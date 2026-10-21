@@ -1,181 +1,170 @@
 {
-  "id": "def-asd-ordinary-supported-kummer-boundary",
-  "kind": "definition",
-  "title": "Relative supported Cartier Kummer boundary specification",
-  "status": "split",
-  "statement": "For a scheme $T$ [def-pc-scheme], a closed immersion $i:D\\hookrightarrow T$ with invertible Cartier ideal $\\mathcal I_D$ [def-nagata-effective-cartier-ideal], a natural number $N$ invertible on $T$, and a commutative ring $A$ killed by $N$, use the ordinary small etale module derived category [def-weil-pbc-derived-categories], direct image [def-weil-pbc-direct-image], and inverse image [def-weil-pbc-inverse-image]. Use the actual finite twist $A_T(1)$ [lem-asd-finite-etale-twist-line] and the integral generator, roots scalar map, and module-to-abelian class realization [def-asd-ordinary-finite-p1-kummer-class]. Define the divisor section of $L=\\mathcal I_D^\\vee=\\mathcal O_T(D)$ [def-pc-divisor-line-bundle] by transposing the ideal inclusion. Its open pullback uses the normalized tensor-pullback adjunction [lem-pc-module-pullback-adjunction], transported to the recorded frame-torsor interface [lem-sc-line-bundle-torsor]. For $c\\in\\operatorname{Ext}^2_A(i_*A_D,A_T(1))$, define the predicate that $c$ is the supported Kummer boundary as follows. For the complementary open $W=T-D$, there are a frame $\\tau$ of $L$ over $W$ equal to the divisor section, a short exact extension $0\\to\\mathbf G_m\\xrightarrow a E\\xrightarrow b i_*\\mathbf Z_D\\to0$, and an equivariant map from the frame torsor of $L$ to $E$ whose image is the fibre over the supported section one and which sends $\\tau$ to zero. Equivariance means $f(g+p)=a(g)+f(p)$; the fibre equation is $b(f(p))=1|_U$ on every etale object $U$. Require the image of $c$ under exact scalar forgetting and precomposition with $i_*\\mathbf Z_D\\to i_*A_D$ to equal the Yoneda product of this extension class with the actual short exact Kummer extension [lem-amb-kummer-any-base], followed by the scalar map $\\mu_N\\to A_T(1)$. Also define the ordinary Kummer Chern class of $L$ in abelian degree-two cohomology and the canonical constant-sheaf closed exchange as the existing base-change mate followed by the constant inverse-image comparison.",
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-nagata-effective-cartier-ideal",
-    "def-pc-divisor-line-bundle",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image",
-    "lem-amb-kummer-any-base",
-    "lem-asd-finite-etale-twist-line",
-    "def-asd-ordinary-finite-p1-kummer-class",
-    "lem-sc-line-bundle-torsor",
-    "lem-pc-module-pullback-adjunction"
-  ],
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PL, lemma-kummer-sequence, applied to the relative line-bundle class; supported realization follows the relative-cone construction in the blueprint lem-amb-cartier-kummer-map.md, with ordinary roots-of-unity twist and derived scalar extension; Tag 0A45, lemma-cohomology-with-support-triangle (etale-cohomology.tex), and the supported-Hom interface of lem-amb-closed-support-hom"
-  },
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_match": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Relative cohomology Kummer class of a Cartier divisor specified by a line torsor and its section off the divisor",
-      "results": {
-        "n_hits": 8,
-        "top": [
-          "AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
-          "IsDedekindDomain.selmerGroup",
-          "IsDedekindDomain.selmerGroup.fromUnit",
-          "WeierstrassCurve.Affine.Point.toClass_apply",
-          "Algebra.Generators.cotangentCompAwaySec",
-          "CommRing.relPic",
-          "WeierstrassCurve.Affine.Point.toClass_some",
-          "IsDedekindDomain.selmerGroup.fromUnitLift"
-        ],
-        "note": "",
-        "subdirectory": "",
-        "digest": "b819b41f69661432"
-      },
-      "date": "2026-10-16",
-      "verdict": "No exact supported Kummer boundary interface; generic or unrelated hits only."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.ShortComplex.ShortExact",
-      "results": {
-        "n_hits": 12,
-        "top": [
-          "CategoryTheory.ShortComplex.ShortExact",
-          "CategoryTheory.ShortComplex.ShortExact.exact",
-          "CategoryTheory.ShortComplex.Splitting.shortExact",
-          "CategoryTheory.ShortComplex.ShortExact.op",
-          "CategoryTheory.ShortComplex.shortExact_iff_op",
-          "CategoryTheory.ShortComplex.ShortExact.epi_g",
-          "CategoryTheory.ShortComplex.ShortExact.mono_f",
-          "CategoryTheory.ShortComplex.shortExact_of_iso"
-        ],
-        "note": "",
-        "subdirectory": "",
-        "digest": "b303e07f28a23936"
-      },
-      "date": "2026-10-16",
-      "verdict": "No exact supported Kummer boundary interface; generic or unrelated hits only."
-    },
-    {
-      "tool": "grep",
-      "query": "relative.*Kummer|supported.*Kummer",
-      "results": {
-        "n_hits": 0,
-        "top": [],
-        "note": "",
-        "subdirectory": "Mathlib/Algebra/Homology",
-        "digest": "4f53cda18c2baa0c"
-      },
-      "date": "2026-10-16",
-      "verdict": "No exact supported Kummer boundary interface; generic or unrelated hits only."
-    },
-    {
-      "tool": "rg",
-      "query": "SupportedKummerBoundary|relative.*Kummer in WeilConjectures/, lean/Sheaf/, dag/nodes/; blueprint_refs.py search supported Kummer",
-      "results": "No exact declaration. Relative torsor cohomology and the p-adic supported Kummer node are distinct; reuse the existing ordinary finite twist, Ext, scalar restriction and finite-P1 helper declarations. Blueprint search: two related nodes, lem-amb-cartier-kummer-map and lem-amb-p1-diagonal-integrals.",
-      "date": "2026-10-16",
-      "verdict": "A new specialized definition is needed; existing constituent definitions are reused."
-    },
-    {
-      "tool": "leansearch",
-      "query": "An effective Cartier divisor gives a supported Kummer class in etale cohomology with finite coefficients",
-      "results": {
-        "t": "2026-10-16T00:30:21Z",
-        "tool": "leansearch",
-        "query": "An effective Cartier divisor gives a supported Kummer class in etale cohomology with finite coefficients",
-        "sub": "",
-        "ok": false,
-        "n_hits": 0,
-        "note": "service unavailable: Internal Server Error",
-        "top": [],
-        "digest": "4f53cda18c2baa0c"
-      },
-      "date": "2026-10-16",
-      "verdict": "unavailable: the service returned Internal Server Error"
-    }
-  ],
-  "created": {
-    "by": "worker",
-    "item": "lem-asd-ordinary-supported-kummer",
-    "date": "2026-10-16",
-    "group": "Q39"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-asd-smooth-tensor",
-      "place": "Supported Cartier Kummer class used in the ordinary projective-line adjunction; relative line torsor and supported boundary",
-      "via": [
-        "lem-asd-ordinary-supported-kummer",
-        "lem-asd-ordinary-finite-p1-adjunction"
-      ]
-    },
-    "same_as": []
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-cbc",
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.OrdinarySupportedKummerBoundary",
-    "declaration": "AlgebraicGeometry.Etale.SupportedKummerBoundary",
-    "declarations": [
-      "AlgebraicGeometry.Etale.supportedConstantUnit",
-      "AlgebraicGeometry.Etale.supportedIntegralConstant",
-      "AlgebraicGeometry.Etale.supportedIntegralUnit",
-      "AlgebraicGeometry.Etale.supportedIntegralOne",
-      "AlgebraicGeometry.Etale.supportedIntegralGenerator",
-      "AlgebraicGeometry.Etale.supportedDivisorSection",
-      "AlgebraicGeometry.Etale.supportedDivisorSectionPullback",
-      "AlgebraicGeometry.Etale.supportedKummerChern",
-      "AlgebraicGeometry.Etale.SupportedKummerBoundary",
-      "AlgebraicGeometry.Etale.supportedConstantExchange"
+ "id": "def-asd-ordinary-supported-kummer-boundary",
+ "kind": "definition",
+ "title": "Relative supported Cartier Kummer boundary specification",
+ "status": "split",
+ "statement": "For a scheme $T$ [def-pc-scheme], a closed immersion $i:D\\hookrightarrow T$ with invertible Cartier ideal $\\mathcal I_D$ [def-nagata-effective-cartier-ideal], a natural number $N$ invertible on $T$, and a commutative ring $A$ killed by $N$, use the ordinary small etale module derived category [def-weil-pbc-derived-categories], direct image [def-weil-pbc-direct-image], and inverse image [def-weil-pbc-inverse-image]. Use the actual finite twist $A_T(1)$ [lem-asd-finite-etale-twist-line] and the integral generator, roots scalar map, and module-to-abelian class realization [def-asd-ordinary-finite-p1-kummer-class]. Define the divisor section of $L=\\mathcal I_D^\\vee=\\mathcal O_T(D)$ [def-pc-divisor-line-bundle] by transposing the ideal inclusion. Its open pullback uses the normalized tensor-pullback adjunction [lem-pc-module-pullback-adjunction], transported to the recorded frame-torsor interface [lem-sc-line-bundle-torsor]. For $c\\in\\operatorname{Ext}^2_A(i_*A_D,A_T(1))$, define the predicate that $c$ is the supported Kummer boundary as follows. For the complementary open $W=T-D$, there are a frame $\\tau$ of $L$ over $W$ equal to the divisor section, a short exact extension $0\\to\\mathbf G_m\\xrightarrow a E\\xrightarrow b i_*\\mathbf Z_D\\to0$, and an equivariant map from the frame torsor of $L$ to $E$ whose image is the fibre over the supported section one and which sends $\\tau$ to zero. Equivariance means $f(g+p)=a(g)+f(p)$; the fibre equation is $b(f(p))=1|_U$ on every etale object $U$. Require the image of $c$ under exact scalar forgetting and precomposition with $i_*\\mathbf Z_D\\to i_*A_D$ to equal the Yoneda product of this extension class with the actual short exact Kummer extension [lem-amb-kummer-any-base], followed by the scalar map $\\mu_N\\to A_T(1)$. Also define the ordinary Kummer Chern class of $L$ in abelian degree-two cohomology and the canonical constant-sheaf closed exchange as the existing base-change mate followed by the constant inverse-image comparison.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-divisor-line-bundle",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "lem-amb-kummer-any-base",
+  "lem-asd-finite-etale-twist-line",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "lem-sc-line-bundle-torsor",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PL, lemma-kummer-sequence, applied to the relative line-bundle class; supported realization follows the relative-cone construction in the blueprint lem-amb-cartier-kummer-map.md, with ordinary roots-of-unity twist and derived scalar extension; Tag 0A45, lemma-cohomology-with-support-triangle (etale-cohomology.tex), and the supported-Hom interface of lem-amb-closed-support-hom"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Relative cohomology Kummer class of a Cartier divisor specified by a line torsor and its section off the divisor",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+     "IsDedekindDomain.selmerGroup",
+     "IsDedekindDomain.selmerGroup.fromUnit",
+     "WeierstrassCurve.Affine.Point.toClass_apply",
+     "Algebra.Generators.cotangentCompAwaySec",
+     "CommRing.relPic",
+     "WeierstrassCurve.Affine.Point.toClass_some",
+     "IsDedekindDomain.selmerGroup.fromUnitLift"
     ],
-    "file": "lean/Sheaf/AlgebraicGeometry/OrdinarySupportedKummerBoundary.lean",
-    "statement": "def SupportedKummerBoundary (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0) {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible) (hT : IsUnit (N : Γ(T, ⊤))) (c : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) (Scheme.finiteEtaleTateLine T N A hA) 2) : Prop",
-    "branch": "newtargets-dag",
-    "by": "Q39",
-    "date": "2026-10-16",
-    "existing": false
+    "note": "",
+    "subdirectory": "",
+    "digest": "b819b41f69661432"
+   },
+   "date": "2026-10-16",
+   "verdict": "No exact supported Kummer boundary interface; generic or unrelated hits only."
   },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-a7425a3eb",
-    "group": "Q39",
-    "result": "pass",
-    "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": {
+    "n_hits": 12,
+    "top": [
+     "CategoryTheory.ShortComplex.ShortExact",
+     "CategoryTheory.ShortComplex.ShortExact.exact",
+     "CategoryTheory.ShortComplex.Splitting.shortExact",
+     "CategoryTheory.ShortComplex.ShortExact.op",
+     "CategoryTheory.ShortComplex.shortExact_iff_op",
+     "CategoryTheory.ShortComplex.ShortExact.epi_g",
+     "CategoryTheory.ShortComplex.ShortExact.mono_f",
+     "CategoryTheory.ShortComplex.shortExact_of_iso"
+    ],
+    "note": "",
+    "subdirectory": "",
+    "digest": "b303e07f28a23936"
+   },
+   "date": "2026-10-16",
+   "verdict": "No exact supported Kummer boundary interface; generic or unrelated hits only."
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-a7425a3eb",
-    "group": "Q39",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable statements, dependencies, sources, definitions, universes, edge cases, docstrings, and verbatim signatures. All four modules reproduced clean per-file scompile.py checks. No fixes required; repository and branch head unchanged."
+  {
+   "tool": "grep",
+   "query": "relative.*Kummer|supported.*Kummer",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": "Mathlib/Algebra/Homology",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-16",
+   "verdict": "No exact supported Kummer boundary interface; generic or unrelated hits only."
+  },
+  {
+   "tool": "rg",
+   "query": "SupportedKummerBoundary|relative.*Kummer in WeilConjectures/, lean/Sheaf/, dag/nodes/; blueprint_refs.py search supported Kummer",
+   "results": "No exact declaration. Relative torsor cohomology and the p-adic supported Kummer node are distinct; reuse the existing ordinary finite twist, Ext, scalar restriction and finite-P1 helper declarations. Blueprint search: two related nodes, lem-amb-cartier-kummer-map and lem-amb-p1-diagonal-integrals.",
+   "date": "2026-10-16",
+   "verdict": "A new specialized definition is needed; existing constituent definitions are reused."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An effective Cartier divisor gives a supported Kummer class in etale cohomology with finite coefficients",
+   "results": {
+    "t": "2026-10-16T00:30:21Z",
+    "tool": "leansearch",
+    "query": "An effective Cartier divisor gives a supported Kummer class in etale cohomology with finite coefficients",
+    "sub": "",
+    "ok": false,
+    "n_hits": 0,
+    "note": "service unavailable: Internal Server Error",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-16",
+   "verdict": "unavailable: the service returned Internal Server Error"
   }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-asd-ordinary-supported-kummer",
+  "date": "2026-10-16",
+  "group": "Q39"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Supported Cartier Kummer class used in the ordinary projective-line adjunction; relative line torsor and supported boundary",
+   "via": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinarySupportedKummerBoundary",
+  "declaration": "AlgebraicGeometry.Etale.SupportedKummerBoundary",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedConstantUnit",
+   "AlgebraicGeometry.Etale.supportedIntegralConstant",
+   "AlgebraicGeometry.Etale.supportedIntegralUnit",
+   "AlgebraicGeometry.Etale.supportedIntegralOne",
+   "AlgebraicGeometry.Etale.supportedIntegralGenerator",
+   "AlgebraicGeometry.Etale.supportedDivisorSection",
+   "AlgebraicGeometry.Etale.supportedDivisorSectionPullback",
+   "AlgebraicGeometry.Etale.supportedKummerChern",
+   "AlgebraicGeometry.Etale.SupportedKummerBoundary",
+   "AlgebraicGeometry.Etale.supportedConstantExchange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinarySupportedKummerBoundary.lean",
+  "statement": "def SupportedKummerBoundary (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0) {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible) (hT : IsUnit (N : Γ(T, ⊤))) (c : Ext ((lowerStar (ModuleCat.{u + 1} A) i).obj (ordinaryFiniteConstant A D)) (Scheme.finiteEtaleTateLine T N A hA) 2) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q39",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a7425a3eb",
+  "group": "Q39",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a7425a3eb",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, definitions, universes, edge cases, docstrings, and verbatim signatures. All four modules reproduced clean per-file scompile.py checks. No fixes required; repository and branch head unchanged."
+ }
 }

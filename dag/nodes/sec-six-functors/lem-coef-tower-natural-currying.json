@@ -1,361 +1,362 @@
 {
-  "id": "lem-coef-tower-natural-currying",
-  "kind": "statement",
-  "proof": [
-    {
-      "text": "Realize $\\operatorname{Tow}(\\operatorname{Mod}(R))$ as module sheaves on the diagram site of the one-object point site with constant ring $R$, using [lem-weil-pbc-diagram-site-realization] with $J=\\mathbf N_{\\ge1}^{\\mathrm{op}}$. It is a small ringed site, so [lem-sf-ringed-derived-closed-symmetric-monoidal] gives the derived tensor-Hom bijection there. For a K-flat representative $P$ of $C$, its constant tower is K-flat: tensoring it with an acyclic tower is acyclic at every level, hence acyclic by levelwise exactness [lem-weil-tower-category-levelwise-abelian]. For a K-injective resolution $I_\\bullet$ of $A_\\bullet$, the internal Hom from $\\operatorname{const}P$ is exactly the tower $\\operatorname{Hom}^{\\bullet}_R(P,I_n)$. Indeed the slice at $n$ has objects $1,\\ldots,n$; a natural map from a constant module to the restricted tower is determined by its component at $n$, and its component at $i\\le n$ is transition composed with that component. This applies to every degree of the Hom complex and its differential. Evaluation of $I_\\bullet$ is K-injective by [lem-weil-tower-evaluation-kinjective]. Thus this internal Hom is the specified $\\mathsf J(C)$ and evaluates to $\\mathbf R\\operatorname{Hom}_R(C,A_n)$.",
-      "uses": [
-        "lem-weil-pbc-diagram-site-realization",
-        "lem-sf-ringed-derived-closed-symmetric-monoidal",
-        "lem-weil-tower-category-levelwise-abelian",
-        "lem-weil-tower-evaluation-kinjective"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-        "place": "Paragraph 2, mapping complexes before limits; ringed-site realization and tensor-Hom transposition (Stacks Tags 08J9 and 0FPT)."
-      }
-    },
-    {
-      "text": "Write $\\lambda_K=t\\circ\\beta_K\\circ(1\\otimes\\eta_K)$. Its three factors are morphisms of the derived tower category: the pairing is supplied by [lem-coef-tower-evaluation-pairing], the coaugmentation by [lem-coef-tower-coaugmentation], and $t$ is the single fixed lift in the hypothesis. Define $\\Gamma_K$ to be the image of $\\lambda_K$ under the tensor-Hom bijection of [lem-sf-ringed-derived-closed-symmetric-monoidal]. By its evaluation normalization,\n$$e_C\\circ(\\Gamma_K\\otimes1_{\\operatorname{const}C})=\\lambda_K,$$\nwhere $e_C:\\mathsf J(C)\\otimes_R^L\\operatorname{const}C\\to A_\\bullet$ is evaluation. On the representatives in step 1, this counit sends a homogeneous map and its argument to their ordinary evaluation; its component at $n$ is the counit for $\\mathbf R\\operatorname{Hom}_R(C,A_n)$. Tensor is also evaluated termwise: for a K-flat tower $T$ and an acyclic $R$-complex $V$, $T\\otimes\\operatorname{const}V$ is acyclic, hence each $T_n\\otimes V$ is acyclic; thus every $T_n$ is K-flat. Quasi-isomorphisms are levelwise. Consequently $\\operatorname{ev}_n\\Gamma_K$ is the transpose of $\\operatorname{ev}_n\\lambda_K$.",
-      "uses": [
-        "lem-coef-tower-evaluation-pairing",
-        "lem-coef-tower-coaugmentation",
-        "lem-sf-ringed-derived-closed-symmetric-monoidal"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-        "place": "Paragraph 2, the middle mapping-complex comparison and its specified natural maps."
-      }
-    },
-    {
-      "text": "Fix $n\\ge1$. Put $H_n=\\mathbf R\\operatorname{Hom}_{X,A_n}(K_n,\\omega_n)$ and $D_n=\\mathbf R\\operatorname{Hom}_{A_n}(C_n,A_n)$, regarded also as $R$-complexes by restriction. The evaluation-pairing node identifies $\\operatorname{ev}_n\\mathsf H(K)=H_n$ and $\\operatorname{ev}_nB_K=C_n$ and identifies the evaluated pairing with compact-support projection followed by evaluation. The fixed trace evaluates to the finite exceptional counit. Moreover $K_n$ is bounded constructible by [def-weil-derived-complete-integral-detailed] and has the assumed finite Tor interval. Hence [lem-coef-finite-mapping-adjunction] applies to $M=K_n$ and gives the isomorphism $\\gamma_{n,K_n}:H_n\\to D_n$, whose transpose is exactly projection, evaluation and this counit. These are the same maps specified in the item, with the same compactification and finite exceptional comparison functor; no ambient pro-etale exceptional adjoint is used.",
-      "uses": [
-        "lem-coef-tower-evaluation-pairing",
-        "lem-coef-finite-mapping-adjunction",
-        "def-weil-derived-complete-integral-detailed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-        "place": "Paragraph 2, finite exceptional adjunction on mapping complexes."
-      }
-    },
-    {
-      "text": "Let $q_n:C\\to\\operatorname{Res}C_n$ be $\\operatorname{ev}_n\\eta_K$. By [lem-coef-tower-coaugmentation] its scalar-extension adjunct is the canonical isomorphism $\\theta_n:C\\otimes_R^LA_n\\xrightarrow{\\sim}C_n$. Apply [lem-sfb-dc-hom-scalar-adjunction] on the one-object point site to $R\\to A_n$, $K=C$, $N=A_n$. It gives the evaluation-normalized isomorphism\n$$\\alpha_n:\\operatorname{Res}\\mathbf R\\operatorname{Hom}_{A_n}(C\\otimes_R^LA_n,A_n)\\xrightarrow{\\sim}\\mathbf R\\operatorname{Hom}_R(C,A_n).$$\nThe composite $\\alpha_n\\circ\\mathbf R\\operatorname{Hom}_{A_n}(\\theta_n,A_n)\\circ\\gamma_{n,K_n}$ has transpose the finite projection/evaluation/counit pairing precomposed in its second variable by $q_n$. In fact the scalar-adjunction node normalizes its transpose by the unit $u_n:C\\to\\operatorname{Res}(C\\otimes_R^LA_n)$, and $q_n=(\\operatorname{Res}\\theta_n)u_n$ by the adjunct formula. Step 3 and the evaluated pairing identify that precomposed pairing with $\\operatorname{ev}_n\\lambda_K$. Bijectivity of tensor-Hom transposition therefore identifies the displayed composite with $\\operatorname{ev}_n\\Gamma_K$, proving the asserted finite evaluation formula.",
-      "uses": [
-        "lem-coef-tower-coaugmentation",
-        "lem-sfb-dc-hom-scalar-adjunction",
-        "lem-coef-tower-evaluation-pairing",
-        "lem-coef-finite-mapping-adjunction",
-        "lem-sf-ringed-derived-closed-symmetric-monoidal"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-        "place": "Paragraph 2, third displayed line: derived scalar adjunction with the actual compact-support projection."
-      }
-    },
-    {
-      "text": "Every map in the evaluation formula of step 4 is an isomorphism: $\\gamma_{n,K_n}$ by finite mapping adjunction, precomposition by $\\theta_n$ because $\\theta_n$ is an isomorphism, and $\\alpha_n$ by scalar adjunction. Thus every $\\operatorname{ev}_n\\Gamma_K$ is an isomorphism. Apply the isomorphism-detection clause of [lem-weil-pbc-sequential-tower-evaluation-full] to the already constructed tower morphism $\\Gamma_K$ on the point site with ring $R$. It follows that $\\Gamma_K$ is an isomorphism in $D(\\operatorname{Tow}(\\operatorname{Mod}(R)))$. Only detection is used here; no lift or uniqueness assertion is used to construct $\\Gamma_K$.",
-      "uses": [
-        "lem-coef-finite-mapping-adjunction",
-        "lem-coef-tower-coaugmentation",
-        "lem-sfb-dc-hom-scalar-adjunction",
-        "lem-weil-pbc-sequential-tower-evaluation-full"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-        "place": "Paragraph 2, the second and third mapping-complex isomorphisms before total inverse limit."
-      }
-    },
-    {
-      "text": "For $f:K\\to K'$, write $h=\\mathsf H(f)$, $b=B(f)$ and $c=\\operatorname{const}C(f)$. The dinaturality statement of [lem-coef-tower-evaluation-pairing] says $\\beta_K(h\\otimes1)=\\beta_{K'}(1\\otimes b)$ as actual derived tower morphisms. Naturality of [lem-coef-tower-coaugmentation] says $b\\eta_K=\\eta_{K'}c$. Functoriality of tensor and associativity of composition give\n$$\\begin{aligned}\n\\lambda_K(h\\otimes1)&=t\\beta_K(h\\otimes\\eta_K)\\\\\n&=t\\beta_{K'}(1\\otimes b)(1\\otimes\\eta_K)\\\\\n&=t\\beta_{K'}(1\\otimes\\eta_{K'}c)\\\\\n&=\\lambda_{K'}(1\\otimes c).\n\\end{aligned}$$\nThe same $t$ occurs throughout, since it was fixed independently of $K$. This proves an equality before evaluation in the index direction.",
-      "uses": [
-        "lem-coef-tower-evaluation-pairing",
-        "lem-coef-tower-coaugmentation"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-        "place": "Final paragraph, all four lines identify the specified natural maps; naturality before inverse limits."
-      }
-    },
-    {
-      "text": "Transpose the two equal maps in step 6 using the bijection of [lem-sf-ringed-derived-closed-symmetric-monoidal], with source $\\mathsf H(K')\\otimes_R^L\\operatorname{const}C$ and target $A_\\bullet$. Naturality in the first tensor variable makes the transpose of $\\lambda_K(h\\otimes1)$ equal to $\\Gamma_Kh$. Naturality in its second variable makes the transpose of $\\lambda_{K'}(1\\otimes c)$ equal to $\\mathsf J(C(f))\\Gamma_{K'}$. Their equality is precisely\n$$\\mathsf J(C(f))\\circ\\Gamma_{K'}=\\Gamma_K\\circ\\mathsf H(f).$$\nIt holds in the derived tower category itself, as required.",
-      "uses": [
-        "lem-sf-ringed-derived-closed-symmetric-monoidal"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-        "place": "Final paragraph, naturality of the specified mapping-complex comparison."
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-coef-tower-natural-currying",
+ "kind": "statement",
+ "proof": [
+  {
+   "text": "Realize $\\operatorname{Tow}(\\operatorname{Mod}(R))$ as module sheaves on the diagram site of the one-object point site with constant ring $R$, using [lem-weil-pbc-diagram-site-realization] with $J=\\mathbf N_{\\ge1}^{\\mathrm{op}}$. It is a small ringed site, so [lem-sf-ringed-derived-closed-symmetric-monoidal] gives the derived tensor-Hom bijection there. For a K-flat representative $P$ of $C$, its constant tower is K-flat: tensoring it with an acyclic tower is acyclic at every level, hence acyclic by levelwise exactness [lem-weil-tower-category-levelwise-abelian]. For a K-injective resolution $I_\\bullet$ of $A_\\bullet$, the internal Hom from $\\operatorname{const}P$ is exactly the tower $\\operatorname{Hom}^{\\bullet}_R(P,I_n)$. Indeed the slice at $n$ has objects $1,\\ldots,n$; a natural map from a constant module to the restricted tower is determined by its component at $n$, and its component at $i\\le n$ is transition composed with that component. This applies to every degree of the Hom complex and its differential. Evaluation of $I_\\bullet$ is K-injective by [lem-weil-tower-evaluation-kinjective]. Thus this internal Hom is the specified $\\mathsf J(C)$ and evaluates to $\\mathbf R\\operatorname{Hom}_R(C,A_n)$.",
+   "uses": [
     "lem-weil-pbc-diagram-site-realization",
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
     "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-tower-evaluation-kinjective",
-    "lem-coef-tower-evaluation-pairing",
-    "lem-coef-tower-coaugmentation",
-    "lem-coef-finite-mapping-adjunction",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-weil-pbc-sequential-tower-evaluation-full"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-weil-tower-evaluation-kinjective"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
-    "place": "Paragraph 2 and final paragraph: explicit ringed-tower tensor-Hom transposition, finite scalar-adjunction normalization, and dinaturality calculation. Generic ringed-site calculus follows Stacks Tags 08J9 and 0FPT."
+    "place": "Paragraph 2, mapping complexes before limits; ringed-site realization and tensor-Hom transposition (Stacks Tags 08J9 and 0FPT)."
+   }
   },
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "prop-coef-integral-dualizing",
-    "date": "2026-10-17",
-    "group": "Q91"
-  },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-biduality-general",
-  "title": "Natural tower currying isomorphism",
-  "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $a:X\\to s=\\operatorname{Spec}k$ be separated and of finite type [def-weil-scheme-morphism-properties]. Use ordinary module sheaves on the small pro-etale sites, with completed coefficient sheaf $R_W=\\lim_n(A_n)_W$ for $W=X,s$ [def-weil-completed-integral-coefficients]. Write $F_n=Ra_{!,n}$ for compact support using one fixed compactification $a=pj$ [def-weil-integral-rational-qbar-compact-support], $G_n=Ra_n^!$ for the finite constructible comparison-class exceptional functor [def-weil-exceptional-inverse-image], and $\\omega_n=G_n(A_n)_s$. Fix a strict complex $Q_\\bullet$ of $(A_n)_X$-modules with quotient-semilinear transitions, representing a normalized dualizing tower [def-coef-normalized-dvr-tower]: $Q_n$ represents $\\omega_n$, and its transitions are adjoint to the counit-defined comparisons $\\omega_m\\otimes^L_{A_m}A_n\\cong\\omega_n$ of [lem-coef-finite-dualizing]. Let $K\\in D^b_c(X,R)$ [def-weil-derived-complete-integral-detailed], let $K_n=K\\otimes^L_{R_X}(A_n)_X$ [def-weil-integral-derived-reduction], and suppose its reductions have Tor amplitude in one finite interval $[a_0,b_0]$ [def-weil-finite-tor-amplitude]. Put $C_n=\\Gamma(s,F_nK_n)$ and $C=\\Gamma(s,Ra_!K)$, with coefficient-point sections [def-weil-finite-coefficient-point]. Suppose $\\dim X\\le d$ for an integer $d\\ge0$ [def-kun-topological-krull-dimension]. Let $\\mathsf H(K),B_K,B_\\omega$ and $\\beta_K$ be the specified derived towers and dinatural pairing of [lem-coef-tower-evaluation-pairing]. Fix a trace $t:B_\\omega\\to A_\\bullet$ evaluating to the finite counits, independently of $K$, using the compatible finite counits of [lem-coef-tower-trace-rectification] and the lift of [lem-weil-pbc-sequential-tower-evaluation-full]. Let $\\eta_K:\\operatorname{const}C\\to B_K$ be the natural coaugmentation of [lem-coef-tower-coaugmentation]. Define $\\mathsf J(C)$ to be the derived tower Hom from $\\operatorname{const}C$ to $A_\\bullet$ [def-pur-derived-internal-hom]; it is computed by termwise Hom from a constant K-flat representative of $C$ into a K-injective resolution of the whole tower $A_\\bullet$. Thus $\\operatorname{ev}_n\\mathsf J(C)=\\mathbf R\\operatorname{Hom}_R(C,A_n)$.\nCurrying the composite\n$$\\mathsf H(K)\\otimes_R^L\\operatorname{const}C\\xrightarrow{1\\otimes\\eta_K}\\mathsf H(K)\\otimes_R^LB_K\\xrightarrow{\\beta_K}B_\\omega\\xrightarrow{t}A_\\bullet$$\ngives an isomorphism $\\Gamma_K:\\mathsf H(K)\\xrightarrow{\\sim}\\mathsf J(C)$ in $D(\\operatorname{Tow}(\\operatorname{Mod}(R)))$. Its evaluation at $n$ is $\\gamma_{n,K_n}$ of [lem-coef-finite-mapping-adjunction] followed by the canonical scalar-adjunction isomorphism $\\mathbf R\\operatorname{Hom}_{A_n}(C_n,A_n)\\cong\\mathbf R\\operatorname{Hom}_R(C,A_n)$. For every $f:K\\to K'$ with induced $C(f):C\\to C'$, the equality $\\mathsf J(C(f))\\circ\\Gamma_{K'}=\\Gamma_K\\circ\\mathsf H(f)$ holds in the derived tower category.",
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-completed-integral-coefficients",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-exceptional-inverse-image",
-    "def-coef-normalized-dvr-tower",
-    "lem-coef-finite-dualizing",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-integral-derived-reduction",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-coefficient-point",
-    "def-kun-topological-krull-dimension",
+  {
+   "text": "Write $\\lambda_K=t\\circ\\beta_K\\circ(1\\otimes\\eta_K)$. Its three factors are morphisms of the derived tower category: the pairing is supplied by [lem-coef-tower-evaluation-pairing], the coaugmentation by [lem-coef-tower-coaugmentation], and $t$ is the single fixed lift in the hypothesis. Define $\\Gamma_K$ to be the image of $\\lambda_K$ under the tensor-Hom bijection of [lem-sf-ringed-derived-closed-symmetric-monoidal]. By its evaluation normalization,\n$$e_C\\circ(\\Gamma_K\\otimes1_{\\operatorname{const}C})=\\lambda_K,$$\nwhere $e_C:\\mathsf J(C)\\otimes_R^L\\operatorname{const}C\\to A_\\bullet$ is evaluation. On the representatives in step 1, this counit sends a homogeneous map and its argument to their ordinary evaluation; its component at $n$ is the counit for $\\mathbf R\\operatorname{Hom}_R(C,A_n)$. Tensor is also evaluated termwise: for a K-flat tower $T$ and an acyclic $R$-complex $V$, $T\\otimes\\operatorname{const}V$ is acyclic, hence each $T_n\\otimes V$ is acyclic; thus every $T_n$ is K-flat. Quasi-isomorphisms are levelwise. Consequently $\\operatorname{ev}_n\\Gamma_K$ is the transpose of $\\operatorname{ev}_n\\lambda_K$.",
+   "uses": [
     "lem-coef-tower-evaluation-pairing",
-    "lem-coef-tower-trace-rectification",
-    "lem-weil-pbc-sequential-tower-evaluation-full",
     "lem-coef-tower-coaugmentation",
-    "def-pur-derived-internal-hom",
-    "lem-coef-finite-mapping-adjunction"
-  ],
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2, middle displayed comparison and final naturality assertion: currying the fixed trace and tower evaluation composite (second part of old step 11).",
-    "note": "Agent-written extraction of the existing item proof; the blueprint supplies the route, and the retained argument is recorded in the delivery report."
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, the middle mapping-complex comparison and its specified natural maps."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "natural tower mapping complex isomorphism by levelwise finite adjunction",
-      "results": "CategoryTheory.Idempotents.DoldKan.η; AlgebraicTopology.DoldKan.instIsIsoFunctorKaroubiSimplicialObjectNatTrans; AlgebraicTopology.DoldKan.N₂Γ₂; AlgebraicTopology.DoldKan.N₁Γ₀_app; AlgebraicTopology.DoldKan.instIsIsoFunctorSimplicialObjectKaroubiNatTrans; CategoryTheory.Idempotents.DoldKan.hε; CategoryTheory.Idempotents.DoldKan.hη; AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Limits.IsIso evaluation",
-      "results": "loogle: Unknown identifier `CategoryTheory.Limits.IsIso`",
-      "date": "2026-10-17",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "levelwise.*isomorphism|quasiIso.*evaluation Mathlib/Algebra/Homology",
-      "results": "none",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "currying natural mapping complex isomorphism from levelwise isomorphisms",
-      "results": "CategoryTheory.Functor.currying; CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv; CategoryTheory.curryingIso; CategoryTheory.curryingIso_hom_toFunctor_obj_obj; CategoryTheory.Functor.curry₃ObjProdComp; CategoryTheory.curryingIso_inv_toFunctor_map_app_app; CategoryTheory.curryingIso_hom_toFunctor_obj_map; MeasurableEquiv.curry",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "natural tower mapping complex isomorphism by levelwise finite adjunction",
-      "results": "CategoryTheory.Idempotents.DoldKan.η; AlgebraicTopology.DoldKan.instIsIsoFunctorKaroubiSimplicialObjectNatTrans; AlgebraicTopology.DoldKan.N₂Γ₂; AlgebraicTopology.DoldKan.N₁Γ₀_app; AlgebraicTopology.DoldKan.instIsIsoFunctorSimplicialObjectKaroubiNatTrans; CategoryTheory.Idempotents.DoldKan.hε; CategoryTheory.Idempotents.DoldKan.hη; AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Limits.IsIso",
-      "results": "loogle: unknown identifier 'CategoryTheory.Limits.IsIso'",
-      "date": "2026-10-17",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "levelwise.*isomorphism|quasiIso.*evaluation Mathlib/Algebra/Homology",
-      "results": "none",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "currying natural mapping complex isomorphism from levelwise isomorphisms",
-      "results": "CategoryTheory.Functor.currying; CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv; CategoryTheory.curryingIso; CategoryTheory.curryingIso_hom_toFunctor_obj_obj; CategoryTheory.Functor.curry₃ObjProdComp; CategoryTheory.curryingIso_inv_toFunctor_map_app_app; CategoryTheory.curryingIso_hom_toFunctor_obj_map; MeasurableEquiv.curry",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "levelwise.*isomorphism|quasiIso.*evaluation Algebra/Homology",
-      "results": "Mathlib/Algebra/Homology/Functor.lean; Mathlib/Algebra/Homology/Functor.lean; Mathlib/Algebra/Homology/Functor.lean; Mathlib/Algebra/Homology/Functor.lean; Mathlib/Algebra/Homology/Functor.lean; 5 source hits; these concern general category or homological constructions, not the stated finite-coefficient compact-support tower comparison.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"IsIso\", \"evaluation\"",
-      "results": "AlgebraicGeometry.Scheme.Spec.isIso_Γevaluation",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Natural isomorphism between dualizing derived mapping towers and Hom of compact support from finite exceptional adjunctions",
-      "results": "CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; LightCondensed.ihomPoints_symm_comp; CategoryTheory.Adjunction.derived'_counit; 8 returned hits; digest 5e950cac32ad440f",
-      "date": "2026-10-17",
-      "verdict": "no match: generic categorical infrastructure or unrelated coefficient algebra does not state the finite exceptional dualizing tower comparison."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalClosed",
-      "results": "CategoryTheory.MonoidalClosed.ofEquiv; CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj; CategoryTheory.MonoidalClosed.ofEquiv_curry_def; CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def; CategoryTheory.Monoidal.Reflective.monoidalClosed; CategoryTheory.Monoidal.Reflective.closed; CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom; CategoryTheory.Monoidal.Reflective.isIso_tfae; 12 returned hits; digest c458cd4b44ac3020",
-      "date": "2026-10-17",
-      "verdict": "no match: generic categorical infrastructure or unrelated coefficient algebra does not state the finite exceptional dualizing tower comparison."
-    },
-    {
-      "tool": "grep",
-      "query": "dualizing|upperShriek|compactSupport Algebra/Homology",
-      "results": "Mathlib/Algebra/Homology/HomotopyFiber.lean; 1 returned hits; digest 064930e5919f47f9",
-      "date": "2026-10-17",
-      "verdict": "no match: generic categorical infrastructure or unrelated coefficient algebra does not state the finite exceptional dualizing tower comparison."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Natural isomorphism of derived mapping complexes from Verdier duality and compact support",
-      "results": "CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh.congr_simp; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc; CategoryTheory.Functor.rightDerivedNatIso; 8 returned hits; digest 0e671249a510d683",
-      "date": "2026-10-17",
-      "verdict": "no match: generic categorical infrastructure or unrelated coefficient algebra does not state the finite exceptional dualizing tower comparison."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived duality for a normalized tower of dualizing complexes modulo powers of a uniformizer",
-      "results": "BDeRham; BDeRhamPlus; instCommRingBDeRhamPlus; Ideal.quotientRangePowQuotSuccInclusionEquiv; IsDedekindDomain.HeightOneSpectrum.adicCompletion; IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower'; localCohomology.isoSelfLERadical; AdicCompletion.map_exact; 8 returned hits; digest 71dd4ac3a7514bb1",
-      "date": "2026-10-17",
-      "verdict": "no match: generic categorical infrastructure or unrelated coefficient algebra does not state the finite exceptional dualizing tower comparison."
-    }
-  ],
-  "blueprint": {
-    "from": {
-      "node": "prop-coef-integral-dualizing",
-      "place": "Proof paragraph 2, middle displayed comparison and final naturality assertion: currying the fixed trace and tower evaluation composite (second part of old step 11).",
-      "via": []
-    },
-    "same_as": [],
-    "is": null
+  {
+   "text": "Fix $n\\ge1$. Put $H_n=\\mathbf R\\operatorname{Hom}_{X,A_n}(K_n,\\omega_n)$ and $D_n=\\mathbf R\\operatorname{Hom}_{A_n}(C_n,A_n)$, regarded also as $R$-complexes by restriction. The evaluation-pairing node identifies $\\operatorname{ev}_n\\mathsf H(K)=H_n$ and $\\operatorname{ev}_nB_K=C_n$ and identifies the evaluated pairing with compact-support projection followed by evaluation. The fixed trace evaluates to the finite exceptional counit. Moreover $K_n$ is bounded constructible by [def-weil-derived-complete-integral-detailed] and has the assumed finite Tor interval. Hence [lem-coef-finite-mapping-adjunction] applies to $M=K_n$ and gives the isomorphism $\\gamma_{n,K_n}:H_n\\to D_n$, whose transpose is exactly projection, evaluation and this counit. These are the same maps specified in the item, with the same compactification and finite exceptional comparison functor; no ambient pro-etale exceptional adjoint is used.",
+   "uses": [
+    "lem-coef-tower-evaluation-pairing",
+    "lem-coef-finite-mapping-adjunction",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, finite exceptional adjunction on mapping complexes."
+   }
   },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-coef-tower-natural-currying",
-    "worker": "stage1",
-    "summary": "Kept the statement and all imported metadata unchanged. Gave seven steps constructing the actual curried tower map, checking its finite evaluation by normalized scalar adjunction, detecting invertibility, and proving naturality from the dinatural pairing and natural coaugmentation. Reused existing generic ringed-site, scalar-adjunction and tower-detection nodes; no new nodes were needed.",
-    "blueprint": "Ancestor prop-coef-integral-dualizing, proof paragraph 2 (middle two displayed comparisons) and final paragraph (specified natural maps). Historical master and main-20261015 proof texts agree here.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-diagram-site-realization",
-        "why": "Generic exact equivalence of tower modules with a small ringed diagram site; supplies a setting for tensor-Hom currying."
-      },
-      {
-        "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
-        "why": "Generic unbounded ringed-site tensor-Hom bijection and its normalized evaluation, including naturality; it does not supply geometric duality."
-      },
-      {
-        "node": "lem-weil-tower-evaluation-kinjective",
-        "why": "Generic evaluation of a K-injective tower is K-injective, used only to check the specified termwise Hom model."
-      },
-      {
-        "node": "lem-sfb-dc-hom-scalar-adjunction",
-        "why": "Generic evaluation-normalized change-of-rings Hom isomorphism on the point site, without a flatness assumption on R to A_n."
-      },
-      {
-        "node": "lem-weil-pbc-sequential-tower-evaluation-full",
-        "why": "Only its isomorphism-detection clause is used for an existing derived tower map; it provides no geometric adjunction or naturality."
-      }
-    ]
+  {
+   "text": "Let $q_n:C\\to\\operatorname{Res}C_n$ be $\\operatorname{ev}_n\\eta_K$. By [lem-coef-tower-coaugmentation] its scalar-extension adjunct is the canonical isomorphism $\\theta_n:C\\otimes_R^LA_n\\xrightarrow{\\sim}C_n$. Apply [lem-sfb-dc-hom-scalar-adjunction] on the one-object point site to $R\\to A_n$, $K=C$, $N=A_n$. It gives the evaluation-normalized isomorphism\n$$\\alpha_n:\\operatorname{Res}\\mathbf R\\operatorname{Hom}_{A_n}(C\\otimes_R^LA_n,A_n)\\xrightarrow{\\sim}\\mathbf R\\operatorname{Hom}_R(C,A_n).$$\nThe composite $\\alpha_n\\circ\\mathbf R\\operatorname{Hom}_{A_n}(\\theta_n,A_n)\\circ\\gamma_{n,K_n}$ has transpose the finite projection/evaluation/counit pairing precomposed in its second variable by $q_n$. In fact the scalar-adjunction node normalizes its transpose by the unit $u_n:C\\to\\operatorname{Res}(C\\otimes_R^LA_n)$, and $q_n=(\\operatorname{Res}\\theta_n)u_n$ by the adjunct formula. Step 3 and the evaluated pairing identify that precomposed pairing with $\\operatorname{ev}_n\\lambda_K$. Bijectivity of tensor-Hom transposition therefore identifies the displayed composite with $\\operatorname{ev}_n\\Gamma_K$, proving the asserted finite evaluation formula.",
+   "uses": [
+    "lem-coef-tower-coaugmentation",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-coef-tower-evaluation-pairing",
+    "lem-coef-finite-mapping-adjunction",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, third displayed line: derived scalar adjunction with the actual compact-support projection."
+   }
   },
-  "tool_uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-weil-tower-evaluation-kinjective",
+  {
+   "text": "Every map in the evaluation formula of step 4 is an isomorphism: $\\gamma_{n,K_n}$ by finite mapping adjunction, precomposition by $\\theta_n$ because $\\theta_n$ is an isomorphism, and $\\alpha_n$ by scalar adjunction. Thus every $\\operatorname{ev}_n\\Gamma_K$ is an isomorphism. Apply the isomorphism-detection clause of [lem-weil-pbc-sequential-tower-evaluation-full] to the already constructed tower morphism $\\Gamma_K$ on the point site with ring $R$. It follows that $\\Gamma_K$ is an isomorphism in $D(\\operatorname{Tow}(\\operatorname{Mod}(R)))$. Only detection is used here; no lift or uniqueness assertion is used to construct $\\Gamma_K$.",
+   "uses": [
+    "lem-coef-finite-mapping-adjunction",
+    "lem-coef-tower-coaugmentation",
     "lem-sfb-dc-hom-scalar-adjunction",
     "lem-weil-pbc-sequential-tower-evaluation-full"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-Codex-Q96-35fb9ab1b",
-    "group": "Q96",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-35fb9ab1b (reviewer sub-agent of L); spot-checked: Reviewed the item, unit/chapter route, all cited node statements, cited literature, and delivery checks A–F. The seven proof steps are mathematically coherent, hypotheses and coefficient/base-change maps align, no new nodes or duplicates occur, all steps are under 2000 characters, and edge cases were checked. Review written to review.md."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Paragraph 2, the second and third mapping-complex isomorphisms before total inverse limit."
+   }
   },
-  "lean": {
-    "module": "Sheaf.SixFunctors.CoefTowerNaturalCurrying",
-    "declaration": "WeilConjectures.coefTowerNaturalCurrying",
-    "file": "lean/Sheaf/SixFunctors/CoefTowerNaturalCurrying.lean",
-    "statement": "theorem coefTowerNaturalCurrying (hl : l ≠ D.p) (Q : CochainComplex (coefficientSequenceModules.{u, u} l E X) ℤ) (eQ : ∀ n : ℕ, (coefficientSequenceDerivedEvaluation.{u, u} l E X n).obj (coefTraceInput l E X Q) ≅ integralDualizingFiniteTerm l E D X n) (_hQ : ∀ {m n : ℕ} (h : n ≤ m), (coefficientSequenceDerivedTransition.{u, u} l E X h).app (coefTraceInput l E X Q) ≫ (normalizedDVRRes.{u, u} l E X h).map (eQ n).hom = (eQ m).hom ≫ integralDualizingExceptionalTransition l E D X hl h) (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a₀ b₀ : ℤ) (_hab : a₀ ≤ b₀) (T : DerivedCategory (scalarReductionSource.{u, u} l E X) ⥤ DerivedCategory (pbcTowers (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))))) (e : ∀ n : ℕ, T ⋙ pbcTowerEvaluation (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) n ≅ compactSupportRestrictedLevel l E (finiteDualizingCompactification D X) n) (_htransition : ∀ (m n : ℕ) (h : n ≤ m) (K : DerivedCategory (scalarReductionSource.{u, u} l E X)), (pbcTowerTransition (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) m n h).app (T.obj K) ≫ (e n).hom.app K = (e m).hom.app K ≫ compactSupportRestrictedTransition l E (finiteDualizingCompactification D X) m n h K) (eTrace : ∀ n : ℕ, (coefTraceEvaluation l E n).obj (coefTraceDualizingTower l E D X Q) ≅ coefTraceFiniteValue l E D X n) (t : coefTraceDualizingTower l E D X Q ⟶ coefCurryingTarget l E) (_ht : ∀ n : ℕ, (coefTraceEvaluation l E n).map t ≫ (coefCurryingTargetEvaluation l E n).hom = (eTrace n).hom ≫ coefTraceFiniteCounit l E D X n ≫ (coefTraceTargetIso l E D n).hom) : ∃ M : CoefCurryingModels l E D X Q a₀ b₀ T e, M.IsSpecified l E D X Q a₀ b₀ T e ∧ (∀ (C : DerivedCategory (ModuleCat.{u + 1} (coefTraceRing l E))) (P : CochainComplex (ModuleCat.{u + 1} (coefTraceRing l E)) ℤ) (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u + 1} (coefTraceRing l E)) (.up ℤ)).kFlat P) (_eP : DerivedCategory.Q.obj P ≅ C) (I : CochainComplex (coefPairingModules l E) ℤ) (_hI : I.IsKInjective) (_eI : DerivedCategory.Q.obj I ≅ coefCurryingTarget l E), Nonempty ((M.hom.hom).obj (op C) ≅ DerivedCategory.Q.obj (coefCurryingHomComplex l E P I))) ∧ (∀ (C : DerivedCategory (ModuleCat.{u + 1} (coefTraceRing l E))) (n : ℕ), (coefTraceEvaluation l E n).map (M.hom.evaluation C) ≫ (coefCurryingTargetEvaluation l E n).hom = (M.tensorEvaluation n).hom.app ((M.hom.hom).obj (op C), (CoefTower.constant (coefTraceRing l E)).obj C) ≫ ((M.homEvaluation n).hom.app (op C) ⊗ₘ (CoefTower.constantEvaluation (coefTraceRing l E) n).hom.app C) ≫ coefCurryingPointEvaluation l E n C) ∧ (∀ (K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), (coefTraceEvaluation l E n).map ((M.eta l E D X Q a₀ b₀ T e).app K) ≫ (M.supportEvaluation l E D X Q a₀ b₀ T e n).hom.app K.obj = (CoefTower.constantEvaluation (coefTraceRing l E) n).hom.app ((coefCurryingIntegralSections l E D X T).obj K.obj) ≫ M.finiteProjection l E D X Q a₀ b₀ T e n K) ∧ (∀ n : ℕ, (M.omegaEvaluation n).hom ≫ (M.omegaOrigin n).hom = (eTrace n).hom) ∧ (∀ K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory, IsIso (M.gamma l E D X Q a₀ b₀ T e t K)) ∧ (∀ (K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), (coefTraceEvaluation l E n).map (M.gamma l E D X Q a₀ b₀ T e t K) ≫ (M.homEvaluation n).hom.app (op ((coefCurryingIntegralSections l E D X T).obj K.obj)) = (M.finiteHom n).hom.app (op K.obj) ≫ M.finiteArrow l E D X Q a₀ b₀ T e n K) ∧ ∀ (K K' : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (f : K ⟶ K'), M.gamma l E D X Q a₀ b₀ T e t K' ≫ (M.hom.hom).map ((coefCurryingIntegralSections l E D X T).map f.hom).op = (coefPairingHom l E X M.calculus Q).map f.hom.op ≫ M.gamma l E D X Q a₀ b₀ T e t K",
-    "branch": "sheaf-dag",
-    "by": "Q09",
-    "date": "2026-10-19",
-    "existing": false,
-    "declarations": [
-      "WeilConjectures.coefCurryingPointDerived",
-      "WeilConjectures.coefCurryingStandardPoint",
-      "WeilConjectures.coefCurryingStandardPointQ",
-      "WeilConjectures.coefCurryingPointEquivalence",
-      "WeilConjectures.coefCurryingStandardEvaluate",
-      "WeilConjectures.coefCurryingStandardEvaluateFactors",
-      "WeilConjectures.coefCurryingEvaluationTransport",
-      "WeilConjectures.coefCurryingQuotients",
-      "WeilConjectures.coefCurryingTarget",
-      "WeilConjectures.coefCurryingTargetEvaluation",
-      "WeilConjectures.CoefCurryingHomModel",
-      "WeilConjectures.coefCurryingHomComplex",
-      "WeilConjectures.coefCurryingPointHom",
-      "WeilConjectures.coefCurryingPointTensor",
-      "WeilConjectures.coefCurryingPointEvaluation",
-      "WeilConjectures.coefCurryingIntegralSections",
-      "WeilConjectures.coefCurryingStandardFiniteSections",
-      "WeilConjectures.CoefCurryingModels",
-      "WeilConjectures.CoefCurryingModels.eta",
-      "WeilConjectures.CoefCurryingModels.supportEvaluation",
-      "WeilConjectures.CoefCurryingModels.finiteProjection",
-      "WeilConjectures.CoefCurryingModels.finiteArrow",
-      "WeilConjectures.CoefCurryingModels.gamma",
-      "WeilConjectures.coefTowerNaturalCurrying",
-      "WeilConjectures.coefCurryingStandardIntegralPoint",
-      "WeilConjectures.coefCurryingIntegralPointTransport",
-      "WeilConjectures.coefCurryingFiniteC",
-      "WeilConjectures.CoefCurryingModels.IsSpecified"
-    ]
+  {
+   "text": "For $f:K\\to K'$, write $h=\\mathsf H(f)$, $b=B(f)$ and $c=\\operatorname{const}C(f)$. The dinaturality statement of [lem-coef-tower-evaluation-pairing] says $\\beta_K(h\\otimes1)=\\beta_{K'}(1\\otimes b)$ as actual derived tower morphisms. Naturality of [lem-coef-tower-coaugmentation] says $b\\eta_K=\\eta_{K'}c$. Functoriality of tensor and associativity of composition give\n$$\\begin{aligned}\n\\lambda_K(h\\otimes1)&=t\\beta_K(h\\otimes\\eta_K)\\\\\n&=t\\beta_{K'}(1\\otimes b)(1\\otimes\\eta_K)\\\\\n&=t\\beta_{K'}(1\\otimes\\eta_{K'}c)\\\\\n&=\\lambda_{K'}(1\\otimes c).\n\\end{aligned}$$\nThe same $t$ occurs throughout, since it was fixed independently of $K$. This proves an equality before evaluation in the index direction.",
+   "uses": [
+    "lem-coef-tower-evaluation-pairing",
+    "lem-coef-tower-coaugmentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Final paragraph, all four lines identify the specified natural maps; naturality before inverse limits."
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-975247e60",
-    "group": "Q09",
-    "result": "pass",
-    "note": "Re-delivery after RETURN of deb24dad (H3 F1/F2, H13 F3). F1: CoefCurryingModels.IsSpecified imposes all 5 coefTowerEvaluationPairing clauses verbatim (Hom complex, eIntegralHom scalar factorisation, eB transitions, beta evaluation, dinaturality) on M.calculus/pairing/finiteFrame/tensorEvaluation/integralHom/finiteHom/eB/omegaEvaluation; inputs a0 b0 imply finiteTorConstructibleIntegral via _hab. support_finite pins M.support vs eB, so the eta clause reduces to the coaugmentation dep's clause. F2: finiteC is now the def coefCurryingFiniteC (derivedFiniteSectionsRestriction + localization liftNatIso + pointSectionsDerived, the last pinned by Qh-whiskering; needs Gamma->RGamma unit iso on Spec kbar, true by w-contractibility); finiteHom/omegaEvaluation/tensorEvaluation pinned by beta evaluation, omegaOrigin by eTrace, homEvaluation by clause 2. F3: dep record no longer delivered; only item node/module/report differ from side-live. lean.statement verbatim; 28 declarations all listed; docstrings with source and blueprint, 7-step theorem docstring; only sorry. nt_compile --json clean 41.8 s. Advisory: possibly redundant transitive imports; compile time near 60 s."
+  {
+   "text": "Transpose the two equal maps in step 6 using the bijection of [lem-sf-ringed-derived-closed-symmetric-monoidal], with source $\\mathsf H(K')\\otimes_R^L\\operatorname{const}C$ and target $A_\\bullet$. Naturality in the first tensor variable makes the transpose of $\\lambda_K(h\\otimes1)$ equal to $\\Gamma_Kh$. Naturality in its second variable makes the transpose of $\\lambda_{K'}(1\\otimes c)$ equal to $\\mathsf J(C(f))\\Gamma_{K'}$. Their equality is precisely\n$$\\mathsf J(C(f))\\circ\\Gamma_{K'}=\\Gamma_K\\circ\\mathsf H(f).$$\nIt holds in the derived tower category itself, as required.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+    "place": "Final paragraph, naturality of the specified mapping-complex comparison."
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-coef-tower-evaluation-pairing",
+  "lem-coef-tower-coaugmentation",
+  "lem-coef-finite-mapping-adjunction",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-sequential-tower-evaluation-full"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md",
+  "place": "Paragraph 2 and final paragraph: explicit ringed-tower tensor-Hom transposition, finite scalar-adjunction normalization, and dinaturality calculation. Generic ringed-site calculus follows Stacks Tags 08J9 and 0FPT."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "prop-coef-integral-dualizing",
+  "date": "2026-10-17",
+  "group": "Q91"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "title": "Natural tower currying isomorphism",
+ "statement": "Fix the global finite-field datum with $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $R$, a uniformizer $\\varpi$, and $A_n=R/\\varpi^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $a:X\\to s=\\operatorname{Spec}k$ be separated and of finite type [def-weil-scheme-morphism-properties]. Use ordinary module sheaves on the small pro-etale sites, with completed coefficient sheaf $R_W=\\lim_n(A_n)_W$ for $W=X,s$ [def-weil-completed-integral-coefficients]. Write $F_n=Ra_{!,n}$ for compact support using one fixed compactification $a=pj$ [def-weil-integral-rational-qbar-compact-support], $G_n=Ra_n^!$ for the finite constructible comparison-class exceptional functor [def-weil-exceptional-inverse-image], and $\\omega_n=G_n(A_n)_s$. Fix a strict complex $Q_\\bullet$ of $(A_n)_X$-modules with quotient-semilinear transitions, representing a normalized dualizing tower [def-coef-normalized-dvr-tower]: $Q_n$ represents $\\omega_n$, and its transitions are adjoint to the counit-defined comparisons $\\omega_m\\otimes^L_{A_m}A_n\\cong\\omega_n$ of [lem-coef-finite-dualizing]. Let $K\\in D^b_c(X,R)$ [def-weil-derived-complete-integral-detailed], let $K_n=K\\otimes^L_{R_X}(A_n)_X$ [def-weil-integral-derived-reduction], and suppose its reductions have Tor amplitude in one finite interval $[a_0,b_0]$ [def-weil-finite-tor-amplitude]. Put $C_n=\\Gamma(s,F_nK_n)$ and $C=\\Gamma(s,Ra_!K)$, with coefficient-point sections [def-weil-finite-coefficient-point]. Suppose $\\dim X\\le d$ for an integer $d\\ge0$ [def-kun-topological-krull-dimension]. Let $\\mathsf H(K),B_K,B_\\omega$ and $\\beta_K$ be the specified derived towers and dinatural pairing of [lem-coef-tower-evaluation-pairing]. Fix a trace $t:B_\\omega\\to A_\\bullet$ evaluating to the finite counits, independently of $K$, using the compatible finite counits of [lem-coef-tower-trace-rectification] and the lift of [lem-weil-pbc-sequential-tower-evaluation-full]. Let $\\eta_K:\\operatorname{const}C\\to B_K$ be the natural coaugmentation of [lem-coef-tower-coaugmentation]. Define $\\mathsf J(C)$ to be the derived tower Hom from $\\operatorname{const}C$ to $A_\\bullet$ [def-pur-derived-internal-hom]; it is computed by termwise Hom from a constant K-flat representative of $C$ into a K-injective resolution of the whole tower $A_\\bullet$. Thus $\\operatorname{ev}_n\\mathsf J(C)=\\mathbf R\\operatorname{Hom}_R(C,A_n)$.\nCurrying the composite\n$$\\mathsf H(K)\\otimes_R^L\\operatorname{const}C\\xrightarrow{1\\otimes\\eta_K}\\mathsf H(K)\\otimes_R^LB_K\\xrightarrow{\\beta_K}B_\\omega\\xrightarrow{t}A_\\bullet$$\ngives an isomorphism $\\Gamma_K:\\mathsf H(K)\\xrightarrow{\\sim}\\mathsf J(C)$ in $D(\\operatorname{Tow}(\\operatorname{Mod}(R)))$. Its evaluation at $n$ is $\\gamma_{n,K_n}$ of [lem-coef-finite-mapping-adjunction] followed by the canonical scalar-adjunction isomorphism $\\mathbf R\\operatorname{Hom}_{A_n}(C_n,A_n)\\cong\\mathbf R\\operatorname{Hom}_R(C,A_n)$. For every $f:K\\to K'$ with induced $C(f):C\\to C'$, the equality $\\mathsf J(C(f))\\circ\\Gamma_{K'}=\\Gamma_K\\circ\\mathsf H(f)$ holds in the derived tower category.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-exceptional-inverse-image",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-finite-dualizing",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-derived-reduction",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-coefficient-point",
+  "def-kun-topological-krull-dimension",
+  "lem-coef-tower-evaluation-pairing",
+  "lem-coef-tower-trace-rectification",
+  "lem-weil-pbc-sequential-tower-evaluation-full",
+  "lem-coef-tower-coaugmentation",
+  "def-pur-derived-internal-hom",
+  "lem-coef-finite-mapping-adjunction"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+  "place": "Proof paragraph 2, middle displayed comparison and final naturality assertion: currying the fixed trace and tower evaluation composite (second part of old step 11).",
+  "note": "Agent-written extraction of the existing item proof; the blueprint supplies the route, and the retained argument is recorded in the delivery report."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "natural tower mapping complex isomorphism by levelwise finite adjunction",
+   "results": "CategoryTheory.Idempotents.DoldKan.η; AlgebraicTopology.DoldKan.instIsIsoFunctorKaroubiSimplicialObjectNatTrans; AlgebraicTopology.DoldKan.N₂Γ₂; AlgebraicTopology.DoldKan.N₁Γ₀_app; AlgebraicTopology.DoldKan.instIsIsoFunctorSimplicialObjectKaroubiNatTrans; CategoryTheory.Idempotents.DoldKan.hε; CategoryTheory.Idempotents.DoldKan.hη; AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsIso evaluation",
+   "results": "loogle: Unknown identifier `CategoryTheory.Limits.IsIso`",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "levelwise.*isomorphism|quasiIso.*evaluation Mathlib/Algebra/Homology",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "currying natural mapping complex isomorphism from levelwise isomorphisms",
+   "results": "CategoryTheory.Functor.currying; CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv; CategoryTheory.curryingIso; CategoryTheory.curryingIso_hom_toFunctor_obj_obj; CategoryTheory.Functor.curry₃ObjProdComp; CategoryTheory.curryingIso_inv_toFunctor_map_app_app; CategoryTheory.curryingIso_hom_toFunctor_obj_map; MeasurableEquiv.curry",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural tower mapping complex isomorphism by levelwise finite adjunction",
+   "results": "CategoryTheory.Idempotents.DoldKan.η; AlgebraicTopology.DoldKan.instIsIsoFunctorKaroubiSimplicialObjectNatTrans; AlgebraicTopology.DoldKan.N₂Γ₂; AlgebraicTopology.DoldKan.N₁Γ₀_app; AlgebraicTopology.DoldKan.instIsIsoFunctorSimplicialObjectKaroubiNatTrans; CategoryTheory.Idempotents.DoldKan.hε; CategoryTheory.Idempotents.DoldKan.hη; AlgebraicTopology.DoldKan.N₂Γ₂_compatible_with_N₁Γ₀",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsIso",
+   "results": "loogle: unknown identifier 'CategoryTheory.Limits.IsIso'",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "levelwise.*isomorphism|quasiIso.*evaluation Mathlib/Algebra/Homology",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "currying natural mapping complex isomorphism from levelwise isomorphisms",
+   "results": "CategoryTheory.Functor.currying; CategoryTheory.MonoidalClosed.FunctorCategory.homEquiv; CategoryTheory.curryingIso; CategoryTheory.curryingIso_hom_toFunctor_obj_obj; CategoryTheory.Functor.curry₃ObjProdComp; CategoryTheory.curryingIso_inv_toFunctor_map_app_app; CategoryTheory.curryingIso_hom_toFunctor_obj_map; MeasurableEquiv.curry",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "levelwise.*isomorphism|quasiIso.*evaluation Algebra/Homology",
+   "results": "Mathlib/Algebra/Homology/Functor.lean; Mathlib/Algebra/Homology/Functor.lean; Mathlib/Algebra/Homology/Functor.lean; Mathlib/Algebra/Homology/Functor.lean; Mathlib/Algebra/Homology/Functor.lean; 5 source hits; these concern general category or homological constructions, not the stated finite-coefficient compact-support tower comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIso\", \"evaluation\"",
+   "results": "AlgebraicGeometry.Scheme.Spec.isIso_Γevaluation",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between dualizing derived mapping towers and Hom of compact support from finite exceptional adjunctions",
+   "results": "CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; LightCondensed.ihomPoints_symm_comp; CategoryTheory.Adjunction.derived'_counit; 8 returned hits; digest 5e950cac32ad440f",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical infrastructure or unrelated coefficient algebra does not state the finite exceptional dualizing tower comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalClosed",
+   "results": "CategoryTheory.MonoidalClosed.ofEquiv; CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj; CategoryTheory.MonoidalClosed.ofEquiv_curry_def; CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def; CategoryTheory.Monoidal.Reflective.monoidalClosed; CategoryTheory.Monoidal.Reflective.closed; CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom; CategoryTheory.Monoidal.Reflective.isIso_tfae; 12 returned hits; digest c458cd4b44ac3020",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical infrastructure or unrelated coefficient algebra does not state the finite exceptional dualizing tower comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|upperShriek|compactSupport Algebra/Homology",
+   "results": "Mathlib/Algebra/Homology/HomotopyFiber.lean; 1 returned hits; digest 064930e5919f47f9",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical infrastructure or unrelated coefficient algebra does not state the finite exceptional dualizing tower comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphism of derived mapping complexes from Verdier duality and compact support",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh.congr_simp; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc; CategoryTheory.Functor.rightDerivedNatIso; 8 returned hits; digest 0e671249a510d683",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical infrastructure or unrelated coefficient algebra does not state the finite exceptional dualizing tower comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived duality for a normalized tower of dualizing complexes modulo powers of a uniformizer",
+   "results": "BDeRham; BDeRhamPlus; instCommRingBDeRhamPlus; Ideal.quotientRangePowQuotSuccInclusionEquiv; IsDedekindDomain.HeightOneSpectrum.adicCompletion; IsDedekindDomain.HeightOneSpectrum.adicCompletion.instIsScalarTower'; localCohomology.isoSelfLERadical; AdicCompletion.map_exact; 8 returned hits; digest 71dd4ac3a7514bb1",
+   "date": "2026-10-17",
+   "verdict": "no match: generic categorical infrastructure or unrelated coefficient algebra does not state the finite exceptional dualizing tower comparison."
+  }
+ ],
+ "blueprint": {
+  "from": {
+   "node": "prop-coef-integral-dualizing",
+   "place": "Proof paragraph 2, middle displayed comparison and final naturality assertion: currying the fixed trace and tower evaluation composite (second part of old step 11).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-coef-tower-natural-currying",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported metadata unchanged. Gave seven steps constructing the actual curried tower map, checking its finite evaluation by normalized scalar adjunction, detecting invertibility, and proving naturality from the dinatural pairing and natural coaugmentation. Reused existing generic ringed-site, scalar-adjunction and tower-detection nodes; no new nodes were needed.",
+  "blueprint": "Ancestor prop-coef-integral-dualizing, proof paragraph 2 (middle two displayed comparisons) and final paragraph (specified natural maps). Historical master and main-20261015 proof texts agree here.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic exact equivalence of tower modules with a small ringed diagram site; supplies a setting for tensor-Hom currying."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic unbounded ringed-site tensor-Hom bijection and its normalized evaluation, including naturality; it does not supply geometric duality."
+   },
+   {
+    "node": "lem-weil-tower-evaluation-kinjective",
+    "why": "Generic evaluation of a K-injective tower is K-injective, used only to check the specified termwise Hom model."
+   },
+   {
+    "node": "lem-sfb-dc-hom-scalar-adjunction",
+    "why": "Generic evaluation-normalized change-of-rings Hom isomorphism on the point site, without a flatness assumption on R to A_n."
+   },
+   {
+    "node": "lem-weil-pbc-sequential-tower-evaluation-full",
+    "why": "Only its isomorphism-detection clause is used for an existing derived tower map; it provides no geometric adjunction or naturality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-sequential-tower-evaluation-full"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q96-35fb9ab1b",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-35fb9ab1b (reviewer sub-agent of L); spot-checked: Reviewed the item, unit/chapter route, all cited node statements, cited literature, and delivery checks A–F. The seven proof steps are mathematically coherent, hypotheses and coefficient/base-change maps align, no new nodes or duplicates occur, all steps are under 2000 characters, and edge cases were checked. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefTowerNaturalCurrying",
+  "declaration": "WeilConjectures.coefTowerNaturalCurrying",
+  "file": "lean/Sheaf/SixFunctors/CoefTowerNaturalCurrying.lean",
+  "statement": "theorem coefTowerNaturalCurrying (hl : l ≠ D.p) (Q : CochainComplex (coefficientSequenceModules.{u, u} l E X) ℤ) (eQ : ∀ n : ℕ, (coefficientSequenceDerivedEvaluation.{u, u} l E X n).obj (coefTraceInput l E X Q) ≅ integralDualizingFiniteTerm l E D X n) (_hQ : ∀ {m n : ℕ} (h : n ≤ m), (coefficientSequenceDerivedTransition.{u, u} l E X h).app (coefTraceInput l E X Q) ≫ (normalizedDVRRes.{u, u} l E X h).map (eQ n).hom = (eQ m).hom ≫ integralDualizingExceptionalTransition l E D X hl h) (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a₀ b₀ : ℤ) (_hab : a₀ ≤ b₀) (T : DerivedCategory (scalarReductionSource.{u, u} l E X) ⥤ DerivedCategory (pbcTowers (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))))) (e : ∀ n : ℕ, T ⋙ pbcTowerEvaluation (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) n ≅ compactSupportRestrictedLevel l E (finiteDualizingCompactification D X) n) (_htransition : ∀ (m n : ℕ) (h : n ≤ m) (K : DerivedCategory (scalarReductionSource.{u, u} l E X)), (pbcTowerTransition (Spec (.of D.k)) (completedIntegralCommRingSheafUnrestricted l E (Spec (.of D.k))) m n h).app (T.obj K) ≫ (e n).hom.app K = (e m).hom.app K ≫ compactSupportRestrictedTransition l E (finiteDualizingCompactification D X) m n h K) (eTrace : ∀ n : ℕ, (coefTraceEvaluation l E n).obj (coefTraceDualizingTower l E D X Q) ≅ coefTraceFiniteValue l E D X n) (t : coefTraceDualizingTower l E D X Q ⟶ coefCurryingTarget l E) (_ht : ∀ n : ℕ, (coefTraceEvaluation l E n).map t ≫ (coefCurryingTargetEvaluation l E n).hom = (eTrace n).hom ≫ coefTraceFiniteCounit l E D X n ≫ (coefTraceTargetIso l E D n).hom) : ∃ M : CoefCurryingModels l E D X Q a₀ b₀ T e, M.IsSpecified l E D X Q a₀ b₀ T e ∧ (∀ (C : DerivedCategory (ModuleCat.{u + 1} (coefTraceRing l E))) (P : CochainComplex (ModuleCat.{u + 1} (coefTraceRing l E)) ℤ) (_hP : (HomologicalComplex.quasiIso (ModuleCat.{u + 1} (coefTraceRing l E)) (.up ℤ)).kFlat P) (_eP : DerivedCategory.Q.obj P ≅ C) (I : CochainComplex (coefPairingModules l E) ℤ) (_hI : I.IsKInjective) (_eI : DerivedCategory.Q.obj I ≅ coefCurryingTarget l E), Nonempty ((M.hom.hom).obj (op C) ≅ DerivedCategory.Q.obj (coefCurryingHomComplex l E P I))) ∧ (∀ (C : DerivedCategory (ModuleCat.{u + 1} (coefTraceRing l E))) (n : ℕ), (coefTraceEvaluation l E n).map (M.hom.evaluation C) ≫ (coefCurryingTargetEvaluation l E n).hom = (M.tensorEvaluation n).hom.app ((M.hom.hom).obj (op C), (CoefTower.constant (coefTraceRing l E)).obj C) ≫ ((M.homEvaluation n).hom.app (op C) ⊗ₘ (CoefTower.constantEvaluation (coefTraceRing l E) n).hom.app C) ≫ coefCurryingPointEvaluation l E n C) ∧ (∀ (K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), (coefTraceEvaluation l E n).map ((M.eta l E D X Q a₀ b₀ T e).app K) ≫ (M.supportEvaluation l E D X Q a₀ b₀ T e n).hom.app K.obj = (CoefTower.constantEvaluation (coefTraceRing l E) n).hom.app ((coefCurryingIntegralSections l E D X T).obj K.obj) ≫ M.finiteProjection l E D X Q a₀ b₀ T e n K) ∧ (∀ n : ℕ, (M.omegaEvaluation n).hom ≫ (M.omegaOrigin n).hom = (eTrace n).hom) ∧ (∀ K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory, IsIso (M.gamma l E D X Q a₀ b₀ T e t K)) ∧ (∀ (K : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (n : ℕ), (coefTraceEvaluation l E n).map (M.gamma l E D X Q a₀ b₀ T e t K) ≫ (M.homEvaluation n).hom.app (op ((coefCurryingIntegralSections l E D X T).obj K.obj)) = (M.finiteHom n).hom.app (op K.obj) ≫ M.finiteArrow l E D X Q a₀ b₀ T e n K) ∧ ∀ (K K' : (CoefTower.inputs l E (X := X) a₀ b₀).FullSubcategory) (f : K ⟶ K'), M.gamma l E D X Q a₀ b₀ T e t K' ≫ (M.hom.hom).map ((coefCurryingIntegralSections l E D X T).map f.hom).op = (coefPairingHom l E X M.calculus Q).map f.hom.op ≫ M.gamma l E D X Q a₀ b₀ T e t K",
+  "branch": "sheaf-dag",
+  "by": "Q09",
+  "date": "2026-10-19",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.coefCurryingPointDerived",
+   "WeilConjectures.coefCurryingStandardPoint",
+   "WeilConjectures.coefCurryingStandardPointQ",
+   "WeilConjectures.coefCurryingPointEquivalence",
+   "WeilConjectures.coefCurryingStandardEvaluate",
+   "WeilConjectures.coefCurryingStandardEvaluateFactors",
+   "WeilConjectures.coefCurryingEvaluationTransport",
+   "WeilConjectures.coefCurryingQuotients",
+   "WeilConjectures.coefCurryingTarget",
+   "WeilConjectures.coefCurryingTargetEvaluation",
+   "WeilConjectures.CoefCurryingHomModel",
+   "WeilConjectures.coefCurryingHomComplex",
+   "WeilConjectures.coefCurryingPointHom",
+   "WeilConjectures.coefCurryingPointTensor",
+   "WeilConjectures.coefCurryingPointEvaluation",
+   "WeilConjectures.coefCurryingIntegralSections",
+   "WeilConjectures.coefCurryingStandardFiniteSections",
+   "WeilConjectures.CoefCurryingModels",
+   "WeilConjectures.CoefCurryingModels.eta",
+   "WeilConjectures.CoefCurryingModels.supportEvaluation",
+   "WeilConjectures.CoefCurryingModels.finiteProjection",
+   "WeilConjectures.CoefCurryingModels.finiteArrow",
+   "WeilConjectures.CoefCurryingModels.gamma",
+   "WeilConjectures.coefTowerNaturalCurrying",
+   "WeilConjectures.coefCurryingStandardIntegralPoint",
+   "WeilConjectures.coefCurryingIntegralPointTransport",
+   "WeilConjectures.coefCurryingFiniteC",
+   "WeilConjectures.CoefCurryingModels.IsSpecified"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-975247e60",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of deb24dad (H3 F1/F2, H13 F3). F1: CoefCurryingModels.IsSpecified imposes all 5 coefTowerEvaluationPairing clauses verbatim (Hom complex, eIntegralHom scalar factorisation, eB transitions, beta evaluation, dinaturality) on M.calculus/pairing/finiteFrame/tensorEvaluation/integralHom/finiteHom/eB/omegaEvaluation; inputs a0 b0 imply finiteTorConstructibleIntegral via _hab. support_finite pins M.support vs eB, so the eta clause reduces to the coaugmentation dep's clause. F2: finiteC is now the def coefCurryingFiniteC (derivedFiniteSectionsRestriction + localization liftNatIso + pointSectionsDerived, the last pinned by Qh-whiskering; needs Gamma->RGamma unit iso on Spec kbar, true by w-contractibility); finiteHom/omegaEvaluation/tensorEvaluation pinned by beta evaluation, omegaOrigin by eTrace, homEvaluation by clause 2. F3: dep record no longer delivered; only item node/module/report differ from side-live. lean.statement verbatim; 28 declarations all listed; docstrings with source and blueprint, 7-step theorem docstring; only sorry. nt_compile --json clean 41.8 s. Advisory: possibly redundant transitive imports; compile time near 60 s."
+ },
+ "lean_audit": {}
 }

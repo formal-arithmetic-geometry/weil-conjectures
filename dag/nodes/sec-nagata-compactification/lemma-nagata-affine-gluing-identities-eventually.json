@@ -1,273 +1,262 @@
 {
-  "id": "lemma-nagata-affine-gluing-identities-eventually",
-  "blueprint": {
-    "is": "lemma-nagata-affine-gluing-identities-eventually",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The selected finite-stage datum satisfies the gluing axioms",
-  "statement": "Let $S$ be a quasi-compact quasi-separated scheme with its selected finite affine gluing presentation $\\mathsf G_S$ [def-nagata-finite-affine-gluing-presentation]. Use the raw coefficient tuple $C$ at $c=\\lambda_{\\mathrm{coeff}}(S)$ of [def-nagata-affine-gluing-coefficient-stage] and the explicit raw refinement system $I(C)$ of [def-nagata-affine-raw-refinement-system]: its chart rings $B_{a,i}\\subseteq A_a=\\Gamma(U_a,\\mathcal O_S)$ are finitely generated $\\mathbf Z$-subrings containing $C_a$ and the labelled principal-open elements $f_p$, and each labelled original restriction $\\rho_p:A_b\\to(A_a)_{f_p}$ restricts to $\\rho_{p,i}:B_{b,i}\\to(B_{a,i})_{f_p}$. Transitions are inclusions and their explicit fraction maps, not unspecified extensions between independent rings. Write $X_{a,i}=\\operatorname{Spec}B_{a,i}$ [def-weil-affine-spectrum], $P_{p,i}=D_{B_{a,i}}(f_p)$ for its labelled source pieces, and $W_{ab,i}$ for the union of the pieces $p:a\\to b$. Localizations are as in [def-weil-ring-localization-away]. No gluing equations are assumed of a raw tuple.\n\nUse exactly the selected finite open and localized map witnesses, upper-bound parameters and index $j=\\lambda_{\\mathrm{glue}}(S)$ of [def-nagata-affine-gluing-valid-stage] on this same system $I(C)$. Then the labelled piece maps in its raw datum at $j$ agree on intersections and assemble into morphisms $\\varphi_{ab,j}:W_{ab,j}\\to W_{ba,j}$. These preserve the selected opens, are mutually inverse, and satisfy all identity and triple-overlap cocycle equations. Explicitly,\n$$W_{aa,j}=X_{a,j},\\qquad\\varphi_{aa,j}=\\mathrm{id},\\qquad\\varphi_{ba,j}\\circ\\varphi_{ab,j}=\\mathrm{id}_{W_{ab,j}},$$\nand for every triple $(a,b,d)$,\n$$\\varphi_{ab,j}^{-1}(W_{ba,j}\\cap W_{bd,j})=W_{ab,j}\\cap W_{ad,j},\\qquad\\varphi_{bd,j}\\circ\\varphi_{ab,j}=\\varphi_{ad,j}\\ \\text{on }W_{ab,j}\\cap W_{ad,j}.$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
-    "place": "node lemma-nagata-affine-gluing-identities-eventually, order 337"
-  },
-  "stmt_deps": [
-    "def-nagata-finite-affine-gluing-presentation",
-    "def-nagata-affine-gluing-coefficient-stage",
-    "def-nagata-affine-raw-refinement-system",
-    "def-nagata-affine-gluing-valid-stage",
-    "def-weil-affine-spectrum",
-    "def-weil-ring-localization-away"
-  ],
-  "proof": [
-    {
-      "text": "Use the same coefficient system and choices as [def-nagata-affine-gluing-valid-stage], rather than constructing another notion of refinement. The initial tuple $C$ comes from [def-nagata-affine-gluing-coefficient-stage]; [lemma-nagata-affine-gluing-coefficients-descend] identifies its restricted maps with the original restrictions. The definition [def-nagata-affine-raw-refinement-system] specifies every tuple, labelled principal piece, inclusion, localized comparison and actual composite domain. The statement [lem-nagata-affine-raw-refinement-cofinal] supplies nonemptiness, directedness and chartwise cofinality for this very system. In particular the upper-bound choices fixed in the valid-stage definition are defined on $I(C)$. Keep its test list $E$: diagonal cover, piecewise image-in-overlap and triple-domain open tests in both orientations, agreement on piece intersections, diagonal identity, both inverse comparisons, and every labelled triple comparison. None of these gluing equations is part of the definition of a raw tuple. This reuses the existing system; no downstream valid-refinement or glued-scheme theorem is used.",
-      "uses": [
-        "def-nagata-affine-gluing-valid-stage",
-        "def-nagata-affine-gluing-coefficient-stage",
-        "lemma-nagata-affine-gluing-coefficients-descend",
-        "def-nagata-affine-raw-refinement-system",
-        "lem-nagata-affine-raw-refinement-cofinal"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
-        "place": "## Proof; independent second reading using the current explicit raw-refinement and witness interfaces; step 1"
-      }
-    },
-    {
-      "text": "Let $F_S=\\{c\\}\\cup\\{w_e:e\\in E\\}$ be the finite set in [def-nagata-affine-gluing-valid-stage]. By [lemma-nagata-directed-finite-upper-bound], each $w_e$ and $c$ is at most $j=u(F_S)$, with exactly that definition's fixed upper-bound parameters. All transitions are the inclusions and fraction maps of [def-nagata-affine-raw-refinement-system]. For ANY $v\\in B_{a,j}$ the induced map $e_{a,j,v}:(B_{a,j})_v\\to(A_a)_v$ is injective: equality of the images of $x/v^r$ and $y/v^s$ means $v^k(v^sx-v^ry)=0$ in $A_a$ for some $k$, by [def-weil-ring-localization-away]. This same equation holds in its subring $B_{a,j}$, proving the fraction equality there. This includes nilpotent $v$, products of principal-open elements, and new numerator elements. Thus for every labelled piece $p:a\\to b$ and EVERY final $z\\in B_{b,j}$, the restricted map is uniquely characterized by $e_{a,j,f_p}(\\rho_{p,j}(z))=\\rho_p(z)$. Its existence is the defining image-containment condition of a tuple. Both sides of the piece-map comparison square have this same image, so they commute on all final elements. No old generator list is being treated as a generating set for an enlarged ring.",
-      "uses": [
-        "def-nagata-affine-gluing-valid-stage",
-        "lemma-nagata-directed-finite-upper-bound",
-        "def-nagata-affine-raw-refinement-system",
-        "def-weil-ring-localization-away"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
-        "place": "## Proof; independent second reading using the current explicit raw-refinement and witness interfaces; step 2"
-      }
-    },
-    {
-      "text": "Verify the open tests piecewise, before assuming local maps glue. A basic open defined by an old element is the inverse image of that basic open under a chart inclusion: a prime avoids the element if and only if its contraction avoids it. On each labelled piece $p:a\\to b$, the commuting comparison of [def-nagata-affine-raw-refinement-system] therefore gives, for any open $V_w\\subseteq X_{b,w}$,\n$$p_j^{-1}((q^b_{jw})^{-1}V_w)=(q^p_{jw})^{-1}(p_w^{-1}V_w),$$\nwhere $q^p$ is the piece comparison. By [def-nagata-affine-gluing-valid-stage], the open witnesses are explicit positive-power identities $h_i^{N_i}=\\sum_k a_{ik}g_k$ and $g_k^{M_k}=\\sum_i b_{ki}h_i$ on localized principal domains, with their numerator coefficients and annihilating powers retained at $w_e$. Applying its transition to $j$ preserves these ring equalities. If a prime contains all $g_k$, it contains every $h_i^{N_i}$ and hence every $h_i$; the reverse identities give the converse. Taking complements proves equality of the two finite unions of basic opens at $j$, including on each actual inverse-image/intersection domain. Thus the diagonal test gives $W_{aa,j}=X_{a,j}$, each image test gives $p_j^{-1}(W_{ba,j})=P_{p,j}$, and each domain test gives $p_j^{-1}(W_{bd,j})=P_{p,j}\\cap W_{ad,j}$. The same tests are present for reversed pieces. The prime and inverse-image calculations use [def-weil-affine-spectrum]; they do not use surjectivity or a Cartesian square between different charts.",
-      "uses": [
-        "def-nagata-affine-raw-refinement-system",
-        "def-nagata-affine-gluing-valid-stage",
-        "def-weil-affine-spectrum"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
-        "place": "## Proof; independent second reading using the current explicit raw-refinement and witness interfaces; step 3"
-      }
-    },
-    {
-      "text": "Verify every map test on all final coefficients by faithful localization. If $p:a\\to b$ is represented on $D(f_p)$ and the next piece is $D_{B_b}(t)$, write $\\rho_{p,j}(t)=h/f_p^N$. Its actual inverse-image domain is $D(f_ph)$, and the extension on fractions is explicitly\n$$y/t^k\\longmapsto\\rho_{p,j}(y)f_p^{Nk}/h^k.$$\nThis follows directly from [def-weil-ring-localization-away] and agrees with the original localized restriction after inclusion into $(A_a)_{f_ph}$. Iterating this formula and multiplying the source and numerator elements puts every parallel comparison on principal pieces $D(v)$ with both ring maps landing in the SAME $(B_{a,j})_v$, as specified by [def-nagata-affine-raw-refinement-system]. For two such maps $P_j,Q_j:B_{d,j}\\to(B_{a,j})_v$, their original counterparts $P,Q:A_d\\to(A_a)_v$ satisfy, for each final $z\\in B_{d,j}$,\n$$e_{a,j,v}(P_j(z))=P(z)=Q(z)=e_{a,j,v}(Q_j(z)).$$\nHere the middle equality is an explicitly recorded equality of the original presentation [def-nagata-finite-affine-gluing-presentation]. For agreement of two pieces into chart $b$, take their two restriction maps on $D(f_pf_{p'})$; both originals are the same overlap identification restricted to that intersection. For a diagonal comparison take $P_j$ to be the restricted identity and $Q_j=\\rho_{p,j}$ for a diagonal piece. For an inverse on chart $a$, take $P_j$ to be the chart inclusion's ring map and $Q_j=\\rho_{p,j}^{\\mathrm{loc}}\\circ\\rho_{q,j}$, with $p:a\\to b$ and $q:b\\to a$; the opposite inverse uses the ordered pair $(b,a)$. For a triple take $P_j=\\rho_{r,j}$ and $Q_j=\\rho_{p,j}^{\\mathrm{loc}}\\circ\\rho_{q,j}$, where $p:a\\to b$, $q:b\\to d$, and $r:a\\to d$, restricting to the common domain of these labelled pieces. The superscript denotes the displayed fraction extension. These are all map tests of [def-nagata-affine-gluing-valid-stage], including every piece combination. In each case step 2 gives $P_j(z)=Q_j(z)$ for every final $z$, and [def-weil-affine-spectrum] gives equality of the corresponding affine-source scheme maps. Thus the enlarged target's new generators satisfy the tests too, without inferring this from tests on the generators at $c$.",
-      "uses": [
-        "def-weil-ring-localization-away",
-        "def-nagata-affine-raw-refinement-system",
-        "def-nagata-finite-affine-gluing-presentation",
-        "def-nagata-affine-gluing-valid-stage",
-        "def-weil-affine-spectrum"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
-        "place": "## Proof; independent second reading using the current explicit raw-refinement and witness interfaces; step 4"
-      }
-    },
-    {
-      "text": "For each pair $(a,b)$, its finitely many principal pieces cover $W_{ab,j}$ by [def-nagata-affine-raw-refinement-system]. Step 4 proves their maps into $X_{b,j}$ agree on every intersection, so [lem-weil-pbc-scheme-morphism-gluing] assembles them into a unique $g_{ab,j}:W_{ab,j}\\to X_{b,j}$. Step 3 puts the image of each piece in $W_{ba,j}$; restrict the point and structure-sheaf maps to that open to obtain $\\varphi_{ab,j}:W_{ab,j}\\to W_{ba,j}$. On each piece, step 3's domain equation gives the inverse image of $W_{bd,j}$ as $P_{p,j}\\cap W_{ad,j}$; union over its covering proves exactly\n$$\\varphi_{ab,j}^{-1}(W_{ba,j}\\cap W_{bd,j})=W_{ab,j}\\cap W_{ad,j}.$$\nFor the diagonal, $W_{aa,j}=X_{a,j}$ and each diagonal piece map equals its chart inclusion by step 4; uniqueness in the same gluing lemma gives $\\varphi_{aa,j}=\\mathrm{id}$. For the inverse, cover $W_{ab,j}$ by the first pieces and their inverse images of the reverse pieces, which cover it by step 3. The two composites there equal the corresponding inclusions by step 4, so gluing uniqueness gives $\\varphi_{ba,j}\\varphi_{ab,j}=\\mathrm{id}$; apply this separately with $(b,a)$ to obtain the reverse identity. For the triple, the domain equation just proved identifies the composite domain with $W_{ab,j}\\cap W_{ad,j}$. Intersect a first piece, the inverse image of a second piece, and a direct piece to cover that domain. Every such labelled comparison is equal by step 4, hence gluing uniqueness gives $\\varphi_{bd,j}\\varphi_{ab,j}=\\varphi_{ad,j}$ there. Equalities into the ambient target chart are also equalities into the specified open target because their point and sheaf maps restrict identically. These are precisely all equations listed in [def-nagata-finite-affine-gluing-presentation].",
-      "uses": [
-        "def-nagata-affine-raw-refinement-system",
-        "lem-weil-pbc-scheme-morphism-gluing",
-        "def-nagata-finite-affine-gluing-presentation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
-        "place": "## Proof; independent second reading using the current explicit raw-refinement and witness interfaces; step 5"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lemma-nagata-affine-gluing-identities-eventually",
+ "blueprint": {
+  "is": "lemma-nagata-affine-gluing-identities-eventually",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The selected finite-stage datum satisfies the gluing axioms",
+ "statement": "Let $S$ be a quasi-compact quasi-separated scheme with its selected finite affine gluing presentation $\\mathsf G_S$ [def-nagata-finite-affine-gluing-presentation]. Use the raw coefficient tuple $C$ at $c=\\lambda_{\\mathrm{coeff}}(S)$ of [def-nagata-affine-gluing-coefficient-stage] and the explicit raw refinement system $I(C)$ of [def-nagata-affine-raw-refinement-system]: its chart rings $B_{a,i}\\subseteq A_a=\\Gamma(U_a,\\mathcal O_S)$ are finitely generated $\\mathbf Z$-subrings containing $C_a$ and the labelled principal-open elements $f_p$, and each labelled original restriction $\\rho_p:A_b\\to(A_a)_{f_p}$ restricts to $\\rho_{p,i}:B_{b,i}\\to(B_{a,i})_{f_p}$. Transitions are inclusions and their explicit fraction maps, not unspecified extensions between independent rings. Write $X_{a,i}=\\operatorname{Spec}B_{a,i}$ [def-weil-affine-spectrum], $P_{p,i}=D_{B_{a,i}}(f_p)$ for its labelled source pieces, and $W_{ab,i}$ for the union of the pieces $p:a\\to b$. Localizations are as in [def-weil-ring-localization-away]. No gluing equations are assumed of a raw tuple.\n\nUse exactly the selected finite open and localized map witnesses, upper-bound parameters and index $j=\\lambda_{\\mathrm{glue}}(S)$ of [def-nagata-affine-gluing-valid-stage] on this same system $I(C)$. Then the labelled piece maps in its raw datum at $j$ agree on intersections and assemble into morphisms $\\varphi_{ab,j}:W_{ab,j}\\to W_{ba,j}$. These preserve the selected opens, are mutually inverse, and satisfy all identity and triple-overlap cocycle equations. Explicitly,\n$$W_{aa,j}=X_{a,j},\\qquad\\varphi_{aa,j}=\\mathrm{id},\\qquad\\varphi_{ba,j}\\circ\\varphi_{ab,j}=\\mathrm{id}_{W_{ab,j}},$$\nand for every triple $(a,b,d)$,\n$$\\varphi_{ab,j}^{-1}(W_{ba,j}\\cap W_{bd,j})=W_{ab,j}\\cap W_{ad,j},\\qquad\\varphi_{bd,j}\\circ\\varphi_{ab,j}=\\varphi_{ad,j}\\ \\text{on }W_{ab,j}\\cap W_{ad,j}.$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
+  "place": "node lemma-nagata-affine-gluing-identities-eventually, order 337"
+ },
+ "stmt_deps": [
+  "def-nagata-finite-affine-gluing-presentation",
+  "def-nagata-affine-gluing-coefficient-stage",
+  "def-nagata-affine-raw-refinement-system",
+  "def-nagata-affine-gluing-valid-stage",
+  "def-weil-affine-spectrum",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Use the same coefficient system and choices as [def-nagata-affine-gluing-valid-stage], rather than constructing another notion of refinement. The initial tuple $C$ comes from [def-nagata-affine-gluing-coefficient-stage]; [lemma-nagata-affine-gluing-coefficients-descend] identifies its restricted maps with the original restrictions. The definition [def-nagata-affine-raw-refinement-system] specifies every tuple, labelled principal piece, inclusion, localized comparison and actual composite domain. The statement [lem-nagata-affine-raw-refinement-cofinal] supplies nonemptiness, directedness and chartwise cofinality for this very system. In particular the upper-bound choices fixed in the valid-stage definition are defined on $I(C)$. Keep its test list $E$: diagonal cover, piecewise image-in-overlap and triple-domain open tests in both orientations, agreement on piece intersections, diagonal identity, both inverse comparisons, and every labelled triple comparison. None of these gluing equations is part of the definition of a raw tuple. This reuses the existing system; no downstream valid-refinement or glued-scheme theorem is used.",
+   "uses": [
     "def-nagata-affine-gluing-valid-stage",
     "def-nagata-affine-gluing-coefficient-stage",
     "lemma-nagata-affine-gluing-coefficients-descend",
     "def-nagata-affine-raw-refinement-system",
-    "lem-nagata-affine-raw-refinement-cofinal",
+    "lem-nagata-affine-raw-refinement-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
+    "place": "## Proof; independent second reading using the current explicit raw-refinement and witness interfaces; step 1"
+   }
+  },
+  {
+   "text": "Let $F_S=\\{c\\}\\cup\\{w_e:e\\in E\\}$ be the finite set in [def-nagata-affine-gluing-valid-stage]. By [lemma-nagata-directed-finite-upper-bound], each $w_e$ and $c$ is at most $j=u(F_S)$, with exactly that definition's fixed upper-bound parameters. All transitions are the inclusions and fraction maps of [def-nagata-affine-raw-refinement-system]. For ANY $v\\in B_{a,j}$ the induced map $e_{a,j,v}:(B_{a,j})_v\\to(A_a)_v$ is injective: equality of the images of $x/v^r$ and $y/v^s$ means $v^k(v^sx-v^ry)=0$ in $A_a$ for some $k$, by [def-weil-ring-localization-away]. This same equation holds in its subring $B_{a,j}$, proving the fraction equality there. This includes nilpotent $v$, products of principal-open elements, and new numerator elements. Thus for every labelled piece $p:a\\to b$ and EVERY final $z\\in B_{b,j}$, the restricted map is uniquely characterized by $e_{a,j,f_p}(\\rho_{p,j}(z))=\\rho_p(z)$. Its existence is the defining image-containment condition of a tuple. Both sides of the piece-map comparison square have this same image, so they commute on all final elements. No old generator list is being treated as a generating set for an enlarged ring.",
+   "uses": [
+    "def-nagata-affine-gluing-valid-stage",
     "lemma-nagata-directed-finite-upper-bound",
-    "def-weil-ring-localization-away",
-    "def-weil-affine-spectrum",
-    "def-nagata-finite-affine-gluing-presentation",
-    "lem-weil-pbc-scheme-morphism-gluing"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "def-nagata-affine-raw-refinement-system",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
-    "place": "## Proof; agent repair using the explicit existing raw refinement system, power-ideal open witnesses, faithful localized comparison on every final coefficient, and piecewise morphism gluing"
+    "place": "## Proof; independent second reading using the current explicit raw-refinement and witness interfaces; step 2"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "A finite collection of identities between morphisms of finitely presented algebras in a filtered direct limit holds simultaneously at a sufficiently large index",
-      "results": "Eight hits, including RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit and exists_eq_comp_ι_app_of_isColimit; read Mathlib/Algebra/Category/Ring/FinitePresentation.lean:31-86. These concern algebra morphisms in filtered colimits, not the selected gluing datum or its open-preservation witnesses.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit",
-      "results": "One hit of that name; source lines 45-51 prove eventual equality of two algebra maps, without the selected upper-bound or gluing-domain assertions.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "exists_comp_map_eq_of_isColimit|exists_eq_comp_ι_app_of_isColimit",
-      "results": "Four hits in Mathlib/Algebra/Category/Ring/FinitePresentation.lean, lines 45, 81, 153, 158; the first two are the declarations read, the last two their uses.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Finite gluing equations for affine schemes descend to one common stage of an inverse limit with affine transition morphisms",
-      "results": "Eight hits including Scheme.GlueData.glued, Scheme.Pullback.gluing, Scheme.isAffine_of_isLimit, and exists_appTop_π_eq_of_isLimit. None states the axioms for the selected coefficient/witness gluing stage.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Ring maps between coefficient subalgebras that are restrictions of fixed ambient maps satisfy the same equations because localization of a subring inclusion at an element is injective",
-      "results": "Eight hits: IsLocalization.map_eq, map_unique and localization-generator compatibility lemmas. These do not state the selected finite-stage gluing theorem.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "IsLocalization.map_injective",
-      "results": "Zero hits; Loogle returned unknown identifier IsLocalization.map_injective. This is an invalid name query, not evidence that localized injectivity is absent.",
-      "date": "2026-10-16",
-      "verdict": "no match: unknown identifier"
-    },
-    {
-      "tool": "grep",
-      "query": "map_injective|map_inj|injective.*map",
-      "results": "Read Mathlib/RingTheory/Localization/Basic.lean:621-624 (localizationAlgebra_injective) and :641-650; the former gives injectivity of localization of an injective algebra map. This is a component of the two-line fraction argument, not the selected gluing theorem.",
-      "date": "2026-10-16",
-      "verdict": "no match for item; component localizationAlgebra_injective"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Finite affine gluing maps on compatible subalgebras preserve identities and cocycles by injectivity of localized subring inclusions",
-      "results": "Eight hits including Localization.existsUnique_algebraMap_eq_of_span_eq_top, IsLocalization.mapₐ and IsLocalization.Away.mapₐ. These are gluing or localization components, not the selected gluing datum or its open witnesses.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Affine scheme morphisms restricted to subrings are equal when their localized maps become equal under injective ring maps; finite open gluing cocycle conditions",
-      "results": "Eight hits including Spec.basicOpen_hom_ext and IsAffineOpen.appLE_eq_away_map; these are local morphism extensionality and localization compatibility components, not the selected coefficient-stage gluing statement.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "IsLocalization.injective",
-      "results": "One hit: injectivity of R -> S for a localization when the multiplicative set consists of non-zero-divisors. This is not injectivity between localizations of a subring inclusion and does not apply to nilpotent denominators.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "localizationAlgebra_injective|map_comp|basicOpen.*preimage|preimage.*basicOpen",
-      "results": "25 displayed hits dominated by map_comp in unrelated RingTheory files; broad query is inconclusive. Followed by the targeted localization search.",
-      "date": "2026-10-16",
-      "verdict": "inconclusive"
-    },
-    {
-      "tool": "grep",
-      "query": "localizationAlgebra_injective",
-      "results": "One hit at Mathlib/RingTheory/Localization/Basic.lean:621; read lines 600-650. Injectivity between localized coefficient inclusions is a component, proved directly in step 2, not the whole item.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Restriction of affine scheme gluing maps to finitely generated subrings preserves identity inverse and cocycle equations after finite open witnesses",
-      "results": "Eight hits including Scheme.Cover.glueMorphisms, Cover.gluedCover and LocalRepresentability.glueData. These construct morphisms or gluing data from already verified compatibility; they do not verify the selected finite-stage equations.",
-      "date": "2026-10-16",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "bypassed"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 337,
-  "blueprint_uses": [
+  {
+   "text": "Verify the open tests piecewise, before assuming local maps glue. A basic open defined by an old element is the inverse image of that basic open under a chart inclusion: a prime avoids the element if and only if its contraction avoids it. On each labelled piece $p:a\\to b$, the commuting comparison of [def-nagata-affine-raw-refinement-system] therefore gives, for any open $V_w\\subseteq X_{b,w}$,\n$$p_j^{-1}((q^b_{jw})^{-1}V_w)=(q^p_{jw})^{-1}(p_w^{-1}V_w),$$\nwhere $q^p$ is the piece comparison. By [def-nagata-affine-gluing-valid-stage], the open witnesses are explicit positive-power identities $h_i^{N_i}=\\sum_k a_{ik}g_k$ and $g_k^{M_k}=\\sum_i b_{ki}h_i$ on localized principal domains, with their numerator coefficients and annihilating powers retained at $w_e$. Applying its transition to $j$ preserves these ring equalities. If a prime contains all $g_k$, it contains every $h_i^{N_i}$ and hence every $h_i$; the reverse identities give the converse. Taking complements proves equality of the two finite unions of basic opens at $j$, including on each actual inverse-image/intersection domain. Thus the diagonal test gives $W_{aa,j}=X_{a,j}$, each image test gives $p_j^{-1}(W_{ba,j})=P_{p,j}$, and each domain test gives $p_j^{-1}(W_{bd,j})=P_{p,j}\\cap W_{ad,j}$. The same tests are present for reversed pieces. The prime and inverse-image calculations use [def-weil-affine-spectrum]; they do not use surjectivity or a Cartesian square between different charts.",
+   "uses": [
+    "def-nagata-affine-raw-refinement-system",
     "def-nagata-affine-gluing-valid-stage",
-    "lemma-nagata-affine-gluing-coefficients-descend",
-    "lemma-nagata-directed-finite-upper-bound"
-  ],
-  "uses_not_cited": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
+    "place": "## Proof; independent second reading using the current explicit raw-refinement and witness interfaces; step 3"
+   }
+  },
+  {
+   "text": "Verify every map test on all final coefficients by faithful localization. If $p:a\\to b$ is represented on $D(f_p)$ and the next piece is $D_{B_b}(t)$, write $\\rho_{p,j}(t)=h/f_p^N$. Its actual inverse-image domain is $D(f_ph)$, and the extension on fractions is explicitly\n$$y/t^k\\longmapsto\\rho_{p,j}(y)f_p^{Nk}/h^k.$$\nThis follows directly from [def-weil-ring-localization-away] and agrees with the original localized restriction after inclusion into $(A_a)_{f_ph}$. Iterating this formula and multiplying the source and numerator elements puts every parallel comparison on principal pieces $D(v)$ with both ring maps landing in the SAME $(B_{a,j})_v$, as specified by [def-nagata-affine-raw-refinement-system]. For two such maps $P_j,Q_j:B_{d,j}\\to(B_{a,j})_v$, their original counterparts $P,Q:A_d\\to(A_a)_v$ satisfy, for each final $z\\in B_{d,j}$,\n$$e_{a,j,v}(P_j(z))=P(z)=Q(z)=e_{a,j,v}(Q_j(z)).$$\nHere the middle equality is an explicitly recorded equality of the original presentation [def-nagata-finite-affine-gluing-presentation]. For agreement of two pieces into chart $b$, take their two restriction maps on $D(f_pf_{p'})$; both originals are the same overlap identification restricted to that intersection. For a diagonal comparison take $P_j$ to be the restricted identity and $Q_j=\\rho_{p,j}$ for a diagonal piece. For an inverse on chart $a$, take $P_j$ to be the chart inclusion's ring map and $Q_j=\\rho_{p,j}^{\\mathrm{loc}}\\circ\\rho_{q,j}$, with $p:a\\to b$ and $q:b\\to a$; the opposite inverse uses the ordered pair $(b,a)$. For a triple take $P_j=\\rho_{r,j}$ and $Q_j=\\rho_{p,j}^{\\mathrm{loc}}\\circ\\rho_{q,j}$, where $p:a\\to b$, $q:b\\to d$, and $r:a\\to d$, restricting to the common domain of these labelled pieces. The superscript denotes the displayed fraction extension. These are all map tests of [def-nagata-affine-gluing-valid-stage], including every piece combination. In each case step 2 gives $P_j(z)=Q_j(z)$ for every final $z$, and [def-weil-affine-spectrum] gives equality of the corresponding affine-source scheme maps. Thus the enlarged target's new generators satisfy the tests too, without inferring this from tests on the generators at $c$.",
+   "uses": [
+    "def-weil-ring-localization-away",
+    "def-nagata-affine-raw-refinement-system",
+    "def-nagata-finite-affine-gluing-presentation",
     "def-nagata-affine-gluing-valid-stage",
-    "lemma-nagata-affine-gluing-coefficients-descend",
-    "lemma-nagata-directed-finite-upper-bound"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_notes": [
-    {
-      "label": "status",
-      "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
+    "place": "## Proof; independent second reading using the current explicit raw-refinement and witness interfaces; step 4"
+   }
   },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-prop-nagata-sketch-approximation",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lemma-nagata-affine-gluing-identities-eventually",
-    "worker": "stage1",
-    "summary": "Independent second reading of the returned repair, rebased on the newly reviewed valid-stage definition: reuse its explicit I(C), cofinality and selected u; preserve its open power-ideal certificates, compare actual restricted maps on every final coefficient by localized injectivity, check piece agreement before assembling whole overlap maps, then verify every identity/inverse/triple equation by coverwise uniqueness. Five steps, no new nodes, no new Mathlib leaves, no Lean. The imported independent-ring pullback ambiguity remains explicitly reported.",
-    "blueprint": "Realizes order 337 proof paragraph and the unit absolute finite-coefficient gluing step, using the current order-336 witness definition and its existing raw-refinement/cofinality nodes. Replace unsupported transport from old generator equality by restriction of the fixed original homomorphisms on all final coefficients. Open domains follow finite positive-power certificates; whole maps are assembled only after the piece-agreement tests. No unit or chapter route change.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-NM-9970c9c6e",
-    "group": "NM",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-9970c9c6e (reviewer sub-agent of L); spot-checked: Reviewed the complete item, cited nodes, unit/chapter route, source locations, delivery errors A–F, and report. The repaired fixed-ambient restriction construction correctly proves all open, identity, inverse, and cocycle equations at the common stage, including edge cases and arbitrary final coefficients. No new nodes, duplicate nodes, coefficient-category mismatch, circularity, or remaining mathematical gap found. Review written to review.md."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "The overlap maps in $\\mathsf G_{S,\\lambda_{\\mathrm{glue}}}$ preserve the\nselected opens, are mutually inverse, and satisfy all identity and\ntriple-overlap cocycle equations.",
-    "proof": [
-      {
-        "text": "Every required equality is determined by finitely many generators after\nlocalization. Equality in the colimit is witnessed at a finite stage.\nThe definition includes all those witness stages in one finite set, and the\nselected upper-bound lemma makes every equation hold simultaneously at\n$\\lambda_{\\mathrm{glue}}(S)$.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For each pair $(a,b)$, its finitely many principal pieces cover $W_{ab,j}$ by [def-nagata-affine-raw-refinement-system]. Step 4 proves their maps into $X_{b,j}$ agree on every intersection, so [lem-weil-pbc-scheme-morphism-gluing] assembles them into a unique $g_{ab,j}:W_{ab,j}\\to X_{b,j}$. Step 3 puts the image of each piece in $W_{ba,j}$; restrict the point and structure-sheaf maps to that open to obtain $\\varphi_{ab,j}:W_{ab,j}\\to W_{ba,j}$. On each piece, step 3's domain equation gives the inverse image of $W_{bd,j}$ as $P_{p,j}\\cap W_{ad,j}$; union over its covering proves exactly\n$$\\varphi_{ab,j}^{-1}(W_{ba,j}\\cap W_{bd,j})=W_{ab,j}\\cap W_{ad,j}.$$\nFor the diagonal, $W_{aa,j}=X_{a,j}$ and each diagonal piece map equals its chart inclusion by step 4; uniqueness in the same gluing lemma gives $\\varphi_{aa,j}=\\mathrm{id}$. For the inverse, cover $W_{ab,j}$ by the first pieces and their inverse images of the reverse pieces, which cover it by step 3. The two composites there equal the corresponding inclusions by step 4, so gluing uniqueness gives $\\varphi_{ba,j}\\varphi_{ab,j}=\\mathrm{id}$; apply this separately with $(b,a)$ to obtain the reverse identity. For the triple, the domain equation just proved identifies the composite domain with $W_{ab,j}\\cap W_{ad,j}$. Intersect a first piece, the inverse image of a second piece, and a direct piece to cover that domain. Every such labelled comparison is equal by step 4, hence gluing uniqueness gives $\\varphi_{bd,j}\\varphi_{ab,j}=\\varphi_{ad,j}$ there. Equalities into the ambient target chart are also equalities into the specified open target because their point and sheaf maps restrict identically. These are precisely all equations listed in [def-nagata-finite-affine-gluing-presentation].",
+   "uses": [
+    "def-nagata-affine-raw-refinement-system",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-nagata-finite-affine-gluing-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
+    "place": "## Proof; independent second reading using the current explicit raw-refinement and witness interfaces; step 5"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-nagata-affine-gluing-valid-stage",
+  "def-nagata-affine-gluing-coefficient-stage",
+  "lemma-nagata-affine-gluing-coefficients-descend",
+  "def-nagata-affine-raw-refinement-system",
+  "lem-nagata-affine-raw-refinement-cofinal",
+  "lemma-nagata-directed-finite-upper-bound",
+  "def-weil-ring-localization-away",
+  "def-weil-affine-spectrum",
+  "def-nagata-finite-affine-gluing-presentation",
+  "lem-weil-pbc-scheme-morphism-gluing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/lemma-nagata-affine-gluing-identities-eventually.md",
+  "place": "## Proof; agent repair using the explicit existing raw refinement system, power-ideal open witnesses, faithful localized comparison on every final coefficient, and piecewise morphism gluing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite collection of identities between morphisms of finitely presented algebras in a filtered direct limit holds simultaneously at a sufficiently large index",
+   "results": "Eight hits, including RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit and exists_eq_comp_ι_app_of_isColimit; read Mathlib/Algebra/Category/Ring/FinitePresentation.lean:31-86. These concern algebra morphisms in filtered colimits, not the selected gluing datum or its open-preservation witnesses.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit",
+   "results": "One hit of that name; source lines 45-51 prove eventual equality of two algebra maps, without the selected upper-bound or gluing-domain assertions.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_comp_map_eq_of_isColimit|exists_eq_comp_ι_app_of_isColimit",
+   "results": "Four hits in Mathlib/Algebra/Category/Ring/FinitePresentation.lean, lines 45, 81, 153, 158; the first two are the declarations read, the last two their uses.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite gluing equations for affine schemes descend to one common stage of an inverse limit with affine transition morphisms",
+   "results": "Eight hits including Scheme.GlueData.glued, Scheme.Pullback.gluing, Scheme.isAffine_of_isLimit, and exists_appTop_π_eq_of_isLimit. None states the axioms for the selected coefficient/witness gluing stage.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ring maps between coefficient subalgebras that are restrictions of fixed ambient maps satisfy the same equations because localization of a subring inclusion at an element is injective",
+   "results": "Eight hits: IsLocalization.map_eq, map_unique and localization-generator compatibility lemmas. These do not state the selected finite-stage gluing theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.map_injective",
+   "results": "Zero hits; Loogle returned unknown identifier IsLocalization.map_injective. This is an invalid name query, not evidence that localized injectivity is absent.",
+   "date": "2026-10-16",
+   "verdict": "no match: unknown identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "map_injective|map_inj|injective.*map",
+   "results": "Read Mathlib/RingTheory/Localization/Basic.lean:621-624 (localizationAlgebra_injective) and :641-650; the former gives injectivity of localization of an injective algebra map. This is a component of the two-line fraction argument, not the selected gluing theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match for item; component localizationAlgebra_injective"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite affine gluing maps on compatible subalgebras preserve identities and cocycles by injectivity of localized subring inclusions",
+   "results": "Eight hits including Localization.existsUnique_algebraMap_eq_of_span_eq_top, IsLocalization.mapₐ and IsLocalization.Away.mapₐ. These are gluing or localization components, not the selected gluing datum or its open witnesses.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine scheme morphisms restricted to subrings are equal when their localized maps become equal under injective ring maps; finite open gluing cocycle conditions",
+   "results": "Eight hits including Spec.basicOpen_hom_ext and IsAffineOpen.appLE_eq_away_map; these are local morphism extensionality and localization compatibility components, not the selected coefficient-stage gluing statement.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.injective",
+   "results": "One hit: injectivity of R -> S for a localization when the multiplicative set consists of non-zero-divisors. This is not injectivity between localizations of a subring inclusion and does not apply to nilpotent denominators.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizationAlgebra_injective|map_comp|basicOpen.*preimage|preimage.*basicOpen",
+   "results": "25 displayed hits dominated by map_comp in unrelated RingTheory files; broad query is inconclusive. Followed by the targeted localization search.",
+   "date": "2026-10-16",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "localizationAlgebra_injective",
+   "results": "One hit at Mathlib/RingTheory/Localization/Basic.lean:621; read lines 600-650. Injectivity between localized coefficient inclusions is a component, proved directly in step 2, not the whole item.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of affine scheme gluing maps to finitely generated subrings preserves identity inverse and cocycle equations after finite open witnesses",
+   "results": "Eight hits including Scheme.Cover.glueMorphisms, Cover.gluedCover and LocalRepresentability.glueData. These construct morphisms or gluing data from already verified compatibility; they do not verify the selected finite-stage equations.",
+   "date": "2026-10-16",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "bypassed"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 337,
+ "blueprint_uses": [
+  "def-nagata-affine-gluing-valid-stage",
+  "lemma-nagata-affine-gluing-coefficients-descend",
+  "lemma-nagata-directed-finite-upper-bound"
+ ],
+ "uses_not_cited": [
+  "def-nagata-affine-gluing-valid-stage",
+  "lemma-nagata-affine-gluing-coefficients-descend",
+  "lemma-nagata-directed-finite-upper-bound"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lemma-nagata-affine-gluing-identities-eventually",
+  "worker": "stage1",
+  "summary": "Independent second reading of the returned repair, rebased on the newly reviewed valid-stage definition: reuse its explicit I(C), cofinality and selected u; preserve its open power-ideal certificates, compare actual restricted maps on every final coefficient by localized injectivity, check piece agreement before assembling whole overlap maps, then verify every identity/inverse/triple equation by coverwise uniqueness. Five steps, no new nodes, no new Mathlib leaves, no Lean. The imported independent-ring pullback ambiguity remains explicitly reported.",
+  "blueprint": "Realizes order 337 proof paragraph and the unit absolute finite-coefficient gluing step, using the current order-336 witness definition and its existing raw-refinement/cofinality nodes. Replace unsupported transport from old generator equality by restriction of the fixed original homomorphisms on all final coefficients. Open domains follow finite positive-power certificates; whole maps are assembled only after the piece-agreement tests. No unit or chapter route change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-9970c9c6e",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-9970c9c6e (reviewer sub-agent of L); spot-checked: Reviewed the complete item, cited nodes, unit/chapter route, source locations, delivery errors A–F, and report. The repaired fixed-ambient restriction construction correctly proves all open, identity, inverse, and cocycle equations at the common stage, including edge cases and arbitrary final coefficients. No new nodes, duplicate nodes, coefficient-category mismatch, circularity, or remaining mathematical gap found. Review written to review.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "The overlap maps in $\\mathsf G_{S,\\lambda_{\\mathrm{glue}}}$ preserve the\nselected opens, are mutually inverse, and satisfy all identity and\ntriple-overlap cocycle equations.",
+  "proof": [
+   {
+    "text": "Every required equality is determined by finitely many generators after\nlocalization. Equality in the colimit is witnessed at a finite stage.\nThe definition includes all those witness stages in one finite set, and the\nselected upper-bound lemma makes every equation hold simultaneously at\n$\\lambda_{\\mathrm{glue}}(S)$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

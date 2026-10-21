@@ -1,143 +1,132 @@
 {
-  "id": "lem-sc-picard-right-cech-cup-homology",
-  "kind": "statement",
-  "title": "Affine Cech transport of the external tensor-cycle formula",
-  "statement": "Let k be a field, let f:X→Spec k and g:Y→Spec k have affine diagonals, and let F,G be quasi-coherent. Take finite affine covers U,V that cover X,Y. Given a natural transformation θ satisfying the explicit cochain-coordinate predicate of [lem-sc-picard-right-cech-cup-construction], there are natural-degree homology isomorphisms a from its tensor Cech source to picardExternalTotal and b from its product Cech target to the scalar model. The family a.inv ≫ H(θ.app G) ≫ b.hom satisfies IsPicardExternalCupHomology of [lem-sc-picard-external-cup-homology-unique]: on each scalar-model tensor-cycle representative it gives externalCup of the factor classes after the model comparisons. This neither constructs θ nor asserts cup invertibility, and has no short complex or normalized cochain map as input or output.",
-  "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BED, equation-kunneth-on-cech (33.29.1.1); Cohomology Tags 01FD, 07MB, 0FKV; official tag pages read"
+ "id": "lem-sc-picard-right-cech-cup-homology",
+ "kind": "statement",
+ "title": "Affine Cech transport of the external tensor-cycle formula",
+ "statement": "Let k be a field, let f:X→Spec k and g:Y→Spec k have affine diagonals, and let F,G be quasi-coherent. Take finite affine covers U,V that cover X,Y. Given a natural transformation θ satisfying the explicit cochain-coordinate predicate of [lem-sc-picard-right-cech-cup-construction], there are natural-degree homology isomorphisms a from its tensor Cech source to picardExternalTotal and b from its product Cech target to the scalar model. The family a.inv ≫ H(θ.app G) ≫ b.hom satisfies IsPicardExternalCupHomology of [lem-sc-picard-external-cup-homology-unique]: on each scalar-model tensor-cycle representative it gives externalCup of the factor classes after the model comparisons. This neither constructs θ nor asserts cup invertibility, and has no short complex or normalized cochain map as input or output.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, equation-kunneth-on-cech (33.29.1.1); Cohomology Tags 01FD, 07MB, 0FKV; official tag pages read"
+ },
+ "stmt_deps": [
+  "def-sc-picard-external-right-cech-models",
+  "lem-sc-picard-right-cech-cup-construction",
+  "lem-sc-picard-external-cup-homology-unique",
+  "lem-sc-picard-kunneth-resolution-model",
+  "pqf-def-coherent",
+  "def-weil-field",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "In each natural degree obtain compatible Cech generator coordinates e and product comparison b from the geometric generator lemma.",
+   "uses": [
+    "lem-sc-picard-right-cech-cup-generators"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-sc-picard-external-right-cech-models",
-    "lem-sc-picard-right-cech-cup-construction",
-    "lem-sc-picard-external-cup-homology-unique",
-    "lem-sc-picard-kunneth-resolution-model",
-    "pqf-def-coherent",
-    "def-weil-field",
-    "def-pc-scheme"
-  ],
-  "proof": [
-    {
-      "text": "In each natural degree obtain compatible Cech generator coordinates e and product comparison b from the geometric generator lemma.",
-      "uses": [
-        "lem-sc-picard-right-cech-cup-generators"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply tensor_kunneth_nat to the two scalar models, using picardScalarModel_negative, to get s and its tensor-cycle formula. Define a as e.symm followed by s, converted to a ModuleCat isomorphism. Choose these comparisons degreewise.",
-      "uses": [
-        "lem-sc-qcoh-cech-total-tensor-nat-iso",
-        "lem-sc-picard-kunneth-resolution-model"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For factor cycles x,y and a specified total cycle z, Kunneth produces z′ with the same cycle inclusion as z. Injectivity of the cycle inclusion gives z′=z. Its cycle formula and s.symm_apply_apply show that a.inv of the class of z is e of the summand tensor of the factor classes. Substitute in the transported map and apply the geometric generator formula. This is exactly IsPicardExternalCupHomology.",
-      "uses": [
-        "lem-sc-picard-right-cech-cup-generators",
-        "lem-sc-qcoh-cech-total-tensor-nat-iso"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-picard-kunneth-resolution-model",
+  {
+   "text": "Apply tensor_kunneth_nat to the two scalar models, using picardScalarModel_negative, to get s and its tensor-cycle formula. Define a as e.symm followed by s, converted to a ModuleCat isomorphism. Choose these comparisons degreewise.",
+   "uses": [
+    "lem-sc-qcoh-cech-total-tensor-nat-iso",
+    "lem-sc-picard-kunneth-resolution-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For factor cycles x,y and a specified total cycle z, Kunneth produces z′ with the same cycle inclusion as z. Injectivity of the cycle inclusion gives z′=z. Its cycle formula and s.symm_apply_apply show that a.inv of the class of z is e of the summand tensor of the factor classes. Substitute in the transported map and apply the geometric generator formula. This is exactly IsPicardExternalCupHomology.",
+   "uses": [
     "lem-sc-picard-right-cech-cup-generators",
     "lem-sc-qcoh-cech-total-tensor-nat-iso"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BED, equation-kunneth-on-cech: E4 Lean assembly from the geometric generator formula and scalar-model tensor Kunneth; cycle identification uses injectivity of iCycles."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "LeanSearch: Natural Cech cup map from tensor total of two factor covers to product cover commutes with coefficient morphisms",
-      "results": "8 hits: CategoryTheory.Limits.ProductsFromFiniteCofiltered.finiteSubproductsCocone_π_app_eq_sum, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀', HomologicalComplex.ιTensorObj, π_tensor_id_preserves_coequalizer_inv_colimMap_desc, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand', id_tensor_π_preserves_coequalizer_inv_colimMap_desc, AlgebraicTopology.DoldKan.Γ₀.Obj.map, TopCat.Presheaf.SheafConditionEqualizerProducts.res",
-      "date": "2026-10-13",
-      "verdict": "No complete match; use the existing tensor/direct-sum tools and the stated geometric nodes."
-    },
-    {
-      "tool": "loogle",
-      "query": "ShortComplex.mapNatTrans",
-      "results": "loogle: unknown identifier 'ShortComplex.mapNatTrans'",
-      "date": "2026-10-13",
-      "verdict": "No complete match; use the existing tensor/direct-sum tools and the stated geometric nodes."
-    },
-    {
-      "tool": "grep",
-      "query": "tensor.*[Kk]unneth|cech.*cup|cup.*cech|Cech.*[Hh]omology",
-      "results": "1 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
-      "date": "2026-10-13",
-      "verdict": "No complete match; use the existing tensor/direct-sum tools and the stated geometric nodes."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.PicardExternalRightCechComparison",
-    "date": "2026-10-13",
-    "group": "R1"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "Tag 0BED external cup comparison in the right coefficient",
-      "via": [
-        "lem-sc-picard-external-right-cech-comparison"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.PicardRightCechCupHomology",
-    "file": "lean/Sheaf/AlgebraicGeometry/PicardRightCechCupHomology.lean",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.picardRightCechCup_homology",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.picardRightCechCup_homology"
-    ],
-    "statement": "theorem picardRightCechCup_homology\n    {k : Type w} [Field k] {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]\n    (F : X.Modules) [F.IsQuasicoherent]\n    {ι κ : Type w} [Finite ι] [Finite κ]\n    (U : ι → X.Opens) (V : κ → Y.Opens)\n    (hU : ∀ i, IsAffineOpen (U i)) (hV : ∀ j, IsAffineOpen (V j))\n    (hUc : iSup U = ⊤) (hVc : iSup V = ⊤)\n    (θ : picardRightTensorCechFunctor f g U V F ⟶\n      picardRightProductCechFunctor f g U V F)\n    (hθ : IsPicardRightCechCup f g U V F θ)\n    (G : Y.Modules) [G.IsQuasicoherent] :\n    ∃ (a : ∀ n : ℕ,\n        ((picardRightTensorCechFunctor f g U V F).obj G).homology (n : ℤ) ≅\n          (picardExternalTotal f g F G).homology (n : ℤ))\n      (b : ∀ n : ℕ,\n        ((picardRightProductCechFunctor f g U V F).obj G).homology (n : ℤ) ≅\n          (picardScalarModel (pullback.fst f g ≫ f)\n            (externalCupCoefficients f g F G)).homology (n : ℤ)),\n      IsPicardExternalCupHomology f g F G (fun n ↦\n        (a n).inv ≫ HomologicalComplex.homologyMap (θ.app G) (n : ℤ) ≫ (b n).hom)",
-    "branch": "sheaf-dag",
-    "by": "R1",
-    "date": "2026-10-13"
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "R1",
-    "result": "pass",
-    "landing": "20261013T115029-L-3325857",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "E4",
-    "result": "pass",
-    "landing": "20261013T130033-L-3922856",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-picard-right-cech-cup-generators",
+  "lem-sc-qcoh-cech-total-tensor-nat-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, equation-kunneth-on-cech: E4 Lean assembly from the geometric generator formula and scalar-model tensor Kunneth; cycle identification uses injectivity of iCycles."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "LeanSearch: Natural Cech cup map from tensor total of two factor covers to product cover commutes with coefficient morphisms",
+   "results": "8 hits: CategoryTheory.Limits.ProductsFromFiniteCofiltered.finiteSubproductsCocone_π_app_eq_sum, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand₀', HomologicalComplex.ιTensorObj, π_tensor_id_preserves_coequalizer_inv_colimMap_desc, AlgebraicTopology.DoldKan.Γ₀.Obj.map_on_summand', id_tensor_π_preserves_coequalizer_inv_colimMap_desc, AlgebraicTopology.DoldKan.Γ₀.Obj.map, TopCat.Presheaf.SheafConditionEqualizerProducts.res",
+   "date": "2026-10-13",
+   "verdict": "No complete match; use the existing tensor/direct-sum tools and the stated geometric nodes."
+  },
+  {
+   "tool": "loogle",
+   "query": "ShortComplex.mapNatTrans",
+   "results": "loogle: unknown identifier 'ShortComplex.mapNatTrans'",
+   "date": "2026-10-13",
+   "verdict": "No complete match; use the existing tensor/direct-sum tools and the stated geometric nodes."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Kk]unneth|cech.*cup|cup.*cech|Cech.*[Hh]omology",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+   "date": "2026-10-13",
+   "verdict": "No complete match; use the existing tensor/direct-sum tools and the stated geometric nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalRightCechComparison",
+  "date": "2026-10-13",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "Tag 0BED external cup comparison in the right coefficient",
+   "via": [
+    "lem-sc-picard-external-right-cech-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardRightCechCupHomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardRightCechCupHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardRightCechCup_homology",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picardRightCechCup_homology"
+  ],
+  "statement": "theorem picardRightCechCup_homology\n    {k : Type w} [Field k] {X Y : Scheme.{w}}\n    (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))\n    [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)]\n    (F : X.Modules) [F.IsQuasicoherent]\n    {ι κ : Type w} [Finite ι] [Finite κ]\n    (U : ι → X.Opens) (V : κ → Y.Opens)\n    (hU : ∀ i, IsAffineOpen (U i)) (hV : ∀ j, IsAffineOpen (V j))\n    (hUc : iSup U = ⊤) (hVc : iSup V = ⊤)\n    (θ : picardRightTensorCechFunctor f g U V F ⟶\n      picardRightProductCechFunctor f g U V F)\n    (hθ : IsPicardRightCechCup f g U V F θ)\n    (G : Y.Modules) [G.IsQuasicoherent] :\n    ∃ (a : ∀ n : ℕ,\n        ((picardRightTensorCechFunctor f g U V F).obj G).homology (n : ℤ) ≅\n          (picardExternalTotal f g F G).homology (n : ℤ))\n      (b : ∀ n : ℕ,\n        ((picardRightProductCechFunctor f g U V F).obj G).homology (n : ℤ) ≅\n          (picardScalarModel (pullback.fst f g ≫ f)\n            (externalCupCoefficients f g F G)).homology (n : ℤ)),\n      IsPicardExternalCupHomology f g F G (fun n ↦\n        (a n).inv ≫ HomologicalComplex.homologyMap (θ.app G) (n : ℤ) ≫ (b n).hom)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-13"
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261013T115029-L-3325857",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261013T130033-L-3922856",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {}
 }

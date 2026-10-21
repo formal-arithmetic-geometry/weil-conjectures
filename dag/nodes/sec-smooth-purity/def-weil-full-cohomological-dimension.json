@@ -1,191 +1,180 @@
 {
-  "id": "def-weil-full-cohomological-dimension",
-  "blueprint": {
-    "is": "def-weil-full-cohomological-dimension",
-    "from": null,
-    "same_as": []
+ "id": "def-weil-full-cohomological-dimension",
+ "blueprint": {
+  "is": "def-weil-full-cohomological-dimension",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Full cohomological dimension",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and an integer $n\\geq1$. Choose a uniformizer $\\varpi_E$ of its ring of integers $\\mathcal O_E$ and put\n$$A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E,$$\nas in [def-weil-l-adic-coefficient-extension]. Let $S$ be a scheme on which $\\ell$ is invertible. Let $\\overline X$ and $Y$ be $S$-schemes whose structure morphisms are of finite type [def-weil-finite-type-morphism], and let $p:\\overline X\\to Y$ be a proper morphism [def-weil-proper-morphism] commuting with those structure morphisms.\n\nUse the small pro-etale sites and the constant-ring module categories of [def-weil-pbc-proetale-site]. For each scheme $T$ write $A_T$ for the constant sheaf of rings with value $A$, $\\mathsf M_T=\\operatorname{Mod}(A_T)$ for its category of module sheaves, and $D_T=D(\\mathsf M_T)$ for the derived category. For $\\mathcal F\\in\\mathsf M_T$, write $\\iota_T\\mathcal F\\in D_T$ for the complex with $\\mathcal F$ in degree zero and zero in every other degree. Write $\\mathcal H_T^r:D_T\\to\\mathsf M_T$ for the cohomology-sheaf functor [def-weil-derived-cohomology-sheaves]. Only the finite-level total derived direct images of [def-weil-derived-direct-image] are used.\n\nFor an integer $c\\geq0$, define $\\operatorname{FullCD}(p,A;c)$ to be the conjunction of these two clauses:\n\n1. For every $\\mathcal F\\in\\mathsf M_{\\overline X}$ and every integer $r>c$,\n$$\\mathcal H_Y^r\\bigl(Rp_*(\\iota_{\\overline X}\\mathcal F)\\bigr)=0\\quad\\text{in }\\mathsf M_Y.$$\n2. For every object $v:V\\to Y$ of $Y_{\\mathrm{proet}}$, form the fibre product [def-pc-fibre-product] $\\overline X_V=\\overline X\\times_YV$, with projections $g_V:\\overline X_V\\to\\overline X$ and $p_V:\\overline X_V\\to V$ satisfying $p\\circ g_V=v\\circ p_V$. For every $\\mathcal F\\in\\mathsf M_{\\overline X}$ and every integer $r>c$,\n$$\\mathcal H_V^r\\bigl(R(p_V)_*(\\iota_{\\overline X_V}(g_V^*\\mathcal F))\\bigr)=0\\quad\\text{in }\\mathsf M_V.$$\nHere $g_V^*\\mathcal F=\\mathcal F|_{\\overline X_V}$ is the module-sheaf pullback of [def-weil-proetale-inverse-image]: inverse image followed by extension of scalars from $g_V^{-1}A_{\\overline X}$ to $A_{\\overline X_V}$. In both clauses $0$ means a zero object of the indicated abelian category, and the coefficient ring is the same $A$. Clause 2 quantifies over sheaves on the original source $\\overline X$, then pulls them back. It imposes no constructibility or etale-origin restriction, and no finite-type condition on the site object $V$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-full-cohomological-dimension.md",
+  "place": "node def-weil-full-cohomological-dimension, order 1473"
+ },
+ "stmt_deps": [
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-proetale-site",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-pc-fibre-product",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Uniform vanishing above c of higher direct image module sheaves for every pro-etale sheaf and its pullbacks to all base changes along site objects",
+   "results": "Eight hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, IsEtale.of_comp, exists_appTop_map_eq_zero_of_isLimit, IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, exists_appTop_map_eq_zero_of_isAffine_of_isLimit, SheafOfModules.isFinitePresentation, IsFinitePresentation, isQuasicoherent. Their returned signatures concern affine limits, etale morphisms, or finite presentation/quasi-coherence, not this predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Full cohomological dimension",
-  "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and an integer $n\\geq1$. Choose a uniformizer $\\varpi_E$ of its ring of integers $\\mathcal O_E$ and put\n$$A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E,$$\nas in [def-weil-l-adic-coefficient-extension]. Let $S$ be a scheme on which $\\ell$ is invertible. Let $\\overline X$ and $Y$ be $S$-schemes whose structure morphisms are of finite type [def-weil-finite-type-morphism], and let $p:\\overline X\\to Y$ be a proper morphism [def-weil-proper-morphism] commuting with those structure morphisms.\n\nUse the small pro-etale sites and the constant-ring module categories of [def-weil-pbc-proetale-site]. For each scheme $T$ write $A_T$ for the constant sheaf of rings with value $A$, $\\mathsf M_T=\\operatorname{Mod}(A_T)$ for its category of module sheaves, and $D_T=D(\\mathsf M_T)$ for the derived category. For $\\mathcal F\\in\\mathsf M_T$, write $\\iota_T\\mathcal F\\in D_T$ for the complex with $\\mathcal F$ in degree zero and zero in every other degree. Write $\\mathcal H_T^r:D_T\\to\\mathsf M_T$ for the cohomology-sheaf functor [def-weil-derived-cohomology-sheaves]. Only the finite-level total derived direct images of [def-weil-derived-direct-image] are used.\n\nFor an integer $c\\geq0$, define $\\operatorname{FullCD}(p,A;c)$ to be the conjunction of these two clauses:\n\n1. For every $\\mathcal F\\in\\mathsf M_{\\overline X}$ and every integer $r>c$,\n$$\\mathcal H_Y^r\\bigl(Rp_*(\\iota_{\\overline X}\\mathcal F)\\bigr)=0\\quad\\text{in }\\mathsf M_Y.$$\n2. For every object $v:V\\to Y$ of $Y_{\\mathrm{proet}}$, form the fibre product [def-pc-fibre-product] $\\overline X_V=\\overline X\\times_YV$, with projections $g_V:\\overline X_V\\to\\overline X$ and $p_V:\\overline X_V\\to V$ satisfying $p\\circ g_V=v\\circ p_V$. For every $\\mathcal F\\in\\mathsf M_{\\overline X}$ and every integer $r>c$,\n$$\\mathcal H_V^r\\bigl(R(p_V)_*(\\iota_{\\overline X_V}(g_V^*\\mathcal F))\\bigr)=0\\quad\\text{in }\\mathsf M_V.$$\nHere $g_V^*\\mathcal F=\\mathcal F|_{\\overline X_V}$ is the module-sheaf pullback of [def-weil-proetale-inverse-image]: inverse image followed by extension of scalars from $g_V^{-1}A_{\\overline X}$ to $A_{\\overline X_V}$. In both clauses $0$ means a zero object of the indicated abelian category, and the coefficient ring is the same $A$. Clause 2 quantifies over sheaves on the original source $\\overline X$, then pulls them back. It imposes no constructibility or etale-origin restriction, and no finite-type condition on the site object $V$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-full-cohomological-dimension.md",
-    "place": "node def-weil-full-cohomological-dimension, order 1473"
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsZero\"",
+   "results": "One hit: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, Mathlib/CategoryTheory/Abelian/RightDerived.lean:153-158. Read the source: the input must be injective. This is not a uniform bound on all sheaves or their site base changes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-weil-derived-direct-image",
-    "def-weil-pbc-proetale-site",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-finite-type-morphism",
-    "def-weil-proper-morphism",
-    "def-pc-fibre-product",
-    "def-weil-proetale-inverse-image"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Uniform vanishing above c of higher direct image module sheaves for every pro-etale sheaf and its pullbacks to all base changes along site objects",
-      "results": "Eight hits: AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, IsEtale.of_comp, exists_appTop_map_eq_zero_of_isLimit, IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, exists_appTop_map_eq_zero_of_isAffine_of_isLimit, SheafOfModules.isFinitePresentation, IsFinitePresentation, isQuasicoherent. Their returned signatures concern affine limits, etale morphisms, or finite presentation/quasi-coherence, not this predicate.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"rightDerived\", \"IsZero\"",
-      "results": "One hit: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, Mathlib/CategoryTheory/Abelian/RightDerived.lean:153-158. Read the source: the input must be injective. This is not a uniform bound on all sheaves or their site base changes.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "FullCD|HasUniformCohomologicalDimensionLE|cohomological.?dimension|cohomologicalDimension",
-      "results": "OK, zero hits in the whole pinned Mathlib source.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Define a cohomological dimension bound for every sheaf and its inverse images along pro-etale base changes",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A left exact functor has cohomological dimension at most c when all right derived functors in degrees greater than c vanish on every object",
-      "results": "Eight hits: CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, isZero_rightDerived_obj_injective_succ, HasInjectiveDimensionLT.mk, hasInjectiveDimensionLT_iff, hasProjectiveDimensionLT_iff, HasProjectiveDimensionLT.mk, HasInjectiveDimensionLT.mk', Abelian.Ext.mapExactFunctor_zero. The signatures concern vanishing on injective/projective inputs, Ext dimension of an individual object, or maps of Ext groups. None states the full bound on all input sheaves and site base changes.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Bounded cohomological amplitude of a right derived functor uniformly on all sheaves after inverse image to a slice site",
-      "results": "Eight returned signatures in Mathlib/Algebra/Homology/DerivedCategory/TStructure concern IsGE/IsLE of a single derived object, its complex representative or its degree-zero embedding. None defines a uniform bound for a derived functor on all sheaves and their site base changes.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "CohomologicalDimension|cohomologicalDimension|cohomological dimension|FullCD",
-      "results": "OK, zero hits in the pinned Mathlib source.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"rightDerived\", \"homologyFunctor\"",
-      "results": "OK, zero hits.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "CohomologicalAmplitude|cohomological.dimension|UniformCohomological|FullCD",
-      "results": "OK, zero hits in the pinned Mathlib source.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A functor between sheaf module categories has finite cohomological dimension when its right derived functors vanish above a fixed natural number on all objects",
-      "results": "Eight hits: Functor.isZero_rightDerived_obj_injective_succ; four IsGE/IsLE object-support declarations; Functor.isZero_leftDerived_obj_projective_succ; IsGrothendieckAbelian.hasExt; hasInjectiveDimensionLT_iff. Read the returned signatures and RightDerived.lean:153-158, TStructure.lean:134-156: these concern injective/projective inputs, single-object support, Ext existence, or the injective dimension of one object, not the uniform pro-etale functor bound and its pullback quantifier.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"rightDerived\", \"IsZero\", \"Functor\"",
-      "results": "One hit: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ. Read Mathlib/CategoryTheory/Abelian/RightDerived.lean:153-158: it requires an injective input, whereas the predicate quantifies over every input sheaf.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "cohomologicalDimension|CohomologicalDimension|FullCD|cohomological.amplitude",
-      "results": "OK, zero hits in pinned Mathlib.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Uniform right derived functor dimension bound on every object of an abelian category, including pullbacks of module sheaves to slice sites",
-      "results": "Eight hits: Sheaf.isGrothendieckAbelian_of_essentiallySmall, Functor.isZero_rightDerived_obj_injective_succ, IsGrothendieckAbelian.hasExt, LightCondensed.instIsGrothendieckAbelianLightCondMod, Functor.isZero_leftDerived_obj_projective_succ, Sheaf.instIsGrothendieckAbelian, HasInjectiveDimensionLE, HasInjectiveDimensionLT. These concern category axioms, Ext existence, injective/projective inputs, or the dimension of an individual object. None defines uniform vanishing on all input sheaves and site base changes. Read the injective vanishing signature in pinned Mathlib/CategoryTheory/Abelian/RightDerived.lean:153-158.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1473,
-  "blueprint_uses": [
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-derived-direct-image",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "FullCD|HasUniformCohomologicalDimensionLE|cohomological.?dimension|cohomologicalDimension",
+   "results": "OK, zero hits in the whole pinned Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-def-sf-operations",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "def-weil-full-cohomological-dimension",
-    "worker": "stage1",
-    "summary": "Rechecked the inherited sandbox against the complete blueprint definition, chapter and unit, all eight immediate dependency statements, and the upstream candidate. Kept the explicit constant-ring module categories, degree-zero complexes, both defining vanishing clauses, and original-source sheaf quantifiers. The coefficient quotient, finite type, properness, fibre product and module pullback use existing definition nodes; no new nodes or proof steps are needed. Repeated all four required Mathlib search kinds and a second semantic phrasing, recording exact logged queries; LeanSearch was unavailable. Removed the stale stage-2 blocking conclusion from this stage-1 handoff. The blueprint warning is commentary in report.md, not a defining clause or an unproved theorem in this node. Independent second reading confirmed both source clauses, all eight dependency statements and the upstream quantifier mismatch; added three independently phrased, actually logged Mathlib searches and a clause-by-clause second-reader report. No mathematical changes were necessary. Rebased against the current DAG after the landing return: re-read all eight cited statements; only def-weil-derived-direct-image gained maintainer metadata, with unchanged statement and dependencies, so no mathematical adjustment was needed. Final fresh second reading independently re-opened the archived source and all eight current dependency statements, confirmed both clauses and edge cases, and logged three additional independently phrased Mathlib searches. The defining predicate required no mathematical change. Final rebase repair audit 2026-10-16: compared the live sync tip 0ef6dac64ebe43af7eea88587d38d6e512b9733c and current shared records for all eight stmt_deps; hashes def-weil-derived-direct-image=71d257e14e995259, def-weil-pbc-proetale-site=4e27ae47747e5735, def-weil-derived-cohomology-sheaves=e81061e5ee943c85, def-weil-l-adic-coefficient-extension=52c65a1f5c9e8e68, def-weil-finite-type-morphism=9a0d038df5abbc30, def-weil-proper-morphism=a6bfa35ac9273f25, def-pc-fibre-product=bc329060a218dfaa, def-weil-proetale-inverse-image=1bb0ed55c1ce0695. Every cited statement remains unchanged and unmerged, so the split is retained exactly; this audit is the concrete repair after the landing-lock return. Current independent second reader restored the exact required review heading and recorded fresh grep/LeanFinder searches; a fresh Loogle search confirmed the existing injective-input result. Source, eight dependency statements and upstream quantifiers were checked directly; no mathematical changes.",
-    "blueprint": "def-weil-full-cohomological-dimension, the two defining displayed vanishing conditions before the Warning; these specify the optional FullCD datum in sk-def-sf-operations clause (v). The source warning is preserved in report.md as commentary, not a third condition. No proof steps."
+  {
+   "tool": "leansearch",
+   "query": "Define a cohomological dimension bound for every sheaf and its inverse images along pro-etale base changes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
   },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-NW-6e77bf0b1",
-    "group": "NW",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-6e77bf0b1 (reviewer sub-agent of L); spot-checked: Read the complete item, report, eight cited statements, source definition (order 1473), Stacks 09A5, and chapter/unit route. Both clauses preserve the coefficient category, quantifiers, hypotheses and base-change projections. Edge cases pass; no new nodes, circular split, duplicate or repair needed. Inherited unused defects are documented in review.md."
+  {
+   "tool": "leanfinder",
+   "query": "A left exact functor has cohomological dimension at most c when all right derived functors in degrees greater than c vanish on every object",
+   "results": "Eight hits: CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, isZero_rightDerived_obj_injective_succ, HasInjectiveDimensionLT.mk, hasInjectiveDimensionLT_iff, hasProjectiveDimensionLT_iff, HasProjectiveDimensionLT.mk, HasInjectiveDimensionLT.mk', Abelian.Ext.mapExactFunctor_zero. The signatures concern vanishing on injective/projective inputs, Ext dimension of an individual object, or maps of Ext groups. None states the full bound on all input sheaves and site base changes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-88433d401",
-    "group": "NL",
-    "result": "pass",
-    "note": "Statement, dependencies, source alignment, edge cases, docstrings, non-hollow constructions, and all four per-file compilations verified successfully."
+  {
+   "tool": "leanfinder",
+   "query": "Bounded cohomological amplitude of a right derived functor uniformly on all sheaves after inverse image to a slice site",
+   "results": "Eight returned signatures in Mathlib/Algebra/Homology/DerivedCategory/TStructure concern IsGE/IsLE of a single derived object, its complex representative or its degree-zero embedding. None defines a uniform bound for a derived functor on all sheaves and their site base changes.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.SfFullCohomologicalDimension",
-    "declaration": "AlgebraicGeometry.Scheme.sfFullCohomologicalDimension",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.sfFullCohomologicalDimension"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/SfFullCohomologicalDimension.lean",
-    "statement": "def sfFullCohomologicalDimension {X Y : Scheme.{u}} (p : X ⟶ Y) (A : Type u) [CommRing A] (c : ℕ) : Prop",
-    "branch": "newtargets-dag",
-    "by": "NL",
-    "date": "2026-10-15",
-    "existing": false,
-    "note": "§1(B): No Lean record exists. The upstream HasUniformCohomologicalDimensionLE quantifies over all sheaves on the base-changed source, which is stronger than this node, whose second clause only pulls back sheaves on the original source. Define both original clauses in the intrinsic constant-ring derived categories, using the canonical pullback and direct image. The delivery/NW branch was read and contains a stage-1 DAG statement but no Lean declaration to reuse."
+  {
+   "tool": "grep",
+   "query": "CohomologicalDimension|cohomologicalDimension|cohomological dimension|FullCD",
+   "results": "OK, zero hits in the pinned Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$, with the finite-torsion coefficient\nconvention [def-weil-finite-torsion-constructibility]. Let $S$ be a scheme on\nwhich $\\ell$ is invertible, let $Y$ and $\\overline X$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let $p:\\overline X\\to\nY$ be a proper $S$-morphism. Use finite-torsion $A$-coefficients and the\nderived direct image [def-weil-derived-direct-image] $Rp_*$. On the small\npro-etale sites [def-weil-pbc-proetale-site], let $\\mathcal H^r$\ndenote the cohomology-sheaf functor\n[def-weil-derived-cohomology-sheaves]. For an integer $c\\in\\mathbf\nZ_{\\geq0}$, write $\\operatorname{FullCD}(p,A;c)$ if\n\n$$\n \\mathcal H^r(Rp_*\\mathcal F)=0\\qquad(r\\in\\mathbf Z,\\ r>c)\n$$\n\nfor every sheaf $\\mathcal F$ of $A$-modules on $\\overline\nX_{\\mathrm{proet}}$, and, for every object $V\\to Y$ of\n$Y_{\\mathrm{proet}}$, if $p_V:\\overline X\\times_YV\\to V$ is the base change\nof $p$, then\n\n$$\n \\mathcal H^r\\bigl(R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV})\\bigr)=0\n \\qquad(r\\in\\mathbf Z,\\ r>c).\n$$\n\n*Warning.* Because the quantifier ranges over *every* pro-etale sheaf of\n$A$-modules, $\\operatorname{FullCD}(p,A;c)$ fails in general, even for $p$\nproper and smooth of dimension one over an algebraically closed field: for an\nelliptic curve $E$ over $\\overline{\\mathbf F}_p$, $A=\\mathbf F_r$ with\n$r\\neq p$, there is a pro-etale $A$-module sheaf $\\mathcal F$ on $E$ (not of\netale origin) with $H^n(E_{\\mathrm{proet}},\\mathcal F)\\neq0$ for every\n$n\\geq1$. What does hold, with $c=2\\dim\\overline X$, is the restriction of\nthe condition to the coefficient sheaves of etale origin.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"homologyFunctor\"",
+   "results": "OK, zero hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CohomologicalAmplitude|cohomological.dimension|UniformCohomological|FullCD",
+   "results": "OK, zero hits in the pinned Mathlib source.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor between sheaf module categories has finite cohomological dimension when its right derived functors vanish above a fixed natural number on all objects",
+   "results": "Eight hits: Functor.isZero_rightDerived_obj_injective_succ; four IsGE/IsLE object-support declarations; Functor.isZero_leftDerived_obj_projective_succ; IsGrothendieckAbelian.hasExt; hasInjectiveDimensionLT_iff. Read the returned signatures and RightDerived.lean:153-158, TStructure.lean:134-156: these concern injective/projective inputs, single-object support, Ext existence, or the injective dimension of one object, not the uniform pro-etale functor bound and its pullback quantifier.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsZero\", \"Functor\"",
+   "results": "One hit: CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ. Read Mathlib/CategoryTheory/Abelian/RightDerived.lean:153-158: it requires an injective input, whereas the predicate quantifies over every input sheaf.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomologicalDimension|CohomologicalDimension|FullCD|cohomological.amplitude",
+   "results": "OK, zero hits in pinned Mathlib.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform right derived functor dimension bound on every object of an abelian category, including pullbacks of module sheaves to slice sites",
+   "results": "Eight hits: Sheaf.isGrothendieckAbelian_of_essentiallySmall, Functor.isZero_rightDerived_obj_injective_succ, IsGrothendieckAbelian.hasExt, LightCondensed.instIsGrothendieckAbelianLightCondMod, Functor.isZero_leftDerived_obj_projective_succ, Sheaf.instIsGrothendieckAbelian, HasInjectiveDimensionLE, HasInjectiveDimensionLT. These concern category axioms, Ext existence, injective/projective inputs, or the dimension of an individual object. None defines uniform vanishing on all input sheaves and site base changes. Read the injective vanishing signature in pinned Mathlib/CategoryTheory/Abelian/RightDerived.lean:153-158.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1473,
+ "blueprint_uses": [
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-weil-full-cohomological-dimension",
+  "worker": "stage1",
+  "summary": "Rechecked the inherited sandbox against the complete blueprint definition, chapter and unit, all eight immediate dependency statements, and the upstream candidate. Kept the explicit constant-ring module categories, degree-zero complexes, both defining vanishing clauses, and original-source sheaf quantifiers. The coefficient quotient, finite type, properness, fibre product and module pullback use existing definition nodes; no new nodes or proof steps are needed. Repeated all four required Mathlib search kinds and a second semantic phrasing, recording exact logged queries; LeanSearch was unavailable. Removed the stale stage-2 blocking conclusion from this stage-1 handoff. The blueprint warning is commentary in report.md, not a defining clause or an unproved theorem in this node. Independent second reading confirmed both source clauses, all eight dependency statements and the upstream quantifier mismatch; added three independently phrased, actually logged Mathlib searches and a clause-by-clause second-reader report. No mathematical changes were necessary. Rebased against the current DAG after the landing return: re-read all eight cited statements; only def-weil-derived-direct-image gained maintainer metadata, with unchanged statement and dependencies, so no mathematical adjustment was needed. Final fresh second reading independently re-opened the archived source and all eight current dependency statements, confirmed both clauses and edge cases, and logged three additional independently phrased Mathlib searches. The defining predicate required no mathematical change. Final rebase repair audit 2026-10-16: compared the live sync tip 0ef6dac64ebe43af7eea88587d38d6e512b9733c and current shared records for all eight stmt_deps; hashes def-weil-derived-direct-image=71d257e14e995259, def-weil-pbc-proetale-site=4e27ae47747e5735, def-weil-derived-cohomology-sheaves=e81061e5ee943c85, def-weil-l-adic-coefficient-extension=52c65a1f5c9e8e68, def-weil-finite-type-morphism=9a0d038df5abbc30, def-weil-proper-morphism=a6bfa35ac9273f25, def-pc-fibre-product=bc329060a218dfaa, def-weil-proetale-inverse-image=1bb0ed55c1ce0695. Every cited statement remains unchanged and unmerged, so the split is retained exactly; this audit is the concrete repair after the landing-lock return. Current independent second reader restored the exact required review heading and recorded fresh grep/LeanFinder searches; a fresh Loogle search confirmed the existing injective-input result. Source, eight dependency statements and upstream quantifiers were checked directly; no mathematical changes.",
+  "blueprint": "def-weil-full-cohomological-dimension, the two defining displayed vanishing conditions before the Warning; these specify the optional FullCD datum in sk-def-sf-operations clause (v). The source warning is preserved in report.md as commentary, not a third condition. No proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-6e77bf0b1",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-6e77bf0b1 (reviewer sub-agent of L); spot-checked: Read the complete item, report, eight cited statements, source definition (order 1473), Stacks 09A5, and chapter/unit route. Both clauses preserve the coefficient category, quantifiers, hypotheses and base-change projections. Edge cases pass; no new nodes, circular split, duplicate or repair needed. Inherited unused defects are documented in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-88433d401",
+  "group": "NL",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, non-hollow constructions, and all four per-file compilations verified successfully."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfFullCohomologicalDimension",
+  "declaration": "AlgebraicGeometry.Scheme.sfFullCohomologicalDimension",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.sfFullCohomologicalDimension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfFullCohomologicalDimension.lean",
+  "statement": "def sfFullCohomologicalDimension {X Y : Scheme.{u}} (p : X ⟶ Y) (A : Type u) [CommRing A] (c : ℕ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "§1(B): No Lean record exists. The upstream HasUniformCohomologicalDimensionLE quantifies over all sheaves on the base-changed source, which is stronger than this node, whose second clause only pulls back sheaves on the original source. Define both original clauses in the intrinsic constant-ring derived categories, using the canonical pullback and direct image. The delivery/NW branch was read and contains a stage-1 DAG statement but no Lean declaration to reuse."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix a prime $\\ell$, a finite extension $E/\\Ql$, an integer $n\\in\\mathbf\nZ_{\\geq1}$, and put $A=A_{E,n}$, with the finite-torsion coefficient\nconvention [def-weil-finite-torsion-constructibility]. Let $S$ be a scheme on\nwhich $\\ell$ is invertible, let $Y$ and $\\overline X$ be finite-type\n[def-weil-scheme-morphism-properties] $S$-schemes, and let $p:\\overline X\\to\nY$ be a proper $S$-morphism. Use finite-torsion $A$-coefficients and the\nderived direct image [def-weil-derived-direct-image] $Rp_*$. On the small\npro-etale sites [def-weil-pbc-proetale-site], let $\\mathcal H^r$\ndenote the cohomology-sheaf functor\n[def-weil-derived-cohomology-sheaves]. For an integer $c\\in\\mathbf\nZ_{\\geq0}$, write $\\operatorname{FullCD}(p,A;c)$ if\n\n$$\n \\mathcal H^r(Rp_*\\mathcal F)=0\\qquad(r\\in\\mathbf Z,\\ r>c)\n$$\n\nfor every sheaf $\\mathcal F$ of $A$-modules on $\\overline\nX_{\\mathrm{proet}}$, and, for every object $V\\to Y$ of\n$Y_{\\mathrm{proet}}$, if $p_V:\\overline X\\times_YV\\to V$ is the base change\nof $p$, then\n\n$$\n \\mathcal H^r\\bigl(R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV})\\bigr)=0\n \\qquad(r\\in\\mathbf Z,\\ r>c).\n$$\n\n*Warning.* Because the quantifier ranges over *every* pro-etale sheaf of\n$A$-modules, $\\operatorname{FullCD}(p,A;c)$ fails in general, even for $p$\nproper and smooth of dimension one over an algebraically closed field: for an\nelliptic curve $E$ over $\\overline{\\mathbf F}_p$, $A=\\mathbf F_r$ with\n$r\\neq p$, there is a pro-etale $A$-module sheaf $\\mathcal F$ on $E$ (not of\netale origin) with $H^n(E_{\\mathrm{proet}},\\mathcal F)\\neq0$ for every\n$n\\geq1$. What does hold, with $c=2\\dim\\overline X$, is the restriction of\nthe condition to the coefficient sheaves of etale origin.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

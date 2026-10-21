@@ -1,184 +1,177 @@
 {
-  "id": "lem-pur-open-adjunction-shift",
-  "kind": "statement",
-  "title": "Shift compatibility of open extension and restriction",
-  "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$. For finite-type $k$-schemes $W$ with their small pro-etale sites put $\\widehat R_W=\\lim_n(A_n)_W$, and let $\\mathscr S_W$ be the abelian category of strict semilinear systems of $(A_n)_W$-module sheaves, with its ordinary unbounded derived category, derived reduction $\\mathcal R_W$ and total-limit functor $\\mathcal L_W=R\\lim\\operatorname{Res}$ of [lem-coef-derived-system-evaluation-calculus]; regard $\\mathscr S_W$ as the module category of the ring diagram $((A_n)_W)_n$ on the simultaneous ringed diagram site of [lem-sf-integral-compactification-system-realization]. For a quasi-compact open immersion $j:U\\hookrightarrow W$, let $J_j:D(\\mathscr S_U)\\to D(\\mathscr S_W)$ be exact termwise open extension by zero and $P_j$ restriction; $J_j$ is left adjoint to $P_j$, using the localized-site extension-by-zero adjunction of [lem-pur-site-restriction-module-adjunction-exact] on the ringed diagram site. Equip both functors with their termwise cochain-shift comparisons. The unit and counit of $J_j\\dashv P_j$ commute with every integer shift, naturally in the system complexes; the assertion is an equality of system maps before finite evaluation and total limit.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Maps-used sentence: adjunction units and counits for the open-extension constituent of compact support"
-  },
-  "stmt_deps": [
-    "lem-sf-integral-compactification-system-realization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-coef-derived-system-evaluation-calculus"
-  ],
-  "proof": [
-    {
-      "text": "The open immersion $j:U\\hookrightarrow W$ is etale, so $U$ is an object of the small pro-etale site $W_{\\mathrm{proet}}$, and the localized site $W_{\\mathrm{proet}}/U$ is the site of $U$ used for $\\mathscr S_U$. The ringed sequence site $\\mathbf N\\times W_{\\mathrm{proet}}$ of [def-coef-ringed-sequence-site] has no single object localizing at $U$ in every level, so the localized-site lemma is applied level by level: for each $n$, [lem-pur-site-restriction-module-adjunction-exact] on $(W_{\\mathrm{proet}},(A_n)_W)$ with the object $U$ gives exact restriction $j^*$ and exact extension by zero $j_!F=P_F^\\#$ with $j_!\\dashv j^*$. Both functors commute with restriction of scalars along $(A_{n+1})_W\\to(A_n)_W$: restriction obviously does, and $j_!\\operatorname{Res}F=\\operatorname{Res}j_!F$ because the extension-by-zero presheaf $P_F$ [def-weil-extension-by-zero-presheaf] has the same underlying abelian presheaf for either ring, and module sheafification is computed on the underlying abelian presheaf [def-weil-presheaf-modules-sheafification], with restriction of scalars leaving the abelian sheaf unchanged [def-pc-sheaf-restrict-scalars]. Hence applying $j_!$, resp. $j^*$, to each level $M_n$ and to each transition $M_{n+1}\\to\\operatorname{Res}M_n$ defines exact functors between the strict semilinear-system categories. The levelwise units and counits are natural, so they commute with the transitions and form system maps, and the triangle identities hold level by level. This is the exact abelian adjunction whose termwise extension to complexes is the open adjunction $J_j\\dashv P_j$ that [lem-sf-integral-compactification-system-realization] records on $D(\\mathscr S)$ ('exact termwise $J_j\\dashv P_j$'). Its derived unit and counit are therefore the images in the derived categories of the termwise unit $\\eta$ and counit $\\varepsilon$ of complexes, before any finite evaluation or $\\mathcal L_W$.",
-      "uses": [
-        "lem-pur-site-restriction-module-adjunction-exact",
-        "def-coef-ringed-sequence-site",
-        "def-weil-extension-by-zero-presheaf",
-        "def-weil-presheaf-modules-sheafification",
-        "def-pc-sheaf-restrict-scalars",
-        "lem-sf-integral-compactification-system-realization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-        "place": "paragraph 2, maps used: adjunction units and counits for the open-extension constituent"
-      }
-    },
-    {
-      "text": "Write $e_1^{(a)}:J_j(X[a])\\to(J_jX)[a]$ and $e_2^{(a)}:P_j(Y[a])\\to(P_jY)[a]$ for the termwise cochain-shift comparisons. In degree $m$ both sides have the term $J_j(X^{m+a})$, and both differentials are $(-1)^aJ_j(d)=J_j((-1)^ad)$ by additivity, so $e_1^{(a)}$ is the identity of complexes; the same holds for $e_2^{(a)}$. These comparisons are compatible with $[a][b]\\cong[a+b]$ and $[0]\\cong\\mathrm{id}$. By [lem-sf-exact-functor-derived-triangulated] the induced functors on derived categories commute with shifts, and their comparisons are the images of these identities under the localization functors. Unit square: in degree $m$, the cochain map $\\eta_{X[a]}$ is $\\eta_{X^{m+a}}$, which is the degree-$m$ component of $\\eta_X[a]$. So $\\eta_X[a]=e^{(a)}_{2,J_jX}\\circ P_j(e^{(a)}_{1,X})\\circ\\eta_{X[a]}$ holds already as an equality of cochain maps, and hence in $D(\\mathscr S_U)$ after localization, which is natural with respect to the shift comparisons. Thus $(e_1^{(a)},e_2^{(a)})$ is compatible with the unit, in the sense of [lem-weil-pbc-adjunction-shift-compatibility-unique], for every $a\\in\\mathbf Z$. By part (i) of that theorem it is also compatible with the counit (the same degreewise computation for $\\varepsilon$ checks this directly). By part (ii), $e_2$ is the unique comparison on $P_j$ compatible with the unit for the given $e_1$, so it is the structure of part (iii). Both unit and counit therefore have the required shift squares for every integer, naturally in the complexes.",
-      "uses": [
-        "lem-sf-exact-functor-derived-triangulated",
-        "lem-weil-pbc-adjunction-shift-compatibility-unique"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-        "place": "paragraph 2, coefficient comparisons preserve adjunction units and counits"
-      }
-    },
-    {
-      "text": "All constructions in the preceding two steps are maps of the strict semilinear-system derived categories on the ringed diagram site. The shift equations are therefore equalities of system maps themselves; applying finite-level evaluation or the total-limit functor only transports these already-established equalities. This gives exactly the stated natural shift compatibility of the unit and counit of $J_j\\dashv P_j$.",
-      "uses": [
-        "lem-sf-integral-compactification-system-realization",
-        "lem-weil-pbc-adjunction-shift-compatibility-unique"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-        "place": "paragraph 2, coherence inherited before finite evaluation"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pur-open-adjunction-shift",
+ "kind": "statement",
+ "title": "Shift compatibility of open extension and restriction",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$. For finite-type $k$-schemes $W$ with their small pro-etale sites put $\\widehat R_W=\\lim_n(A_n)_W$, and let $\\mathscr S_W$ be the abelian category of strict semilinear systems of $(A_n)_W$-module sheaves, with its ordinary unbounded derived category, derived reduction $\\mathcal R_W$ and total-limit functor $\\mathcal L_W=R\\lim\\operatorname{Res}$ of [lem-coef-derived-system-evaluation-calculus]; regard $\\mathscr S_W$ as the module category of the ring diagram $((A_n)_W)_n$ on the simultaneous ringed diagram site of [lem-sf-integral-compactification-system-realization]. For a quasi-compact open immersion $j:U\\hookrightarrow W$, let $J_j:D(\\mathscr S_U)\\to D(\\mathscr S_W)$ be exact termwise open extension by zero and $P_j$ restriction; $J_j$ is left adjoint to $P_j$, using the localized-site extension-by-zero adjunction of [lem-pur-site-restriction-module-adjunction-exact] on the ringed diagram site. Equip both functors with their termwise cochain-shift comparisons. The unit and counit of $J_j\\dashv P_j$ commute with every integer shift, naturally in the system complexes; the assertion is an equality of system maps before finite evaluation and total limit.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "Maps-used sentence: adjunction units and counits for the open-extension constituent of compact support"
+ },
+ "stmt_deps": [
+  "lem-sf-integral-compactification-system-realization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "proof": [
+  {
+   "text": "The open immersion $j:U\\hookrightarrow W$ is etale, so $U$ is an object of the small pro-etale site $W_{\\mathrm{proet}}$, and the localized site $W_{\\mathrm{proet}}/U$ is the site of $U$ used for $\\mathscr S_U$. The ringed sequence site $\\mathbf N\\times W_{\\mathrm{proet}}$ of [def-coef-ringed-sequence-site] has no single object localizing at $U$ in every level, so the localized-site lemma is applied level by level: for each $n$, [lem-pur-site-restriction-module-adjunction-exact] on $(W_{\\mathrm{proet}},(A_n)_W)$ with the object $U$ gives exact restriction $j^*$ and exact extension by zero $j_!F=P_F^\\#$ with $j_!\\dashv j^*$. Both functors commute with restriction of scalars along $(A_{n+1})_W\\to(A_n)_W$: restriction obviously does, and $j_!\\operatorname{Res}F=\\operatorname{Res}j_!F$ because the extension-by-zero presheaf $P_F$ [def-weil-extension-by-zero-presheaf] has the same underlying abelian presheaf for either ring, and module sheafification is computed on the underlying abelian presheaf [def-weil-presheaf-modules-sheafification], with restriction of scalars leaving the abelian sheaf unchanged [def-pc-sheaf-restrict-scalars]. Hence applying $j_!$, resp. $j^*$, to each level $M_n$ and to each transition $M_{n+1}\\to\\operatorname{Res}M_n$ defines exact functors between the strict semilinear-system categories. The levelwise units and counits are natural, so they commute with the transitions and form system maps, and the triangle identities hold level by level. This is the exact abelian adjunction whose termwise extension to complexes is the open adjunction $J_j\\dashv P_j$ that [lem-sf-integral-compactification-system-realization] records on $D(\\mathscr S)$ ('exact termwise $J_j\\dashv P_j$'). Its derived unit and counit are therefore the images in the derived categories of the termwise unit $\\eta$ and counit $\\varepsilon$ of complexes, before any finite evaluation or $\\mathcal L_W$.",
+   "uses": [
     "lem-pur-site-restriction-module-adjunction-exact",
     "def-coef-ringed-sequence-site",
     "def-weil-extension-by-zero-presheaf",
     "def-weil-presheaf-modules-sheafification",
     "def-pc-sheaf-restrict-scalars",
-    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "paragraph 2, maps used: adjunction units and counits for the open-extension constituent"
+   }
+  },
+  {
+   "text": "Write $e_1^{(a)}:J_j(X[a])\\to(J_jX)[a]$ and $e_2^{(a)}:P_j(Y[a])\\to(P_jY)[a]$ for the termwise cochain-shift comparisons. In degree $m$ both sides have the term $J_j(X^{m+a})$, and both differentials are $(-1)^aJ_j(d)=J_j((-1)^ad)$ by additivity, so $e_1^{(a)}$ is the identity of complexes; the same holds for $e_2^{(a)}$. These comparisons are compatible with $[a][b]\\cong[a+b]$ and $[0]\\cong\\mathrm{id}$. By [lem-sf-exact-functor-derived-triangulated] the induced functors on derived categories commute with shifts, and their comparisons are the images of these identities under the localization functors. Unit square: in degree $m$, the cochain map $\\eta_{X[a]}$ is $\\eta_{X^{m+a}}$, which is the degree-$m$ component of $\\eta_X[a]$. So $\\eta_X[a]=e^{(a)}_{2,J_jX}\\circ P_j(e^{(a)}_{1,X})\\circ\\eta_{X[a]}$ holds already as an equality of cochain maps, and hence in $D(\\mathscr S_U)$ after localization, which is natural with respect to the shift comparisons. Thus $(e_1^{(a)},e_2^{(a)})$ is compatible with the unit, in the sense of [lem-weil-pbc-adjunction-shift-compatibility-unique], for every $a\\in\\mathbf Z$. By part (i) of that theorem it is also compatible with the counit (the same degreewise computation for $\\varepsilon$ checks this directly). By part (ii), $e_2$ is the unique comparison on $P_j$ compatible with the unit for the given $e_1$, so it is the structure of part (iii). Both unit and counit therefore have the required shift squares for every integer, naturally in the complexes.",
+   "uses": [
     "lem-sf-exact-functor-derived-triangulated",
     "lem-weil-pbc-adjunction-shift-compatibility-unique"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "paragraph 2: adjunction units and counits among the maps used in coherence; exact open-extension/restriction shift calculation supplied explicitly"
+    "place": "paragraph 2, coefficient comparisons preserve adjunction units and counits"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "extension by zero restriction adjunction unit counit commutes with integer shifts on derived ringed diagram systems",
-      "results": "CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app; CategoryTheory.Adjunction.rightAdjointCommShift; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; no extension-by-zero-specific declaration",
-      "date": "2026-10-18",
-      "verdict": "generalization: generic adjunction shift results only"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.CommShift, mapDerivedCategoryAdjunction",
-      "results": "0 hits; loogle reported unknown identifier mapDerivedCategoryAdjunction",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "commShift_mapDerivedCategoryAdjunction|openImmersionLowerShriekUpperStarAdjunction [directory Mathlib/CategoryTheory]",
-      "results": "0 hits in the Mathlib source; the project source has CategoryTheory.Adjunction.commShift_mapDerivedCategoryAdjunction in WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryAdjunctionShift.lean",
-      "date": "2026-10-18",
-      "verdict": "no Mathlib match; project theorem inspected as the generic derived-adjunction implementation"
-    },
-    {
-      "tool": "leansearch",
-      "query": "derived extension by zero restriction adjunction commutes with shifts",
-      "results": "CategoryTheory.Adjunction.rightAdjointCommShift; CategoryTheory.Adjunction.commShift_of_leftAdjoint; CategoryTheory.Adjunction.CommShift; no open-extension declaration",
-      "date": "2026-10-18",
-      "verdict": "generalization: generic adjunction CommShift only"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-pur-integral-realization-shift-coherence",
-    "date": "2026-10-18",
-    "group": "Q26"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-sf-compatibility",
-  "blueprint": {
-    "from": {
-      "node": "thm-pur-rational-and-qbar-purity",
-      "place": "fix-prop-coherence.proof.md, paragraph 2: the maps used in coherence include adjunction units and counits; this item supplies the open-extension/restriction adjunction's shift squares before evaluation",
-      "via": [
-        "lem-pur-integral-realization-shift-coherence",
-        "lem-pur-adic-projection-shift-coherence"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "merged_into": null,
-  "split_report": {
-    "date": "2026-10-18",
-    "item": "lem-pur-open-adjunction-shift",
-    "worker": "stage1",
-    "summary": "No exact source declaration exists. The split checks the localized ringed-site module adjunction for termwise open extension and restriction, identifies it with the strict semilinear-system functors in the simultaneous ringed-diagram realization, and applies the generic exact-derived adjunction shift compatibility to obtain unit and counit squares as system maps before finite evaluation and total limit. No new DAG nodes were needed.",
-    "blueprint": "fix-prop-coherence.proof.md paragraph 2: adjunction units and counits are among the coherence maps; the item supplies the open-extension constituent's shift compatibility.",
-    "tool_uses": [
-      {
-        "node": "lem-pur-site-restriction-module-adjunction-exact",
-        "why": "The proof takes the exact localized ringed-site extension-by-zero/restriction adjunction as the underlying system adjunction."
-      },
-      {
-        "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
-        "why": "The proof uses the generic theorem that an adjunction with the canonical left shift has unique compatible right shift and shift-compatible unit and counit."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
+  {
+   "text": "All constructions in the preceding two steps are maps of the strict semilinear-system derived categories on the ringed diagram site. The shift equations are therefore equalities of system maps themselves; applying finite-level evaluation or the total-limit functor only transports these already-established equalities. This gives exactly the stated natural shift compatibility of the unit and counit of $J_j\\dashv P_j$.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
     "lem-weil-pbc-adjunction-shift-compatibility-unique"
-  ],
-  "reviewed": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-cc-NX-66c0b14ac",
-    "group": "NX",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-66c0b14ac (reviewer sub-agent of L); spot-checked: Read the item in full, every cited statement, the unit record, the parent citers and the source fix-prop-coherence.proof.md paragraph 2. The delivery creates no new nodes. The statement (unit and counit of the exact termwise J_j ⊣ P_j on strict semilinear systems commute with every shift, as system maps) is true and not weakened. Checked on U=W (identity) and U=∅ (zero functors). It is not a duplicate: lem-weil-pbc-derived-adjunction-shift covers only Lf*⊣Rf_*. Two faults, both fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-open-adjunction-shift.json. (1) Step 1 applied lem-pur-site-restriction-module-adjunction-exact at U on the sequence site N×W_proet, where U is not an object (E1). I rewrote it to apply the lemma level by level on (W_proet,(A_n)_W), with U an object because j is étale. j_! and j^* commute with Res along A_{n+1}→A_n, by def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification and def-pc-sheaf-restrict-scalars, so they act on systems with levelwise unit and counit. This identifies them with the realization node's exact termwise J_j⊣P_j. (2) Step 2 concluded unit compatibility from uniqueness (ii) without verifying it, a non sequitur (C3/E5). I replaced it with the degreewise check: the termwise comparisons are identities (by additivity, signs agree) and η_{X[a]}=(η_X[a]) in each degree, so the unit square holds for cochain maps and hence in D. The counit then follows by (i), and (ii)/(iii) give uniqueness. proof_deps updated. I removed the same-unit realization node from tool_uses. Accepted tool uses: lem-pur-site-restriction-module-adjunction-exact (unit sk-def-sf-operations, in the unit's uses) and lem-weil-pbc-adjunction-shift-compatibility-unique (Mathlib leaf). No cycle and no SGA citation.; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.SixFunctors.OpenAdjunctionShift",
-    "declaration": "WeilConjectures.IntegralSystemRealization.openAdjunctionShift",
-    "file": "lean/Sheaf/SixFunctors/OpenAdjunctionShift.lean",
-    "statement": "theorem openAdjunctionShift (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (D : WeilConjectures.FiniteFieldDatum.{u}) (_hl : l ≠ D.p) {U W : Over (Spec (CommRingCat.of D.k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] (j : U ⟶ W) [IsOpenImmersion j.left] [QuasiCompact j.left] (o : Operations l E) : ((o.extension j.left).adj).CommShift ℤ",
-    "branch": "newtargets-dag",
-    "by": "Q16",
-    "date": "2026-10-18",
-    "existing": false,
-    "declarations": [
-      "WeilConjectures.IntegralSystemRealization.openRestrictionCommShift",
-      "WeilConjectures.IntegralSystemRealization.openAdjunctionShift"
-    ]
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-6d8c547cc",
-    "group": "Q16",
-    "result": "pass",
-    "note": "Only change vs live: lean record; statement verbatim (script check). Clauses match: FiniteFieldDatum/l≠p/E finite over Q_l, Over Spec k LocallyOfFiniteType+QuasiCompact, j open immersion + QuasiCompact, System = coefficientSequenceDerived, J = (o.extension j).ordinary.mapDerivedCategory, P = pull, Open.adj = exactDerivedAdjunction (localization of the cochain adjunction to the actual pullbackTensorSequenceInverse, OpenTensorNormalization.lean:359), so the universal o is pinned and true for the recorded realization. Shift structures are the mapDerivedCategory ones; openRestrictionCommShift is inferInstanceAs of it. Conclusion Adjunction.CommShift ℤ = unit+counit squares for all a∈ℤ before evaluation or limit. Edge cases U=W, U=∅, a=0 and negative shifts OK; no extra bounds or universe changes. All 3 stmt_dep modules imported; docstrings carry source place and blueprint id; sole sorry; no duplicate found (DerivedAdjunctionCommShift is etale f^*⊣f_* only). nt_compile --json exit 0 clean 2.5 s; broken-field control fails at line 89. Advisory: the instance is defeq to the systemPullShift def (def-pur-integral-operation-shift-data)."
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+    "place": "paragraph 2, coherence inherited before finite evaluation"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-coef-ringed-sequence-site",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+  "place": "paragraph 2: adjunction units and counits among the maps used in coherence; exact open-extension/restriction shift calculation supplied explicitly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero restriction adjunction unit counit commutes with integer shifts on derived ringed diagram systems",
+   "results": "CategoryTheory.Adjunction.commShiftIso_inv_app_counit_app; CategoryTheory.Adjunction.rightAdjointCommShift; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; no extension-by-zero-specific declaration",
+   "date": "2026-10-18",
+   "verdict": "generalization: generic adjunction shift results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.CommShift, mapDerivedCategoryAdjunction",
+   "results": "0 hits; loogle reported unknown identifier mapDerivedCategoryAdjunction",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "commShift_mapDerivedCategoryAdjunction|openImmersionLowerShriekUpperStarAdjunction [directory Mathlib/CategoryTheory]",
+   "results": "0 hits in the Mathlib source; the project source has CategoryTheory.Adjunction.commShift_mapDerivedCategoryAdjunction in WeilConjectures/CategoryTheory/DerivedCategory/MapDerivedCategoryAdjunctionShift.lean",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match; project theorem inspected as the generic derived-adjunction implementation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension by zero restriction adjunction commutes with shifts",
+   "results": "CategoryTheory.Adjunction.rightAdjointCommShift; CategoryTheory.Adjunction.commShift_of_leftAdjoint; CategoryTheory.Adjunction.CommShift; no open-extension declaration",
+   "date": "2026-10-18",
+   "verdict": "generalization: generic adjunction CommShift only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-integral-realization-shift-coherence",
+  "date": "2026-10-18",
+  "group": "Q26"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "fix-prop-coherence.proof.md, paragraph 2: the maps used in coherence include adjunction units and counits; this item supplies the open-extension/restriction adjunction's shift squares before evaluation",
+   "via": [
+    "lem-pur-integral-realization-shift-coherence",
+    "lem-pur-adic-projection-shift-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean_audit": {},
+ "merged_into": null,
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-open-adjunction-shift",
+  "worker": "stage1",
+  "summary": "No exact source declaration exists. The split checks the localized ringed-site module adjunction for termwise open extension and restriction, identifies it with the strict semilinear-system functors in the simultaneous ringed-diagram realization, and applies the generic exact-derived adjunction shift compatibility to obtain unit and counit squares as system maps before finite evaluation and total limit. No new DAG nodes were needed.",
+  "blueprint": "fix-prop-coherence.proof.md paragraph 2: adjunction units and counits are among the coherence maps; the item supplies the open-extension constituent's shift compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "The proof takes the exact localized ringed-site extension-by-zero/restriction adjunction as the underlying system adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "The proof uses the generic theorem that an adjunction with the canonical left shift has unique compatible right shift and shift-compatible unit and counit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NX-66c0b14ac",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-66c0b14ac (reviewer sub-agent of L); spot-checked: Read the item in full, every cited statement, the unit record, the parent citers and the source fix-prop-coherence.proof.md paragraph 2. The delivery creates no new nodes. The statement (unit and counit of the exact termwise J_j ⊣ P_j on strict semilinear systems commute with every shift, as system maps) is true and not weakened. Checked on U=W (identity) and U=∅ (zero functors). It is not a duplicate: lem-weil-pbc-derived-adjunction-shift covers only Lf*⊣Rf_*. Two faults, both fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-open-adjunction-shift.json. (1) Step 1 applied lem-pur-site-restriction-module-adjunction-exact at U on the sequence site N×W_proet, where U is not an object (E1). I rewrote it to apply the lemma level by level on (W_proet,(A_n)_W), with U an object because j is étale. j_! and j^* commute with Res along A_{n+1}→A_n, by def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification and def-pc-sheaf-restrict-scalars, so they act on systems with levelwise unit and counit. This identifies them with the realization node's exact termwise J_j⊣P_j. (2) Step 2 concluded unit compatibility from uniqueness (ii) without verifying it, a non sequitur (C3/E5). I replaced it with the degreewise check: the termwise comparisons are identities (by additivity, signs agree) and η_{X[a]}=(η_X[a]) in each degree, so the unit square holds for cochain maps and hence in D. The counit then follows by (i), and (ii)/(iii) give uniqueness. proof_deps updated. I removed the same-unit realization node from tool_uses. Accepted tool uses: lem-pur-site-restriction-module-adjunction-exact (unit sk-def-sf-operations, in the unit's uses) and lem-weil-pbc-adjunction-shift-compatibility-unique (Mathlib leaf). No cycle and no SGA citation.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenAdjunctionShift",
+  "declaration": "WeilConjectures.IntegralSystemRealization.openAdjunctionShift",
+  "file": "lean/Sheaf/SixFunctors/OpenAdjunctionShift.lean",
+  "statement": "theorem openAdjunctionShift (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (D : WeilConjectures.FiniteFieldDatum.{u}) (_hl : l ≠ D.p) {U W : Over (Spec (CommRingCat.of D.k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] (j : U ⟶ W) [IsOpenImmersion j.left] [QuasiCompact j.left] (o : Operations l E) : ((o.extension j.left).adj).CommShift ℤ",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.openRestrictionCommShift",
+   "WeilConjectures.IntegralSystemRealization.openAdjunctionShift"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d8c547cc",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Only change vs live: lean record; statement verbatim (script check). Clauses match: FiniteFieldDatum/l≠p/E finite over Q_l, Over Spec k LocallyOfFiniteType+QuasiCompact, j open immersion + QuasiCompact, System = coefficientSequenceDerived, J = (o.extension j).ordinary.mapDerivedCategory, P = pull, Open.adj = exactDerivedAdjunction (localization of the cochain adjunction to the actual pullbackTensorSequenceInverse, OpenTensorNormalization.lean:359), so the universal o is pinned and true for the recorded realization. Shift structures are the mapDerivedCategory ones; openRestrictionCommShift is inferInstanceAs of it. Conclusion Adjunction.CommShift ℤ = unit+counit squares for all a∈ℤ before evaluation or limit. Edge cases U=W, U=∅, a=0 and negative shifts OK; no extra bounds or universe changes. All 3 stmt_dep modules imported; docstrings carry source place and blueprint id; sole sorry; no duplicate found (DerivedAdjunctionCommShift is etale f^*⊣f_* only). nt_compile --json exit 0 clean 2.5 s; broken-field control fails at line 89. Advisory: the instance is defeq to the systemPullShift def (def-pur-integral-operation-shift-data)."
+ }
 }

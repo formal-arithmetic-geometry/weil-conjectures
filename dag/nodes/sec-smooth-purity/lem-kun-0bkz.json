@@ -1,121 +1,34 @@
 {
-  "id": "lem-kun-0bkz",
-  "blueprint": {
-    "is": "lem-kun-0bkz",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Cohomology of unbounded complexes",
-  "statement": "Let $X$ be a scheme, $K\\in D(X_{\\Et})$, and $\\mathcal B$ a class\nof objects of $X_{\\Et}$ such that (1) every object of $X_{\\Et}$\nadmits a covering by objects of $\\mathcal B$, and (2)\n$H^p(U_{\\Et},\\mathcal H^q(K))=0$ for all $p>0$, all\n$q\\in\\mathbf Z$, and all $U\\in\\mathcal B$. Then\n$H^q(U_{\\Et},K)=H^0(U_{\\Et},\\mathcal H^q(K))$ for all $q$ and all\n$U\\in\\mathcal B$. (*Source:* Stacks Project,\n[Tag\n`0BKZ`](https://stacks.math.columbia.edu/tag/0BKZ).)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0bkz.md",
-    "place": "node lem-kun-0bkz, order 1717",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0BKZ"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-derived-categories",
-    "def-weil-derived-cohomology-sheaves",
-    "def-kun-rgamma-unbounded",
-    "def-weil-pbc-sites-and-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Use the small representatives of the sites fixed by [def-weil-size-convention], and regard abelian sheaves as modules over the constant ring sheaf $\\mathbf Z_X$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]. Explicitly, on a cover where a section of $\\mathbf Z_X$ is represented by integers, let it act by repeated addition on the restrictions of a section of the abelian sheaf. These local sections agree on overlaps and glue uniquely; the module axioms and compatibility with restriction hold locally for integers and hence globally. Conversely any $\\mathbf Z_X$-action must be this action. Every abelian-sheaf morphism commutes with it, so this is an equivalence with the same underlying complexes, cohomology and homotopies. Write $H^r(U,L)$ for the cohomology of derived evaluation at the object $U$ of $X_{\\Et}$, whose degree-zero recipe is [def-weil-pbc-sites-and-cohomology]. This is the notation $H^r(U_{\\Et},L|_U)$ in the statement, also for unbounded $L$: by [lem-weil-pbc-site-restriction-injectives] restriction to $X_{\\Et}/U$ is exact, so it preserves quasi-isomorphisms, and by [lem-pur-kinjective-restrict-localized] it preserves K-injectives. Consequently, restricting a K-injective resolution $L\\to I$ and then evaluating at the final object of the slice gives exactly the complex $I(U)$. The covering-preserving equivalence $X_{\\Et}/U\\simeq U_{\\Et}$ of [lem-weil-pbc-etale-site-localization-open] identifies this final object with $U$. An equivalence of abelian categories preserves kernels, cokernels and homotopies by their defining universal properties, hence preserves acyclic complexes and K-injectives. Therefore the same complex computes derived global sections on $U_{\\Et}$ by [def-kun-rgamma-unbounded]. In particular hypothesis (2) is precisely $R^p\\Gamma(U,\\mathcal H^r K)=0$ for $p>0$.",
-      "uses": [
-        "def-weil-size-convention",
-        "def-weil-pbc-constant-sheaf",
-        "def-weil-sheaf-of-modules-category",
-        "def-weil-pbc-sites-and-cohomology",
-        "lem-weil-pbc-site-restriction-injectives",
-        "lem-pur-kinjective-restrict-localized",
-        "lem-weil-pbc-etale-site-localization-open",
-        "def-kun-rgamma-unbounded"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; notation over an object; localized-site interpretation (Modules on Sites 03DI/03DJ; 08BS for K-injective restriction)"
-      }
-    },
-    {
-      "text": "Put $K_n=\\tau_{\\geq-n}K$ for $n\\in\\mathbf N$, with transitions $t_n:K_{n+1}\\to K_n$. The good-truncation construction [def-kun-truncations] gives $\\mathcal H^r(K_n)=0$ for $r<-n$ and the canonical identification $\\mathcal H^r(K_n)=\\mathcal H^r(K)$ for $r\\geq-n$. Fix $U\\in\\mathcal B$. Apply [thm-sp-truncation-e2] to the bounded-below complex $K_n$, with $v=\\Gamma(U,-)$ and lower bound $-n$. Its source category and its target $\\operatorname{Ab}$ are Grothendieck: apply [prop-pur-kinjective-resolutions-exist] to the constant $\\mathbf Z$-ringed small site $X_{\\Et}$, and to the site with one object, only its identity and the trivial topology, respectively. On the latter site a module sheaf is just an abelian group. Evaluation is additive left exact by [def-weil-pbc-sites-and-cohomology], and the K-injective recipe in the cited existence theorem supplies the derived functor required by the spectral-sequence theorem. We obtain a convergent spectral sequence with finite abutment filtration\n$$E_2^{p,r}(n)=H^p(U,\\mathcal H^r(K_n))\\Longrightarrow H^{p+r}(U,K_n).$$\nOnly bounded-below complexes are used here.",
-      "uses": [
-        "def-kun-truncations",
-        "thm-sp-truncation-e2",
-        "prop-pur-kinjective-resolutions-exist",
-        "def-weil-pbc-sites-and-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; bounded-below spectral sequence, from Derived Categories Tag 015J, label lemma-two-ss-complex-functor"
-      }
-    },
-    {
-      "text": "All terms with $p<0$ vanish by the spectral-sequence theorem, and those with $p>0$ vanish by hypothesis (2) and the cohomology calculation for $K_n$ in step 2. Every differential $d_s$ for $s\\geq2$ out of column zero lands in column $s>0$, and every differential into it starts in column $-s<0$. Thus $E_\\infty^{0,r}(n)=E_2^{0,r}(n)$ and all other columns are zero. The finite decreasing filtration on $H^r(U,K_n)$ has $F^0=H^r(U,K_n)$; all its graded pieces with positive index are zero, so its finite zero end implies $F^1=0$. Its column-zero edge therefore gives an isomorphism\n$$e_{n,r}:H^r(U,K_n)\\xrightarrow{\\sim}\\Gamma(U,\\mathcal H^r(K_n)).$$\nThese are compatible with $t_n$: the maps of canonical truncations commute with $t_n$, so the images defining $F^p$, the cycle and boundary kernels and quotients defining the pages, and the column-zero quotient maps all commute with $t_n$. The $E_2$ identifications in [thm-sp-truncation-e2] are natural. Hence\n$$e_{n,r}\\circ H^r(U,t_n)=\\Gamma(U,\\mathcal H^r(t_n))\\circ e_{n+1,r}.$$\nThis verifies compatibility of the actual transition maps, rather than only abstract equality of the groups.",
-      "uses": [
-        "thm-sp-truncation-e2"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; collapse of the bounded-below spectral sequence; naturality for the truncation transitions"
-      }
-    },
-    {
-      "text": "The hypotheses of [lem-kun-site-truncation-derived-limit] hold for $\\mathcal C=X_{\\Et}$, $\\mathcal O=\\mathbf Z_X$, $E=K$ and $d=0$. Smallness is fixed in step 1; hypothesis (1) is exactly its covering assumption, and hypothesis (2) implies the required vanishing for every $p>0$ and $r<0$. It follows that $K$, with the canonical projections $K\\to K_n$, is a derived limit of $(K_n,t_n)$. No bound on all sheaves on $X_{\\Et}$ is being assumed; only the specified cohomology sheaves of $K$ enter this application.",
-      "uses": [
-        "lem-kun-site-truncation-derived-limit"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; first sentence of the source proof, applying Tag 0D6P with d=0"
-      }
-    },
-    {
-      "text": "Apply [lem-kun-site-rgamma-derived-limit] to the derived-limit triangle of step 4 and to the fixed object $U$. It says that $R\\Gamma(U,K)$ is a derived limit of the tower $R\\Gamma(U,K_n)$ in $D(\\operatorname{Ab})$, with projections obtained from $K\\to K_n$. Now [lem-pc-derived-limit-milnor-sequence], applied in $D(\\operatorname{Ab})$, gives, for each integer $r$, the exact sequence\n$$0\\longrightarrow R^1\\varprojlim_n H^{r-1}(U,K_n)\\longrightarrow H^r(U,K)\\longrightarrow\\varprojlim_n H^r(U,K_n)\\longrightarrow0.$$\nThere is no quasi-compactness or finiteness hypothesis in either cited statement.",
-      "uses": [
-        "lem-kun-site-rgamma-derived-limit",
-        "lem-pc-derived-limit-milnor-sequence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; displayed short exact sequence, equation Tag 0BKX, from Tag 0D6K and the group-valued Milnor sequence"
-      }
-    },
-    {
-      "text": "Choose $N\\in\\mathbf N$ with $N\\geq1-r$. For $n\\geq N$ and $j\\in\\{r-1,r\\}$, good truncation gives $\\mathcal H^j(K_n)=\\mathcal H^j(K)$, and the map $\\mathcal H^j(t_n)$ is the identity under these canonical identifications: its composite with the canonical projection from $\\mathcal H^j(K)$ is that same projection. Use the compatible edge isomorphisms of step 3. The two towers $H^j(U,K_n)$ are therefore eventually constant, with identity transition maps on their tails identified with $\\Gamma(U,\\mathcal H^j(K))$.",
-      "uses": [
-        "def-kun-truncations"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; last two sentences of the source proof, with a common threshold for r and r-1"
-      }
-    },
-    {
-      "text": "For completeness compute the limits of either eventually constant tower $(A_n,f_n)$. The Roos formula of [lem-pc-derived-limit-roos-abelian-groups] identifies $\\varprojlim A_n$ with the kernel and $R^1\\varprojlim A_n$ with the cokernel of\n$$1-s:\\prod_nA_n\\to\\prod_nA_n,\\qquad (x_n)\\mapsto(x_n-f_n(x_{n+1})).$$\nChoose $N$ after which all $f_n$ are isomorphisms. Given any $(b_n)$, set $x_N=0$, define $x_{n+1}=f_n^{-1}(x_n-b_n)$ for $n\\geq N$, and then define $x_n=b_n+f_n(x_{n+1})$ backwards for $n<N$. This solves $(1-s)x=b$, so the cokernel is zero. In the kernel, $x_N$ uniquely determines every later entry using the inverse transitions and every earlier entry using the transitions; thus projection to $A_N$ is an isomorphism, and in the identified constant tail it is the common value. Applying this to the two towers in step 6 makes the left term of step 5 zero and identifies its right term with $\\Gamma(U,\\mathcal H^r(K))$. Exactness gives\n$$H^r(U_{\\Et},K)\\cong H^0(U_{\\Et},\\mathcal H^r(K)).$$\nSince $r\\in\\mathbf Z$ and $U\\in\\mathcal B$ were arbitrary, this is the claimed equality in the canonical cohomological identifications.",
-      "uses": [
-        "lem-pc-derived-limit-roos-abelian-groups"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; last sentence of source proof; explicit kernel/cokernel computation using More on Algebra Tag 07KW"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-kun-0bkz",
+ "blueprint": {
+  "is": "lem-kun-0bkz",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Cohomology of unbounded complexes",
+ "statement": "Let $X$ be a scheme, $K\\in D(X_{\\Et})$, and $\\mathcal B$ a class\nof objects of $X_{\\Et}$ such that (1) every object of $X_{\\Et}$\nadmits a covering by objects of $\\mathcal B$, and (2)\n$H^p(U_{\\Et},\\mathcal H^q(K))=0$ for all $p>0$, all\n$q\\in\\mathbf Z$, and all $U\\in\\mathcal B$. Then\n$H^q(U_{\\Et},K)=H^0(U_{\\Et},\\mathcal H^q(K))$ for all $q$ and all\n$U\\in\\mathcal B$. (*Source:* Stacks Project,\n[Tag\n`0BKZ`](https://stacks.math.columbia.edu/tag/0BKZ).)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0bkz.md",
+  "place": "node lem-kun-0bkz, order 1717",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0BKZ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "def-weil-derived-cohomology-sheaves",
+  "def-kun-rgamma-unbounded",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use the small representatives of the sites fixed by [def-weil-size-convention], and regard abelian sheaves as modules over the constant ring sheaf $\\mathbf Z_X$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]. Explicitly, on a cover where a section of $\\mathbf Z_X$ is represented by integers, let it act by repeated addition on the restrictions of a section of the abelian sheaf. These local sections agree on overlaps and glue uniquely; the module axioms and compatibility with restriction hold locally for integers and hence globally. Conversely any $\\mathbf Z_X$-action must be this action. Every abelian-sheaf morphism commutes with it, so this is an equivalence with the same underlying complexes, cohomology and homotopies. Write $H^r(U,L)$ for the cohomology of derived evaluation at the object $U$ of $X_{\\Et}$, whose degree-zero recipe is [def-weil-pbc-sites-and-cohomology]. This is the notation $H^r(U_{\\Et},L|_U)$ in the statement, also for unbounded $L$: by [lem-weil-pbc-site-restriction-injectives] restriction to $X_{\\Et}/U$ is exact, so it preserves quasi-isomorphisms, and by [lem-pur-kinjective-restrict-localized] it preserves K-injectives. Consequently, restricting a K-injective resolution $L\\to I$ and then evaluating at the final object of the slice gives exactly the complex $I(U)$. The covering-preserving equivalence $X_{\\Et}/U\\simeq U_{\\Et}$ of [lem-weil-pbc-etale-site-localization-open] identifies this final object with $U$. An equivalence of abelian categories preserves kernels, cokernels and homotopies by their defining universal properties, hence preserves acyclic complexes and K-injectives. Therefore the same complex computes derived global sections on $U_{\\Et}$ by [def-kun-rgamma-unbounded]. In particular hypothesis (2) is precisely $R^p\\Gamma(U,\\mathcal H^r K)=0$ for $p>0$.",
+   "uses": [
     "def-weil-size-convention",
     "def-weil-pbc-constant-sheaf",
     "def-weil-sheaf-of-modules-category",
@@ -123,171 +36,247 @@
     "lem-weil-pbc-site-restriction-injectives",
     "lem-pur-kinjective-restrict-localized",
     "lem-weil-pbc-etale-site-localization-open",
-    "def-kun-rgamma-unbounded",
+    "def-kun-rgamma-unbounded"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; notation over an object; localized-site interpretation (Modules on Sites 03DI/03DJ; 08BS for K-injective restriction)"
+   }
+  },
+  {
+   "text": "Put $K_n=\\tau_{\\geq-n}K$ for $n\\in\\mathbf N$, with transitions $t_n:K_{n+1}\\to K_n$. The good-truncation construction [def-kun-truncations] gives $\\mathcal H^r(K_n)=0$ for $r<-n$ and the canonical identification $\\mathcal H^r(K_n)=\\mathcal H^r(K)$ for $r\\geq-n$. Fix $U\\in\\mathcal B$. Apply [thm-sp-truncation-e2] to the bounded-below complex $K_n$, with $v=\\Gamma(U,-)$ and lower bound $-n$. Its source category and its target $\\operatorname{Ab}$ are Grothendieck: apply [prop-pur-kinjective-resolutions-exist] to the constant $\\mathbf Z$-ringed small site $X_{\\Et}$, and to the site with one object, only its identity and the trivial topology, respectively. On the latter site a module sheaf is just an abelian group. Evaluation is additive left exact by [def-weil-pbc-sites-and-cohomology], and the K-injective recipe in the cited existence theorem supplies the derived functor required by the spectral-sequence theorem. We obtain a convergent spectral sequence with finite abutment filtration\n$$E_2^{p,r}(n)=H^p(U,\\mathcal H^r(K_n))\\Longrightarrow H^{p+r}(U,K_n).$$\nOnly bounded-below complexes are used here.",
+   "uses": [
     "def-kun-truncations",
     "thm-sp-truncation-e2",
     "prop-pur-kinjective-resolutions-exist",
-    "lem-kun-site-truncation-derived-limit",
-    "lem-kun-site-rgamma-derived-limit",
-    "lem-pc-derived-limit-milnor-sequence",
-    "lem-pc-derived-limit-roos-abelian-groups"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; proof via Tags 0D6P, 0D6K, 0BKX and Derived Categories 015J"
+    "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; bounded-below spectral sequence, from Derived Categories Tag 015J, label lemma-two-ss-complex-functor"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "For an unbounded complex of sheaves whose cohomology sheaves have no higher cohomology on a basis, hypercohomology equals sections of the cohomology sheaf",
-      "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CochainComplex.HomComplex.leftHomologyData'_H_coe, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instAddCommGroupH, CochainComplex.HomComplex.homologyAddEquiv, CochainComplex.HomComplex.leftHomologyData', CochainComplex.HomComplex.leftHomologyData_H_coe",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf cohomology, Hom-complex cohomology and truncation support results do not give the unbounded basis-acyclic comparison"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.rightDerived",
-      "results": "0 hits: none",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf cohomology, Hom-complex cohomology and truncation support results do not give the unbounded basis-acyclic comparison"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Cohomology of an unbounded complex of sheaves with acyclic cohomology sheaves on a basis",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "hypercohomology|acyclic.*cohomology|cohomology.*acyclic|isLimit.*trunc",
-      "results": "0 hits: none; searched Mathlib/CategoryTheory",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf cohomology, Hom-complex cohomology and truncation support results do not give the unbounded basis-acyclic comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Hypercohomology equals zeroth derived sections of cohomology when all positive derived sections of every cohomology sheaf vanish locally on covering objects",
-      "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CochainComplex.isZero_of_isLE, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, CochainComplex.isZero_of_isGE, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.HomComplex.leftHomologyData'_H_coe",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf cohomology, Hom-complex cohomology and truncation support results do not give the unbounded basis-acyclic comparison"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1717,
-  "blueprint_uses": [
-    "def-kun-rgamma-unbounded",
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-hypercohomology-filtrations"
-  ],
-  "uses_not_cited": [
-    "def-kun-rgamma-unbounded"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "All terms with $p<0$ vanish by the spectral-sequence theorem, and those with $p>0$ vanish by hypothesis (2) and the cohomology calculation for $K_n$ in step 2. Every differential $d_s$ for $s\\geq2$ out of column zero lands in column $s>0$, and every differential into it starts in column $-s<0$. Thus $E_\\infty^{0,r}(n)=E_2^{0,r}(n)$ and all other columns are zero. The finite decreasing filtration on $H^r(U,K_n)$ has $F^0=H^r(U,K_n)$; all its graded pieces with positive index are zero, so its finite zero end implies $F^1=0$. Its column-zero edge therefore gives an isomorphism\n$$e_{n,r}:H^r(U,K_n)\\xrightarrow{\\sim}\\Gamma(U,\\mathcal H^r(K_n)).$$\nThese are compatible with $t_n$: the maps of canonical truncations commute with $t_n$, so the images defining $F^p$, the cycle and boundary kernels and quotients defining the pages, and the column-zero quotient maps all commute with $t_n$. The $E_2$ identifications in [thm-sp-truncation-e2] are natural. Hence\n$$e_{n,r}\\circ H^r(U,t_n)=\\Gamma(U,\\mathcal H^r(t_n))\\circ e_{n+1,r}.$$\nThis verifies compatibility of the actual transition maps, rather than only abstract equality of the groups.",
+   "uses": [
+    "thm-sp-truncation-e2"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; collapse of the bounded-below spectral sequence; naturality for the truncation transitions"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-kun-0bkz",
-    "worker": "stage1",
-    "summary": "Kept the true imported statement. Replaced the unsupported unbounded spectral-sequence convergence by the actual Stacks 0BKZ proof: bounded-below truncation spectral sequences, reconstruction under local cohomological bounds, derived sections preserving derived limits, the existing group-valued Milnor sequence, and an explicit Roos calculation for eventually constant towers. Two statement-only ringed-site lemmas are new; no Mathlib leaf or project attachment was found.",
-    "blueprint": "The blueprint proof is one paragraph invoking a spectral sequence for unbounded K. Steps 1-3 justify its column-zero calculation for each bounded-below truncation; steps 4-7 supply the missing passage to K exactly along Stacks 0BKZ. No unit or chapter route changes.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-site-restriction-injectives",
-        "why": "Exact restriction to a slice is a general site tool needed to interpret cohomology over an etale object."
-      },
-      {
-        "node": "lem-pur-kinjective-restrict-localized",
-        "why": "K-injective restriction identifies object evaluation with unbounded cohomology on the localized site."
-      },
-      {
-        "node": "lem-weil-pbc-etale-site-localization-open",
-        "why": "The localized small etale site at any etale object is the small etale site of its scheme."
-      },
-      {
-        "node": "thm-sp-truncation-e2",
-        "why": "General bounded-below hypercohomology convergence and its finite filtration; the Kunneth unit has no separate convergence theorem."
-      },
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "Grothendieck and K-injective existence hypotheses for the bounded-below spectral-sequence tool."
-      },
-      {
-        "node": "lem-pc-derived-limit-milnor-sequence",
-        "why": "General Milnor short exact sequence in D(Ab), after the new site theorem puts derived sections in that situation."
-      },
-      {
-        "node": "lem-pc-derived-limit-roos-abelian-groups",
-        "why": "General kernel/cokernel computation used to prove the eventually constant inverse-limit calculation explicitly."
-      }
-    ]
+  {
+   "text": "The hypotheses of [lem-kun-site-truncation-derived-limit] hold for $\\mathcal C=X_{\\Et}$, $\\mathcal O=\\mathbf Z_X$, $E=K$ and $d=0$. Smallness is fixed in step 1; hypothesis (1) is exactly its covering assumption, and hypothesis (2) implies the required vanishing for every $p>0$ and $r<0$. It follows that $K$, with the canonical projections $K\\to K_n$, is a derived limit of $(K_n,t_n)$. No bound on all sheaves on $X_{\\Et}$ is being assumed; only the specified cohomology sheaves of $K$ enter this application.",
+   "uses": [
+    "lem-kun-site-truncation-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; first sentence of the source proof, applying Tag 0D6P with d=0"
+   }
   },
-  "tool_uses": [
-    "lem-weil-pbc-site-restriction-injectives",
-    "lem-pur-kinjective-restrict-localized",
-    "lem-weil-pbc-etale-site-localization-open",
-    "thm-sp-truncation-e2",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-derived-limit-milnor-sequence",
+  {
+   "text": "Apply [lem-kun-site-rgamma-derived-limit] to the derived-limit triangle of step 4 and to the fixed object $U$. It says that $R\\Gamma(U,K)$ is a derived limit of the tower $R\\Gamma(U,K_n)$ in $D(\\operatorname{Ab})$, with projections obtained from $K\\to K_n$. Now [lem-pc-derived-limit-milnor-sequence], applied in $D(\\operatorname{Ab})$, gives, for each integer $r$, the exact sequence\n$$0\\longrightarrow R^1\\varprojlim_n H^{r-1}(U,K_n)\\longrightarrow H^r(U,K)\\longrightarrow\\varprojlim_n H^r(U,K_n)\\longrightarrow0.$$\nThere is no quasi-compactness or finiteness hypothesis in either cited statement.",
+   "uses": [
+    "lem-kun-site-rgamma-derived-limit",
+    "lem-pc-derived-limit-milnor-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; displayed short exact sequence, equation Tag 0BKX, from Tag 0D6K and the group-valued Milnor sequence"
+   }
+  },
+  {
+   "text": "Choose $N\\in\\mathbf N$ with $N\\geq1-r$. For $n\\geq N$ and $j\\in\\{r-1,r\\}$, good truncation gives $\\mathcal H^j(K_n)=\\mathcal H^j(K)$, and the map $\\mathcal H^j(t_n)$ is the identity under these canonical identifications: its composite with the canonical projection from $\\mathcal H^j(K)$ is that same projection. Use the compatible edge isomorphisms of step 3. The two towers $H^j(U,K_n)$ are therefore eventually constant, with identity transition maps on their tails identified with $\\Gamma(U,\\mathcal H^j(K))$.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; last two sentences of the source proof, with a common threshold for r and r-1"
+   }
+  },
+  {
+   "text": "For completeness compute the limits of either eventually constant tower $(A_n,f_n)$. The Roos formula of [lem-pc-derived-limit-roos-abelian-groups] identifies $\\varprojlim A_n$ with the kernel and $R^1\\varprojlim A_n$ with the cokernel of\n$$1-s:\\prod_nA_n\\to\\prod_nA_n,\\qquad (x_n)\\mapsto(x_n-f_n(x_{n+1})).$$\nChoose $N$ after which all $f_n$ are isomorphisms. Given any $(b_n)$, set $x_N=0$, define $x_{n+1}=f_n^{-1}(x_n-b_n)$ for $n\\geq N$, and then define $x_n=b_n+f_n(x_{n+1})$ backwards for $n<N$. This solves $(1-s)x=b$, so the cokernel is zero. In the kernel, $x_N$ uniquely determines every later entry using the inverse transitions and every earlier entry using the transitions; thus projection to $A_N$ is an isomorphism, and in the identified constant tail it is the common value. Applying this to the two towers in step 6 makes the left term of step 5 zero and identifies its right term with $\\Gamma(U,\\mathcal H^r(K))$. Exactness gives\n$$H^r(U_{\\Et},K)\\cong H^0(U_{\\Et},\\mathcal H^r(K)).$$\nSince $r\\in\\mathbf Z$ and $U\\in\\mathcal B$ were arbitrary, this is the claimed equality in the canonical cohomological identifications.",
+   "uses": [
     "lem-pc-derived-limit-roos-abelian-groups"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-Q14-09e96f6f0",
-    "group": "Q14",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-09e96f6f0 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass: item matches Stacks 0BKZ; steps correctly use bounded-below truncations, 0D6P reconstruction, 0D6K derived-section limits, Milnor, and Roos calculations, with edge cases tested. Both new nodes are genuine arbitrary-site lemmas and have no duplicate. Repair required because each new node's created record omitted required by/date fields and standard merged_into/import_flags/lean_audit fields. Complete corrected files are under fixes/dag/nodes/sec-smooth-purity/. No Lean, builds, git, ssh, or live project access used.; 2 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-4a6746bce",
-    "group": "NJ",
-    "result": "pass",
-    "note": "Statement matches Stacks Tag 0BKZ and the node verbatim; dependencies, universes, edge cases, docstrings, report sections, duplicate searches, and compiler evidence checked. No findings."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.UnboundedEtaleCohomologyAcyclicBasis",
-    "declaration": "AlgebraicGeometry.Etale.cohomology_iso_sections_of_acyclic_covering_class",
-    "file": "lean/Sheaf/AlgebraicGeometry/UnboundedEtaleCohomologyAcyclicBasis.lean",
-    "statement": "theorem cohomology_iso_sections_of_acyclic_covering_class (X : Scheme.{u}) (K : DerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (B : Set X.Etale) (hcover : ∀ V : X.Etale, ∃ (ι : Type (u + 1)) (W : ι → X.Etale) (f : ∀ i : ι, W i ⟶ V), (∀ i : ι, W i ∈ B) ∧ Sieve.ofArrows W f ∈ X.smallEtaleTopology V) (hacyclic : ∀ (U : X.Etale), U ∈ B → ∀ (p : ℕ), 0 < p → ∀ q : ℤ, Subsingleton (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} U.hom).obj ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj K)) p)) : ∀ (U : X.Etale), U ∈ B → ∀ q : ℤ, Nonempty ((cohomology AddCommGrpCat.{u + 1} U.left q).obj ((upperStar AddCommGrpCat.{u + 1} U.hom).mapDerivedCategory.obj K) ≅ ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj K).obj.obj (op U))",
-    "branch": "newtargets-dag",
-    "by": "NJ",
-    "date": "2026-10-16",
-    "existing": false
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be a scheme, $K\\in D(X_{\\Et})$, and $\\mathcal B$ a class\nof objects of $X_{\\Et}$ such that (1) every object of $X_{\\Et}$\nadmits a covering by objects of $\\mathcal B$, and (2)\n$H^p(U_{\\Et},\\mathcal H^q(K))=0$ for all $p>0$, all\n$q\\in\\mathbf Z$, and all $U\\in\\mathcal B$. Then\n$H^q(U_{\\Et},K)=H^0(U_{\\Et},\\mathcal H^q(K))$ for all $q$ and all\n$U\\in\\mathcal B$.",
-    "proof": [
-      {
-        "text": "For $U\\in\\mathcal B$ the hypercohomology spectral sequence of\n[def-weil-pbc-hypercohomology-filtrations] (in the global-section\nform) has\n$E_2^{p,q}=H^p(U_{\\Et},\\mathcal H^q(K))\\Rightarrow H^{p+q}(U_{\\Et},K)$. Hypothesis (2) kills the columns $p>0$, so\nonly the column $p=0$ survives and there are no differentials to or\nfrom it; hence $H^n(U_{\\Et},K)=E_2^{0,n}=H^0(U_{\\Et},\\mathcal H^n(K))$\nfor every $n$, which is the assertion, in the notation of\n[def-weil-pbc-etale-cohomology].",
-        "uses": [
-          "def-weil-pbc-hypercohomology-filtrations",
-          "def-weil-pbc-etale-cohomology"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; last sentence of source proof; explicit kernel/cokernel computation using More on Algebra Tag 07KW"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-site-restriction-injectives",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-etale-site-localization-open",
+  "def-kun-rgamma-unbounded",
+  "def-kun-truncations",
+  "thm-sp-truncation-e2",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-kun-site-truncation-derived-limit",
+  "lem-kun-site-rgamma-derived-limit",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-derived-limit-roos-abelian-groups"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0BKZ, label lemma-cohomology-over-U-trivial; proof via Tags 0D6P, 0D6K, 0BKX and Derived Categories 015J"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an unbounded complex of sheaves whose cohomology sheaves have no higher cohomology on a basis, hypercohomology equals sections of the cohomology sheaf",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.H, CochainComplex.HomComplex.leftHomologyData'_H_coe, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instAddCommGroupH, CochainComplex.HomComplex.homologyAddEquiv, CochainComplex.HomComplex.leftHomologyData', CochainComplex.HomComplex.leftHomologyData_H_coe",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf cohomology, Hom-complex cohomology and truncation support results do not give the unbounded basis-acyclic comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.rightDerived",
+   "results": "0 hits: none",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf cohomology, Hom-complex cohomology and truncation support results do not give the unbounded basis-acyclic comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of an unbounded complex of sheaves with acyclic cohomology sheaves on a basis",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "hypercohomology|acyclic.*cohomology|cohomology.*acyclic|isLimit.*trunc",
+   "results": "0 hits: none; searched Mathlib/CategoryTheory",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf cohomology, Hom-complex cohomology and truncation support results do not give the unbounded basis-acyclic comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hypercohomology equals zeroth derived sections of cohomology when all positive derived sections of every cohomology sheaf vanish locally on covering objects",
+   "results": "8 hits: CategoryTheory.Sheaf.cohomologyPresheaf, CochainComplex.isZero_of_isLE, CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero, CochainComplex.isZero_of_isGE, CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.instAddCommGroupH, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.HomComplex.leftHomologyData'_H_coe",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf cohomology, Hom-complex cohomology and truncation support results do not give the unbounded basis-acyclic comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1717,
+ "blueprint_uses": [
+  "def-kun-rgamma-unbounded",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-hypercohomology-filtrations"
+ ],
+ "uses_not_cited": [
+  "def-kun-rgamma-unbounded"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-0bkz",
+  "worker": "stage1",
+  "summary": "Kept the true imported statement. Replaced the unsupported unbounded spectral-sequence convergence by the actual Stacks 0BKZ proof: bounded-below truncation spectral sequences, reconstruction under local cohomological bounds, derived sections preserving derived limits, the existing group-valued Milnor sequence, and an explicit Roos calculation for eventually constant towers. Two statement-only ringed-site lemmas are new; no Mathlib leaf or project attachment was found.",
+  "blueprint": "The blueprint proof is one paragraph invoking a spectral sequence for unbounded K. Steps 1-3 justify its column-zero calculation for each bounded-below truncation; steps 4-7 supply the missing passage to K exactly along Stacks 0BKZ. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-restriction-injectives",
+    "why": "Exact restriction to a slice is a general site tool needed to interpret cohomology over an etale object."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "K-injective restriction identifies object evaluation with unbounded cohomology on the localized site."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "The localized small etale site at any etale object is the small etale site of its scheme."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "General bounded-below hypercohomology convergence and its finite filtration; the Kunneth unit has no separate convergence theorem."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Grothendieck and K-injective existence hypotheses for the bounded-below spectral-sequence tool."
+   },
+   {
+    "node": "lem-pc-derived-limit-milnor-sequence",
+    "why": "General Milnor short exact sequence in D(Ab), after the new site theorem puts derived sections in that situation."
+   },
+   {
+    "node": "lem-pc-derived-limit-roos-abelian-groups",
+    "why": "General kernel/cokernel computation used to prove the eventually constant inverse-limit calculation explicitly."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-restriction-injectives",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-weil-pbc-etale-site-localization-open",
+  "thm-sp-truncation-e2",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-derived-limit-milnor-sequence",
+  "lem-pc-derived-limit-roos-abelian-groups"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-09e96f6f0",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-09e96f6f0 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass: item matches Stacks 0BKZ; steps correctly use bounded-below truncations, 0D6P reconstruction, 0D6K derived-section limits, Milnor, and Roos calculations, with edge cases tested. Both new nodes are genuine arbitrary-site lemmas and have no duplicate. Repair required because each new node's created record omitted required by/date fields and standard merged_into/import_flags/lean_audit fields. Complete corrected files are under fixes/dag/nodes/sec-smooth-purity/. No Lean, builds, git, ssh, or live project access used.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4a6746bce",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement matches Stacks Tag 0BKZ and the node verbatim; dependencies, universes, edge cases, docstrings, report sections, duplicate searches, and compiler evidence checked. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnboundedEtaleCohomologyAcyclicBasis",
+  "declaration": "AlgebraicGeometry.Etale.cohomology_iso_sections_of_acyclic_covering_class",
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedEtaleCohomologyAcyclicBasis.lean",
+  "statement": "theorem cohomology_iso_sections_of_acyclic_covering_class (X : Scheme.{u}) (K : DerivedCategory (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})) (B : Set X.Etale) (hcover : ∀ V : X.Etale, ∃ (ι : Type (u + 1)) (W : ι → X.Etale) (f : ∀ i : ι, W i ⟶ V), (∀ i : ι, W i ∈ B) ∧ Sieve.ofArrows W f ∈ X.smallEtaleTopology V) (hacyclic : ∀ (U : X.Etale), U ∈ B → ∀ (p : ℕ), 0 < p → ∀ q : ℤ, Subsingleton (Sheaf.H ((upperStar AddCommGrpCat.{u + 1} U.hom).obj ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj K)) p)) : ∀ (U : X.Etale), U ∈ B → ∀ q : ℤ, Nonempty ((cohomology AddCommGrpCat.{u + 1} U.left q).obj ((upperStar AddCommGrpCat.{u + 1} U.hom).mapDerivedCategory.obj K) ≅ ((DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj K).obj.obj (op U))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be a scheme, $K\\in D(X_{\\Et})$, and $\\mathcal B$ a class\nof objects of $X_{\\Et}$ such that (1) every object of $X_{\\Et}$\nadmits a covering by objects of $\\mathcal B$, and (2)\n$H^p(U_{\\Et},\\mathcal H^q(K))=0$ for all $p>0$, all\n$q\\in\\mathbf Z$, and all $U\\in\\mathcal B$. Then\n$H^q(U_{\\Et},K)=H^0(U_{\\Et},\\mathcal H^q(K))$ for all $q$ and all\n$U\\in\\mathcal B$.",
+  "proof": [
+   {
+    "text": "For $U\\in\\mathcal B$ the hypercohomology spectral sequence of\n[def-weil-pbc-hypercohomology-filtrations] (in the global-section\nform) has\n$E_2^{p,q}=H^p(U_{\\Et},\\mathcal H^q(K))\\Rightarrow H^{p+q}(U_{\\Et},K)$. Hypothesis (2) kills the columns $p>0$, so\nonly the column $p=0$ survives and there are no differentials to or\nfrom it; hence $H^n(U_{\\Et},K)=E_2^{0,n}=H^0(U_{\\Et},\\mathcal H^n(K))$\nfor every $n$, which is the assertion, in the notation of\n[def-weil-pbc-etale-cohomology].",
+    "uses": [
+     "def-weil-pbc-hypercohomology-filtrations",
+     "def-weil-pbc-etale-cohomology"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

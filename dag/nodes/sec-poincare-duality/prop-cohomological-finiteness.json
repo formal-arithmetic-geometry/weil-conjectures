@@ -1,303 +1,292 @@
 {
-  "id": "prop-cohomological-finiteness",
-  "blueprint": {
-    "is": "prop-cohomological-finiteness",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Compact-support finiteness and Frobenius",
-  "statement": "Fix the finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, choose a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and\nchoose a finite extension $E/\\Ql$ contained in $\\Qlb$. Let $Y_0$ be a\nseparated finite-type\n$k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, and choose\n$K\\in D^b_{c,\\mathrm W}(Y,E)$, a\nWeil complex. Write $E_Y$ for the constant\nWeil sheaf. Then the\n$E$-coefficient abbreviations mean\n$H^i(Y,E)=H^i(Y,E_Y)$ and $H_c^i(Y,E)=H_c^i(Y,E_Y)$. The\nordinary and compact-support\ncohomology groups, in particular $H_c^i(Y,K)$ meaning\n$H_c^i(Y,\\operatorname{For}K)$, are finite-dimensional, vanish outside a\nfinite interval, and carry the\ngeometric Frobenius\nautomorphism. If $Y_0$ is\nproper, the\ncanonical isomorphism\n\n$$\nH_c^i(Y,K)\\xrightarrow{\\sim}H^i(Y,K)\n$$\n\nis Frobenius-equivariant.\nIf $Y$ has dimension $e\\in\\mathbf Z_{\\geq0}$ and $K=E_Y$ is the\nconstant Weil sheaf, then\n\n$$\nH_c^i(Y,E)=0\\qquad\\text{for }i<0\\text{ or }i>2e.\n$$\n\nFor proper $Y$, the\nordinary cohomology also\nsatisfies $H^i(Y,E)=0$ for $i<0$ or $i>2e$. In\nparticular, if $X_0/\\Fq$ is smooth,\nproper, geometrically connected of pure dimension\n$d\\in\\mathbf Z_{\\geq0}$, and $X=X_0\\times_{\\Fq}k$, then\n\n$$\nH^i(X,\\Ql)=0\\qquad\\text{for }i\\notin[0,2d].\n$$\n\nMoreover, if $Y_0$ is geometrically connected (neither properness nor\nsmoothness is needed), then $H^0(Y,E)\\cong E$, and the\ngeometric Frobenius acts as the\nidentity on this group; in particular $H^0(X,\\Ql)\\cong\\Ql$ with\n$F=\\mathrm{id}$ for every smooth, separated finite-type, geometrically\nconnected $X_0$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-    "place": "node prop-cohomological-finiteness, order 2431"
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-weil-sheaf-complex",
-    "def-weil-constant-weil-structure",
-    "def-weil-ordinary-compact-cohomology",
-    "def-weil-vector-space-dimension",
-    "def-weil-global-geometric-frobenius",
-    "def-weil-proper-morphism",
-    "prop-weil-proper-compact-coincidence",
-    "def-kun-dimension",
-    "def-weil-geometric-hypotheses"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1 (the setting).* $Y_0\\to\\Spec k_0$ is separated and of finite type, so by [lem-pod-separated-finite-type-base-change] its base change $a_Y:Y=Y_0\\times_{k_0}k\\to s=\\Spec k$ is separated and of finite type [def-weil-scheme-morphism-properties]; this is the setting of [def-weil-ordinary-compact-cohomology], [def-weil-frobenius-cohomology-transport] and [def-weil-global-geometric-frobenius]. For a Weil complex $K=(\\operatorname{For}K,\\theta_K)\\in D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex], $\\operatorname{For}K\\in D^b_c(Y,E)$ and $\\theta_K:Lg_Y^*\\operatorname{For}K\\to\\operatorname{For}K$ is an isomorphism, and $H^i(Y,K)$, $H^i_c(Y,K)$ mean $H^i(Y,\\operatorname{For}K)$, $H^i_c(Y,\\operatorname{For}K)$ [def-weil-ordinary-compact-cohomology]. The constant Weil sheaf is $(E_Y,\\theta_E)$ with its canonical Weil structure [def-weil-constant-weil-structure], and $\\operatorname{For}(E_Y,\\theta_E)=E_Y$, so $H^i(Y,E)=H^i(Y,E_Y)$ and $H^i_c(Y,E)=H^i_c(Y,E_Y)$ are the case $K=E_Y$ of what follows.",
-      "uses": [
-        "lem-pod-separated-finite-type-base-change",
-        "def-weil-scheme-morphism-properties",
-        "def-weil-ordinary-compact-cohomology",
-        "def-weil-weil-sheaf-complex",
-        "def-weil-constant-weil-structure"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-        "place": "## Proof, Step 1 (setting: a_Y separated of finite type over k); Deligne, Weil I, (1.3)-(1.4), p. 274 (X_0 a variety over F_q and X its extension of scalars)"
-      }
-    },
-    {
-      "text": "*Step 2 (finite-dimensionality and boundedness).* Let $M=\\operatorname{For}K\\in D^b_c(Y,E)$. By [lem-weil-structure-direct-images-constructible] (with $\\Lambda=E$), $Ra_{Y*}M$ and $Ra_{Y!}M$ lie in $D^b_c(s,E)$, the domain of the point fibre functor $\\operatorname{Fib}_s:D^b_c(s,E)\\to D^b_{\\mathrm{fd}}(E)$ of [def-weil-finite-coefficient-point] (item 3). Hence $\\RGamma(Y,M)=\\operatorname{Fib}_s(Ra_{Y*}M)$ and $\\RGammac(Y,M)=\\operatorname{Fib}_s(Ra_{Y!}M)$ [def-weil-ordinary-compact-cohomology] are objects of $D^b_{\\mathrm{fd}}(E)$, which by [def-weil-point-fd-complexes] means: every $H^i(Y,M)=\\mathrm H^i(\\RGamma(Y,M))$ and every $H^i_c(Y,M)$ is a finite-dimensional $E$-vector space [def-weil-vector-space-dimension], and only finitely many of them are nonzero, so they vanish outside the finite interval $[i_-,i_+]$ spanned by the finitely many degrees in which they are nonzero (any interval if there are none). This is the asserted finite-dimensionality and vanishing outside a finite interval, for ordinary and for compact-support cohomology.",
-      "uses": [
-        "lem-weil-structure-direct-images-constructible",
-        "def-weil-finite-coefficient-point",
-        "def-weil-ordinary-compact-cohomology",
-        "def-weil-point-fd-complexes",
-        "def-weil-vector-space-dimension"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
-        "place": "(1.3), p. 274 and (1.10), p. 277 (the H^i(X,F), H^i_c(X,F) are finite-dimensional Q_l-spaces, zero for i > 2 dim X); finite level: Milne, LEC (literature/milne-lectures-on-etale-cohomology_LEC.pdf), Theorem 19.1, p. 123, Proposition 18.3 (c), p. 120, and the l-adic groups p. 124; the reduction to constructibility at the point follows the blueprint ## Proof, Steps 2-4"
-      }
-    },
-    {
-      "text": "*Step 3 (the geometric Frobenius is an automorphism).* By [def-weil-global-geometric-frobenius] the geometric Frobenius on $H^i(Y,K)$ is $F=\\mathrm H^i(\\RGamma(Y,\\theta_K))\\circ\\mathrm H^i(\\tau_M)$ and on $H^i_c(Y,K)$ it is $F=\\mathrm H^i(\\RGammac(Y,\\theta_K))\\circ\\mathrm H^i(\\tau_{c,M})$, with $M=\\operatorname{For}K$ and $\\tau_M$, $\\tau_{c,M}$ the transports of [def-weil-frobenius-cohomology-transport]. The maps $\\mathrm H^i(\\tau_M)$, $\\mathrm H^i(\\tau_{c,M})$ are isomorphisms by [lem-weil-frobenius-cohomology-transport-iso] (3); $\\theta_K$ is an isomorphism (Step 1), so its images under the functors $\\RGamma(Y,-)$, $\\RGammac(Y,-)$ and $\\mathrm H^i$ are isomorphisms. Each factor is $E$-linear, being $\\mathrm H^i$ of a morphism of $D(E)$. So $F$ is an $E$-linear automorphism of the finite-dimensional space $H^i(Y,K)$, resp. $H^i_c(Y,K)$ (Step 2): these groups carry the geometric Frobenius automorphism.",
-      "uses": [
-        "def-weil-global-geometric-frobenius",
-        "def-weil-frobenius-cohomology-transport",
-        "lem-weil-frobenius-cohomology-transport-iso",
-        "def-weil-weil-sheaf-complex"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-        "place": "(1.1.14), p. 153 (F acts on H^i(X,F) and H^i_c 'par transport de structure'); Deligne, Weil I, (1.12), p. 278 (F^*: H^i_c(X,F) -> H^i_c(X,F^*F) -> H^i_c(X,F))"
-      }
-    },
-    {
-      "text": "*Step 4 (the proper case: the comparison is Frobenius-equivariant).* Let $Y_0$ be proper [def-weil-proper-morphism]. Then $a_Y$ is proper, as a base change of $Y_0\\to\\Spec k_0$ [lem-weil-pbc-proper-base-change], and [prop-weil-proper-compact-coincidence] gives the natural isomorphism $\\kappa_N:Ra_{Y!}N\\xrightarrow{\\sim}Ra_{Y*}N$ for $N\\in D^b_c(Y,E)$, hence the canonical isomorphism $h=\\mathrm H^i(\\operatorname{Fib}_s\\kappa_M):H^i_c(Y,K)\\xrightarrow{\\sim}H^i(Y,K)$, $M=\\operatorname{For}K$. With $F_c$, $F$ the operators of Step 3:\n$$F\\circ h=\\mathrm H^i(\\RGamma(Y,\\theta_K))\\circ\\mathrm H^i(\\tau_M)\\circ\\mathrm H^i(\\operatorname{Fib}_s\\kappa_M)\n=\\mathrm H^i(\\RGamma(Y,\\theta_K))\\circ\\mathrm H^i(\\operatorname{Fib}_s\\kappa_{Lg_Y^*M})\\circ\\mathrm H^i(\\tau_{c,M})$$\nby [lem-pod-proper-coincidence-frobenius] (2), and $\\RGamma(Y,\\theta_K)\\circ\\operatorname{Fib}_s(\\kappa_{Lg_Y^*M})=\\operatorname{Fib}_s(Ra_{Y*}\\theta_K\\circ\\kappa_{Lg_Y^*M})=\\operatorname{Fib}_s(\\kappa_M\\circ Ra_{Y!}\\theta_K)=\\operatorname{Fib}_s(\\kappa_M)\\circ\\RGammac(Y,\\theta_K)$ by naturality of $\\kappa$ applied to $\\theta_K:Lg_Y^*M\\to M$. Hence $F\\circ h=h\\circ\\mathrm H^i(\\RGammac(Y,\\theta_K))\\circ\\mathrm H^i(\\tau_{c,M})=h\\circ F_c$: the canonical isomorphism $H^i_c(Y,K)\\xrightarrow{\\sim}H^i(Y,K)$ is Frobenius-equivariant.",
-      "uses": [
-        "def-weil-proper-morphism",
-        "lem-weil-pbc-proper-base-change",
-        "prop-weil-proper-compact-coincidence",
-        "lem-pod-proper-coincidence-frobenius",
-        "def-weil-global-geometric-frobenius"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-        "place": "## Proof, Step 6; Deligne, Weil I (literature/deligne-weil-I_PMIHES-1974-43.pdf), (1.3), p. 274: 'Pour X propre, les deux coincident'"
-      }
-    },
-    {
-      "text": "*Step 5 (constant coefficients, compact support, integral finite level).* Let $K=E_Y$ and assume $\\dim Y\\leq e$ [def-kun-dimension]. By [lem-weil-constant-coefficient-objects-constructible] (2), $\\widehat{\\mathcal O}_{E,Y}$ placed in degree $0$ is an object of $D^b_c(Y,\\mathcal O_E)$ whose reductions are $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong(A_{E,n})_Y$ in degree $0$; for every sheaf $\\mathcal M$ of $A_{E,n}$-modules, $(A_{E,n})_Y\\otimes^L_{A_{E,n}}\\mathcal M=\\mathcal M$ sits in degree $0$, so all reductions have Tor amplitude in $[0,0]$ [def-weil-finite-tor-amplitude]. Apply [lem-coef-integral-compact-support] to $f=a_Y$ (separated of finite type, $\\dim Y\\leq e$) and $\\widehat{\\mathcal O}_{E,Y}$ with Tor interval $[0,0]$: $N:=Ra_{Y!}\\widehat{\\mathcal O}_{E,Y}\\in D^b_c(s,\\mathcal O_E)$ (the integral compact-support functor of [def-weil-integral-rational-qbar-compact-support]), $N\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong Ra_{Y!,n}(A_{E,n})_Y$, and these reductions have Tor amplitude in $[0,2e]$. For $n=1$, $A_{E,1}$ is the residue field of $\\mathcal O_E$; taking $\\mathcal M=(A_{E,1})_s$ in the definition of Tor amplitude gives $\\mathcal H^r(N\\otimes^L_{\\mathcal O_E}A_{E,1})=0$ for $r\\notin[0,2e]$.",
-      "uses": [
-        "def-kun-dimension",
-        "lem-weil-constant-coefficient-objects-constructible",
-        "def-weil-finite-tor-amplitude",
-        "lem-coef-integral-compact-support",
-        "def-weil-integral-rational-qbar-compact-support"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-        "place": "Theorem 15.1, p. 105 (cd(X) <= 2 dim X for a variety over an algebraically closed field) and Proposition 18.3, p. 120, at finite level, here through lem-coef-integral-compact-support; the blueprint ## Proof, Steps 2 and 7 ('For K=E_Y Step 2 gives H^i_c(Y,E)=0 for i>2e')"
-      }
-    },
-    {
-      "text": "*Step 6 (passage to the point and to $\\mathcal O_E$-modules).* Put $C=\\Gamma(s,N)=\\operatorname{Fib}_s(N)\\in D^b_{\\mathrm{fg}}(\\mathcal O_E)$ ([def-weil-finite-coefficient-point] item 2, [def-weil-point-fg-complete-complexes]): $H^r(C)=0$ for all but finitely many $r$ and each $H^r(C)$ is a finitely generated $\\mathcal O_E$-module. By [lem-pod-point-sections-derived-reduction] (with $n=1$), $H^r(C\\otimes^L_{\\mathcal O_E}A_{E,1})\\cong\\Gamma(s,\\mathcal H^r(N\\otimes^L_{\\mathcal O_E}A_{E,1}))$, which is $0$ for $r\\notin[0,2e]$ by Step 5. Since $\\mathcal O_E$ is a discrete valuation ring with uniformizer $\\varpi_E$ and residue field $A_{E,1}$ [def-weil-l-adic-coefficient-extension], [lem-pod-dvr-complex-amplitude-mod-uniformizer] (with $a=0$, $b=2e$) gives $H^r(C)=0$ for $r\\notin[0,2e]$.",
-      "uses": [
-        "def-weil-finite-coefficient-point",
-        "def-weil-point-fg-complete-complexes",
-        "lem-pod-point-sections-derived-reduction",
-        "def-weil-l-adic-coefficient-extension",
-        "lem-pod-dvr-complex-amplitude-mod-uniformizer"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-        "place": "proof of Theorem 19.2, p. 125 (0 -> H^r(M)/l^n -> H^r(M_n) -> H^{r+1}(M)_{l^n} -> 0, and Nakayama), and p. 124 (H^r(X,Z_l)=lim H^r(X,Z/l^n)); the blueprint ## Proof, Step 4"
-      }
-    },
-    {
-      "text": "*Step 7 (rationalization: $H^i_c(Y,E)=0$ for $i<0$ or $i>2e$).* $E_Y$ is the image of $\\widehat{\\mathcal O}_{E,Y}$ in $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-constant-weil-structure], so by [def-weil-integral-rational-qbar-compact-support] $Ra_{Y!}E_Y$ is the object $N$ of Step 5 regarded in $D^b_c(s,E)$, and by [def-weil-finite-coefficient-point] (item 3) $\\RGammac(Y,E_Y)=\\operatorname{Fib}_s(N)=\\Gamma(s,N)\\otimes_{\\mathcal O_E}E=C\\otimes_{\\mathcal O_E}E$ [def-weil-ordinary-compact-cohomology]. $E=\\mathcal O_E[1/\\varpi_E]$ is a localization, hence flat over $\\mathcal O_E$, so $H^r(C\\otimes_{\\mathcal O_E}E)=H^r(C)\\otimes_{\\mathcal O_E}E$, which vanishes for $r\\notin[0,2e]$ by Step 6. Thus $H^i_c(Y,E)=0$ for $i<0$ or $i>2e$.",
-      "uses": [
-        "def-weil-constant-weil-structure",
-        "def-weil-integral-rational-qbar-compact-support",
-        "def-weil-finite-coefficient-point",
-        "def-weil-ordinary-compact-cohomology"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-        "place": "p. 124: H^r(X,Q_l) = H^r(X,Z_l) (x) Q_l; Deligne, Weil I, (1.10), p. 277 (zero for i > 2 dim X)"
-      }
-    },
-    {
-      "text": "*Step 8 (ordinary cohomology of proper $Y$, and the case of $X$).* If $Y$ is proper, [prop-weil-proper-compact-coincidence] gives $H^i(Y,E)\\cong H^i_c(Y,E)$, so $H^i(Y,E)=0$ for $i<0$ or $i>2e$ by Step 7. Now let $X_0$ be smooth, proper, geometrically connected of pure dimension $d$ [def-weil-geometric-hypotheses], $X=X_0\\times_{k_0}k$, and $E=\\Ql$. By [def-weil-geometric-hypotheses] every irreducible component of $X$ has Krull dimension $d$ [def-weil-pure-dimension]; a chain of nonempty irreducible closed subsets of $X$ lies in an irreducible component (its largest member is irreducible, hence contained in a maximal irreducible closed subset), so $\\dim X\\leq d$ [def-kun-dimension]. $X$ is proper by [lem-weil-pbc-proper-base-change]. The case $Y=X$, $e=d$, $E=\\Ql$ of the first sentence gives $H^i(X,\\Ql)=0$ for $i\\notin[0,2d]$. Implementation of the smooth constant-sheaf ordinary range at Qbar_ell: negative degrees vanish because a right derived functor applied to a sheaf in degree zero is nonnegative. For positive degrees use the dimension bound for the smooth geometric fiber and [lem-sf-etale-direct-image-vanishing], transport the resulting finite-coefficient etale bound to pro-etale sheaves by the comparison isomorphism, then apply [lem-pod-adic-unit-direct-image-finite-bound] with b=2d. Forgetting Weil structures commutes with this derived direct image. Its cohomology sheaf is zero, hence so are its global sections. This implements the ordinary smooth clause without invoking the compact-support comparison in that clause; the previous steps still serve the other claims of this proposition.",
-      "uses": [
-        "prop-weil-proper-compact-coincidence",
-        "def-weil-geometric-hypotheses",
-        "def-weil-pure-dimension",
-        "def-kun-dimension",
-        "lem-weil-pbc-proper-base-change",
-        "lem-sf-etale-direct-image-vanishing",
-        "lem-pod-adic-unit-direct-image-finite-bound"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
-        "place": "(1.3), p. 274 ('Pour X propre, les deux coincident ... nuls pour i > 2 dim(X)'); Milne, LEC, Theorem 15.1, p. 105"
-      }
-    },
-    {
-      "text": "*Step 9 (degree zero for geometrically connected $Y_0$).* If $Y_0$ is geometrically connected [def-weil-geometric-hypotheses], then $Y=Y_0\\times_{k_0}k$ is nonempty and connected by [lem-weil-geometrically-connected-algebraic-closure] ($k$ is an algebraic closure of $k_0$ [def-weil-finite-field-fiber]); no properness or smoothness is used. By [lem-pod-connected-constant-h0] (3), $E\\to H^0(Y,E)$, $\\lambda\\mapsto\\lambda\\cdot1_E$, is an isomorphism, so $H^0(Y,E)\\cong E$. By [lem-pod-frobenius-fixes-unit-section], the geometric Frobenius $F$ of the constant Weil sheaf satisfies $F(1_E)=1_E$; $F$ is $E$-linear (Step 3), so $F(\\lambda\\cdot1_E)=\\lambda\\cdot1_E$ for all $\\lambda\\in E$, i.e. $F=\\operatorname{id}$ on $H^0(Y,E)$. For a smooth, separated finite-type, geometrically connected $X_0$ and $E=\\Ql$ this is $H^0(X,\\Ql)\\cong\\Ql$ with $F=\\operatorname{id}$.",
-      "uses": [
-        "def-weil-geometric-hypotheses",
-        "lem-weil-geometrically-connected-algebraic-closure",
-        "def-weil-finite-field-fiber",
-        "lem-pod-connected-constant-h0",
-        "lem-pod-frobenius-fixes-unit-section"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
-        "place": "(1.11)-(1.12), pp. 277-278 (F^* on a sheaf coming from X_0, identity on the constant sheaf's sections); the blueprint ## Proof, Step 7"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "prop-cohomological-finiteness",
+ "blueprint": {
+  "is": "prop-cohomological-finiteness",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Compact-support finiteness and Frobenius",
+ "statement": "Fix the finite-field datum\n$p,a,q,k_0,k$, where $q=p^a$, choose a prime $\\ell\\neq p$, write\n$\\Ql=\\mathbf Q_\\ell$, choose an algebraic closure $\\Qlb$ of $\\Ql$, and\nchoose a finite extension $E/\\Ql$ contained in $\\Qlb$. Let $Y_0$ be a\nseparated finite-type\n$k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, and choose\n$K\\in D^b_{c,\\mathrm W}(Y,E)$, a\nWeil complex. Write $E_Y$ for the constant\nWeil sheaf. Then the\n$E$-coefficient abbreviations mean\n$H^i(Y,E)=H^i(Y,E_Y)$ and $H_c^i(Y,E)=H_c^i(Y,E_Y)$. The\nordinary and compact-support\ncohomology groups, in particular $H_c^i(Y,K)$ meaning\n$H_c^i(Y,\\operatorname{For}K)$, are finite-dimensional, vanish outside a\nfinite interval, and carry the\ngeometric Frobenius\nautomorphism. If $Y_0$ is\nproper, the\ncanonical isomorphism\n\n$$\nH_c^i(Y,K)\\xrightarrow{\\sim}H^i(Y,K)\n$$\n\nis Frobenius-equivariant.\nIf $Y$ has dimension $e\\in\\mathbf Z_{\\geq0}$ and $K=E_Y$ is the\nconstant Weil sheaf, then\n\n$$\nH_c^i(Y,E)=0\\qquad\\text{for }i<0\\text{ or }i>2e.\n$$\n\nFor proper $Y$, the\nordinary cohomology also\nsatisfies $H^i(Y,E)=0$ for $i<0$ or $i>2e$. In\nparticular, if $X_0/\\Fq$ is smooth,\nproper, geometrically connected of pure dimension\n$d\\in\\mathbf Z_{\\geq0}$, and $X=X_0\\times_{\\Fq}k$, then\n\n$$\nH^i(X,\\Ql)=0\\qquad\\text{for }i\\notin[0,2d].\n$$\n\nMoreover, if $Y_0$ is geometrically connected (neither properness nor\nsmoothness is needed), then $H^0(Y,E)\\cong E$, and the\ngeometric Frobenius acts as the\nidentity on this group; in particular $H^0(X,\\Ql)\\cong\\Ql$ with\n$F=\\mathrm{id}$ for every smooth, separated finite-type, geometrically\nconnected $X_0$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+  "place": "node prop-cohomological-finiteness, order 2431"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constant-weil-structure",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-vector-space-dimension",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-proper-morphism",
+  "prop-weil-proper-compact-coincidence",
+  "def-kun-dimension",
+  "def-weil-geometric-hypotheses"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1 (the setting).* $Y_0\\to\\Spec k_0$ is separated and of finite type, so by [lem-pod-separated-finite-type-base-change] its base change $a_Y:Y=Y_0\\times_{k_0}k\\to s=\\Spec k$ is separated and of finite type [def-weil-scheme-morphism-properties]; this is the setting of [def-weil-ordinary-compact-cohomology], [def-weil-frobenius-cohomology-transport] and [def-weil-global-geometric-frobenius]. For a Weil complex $K=(\\operatorname{For}K,\\theta_K)\\in D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex], $\\operatorname{For}K\\in D^b_c(Y,E)$ and $\\theta_K:Lg_Y^*\\operatorname{For}K\\to\\operatorname{For}K$ is an isomorphism, and $H^i(Y,K)$, $H^i_c(Y,K)$ mean $H^i(Y,\\operatorname{For}K)$, $H^i_c(Y,\\operatorname{For}K)$ [def-weil-ordinary-compact-cohomology]. The constant Weil sheaf is $(E_Y,\\theta_E)$ with its canonical Weil structure [def-weil-constant-weil-structure], and $\\operatorname{For}(E_Y,\\theta_E)=E_Y$, so $H^i(Y,E)=H^i(Y,E_Y)$ and $H^i_c(Y,E)=H^i_c(Y,E_Y)$ are the case $K=E_Y$ of what follows.",
+   "uses": [
     "lem-pod-separated-finite-type-base-change",
     "def-weil-scheme-morphism-properties",
     "def-weil-ordinary-compact-cohomology",
     "def-weil-weil-sheaf-complex",
-    "def-weil-constant-weil-structure",
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+    "place": "## Proof, Step 1 (setting: a_Y separated of finite type over k); Deligne, Weil I, (1.3)-(1.4), p. 274 (X_0 a variety over F_q and X its extension of scalars)"
+   }
+  },
+  {
+   "text": "*Step 2 (finite-dimensionality and boundedness).* Let $M=\\operatorname{For}K\\in D^b_c(Y,E)$. By [lem-weil-structure-direct-images-constructible] (with $\\Lambda=E$), $Ra_{Y*}M$ and $Ra_{Y!}M$ lie in $D^b_c(s,E)$, the domain of the point fibre functor $\\operatorname{Fib}_s:D^b_c(s,E)\\to D^b_{\\mathrm{fd}}(E)$ of [def-weil-finite-coefficient-point] (item 3). Hence $\\RGamma(Y,M)=\\operatorname{Fib}_s(Ra_{Y*}M)$ and $\\RGammac(Y,M)=\\operatorname{Fib}_s(Ra_{Y!}M)$ [def-weil-ordinary-compact-cohomology] are objects of $D^b_{\\mathrm{fd}}(E)$, which by [def-weil-point-fd-complexes] means: every $H^i(Y,M)=\\mathrm H^i(\\RGamma(Y,M))$ and every $H^i_c(Y,M)$ is a finite-dimensional $E$-vector space [def-weil-vector-space-dimension], and only finitely many of them are nonzero, so they vanish outside the finite interval $[i_-,i_+]$ spanned by the finitely many degrees in which they are nonzero (any interval if there are none). This is the asserted finite-dimensionality and vanishing outside a finite interval, for ordinary and for compact-support cohomology.",
+   "uses": [
     "lem-weil-structure-direct-images-constructible",
     "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology",
     "def-weil-point-fd-complexes",
-    "def-weil-vector-space-dimension",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "(1.3), p. 274 and (1.10), p. 277 (the H^i(X,F), H^i_c(X,F) are finite-dimensional Q_l-spaces, zero for i > 2 dim X); finite level: Milne, LEC (literature/milne-lectures-on-etale-cohomology_LEC.pdf), Theorem 19.1, p. 123, Proposition 18.3 (c), p. 120, and the l-adic groups p. 124; the reduction to constructibility at the point follows the blueprint ## Proof, Steps 2-4"
+   }
+  },
+  {
+   "text": "*Step 3 (the geometric Frobenius is an automorphism).* By [def-weil-global-geometric-frobenius] the geometric Frobenius on $H^i(Y,K)$ is $F=\\mathrm H^i(\\RGamma(Y,\\theta_K))\\circ\\mathrm H^i(\\tau_M)$ and on $H^i_c(Y,K)$ it is $F=\\mathrm H^i(\\RGammac(Y,\\theta_K))\\circ\\mathrm H^i(\\tau_{c,M})$, with $M=\\operatorname{For}K$ and $\\tau_M$, $\\tau_{c,M}$ the transports of [def-weil-frobenius-cohomology-transport]. The maps $\\mathrm H^i(\\tau_M)$, $\\mathrm H^i(\\tau_{c,M})$ are isomorphisms by [lem-weil-frobenius-cohomology-transport-iso] (3); $\\theta_K$ is an isomorphism (Step 1), so its images under the functors $\\RGamma(Y,-)$, $\\RGammac(Y,-)$ and $\\mathrm H^i$ are isomorphisms. Each factor is $E$-linear, being $\\mathrm H^i$ of a morphism of $D(E)$. So $F$ is an $E$-linear automorphism of the finite-dimensional space $H^i(Y,K)$, resp. $H^i_c(Y,K)$ (Step 2): these groups carry the geometric Frobenius automorphism.",
+   "uses": [
     "def-weil-global-geometric-frobenius",
     "def-weil-frobenius-cohomology-transport",
     "lem-weil-frobenius-cohomology-transport-iso",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.14), p. 153 (F acts on H^i(X,F) and H^i_c 'par transport de structure'); Deligne, Weil I, (1.12), p. 278 (F^*: H^i_c(X,F) -> H^i_c(X,F^*F) -> H^i_c(X,F))"
+   }
+  },
+  {
+   "text": "*Step 4 (the proper case: the comparison is Frobenius-equivariant).* Let $Y_0$ be proper [def-weil-proper-morphism]. Then $a_Y$ is proper, as a base change of $Y_0\\to\\Spec k_0$ [lem-weil-pbc-proper-base-change], and [prop-weil-proper-compact-coincidence] gives the natural isomorphism $\\kappa_N:Ra_{Y!}N\\xrightarrow{\\sim}Ra_{Y*}N$ for $N\\in D^b_c(Y,E)$, hence the canonical isomorphism $h=\\mathrm H^i(\\operatorname{Fib}_s\\kappa_M):H^i_c(Y,K)\\xrightarrow{\\sim}H^i(Y,K)$, $M=\\operatorname{For}K$. With $F_c$, $F$ the operators of Step 3:\n$$F\\circ h=\\mathrm H^i(\\RGamma(Y,\\theta_K))\\circ\\mathrm H^i(\\tau_M)\\circ\\mathrm H^i(\\operatorname{Fib}_s\\kappa_M)\n=\\mathrm H^i(\\RGamma(Y,\\theta_K))\\circ\\mathrm H^i(\\operatorname{Fib}_s\\kappa_{Lg_Y^*M})\\circ\\mathrm H^i(\\tau_{c,M})$$\nby [lem-pod-proper-coincidence-frobenius] (2), and $\\RGamma(Y,\\theta_K)\\circ\\operatorname{Fib}_s(\\kappa_{Lg_Y^*M})=\\operatorname{Fib}_s(Ra_{Y*}\\theta_K\\circ\\kappa_{Lg_Y^*M})=\\operatorname{Fib}_s(\\kappa_M\\circ Ra_{Y!}\\theta_K)=\\operatorname{Fib}_s(\\kappa_M)\\circ\\RGammac(Y,\\theta_K)$ by naturality of $\\kappa$ applied to $\\theta_K:Lg_Y^*M\\to M$. Hence $F\\circ h=h\\circ\\mathrm H^i(\\RGammac(Y,\\theta_K))\\circ\\mathrm H^i(\\tau_{c,M})=h\\circ F_c$: the canonical isomorphism $H^i_c(Y,K)\\xrightarrow{\\sim}H^i(Y,K)$ is Frobenius-equivariant.",
+   "uses": [
     "def-weil-proper-morphism",
     "lem-weil-pbc-proper-base-change",
     "prop-weil-proper-compact-coincidence",
     "lem-pod-proper-coincidence-frobenius",
+    "def-weil-global-geometric-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+    "place": "## Proof, Step 6; Deligne, Weil I (literature/deligne-weil-I_PMIHES-1974-43.pdf), (1.3), p. 274: 'Pour X propre, les deux coincident'"
+   }
+  },
+  {
+   "text": "*Step 5 (constant coefficients, compact support, integral finite level).* Let $K=E_Y$ and assume $\\dim Y\\leq e$ [def-kun-dimension]. By [lem-weil-constant-coefficient-objects-constructible] (2), $\\widehat{\\mathcal O}_{E,Y}$ placed in degree $0$ is an object of $D^b_c(Y,\\mathcal O_E)$ whose reductions are $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong(A_{E,n})_Y$ in degree $0$; for every sheaf $\\mathcal M$ of $A_{E,n}$-modules, $(A_{E,n})_Y\\otimes^L_{A_{E,n}}\\mathcal M=\\mathcal M$ sits in degree $0$, so all reductions have Tor amplitude in $[0,0]$ [def-weil-finite-tor-amplitude]. Apply [lem-coef-integral-compact-support] to $f=a_Y$ (separated of finite type, $\\dim Y\\leq e$) and $\\widehat{\\mathcal O}_{E,Y}$ with Tor interval $[0,0]$: $N:=Ra_{Y!}\\widehat{\\mathcal O}_{E,Y}\\in D^b_c(s,\\mathcal O_E)$ (the integral compact-support functor of [def-weil-integral-rational-qbar-compact-support]), $N\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong Ra_{Y!,n}(A_{E,n})_Y$, and these reductions have Tor amplitude in $[0,2e]$. For $n=1$, $A_{E,1}$ is the residue field of $\\mathcal O_E$; taking $\\mathcal M=(A_{E,1})_s$ in the definition of Tor amplitude gives $\\mathcal H^r(N\\otimes^L_{\\mathcal O_E}A_{E,1})=0$ for $r\\notin[0,2e]$.",
+   "uses": [
     "def-kun-dimension",
     "lem-weil-constant-coefficient-objects-constructible",
     "def-weil-finite-tor-amplitude",
     "lem-coef-integral-compact-support",
-    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Theorem 15.1, p. 105 (cd(X) <= 2 dim X for a variety over an algebraically closed field) and Proposition 18.3, p. 120, at finite level, here through lem-coef-integral-compact-support; the blueprint ## Proof, Steps 2 and 7 ('For K=E_Y Step 2 gives H^i_c(Y,E)=0 for i>2e')"
+   }
+  },
+  {
+   "text": "*Step 6 (passage to the point and to $\\mathcal O_E$-modules).* Put $C=\\Gamma(s,N)=\\operatorname{Fib}_s(N)\\in D^b_{\\mathrm{fg}}(\\mathcal O_E)$ ([def-weil-finite-coefficient-point] item 2, [def-weil-point-fg-complete-complexes]): $H^r(C)=0$ for all but finitely many $r$ and each $H^r(C)$ is a finitely generated $\\mathcal O_E$-module. By [lem-pod-point-sections-derived-reduction] (with $n=1$), $H^r(C\\otimes^L_{\\mathcal O_E}A_{E,1})\\cong\\Gamma(s,\\mathcal H^r(N\\otimes^L_{\\mathcal O_E}A_{E,1}))$, which is $0$ for $r\\notin[0,2e]$ by Step 5. Since $\\mathcal O_E$ is a discrete valuation ring with uniformizer $\\varpi_E$ and residue field $A_{E,1}$ [def-weil-l-adic-coefficient-extension], [lem-pod-dvr-complex-amplitude-mod-uniformizer] (with $a=0$, $b=2e$) gives $H^r(C)=0$ for $r\\notin[0,2e]$.",
+   "uses": [
+    "def-weil-finite-coefficient-point",
     "def-weil-point-fg-complete-complexes",
     "lem-pod-point-sections-derived-reduction",
     "def-weil-l-adic-coefficient-extension",
-    "lem-pod-dvr-complex-amplitude-mod-uniformizer",
+    "lem-pod-dvr-complex-amplitude-mod-uniformizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "proof of Theorem 19.2, p. 125 (0 -> H^r(M)/l^n -> H^r(M_n) -> H^{r+1}(M)_{l^n} -> 0, and Nakayama), and p. 124 (H^r(X,Z_l)=lim H^r(X,Z/l^n)); the blueprint ## Proof, Step 4"
+   }
+  },
+  {
+   "text": "*Step 7 (rationalization: $H^i_c(Y,E)=0$ for $i<0$ or $i>2e$).* $E_Y$ is the image of $\\widehat{\\mathcal O}_{E,Y}$ in $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-constant-weil-structure], so by [def-weil-integral-rational-qbar-compact-support] $Ra_{Y!}E_Y$ is the object $N$ of Step 5 regarded in $D^b_c(s,E)$, and by [def-weil-finite-coefficient-point] (item 3) $\\RGammac(Y,E_Y)=\\operatorname{Fib}_s(N)=\\Gamma(s,N)\\otimes_{\\mathcal O_E}E=C\\otimes_{\\mathcal O_E}E$ [def-weil-ordinary-compact-cohomology]. $E=\\mathcal O_E[1/\\varpi_E]$ is a localization, hence flat over $\\mathcal O_E$, so $H^r(C\\otimes_{\\mathcal O_E}E)=H^r(C)\\otimes_{\\mathcal O_E}E$, which vanishes for $r\\notin[0,2e]$ by Step 6. Thus $H^i_c(Y,E)=0$ for $i<0$ or $i>2e$.",
+   "uses": [
+    "def-weil-constant-weil-structure",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-finite-coefficient-point",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "p. 124: H^r(X,Q_l) = H^r(X,Z_l) (x) Q_l; Deligne, Weil I, (1.10), p. 277 (zero for i > 2 dim X)"
+   }
+  },
+  {
+   "text": "*Step 8 (ordinary cohomology of proper $Y$, and the case of $X$).* If $Y$ is proper, [prop-weil-proper-compact-coincidence] gives $H^i(Y,E)\\cong H^i_c(Y,E)$, so $H^i(Y,E)=0$ for $i<0$ or $i>2e$ by Step 7. Now let $X_0$ be smooth, proper, geometrically connected of pure dimension $d$ [def-weil-geometric-hypotheses], $X=X_0\\times_{k_0}k$, and $E=\\Ql$. By [def-weil-geometric-hypotheses] every irreducible component of $X$ has Krull dimension $d$ [def-weil-pure-dimension]; a chain of nonempty irreducible closed subsets of $X$ lies in an irreducible component (its largest member is irreducible, hence contained in a maximal irreducible closed subset), so $\\dim X\\leq d$ [def-kun-dimension]. $X$ is proper by [lem-weil-pbc-proper-base-change]. The case $Y=X$, $e=d$, $E=\\Ql$ of the first sentence gives $H^i(X,\\Ql)=0$ for $i\\notin[0,2d]$. Implementation of the smooth constant-sheaf ordinary range at Qbar_ell: negative degrees vanish because a right derived functor applied to a sheaf in degree zero is nonnegative. For positive degrees use the dimension bound for the smooth geometric fiber and [lem-sf-etale-direct-image-vanishing], transport the resulting finite-coefficient etale bound to pro-etale sheaves by the comparison isomorphism, then apply [lem-pod-adic-unit-direct-image-finite-bound] with b=2d. Forgetting Weil structures commutes with this derived direct image. Its cohomology sheaf is zero, hence so are its global sections. This implements the ordinary smooth clause without invoking the compact-support comparison in that clause; the previous steps still serve the other claims of this proposition.",
+   "uses": [
+    "prop-weil-proper-compact-coincidence",
     "def-weil-geometric-hypotheses",
     "def-weil-pure-dimension",
+    "def-kun-dimension",
+    "lem-weil-pbc-proper-base-change",
     "lem-sf-etale-direct-image-vanishing",
-    "lem-pod-adic-unit-direct-image-finite-bound",
+    "lem-pod-adic-unit-direct-image-finite-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "(1.3), p. 274 ('Pour X propre, les deux coincident ... nuls pour i > 2 dim(X)'); Milne, LEC, Theorem 15.1, p. 105"
+   }
+  },
+  {
+   "text": "*Step 9 (degree zero for geometrically connected $Y_0$).* If $Y_0$ is geometrically connected [def-weil-geometric-hypotheses], then $Y=Y_0\\times_{k_0}k$ is nonempty and connected by [lem-weil-geometrically-connected-algebraic-closure] ($k$ is an algebraic closure of $k_0$ [def-weil-finite-field-fiber]); no properness or smoothness is used. By [lem-pod-connected-constant-h0] (3), $E\\to H^0(Y,E)$, $\\lambda\\mapsto\\lambda\\cdot1_E$, is an isomorphism, so $H^0(Y,E)\\cong E$. By [lem-pod-frobenius-fixes-unit-section], the geometric Frobenius $F$ of the constant Weil sheaf satisfies $F(1_E)=1_E$; $F$ is $E$-linear (Step 3), so $F(\\lambda\\cdot1_E)=\\lambda\\cdot1_E$ for all $\\lambda\\in E$, i.e. $F=\\operatorname{id}$ on $H^0(Y,E)$. For a smooth, separated finite-type, geometrically connected $X_0$ and $E=\\Ql$ this is $H^0(X,\\Ql)\\cong\\Ql$ with $F=\\operatorname{id}$.",
+   "uses": [
+    "def-weil-geometric-hypotheses",
     "lem-weil-geometrically-connected-algebraic-closure",
     "def-weil-finite-field-fiber",
     "lem-pod-connected-constant-h0",
     "lem-pod-frobenius-fixes-unit-section"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-    "place": "Original proof, with Step 8 ordinary smooth Qbar_ell implementation by F3, 2026-10-16"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -rli -E 'etale cohomology|étale cohomology|proetale|ProEt|compactly supported|Frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-      "results": "AlgebraicGeometry/Sites/Proetale.lean (pro-etale site) and AlgebraicGeometry/Sites/ElladicCohomology.lean (Scheme.EllAdicCohomology, H^i(X_proet,Z_l) as a definition only): no finiteness, no compact supports, no vanishing range, no Frobenius",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2431,
-  "blueprint_uses": [
-    "cor-galois-lisse-representations",
-    "cor-weil-pbc-geometric-fiber-finite",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-finite-coefficient-point",
-    "def-weil-finite-field-fiber",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-geometric-hypotheses",
-    "def-weil-global-geometric-frobenius",
-    "def-weil-ordinary-compact-cohomology",
-    "def-weil-pbc-proetale-site",
-    "def-weil-rationalization-karoubi",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-weil-sheaf-complex",
-    "fin4-lem-fibrewise-cohomological-dimension",
-    "prop-finite-compact-support-constructibility",
-    "sbc-thm-finiteness-finite-type",
-    "thm-galois-fundamental"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "prop-cohomological-finiteness",
-    "worker": "stage1",
-    "summary": "Statement kept (master blueprint, order 2431; the slopmaster2 version prop:cohomological-finiteness has no proof and no H^0 clause). stmt_deps were empty; added the twelve notions the statement uses. The imported 7-step proof went through the finite-level towers (Steps 1-4) and cited nodes it did not need (pbc-proetale-site, rationalization, finite-torsion constructibility, sbc-thm-finiteness-finite-type, cor-weil-pbc-geometric-fiber-finite, fin4-lem-fibrewise-cohomological-dimension, thm-galois-fundamental, cor-galois-lisse-representations); rewritten in 9 steps. Finiteness and boundedness now come directly from lem-weil-structure-direct-images-constructible and Fib_s: D^b_c(s,E) -> D^b_fd(E) (the same lemma def-weil-ordinary-compact-cohomology uses, so no cycle); the Frobenius is an automorphism by lem-weil-frobenius-cohomology-transport-iso; the proper comparison by prop-weil-proper-compact-coincidence plus the new lem-pod-proper-coincidence-frobenius (the hidden 'both operators are those of Step 5'); the range [0,2e] for H^i_c(Y,E) from lem-coef-integral-compact-support (Tor interval [0,2e] of the reductions), the new lem-pod-point-sections-derived-reduction and the new derived-Nakayama lemma lem-pod-dvr-complex-amplitude-mod-uniformizer, then flatness of E; H^0 from the new lem-pod-connected-constant-h0 and lem-pod-frobenius-fixes-unit-section (replacing the fundamental-group argument, which is stated for finite rings only). Base change of separated finite type became the Mathlib leaf lem-pod-separated-finite-type-base-change."
-  },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass"
-  },
-  "chapter": "sec-poincare-duality",
-  "unit": "sk-lem-finite",
-  "tool_uses": [
-    "prop-weil-proper-compact-coincidence",
-    "lem-pod-point-sections-derived-reduction",
-    "lem-pod-proper-coincidence-frobenius"
-  ],
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "F3",
-    "result": "pass",
-    "landing": "20261015T194213-L-1175013",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "lean": {
-    "branch": "master",
-    "existing": true,
-    "module": "WeilConjectures.WeilSheaf.Finiteness",
-    "declaration": "AlgebraicGeometry.WeilComplex.exists_subsingleton_compactlySupportedCohomology",
-    "declarations": [
-      "AlgebraicGeometry.WeilComplex.exists_subsingleton_compactlySupportedCohomology",
-      "AlgebraicGeometry.WeilComplex.exists_subsingleton_cohomology",
-      "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_adicConstant",
-      "AlgebraicGeometry.WeilSheaf.finrank_cohomology_zero_adicConstant",
-      "AlgebraicGeometry.WeilSheaf.frobenius_cohomology_zero_adicConstant",
-      "AlgebraicGeometry.WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology",
-      "AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant_of_isProper",
-      "AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_zero_adicConstant",
-      "AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_cohomology"
-    ],
-    "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.WeilSheaf.Finiteness: the blueprint item prop-cohomological-finiteness's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-I_PMIHES-1974-43.pdf",
+    "place": "(1.11)-(1.12), pp. 277-278 (F^* on a sheaf coming from X_0, identity on the constant sheaf's sections); the blueprint ## Proof, Step 7"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constant-weil-structure",
+  "lem-weil-structure-direct-images-constructible",
+  "def-weil-finite-coefficient-point",
+  "def-weil-point-fd-complexes",
+  "def-weil-vector-space-dimension",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-frobenius-cohomology-transport",
+  "lem-weil-frobenius-cohomology-transport-iso",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-base-change",
+  "prop-weil-proper-compact-coincidence",
+  "lem-pod-proper-coincidence-frobenius",
+  "def-kun-dimension",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-finite-tor-amplitude",
+  "lem-coef-integral-compact-support",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-point-fg-complete-complexes",
+  "lem-pod-point-sections-derived-reduction",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pod-dvr-complex-amplitude-mod-uniformizer",
+  "def-weil-geometric-hypotheses",
+  "def-weil-pure-dimension",
+  "lem-sf-etale-direct-image-vanishing",
+  "lem-pod-adic-unit-direct-image-finite-bound",
+  "lem-weil-geometrically-connected-algebraic-closure",
+  "def-weil-finite-field-fiber",
+  "lem-pod-connected-constant-h0",
+  "lem-pod-frobenius-fixes-unit-section"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+  "place": "Original proof, with Step 8 ordinary smooth Qbar_ell implementation by F3, 2026-10-16"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli -E 'etale cohomology|étale cohomology|proetale|ProEt|compactly supported|Frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "AlgebraicGeometry/Sites/Proetale.lean (pro-etale site) and AlgebraicGeometry/Sites/ElladicCohomology.lean (Scheme.EllAdicCohomology, H^i(X_proet,Z_l) as a definition only): no finiteness, no compact supports, no vanishing range, no Frobenius",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2431,
+ "blueprint_uses": [
+  "cor-galois-lisse-representations",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-field-fiber",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-geometric-hypotheses",
+  "def-weil-global-geometric-frobenius",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-pbc-proetale-site",
+  "def-weil-rationalization-karoubi",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-weil-sheaf-complex",
+  "fin4-lem-fibrewise-cohomological-dimension",
+  "prop-finite-compact-support-constructibility",
+  "sbc-thm-finiteness-finite-type",
+  "thm-galois-fundamental"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "prop-cohomological-finiteness",
+  "worker": "stage1",
+  "summary": "Statement kept (master blueprint, order 2431; the slopmaster2 version prop:cohomological-finiteness has no proof and no H^0 clause). stmt_deps were empty; added the twelve notions the statement uses. The imported 7-step proof went through the finite-level towers (Steps 1-4) and cited nodes it did not need (pbc-proetale-site, rationalization, finite-torsion constructibility, sbc-thm-finiteness-finite-type, cor-weil-pbc-geometric-fiber-finite, fin4-lem-fibrewise-cohomological-dimension, thm-galois-fundamental, cor-galois-lisse-representations); rewritten in 9 steps. Finiteness and boundedness now come directly from lem-weil-structure-direct-images-constructible and Fib_s: D^b_c(s,E) -> D^b_fd(E) (the same lemma def-weil-ordinary-compact-cohomology uses, so no cycle); the Frobenius is an automorphism by lem-weil-frobenius-cohomology-transport-iso; the proper comparison by prop-weil-proper-compact-coincidence plus the new lem-pod-proper-coincidence-frobenius (the hidden 'both operators are those of Step 5'); the range [0,2e] for H^i_c(Y,E) from lem-coef-integral-compact-support (Tor interval [0,2e] of the reductions), the new lem-pod-point-sections-derived-reduction and the new derived-Nakayama lemma lem-pod-dvr-complex-amplitude-mod-uniformizer, then flatness of E; H^0 from the new lem-pod-connected-constant-h0 and lem-pod-frobenius-fixes-unit-section (replacing the fundamental-group argument, which is stated for finite rings only). Base change of separated finite type became the Mathlib leaf lem-pod-separated-finite-type-base-change."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "tool_uses": [
+  "prop-weil-proper-compact-coincidence",
+  "lem-pod-point-sections-derived-reduction",
+  "lem-pod-proper-coincidence-frobenius"
+ ],
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261015T194213-L-1175013",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean": {
+  "branch": "master",
+  "existing": true,
+  "module": "WeilConjectures.WeilSheaf.Finiteness",
+  "declaration": "AlgebraicGeometry.WeilComplex.exists_subsingleton_compactlySupportedCohomology",
+  "declarations": [
+   "AlgebraicGeometry.WeilComplex.exists_subsingleton_compactlySupportedCohomology",
+   "AlgebraicGeometry.WeilComplex.exists_subsingleton_cohomology",
+   "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_adicConstant",
+   "AlgebraicGeometry.WeilSheaf.finrank_cohomology_zero_adicConstant",
+   "AlgebraicGeometry.WeilSheaf.frobenius_cohomology_zero_adicConstant",
+   "AlgebraicGeometry.WeilComplex.nonempty_equiv_compactlySupportedCohomology_cohomology",
+   "AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant_of_isProper",
+   "AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_zero_adicConstant",
+   "AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_cohomology"
+  ],
+  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.WeilSheaf.Finiteness: the blueprint item prop-cohomological-finiteness's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ }
 }

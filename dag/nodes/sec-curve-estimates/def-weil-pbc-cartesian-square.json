@@ -1,118 +1,73 @@
 {
-  "id": "def-weil-pbc-cartesian-square",
-  "blueprint": {
-    "is": "def-weil-pbc-cartesian-square",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "definition",
-  "title": "Cartesian square and chosen pullback identification",
-  "statement": "A *cartesian square* $\\square=(f,f',g,g',\\alpha)$ is a diagram\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nof scheme morphisms [def-weil-pbc-scheme-conventions] together with a chosen\nidentification $\\alpha:X'\\xrightarrow{\\sim}X\\times_YY'$ and the corresponding\nequality $fg'=gf'$. This choice gives a specified natural isomorphism\n\n$$\n \\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}\n$$\n\nof inverse image [def-weil-pbc-inverse-image] functors, compatible with\nidentities and pasted squares.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/def-weil-pbc-cartesian-square.md",
-    "place": "node def-weil-pbc-cartesian-square, order 994"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-inverse-image"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 994,
-  "blueprint_uses": [
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.ChosenCartesianSquare",
-    "declaration": "AlgebraicGeometry.ChosenCartesianSquare",
-    "file": "lean/Sheaf/AlgebraicGeometry/ChosenCartesianSquare.lean",
-    "statement": "structure ChosenCartesianSquare {X' X Y' Y : Scheme.{u}} (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y) extends CommSq g' f' f g",
-    "branch": "newtargets-dag",
-    "by": "NA",
-    "date": "2026-10-15",
-    "existing": false,
-    "note": "The former record squareUpperStarIso takes only CommSq and does not supply Cartesian data or the chosen identification. This module supplies the scheme square with its chosen fibre-product isomorphism and projection equations, extends CommSq, and reuses squareUpperStarIso for the canonical coherent inverse-image comparison; no inverse-image functor or comparison is redefined."
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.Etale.squareUpperStarIso"
-  ],
-  "blueprint_sketch": [
-    {
-      "statement": "For schemes and morphisms\n\n$$\n\\begin{CD}\nX' @>{g'}>> X\\\\\n@V{f'}VV       @VV{f}V\\\\\nY' @>{g}>> Y,\n\\end{CD}\n$$\n\nwe write $\\square=(f,f',g,g',\\alpha)$ when\n$\\alpha:X'\\xrightarrow{\\sim}X\\times_Y Y'$ is a specified isomorphism and\n$f\\circ g'=g\\circ f'$ as maps to $Y$. The notation\n$g'^{-1}F$ always means inverse image using this specified identification.",
-      "proof": "",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Etale.squareUpperStarIso"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.squareUpperStarIso",
-          "module": "WeilConjectures.SixFunctors.BaseChange.Square",
-          "lines": [
-            74,
-            79
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.squareUpperStarIso_paste_horiz_hom",
-          "module": "WeilConjectures.SixFunctors.BaseChange.Pasting",
-          "lines": [
-            154,
-            173
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.squareUpperStarIso_paste_vert_hom",
-          "module": "WeilConjectures.SixFunctors.BaseChange.Pasting",
-          "lines": [
-            240,
-            260
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-7a2521c46",
-    "group": "NA",
-    "result": "pass",
-    "note": "Statements, dependencies, orientation, edge cases, docstrings, searches, and server-only compilation all checked; no findings."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Consider a commutative square of scheme morphisms\n[def-weil-pbc-scheme-conventions]\n\n$$\n\\begin{CD}\nX' @>{g'}>> X\\\\\n@V{f'}VV       @VV{f}V\\\\\nY' @>{g}>> Y,\n\\end{CD}\n$$\n\nthat is, $f\\circ g'=g\\circ f'$ as maps to $Y$, and let $\\mathcal A$ be a\nGrothendieck abelian coefficient category for which presheaves on small\netale sites can be sheafified. The *square isomorphism* of the square is\nthe natural isomorphism\n\n$$\n \\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}\n$$\n\nof inverse image [def-weil-pbc-inverse-image] functors from\n$\\mathcal A$-valued etale sheaves on $Y$ to $\\mathcal A$-valued etale\nsheaves on $X'$, obtained by identifying both sides with the inverse image\nalong the common composite $fg'=gf':X'\\to Y$ through the composition\nisomorphisms of inverse images.\n\nA *cartesian square* $\\square=(f,f',g,g',\\alpha)$ is such a commutative\nsquare together with a chosen identification\n$\\alpha:X'\\xrightarrow{\\sim}X\\times_YY'$ compatible with the maps; the\nnotation $g'^{-1}F$ always means inverse image using this specified\nidentification.\n\nThe square isomorphisms are compatible with identities and with pasting:\nfor two commutative squares pasted horizontally (or vertically), the\nsquare isomorphism of the composite square is the composite of the two\nsquare isomorphisms, modulo the composition isomorphisms of inverse\nimages along the horizontal (respectively vertical) maps.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "def-weil-pbc-cartesian-square",
+ "blueprint": {
+  "is": "def-weil-pbc-cartesian-square",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Cartesian square and chosen pullback identification",
+ "statement": "A *cartesian square* $\\square=(f,f',g,g',\\alpha)$ is a diagram\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nof scheme morphisms [def-weil-pbc-scheme-conventions] together with a chosen\nidentification $\\alpha:X'\\xrightarrow{\\sim}X\\times_YY'$ and the corresponding\nequality $fg'=gf'$. This choice gives a specified natural isomorphism\n\n$$\n \\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}\n$$\n\nof inverse image [def-weil-pbc-inverse-image] functors, compatible with\nidentities and pasted squares.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/def-weil-pbc-cartesian-square.md",
+  "place": "node def-weil-pbc-cartesian-square, order 994"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 994,
+ "blueprint_uses": [
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ChosenCartesianSquare",
+  "declaration": "AlgebraicGeometry.ChosenCartesianSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/ChosenCartesianSquare.lean",
+  "statement": "structure ChosenCartesianSquare {X' X Y' Y : Scheme.{u}} (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y) extends CommSq g' f' f g",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The former record squareUpperStarIso takes only CommSq and does not supply Cartesian data or the chosen identification. This module supplies the scheme square with its chosen fibre-product isomorphism and projection equations, extends CommSq, and reuses squareUpperStarIso for the canonical coherent inverse-image comparison; no inverse-image functor or comparison is redefined."
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.squareUpperStarIso"
+ ],
+ "blueprint_sketch": [
+  {
+   "statement": "For schemes and morphisms\n\n$$\n\\begin{CD}\nX' @>{g'}>> X\\\\\n@V{f'}VV       @VV{f}V\\\\\nY' @>{g}>> Y,\n\\end{CD}\n$$\n\nwe write $\\square=(f,f',g,g',\\alpha)$ when\n$\\alpha:X'\\xrightarrow{\\sim}X\\times_Y Y'$ is a specified isomorphism and\n$f\\circ g'=g\\circ f'$ as maps to $Y$. The notation\n$g'^{-1}F$ always means inverse image using this specified identification.",
+   "proof": "",
+   "cites": []
   }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7a2521c46",
+  "group": "NA",
+  "result": "pass",
+  "note": "Statements, dependencies, orientation, edge cases, docstrings, searches, and server-only compilation all checked; no findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Consider a commutative square of scheme morphisms\n[def-weil-pbc-scheme-conventions]\n\n$$\n\\begin{CD}\nX' @>{g'}>> X\\\\\n@V{f'}VV       @VV{f}V\\\\\nY' @>{g}>> Y,\n\\end{CD}\n$$\n\nthat is, $f\\circ g'=g\\circ f'$ as maps to $Y$, and let $\\mathcal A$ be a\nGrothendieck abelian coefficient category for which presheaves on small\netale sites can be sheafified. The *square isomorphism* of the square is\nthe natural isomorphism\n\n$$\n \\theta_\\square:f'^{-1}g^{-1}\\xrightarrow{\\sim}g'^{-1}f^{-1}\n$$\n\nof inverse image [def-weil-pbc-inverse-image] functors from\n$\\mathcal A$-valued etale sheaves on $Y$ to $\\mathcal A$-valued etale\nsheaves on $X'$, obtained by identifying both sides with the inverse image\nalong the common composite $fg'=gf':X'\\to Y$ through the composition\nisomorphisms of inverse images.\n\nA *cartesian square* $\\square=(f,f',g,g',\\alpha)$ is such a commutative\nsquare together with a chosen identification\n$\\alpha:X'\\xrightarrow{\\sim}X\\times_YY'$ compatible with the maps; the\nnotation $g'^{-1}F$ always means inverse image using this specified\nidentification.\n\nThe square isomorphisms are compatible with identities and with pasting:\nfor two commutative squares pasted horizontally (or vertically), the\nsquare isomorphism of the composite square is the composite of the two\nsquare isomorphisms, modulo the composition isomorphisms of inverse\nimages along the horizontal (respectively vertical) maps.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

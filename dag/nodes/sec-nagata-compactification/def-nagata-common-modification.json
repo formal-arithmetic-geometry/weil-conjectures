@@ -1,121 +1,96 @@
 {
-  "id": "def-nagata-common-modification",
-  "blueprint": {
-    "is": "def-nagata-common-modification",
-    "from": null,
-    "same_as": null
+ "id": "def-nagata-common-modification",
+ "blueprint": {
+  "is": "def-nagata-common-modification",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Common-modification construction",
+ "statement": "Let $U\\hookrightarrow X_i$ be open immersions over $S$, with\n$U,X_1,X_2$ separated and of finite type over the qcqs scheme $S$.\nConstruct the following objects in order.\n\n1. Let\n$$\nX_{12}=\\operatorname{SIm}\n\\bigl(U\\longrightarrow X_1\\times_SX_2\\bigr)\n$$\nand write $p_i\\colon X_{12}\\to X_i$ for the projections.\n1. Apply [def-nagata-elimination-indeterminacy] to $(p_i,U)$.\nDenote the resulting blow-ups by\n$X_i^i= X^{\\mathrm{el}}(p_i,U)$, their center ideals by\n$\\mathcal I_i$, and the open strict transforms by\n$X_{12}^i\\subseteq X_i^i$.\n1. On $X_{12}$ define\n$$\n\\mathcal K_{12}\n=p_1^{-1}\\mathcal I_1\\mathcal O_{X_{12}}\\,\np_2^{-1}\\mathcal I_2\\mathcal O_{X_{12}},\n\\qquad\nX'_{12}=\\operatorname{Bl}_{\\mathcal K_{12}}(X_{12}).\n$$\n1. The product-center blow-up maps to each $X_{12}^i$. Extend\n$X'_{12}\\to X_{12}^i$ across the open\n$X_{12}^i\\subseteq X_i^i$ by\n[def-nagata-extended-admissible-blowup]; call the resulting\nambient schemes $X'_i$.\n1. Define\n$$\n\\mathsf{CM}(X_1,X_2;U)=X'_1\\amalg_{X'_{12}}X'_2\n$$\nusing the two constructed open immersions of $X'_{12}$.\n\nThe construction includes the maps $X'_i\\to X_i$, the two open maps\n$X'_i\\to\\mathsf{CM}(X_1,X_2;U)$, and the identified copy of $U$.\n\n*Packaged interface.* What is recorded as data — and what the\nformalised structure `CommonModification` carries — is only: the two\n$U$-admissible blow-ups $X'_i\\to X_i$, the two open immersions\n$X'_i\\to\\mathsf{CM}(X_1,X_2;U)$ together with the fact that they cover\n$\\mathsf{CM}(X_1,X_2;U)$, the two lifted copies of $U$ and their agreement in\nthe glued scheme, and separatedness and finite type of\n$\\mathsf{CM}(X_1,X_2;U)\\to S$. The stronger overlap identification of step 5\n— that the two opens glue along *exactly* $X'_{12}$ and not merely along\ntheir topological intersection — is an internal step of the construction: it is\nused in the proof of [lemma-nagata-common-modification] to obtain\nseparatedness of the glued scheme, and separatedness is part of the packaged\ninterface. The downstream consumers\n([def-nagata-two-open-final-modification] and\n[lemma-nagata-two-open-density-transport]) use only the packaged\ninterface: density transport needs the two charts to cover and the copies of\n$U$ to agree, and the valuative lifting argument needs only separatedness of\n$\\mathsf{CM}(X_1,X_2;U)\\to S$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-common/def-nagata-common-modification.md",
+  "place": "node def-nagata-common-modification, order 239"
+ },
+ "stmt_deps": [
+  "def-nagata-elimination-indeterminacy",
+  "def-nagata-extended-admissible-blowup",
+  "def-nagata-admissible-blowup",
+  "def-nagata-global-blowup",
+  "def-nagata-scheme-theoretic-image",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 239,
+ "blueprint_uses": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-elimination-indeterminacy",
+  "def-nagata-extended-admissible-blowup",
+  "def-nagata-global-blowup",
+  "def-nagata-scheme-theoretic-image",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Compactification.CommonModification",
+  "declaration": "AlgebraicGeometry.CommonModification",
+  "branch": "slopmaster2",
+  "line": 65,
+  "sorry_free": true,
+  "body_lines": 19
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.CommonModification"
+ ],
+ "uses_not_cited": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-global-blowup",
+  "def-nagata-scheme-theoretic-image",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "lean_audit": {},
+ "pointers": [
+  {
+   "to": "lemma-nagata-common-modification",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: \"used in the proof of [lemma]\"",
+   "date": "2026-10-09"
   },
-  "kind": "definition",
-  "title": "Common-modification construction",
-  "statement": "Let $U\\hookrightarrow X_i$ be open immersions over $S$, with\n$U,X_1,X_2$ separated and of finite type over the qcqs scheme $S$.\nConstruct the following objects in order.\n\n1. Let\n$$\nX_{12}=\\operatorname{SIm}\n\\bigl(U\\longrightarrow X_1\\times_SX_2\\bigr)\n$$\nand write $p_i\\colon X_{12}\\to X_i$ for the projections.\n1. Apply [def-nagata-elimination-indeterminacy] to $(p_i,U)$.\nDenote the resulting blow-ups by\n$X_i^i= X^{\\mathrm{el}}(p_i,U)$, their center ideals by\n$\\mathcal I_i$, and the open strict transforms by\n$X_{12}^i\\subseteq X_i^i$.\n1. On $X_{12}$ define\n$$\n\\mathcal K_{12}\n=p_1^{-1}\\mathcal I_1\\mathcal O_{X_{12}}\\,\np_2^{-1}\\mathcal I_2\\mathcal O_{X_{12}},\n\\qquad\nX'_{12}=\\operatorname{Bl}_{\\mathcal K_{12}}(X_{12}).\n$$\n1. The product-center blow-up maps to each $X_{12}^i$. Extend\n$X'_{12}\\to X_{12}^i$ across the open\n$X_{12}^i\\subseteq X_i^i$ by\n[def-nagata-extended-admissible-blowup]; call the resulting\nambient schemes $X'_i$.\n1. Define\n$$\n\\mathsf{CM}(X_1,X_2;U)=X'_1\\amalg_{X'_{12}}X'_2\n$$\nusing the two constructed open immersions of $X'_{12}$.\n\nThe construction includes the maps $X'_i\\to X_i$, the two open maps\n$X'_i\\to\\mathsf{CM}(X_1,X_2;U)$, and the identified copy of $U$.\n\n*Packaged interface.* What is recorded as data — and what the\nformalised structure `CommonModification` carries — is only: the two\n$U$-admissible blow-ups $X'_i\\to X_i$, the two open immersions\n$X'_i\\to\\mathsf{CM}(X_1,X_2;U)$ together with the fact that they cover\n$\\mathsf{CM}(X_1,X_2;U)$, the two lifted copies of $U$ and their agreement in\nthe glued scheme, and separatedness and finite type of\n$\\mathsf{CM}(X_1,X_2;U)\\to S$. The stronger overlap identification of step 5\n— that the two opens glue along *exactly* $X'_{12}$ and not merely along\ntheir topological intersection — is an internal step of the construction: it is\nused in the proof of [lemma-nagata-common-modification] to obtain\nseparatedness of the glued scheme, and separatedness is part of the packaged\ninterface. The downstream consumers\n([def-nagata-two-open-final-modification] and\n[lemma-nagata-two-open-density-transport]) use only the packaged\ninterface: density transport needs the two charts to cover and the copies of\n$U$ to agree, and the valuative lifting argument needs only separatedness of\n$\\mathsf{CM}(X_1,X_2;U)\\to S$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-common/def-nagata-common-modification.md",
-    "place": "node def-nagata-common-modification, order 239"
+  {
+   "to": "def-nagata-two-open-final-modification",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: \"downstream consumers\"",
+   "date": "2026-10-09"
   },
-  "stmt_deps": [
-    "def-nagata-elimination-indeterminacy",
-    "def-nagata-extended-admissible-blowup",
-    "def-nagata-admissible-blowup",
-    "def-nagata-global-blowup",
-    "def-nagata-scheme-theoretic-image",
-    "prop-nagata-global-blowup-cover-independent"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 239,
-  "blueprint_uses": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-elimination-indeterminacy",
-    "def-nagata-extended-admissible-blowup",
-    "def-nagata-global-blowup",
-    "def-nagata-scheme-theoretic-image",
-    "prop-nagata-global-blowup-cover-independent"
-  ],
-  "lean": {
-    "module": "WeilConjectures.Compactification.CommonModification",
-    "declaration": "AlgebraicGeometry.CommonModification",
-    "branch": "slopmaster2",
-    "line": 65,
-    "sorry_free": true,
-    "body_lines": 19
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.CommonModification"
-  ],
-  "uses_not_cited": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-global-blowup",
-    "def-nagata-scheme-theoretic-image",
-    "prop-nagata-global-blowup-cover-independent"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.CommonModification"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.CommonModification",
-          "module": "WeilConjectures.Compactification.CommonModification",
-          "lines": [
-            62,
-            104
-          ],
-          "kind": "structure",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "pointers": [
-    {
-      "to": "lemma-nagata-common-modification",
-      "was": [
-        "stmt"
-      ],
-      "reason": "forward pointer in the text, not a dependency: \"used in the proof of [lemma]\"",
-      "date": "2026-10-09"
-    },
-    {
-      "to": "def-nagata-two-open-final-modification",
-      "was": [
-        "stmt"
-      ],
-      "reason": "forward pointer in the text, not a dependency: \"downstream consumers\"",
-      "date": "2026-10-09"
-    },
-    {
-      "to": "lemma-nagata-two-open-density-transport",
-      "was": [
-        "stmt"
-      ],
-      "reason": "forward pointer in the text, not a dependency: \"downstream consumers\"",
-      "date": "2026-10-09"
-    }
-  ],
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-lem-nagata-sketch-common",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $s_i\\colon X_i\\to S$ ($i=1,2$) be morphisms of schemes and let\n$j_i\\colon U\\hookrightarrow X_i$ be open immersions. A *common\nmodification* $\\mathsf{CM}(X_1,X_2;U)$ of $X_1$ and $X_2$ along $U$\nconsists of\n\n* $U$-admissible blow-ups $\\pi_i\\colon X'_i\\to X_i$ (admissible with\n  respect to the open $j_i(U)\\subseteq X_i$), for $i=1,2$;\n* a scheme $W$ with a morphism $w\\colon W\\to S$;\n* open immersions $k_i\\colon X'_i\\to W$ with $w\\circ k_i=s_i\\circ\\pi_i$;\n* morphisms $u_i\\colon U\\to X'_i$ with $\\pi_i\\circ u_i=j_i$;\n\nsuch that $k_1\\circ u_1=k_2\\circ u_2$, the images of $k_1$ and $k_2$ cover\n$W$, and $w\\colon W\\to S$ is separated and of finite type.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "to": "lemma-nagata-two-open-density-transport",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: \"downstream consumers\"",
+   "date": "2026-10-09"
   }
+ ],
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-lem-nagata-sketch-common",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $s_i\\colon X_i\\to S$ ($i=1,2$) be morphisms of schemes and let\n$j_i\\colon U\\hookrightarrow X_i$ be open immersions. A *common\nmodification* $\\mathsf{CM}(X_1,X_2;U)$ of $X_1$ and $X_2$ along $U$\nconsists of\n\n* $U$-admissible blow-ups $\\pi_i\\colon X'_i\\to X_i$ (admissible with\n  respect to the open $j_i(U)\\subseteq X_i$), for $i=1,2$;\n* a scheme $W$ with a morphism $w\\colon W\\to S$;\n* open immersions $k_i\\colon X'_i\\to W$ with $w\\circ k_i=s_i\\circ\\pi_i$;\n* morphisms $u_i\\colon U\\to X'_i$ with $\\pi_i\\circ u_i=j_i$;\n\nsuch that $k_1\\circ u_1=k_2\\circ u_2$, the images of $k_1$ and $k_2$ cover\n$W$, and $w\\colon W\\to S$ is separated and of finite type.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

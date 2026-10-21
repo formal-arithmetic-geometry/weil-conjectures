@@ -1,322 +1,311 @@
 {
-  "id": "det-thm-restriction-glue",
-  "blueprint": {
-    "is": "det-thm-restriction-glue",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Gluing constructibility of $f^!K$ and restricting the adjunction",
-  "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside a fixed algebraic closure $\\Qlb=\\overline{\\mathbf Q}_\\ell$. Let $X,Y$ be separated schemes of finite type over $k$ and $f:X\\to Y$ a separated finite-type $k$-morphism, in the standing setting [sk-def-sfb-dc-setting]. Let $\\Lambda=E$ or $\\Qlb$. For $E$, use the condensed ring $S\\mapsto C(S,E)$ on profinite sets, with the $\\ell$-adic topology [sk-def-sfb-condensed-ring]. For $\\Qlb$, use [sk-def-sfb-qlbar-condensed]: its sections on a profinite set $S$ are the continuous maps $S\\to\\Qlb$ whose image is contained in some finite subextension of $\\mathbf Q_\\ell$. Pull these rings back to the scheme pro-étale topoi [sk-def-sfb-pulled-back-coefficients] and use their module-object coefficients. Use $D(X_{\\mathrm{proét}},\\Lambda)$ and $\\Dbc(X,\\Lambda)$ as in [sk-def-sfb-constructible], the full localizing closures of [sk-def-localizing-closure], and the compact-support functor $Rf_!$ with right adjoint $f^!$ supplied by [sk-prop-sf-existence].\n\n1. Let $M\\in D(X_{\\mathrm{proét}},\\Lambda)$ and let $X=\\bigcup_{\\alpha\\in I}U_\\alpha$ be a finite open cover with $M|_{U_\\alpha}\\in\\Dbc(U_\\alpha,\\Lambda)$ for all $\\alpha\\in I$. Then $M\\in\\Dbc(X,\\Lambda)$.\n2. For $K\\in\\Dbc(Y,\\Lambda)$, $f^!K\\in\\Dbc(X,\\Lambda)$, and for $A\\in\\Dbc(X,\\Lambda)$ the adjunction bijection restricts naturally to\n$$\n\\Hom_{\\Dbc(Y,\\Lambda)}(Rf_!A,K)\\simeq\\Hom_{\\Dbc(X,\\Lambda)}(A,f^!K).\n$$",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.md",
-    "place": "node det-thm-restriction-glue, order None"
-  },
-  "stmt_deps": [
-    "sk-def-sfb-dc-setting",
-    "sk-def-sfb-constructible",
-    "sk-def-localizing-closure",
-    "sk-prop-sf-existence",
-    "def-weil-finite-type-morphism",
-    "def-weil-proper-morphism",
-    "sk-def-sfb-condensed-ring",
-    "sk-def-sfb-qlbar-condensed",
-    "sk-def-sfb-pulled-back-coefficients"
-  ],
-  "proof": [
-    {
-      "text": "First make the standing hypotheses explicit. The field $k$ is Noetherian since its only ideals are $0$ and $k$, so $\\operatorname{Spec}k$ is locally Noetherian. Apply [pqf-lem-locnoeth-lft] to the structure maps of $X$ and $Y$. Their sources are quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine], so they are Noetherian (locally Noetherian and quasi-compact). The rational-coefficient statement [sk-lem-coefficient-heart] identifies $\\Dctf=\\Dbc$ and describes constructibility as being lisse on finitely many strata. Thus $\\Loc(\\Dctf)=\\Loc(\\Dbc)$ as full subcategories by the definition [sk-def-localizing-closure]. This comparison is in the pulled-back condensed module-object categories, without replacing them by discrete field-module sheaves. The rational coefficient is the one fixed in the statement: for $\\Qlb$ it is the condensed ring of [sk-def-sfb-qlbar-condensed], the blueprint's condensed $\\Qlb$, which is also the coefficient of [sk-lem-coefficient-heart] and of the local statement used in step 4. The admissible coefficient $\\Qlb$ of [sk-def-localizing-closure], and hence of the existence and coherence statements used in steps 5–6, is read as this same ring, as in the blueprint's text of that definition, whose condensed $\\Qlb$ is the one just named; it is not the ring $S\\mapsto C(S,\\Qlb)$ of all continuous maps, which is a different condensed ring (a convergent sequence of elements of unbounded degree gives a continuous map on the one-point compactification of $\\mathbf N$ that lies in no finite subextension).",
-      "uses": [
-        "pqf-lem-locnoeth-lft",
-        "lem-weil-pbc-qcqs-over-affine",
-        "sk-lem-coefficient-heart",
-        "sk-def-localizing-closure",
-        "sk-def-sfb-qlbar-condensed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-        "place": "Standing hypotheses implicit in both paragraphs; rational identification needed for paragraph (2)."
-      }
-    },
-    {
-      "text": "For (1), restriction to an open immersion is exact on coefficient modules by [sk-prop-sfb-cartesian-coefficients]. Consequently it preserves kernels and images of the differentials of a representative complex, giving $\\mathcal H^q(M)|_{U_\\alpha}=\\mathcal H^q(M|_{U_\\alpha})$. If $X$ is empty, every coefficient-module sheaf is zero by the empty-cover sheaf axiom, so $M=0$ and (1) holds; this includes both an empty index set and covers consisting entirely of empty opens. Henceforth assume $X$ nonempty, so the finite index set is nonempty. Choose intervals $[a_\\alpha,b_\\alpha]$ with $a_\\alpha\\le b_\\alpha$ bounding the restricted complexes, taking $[0,0]$ on an empty cover member. Put $a=\\min_\\alpha a_\\alpha$ and $b=\\max_\\alpha b_\\alpha$. For $q\\notin[a,b]$, the sheaf $\\mathcal H^q(M)$ vanishes on every cover member, hence is zero: for any pro-étale object $T\\to X$, its opens $T\\times_XU_\\alpha$ cover it, and the sheaf axiom detects zero sections there. This proves boundedness in the sense of [sk-def-sfb-constructible].",
-      "uses": [
-        "sk-prop-sfb-cartesian-coefficients",
-        "sk-def-sfb-constructible"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-        "place": "Paragraph (1), Boundedness; exactness and the empty-cover case written out."
-      }
-    },
-    {
-      "text": "Continue with $X$ nonempty as in step 2. Only finitely many $q$ in $[a,b]$ can contribute. For each $\\alpha$ and each such $q$, choose a finite stratification of $U_\\alpha$ on which $\\mathcal H^q(M|_{U_\\alpha})$ is lisse, using [sk-lem-coefficient-heart]. Regard its scheme strata as immersions into $X$ by composing with $U_\\alpha\\hookrightarrow X$, using clause (e) of [lem-weil-pbc-proper-fp-permanence]. Adjoin the complement $X\\setminus U_\\alpha$ with its reduced induced closed subscheme structure from [lem-weil-pbc-reduced-induced-closed-subscheme]. This makes a finite scheme stratification of $X$ for each pair $(\\alpha,q)$. By clause (1) of [det-lem-coefficient-heart-common-stratification], these finitely many stratifications have a common finite refinement. Each nonempty refined stratum lies in some $U_\\alpha$, because the opens cover $X$, and lies in one adapted stratum there for each $q$. For such an $\\alpha$, the refined strata lying in $U_\\alpha$ form a scheme stratification of $U_\\alpha$ refining each chosen adapted stratification. Apply clause (2) of that same node to the already constructible sheaf $\\mathcal H^q(M|_{U_\\alpha})$ on $U_\\alpha$, not to a sheaf whose global constructibility is still being proved. It is lisse on each of these refined strata, including its given scheme structure. Exact restriction from step 2 identifies this sheaf there with the restriction of $\\mathcal H^q(M)$; hence every $\\mathcal H^q(M)$ is lisse on the refinement. By the lisse characterization of constructibility in [sk-lem-coefficient-heart] (the strata are constructible locally closed subsets since $X$ is Noetherian, as [sk-def-sfb-constructible] notes), every $\\mathcal H^q(M)$ is constructible, and the boundedness in the preceding step gives $M\\in\\Dbc(X,\\Lambda)$. Empty strata are discarded; if all cohomology is zero the conclusion follows directly from the same definition.",
-      "uses": [
-        "sk-lem-coefficient-heart",
-        "lem-weil-pbc-proper-fp-permanence",
-        "lem-weil-pbc-reduced-induced-closed-subscheme",
-        "det-lem-coefficient-heart-common-stratification",
-        "sk-def-sfb-constructible"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-        "place": "Paragraph (1), Constructibility; finite common refinement, actual scheme strata, and lisse restriction."
-      }
-    },
-    {
-      "text": "For (2), fix $K\\in\\Dbc(Y,\\Lambda)$. The statement [det-thm-restriction-local] supplies finitely many affine opens $u_\\alpha:U_\\alpha\\hookrightarrow X$ covering $X$, together with affine $V_\\alpha\\subset Y$ and closed embeddings into affine spaces over $V_\\alpha$, and it asserts $u_\\alpha^*f^!K\\in\\Dbc(U_\\alpha,\\Lambda)$. Its hypotheses hold for the standing schemes and for $\\Lambda=E$ or $\\Qlb$; the rational identification in step 1 puts $K$ in the domain of $f^!$. Apply (1), now proved in steps 2–3, to $M=f^!K$. This gives $f^!K\\in\\Dbc(X,\\Lambda)$.",
-      "uses": [
-        "det-thm-restriction-local"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-        "place": "Paragraph (2), first sentence; unit sk-thm-restriction step 2."
-      }
-    },
-    {
-      "text": "Let $f=p\\circ j$ be the chosen compactification in [sk-def-sfb-dc-setting], using the compactification convention in [sk-prop-sf-existence]. The latter specifies $j$ to be quasi-compact and $p$ proper, and defines $Rf_!$ as $Rp_*D(j_!)$ on the localizing closures. Step 1 showed $Y$ qcqs. The compactification convention [sk-def-nagata-sketch-data] cited by both nodes makes $j$ a quasi-compact open immersion. Thus [det-sf-comp-coherence-single] applies to this compactification and to the admissible rational coefficient $\\Lambda$ (with $\\Qlb$ read as in step 1): its composite sends $\\Dctf(X,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$. Using $\\Dctf=\\Dbc$ from step 1 gives $Rf_!A\\in\\Dbc(Y,\\Lambda)$ for every $A\\in\\Dbc(X,\\Lambda)$.",
-      "uses": [
-        "sk-def-sfb-dc-setting",
-        "sk-prop-sf-existence",
-        "det-sf-comp-coherence-single",
-        "sk-def-nagata-sketch-data"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-        "place": "Paragraph (2), compact-support preservation; unit step 3, using the existing single-compactification component of the missing imported coherence id."
-      }
-    },
-    {
-      "text": "For $A,K$ as above, use the natural Hom bijection of [sk-prop-sf-existence] on $\\Loc(\\Dctf)$. Steps 4–5 show that its four objects $A,f^!K,Rf_!A,K$ lie in the relevant bounded constructible subcategories. These subcategories are full in the ambient derived categories by [sk-def-sfb-constructible], as are the localizing closures by [sk-def-localizing-closure]; their Hom sets, identities and compositions on these objects are therefore exactly the same. The unchanged bijection consequently is $\\Hom_{\\Dbc(Y,\\Lambda)}(Rf_!A,K)\\simeq\\Hom_{\\Dbc(X,\\Lambda)}(A,f^!K)$. Its naturality equations are unchanged equations of the same morphisms, so it gives the asserted restricted adjunction.",
-      "uses": [
-        "sk-prop-sf-existence",
-        "sk-def-sfb-constructible",
-        "sk-def-localizing-closure"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-        "place": "Paragraph (2), last three sentences; explicit full-subcategory Hom calculation."
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "det-thm-restriction-glue",
+ "blueprint": {
+  "is": "det-thm-restriction-glue",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Gluing constructibility of $f^!K$ and restricting the adjunction",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside a fixed algebraic closure $\\Qlb=\\overline{\\mathbf Q}_\\ell$. Let $X,Y$ be separated schemes of finite type over $k$ and $f:X\\to Y$ a separated finite-type $k$-morphism, in the standing setting [sk-def-sfb-dc-setting]. Let $\\Lambda=E$ or $\\Qlb$. For $E$, use the condensed ring $S\\mapsto C(S,E)$ on profinite sets, with the $\\ell$-adic topology [sk-def-sfb-condensed-ring]. For $\\Qlb$, use [sk-def-sfb-qlbar-condensed]: its sections on a profinite set $S$ are the continuous maps $S\\to\\Qlb$ whose image is contained in some finite subextension of $\\mathbf Q_\\ell$. Pull these rings back to the scheme pro-étale topoi [sk-def-sfb-pulled-back-coefficients] and use their module-object coefficients. Use $D(X_{\\mathrm{proét}},\\Lambda)$ and $\\Dbc(X,\\Lambda)$ as in [sk-def-sfb-constructible], the full localizing closures of [sk-def-localizing-closure], and the compact-support functor $Rf_!$ with right adjoint $f^!$ supplied by [sk-prop-sf-existence].\n\n1. Let $M\\in D(X_{\\mathrm{proét}},\\Lambda)$ and let $X=\\bigcup_{\\alpha\\in I}U_\\alpha$ be a finite open cover with $M|_{U_\\alpha}\\in\\Dbc(U_\\alpha,\\Lambda)$ for all $\\alpha\\in I$. Then $M\\in\\Dbc(X,\\Lambda)$.\n2. For $K\\in\\Dbc(Y,\\Lambda)$, $f^!K\\in\\Dbc(X,\\Lambda)$, and for $A\\in\\Dbc(X,\\Lambda)$ the adjunction bijection restricts naturally to\n$$\n\\Hom_{\\Dbc(Y,\\Lambda)}(Rf_!A,K)\\simeq\\Hom_{\\Dbc(X,\\Lambda)}(A,f^!K).\n$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.md",
+  "place": "node det-thm-restriction-glue, order None"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "sk-prop-sf-existence",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "First make the standing hypotheses explicit. The field $k$ is Noetherian since its only ideals are $0$ and $k$, so $\\operatorname{Spec}k$ is locally Noetherian. Apply [pqf-lem-locnoeth-lft] to the structure maps of $X$ and $Y$. Their sources are quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-over-affine], so they are Noetherian (locally Noetherian and quasi-compact). The rational-coefficient statement [sk-lem-coefficient-heart] identifies $\\Dctf=\\Dbc$ and describes constructibility as being lisse on finitely many strata. Thus $\\Loc(\\Dctf)=\\Loc(\\Dbc)$ as full subcategories by the definition [sk-def-localizing-closure]. This comparison is in the pulled-back condensed module-object categories, without replacing them by discrete field-module sheaves. The rational coefficient is the one fixed in the statement: for $\\Qlb$ it is the condensed ring of [sk-def-sfb-qlbar-condensed], the blueprint's condensed $\\Qlb$, which is also the coefficient of [sk-lem-coefficient-heart] and of the local statement used in step 4. The admissible coefficient $\\Qlb$ of [sk-def-localizing-closure], and hence of the existence and coherence statements used in steps 5–6, is read as this same ring, as in the blueprint's text of that definition, whose condensed $\\Qlb$ is the one just named; it is not the ring $S\\mapsto C(S,\\Qlb)$ of all continuous maps, which is a different condensed ring (a convergent sequence of elements of unbounded degree gives a continuous map on the one-point compactification of $\\mathbf N$ that lies in no finite subextension).",
+   "uses": [
     "pqf-lem-locnoeth-lft",
     "lem-weil-pbc-qcqs-over-affine",
     "sk-lem-coefficient-heart",
     "sk-def-localizing-closure",
-    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-qlbar-condensed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Standing hypotheses implicit in both paragraphs; rational identification needed for paragraph (2)."
+   }
+  },
+  {
+   "text": "For (1), restriction to an open immersion is exact on coefficient modules by [sk-prop-sfb-cartesian-coefficients]. Consequently it preserves kernels and images of the differentials of a representative complex, giving $\\mathcal H^q(M)|_{U_\\alpha}=\\mathcal H^q(M|_{U_\\alpha})$. If $X$ is empty, every coefficient-module sheaf is zero by the empty-cover sheaf axiom, so $M=0$ and (1) holds; this includes both an empty index set and covers consisting entirely of empty opens. Henceforth assume $X$ nonempty, so the finite index set is nonempty. Choose intervals $[a_\\alpha,b_\\alpha]$ with $a_\\alpha\\le b_\\alpha$ bounding the restricted complexes, taking $[0,0]$ on an empty cover member. Put $a=\\min_\\alpha a_\\alpha$ and $b=\\max_\\alpha b_\\alpha$. For $q\\notin[a,b]$, the sheaf $\\mathcal H^q(M)$ vanishes on every cover member, hence is zero: for any pro-étale object $T\\to X$, its opens $T\\times_XU_\\alpha$ cover it, and the sheaf axiom detects zero sections there. This proves boundedness in the sense of [sk-def-sfb-constructible].",
+   "uses": [
     "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-constructible",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Paragraph (1), Boundedness; exactness and the empty-cover case written out."
+   }
+  },
+  {
+   "text": "Continue with $X$ nonempty as in step 2. Only finitely many $q$ in $[a,b]$ can contribute. For each $\\alpha$ and each such $q$, choose a finite stratification of $U_\\alpha$ on which $\\mathcal H^q(M|_{U_\\alpha})$ is lisse, using [sk-lem-coefficient-heart]. Regard its scheme strata as immersions into $X$ by composing with $U_\\alpha\\hookrightarrow X$, using clause (e) of [lem-weil-pbc-proper-fp-permanence]. Adjoin the complement $X\\setminus U_\\alpha$ with its reduced induced closed subscheme structure from [lem-weil-pbc-reduced-induced-closed-subscheme]. This makes a finite scheme stratification of $X$ for each pair $(\\alpha,q)$. By clause (1) of [det-lem-coefficient-heart-common-stratification], these finitely many stratifications have a common finite refinement. Each nonempty refined stratum lies in some $U_\\alpha$, because the opens cover $X$, and lies in one adapted stratum there for each $q$. For such an $\\alpha$, the refined strata lying in $U_\\alpha$ form a scheme stratification of $U_\\alpha$ refining each chosen adapted stratification. Apply clause (2) of that same node to the already constructible sheaf $\\mathcal H^q(M|_{U_\\alpha})$ on $U_\\alpha$, not to a sheaf whose global constructibility is still being proved. It is lisse on each of these refined strata, including its given scheme structure. Exact restriction from step 2 identifies this sheaf there with the restriction of $\\mathcal H^q(M)$; hence every $\\mathcal H^q(M)$ is lisse on the refinement. By the lisse characterization of constructibility in [sk-lem-coefficient-heart] (the strata are constructible locally closed subsets since $X$ is Noetherian, as [sk-def-sfb-constructible] notes), every $\\mathcal H^q(M)$ is constructible, and the boundedness in the preceding step gives $M\\in\\Dbc(X,\\Lambda)$. Empty strata are discarded; if all cohomology is zero the conclusion follows directly from the same definition.",
+   "uses": [
+    "sk-lem-coefficient-heart",
     "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-reduced-induced-closed-subscheme",
     "det-lem-coefficient-heart-common-stratification",
-    "det-thm-restriction-local",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Paragraph (1), Constructibility; finite common refinement, actual scheme strata, and lisse restriction."
+   }
+  },
+  {
+   "text": "For (2), fix $K\\in\\Dbc(Y,\\Lambda)$. The statement [det-thm-restriction-local] supplies finitely many affine opens $u_\\alpha:U_\\alpha\\hookrightarrow X$ covering $X$, together with affine $V_\\alpha\\subset Y$ and closed embeddings into affine spaces over $V_\\alpha$, and it asserts $u_\\alpha^*f^!K\\in\\Dbc(U_\\alpha,\\Lambda)$. Its hypotheses hold for the standing schemes and for $\\Lambda=E$ or $\\Qlb$; the rational identification in step 1 puts $K$ in the domain of $f^!$. Apply (1), now proved in steps 2–3, to $M=f^!K$. This gives $f^!K\\in\\Dbc(X,\\Lambda)$.",
+   "uses": [
+    "det-thm-restriction-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Paragraph (2), first sentence; unit sk-thm-restriction step 2."
+   }
+  },
+  {
+   "text": "Let $f=p\\circ j$ be the chosen compactification in [sk-def-sfb-dc-setting], using the compactification convention in [sk-prop-sf-existence]. The latter specifies $j$ to be quasi-compact and $p$ proper, and defines $Rf_!$ as $Rp_*D(j_!)$ on the localizing closures. Step 1 showed $Y$ qcqs. The compactification convention [sk-def-nagata-sketch-data] cited by both nodes makes $j$ a quasi-compact open immersion. Thus [det-sf-comp-coherence-single] applies to this compactification and to the admissible rational coefficient $\\Lambda$ (with $\\Qlb$ read as in step 1): its composite sends $\\Dctf(X,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$. Using $\\Dctf=\\Dbc$ from step 1 gives $Rf_!A\\in\\Dbc(Y,\\Lambda)$ for every $A\\in\\Dbc(X,\\Lambda)$.",
+   "uses": [
     "sk-def-sfb-dc-setting",
     "sk-prop-sf-existence",
     "det-sf-comp-coherence-single",
     "sk-def-nagata-sketch-data"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
-    "place": "Paragraphs (1)–(2), expanded with the cited existing nodes and explicit standing assumptions."
+    "place": "Paragraph (2), compact-support preservation; unit step 3, using the existing single-compactification component of the missing imported coherence id."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "finite open cover gluing bounded constructible complexes and restricting exceptional adjunction to bounded constructible subcategories",
-      "results": "Actual output: 8 hits; TopCat.GlueData.ofOpenSubsets_toGlueData_V, AlgebraicGeometry.Scheme.GlueData.openCover, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover_I₀, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover_X, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.natTrans.",
-      "date": "2026-10-17",
-      "verdict": "no match for the entire geometric item"
-    },
-    {
-      "tool": "leansearch",
-      "query": "finite open cover local bounded constructibility exceptional inverse image adjunction",
-      "results": "Actual output: 8 hits; Topology.IsLocallyConstructible.of_isOpenCover', Topology.IsInducing.adjunction, Topology.IsLocallyConstructible.of_isOpenCover, Topology.IsLocallyConstructible.iff_of_isOpenCover, IsOpenMap.adjunction, IsOpenMap.adjunctionNhds, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover, Topology.IsInducing.adjunctionNhds. Read Mathlib/Topology/Constructible.lean:504–535: these statements concern subsets of a topological space, not constructible cohomology sheaves.",
-      "date": "2026-10-17",
-      "verdict": "no match for the entire geometric item"
-    },
-    {
-      "tool": "grep",
-      "query": "boundedConstructible|rightDerivedUpperShriek|rightDerivedLowerShriek",
-      "results": "Actual output: 0 hits; .",
-      "date": "2026-10-17",
-      "verdict": "no match for the entire geometric item"
-    },
-    {
-      "tool": "loogle",
-      "query": "DerivedCategory.boundedConstructible Adjunction Hom Rf_! f^!",
-      "results": "Actual output: 0 hits; . loogle: <input>:1:60: unexpected end of input",
-      "date": "2026-10-17",
-      "verdict": "unavailable: invalid query; corrected by the qualified CategoryTheory.Adjunction search"
-    },
-    {
-      "tool": "grep",
-      "query": "IsLocallyConstructible.of_isOpenCover|boundedConstructible",
-      "results": "Actual output: 2 hits; Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean. Mathlib subdirectory: Topology.",
-      "date": "2026-10-17",
-      "verdict": "no match for the entire geometric item"
-    },
-    {
-      "tool": "loogle",
-      "query": "Adjunction, boundedConstructible",
-      "results": "Actual output: 0 hits; . loogle: unknown identifier 'Adjunction'",
-      "date": "2026-10-17",
-      "verdict": "unavailable: invalid query; corrected by the qualified CategoryTheory.Adjunction search"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction, \"restrict\"",
-      "results": "Actual output: 9 hits; ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply. Read Mathlib/CategoryTheory/Adjunction/Restrict.lean: the generic restriction theorem assumes both object-preservation inputs and supplies neither geometric preservation nor gluing.",
-      "date": "2026-10-17",
-      "verdict": "no match for the entire geometric item"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A bounded complex of pro-étale sheaves is constructible if its restrictions to a finite open cover are bounded constructible",
-      "results": "Actual output: 8 hits; Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, Topology.IsLocallyConstructible.of_isOpenCover', Topology.IsLocallyConstructible.iff_of_isOpenCover, Topology.IsLocallyConstructible.of_isOpenCover, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, LightCondAb.ofSheafLightProfinite, LightCondensed. Read Mathlib/Topology/Constructible.lean:504–535: these statements concern subsets of a topological space, not constructible cohomology sheaves.",
-      "date": "2026-10-17",
-      "verdict": "no match for the entire geometric item"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible.*[Cc]over|[Cc]over.*constructible|cohomology.*[Bb]ounded",
-      "results": "Actual output: 5 hits; Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean.",
-      "date": "2026-10-16",
-      "verdict": "No match: the open-cover hits in Mathlib/Topology/Constructible.lean concern constructible subsets, not coefficient-module sheaves."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
-      "results": "Actual output: 6 hits; CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply.",
-      "date": "2026-10-16",
-      "verdict": "No match for the whole item: generic full-subcategory adjunction restriction assumes the functor restrictions and their commuting isomorphisms."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Cohomology sheaves of an unbounded derived object are bounded and constructible locally on a finite open covering of a scheme",
-      "results": "Actual output: 8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.isLE_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_iff, DerivedCategory.isZero_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE.",
-      "date": "2026-10-16",
-      "verdict": "No match: general derived-category cohomological bounds, without scheme-open gluing or constructibility."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Finite open covering detects bounded complexes with locally constant finite rank cohomology, and an adjunction restricts to full subcategories preserved by both functors",
-      "results": "Actual output: 8 hits; CompHausLike.LocallyConstant.adjunction, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, LightCondSet.LocallyConstant.adjunction, CompHausLike.LocallyConstant.functorIso, LightCondMod.LocallyConstant.adjunction, CompHausLike.LocallyConstantModule.functor, LightCondMod.isDiscrete_tfae, LightCondSet.LocallyConstant.iso.",
-      "date": "2026-10-16",
-      "verdict": "No match: locally constant condensed sheaf adjunctions do not assert scheme-open gluing of bounded constructible complexes or exceptional-image preservation."
-    },
-    {
-      "tool": "grep",
-      "query": "isOpenCover|boundedConstructible|cohomology.*constructible",
-      "results": "Actual output: 5 hits; 302, 504, 505, 521, 522. Source subdirectory: Topology/Constructible.lean",
-      "date": "2026-10-16",
-      "verdict": "No match: read Mathlib/Topology/Constructible.lean:500-536; these are constructible subsets, not cohomology sheaves."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Adjunction\", \"restrictFullyFaithful\"",
-      "results": "Actual output: 6 hits; CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply.",
-      "date": "2026-10-16",
-      "verdict": "No match for the entire item: read Mathlib/CategoryTheory/Adjunction/Restrict.lean:30-66; the generic adjunction restriction assumes both object-preservation inputs."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-thm-restriction-local",
-    "sk-prop-sf-comp-coherence",
-    "sk-prop-sf-existence"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-thm-restriction",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "det-thm-restriction-glue",
-    "worker": "stage1",
-    "group": "Q27",
-    "summary": "STATEMENT-DISPUTED: the imported shorthand omitted the standing scheme hypotheses required to type the referenced Brown adjoint and to obtain a finite affine cover. Restored the exact setting of sk-def-sfb-dc-setting, preserving both conclusions and the condensed coefficient category. Expanded boundedness, common-stratification gluing, local f^! preservation, compactification preservation and full-subcategory restriction. Explicitly cites the existing rational Dctf=Dbc assertion; replaces absent sk-prop-sf-comp-coherence by det-sf-comp-coherence-single. No new nodes. Second reading explicitly fixes the Qlbar coefficient to sk-def-sfb-qlbar-condensed, matching the current local-input statement.",
-    "blueprint": "The original proof paragraph (1) is realized by steps 2–3, paragraph (2) by steps 4–6; step 1 spells out standing hypotheses and the rational-category comparison. These realize unit sk-thm-restriction steps 2–3 without replacing its affine-factorization route.",
-    "tool_uses": [
-      {
-        "node": "sk-lem-coefficient-heart",
-        "why": "Only its explicit rational Dctf=Dbc identification and lisse-stratification characterization are used; these supply coefficient comparisons, not an alternative exceptional-image route."
-      },
-      {
-        "node": "det-lem-coefficient-heart-common-stratification",
-        "why": "Generic finite common refinement and lisse restriction are exactly the tools for the common-refinement argument of unit step 2."
-      },
-      {
-        "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
-        "why": "Supplies only the scheme structure on the closed complements in that finite partition, with no six-functor theorem."
-      },
-      {
-        "node": "sk-prop-sfb-cartesian-coefficients",
-        "why": "Only the exactness of inverse image on these pulled-back coefficient modules is used to compute restricted cohomology."
-      }
-    ]
-  },
-  "tool_uses": [
-    "sk-lem-coefficient-heart",
-    "det-lem-coefficient-heart-common-stratification",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "sk-prop-sfb-cartesian-coefficients"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-cc-Q27-a0a9c65ab",
-    "group": "Q27",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-a0a9c65ab (reviewer sub-agent of L); spot-checked: Read in full: the item, the blueprint item, its proof, the unit and its local/unit proofs from main-20261015, every cited node's statement, and the master Proper.lean docstring for the condensed Qlb (padicAlgClRingObj). The item statement adds the standing setting of sk-def-sfb-dc-setting, which sk-prop-sf-existence needs for f^! to exist. The worker's counterexample (an infinite disjoint union of Spec k) shows why that setting is needed. Both conclusions are kept and nothing is weakened. Step checks: step 1 uses 01T6 and 01K4 for Noetherian X and Y, and the heart node for Dctf=Dbc. Step 2 uses exact module pullback from sk-prop-sfb-cartesian-coefficients, and the zero check is done on the open cover T×_X U_α. Step 3 builds strata of X with immersion composition (e) and reduced complements (2), takes a common refinement by clause (1), and restricts lisse sheaves by clause (2). Each nonempty stratum lies in some U_α. Step 4 uses det-thm-restriction-local (finite chart cover plus local Dbc) and then clause (1). Step 5 uses the same Rp_*∘j_! as sk-prop-sf-existence and det-sf-comp-coherence-single with Y qcqs. Step 6 is elementary because the subcategories are full. No cycle; proof_deps equals the union of the uses. No new nodes and no duplicates (det-thm-int-restriction-glue is the O_E analogue). I accept all four declared tool_uses. No SGA source. FIX, three repairs: (1) Step 1 now states the Qlb coefficient explicitly as the finite-subextension ring, which matches the master and the heart and local nodes. It differs from C(-,Qlb): x_n=ℓ^{n+1/n}→0 gives a continuous map whose image lies in no finite subextension. Before this, the item silently applied sk-def-localizing-closure and det-sf-comp-coherence-single, whose DAG wording ('ℓ-adic topology') literally gives C(-,Qlb). This is a pre-existing imprecision in those reviewed nodes, outside this delivery, reported to the maintainer: they should cite sk-def-sfb-qlbar-condensed. (2) Step 3 now takes constructibility from the heart node's lisse characterization, not from sk-def-sfb-constructible's local-model definition. (3) Step 5 now cites sk-def-nagata-sketch-data for the quasi-compactness of j. Uses and proof_deps are updated; the statement is unchanged.; 1 file(s) fixed by the reviewer"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-ff4b72f02",
-    "group": "Q01",
-    "result": "pass",
-    "note": "Read the node, the blueprint source place, every stmt_dep record and the exact declarations: CondensedConstantConstructibility (Dbc predicate), localizingClosureProEtale, localizingLowerShriek and the full signature of exists_localizingExceptionalAdjoint, padicSubfieldCondensedRing and padicAlgClRingObj (finite-subextension Qlbar ring, not C(-,Qlbar)). hΛ covers exactly the E and Qlbar cases of the existence theorem. The char/finite-type/separated hypotheses match the node and are no stronger. h, G and adj are exactly the data the existence theorem provides, not extra assumptions. Clause 1: finite I : Type w, iSup U = ⊤, restriction via upperStar along the open immersion. Clause 2: hX, hY, hF, hG are conclusions; adjbc is pinned to adj.homEquiv by an equation. Edge cases checked: empty I or empty X, zero objects, E = Q_l, universes (k : Type u, w free). The two helper lifts carry real data; the theorem's sorry is the only one; docstrings, line widths and stated-proof-dep imports are OK; no name clash. The node changed only in lean, and lean.statement is verbatim from the file. The report has a real Worker report and the Second reading by Q01 section is the standard note that this review is the second reading. nt_compile.py --json on the snapshot file: clean in 3.9 s; #check and #print axioms confirm the types and sorryAx. Observation outside this delivery: sk-def-sfb-qlbar-condensed still lacks a lean record."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.RationalRestrictionGlue",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rationalRestrictionGlue",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.CondensedRing.restrictionGlueLowerShriek",
-      "AlgebraicGeometry.ProEtale.CondensedRing.restrictionGlueUpperShriek",
-      "AlgebraicGeometry.ProEtale.CondensedRing.rationalRestrictionGlue"
-    ],
-    "file": "lean/Sheaf/Paper/RationalRestrictionGlue.lean",
-    "statement": "theorem rationalRestrictionGlue (ℓ : ℕ) [Fact ℓ.Prime] (E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)) [FiniteDimensional ℚ_[ℓ] E] (hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (Profinite.padicSubfieldCondensedRing ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (c : Compactification.BoundaryCompactification f) (h : ∀ A, localizingClosureProEtale Λ X A → localizingClosureProEtale Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj A)) (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤ (localizingClosureProEtale Λ X).FullSubcategory) (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) : (∀ (I : Type w) [Finite I] (U : I → X.Opens), iSup U = ⊤ → ∀ M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), (∀ i : I, constantModelBoundedConstructible Λ (U i).toScheme (((upperStar Λ (U i).ι).mapDerivedCategory).obj M)) → constantModelBoundedConstructible Λ X M) ∧ ∃ (hX : constantModelBoundedConstructible Λ X ≤ localizingClosureProEtale Λ X) (hY : constantModelBoundedConstructible Λ Y ≤ localizingClosureProEtale Λ Y) (hF : ∀ A, constantModelBoundedConstructible Λ X A → constantModelBoundedConstructible Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj A)) (hG : ∀ K : (localizingClosureProEtale Λ Y).FullSubcategory, constantModelBoundedConstructible Λ Y K.obj → constantModelBoundedConstructible Λ X (G.obj K).obj), ∃ adjbc : restrictionGlueLowerShriek Λ c.obj.obj hF ⊣ restrictionGlueUpperShriek Λ G hY hG, ∀ (A : ConstantModelBoundedConstructible Λ X) (K : ConstantModelBoundedConstructible Λ Y) (t : (restrictionGlueLowerShriek Λ c.obj.obj hF).obj A ⟶ K), (adjbc.homEquiv A K t).hom = (adj.homEquiv ⟨A.obj, hX A.obj A.property⟩ ⟨K.obj, hY K.obj K.property⟩ (ObjectProperty.homMk t.hom)).hom",
-    "branch": "newtargets-dag",
-    "by": "Q01",
-    "date": "2026-10-18",
-    "existing": false
+  {
+   "text": "For $A,K$ as above, use the natural Hom bijection of [sk-prop-sf-existence] on $\\Loc(\\Dctf)$. Steps 4–5 show that its four objects $A,f^!K,Rf_!A,K$ lie in the relevant bounded constructible subcategories. These subcategories are full in the ambient derived categories by [sk-def-sfb-constructible], as are the localizing closures by [sk-def-localizing-closure]; their Hom sets, identities and compositions on these objects are therefore exactly the same. The unchanged bijection consequently is $\\Hom_{\\Dbc(Y,\\Lambda)}(Rf_!A,K)\\simeq\\Hom_{\\Dbc(X,\\Lambda)}(A,f^!K)$. Its naturality equations are unchanged equations of the same morphisms, so it gives the asserted restricted adjunction.",
+   "uses": [
+    "sk-prop-sf-existence",
+    "sk-def-sfb-constructible",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+    "place": "Paragraph (2), last three sentences; explicit full-subcategory Hom calculation."
+   }
   }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-qcqs-over-affine",
+  "sk-lem-coefficient-heart",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-constructible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "det-lem-coefficient-heart-common-stratification",
+  "det-thm-restriction-local",
+  "sk-def-sfb-dc-setting",
+  "sk-prop-sf-existence",
+  "det-sf-comp-coherence-single",
+  "sk-def-nagata-sketch-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-restriction/sk-thm-restriction-glue.proof.md",
+  "place": "Paragraphs (1)–(2), expanded with the cited existing nodes and explicit standing assumptions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite open cover gluing bounded constructible complexes and restricting exceptional adjunction to bounded constructible subcategories",
+   "results": "Actual output: 8 hits; TopCat.GlueData.ofOpenSubsets_toGlueData_V, AlgebraicGeometry.Scheme.GlueData.openCover, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.functor, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover_I₀, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover_X, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.natTrans.",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire geometric item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite open cover local bounded constructibility exceptional inverse image adjunction",
+   "results": "Actual output: 8 hits; Topology.IsLocallyConstructible.of_isOpenCover', Topology.IsInducing.adjunction, Topology.IsLocallyConstructible.of_isOpenCover, Topology.IsLocallyConstructible.iff_of_isOpenCover, IsOpenMap.adjunction, IsOpenMap.adjunctionNhds, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover, Topology.IsInducing.adjunctionNhds. Read Mathlib/Topology/Constructible.lean:504–535: these statements concern subsets of a topological space, not constructible cohomology sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire geometric item"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|rightDerivedUpperShriek|rightDerivedLowerShriek",
+   "results": "Actual output: 0 hits; .",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire geometric item"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.boundedConstructible Adjunction Hom Rf_! f^!",
+   "results": "Actual output: 0 hits; . loogle: <input>:1:60: unexpected end of input",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid query; corrected by the qualified CategoryTheory.Adjunction search"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLocallyConstructible.of_isOpenCover|boundedConstructible",
+   "results": "Actual output: 2 hits; Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean. Mathlib subdirectory: Topology.",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire geometric item"
+  },
+  {
+   "tool": "loogle",
+   "query": "Adjunction, boundedConstructible",
+   "results": "Actual output: 0 hits; . loogle: unknown identifier 'Adjunction'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid query; corrected by the qualified CategoryTheory.Adjunction search"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"restrict\"",
+   "results": "Actual output: 9 hits; ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj, CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply. Read Mathlib/CategoryTheory/Adjunction/Restrict.lean: the generic restriction theorem assumes both object-preservation inputs and supplies neither geometric preservation nor gluing.",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire geometric item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of pro-étale sheaves is constructible if its restrictions to a finite open cover are bounded constructible",
+   "results": "Actual output: 8 hits; Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, Topology.IsLocallyConstructible.of_isOpenCover', Topology.IsLocallyConstructible.iff_of_isOpenCover, Topology.IsLocallyConstructible.of_isOpenCover, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, LightCondAb.ofSheafLightProfinite, LightCondensed. Read Mathlib/Topology/Constructible.lean:504–535: these statements concern subsets of a topological space, not constructible cohomology sheaves.",
+   "date": "2026-10-17",
+   "verdict": "no match for the entire geometric item"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Cc]over|[Cc]over.*constructible|cohomology.*[Bb]ounded",
+   "results": "Actual output: 5 hits; Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean, Mathlib/Topology/Constructible.lean.",
+   "date": "2026-10-16",
+   "verdict": "No match: the open-cover hits in Mathlib/Topology/Constructible.lean concern constructible subsets, not coefficient-module sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.restrictFullyFaithful",
+   "results": "Actual output: 6 hits; CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply.",
+   "date": "2026-10-16",
+   "verdict": "No match for the whole item: generic full-subcategory adjunction restriction assumes the functor restrictions and their commuting isomorphisms."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology sheaves of an unbounded derived object are bounded and constructible locally on a finite open covering of a scheme",
+   "results": "Actual output: 8 hits; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.isLE_iff, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.isGE_iff, DerivedCategory.isZero_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE.",
+   "date": "2026-10-16",
+   "verdict": "No match: general derived-category cohomological bounds, without scheme-open gluing or constructibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite open covering detects bounded complexes with locally constant finite rank cohomology, and an adjunction restricts to full subcategories preserved by both functors",
+   "results": "Actual output: 8 hits; CompHausLike.LocallyConstant.adjunction, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, LightCondSet.LocallyConstant.adjunction, CompHausLike.LocallyConstant.functorIso, LightCondMod.LocallyConstant.adjunction, CompHausLike.LocallyConstantModule.functor, LightCondMod.isDiscrete_tfae, LightCondSet.LocallyConstant.iso.",
+   "date": "2026-10-16",
+   "verdict": "No match: locally constant condensed sheaf adjunctions do not assert scheme-open gluing of bounded constructible complexes or exceptional-image preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "isOpenCover|boundedConstructible|cohomology.*constructible",
+   "results": "Actual output: 5 hits; 302, 504, 505, 521, 522. Source subdirectory: Topology/Constructible.lean",
+   "date": "2026-10-16",
+   "verdict": "No match: read Mathlib/Topology/Constructible.lean:500-536; these are constructible subsets, not cohomology sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"restrictFullyFaithful\"",
+   "results": "Actual output: 6 hits; CategoryTheory.Adjunction.restrictFullyFaithful, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply.",
+   "date": "2026-10-16",
+   "verdict": "No match for the entire item: read Mathlib/CategoryTheory/Adjunction/Restrict.lean:30-66; the generic adjunction restriction assumes both object-preservation inputs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-thm-restriction-local",
+  "sk-prop-sf-comp-coherence",
+  "sk-prop-sf-existence"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-restriction",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-thm-restriction-glue",
+  "worker": "stage1",
+  "group": "Q27",
+  "summary": "STATEMENT-DISPUTED: the imported shorthand omitted the standing scheme hypotheses required to type the referenced Brown adjoint and to obtain a finite affine cover. Restored the exact setting of sk-def-sfb-dc-setting, preserving both conclusions and the condensed coefficient category. Expanded boundedness, common-stratification gluing, local f^! preservation, compactification preservation and full-subcategory restriction. Explicitly cites the existing rational Dctf=Dbc assertion; replaces absent sk-prop-sf-comp-coherence by det-sf-comp-coherence-single. No new nodes. Second reading explicitly fixes the Qlbar coefficient to sk-def-sfb-qlbar-condensed, matching the current local-input statement.",
+  "blueprint": "The original proof paragraph (1) is realized by steps 2–3, paragraph (2) by steps 4–6; step 1 spells out standing hypotheses and the rational-category comparison. These realize unit sk-thm-restriction steps 2–3 without replacing its affine-factorization route.",
+  "tool_uses": [
+   {
+    "node": "sk-lem-coefficient-heart",
+    "why": "Only its explicit rational Dctf=Dbc identification and lisse-stratification characterization are used; these supply coefficient comparisons, not an alternative exceptional-image route."
+   },
+   {
+    "node": "det-lem-coefficient-heart-common-stratification",
+    "why": "Generic finite common refinement and lisse restriction are exactly the tools for the common-refinement argument of unit step 2."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Supplies only the scheme structure on the closed complements in that finite partition, with no six-functor theorem."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Only the exactness of inverse image on these pulled-back coefficient modules is used to compute restricted cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-lem-coefficient-heart",
+  "det-lem-coefficient-heart-common-stratification",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "sk-prop-sfb-cartesian-coefficients"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-a0a9c65ab",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-a0a9c65ab (reviewer sub-agent of L); spot-checked: Read in full: the item, the blueprint item, its proof, the unit and its local/unit proofs from main-20261015, every cited node's statement, and the master Proper.lean docstring for the condensed Qlb (padicAlgClRingObj). The item statement adds the standing setting of sk-def-sfb-dc-setting, which sk-prop-sf-existence needs for f^! to exist. The worker's counterexample (an infinite disjoint union of Spec k) shows why that setting is needed. Both conclusions are kept and nothing is weakened. Step checks: step 1 uses 01T6 and 01K4 for Noetherian X and Y, and the heart node for Dctf=Dbc. Step 2 uses exact module pullback from sk-prop-sfb-cartesian-coefficients, and the zero check is done on the open cover T×_X U_α. Step 3 builds strata of X with immersion composition (e) and reduced complements (2), takes a common refinement by clause (1), and restricts lisse sheaves by clause (2). Each nonempty stratum lies in some U_α. Step 4 uses det-thm-restriction-local (finite chart cover plus local Dbc) and then clause (1). Step 5 uses the same Rp_*∘j_! as sk-prop-sf-existence and det-sf-comp-coherence-single with Y qcqs. Step 6 is elementary because the subcategories are full. No cycle; proof_deps equals the union of the uses. No new nodes and no duplicates (det-thm-int-restriction-glue is the O_E analogue). I accept all four declared tool_uses. No SGA source. FIX, three repairs: (1) Step 1 now states the Qlb coefficient explicitly as the finite-subextension ring, which matches the master and the heart and local nodes. It differs from C(-,Qlb): x_n=ℓ^{n+1/n}→0 gives a continuous map whose image lies in no finite subextension. Before this, the item silently applied sk-def-localizing-closure and det-sf-comp-coherence-single, whose DAG wording ('ℓ-adic topology') literally gives C(-,Qlb). This is a pre-existing imprecision in those reviewed nodes, outside this delivery, reported to the maintainer: they should cite sk-def-sfb-qlbar-condensed. (2) Step 3 now takes constructibility from the heart node's lisse characterization, not from sk-def-sfb-constructible's local-model definition. (3) Step 5 now cites sk-def-nagata-sketch-data for the quasi-compactness of j. Uses and proof_deps are updated; the statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {},
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ff4b72f02",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read the node, the blueprint source place, every stmt_dep record and the exact declarations: CondensedConstantConstructibility (Dbc predicate), localizingClosureProEtale, localizingLowerShriek and the full signature of exists_localizingExceptionalAdjoint, padicSubfieldCondensedRing and padicAlgClRingObj (finite-subextension Qlbar ring, not C(-,Qlbar)). hΛ covers exactly the E and Qlbar cases of the existence theorem. The char/finite-type/separated hypotheses match the node and are no stronger. h, G and adj are exactly the data the existence theorem provides, not extra assumptions. Clause 1: finite I : Type w, iSup U = ⊤, restriction via upperStar along the open immersion. Clause 2: hX, hY, hF, hG are conclusions; adjbc is pinned to adj.homEquiv by an equation. Edge cases checked: empty I or empty X, zero objects, E = Q_l, universes (k : Type u, w free). The two helper lifts carry real data; the theorem's sorry is the only one; docstrings, line widths and stated-proof-dep imports are OK; no name clash. The node changed only in lean, and lean.statement is verbatim from the file. The report has a real Worker report and the Second reading by Q01 section is the standard note that this review is the second reading. nt_compile.py --json on the snapshot file: clean in 3.9 s; #check and #print axioms confirm the types and sorryAx. Observation outside this delivery: sk-def-sfb-qlbar-condensed still lacks a lean record."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalRestrictionGlue",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rationalRestrictionGlue",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.restrictionGlueLowerShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.restrictionGlueUpperShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalRestrictionGlue"
+  ],
+  "file": "lean/Sheaf/Paper/RationalRestrictionGlue.lean",
+  "statement": "theorem rationalRestrictionGlue (ℓ : ℕ) [Fact ℓ.Prime] (E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)) [FiniteDimensional ℚ_[ℓ] E] (hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (Profinite.padicSubfieldCondensedRing ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (c : Compactification.BoundaryCompactification f) (h : ∀ A, localizingClosureProEtale Λ X A → localizingClosureProEtale Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj A)) (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤ (localizingClosureProEtale Λ X).FullSubcategory) (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) : (∀ (I : Type w) [Finite I] (U : I → X.Opens), iSup U = ⊤ → ∀ M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), (∀ i : I, constantModelBoundedConstructible Λ (U i).toScheme (((upperStar Λ (U i).ι).mapDerivedCategory).obj M)) → constantModelBoundedConstructible Λ X M) ∧ ∃ (hX : constantModelBoundedConstructible Λ X ≤ localizingClosureProEtale Λ X) (hY : constantModelBoundedConstructible Λ Y ≤ localizingClosureProEtale Λ Y) (hF : ∀ A, constantModelBoundedConstructible Λ X A → constantModelBoundedConstructible Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj A)) (hG : ∀ K : (localizingClosureProEtale Λ Y).FullSubcategory, constantModelBoundedConstructible Λ Y K.obj → constantModelBoundedConstructible Λ X (G.obj K).obj), ∃ adjbc : restrictionGlueLowerShriek Λ c.obj.obj hF ⊣ restrictionGlueUpperShriek Λ G hY hG, ∀ (A : ConstantModelBoundedConstructible Λ X) (K : ConstantModelBoundedConstructible Λ Y) (t : (restrictionGlueLowerShriek Λ c.obj.obj hF).obj A ⟶ K), (adjbc.homEquiv A K t).hom = (adj.homEquiv ⟨A.obj, hX A.obj A.property⟩ ⟨K.obj, hY K.obj K.property⟩ (ObjectProperty.homMk t.hom)).hom",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-18",
+  "existing": false
+ }
 }

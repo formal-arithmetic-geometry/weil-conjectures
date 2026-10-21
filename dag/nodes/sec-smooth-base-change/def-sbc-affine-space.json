@@ -1,145 +1,134 @@
 {
-  "id": "def-sbc-affine-space",
-  "blueprint": {
-    "is": "def-sbc-affine-space",
-    "from": null,
-    "same_as": [
-      "def-nagata-relative-affine-space"
-    ]
+ "id": "def-sbc-affine-space",
+ "blueprint": {
+  "is": "def-sbc-affine-space",
+  "from": null,
+  "same_as": [
+   "def-nagata-relative-affine-space"
+  ]
+ },
+ "kind": "definition",
+ "title": "Affine space",
+ "statement": "For a scheme $S$ [def-pc-scheme], with the conventions of [def-weil-pbc-scheme-conventions] and $n\\in\\mathbb N$, the affine $n$-space over $S$ is the scheme\n$$\\mathbf A^n_S=S\\times_{\\operatorname{Spec}\\mathbb Z}\\operatorname{Spec}(\\mathbb Z[x_1,\\ldots,x_n])$$\nwith its first projection to $S$ [def-pc-fibre-product, def-weil-affine-spectrum]. Equivalently, this is the relative spectrum $\\underline{\\operatorname{Spec}}_S(\\mathcal O_S[x_1,\\ldots,x_n])$, where the polynomial algebra sheaf is locally the polynomial algebra on $n$ variables. Over an affine open $U=\\operatorname{Spec}R$ of $S$, its restriction is canonically $\\operatorname{Spec}(R[x_1,\\ldots,x_n])$ with structure map induced by the inclusion of constants. For $n=0$, the projection $\\mathbf A^0_S\\to S$ is a canonical isomorphism; the notation $\\mathbf A^0_S=S$ uses this identification. Smoothness is a separate statement, [sbc-lem-affine-space-smooth].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-smooth/def-sbc-affine-space.md",
+  "place": "node def-sbc-affine-space, order 1377"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def AffineSpace|def over|isEmpty|empty|iso.*Spec",
+   "results": "24, 44, 166, 174, 181",
+   "date": "2026-10-14",
+   "verdict": "match: AffineSpace and its over, SpecIso, isPullback_map, and empty-coordinate IsIso instance jointly cover the definition; sources read"
   },
-  "kind": "definition",
-  "title": "Affine space",
-  "statement": "For a scheme $S$ [def-pc-scheme], with the conventions of [def-weil-pbc-scheme-conventions] and $n\\in\\mathbb N$, the affine $n$-space over $S$ is the scheme\n$$\\mathbf A^n_S=S\\times_{\\operatorname{Spec}\\mathbb Z}\\operatorname{Spec}(\\mathbb Z[x_1,\\ldots,x_n])$$\nwith its first projection to $S$ [def-pc-fibre-product, def-weil-affine-spectrum]. Equivalently, this is the relative spectrum $\\underline{\\operatorname{Spec}}_S(\\mathcal O_S[x_1,\\ldots,x_n])$, where the polynomial algebra sheaf is locally the polynomial algebra on $n$ variables. Over an affine open $U=\\operatorname{Spec}R$ of $S$, its restriction is canonically $\\operatorname{Spec}(R[x_1,\\ldots,x_n])$ with structure map induced by the inclusion of constants. For $n=0$, the projection $\\mathbf A^0_S\\to S$ is a canonical isomorphism; the notation $\\mathbf A^0_S=S$ uses this identification. Smoothness is a separate statement, [sbc-lem-affine-space-smooth].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-smooth/def-sbc-affine-space.md",
-    "place": "node def-sbc-affine-space, order 1377"
+  {
+   "tool": "leansearch",
+   "query": "Affine space over a scheme with no coordinates is isomorphic to the base scheme",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-pc-fibre-product",
-    "def-weil-affine-spectrum",
-    "def-pc-scheme",
-    "lem-weil-pbc-affine-morphism-relative-spec"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "def AffineSpace|def over|isEmpty|empty|iso.*Spec",
-      "results": "24, 44, 166, 174, 181",
-      "date": "2026-10-14",
-      "verdict": "match: AffineSpace and its over, SpecIso, isPullback_map, and empty-coordinate IsIso instance jointly cover the definition; sources read"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Affine space over a scheme with no coordinates is isomorphic to the base scheme",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.AffineSpace",
-      "results": "AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace.instIsIntegral, AlgebraicGeometry.AffineSpace.instIsReduced, AlgebraicGeometry.AffineSpace.reindex, AlgebraicGeometry.AffineSpace.map, AlgebraicGeometry.AffineSpace.reindex_id",
-      "date": "2026-10-14",
-      "verdict": "match: AffineSpace and its over, SpecIso, isPullback_map, and empty-coordinate IsIso instance jointly cover the definition; sources read"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Relative affine n-space over an arbitrary scheme S is locally Spec of the polynomial ring over each affine open, and affine zero-space is canonically S",
-      "results": "AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.isoOfIsAffine, AlgebraicGeometry.AffineSpace.SpecIso, AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.functor_obj_obj",
-      "date": "2026-10-14",
-      "verdict": "match: AffineSpace and its over, SpecIso, isPullback_map, and empty-coordinate IsIso instance jointly cover the definition; sources read"
-    },
-    {
-      "tool": "grep",
-      "query": "IsEmpty n|def AffineSpace|instance over|def SpecIso|lemma isPullback_map",
-      "results": "Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean",
-      "date": "2026-10-14",
-      "verdict": "match: AffineSpace and its over, SpecIso, isPullback_map, and empty-coordinate IsIso instance jointly cover the definition; sources read"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.AffineSpace, IsIso",
-      "results": "0 hits; loogle: unknown identifier 'IsIso'",
-      "date": "2026-10-14",
-      "verdict": "query error: repeated with qualified CategoryTheory.IsIso"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.AffineSpace, CategoryTheory.IsIso",
-      "results": "AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty",
-      "date": "2026-10-14",
-      "verdict": "match: exact empty-coordinate isomorphism instance at line 442"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.AffineSpace.SpecIso",
-      "results": "AlgebraicGeometry.AffineSpace.SpecIso, AlgebraicGeometry.AffineSpace.SpecIso_inv_over, AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc, AlgebraicGeometry.AffineSpace.map_SpecMap, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord",
-      "date": "2026-10-14",
-      "verdict": "match: SpecIso and SpecIso_inv_over give the affine-base chart and constants map; declarations read at lines 228 and 255"
-    },
-    {
-      "tool": "grep",
-      "query": "pullback.*Spec|SpecIso_inv_over|IsEmpty n",
-      "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
-      "date": "2026-10-14",
-      "verdict": "match: AffineSpace.lean lines 45 and 255 confirm pullback construction and constants-map compatibility; other hits are unrelated pullback results"
-    }
-  ],
-  "mathlib_match": {
-    "declaration": "AlgebraicGeometry.AffineSpace",
-    "file": "Mathlib/AlgebraicGeometry/AffineSpace.lean",
-    "line": 44,
-    "how": "specializes in one line: take coordinate type ULift (Fin n). AffineSpace (line 44) is exactly the alternative base-change definition in Stacks 01M0/01LZ; over (line 66) is the first projection. SpecIso (line 228) and SpecIso_inv_over (line 255) give the polynomial spectrum and constants inclusion on affine bases; isPullback_map (line 325) applies to each affine-open inclusion to identify its restriction. The instance at line 442 (AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty) makes the projection an isomorphism for an empty coordinate type, including ULift (Fin 0). No affineness assumption on S is required."
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace",
+   "results": "AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace.instIsIntegral, AlgebraicGeometry.AffineSpace.instIsReduced, AlgebraicGeometry.AffineSpace.reindex, AlgebraicGeometry.AffineSpace.map, AlgebraicGeometry.AffineSpace.reindex_id",
+   "date": "2026-10-14",
+   "verdict": "match: AffineSpace and its over, SpecIso, isPullback_map, and empty-coordinate IsIso instance jointly cover the definition; sources read"
   },
-  "status": "mathlib",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1377,
-  "blueprint_uses": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "leanfinder",
+   "query": "Relative affine n-space over an arbitrary scheme S is locally Spec of the polynomial ring over each affine open, and affine zero-space is canonically S",
+   "results": "AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.isoOfIsAffine, AlgebraicGeometry.AffineSpace.SpecIso, AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.functor_obj_obj",
+   "date": "2026-10-14",
+   "verdict": "match: AffineSpace and its over, SpecIso, isPullback_map, and empty-coordinate IsIso instance jointly cover the definition; sources read"
   },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-def-smooth",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "def-sbc-affine-space",
-    "worker": "stage1",
-    "summary": "Read Stacks 01M0 and its base-change alternative; corrected ordinary Spec of a sheaf to the relative-spectrum meaning, with canonical rather than literal equality in dimension zero. Mathlib provides every clause; no new nodes. Read the project affine-space extension, which imports the underlying Mathlib definition and contains no project attachment covering the item.",
-    "blueprint": "Definition formula, structure morphism, and zero-dimensional identification of blueprint def-sbc-affine-space; smoothness remains the separate node.",
-    "tool_uses": []
+  {
+   "tool": "grep",
+   "query": "IsEmpty n|def AffineSpace|instance over|def SpecIso|lemma isPullback_map",
+   "results": "Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean",
+   "date": "2026-10-14",
+   "verdict": "match: AffineSpace and its over, SpecIso, isPullback_map, and empty-coordinate IsIso instance jointly cover the definition; sources read"
   },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NP-9066573d8",
-    "group": "NP",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-9066573d8 (reviewer sub-agent of L); spot-checked: Mathematics, Stacks Tag 01M0, Mathlib AffineSpace declarations, edge cases, duplicate search, route, and exact target-source coefficient categories were checked in full. The statement uses relative spectrum but omitted existing node lem-weil-pbc-affine-morphism-relative-spec from stmt_deps (B3). Added it in fixes/dag/nodes/sec-smooth-base-change/def-sbc-affine-space.json. Detailed review written to review.md.; 1 file(s) fixed by the reviewer"
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, IsIso",
+   "results": "0 hits; loogle: unknown identifier 'IsIso'",
+   "date": "2026-10-14",
+   "verdict": "query error: repeated with qualified CategoryTheory.IsIso"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For a scheme $S$ and an integer $n\\geq0$, the *affine $n$-space*\nover $S$ is\n\n$$\n\\mathbf A^n_S=\\operatorname{Spec}\\bigl(\\mathcal O_S[x_1,\\dots,x_n]\\bigr)\n$$\n\nwith its structure morphism $\\mathbf A^n_S\\to S$; for $n=0$ one has\n$\\mathbf A^0_S=S$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, CategoryTheory.IsIso",
+   "results": "AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty",
+   "date": "2026-10-14",
+   "verdict": "match: exact empty-coordinate isomorphism instance at line 442"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace.SpecIso",
+   "results": "AlgebraicGeometry.AffineSpace.SpecIso, AlgebraicGeometry.AffineSpace.SpecIso_inv_over, AlgebraicGeometry.AffineSpace.SpecIso_inv_over_assoc, AlgebraicGeometry.AffineSpace.map_SpecMap, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.AffineSpace.SpecIso_inv_appTop_coord",
+   "date": "2026-10-14",
+   "verdict": "match: SpecIso and SpecIso_inv_over give the affine-base chart and constants map; declarations read at lines 228 and 255"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*Spec|SpecIso_inv_over|IsEmpty n",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean",
+   "date": "2026-10-14",
+   "verdict": "match: AffineSpace.lean lines 45 and 255 confirm pullback construction and constants-map compatibility; other hits are unrelated pullback results"
   }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.AffineSpace",
+  "file": "Mathlib/AlgebraicGeometry/AffineSpace.lean",
+  "line": 44,
+  "how": "specializes in one line: take coordinate type ULift (Fin n). AffineSpace (line 44) is exactly the alternative base-change definition in Stacks 01M0/01LZ; over (line 66) is the first projection. SpecIso (line 228) and SpecIso_inv_over (line 255) give the polynomial spectrum and constants inclusion on affine bases; isPullback_map (line 325) applies to each affine-open inclusion to identify its restriction. The instance at line 442 (AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty) makes the projection an isomorphism for an empty coordinate type, including ULift (Fin 0). No affineness assumption on S is required."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1377,
+ "blueprint_uses": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "lean_audit": {},
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-def-smooth",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-sbc-affine-space",
+  "worker": "stage1",
+  "summary": "Read Stacks 01M0 and its base-change alternative; corrected ordinary Spec of a sheaf to the relative-spectrum meaning, with canonical rather than literal equality in dimension zero. Mathlib provides every clause; no new nodes. Read the project affine-space extension, which imports the underlying Mathlib definition and contains no project attachment covering the item.",
+  "blueprint": "Definition formula, structure morphism, and zero-dimensional identification of blueprint def-sbc-affine-space; smoothness remains the separate node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NP-9066573d8",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NP-9066573d8 (reviewer sub-agent of L); spot-checked: Mathematics, Stacks Tag 01M0, Mathlib AffineSpace declarations, edge cases, duplicate search, route, and exact target-source coefficient categories were checked in full. The statement uses relative spectrum but omitted existing node lem-weil-pbc-affine-morphism-relative-spec from stmt_deps (B3). Added it in fixes/dag/nodes/sec-smooth-base-change/def-sbc-affine-space.json. Detailed review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For a scheme $S$ and an integer $n\\geq0$, the *affine $n$-space*\nover $S$ is\n\n$$\n\\mathbf A^n_S=\\operatorname{Spec}\\bigl(\\mathcal O_S[x_1,\\dots,x_n]\\bigr)\n$$\n\nwith its structure morphism $\\mathbf A^n_S\\to S$; for $n=0$ one has\n$\\mathbf A^0_S=S$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

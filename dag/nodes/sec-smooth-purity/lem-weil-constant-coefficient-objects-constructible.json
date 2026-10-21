@@ -1,290 +1,279 @@
 {
-  "id": "lem-weil-constant-coefficient-objects-constructible",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-weil-ordinary-compact-cohomology",
-      "place": "its statement (a notion the statement uses)",
-      "via": []
-    },
-    "same_as": null
+ "id": "lem-weil-constant-coefficient-objects-constructible",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-ordinary-compact-cohomology",
+   "place": "its statement (a notion the statement uses)",
+   "via": []
   },
-  "kind": "statement",
-  "title": "The constant coefficient objects are bounded constructible",
-  "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, a finite extension $E/\\Ql$ contained in $\\Qlb$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and for $n\\geq1$ put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $Y$ be a scheme, with small pro-etale site $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]; let $(A_{E,n})_Y$ be the constant sheaf of the ring $A_{E,n}$ on $Y_{\\mathrm{proet}}$ (the sheafification of the constant presheaf, as in that definition), and let $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$ be the completed integral coefficient sheaf [def-weil-completed-integral-coefficients]. Then:\n\n1. $(A_{E,n})_Y$, placed in degree $0$, is an object of $D^b_c(Y,A_{E,n})$ [def-weil-finite-torsion-constructibility]: it is locally constant on the single stratum $Y$ with finite stalks $A_{E,n}$.\n2. $\\widehat{\\mathcal O}_{E,Y}$, placed in degree $0$, is an object of $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]: it is derived complete [def-weil-derived-complete], the canonical map $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}\\to(A_{E,n})_Y$ (the derived reduction modulo $\\varpi_E^n$ [def-weil-integral-derived-reduction]) is an isomorphism for every $n\\geq1$, and the cohomological supports [def-weil-cohomological-support] of these reductions are all contained in $[0,0]$.\n3. Consequently $E_Y$, the image of $\\widehat{\\mathcal O}_{E,Y}$ in the rationalized category $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-rationalization-karoubi], and $(\\Qlb)_Y=(E,E_Y)$ in the common-stage category $D^b_c(Y,\\Qlb)$ [def-weil-algebraically-closed-coefficients], are objects of those categories, and $(\\Qlb)_Y$ is independent of the stage $E$: for finite extensions $E\\subset L$ in $\\Qlb$, the integral scalar extension [def-weil-integral-scalar-extension] gives an isomorphism $\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\mathcal O_E}\\mathcal O_L\\cong\\widehat{\\mathcal O}_{L,Y}$ in $D(Y_{\\mathrm{proet}},\\mathcal O_L)$, hence $E_Y\\otimes_EL\\cong L_Y$ in $D^b_c(Y,L)$, and its class is an isomorphism $(E,E_Y)\\cong(L,L_Y)$ in $D^b_c(Y,\\Qlb)$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
-    "place": "node def-weil-ordinary-compact-cohomology, order 1510: 'let $\\Lambda_Y$ denote its coefficient object on the small pro-etale site ... Abbreviate $H^i(Y,\\Lambda)=H^i(Y,\\Lambda_Y)$' (for $H^i(Y,\\Lambda_Y)$ to be defined, $\\Lambda_Y$ must be an object of $D^b_c(Y,\\Lambda)$; the blueprint does not say so). The integral case is Bhatt-Scholze, literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Definition 6.8.1 and Lemma 6.8.2(1) ($\\mathcal O_{E,X}=\\widehat{\\mathcal O}_E=\\varprojlim_n\\mathcal O_E/\\varpi^n$)"
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-algebraic-closure",
-    "def-weil-pbc-proetale-site",
-    "def-weil-completed-integral-coefficients",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-derived-complete",
-    "def-weil-integral-derived-reduction",
-    "def-weil-cohomological-support",
-    "def-weil-rationalization-karoubi",
-    "def-weil-integral-scalar-extension",
-    "def-weil-algebraically-closed-coefficients"
-  ],
-  "proof": [
-    {
-      "text": "Finiteness and the tower. By [lem-weil-valued-dvr-finite-quotients] (applied to $\\mathcal O_E$, a discrete valuation ring with finite residue field by [def-weil-l-adic-coefficient-extension]), each $A_{E,n}$ is a finite ring and each reduction $A_{E,n+1}\\to A_{E,n}$ is surjective. Hence the morphism of constant sheaves $(A_{E,n+1})_Y\\to(A_{E,n})_Y$ is surjective: every section of $(A_{E,n})_Y$ over $U$ is, on the members of some covering of $U$, a constant section $a\\in A_{E,n}$ (sheafification [def-weil-pbc-proetale-site]), and $a$ lifts to $A_{E,n+1}$.",
-      "uses": [
-        "lem-weil-valued-dvr-finite-quotients",
-        "def-weil-l-adic-coefficient-extension",
-        "def-weil-pbc-proetale-site"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "p. 49, §6.5, first paragraph (the sheaves $R/\\mathfrak m^n$ on $X_{\\mathrm{proet}}$ and $\\widehat R=\\lim R/\\mathfrak m^n$, here $R=\\mathcal O_E$, $\\mathfrak m=(\\varpi_E)$); p. 58, Lemma 6.8.2(1)"
-      }
-    },
-    {
-      "text": "Part 1. Take the partition of $Y$ with the single stratum $Y_1=Y$ ($N=1$), with immersion $i_1=\\mathrm{id}_Y$. The set $Y$ is open and closed in $Y$, hence locally closed, and constructible (it is open and retrocompact in $Y$) [def-weil-scheme-morphism-properties]. The restriction $\\mathrm{id}_Y^*(A_{E,n})_Y$ is $(A_{E,n})_Y$ itself (inverse image along the identity), and it is constant, hence locally constant (take the one-member covering $\\{\\mathrm{id}:Y\\to Y\\}$ of $Y_{\\mathrm{proet}}$) [def-weil-proetale-locally-constant-sheaf]. Its stalk at every geometric point of $Y$ [def-weil-proetale-geometric-stalk] is $A_{E,n}$ by [lem-weil-proetale-constant-sheaf-stalk], a finite $A_{E,n}$-module by Step 1. So $(A_{E,n})_Y$ is a constructible sheaf of $A_{E,n}$-modules [def-weil-proetale-constructible-sheaf].",
-      "uses": [
-        "def-weil-scheme-morphism-properties",
-        "lem-weil-proetale-constant-sheaf-stalk",
-        "def-weil-proetale-constructible-sheaf",
-        "lem-weil-valued-dvr-finite-quotients",
-        "def-weil-proetale-locally-constant-sheaf",
-        "def-weil-proetale-geometric-stalk"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "p. 49, §6.5, paragraph after Definition 6.5.1 ($D_{cons}(X_{\\mathrm{proet}},R/\\mathfrak m^n)\\simeq D_{cons}(X_{\\mathrm{et}},R/\\mathfrak m^n)$; the constant sheaf $R/\\mathfrak m^n$ is the pullback of a constant, hence constructible, etale sheaf); the stratification and stalks are written out here"
-      }
-    },
-    {
-      "text": "The complex $(A_{E,n})_Y[0]$ has $\\mathcal H^0=(A_{E,n})_Y$ and $\\mathcal H^i=0$ for $i\\neq0$ [def-weil-derived-cohomology-sheaves]: finitely many nonzero cohomology sheaves, all constructible by Step 2. Hence $(A_{E,n})_Y\\in D^b_c(Y,A_{E,n})$ [def-weil-finite-torsion-constructibility], and its cohomological support [def-weil-cohomological-support] is contained in $\\{0\\}$ (it is $\\{0\\}$ if $Y\\neq\\emptyset$ and empty if $Y=\\emptyset$). This proves Part 1.",
-      "uses": [
-        "def-weil-derived-cohomology-sheaves",
-        "def-weil-finite-torsion-constructibility",
-        "def-weil-cohomological-support"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "p. 49, §6.5 (as in Step 2)"
-      }
-    },
-    {
-      "text": "Reductions of $\\widehat{\\mathcal O}_{E,Y}$. The one-term complex $P=\\widehat{\\mathcal O}_{E,Y}$ in degree $0$ is K-flat over $\\widehat{\\mathcal O}_{E,Y}$: for every acyclic complex $M$ of $\\widehat{\\mathcal O}_{E,Y}$-modules, $\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\widehat{\\mathcal O}_{E,Y}}M\\cong M$ termwise (unit isomorphism of the tensor product of sheaves of modules [def-pur-sheaf-tensor-product]), which is acyclic. So the identity $P\\to\\widehat{\\mathcal O}_{E,Y}$ may be used in [def-weil-integral-derived-reduction], and $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}=\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\widehat{\\mathcal O}_{E,Y}}(A_{E,n})_Y\\cong(A_{E,n})_Y$, the isomorphism being the unit isomorphism; this is the canonical map of Part 2, which is therefore an isomorphism. Under these isomorphisms the transition maps of the system $(\\operatorname{Res}_n(\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}))_n$ of [def-weil-derived-complete] are the reduction maps $\\operatorname{Res}_{n+1}(A_{E,n+1})_Y\\to\\operatorname{Res}_n(A_{E,n})_Y$, and the maps $\\widehat{\\mathcal O}_{E,Y}\\to\\operatorname{Res}_n(A_{E,n})_Y$ are the limit projections $\\pi_n$ [def-weil-completed-integral-coefficients] (the unit isomorphism is natural in the second factor).",
-      "uses": [
-        "def-pur-sheaf-tensor-product",
-        "def-weil-integral-derived-reduction",
-        "def-weil-derived-complete",
-        "def-weil-completed-integral-coefficients"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "p. 24, Definition 3.5.2 (the maps $\\widehat R\\to R/\\mathfrak m^n$ and $K\\otimes^L_{\\widehat R}R/\\mathfrak m^n$); p. 49, Lemma 6.5.4 and the notation of §6.5 ('when $L=R$ or $R/\\mathfrak m^n$ we drop the underline')"
-      }
-    },
-    {
-      "text": "By Step 4 and Part 1, every reduction $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong(A_{E,n})_Y$ lies in $D^b_c(Y,A_{E,n})$, and their cohomological supports are all contained in the single interval $[0,0]$, independent of $n$ (Step 3).",
-      "uses": [
-        "def-weil-finite-torsion-constructibility",
-        "def-weil-cohomological-support"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "p. 49, Definition 6.5.1 and Lemma 6.5.4"
-      }
-    },
-    {
-      "text": "$\\widehat{\\mathcal O}_{E,Y}$ is derived complete. The $\\widehat{\\mathcal O}_{E,Y}$-modules $F_n=\\operatorname{Res}_n(A_{E,n})_Y$ form an inverse system with surjective transition maps (Step 1; $\\operatorname{Res}_n$ does not change the underlying sheaf), and their limit in sheaves of $\\widehat{\\mathcal O}_{E,Y}$-modules is $\\widehat{\\mathcal O}_{E,Y}$ itself with projections $\\pi_n$ (limits of sheaves of modules and of rings are computed on the underlying sheaves [def-pur-sheaf-inverse-limit, def-weil-completed-integral-coefficients]). By [lem-weil-proetale-surjective-tower-derived-limit] (clause 2), with $\\mathcal R=\\widehat{\\mathcal O}_{E,Y}$, $\\widehat{\\mathcal O}_{E,Y}$ in degree $0$ is a derived limit $R\\varprojlim_n\\operatorname{Res}_n(A_{E,n})_Y$ in $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ [def-weil-derived-limit]; by clause 3, the canonical map $\\widehat{\\mathcal O}_{E,Y}\\to R\\varprojlim_n\\operatorname{Res}_n(A_{E,n})_Y$ of [def-weil-derived-complete], which is the map compatible with the $\\pi_n$ of Step 4, is the unique such map, namely the identity of $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$, an isomorphism. Hence $\\widehat{\\mathcal O}_{E,Y}$ is derived complete [def-weil-derived-complete].",
-      "uses": [
-        "lem-weil-proetale-surjective-tower-derived-limit",
-        "def-pur-sheaf-inverse-limit",
-        "def-weil-completed-integral-coefficients",
-        "def-weil-derived-limit",
-        "def-weil-derived-complete",
-        "lem-weil-valued-dvr-finite-quotients"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "p. 17, Proposition 3.1.10 ($\\lim F_n\\simeq R\\lim F_n$ for surjective towers in a replete topos), with p. 18, Proposition 3.2.3(1) and p. 29, Proposition 4.2.8; p. 24, Definition 3.5.2 ($m$-adic completeness of $K\\in D(X,\\widehat R)$)"
-      }
-    },
-    {
-      "text": "Part 2. By Steps 4, 5 and 6, $\\widehat{\\mathcal O}_{E,Y}$ is derived complete, its reductions lie in $D^b_c(Y,A_{E,n})$ and have cohomological supports in $[0,0]$ for every $n$; so it is an object of $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed].",
-      "uses": [
-        "def-weil-derived-complete-integral-detailed"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "p. 49, Definition 6.5.1 (here $K\\otimes^L_{\\widehat R}R/\\mathfrak m=(A_{E,1})_Y$ is the pullback of the constant etale sheaf, so $\\widehat R\\in D_{cons}(X_{\\mathrm{proet}},\\widehat R)$); p. 58, Lemma 6.8.2(1) ($\\mathcal O_{E,X}=\\widehat{\\mathcal O}_E$)"
-      }
-    },
-    {
-      "text": "Part 3, objects. The rationalized category $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ has the same objects as $D^b_c(Y,\\mathcal O_E)$ [def-weil-rationalization-karoubi], so $E_Y$, the object $\\widehat{\\mathcal O}_{E,Y}$ of Part 2 viewed there, is an object of $D^b_c(Y,E)$. The objects of $D^b_c(Y,\\Qlb)=\\mathcal C_Y$ are the pairs $(E,K)$ with $E\\in\\mathcal E_\\ell$ and $K\\in D^b_c(Y,E)$ [def-weil-algebraically-closed-coefficients], so $(\\Qlb)_Y=(E,E_Y)$ is one.",
-      "uses": [
-        "def-weil-rationalization-karoubi",
-        "def-weil-algebraically-closed-coefficients"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "p. 58, Lemma 6.8.2(2) ($E_X=\\mathcal O_{E,X}[\\ell^{-1}]$) and Definition 6.8.1; the categories here are those of the DAG, not Bhatt-Scholze's"
-      }
-    },
-    {
-      "text": "Integral scalar extension of $\\widehat{\\mathcal O}_{E,Y}$. Let $E\\subset L$ be finite extensions of $\\Ql$ in $\\Qlb$, $e$ the ramification index, so $\\varpi_E\\mathcal O_L=\\varpi_L^e\\mathcal O_L$. As in Step 4 the K-flat representative $P=\\widehat{\\mathcal O}_{E,Y}$ gives $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{L,m}=\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\widehat{\\mathcal O}_{E,Y}}(A_{L,m})_Y\\cong(A_{L,m})_Y$ [def-weil-integral-scalar-extension, def-pur-sheaf-tensor-product], with the reductions $(A_{L,m+1})_Y\\to(A_{L,m})_Y$ as transition maps; these are surjective by Step 1 applied to $L$. Their limit is $\\widehat{\\mathcal O}_{L,Y}$ [def-weil-completed-integral-coefficients for $L$], so by [lem-weil-proetale-surjective-tower-derived-limit] (with $\\mathcal R=\\widehat{\\mathcal O}_{L,Y}$) $\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\mathcal O_E}\\mathcal O_L=R\\varprojlim_m\\operatorname{Res}_m(A_{L,m})_Y\\cong\\widehat{\\mathcal O}_{L,Y}$ in $D(Y_{\\mathrm{proet}},\\mathcal O_L)$, the isomorphism being compatible with the projections to the $(A_{L,m})_Y$.",
-      "uses": [
-        "def-weil-integral-scalar-extension",
-        "def-pur-sheaf-tensor-product",
-        "lem-weil-valued-dvr-finite-quotients",
-        "def-weil-completed-integral-coefficients",
-        "lem-weil-proetale-surjective-tower-derived-limit",
-        "def-weil-derived-limit"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "agent-written; the analogue in the source is p. 58, Lemma 6.8.2(1)-(2) and its proof on p. 59 ($\\mathcal O_{E,X}$ is $\\varprojlim_n\\mathcal O_E/\\varpi^n$ for every finite $E$, and $\\mathcal O_{E,X}=\\operatorname{colim}_F\\mathcal O_{F,X}$)"
-      }
-    },
-    {
-      "text": "Independence of the stage. The scalar-extension functor $-\\otimes_EL:D^b_c(Y,E)\\to D^b_c(Y,L)$ is, on objects, $K\\mapsto K\\otimes_{\\mathcal O_E}\\mathcal O_L$, the integral scalar extension of an integral representative, viewed in the rationalization [def-weil-rationalization-karoubi]. On the representative $\\widehat{\\mathcal O}_{E,Y}$ of $E_Y$, Step 9 gives an isomorphism $\\phi:\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\mathcal O_E}\\mathcal O_L\\cong\\widehat{\\mathcal O}_{L,Y}$ in $D(Y_{\\mathrm{proet}},\\mathcal O_L)$, between objects of the full subcategory $D^b_c(Y,\\mathcal O_L)$ (Part 2 for $L$), and Step 9 with $E=L$ gives $\\psi:\\widehat{\\mathcal O}_{L,Y}\\otimes_{\\mathcal O_L}\\mathcal O_L\\cong\\widehat{\\mathcal O}_{L,Y}$; their images in $D^b_c(Y,L)$ are isomorphisms $\\phi:E_Y\\otimes_EL\\cong L_Y$ and $\\psi:L_Y\\otimes_LL\\cong L_Y$ (a functor carries isomorphisms to isomorphisms). So $u=\\psi^{-1}\\phi:E_Y\\otimes_EL\\to L_Y\\otimes_LL$ represents a morphism $[L,u]:(E,E_Y)\\to(L,L_Y)$ of $\\mathcal C_Y$, and $[L,u^{-1}]$ a morphism back; their composites are represented over $L$ by $u^{-1}u$ and $uu^{-1}$, identities, which represent the identities of $(E,E_Y)$ and $(L,L_Y)$. Hence $[L,u]$ is an isomorphism $(E,E_Y)\\cong(L,L_Y)$ in $D^b_c(Y,\\Qlb)$ [def-weil-algebraically-closed-coefficients]. This proves Part 3.",
-      "uses": [
-        "def-weil-rationalization-karoubi",
-        "def-weil-derived-complete-integral-detailed",
-        "def-weil-algebraically-closed-coefficients"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "agent-written, from the definitions of the DAG; the source analogue is p. 58, Lemma 6.8.2(2)"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The constant coefficient objects are bounded constructible",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, a finite extension $E/\\Ql$ contained in $\\Qlb$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and for $n\\geq1$ put $A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Let $Y$ be a scheme, with small pro-etale site $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site]; let $(A_{E,n})_Y$ be the constant sheaf of the ring $A_{E,n}$ on $Y_{\\mathrm{proet}}$ (the sheafification of the constant presheaf, as in that definition), and let $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$ be the completed integral coefficient sheaf [def-weil-completed-integral-coefficients]. Then:\n\n1. $(A_{E,n})_Y$, placed in degree $0$, is an object of $D^b_c(Y,A_{E,n})$ [def-weil-finite-torsion-constructibility]: it is locally constant on the single stratum $Y$ with finite stalks $A_{E,n}$.\n2. $\\widehat{\\mathcal O}_{E,Y}$, placed in degree $0$, is an object of $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed]: it is derived complete [def-weil-derived-complete], the canonical map $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}\\to(A_{E,n})_Y$ (the derived reduction modulo $\\varpi_E^n$ [def-weil-integral-derived-reduction]) is an isomorphism for every $n\\geq1$, and the cohomological supports [def-weil-cohomological-support] of these reductions are all contained in $[0,0]$.\n3. Consequently $E_Y$, the image of $\\widehat{\\mathcal O}_{E,Y}$ in the rationalized category $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-rationalization-karoubi], and $(\\Qlb)_Y=(E,E_Y)$ in the common-stage category $D^b_c(Y,\\Qlb)$ [def-weil-algebraically-closed-coefficients], are objects of those categories, and $(\\Qlb)_Y$ is independent of the stage $E$: for finite extensions $E\\subset L$ in $\\Qlb$, the integral scalar extension [def-weil-integral-scalar-extension] gives an isomorphism $\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\mathcal O_E}\\mathcal O_L\\cong\\widehat{\\mathcal O}_{L,Y}$ in $D(Y_{\\mathrm{proet}},\\mathcal O_L)$, hence $E_Y\\otimes_EL\\cong L_Y$ in $D^b_c(Y,L)$, and its class is an isomorphism $(E,E_Y)\\cong(L,L_Y)$ in $D^b_c(Y,\\Qlb)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+  "place": "node def-weil-ordinary-compact-cohomology, order 1510: 'let $\\Lambda_Y$ denote its coefficient object on the small pro-etale site ... Abbreviate $H^i(Y,\\Lambda)=H^i(Y,\\Lambda_Y)$' (for $H^i(Y,\\Lambda_Y)$ to be defined, $\\Lambda_Y$ must be an object of $D^b_c(Y,\\Lambda)$; the blueprint does not say so). The integral case is Bhatt-Scholze, literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Definition 6.8.1 and Lemma 6.8.2(1) ($\\mathcal O_{E,X}=\\widehat{\\mathcal O}_E=\\varprojlim_n\\mathcal O_E/\\varpi^n$)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-complete",
+  "def-weil-integral-derived-reduction",
+  "def-weil-cohomological-support",
+  "def-weil-rationalization-karoubi",
+  "def-weil-integral-scalar-extension",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Finiteness and the tower. By [lem-weil-valued-dvr-finite-quotients] (applied to $\\mathcal O_E$, a discrete valuation ring with finite residue field by [def-weil-l-adic-coefficient-extension]), each $A_{E,n}$ is a finite ring and each reduction $A_{E,n+1}\\to A_{E,n}$ is surjective. Hence the morphism of constant sheaves $(A_{E,n+1})_Y\\to(A_{E,n})_Y$ is surjective: every section of $(A_{E,n})_Y$ over $U$ is, on the members of some covering of $U$, a constant section $a\\in A_{E,n}$ (sheafification [def-weil-pbc-proetale-site]), and $a$ lifts to $A_{E,n+1}$.",
+   "uses": [
     "lem-weil-valued-dvr-finite-quotients",
     "def-weil-l-adic-coefficient-extension",
-    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "p. 49, §6.5, first paragraph (the sheaves $R/\\mathfrak m^n$ on $X_{\\mathrm{proet}}$ and $\\widehat R=\\lim R/\\mathfrak m^n$, here $R=\\mathcal O_E$, $\\mathfrak m=(\\varpi_E)$); p. 58, Lemma 6.8.2(1)"
+   }
+  },
+  {
+   "text": "Part 1. Take the partition of $Y$ with the single stratum $Y_1=Y$ ($N=1$), with immersion $i_1=\\mathrm{id}_Y$. The set $Y$ is open and closed in $Y$, hence locally closed, and constructible (it is open and retrocompact in $Y$) [def-weil-scheme-morphism-properties]. The restriction $\\mathrm{id}_Y^*(A_{E,n})_Y$ is $(A_{E,n})_Y$ itself (inverse image along the identity), and it is constant, hence locally constant (take the one-member covering $\\{\\mathrm{id}:Y\\to Y\\}$ of $Y_{\\mathrm{proet}}$) [def-weil-proetale-locally-constant-sheaf]. Its stalk at every geometric point of $Y$ [def-weil-proetale-geometric-stalk] is $A_{E,n}$ by [lem-weil-proetale-constant-sheaf-stalk], a finite $A_{E,n}$-module by Step 1. So $(A_{E,n})_Y$ is a constructible sheaf of $A_{E,n}$-modules [def-weil-proetale-constructible-sheaf].",
+   "uses": [
     "def-weil-scheme-morphism-properties",
     "lem-weil-proetale-constant-sheaf-stalk",
     "def-weil-proetale-constructible-sheaf",
+    "lem-weil-valued-dvr-finite-quotients",
     "def-weil-proetale-locally-constant-sheaf",
-    "def-weil-proetale-geometric-stalk",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "p. 49, §6.5, paragraph after Definition 6.5.1 ($D_{cons}(X_{\\mathrm{proet}},R/\\mathfrak m^n)\\simeq D_{cons}(X_{\\mathrm{et}},R/\\mathfrak m^n)$; the constant sheaf $R/\\mathfrak m^n$ is the pullback of a constant, hence constructible, etale sheaf); the stratification and stalks are written out here"
+   }
+  },
+  {
+   "text": "The complex $(A_{E,n})_Y[0]$ has $\\mathcal H^0=(A_{E,n})_Y$ and $\\mathcal H^i=0$ for $i\\neq0$ [def-weil-derived-cohomology-sheaves]: finitely many nonzero cohomology sheaves, all constructible by Step 2. Hence $(A_{E,n})_Y\\in D^b_c(Y,A_{E,n})$ [def-weil-finite-torsion-constructibility], and its cohomological support [def-weil-cohomological-support] is contained in $\\{0\\}$ (it is $\\{0\\}$ if $Y\\neq\\emptyset$ and empty if $Y=\\emptyset$). This proves Part 1.",
+   "uses": [
     "def-weil-derived-cohomology-sheaves",
     "def-weil-finite-torsion-constructibility",
-    "def-weil-cohomological-support",
+    "def-weil-cohomological-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "p. 49, §6.5 (as in Step 2)"
+   }
+  },
+  {
+   "text": "Reductions of $\\widehat{\\mathcal O}_{E,Y}$. The one-term complex $P=\\widehat{\\mathcal O}_{E,Y}$ in degree $0$ is K-flat over $\\widehat{\\mathcal O}_{E,Y}$: for every acyclic complex $M$ of $\\widehat{\\mathcal O}_{E,Y}$-modules, $\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\widehat{\\mathcal O}_{E,Y}}M\\cong M$ termwise (unit isomorphism of the tensor product of sheaves of modules [def-pur-sheaf-tensor-product]), which is acyclic. So the identity $P\\to\\widehat{\\mathcal O}_{E,Y}$ may be used in [def-weil-integral-derived-reduction], and $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}=\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\widehat{\\mathcal O}_{E,Y}}(A_{E,n})_Y\\cong(A_{E,n})_Y$, the isomorphism being the unit isomorphism; this is the canonical map of Part 2, which is therefore an isomorphism. Under these isomorphisms the transition maps of the system $(\\operatorname{Res}_n(\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}))_n$ of [def-weil-derived-complete] are the reduction maps $\\operatorname{Res}_{n+1}(A_{E,n+1})_Y\\to\\operatorname{Res}_n(A_{E,n})_Y$, and the maps $\\widehat{\\mathcal O}_{E,Y}\\to\\operatorname{Res}_n(A_{E,n})_Y$ are the limit projections $\\pi_n$ [def-weil-completed-integral-coefficients] (the unit isomorphism is natural in the second factor).",
+   "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-integral-derived-reduction",
     "def-weil-derived-complete",
-    "def-weil-completed-integral-coefficients",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "p. 24, Definition 3.5.2 (the maps $\\widehat R\\to R/\\mathfrak m^n$ and $K\\otimes^L_{\\widehat R}R/\\mathfrak m^n$); p. 49, Lemma 6.5.4 and the notation of §6.5 ('when $L=R$ or $R/\\mathfrak m^n$ we drop the underline')"
+   }
+  },
+  {
+   "text": "By Step 4 and Part 1, every reduction $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{E,n}\\cong(A_{E,n})_Y$ lies in $D^b_c(Y,A_{E,n})$, and their cohomological supports are all contained in the single interval $[0,0]$, independent of $n$ (Step 3).",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-cohomological-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "p. 49, Definition 6.5.1 and Lemma 6.5.4"
+   }
+  },
+  {
+   "text": "$\\widehat{\\mathcal O}_{E,Y}$ is derived complete. The $\\widehat{\\mathcal O}_{E,Y}$-modules $F_n=\\operatorname{Res}_n(A_{E,n})_Y$ form an inverse system with surjective transition maps (Step 1; $\\operatorname{Res}_n$ does not change the underlying sheaf), and their limit in sheaves of $\\widehat{\\mathcal O}_{E,Y}$-modules is $\\widehat{\\mathcal O}_{E,Y}$ itself with projections $\\pi_n$ (limits of sheaves of modules and of rings are computed on the underlying sheaves [def-pur-sheaf-inverse-limit, def-weil-completed-integral-coefficients]). By [lem-weil-proetale-surjective-tower-derived-limit] (clause 2), with $\\mathcal R=\\widehat{\\mathcal O}_{E,Y}$, $\\widehat{\\mathcal O}_{E,Y}$ in degree $0$ is a derived limit $R\\varprojlim_n\\operatorname{Res}_n(A_{E,n})_Y$ in $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ [def-weil-derived-limit]; by clause 3, the canonical map $\\widehat{\\mathcal O}_{E,Y}\\to R\\varprojlim_n\\operatorname{Res}_n(A_{E,n})_Y$ of [def-weil-derived-complete], which is the map compatible with the $\\pi_n$ of Step 4, is the unique such map, namely the identity of $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$, an isomorphism. Hence $\\widehat{\\mathcal O}_{E,Y}$ is derived complete [def-weil-derived-complete].",
+   "uses": [
     "lem-weil-proetale-surjective-tower-derived-limit",
     "def-pur-sheaf-inverse-limit",
+    "def-weil-completed-integral-coefficients",
     "def-weil-derived-limit",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-rationalization-karoubi",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-integral-scalar-extension"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-weil-derived-complete",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Parts 1 and 2: §6.5 (p. 49, Definition 6.5.1, Lemma 6.5.4), Definition 3.5.2 (p. 24), Proposition 3.1.10 (p. 17) with Propositions 3.2.3(1) (p. 18) and 4.2.8 (p. 29), Definition 6.8.1 and Lemma 6.8.2(1) (p. 58); Part 3 (Steps 9 and 10) is agent-written from the DAG's definitions of the rationalized and common-stage categories, which Bhatt-Scholze do not use"
+    "place": "p. 17, Proposition 3.1.10 ($\\lim F_n\\simeq R\\lim F_n$ for surjective towers in a replete topos), with p. 18, Proposition 3.2.3(1) and p. 29, Proposition 4.2.8; p. 24, Definition 3.5.2 ($m$-adic completeness of $K\\in D(X,\\widehat R)$)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -rli 'constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1) ; grep -n 'def constantSheaf\\|def constantSheafAdj' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/CategoryTheory/Sites/ConstantSheaf.lean; grep -n 'ellAdicSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/AlgebraicGeometry/Sites/ElladicCohomology.lean; grep -rli 'derived complete\\|DerivedComplete\\|IsAdicComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/CategoryTheory/Sites",
-      "results": "'constructible' occurs only for constructible subsets of topological spaces and prime spectra (Mathlib/Topology/Constructible.lean, RingTheory/Spectrum/Prime/ConstructibleSet.lean, Topology/Spectral/ConstructibleTopology.lean), never for sheaves. Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:66 `constantSheaf J D : D ⥤ Sheaf J D` (sheafification of the constant presheaf, the general form of (A_{E,n})_Y). Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:52 `Scheme.ellAdicSheaf X ℓ : Sheaf (ProEt.topology X) Ab`, the sheaf U ↦ C(U, ℤ_[ℓ]) on the small pro-étale site, which is Bhatt-Scholze's O_{E,X} for E = ℚ_ℓ, i.e. the sheaf this node identifies with lim (ℤ/ℓ^n)_Y; the identification with the limit of constant sheaves, derived completeness and the reduction isomorphisms are not in Mathlib. No derived completeness for sheaves on sites",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "def-weil-ordinary-compact-cohomology",
-    "date": "2026-10-09"
+  {
+   "text": "Part 2. By Steps 4, 5 and 6, $\\widehat{\\mathcal O}_{E,Y}$ is derived complete, its reductions lie in $D^b_c(Y,A_{E,n})$ and have cohomological supports in $[0,0]$ for every $n$; so it is an object of $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed].",
+   "uses": [
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "p. 49, Definition 6.5.1 (here $K\\otimes^L_{\\widehat R}R/\\mathfrak m=(A_{E,1})_Y$ is the pullback of the constant etale sheaf, so $\\widehat R\\in D_{cons}(X_{\\mathrm{proet}},\\widehat R)$); p. 58, Lemma 6.8.2(1) ($\\mathcal O_{E,X}=\\widehat{\\mathcal O}_E$)"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "Part 3, objects. The rationalized category $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ has the same objects as $D^b_c(Y,\\mathcal O_E)$ [def-weil-rationalization-karoubi], so $E_Y$, the object $\\widehat{\\mathcal O}_{E,Y}$ of Part 2 viewed there, is an object of $D^b_c(Y,E)$. The objects of $D^b_c(Y,\\Qlb)=\\mathcal C_Y$ are the pairs $(E,K)$ with $E\\in\\mathcal E_\\ell$ and $K\\in D^b_c(Y,E)$ [def-weil-algebraically-closed-coefficients], so $(\\Qlb)_Y=(E,E_Y)$ is one.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "p. 58, Lemma 6.8.2(2) ($E_X=\\mathcal O_{E,X}[\\ell^{-1}]$) and Definition 6.8.1; the categories here are those of the DAG, not Bhatt-Scholze's"
+   }
   },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "lem-weil-constant-coefficient-objects-constructible",
-    "worker": "stage1",
-    "summary": "Wrote a 10-step proof following Bhatt-Scholze §6.5, Definition 3.5.2, Proposition 3.1.10 and Lemma 6.8.2(1): (A_{E,n})_Y is constructible on the single stratum Y with stalks A_{E,n}; the one-term complex Ohat_{E,Y} is K-flat, so its reductions are the constant sheaves (A_{E,n})_Y; derived completeness is the surjective-tower case of R lim = lim on the replete pro-etale topos; Part 3 (stage independence) is agent-written via the integral scalar extension node and the same tower lemma. Step 2 uses def-weil-proetale-locally-constant-sheaf and def-weil-proetale-geometric-stalk, created today by the worker of def-weil-scheme-morphism-properties. Created two unsplit nodes: lem-weil-proetale-constant-sheaf-stalk (stalks of constant sheaves at geometric points) and lem-weil-proetale-surjective-tower-derived-limit (BS Prop. 3.1.10 in the form of a Roos triangle, with uniqueness of the induced map). Statement: the reduction is now cited as def-weil-integral-derived-reduction (the notion def-weil-derived-complete-integral-detailed uses) instead of def-weil-derived-tensor, and the stage-independence clause of Part 3 is made precise through def-weil-integral-scalar-extension; stmt_deps updated accordingly (added def-weil-l-adic-coefficient-extension, def-weil-algebraic-closure, def-weil-integral-derived-reduction, def-weil-integral-scalar-extension; removed def-weil-derived-tensor)."
+  {
+   "text": "Integral scalar extension of $\\widehat{\\mathcal O}_{E,Y}$. Let $E\\subset L$ be finite extensions of $\\Ql$ in $\\Qlb$, $e$ the ramification index, so $\\varpi_E\\mathcal O_L=\\varpi_L^e\\mathcal O_L$. As in Step 4 the K-flat representative $P=\\widehat{\\mathcal O}_{E,Y}$ gives $\\widehat{\\mathcal O}_{E,Y}\\otimes^L_{\\mathcal O_E}A_{L,m}=\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\widehat{\\mathcal O}_{E,Y}}(A_{L,m})_Y\\cong(A_{L,m})_Y$ [def-weil-integral-scalar-extension, def-pur-sheaf-tensor-product], with the reductions $(A_{L,m+1})_Y\\to(A_{L,m})_Y$ as transition maps; these are surjective by Step 1 applied to $L$. Their limit is $\\widehat{\\mathcal O}_{L,Y}$ [def-weil-completed-integral-coefficients for $L$], so by [lem-weil-proetale-surjective-tower-derived-limit] (with $\\mathcal R=\\widehat{\\mathcal O}_{L,Y}$) $\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\mathcal O_E}\\mathcal O_L=R\\varprojlim_m\\operatorname{Res}_m(A_{L,m})_Y\\cong\\widehat{\\mathcal O}_{L,Y}$ in $D(Y_{\\mathrm{proet}},\\mathcal O_L)$, the isomorphism being compatible with the projections to the $(A_{L,m})_Y$.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-weil-completed-integral-coefficients",
+    "lem-weil-proetale-surjective-tower-derived-limit",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "agent-written; the analogue in the source is p. 58, Lemma 6.8.2(1)-(2) and its proof on p. 59 ($\\mathcal O_{E,X}$ is $\\varprojlim_n\\mathcal O_E/\\varpi^n$ for every finite $E$, and $\\mathcal O_{E,X}=\\operatorname{colim}_F\\mathcal O_{F,X}$)"
+   }
   },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-def-sf-admissible",
-  "lean": {
-    "module": "Sheaf.Paper.ConstantCoefficientScalarNormalization",
-    "declaration": "WeilConjectures.constantCoefficientRationalScalarIso",
-    "declarations": [
-      "WeilConjectures.constantCoefficientScalarUnit_existsUnique",
-      "WeilConjectures.constantCoefficientScalarUnit",
-      "WeilConjectures.constantCoefficientScalarUnit_isIso",
-      "WeilConjectures.constantCoefficientIntegralScalarIso",
-      "WeilConjectures.constantCoefficientConstructibleScalarIso",
-      "WeilConjectures.constantCoefficientRationalScalarIso_existsUnique",
-      "WeilConjectures.constantCoefficientRationalScalarIso"
-    ],
-    "file": "lean/Sheaf/Paper/ConstantCoefficientScalarNormalization.lean",
-    "statement": "def constantCoefficientRationalScalarIso",
-    "branch": "newtargets-dag",
-    "by": "Q13",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "Section 1(B): the previous module states Parts 1-3 but its scalar isomorphisms are bare Nonempty witnesses and its rational object uses the older category. Publicly retain all its declarations through ConstantWeilStructure and add the strict-cone-normalized integral unit isomorphism and its uniquely normalized image in the currently recorded sfRationalConstructibleCategory. The regular coefficient complexes, good representatives, scalar functors and rational localization are reused. Quotient components and zero shifted component determine the unit uniquely; no arbitrary isomorphism is chosen. All other node fields are unchanged."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-4f19764f8",
-    "group": "Q13",
-    "result": "pass",
-    "note": "Both delivered modules compile clean via nt_compile.py --json on the side overlay (ScalarNormalization 12.8 s/8.3 s, StageIndependence 9.0 s/9.2 s), no warnings. Clause-by-clause match: D, l, hl (invertibility derived), finite-type Y0 (LocallyOfFiniteType+QuasiCompact), geometricFrobenius as scheme iso, Omega in an independent universe, Index A<=B with coefficientInclusion. beta = recorded integralScalarExtensionComparisonOfUniverses at R[0] itself then Q(eta)^-1, eta uniquely fixed (1|->1(x)1 at every quotient and V, zero shifted component) by module maps out of the regular module over the completed ring, hence s|->pi^L_m(s). alpha = unique iso whose hom is HEq the localized beta (propositional object formula, so meaningful). Clause 1: pullback.map alpha >> theta_L = (comparison.symm >> scalar theta_E) >> alpha, direction checked, plus the Weil-sheaf iso forgetting to alpha. Clause 2: common-stage Weil-sheaf iso whose inverse forgets to ofHom of alpha_{Ql,A} with the recorded associator, self-transition and stage-transition equality. Edge cases: empty Y, E=L, E=Ql, ramified, Spec F_{q^2}, universes. Section 1(B) wrapper justified (old records only Nonempty, older category). Only lean changed in both node copies; the old Parts 1-3 are re-exported (checked by #check). Statements verbatim; docstrings carry source and blueprint id; sorry-only; no stronger assumptions; no hollow defs. Minor observation, not a fault: the dependency record's main declaration is a def whose spec is in the listed _existsUnique theorem."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "AUTO",
-    "group": "Z5",
-    "result": "pass",
-    "landing": "20261019T034409-L-428773",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-    "sorry_before": [
-      "WeilConjectures.constantCoefficientRationalScalarIso_existsUnique",
-      "WeilConjectures.constantCoefficientScalarUnit_existsUnique",
-      "WeilConjectures.constantCoefficientScalarUnit_isIso"
-    ],
-    "sorry_after": [
-      "WeilConjectures.constantCoefficientScalarUnit_existsUnique",
-      "WeilConjectures.constantCoefficientScalarUnit_isIso"
-    ]
+  {
+   "text": "Independence of the stage. The scalar-extension functor $-\\otimes_EL:D^b_c(Y,E)\\to D^b_c(Y,L)$ is, on objects, $K\\mapsto K\\otimes_{\\mathcal O_E}\\mathcal O_L$, the integral scalar extension of an integral representative, viewed in the rationalization [def-weil-rationalization-karoubi]. On the representative $\\widehat{\\mathcal O}_{E,Y}$ of $E_Y$, Step 9 gives an isomorphism $\\phi:\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\mathcal O_E}\\mathcal O_L\\cong\\widehat{\\mathcal O}_{L,Y}$ in $D(Y_{\\mathrm{proet}},\\mathcal O_L)$, between objects of the full subcategory $D^b_c(Y,\\mathcal O_L)$ (Part 2 for $L$), and Step 9 with $E=L$ gives $\\psi:\\widehat{\\mathcal O}_{L,Y}\\otimes_{\\mathcal O_L}\\mathcal O_L\\cong\\widehat{\\mathcal O}_{L,Y}$; their images in $D^b_c(Y,L)$ are isomorphisms $\\phi:E_Y\\otimes_EL\\cong L_Y$ and $\\psi:L_Y\\otimes_LL\\cong L_Y$ (a functor carries isomorphisms to isomorphisms). So $u=\\psi^{-1}\\phi:E_Y\\otimes_EL\\to L_Y\\otimes_LL$ represents a morphism $[L,u]:(E,E_Y)\\to(L,L_Y)$ of $\\mathcal C_Y$, and $[L,u^{-1}]$ a morphism back; their composites are represented over $L$ by $u^{-1}u$ and $uu^{-1}$, identities, which represent the identities of $(E,E_Y)$ and $(L,L_Y)$. Hence $[L,u]$ is an isomorphism $(E,E_Y)\\cong(L,L_Y)$ in $D^b_c(Y,\\Qlb)$ [def-weil-algebraically-closed-coefficients]. This proves Part 3.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "agent-written, from the definitions of the DAG; the source analogue is p. 58, Lemma 6.8.2(2)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-cohomological-support",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-derived-reduction",
+  "def-weil-derived-complete",
+  "def-weil-completed-integral-coefficients",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-derived-limit",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Parts 1 and 2: §6.5 (p. 49, Definition 6.5.1, Lemma 6.5.4), Definition 3.5.2 (p. 24), Proposition 3.1.10 (p. 17) with Propositions 3.2.3(1) (p. 18) and 4.2.8 (p. 29), Definition 6.8.1 and Lemma 6.8.2(1) (p. 58); Part 3 (Steps 9 and 10) is agent-written from the DAG's definitions of the rationalized and common-stage categories, which Bhatt-Scholze do not use"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli 'constructible' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1) ; grep -n 'def constantSheaf\\|def constantSheafAdj' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/CategoryTheory/Sites/ConstantSheaf.lean; grep -n 'ellAdicSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/AlgebraicGeometry/Sites/ElladicCohomology.lean; grep -rli 'derived complete\\|DerivedComplete\\|IsAdicComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/CategoryTheory/Sites",
+   "results": "'constructible' occurs only for constructible subsets of topological spaces and prime spectra (Mathlib/Topology/Constructible.lean, RingTheory/Spectrum/Prime/ConstructibleSet.lean, Topology/Spectral/ConstructibleTopology.lean), never for sheaves. Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:66 `constantSheaf J D : D ⥤ Sheaf J D` (sheafification of the constant presheaf, the general form of (A_{E,n})_Y). Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:52 `Scheme.ellAdicSheaf X ℓ : Sheaf (ProEt.topology X) Ab`, the sheaf U ↦ C(U, ℤ_[ℓ]) on the small pro-étale site, which is Bhatt-Scholze's O_{E,X} for E = ℚ_ℓ, i.e. the sheaf this node identifies with lim (ℤ/ℓ^n)_Y; the identification with the limit of constant sheaves, derived completeness and the reduction isomorphisms are not in Mathlib. No derived completeness for sheaves on sites",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-ordinary-compact-cohomology",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "lem-weil-constant-coefficient-objects-constructible",
+  "worker": "stage1",
+  "summary": "Wrote a 10-step proof following Bhatt-Scholze §6.5, Definition 3.5.2, Proposition 3.1.10 and Lemma 6.8.2(1): (A_{E,n})_Y is constructible on the single stratum Y with stalks A_{E,n}; the one-term complex Ohat_{E,Y} is K-flat, so its reductions are the constant sheaves (A_{E,n})_Y; derived completeness is the surjective-tower case of R lim = lim on the replete pro-etale topos; Part 3 (stage independence) is agent-written via the integral scalar extension node and the same tower lemma. Step 2 uses def-weil-proetale-locally-constant-sheaf and def-weil-proetale-geometric-stalk, created today by the worker of def-weil-scheme-morphism-properties. Created two unsplit nodes: lem-weil-proetale-constant-sheaf-stalk (stalks of constant sheaves at geometric points) and lem-weil-proetale-surjective-tower-derived-limit (BS Prop. 3.1.10 in the form of a Roos triangle, with uniqueness of the induced map). Statement: the reduction is now cited as def-weil-integral-derived-reduction (the notion def-weil-derived-complete-integral-detailed uses) instead of def-weil-derived-tensor, and the stage-independence clause of Part 3 is made precise through def-weil-integral-scalar-extension; stmt_deps updated accordingly (added def-weil-l-adic-coefficient-extension, def-weil-algebraic-closure, def-weil-integral-derived-reduction, def-weil-integral-scalar-extension; removed def-weil-derived-tensor)."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "module": "Sheaf.Paper.ConstantCoefficientScalarNormalization",
+  "declaration": "WeilConjectures.constantCoefficientRationalScalarIso",
+  "declarations": [
+   "WeilConjectures.constantCoefficientScalarUnit_existsUnique",
+   "WeilConjectures.constantCoefficientScalarUnit",
+   "WeilConjectures.constantCoefficientScalarUnit_isIso",
+   "WeilConjectures.constantCoefficientIntegralScalarIso",
+   "WeilConjectures.constantCoefficientConstructibleScalarIso",
+   "WeilConjectures.constantCoefficientRationalScalarIso_existsUnique",
+   "WeilConjectures.constantCoefficientRationalScalarIso"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantCoefficientScalarNormalization.lean",
+  "statement": "def constantCoefficientRationalScalarIso",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Section 1(B): the previous module states Parts 1-3 but its scalar isomorphisms are bare Nonempty witnesses and its rational object uses the older category. Publicly retain all its declarations through ConstantWeilStructure and add the strict-cone-normalized integral unit isomorphism and its uniquely normalized image in the currently recorded sfRationalConstructibleCategory. The regular coefficient complexes, good representatives, scalar functors and rational localization are reused. Quotient components and zero shifted component determine the unit uniquely; no arbitrary isomorphism is chosen. All other node fields are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f19764f8",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Both delivered modules compile clean via nt_compile.py --json on the side overlay (ScalarNormalization 12.8 s/8.3 s, StageIndependence 9.0 s/9.2 s), no warnings. Clause-by-clause match: D, l, hl (invertibility derived), finite-type Y0 (LocallyOfFiniteType+QuasiCompact), geometricFrobenius as scheme iso, Omega in an independent universe, Index A<=B with coefficientInclusion. beta = recorded integralScalarExtensionComparisonOfUniverses at R[0] itself then Q(eta)^-1, eta uniquely fixed (1|->1(x)1 at every quotient and V, zero shifted component) by module maps out of the regular module over the completed ring, hence s|->pi^L_m(s). alpha = unique iso whose hom is HEq the localized beta (propositional object formula, so meaningful). Clause 1: pullback.map alpha >> theta_L = (comparison.symm >> scalar theta_E) >> alpha, direction checked, plus the Weil-sheaf iso forgetting to alpha. Clause 2: common-stage Weil-sheaf iso whose inverse forgets to ofHom of alpha_{Ql,A} with the recorded associator, self-transition and stage-transition equality. Edge cases: empty Y, E=L, E=Ql, ramified, Spec F_{q^2}, universes. Section 1(B) wrapper justified (old records only Nonempty, older category). Only lean changed in both node copies; the old Parts 1-3 are re-exported (checked by #check). Statements verbatim; docstrings carry source and blueprint id; sorry-only; no stronger assumptions; no hollow defs. Minor observation, not a fault: the dependency record's main declaration is a def whose spec is in the listed _existsUnique theorem."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261019T034409-L-428773",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "WeilConjectures.constantCoefficientRationalScalarIso_existsUnique",
+   "WeilConjectures.constantCoefficientScalarUnit_existsUnique",
+   "WeilConjectures.constantCoefficientScalarUnit_isIso"
+  ],
+  "sorry_after": [
+   "WeilConjectures.constantCoefficientScalarUnit_existsUnique",
+   "WeilConjectures.constantCoefficientScalarUnit_isIso"
+  ]
+ }
 }

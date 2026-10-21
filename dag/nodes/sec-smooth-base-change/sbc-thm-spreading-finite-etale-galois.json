@@ -1,227 +1,216 @@
 {
-  "id": "sbc-thm-spreading-finite-etale-galois",
-  "blueprint": {
-    "is": "sbc-thm-spreading-finite-etale-galois",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Spreading a finite etale Galois cover",
-  "statement": "Let $S$ be a\nquasi-compact and\nquasi-separated integral\nnormal scheme with generic point $\\eta$. Let\n$C\\to S$ be a quasi-compact and quasi-separated\nsmooth morphism with\ngeometrically connected\nfibres, and fix a section $\\sigma:S\\to C$. Let $Z\\to C_\\eta$\nbe a finite etale\nGalois cover with group\n$G$, assume $|G|$ is\ninvertible on $S$, and assume $Z$ has a $\\kappa(\\eta)$-rational point\nmapping to $\\sigma(\\eta)$. Then there is a finite etale\nGalois cover\n$\\widetilde Z\\to C$ with group $G$ whose restriction to $C_\\eta$ is the\ngiven cover $Z\\to C_\\eta$.\n(*Stacks Project, Fundamental Groups of Schemes, [Tag `0EZJ`](https://stacks.math.columbia.edu/tag/0EZJ) = Lemma 58.31.9.*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-input-spreading/sbc-thm-spreading-finite-etale-galois.md",
-    "place": "node sbc-thm-spreading-finite-etale-galois, order 1405",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0EZJ"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-sbc-normal-dominant-galois",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "Put $K=\\kappa(\\eta)$ and form the generic fibre $q:C_\\eta\\to\\operatorname{Spec}K$, $j:C_\\eta\\to C$. The pullback universal property applied to $(1,i\\sigma)$ gives $s_\\eta$ with $s_\\eta q=1$ and $s_\\eta j=i\\sigma$, since $\\sigma c=1$. Apply lem-sbc-underlying-finite-etale-extension to the given $G$-torsor and its point over $s_\\eta$. Its hypotheses are exactly the qcqs, normal integral, smooth geometrically connected, section and invertible-order hypotheses here. Obtain a finite etale surjective $\\pi:P\\to C$ and $\\psi:Z\\to P$ with cartesian generic square. This uses the existing underlying-extension node, whose Noetherian approximation and Noetherian extension dependencies carry the limit, trait and depth-two parts of the unit route.",
-      "uses": [
-        "lem-sbc-underlying-finite-etale-extension",
-        "def-pc-fibre-product"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/pione.tex",
-        "place": "Tag 0EZJ, lemma-extend-covering-general; Tag 0EYJ, lemma-extend-covering, extension of the group action"
-      }
-    },
-    {
-      "text": "Apply lem-sbc-generic-fibre-action-extension to this $\\pi$ and cartesian square. The base and family satisfy its normal integral, smooth and geometrically connected hypotheses; finiteness and etaleness of $\\pi$ came from step 1. Obtain maps $a_g$ over $C$, $a_1=1$, $a_{gh}=a_h;a_g$, and $g_Z;\\psi=\\psi;a_g$, with $\\coprod_{g\\in G}P\\to P\\times_C P$, component $(a_g,1)$, an isomorphism. No connectedness of $Z$ or $P$ is needed.",
-      "uses": [
-        "lem-sbc-generic-fibre-action-extension"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/pione.tex",
-        "place": "Tag 0EZJ, lemma-extend-covering-general; Tag 0EYJ, lemma-extend-covering, extension of the group action"
-      }
-    },
-    {
-      "text": "Give $P$ the action $g\\mapsto a_g$. The laws in step 2 give inverses $a_{g^{-1}}$, so these are automorphisms over $C$; being isomorphisms, they are finite etale. On each geometric fibre the displayed isomorphism says that for every ordered pair of points there is exactly one $g$ taking the second to the first; the fibre is nonempty by surjectivity in step 1. Thus this is precisely a finite etale $G$-torsor, the Galois-cover notion of def-sbc-normal-dominant-galois. In the quotient-sheaf description the same identity identifies the action relation with $P\\times_C P$, so its quotient is $C$: locally lift a section of $C$ to the covering $P$, and two lifts differ by exactly one $g$. An invariant morphism out of $P$ has equal composites with the two projections from this relation, so its local values on these lifts agree and glue uniquely; this is also the categorical quotient property. Set $\\widetilde Z=P$ with this action. The cartesian square of step 1 identifies its restriction with $Z$, and the equations of step 2 make that identification $G$-equivariant. These are the required clauses.",
-      "uses": [
-        "def-sbc-normal-dominant-galois",
-        "lem-sbc-underlying-finite-etale-extension",
-        "lem-sbc-generic-fibre-action-extension"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/pione.tex",
-        "place": "Tag 0EZJ, lemma-extend-covering-general; Tag 0EYJ, lemma-extend-covering, extension of the group action"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "sbc-thm-spreading-finite-etale-galois",
+ "blueprint": {
+  "is": "sbc-thm-spreading-finite-etale-galois",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Spreading a finite etale Galois cover",
+ "statement": "Let $S$ be a\nquasi-compact and\nquasi-separated integral\nnormal scheme with generic point $\\eta$. Let\n$C\\to S$ be a quasi-compact and quasi-separated\nsmooth morphism with\ngeometrically connected\nfibres, and fix a section $\\sigma:S\\to C$. Let $Z\\to C_\\eta$\nbe a finite etale\nGalois cover with group\n$G$, assume $|G|$ is\ninvertible on $S$, and assume $Z$ has a $\\kappa(\\eta)$-rational point\nmapping to $\\sigma(\\eta)$. Then there is a finite etale\nGalois cover\n$\\widetilde Z\\to C$ with group $G$ whose restriction to $C_\\eta$ is the\ngiven cover $Z\\to C_\\eta$.\n(*Stacks Project, Fundamental Groups of Schemes, [Tag `0EZJ`](https://stacks.math.columbia.edu/tag/0EZJ) = Lemma 58.31.9.*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-input-spreading/sbc-thm-spreading-finite-etale-galois.md",
+  "place": "node sbc-thm-spreading-finite-etale-galois, order 1405",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0EZJ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=\\kappa(\\eta)$ and form the generic fibre $q:C_\\eta\\to\\operatorname{Spec}K$, $j:C_\\eta\\to C$. The pullback universal property applied to $(1,i\\sigma)$ gives $s_\\eta$ with $s_\\eta q=1$ and $s_\\eta j=i\\sigma$, since $\\sigma c=1$. Apply lem-sbc-underlying-finite-etale-extension to the given $G$-torsor and its point over $s_\\eta$. Its hypotheses are exactly the qcqs, normal integral, smooth geometrically connected, section and invertible-order hypotheses here. Obtain a finite etale surjective $\\pi:P\\to C$ and $\\psi:Z\\to P$ with cartesian generic square. This uses the existing underlying-extension node, whose Noetherian approximation and Noetherian extension dependencies carry the limit, trait and depth-two parts of the unit route.",
+   "uses": [
     "lem-sbc-underlying-finite-etale-extension",
-    "def-pc-fibre-product",
-    "lem-sbc-generic-fibre-action-extension",
-    "def-sbc-normal-dominant-galois"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/pione.tex",
     "place": "Tag 0EZJ, lemma-extend-covering-general; Tag 0EYJ, lemma-extend-covering, extension of the group action"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "GaloisCover|genericFibre|EtaleTorsor",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A finite etale Galois cover of the generic fibre of a smooth family over a normal integral scheme extends if split along a section",
-      "results": "Algebra.Etale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.iff_exists_algEquiv_prod; AlgebraicGeometry.IsEtale.of_comp; Algebra.Etale.exists_subalgebra_fg; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.IsEtaleAt.comp; Algebra.Etale.comp; AlgebraicGeometry.IsEtale.instFormallyUnramified",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.Smooth",
-      "results": "AlgebraicGeometry.Etale.instSmooth",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "finite etale Galois cover generic fibre extension smooth scheme section",
-      "results": "No hits; service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Extend a finite torsor from the generic fiber over a normal base with smooth geometrically connected fibers and a pointed section",
-      "results": "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; Algebra.Smooth.exists_finiteType; AlgebraicGeometry.AffineSpace.not_isIntegralHom; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.finite_appTop_of_universallyClosed",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"GaloisCover\"",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "extend.*cover|cover.*extend|torsor.*generic|generic.*torsor",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "IsTorsor|exists.*[Ee]tale.*extension|[Gg]eneric.*[Cc]over",
-      "results": "Mathlib/Dynamics/SymbolicDynamics/Basic.lean",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Restriction functor for finite etale covers to the generic fiber of a normal scheme is fully faithful and extends group actions",
-      "results": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; CategoryTheory.PreGaloisCategory.functorToAction_full; CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber; CategoryTheory.PreGaloisCategory.instFullContActionFintypeCatAutFunctorFunctorToContAction; AlgebraicGeometry.Scheme.instFullEtaleOverForget; CategoryTheory.PreGaloisCategory.exists_galois_representative; CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family; CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1405,
-  "blueprint_uses": [
+  {
+   "text": "Apply lem-sbc-generic-fibre-action-extension to this $\\pi$ and cartesian square. The base and family satisfy its normal integral, smooth and geometrically connected hypotheses; finiteness and etaleness of $\\pi$ came from step 1. Obtain maps $a_g$ over $C$, $a_1=1$, $a_{gh}=a_h;a_g$, and $g_Z;\\psi=\\psi;a_g$, with $\\coprod_{g\\in G}P\\to P\\times_C P$, component $(a_g,1)$, an isomorphism. No connectedness of $Z$ or $P$ is needed.",
+   "uses": [
+    "lem-sbc-generic-fibre-action-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0EZJ, lemma-extend-covering-general; Tag 0EYJ, lemma-extend-covering, extension of the group action"
+   }
+  },
+  {
+   "text": "Give $P$ the action $g\\mapsto a_g$. The laws in step 2 give inverses $a_{g^{-1}}$, so these are automorphisms over $C$; being isomorphisms, they are finite etale. On each geometric fibre the displayed isomorphism says that for every ordered pair of points there is exactly one $g$ taking the second to the first; the fibre is nonempty by surjectivity in step 1. Thus this is precisely a finite etale $G$-torsor, the Galois-cover notion of def-sbc-normal-dominant-galois. In the quotient-sheaf description the same identity identifies the action relation with $P\\times_C P$, so its quotient is $C$: locally lift a section of $C$ to the covering $P$, and two lifts differ by exactly one $g$. An invariant morphism out of $P$ has equal composites with the two projections from this relation, so its local values on these lifts agree and glue uniquely; this is also the categorical quotient property. Set $\\widetilde Z=P$ with this action. The cartesian square of step 1 identifies its restriction with $Z$, and the equations of step 2 make that identification $G$-equivariant. These are the required clauses.",
+   "uses": [
     "def-sbc-normal-dominant-galois",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "uses_not_cited": [
-    "def-sbc-normal-dominant-galois",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Fundamental Groups of Schemes, Lemma 58.31.9 ([Tag 0EZJ](https://stacks.math.columbia.edu/tag/0EZJ)): a finite etale Galois cover of the generic fibre whose group has order invertible on the base spreads out to a finite etale Galois cover of the whole smooth family with geometrically connected fibres. The blueprint uses it in this form; no separate proof is given.",
-  "blueprint_proof_steps": [
-    {
-      "text": "This is the recorded classical input named in the statement, Stacks Project, Fundamental Groups of Schemes, Lemma 58.31.9 ([Tag 0EZJ](https://stacks.math.columbia.edu/tag/0EZJ)): a finite etale Galois cover of the generic fibre whose group has order invertible on the base spreads out to a finite etale Galois cover of the whole smooth family with geometrically connected fibres. The blueprint uses it in this form; no separate proof is given.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-prop-input-spreading",
-  "lean": {
-    "existing": true,
-    "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading",
-    "declaration": "AlgebraicGeometry.Scheme.GaloisCover.exists_isPullback_of_genericFibre",
-    "statement": "theorem GaloisCover.exists_isPullback_of_genericFibre {S C : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x)) (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c] (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S) (G : Type (u + 1)) [Group G] [Finite G] (hG : IsUnit (Nat.card G : Γ(S, ⊤))) {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C) (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c) (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _) (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ) (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη) : ∃ (T : GaloisCover G C) (ψ : Z.P ⟶ T.P), IsPullback ψ Z.π T.π j ∧ ∀ g : G, Z.smul g ≫ ψ = ψ ≫ T.smul g",
-    "branch": "sheaf-dag",
-    "by": "A3",
-    "date": "2026-10-12"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "A3",
-    "result": "pass",
-    "landing": "20261012T035347-L-1583710",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "sbc-thm-spreading-finite-etale-galois",
-    "worker": "stage1",
-    "summary": "Read Stacks 0EZJ and 0EYJ and reused the existing underlying extension and action extension statements. Checked every hypothesis, made the final action/torsor/restriction assembly explicit, recorded actual Mathlib searches, and created no nodes. The slopmaster2 declaration ends in sorry and is not an attachment.",
-    "blueprint": "Realizes the blueprint classical-input paragraph through the existing underlying-extension and generic-action nodes; the former retains the unit limit/trait/section/maximal-open/depth-two route."
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NX-0d2d35d17",
-    "group": "NX",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-0d2d35d17 (reviewer sub-agent of L); spot-checked: Target and cited mathematics checked in full. Fixed proof bookkeeping: step 1 cites def-pc-fibre-product; step 3 cites both prior extension nodes and is marked non-elementary. Corrected DAG JSON is under fixes/dag/nodes/sec-smooth-base-change/. No nodes dropped.; 1 file(s) fixed by the reviewer"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $S$ be a\nquasi-compact and\nquasi-separated integral\nnormal scheme with generic point $\\eta$. Let\n$C\\to S$ be a quasi-compact and quasi-separated\nsmooth morphism with\ngeometrically connected\nfibres, and fix a section $\\sigma:S\\to C$. Let $Z\\to C_\\eta$\nbe a finite etale\nGalois cover with group\n$G$, assume $|G|$ is\ninvertible on $S$, and assume $Z$ has a $\\kappa(\\eta)$-rational point\nmapping to $\\sigma(\\eta)$. Then there is a finite etale\nGalois cover\n$\\widetilde Z\\to C$ with group $G$ whose restriction to $C_\\eta$ is the\ngiven cover $Z\\to C_\\eta$.",
-    "proof": [
-      {
-        "text": "This is classical, Stacks Project, Fundamental Groups of Schemes, Lemma 58.31.9 ([Tag 0EZJ](https://stacks.math.columbia.edu/tag/0EZJ)): a finite etale Galois cover of the generic fibre whose group has order invertible on the base spreads out to a finite etale Galois cover of the whole smooth family with geometrically connected fibres. No separate proof is given.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "lem-sbc-underlying-finite-etale-extension",
+    "lem-sbc-generic-fibre-action-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0EZJ, lemma-extend-covering-general; Tag 0EYJ, lemma-extend-covering, extension of the group action"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-sbc-underlying-finite-etale-extension",
+  "def-pc-fibre-product",
+  "lem-sbc-generic-fibre-action-extension",
+  "def-sbc-normal-dominant-galois"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0EZJ, lemma-extend-covering-general; Tag 0EYJ, lemma-extend-covering, extension of the group action"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "GaloisCover|genericFibre|EtaleTorsor",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale Galois cover of the generic fibre of a smooth family over a normal integral scheme extends if split along a section",
+   "results": "Algebra.Etale.iff_exists_algEquiv_prod; Algebra.FormallyEtale.iff_exists_algEquiv_prod; AlgebraicGeometry.IsEtale.of_comp; Algebra.Etale.exists_subalgebra_fg; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.IsEtaleAt.comp; Algebra.Etale.comp; AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.Smooth",
+   "results": "AlgebraicGeometry.Etale.instSmooth",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale Galois cover generic fibre extension smooth scheme section",
+   "results": "No hits; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a finite torsor from the generic fiber over a normal base with smooth geometrically connected fibers and a pointed section",
+   "results": "AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType; Algebra.Smooth.exists_finiteType; AlgebraicGeometry.AffineSpace.not_isIntegralHom; AlgebraicGeometry.AffineSpace; AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; AlgebraicGeometry.finite_appTop_of_universallyClosed",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GaloisCover\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extend.*cover|cover.*extend|torsor.*generic|generic.*torsor",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTorsor|exists.*[Ee]tale.*extension|[Gg]eneric.*[Cc]over",
+   "results": "Mathlib/Dynamics/SymbolicDynamics/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction functor for finite etale covers to the generic fiber of a normal scheme is fully faithful and extends group actions",
+   "results": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; CategoryTheory.PreGaloisCategory.functorToAction_full; CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber; CategoryTheory.PreGaloisCategory.instFullContActionFintypeCatAutFunctorFunctorToContAction; AlgebraicGeometry.Scheme.instFullEtaleOverForget; CategoryTheory.PreGaloisCategory.exists_galois_representative; CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family; CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1405,
+ "blueprint_uses": [
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "uses_not_cited": [
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Fundamental Groups of Schemes, Lemma 58.31.9 ([Tag 0EZJ](https://stacks.math.columbia.edu/tag/0EZJ)): a finite etale Galois cover of the generic fibre whose group has order invertible on the base spreads out to a finite etale Galois cover of the whole smooth family with geometrically connected fibres. The blueprint uses it in this form; no separate proof is given.",
+ "blueprint_proof_steps": [
+  {
+   "text": "This is the recorded classical input named in the statement, Stacks Project, Fundamental Groups of Schemes, Lemma 58.31.9 ([Tag 0EZJ](https://stacks.math.columbia.edu/tag/0EZJ)): a finite etale Galois cover of the generic fibre whose group has order invertible on the base spreads out to a finite etale Galois cover of the whole smooth family with geometrically connected fibres. The blueprint uses it in this form; no separate proof is given.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-input-spreading",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsorSpreading",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.exists_isPullback_of_genericFibre",
+  "statement": "theorem GaloisCover.exists_isPullback_of_genericFibre {S C : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] [IsIntegral S] (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x)) (c : C ⟶ S) [QuasiCompact c] [QuasiSeparated c] [Smooth c] [GeometricallyConnected c] (σ : S ⟶ C) (hσ : σ ≫ c = 𝟙 S) (G : Type (u + 1)) [Group G] [Finite G] (hG : IsUnit (Nat.card G : Γ(S, ⊤))) {Cη : Scheme.{u}} (q : Cη ⟶ Spec S.functionField) (j : Cη ⟶ C) (hCη : IsPullback q j (S.fromSpecStalk (genericPoint S)) c) (sη : Spec S.functionField ⟶ Cη) (hsq : sη ≫ q = 𝟙 _) (hsj : sη ≫ j = S.fromSpecStalk (genericPoint S) ≫ σ) (Z : GaloisCover G Cη) (hZ : ∃ z : Spec S.functionField ⟶ Z.P, z ≫ Z.π = sη) : ∃ (T : GaloisCover G C) (ψ : Z.P ⟶ T.P), IsPullback ψ Z.π T.π j ∧ ∀ g : G, Z.smul g ≫ ψ = ψ ≫ T.smul g",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-12"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261012T035347-L-1583710",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-thm-spreading-finite-etale-galois",
+  "worker": "stage1",
+  "summary": "Read Stacks 0EZJ and 0EYJ and reused the existing underlying extension and action extension statements. Checked every hypothesis, made the final action/torsor/restriction assembly explicit, recorded actual Mathlib searches, and created no nodes. The slopmaster2 declaration ends in sorry and is not an attachment.",
+  "blueprint": "Realizes the blueprint classical-input paragraph through the existing underlying-extension and generic-action nodes; the former retains the unit limit/trait/section/maximal-open/depth-two route."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-0d2d35d17",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-0d2d35d17 (reviewer sub-agent of L); spot-checked: Target and cited mathematics checked in full. Fixed proof bookkeeping: step 1 cites def-pc-fibre-product; step 3 cites both prior extension nodes and is marked non-elementary. Corrected DAG JSON is under fixes/dag/nodes/sec-smooth-base-change/. No nodes dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $S$ be a\nquasi-compact and\nquasi-separated integral\nnormal scheme with generic point $\\eta$. Let\n$C\\to S$ be a quasi-compact and quasi-separated\nsmooth morphism with\ngeometrically connected\nfibres, and fix a section $\\sigma:S\\to C$. Let $Z\\to C_\\eta$\nbe a finite etale\nGalois cover with group\n$G$, assume $|G|$ is\ninvertible on $S$, and assume $Z$ has a $\\kappa(\\eta)$-rational point\nmapping to $\\sigma(\\eta)$. Then there is a finite etale\nGalois cover\n$\\widetilde Z\\to C$ with group $G$ whose restriction to $C_\\eta$ is the\ngiven cover $Z\\to C_\\eta$.",
+  "proof": [
+   {
+    "text": "This is classical, Stacks Project, Fundamental Groups of Schemes, Lemma 58.31.9 ([Tag 0EZJ](https://stacks.math.columbia.edu/tag/0EZJ)): a finite etale Galois cover of the generic fibre whose group has order invertible on the base spreads out to a finite etale Galois cover of the whole smooth family with geometrically connected fibres. No separate proof is given.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

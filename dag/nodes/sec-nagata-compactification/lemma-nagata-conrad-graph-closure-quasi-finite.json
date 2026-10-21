@@ -1,248 +1,223 @@
 {
-  "id": "lemma-nagata-conrad-graph-closure-quasi-finite",
-  "blueprint": {
-    "is": "lemma-nagata-conrad-graph-closure-quasi-finite",
-    "from": null,
-    "same_as": null
+ "id": "lemma-nagata-conrad-graph-closure-quasi-finite",
+ "blueprint": {
+  "is": "lemma-nagata-conrad-graph-closure-quasi-finite",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The closed graph is quasi-finite over the blow-up (Conrad)",
+ "statement": "Let $X$ be qcqs, let $U\\subseteq V\\subseteq X$ be quasi-compact opens, let\n$p\\colon Y\\to X$ be separated and locally of finite type with $Y$ qcqs, and\nlet $f\\colon U\\to Y$ be a section of $p$ over $U$ whose image is closed in\n$p^{-1}(V)$. There is a $V$-admissible blow-up\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ with the\nfollowing property. Let $\\sigma\\colon U\\hookrightarrow\\widetilde X$ be the\ncanonical section of $q$ over $U$, let\n$F=(f,\\sigma)\\colon U\\to Y\\times_X\\widetilde X$ be the induced quasi-compact\nimmersion, and let $\\overline{F(U)}$ be its scheme-theoretic image. Then\n\n$$\n\\overline{F(U)}\\longrightarrow\\widetilde X\n$$\n\nis quasi-finite (locally quasi-finite, locally of finite type and\nquasi-compact) and separated.\n\nNeither $U$ nor $V$ is assumed dense in $X$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-graph-closure-quasi-finite.md",
+  "place": "node lemma-nagata-conrad-graph-closure-quasi-finite, order 217",
+  "external": [
+   {
+    "document": "Conrad",
+    "place": "*Unlike Conrad we do not replace $X$ by the scheme-theoretic image $\\overline{U_Z}$.* Conrad does so in order to make $U_Z$ dense, which his quasi-affine case requires; the form of that case proved here ([lemma-nagata-conrad-quasi-affine-general]) carries no density hypothesis, so the reduction to the smaller base — and with it the extension of $\\mathcal I_Z$ from $\\overline{U_Z}$ back to $X$ and "
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-invertible-ideal",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover $\\{Z\\}_{Z\\in S}$ of $Y$ and fix one of its\nmembers $Z$. Since $Z$ is affine it is quasi-affine, and the composite\n$p_Z\\colon Z\\hookrightarrow Y\\xrightarrow{p}X$ is quasi-compact because $Z$\nis quasi-compact and $X$ is quasi-separated; so $p_Z$ is quasi-affine as a\nmorphism ([def-nagata-quasi-affine-morphism]). Put\n$U_Z=U\\cap f^{-1}(Z)$, an open of $X$ contained in $U$, hence in $V$, and\nquasi-compact because $f$ is quasi-compact. The restriction\n$f_Z\\colon U_Z\\to Z$ of $f$ is a section of $p_Z$ over $U_Z$, and its image\nis the trace of $f(U)$ on $Z$, hence closed in $p_Z^{-1}(V)=Z\\cap p^{-1}(V)$.",
+   "uses": [
+    "def-nagata-quasi-affine-morphism"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "The closed graph is quasi-finite over the blow-up (Conrad)",
-  "statement": "Let $X$ be qcqs, let $U\\subseteq V\\subseteq X$ be quasi-compact opens, let\n$p\\colon Y\\to X$ be separated and locally of finite type with $Y$ qcqs, and\nlet $f\\colon U\\to Y$ be a section of $p$ over $U$ whose image is closed in\n$p^{-1}(V)$. There is a $V$-admissible blow-up\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ with the\nfollowing property. Let $\\sigma\\colon U\\hookrightarrow\\widetilde X$ be the\ncanonical section of $q$ over $U$, let\n$F=(f,\\sigma)\\colon U\\to Y\\times_X\\widetilde X$ be the induced quasi-compact\nimmersion, and let $\\overline{F(U)}$ be its scheme-theoretic image. Then\n\n$$\n\\overline{F(U)}\\longrightarrow\\widetilde X\n$$\n\nis quasi-finite (locally quasi-finite, locally of finite type and\nquasi-compact) and separated.\n\nNeither $U$ nor $V$ is assumed dense in $X$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-graph-closure-quasi-finite.md",
-    "place": "node lemma-nagata-conrad-graph-closure-quasi-finite, order 217",
-    "external": [
-      {
-        "document": "Conrad",
-        "place": "*Unlike Conrad we do not replace $X$ by the scheme-theoretic image $\\overline{U_Z}$.* Conrad does so in order to make $U_Z$ dense, which his quasi-affine case requires; the form of that case proved here ([lemma-nagata-conrad-quasi-affine-general]) carries no density hypothesis, so the reduction to the smaller base — and with it the extension of $\\mathcal I_Z$ from $\\overline{U_Z}$ back to $X$ and "
-      }
-    ]
+  {
+   "text": "So [lemma-nagata-conrad-quasi-affine-general] applies to\n$(U_Z\\subseteq V, f_Z, p_Z)$ and produces a finite type quasi-coherent ideal\n$\\mathcal I_Z$ on $X$ with $V(\\mathcal I_Z)\\cap V=\\varnothing$, an open\n$W_Z\\subseteq\\operatorname{Bl}_{\\mathcal I_Z}(X)$ containing the preimage of\n$U_Z$, and an $X$-morphism $g_Z\\colon W_Z\\to Z$ extending $f_Z$ whose graph is\nclosed in $Z\\times_X\\operatorname{Bl}_{\\mathcal I_Z}(X)$.",
+   "uses": [
+    "lemma-nagata-conrad-quasi-affine-general"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-effective-cartier-ideal",
-    "def-nagata-extended-ideal",
-    "def-nagata-global-blowup",
-    "def-nagata-invertible-ideal",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image"
-  ],
-  "proof": [
-    {
-      "text": "Choose a finite affine open cover $\\{Z\\}_{Z\\in S}$ of $Y$ and fix one of its\nmembers $Z$. Since $Z$ is affine it is quasi-affine, and the composite\n$p_Z\\colon Z\\hookrightarrow Y\\xrightarrow{p}X$ is quasi-compact because $Z$\nis quasi-compact and $X$ is quasi-separated; so $p_Z$ is quasi-affine as a\nmorphism ([def-nagata-quasi-affine-morphism]). Put\n$U_Z=U\\cap f^{-1}(Z)$, an open of $X$ contained in $U$, hence in $V$, and\nquasi-compact because $f$ is quasi-compact. The restriction\n$f_Z\\colon U_Z\\to Z$ of $f$ is a section of $p_Z$ over $U_Z$, and its image\nis the trace of $f(U)$ on $Z$, hence closed in $p_Z^{-1}(V)=Z\\cap p^{-1}(V)$.",
-      "uses": [
-        "def-nagata-quasi-affine-morphism"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "So [lemma-nagata-conrad-quasi-affine-general] applies to\n$(U_Z\\subseteq V, f_Z, p_Z)$ and produces a finite type quasi-coherent ideal\n$\\mathcal I_Z$ on $X$ with $V(\\mathcal I_Z)\\cap V=\\varnothing$, an open\n$W_Z\\subseteq\\operatorname{Bl}_{\\mathcal I_Z}(X)$ containing the preimage of\n$U_Z$, and an $X$-morphism $g_Z\\colon W_Z\\to Z$ extending $f_Z$ whose graph is\nclosed in $Z\\times_X\\operatorname{Bl}_{\\mathcal I_Z}(X)$.",
-      "uses": [
-        "lemma-nagata-conrad-quasi-affine-general"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Unlike Conrad we do not replace $X$ by the scheme-theoretic image\n$\\overline{U_Z}$.* Conrad does so in order to make $U_Z$ dense, which his\nquasi-affine case requires; the form of that case proved here\n([lemma-nagata-conrad-quasi-affine-general]) carries no density\nhypothesis, so the reduction to the smaller base — and with it the\nextension of $\\mathcal I_Z$ from $\\overline{U_Z}$ back to $X$ and the\nambient closedness of the strict transform — is unnecessary.",
-      "uses": [
-        "lemma-nagata-conrad-quasi-affine-general"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Put $\\mathcal I=\\prod_{Z\\in S}\\mathcal I_Z$; it is of finite type and\n$V(\\mathcal I)=\\bigcup_ZV(\\mathcal I_Z)$ misses $V$, so\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ is a\n$V$-admissible blow-up. For each $Z\\in S$ the inverse image of\n$\\mathcal I_Z$ on $\\widetilde X$ is a factor of the invertible ideal\n$\\mathcal I\\cdot\\mathcal O_{\\widetilde X}$, hence invertible\n([lemma-nagata-invertible-product-factor]), so the universal property of\nblowing up ([thm-nagata-blowup-universal-property]) provides a\ncomparison $c_Z\\colon\\widetilde X\\to\\operatorname{Bl}_{\\mathcal I_Z}(X)$ over\n$X$.",
-      "uses": [
-        "lemma-nagata-invertible-product-factor",
-        "thm-nagata-blowup-universal-property"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Write $\\Omega_Z=\\mathrm{pr}_Y^{-1}(Z)\\subseteq Y\\times_X\\widetilde X$, an open\nsubscheme, and let $\\Phi_Z$ be the graph of\n$c_Z^{-1}(W_Z)\\to W_Z\\xrightarrow{g_Z}Z$, a morphism\n$c_Z^{-1}(W_Z)\\to Y\\times_X\\widetilde X$ landing in $\\Omega_Z$ and satisfying\n$\\mathrm{pr}_{\\widetilde X}\\circ\\Phi_Z=\\iota_{c_Z^{-1}(W_Z)}$. Two things\nhold.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "1. *$\\Phi_Z$ is injective over $\\widetilde X$*: this is immediate\nfrom $\\mathrm{pr}_{\\widetilde X}\\circ\\Phi_Z=\\iota_{c_Z^{-1}(W_Z)}$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "1. *The range of $\\Phi_Z$ is closed in $\\Omega_Z$*: indeed\n$\\Omega_Z=Z\\times_X\\widetilde X$ and\n$c_Z^{-1}(W_Z)=W_Z\\times_{\\operatorname{Bl}_{\\mathcal I_Z}(X)}\\widetilde X$,\nso $\\Phi_Z$ is the base change of the closed graph of $g_Z$ along\n$\\Omega_Z\\to Z\\times_X\\operatorname{Bl}_{\\mathcal I_Z}(X)$, and the range\nof a base change is the inverse image of the range.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Finally, $F(U)\\cap\\Omega_Z$ is contained in the range of $\\Phi_Z$: a point of\nit is $F(u)$ with $f(u)\\in Z$, so $u\\in U_Z$, and there $\\sigma$ lands in\n$c_Z^{-1}(W_Z)$ and $g_Z$ agrees with $f$. As $\\Omega_Z$ is open,\n$\\overline{F(U)}\\cap\\Omega_Z$ is the closure of $F(U)\\cap\\Omega_Z$ inside\n$\\Omega_Z$, which by (2) is again contained in the range of $\\Phi_Z$. The\n$\\Omega_Z$ cover $Y\\times_X\\widetilde X$, so the underlying space of\n$\\overline{F(U)}$ is covered by the finitely many sets $\\Phi_Z(c_Z^{-1}(W_Z))$,\neach injective over $\\widetilde X$ by (1); hence the fibres of\n$\\overline{F(U)}\\to\\widetilde X$ are finite. Being locally of finite type\n(as a closed immersion followed by a base change of $p$), the morphism is\ntherefore locally quasi-finite. It is quasi-compact because\n$\\overline{F(U)}$ is quasi-compact and $\\widetilde X$ quasi-separated, and\nseparated because $p$ is.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "def-nagata-quasi-affine-morphism",
-    "lemma-nagata-conrad-quasi-affine-general",
+  {
+   "text": "*Unlike Conrad we do not replace $X$ by the scheme-theoretic image\n$\\overline{U_Z}$.* Conrad does so in order to make $U_Z$ dense, which his\nquasi-affine case requires; the form of that case proved here\n([lemma-nagata-conrad-quasi-affine-general]) carries no density\nhypothesis, so the reduction to the smaller base — and with it the\nextension of $\\mathcal I_Z$ from $\\overline{U_Z}$ back to $X$ and the\nambient closedness of the strict transform — is unnecessary.",
+   "uses": [
+    "lemma-nagata-conrad-quasi-affine-general"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put $\\mathcal I=\\prod_{Z\\in S}\\mathcal I_Z$; it is of finite type and\n$V(\\mathcal I)=\\bigcup_ZV(\\mathcal I_Z)$ misses $V$, so\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ is a\n$V$-admissible blow-up. For each $Z\\in S$ the inverse image of\n$\\mathcal I_Z$ on $\\widetilde X$ is a factor of the invertible ideal\n$\\mathcal I\\cdot\\mathcal O_{\\widetilde X}$, hence invertible\n([lemma-nagata-invertible-product-factor]), so the universal property of\nblowing up ([thm-nagata-blowup-universal-property]) provides a\ncomparison $c_Z\\colon\\widetilde X\\to\\operatorname{Bl}_{\\mathcal I_Z}(X)$ over\n$X$.",
+   "uses": [
     "lemma-nagata-invertible-product-factor",
-    "thm-nagata-blowup-universal-property",
-    "lemma-nagata-affine-blowup-complement",
-    "lemma-nagata-affine-finite-type-is-quasi-affine",
-    "lemma-nagata-blowup-proper",
-    "lemma-nagata-ideal-invertible-product-factor",
-    "lemma-nagata-ideal-unit-off-support",
-    "lemma-nagata-scheme-image-ideal-qc",
-    "prop-nagata-global-blowup-cover-independent",
-    "thm-nagata-blowup-principalizes-center",
-    "thm-nagata-global-blowup-proper"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-graph-closure-quasi-finite.md",
-    "place": "## Proof"
+    "thm-nagata-blowup-universal-property"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 217,
-  "blueprint_uses": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-effective-cartier-ideal",
-    "def-nagata-extended-ideal",
-    "def-nagata-global-blowup",
-    "def-nagata-invertible-ideal",
-    "def-nagata-quasi-affine-morphism",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "lemma-nagata-affine-blowup-complement",
-    "lemma-nagata-affine-finite-type-is-quasi-affine",
-    "lemma-nagata-blowup-proper",
-    "lemma-nagata-conrad-quasi-affine-general",
-    "lemma-nagata-ideal-invertible-product-factor",
-    "lemma-nagata-ideal-unit-off-support",
-    "lemma-nagata-invertible-product-factor",
-    "lemma-nagata-scheme-image-ideal-qc",
-    "prop-nagata-global-blowup-cover-independent",
-    "thm-nagata-blowup-principalizes-center",
-    "thm-nagata-blowup-universal-property",
-    "thm-nagata-global-blowup-proper"
-  ],
-  "lean": {
-    "module": "WeilConjectures.Blowup.GraphQuasiFinite",
-    "declaration": "AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph",
-    "branch": "slopmaster2",
-    "line": 264,
-    "sorry_free": true,
-    "body_lines": 180
+  {
+   "text": "Write $\\Omega_Z=\\mathrm{pr}_Y^{-1}(Z)\\subseteq Y\\times_X\\widetilde X$, an open\nsubscheme, and let $\\Phi_Z$ be the graph of\n$c_Z^{-1}(W_Z)\\to W_Z\\xrightarrow{g_Z}Z$, a morphism\n$c_Z^{-1}(W_Z)\\to Y\\times_X\\widetilde X$ landing in $\\Omega_Z$ and satisfying\n$\\mathrm{pr}_{\\widetilde X}\\circ\\Phi_Z=\\iota_{c_Z^{-1}(W_Z)}$. Two things\nhold.",
+   "uses": [],
+   "elementary": null
   },
-  "blueprint_lean": [
-    "AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph"
-  ],
-  "uses_not_cited": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-effective-cartier-ideal",
-    "def-nagata-extended-ideal",
-    "def-nagata-global-blowup",
-    "def-nagata-invertible-ideal",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "lemma-nagata-affine-blowup-complement",
-    "lemma-nagata-affine-finite-type-is-quasi-affine",
-    "lemma-nagata-blowup-proper",
-    "lemma-nagata-ideal-invertible-product-factor",
-    "lemma-nagata-ideal-unit-off-support",
-    "lemma-nagata-scheme-image-ideal-qc",
-    "prop-nagata-global-blowup-cover-independent",
-    "thm-nagata-blowup-principalizes-center",
-    "thm-nagata-global-blowup-proper"
-  ],
-  "proof_split_by": "list",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph",
-          "module": "WeilConjectures.Blowup.GraphQuasiFinite",
-          "lines": [
-            256,
-            467
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "text": "1. *$\\Phi_Z$ is injective over $\\widetilde X$*: this is immediate\nfrom $\\mathrm{pr}_{\\widetilde X}\\circ\\Phi_Z=\\iota_{c_Z^{-1}(W_Z)}$.",
+   "uses": [],
+   "elementary": null
   },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-thm-nagata-sketch-conrad",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be qcqs, let $U\\subseteq V\\subseteq X$ be quasi-compact opens, let\n$p\\colon Y\\to X$ be separated and locally of finite type with $Y$ qcqs, and\nlet $f\\colon U\\to Y$ be a section of $p$ over $U$ whose image is closed in\n$p^{-1}(V)$. There is a $V$-admissible blow-up\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ and an open\nimmersion $\\sigma\\colon U\\hookrightarrow\\widetilde X$ with\n$q\\circ\\sigma$ the inclusion of $U$, with the following property. Let\n$F=(f,\\sigma)\\colon U\\to Y\\times_X\\widetilde X$ be the induced morphism\nand let $\\overline{F(U)}$ be its scheme-theoretic image. Then\n\n$$\n\\overline{F(U)}\\longrightarrow\\widetilde X\n$$\n\nis quasi-finite (locally quasi-finite, locally of finite type and\nquasi-compact) and separated.\n\nNeither $U$ nor $V$ is assumed dense in $X$.",
-    "proof": [
-      {
-        "text": "Choose a finite affine open cover $\\{Z\\}_{Z\\in S}$ of $Y$ and fix one of its\nmembers $Z$. Since $Z$ is affine it is quasi-affine, and the composite\n$p_Z\\colon Z\\hookrightarrow Y\\xrightarrow{p}X$ is quasi-compact because $Z$\nis quasi-compact and $X$ is quasi-separated; so $p_Z$ is quasi-affine as a\nmorphism ([def-nagata-quasi-affine-morphism]). Put\n$U_Z=U\\cap f^{-1}(Z)$, an open of $X$ contained in $U$, hence in $V$, and\nquasi-compact because $f$ is quasi-compact. The restriction\n$f_Z\\colon U_Z\\to Z$ of $f$ is a section of $p_Z$ over $U_Z$, and its image\nis the trace of $f(U)$ on $Z$, hence closed in $p_Z^{-1}(V)=Z\\cap p^{-1}(V)$.",
-        "uses": [
-          "def-nagata-quasi-affine-morphism"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "So [lemma-nagata-conrad-quasi-affine-general] applies to\n$(U_Z\\subseteq V, f_Z, p_Z)$ and produces a finite type quasi-coherent ideal\n$\\mathcal I_Z$ on $X$ with $V(\\mathcal I_Z)\\cap V=\\varnothing$, an open\n$W_Z\\subseteq\\operatorname{Bl}_{\\mathcal I_Z}(X)$ containing the preimage of\n$U_Z$, and an $X$-morphism $g_Z\\colon W_Z\\to Z$ extending $f_Z$ whose graph is\nclosed in $Z\\times_X\\operatorname{Bl}_{\\mathcal I_Z}(X)$.",
-        "uses": [
-          "lemma-nagata-conrad-quasi-affine-general"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Unlike Conrad we do not replace $X$ by the scheme-theoretic image\n$\\overline{U_Z}$.* Conrad does so in order to make $U_Z$ dense, which his\nquasi-affine case requires; the form of that case proved here\n([lemma-nagata-conrad-quasi-affine-general]) carries no density\nhypothesis, so the reduction to the smaller base — and with it the\nextension of $\\mathcal I_Z$ from $\\overline{U_Z}$ back to $X$ and the\nambient closedness of the strict transform — is unnecessary.",
-        "uses": [
-          "lemma-nagata-conrad-quasi-affine-general"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Put $\\mathcal I=\\prod_{Z\\in S}\\mathcal I_Z$; it is of finite type and\n$V(\\mathcal I)=\\bigcup_ZV(\\mathcal I_Z)$ misses $V$, so\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ is a\n$V$-admissible blow-up. As its centre misses $V\\supseteq U$, $q$ restricts to\nan isomorphism $q^{-1}(U)\\to U$ ([lemma-nagata-affine-blowup-complement],\non an affine open cover of $U$); let $\\sigma\\colon U\\hookrightarrow\\widetilde X$\nbe its inverse followed by the inclusion of $q^{-1}(U)$. This is an open\nimmersion with $q\\circ\\sigma$ the inclusion of $U$. For each $Z\\in S$ the inverse image of\n$\\mathcal I_Z$ on $\\widetilde X$ is a factor of the invertible ideal\n$\\mathcal I\\cdot\\mathcal O_{\\widetilde X}$, hence invertible\n([lemma-nagata-invertible-product-factor]), so the universal property of\nblowing up ([thm-nagata-blowup-universal-property]) provides a\ncomparison $c_Z\\colon\\widetilde X\\to\\operatorname{Bl}_{\\mathcal I_Z}(X)$ over\n$X$.",
-        "uses": [
-          "lemma-nagata-affine-blowup-complement",
-          "lemma-nagata-invertible-product-factor",
-          "thm-nagata-blowup-universal-property"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Write $\\Omega_Z=\\mathrm{pr}_Y^{-1}(Z)\\subseteq Y\\times_X\\widetilde X$, an open\nsubscheme, and let $\\Phi_Z$ be the graph of\n$c_Z^{-1}(W_Z)\\to W_Z\\xrightarrow{g_Z}Z$, a morphism\n$c_Z^{-1}(W_Z)\\to Y\\times_X\\widetilde X$ landing in $\\Omega_Z$ and satisfying\n$\\mathrm{pr}_{\\widetilde X}\\circ\\Phi_Z=\\iota_{c_Z^{-1}(W_Z)}$. Two things\nhold.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "1. *$\\Phi_Z$ is injective over $\\widetilde X$*: this is immediate\nfrom $\\mathrm{pr}_{\\widetilde X}\\circ\\Phi_Z=\\iota_{c_Z^{-1}(W_Z)}$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "1. *The range of $\\Phi_Z$ is closed in $\\Omega_Z$*: indeed\n$\\Omega_Z=Z\\times_X\\widetilde X$ and\n$c_Z^{-1}(W_Z)=W_Z\\times_{\\operatorname{Bl}_{\\mathcal I_Z}(X)}\\widetilde X$,\nso $\\Phi_Z$ is the base change of the closed graph of $g_Z$ along\n$\\Omega_Z\\to Z\\times_X\\operatorname{Bl}_{\\mathcal I_Z}(X)$, and the range\nof a base change is the inverse image of the range.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "Finally, $F(U)\\cap\\Omega_Z$ is contained in the range of $\\Phi_Z$: a point of\nit is $F(u)$ with $f(u)\\in Z$, so $u\\in U_Z$, and there $\\sigma$ lands in\n$c_Z^{-1}(W_Z)$ and $g_Z$ agrees with $f$. As $\\Omega_Z$ is open,\n$\\overline{F(U)}\\cap\\Omega_Z$ is the closure of $F(U)\\cap\\Omega_Z$ inside\n$\\Omega_Z$, which by (2) is again contained in the range of $\\Phi_Z$. The\n$\\Omega_Z$ cover $Y\\times_X\\widetilde X$, so the underlying space of\n$\\overline{F(U)}$ is covered by the finitely many sets $\\Phi_Z(c_Z^{-1}(W_Z))$,\neach injective over $\\widetilde X$ by (1); hence the fibres of\n$\\overline{F(U)}\\to\\widetilde X$ are finite. Being locally of finite type\n(as a closed immersion followed by a base change of $p$), the morphism is\ntherefore locally quasi-finite. It is quasi-compact because\n$\\overline{F(U)}$ is quasi-compact and $\\widetilde X$ quasi-separated, and\nseparated because $p$ is.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "1. *The range of $\\Phi_Z$ is closed in $\\Omega_Z$*: indeed\n$\\Omega_Z=Z\\times_X\\widetilde X$ and\n$c_Z^{-1}(W_Z)=W_Z\\times_{\\operatorname{Bl}_{\\mathcal I_Z}(X)}\\widetilde X$,\nso $\\Phi_Z$ is the base change of the closed graph of $g_Z$ along\n$\\Omega_Z\\to Z\\times_X\\operatorname{Bl}_{\\mathcal I_Z}(X)$, and the range\nof a base change is the inverse image of the range.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "Finally, $F(U)\\cap\\Omega_Z$ is contained in the range of $\\Phi_Z$: a point of\nit is $F(u)$ with $f(u)\\in Z$, so $u\\in U_Z$, and there $\\sigma$ lands in\n$c_Z^{-1}(W_Z)$ and $g_Z$ agrees with $f$. As $\\Omega_Z$ is open,\n$\\overline{F(U)}\\cap\\Omega_Z$ is the closure of $F(U)\\cap\\Omega_Z$ inside\n$\\Omega_Z$, which by (2) is again contained in the range of $\\Phi_Z$. The\n$\\Omega_Z$ cover $Y\\times_X\\widetilde X$, so the underlying space of\n$\\overline{F(U)}$ is covered by the finitely many sets $\\Phi_Z(c_Z^{-1}(W_Z))$,\neach injective over $\\widetilde X$ by (1); hence the fibres of\n$\\overline{F(U)}\\to\\widetilde X$ are finite. Being locally of finite type\n(as a closed immersion followed by a base change of $p$), the morphism is\ntherefore locally quasi-finite. It is quasi-compact because\n$\\overline{F(U)}$ is quasi-compact and $\\widetilde X$ quasi-separated, and\nseparated because $p$ is.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "def-nagata-quasi-affine-morphism",
+  "lemma-nagata-conrad-quasi-affine-general",
+  "lemma-nagata-invertible-product-factor",
+  "thm-nagata-blowup-universal-property",
+  "lemma-nagata-affine-blowup-complement",
+  "lemma-nagata-affine-finite-type-is-quasi-affine",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-ideal-invertible-product-factor",
+  "lemma-nagata-ideal-unit-off-support",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "prop-nagata-global-blowup-cover-independent",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-global-blowup-proper"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-graph-closure-quasi-finite.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 217,
+ "blueprint_uses": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-invertible-ideal",
+  "def-nagata-quasi-affine-morphism",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-affine-blowup-complement",
+  "lemma-nagata-affine-finite-type-is-quasi-affine",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-conrad-quasi-affine-general",
+  "lemma-nagata-ideal-invertible-product-factor",
+  "lemma-nagata-ideal-unit-off-support",
+  "lemma-nagata-invertible-product-factor",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "prop-nagata-global-blowup-cover-independent",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property",
+  "thm-nagata-global-blowup-proper"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Blowup.GraphQuasiFinite",
+  "declaration": "AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph",
+  "branch": "slopmaster2",
+  "line": 264,
+  "sorry_free": true,
+  "body_lines": 180
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph"
+ ],
+ "uses_not_cited": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-invertible-ideal",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-affine-blowup-complement",
+  "lemma-nagata-affine-finite-type-is-quasi-affine",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-ideal-invertible-product-factor",
+  "lemma-nagata-ideal-unit-off-support",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "prop-nagata-global-blowup-cover-independent",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-global-blowup-proper"
+ ],
+ "proof_split_by": "list",
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-thm-nagata-sketch-conrad",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be qcqs, let $U\\subseteq V\\subseteq X$ be quasi-compact opens, let\n$p\\colon Y\\to X$ be separated and locally of finite type with $Y$ qcqs, and\nlet $f\\colon U\\to Y$ be a section of $p$ over $U$ whose image is closed in\n$p^{-1}(V)$. There is a $V$-admissible blow-up\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ and an open\nimmersion $\\sigma\\colon U\\hookrightarrow\\widetilde X$ with\n$q\\circ\\sigma$ the inclusion of $U$, with the following property. Let\n$F=(f,\\sigma)\\colon U\\to Y\\times_X\\widetilde X$ be the induced morphism\nand let $\\overline{F(U)}$ be its scheme-theoretic image. Then\n\n$$\n\\overline{F(U)}\\longrightarrow\\widetilde X\n$$\n\nis quasi-finite (locally quasi-finite, locally of finite type and\nquasi-compact) and separated.\n\nNeither $U$ nor $V$ is assumed dense in $X$.",
+  "proof": [
+   {
+    "text": "Choose a finite affine open cover $\\{Z\\}_{Z\\in S}$ of $Y$ and fix one of its\nmembers $Z$. Since $Z$ is affine it is quasi-affine, and the composite\n$p_Z\\colon Z\\hookrightarrow Y\\xrightarrow{p}X$ is quasi-compact because $Z$\nis quasi-compact and $X$ is quasi-separated; so $p_Z$ is quasi-affine as a\nmorphism ([def-nagata-quasi-affine-morphism]). Put\n$U_Z=U\\cap f^{-1}(Z)$, an open of $X$ contained in $U$, hence in $V$, and\nquasi-compact because $f$ is quasi-compact. The restriction\n$f_Z\\colon U_Z\\to Z$ of $f$ is a section of $p_Z$ over $U_Z$, and its image\nis the trace of $f(U)$ on $Z$, hence closed in $p_Z^{-1}(V)=Z\\cap p^{-1}(V)$.",
+    "uses": [
+     "def-nagata-quasi-affine-morphism"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "So [lemma-nagata-conrad-quasi-affine-general] applies to\n$(U_Z\\subseteq V, f_Z, p_Z)$ and produces a finite type quasi-coherent ideal\n$\\mathcal I_Z$ on $X$ with $V(\\mathcal I_Z)\\cap V=\\varnothing$, an open\n$W_Z\\subseteq\\operatorname{Bl}_{\\mathcal I_Z}(X)$ containing the preimage of\n$U_Z$, and an $X$-morphism $g_Z\\colon W_Z\\to Z$ extending $f_Z$ whose graph is\nclosed in $Z\\times_X\\operatorname{Bl}_{\\mathcal I_Z}(X)$.",
+    "uses": [
+     "lemma-nagata-conrad-quasi-affine-general"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Unlike Conrad we do not replace $X$ by the scheme-theoretic image\n$\\overline{U_Z}$.* Conrad does so in order to make $U_Z$ dense, which his\nquasi-affine case requires; the form of that case proved here\n([lemma-nagata-conrad-quasi-affine-general]) carries no density\nhypothesis, so the reduction to the smaller base — and with it the\nextension of $\\mathcal I_Z$ from $\\overline{U_Z}$ back to $X$ and the\nambient closedness of the strict transform — is unnecessary.",
+    "uses": [
+     "lemma-nagata-conrad-quasi-affine-general"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Put $\\mathcal I=\\prod_{Z\\in S}\\mathcal I_Z$; it is of finite type and\n$V(\\mathcal I)=\\bigcup_ZV(\\mathcal I_Z)$ misses $V$, so\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ is a\n$V$-admissible blow-up. As its centre misses $V\\supseteq U$, $q$ restricts to\nan isomorphism $q^{-1}(U)\\to U$ ([lemma-nagata-affine-blowup-complement],\non an affine open cover of $U$); let $\\sigma\\colon U\\hookrightarrow\\widetilde X$\nbe its inverse followed by the inclusion of $q^{-1}(U)$. This is an open\nimmersion with $q\\circ\\sigma$ the inclusion of $U$. For each $Z\\in S$ the inverse image of\n$\\mathcal I_Z$ on $\\widetilde X$ is a factor of the invertible ideal\n$\\mathcal I\\cdot\\mathcal O_{\\widetilde X}$, hence invertible\n([lemma-nagata-invertible-product-factor]), so the universal property of\nblowing up ([thm-nagata-blowup-universal-property]) provides a\ncomparison $c_Z\\colon\\widetilde X\\to\\operatorname{Bl}_{\\mathcal I_Z}(X)$ over\n$X$.",
+    "uses": [
+     "lemma-nagata-affine-blowup-complement",
+     "lemma-nagata-invertible-product-factor",
+     "thm-nagata-blowup-universal-property"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Write $\\Omega_Z=\\mathrm{pr}_Y^{-1}(Z)\\subseteq Y\\times_X\\widetilde X$, an open\nsubscheme, and let $\\Phi_Z$ be the graph of\n$c_Z^{-1}(W_Z)\\to W_Z\\xrightarrow{g_Z}Z$, a morphism\n$c_Z^{-1}(W_Z)\\to Y\\times_X\\widetilde X$ landing in $\\Omega_Z$ and satisfying\n$\\mathrm{pr}_{\\widetilde X}\\circ\\Phi_Z=\\iota_{c_Z^{-1}(W_Z)}$. Two things\nhold.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "1. *$\\Phi_Z$ is injective over $\\widetilde X$*: this is immediate\nfrom $\\mathrm{pr}_{\\widetilde X}\\circ\\Phi_Z=\\iota_{c_Z^{-1}(W_Z)}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "1. *The range of $\\Phi_Z$ is closed in $\\Omega_Z$*: indeed\n$\\Omega_Z=Z\\times_X\\widetilde X$ and\n$c_Z^{-1}(W_Z)=W_Z\\times_{\\operatorname{Bl}_{\\mathcal I_Z}(X)}\\widetilde X$,\nso $\\Phi_Z$ is the base change of the closed graph of $g_Z$ along\n$\\Omega_Z\\to Z\\times_X\\operatorname{Bl}_{\\mathcal I_Z}(X)$, and the range\nof a base change is the inverse image of the range.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Finally, $F(U)\\cap\\Omega_Z$ is contained in the range of $\\Phi_Z$: a point of\nit is $F(u)$ with $f(u)\\in Z$, so $u\\in U_Z$, and there $\\sigma$ lands in\n$c_Z^{-1}(W_Z)$ and $g_Z$ agrees with $f$. As $\\Omega_Z$ is open,\n$\\overline{F(U)}\\cap\\Omega_Z$ is the closure of $F(U)\\cap\\Omega_Z$ inside\n$\\Omega_Z$, which by (2) is again contained in the range of $\\Phi_Z$. The\n$\\Omega_Z$ cover $Y\\times_X\\widetilde X$, so the underlying space of\n$\\overline{F(U)}$ is covered by the finitely many sets $\\Phi_Z(c_Z^{-1}(W_Z))$,\neach injective over $\\widetilde X$ by (1); hence the fibres of\n$\\overline{F(U)}\\to\\widetilde X$ are finite. Being locally of finite type\n(as a closed immersion followed by a base change of $p$), the morphism is\ntherefore locally quasi-finite. It is quasi-compact because\n$\\overline{F(U)}$ is quasi-compact and $\\widetilde X$ quasi-separated, and\nseparated because $p$ is.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

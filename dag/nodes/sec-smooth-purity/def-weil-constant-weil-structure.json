@@ -1,191 +1,180 @@
 {
-  "id": "def-weil-constant-weil-structure",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-weil-ordinary-compact-cohomology",
-      "place": "its statement (a notion the statement uses)",
-      "via": []
-    },
-    "same_as": null
+ "id": "def-weil-constant-weil-structure",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-ordinary-compact-cohomology",
+   "place": "its statement (a notion the statement uses)",
+   "via": []
   },
-  "kind": "definition",
-  "title": "Canonical Weil structure on the constant coefficient object",
-  "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and a finite extension $E/\\Ql$ contained in $\\Qlb$, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, finite coefficient rings $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($n\\geq1$) and reductions $r_n:A_{E,n+1}\\twoheadrightarrow A_{E,n}$ [def-weil-l-adic-coefficient-extension]. Let $Y_0$ be a finite-type [def-weil-scheme-morphism-properties] $k_0$-scheme, $Y=Y_0\\times_{k_0}k$, and $g_Y:Y\\to Y$ the geometric-Frobenius automorphism [def-weil-frobenius-detailed], an isomorphism of schemes; $\\ell$ is invertible on $Y$.\n\n1. *Finite level.* For $n\\geq1$ let $(A_{E,n})_Y$ be the constant sheaf of rings on the small pro-etale site $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and let\n$$\n c_n=c^{g_Y}_{A_{E,n}}:g_Y^{-1}(A_{E,n})_Y\\longrightarrow(A_{E,n})_Y\n$$\nbe the structure map of the pro-etale inverse image along $g_Y$ [def-weil-proetale-inverse-image]: the morphism of sheaves of rings adjoint, under $g_Y^{-1}\\dashv g_{Y*}$, to the map $(A_{E,n})_Y\\to g_{Y*}(A_{E,n})_Y$ induced by sending $a\\in A_{E,n}$ to the constant section $a$ over every object. Each $c_n$ is an isomorphism, and $(r_n)_Y\\circ c_{n+1}=c_n\\circ g_Y^{-1}((r_n)_Y)$ for every $n$ [lem-weil-proetale-isomorphism-inverse-image].\n\n2. *Integral level.* Let $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$ be the completed integral coefficient sheaf [def-weil-completed-integral-coefficients], an inverse limit of sheaves of rings [def-pur-sheaf-inverse-limit]. Define\n$$\n c_{\\mathcal O_E}:g_Y^{-1}\\widehat{\\mathcal O}_{E,Y}\\longrightarrow\\varprojlim_ng_Y^{-1}(A_{E,n})_Y\\xrightarrow{\\ \\varprojlim_nc_n\\ }\\widehat{\\mathcal O}_{E,Y},\n$$\nthe first arrow being the canonical comparison map induced by the inverse images of the projections; the second arrow is defined by the compatibility in 1. Both arrows are isomorphisms [lem-weil-proetale-isomorphism-inverse-image], so $c_{\\mathcal O_E}$ is an isomorphism of sheaves of rings.\n\n3. *Derived integral level.* $\\widehat{\\mathcal O}_{E,Y}$ placed in degree $0$ is an object of $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed, lem-weil-constant-coefficient-objects-constructible]. Let $\\lambda:Lg_Y^*\\widehat{\\mathcal O}_{E,Y}\\xrightarrow{\\sim}g_Y^{-1}\\widehat{\\mathcal O}_{E,Y}$ be the isomorphism identifying the derived pullback [def-weil-derived-pullback-tensor-hom] along the isomorphism $g_Y$ with the inverse image [lem-weil-isomorphism-derived-pullback], and put\n$$\n \\theta_{\\mathcal O_E}=c_{\\mathcal O_E}\\circ\\lambda:Lg_Y^*\\widehat{\\mathcal O}_{E,Y}\\xrightarrow{\\ \\sim\\ }\\widehat{\\mathcal O}_{E,Y}\\quad\\text{in }D^b_c(Y,\\mathcal O_E).\n$$\n\n4. *Rational level.* Let $E_Y$ be the image of $\\widehat{\\mathcal O}_{E,Y}$ in the rationalized category $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-rationalization-karoubi], on which the derived pullback $Lg_Y^*$ is induced from integral representatives [def-weil-derived-pullback-tensor-hom]. Put $\\theta_E=\\theta_{\\mathcal O_E}\\otimes1:Lg_Y^*E_Y\\xrightarrow{\\sim}E_Y$, the image of $\\theta_{\\mathcal O_E}$, an isomorphism. Since $\\widehat{\\mathcal O}_{E,Y}$ is a sheaf placed in degree $0$, $E_Y$ lies in the constructible heart $\\Sh_c(Y,E)$ [def-weil-constructible-heart], so $(E_Y,\\theta_E)$ is a constructible $E$-Weil sheaf and an object of $D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex]. It is the *canonical Weil structure* on $E_Y$, and $\\operatorname{For}(E_Y,\\theta_E)=E_Y$.\n\n5. *Algebraically closed coefficients.* The *canonical Weil structure* on $(\\Qlb)_Y$ is the object $(\\Ql,((\\Ql)_Y,\\theta_{\\Ql}))$ of $D^b_{c,\\mathrm W}(Y,\\Qlb)=\\operatorname{2-colim}_{E}D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex], given at the stage $E=\\Ql$ of the directed set of finite extensions of $\\Ql$ in $\\Qlb$ [def-weil-algebraically-closed-coefficients]. Its image under $\\operatorname{For}$ is $(\\Ql,(\\Ql)_Y)$, which is the object $(\\Qlb)_Y$ of $D^b_c(Y,\\Qlb)$ [lem-weil-constant-coefficient-objects-constructible].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
-    "place": "node def-weil-ordinary-compact-cohomology, order 1510: 'When $\\Lambda\\in\\{E,\\Qlb\\}$, equip it with the canonical Weil structure from the Weil-sheaf structure [def-weil-weil-sheaf-complex]' (the structure is named but not constructed in the blueprint; def-pod-dual-tate-datum also names it as $\\varphi_A:Lg_\\gamma^*A_X\\xrightarrow{\\sim}A_X$ without defining it)"
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Canonical Weil structure on the constant coefficient object",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$ [def-weil-l-adic-numbers, def-weil-algebraic-closure], and a finite extension $E/\\Ql$ contained in $\\Qlb$, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, finite coefficient rings $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($n\\geq1$) and reductions $r_n:A_{E,n+1}\\twoheadrightarrow A_{E,n}$ [def-weil-l-adic-coefficient-extension]. Let $Y_0$ be a finite-type [def-weil-scheme-morphism-properties] $k_0$-scheme, $Y=Y_0\\times_{k_0}k$, and $g_Y:Y\\to Y$ the geometric-Frobenius automorphism [def-weil-frobenius-detailed], an isomorphism of schemes; $\\ell$ is invertible on $Y$.\n\n1. *Finite level.* For $n\\geq1$ let $(A_{E,n})_Y$ be the constant sheaf of rings on the small pro-etale site $Y_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and let\n$$\n c_n=c^{g_Y}_{A_{E,n}}:g_Y^{-1}(A_{E,n})_Y\\longrightarrow(A_{E,n})_Y\n$$\nbe the structure map of the pro-etale inverse image along $g_Y$ [def-weil-proetale-inverse-image]: the morphism of sheaves of rings adjoint, under $g_Y^{-1}\\dashv g_{Y*}$, to the map $(A_{E,n})_Y\\to g_{Y*}(A_{E,n})_Y$ induced by sending $a\\in A_{E,n}$ to the constant section $a$ over every object. Each $c_n$ is an isomorphism, and $(r_n)_Y\\circ c_{n+1}=c_n\\circ g_Y^{-1}((r_n)_Y)$ for every $n$ [lem-weil-proetale-isomorphism-inverse-image].\n\n2. *Integral level.* Let $\\widehat{\\mathcal O}_{E,Y}=\\varprojlim_n(A_{E,n})_Y$ be the completed integral coefficient sheaf [def-weil-completed-integral-coefficients], an inverse limit of sheaves of rings [def-pur-sheaf-inverse-limit]. Define\n$$\n c_{\\mathcal O_E}:g_Y^{-1}\\widehat{\\mathcal O}_{E,Y}\\longrightarrow\\varprojlim_ng_Y^{-1}(A_{E,n})_Y\\xrightarrow{\\ \\varprojlim_nc_n\\ }\\widehat{\\mathcal O}_{E,Y},\n$$\nthe first arrow being the canonical comparison map induced by the inverse images of the projections; the second arrow is defined by the compatibility in 1. Both arrows are isomorphisms [lem-weil-proetale-isomorphism-inverse-image], so $c_{\\mathcal O_E}$ is an isomorphism of sheaves of rings.\n\n3. *Derived integral level.* $\\widehat{\\mathcal O}_{E,Y}$ placed in degree $0$ is an object of $D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed, lem-weil-constant-coefficient-objects-constructible]. Let $\\lambda:Lg_Y^*\\widehat{\\mathcal O}_{E,Y}\\xrightarrow{\\sim}g_Y^{-1}\\widehat{\\mathcal O}_{E,Y}$ be the isomorphism identifying the derived pullback [def-weil-derived-pullback-tensor-hom] along the isomorphism $g_Y$ with the inverse image [lem-weil-isomorphism-derived-pullback], and put\n$$\n \\theta_{\\mathcal O_E}=c_{\\mathcal O_E}\\circ\\lambda:Lg_Y^*\\widehat{\\mathcal O}_{E,Y}\\xrightarrow{\\ \\sim\\ }\\widehat{\\mathcal O}_{E,Y}\\quad\\text{in }D^b_c(Y,\\mathcal O_E).\n$$\n\n4. *Rational level.* Let $E_Y$ be the image of $\\widehat{\\mathcal O}_{E,Y}$ in the rationalized category $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-rationalization-karoubi], on which the derived pullback $Lg_Y^*$ is induced from integral representatives [def-weil-derived-pullback-tensor-hom]. Put $\\theta_E=\\theta_{\\mathcal O_E}\\otimes1:Lg_Y^*E_Y\\xrightarrow{\\sim}E_Y$, the image of $\\theta_{\\mathcal O_E}$, an isomorphism. Since $\\widehat{\\mathcal O}_{E,Y}$ is a sheaf placed in degree $0$, $E_Y$ lies in the constructible heart $\\Sh_c(Y,E)$ [def-weil-constructible-heart], so $(E_Y,\\theta_E)$ is a constructible $E$-Weil sheaf and an object of $D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex]. It is the *canonical Weil structure* on $E_Y$, and $\\operatorname{For}(E_Y,\\theta_E)=E_Y$.\n\n5. *Algebraically closed coefficients.* The *canonical Weil structure* on $(\\Qlb)_Y$ is the object $(\\Ql,((\\Ql)_Y,\\theta_{\\Ql}))$ of $D^b_{c,\\mathrm W}(Y,\\Qlb)=\\operatorname{2-colim}_{E}D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex], given at the stage $E=\\Ql$ of the directed set of finite extensions of $\\Ql$ in $\\Qlb$ [def-weil-algebraically-closed-coefficients]. Its image under $\\operatorname{For}$ is $(\\Ql,(\\Ql)_Y)$, which is the object $(\\Qlb)_Y$ of $D^b_c(Y,\\Qlb)$ [lem-weil-constant-coefficient-objects-constructible].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+  "place": "node def-weil-ordinary-compact-cohomology, order 1510: 'When $\\Lambda\\in\\{E,\\Qlb\\}$, equip it with the canonical Weil structure from the Weil-sheaf structure [def-weil-weil-sheaf-complex]' (the structure is named but not constructed in the blueprint; def-pod-dual-tate-datum also names it as $\\varphi_A:Lg_\\gamma^*A_X\\xrightarrow{\\sim}A_X$ without defining it)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-numbers",
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-frobenius-detailed",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-rationalization-karoubi",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Finite reduction compatibility is the coefficient naturality clause of proEtaleIso_constantComparison applied to the actual quotient transition, after unfolding the finite comparison and reduction definitions.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true
   },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-l-adic-numbers",
-    "def-weil-algebraic-closure",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-frobenius-detailed",
-    "def-weil-pbc-proetale-site",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-completed-integral-coefficients",
-    "def-pur-sheaf-inverse-limit",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-weil-constant-coefficient-objects-constructible",
-    "def-weil-derived-pullback-tensor-hom",
-    "lem-weil-isomorphism-derived-pullback",
-    "def-weil-rationalization-karoubi",
-    "def-weil-constructible-heart",
-    "def-weil-weil-sheaf-complex",
-    "def-weil-algebraically-closed-coefficients"
-  ],
-  "proof": [
-    {
-      "text": "Finite reduction compatibility is the coefficient naturality clause of proEtaleIso_constantComparison applied to the actual quotient transition, after unfolding the finite comparison and reduction definitions.",
-      "uses": [
-        "lem-weil-proetale-isomorphism-inverse-image"
-      ],
-      "elementary": true
-    },
-    {
-      "text": "The regular integral representative is the single complex in degree zero. Its good-complex theorem remains open, with the complete argument in its Lean docstring. The normalized strict chain unit and its quasi-isomorphism theorem also remain open as the original named theorems; their finite-generator and Roos arguments are unchanged.",
-      "uses": [],
-      "elementary": false
-    },
-    {
-      "text": "For the termwise unit map, proEtaleIsoPostcompose_equivalence and the map/pullback adjunction make proEtaleBaseChange an equivalence. Transport through the explicit AsSmall equivalences makes model base change final. Mathlib SheafOfModules.pullbackObjUnitToUnit is therefore invertible; the two functor maps preserve its invertibility. For restriction of the unit, the underlying section map sends x to c.inv(x) times 1 and is bijective because c is a ring-sheaf isomorphism. The underlying abelian-presheaf functor reflects isomorphisms.",
-      "uses": [
-        "lem-weil-proetale-isomorphism-inverse-image"
-      ],
-      "elementary": true
-    },
-    {
-      "text": "For rational heart membership use the specified integral constant object in both existential standard classes, with the identity isomorphism. Its underlying derived object is a single object in degree zero; Mathlib DerivedCategory.isZero_of_isLE and isZero_of_isGE give the required vanishing. For common-stage heart membership use the base coefficient stage and its rational constant object, with the rational heart theorem and identity inclusion isomorphism.",
-      "uses": [
-        "def-weil-constructible-heart"
-      ],
-      "elementary": true
-    },
-    {
-      "text": "Both forgetful identities hold by reflexivity: the fixed-pair forgetful functor retains its carrier, and finite-stage inclusion retains the literal coefficient-stage pair.",
-      "uses": [
-        "def-weil-weil-sheaf-complex"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-constructible-heart",
+  {
+   "text": "The regular integral representative is the single complex in degree zero. Its good-complex theorem remains open, with the complete argument in its Lean docstring. The normalized strict chain unit and its quasi-isomorphism theorem also remain open as the original named theorems; their finite-generator and Roos arguments are unchanged.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For the termwise unit map, proEtaleIsoPostcompose_equivalence and the map/pullback adjunction make proEtaleBaseChange an equivalence. Transport through the explicit AsSmall equivalences makes model base change final. Mathlib SheafOfModules.pullbackObjUnitToUnit is therefore invertible; the two functor maps preserve its invertibility. For restriction of the unit, the underlying section map sends x to c.inv(x) times 1 and is bijective because c is a ring-sheaf isomorphism. The underlying abelian-presheaf functor reflects isomorphisms.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For rational heart membership use the specified integral constant object in both existential standard classes, with the identity isomorphism. Its underlying derived object is a single object in degree zero; Mathlib DerivedCategory.isZero_of_isLE and isZero_of_isGE give the required vanishing. For common-stage heart membership use the base coefficient stage and its rational constant object, with the rational heart theorem and identity inclusion isomorphism.",
+   "uses": [
+    "def-weil-constructible-heart"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Both forgetful identities hold by reflexivity: the fixed-pair forgetful functor retains its carrier, and finite-stage inclusion retains the literal coefficient-stage pair.",
+   "uses": [
     "def-weil-weil-sheaf-complex"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
-    "place": "Coefficient paragraph, order 1510; six direct Lean proofs from the existing constant-comparison, site-equivalence, single-complex and fixed-pair APIs; three original obligations remain."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -rli 'weil sheaf\\|Weil complex\\|geometric Frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1); grep -rl 'Frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/AlgebraicGeometry; grep -n 'constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/CategoryTheory/Sites/ConstantSheaf.lean | head",
-      "results": "no file of Mathlib mentions Weil sheaves, Weil complexes or a geometric Frobenius; no Frobenius morphism of schemes in Mathlib/AlgebraicGeometry; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:66 `constantSheaf J D` and :70 `constantSheafAdj` (adjunction with evaluation at a terminal object), but no pullback of sheaves along a morphism of schemes compared with the constant sheaf",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "def-weil-ordinary-compact-cohomology",
-    "date": "2026-10-09"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "def-weil-constant-weil-structure",
-    "worker": "stage1",
-    "summary": "The blueprint names but does not construct this structure (def-weil-ordinary-compact-cohomology, order 1510), so the statement was checked against the definitions it uses. Corrected: (a) c_A was described as 'inverse to the adjunction unit on constant sections', which is not a map g^{-1}A_Y -> A_Y; it is now the structure map of the pro-etale inverse image (adjoint of A_Y -> g_*A_Y), new node def-weil-proetale-inverse-image, which the DAG lacked (def-weil-pbc-inverse-image is the etale one); (b) the integral isomorphism needs g^{-1} to commute with the inverse limit, true because g_Y is an isomorphism: split off as lem-weil-proetale-isomorphism-inverse-image, together with the isomorphy of c_n and its compatibility with reductions; (c) 'Lg^* agrees with g^{-1}' (the old text justified it by exactness of g^{-1}, which does not by itself remove the tensor with g^{-1}A over A or the integral derived-limit recipe) is split off as lem-weil-isomorphism-derived-pullback; (d) the claim that the Qlb object is independent of the stage E with theta_E (x) L = theta_L is removed from the definition, which now fixes the stage E = Ql, and stated as lem-weil-constant-weil-structure-stage-independence (unsplit; no node uses it yet). Added statement dependencies for the notions used (l-adic numbers, algebraic closure, coefficient extension, inverse limit of sheaves, derived-complete integral category, constructible heart). Mathlib (CategoryTheory/Sites/ConstantSheaf.lean equivCommuteConstant, Sites/Equivalence.lean sheafCongr, AlgebraicGeometry/Sites/Proetale.lean) has the general site-theoretic tools but no functoriality of the small pro-etale site."
-  },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-def-sf-admissible",
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-ba594b39f",
-    "group": "ND",
-    "result": "pass",
-    "note": "All 5 clauses checked against node 1510. c_n is proEtaleIsoConstantRingComparison with the reduction compatibility for all n (exponent n+1). c_O is the recorded isomorphismCompletedCoefficientComparison. theta_O is normalized by a strict ∃! chain unit into the recorded pullback Roos complex (1↦unit of 1⊗1, zero shifted part), which is plausibly true and canonical; theta = c_O∘lambda by construction. E_Y = sfRationalConstructibleLocalization of the integral object, theta_E its image, IsoAlgebra pair, heart membership and For stated. Qlb object at finiteCoefficientBase with literal For pair, no stage-independence added. Both §1(B) repairs justified: upstream WeilComplex is the Ext-valued derived-of-Weil-sheaves category the node excludes; IsoAlgebra equals the fixed-pair mathlib_match; old heart is on the legacy rationalConstructibleCategory and the same classes are restated on the sf categories. Nodes differ only in lean; statements verbatim; no hollow defs; sorry-only proofs; docstrings and line width OK. nt_compile --json of all three files: exit 0, no error or warning diagnostics (6.8 s, 6.1 s, 17.0 s). Minor non-blocking: standard classes restated as helpers in the heart module; current-category wrappers parallel the legacy ones."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.ConstantWeilStructure",
-    "declaration": "WeilConjectures.constantWeilAlgebraicallyClosedSheaf",
-    "declarations": [
-      "WeilConjectures.constantWeilFiniteComparison",
-      "WeilConjectures.constantWeilCoefficientReduction",
-      "WeilConjectures.constantWeilFiniteComparison_reduction",
-      "WeilConjectures.constantWeilIntegralComparison",
-      "WeilConjectures.constantWeilIntegralComplex",
-      "WeilConjectures.constantWeilIntegralComplex_good",
-      "WeilConjectures.constantWeilIntegralGood",
-      "WeilConjectures.constantWeilPullbackTower",
-      "WeilConjectures.constantWeilPullbackRoosEndomorphism",
-      "WeilConjectures.constantWeilUnitSection",
-      "WeilConjectures.constantWeilReducedUnitSection",
-      "WeilConjectures.constantWeilChainUnit_existsUnique",
-      "WeilConjectures.constantWeilChainUnit",
-      "WeilConjectures.constantWeilChainUnit_isIso",
-      "WeilConjectures.constantWeilIntegralRoosComparison",
-      "WeilConjectures.constantWeilTermwiseUnitMap",
-      "WeilConjectures.constantWeilRestrictionUnitMap",
-      "WeilConjectures.constantWeilTermwiseUnitMaps_isIso",
-      "WeilConjectures.constantWeilTermwiseUnitIso",
-      "WeilConjectures.constantWeilDerivedCoefficientComparison",
-      "WeilConjectures.constantWeilIntegralLambda",
-      "WeilConjectures.constantWeilIntegralTheta",
-      "WeilConjectures.constantWeilIntegralObject",
-      "WeilConjectures.constantWeilRationalObject",
-      "WeilConjectures.constantWeilConstructibleIntegralTheta",
-      "WeilConjectures.constantWeilRationalTheta",
-      "WeilConjectures.constantWeilRationalComplex",
-      "WeilConjectures.constantWeilRationalObject_mem_heart",
-      "WeilConjectures.constantWeilRationalSheaf",
-      "WeilConjectures.constantWeilAlgebraicallyClosedComplex",
-      "WeilConjectures.constantWeilAlgebraicallyClosedObject_mem_heart",
-      "WeilConjectures.constantWeilAlgebraicallyClosedSheaf",
-      "WeilConjectures.constantWeilRationalForget",
-      "WeilConjectures.constantWeilAlgebraicallyClosedForget"
-    ],
-    "file": "lean/Sheaf/Paper/ConstantWeilStructure.lean",
-    "statement": "def constantWeilAlgebraicallyClosedSheaf : sfCommonStageWeilSheaf D l hl Y₀ Ω",
-    "branch": "newtargets-dag",
-    "by": "ND",
-    "date": "2026-10-17",
-    "existing": false
-  },
-  "reviewed_proof": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "Z6",
-    "result": "pass",
-    "landing": "20261019T034412-L-429282",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-constructible-heart",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+  "place": "Coefficient paragraph, order 1510; six direct Lean proofs from the existing constant-comparison, site-equivalence, single-complex and fixed-pair APIs; three original obligations remain."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli 'weil sheaf\\|Weil complex\\|geometric Frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1); grep -rl 'Frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/AlgebraicGeometry; grep -n 'constantSheaf' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib (checkout 0df444a360, v4.33.1)/CategoryTheory/Sites/ConstantSheaf.lean | head",
+   "results": "no file of Mathlib mentions Weil sheaves, Weil complexes or a geometric Frobenius; no Frobenius morphism of schemes in Mathlib/AlgebraicGeometry; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:66 `constantSheaf J D` and :70 `constantSheafAdj` (adjunction with evaluation at a terminal object), but no pullback of sheaves along a morphism of schemes compared with the constant sheaf",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-ordinary-compact-cohomology",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-constant-weil-structure",
+  "worker": "stage1",
+  "summary": "The blueprint names but does not construct this structure (def-weil-ordinary-compact-cohomology, order 1510), so the statement was checked against the definitions it uses. Corrected: (a) c_A was described as 'inverse to the adjunction unit on constant sections', which is not a map g^{-1}A_Y -> A_Y; it is now the structure map of the pro-etale inverse image (adjoint of A_Y -> g_*A_Y), new node def-weil-proetale-inverse-image, which the DAG lacked (def-weil-pbc-inverse-image is the etale one); (b) the integral isomorphism needs g^{-1} to commute with the inverse limit, true because g_Y is an isomorphism: split off as lem-weil-proetale-isomorphism-inverse-image, together with the isomorphy of c_n and its compatibility with reductions; (c) 'Lg^* agrees with g^{-1}' (the old text justified it by exactness of g^{-1}, which does not by itself remove the tensor with g^{-1}A over A or the integral derived-limit recipe) is split off as lem-weil-isomorphism-derived-pullback; (d) the claim that the Qlb object is independent of the stage E with theta_E (x) L = theta_L is removed from the definition, which now fixes the stage E = Ql, and stated as lem-weil-constant-weil-structure-stage-independence (unsplit; no node uses it yet). Added statement dependencies for the notions used (l-adic numbers, algebraic closure, coefficient extension, inverse limit of sheaves, derived-complete integral category, constructible heart). Mathlib (CategoryTheory/Sites/ConstantSheaf.lean equivCommuteConstant, Sites/Equivalence.lean sheafCongr, AlgebraicGeometry/Sites/Proetale.lean) has the general site-theoretic tools but no functoriality of the small pro-etale site."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba594b39f",
+  "group": "ND",
+  "result": "pass",
+  "note": "All 5 clauses checked against node 1510. c_n is proEtaleIsoConstantRingComparison with the reduction compatibility for all n (exponent n+1). c_O is the recorded isomorphismCompletedCoefficientComparison. theta_O is normalized by a strict ∃! chain unit into the recorded pullback Roos complex (1↦unit of 1⊗1, zero shifted part), which is plausibly true and canonical; theta = c_O∘lambda by construction. E_Y = sfRationalConstructibleLocalization of the integral object, theta_E its image, IsoAlgebra pair, heart membership and For stated. Qlb object at finiteCoefficientBase with literal For pair, no stage-independence added. Both §1(B) repairs justified: upstream WeilComplex is the Ext-valued derived-of-Weil-sheaves category the node excludes; IsoAlgebra equals the fixed-pair mathlib_match; old heart is on the legacy rationalConstructibleCategory and the same classes are restated on the sf categories. Nodes differ only in lean; statements verbatim; no hollow defs; sorry-only proofs; docstrings and line width OK. nt_compile --json of all three files: exit 0, no error or warning diagnostics (6.8 s, 6.1 s, 17.0 s). Minor non-blocking: standard classes restated as helpers in the heart module; current-category wrappers parallel the legacy ones."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantWeilStructure",
+  "declaration": "WeilConjectures.constantWeilAlgebraicallyClosedSheaf",
+  "declarations": [
+   "WeilConjectures.constantWeilFiniteComparison",
+   "WeilConjectures.constantWeilCoefficientReduction",
+   "WeilConjectures.constantWeilFiniteComparison_reduction",
+   "WeilConjectures.constantWeilIntegralComparison",
+   "WeilConjectures.constantWeilIntegralComplex",
+   "WeilConjectures.constantWeilIntegralComplex_good",
+   "WeilConjectures.constantWeilIntegralGood",
+   "WeilConjectures.constantWeilPullbackTower",
+   "WeilConjectures.constantWeilPullbackRoosEndomorphism",
+   "WeilConjectures.constantWeilUnitSection",
+   "WeilConjectures.constantWeilReducedUnitSection",
+   "WeilConjectures.constantWeilChainUnit_existsUnique",
+   "WeilConjectures.constantWeilChainUnit",
+   "WeilConjectures.constantWeilChainUnit_isIso",
+   "WeilConjectures.constantWeilIntegralRoosComparison",
+   "WeilConjectures.constantWeilTermwiseUnitMap",
+   "WeilConjectures.constantWeilRestrictionUnitMap",
+   "WeilConjectures.constantWeilTermwiseUnitMaps_isIso",
+   "WeilConjectures.constantWeilTermwiseUnitIso",
+   "WeilConjectures.constantWeilDerivedCoefficientComparison",
+   "WeilConjectures.constantWeilIntegralLambda",
+   "WeilConjectures.constantWeilIntegralTheta",
+   "WeilConjectures.constantWeilIntegralObject",
+   "WeilConjectures.constantWeilRationalObject",
+   "WeilConjectures.constantWeilConstructibleIntegralTheta",
+   "WeilConjectures.constantWeilRationalTheta",
+   "WeilConjectures.constantWeilRationalComplex",
+   "WeilConjectures.constantWeilRationalObject_mem_heart",
+   "WeilConjectures.constantWeilRationalSheaf",
+   "WeilConjectures.constantWeilAlgebraicallyClosedComplex",
+   "WeilConjectures.constantWeilAlgebraicallyClosedObject_mem_heart",
+   "WeilConjectures.constantWeilAlgebraicallyClosedSheaf",
+   "WeilConjectures.constantWeilRationalForget",
+   "WeilConjectures.constantWeilAlgebraicallyClosedForget"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantWeilStructure.lean",
+  "statement": "def constantWeilAlgebraicallyClosedSheaf : sfCommonStageWeilSheaf D l hl Y₀ Ω",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261019T034412-L-429282",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

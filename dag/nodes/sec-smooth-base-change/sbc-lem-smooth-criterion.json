@@ -1,129 +1,104 @@
 {
-  "id": "sbc-lem-smooth-criterion",
-  "blueprint": {
-    "is": "sbc-lem-smooth-criterion",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Smoothness by flatness and smooth fibres",
-  "statement": "A morphism $f:X\\to Y$ of schemes is\nsmooth if and only if it is flat,\nlocally of finite presentation, and every fibre $X_y$ is smooth over\n$\\kappa(y)$.\n(*Stacks Project: a smooth morphism is locally of finite\npresentation and flat by\n[Lemma 29.35.8](https://stacks.math.columbia.edu/tag/01VE) and\n[Lemma 29.35.9](https://stacks.math.columbia.edu/tag/01VF), its\nfibres are smooth by base change,\n[Lemma 29.35.5](https://stacks.math.columbia.edu/tag/01VB), and\nconversely flatness, local finite presentation and smooth fibres give\nsmoothness by\n[Lemma 29.35.3](https://stacks.math.columbia.edu/tag/01V8); the two\ndefinitions of smoothness are identified by\n[Lemma 37.11.7](https://stacks.math.columbia.edu/tag/02H6). For\nmorphisms of finite type the criterion is the Jacobian criterion,\n[Lemma 29.35.14](https://stacks.math.columbia.edu/tag/01V9).*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-smooth/sbc-lem-smooth-criterion.md",
-    "place": "node sbc-lem-smooth-criterion, order 1375",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01VE"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01VF"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01VB"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01V8"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 02H6"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01V9"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-sbc-smooth-morphisms"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "unsplit",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1375,
-  "blueprint_uses": [
-    "def-sbc-smooth-morphisms"
-  ],
-  "uses_not_cited": [
-    "def-sbc-smooth-morphisms"
-  ],
-  "blueprint_proof_text": "This is the recorded classical input named in the statement: smooth morphisms are flat and locally of finite presentation (Stacks Project, Lemmas 29.35.8 and 29.35.9, [Tag 01VE](https://stacks.math.columbia.edu/tag/01VE), [Tag 01VF](https://stacks.math.columbia.edu/tag/01VF)), have smooth fibres by base change (Lemma 29.35.5, [Tag 01VB](https://stacks.math.columbia.edu/tag/01VB)), and conversely flatness with local finite presentation and smooth fibres gives smoothness (Lemma 29.35.3, [Tag 01V8](https://stacks.math.columbia.edu/tag/01V8)), the two definitions of smoothness being identified by Lemma 37.11.7 ([Tag 02H6](https://stacks.math.columbia.edu/tag/02H6)); for morphisms of finite type this is the Jacobian criterion, Lemma 29.35.14 ([Tag 01V9](https://stacks.math.columbia.edu/tag/01V9)). The blueprint uses the criterion, which is why it is recorded here; no separate proof is given.",
-  "blueprint_proof_steps": [
-    {
-      "text": "This is the recorded classical input named in the statement: smooth morphisms are flat and locally of finite presentation (Stacks Project, Lemmas 29.35.8 and 29.35.9, [Tag 01VE](https://stacks.math.columbia.edu/tag/01VE), [Tag 01VF](https://stacks.math.columbia.edu/tag/01VF)), have smooth fibres by base change (Lemma 29.35.5, [Tag 01VB](https://stacks.math.columbia.edu/tag/01VB)), and conversely flatness with local finite presentation and smooth fibres gives smoothness (Lemma 29.35.3, [Tag 01V8](https://stacks.math.columbia.edu/tag/01V8)), the two definitions of smoothness being identified by Lemma 37.11.7 ([Tag 02H6](https://stacks.math.columbia.edu/tag/02H6)); for morphisms of finite type this is the Jacobian criterion, Lemma 29.35.14 ([Tag 01V9](https://stacks.math.columbia.edu/tag/01V9)). The blueprint uses the criterion, which is why it is recorded here; no separate proof is given.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber",
-          "lines": [
-            47,
-            62
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-def-smooth",
-  "lean": {
-    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber",
-    "declaration": "AlgebraicGeometry.smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField",
-    "statement": "theorem smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    Smooth f ↔ Flat f ∧ LocallyOfFinitePresentation f ∧\n      ∀ y, Smooth (f.fiberToSpecResidueField y)",
-    "branch": "slopmaster2",
-    "by": "NV",
-    "date": "2026-10-15",
-    "existing": true,
-    "note": "Exact existing iff for arbitrary scheme morphisms: flatness, local finite presentation, and smoothness of every scheme-theoretic fibre over its residue field. Read the full signature and docstring in both the local upstream source and current server source."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-052a10a91",
-    "group": "NV",
-    "result": "pass",
-    "note": "Wrote review.md. Exact signature, dependencies, source clauses, universes, edge cases, and report sections checked. Server-only compilation passed cleanly in 1.8 seconds. No delivery errors or fixes; branch head unchanged."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "A morphism $f:X\\to Y$ of schemes is\nsmooth if and only if it is flat,\nlocally of finite presentation, and every fibre $X_y$ is smooth over\n$\\kappa(y)$.",
-    "proof": [
-      {
-        "text": "This is classical: smooth morphisms are flat and locally of finite presentation (Stacks Project, Lemmas 29.35.8 and 29.35.9, [Tag 01VE](https://stacks.math.columbia.edu/tag/01VE), [Tag 01VF](https://stacks.math.columbia.edu/tag/01VF)), have smooth fibres by base change (Lemma 29.35.5, [Tag 01VB](https://stacks.math.columbia.edu/tag/01VB)), and conversely flatness with local finite presentation and smooth fibres gives smoothness (Lemma 29.35.3, [Tag 01V8](https://stacks.math.columbia.edu/tag/01V8)), the two definitions of smoothness being identified by Lemma 37.11.7 ([Tag 02H6](https://stacks.math.columbia.edu/tag/02H6)); for morphisms of finite type this is the Jacobian criterion, Lemma 29.35.14 ([Tag 01V9](https://stacks.math.columbia.edu/tag/01V9)). No separate proof is given.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "sbc-lem-smooth-criterion",
+ "blueprint": {
+  "is": "sbc-lem-smooth-criterion",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Smoothness by flatness and smooth fibres",
+ "statement": "A morphism $f:X\\to Y$ of schemes is\nsmooth if and only if it is flat,\nlocally of finite presentation, and every fibre $X_y$ is smooth over\n$\\kappa(y)$.\n(*Stacks Project: a smooth morphism is locally of finite\npresentation and flat by\n[Lemma 29.35.8](https://stacks.math.columbia.edu/tag/01VE) and\n[Lemma 29.35.9](https://stacks.math.columbia.edu/tag/01VF), its\nfibres are smooth by base change,\n[Lemma 29.35.5](https://stacks.math.columbia.edu/tag/01VB), and\nconversely flatness, local finite presentation and smooth fibres give\nsmoothness by\n[Lemma 29.35.3](https://stacks.math.columbia.edu/tag/01V8); the two\ndefinitions of smoothness are identified by\n[Lemma 37.11.7](https://stacks.math.columbia.edu/tag/02H6). For\nmorphisms of finite type the criterion is the Jacobian criterion,\n[Lemma 29.35.14](https://stacks.math.columbia.edu/tag/01V9).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-smooth/sbc-lem-smooth-criterion.md",
+  "place": "node sbc-lem-smooth-criterion, order 1375",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01VE"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01VF"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01VB"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01V8"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02H6"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01V9"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1375,
+ "blueprint_uses": [
+  "def-sbc-smooth-morphisms"
+ ],
+ "uses_not_cited": [
+  "def-sbc-smooth-morphisms"
+ ],
+ "blueprint_proof_text": "This is the recorded classical input named in the statement: smooth morphisms are flat and locally of finite presentation (Stacks Project, Lemmas 29.35.8 and 29.35.9, [Tag 01VE](https://stacks.math.columbia.edu/tag/01VE), [Tag 01VF](https://stacks.math.columbia.edu/tag/01VF)), have smooth fibres by base change (Lemma 29.35.5, [Tag 01VB](https://stacks.math.columbia.edu/tag/01VB)), and conversely flatness with local finite presentation and smooth fibres gives smoothness (Lemma 29.35.3, [Tag 01V8](https://stacks.math.columbia.edu/tag/01V8)), the two definitions of smoothness being identified by Lemma 37.11.7 ([Tag 02H6](https://stacks.math.columbia.edu/tag/02H6)); for morphisms of finite type this is the Jacobian criterion, Lemma 29.35.14 ([Tag 01V9](https://stacks.math.columbia.edu/tag/01V9)). The blueprint uses the criterion, which is why it is recorded here; no separate proof is given.",
+ "blueprint_proof_steps": [
+  {
+   "text": "This is the recorded classical input named in the statement: smooth morphisms are flat and locally of finite presentation (Stacks Project, Lemmas 29.35.8 and 29.35.9, [Tag 01VE](https://stacks.math.columbia.edu/tag/01VE), [Tag 01VF](https://stacks.math.columbia.edu/tag/01VF)), have smooth fibres by base change (Lemma 29.35.5, [Tag 01VB](https://stacks.math.columbia.edu/tag/01VB)), and conversely flatness with local finite presentation and smooth fibres gives smoothness (Lemma 29.35.3, [Tag 01V8](https://stacks.math.columbia.edu/tag/01V8)), the two definitions of smoothness being identified by Lemma 37.11.7 ([Tag 02H6](https://stacks.math.columbia.edu/tag/02H6)); for morphisms of finite type this is the Jacobian criterion, Lemma 29.35.14 ([Tag 01V9](https://stacks.math.columbia.edu/tag/01V9)). The blueprint uses the criterion, which is why it is recorded here; no separate proof is given.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-def-smooth",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber",
+  "declaration": "AlgebraicGeometry.smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField",
+  "statement": "theorem smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField\n    {X Y : Scheme.{u}} (f : X ⟶ Y) :\n    Smooth f ↔ Flat f ∧ LocallyOfFinitePresentation f ∧\n      ∀ y, Smooth (f.fiberToSpecResidueField y)",
+  "branch": "slopmaster2",
+  "by": "NV",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Exact existing iff for arbitrary scheme morphisms: flatness, local finite presentation, and smoothness of every scheme-theoretic fibre over its residue field. Read the full signature and docstring in both the local upstream source and current server source."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-052a10a91",
+  "group": "NV",
+  "result": "pass",
+  "note": "Wrote review.md. Exact signature, dependencies, source clauses, universes, edge cases, and report sections checked. Server-only compilation passed cleanly in 1.8 seconds. No delivery errors or fixes; branch head unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "A morphism $f:X\\to Y$ of schemes is\nsmooth if and only if it is flat,\nlocally of finite presentation, and every fibre $X_y$ is smooth over\n$\\kappa(y)$.",
+  "proof": [
+   {
+    "text": "This is classical: smooth morphisms are flat and locally of finite presentation (Stacks Project, Lemmas 29.35.8 and 29.35.9, [Tag 01VE](https://stacks.math.columbia.edu/tag/01VE), [Tag 01VF](https://stacks.math.columbia.edu/tag/01VF)), have smooth fibres by base change (Lemma 29.35.5, [Tag 01VB](https://stacks.math.columbia.edu/tag/01VB)), and conversely flatness with local finite presentation and smooth fibres gives smoothness (Lemma 29.35.3, [Tag 01V8](https://stacks.math.columbia.edu/tag/01V8)), the two definitions of smoothness being identified by Lemma 37.11.7 ([Tag 02H6](https://stacks.math.columbia.edu/tag/02H6)); for morphisms of finite type this is the Jacobian criterion, Lemma 29.35.14 ([Tag 01V9](https://stacks.math.columbia.edu/tag/01V9)). No separate proof is given.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

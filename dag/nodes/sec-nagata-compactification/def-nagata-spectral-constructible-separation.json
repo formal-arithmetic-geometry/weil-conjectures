@@ -1,133 +1,122 @@
 {
-  "id": "def-nagata-spectral-constructible-separation",
-  "blueprint": {
-    "is": "def-nagata-spectral-constructible-separation",
-    "from": null,
-    "same_as": []
+ "id": "def-nagata-spectral-constructible-separation",
+ "blueprint": {
+  "is": "def-nagata-spectral-constructible-separation",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Constructible separation data in a spectral space",
+ "statement": "Let $T,T'\\subseteq V$ be disjoint closed subsets of a spectral space $V$ [def-weil-spectral-space].\nSelect quasi-compact opens $(W,W')$ from\n[lemma-nagata-spectral-constructible-separation-exists] and define\n\n$$\nT_c=V\\setminus W,\n\\qquad\nT'_c=V\\setminus W'.\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-boundary/def-nagata-spectral-constructible-separation.md",
+  "place": "node def-nagata-spectral-constructible-separation, order 253"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "lemma-nagata-spectral-constructible-separation-exists"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "separat|disjoint_union_eq_univ|separator",
+   "results": "Search in Topology/Spectral: 11 hits, in ConstructibleTopology.lean:22,82,84,88,93; Prespectral.lean:55,56; Basic.lean:14,34,39,46. These concern quasi-separated spaces, Hausdorff prespectral spaces, and SpectralSpace.",
+   "date": "2026-10-16",
+   "verdict": "no match: none defines the selected separation data"
   },
-  "kind": "definition",
-  "title": "Constructible separation data in a spectral space",
-  "statement": "Let $T,T'\\subseteq V$ be disjoint closed subsets of a spectral space $V$ [def-weil-spectral-space].\nSelect quasi-compact opens $(W,W')$ from\n[lemma-nagata-spectral-constructible-separation-exists] and define\n\n$$\nT_c=V\\setminus W,\n\\qquad\nT'_c=V\\setminus W'.\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-boundary/def-nagata-spectral-constructible-separation.md",
-    "place": "node def-nagata-spectral-constructible-separation, order 253"
+  {
+   "tool": "leansearch",
+   "query": "A chosen pair of closed constructible supersets separating two disjoint closed sets in a spectral space",
+   "results": "NormalSpace.normal, SeparatedNhds, PrimeSpectrum.instQuasiSeparatedSpace, IsTotallySeparated, normal_separation, exists_isClopen_of_totally_separated, IsClosed.HasSeparatingCover, totallySeparatedSpace_iff_exists_isClopen. Read Separation/Regular.lean:461–471 and Separation/SeparatedNhds.lean:44–45: these separate by open neighbourhoods with extra separation axioms.",
+   "date": "2026-10-16",
+   "verdict": "no match: neither these hypotheses nor their outputs give this definition"
   },
-  "stmt_deps": [
-    "def-weil-spectral-space",
-    "lemma-nagata-spectral-constructible-separation-exists"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "separat|disjoint_union_eq_univ|separator",
-      "results": "Search in Topology/Spectral: 11 hits, in ConstructibleTopology.lean:22,82,84,88,93; Prespectral.lean:55,56; Basic.lean:14,34,39,46. These concern quasi-separated spaces, Hausdorff prespectral spaces, and SpectralSpace.",
-      "date": "2026-10-16",
-      "verdict": "no match: none defines the selected separation data"
-    },
-    {
-      "tool": "leansearch",
-      "query": "A chosen pair of closed constructible supersets separating two disjoint closed sets in a spectral space",
-      "results": "NormalSpace.normal, SeparatedNhds, PrimeSpectrum.instQuasiSeparatedSpace, IsTotallySeparated, normal_separation, exists_isClopen_of_totally_separated, IsClosed.HasSeparatingCover, totallySeparatedSpace_iff_exists_isClopen. Read Separation/Regular.lean:461–471 and Separation/SeparatedNhds.lean:44–45: these separate by open neighbourhoods with extra separation axioms.",
-      "date": "2026-10-16",
-      "verdict": "no match: neither these hypotheses nor their outputs give this definition"
-    },
-    {
-      "tool": "loogle",
-      "query": "SpectralSpace, Disjoint",
-      "results": "0 hits.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Choose two quasi-compact open subsets separating disjoint closed subsets of a spectral space and define the pair of their complements",
-      "results": "PrespectralSpace.exists_isCompact_and_isOpen_between (Mathlib/Topology/Spectral/Prespectral.lean:164) gives compact-open interpolation; other hits: SpectralSpace.toQuasiSeparatedSpace, instTotallySeparatedSpaceOfT2SpaceOfPrespectralSpace, PrespectralSpace, SpectralSpace, SpectralSpace.toPrespectralSpace, PrimeSpectrum.instPrespectralSpace, QuasiSeparatedSpace.",
-      "date": "2026-10-16",
-      "verdict": "no match: existence/interpolation and space classes do not define the selected pair of complements"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Noncomputable selection of compact open separating neighborhoods for disjoint closed sets in a compact prespectral space",
-      "results": "PrespectralSpace.exists_isCompact_and_isOpen_between, instTotallySeparatedSpaceOfT2SpaceOfPrespectralSpace, SeparatedNhds.of_isCompact_isCompact_isClosed, IsCompact.separation_of_notMem, SeparatedNhds.of_isCompact_isClosed, SeparatedNhds.of_isClosed_isCompact_closure_compl_isClosed, PrespectralSpace, t2_separation_compact_nhds.",
-      "date": "2026-10-16",
-      "verdict": "no match: interpolation is an ingredient for the existing existence node, not the selected pair definition"
-    },
-    {
-      "tool": "grep",
-      "query": "exists_isCompact_and_isOpen_between|noncomputable def|choose|separation",
-      "results": "Search in Topology/Spectral: one hit, Mathlib/Topology/Spectral/Prespectral.lean:164, PrespectralSpace.exists_isCompact_and_isOpen_between. Read lines 164–174: for compact K in open U it gives a compact open W between them.",
-      "date": "2026-10-16",
-      "verdict": "no match: no selected pair of complements; keep the already existing project existence node"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "In a compact space with a basis of compact open sets, select compact open neighborhoods covering the space and avoiding two disjoint closed sets",
-      "results": "8 hits: SeparatedNhds.of_isCompact_isCompact_isClosed; IsCompact.separation_of_notMem; SeparatedNhds.of_isCompact_isClosed; SeparatedNhds.of_isCompact_isCompact; t2_separation_compact_nhds; exists_subset_iUnion_compact_subset_t2space; exists_compact_closed_between; exists_subset_iUnion_closure_subset_t2space. Read the first candidate in Separation/Basic.lean:1009–1014 and SeparatedNhds in Separation/SeparatedNhds.lean:44–45: disjoint open neighborhoods under R1Space, rather than a selected pair of compact-open complements.",
-      "date": "2026-10-16",
-      "verdict": "no match: no selected separation datum; candidates require extra separation hypotheses"
-    },
-    {
-      "tool": "grep",
-      "query": "noncomputable|choose|separator|separation|disjoint",
-      "results": "Search in Topology/Spectral: 0 hits. Directly read Spectral/Basic.lean:38–39 and Prespectral.lean:164–174; the space class and compact-open interpolation do not define a selected separation pair.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "bypassed"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 253,
-  "blueprint_uses": [
-    "lemma-nagata-spectral-constructible-separation-exists"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "status",
-      "text": "**Status.** Bypassed by the formalized route: the existence statement\n`PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ`\nis used directly, so no selected separation datum and specification lemma\nare introduced.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "SpectralSpace, Disjoint",
+   "results": "0 hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-lem-nagata-sketch-boundary",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "def-nagata-spectral-constructible-separation",
-    "worker": "stage1",
-    "summary": "Definition split without new nodes: retain the two complement formulas and their choice from the existing separation-existence theorem, and add the existing Mathlib leaf def-weil-spectral-space for the ambient notion. Read the blueprint definition and Stacks Tag 0F3W (flat.tex, lemma-blowup-iso-along, first proof paragraph). The project existence theorem is closed in the supplied sorry map and supplies the choice, so no data is selected from an unproved mere existence claim. Six logged Mathlib searches found interpolation but no declaration defining the selected pair. No proof or specification properties are added to this definition. Second reading restored the imported source field, which is maintainer-owned; the checked Stacks reference is flat.tex, Tag 0F3W, label lemma-blowup-iso-along, first proof paragraph (lines 9620–9630). Two independently phrased, logged Mathlib searches confirm that the selected pair has no identified exact declaration.",
-    "blueprint": "Realizes the statement of def-nagata-spectral-constructible-separation, namely selection of (W,W′) from lemma-nagata-spectral-constructible-separation-exists and the two complement formulas. Its source has no proof. The bypassed status note is preserved as historical import metadata; no unit proof step or route is replaced."
+  {
+   "tool": "leanfinder",
+   "query": "Choose two quasi-compact open subsets separating disjoint closed subsets of a spectral space and define the pair of their complements",
+   "results": "PrespectralSpace.exists_isCompact_and_isOpen_between (Mathlib/Topology/Spectral/Prespectral.lean:164) gives compact-open interpolation; other hits: SpectralSpace.toQuasiSeparatedSpace, instTotallySeparatedSpaceOfT2SpaceOfPrespectralSpace, PrespectralSpace, SpectralSpace, SpectralSpace.toPrespectralSpace, PrimeSpectrum.instPrespectralSpace, QuasiSeparatedSpace.",
+   "date": "2026-10-16",
+   "verdict": "no match: existence/interpolation and space classes do not define the selected pair of complements"
   },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-NJ-5b9443319",
-    "group": "NJ",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-5b9443319 (reviewer sub-agent of L); spot-checked: Read the definition, cited nodes, master blueprint, Stacks 0F3W/08YG, reference existence proof, and unit/chapter route. Witness hypotheses and complement orientation agree. Checked 24 finite T0 spaces and 242 disjoint closed input pairs. No new nodes, duplicates, cycles, missing construction inputs, or target changes found. Review written to review.md; no fixes or tool_uses."
+  {
+   "tool": "leanfinder",
+   "query": "Noncomputable selection of compact open separating neighborhoods for disjoint closed sets in a compact prespectral space",
+   "results": "PrespectralSpace.exists_isCompact_and_isOpen_between, instTotallySeparatedSpaceOfT2SpaceOfPrespectralSpace, SeparatedNhds.of_isCompact_isCompact_isClosed, IsCompact.separation_of_notMem, SeparatedNhds.of_isCompact_isClosed, SeparatedNhds.of_isClosed_isCompact_closure_compl_isClosed, PrespectralSpace, t2_separation_compact_nhds.",
+   "date": "2026-10-16",
+   "verdict": "no match: interpolation is an ingredient for the existing existence node, not the selected pair definition"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $T,T'\\subseteq V$ be disjoint closed subsets of a spectral space.\nSelect quasi-compact opens $(W,W')$ from\n[lemma-nagata-spectral-constructible-separation-exists] and define\n\n$$\nT_c=V\\setminus W,\n\\qquad\nT'_c=V\\setminus W'.\n$$",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "grep",
+   "query": "exists_isCompact_and_isOpen_between|noncomputable def|choose|separation",
+   "results": "Search in Topology/Spectral: one hit, Mathlib/Topology/Spectral/Prespectral.lean:164, PrespectralSpace.exists_isCompact_and_isOpen_between. Read lines 164–174: for compact K in open U it gives a compact open W between them.",
+   "date": "2026-10-16",
+   "verdict": "no match: no selected pair of complements; keep the already existing project existence node"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a compact space with a basis of compact open sets, select compact open neighborhoods covering the space and avoiding two disjoint closed sets",
+   "results": "8 hits: SeparatedNhds.of_isCompact_isCompact_isClosed; IsCompact.separation_of_notMem; SeparatedNhds.of_isCompact_isClosed; SeparatedNhds.of_isCompact_isCompact; t2_separation_compact_nhds; exists_subset_iUnion_compact_subset_t2space; exists_compact_closed_between; exists_subset_iUnion_closure_subset_t2space. Read the first candidate in Separation/Basic.lean:1009–1014 and SeparatedNhds in Separation/SeparatedNhds.lean:44–45: disjoint open neighborhoods under R1Space, rather than a selected pair of compact-open complements.",
+   "date": "2026-10-16",
+   "verdict": "no match: no selected separation datum; candidates require extra separation hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable|choose|separator|separation|disjoint",
+   "results": "Search in Topology/Spectral: 0 hits. Directly read Spectral/Basic.lean:38–39 and Prespectral.lean:164–174; the space class and compact-open interpolation do not define a selected separation pair.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "bypassed"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 253,
+ "blueprint_uses": [
+  "lemma-nagata-spectral-constructible-separation-exists"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** Bypassed by the formalized route: the existence statement\n`PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ`\nis used directly, so no selected separation datum and specification lemma\nare introduced.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-lem-nagata-sketch-boundary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-nagata-spectral-constructible-separation",
+  "worker": "stage1",
+  "summary": "Definition split without new nodes: retain the two complement formulas and their choice from the existing separation-existence theorem, and add the existing Mathlib leaf def-weil-spectral-space for the ambient notion. Read the blueprint definition and Stacks Tag 0F3W (flat.tex, lemma-blowup-iso-along, first proof paragraph). The project existence theorem is closed in the supplied sorry map and supplies the choice, so no data is selected from an unproved mere existence claim. Six logged Mathlib searches found interpolation but no declaration defining the selected pair. No proof or specification properties are added to this definition. Second reading restored the imported source field, which is maintainer-owned; the checked Stacks reference is flat.tex, Tag 0F3W, label lemma-blowup-iso-along, first proof paragraph (lines 9620–9630). Two independently phrased, logged Mathlib searches confirm that the selected pair has no identified exact declaration.",
+  "blueprint": "Realizes the statement of def-nagata-spectral-constructible-separation, namely selection of (W,W′) from lemma-nagata-spectral-constructible-separation-exists and the two complement formulas. Its source has no proof. The bypassed status note is preserved as historical import metadata; no unit proof step or route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-5b9443319",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-5b9443319 (reviewer sub-agent of L); spot-checked: Read the definition, cited nodes, master blueprint, Stacks 0F3W/08YG, reference existence proof, and unit/chapter route. Witness hypotheses and complement orientation agree. Checked 24 finite T0 spaces and 242 disjoint closed input pairs. No new nodes, duplicates, cycles, missing construction inputs, or target changes found. Review written to review.md; no fixes or tool_uses."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $T,T'\\subseteq V$ be disjoint closed subsets of a spectral space.\nSelect quasi-compact opens $(W,W')$ from\n[lemma-nagata-spectral-constructible-separation-exists] and define\n\n$$\nT_c=V\\setminus W,\n\\qquad\nT'_c=V\\setminus W'.\n$$",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,187 +1,176 @@
 {
-  "id": "sbc-lem-thickening-etale-site",
-  "blueprint": {
-    "is": "sbc-lem-thickening-etale-site",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The etale site of a thickening",
-  "statement": "If $T''\\to T'$ is a thickening of schemes (a closed immersion\ninducing a homeomorphism of the underlying spaces), then the\nsmall etale site of $T''$ is the\nsame as that of $T'$: pullback along $T''\\to T'$ induces an\nisomorphism of sites, hence an equivalence of the categories of\netale sheaves identifying the\ncohomology of the two schemes.\n(*Stacks Project, Etale Cohomology, Proposition 59.45.4,\n[Tag `03SI`](https://stacks.math.columbia.edu/tag/03SI).*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-thickening-etale-site.md",
-    "place": "node sbc-lem-thickening-etale-site, order 1390",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 03SI"
-      }
-    ]
-  },
-  "stmt_deps": [
+ "id": "sbc-lem-thickening-etale-site",
+ "blueprint": {
+  "is": "sbc-lem-thickening-etale-site",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The etale site of a thickening",
+ "statement": "If $T''\\to T'$ is a thickening of schemes (a closed immersion\ninducing a homeomorphism of the underlying spaces), then the\nsmall etale site of $T''$ is the\nsame as that of $T'$: pullback along $T''\\to T'$ induces an\nisomorphism of sites, hence an equivalence of the categories of\netale sheaves identifying the\ncohomology of the two schemes.\n(*Stacks Project, Etale Cohomology, Proposition 59.45.4,\n[Tag `03SI`](https://stacks.math.columbia.edu/tag/03SI).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-failure-field/sbc-lem-thickening-etale-site.md",
+  "place": "node sbc-lem-thickening-etale-site, order 1390",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03SI"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sbc-first-order-thickening",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "A thickening is a surjective closed immersion, so the existing lemma on surjective closed immersions gives that its structure morphism is a universal homeomorphism.",
+   "uses": [
     "def-sbc-first-order-thickening",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-etale-site"
-  ],
-  "proof": [
-    {
-      "text": "A thickening is a surjective closed immersion, so the existing lemma on surjective closed immersions gives that its structure morphism is a universal homeomorphism.",
-      "uses": [
-        "def-sbc-first-order-thickening",
-        "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/morphisms.tex",
-        "place": "Tag 04EX, Definition definition-thickening (1); proof of Tag 09ZV, Lemma lemma-thicken-property-morphisms; Tag 04DF, Lemma lemma-universal-homeomorphism"
-      }
-    },
-    {
-      "text": "For a universal homeomorphism, base change gives an equivalence between the categories of etale schemes, and it preserves and reflects jointly-surjective covering families. Therefore pullback identifies the small etale sites (their objects, morphisms, and covering families).",
-      "uses": [
-        "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-        "lemma-weil-pbc-universal-homeomorphism-coverings",
-        "def-weil-pbc-etale-site"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 04DZ, Theorem theorem-topological-invariance; Tag 03SI, Proposition proposition-topological-invariance (1)"
-      }
-    },
-    {
-      "text": "Apply the topological-invariance proposition to the universal homeomorphism $i:T''\\to T'$ obtained in Step 1. Pullback gives an equivalence of small etale topoi. For every abelian sheaf $F$ on $T'_{\\mathrm{et}}$ and every $n\\geq0$, its cohomology clause gives $H^n(T'_{\\mathrm{et}},F)\\cong H^n(T''_{\\mathrm{et}},i^{-1}F)$, which is the claimed identification.",
-      "uses": [
-        "prop-weil-pbc-universal-homeomorphism-topos"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 03SI, Proposition proposition-topological-invariance (2)-(3)"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-sbc-first-order-thickening",
-    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+    "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex; literature/stacks-project/morphisms.tex",
+    "place": "Tag 04EX, Definition definition-thickening (1); proof of Tag 09ZV, Lemma lemma-thicken-property-morphisms; Tag 04DF, Lemma lemma-universal-homeomorphism"
+   }
+  },
+  {
+   "text": "For a universal homeomorphism, base change gives an equivalence between the categories of etale schemes, and it preserves and reflects jointly-surjective covering families. Therefore pullback identifies the small etale sites (their objects, morphisms, and covering families).",
+   "uses": [
     "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
     "lemma-weil-pbc-universal-homeomorphism-coverings",
-    "def-weil-pbc-etale-site",
-    "prop-weil-pbc-universal-homeomorphism-topos"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03SI, Proposition proposition-topological-invariance; Tag 04DZ, Theorem theorem-topological-invariance; Tag 04EX, Definition definition-thickening; proof of Tag 09ZV, Lemma lemma-thicken-property-morphisms"
+    "place": "Tag 04DZ, Theorem theorem-topological-invariance; Tag 03SI, Proposition proposition-topological-invariance (1)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "thickening of schemes closed immersion surjective induces equivalence of small etale sites and cohomology",
-      "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, Scheme.smallEtaleTopology, Scheme.instCategoryEtale, Scheme.smallEtalePretopology, Scheme.Etale.forget, Scheme.etalePretopology, Scheme.Etale, IsEtale; no thickening or topological-invariance declaration",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "IsClosedImmersion, Surjective, IsUniversalHomeomorphism",
-      "results": "0 hits; unknown identifier IsClosedImmersion in Loogle query",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "IsClosedImmersion.*Surjective|IsUniversalHomeomorphism in Mathlib/AlgebraicGeometry",
-      "results": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:45 class IsClosedImmersion; no universal-homeomorphism site/cohomology result",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1390,
-  "blueprint_uses": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-etale-site"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-etale-site"
-  ],
-  "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Etale Cohomology, Proposition 59.45.4 ([Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)): a thickening induces an isomorphism of small etale sites, hence an equivalence of the categories of etale sheaves identifying the cohomology of the two schemes. No separate proof is given.",
-  "blueprint_proof_steps": [
-    {
-      "text": "This is the recorded classical input named in the statement, Stacks Project, Etale Cohomology, Proposition 59.45.4 ([Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)): a thickening induces an isomorphism of small etale sites, hence an equivalence of the categories of etale sheaves identifying the cohomology of the two schemes. No separate proof is given.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-lem-failure-field",
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance",
-    "file": "lean/WeilConjectures/SixFunctors/Etale/UpperLowerStar/TopologicalInvariance.lean",
-    "declaration": "AlgebraicGeometry.Etale.isEquivalence_upperStar_of_thickening",
-    "statement": "theorem isEquivalence_upperStar_of_thickening {T₁ T₂ : Scheme.{u}} (i : T₁ ⟶ T₂)\n    [IsClosedImmersion i] (hi : Function.Surjective i.base) : ((i)^*[A]).IsEquivalence",
-    "branch": "sheaf-dag",
-    "by": "S1",
-    "date": "2026-10-14",
-    "existing": true,
-    "note": "Existing source theorem at lines 166-170; A is an arbitrary Grothendieck abelian coefficient category in the surrounding section. Its special case A = ModuleCat Λ is the exact input used here. The same module supplies cohomologyMap_bijective for the cohomology clause. No new Lean declaration or sorry is introduced."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "S1",
-    "result": "pass",
-    "landing": "20261014T140636-L-118258",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "split_report": {
-    "date": "2026-10-15",
-    "item": "sbc-lem-thickening-etale-site",
-    "worker": "stage1",
-    "summary": "Rebuilt the split after the refused attachment. A thickening is first converted to a universal homeomorphism using the existing surjective-closed-immersion lemma; the existing site-equivalence and covering-compatibility lemmas give the isomorphism of small etale sites; the existing topological-invariance proposition gives the sheaf equivalence and cohomology identification. No new nodes were necessary.",
-    "blueprint": "Realizes the blueprint proof sentence that a thickening induces an isomorphism of small etale sites, hence an equivalence of etale sheaves identifying cohomology (Tag 03SI)."
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NS-0a0f282f7",
-    "group": "NS",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-0a0f282f7 (reviewer sub-agent of L); spot-checked: The three-step split is mathematically correct and matches Tags 04EX, 04DZ, and 03SI; all cited nodes and edge cases were checked. The item retained a stale lean attachment: isEquivalence_upperStar_of_thickening proves only a sheaf equivalence, not the full site and cohomology statement, contrary to the report’s refusal of the attachment. Removed it in fixes/dag/nodes/sec-smooth-base-change/sbc-lem-thickening-etale-site.json. Cross-unit universal-homeomorphism nodes are accepted as maintainer-recorded tool uses.; 1 file(s) fixed by the reviewer"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "If $T''\\to T'$ is a thickening of schemes (a closed immersion\ninducing a homeomorphism of the underlying spaces), then the\nsmall etale site of $T''$ is the\nsame as that of $T'$: pullback along $T''\\to T'$ induces an\nisomorphism of sites, hence an equivalence of the categories of\netale sheaves identifying the\ncohomology of the two schemes.",
-    "proof": [
-      {
-        "text": "This is classical, Stacks Project, Etale Cohomology, Proposition 59.45.4 ([Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)): a thickening induces an isomorphism of small etale sites, hence an equivalence of the categories of etale sheaves identifying the cohomology of the two schemes. No separate proof is given.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Apply the topological-invariance proposition to the universal homeomorphism $i:T''\\to T'$ obtained in Step 1. Pullback gives an equivalence of small etale topoi. For every abelian sheaf $F$ on $T'_{\\mathrm{et}}$ and every $n\\geq0$, its cohomology clause gives $H^n(T'_{\\mathrm{et}},F)\\cong H^n(T''_{\\mathrm{et}},i^{-1}F)$, which is the claimed identification.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SI, Proposition proposition-topological-invariance (2)-(3)"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-sbc-first-order-thickening",
+  "lem-weil-pbc-surjective-closed-immersion-universal-homeomorphism",
+  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
+  "lemma-weil-pbc-universal-homeomorphism-coverings",
+  "def-weil-pbc-etale-site",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03SI, Proposition proposition-topological-invariance; Tag 04DZ, Theorem theorem-topological-invariance; Tag 04EX, Definition definition-thickening; proof of Tag 09ZV, Lemma lemma-thicken-property-morphisms"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "thickening of schemes closed immersion surjective induces equivalence of small etale sites and cohomology",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etaleTopology, Scheme.smallEtaleTopology, Scheme.instCategoryEtale, Scheme.smallEtalePretopology, Scheme.Etale.forget, Scheme.etalePretopology, Scheme.Etale, IsEtale; no thickening or topological-invariance declaration",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsClosedImmersion, Surjective, IsUniversalHomeomorphism",
+   "results": "0 hits; unknown identifier IsClosedImmersion in Loogle query",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsClosedImmersion.*Surjective|IsUniversalHomeomorphism in Mathlib/AlgebraicGeometry",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean:45 class IsClosedImmersion; no universal-homeomorphism site/cohomology result",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1390,
+ "blueprint_uses": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-etale-site"
+ ],
+ "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Etale Cohomology, Proposition 59.45.4 ([Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)): a thickening induces an isomorphism of small etale sites, hence an equivalence of the categories of etale sheaves identifying the cohomology of the two schemes. No separate proof is given.",
+ "blueprint_proof_steps": [
+  {
+   "text": "This is the recorded classical input named in the statement, Stacks Project, Etale Cohomology, Proposition 59.45.4 ([Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)): a thickening induces an isomorphism of small etale sites, hence an equivalence of the categories of etale sheaves identifying the cohomology of the two schemes. No separate proof is given.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/UpperLowerStar/TopologicalInvariance.lean",
+  "declaration": "AlgebraicGeometry.Etale.isEquivalence_upperStar_of_thickening",
+  "statement": "theorem isEquivalence_upperStar_of_thickening {T₁ T₂ : Scheme.{u}} (i : T₁ ⟶ T₂)\n    [IsClosedImmersion i] (hi : Function.Surjective i.base) : ((i)^*[A]).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-14",
+  "existing": true,
+  "note": "Existing source theorem at lines 166-170; A is an arbitrary Grothendieck abelian coefficient category in the surrounding section. Its special case A = ModuleCat Λ is the exact input used here. The same module supplies cohomologyMap_bijective for the cohomology clause. No new Lean declaration or sorry is introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261014T140636-L-118258",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-15",
+  "item": "sbc-lem-thickening-etale-site",
+  "worker": "stage1",
+  "summary": "Rebuilt the split after the refused attachment. A thickening is first converted to a universal homeomorphism using the existing surjective-closed-immersion lemma; the existing site-equivalence and covering-compatibility lemmas give the isomorphism of small etale sites; the existing topological-invariance proposition gives the sheaf equivalence and cohomology identification. No new nodes were necessary.",
+  "blueprint": "Realizes the blueprint proof sentence that a thickening induces an isomorphism of small etale sites, hence an equivalence of etale sheaves identifying cohomology (Tag 03SI)."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-0a0f282f7",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-0a0f282f7 (reviewer sub-agent of L); spot-checked: The three-step split is mathematically correct and matches Tags 04EX, 04DZ, and 03SI; all cited nodes and edge cases were checked. The item retained a stale lean attachment: isEquivalence_upperStar_of_thickening proves only a sheaf equivalence, not the full site and cohomology statement, contrary to the report’s refusal of the attachment. Removed it in fixes/dag/nodes/sec-smooth-base-change/sbc-lem-thickening-etale-site.json. Cross-unit universal-homeomorphism nodes are accepted as maintainer-recorded tool uses.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "If $T''\\to T'$ is a thickening of schemes (a closed immersion\ninducing a homeomorphism of the underlying spaces), then the\nsmall etale site of $T''$ is the\nsame as that of $T'$: pullback along $T''\\to T'$ induces an\nisomorphism of sites, hence an equivalence of the categories of\netale sheaves identifying the\ncohomology of the two schemes.",
+  "proof": [
+   {
+    "text": "This is classical, Stacks Project, Etale Cohomology, Proposition 59.45.4 ([Tag 03SI](https://stacks.math.columbia.edu/tag/03SI)): a thickening induces an isomorphism of small etale sites, hence an equivalence of the categories of etale sheaves identifying the cohomology of the two schemes. No separate proof is given.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

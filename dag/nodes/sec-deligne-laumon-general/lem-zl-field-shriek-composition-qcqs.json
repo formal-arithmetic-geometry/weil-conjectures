@@ -1,433 +1,426 @@
 {
-  "id": "lem-zl-field-shriek-composition-qcqs",
-  "kind": "statement",
-  "title": "Compact-support composition at field coefficients over qcqs finite-type schemes",
-  "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside it [def-weil-finite-field-fiber]. Let $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ be separated finite-type morphisms of quasi-separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. For $\\Lambda=E$ use the rationalized coefficient categories [def-weil-rationalization-karoubi], and for $\\Lambda=\\overline{\\mathbf Q}_\\ell$ use the common finite-stage categories [def-weil-algebraically-closed-coefficients]. For the compact-support functors defined by integral derived limits and coefficient passage in [def-weil-integral-rational-qbar-compact-support], the canonical compactification composition comparison is a natural isomorphism\n$$\\alpha_{g,f}:Rg_!Rf_!\\xrightarrow{\\ \\sim\\ }R(gf)_!:D^b_c(X,\\Lambda)\\longrightarrow D^b_c(Z,\\Lambda).$$\nHere the comparison is the field-coefficient passage of the proper/open compactification comparison: for compatible compactifications $Y\\xhookrightarrow{i}\\overline Y\\xrightarrow{q}Z$ and $X\\xhookrightarrow{a}\\overline X\\xrightarrow{p}\\overline Y$, put $V=p^{-1}(Y)$, write $a=bc$ with $b:V\\hookrightarrow\\overline X$ open and $p_Y:V\\to Y$ proper, and use the proper/open comparison $i_!Rp_{Y*}\\simeq Rp_*b_!$, followed by $Rq_*$ and $c_!$. No separatedness of $X,Y,Z$ over $k$ is assumed.",
-  "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, lemma-shriek-composition (compatible compactification comparison at finite coefficients); field-stage extension of this comparison using Bhatt–Scholze Definition 6.7.6 and Lemmas 6.7.7, 6.1.13, and the common-stage construction. This field-stage assertion is an additional obligation, not a claim that 0F7J treats non-torsion discrete coefficients.",
-    "external": [
-      {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Definition 6.7.6 and Lemmas 6.7.7, 6.1.13"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-rationalization-karoubi",
-    "def-weil-compactifications-refinements",
-    "def-weil-l-adic-coefficient-extension",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-compact-support-finite-action",
-    "def-weil-compact-support-coefficient-action",
-    "lem-weil-compact-support-finite-field-independence",
-    "lem-pur-compact-support-integral-coefficient-comparison"
-  ],
-  "proof": [
-    {
-      "text": "Work first over $R=\\mathcal O_E$, with $t=\\varpi_E$ and $A_n=R/t^n$. Finite-type $k$-schemes are quasi-compact, and the assumed quasi-separatedness makes $X,Y,Z$ qcqs. Nagata therefore supplies a compactification $(i,q)$ of $g$. Apply the compatible-compactification-triangle lemma to obtain $(a,p)$ of $if$, $V=\\overline X\\times_{\\overline Y}Y$, and $a=bc$, with $p_Y$ proper and $b,c$ quasi-compact open. Thus $(c,p_Y)$ compactifies $f$ and $(a,qp)$ compactifies $gf$. All these ambient and intermediate schemes are finite type over $k$: proper maps and quasi-compact opens are finite type by their definitions; the proper/finite-presentation permanence lemma gives locally finite-type composition, and qcqs permanence gives quasi-compactness of the sources over a quasi-compact target. Together these give finite type for the composed structure maps. They are Noetherian by the finite-type-over-Noetherian lemma applied over the field, hence quasi-separated by the locally-Noetherian lemma. These checks concern the morphisms and the finiteness of the schemes, and impose no separatedness of a structure morphism to $k$.",
-      "uses": [
-        "thm-nagata-compactification",
-        "lem-weil-pbc-compatible-compactification-triangle",
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-weil-pbc-locally-noetherian-quasi-separated",
-        "lem-weil-pbc-proper-fp-permanence",
-        "lem-weil-pbc-qcqs-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0F7J, first paragraph of the proof: compatible compactifications and the inverse image of Y."
-      }
-    },
-    {
-      "text": "For an integral input $K\\in D^b_c(X,R)$ use its strict reduction system $\\mathcal R K$ and the total-limit functor $\\mathcal L$ of the derived-system calculus. Its levels are bounded constructible with a common cohomological interval by the integral category's definition. The constructible-origin lemma supplies bounded etale-origin witnesses at every finite level. If $K_1$ is supported in $[u,v]$, the integral residue-Tor lemma gives the same finite Tor interval $[u,v]$ for every $K_n$. These checks also hold for every intermediate proper/open expression needed below. Indeed, extension by a quasi-compact open is the compact-support candidate $(j,1)$, and proper direct image is the candidate $(1,p)$. The integral compact-support constructibility lemma therefore keeps their integral outputs in $D^b_c$; operation-reduction identifies their reductions with the corresponding finite candidates. Applying residue-Tor and constructible-origin to each such output gives its uniform Tor bounds and origin witnesses. The finite-reduction clause of operation-reduction identifies the transition-adjoint maps with isomorphisms, so the associated system expressions are normalized. Only finitely many operations occur, so take the minimum lower and maximum upper bounds when a common interval is required. This verifies the bounded-domain hypotheses for the system-realization theorem, including the intermediate objects.",
-      "uses": [
-        "lem-coef-derived-system-evaluation-calculus",
-        "def-weil-derived-complete-integral-detailed",
-        "lem-sf-proetale-constructible-origin",
-        "lem-coef-integral-residue-tor",
-        "lem-sf-integral-compact-support-constructible",
-        "lem-fix-operation-reduction",
-        "lem-sf-compact-support-restriction-of-scalars",
-        "lem-weil-proetale-direct-image-restriction-of-scalars"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Definition 6.7.6 and Lemma 6.7.7 (integral constructible domains); agent verification of the precise uniform bounds using the cited DVR lemmas."
-      }
-    },
-    {
-      "text": "Write $S_u$ for derived direct image of semilinear systems and $J_j$ for exact open extension. For the cartesian proper/open square $pb=ip_Y$ of step 1, use the actual derived-system transformation $\\Gamma_Q:J_iS_{p_Y}\\to S_pJ_b$ of the system-realization theorem. It is the open-adjunction transpose of the inverse restriction isomorphism, with the stated unit normalization; its finite evaluations are the canonical proper/open maps, including the quotient transitions. By the strict-tower proper/open calculus, those finite maps are isomorphisms on the etale-origin inputs supplied in step 2. The evaluation-conservativity clause of the derived-system calculus now shows that $\\Gamma_Q$ is an isomorphism on these system inputs. This uses conservativity only to test an already constructed map for invertibility. Its construction, naturality and pasting identities are those of the system-realization theorem, not lifts chosen from a family of finite derived arrows.",
-      "uses": [
-        "lem-sf-integral-compactification-system-realization",
-        "lem-cbc-strict-tower-proper-open-calculus",
-        "lem-coef-derived-system-evaluation-calculus"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0F7J: the proper/open interchange in the third displayed equality; its strict-system construction is supplied by the cited realization and tower lemmas."
-      }
-    },
-    {
-      "text": "Whisker the isomorphism of step 3 by $S_q$ on the left and $J_c$ on the right, then insert the proper and open compositors. This gives the natural system isomorphism $A:S_qJ_iS_{p_Y}J_c\\xrightarrow{S_q\\Gamma_QJ_c}S_qS_pJ_bJ_c\\simeq S_{qp}J_a$. Apply $\\mathcal L$ and conjugate by the natural realization isomorphisms $c_V$ for the two words. By the realization theorem, the left word realizes the nested integral functor $Rg_!Rf_!$, and the right word realizes $R(gf)_!$, with exactly the quotient-induced transitions and integral derived limits prescribed by the definition of compact support. Its compatibility with whiskering, proper/open interchange and the compositors identifies the resulting map with the integral compactification composition comparison in the statement. Thus $\\alpha^R_{g,f}=c_{S_{qp}J_a}\\,\\mathcal L(A)\\,c_{S_qJ_iS_{p_Y}J_c}^{-1}$ is a natural isomorphism. Its inverse is obtained by the inverse compositors and $\\Gamma_Q^{-1}$. In particular this identifies the actual nested functors and their maps, not just their reductions.",
-      "uses": [
-        "lem-sf-integral-compactification-system-realization",
-        "def-weil-integral-rational-qbar-compact-support"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0F7J, the four displayed equalities, read in the direction Rg_! Rf_! to R(gf)_!; integral realization is the agent-supplied coefficient passage."
-      }
-    },
-    {
-      "text": "The same construction works for refinement squares, which need not be cartesian: their system maps are the normalized proper/open maps of the realization theorem, and are invertible by the argument of step 3. Apply compactification-refinement coherence with $P_p=S_p$ and $J_j$ as above. Its unital compositors and horizontal/vertical proper/open pasting hypotheses hold as actual system identities by that realization theorem. Nonemptiness follows from step 1; the compactifiable-cofiltered lemma gives common refinements and equalizers; the compatible-tower lemma gives common refining composition towers. Repeated use of the latter gives the three-map staircases required in the formal coherence statement. Consequently its displayed transformation $P_qJ_iP_{p_Y}J_c\\to P_{qp}J_a$, which is exactly $A$, commutes with all common-refinement comparisons and is independent of the chosen tower. Apply $\\mathcal L$ and the intertwining realization isomorphisms: the same equalities hold for $\\alpha^R_{g,f}$ and the integral compactification comparisons. This proves canonicity for arbitrary choices, including those fixed in the definition of each compact-support functor. It does not infer equality of system maps from equality of their finite evaluations.",
-      "uses": [
-        "lem-sf-integral-compactification-system-realization",
-        "lem-cbc-compactifiable-cofiltered",
-        "lem-cbc-compactifiable-compatible-tower",
-        "lem-sp-compactification-refinement-coherence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0F7J, independence-of-choices argument after the displayed composition formula; the cited formal coherence theorem packages its refinement pasting."
-      }
-    },
-    {
-      "text": "Pass from $R$ to $E$ by raw scalar localization. The rational category has the same objects as the integral category and localized Hom groups, as specified in the rationalization definition. The derived functors used above are exact $R$-linear functors, and restrict to the integral constructible categories by step 2. Rational transport therefore extends both compact-support functors, their composites and $\\alpha^R_{g,f}$ uniquely, with component $\\alpha^R_{g,f,K}\\otimes1$. Localizing its inverse proves that the resulting $\\alpha^E_{g,f}$ is an isomorphism. By the compact-support definition these extended functors are precisely $Rf_{!,E},Rg_{!,E}$ and $R(gf)_{!,E}$; uniqueness transports the identification of the map and the common-refinement equalities from steps 4-5. No idempotent completion or choice of a new lattice is required.",
-      "uses": [
-        "def-weil-rationalization-karoubi",
-        "prop-weil-pbc-rational-transport",
-        "def-weil-integral-rational-qbar-compact-support"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Definition 6.7.6 and Lemma 6.7.7 for the integral compactification functor; agent passage through the raw rationalization specified by the cited definitions."
-      }
-    },
-    {
-      "text": "For $E\\subset F\\subset\\overline{\\mathbf Q}_\\ell$, use the scalar-extension comparisons for the operations and canonical comparisons supplied by operation-reduction. That lemma also preserves the units, counits and tensor associativity used in projection and exchange. The proper/open map used here is the normalized adjunction mate; hence transporting its defining unit/counit composite transports $\\Gamma_Q$ to the corresponding proper/open map over $F$. Proper/open compositors, their whiskerings and the expression in step 4 are transported as well. Thus the natural isomorphisms $\\alpha^E$ commute with the coefficient comparisons for $Rg_!Rf_!$ and $R(gf)_!$. The comparisons for a tower $E\\subset F\\subset H$ use the canonical scalar-extension associators: insert the scalar-extension composition isomorphisms in the unit/counit composites, and the preserved associativity and adjunction identities identify the iterated comparison with the direct one. This verifies the identity and tower equations needed for coherent pair-functor descent for these two functor families and their transformation.",
-      "uses": [
-        "lem-fix-operation-reduction",
-        "lem-weil-scalar-extension-composition",
-        "lem-sf-integral-compactification-system-realization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Definition 6.7.6: proper/open construction; agent check of the common-stage coefficient compatibilities using the cited operation and scalar-extension comparisons."
-      }
-    },
-    {
-      "text": "Finally use the common finite-stage categories of the algebraically-closed coefficient definition. Apply coherent pair-functor descent to $\\Phi_E=Rg_{!,E}Rf_{!,E}$, $\\Psi_E=R(gf)_{!,E}$, their coefficient comparisons and the compatible transformations $\\alpha^E$ of step 7. The descended component at $(E,K)$ is $[E,\\alpha^E_{g,f,K}]$. The descent lemma gives its naturality for arbitrary morphisms represented over a common overfield, and independence of the representative and that overfield. The components $[E,(\\alpha^E_{g,f,K})^{-1}]$ give its inverse since both composites are identities at the finite stage $E$. By the compact-support definition, the descended functors are exactly $Rg_!Rf_!$ and $R(gf)_!$ with $\\overline{\\mathbf Q}_\\ell$ coefficients. The descent lemma preserves composition and equations of compatible transformations, so the compactification identification and independence proved above descend too. This proves the requested canonical natural isomorphism for both choices of $\\Lambda$.",
-      "uses": [
-        "def-weil-algebraically-closed-coefficients",
-        "lem-sbc-coherent-pair-functor-descent",
-        "def-weil-integral-rational-qbar-compact-support"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0F7J, compactification composition formula; agent common-finite-stage descent, which is not asserted by the finite-coefficient Stacks lemma."
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-zl-field-shriek-composition-qcqs",
+ "kind": "statement",
+ "title": "Compact-support composition at field coefficients over qcqs finite-type schemes",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside it [def-weil-finite-field-fiber]. Let $X\\xrightarrow{f}Y\\xrightarrow{g}Z$ be separated finite-type morphisms of quasi-separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. For $\\Lambda=E$ use the rationalized coefficient categories [def-weil-rationalization-karoubi], and for $\\Lambda=\\overline{\\mathbf Q}_\\ell$ use the common finite-stage categories [def-weil-algebraically-closed-coefficients]. For the compact-support functors defined by integral derived limits and coefficient passage in [def-weil-integral-rational-qbar-compact-support], the canonical compactification composition comparison is a natural isomorphism\n$$\\alpha_{g,f}:Rg_!Rf_!\\xrightarrow{\\ \\sim\\ }R(gf)_!:D^b_c(X,\\Lambda)\\longrightarrow D^b_c(Z,\\Lambda).$$\nHere the comparison is the field-coefficient passage of the proper/open compactification comparison: for compatible compactifications $Y\\xhookrightarrow{i}\\overline Y\\xrightarrow{q}Z$ and $X\\xhookrightarrow{a}\\overline X\\xrightarrow{p}\\overline Y$, put $V=p^{-1}(Y)$, write $a=bc$ with $b:V\\hookrightarrow\\overline X$ open and $p_Y:V\\to Y$ proper, and use the proper/open comparison $i_!Rp_{Y*}\\simeq Rp_*b_!$, followed by $Rq_*$ and $c_!$. No separatedness of $X,Y,Z$ over $k$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J, lemma-shriek-composition (compatible compactification comparison at finite coefficients); field-stage extension of this comparison using Bhatt–Scholze Definition 6.7.6 and Lemmas 6.7.7, 6.1.13, and the common-stage construction. This field-stage assertion is an additional obligation, not a claim that 0F7J treats non-torsion discrete coefficients.",
+  "external": [
+   {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6 and Lemmas 6.7.7, 6.1.13"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-rationalization-karoubi",
+  "def-weil-compactifications-refinements",
+  "def-weil-l-adic-coefficient-extension",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-compact-support-finite-action",
+  "def-weil-compact-support-coefficient-action",
+  "lem-weil-compact-support-finite-field-independence",
+  "lem-pur-compact-support-integral-coefficient-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Work first over $R=\\mathcal O_E$, with $t=\\varpi_E$ and $A_n=R/t^n$. Finite-type $k$-schemes are quasi-compact, and the assumed quasi-separatedness makes $X,Y,Z$ qcqs. Nagata therefore supplies a compactification $(i,q)$ of $g$. Apply the compatible-compactification-triangle lemma to obtain $(a,p)$ of $if$, $V=\\overline X\\times_{\\overline Y}Y$, and $a=bc$, with $p_Y$ proper and $b,c$ quasi-compact open. Thus $(c,p_Y)$ compactifies $f$ and $(a,qp)$ compactifies $gf$. All these ambient and intermediate schemes are finite type over $k$: proper maps and quasi-compact opens are finite type by their definitions; the proper/finite-presentation permanence lemma gives locally finite-type composition, and qcqs permanence gives quasi-compactness of the sources over a quasi-compact target. Together these give finite type for the composed structure maps. They are Noetherian by the finite-type-over-Noetherian lemma applied over the field, hence quasi-separated by the locally-Noetherian lemma. These checks concern the morphisms and the finiteness of the schemes, and impose no separatedness of a structure morphism to $k$.",
+   "uses": [
     "thm-nagata-compactification",
     "lem-weil-pbc-compatible-compactification-triangle",
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-locally-noetherian-quasi-separated",
     "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, first paragraph of the proof: compatible compactifications and the inverse image of Y."
+   }
+  },
+  {
+   "text": "For an integral input $K\\in D^b_c(X,R)$ use its strict reduction system $\\mathcal R K$ and the total-limit functor $\\mathcal L$ of the derived-system calculus. Its levels are bounded constructible with a common cohomological interval by the integral category's definition. The constructible-origin lemma supplies bounded etale-origin witnesses at every finite level. If $K_1$ is supported in $[u,v]$, the integral residue-Tor lemma gives the same finite Tor interval $[u,v]$ for every $K_n$. These checks also hold for every intermediate proper/open expression needed below. Indeed, extension by a quasi-compact open is the compact-support candidate $(j,1)$, and proper direct image is the candidate $(1,p)$. The integral compact-support constructibility lemma therefore keeps their integral outputs in $D^b_c$; operation-reduction identifies their reductions with the corresponding finite candidates. Applying residue-Tor and constructible-origin to each such output gives its uniform Tor bounds and origin witnesses. The finite-reduction clause of operation-reduction identifies the transition-adjoint maps with isomorphisms, so the associated system expressions are normalized. Only finitely many operations occur, so take the minimum lower and maximum upper bounds when a common interval is required. This verifies the bounded-domain hypotheses for the system-realization theorem, including the intermediate objects.",
+   "uses": [
     "lem-coef-derived-system-evaluation-calculus",
     "def-weil-derived-complete-integral-detailed",
     "lem-sf-proetale-constructible-origin",
     "lem-coef-integral-residue-tor",
     "lem-sf-integral-compact-support-constructible",
     "lem-fix-operation-reduction",
-    "lem-sf-integral-compactification-system-realization",
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "def-weil-integral-rational-qbar-compact-support",
-    "lem-cbc-compactifiable-cofiltered",
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-sp-compactification-refinement-coherence",
-    "def-weil-rationalization-karoubi",
-    "prop-weil-pbc-rational-transport",
-    "lem-weil-scalar-extension-composition",
-    "def-weil-algebraically-closed-coefficients",
-    "lem-sbc-coherent-pair-functor-descent",
     "lem-sf-compact-support-restriction-of-scalars",
     "lem-weil-proetale-direct-image-restriction-of-scalars"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J (lemma-shriek-composition), with the integral proper/open construction of Bhatt–Scholze Definition 6.7.6 and Lemmas 6.7.7, 6.1.13. Agent supplies the strict-system realization, rationalization and common-stage passage using the cited existing nodes; neither source is claimed to state this whole field-stage result."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6 and Lemma 6.7.7 (integral constructible domains); agent verification of the precise uniform bounds using the cited DVR lemmas."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Composition of compactly supported direct images for separated finite type schemes with l-adic coefficients",
-      "results": "8 hits: HasCompactSupport.comp_isClosedEmbedding, CompactlySupportedContinuousMap.comp, AlgebraicGeometry.IsSeparated.of_comp, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.IsSeparated.comp_iff, AlgebraicGeometry.QuasiCompact.of_comp, CompactlySupportedContinuousMap.compAddMonoidHom",
-      "date": "2026-10-17",
-      "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For composable separated finite type scheme morphisms the l-adic compact support functors satisfy R g shriek R f shriek naturally isomorphic to R gf shriek",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'",
-      "date": "2026-10-17",
-      "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Pseudofunctor composition isomorphism for exceptional direct images in constructible common finite stage Q ell bar coefficient categories",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, CategoryTheory.Pseudofunctor.CoGrothendieck.mapCompIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, CategoryTheory.Pseudofunctor.CoGrothendieck.compIso",
-      "date": "2026-10-17",
-      "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"lowerShriek\"",
-      "results": "0 hits: ",
-      "date": "2026-10-17",
-      "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
-    },
-    {
-      "tool": "grep",
-      "query": "lowerShriek|compactSupport|compact.support",
-      "results": "0 hits: ",
-      "date": "2026-10-17",
-      "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients (grep in Mathlib/CategoryTheory)"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Natural composition isomorphism for compactly supported direct images with l-adic field coefficients",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.Functor.sheafPushforwardContinuousComp', SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatTrans_comp, lightProfiniteToLightCondSetIsoTopCatToLightCondSet",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits concern underived structure-sheaf/site pushforwards or unrelated compactly supported functions and scheme properties, not the defined adic compact-support comparison on these coefficient categories"
-    },
-    {
-      "tool": "loogle",
-      "query": "lowerShriek, Rf_!, compactSupport",
-      "results": "0 hits: ; loogle: unknown identifier 'lowerShriek'",
-      "date": "2026-10-17",
-      "verdict": "unavailable: invalid identifier in this Loogle query; no absence conclusion drawn; replaced by the valid quoted substring query"
-    },
-    {
-      "tool": "grep",
-      "query": "lowerShriek|compactSupport|compact.support",
-      "results": "0 hits: ; searched Mathlib/CategoryTheory",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits concern underived structure-sheaf/site pushforwards or unrelated compactly supported functions and scheme properties, not the defined adic compact-support comparison on these coefficient categories"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Composition of compactly supported direct images for separated finite type schemes with l-adic field coefficients",
-      "results": "8 hits: CompactlySupportedContinuousMap.comp, AlgebraicGeometry.IsSeparated.of_comp, AlgebraicGeometry.IsSeparated.comp_iff, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsSeparated.instCompScheme",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits concern underived structure-sheaf/site pushforwards or unrelated compactly supported functions and scheme properties, not the defined adic compact-support comparison on these coefficient categories"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"shriek\"",
-      "results": "0 hits: ",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits concern underived structure-sheaf/site pushforwards or unrelated compactly supported functions and scheme properties, not the defined adic compact-support comparison on these coefficient categories"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Functorial composition of exceptional direct image for constructible l-adic sheaves",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp', AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app",
-      "date": "2026-10-17",
-      "verdict": "no match: the hits concern underived structure-sheaf/site pushforwards or unrelated compactly supported functions and scheme properties, not the defined adic compact-support comparison on these coefficient categories"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-zl-compact-support-leray-filtration",
-    "date": "2026-10-17",
-    "group": "Q54"
-  },
-  "chapter": "sec-deligne-laumon-general",
-  "unit": "sk-l-dl-general-composition",
-  "blueprint": {
-    "from": {
-      "node": "lem-zl-composition-weight-bound",
-      "place": "Proof, first sentence: Frobenius-compatible composition R(gh)_!F ≅ Rg_!(Rh_!F), extending the separated-scheme interface to the stated qcqs bases.",
-      "via": [
-        "lem-zl-compact-support-leray-filtration"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "merged_into": null,
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "split_report": {
-    "date": "2026-10-18",
-    "item": "lem-zl-field-shriek-composition-qcqs",
-    "worker": "stage1",
-    "summary": "Eight-step split of the unchanged qcqs field-coefficient statement, reusing existing nodes only. Checks finite-type/qcqs geometry, uniform residue-Tor bounds, actual semilinear proper/open maps, realization of nested integral functors, refinement independence, raw rational localization, coefficient compatibility and common-stage descent. No exact closed project declaration or Mathlib match was found. No new nodes, no SGA, no Lean changes or compilation.",
-    "blueprint": "Realizes the first sentence of lem-zl-composition-weight-bound (R(gh)_!F ≅ Rg_!(Rh_!F)) through the coefficient-domain obligation introduced by lem-zl-compact-support-leray-filtration, following unit sk-l-dl-general-composition and its cited compact-support composition route. The Frobenius filtration construction stays in the parent; this item supplies only the specified natural composition comparison.",
-    "tool_uses": [
-      {
-        "node": "thm-nagata-compactification",
-        "why": "Compactification existence over qcqs targets; the composition-weight unit uses compact support but does not reprove Nagata."
-      },
-      {
-        "node": "lem-weil-pbc-compatible-compactification-triangle",
-        "why": "Geometric compatible compactification triangle, over qcqs schemes without separated structure morphisms; realizes the stated compact-support composition route."
-      },
-      {
-        "node": "lem-weil-pbc-finite-type-over-noetherian",
-        "why": "Generic finite-type Noetherian permanence for compactification ambient schemes."
-      },
-      {
-        "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-        "why": "Generic quasi-separatedness criterion for the finite-type ambient schemes."
-      },
-      {
-        "node": "lem-coef-derived-system-evaluation-calculus",
-        "why": "Strict semilinear reduction and total-limit functors, adjunction and conservativity for already constructed system maps."
-      },
-      {
-        "node": "lem-sf-proetale-constructible-origin",
-        "why": "Finite-stage bounded constructible inputs have etale-origin witnesses; no such coefficient comparison is proved in the weight unit."
-      },
-      {
-        "node": "lem-coef-integral-residue-tor",
-        "why": "DVR residue bound supplies uniform finite-level Tor bounds required for integral realization."
-      },
-      {
-        "node": "lem-sf-integral-compact-support-constructible",
-        "why": "Integral proper/open expressions preserve the stated bounded constructible domain on nonseparated finite-type schemes."
-      },
-      {
-        "node": "lem-fix-operation-reduction",
-        "why": "Reduction and coefficient-extension compatibility of operations and their canonical comparisons; used within the proper/open route, not as a replacement for composition."
-      },
-      {
-        "node": "lem-sf-integral-compactification-system-realization",
-        "why": "Generic strict-system proper/open map and realization of finite words, including nested compact-support functors and their actual comparison maps."
-      },
-      {
-        "node": "lem-cbc-strict-tower-proper-open-calculus",
-        "why": "Finite-etale-origin invertibility of the normalized proper/open comparison, including refinement squares."
-      },
-      {
-        "node": "lem-cbc-compactifiable-cofiltered",
-        "why": "Generic common refinement/equalizer existence once compactifications are supplied."
-      },
-      {
-        "node": "lem-cbc-compactifiable-compatible-tower",
-        "why": "Generic common refining compatible towers needed to make the composition map canonical."
-      },
-      {
-        "node": "lem-sp-compactification-refinement-coherence",
-        "why": "Formal proper/open pasting and refinement coherence for supplied geometric and categorical data."
-      },
-      {
-        "node": "prop-weil-pbc-rational-transport",
-        "why": "Generic localization of supplied exact linear functors and transformations to raw E categories."
-      },
-      {
-        "node": "lem-weil-scalar-extension-composition",
-        "why": "Canonical composition identifications for coefficient extensions in the common-stage descent."
-      },
-      {
-        "node": "lem-sbc-coherent-pair-functor-descent",
-        "why": "Generic descent of coherent functor families and compatible transformations to the raw pair category."
-      },
-      {
-        "node": "lem-weil-pbc-proper-fp-permanence",
-        "why": "Generic locally-finite-type composition and proper-map permanence for the compatible ambient schemes."
-      },
-      {
-        "node": "lem-weil-pbc-qcqs-morphism-permanence",
-        "why": "Generic quasi-compactness and quasi-separatedness permanence used to verify the finite-type ambient schemes."
-      }
-    ]
-  },
-  "tool_uses": [
-    "thm-nagata-compactification",
-    "lem-weil-pbc-compatible-compactification-triangle",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-sf-proetale-constructible-origin",
-    "lem-coef-integral-residue-tor",
-    "lem-sf-integral-compact-support-constructible",
-    "lem-fix-operation-reduction",
+  {
+   "text": "Write $S_u$ for derived direct image of semilinear systems and $J_j$ for exact open extension. For the cartesian proper/open square $pb=ip_Y$ of step 1, use the actual derived-system transformation $\\Gamma_Q:J_iS_{p_Y}\\to S_pJ_b$ of the system-realization theorem. It is the open-adjunction transpose of the inverse restriction isomorphism, with the stated unit normalization; its finite evaluations are the canonical proper/open maps, including the quotient transitions. By the strict-tower proper/open calculus, those finite maps are isomorphisms on the etale-origin inputs supplied in step 2. The evaluation-conservativity clause of the derived-system calculus now shows that $\\Gamma_Q$ is an isomorphism on these system inputs. This uses conservativity only to test an already constructed map for invertibility. Its construction, naturality and pasting identities are those of the system-realization theorem, not lifts chosen from a family of finite derived arrows.",
+   "uses": [
     "lem-sf-integral-compactification-system-realization",
     "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J: the proper/open interchange in the third displayed equality; its strict-system construction is supplied by the cited realization and tower lemmas."
+   }
+  },
+  {
+   "text": "Whisker the isomorphism of step 3 by $S_q$ on the left and $J_c$ on the right, then insert the proper and open compositors. This gives the natural system isomorphism $A:S_qJ_iS_{p_Y}J_c\\xrightarrow{S_q\\Gamma_QJ_c}S_qS_pJ_bJ_c\\simeq S_{qp}J_a$. Apply $\\mathcal L$ and conjugate by the natural realization isomorphisms $c_V$ for the two words. By the realization theorem, the left word realizes the nested integral functor $Rg_!Rf_!$, and the right word realizes $R(gf)_!$, with exactly the quotient-induced transitions and integral derived limits prescribed by the definition of compact support. Its compatibility with whiskering, proper/open interchange and the compositors identifies the resulting map with the integral compactification composition comparison in the statement. Thus $\\alpha^R_{g,f}=c_{S_{qp}J_a}\\,\\mathcal L(A)\\,c_{S_qJ_iS_{p_Y}J_c}^{-1}$ is a natural isomorphism. Its inverse is obtained by the inverse compositors and $\\Gamma_Q^{-1}$. In particular this identifies the actual nested functors and their maps, not just their reductions.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, the four displayed equalities, read in the direction Rg_! Rf_! to R(gf)_!; integral realization is the agent-supplied coefficient passage."
+   }
+  },
+  {
+   "text": "The same construction works for refinement squares, which need not be cartesian: their system maps are the normalized proper/open maps of the realization theorem, and are invertible by the argument of step 3. Apply compactification-refinement coherence with $P_p=S_p$ and $J_j$ as above. Its unital compositors and horizontal/vertical proper/open pasting hypotheses hold as actual system identities by that realization theorem. Nonemptiness follows from step 1; the compactifiable-cofiltered lemma gives common refinements and equalizers; the compatible-tower lemma gives common refining composition towers. Repeated use of the latter gives the three-map staircases required in the formal coherence statement. Consequently its displayed transformation $P_qJ_iP_{p_Y}J_c\\to P_{qp}J_a$, which is exactly $A$, commutes with all common-refinement comparisons and is independent of the chosen tower. Apply $\\mathcal L$ and the intertwining realization isomorphisms: the same equalities hold for $\\alpha^R_{g,f}$ and the integral compactification comparisons. This proves canonicity for arbitrary choices, including those fixed in the definition of each compact-support functor. It does not infer equality of system maps from equality of their finite evaluations.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
     "lem-cbc-compactifiable-cofiltered",
     "lem-cbc-compactifiable-compatible-tower",
-    "lem-sp-compactification-refinement-coherence",
+    "lem-sp-compactification-refinement-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, independence-of-choices argument after the displayed composition formula; the cited formal coherence theorem packages its refinement pasting."
+   }
+  },
+  {
+   "text": "Pass from $R$ to $E$ by raw scalar localization. The rational category has the same objects as the integral category and localized Hom groups, as specified in the rationalization definition. The derived functors used above are exact $R$-linear functors, and restrict to the integral constructible categories by step 2. Rational transport therefore extends both compact-support functors, their composites and $\\alpha^R_{g,f}$ uniquely, with component $\\alpha^R_{g,f,K}\\otimes1$. Localizing its inverse proves that the resulting $\\alpha^E_{g,f}$ is an isomorphism. By the compact-support definition these extended functors are precisely $Rf_{!,E},Rg_{!,E}$ and $R(gf)_{!,E}$; uniqueness transports the identification of the map and the common-refinement equalities from steps 4-5. No idempotent completion or choice of a new lattice is required.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
     "prop-weil-pbc-rational-transport",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6 and Lemma 6.7.7 for the integral compactification functor; agent passage through the raw rationalization specified by the cited definitions."
+   }
+  },
+  {
+   "text": "For $E\\subset F\\subset\\overline{\\mathbf Q}_\\ell$, use the scalar-extension comparisons for the operations and canonical comparisons supplied by operation-reduction. That lemma also preserves the units, counits and tensor associativity used in projection and exchange. The proper/open map used here is the normalized adjunction mate; hence transporting its defining unit/counit composite transports $\\Gamma_Q$ to the corresponding proper/open map over $F$. Proper/open compositors, their whiskerings and the expression in step 4 are transported as well. Thus the natural isomorphisms $\\alpha^E$ commute with the coefficient comparisons for $Rg_!Rf_!$ and $R(gf)_!$. The comparisons for a tower $E\\subset F\\subset H$ use the canonical scalar-extension associators: insert the scalar-extension composition isomorphisms in the unit/counit composites, and the preserved associativity and adjunction identities identify the iterated comparison with the direct one. This verifies the identity and tower equations needed for coherent pair-functor descent for these two functor families and their transformation.",
+   "uses": [
+    "lem-fix-operation-reduction",
     "lem-weil-scalar-extension-composition",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.7.6: proper/open construction; agent check of the common-stage coefficient compatibilities using the cited operation and scalar-extension comparisons."
+   }
+  },
+  {
+   "text": "Finally use the common finite-stage categories of the algebraically-closed coefficient definition. Apply coherent pair-functor descent to $\\Phi_E=Rg_{!,E}Rf_{!,E}$, $\\Psi_E=R(gf)_{!,E}$, their coefficient comparisons and the compatible transformations $\\alpha^E$ of step 7. The descended component at $(E,K)$ is $[E,\\alpha^E_{g,f,K}]$. The descent lemma gives its naturality for arbitrary morphisms represented over a common overfield, and independence of the representative and that overfield. The components $[E,(\\alpha^E_{g,f,K})^{-1}]$ give its inverse since both composites are identities at the finite stage $E$. By the compact-support definition, the descended functors are exactly $Rg_!Rf_!$ and $R(gf)_!$ with $\\overline{\\mathbf Q}_\\ell$ coefficients. The descent lemma preserves composition and equations of compatible transformations, so the compactification identification and independence proved above descend too. This proves the requested canonical natural isomorphism for both choices of $\\Lambda$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
     "lem-sbc-coherent-pair-functor-descent",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-Codex-Q06-8b5501db4",
-    "group": "Q06",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-8b5501db4 (reviewer sub-agent of L); spot-checked: Reviewed the item, all eight steps, cited node statements, Stacks 0F7J, Bhatt–Scholze, coefficient categories, route constraints, edge cases, and searches. Step 2 asserted normalized transition isomorphisms without citing lem-sf-compact-support-restriction-of-scalars or lem-weil-proetale-direct-image-restriction-of-scalars; the corrected whole DAG JSON adds both dependencies. Review written to review.md.; 1 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-8727e1a82",
-    "group": "Q49",
-    "result": "pass",
-    "note": "Read node, Stacks 0F7J, BS 6.7.6/6.7.7/6.1.13 as cited, all 12 stmt_deps and the side dependency declarations (CompactSupportFiniteAction, CompactSupportCoefficientAction, PurCompactSupport incl. recordedIdentification, FiniteFieldDatum, Pair/inclusion). Hypotheses exact: D.k = alg. closure of the finite field, l prime with l != p, Omega in independent universe v, X/Y/Z finite type with no separatedness over k (qs automatic), f/g separated finite type, cf/cg/cfg universally quantified. Conclusions: integral ∃! with the 0F7J proper/open tower (V, b, c, p_Y, a=bc, Gamma = open adjunct of inverse Lambda) and normalized refinement independence; a qualifying tower with refinements always exists and the IsIso witnesses always hold; rational ∃! = localization of the integral component; Qbar ∃! on Pair with component inclusion E0 of the rational compositor (HEq types agree via obj/finite_eq/value_eq). §1(B) module for def-weil-integral-rational-qbar-compact-support justified: the old identification needs separated bases and finite Tor; the new module re-exports the values and copies the IsRecordedIdentification normalization. Node diffs: item only lean + stmt_deps (+4 landed nodes); dep only lean with note; statements verbatim. No hollow defs, all theorems sorry, docstrings with source/blueprint/proof steps, lines <=100, proper imports, real pro-etale completed coefficients. nt_compile --json on both modules: rc=0 twice, 3.2 s and 8.2 s, no warnings. Non-blocking: general-K0 uniqueness of sfQcqsCompactSupportRealization_existsUnique relies on reductions (fine over F̄_q; restrict to FiniteFieldDatum at stage 3 if it fails); dep record's main declaration is now the realization iso, values re-exported."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.FieldShriekCompositionQcqs",
-    "declaration": "WeilConjectures.sfFieldShriekCompositionQbar_existsUnique",
-    "declarations": [
-      "WeilConjectures.sfCompositionPullSquare",
-      "WeilConjectures.sfCompositionLambda",
-      "WeilConjectures.sfCompositionGamma",
-      "WeilConjectures.sfCompositionOpenComp",
-      "WeilConjectures.sfCompositionOpenCongr",
-      "WeilConjectures.sfCompletedCompositionOnTower",
-      "WeilConjectures.SfCompletedRefinementSpec",
-      "WeilConjectures.SfIntegralCompositionSpec",
-      "WeilConjectures.sfFieldShriekCompositionIntegral_existsUnique",
-      "WeilConjectures.sfFieldShriekCompositionIntegral",
-      "WeilConjectures.sfFieldShriekCompositionRational_existsUnique",
-      "WeilConjectures.sfFieldShriekCompositionRational",
-      "WeilConjectures.sfFieldShriekCompositionQbar_existsUnique"
-    ],
-    "file": "lean/Sheaf/Paper/FieldShriekCompositionQcqs.lean",
-    "statement": "theorem sfFieldShriekCompositionQbar_existsUnique (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (Sf : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω cf) (Sg : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω cg) (Sfg : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω cfg) : ∃! γ : Sf.system.functor ⋙ Sg.system.functor ≅ Sfg.system.functor, ∀ (E₀ : Padic.FiniteCoefficientFields l Ω) (K : Stage l Ω X E₀), HEq (γ.hom.app ⟨E₀, K⟩) ((inclusion (l := l) (Ω := Ω) (Y := Z) E₀).map ((sfFieldShriekCompositionRational D l hl cf cg cfg (AlgebraicallyClosedCoefficients.Coefficient l Ω E₀)).hom.app K))",
-    "branch": "newtargets-dag",
-    "by": "Q49",
-    "date": "2026-10-17",
-    "existing": false,
-    "note": "Both field cases are stated: integral proper/open and refinement normalization, raw rationalization of that canonical component, and its class on every finite-stage pair. No separated structure morphism, finite-Tor input, or arbitrary comparison is assumed. The normalized coefficient actions are universally quantified; their existence is the recorded finite-field-independence theorem."
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, compactification composition formula; agent common-finite-stage descent, which is not asserted by the finite-coefficient Stacks lemma."
+   }
   }
+ ],
+ "proof_deps": [
+  "thm-nagata-compactification",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-sf-proetale-constructible-origin",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-fix-operation-reduction",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-sp-compactification-refinement-coherence",
+  "def-weil-rationalization-karoubi",
+  "prop-weil-pbc-rational-transport",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients",
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), with the integral proper/open construction of Bhatt–Scholze Definition 6.7.6 and Lemmas 6.7.7, 6.1.13. Agent supplies the strict-system realization, rationalization and common-stage passage using the cited existing nodes; neither source is claimed to state this whole field-stage result."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition of compactly supported direct images for separated finite type schemes with l-adic coefficients",
+   "results": "8 hits: HasCompactSupport.comp_isClosedEmbedding, CompactlySupportedContinuousMap.comp, AlgebraicGeometry.IsSeparated.of_comp, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.IsSeparated.comp_iff, AlgebraicGeometry.QuasiCompact.of_comp, CompactlySupportedContinuousMap.compAddMonoidHom",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For composable separated finite type scheme morphisms the l-adic compact support functors satisfy R g shriek R f shriek naturally isomorphic to R gf shriek",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pseudofunctor composition isomorphism for exceptional direct images in constructible common finite stage Q ell bar coefficient categories",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, CategoryTheory.Pseudofunctor.CoGrothendieck.mapCompIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, CategoryTheory.Pseudofunctor.CoGrothendieck.compIso",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"lowerShriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport|compact.support",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: hits do not state compact-support operations on constructible adic field coefficients (grep in Mathlib/CategoryTheory)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural composition isomorphism for compactly supported direct images with l-adic field coefficients",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, CategoryTheory.Functor.sheafPushforwardContinuousComp', SheafOfModules.pushforwardComp, SheafOfModules.pushforwardNatTrans_comp, lightProfiniteToLightCondSetIsoTopCatToLightCondSet",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived structure-sheaf/site pushforwards or unrelated compactly supported functions and scheme properties, not the defined adic compact-support comparison on these coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "lowerShriek, Rf_!, compactSupport",
+   "results": "0 hits: ; loogle: unknown identifier 'lowerShriek'",
+   "date": "2026-10-17",
+   "verdict": "unavailable: invalid identifier in this Loogle query; no absence conclusion drawn; replaced by the valid quoted substring query"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactSupport|compact.support",
+   "results": "0 hits: ; searched Mathlib/CategoryTheory",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived structure-sheaf/site pushforwards or unrelated compactly supported functions and scheme properties, not the defined adic compact-support comparison on these coefficient categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of compactly supported direct images for separated finite type schemes with l-adic field coefficients",
+   "results": "8 hits: CompactlySupportedContinuousMap.comp, AlgebraicGeometry.IsSeparated.of_comp, AlgebraicGeometry.IsSeparated.comp_iff, AlgebraicGeometry.IsClosedImmersion.of_comp, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.QuasiCompact.of_comp, AlgebraicGeometry.IsProper.instCompScheme, AlgebraicGeometry.IsSeparated.instCompScheme",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived structure-sheaf/site pushforwards or unrelated compactly supported functions and scheme properties, not the defined adic compact-support comparison on these coefficient categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived structure-sheaf/site pushforwards or unrelated compactly supported functions and scheme properties, not the defined adic compact-support comparison on these coefficient categories"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial composition of exceptional direct image for constructible l-adic sheaves",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp', AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, CategoryTheory.ExponentiableMorphism.comp_pushforward, CategoryTheory.Functor.sheafPushforwardContinuousComp_hom_app_val_app",
+   "date": "2026-10-17",
+   "verdict": "no match: the hits concern underived structure-sheaf/site pushforwards or unrelated compactly supported functions and scheme properties, not the defined adic compact-support comparison on these coefficient categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-compact-support-leray-filtration",
+  "date": "2026-10-17",
+  "group": "Q54"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "blueprint": {
+  "from": {
+   "node": "lem-zl-composition-weight-bound",
+   "place": "Proof, first sentence: Frobenius-compatible composition R(gh)_!F ≅ Rg_!(Rh_!F), extending the separated-scheme interface to the stated qcqs bases.",
+   "via": [
+    "lem-zl-compact-support-leray-filtration"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "merged_into": null,
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-field-shriek-composition-qcqs",
+  "worker": "stage1",
+  "summary": "Eight-step split of the unchanged qcqs field-coefficient statement, reusing existing nodes only. Checks finite-type/qcqs geometry, uniform residue-Tor bounds, actual semilinear proper/open maps, realization of nested integral functors, refinement independence, raw rational localization, coefficient compatibility and common-stage descent. No exact closed project declaration or Mathlib match was found. No new nodes, no SGA, no Lean changes or compilation.",
+  "blueprint": "Realizes the first sentence of lem-zl-composition-weight-bound (R(gh)_!F ≅ Rg_!(Rh_!F)) through the coefficient-domain obligation introduced by lem-zl-compact-support-leray-filtration, following unit sk-l-dl-general-composition and its cited compact-support composition route. The Frobenius filtration construction stays in the parent; this item supplies only the specified natural composition comparison.",
+  "tool_uses": [
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Compactification existence over qcqs targets; the composition-weight unit uses compact support but does not reprove Nagata."
+   },
+   {
+    "node": "lem-weil-pbc-compatible-compactification-triangle",
+    "why": "Geometric compatible compactification triangle, over qcqs schemes without separated structure morphisms; realizes the stated compact-support composition route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian permanence for compactification ambient schemes."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic quasi-separatedness criterion for the finite-type ambient schemes."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Strict semilinear reduction and total-limit functors, adjunction and conservativity for already constructed system maps."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Finite-stage bounded constructible inputs have etale-origin witnesses; no such coefficient comparison is proved in the weight unit."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "DVR residue bound supplies uniform finite-level Tor bounds required for integral realization."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Integral proper/open expressions preserve the stated bounded constructible domain on nonseparated finite-type schemes."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Reduction and coefficient-extension compatibility of operations and their canonical comparisons; used within the proper/open route, not as a replacement for composition."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Generic strict-system proper/open map and realization of finite words, including nested compact-support functors and their actual comparison maps."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Finite-etale-origin invertibility of the normalized proper/open comparison, including refinement squares."
+   },
+   {
+    "node": "lem-cbc-compactifiable-cofiltered",
+    "why": "Generic common refinement/equalizer existence once compactifications are supplied."
+   },
+   {
+    "node": "lem-cbc-compactifiable-compatible-tower",
+    "why": "Generic common refining compatible towers needed to make the composition map canonical."
+   },
+   {
+    "node": "lem-sp-compactification-refinement-coherence",
+    "why": "Formal proper/open pasting and refinement coherence for supplied geometric and categorical data."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic localization of supplied exact linear functors and transformations to raw E categories."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Canonical composition identifications for coefficient extensions in the common-stage descent."
+   },
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic descent of coherent functor families and compatible transformations to the raw pair category."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic locally-finite-type composition and proper-map permanence for the compatible ambient schemes."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic quasi-compactness and quasi-separatedness permanence used to verify the finite-type ambient schemes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-nagata-compactification",
+  "lem-weil-pbc-compatible-compactification-triangle",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sf-proetale-constructible-origin",
+  "lem-coef-integral-residue-tor",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-fix-operation-reduction",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-compactifiable-cofiltered",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-sp-compactification-refinement-coherence",
+  "prop-weil-pbc-rational-transport",
+  "lem-weil-scalar-extension-composition",
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-8b5501db4",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-8b5501db4 (reviewer sub-agent of L); spot-checked: Reviewed the item, all eight steps, cited node statements, Stacks 0F7J, Bhatt–Scholze, coefficient categories, route constraints, edge cases, and searches. Step 2 asserted normalized transition isomorphisms without citing lem-sf-compact-support-restriction-of-scalars or lem-weil-proetale-direct-image-restriction-of-scalars; the corrected whole DAG JSON adds both dependencies. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8727e1a82",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Read node, Stacks 0F7J, BS 6.7.6/6.7.7/6.1.13 as cited, all 12 stmt_deps and the side dependency declarations (CompactSupportFiniteAction, CompactSupportCoefficientAction, PurCompactSupport incl. recordedIdentification, FiniteFieldDatum, Pair/inclusion). Hypotheses exact: D.k = alg. closure of the finite field, l prime with l != p, Omega in independent universe v, X/Y/Z finite type with no separatedness over k (qs automatic), f/g separated finite type, cf/cg/cfg universally quantified. Conclusions: integral ∃! with the 0F7J proper/open tower (V, b, c, p_Y, a=bc, Gamma = open adjunct of inverse Lambda) and normalized refinement independence; a qualifying tower with refinements always exists and the IsIso witnesses always hold; rational ∃! = localization of the integral component; Qbar ∃! on Pair with component inclusion E0 of the rational compositor (HEq types agree via obj/finite_eq/value_eq). §1(B) module for def-weil-integral-rational-qbar-compact-support justified: the old identification needs separated bases and finite Tor; the new module re-exports the values and copies the IsRecordedIdentification normalization. Node diffs: item only lean + stmt_deps (+4 landed nodes); dep only lean with note; statements verbatim. No hollow defs, all theorems sorry, docstrings with source/blueprint/proof steps, lines <=100, proper imports, real pro-etale completed coefficients. nt_compile --json on both modules: rc=0 twice, 3.2 s and 8.2 s, no warnings. Non-blocking: general-K0 uniqueness of sfQcqsCompactSupportRealization_existsUnique relies on reductions (fine over F̄_q; restrict to FiniteFieldDatum at stage 3 if it fails); dep record's main declaration is now the realization iso, values re-exported."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldShriekCompositionQcqs",
+  "declaration": "WeilConjectures.sfFieldShriekCompositionQbar_existsUnique",
+  "declarations": [
+   "WeilConjectures.sfCompositionPullSquare",
+   "WeilConjectures.sfCompositionLambda",
+   "WeilConjectures.sfCompositionGamma",
+   "WeilConjectures.sfCompositionOpenComp",
+   "WeilConjectures.sfCompositionOpenCongr",
+   "WeilConjectures.sfCompletedCompositionOnTower",
+   "WeilConjectures.SfCompletedRefinementSpec",
+   "WeilConjectures.SfIntegralCompositionSpec",
+   "WeilConjectures.sfFieldShriekCompositionIntegral_existsUnique",
+   "WeilConjectures.sfFieldShriekCompositionIntegral",
+   "WeilConjectures.sfFieldShriekCompositionRational_existsUnique",
+   "WeilConjectures.sfFieldShriekCompositionRational",
+   "WeilConjectures.sfFieldShriekCompositionQbar_existsUnique"
+  ],
+  "file": "lean/Sheaf/Paper/FieldShriekCompositionQcqs.lean",
+  "statement": "theorem sfFieldShriekCompositionQbar_existsUnique (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (Sf : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω cf) (Sg : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω cg) (Sfg : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω cfg) : ∃! γ : Sf.system.functor ⋙ Sg.system.functor ≅ Sfg.system.functor, ∀ (E₀ : Padic.FiniteCoefficientFields l Ω) (K : Stage l Ω X E₀), HEq (γ.hom.app ⟨E₀, K⟩) ((inclusion (l := l) (Ω := Ω) (Y := Z) E₀).map ((sfFieldShriekCompositionRational D l hl cf cg cfg (AlgebraicallyClosedCoefficients.Coefficient l Ω E₀)).hom.app K))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Both field cases are stated: integral proper/open and refinement normalization, raw rationalization of that canonical component, and its class on every finite-stage pair. No separated structure morphism, finite-Tor input, or arbitrary comparison is assumed. The normalized coefficient actions are universally quantified; their existence is the recorded finite-field-independence theorem."
+ }
 }

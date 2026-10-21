@@ -1,123 +1,87 @@
 {
-  "id": "p-linear-filtration",
-  "blueprint": {
-    "is": "p-linear-filtration",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Characteristic polynomials along a filtration",
-  "statement": "Let $f$ be an endomorphism of a finite-dimensional\n$k$-space $V$ preserving a filtration with graded\npieces $\\mathrm{gr}_j$. Then\n\n$$\n\\det(1-Tf\\mid V)=\\prod_j\\det\\bigl(1-Tf\\mid\\mathrm{gr}_j\\bigr).\n$$\n\nIn particular the eigenvalues of $f$ on any subquotient occur among those\non $V$, with multiplicity; so a scalar acting on a nonzero invariant\nsubquotient is an eigenvalue on the ambient space.\nlem:filtration-constituent;lem:scalar-subquotient-eigenvalue",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-linear-filtration/p-linear-filtration.md",
-    "place": "node p-linear-filtration, order 2549"
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "It is enough to treat one invariant subspace and iterate along the\nfiltration. For $S\\subseteq V$ with $f(S)\\subseteq S$, choose a basis of\n$S$ and extend it to $V$; over the polynomial ring $k[T]$ the matrix of\n$1-Tf$ is then block upper triangular, with diagonal blocks those of\n$1-Tf$ on $S$ and on $V/S$, so its determinant is the product of the two\nblock determinants. Induction on the length of the filtration gives the\ndisplayed formula. A subquotient $S/U$ sits in the flag\n$0\\subseteq U\\subseteq S\\subseteq V$, so $\\det(1-Tf\\mid S/U)$ divides\n$\\det(1-Tf\\mid V)$, which is the statement about eigenvalues with\nmultiplicity. If $f$ acts on $S/U\\ne0$ by the scalar $c$, apply the same\nfactorization to $B=f-c$: the middle factor is the determinant of the zero\nmap on a space of positive dimension, hence zero, so\n$\\det(f-c\\operatorname{id}_V)=0$ and $c$ is an eigenvalue on $V$.\nThe determinant factorization along an invariant subspace is Mathlib's\n`LinearMap.det_eq_det_mul_det`, in matrix form\n`Matrix.charpoly_fromBlocks_zero`$_{12}$; what is not available\nis the statement above, Mathlib having only the direct-sum case\n`LinearMap.charpoly_prodMap`.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-linear-filtration/p-linear-filtration.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "lean_multiple",
-    "lean_over_10_lines",
-    "mentions_mathlib"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2549,
-  "blueprint_uses": [],
-  "lean": {
-    "module": "WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic",
-    "declaration": "LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ",
-    "branch": "slopmaster2",
-    "line": 86,
-    "sorry_free": true,
-    "body_lines": 28,
-    "others": [
-      {
-        "module": "WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic",
-        "declaration": "Module.End.hasEigenvalue_of_subquotient",
-        "branch": "slopmaster2",
-        "line": 39,
-        "sorry_free": true,
-        "body_lines": 18
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ",
-    "Module.End.hasEigenvalue_of_subquotient"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ",
-        "Module.End.hasEigenvalue_of_subquotient"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ",
-          "module": "WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic",
-          "lines": [
-            82,
-            117
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "Module.End.hasEigenvalue_of_subquotient",
-          "module": "WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic",
-          "lines": [
-            36,
-            59
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-algebraic-groups-lie-algebras",
-  "unit": "sk-p-linear-filtration",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f$ be an endomorphism of a finite-dimensional\n$k$-space $V$ and let $S\\subseteq V$ be an $f$-stable subspace. Then the\ncharacteristic polynomials satisfy\n\n$$\n\\det(T-f\\mid V)=\\det(T-f\\mid S)\\,\\det(T-f\\mid V/S)\n$$\n\n(more generally this holds over a commutative ring, for a finite free\nmodule $V$ and an $f$-stable submodule $S$ with $S$ and $V/S$ finite\nfree). Moreover, if $U\\subsetneq S\\subseteq V$ are $f$-stable subspaces\nand $f$ acts on the nonzero subquotient $S/U$ as a scalar $c$, then $c$\nis an eigenvalue of $f$ on $V$.",
-    "proof": [
-      {
-        "text": "Let $R$ be the base ring ($R=k$ for the first assertion) and $T$ an\nindeterminate. Since $V/S$ is free, a basis of $S$ together with lifts of a\nbasis of $V/S$ is a basis of $V$. In it the matrix of $f$ is block upper\ntriangular, with diagonal blocks the matrices of $f$ on $S$ and on $V/S$;\nso the matrix of $T-f$ over $R[T]$ is block upper triangular with\ndiagonal blocks those of $T-f$ on $S$ and on $V/S$, and its determinant is\nthe product of the two block determinants. This is the displayed formula.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "For the second assertion (over the field $k$, where all subspaces and\nquotients are free), let $f$ act on $S/U\\ne0$ by the scalar $c$ and put\n$B=f-c$, which preserves $U$ and $S$. Applying the factorization to $B$\nalong $S\\subseteq V$, and then to $B|_S$ along $U\\subseteq S$, gives\n$$\n\\det(B\\mid V)=\\det(B\\mid U)\\,\\det(B\\mid S/U)\\,\\det(B\\mid V/S).\n$$\nThe middle factor is the determinant of the zero map on a space of\npositive dimension, hence zero, so $\\det(f-c\\operatorname{id}_V)=0$ and $c$\nis an eigenvalue of $f$ on $V$.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "p-linear-filtration",
+ "blueprint": {
+  "is": "p-linear-filtration",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Characteristic polynomials along a filtration",
+ "statement": "Let $f$ be an endomorphism of a finite-dimensional\n$k$-space $V$ preserving a filtration with graded\npieces $\\mathrm{gr}_j$. Then\n\n$$\n\\det(1-Tf\\mid V)=\\prod_j\\det\\bigl(1-Tf\\mid\\mathrm{gr}_j\\bigr).\n$$\n\nIn particular the eigenvalues of $f$ on any subquotient occur among those\non $V$, with multiplicity; so a scalar acting on a nonzero invariant\nsubquotient is an eigenvalue on the ambient space.\nlem:filtration-constituent;lem:scalar-subquotient-eigenvalue",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-linear-filtration/p-linear-filtration.md",
+  "place": "node p-linear-filtration, order 2549"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "It is enough to treat one invariant subspace and iterate along the\nfiltration. For $S\\subseteq V$ with $f(S)\\subseteq S$, choose a basis of\n$S$ and extend it to $V$; over the polynomial ring $k[T]$ the matrix of\n$1-Tf$ is then block upper triangular, with diagonal blocks those of\n$1-Tf$ on $S$ and on $V/S$, so its determinant is the product of the two\nblock determinants. Induction on the length of the filtration gives the\ndisplayed formula. A subquotient $S/U$ sits in the flag\n$0\\subseteq U\\subseteq S\\subseteq V$, so $\\det(1-Tf\\mid S/U)$ divides\n$\\det(1-Tf\\mid V)$, which is the statement about eigenvalues with\nmultiplicity. If $f$ acts on $S/U\\ne0$ by the scalar $c$, apply the same\nfactorization to $B=f-c$: the middle factor is the determinant of the zero\nmap on a space of positive dimension, hence zero, so\n$\\det(f-c\\operatorname{id}_V)=0$ and $c$ is an eigenvalue on $V$.\nThe determinant factorization along an invariant subspace is Mathlib's\n`LinearMap.det_eq_det_mul_det`, in matrix form\n`Matrix.charpoly_fromBlocks_zero`$_{12}$; what is not available\nis the statement above, Mathlib having only the direct-sum case\n`LinearMap.charpoly_prodMap`.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-linear-filtration/p-linear-filtration.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple",
+  "lean_over_10_lines",
+  "mentions_mathlib"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2549,
+ "blueprint_uses": [],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic",
+  "declaration": "LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ",
+  "branch": "slopmaster2",
+  "line": 86,
+  "sorry_free": true,
+  "body_lines": 28,
+  "others": [
+   {
+    "module": "WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic",
+    "declaration": "Module.End.hasEigenvalue_of_subquotient",
+    "branch": "slopmaster2",
+    "line": 39,
+    "sorry_free": true,
+    "body_lines": 18
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "LinearMap.charpoly_eq_charpoly_restrict_mul_charpoly_mapQ",
+  "Module.End.hasEigenvalue_of_subquotient"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-p-linear-filtration",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f$ be an endomorphism of a finite-dimensional\n$k$-space $V$ and let $S\\subseteq V$ be an $f$-stable subspace. Then the\ncharacteristic polynomials satisfy\n\n$$\n\\det(T-f\\mid V)=\\det(T-f\\mid S)\\,\\det(T-f\\mid V/S)\n$$\n\n(more generally this holds over a commutative ring, for a finite free\nmodule $V$ and an $f$-stable submodule $S$ with $S$ and $V/S$ finite\nfree). Moreover, if $U\\subsetneq S\\subseteq V$ are $f$-stable subspaces\nand $f$ acts on the nonzero subquotient $S/U$ as a scalar $c$, then $c$\nis an eigenvalue of $f$ on $V$.",
+  "proof": [
+   {
+    "text": "Let $R$ be the base ring ($R=k$ for the first assertion) and $T$ an\nindeterminate. Since $V/S$ is free, a basis of $S$ together with lifts of a\nbasis of $V/S$ is a basis of $V$. In it the matrix of $f$ is block upper\ntriangular, with diagonal blocks the matrices of $f$ on $S$ and on $V/S$;\nso the matrix of $T-f$ over $R[T]$ is block upper triangular with\ndiagonal blocks those of $T-f$ on $S$ and on $V/S$, and its determinant is\nthe product of the two block determinants. This is the displayed formula.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the second assertion (over the field $k$, where all subspaces and\nquotients are free), let $f$ act on $S/U\\ne0$ by the scalar $c$ and put\n$B=f-c$, which preserves $U$ and $S$. Applying the factorization to $B$\nalong $S\\subseteq V$, and then to $B|_S$ along $U\\subseteq S$, gives\n$$\n\\det(B\\mid V)=\\det(B\\mid U)\\,\\det(B\\mid S/U)\\,\\det(B\\mid V/S).\n$$\nThe middle factor is the determinant of the zero map on a space of\npositive dimension, hence zero, so $\\det(f-c\\operatorname{id}_V)=0$ and $c$\nis an eigenvalue of $f$ on $V$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

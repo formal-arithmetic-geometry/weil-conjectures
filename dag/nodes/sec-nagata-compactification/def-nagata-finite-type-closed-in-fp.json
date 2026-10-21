@@ -1,141 +1,88 @@
 {
-  "id": "def-nagata-finite-type-closed-in-fp",
-  "blueprint": {
-    "is": "def-nagata-finite-type-closed-in-fp",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "definition",
-  "title": "Separated finite-presentation envelope",
-  "statement": "Let $S$ be qcqs and let $X\\to S$ be separated and of finite type. Form\n\n$$\n\\mathsf{FP}(X/S)=(A_{X/S},(X_\\alpha)_\\alpha).\n$$\n\nApply [def-nagata-fixed-base-separated-stage] to this system and\ndefine\n\n$$\n\\alpha^{X/S}_{\\mathrm{sep}}\n=\\alpha_{\\mathrm{sep}},\n\\qquad\nX^{\\mathrm{fp}}=X_{\\alpha^{X/S}_{\\mathrm{sep}}},\n\\qquad\ni^{\\mathrm{fp}}_{X/S}\n=i_{\\alpha^{X/S}_{\\mathrm{sep}}}\\colon X\\hookrightarrow X^{\\mathrm{fp}}.\n$$\n\nDenote the resulting explicit pair by\n$\\mathsf{Env}_{\\mathrm{fp}}(X/S)=(X^{\\mathrm{fp}},i^{\\mathrm{fp}}_{X/S})$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-envelope/def-nagata-finite-type-closed-in-fp.md",
-    "place": "node def-nagata-finite-type-closed-in-fp, order 396"
-  },
-  "stmt_deps": [
-    "def-nagata-fixed-base-separated-stage",
-    "def-nagata-finite-type-fp-model-system"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "bypassed"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 396,
-  "blueprint_uses": [
-    "def-nagata-finite-type-fp-model-system",
-    "def-nagata-fixed-base-separated-stage"
-  ],
-  "uses_not_cited": [
-    "def-nagata-finite-type-fp-model-system"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "status",
-      "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.separatedFPEnvelopeIndex",
-          "module": "WeilConjectures.AlgebraicGeometry.SeparatedEnvelope",
-          "lines": [
-            98,
-            102
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.separatedFPEnvelope",
-          "module": "WeilConjectures.AlgebraicGeometry.SeparatedEnvelope",
-          "lines": [
-            104,
-            109
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.toSeparatedFPEnvelope",
-          "module": "WeilConjectures.AlgebraicGeometry.SeparatedEnvelope",
-          "lines": [
-            111,
-            114
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.separatedFPEnvelopeHom",
-          "module": "WeilConjectures.AlgebraicGeometry.SeparatedEnvelope",
-          "lines": [
-            116,
-            119
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-prop-nagata-sketch-envelope",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "def-nagata-finite-type-closed-in-fp",
-    "worker": "stage1",
-    "summary": "Checked the explicit envelope definition against its blueprint source and its two definition dependencies. The blueprint marks this stage-by-stage construction as bypassed by the formalized finite-presentation and Noetherian-descent route, so there are no proof steps or new lemma nodes to add. The corresponding Lean theorem is an existence proposition and does not state this explicit definition.",
-    "blueprint": "The node statement is the imported blueprint node itself; its status note records that the stage bookkeeping is bypassed by the formalized route. The statement place is the node statement, and the whole blueprint was searched with no other matching node."
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-nft2316",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nft2316 (reviewer sub-agent of L); spot-checked: Statement verbatim vs blueprint node (order 396), B3 ok; X qcqs follows from S qcqs + X->S separated finite type, so FP(X/S) of def-nagata-finite-type-fp-model-system applies, and lemma-nagata-fixed-base-separated-stage-exists hypotheses (X->S separated, S qs) hold so alpha_sep is defined; stmt_deps both present; citers (def-nagata-final-fp-envelope, prop-nagata-finite-type-closed-in-fp, three sec-proper-base-change nodes) use the same Env_fp pair (C4); no other node defines Env_fp (class b); definition, no proof steps; no repairs needed; no fault missed by Second reading."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope",
-    "declaration": "AlgebraicGeometry.nagataFinitePresentationEnvelope",
-    "file": "lean/Sheaf/AlgebraicGeometry/NagataFinitePresentationEnvelope.lean",
-    "statement": "def nagataFinitePresentationEnvelope {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace S] [QuasiSeparatedSpace S] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] : Σ Y : Over S, X ⟶ Y.left",
-    "branch": "sheaf-dag",
-    "by": "K1",
-    "date": "2026-10-11",
-    "existing": false,
-    "fixed_by": "R-nfc1146"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-nfc1146",
-    "group": "K1",
-    "result": "fix",
-    "note": "S qcqs=[CompactSpace S][QuasiSeparatedSpace S]; separated finite type=[IsSeparated f][LocallyOfFiniteType f][QuasiCompact f]; X qcqs derived; FP(X/S)=choice of recorded Scheme.Hom.FinitePresentationApproximation (Type u index); alpha_sep=nagataSeparatedStage F.isLimit F.p i0 (M1 spelling); FIX: pair type Σ Y : Scheme, X ⟶ Y -> Σ Y : Over S, X ⟶ Y.left (X^fp keeps its structure map p.app alpha_sep, which citer prop-nagata-finite-type-closed-in-fp needs: 'the constructed morphism X^fp -> S'); tested that citer's statement (separated, LFP, qc of .1.hom, closed immersion .2, .2 ≫ .1.hom = f) is provable by unfolding; no sorry, axioms std"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $S$ be qcqs and let $X\\to S$ be separated and of finite type. Form\n\n$$\n\\mathsf{FP}(X/S)=(A_{X/S},(X_\\alpha)_\\alpha).\n$$\n\nApply [def-nagata-fixed-base-separated-stage] to this system and\ndefine\n\n$$\n\\alpha^{X/S}_{\\mathrm{sep}}\n=\\alpha_{\\mathrm{sep}},\n\\qquad\nX^{\\mathrm{fp}}=X_{\\alpha^{X/S}_{\\mathrm{sep}}},\n\\qquad\ni^{\\mathrm{fp}}_{X/S}\n=i_{\\alpha^{X/S}_{\\mathrm{sep}}}\\colon X\\hookrightarrow X^{\\mathrm{fp}}.\n$$\n\nDenote the resulting explicit pair by\n$\\mathsf{Env}_{\\mathrm{fp}}(X/S)=(X^{\\mathrm{fp}},i^{\\mathrm{fp}}_{X/S})$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "def-nagata-finite-type-closed-in-fp",
+ "blueprint": {
+  "is": "def-nagata-finite-type-closed-in-fp",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Separated finite-presentation envelope",
+ "statement": "Let $S$ be qcqs and let $X\\to S$ be separated and of finite type. Form\n\n$$\n\\mathsf{FP}(X/S)=(A_{X/S},(X_\\alpha)_\\alpha).\n$$\n\nApply [def-nagata-fixed-base-separated-stage] to this system and\ndefine\n\n$$\n\\alpha^{X/S}_{\\mathrm{sep}}\n=\\alpha_{\\mathrm{sep}},\n\\qquad\nX^{\\mathrm{fp}}=X_{\\alpha^{X/S}_{\\mathrm{sep}}},\n\\qquad\ni^{\\mathrm{fp}}_{X/S}\n=i_{\\alpha^{X/S}_{\\mathrm{sep}}}\\colon X\\hookrightarrow X^{\\mathrm{fp}}.\n$$\n\nDenote the resulting explicit pair by\n$\\mathsf{Env}_{\\mathrm{fp}}(X/S)=(X^{\\mathrm{fp}},i^{\\mathrm{fp}}_{X/S})$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-envelope/def-nagata-finite-type-closed-in-fp.md",
+  "place": "node def-nagata-finite-type-closed-in-fp, order 396"
+ },
+ "stmt_deps": [
+  "def-nagata-fixed-base-separated-stage",
+  "def-nagata-finite-type-fp-model-system"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "bypassed"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 396,
+ "blueprint_uses": [
+  "def-nagata-finite-type-fp-model-system",
+  "def-nagata-fixed-base-separated-stage"
+ ],
+ "uses_not_cited": [
+  "def-nagata-finite-type-fp-model-system"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
+   "where": "statement"
   }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-prop-nagata-sketch-envelope",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "def-nagata-finite-type-closed-in-fp",
+  "worker": "stage1",
+  "summary": "Checked the explicit envelope definition against its blueprint source and its two definition dependencies. The blueprint marks this stage-by-stage construction as bypassed by the formalized finite-presentation and Noetherian-descent route, so there are no proof steps or new lemma nodes to add. The corresponding Lean theorem is an existence proposition and does not state this explicit definition.",
+  "blueprint": "The node statement is the imported blueprint node itself; its status note records that the stage bookkeeping is bypassed by the formalized route. The statement place is the node statement, and the whole blueprint was searched with no other matching node."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nft2316",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nft2316 (reviewer sub-agent of L); spot-checked: Statement verbatim vs blueprint node (order 396), B3 ok; X qcqs follows from S qcqs + X->S separated finite type, so FP(X/S) of def-nagata-finite-type-fp-model-system applies, and lemma-nagata-fixed-base-separated-stage-exists hypotheses (X->S separated, S qs) hold so alpha_sep is defined; stmt_deps both present; citers (def-nagata-final-fp-envelope, prop-nagata-finite-type-closed-in-fp, three sec-proper-base-change nodes) use the same Env_fp pair (C4); no other node defines Env_fp (class b); definition, no proof steps; no repairs needed; no fault missed by Second reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataFinitePresentationEnvelope",
+  "declaration": "AlgebraicGeometry.nagataFinitePresentationEnvelope",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataFinitePresentationEnvelope.lean",
+  "statement": "def nagataFinitePresentationEnvelope {X S : Scheme.{u}} (f : X ⟶ S) [CompactSpace S] [QuasiSeparatedSpace S] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] : Σ Y : Over S, X ⟶ Y.left",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-nfc1146"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nfc1146",
+  "group": "K1",
+  "result": "fix",
+  "note": "S qcqs=[CompactSpace S][QuasiSeparatedSpace S]; separated finite type=[IsSeparated f][LocallyOfFiniteType f][QuasiCompact f]; X qcqs derived; FP(X/S)=choice of recorded Scheme.Hom.FinitePresentationApproximation (Type u index); alpha_sep=nagataSeparatedStage F.isLimit F.p i0 (M1 spelling); FIX: pair type Σ Y : Scheme, X ⟶ Y -> Σ Y : Over S, X ⟶ Y.left (X^fp keeps its structure map p.app alpha_sep, which citer prop-nagata-finite-type-closed-in-fp needs: 'the constructed morphism X^fp -> S'); tested that citer's statement (separated, LFP, qc of .1.hom, closed immersion .2, .2 ≫ .1.hom = f) is provable by unfolding; no sorry, axioms std"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $S$ be qcqs and let $X\\to S$ be separated and of finite type. Form\n\n$$\n\\mathsf{FP}(X/S)=(A_{X/S},(X_\\alpha)_\\alpha).\n$$\n\nApply [def-nagata-fixed-base-separated-stage] to this system and\ndefine\n\n$$\n\\alpha^{X/S}_{\\mathrm{sep}}\n=\\alpha_{\\mathrm{sep}},\n\\qquad\nX^{\\mathrm{fp}}=X_{\\alpha^{X/S}_{\\mathrm{sep}}},\n\\qquad\ni^{\\mathrm{fp}}_{X/S}\n=i_{\\alpha^{X/S}_{\\mathrm{sep}}}\\colon X\\hookrightarrow X^{\\mathrm{fp}}.\n$$\n\nDenote the resulting explicit pair by\n$\\mathsf{Env}_{\\mathrm{fp}}(X/S)=(X^{\\mathrm{fp}},i^{\\mathrm{fp}}_{X/S})$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

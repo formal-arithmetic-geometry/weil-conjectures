@@ -1,338 +1,269 @@
 {
-  "id": "lem-chow-graph",
-  "blueprint": {
-    "is": "lem-chow-graph",
-    "from": null,
-    "same_as": null
+ "id": "lem-chow-graph",
+ "blueprint": {
+  "is": "lem-chow-graph",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The graph of the cover",
+ "statement": "Let $Y=\\operatorname{Spec}A$ be affine, let $X\\to Y$ be of finite type, and\nlet $X=U_1\\cup\\dots\\cup U_m$ be the affine open cover of\n[lemma-nagata-dense-affine-cover-exists], with its dense open $U:=\\bigcap_iU_i$.\nApplying [lem-chow-scheme-theoretic-closure] (which keeps $X$ proper\nif it was, and keeps each $U_i$ affine and of finite type over $Y$), we assume\nfrom now on that $U$ is scheme-theoretically dense in $X$. For each $i$, let\n$U_i\\hookrightarrow\\mathbf P^{n_i}_Y$ be the immersion of\n[lem-chow-affine-immersion], and let\n$Z_i\\subseteq\\mathbf P^{n_i}_Y$ be the closed model of\n[lem-chow-closed-model], so that $U_i\\hookrightarrow Z_i$ is a\nscheme-theoretically dense open immersion. Put\n\n$$\n Z:=\\prod_{i=1}^mZ_i,\n$$\n\nand let $\\widetilde X\\subseteq Z$ be the scheme-theoretic image\n([def-nagata-scheme-theoretic-image]) of the diagonal morphism\n\n$$\n j=(j_1|_U,\\dots,j_m|_U):U\\longrightarrow Z.\n$$\n\nThen:\n\n- (i) $U\\hookrightarrow\\widetilde X$ is a scheme-theoretically dense open\n  immersion, and $\\widetilde X\\to Y$ is proper;\n- (ii) the projections $\\mathrm{pr}_i|_{\\widetilde X}:\\widetilde\n  X\\to\\mathbf P^{n_i}_Y$ factor through $Z_i$, i.e. there are morphisms\n  $p_i:\\widetilde X\\to Z_i$ with\n  $p_i=(\\mathrm{pr}_i|_{\\widetilde X}\\text{ co-restricted})$, and each $p_i$\n  is proper;\n- (iii) the composite\n\n  $$\n   \\widetilde X\\hookrightarrow Z\\hookrightarrow\\prod_{i=1}^m\\mathbf P^{n_i}_Y\n   \\xrightarrow{\\ s\\ }\\mathbf P^N_Y,\\qquad N=\\prod_{i=1}^m(n_i+1)-1,\n  $$\n\n  of the closed immersion $\\widetilde X\\hookrightarrow Z$, the product of the\n  closed immersions $Z_i\\hookrightarrow\\mathbf P^{n_i}_Y$, and the Segre\n  embedding ([def-chow-segre],\n  [lem-chow-segre]) is a closed immersion.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-graph.md",
+  "place": "node lem-chow-graph, order 1057",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01RG"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01R9"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01W6"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "lemma-nagata-dense-affine-cover-exists",
+  "lem-chow-scheme-theoretic-closure",
+  "lem-chow-affine-immersion",
+  "lem-chow-closed-model",
+  "def-nagata-scheme-theoretic-image",
+  "def-chow-segre",
+  "lem-chow-segre",
+  "def-nagata-affine-proj",
+  "def-nagata-dense-compactification",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-image-comparison",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "*The reduction step is legitimate.* By\n[lem-chow-scheme-theoretic-closure], $X^{*}\\to X$ is a surjective\nclosed immersion and $U\\subseteq X^{*}$ is scheme-theoretically dense;\n$\\pi:X^{*}\\to X$ is proper whenever $X\\to Y$ is (a closed immersion followed\nby a proper morphism is proper), so conclusions about properness pass from\n$X^{*}$ to $X$, and the $U_i^{*}=X^{*}\\cap U_i$ are affine, of finite type\nover $Y$, with $U=\\bigcap_iU_i^{*}$. Hence we may replace $X$ by $X^{*}$ and\n$U_i$ by $U_i^{*}$.",
+   "uses": [
+    "lem-chow-scheme-theoretic-closure"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "The graph of the cover",
-  "statement": "Let $Y=\\operatorname{Spec}A$ be affine, let $X\\to Y$ be of finite type, and\nlet $X=U_1\\cup\\dots\\cup U_m$ be the affine open cover of\n[lemma-nagata-dense-affine-cover-exists], with its dense open $U:=\\bigcap_iU_i$.\nApplying [lem-chow-scheme-theoretic-closure] (which keeps $X$ proper\nif it was, and keeps each $U_i$ affine and of finite type over $Y$), we assume\nfrom now on that $U$ is scheme-theoretically dense in $X$. For each $i$, let\n$U_i\\hookrightarrow\\mathbf P^{n_i}_Y$ be the immersion of\n[lem-chow-affine-immersion], and let\n$Z_i\\subseteq\\mathbf P^{n_i}_Y$ be the closed model of\n[lem-chow-closed-model], so that $U_i\\hookrightarrow Z_i$ is a\nscheme-theoretically dense open immersion. Put\n\n$$\n Z:=\\prod_{i=1}^mZ_i,\n$$\n\nand let $\\widetilde X\\subseteq Z$ be the scheme-theoretic image\n([def-nagata-scheme-theoretic-image]) of the diagonal morphism\n\n$$\n j=(j_1|_U,\\dots,j_m|_U):U\\longrightarrow Z.\n$$\n\nThen:\n\n- (i) $U\\hookrightarrow\\widetilde X$ is a scheme-theoretically dense open\n  immersion, and $\\widetilde X\\to Y$ is proper;\n- (ii) the projections $\\mathrm{pr}_i|_{\\widetilde X}:\\widetilde\n  X\\to\\mathbf P^{n_i}_Y$ factor through $Z_i$, i.e. there are morphisms\n  $p_i:\\widetilde X\\to Z_i$ with\n  $p_i=(\\mathrm{pr}_i|_{\\widetilde X}\\text{ co-restricted})$, and each $p_i$\n  is proper;\n- (iii) the composite\n\n  $$\n   \\widetilde X\\hookrightarrow Z\\hookrightarrow\\prod_{i=1}^m\\mathbf P^{n_i}_Y\n   \\xrightarrow{\\ s\\ }\\mathbf P^N_Y,\\qquad N=\\prod_{i=1}^m(n_i+1)-1,\n  $$\n\n  of the closed immersion $\\widetilde X\\hookrightarrow Z$, the product of the\n  closed immersions $Z_i\\hookrightarrow\\mathbf P^{n_i}_Y$, and the Segre\n  embedding ([def-chow-segre],\n  [lem-chow-segre]) is a closed immersion.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-graph.md",
-    "place": "node lem-chow-graph, order 1057",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01RG"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01R9"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01W6"
-      }
-    ]
+  {
+   "text": "*$j$ is an immersion.* By [lem-chow-affine-immersion] each\n$j_i|_U$ factors as the closed immersion $U\\hookrightarrow\\mathbf A^{n_i}_Y$\nfollowed by the open immersion $\\mathbf A^{n_i}_Y\\hookrightarrow\\mathbf\nP^{n_i}_Y$. The induced morphism $U\\to\\prod_i\\mathbf A^{n_i}_Y$ is a closed\nimmersion: the target is affine with coordinate ring the tensor product over\n$A$ of the coordinate rings of the $\\mathbf A^{n_i}_Y$, and each of the\ncoordinate ring maps onto $B=\\mathcal O_U(U)$ is surjective, hence so is the\ntensor product map. Composing with the open immersion $\\prod_i\\mathbf\nA^{n_i}_Y\\hookrightarrow\\prod_i\\mathbf P^{n_i}_Y$ and using that\n$\\prod_iZ_i\\subseteq\\prod_i\\mathbf P^{n_i}_Y$ is closed, we get that $j:U\\to\nZ$ is an immersion.",
+   "uses": [
+    "lem-chow-affine-immersion"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "lemma-nagata-dense-affine-cover-exists",
-    "lem-chow-scheme-theoretic-closure",
-    "lem-chow-affine-immersion",
-    "lem-chow-closed-model",
-    "def-nagata-scheme-theoretic-image",
-    "def-chow-segre",
-    "lem-chow-segre",
-    "def-nagata-affine-proj",
-    "def-nagata-dense-compactification",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-scheme-image-comparison",
-    "def-nagata-scheme-image-factor",
-    "def-nagata-scheme-theoretic-closure",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "*The reduction step is legitimate.* By\n[lem-chow-scheme-theoretic-closure], $X^{*}\\to X$ is a surjective\nclosed immersion and $U\\subseteq X^{*}$ is scheme-theoretically dense;\n$\\pi:X^{*}\\to X$ is proper whenever $X\\to Y$ is (a closed immersion followed\nby a proper morphism is proper), so conclusions about properness pass from\n$X^{*}$ to $X$, and the $U_i^{*}=X^{*}\\cap U_i$ are affine, of finite type\nover $Y$, with $U=\\bigcap_iU_i^{*}$. Hence we may replace $X$ by $X^{*}$ and\n$U_i$ by $U_i^{*}$.",
-      "uses": [
-        "lem-chow-scheme-theoretic-closure"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*$j$ is an immersion.* By [lem-chow-affine-immersion] each\n$j_i|_U$ factors as the closed immersion $U\\hookrightarrow\\mathbf A^{n_i}_Y$\nfollowed by the open immersion $\\mathbf A^{n_i}_Y\\hookrightarrow\\mathbf\nP^{n_i}_Y$. The induced morphism $U\\to\\prod_i\\mathbf A^{n_i}_Y$ is a closed\nimmersion: the target is affine with coordinate ring the tensor product over\n$A$ of the coordinate rings of the $\\mathbf A^{n_i}_Y$, and each of the\ncoordinate ring maps onto $B=\\mathcal O_U(U)$ is surjective, hence so is the\ntensor product map. Composing with the open immersion $\\prod_i\\mathbf\nA^{n_i}_Y\\hookrightarrow\\prod_i\\mathbf P^{n_i}_Y$ and using that\n$\\prod_iZ_i\\subseteq\\prod_i\\mathbf P^{n_i}_Y$ is closed, we get that $j:U\\to\nZ$ is an immersion.",
-      "uses": [
-        "lem-chow-affine-immersion"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Proof of (i).* Stacks Project, Morphisms, Lemma 29.7.7 (Tag\n[01RG](https://stacks.math.columbia.edu/tag/01RG)) applied to the\nquasi-compact immersion $j$ (its source $U$ is quasi-compact) shows that the\nscheme-theoretic image $\\widetilde X$ of $j$ contains $U$ as a\nscheme-theoretically dense open subscheme. For properness: each $Z_i\\to Y$ is\nproper by [lem-chow-closed-model]; $Z=\\prod_iZ_i$ is closed in\n$\\prod_i\\mathbf P^{n_i}_Y$ (a product of closed immersions is a closed\nimmersion), and $\\prod_i\\mathbf P^{n_i}_Y$ is proper over $Y$ by\n[lem-chow-segre] and\n[def-chow-segre] (its structure morphism is the composite\nof the closed Segre immersion $\\prod_i\\mathbf P^{n_i}_Y\\hookrightarrow\\mathbf\nP^N_Y$ with the proper $\\mathbf P^N_Y\\to Y$); hence $Z\\to Y$ is proper, and\nthe closed subscheme $\\widetilde X\\subseteq Z$ is proper over $Y$ too\n(`closed subscheme` means the composite of the closed immersion with the\nproper morphism is proper).",
-      "uses": [
-        "lem-chow-closed-model",
-        "lem-chow-segre",
-        "def-chow-segre"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Proof of (ii).* The morphism $\\mathrm{pr}_i\\circ j$ equals $j_i|_U:\\ U\\to\nZ_i\\subseteq\\mathbf P^{n_i}_Y$, i.e. it factors through the closed subscheme\n$Z_i$; by the universal property of the scheme-theoretic image\n([def-nagata-scheme-theoretic-image]; equivalently Stacks Project,\nMorphisms, Lemma 29.6.6, Tag\n[01R9](https://stacks.math.columbia.edu/tag/01R9)), the induced morphism\n$\\mathrm{pr}_i|_{\\widetilde X}:\\widetilde X\\to\\mathbf P^{n_i}_Y$ thus factors\nthrough $Z_i$, giving $p_i$. The morphism $p_i$ is proper by Stacks Project,\nMorphisms, Lemma 29.42.7 (Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)): $\\widetilde X\\to Y$ is\nproper by (i), the target $Z_i$ is separated over $Y$ (it is a closed\nsubscheme of the projective $Y$-scheme $\\mathbf P^{n_i}_Y$, which is separated\nover $Y$), and a morphism from a $Y$-proper scheme to a $Y$-separated scheme\nis proper.",
-      "uses": [
-        "def-nagata-scheme-theoretic-image"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Proof of (iii).* $\\widetilde X\\hookrightarrow Z$ is a closed immersion by the\ndefinition of the scheme-theoretic image\n([def-nagata-scheme-theoretic-image]); the product of the closed\nimmersions $Z_i\\hookrightarrow\\mathbf P^{n_i}_Y$ is a closed immersion; and\n$s$ is a closed immersion by [lem-chow-segre].\nCompositions of closed immersions are closed immersions, which proves (iii).",
-      "uses": [
-        "def-nagata-scheme-theoretic-image",
-        "lem-chow-segre"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-chow-scheme-theoretic-closure",
-    "lem-chow-affine-immersion",
+  {
+   "text": "*Proof of (i).* Stacks Project, Morphisms, Lemma 29.7.7 (Tag\n[01RG](https://stacks.math.columbia.edu/tag/01RG)) applied to the\nquasi-compact immersion $j$ (its source $U$ is quasi-compact) shows that the\nscheme-theoretic image $\\widetilde X$ of $j$ contains $U$ as a\nscheme-theoretically dense open subscheme. For properness: each $Z_i\\to Y$ is\nproper by [lem-chow-closed-model]; $Z=\\prod_iZ_i$ is closed in\n$\\prod_i\\mathbf P^{n_i}_Y$ (a product of closed immersions is a closed\nimmersion), and $\\prod_i\\mathbf P^{n_i}_Y$ is proper over $Y$ by\n[lem-chow-segre] and\n[def-chow-segre] (its structure morphism is the composite\nof the closed Segre immersion $\\prod_i\\mathbf P^{n_i}_Y\\hookrightarrow\\mathbf\nP^N_Y$ with the proper $\\mathbf P^N_Y\\to Y$); hence $Z\\to Y$ is proper, and\nthe closed subscheme $\\widetilde X\\subseteq Z$ is proper over $Y$ too\n(`closed subscheme` means the composite of the closed immersion with the\nproper morphism is proper).",
+   "uses": [
     "lem-chow-closed-model",
     "lem-chow-segre",
-    "def-chow-segre",
+    "def-chow-segre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Proof of (ii).* The morphism $\\mathrm{pr}_i\\circ j$ equals $j_i|_U:\\ U\\to\nZ_i\\subseteq\\mathbf P^{n_i}_Y$, i.e. it factors through the closed subscheme\n$Z_i$; by the universal property of the scheme-theoretic image\n([def-nagata-scheme-theoretic-image]; equivalently Stacks Project,\nMorphisms, Lemma 29.6.6, Tag\n[01R9](https://stacks.math.columbia.edu/tag/01R9)), the induced morphism\n$\\mathrm{pr}_i|_{\\widetilde X}:\\widetilde X\\to\\mathbf P^{n_i}_Y$ thus factors\nthrough $Z_i$, giving $p_i$. The morphism $p_i$ is proper by Stacks Project,\nMorphisms, Lemma 29.42.7 (Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)): $\\widetilde X\\to Y$ is\nproper by (i), the target $Z_i$ is separated over $Y$ (it is a closed\nsubscheme of the projective $Y$-scheme $\\mathbf P^{n_i}_Y$, which is separated\nover $Y$), and a morphism from a $Y$-proper scheme to a $Y$-separated scheme\nis proper.",
+   "uses": [
+    "def-nagata-scheme-theoretic-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Proof of (iii).* $\\widetilde X\\hookrightarrow Z$ is a closed immersion by the\ndefinition of the scheme-theoretic image\n([def-nagata-scheme-theoretic-image]); the product of the closed\nimmersions $Z_i\\hookrightarrow\\mathbf P^{n_i}_Y$ is a closed immersion; and\n$s$ is a closed immersion by [lem-chow-segre].\nCompositions of closed immersions are closed immersions, which proves (iii).",
+   "uses": [
     "def-nagata-scheme-theoretic-image",
-    "lem-chow-tuple-immersion",
-    "lem-weil-pbc-closed-immersion-products",
-    "lemma-nagata-scheme-image-ideal-qc",
-    "lemma-nagata-scheme-image-universal",
-    "lemma-nagata-scheme-theoretic-closure-minimal"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-graph.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "proof_cites_literature",
-    "lean_multiple",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1057,
-  "blueprint_uses": [
-    "def-chow-segre",
-    "def-nagata-affine-proj",
-    "def-nagata-dense-compactification",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-scheme-image-comparison",
-    "def-nagata-scheme-image-factor",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "def-weil-pbc-scheme-conventions",
-    "lem-chow-affine-immersion",
-    "lem-chow-closed-model",
-    "lem-chow-scheme-theoretic-closure",
-    "lem-chow-segre",
-    "lem-chow-tuple-immersion",
-    "lem-weil-pbc-closed-immersion-products",
-    "lemma-nagata-dense-affine-cover-exists",
-    "lemma-nagata-scheme-image-ideal-qc",
-    "lemma-nagata-scheme-image-universal",
-    "lemma-nagata-scheme-theoretic-closure-minimal"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
-    "declaration": "AlgebraicGeometry.ChowGraph",
-    "branch": "slopmaster2",
-    "line": 161,
-    "sorry_free": true,
-    "body_lines": 1,
-    "others": [
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
-        "declaration": "AlgebraicGeometry.ChowGraph.emb",
-        "branch": "slopmaster2",
-        "line": 171,
-        "sorry_free": true,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
-        "declaration": "AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over",
-        "branch": "slopmaster2",
-        "line": 282,
-        "sorry_free": true,
-        "body_lines": 15
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
-        "declaration": "AlgebraicGeometry.ChowGraph.proj",
-        "branch": "slopmaster2",
-        "line": 230,
-        "sorry_free": true,
-        "body_lines": 7
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
-        "declaration": "AlgebraicGeometry.ChowGraph.toGraph",
-        "branch": "slopmaster2",
-        "line": 180,
-        "sorry_free": true,
-        "body_lines": 1
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.ChowGraph",
-    "AlgebraicGeometry.ChowGraph.emb",
-    "AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over",
-    "AlgebraicGeometry.ChowGraph.proj",
-    "AlgebraicGeometry.ChowGraph.toGraph"
-  ],
-  "uses_not_cited": [
-    "def-nagata-affine-proj",
-    "def-nagata-dense-compactification",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-scheme-image-comparison",
-    "def-nagata-scheme-image-factor",
-    "def-nagata-scheme-theoretic-closure",
-    "def-weil-pbc-scheme-conventions",
-    "lem-chow-tuple-immersion",
-    "lem-weil-pbc-closed-immersion-products",
-    "lemma-nagata-scheme-image-ideal-qc",
-    "lemma-nagata-scheme-image-universal",
-    "lemma-nagata-scheme-theoretic-closure-minimal"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_sketch": [
-    {
-      "statement": "Let $S$ be noetherian, let $X\\to S$ be separated of finite type and let\n$X=U_1\\cup\\dots\\cup U_m$ be a finite affine open covering such that\n$U:=U_1\\cap\\dots\\cap U_m$ is scheme-theoretically dense in $X$. Choose, by\n[lem-chow-affine-immersion], immersions\n$j_i\\colon U_i\\to\\mathbf P^{n_i}_S$ and, by [lem-chow-closed-model],\nclosed subschemes $Z_i\\subseteq\\mathbf P^{n_i}_S$ with $U_i\\to Z_i$ a\nscheme-theoretically dense open immersion and $Z_i\\to S$ proper. Let\n$Z\\subseteq\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ be the\nscheme-theoretic image of\n\n$$\nj=(j_1|_U,\\dots,j_m|_U)\\colon U\n\\longrightarrow\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S .\n$$\n\nThen:\n\n1. $Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ is a\nclosed immersion, $j$ induces an open immersion $U\\to Z$ identifying $U$ with\na scheme-theoretically dense open subscheme of $Z$, and $Z\\to S$ is proper;\n1. for every $i$ the projection $\\mathrm{pr}_i|_Z\\colon Z\\to\\mathbf P^{n_i}_S$ factors through $Z_i$, and the induced morphism\n$p_i\\colon Z\\to Z_i$ is proper;\n1. $p_i|_U$ is the open immersion $U\\to U_i\\to Z_i$; in particular\n$U\\subseteq p_i^{-1}(U_i)$.\n\nThe formalisation takes the $m$-fold fibre product\n$\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ to be the categorical\nproduct in the category of $S$-schemes, so that (1) is a closed immersion into\nthat product rather than into a single projective space; the composition with\nthe Segre embedding of [lem-chow-segre], giving a closed immersion\n$Z\\to\\mathbf P^N_S$ over $S$ as used in Step 7 of the proof of\n[thm-chow-lemma], is the separate statement\n`ChowGraph.exists_isClosedImmersion_over` listed above. It also\nweakens the hypotheses to what the proof uses:\nthe members of the cover need not be affine and need not cover $X$, only $X$\nneeds to be a noetherian space, and $U$ need not be dense in $X$.",
-      "proof": "Each $j_i|_U$ is an immersion, being the composition of the open immersion\n$U\\to U_i$ with the immersion $j_i$. Hence $j$ is an immersion by\n[lem-chow-tuple-immersion], and it is quasi-compact because $U$ is\nnoetherian. Part (1) now follows from 01RG for the first two\nassertions; for the third, $\\mathbf P^{n_1}_S\\times_S\\dots\\times_S \\mathbf P^{n_m}_S\\to S$ is proper, being a finite fibre product of proper\n$S$-schemes, and $Z$ is a closed subscheme of it, so $Z\\to S$ is proper by\n01W5.\n\nFor (2), the open immersion $U\\to Z$ is quasi-compact and scheme-theoretically\ndominant, so $\\mathrm{pr}_i|_Z\\colon Z\\to\\mathbf P^{n_i}_S$ and its restriction\n$\\mathrm{pr}_i\\circ j=j_i|_U$ to $U$ have the same kernel. That kernel\ncontains the ideal sheaf of $Z_i$, because $j_i|_U$ factors through $Z_i$ by\nconstruction; so the universal property of the closed immersion\n$Z_i\\to\\mathbf P^{n_i}_S$ produces the morphism $p_i\\colon Z\\to Z_i$ with\n$p_i$ followed by $Z_i\\to\\mathbf P^{n_i}_S$ equal to $\\mathrm{pr}_i|_Z$. (This\nis 01R9 in the case in which $Z_i$ is presented as the\nscheme-theoretic image of $j_i|_U$, which it is: formation of the\nscheme-theoretic image commutes with restriction to the open $U_i\\subseteq X$.)\nIt is proper: $Z\\to S$ is proper by (1) and $Z_i\\to S$ is separated, so $p_i$\nis proper by 01W6.\n\nPart (3) is immediate from $\\mathrm{pr}_i\\circ j=j_i|_U$ and the fact that\n$j_i$ identifies $U_i$ with an open subscheme of $Z_i$.",
-      "cites": [
-        "lem-chow-affine-immersion",
-        "lem-chow-closed-model",
-        "lem-chow-segre",
-        "thm-chow-lemma",
-        "lem-chow-tuple-immersion"
-      ]
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.ChowGraph",
-        "AlgebraicGeometry.ChowGraph.emb",
-        "AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over",
-        "AlgebraicGeometry.ChowGraph.proj",
-        "AlgebraicGeometry.ChowGraph.toGraph"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.ChowGraph",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
-          "lines": [
-            151,
-            162
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowGraph.emb",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
-          "lines": [
-            169,
-            170
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
-          "lines": [
-            281,
-            308
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowGraph.proj",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
-          "lines": [
-            233,
-            246
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowGraph.toGraph",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
-          "lines": [
-            175,
-            179
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-chow",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f\\colon X\\to S$ be a morphism of schemes, let $U_1,\\dots,U_m$ be finitely\nmany open subschemes of $X$ and put $U:=U_1\\cap\\dots\\cap U_m$. For each $i$ let\n$Z_i$ be a proper closed model of $U_i\\to S$ as in [lem-chow-closed-model]: a\nclosed immersion $Z_i\\to\\mathbf P^{n_i}_S$ ($n_i$ a finite set) and a\nscheme-theoretically dense open immersion $U_i\\to Z_i$ compatible with the\nmaps to $S$. Let $Z\\subseteq\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$\n(the product in the category of $S$-schemes) be the scheme-theoretic image of\n\n$$\nj=(j_1,\\dots,j_m)\\colon U\n\\longrightarrow\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S ,\n$$\n\nwhere $j_i$ is the composite $U\\subseteq U_i\\to Z_i\\to\\mathbf P^{n_i}_S$. Then:\n\n1. $Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ is a\nclosed immersion and $Z\\to S$ is proper; moreover there are a finite set $N$\nand a closed immersion $Z\\to\\mathbf P^N_S$ of $S$-schemes.\n\nIf moreover the underlying space of $X$ is noetherian:\n\n2. $j$ induces a scheme-theoretically dominant morphism $U\\to Z$, which (if\n$m\\geq1$) is an open immersion identifying $U$ with a scheme-theoretically\ndense open subscheme of $Z$;\n3. for every $i$ the projection $\\mathrm{pr}_i|_Z\\colon Z\\to\\mathbf P^{n_i}_S$\nfactors through $Z_i$, and the induced morphism $p_i\\colon Z\\to Z_i$ is proper;\n4. $p_i|_U$ is the open immersion $U\\to U_i\\to Z_i$; in particular (if\n$m\\geq1$) $U\\subseteq p_i^{-1}(U_i)$.",
-    "proof": [
-      {
-        "text": "Each $j_i|_U$ is an immersion, being the composition of the open immersion\n$U\\to U_i$ with the immersion $j_i$. Hence $j$ is an immersion by\n[lem-chow-tuple-immersion], and it is quasi-compact because $U$ is\nnoetherian. Part (1) now follows from 01RG for the first two\nassertions; for the third, $\\mathbf P^{n_1}_S\\times_S\\dots\\times_S \\mathbf P^{n_m}_S\\to S$ is proper, being a finite fibre product of proper\n$S$-schemes, and $Z$ is a closed subscheme of it, so $Z\\to S$ is proper by\n01W5.\n\nFor (2), the open immersion $U\\to Z$ is quasi-compact and scheme-theoretically\ndominant, so $\\mathrm{pr}_i|_Z\\colon Z\\to\\mathbf P^{n_i}_S$ and its restriction\n$\\mathrm{pr}_i\\circ j=j_i|_U$ to $U$ have the same kernel. That kernel\ncontains the ideal sheaf of $Z_i$, because $j_i|_U$ factors through $Z_i$ by\nconstruction; so the universal property of the closed immersion\n$Z_i\\to\\mathbf P^{n_i}_S$ produces the morphism $p_i\\colon Z\\to Z_i$ with\n$p_i$ followed by $Z_i\\to\\mathbf P^{n_i}_S$ equal to $\\mathrm{pr}_i|_Z$. (This\nis 01R9 in the case in which $Z_i$ is presented as the\nscheme-theoretic image of $j_i|_U$, which it is: formation of the\nscheme-theoretic image commutes with restriction to the open $U_i\\subseteq X$.)\nIt is proper: $Z\\to S$ is proper by (1) and $Z_i\\to S$ is separated, so $p_i$\nis proper by 01W6.\n\nPart (3) is immediate from $\\mathrm{pr}_i\\circ j=j_i|_U$ and the fact that\n$j_i$ identifies $U_i$ with an open subscheme of $Z_i$.",
-        "uses": [
-          "lem-chow-tuple-immersion"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*The reduction step is legitimate.* By\n[lem-chow-scheme-theoretic-closure], $X^{*}\\to X$ is a surjective\nclosed immersion and $U\\subseteq X^{*}$ is scheme-theoretically dense;\n$\\pi:X^{*}\\to X$ is proper whenever $X\\to Y$ is (a closed immersion followed\nby a proper morphism is proper), so conclusions about properness pass from\n$X^{*}$ to $X$, and the $U_i^{*}=X^{*}\\cap U_i$ are affine, of finite type\nover $Y$, with $U=\\bigcap_iU_i^{*}$. Hence we may replace $X$ by $X^{*}$ and\n$U_i$ by $U_i^{*}$.",
-        "uses": [
-          "lem-chow-scheme-theoretic-closure"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*$j$ is an immersion.* By [lem-chow-affine-immersion] each\n$j_i|_U$ factors as the closed immersion $U\\hookrightarrow\\mathbf A^{n_i}_Y$\nfollowed by the open immersion $\\mathbf A^{n_i}_Y\\hookrightarrow\\mathbf\nP^{n_i}_Y$. The induced morphism $U\\to\\prod_i\\mathbf A^{n_i}_Y$ is a closed\nimmersion: the target is affine with coordinate ring the tensor product over\n$A$ of the coordinate rings of the $\\mathbf A^{n_i}_Y$, and each of the\ncoordinate ring maps onto $B=\\mathcal O_U(U)$ is surjective, hence so is the\ntensor product map. Composing with the open immersion $\\prod_i\\mathbf\nA^{n_i}_Y\\hookrightarrow\\prod_i\\mathbf P^{n_i}_Y$ and using that\n$\\prod_iZ_i\\subseteq\\prod_i\\mathbf P^{n_i}_Y$ is closed, we get that $j:U\\to\nZ$ is an immersion.",
-        "uses": [
-          "lem-chow-affine-immersion"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Proof of (i).* Stacks Project, Morphisms, Lemma 29.7.7 (Tag\n[01RG](https://stacks.math.columbia.edu/tag/01RG)) applied to the\nquasi-compact immersion $j$ (its source $U$ is quasi-compact) shows that the\nscheme-theoretic image $\\widetilde X$ of $j$ contains $U$ as a\nscheme-theoretically dense open subscheme. For properness: each $Z_i\\to Y$ is\nproper by [lem-chow-closed-model]; $Z=\\prod_iZ_i$ is closed in\n$\\prod_i\\mathbf P^{n_i}_Y$ (a product of closed immersions is a closed\nimmersion), and $\\prod_i\\mathbf P^{n_i}_Y$ is proper over $Y$ by\n[lem-chow-segre] and\n[def-chow-segre] (its structure morphism is the composite\nof the closed Segre immersion $\\prod_i\\mathbf P^{n_i}_Y\\hookrightarrow\\mathbf\nP^N_Y$ with the proper $\\mathbf P^N_Y\\to Y$); hence $Z\\to Y$ is proper, and\nthe closed subscheme $\\widetilde X\\subseteq Z$ is proper over $Y$ too\n(`closed subscheme` means the composite of the closed immersion with the\nproper morphism is proper).",
-        "uses": [
-          "lem-chow-closed-model",
-          "lem-chow-segre",
-          "def-chow-segre"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Proof of (ii).* The morphism $\\mathrm{pr}_i\\circ j$ equals $j_i|_U:\\ U\\to\nZ_i\\subseteq\\mathbf P^{n_i}_Y$, i.e. it factors through the closed subscheme\n$Z_i$; by the universal property of the scheme-theoretic image\n([def-nagata-scheme-theoretic-image]; equivalently Stacks Project,\nMorphisms, Lemma 29.6.6, Tag\n[01R9](https://stacks.math.columbia.edu/tag/01R9)), the induced morphism\n$\\mathrm{pr}_i|_{\\widetilde X}:\\widetilde X\\to\\mathbf P^{n_i}_Y$ thus factors\nthrough $Z_i$, giving $p_i$. The morphism $p_i$ is proper by Stacks Project,\nMorphisms, Lemma 29.42.7 (Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)): $\\widetilde X\\to Y$ is\nproper by (i), the target $Z_i$ is separated over $Y$ (it is a closed\nsubscheme of the projective $Y$-scheme $\\mathbf P^{n_i}_Y$, which is separated\nover $Y$), and a morphism from a $Y$-proper scheme to a $Y$-separated scheme\nis proper.",
-        "uses": [
-          "def-nagata-scheme-theoretic-image"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Proof of (iii).* $\\widetilde X\\hookrightarrow Z$ is a closed immersion by the\ndefinition of the scheme-theoretic image\n([def-nagata-scheme-theoretic-image]); the product of the closed\nimmersions $Z_i\\hookrightarrow\\mathbf P^{n_i}_Y$ is a closed immersion; and\n$s$ is a closed immersion by [lem-chow-segre].\nCompositions of closed immersions are closed immersions, which proves (iii).",
-        "uses": [
-          "def-nagata-scheme-theoretic-image",
-          "lem-chow-segre"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "lem-chow-segre"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-chow-scheme-theoretic-closure",
+  "lem-chow-affine-immersion",
+  "lem-chow-closed-model",
+  "lem-chow-segre",
+  "def-chow-segre",
+  "def-nagata-scheme-theoretic-image",
+  "lem-chow-tuple-immersion",
+  "lem-weil-pbc-closed-immersion-products",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-universal",
+  "lemma-nagata-scheme-theoretic-closure-minimal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-graph.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "proof_cites_literature",
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1057,
+ "blueprint_uses": [
+  "def-chow-segre",
+  "def-nagata-affine-proj",
+  "def-nagata-dense-compactification",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-image-comparison",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-chow-affine-immersion",
+  "lem-chow-closed-model",
+  "lem-chow-scheme-theoretic-closure",
+  "lem-chow-segre",
+  "lem-chow-tuple-immersion",
+  "lem-weil-pbc-closed-immersion-products",
+  "lemma-nagata-dense-affine-cover-exists",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-universal",
+  "lemma-nagata-scheme-theoretic-closure-minimal"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
+  "declaration": "AlgebraicGeometry.ChowGraph",
+  "branch": "slopmaster2",
+  "line": 161,
+  "sorry_free": true,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
+    "declaration": "AlgebraicGeometry.ChowGraph.emb",
+    "branch": "slopmaster2",
+    "line": 171,
+    "sorry_free": true,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
+    "declaration": "AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over",
+    "branch": "slopmaster2",
+    "line": 282,
+    "sorry_free": true,
+    "body_lines": 15
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
+    "declaration": "AlgebraicGeometry.ChowGraph.proj",
+    "branch": "slopmaster2",
+    "line": 230,
+    "sorry_free": true,
+    "body_lines": 7
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Graph",
+    "declaration": "AlgebraicGeometry.ChowGraph.toGraph",
+    "branch": "slopmaster2",
+    "line": 180,
+    "sorry_free": true,
+    "body_lines": 1
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.ChowGraph",
+  "AlgebraicGeometry.ChowGraph.emb",
+  "AlgebraicGeometry.ChowGraph.exists_isClosedImmersion_over",
+  "AlgebraicGeometry.ChowGraph.proj",
+  "AlgebraicGeometry.ChowGraph.toGraph"
+ ],
+ "uses_not_cited": [
+  "def-nagata-affine-proj",
+  "def-nagata-dense-compactification",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-image-comparison",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "def-weil-pbc-scheme-conventions",
+  "lem-chow-tuple-immersion",
+  "lem-weil-pbc-closed-immersion-products",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-universal",
+  "lemma-nagata-scheme-theoretic-closure-minimal"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $S$ be noetherian, let $X\\to S$ be separated of finite type and let\n$X=U_1\\cup\\dots\\cup U_m$ be a finite affine open covering such that\n$U:=U_1\\cap\\dots\\cap U_m$ is scheme-theoretically dense in $X$. Choose, by\n[lem-chow-affine-immersion], immersions\n$j_i\\colon U_i\\to\\mathbf P^{n_i}_S$ and, by [lem-chow-closed-model],\nclosed subschemes $Z_i\\subseteq\\mathbf P^{n_i}_S$ with $U_i\\to Z_i$ a\nscheme-theoretically dense open immersion and $Z_i\\to S$ proper. Let\n$Z\\subseteq\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ be the\nscheme-theoretic image of\n\n$$\nj=(j_1|_U,\\dots,j_m|_U)\\colon U\n\\longrightarrow\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S .\n$$\n\nThen:\n\n1. $Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ is a\nclosed immersion, $j$ induces an open immersion $U\\to Z$ identifying $U$ with\na scheme-theoretically dense open subscheme of $Z$, and $Z\\to S$ is proper;\n1. for every $i$ the projection $\\mathrm{pr}_i|_Z\\colon Z\\to\\mathbf P^{n_i}_S$ factors through $Z_i$, and the induced morphism\n$p_i\\colon Z\\to Z_i$ is proper;\n1. $p_i|_U$ is the open immersion $U\\to U_i\\to Z_i$; in particular\n$U\\subseteq p_i^{-1}(U_i)$.\n\nThe formalisation takes the $m$-fold fibre product\n$\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ to be the categorical\nproduct in the category of $S$-schemes, so that (1) is a closed immersion into\nthat product rather than into a single projective space; the composition with\nthe Segre embedding of [lem-chow-segre], giving a closed immersion\n$Z\\to\\mathbf P^N_S$ over $S$ as used in Step 7 of the proof of\n[thm-chow-lemma], is the separate statement\n`ChowGraph.exists_isClosedImmersion_over` listed above. It also\nweakens the hypotheses to what the proof uses:\nthe members of the cover need not be affine and need not cover $X$, only $X$\nneeds to be a noetherian space, and $U$ need not be dense in $X$.",
+   "proof": "Each $j_i|_U$ is an immersion, being the composition of the open immersion\n$U\\to U_i$ with the immersion $j_i$. Hence $j$ is an immersion by\n[lem-chow-tuple-immersion], and it is quasi-compact because $U$ is\nnoetherian. Part (1) now follows from 01RG for the first two\nassertions; for the third, $\\mathbf P^{n_1}_S\\times_S\\dots\\times_S \\mathbf P^{n_m}_S\\to S$ is proper, being a finite fibre product of proper\n$S$-schemes, and $Z$ is a closed subscheme of it, so $Z\\to S$ is proper by\n01W5.\n\nFor (2), the open immersion $U\\to Z$ is quasi-compact and scheme-theoretically\ndominant, so $\\mathrm{pr}_i|_Z\\colon Z\\to\\mathbf P^{n_i}_S$ and its restriction\n$\\mathrm{pr}_i\\circ j=j_i|_U$ to $U$ have the same kernel. That kernel\ncontains the ideal sheaf of $Z_i$, because $j_i|_U$ factors through $Z_i$ by\nconstruction; so the universal property of the closed immersion\n$Z_i\\to\\mathbf P^{n_i}_S$ produces the morphism $p_i\\colon Z\\to Z_i$ with\n$p_i$ followed by $Z_i\\to\\mathbf P^{n_i}_S$ equal to $\\mathrm{pr}_i|_Z$. (This\nis 01R9 in the case in which $Z_i$ is presented as the\nscheme-theoretic image of $j_i|_U$, which it is: formation of the\nscheme-theoretic image commutes with restriction to the open $U_i\\subseteq X$.)\nIt is proper: $Z\\to S$ is proper by (1) and $Z_i\\to S$ is separated, so $p_i$\nis proper by 01W6.\n\nPart (3) is immediate from $\\mathrm{pr}_i\\circ j=j_i|_U$ and the fact that\n$j_i$ identifies $U_i$ with an open subscheme of $Z_i$.",
+   "cites": [
+    "lem-chow-affine-immersion",
+    "lem-chow-closed-model",
+    "lem-chow-segre",
+    "thm-chow-lemma",
+    "lem-chow-tuple-immersion"
+   ]
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-chow",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f\\colon X\\to S$ be a morphism of schemes, let $U_1,\\dots,U_m$ be finitely\nmany open subschemes of $X$ and put $U:=U_1\\cap\\dots\\cap U_m$. For each $i$ let\n$Z_i$ be a proper closed model of $U_i\\to S$ as in [lem-chow-closed-model]: a\nclosed immersion $Z_i\\to\\mathbf P^{n_i}_S$ ($n_i$ a finite set) and a\nscheme-theoretically dense open immersion $U_i\\to Z_i$ compatible with the\nmaps to $S$. Let $Z\\subseteq\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$\n(the product in the category of $S$-schemes) be the scheme-theoretic image of\n\n$$\nj=(j_1,\\dots,j_m)\\colon U\n\\longrightarrow\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S ,\n$$\n\nwhere $j_i$ is the composite $U\\subseteq U_i\\to Z_i\\to\\mathbf P^{n_i}_S$. Then:\n\n1. $Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ is a\nclosed immersion and $Z\\to S$ is proper; moreover there are a finite set $N$\nand a closed immersion $Z\\to\\mathbf P^N_S$ of $S$-schemes.\n\nIf moreover the underlying space of $X$ is noetherian:\n\n2. $j$ induces a scheme-theoretically dominant morphism $U\\to Z$, which (if\n$m\\geq1$) is an open immersion identifying $U$ with a scheme-theoretically\ndense open subscheme of $Z$;\n3. for every $i$ the projection $\\mathrm{pr}_i|_Z\\colon Z\\to\\mathbf P^{n_i}_S$\nfactors through $Z_i$, and the induced morphism $p_i\\colon Z\\to Z_i$ is proper;\n4. $p_i|_U$ is the open immersion $U\\to U_i\\to Z_i$; in particular (if\n$m\\geq1$) $U\\subseteq p_i^{-1}(U_i)$.",
+  "proof": [
+   {
+    "text": "Each $j_i|_U$ is an immersion, being the composition of the open immersion\n$U\\to U_i$ with the immersion $j_i$. Hence $j$ is an immersion by\n[lem-chow-tuple-immersion], and it is quasi-compact because $U$ is\nnoetherian. Part (1) now follows from 01RG for the first two\nassertions; for the third, $\\mathbf P^{n_1}_S\\times_S\\dots\\times_S \\mathbf P^{n_m}_S\\to S$ is proper, being a finite fibre product of proper\n$S$-schemes, and $Z$ is a closed subscheme of it, so $Z\\to S$ is proper by\n01W5.\n\nFor (2), the open immersion $U\\to Z$ is quasi-compact and scheme-theoretically\ndominant, so $\\mathrm{pr}_i|_Z\\colon Z\\to\\mathbf P^{n_i}_S$ and its restriction\n$\\mathrm{pr}_i\\circ j=j_i|_U$ to $U$ have the same kernel. That kernel\ncontains the ideal sheaf of $Z_i$, because $j_i|_U$ factors through $Z_i$ by\nconstruction; so the universal property of the closed immersion\n$Z_i\\to\\mathbf P^{n_i}_S$ produces the morphism $p_i\\colon Z\\to Z_i$ with\n$p_i$ followed by $Z_i\\to\\mathbf P^{n_i}_S$ equal to $\\mathrm{pr}_i|_Z$. (This\nis 01R9 in the case in which $Z_i$ is presented as the\nscheme-theoretic image of $j_i|_U$, which it is: formation of the\nscheme-theoretic image commutes with restriction to the open $U_i\\subseteq X$.)\nIt is proper: $Z\\to S$ is proper by (1) and $Z_i\\to S$ is separated, so $p_i$\nis proper by 01W6.\n\nPart (3) is immediate from $\\mathrm{pr}_i\\circ j=j_i|_U$ and the fact that\n$j_i$ identifies $U_i$ with an open subscheme of $Z_i$.",
+    "uses": [
+     "lem-chow-tuple-immersion"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The reduction step is legitimate.* By\n[lem-chow-scheme-theoretic-closure], $X^{*}\\to X$ is a surjective\nclosed immersion and $U\\subseteq X^{*}$ is scheme-theoretically dense;\n$\\pi:X^{*}\\to X$ is proper whenever $X\\to Y$ is (a closed immersion followed\nby a proper morphism is proper), so conclusions about properness pass from\n$X^{*}$ to $X$, and the $U_i^{*}=X^{*}\\cap U_i$ are affine, of finite type\nover $Y$, with $U=\\bigcap_iU_i^{*}$. Hence we may replace $X$ by $X^{*}$ and\n$U_i$ by $U_i^{*}$.",
+    "uses": [
+     "lem-chow-scheme-theoretic-closure"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*$j$ is an immersion.* By [lem-chow-affine-immersion] each\n$j_i|_U$ factors as the closed immersion $U\\hookrightarrow\\mathbf A^{n_i}_Y$\nfollowed by the open immersion $\\mathbf A^{n_i}_Y\\hookrightarrow\\mathbf\nP^{n_i}_Y$. The induced morphism $U\\to\\prod_i\\mathbf A^{n_i}_Y$ is a closed\nimmersion: the target is affine with coordinate ring the tensor product over\n$A$ of the coordinate rings of the $\\mathbf A^{n_i}_Y$, and each of the\ncoordinate ring maps onto $B=\\mathcal O_U(U)$ is surjective, hence so is the\ntensor product map. Composing with the open immersion $\\prod_i\\mathbf\nA^{n_i}_Y\\hookrightarrow\\prod_i\\mathbf P^{n_i}_Y$ and using that\n$\\prod_iZ_i\\subseteq\\prod_i\\mathbf P^{n_i}_Y$ is closed, we get that $j:U\\to\nZ$ is an immersion.",
+    "uses": [
+     "lem-chow-affine-immersion"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Proof of (i).* Stacks Project, Morphisms, Lemma 29.7.7 (Tag\n[01RG](https://stacks.math.columbia.edu/tag/01RG)) applied to the\nquasi-compact immersion $j$ (its source $U$ is quasi-compact) shows that the\nscheme-theoretic image $\\widetilde X$ of $j$ contains $U$ as a\nscheme-theoretically dense open subscheme. For properness: each $Z_i\\to Y$ is\nproper by [lem-chow-closed-model]; $Z=\\prod_iZ_i$ is closed in\n$\\prod_i\\mathbf P^{n_i}_Y$ (a product of closed immersions is a closed\nimmersion), and $\\prod_i\\mathbf P^{n_i}_Y$ is proper over $Y$ by\n[lem-chow-segre] and\n[def-chow-segre] (its structure morphism is the composite\nof the closed Segre immersion $\\prod_i\\mathbf P^{n_i}_Y\\hookrightarrow\\mathbf\nP^N_Y$ with the proper $\\mathbf P^N_Y\\to Y$); hence $Z\\to Y$ is proper, and\nthe closed subscheme $\\widetilde X\\subseteq Z$ is proper over $Y$ too\n(`closed subscheme` means the composite of the closed immersion with the\nproper morphism is proper).",
+    "uses": [
+     "lem-chow-closed-model",
+     "lem-chow-segre",
+     "def-chow-segre"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Proof of (ii).* The morphism $\\mathrm{pr}_i\\circ j$ equals $j_i|_U:\\ U\\to\nZ_i\\subseteq\\mathbf P^{n_i}_Y$, i.e. it factors through the closed subscheme\n$Z_i$; by the universal property of the scheme-theoretic image\n([def-nagata-scheme-theoretic-image]; equivalently Stacks Project,\nMorphisms, Lemma 29.6.6, Tag\n[01R9](https://stacks.math.columbia.edu/tag/01R9)), the induced morphism\n$\\mathrm{pr}_i|_{\\widetilde X}:\\widetilde X\\to\\mathbf P^{n_i}_Y$ thus factors\nthrough $Z_i$, giving $p_i$. The morphism $p_i$ is proper by Stacks Project,\nMorphisms, Lemma 29.42.7 (Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)): $\\widetilde X\\to Y$ is\nproper by (i), the target $Z_i$ is separated over $Y$ (it is a closed\nsubscheme of the projective $Y$-scheme $\\mathbf P^{n_i}_Y$, which is separated\nover $Y$), and a morphism from a $Y$-proper scheme to a $Y$-separated scheme\nis proper.",
+    "uses": [
+     "def-nagata-scheme-theoretic-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Proof of (iii).* $\\widetilde X\\hookrightarrow Z$ is a closed immersion by the\ndefinition of the scheme-theoretic image\n([def-nagata-scheme-theoretic-image]); the product of the closed\nimmersions $Z_i\\hookrightarrow\\mathbf P^{n_i}_Y$ is a closed immersion; and\n$s$ is a closed immersion by [lem-chow-segre].\nCompositions of closed immersions are closed immersions, which proves (iii).",
+    "uses": [
+     "def-nagata-scheme-theoretic-image",
+     "lem-chow-segre"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

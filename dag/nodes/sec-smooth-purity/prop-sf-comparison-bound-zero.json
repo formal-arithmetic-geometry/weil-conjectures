@@ -1,334 +1,323 @@
 {
-  "id": "prop-sf-comparison-bound-zero",
-  "blueprint": {
-    "is": "prop-sf-comparison-bound-zero",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The comparison bound on coefficients of étale origin is $M=0$",
-  "statement": "Let $X$ be any scheme and $A$ a finite discrete commutative ring. Use sheaves of modules over the constant sheaves $A_{X_{\\mathrm{et}}}$ and $A_{X_{\\mathrm{proet}}}$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category], on the small sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site]. Let $\\nu_X:X_{\\mathrm{proet}}\\to X_{\\mathrm{et}}$ be the comparison geometric morphism [def-weil-pbc-site-comparison-morphism]. Its inverse image on fixed-$A$ modules, denoted $\\nu_X^*$, applies the inverse image to the underlying abelian sheaf and to each scalar endomorphism; its direct image $\\nu_{X,*}$ is restriction to etale objects. Right derived functors are computed by injective module resolutions [def-sp-left-exact-additive, def-sp-injective-resolutions]. For every sheaf $G$ of $A$-modules on $X_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves], the adjunction unit and higher direct images satisfy\n$$G\\xrightarrow{\\ \\sim\\ }\\nu_{X,*}\\nu_X^*G,\\qquad R^q\\nu_{X,*}(\\nu_X^*G)=0\\quad(q>0).$$\nNo constructibility or finiteness hypothesis is imposed on $G$, and no Noetherian or dimension hypothesis is imposed on $X$. In particular the comparison direct image has bound $M=0$ on sheaves of etale origin: any $F$ isomorphic to $\\nu_X^*G$ has $R^q\\nu_{X,*}F=0$ for $q>0$, independently of $\\dim X$. For a finite field $\\mathbf F_q$ of characteristic $p$, $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, $A=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and a finite-type $k$-scheme $X$, this applies to every coefficient sheaf of [def-sf-fullcd-used-class] by its defining etale-origin witness.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/prop-sf-comparison-bound-zero.md",
-    "place": "node prop-sf-comparison-bound-zero, order 1797",
-    "external": [
-      {
-        "document": "Bhatt",
-        "place": "The two inputs are Bhatt–Scholze, Lemma 5.1.1 and Corollary 5.1.6 of [arXiv:1309.1198v2](https://arxiv.org/html/1309.1198v2), quoted verbatim in Section 16.1 of the audit ledger; both are stated for an arbitrary scheme and an arbitrary sheaf, respectively bounded-below complex, on the small étale site, so a sheaf of $A$-modules on $X_{\\Et}$ in the sense of [def-weil-pbc-etale-sheaves] is covered v"
-      },
-      {
-        "document": "Scholze",
-        "place": "The two inputs are Bhatt–Scholze, Lemma 5.1.1 and Corollary 5.1.6 of [arXiv:1309.1198v2](https://arxiv.org/html/1309.1198v2), quoted verbatim in Section 16.1 of the audit ledger; both are stated for an arbitrary scheme and an arbitrary sheaf, respectively bounded-below complex, on the small étale site, so a sheaf of $A$-modules on $X_{\\Et}$ in the sense of [def-weil-pbc-etale-sheaves] is covered v"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-sp-left-exact-additive",
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-etale-sheaves",
-    "def-sf-fullcd-used-class",
-    "def-weil-l-adic-coefficient-extension"
-  ],
-  "proof": [
-    {
-      "text": "Write $L=\\nu_X^{-1}$ and $R=\\nu_{X,*}$ on abelian sheaves, and $L_A,R_A$ for the fixed-$A$ module functors. For the constant sheaf $\\underline A$ of [def-weil-pbc-constant-sheaf], giving an $\\underline A$-module structure on an abelian sheaf is equivalent to giving compatible endomorphisms $\\lambda_a$ for all $a\\in A$ satisfying the module identities. Indeed, [lem-pc-sites-sheafification-underlying-sets] identifies the underlying set sheafification of the constant ring presheaf, and [lem-weil-pbc-site-sheafification-sections-local] applied to the constant presheaf says that a section of $\\underline A$ is locally represented by constants, with equal representatives agreeing after a further cover. Act by those constants on that cover and glue. Two presentations agree after a common refinement, so the result is well-defined. A map commuting with all $\\lambda_a$ is therefore linear over every section of $\\underline A$, by restriction to such a cover and the sheaf uniqueness axiom. This applies on both sites for the finite discrete ring $A$. By [lem-cbc-comparison-pullback-sections], at every etale object $U$ the comparison unit on underlying sets identifies $G(U)$ with $(L_AG)(U)$. The algebraic-structure construction of [def-weil-pbc-site-comparison-morphism] applies the set inverse image to addition, zero, negation and every endomorphism $\\lambda_a$ for $a\\in A$. The finite set of scalar operations is carried along by the finite-limit-preserving inverse image, and applying it to each module identity gives the same identity after pullback. The unit is natural in these operations, so its component at $U$ is $A$-linear. Its bijective inverse is $A$-linear, since for $y=\\eta_U(x)$ one has $\\eta_U^{-1}(ay)=\\eta_U^{-1}(\\eta_U(ax))=ax$. These inverses commute with restrictions by the naturality of $\\eta$. The module convention [def-weil-sheaf-of-modules-category] and the preceding local scalar argument therefore give the asserted unit isomorphism over the constant ring sheaf. The set-sheaf adjunction restricts to the module adjunction: a map and its transpose commute with addition and each $\\lambda_a$ by naturality of the unit and counit, and the module identities are preserved by the finite-product-preserving inverse image. Thus the map just checked is its actual unit for this finite discrete $A$. For an abelian etale sheaf $B$, the same cited sections formula makes $\\eta_B:B\\to RLB$ an objectwise bijection. Naturality with respect to addition, zero and negation makes each component a group homomorphism; its inverse is a group homomorphism and commutes with restrictions. Hence $\\eta_B$ is an isomorphism of abelian sheaves. Naturality in a morphism $b:B\\to B'$ says $(RLb)\\eta_B=\\eta_{B'}b$.",
-      "uses": [
-        "lem-cbc-comparison-pullback-sections",
-        "def-weil-pbc-site-comparison-morphism",
-        "def-weil-sheaf-of-modules-category",
-        "def-weil-pbc-constant-sheaf",
-        "lem-weil-pbc-site-sheafification-sections-local",
-        "lem-pc-sites-sheafification-underlying-sets"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099T, label lemma-fully-faithful; section formula Tag 0GLZ, label lemma-describe-pullback-from-etale; local constant representatives: sites.tex Tag 00WK, label lemma-sections-sheafification"
-      }
-    },
-    {
-      "text": "For an arbitrary abelian sheaf $B$ on $X_{\\mathrm{et}}$, choose an injective resolution $B\\to I^\\bullet$, using enough injectives on sites in [def-weil-pbc-sites-and-cohomology]. By [lem-weil-pbc-site-pullback-abelian-exact], $LB\\to LI^\\bullet$ is an exact resolution. Each $LI^n$ is $R$-acyclic by [lem-cbc-abelian-comparison-injective-acyclicity]. Clause (2) of [lemma-weil-pbc-leray-acyclicity] computes $R^qR(LB)$ by $\\mathcal H^q(RLI^\\bullet)$. The natural unit isomorphisms from step 1 commute with the differentials of $I^\\bullet$, so $RLI^\\bullet\\cong I^\\bullet$ as complexes. Since $I^\\bullet$ resolves $B$ in degree zero, $R^qR(LB)=0$ for every $q>0$. This is the independent acyclicity argument needed in addition to ordinary full faithfulness.",
-      "uses": [
-        "def-weil-pbc-sites-and-cohomology",
-        "lem-weil-pbc-site-pullback-abelian-exact",
-        "lem-cbc-abelian-comparison-injective-acyclicity",
-        "lemma-weil-pbc-leray-acyclicity"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099V, label lemma-relative-comparison, second paragraph; acyclic resolutions: derived.tex, Tag 015E, label lemma-leray-acyclicity"
-      }
-    },
-    {
-      "text": "Work in one sufficiently large universe for both small-site representatives and all coefficient values. By [lem-pur-ringed-site-grothendieck-abelian] and [lem-sp-grothendieck-enough-injectives], the categories of module sheaves over the constant ring $A$ on these sites have enough injectives. Direct image $R_A$ is additive and left exact: it restricts module sheaves to etale objects, so it preserves zero, addition and the sectionwise kernels specified in [def-weil-sheaf-of-modules-category]. Let $S_{\\mathrm{proet}}$ and $S_{\\mathrm{et}}$ forget scalars. They are exact and faithful by [lem-weil-pbc-module-sheaves-colimits-forgetful]. If $J$ is an injective pro-etale $A$-module sheaf, then for every pro-etale object $W$ and $q>0$, [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] identifies $H^q(W,S_{\\mathrm{proet}}J)$ with $R^q\\Gamma_{\\mathrm{Mod}}(W,J)=0$: the latter is computed using the injective resolution having just $J$ in degree zero. In particular this holds at every etale object $u_X(U)$. Apply [lem-weil-pbc-site-higher-direct-image-sheafified-presheaf] to the abelian comparison functor $R$: its positive higher direct image of $S_{\\mathrm{proet}}J$ is the sheafification of the zero presheaf $U\\mapsto H^q(u_X(U),S_{\\mathrm{proet}}J)$. Thus $S_{\\mathrm{proet}}J$ is $R$-acyclic. This proves the needed acyclicity without asserting that $S_{\\mathrm{proet}}J$ is injective.",
-      "uses": [
-        "lem-pur-ringed-site-grothendieck-abelian",
-        "lem-sp-grothendieck-enough-injectives",
-        "lem-weil-pbc-module-sheaves-colimits-forgetful",
-        "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-        "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
-        "def-weil-sheaf-of-modules-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, over-object equality; Tag 072W, label lemma-higher-direct-images"
-      }
-    },
-    {
-      "text": "For a pro-etale module sheaf $M$, choose an injective module resolution $M\\to J^\\bullet$. Exactness of $S_{\\mathrm{proet}}$ from [lem-weil-pbc-module-sheaves-colimits-forgetful] makes $S_{\\mathrm{proet}}M\\to S_{\\mathrm{proet}}J^\\bullet$ an abelian resolution; step 3 makes every term $R$-acyclic. Thus [lemma-weil-pbc-leray-acyclicity] (2) computes $R^qR(S_{\\mathrm{proet}}M)$ as $\\mathcal H^q(RS_{\\mathrm{proet}}J^\\bullet)$. Restriction to etale objects gives equality $RS_{\\mathrm{proet}}J^\\bullet=S_{\\mathrm{et}}R_AJ^\\bullet$ by the direct-image formula of [def-weil-pbc-site-comparison-morphism]. Exactness of $S_{\\mathrm{et}}$ preserves the kernels and images defining cohomology, so the last cohomology sheaf is $S_{\\mathrm{et}}\\mathcal H^q(R_AJ^\\bullet)=S_{\\mathrm{et}}R^qR_A(M)$, by [def-sp-left-exact-additive]. Now put $M=L_AG$. The scalar construction in step 1 identifies $S_{\\mathrm{proet}}L_AG=L(S_{\\mathrm{et}}G)$. Step 2 says the abelian higher direct images of this sheaf are zero. Hence $S_{\\mathrm{et}}R^qR_A(L_AG)=0$ for $q>0$. A module sheaf with zero underlying abelian sheaf has zero sections on every object and is itself zero. This proves the desired module vanishing for every finite discrete commutative $A$.",
-      "uses": [
-        "lem-weil-pbc-module-sheaves-colimits-forgetful",
-        "lemma-weil-pbc-leray-acyclicity",
-        "def-weil-pbc-site-comparison-morphism",
-        "def-sp-left-exact-additive"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, acyclic-resolution argument combined with proetale.tex Tag 099V"
-      }
-    },
-    {
-      "text": "If $F\\cong L_AG$, functoriality of each $R^qR_A$ carries this isomorphism to $R^qR_AF\\cong R^qR_A(L_AG)=0$ for $q>0$. Thus $M=0$ works for the whole etale-origin class, with no dependence on dimension. For the coefficient class [def-sf-fullcd-used-class], take a finite field $\\mathbf F_q$ of characteristic $p$, $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, $A=\\mathcal O_E/\\varpi_E^n$, and a finite-type $k$-scheme $\\overline X$. By [def-weil-l-adic-coefficient-extension], $A$ is a finite commutative ring, taken with its discrete topology, so steps 1--4 apply. The defining condition of the class is $\\mathcal F\\cong\\nu_{\\overline X}^*\\mathcal G$; this is precisely such an origin witness. This defining condition is the whole membership condition in the current statement of that node. The argument proves a bound for the comparison functor; a dimension bound for a proper morphism is a separate statement.",
-      "uses": [
-        "def-sf-fullcd-used-class",
-        "def-weil-l-adic-coefficient-extension"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/prop-sf-comparison-bound-zero.md",
-        "place": "Final paragraph: uniform comparison bound M=0 on etale-origin sheaves"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-sf-fullcd-used-class",
-    "def-sp-left-exact-additive",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category",
-    "lem-cbc-abelian-comparison-injective-acyclicity",
+ "id": "prop-sf-comparison-bound-zero",
+ "blueprint": {
+  "is": "prop-sf-comparison-bound-zero",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The comparison bound on coefficients of étale origin is $M=0$",
+ "statement": "Let $X$ be any scheme and $A$ a finite discrete commutative ring. Use sheaves of modules over the constant sheaves $A_{X_{\\mathrm{et}}}$ and $A_{X_{\\mathrm{proet}}}$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category], on the small sites [def-weil-pbc-etale-site, def-weil-pbc-proetale-site]. Let $\\nu_X:X_{\\mathrm{proet}}\\to X_{\\mathrm{et}}$ be the comparison geometric morphism [def-weil-pbc-site-comparison-morphism]. Its inverse image on fixed-$A$ modules, denoted $\\nu_X^*$, applies the inverse image to the underlying abelian sheaf and to each scalar endomorphism; its direct image $\\nu_{X,*}$ is restriction to etale objects. Right derived functors are computed by injective module resolutions [def-sp-left-exact-additive, def-sp-injective-resolutions]. For every sheaf $G$ of $A$-modules on $X_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves], the adjunction unit and higher direct images satisfy\n$$G\\xrightarrow{\\ \\sim\\ }\\nu_{X,*}\\nu_X^*G,\\qquad R^q\\nu_{X,*}(\\nu_X^*G)=0\\quad(q>0).$$\nNo constructibility or finiteness hypothesis is imposed on $G$, and no Noetherian or dimension hypothesis is imposed on $X$. In particular the comparison direct image has bound $M=0$ on sheaves of etale origin: any $F$ isomorphic to $\\nu_X^*G$ has $R^q\\nu_{X,*}F=0$ for $q>0$, independently of $\\dim X$. For a finite field $\\mathbf F_q$ of characteristic $p$, $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, $A=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and a finite-type $k$-scheme $X$, this applies to every coefficient sheaf of [def-sf-fullcd-used-class] by its defining etale-origin witness.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/prop-sf-comparison-bound-zero.md",
+  "place": "node prop-sf-comparison-bound-zero, order 1797",
+  "external": [
+   {
+    "document": "Bhatt",
+    "place": "The two inputs are Bhatt–Scholze, Lemma 5.1.1 and Corollary 5.1.6 of [arXiv:1309.1198v2](https://arxiv.org/html/1309.1198v2), quoted verbatim in Section 16.1 of the audit ledger; both are stated for an arbitrary scheme and an arbitrary sheaf, respectively bounded-below complex, on the small étale site, so a sheaf of $A$-modules on $X_{\\Et}$ in the sense of [def-weil-pbc-etale-sheaves] is covered v"
+   },
+   {
+    "document": "Scholze",
+    "place": "The two inputs are Bhatt–Scholze, Lemma 5.1.1 and Corollary 5.1.6 of [arXiv:1309.1198v2](https://arxiv.org/html/1309.1198v2), quoted verbatim in Section 16.1 of the audit ledger; both are stated for an arbitrary scheme and an arbitrary sheaf, respectively bounded-below complex, on the small étale site, so a sheaf of $A$-modules on $X_{\\Et}$ in the sense of [def-weil-pbc-etale-sheaves] is covered v"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-sp-left-exact-additive",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-sheaves",
+  "def-sf-fullcd-used-class",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [
+  {
+   "text": "Write $L=\\nu_X^{-1}$ and $R=\\nu_{X,*}$ on abelian sheaves, and $L_A,R_A$ for the fixed-$A$ module functors. For the constant sheaf $\\underline A$ of [def-weil-pbc-constant-sheaf], giving an $\\underline A$-module structure on an abelian sheaf is equivalent to giving compatible endomorphisms $\\lambda_a$ for all $a\\in A$ satisfying the module identities. Indeed, [lem-pc-sites-sheafification-underlying-sets] identifies the underlying set sheafification of the constant ring presheaf, and [lem-weil-pbc-site-sheafification-sections-local] applied to the constant presheaf says that a section of $\\underline A$ is locally represented by constants, with equal representatives agreeing after a further cover. Act by those constants on that cover and glue. Two presentations agree after a common refinement, so the result is well-defined. A map commuting with all $\\lambda_a$ is therefore linear over every section of $\\underline A$, by restriction to such a cover and the sheaf uniqueness axiom. This applies on both sites for the finite discrete ring $A$. By [lem-cbc-comparison-pullback-sections], at every etale object $U$ the comparison unit on underlying sets identifies $G(U)$ with $(L_AG)(U)$. The algebraic-structure construction of [def-weil-pbc-site-comparison-morphism] applies the set inverse image to addition, zero, negation and every endomorphism $\\lambda_a$ for $a\\in A$. The finite set of scalar operations is carried along by the finite-limit-preserving inverse image, and applying it to each module identity gives the same identity after pullback. The unit is natural in these operations, so its component at $U$ is $A$-linear. Its bijective inverse is $A$-linear, since for $y=\\eta_U(x)$ one has $\\eta_U^{-1}(ay)=\\eta_U^{-1}(\\eta_U(ax))=ax$. These inverses commute with restrictions by the naturality of $\\eta$. The module convention [def-weil-sheaf-of-modules-category] and the preceding local scalar argument therefore give the asserted unit isomorphism over the constant ring sheaf. The set-sheaf adjunction restricts to the module adjunction: a map and its transpose commute with addition and each $\\lambda_a$ by naturality of the unit and counit, and the module identities are preserved by the finite-product-preserving inverse image. Thus the map just checked is its actual unit for this finite discrete $A$. For an abelian etale sheaf $B$, the same cited sections formula makes $\\eta_B:B\\to RLB$ an objectwise bijection. Naturality with respect to addition, zero and negation makes each component a group homomorphism; its inverse is a group homomorphism and commutes with restrictions. Hence $\\eta_B$ is an isomorphism of abelian sheaves. Naturality in a morphism $b:B\\to B'$ says $(RLb)\\eta_B=\\eta_{B'}b$.",
+   "uses": [
     "lem-cbc-comparison-pullback-sections",
-    "lem-pc-sites-sheafification-underlying-sets",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099T, label lemma-fully-faithful; section formula Tag 0GLZ, label lemma-describe-pullback-from-etale; local constant representatives: sites.tex Tag 00WK, label lemma-sections-sheafification"
+   }
+  },
+  {
+   "text": "For an arbitrary abelian sheaf $B$ on $X_{\\mathrm{et}}$, choose an injective resolution $B\\to I^\\bullet$, using enough injectives on sites in [def-weil-pbc-sites-and-cohomology]. By [lem-weil-pbc-site-pullback-abelian-exact], $LB\\to LI^\\bullet$ is an exact resolution. Each $LI^n$ is $R$-acyclic by [lem-cbc-abelian-comparison-injective-acyclicity]. Clause (2) of [lemma-weil-pbc-leray-acyclicity] computes $R^qR(LB)$ by $\\mathcal H^q(RLI^\\bullet)$. The natural unit isomorphisms from step 1 commute with the differentials of $I^\\bullet$, so $RLI^\\bullet\\cong I^\\bullet$ as complexes. Since $I^\\bullet$ resolves $B$ in degree zero, $R^qR(LB)=0$ for every $q>0$. This is the independent acyclicity argument needed in addition to ordinary full faithfulness.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-pullback-abelian-exact",
+    "lem-cbc-abelian-comparison-injective-acyclicity",
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, label lemma-relative-comparison, second paragraph; acyclic resolutions: derived.tex, Tag 015E, label lemma-leray-acyclicity"
+   }
+  },
+  {
+   "text": "Work in one sufficiently large universe for both small-site representatives and all coefficient values. By [lem-pur-ringed-site-grothendieck-abelian] and [lem-sp-grothendieck-enough-injectives], the categories of module sheaves over the constant ring $A$ on these sites have enough injectives. Direct image $R_A$ is additive and left exact: it restricts module sheaves to etale objects, so it preserves zero, addition and the sectionwise kernels specified in [def-weil-sheaf-of-modules-category]. Let $S_{\\mathrm{proet}}$ and $S_{\\mathrm{et}}$ forget scalars. They are exact and faithful by [lem-weil-pbc-module-sheaves-colimits-forgetful]. If $J$ is an injective pro-etale $A$-module sheaf, then for every pro-etale object $W$ and $q>0$, [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] identifies $H^q(W,S_{\\mathrm{proet}}J)$ with $R^q\\Gamma_{\\mathrm{Mod}}(W,J)=0$: the latter is computed using the injective resolution having just $J$ in degree zero. In particular this holds at every etale object $u_X(U)$. Apply [lem-weil-pbc-site-higher-direct-image-sheafified-presheaf] to the abelian comparison functor $R$: its positive higher direct image of $S_{\\mathrm{proet}}J$ is the sheafification of the zero presheaf $U\\mapsto H^q(u_X(U),S_{\\mathrm{proet}}J)$. Thus $S_{\\mathrm{proet}}J$ is $R$-acyclic. This proves the needed acyclicity without asserting that $S_{\\mathrm{proet}}J$ is injective.",
+   "uses": [
     "lem-pur-ringed-site-grothendieck-abelian",
     "lem-sp-grothendieck-enough-injectives",
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
     "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lemma-weil-pbc-leray-acyclicity"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/prop-sf-comparison-bound-zero.md",
-    "place": "Reconstruction of the two comparison clauses using Stacks Tags 0GLZ, 099T, 099V, 03FD, 072W, 015E and 00WK. Exact master blueprint and Bhatt-Scholze Lemmas 5.1.1-5.1.2 and Corollary 5.1.6 were read in the existing read-only literature checkout /home/ubuntu/work-bp/sheaf/literature; the module transfer is written out in steps 3-4."
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, over-object equality; Tag 072W, label lemma-higher-direct-images"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "loogle",
-      "query": "\"proetaleTopology\", \"rightDerived\"",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For any sheaf of modules on the small etale site of a scheme the unit to comparison pushforward pullback is an isomorphism and its higher comparison direct images vanish",
-      "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pushforwardNatIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, SheafOfModules.pushforwardPushforwardAdj",
-      "date": "2026-10-16",
-      "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
-    },
-    {
-      "tool": "grep",
-      "query": "proetale.*(Derived|[Aa]cyclic|[Cc]omparison)|[Cc]omparison.*proetale",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The pullback from etale sheaves to pro etale sheaves is fully faithful on bounded below derived categories with arbitrary discrete ring coefficients",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, CategoryTheory.instFullSheafFunctorOppositeCompSheafComposeSheafToPresheafOfFaithful, CategoryTheory.fullyFaithfulSheafCompose, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.instFullSheafSheafComposeOfFaithful, lightProfiniteToLightCondSetFullyFaithful, DerivedCategory.instFullSingleFunctor",
-      "date": "2026-10-16",
-      "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Higher direct images along the proetale to etale comparison morphism vanish for pullbacks of arbitrary etale module sheaves",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "comparisonUpperStar|comparisonLowerStar|etale.*proetale|proetale.*etale",
-      "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"ProEt\", \"Sheaf\"",
-      "results": "1 hits: AlgebraicGeometry.Scheme.instIsGrothendieckAbelianSheafProEtTopologyAb",
-      "date": "2026-10-16",
-      "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The pro etale comparison pullback of an arbitrary etale sheaf of finite ring modules has no positive higher comparison direct images",
-      "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
-      "date": "2026-10-15",
-      "verdict": "no match: free-module pullback and generic ringed-site pullback composition do not give the etale-to-proetale unit and derived comparison vanishing"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The adjunction unit from an etale module sheaf to pro etale comparison pushforward pullback is an isomorphism with zero positive derived direct images",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1797,
-  "blueprint_uses": [
-    "def-sf-fullcd-used-class",
-    "def-weil-full-cohomological-dimension",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-sf-proetale-constructible-origin",
-    "thm-sf-fullcd-etale-origin",
-    "thm-sp-grothendieck"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-proetale-site"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-fullcd-etale-origin",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "prop-sf-comparison-bound-zero",
-    "worker": "stage1",
-    "summary": "F1-F4 repair: independently read the exact archived master blueprint, the paper and Stacks source passages, all cited current statements, the upstream master condensed-coefficient target and candidate slopmaster2 declarations; searched the entire DAG and checked back paths. Restored the maintainer-owned source record, removed the obsolete missing-source and constructibility claims from the report, and cited the existing underlying-set-sheafification and local-sections lemmas for the scalar argument. Retained the finite discrete commutative coefficient statement, five-step injective-resolution proof, and zero new nodes.",
-    "blueprint": "Original proof, section-formula/unit argument: step 1. Derived comparison specialized to a degree-zero sheaf: step 2, with the coefficient-category justification supplied in steps 3-4. Final uniform M=0 and coefficient-class paragraph: step 5. The contextual 2d Leray discussion belongs to thm-sf-fullcd-etale-origin and is not used as an input here.",
-    "tool_uses": [
-      {
-        "node": "lemma-weil-pbc-leray-acyclicity",
-        "why": "General computation of derived functors by acyclic resolutions, needed both for the abelian comparison and for forgetting module coefficients; this unit has no general resolution theorem."
-      },
-      {
-        "node": "lem-weil-pbc-site-pullback-abelian-exact",
-        "why": "Exactness of abelian inverse image for an arbitrary site morphism, used to pull back the chosen injective resolution."
-      },
-      {
-        "node": "lem-pur-ringed-site-grothendieck-abelian",
-        "why": "Generic existence of a Grothendieck category of module sheaves on a small ringed site, used to obtain module injective resolutions."
-      },
-      {
-        "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-        "why": "Exactness and faithfulness of forgetting modules to abelian sheaves on any ringed site; no etale-only restriction is sufficient here."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-        "why": "Generic comparison of module and abelian cohomology over any object of a ringed site; used on the pro-etale site, not the etale-only special cases."
-      },
-      {
-        "node": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
-        "why": "General sheafified-presheaf description of abelian higher direct images, used to deduce comparison acyclicity of underlying module injectives."
-      },
-      {
-        "node": "lem-weil-pbc-site-sheafification-sections-local",
-        "why": "Local representatives of sections of the sheafified constant ring, needed to check module linearity over arbitrary sections; no statement of this unit gives the generic sheafification fact."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lemma-weil-pbc-leray-acyclicity",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-pur-ringed-site-grothendieck-abelian",
+  {
+   "text": "For a pro-etale module sheaf $M$, choose an injective module resolution $M\\to J^\\bullet$. Exactness of $S_{\\mathrm{proet}}$ from [lem-weil-pbc-module-sheaves-colimits-forgetful] makes $S_{\\mathrm{proet}}M\\to S_{\\mathrm{proet}}J^\\bullet$ an abelian resolution; step 3 makes every term $R$-acyclic. Thus [lemma-weil-pbc-leray-acyclicity] (2) computes $R^qR(S_{\\mathrm{proet}}M)$ as $\\mathcal H^q(RS_{\\mathrm{proet}}J^\\bullet)$. Restriction to etale objects gives equality $RS_{\\mathrm{proet}}J^\\bullet=S_{\\mathrm{et}}R_AJ^\\bullet$ by the direct-image formula of [def-weil-pbc-site-comparison-morphism]. Exactness of $S_{\\mathrm{et}}$ preserves the kernels and images defining cohomology, so the last cohomology sheaf is $S_{\\mathrm{et}}\\mathcal H^q(R_AJ^\\bullet)=S_{\\mathrm{et}}R^qR_A(M)$, by [def-sp-left-exact-additive]. Now put $M=L_AG$. The scalar construction in step 1 identifies $S_{\\mathrm{proet}}L_AG=L(S_{\\mathrm{et}}G)$. Step 2 says the abelian higher direct images of this sheaf are zero. Hence $S_{\\mathrm{et}}R^qR_A(L_AG)=0$ for $q>0$. A module sheaf with zero underlying abelian sheaf has zero sections on every object and is itself zero. This proves the desired module vanishing for every finite discrete commutative $A$.",
+   "uses": [
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
-    "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
-    "lem-weil-pbc-site-sheafification-sections-local"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-Q16-44d143afa",
-    "group": "Q16",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-44d143afa (reviewer sub-agent of L); spot-checked: Independent full review completed; all five proof steps, cited DAG statements, source tags, coefficient-category transfer, edge cases, duplicate search, and graph dependencies check out. Review written to review.md."
+    "lemma-weil-pbc-leray-acyclicity",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD, label lemma-cohomology-modules-abelian-agree, acyclic-resolution argument combined with proetale.tex Tag 099V"
+   }
   },
-  "lean": {
-    "module": "Sheaf.Paper.ComparisonBoundZero",
-    "declaration": "AlgebraicGeometry.ProEtale.comparison_bound_zero",
-    "file": "lean/Sheaf/Paper/ComparisonBoundZero.lean",
-    "statement": "theorem comparison_bound_zero (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] : (∀ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A), IsIso ((X.proEtaleSiteComparisonModules A).unit.app G) ∧ ∀ q : ℕ, 0 < q → IsZero (((comparisonLowerStar (ModuleCat.{u + 1} A) X).rightDerived q).obj ((comparisonUpperStar (ModuleCat.{u + 1} A) X).obj G))) ∧ (∀ F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A), (comparisonUpperStar (ModuleCat.{u + 1} A) X).essImage F → ∀ q : ℕ, 0 < q → IsZero (((comparisonLowerStar (ModuleCat.{u + 1} A) X).rightDerived q).obj F))",
-    "branch": "newtargets-dag",
-    "by": "NG",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Combines the canonical finite-coefficient adjunction unit with positive injective-resolution rightDerived vanishing, and states the whole essential-image bound. Uses the ModuleCat-valued fixed-coefficient encoding recorded in def-weil-pbc-site-comparison-morphism and def-weil-pbc-etale-sheaves; no new sheaf category or comparison functor."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-2a3bbbafc",
-    "group": "NG",
-    "result": "pass",
-    "note": "Statement, dependencies, source proof, edge cases, docstrings, exact declaration, and per-file compilation verified; no findings."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be a scheme and let $\\nu_X:X_{\\Proet}\\to X_{\\Et}$ be the comparison\nmorphism of [def-weil-pbc-site-comparison-morphism], the coefficient ring\nbeing $A$. Let $G$ be a sheaf of $A$-modules on the small étale site\n$X_{\\Et}$, in the sense of [def-weil-pbc-etale-sheaves]; *no*\nconstructibility hypothesis is imposed on $G$. Then the adjunction map\n\n$$\nG\\longrightarrow\\nu_{X,*}\\nu_X^*G\n$$\n\nis an isomorphism, and consequently\n\n$$\nR^q\\nu_{X,*}\\bigl(\\nu_X^*G\\bigr)=0\\qquad(q>0).\n$$\n\nThus on the sheaves of étale origin – equivalently, by\n[lem-sf-proetale-constructible-origin], on the coefficient sheaves of the\nblueprint's class [def-sf-fullcd-used-class] – the vanishing degree of\nthe comparison direct image is bounded by $M=0$, independently of the\ndimension of $X$ and of any constructibility of $G$.",
-    "proof": [
-      {
-        "text": "The two inputs are Bhatt–Scholze, Lemma 5.1.1 and Corollary 5.1.6 of\n[arXiv:1309.1198v2](https://arxiv.org/html/1309.1198v2), quoted verbatim in\nSection 16.1 of the audit ledger; both are stated for an arbitrary scheme and\nan arbitrary sheaf, respectively bounded-below complex, on the small étale\nsite, so a sheaf of $A$-modules on $X_{\\Et}$ in the sense of\n[def-weil-pbc-etale-sheaves] is covered verbatim. By Lemma 5.1.1, for\n$G\\in\\Sh(X_{\\Et})$ and an affine pro-étale $U=\\lim_iU_i$ one has\n$\\nu_X^*G(U)=\\colim_iG(U_i)$, the presheaf so defined being a sheaf; by\nLemma 5.1.2 the pullback $\\nu_X^*$ is fully faithful, with essential image\nexactly those sheaves $F$ on $X_{\\Proet}$ whose values on $U=\\lim_iU_i$\nare the filtered colimits of their values on the $U_i$. The sheaf\n$\\nu_X^*G$ lies in that essential image, so\n$\\nu_X^*\\nu_{X,*}\\nu_X^*G\\to\\nu_X^*G$ is an isomorphism; applying the fully\nfaithful $\\nu_X^*$ to the two maps $G\\to\\nu_{X,*}\\nu_X^*G$ and\n$\\nu_{X,*}\\nu_X^*G\\to G$ that this isomorphism exhibits shows that the\nadjunction map $G\\to\\nu_{X,*}\\nu_X^*G$ is an isomorphism in\n$\\Sh(X_{\\Et},A)$. Corollary 5.1.6 is the derived form of the same identity:\n$K\\to R\\nu_{X,*}\\nu_X^*K$ is an equivalence for every\n$K\\in D^+(X_{\\Et})$. Taking $K=G$ concentrated in degree zero and passing\nto cohomology sheaves gives\n$R^q\\nu_{X,*}\\nu_X^*G=\\mathcal H^q(R\\nu_{X,*}\\nu_X^*G)=0$ for every $q>0$,\nwhich is the displayed vanishing. The identification of the class of étale\norigin with the coefficient class [def-sf-fullcd-used-class] is\n[lem-sf-proetale-constructible-origin], and the passage from this bound to\nthe bound $2d$ of [thm-sf-fullcd-etale-origin] in the form of\n[def-weil-full-cohomological-dimension] is through the Leray spectral\nsequence of [thm-sp-grothendieck], whose $p$-direction is bounded by\n$2d$ on the étale site.",
-        "uses": [
-          "def-weil-pbc-etale-sheaves",
-          "def-sf-fullcd-used-class",
-          "lem-sf-proetale-constructible-origin",
-          "thm-sf-fullcd-etale-origin",
-          "def-weil-full-cohomological-dimension",
-          "thm-sp-grothendieck"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "If $F\\cong L_AG$, functoriality of each $R^qR_A$ carries this isomorphism to $R^qR_AF\\cong R^qR_A(L_AG)=0$ for $q>0$. Thus $M=0$ works for the whole etale-origin class, with no dependence on dimension. For the coefficient class [def-sf-fullcd-used-class], take a finite field $\\mathbf F_q$ of characteristic $p$, $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, $n\\geq1$, $A=\\mathcal O_E/\\varpi_E^n$, and a finite-type $k$-scheme $\\overline X$. By [def-weil-l-adic-coefficient-extension], $A$ is a finite commutative ring, taken with its discrete topology, so steps 1--4 apply. The defining condition of the class is $\\mathcal F\\cong\\nu_{\\overline X}^*\\mathcal G$; this is precisely such an origin witness. This defining condition is the whole membership condition in the current statement of that node. The argument proves a bound for the comparison functor; a dimension bound for a proper morphism is a separate statement.",
+   "uses": [
+    "def-sf-fullcd-used-class",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/prop-sf-comparison-bound-zero.md",
+    "place": "Final paragraph: uniform comparison bound M=0 on etale-origin sheaves"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-sf-fullcd-used-class",
+  "def-sp-left-exact-additive",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-cbc-abelian-comparison-injective-acyclicity",
+  "lem-cbc-comparison-pullback-sections",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-site-sheafification-sections-local",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/prop-sf-comparison-bound-zero.md",
+  "place": "Reconstruction of the two comparison clauses using Stacks Tags 0GLZ, 099T, 099V, 03FD, 072W, 015E and 00WK. Exact master blueprint and Bhatt-Scholze Lemmas 5.1.1-5.1.2 and Corollary 5.1.6 were read in the existing read-only literature checkout /home/ubuntu/work-bp/sheaf/literature; the module transfer is written out in steps 3-4."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"proetaleTopology\", \"rightDerived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any sheaf of modules on the small etale site of a scheme the unit to comparison pushforward pullback is an isomorphism and its higher comparison direct images vanish",
+   "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pushforwardNatIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardNatIso_hom, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(Derived|[Aa]cyclic|[Cc]omparison)|[Cc]omparison.*proetale",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback from etale sheaves to pro etale sheaves is fully faithful on bounded below derived categories with arbitrary discrete ring coefficients",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, CategoryTheory.instFullSheafFunctorOppositeCompSheafComposeSheafToPresheafOfFaithful, CategoryTheory.fullyFaithfulSheafCompose, DerivedCategory.instFullFunctorHomotopyCategoryIntUpObjWhiskeringLeftQh, CategoryTheory.instFullSheafSheafComposeOfFaithful, lightProfiniteToLightCondSetFullyFaithful, DerivedCategory.instFullSingleFunctor",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images along the proetale to etale comparison morphism vanish for pullbacks of arbitrary etale module sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "comparisonUpperStar|comparisonLowerStar|etale.*proetale|proetale.*etale",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProEt\", \"Sheaf\"",
+   "results": "1 hits: AlgebraicGeometry.Scheme.instIsGrothendieckAbelianSheafProEtTopologyAb",
+   "date": "2026-10-16",
+   "verdict": "no match: generic module pullback, sheaf composition, the etale forgetful embedding, site coverings and existence of a Grothendieck sheaf category do not give this comparison unit together with higher-direct-image vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pro etale comparison pullback of an arbitrary etale sheaf of finite ring modules has no positive higher comparison direct images",
+   "results": "8 hits: SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackComp, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc",
+   "date": "2026-10-15",
+   "verdict": "no match: free-module pullback and generic ringed-site pullback composition do not give the etale-to-proetale unit and derived comparison vanishing"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction unit from an etale module sheaf to pro etale comparison pushforward pullback is an isomorphism with zero positive derived direct images",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1797,
+ "blueprint_uses": [
+  "def-sf-fullcd-used-class",
+  "def-weil-full-cohomological-dimension",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-fullcd-etale-origin",
+  "thm-sp-grothendieck"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "prop-sf-comparison-bound-zero",
+  "worker": "stage1",
+  "summary": "F1-F4 repair: independently read the exact archived master blueprint, the paper and Stacks source passages, all cited current statements, the upstream master condensed-coefficient target and candidate slopmaster2 declarations; searched the entire DAG and checked back paths. Restored the maintainer-owned source record, removed the obsolete missing-source and constructibility claims from the report, and cited the existing underlying-set-sheafification and local-sections lemmas for the scalar argument. Retained the finite discrete commutative coefficient statement, five-step injective-resolution proof, and zero new nodes.",
+  "blueprint": "Original proof, section-formula/unit argument: step 1. Derived comparison specialized to a degree-zero sheaf: step 2, with the coefficient-category justification supplied in steps 3-4. Final uniform M=0 and coefficient-class paragraph: step 5. The contextual 2d Leray discussion belongs to thm-sf-fullcd-etale-origin and is not used as an input here.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "General computation of derived functors by acyclic resolutions, needed both for the abelian comparison and for forgetting module coefficients; this unit has no general resolution theorem."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Exactness of abelian inverse image for an arbitrary site morphism, used to pull back the chosen injective resolution."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic existence of a Grothendieck category of module sheaves on a small ringed site, used to obtain module injective resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Exactness and faithfulness of forgetting modules to abelian sheaves on any ringed site; no etale-only restriction is sufficient here."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic comparison of module and abelian cohomology over any object of a ringed site; used on the pro-etale site, not the etale-only special cases."
+   },
+   {
+    "node": "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+    "why": "General sheafified-presheaf description of abelian higher direct images, used to deduce comparison acyclicity of underlying module injectives."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheafification-sections-local",
+    "why": "Local representatives of sections of the sheafified constant ring, needed to check module linearity over arbitrary sections; no statement of this unit gives the generic sheafification fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q16-44d143afa",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-44d143afa (reviewer sub-agent of L); spot-checked: Independent full review completed; all five proof steps, cited DAG statements, source tags, coefficient-category transfer, edge cases, duplicate search, and graph dependencies check out. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ComparisonBoundZero",
+  "declaration": "AlgebraicGeometry.ProEtale.comparison_bound_zero",
+  "file": "lean/Sheaf/Paper/ComparisonBoundZero.lean",
+  "statement": "theorem comparison_bound_zero (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] : (∀ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A), IsIso ((X.proEtaleSiteComparisonModules A).unit.app G) ∧ ∀ q : ℕ, 0 < q → IsZero (((comparisonLowerStar (ModuleCat.{u + 1} A) X).rightDerived q).obj ((comparisonUpperStar (ModuleCat.{u + 1} A) X).obj G))) ∧ (∀ F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A), (comparisonUpperStar (ModuleCat.{u + 1} A) X).essImage F → ∀ q : ℕ, 0 < q → IsZero (((comparisonLowerStar (ModuleCat.{u + 1} A) X).rightDerived q).obj F))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Combines the canonical finite-coefficient adjunction unit with positive injective-resolution rightDerived vanishing, and states the whole essential-image bound. Uses the ModuleCat-valued fixed-coefficient encoding recorded in def-weil-pbc-site-comparison-morphism and def-weil-pbc-etale-sheaves; no new sheaf category or comparison functor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2a3bbbafc",
+  "group": "NG",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, edge cases, docstrings, exact declaration, and per-file compilation verified; no findings."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be a scheme and let $\\nu_X:X_{\\Proet}\\to X_{\\Et}$ be the comparison\nmorphism of [def-weil-pbc-site-comparison-morphism], the coefficient ring\nbeing $A$. Let $G$ be a sheaf of $A$-modules on the small étale site\n$X_{\\Et}$, in the sense of [def-weil-pbc-etale-sheaves]; *no*\nconstructibility hypothesis is imposed on $G$. Then the adjunction map\n\n$$\nG\\longrightarrow\\nu_{X,*}\\nu_X^*G\n$$\n\nis an isomorphism, and consequently\n\n$$\nR^q\\nu_{X,*}\\bigl(\\nu_X^*G\\bigr)=0\\qquad(q>0).\n$$\n\nThus on the sheaves of étale origin – equivalently, by\n[lem-sf-proetale-constructible-origin], on the coefficient sheaves of the\nblueprint's class [def-sf-fullcd-used-class] – the vanishing degree of\nthe comparison direct image is bounded by $M=0$, independently of the\ndimension of $X$ and of any constructibility of $G$.",
+  "proof": [
+   {
+    "text": "The two inputs are Bhatt–Scholze, Lemma 5.1.1 and Corollary 5.1.6 of\n[arXiv:1309.1198v2](https://arxiv.org/html/1309.1198v2), quoted verbatim in\nSection 16.1 of the audit ledger; both are stated for an arbitrary scheme and\nan arbitrary sheaf, respectively bounded-below complex, on the small étale\nsite, so a sheaf of $A$-modules on $X_{\\Et}$ in the sense of\n[def-weil-pbc-etale-sheaves] is covered verbatim. By Lemma 5.1.1, for\n$G\\in\\Sh(X_{\\Et})$ and an affine pro-étale $U=\\lim_iU_i$ one has\n$\\nu_X^*G(U)=\\colim_iG(U_i)$, the presheaf so defined being a sheaf; by\nLemma 5.1.2 the pullback $\\nu_X^*$ is fully faithful, with essential image\nexactly those sheaves $F$ on $X_{\\Proet}$ whose values on $U=\\lim_iU_i$\nare the filtered colimits of their values on the $U_i$. The sheaf\n$\\nu_X^*G$ lies in that essential image, so\n$\\nu_X^*\\nu_{X,*}\\nu_X^*G\\to\\nu_X^*G$ is an isomorphism; applying the fully\nfaithful $\\nu_X^*$ to the two maps $G\\to\\nu_{X,*}\\nu_X^*G$ and\n$\\nu_{X,*}\\nu_X^*G\\to G$ that this isomorphism exhibits shows that the\nadjunction map $G\\to\\nu_{X,*}\\nu_X^*G$ is an isomorphism in\n$\\Sh(X_{\\Et},A)$. Corollary 5.1.6 is the derived form of the same identity:\n$K\\to R\\nu_{X,*}\\nu_X^*K$ is an equivalence for every\n$K\\in D^+(X_{\\Et})$. Taking $K=G$ concentrated in degree zero and passing\nto cohomology sheaves gives\n$R^q\\nu_{X,*}\\nu_X^*G=\\mathcal H^q(R\\nu_{X,*}\\nu_X^*G)=0$ for every $q>0$,\nwhich is the displayed vanishing. The identification of the class of étale\norigin with the coefficient class [def-sf-fullcd-used-class] is\n[lem-sf-proetale-constructible-origin], and the passage from this bound to\nthe bound $2d$ of [thm-sf-fullcd-etale-origin] in the form of\n[def-weil-full-cohomological-dimension] is through the Leray spectral\nsequence of [thm-sp-grothendieck], whose $p$-direction is bounded by\n$2d$ on the étale site.",
+    "uses": [
+     "def-weil-pbc-etale-sheaves",
+     "def-sf-fullcd-used-class",
+     "lem-sf-proetale-constructible-origin",
+     "thm-sf-fullcd-etale-origin",
+     "def-weil-full-cohomological-dimension",
+     "thm-sp-grothendieck"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

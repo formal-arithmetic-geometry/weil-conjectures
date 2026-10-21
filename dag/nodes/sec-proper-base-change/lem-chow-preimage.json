@@ -1,212 +1,176 @@
 {
-  "id": "lem-chow-preimage",
-  "blueprint": {
-    "is": "lem-chow-preimage",
-    "from": null,
-    "same_as": null
+ "id": "lem-chow-preimage",
+ "blueprint": {
+  "is": "lem-chow-preimage",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The preimages of the members of the cover",
+ "statement": "In the situation of [lem-chow-glue],\n\n$$\n \\pi^{-1}(U_i)=V_i\n$$\n\nfor every $i$; consequently the restriction $\\pi^{-1}(U_i)\\to U_i$ is the\nmorphism $p_i|_{V_i}$, which is proper by\n[lem-chow-graph] (ii) and the stability of properness\nunder base change.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-preimage.md",
+  "place": "node lem-chow-preimage, order 1059",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01W4"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01W6"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "lem-chow-glue",
+  "lem-chow-graph",
+  "def-nagata-affine-proj",
+  "def-nagata-dense-compactification",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The inclusion $V_i\\subseteq\\pi^{-1}(U_i)$ holds because $\\pi|_{V_i}=p_i|_{V_i}$\nmaps $V_i$ into $U_i$ ([lem-chow-glue]).",
+   "uses": [
+    "lem-chow-glue"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "The preimages of the members of the cover",
-  "statement": "In the situation of [lem-chow-glue],\n\n$$\n \\pi^{-1}(U_i)=V_i\n$$\n\nfor every $i$; consequently the restriction $\\pi^{-1}(U_i)\\to U_i$ is the\nmorphism $p_i|_{V_i}$, which is proper by\n[lem-chow-graph] (ii) and the stability of properness\nunder base change.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-preimage.md",
-    "place": "node lem-chow-preimage, order 1059",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01W4"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01W6"
-      }
-    ]
+  {
+   "text": "*Step 1: $\\pi$ is separated.* Each $p_i|_{V_i}:V_i\\to U_i$ is proper by\n[lem-chow-graph] (ii) (its properness is stable under\nthe base change along the open immersion $U_i\\to Z_i$, Stacks Project,\nMorphisms, Lemma 29.42.5, Tag\n[01W4](https://stacks.math.columbia.edu/tag/01W4)), hence separated; since\nseparatedness is local on the source and the $V_i$ cover $X'$, the morphism\n$\\pi$ is separated. Hence its base change\n$\\pi^{-1}(U_i)=X'\\times_XU_i\\to U_i$ along the open immersion $U_i\\to X$ is\nseparated.",
+   "uses": [
+    "lem-chow-graph"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "lem-chow-glue",
-    "lem-chow-graph",
-    "def-nagata-affine-proj",
-    "def-nagata-dense-compactification",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-scheme-image-factor",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "The inclusion $V_i\\subseteq\\pi^{-1}(U_i)$ holds because $\\pi|_{V_i}=p_i|_{V_i}$\nmaps $V_i$ into $U_i$ ([lem-chow-glue]).",
-      "uses": [
-        "lem-chow-glue"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 1: $\\pi$ is separated.* Each $p_i|_{V_i}:V_i\\to U_i$ is proper by\n[lem-chow-graph] (ii) (its properness is stable under\nthe base change along the open immersion $U_i\\to Z_i$, Stacks Project,\nMorphisms, Lemma 29.42.5, Tag\n[01W4](https://stacks.math.columbia.edu/tag/01W4)), hence separated; since\nseparatedness is local on the source and the $V_i$ cover $X'$, the morphism\n$\\pi$ is separated. Hence its base change\n$\\pi^{-1}(U_i)=X'\\times_XU_i\\to U_i$ along the open immersion $U_i\\to X$ is\nseparated.",
-      "uses": [
-        "lem-chow-graph"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 2: $V_i$ is closed in $\\pi^{-1}(U_i)$.* Apply Stacks Project,\nMorphisms, Lemma 29.42.7 (Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)) to the diagram whose\ncomposite $V_i\\to\\pi^{-1}(U_i)\\to U_i$ is the proper morphism $p_i|_{V_i}$ and\nwhose second member $\\pi^{-1}(U_i)\\to U_i$ is separated: the lemma says that\nthe morphism $V_i\\to\\pi^{-1}(U_i)$ is proper, hence closed, so its image\n(which is $V_i$ itself) is closed in $\\pi^{-1}(U_i)$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 3: $V_i$ is dense in $\\pi^{-1}(U_i)$.* By\n[lem-chow-graph] (i), $U$ is scheme-theoretically dense\nin $\\widetilde X$; since $U\\subseteq V_i$ and\n$\\pi^{-1}(U_i)\\subseteq\\widetilde X$ is open, the closure of $V_i$ in\n$\\pi^{-1}(U_i)$ is all of $\\pi^{-1}(U_i)$. Steps 2 and 3 give\n$V_i=\\pi^{-1}(U_i)$.",
-      "uses": [
-        "lem-chow-graph"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-chow-glue",
-    "lem-chow-graph",
-    "lem-chow-agree-on-dense-open",
-    "lem-chow-closed-model",
-    "lem-chow-tuple-immersion",
-    "lemma-nagata-dense-flat-pullback",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lemma-nagata-projective-space-base-change-proper",
-    "lemma-nagata-proper-to-separated-target",
-    "lemma-nagata-scheme-image-ideal-qc"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-preimage.md",
-    "place": "## Proof"
+  {
+   "text": "*Step 2: $V_i$ is closed in $\\pi^{-1}(U_i)$.* Apply Stacks Project,\nMorphisms, Lemma 29.42.7 (Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)) to the diagram whose\ncomposite $V_i\\to\\pi^{-1}(U_i)\\to U_i$ is the proper morphism $p_i|_{V_i}$ and\nwhose second member $\\pi^{-1}(U_i)\\to U_i$ is separated: the lemma says that\nthe morphism $V_i\\to\\pi^{-1}(U_i)$ is proper, hence closed, so its image\n(which is $V_i$ itself) is closed in $\\pi^{-1}(U_i)$.",
+   "uses": [],
+   "elementary": null
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "proof_cites_literature",
-    "lean_multiple"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1059,
-  "blueprint_uses": [
-    "def-nagata-affine-proj",
-    "def-nagata-dense-compactification",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-scheme-image-factor",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "def-weil-pbc-scheme-conventions",
-    "lem-chow-agree-on-dense-open",
-    "lem-chow-closed-model",
-    "lem-chow-glue",
-    "lem-chow-graph",
-    "lem-chow-tuple-immersion",
-    "lemma-nagata-dense-flat-pullback",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lemma-nagata-projective-space-base-change-proper",
-    "lemma-nagata-proper-to-separated-target",
-    "lemma-nagata-scheme-image-ideal-qc"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
-    "declaration": "AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap",
-    "branch": "slopmaster2",
-    "line": 260,
-    "sorry_free": true,
-    "body_lines": 7,
-    "others": [
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
-        "declaration": "AlgebraicGeometry.ChowGraph.preimage_modificationMap",
-        "branch": "slopmaster2",
-        "line": 246,
-        "sorry_free": true,
-        "body_lines": 10
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap",
-    "AlgebraicGeometry.ChowGraph.preimage_modificationMap"
-  ],
-  "uses_not_cited": [
-    "def-nagata-affine-proj",
-    "def-nagata-dense-compactification",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-scheme-image-factor",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "def-weil-pbc-scheme-conventions",
-    "lem-chow-agree-on-dense-open",
-    "lem-chow-closed-model",
-    "lem-chow-tuple-immersion",
-    "lemma-nagata-dense-flat-pullback",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lemma-nagata-projective-space-base-change-proper",
-    "lemma-nagata-proper-to-separated-target",
-    "lemma-nagata-scheme-image-ideal-qc"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_sketch": [
-    {
-      "statement": "In the situation of [lem-chow-glue] one has $\\pi^{-1}(U_i)=V_i$ for every\n$i$. Consequently $\\pi^{-1}(U_i)\\to U_i$ is the proper morphism\n$p_i|_{V_i}$.",
-      "proof": "The inclusion $V_i\\subseteq\\pi^{-1}(U_i)$ holds because $\\pi|_{V_i}=p_i|_{V_i}$\ntakes values in $U_i$. The morphism $p_i|_{V_i}\\colon V_i\\to U_i$ is proper,\nbeing the base change of the proper morphism $p_i$ along the open immersion\n$U_i\\to Z_i$. The open subscheme $\\pi^{-1}(U_i)\\subseteq Z$ is separated over\n$S$, hence $\\pi^{-1}(U_i)\\to U_i$ is separated. Applying 01W6\nto the commutative triangle formed by $V_i\\to\\pi^{-1}(U_i)$ and the two\nmorphisms to $U_i$, we conclude that $V_i\\to\\pi^{-1}(U_i)$ is universally\nclosed; in particular $V_i$ is closed in $\\pi^{-1}(U_i)$. On the other hand\n$U\\subseteq V_i$ and $U$ is dense in the open subscheme\n$\\pi^{-1}(U_i)\\subseteq Z$, so $V_i$ is dense in $\\pi^{-1}(U_i)$. Being closed\nand dense, $V_i=\\pi^{-1}(U_i)$.",
-      "cites": [
-        "lem-chow-glue"
-      ]
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap",
-        "AlgebraicGeometry.ChowGraph.preimage_modificationMap"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
-          "lines": [
-            259,
-            268
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowGraph.preimage_modificationMap",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
-          "lines": [
-            239,
-            257
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-chow",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the situation of [lem-chow-glue] (so the underlying space of $X$ is\nnoetherian, $m\\geq1$ and $f$ is separated) one has $\\pi^{-1}(U_i)=V_i$ for\nevery $i$. Consequently $\\pi^{-1}(U_i)\\to U_i$ is the proper morphism\n$p_i|_{V_i}$; in particular the restriction $\\pi^{-1}(U_i)\\to U_i$ of $\\pi$ is\nproper.",
-    "proof": [
-      {
-        "text": "The inclusion $V_i\\subseteq\\pi^{-1}(U_i)$ holds because $\\pi|_{V_i}=p_i|_{V_i}$\ntakes values in $U_i$. The morphism $p_i|_{V_i}\\colon V_i\\to U_i$ is proper,\nbeing the base change of the proper morphism $p_i$ along the open immersion\n$U_i\\to Z_i$. The open subscheme $\\pi^{-1}(U_i)\\subseteq Z$ is separated over\n$S$, hence $\\pi^{-1}(U_i)\\to U_i$ is separated. Applying 01W6\nto the commutative triangle formed by $V_i\\to\\pi^{-1}(U_i)$ and the two\nmorphisms to $U_i$, we conclude that $V_i\\to\\pi^{-1}(U_i)$ is universally\nclosed; in particular $V_i$ is closed in $\\pi^{-1}(U_i)$. On the other hand\n$U\\subseteq V_i$ and $U$ is dense in the open subscheme\n$\\pi^{-1}(U_i)\\subseteq Z$, so $V_i$ is dense in $\\pi^{-1}(U_i)$. Being closed\nand dense, $V_i=\\pi^{-1}(U_i)$.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "*Step 3: $V_i$ is dense in $\\pi^{-1}(U_i)$.* By\n[lem-chow-graph] (i), $U$ is scheme-theoretically dense\nin $\\widetilde X$; since $U\\subseteq V_i$ and\n$\\pi^{-1}(U_i)\\subseteq\\widetilde X$ is open, the closure of $V_i$ in\n$\\pi^{-1}(U_i)$ is all of $\\pi^{-1}(U_i)$. Steps 2 and 3 give\n$V_i=\\pi^{-1}(U_i)$.",
+   "uses": [
+    "lem-chow-graph"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-chow-glue",
+  "lem-chow-graph",
+  "lem-chow-agree-on-dense-open",
+  "lem-chow-closed-model",
+  "lem-chow-tuple-immersion",
+  "lemma-nagata-dense-flat-pullback",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-proper-to-separated-target",
+  "lemma-nagata-scheme-image-ideal-qc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-preimage.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "proof_cites_literature",
+  "lean_multiple"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1059,
+ "blueprint_uses": [
+  "def-nagata-affine-proj",
+  "def-nagata-dense-compactification",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-chow-agree-on-dense-open",
+  "lem-chow-closed-model",
+  "lem-chow-glue",
+  "lem-chow-graph",
+  "lem-chow-tuple-immersion",
+  "lemma-nagata-dense-flat-pullback",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-proper-to-separated-target",
+  "lemma-nagata-scheme-image-ideal-qc"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
+  "declaration": "AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap",
+  "branch": "slopmaster2",
+  "line": 260,
+  "sorry_free": true,
+  "body_lines": 7,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
+    "declaration": "AlgebraicGeometry.ChowGraph.preimage_modificationMap",
+    "branch": "slopmaster2",
+    "line": 246,
+    "sorry_free": true,
+    "body_lines": 10
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.ChowGraph.isProper_morphismRestrict_modificationMap",
+  "AlgebraicGeometry.ChowGraph.preimage_modificationMap"
+ ],
+ "uses_not_cited": [
+  "def-nagata-affine-proj",
+  "def-nagata-dense-compactification",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-chow-agree-on-dense-open",
+  "lem-chow-closed-model",
+  "lem-chow-tuple-immersion",
+  "lemma-nagata-dense-flat-pullback",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-proper-to-separated-target",
+  "lemma-nagata-scheme-image-ideal-qc"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_sketch": [
+  {
+   "statement": "In the situation of [lem-chow-glue] one has $\\pi^{-1}(U_i)=V_i$ for every\n$i$. Consequently $\\pi^{-1}(U_i)\\to U_i$ is the proper morphism\n$p_i|_{V_i}$.",
+   "proof": "The inclusion $V_i\\subseteq\\pi^{-1}(U_i)$ holds because $\\pi|_{V_i}=p_i|_{V_i}$\ntakes values in $U_i$. The morphism $p_i|_{V_i}\\colon V_i\\to U_i$ is proper,\nbeing the base change of the proper morphism $p_i$ along the open immersion\n$U_i\\to Z_i$. The open subscheme $\\pi^{-1}(U_i)\\subseteq Z$ is separated over\n$S$, hence $\\pi^{-1}(U_i)\\to U_i$ is separated. Applying 01W6\nto the commutative triangle formed by $V_i\\to\\pi^{-1}(U_i)$ and the two\nmorphisms to $U_i$, we conclude that $V_i\\to\\pi^{-1}(U_i)$ is universally\nclosed; in particular $V_i$ is closed in $\\pi^{-1}(U_i)$. On the other hand\n$U\\subseteq V_i$ and $U$ is dense in the open subscheme\n$\\pi^{-1}(U_i)\\subseteq Z$, so $V_i$ is dense in $\\pi^{-1}(U_i)$. Being closed\nand dense, $V_i=\\pi^{-1}(U_i)$.",
+   "cites": [
+    "lem-chow-glue"
+   ]
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-chow",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the situation of [lem-chow-glue] (so the underlying space of $X$ is\nnoetherian, $m\\geq1$ and $f$ is separated) one has $\\pi^{-1}(U_i)=V_i$ for\nevery $i$. Consequently $\\pi^{-1}(U_i)\\to U_i$ is the proper morphism\n$p_i|_{V_i}$; in particular the restriction $\\pi^{-1}(U_i)\\to U_i$ of $\\pi$ is\nproper.",
+  "proof": [
+   {
+    "text": "The inclusion $V_i\\subseteq\\pi^{-1}(U_i)$ holds because $\\pi|_{V_i}=p_i|_{V_i}$\ntakes values in $U_i$. The morphism $p_i|_{V_i}\\colon V_i\\to U_i$ is proper,\nbeing the base change of the proper morphism $p_i$ along the open immersion\n$U_i\\to Z_i$. The open subscheme $\\pi^{-1}(U_i)\\subseteq Z$ is separated over\n$S$, hence $\\pi^{-1}(U_i)\\to U_i$ is separated. Applying 01W6\nto the commutative triangle formed by $V_i\\to\\pi^{-1}(U_i)$ and the two\nmorphisms to $U_i$, we conclude that $V_i\\to\\pi^{-1}(U_i)$ is universally\nclosed; in particular $V_i$ is closed in $\\pi^{-1}(U_i)$. On the other hand\n$U\\subseteq V_i$ and $U$ is dense in the open subscheme\n$\\pi^{-1}(U_i)\\subseteq Z$, so $V_i$ is dense in $\\pi^{-1}(U_i)$. Being closed\nand dense, $V_i=\\pi^{-1}(U_i)$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,99 +1,88 @@
 {
-  "id": "def-weil-karoubi-envelope",
-  "blueprint": {
-    "is": "def-weil-karoubi-envelope",
-    "from": null,
-    "same_as": null
+ "id": "def-weil-karoubi-envelope",
+ "blueprint": {
+  "is": "def-weil-karoubi-envelope",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Karoubi envelope",
+ "statement": "For an additive category $\\mathcal T$, the *Karoubi envelope*\n$\\Kar(\\mathcal T)$ has objects $(K,e)$, where $K\\in\\mathcal T$ and\n$e\\in\\operatorname{End}_{\\mathcal T}(K)$ satisfies $e^2=e$, and morphisms\n$u:(K,e)\\to(L,d)$ the morphisms $u\\in\\Hom_{\\mathcal T}(K,L)$ satisfying\n$u=d\\,u\\,e$. The identity of $(K,e)$ is $e$, and composition is inherited\nfrom $\\mathcal T$. The canonical functor\n\n$$\n \\mathcal T\\longrightarrow\\Kar(\\mathcal T),\\qquad\n K\\longmapsto(K,\\operatorname{id}_K),\\qquad f\\longmapsto f,\n$$\n\nis the *inclusion of $\\mathcal T$ in its Karoubi envelope*.\n\n*Difference:* Stacks states neither the construction of the Karoubi envelope\nnor its inclusion functor, and its splitting criterion is one of three\nequivalent characterizations of Karoubianity rather than a construction\napplied to a given category; the request on that section page to add the\nconstruction of the Karoubi envelope stands as an open comment (Comment\n5787), and the addition of the explicit section--retraction form of an\nidempotent to Lemma 12.4.2 was declined.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-karoubi-envelope.md",
+  "place": "node def-weil-karoubi-envelope, order 1206",
+  "external": [
+   {
+    "document": "literature/balmer-schlichting-idempotent-completion.pdf",
+    "place": "Definition 1.2, p. 2 (added by the lead at review)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-additive-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n '^structure\\|^def \\|^instance\\|comm :\\|id_f\\|comp_f' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Idempotents/Karoubi.lean",
+   "results": "Karoubi.lean:44 `structure Karoubi` (fields X, p, idem : p ≫ p = p); :72 `structure Hom` (f, comm : P.p ≫ f ≫ Q.p = f, i.e. u = d u e in applicative order); :96 `instance : Category (Karoubi C)`; :113 `comp_f` (composition inherited); :116 `id_f : (𝟙 P).f = P.p` (identity of (K,e) is e); :139 `toKaroubi : C ⥤ Karoubi C` (X ↦ ⟨X, 𝟙 X⟩, f ↦ f); :144 `fullyFaithfulToKaroubi`; :204 `instance [Preadditive C] : Preadditive (Karoubi C)`; :207 `(toKaroubi C).Additive`; :213 `instance : IsIdempotentComplete (Karoubi C)`. Idempotents/Biproducts.lean:76 `karoubi_hasFiniteBiproducts` (so Karoubi of an additive category is additive). No declaration named `Karoubi.instAdditive` exists; additivity is these two instances.",
+   "date": "2026-10-09",
+   "verdict": "match"
   },
-  "kind": "definition",
-  "title": "Karoubi envelope",
-  "statement": "For an additive category $\\mathcal T$, the *Karoubi envelope*\n$\\Kar(\\mathcal T)$ has objects $(K,e)$, where $K\\in\\mathcal T$ and\n$e\\in\\operatorname{End}_{\\mathcal T}(K)$ satisfies $e^2=e$, and morphisms\n$u:(K,e)\\to(L,d)$ the morphisms $u\\in\\Hom_{\\mathcal T}(K,L)$ satisfying\n$u=d\\,u\\,e$. The identity of $(K,e)$ is $e$, and composition is inherited\nfrom $\\mathcal T$. The canonical functor\n\n$$\n \\mathcal T\\longrightarrow\\Kar(\\mathcal T),\\qquad\n K\\longmapsto(K,\\operatorname{id}_K),\\qquad f\\longmapsto f,\n$$\n\nis the *inclusion of $\\mathcal T$ in its Karoubi envelope*.\n\n*Difference:* Stacks states neither the construction of the Karoubi envelope\nnor its inclusion functor, and its splitting criterion is one of three\nequivalent characterizations of Karoubianity rather than a construction\napplied to a given category; the request on that section page to add the\nconstruction of the Karoubi envelope stands as an open comment (Comment\n5787), and the addition of the explicit section--retraction form of an\nidempotent to Lemma 12.4.2 was declined.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-karoubi-envelope.md",
-    "place": "node def-weil-karoubi-envelope, order 1206",
-    "external": [
-      {
-        "document": "literature/balmer-schlichting-idempotent-completion.pdf",
-        "place": "Definition 1.2, p. 2 (added by the lead at review)"
-      }
-    ]
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsIdempotentComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Idempotents/Basic.lean",
+   "results": "Basic.lean:54 `class IsIdempotentComplete` (every idempotent p splits as p = e ≫ i with i ≫ e = 𝟙)",
+   "date": "2026-10-09",
+   "verdict": "match (not needed to state this node; used by lem-weil-karoubi-envelope-idempotent-complete)"
   },
-  "stmt_deps": [
-    "def-weil-additive-category"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -n '^structure\\|^def \\|^instance\\|comm :\\|id_f\\|comp_f' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Idempotents/Karoubi.lean",
-      "results": "Karoubi.lean:44 `structure Karoubi` (fields X, p, idem : p ≫ p = p); :72 `structure Hom` (f, comm : P.p ≫ f ≫ Q.p = f, i.e. u = d u e in applicative order); :96 `instance : Category (Karoubi C)`; :113 `comp_f` (composition inherited); :116 `id_f : (𝟙 P).f = P.p` (identity of (K,e) is e); :139 `toKaroubi : C ⥤ Karoubi C` (X ↦ ⟨X, 𝟙 X⟩, f ↦ f); :144 `fullyFaithfulToKaroubi`; :204 `instance [Preadditive C] : Preadditive (Karoubi C)`; :207 `(toKaroubi C).Additive`; :213 `instance : IsIdempotentComplete (Karoubi C)`. Idempotents/Biproducts.lean:76 `karoubi_hasFiniteBiproducts` (so Karoubi of an additive category is additive). No declaration named `Karoubi.instAdditive` exists; additivity is these two instances.",
-      "date": "2026-10-09",
-      "verdict": "match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -n 'class IsIdempotentComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Idempotents/Basic.lean",
-      "results": "Basic.lean:54 `class IsIdempotentComplete` (every idempotent p splits as p = e ≫ i with i ≫ e = 𝟙)",
-      "date": "2026-10-09",
-      "verdict": "match (not needed to state this node; used by lem-weil-karoubi-envelope-idempotent-complete)"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rln 'Karoubi\\|IsIdempotentComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization; grep -rln Karoubi ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'Pretriangulated\\|Triangulated'; grep -rn 'Balmer\\|Schlichting' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-      "results": "none: Mathlib has no shift, pretriangulated or triangulated structure on Karoubi C, and no reference to Balmer-Schlichting. The Balmer-Schlichting theorem (Theorem 1.5, p. 2) is the existing node lem-weil-karoubi-envelope-triangulated, not part of this definition",
-      "date": "2026-10-09",
-      "verdict": "no match for the triangulated structure"
-    },
-    {
-      "tool": "pdftotext",
-      "query": "literature/balmer-schlichting-idempotent-completion.pdf, Definition 1.2, p. 2",
-      "results": "Objects (A,e), e idempotent; morphisms α:(A,e)→(B,f) with αe = fα = α (equivalent to α = fαe); ι: A ↦ (A,1). Same as the node's statement and as Mathlib's Karoubi/toKaroubi",
-      "date": "2026-10-09",
-      "verdict": "source agrees"
-    }
-  ],
-  "mathlib_match": {
-    "declaration": "CategoryTheory.Idempotents.Karoubi",
-    "file": "Mathlib/CategoryTheory/Idempotents/Karoubi.lean",
-    "how": "specializes in one line: Mathlib defines `Karoubi C` with its category structure for any category C (Karoubi.lean:44, :72, :96, `id_f` :116, `comp_f` :113); the inclusion is `CategoryTheory.Idempotents.toKaroubi C` (:139). Applied to an additive C (`[Preadditive C] [HasFiniteBiproducts C]`) it is exactly the node's definition; the morphism condition `P.p ≫ f ≫ Q.p = f` is u = d u e"
+  {
+   "tool": "grep",
+   "query": "grep -rln 'Karoubi\\|IsIdempotentComplete' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Triangulated ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Shift ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Localization; grep -rln Karoubi ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib | xargs grep -ln 'Pretriangulated\\|Triangulated'; grep -rn 'Balmer\\|Schlichting' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "none: Mathlib has no shift, pretriangulated or triangulated structure on Karoubi C, and no reference to Balmer-Schlichting. The Balmer-Schlichting theorem (Theorem 1.5, p. 2) is the existing node lem-weil-karoubi-envelope-triangulated, not part of this definition",
+   "date": "2026-10-09",
+   "verdict": "no match for the triangulated structure"
   },
-  "status": "mathlib",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1206,
-  "blueprint_uses": [],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "def-weil-karoubi-envelope",
-    "worker": "stage1",
-    "summary": "Checked the statement against Balmer-Schlichting, Definition 1.2 (p. 2) of literature/balmer-schlichting-idempotent-completion.pdf: objects (A,e) with e idempotent, morphisms α with αe = fα = α (equivalent to the node's u = d u e), inclusion A ↦ (A,1); the statement is correct and kept. The node defines only the category and the inclusion functor; it does not assert additivity, idempotent completeness, full faithfulness or a triangulated structure, which are the existing statement nodes lem-weil-karoubi-envelope-idempotent-complete, lem-weil-karoubi-envelope-fully-faithful and lem-weil-karoubi-envelope-triangulated (Balmer-Schlichting Theorem 1.5, p. 2). Notions used: additive category (new Mathlib-leaf node def-weil-additive-category) and idempotent endomorphism (e^2 = e, written out in the statement, the field `idem` of Mathlib's Karoubi). Mathlib has the definition: CategoryTheory.Idempotents.Karoubi and toKaroubi, for any category; so the node is a Mathlib leaf. Mathlib has no triangulated structure on Karoubi C (searched). The statement's 'Difference' paragraph is a blueprint remark about Stacks, not mathematics; left as is. The node's source remains the blueprint; the literature place is Balmer-Schlichting Def. 1.2, p. 2."
-  },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass; Mathlib leaf (Idempotents.Karoubi)"
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For an additive category $\\mathcal T$, the *Karoubi envelope*\n$\\Kar(\\mathcal T)$ has objects $(K,e)$, where $K\\in\\mathcal T$ and\n$e\\in\\operatorname{End}_{\\mathcal T}(K)$ satisfies $e^2=e$, and morphisms\n$u:(K,e)\\to(L,d)$ the morphisms $u\\in\\Hom_{\\mathcal T}(K,L)$ satisfying\n$u=d\\,u\\,e$. The identity of $(K,e)$ is $e$, and composition is inherited\nfrom $\\mathcal T$. The canonical functor\n\n$$\n \\mathcal T\\longrightarrow\\Kar(\\mathcal T),\\qquad\n K\\longmapsto(K,\\operatorname{id}_K),\\qquad f\\longmapsto f,\n$$\n\nis the *inclusion of $\\mathcal T$ in its Karoubi envelope*.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "pdftotext",
+   "query": "literature/balmer-schlichting-idempotent-completion.pdf, Definition 1.2, p. 2",
+   "results": "Objects (A,e), e idempotent; morphisms α:(A,e)→(B,f) with αe = fα = α (equivalent to α = fαe); ι: A ↦ (A,1). Same as the node's statement and as Mathlib's Karoubi/toKaroubi",
+   "date": "2026-10-09",
+   "verdict": "source agrees"
   }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Idempotents.Karoubi",
+  "file": "Mathlib/CategoryTheory/Idempotents/Karoubi.lean",
+  "how": "specializes in one line: Mathlib defines `Karoubi C` with its category structure for any category C (Karoubi.lean:44, :72, :96, `id_f` :116, `comp_f` :113); the inclusion is `CategoryTheory.Idempotents.toKaroubi C` (:139). Applied to an additive C (`[Preadditive C] [HasFiniteBiproducts C]`) it is exactly the node's definition; the morphism condition `P.p ≫ f ≫ Q.p = f` is u = d u e"
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1206,
+ "blueprint_uses": [],
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-karoubi-envelope",
+  "worker": "stage1",
+  "summary": "Checked the statement against Balmer-Schlichting, Definition 1.2 (p. 2) of literature/balmer-schlichting-idempotent-completion.pdf: objects (A,e) with e idempotent, morphisms α with αe = fα = α (equivalent to the node's u = d u e), inclusion A ↦ (A,1); the statement is correct and kept. The node defines only the category and the inclusion functor; it does not assert additivity, idempotent completeness, full faithfulness or a triangulated structure, which are the existing statement nodes lem-weil-karoubi-envelope-idempotent-complete, lem-weil-karoubi-envelope-fully-faithful and lem-weil-karoubi-envelope-triangulated (Balmer-Schlichting Theorem 1.5, p. 2). Notions used: additive category (new Mathlib-leaf node def-weil-additive-category) and idempotent endomorphism (e^2 = e, written out in the statement, the field `idem` of Mathlib's Karoubi). Mathlib has the definition: CategoryTheory.Idempotents.Karoubi and toKaroubi, for any category; so the node is a Mathlib leaf. Mathlib has no triangulated structure on Karoubi C (searched). The statement's 'Difference' paragraph is a blueprint remark about Stacks, not mathematics; left as is. The node's source remains the blueprint; the literature place is Balmer-Schlichting Def. 1.2, p. 2."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass; Mathlib leaf (Idempotents.Karoubi)"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For an additive category $\\mathcal T$, the *Karoubi envelope*\n$\\Kar(\\mathcal T)$ has objects $(K,e)$, where $K\\in\\mathcal T$ and\n$e\\in\\operatorname{End}_{\\mathcal T}(K)$ satisfies $e^2=e$, and morphisms\n$u:(K,e)\\to(L,d)$ the morphisms $u\\in\\Hom_{\\mathcal T}(K,L)$ satisfying\n$u=d\\,u\\,e$. The identity of $(K,e)$ is $e$, and composition is inherited\nfrom $\\mathcal T$. The canonical functor\n\n$$\n \\mathcal T\\longrightarrow\\Kar(\\mathcal T),\\qquad\n K\\longmapsto(K,\\operatorname{id}_K),\\qquad f\\longmapsto f,\n$$\n\nis the *inclusion of $\\mathcal T$ in its Karoubi envelope*.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

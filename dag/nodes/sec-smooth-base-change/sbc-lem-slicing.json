@@ -1,350 +1,339 @@
 {
-  "id": "sbc-lem-slicing",
-  "blueprint": {
-    "is": "sbc-lem-slicing",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Slicing a smooth morphism",
-  "statement": "Let $f:X\\to S$ be a\nsmooth morphism of schemes. Then\nthere exists an etale covering $\\{U_i\\to X\\}_{i\\in I}$ such that\n$U_i\\to S$ factors as $U_i\\to V_i\\to S$ where $V_i\\to S$ is etale and\n$U_i\\to V_i$ is a smooth morphism of affine schemes, which has a\nsection, and has geometrically\nconnected fibres.\n(*Stacks Project, More on Morphisms, [Tag `0EY4`](https://stacks.math.columbia.edu/tag/0EY4) = Lemma\n37.38.8.*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-normal-form/sbc-lem-slicing.md",
-    "place": "node sbc-lem-slicing, order 1401",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0EY4"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-sbc-smooth-morphisms",
-    "def-weil-etale-morphism",
-    "def-pc-section",
-    "def-pc-geometrically-irreducible",
-    "def-weil-geometric-fibre"
-  ],
-  "proof": [
-    {
-      "text": "Fix an arbitrary $x\\in X$. Choose affine opens $S_0\\subseteq S$ about $f(x)$ and $X_0\\subseteq f^{-1}(S_0)$ about $x$. Let $f_0:X_0\\to S_0$ be the restriction. The affine-basis statement gives these opens, the smooth-restriction statement gives smoothness of $f_0$, and the affine-schemes and affine-permanence statements give that $f_0$ is affine, quasi-compact and quasi-separated. It suffices to construct the required factorization over $X_0,S_0$ with $x$ in its image; composing with the open inclusions will return it to $X,S$.",
-      "uses": [
-        "lem-weil-pbc-affine-opens-basis",
-        "lem-weil-pbc-smooth-restrict-open-subschemes",
-        "lem-weil-pbc-morphism-affine-schemes-affine",
-        "lem-weil-pbc-affine-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
-      }
-    },
-    {
-      "text": "Apply the fibre-component-neighbourhood statement to $f_0,x$, which is permitted since smoothness includes local finite presentation, hence local finite type: an affine presentation $R[t_1,\\ldots,t_n]/(F_1,\\ldots,F_m)$ is generated as an $R$-algebra by the images of $t_1,\\ldots,t_n$. Obtain $W$ containing $x$ with $W\\cap f_0^{-1}(f_0(x))$ inside its component. The scheme-theoretic fibre is smooth over its residue field by clause (2) of the smooth-base-change statement and has this same subspace topology. Density of finite separable closed points applied to its nonempty open $W\\cap f_0^{-1}(f_0(x))$ gives $x^{\\prime}$ there, with finite separable residue field over $\\kappa(f_0(x))$. Thus $x,x^{\\prime}$ lie in the same fibre component.",
-      "uses": [
-        "lem-sbc-fibre-component-neighbourhood",
-        "def-sbc-smooth-morphisms",
-        "def-weil-finite-type-morphism",
-        "def-pc-scheme-fibre",
-        "lem-pc-proper-base-change",
-        "lem-pc-dense-separable-points",
-        "def-sbc-locally-finite-presentation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
-      }
-    },
-    {
-      "text": "Apply the separable-point etale-slice statement to $f_0,x^{\\prime}$. It gives affine $Z$, $i:Z\\to X_0$, and $z\\in Z$ with $i(z)=x^{\\prime}$ and $r=i$ followed by $f_0$ etale. Put $P=X_0\\times_{S_0}Z$, with projections $p$ and $g$. The fibre-product universal property gives a section $\\sigma=(i,\\mathrm{id}_Z)$ of $g$. Clause (2) of smooth base change makes $g$ smooth, and affine permanence makes it affine, hence quasi-compact and quasi-separated. The projection $p$ is etale, being the base change of $r$.",
-      "uses": [
-        "lem-sbc-smooth-separable-point-etale-slice",
-        "def-pc-fibre-product",
-        "lem-pc-proper-base-change",
-        "lem-weil-pbc-affine-morphism-permanence",
-        "lem-weil-pbc-etale-scheme-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
-      }
-    },
-    {
-      "text": "Apply the component-image statement with $a=\\sigma(z)$: its first projection is $x^{\\prime}$. Since $x$ lies in that same component, there is $a_0\\in P$ over $x$ lying in the fibre component of $\\sigma(z)$ over $z$. Apply the relative-section-component statement to $g,\\sigma$ to obtain an open $P_0\\subseteq P$ containing the section and the entire component in question, with geometrically irreducible fibres over $Z$. In particular $a_0\\in P_0$. Its restriction $h:P_0\\to Z$ is smooth.",
-      "uses": [
-        "lem-sbc-etale-base-change-component-image",
-        "lem-sbc-smooth-section-component-geometrically-irreducible",
-        "lem-weil-pbc-smooth-restrict-open-subschemes"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
-      }
-    },
-    {
-      "text": "Choose an affine open $A\\subseteq P_0$ containing $a_0$. Put $T=h(A)\\subseteq Z$. Smoothness gives flatness and local finite presentation; the flat-lfp open-map statement therefore makes $T$ open. Let $k:A\\to T$ be the restricted map. It is smooth by smooth restriction. Set $t=k(a_0)$. By smooth base change its fibre over $t$ is smooth over $\\kappa(t)$, and by density it contains a finite separable closed point $a^{\\prime}$. Apply the etale-slice statement again, now to $k,a^{\\prime}$, to obtain affine $Z^{\\prime}$, $j:Z^{\\prime}\\to A$, and $z^{\\prime}\\in Z^{\\prime}$ with $j(z^{\\prime})=a^{\\prime}$ and $r^{\\prime}=k\\circ j:Z^{\\prime}\\to T$ etale.",
-      "uses": [
-        "lem-weil-pbc-affine-opens-basis",
-        "lem-pc-smooth-flat",
-        "lem-weil-pbc-flat-lfp-open",
-        "lem-weil-pbc-smooth-restrict-open-subschemes",
-        "lem-pc-proper-base-change",
-        "lem-pc-dense-separable-points",
-        "lem-sbc-smooth-separable-point-etale-slice"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
-      }
-    },
-    {
-      "text": "Set $U=A\\times_T Z^{\\prime}$, $V=Z^{\\prime}$, and $q:U\\to Z^{\\prime}$ the second projection. It is smooth by smooth base change and has section $(j,\\mathrm{id}_{Z^{\\prime}})$ by the fibre-product universal property. Its map to $X_0$ is the first projection followed by $A\\hookrightarrow P_0\\hookrightarrow P$ and $p$. Each open inclusion is etale, the first projection is the base change of $r^{\\prime}$, and $p$ is etale, so this composite is etale. The map $V=Z^{\\prime}\\to T$ is $r^{\\prime}$ and is etale; the inclusion $T\\hookrightarrow Z$ is etale as an open immersion, and $Z\\to S_0$ is $r$ and is etale. Applying etale composition twice proves that $V\\to S_0$ is etale. The two composites to $S_0$ agree by the defining equality of each fibre product.",
-      "uses": [
-        "lem-pc-proper-base-change",
-        "def-pc-fibre-product",
-        "lem-weil-pbc-etale-scheme-base-change",
-        "lem-weil-pbc-etale-composition-cancellation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
-      }
-    },
-    {
-      "text": "The map $A\\to Z$ is between affine schemes, hence affine. Its base change to the affine scheme $Z^{\\prime}$ is affine and has affine source by affine permanence. Since both $A\\to Z$ and $Z^{\\prime}\\to Z$ factor through the open $T$, the universal property identifies $A\\times_ZZ^{\\prime}$ with $A\\times_TZ^{\\prime}=U$: any pair of maps agreeing in $Z$ agrees in $T$ because an open inclusion is a monomorphism. Therefore $U$ is affine, and $V=Z^{\\prime}$ is affine by construction.",
-      "uses": [
-        "lem-weil-pbc-morphism-affine-schemes-affine",
-        "lem-weil-pbc-affine-morphism-permanence",
-        "def-pc-fibre-product",
-        "lem-weil-pbc-open-immersion-monomorphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
-      }
-    },
-    {
-      "text": "For any point of $V$ and any extension field of its residue field, the corresponding fibre of $U\\to V$ is, by base change of the open immersion $A\\hookrightarrow P_0$ and the fibre-product universal property, an open subscheme of the corresponding field base change of a fibre of $P_0\\to Z$. The latter is irreducible by the relative-component statement and the definition of geometric irreducibility. The former is nonempty because the section of $q$ base changes to a rational point. A nonempty open subset of an irreducible space is irreducible: two nonempty relatively open subsets are nonempty opens of the ambient irreducible space and so intersect. It is therefore connected, since a disconnection would give two disjoint nonempty opens. This proves geometrically connected fibres for $q$. The same argument without the field extension shows $A_t$ irreducible, since it is an open of the irreducible fibre $(P_0)_t$ and contains $a_0$.",
-      "uses": [
-        "lem-sbc-smooth-section-component-geometrically-irreducible",
-        "def-pc-geometrically-irreducible",
-        "def-weil-irreducible-components",
-        "def-weil-connected-scheme",
-        "def-pc-base-change",
-        "def-pc-scheme-fibre",
-        "lem-weil-pbc-open-immersion-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
-      }
-    },
-    {
-      "text": "The points $a_0,a^{\\prime}$ are in the same connected component of the fibre of $k$ over $t$, since this fibre is irreducible and nonempty as just shown. Apply the component-image statement to $k$, the etale morphism $r^{\\prime}$, and the section point $(j(z^{\\prime}),z^{\\prime})$ of $U$. It gives a point $u\\in U$ projecting to $a_0$, hence mapping to the original $x$ in $X_0$. This supplies pointwise coverage, without claiming that an open dense union must be the whole fibre.",
-      "uses": [
-        "lem-sbc-etale-base-change-component-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
-      }
-    },
-    {
-      "text": "Compose the maps to $X_0,S_0$ with their inclusions into $X,S$. Open inclusions and composites of etale maps are etale, while $q$, its section, affine source and target, and its geometric fibres have not changed. The factorization equality follows by associativity and the equality $X_0\\to S_0\\to S=X_0\\to X\\to S$. Choose one such diagram for each $x\\in X$ and index by the set of points of $X$. For each $x$, the point $u$ just constructed maps to $x$, so the family is jointly surjective and therefore an etale covering. If $X$ is empty, use the empty family.",
-      "uses": [
-        "lem-weil-pbc-etale-composition-cancellation"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "sbc-lem-slicing",
+ "blueprint": {
+  "is": "sbc-lem-slicing",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Slicing a smooth morphism",
+ "statement": "Let $f:X\\to S$ be a\nsmooth morphism of schemes. Then\nthere exists an etale covering $\\{U_i\\to X\\}_{i\\in I}$ such that\n$U_i\\to S$ factors as $U_i\\to V_i\\to S$ where $V_i\\to S$ is etale and\n$U_i\\to V_i$ is a smooth morphism of affine schemes, which has a\nsection, and has geometrically\nconnected fibres.\n(*Stacks Project, More on Morphisms, [Tag `0EY4`](https://stacks.math.columbia.edu/tag/0EY4) = Lemma\n37.38.8.*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-prop-normal-form/sbc-lem-slicing.md",
+  "place": "node sbc-lem-slicing, order 1401",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0EY4"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-etale-morphism",
+  "def-pc-section",
+  "def-pc-geometrically-irreducible",
+  "def-weil-geometric-fibre"
+ ],
+ "proof": [
+  {
+   "text": "Fix an arbitrary $x\\in X$. Choose affine opens $S_0\\subseteq S$ about $f(x)$ and $X_0\\subseteq f^{-1}(S_0)$ about $x$. Let $f_0:X_0\\to S_0$ be the restriction. The affine-basis statement gives these opens, the smooth-restriction statement gives smoothness of $f_0$, and the affine-schemes and affine-permanence statements give that $f_0$ is affine, quasi-compact and quasi-separated. It suffices to construct the required factorization over $X_0,S_0$ with $x$ in its image; composing with the open inclusions will return it to $X,S$.",
+   "uses": [
     "lem-weil-pbc-affine-opens-basis",
     "lem-weil-pbc-smooth-restrict-open-subschemes",
     "lem-weil-pbc-morphism-affine-schemes-affine",
-    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
+   }
+  },
+  {
+   "text": "Apply the fibre-component-neighbourhood statement to $f_0,x$, which is permitted since smoothness includes local finite presentation, hence local finite type: an affine presentation $R[t_1,\\ldots,t_n]/(F_1,\\ldots,F_m)$ is generated as an $R$-algebra by the images of $t_1,\\ldots,t_n$. Obtain $W$ containing $x$ with $W\\cap f_0^{-1}(f_0(x))$ inside its component. The scheme-theoretic fibre is smooth over its residue field by clause (2) of the smooth-base-change statement and has this same subspace topology. Density of finite separable closed points applied to its nonempty open $W\\cap f_0^{-1}(f_0(x))$ gives $x^{\\prime}$ there, with finite separable residue field over $\\kappa(f_0(x))$. Thus $x,x^{\\prime}$ lie in the same fibre component.",
+   "uses": [
     "lem-sbc-fibre-component-neighbourhood",
     "def-sbc-smooth-morphisms",
     "def-weil-finite-type-morphism",
     "def-pc-scheme-fibre",
     "lem-pc-proper-base-change",
     "lem-pc-dense-separable-points",
-    "def-sbc-locally-finite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
+   }
+  },
+  {
+   "text": "Apply the separable-point etale-slice statement to $f_0,x^{\\prime}$. It gives affine $Z$, $i:Z\\to X_0$, and $z\\in Z$ with $i(z)=x^{\\prime}$ and $r=i$ followed by $f_0$ etale. Put $P=X_0\\times_{S_0}Z$, with projections $p$ and $g$. The fibre-product universal property gives a section $\\sigma=(i,\\mathrm{id}_Z)$ of $g$. Clause (2) of smooth base change makes $g$ smooth, and affine permanence makes it affine, hence quasi-compact and quasi-separated. The projection $p$ is etale, being the base change of $r$.",
+   "uses": [
     "lem-sbc-smooth-separable-point-etale-slice",
     "def-pc-fibre-product",
-    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
+   }
+  },
+  {
+   "text": "Apply the component-image statement with $a=\\sigma(z)$: its first projection is $x^{\\prime}$. Since $x$ lies in that same component, there is $a_0\\in P$ over $x$ lying in the fibre component of $\\sigma(z)$ over $z$. Apply the relative-section-component statement to $g,\\sigma$ to obtain an open $P_0\\subseteq P$ containing the section and the entire component in question, with geometrically irreducible fibres over $Z$. In particular $a_0\\in P_0$. Its restriction $h:P_0\\to Z$ is smooth.",
+   "uses": [
     "lem-sbc-etale-base-change-component-image",
     "lem-sbc-smooth-section-component-geometrically-irreducible",
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
+   }
+  },
+  {
+   "text": "Choose an affine open $A\\subseteq P_0$ containing $a_0$. Put $T=h(A)\\subseteq Z$. Smoothness gives flatness and local finite presentation; the flat-lfp open-map statement therefore makes $T$ open. Let $k:A\\to T$ be the restricted map. It is smooth by smooth restriction. Set $t=k(a_0)$. By smooth base change its fibre over $t$ is smooth over $\\kappa(t)$, and by density it contains a finite separable closed point $a^{\\prime}$. Apply the etale-slice statement again, now to $k,a^{\\prime}$, to obtain affine $Z^{\\prime}$, $j:Z^{\\prime}\\to A$, and $z^{\\prime}\\in Z^{\\prime}$ with $j(z^{\\prime})=a^{\\prime}$ and $r^{\\prime}=k\\circ j:Z^{\\prime}\\to T$ etale.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
     "lem-pc-smooth-flat",
     "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-etale-composition-cancellation",
-    "lem-weil-pbc-open-immersion-monomorphism",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-pc-proper-base-change",
+    "lem-pc-dense-separable-points",
+    "lem-sbc-smooth-separable-point-etale-slice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
+   }
+  },
+  {
+   "text": "Set $U=A\\times_T Z^{\\prime}$, $V=Z^{\\prime}$, and $q:U\\to Z^{\\prime}$ the second projection. It is smooth by smooth base change and has section $(j,\\mathrm{id}_{Z^{\\prime}})$ by the fibre-product universal property. Its map to $X_0$ is the first projection followed by $A\\hookrightarrow P_0\\hookrightarrow P$ and $p$. Each open inclusion is etale, the first projection is the base change of $r^{\\prime}$, and $p$ is etale, so this composite is etale. The map $V=Z^{\\prime}\\to T$ is $r^{\\prime}$ and is etale; the inclusion $T\\hookrightarrow Z$ is etale as an open immersion, and $Z\\to S_0$ is $r$ and is etale. Applying etale composition twice proves that $V\\to S_0$ is etale. The two composites to $S_0$ agree by the defining equality of each fibre product.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
+   }
+  },
+  {
+   "text": "The map $A\\to Z$ is between affine schemes, hence affine. Its base change to the affine scheme $Z^{\\prime}$ is affine and has affine source by affine permanence. Since both $A\\to Z$ and $Z^{\\prime}\\to Z$ factor through the open $T$, the universal property identifies $A\\times_ZZ^{\\prime}$ with $A\\times_TZ^{\\prime}=U$: any pair of maps agreeing in $Z$ agrees in $T$ because an open inclusion is a monomorphism. Therefore $U$ is affine, and $V=Z^{\\prime}$ is affine by construction.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-monomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
+   }
+  },
+  {
+   "text": "For any point of $V$ and any extension field of its residue field, the corresponding fibre of $U\\to V$ is, by base change of the open immersion $A\\hookrightarrow P_0$ and the fibre-product universal property, an open subscheme of the corresponding field base change of a fibre of $P_0\\to Z$. The latter is irreducible by the relative-component statement and the definition of geometric irreducibility. The former is nonempty because the section of $q$ base changes to a rational point. A nonempty open subset of an irreducible space is irreducible: two nonempty relatively open subsets are nonempty opens of the ambient irreducible space and so intersect. It is therefore connected, since a disconnection would give two disjoint nonempty opens. This proves geometrically connected fibres for $q$. The same argument without the field extension shows $A_t$ irreducible, since it is an open of the irreducible fibre $(P_0)_t$ and contains $a_0$.",
+   "uses": [
+    "lem-sbc-smooth-section-component-geometrically-irreducible",
     "def-pc-geometrically-irreducible",
     "def-weil-irreducible-components",
     "def-weil-connected-scheme",
     "def-pc-base-change",
+    "def-pc-scheme-fibre",
     "lem-weil-pbc-open-immersion-base-change"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0EY4, lemma-cover-smooth-by-special; covering and second-slice details from the existing Slicing.lean proof"
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Smooth morphism etale covering by affine schemes with a section and geometrically connected fibres",
-      "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; RingHom.etale_iff_formallyUnramified_and_smooth; AlgebraicGeometry.Scheme.instCategoryEtale; 8 hits, digest 9fd0dfe2f68d0521",
-      "date": "2026-10-14",
-      "verdict": "no exact match: hits do not state this scheme-fibre component assertion"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A smooth morphism admits locally an etale base and a section with affine source and geometrically connected fibres",
-      "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; RingHom.etale_iff_formallyUnramified_and_smooth; 8 hits, digest 7a9146d69f7e69f6",
-      "date": "2026-10-14",
-      "verdict": "no exact match: hits do not state this scheme-fibre component assertion"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Smooth",
-      "results": "AlgebraicGeometry.instIsStableUnderCompositionSchemeSmooth; AlgebraicGeometry.smooth_isStableUnderBaseChange; AlgebraicGeometry.instRespectsSchemeSmoothIsOpenImmersion; AlgebraicGeometry.Smooth; AlgebraicGeometry.instHasRingHomPropertySmoothSmooth; AlgebraicGeometry.instFlatOfSmooth; AlgebraicGeometry.instLocallyOfFinitePresentationOfSmooth; AlgebraicGeometry.instSmoothOfIsOpenImmersion; 12 hits, digest 67457af082905dac",
-      "date": "2026-10-14",
-      "verdict": "no exact match: hits do not state this scheme-fibre component assertion"
-    },
-    {
-      "tool": "grep",
-      "query": "exists_etaleCover_factorization|slicing|cover.*smooth",
-      "results": "Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean; Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean; 2 hits, digest 2d1a415732156139",
-      "date": "2026-10-14",
-      "verdict": "no exact match: hits do not state this scheme-fibre component assertion"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1401,
-  "blueprint_uses": [
-    "def-sbc-normal-dominant-galois",
-    "def-sbc-smooth-morphisms"
-  ],
-  "uses_not_cited": [
-    "def-sbc-normal-dominant-galois",
-    "def-sbc-smooth-morphisms"
-  ],
-  "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, More on Morphisms, Lemma 37.38.8 ([Tag 0EY4](https://stacks.math.columbia.edu/tag/0EY4)): a smooth morphism becomes, after an etale cover of its source, a smooth morphism of affine schemes with a section and geometrically connected fibres over an etale base. No separate proof is given.",
-  "blueprint_proof_steps": [
-    {
-      "text": "This is the recorded classical input named in the statement, Stacks Project, More on Morphisms, Lemma 37.38.8 ([Tag 0EY4](https://stacks.math.columbia.edu/tag/0EY4)): a smooth morphism becomes, after an etale cover of its source, a smooth morphism of affine schemes with a section and geometrically connected fibres over an etale base. No separate proof is given.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "The points $a_0,a^{\\prime}$ are in the same connected component of the fibre of $k$ over $t$, since this fibre is irreducible and nonempty as just shown. Apply the component-image statement to $k$, the etale morphism $r^{\\prime}$, and the section point $(j(z^{\\prime}),z^{\\prime})$ of $U$. It gives a point $u\\in U$ projecting to $a_0$, hence mapping to the original $x$ in $X_0$. This supplies pointwise coverage, without claiming that an open dense union must be the whole fibre.",
+   "uses": [
+    "lem-sbc-etale-base-change-component-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
+   }
   },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-prop-normal-form",
-  "lean": {
-    "existing": true,
-    "module": "WeilConjectures.AlgebraicGeometry.Morphisms.Slicing",
-    "declaration": "AlgebraicGeometry.Smooth.exists_etaleCover_factorization",
-    "statement": "theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] : ∃ (ι : Type u) (U : ι → Scheme.{u}) (p : ∀ i, U i ⟶ X) (V : ι → Scheme.{u}) (q : ∀ i, U i ⟶ V i) (r : ∀ i, V i ⟶ S), (∀ i, Etale (p i)) ∧ (∀ x : X, ∃ (i : ι) (y : U i), (p i).base y = x) ∧ (∀ i, Etale (r i)) ∧ (∀ i, Smooth (q i)) ∧ (∀ i, IsAffine (U i)) ∧ (∀ i, IsAffine (V i)) ∧ (∀ i, GeometricallyConnected (q i)) ∧ (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧ (∀ i, q i ≫ r i = p i ≫ f)",
-    "branch": "sheaf-dag",
-    "by": "B3",
-    "date": "2026-10-12"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "B3",
-    "result": "pass",
-    "landing": "20261012T035647-L-1600045",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "sbc-lem-slicing",
-    "worker": "stage1",
-    "summary": "Expanded the hidden pointwise slicing argument into ten steps. Reused the existing density, etale slice, section component and affine permanence nodes; introduced only the two exact, closed source-library component statements. Explicitly localized before invoking the qcqs component lemma and used the component-image statement twice to prove coverage.",
-    "blueprint": "The sole recorded classical-input paragraph (Stacks 0EY4): separable-point slicing, relative section component, affine shrinking and construction of the etale covering. These steps realize the slicing clause and step 2 of sk-prop-normal-form.",
-    "tool_uses": [
-      {
-        "node": "def-sbc-smooth-morphisms",
-        "why": "Generic Smooth morphisms used in the pointwise Stacks slicing argument; this unit contains no alternative statement giving this fact."
-      },
-      {
-        "node": "lem-pc-proper-base-change",
-        "why": "Generic Proper and smooth morphisms are stable under base change used in the pointwise Stacks slicing argument; this unit contains no alternative statement giving this fact."
-      },
-      {
-        "node": "lem-pc-dense-separable-points",
-        "why": "Generic Density of rationally defined closed points used in the pointwise Stacks slicing argument; this unit contains no alternative statement giving this fact."
-      },
-      {
-        "node": "lem-sbc-smooth-separable-point-etale-slice",
-        "why": "Generic Etale slice through a separable point of a smooth morphism used in the pointwise Stacks slicing argument; this unit contains no alternative statement giving this fact."
-      },
-      {
-        "node": "def-pc-base-change",
-        "why": "Generic Base change along $T$, geometric fibres used in the pointwise Stacks slicing argument; this unit contains no alternative statement giving this fact."
-      }
-    ]
-  },
-  "tool_uses": [
-    "def-sbc-smooth-morphisms",
-    "lem-pc-proper-base-change",
-    "lem-pc-dense-separable-points",
-    "lem-sbc-smooth-separable-point-etale-slice",
-    "def-pc-base-change"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NC-9bbb1a12c",
-    "group": "NC",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-9bbb1a12c (reviewer sub-agent of L); spot-checked: Read all ten proof steps, both new statements, cited statements, sources and unit/chapter route. Slicing and componentwise coverage are sound; target hypotheses and coefficients remain unchanged. Corrected incomplete provenance and attachment records in both new JSON files. Documented two inherited downstream cycles and unverified transitive Lean closure in review.md; no delivered node introduces a cycle.; 2 file(s) fixed by the reviewer"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f:X\\to S$ be a\nsmooth morphism of schemes. Then\nthere exists an etale covering $\\{U_i\\to X\\}_{i\\in I}$ such that\n$U_i\\to S$ factors as $U_i\\to V_i\\to S$ where $V_i\\to S$ is etale and\n$U_i\\to V_i$ is a smooth morphism of affine schemes, which has a\nsection, and has geometrically\nconnected fibres.",
-    "proof": [
-      {
-        "text": "This is classical, Stacks Project, More on Morphisms, Lemma 37.38.8 ([Tag 0EY4](https://stacks.math.columbia.edu/tag/0EY4)): a smooth morphism becomes, after an etale cover of its source, a smooth morphism of affine schemes with a section and geometrically connected fibres over an etale base. No separate proof is given.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Compose the maps to $X_0,S_0$ with their inclusions into $X,S$. Open inclusions and composites of etale maps are etale, while $q$, its section, affine source and target, and its geometric fibres have not changed. The factorization equality follows by associativity and the equality $X_0\\to S_0\\to S=X_0\\to X\\to S$. Choose one such diagram for each $x\\in X$ and index by the set of points of $X$. For each $x$, the point $u$ just constructed maps to $x$, so the family is jointly surjective and therefore an etale covering. If $X$ is empty, use the empty family.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0EY4, lemma-cover-smooth-by-special; pointwise version of the argument in Slicing.lean:225-349"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sbc-fibre-component-neighbourhood",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "lem-pc-proper-base-change",
+  "lem-pc-dense-separable-points",
+  "def-sbc-locally-finite-presentation",
+  "lem-sbc-smooth-separable-point-etale-slice",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-sbc-etale-base-change-component-image",
+  "lem-sbc-smooth-section-component-geometrically-irreducible",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-open-immersion-monomorphism",
+  "def-pc-geometrically-irreducible",
+  "def-weil-irreducible-components",
+  "def-weil-connected-scheme",
+  "def-pc-base-change",
+  "lem-weil-pbc-open-immersion-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0EY4, lemma-cover-smooth-by-special; covering and second-slice details from the existing Slicing.lean proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphism etale covering by affine schemes with a section and geometrically connected fibres",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; RingHom.etale_iff_formallyUnramified_and_smooth; AlgebraicGeometry.Scheme.instCategoryEtale; 8 hits, digest 9fd0dfe2f68d0521",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits do not state this scheme-fibre component assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism admits locally an etale base and a section with affine source and geometrically connected fibres",
+   "results": "AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale.instIsSmooth; AlgebraicGeometry.IsEtale; AlgebraicGeometry.IsEtale.of_comp; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension; RingHom.etale_iff_formallyUnramified_and_smooth; 8 hits, digest 7a9146d69f7e69f6",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits do not state this scheme-fibre component assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth",
+   "results": "AlgebraicGeometry.instIsStableUnderCompositionSchemeSmooth; AlgebraicGeometry.smooth_isStableUnderBaseChange; AlgebraicGeometry.instRespectsSchemeSmoothIsOpenImmersion; AlgebraicGeometry.Smooth; AlgebraicGeometry.instHasRingHomPropertySmoothSmooth; AlgebraicGeometry.instFlatOfSmooth; AlgebraicGeometry.instLocallyOfFinitePresentationOfSmooth; AlgebraicGeometry.instSmoothOfIsOpenImmersion; 12 hits, digest 67457af082905dac",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits do not state this scheme-fibre component assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_etaleCover_factorization|slicing|cover.*smooth",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean; Mathlib/AlgebraicGeometry/Morphisms/SmoothFiber.lean; 2 hits, digest 2d1a415732156139",
+   "date": "2026-10-14",
+   "verdict": "no exact match: hits do not state this scheme-fibre component assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1401,
+ "blueprint_uses": [
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms"
+ ],
+ "uses_not_cited": [
+  "def-sbc-normal-dominant-galois",
+  "def-sbc-smooth-morphisms"
+ ],
+ "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, More on Morphisms, Lemma 37.38.8 ([Tag 0EY4](https://stacks.math.columbia.edu/tag/0EY4)): a smooth morphism becomes, after an etale cover of its source, a smooth morphism of affine schemes with a section and geometrically connected fibres over an etale base. No separate proof is given.",
+ "blueprint_proof_steps": [
+  {
+   "text": "This is the recorded classical input named in the statement, Stacks Project, More on Morphisms, Lemma 37.38.8 ([Tag 0EY4](https://stacks.math.columbia.edu/tag/0EY4)): a smooth morphism becomes, after an etale cover of its source, a smooth morphism of affine schemes with a section and geometrically connected fibres over an etale base. No separate proof is given.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-prop-normal-form",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.Slicing",
+  "declaration": "AlgebraicGeometry.Smooth.exists_etaleCover_factorization",
+  "statement": "theorem Smooth.exists_etaleCover_factorization {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] : ∃ (ι : Type u) (U : ι → Scheme.{u}) (p : ∀ i, U i ⟶ X) (V : ι → Scheme.{u}) (q : ∀ i, U i ⟶ V i) (r : ∀ i, V i ⟶ S), (∀ i, Etale (p i)) ∧ (∀ x : X, ∃ (i : ι) (y : U i), (p i).base y = x) ∧ (∀ i, Etale (r i)) ∧ (∀ i, Smooth (q i)) ∧ (∀ i, IsAffine (U i)) ∧ (∀ i, IsAffine (V i)) ∧ (∀ i, GeometricallyConnected (q i)) ∧ (∀ i, ∃ s : V i ⟶ U i, s ≫ q i = 𝟙 (V i)) ∧ (∀ i, q i ≫ r i = p i ≫ f)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-12"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261012T035647-L-1600045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-lem-slicing",
+  "worker": "stage1",
+  "summary": "Expanded the hidden pointwise slicing argument into ten steps. Reused the existing density, etale slice, section component and affine permanence nodes; introduced only the two exact, closed source-library component statements. Explicitly localized before invoking the qcqs component lemma and used the component-image statement twice to prove coverage.",
+  "blueprint": "The sole recorded classical-input paragraph (Stacks 0EY4): separable-point slicing, relative section component, affine shrinking and construction of the etale covering. These steps realize the slicing clause and step 2 of sk-prop-normal-form.",
+  "tool_uses": [
+   {
+    "node": "def-sbc-smooth-morphisms",
+    "why": "Generic Smooth morphisms used in the pointwise Stacks slicing argument; this unit contains no alternative statement giving this fact."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic Proper and smooth morphisms are stable under base change used in the pointwise Stacks slicing argument; this unit contains no alternative statement giving this fact."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "Generic Density of rationally defined closed points used in the pointwise Stacks slicing argument; this unit contains no alternative statement giving this fact."
+   },
+   {
+    "node": "lem-sbc-smooth-separable-point-etale-slice",
+    "why": "Generic Etale slice through a separable point of a smooth morphism used in the pointwise Stacks slicing argument; this unit contains no alternative statement giving this fact."
+   },
+   {
+    "node": "def-pc-base-change",
+    "why": "Generic Base change along $T$, geometric fibres used in the pointwise Stacks slicing argument; this unit contains no alternative statement giving this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sbc-smooth-morphisms",
+  "lem-pc-proper-base-change",
+  "lem-pc-dense-separable-points",
+  "lem-sbc-smooth-separable-point-etale-slice",
+  "def-pc-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NC-9bbb1a12c",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-9bbb1a12c (reviewer sub-agent of L); spot-checked: Read all ten proof steps, both new statements, cited statements, sources and unit/chapter route. Slicing and componentwise coverage are sound; target hypotheses and coefficients remain unchanged. Corrected incomplete provenance and attachment records in both new JSON files. Documented two inherited downstream cycles and unverified transitive Lean closure in review.md; no delivered node introduces a cycle.; 2 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f:X\\to S$ be a\nsmooth morphism of schemes. Then\nthere exists an etale covering $\\{U_i\\to X\\}_{i\\in I}$ such that\n$U_i\\to S$ factors as $U_i\\to V_i\\to S$ where $V_i\\to S$ is etale and\n$U_i\\to V_i$ is a smooth morphism of affine schemes, which has a\nsection, and has geometrically\nconnected fibres.",
+  "proof": [
+   {
+    "text": "This is classical, Stacks Project, More on Morphisms, Lemma 37.38.8 ([Tag 0EY4](https://stacks.math.columbia.edu/tag/0EY4)): a smooth morphism becomes, after an etale cover of its source, a smooth morphism of affine schemes with a section and geometrically connected fibres over an etale base. No separate proof is given.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

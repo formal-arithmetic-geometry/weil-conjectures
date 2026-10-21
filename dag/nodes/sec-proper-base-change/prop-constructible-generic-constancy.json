@@ -1,201 +1,154 @@
 {
-  "id": "prop-constructible-generic-constancy",
-  "blueprint": {
-    "is": "prop-constructible-generic-constancy",
-    "from": null,
-    "same_as": null
+ "id": "prop-constructible-generic-constancy",
+ "blueprint": {
+  "is": "prop-constructible-generic-constancy",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Generic constancy",
+ "statement": "Let $X$ be a scheme and let $\\mathcal F\\in\\shv{\\et X}$ be constructible.\nThen there is a dense open $U\\subseteq X$ such that $\\mathcal F|_U$ is\nfinite locally constant. (No Noetherian hypothesis on $X$ is needed.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-constructible-generic-constancy.md",
+  "place": "node prop-constructible-generic-constancy, order 1170"
+ },
+ "stmt_deps": [
+  "def-constructible-constant",
+  "def-constructible-constructible",
+  "def-constructible-finite",
+  "def-constructible-finite-locally-constant",
+  "def-constructible-locally-constant",
+  "def-constructible-stratification",
+  "def-kun-separably-closed"
+ ],
+ "proof": [
+  {
+   "text": "Let $(\\iota_k\\colon Z_k\\to X)_{k<n}$ be a stratification witnessing\nconstructibility, with strata $X_k=\\iota_k(Z_k)$, and let\n$U=\\bigcup_kU_k$ with $U_k$ the interior of $X_k$ in $X$.",
+   "uses": [],
+   "elementary": null
   },
-  "kind": "statement",
-  "title": "Generic constancy",
-  "statement": "Let $X$ be a scheme and let $\\mathcal F\\in\\shv{\\et X}$ be constructible.\nThen there is a dense open $U\\subseteq X$ such that $\\mathcal F|_U$ is\nfinite locally constant. (No Noetherian hypothesis on $X$ is needed.)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-constructible-generic-constancy.md",
-    "place": "node prop-constructible-generic-constancy, order 1170"
+  {
+   "text": "*$U$ is dense.* A locally closed subset $L$ of a topological space\nwith empty interior is nowhere dense: writing $L=V\\cap\\overline L$ with $V$\nopen, the open set $\\operatorname{int}\\overline L$ meets $V$ inside\n$\\operatorname{int}L=\\emptyset$, and an open subset of $\\overline V$\ndisjoint from $V$ is empty. A finite union of nowhere dense sets is\nnowhere dense (if $A$ is closed with empty interior and $B$ has empty\ninterior, then $\\operatorname{int}(A\\cup B)\\setminus A$ is an open subset\nof $B$, hence empty, so $\\operatorname{int}(A\\cup B)\\subseteq \\operatorname{int}A=\\emptyset$). Now $X_k\\setminus U_k$ is locally closed\nwith empty interior, so $N=\\bigcup_k(X_k\\setminus U_k)$ is nowhere dense,\nand $X\\setminus N\\subseteq U$ since the $X_k$ cover $X$; the complement of\na set with empty interior is dense, hence so is $U$.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [
-    "def-constructible-constant",
-    "def-constructible-constructible",
-    "def-constructible-finite",
-    "def-constructible-finite-locally-constant",
-    "def-constructible-locally-constant",
-    "def-constructible-stratification",
-    "def-kun-separably-closed"
-  ],
-  "proof": [
-    {
-      "text": "Let $(\\iota_k\\colon Z_k\\to X)_{k<n}$ be a stratification witnessing\nconstructibility, with strata $X_k=\\iota_k(Z_k)$, and let\n$U=\\bigcup_kU_k$ with $U_k$ the interior of $X_k$ in $X$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*$U$ is dense.* A locally closed subset $L$ of a topological space\nwith empty interior is nowhere dense: writing $L=V\\cap\\overline L$ with $V$\nopen, the open set $\\operatorname{int}\\overline L$ meets $V$ inside\n$\\operatorname{int}L=\\emptyset$, and an open subset of $\\overline V$\ndisjoint from $V$ is empty. A finite union of nowhere dense sets is\nnowhere dense (if $A$ is closed with empty interior and $B$ has empty\ninterior, then $\\operatorname{int}(A\\cup B)\\setminus A$ is an open subset\nof $B$, hence empty, so $\\operatorname{int}(A\\cup B)\\subseteq \\operatorname{int}A=\\emptyset$). Now $X_k\\setminus U_k$ is locally closed\nwith empty interior, so $N=\\bigcup_k(X_k\\setminus U_k)$ is nowhere dense,\nand $X\\setminus N\\subseteq U$ since the $X_k$ cover $X$; the complement of\na set with empty interior is dense, hence so is $U$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*$\\mathcal F|_U$ is finite locally constant.* The open subsets\n$U_k$ cover $U$, and $\\mathcal F|_{U_k}$ is the pullback of $\\mathcal F$\nalong the open immersion $U_k\\to X$, whose image $U_k$ is contained in\n$X_k=\\iota_k(Z_k)$; since $\\iota_k^*\\mathcal F$ is finite locally\nconstant, so is $\\mathcal F|_{U_k}$ by\n[lemma-constructible-immersion-independence] (in the form: for an\nimmersion $b$ and any morphism $a$ with image in the image of $b$,\n$b^*\\mathcal F$ finite locally constant implies $a^*\\mathcal F$ finite\nlocally constant). Finally, a sheaf which is finite locally constant on\neach member of an open cover is finite locally constant: the trivialising\nétale covers of the restrictions compose to a trivialising étale\ncover, and a geometric point of $U$ lifts to a member of the open cover\ncontaining its image, where the stalk is unchanged.",
-      "uses": [
-        "lemma-constructible-immersion-independence"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lemma-constructible-immersion-independence",
-    "lemma-constructible-iso-invariance",
-    "lemma-constructible-pullback-locally-constant",
-    "lemma-openclosed-stalk-upperstar",
-    "prop-constructible-pullback"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-constructible-generic-constancy.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "lean_multiple",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1170,
-  "blueprint_uses": [
-    "def-constructible-constant",
-    "def-constructible-constructible",
-    "def-constructible-finite",
-    "def-constructible-finite-locally-constant",
-    "def-constructible-locally-constant",
-    "def-constructible-stratification",
-    "def-kun-separably-closed",
-    "lemma-constructible-immersion-independence",
-    "lemma-constructible-iso-invariance",
-    "lemma-constructible-pullback-locally-constant",
-    "lemma-openclosed-stalk-upperstar",
-    "prop-constructible-pullback"
-  ],
-  "lean": {
-    "module": "WeilConjectures.ConstructibleSheaf.GenericConstancy",
-    "declaration": "AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_dense_open",
-    "branch": "slopmaster2",
-    "line": 144,
-    "sorry_free": true,
-    "body_lines": 17,
-    "others": [
-      {
-        "module": "WeilConjectures.ConstructibleSheaf.GenericConstancy",
-        "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_openCover",
-        "branch": "slopmaster2",
-        "line": 96,
-        "sorry_free": true,
-        "body_lines": 6
-      },
-      {
-        "module": "WeilConjectures.Topology.StratificationDense",
-        "declaration": "Topology.Stratification.dense_iUnion_interior_stratum",
-        "branch": "slopmaster2",
-        "line": 90,
-        "sorry_free": true,
-        "body_lines": 9
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_dense_open",
-    "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_openCover",
-    "Topology.Stratification.dense_iUnion_interior_stratum"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "uses_not_cited": [
-    "def-constructible-constant",
-    "def-constructible-constructible",
-    "def-constructible-finite",
-    "def-constructible-finite-locally-constant",
-    "def-constructible-locally-constant",
-    "def-constructible-stratification",
-    "def-kun-separably-closed",
-    "lemma-constructible-iso-invariance",
-    "lemma-constructible-pullback-locally-constant",
-    "lemma-openclosed-stalk-upperstar",
-    "prop-constructible-pullback"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_dense_open",
-        "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_openCover",
-        "Topology.Stratification.dense_iUnion_interior_stratum"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_dense_open",
-          "module": "WeilConjectures.ConstructibleSheaf.GenericConstancy",
-          "lines": [
-            138,
-            161
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_openCover",
-          "module": "WeilConjectures.ConstructibleSheaf.GenericConstancy",
-          "lines": [
-            91,
-            102
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "Topology.Stratification.dense_iUnion_interior_stratum",
-          "module": "WeilConjectures.Topology.StratificationDense",
-          "lines": [
-            88,
-            99
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be a scheme and let $\\mathcal F\\in\\shv{\\et X}$ be constructible.\nThen there is a dense open $U\\subseteq X$ such that $\\mathcal F|_U$ is\nfinite locally constant. (No Noetherian hypothesis on $X$ is needed.)\nMoreover, for every finite stratification of a topological space the\nunion of the interiors of the strata is dense, and a sheaf\n$\\mathcal G\\in\\shv{\\et X}$ whose pullbacks to the members of an open cover\nof $X$ are finite locally constant is finite locally constant.",
-    "proof": [
-      {
-        "text": "Let $(\\iota_k\\colon Z_k\\to X)_{k<n}$ be a stratification witnessing\nconstructibility, with strata $X_k=\\iota_k(Z_k)$, and let\n$U=\\bigcup_kU_k$ with $U_k$ the interior of $X_k$ in $X$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*$U$ is dense.* A locally closed subset $L$ of a topological space\nwith empty interior is nowhere dense: writing $L=V\\cap\\overline L$ with $V$\nopen, the open set $\\operatorname{int}\\overline L$ meets $V$ inside\n$\\operatorname{int}L=\\emptyset$, and an open subset of $\\overline V$\ndisjoint from $V$ is empty. A finite union of nowhere dense sets is\nnowhere dense (if $A$ is closed with empty interior and $B$ has empty\ninterior, then $\\operatorname{int}(A\\cup B)\\setminus A$ is an open subset\nof $B$, hence empty, so $\\operatorname{int}(A\\cup B)\\subseteq \\operatorname{int}A=\\emptyset$). Now $X_k\\setminus U_k$ is locally closed\nwith empty interior, so $N=\\bigcup_k(X_k\\setminus U_k)$ is nowhere dense,\nand $X\\setminus N\\subseteq U$ since the $X_k$ cover $X$; the complement of\na set with empty interior is dense, hence so is $U$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*$\\mathcal F|_U$ is finite locally constant.* The open subsets\n$U_k$ cover $U$, and $\\mathcal F|_{U_k}$ is the pullback of $\\mathcal F$\nalong the open immersion $U_k\\to X$, whose image $U_k$ is contained in\n$X_k=\\iota_k(Z_k)$; since $\\iota_k^*\\mathcal F$ is finite locally\nconstant, so is $\\mathcal F|_{U_k}$ by\n[lemma-constructible-immersion-independence] (in the form: for an\nimmersion $b$ and any morphism $a$ with image in the image of $b$,\n$b^*\\mathcal F$ finite locally constant implies $a^*\\mathcal F$ finite\nlocally constant). Finally, a sheaf which is finite locally constant on\neach member of an open cover is finite locally constant: the trivialising\nétale covers of the restrictions compose to a trivialising étale\ncover, and a geometric point of $U$ lifts to a member of the open cover\ncontaining its image, where the stalk is unchanged.",
-        "uses": [
-          "lemma-constructible-immersion-independence"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "*$\\mathcal F|_U$ is finite locally constant.* The open subsets\n$U_k$ cover $U$, and $\\mathcal F|_{U_k}$ is the pullback of $\\mathcal F$\nalong the open immersion $U_k\\to X$, whose image $U_k$ is contained in\n$X_k=\\iota_k(Z_k)$; since $\\iota_k^*\\mathcal F$ is finite locally\nconstant, so is $\\mathcal F|_{U_k}$ by\n[lemma-constructible-immersion-independence] (in the form: for an\nimmersion $b$ and any morphism $a$ with image in the image of $b$,\n$b^*\\mathcal F$ finite locally constant implies $a^*\\mathcal F$ finite\nlocally constant). Finally, a sheaf which is finite locally constant on\neach member of an open cover is finite locally constant: the trivialising\nétale covers of the restrictions compose to a trivialising étale\ncover, and a geometric point of $U$ lifts to a member of the open cover\ncontaining its image, where the stalk is unchanged.",
+   "uses": [
+    "lemma-constructible-immersion-independence"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lemma-constructible-immersion-independence",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-openclosed-stalk-upperstar",
+  "prop-constructible-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/prop-constructible-generic-constancy.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1170,
+ "blueprint_uses": [
+  "def-constructible-constant",
+  "def-constructible-constructible",
+  "def-constructible-finite",
+  "def-constructible-finite-locally-constant",
+  "def-constructible-locally-constant",
+  "def-constructible-stratification",
+  "def-kun-separably-closed",
+  "lemma-constructible-immersion-independence",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-openclosed-stalk-upperstar",
+  "prop-constructible-pullback"
+ ],
+ "lean": {
+  "module": "WeilConjectures.ConstructibleSheaf.GenericConstancy",
+  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_dense_open",
+  "branch": "slopmaster2",
+  "line": 144,
+  "sorry_free": true,
+  "body_lines": 17,
+  "others": [
+   {
+    "module": "WeilConjectures.ConstructibleSheaf.GenericConstancy",
+    "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_openCover",
+    "branch": "slopmaster2",
+    "line": 96,
+    "sorry_free": true,
+    "body_lines": 6
+   },
+   {
+    "module": "WeilConjectures.Topology.StratificationDense",
+    "declaration": "Topology.Stratification.dense_iUnion_interior_stratum",
+    "branch": "slopmaster2",
+    "line": 90,
+    "sorry_free": true,
+    "body_lines": 9
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_dense_open",
+  "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_openCover",
+  "Topology.Stratification.dense_iUnion_interior_stratum"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-constructible-constant",
+  "def-constructible-constructible",
+  "def-constructible-finite",
+  "def-constructible-finite-locally-constant",
+  "def-constructible-locally-constant",
+  "def-constructible-stratification",
+  "def-kun-separably-closed",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-openclosed-stalk-upperstar",
+  "prop-constructible-pullback"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be a scheme and let $\\mathcal F\\in\\shv{\\et X}$ be constructible.\nThen there is a dense open $U\\subseteq X$ such that $\\mathcal F|_U$ is\nfinite locally constant. (No Noetherian hypothesis on $X$ is needed.)\nMoreover, for every finite stratification of a topological space the\nunion of the interiors of the strata is dense, and a sheaf\n$\\mathcal G\\in\\shv{\\et X}$ whose pullbacks to the members of an open cover\nof $X$ are finite locally constant is finite locally constant.",
+  "proof": [
+   {
+    "text": "Let $(\\iota_k\\colon Z_k\\to X)_{k<n}$ be a stratification witnessing\nconstructibility, with strata $X_k=\\iota_k(Z_k)$, and let\n$U=\\bigcup_kU_k$ with $U_k$ the interior of $X_k$ in $X$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*$U$ is dense.* A locally closed subset $L$ of a topological space\nwith empty interior is nowhere dense: writing $L=V\\cap\\overline L$ with $V$\nopen, the open set $\\operatorname{int}\\overline L$ meets $V$ inside\n$\\operatorname{int}L=\\emptyset$, and an open subset of $\\overline V$\ndisjoint from $V$ is empty. A finite union of nowhere dense sets is\nnowhere dense (if $A$ is closed with empty interior and $B$ has empty\ninterior, then $\\operatorname{int}(A\\cup B)\\setminus A$ is an open subset\nof $B$, hence empty, so $\\operatorname{int}(A\\cup B)\\subseteq \\operatorname{int}A=\\emptyset$). Now $X_k\\setminus U_k$ is locally closed\nwith empty interior, so $N=\\bigcup_k(X_k\\setminus U_k)$ is nowhere dense,\nand $X\\setminus N\\subseteq U$ since the $X_k$ cover $X$; the complement of\na set with empty interior is dense, hence so is $U$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*$\\mathcal F|_U$ is finite locally constant.* The open subsets\n$U_k$ cover $U$, and $\\mathcal F|_{U_k}$ is the pullback of $\\mathcal F$\nalong the open immersion $U_k\\to X$, whose image $U_k$ is contained in\n$X_k=\\iota_k(Z_k)$; since $\\iota_k^*\\mathcal F$ is finite locally\nconstant, so is $\\mathcal F|_{U_k}$ by\n[lemma-constructible-immersion-independence] (in the form: for an\nimmersion $b$ and any morphism $a$ with image in the image of $b$,\n$b^*\\mathcal F$ finite locally constant implies $a^*\\mathcal F$ finite\nlocally constant). Finally, a sheaf which is finite locally constant on\neach member of an open cover is finite locally constant: the trivialising\nétale covers of the restrictions compose to a trivialising étale\ncover, and a geometric point of $U$ lifts to a member of the open cover\ncontaining its image, where the stalk is unchanged.",
+    "uses": [
+     "lemma-constructible-immersion-independence"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

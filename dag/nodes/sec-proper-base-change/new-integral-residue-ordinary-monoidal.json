@@ -1,159 +1,148 @@
 {
-  "id": "new-integral-residue-ordinary-monoidal",
-  "kind": "definition",
-  "title": "Ordinary condensed-coefficient module pullback is strong monoidal",
-  "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface]. For any condensed commutative coefficient ring Λ and any scheme morphism f, construct a strong monoidal structure on the actual internal-module pullback (f)^*⟦Λ⟧. More generally, a strong braided monoidal functor G preserving the balanced coequalizers, and an isomorphism of commutative ring objects ρ:S→G(R), give a strong monoidal structure on Mod.mapModComap ρ. The module tensorator and unit are explicit maps with all naturality, unit and associativity laws proved.",
-  "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
-  },
-  "stmt_deps": [
+ "id": "new-integral-residue-ordinary-monoidal",
+ "kind": "definition",
+ "title": "Ordinary condensed-coefficient module pullback is strong monoidal",
+ "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface]. For any condensed commutative coefficient ring Λ and any scheme morphism f, construct a strong monoidal structure on the actual internal-module pullback (f)^*⟦Λ⟧. More generally, a strong braided monoidal functor G preserving the balanced coequalizers, and an isomorphism of commutative ring objects ρ:S→G(R), give a strong monoidal structure on Mod.mapModComap ρ. The module tensorator and unit are explicit maps with all naturality, unit and associativity laws proved.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "proof": [
+  {
+   "text": "Expose the balanced coequalizer as a cofork of module objects. Forgetting the module action creates this colimit, which identifies the coequalizer tensor functor with the existing monoidal tensor. Prove the presentation formulas for the unitors.",
+   "uses": [
     "def-weil-pbc-residue-exchange-comparison-interface"
-  ],
-  "proof": [
-    {
-      "text": "Expose the balanced coequalizer as a cofork of module objects. Forgetting the module action creates this colimit, which identifies the coequalizer tensor functor with the existing monoidal tensor. Prove the presentation formulas for the unitors.",
-      "uses": [
-        "def-weil-pbc-residue-exchange-comparison-interface"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Use tensorLeftCompMapModComapIso to construct the tensor comparison, and the inverse ring isomorphism for the unit comparison. Their composites with presentation epimorphisms are the ambient monoidal tensor and unit maps. Prove naturality, both unit laws, and associativity by cancellation of those epimorphisms and the ambient strong monoidal coherence laws.",
-      "uses": [],
-      "elementary": false
-    },
-    {
-      "text": "Assemble CoreMonoidal. The ordinary coefficient pullback is mapMod followed by scalar extension along the coefficient-pullback isomorphism; extendScalarsIsoComapInv identifies it with mapModComap. Transport the proved monoidal structure along that explicit isomorphism.",
-      "uses": [],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-residue-exchange-comparison-interface"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-    "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors."
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "tensorLeftCompMapModComapIso|mapModComap.*Monoidal|leftDerived.*Monoidal",
-      "date": "2026-10-16",
-      "results": "0 hits: ",
-      "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.CoreMonoidal",
-      "date": "2026-10-16",
-      "results": "12 hits: CategoryTheory.Functor.CoreMonoidal, CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.εIso, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal",
-      "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A strong braided monoidal functor preserving coequalizers induces a strong monoidal functor on modules over isomorphic commutative ring objects",
-      "date": "2026-10-16",
-      "results": "8 hits: ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat, CategoryTheory.Functor.mapCommMon, CoalgCat.MonoidalCategory.inducingFunctorData, ModuleCat.monoidalCategory, AlgCat.instBraidedModuleCatForget₂, ModuleCat.MonoidalCategory.instBraidedCategory, CategoryTheory.monoidalLinearOfFaithful, ModuleCat.MonoidalCategory.instMonoidalCategoryStruct",
-      "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
-    },
-    {
-      "tool": "leansearch",
-      "query": "A braided strong monoidal functor preserving balanced coequalizers induces a strong monoidal functor on internal modules over isomorphic commutative ring objects",
-      "date": "2026-10-16",
-      "results": "8 hits: CategoryTheory.Functor.instMonoidalMonMapMon, CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.mapGrp.instMonoidal, CategoryTheory.Functor.instBraidedMonMapMon, CategoryTheory.Functor.Braided.ofChosenFiniteProducts, ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat, CategoryTheory.Functor.Braided.toMonoidal, CategoryTheory.Functor.Full.mapCommMon",
-      "verdict": "The hits supply generic ordinary module, monoidal or derived-functor ingredients. None is the specialized derived internal-module comparison stated here; the applicable generic ingredients are used in the construction."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.IntegralResidueProjectionNormalization",
-    "date": "2026-10-16",
-    "group": "D3"
+  {
+   "text": "Use tensorLeftCompMapModComapIso to construct the tensor comparison, and the inverse ring isomorphism for the unit comparison. Their composites with presentation epimorphisms are the ambient monoidal tensor and unit maps. Prove naturality, both unit laws, and associativity by cancellation of those epimorphisms and the ambient strong monoidal coherence laws.",
+   "uses": [],
+   "elementary": false
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "nt-target-proetale-e",
-      "place": "Ordinary condensed-coefficient module pullback is strong monoidal",
-      "via": [
-        "new-integral-residue-projection-normalization",
-        "lem-weil-pbc-integral-residue-comparisons",
-        "lem-weil-pbc-integral-residue-exchange",
-        "lem-weil-pbc-integral-finite-exchange-comparison",
-        "new-proper-continuous-basechange-app"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Paper.IntegralResidueOrdinaryMonoidal",
-    "file": "lean/Sheaf/Paper/IntegralResidueOrdinaryMonoidal.lean",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeOrdinaryPullMonoidal",
-    "statement": "def residueExchangeOrdinaryPullMonoidal\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) : (f)^*⟦integralCoeff ℓ E⟧.Monoidal",
-    "branch": "sheaf-dag",
-    "by": "D3",
-    "date": "2026-10-16",
-    "declarations": [
-      "CategoryTheory.Mod.ResidueOrdinary.relativeTensorπ",
-      "CategoryTheory.Mod.ResidueOrdinary.relativeTensorCofork",
-      "CategoryTheory.Mod.ResidueOrdinary.isColimitRelativeTensorCofork",
-      "CategoryTheory.Mod.ResidueOrdinary.relativeTensorRightIso",
-      "CategoryTheory.Mod.ResidueOrdinary.tensorπ_leftUnitor",
-      "CategoryTheory.Mod.ResidueOrdinary.tensorπ_rightUnitor",
-      "CategoryTheory.Mod.ResidueOrdinary.relativeTensorRightIso_π",
-      "CategoryTheory.Mod.ResidueOrdinary.tensorComparison",
-      "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_π",
-      "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_inv_π",
-      "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_inv_natural_left",
-      "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_inv_natural_right",
-      "CategoryTheory.Mod.ResidueOrdinary.unitComparison",
-      "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_left_unitality",
-      "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_right_unitality",
-      "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_associativity",
-      "CategoryTheory.Mod.ResidueOrdinary.mapModComapMonoidal",
-      "AlgebraicGeometry.ProEtale.CondensedRing.residueOrdinaryUpperStarMonoidal",
-      "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeOrdinaryPullMonoidal"
-    ]
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "X-56663",
-    "group": "D3",
-    "result": "pass",
-    "landing": "20261016T101204-L-2230257",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "X-56663",
-    "group": "D3",
-    "result": "pass",
-    "landing": "20261016T101204-L-2230257",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "Assemble CoreMonoidal. The ordinary coefficient pullback is mapMod followed by scalar extension along the coefficient-pullback isomorphism; extendScalarsIsoComapInv identifies it with mapModComap. Transport the proved monoidal structure along that explicit isomorphism.",
+   "uses": [],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorLeftCompMapModComapIso|mapModComap.*Monoidal|leftDerived.*Monoidal",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal",
+   "date": "2026-10-16",
+   "results": "12 hits: CategoryTheory.Functor.CoreMonoidal, CategoryTheory.Functor.CoreMonoidal.toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal, CategoryTheory.Functor.CoreMonoidal.toOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.εIso, CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toLaxMonoidal, CategoryTheory.Functor.CoreMonoidal.toMonoidal_toOplaxMonoidal",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong braided monoidal functor preserving coequalizers induces a strong monoidal functor on modules over isomorphic commutative ring objects",
+   "date": "2026-10-16",
+   "results": "8 hits: ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat, CategoryTheory.Functor.mapCommMon, CoalgCat.MonoidalCategory.inducingFunctorData, ModuleCat.monoidalCategory, AlgCat.instBraidedModuleCatForget₂, ModuleCat.MonoidalCategory.instBraidedCategory, CategoryTheory.monoidalLinearOfFaithful, ModuleCat.MonoidalCategory.instMonoidalCategoryStruct",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A braided strong monoidal functor preserving balanced coequalizers induces a strong monoidal functor on internal modules over isomorphic commutative ring objects",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Functor.instMonoidalMonMapMon, CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.mapGrp.instMonoidal, CategoryTheory.Functor.instBraidedMonMapMon, CategoryTheory.Functor.Braided.ofChosenFiniteProducts, ModuleCat.MonoidalCategory.instBraidedSemimoduleCatFunctorEquivalenceSemimoduleCat, CategoryTheory.Functor.Braided.toMonoidal, CategoryTheory.Functor.Full.mapCommMon",
+   "verdict": "The hits supply generic ordinary module, monoidal or derived-functor ingredients. None is the specialized derived internal-module comparison stated here; the applicable generic ingredients are used in the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueProjectionNormalization",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Ordinary condensed-coefficient module pullback is strong monoidal",
+   "via": [
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueOrdinaryMonoidal",
+  "file": "lean/Sheaf/Paper/IntegralResidueOrdinaryMonoidal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeOrdinaryPullMonoidal",
+  "statement": "def residueExchangeOrdinaryPullMonoidal\n    (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) : (f)^*⟦integralCoeff ℓ E⟧.Monoidal",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16",
+  "declarations": [
+   "CategoryTheory.Mod.ResidueOrdinary.relativeTensorπ",
+   "CategoryTheory.Mod.ResidueOrdinary.relativeTensorCofork",
+   "CategoryTheory.Mod.ResidueOrdinary.isColimitRelativeTensorCofork",
+   "CategoryTheory.Mod.ResidueOrdinary.relativeTensorRightIso",
+   "CategoryTheory.Mod.ResidueOrdinary.tensorπ_leftUnitor",
+   "CategoryTheory.Mod.ResidueOrdinary.tensorπ_rightUnitor",
+   "CategoryTheory.Mod.ResidueOrdinary.relativeTensorRightIso_π",
+   "CategoryTheory.Mod.ResidueOrdinary.tensorComparison",
+   "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_π",
+   "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_inv_π",
+   "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_inv_natural_left",
+   "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_inv_natural_right",
+   "CategoryTheory.Mod.ResidueOrdinary.unitComparison",
+   "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_left_unitality",
+   "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_right_unitality",
+   "CategoryTheory.Mod.ResidueOrdinary.tensorComparison_associativity",
+   "CategoryTheory.Mod.ResidueOrdinary.mapModComapMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueOrdinaryUpperStarMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeOrdinaryPullMonoidal"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
+ },
+ "lean_audit": {}
 }

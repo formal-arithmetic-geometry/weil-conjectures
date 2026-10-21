@@ -1,242 +1,243 @@
 {
-  "id": "lem-weil-pbc-adic-flat-iff-supplied-model-flat",
-  "kind": "statement",
-  "title": "Ambient and supplied-model Padic cohomology flatness",
-  "statement": "Let T be noetherian, of bounded Krull dimension, with l invertible in every stalk, E/Q_l finite, and K a bounded constructible complete complex over the unlifted Padic datum [def-weil-pbc-bounded-constructible-complete]. Every ambient H^q(K) is flat if and only if for every simultaneous choice of integral bounds, finite stratification, covering sieves and a supplied common local model on every covering arrow [def-weil-pbc-bounded-constructible-tower], every cohomology sheaf of each supplied model is flat over the actual inverse-image completed coefficient ring [def-pc-flat-sheaf-modules].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-    "place": "Proof steps 1, 2 and 9--11: coefficient-preserving restriction, completeness and strict-tower model reconstruction.",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 051K, algebra.tex, lemma-artinian-variant-local-criterion-flatness; local Artinian module ingredient only, not the full sheaf-derived equivalence"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0539, more-algebra.tex, lemma-valuation-ring-torsion-free-flat; valuation-ring module ingredient only, not the full equivalence"
-      }
-    ]
+ "id": "lem-weil-pbc-adic-flat-iff-supplied-model-flat",
+ "kind": "statement",
+ "title": "Ambient and supplied-model Padic cohomology flatness",
+ "statement": "Let T be noetherian, of bounded Krull dimension, with l invertible in every stalk, E/Q_l finite, and K a bounded constructible complete complex over the unlifted Padic datum [def-weil-pbc-bounded-constructible-complete]. Every ambient H^q(K) is flat if and only if for every simultaneous choice of integral bounds, finite stratification, covering sieves and a supplied common local model on every covering arrow [def-weil-pbc-bounded-constructible-tower], every cohomology sheaf of each supplied model is flat over the actual inverse-image completed coefficient ring [def-pc-flat-sheaf-modules].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
+  "place": "Proof steps 1, 2 and 9--11: coefficient-preserving restriction, completeness and strict-tower model reconstruction.",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 051K, algebra.tex, lemma-artinian-variant-local-criterion-flatness; local Artinian module ingredient only, not the full sheaf-derived equivalence"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0539, more-algebra.tex, lemma-valuation-ring-torsion-free-flat; valuation-ring module ingredient only, not the full equivalence"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pc-flat-sheaf-modules",
+  "prop-weil-pbc-levelwise-truncations",
+  "def-pc-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Put $B=A_T$. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a Noetherian PID and every nonzero element is a unit times a power of $\\varpi$. The ordinary exact sequence $0\\to A\\xrightarrow{\\varpi^n}A\\to P_n\\to0$, followed by [lem-weil-pbc-completed-constant-sheaf-reduction], gives the finite-free $B$-resolution $[B\\xrightarrow{\\varpi^n}B]\\to R_n[0]$ in degrees $[-1,0]$. In particular multiplication by $\\varpi^n$ on $B$ is injective. For a locally closed stratum $i:S\\to T$, [lem-weil-pbc-proetale-immersion-limit-preservation] identifies $i^{-1}B$ with $A_S$: it preserves the defining limit, and constant finite coefficient sheaves pull back to their constant sheaves. On a pro-etale object $U\\to S$, the slice-site equivalence of [lem-weil-proetale-weakly-etale-localization] gives the same identification $B|_U=A_U$. These inverse images are exact on module sheaves. They commute with ordinary tensors by [lem-weil-pbc-ringed-topoi-module-pullback-tensor], and with derived tensors by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] (the coefficient maps just identified are isomorphisms). Exactness also identifies the kernels, images and quotients defining cohomology. Thus cohomology, finite reduction and the Tor sheaves in (a) commute with all these restrictions.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 093J (lemma-constant-exact), 093M (lemma-completion-flat); restriction uses proetale.tex Tag 09AA (lemma-closed-immersion), sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product)."
+   }
   },
-  "stmt_deps": [
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-pc-flat-sheaf-modules",
-    "prop-weil-pbc-levelwise-truncations",
-    "def-pc-scheme"
-  ],
-  "proof": [
-    {
-      "text": "Put $B=A_T$. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a Noetherian PID and every nonzero element is a unit times a power of $\\varpi$. The ordinary exact sequence $0\\to A\\xrightarrow{\\varpi^n}A\\to P_n\\to0$, followed by [lem-weil-pbc-completed-constant-sheaf-reduction], gives the finite-free $B$-resolution $[B\\xrightarrow{\\varpi^n}B]\\to R_n[0]$ in degrees $[-1,0]$. In particular multiplication by $\\varpi^n$ on $B$ is injective. For a locally closed stratum $i:S\\to T$, [lem-weil-pbc-proetale-immersion-limit-preservation] identifies $i^{-1}B$ with $A_S$: it preserves the defining limit, and constant finite coefficient sheaves pull back to their constant sheaves. On a pro-etale object $U\\to S$, the slice-site equivalence of [lem-weil-proetale-weakly-etale-localization] gives the same identification $B|_U=A_U$. These inverse images are exact on module sheaves. They commute with ordinary tensors by [lem-weil-pbc-ringed-topoi-module-pullback-tensor], and with derived tensors by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] (the coefficient maps just identified are isomorphisms). Exactness also identifies the kernels, images and quotients defining cohomology. Thus cohomology, finite reduction and the Tor sheaves in (a) commute with all these restrictions.",
-      "uses": [
-        "lem-weil-l-adic-extension-integers-dvr",
-        "lem-weil-pbc-completed-constant-sheaf-reduction",
-        "lem-weil-pbc-proetale-immersion-limit-preservation",
-        "lem-weil-proetale-weakly-etale-localization",
-        "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tags 093J (lemma-constant-exact), 093M (lemma-completion-flat); restriction uses proetale.tex Tag 09AA (lemma-closed-immersion), sites-cohomology.tex Tag 07A4 (lemma-pullback-tensor-product)."
-      }
-    },
-    {
-      "text": "We will test flatness on finite stratum covers. Flatness is preserved by each restriction of step 1: a flat sheaf $F$ in degree zero is K-flat by [lem-pc-bounded-above-flat-kflat-site], and [lem-weil-pbc-ringed-pullback-preserves-kflat] says that its pulled-back degree-zero term is flat. Conversely suppose that $F|_U$ is flat on every member of a pro-etale covering of each stratum of one finite stratification. For an injection $M'\\to M$ of $B$-module sheaves, let $N$ be the kernel of $M'\\otimes_BF\\to M\\otimes_BF$. Exactness and the tensor comparison in step 1 identify $N|_U$ with the kernel after restriction; that kernel is zero by the local flatness. By [lem-weil-pbc-noetherian-stratum-detection], $N=0$. Tensor with $F$ preserves cokernels: by [lem-pc-sheaf-modules-tensor-closed] it is left adjoint to the sheaf internal Hom, and the universal property of a cokernel gives its preservation under this adjunction, so preservation of these injections is exactly flatness [def-pc-flat-sheaf-modules]. This also proves descent of flatness for the fixed supplied stratum covers, not just for a chosen perfect-model cover.",
-      "uses": [
-        "lem-pc-bounded-above-flat-kflat-site",
-        "lem-weil-pbc-ringed-pullback-preserves-kflat",
-        "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-        "lem-weil-pbc-noetherian-stratum-detection",
-        "def-pc-flat-sheaf-modules",
-        "def-pur-sheaf-tensor-product",
-        "lem-pc-sheaf-modules-tensor-closed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 0G7E (lemma-pullback-K-flat); descent is the kernel argument using proetale.tex Tag 09AH (lemma-ses-associated-to-open)."
-      }
-    },
-    {
-      "text": "It remains to compare with every supplied common local model, rather than just the perfect models chosen in step 5. Fix a supplied $U=U_{\\alpha j}$ and $L=L_{\\alpha j}$ as in [def-weil-pbc-bounded-constructible-tower]. Each term of $L$ is, pro-etale locally on $U$, the inverse limit of sheaves killed by $\\varpi^n$ [def-weil-pbc-adic-lisse-module]. The restricted completed coefficient ring is $A_U$ by step 1. By [lem-weil-pbc-torsion-limit-sheaf-completeness] these terms, and then their bounded complex $L$, are derived complete after restriction to the constant $A$-sheaf. The equivalence in [lem-weil-pbc-constant-completion-equivalence] makes $L$ derived complete over $A_U$ as well. Also $K|_U$ is complete: $K$ is complete by [def-weil-pbc-bounded-constructible-complete], and the exact restrictions of step 1 preserve the defining countable products. For immersions this is [lem-weil-pbc-proetale-immersion-limit-preservation], and for covering objects it is sectionwise slice restriction [lem-weil-proetale-weakly-etale-localization]. Products on these pro-etale module categories are exact by [lem-weil-proetale-countable-products-exact]; their derived products are the termwise products by [lem-weil-derived-countable-products-core]. Consequently restriction carries the natural Roos triangle of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] and its completion-unit map to the same triangle and map on $U$. The unit is an isomorphism before and after restriction. This verifies completeness without assuming that $U$ is of finite type over a field, or is Noetherian.",
-      "uses": [
-        "def-weil-pbc-bounded-constructible-tower",
-        "def-weil-pbc-adic-lisse-module",
-        "lem-weil-pbc-torsion-limit-sheaf-completeness",
-        "lem-weil-pbc-constant-completion-equivalence",
-        "def-weil-pbc-bounded-constructible-complete",
-        "lem-weil-pbc-proetale-immersion-limit-preservation",
-        "lem-weil-proetale-weakly-etale-localization",
-        "lem-weil-proetale-countable-products-exact",
-        "lem-weil-derived-countable-products-core",
-        "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099Q (proposition-enough-weakly-contractibles) (1),(4),(5); Tag 099M (lemma-naive-completion); coefficient restriction is algebraization.tex Tag 099I (lemma-restriction-derived-complete-equivalence)."
-      }
-    },
-    {
-      "text": "The supplied isomorphisms $e_n:K_n|_U\\simeq L\\otimes^L_{A_U}R_n|_U$ commute with strict transitions after forgetting to $A_U$: by [def-weil-pbc-bounded-constructible-tower], each strict transition is the scalar-extension map followed by normalization, and the equation for $e_n$ identifies these composites. Apply [lem-weil-pbc-sequential-tower-evaluation-full] on the small site $U_{\\mathrm{proet}}$, with ring sheaf $A_U$, to obtain an isomorphism of the two objects in the derived category of strict towers. Both towers exist by [def-weil-pbc-adic-coefficient-datum], applied to the two complexes. The exact derived-limit functor in [lem-weil-pbc-ringed-strict-tower-homotopy-limit] sends that isomorphism to an isomorphism of their limits. By completeness from step 9 and [prop-weil-pbc-koszul-reconstruction], those limits identify with $K|_U$ and $L$, respectively. Thus $K|_U\\simeq L$ as $A_U$-complexes, and exact restriction gives $\\mathcal H^q(L)\\simeq\\mathcal H^q(K)|_U$. Existence of this isomorphism suffices for flatness; neither uniqueness nor a functorial choice of a lift of the $e_n$ is claimed. This proves the comparison for every supplied system of local models, irrespective of the perfect charts used earlier.",
-      "uses": [
-        "def-weil-pbc-bounded-constructible-tower",
-        "lem-weil-pbc-sequential-tower-evaluation-full",
-        "def-weil-pbc-adic-coefficient-datum",
-        "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-        "prop-weil-pbc-koszul-reconstruction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099M (lemma-naive-completion); strict-tower morphism lifting is the cited sequential-tower statement, not a uniqueness assertion about cones."
-      }
-    },
-    {
-      "text": "If (b) holds, step 2 preserves its flat cohomology under restriction to every supplied stratum cover, and the cohomology isomorphisms of step 10 give (c). Conversely suppose (c). Choose any of the supplied common model systems, which exists by [def-weil-pbc-bounded-constructible-complete] and [def-weil-pbc-bounded-constructible-tower]. Step 10 identifies its flat cohomology with the restricted cohomology of $K$. Step 2, with the jointly conservative exact restrictions of [lem-weil-pbc-noetherian-stratum-detection], then gives (b). Empty strata and zero models cause no exception. Combining this with steps 3--8 proves all three equivalences. Steps 3 and 4 supply precisely the canonical cohomology reduction identifications and $R_n$-flatness asserted after them.",
-      "uses": [
-        "def-weil-pbc-bounded-constructible-complete",
-        "def-weil-pbc-bounded-constructible-tower",
-        "lem-weil-pbc-noetherian-stratum-detection"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-        "place": "Statement hypothesis paragraph, equivalence with flat cohomology of every supplied common local model; conclusion of steps 2--10."
-      }
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "We will test flatness on finite stratum covers. Flatness is preserved by each restriction of step 1: a flat sheaf $F$ in degree zero is K-flat by [lem-pc-bounded-above-flat-kflat-site], and [lem-weil-pbc-ringed-pullback-preserves-kflat] says that its pulled-back degree-zero term is flat. Conversely suppose that $F|_U$ is flat on every member of a pro-etale covering of each stratum of one finite stratification. For an injection $M'\\to M$ of $B$-module sheaves, let $N$ be the kernel of $M'\\otimes_BF\\to M\\otimes_BF$. Exactness and the tensor comparison in step 1 identify $N|_U$ with the kernel after restriction; that kernel is zero by the local flatness. By [lem-weil-pbc-noetherian-stratum-detection], $N=0$. Tensor with $F$ preserves cokernels: by [lem-pc-sheaf-modules-tensor-closed] it is left adjoint to the sheaf internal Hom, and the universal property of a cokernel gives its preservation under this adjunction, so preservation of these injections is exactly flatness [def-pc-flat-sheaf-modules]. This also proves descent of flatness for the fixed supplied stratum covers, not just for a chosen perfect-model cover.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-weil-pbc-noetherian-stratum-detection",
     "def-pc-flat-sheaf-modules",
     "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-adic-coefficient-datum",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 0G7E (lemma-pullback-K-flat); descent is the kernel argument using proetale.tex Tag 09AH (lemma-ses-associated-to-open)."
+   }
+  },
+  {
+   "text": "It remains to compare with every supplied common local model, rather than just the perfect models chosen in step 5. Fix a supplied $U=U_{\\alpha j}$ and $L=L_{\\alpha j}$ as in [def-weil-pbc-bounded-constructible-tower]. Each term of $L$ is, pro-etale locally on $U$, the inverse limit of sheaves killed by $\\varpi^n$ [def-weil-pbc-adic-lisse-module]. The restricted completed coefficient ring is $A_U$ by step 1. By [lem-weil-pbc-torsion-limit-sheaf-completeness] these terms, and then their bounded complex $L$, are derived complete after restriction to the constant $A$-sheaf. The equivalence in [lem-weil-pbc-constant-completion-equivalence] makes $L$ derived complete over $A_U$ as well. Also $K|_U$ is complete: $K$ is complete by [def-weil-pbc-bounded-constructible-complete], and the exact restrictions of step 1 preserve the defining countable products. For immersions this is [lem-weil-pbc-proetale-immersion-limit-preservation], and for covering objects it is sectionwise slice restriction [lem-weil-proetale-weakly-etale-localization]. Products on these pro-etale module categories are exact by [lem-weil-proetale-countable-products-exact]; their derived products are the termwise products by [lem-weil-derived-countable-products-core]. Consequently restriction carries the natural Roos triangle of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] and its completion-unit map to the same triangle and map on $U$. The unit is an isomorphism before and after restriction. This verifies completeness without assuming that $U$ is of finite type over a field, or is Noetherian.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
     "def-weil-pbc-adic-lisse-module",
+    "lem-weil-pbc-torsion-limit-sheaf-completeness",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-bounded-constructible-complete",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-countable-products-core",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099Q (proposition-enough-weakly-contractibles) (1),(4),(5); Tag 099M (lemma-naive-completion); coefficient restriction is algebraization.tex Tag 099I (lemma-restriction-derived-complete-equivalence)."
+   }
+  },
+  {
+   "text": "The supplied isomorphisms $e_n:K_n|_U\\simeq L\\otimes^L_{A_U}R_n|_U$ commute with strict transitions after forgetting to $A_U$: by [def-weil-pbc-bounded-constructible-tower], each strict transition is the scalar-extension map followed by normalization, and the equation for $e_n$ identifies these composites. Apply [lem-weil-pbc-sequential-tower-evaluation-full] on the small site $U_{\\mathrm{proet}}$, with ring sheaf $A_U$, to obtain an isomorphism of the two objects in the derived category of strict towers. Both towers exist by [def-weil-pbc-adic-coefficient-datum], applied to the two complexes. The exact derived-limit functor in [lem-weil-pbc-ringed-strict-tower-homotopy-limit] sends that isomorphism to an isomorphism of their limits. By completeness from step 9 and [prop-weil-pbc-koszul-reconstruction], those limits identify with $K|_U$ and $L$, respectively. Thus $K|_U\\simeq L$ as $A_U$-complexes, and exact restriction gives $\\mathcal H^q(L)\\simeq\\mathcal H^q(K)|_U$. Existence of this isomorphism suffices for flatness; neither uniqueness nor a functorial choice of a lift of the $e_n$ is claimed. This proves the comparison for every supplied system of local models, irrespective of the perfect charts used earlier.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-weil-pbc-sequential-tower-evaluation-full",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "prop-weil-pbc-koszul-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099M (lemma-naive-completion); strict-tower morphism lifting is the cited sequential-tower statement, not a uniqueness assertion about cones."
+   }
+  },
+  {
+   "text": "If (b) holds, step 2 preserves its flat cohomology under restriction to every supplied stratum cover, and the cohomology isomorphisms of step 10 give (c). Conversely suppose (c). Choose any of the supplied common model systems, which exists by [def-weil-pbc-bounded-constructible-complete] and [def-weil-pbc-bounded-constructible-tower]. Step 10 identifies its flat cohomology with the restricted cohomology of $K$. Step 2, with the jointly conservative exact restrictions of [lem-weil-pbc-noetherian-stratum-detection], then gives (b). Empty strata and zero models cause no exception. Combining this with steps 3--8 proves all three equivalences. Steps 3 and 4 supply precisely the canonical cohomology reduction identifications and $R_n$-flatness asserted after them.",
+   "uses": [
     "def-weil-pbc-bounded-constructible-complete",
     "def-weil-pbc-bounded-constructible-tower",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-derived-countable-products-core",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-noetherian-stratum-detection",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-weil-pbc-sequential-tower-evaluation-full",
-    "lem-weil-pbc-torsion-limit-sheaf-completeness",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-proetale-weakly-etale-localization",
-    "prop-weil-pbc-koszul-reconstruction"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-weil-pbc-noetherian-stratum-detection"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-    "place": "Proof steps 1, 2 and 9--11: coefficient-preserving restriction, completeness and strict-tower model reconstruction."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "For a complex with flat cohomology, cohomology commutes with derived scalar extension and the resulting cohomology is flat",
-      "results": "Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Algebra.FormallyUnramified.flat_of_restrictScalars, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.isBaseChange, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.of_flat_tensorProduct",
-      "date": "2026-10-19",
-      "verdict": "No exact sheaf-derived statement; only general module flatness tools."
-    },
-    {
-      "tool": "loogle",
-      "query": "Module.Flat, Function.Injective",
-      "results": "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right, TensorProduct.nontrivial_of_linearMap_injective_of_flat_left, TensorProduct.nontrivial_of_linearMap_injective_of_flat_right, Algebra.TensorProduct.includeRight_injective, Algebra.TensorProduct.includeLeft_injective, Module.Flat.lTensor_preserves_injective_linearMap, Module.Flat.rTensor_preserves_injective_linearMap",
-      "date": "2026-10-19",
-      "verdict": "No exact sheaf-derived statement; only general module flatness tools."
-    },
-    {
-      "tool": "grep",
-      "query": "homology.*[Ff]lat|[Ff]lat.*homology",
-      "results": "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
-      "date": "2026-10-19",
-      "verdict": "No exact sheaf-derived statement; only general module flatness tools."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Cohomology commutes with derived quotient extension for a complex whose cohomology sheaves are flat",
-      "results": "Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; DerivedCategory.quotientCompQhIso; HasDerivedCategory.standard. No completed sheaf quotient cohomology criterion.",
-      "date": "2026-10-20",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.AdicTorFlatCohomology",
-    "date": "2026-10-20",
-    "group": "K7"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-integral-truncations",
-      "place": "Proof steps 1, 2 and 9--11: coefficient-preserving restriction, completeness and strict-tower model reconstruction.",
-      "via": [
-        "lem-weil-pbc-adic-tor-flat-cohomology"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-rem-rest",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Paper.AdicSuppliedModelFlatCriterion",
-    "file": "lean/Sheaf/Paper/AdicSuppliedModelFlatCriterion.lean",
-    "declaration": "AlgebraicGeometry.Scheme.pbc_adic_flat_iff_supplied_model_flat",
-    "statement": "theorem pbc_adic_flat_iff_supplied_model_flat\n    (T : Scheme.{u}) [IsNoetherian T]\n    (_hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n)\n    (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (_hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))\n    (K : PbcBoundedConstructibleComplete T (pbcPadicCoefficientDatum l E)) :\n    (∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology T)\n        (R := pbcAdicCompletion T (pbcPadicCoefficientDatum l E))\n        ((DerivedCategory.homologyFunctor _ q).obj K.obj)) ↔\n    ∀ (d₀ d₁ : ℤ), d₀ ≤ d₁ → ∀ (S : Stratification T)\n        (V : ∀ α : Fin S.n, Sieve (⊤_ (S.domain α).ProEt)),\n        (∀ α : Fin S.n, V α ∈ ProEt.topology (S.domain α) (⊤_ (S.domain α).ProEt)) →\n        ∀ L : ∀ (α : Fin S.n) (U : (S.domain α).ProEt)\n            (f : U ⟶ ⊤_ (S.domain α).ProEt),\n            V α f → AdicTowerLocalModel (pbcPadicCoefficientDatum l E) (U.hom ≫ S.immersion α)\n              (pbcReductionAdicTower T (pbcPadicCoefficientDatum l E) K.obj) d₀ d₁,\n          ∀ (α : Fin S.n) (U : (S.domain α).ProEt)\n            (f : U ⟶ ⊤_ (S.domain α).ProEt) (hf : V α f) (q : ℤ),\n            SheafOfModules.IsFlatOnSite (J := ProEt.topology U.left)\n              (R := (adicTowerInverseImage (U.hom ≫ S.immersion α)).obj\n                (pbcAdicCompletion T (pbcPadicCoefficientDatum l E)))\n              ((DerivedCategory.homologyFunctor _ q).obj\n                (DerivedCategory.Q.obj (L α U f hf).complex))",
-    "branch": "sheaf-dag",
-    "by": "K7",
-    "date": "2026-10-20"
-  },
-  "tool_uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-derived-countable-products-core",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-noetherian-stratum-detection",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-weil-pbc-sequential-tower-evaluation-full",
-    "lem-weil-pbc-torsion-limit-sheaf-completeness",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-proetale-weakly-etale-localization",
-    "prop-weil-pbc-koszul-reconstruction"
-  ],
-  "reviewed": {
-    "date": "2026-10-20",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "K7",
-    "result": "pass",
-    "landing": "20261020T051503-L-1695358",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-20",
-    "by": "L",
-    "reviewer": "C-3bd35",
-    "group": "J2",
-    "result": "pass",
-    "landing": "20261020T230752-L-610588",
-    "kind": "proof",
-    "note": "independent cc review: delivered AdicSuppliedModelFlatCriterion.lean and node lean.statement vs quarantine source and live node: only LocallyClosedStratification T → Scheme.Stratification T, same data on Noetherian T via Stratification.ofNoetherianSpace; compiles, 0 live importers"
+    "place": "Statement hypothesis paragraph, equivalence with flat cohomology of every supplied common local model; conclusion of steps 2--10."
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-derived-countable-products-core",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-sequential-tower-evaluation-full",
+  "lem-weil-pbc-torsion-limit-sheaf-completeness",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-koszul-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
+  "place": "Proof steps 1, 2 and 9--11: coefficient-preserving restriction, completeness and strict-tower model reconstruction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a complex with flat cohomology, cohomology commutes with derived scalar extension and the resulting cohomology is flat",
+   "results": "Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Algebra.FormallyUnramified.flat_of_restrictScalars, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.isBaseChange, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.of_flat_tensorProduct",
+   "date": "2026-10-19",
+   "verdict": "No exact sheaf-derived statement; only general module flatness tools."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Function.Injective",
+   "results": "Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_left, Algebra.TensorProduct.nontrivial_of_algebraMap_injective_of_flat_right, TensorProduct.nontrivial_of_linearMap_injective_of_flat_left, TensorProduct.nontrivial_of_linearMap_injective_of_flat_right, Algebra.TensorProduct.includeRight_injective, Algebra.TensorProduct.includeLeft_injective, Module.Flat.lTensor_preserves_injective_linearMap, Module.Flat.rTensor_preserves_injective_linearMap",
+   "date": "2026-10-19",
+   "verdict": "No exact sheaf-derived statement; only general module flatness tools."
+  },
+  {
+   "tool": "grep",
+   "query": "homology.*[Ff]lat|[Ff]lat.*homology",
+   "results": "Mathlib/RepresentationTheory/Homological/GroupHomology/Functoriality.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact sheaf-derived statement; only general module flatness tools."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology commutes with derived quotient extension for a complex whose cohomology sheaves are flat",
+   "results": "Module.Flat.rTensor_shortComplex_exact; Module.Flat.lTensor_shortComplex_exact; DerivedCategory.quotientCompQhIso; HasDerivedCategory.standard. No completed sheaf quotient cohomology criterion.",
+   "date": "2026-10-20",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicTorFlatCohomology",
+  "date": "2026-10-20",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-integral-truncations",
+   "place": "Proof steps 1, 2 and 9--11: coefficient-preserving restriction, completeness and strict-tower model reconstruction.",
+   "via": [
+    "lem-weil-pbc-adic-tor-flat-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicSuppliedModelFlatCriterion",
+  "file": "lean/Sheaf/Paper/AdicSuppliedModelFlatCriterion.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_adic_flat_iff_supplied_model_flat",
+  "statement": "theorem pbc_adic_flat_iff_supplied_model_flat\n    (T : Scheme.{u}) [IsNoetherian T]\n    (_hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n)\n    (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (_hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))\n    (K : PbcBoundedConstructibleComplete T (pbcPadicCoefficientDatum l E)) :\n    (∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := ProEt.topology T)\n        (R := pbcAdicCompletion T (pbcPadicCoefficientDatum l E))\n        ((DerivedCategory.homologyFunctor _ q).obj K.obj)) ↔\n    ∀ (d₀ d₁ : ℤ), d₀ ≤ d₁ → ∀ (S : Stratification T)\n        (V : ∀ α : Fin S.n, Sieve (⊤_ (S.domain α).ProEt)),\n        (∀ α : Fin S.n, V α ∈ ProEt.topology (S.domain α) (⊤_ (S.domain α).ProEt)) →\n        ∀ L : ∀ (α : Fin S.n) (U : (S.domain α).ProEt)\n            (f : U ⟶ ⊤_ (S.domain α).ProEt),\n            V α f → AdicTowerLocalModel (pbcPadicCoefficientDatum l E) (U.hom ≫ S.immersion α)\n              (pbcReductionAdicTower T (pbcPadicCoefficientDatum l E) K.obj) d₀ d₁,\n          ∀ (α : Fin S.n) (U : (S.domain α).ProEt)\n            (f : U ⟶ ⊤_ (S.domain α).ProEt) (hf : V α f) (q : ℤ),\n            SheafOfModules.IsFlatOnSite (J := ProEt.topology U.left)\n              (R := (adicTowerInverseImage (U.hom ≫ S.immersion α)).obj\n                (pbcAdicCompletion T (pbcPadicCoefficientDatum l E)))\n              ((DerivedCategory.homologyFunctor _ q).obj\n                (DerivedCategory.Q.obj (L α U f hf).complex))",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-20"
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-derived-countable-products-core",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-sequential-tower-evaluation-full",
+  "lem-weil-pbc-torsion-limit-sheaf-completeness",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-koszul-reconstruction"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261020T051503-L-1695358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3bd35",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T230752-L-610588",
+  "kind": "proof",
+  "note": "independent cc review: delivered AdicSuppliedModelFlatCriterion.lean and node lean.statement vs quarantine source and live node: only LocallyClosedStratification T → Scheme.Stratification T, same data on Noetherian T via Stratification.ofNoetherianSpace; compiles, 0 live importers"
+ },
+ "lean_audit": {}
 }

@@ -1,231 +1,220 @@
 {
-  "id": "def-wf-weil-category",
-  "blueprint": {
-    "is": "def-wf-weil-category",
-    "from": null,
-    "same_as": []
+ "id": "def-wf-weil-category",
+ "blueprint": {
+  "is": "def-wf-weil-category",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The Weil category",
+ "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ of\n[def-weil-finite-field-fiber], with $k_0=\\mathbf F_q$ and\n$k=\\overline{\\mathbf F}_q$, a prime $\\ell\\neq p$, and the chosen algebraic\nclosure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$. Let $X_0$ be a separated scheme of\nfinite type over $k_0$ in the conventions of\n[def-weil-pbc-scheme-conventions], and put $X=X_0\\times_{k_0}k$.\nFor a finite intermediate extension $E/\\Ql$ in $\\Qlb$, use\n$\\mathcal C_E=D^b_c(X,E)$ of [def-weil-pbc-rational-category], namely the\nraw rationalization of the integral category\n[def-weil-pbc-bounded-constructible-complete]. These coefficient categories\nare on the small pro-etale site, with completed integral coefficients;\nno identification with a different coefficient model is made.\n\nWrite $\\Phi_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$,\nwhere $\\gamma=(z\\mapsto z^q)^{-1}$ on $k$, for the geometric-Frobenius\nautomorphism of [def-weil-frobenius-detailed], with the geometric convention\nof [def-tw-frobenius-action]. Write $P_E=\\Phi_{X,E}^*$ for its pullback on\n$\\mathcal C_E$: the completed pullback of\n[def-weil-pbc-completed-pullback] at the integral stage followed by\nrationalization, using the equivalence of small pro-etale sites induced\nby the scheme automorphism\n[lem-weil-proetale-isomorphism-inverse-image]. Thus $\\Phi_X^*K$ below\nmeans this derived pullback. In this automorphism case, inverse image\nis an exact equivalence with exact inverse. Applying the two inverse\nfunctors to resolutions of strict towers identifies the derived inverse\nlimit of the transported reduction tower with transport of the original\nderived inverse limit. Thus completed pullback here is coefficient\ntransport, and its inverse is the transport along $\\Phi_X^{-1}$.\n\nA *Weil complex* at $E$ on $X_0$ is a pair $(K,\\varphi_K)$ with\n$K\\in\\mathcal C_E$ and an isomorphism\n$\\varphi_K:P_EK\\xrightarrow{\\sim}K$. Define\n$\\mathrm{WeilD}(X_0,E)$ to be the category of these fixed pairs\n[def-weil-endofunctor-fixed-pair-category]. Explicitly, a morphism\n$(K,\\varphi_K)\\to(L,\\varphi_L)$ is a morphism $u:K\\to L$ in $\\mathcal C_E$\nsatisfying\n$$u\\circ\\varphi_K=\\varphi_L\\circ P_E(u).$$\nIdentities and composition are those of $\\mathcal C_E$. The *strict*\nversion mentioned here uses these same pairs and all these commuting\nmorphisms; the definition supplies no alternative morphism groups and no\ntriangulated structure on the category of pairs.\n\nFor $E\\subseteq F$ use the scalar-extension functor\n$T_{F/E}:\\mathcal C_E\\to\\mathcal C_F$, its normalized units and\nassociators, and the ambient pullback comparison of [prop-weil-pbc-scalar-extension],\nrestricted and rationalized for the automorphism $\\Phi_X$. Here the\nrestriction uses the site equivalence above: it transports the completed\ncoefficient sheaf and reduction tower, compatible etale-origin witnesses,\nand constructibility strata, with their bounds unchanged. This is the\nisomorphism case of the comparison, whose constructible restriction is\nconditional on preservation in the cited statement.\nWrite the comparison in the direction\n$c_{F/E}:P_FT_{F/E}\\xrightarrow{\\sim}T_{F/E}P_E$.\nDefine the transition functor on Weil complexes by\n$$(K,\\varphi_K)\\longmapsto\n(T_{F/E}K,\\ T_{F/E}(\\varphi_K)\\circ c_{F/E,K}),\n\\qquad u\\longmapsto T_{F/E}(u).$$\n\nThe $\\Qlb$-version $\\mathrm{WeilD}(X_0,\\Qlb)$ is the filtered\n$2$-colimit of these finite-stage Weil categories, with the common-stage\nconvention of [def-weil-pbc-qbar-category]. More explicitly, its objects\nare pairs $(E,W)$ with $E$ in the directed set of finite intermediate\nextensions [def-weil-finite-subextension-directed-set] and\n$W\\in\\mathrm{WeilD}(X_0,E)$. A morphism $(E,W)\\to(F,V)$ is a class\n$[M,u]$, where $M\\supseteq E,F$ is a finite intermediate extension and\n$u:T_{M/E}W\\to T_{M/F}V$ is a commuting Weil morphism at $M$.\nWrite $a_{N,M,E,W}:T_{N/M}T_{M/E}W\\xrightarrow{\\sim}T_{N/E}W$\nfor the induced associator on Weil pairs. For $N\\supseteq M$ define\n$$u_N=a_{N,M,F,V}\\circ T_{N/M}(u)\\circ a_{N,M,E,W}^{-1}.$$\nRepresentatives $[M,u]$ and $[M',u']$ agree if $u_N=u'_N$ for some\nfinite $N\\supseteq M,M'$. Equivalently their Hom group is\n$$\\varinjlim_{M\\supseteq E,F}\n\\operatorname{Hom}_{\\mathrm{WeilD}(X_0,M)}(T_{M/E}W,T_{M/F}V)$$\n[def-weil-directed-colimit-abelian-groups]. The identity is represented by\n$(E,\\operatorname{id}_W)$. For $[M,u]:(E,W)\\to(F,V)$ and\n$[M',v]:(F,V)\\to(G,Z)$, choose $N\\supseteq M,M'$ and define their\ncomposite to be $[N,v_N\\circ u_N]$. Here \"finite\nsubfield\" always means finite over $\\Ql$, not a field with finitely many\nelements. This is a colimit of Weil categories, not a claim that the\nunderlying coefficient category of [def-weil-pbc-qbar-category] already\nincludes Frobenius data.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-weil-category.md",
+  "place": "node def-wf-weil-category, order 2106",
+  "note": [
+   "*Recorded in advance* from chapter *Weight foundations and monodromy groups* of the source."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "def-weil-frobenius-detailed",
+  "def-tw-frobenius-action",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-endofunctor-fixed-pair-category",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-qbar-category",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-directed-colimit-abelian-groups"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Definition of the Weil category of bounded constructible complexes with a Frobenius isomorphism over a finite field, including the filtered colimit over finite extensions of Q_l",
+   "results": "WittVector.StandardOneDimIsocrystal; WittVector.Isocrystal; WittVector.instModuleFractionRingStandardOneDimIsocrystal; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.Isocrystal.toModule; WittVector.instAddCommGroupStandardOneDimIsocrystal; WittVector.IsocrystalEquiv; WittVector.isocrystal_classification. None is a Weil category or Frobenius-fixed complex category.",
+   "date": "2026-10-15",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "The Weil category",
-  "statement": "Fix the global finite-field datum $(p,a,q,k_0,k)$ of\n[def-weil-finite-field-fiber], with $k_0=\\mathbf F_q$ and\n$k=\\overline{\\mathbf F}_q$, a prime $\\ell\\neq p$, and the chosen algebraic\nclosure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$. Let $X_0$ be a separated scheme of\nfinite type over $k_0$ in the conventions of\n[def-weil-pbc-scheme-conventions], and put $X=X_0\\times_{k_0}k$.\nFor a finite intermediate extension $E/\\Ql$ in $\\Qlb$, use\n$\\mathcal C_E=D^b_c(X,E)$ of [def-weil-pbc-rational-category], namely the\nraw rationalization of the integral category\n[def-weil-pbc-bounded-constructible-complete]. These coefficient categories\nare on the small pro-etale site, with completed integral coefficients;\nno identification with a different coefficient model is made.\n\nWrite $\\Phi_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\gamma)$,\nwhere $\\gamma=(z\\mapsto z^q)^{-1}$ on $k$, for the geometric-Frobenius\nautomorphism of [def-weil-frobenius-detailed], with the geometric convention\nof [def-tw-frobenius-action]. Write $P_E=\\Phi_{X,E}^*$ for its pullback on\n$\\mathcal C_E$: the completed pullback of\n[def-weil-pbc-completed-pullback] at the integral stage followed by\nrationalization, using the equivalence of small pro-etale sites induced\nby the scheme automorphism\n[lem-weil-proetale-isomorphism-inverse-image]. Thus $\\Phi_X^*K$ below\nmeans this derived pullback. In this automorphism case, inverse image\nis an exact equivalence with exact inverse. Applying the two inverse\nfunctors to resolutions of strict towers identifies the derived inverse\nlimit of the transported reduction tower with transport of the original\nderived inverse limit. Thus completed pullback here is coefficient\ntransport, and its inverse is the transport along $\\Phi_X^{-1}$.\n\nA *Weil complex* at $E$ on $X_0$ is a pair $(K,\\varphi_K)$ with\n$K\\in\\mathcal C_E$ and an isomorphism\n$\\varphi_K:P_EK\\xrightarrow{\\sim}K$. Define\n$\\mathrm{WeilD}(X_0,E)$ to be the category of these fixed pairs\n[def-weil-endofunctor-fixed-pair-category]. Explicitly, a morphism\n$(K,\\varphi_K)\\to(L,\\varphi_L)$ is a morphism $u:K\\to L$ in $\\mathcal C_E$\nsatisfying\n$$u\\circ\\varphi_K=\\varphi_L\\circ P_E(u).$$\nIdentities and composition are those of $\\mathcal C_E$. The *strict*\nversion mentioned here uses these same pairs and all these commuting\nmorphisms; the definition supplies no alternative morphism groups and no\ntriangulated structure on the category of pairs.\n\nFor $E\\subseteq F$ use the scalar-extension functor\n$T_{F/E}:\\mathcal C_E\\to\\mathcal C_F$, its normalized units and\nassociators, and the ambient pullback comparison of [prop-weil-pbc-scalar-extension],\nrestricted and rationalized for the automorphism $\\Phi_X$. Here the\nrestriction uses the site equivalence above: it transports the completed\ncoefficient sheaf and reduction tower, compatible etale-origin witnesses,\nand constructibility strata, with their bounds unchanged. This is the\nisomorphism case of the comparison, whose constructible restriction is\nconditional on preservation in the cited statement.\nWrite the comparison in the direction\n$c_{F/E}:P_FT_{F/E}\\xrightarrow{\\sim}T_{F/E}P_E$.\nDefine the transition functor on Weil complexes by\n$$(K,\\varphi_K)\\longmapsto\n(T_{F/E}K,\\ T_{F/E}(\\varphi_K)\\circ c_{F/E,K}),\n\\qquad u\\longmapsto T_{F/E}(u).$$\n\nThe $\\Qlb$-version $\\mathrm{WeilD}(X_0,\\Qlb)$ is the filtered\n$2$-colimit of these finite-stage Weil categories, with the common-stage\nconvention of [def-weil-pbc-qbar-category]. More explicitly, its objects\nare pairs $(E,W)$ with $E$ in the directed set of finite intermediate\nextensions [def-weil-finite-subextension-directed-set] and\n$W\\in\\mathrm{WeilD}(X_0,E)$. A morphism $(E,W)\\to(F,V)$ is a class\n$[M,u]$, where $M\\supseteq E,F$ is a finite intermediate extension and\n$u:T_{M/E}W\\to T_{M/F}V$ is a commuting Weil morphism at $M$.\nWrite $a_{N,M,E,W}:T_{N/M}T_{M/E}W\\xrightarrow{\\sim}T_{N/E}W$\nfor the induced associator on Weil pairs. For $N\\supseteq M$ define\n$$u_N=a_{N,M,F,V}\\circ T_{N/M}(u)\\circ a_{N,M,E,W}^{-1}.$$\nRepresentatives $[M,u]$ and $[M',u']$ agree if $u_N=u'_N$ for some\nfinite $N\\supseteq M,M'$. Equivalently their Hom group is\n$$\\varinjlim_{M\\supseteq E,F}\n\\operatorname{Hom}_{\\mathrm{WeilD}(X_0,M)}(T_{M/E}W,T_{M/F}V)$$\n[def-weil-directed-colimit-abelian-groups]. The identity is represented by\n$(E,\\operatorname{id}_W)$. For $[M,u]:(E,W)\\to(F,V)$ and\n$[M',v]:(F,V)\\to(G,Z)$, choose $N\\supseteq M,M'$ and define their\ncomposite to be $[N,v_N\\circ u_N]$. Here \"finite\nsubfield\" always means finite over $\\Ql$, not a field with finitely many\nelements. This is a colimit of Weil categories, not a claim that the\nunderlying coefficient category of [def-weil-pbc-qbar-category] already\nincludes Frobenius data.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-weil-category.md",
-    "place": "node def-wf-weil-category, order 2106",
-    "note": [
-      "*Recorded in advance* from chapter *Weight foundations and monodromy groups* of the source."
-    ]
+  {
+   "tool": "loogle",
+   "query": "WeilComplex, IsoAlgebra, CategoryTheory.Endofunctor.Algebra",
+   "results": "0 hits; unknown identifier WeilComplex.",
+   "date": "2026-10-15",
+   "verdict": "invalid query; superseded by valid Endofunctor.Algebra searches"
   },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-pbc-rational-category",
-    "def-weil-frobenius-detailed",
-    "def-tw-frobenius-action",
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "def-weil-endofunctor-fixed-pair-category",
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-pbc-qbar-category",
-    "def-weil-finite-subextension-directed-set",
-    "def-weil-directed-colimit-abelian-groups"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Definition of the Weil category of bounded constructible complexes with a Frobenius isomorphism over a finite field, including the filtered colimit over finite extensions of Q_l",
-      "results": "WittVector.StandardOneDimIsocrystal; WittVector.Isocrystal; WittVector.instModuleFractionRingStandardOneDimIsocrystal; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.Isocrystal.toModule; WittVector.instAddCommGroupStandardOneDimIsocrystal; WittVector.IsocrystalEquiv; WittVector.isocrystal_classification. None is a Weil category or Frobenius-fixed complex category.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "WeilComplex, IsoAlgebra, CategoryTheory.Endofunctor.Algebra",
-      "results": "0 hits; unknown identifier WeilComplex.",
-      "date": "2026-10-15",
-      "verdict": "invalid query; superseded by valid Endofunctor.Algebra searches"
-    },
-    {
-      "tool": "grep",
-      "query": "WeilComplex|WeilSheaf|IsoAlgebra|fixed pair|Frobenius",
-      "results": "Helper printed OK 0 hits, but the requested subdirectory WeilConjectures does not exist under Mathlib/. This was an invalid search scope and provides no absence evidence; corrected by a later CategoryTheory grep.",
-      "date": "2026-10-15",
-      "verdict": "invalid search scope; superseded",
-      "subdirectory": "WeilConjectures"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Weil category of bounded constructible complexes with Frobenius structure over a finite field",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Category of Weil objects as fixed pairs for geometric Frobenius pullback, with morphisms commuting with Frobenius",
-      "results": "WittVector.Isocrystal; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.IsocrystalHom; WittVector.StandardOneDimIsocrystal; WittVector.IsocrystalEquiv; Isocrystal.term_→ᶠⁱ[_,_]_; WittVector.Isocrystal.frobenius; WittVector.Isocrystal.frob. None states the requested category.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Endofunctor.Algebra, CategoryTheory.Endofunctor.IsoAlgebra, AlgebraicGeometry.WeilComplex",
-      "results": "0 hits; unknown identifier CategoryTheory.Endofunctor.IsoAlgebra.",
-      "date": "2026-10-15",
-      "verdict": "invalid query; superseded by valid Endofunctor.Algebra searches"
-    },
-    {
-      "tool": "grep",
-      "query": "fixed pair|Frobenius pullback|geometricGaloisFrobenius|IsoAlgebra",
-      "results": "Helper printed OK 0 hits, but it prepends Mathlib/, so this requested a nonexistent nested Mathlib/Mathlib/CategoryTheory path. This provides no absence evidence; corrected by a later CategoryTheory grep.",
-      "date": "2026-10-15",
-      "verdict": "invalid search scope; superseded",
-      "subdirectory": "Mathlib/CategoryTheory"
-    },
-    {
-      "tool": "grep",
-      "query": "WeilComplex|WeilSheaf|IsoAlgebra|Frobenius",
-      "results": "12 hits: Adjunction/Mates.lean:39; RegularCategory/Basic.lean:25,169,180,182,191; Monoidal/Rigid/Basic.lean:383; Monoidal/Closed/Functor.lean:19,28,31,51,61. These concern Frobenius reciprocity, not Weil complexes.",
-      "date": "2026-10-15",
-      "verdict": "no match",
-      "subdirectory": "CategoryTheory"
-    },
-    {
-      "tool": "grep",
-      "query": "geometricGaloisFrobenius|WeilComplex|boundedConstructible|ellAdicSheaf",
-      "results": "5 hits in Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:27,63,71,76,80. Read the file: ellAdicSheaf is the sheaf of continuous Z_l-valued functions, and EllAdicCohomology its cohomology; neither supplies constructible E-complexes with Frobenius or their filtered colimit.",
-      "date": "2026-10-15",
-      "verdict": "no match",
-      "subdirectory": "AlgebraicGeometry"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Endofunctor.Algebra",
-      "results": "12 hits: CategoryTheory.Endofunctor.Algebra; instInhabitedAlgebraId; Algebra.a; Algebra.instCategory; Algebra.instCategoryStruct; Algebra.Hom; Algebra.Hom.id; Algebra.forget; Algebra.Hom.instInhabited; Algebra.forget_faithful; Algebra.forget_reflects_iso; Algebra.mk. Read Mathlib/CategoryTheory/Endofunctor/Algebra.lean:39,65,115,131. This is the generic categorical ingredient already recorded by def-weil-endofunctor-fixed-pair-category; it does not define the coefficient or Frobenius categories of this item.",
-      "date": "2026-10-15",
-      "verdict": "generic ingredient only; no match for the full item"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Equivariant objects of a category for an automorphism functor with invertible structure map and intertwining morphisms, over a filtered system of coefficient fields",
-      "results": "8 hits, all CategoryTheory.PreGaloisCategory results: action_ext_of_isGalois, functorToAction, instMulActionAutCarrierVFintypeCatFunctorObjActionFunctorToAction, mulAction_def, instMulActionAutFunctorFintypeCatCarrierObj, toAut_hom_app_apply, autMulFiber, toAut. These concern automorphisms acting on a finite-set-valued fiber functor, not the specified constructible PBC coefficient categories or their finite-stage Weil colimit.",
-      "date": "2026-10-16",
-      "verdict": "no match for the item"
-    },
-    {
-      "tool": "grep",
-      "query": "Endofunctor.Algebra|IsIso.*str|equivariant",
-      "subdirectory": "CategoryTheory/Endofunctor",
-      "results": "2 hits in Mathlib/CategoryTheory/Endofunctor/Algebra.lean:225,423, Algebra.Initial.str_isIso and Coalgebra.Terminal.str_isIso. These prove invertibility of structure maps of initial algebras or terminal coalgebras, not the Weil category. Read Algebra.lean:39-142 for the existing fixed-pair ingredient.",
-      "date": "2026-10-16",
-      "verdict": "generic ingredients only"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Endofunctor.Algebra.Hom",
-      "results": "12 hits: Algebra.Hom, Hom.id, Hom.instInhabited, Algebra.id_eq_id, Hom.comp, Hom.f, Algebra.forget_map, Hom.ext, Hom.ext_iff, Algebra.comp_eq_comp, Hom.h, Hom.mk (all in CategoryTheory.Endofunctor). Read Mathlib/CategoryTheory/Endofunctor/Algebra.lean:39-142: this supplies the generic fixed-pair category already cited via def-weil-endofunctor-fixed-pair-category, without the PBC coefficients or filtered-stage colimit.",
-      "date": "2026-10-16",
-      "verdict": "generic ingredient already reused; no match for the item"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2106,
-  "blueprint_uses": [
-    "def-tw-frobenius-action",
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-pbc-qbar-category",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "recorded_in_advance",
-      "text": "*Recorded in advance* from chapter *Weight foundations and monodromy groups* of the source.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "WeilComplex|WeilSheaf|IsoAlgebra|fixed pair|Frobenius",
+   "results": "Helper printed OK 0 hits, but the requested subdirectory WeilConjectures does not exist under Mathlib/. This was an invalid search scope and provides no absence evidence; corrected by a later CategoryTheory grep.",
+   "date": "2026-10-15",
+   "verdict": "invalid search scope; superseded",
+   "subdirectory": "WeilConjectures"
   },
-  "chapter": "sec-six-functors",
-  "unit": "sk-rem-sf-pf-done",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "def-wf-weil-category",
-    "worker": "stage1",
-    "summary": "Definition-only split, no new nodes. Read the exact master blueprint definition and unit on the project server, all statement dependencies, related DAG definitions and slopmaster2 source. Corrected the imported integral-only citation for D^b_c(X,E) by explicitly using the existing raw rationalization, spelled out the inherited ell != p setting, named completed derived Frobenius pullback and the existing fixed-pair category, and made the Weil scalar-extension functors and common-stage filtered-colimit morphisms explicit. No category of derived Weil sheaves is identified with this category of pairs. Related definitions use different coefficient models, so blueprint.same_as is empty after search; imported blueprint.from stays null. Generic category theory is already a Mathlib leaf, but no Mathlib or project declaration covers the entire item. Recorded two incorrectly scoped greps honestly as superseded and reran searches with valid source scopes; LeanSearch was unavailable. Second reading: cited the existing scheme-isomorphism/site-equivalence input, replaced implicit common-stage transport and composition by the associator conjugation formulas, and relabelled two invalid Loogle queries honestly. No new nodes. Return repair (merge-lock timeout): reread all thirteen current dependency statements and checked they match the server snapshot. Made the scalar/pullback comparison explicitly the restricted and rationalized ambient comparison in the scheme-automorphism case, spelling out why its preservation condition holds. Completed pullback is still the strict reduction-tower derived-limit construction; no arbitrary pullback preservation is used. The delivery tool rebases onto current origin during the required dry run. Fresh repair pass: compared all thirteen current dependencies field by field with the saved repair snapshot (no changes), reread the exact master definition and unit by read-only SSH, and explicitly described why the strict-tower derived-limit pullback is transport in the scheme-automorphism case. This identifies the inverse endofunctor used in the definition and supports the conditional restriction of the current scalar-extension comparison.",
-    "blueprint": "Realizes all sentences of master blueprint def-wf-weil-category (order 2106): Weil-complex data, commuting morphisms, WeilD and its strict version, and the filtered-colimit Qbar version. The additional formulas unpack these definitions and repair the integral-versus-rational reference. The enclosing unit sk-rem-sf-pf-done is a projection-formula remark with no proof steps; this recorded-in-advance definition is not that unit statement.",
-    "tool_uses": []
+  {
+   "tool": "leansearch",
+   "query": "Weil category of bounded constructible complexes with Frobenius structure over a finite field",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
   },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-NJ-f643c3d53",
-    "group": "NJ",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-f643c3d53 (reviewer sub-agent of L); spot-checked: Read the full definition, all thirteen dependency statements, exact master sources, and unit/chapter route. Checked Frobenius transport, conditional scalar-extension preservation, associator directions, colimit composition, edge cases, and duplicate candidates. No new nodes or repairs needed. No comparison with the targets’ condensed coefficient categories is assumed. Detailed checks are in review.md."
+  {
+   "tool": "leanfinder",
+   "query": "Category of Weil objects as fixed pairs for geometric Frobenius pullback, with morphisms commuting with Frobenius",
+   "results": "WittVector.Isocrystal; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.IsocrystalHom; WittVector.StandardOneDimIsocrystal; WittVector.IsocrystalEquiv; Isocrystal.term_→ᶠⁱ[_,_]_; WittVector.Isocrystal.frobenius; WittVector.Isocrystal.frob. None states the requested category.",
+   "date": "2026-10-15",
+   "verdict": "no match"
   },
-  "lean": {
-    "module": "Sheaf.Paper.PbcWeilCategory",
-    "declaration": "WeilConjectures.WeilDQbar",
-    "declarations": [
-      "CategoryTheory.Endofunctor.IsoAlgebra.PreadditiveNormalized",
-      "CategoryTheory.Endofunctor.IsoAlgebra.preadditive_exists",
-      "CategoryTheory.Endofunctor.IsoAlgebra.preadditive",
-      "WeilConjectures.weilGeometricFiber_coefficientHypotheses",
-      "WeilConjectures.weilGeometricFiber_isNoetherian",
-      "WeilConjectures.weilFrobeniusPullback",
-      "WeilConjectures.weilFrobeniusPullback_additive",
-      "WeilConjectures.WeilD",
-      "WeilConjectures.weilCoefficientExtension",
-      "WeilConjectures.weilFrobeniusScalarComparison",
-      "WeilConjectures.weilScalarExtension",
-      "WeilConjectures.weilScalarExtension_additive",
-      "WeilConjectures.weilScalarAssociator_exists",
-      "WeilConjectures.weilScalarAssociator",
-      "WeilConjectures.weilScalarAssociator_cocycle",
-      "WeilConjectures.weilScalarExtension_refl",
-      "WeilConjectures.weilScalarSystem",
-      "WeilConjectures.WeilDQbar"
-    ],
-    "file": "lean/Sheaf/Paper/PbcWeilCategory.lean",
-    "statement": "abbrev WeilDQbar",
-    "branch": "newtargets-dag",
-    "by": "NJ",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Unstated prerequisite supplied with def-wf-tensor-product. Reuses the NQ reference draft, consolidating the canonical coefficient-map and isomorphism-transport helpers in their owning modules. The actual finite quotients, normalized tensor adjunctions, raw rationalization and common-stage Weil pairs are retained."
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra, CategoryTheory.Endofunctor.IsoAlgebra, AlgebraicGeometry.WeilComplex",
+   "results": "0 hits; unknown identifier CategoryTheory.Endofunctor.IsoAlgebra.",
+   "date": "2026-10-15",
+   "verdict": "invalid query; superseded by valid Endofunctor.Algebra searches"
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-884995e9b",
-    "group": "NJ",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable statements, all dependencies, sources, canonical constructions, universes, edge cases, and report gates. All five modules reproduced cleanly through scompile.py. No fixes needed; branch head unchanged."
+  {
+   "tool": "grep",
+   "query": "fixed pair|Frobenius pullback|geometricGaloisFrobenius|IsoAlgebra",
+   "results": "Helper printed OK 0 hits, but it prepends Mathlib/, so this requested a nonexistent nested Mathlib/Mathlib/CategoryTheory path. This provides no absence evidence; corrected by a later CategoryTheory grep.",
+   "date": "2026-10-15",
+   "verdict": "invalid search scope; superseded",
+   "subdirectory": "Mathlib/CategoryTheory"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $E/\\mathbf Q_\\ell$ be finite and let $X_0$ be a\nseparated scheme of finite type\nover $\\mathbf F_q$, with $X=X_0\\otimes_{\\mathbf F_q}\\overline{\\mathbf F}_q$.\nA *Weil complex* $(K,\\varphi_K)$ consists of\n$K\\in D^b_c(X,E)$ (the categories of\n[def-weil-pbc-bounded-constructible-complete]) and an isomorphism\n$\\varphi_K:\\Phi_X^*K\\cong K$, where $\\Phi_X$ is the geometric\nFrobenius of [def-tw-frobenius-action]; morphisms are morphisms\nof $K$ commuting with the $\\varphi$'s. The *Weil category*\n$\\mathrm{WeilD}(X_0,E)$ has as objects the Weil complexes; its strict\nversion uses the same objects and all commuting morphisms. The\n$\\overline{\\mathbf Q}_\\ell$-version is the filtered colimit over the\nfinite subfields $E$ of its finite-stage analogue (the\n$2$-colimit of\n[def-weil-pbc-qbar-category]).",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "grep",
+   "query": "WeilComplex|WeilSheaf|IsoAlgebra|Frobenius",
+   "results": "12 hits: Adjunction/Mates.lean:39; RegularCategory/Basic.lean:25,169,180,182,191; Monoidal/Rigid/Basic.lean:383; Monoidal/Closed/Functor.lean:19,28,31,51,61. These concern Frobenius reciprocity, not Weil complexes.",
+   "date": "2026-10-15",
+   "verdict": "no match",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "geometricGaloisFrobenius|WeilComplex|boundedConstructible|ellAdicSheaf",
+   "results": "5 hits in Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:27,63,71,76,80. Read the file: ellAdicSheaf is the sheaf of continuous Z_l-valued functions, and EllAdicCohomology its cohomology; neither supplies constructible E-complexes with Frobenius or their filtered colimit.",
+   "date": "2026-10-15",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra",
+   "results": "12 hits: CategoryTheory.Endofunctor.Algebra; instInhabitedAlgebraId; Algebra.a; Algebra.instCategory; Algebra.instCategoryStruct; Algebra.Hom; Algebra.Hom.id; Algebra.forget; Algebra.Hom.instInhabited; Algebra.forget_faithful; Algebra.forget_reflects_iso; Algebra.mk. Read Mathlib/CategoryTheory/Endofunctor/Algebra.lean:39,65,115,131. This is the generic categorical ingredient already recorded by def-weil-endofunctor-fixed-pair-category; it does not define the coefficient or Frobenius categories of this item.",
+   "date": "2026-10-15",
+   "verdict": "generic ingredient only; no match for the full item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant objects of a category for an automorphism functor with invertible structure map and intertwining morphisms, over a filtered system of coefficient fields",
+   "results": "8 hits, all CategoryTheory.PreGaloisCategory results: action_ext_of_isGalois, functorToAction, instMulActionAutCarrierVFintypeCatFunctorObjActionFunctorToAction, mulAction_def, instMulActionAutFunctorFintypeCatCarrierObj, toAut_hom_app_apply, autMulFiber, toAut. These concern automorphisms acting on a finite-set-valued fiber functor, not the specified constructible PBC coefficient categories or their finite-stage Weil colimit.",
+   "date": "2026-10-16",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "Endofunctor.Algebra|IsIso.*str|equivariant",
+   "subdirectory": "CategoryTheory/Endofunctor",
+   "results": "2 hits in Mathlib/CategoryTheory/Endofunctor/Algebra.lean:225,423, Algebra.Initial.str_isIso and Coalgebra.Terminal.str_isIso. These prove invertibility of structure maps of initial algebras or terminal coalgebras, not the Weil category. Read Algebra.lean:39-142 for the existing fixed-pair ingredient.",
+   "date": "2026-10-16",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.Algebra.Hom",
+   "results": "12 hits: Algebra.Hom, Hom.id, Hom.instInhabited, Algebra.id_eq_id, Hom.comp, Hom.f, Algebra.forget_map, Hom.ext, Hom.ext_iff, Algebra.comp_eq_comp, Hom.h, Hom.mk (all in CategoryTheory.Endofunctor). Read Mathlib/CategoryTheory/Endofunctor/Algebra.lean:39-142: this supplies the generic fixed-pair category already cited via def-weil-endofunctor-fixed-pair-category, without the PBC coefficients or filtered-stage colimit.",
+   "date": "2026-10-16",
+   "verdict": "generic ingredient already reused; no match for the item"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2106,
+ "blueprint_uses": [
+  "def-tw-frobenius-action",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "recorded_in_advance",
+   "text": "*Recorded in advance* from chapter *Weight foundations and monodromy groups* of the source.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-wf-weil-category",
+  "worker": "stage1",
+  "summary": "Definition-only split, no new nodes. Read the exact master blueprint definition and unit on the project server, all statement dependencies, related DAG definitions and slopmaster2 source. Corrected the imported integral-only citation for D^b_c(X,E) by explicitly using the existing raw rationalization, spelled out the inherited ell != p setting, named completed derived Frobenius pullback and the existing fixed-pair category, and made the Weil scalar-extension functors and common-stage filtered-colimit morphisms explicit. No category of derived Weil sheaves is identified with this category of pairs. Related definitions use different coefficient models, so blueprint.same_as is empty after search; imported blueprint.from stays null. Generic category theory is already a Mathlib leaf, but no Mathlib or project declaration covers the entire item. Recorded two incorrectly scoped greps honestly as superseded and reran searches with valid source scopes; LeanSearch was unavailable. Second reading: cited the existing scheme-isomorphism/site-equivalence input, replaced implicit common-stage transport and composition by the associator conjugation formulas, and relabelled two invalid Loogle queries honestly. No new nodes. Return repair (merge-lock timeout): reread all thirteen current dependency statements and checked they match the server snapshot. Made the scalar/pullback comparison explicitly the restricted and rationalized ambient comparison in the scheme-automorphism case, spelling out why its preservation condition holds. Completed pullback is still the strict reduction-tower derived-limit construction; no arbitrary pullback preservation is used. The delivery tool rebases onto current origin during the required dry run. Fresh repair pass: compared all thirteen current dependencies field by field with the saved repair snapshot (no changes), reread the exact master definition and unit by read-only SSH, and explicitly described why the strict-tower derived-limit pullback is transport in the scheme-automorphism case. This identifies the inverse endofunctor used in the definition and supports the conditional restriction of the current scalar-extension comparison.",
+  "blueprint": "Realizes all sentences of master blueprint def-wf-weil-category (order 2106): Weil-complex data, commuting morphisms, WeilD and its strict version, and the filtered-colimit Qbar version. The additional formulas unpack these definitions and repair the integral-versus-rational reference. The enclosing unit sk-rem-sf-pf-done is a projection-formula remark with no proof steps; this recorded-in-advance definition is not that unit statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-f643c3d53",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-f643c3d53 (reviewer sub-agent of L); spot-checked: Read the full definition, all thirteen dependency statements, exact master sources, and unit/chapter route. Checked Frobenius transport, conditional scalar-extension preservation, associator directions, colimit composition, edge cases, and duplicate candidates. No new nodes or repairs needed. No comparison with the targets’ condensed coefficient categories is assumed. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PbcWeilCategory",
+  "declaration": "WeilConjectures.WeilDQbar",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.PreadditiveNormalized",
+   "CategoryTheory.Endofunctor.IsoAlgebra.preadditive_exists",
+   "CategoryTheory.Endofunctor.IsoAlgebra.preadditive",
+   "WeilConjectures.weilGeometricFiber_coefficientHypotheses",
+   "WeilConjectures.weilGeometricFiber_isNoetherian",
+   "WeilConjectures.weilFrobeniusPullback",
+   "WeilConjectures.weilFrobeniusPullback_additive",
+   "WeilConjectures.WeilD",
+   "WeilConjectures.weilCoefficientExtension",
+   "WeilConjectures.weilFrobeniusScalarComparison",
+   "WeilConjectures.weilScalarExtension",
+   "WeilConjectures.weilScalarExtension_additive",
+   "WeilConjectures.weilScalarAssociator_exists",
+   "WeilConjectures.weilScalarAssociator",
+   "WeilConjectures.weilScalarAssociator_cocycle",
+   "WeilConjectures.weilScalarExtension_refl",
+   "WeilConjectures.weilScalarSystem",
+   "WeilConjectures.WeilDQbar"
+  ],
+  "file": "lean/Sheaf/Paper/PbcWeilCategory.lean",
+  "statement": "abbrev WeilDQbar",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Unstated prerequisite supplied with def-wf-tensor-product. Reuses the NQ reference draft, consolidating the canonical coefficient-map and isomorphism-transport helpers in their owning modules. The actual finite quotients, normalized tensor adjunctions, raw rationalization and common-stage Weil pairs are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-884995e9b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all dependencies, sources, canonical constructions, universes, edge cases, and report gates. All five modules reproduced cleanly through scompile.py. No fixes needed; branch head unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $E/\\mathbf Q_\\ell$ be finite and let $X_0$ be a\nseparated scheme of finite type\nover $\\mathbf F_q$, with $X=X_0\\otimes_{\\mathbf F_q}\\overline{\\mathbf F}_q$.\nA *Weil complex* $(K,\\varphi_K)$ consists of\n$K\\in D^b_c(X,E)$ (the categories of\n[def-weil-pbc-bounded-constructible-complete]) and an isomorphism\n$\\varphi_K:\\Phi_X^*K\\cong K$, where $\\Phi_X$ is the geometric\nFrobenius of [def-tw-frobenius-action]; morphisms are morphisms\nof $K$ commuting with the $\\varphi$'s. The *Weil category*\n$\\mathrm{WeilD}(X_0,E)$ has as objects the Weil complexes; its strict\nversion uses the same objects and all commuting morphisms. The\n$\\overline{\\mathbf Q}_\\ell$-version is the filtered colimit over the\nfinite subfields $E$ of its finite-stage analogue (the\n$2$-colimit of\n[def-weil-pbc-qbar-category]).",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

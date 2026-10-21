@@ -1,155 +1,119 @@
 {
-  "id": "def-kun-dimension",
-  "blueprint": {
-    "is": "def-kun-dimension",
-    "from": null,
-    "same_as": null
+ "id": "def-kun-dimension",
+ "blueprint": {
+  "is": "def-kun-dimension",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Dimension",
+ "statement": "The *Krull dimension* $\\kundim X$ of a scheme is the supremum\nof the integers $r$ such that there is a strict chain\n$Z_0\\subsetneq\\cdots\\subsetneq Z_r$ of nonempty irreducible closed\nsubsets of $|X|$. For $x\\in X$, the *dimension at $x$* is\n\n$$\n\\kundim_xX=\\min\\{\\kundim U:x\\in U\\subseteq X\\text{ open}\\}.\n$$\n\nFor a scheme $X$ of finite type over a field $K$ the finiteness\n$\\kundim X<\\infty$ is recorded with the other properties of this notion, and the\ncomputation of the dimension at a point $x\\in X$ in terms of the\ntranscendence degree of\n[def-kun-support] is [lem-kun-dimension-formula].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-dimension.md",
+  "place": "node def-kun-dimension, order 1674"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-kun-topological-krull-dimension",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-finite-type-morphism",
+  "def-kun-support"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rn 'krullDim\\|Scheme.dim\\|def dim\\|topologicalKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln -i 'krullDim\\|dimension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "no dimension of a scheme is defined in Mathlib/AlgebraicGeometry/: Artinian.lean:66-74 applies `topologicalKrullDim X` to a scheme X through its coercion to a type (the Krull dimension of the underlying space, as in this definition); Properties.lean:376 `ringKrullDim_stalk_eq_coheight` (ringKrullDim (X.presheaf.stalk x) = Order.coheight x, tag 02IZ) is the dimension of the local ring at x, not the dimension of X at x; Morphisms/Smooth.lean:135 SmoothOfRelativeDimension is a relative notion for morphisms",
+   "date": "2026-10-09",
+   "verdict": "generalization for the first notion only: `topologicalKrullDim X` for `X : Scheme` is kundim X in one line (recorded on def-kun-topological-krull-dimension); no match for the dimension at a point"
   },
-  "kind": "definition",
-  "title": "Dimension",
-  "statement": "The *Krull dimension* $\\kundim X$ of a scheme is the supremum\nof the integers $r$ such that there is a strict chain\n$Z_0\\subsetneq\\cdots\\subsetneq Z_r$ of nonempty irreducible closed\nsubsets of $|X|$. For $x\\in X$, the *dimension at $x$* is\n\n$$\n\\kundim_xX=\\min\\{\\kundim U:x\\in U\\subseteq X\\text{ open}\\}.\n$$\n\nFor a scheme $X$ of finite type over a field $K$ the finiteness\n$\\kundim X<\\infty$ is recorded with the other properties of this notion, and the\ncomputation of the dimension at a point $x\\in X$ in terms of the\ntranscendence degree of\n[def-kun-support] is [lem-kun-dimension-formula].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-dimension.md",
-    "place": "node def-kun-dimension, order 1674"
+  {
+   "tool": "grep",
+   "query": "grep -rni 'dimension at\\|krullDim.*nhds\\|topologicalKrullDim.*Opens\\|⨅.*krullDim\\|localDim\\|dimAt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rn 'stacks 0055\\|stacks 04MT' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
+   "results": "nothing for the minimum of the dimension over open neighbourhoods of a point, for spaces or schemes; no declaration tagged Stacks 0055 or 04MT (searches recorded on def-kun-topological-dimension-at-point)",
+   "date": "2026-10-09",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-kun-topological-krull-dimension",
-    "def-kun-topological-dimension-at-point",
-    "def-weil-finite-type-morphism",
-    "def-kun-support"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -rn 'krullDim\\|Scheme.dim\\|def dim\\|topologicalKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; grep -rln -i 'krullDim\\|dimension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-      "results": "no dimension of a scheme is defined in Mathlib/AlgebraicGeometry/: Artinian.lean:66-74 applies `topologicalKrullDim X` to a scheme X through its coercion to a type (the Krull dimension of the underlying space, as in this definition); Properties.lean:376 `ringKrullDim_stalk_eq_coheight` (ringKrullDim (X.presheaf.stalk x) = Order.coheight x, tag 02IZ) is the dimension of the local ring at x, not the dimension of X at x; Morphisms/Smooth.lean:135 SmoothOfRelativeDimension is a relative notion for morphisms",
-      "date": "2026-10-09",
-      "verdict": "generalization for the first notion only: `topologicalKrullDim X` for `X : Scheme` is kundim X in one line (recorded on def-kun-topological-krull-dimension); no match for the dimension at a point"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rni 'dimension at\\|krullDim.*nhds\\|topologicalKrullDim.*Opens\\|⨅.*krullDim\\|localDim\\|dimAt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean; grep -rn 'stacks 0055\\|stacks 04MT' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib --include=*.lean",
-      "results": "nothing for the minimum of the dimension over open neighbourhoods of a point, for spaces or schemes; no declaration tagged Stacks 0055 or 04MT (searches recorded on def-kun-topological-dimension-at-point)",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Krull dimension of a scheme at a point",
-      "results": "topologicalKrullDim (Mathlib.Topology.KrullDimension); AlgebraicGeometry.Scheme.height_of_isClosed (Mathlib.AlgebraicGeometry.Scheme); PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; ringKrullDim; IsLocalRing.maximalIdeal_height_eq_ringKrullDim; Module.supportDim",
-      "date": "2026-10-09",
-      "verdict": "no match for the dimension at a point; first clause is topologicalKrullDim (already the leaf def-kun-topological-krull-dimension)"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "dimension of a scheme at a point x, dim_x X",
-      "results": "AlgebraicGeometry.Scheme.height_of_isClosed; Module.rankAtStalk_self; topologicalKrullDim; PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; AlgebraicGeometry.Scheme.functionField",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n 'topologicalKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; rg -ln 'OpenNhdsOf.*Krull|krullDim.*OpenNhds|⨅ .*topologicalKrullDim|dimAt|localDimension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
-      "results": "only AlgebraicGeometry/Artinian.lean:66-123 (topologicalKrullDim of a scheme, ≤ 0 criterion); no local dimension anywhere",
-      "date": "2026-10-09",
-      "verdict": "no match; split unchanged"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1674,
-  "blueprint_uses": [
-    "def-kun-support",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "topologicalKrullDimAt",
-        "topologicalKrullDim"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "topologicalKrullDimAt",
-          "module": "WeilConjectures.Mathlib.Topology.KrullDimension",
-          "lines": [
-            341,
-            344
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "topologicalKrullDim",
-          "module": null,
-          "lines": [
-            0,
-            0
-          ],
-          "kind": null,
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "tool": "leansearch",
+   "query": "Krull dimension of a scheme at a point",
+   "results": "topologicalKrullDim (Mathlib.Topology.KrullDimension); AlgebraicGeometry.Scheme.height_of_isClosed (Mathlib.AlgebraicGeometry.Scheme); PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; ringKrullDim; IsLocalRing.maximalIdeal_height_eq_ringKrullDim; Module.supportDim",
+   "date": "2026-10-09",
+   "verdict": "no match for the dimension at a point; first clause is topologicalKrullDim (already the leaf def-kun-topological-krull-dimension)"
   },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "def-kun-dimension",
-    "worker": "stage1",
-    "summary": "Checked the statement against its only source, the master blueprint node (order 1674; slopmaster2 has no copy), and against the literature it transcribes, Stacks Properties Definition 28.10.1 (tag 04MT), which defines the dimension of a scheme and its dimension at a point as those of the underlying topological space, Stacks Topology Definition 5.10.1 (tag 0055); the statement agrees with both (strict chains of nonempty irreducible closed subsets, supremum of lengths, minimum over open neighbourhoods) and is kept unchanged. The two notions it is built from are now nodes: the Krull dimension of a topological space (new leaf def-kun-topological-krull-dimension, Mathlib `topologicalKrullDim` = krullDim (IrreducibleCloseds X), exact; it points at the existing leaf def-weil-irreducible-components for irreducibility) and the Krull dimension of a topological space at a point (new node def-kun-topological-dimension-at-point, Stacks 0055 (4), no Mathlib match, unsplit); schemes, their underlying space and open subsets are the existing leaf def-pc-scheme (Mathlib AlgebraicGeometry.Scheme). Mathlib has no dimension of a scheme or of a scheme at a point; Artinian.lean applies topologicalKrullDim to a scheme directly, so the first notion specializes in one line, the second has no match, and the item is not a leaf. stmt_deps: removed lem-kun-dimension-formula (a lemma the last paragraph announces, itself stated with kundim_x X; a definition does not depend on a statement about it) and the grab-bag def-weil-pbc-scheme-conventions (the blueprint's uses entry that the text never cites, import flag cites_outside_uses), replaced by def-pc-scheme and, for 'of finite type over a field K' in the last paragraph, def-weil-finite-type-morphism; kept def-kun-support, which the text cites for the transcendence degree. The last paragraph is commentary announcing lem-kun-dimension-finite-type and lem-kun-dimension-formula, not part of the definition; it is left in place."
+  {
+   "tool": "leanfinder",
+   "query": "dimension of a scheme at a point x, dim_x X",
+   "results": "AlgebraicGeometry.Scheme.height_of_isClosed; Module.rankAtStalk_self; topologicalKrullDim; PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim; AlgebraicGeometry.Scheme.functionField",
+   "date": "2026-10-09",
+   "verdict": "no match"
   },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "lean": {
-    "module": "WeilConjectures.Mathlib.Topology.KrullDimension",
-    "declaration": "topologicalKrullDimAt",
-    "declarations": [
-      "topologicalKrullDimAt",
-      "topologicalKrullDim"
-    ],
-    "statement": "noncomputable def topologicalKrullDimAt (x : X) : WithBot ℕ∞",
-    "branch": "slopmaster2",
-    "by": "E1",
-    "date": "2026-10-11",
-    "existing": true,
-    "note": "Both notions reuse existing declarations on the underlying topological space of a scheme: topologicalKrullDim X (Mathlib.Topology.KrullDimension) and topologicalKrullDimAt x (this module, with implicit {X : Type*} [TopologicalSpace X]). The latter is the infimum of topologicalKrullDim U over open U containing x; this infimum is the minimum since WithBot ℕ∞ is well ordered and the neighbourhood family is nonempty. The last paragraph announces properties, not additional defining data."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-dkd1323",
-    "group": "E1",
-    "result": "pass",
-    "note": "existing: dim X = Mathlib root topologicalKrullDim X (Order.krullDim of IrreducibleCloseds, nonempty, strict chains, length r, ⊥ empty) on the scheme carrier, verbatim the node (not Scheme.dim, the local-ring form equal only via sorry'd dim_eq_topologicalKrullDim); dim_x X = slopmaster2 root topologicalKrullDimAt x = ⨅ over Opens containing x (attained, WithBot ℕ∞ well-ordered), same declaration as def-kun-topological-dimension-at-point; no third definition; finite-type paragraph is announcement only"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "The *Krull dimension* $\\kundim X$ of a scheme is the supremum\nof the integers $r$ such that there is a strict chain\n$Z_0\\subsetneq\\cdots\\subsetneq Z_r$ of nonempty irreducible closed\nsubsets of $|X|$. For $x\\in X$, the *dimension at $x$* is\n\n$$\n\\kundim_xX=\\min\\{\\kundim U:x\\in U\\subseteq X\\text{ open}\\}.\n$$",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "grep",
+   "query": "rg -n 'topologicalKrullDim' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry; rg -ln 'OpenNhdsOf.*Krull|krullDim.*OpenNhds|⨅ .*topologicalKrullDim|dimAt|localDimension' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib",
+   "results": "only AlgebraicGeometry/Artinian.lean:66-123 (topologicalKrullDim of a scheme, ≤ 0 criterion); no local dimension anywhere",
+   "date": "2026-10-09",
+   "verdict": "no match; split unchanged"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1674,
+ "blueprint_uses": [
+  "def-kun-support",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-kun-dimension",
+  "worker": "stage1",
+  "summary": "Checked the statement against its only source, the master blueprint node (order 1674; slopmaster2 has no copy), and against the literature it transcribes, Stacks Properties Definition 28.10.1 (tag 04MT), which defines the dimension of a scheme and its dimension at a point as those of the underlying topological space, Stacks Topology Definition 5.10.1 (tag 0055); the statement agrees with both (strict chains of nonempty irreducible closed subsets, supremum of lengths, minimum over open neighbourhoods) and is kept unchanged. The two notions it is built from are now nodes: the Krull dimension of a topological space (new leaf def-kun-topological-krull-dimension, Mathlib `topologicalKrullDim` = krullDim (IrreducibleCloseds X), exact; it points at the existing leaf def-weil-irreducible-components for irreducibility) and the Krull dimension of a topological space at a point (new node def-kun-topological-dimension-at-point, Stacks 0055 (4), no Mathlib match, unsplit); schemes, their underlying space and open subsets are the existing leaf def-pc-scheme (Mathlib AlgebraicGeometry.Scheme). Mathlib has no dimension of a scheme or of a scheme at a point; Artinian.lean applies topologicalKrullDim to a scheme directly, so the first notion specializes in one line, the second has no match, and the item is not a leaf. stmt_deps: removed lem-kun-dimension-formula (a lemma the last paragraph announces, itself stated with kundim_x X; a definition does not depend on a statement about it) and the grab-bag def-weil-pbc-scheme-conventions (the blueprint's uses entry that the text never cites, import flag cites_outside_uses), replaced by def-pc-scheme and, for 'of finite type over a field K' in the last paragraph, def-weil-finite-type-morphism; kept def-kun-support, which the text cites for the transcendence degree. The last paragraph is commentary announcing lem-kun-dimension-finite-type and lem-kun-dimension-formula, not part of the definition; it is left in place."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Topology.KrullDimension",
+  "declaration": "topologicalKrullDimAt",
+  "declarations": [
+   "topologicalKrullDimAt",
+   "topologicalKrullDim"
+  ],
+  "statement": "noncomputable def topologicalKrullDimAt (x : X) : WithBot ℕ∞",
+  "branch": "slopmaster2",
+  "by": "E1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Both notions reuse existing declarations on the underlying topological space of a scheme: topologicalKrullDim X (Mathlib.Topology.KrullDimension) and topologicalKrullDimAt x (this module, with implicit {X : Type*} [TopologicalSpace X]). The latter is the infimum of topologicalKrullDim U over open U containing x; this infimum is the minimum since WithBot ℕ∞ is well ordered and the neighbourhood family is nonempty. The last paragraph announces properties, not additional defining data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dkd1323",
+  "group": "E1",
+  "result": "pass",
+  "note": "existing: dim X = Mathlib root topologicalKrullDim X (Order.krullDim of IrreducibleCloseds, nonempty, strict chains, length r, ⊥ empty) on the scheme carrier, verbatim the node (not Scheme.dim, the local-ring form equal only via sorry'd dim_eq_topologicalKrullDim); dim_x X = slopmaster2 root topologicalKrullDimAt x = ⨅ over Opens containing x (attained, WithBot ℕ∞ well-ordered), same declaration as def-kun-topological-dimension-at-point; no third definition; finite-type paragraph is announcement only"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "The *Krull dimension* $\\kundim X$ of a scheme is the supremum\nof the integers $r$ such that there is a strict chain\n$Z_0\\subsetneq\\cdots\\subsetneq Z_r$ of nonempty irreducible closed\nsubsets of $|X|$. For $x\\in X$, the *dimension at $x$* is\n\n$$\n\\kundim_xX=\\min\\{\\kundim U:x\\in U\\subseteq X\\text{ open}\\}.\n$$",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

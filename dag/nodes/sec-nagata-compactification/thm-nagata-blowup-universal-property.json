@@ -1,272 +1,217 @@
 {
-  "id": "thm-nagata-blowup-universal-property",
-  "blueprint": {
-    "is": "thm-nagata-blowup-universal-property",
-    "from": null,
-    "same_as": null
+ "id": "thm-nagata-blowup-universal-property",
+ "blueprint": {
+  "is": "thm-nagata-blowup-universal-property",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "[stacks-project]",
+ "statement": "Under the data of [thm-nagata-blowup-universal-property], the constructed\nmap $\\widetilde f$ is the unique $X$-morphism from $Y$ to\n$\\operatorname{Bl}_{\\mathcal I}(X)$ inducing the chosen invertible\nquotient. Thus the blow-up is final among such $X$-schemes.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/thm-nagata-blowup-universal-property.md",
+  "place": "node thm-nagata-blowup-universal-property, order 110"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Existence is [thm-nagata-blowup-universal-property], and uniqueness\namong $X$-morphisms inducing the specified quotient is\n[thm-nagata-blowup-universal-property]. Together these are exactly the\nasserted final-object property.",
+   "uses": [],
+   "elementary": null
   },
-  "kind": "statement",
-  "title": "[stacks-project]",
-  "statement": "Under the data of [thm-nagata-blowup-universal-property], the constructed\nmap $\\widetilde f$ is the unique $X$-morphism from $Y$ to\n$\\operatorname{Bl}_{\\mathcal I}(X)$ inducing the chosen invertible\nquotient. Thus the blow-up is final among such $X$-schemes.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/thm-nagata-blowup-universal-property.md",
-    "place": "node thm-nagata-blowup-universal-property, order 110"
+  {
+   "text": "## Graded map induced by an invertible quotient\n\nLet $f\\colon Y\\to X$, let $\\mathcal I\\subseteq\\mathcal O_X$ be a\nquasi-coherent ideal, and let\n$\\mathcal L\\hookrightarrow\\mathcal O_Y$ be an invertible ideal together with\na surjection $q\\colon f^*\\mathcal I\\twoheadrightarrow\\mathcal L$ such that\nthe composite $\\mathcal L\\hookrightarrow\\mathcal O_Y$ after $q$ is the\ncanonical map whose image is the extended ideal\n$\\mathcal I\\mathcal O_Y$ of\n[def-nagata-extended-ideal]. Define $\\alpha_f$ degreewise by the\ntensor powers of this quotient:\n\n$$\n\\alpha_f\\colon\nf^*\\Bigl(\\bigoplus_{n\\geq0}\\mathcal I^n\\Bigr)\n\\longrightarrow\\bigoplus_{n\\geq0}\\mathcal L^{\\otimes n}.\n$$",
+   "uses": [
+    "def-nagata-extended-ideal"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Existence is [thm-nagata-blowup-universal-property], and uniqueness\namong $X$-morphisms inducing the specified quotient is\n[thm-nagata-blowup-universal-property]. Together these are exactly the\nasserted final-object property.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "## Graded map induced by an invertible quotient\n\nLet $f\\colon Y\\to X$, let $\\mathcal I\\subseteq\\mathcal O_X$ be a\nquasi-coherent ideal, and let\n$\\mathcal L\\hookrightarrow\\mathcal O_Y$ be an invertible ideal together with\na surjection $q\\colon f^*\\mathcal I\\twoheadrightarrow\\mathcal L$ such that\nthe composite $\\mathcal L\\hookrightarrow\\mathcal O_Y$ after $q$ is the\ncanonical map whose image is the extended ideal\n$\\mathcal I\\mathcal O_Y$ of\n[def-nagata-extended-ideal]. Define $\\alpha_f$ degreewise by the\ntensor powers of this quotient:\n\n$$\n\\alpha_f\\colon\nf^*\\Bigl(\\bigoplus_{n\\geq0}\\mathcal I^n\\Bigr)\n\\longrightarrow\\bigoplus_{n\\geq0}\\mathcal L^{\\otimes n}.\n$$",
-      "uses": [
-        "def-nagata-extended-ideal"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "## The quotient construction is a graded algebra map\n\nThe degreewise map $\\alpha_f$ respects the unit and multiplication and is a\ngraded algebra morphism.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Proof.*\nIn degree $n$, tensor $q$ $n$ times. Let\n$\\mu_{\\mathcal I}\\colon(f^*\\mathcal I)^{\\otimes n}\\to f^*(\\mathcal I^n)$ be multiplication. The composite of $q^{\\otimes n}$\nwith\nmultiplication isomorphism\n$\\mathcal L^{\\otimes n}\\cong\\mathcal L^n$ from\n[lemma-nagata-invertible-ideal-tensor-power] and the injection\n$\\mathcal L^n\\hookrightarrow\\mathcal O_Y$ is ordinary $n$-fold\nmultiplication. It therefore kills $\\ker(\\mu_{\\mathcal I})$; injectivity\nof $\\mathcal L^n\\hookrightarrow\\mathcal O_Y$ shows that $q^{\\otimes n}$\nitself kills this kernel. Hence it factors uniquely through\n$f^*(\\mathcal I^n)$. These factorizations commute with multiplication by\nassociativity and with the degree-zero unit, giving the graded algebra map.\nAssociativity of tensor products and the multiplication maps for ideal\npowers show that these degreewise maps preserve the unit and multiplication.",
-      "uses": [
-        "lemma-nagata-invertible-ideal-tensor-power"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "## Universal lift construction\n\nUnder the data of\n[thm-nagata-blowup-universal-property], use the inverse of the canonical isomorphism in\n[lemma-nagata-relative-proj-invertible-tensor-powers], apply the\ncontravariant relative-Proj map induced by $\\alpha_f$. Then use the\narbitrary base-change comparison in\n[lemma-nagata-relative-proj-base-change-arbitrary] to identify the\nresulting target with $Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X)$. Here\n$\\operatorname{Proj}_X(\\mathcal R_X(\\mathcal I))$ is identified with\n[def-nagata-global-blowup]: both are obtained by gluing the same affine\nRees-algebra Proj schemes, and the comparison respects the restriction\ncocycles. Compose\nthe resulting map with the second projection\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X)\\to \\operatorname{Bl}_{\\mathcal I}(X)$, and\ndefine\n\n$$\n\\widetilde f\\colon Y\\longrightarrow\\operatorname{Bl}_{\\mathcal I}(X)\n$$\n\nto be the resulting composite. The affine maps and their gluing data are\npart of the relative-Proj interface; no identification of $Y$ with a Proj\nis left implicit.",
-      "uses": [
-        "lemma-nagata-relative-proj-invertible-tensor-powers",
-        "lemma-nagata-relative-proj-base-change-arbitrary",
-        "def-nagata-global-blowup"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "## Uniqueness of the universal lift\n\nUnder the data of [thm-nagata-blowup-universal-property], every $X$-morphism\n$h\\colon Y\\to\\operatorname{Bl}_{\\mathcal I}(X)$ inducing the chosen\ninvertible quotient equals the constructed map $\\widetilde f$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Proof.*\nOn each affine open of $X$, let $D_+(f)$ range over the standard opens\nindexed by the degree-one elements $f\\in\\mathcal I$; these opens cover the\nblow-up Proj. The inverse image of each chart\nunder $h$ is determined by the degree-zero map obtained from the given\nquotient $f^*\\mathcal I\\twoheadrightarrow\\mathcal L$: on a representative\n$x/f_i^n$ it is the coefficient of the corresponding quotient fraction in\n$\\mathcal O_Y$. The constructed lift uses exactly the same degreewise maps,\nby definition of $\\alpha_f$ and the tensor-power identification, so $h$ and\n$\\widetilde f$ agree on each inverse-image chart. These equalities are\ncompatible on chart overlaps because both maps send a localized fraction to\nits further localization; the localization cocycle gives literal equality.\nThe standard charts cover the target, hence their inverse images cover $Y$,\nand equality of morphisms on this cover implies $h=\\widetilde f$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "## The constructed lift lies over $X$\n\nUnder the data of [thm-nagata-blowup-universal-property], the constructed\nmap $\\widetilde f$ is an $X$-morphism: its composite with\n$b_{X,\\mathcal I}$ is $f$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Proof.*\nOn each standard chart, the degree-zero component of\n[thm-nagata-blowup-universal-property] is the canonical map to\n$\\mathcal O_Y$, hence the composite with the blow-up structure map is $f$.\nThe chart maps agree on overlaps by functoriality of localization, and the\nglued equality is therefore the specified equality over $X$.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "def-nagata-extended-ideal",
-    "lemma-nagata-invertible-ideal-tensor-power",
+  {
+   "text": "## The quotient construction is a graded algebra map\n\nThe degreewise map $\\alpha_f$ respects the unit and multiplication and is a\ngraded algebra morphism.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Proof.*\nIn degree $n$, tensor $q$ $n$ times. Let\n$\\mu_{\\mathcal I}\\colon(f^*\\mathcal I)^{\\otimes n}\\to f^*(\\mathcal I^n)$ be multiplication. The composite of $q^{\\otimes n}$\nwith\nmultiplication isomorphism\n$\\mathcal L^{\\otimes n}\\cong\\mathcal L^n$ from\n[lemma-nagata-invertible-ideal-tensor-power] and the injection\n$\\mathcal L^n\\hookrightarrow\\mathcal O_Y$ is ordinary $n$-fold\nmultiplication. It therefore kills $\\ker(\\mu_{\\mathcal I})$; injectivity\nof $\\mathcal L^n\\hookrightarrow\\mathcal O_Y$ shows that $q^{\\otimes n}$\nitself kills this kernel. Hence it factors uniquely through\n$f^*(\\mathcal I^n)$. These factorizations commute with multiplication by\nassociativity and with the degree-zero unit, giving the graded algebra map.\nAssociativity of tensor products and the multiplication maps for ideal\npowers show that these degreewise maps preserve the unit and multiplication.",
+   "uses": [
+    "lemma-nagata-invertible-ideal-tensor-power"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "## Universal lift construction\n\nUnder the data of\n[thm-nagata-blowup-universal-property], use the inverse of the canonical isomorphism in\n[lemma-nagata-relative-proj-invertible-tensor-powers], apply the\ncontravariant relative-Proj map induced by $\\alpha_f$. Then use the\narbitrary base-change comparison in\n[lemma-nagata-relative-proj-base-change-arbitrary] to identify the\nresulting target with $Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X)$. Here\n$\\operatorname{Proj}_X(\\mathcal R_X(\\mathcal I))$ is identified with\n[def-nagata-global-blowup]: both are obtained by gluing the same affine\nRees-algebra Proj schemes, and the comparison respects the restriction\ncocycles. Compose\nthe resulting map with the second projection\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X)\\to \\operatorname{Bl}_{\\mathcal I}(X)$, and\ndefine\n\n$$\n\\widetilde f\\colon Y\\longrightarrow\\operatorname{Bl}_{\\mathcal I}(X)\n$$\n\nto be the resulting composite. The affine maps and their gluing data are\npart of the relative-Proj interface; no identification of $Y$ with a Proj\nis left implicit.",
+   "uses": [
     "lemma-nagata-relative-proj-invertible-tensor-powers",
     "lemma-nagata-relative-proj-base-change-arbitrary",
     "def-nagata-global-blowup"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/thm-nagata-blowup-universal-property.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "embedded_statements",
-    "padded_uses",
-    "self_citation",
-    "lean_multiple",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 110,
-  "blueprint_uses": [
-    "def-nagata-affine-blowup",
-    "def-nagata-affine-blowup-chart-map",
-    "def-nagata-affine-blowup-restriction-map",
-    "def-nagata-affine-proj",
-    "def-nagata-effective-cartier-ideal",
-    "def-nagata-extended-ideal",
-    "def-nagata-global-blowup",
-    "def-nagata-global-blowup-glue-data",
-    "def-nagata-global-blowup-local-model",
-    "def-nagata-global-blowup-overlap-basic-map",
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-nagata-invertible-ideal",
-    "def-nagata-rees-algebra",
-    "def-nagata-rees-localization-map",
-    "def-nagata-rees-piece",
-    "def-nagata-relative-proj",
-    "def-nagata-sheaf-rees-algebra",
-    "lemma-nagata-chart-extended-ideal-principal",
-    "lemma-nagata-global-blowup-overlap-basic",
-    "lemma-nagata-invertible-ideal-tensor-power",
-    "lemma-nagata-localization-ideal-pow",
-    "lemma-nagata-proj-chart-ring-cocycle",
-    "lemma-nagata-rees-degree-one-element",
-    "lemma-nagata-rees-degree-zero",
-    "lemma-nagata-rees-generators-cover-proj",
-    "lemma-nagata-rees-piece-membership",
-    "lemma-nagata-rees-piece-mul",
-    "lemma-nagata-relative-proj-base-change-arbitrary",
-    "lemma-nagata-relative-proj-invertible-tensor-powers",
-    "prop-nagata-affine-blowup-chart",
-    "prop-nagata-global-blowup-cover-independent",
-    "prop-nagata-proj-standard-open",
-    "prop-nagata-rees-graded"
-  ],
-  "lean": {
-    "module": "WeilConjectures.Blowup.BlowupUniversal",
-    "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.exists_lift_blowup",
-    "branch": "master",
-    "line": 1312,
-    "sorry_free": true,
-    "body_lines": 24,
-    "others": [
-      {
-        "module": "WeilConjectures.Blowup.BlowupUniversal",
-        "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.hom_ext_of_isInvertible_comap",
-        "branch": "master",
-        "line": 1092,
-        "sorry_free": true,
-        "body_lines": 41
-      }
-    ]
+  {
+   "text": "## Uniqueness of the universal lift\n\nUnder the data of [thm-nagata-blowup-universal-property], every $X$-morphism\n$h\\colon Y\\to\\operatorname{Bl}_{\\mathcal I}(X)$ inducing the chosen\ninvertible quotient equals the constructed map $\\widetilde f$.",
+   "uses": [],
+   "elementary": null
   },
-  "blueprint_lean": [
-    "AlgebraicGeometry.Scheme.IdealSheafData.exists_lift_blowup",
-    "AlgebraicGeometry.Scheme.IdealSheafData.hom_ext_of_isInvertible_comap"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.IdealSheafData.exists_lift_blowup",
-          "module": "WeilConjectures.Blowup.BlowupUniversal",
-          "lines": [
-            1310,
-            1338
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.IdealSheafData.hom_ext_of_isInvertible_comap",
-          "module": "WeilConjectures.Blowup.BlowupUniversal",
-          "lines": [
-            1089,
-            1136
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.IdealSheafData.exists_lift_blowup",
-          "module": "WeilConjectures.Blowup.BlowupUniversal",
-          "lines": [
-            1287,
-            1315
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.IdealSheafData.hom_ext_of_isInvertible_comap",
-          "module": "WeilConjectures.Blowup.BlowupUniversal",
-          "lines": [
-            1066,
-            1113
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "text": "*Proof.*\nOn each affine open of $X$, let $D_+(f)$ range over the standard opens\nindexed by the degree-one elements $f\\in\\mathcal I$; these opens cover the\nblow-up Proj. The inverse image of each chart\nunder $h$ is determined by the degree-zero map obtained from the given\nquotient $f^*\\mathcal I\\twoheadrightarrow\\mathcal L$: on a representative\n$x/f_i^n$ it is the coefficient of the corresponding quotient fraction in\n$\\mathcal O_Y$. The constructed lift uses exactly the same degreewise maps,\nby definition of $\\alpha_f$ and the tensor-power identification, so $h$ and\n$\\widetilde f$ agree on each inverse-image chart. These equalities are\ncompatible on chart overlaps because both maps send a localized fraction to\nits further localization; the localization cocycle gives literal equality.\nThe standard charts cover the target, hence their inverse images cover $Y$,\nand equality of morphisms on this cover implies $h=\\widetilde f$.",
+   "uses": [],
+   "elementary": null
   },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-lem-nagata-sketch-blowups",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\mathcal I$ be a quasi-coherent ideal on a scheme $X$ and let\n$t\\colon T\\to X$ be a morphism such that the extended ideal\n$\\mathcal I\\mathcal O_T$ is invertible. Then there is a unique morphism\n$h\\colon T\\to\\operatorname{Bl}_{\\mathcal I}(X)$ with\n$b_{X,\\mathcal I}\\circ h=t$. Thus the blow-up is final among $X$-schemes on\nwhich the extended ideal of $\\mathcal I$ is invertible.",
-    "proof": [
-      {
-        "text": "Existence is [thm-nagata-blowup-universal-property], and uniqueness\namong $X$-morphisms inducing the specified quotient is\n[thm-nagata-blowup-universal-property]. Together these are exactly the\nasserted final-object property.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "**Graded map induced by an invertible quotient.**\n\nLet $f\\colon Y\\to X$, let $\\mathcal I\\subseteq\\mathcal O_X$ be a\nquasi-coherent ideal, and let\n$\\mathcal L\\hookrightarrow\\mathcal O_Y$ be an invertible ideal together with\na surjection $q\\colon f^*\\mathcal I\\twoheadrightarrow\\mathcal L$ such that\nthe composite $\\mathcal L\\hookrightarrow\\mathcal O_Y$ after $q$ is the\ncanonical map whose image is the extended ideal\n$\\mathcal I\\mathcal O_Y$ of\n[def-nagata-extended-ideal]. Define $\\alpha_f$ degreewise by the\ntensor powers of this quotient:\n\n$$\n\\alpha_f\\colon\nf^*\\Bigl(\\bigoplus_{n\\geq0}\\mathcal I^n\\Bigr)\n\\longrightarrow\\bigoplus_{n\\geq0}\\mathcal L^{\\otimes n}.\n$$",
-        "uses": [
-          "def-nagata-extended-ideal"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "**The quotient construction is a graded algebra map.**\n\nThe degreewise map $\\alpha_f$ respects the unit and multiplication and is a\ngraded algebra morphism.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Proof.*\nIn degree $n$, tensor $q$ $n$ times. Let\n$\\mu_{\\mathcal I}\\colon(f^*\\mathcal I)^{\\otimes n}\\to f^*(\\mathcal I^n)$ be multiplication. The composite of $q^{\\otimes n}$\nwith\nmultiplication isomorphism\n$\\mathcal L^{\\otimes n}\\cong\\mathcal L^n$ from\n[lemma-nagata-invertible-ideal-tensor-power] and the injection\n$\\mathcal L^n\\hookrightarrow\\mathcal O_Y$ is ordinary $n$-fold\nmultiplication. It therefore kills $\\ker(\\mu_{\\mathcal I})$; injectivity\nof $\\mathcal L^n\\hookrightarrow\\mathcal O_Y$ shows that $q^{\\otimes n}$\nitself kills this kernel. Hence it factors uniquely through\n$f^*(\\mathcal I^n)$. These factorizations commute with multiplication by\nassociativity and with the degree-zero unit, giving the graded algebra map.\nAssociativity of tensor products and the multiplication maps for ideal\npowers show that these degreewise maps preserve the unit and multiplication.",
-        "uses": [
-          "lemma-nagata-invertible-ideal-tensor-power"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "**Universal lift construction.**\n\nUnder the data of\n[thm-nagata-blowup-universal-property], use the inverse of the canonical isomorphism in\n[lemma-nagata-relative-proj-invertible-tensor-powers], apply the\ncontravariant relative-Proj map induced by $\\alpha_f$. Then use the\narbitrary base-change comparison in\n[lemma-nagata-relative-proj-base-change-arbitrary] to identify the\nresulting target with $Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X)$. Here\n$\\operatorname{Proj}_X(\\mathcal R_X(\\mathcal I))$ is identified with\n[def-nagata-global-blowup]: both are obtained by gluing the same affine\nRees-algebra Proj schemes, and the comparison respects the restriction\ncocycles. Compose\nthe resulting map with the second projection\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X)\\to \\operatorname{Bl}_{\\mathcal I}(X)$, and\ndefine\n\n$$\n\\widetilde f\\colon Y\\longrightarrow\\operatorname{Bl}_{\\mathcal I}(X)\n$$\n\nto be the resulting composite. The affine maps and their gluing data are\npart of the relative-Proj interface; no identification of $Y$ with a Proj\nis left implicit.",
-        "uses": [
-          "lemma-nagata-relative-proj-invertible-tensor-powers",
-          "lemma-nagata-relative-proj-base-change-arbitrary",
-          "def-nagata-global-blowup"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "**Uniqueness of the universal lift.**\n\nUnder the data of [thm-nagata-blowup-universal-property], every $X$-morphism\n$h\\colon Y\\to\\operatorname{Bl}_{\\mathcal I}(X)$ inducing the chosen\ninvertible quotient equals the constructed map $\\widetilde f$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Proof.*\nOn each affine open of $X$, let $D_+(f)$ range over the standard opens\nindexed by the degree-one elements $f\\in\\mathcal I$; these opens cover the\nblow-up Proj. The inverse image of each chart\nunder $h$ is determined by the degree-zero map obtained from the given\nquotient $f^*\\mathcal I\\twoheadrightarrow\\mathcal L$: on a representative\n$x/f_i^n$ it is the coefficient of the corresponding quotient fraction in\n$\\mathcal O_Y$. The constructed lift uses exactly the same degreewise maps,\nby definition of $\\alpha_f$ and the tensor-power identification, so $h$ and\n$\\widetilde f$ agree on each inverse-image chart. These equalities are\ncompatible on chart overlaps because both maps send a localized fraction to\nits further localization; the localization cocycle gives literal equality.\nThe standard charts cover the target, hence their inverse images cover $Y$,\nand equality of morphisms on this cover implies $h=\\widetilde f$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "**The constructed lift lies over $X$.**\n\nUnder the data of [thm-nagata-blowup-universal-property], the constructed\nmap $\\widetilde f$ is an $X$-morphism: its composite with\n$b_{X,\\mathcal I}$ is $f$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Proof.*\nOn each standard chart, the degree-zero component of\n[thm-nagata-blowup-universal-property] is the canonical map to\n$\\mathcal O_Y$, hence the composite with the blow-up structure map is $f$.\nThe chart maps agree on overlaps by functoriality of localization, and the\nglued equality is therefore the specified equality over $X$.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "## The constructed lift lies over $X$\n\nUnder the data of [thm-nagata-blowup-universal-property], the constructed\nmap $\\widetilde f$ is an $X$-morphism: its composite with\n$b_{X,\\mathcal I}$ is $f$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "*Proof.*\nOn each standard chart, the degree-zero component of\n[thm-nagata-blowup-universal-property] is the canonical map to\n$\\mathcal O_Y$, hence the composite with the blow-up structure map is $f$.\nThe chart maps agree on overlaps by functoriality of localization, and the\nglued equality is therefore the specified equality over $X$.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "def-nagata-extended-ideal",
+  "lemma-nagata-invertible-ideal-tensor-power",
+  "lemma-nagata-relative-proj-invertible-tensor-powers",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "def-nagata-global-blowup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/thm-nagata-blowup-universal-property.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "embedded_statements",
+  "padded_uses",
+  "self_citation",
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 110,
+ "blueprint_uses": [
+  "def-nagata-affine-blowup",
+  "def-nagata-affine-blowup-chart-map",
+  "def-nagata-affine-blowup-restriction-map",
+  "def-nagata-affine-proj",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-global-blowup-glue-data",
+  "def-nagata-global-blowup-local-model",
+  "def-nagata-global-blowup-overlap-basic-map",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-nagata-invertible-ideal",
+  "def-nagata-rees-algebra",
+  "def-nagata-rees-localization-map",
+  "def-nagata-rees-piece",
+  "def-nagata-relative-proj",
+  "def-nagata-sheaf-rees-algebra",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "lemma-nagata-global-blowup-overlap-basic",
+  "lemma-nagata-invertible-ideal-tensor-power",
+  "lemma-nagata-localization-ideal-pow",
+  "lemma-nagata-proj-chart-ring-cocycle",
+  "lemma-nagata-rees-degree-one-element",
+  "lemma-nagata-rees-degree-zero",
+  "lemma-nagata-rees-generators-cover-proj",
+  "lemma-nagata-rees-piece-membership",
+  "lemma-nagata-rees-piece-mul",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "lemma-nagata-relative-proj-invertible-tensor-powers",
+  "prop-nagata-affine-blowup-chart",
+  "prop-nagata-global-blowup-cover-independent",
+  "prop-nagata-proj-standard-open",
+  "prop-nagata-rees-graded"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Blowup.BlowupUniversal",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.exists_lift_blowup",
+  "branch": "master",
+  "line": 1312,
+  "sorry_free": true,
+  "body_lines": 24,
+  "others": [
+   {
+    "module": "WeilConjectures.Blowup.BlowupUniversal",
+    "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.hom_ext_of_isInvertible_comap",
+    "branch": "master",
+    "line": 1092,
+    "sorry_free": true,
+    "body_lines": 41
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.IdealSheafData.exists_lift_blowup",
+  "AlgebraicGeometry.Scheme.IdealSheafData.hom_ext_of_isInvertible_comap"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-lem-nagata-sketch-blowups",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\mathcal I$ be a quasi-coherent ideal on a scheme $X$ and let\n$t\\colon T\\to X$ be a morphism such that the extended ideal\n$\\mathcal I\\mathcal O_T$ is invertible. Then there is a unique morphism\n$h\\colon T\\to\\operatorname{Bl}_{\\mathcal I}(X)$ with\n$b_{X,\\mathcal I}\\circ h=t$. Thus the blow-up is final among $X$-schemes on\nwhich the extended ideal of $\\mathcal I$ is invertible.",
+  "proof": [
+   {
+    "text": "Existence is [thm-nagata-blowup-universal-property], and uniqueness\namong $X$-morphisms inducing the specified quotient is\n[thm-nagata-blowup-universal-property]. Together these are exactly the\nasserted final-object property.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**Graded map induced by an invertible quotient.**\n\nLet $f\\colon Y\\to X$, let $\\mathcal I\\subseteq\\mathcal O_X$ be a\nquasi-coherent ideal, and let\n$\\mathcal L\\hookrightarrow\\mathcal O_Y$ be an invertible ideal together with\na surjection $q\\colon f^*\\mathcal I\\twoheadrightarrow\\mathcal L$ such that\nthe composite $\\mathcal L\\hookrightarrow\\mathcal O_Y$ after $q$ is the\ncanonical map whose image is the extended ideal\n$\\mathcal I\\mathcal O_Y$ of\n[def-nagata-extended-ideal]. Define $\\alpha_f$ degreewise by the\ntensor powers of this quotient:\n\n$$\n\\alpha_f\\colon\nf^*\\Bigl(\\bigoplus_{n\\geq0}\\mathcal I^n\\Bigr)\n\\longrightarrow\\bigoplus_{n\\geq0}\\mathcal L^{\\otimes n}.\n$$",
+    "uses": [
+     "def-nagata-extended-ideal"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**The quotient construction is a graded algebra map.**\n\nThe degreewise map $\\alpha_f$ respects the unit and multiplication and is a\ngraded algebra morphism.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Proof.*\nIn degree $n$, tensor $q$ $n$ times. Let\n$\\mu_{\\mathcal I}\\colon(f^*\\mathcal I)^{\\otimes n}\\to f^*(\\mathcal I^n)$ be multiplication. The composite of $q^{\\otimes n}$\nwith\nmultiplication isomorphism\n$\\mathcal L^{\\otimes n}\\cong\\mathcal L^n$ from\n[lemma-nagata-invertible-ideal-tensor-power] and the injection\n$\\mathcal L^n\\hookrightarrow\\mathcal O_Y$ is ordinary $n$-fold\nmultiplication. It therefore kills $\\ker(\\mu_{\\mathcal I})$; injectivity\nof $\\mathcal L^n\\hookrightarrow\\mathcal O_Y$ shows that $q^{\\otimes n}$\nitself kills this kernel. Hence it factors uniquely through\n$f^*(\\mathcal I^n)$. These factorizations commute with multiplication by\nassociativity and with the degree-zero unit, giving the graded algebra map.\nAssociativity of tensor products and the multiplication maps for ideal\npowers show that these degreewise maps preserve the unit and multiplication.",
+    "uses": [
+     "lemma-nagata-invertible-ideal-tensor-power"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Universal lift construction.**\n\nUnder the data of\n[thm-nagata-blowup-universal-property], use the inverse of the canonical isomorphism in\n[lemma-nagata-relative-proj-invertible-tensor-powers], apply the\ncontravariant relative-Proj map induced by $\\alpha_f$. Then use the\narbitrary base-change comparison in\n[lemma-nagata-relative-proj-base-change-arbitrary] to identify the\nresulting target with $Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X)$. Here\n$\\operatorname{Proj}_X(\\mathcal R_X(\\mathcal I))$ is identified with\n[def-nagata-global-blowup]: both are obtained by gluing the same affine\nRees-algebra Proj schemes, and the comparison respects the restriction\ncocycles. Compose\nthe resulting map with the second projection\n$Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X)\\to \\operatorname{Bl}_{\\mathcal I}(X)$, and\ndefine\n\n$$\n\\widetilde f\\colon Y\\longrightarrow\\operatorname{Bl}_{\\mathcal I}(X)\n$$\n\nto be the resulting composite. The affine maps and their gluing data are\npart of the relative-Proj interface; no identification of $Y$ with a Proj\nis left implicit.",
+    "uses": [
+     "lemma-nagata-relative-proj-invertible-tensor-powers",
+     "lemma-nagata-relative-proj-base-change-arbitrary",
+     "def-nagata-global-blowup"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "**Uniqueness of the universal lift.**\n\nUnder the data of [thm-nagata-blowup-universal-property], every $X$-morphism\n$h\\colon Y\\to\\operatorname{Bl}_{\\mathcal I}(X)$ inducing the chosen\ninvertible quotient equals the constructed map $\\widetilde f$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Proof.*\nOn each affine open of $X$, let $D_+(f)$ range over the standard opens\nindexed by the degree-one elements $f\\in\\mathcal I$; these opens cover the\nblow-up Proj. The inverse image of each chart\nunder $h$ is determined by the degree-zero map obtained from the given\nquotient $f^*\\mathcal I\\twoheadrightarrow\\mathcal L$: on a representative\n$x/f_i^n$ it is the coefficient of the corresponding quotient fraction in\n$\\mathcal O_Y$. The constructed lift uses exactly the same degreewise maps,\nby definition of $\\alpha_f$ and the tensor-power identification, so $h$ and\n$\\widetilde f$ agree on each inverse-image chart. These equalities are\ncompatible on chart overlaps because both maps send a localized fraction to\nits further localization; the localization cocycle gives literal equality.\nThe standard charts cover the target, hence their inverse images cover $Y$,\nand equality of morphisms on this cover implies $h=\\widetilde f$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**The constructed lift lies over $X$.**\n\nUnder the data of [thm-nagata-blowup-universal-property], the constructed\nmap $\\widetilde f$ is an $X$-morphism: its composite with\n$b_{X,\\mathcal I}$ is $f$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Proof.*\nOn each standard chart, the degree-zero component of\n[thm-nagata-blowup-universal-property] is the canonical map to\n$\\mathcal O_Y$, hence the composite with the blow-up structure map is $f$.\nThe chart maps agree on overlaps by functoriality of localization, and the\nglued equality is therefore the specified equality over $X$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

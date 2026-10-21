@@ -1,143 +1,118 @@
 {
-  "id": "lem-chow-affine-immersion",
-  "blueprint": {
-    "is": "lem-chow-affine-immersion",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "An affine scheme of finite type immerses into projective space",
-  "statement": "Let $Y=\\operatorname{Spec}A$ be affine and let $U$ be an affine scheme of\nfinite type over $Y$, say $U=\\operatorname{Spec}B$ with $B$ generated as an\n$A$-algebra by $b_1,\\dots,b_m$. Then the $A$-algebra surjection\n$A[x_1,\\dots,x_m]\\twoheadrightarrow B$, $x_j\\mapsto b_j$, defines a closed\nimmersion\n\n$$\n U\\hookrightarrow\\mathbf A^m_Y,\n$$\n\nand composing with the open immersion $\\mathbf A^m_Y\\hookrightarrow\\mathbf\nP^m_Y$ (where $\\mathbf A^m_Y=D_+(x_0)\\subseteq\\mathbf P^m_Y$) gives an\nimmersion $j:U\\hookrightarrow\\mathbf P^m_Y$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-affine-immersion.md",
-    "place": "node lem-chow-affine-immersion, order 1053"
-  },
-  "stmt_deps": [
-    "def-nagata-affine-proj",
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-relative-affine-space",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "The surjection $A[x_1,\\dots,x_m]\\twoheadrightarrow B$ is a surjective ring\nhomomorphism between the coordinate rings of affine schemes, so it induces a\nclosed immersion of affine schemes (on affines, closed immersions are exactly\nthose induced by surjective ring homomorphisms). The composite with the open\nimmersion $\\mathbf A^m_Y=D_+(x_0)\\hookrightarrow\\mathbf P^m_Y$ is an\nimmersion, since a composite of an open and a closed immersion is an\nimmersion.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "prop-nagata-proj-standard-open"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-affine-immersion.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1053,
-  "blueprint_uses": [
-    "def-nagata-affine-proj",
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-relative-affine-space",
-    "def-weil-pbc-scheme-conventions",
-    "prop-nagata-proj-standard-open"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion",
-    "declaration": "AlgebraicGeometry.exists_isImmersion_projectiveSpace",
-    "branch": "slopmaster2",
-    "line": 118,
-    "sorry_free": true,
-    "body_lines": 38
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.exists_isImmersion_projectiveSpace"
-  ],
-  "uses_not_cited": [
-    "def-nagata-affine-proj",
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-relative-affine-space",
-    "def-weil-pbc-scheme-conventions",
-    "prop-nagata-proj-standard-open"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "Let $S$ be a scheme and let $V$ be an affine scheme equipped with a morphism\n$g\\colon V\\to S$ that is locally of finite type. Then there are a finite index\nset $n$ and an immersion $j\\colon V\\to\\mathbf P^n_S$ with\n$j$ followed by $\\mathbf P^n_S\\to S$ equal to $g$. Here the homogeneous\ncoordinates $T_i$ of $\\mathbf P^n_S$ are indexed by the finite set $n$.",
-      "proof": "Write $B=\\Gamma(V,\\mathcal O_V)$, so that $V=\\Spec B$. We give an elementary\nconstruction; it does not use ample invertible sheaves.\n\n*Step 1: a cover adapted to $g$.* Every point of $V$ has a basic open\nneighbourhood $D(b)$ with $g(D(b))$ contained in an affine open of $S$: pick an\naffine open $W\\subseteq S$ around the image point and then a basic open of $V$\ninside $g^{-1}(W)$. Since $V$ is quasi-compact, finitely many of these cover\n$V$: there are a finite set $\\Lambda$, sections $b_\\lambda\\in B$ and affine\nopens $W_\\lambda\\subseteq S$ with $D(b_\\lambda)\\subseteq g^{-1}(W_\\lambda)$ and\n$V=\\bigcup_{\\lambda}D(b_\\lambda)$.\n\n*Step 2: generators with a common denominator.* Fix $\\lambda$ and put\n$A_\\lambda=\\Gamma(W_\\lambda,\\mathcal O_S)$. The induced morphism\n$D(b_\\lambda)\\to W_\\lambda$ is a morphism of affine schemes that is locally of\nfinite type, so $B_{b_\\lambda}=\\Gamma(D(b_\\lambda),\\mathcal O_V)$ is a finitely\ngenerated $A_\\lambda$-algebra. Clearing denominators, we may choose the\ngenerators of the shape $c_\\mu/b_\\lambda^{N}$ with $c_\\mu\\in B$ and a single\nexponent $N$, indexed by a finite set $M_\\lambda$. Put\n\n$$\nt_{\\lambda,\\ast}=1,\\qquad t_{\\lambda,\\mu}=c_\\mu b_\\lambda\n\\quad(\\mu\\in M_\\lambda),\n$$\n\na family indexed by the finite set $M_\\lambda^{+}=M_\\lambda\\sqcup\\{\\ast\\}$.\nIn $B_{b_\\lambda}$ we have $t_{\\lambda,\\ast}/b_\\lambda=1/b_\\lambda$ and\n$t_{\\lambda,\\mu}/b_\\lambda=c_\\mu$, hence\n$c_\\mu/b_\\lambda^{N}=(1/b_\\lambda)^{N}\\cdot c_\\mu$ lies in the subring\ngenerated by $A_\\lambda$ and the quotients $t_{\\lambda,\\bullet}/b_\\lambda$.\nTherefore $B_{b_\\lambda}$ is generated as a ring by the image of $A_\\lambda$\ntogether with the quotients $t_{\\lambda,\\bullet}/b_\\lambda$.\n\n*Step 3: the morphism.* Let\n$n=\\Lambda\\sqcup\\coprod_{\\lambda\\in\\Lambda}M_\\lambda^{+}$, a finite set, and\nlet $s\\colon n\\to B$ be the family given by $s_\\lambda=b_\\lambda$ for\n$\\lambda\\in\\Lambda$ and $s_{(\\lambda,\\mu)}=t_{\\lambda,\\mu}$. The\n$D(b_\\lambda)$ cover $V$, so the $s_i$ generate the unit ideal of $B$, and\ntherefore they define a morphism $j\\colon V\\to\\mathbf P^n_S$ over $S$ with\n$j^{-1}\\bigl(D_+(T_i)\\bigr)=D(s_i)$.\n\n*Step 4: $j$ is an immersion.* The opens $D_+(T_{\\lambda})$ for\n$\\lambda\\in\\Lambda$ have preimages $D(b_\\lambda)$, which cover $V$; hence the\nimage of $j$ is contained in $U=\\bigcup_{\\lambda\\in\\Lambda}D_+(T_\\lambda)$.\nBeing an immersion is local on the target, so it suffices to show that the\nrestriction of $j$ over each $D_+(T_\\lambda)$ is an immersion. On the standard\nchart $D_+(T_\\lambda)\\cong\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S$ this\nrestriction is the morphism\n\n$$\nD(b_\\lambda)\\longrightarrow\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S,\n\\qquad Y_i\\longmapsto s_i/b_\\lambda .\n$$\n\nSince $D(b_\\lambda)\\subseteq g^{-1}(W_\\lambda)$, it factors through the open\nsubscheme $\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}$, and the resulting\nmorphism\n$D(b_\\lambda)\\to\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda} =\\Spec A_\\lambda[Y_i]$ is $\\Spec$ of the $A_\\lambda$-algebra map\n$Y_i\\mapsto s_i/b_\\lambda$. That map is surjective by Step 2, because its\nimage already contains the quotients $t_{\\lambda,\\bullet}/b_\\lambda$. Hence\n$D(b_\\lambda)\\to\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}$ is a closed\nimmersion, and composing with the open immersion\n$\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}\\to \\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S$ shows that the restriction of $j$ over\n$D_+(T_\\lambda)$ is an immersion.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.exists_isImmersion_projectiveSpace"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.exists_isImmersion_projectiveSpace",
-          "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion",
-          "lines": [
-            116,
-            158
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-chow",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $S$ be a scheme and let $V$ be an affine scheme equipped with a morphism\n$g\\colon V\\to S$ that is locally of finite type. Then there are a finite set\n$n$ and an immersion $j\\colon V\\to\\mathbf P^n_S$ with\n$j$ followed by $\\mathbf P^n_S\\to S$ equal to $g$, where the homogeneous\ncoordinates $T_i$ of $\\mathbf P^n_S$ are indexed by the finite set $n$.",
-    "proof": [
-      {
-        "text": "Write $B=\\Gamma(V,\\mathcal O_V)$, so that $V=\\Spec B$. We give an elementary\nconstruction; it does not use ample invertible sheaves.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 1: a cover adapted to $g$.* Every point of $V$ has a basic open\nneighbourhood $D(b)$ with $g(D(b))$ contained in an affine open of $S$: pick an\naffine open $W\\subseteq S$ around the image point and then a basic open of $V$\ninside $g^{-1}(W)$. Since $V$ is quasi-compact, finitely many of these cover\n$V$: there are a finite set $\\Lambda$, sections $b_\\lambda\\in B$ and affine\nopens $W_\\lambda\\subseteq S$ with $D(b_\\lambda)\\subseteq g^{-1}(W_\\lambda)$ and\n$V=\\bigcup_{\\lambda}D(b_\\lambda)$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 2: generators with a common denominator.* Fix $\\lambda$ and put\n$A_\\lambda=\\Gamma(W_\\lambda,\\mathcal O_S)$. The induced morphism\n$D(b_\\lambda)\\to W_\\lambda$ is a morphism of affine schemes that is locally of\nfinite type, so $B_{b_\\lambda}=\\Gamma(D(b_\\lambda),\\mathcal O_V)$ is a finitely\ngenerated $A_\\lambda$-algebra. Clearing denominators, we may choose the\ngenerators of the shape $c_\\mu/b_\\lambda^{N}$ with $c_\\mu\\in B$ and a single\nexponent $N$, indexed by a finite set $M_\\lambda$. Put\n\n$$\nt_{\\lambda,\\ast}=1,\\qquad t_{\\lambda,\\mu}=c_\\mu b_\\lambda\n\\quad(\\mu\\in M_\\lambda),\n$$\n\na family indexed by the finite set $M_\\lambda^{+}=M_\\lambda\\sqcup\\{\\ast\\}$.\nIn $B_{b_\\lambda}$ we have $t_{\\lambda,\\ast}/b_\\lambda=1/b_\\lambda$ and\n$t_{\\lambda,\\mu}/b_\\lambda=c_\\mu$, hence\n$c_\\mu/b_\\lambda^{N}=(1/b_\\lambda)^{N}\\cdot c_\\mu$ lies in the subring\ngenerated by $A_\\lambda$ and the quotients $t_{\\lambda,\\bullet}/b_\\lambda$.\nTherefore $B_{b_\\lambda}$ is generated as a ring by the image of $A_\\lambda$\ntogether with the quotients $t_{\\lambda,\\bullet}/b_\\lambda$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 3: the morphism.* Let\n$n=\\Lambda\\sqcup\\coprod_{\\lambda\\in\\Lambda}M_\\lambda^{+}$, a finite set, and\nlet $s\\colon n\\to B$ be the family given by $s_\\lambda=b_\\lambda$ for\n$\\lambda\\in\\Lambda$ and $s_{(\\lambda,\\mu)}=t_{\\lambda,\\mu}$. The\n$D(b_\\lambda)$ cover $V$, so the $s_i$ generate the unit ideal of $B$, and\ntherefore they define a morphism $j\\colon V\\to\\mathbf P^n_S$ over $S$ with\n$j^{-1}\\bigl(D_+(T_i)\\bigr)=D(s_i)$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 4: $j$ is an immersion.* The opens $D_+(T_{\\lambda})$ for\n$\\lambda\\in\\Lambda$ have preimages $D(b_\\lambda)$, which cover $V$; hence the\nimage of $j$ is contained in $U=\\bigcup_{\\lambda\\in\\Lambda}D_+(T_\\lambda)$.\nBeing an immersion is local on the target, so it suffices to show that the\nrestriction of $j$ over each $D_+(T_\\lambda)$ is an immersion. On the standard\nchart $D_+(T_\\lambda)\\cong\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S$ this\nrestriction is the morphism\n\n$$\nD(b_\\lambda)\\longrightarrow\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S,\n\\qquad Y_i\\longmapsto s_i/b_\\lambda .\n$$\n\nSince $D(b_\\lambda)\\subseteq g^{-1}(W_\\lambda)$, it factors through the open\nsubscheme $\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}$, and the resulting\nmorphism\n$D(b_\\lambda)\\to\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda} =\\Spec A_\\lambda[Y_i]$ is $\\Spec$ of the $A_\\lambda$-algebra map\n$Y_i\\mapsto s_i/b_\\lambda$. That map is surjective by Step 2, because its\nimage already contains the quotients $t_{\\lambda,\\bullet}/b_\\lambda$. Hence\n$D(b_\\lambda)\\to\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}$ is a closed\nimmersion, and composing with the open immersion\n$\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}\\to \\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S$ shows that the restriction of $j$ over\n$D_+(T_\\lambda)$ is an immersion.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "lem-chow-affine-immersion",
+ "blueprint": {
+  "is": "lem-chow-affine-immersion",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "An affine scheme of finite type immerses into projective space",
+ "statement": "Let $Y=\\operatorname{Spec}A$ be affine and let $U$ be an affine scheme of\nfinite type over $Y$, say $U=\\operatorname{Spec}B$ with $B$ generated as an\n$A$-algebra by $b_1,\\dots,b_m$. Then the $A$-algebra surjection\n$A[x_1,\\dots,x_m]\\twoheadrightarrow B$, $x_j\\mapsto b_j$, defines a closed\nimmersion\n\n$$\n U\\hookrightarrow\\mathbf A^m_Y,\n$$\n\nand composing with the open immersion $\\mathbf A^m_Y\\hookrightarrow\\mathbf\nP^m_Y$ (where $\\mathbf A^m_Y=D_+(x_0)\\subseteq\\mathbf P^m_Y$) gives an\nimmersion $j:U\\hookrightarrow\\mathbf P^m_Y$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-affine-immersion.md",
+  "place": "node lem-chow-affine-immersion, order 1053"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-relative-affine-space",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "The surjection $A[x_1,\\dots,x_m]\\twoheadrightarrow B$ is a surjective ring\nhomomorphism between the coordinate rings of affine schemes, so it induces a\nclosed immersion of affine schemes (on affines, closed immersions are exactly\nthose induced by surjective ring homomorphisms). The composite with the open\nimmersion $\\mathbf A^m_Y=D_+(x_0)\\hookrightarrow\\mathbf P^m_Y$ is an\nimmersion, since a composite of an open and a closed immersion is an\nimmersion.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "prop-nagata-proj-standard-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-affine-immersion.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1053,
+ "blueprint_uses": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-relative-affine-space",
+  "def-weil-pbc-scheme-conventions",
+  "prop-nagata-proj-standard-open"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion",
+  "declaration": "AlgebraicGeometry.exists_isImmersion_projectiveSpace",
+  "branch": "slopmaster2",
+  "line": 118,
+  "sorry_free": true,
+  "body_lines": 38
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_isImmersion_projectiveSpace"
+ ],
+ "uses_not_cited": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-relative-affine-space",
+  "def-weil-pbc-scheme-conventions",
+  "prop-nagata-proj-standard-open"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $S$ be a scheme and let $V$ be an affine scheme equipped with a morphism\n$g\\colon V\\to S$ that is locally of finite type. Then there are a finite index\nset $n$ and an immersion $j\\colon V\\to\\mathbf P^n_S$ with\n$j$ followed by $\\mathbf P^n_S\\to S$ equal to $g$. Here the homogeneous\ncoordinates $T_i$ of $\\mathbf P^n_S$ are indexed by the finite set $n$.",
+   "proof": "Write $B=\\Gamma(V,\\mathcal O_V)$, so that $V=\\Spec B$. We give an elementary\nconstruction; it does not use ample invertible sheaves.\n\n*Step 1: a cover adapted to $g$.* Every point of $V$ has a basic open\nneighbourhood $D(b)$ with $g(D(b))$ contained in an affine open of $S$: pick an\naffine open $W\\subseteq S$ around the image point and then a basic open of $V$\ninside $g^{-1}(W)$. Since $V$ is quasi-compact, finitely many of these cover\n$V$: there are a finite set $\\Lambda$, sections $b_\\lambda\\in B$ and affine\nopens $W_\\lambda\\subseteq S$ with $D(b_\\lambda)\\subseteq g^{-1}(W_\\lambda)$ and\n$V=\\bigcup_{\\lambda}D(b_\\lambda)$.\n\n*Step 2: generators with a common denominator.* Fix $\\lambda$ and put\n$A_\\lambda=\\Gamma(W_\\lambda,\\mathcal O_S)$. The induced morphism\n$D(b_\\lambda)\\to W_\\lambda$ is a morphism of affine schemes that is locally of\nfinite type, so $B_{b_\\lambda}=\\Gamma(D(b_\\lambda),\\mathcal O_V)$ is a finitely\ngenerated $A_\\lambda$-algebra. Clearing denominators, we may choose the\ngenerators of the shape $c_\\mu/b_\\lambda^{N}$ with $c_\\mu\\in B$ and a single\nexponent $N$, indexed by a finite set $M_\\lambda$. Put\n\n$$\nt_{\\lambda,\\ast}=1,\\qquad t_{\\lambda,\\mu}=c_\\mu b_\\lambda\n\\quad(\\mu\\in M_\\lambda),\n$$\n\na family indexed by the finite set $M_\\lambda^{+}=M_\\lambda\\sqcup\\{\\ast\\}$.\nIn $B_{b_\\lambda}$ we have $t_{\\lambda,\\ast}/b_\\lambda=1/b_\\lambda$ and\n$t_{\\lambda,\\mu}/b_\\lambda=c_\\mu$, hence\n$c_\\mu/b_\\lambda^{N}=(1/b_\\lambda)^{N}\\cdot c_\\mu$ lies in the subring\ngenerated by $A_\\lambda$ and the quotients $t_{\\lambda,\\bullet}/b_\\lambda$.\nTherefore $B_{b_\\lambda}$ is generated as a ring by the image of $A_\\lambda$\ntogether with the quotients $t_{\\lambda,\\bullet}/b_\\lambda$.\n\n*Step 3: the morphism.* Let\n$n=\\Lambda\\sqcup\\coprod_{\\lambda\\in\\Lambda}M_\\lambda^{+}$, a finite set, and\nlet $s\\colon n\\to B$ be the family given by $s_\\lambda=b_\\lambda$ for\n$\\lambda\\in\\Lambda$ and $s_{(\\lambda,\\mu)}=t_{\\lambda,\\mu}$. The\n$D(b_\\lambda)$ cover $V$, so the $s_i$ generate the unit ideal of $B$, and\ntherefore they define a morphism $j\\colon V\\to\\mathbf P^n_S$ over $S$ with\n$j^{-1}\\bigl(D_+(T_i)\\bigr)=D(s_i)$.\n\n*Step 4: $j$ is an immersion.* The opens $D_+(T_{\\lambda})$ for\n$\\lambda\\in\\Lambda$ have preimages $D(b_\\lambda)$, which cover $V$; hence the\nimage of $j$ is contained in $U=\\bigcup_{\\lambda\\in\\Lambda}D_+(T_\\lambda)$.\nBeing an immersion is local on the target, so it suffices to show that the\nrestriction of $j$ over each $D_+(T_\\lambda)$ is an immersion. On the standard\nchart $D_+(T_\\lambda)\\cong\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S$ this\nrestriction is the morphism\n\n$$\nD(b_\\lambda)\\longrightarrow\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S,\n\\qquad Y_i\\longmapsto s_i/b_\\lambda .\n$$\n\nSince $D(b_\\lambda)\\subseteq g^{-1}(W_\\lambda)$, it factors through the open\nsubscheme $\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}$, and the resulting\nmorphism\n$D(b_\\lambda)\\to\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda} =\\Spec A_\\lambda[Y_i]$ is $\\Spec$ of the $A_\\lambda$-algebra map\n$Y_i\\mapsto s_i/b_\\lambda$. That map is surjective by Step 2, because its\nimage already contains the quotients $t_{\\lambda,\\bullet}/b_\\lambda$. Hence\n$D(b_\\lambda)\\to\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}$ is a closed\nimmersion, and composing with the open immersion\n$\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}\\to \\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S$ shows that the restriction of $j$ over\n$D_+(T_\\lambda)$ is an immersion.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-chow",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $S$ be a scheme and let $V$ be an affine scheme equipped with a morphism\n$g\\colon V\\to S$ that is locally of finite type. Then there are a finite set\n$n$ and an immersion $j\\colon V\\to\\mathbf P^n_S$ with\n$j$ followed by $\\mathbf P^n_S\\to S$ equal to $g$, where the homogeneous\ncoordinates $T_i$ of $\\mathbf P^n_S$ are indexed by the finite set $n$.",
+  "proof": [
+   {
+    "text": "Write $B=\\Gamma(V,\\mathcal O_V)$, so that $V=\\Spec B$. We give an elementary\nconstruction; it does not use ample invertible sheaves.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 1: a cover adapted to $g$.* Every point of $V$ has a basic open\nneighbourhood $D(b)$ with $g(D(b))$ contained in an affine open of $S$: pick an\naffine open $W\\subseteq S$ around the image point and then a basic open of $V$\ninside $g^{-1}(W)$. Since $V$ is quasi-compact, finitely many of these cover\n$V$: there are a finite set $\\Lambda$, sections $b_\\lambda\\in B$ and affine\nopens $W_\\lambda\\subseteq S$ with $D(b_\\lambda)\\subseteq g^{-1}(W_\\lambda)$ and\n$V=\\bigcup_{\\lambda}D(b_\\lambda)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 2: generators with a common denominator.* Fix $\\lambda$ and put\n$A_\\lambda=\\Gamma(W_\\lambda,\\mathcal O_S)$. The induced morphism\n$D(b_\\lambda)\\to W_\\lambda$ is a morphism of affine schemes that is locally of\nfinite type, so $B_{b_\\lambda}=\\Gamma(D(b_\\lambda),\\mathcal O_V)$ is a finitely\ngenerated $A_\\lambda$-algebra. Clearing denominators, we may choose the\ngenerators of the shape $c_\\mu/b_\\lambda^{N}$ with $c_\\mu\\in B$ and a single\nexponent $N$, indexed by a finite set $M_\\lambda$. Put\n\n$$\nt_{\\lambda,\\ast}=1,\\qquad t_{\\lambda,\\mu}=c_\\mu b_\\lambda\n\\quad(\\mu\\in M_\\lambda),\n$$\n\na family indexed by the finite set $M_\\lambda^{+}=M_\\lambda\\sqcup\\{\\ast\\}$.\nIn $B_{b_\\lambda}$ we have $t_{\\lambda,\\ast}/b_\\lambda=1/b_\\lambda$ and\n$t_{\\lambda,\\mu}/b_\\lambda=c_\\mu$, hence\n$c_\\mu/b_\\lambda^{N}=(1/b_\\lambda)^{N}\\cdot c_\\mu$ lies in the subring\ngenerated by $A_\\lambda$ and the quotients $t_{\\lambda,\\bullet}/b_\\lambda$.\nTherefore $B_{b_\\lambda}$ is generated as a ring by the image of $A_\\lambda$\ntogether with the quotients $t_{\\lambda,\\bullet}/b_\\lambda$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 3: the morphism.* Let\n$n=\\Lambda\\sqcup\\coprod_{\\lambda\\in\\Lambda}M_\\lambda^{+}$, a finite set, and\nlet $s\\colon n\\to B$ be the family given by $s_\\lambda=b_\\lambda$ for\n$\\lambda\\in\\Lambda$ and $s_{(\\lambda,\\mu)}=t_{\\lambda,\\mu}$. The\n$D(b_\\lambda)$ cover $V$, so the $s_i$ generate the unit ideal of $B$, and\ntherefore they define a morphism $j\\colon V\\to\\mathbf P^n_S$ over $S$ with\n$j^{-1}\\bigl(D_+(T_i)\\bigr)=D(s_i)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 4: $j$ is an immersion.* The opens $D_+(T_{\\lambda})$ for\n$\\lambda\\in\\Lambda$ have preimages $D(b_\\lambda)$, which cover $V$; hence the\nimage of $j$ is contained in $U=\\bigcup_{\\lambda\\in\\Lambda}D_+(T_\\lambda)$.\nBeing an immersion is local on the target, so it suffices to show that the\nrestriction of $j$ over each $D_+(T_\\lambda)$ is an immersion. On the standard\nchart $D_+(T_\\lambda)\\cong\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S$ this\nrestriction is the morphism\n\n$$\nD(b_\\lambda)\\longrightarrow\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S,\n\\qquad Y_i\\longmapsto s_i/b_\\lambda .\n$$\n\nSince $D(b_\\lambda)\\subseteq g^{-1}(W_\\lambda)$, it factors through the open\nsubscheme $\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}$, and the resulting\nmorphism\n$D(b_\\lambda)\\to\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda} =\\Spec A_\\lambda[Y_i]$ is $\\Spec$ of the $A_\\lambda$-algebra map\n$Y_i\\mapsto s_i/b_\\lambda$. That map is surjective by Step 2, because its\nimage already contains the quotients $t_{\\lambda,\\bullet}/b_\\lambda$. Hence\n$D(b_\\lambda)\\to\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}$ is a closed\nimmersion, and composing with the open immersion\n$\\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_{W_\\lambda}\\to \\mathbf A^{\\,n\\setminus\\{\\lambda\\}}_S$ shows that the restriction of $j$ over\n$D_+(T_\\lambda)$ is an immersion.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

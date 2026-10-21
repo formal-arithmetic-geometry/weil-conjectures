@@ -1,173 +1,162 @@
 {
-  "id": "def-pbc-canonical-coherent-etale-comparison",
-  "kind": "definition",
-  "title": "Canonical normalized coherent-etale comparison and transported additive action",
-  "status": "split",
-  "statement": "Let $X$ be a proper scheme over a field $k$ [def-pc-scheme] [def-weil-proper-morphism]. For a quasi-coherent module $M$, use its associated etale tensor-section sheaf [def-sc-etale-qcoherent-module], lifted by the standard coefficient-universe functor when needed for inverse image. The canonical Zariski-abelian-to-etale comparison is the unique family of additive cohomology equivalences, natural in all quasi-coherent modules, equal on degree-zero sections to the tensor-pullback unit, and commuting with the connecting maps for every short exact sequence of quasi-coherent modules [def-sc-zariski-cohomology] [lem-sc-etale-zariski-qcoh-comparison]. Compose this family with the fixed module/abelian common-resolution comparison [new-module-cohomology-ext-resolution-naturality] and invert to define $c_X^q:H^q(X_{et},M_{et})\\simeq H^q(X,M)$ [pqf-def-cohomology]. Transport any additive endomorphism of the underlying Zariski abelian sheaf through that same fixed resolution comparison to define its additive action on module cohomology. For the structure module, regard the latter groups with their canonical field-module structure [def-sc-field-linear-module-cohomology-operations]. The structure-module and base-changed proper-scheme specializations use precisely these constructions, with properness of the latter supplied by stability under base change.",
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-proper-morphism",
-    "def-sc-etale-qcoherent-module",
-    "pqf-def-cohomology",
-    "def-sc-zariski-cohomology",
-    "lem-sc-etale-zariski-qcoh-comparison",
-    "new-module-cohomology-ext-resolution-naturality",
-    "def-sc-field-linear-module-cohomology-operations"
-  ],
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex; sites-cohomology.tex; homology.tex",
-    "place": "Tags 03P2 (quasi-coherent comparison), 03FD (module/abelian comparison), 010S (universal delta functors); Tag 0A3P (Frobenius application)"
-  },
-  "proof": [
-    {
-      "text": "Use the tensor-component prescription of the existing etale comparison to identify the coefficient maps. Construct a normalized additive family. Simultaneous acyclic sequences give bijectivity in every degree and equality of any two normalized additive families. Turn the maps into additive equivalences by ofBijective. Function extensionality turns uniqueness of the underlying maps into uniqueness of the entire family. The existing definitions then choose this unique family and compose it with the fixed common-resolution comparison and the canonical Ext-universe equivalence.",
-      "uses": [
-        "lem-pbc-coherent-etale-comparison-morphism",
-        "lem-pbc-coherent-etale-normalized-additive-map",
-        "lem-pbc-coherent-etale-effacing-sequence",
-        "lem-sc-etale-zariski-qcoh-comparison",
-        "new-module-cohomology-ext-resolution-naturality"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Represent Ext universe change by Mathlib Ext.chgUniv. Its homEquiv_chgUniv identity identifies the represented derived morphism with the previous common-derived-category homAddEquiv transport, proves additivity and gives compatibility with Ext postcomposition. Evaluate the existing common-resolution natural-isomorphism component through the proved generic composite formula. Its naturality square and universe-transport naturality yield the fixed large module comparison naturality API. The module additive-group cache is the same underlying group obtained by exact forgetting of scalars.",
-      "uses": [
-        "new-module-cohomology-ext-resolution-naturality"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "def-pbc-canonical-coherent-etale-comparison",
+ "kind": "definition",
+ "title": "Canonical normalized coherent-etale comparison and transported additive action",
+ "status": "split",
+ "statement": "Let $X$ be a proper scheme over a field $k$ [def-pc-scheme] [def-weil-proper-morphism]. For a quasi-coherent module $M$, use its associated etale tensor-section sheaf [def-sc-etale-qcoherent-module], lifted by the standard coefficient-universe functor when needed for inverse image. The canonical Zariski-abelian-to-etale comparison is the unique family of additive cohomology equivalences, natural in all quasi-coherent modules, equal on degree-zero sections to the tensor-pullback unit, and commuting with the connecting maps for every short exact sequence of quasi-coherent modules [def-sc-zariski-cohomology] [lem-sc-etale-zariski-qcoh-comparison]. Compose this family with the fixed module/abelian common-resolution comparison [new-module-cohomology-ext-resolution-naturality] and invert to define $c_X^q:H^q(X_{et},M_{et})\\simeq H^q(X,M)$ [pqf-def-cohomology]. Transport any additive endomorphism of the underlying Zariski abelian sheaf through that same fixed resolution comparison to define its additive action on module cohomology. For the structure module, regard the latter groups with their canonical field-module structure [def-sc-field-linear-module-cohomology-operations]. The structure-module and base-changed proper-scheme specializations use precisely these constructions, with properness of the latter supplied by stability under base change.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-sc-etale-qcoherent-module",
+  "pqf-def-cohomology",
+  "def-sc-zariski-cohomology",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "new-module-cohomology-ext-resolution-naturality",
+  "def-sc-field-linear-module-cohomology-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; sites-cohomology.tex; homology.tex",
+  "place": "Tags 03P2 (quasi-coherent comparison), 03FD (module/abelian comparison), 010S (universal delta functors); Tag 0A3P (Frobenius application)"
+ },
+ "proof": [
+  {
+   "text": "Use the tensor-component prescription of the existing etale comparison to identify the coefficient maps. Construct a normalized additive family. Simultaneous acyclic sequences give bijectivity in every degree and equality of any two normalized additive families. Turn the maps into additive equivalences by ofBijective. Function extensionality turns uniqueness of the underlying maps into uniqueness of the entire family. The existing definitions then choose this unique family and compose it with the fixed common-resolution comparison and the canonical Ext-universe equivalence.",
+   "uses": [
     "lem-pbc-coherent-etale-comparison-morphism",
     "lem-pbc-coherent-etale-normalized-additive-map",
     "lem-pbc-coherent-etale-effacing-sequence",
     "lem-sc-etale-zariski-qcoh-comparison",
     "new-module-cohomology-ext-resolution-naturality"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/homology.tex; etale-cohomology.tex",
-    "place": "Tags 010T, 03P2, 03FD; explicit additive-map construction, dimension shifting, and uniqueness. The fixed module comparison retains its resolution-isomorphism component; Ext.chgUniv represents the identical derived morphism and gives a component/naturality API without unfolding resolutions."
+   ],
+   "elementary": false
   },
-  "mathlib_match": null,
-  "mathlib_searches": [
-    {
-      "tool": "LeanSearch",
-      "query": "The canonical comparison between Zariski and etale cohomology of quasi coherent modules is the unique morphism of delta functors which is the identity on global sections",
-      "results": "msearch.py leansearch: UNAVAILABLE, Internal Server Error; no result returned.",
-      "date": "2026-10-15",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "Loogle",
-      "query": "\"delta\", \"cohomology\"",
-      "results": "msearch.py loogle: 0 results.",
-      "date": "2026-10-15",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "normalizedCoherentEtale|IsNormalizedCoherentEtaleComparison; canonical.*[Ee]tale.*[Cc]omparison|[Ee]tale.*[Cc]omparison.*unique",
-      "results": "rg in Mathlib, WeilConjectures and lean/Sheaf: no declaration matching the uniquely normalized comparison. Existing EtaleZariskiQcohComparison gives an existential natural family normalized in degree zero, without a connecting-map condition; reused for its uniquely component-determined coefficient maps. ModuleCohomologyExtResolutionNaturality provides the fixed module/abelian comparison and is reused.",
-      "date": "2026-10-15",
-      "verdict": "new normalized family required"
-    },
-    {
-      "tool": "DAG search",
-      "query": "tools/blueprint_refs.py search \"canonical coherent\"; rg normalizedCoherentEtale|IsNormalizedCoherentEtaleComparison dag/nodes",
-      "results": "0 blueprint nodes; no named normalized-comparison definition. Existing comparison nodes are dependencies, not this canonical construction.",
-      "date": "2026-10-15",
-      "verdict": "no duplicate node"
-    }
-  ],
-  "created": {
-    "by": "worker",
-    "item": "lem-weil-pbc-coherent-frobenius-comparison",
-    "date": "2026-10-15",
-    "group": "NE"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
-      "place": "Proper coherent base change and the canonical etale-to-module cohomology identifications in the final paragraph",
-      "via": [
-        "lem-weil-pbc-coherent-frobenius-comparison"
-      ]
-    },
-    "same_as": []
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.canonicalCoherentEtaleComparison",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.liftedCoherentEtaleSheaf",
-      "AlgebraicGeometry.Scheme.Modules.coherentEtaleMap",
-      "AlgebraicGeometry.Scheme.Modules.IsNormalizedCoherentEtaleComparison",
-      "AlgebraicGeometry.Scheme.Modules.exists_unique_normalizedCoherentEtaleComparison",
-      "AlgebraicGeometry.Scheme.Modules.normalizedCoherentEtaleComparison",
-      "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge",
-      "AlgebraicGeometry.Scheme.Modules.canonicalCoherentEtaleComparison",
-      "AlgebraicGeometry.Scheme.Modules.coherentAdditiveEndomorphism",
-      "AlgebraicGeometry.Scheme.Modules.structureTensorEtaleSheaf",
-      "AlgebraicGeometry.Scheme.Modules.structureCoherentEtaleComparison",
-      "AlgebraicGeometry.Scheme.Modules.structureCoherentEtaleComparisonOfPullback",
-      "AlgebraicGeometry.Scheme.Modules.structureCoherentFrobenius",
-      "AlgebraicGeometry.Scheme.Modules.coherentExtUniverseEquiv",
-      "AlgebraicGeometry.Scheme.Modules.coherentModuleGroup",
-      "AlgebraicGeometry.Scheme.Modules.coherentExtUniverseEquiv_hom",
-      "AlgebraicGeometry.Scheme.Modules.coherentExtUniverseEquiv_comp",
-      "AlgebraicGeometry.Scheme.Modules.coherentSheafUniverseEquiv_naturality",
-      "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge_component",
-      "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge_naturality"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/CanonicalCoherentEtaleComparison.lean",
-    "statement": "def canonicalCoherentEtaleComparison {k : Type u} [Field k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsProper f] (F : X.Modules)\n    [F.IsQuasicoherent] (q : ℕ) :\n    CoherentEtale.Target X F q ≃+ coherentModuleGroup X F q",
-    "branch": "newtargets-dag",
-    "by": "NE",
-    "date": "2026-10-15",
-    "existing": false,
-    "note": "The comparison is chosen only from a unique normalized delta-functor family. Its module/abelian part uses the existing explicit common-resolution comparison, with canonical Ext universe transport. The only postponed proof is the named existence-and-uniqueness theorem; no arbitrary existence choice defines coefficient data."
-  },
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-0ef8d3190",
-    "group": "NE",
-    "result": "pass",
-    "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-0ef8d3190",
-    "group": "NE",
-    "result": "pass",
-    "note": "Reviewed immutable modules, dependencies, source passages, canonical constructions, all statement clauses, edge cases, docstrings, reports, and verbatim signatures. Server compiles passed at 56.1 s and 2.2 s. No project changes or global build."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-20",
-    "by": "L",
-    "reviewer": "C-3809e",
-    "group": "B2",
-    "result": "fix",
-    "landing": "20261020T230711-L-602865",
-    "kind": "interface",
-    "note": "independent cc review: Delivered item, new degree-zero module, adapted CanonicalCoherentEtaleComparison and six consumers matched against the base/quarantine originals, the adopted WeilConjectures ModuleCohomologyExtResolutionNaturality(+Extension), the DAG nodes and the change records; all compiled, plus two quarantined importers, original-vs-adapted forced-adaptation compiles, #print axioms and old=new scratch proofs for coherentExtUniverseEquiv and coherentModuleGroup"
+  {
+   "text": "Represent Ext universe change by Mathlib Ext.chgUniv. Its homEquiv_chgUniv identity identifies the represented derived morphism with the previous common-derived-category homAddEquiv transport, proves additivity and gives compatibility with Ext postcomposition. Evaluate the existing common-resolution natural-isomorphism component through the proved generic composite formula. Its naturality square and universe-transport naturality yield the fixed large module comparison naturality API. The module additive-group cache is the same underlying group obtained by exact forgetting of scalars.",
+   "uses": [
+    "new-module-cohomology-ext-resolution-naturality"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pbc-coherent-etale-comparison-morphism",
+  "lem-pbc-coherent-etale-normalized-additive-map",
+  "lem-pbc-coherent-etale-effacing-sequence",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "new-module-cohomology-ext-resolution-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex; etale-cohomology.tex",
+  "place": "Tags 010T, 03P2, 03FD; explicit additive-map construction, dimension shifting, and uniqueness. The fixed module comparison retains its resolution-isomorphism component; Ext.chgUniv represents the identical derived morphism and gives a component/naturality API without unfolding resolutions."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "The canonical comparison between Zariski and etale cohomology of quasi coherent modules is the unique morphism of delta functors which is the identity on global sections",
+   "results": "msearch.py leansearch: UNAVAILABLE, Internal Server Error; no result returned.",
+   "date": "2026-10-15",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "Loogle",
+   "query": "\"delta\", \"cohomology\"",
+   "results": "msearch.py loogle: 0 results.",
+   "date": "2026-10-15",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedCoherentEtale|IsNormalizedCoherentEtaleComparison; canonical.*[Ee]tale.*[Cc]omparison|[Ee]tale.*[Cc]omparison.*unique",
+   "results": "rg in Mathlib, WeilConjectures and lean/Sheaf: no declaration matching the uniquely normalized comparison. Existing EtaleZariskiQcohComparison gives an existential natural family normalized in degree zero, without a connecting-map condition; reused for its uniquely component-determined coefficient maps. ModuleCohomologyExtResolutionNaturality provides the fixed module/abelian comparison and is reused.",
+   "date": "2026-10-15",
+   "verdict": "new normalized family required"
+  },
+  {
+   "tool": "DAG search",
+   "query": "tools/blueprint_refs.py search \"canonical coherent\"; rg normalizedCoherentEtale|IsNormalizedCoherentEtaleComparison dag/nodes",
+   "results": "0 blueprint nodes; no named normalized-comparison definition. Existing comparison nodes are dependencies, not this canonical construction.",
+   "date": "2026-10-15",
+   "verdict": "no duplicate node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-coherent-frobenius-comparison",
+  "date": "2026-10-15",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "Proper coherent base change and the canonical etale-to-module cohomology identifications in the final paragraph",
+   "via": [
+    "lem-weil-pbc-coherent-frobenius-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.canonicalCoherentEtaleComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.liftedCoherentEtaleSheaf",
+   "AlgebraicGeometry.Scheme.Modules.coherentEtaleMap",
+   "AlgebraicGeometry.Scheme.Modules.IsNormalizedCoherentEtaleComparison",
+   "AlgebraicGeometry.Scheme.Modules.exists_unique_normalizedCoherentEtaleComparison",
+   "AlgebraicGeometry.Scheme.Modules.normalizedCoherentEtaleComparison",
+   "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge",
+   "AlgebraicGeometry.Scheme.Modules.canonicalCoherentEtaleComparison",
+   "AlgebraicGeometry.Scheme.Modules.coherentAdditiveEndomorphism",
+   "AlgebraicGeometry.Scheme.Modules.structureTensorEtaleSheaf",
+   "AlgebraicGeometry.Scheme.Modules.structureCoherentEtaleComparison",
+   "AlgebraicGeometry.Scheme.Modules.structureCoherentEtaleComparisonOfPullback",
+   "AlgebraicGeometry.Scheme.Modules.structureCoherentFrobenius",
+   "AlgebraicGeometry.Scheme.Modules.coherentExtUniverseEquiv",
+   "AlgebraicGeometry.Scheme.Modules.coherentModuleGroup",
+   "AlgebraicGeometry.Scheme.Modules.coherentExtUniverseEquiv_hom",
+   "AlgebraicGeometry.Scheme.Modules.coherentExtUniverseEquiv_comp",
+   "AlgebraicGeometry.Scheme.Modules.coherentSheafUniverseEquiv_naturality",
+   "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge_component",
+   "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalCoherentEtaleComparison.lean",
+  "statement": "def canonicalCoherentEtaleComparison {k : Type u} [Field k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsProper f] (F : X.Modules)\n    [F.IsQuasicoherent] (q : ℕ) :\n    CoherentEtale.Target X F q ≃+ coherentModuleGroup X F q",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The comparison is chosen only from a unique normalized delta-functor family. Its module/abelian part uses the existing explicit common-resolution comparison, with canonical Ext universe transport. The only postponed proof is the named existence-and-uniqueness theorem; no arbitrary existence choice defines coefficient data."
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0ef8d3190",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0ef8d3190",
+  "group": "NE",
+  "result": "pass",
+  "note": "Reviewed immutable modules, dependencies, source passages, canonical constructions, all statement clauses, edge cases, docstrings, reports, and verbatim signatures. Server compiles passed at 56.1 s and 2.2 s. No project changes or global build."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-3809e",
+  "group": "B2",
+  "result": "fix",
+  "landing": "20261020T230711-L-602865",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, new degree-zero module, adapted CanonicalCoherentEtaleComparison and six consumers matched against the base/quarantine originals, the adopted WeilConjectures ModuleCohomologyExtResolutionNaturality(+Extension), the DAG nodes and the change records; all compiled, plus two quarantined importers, original-vs-adapted forced-adaptation compiles, #print axioms and old=new scratch proofs for coherentExtUniverseEquiv and coherentModuleGroup"
+ }
 }

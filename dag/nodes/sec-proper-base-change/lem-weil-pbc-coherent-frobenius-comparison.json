@@ -1,305 +1,294 @@
 {
-  "id": "lem-weil-pbc-coherent-frobenius-comparison",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
-      "place": "Proof, final paragraph: proper coherent base change identifies E tensor k′ with H¹ of the base-changed structure sheaf and carries Frobenius to Frobenius",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-weil-pbc-coherent-frobenius-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "Proof, final paragraph: proper coherent base change identifies E tensor k′ with H¹ of the base-changed structure sheaf and carries Frobenius to Frobenius",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Frobenius compatibility of the canonical additive/coherent cohomology comparisons",
-  "statement": "Let $p$ be prime, let $k$ be a field of characteristic $p$ [def-pc-field-characteristic], and let $X$ be a proper $k$-scheme [def-pc-scheme, def-weil-proper-morphism]. Put $G_X=(\\mathcal O_X)_{\\mathrm{et}}$ [def-sc-etale-qcoherent-module], and let $\\mathrm{Fr}_X:G_X\\to G_X$ be the additive sheaf map $s\\mapsto s^p$. For $q\\geq0$, put $E_X^q=H^q(X,\\mathcal O_X)$ [pqf-def-cohomology]; let $F_X^q$ be Frobenius on the cohomology of the underlying Zariski abelian sheaf of $\\mathcal O_X$, transported to $E_X^q$ by the canonical module/abelian cohomology identification [lem-sc-module-abelian-zariski-cohomology, def-sc-zariski-cohomology]. Let $c_X^q:H^q(X_{\\mathrm{et}},G_X)\\xrightarrow{\\sim}E_X^q$ be the inverse of the canonical module-to-etale comparison [lem-sc-etale-zariski-qcoh-comparison]; equivalently it is the canonical etale-to-Zariski abelian comparison followed by the abelian-to-module identification just specified. Then $F_X^q$ is additive, $F_X^q(av)=a^pF_X^q(v)$, and\n$$c_X^q\\circ H^q(\\mathrm{Fr}_X)=F_X^q\\circ c_X^q.$$\nFor every field extension $k\\subseteq K$ [def-pc-field-extension], put $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-base-change], let $j:X_K\\to X$ be the projection and $u:j^{-1}G_X\\to G_{X_K}$ the sheaf map whose adjoint is structural pullback of regular functions [def-weil-pbc-inverse-image]. With $P_j^q=H^q(u)\\circ j^*$ the canonical additive-coefficient cohomology pullback [def-weil-pbc-cohomology-pullback], let $b_q:E_X^q\\otimes_kK\\xrightarrow{\\sim}E_{X_K}^q$ be the canonical flat coherent base-change isomorphism [lem-sc-flat-base-change-coherent]. Then\n$$c_{X_K}^q(P_j^q(x))=b_q(c_X^q(x)\\otimes1),\\qquad F_{X_K}^q(b_q(v\\otimes a))=b_q(F_X^q(v)\\otimes a^p)$$\nfor every $x\\in H^q(X_{\\mathrm{et}},G_X)$, $v\\in E_X^q$ and $a\\in K$.",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0A3P, label lemma-finiteness-proper-variety-char-p-p, proof, together with Tag 03P2, label theorem-zariski-fpqc-quasi-coherent; coherent.tex Tag 02KH, label lemma-flat-base-change-cohomology, separated finite-affine-cover proof"
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-proper-morphism",
-    "def-pc-field-characteristic",
-    "def-sc-etale-qcoherent-module",
-    "pqf-def-cohomology",
-    "def-sc-zariski-cohomology",
-    "lem-sc-module-abelian-zariski-cohomology",
-    "lem-sc-etale-zariski-qcoh-comparison",
-    "def-pc-field-extension",
-    "def-pc-base-change",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-cohomology-pullback",
-    "lem-sc-flat-base-change-coherent",
-    "def-pbc-canonical-coherent-etale-comparison"
-  ],
-  "proof": [
-    {
-      "text": "Apply coherentPowerComparison to the source structure-sheaf power map. Its first assertion gives p-semilinearity. Conjugate its normalized power square by moduleAbelianCohomologyLarge to prove the etale-to-coherent Frobenius square.",
-      "uses": [
-        "new-coherent-power-comparison",
-        "def-pbc-canonical-coherent-etale-comparison"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Properness of the base-changed structure morphism follows from the given cartesian square. Apply the canonical coherent-etale structural pullback square and substitute hb to prove the base-change comparison formula.",
-      "uses": [
-        "new-coherent-etale-comparison-pullback",
-        "lem-weil-pbc-proper-base-change"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "K-linearity of b gives b(a tensor v)=a*b(1 tensor v). Apply coherentPowerComparison on Y to get semilinearity there, substitute hb, use coherent Frobenius structural-pullback naturality, and substitute hb backwards. This proves the final tensor identity, without constructing b or reproving its bijectivity.",
-      "uses": [
-        "new-coherent-power-comparison",
-        "new-coherent-frobenius-pullback"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Frobenius compatibility of the canonical additive/coherent cohomology comparisons",
+ "statement": "Let $p$ be prime, let $k$ be a field of characteristic $p$ [def-pc-field-characteristic], and let $X$ be a proper $k$-scheme [def-pc-scheme, def-weil-proper-morphism]. Put $G_X=(\\mathcal O_X)_{\\mathrm{et}}$ [def-sc-etale-qcoherent-module], and let $\\mathrm{Fr}_X:G_X\\to G_X$ be the additive sheaf map $s\\mapsto s^p$. For $q\\geq0$, put $E_X^q=H^q(X,\\mathcal O_X)$ [pqf-def-cohomology]; let $F_X^q$ be Frobenius on the cohomology of the underlying Zariski abelian sheaf of $\\mathcal O_X$, transported to $E_X^q$ by the canonical module/abelian cohomology identification [lem-sc-module-abelian-zariski-cohomology, def-sc-zariski-cohomology]. Let $c_X^q:H^q(X_{\\mathrm{et}},G_X)\\xrightarrow{\\sim}E_X^q$ be the inverse of the canonical module-to-etale comparison [lem-sc-etale-zariski-qcoh-comparison]; equivalently it is the canonical etale-to-Zariski abelian comparison followed by the abelian-to-module identification just specified. Then $F_X^q$ is additive, $F_X^q(av)=a^pF_X^q(v)$, and\n$$c_X^q\\circ H^q(\\mathrm{Fr}_X)=F_X^q\\circ c_X^q.$$\nFor every field extension $k\\subseteq K$ [def-pc-field-extension], put $X_K=X\\times_{\\operatorname{Spec}k}\\operatorname{Spec}K$ [def-pc-base-change], let $j:X_K\\to X$ be the projection and $u:j^{-1}G_X\\to G_{X_K}$ the sheaf map whose adjoint is structural pullback of regular functions [def-weil-pbc-inverse-image]. With $P_j^q=H^q(u)\\circ j^*$ the canonical additive-coefficient cohomology pullback [def-weil-pbc-cohomology-pullback], let $b_q:E_X^q\\otimes_kK\\xrightarrow{\\sim}E_{X_K}^q$ be the canonical flat coherent base-change isomorphism [lem-sc-flat-base-change-coherent]. Then\n$$c_{X_K}^q(P_j^q(x))=b_q(c_X^q(x)\\otimes1),\\qquad F_{X_K}^q(b_q(v\\otimes a))=b_q(F_X^q(v)\\otimes a^p)$$\nfor every $x\\in H^q(X_{\\mathrm{et}},G_X)$, $v\\in E_X^q$ and $a\\in K$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3P, label lemma-finiteness-proper-variety-char-p-p, proof, together with Tag 03P2, label theorem-zariski-fpqc-quasi-coherent; coherent.tex Tag 02KH, label lemma-flat-base-change-cohomology, separated finite-affine-cover proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-pc-field-characteristic",
+  "def-sc-etale-qcoherent-module",
+  "pqf-def-cohomology",
+  "def-sc-zariski-cohomology",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "def-pc-field-extension",
+  "def-pc-base-change",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-sc-flat-base-change-coherent",
+  "def-pbc-canonical-coherent-etale-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Apply coherentPowerComparison to the source structure-sheaf power map. Its first assertion gives p-semilinearity. Conjugate its normalized power square by moduleAbelianCohomologyLarge to prove the etale-to-coherent Frobenius square.",
+   "uses": [
     "new-coherent-power-comparison",
-    "def-pbc-canonical-coherent-etale-comparison",
+    "def-pbc-canonical-coherent-etale-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Properness of the base-changed structure morphism follows from the given cartesian square. Apply the canonical coherent-etale structural pullback square and substitute hb to prove the base-change comparison formula.",
+   "uses": [
     "new-coherent-etale-comparison-pullback",
-    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "K-linearity of b gives b(a tensor v)=a*b(1 tensor v). Apply coherentPowerComparison on Y to get semilinearity there, substitute hb, use coherent Frobenius structural-pullback naturality, and substitute hb backwards. This proves the final tensor identity, without constructing b or reproving its bijectivity.",
+   "uses": [
+    "new-coherent-power-comparison",
     "new-coherent-frobenius-pullback"
-  ],
-  "proof_origin": {
-    "by": "Q4 stage-3 worker",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0A3P and Tags 03P2, 03FD; scalar action and tensor assembly directly from the fixed comparisons and hb"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "frobenius|Artin.Schreier",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Etale coherent cohomology comparison commutes with Frobenius and flat base change",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a proper scheme in characteristic p, etale cohomology of the additive structure sheaf identifies with coherent cohomology compatibly with Frobenius and flat field base change",
-      "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent; Algebra.formallyEtale_iff; Algebra.FormallyEtale.of_restrictScalars; Algebra.etaleLocus_eq_compl_support; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.comp; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; AlgebraicGeometry.IsEtale.of_comp",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Frobenius\", \"cohomology\"",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The canonical Cech comparison from coherent to etale additive sheaf cohomology is natural for p semilinear Frobenius and sends flat scalar extension to the cohomology pullback",
-      "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; LightCondMod.hom_naturality_apply; CondensedMod.hom_naturality_apply; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; LightCondSet.hom_naturality_apply",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Sheaf\", \"cohomology\"",
-      "results": "CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.cohomologyFunctor; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.PresheafOfGroups.OneCohomologyRelation; CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl; CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm; CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
-    },
-    {
-      "tool": "grep",
-      "query": "Artin.Schreier|coherent.*cohomology|cohomology.*baseChange",
-      "results": "Mathlib/FieldTheory/KummerExtension.lean",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "naturality of sheaf cohomology comparison for the structure sheaf with absolute Frobenius and extension of scalars",
-      "results": "CategoryTheory.Sheaf.ΓRes_naturality; AlgebraicGeometry.Spec_Γ_naturality_assoc; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; AlgebraicGeometry.Scheme.ΓSpecIso_naturality; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm",
-      "date": "2026-10-14",
-      "verdict": "no match: generic cohomology/global-section naturality, cotangent cohomology or condensed coherent topology do not state this scheme-cohomology assertion"
-    },
-    {
-      "tool": "grep",
-      "query": "coherent.*(finite|cohomology)|Frobenius.*cohomology",
-      "results": "Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Basic.lean",
-      "date": "2026-10-14",
-      "verdict": "no match: generic cohomology/global-section naturality, cotangent cohomology or condensed coherent topology do not state this scheme-cohomology assertion"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"cohomology\", \"Frobenius\"",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match: generic cohomology/global-section naturality, cotangent cohomology or condensed coherent topology do not state this scheme-cohomology assertion"
-    },
-    {
-      "tool": "grep",
-      "query": "Frobenius.*cohomology|cohomology.*Frobenius",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match: cotangent cohomology, etale morphism properties and tensor modules do not state this canonical Frobenius-compatible sheaf cohomology comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "On Cech cocycles Frobenius is componentwise pth power and flat scalar extension sends z tensor a to pullback z times a compatibly with canonical sheaf cohomology",
-      "results": "Algebra.tensorH1CotangentOfIsLocalization_toLinearMap; Algebra.Extension.tensorH1Cotangent; Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex; Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange; Algebra.tensorH1CotangentOfIsLocalization; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; Algebra.Extension.tensorCotangentSpace; Algebra.Generators.H1Cotangent.δ_eq",
-      "date": "2026-10-14",
-      "verdict": "no match: cotangent cohomology, etale morphism properties and tensor modules do not state this canonical Frobenius-compatible sheaf cohomology comparison"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Frobenius\", \"cohomology\"",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match: cotangent cohomology, etale morphism properties and tensor modules do not state this canonical Frobenius-compatible sheaf cohomology comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a proper scheme in characteristic p the canonical etale structure sheaf cohomology to coherent cohomology comparison commutes with Frobenius and field base change",
-      "results": "AlgebraicGeometry.IsEtale.of_comp; Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.comp; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.IsEtaleAt.comp; KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.Etale.comp",
-      "date": "2026-10-14",
-      "verdict": "no match: cotangent cohomology, etale morphism properties and tensor modules do not state this canonical Frobenius-compatible sheaf cohomology comparison"
-    },
-    {
-      "tool": "grep",
-      "query": "Frobenius.*cohomology|cohomology.*Frobenius|coherent_frobenius",
-      "results": "No hits",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Structure sheaf etale cohomology equals coherent cohomology naturally under Frobenius and flat scalar extension",
-      "results": "CategoryTheory.Sheaf.H; Algebra.FormallyUnramified.flat_of_restrictScalars; AlgebraicGeometry.Spec.structureSheaf; CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj; comonadicExtendScalars; RingHom.Etale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; AlgebraicGeometry.Scheme.etalePretopology",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf.H, frobenius",
-      "results": "No hits",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The canonical etale to Zariski structure sheaf cohomology comparison commutes with Frobenius and field extension",
-      "results": "KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.Etale.comp; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.etaleLocus_eq_compl_support; Algebra.Etale.formallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.IsEtaleAt.comp; Algebra.FormallyEtale.localization_map",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Cech cocycles compute coherent cohomology and the additive p power map is semilinear and compatible with extension of scalars",
-      "results": "ContinuousCohomology.homogeneousCochains; groupCohomology.iCocycles; groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply; CategoryTheory.PresheafOfGroups.OneCohomologyRelation; groupCohomology.cocyclesIso₀_hom_comp_f_apply; groupCohomology.cocyclesIso₀_hom_comp_f; groupCohomology.coe_mapCocycles₁; groupCohomology.isoCocycles₁_hom_comp_i_apply",
-      "date": "2026-10-17",
-      "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lemma-weil-pbc-smooth-curve-artin-schreier",
-    "by": "worker",
-    "date": "2026-10-14"
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-weil-pbc-coherent-frobenius-comparison",
-    "worker": "stage1",
-    "summary": "Audited the inherited common-Cech proof and all cited statements. Replaced the long inline module/abelian pullback identification by the existing ringed-site refinement square, coefficient factorization and fixed resolution comparison theorems; added proper base-change and resolution normalization citations. No statement change or new node. Repeated item Mathlib searches by two semantic phrasings, Loogle and source grep without a match.",
-    "blueprint": "Realizes the final paragraph of the current blueprint lemma-weil-pbc-smooth-curve-artin-schreier: coherent base change identifies E tensor k′ and carries Frobenius to Frobenius. Steps 1–3 give the canonical additive comparison and semilinearity, Steps 4–7 identify the specified field-extension map, and Step 8 proves the Frobenius formula on cycles.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-flat-cohomology-separated",
-        "why": "Generic separated flat coherent base-change theorem, used for invertibility of the explicitly specified linear extension."
-      },
-      {
-        "node": "lem-sc-cech-comparison-map-naturality",
-        "why": "Generic module coefficient naturality, used on multiplication maps to prove scalar linearity of the Cech edges."
-      },
-      {
-        "node": "lem-sc-etale-tensor-positive-object-cohomology",
-        "why": "Generic affine-object vanishing for the associated quasi-coherent etale sheaf, supplying the edge acyclicity hypotheses."
-      },
-      {
-        "node": "lem-weil-pbc-etale-base-change-continuous",
-        "why": "Generic cohomological tool for the canonical comparisons; the curve unit has no substitute for this general construction."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-site-cech-refinement-square",
-        "why": "Generic cohomological tool for the canonical comparisons; the curve unit has no substitute for this general construction."
-      }
-    ]
-  },
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q27-ef53a2766",
-    "group": "Q27",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-ef53a2766 (reviewer sub-agent of L); spot-checked: Read the whole item: all 8 steps, the statement of every one of the 36 proof_deps and 14 stmt_deps, and the Lean of def-pbc-canonical-coherent-etale-comparison. Its uniqueness is among normalized families of equivalences over all quasi-coherent modules. Sources checked: Stacks 0A3P proof (03P2 and 02KH used for this compatibility) and the final paragraph of the current blueprint lemma-weil-pbc-smooth-curve-artin-schreier (the from.place is correct). The statement is unchanged and there are no new nodes. Step checks: Step 1 hypotheses hold (finite affine cover, separated affine intersections, triple-tensor instantiation with f_0=id and T=Spec K, affine vanishing in the module, abelian and etale theories, properness of X_K). Steps 3-8 are correct: additive edge naturality for Frobenius, p=2 and the zero ring checked, the base-change site morphism, the refinement square matching the module fmap recipe, the coefficient factor/transport/Ext-edge chain identifying b_q, flatness and separated flat base change, and the semilinear cycle calculation. Repaired fault (E5): Step 2 asserted that the Cech-computed map is c_X^q but never showed the change-of-site maps form the definition's unique normalized family. It also equated the delta-universal module/abelian identification with the fixed resolution comparison without argument. The fix rewrites Step 2 using in-unit nodes: lem-weil-pbc-site-cohomology-pullback (delta-morphism, unit in degree 0), lem-weil-pbc-site-pullback-abelian-exact, and lem-weil-pbc-horseshoe-delta-functor with def-weil-pbc-delta-functor (connecting maps along the morphism of short exact sequences). Bijectivity for every quasi-coherent F follows from Step 1 and the edge square, then the definition's uniqueness applies. A resolution map I_ab->J with resolution normalization gives iota e_mod = e_ab. proof_deps recomputed; no cycle; all additions in unit sk-thm-p1. Accepted tool_uses: lem-pc-flat-cohomology-separated, lem-sc-cech-comparison-map-naturality, lem-sc-etale-tensor-positive-object-cohomology, lem-weil-pbc-etale-base-change-continuous, lem-weil-pbc-ringed-site-cech-refinement-square (the only off-route one). No SGA cited. Process note: the side ledger retired the Q27 claim 32 s before this commit; the merge tool should check mergeability.; 1 file(s) fixed by the reviewer"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-0ef8d3190",
-    "group": "NE",
-    "result": "pass",
-    "note": "Reviewed immutable modules, dependencies, source passages, canonical constructions, all statement clauses, edge cases, docstrings, reports, and verbatim signatures. Server compiles passed at 56.1 s and 2.2 s. No project changes or global build."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.CoherentFrobeniusComparison",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_frobenius_comparison",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.coherent_frobenius_comparison"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/CoherentFrobeniusComparison.lean",
-    "statement": "theorem coherent_frobenius_comparison {k K : Type u} [Field k] [Field K] [Algebra k K] {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsProper f] (g : Y ⟶ Spec (.of K)) (j : Y ⟶ X) (h : IsPullback j g f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (p : ℕ) [Fact p.Prime] [CharP k p] (q : ℕ) (FrZ : (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj (unit X) ⟶ (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj (unit X)) (FrZK : (SheafOfModules.toSheaf.{u} Y.ringCatSheaf).obj (unit Y) ⟶ (SheafOfModules.toSheaf.{u} Y.ringCatSheaf).obj (unit Y)) (hFrZ : ∀ (U : X.Opensᵒᵖ) (s : Γ(X, U.unop)), FrZ.hom.app U s = s ^ p) (hFrZK : ∀ (U : Y.Opensᵒᵖ) (s : Γ(Y, U.unop)), FrZK.hom.app U s = s ^ p) (FrE : structureTensorEtaleSheaf X ⟶ structureTensorEtaleSheaf X) (hFrE : ∀ (U : X.Etaleᵒᵖ) (s : (structureTensorEtaleSheaf X).obj.obj U), (tensorPullbackObjUnitToUnit U.unop.hom).app ⊤ (FrE.hom.app U s).down = (@id Γ(U.unop.left, ⊤) ((tensorPullbackObjUnitToUnit U.unop.hom).app ⊤ s.down)) ^ p) (u : (Etale.upperStar AddCommGrpCat.{u + 1} j).obj (structureTensorEtaleSheaf X) ⟶ structureTensorEtaleSheaf Y) (hu : ∀ (U : X.Etale) (s : (structureTensorEtaleSheaf X).obj.obj (op U)), (tensorPullbackObjUnitToUnit ((MorphismProperty.Over.pullback @Etale ⊤ j).obj U).hom).app ⊤ (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j).homEquiv (structureTensorEtaleSheaf X) (structureTensorEtaleSheaf Y) u).hom.app (op U) s).down = (pullback.fst U.hom j).appTop ((tensorPullbackObjUnitToUnit U.hom).app ⊤ s.down)) (b : (K ⊗[k] scalarCohomology f (unit X) q) ≃ₗ[K] scalarCohomology g (unit Y) q) (hb : ∀ v : scalarCohomology f (unit X) q, b ((1 : K) ⊗ₜ[k] v) = (moduleCohomologyFMap j (SheafOfModules.unitToPushforwardObjUnit j.toRingCatSheafHom) q).hom v) : (∀ (a : k) (v : scalarCohomology f (unit X) q), structureCoherentFrobenius f q FrZ (a • v) = a ^ p • structureCoherentFrobenius f q FrZ v) ∧ (∀ x : Sheaf.H (structureTensorEtaleSheaf X) q, structureCoherentEtaleComparison f q (Sheaf.H.map FrE q x) = structureCoherentFrobenius f q FrZ (structureCoherentEtaleComparison f q x)) ∧ (∀ x : Sheaf.H (structureTensorEtaleSheaf X) q, structureCoherentEtaleComparisonOfPullback f g j (Spec.map (CommRingCat.ofHom (algebraMap k K))) h q (Sheaf.H.map u q (Etale.cohomologyMap j (structureTensorEtaleSheaf X) q x)) = b ((1 : K) ⊗ₜ[k] structureCoherentEtaleComparison f q x)) ∧ ∀ (v : scalarCohomology f (unit X) q) (a : K), structureCoherentFrobenius g q FrZK (b (a ⊗ₜ[k] v)) = b ((a ^ p) ⊗ₜ[k] structureCoherentFrobenius f q FrZ v)",
-    "branch": "newtargets-dag",
-    "by": "NE",
-    "date": "2026-10-15",
-    "existing": false,
-    "note": "Canonical comparisons are defined in the companion definition node. Coefficient maps and the flat base-change equivalence are specified by their defining sectionwise and pure-tensor equations. Tensor order K tensor E is the canonical commuted presentation of E tensor K."
-  },
-  "tool_uses": [
-    "lem-sc-etale-tensor-positive-object-cohomology",
-    "lem-weil-pbc-etale-base-change-continuous",
-    "lem-weil-pbc-ringed-site-cech-refinement-square"
-  ],
-  "reviewed_proof": {
-    "date": "2026-10-20",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "D5",
-    "result": "pass",
-    "landing": "20261020T235550-L-1189935",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-    "sorry_before": [],
-    "sorry_after": []
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "new-coherent-power-comparison",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "new-coherent-etale-comparison-pullback",
+  "lem-weil-pbc-proper-base-change",
+  "new-coherent-frobenius-pullback"
+ ],
+ "proof_origin": {
+  "by": "Q4 stage-3 worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0A3P and Tags 03P2, 03FD; scalar action and tensor assembly directly from the fixed comparisons and hb"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frobenius|Artin.Schreier",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale coherent cohomology comparison commutes with Frobenius and flat base change",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme in characteristic p, etale cohomology of the additive structure sheaf identifies with coherent cohomology compatibly with Frobenius and flat field base change",
+   "results": "Algebra.FormallyEtale.subsingleton_h1Cotangent; Algebra.formallyEtale_iff; Algebra.FormallyEtale.of_restrictScalars; Algebra.etaleLocus_eq_compl_support; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.comp; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"cohomology\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical Cech comparison from coherent to etale additive sheaf cohomology is natural for p semilinear Frobenius and sends flat scalar extension to the cohomology pullback",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; LightCondMod.hom_naturality_apply; CondensedMod.hom_naturality_apply; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; LightCondSet.hom_naturality_apply",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"cohomology\"",
+   "results": "CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Sheaf.cohomologyFunctor; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.PresheafOfGroups.OneCohomologyRelation; CategoryTheory.PresheafOfGroups.OneCohomologyRelation.refl; CategoryTheory.PresheafOfGroups.OneCohomologyRelation.symm; CategoryTheory.PresheafOfGroups.OneCohomologyRelation.trans",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
+  },
+  {
+   "tool": "grep",
+   "query": "Artin.Schreier|coherent.*cohomology|cohomology.*baseChange",
+   "results": "Mathlib/FieldTheory/KummerExtension.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the Frobenius-compatible etale/coherent cohomology comparison or the characteristic-p curve calculation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "naturality of sheaf cohomology comparison for the structure sheaf with absolute Frobenius and extension of scalars",
+   "results": "CategoryTheory.Sheaf.ΓRes_naturality; AlgebraicGeometry.Spec_Γ_naturality_assoc; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; AlgebraicGeometry.StructureSheaf.toOpen_comp_comap; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; AlgebraicGeometry.Scheme.ΓSpecIso_naturality; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm",
+   "date": "2026-10-14",
+   "verdict": "no match: generic cohomology/global-section naturality, cotangent cohomology or condensed coherent topology do not state this scheme-cohomology assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*(finite|cohomology)|Frobenius.*cohomology",
+   "results": "Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Discrete/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: generic cohomology/global-section naturality, cotangent cohomology or condensed coherent topology do not state this scheme-cohomology assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"Frobenius\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: generic cohomology/global-section naturality, cotangent cohomology or condensed coherent topology do not state this scheme-cohomology assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*cohomology|cohomology.*Frobenius",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: cotangent cohomology, etale morphism properties and tensor modules do not state this canonical Frobenius-compatible sheaf cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On Cech cocycles Frobenius is componentwise pth power and flat scalar extension sends z tensor a to pullback z times a compatibly with canonical sheaf cohomology",
+   "results": "Algebra.tensorH1CotangentOfIsLocalization_toLinearMap; Algebra.Extension.tensorH1Cotangent; Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex; Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange; Algebra.tensorH1CotangentOfIsLocalization; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; Algebra.Extension.tensorCotangentSpace; Algebra.Generators.H1Cotangent.δ_eq",
+   "date": "2026-10-14",
+   "verdict": "no match: cotangent cohomology, etale morphism properties and tensor modules do not state this canonical Frobenius-compatible sheaf cohomology comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"cohomology\"",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: cotangent cohomology, etale morphism properties and tensor modules do not state this canonical Frobenius-compatible sheaf cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme in characteristic p the canonical etale structure sheaf cohomology to coherent cohomology comparison commutes with Frobenius and field base change",
+   "results": "AlgebraicGeometry.IsEtale.of_comp; Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.comp; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.IsEtaleAt.comp; KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.Etale.comp",
+   "date": "2026-10-14",
+   "verdict": "no match: cotangent cohomology, etale morphism properties and tensor modules do not state this canonical Frobenius-compatible sheaf cohomology comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*cohomology|cohomology.*Frobenius|coherent_frobenius",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Structure sheaf etale cohomology equals coherent cohomology naturally under Frobenius and flat scalar extension",
+   "results": "CategoryTheory.Sheaf.H; Algebra.FormallyUnramified.flat_of_restrictScalars; AlgebraicGeometry.Spec.structureSheaf; CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj; comonadicExtendScalars; RingHom.Etale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; AlgebraicGeometry.Scheme.etalePretopology",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, frobenius",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical etale to Zariski structure sheaf cohomology comparison commutes with Frobenius and field extension",
+   "results": "KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.Etale.comp; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.etaleLocus_eq_compl_support; Algebra.Etale.formallyEtale; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.IsEtaleAt.comp; Algebra.FormallyEtale.localization_map",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech cocycles compute coherent cohomology and the additive p power map is semilinear and compatible with extension of scalars",
+   "results": "ContinuousCohomology.homogeneousCochains; groupCohomology.iCocycles; groupCohomology.toCocycles_comp_isoCocycles₁_hom_apply; CategoryTheory.PresheafOfGroups.OneCohomologyRelation; groupCohomology.cocyclesIso₀_hom_comp_f_apply; groupCohomology.cocyclesIso₀_hom_comp_f; groupCohomology.coe_mapCocycles₁; groupCohomology.isoCocycles₁_hom_comp_i_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: the returned definitions, etale ring properties, cotangent base change, and group cochain formulas do not state this canonical scheme sheaf-cohomology comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lemma-weil-pbc-smooth-curve-artin-schreier",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-weil-pbc-coherent-frobenius-comparison",
+  "worker": "stage1",
+  "summary": "Audited the inherited common-Cech proof and all cited statements. Replaced the long inline module/abelian pullback identification by the existing ringed-site refinement square, coefficient factorization and fixed resolution comparison theorems; added proper base-change and resolution normalization citations. No statement change or new node. Repeated item Mathlib searches by two semantic phrasings, Loogle and source grep without a match.",
+  "blueprint": "Realizes the final paragraph of the current blueprint lemma-weil-pbc-smooth-curve-artin-schreier: coherent base change identifies E tensor k′ and carries Frobenius to Frobenius. Steps 1–3 give the canonical additive comparison and semilinearity, Steps 4–7 identify the specified field-extension map, and Step 8 proves the Frobenius formula on cycles.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-cohomology-separated",
+    "why": "Generic separated flat coherent base-change theorem, used for invertibility of the explicitly specified linear extension."
+   },
+   {
+    "node": "lem-sc-cech-comparison-map-naturality",
+    "why": "Generic module coefficient naturality, used on multiplication maps to prove scalar linearity of the Cech edges."
+   },
+   {
+    "node": "lem-sc-etale-tensor-positive-object-cohomology",
+    "why": "Generic affine-object vanishing for the associated quasi-coherent etale sheaf, supplying the edge acyclicity hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-continuous",
+    "why": "Generic cohomological tool for the canonical comparisons; the curve unit has no substitute for this general construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-cech-refinement-square",
+    "why": "Generic cohomological tool for the canonical comparisons; the curve unit has no substitute for this general construction."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-ef53a2766",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-ef53a2766 (reviewer sub-agent of L); spot-checked: Read the whole item: all 8 steps, the statement of every one of the 36 proof_deps and 14 stmt_deps, and the Lean of def-pbc-canonical-coherent-etale-comparison. Its uniqueness is among normalized families of equivalences over all quasi-coherent modules. Sources checked: Stacks 0A3P proof (03P2 and 02KH used for this compatibility) and the final paragraph of the current blueprint lemma-weil-pbc-smooth-curve-artin-schreier (the from.place is correct). The statement is unchanged and there are no new nodes. Step checks: Step 1 hypotheses hold (finite affine cover, separated affine intersections, triple-tensor instantiation with f_0=id and T=Spec K, affine vanishing in the module, abelian and etale theories, properness of X_K). Steps 3-8 are correct: additive edge naturality for Frobenius, p=2 and the zero ring checked, the base-change site morphism, the refinement square matching the module fmap recipe, the coefficient factor/transport/Ext-edge chain identifying b_q, flatness and separated flat base change, and the semilinear cycle calculation. Repaired fault (E5): Step 2 asserted that the Cech-computed map is c_X^q but never showed the change-of-site maps form the definition's unique normalized family. It also equated the delta-universal module/abelian identification with the fixed resolution comparison without argument. The fix rewrites Step 2 using in-unit nodes: lem-weil-pbc-site-cohomology-pullback (delta-morphism, unit in degree 0), lem-weil-pbc-site-pullback-abelian-exact, and lem-weil-pbc-horseshoe-delta-functor with def-weil-pbc-delta-functor (connecting maps along the morphism of short exact sequences). Bijectivity for every quasi-coherent F follows from Step 1 and the edge square, then the definition's uniqueness applies. A resolution map I_ab->J with resolution normalization gives iota e_mod = e_ab. proof_deps recomputed; no cycle; all additions in unit sk-thm-p1. Accepted tool_uses: lem-pc-flat-cohomology-separated, lem-sc-cech-comparison-map-naturality, lem-sc-etale-tensor-positive-object-cohomology, lem-weil-pbc-etale-base-change-continuous, lem-weil-pbc-ringed-site-cech-refinement-square (the only off-route one). No SGA cited. Process note: the side ledger retired the Q27 claim 32 s before this commit; the merge tool should check mergeability.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {},
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0ef8d3190",
+  "group": "NE",
+  "result": "pass",
+  "note": "Reviewed immutable modules, dependencies, source passages, canonical constructions, all statement clauses, edge cases, docstrings, reports, and verbatim signatures. Server compiles passed at 56.1 s and 2.2 s. No project changes or global build."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoherentFrobeniusComparison",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherent_frobenius_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.coherent_frobenius_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFrobeniusComparison.lean",
+  "statement": "theorem coherent_frobenius_comparison {k K : Type u} [Field k] [Field K] [Algebra k K] {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsProper f] (g : Y ⟶ Spec (.of K)) (j : Y ⟶ X) (h : IsPullback j g f (Spec.map (CommRingCat.ofHom (algebraMap k K)))) (p : ℕ) [Fact p.Prime] [CharP k p] (q : ℕ) (FrZ : (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj (unit X) ⟶ (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj (unit X)) (FrZK : (SheafOfModules.toSheaf.{u} Y.ringCatSheaf).obj (unit Y) ⟶ (SheafOfModules.toSheaf.{u} Y.ringCatSheaf).obj (unit Y)) (hFrZ : ∀ (U : X.Opensᵒᵖ) (s : Γ(X, U.unop)), FrZ.hom.app U s = s ^ p) (hFrZK : ∀ (U : Y.Opensᵒᵖ) (s : Γ(Y, U.unop)), FrZK.hom.app U s = s ^ p) (FrE : structureTensorEtaleSheaf X ⟶ structureTensorEtaleSheaf X) (hFrE : ∀ (U : X.Etaleᵒᵖ) (s : (structureTensorEtaleSheaf X).obj.obj U), (tensorPullbackObjUnitToUnit U.unop.hom).app ⊤ (FrE.hom.app U s).down = (@id Γ(U.unop.left, ⊤) ((tensorPullbackObjUnitToUnit U.unop.hom).app ⊤ s.down)) ^ p) (u : (Etale.upperStar AddCommGrpCat.{u + 1} j).obj (structureTensorEtaleSheaf X) ⟶ structureTensorEtaleSheaf Y) (hu : ∀ (U : X.Etale) (s : (structureTensorEtaleSheaf X).obj.obj (op U)), (tensorPullbackObjUnitToUnit ((MorphismProperty.Over.pullback @Etale ⊤ j).obj U).hom).app ⊤ (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} j).homEquiv (structureTensorEtaleSheaf X) (structureTensorEtaleSheaf Y) u).hom.app (op U) s).down = (pullback.fst U.hom j).appTop ((tensorPullbackObjUnitToUnit U.hom).app ⊤ s.down)) (b : (K ⊗[k] scalarCohomology f (unit X) q) ≃ₗ[K] scalarCohomology g (unit Y) q) (hb : ∀ v : scalarCohomology f (unit X) q, b ((1 : K) ⊗ₜ[k] v) = (moduleCohomologyFMap j (SheafOfModules.unitToPushforwardObjUnit j.toRingCatSheafHom) q).hom v) : (∀ (a : k) (v : scalarCohomology f (unit X) q), structureCoherentFrobenius f q FrZ (a • v) = a ^ p • structureCoherentFrobenius f q FrZ v) ∧ (∀ x : Sheaf.H (structureTensorEtaleSheaf X) q, structureCoherentEtaleComparison f q (Sheaf.H.map FrE q x) = structureCoherentFrobenius f q FrZ (structureCoherentEtaleComparison f q x)) ∧ (∀ x : Sheaf.H (structureTensorEtaleSheaf X) q, structureCoherentEtaleComparisonOfPullback f g j (Spec.map (CommRingCat.ofHom (algebraMap k K))) h q (Sheaf.H.map u q (Etale.cohomologyMap j (structureTensorEtaleSheaf X) q x)) = b ((1 : K) ⊗ₜ[k] structureCoherentEtaleComparison f q x)) ∧ ∀ (v : scalarCohomology f (unit X) q) (a : K), structureCoherentFrobenius g q FrZK (b (a ⊗ₜ[k] v)) = b ((a ^ p) ⊗ₜ[k] structureCoherentFrobenius f q FrZ v)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "Canonical comparisons are defined in the companion definition node. Coefficient maps and the flat base-change equivalence are specified by their defining sectionwise and pure-tensor equations. Tensor order K tensor E is the canonical commuted presentation of E tensor K."
+ },
+ "tool_uses": [
+  "lem-sc-etale-tensor-positive-object-cohomology",
+  "lem-weil-pbc-etale-base-change-continuous",
+  "lem-weil-pbc-ringed-site-cech-refinement-square"
+ ],
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261020T235550-L-1189935",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [],
+  "sorry_after": []
+ }
 }

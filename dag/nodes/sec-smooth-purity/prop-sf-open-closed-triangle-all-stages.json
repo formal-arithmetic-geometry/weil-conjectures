@@ -1,651 +1,628 @@
 {
-  "id": "prop-sf-open-closed-triangle-all-stages",
-  "blueprint": {
-    "is": "prop-sf-open-closed-triangle-all-stages",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The open–closed triangle at every coefficient stage",
-  "statement": "Let $X$ be a separated finite-type $k$-scheme, let $i:Z\\hookrightarrow X$ be\na closed immersion and $j:U\\hookrightarrow X$ the complementary open\nimmersion. Let $\\Lambda$ be one of the coefficient stages\n$A_{E,n},\\mathcal O_E,E,\\Qlb$, with the categories $D^b_c(-,\\Lambda)$\n([def-weil-derived-complete-integral-detailed],\n[def-weil-rationalization-karoubi],\n[def-weil-algebraically-closed-coefficients]), the pullbacks $i^*,j^*$ of\n[def-weil-derived-pullback-tensor-hom], the direct image $i_*=Ri_*$ of\n[def-weil-derived-direct-image] and the extension by zero $j_!=Rj_!$ of\n[def-weil-integral-rational-qbar-compact-support]. For\n$K\\in D^b_c(X,\\Lambda)$ the open counit and the closed unit extend to a\ndistinguished triangle, the open–closed recollement triangle of\n[def-weil-open-closed-recollement],\n$$\nj_!j^*K\\longrightarrow K\\longrightarrow i_*i^*K\n\\longrightarrow j_!j^*K[1].\n$$\nMoreover $\\operatorname{Hom}(j_!j^*K[m],i_*i^*K)=0$ for all $m$; hence the\nthird arrow is uniquely determined by the other two and the triangle is\nfunctorial in $K$. If $X=X_0\\otimes_{k_0}k$, $Z$, $U$ come from\n$k_0$-schemes, $\\Lambda\\in\\{E,\\Qlb\\}$ and $K$ is a Weil complex\n([def-weil-weil-sheaf-complex]), then all three arrows are\nWeil-equivariant.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-    "place": "node prop-sf-open-closed-triangle-all-stages, order 1851"
-  },
-  "stmt_deps": [
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-rationalization-karoubi",
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-derived-direct-image",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-open-closed-recollement",
-    "def-weil-weil-sheaf-complex"
-  ],
-  "proof": [
-    {
-      "text": "The schemes in the statement are Noetherian: a field has only the ideals $0$ and $(1)$, so its spectrum is Noetherian, and apply [lem-weil-pbc-finite-type-over-noetherian]. Here $Z$ is finite type over $k$: intersect a finite affine finite-type cover of $X$ with $Z$ and take quotient coordinate rings. The open $U$ is also finite type over $k$: each of its intersections with those Noetherian affines is quasi-compact, hence a finite union of principal opens, whose rings are finitely generated over $k$ by adjoining an inverse. Every open in a Noetherian affine is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so $j$ is quasi-compact. We will use the ringed sheaf sequence with this hypothesis. At finite coefficients, inverse image along $i$ or $j$ preserves constructibility: intersect a finite locally closed constructible partition with $Z$ or $U$, and restrict the locally constant finite modules. Extension by zero along $j$ preserves constructibility: use the partition on $U$, viewed in $X$, together with $Z$, on which the restriction is zero. Direct image along $i$ preserves constructibility: view the partition of $Z$ in $X$ and add $U$, using $i^{-1}i_* = \\mathrm{id}$ and $j^{-1}i_*=0$. These identities and exactness of $j_!,i_*$ are supplied by [lem-weil-pbc-proetale-ringed-open-closed]; exactness of inverse images is [def-weil-pbc-proetale-operations]. Thus each functor preserves the cohomological interval of a bounded finite-coefficient complex, since exact functors commute with kernels, images and cokernels. The partition condition is exactly [def-weil-finite-torsion-constructibility].",
-      "uses": [
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-        "def-weil-finite-torsion-constructibility",
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "def-weil-pbc-proetale-operations"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Finite stage: quasi-compactness and constructible vertices; unit proof, exact sheaf sequence."
-      }
-    },
-    {
-      "text": "At finite coefficients apply the counit--unit short exact sequence of [lem-weil-pbc-proetale-ringed-open-closed] to every term of a representative complex of $K$. The maps are natural in the sheaf, hence commute with the differentials. By [lem-weil-pbc-complex-ses-triangle] this short exact sequence of complexes gives a distinguished triangle $j_!j^{-1}K\\to K\\to i_*i^{-1}K\\to j_!j^{-1}K[1]$. The exact functors induce triangulated functors by [lem-sf-exact-functor-derived-triangulated], and their ordinary derived functors are their termwise functors by [lem-weil-pbc-exact-functor-derived-functor]. Thus the vertices and first two maps are exactly those in the statement. Step 1 puts the triangle in the full bounded constructible subcategory. This is the unit's termwise sheaf-sequence argument, with the ringed pro-etale sequence supplying the sheaf calculation; it does not assume ordinary geometric stalks conservative on arbitrary pro-etale sheaves.",
-      "uses": [
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "lem-weil-pbc-complex-ses-triangle",
-        "lem-sf-exact-functor-derived-triangulated",
-        "lem-weil-pbc-exact-functor-derived-functor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Finite stage: the exact sequence and its derived triangle; unit proof."
-      }
-    },
-    {
-      "text": "For the integral stage put $R_T=\\widehat{\\mathcal O}_{E,T}$ and $A_n=\\mathcal O_E/\\varpi_E^n$. By [lem-weil-pbc-profinite-coefficient-inverse-image] the actual inverse-image coefficient sheaves for $i,j$ are $R_Z,R_U$, compatibly with all finite quotient maps. Write $I=i^{-1}$, $J=j^{-1}$, $H=i_*$ and $L=j_!$ for the ordinary module functors for these ring sheaves. They satisfy the exact sequence, adjunctions, exactness and support identities of [lem-weil-pbc-proetale-ringed-open-closed]. By [lem-weil-pbc-proetale-immersion-limit-preservation], $I,J$ are exact and preserve countable products. On derived categories these products are represented termwise by [lem-weil-derived-limit-existence], since products of pro-etale module sheaves are exact [lem-weil-proetale-countable-products-exact]. Consequently $I,J$ carry a Roos triangle to a Roos triangle by [lem-pc-homotopy-limit-map]. Applied to the reduction tower of an integral $K$, this identifies $IK,JK$ with the completed pullbacks defined in [def-weil-derived-pullback-tensor-hom]. Indeed inverse image commutes with restriction of the module action along $R_T\\to(A_n)_T$ by the compatible ring identifications, and the image tower is exactly $(\\operatorname{Res}_n i_n^*K_n)_n$ or $(\\operatorname{Res}_n j_n^*K_n)_n$, including its transition maps. The identifications commute with the projections and maps from $K$.",
-      "uses": [
-        "lem-weil-pbc-profinite-coefficient-inverse-image",
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "lem-weil-pbc-proetale-immersion-limit-preservation",
-        "lem-weil-derived-limit-existence",
-        "lem-weil-proetale-countable-products-exact",
-        "lem-pc-homotopy-limit-map",
-        "def-weil-derived-pullback-tensor-hom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Integral stage: identify ordinary immersion restriction with completed pullback."
-      }
-    },
-    {
-      "text": "The functor $L$ also preserves countable products. Here is the argument, rather than a new lemma. For a module $N$ on $U$, $Jj_*N=N$: in the slice-site description, restriction of $V\\mapsto N(V\\times_X U)$ back to $U$ evaluates $N$ on the same objects. Apply the ringed sheaf sequence to $j_*N$ to get $LN=\\ker(j_*N\\to HIj_*N)$. Both $j_*$ and $H$ preserve products as right adjoints (the adjunction and the universal property of a product give $\\operatorname{Hom}(Q,R\\prod N_a)=\\prod_a\\operatorname{Hom}(Q,RN_a)$); $I$ preserves products by [lem-weil-pbc-proetale-immersion-limit-preservation]. Taking the kernel of the product diagram gives the product of the kernels. Thus $L\\prod N_a=\\prod LN_a$. This is the proof of Stacks Tag 09BP, label lemma-j-shriek-limits, from the cited sheaf sequence and limit preservation. Exactness of $L$ and the termwise description of derived products now let [lem-pc-homotopy-limit-map] apply to $L$ too.",
-      "uses": [
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "def-weil-proetale-inverse-image",
-        "lem-weil-pbc-proetale-immersion-limit-preservation",
-        "lem-weil-derived-limit-existence",
-        "lem-weil-proetale-countable-products-exact",
-        "lem-sf-exact-functor-derived-triangulated",
-        "lem-pc-homotopy-limit-map"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 09BP, label lemma-j-shriek-limits: kernel proof of product preservation."
-      }
-    },
-    {
-      "text": "The ordinary $L$ commutes with derived reduction, including quotient transitions. To check it explicitly, take a K-flat representative $P$ of $N$ using [lem-pc-kflat-resolution]. The tensor isomorphism [lem-weil-pbc-ringed-slice-extension-tensor] extends to total tensor complexes: $F\\otimes LP=L(JF\\otimes P)$, since $L$ preserves direct sums as a left adjoint [lem-weil-pbc-left-adjoint-preserves-colimits]. If $F$ is acyclic, then $JF$ is acyclic; K-flatness of $P$ and exactness of $L$ show $LP$ is K-flat by [def-pc-kflat-complex]. Hence $(LN)\\otimes^L_{R_X}(A_n)_X$ is represented by $(LP)\\otimes_{R_X}(A_n)_X=L(P\\otimes_{R_U}(A_n)_U)$, which is $L_n(N\\otimes^L_{R_U}(A_n)_U)$. On underlying module presheaves changing the scalar action and extending by zero commute: on objects factoring through $U$ both are the same module with the same action, and on the other objects both are zero; the same universal property of module sheafification gives the sheaf comparison. This identifies the displayed right side with the finite-coefficient extension $L_n$. Every comparison is tensor balancing and respects $A_{n+1}\\to A_n$, so these are comparisons of towers, not merely separate isomorphisms.",
-      "uses": [
-        "lem-pc-kflat-resolution",
-        "def-pc-kflat-complex",
-        "lem-weil-pbc-ringed-slice-extension-tensor",
-        "lem-weil-pbc-left-adjoint-preserves-colimits",
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "def-weil-extension-by-zero-presheaf",
-        "def-weil-presheaf-modules-sheafification"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Integral stage: explicit reduction comparison for extension by zero; ringed slice tensor argument."
-      }
-    },
-    {
-      "text": "For integral $N$, steps 4--5 carry its defining Roos triangle to one for $LN$ with its actual finite reductions and their maps from $LN$. Thus $LN$ is derived complete by [def-weil-derived-complete]. Its reductions are the finite extensions $L_nN_n$, whose constructibility and common cohomological interval follow from step 1. Hence $LN\\in D^b_c(X,\\mathcal O_E)$ by [def-weil-derived-complete-integral-detailed], and $LN=R\\varprojlim_n\\operatorname{Res}_nL_nN_n$ is exactly the integral $Rj_!N$ of [def-weil-integral-rational-qbar-compact-support], using the compactification $U\\xrightarrow{j}X\\xrightarrow{\\mathrm{id}}X$. For integral $M$ on $Z$, apply [prop-weil-pbc-direct-image-limits] to its reduction tower and the closed direct image. Its tower comparison identifies ordinary $Ri_*M$ with the derived limit of the finite direct images; its completeness clause makes this object derived complete; and its projection-formula clause identifies each reduction with $Ri_{*,n}M_n$, compatibly with $A_{n+1}\\to A_n$. Since $i_*$ is exact, ordinary $Ri_*$ is $H$ applied termwise. Step 1 gives a common interval for its reductions, so $HM$ belongs to the integral constructible category and agrees with [def-weil-derived-direct-image]. The integral pullbacks preserve the constructible category and have the asserted reductions by [lem-pur-integral-operations-preserve-constructible].",
-      "uses": [
-        "def-weil-derived-complete",
-        "def-weil-derived-complete-integral-detailed",
-        "def-weil-integral-rational-qbar-compact-support",
-        "prop-weil-pbc-direct-image-limits",
-        "def-weil-derived-direct-image",
-        "lem-weil-pbc-exact-functor-derived-functor",
-        "lem-pur-integral-operations-preserve-constructible"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Integral stage: completeness, uniform amplitude, and identification of the compact-support and ordinary direct images."
-      }
-    },
-    {
-      "text": "For a representative complex $B^\\bullet$ of the integral $K$, the ringed localization sequence in each degree gives $0\\to LJB^q\\to B^q\\to HIB^q\\to0$. Naturality of the counit and unit makes these maps commute with $d^q$, so this is a short exact sequence of complexes. Apply [lem-weil-pbc-complex-ses-triangle]. Steps 3 and 6 identify all three vertices with $j_!j^*K,K,Ri_*i^*K$ in $D^b_c(X,\\mathcal O_E)$. This category has the induced triangles by [lem-weil-integral-constructible-triangulated]. The maps are the ordinary open counit and closed unit. The open exact adjunction descends to the derived categories by [lem-sc-derived-adjunction-from-underived], since exact functors are their absolute derived functors by [lem-weil-pbc-exact-functor-derived-functor]; the closed derived adjunction is [def-weil-pbc-proetale-operations]. The preceding tower identifications are induced by the same sheaf maps, so this is also the pair of maps for the completed operations. In particular the reductions of these maps are the finite maps; their compatibility with units and counits is also stated in [lem-fix-operation-reduction].",
-      "uses": [
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "lem-weil-pbc-complex-ses-triangle",
-        "lem-weil-integral-constructible-triangulated",
-        "lem-sc-derived-adjunction-from-underived",
-        "lem-weil-pbc-exact-functor-derived-functor",
-        "def-weil-pbc-proetale-operations",
-        "lem-fix-operation-reduction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Integral stage: the triangle of the termwise sheaf sequence and its specified arrows."
-      }
-    },
-    {
-      "text": "At both finite and integral stages the stronger cross-object vanishing holds: for any $N\\in D^b_c(U,\\Lambda)$, $M\\in D^b_c(Z,\\Lambda)$ and $m\\in\\mathbf Z$, $\\operatorname{Hom}(j_!N[m],i_*M)=\\operatorname{Hom}(N[m],j^*i_*M)=0$. The adjunction comes from the exact ringed sheaf adjunction by [lem-sc-derived-adjunction-from-underived] and [lem-weil-pbc-exact-functor-derived-functor], and $j^*i_*=0$ is the exact support identity of [lem-weil-pbc-proetale-ringed-open-closed], applied termwise. At integral coefficients steps 3 and 6 justify using these ordinary operations for the completed symbols. Taking $N=j^*K$ and $M=i^*K$ gives the required vanishing.",
-      "uses": [
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "lem-sc-derived-adjunction-from-underived",
-        "lem-weil-pbc-exact-functor-derived-functor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Finite and integral Hom vanishing, with different source and target objects allowed."
-      }
-    },
-    {
-      "text": "Here is the uniqueness and naturality argument used at every stage below. Write $A_K=j_!j^*K$ and $C_K=i_*i^*K$, and assume the cross-object vanishing of step 8. For two completions of the same pair $A_K\\to K\\to C_K$, TR3 in [def-weil-triangulated-category] supplies $(1,1,h)$ between their triangles. The second square gives $(h-1)v=0$. By [lem-weil-pbc-hom-out-of-triangle-exact](ii), $h-1=t\\delta$ for some $t:A_K[1]\\to C_K$. Vanishing gives $t=0$, hence $h=1$; the third square then says the connecting maps coincide. For $f:K\\to K'$, TR3 applied to $(j_!j^*f,f)$ produces a third component $h$. Naturality of the closed unit implies $(h-i_*i^*f)v=0$. The same factorization gives a map $A_K[1]\\to C_{K'}$, zero by cross-object vanishing, so $h=i_*i^*f$. The third square is exactly naturality of the connecting arrow. This corrects the imported phrase 'hence through a zero map': it is $t$ that is zero, and $\\delta:C_K\\to A_K[1]$ need not be zero.",
-      "uses": [
-        "def-weil-triangulated-category",
-        "lem-weil-pbc-hom-out-of-triangle-exact"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Finite-stage last sentence and functoriality: explicit TR3 and Hom-exactness argument."
-      }
-    },
-    {
-      "text": "For $\\Lambda=E$, [def-weil-rationalization-karoubi] uses raw scalar localization with the same objects and Hom groups $\\operatorname{Hom}_{\\mathcal O_E}(-,-)\\otimes_{\\mathcal O_E}E$, and its localization functor is exact. The operations and maps are the rationalized integral ones; [prop-weil-pbc-rational-transport] extends exact linear functors and their transformations, and [lem-fix-operation-reduction] includes the compatibility of these operations, units and counits with rationalization. Applying localization to the integral triangle gives the required triangle. Every cross-object Hom group of step 8 becomes $0\\otimes_{\\mathcal O_E}E=0$. Step 9 proves uniqueness and naturality also for arbitrary rational morphisms, which need not be integral morphisms.",
-      "uses": [
-        "def-weil-rationalization-karoubi",
-        "prop-weil-pbc-rational-transport",
-        "lem-fix-operation-reduction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Rational stage: raw scalar localization and transported maps."
-      }
-    },
-    {
-      "text": "The schemes $X,U,Z$ are Noetherian by step 1 and finite-dimensional by [lem-kun-dimension-finite-type], applied to their finite-type structure morphisms over $k$; the coefficient datum has $\\ell\\ne p=\\operatorname{char}k$, so $\\ell$ is invertible on all three. These verify the scheme hypotheses of the scalar-extension theorem. For $\\Lambda=\\Qlb$, choose a finite stage $(E,K)$ as in [def-weil-algebraically-closed-coefficients]. Scalar extension is exact with the coherent comparisons of [prop-weil-pbc-scalar-extension]; compatibility for compact support as well as pullback and direct image, including units and counits, is [lem-fix-operation-reduction]. Consequently [prop-weil-pbc-descent-functors] descends the four functors and the two transformations, with the same interpretation of compact support as [def-weil-integral-rational-qbar-compact-support]. The $E$-triangle maps to a distinguished triangle, because finite-stage inclusions are exact [thm-weil-pbc-verdier-axioms]. For possibly different finite stages $N,M$, represent both over a common extension $L$. At every further stage the group $\\operatorname{Hom}(j_!N_L[m],i_*M_L)$ is zero by step 10. The common-stage Hom formula in [def-weil-algebraically-closed-coefficients] is a filtered colimit of these zero groups, and is zero. Step 9 again proves uniqueness and functoriality, now for every common-stage morphism.",
-      "uses": [
-        "lem-kun-dimension-finite-type",
-        "def-weil-algebraically-closed-coefficients",
-        "prop-weil-pbc-scalar-extension",
-        "lem-fix-operation-reduction",
-        "prop-weil-pbc-descent-functors",
-        "def-weil-integral-rational-qbar-compact-support",
-        "thm-weil-pbc-verdier-axioms"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Algebraically closed stage: common-stage triangles, maps, and Hom groups."
-      }
-    },
-    {
-      "text": "Finally let $g_X,g_U,g_Z$ be the geometric Frobenius automorphisms of [def-weil-frobenius-detailed]. Because $i,j$ and the schemes are defined over $k_0$, these automorphisms commute with the immersions. They may be semilinear over $k$, so we use [def-weil-proetale-inverse-image] directly: pullback along each $g_T$ and $g_T^{-1}$ gives inverse equivalences of pro-etale sites preserving covering families. The coefficient identifications of [lem-weil-pbc-profinite-coefficient-inverse-image] respect composites and finite projections. Hence the induced module pullbacks are inverse exact equivalences; they preserve finite constructibility partitions and the Roos triangles for completeness, and therefore induce the Frobenius pullbacks $F_T=g_T^*$ on all four coefficient categories.",
-      "uses": [
-        "def-weil-frobenius-detailed",
-        "def-weil-proetale-inverse-image",
-        "lem-weil-pbc-profinite-coefficient-inverse-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Weil structures: semilinear site equivalences and coefficient compatibility."
-      }
-    },
-    {
-      "text": "Composition of these base-change functors gives $b:F_Uj^*\\cong j^*F_X$ and $d:F_Zi^*\\cong i^*F_X$. Define $c:F_Xi_*\\cong i_*F_Z$ as the right-adjoint mate of $d^{-1}:i^*F_X\\cong F_Zi^*$, and define $a:F_Xj_!\\cong j_!F_U$ as the inverse of the left-adjoint conjugate $j_!F_U\\to F_Xj_!$ of $b$. The vertical functors are equivalences, so [lem-weil-mate-iso-along-equivalences] makes the right-adjoint mate an isomorphism; applying the same result to opposite adjunctions makes the left-adjoint conjugate an isomorphism. These constructions are made first on module sheaves and then termwise on complexes and through the completed, rational and common-stage models of steps 3--7 and 10--11; no $k$-linearity of $g_T$ is used.",
-      "uses": [
-        "def-weil-proetale-inverse-image",
-        "lem-weil-mate-iso-along-equivalences"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Weil structures: construction and invertibility of the Frobenius mate comparisons."
-      }
-    },
-    {
-      "text": "The mate formulas are compatible with the units and counits. The unit and counit identities in [lem-pur-mate-unit-compatibility] and [lem-amb-mate-unit-counit], together with the pasting and identity laws of [lem-weil-pbc-mate-pasting], give componentwise\n$$F_X\\varepsilon_K=\\varepsilon_{F_XK}\\circ j_!(b_K)\\circ a_{j^*K},\\qquad i_*(d_K)\\circ c_{i^*K}\\circ F_X\\eta_K=\\eta_{F_XK}.$$\nThus these are the actual mate equations, rather than an appeal to a $k$-linear exchange theorem.",
-      "uses": [
-        "lem-pur-mate-unit-compatibility",
-        "lem-amb-mate-unit-counit",
-        "lem-weil-pbc-mate-pasting"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Weil structures: explicit mate equations for the open counit and closed unit."
-      }
-    },
-    {
-      "text": "If $\\theta:F_XK\\xrightarrow{\\sim}K$ is the Weil structure of [def-weil-weil-sheaf-complex], define structures on the outer terms by\n$$\\theta_A=j_!j^*(\\theta)\\circ j_!(b_K)\\circ a_{j^*K},\\qquad \\theta_C=i_*i^*(\\theta)\\circ i_*(d_K)\\circ c_{i^*K}.$$\nThe two mate equations of step 14 and naturality of the unit and counit give $\\varepsilon_K\\theta_A=\\theta F_X\\varepsilon_K$ and $\\eta_K\\theta=\\theta_CF_X\\eta_K$. Since $F_X$ is an exact equivalence, it transports the distinguished triangle to a distinguished triangle with these same first two arrows under $\\theta_A,\\theta,\\theta_C$, using the stagewise triangulation supplied by [thm-weil-pbc-verdier-axioms].",
-      "uses": [
-        "def-weil-weil-sheaf-complex",
-        "thm-weil-pbc-verdier-axioms"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Weil structures: induced Weil structures on the outer terms and transport of the triangle."
-      }
-    },
-    {
-      "text": "Apply the uniqueness argument of step 9 to the original triangle and the transported triangle: the first two squares already commute, and the factorization through the connecting morphism is killed by the cross-object Hom vanishing. Equivalently, the uniqueness calculation using [def-weil-triangulated-category] and [lem-weil-pbc-hom-out-of-triangle-exact] forces the third square\n$$\\delta_K\\theta_C=\\theta_A[1]F_X(\\delta_K),$$\nwith the canonical shift comparison. Therefore all three arrows are Weil-equivariant in the category of pairs; no triangulated structure on that category is asserted.",
-      "uses": [
-        "def-weil-triangulated-category",
-        "lem-weil-pbc-hom-out-of-triangle-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-        "place": "Weil structures: uniqueness of the connecting arrow and equivariance of the third map."
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "prop-sf-open-closed-triangle-all-stages",
+ "blueprint": {
+  "is": "prop-sf-open-closed-triangle-all-stages",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The open–closed triangle at every coefficient stage",
+ "statement": "Let $X$ be a separated finite-type $k$-scheme, let $i:Z\\hookrightarrow X$ be\na closed immersion and $j:U\\hookrightarrow X$ the complementary open\nimmersion. Let $\\Lambda$ be one of the coefficient stages\n$A_{E,n},\\mathcal O_E,E,\\Qlb$, with the categories $D^b_c(-,\\Lambda)$\n([def-weil-derived-complete-integral-detailed],\n[def-weil-rationalization-karoubi],\n[def-weil-algebraically-closed-coefficients]), the pullbacks $i^*,j^*$ of\n[def-weil-derived-pullback-tensor-hom], the direct image $i_*=Ri_*$ of\n[def-weil-derived-direct-image] and the extension by zero $j_!=Rj_!$ of\n[def-weil-integral-rational-qbar-compact-support]. For\n$K\\in D^b_c(X,\\Lambda)$ the open counit and the closed unit extend to a\ndistinguished triangle, the open–closed recollement triangle of\n[def-weil-open-closed-recollement],\n$$\nj_!j^*K\\longrightarrow K\\longrightarrow i_*i^*K\n\\longrightarrow j_!j^*K[1].\n$$\nMoreover $\\operatorname{Hom}(j_!j^*K[m],i_*i^*K)=0$ for all $m$; hence the\nthird arrow is uniquely determined by the other two and the triangle is\nfunctorial in $K$. If $X=X_0\\otimes_{k_0}k$, $Z$, $U$ come from\n$k_0$-schemes, $\\Lambda\\in\\{E,\\Qlb\\}$ and $K$ is a Weil complex\n([def-weil-weil-sheaf-complex]), then all three arrows are\nWeil-equivariant.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+  "place": "node prop-sf-open-closed-triangle-all-stages, order 1851"
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-derived-direct-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-open-closed-recollement",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof": [
+  {
+   "text": "The schemes in the statement are Noetherian: a field has only the ideals $0$ and $(1)$, so its spectrum is Noetherian, and apply [lem-weil-pbc-finite-type-over-noetherian]. Here $Z$ is finite type over $k$: intersect a finite affine finite-type cover of $X$ with $Z$ and take quotient coordinate rings. The open $U$ is also finite type over $k$: each of its intersections with those Noetherian affines is quasi-compact, hence a finite union of principal opens, whose rings are finitely generated over $k$ by adjoining an inverse. Every open in a Noetherian affine is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so $j$ is quasi-compact. We will use the ringed sheaf sequence with this hypothesis. At finite coefficients, inverse image along $i$ or $j$ preserves constructibility: intersect a finite locally closed constructible partition with $Z$ or $U$, and restrict the locally constant finite modules. Extension by zero along $j$ preserves constructibility: use the partition on $U$, viewed in $X$, together with $Z$, on which the restriction is zero. Direct image along $i$ preserves constructibility: view the partition of $Z$ in $X$ and add $U$, using $i^{-1}i_* = \\mathrm{id}$ and $j^{-1}i_*=0$. These identities and exactness of $j_!,i_*$ are supplied by [lem-weil-pbc-proetale-ringed-open-closed]; exactness of inverse images is [def-weil-pbc-proetale-operations]. Thus each functor preserves the cohomological interval of a bounded finite-coefficient complex, since exact functors commute with kernels, images and cokernels. The partition condition is exactly [def-weil-finite-torsion-constructibility].",
+   "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "def-weil-finite-torsion-constructibility",
     "lem-weil-pbc-proetale-ringed-open-closed",
-    "def-weil-pbc-proetale-operations",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Finite stage: quasi-compactness and constructible vertices; unit proof, exact sheaf sequence."
+   }
+  },
+  {
+   "text": "At finite coefficients apply the counit--unit short exact sequence of [lem-weil-pbc-proetale-ringed-open-closed] to every term of a representative complex of $K$. The maps are natural in the sheaf, hence commute with the differentials. By [lem-weil-pbc-complex-ses-triangle] this short exact sequence of complexes gives a distinguished triangle $j_!j^{-1}K\\to K\\to i_*i^{-1}K\\to j_!j^{-1}K[1]$. The exact functors induce triangulated functors by [lem-sf-exact-functor-derived-triangulated], and their ordinary derived functors are their termwise functors by [lem-weil-pbc-exact-functor-derived-functor]. Thus the vertices and first two maps are exactly those in the statement. Step 1 puts the triangle in the full bounded constructible subcategory. This is the unit's termwise sheaf-sequence argument, with the ringed pro-etale sequence supplying the sheaf calculation; it does not assume ordinary geometric stalks conservative on arbitrary pro-etale sheaves.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
     "lem-weil-pbc-complex-ses-triangle",
     "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Finite stage: the exact sequence and its derived triangle; unit proof."
+   }
+  },
+  {
+   "text": "For the integral stage put $R_T=\\widehat{\\mathcal O}_{E,T}$ and $A_n=\\mathcal O_E/\\varpi_E^n$. By [lem-weil-pbc-profinite-coefficient-inverse-image] the actual inverse-image coefficient sheaves for $i,j$ are $R_Z,R_U$, compatibly with all finite quotient maps. Write $I=i^{-1}$, $J=j^{-1}$, $H=i_*$ and $L=j_!$ for the ordinary module functors for these ring sheaves. They satisfy the exact sequence, adjunctions, exactness and support identities of [lem-weil-pbc-proetale-ringed-open-closed]. By [lem-weil-pbc-proetale-immersion-limit-preservation], $I,J$ are exact and preserve countable products. On derived categories these products are represented termwise by [lem-weil-derived-limit-existence], since products of pro-etale module sheaves are exact [lem-weil-proetale-countable-products-exact]. Consequently $I,J$ carry a Roos triangle to a Roos triangle by [lem-pc-homotopy-limit-map]. Applied to the reduction tower of an integral $K$, this identifies $IK,JK$ with the completed pullbacks defined in [def-weil-derived-pullback-tensor-hom]. Indeed inverse image commutes with restriction of the module action along $R_T\\to(A_n)_T$ by the compatible ring identifications, and the image tower is exactly $(\\operatorname{Res}_n i_n^*K_n)_n$ or $(\\operatorname{Res}_n j_n^*K_n)_n$, including its transition maps. The identifications commute with the projections and maps from $K$.",
+   "uses": [
     "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-proetale-ringed-open-closed",
     "lem-weil-pbc-proetale-immersion-limit-preservation",
     "lem-weil-derived-limit-existence",
     "lem-weil-proetale-countable-products-exact",
     "lem-pc-homotopy-limit-map",
-    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Integral stage: identify ordinary immersion restriction with completed pullback."
+   }
+  },
+  {
+   "text": "The functor $L$ also preserves countable products. Here is the argument, rather than a new lemma. For a module $N$ on $U$, $Jj_*N=N$: in the slice-site description, restriction of $V\\mapsto N(V\\times_X U)$ back to $U$ evaluates $N$ on the same objects. Apply the ringed sheaf sequence to $j_*N$ to get $LN=\\ker(j_*N\\to HIj_*N)$. Both $j_*$ and $H$ preserve products as right adjoints (the adjunction and the universal property of a product give $\\operatorname{Hom}(Q,R\\prod N_a)=\\prod_a\\operatorname{Hom}(Q,RN_a)$); $I$ preserves products by [lem-weil-pbc-proetale-immersion-limit-preservation]. Taking the kernel of the product diagram gives the product of the kernels. Thus $L\\prod N_a=\\prod LN_a$. This is the proof of Stacks Tag 09BP, label lemma-j-shriek-limits, from the cited sheaf sequence and limit preservation. Exactness of $L$ and the termwise description of derived products now let [lem-pc-homotopy-limit-map] apply to $L$ too.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
     "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-derived-limit-existence",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-homotopy-limit-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BP, label lemma-j-shriek-limits: kernel proof of product preservation."
+   }
+  },
+  {
+   "text": "The ordinary $L$ commutes with derived reduction, including quotient transitions. To check it explicitly, take a K-flat representative $P$ of $N$ using [lem-pc-kflat-resolution]. The tensor isomorphism [lem-weil-pbc-ringed-slice-extension-tensor] extends to total tensor complexes: $F\\otimes LP=L(JF\\otimes P)$, since $L$ preserves direct sums as a left adjoint [lem-weil-pbc-left-adjoint-preserves-colimits]. If $F$ is acyclic, then $JF$ is acyclic; K-flatness of $P$ and exactness of $L$ show $LP$ is K-flat by [def-pc-kflat-complex]. Hence $(LN)\\otimes^L_{R_X}(A_n)_X$ is represented by $(LP)\\otimes_{R_X}(A_n)_X=L(P\\otimes_{R_U}(A_n)_U)$, which is $L_n(N\\otimes^L_{R_U}(A_n)_U)$. On underlying module presheaves changing the scalar action and extending by zero commute: on objects factoring through $U$ both are the same module with the same action, and on the other objects both are zero; the same universal property of module sheafification gives the sheaf comparison. This identifies the displayed right side with the finite-coefficient extension $L_n$. Every comparison is tensor balancing and respects $A_{n+1}\\to A_n$, so these are comparisons of towers, not merely separate isomorphisms.",
+   "uses": [
     "lem-pc-kflat-resolution",
     "def-pc-kflat-complex",
     "lem-weil-pbc-ringed-slice-extension-tensor",
     "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-proetale-ringed-open-closed",
     "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Integral stage: explicit reduction comparison for extension by zero; ringed slice tensor argument."
+   }
+  },
+  {
+   "text": "For integral $N$, steps 4--5 carry its defining Roos triangle to one for $LN$ with its actual finite reductions and their maps from $LN$. Thus $LN$ is derived complete by [def-weil-derived-complete]. Its reductions are the finite extensions $L_nN_n$, whose constructibility and common cohomological interval follow from step 1. Hence $LN\\in D^b_c(X,\\mathcal O_E)$ by [def-weil-derived-complete-integral-detailed], and $LN=R\\varprojlim_n\\operatorname{Res}_nL_nN_n$ is exactly the integral $Rj_!N$ of [def-weil-integral-rational-qbar-compact-support], using the compactification $U\\xrightarrow{j}X\\xrightarrow{\\mathrm{id}}X$. For integral $M$ on $Z$, apply [prop-weil-pbc-direct-image-limits] to its reduction tower and the closed direct image. Its tower comparison identifies ordinary $Ri_*M$ with the derived limit of the finite direct images; its completeness clause makes this object derived complete; and its projection-formula clause identifies each reduction with $Ri_{*,n}M_n$, compatibly with $A_{n+1}\\to A_n$. Since $i_*$ is exact, ordinary $Ri_*$ is $H$ applied termwise. Step 1 gives a common interval for its reductions, so $HM$ belongs to the integral constructible category and agrees with [def-weil-derived-direct-image]. The integral pullbacks preserve the constructible category and have the asserted reductions by [lem-pur-integral-operations-preserve-constructible].",
+   "uses": [
     "def-weil-derived-complete",
     "def-weil-derived-complete-integral-detailed",
     "def-weil-integral-rational-qbar-compact-support",
     "prop-weil-pbc-direct-image-limits",
     "def-weil-derived-direct-image",
-    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pur-integral-operations-preserve-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Integral stage: completeness, uniform amplitude, and identification of the compact-support and ordinary direct images."
+   }
+  },
+  {
+   "text": "For a representative complex $B^\\bullet$ of the integral $K$, the ringed localization sequence in each degree gives $0\\to LJB^q\\to B^q\\to HIB^q\\to0$. Naturality of the counit and unit makes these maps commute with $d^q$, so this is a short exact sequence of complexes. Apply [lem-weil-pbc-complex-ses-triangle]. Steps 3 and 6 identify all three vertices with $j_!j^*K,K,Ri_*i^*K$ in $D^b_c(X,\\mathcal O_E)$. This category has the induced triangles by [lem-weil-integral-constructible-triangulated]. The maps are the ordinary open counit and closed unit. The open exact adjunction descends to the derived categories by [lem-sc-derived-adjunction-from-underived], since exact functors are their absolute derived functors by [lem-weil-pbc-exact-functor-derived-functor]; the closed derived adjunction is [def-weil-pbc-proetale-operations]. The preceding tower identifications are induced by the same sheaf maps, so this is also the pair of maps for the completed operations. In particular the reductions of these maps are the finite maps; their compatibility with units and counits is also stated in [lem-fix-operation-reduction].",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-complex-ses-triangle",
     "lem-weil-integral-constructible-triangulated",
     "lem-sc-derived-adjunction-from-underived",
-    "lem-fix-operation-reduction",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-weil-pbc-proetale-operations",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Integral stage: the triangle of the termwise sheaf sequence and its specified arrows."
+   }
+  },
+  {
+   "text": "At both finite and integral stages the stronger cross-object vanishing holds: for any $N\\in D^b_c(U,\\Lambda)$, $M\\in D^b_c(Z,\\Lambda)$ and $m\\in\\mathbf Z$, $\\operatorname{Hom}(j_!N[m],i_*M)=\\operatorname{Hom}(N[m],j^*i_*M)=0$. The adjunction comes from the exact ringed sheaf adjunction by [lem-sc-derived-adjunction-from-underived] and [lem-weil-pbc-exact-functor-derived-functor], and $j^*i_*=0$ is the exact support identity of [lem-weil-pbc-proetale-ringed-open-closed], applied termwise. At integral coefficients steps 3 and 6 justify using these ordinary operations for the completed symbols. Taking $N=j^*K$ and $M=i^*K$ gives the required vanishing.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sc-derived-adjunction-from-underived",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Finite and integral Hom vanishing, with different source and target objects allowed."
+   }
+  },
+  {
+   "text": "Here is the uniqueness and naturality argument used at every stage below. Write $A_K=j_!j^*K$ and $C_K=i_*i^*K$, and assume the cross-object vanishing of step 8. For two completions of the same pair $A_K\\to K\\to C_K$, TR3 in [def-weil-triangulated-category] supplies $(1,1,h)$ between their triangles. The second square gives $(h-1)v=0$. By [lem-weil-pbc-hom-out-of-triangle-exact](ii), $h-1=t\\delta$ for some $t:A_K[1]\\to C_K$. Vanishing gives $t=0$, hence $h=1$; the third square then says the connecting maps coincide. For $f:K\\to K'$, TR3 applied to $(j_!j^*f,f)$ produces a third component $h$. Naturality of the closed unit implies $(h-i_*i^*f)v=0$. The same factorization gives a map $A_K[1]\\to C_{K'}$, zero by cross-object vanishing, so $h=i_*i^*f$. The third square is exactly naturality of the connecting arrow. This corrects the imported phrase 'hence through a zero map': it is $t$ that is zero, and $\\delta:C_K\\to A_K[1]$ need not be zero.",
+   "uses": [
     "def-weil-triangulated-category",
-    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Finite-stage last sentence and functoriality: explicit TR3 and Hom-exactness argument."
+   }
+  },
+  {
+   "text": "For $\\Lambda=E$, [def-weil-rationalization-karoubi] uses raw scalar localization with the same objects and Hom groups $\\operatorname{Hom}_{\\mathcal O_E}(-,-)\\otimes_{\\mathcal O_E}E$, and its localization functor is exact. The operations and maps are the rationalized integral ones; [prop-weil-pbc-rational-transport] extends exact linear functors and their transformations, and [lem-fix-operation-reduction] includes the compatibility of these operations, units and counits with rationalization. Applying localization to the integral triangle gives the required triangle. Every cross-object Hom group of step 8 becomes $0\\otimes_{\\mathcal O_E}E=0$. Step 9 proves uniqueness and naturality also for arbitrary rational morphisms, which need not be integral morphisms.",
+   "uses": [
     "def-weil-rationalization-karoubi",
     "prop-weil-pbc-rational-transport",
+    "lem-fix-operation-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Rational stage: raw scalar localization and transported maps."
+   }
+  },
+  {
+   "text": "The schemes $X,U,Z$ are Noetherian by step 1 and finite-dimensional by [lem-kun-dimension-finite-type], applied to their finite-type structure morphisms over $k$; the coefficient datum has $\\ell\\ne p=\\operatorname{char}k$, so $\\ell$ is invertible on all three. These verify the scheme hypotheses of the scalar-extension theorem. For $\\Lambda=\\Qlb$, choose a finite stage $(E,K)$ as in [def-weil-algebraically-closed-coefficients]. Scalar extension is exact with the coherent comparisons of [prop-weil-pbc-scalar-extension]; compatibility for compact support as well as pullback and direct image, including units and counits, is [lem-fix-operation-reduction]. Consequently [prop-weil-pbc-descent-functors] descends the four functors and the two transformations, with the same interpretation of compact support as [def-weil-integral-rational-qbar-compact-support]. The $E$-triangle maps to a distinguished triangle, because finite-stage inclusions are exact [thm-weil-pbc-verdier-axioms]. For possibly different finite stages $N,M$, represent both over a common extension $L$. At every further stage the group $\\operatorname{Hom}(j_!N_L[m],i_*M_L)$ is zero by step 10. The common-stage Hom formula in [def-weil-algebraically-closed-coefficients] is a filtered colimit of these zero groups, and is zero. Step 9 again proves uniqueness and functoriality, now for every common-stage morphism.",
+   "uses": [
     "lem-kun-dimension-finite-type",
     "def-weil-algebraically-closed-coefficients",
     "prop-weil-pbc-scalar-extension",
+    "lem-fix-operation-reduction",
     "prop-weil-pbc-descent-functors",
-    "thm-weil-pbc-verdier-axioms",
+    "def-weil-integral-rational-qbar-compact-support",
+    "thm-weil-pbc-verdier-axioms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Algebraically closed stage: common-stage triangles, maps, and Hom groups."
+   }
+  },
+  {
+   "text": "Finally let $g_X,g_U,g_Z$ be the geometric Frobenius automorphisms of [def-weil-frobenius-detailed]. Because $i,j$ and the schemes are defined over $k_0$, these automorphisms commute with the immersions. They may be semilinear over $k$, so we use [def-weil-proetale-inverse-image] directly: pullback along each $g_T$ and $g_T^{-1}$ gives inverse equivalences of pro-etale sites preserving covering families. The coefficient identifications of [lem-weil-pbc-profinite-coefficient-inverse-image] respect composites and finite projections. Hence the induced module pullbacks are inverse exact equivalences; they preserve finite constructibility partitions and the Roos triangles for completeness, and therefore induce the Frobenius pullbacks $F_T=g_T^*$ on all four coefficient categories.",
+   "uses": [
     "def-weil-frobenius-detailed",
-    "lem-weil-mate-iso-along-equivalences",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Weil structures: semilinear site equivalences and coefficient compatibility."
+   }
+  },
+  {
+   "text": "Composition of these base-change functors gives $b:F_Uj^*\\cong j^*F_X$ and $d:F_Zi^*\\cong i^*F_X$. Define $c:F_Xi_*\\cong i_*F_Z$ as the right-adjoint mate of $d^{-1}:i^*F_X\\cong F_Zi^*$, and define $a:F_Xj_!\\cong j_!F_U$ as the inverse of the left-adjoint conjugate $j_!F_U\\to F_Xj_!$ of $b$. The vertical functors are equivalences, so [lem-weil-mate-iso-along-equivalences] makes the right-adjoint mate an isomorphism; applying the same result to opposite adjunctions makes the left-adjoint conjugate an isomorphism. These constructions are made first on module sheaves and then termwise on complexes and through the completed, rational and common-stage models of steps 3--7 and 10--11; no $k$-linearity of $g_T$ is used.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-mate-iso-along-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Weil structures: construction and invertibility of the Frobenius mate comparisons."
+   }
+  },
+  {
+   "text": "The mate formulas are compatible with the units and counits. The unit and counit identities in [lem-pur-mate-unit-compatibility] and [lem-amb-mate-unit-counit], together with the pasting and identity laws of [lem-weil-pbc-mate-pasting], give componentwise\n$$F_X\\varepsilon_K=\\varepsilon_{F_XK}\\circ j_!(b_K)\\circ a_{j^*K},\\qquad i_*(d_K)\\circ c_{i^*K}\\circ F_X\\eta_K=\\eta_{F_XK}.$$\nThus these are the actual mate equations, rather than an appeal to a $k$-linear exchange theorem.",
+   "uses": [
     "lem-pur-mate-unit-compatibility",
     "lem-amb-mate-unit-counit",
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-weil-sheaf-complex"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
-    "place": "Original finite/integral/rational/common-stage route, with explicit ringed sheaf sequence, completion identifications, and semilinear Frobenius mate argument; sources Tags 09AH, 09BP, 0152."
+    "place": "Weil structures: explicit mate equations for the open counit and closed unit."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Open closed localization distinguished triangle for constructible sheaves with finite adic and rational coefficients",
-      "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.TStructure.t",
-      "date": "2026-10-16",
-      "verdict": "no match: returned declarations do not state the constructible open-closed triangle at the four coefficient stages"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf, CategoryTheory.Triangle",
-      "results": "; loogle: unknown identifier 'CategoryTheory.Triangle'",
-      "date": "2026-10-16",
-      "verdict": "invalid query: unknown identifier CategoryTheory.Triangle; no conclusion about absence is drawn from this query"
-    },
-    {
-      "tool": "grep",
-      "query": "openClosed|open_closed|recollement",
-      "results": "Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/Analysis/Normed/Group/Ultra.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: returned declarations do not state the constructible open-closed triangle at the four coefficient stages"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Extension by zero restriction and closed pushforward localization sequence on etale sheaves",
-      "results": "Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, TopCat.Sheaf.extend_hom_app",
-      "date": "2026-10-16",
-      "verdict": "no match: returned declarations do not state the constructible open-closed triangle at the four coefficient stages"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"OpenImmersion\", \"sheaf\"",
-      "results": "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion, AlgebraicGeometry.SheafedSpace.IsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.locallyRingedSpace_toLocallyRingedSpace, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofIso, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpace, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mono, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofIsIso",
-      "date": "2026-10-16",
-      "verdict": "no match: returned declarations do not state the constructible open-closed triangle at the four coefficient stages"
-    },
-    {
-      "tool": "leansearch",
-      "query": "open closed distinguished triangle etale constructible sheaves",
-      "results": "unavailable: service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "extensionByZero|extension_by_zero|localizationTriangle|localization_triangle",
-      "results": "none",
-      "date": "2026-10-16",
-      "verdict": "no match: no declarations with these extension-by-zero/localization-triangle names in CategoryTheory"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For complementary open and closed subtopoi the extension by zero and restriction adjunctions give a localization triangle in the derived category",
-      "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
-      "date": "2026-10-16",
-      "verdict": "no match: generic triangulated localization/adjunction results do not identify open and closed constructible sheaf operations at all coefficient stages"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1851,
-  "blueprint_uses": [
-    "def-weil-algebraically-closed-coefficients",
-    "def-weil-derived-complete",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-frobenius-detailed",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-open-closed-recollement",
-    "def-weil-rationalization-karoubi",
+  {
+   "text": "If $\\theta:F_XK\\xrightarrow{\\sim}K$ is the Weil structure of [def-weil-weil-sheaf-complex], define structures on the outer terms by\n$$\\theta_A=j_!j^*(\\theta)\\circ j_!(b_K)\\circ a_{j^*K},\\qquad \\theta_C=i_*i^*(\\theta)\\circ i_*(d_K)\\circ c_{i^*K}.$$\nThe two mate equations of step 14 and naturality of the unit and counit give $\\varepsilon_K\\theta_A=\\theta F_X\\varepsilon_K$ and $\\eta_K\\theta=\\theta_CF_X\\eta_K$. Since $F_X$ is an exact equivalence, it transports the distinguished triangle to a distinguished triangle with these same first two arrows under $\\theta_A,\\theta,\\theta_C$, using the stagewise triangulation supplied by [thm-weil-pbc-verdier-axioms].",
+   "uses": [
     "def-weil-weil-sheaf-complex",
-    "fix-lem-exchanges",
-    "lem-cbc-completed-extension-zero-comparison",
-    "lem-cbc-open-closed-recollement",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-sf-proetale-constructible-origin",
-    "lem-weil-pbc-comparison-pullback",
-    "lemma-weil-pbc-completed-pullback-reduction",
-    "prop-weil-open-closed-recollement-adjunctions",
-    "prop-weil-pbc-comparison-direct-image",
-    "prop-weil-pbc-descent-functors",
-    "prop-weil-pbc-direct-image-limits",
-    "prop-weil-pbc-rational-transport",
-    "prop-weil-pbc-roos-triangle",
-    "prop-weil-pbc-scalar-extension",
-    "prop-weil-pbc-site-comparison-finite-level",
     "thm-weil-pbc-verdier-axioms"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.WeilComplex.exists_distTriang_openClosed",
-          "module": "WeilConjectures.WeilSheaf.LowerShriekFunctoriality",
-          "lines": [
-            126,
-            144
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Weil structures: induced Weil structures on the outer terms and transport of the triangle."
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-open-closed-triangle",
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "F1",
-    "result": "pass",
-    "landing": "20261015T190717-L-966338",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "prop-sf-open-closed-triangle-all-stages",
-    "worker": "stage1",
-    "summary": "Repaired the returned Frobenius step by splitting its semilinear site-equivalence, mate-comparison, explicit unit/counit, outer Weil-structure, and uniqueness arguments into five cited steps. Reused the existing Mathlib leaves lem-pur-mate-unit-compatibility and lem-amb-mate-unit-counit for the two mate identities, so no duplicate node was created; all other steps and the statement remain unchanged. Each replacement is below the 2000-character review threshold.",
-    "blueprint": "Realizes the unit sheaf-sequence-to-triangle argument and all five paragraphs of the item: finite stage (1-2), integral (3-8), uniqueness (9), rational (10), common-stage (11), and the repaired five-part Weil-structure paragraph (12-16).",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-finite-type-over-noetherian",
-        "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-        "why": "Generic An open subscheme of a Noetherian scheme is Noetherian used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-pbc-proetale-ringed-open-closed",
-        "why": "Generic Ringed pro-etale open-closed localization used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-pbc-complex-ses-triangle",
-        "why": "Generic A short exact sequence of complexes gives a distinguished triangle in D(A), functorially used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-sf-exact-functor-derived-triangulated",
-        "why": "Generic An exact functor of abelian categories induces a triangulated functor on derived categories used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-pbc-exact-functor-derived-functor",
-        "why": "Generic The functor induced by an exact functor is its own right and left derived functor used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
-        "why": "Generic Compatible inverse image of profinite coefficient sheaves used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
-        "why": "Generic Inverse images along immersions preserve pro-etale limits used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-derived-limit-existence",
-        "why": "Generic Existence and computation of derived limits used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-proetale-countable-products-exact",
-        "why": "Generic Countable products of pro-etale modules are exact used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-pc-homotopy-limit-map",
-        "why": "Generic Triangulated product-preserving functors preserve homotopy limits used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "Generic Existence of K-flat resolutions on a ringed site used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-slice-extension-tensor",
-        "why": "Generic Tensor projection formula for extension by zero on a ringed-site slice used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-        "why": "Generic Left adjoints preserve colimits used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "prop-weil-pbc-direct-image-limits",
-        "why": "Generic Direct image, derived limits, and completeness used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-pur-integral-operations-preserve-constructible",
-        "why": "Generic Integral pullback and completed tensor product preserve constructibility used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-integral-constructible-triangulated",
-        "why": "Generic Bounded constructible derived-complete integral complexes form a triangulated subcategory used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-sc-derived-adjunction-from-underived",
-        "why": "Generic Derived functors inherit an adjunction used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-fix-operation-reduction",
-        "why": "Generic Basic operations and coefficient reduction used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-pbc-hom-out-of-triangle-exact",
-        "why": "Generic Hom(-,W) applied to a distinguished triangle: exactness at Y and at Z used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "prop-weil-pbc-rational-transport",
-        "why": "Generic Functorial transport to a finite field used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "prop-weil-pbc-scalar-extension",
-        "why": "Generic Compatibility with finite scalar extension used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "prop-weil-pbc-descent-functors",
-        "why": "Generic Descent of coefficient-compatible functors used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "thm-weil-pbc-verdier-axioms",
-        "why": "Generic Verdier axioms and stagewise triangulation used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-mate-iso-along-equivalences",
-        "why": "Generic The mate of an isomorphism along equivalences is an isomorphism used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-weil-pbc-mate-pasting",
-        "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
-      },
-      {
-        "node": "lem-kun-dimension-finite-type",
-        "why": "Its finite-type-over-a-field dimension bound verifies the finite-dimensional scheme hypothesis of scalar extension in step 11. It is a general dimension theorem; this localization unit gives no dimension lemma."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-derived-limit-existence",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-pc-homotopy-limit-map",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "prop-weil-pbc-direct-image-limits",
-    "lem-pur-integral-operations-preserve-constructible",
-    "lem-weil-integral-constructible-triangulated",
-    "lem-sc-derived-adjunction-from-underived",
-    "lem-fix-operation-reduction",
-    "lem-weil-pbc-hom-out-of-triangle-exact",
-    "prop-weil-pbc-rational-transport",
-    "prop-weil-pbc-scalar-extension",
-    "prop-weil-pbc-descent-functors",
-    "thm-weil-pbc-verdier-axioms",
-    "lem-weil-mate-iso-along-equivalences",
-    "lem-weil-pbc-mate-pasting",
-    "lem-kun-dimension-finite-type"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-Codex-Q09-f0c4bea74",
-    "group": "Q09",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-f0c4bea74 (reviewer sub-agent of L); spot-checked: Read all 16 steps, 46 cited statements, source locations, and unit/chapter routes. Verified coefficient stages, semilinear Frobenius mates, equivariance, uniqueness, and edge cases. Corrected step 13’s five missing \\cong escapes and malformed \\to escape. Whole corrected JSON is under fixes/dag/nodes/sec-smooth-purity/; detailed checks and accepted tool uses are in review.md. No new nodes or statement changes.; 1 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-5de596679",
-    "group": "Q133",
-    "result": "fix",
-    "note": "Read the node (16 steps), the source place (order 1851, verbatim), the 609-line module, the report and the 8 recorded stmt_dep declarations. Finding H3/H4: SfIntegralRecollementVertices identified the integral closed vertex with the auxiliary ordinary sfCompletedDerivedDirectImage instead of the node's Rlim Res_n Ri_{*,n} (recorded SfIntegralDirectImage), which agree only via prop-weil-pbc-direct-image-limits. Fixed in fixes/SfOpenClosedTriangleAllStages.lean: the clause is now ∃ L : SfIntegralDirectImage l E i (i^*K), closedTerm K ≅ L.obj, with products from integralOperationsDerivedCountableProducts; the report is updated in fixes/<item>.report.md; lean.statement unchanged and verbatim. Accepted: finite stage equals the FiniteOpenClosedRecollementTriangle data; integral, rational and common-stage normalizations pin the counit and unit to the real module kernel inclusion and tensor-unit adjunction; the existential CommShift in the Weil theorems does not weaken the third square because completions are unique; the helper theorems left as sorry are named, docstringed and true. No hollow defs, no added hypotheses, universes independent. Edge cases checked: Z or U empty, n≥1, all m in Z, non-integral rational maps, larger common stages. nt_compile: delivered and fixed modules both rc 0 with no diagnostics."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.SfOpenClosedTriangleAllStages",
-    "declaration": "WeilConjectures.sfOpenClosedTriangle_qbar_weil",
-    "declarations": [
-      "WeilConjectures.sfRecollementCoefficientMap",
-      "WeilConjectures.sfRecollementCoefficientMap_isIso",
-      "WeilConjectures.sfRecollementModuleAdjunction",
-      "WeilConjectures.sfRecollementModuleClosed",
-      "WeilConjectures.sfRecollementModuleUnit",
-      "WeilConjectures.sfRecollementModuleOpen",
-      "WeilConjectures.sfRecollementModuleCounit",
-      "WeilConjectures.sfRecollementModule_exact",
-      "WeilConjectures.sfRecollementModuleOpen_additive",
-      "WeilConjectures.sfRecollementModuleOpen_limits",
-      "WeilConjectures.sfRecollementModuleOpen_colimits",
-      "WeilConjectures.sfRecollementModuleClosed_additive",
-      "WeilConjectures.sfRecollementModuleClosed_limits",
-      "WeilConjectures.sfRecollementModuleClosed_colimits",
-      "WeilConjectures.SfRecollementPresentation",
-      "WeilConjectures.SfRecollementConclusion",
-      "WeilConjectures.sfFiniteRecollementPresentation",
-      "WeilConjectures.SfRecollementConclusionOn",
-      "WeilConjectures.sfFiniteRecollementAt",
-      "WeilConjectures.sfOpenClosedTriangle_finite",
-      "WeilConjectures.sfRecollementNoetherian",
-      "WeilConjectures.sfRecollementOpenFiniteType",
-      "WeilConjectures.SfIntegralRecollementNormalization",
-      "WeilConjectures.SfRationalRecollementNormalization",
-      "WeilConjectures.SfIntegralRecollementVertices",
-      "WeilConjectures.sfOpenClosedTriangle_integral_rational",
-      "WeilConjectures.SfCommonStageRecollementNormalization",
-      "WeilConjectures.sfOpenClosedTriangle_qbar",
-      "WeilConjectures.SfRecollementFrobeniusExact",
-      "WeilConjectures.SfRecollementWeilEquivariant",
-      "WeilConjectures.sfRecollementGeometricNoetherian",
-      "WeilConjectures.sfOpenClosedTriangle_rational_weil",
-      "WeilConjectures.sfOpenClosedTriangle_qbar_weil"
-    ],
-    "file": "lean/Sheaf/Paper/SfOpenClosedTriangleAllStages.lean",
-    "statement": "theorem sfOpenClosedTriangle_qbar_weil (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (X₀ Z₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom] (i₀ : Z₀ ⟶ X₀) [IsClosedImmersion i₀.left] (i : (D.geometricFiber Z₀).left ⟶ (D.geometricFiber X₀).left) [IsClosedImmersion i] (_hi : i = ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map i₀).left) (P : ∀ L : AlgebraicallyClosedCoefficients.Index l Ω, SfRecollementPresentation (sfIntegralConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (D.geometricFiber X₀).left)) (Q : ∀ L : AlgebraicallyClosedCoefficients.Index l Ω, SfRecollementPresentation (GeneralAlgebraicallyClosedCoefficients.Stage l Ω (D.geometricFiber X₀).left L)) (_hPQ : ∀ L, SfIntegralRecollementNormalization l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) i (sfRecollementGeometricNoetherian D X₀) (P L) ∧ SfRationalRecollementNormalization l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (D.geometricFiber X₀).left (P L) (Q L)) (R : SfRecollementPresentation (generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left)) (_hR : SfCommonStageRecollementNormalization l Ω (D.geometricFiber X₀).left Q R) : ∃ s : (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).CommShift ℤ, SfRecollementFrobeniusExact (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω) s ∧ SfRecollementWeilEquivariant R (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω) s",
-    "branch": "newtargets-dag",
-    "by": "Q133",
-    "date": "2026-10-17",
-    "existing": false,
-    "note": "The five sfOpenClosedTriangle_* statements jointly state the four coefficient stages and the two Weil-equivariance clauses. Canonical presentation helpers use the closed tensor-unit adjunction and its kernel before localization, normalize integral arrows on every representative complex, retain literal rational/common-stage objects and normalize their maps through the recorded inclusions. No triangle, Hom vanishing, or Weil structure on the outer terms is assumed. All existence data remains in theorem conclusions; no arbitrary functor or comparison is selected from a mere existence assertion.",
-    "fixed_by": "NT-stage2-cc-5de596679"
+  {
+   "text": "Apply the uniqueness argument of step 9 to the original triangle and the transported triangle: the first two squares already commute, and the factorization through the connecting morphism is killed by the cross-object Hom vanishing. Equivalently, the uniqueness calculation using [def-weil-triangulated-category] and [lem-weil-pbc-hom-out-of-triangle-exact] forces the third square\n$$\\delta_K\\theta_C=\\theta_A[1]F_X(\\delta_K),$$\nwith the canonical shift comparison. Therefore all three arrows are Weil-equivariant in the category of pairs; no triangulated structure on that category is asserted.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+    "place": "Weil structures: uniqueness of the connecting arrow and equivariance of the third map."
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-finite-torsion-constructibility",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pc-homotopy-limit-map",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-proetale-inverse-image",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-weil-pbc-direct-image-limits",
+  "def-weil-derived-direct-image",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-fix-operation-reduction",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "def-weil-rationalization-karoubi",
+  "prop-weil-pbc-rational-transport",
+  "lem-kun-dimension-finite-type",
+  "def-weil-algebraically-closed-coefficients",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-descent-functors",
+  "thm-weil-pbc-verdier-axioms",
+  "def-weil-frobenius-detailed",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-pur-mate-unit-compatibility",
+  "lem-amb-mate-unit-counit",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-open-closed-triangle/prop-sf-open-closed-triangle-all-stages.md",
+  "place": "Original finite/integral/rational/common-stage route, with explicit ringed sheaf sequence, completion identifications, and semilinear Frobenius mate argument; sources Tags 09AH, 09BP, 0152."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Open closed localization distinguished triangle for constructible sheaves with finite adic and rational coefficients",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.right_fac_of_isStrictlyLE, DerivedCategory.TStructure.t",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the constructible open-closed triangle at the four coefficient stages"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Triangle",
+   "results": "; loogle: unknown identifier 'CategoryTheory.Triangle'",
+   "date": "2026-10-16",
+   "verdict": "invalid query: unknown identifier CategoryTheory.Triangle; no conclusion about absence is drawn from this query"
+  },
+  {
+   "tool": "grep",
+   "query": "openClosed|open_closed|recollement",
+   "results": "Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/WithVal.lean, Mathlib/NumberTheory/Padics/PadicIntegers.lean, Mathlib/Analysis/Normed/Group/Ultra.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean, Mathlib/Topology/Algebra/Valued/ValuationTopology.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the constructible open-closed triangle at the four coefficient stages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero restriction and closed pushforward localization sequence on etale sheaves",
+   "results": "Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, TopCat.Sheaf.extend_hom_app",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the constructible open-closed triangle at the four coefficient stages"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"OpenImmersion\", \"sheaf\"",
+   "results": "AlgebraicGeometry.PresheafedSpace.IsOpenImmersion, AlgebraicGeometry.SheafedSpace.IsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.locallyRingedSpace_toLocallyRingedSpace, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofIso, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpace, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpace, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mono, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofIsIso",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations do not state the constructible open-closed triangle at the four coefficient stages"
+  },
+  {
+   "tool": "leansearch",
+   "query": "open closed distinguished triangle etale constructible sheaves",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|localizationTriangle|localization_triangle",
+   "results": "none",
+   "date": "2026-10-16",
+   "verdict": "no match: no declarations with these extension-by-zero/localization-triangle names in CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For complementary open and closed subtopoi the extension by zero and restriction adjunctions give a localization triangle in the derived category",
+   "results": "CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Adjunction.isTriangulated_leftAdjoint",
+   "date": "2026-10-16",
+   "verdict": "no match: generic triangulated localization/adjunction results do not identify open and closed constructible sheaf operations at all coefficient stages"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1851,
+ "blueprint_uses": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-open-closed-recollement",
+  "def-weil-rationalization-karoubi",
+  "def-weil-weil-sheaf-complex",
+  "fix-lem-exchanges",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-cbc-open-closed-recollement",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-pbc-comparison-pullback",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "prop-weil-open-closed-recollement-adjunctions",
+  "prop-weil-pbc-comparison-direct-image",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-direct-image-limits",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-roos-triangle",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-verdier-axioms"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-open-closed-triangle",
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T190717-L-966338",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-sf-open-closed-triangle-all-stages",
+  "worker": "stage1",
+  "summary": "Repaired the returned Frobenius step by splitting its semilinear site-equivalence, mate-comparison, explicit unit/counit, outer Weil-structure, and uniqueness arguments into five cited steps. Reused the existing Mathlib leaves lem-pur-mate-unit-compatibility and lem-amb-mate-unit-counit for the two mate identities, so no duplicate node was created; all other steps and the statement remain unchanged. Each replacement is below the 2000-character review threshold.",
+  "blueprint": "Realizes the unit sheaf-sequence-to-triangle argument and all five paragraphs of the item: finite stage (1-2), integral (3-8), uniqueness (9), rational (10), common-stage (11), and the repaired five-part Weil-structure paragraph (12-16).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic Ringed pro-etale open-closed localization used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic A short exact sequence of complexes gives a distinguished triangle in D(A), functorially used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic An exact functor of abelian categories induces a triangulated functor on derived categories used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic Compatible inverse image of profinite coefficient sheaves used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic Inverse images along immersions preserve pro-etale limits used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic Existence and computation of derived limits used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic Countable products of pro-etale modules are exact used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-pc-homotopy-limit-map",
+    "why": "Generic Triangulated product-preserving functors preserve homotopy limits used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic Tensor projection formula for extension by zero on a ringed-site slice used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic Left adjoints preserve colimits used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic Direct image, derived limits, and completeness used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic Integral pullback and completed tensor product preserve constructibility used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Generic Bounded constructible derived-complete integral complexes form a triangulated subcategory used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-sc-derived-adjunction-from-underived",
+    "why": "Generic Derived functors inherit an adjunction used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Generic Basic operations and coefficient reduction used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Generic Hom(-,W) applied to a distinguished triangle: exactness at Y and at Z used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic Functorial transport to a finite field used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic Compatibility with finite scalar extension used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Generic Descent of coefficient-compatible functors used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "thm-weil-pbc-verdier-axioms",
+    "why": "Generic Verdier axioms and stagewise triangulation used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "Generic The mate of an isomorphism along equivalences is an isomorphism used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares used only for its stated categorical/ringed-site property in the sheaf-sequence and coefficient-transport proof; the unit has no separate node giving this property."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Its finite-type-over-a-field dimension bound verifies the finite-dimensional scheme hypothesis of scalar extension in step 11. It is a general dimension theorem; this localization unit gives no dimension lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pc-homotopy-limit-map",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-sc-derived-adjunction-from-underived",
+  "lem-fix-operation-reduction",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-descent-functors",
+  "thm-weil-pbc-verdier-axioms",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-weil-pbc-mate-pasting",
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-f0c4bea74",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-f0c4bea74 (reviewer sub-agent of L); spot-checked: Read all 16 steps, 46 cited statements, source locations, and unit/chapter routes. Verified coefficient stages, semilinear Frobenius mates, equivariance, uniqueness, and edge cases. Corrected step 13’s five missing \\cong escapes and malformed \\to escape. Whole corrected JSON is under fixes/dag/nodes/sec-smooth-purity/; detailed checks and accepted tool uses are in review.md. No new nodes or statement changes.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5de596679",
+  "group": "Q133",
+  "result": "fix",
+  "note": "Read the node (16 steps), the source place (order 1851, verbatim), the 609-line module, the report and the 8 recorded stmt_dep declarations. Finding H3/H4: SfIntegralRecollementVertices identified the integral closed vertex with the auxiliary ordinary sfCompletedDerivedDirectImage instead of the node's Rlim Res_n Ri_{*,n} (recorded SfIntegralDirectImage), which agree only via prop-weil-pbc-direct-image-limits. Fixed in fixes/SfOpenClosedTriangleAllStages.lean: the clause is now ∃ L : SfIntegralDirectImage l E i (i^*K), closedTerm K ≅ L.obj, with products from integralOperationsDerivedCountableProducts; the report is updated in fixes/<item>.report.md; lean.statement unchanged and verbatim. Accepted: finite stage equals the FiniteOpenClosedRecollementTriangle data; integral, rational and common-stage normalizations pin the counit and unit to the real module kernel inclusion and tensor-unit adjunction; the existential CommShift in the Weil theorems does not weaken the third square because completions are unique; the helper theorems left as sorry are named, docstringed and true. No hollow defs, no added hypotheses, universes independent. Edge cases checked: Z or U empty, n≥1, all m in Z, non-integral rational maps, larger common stages. nt_compile: delivered and fixed modules both rc 0 with no diagnostics."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfOpenClosedTriangleAllStages",
+  "declaration": "WeilConjectures.sfOpenClosedTriangle_qbar_weil",
+  "declarations": [
+   "WeilConjectures.sfRecollementCoefficientMap",
+   "WeilConjectures.sfRecollementCoefficientMap_isIso",
+   "WeilConjectures.sfRecollementModuleAdjunction",
+   "WeilConjectures.sfRecollementModuleClosed",
+   "WeilConjectures.sfRecollementModuleUnit",
+   "WeilConjectures.sfRecollementModuleOpen",
+   "WeilConjectures.sfRecollementModuleCounit",
+   "WeilConjectures.sfRecollementModule_exact",
+   "WeilConjectures.sfRecollementModuleOpen_additive",
+   "WeilConjectures.sfRecollementModuleOpen_limits",
+   "WeilConjectures.sfRecollementModuleOpen_colimits",
+   "WeilConjectures.sfRecollementModuleClosed_additive",
+   "WeilConjectures.sfRecollementModuleClosed_limits",
+   "WeilConjectures.sfRecollementModuleClosed_colimits",
+   "WeilConjectures.SfRecollementPresentation",
+   "WeilConjectures.SfRecollementConclusion",
+   "WeilConjectures.sfFiniteRecollementPresentation",
+   "WeilConjectures.SfRecollementConclusionOn",
+   "WeilConjectures.sfFiniteRecollementAt",
+   "WeilConjectures.sfOpenClosedTriangle_finite",
+   "WeilConjectures.sfRecollementNoetherian",
+   "WeilConjectures.sfRecollementOpenFiniteType",
+   "WeilConjectures.SfIntegralRecollementNormalization",
+   "WeilConjectures.SfRationalRecollementNormalization",
+   "WeilConjectures.SfIntegralRecollementVertices",
+   "WeilConjectures.sfOpenClosedTriangle_integral_rational",
+   "WeilConjectures.SfCommonStageRecollementNormalization",
+   "WeilConjectures.sfOpenClosedTriangle_qbar",
+   "WeilConjectures.SfRecollementFrobeniusExact",
+   "WeilConjectures.SfRecollementWeilEquivariant",
+   "WeilConjectures.sfRecollementGeometricNoetherian",
+   "WeilConjectures.sfOpenClosedTriangle_rational_weil",
+   "WeilConjectures.sfOpenClosedTriangle_qbar_weil"
+  ],
+  "file": "lean/Sheaf/Paper/SfOpenClosedTriangleAllStages.lean",
+  "statement": "theorem sfOpenClosedTriangle_qbar_weil (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) (X₀ Z₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom] (i₀ : Z₀ ⟶ X₀) [IsClosedImmersion i₀.left] (i : (D.geometricFiber Z₀).left ⟶ (D.geometricFiber X₀).left) [IsClosedImmersion i] (_hi : i = ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map i₀).left) (P : ∀ L : AlgebraicallyClosedCoefficients.Index l Ω, SfRecollementPresentation (sfIntegralConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (D.geometricFiber X₀).left)) (Q : ∀ L : AlgebraicallyClosedCoefficients.Index l Ω, SfRecollementPresentation (GeneralAlgebraicallyClosedCoefficients.Stage l Ω (D.geometricFiber X₀).left L)) (_hPQ : ∀ L, SfIntegralRecollementNormalization l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) i (sfRecollementGeometricNoetherian D X₀) (P L) ∧ SfRationalRecollementNormalization l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) (D.geometricFiber X₀).left (P L) (Q L)) (R : SfRecollementPresentation (generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left)) (_hR : SfCommonStageRecollementNormalization l Ω (D.geometricFiber X₀).left Q R) : ∃ s : (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).CommShift ℤ, SfRecollementFrobeniusExact (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω) s ∧ SfRecollementWeilEquivariant R (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω) s",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The five sfOpenClosedTriangle_* statements jointly state the four coefficient stages and the two Weil-equivariance clauses. Canonical presentation helpers use the closed tensor-unit adjunction and its kernel before localization, normalize integral arrows on every representative complex, retain literal rational/common-stage objects and normalize their maps through the recorded inclusions. No triangle, Hom vanishing, or Weil structure on the outer terms is assumed. All existence data remains in theorem conclusions; no arbitrary functor or comparison is selected from a mere existence assertion.",
+  "fixed_by": "NT-stage2-cc-5de596679"
+ }
 }

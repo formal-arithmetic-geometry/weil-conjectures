@@ -1,226 +1,215 @@
 {
-  "id": "prop-weil-proet-finite-proper-base-change",
-  "blueprint": {
-    "is": "prop-weil-proet-finite-proper-base-change",
-    "from": null,
-    "same_as": [
-      "lemma-weil-pbc-torsion-assembly"
-    ]
-  },
-  "kind": "statement",
-  "title": "Finite-torsion proper base change",
-  "statement": "Let\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nbe cartesian [def-weil-pbc-cartesian-square] with $f$ proper. For every\ntorsion sheaf $F$ on $X_{\\Et}$,\n\n$$\n \\Ex_{\\square,F}:g^{-1}Rf_*F\n \\xrightarrow{\\sim}Rf'_*g'^{-1}F\n$$\n\nis an isomorphism in $\\Dplus(Y'_{\\Et})$, where $\\Ex_{\\square,F}$ is the\nderived exchange morphism [def-weil-pbc-derived-exchange].",
-  "source": {
+ "id": "prop-weil-proet-finite-proper-base-change",
+ "blueprint": {
+  "is": "prop-weil-proet-finite-proper-base-change",
+  "from": null,
+  "same_as": [
+   "lemma-weil-pbc-torsion-assembly"
+  ]
+ },
+ "kind": "statement",
+ "title": "Finite-torsion proper base change",
+ "statement": "Let\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nbe cartesian [def-weil-pbc-cartesian-square] with $f$ proper. For every\ntorsion sheaf $F$ on $X_{\\Et}$,\n\n$$\n \\Ex_{\\square,F}:g^{-1}Rf_*F\n \\xrightarrow{\\sim}Rf'_*g'^{-1}F\n$$\n\nis an isomorphism in $\\Dplus(Y'_{\\Et})$, where $\\Ex_{\\square,F}$ is the\nderived exchange morphism [def-weil-pbc-derived-exchange].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-proet-finite-proper-base-change.md",
+  "place": "node prop-weil-proet-finite-proper-base-change, order 1321",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 095T"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $K=F[0]$, represented by the complex with $F$ in degree $0$, zero objects in all other degrees, and zero differentials. Computing $\\Ker d^i/\\Im d^{i-1}$ gives $\\mathcal H^0(K)=F$ and $\\mathcal H^i(K)=0$ for $i\\ne0$. Thus $K\\in\\Dplus(X_{\\Et})$ with lower bound $0$ by [def-weil-pbc-derived-categories]. Its cohomology sheaves are torsion: $F$ is torsion by hypothesis and every local section of the zero sheaf is killed by $1$, by [def-weil-pbc-etale-sheaves].",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-proet-finite-proper-base-change.md",
-    "place": "node prop-weil-proet-finite-proper-base-change, order 1321",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 095T"
-      }
-    ]
+    "place": "Detailed form, Proof: specialization K=F[0]; Stacks 0DDE (lemma-proper-base-change) specialized to degree zero"
+   }
   },
-  "stmt_deps": [
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-derived-exchange",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-proper-morphism"
-  ],
-  "proof": [
-    {
-      "text": "Put $K=F[0]$, represented by the complex with $F$ in degree $0$, zero objects in all other degrees, and zero differentials. Computing $\\Ker d^i/\\Im d^{i-1}$ gives $\\mathcal H^0(K)=F$ and $\\mathcal H^i(K)=0$ for $i\\ne0$. Thus $K\\in\\Dplus(X_{\\Et})$ with lower bound $0$ by [def-weil-pbc-derived-categories]. Its cohomology sheaves are torsion: $F$ is torsion by hypothesis and every local section of the zero sheaf is killed by $1$, by [def-weil-pbc-etale-sheaves].",
-      "uses": [
-        "def-weil-pbc-derived-categories",
-        "def-weil-pbc-etale-sheaves"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-proet-finite-proper-base-change.md",
-        "place": "Detailed form, Proof: specialization K=F[0]; Stacks 0DDE (lemma-proper-base-change) specialized to degree zero"
-      }
-    },
-    {
-      "text": "The square is cartesian and $f$ is proper by the hypotheses of the item; Step 1 supplies a bounded-below complex with torsion cohomology. Apply [thm-weil-pbc-bounded-below] to this same square and $K=F[0]$. It gives that $\\Ex_{\\square,F[0]}:g^{-1}Rf_*F[0]\\to Rf'_*g'^{-1}F[0]$ is an isomorphism in $\\Dplus(Y'_{\\Et})$, with no restriction on $g$.",
-      "uses": [
-        "thm-weil-pbc-bounded-below"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0DDE, lemma-proper-base-change, statement (line 18708); K=F[0]"
-      }
-    },
-    {
-      "text": "The notation $Rf_*F$ in the item means the derived direct image of the sheaf placed in degree $0$. By [def-weil-pbc-derived-exchange], the morphism denoted $\\Ex_{\\square,F}$ is the component at that object of the very same transformation $\\Ex_\\square:g^{-1}Rf_*\\to Rf'_*g'^{-1}$. Therefore $\\Ex_{\\square,F}=\\Ex_{\\square,F[0]}$; the isomorphism of Step 2 is precisely the asserted morphism, rather than an unspecified isomorphism between its endpoints.",
-      "uses": [
-        "def-weil-pbc-derived-exchange"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-proet-finite-proper-base-change.md",
-        "place": "Detailed form, Proof: specialization K=F[0]; Stacks 0DDE (lemma-proper-base-change) specialized to degree zero"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-etale-sheaves",
-    "thm-weil-pbc-bounded-below",
-    "def-weil-pbc-derived-exchange"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-proet-finite-proper-base-change.md",
-    "place": "Detailed form, Proof; the elementary single-complex computation is written out, and the existing theorem is Stacks 0DDE"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "properBaseChange|proper_base_change|isIso_baseChange|derivedBaseChange",
-      "results": "0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "no match: underived sheaf comparisons or geometric base-change stability do not assert torsion derived proper base change"
-    },
-    {
-      "tool": "leansearch",
-      "query": "proper base change theorem for torsion sheaves of abelian groups in etale cohomology",
-      "results": "unavailable: service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"baseChange\", \"IsProper\"",
-      "results": "1 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange",
-      "date": "2026-10-14",
-      "verdict": "no match: underived sheaf comparisons or geometric base-change stability do not assert torsion derived proper base change"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Proper base change for a torsion abelian sheaf on the small etale site: inverse image of derived direct image is isomorphic to derived direct image of inverse image",
-      "results": "8 hits: SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardNatIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso",
-      "date": "2026-10-14",
-      "verdict": "no match: underived sheaf comparisons or geometric base-change stability do not assert torsion derived proper base change"
-    },
-    {
-      "tool": "grep",
-      "query": "base.?change|IsProper",
-      "results": "18 hits: Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; searched Mathlib/AlgebraicGeometry/Sites",
-      "date": "2026-10-14",
-      "verdict": "no match: underived sheaf comparisons or geometric base-change stability do not assert torsion derived proper base change"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a proper morphism of schemes higher direct images of torsion etale sheaves commute with arbitrary base change",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforward_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, SheafOfModules.pushforwardComp",
-      "date": "2026-10-14",
-      "verdict": "no match: underived sheaf comparisons or geometric base-change stability do not assert torsion derived proper base change"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1321,
-  "blueprint_uses": [
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-derived-exchange",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-weil-pbc-derived-exchange-coherence",
-    "lemma-weil-pbc-torsion-assembly",
+  {
+   "text": "The square is cartesian and $f$ is proper by the hypotheses of the item; Step 1 supplies a bounded-below complex with torsion cohomology. Apply [thm-weil-pbc-bounded-below] to this same square and $K=F[0]$. It gives that $\\Ex_{\\square,F[0]}:g^{-1}Rf_*F[0]\\to Rf'_*g'^{-1}F[0]$ is an isomorphism in $\\Dplus(Y'_{\\Et})$, with no restriction on $g$.",
+   "uses": [
     "thm-weil-pbc-bounded-below"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-weil-pbc-derived-exchange-coherence",
-    "lemma-weil-pbc-torsion-assembly"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "Let\n\n$$\n\\begin{CD}\nX'@>{g'}>>X\\\\\n@V{f'}VV @VV{f}V\\\\\nY'@>{g}>>Y\n\\end{CD}\n$$\n\nbe Cartesian with $f$ proper. For every torsion sheaf $F$ on\n$X_{\\mathrm{et}}$, the canonical exchange map\n\n$$\ng^{-1}Rf_*F\\xrightarrow{\\sim}Rf'_*g'^{-1}F\n$$\n\nis an isomorphism. These isomorphisms are natural in $F$, equal the identity\nfor identity squares, and commute with horizontal and vertical pasting.",
-      "proof": "The torsion assembly proves the isomorphism in every cohomological degree for\nthe map constructed in S0. A morphism in $D^+$ is an isomorphism exactly when\nall its cohomology sheaf maps are isomorphisms. Naturality, identity, and\npasting are the corresponding S0 coherence equations and survive each\ndevissage step. This is the expanded endpoint whose source locator is Tag\n`095T`; that tag is not used as a proof leaf.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0DDE, lemma-proper-base-change, statement (line 18708); K=F[0]"
+   }
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "prop-weil-proet-finite-proper-base-change",
-    "worker": "stage1",
-    "summary": "Kept the detailed statement unchanged. Expanded the degree-zero specialization into its cohomology calculation, application of the existing bounded-below theorem, and definitional identification of the actual exchange component. Removed unused proof dependencies and added the definition of properness to statement dependencies. No new nodes or Mathlib leaves. Searches found only underived sheaf comparisons and stability of geometric properties.",
-    "blueprint": "Detailed form Proof: F[0] has torsion cohomology, apply thm-weil-pbc-bounded-below, and identify Ex at F[0] with Ex at F. The same unit route is retained through that theorem; the earlier sketch coherence clauses are absent from the imported detailed statement and are reported, not silently added."
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "NT-Codex-NB-4c3722974",
-    "group": "NB",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-4c3722974 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route, and Stacks 095T/0DDE. All three specialization steps are valid for the canonical étale exchange map; no new nodes or circular dependency. Archived master targets retain their distinct condensed pro-étale coefficients and require separate comparisons. Detailed checks and the inherited sketch-coherence discrepancy are recorded in review.md."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.TorsionSheafProperBaseChange",
-    "declaration": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_torsionSheaf_of_isProper",
-    "file": "lean/Sheaf/AlgebraicGeometry/TorsionSheafProperBaseChange.lean",
-    "statement": "theorem isIso_derivedBaseChangeMapPlus_app_torsionSheaf_of_isProper {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} [IsProper f] (sq : ChosenCartesianSquare g' f' f g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) : IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))",
-    "branch": "newtargets-dag",
-    "by": "NK",
-    "date": "2026-10-15",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-5765b1411",
-    "group": "NK",
-    "result": "pass",
-    "note": "Statement, dependencies, sources, universes, edge cases, docstrings, and report sections checked. Verbatim signature confirmed; immutable module passed server-only compilation in 2.9 seconds. No repairs needed."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nbe cartesian [def-weil-pbc-cartesian-square] with $f$ proper. For every\ntorsion sheaf $F$ on $X_{\\Et}$,\n\n$$\n \\Ex_{\\square,F}:g^{-1}Rf_*F\n \\xrightarrow{\\sim}Rf'_*g'^{-1}F\n$$\n\nis an isomorphism in $\\Dplus(Y'_{\\Et})$, where $\\Ex_{\\square,F}$ is the\nderived exchange morphism [def-weil-pbc-derived-exchange]. These\nisomorphisms are natural in $F$, equal the identity for identity squares,\nand commute with horizontal and vertical pasting.",
-    "proof": [
-      {
-        "text": "View $F$ as the complex $F[0]$; its only cohomology sheaf is the torsion sheaf\n$F$, so $F[0]$ has torsion cohomology. [thm-weil-pbc-bounded-below] applied to\n$K=F[0]$ makes the derived exchange morphism $\\Ex_{\\square,F[0]}$ an\nisomorphism in $\\Dplus(Y'_{\\Et})$; by [def-weil-pbc-derived-exchange] that\nmorphism for a complex concentrated in degree zero is the exchange morphism\n$\\Ex_{\\square,F}$ of the sheaf $F$, giving the assertion.",
-        "uses": [
-          "thm-weil-pbc-bounded-below",
-          "def-weil-pbc-derived-exchange"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "The torsion assembly proves the isomorphism in every cohomological degree for\nthe map constructed in S0. A morphism in $D^+$ is an isomorphism exactly when\nall its cohomology sheaf maps are isomorphisms. Naturality, identity, and\npasting are the corresponding S0 coherence equations and survive each\ndevissage step. This is the expanded endpoint whose source locator is Tag\n`095T`; that tag is not used as a proof leaf.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "The notation $Rf_*F$ in the item means the derived direct image of the sheaf placed in degree $0$. By [def-weil-pbc-derived-exchange], the morphism denoted $\\Ex_{\\square,F}$ is the component at that object of the very same transformation $\\Ex_\\square:g^{-1}Rf_*\\to Rf'_*g'^{-1}$. Therefore $\\Ex_{\\square,F}=\\Ex_{\\square,F[0]}$; the isomorphism of Step 2 is precisely the asserted morphism, rather than an unspecified isomorphism between its endpoints.",
+   "uses": [
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-proet-finite-proper-base-change.md",
+    "place": "Detailed form, Proof: specialization K=F[0]; Stacks 0DDE (lemma-proper-base-change) specialized to degree zero"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves",
+  "thm-weil-pbc-bounded-below",
+  "def-weil-pbc-derived-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-proet-finite-proper-base-change.md",
+  "place": "Detailed form, Proof; the elementary single-complex computation is written out, and the existing theorem is Stacks 0DDE"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "properBaseChange|proper_base_change|isIso_baseChange|derivedBaseChange",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: underived sheaf comparisons or geometric base-change stability do not assert torsion derived proper base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper base change theorem for torsion sheaves of abelian groups in etale cohomology",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"IsProper\"",
+   "results": "1 hits: AlgebraicGeometry.IsProper.isStableUnderBaseChange",
+   "date": "2026-10-14",
+   "verdict": "no match: underived sheaf comparisons or geometric base-change stability do not assert torsion derived proper base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper base change for a torsion abelian sheaf on the small etale site: inverse image of derived direct image is isomorphic to derived direct image of inverse image",
+   "results": "8 hits: SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardNatIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackIso, SheafOfModules.freeFunctorCompPullbackIso",
+   "date": "2026-10-14",
+   "verdict": "no match: underived sheaf comparisons or geometric base-change stability do not assert torsion derived proper base change"
+  },
+  {
+   "tool": "grep",
+   "query": "base.?change|IsProper",
+   "results": "18 hits: Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/Affine.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean, Mathlib/AlgebraicGeometry/Sites/Fpqc.lean; searched Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-14",
+   "verdict": "no match: underived sheaf comparisons or geometric base-change stability do not assert torsion derived proper base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper morphism of schemes higher direct images of torsion etale sheaves commute with arbitrary base change",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforward_assoc, SheafOfModules.pullbackComp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, SheafOfModules.pushforwardComp",
+   "date": "2026-10-14",
+   "verdict": "no match: underived sheaf comparisons or geometric base-change stability do not assert torsion derived proper base change"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1321,
+ "blueprint_uses": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-derived-exchange-coherence",
+  "lemma-weil-pbc-torsion-assembly",
+  "thm-weil-pbc-bounded-below"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-weil-pbc-derived-exchange-coherence",
+  "lemma-weil-pbc-torsion-assembly"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let\n\n$$\n\\begin{CD}\nX'@>{g'}>>X\\\\\n@V{f'}VV @VV{f}V\\\\\nY'@>{g}>>Y\n\\end{CD}\n$$\n\nbe Cartesian with $f$ proper. For every torsion sheaf $F$ on\n$X_{\\mathrm{et}}$, the canonical exchange map\n\n$$\ng^{-1}Rf_*F\\xrightarrow{\\sim}Rf'_*g'^{-1}F\n$$\n\nis an isomorphism. These isomorphisms are natural in $F$, equal the identity\nfor identity squares, and commute with horizontal and vertical pasting.",
+   "proof": "The torsion assembly proves the isomorphism in every cohomological degree for\nthe map constructed in S0. A morphism in $D^+$ is an isomorphism exactly when\nall its cohomology sheaf maps are isomorphisms. Naturality, identity, and\npasting are the corresponding S0 coherence equations and survive each\ndevissage step. This is the expanded endpoint whose source locator is Tag\n`095T`; that tag is not used as a proof leaf.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "prop-weil-proet-finite-proper-base-change",
+  "worker": "stage1",
+  "summary": "Kept the detailed statement unchanged. Expanded the degree-zero specialization into its cohomology calculation, application of the existing bounded-below theorem, and definitional identification of the actual exchange component. Removed unused proof dependencies and added the definition of properness to statement dependencies. No new nodes or Mathlib leaves. Searches found only underived sheaf comparisons and stability of geometric properties.",
+  "blueprint": "Detailed form Proof: F[0] has torsion cohomology, apply thm-weil-pbc-bounded-below, and identify Ex at F[0] with Ex at F. The same unit route is retained through that theorem; the earlier sketch coherence clauses are absent from the imported detailed statement and are reported, not silently added."
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "NT-Codex-NB-4c3722974",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-4c3722974 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, blueprint route, and Stacks 095T/0DDE. All three specialization steps are valid for the canonical étale exchange map; no new nodes or circular dependency. Archived master targets retain their distinct condensed pro-étale coefficients and require separate comparisons. Detailed checks and the inherited sketch-coherence discrepancy are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorsionSheafProperBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_torsionSheaf_of_isProper",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionSheafProperBaseChange.lean",
+  "statement": "theorem isIso_derivedBaseChangeMapPlus_app_torsionSheaf_of_isProper {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} [IsProper f] (sq : ChosenCartesianSquare g' f' f g) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) : IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq).app ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5765b1411",
+  "group": "NK",
+  "result": "pass",
+  "note": "Statement, dependencies, sources, universes, edge cases, docstrings, and report sections checked. Verbatim signature confirmed; immutable module passed server-only compilation in 2.9 seconds. No repairs needed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let\n\n$$\n \\begin{array}{ccc}\n X'&\\xrightarrow{g'}&X\\\\\n f'\\downarrow&&\\downarrow f\\\\\n Y'&\\xrightarrow{g}&Y\n \\end{array}\n$$\n\nbe cartesian [def-weil-pbc-cartesian-square] with $f$ proper. For every\ntorsion sheaf $F$ on $X_{\\Et}$,\n\n$$\n \\Ex_{\\square,F}:g^{-1}Rf_*F\n \\xrightarrow{\\sim}Rf'_*g'^{-1}F\n$$\n\nis an isomorphism in $\\Dplus(Y'_{\\Et})$, where $\\Ex_{\\square,F}$ is the\nderived exchange morphism [def-weil-pbc-derived-exchange]. These\nisomorphisms are natural in $F$, equal the identity for identity squares,\nand commute with horizontal and vertical pasting.",
+  "proof": [
+   {
+    "text": "View $F$ as the complex $F[0]$; its only cohomology sheaf is the torsion sheaf\n$F$, so $F[0]$ has torsion cohomology. [thm-weil-pbc-bounded-below] applied to\n$K=F[0]$ makes the derived exchange morphism $\\Ex_{\\square,F[0]}$ an\nisomorphism in $\\Dplus(Y'_{\\Et})$; by [def-weil-pbc-derived-exchange] that\nmorphism for a complex concentrated in degree zero is the exchange morphism\n$\\Ex_{\\square,F}$ of the sheaf $F$, giving the assertion.",
+    "uses": [
+     "thm-weil-pbc-bounded-below",
+     "def-weil-pbc-derived-exchange"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The torsion assembly proves the isomorphism in every cohomological degree for\nthe map constructed in S0. A morphism in $D^+$ is an isomorphism exactly when\nall its cohomology sheaf maps are isomorphisms. Naturality, identity, and\npasting are the corresponding S0 coherence equations and survive each\ndevissage step. This is the expanded endpoint whose source locator is Tag\n`095T`; that tag is not used as a proof leaf.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,175 +1,128 @@
 {
-  "id": "lemma-weil-pbc-derived-exchange-coherence",
-  "blueprint": {
-    "is": "lemma-weil-pbc-derived-exchange-coherence",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Resolution independence, identities, and pasting",
-  "statement": "The class $\\operatorname{Ex}_{\\square,K}$ is independent of the injective\nresolution and is compatible with identity squares, horizontal pasting, and\nvertical pasting.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lemma-weil-pbc-derived-exchange-coherence.md",
-    "place": "node lemma-weil-pbc-derived-exchange-coherence, order 1046"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-derived-exchange",
-    "def-weil-pbc-underived-exchange"
-  ],
-  "proof": [
-    {
-      "text": "Given two injective resolutions, the comparison theorem supplies chain maps\neach way, unique up to chain homotopy, whose composites are homotopic to the\nidentities. Naturality of the degreewise exchange map sends these homotopies\nto homotopies after both direct images; localization therefore gives the same\nderived morphism. For the identity square, the unit followed by the counit is\nthe identity sectionwise, hence degreewise. For pasted squares, expand each\nexchange as ``unit, pullback identification, counit''; the two middle\nidentifications are equal by associativity of fibre products, and the two\nadjunction triangle identities cancel the adjacent unit–counit pairs. The\nsame calculation with the order reversed proves vertical pasting.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "lemma-weil-pbc-derived-exchange-replacement"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lemma-weil-pbc-derived-exchange-coherence.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "lean_multiple",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1046,
-  "blueprint_uses": [
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-derived-exchange",
-    "def-weil-pbc-underived-exchange",
-    "lemma-weil-pbc-derived-exchange-replacement"
-  ],
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
-    "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext",
-    "branch": "slopmaster2",
-    "line": 170,
-    "sorry_free": true,
-    "body_lines": 6,
-    "others": [
-      {
-        "module": "WeilConjectures.SixFunctors.BaseChange.DerivedPasting",
-        "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz",
-        "branch": "slopmaster2",
-        "line": 264,
-        "sorry_free": true,
-        "body_lines": 105
-      },
-      {
-        "module": "WeilConjectures.SixFunctors.BaseChange.DerivedPasting",
-        "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert",
-        "branch": "slopmaster2",
-        "line": 124,
-        "sorry_free": true,
-        "body_lines": 82
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext",
-    "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz",
-    "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-derived-exchange",
-    "def-weil-pbc-underived-exchange",
-    "lemma-weil-pbc-derived-exchange-replacement"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext",
-        "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz",
-        "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext",
-          "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
-          "lines": [
-            166,
-            190
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz",
-          "module": "WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Horizontal",
-          "lines": [
-            55,
-            190
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert",
-          "module": "WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical",
-          "lines": [
-            89,
-            192
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-def-exchange",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\mathcal A$ be a coefficient category as in\n[def-weil-pbc-derived-exchange], and consider derived exchange morphisms\n[def-weil-pbc-derived-exchange] of commutative squares of schemes.\n\n1. *(Uniqueness.)* For a commutative square $\\square$, every natural\ntransformation $g^{-1}Rf_*\\to Rf'_*g'^{-1}$ on $\\Dplus(X_{\\Et},\\mathcal A)$\nwhich, on every bounded below complex $K$, is computed by the termwise\nunderived exchange morphism [def-weil-pbc-underived-exchange] (in the sense of\n[lemma-weil-pbc-derived-exchange-replacement]) equals $\\Ex_{\\square}$. In\nparticular $\\Ex_{\\square,K}$ does not depend on the choice of a resolution.\n2. *(Vertical pasting.)* For commutative squares $\\square_1$ (with\n$f\\circ g'=g\\circ f'$, $f:X\\to Y$, $f':X'\\to Y'$) and $\\square_2$ (with\n$e\\circ g=k\\circ e'$, $e:Y\\to Z$, $e':Y'\\to Z'$), the exchange morphism of the\npasted square ($(e\\circ f)\\circ g'=k\\circ(e'\\circ f')$) equals the composite\n\n$$\n k^{-1}R(e f)_*\\cong k^{-1}Re_*Rf_*\\xrightarrow{\\Ex_{\\square_2}}\n Re'_*g^{-1}Rf_*\\xrightarrow{\\Ex_{\\square_1}}Re'_*Rf'_*g'^{-1}\n \\cong R(e'f')_*g'^{-1},\n$$\n\nthe outer isomorphisms being the composition isomorphisms of derived direct\nimages.\n3. *(Horizontal pasting.)* For commutative squares $\\square_1$ (with\n$f\\circ g'=g\\circ f'$) and $\\square_2$ (with $f'\\circ g''=h\\circ f''$,\n$f'':X''\\to Y''$, $g'':X''\\to X'$, $h:Y''\\to Y'$), the exchange morphism of the\npasted square ($f\\circ(g'g'')=(gh)\\circ f''$) equals the composite\n\n$$\n (gh)^{-1}Rf_*\\cong h^{-1}g^{-1}Rf_*\\xrightarrow{\\Ex_{\\square_1}}\n h^{-1}Rf'_*g'^{-1}\\xrightarrow{\\Ex_{\\square_2}}Rf''_*g''^{-1}g'^{-1}\n \\cong Rf''_*(g'g'')^{-1},\n$$\n\nthe outer isomorphisms being the composition isomorphisms of inverse images.",
-    "proof": [
-      {
-        "text": "*(1)* This is the uniqueness part of\n[lemma-weil-pbc-derived-exchange-replacement]. Independence of the resolution\nfollows: for any bounded below injective resolution $K\\to I$, naturality of\n$\\Ex_\\square$ along the isomorphism $K\\cong I$ in $\\Dplus$ and the formula of\n[lemma-weil-pbc-derived-exchange-replacement] for complexes of injectives\nexpress $\\Ex_{\\square,K}$ through $\\Ex^0_{\\square,I}$, and the result is the\nsame morphism for every choice of $I$ since it equals $\\Ex_{\\square,K}$.",
-        "uses": [
-          "lemma-weil-pbc-derived-exchange-replacement"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Underived pasting.* We first record the pasting laws for the underived\nexchange morphisms [def-weil-pbc-underived-exchange]. For vertically pasted\nsquares, $\\Ex^0$ of the pasted square equals the composite\n$k^{-1}(ef)_*\\cong k^{-1}e_*f_*\\xrightarrow{\\Ex^0_{\\square_2}}e'_*g^{-1}f_*\n\\xrightarrow{e'_*\\Ex^0_{\\square_1}}e'_*f'_*g'^{-1}\\cong(e'f')_*g'^{-1}$; for\nhorizontally pasted squares, $\\Ex^0$ of the pasted square equals\n$(gh)^{-1}f_*\\cong h^{-1}g^{-1}f_*\\xrightarrow{h^{-1}\\Ex^0_{\\square_1}}\nh^{-1}f'_*g'^{-1}\\xrightarrow{\\Ex^0_{\\square_2}}f''_*g''^{-1}g'^{-1}\\cong\nf''_*(g'g'')^{-1}$. Indeed, expand each $\\Ex^0$ as \"unit, square isomorphism\n$\\theta$, counit\". The square isomorphism of the pasted square is the composite\nof the two square isomorphisms modulo composition isomorphisms\n[def-weil-pbc-cartesian-square], the composition isomorphisms of direct images\nare the mates of those of inverse images, and the triangle identities cancel\nthe adjacent unit–counit pairs; this is the compatibility of mates with\npasting.",
-        "uses": [
-          "def-weil-pbc-underived-exchange",
-          "def-weil-pbc-cartesian-square"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*(3) Horizontal pasting.* By (1) it suffices to show that the displayed\ncomposite $\\Phi$ satisfies the characterizing identity of\n[lemma-weil-pbc-derived-exchange-replacement] for the pasted square. Let $K$ be a\nbounded below complex on $X$, and write $\\eta^f$, $\\eta^{f'}$, $\\eta^{f''}$ for the\ncanonical maps from direct images to derived direct images. The composition\nisomorphism $(gh)^{-1}\\cong h^{-1}g^{-1}$ is natural, so it carries\n$(gh)^{-1}\\eta^f_K$ to $h^{-1}g^{-1}\\eta^f_K$. Then $h^{-1}\\Ex_{\\square_1,K}\\circ\nh^{-1}g^{-1}\\eta^f_K=h^{-1}(\\eta^{f'}_{g'^{-1}K}\\circ\\Ex^0_{\\square_1,K})$ by the\nidentity for $\\square_1$, and\n$\\Ex_{\\square_2,g'^{-1}K}\\circ h^{-1}\\eta^{f'}_{g'^{-1}K}\n=\\eta^{f''}_{g''^{-1}g'^{-1}K}\\circ\\Ex^0_{\\square_2,g'^{-1}K}$ by the identity for\n$\\square_2$ applied to the complex $g'^{-1}K$. Finally the composition\nisomorphism $g''^{-1}g'^{-1}\\cong(g'g'')^{-1}$ commutes with $\\eta^{f''}$ by\nnaturality. Altogether $\\Phi_K\\circ(gh)^{-1}\\eta^f_K$ equals $\\eta^{f''}$ composed\nwith the underived composite above, which is $\\Ex^0$ of the pasted square\napplied to $K$. So $\\Phi$ is the derived exchange morphism of the pasted square.",
-        "uses": [
-          "lemma-weil-pbc-derived-exchange-replacement"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*(2) Vertical pasting.* Again by (1) it suffices to check the characterizing\nidentity, and by the uniqueness argument of\n[lemma-weil-pbc-derived-exchange-replacement] it suffices to check it on bounded\nbelow complexes $I$ of injectives (every object of $\\Dplus$ is isomorphic to one,\nand on them the canonical maps $\\eta^f_I$ are isomorphisms). For such $I$,\n$f_*I$ is again a bounded below complex of injectives, because $f_*$ is right\nadjoint to the exact functor $f^{-1}$; hence $\\eta^f_I$, $\\eta^e_{f_*I}$ and\n$\\eta^{ef}_I$ are isomorphisms, and the composition isomorphism\n$R(ef)_*I\\cong Re_*Rf_*I$ is the one induced by $(ef)_*I=e_*f_*I$. Using the\nidentity for $\\square_2$ on the complex $f_*I$, then naturality of\n$\\eta^{e'}$ along the chain map $\\Ex^0_{\\square_1,I}$ followed by the identity for\n$\\square_1$ on $I$, and finally the compatibility of the composition isomorphism\n$Re'_*Rf'_*\\cong R(e'f')_*$ with the canonical maps\n($\\eta^{e'f'}_M$ corresponds to $Re'_*(\\eta^{f'}_M)\\circ\\eta^{e'}_{f'_*M}$), the\ncomposite of the displayed morphism with $k^{-1}\\eta^{ef}_I$ becomes\n$\\eta^{e'f'}_{g'^{-1}I}$ composed with the underived vertical composite above,\ni.e. with $\\Ex^0$ of the pasted square applied to $I$. Hence the displayed\ncomposite is the derived exchange morphism of the pasted square.",
-        "uses": [
-          "lemma-weil-pbc-derived-exchange-replacement"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "lemma-weil-pbc-derived-exchange-coherence",
+ "blueprint": {
+  "is": "lemma-weil-pbc-derived-exchange-coherence",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Resolution independence, identities, and pasting",
+ "statement": "The class $\\operatorname{Ex}_{\\square,K}$ is independent of the injective\nresolution and is compatible with identity squares, horizontal pasting, and\nvertical pasting.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lemma-weil-pbc-derived-exchange-coherence.md",
+  "place": "node lemma-weil-pbc-derived-exchange-coherence, order 1046"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-underived-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Given two injective resolutions, the comparison theorem supplies chain maps\neach way, unique up to chain homotopy, whose composites are homotopic to the\nidentities. Naturality of the degreewise exchange map sends these homotopies\nto homotopies after both direct images; localization therefore gives the same\nderived morphism. For the identity square, the unit followed by the counit is\nthe identity sectionwise, hence degreewise. For pasted squares, expand each\nexchange as ``unit, pullback identification, counit''; the two middle\nidentifications are equal by associativity of fibre products, and the two\nadjunction triangle identities cancel the adjacent unit–counit pairs. The\nsame calculation with the order reversed proves vertical pasting.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-derived-exchange-replacement"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-def-exchange/lemma-weil-pbc-derived-exchange-coherence.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1046,
+ "blueprint_uses": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-underived-exchange",
+  "lemma-weil-pbc-derived-exchange-replacement"
+ ],
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
+  "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext",
+  "branch": "slopmaster2",
+  "line": 170,
+  "sorry_free": true,
+  "body_lines": 6,
+  "others": [
+   {
+    "module": "WeilConjectures.SixFunctors.BaseChange.DerivedPasting",
+    "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz",
+    "branch": "slopmaster2",
+    "line": 264,
+    "sorry_free": true,
+    "body_lines": 105
+   },
+   {
+    "module": "WeilConjectures.SixFunctors.BaseChange.DerivedPasting",
+    "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert",
+    "branch": "slopmaster2",
+    "line": 124,
+    "sorry_free": true,
+    "body_lines": 82
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext",
+  "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz",
+  "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-underived-exchange",
+  "lemma-weil-pbc-derived-exchange-replacement"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-def-exchange",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\mathcal A$ be a coefficient category as in\n[def-weil-pbc-derived-exchange], and consider derived exchange morphisms\n[def-weil-pbc-derived-exchange] of commutative squares of schemes.\n\n1. *(Uniqueness.)* For a commutative square $\\square$, every natural\ntransformation $g^{-1}Rf_*\\to Rf'_*g'^{-1}$ on $\\Dplus(X_{\\Et},\\mathcal A)$\nwhich, on every bounded below complex $K$, is computed by the termwise\nunderived exchange morphism [def-weil-pbc-underived-exchange] (in the sense of\n[lemma-weil-pbc-derived-exchange-replacement]) equals $\\Ex_{\\square}$. In\nparticular $\\Ex_{\\square,K}$ does not depend on the choice of a resolution.\n2. *(Vertical pasting.)* For commutative squares $\\square_1$ (with\n$f\\circ g'=g\\circ f'$, $f:X\\to Y$, $f':X'\\to Y'$) and $\\square_2$ (with\n$e\\circ g=k\\circ e'$, $e:Y\\to Z$, $e':Y'\\to Z'$), the exchange morphism of the\npasted square ($(e\\circ f)\\circ g'=k\\circ(e'\\circ f')$) equals the composite\n\n$$\n k^{-1}R(e f)_*\\cong k^{-1}Re_*Rf_*\\xrightarrow{\\Ex_{\\square_2}}\n Re'_*g^{-1}Rf_*\\xrightarrow{\\Ex_{\\square_1}}Re'_*Rf'_*g'^{-1}\n \\cong R(e'f')_*g'^{-1},\n$$\n\nthe outer isomorphisms being the composition isomorphisms of derived direct\nimages.\n3. *(Horizontal pasting.)* For commutative squares $\\square_1$ (with\n$f\\circ g'=g\\circ f'$) and $\\square_2$ (with $f'\\circ g''=h\\circ f''$,\n$f'':X''\\to Y''$, $g'':X''\\to X'$, $h:Y''\\to Y'$), the exchange morphism of the\npasted square ($f\\circ(g'g'')=(gh)\\circ f''$) equals the composite\n\n$$\n (gh)^{-1}Rf_*\\cong h^{-1}g^{-1}Rf_*\\xrightarrow{\\Ex_{\\square_1}}\n h^{-1}Rf'_*g'^{-1}\\xrightarrow{\\Ex_{\\square_2}}Rf''_*g''^{-1}g'^{-1}\n \\cong Rf''_*(g'g'')^{-1},\n$$\n\nthe outer isomorphisms being the composition isomorphisms of inverse images.",
+  "proof": [
+   {
+    "text": "*(1)* This is the uniqueness part of\n[lemma-weil-pbc-derived-exchange-replacement]. Independence of the resolution\nfollows: for any bounded below injective resolution $K\\to I$, naturality of\n$\\Ex_\\square$ along the isomorphism $K\\cong I$ in $\\Dplus$ and the formula of\n[lemma-weil-pbc-derived-exchange-replacement] for complexes of injectives\nexpress $\\Ex_{\\square,K}$ through $\\Ex^0_{\\square,I}$, and the result is the\nsame morphism for every choice of $I$ since it equals $\\Ex_{\\square,K}$.",
+    "uses": [
+     "lemma-weil-pbc-derived-exchange-replacement"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Underived pasting.* We first record the pasting laws for the underived\nexchange morphisms [def-weil-pbc-underived-exchange]. For vertically pasted\nsquares, $\\Ex^0$ of the pasted square equals the composite\n$k^{-1}(ef)_*\\cong k^{-1}e_*f_*\\xrightarrow{\\Ex^0_{\\square_2}}e'_*g^{-1}f_*\n\\xrightarrow{e'_*\\Ex^0_{\\square_1}}e'_*f'_*g'^{-1}\\cong(e'f')_*g'^{-1}$; for\nhorizontally pasted squares, $\\Ex^0$ of the pasted square equals\n$(gh)^{-1}f_*\\cong h^{-1}g^{-1}f_*\\xrightarrow{h^{-1}\\Ex^0_{\\square_1}}\nh^{-1}f'_*g'^{-1}\\xrightarrow{\\Ex^0_{\\square_2}}f''_*g''^{-1}g'^{-1}\\cong\nf''_*(g'g'')^{-1}$. Indeed, expand each $\\Ex^0$ as \"unit, square isomorphism\n$\\theta$, counit\". The square isomorphism of the pasted square is the composite\nof the two square isomorphisms modulo composition isomorphisms\n[def-weil-pbc-cartesian-square], the composition isomorphisms of direct images\nare the mates of those of inverse images, and the triangle identities cancel\nthe adjacent unit–counit pairs; this is the compatibility of mates with\npasting.",
+    "uses": [
+     "def-weil-pbc-underived-exchange",
+     "def-weil-pbc-cartesian-square"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(3) Horizontal pasting.* By (1) it suffices to show that the displayed\ncomposite $\\Phi$ satisfies the characterizing identity of\n[lemma-weil-pbc-derived-exchange-replacement] for the pasted square. Let $K$ be a\nbounded below complex on $X$, and write $\\eta^f$, $\\eta^{f'}$, $\\eta^{f''}$ for the\ncanonical maps from direct images to derived direct images. The composition\nisomorphism $(gh)^{-1}\\cong h^{-1}g^{-1}$ is natural, so it carries\n$(gh)^{-1}\\eta^f_K$ to $h^{-1}g^{-1}\\eta^f_K$. Then $h^{-1}\\Ex_{\\square_1,K}\\circ\nh^{-1}g^{-1}\\eta^f_K=h^{-1}(\\eta^{f'}_{g'^{-1}K}\\circ\\Ex^0_{\\square_1,K})$ by the\nidentity for $\\square_1$, and\n$\\Ex_{\\square_2,g'^{-1}K}\\circ h^{-1}\\eta^{f'}_{g'^{-1}K}\n=\\eta^{f''}_{g''^{-1}g'^{-1}K}\\circ\\Ex^0_{\\square_2,g'^{-1}K}$ by the identity for\n$\\square_2$ applied to the complex $g'^{-1}K$. Finally the composition\nisomorphism $g''^{-1}g'^{-1}\\cong(g'g'')^{-1}$ commutes with $\\eta^{f''}$ by\nnaturality. Altogether $\\Phi_K\\circ(gh)^{-1}\\eta^f_K$ equals $\\eta^{f''}$ composed\nwith the underived composite above, which is $\\Ex^0$ of the pasted square\napplied to $K$. So $\\Phi$ is the derived exchange morphism of the pasted square.",
+    "uses": [
+     "lemma-weil-pbc-derived-exchange-replacement"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*(2) Vertical pasting.* Again by (1) it suffices to check the characterizing\nidentity, and by the uniqueness argument of\n[lemma-weil-pbc-derived-exchange-replacement] it suffices to check it on bounded\nbelow complexes $I$ of injectives (every object of $\\Dplus$ is isomorphic to one,\nand on them the canonical maps $\\eta^f_I$ are isomorphisms). For such $I$,\n$f_*I$ is again a bounded below complex of injectives, because $f_*$ is right\nadjoint to the exact functor $f^{-1}$; hence $\\eta^f_I$, $\\eta^e_{f_*I}$ and\n$\\eta^{ef}_I$ are isomorphisms, and the composition isomorphism\n$R(ef)_*I\\cong Re_*Rf_*I$ is the one induced by $(ef)_*I=e_*f_*I$. Using the\nidentity for $\\square_2$ on the complex $f_*I$, then naturality of\n$\\eta^{e'}$ along the chain map $\\Ex^0_{\\square_1,I}$ followed by the identity for\n$\\square_1$ on $I$, and finally the compatibility of the composition isomorphism\n$Re'_*Rf'_*\\cong R(e'f')_*$ with the canonical maps\n($\\eta^{e'f'}_M$ corresponds to $Re'_*(\\eta^{f'}_M)\\circ\\eta^{e'}_{f'_*M}$), the\ncomposite of the displayed morphism with $k^{-1}\\eta^{ef}_I$ becomes\n$\\eta^{e'f'}_{g'^{-1}I}$ composed with the underived vertical composite above,\ni.e. with $\\Ex^0$ of the pasted square applied to $I$. Hence the displayed\ncomposite is the derived exchange morphism of the pasted square.",
+    "uses": [
+     "lemma-weil-pbc-derived-exchange-replacement"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

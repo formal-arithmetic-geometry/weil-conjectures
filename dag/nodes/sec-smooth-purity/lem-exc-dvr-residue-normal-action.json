@@ -253,18 +253,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-33c0cf60e (reviewer sub-agent of L); spot-checked: I read everything in full. The item matches Stacks 09ED (more-algebra.tex:33224) clauses (1)-(2) exactly: a DVR A, L/K finite normal separable, B the integral closure of A in L, n maximal; E/k normal and D -> Aut_k(E) surjective. No residue separability is assumed, the target is not weakened and its statement is unchanged. Steps 1-5 follow the 09ED proof (B^G=A, then 0BRJ), and every cited statement gives what its step takes from it. Step 1 (DVR => PID => integrally closed; finite Galois => G finite and L^G=K) checks out. Steps 2-3 correctly give B G-stable and B^G=A in a few written-out lines, so they are rightly marked elementary. Step 4 applies the integral-algebra contraction lemma with I=0, and locality gives n∩A=m_A. In step 5 the substitutions R=A, S=B, H=G, p=m_A, q=n are exact, and D and rho match the leaf's D_H(q) and its map. All proof dependencies are Mathlib leaves or definitions, so there is no route issue and no tool_uses were needed. The new leaf lem-exc-finite-invariant-quotient-normal-action is the maximal-ideal case of Stacks 0BRJ (more-algebra.tex:32704). I checked it against Mathlib Invariant/Galois.lean:140 (Ideal.Quotient.normal; section hypotheses at 71-75), Invariant/Basic.lean:362 (stabilizerHom_surjective; hypotheses at 183-192), Ideal/Over.lean:341 (stabilizerHom is b mod Q -> g.b mod Q) and Invariant/Defs.lean:31 (IsInvariant). There is one declaration per clause. R=S^H gives IsInvariant, and the fact that R is pointwise fixed gives SMulCommClass. The leaf passes B1-B7. I tested it on trivial H with R=S, on k x k with the swap action, and on the worker's characteristic-p C_p purely inseparable example; it is true as stated. On duplicates, lem-exc-finite-galois-prime-residue-lifting already states the surjectivity clause but not normality, and no node states 0BRJ or residue normality. The leaf is strictly more general than the parent and follows the source, so it is not a D1 restatement. Fix: the leaf's mathlib_match.how gave the hypotheses of Ideal.Quotient.normal as Galois.lean '75-79'; the actual section normal hypotheses are at 71-75, and 76-79 are unused IsFractionRing variables. I corrected only that field in fixes/dag/nodes/sec-smooth-purity/lem-exc-finite-invariant-quotient-normal-action.json. No nodes are dropped.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
+ "lean_audit": {},
  "lean": {
   "module": "Sheaf.FieldTheory.FiniteDVRResidueNormalAction",
   "declaration": "IsDiscreteValuationRing.residue_normal_action",

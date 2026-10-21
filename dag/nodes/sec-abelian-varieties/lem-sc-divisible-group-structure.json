@@ -1,108 +1,83 @@
 {
-  "id": "lem-sc-divisible-group-structure",
-  "blueprint": {
-    "is": "lem-sc-divisible-group-structure",
-    "from": null,
-    "same_as": null
+ "id": "lem-sc-divisible-group-structure",
+ "blueprint": {
+  "is": "lem-sc-divisible-group-structure",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Structure of divisible abelian groups",
+ "statement": "Let $D$ be a divisible abelian group, $\\ell$ a prime and\n$r\\geq0$ an integer such that $D[\\ell]$ has order $\\ell^r$.\nThen $D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$ for every\n$n\\geq1$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-divisible-structure/lem-sc-divisible-group-structure.md",
+  "place": "node lem-sc-divisible-group-structure, order 574",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03RP"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "We prove by induction on $n$ that\n$D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$, using only\ndivisibility of $D$ and the given size of $D[\\ell]$. The case\n$n=1$ is the hypothesis: $D[\\ell]$ is a group killed by $\\ell$\nof order $\\ell^r$, hence $\\cong(\\mathbf Z/\\ell\\mathbf Z)^r$.",
+   "uses": [],
+   "elementary": null
   },
-  "kind": "statement",
-  "title": "Structure of divisible abelian groups",
-  "statement": "Let $D$ be a divisible abelian group, $\\ell$ a prime and\n$r\\geq0$ an integer such that $D[\\ell]$ has order $\\ell^r$.\nThen $D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$ for every\n$n\\geq1$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-divisible-structure/lem-sc-divisible-group-structure.md",
-    "place": "node lem-sc-divisible-group-structure, order 574",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 03RP"
-      }
-    ]
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "We prove by induction on $n$ that\n$D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$, using only\ndivisibility of $D$ and the given size of $D[\\ell]$. The case\n$n=1$ is the hypothesis: $D[\\ell]$ is a group killed by $\\ell$\nof order $\\ell^r$, hence $\\cong(\\mathbf Z/\\ell\\mathbf Z)^r$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "For the induction step, multiplication by $\\ell$ gives an exact\nsequence\n\n$$\n0\\longrightarrow D[\\ell]\\longrightarrow D[\\ell^{n+1}]\n\\xrightarrow{\\ \\ell\\ }D[\\ell^n]\\longrightarrow0,\n$$\n\nsurjective on the right by divisibility of $D$. By induction\n$D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$, so\n$D[\\ell^{n+1}]$ is a finite abelian $\\ell$-group of order\n$\\ell^r\\cdot\\ell^{nr}=\\ell^{(n+1)r}$ satisfying\n$\\ell\\cdot D[\\ell^{n+1}]=D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$\nand $D[\\ell^{n+1}][\\ell]=D[\\ell]\\cong(\\mathbf Z/\\ell\\mathbf Z)^r$.\nWrite $D[\\ell^{n+1}]\\cong\\bigoplus_i\\mathbf Z/\\ell^{a_i}\\mathbf Z$\n(classification of finite abelian $\\ell$-groups, $a_i\\leq n+1$).\nThe second condition says that the number of cyclic summands is\nexactly $r$ (the $\\ell$-torsion of $\\bigoplus_i\\mathbf Z/\\ell^{a_i}\\mathbf Z$ is $(\\mathbf Z/\\ell\\mathbf Z)^r$), and the\nfirst says that $\\ell\\cdot D[\\ell^{n+1}]$, which is\n$\\bigoplus_{a_i\\geq2}\\mathbf Z/\\ell^{a_i-1}\\mathbf Z$, is\n$\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$; hence there are exactly $r$\nsummands with $a_i\\geq2$, each with $a_i-1=n$. Therefore all\n$r$ summands have $a_i=n+1$, and\n$D[\\ell^{n+1}]\\cong(\\mathbf Z/\\ell^{n+1}\\mathbf Z)^r$.\n(*cf. the same induction in Stacks Project, Groupoid Schemes,\nProposition 39.9.11, [Tag 03RP](https://stacks.math.columbia.edu/tag/03RP), proof of part (7)*.)",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-divisible-structure/lem-sc-divisible-group-structure.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 574,
-  "blueprint_uses": [],
-  "lean": {
-    "module": "WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic",
-    "declaration": "AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq",
-    "branch": "slopmaster2",
-    "line": 153,
-    "sorry_free": true,
-    "body_lines": 44
-  },
-  "blueprint_lean": [
-    "AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq",
-          "module": "WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic",
-          "lines": [
-            217,
-            271
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-divisible-structure",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $D$ be a divisible abelian group, $\\ell$ a prime and\n$r\\geq0$ an integer such that $D[\\ell]$ has order $\\ell^r$.\nThen $D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$ for every\n$n\\geq0$.",
-    "proof": [
-      {
-        "text": "We prove by induction on $n$ that\n$D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$, using only\ndivisibility of $D$ and the given size of $D[\\ell]$. For $n=0$\nboth sides are trivial groups: $D[1]=0$ and\n$(\\mathbf Z/\\mathbf Z)^r=0$. The case\n$n=1$ is the hypothesis: $D[\\ell]$ is a group killed by $\\ell$\nof order $\\ell^r$, hence $\\cong(\\mathbf Z/\\ell\\mathbf Z)^r$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "For the induction step from $n\\geq1$ to $n+1$, multiplication by $\\ell$ gives an exact\nsequence\n\n$$\n0\\longrightarrow D[\\ell]\\longrightarrow D[\\ell^{n+1}]\n\\xrightarrow{\\ \\ell\\ }D[\\ell^n]\\longrightarrow0,\n$$\n\nsurjective on the right by divisibility of $D$. By induction\n$D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$, so\n$D[\\ell^{n+1}]$ is a finite abelian $\\ell$-group of order\n$\\ell^r\\cdot\\ell^{nr}=\\ell^{(n+1)r}$ satisfying\n$\\ell\\cdot D[\\ell^{n+1}]=D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$\nand $D[\\ell^{n+1}][\\ell]=D[\\ell]\\cong(\\mathbf Z/\\ell\\mathbf Z)^r$.\nWrite $D[\\ell^{n+1}]\\cong\\bigoplus_i\\mathbf Z/\\ell^{a_i}\\mathbf Z$\n(classification of finite abelian $\\ell$-groups, $a_i\\leq n+1$).\nThe second condition says that the number of cyclic summands is\nexactly $r$ (the $\\ell$-torsion of $\\bigoplus_i\\mathbf Z/\\ell^{a_i}\\mathbf Z$ is $(\\mathbf Z/\\ell\\mathbf Z)^r$), and the\nfirst says that $\\ell\\cdot D[\\ell^{n+1}]$, which is\n$\\bigoplus_{a_i\\geq2}\\mathbf Z/\\ell^{a_i-1}\\mathbf Z$, is\n$\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$; hence there are exactly $r$\nsummands with $a_i\\geq2$, each with $a_i-1=n$. Therefore all\n$r$ summands have $a_i=n+1$, and\n$D[\\ell^{n+1}]\\cong(\\mathbf Z/\\ell^{n+1}\\mathbf Z)^r$.\n(*cf. the same induction in Stacks Project, Groupoid Schemes,\nProposition 39.9.11, [Tag 03RP](https://stacks.math.columbia.edu/tag/03RP), proof of part (7)*.)",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For the induction step, multiplication by $\\ell$ gives an exact\nsequence\n\n$$\n0\\longrightarrow D[\\ell]\\longrightarrow D[\\ell^{n+1}]\n\\xrightarrow{\\ \\ell\\ }D[\\ell^n]\\longrightarrow0,\n$$\n\nsurjective on the right by divisibility of $D$. By induction\n$D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$, so\n$D[\\ell^{n+1}]$ is a finite abelian $\\ell$-group of order\n$\\ell^r\\cdot\\ell^{nr}=\\ell^{(n+1)r}$ satisfying\n$\\ell\\cdot D[\\ell^{n+1}]=D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$\nand $D[\\ell^{n+1}][\\ell]=D[\\ell]\\cong(\\mathbf Z/\\ell\\mathbf Z)^r$.\nWrite $D[\\ell^{n+1}]\\cong\\bigoplus_i\\mathbf Z/\\ell^{a_i}\\mathbf Z$\n(classification of finite abelian $\\ell$-groups, $a_i\\leq n+1$).\nThe second condition says that the number of cyclic summands is\nexactly $r$ (the $\\ell$-torsion of $\\bigoplus_i\\mathbf Z/\\ell^{a_i}\\mathbf Z$ is $(\\mathbf Z/\\ell\\mathbf Z)^r$), and the\nfirst says that $\\ell\\cdot D[\\ell^{n+1}]$, which is\n$\\bigoplus_{a_i\\geq2}\\mathbf Z/\\ell^{a_i-1}\\mathbf Z$, is\n$\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$; hence there are exactly $r$\nsummands with $a_i\\geq2$, each with $a_i-1=n$. Therefore all\n$r$ summands have $a_i=n+1$, and\n$D[\\ell^{n+1}]\\cong(\\mathbf Z/\\ell^{n+1}\\mathbf Z)^r$.\n(*cf. the same induction in Stacks Project, Groupoid Schemes,\nProposition 39.9.11, [Tag 03RP](https://stacks.math.columbia.edu/tag/03RP), proof of part (7)*.)",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-divisible-structure/lem-sc-divisible-group-structure.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 574,
+ "blueprint_uses": [],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic",
+  "declaration": "AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq",
+  "branch": "slopmaster2",
+  "line": 153,
+  "sorry_free": true,
+  "body_lines": 44
+ },
+ "blueprint_lean": [
+  "AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-divisible-structure",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $D$ be a divisible abelian group, $\\ell$ a prime and\n$r\\geq0$ an integer such that $D[\\ell]$ has order $\\ell^r$.\nThen $D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$ for every\n$n\\geq0$.",
+  "proof": [
+   {
+    "text": "We prove by induction on $n$ that\n$D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$, using only\ndivisibility of $D$ and the given size of $D[\\ell]$. For $n=0$\nboth sides are trivial groups: $D[1]=0$ and\n$(\\mathbf Z/\\mathbf Z)^r=0$. The case\n$n=1$ is the hypothesis: $D[\\ell]$ is a group killed by $\\ell$\nof order $\\ell^r$, hence $\\cong(\\mathbf Z/\\ell\\mathbf Z)^r$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "For the induction step from $n\\geq1$ to $n+1$, multiplication by $\\ell$ gives an exact\nsequence\n\n$$\n0\\longrightarrow D[\\ell]\\longrightarrow D[\\ell^{n+1}]\n\\xrightarrow{\\ \\ell\\ }D[\\ell^n]\\longrightarrow0,\n$$\n\nsurjective on the right by divisibility of $D$. By induction\n$D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$, so\n$D[\\ell^{n+1}]$ is a finite abelian $\\ell$-group of order\n$\\ell^r\\cdot\\ell^{nr}=\\ell^{(n+1)r}$ satisfying\n$\\ell\\cdot D[\\ell^{n+1}]=D[\\ell^n]\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$\nand $D[\\ell^{n+1}][\\ell]=D[\\ell]\\cong(\\mathbf Z/\\ell\\mathbf Z)^r$.\nWrite $D[\\ell^{n+1}]\\cong\\bigoplus_i\\mathbf Z/\\ell^{a_i}\\mathbf Z$\n(classification of finite abelian $\\ell$-groups, $a_i\\leq n+1$).\nThe second condition says that the number of cyclic summands is\nexactly $r$ (the $\\ell$-torsion of $\\bigoplus_i\\mathbf Z/\\ell^{a_i}\\mathbf Z$ is $(\\mathbf Z/\\ell\\mathbf Z)^r$), and the\nfirst says that $\\ell\\cdot D[\\ell^{n+1}]$, which is\n$\\bigoplus_{a_i\\geq2}\\mathbf Z/\\ell^{a_i-1}\\mathbf Z$, is\n$\\cong(\\mathbf Z/\\ell^n\\mathbf Z)^r$; hence there are exactly $r$\nsummands with $a_i\\geq2$, each with $a_i-1=n$. Therefore all\n$r$ summands have $a_i=n+1$, and\n$D[\\ell^{n+1}]\\cong(\\mathbf Z/\\ell^{n+1}\\mathbf Z)^r$.\n(*cf. the same induction in Stacks Project, Groupoid Schemes,\nProposition 39.9.11, [Tag 03RP](https://stacks.math.columbia.edu/tag/03RP), proof of part (7)*.)",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

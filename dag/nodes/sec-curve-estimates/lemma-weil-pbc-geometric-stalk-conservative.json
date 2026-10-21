@@ -1,133 +1,108 @@
 {
-  "id": "lemma-weil-pbc-geometric-stalk-conservative",
-  "blueprint": {
-    "is": "lemma-weil-pbc-geometric-stalk-conservative",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Conservativity of geometric stalks",
-  "statement": "A morphism of etale sheaves of abelian groups is an isomorphism if and only\nif it is an isomorphism at every geometric stalk\n[def-weil-pbc-geometric-stalks].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-geometric-stalk-conservative.md",
-    "place": "node lemma-weil-pbc-geometric-stalk-conservative, order 991"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-geometric-stalks",
-    "def-kun-separably-closed"
-  ],
-  "proof": [
-    {
-      "text": "The kernel and cokernel have zero geometric stalks by exactness of the stalk\nfunctors of [prop-weil-pbc-geometric-stalks-exact]. If a sheaf has zero\nstalks, every local section vanishes on an etale neighbourhood of each point,\nand quasi-compact refinement on an etale object makes it zero on a cover,\nhence zero by the sheaf axiom of [def-weil-pbc-etale-sheaves]; so kernel and\ncokernel vanish.",
-      "uses": [
-        "prop-weil-pbc-geometric-stalks-exact",
-        "def-weil-pbc-etale-sheaves"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lemma-weil-pbc-geometric-stalk-conservative",
+ "blueprint": {
+  "is": "lemma-weil-pbc-geometric-stalk-conservative",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Conservativity of geometric stalks",
+ "statement": "A morphism of etale sheaves of abelian groups is an isomorphism if and only\nif it is an isomorphism at every geometric stalk\n[def-weil-pbc-geometric-stalks].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-geometric-stalk-conservative.md",
+  "place": "node lemma-weil-pbc-geometric-stalk-conservative, order 991"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-kun-separably-closed"
+ ],
+ "proof": [
+  {
+   "text": "The kernel and cokernel have zero geometric stalks by exactness of the stalk\nfunctors of [prop-weil-pbc-geometric-stalks-exact]. If a sheaf has zero\nstalks, every local section vanishes on an etale neighbourhood of each point,\nand quasi-compact refinement on an etale object makes it zero on a cover,\nhence zero by the sheaf axiom of [def-weil-pbc-etale-sheaves]; so kernel and\ncokernel vanish.",
+   "uses": [
     "prop-weil-pbc-geometric-stalks-exact",
-    "def-weil-pbc-etale-sheaves",
-    "lemma-openclosed-point-ulift"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-geometric-stalk-conservative.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 991,
-  "blueprint_uses": [
-    "def-kun-separably-closed",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-geometric-stalks",
-    "lemma-openclosed-point-ulift",
-    "prop-weil-pbc-geometric-stalks-exact"
-  ],
-  "lean": {
-    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint",
-    "declaration": "AlgebraicGeometry.Scheme.isIso_of_isIso_sheafFiber_map",
-    "branch": "slopmaster2",
-    "line": 173,
-    "sorry_free": true,
-    "body_lines": 4
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.Scheme.isIso_of_isIso_sheafFiber_map"
-  ],
-  "uses_not_cited": [
-    "def-kun-separably-closed",
-    "lemma-openclosed-point-ulift"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "A morphism of etale abelian sheaves is an isomorphism if and only if it is an\nisomorphism at every geometric stalk.",
-      "proof": "The kernel and cokernel have zero geometric stalks. If a sheaf has zero\nstalks, every local section vanishes on an etale neighbourhood of each point;\nquasi-compact refinement on an etale object makes it locally zero on a cover,\nhence zero by the sheaf axiom. Thus kernel and cokernel vanish.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Scheme.isIso_of_isIso_sheafFiber_map"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.isIso_of_isIso_sheafFiber_map",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint",
-          "lines": [
-            171,
-            179
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $S$ be a scheme and let $\\mathcal A$ be a category with all (small)\ncolimits which is concrete over sets, with a forgetful functor that reflects\nisomorphisms, preserves filtered colimits and is compatible with the sheaf\ncondition on $S_{\\Et}$ (for instance etale sheaves of abelian groups or of\n$\\Lambda$-modules). For each point $s\\in S$ let $\\bar s$ be the geometric point\nat an algebraic closure of $\\kappa(s)$. A morphism $\\varphi:F\\to G$ of\n$\\mathcal A$-valued etale sheaves on $S$ is an isomorphism if the induced map\nof geometric stalks [def-weil-pbc-geometric-stalks]\n$\\varphi_{\\bar s}:F_{\\bar s}\\to G_{\\bar s}$ is an isomorphism for every\n$s\\in S$.",
-    "proof": [
-      {
-        "text": "Write $\\underline F$, $\\underline G$ for the sheaves of sets obtained by\ncomposing $F$, $G$ with the forgetful functor of $\\mathcal A$; they are\nsheaves by the compatibility of the forgetful functor with the sheaf\ncondition, and $\\varphi$ induces $\\underline\\varphi:\\underline F\\to\\underline G$.\nA geometric stalk is a colimit over the opposite of the cofiltered category of\npointed etale neighbourhoods [def-weil-pbc-geometric-stalks], i.e. a filtered\ncolimit, and the forgetful functor preserves filtered colimits; so the\nunderlying set of $F_{\\bar s}$ is the stalk $\\underline F_{\\bar s}$, and\n$\\underline\\varphi_{\\bar s}$ is a bijection for every $s\\in S$. Passing to a\nlarger universe of sets does not change these stalks\n([lemma-openclosed-point-ulift]).\n\nLet $u:U\\to S$ be etale and $x\\in U$ with $s=u(x)$. Since $\\kappa(x)$ is a\nfinite separable extension of $\\kappa(s)$, it embeds over $\\kappa(s)$ into the\nalgebraic closure $\\overline{\\kappa(s)}$ (which is in particular separably\nclosed, [def-kun-separably-closed]); this gives a geometric point $\\bar x$ of\n$U$ at $x$ lying over $\\bar s$, so $(U,\\bar x)$ is a pointed etale\nneighbourhood of $\\bar s$.",
-        "uses": [
-          "def-weil-pbc-geometric-stalks",
-          "lemma-openclosed-point-ulift",
-          "def-kun-separably-closed"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Injectivity on sections.* Let $a,b\\in\\underline F(U)$ with\n$\\underline\\varphi(a)=\\underline\\varphi(b)$. For each $x\\in U$ as above, the\ngerms of $a$ and $b$ in $\\underline F_{\\bar s}$ have the same image under the\nbijection $\\underline\\varphi_{\\bar s}$, so they agree; hence $a$ and $b$\nagree on some pointed etale neighbourhood $(V_x,\\bar v_x)\\to(U,\\bar x)$. The\nimages of the $V_x\\to U$ contain every point of $U$, so $\\{V_x\\to U\\}$ is an\netale covering, and $a=b$ by the sheaf axiom.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Surjectivity on sections.* Let $c\\in\\underline G(U)$. For each $x\\in U$ the\ngerm of $c$ at $\\bar s$ (through $(U,\\bar x)$) is the image of a germ of\n$\\underline F$, so there are a pointed etale neighbourhood\n$(V_x,\\bar v_x)\\to(U,\\bar x)$ and $a_x\\in\\underline F(V_x)$ with\n$\\underline\\varphi(a_x)=c|_{V_x}$. On $V_x\\times_UV_{x'}$, which is etale over\n$S$, the restrictions of $a_x$ and $a_{x'}$ have the same image $c$, so they\nagree by injectivity. As $\\{V_x\\to U\\}$ is an etale covering, the $a_x$ glue\nto $a\\in\\underline F(U)$, and $\\underline\\varphi(a)=c$ by the sheaf axiom for\n$\\underline G$.\n\nHence the underlying map of sets of $\\varphi_U:F(U)\\to G(U)$ is bijective for\nevery etale $U\\to S$. The forgetful functor reflects isomorphisms, so every\n$\\varphi_U$ is an isomorphism in $\\mathcal A$, and $\\varphi$ is an isomorphism\nof sheaves.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-geometric-stalks-exact",
+  "def-weil-pbc-etale-sheaves",
+  "lemma-openclosed-point-ulift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-geometric-stalk-conservative.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 991,
+ "blueprint_uses": [
+  "def-kun-separably-closed",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "lemma-openclosed-point-ulift",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_of_isIso_sheafFiber_map",
+  "branch": "slopmaster2",
+  "line": 173,
+  "sorry_free": true,
+  "body_lines": 4
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.isIso_of_isIso_sheafFiber_map"
+ ],
+ "uses_not_cited": [
+  "def-kun-separably-closed",
+  "lemma-openclosed-point-ulift"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "A morphism of etale abelian sheaves is an isomorphism if and only if it is an\nisomorphism at every geometric stalk.",
+   "proof": "The kernel and cokernel have zero geometric stalks. If a sheaf has zero\nstalks, every local section vanishes on an etale neighbourhood of each point;\nquasi-compact refinement on an etale object makes it locally zero on a cover,\nhence zero by the sheaf axiom. Thus kernel and cokernel vanish.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $S$ be a scheme and let $\\mathcal A$ be a category with all (small)\ncolimits which is concrete over sets, with a forgetful functor that reflects\nisomorphisms, preserves filtered colimits and is compatible with the sheaf\ncondition on $S_{\\Et}$ (for instance etale sheaves of abelian groups or of\n$\\Lambda$-modules). For each point $s\\in S$ let $\\bar s$ be the geometric point\nat an algebraic closure of $\\kappa(s)$. A morphism $\\varphi:F\\to G$ of\n$\\mathcal A$-valued etale sheaves on $S$ is an isomorphism if the induced map\nof geometric stalks [def-weil-pbc-geometric-stalks]\n$\\varphi_{\\bar s}:F_{\\bar s}\\to G_{\\bar s}$ is an isomorphism for every\n$s\\in S$.",
+  "proof": [
+   {
+    "text": "Write $\\underline F$, $\\underline G$ for the sheaves of sets obtained by\ncomposing $F$, $G$ with the forgetful functor of $\\mathcal A$; they are\nsheaves by the compatibility of the forgetful functor with the sheaf\ncondition, and $\\varphi$ induces $\\underline\\varphi:\\underline F\\to\\underline G$.\nA geometric stalk is a colimit over the opposite of the cofiltered category of\npointed etale neighbourhoods [def-weil-pbc-geometric-stalks], i.e. a filtered\ncolimit, and the forgetful functor preserves filtered colimits; so the\nunderlying set of $F_{\\bar s}$ is the stalk $\\underline F_{\\bar s}$, and\n$\\underline\\varphi_{\\bar s}$ is a bijection for every $s\\in S$. Passing to a\nlarger universe of sets does not change these stalks\n([lemma-openclosed-point-ulift]).\n\nLet $u:U\\to S$ be etale and $x\\in U$ with $s=u(x)$. Since $\\kappa(x)$ is a\nfinite separable extension of $\\kappa(s)$, it embeds over $\\kappa(s)$ into the\nalgebraic closure $\\overline{\\kappa(s)}$ (which is in particular separably\nclosed, [def-kun-separably-closed]); this gives a geometric point $\\bar x$ of\n$U$ at $x$ lying over $\\bar s$, so $(U,\\bar x)$ is a pointed etale\nneighbourhood of $\\bar s$.",
+    "uses": [
+     "def-weil-pbc-geometric-stalks",
+     "lemma-openclosed-point-ulift",
+     "def-kun-separably-closed"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Injectivity on sections.* Let $a,b\\in\\underline F(U)$ with\n$\\underline\\varphi(a)=\\underline\\varphi(b)$. For each $x\\in U$ as above, the\ngerms of $a$ and $b$ in $\\underline F_{\\bar s}$ have the same image under the\nbijection $\\underline\\varphi_{\\bar s}$, so they agree; hence $a$ and $b$\nagree on some pointed etale neighbourhood $(V_x,\\bar v_x)\\to(U,\\bar x)$. The\nimages of the $V_x\\to U$ contain every point of $U$, so $\\{V_x\\to U\\}$ is an\netale covering, and $a=b$ by the sheaf axiom.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Surjectivity on sections.* Let $c\\in\\underline G(U)$. For each $x\\in U$ the\ngerm of $c$ at $\\bar s$ (through $(U,\\bar x)$) is the image of a germ of\n$\\underline F$, so there are a pointed etale neighbourhood\n$(V_x,\\bar v_x)\\to(U,\\bar x)$ and $a_x\\in\\underline F(V_x)$ with\n$\\underline\\varphi(a_x)=c|_{V_x}$. On $V_x\\times_UV_{x'}$, which is etale over\n$S$, the restrictions of $a_x$ and $a_{x'}$ have the same image $c$, so they\nagree by injectivity. As $\\{V_x\\to U\\}$ is an etale covering, the $a_x$ glue\nto $a\\in\\underline F(U)$, and $\\underline\\varphi(a)=c$ by the sheaf axiom for\n$\\underline G$.\n\nHence the underlying map of sets of $\\varphi_U:F(U)\\to G(U)$ is bijective for\nevery etale $U\\to S$. The forgetful functor reflects isomorphisms, so every\n$\\varphi_U$ is an isomorphism in $\\mathcal A$, and $\\varphi$ is an isomorphism\nof sheaves.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

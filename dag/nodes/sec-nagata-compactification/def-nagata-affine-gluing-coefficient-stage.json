@@ -1,268 +1,257 @@
 {
-  "id": "def-nagata-affine-gluing-coefficient-stage",
-  "blueprint": {
-    "is": "def-nagata-affine-gluing-coefficient-stage",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "definition",
-  "title": "Coefficient stage of an affine gluing presentation",
-  "statement": "The following explicit compatible coefficient-system and selected-stage construction is well defined. Let $S$ be a quasi-compact quasi-separated scheme with a selected finite affine gluing presentation $\\mathsf G_S$ [def-nagata-finite-affine-gluing-presentation]. Retain every choice in that record, and fix the finite additional marked basic-open refinements used in [def-nagata-finite-affine-subring-model]. Denote the resulting finite set of marked affine opens by $\\mathcal C$ and put $A_P=\\Gamma(P,\\mathcal O_S)$. The initial finite seed consists of every marked basic-open element and its recorded restrictions; finitely many additional coefficients may be included. No compatible small ring map is supplied as an extra hypothesis.\n\nThe coefficient index set is defined by an explicit subset of a product of sets of subrings:\n$$\nI(\\mathsf G_S)=\\{(B_P)_{P\\in\\mathcal C}\\mid (B_P)_P\\text{ is a finite affine subring model of the marked record}\\}.\n$$\nThe notion of model is exactly [def-nagata-finite-affine-subring-model]. Its rings are actual finitely generated integer subrings of $A_P$, its maps are restrictions of the original maps, and all its marked covers and gluing equations are properties of that tuple. Order this set by componentwise inclusion. For every index $i$ write $B_{P,i}$ for its $P$-component. For $i\\leq j$, the transition $B_{P,i}\\to B_{P,j}$ is literal inclusion. On each marked localization it is\n$$b/f^m\\longmapsto b/f^m.$$\nFor a restricted comparison $\\phi$, the two transition composites agree because both send $b/f^m$ to $\\phi(b)/\\phi(f)^m$ in the same original localized ring. There is no extension of a comparison map to an arbitrary product-of-finite-subsets index.\n\nThe set $I(\\mathsf G_S)$ is nonempty and directed, contains a model above every finite seed in all the marked rings, and satisfies\n$$\\bigcup_{i\\in I(\\mathsf G_S)}B_{P,i}=A_P$$\nfor every marked affine $P$. In particular the following auxiliary selections are possible.\n\nAs in [def-nagata-directed-finite-upper-bound], fix a base index $i_\\varnothing$, a binary common-bound function $d$ on this constructed directed set, and an auxiliary linear order. These are the auxiliary selection parameters of the construction, not rings or maps extracted from an unspecified existence witness. Partition the finite seed by assigning each marked affine $P$ to one main chart $U_a$ containing it. Let $E^{(a)}$ be the family equal to $E_P$ at the marked affines assigned to $a$ and empty elsewhere. For each such finite seed family fix an index $i_a$ containing $E^{(a)}$; the seed-containment assertion just established ensures these choices are possible. With all selections fixed, define\n$$\\lambda_{\\mathrm{coeff}}(S)=u(\\{i_\\varnothing\\}\\cup\\{i_a\\mid 1\\leq a\\leq n\\}).$$\nEvery selected $i_a$ is below this bound, so all the finite seed coefficients belong to the tuple at that stage. Define $\\mathsf G^{\\mathrm{raw}}_{S,\\lambda_{\\mathrm{coeff}}}$ by evaluating the tuple, marked elements, restrictions and localized comparisons at that index. More generally the same evaluation defines $\\mathsf G^{\\mathrm{raw}}_{S,j}$ at every $j\\geq\\lambda_{\\mathrm{coeff}}$; its maps to an earlier record are the just-defined inclusions on rings and their contravariant spectrum maps [def-weil-affine-spectrum]. The raw record already satisfies the gluing equations because its index is a model. Its main-chart tuple is in particular a raw coefficient tuple in [def-nagata-affine-raw-refinement-system] for the later valid-stage construction; that construction may use its separately specified raw-refinement preorder, which need not consist of full models of this marked record.\n\nFor a marked inclusion $P\\subseteq Q$, refinement squares of marked open immersions are pullbacks [def-pc-fibre-product], and preserve the overlap as an inverse image. Indeed, the image at either index is the same prescribed union $\\bigcup_{f\\in F_{PQ}}D(f)$, and inverse image of $D(f)$ under a spectrum map is $D(f)$. On each such piece, both the refined open and the inverse-image open have ring $B_{Q,j}[1/f]$, by the model's localization isomorphisms. These identifications agree on intersections since they send the same fraction to itself. With $B_{Q,j}$ replaced by $A_Q$, the identical description recovers $P\\subseteq Q$ in the original scheme. Thus 'pullback of the raw datum to a later stage' means this explicitly compatible refinement on every marked open, not tensoring unrelated chart algebras or assuming a common coefficient base ring. Empty covers, empty seed sets, zero rings and empty basic opens are included.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-affine-gluing-coefficient-stage.md",
-    "place": "node def-nagata-affine-gluing-coefficient-stage, order 334"
-  },
-  "stmt_deps": [
-    "def-nagata-finite-affine-gluing-presentation",
-    "def-nagata-finite-affine-subring-model",
-    "def-nagata-directed-finite-upper-bound",
-    "def-weil-affine-spectrum",
-    "def-pc-fibre-product",
-    "def-nagata-affine-raw-refinement-system"
-  ],
-  "proof": [
-    {
-      "text": "Each marked $A_P$ is a set, so its subrings form a set and the finite product of these sets is a set. The model predicate cuts out an explicit subset $I$. Componentwise inclusion is reflexive, transitive and antisymmetric. For $i\\leq j$ define the chart transition by inclusion. Every restricted comparison and its reverse is already specified by the model predicate, not chosen from a generator assignment. In the original localized ring both orders of composing a comparison with a transition send $b/f^m$ to $\\phi(b)/\\phi(f)^m$. The maps therefore commute. Localized subrings are identified with their images as in the model definition; injectivity between the small and original localizations follows directly because $f^k b=0$ in the original ring is the same equality of elements of its subring. Spectrum maps reverse the ring maps functorially.",
-      "uses": [
-        "def-nagata-finite-affine-subring-model",
-        "def-nagata-finite-affine-gluing-presentation",
-        "def-weil-affine-spectrum"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Tags 07RN and 01Z7: actual subalgebras and containment maps; elementary finite-record packaging."
-      }
-    },
-    {
-      "text": "The choices in the following selected-bound construction are available by finite induction using [lem-nagata-one-affine-subring-extension]. More explicitly, order the main affine charts $U_1,\\ldots,U_n$ and let $V_m=U_1\\cup\\cdots\\cup U_m$. Each $V_m$ is quasi-compact as a finite union of quasi-compact affine opens. Its diagonal is the restriction of the diagonal of $S$ over the open $V_m\\times_{\\operatorname{Spec}\\mathbf Z}V_m$; the inverse image of any quasi-compact open there is the same inverse image under the diagonal of $S$, hence quasi-compact by [def-weil-quasi-separated-morphism]. Thus $V_m$ is quasi-separated, as required for the lemma. Assign each marked auxiliary affine to a main chart containing it, and retain in the prefix record the assigned affines, restrictions, covers and equations involving the prefix charts. Fix any finite basic-open refinements needed to make these prefix records gluing presentations before the induction. There are only finitely many prefixes. At $m=0$ the empty record has the single empty tuple; no auxiliary affine is assigned to an empty list of main charts. Maintain the assertion that the set of models of the prefix record is nonempty, directed by containment, and contains a model above any finite seed in its marked rings. At the step $V_m=V_{m-1}\\cup U_m$, apply that lemma to the entire prefix family and an arbitrary finite seed of the new record. The prefix family exhausts every old marked ring: each single element is itself a finite seed. Choose any old index $i_0$, available by nonemptiness. The lemma therefore applies and supplies a model containing the new seed and the selected old tuple. Taking the seed empty proves nonemptiness. To dominate two models, take, in each of the finitely many marked rings, the union of finite generating sets of their two subrings; a model containing this finite seed contains both models. This proves the induction assertion at $m$ and hence at $n$. In particular\n$$\\bigcup_{i\\in I(\\mathsf G_S)}B_{P,i}=A_P$$\nfor every marked affine $P$. This induction uses the one-affine-open extension statement, not a termination claim for arbitrary fraction representatives or the global absolute-approximation conclusion.",
-      "uses": [
-        "lem-nagata-one-affine-subring-extension",
-        "def-nagata-finite-affine-subring-model",
-        "def-nagata-finite-affine-gluing-presentation",
-        "def-weil-quasi-separated-morphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Tag 07RN (lemma-approximate), induction by adjoining one affine open; Tag 01Z7 for arbitrary prescribed finite seeds."
-      }
-    },
-    {
-      "text": "For a marked inclusion $P\\subseteq Q$, the small open in $\\operatorname{Spec}(B_{Q,i})$ is the prescribed union of $D(f)$ with $f\\in F_{PQ}$. If $\\mathfrak p$ is a prime of $B_{Q,j}$, then $f\\notin\\mathfrak p\\cap B_{Q,i}$ if and only if $f\\notin\\mathfrak p$. Its inverse image is consequently the same union of $D(f)$ at $j$. The model's unit-ideal condition covers $\\operatorname{Spec}(B_{P,i})$ and $\\operatorname{Spec}(B_{P,j})$ by the corresponding pieces; its localization isomorphisms identify the restrictions of the two open maps with precisely these basic opens. The restriction maps on each piece and on intersections send the same fractions to themselves. Thus both squares identify with the inclusion of this inverse-image open, which is exactly the pullback square for open immersions [def-weil-open-immersion]. This proves the asserted compatibility for the whole finite record, including the unions defining nonaffine overlap domains. The same computation with $A_Q$ instead of $B_{Q,j}$ recovers the original marked open. Explicitly, any compatible pair of maps from a scheme $T$ into the two vertices of such a square has its map into the later main chart landing in that inverse-image open. The required factorization into the smaller later open is its restriction to this open, and is unique since an open immersion identifies the domain with an open subscheme. This is the cited definition's pullback universal property.",
-      "uses": [
-        "def-nagata-finite-affine-subring-model",
-        "def-nagata-finite-affine-gluing-presentation",
-        "def-weil-affine-spectrum",
-        "def-pc-fibre-product",
-        "def-weil-open-immersion"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Tag 07RN: affine transition and open-immersion compatibility; the displayed basic-open inverse-image computation is elementary from the chosen record."
-      }
-    },
-    {
-      "text": "By step 2 every finite seed family $E^{(a)}$ is contained in some index $i_a$. The index set is nonempty and directed by that step, so fix the auxiliary bound selections and linear order of the cited upper-bound definition. The finite set $\\{i_\\varnothing\\}\\cup\\{i_a:1\\leq a\\leq n\\}$ has the specified fold $u$. The cited upper-bound lemma gives $i_a\\leq\\lambda_{\\mathrm{coeff}}$ for every $a$. Since the order is componentwise containment, every element of each $E^{(a)}$ belongs to its component at $\\lambda_{\\mathrm{coeff}}$. The families partition all the marked seed components, including the auxiliary affine rings. The assertion follows also when $n=0$, where the index and its empty tuple are unique.",
-      "uses": [
-        "def-nagata-directed-finite-upper-bound",
-        "lemma-nagata-directed-finite-upper-bound",
-        "def-nagata-finite-affine-subring-model"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Finite bound selection is the blueprint order-328 convention applied to the compatible subring set constructed using 07RN."
-      }
-    },
-    {
-      "text": "Evaluate the already specified subring tuple and its restrictions at $\\lambda_{\\mathrm{coeff}}$ to define the raw datum. Modelhood requires all marked covering, overlap-domain, identity, inverse, open-preservation and triple-cocycle conditions, so these hold at this stage. For every later index $j$ the same evaluation defines another raw datum; step 1 supplies its transition maps and step 3 its pullback identifications on marked opens. Hence equations and their displayed domains remain valid there. Original comparison maps are recovered after the canonical identifications with the original marked open rings in step 3, since all maps are restrictions of the original maps. For the later valid-stage construction, retain the main-chart tuple and the restrictions to its labelled principal-open pieces. These satisfy its raw-input containment condition because the model comparison maps are restrictions of the original maps. That node defines its own raw-refinement preorder above this tuple. No claim is made here that every object of that larger raw preorder satisfies modelhood; its open-domain certificates are handled in that node. All rings, all stages and all maps of the claimed construction have now been explicitly defined, and their needed properties proved.",
-      "uses": [
-        "def-nagata-finite-affine-subring-model",
-        "def-nagata-finite-affine-gluing-presentation",
-        "def-weil-affine-spectrum",
-        "def-nagata-affine-raw-refinement-system"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/limits.tex",
-        "place": "Tags 07RN and 01Z7: evaluate the compatible finite model; finite gluing data retain their equations under refinement."
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "def-nagata-affine-gluing-coefficient-stage",
+ "blueprint": {
+  "is": "def-nagata-affine-gluing-coefficient-stage",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Coefficient stage of an affine gluing presentation",
+ "statement": "The following explicit compatible coefficient-system and selected-stage construction is well defined. Let $S$ be a quasi-compact quasi-separated scheme with a selected finite affine gluing presentation $\\mathsf G_S$ [def-nagata-finite-affine-gluing-presentation]. Retain every choice in that record, and fix the finite additional marked basic-open refinements used in [def-nagata-finite-affine-subring-model]. Denote the resulting finite set of marked affine opens by $\\mathcal C$ and put $A_P=\\Gamma(P,\\mathcal O_S)$. The initial finite seed consists of every marked basic-open element and its recorded restrictions; finitely many additional coefficients may be included. No compatible small ring map is supplied as an extra hypothesis.\n\nThe coefficient index set is defined by an explicit subset of a product of sets of subrings:\n$$\nI(\\mathsf G_S)=\\{(B_P)_{P\\in\\mathcal C}\\mid (B_P)_P\\text{ is a finite affine subring model of the marked record}\\}.\n$$\nThe notion of model is exactly [def-nagata-finite-affine-subring-model]. Its rings are actual finitely generated integer subrings of $A_P$, its maps are restrictions of the original maps, and all its marked covers and gluing equations are properties of that tuple. Order this set by componentwise inclusion. For every index $i$ write $B_{P,i}$ for its $P$-component. For $i\\leq j$, the transition $B_{P,i}\\to B_{P,j}$ is literal inclusion. On each marked localization it is\n$$b/f^m\\longmapsto b/f^m.$$\nFor a restricted comparison $\\phi$, the two transition composites agree because both send $b/f^m$ to $\\phi(b)/\\phi(f)^m$ in the same original localized ring. There is no extension of a comparison map to an arbitrary product-of-finite-subsets index.\n\nThe set $I(\\mathsf G_S)$ is nonempty and directed, contains a model above every finite seed in all the marked rings, and satisfies\n$$\\bigcup_{i\\in I(\\mathsf G_S)}B_{P,i}=A_P$$\nfor every marked affine $P$. In particular the following auxiliary selections are possible.\n\nAs in [def-nagata-directed-finite-upper-bound], fix a base index $i_\\varnothing$, a binary common-bound function $d$ on this constructed directed set, and an auxiliary linear order. These are the auxiliary selection parameters of the construction, not rings or maps extracted from an unspecified existence witness. Partition the finite seed by assigning each marked affine $P$ to one main chart $U_a$ containing it. Let $E^{(a)}$ be the family equal to $E_P$ at the marked affines assigned to $a$ and empty elsewhere. For each such finite seed family fix an index $i_a$ containing $E^{(a)}$; the seed-containment assertion just established ensures these choices are possible. With all selections fixed, define\n$$\\lambda_{\\mathrm{coeff}}(S)=u(\\{i_\\varnothing\\}\\cup\\{i_a\\mid 1\\leq a\\leq n\\}).$$\nEvery selected $i_a$ is below this bound, so all the finite seed coefficients belong to the tuple at that stage. Define $\\mathsf G^{\\mathrm{raw}}_{S,\\lambda_{\\mathrm{coeff}}}$ by evaluating the tuple, marked elements, restrictions and localized comparisons at that index. More generally the same evaluation defines $\\mathsf G^{\\mathrm{raw}}_{S,j}$ at every $j\\geq\\lambda_{\\mathrm{coeff}}$; its maps to an earlier record are the just-defined inclusions on rings and their contravariant spectrum maps [def-weil-affine-spectrum]. The raw record already satisfies the gluing equations because its index is a model. Its main-chart tuple is in particular a raw coefficient tuple in [def-nagata-affine-raw-refinement-system] for the later valid-stage construction; that construction may use its separately specified raw-refinement preorder, which need not consist of full models of this marked record.\n\nFor a marked inclusion $P\\subseteq Q$, refinement squares of marked open immersions are pullbacks [def-pc-fibre-product], and preserve the overlap as an inverse image. Indeed, the image at either index is the same prescribed union $\\bigcup_{f\\in F_{PQ}}D(f)$, and inverse image of $D(f)$ under a spectrum map is $D(f)$. On each such piece, both the refined open and the inverse-image open have ring $B_{Q,j}[1/f]$, by the model's localization isomorphisms. These identifications agree on intersections since they send the same fraction to itself. With $B_{Q,j}$ replaced by $A_Q$, the identical description recovers $P\\subseteq Q$ in the original scheme. Thus 'pullback of the raw datum to a later stage' means this explicitly compatible refinement on every marked open, not tensoring unrelated chart algebras or assuming a common coefficient base ring. Empty covers, empty seed sets, zero rings and empty basic opens are included.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-approximation/def-nagata-affine-gluing-coefficient-stage.md",
+  "place": "node def-nagata-affine-gluing-coefficient-stage, order 334"
+ },
+ "stmt_deps": [
+  "def-nagata-finite-affine-gluing-presentation",
+  "def-nagata-finite-affine-subring-model",
+  "def-nagata-directed-finite-upper-bound",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-nagata-affine-raw-refinement-system"
+ ],
+ "proof": [
+  {
+   "text": "Each marked $A_P$ is a set, so its subrings form a set and the finite product of these sets is a set. The model predicate cuts out an explicit subset $I$. Componentwise inclusion is reflexive, transitive and antisymmetric. For $i\\leq j$ define the chart transition by inclusion. Every restricted comparison and its reverse is already specified by the model predicate, not chosen from a generator assignment. In the original localized ring both orders of composing a comparison with a transition send $b/f^m$ to $\\phi(b)/\\phi(f)^m$. The maps therefore commute. Localized subrings are identified with their images as in the model definition; injectivity between the small and original localizations follows directly because $f^k b=0$ in the original ring is the same equality of elements of its subring. Spectrum maps reverse the ring maps functorially.",
+   "uses": [
     "def-nagata-finite-affine-subring-model",
     "def-nagata-finite-affine-gluing-presentation",
-    "def-weil-affine-spectrum",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 07RN and 01Z7: actual subalgebras and containment maps; elementary finite-record packaging."
+   }
+  },
+  {
+   "text": "The choices in the following selected-bound construction are available by finite induction using [lem-nagata-one-affine-subring-extension]. More explicitly, order the main affine charts $U_1,\\ldots,U_n$ and let $V_m=U_1\\cup\\cdots\\cup U_m$. Each $V_m$ is quasi-compact as a finite union of quasi-compact affine opens. Its diagonal is the restriction of the diagonal of $S$ over the open $V_m\\times_{\\operatorname{Spec}\\mathbf Z}V_m$; the inverse image of any quasi-compact open there is the same inverse image under the diagonal of $S$, hence quasi-compact by [def-weil-quasi-separated-morphism]. Thus $V_m$ is quasi-separated, as required for the lemma. Assign each marked auxiliary affine to a main chart containing it, and retain in the prefix record the assigned affines, restrictions, covers and equations involving the prefix charts. Fix any finite basic-open refinements needed to make these prefix records gluing presentations before the induction. There are only finitely many prefixes. At $m=0$ the empty record has the single empty tuple; no auxiliary affine is assigned to an empty list of main charts. Maintain the assertion that the set of models of the prefix record is nonempty, directed by containment, and contains a model above any finite seed in its marked rings. At the step $V_m=V_{m-1}\\cup U_m$, apply that lemma to the entire prefix family and an arbitrary finite seed of the new record. The prefix family exhausts every old marked ring: each single element is itself a finite seed. Choose any old index $i_0$, available by nonemptiness. The lemma therefore applies and supplies a model containing the new seed and the selected old tuple. Taking the seed empty proves nonemptiness. To dominate two models, take, in each of the finitely many marked rings, the union of finite generating sets of their two subrings; a model containing this finite seed contains both models. This proves the induction assertion at $m$ and hence at $n$. In particular\n$$\\bigcup_{i\\in I(\\mathsf G_S)}B_{P,i}=A_P$$\nfor every marked affine $P$. This induction uses the one-affine-open extension statement, not a termination claim for arbitrary fraction representatives or the global absolute-approximation conclusion.",
+   "uses": [
     "lem-nagata-one-affine-subring-extension",
-    "def-weil-quasi-separated-morphism",
+    "def-nagata-finite-affine-subring-model",
+    "def-nagata-finite-affine-gluing-presentation",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN (lemma-approximate), induction by adjoining one affine open; Tag 01Z7 for arbitrary prescribed finite seeds."
+   }
+  },
+  {
+   "text": "For a marked inclusion $P\\subseteq Q$, the small open in $\\operatorname{Spec}(B_{Q,i})$ is the prescribed union of $D(f)$ with $f\\in F_{PQ}$. If $\\mathfrak p$ is a prime of $B_{Q,j}$, then $f\\notin\\mathfrak p\\cap B_{Q,i}$ if and only if $f\\notin\\mathfrak p$. Its inverse image is consequently the same union of $D(f)$ at $j$. The model's unit-ideal condition covers $\\operatorname{Spec}(B_{P,i})$ and $\\operatorname{Spec}(B_{P,j})$ by the corresponding pieces; its localization isomorphisms identify the restrictions of the two open maps with precisely these basic opens. The restriction maps on each piece and on intersections send the same fractions to themselves. Thus both squares identify with the inclusion of this inverse-image open, which is exactly the pullback square for open immersions [def-weil-open-immersion]. This proves the asserted compatibility for the whole finite record, including the unions defining nonaffine overlap domains. The same computation with $A_Q$ instead of $B_{Q,j}$ recovers the original marked open. Explicitly, any compatible pair of maps from a scheme $T$ into the two vertices of such a square has its map into the later main chart landing in that inverse-image open. The required factorization into the smaller later open is its restriction to this open, and is unique since an open immersion identifies the domain with an open subscheme. This is the cited definition's pullback universal property.",
+   "uses": [
+    "def-nagata-finite-affine-subring-model",
+    "def-nagata-finite-affine-gluing-presentation",
+    "def-weil-affine-spectrum",
     "def-pc-fibre-product",
-    "def-weil-open-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 07RN: affine transition and open-immersion compatibility; the displayed basic-open inverse-image computation is elementary from the chosen record."
+   }
+  },
+  {
+   "text": "By step 2 every finite seed family $E^{(a)}$ is contained in some index $i_a$. The index set is nonempty and directed by that step, so fix the auxiliary bound selections and linear order of the cited upper-bound definition. The finite set $\\{i_\\varnothing\\}\\cup\\{i_a:1\\leq a\\leq n\\}$ has the specified fold $u$. The cited upper-bound lemma gives $i_a\\leq\\lambda_{\\mathrm{coeff}}$ for every $a$. Since the order is componentwise containment, every element of each $E^{(a)}$ belongs to its component at $\\lambda_{\\mathrm{coeff}}$. The families partition all the marked seed components, including the auxiliary affine rings. The assertion follows also when $n=0$, where the index and its empty tuple are unique.",
+   "uses": [
     "def-nagata-directed-finite-upper-bound",
     "lemma-nagata-directed-finite-upper-bound",
-    "def-nagata-affine-raw-refinement-system"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "def-nagata-finite-affine-subring-model"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tags 07RN and 01Z7, finite-affine-cover induction adapted to the explicitly marked subring-system construction; selected-bound convention from blueprint order 328."
+    "place": "Finite bound selection is the blueprint order-328 convention applied to the compatible subring set constructed using 07RN."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "finite coefficient subalgebras of rings in affine gluing data for absolute approximation of a scheme",
-      "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.Scheme.AffineCover.obj; AlgebraicGeometry.Scheme.AffineCover.X; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
-      "date": "2026-10-16",
-      "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
-    },
-    {
-      "tool": "loogle",
-      "query": "Algebra.FiniteType, Subalgebra",
-      "results": "Subalgebra.fg_iff_finiteType; Algebra.FiniteType.adjoin_of_finite; Algebra.FiniteType.instSubtypeMemSubalgebraAdjoinOfFiniteElem; Algebra.FiniteType.mk; Algebra.FiniteType.out; AddMonoidAlgebra.exists_finset_adjoin_eq_top; MonoidAlgebra.exists_finset_adjoin_eq_top; Algebra.instFiniteTypeSubtypeMemSubalgebraSubalgebra",
-      "date": "2026-10-16",
-      "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
-    },
-    {
-      "tool": "grep",
-      "query": "coefficient.*gluing|gluing.*coefficient|finite.*subalgebra",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
-    },
-    {
-      "tool": "leansearch",
-      "query": "choose finite type subalgebras of affine chart rings containing all coefficients of finitely many overlap maps",
-      "results": "Subalgebra.FG; Subalgebra.fg_iff_finiteType; RingHom.FiniteType; Algebra.EssFiniteType.subalgebra; AlgebraicGeometry.LocallyOfFiniteType.mk; Algebra.FiniteType.mk; AlgHom.FiniteType; Algebra.SubmersivePresentation.HasCoeffs.mk",
-      "date": "2026-10-16",
-      "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "finite subdiagram of finitely generated subrings stable under localization isomorphisms gluing schemes approximation",
-      "results": "AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f; AlgebraicGeometry.locallyOfFiniteType_iff; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset; AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType",
-      "date": "2026-10-16",
-      "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
-    },
-    {
-      "tool": "leansearch",
-      "query": "finite compatible subalgebras of localized ring isomorphisms chosen coefficient stage of gluing presentation",
-      "results": "IsLocalization.Away.finitePresentation; instFinitePresentationAway; Localization.subalgebra; RingHom.finitePresentation_ofLocalizationSpanTarget; Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway; RingHom.FinitePresentation; RingHom.finitePresentation_localizationPreserves; IsLocalization.atUnits",
-      "date": "2026-10-16",
-      "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
-    },
-    {
-      "tool": "grep",
-      "query": "def adjoin|fg_adjoin|adjoin_of_finite|sup.*FG",
-      "results": "Mathlib/RingTheory/IsAdjoinRoot.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/AdjoinRoot.lean; Mathlib/RingTheory/FractionalIdeal/Operations.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "finite diagram of commutative rings generated by finitely many elements localization ring homomorphism restriction subring",
-      "results": "RingHom.OfLocalizationFiniteSpanTarget; Algebra.EssFiniteType.cond; RingHom.finite_ofLocalizationSpan; RingHom.OfLocalizationFiniteSpan; RingHom.localization_away_map_finiteType; RingHom.localization_away_map_finite; RingHom.finiteType_ofLocalizationSpan; RingHom.finiteType_ofLocalizationSpanTarget",
-      "date": "2026-10-16",
-      "verdict": "no match: the displayed results concern localization properties or generic codomain restrictions; none defines a finite compatible gluing record or constructs compatible finite coefficient stages"
-    },
-    {
-      "tool": "grep",
-      "query": "restrict.*Subalgebra|Subalgebra.*restrict|codRestrict",
-      "results": "Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/RingTheory/LinearDisjoint.lean; Mathlib/RingTheory/Invariant/Basic.lean; Mathlib/RingTheory/Derivation/ToSquareZero.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/RingTheory/Smooth/IntegralClosure.lean; Mathlib/RingTheory/Smooth/IntegralClosure.lean; Mathlib/RingTheory/Smooth/IntegralClosure.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: the displayed results concern localization properties or generic codomain restrictions; none defines a finite compatible gluing record or constructs compatible finite coefficient stages"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Canonical directed poset of compatible finitely generated subrings of a finite affine gluing presentation with restriction homomorphisms and localized overlap isomorphisms",
-      "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover; AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover; AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover_I₀; AlgebraicGeometry.Scheme.directedAffineCover; AlgebraicGeometry.Scheme.directedAffineCover_I₀; AlgebraicGeometry.Scheme.instPreorderI₀DirectedAffineCover; AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
-      "date": "2026-10-16",
-      "verdict": "no match: individual localization or directed-affine-cover declarations do not construct this coefficient system and selected common stage"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Finitely generated subrings compatible with an affine gluing diagram and its principal open localization maps",
-      "results": "AlgebraicGeometry.basicOpenIsoSpecAway_inv_homOfLE; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier; AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway; AlgebraicGeometry.Scheme.affineBasisCoverOfAffine; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f; AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap; Algebra.instIsStandardOpenImmersionAway; AlgebraicGeometry.StructureSheaf.toBasicOpen",
-      "date": "2026-10-16",
-      "verdict": "no match: individual localization or directed-affine-cover declarations do not construct this coefficient system and selected common stage"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "bypassed"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 334,
-  "blueprint_uses": [
-    "def-nagata-directed-finite-upper-bound",
+  {
+   "text": "Evaluate the already specified subring tuple and its restrictions at $\\lambda_{\\mathrm{coeff}}$ to define the raw datum. Modelhood requires all marked covering, overlap-domain, identity, inverse, open-preservation and triple-cocycle conditions, so these hold at this stage. For every later index $j$ the same evaluation defines another raw datum; step 1 supplies its transition maps and step 3 its pullback identifications on marked opens. Hence equations and their displayed domains remain valid there. Original comparison maps are recovered after the canonical identifications with the original marked open rings in step 3, since all maps are restrictions of the original maps. For the later valid-stage construction, retain the main-chart tuple and the restrictions to its labelled principal-open pieces. These satisfy its raw-input containment condition because the model comparison maps are restrictions of the original maps. That node defines its own raw-refinement preorder above this tuple. No claim is made here that every object of that larger raw preorder satisfies modelhood; its open-domain certificates are handled in that node. All rings, all stages and all maps of the claimed construction have now been explicitly defined, and their needed properties proved.",
+   "uses": [
+    "def-nagata-finite-affine-subring-model",
     "def-nagata-finite-affine-gluing-presentation",
-    "lemma-nagata-filtered-colimit-finite-data"
-  ],
-  "uses_not_cited": [
-    "def-nagata-directed-finite-upper-bound",
-    "def-nagata-finite-affine-gluing-presentation",
-    "lemma-nagata-filtered-colimit-finite-data"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "status",
-      "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-prop-nagata-sketch-approximation",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "def-nagata-affine-gluing-coefficient-stage",
-    "worker": "stage1",
-    "summary": "Repair of E1/D5 and E5/C4. Replace supplied compatible maps and the bare finite-subset poset by the explicit set of all finite affine subring models. Define every map as a restriction or inclusion. Represent the real existence obligation by a strictly local one-affine-open extension lemma, and spell out the finite-prefix induction establishing seed cofinality and directedness. The selected-bound construction now runs inside this compatible system, whose marked open squares are cartesian at every refinement. Two new unsplit prerequisites; no Mathlib leaf or attachment. The definition retains its maintainer-owned classification; five explicit verification steps expose its construction/well-definedness argument. The substantive existence claim is represented by the separate named one-affine extension theorem; the finite induction from it is written out rather than left hidden in the definition. Second reading adds the open-immersion definition citation, makes the empty-prefix and chosen-old-index cases explicit, and adapts the handoff to the newly synced raw-refinement definition without claiming all its raw objects are full models.",
-    "blueprint": "Order 334: finite coefficient rings, selected common bound, and raw gluing record; orders 335–336 obtain a common compatible system rather than unsupported extension of maps along arbitrary coefficient-set containment. The erroneous arbitrary-closure termination sentence is replaced by the finite affine-cover induction of Stacks 07RN, preserving the 01ZA/01ZM unit route.",
-    "statement_dispute": {
-      "old_statement": "Start with the finite lists of basic-open elements in $\\mathsf G_S$.\nClose these lists under the finitely many overlap maps and proposed\ninverses, recording the finitely many coefficients occurring when the\nimages are expressed in the selected localizations. The identity and\ncocycle paths in the finite gluing groupoid show that one such finite\nclosure suffices. For each chart, take the finitely generated\n$\\mathbf Z$-subalgebra generated by its resulting finite list. Define\n$\\lambda_{\\mathrm{coeff}}(S)$ to be the selected finite upper bound of all\nchartwise coefficient indices, and denote the resulting finite-stage raw\ngluing datum by\n$\\mathsf G_{S,\\lambda_{\\mathrm{coeff}}}^{\\mathrm{raw}}$.",
-      "reason": "Identity/cocycle paths do not force arbitrary fraction-representative extraction to terminate; bare chartwise finite-subset containment does not preserve comparisons. The valid termination counterexample is retained in the report.",
-      "correction": "Construct all actual finite subring models and their restriction system. Establish cofinality by a relative one-affine-open extension prerequisite and finite induction, then select a stage inside that system. Since the rings are embedded subrings and the marked whole-overlap record is realized, these coefficient stages can already satisfy the gluing axioms.",
-      "affected_citers": [
-        "lemma-nagata-affine-gluing-coefficients-descend",
-        "def-nagata-affine-gluing-valid-stage",
-        "lemma-nagata-affine-gluing-identities-eventually",
-        "lemma-nagata-valid-refinements-directed"
-      ]
-    },
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-NH-cfeaf1c18",
-    "group": "NH",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-cfeaf1c18 (reviewer sub-agent of L); spot-checked: Read the complete delivery and cited mathematics; review.md records all five step checks, both new nodes, Stacks 01Z7/07RN/01ZM/01R8, edge cases, duplicate searches, target coefficient categories, and dependency checks. No corrections or additional tool_uses required."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Start with the finite lists of basic-open elements in $\\mathsf G_S$.\nClose these lists under the finitely many overlap maps and proposed\ninverses, recording the finitely many coefficients occurring when the\nimages are expressed in the selected localizations. For each chart, take the finitely generated\n$\\mathbf Z$-subalgebra generated by its resulting finite list. Define\n$\\lambda_{\\mathrm{coeff}}(S)$ to be the selected finite upper bound of all\nchartwise coefficient indices, and denote the resulting finite-stage raw\ngluing datum by\n$\\mathsf G_{S,\\lambda_{\\mathrm{coeff}}}^{\\mathrm{raw}}$.",
-    "proof": [
-      {
-        "text": "The identity and\ncocycle paths in the finite gluing groupoid show that one such finite\nclosure suffices.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "def-weil-affine-spectrum",
+    "def-nagata-affine-raw-refinement-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 07RN and 01Z7: evaluate the compatible finite model; finite gluing data retain their equations under refinement."
+   }
   }
+ ],
+ "proof_deps": [
+  "def-nagata-finite-affine-subring-model",
+  "def-nagata-finite-affine-gluing-presentation",
+  "def-weil-affine-spectrum",
+  "lem-nagata-one-affine-subring-extension",
+  "def-weil-quasi-separated-morphism",
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-nagata-directed-finite-upper-bound",
+  "lemma-nagata-directed-finite-upper-bound",
+  "def-nagata-affine-raw-refinement-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tags 07RN and 01Z7, finite-affine-cover induction adapted to the explicitly marked subring-system construction; selected-bound convention from blueprint order 328."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient subalgebras of rings in affine gluing data for absolute approximation of a scheme",
+   "results": "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite; AlgebraicGeometry.Scheme.AffineCover.obj; AlgebraicGeometry.Scheme.AffineCover.X; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_I₀; AlgebraicGeometry.Scheme.exists_isOpenCover_and_isAffine",
+   "date": "2026-10-16",
+   "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, Subalgebra",
+   "results": "Subalgebra.fg_iff_finiteType; Algebra.FiniteType.adjoin_of_finite; Algebra.FiniteType.instSubtypeMemSubalgebraAdjoinOfFiniteElem; Algebra.FiniteType.mk; Algebra.FiniteType.out; AddMonoidAlgebra.exists_finset_adjoin_eq_top; MonoidAlgebra.exists_finset_adjoin_eq_top; Algebra.instFiniteTypeSubtypeMemSubalgebraSubalgebra",
+   "date": "2026-10-16",
+   "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
+  },
+  {
+   "tool": "grep",
+   "query": "coefficient.*gluing|gluing.*coefficient|finite.*subalgebra",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
+  },
+  {
+   "tool": "leansearch",
+   "query": "choose finite type subalgebras of affine chart rings containing all coefficients of finitely many overlap maps",
+   "results": "Subalgebra.FG; Subalgebra.fg_iff_finiteType; RingHom.FiniteType; Algebra.EssFiniteType.subalgebra; AlgebraicGeometry.LocallyOfFiniteType.mk; Algebra.FiniteType.mk; AlgHom.FiniteType; Algebra.SubmersivePresentation.HasCoeffs.mk",
+   "date": "2026-10-16",
+   "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite subdiagram of finitely generated subrings stable under localization isomorphisms gluing schemes approximation",
+   "results": "AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f; AlgebraicGeometry.locallyOfFiniteType_iff; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop; AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop; AlgebraicGeometry.LocallyOfFiniteType.finiteType_of_affine_subset; AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType",
+   "date": "2026-10-16",
+   "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite compatible subalgebras of localized ring isomorphisms chosen coefficient stage of gluing presentation",
+   "results": "IsLocalization.Away.finitePresentation; instFinitePresentationAway; Localization.subalgebra; RingHom.finitePresentation_ofLocalizationSpanTarget; Algebra.FinitePresentation.of_span_eq_top_target_of_isLocalizationAway; RingHom.FinitePresentation; RingHom.finitePresentation_localizationPreserves; IsLocalization.atUnits",
+   "date": "2026-10-16",
+   "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
+  },
+  {
+   "tool": "grep",
+   "query": "def adjoin|fg_adjoin|adjoin_of_finite|sup.*FG",
+   "results": "Mathlib/RingTheory/IsAdjoinRoot.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/Finiteness/Basic.lean; Mathlib/RingTheory/AdjoinRoot.lean; Mathlib/RingTheory/FractionalIdeal/Operations.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: generic finite-type, localization, and affine-cover declarations do not define the chosen compatible coefficient record and its selected common index"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite diagram of commutative rings generated by finitely many elements localization ring homomorphism restriction subring",
+   "results": "RingHom.OfLocalizationFiniteSpanTarget; Algebra.EssFiniteType.cond; RingHom.finite_ofLocalizationSpan; RingHom.OfLocalizationFiniteSpan; RingHom.localization_away_map_finiteType; RingHom.localization_away_map_finite; RingHom.finiteType_ofLocalizationSpan; RingHom.finiteType_ofLocalizationSpanTarget",
+   "date": "2026-10-16",
+   "verdict": "no match: the displayed results concern localization properties or generic codomain restrictions; none defines a finite compatible gluing record or constructs compatible finite coefficient stages"
+  },
+  {
+   "tool": "grep",
+   "query": "restrict.*Subalgebra|Subalgebra.*restrict|codRestrict",
+   "results": "Mathlib/RingTheory/QuotSMulTop.lean; Mathlib/RingTheory/LinearDisjoint.lean; Mathlib/RingTheory/Invariant/Basic.lean; Mathlib/RingTheory/Derivation/ToSquareZero.lean; Mathlib/RingTheory/Extension/Cotangent/Basic.lean; Mathlib/RingTheory/Smooth/IntegralClosure.lean; Mathlib/RingTheory/Smooth/IntegralClosure.lean; Mathlib/RingTheory/Smooth/IntegralClosure.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the displayed results concern localization properties or generic codomain restrictions; none defines a finite compatible gluing record or constructs compatible finite coefficient stages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical directed poset of compatible finitely generated subrings of a finite affine gluing presentation with restriction homomorphisms and localized overlap isomorphisms",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.instLocallyDirectedIsOpenImmersionDirectedCover; AlgebraicGeometry.Scheme.instLocallyDirectedIsOpenImmersionDirectedAffineCover; AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover_I₀; AlgebraicGeometry.Scheme.directedAffineCover; AlgebraicGeometry.Scheme.directedAffineCover_I₀; AlgebraicGeometry.Scheme.instPreorderI₀DirectedAffineCover; AlgebraicGeometry.Scheme.AffineZariskiSite.directedCover; AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+   "date": "2026-10-16",
+   "verdict": "no match: individual localization or directed-affine-cover declarations do not construct this coefficient system and selected common stage"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely generated subrings compatible with an affine gluing diagram and its principal open localization maps",
+   "results": "AlgebraicGeometry.basicOpenIsoSpecAway_inv_homOfLE; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier; AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway; AlgebraicGeometry.Scheme.affineBasisCoverOfAffine; AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f; AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap; Algebra.instIsStandardOpenImmersionAway; AlgebraicGeometry.StructureSheaf.toBasicOpen",
+   "date": "2026-10-16",
+   "verdict": "no match: individual localization or directed-affine-cover declarations do not construct this coefficient system and selected common stage"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "bypassed"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 334,
+ "blueprint_uses": [
+  "def-nagata-directed-finite-upper-bound",
+  "def-nagata-finite-affine-gluing-presentation",
+  "lemma-nagata-filtered-colimit-finite-data"
+ ],
+ "uses_not_cited": [
+  "def-nagata-directed-finite-upper-bound",
+  "def-nagata-finite-affine-gluing-presentation",
+  "lemma-nagata-filtered-colimit-finite-data"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-prop-nagata-sketch-approximation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-nagata-affine-gluing-coefficient-stage",
+  "worker": "stage1",
+  "summary": "Repair of E1/D5 and E5/C4. Replace supplied compatible maps and the bare finite-subset poset by the explicit set of all finite affine subring models. Define every map as a restriction or inclusion. Represent the real existence obligation by a strictly local one-affine-open extension lemma, and spell out the finite-prefix induction establishing seed cofinality and directedness. The selected-bound construction now runs inside this compatible system, whose marked open squares are cartesian at every refinement. Two new unsplit prerequisites; no Mathlib leaf or attachment. The definition retains its maintainer-owned classification; five explicit verification steps expose its construction/well-definedness argument. The substantive existence claim is represented by the separate named one-affine extension theorem; the finite induction from it is written out rather than left hidden in the definition. Second reading adds the open-immersion definition citation, makes the empty-prefix and chosen-old-index cases explicit, and adapts the handoff to the newly synced raw-refinement definition without claiming all its raw objects are full models.",
+  "blueprint": "Order 334: finite coefficient rings, selected common bound, and raw gluing record; orders 335–336 obtain a common compatible system rather than unsupported extension of maps along arbitrary coefficient-set containment. The erroneous arbitrary-closure termination sentence is replaced by the finite affine-cover induction of Stacks 07RN, preserving the 01ZA/01ZM unit route.",
+  "statement_dispute": {
+   "old_statement": "Start with the finite lists of basic-open elements in $\\mathsf G_S$.\nClose these lists under the finitely many overlap maps and proposed\ninverses, recording the finitely many coefficients occurring when the\nimages are expressed in the selected localizations. The identity and\ncocycle paths in the finite gluing groupoid show that one such finite\nclosure suffices. For each chart, take the finitely generated\n$\\mathbf Z$-subalgebra generated by its resulting finite list. Define\n$\\lambda_{\\mathrm{coeff}}(S)$ to be the selected finite upper bound of all\nchartwise coefficient indices, and denote the resulting finite-stage raw\ngluing datum by\n$\\mathsf G_{S,\\lambda_{\\mathrm{coeff}}}^{\\mathrm{raw}}$.",
+   "reason": "Identity/cocycle paths do not force arbitrary fraction-representative extraction to terminate; bare chartwise finite-subset containment does not preserve comparisons. The valid termination counterexample is retained in the report.",
+   "correction": "Construct all actual finite subring models and their restriction system. Establish cofinality by a relative one-affine-open extension prerequisite and finite induction, then select a stage inside that system. Since the rings are embedded subrings and the marked whole-overlap record is realized, these coefficient stages can already satisfy the gluing axioms.",
+   "affected_citers": [
+    "lemma-nagata-affine-gluing-coefficients-descend",
+    "def-nagata-affine-gluing-valid-stage",
+    "lemma-nagata-affine-gluing-identities-eventually",
+    "lemma-nagata-valid-refinements-directed"
+   ]
+  },
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-cfeaf1c18",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-cfeaf1c18 (reviewer sub-agent of L); spot-checked: Read the complete delivery and cited mathematics; review.md records all five step checks, both new nodes, Stacks 01Z7/07RN/01ZM/01R8, edge cases, duplicate searches, target coefficient categories, and dependency checks. No corrections or additional tool_uses required."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Start with the finite lists of basic-open elements in $\\mathsf G_S$.\nClose these lists under the finitely many overlap maps and proposed\ninverses, recording the finitely many coefficients occurring when the\nimages are expressed in the selected localizations. For each chart, take the finitely generated\n$\\mathbf Z$-subalgebra generated by its resulting finite list. Define\n$\\lambda_{\\mathrm{coeff}}(S)$ to be the selected finite upper bound of all\nchartwise coefficient indices, and denote the resulting finite-stage raw\ngluing datum by\n$\\mathsf G_{S,\\lambda_{\\mathrm{coeff}}}^{\\mathrm{raw}}$.",
+  "proof": [
+   {
+    "text": "The identity and\ncocycle paths in the finite gluing groupoid show that one such finite\nclosure suffices.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

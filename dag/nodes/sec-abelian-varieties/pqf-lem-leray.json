@@ -1,218 +1,195 @@
 {
-  "id": "pqf-lem-leray",
-  "blueprint": {
-    "is": "pqf-lem-leray",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Leray spectral sequence",
-  "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\mathcal F$ a\nquasi-coherent $\\mathcal O_X$-module. There is a spectral sequence\n\n$$\nE_2^{p,q}=\\mathrm H^p\\bigl(Y,R^qf_*\\mathcal F\\bigr)\n\\quad\\Longrightarrow\\quad \\mathrm H^{p+q}(X,\\mathcal F).\n$$\n\n(*Stacks Project, Cohomology of Sheaves, Lemma 20.13.4, Tag\n[01F2](https://stacks.math.columbia.edu/tag/01F2).*)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-leray.md",
-    "place": "node pqf-lem-leray, order 536",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01F2"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "pqf-def-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Set D to RingedSpace.moduleDirectImage f and G to RingedSpace.globalSectionsFunctor Y followed by forgetting scalars. Mathlib infers additivity and finite-limit preservation from pushforward and evaluation. For an injective I, use module_pushforward_injective_acyclic at the top open. The private proved helper derived_forget_iso compares derived G with the scalar-forgotten moduleCohomology, via InjectiveResolution.isoRightDerivedObj on a common resolution and ShortComplex.mapHomologyIso for the exact forgetful functor. Transport the cohomology vanishing through this isomorphism to prove D.IsAcyclicComposablePair G.",
-      "uses": [
-        "def-pc-ringed-spaces-derived-direct-image",
-        "def-sc-ringed-space-module-cohomology",
-        "lem-weil-pbc-module-pushforward-injective-acyclic",
-        "lem-sp-derived-well-defined"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply the existing source-library Functor.exists_grothendieckSpectralSequence to D, G and F. It gives the required natural-number sequence, derived second page and derived-composite abutment. This objectwise interface is recorded in src-grothendieck-spectral-sequence-nat; no Cartan–Eilenberg comparison or edge maps are used. Compose each second-page isomorphism with derived_forget_iso to identify it with the scalar-forgotten module cohomology in the statement.",
-      "uses": [
-        "src-grothendieck-spectral-sequence-nat",
-        "def-sc-ringed-space-module-cohomology"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "D followed by scalar-forgotten global sections on Y is definitionally the scalar-forgotten global-sections functor on X (inverse image of the top open is definitionally top). Use Iso.refl for this functor isomorphism and NatTrans.rightDerived on its two directions; NatTrans.rightDerived_comp and rightDerived_id prove the inverse identities. Compose its component in degree n with derived_forget_iso for X. Apply SpectralSequence.AbutsTo.of_nonempty_iso to transport the abutment. The declared cohomology functors are exactly the right derived global sections of pqf-def-cohomology; no hypotheses or definitions change.",
-      "uses": [
-        "pqf-def-cohomology",
-        "lem-sp-derived-well-defined"
-      ],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
+ "id": "pqf-lem-leray",
+ "blueprint": {
+  "is": "pqf-lem-leray",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Leray spectral sequence",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\mathcal F$ a\nquasi-coherent $\\mathcal O_X$-module. There is a spectral sequence\n\n$$\nE_2^{p,q}=\\mathrm H^p\\bigl(Y,R^qf_*\\mathcal F\\bigr)\n\\quad\\Longrightarrow\\quad \\mathrm H^{p+q}(X,\\mathcal F).\n$$\n\n(*Stacks Project, Cohomology of Sheaves, Lemma 20.13.4, Tag\n[01F2](https://stacks.math.columbia.edu/tag/01F2).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-pqf-finite/pqf-lem-leray.md",
+  "place": "node pqf-lem-leray, order 536",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01F2"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Set D to RingedSpace.moduleDirectImage f and G to RingedSpace.globalSectionsFunctor Y followed by forgetting scalars. Mathlib infers additivity and finite-limit preservation from pushforward and evaluation. For an injective I, use module_pushforward_injective_acyclic at the top open. The private proved helper derived_forget_iso compares derived G with the scalar-forgotten moduleCohomology, via InjectiveResolution.isoRightDerivedObj on a common resolution and ShortComplex.mapHomologyIso for the exact forgetful functor. Transport the cohomology vanishing through this isomorphism to prove D.IsAcyclicComposablePair G.",
+   "uses": [
     "def-pc-ringed-spaces-derived-direct-image",
     "def-sc-ringed-space-module-cohomology",
     "lem-weil-pbc-module-pushforward-injective-acyclic",
-    "lem-sp-derived-well-defined",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing source-library Functor.exists_grothendieckSpectralSequence to D, G and F. It gives the required natural-number sequence, derived second page and derived-composite abutment. This objectwise interface is recorded in src-grothendieck-spectral-sequence-nat; no Cartan–Eilenberg comparison or edge maps are used. Compose each second-page isomorphism with derived_forget_iso to identify it with the scalar-forgotten module cohomology in the statement.",
+   "uses": [
     "src-grothendieck-spectral-sequence-nat",
-    "pqf-def-cohomology"
-  ],
-  "proof_origin": {
-    "by": "worker",
-    "document": "lean/WeilConjectures/CategoryTheory/SpectralSequence/Grothendieck.lean",
-    "place": "Functor.exists_grothendieckSpectralSequence specialized to module direct image and scalar-forgotten global sections; Mathlib injective-resolution and homology comparison"
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Leray spectral sequence for quasi-coherent sheaf on schemes",
-      "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; AlgebraicGeometry.Scheme.Modules.instAbelian; sheaf cohomology primitives; no Leray theorem",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Grothendieck spectral sequence, rightDerived, sheaf cohomology",
-      "results": "0 hits; unknown identifier Grothendieck",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "Leray|grothendieckSpectralSequence in Mathlib/CategoryTheory",
-      "results": "0 hits",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 536,
-  "blueprint_uses": [
+  {
+   "text": "D followed by scalar-forgotten global sections on Y is definitionally the scalar-forgotten global-sections functor on X (inverse image of the top open is definitionally top). Use Iso.refl for this functor isomorphism and NatTrans.rightDerived on its two directions; NatTrans.rightDerived_comp and rightDerived_id prove the inverse identities. Compose its component in degree n with derived_forget_iso for X. Apply SpectralSequence.AbutsTo.of_nonempty_iso to transport the abutment. The declared cohomology functors are exactly the right derived global sections of pqf-def-cohomology; no hypotheses or definitions change.",
+   "uses": [
     "pqf-def-cohomology",
-    "thm-sp-grothendieck"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Modules.exists_leraySpectralSequence",
-          "module": "WeilConjectures.AlgebraicGeometry.Cohomology.Leray",
-          "lines": [
-            83,
-            102
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-pqf-finite",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "pqf-lem-leray",
-    "worker": "stage1",
-    "summary": "Replaced the informal imported argument with an explicit specialization of the existing Grothendieck spectral-sequence theorem. Three steps verify the module categories and functor hypotheses, apply the theorem, and identify higher direct images, cohomology, and the composite abutment. No child nodes were created because every required fact is already stated by existing DAG nodes.",
-    "blueprint": "The single proof paragraph: apply Grothendieck to f_* and Gamma, use acyclicity of direct images of injectives, then identify E2 and the abutment.",
-    "tool_uses": [
-      {
-        "node": "thm-sp-grothendieck",
-        "why": "The item is the scheme-module specialization of this generic spectral-sequence theorem."
-      },
-      {
-        "node": "lem-weil-pbc-module-pushforward-injective-acyclic",
-        "why": "It supplies acyclicity of f_* applied to injective O_X-modules."
-      },
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "It supplies the Grothendieck abelian and enough-injectives hypotheses for module sheaf categories."
-      },
-      {
-        "node": "def-pc-module-pullback",
-        "why": "It defines the scheme-module pushforward; its sectionwise definition gives preservation of kernels and finite products."
-      },
-      {
-        "node": "lem-sc-global-sections-left-exact",
-        "why": "It supplies additivity and left exactness of global sections."
-      },
-      {
-        "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
-        "why": "It supplies the Grothendieck abelian structure of abelian groups."
-      }
-    ]
-  },
-  "tool_uses": [
-    "thm-sp-grothendieck",
-    "lem-weil-pbc-module-pushforward-injective-acyclic",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pc-module-pullback",
-    "lem-sc-global-sections-left-exact",
-    "lem-weil-pbc-ring-modules-grothendieck-abelian"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-plr2322",
-    "group": "E1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-plr2322 (reviewer sub-agent of L); spot-checked: Proof is thm-sp-grothendieck applied to Gamma(Y,-) o f_*; f_* of injective is Gamma-acyclic cited from lem-weil-pbc-module-pushforward-injective-acyclic (C1 ok); Grothendieck-abelian/enough-injectives, left exactness, abutment identification checked (C4 ok); item states no edge-map clause; no new nodes, thm-sp-grothendieck not restated (class b none). FIX more, RETURN less: (1) E7 statement silently changed (Lemma 20.13.4 -> 'Lemma 01F2', reflowed) with no reason given: original statement restored; (2) stmt_deps listed all nine proof deps incl. thm-sp-grothendieck: reset to the statement's own definitions [def-pc-scheme, pqf-def-cohomology]; (3) B3 Step 2 TeX unclosed $ after R^{p+q}(G o F)(F): closed; (4) Step 1 Ab Grothendieck now names the specialization R=Z of lem-weil-pbc-ring-modules-grothendieck-abelian. Second reading by E1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.LeraySpectralSequence",
-    "declaration": "AlgebraicGeometry.exists_leray_spectralSequence",
-    "file": "lean/Sheaf/AlgebraicGeometry/LeraySpectralSequence.lean",
-    "statement": "theorem exists_leray_spectralSequence {X Y : Scheme.{v}} (f : X ⟶ Y) (F : SheafOfModules.{v} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent] : ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{v}, (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅ (forget₂ (ModuleCat.{v} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q).obj F)))) ∧ E.AbutsTo (fun n ↦ (forget₂ (ModuleCat.{v} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology X.toRingedSpace n).obj F))",
-    "branch": "sheaf-dag",
-    "by": "M1",
-    "date": "2026-10-12",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "AUTO",
-    "group": "M1",
-    "result": "pass",
-    "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "Y3",
-    "result": "pass",
-    "landing": "20261013T024053-L-3340831",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\mathcal F$ a\nquasi-coherent $\\mathcal O_X$-module. There is a spectral sequence\n\n$$\nE_2^{p,q}=\\mathrm H^p\\bigl(Y,R^qf_*\\mathcal F\\bigr)\n\\quad\\Longrightarrow\\quad \\mathrm H^{p+q}(X,\\mathcal F).\n$$",
-    "proof": [
-      {
-        "text": "Apply the Grothendieck spectral sequence\n[thm-sp-grothendieck] of the spectral-sequence chapter to the composable pair of\nleft exact functors $F=f_*:\\mathcal O_X$-mod$\\to\\mathcal O_Y$-mod\n(which is left exact: the functor of sections over the open\nsubschemes, exactness of $f_*$ on the left being the sheaf property)\nand $G=\\Gamma(Y,-):\\mathcal O_Y$-mod$\\to\\mathbf{Ab}$.\nThe acyclicity condition holds: every injective\n$\\mathcal O_X$-module $\\mathcal I$ is flasque (classical: for\n$j:U\\hookrightarrow X$ open, injectivity applied to the canonical\nmap $j_{!}\\mathcal I|_U\\to\\mathcal I$ extends sections of\n$\\mathcal I$ over $U$ to all of $X$; equivalently, every\n$\\mathcal O_X$-module is a submodule of an injective module and\ninjective modules are the extension-closed objects), and a flasque\n$\\mathcal O_X$-module $\\mathcal J$ is $f_*$-acyclic: its stalk\n$(R^qf_*\\mathcal J)_y=\\varinjlim_{y\\in V}\\mathrm H^q(f^{-1}(V),\\mathcal J)$ vanishes for $q>0$ since flasque\n$\\mathcal O_X$-modules are acyclic for $\\Gamma$ on every open\nsubscheme (the standard flasque resolutions). By\n[thm-sp-grothendieck] there is a functorial first-quadrant\nspectral sequence with\n\n$$\nE_2^{p,q}=R^pG\\bigl(R^qF(\\mathcal F)\\bigr)\n=\\mathrm H^p\\bigl(Y,R^qf_*\\mathcal F\\bigr)\n\\;\\Longrightarrow\\;\nR^{p+q}(G\\circ F)(\\mathcal F)=\\mathrm H^{p+q}(X,\\mathcal F),\n$$\n\n$G\\circ F=\\Gamma(Y,-)\\circ f_*=\\Gamma(X,-)$ being the global\nsections of the source, and $R^qF(\\mathcal F)=R^qf_*\\mathcal F$,\n$R^pG(-)=\\mathrm H^p(Y,-)$ as the right derived functors fixed in\n[pqf-def-cohomology]. This is the displayed spectral\nsequence.",
-        "uses": [
-          "thm-sp-grothendieck",
-          "pqf-def-cohomology"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "def-pc-ringed-spaces-derived-direct-image",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "lem-sp-derived-well-defined",
+  "src-grothendieck-spectral-sequence-nat",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/SpectralSequence/Grothendieck.lean",
+  "place": "Functor.exists_grothendieckSpectralSequence specialized to module direct image and scalar-forgotten global sections; Mathlib injective-resolution and homology comparison"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Leray spectral sequence for quasi-coherent sheaf on schemes",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; AlgebraicGeometry.Scheme.Modules.instAbelian; sheaf cohomology primitives; no Leray theorem",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Grothendieck spectral sequence, rightDerived, sheaf cohomology",
+   "results": "0 hits; unknown identifier Grothendieck",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Leray|grothendieckSpectralSequence in Mathlib/CategoryTheory",
+   "results": "0 hits",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 536,
+ "blueprint_uses": [
+  "pqf-def-cohomology",
+  "thm-sp-grothendieck"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "pqf-lem-leray",
+  "worker": "stage1",
+  "summary": "Replaced the informal imported argument with an explicit specialization of the existing Grothendieck spectral-sequence theorem. Three steps verify the module categories and functor hypotheses, apply the theorem, and identify higher direct images, cohomology, and the composite abutment. No child nodes were created because every required fact is already stated by existing DAG nodes.",
+  "blueprint": "The single proof paragraph: apply Grothendieck to f_* and Gamma, use acyclicity of direct images of injectives, then identify E2 and the abutment.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "The item is the scheme-module specialization of this generic spectral-sequence theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-pushforward-injective-acyclic",
+    "why": "It supplies acyclicity of f_* applied to injective O_X-modules."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "It supplies the Grothendieck abelian and enough-injectives hypotheses for module sheaf categories."
+   },
+   {
+    "node": "def-pc-module-pullback",
+    "why": "It defines the scheme-module pushforward; its sectionwise definition gives preservation of kernels and finite products."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "It supplies additivity and left exactness of global sections."
+   },
+   {
+    "node": "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "why": "It supplies the Grothendieck abelian structure of abelian groups."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-grothendieck",
+  "lem-weil-pbc-module-pushforward-injective-acyclic",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pc-module-pullback",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-ring-modules-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-plr2322",
+  "group": "E1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-plr2322 (reviewer sub-agent of L); spot-checked: Proof is thm-sp-grothendieck applied to Gamma(Y,-) o f_*; f_* of injective is Gamma-acyclic cited from lem-weil-pbc-module-pushforward-injective-acyclic (C1 ok); Grothendieck-abelian/enough-injectives, left exactness, abutment identification checked (C4 ok); item states no edge-map clause; no new nodes, thm-sp-grothendieck not restated (class b none). FIX more, RETURN less: (1) E7 statement silently changed (Lemma 20.13.4 -> 'Lemma 01F2', reflowed) with no reason given: original statement restored; (2) stmt_deps listed all nine proof deps incl. thm-sp-grothendieck: reset to the statement's own definitions [def-pc-scheme, pqf-def-cohomology]; (3) B3 Step 2 TeX unclosed $ after R^{p+q}(G o F)(F): closed; (4) Step 1 Ab Grothendieck now names the specialization R=Z of lem-weil-pbc-ring-modules-grothendieck-abelian. Second reading by E1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LeraySpectralSequence",
+  "declaration": "AlgebraicGeometry.exists_leray_spectralSequence",
+  "file": "lean/Sheaf/AlgebraicGeometry/LeraySpectralSequence.lean",
+  "statement": "theorem exists_leray_spectralSequence {X Y : Scheme.{v}} (f : X ⟶ Y) (F : SheafOfModules.{v} (moduleRings X.toRingedSpace)) [F.IsQuasicoherent] : ∃ E : E₂CohomologicalSpectralSequenceNat AddCommGrpCat.{v}, (∀ p q : ℕ, Nonempty ((E.page 2).X (p, q) ≅ (forget₂ (ModuleCat.{v} ((moduleRings Y.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology Y.toRingedSpace p).obj (((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived q).obj F)))) ∧ E.AbutsTo (fun n ↦ (forget₂ (ModuleCat.{v} ((moduleRings X.toRingedSpace).obj.obj (op ⊤))) AddCommGrpCat.{v}).obj ((RingedSpace.moduleCohomology X.toRingedSpace n).obj F))",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-12",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "M1",
+  "result": "pass",
+  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261013T024053-L-3340831",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f:X\\to Y$ be a morphism of schemes and $\\mathcal F$ a\nquasi-coherent $\\mathcal O_X$-module. There is a spectral sequence\n\n$$\nE_2^{p,q}=\\mathrm H^p\\bigl(Y,R^qf_*\\mathcal F\\bigr)\n\\quad\\Longrightarrow\\quad \\mathrm H^{p+q}(X,\\mathcal F).\n$$",
+  "proof": [
+   {
+    "text": "Apply the Grothendieck spectral sequence\n[thm-sp-grothendieck] of the spectral-sequence chapter to the composable pair of\nleft exact functors $F=f_*:\\mathcal O_X$-mod$\\to\\mathcal O_Y$-mod\n(which is left exact: the functor of sections over the open\nsubschemes, exactness of $f_*$ on the left being the sheaf property)\nand $G=\\Gamma(Y,-):\\mathcal O_Y$-mod$\\to\\mathbf{Ab}$.\nThe acyclicity condition holds: every injective\n$\\mathcal O_X$-module $\\mathcal I$ is flasque (classical: for\n$j:U\\hookrightarrow X$ open, injectivity applied to the canonical\nmap $j_{!}\\mathcal I|_U\\to\\mathcal I$ extends sections of\n$\\mathcal I$ over $U$ to all of $X$; equivalently, every\n$\\mathcal O_X$-module is a submodule of an injective module and\ninjective modules are the extension-closed objects), and a flasque\n$\\mathcal O_X$-module $\\mathcal J$ is $f_*$-acyclic: its stalk\n$(R^qf_*\\mathcal J)_y=\\varinjlim_{y\\in V}\\mathrm H^q(f^{-1}(V),\\mathcal J)$ vanishes for $q>0$ since flasque\n$\\mathcal O_X$-modules are acyclic for $\\Gamma$ on every open\nsubscheme (the standard flasque resolutions). By\n[thm-sp-grothendieck] there is a functorial first-quadrant\nspectral sequence with\n\n$$\nE_2^{p,q}=R^pG\\bigl(R^qF(\\mathcal F)\\bigr)\n=\\mathrm H^p\\bigl(Y,R^qf_*\\mathcal F\\bigr)\n\\;\\Longrightarrow\\;\nR^{p+q}(G\\circ F)(\\mathcal F)=\\mathrm H^{p+q}(X,\\mathcal F),\n$$\n\n$G\\circ F=\\Gamma(Y,-)\\circ f_*=\\Gamma(X,-)$ being the global\nsections of the source, and $R^qF(\\mathcal F)=R^qf_*\\mathcal F$,\n$R^pG(-)=\\mathrm H^p(Y,-)$ as the right derived functors fixed in\n[pqf-def-cohomology]. This is the displayed spectral\nsequence.",
+    "uses": [
+     "thm-sp-grothendieck",
+     "pqf-def-cohomology"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

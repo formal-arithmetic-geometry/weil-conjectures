@@ -209,18 +209,7 @@
   "item": "lem-sc-picg-geometrically-integral",
   "date": "2026-10-10"
  },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
+ "lean_audit": {},
  "chapter": "sec-picard-framework",
  "unit": "sk-prop-jacobian",
  "split_report": {
@@ -235,7 +224,7 @@
   "module": "Sheaf.AlgebraicGeometry.HilbertToPicardMorphism",
   "declaration": "AlgebraicGeometry.exists_hilbertToPicardMorphism",
   "file": "lean/Sheaf/AlgebraicGeometry/HilbertToPicardMorphism.lean",
-  "statement": "theorem exists_hilbertToPicardMorphism {k : Type u} [Field k] [IsSepClosed k] {C : Scheme.{u}} (f : C \u27f6 Spec (.of k)) [IsSmoothProjectiveCurve f] [GeometricallyIntegral f] (d : \u2115) (H P : Over (Spec (.of k))) (eH : (hilbertPresheaf f d).RepresentableBy H) (eP : (picardFunctorDegree f d).obj.RepresentableBy P) : let D := (eH.homEquiv (\ud835\udfd9 H)).1 D.IsRelativeEffectiveCartier (pullback.snd f H.hom) \u2227 D.toModules\u1d5b.IsInvertible \u2227 \u2203 L : (pullback f H.hom).Pic, Nonempty ((fromSkeleton _).obj L.val \u2245 D.toModules\u1d5b) \u2227 (\u2200 t : H.left, picardPresheafDegree f L t = (d : \u2124)) \u2227 \u2203 (hL : L \u2208 (picardSubfunctorDegree f d).obj (op H)) (\u03b3 : H \u27f6 P), eP.homEquiv \u03b3 = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f d).toFunctor).app (op H) \u27e8L, hL\u27e9 \u2227 \u2200 (K : Type u) [Field K] [Algebra k K] (x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) \u27f6 H), let T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) let DK := (eH.homEquiv x).1 DK.IsInvertible \u2227 DK.toModules\u1d5b.IsInvertible \u2227 \u2203 (LK : (pullback f T.hom).Pic) (hLK : LK \u2208 (picardSubfunctorDegree f d).obj (op T)), Nonempty ((fromSkeleton _).obj LK.val \u2245 DK.toModules\u1d5b) \u2227 eP.homEquiv (x \u226b \u03b3) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f d).toFunctor).app (op T) \u27e8LK, hLK\u27e9",
+  "statement": "theorem exists_hilbertToPicardMorphism {k : Type u} [Field k] [IsSepClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f] [GeometricallyIntegral f] (d : ℕ) (H P : Over (Spec (.of k))) (eH : (hilbertPresheaf f d).RepresentableBy H) (eP : (picardFunctorDegree f d).obj.RepresentableBy P) : let D := (eH.homEquiv (𝟙 H)).1 D.IsRelativeEffectiveCartier (pullback.snd f H.hom) ∧ D.toModulesᵛ.IsInvertible ∧ ∃ L : (pullback f H.hom).Pic, Nonempty ((fromSkeleton _).obj L.val ≅ D.toModulesᵛ) ∧ (∀ t : H.left, picardPresheafDegree f L t = (d : ℤ)) ∧ ∃ (hL : L ∈ (picardSubfunctorDegree f d).obj (op H)) (γ : H ⟶ P), eP.homEquiv γ = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f d).toFunctor).app (op H) ⟨L, hL⟩ ∧ ∀ (K : Type u) [Field K] [Algebra k K] (x : Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) ⟶ H), let T := Over.mk (Spec.map (CommRingCat.ofHom (algebraMap k K))) let DK := (eH.homEquiv x).1 DK.IsInvertible ∧ DK.toModulesᵛ.IsInvertible ∧ ∃ (LK : (pullback f T.hom).Pic) (hLK : LK ∈ (picardSubfunctorDegree f d).obj (op T)), Nonempty ((fromSkeleton _).obj LK.val ≅ DK.toModulesᵛ) ∧ eP.homEquiv (x ≫ γ) = (toSheafify (Scheme.fppfTopology.over (Spec (.of k))) (picardSubfunctorDegree f d).toFunctor).app (op T) ⟨LK, hLK⟩",
   "branch": "sheaf-dag",
   "by": "M1",
   "date": "2026-10-11",
@@ -248,6 +237,6 @@
   "reviewer": "R-htp1136",
   "group": "M1",
   "result": "fix",
-  "note": "k sep. closed [IsSepClosed]; C smooth projective [f.IsSmoothProjectiveCurve] + [GeometricallyIntegral f]; d : \u2115; H_d via (hilbertPresheaf f d).RepresentableBy H, D = eH.homEquiv (\ud835\udfd9 H); P_d via (picardFunctorDegree f d).obj.RepresentableBy P (FIX: replaced the delivered private degree subfunctor Q/hQ of picardFunctor, H4/H12); (1) IsRelativeEffectiveCartier + O(D) invertible; (2) L \u2245 O(D), fibre degree d, L \u2208 picardSubfunctorDegree f d, eP.homEquiv \u03b3 = toSheafify class of \u27e8L,hL\u27e9; (3) all K/k in Type u, x : Spec K \u27f6 H, DK effective Cartier, eP.homEquiv (x \u226b \u03b3) = class of O(DK) in Pic^d; g unused; no hollow hypotheses"
+  "note": "k sep. closed [IsSepClosed]; C smooth projective [f.IsSmoothProjectiveCurve] + [GeometricallyIntegral f]; d : ℕ; H_d via (hilbertPresheaf f d).RepresentableBy H, D = eH.homEquiv (𝟙 H); P_d via (picardFunctorDegree f d).obj.RepresentableBy P (FIX: replaced the delivered private degree subfunctor Q/hQ of picardFunctor, H4/H12); (1) IsRelativeEffectiveCartier + O(D) invertible; (2) L ≅ O(D), fibre degree d, L ∈ picardSubfunctorDegree f d, eP.homEquiv γ = toSheafify class of ⟨L,hL⟩; (3) all K/k in Type u, x : Spec K ⟶ H, DK effective Cartier, eP.homEquiv (x ≫ γ) = class of O(DK) in Pic^d; g unused; no hollow hypotheses"
  }
 }

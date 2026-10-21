@@ -1,230 +1,172 @@
 {
-  "id": "thm-weil-final-rationality",
-  "blueprint": {
-    "is": "thm-weil-final-rationality",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Weil conjectures I: rationality and Euler product",
-  "statement": "Fix a finite field\n$k_0=\\mathbf F_q$ of characteristic $p$, with algebraic closure\n$k=\\overline{\\mathbf F}_q$.\nLet $X_0/k_0$ be\nsmooth, proper and geometrically\nconnected of pure dimension $d\\geq0$, and put $X=X_0\\times_{k_0}k$.\nFor an indeterminate $T$, use the\npoint-count zeta series\n\n$$\nZ(X_0,T)=\\exp\\left(\\sum_{n\\geq1}\n\\#X_0(\\mathbf F_{q^n})\\frac{T^n}{n}\\right).\n$$\n\nHere $|X_0|$ is the set of closed points and\n$\\deg(x)=[\\kappa(x):k_0]$. Then\n\n$$\nZ(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T),\n\\qquad\nZ(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}.\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md",
-    "place": "node thm-weil-final-rationality, order 2928"
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-geometric-hypotheses",
-    "def-weil-point-counts-zeta",
-    "def-weil-formal-power-series"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1: the exponential description, integrality, and the Euler product.* By [def-weil-geometric-hypotheses], $X_0$ is proper over $k_0$, so its structure morphism is of finite type and $X_0$ is a finite-type $k_0$-scheme. Hence $N_n(X_0)=\\#X_0(\\mathbf F_{q^n})$ for $n\\geq1$, the set $|X_0|$ of closed points, the residue fields $\\kappa(x)$, the degrees $\\deg(x)=[\\kappa(x):k_0]$ and the point-count zeta series\n\n$$\nZ(X_0,T)=\\exp\\left(\\sum_{n\\geq1}N_n(X_0)\\frac{T^n}{n}\\right)\\in1+T\\mathbf Q[[T]]\n$$\n\n(formal power-series exponential) are those of [def-weil-finite-field-fiber] and [def-weil-point-counts-zeta]; this is the first displayed description of $Z(X_0,T)$ in the statement. Applying [prop-euler-product] to the finite-type $k_0$-scheme $X_0$ gives\n\n$$\nZ(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}\\in1+T\\mathbf Z[[T]],\n$$\n\nthe product being coefficientwise locally finite (modulo $T^{m+1}$ only the finitely many closed points of degree at most $m$ contribute). This is the Euler-product clause of the statement, and it gives the integrality $Z(X_0,T)\\in1+T\\mathbf Z[[T]]$. Write $Z(X_0,T)=\\sum_{n\\geq0}z_nT^n$; then $z_0=1$ and $z_n\\in\\mathbf Z$ for every $n$.",
-      "uses": [
-        "def-weil-geometric-hypotheses",
-        "def-weil-finite-field-fiber",
-        "def-weil-point-counts-zeta",
-        "prop-euler-product"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-        "place": "Chapter II, §27, 'Integrality', pp. 157–158 (PDF pp. 157–158, v2.21): the closed-point computation ending in display (4), $Z(X_0,t)=\\prod_{x\\in X_0}(1-t^{\\deg x})^{-1}$, and 'Hence $Z(X_0,t)\\in1+t\\mathbf Z[[t]]$'; the computation itself is [prop-euler-product] (Lean `zetaSeries_eq_tprod`, closed). Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.1.2), p. 274 (PDF p. 3), and (1.4.1)–(1.5.2), p. 275 (PDF p. 4), define $Z$ by the Euler product and derive the exponential form. Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof', first sentence."
-      }
-    },
-    {
-      "text": "*Step 2: the $\\ell$-adic factorization; $Z(X_0,T)$ is rational over $\\Ql$.* Choose a prime $\\ell\\neq p$ (there are infinitely many primes), write $\\Ql=\\mathbf Q_\\ell$, and let $(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ be the smooth-proper cohomological family of $X_0$ [def-weil-smooth-proper-cohomological-family], with $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})\\in\\Ql[T]$. The geometric clause of [prop-trace-determinant], applied to $X_0$, gives, after the coefficientwise extension $\\mathbf Q[[T]]\\to\\Ql[[T]]$ (the ring homomorphism $\\sum_nc_nT^n\\mapsto\\sum_n(c_n\\cdot1_{\\Ql})T^n$),\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\\quad\\text{in }\\Ql[[T]],\n$$\n\nwhere the negative powers are inverses in $\\Ql[[T]]$: each $P_{i,\\ell}$ has constant coefficient $P_{i,\\ell}(0)=1$ [lem-weil-reverse-charpoly-coefficients, clause 1], hence is a unit of $\\Ql[[T]]$. Let $N_\\ell=\\prod_{i\\text{ odd}}P_{i,\\ell}$ and $D_\\ell=\\prod_{i\\text{ even}}P_{i,\\ell}$ be the parity products [def-weil-parity-products]; they lie in $\\Ql[T]$ and $N_\\ell(0)=D_\\ell(0)=1$. Multiplying the displayed identity by the unit $D_\\ell$ gives\n\n$$\nZ(X_0,T)\\cdot D_\\ell(T)=N_\\ell(T)\\quad\\text{in }\\Ql[[T]].\n$$\n\nSo the image of $Z(X_0,T)$ in $\\Ql[[T]]$ is the quotient $N_\\ell/D_\\ell$ of two polynomials of $\\Ql[T]$ with $D_\\ell(0)=1$: in Milne's words, $Z(X_0,T)$ is a rational function with coefficients in $\\Ql$.",
-      "uses": [
-        "def-weil-smooth-proper-cohomological-family",
-        "prop-trace-determinant",
-        "lem-weil-reverse-charpoly-coefficients",
-        "def-weil-parity-products"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-        "place": "Chapter II, §27, Theorem 27.6, p. 156 (PDF p. 156, v2.21): $Z(X_0,t)=P_1(X_0,t)\\cdots P_{2d-1}(X_0,t)/P_0(X_0,t)\\cdots P_{2d}(X_0,t)$ with $P_r(X,t)=\\det(1-Ft\\mid H^r(X,\\mathbf Q_\\ell))$, and Remark 27.7: '$P_r(X_0,t)=1+\\cdots\\in\\mathbf Q_\\ell[t]$'; Corollary 27.8, first sentence of the proof: 'Theorem 27.6 shows that it is a rational function with coefficients in $\\mathbf Q_\\ell$'. Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.5.4), p. 276 (PDF p. 5): 'Le membre de droite est un élément de $\\mathbf Q_\\ell(t)$'. In the DAG the identity is the geometric clause of [prop-trace-determinant] (which rests on [prop-every-iterate-trace]); the blueprint, literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof', cites both for 'a factorization over $\\Ql(T)$'."
-      }
-    },
-    {
-      "text": "*Step 3: the Hankel rank of $Z(X_0,T)$ over $\\Ql$ is finite.* Let $\\mathcal H(Z)=(z_{r+s})_{r,s\\geq0}$ be the Hankel matrix of $Z(X_0,T)$ [def-weil-hankel-matrix]. Its entries are the integers $z_{r+s}$ of Step 1, and the Hankel matrix of the image of $Z(X_0,T)$ in $\\Ql[[T]]$ is the same matrix with its entries viewed in $\\Ql$. By Step 2 the image of $Z(X_0,T)$ in $\\Ql[[T]]$ satisfies condition (1) of [prop-weil-rationality-criterion] for the field $K=\\Ql$: it is $P/Q$ with $P=N_\\ell$, $Q=D_\\ell\\in\\Ql[T]$ and $Q(0)=1$. By the implication (1)$\\Rightarrow$(2) of that criterion, its Hankel rank over $\\Ql$ is finite: there is an integer $R\\geq0$ such that every finite square submatrix of $\\mathcal H(Z)$ has rank at most $R$ over $\\Ql$.",
-      "uses": [
-        "def-weil-hankel-matrix",
-        "prop-weil-rationality-criterion"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-        "place": "Chapter II, §27, Lemma 27.9 and its proof (Bourbaki, Algèbre, IV.5, Exercise 3, items (a), (b), (d)), pp. 156–157 (PDF pp. 156–157, v2.21): $f(t)\\in K(t)$ if and only if the Hankel determinants $H^{(r+1)}_{d+j}$ vanish for all $j\\geq1$, for some $d,r$. Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 276 (PDF p. 5): 'l'image de $Z(X_0,t)$ dans $\\mathbf Q_\\ell[[t]]$ est le développement de Taylor d'une fraction rationnelle. Ceci signifie que pour N et M assez grands ... les déterminants de Hankel $H_\\lambda=\\det((a_{i+j+\\lambda})_{0\\leq i,j\\leq M})$ ($\\lambda>N$) sont nuls'. In the DAG, Bourbaki's criterion in the form 'rational iff finite Hankel rank' is [prop-weil-rationality-criterion]; blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof': 'By [prop-weil-rationality-criterion], this rational expression gives finite Hankel rank over $\\Ql$'."
-      }
-    },
-    {
-      "text": "*Step 4: the rank bound descends to $\\mathbf Q$.* Since $\\Ql$ has characteristic zero [lem-weil-integers-injective-char-zero], its prime field is $\\mathbf Q$: the ring homomorphism $\\mathbf Q\\to\\Ql$ is injective and identifies $\\mathbf Q$ with a subfield of $\\Ql$, and the entries $z_{r+s}\\in\\mathbf Z\\subset\\mathbf Q$ of $\\mathcal H(Z)$ are sent to the entries of the Hankel matrix of Step 3. Let $M$ be a finite square submatrix of $\\mathcal H(Z)$, a matrix with entries in $\\mathbf Q$. By [lem-weil-matrix-rank-field-extension], applied to the field extension $\\mathbf Q\\subset\\Ql$, the rank of $M$ over $\\mathbf Q$ equals its rank over $\\Ql$, which is at most $R$ by Step 3. Taking the supremum over all finite square submatrices, which is how the rank of $\\mathcal H(Z)$ is defined [def-weil-hankel-matrix], the Hankel rank of $Z(X_0,T)\\in\\mathbf Q[[T]]$ over $\\mathbf Q$ is at most $R$, hence finite. (In the words of Deligne and Milne: a Hankel determinant of $Z(X_0,T)$ is a rational number, and it vanishes in $\\Ql$ if and only if it vanishes in $\\mathbf Q$.)",
-      "uses": [
-        "lem-weil-integers-injective-char-zero",
-        "lem-weil-matrix-rank-field-extension",
-        "def-weil-hankel-matrix"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-        "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157 (PDF p. 157, v2.21): 'Obviously, if the condition in (d) is satisfied in K, then it is satisfied in k'. Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 276 (PDF p. 5): 'Cette nullité est vraie dans $\\mathbf Q_\\ell$ si et seulement si elle l'est dans $\\mathbf Q$'. Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof': 'every finite Hankel minor has integral entries, so the same rank bound holds over $\\mathbf Q$'. The linear algebra all three leave unsaid is [lem-weil-matrix-rank-field-extension]."
-      }
-    },
-    {
-      "text": "*Step 5: conclusion.* By Step 4, condition (2) of [prop-weil-rationality-criterion] holds for $C=Z(X_0,T)$ and the field $K=\\mathbf Q$. By the implication (2)$\\Rightarrow$(1) of that criterion there are polynomials $P,Q\\in\\mathbf Q[T]$ with $Q(0)=1$ and $Z(X_0,T)=P/Q$ in $\\mathbf Q[[T]]$, that is, $Q(T)\\,Z(X_0,T)=P(T)$, where $Q$ is a unit of $\\mathbf Q[[T]]$ because $Q(0)=1$. This is what $Z(X_0,T)\\in\\mathbf Q(T)$ means for a power series: $Z(X_0,T)$ is the Taylor expansion at $T=0$ of the rational function $P/Q\\in\\mathbf Q(T)$. Together with the integrality of Step 1, $Z(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$, and with the Euler product of Step 1 both displayed assertions of the statement hold.",
-      "uses": [
-        "prop-weil-rationality-criterion"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-        "place": "Chapter II, §27, Corollary 27.8, p. 156 (PDF p. 156, v2.21): '$Z(X_0,t)$ ... is a rational function with coefficients in $\\mathbf Q$, i.e., it lies in $\\mathbf Q(t)$', by Lemma 27.9 with $k=\\mathbf Q$, $K=\\mathbf Q_\\ell$. Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 276 (PDF p. 5): '$Z(X_0,t)$ est donc le développement en série de Taylor d'un élément de $\\mathbf Q(t)$. En d'autres termes, $Z(X_0,t)\\in\\mathbf Z[[t]]\\cap\\mathbf Q_\\ell(t)\\subset\\mathbf Q(t)$'. Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof', last sentence (there through [prop-rational-descent], which is this implication for $K=\\mathbf Q$)."
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "thm-weil-final-rationality",
+ "blueprint": {
+  "is": "thm-weil-final-rationality",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Weil conjectures I: rationality and Euler product",
+ "statement": "Fix a finite field\n$k_0=\\mathbf F_q$ of characteristic $p$, with algebraic closure\n$k=\\overline{\\mathbf F}_q$.\nLet $X_0/k_0$ be\nsmooth, proper and geometrically\nconnected of pure dimension $d\\geq0$, and put $X=X_0\\times_{k_0}k$.\nFor an indeterminate $T$, use the\npoint-count zeta series\n\n$$\nZ(X_0,T)=\\exp\\left(\\sum_{n\\geq1}\n\\#X_0(\\mathbf F_{q^n})\\frac{T^n}{n}\\right).\n$$\n\nHere $|X_0|$ is the set of closed points and\n$\\deg(x)=[\\kappa(x):k_0]$. Then\n\n$$\nZ(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T),\n\\qquad\nZ(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}.\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md",
+  "place": "node thm-weil-final-rationality, order 2928"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-point-counts-zeta",
+  "def-weil-formal-power-series"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1: the exponential description, integrality, and the Euler product.* By [def-weil-geometric-hypotheses], $X_0$ is proper over $k_0$, so its structure morphism is of finite type and $X_0$ is a finite-type $k_0$-scheme. Hence $N_n(X_0)=\\#X_0(\\mathbf F_{q^n})$ for $n\\geq1$, the set $|X_0|$ of closed points, the residue fields $\\kappa(x)$, the degrees $\\deg(x)=[\\kappa(x):k_0]$ and the point-count zeta series\n\n$$\nZ(X_0,T)=\\exp\\left(\\sum_{n\\geq1}N_n(X_0)\\frac{T^n}{n}\\right)\\in1+T\\mathbf Q[[T]]\n$$\n\n(formal power-series exponential) are those of [def-weil-finite-field-fiber] and [def-weil-point-counts-zeta]; this is the first displayed description of $Z(X_0,T)$ in the statement. Applying [prop-euler-product] to the finite-type $k_0$-scheme $X_0$ gives\n\n$$\nZ(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}\\in1+T\\mathbf Z[[T]],\n$$\n\nthe product being coefficientwise locally finite (modulo $T^{m+1}$ only the finitely many closed points of degree at most $m$ contribute). This is the Euler-product clause of the statement, and it gives the integrality $Z(X_0,T)\\in1+T\\mathbf Z[[T]]$. Write $Z(X_0,T)=\\sum_{n\\geq0}z_nT^n$; then $z_0=1$ and $z_n\\in\\mathbf Z$ for every $n$.",
+   "uses": [
     "def-weil-geometric-hypotheses",
     "def-weil-finite-field-fiber",
     "def-weil-point-counts-zeta",
-    "prop-euler-product",
+    "prop-euler-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, 'Integrality', pp. 157–158 (PDF pp. 157–158, v2.21): the closed-point computation ending in display (4), $Z(X_0,t)=\\prod_{x\\in X_0}(1-t^{\\deg x})^{-1}$, and 'Hence $Z(X_0,t)\\in1+t\\mathbf Z[[t]]$'; the computation itself is [prop-euler-product] (Lean `zetaSeries_eq_tprod`, closed). Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.1.2), p. 274 (PDF p. 3), and (1.4.1)–(1.5.2), p. 275 (PDF p. 4), define $Z$ by the Euler product and derive the exponential form. Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof', first sentence."
+   }
+  },
+  {
+   "text": "*Step 2: the $\\ell$-adic factorization; $Z(X_0,T)$ is rational over $\\Ql$.* Choose a prime $\\ell\\neq p$ (there are infinitely many primes), write $\\Ql=\\mathbf Q_\\ell$, and let $(V_{i,\\ell},F_{i,\\ell},P_{i,\\ell})_{0\\leq i\\leq2d}$ be the smooth-proper cohomological family of $X_0$ [def-weil-smooth-proper-cohomological-family], with $P_{i,\\ell}(T)=\\det(1-TF_{i,\\ell}\\mid V_{i,\\ell})\\in\\Ql[T]$. The geometric clause of [prop-trace-determinant], applied to $X_0$, gives, after the coefficientwise extension $\\mathbf Q[[T]]\\to\\Ql[[T]]$ (the ring homomorphism $\\sum_nc_nT^n\\mapsto\\sum_n(c_n\\cdot1_{\\Ql})T^n$),\n\n$$\nZ(X_0,T)=\\prod_{i=0}^{2d}P_{i,\\ell}(T)^{(-1)^{i+1}}\\quad\\text{in }\\Ql[[T]],\n$$\n\nwhere the negative powers are inverses in $\\Ql[[T]]$: each $P_{i,\\ell}$ has constant coefficient $P_{i,\\ell}(0)=1$ [lem-weil-reverse-charpoly-coefficients, clause 1], hence is a unit of $\\Ql[[T]]$. Let $N_\\ell=\\prod_{i\\text{ odd}}P_{i,\\ell}$ and $D_\\ell=\\prod_{i\\text{ even}}P_{i,\\ell}$ be the parity products [def-weil-parity-products]; they lie in $\\Ql[T]$ and $N_\\ell(0)=D_\\ell(0)=1$. Multiplying the displayed identity by the unit $D_\\ell$ gives\n\n$$\nZ(X_0,T)\\cdot D_\\ell(T)=N_\\ell(T)\\quad\\text{in }\\Ql[[T]].\n$$\n\nSo the image of $Z(X_0,T)$ in $\\Ql[[T]]$ is the quotient $N_\\ell/D_\\ell$ of two polynomials of $\\Ql[T]$ with $D_\\ell(0)=1$: in Milne's words, $Z(X_0,T)$ is a rational function with coefficients in $\\Ql$.",
+   "uses": [
     "def-weil-smooth-proper-cohomological-family",
     "prop-trace-determinant",
     "lem-weil-reverse-charpoly-coefficients",
-    "def-weil-parity-products",
-    "def-weil-hankel-matrix",
-    "prop-weil-rationality-criterion",
-    "lem-weil-integers-injective-char-zero",
-    "lem-weil-matrix-rank-field-extension"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-weil-parity-products"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Chapter II, §27: Theorem 27.6, Corollary 27.8 and Lemma 27.9 (pp. 156–157) for the rationality, 'Integrality' (pp. 157–158, display (4)) for the Euler product and $Z\\in1+t\\mathbf Z[[t]]$; the same argument is Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.1.2)–(1.5.4) and 'Preuve de (1.7) ⇒ (1.6)', pp. 274–276 (PDF pp. 3–5), which each step also cites. Milne's Lemma 27.9 is carried out through the blueprint's Hankel criterion [prop-weil-rationality-criterion] in both directions, as the blueprint's own proof does; the one argument that neither Milne, Deligne nor the blueprint writes out, the invariance of matrix rank under $\\mathbf Q\\subset\\Ql$, is [lem-weil-matrix-rank-field-extension]."
+    "place": "Chapter II, §27, Theorem 27.6, p. 156 (PDF p. 156, v2.21): $Z(X_0,t)=P_1(X_0,t)\\cdots P_{2d-1}(X_0,t)/P_0(X_0,t)\\cdots P_{2d}(X_0,t)$ with $P_r(X,t)=\\det(1-Ft\\mid H^r(X,\\mathbf Q_\\ell))$, and Remark 27.7: '$P_r(X_0,t)=1+\\cdots\\in\\mathbf Q_\\ell[t]$'; Corollary 27.8, first sentence of the proof: 'Theorem 27.6 shows that it is a rational function with coefficients in $\\mathbf Q_\\ell$'. Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.5.4), p. 276 (PDF p. 5): 'Le membre de droite est un élément de $\\mathbf Q_\\ell(t)$'. In the DAG the identity is the geometric clause of [prop-trace-determinant] (which rests on [prop-every-iterate-trace]); the blueprint, literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof', cites both for 'a factorization over $\\Ql(T)$'."
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2928,
-  "blueprint_uses": [
-    "def-weil-finite-field-fiber",
-    "def-weil-geometric-hypotheses",
-    "def-weil-point-counts-zeta",
-    "prop-euler-product",
-    "prop-every-iterate-trace",
-    "prop-rational-descent",
-    "prop-trace-determinant",
+  {
+   "text": "*Step 3: the Hankel rank of $Z(X_0,T)$ over $\\Ql$ is finite.* Let $\\mathcal H(Z)=(z_{r+s})_{r,s\\geq0}$ be the Hankel matrix of $Z(X_0,T)$ [def-weil-hankel-matrix]. Its entries are the integers $z_{r+s}$ of Step 1, and the Hankel matrix of the image of $Z(X_0,T)$ in $\\Ql[[T]]$ is the same matrix with its entries viewed in $\\Ql$. By Step 2 the image of $Z(X_0,T)$ in $\\Ql[[T]]$ satisfies condition (1) of [prop-weil-rationality-criterion] for the field $K=\\Ql$: it is $P/Q$ with $P=N_\\ell$, $Q=D_\\ell\\in\\Ql[T]$ and $Q(0)=1$. By the implication (1)$\\Rightarrow$(2) of that criterion, its Hankel rank over $\\Ql$ is finite: there is an integer $R\\geq0$ such that every finite square submatrix of $\\mathcal H(Z)$ has rank at most $R$ over $\\Ql$.",
+   "uses": [
+    "def-weil-hankel-matrix",
     "prop-weil-rationality-criterion"
-  ],
-  "lean": {
-    "module": "WeilConjectures.Statement",
-    "declaration": "AlgebraicGeometry.Scheme.zetaSeries_rational",
-    "branch": "master",
-    "line": 80,
-    "sorry_free": false,
-    "body_lines": 1
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, Lemma 27.9 and its proof (Bourbaki, Algèbre, IV.5, Exercise 3, items (a), (b), (d)), pp. 156–157 (PDF pp. 156–157, v2.21): $f(t)\\in K(t)$ if and only if the Hankel determinants $H^{(r+1)}_{d+j}$ vanish for all $j\\geq1$, for some $d,r$. Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 276 (PDF p. 5): 'l'image de $Z(X_0,t)$ dans $\\mathbf Q_\\ell[[t]]$ est le développement de Taylor d'une fraction rationnelle. Ceci signifie que pour N et M assez grands ... les déterminants de Hankel $H_\\lambda=\\det((a_{i+j+\\lambda})_{0\\leq i,j\\leq M})$ ($\\lambda>N$) sont nuls'. In the DAG, Bourbaki's criterion in the form 'rational iff finite Hankel rank' is [prop-weil-rationality-criterion]; blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof': 'By [prop-weil-rationality-criterion], this rational expression gives finite Hankel rank over $\\Ql$'."
+   }
   },
-  "blueprint_lean": [
-    "AlgebraicGeometry.Scheme.zetaSeries_rational"
-  ],
-  "uses_not_cited": [
-    "def-weil-finite-field-fiber",
-    "def-weil-geometric-hypotheses"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.zetaSeries_rational",
-          "module": "WeilConjectures.Statement",
-          "lines": [
-            77,
-            84
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.zetaSeries_rational",
-          "module": "WeilConjectures.Statement",
-          "lines": [
-            80,
-            87
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine",
-          "module": "WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar",
-          "lines": [
-            405,
-            415
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.WeilComplex.finsum_trace_compactlySupportedCohomology_eq",
-          "module": "WeilConjectures.ZetaFunction.TraceFormula",
-          "lines": [
-            65,
-            80
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
+  {
+   "text": "*Step 4: the rank bound descends to $\\mathbf Q$.* Since $\\Ql$ has characteristic zero [lem-weil-integers-injective-char-zero], its prime field is $\\mathbf Q$: the ring homomorphism $\\mathbf Q\\to\\Ql$ is injective and identifies $\\mathbf Q$ with a subfield of $\\Ql$, and the entries $z_{r+s}\\in\\mathbf Z\\subset\\mathbf Q$ of $\\mathcal H(Z)$ are sent to the entries of the Hankel matrix of Step 3. Let $M$ be a finite square submatrix of $\\mathcal H(Z)$, a matrix with entries in $\\mathbf Q$. By [lem-weil-matrix-rank-field-extension], applied to the field extension $\\mathbf Q\\subset\\Ql$, the rank of $M$ over $\\mathbf Q$ equals its rank over $\\Ql$, which is at most $R$ by Step 3. Taking the supremum over all finite square submatrices, which is how the rank of $\\mathcal H(Z)$ is defined [def-weil-hankel-matrix], the Hankel rank of $Z(X_0,T)\\in\\mathbf Q[[T]]$ over $\\mathbf Q$ is at most $R$, hence finite. (In the words of Deligne and Milne: a Hankel determinant of $Z(X_0,T)$ is a rational number, and it vanishes in $\\Ql$ if and only if it vanishes in $\\mathbf Q$.)",
+   "uses": [
+    "lem-weil-integers-injective-char-zero",
+    "lem-weil-matrix-rank-field-extension",
+    "def-weil-hankel-matrix"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, proof of Lemma 27.9, last sentence, p. 157 (PDF p. 157, v2.21): 'Obviously, if the condition in (d) is satisfied in K, then it is satisfied in k'. Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 276 (PDF p. 5): 'Cette nullité est vraie dans $\\mathbf Q_\\ell$ si et seulement si elle l'est dans $\\mathbf Q$'. Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof': 'every finite Hankel minor has integral entries, so the same rank bound holds over $\\mathbf Q$'. The linear algebra all three leave unsaid is [lem-weil-matrix-rank-field-extension]."
+   }
   },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "thm-weil-final-rationality",
-    "worker": "stage1",
-    "summary": "Statement checked against the master blueprint file (identical) and the slopmaster2 LaTeX (01_final_weil_conjectures.tex, clause (i) of thm:weil-final, same content; slopmaster2 has no separate node for this theorem) and against Milne LEC Theorem 27.6, Corollary 27.8 and §27 'Integrality' and Deligne Weil I p. 276; kept. The Lean declaration AlgebraicGeometry.Scheme.zetaSeries_rational (WeilConjectures/Statement.lean 77–84, identical on master and slopmaster2) states something else: for every scheme of finite type over a finite field (no smoothness, properness, geometric connectedness or separatedness), there are P, Q in Z[T] with Q(0)=1 and Z·Q=P in Q[[T]]; it has no Euler-product clause, and its conclusion (integral P and Q) is stronger than this node's Z in 1+TZ[[T]] ∩ Q(T), needing Fatou's lemma ([prop-weil-integral-rational-series]); the node's statement was not changed, since it agrees with its source. stmt_deps completed with def-weil-point-counts-zeta (the statement says 'use the point-count zeta series') and def-weil-formal-power-series (Z[[T]]); the imported one-paragraph proof was replaced by five steps following Milne/Deligne: the Euler product and integrality from prop-euler-product (closed on slopmaster2); the l-adic identity Z·D_l=N_l from the geometric clause of prop-trace-determinant with P_{i,l}(0)=1 from lem-weil-reverse-charpoly-coefficients (the blueprint also cites prop-every-iterate-trace here, which only prop-trace-determinant's proof uses); finite Hankel rank over Q_l by prop-weil-rationality-criterion (1)⇒(2); descent of the rank bound to Q, where the linear algebra that Milne ('Obviously'), Deligne and the blueprint ('every finite Hankel minor has integral entries') leave unsaid is the new node lem-weil-matrix-rank-field-extension (no Mathlib match; ingredients linearIndependent_algebraMap_comp_iff, Matrix.rank_eq_finrank_span_row, RingHom.map_det recorded); and Q(T)-rationality by the criterion (2)⇒(1) with K=Q. The blueprint's prop-rational-descent is not cited: its statement is the criterion's (2)⇒(1) for K=Q under hypotheses (Euler product, trace-determinant identity) it does not use, and its proof is that one application; it stays reachable through prop-weil-zeta-integral-rational and prop-weil-zeta-normalized-presentation. The target thm-weil-final cites def-weil-rational-power-series for the meaning of 'Z in Q(T)'; that node does not exist yet (another worker's), so Step 5 spells the meaning out instead and the lead may add it to stmt_deps when it lands."
-  },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass"
-  },
-  "chapter": "sec-zeta-weil",
-  "unit": "sk-thm-weil1",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix a finite field\n$k_0=\\mathbf F_q$ of characteristic $p$, with algebraic closure\n$k=\\overline{\\mathbf F}_q$.\nLet $X_0$ be a $k_0$-scheme of finite type (quasi-compact and locally of\nfinite type over $k_0$).\nFor an indeterminate $T$, use the\npoint-count zeta series\n\n$$\nZ(X_0,T)=\\exp\\left(\\sum_{n\\geq1}\n\\#X_0(\\mathbf F_{q^n})\\frac{T^n}{n}\\right).\n$$\n\nHere $|X_0|$ is the set of closed points and\n$\\deg(x)=[\\kappa(x):k_0]$. Then there are polynomials\n$A,B\\in\\mathbf Z[T]$ with $B(0)=1$ and\n\n$$\nB(T)\\,Z(X_0,T)=A(T)\\quad\\text{in }\\mathbf Q[[T]],\n$$\n\nso that in particular $Z(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$; and\n\n$$\nZ(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}.\n$$",
-    "proof": [
-      {
-        "text": "The exponential definition and the closed-point product are\n[def-weil-point-counts-zeta], [prop-euler-product]. The trace calculation\n[prop-every-iterate-trace], together with the determinant identity\n[prop-trace-determinant], gives a factorization over $\\Ql(T)$. By\n[prop-weil-rationality-criterion], this rational expression gives finite Hankel\nrank over $\\Ql$; every finite Hankel minor has integral entries, so the\nsame rank bound holds over $\\mathbf Q$. Thus the finite-rank hypothesis of\n[prop-rational-descent] is verified, and its rationality statement\ndescends the factorization to $\\mathbf Q(T)$; the integrality of the\npoint-count coefficients is the exponential definition above, so the two\nasserted forms hold.",
-        "uses": [
-          "def-weil-point-counts-zeta",
-          "prop-euler-product",
-          "prop-every-iterate-trace",
-          "prop-trace-determinant",
-          "prop-weil-rationality-criterion",
-          "prop-rational-descent"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "*Step 5: conclusion.* By Step 4, condition (2) of [prop-weil-rationality-criterion] holds for $C=Z(X_0,T)$ and the field $K=\\mathbf Q$. By the implication (2)$\\Rightarrow$(1) of that criterion there are polynomials $P,Q\\in\\mathbf Q[T]$ with $Q(0)=1$ and $Z(X_0,T)=P/Q$ in $\\mathbf Q[[T]]$, that is, $Q(T)\\,Z(X_0,T)=P(T)$, where $Q$ is a unit of $\\mathbf Q[[T]]$ because $Q(0)=1$. This is what $Z(X_0,T)\\in\\mathbf Q(T)$ means for a power series: $Z(X_0,T)$ is the Taylor expansion at $T=0$ of the rational function $P/Q\\in\\mathbf Q(T)$. Together with the integrality of Step 1, $Z(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$, and with the Euler product of Step 1 both displayed assertions of the statement hold.",
+   "uses": [
+    "prop-weil-rationality-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Chapter II, §27, Corollary 27.8, p. 156 (PDF p. 156, v2.21): '$Z(X_0,t)$ ... is a rational function with coefficients in $\\mathbf Q$, i.e., it lies in $\\mathbf Q(t)$', by Lemma 27.9 with $k=\\mathbf Q$, $K=\\mathbf Q_\\ell$. Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, p. 276 (PDF p. 5): '$Z(X_0,t)$ est donc le développement en série de Taylor d'un élément de $\\mathbf Q(t)$. En d'autres termes, $Z(X_0,t)\\in\\mathbf Z[[t]]\\cap\\mathbf Q_\\ell(t)\\subset\\mathbf Q(t)$'. Blueprint: literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-weil1/thm-weil-final-rationality.md, '## Proof', last sentence (there through [prop-rational-descent], which is this implication for $K=\\mathbf Q$)."
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-geometric-hypotheses",
+  "def-weil-finite-field-fiber",
+  "def-weil-point-counts-zeta",
+  "prop-euler-product",
+  "def-weil-smooth-proper-cohomological-family",
+  "prop-trace-determinant",
+  "lem-weil-reverse-charpoly-coefficients",
+  "def-weil-parity-products",
+  "def-weil-hankel-matrix",
+  "prop-weil-rationality-criterion",
+  "lem-weil-integers-injective-char-zero",
+  "lem-weil-matrix-rank-field-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Chapter II, §27: Theorem 27.6, Corollary 27.8 and Lemma 27.9 (pp. 156–157) for the rationality, 'Integrality' (pp. 157–158, display (4)) for the Euler product and $Z\\in1+t\\mathbf Z[[t]]$; the same argument is Deligne, literature/deligne-weil-I_PMIHES-1974-43.pdf, (1.1.2)–(1.5.4) and 'Preuve de (1.7) ⇒ (1.6)', pp. 274–276 (PDF pp. 3–5), which each step also cites. Milne's Lemma 27.9 is carried out through the blueprint's Hankel criterion [prop-weil-rationality-criterion] in both directions, as the blueprint's own proof does; the one argument that neither Milne, Deligne nor the blueprint writes out, the invariance of matrix rank under $\\mathbf Q\\subset\\Ql$, is [lem-weil-matrix-rank-field-extension]."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2928,
+ "blueprint_uses": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses",
+  "def-weil-point-counts-zeta",
+  "prop-euler-product",
+  "prop-every-iterate-trace",
+  "prop-rational-descent",
+  "prop-trace-determinant",
+  "prop-weil-rationality-criterion"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Statement",
+  "declaration": "AlgebraicGeometry.Scheme.zetaSeries_rational",
+  "branch": "master",
+  "line": 80,
+  "sorry_free": false,
+  "body_lines": 1
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.zetaSeries_rational"
+ ],
+ "uses_not_cited": [
+  "def-weil-finite-field-fiber",
+  "def-weil-geometric-hypotheses"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "thm-weil-final-rationality",
+  "worker": "stage1",
+  "summary": "Statement checked against the master blueprint file (identical) and the slopmaster2 LaTeX (01_final_weil_conjectures.tex, clause (i) of thm:weil-final, same content; slopmaster2 has no separate node for this theorem) and against Milne LEC Theorem 27.6, Corollary 27.8 and §27 'Integrality' and Deligne Weil I p. 276; kept. The Lean declaration AlgebraicGeometry.Scheme.zetaSeries_rational (WeilConjectures/Statement.lean 77–84, identical on master and slopmaster2) states something else: for every scheme of finite type over a finite field (no smoothness, properness, geometric connectedness or separatedness), there are P, Q in Z[T] with Q(0)=1 and Z·Q=P in Q[[T]]; it has no Euler-product clause, and its conclusion (integral P and Q) is stronger than this node's Z in 1+TZ[[T]] ∩ Q(T), needing Fatou's lemma ([prop-weil-integral-rational-series]); the node's statement was not changed, since it agrees with its source. stmt_deps completed with def-weil-point-counts-zeta (the statement says 'use the point-count zeta series') and def-weil-formal-power-series (Z[[T]]); the imported one-paragraph proof was replaced by five steps following Milne/Deligne: the Euler product and integrality from prop-euler-product (closed on slopmaster2); the l-adic identity Z·D_l=N_l from the geometric clause of prop-trace-determinant with P_{i,l}(0)=1 from lem-weil-reverse-charpoly-coefficients (the blueprint also cites prop-every-iterate-trace here, which only prop-trace-determinant's proof uses); finite Hankel rank over Q_l by prop-weil-rationality-criterion (1)⇒(2); descent of the rank bound to Q, where the linear algebra that Milne ('Obviously'), Deligne and the blueprint ('every finite Hankel minor has integral entries') leave unsaid is the new node lem-weil-matrix-rank-field-extension (no Mathlib match; ingredients linearIndependent_algebraMap_comp_iff, Matrix.rank_eq_finrank_span_row, RingHom.map_det recorded); and Q(T)-rationality by the criterion (2)⇒(1) with K=Q. The blueprint's prop-rational-descent is not cited: its statement is the criterion's (2)⇒(1) for K=Q under hypotheses (Euler product, trace-determinant identity) it does not use, and its proof is that one application; it stays reachable through prop-weil-zeta-integral-rational and prop-weil-zeta-normalized-presentation. The target thm-weil-final cites def-weil-rational-power-series for the meaning of 'Z in Q(T)'; that node does not exist yet (another worker's), so Step 5 spells the meaning out instead and the lead may add it to stmt_deps when it lands."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-weil1",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix a finite field\n$k_0=\\mathbf F_q$ of characteristic $p$, with algebraic closure\n$k=\\overline{\\mathbf F}_q$.\nLet $X_0$ be a $k_0$-scheme of finite type (quasi-compact and locally of\nfinite type over $k_0$).\nFor an indeterminate $T$, use the\npoint-count zeta series\n\n$$\nZ(X_0,T)=\\exp\\left(\\sum_{n\\geq1}\n\\#X_0(\\mathbf F_{q^n})\\frac{T^n}{n}\\right).\n$$\n\nHere $|X_0|$ is the set of closed points and\n$\\deg(x)=[\\kappa(x):k_0]$. Then there are polynomials\n$A,B\\in\\mathbf Z[T]$ with $B(0)=1$ and\n\n$$\nB(T)\\,Z(X_0,T)=A(T)\\quad\\text{in }\\mathbf Q[[T]],\n$$\n\nso that in particular $Z(X_0,T)\\in1+T\\mathbf Z[[T]]\\cap\\mathbf Q(T)$; and\n\n$$\nZ(X_0,T)=\\prod_{x\\in|X_0|}(1-T^{\\deg(x)})^{-1}.\n$$",
+  "proof": [
+   {
+    "text": "The exponential definition and the closed-point product are\n[def-weil-point-counts-zeta], [prop-euler-product]. The trace calculation\n[prop-every-iterate-trace], together with the determinant identity\n[prop-trace-determinant], gives a factorization over $\\Ql(T)$. By\n[prop-weil-rationality-criterion], this rational expression gives finite Hankel\nrank over $\\Ql$; every finite Hankel minor has integral entries, so the\nsame rank bound holds over $\\mathbf Q$. Thus the finite-rank hypothesis of\n[prop-rational-descent] is verified, and its rationality statement\ndescends the factorization to $\\mathbf Q(T)$; the integrality of the\npoint-count coefficients is the exponential definition above, so the two\nasserted forms hold.",
+    "uses": [
+     "def-weil-point-counts-zeta",
+     "prop-euler-product",
+     "prop-every-iterate-trace",
+     "prop-trace-determinant",
+     "prop-weil-rationality-criterion",
+     "prop-rational-descent"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

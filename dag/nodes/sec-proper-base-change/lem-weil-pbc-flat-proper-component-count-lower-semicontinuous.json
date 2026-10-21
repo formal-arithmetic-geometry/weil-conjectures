@@ -1,314 +1,303 @@
 {
-  "id": "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-direct-image-finiteness-proper",
-      "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0E0N, label lemma-proper-flat-geom-red, specialized to smooth morphisms (smooth implies flat with geometrically reduced fibres); Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous",
-      "via": [
-        "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
-        "lem-weil-pbc-good-curves-generic-diagram",
-        "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-        "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
-        "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
-        "lem-weil-pbc-etale-compactification-constructibility",
-        "lem-weil-pbc-etale-proper-direct-image-finiteness"
-      ]
-    },
-    "same_as": []
+ "id": "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0E0N, label lemma-proper-flat-geom-red, specialized to smooth morphisms (smooth implies flat with geometrically reduced fibres); Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous",
+   "via": [
+    "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
   },
-  "kind": "statement",
-  "title": "Lower semicontinuity of geometric component counts in flat proper families",
-  "statement": "Let $f:X\\to S$ be a proper flat morphism of finite presentation of schemes [def-pc-scheme] [def-weil-proper-morphism] [def-weil-flat-morphism] [def-weil-pbc-scheme-conventions]. For $s\\in S$, write $X_{\\bar s}=X\\times_S\\operatorname{Spec}\\overline{\\kappa(s)}$ for its geometric fibre [def-weil-geometric-fibre]. Let $n(s)$ be the number of connected components (maximal nonempty connected subsets) of its underlying space [def-weil-connected-scheme]. Each $n(s)$ is finite, with $n(s)=0$ when $X_{\\bar s}$ is empty. For every $s\\in S$ there is an open neighbourhood $V$ of $s$ such that $n(t)\\geq n(s)$ for every $t\\in V$; equivalently, the integer-valued function $n$ is lower semicontinuous.",
-  "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous"
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-proper-morphism",
-    "def-weil-flat-morphism",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-geometric-fibre",
-    "def-weil-connected-scheme"
-  ],
-  "proof": [
-    {
-      "text": "Fix $s\\in S$ and replace $S$ by an affine open neighbourhood of $s$, pulling back $X$. This does not change any fibre at a point of that open. Properness is preserved by this base change. Flatness and local finite presentation restrict because the same stalk maps and affine presentation witnesses are used. Write $S=\\operatorname{Spec}A$. Take the canonical Stein factorization $X\\xrightarrow{q}T=\\operatorname{Spec}\\Gamma(X,\\mathcal O_X)\\xrightarrow{\\pi}S$. The affine Stein theorem gives that $\\pi$ is integral and $q$ is proper with geometrically connected, hence nonempty, fibres. The Stein-fibre lemma gives finitely many points of $T$ over $s$, all with finite residue extensions.",
-      "uses": [
-        "lem-weil-pbc-proper-base-change",
-        "def-weil-flat-morphism",
-        "def-sbc-locally-finite-presentation",
-        "lem-weil-pbc-stein-factorization-affine",
-        "lem-weil-pbc-stein-finite-fibres-residue-fields"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-      }
-    },
-    {
-      "text": "Apply integral-fibre etale splitting to $\\pi:T\\to S$ at $s$. Its two extra hypotheses are exactly the finiteness and residue-extension conclusions of step 1. Obtain an affine etale $g:U\\to S$, $u$ over $s$, and $T_U=T\\times_SU=\\coprod_{i=1}^m V_i$, with each $V_i$ open and closed and having a single point $v_i$ over $u$ with purely inseparable residue extension. Set $X_U=X\\times_SU$ and $X_i=q_U^{-1}(V_i)$, where $q_U:X_U\\to T_U$ is the base change of $q$. Preimages of open-and-closed subsets are open and closed; they form a finite disjoint partition of $X_U$.",
-      "uses": [
-        "lem-weil-pbc-integral-fibre-etale-splitting"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-      }
-    },
-    {
-      "text": "For every $w\\in U$, base-change invariance gives $n_{X_U/U}(w)=n_{X/S}(g(w))$, in particular equality at $u$ and $s$. The morphism $X_U\\to U$ is flat by flat base-change stability, and locally of finite presentation by the finite-presentation permanence theorem. Consequently each open subscheme $X_i$ is flat and locally of finite presentation over $U$: its stalk maps are those of $X_U\\to U$, and if $\\operatorname{Spec}C$ is an affine presentation witness at a point of $X_i$, choose a principal open $D(h)$ containing that point and contained in $X_i$. If $C=R[x_1,\\ldots,x_a]/(r_1,\\ldots,r_b)$, then $C_h=R[x_1,\\ldots,x_a,z]/(r_1,\\ldots,r_b,zh-1)$ is again finitely presented over $R$.",
-      "uses": [
-        "lem-weil-pbc-geometric-component-count-base-change",
-        "lem-weil-pbc-flat-morphism-base-change",
-        "lem-weil-pbc-qcqs-morphism-permanence",
-        "def-weil-flat-morphism",
-        "def-sbc-locally-finite-presentation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-      }
-    },
-    {
-      "text": "Choose an algebraic closure $\\Omega$ of $\\kappa(u)$. The fibre $(V_i)_u\\to\\operatorname{Spec}\\kappa(u)$ is injective on points and has a purely inseparable residue extension at its only point, so it is radicial. The radicial/universally-injective equivalence implies that $(V_i)_{\\bar u}$ has at most one point. It has at least one: in positive characteristic send each $a\\in\\kappa(v_i)$, with $a^{p^r}=c\\in\\kappa(u)$, to the unique root of $Z^{p^r}-c$ in $\\Omega$. Uniqueness makes this independent of the exponent; choosing a common exponent for two elements and using $(a+b)^{p^r}=a^{p^r}+b^{p^r}$ shows that it preserves sums, and the corresponding product identity shows it preserves products. It fixes $\\kappa(u)$ and sends $1$ to $1$, so it is an injective field homomorphism. In characteristic zero the extension is trivial. Composing $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\kappa(v_i)$ with the residue-field point gives an $\\Omega$-point of $(V_i)_u$. Thus $(V_i)_{\\bar u}$ has exactly one point $z_i$. The fibre of $q_\\Omega$ at $z_i$ is a field extension of the fibre of $q$ at the image of $z_i$ in $T$: this follows by reassociating the fibre products. That fibre is connected and nonempty by the geometrically-connected-fibre clause of the affine Stein theorem and the definition of geometric connectedness. The fibre homeomorphism identifies its underlying space with $q_\\Omega^{-1}(z_i)$, which is the whole of $(X_i)_{\\bar u}$. Hence $(X_i)_{\\bar u}$ is connected and nonempty.",
-      "uses": [
-        "def-weil-radicial-morphism",
-        "def-weil-pbc-finite-purely-inseparable-extension",
-        "lem-weil-pbc-stein-factorization-affine",
-        "def-pc-geometrically-irreducible",
-        "def-pc-scheme-fibre",
-        "def-weil-algebraic-closure",
-        "def-pc-field-extension"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-      }
-    },
-    {
-      "text": "The geometric fibre $(X_U)_{\\bar u}$ is partitioned into the $m$ pairwise disjoint open-and-closed connected nonempty subsets $(X_i)_{\\bar u}$. Each is a maximal connected subset: a connected subset cannot meet both an open-and-closed piece and its complement. Thus its component count is exactly $m$, and step 3 gives $n(s)=m<\\infty$. This argument works at every $s$, proving finiteness everywhere. For $m=0$ the partition is empty, the geometric fibre is empty and $n(s)=0$. In that case the required inequality is automatic on $S$ because all counts are nonnegative.",
-      "uses": [
-        "def-weil-connected-scheme",
-        "lem-weil-pbc-geometric-component-count-base-change"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-      }
-    },
-    {
-      "text": "For $m>0$, each $X_i\\to U$ is flat and locally of finite presentation, so its image $W_i$ is open. It contains $u$ by step 4. Put $W=\\bigcap_{i=1}^m W_i$, an open neighbourhood of $u$. For $w\\in W$, every $(X_i)_w$ is nonempty. Its geometric base change is still nonempty: take a nonempty affine open $\\operatorname{Spec}D$ in $(X_i)_w$; the map $D\\to D\\otimes_{\\kappa(w)}\\overline{\\kappa(w)}$ is faithfully flat, so its spectrum surjects onto $\\operatorname{Spec}D$. The geometric fibre $(X_U)_{\\bar w}$ therefore has at least $m$ components, because it is partitioned into $m$ nonempty open-and-closed pieces and each connected component lies in a single piece.",
-      "uses": [
-        "lem-weil-pbc-flat-lfp-open",
-        "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-        "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-        "def-weil-connected-scheme"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-      }
-    },
-    {
-      "text": "The etale morphism $g$ is open, so $V=g(W)$ is an open neighbourhood of $s$ in the affine open chosen in step 1, hence also in the original $S$. Given $t\\in V$, choose $w\\in W$ with $g(w)=t$. Step 3 and step 6 give $n(t)=n_{X_U/U}(w)\\geq m=n(s)$. For an integer threshold $a$, every point with $n(s)>a$ has such an open neighbourhood lying in $\\{t:n(t)>a\\}$; hence all strict superlevel sets are open, which is lower semicontinuity.",
-      "uses": [
-        "lem-weil-pbc-etale-morphism-open-map",
-        "lem-weil-pbc-geometric-component-count-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-morphisms.tex",
-        "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-pc-field-extension",
-    "def-pc-geometrically-irreducible",
-    "def-pc-scheme-fibre",
-    "def-sbc-locally-finite-presentation",
-    "def-weil-algebraic-closure",
-    "def-weil-connected-scheme",
-    "def-weil-flat-morphism",
-    "def-weil-pbc-finite-purely-inseparable-extension",
-    "def-weil-radicial-morphism",
-    "lem-weil-pbc-etale-morphism-open-map",
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
-    "lem-weil-pbc-flat-lfp-open",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-weil-pbc-geometric-component-count-base-change",
-    "lem-weil-pbc-integral-fibre-etale-splitting",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Lower semicontinuity of geometric component counts in flat proper families",
+ "statement": "Let $f:X\\to S$ be a proper flat morphism of finite presentation of schemes [def-pc-scheme] [def-weil-proper-morphism] [def-weil-flat-morphism] [def-weil-pbc-scheme-conventions]. For $s\\in S$, write $X_{\\bar s}=X\\times_S\\operatorname{Spec}\\overline{\\kappa(s)}$ for its geometric fibre [def-weil-geometric-fibre]. Let $n(s)$ be the number of connected components (maximal nonempty connected subsets) of its underlying space [def-weil-connected-scheme]. Each $n(s)$ is finite, with $n(s)=0$ when $X_{\\bar s}$ is empty. For every $s\\in S$ there is an open neighbourhood $V$ of $s$ such that $n(t)\\geq n(s)$ for every $t\\in V$; equivalently, the integer-valued function $n$ is lower semicontinuous.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-geometric-fibre",
+  "def-weil-connected-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Fix $s\\in S$ and replace $S$ by an affine open neighbourhood of $s$, pulling back $X$. This does not change any fibre at a point of that open. Properness is preserved by this base change. Flatness and local finite presentation restrict because the same stalk maps and affine presentation witnesses are used. Write $S=\\operatorname{Spec}A$. Take the canonical Stein factorization $X\\xrightarrow{q}T=\\operatorname{Spec}\\Gamma(X,\\mathcal O_X)\\xrightarrow{\\pi}S$. The affine Stein theorem gives that $\\pi$ is integral and $q$ is proper with geometrically connected, hence nonempty, fibres. The Stein-fibre lemma gives finitely many points of $T$ over $s$, all with finite residue extensions.",
+   "uses": [
     "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
     "lem-weil-pbc-stein-factorization-affine",
     "lem-weil-pbc-stein-finite-fibres-residue-fields"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/more-morphisms.tex",
     "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "The number of geometric connected components of fibres of a proper flat finitely presented morphism is lower semicontinuous",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "In a flat proper family every geometric connected component of a fibre persists in nearby fibres",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"LowerSemicontinuous\", \"Scheme\"",
-      "results": "[loogle] OK 0 hit(s)\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "lowerSemicontinuous.*component|component.*lowerSemicontinuous|geometric.*connected.*component",
-      "results": "[grep] OK 0 hit(s)\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Geometric fibre connected component count lower semicontinuity for proper flat schemes",
-      "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "LowerSemicontinuous|finite.*appTop|appTop.*finite|connectedComponents",
-      "results": "{\"t\": \"2026-10-14T08:58:31Z\", \"tool\": \"grep\", \"query\": \"LowerSemicontinuous|finite.*appTop|appTop.*finite|connectedComponents\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"270e5e7b77a8e355\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a proper flat finitely presented scheme morphism the cardinality of pi zero of geometric fibers is lower semicontinuous",
-      "results": "{\"t\": \"2026-10-14T08:58:32Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper flat finitely presented scheme morphism the cardinality of pi zero of geometric fibers is lower semicontinuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.instFstScheme\"], \"digest\": \"844b58178172a4d8\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The section algebra of a complete reduced scheme over an algebraically closed field is the algebra of functions on its finite set of connected components",
-      "results": "{\"t\": \"2026-10-14T08:58:32Z\", \"tool\": \"leanfinder\", \"query\": \"The section algebra of a complete reduced scheme over an algebraically closed field is the algebra of functions on its finite set of connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\"], \"digest\": \"4b92e4e3fc07cb0d\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"IsProper\", \"ConnectedComponents\"",
-      "results": "{\"t\": \"2026-10-14T08:59:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"ConnectedComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The number of geometric connected components of fibres of a proper flat finitely presented scheme morphism is lower semicontinuous",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "In a proper flat family disconnected geometric fibres remain disconnected on a neighbourhood",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"Sigma.isConnected_iff\", \"module\": \"Mathlib/Topology/Connected/Clopen\", \"type\": \"∀ {ι : Type u_1} {X : ι → Type u_2} [inst : (i : ι) → TopologicalSpace (X i)] {s : Set ((i : ι) × X i)},\\n  IsConnected s ↔ ∃ i t, IsConnected t ∧ s = Sigma.mk i '' t\", \"doc\": \"A subset $ S $ of the disjoint union $ \\\\Sigma X $ of topological spaces is connected if and only if there exists an index $ i $ and a connected subset $ T \\\\subseteq X_i $ such that $ S $ is precisely \"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"preimage_connectedComponent_connected\", \"module\": \"Mathlib/Topology/Connected/Clopen\", \"type\": \"∀ {α : Type u} {β : Type v} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] {f : α → β},\\n  (∀ (t : β), IsConnected (f ⁻¹' {t})) →\\n    (∀ (T : Set β), IsClosed T ↔ IsClosed (f ⁻¹' T)) → ∀ (t : β), IsConnected (f ⁻¹' connectedComponent t)\", \"doc\": \"Let $ f : \\\\alpha \\\\to \\\\beta $ be a function between topological spaces. If (1) every fiber $ f^{-1}(\\\\{t\\\\}) $ is connected for $ t \\\\in \\\\beta $, and (2) a subset $ T \\\\subseteq \\\\beta $ is closed if and on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isEmpty_pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Disjoint (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\\n      (Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.base)) →\\n    IsEmpty ↥(CategoryTheory.Limits.pullback f g)\", \"doc\": \"In the category of schemes, for any two morphisms $ f: X \\\\to Z $ and $ g: Y \\\\to Z $, the pullback of $ f $ and $ g $ exists.\"}\n  {\"name\": \"Continuous.image_connectedComponent_eq_singleton\", \"module\": \"Mathlib/Topology/Connected/TotallyDisconnected\", \"type\": \"∀ {α : Type u} [inst : TopologicalSpace α] {β : Type u_3} [inst_1 : TopologicalSpace β] [TotallyDisconnectedSpace β]\\n  {f : α → β}, Continuous f → ∀ (a : α), f '' connectedComponent a = {f a}\", \"doc\": \"For a continuous function $ f : \\\\alpha \\\\to \\\\beta $ where $ \\\\beta $ is a totally disconnected topological space, the image of the connected component containing any point $ a \\\\in \\\\alpha $ under $ f $ i\"}\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"LowerSemicontinuous\", \"Scheme\"",
-      "results": "[loogle] OK 0 hit(s)\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "component.*lowerSemi|lowerSemi.*component|geometric.*connected.*component",
-      "results": "[grep] OK 0 hit(s)\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Geometric connected component count of proper flat scheme fibres is lower semicontinuous",
-      "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
-    "by": "worker",
-    "date": "2026-10-14"
+  {
+   "text": "Apply integral-fibre etale splitting to $\\pi:T\\to S$ at $s$. Its two extra hypotheses are exactly the finiteness and residue-extension conclusions of step 1. Obtain an affine etale $g:U\\to S$, $u$ over $s$, and $T_U=T\\times_SU=\\coprod_{i=1}^m V_i$, with each $V_i$ open and closed and having a single point $v_i$ over $u$ with purely inseparable residue extension. Set $X_U=X\\times_SU$ and $X_i=q_U^{-1}(V_i)$, where $q_U:X_U\\to T_U$ is the base change of $q$. Preimages of open-and-closed subsets are open and closed; they form a finite disjoint partition of $X_U$.",
+   "uses": [
+    "lem-weil-pbc-integral-fibre-etale-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
-    "worker": "stage1",
-    "summary": "Followed Tag 0BUI through affine Stein factorization and etale splitting, with three strictly smaller unsplit inputs. Wrote out the radicial single-point geometric fibre argument, finite clopen component count (including zero), persistence by flat openness, and descent of the neighbourhood through an open etale map. No statement correction or Lean attachment.",
-    "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0E0N, label lemma-proper-flat-geom-red, specialized to smooth morphisms (smooth implies flat with geometrically reduced fibres); Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous"
+  {
+   "text": "For every $w\\in U$, base-change invariance gives $n_{X_U/U}(w)=n_{X/S}(g(w))$, in particular equality at $u$ and $s$. The morphism $X_U\\to U$ is flat by flat base-change stability, and locally of finite presentation by the finite-presentation permanence theorem. Consequently each open subscheme $X_i$ is flat and locally of finite presentation over $U$: its stalk maps are those of $X_U\\to U$, and if $\\operatorname{Spec}C$ is an affine presentation witness at a point of $X_i$, choose a principal open $D(h)$ containing that point and contained in $X_i$. If $C=R[x_1,\\ldots,x_a]/(r_1,\\ldots,r_b)$, then $C_h=R[x_1,\\ldots,x_a,z]/(r_1,\\ldots,r_b,zh-1)$ is again finitely presented over $R$.",
+   "uses": [
+    "lem-weil-pbc-geometric-component-count-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
   },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NJ-6716fe386",
-    "group": "NJ",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-6716fe386 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited statements and sources, report, and chapter/unit route. All seven proof steps hold; Tags 0BUI, 055F, 0E0M, and 0BSR match the stated hypotheses and conclusions. Checked empty, separable, and nonreduced purely inseparable fibres; found no duplicate or restated split. Target morphisms and coefficient categories remain unchanged. Detailed checks and an inherited missing descendant are recorded in review.md."
+  {
+   "text": "Choose an algebraic closure $\\Omega$ of $\\kappa(u)$. The fibre $(V_i)_u\\to\\operatorname{Spec}\\kappa(u)$ is injective on points and has a purely inseparable residue extension at its only point, so it is radicial. The radicial/universally-injective equivalence implies that $(V_i)_{\\bar u}$ has at most one point. It has at least one: in positive characteristic send each $a\\in\\kappa(v_i)$, with $a^{p^r}=c\\in\\kappa(u)$, to the unique root of $Z^{p^r}-c$ in $\\Omega$. Uniqueness makes this independent of the exponent; choosing a common exponent for two elements and using $(a+b)^{p^r}=a^{p^r}+b^{p^r}$ shows that it preserves sums, and the corresponding product identity shows it preserves products. It fixes $\\kappa(u)$ and sends $1$ to $1$, so it is an injective field homomorphism. In characteristic zero the extension is trivial. Composing $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\kappa(v_i)$ with the residue-field point gives an $\\Omega$-point of $(V_i)_u$. Thus $(V_i)_{\\bar u}$ has exactly one point $z_i$. The fibre of $q_\\Omega$ at $z_i$ is a field extension of the fibre of $q$ at the image of $z_i$ in $T$: this follows by reassociating the fibre products. That fibre is connected and nonempty by the geometrically-connected-fibre clause of the affine Stein theorem and the definition of geometric connectedness. The fibre homeomorphism identifies its underlying space with $q_\\Omega^{-1}(z_i)$, which is the whole of $(X_i)_{\\bar u}$. Hence $(X_i)_{\\bar u}$ is connected and nonempty.",
+   "uses": [
+    "def-weil-radicial-morphism",
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-stein-factorization-affine",
+    "def-pc-geometrically-irreducible",
+    "def-pc-scheme-fibre",
+    "def-weil-algebraic-closure",
+    "def-pc-field-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "The geometric fibre $(X_U)_{\\bar u}$ is partitioned into the $m$ pairwise disjoint open-and-closed connected nonempty subsets $(X_i)_{\\bar u}$. Each is a maximal connected subset: a connected subset cannot meet both an open-and-closed piece and its complement. Thus its component count is exactly $m$, and step 3 gives $n(s)=m<\\infty$. This argument works at every $s$, proving finiteness everywhere. For $m=0$ the partition is empty, the geometric fibre is empty and $n(s)=0$. In that case the required inequality is automatic on $S$ because all counts are nonnegative.",
+   "uses": [
+    "def-weil-connected-scheme",
+    "lem-weil-pbc-geometric-component-count-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-3ee36aec2",
-    "group": "NJ",
-    "result": "pass",
-    "note": "Wrote review.md. Verified immutable files, source, dependencies, every statement clause, edge cases, docstrings, and verbatim signature. Server-only compile reproduced cleanly in 1.4 seconds. No H1–H13 errors; no repository or branch changes made by this review."
+  {
+   "text": "For $m>0$, each $X_i\\to U$ is flat and locally of finite presentation, so its image $W_i$ is open. It contains $u$ by step 4. Put $W=\\bigcap_{i=1}^m W_i$, an open neighbourhood of $u$. For $w\\in W$, every $(X_i)_w$ is nonempty. Its geometric base change is still nonempty: take a nonempty affine open $\\operatorname{Spec}D$ in $(X_i)_w$; the map $D\\to D\\otimes_{\\kappa(w)}\\overline{\\kappa(w)}$ is faithfully flat, so its spectrum surjects onto $\\operatorname{Spec}D$. The geometric fibre $(X_U)_{\\bar w}$ therefore has at least $m$ components, because it is partitioned into $m$ nonempty open-and-closed pieces and each connected component lies in a single piece.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
   },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.FlatProperComponentCountLowerSemicontinuous",
-    "declaration": "AlgebraicGeometry.Scheme.Hom.geometricComponentCount_lowerSemicontinuous",
-    "file": "lean/Sheaf/AlgebraicGeometry/FlatProperComponentCountLowerSemicontinuous.lean",
-    "statement": "theorem Scheme.Hom.geometricComponentCount_lowerSemicontinuous {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] : ∃ n : S → ℕ, (∀ s : S, Finite (ConnectedComponents (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u})) ∧ n s = Nat.card (ConnectedComponents (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u}))) ∧ (∀ s : S, IsEmpty (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u}) → n s = 0) ∧ ∀ s : S, ∃ V : S.Opens, s ∈ V ∧ ∀ t : S, t ∈ V → n s ≤ n t",
-    "branch": "newtargets-dag",
-    "by": "NJ",
-    "date": "2026-10-15",
-    "existing": false
+  {
+   "text": "The etale morphism $g$ is open, so $V=g(W)$ is an open neighbourhood of $s$ in the affine open chosen in step 1, hence also in the original $S$. Given $t\\in V$, choose $w\\in W$ with $g(w)=t$. Step 3 and step 6 give $n(t)=n_{X_U/U}(w)\\geq m=n(s)$. For an integer threshold $a$, every point with $n(s)>a$ has such an open neighbourhood lying in $\\{t:n(t)>a\\}$; hence all strict superlevel sets are open, which is lower semicontinuity.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-geometric-component-count-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-field-extension",
+  "def-pc-geometrically-irreducible",
+  "def-pc-scheme-fibre",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-algebraic-closure",
+  "def-weil-connected-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "def-weil-radicial-morphism",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-field-extension-base-change-faithfully-flat",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-geometric-component-count-base-change",
+  "lem-weil-pbc-integral-fibre-etale-splitting",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-weil-pbc-stein-finite-fibres-residue-fields"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The number of geometric connected components of fibres of a proper flat finitely presented morphism is lower semicontinuous",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a flat proper family every geometric connected component of a fibre persists in nearby fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instFstScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat g],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.fst f g)\", \"doc\": \"If $ g : Y \\to Z $ is a flat morphism of schemes, then the first projection morphism from the fiber product $ X \\times_Z Y $ to $ X $ is also flat.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Z) (g : Y ⟶ Z) [AlgebraicGeometry.Flat f],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.Surjective)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being a surjective morphism of schemes descends along morphisms that are simultaneously surjective, flat, and quasi-compact. In other words, if a morphism becomes surjective after a ba\"}\n  {\"name\": \"AlgebraicGeometry.Flat.isQuotientMap_of_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f] [AlgebraicGeometry.QuasiCompact f]\\n  [AlgebraicGeometry.Surjective f], Topology.IsQuotientMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"Let $ f : X \\\\to Y $ be a morphism of schemes. If $ f $ is flat, quasi-compact, and surjective, then the underlying continuous map of topological spaces is a quotient map, meaning the topology on $ Y $\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instDescScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {ι : Type v} [inst : Small.{u, v} ι] {Y : ι → AlgebraicGeometry.Scheme}\\n  {f : (i : ι) → Y i ⟶ X} [∀ (i : ι), AlgebraicGeometry.Flat (f i)],\\n  AlgebraicGeometry.Flat (CategoryTheory.Limits.Sigma.desc f)\", \"doc\": \"Given a scheme $X$ and a small family of schemes $\\\\{Y_i\\\\}$ indexed by $i : Ι$, if each morphism $f_i : Y_i \\to X$ is flat, then the coproduct morphism $\\\\coprod f_i : \\\\coprod Y_i \\to X$ is also flat. Thi\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerSemicontinuous\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerSemicontinuous.*component|component.*lowerSemicontinuous|geometric.*connected.*component",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibre connected component count lower semicontinuity for proper flat schemes",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "LowerSemicontinuous|finite.*appTop|appTop.*finite|connectedComponents",
+   "results": "{\"t\": \"2026-10-14T08:58:31Z\", \"tool\": \"grep\", \"query\": \"LowerSemicontinuous|finite.*appTop|appTop.*finite|connectedComponents\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"270e5e7b77a8e355\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper flat finitely presented scheme morphism the cardinality of pi zero of geometric fibers is lower semicontinuous",
+   "results": "{\"t\": \"2026-10-14T08:58:32Z\", \"tool\": \"leanfinder\", \"query\": \"For a proper flat finitely presented scheme morphism the cardinality of pi zero of geometric fibers is lower semicontinuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.instSndScheme\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.instFstScheme\"], \"digest\": \"844b58178172a4d8\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The section algebra of a complete reduced scheme over an algebraically closed field is the algebra of functions on its finite set of connected components",
+   "results": "{\"t\": \"2026-10-14T08:58:32Z\", \"tool\": \"leanfinder\", \"query\": \"The section algebra of a complete reduced scheme over an algebraically closed field is the algebra of functions on its finite set of connected components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsDomainCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopOfIsIntegral\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecOf\", \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"AlgebraicGeometry.instAlgebraCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensFunctionFieldOfNonemptyToScheme\", \"AlgebraicGeometry.Scheme.functionField\", \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"AlgebraicGeometry.affine_isIntegral_iff\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\"], \"digest\": \"4b92e4e3fc07cb0d\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"ConnectedComponents\"",
+   "results": "{\"t\": \"2026-10-14T08:59:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsProper\\\", \\\"ConnectedComponents\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The number of geometric connected components of fibres of a proper flat finitely presented scheme morphism is lower semicontinuous",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f]\\n  [AlgebraicGeometry.LocallyOfFinitePresentation f], AlgebraicGeometry.UniversallyOpen f\", \"doc\": \"A morphism of schemes that is flat and locally of finite presentation is universally open. This means that for any base change $ Y' \\to Y $, the induced morphism $ X \\times_Y Y' \\to Y' $ is an open map o\"}\n  {\"name\": \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  [P.DescendsAlong (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)]\\n  [AlgebraicGeometry.IsZariskiLocalAtTarget P],\\n  P.DescendsAlong\\n    (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.F\", \"doc\": \"If a morphism property $ P $ is Zariski local at the target and descends along morphisms that are surjective, flat, and quasi-compact, then $ P $ also descends along morphisms that are surjective, fla\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyClosed_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyClosed)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally closed descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism $ f: X \\to Y $ is surjective, flat, and quas\"}\n  {\"name\": \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FlatDescent\", \"type\": \"CategoryTheory.MorphismProperty.DescendsAlong (@AlgebraicGeometry.UniversallyOpen)\\n  (@AlgebraicGeometry.Surjective ⊓ @AlgebraicGeometry.Flat ⊓ @AlgebraicGeometry.QuasiCompact)\", \"doc\": \"The property of being universally open descends along morphisms that are simultaneously surjective, flat, and quasi-compact. This means that if a morphism becomes universally open after base change al\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a proper flat family disconnected geometric fibres remain disconnected on a neighbourhood",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  DiscreteTopology ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any point $ y \\\\in Y $, the fiber $ f^{-1}(y) $ is equipped with the discrete topology, meaning every subset of the fiber is open.\"}\n  {\"name\": \"Sigma.isConnected_iff\", \"module\": \"Mathlib/Topology/Connected/Clopen\", \"type\": \"∀ {ι : Type u_1} {X : ι → Type u_2} [inst : (i : ι) → TopologicalSpace (X i)] {s : Set ((i : ι) × X i)},\\n  IsConnected s ↔ ∃ i t, IsConnected t ∧ s = Sigma.mk i '' t\", \"doc\": \"A subset $ S $ of the disjoint union $ \\\\Sigma X $ of topological spaces is connected if and only if there exists an index $ i $ and a connected subset $ T \\\\subseteq X_i $ such that $ S $ is precisely \"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.IsFinite f],\\n  Finite ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyOpen\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.Flat f],\\n  GeneralizingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"preimage_connectedComponent_connected\", \"module\": \"Mathlib/Topology/Connected/Clopen\", \"type\": \"∀ {α : Type u} {β : Type v} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace β] {f : α → β},\\n  (∀ (t : β), IsConnected (f ⁻¹' {t})) →\\n    (∀ (T : Set β), IsClosed T ↔ IsClosed (f ⁻¹' T)) → ∀ (t : β), IsConnected (f ⁻¹' connectedComponent t)\", \"doc\": \"Let $ f : \\\\alpha \\\\to \\\\beta $ be a function between topological spaces. If (1) every fiber $ f^{-1}(\\\\{t\\\\}) $ is connected for $ t \\\\in \\\\beta $, and (2) a subset $ T \\\\subseteq \\\\beta $ is closed if and on\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.isEmpty_pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Pullbacks\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S),\\n  Disjoint (Set.range ⇑(CategoryTheory.ConcreteCategory.hom f.base))\\n      (Set.range ⇑(CategoryTheory.ConcreteCategory.hom g.base)) →\\n    IsEmpty ↥(CategoryTheory.Limits.pullback f g)\", \"doc\": \"In the category of schemes, for any two morphisms $ f: X \\\\to Z $ and $ g: Y \\\\to Z $, the pullback of $ f $ and $ g $ exists.\"}\n  {\"name\": \"Continuous.image_connectedComponent_eq_singleton\", \"module\": \"Mathlib/Topology/Connected/TotallyDisconnected\", \"type\": \"∀ {α : Type u} [inst : TopologicalSpace α] {β : Type u_3} [inst_1 : TopologicalSpace β] [TotallyDisconnectedSpace β]\\n  {f : α → β}, Continuous f → ∀ (a : α), f '' connectedComponent a = {f a}\", \"doc\": \"For a continuous function $ f : \\\\alpha \\\\to \\\\beta $ where $ \\\\beta $ is a totally disconnected topological space, the image of the connected component containing any point $ a \\\\in \\\\alpha $ under $ f $ i\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LowerSemicontinuous\", \"Scheme\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "component.*lowerSemi|lowerSemi.*component|geometric.*connected.*component",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric connected component count of proper flat scheme fibres is lower semicontinuous",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-weil-pbc-proper-flat-geometric-components-locally-constant",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+  "worker": "stage1",
+  "summary": "Followed Tag 0BUI through affine Stein factorization and etale splitting, with three strictly smaller unsplit inputs. Wrote out the radicial single-point geometric fibre argument, finite clopen component count (including zero), persistence by flat openness, and descent of the neighbourhood through an open etale map. No statement correction or Lean attachment.",
+  "blueprint": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0E0N, label lemma-proper-flat-geom-red, specialized to smooth morphisms (smooth implies flat with geometrically reduced fibres); Tag 0BUI, label lemma-proper-flat-nr-geom-conn-comps-lower-semicontinuous"
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NJ-6716fe386",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-6716fe386 (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes, cited statements and sources, report, and chapter/unit route. All seven proof steps hold; Tags 0BUI, 055F, 0E0M, and 0BSR match the stated hypotheses and conclusions. Checked empty, separable, and nonreduced purely inseparable fibres; found no duplicate or restated split. Target morphisms and coefficient categories remain unchanged. Detailed checks and an inherited missing descendant are recorded in review.md."
+ },
+ "lean_audit": {},
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3ee36aec2",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, source, dependencies, every statement clause, edge cases, docstrings, and verbatim signature. Server-only compile reproduced cleanly in 1.4 seconds. No H1–H13 errors; no repository or branch changes made by this review."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatProperComponentCountLowerSemicontinuous",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.geometricComponentCount_lowerSemicontinuous",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatProperComponentCountLowerSemicontinuous.lean",
+  "statement": "theorem Scheme.Hom.geometricComponentCount_lowerSemicontinuous {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] : ∃ n : S → ℕ, (∀ s : S, Finite (ConnectedComponents (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u})) ∧ n s = Nat.card (ConnectedComponents (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u}))) ∧ (∀ s : S, IsEmpty (pullback f (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u}) → n s = 0) ∧ ∀ s : S, ∃ V : S.Opens, s ∈ V ∧ ∀ t : S, t ∈ V → n s ≤ n t",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-15",
+  "existing": false
+ }
 }

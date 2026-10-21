@@ -1,204 +1,179 @@
 {
-  "id": "thm-pqf-zmt-factorization",
-  "blueprint": {
-    "is": "thm-pqf-zmt-factorization",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Zariski's main theorem: the quasi-finite factorization",
-  "statement": "Let $f:X\\to S$ be a\nseparated morphism of finite\ntype which is everywhere\nquasi-finite, with $S$\nquasi-compact and quasi-separated. Then there exist a scheme $T$, a\nquasi-compact open\nimmersion $j:X\\hookrightarrow T$ and a\nfinite morphism\n$p:T\\to S$ with $f=p\\circ j$.\n(*Stacks Project: the Zariski main theorem, More on Morphisms,\nTag [05K0](https://stacks.math.columbia.edu/tag/05K0);\nthe\nnormalization-of-the-target-in-the-source constructions used in the\nproof are the quasi-finite-locus theorem Tag\n[03GW](https://stacks.math.columbia.edu/tag/03GW) and Tag\n[02LR](https://stacks.math.columbia.edu/tag/02LR).*)",
-  "source": {
+ "id": "thm-pqf-zmt-factorization",
+ "blueprint": {
+  "is": "thm-pqf-zmt-factorization",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Zariski's main theorem: the quasi-finite factorization",
+ "statement": "Let $f:X\\to S$ be a\nseparated morphism of finite\ntype which is everywhere\nquasi-finite, with $S$\nquasi-compact and quasi-separated. Then there exist a scheme $T$, a\nquasi-compact open\nimmersion $j:X\\hookrightarrow T$ and a\nfinite morphism\n$p:T\\to S$ with $f=p\\circ j$.\n(*Stacks Project: the Zariski main theorem, More on Morphisms,\nTag [05K0](https://stacks.math.columbia.edu/tag/05K0);\nthe\nnormalization-of-the-target-in-the-source constructions used in the\nproof are the quasi-finite-locus theorem Tag\n[03GW](https://stacks.math.columbia.edu/tag/03GW) and Tag\n[02LR](https://stacks.math.columbia.edu/tag/02LR).*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
+  "place": "node thm-pqf-zmt-factorization, order 201",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 05K0"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 03GW"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02LR"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the relative-normalization statement to obtain an integral morphism \\(\\nu_f:N_f\\to S\\), a factorization \\(X\\xrightarrow{\\iota_f}N_f\\xrightarrow{\\nu_f}S\\) of \\(f\\), and a quasi-compact open immersion \\(\\iota_f\\).",
+   "uses": [
+    "pqf-lem-normalization-open"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
-    "place": "node thm-pqf-zmt-factorization, order 201",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 05K0"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 03GW"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 02LR"
-      }
-    ]
+    "place": "Step 1: the canonical branch; Tags 03GW and 02LR"
+   }
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Apply the relative-normalization statement to obtain an integral morphism \\(\\nu_f:N_f\\to S\\), a factorization \\(X\\xrightarrow{\\iota_f}N_f\\xrightarrow{\\nu_f}S\\) of \\(f\\), and a quasi-compact open immersion \\(\\iota_f\\).",
-      "uses": [
-        "pqf-lem-normalization-open"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
-        "place": "Step 1: the canonical branch; Tags 03GW and 02LR"
-      }
-    },
-    {
-      "text": "Apply the finite-approximation statement to the integral morphism \\(\\nu_f\\). This gives a filtered limit \\(N_f=\\varprojlim_\\lambda T_\\lambda\\) with affine transitions and each \\(T_\\lambda\\to S\\) finite.",
-      "uses": [
-        "lem-weil-pbc-integral-morphism-limit-of-finite"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
-        "place": "Step 2: the finite approximation tail; Tag 09YZ"
-      }
-    },
-    {
-      "text": "Use the descent statement on the quasi-compact open immersion \\(X\\to N_f\\). It supplies an index \\(\\lambda_0\\), a scheme \\(T\\), a quasi-compact open immersion \\(j:X\\to T\\), and a closed immersion \\(i:T\\to T_{\\lambda_0}\\) whose composite is the projection of \\(\\iota_f\\).",
-      "uses": [
-        "thm-pqf-immersion-descent"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
-        "place": "Step 3: the descended stage"
-      }
-    },
-    {
-      "text": "A closed immersion is finite because on affine opens it is induced by a quotient ring map, whose target is generated by \\(1\\); finite morphisms are stable under composition because products of finite generating sets generate the composite algebra. Since \\(T_{\\lambda_0}\\to S\\) is finite, \\(p:=T\\to T_{\\lambda_0}\\to S\\) is finite. The compatibility in the descent statement and \\(\\nu_f\\circ\\iota_f=f\\) give \\(p\\circ j=f\\).",
-      "uses": [
-        "def-weil-pbc-scheme-conventions",
-        "thm-pqf-immersion-descent"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
-        "place": "Step 3: the descended stage"
-      }
-    }
-  ],
-  "proof_deps": [
-    "pqf-lem-normalization-open",
-    "lem-weil-pbc-integral-morphism-limit-of-finite",
+  {
+   "text": "Apply the finite-approximation statement to the integral morphism \\(\\nu_f\\). This gives a filtered limit \\(N_f=\\varprojlim_\\lambda T_\\lambda\\) with affine transitions and each \\(T_\\lambda\\to S\\) finite.",
+   "uses": [
+    "lem-weil-pbc-integral-morphism-limit-of-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
+    "place": "Step 2: the finite approximation tail; Tag 09YZ"
+   }
+  },
+  {
+   "text": "Use the descent statement on the quasi-compact open immersion \\(X\\to N_f\\). It supplies an index \\(\\lambda_0\\), a scheme \\(T\\), a quasi-compact open immersion \\(j:X\\to T\\), and a closed immersion \\(i:T\\to T_{\\lambda_0}\\) whose composite is the projection of \\(\\iota_f\\).",
+   "uses": [
+    "thm-pqf-immersion-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
+    "place": "Step 3: the descended stage"
+   }
+  },
+  {
+   "text": "A closed immersion is finite because on affine opens it is induced by a quotient ring map, whose target is generated by \\(1\\); finite morphisms are stable under composition because products of finite generating sets generate the composite algebra. Since \\(T_{\\lambda_0}\\to S\\) is finite, \\(p:=T\\to T_{\\lambda_0}\\to S\\) is finite. The compatibility in the descent statement and \\(\\nu_f\\circ\\iota_f=f\\) give \\(p\\circ j=f\\).",
+   "uses": [
+    "def-weil-pbc-scheme-conventions",
+    "thm-pqf-immersion-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
+    "place": "Step 3: the descended stage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-normalization-open",
+  "lem-weil-pbc-integral-morphism-limit-of-finite",
+  "thm-pqf-immersion-descent",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
+  "place": "Steps 1-3"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "partial_undischarged_input",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 201,
+ "blueprint_uses": [
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-quasifinite",
+  "thm-pqf-immersion-descent"
+ ],
+ "blueprint_proof_text": "*Step 1: the canonical branch (recorded input).* The\nnormalization of $S$ in $X$ (the relative\nintegral-closure construction of the recorded input Tag\n03GW, cf. also the quasi-finite-locus statement OBL-PQF-06) is a\nscheme $N_f$ with a morphism\n\n$$\nX\\xrightarrow{\\ \\iota_f\\ }N_f\\xrightarrow{\\ \\nu_f\\ }S,\n\\qquad \\nu_f\\circ\\iota_f=f,\n$$\n\nwhere $\\nu_f$ is *integral* and, since $f$ is everywhere\nquasi-finite ([pqf-def-quasifinite]), $\\iota_f$ is a\n*quasi-compact open immersion*\n(the classical form of the theorem, Tag 02LR). Write\n$\\mathcal A_f=\\nu_{f*}\\mathcal O_{N_f}$, an $\\mathcal O_S$-algebra\nwhose fibres are the integral closures mentioned there; locally on an\naffine $\\operatorname{Spec}A\\subseteq S$ the algebra\n$\\mathcal A_f(\\operatorname{Spec}A)$ is the integral closure of $A$ in\n$\\Gamma(f^{-1}(\\operatorname{Spec}A),\\mathcal O_X)$.\n\n*Step 2: the finite approximation tail.* On every affine\n$\\operatorname{Spec}A\\subseteq S$, the ring $B=\\mathcal A_f(A)$ is\nthe filtered union of its finite $A$-subalgebras: each $b\\in B$ is\nintegral over $A$, so the subalgebra $A[b]$ is a finite $A$-module\n(generated by $1,b,\\dots,b^{n-1}$ for the minimal degree of a monic\nequation), finite lists of integral elements generate finite\nsubalgebras (the same argument, iterated), and the union of the\nfinite subalgebras generated by finite lists of elements of $B$ is\n$B$ and is filtered by inclusion of the generating lists. Globally,\nsince $S$ is quasi-compact, $\\mathcal A_f$ is the filtered union of\nits finite quasi-coherent $\\mathcal O_S$-subalgebras\n$\\mathcal A_\\lambda$, with $T_\\lambda=\\operatorname{Spec}_S\\mathcal A_\\lambda$ finite over $S$ by\n[def-weil-pbc-scheme-conventions] (affine and finite\n$\\mathcal O_S$-module); the transition maps of the system\n$\\{T_\\lambda\\}$ are affine, and $N_f=\\varprojlim_\\lambda T_\\lambda$.\n\n*Step 3: the descended stage (recorded input).* By\n[thm-pqf-immersion-descent] there are an index $\\lambda_0$ and a\nfactorization\n\n$$\nX\\xrightarrow{\\ j\\ }T\\xrightarrow{\\ i\\ }T_{\\lambda_0}\n$$\n\nwith $j$ a quasi-compact *open* immersion and $i$ a *closed*\nimmersion. The closed immersion $i$ is finite, hence a\n[def-weil-pbc-scheme-conventions] finite morphism, and a closed\nsubscheme of a finite $S$-scheme is finite over it: $T\\to T_{\\lambda_0}$ is an affine $S$-morphism with finite module of sections\n(closed immersion), and finiteness is transitive (finite over finite is\nfinite: the module of sections over the composite affine is generated\nby the products of the two finite generating lists). Therefore\n$p=T\\to T_{\\lambda_0}\\to S$ is finite, and pasting the canonical\nequality $\\nu_f\\circ\\iota_f=f$ with the stage projections gives\n$p\\circ j=f$: the projections of the limit $N_f=\\varprojlim_\\lambda T_\\lambda$ are compatible, and the interface identifies the descended\nfactorization with the one of Step 1.",
+ "blueprint_proof_steps": [
+  {
+   "text": "*Step 1: the canonical branch (recorded input).* The\nnormalization of $S$ in $X$ (the relative\nintegral-closure construction of the recorded input Tag\n03GW, cf. also the quasi-finite-locus statement OBL-PQF-06) is a\nscheme $N_f$ with a morphism\n\n$$\nX\\xrightarrow{\\ \\iota_f\\ }N_f\\xrightarrow{\\ \\nu_f\\ }S,\n\\qquad \\nu_f\\circ\\iota_f=f,\n$$\n\nwhere $\\nu_f$ is *integral* and, since $f$ is everywhere\nquasi-finite ([pqf-def-quasifinite]), $\\iota_f$ is a\n*quasi-compact open immersion*\n(the classical form of the theorem, Tag 02LR). Write\n$\\mathcal A_f=\\nu_{f*}\\mathcal O_{N_f}$, an $\\mathcal O_S$-algebra\nwhose fibres are the integral closures mentioned there; locally on an\naffine $\\operatorname{Spec}A\\subseteq S$ the algebra\n$\\mathcal A_f(\\operatorname{Spec}A)$ is the integral closure of $A$ in\n$\\Gamma(f^{-1}(\\operatorname{Spec}A),\\mathcal O_X)$.",
+   "uses": [
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 2: the finite approximation tail.* On every affine\n$\\operatorname{Spec}A\\subseteq S$, the ring $B=\\mathcal A_f(A)$ is\nthe filtered union of its finite $A$-subalgebras: each $b\\in B$ is\nintegral over $A$, so the subalgebra $A[b]$ is a finite $A$-module\n(generated by $1,b,\\dots,b^{n-1}$ for the minimal degree of a monic\nequation), finite lists of integral elements generate finite\nsubalgebras (the same argument, iterated), and the union of the\nfinite subalgebras generated by finite lists of elements of $B$ is\n$B$ and is filtered by inclusion of the generating lists. Globally,\nsince $S$ is quasi-compact, $\\mathcal A_f$ is the filtered union of\nits finite quasi-coherent $\\mathcal O_S$-subalgebras\n$\\mathcal A_\\lambda$, with $T_\\lambda=\\operatorname{Spec}_S\\mathcal A_\\lambda$ finite over $S$ by\n[def-weil-pbc-scheme-conventions] (affine and finite\n$\\mathcal O_S$-module); the transition maps of the system\n$\\{T_\\lambda\\}$ are affine, and $N_f=\\varprojlim_\\lambda T_\\lambda$.",
+   "uses": [
+    "def-weil-pbc-scheme-conventions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: the descended stage (recorded input).* By\n[thm-pqf-immersion-descent] there are an index $\\lambda_0$ and a\nfactorization\n\n$$\nX\\xrightarrow{\\ j\\ }T\\xrightarrow{\\ i\\ }T_{\\lambda_0}\n$$\n\nwith $j$ a quasi-compact *open* immersion and $i$ a *closed*\nimmersion. The closed immersion $i$ is finite, hence a\n[def-weil-pbc-scheme-conventions] finite morphism, and a closed\nsubscheme of a finite $S$-scheme is finite over it: $T\\to T_{\\lambda_0}$ is an affine $S$-morphism with finite module of sections\n(closed immersion), and finiteness is transitive (finite over finite is\nfinite: the module of sections over the composite affine is generated\nby the products of the two finite generating lists). Therefore\n$p=T\\to T_{\\lambda_0}\\to S$ is finite, and pasting the canonical\nequality $\\nu_f\\circ\\iota_f=f$ with the stage projections gives\n$p\\circ j=f$: the projections of the limit $N_f=\\varprojlim_\\lambda T_\\lambda$ are compatible, and the interface identifies the descended\nfactorization with the one of Step 1.",
+   "uses": [
     "thm-pqf-immersion-descent",
     "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/thm-pqf-zmt-factorization.md",
-    "place": "Steps 1-3"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "partial_undischarged_input",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 201,
-  "blueprint_uses": [
-    "def-weil-pbc-scheme-conventions",
-    "pqf-def-quasifinite",
-    "thm-pqf-immersion-descent"
-  ],
-  "blueprint_proof_text": "*Step 1: the canonical branch (recorded input).* The\nnormalization of $S$ in $X$ (the relative\nintegral-closure construction of the recorded input Tag\n03GW, cf. also the quasi-finite-locus statement OBL-PQF-06) is a\nscheme $N_f$ with a morphism\n\n$$\nX\\xrightarrow{\\ \\iota_f\\ }N_f\\xrightarrow{\\ \\nu_f\\ }S,\n\\qquad \\nu_f\\circ\\iota_f=f,\n$$\n\nwhere $\\nu_f$ is *integral* and, since $f$ is everywhere\nquasi-finite ([pqf-def-quasifinite]), $\\iota_f$ is a\n*quasi-compact open immersion*\n(the classical form of the theorem, Tag 02LR). Write\n$\\mathcal A_f=\\nu_{f*}\\mathcal O_{N_f}$, an $\\mathcal O_S$-algebra\nwhose fibres are the integral closures mentioned there; locally on an\naffine $\\operatorname{Spec}A\\subseteq S$ the algebra\n$\\mathcal A_f(\\operatorname{Spec}A)$ is the integral closure of $A$ in\n$\\Gamma(f^{-1}(\\operatorname{Spec}A),\\mathcal O_X)$.\n\n*Step 2: the finite approximation tail.* On every affine\n$\\operatorname{Spec}A\\subseteq S$, the ring $B=\\mathcal A_f(A)$ is\nthe filtered union of its finite $A$-subalgebras: each $b\\in B$ is\nintegral over $A$, so the subalgebra $A[b]$ is a finite $A$-module\n(generated by $1,b,\\dots,b^{n-1}$ for the minimal degree of a monic\nequation), finite lists of integral elements generate finite\nsubalgebras (the same argument, iterated), and the union of the\nfinite subalgebras generated by finite lists of elements of $B$ is\n$B$ and is filtered by inclusion of the generating lists. Globally,\nsince $S$ is quasi-compact, $\\mathcal A_f$ is the filtered union of\nits finite quasi-coherent $\\mathcal O_S$-subalgebras\n$\\mathcal A_\\lambda$, with $T_\\lambda=\\operatorname{Spec}_S\\mathcal A_\\lambda$ finite over $S$ by\n[def-weil-pbc-scheme-conventions] (affine and finite\n$\\mathcal O_S$-module); the transition maps of the system\n$\\{T_\\lambda\\}$ are affine, and $N_f=\\varprojlim_\\lambda T_\\lambda$.\n\n*Step 3: the descended stage (recorded input).* By\n[thm-pqf-immersion-descent] there are an index $\\lambda_0$ and a\nfactorization\n\n$$\nX\\xrightarrow{\\ j\\ }T\\xrightarrow{\\ i\\ }T_{\\lambda_0}\n$$\n\nwith $j$ a quasi-compact *open* immersion and $i$ a *closed*\nimmersion. The closed immersion $i$ is finite, hence a\n[def-weil-pbc-scheme-conventions] finite morphism, and a closed\nsubscheme of a finite $S$-scheme is finite over it: $T\\to T_{\\lambda_0}$ is an affine $S$-morphism with finite module of sections\n(closed immersion), and finiteness is transitive (finite over finite is\nfinite: the module of sections over the composite affine is generated\nby the products of the two finite generating lists). Therefore\n$p=T\\to T_{\\lambda_0}\\to S$ is finite, and pasting the canonical\nequality $\\nu_f\\circ\\iota_f=f$ with the stage projections gives\n$p\\circ j=f$: the projections of the limit $N_f=\\varprojlim_\\lambda T_\\lambda$ are compatible, and the interface identifies the descended\nfactorization with the one of Step 1.",
-  "blueprint_proof_steps": [
-    {
-      "text": "*Step 1: the canonical branch (recorded input).* The\nnormalization of $S$ in $X$ (the relative\nintegral-closure construction of the recorded input Tag\n03GW, cf. also the quasi-finite-locus statement OBL-PQF-06) is a\nscheme $N_f$ with a morphism\n\n$$\nX\\xrightarrow{\\ \\iota_f\\ }N_f\\xrightarrow{\\ \\nu_f\\ }S,\n\\qquad \\nu_f\\circ\\iota_f=f,\n$$\n\nwhere $\\nu_f$ is *integral* and, since $f$ is everywhere\nquasi-finite ([pqf-def-quasifinite]), $\\iota_f$ is a\n*quasi-compact open immersion*\n(the classical form of the theorem, Tag 02LR). Write\n$\\mathcal A_f=\\nu_{f*}\\mathcal O_{N_f}$, an $\\mathcal O_S$-algebra\nwhose fibres are the integral closures mentioned there; locally on an\naffine $\\operatorname{Spec}A\\subseteq S$ the algebra\n$\\mathcal A_f(\\operatorname{Spec}A)$ is the integral closure of $A$ in\n$\\Gamma(f^{-1}(\\operatorname{Spec}A),\\mathcal O_X)$.",
-      "uses": [
-        "pqf-def-quasifinite"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 2: the finite approximation tail.* On every affine\n$\\operatorname{Spec}A\\subseteq S$, the ring $B=\\mathcal A_f(A)$ is\nthe filtered union of its finite $A$-subalgebras: each $b\\in B$ is\nintegral over $A$, so the subalgebra $A[b]$ is a finite $A$-module\n(generated by $1,b,\\dots,b^{n-1}$ for the minimal degree of a monic\nequation), finite lists of integral elements generate finite\nsubalgebras (the same argument, iterated), and the union of the\nfinite subalgebras generated by finite lists of elements of $B$ is\n$B$ and is filtered by inclusion of the generating lists. Globally,\nsince $S$ is quasi-compact, $\\mathcal A_f$ is the filtered union of\nits finite quasi-coherent $\\mathcal O_S$-subalgebras\n$\\mathcal A_\\lambda$, with $T_\\lambda=\\operatorname{Spec}_S\\mathcal A_\\lambda$ finite over $S$ by\n[def-weil-pbc-scheme-conventions] (affine and finite\n$\\mathcal O_S$-module); the transition maps of the system\n$\\{T_\\lambda\\}$ are affine, and $N_f=\\varprojlim_\\lambda T_\\lambda$.",
-      "uses": [
-        "def-weil-pbc-scheme-conventions"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3: the descended stage (recorded input).* By\n[thm-pqf-immersion-descent] there are an index $\\lambda_0$ and a\nfactorization\n\n$$\nX\\xrightarrow{\\ j\\ }T\\xrightarrow{\\ i\\ }T_{\\lambda_0}\n$$\n\nwith $j$ a quasi-compact *open* immersion and $i$ a *closed*\nimmersion. The closed immersion $i$ is finite, hence a\n[def-weil-pbc-scheme-conventions] finite morphism, and a closed\nsubscheme of a finite $S$-scheme is finite over it: $T\\to T_{\\lambda_0}$ is an affine $S$-morphism with finite module of sections\n(closed immersion), and finiteness is transitive (finite over finite is\nfinite: the module of sections over the composite affine is generated\nby the products of the two finite generating lists). Therefore\n$p=T\\to T_{\\lambda_0}\\to S$ is finite, and pasting the canonical\nequality $\\nu_f\\circ\\iota_f=f$ with the stage projections gives\n$p\\circ j=f$: the projections of the limit $N_f=\\varprojlim_\\lambda T_\\lambda$ are compatible, and the interface identifies the descended\nfactorization with the one of Step 1.",
-      "uses": [
-        "thm-pqf-immersion-descent",
-        "def-weil-pbc-scheme-conventions"
-      ],
-      "elementary": false
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite",
-          "module": "WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization",
-          "lines": [
-            83,
-            105
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-prop-nagata-sketch-zmt",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "thm-pqf-zmt-factorization",
-    "worker": "stage1",
-    "summary": "Split the factorization proof into the relative-normalization input, the existing general integral finite-approximation statement, the existing immersion-descent statement, and the elementary finiteness/composition conclusion. The Lean theorem was not attached because its finite-approximation dependency is sorried.",
-    "blueprint": "Steps 1, 2, and 3 of the imported blueprint proof.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-integral-morphism-limit-of-finite",
-        "why": "The unit route needs the general integral finite-approximation theorem; no node in this unit restates that general construction."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-integral-morphism-limit-of-finite"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-zmt2535",
-    "group": "H1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zmt2535 (reviewer sub-agent of L); spot-checked: Reviewed packet head 67c680bd4; new head 52d1d266f is the same commit rebased (the three delivery files are byte-identical). Mathlib has no finite factorization (only integral, via toNormalization/fromNormalization; no exists_isOpenImmersion_comp_isFinite), so the item is not a leaf and the split stands. Steps 1-4 against cited statements: Step 2's lem-weil-pbc-integral-morphism-limit-of-finite supplies finite stages with affine transitions as thm-pqf-immersion-descent requires; Step 4 elementary; quasi-finite = finite type + locally quasi-finite (pqf-def-quasifinite) matches the item, Tags 05K0/02LR. tool_uses lem-weil-pbc-integral-morphism-limit-of-finite accepted (generic tool). FIX more, RETURN less: B (class c) pqf-lem-normalization-open is stated by Mathlib clause by clause (IsIntegralHom f.fromNormalization Normalization.lean:200, toNormalization_fromNormalization :190, IsOpenImmersion f.toNormalization ZariskisMainTheorem.lean:358, QuasiCompact f.toNormalization Normalization.lean:314): made a leaf (status mathlib, mathlib_match, grep search recorded); also corrected the recorded false location Normalization.lean:55.; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization",
-    "declaration": "AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite",
-    "statement": "theorem Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite {X S : Scheme.{u}}\n    (f : X ⟶ S) [LocallyQuasiFinite f] [LocallyOfFiniteType f] [IsSeparated f]\n    [QuasiCompact f] [CompactSpace S] [QuasiSeparatedSpace S] :\n    ∃ (T : Scheme.{u}) (j : X ⟶ T) (p : T ⟶ S), IsOpenImmersion j ∧ QuasiCompact j ∧\n      IsFinite p ∧ j ≫ p = f",
-    "branch": "slopmaster2",
-    "by": "C1",
-    "date": "2026-10-11",
-    "existing": true,
-    "note": "Exact finite-factorization statement already exists in the source repository, lines 168-172. Finite type is rendered by LocallyOfFiniteType and QuasiCompact; the base conditions are CompactSpace and QuasiSeparatedSpace. This stage records the statement, irrespective of the sorried finite-approximation input of its upstream proof.; Lean refresh 7d675a26 (L): moved from WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-zmt",
-    "group": "C1",
-    "result": "pass"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f:X\\to S$ be a\nseparated morphism of finite\ntype which is everywhere\nquasi-finite, with $S$\nquasi-compact and quasi-separated. Then there exist a scheme $T$, a\nquasi-compact open\nimmersion $j:X\\hookrightarrow T$ and a\nfinite morphism\n$p:T\\to S$ with $f=p\\circ j$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false
   }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-prop-nagata-sketch-zmt",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "thm-pqf-zmt-factorization",
+  "worker": "stage1",
+  "summary": "Split the factorization proof into the relative-normalization input, the existing general integral finite-approximation statement, the existing immersion-descent statement, and the elementary finiteness/composition conclusion. The Lean theorem was not attached because its finite-approximation dependency is sorried.",
+  "blueprint": "Steps 1, 2, and 3 of the imported blueprint proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-morphism-limit-of-finite",
+    "why": "The unit route needs the general integral finite-approximation theorem; no node in this unit restates that general construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-morphism-limit-of-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-zmt2535",
+  "group": "H1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-zmt2535 (reviewer sub-agent of L); spot-checked: Reviewed packet head 67c680bd4; new head 52d1d266f is the same commit rebased (the three delivery files are byte-identical). Mathlib has no finite factorization (only integral, via toNormalization/fromNormalization; no exists_isOpenImmersion_comp_isFinite), so the item is not a leaf and the split stands. Steps 1-4 against cited statements: Step 2's lem-weil-pbc-integral-morphism-limit-of-finite supplies finite stages with affine transitions as thm-pqf-immersion-descent requires; Step 4 elementary; quasi-finite = finite type + locally quasi-finite (pqf-def-quasifinite) matches the item, Tags 05K0/02LR. tool_uses lem-weil-pbc-integral-morphism-limit-of-finite accepted (generic tool). FIX more, RETURN less: B (class c) pqf-lem-normalization-open is stated by Mathlib clause by clause (IsIntegralHom f.fromNormalization Normalization.lean:200, toNormalization_fromNormalization :190, IsOpenImmersion f.toNormalization ZariskisMainTheorem.lean:358, QuasiCompact f.toNormalization Normalization.lean:314): made a leaf (status mathlib, mathlib_match, grep search recorded); also corrected the recorded false location Normalization.lean:55.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite",
+  "statement": "theorem Scheme.Hom.exists_isOpenImmersion_isFinite_of_locallyQuasiFinite {X S : Scheme.{u}}\n    (f : X ⟶ S) [LocallyQuasiFinite f] [LocallyOfFiniteType f] [IsSeparated f]\n    [QuasiCompact f] [CompactSpace S] [QuasiSeparatedSpace S] :\n    ∃ (T : Scheme.{u}) (j : X ⟶ T) (p : T ⟶ S), IsOpenImmersion j ∧ QuasiCompact j ∧\n      IsFinite p ∧ j ≫ p = f",
+  "branch": "slopmaster2",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Exact finite-factorization statement already exists in the source repository, lines 168-172. Finite type is rendered by LocallyOfFiniteType and QuasiCompact; the base conditions are CompactSpace and QuasiSeparatedSpace. This stage records the statement, irrespective of the sorried finite-approximation input of its upstream proof.; Lean refresh 7d675a26 (L): moved from WeilConjectures.Mathlib.AlgebraicGeometry.ZariskisMainTheorem"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-zmt",
+  "group": "C1",
+  "result": "pass"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f:X\\to S$ be a\nseparated morphism of finite\ntype which is everywhere\nquasi-finite, with $S$\nquasi-compact and quasi-separated. Then there exist a scheme $T$, a\nquasi-compact open\nimmersion $j:X\\hookrightarrow T$ and a\nfinite morphism\n$p:T\\to S$ with $f=p\\circ j$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

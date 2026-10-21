@@ -1,229 +1,230 @@
 {
-  "id": "lem-pur-diagonal-orientation-compatibility",
-  "kind": "statement",
-  "title": "Normalized deformation comparisons commute with coefficient reduction",
-  "statement": "Let $\\ell$ be prime, $r\\geq m\\geq1$, $A=\\mathbf Z/\\ell^r\\mathbf Z$, $B=\\mathbf Z/\\ell^m\\mathbf Z$, and $S$ a Noetherian scheme (one admitting a finite affine cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring]) on which $\\ell$ is invertible. Let $g:V\\to S$ be smooth separated of finite type and pure relative dimension $d\\geq0$, and let $s:S\\hookrightarrow V$ be a closed regular section of codimension $d$. Assume the normal bundle $\\pi:N_s\\to S$ and deformation family $\\widetilde g:D\\to\\mathbf A^1_S$, with section $\\widetilde s$, and their compactifiability hypotheses are those specified in [lem-pur-noetherian-etale-section-specialization]. For $R=A,B$, work in the ordinary etale $R$-module derived categories; put $C_R=s^*\\omega_{g,R}$ and $F_R=\\widetilde s^*\\omega_{\\widetilde g,R}$, with $\\omega_{h,R}=h_R^\\times R_{\\operatorname{target}(h)}$. Write $a:\\mathbf A^1_S\\to S$ and $i_j:S\\to\\mathbf A^1_S$ for $t=j$, $j=0,1$. Let $\\kappa_R:F_R\\xrightarrow{\\sim}a^*C_R$ be the normalized isomorphism whose restriction at $1$ is the identity, and put $\\delta_R=(i_0^*\\kappa_R)^{-1}:C_R\\to z^*\\omega_{\\pi,R}$. Write $S_T=(-)\\otimes_A^LB$. For any morphisms\n$$e_F:S_{\\mathbf A^1_S}F_A\\to F_B,\\qquad e_C:S_SC_A\\to C_B$$\nwhose restrictions at $t=1$ agree under the canonical fibre identifications, one has\n$$\\kappa_B\\circ e_F=a^*e_C\\circ S_{\\mathbf A^1_S}(\\kappa_A).$$\nWith $e_0=i_0^*e_F$ under the normal-fibre identifications, this implies\n$$\\delta_B\\circ e_C=e_0\\circ S_S(\\delta_A).$$\nThe morphisms $e_F,e_C,e_0$ are not required to be invertible. More generally, restriction along $i_1$ is injective on morphisms $a^*L\\to a^*M$ for finite locally constant $B$-module sheaves $L,M$ locally free of rank one on $S$, and on morphisms between their equal shifts in the ordinary derived category.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Gluing: uniqueness of normalized rank-one comparisons on connected geometric affine-line fibres; extended from isomorphisms to morphisms as in returned item Step 6"
-  },
-  "stmt_deps": [
-    "lem-pur-noetherian-etale-section-specialization",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pc-scheme",
-    "def-weil-pbc-noetherian-ring",
-    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
-  ],
-  "proof": [
-    {
-      "text": "Since $g$ is of finite type and $S$ is Noetherian, $V$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], so all hypotheses of [lem-pur-noetherian-etale-section-specialization] hold. Apply it separately for $R=A$ and $R=B$. It gives that $F_R[-2d]$ and $C_R[-2d]$ are locally constant free rank-one ordinary étale $R$-module sheaves. Since these sheaves are locally free, derived tensor with $B$ is concentrated in degree zero. The canonical tensor/pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies $S_{\\mathbf A^1_S}a^*C_A$ with $a^*S_SC_A$. By [lem-weil-pbc-derived-single-fully-faithful], after cancelling the common shift $[2d]$, equality of the derived maps in the claim is equivalent to equality of the corresponding ordinary sheaf maps.",
-      "uses": [
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-pur-noetherian-etale-section-specialization",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "lem-weil-pbc-derived-single-fully-faithful"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-        "place": "Gluing paragraph: both family and section objects are shifts of locally constant rank-one sheaves; morphisms are ordinary sheaf maps"
-      }
-    },
-    {
-      "text": "Set $u=\\kappa_B\\circ e_F$ and $v=a^*e_C\\circ S_{\\mathbf A^1_S}(\\kappa_A)$. Their restrictions at $t=1$ agree by hypothesis. After Step 1, cancel $[2d]$ and use $\\kappa_A$ to regard $u-v$ as a map $a^*L\\to a^*M$ of finite locally constant $B$-module sheaves on $\\mathbf A^1_S$, where $L=S_SC_A[-2d]$ and $M=C_B[-2d]$. Let $H$ be the endomorphism of $a^*(L\\oplus M)=a^*L\\oplus a^*M$ whose diagonal components are $1_{a^*L}$ and $1_{a^*M}$, whose component $a^*L\\to a^*M$ is $u-v$, and whose component $a^*M\\to a^*L$ is $0$. Its restriction at $t=1$ is the identity. Pulling to the pro-étale sites, [lem-sf-proetale-locally-constant-origin] makes $\\nu_S^*(L\\oplus M)$ a finite locally constant sheaf, [lem-weil-pbc-comparison-pullback] identifies the pullback with the affine-line pullback there, and [lem-pur-a1-pullback-endomorphism-rigidity] forces $\\nu^*H=1$. The finite-level comparison unit [prop-weil-pbc-site-comparison-finite-level] is an isomorphism, so it reflects equality of the original étale maps. Hence $u=v$, proving the first displayed compatibility.",
-      "uses": [
-        "lem-sf-proetale-locally-constant-origin",
-        "lem-weil-pbc-comparison-pullback",
-        "lem-pur-a1-pullback-endomorphism-rigidity",
-        "prop-weil-pbc-site-comparison-finite-level"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-        "place": "Gluing paragraph: normalized maps agree on overlaps because their difference is an automorphism of a rank-one locally constant sheaf fixed at t=1"
-      }
-    },
-    {
-      "text": "Restrict the equality of Step 2 along $i_0$. Writing $x_R=i_0^*\\kappa_R$, the fibre comparison gives $x_B\\circ e_0=e_C\\circ S_Sx_A$. Since each $x_R$ is an isomorphism, left multiplication by $x_B^{-1}=\\delta_B$ and right multiplication by $(S_Sx_A)^{-1}=S_S\\delta_A$ yield $\\delta_B\\circ e_C=e_0\\circ S_S(\\delta_A)$.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-        "place": "Restriction of the normalized comparison to t=0 and inversion"
-      }
-    },
-    {
-      "text": "The same matrix argument proves the final general assertion. For arbitrary finite locally constant $B$-module sheaves $L,M$ on $S$, two maps $a^*L\\to a^*M$ equal at $i_1$ have difference $q$; the endomorphism of $a^*(L\\oplus M)$ with diagonal components the identities, component $q:a^*L\\to a^*M$ and zero component $a^*M\\to a^*L$ restricts to the identity at $i_1$. The comparison and rigidity statements used in Step 2 force $q=0$. For equal shifts of these sheaves, [lem-weil-pbc-derived-single-fully-faithful] identifies derived maps with the sheaf maps after cancelling the common shift, so restriction along $i_1$ remains injective in the derived category.",
-      "uses": [
-        "lem-sf-proetale-locally-constant-origin",
-        "lem-weil-pbc-comparison-pullback",
-        "lem-pur-a1-pullback-endomorphism-rigidity",
-        "prop-weil-pbc-site-comparison-finite-level",
-        "lem-weil-pbc-derived-single-fully-faithful"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-        "place": "Gluing paragraph: uniqueness of normalized rank-one comparisons on connected affine-line fibres"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pur-diagonal-orientation-compatibility",
+ "kind": "statement",
+ "title": "Normalized deformation comparisons commute with coefficient reduction",
+ "statement": "Let $\\ell$ be prime, $r\\geq m\\geq1$, $A=\\mathbf Z/\\ell^r\\mathbf Z$, $B=\\mathbf Z/\\ell^m\\mathbf Z$, and $S$ a Noetherian scheme (one admitting a finite affine cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring]) on which $\\ell$ is invertible. Let $g:V\\to S$ be smooth separated of finite type and pure relative dimension $d\\geq0$, and let $s:S\\hookrightarrow V$ be a closed regular section of codimension $d$. Assume the normal bundle $\\pi:N_s\\to S$ and deformation family $\\widetilde g:D\\to\\mathbf A^1_S$, with section $\\widetilde s$, and their compactifiability hypotheses are those specified in [lem-pur-noetherian-etale-section-specialization]. For $R=A,B$, work in the ordinary etale $R$-module derived categories; put $C_R=s^*\\omega_{g,R}$ and $F_R=\\widetilde s^*\\omega_{\\widetilde g,R}$, with $\\omega_{h,R}=h_R^\\times R_{\\operatorname{target}(h)}$. Write $a:\\mathbf A^1_S\\to S$ and $i_j:S\\to\\mathbf A^1_S$ for $t=j$, $j=0,1$. Let $\\kappa_R:F_R\\xrightarrow{\\sim}a^*C_R$ be the normalized isomorphism whose restriction at $1$ is the identity, and put $\\delta_R=(i_0^*\\kappa_R)^{-1}:C_R\\to z^*\\omega_{\\pi,R}$. Write $S_T=(-)\\otimes_A^LB$. For any morphisms\n$$e_F:S_{\\mathbf A^1_S}F_A\\to F_B,\\qquad e_C:S_SC_A\\to C_B$$\nwhose restrictions at $t=1$ agree under the canonical fibre identifications, one has\n$$\\kappa_B\\circ e_F=a^*e_C\\circ S_{\\mathbf A^1_S}(\\kappa_A).$$\nWith $e_0=i_0^*e_F$ under the normal-fibre identifications, this implies\n$$\\delta_B\\circ e_C=e_0\\circ S_S(\\delta_A).$$\nThe morphisms $e_F,e_C,e_0$ are not required to be invertible. More generally, restriction along $i_1$ is injective on morphisms $a^*L\\to a^*M$ for finite locally constant $B$-module sheaves $L,M$ locally free of rank one on $S$, and on morphisms between their equal shifts in the ordinary derived category.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Gluing: uniqueness of normalized rank-one comparisons on connected geometric affine-line fibres; extended from isomorphisms to morphisms as in returned item Step 6"
+ },
+ "stmt_deps": [
+  "lem-pur-noetherian-etale-section-specialization",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "Since $g$ is of finite type and $S$ is Noetherian, $V$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], so all hypotheses of [lem-pur-noetherian-etale-section-specialization] hold. Apply it separately for $R=A$ and $R=B$. It gives that $F_R[-2d]$ and $C_R[-2d]$ are locally constant free rank-one ordinary étale $R$-module sheaves. Since these sheaves are locally free, derived tensor with $B$ is concentrated in degree zero. The canonical tensor/pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies $S_{\\mathbf A^1_S}a^*C_A$ with $a^*S_SC_A$. By [lem-weil-pbc-derived-single-fully-faithful], after cancelling the common shift $[2d]$, equality of the derived maps in the claim is equivalent to equality of the corresponding ordinary sheaf maps.",
+   "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-pur-noetherian-etale-section-specialization",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-sf-proetale-locally-constant-origin",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-pur-a1-pullback-endomorphism-rigidity",
-    "prop-weil-pbc-site-comparison-finite-level"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
-    "place": "Gluing paragraph: uniqueness of normalized rank-one comparisons on connected affine-line fibres; coefficient morphism version"
+    "place": "Gluing paragraph: both family and section objects are shifts of locally constant rank-one sheaves; morphisms are ordinary sheaf maps"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Morphisms of pulled back locally constant rank one etale sheaves on affine line are determined by restriction along the unit section",
-      "results": "{\"t\": \"2026-10-17T10:52:41Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms of pulled back locally constant rank one etale sheaves on affine line are determined by restriction along the unit section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.presheaf_ext\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.Scheme.Modules.hom_ext\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.Scheme.Modules.hom_ext_iff\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"TopCat.Presheaf.pullback_obj_obj_ext\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\"], \"digest\": \"8783f231322740ff\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Normalized deformation to normal cone purity comparison commutes with reduction of torsion coefficients",
-      "results": "{\"t\": \"2026-10-17T10:52:31Z\", \"tool\": \"leansearch\", \"query\": \"Normalized deformation to normal cone purity comparison commutes with reduction of torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib.Tactic.Module.reduceCoefficientwise\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"Polynomial.map_normalize\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"7f2ef818ec160353\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"LocallyConstant\", \"connected\"",
-      "results": "{\"t\": \"2026-10-17T10:52:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyConstant\\\", \\\"connected\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocallyConstant.apply_eq_of_preconnectedSpace\", \"IsLocallyConstant.of_constant_on_connected_components\", \"IsLocallyConstant.apply_eq_of_isPreconnected\", \"LocallyConstant.apply_eq_of_preconnectedSpace\", \"IsLocallyConstant.of_constant_on_connected_clopens\", \"IsLocallyConstant.of_constant_on_preconnected_clopens\", \"LocallyConstant.apply_eq_of_isPreconnected\", \"LightCondSet.LocallyConstant.instHasPropAndTotallyDisconnectedSpaceCarrierSecondCountableTopologySubtypeToTop\"], \"digest\": \"27507738bab0d532\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
-    },
-    {
-      "tool": "grep",
-      "query": "LocallyConstant.*[Cc]onnected|[Cc]onnected.*LocallyConstant",
-      "results": "{\"t\": \"2026-10-17T10:52:30Z\", \"tool\": \"grep\", \"query\": \"LocallyConstant.*[Cc]onnected|[Cc]onnected.*LocallyConstant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Complex.lean\", \"Mathlib/Geometry/Manifold/Complex.lean\", \"Mathlib/Topology/Germ.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\"], \"digest\": \"de4251f48a31e993\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-pur-finite-smooth-adjunction-general-base",
-    "date": "2026-10-17",
-    "group": "Q52"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-purity-transport",
-  "blueprint": {
-    "from": {
-      "node": null,
-      "place": "Normalized comparison in sk-thm-dnc.proof.md, Gluing; returned item Step 6",
-      "via": [
-        "lem-pur-finite-smooth-adjunction-general-base",
-        "nt-target-smooth-purity-qbar"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-pur-diagonal-orientation-compatibility",
-    "worker": "stage1",
-    "summary": "Q90 retained the imported ordinary-etale statement and split its proof into four steps. The normalized family and section objects are reduced to locally constant rank-one sheaves using the existing Noetherian specialization node; a unipotent matrix reduces equality of two coefficient maps to arbitrary-base affine-line rigidity after faithful ordinary-etale/pro-etale comparison; restriction to the zero fibre gives the delta identity, and the same matrix argument proves the final injectivity clause. No new nodes or Mathlib leaves were needed.",
-    "blueprint": "Realizes the gluing paragraph of main-20261015 sk-thm-dnc.proof.md, specifically uniqueness of normalized rank-one comparisons on connected affine-line fibres, extended to arbitrary coefficient morphisms as required by the imported item.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "why": "Generic derived tensor/pullback coherence identifies coefficient extension of an affine-line pullback with the pullback of the coefficient extension."
-      },
-      {
-        "node": "lem-weil-pbc-derived-single-fully-faithful",
-        "why": "Generic full faithfulness of degree-zero sheaves identifies the derived maps after the common shift is removed."
-      },
-      {
-        "node": "lem-sf-proetale-locally-constant-origin",
-        "why": "Generic ordinary-to-pro-etale transfer supplies finite locally constant pro-etale sheaves to which affine-line rigidity applies."
-      },
-      {
-        "node": "lem-weil-pbc-comparison-pullback",
-        "why": "Generic comparison pullback coherence identifies the pro-etale pullback of the ordinary affine-line pullback."
-      },
-      {
-        "node": "lem-pur-a1-pullback-endomorphism-rigidity",
-        "why": "Arbitrary-base affine-line endomorphism rigidity is the black-box uniqueness input for the matrix argument."
-      },
-      {
-        "node": "prop-weil-pbc-site-comparison-finite-level",
-        "why": "Generic finite-level comparison unit isomorphism reflects equality of ordinary etale sheaf maps after pro-etale pullback."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-derived-single-fully-faithful",
+  {
+   "text": "Set $u=\\kappa_B\\circ e_F$ and $v=a^*e_C\\circ S_{\\mathbf A^1_S}(\\kappa_A)$. Their restrictions at $t=1$ agree by hypothesis. After Step 1, cancel $[2d]$ and use $\\kappa_A$ to regard $u-v$ as a map $a^*L\\to a^*M$ of finite locally constant $B$-module sheaves on $\\mathbf A^1_S$, where $L=S_SC_A[-2d]$ and $M=C_B[-2d]$. Let $H$ be the endomorphism of $a^*(L\\oplus M)=a^*L\\oplus a^*M$ whose diagonal components are $1_{a^*L}$ and $1_{a^*M}$, whose component $a^*L\\to a^*M$ is $u-v$, and whose component $a^*M\\to a^*L$ is $0$. Its restriction at $t=1$ is the identity. Pulling to the pro-étale sites, [lem-sf-proetale-locally-constant-origin] makes $\\nu_S^*(L\\oplus M)$ a finite locally constant sheaf, [lem-weil-pbc-comparison-pullback] identifies the pullback with the affine-line pullback there, and [lem-pur-a1-pullback-endomorphism-rigidity] forces $\\nu^*H=1$. The finite-level comparison unit [prop-weil-pbc-site-comparison-finite-level] is an isomorphism, so it reflects equality of the original étale maps. Hence $u=v$, proving the first displayed compatibility.",
+   "uses": [
     "lem-sf-proetale-locally-constant-origin",
     "lem-weil-pbc-comparison-pullback",
     "lem-pur-a1-pullback-endomorphism-rigidity",
     "prop-weil-pbc-site-comparison-finite-level"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q90-193832d85",
-    "group": "Q90",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-193832d85 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, and the main-20261015 sk-thm-dnc proof (Gluing paragraph and the t=0 restriction). The statement is unchanged and correct, and the delivery adds no new node. Step 1: the specialization node needs both S and V Noetherian, but the item assumes only S, and V being Noetherian was not cited (error C1). Fixed by citing the Mathlib leaf lem-weil-pbc-finite-type-over-noetherian; it is also added to proof_deps. The tensor/pullback identification is B-linear by naturality, since everything is a sheaf in one degree. Step 2: the matrix argument holds. i_1^*H=id. lem-sf-proetale-locally-constant-origin(a) makes the pulled-back sheaf lisse on the pro-étale site. comparison-pullback is compatible with composites. The arbitrary-base A^1 rigidity lemma (finite B) applies because S is only Noetherian. The unit of prop-weil-pbc-site-comparison-finite-level is an isomorphism, so the comparison is faithful. Step 3 is elementary: I checked the types and the cancellation. Step 4 proves the stronger statement for arbitrary finite locally constant sheaves. TeX fault: the psmallmatrix row break was a single backslash (`\\u`, `\\q` in the decoded text), which renders as a breve macro. Rewritten as components in words in Steps 2 and 4. Edge cases checked: d=0, empty S, r=m, zero maps, disconnected or nonreduced S. Not a duplicate of lem-pur-lisse-uniqueness or prop-pur-a1-invariance, which are over a field base. All cited nodes are on the route of sk-thm-purity-transport (closure includes sk-thm-dnc, sk-prop-sf-comparison, sk-thm-properbasechange). The worker-written tool_uses are accepted. No SGA source is used. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-diagonal-orientation-compatibility.json.; 1 file(s) fixed by the reviewer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing paragraph: normalized maps agree on overlaps because their difference is an automorphism of a rank-one locally constant sheaf fixed at t=1"
+   }
   },
-  "lean": {
-    "module": "Sheaf.Paper.PurityDiagonalOrientationCompatibility",
-    "declaration": "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.diagonalOrientationCompatibility",
-    "declarations": [
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.coefficientMap",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtension",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtensionAdjunction",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtension_additive",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtension_preservesKFlatQuasiIso_proof",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtension_preservesKFlatQuasiIso",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtensionDerived",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarUpperStarIso",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarThenPullbackCounit",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.pullbackThenScalarCounit",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarPullback_composites_derivable",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalScalarPullbackNatIso",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalScalarPullbackIso",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.atZero_isIso",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalAtZeroIso",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.atOne_isIso",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalAtOneIso",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalZeroFiberIso",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalOneFiberIso",
-      "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.diagonalOrientationCompatibility"
-    ],
-    "file": "lean/Sheaf/Paper/PurityDiagonalOrientationCompatibility.lean",
-    "statement": "theorem diagonalOrientationCompatibility (ell r m : ℕ) [Fact ell.Prime] (hr : 1 ≤ r) (hm : 1 ≤ m) (hmr : m ≤ r) {V S : Scheme.{u}} [IsNoetherian S] (hS : ∀ x : S, IsUnit (ell : S.presheaf.stalk x)) (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) (hregular : ∀ x : S, ∃ U : V.affineOpens, s x ∈ U.1 ∧ ∃ q : Fin d → Γ(V, U.1), RingTheory.Sequence.IsWeaklyRegular Γ(V, U.1) (List.ofFn q) ∧ Ideal.span (Set.range q) = s.ker.ideal U) [HasCompactification (Scheme.Hom.normalConeProj g s)] [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] [QuasiCompact (Scheme.Hom.normalConeProj g s)] (eF : (scalarExtensionDerived ell r m hmr (X := AffineSpace (ULift.{u} (Fin 1)) S)).obj (family (NoetherianSectionSpecialization.Coeff ell r) g s) ⟶ family (NoetherianSectionSpecialization.Coeff ell m) g s) (eC : (scalarExtensionDerived ell r m hmr (X := S)).obj (sectionInvariant (NoetherianSectionSpecialization.Coeff ell r) g s) ⟶ sectionInvariant (NoetherianSectionSpecialization.Coeff ell m) g s) (e0 : (scalarExtensionDerived ell r m hmr (X := S)).obj (sectionInvariant (NoetherianSectionSpecialization.Coeff ell r) (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection) ⟶ sectionInvariant (NoetherianSectionSpecialization.Coeff ell m) (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection) (κA : family (NoetherianSectionSpecialization.Coeff ell r) g s ≅ (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell r)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj (sectionInvariant (NoetherianSectionSpecialization.Coeff ell r) g s)) (hκA : Normalized (NoetherianSectionSpecialization.Coeff ell r) g s hs κA) (κB : family (NoetherianSectionSpecialization.Coeff ell m) g s ≅ (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj (sectionInvariant (NoetherianSectionSpecialization.Coeff ell m) g s)) (hκB : Normalized (NoetherianSectionSpecialization.Coeff ell m) g s hs κB) (he0 : e0 = (canonicalZeroFiberIso ell r m hr hmr hS d g s hs hregular).hom ≫ (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.map eF ≫ (canonicalAtZeroIso ell m hm hS d g s hs hregular).hom) (h₁ : (canonicalOneFiberIso ell r m hr hmr hS d g s hs hregular).hom ≫ (upperStar (ModuleCat.{u + 1} (Coeff ell m)) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.map eF ≫ atOne (Coeff ell m) g s hs = eC) (L M : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m))) (hL : ∃ cover : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : cover.I₀, Nonempty (L.over (cover.etalePrecoverageToEtale i) ≅ (constantSheaf (S.smallEtaleTopology.over (cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m))).obj (ModuleCat.of (NoetherianSectionSpecialization.Coeff ell m) (NoetherianSectionSpecialization.Coeff ell m)))) (hM : ∃ cover : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : cover.I₀, Nonempty (M.over (cover.etalePrecoverageToEtale i) ≅ (constantSheaf (S.smallEtaleTopology.over (cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m))).obj (ModuleCat.of (NoetherianSectionSpecialization.Coeff ell m) (NoetherianSectionSpecialization.Coeff ell m)))) : (eF ≫ κB.hom = (scalarExtensionDerived ell r m hmr (X := AffineSpace (ULift.{u} (Fin 1)) S)).map κA.hom ≫ (canonicalScalarPullbackIso ell r m hmr (sectionInvariant (NoetherianSectionSpecialization.Coeff ell r) g s)).hom ≫ (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.map eC) ∧ (eC ≫ specialization (NoetherianSectionSpecialization.Coeff ell m) g s κB = (scalarExtensionDerived ell r m hmr (X := S)).map (specialization (NoetherianSectionSpecialization.Coeff ell r) g s κA) ≫ e0) ∧ (∀ (φ ψ : (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj L ⟶ (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj M), (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).map φ = (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).map ψ → φ = ψ) ∧ (∀ (n : ℤ) (φ ψ : (_root_.DerivedCategory.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj L)⟦n⟧ ⟶ (_root_.DerivedCategory.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj M)⟦n⟧), (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.map φ = (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.map ψ → φ = ψ)",
-    "branch": "newtargets-dag",
-    "by": "Q31",
-    "date": "2026-10-17",
-    "existing": false,
-    "note": "Repair of H3 at immutable head 2eb05f1f5571: one ordinary derived scalar-extension functor, leftDerivedFunctor of the published sheafified extendScalars; canonical derived scalar/pullback comparisons from Mathlib leftDerivedNatIso and the actual composite derived counits; canonical one/zero fibre isomorphisms built from asIso of the specialization dependency maps. Auxiliary named proposition theorems give K-flat preservation, the two universal derived-functor properties, and invertibility of the actual fibre maps. All are listed in declarations; no choice from an unconstrained existence theorem. The original mathematical node statement is retained."
+  {
+   "text": "Restrict the equality of Step 2 along $i_0$. Writing $x_R=i_0^*\\kappa_R$, the fibre comparison gives $x_B\\circ e_0=e_C\\circ S_Sx_A$. Since each $x_R$ is an isomorphism, left multiplication by $x_B^{-1}=\\delta_B$ and right multiplication by $(S_Sx_A)^{-1}=S_S\\delta_A$ yield $\\delta_B\\circ e_C=e_0\\circ S_S(\\delta_A)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Restriction of the normalized comparison to t=0 and inversion"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-3e5e39859",
-    "group": "Q31",
-    "result": "pass",
-    "note": "Clause-by-clause match against node and sk-thm-dnc Gluing (ell/r/m, Noetherian S, hS, smooth separated g, regular section, compactifiability, Normalized kappa, h1 at t=1, he0, conclusion 1 with canonical S a^* = a^* S, delta equation in source direction, L/M ordinary and equal-shift injectivity). Canonical constructions as the H3 return prescribed: leftDerivedFunctor of etaleSheafExtendScalars (ordinary etale), leftDerivedNatIso universal lift of the adjunction-conjugate abelian comparison, asIso of dependency atZero/atOne; no choose/Nonempty data; 5 theorems sorry; docstrings/conventions ok; lean.statement verbatim, declarations complete, stmt_deps gains only a landed node. nt_compile rc=0 46.9 s, no warnings (one 60 s timeout under load ~170). Non-blocking observation: second realization of existing AlgebraicGeometry.Etale.scalarExtension/scalarPullbackIso (scalarUpperStarIso = scalarSheafPullbackIso), accepted because prescribed by the maintainer's return and canonically isomorphic."
+  {
+   "text": "The same matrix argument proves the final general assertion. For arbitrary finite locally constant $B$-module sheaves $L,M$ on $S$, two maps $a^*L\\to a^*M$ equal at $i_1$ have difference $q$; the endomorphism of $a^*(L\\oplus M)$ with diagonal components the identities, component $q:a^*L\\to a^*M$ and zero component $a^*M\\to a^*L$ restricts to the identity at $i_1$. The comparison and rigidity statements used in Step 2 force $q=0$. For equal shifts of these sheaves, [lem-weil-pbc-derived-single-fully-faithful] identifies derived maps with the sheaf maps after cancelling the common shift, so restriction along $i_1$ remains injective in the derived category.",
+   "uses": [
+    "lem-sf-proetale-locally-constant-origin",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-pur-a1-pullback-endomorphism-rigidity",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Gluing paragraph: uniqueness of normalized rank-one comparisons on connected affine-line fibres"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pur-noetherian-etale-section-specialization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-pur-a1-pullback-endomorphism-rigidity",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Gluing paragraph: uniqueness of normalized rank-one comparisons on connected affine-line fibres; coefficient morphism version"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms of pulled back locally constant rank one etale sheaves on affine line are determined by restriction along the unit section",
+   "results": "{\"t\": \"2026-10-17T10:52:41Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms of pulled back locally constant rank one etale sheaves on affine line are determined by restriction along the unit section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.presheaf_ext\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.Scheme.Modules.hom_ext\", \"AlgebraicGeometry.Spec.basicOpen_hom_ext\", \"AlgebraicGeometry.Scheme.Modules.hom_ext_iff\", \"AlgebraicGeometry.AffineSpace.homOverEquiv\", \"TopCat.Presheaf.pullback_obj_obj_ext\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\"], \"digest\": \"8783f231322740ff\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized deformation to normal cone purity comparison commutes with reduction of torsion coefficients",
+   "results": "{\"t\": \"2026-10-17T10:52:31Z\", \"tool\": \"leansearch\", \"query\": \"Normalized deformation to normal cone purity comparison commutes with reduction of torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib.Tactic.Module.reduceCoefficientwise\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"Polynomial.map_normalize\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\"], \"digest\": \"7f2ef818ec160353\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyConstant\", \"connected\"",
+   "results": "{\"t\": \"2026-10-17T10:52:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyConstant\\\", \\\"connected\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocallyConstant.apply_eq_of_preconnectedSpace\", \"IsLocallyConstant.of_constant_on_connected_components\", \"IsLocallyConstant.apply_eq_of_isPreconnected\", \"LocallyConstant.apply_eq_of_preconnectedSpace\", \"IsLocallyConstant.of_constant_on_connected_clopens\", \"IsLocallyConstant.of_constant_on_preconnected_clopens\", \"LocallyConstant.apply_eq_of_isPreconnected\", \"LightCondSet.LocallyConstant.instHasPropAndTotallyDisconnectedSpaceCarrierSecondCountableTopologySubtypeToTop\"], \"digest\": \"27507738bab0d532\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant.*[Cc]onnected|[Cc]onnected.*LocallyConstant",
+   "results": "{\"t\": \"2026-10-17T10:52:30Z\", \"tool\": \"grep\", \"query\": \"LocallyConstant.*[Cc]onnected|[Cc]onnected.*LocallyConstant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Complex.lean\", \"Mathlib/Geometry/Manifold/Complex.lean\", \"Mathlib/Topology/Germ.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\", \"Mathlib/Topology/LocallyConstant/Basic.lean\"], \"digest\": \"de4251f48a31e993\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: inspected returned signatures; generic module flatness, mates, topological locally constant functions and etale algebras do not state this ordinary-etale coefficient/deformation normalization lemma"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-finite-smooth-adjunction-general-base",
+  "date": "2026-10-17",
+  "group": "Q52"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Normalized comparison in sk-thm-dnc.proof.md, Gluing; returned item Step 6",
+   "via": [
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-diagonal-orientation-compatibility",
+  "worker": "stage1",
+  "summary": "Q90 retained the imported ordinary-etale statement and split its proof into four steps. The normalized family and section objects are reduced to locally constant rank-one sheaves using the existing Noetherian specialization node; a unipotent matrix reduces equality of two coefficient maps to arbitrary-base affine-line rigidity after faithful ordinary-etale/pro-etale comparison; restriction to the zero fibre gives the delta identity, and the same matrix argument proves the final injectivity clause. No new nodes or Mathlib leaves were needed.",
+  "blueprint": "Realizes the gluing paragraph of main-20261015 sk-thm-dnc.proof.md, specifically uniqueness of normalized rank-one comparisons on connected affine-line fibres, extended to arbitrary coefficient morphisms as required by the imported item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived tensor/pullback coherence identifies coefficient extension of an affine-line pullback with the pullback of the coefficient extension."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic full faithfulness of degree-zero sheaves identifies the derived maps after the common shift is removed."
+   },
+   {
+    "node": "lem-sf-proetale-locally-constant-origin",
+    "why": "Generic ordinary-to-pro-etale transfer supplies finite locally constant pro-etale sheaves to which affine-line rigidity applies."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic comparison pullback coherence identifies the pro-etale pullback of the ordinary affine-line pullback."
+   },
+   {
+    "node": "lem-pur-a1-pullback-endomorphism-rigidity",
+    "why": "Arbitrary-base affine-line endomorphism rigidity is the black-box uniqueness input for the matrix argument."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Generic finite-level comparison unit isomorphism reflects equality of ordinary etale sheaf maps after pro-etale pullback."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sf-proetale-locally-constant-origin",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-pur-a1-pullback-endomorphism-rigidity",
+  "prop-weil-pbc-site-comparison-finite-level"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-193832d85",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-193832d85 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, and the main-20261015 sk-thm-dnc proof (Gluing paragraph and the t=0 restriction). The statement is unchanged and correct, and the delivery adds no new node. Step 1: the specialization node needs both S and V Noetherian, but the item assumes only S, and V being Noetherian was not cited (error C1). Fixed by citing the Mathlib leaf lem-weil-pbc-finite-type-over-noetherian; it is also added to proof_deps. The tensor/pullback identification is B-linear by naturality, since everything is a sheaf in one degree. Step 2: the matrix argument holds. i_1^*H=id. lem-sf-proetale-locally-constant-origin(a) makes the pulled-back sheaf lisse on the pro-étale site. comparison-pullback is compatible with composites. The arbitrary-base A^1 rigidity lemma (finite B) applies because S is only Noetherian. The unit of prop-weil-pbc-site-comparison-finite-level is an isomorphism, so the comparison is faithful. Step 3 is elementary: I checked the types and the cancellation. Step 4 proves the stronger statement for arbitrary finite locally constant sheaves. TeX fault: the psmallmatrix row break was a single backslash (`\\u`, `\\q` in the decoded text), which renders as a breve macro. Rewritten as components in words in Steps 2 and 4. Edge cases checked: d=0, empty S, r=m, zero maps, disconnected or nonreduced S. Not a duplicate of lem-pur-lisse-uniqueness or prop-pur-a1-invariance, which are over a field base. All cited nodes are on the route of sk-thm-purity-transport (closure includes sk-thm-dnc, sk-prop-sf-comparison, sk-thm-properbasechange). The worker-written tool_uses are accepted. No SGA source is used. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-diagonal-orientation-compatibility.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityDiagonalOrientationCompatibility",
+  "declaration": "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.diagonalOrientationCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.coefficientMap",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtension",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtensionAdjunction",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtension_additive",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtension_preservesKFlatQuasiIso_proof",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtension_preservesKFlatQuasiIso",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarExtensionDerived",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarUpperStarIso",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarThenPullbackCounit",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.pullbackThenScalarCounit",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.scalarPullback_composites_derivable",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalScalarPullbackNatIso",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalScalarPullbackIso",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.atZero_isIso",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalAtZeroIso",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.atOne_isIso",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalAtOneIso",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalZeroFiberIso",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.canonicalOneFiberIso",
+   "AlgebraicGeometry.Etale.NoetherianSectionSpecialization.diagonalOrientationCompatibility"
+  ],
+  "file": "lean/Sheaf/Paper/PurityDiagonalOrientationCompatibility.lean",
+  "statement": "theorem diagonalOrientationCompatibility (ell r m : ℕ) [Fact ell.Prime] (hr : 1 ≤ r) (hm : 1 ≤ m) (hmr : m ≤ r) {V S : Scheme.{u}} [IsNoetherian S] (hS : ∀ x : S, IsUnit (ell : S.presheaf.stalk x)) (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] [HasCompactification g] (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) (hregular : ∀ x : S, ∃ U : V.affineOpens, s x ∈ U.1 ∧ ∃ q : Fin d → Γ(V, U.1), RingTheory.Sequence.IsWeaklyRegular Γ(V, U.1) (List.ofFn q) ∧ Ideal.span (Set.range q) = s.ker.ideal U) [HasCompactification (Scheme.Hom.normalConeProj g s)] [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] [QuasiCompact (Scheme.Hom.normalConeProj g s)] (eF : (scalarExtensionDerived ell r m hmr (X := AffineSpace (ULift.{u} (Fin 1)) S)).obj (family (NoetherianSectionSpecialization.Coeff ell r) g s) ⟶ family (NoetherianSectionSpecialization.Coeff ell m) g s) (eC : (scalarExtensionDerived ell r m hmr (X := S)).obj (sectionInvariant (NoetherianSectionSpecialization.Coeff ell r) g s) ⟶ sectionInvariant (NoetherianSectionSpecialization.Coeff ell m) g s) (e0 : (scalarExtensionDerived ell r m hmr (X := S)).obj (sectionInvariant (NoetherianSectionSpecialization.Coeff ell r) (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection) ⟶ sectionInvariant (NoetherianSectionSpecialization.Coeff ell m) (Scheme.Hom.normalConeProj g s) s.normalConeZeroSection) (κA : family (NoetherianSectionSpecialization.Coeff ell r) g s ≅ (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell r)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj (sectionInvariant (NoetherianSectionSpecialization.Coeff ell r) g s)) (hκA : Normalized (NoetherianSectionSpecialization.Coeff ell r) g s hs κA) (κB : family (NoetherianSectionSpecialization.Coeff ell m) g s ≅ (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.obj (sectionInvariant (NoetherianSectionSpecialization.Coeff ell m) g s)) (hκB : Normalized (NoetherianSectionSpecialization.Coeff ell m) g s hs κB) (he0 : e0 = (canonicalZeroFiberIso ell r m hr hmr hS d g s hs hregular).hom ≫ (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace.zeroSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.map eF ≫ (canonicalAtZeroIso ell m hm hS d g s hs hregular).hom) (h₁ : (canonicalOneFiberIso ell r m hr hmr hS d g s hs hregular).hom ≫ (upperStar (ModuleCat.{u + 1} (Coeff ell m)) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.map eF ≫ atOne (Coeff ell m) g s hs = eC) (L M : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m))) (hL : ∃ cover : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : cover.I₀, Nonempty (L.over (cover.etalePrecoverageToEtale i) ≅ (constantSheaf (S.smallEtaleTopology.over (cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m))).obj (ModuleCat.of (NoetherianSectionSpecialization.Coeff ell m) (NoetherianSectionSpecialization.Coeff ell m)))) (hM : ∃ cover : Scheme.Cover.{u} Scheme.etalePrecoverage S, ∀ i : cover.I₀, Nonempty (M.over (cover.etalePrecoverageToEtale i) ≅ (constantSheaf (S.smallEtaleTopology.over (cover.etalePrecoverageToEtale i)) (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m))).obj (ModuleCat.of (NoetherianSectionSpecialization.Coeff ell m) (NoetherianSectionSpecialization.Coeff ell m)))) : (eF ≫ κB.hom = (scalarExtensionDerived ell r m hmr (X := AffineSpace (ULift.{u} (Fin 1)) S)).map κA.hom ≫ (canonicalScalarPullbackIso ell r m hmr (sectionInvariant (NoetherianSectionSpecialization.Coeff ell r) g s)).hom ≫ (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).leftDerivedFunctor.map eC) ∧ (eC ≫ specialization (NoetherianSectionSpecialization.Coeff ell m) g s κB = (scalarExtensionDerived ell r m hmr (X := S)).map (specialization (NoetherianSectionSpecialization.Coeff ell r) g s κA) ≫ e0) ∧ (∀ (φ ψ : (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj L ⟶ (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj M), (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).map φ = (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).map ψ → φ = ψ) ∧ (∀ (n : ℤ) (φ ψ : (_root_.DerivedCategory.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj L)⟦n⟧ ⟶ (_root_.DerivedCategory.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace (ULift.{u} (Fin 1)) S ↘ S)).obj M)⟦n⟧), (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.map φ = (upperStar (ModuleCat.{u + 1} (NoetherianSectionSpecialization.Coeff ell m)) (AffineSpace.oneSection (ULift.{u} (Fin 1)) S)).leftDerivedFunctor.map ψ → φ = ψ)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of H3 at immutable head 2eb05f1f5571: one ordinary derived scalar-extension functor, leftDerivedFunctor of the published sheafified extendScalars; canonical derived scalar/pullback comparisons from Mathlib leftDerivedNatIso and the actual composite derived counits; canonical one/zero fibre isomorphisms built from asIso of the specialization dependency maps. Auxiliary named proposition theorems give K-flat preservation, the two universal derived-functor properties, and invertibility of the actual fibre maps. All are listed in declarations; no choice from an unconstrained existence theorem. The original mathematical node statement is retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e5e39859",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Clause-by-clause match against node and sk-thm-dnc Gluing (ell/r/m, Noetherian S, hS, smooth separated g, regular section, compactifiability, Normalized kappa, h1 at t=1, he0, conclusion 1 with canonical S a^* = a^* S, delta equation in source direction, L/M ordinary and equal-shift injectivity). Canonical constructions as the H3 return prescribed: leftDerivedFunctor of etaleSheafExtendScalars (ordinary etale), leftDerivedNatIso universal lift of the adjunction-conjugate abelian comparison, asIso of dependency atZero/atOne; no choose/Nonempty data; 5 theorems sorry; docstrings/conventions ok; lean.statement verbatim, declarations complete, stmt_deps gains only a landed node. nt_compile rc=0 46.9 s, no warnings (one 60 s timeout under load ~170). Non-blocking observation: second realization of existing AlgebraicGeometry.Etale.scalarExtension/scalarPullbackIso (scalarUpperStarIso = scalarSheafPullbackIso), accepted because prescribed by the maintainer's return and canonically isomorphic."
+ },
+ "lean_audit": {}
 }

@@ -1,373 +1,362 @@
 {
-  "id": "lem-asd-smooth-generic-direct-image",
-  "blueprint": {
-    "is": "lem-asd-smooth-generic-direct-image",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "A smooth source with locally constant coefficients",
-  "statement": "Let $S$ be integral and of finite type over a field $k$, let\n$\\ell\\ne\\operatorname{char}(k)$, let $f:X\\to S$ be a\nseparated smooth morphism of\nfinite type, and let $L$ be a finite locally constant\n$\\mathbf F_\\ell$-sheaf. There is a nonempty open $U\\subset S$\nsuch that $Rf_{U,*}L|_{X_U}$ is bounded with finite locally\nconstant cohomology, and for every $v:T\\to U$ with Noetherian $T$ the ordinary\nbase-change morphism\n\n$$\nv^*Rf_{U,*}L|_{X_U}\\longrightarrow Rf_{T,*}L|_{X_T}\n$$\n\nis an isomorphism.\nThe notation refers to ordinary derived categories.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-    "place": "node lem-asd-smooth-generic-direct-image, order 1632"
-  },
-  "stmt_deps": [
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-derived-categories",
-    "sbc-def-base-change-map",
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-scheme-conventions",
-    "def-pc-integral-scheme"
-  ],
-  "proof": [
-    {
-      "text": "Set $\\lambda=\\mathbf F_\\ell$ and use only the ordinary small etale categories with this constant coefficient ring. The schemes $S$ and $X$ are Noetherian: a field is Noetherian, and [pqf-lem-locnoeth-lft] applies first to $S\\to\\operatorname{Spec}k$ and then to $X\\to S$; finite type also gives quasi-compactness. The dimension function on $X$ is locally constant by [sbc-lem-smooth-relative-dimension-locally-constant] (Stacks Tag 02G1). Its level sets $X_d$ are open and closed. Quasi-compactness gives finitely many nonempty level sets: their open cover has a finite subcover. Each $f_d:X_d\\to S$ is separated smooth of finite type of pure relative dimension $d$. Nagata compactification [thm-nagata-compactification] makes it compactifiable. Work on these finitely many pieces and take a common open of $S$ at the end; this is a decomposition of $X$, not of $S$.",
-      "uses": [
-        "pqf-lem-locnoeth-lft",
-        "sbc-lem-smooth-relative-dimension-locally-constant",
-        "thm-nagata-compactification"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-        "place": "Proof, first paragraph: relative-dimension reduction"
-      }
-    },
-    {
-      "text": "Fix one piece and write $f$ for $f_d$. Put $\\omega=f^\\times\\lambda_S$. By [thm-asd-smooth-tensor], $\\omega=P[2d]$ with $P$ finite locally constant of rank one. Define $L^\\vee=\\mathcal Hom_\\lambda(L,\\lambda_X)$ and $N=L^\\vee\\otimes_\\lambda P[2d]$. This ordinary tensor computes the derived tensor because the sheaves involved are locally finite free. On a trivializing etale neighborhood, $L=\\lambda^r$ and $P=\\lambda$, so $N=\\lambda^r[2d]$ and the evaluation $L\\to R\\mathcal Hom_\\lambda(N,\\omega)$ is the bidual map $\\lambda^r\\to(\\lambda^r)^\\vee{}^\\vee$, in degree zero. The internal Hom functor from $\\lambda^r$ is a finite product of the identity and hence exact; there are no higher internal Ext terms. This computes an isomorphism locally, and the sheaf-level geometric-stalk criterion [lemma-weil-pbc-geometric-stalk-conservative], applied to cohomology, checks it globally. It also shows directly that $N$ is bounded constructible in the sense of [def-weil-pbc-constructible-complexes]. Internal Hom here is the operation of [def-pur-derived-internal-hom] on the small etale ringed site, not a pro-etale or adic operation.",
-      "uses": [
-        "thm-asd-smooth-tensor",
-        "lemma-weil-pbc-geometric-stalk-conservative",
-        "def-weil-pbc-constructible-complexes",
-        "def-pur-derived-internal-hom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-        "place": "Proof, first paragraph: construction of N and evaluation"
-      }
-    },
-    {
-      "text": "Apply [prop-asd-internal-adjunction] with $M=N$ and $K=\\lambda_S$. The evaluation identification from the preceding step gives a canonical isomorphism $\\alpha_f:Rf_*L\\xrightarrow{\\sim}D_S(C)$, where $C=Rf_!N$ and $D_S(C)=R\\mathcal Hom_\\lambda(C,\\lambda_S)$. By [lem-fin-compact-bounded-and-base-change], $C$ is bounded constructible. For each nonzero $\\mathcal H^q(C)$ choose its finite locally closed stratification from [def-weil-pbc-constructible-complexes]. The stratum containing the generic point of integral $S$ contains an open neighborhood of that point: write its underlying set as $O\\cap Z$, with $O$ open and $Z$ closed; since $Z$ contains the generic point, $Z=S$. Restrict to $O$. The finitely many degrees give a common nonempty open $U$. Include restriction to $U$ in the compact-support base-change clause of [lem-fin-compact-bounded-and-base-change], so that the same construction for $f_U$ has compact direct image $C|_U$. Apply [lem-fin-lisse-field-dual] to $C|_U$. Its cohomology formula makes $D_U(C|_U)$ bounded and finite locally constant, hence so is $Rf_{U,*}L|_{X_U}$ by $\\alpha_{f_U}$. No ordinary direct-image finiteness theorem is used.",
-      "uses": [
-        "prop-asd-internal-adjunction",
-        "lem-fin-compact-bounded-and-base-change",
-        "def-weil-pbc-constructible-complexes",
-        "lem-fin-lisse-field-dual"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-        "place": "Proof, second and third paragraphs"
-      }
-    },
-    {
-      "text": "Let $v:T\\to U$ have Noetherian source and let $v_X:X_T\\to X_U$ be the other edge. The canonical comparison [prop-asd-smooth-base-change] identifies $v_X^*\\omega_{f_U}$ with $\\omega_{f_T}$ and respects the tensor map. Pulling back the finite-free evaluation of step 2 identifies $v_X^*N$ with $N_T=(v_X^*L)^\\vee\\otimes\\omega_{f_T}$. This uses the identity $(\\lambda^r)^\\vee=\\lambda^r$ on each trivializing neighborhood; pullback preserves that cover. Put $C_T=Rf_{T,!}N_T$. Compact-support exchange [lem-fin-compact-bounded-and-base-change] gives $b:v^*(C|_U)\\xrightarrow{\\sim}C_T$. The canonical dual-pullback map $a:v^*D_U(C|_U)\\xrightarrow{\\sim}D_T(v^*(C|_U))$ is an isomorphism by [lem-fin-lisse-field-dual]. Thus $D_T(b^{-1})\\circ a$, together with $\\alpha_{f_U}$ and $\\alpha_{f_T}^{-1}$ from [prop-asd-internal-adjunction], gives an isomorphism $\\beta:v^*Rf_{U,*}L\\to Rf_{T,*}v_X^*L$. The adjunction for $f_T$ is available on its ambient Noetherian category even though $T$ need not be finite type over $k$: the base-changed compactification supplies compactifiability. More explicitly, [lem-pod-separated-finite-type-base-change] gives finite type of $f_T$, so [pqf-lem-locnoeth-lft] and quasi-compactness give Noetherian $X_T$. The chosen compactification base changes to a compactification by [lemma-nagata-compactification-base-change]. The prime $\\ell$ stays invertible on $T$ because its inverse in $k$ pulls back along $T\\to U\\to\\operatorname{Spec}k$.",
-      "uses": [
-        "prop-asd-smooth-base-change",
-        "lem-fin-compact-bounded-and-base-change",
-        "lem-fin-lisse-field-dual",
-        "prop-asd-internal-adjunction",
-        "lem-pod-separated-finite-type-base-change",
-        "pqf-lem-locnoeth-lft",
-        "lemma-nagata-compactification-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-        "place": "Proof, last paragraph: base-change isomorphisms"
-      }
-    },
-    {
-      "text": "Let $B=Rf_{U,*}L$, let $e:f_U^*B\\to L$ be the ordinary counit, and set $H=f_U^*B\\otimes^L N$. Evaluation gives $p:H\\xrightarrow{e\\otimes1}L\\otimes^L N\\xrightarrow{\\mathrm{ev}}\\omega_{f_U}$. By [lem-asd-internal-adjunction-evaluation], the tensor transpose of $\\alpha_{f_U}$ is $t=\\varepsilon_U\\circ Rf_{U,!}(p)\\circ\\Pi_U:B\\otimes^L C\\to\\lambda_U$. Write $b_K:v^*Rf_{U,!}K\\to Rf_{T,!}v_X^*K$ for compact exchange, and $c:v_X^*\\omega_{f_U}\\to\\omega_{f_T}$ for the smooth exceptional comparison. These are different maps.",
-      "uses": [
-        "lem-asd-internal-adjunction-evaluation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-        "place": "Proof, last paragraph: normalize the internal adjunction by evaluation"
-      }
-    },
-    {
-      "text": "The complexes $H$ and $\\omega_{f_U}$ are bounded constructible: $B$ is bounded lisse by step 3, and locally $N$ and $\\omega$ are shifted finite free sheaves by step 2. Thus [thm-cbc-finite-torsion] applies to $p$ and gives $b_{\\omega}\\circ v^*Rf_{U,!}(p)=Rf_{T,!}(v_X^*p)\\circ b_H$. The comparison $c$ of [prop-asd-smooth-base-change] is defined as the exceptional transpose of $v^*\\varepsilon_U\\circ b_{\\omega}^{-1}$. Apply [lem-weil-pbc-adjunction-of-natural-bijection] to that definition to obtain $\\varepsilon_T\\circ Rf_{T,!}(c)=v^*\\varepsilon_U\\circ b_{\\omega}^{-1}$. Both sides have source $Rf_{T,!}v_X^*\\omega_{f_U}$ and target $\\lambda_T$.",
-      "uses": [
-        "thm-cbc-finite-torsion",
-        "prop-asd-smooth-base-change",
-        "lem-weil-pbc-adjunction-of-natural-bijection"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-        "place": "Proof, last paragraph: compact exchange naturality and exceptional-counit mate"
-      }
-    },
-    {
-      "text": "Put $p_T=c\\circ v_X^*p$ and $N'=v_X^*N$, with the identification of step 4. Multiplying the two equations of step 6 cancels $b_{\\omega}^{-1}b_{\\omega}$ and gives\n$$\\varepsilon_T Rf_{T,!}(p_T)b_H=v^*(\\varepsilon_U Rf_{U,!}(p)).$$\nBy [lem-asd-compact-projection-exchange],\n$$b_Hv^*\\Pi_U=\\Pi_T(1\\otimes b_N),$$\nwhere $\\Pi_T:v^*B\\otimes^L Rf_{T,!}N'\\to Rf_{T,!}(f_T^*v^*B\\otimes^L N')$. Hence\n$$\\varepsilon_T Rf_{T,!}(p_T)\\Pi_T(1\\otimes b_N)=v^*t.$$\nAll tensor and inverse-image comparisons in these equations are the canonical ones of the projection-exchange node.",
-      "uses": [
-        "lem-asd-compact-projection-exchange"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-        "place": "Proof, last paragraph: transport the evaluation pairing through the projection formula"
-      }
-    },
-    {
-      "text": "The dual pullback comparison $a$ is defined by pulling back evaluation: the tensor transpose of $a\\circ v^*\\alpha_{f_U}$ is $v^*t$. Precomposing the dual with $b_N^{-1}$, as in step 4, therefore gives tensor transpose $v^*t\\circ(1\\otimes b_N^{-1})$. The last equation of step 7 identifies it with $\\varepsilon_T Rf_{T,!}(p_T)\\Pi_T$. By [lem-asd-internal-adjunction-evaluation] over $T$, this is the transpose of the map obtained from $p_T$ by ordinary and tensor--Hom adjunction. Thus that map is the isomorphism $\\beta$ of step 4.",
-      "uses": [
-        "lem-asd-internal-adjunction-evaluation"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-        "place": "Proof, last paragraph: compare the two transposed pairings"
-      }
-    },
-    {
-      "text": "Under $N'\\cong(v_X^*L)^\\vee\\otimes\\omega_{f_T}$, the pairing $p_T$ is the evaluation pairing of $v_X^*e$: pull back $p=\\mathrm{ev}\\circ(e\\otimes1)$ and use the tensor compatibility of [prop-asd-smooth-base-change]. The local finite-free evaluation isomorphism of step 2 therefore identifies its tensor--Hom transpose with $f_T^*v^*B\\cong v_X^*f_U^*B\\xrightarrow{v_X^*e}v_X^*L$. This is precisely the inverse-image transpose defining ordinary exchange in [sbc-def-base-change-map] on the exchanged square. Equality under the adjunction bijection implies that ordinary exchange equals $\\beta$, and hence is an isomorphism.",
-      "uses": [
-        "prop-asd-smooth-base-change",
-        "sbc-def-base-change-map"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-        "place": "Proof, last paragraph: identify the specified ordinary base-change morphism"
-      }
-    },
-    {
-      "text": "Intersect the nonempty opens obtained for the finitely many $X_d$. They all contain the generic point, so their intersection $U$ is nonempty. A sheaf on a finite disjoint union is the tuple of its restrictions (the sheaf condition on the open-and-closed covering); sections over a base object are the finite product of sections on the pieces. Hence both direct-image constructions and their exchange maps are the finite products of those for $f_d$. Finite products are finite direct sums in an abelian category and are exact, so this equality persists upon deriving. Take the minimum and maximum of the finitely many cohomological bounds. Finite direct sums of finite locally constant sheaves are finite locally constant, as seen on a common trivializing etale cover. The component exchange maps are isomorphisms by step 9; their finite product is an isomorphism. If $X$ is empty the complex is zero and take $U=S$.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-        "place": "Proof, last sentence: recombination of the dimensions"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-asd-smooth-generic-direct-image",
+ "blueprint": {
+  "is": "lem-asd-smooth-generic-direct-image",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A smooth source with locally constant coefficients",
+ "statement": "Let $S$ be integral and of finite type over a field $k$, let\n$\\ell\\ne\\operatorname{char}(k)$, let $f:X\\to S$ be a\nseparated smooth morphism of\nfinite type, and let $L$ be a finite locally constant\n$\\mathbf F_\\ell$-sheaf. There is a nonempty open $U\\subset S$\nsuch that $Rf_{U,*}L|_{X_U}$ is bounded with finite locally\nconstant cohomology, and for every $v:T\\to U$ with Noetherian $T$ the ordinary\nbase-change morphism\n\n$$\nv^*Rf_{U,*}L|_{X_U}\\longrightarrow Rf_{T,*}L|_{X_T}\n$$\n\nis an isomorphism.\nThe notation refers to ordinary derived categories.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+  "place": "node lem-asd-smooth-generic-direct-image, order 1632"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-derived-categories",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-integral-scheme"
+ ],
+ "proof": [
+  {
+   "text": "Set $\\lambda=\\mathbf F_\\ell$ and use only the ordinary small etale categories with this constant coefficient ring. The schemes $S$ and $X$ are Noetherian: a field is Noetherian, and [pqf-lem-locnoeth-lft] applies first to $S\\to\\operatorname{Spec}k$ and then to $X\\to S$; finite type also gives quasi-compactness. The dimension function on $X$ is locally constant by [sbc-lem-smooth-relative-dimension-locally-constant] (Stacks Tag 02G1). Its level sets $X_d$ are open and closed. Quasi-compactness gives finitely many nonempty level sets: their open cover has a finite subcover. Each $f_d:X_d\\to S$ is separated smooth of finite type of pure relative dimension $d$. Nagata compactification [thm-nagata-compactification] makes it compactifiable. Work on these finitely many pieces and take a common open of $S$ at the end; this is a decomposition of $X$, not of $S$.",
+   "uses": [
     "pqf-lem-locnoeth-lft",
     "sbc-lem-smooth-relative-dimension-locally-constant",
-    "thm-nagata-compactification",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+    "place": "Proof, first paragraph: relative-dimension reduction"
+   }
+  },
+  {
+   "text": "Fix one piece and write $f$ for $f_d$. Put $\\omega=f^\\times\\lambda_S$. By [thm-asd-smooth-tensor], $\\omega=P[2d]$ with $P$ finite locally constant of rank one. Define $L^\\vee=\\mathcal Hom_\\lambda(L,\\lambda_X)$ and $N=L^\\vee\\otimes_\\lambda P[2d]$. This ordinary tensor computes the derived tensor because the sheaves involved are locally finite free. On a trivializing etale neighborhood, $L=\\lambda^r$ and $P=\\lambda$, so $N=\\lambda^r[2d]$ and the evaluation $L\\to R\\mathcal Hom_\\lambda(N,\\omega)$ is the bidual map $\\lambda^r\\to(\\lambda^r)^\\vee{}^\\vee$, in degree zero. The internal Hom functor from $\\lambda^r$ is a finite product of the identity and hence exact; there are no higher internal Ext terms. This computes an isomorphism locally, and the sheaf-level geometric-stalk criterion [lemma-weil-pbc-geometric-stalk-conservative], applied to cohomology, checks it globally. It also shows directly that $N$ is bounded constructible in the sense of [def-weil-pbc-constructible-complexes]. Internal Hom here is the operation of [def-pur-derived-internal-hom] on the small etale ringed site, not a pro-etale or adic operation.",
+   "uses": [
     "thm-asd-smooth-tensor",
     "lemma-weil-pbc-geometric-stalk-conservative",
     "def-weil-pbc-constructible-complexes",
-    "def-pur-derived-internal-hom",
-    "prop-asd-internal-adjunction",
-    "lem-fin-compact-bounded-and-base-change",
-    "lem-fin-lisse-field-dual",
-    "prop-asd-smooth-base-change",
-    "lem-pod-separated-finite-type-base-change",
-    "lemma-nagata-compactification-base-change",
-    "lem-asd-internal-adjunction-evaluation",
-    "thm-cbc-finite-torsion",
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "lem-asd-compact-projection-exchange",
-    "sbc-def-base-change-map"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
-    "place": "## Proof"
+    "place": "Proof, first paragraph: construction of N and evaluation"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "A smooth separated morphism over an integral finite type scheme and finite locally constant etale field sheaf has generically locally constant derived direct image and universal base change",
-      "results": "Actual hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Etale; 8 hits",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern scheme morphisms, normalization, or condensed locally constant functors, not ordinary etale generic derived direct image and its exchange."
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.IsSmooth, CategoryTheory.Sheaf",
-      "results": "loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern scheme morphisms, normalization, or condensed locally constant functors, not ordinary etale generic derived direct image and its exchange."
-    },
-    {
-      "tool": "grep",
-      "query": "generic.*base.change|locally.constant.*direct.image|smooth.*base.change",
-      "results": "Actual hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Etale/Descent.lean; 8 hits",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern scheme morphisms, normalization, or condensed locally constant functors, not ordinary etale generic derived direct image and its exchange."
-    },
-    {
-      "tool": "leansearch",
-      "query": "generic base change for higher direct images of finite locally constant etale sheaves",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Higher direct images of a local system become locally constant after shrinking integral base and commute with any Noetherian base change",
-      "results": "Actual hits: CompHausLike.LocallyConstantModule.functor, CategoryTheory.instIsConstantObjSheafSheafCompose, CompHausLike.LocallyConstant.functorIso, CompHausLike.LocallyConstant.functorToPresheavesIso, CompHausLike.LocallyConstant.functor, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.isConstant_iff_forget, Condensed.lanSheafProfinite; 8 hits",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern scheme morphisms, normalization, or condensed locally constant functors, not ordinary etale generic derived direct image and its exchange."
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Smooth, CategoryTheory.Sheaf",
-      "results": "Actual hits: ; 0 hits",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern scheme morphisms, normalization, or condensed locally constant functors, not ordinary etale generic derived direct image and its exchange."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1632,
-  "blueprint_uses": [
-    "def-sbc-smooth-morphisms",
+  {
+   "text": "Apply [prop-asd-internal-adjunction] with $M=N$ and $K=\\lambda_S$. The evaluation identification from the preceding step gives a canonical isomorphism $\\alpha_f:Rf_*L\\xrightarrow{\\sim}D_S(C)$, where $C=Rf_!N$ and $D_S(C)=R\\mathcal Hom_\\lambda(C,\\lambda_S)$. By [lem-fin-compact-bounded-and-base-change], $C$ is bounded constructible. For each nonzero $\\mathcal H^q(C)$ choose its finite locally closed stratification from [def-weil-pbc-constructible-complexes]. The stratum containing the generic point of integral $S$ contains an open neighborhood of that point: write its underlying set as $O\\cap Z$, with $O$ open and $Z$ closed; since $Z$ contains the generic point, $Z=S$. Restrict to $O$. The finitely many degrees give a common nonempty open $U$. Include restriction to $U$ in the compact-support base-change clause of [lem-fin-compact-bounded-and-base-change], so that the same construction for $f_U$ has compact direct image $C|_U$. Apply [lem-fin-lisse-field-dual] to $C|_U$. Its cohomology formula makes $D_U(C|_U)$ bounded and finite locally constant, hence so is $Rf_{U,*}L|_{X_U}$ by $\\alpha_{f_U}$. No ordinary direct-image finiteness theorem is used.",
+   "uses": [
+    "prop-asd-internal-adjunction",
+    "lem-fin-compact-bounded-and-base-change",
     "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-derived-categories",
+    "lem-fin-lisse-field-dual"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+    "place": "Proof, second and third paragraphs"
+   }
+  },
+  {
+   "text": "Let $v:T\\to U$ have Noetherian source and let $v_X:X_T\\to X_U$ be the other edge. The canonical comparison [prop-asd-smooth-base-change] identifies $v_X^*\\omega_{f_U}$ with $\\omega_{f_T}$ and respects the tensor map. Pulling back the finite-free evaluation of step 2 identifies $v_X^*N$ with $N_T=(v_X^*L)^\\vee\\otimes\\omega_{f_T}$. This uses the identity $(\\lambda^r)^\\vee=\\lambda^r$ on each trivializing neighborhood; pullback preserves that cover. Put $C_T=Rf_{T,!}N_T$. Compact-support exchange [lem-fin-compact-bounded-and-base-change] gives $b:v^*(C|_U)\\xrightarrow{\\sim}C_T$. The canonical dual-pullback map $a:v^*D_U(C|_U)\\xrightarrow{\\sim}D_T(v^*(C|_U))$ is an isomorphism by [lem-fin-lisse-field-dual]. Thus $D_T(b^{-1})\\circ a$, together with $\\alpha_{f_U}$ and $\\alpha_{f_T}^{-1}$ from [prop-asd-internal-adjunction], gives an isomorphism $\\beta:v^*Rf_{U,*}L\\to Rf_{T,*}v_X^*L$. The adjunction for $f_T$ is available on its ambient Noetherian category even though $T$ need not be finite type over $k$: the base-changed compactification supplies compactifiability. More explicitly, [lem-pod-separated-finite-type-base-change] gives finite type of $f_T$, so [pqf-lem-locnoeth-lft] and quasi-compactness give Noetherian $X_T$. The chosen compactification base changes to a compactification by [lemma-nagata-compactification-base-change]. The prime $\\ell$ stays invertible on $T$ because its inverse in $k$ pulls back along $T\\to U\\to\\operatorname{Spec}k$.",
+   "uses": [
+    "prop-asd-smooth-base-change",
     "lem-fin-compact-bounded-and-base-change",
     "lem-fin-lisse-field-dual",
     "prop-asd-internal-adjunction",
-    "prop-asd-smooth-base-change",
-    "sbc-def-base-change-map",
-    "sbc-lem-smooth-relative-dimension-locally-constant",
-    "thm-asd-smooth-tensor"
-  ],
-  "uses_not_cited": [
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-derived-categories",
-    "sbc-def-base-change-map"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-cbc",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-asd-smooth-generic-direct-image",
-    "worker": "stage1",
-    "summary": "Repaired the returned long step using new internal-adjunction evaluation, attached project projection-exchange coherence, existing compact-exchange naturality and the existing Mathlib adjunction Hom-bijection leaf; preserved statement, Lean record, original steps 1–4 and final finite-dimension recombination.",
-    "blueprint": "Relative-dimension and finite-free reduction: steps 1–2; generic shrinking: step 3; base-change construction: step 4; evaluation normalization: step 5; exchange naturality and counit: step 6; projection coherence: step 7; dual and internal transposes: step 8; canonical ordinary exchange: step 9; finite recombination: step 10.",
-    "tool_uses": [
-      {
-        "node": "pqf-lem-locnoeth-lft",
-        "why": "Noetherianity under locally finite type is a general scheme tool; the unit has no such foundational statement."
-      },
-      {
-        "node": "sbc-lem-smooth-relative-dimension-locally-constant",
-        "why": "The imported proof explicitly needs the relative dimension function; this generic smooth geometry fact is not restated in this unit."
-      },
-      {
-        "node": "thm-nagata-compactification",
-        "why": "Compactifiability needed by ambient adjunction is a generic compactification theorem, not an alternative to the unit route."
-      },
-      {
-        "node": "lemma-weil-pbc-geometric-stalk-conservative",
-        "why": "Tests the finite-free evaluation on cohomology sheaves; no special duality or base-change conclusion is imported."
-      },
-      {
-        "node": "def-pur-derived-internal-hom",
-        "why": "The ringed-site definition supplies ordinary etale internal Hom without identifying pro-etale coefficient categories."
-      },
-      {
-        "node": "def-weil-pbc-constructible-complexes",
-        "why": "Defines the stratification used in the imported generic shrinking argument."
-      },
-      {
-        "node": "sbc-def-base-change-map",
-        "why": "Its counit transpose fixes the precise ordinary exchange being tested."
-      },
-      {
-        "node": "thm-cbc-finite-torsion",
-        "why": "Existing ordinary etale compact-support naturality, applied to bounded pairings; not a change of proof route."
-      }
-    ]
-  },
-  "tool_uses": [
+    "lem-pod-separated-finite-type-base-change",
     "pqf-lem-locnoeth-lft",
-    "sbc-lem-smooth-relative-dimension-locally-constant",
-    "thm-nagata-compactification",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-pur-derived-internal-hom",
-    "def-weil-pbc-constructible-complexes",
-    "sbc-def-base-change-map",
-    "thm-cbc-finite-torsion"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-N6-409051189",
-    "group": "N6",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-409051189 (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps, both new nodes, every cited statement, the full proof of prop-asd-internal-adjunction, the blueprint (master and main-20261015, identical), and LowerShriekProjectionExchange.lean l.1-179 (no sorry). Statement and coefficient category: ordinary small-etale F_ell. Base-change map: sbc-def-base-change-map; steps 8-9 match its f_T^*-transpose (v_X^*e) exactly, so the target is not weakened. Recomputed step 7: eps_T Rf_T!(c) b_omega = v^*eps_U from the prop-asd-smooth-base-change transpose definition plus the Mathlib inverse-Hom leaf, then the projection-exchange square gives v^*t. Steps 1-4 rechecked: Noetherian T, base-changed compactification, ell invertible. Evaluation node is true; it is the Phi_Q chain of prop-asd-internal-adjunction's proof, needed by C3, and restates no clause. Projection-exchange node is true and is a specialization of the sorry-free projectionMap_rightDerivedLowerShriekBaseChangeMap (Lean: arbitrary schemes, Finite Λ), left as lean_candidates. Searched for duplicates: prop-sf-pf-coherence and lem-sp-compact-projection-base-change are finite-field/pro-etale, lem-sf-proper-open-projection-mate is pro-etale, lem-pur-etale-support-map-compatibility is etale-only; none is a duplicate. Fixed one B3 fault: both new statements used Rf_! and extension-by-zero comparisons uncited; added def-amb-etale-compact-support, lem-pur-etale-open-derived-tensor and sbc-prop-extension-by-zero-and-arbitrary-base-change, inline and in stmt_deps. No cycle. Off-unit citations are definitions, Mathlib leaves or Lean-closed; declared tool uses accepted.; 2 file(s) fixed by the reviewer"
+    "lemma-nagata-compactification-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+    "place": "Proof, last paragraph: base-change isomorphisms"
+   }
   },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.SmoothGenericDirectImage",
-    "declaration": "AlgebraicGeometry.Etale.exists_nonempty_open_smooth_directImage_lisse_baseChange",
-    "file": "lean/Sheaf/AlgebraicGeometry/SmoothGenericDirectImage.lean",
-    "statement": "theorem exists_nonempty_open_smooth_directImage_lisse_baseChange (k : Type u) [Field k] (S : Scheme.{u}) [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k) (X : Scheme.{u}) (f : X ⟶ S) [IsSeparated f] [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f] (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) (hL : Scheme.IsFiniteLocallyConstantSheaf L) : ∃ U : S.Opens, Nonempty U ∧ ∀ (XU : Scheme.{u}) (p : XU ⟶ X) (fU : XU ⟶ U.toScheme), IsPullback p fU f U.ι → (∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj ((R((fU)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((L((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L))))) ∧ (∀ i : ℤ, Scheme.IsFiniteLocallyConstantSheaf ((_root_.DerivedCategory.homologyFunctor _ i).obj ((R((fU)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((L((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L))))) ∧ ∀ (T : Scheme.{u}) [IsNoetherian T] (v : T ⟶ U.toScheme) (XT : Scheme.{u}) (vX : XT ⟶ XU) (fT : XT ⟶ T) (sq : IsPullback vX fT fU v), IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) sq.toCommSq).app ((L((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L)))",
-    "branch": "newtargets-dag",
-    "by": "NA",
-    "date": "2026-10-15",
-    "existing": false
+  {
+   "text": "Let $B=Rf_{U,*}L$, let $e:f_U^*B\\to L$ be the ordinary counit, and set $H=f_U^*B\\otimes^L N$. Evaluation gives $p:H\\xrightarrow{e\\otimes1}L\\otimes^L N\\xrightarrow{\\mathrm{ev}}\\omega_{f_U}$. By [lem-asd-internal-adjunction-evaluation], the tensor transpose of $\\alpha_{f_U}$ is $t=\\varepsilon_U\\circ Rf_{U,!}(p)\\circ\\Pi_U:B\\otimes^L C\\to\\lambda_U$. Write $b_K:v^*Rf_{U,!}K\\to Rf_{T,!}v_X^*K$ for compact exchange, and $c:v_X^*\\omega_{f_U}\\to\\omega_{f_T}$ for the smooth exceptional comparison. These are different maps.",
+   "uses": [
+    "lem-asd-internal-adjunction-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+    "place": "Proof, last paragraph: normalize the internal adjunction by evaluation"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-f8fc387bc",
-    "group": "NA",
-    "result": "pass",
-    "note": "Wrote review.md. Checked the immutable node, all six statement dependencies, source, declarations, report, universes, edge cases, and verbatim signature. Independently reproduced clean per-file compilation through scompile.py (4.7 s and 5.1 s). No findings; branch head unchanged."
+  {
+   "text": "The complexes $H$ and $\\omega_{f_U}$ are bounded constructible: $B$ is bounded lisse by step 3, and locally $N$ and $\\omega$ are shifted finite free sheaves by step 2. Thus [thm-cbc-finite-torsion] applies to $p$ and gives $b_{\\omega}\\circ v^*Rf_{U,!}(p)=Rf_{T,!}(v_X^*p)\\circ b_H$. The comparison $c$ of [prop-asd-smooth-base-change] is defined as the exceptional transpose of $v^*\\varepsilon_U\\circ b_{\\omega}^{-1}$. Apply [lem-weil-pbc-adjunction-of-natural-bijection] to that definition to obtain $\\varepsilon_T\\circ Rf_{T,!}(c)=v^*\\varepsilon_U\\circ b_{\\omega}^{-1}$. Both sides have source $Rf_{T,!}v_X^*\\omega_{f_U}$ and target $\\lambda_T$.",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "prop-asd-smooth-base-change",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+    "place": "Proof, last paragraph: compact exchange naturality and exceptional-counit mate"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $S$ be integral and of finite type over a field $k$, let\n$\\ell\\ne\\operatorname{char}(k)$, let $f:X\\to S$ be a\nseparated smooth morphism of\nfinite type, and let $L$ be a finite locally constant\n$\\mathbf F_\\ell$-sheaf. There is a nonempty open $U\\subset S$\nsuch that $Rf_{U,*}L|_{X_U}$ is bounded with finite locally\nconstant cohomology, and for every $v:T\\to U$ with Noetherian $T$ the ordinary\nbase-change morphism\n\n$$\nv^*Rf_{U,*}L|_{X_U}\\longrightarrow Rf_{T,*}L|_{X_T}\n$$\n\nis an isomorphism.",
-    "proof": [
-      {
-        "text": "Write $\\lambda=\\mathbf F_\\ell$. The relative dimension is\nlocally constant by\n[sbc-lem-smooth-relative-dimension-locally-constant]; the\nfinitely many occurring dimensions give a finite disjoint open\ndecomposition, so we may treat one dimension at a time.\nPut $\\omega_f=f^\\times\\lambda_S$. The ambient smooth theorem\n[thm-asd-smooth-tensor] says that $\\omega_f$ is locally an\ninvertible sheaf in degree $-2d$, that\n$f^\\times M=\\omega_f\\otimes f^*M$. Its compatibility with\nNoetherian base change is [prop-asd-smooth-base-change]. In particular\n$N=L^\\vee\\otimes\\omega_f$ is bounded constructible and the\nfinite-dimensional evaluation isomorphism gives\n\n$$\nR\\mathcal Hom_X(N,\\omega_f)=L.\n$$",
-        "uses": [
-          "sbc-lem-smooth-relative-dimension-locally-constant",
-          "thm-asd-smooth-tensor",
-          "prop-asd-smooth-base-change"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "The internal adjunction proved on the ambient categories in\n[prop-asd-internal-adjunction] therefore identifies\n\n$$\nRf_*L\n=R\\mathcal Hom_S(Rf_!N,\\lambda_S).\n\\tag{\\(\\ast\\)}\n$$\n\nThis invokes neither preservation of a constructible subcategory\nby $f^!$ nor ordinary direct-image finiteness.",
-        "uses": [
-          "prop-asd-internal-adjunction"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "By [lem-fin-compact-bounded-and-base-change], $C=Rf_!N$\nis bounded constructible. Each of its finitely many nonzero\ncohomology sheaves is finite locally constant on some nonempty\nopen of the integral scheme $S$: take the stratum containing\nthe generic point in the constructible stratification of\n[def-weil-pbc-constructible-complexes], and then its open\nneighborhood. Intersect these finitely many opens to obtain $U$.\nApply [lem-fin-lisse-field-dual] to $C|_U$; equation\n$(\\ast)$ gives the claimed bounded locally constant cohomology.",
-        "uses": [
-          "lem-fin-compact-bounded-and-base-change",
-          "def-weil-pbc-constructible-complexes",
-          "lem-fin-lisse-field-dual"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "For $v:T\\to U$ with Noetherian $T$, the ambient smooth theorem identifies\n$v_X^*N$ with the coefficient complex used for $f_T$.\nCompact-support base change identifies\n$v^*C$ with $Rf_{T,!}v_X^*N$, and\n[lem-fin-lisse-field-dual] permits pullback through its\ninternal dual. Thus the pullback of $(\\ast)$ is the same\nisomorphism $(\\ast)$ for $f_T$. Naturality of internal\nadjunction with respect to its unit and counit identifies this\ncomposite with the ordinary base-change morphism. Hence the\nspecified morphism, and not merely two abstract objects, is an\nisomorphism. Intersect the opens obtained for the finitely many\nrelative dimensions to finish.",
-        "uses": [
-          "lem-fin-lisse-field-dual"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Put $p_T=c\\circ v_X^*p$ and $N'=v_X^*N$, with the identification of step 4. Multiplying the two equations of step 6 cancels $b_{\\omega}^{-1}b_{\\omega}$ and gives\n$$\\varepsilon_T Rf_{T,!}(p_T)b_H=v^*(\\varepsilon_U Rf_{U,!}(p)).$$\nBy [lem-asd-compact-projection-exchange],\n$$b_Hv^*\\Pi_U=\\Pi_T(1\\otimes b_N),$$\nwhere $\\Pi_T:v^*B\\otimes^L Rf_{T,!}N'\\to Rf_{T,!}(f_T^*v^*B\\otimes^L N')$. Hence\n$$\\varepsilon_T Rf_{T,!}(p_T)\\Pi_T(1\\otimes b_N)=v^*t.$$\nAll tensor and inverse-image comparisons in these equations are the canonical ones of the projection-exchange node.",
+   "uses": [
+    "lem-asd-compact-projection-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+    "place": "Proof, last paragraph: transport the evaluation pairing through the projection formula"
+   }
+  },
+  {
+   "text": "The dual pullback comparison $a$ is defined by pulling back evaluation: the tensor transpose of $a\\circ v^*\\alpha_{f_U}$ is $v^*t$. Precomposing the dual with $b_N^{-1}$, as in step 4, therefore gives tensor transpose $v^*t\\circ(1\\otimes b_N^{-1})$. The last equation of step 7 identifies it with $\\varepsilon_T Rf_{T,!}(p_T)\\Pi_T$. By [lem-asd-internal-adjunction-evaluation] over $T$, this is the transpose of the map obtained from $p_T$ by ordinary and tensor--Hom adjunction. Thus that map is the isomorphism $\\beta$ of step 4.",
+   "uses": [
+    "lem-asd-internal-adjunction-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+    "place": "Proof, last paragraph: compare the two transposed pairings"
+   }
+  },
+  {
+   "text": "Under $N'\\cong(v_X^*L)^\\vee\\otimes\\omega_{f_T}$, the pairing $p_T$ is the evaluation pairing of $v_X^*e$: pull back $p=\\mathrm{ev}\\circ(e\\otimes1)$ and use the tensor compatibility of [prop-asd-smooth-base-change]. The local finite-free evaluation isomorphism of step 2 therefore identifies its tensor--Hom transpose with $f_T^*v^*B\\cong v_X^*f_U^*B\\xrightarrow{v_X^*e}v_X^*L$. This is precisely the inverse-image transpose defining ordinary exchange in [sbc-def-base-change-map] on the exchanged square. Equality under the adjunction bijection implies that ordinary exchange equals $\\beta$, and hence is an isomorphism.",
+   "uses": [
+    "prop-asd-smooth-base-change",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+    "place": "Proof, last paragraph: identify the specified ordinary base-change morphism"
+   }
+  },
+  {
+   "text": "Intersect the nonempty opens obtained for the finitely many $X_d$. They all contain the generic point, so their intersection $U$ is nonempty. A sheaf on a finite disjoint union is the tuple of its restrictions (the sheaf condition on the open-and-closed covering); sections over a base object are the finite product of sections on the pieces. Hence both direct-image constructions and their exchange maps are the finite products of those for $f_d$. Finite products are finite direct sums in an abelian category and are exact, so this equality persists upon deriving. Take the minimum and maximum of the finitely many cohomological bounds. Finite direct sums of finite locally constant sheaves are finite locally constant, as seen on a common trivializing etale cover. The component exchange maps are isomorphisms by step 9; their finite product is an isomorphism. If $X$ is empty the complex is zero and take $U=S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+    "place": "Proof, last sentence: recombination of the dimensions"
+   }
   }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "thm-nagata-compactification",
+  "thm-asd-smooth-tensor",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-constructible-complexes",
+  "def-pur-derived-internal-hom",
+  "prop-asd-internal-adjunction",
+  "lem-fin-compact-bounded-and-base-change",
+  "lem-fin-lisse-field-dual",
+  "prop-asd-smooth-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lemma-nagata-compactification-base-change",
+  "lem-asd-internal-adjunction-evaluation",
+  "thm-cbc-finite-torsion",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-asd-compact-projection-exchange",
+  "sbc-def-base-change-map"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-asd-smooth-generic-direct-image.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth separated morphism over an integral finite type scheme and finite locally constant etale field sheaf has generically locally constant derived direct image and universal base change",
+   "results": "Actual hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsFinite.of_comp, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.FormallyUnramified, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.Scheme.Etale; 8 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern scheme morphisms, normalization, or condensed locally constant functors, not ordinary etale generic derived direct image and its exchange."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSmooth, CategoryTheory.Sheaf",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.IsSmooth'",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern scheme morphisms, normalization, or condensed locally constant functors, not ordinary etale generic derived direct image and its exchange."
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*base.change|locally.constant.*direct.image|smooth.*base.change",
+   "results": "Actual hits: Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Normalization.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/IntegralClosure.lean, Mathlib/RingTheory/Smooth/Basic.lean, Mathlib/RingTheory/Etale/Descent.lean; 8 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern scheme morphisms, normalization, or condensed locally constant functors, not ordinary etale generic derived direct image and its exchange."
+  },
+  {
+   "tool": "leansearch",
+   "query": "generic base change for higher direct images of finite locally constant etale sheaves",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images of a local system become locally constant after shrinking integral base and commute with any Noetherian base change",
+   "results": "Actual hits: CompHausLike.LocallyConstantModule.functor, CategoryTheory.instIsConstantObjSheafSheafCompose, CompHausLike.LocallyConstant.functorIso, CompHausLike.LocallyConstant.functorToPresheavesIso, CompHausLike.LocallyConstant.functor, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.isConstant_iff_forget, Condensed.lanSheafProfinite; 8 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern scheme morphisms, normalization, or condensed locally constant functors, not ordinary etale generic derived direct image and its exchange."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.Sheaf",
+   "results": "Actual hits: ; 0 hits",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern scheme morphisms, normalization, or condensed locally constant functors, not ordinary etale generic derived direct image and its exchange."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1632,
+ "blueprint_uses": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-derived-categories",
+  "lem-fin-compact-bounded-and-base-change",
+  "lem-fin-lisse-field-dual",
+  "prop-asd-internal-adjunction",
+  "prop-asd-smooth-base-change",
+  "sbc-def-base-change-map",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "thm-asd-smooth-tensor"
+ ],
+ "uses_not_cited": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-derived-categories",
+  "sbc-def-base-change-map"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-asd-smooth-generic-direct-image",
+  "worker": "stage1",
+  "summary": "Repaired the returned long step using new internal-adjunction evaluation, attached project projection-exchange coherence, existing compact-exchange naturality and the existing Mathlib adjunction Hom-bijection leaf; preserved statement, Lean record, original steps 1–4 and final finite-dimension recombination.",
+  "blueprint": "Relative-dimension and finite-free reduction: steps 1–2; generic shrinking: step 3; base-change construction: step 4; evaluation normalization: step 5; exchange naturality and counit: step 6; projection coherence: step 7; dual and internal transposes: step 8; canonical ordinary exchange: step 9; finite recombination: step 10.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Noetherianity under locally finite type is a general scheme tool; the unit has no such foundational statement."
+   },
+   {
+    "node": "sbc-lem-smooth-relative-dimension-locally-constant",
+    "why": "The imported proof explicitly needs the relative dimension function; this generic smooth geometry fact is not restated in this unit."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Compactifiability needed by ambient adjunction is a generic compactification theorem, not an alternative to the unit route."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Tests the finite-free evaluation on cohomology sheaves; no special duality or base-change conclusion is imported."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "The ringed-site definition supplies ordinary etale internal Hom without identifying pro-etale coefficient categories."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Defines the stratification used in the imported generic shrinking argument."
+   },
+   {
+    "node": "sbc-def-base-change-map",
+    "why": "Its counit transpose fixes the precise ordinary exchange being tested."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Existing ordinary etale compact-support naturality, applied to bounded pairings; not a change of proof route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "thm-nagata-compactification",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-constructible-complexes",
+  "sbc-def-base-change-map",
+  "thm-cbc-finite-torsion"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N6-409051189",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-409051189 (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps, both new nodes, every cited statement, the full proof of prop-asd-internal-adjunction, the blueprint (master and main-20261015, identical), and LowerShriekProjectionExchange.lean l.1-179 (no sorry). Statement and coefficient category: ordinary small-etale F_ell. Base-change map: sbc-def-base-change-map; steps 8-9 match its f_T^*-transpose (v_X^*e) exactly, so the target is not weakened. Recomputed step 7: eps_T Rf_T!(c) b_omega = v^*eps_U from the prop-asd-smooth-base-change transpose definition plus the Mathlib inverse-Hom leaf, then the projection-exchange square gives v^*t. Steps 1-4 rechecked: Noetherian T, base-changed compactification, ell invertible. Evaluation node is true; it is the Phi_Q chain of prop-asd-internal-adjunction's proof, needed by C3, and restates no clause. Projection-exchange node is true and is a specialization of the sorry-free projectionMap_rightDerivedLowerShriekBaseChangeMap (Lean: arbitrary schemes, Finite Λ), left as lean_candidates. Searched for duplicates: prop-sf-pf-coherence and lem-sp-compact-projection-base-change are finite-field/pro-etale, lem-sf-proper-open-projection-mate is pro-etale, lem-pur-etale-support-map-compatibility is etale-only; none is a duplicate. Fixed one B3 fault: both new statements used Rf_! and extension-by-zero comparisons uncited; added def-amb-etale-compact-support, lem-pur-etale-open-derived-tensor and sbc-prop-extension-by-zero-and-arbitrary-base-change, inline and in stmt_deps. No cycle. Off-unit citations are definitions, Mathlib leaves or Lean-closed; declared tool uses accepted.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothGenericDirectImage",
+  "declaration": "AlgebraicGeometry.Etale.exists_nonempty_open_smooth_directImage_lisse_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothGenericDirectImage.lean",
+  "statement": "theorem exists_nonempty_open_smooth_directImage_lisse_baseChange (k : Type u) [Field k] (S : Scheme.{u}) [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ ringChar k) (X : Scheme.{u}) (f : X ⟶ S) [IsSeparated f] [Smooth f] [LocallyOfFiniteType f] [QuasiCompact f] (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) (hL : Scheme.IsFiniteLocallyConstantSheaf L) : ∃ U : S.Opens, Nonempty U ∧ ∀ (XU : Scheme.{u}) (p : XU ⟶ X) (fU : XU ⟶ U.toScheme), IsPullback p fU f U.ι → (∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj ((R((fU)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((L((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L))))) ∧ (∀ i : ℤ, Scheme.IsFiniteLocallyConstantSheaf ((_root_.DerivedCategory.homologyFunctor _ i).obj ((R((fU)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((L((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L))))) ∧ ∀ (T : Scheme.{u}) [IsNoetherian T] (v : T ⟶ U.toScheme) (XT : Scheme.{u}) (vX : XT ⟶ XU) (fT : XT ⟶ T) (sq : IsPullback vX fT fU v), IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) sq.toCommSq).app ((L((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L)))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f8fc387bc",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable node, all six statement dependencies, source, declarations, report, universes, edge cases, and verbatim signature. Independently reproduced clean per-file compilation through scompile.py (4.7 s and 5.1 s). No findings; branch head unchanged."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $S$ be integral and of finite type over a field $k$, let\n$\\ell\\ne\\operatorname{char}(k)$, let $f:X\\to S$ be a\nseparated smooth morphism of\nfinite type, and let $L$ be a finite locally constant\n$\\mathbf F_\\ell$-sheaf. There is a nonempty open $U\\subset S$\nsuch that $Rf_{U,*}L|_{X_U}$ is bounded with finite locally\nconstant cohomology, and for every $v:T\\to U$ with Noetherian $T$ the ordinary\nbase-change morphism\n\n$$\nv^*Rf_{U,*}L|_{X_U}\\longrightarrow Rf_{T,*}L|_{X_T}\n$$\n\nis an isomorphism.",
+  "proof": [
+   {
+    "text": "Write $\\lambda=\\mathbf F_\\ell$. The relative dimension is\nlocally constant by\n[sbc-lem-smooth-relative-dimension-locally-constant]; the\nfinitely many occurring dimensions give a finite disjoint open\ndecomposition, so we may treat one dimension at a time.\nPut $\\omega_f=f^\\times\\lambda_S$. The ambient smooth theorem\n[thm-asd-smooth-tensor] says that $\\omega_f$ is locally an\ninvertible sheaf in degree $-2d$, that\n$f^\\times M=\\omega_f\\otimes f^*M$. Its compatibility with\nNoetherian base change is [prop-asd-smooth-base-change]. In particular\n$N=L^\\vee\\otimes\\omega_f$ is bounded constructible and the\nfinite-dimensional evaluation isomorphism gives\n\n$$\nR\\mathcal Hom_X(N,\\omega_f)=L.\n$$",
+    "uses": [
+     "sbc-lem-smooth-relative-dimension-locally-constant",
+     "thm-asd-smooth-tensor",
+     "prop-asd-smooth-base-change"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The internal adjunction proved on the ambient categories in\n[prop-asd-internal-adjunction] therefore identifies\n\n$$\nRf_*L\n=R\\mathcal Hom_S(Rf_!N,\\lambda_S).\n\\tag{\\(\\ast\\)}\n$$\n\nThis invokes neither preservation of a constructible subcategory\nby $f^!$ nor ordinary direct-image finiteness.",
+    "uses": [
+     "prop-asd-internal-adjunction"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By [lem-fin-compact-bounded-and-base-change], $C=Rf_!N$\nis bounded constructible. Each of its finitely many nonzero\ncohomology sheaves is finite locally constant on some nonempty\nopen of the integral scheme $S$: take the stratum containing\nthe generic point in the constructible stratification of\n[def-weil-pbc-constructible-complexes], and then its open\nneighborhood. Intersect these finitely many opens to obtain $U$.\nApply [lem-fin-lisse-field-dual] to $C|_U$; equation\n$(\\ast)$ gives the claimed bounded locally constant cohomology.",
+    "uses": [
+     "lem-fin-compact-bounded-and-base-change",
+     "def-weil-pbc-constructible-complexes",
+     "lem-fin-lisse-field-dual"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For $v:T\\to U$ with Noetherian $T$, the ambient smooth theorem identifies\n$v_X^*N$ with the coefficient complex used for $f_T$.\nCompact-support base change identifies\n$v^*C$ with $Rf_{T,!}v_X^*N$, and\n[lem-fin-lisse-field-dual] permits pullback through its\ninternal dual. Thus the pullback of $(\\ast)$ is the same\nisomorphism $(\\ast)$ for $f_T$. Naturality of internal\nadjunction with respect to its unit and counit identifies this\ncomposite with the ordinary base-change morphism. Hence the\nspecified morphism, and not merely two abstract objects, is an\nisomorphism. Intersect the opens obtained for the finitely many\nrelative dimensions to finish.",
+    "uses": [
+     "lem-fin-lisse-field-dual"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,165 +1,53 @@
 {
-  "id": "lem-pur-gysin-structure",
-  "blueprint": {
-    "is": "lem-pur-gysin-structure",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Structure of the exceptional inverse image of the zero section",
-  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\Lambda=A=A_{E,n}$ and use the affine-line datum of\n[def-pur-affine-line-datum]: $Y$ is a separated finite-type $k$-scheme,\n$e(E/\\mathbf Q_\\ell)\\mid n$, $N=n/e(E/\\mathbf Q_\\ell)$,\n$X=\\mathbf A^1_Y$, $s:Y\\hookrightarrow X$ is the zero section,\n$j:U=\\mathbf G_{m,Y}\\hookrightarrow X$ is its open complement, and\n$\\kappa(t)\\in H^1(U,A(1))$ is the coefficient-extended Kummer class\nof the coordinate. Work on the small pro-etale sites as in those\nconventions, with cohomology sheaves [def-weil-derived-cohomology-sheaves],\nsupported cohomology [def-pur-support-cohomology], and\n$D^b_{ctf}$ as in [def-weil-finite-tor-amplitude]. Then:\n\n1. The object $Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]$ lies in\n$D^b_{ctf}(Y,\\Lambda)$ and is concentrated in degree zero after the\ndisplayed shift, with lisse rank-one cohomology sheaf.\n1. Under the long exact sequence of\n[thm-pur-with-support-exactness] for the pair\n$(s(Y),\\mathbf A^1_Y)$, there is a canonical identification\n$$\n\\Gamma\\!\\left(Y,\\mathcal H^0\\bigl(Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\bigr)\\right)\n\\cong H^2_{s(Y)}\\bigl(\\mathbf A^1_Y,\\Lambda(1)\\bigr),\n$$\nvia which the boundary of the\nKummer class of $t$ corresponds\nto an element of the space of morphisms\n$$\n\\operatorname{Hom}_{D(Y,\\Lambda)}\\bigl(\\Lambda_Y,Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\bigr).\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-gysin-structure.md",
-    "place": "node lem-pur-gysin-structure, order 1946",
-    "external": [
-      {
-        "document": "Milne",
-        "place": "Under the long exact sequence of [thm-pur-with-support-exactness] for the pair $(s(Y),\\mathbf A^1_Y)$, there is a canonical identification $$ \\Gamma\\!\\left(Y,\\mathcal H^0\\bigl(Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\bigr)\\right) \\cong H^2_{s(Y)}\\bigl(\\mathbf A^1_Y,\\Lambda(1)\\bigr), $$ via which the boundary of the Kummer class of $t$ corresponds to an element of the space of morphisms $$ \\operatorname{H"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pur-conventions",
-    "def-pur-affine-line-datum",
-    "def-weil-derived-cohomology-sheaves",
-    "def-pur-support-cohomology",
-    "def-weil-finite-tor-amplitude",
-    "def-weil-exceptional-inverse-image",
-    "thm-pur-with-support-exactness",
-    "lem-pur-retracted-support-localization-comparison",
-    "def-weil-pbc-proetale-modules"
-  ],
-  "proof": [
-    {
-      "text": "Use the finite stage of [def-pur-conventions] and the exceptional functor with the domains of [def-weil-exceptional-inverse-image]. Set $p:X\\to Y$, $\\pi=pj$ and $F=A_X(1)[0]$, with the pair $(s,j)$ and $\\kappa(t)$ of [def-pur-affine-line-datum]. Its $e\\mid n$ gives $N=n/e\\geq1$, and [lem-pur-finite-kummer-level] identifies $A$ as a module with $(\\mathbf Z/\\ell^N\\mathbf Z)^{ef}$, so $A$ is finite. Apply [lem-pur-affine-line-support-geometry] to the underlying finite-type $k$-scheme $Y$. It says that $Y,X,U$ are Noetherian, that $X,U$ are finite type over $k$, and that $j$ is quasi-compact. These are the support and closed-exactness hypotheses needed below.",
-      "uses": [
-        "def-pur-conventions",
-        "def-weil-exceptional-inverse-image",
-        "def-pur-affine-line-datum",
-        "lem-pur-finite-kummer-level",
-        "lem-pur-affine-line-support-geometry"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
-        "place": "first paragraph: affine-line datum; hypotheses of the closed-support construction made explicit"
-      }
-    },
-    {
-      "text": "In this step write $R s^!_0$ for the right derived functor of $M\\mapsto s^{-1}\\ker(M\\to j_*j^*M)$ on $D^+$, as specified in [lem-pur-support-localization-triangle], and put $B_0=R s^!_0F$. This notation distinguishes it from the exceptional inverse image defined by etale transport; their comparison will be proved in step 7, after computing $B_0$. The localization lemma applies because $j$ is quasi-compact, $A$ is finite, and $F$ is a sheaf in degree zero. It gives a distinguished triangle $s_*B_0\\to F\\to Rj_*j^*F\\to(s_*B_0)[1]$, with its first arrow the support-adjunction counit. By [lem-exc-proetale-closed-exact], $s_*$ is exact. On a complex this exactness gives $\\mathcal H^q(s_*L)=s_*\\mathcal H^q(L)$, since kernels and images commute with an exact functor. Hence $s_*$ preserves quasi-isomorphisms, and the comparison from its termwise functor to $Rs_*$ is an isomorphism. The termwise functor is triangulated by [lem-sf-exact-functor-derived-triangulated]. Apply $Rp_*$ to the triangle: [lem-pc-right-derived-functor-triangulated] gives preservation of triangles and shifts. This is the finite-level functor of [def-weil-derived-direct-image], constructed by K-injectives, which exist by [prop-pur-kinjective-resolutions-exist] on the larger-universe small skeletons of [def-weil-pbc-proetale-site]. The finite-level composition isomorphisms of [lem-weil-derived-direct-image-composition], with $ps=\\mathrm{id}_Y$ and $pj=\\pi$, identify $Rp_*s_*$ with the identity and $Rp_*Rj_*$ with $R\\pi_*$. Thus, with $P=Rp_*F$ and $Q=R\\pi_*A(1)_U$, we obtain $B_0\\to P\\xrightarrow{r}Q\\xrightarrow{\\delta}B_0[1]$. Here $r$ is derived restriction from $F\\to Rj_*j^*F$. No exceptional-functor comparison is used to obtain this triangle.",
-      "uses": [
-        "lem-pur-support-localization-triangle",
-        "lem-exc-proetale-closed-exact",
-        "lem-sf-exact-functor-derived-triangulated",
-        "lem-pc-right-derived-functor-triangulated",
-        "def-weil-derived-direct-image",
-        "prop-pur-kinjective-resolutions-exist",
-        "def-weil-pbc-proetale-site",
-        "lem-weil-derived-direct-image-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
-        "place": "first paragraph through the distinguished triangle on Y"
-      }
-    },
-    {
-      "text": "By [prop-pur-gm-relative-kummer](1), the unit $A_Y(1)[0]\\to P$ is an isomorphism. By (2), the restriction of this unit along $j$ is the unit $A_Y(1)\\to\\mathcal H^0(Q)$ and is an isomorphism; this is exactly the equivalence with restriction composed with $p^*$ stated in that clause. Hence $\\mathcal H^0(r)$ is an isomorphism. The same proposition gives $\\mathcal H^1(Q)\\cong A_Y$, with $1$ sent to the edge image of $\\kappa(t)$, and $\\mathcal H^m(Q)=0$ for $m\\geq2$. There is also no negative cohomology of $P$ or $Q$: [lem-weil-pbc-dplus-injective-representative](1),(2) represents either input sheaf by a K-injective resolution zero below degree zero, and direct image applied termwise remains zero there. The module category is Grothendieck by [prop-pur-kinjective-resolutions-exist], and [lem-sp-grothendieck-enough-injectives] supplies enough injectives. Thus $P$ has cohomology only in degree zero and $Q$ only in degrees zero and one.",
-      "uses": [
-        "prop-pur-gm-relative-kummer",
-        "lem-weil-pbc-dplus-injective-representative",
-        "prop-pur-kinjective-resolutions-exist",
-        "lem-sp-grothendieck-enough-injectives"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
-        "place": "first paragraph: units, Kummer generator, and all vanishing degrees"
-      }
-    },
-    {
-      "text": "Use [lem-sf-derived-homology-long-exact] on the triangle of step 2. For $m<0$, the exact segment $\\mathcal H^{m-1}(Q)\\to\\mathcal H^m(B_0)\\to\\mathcal H^m(P)$ has zero outer terms, so $\\mathcal H^m(B_0)=0$. In degrees zero and one the exact segment is $0\\to\\mathcal H^0(B_0)\\to\\mathcal H^0(P)\\xrightarrow{\\sim}\\mathcal H^0(Q)\\to\\mathcal H^1(B_0)\\to0$, giving $\\mathcal H^0(B_0)=\\mathcal H^1(B_0)=0$. Next, $0=\\mathcal H^1(P)\\to\\mathcal H^1(Q)\\xrightarrow{\\delta^1}\\mathcal H^2(B_0)\\to\\mathcal H^2(P)=0$ makes $\\delta^1$ an isomorphism. For $m\\geq3$, again $\\mathcal H^{m-1}(Q)=\\mathcal H^m(P)=0$, hence $\\mathcal H^m(B_0)=0$. Therefore $\\mathcal H^2(B_0)\\cong A_Y$ via $\\delta^1$, and all its other cohomology sheaves vanish. The argument uses kernels and images in the abelian category of module sheaves, not a conclusion from constant numerical ranks.",
-      "uses": [
-        "lem-sf-derived-homology-long-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
-        "place": "first paragraph: displayed long exact sequence and degree-by-degree computation"
-      }
-    },
-    {
-      "text": "Put $C_0=B_0[2]=R s^!_0A_X(1)[2]$. By [lem-sp-derived-cohomology-shift], $\\mathcal H^m(C_0)=\\mathcal H^{m+2}(B_0)$, so only $\\mathcal H^0(C_0)$ survives, and step 4 identifies it with the constant rank-one module sheaf $A_Y$. Apply [lem-sf-derived-concentrated-single] with $r=0$ to obtain $C_0\\cong\\mathcal H^0(C_0)[0]\\cong A_Y[0]$. The canonical identification with its degree-zero cohomology uses the good-truncation maps: for a representative $C_0^\\bullet$, the maps $\\tau_{\\leq0}C_0^\\bullet\\to C_0^\\bullet$ and $\\tau_{\\leq0}C_0^\\bullet\\to\\mathcal H^0(C_0)[0]$ induce the identity on degree-zero cohomology and isomorphisms on all other (zero) cohomology groups, hence are quasi-isomorphisms. These are the truncations of [def-sbc-standard-tstructure-derived-category]: the second map is the quotient $\\ker d^0\\to\\ker d^0/\\operatorname{im}d^{-1}$ in degree zero and zero in negative degrees. Both maps are natural in chain maps and induce the identity on $\\mathcal H^0$; the resulting isomorphism in the derived category is therefore the canonical one and does not use a chosen trivialization $\\mathcal H^0(C_0)\\cong A_Y$. Thus $C_0$ is concentrated in degree zero, with constant, and in particular lisse, rank-one cohomology.",
-      "uses": [
-        "lem-sp-derived-cohomology-shift",
-        "lem-sf-derived-concentrated-single",
-        "def-sbc-standard-tstructure-derived-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
-        "place": "end of first paragraph: displayed shift and constant cohomology; canonical good truncation as in Stacks 08J5"
-      }
-    },
-    {
-      "text": "The constant finite module sheaf $A_Y$ is constructible by the single stratum $Y$ in [def-weil-finite-torsion-constructibility]. Moreover $A_Y[0]$ itself is K-flat in the definition of [def-weil-derived-tensor]: tensoring it with any acyclic complex is that same complex, by the mutually inverse degreewise maps $a\\otimes x\\mapsto ax$ and $x\\mapsto1\\otimes x$. Consequently for every degree-zero module sheaf $M$, $C_0\\otimes_A^L M\\cong A_Y[0]\\otimes_A M[0]\\cong M[0]$. This proves Tor amplitude $[0,0]$ by [def-weil-finite-tor-amplitude]. Together with step 5 it proves $C_0\\in D^b_{ctf}(Y,A)$. The Tor conclusion comes from the explicit tensor unit, and is not deduced from bounded constructibility. This proves the constructibility and Tor claims for the support value $C_0$, before any comparison with the separately defined exceptional inverse image.",
-      "uses": [
-        "def-weil-finite-torsion-constructibility",
-        "def-weil-derived-tensor",
-        "def-weil-finite-tor-amplitude"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
-        "place": "end of first paragraph: constructibility and finite Tor amplitude, with tensor-unit verification"
-      }
-    },
-    {
-      "text": "Compare $B_0$ with $B=Rs^!F$. The zero section is a closed immersion in the affine-line datum, $X,Y$ are finite type over $k$ and $j$ is quasi-compact by step 1, and $F=A_X(1)[0]$ is bounded below. Steps 5-6 give $B_0=C_0[-2]\\cong A_Y[-2]$, which is bounded constructible by [def-weil-finite-torsion-constructibility]. Thus [lem-pur-closed-support-exceptional-comparison], applied to $i=s$ and $K=F$, gives a canonical isomorphism $\\phi:B_0\\xrightarrow{\\sim}B$ with $\\epsilon\\circ s_*\\phi=\\epsilon_0$, where $\\epsilon_0$ is the support counit and $\\epsilon$ the relative exceptional counit. Put $C=B[2]$. The isomorphism $\\phi[2]:C_0\\xrightarrow{\\sim}C$ carries the concentration, constant rank-one cohomology and finite-Tor conclusions of steps 5-6 to $C$, proving (1). The comparison lemma uses only the full bounded-below etale-origin class; no ambient adjunction on arbitrary pro-etale objects is invoked.",
-      "uses": [
-        "def-weil-finite-torsion-constructibility",
-        "lem-pur-closed-support-exceptional-comparison"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
-        "place": "first paragraph: comparison of the localization support value with the exceptional inverse image, after the relative A1/Gm calculation; expanded relative-adjunction argument"
-      }
-    },
-    {
-      "text": "Apply [lem-pur-supported-hom] to $s$, $F=A_X(1)[0]$, and $a=2$. It gives the natural isomorphism\n$$H^2_{s(Y)}(X,F)\\cong\\operatorname{Hom}_{D(X_{\\mathrm{proet}},A)}(s_*A_Y,F[2]).$$\nThe support adjunction of [lem-pur-support-localization-triangle], applied to the bounded-below test object $A_Y[-2]$ and input $F$, gives\n$$\\operatorname{Hom}_X(s_*A_Y,F[2])\\cong\\operatorname{Hom}_X(s_*(A_Y[-2]),F)\\cong\\operatorname{Hom}_Y(A_Y[-2],B_0)\\cong\\operatorname{Hom}_Y(A_Y,C_0).$$\nThe first and last identifications apply the mutually inverse shift functors of [def-weil-abstract-derived-category]; exact termwise $s_*$ commutes with them by [lem-sf-exact-functor-derived-triangulated]. Now compose with postcomposition by $\\phi[2]$ from step 7 to obtain $H^2_{s(Y)}(X,F)\\cong\\operatorname{Hom}_Y(A_Y,C)$ for the actual exceptional value $C=Rs^!F[2]$. The equality $\\epsilon\\,s_*\\phi=\\epsilon_0$ proved in step 7 says exactly that this composite uses the relative exceptional adjunction on the test object $A_Y[-2]$. This establishes the claimed comparison without treating the ambient support adjoint as the transported exceptional functor.",
-      "uses": [
-        "lem-pur-supported-hom",
-        "lem-pur-support-localization-triangle",
-        "def-weil-abstract-derived-category",
-        "lem-sf-exact-functor-derived-triangulated"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
-        "place": "second paragraph: supported cohomology to the Hom of the actual exceptional value, using the proved counit-compatible comparison"
-      }
-    },
-    {
-      "text": "Step 7 and the canonical degree-zero truncation of step 5 identify $C$ with $\\mathcal H^0(C)[0]$. By [lem-weil-pbc-derived-single-fully-faithful], $\\operatorname{Hom}_{D(Y,A)}(A_Y[0],C)$ is therefore $\\operatorname{Hom}_{\\operatorname{Mod}(A_Y)}(A_Y,\\mathcal H^0(C))$. Evaluation at $1$ identifies this last group with $\\Gamma(Y,\\mathcal H^0(C))$: a global section $v$ defines on each site object $V$ the $A_Y(V)$-linear map $a\\mapsto a\\,v|_V$, compatible with restrictions. Conversely, an $A_Y$-linear sheaf map sends $1|_V$ to the restriction of its value at the global section $1$, and hence sends every $a\\in A_Y(V)$ to $a$ times that restriction. These constructions are inverse, including on disconnected objects of the site. Composing the inverse of step 8 with this identification gives the claimed canonical isomorphism $\\Gamma(Y,\\mathcal H^0(C))\\cong H^2_{s(Y)}(X,A(1))$. The class $\\kappa(t)$ of [def-pur-affine-line-datum] is a class in $H^1(U,A(1))$, and the pro-etale finite-torsion clause of [thm-pur-with-support-exactness] supplies its boundary $\\beta=\\partial\\kappa(t)\\in H^2_{s(Y)}(X,A(1))$. Apply the isomorphism of step 8 to $\\beta$ to obtain a morphism $A_Y\\to C$; under evaluation at $1$ it corresponds to the inverse image of $\\beta$ in $\\Gamma(Y,\\mathcal H^0(C))$. This proves precisely the asserted correspondence of the boundary class. The statement asks for this correspondence, not for a further equality with a separately constructed Cartier class.",
-      "uses": [
-        "lem-weil-pbc-derived-single-fully-faithful",
-        "def-pur-affine-line-datum",
-        "thm-pur-with-support-exactness"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
-        "place": "second paragraph: global sections, supported boundary, and the resulting morphism"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pur-gysin-structure",
+ "blueprint": {
+  "is": "lem-pur-gysin-structure",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Structure of the exceptional inverse image of the zero section",
+ "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\Lambda=A=A_{E,n}$ and use the affine-line datum of\n[def-pur-affine-line-datum]: $Y$ is a separated finite-type $k$-scheme,\n$e(E/\\mathbf Q_\\ell)\\mid n$, $N=n/e(E/\\mathbf Q_\\ell)$,\n$X=\\mathbf A^1_Y$, $s:Y\\hookrightarrow X$ is the zero section,\n$j:U=\\mathbf G_{m,Y}\\hookrightarrow X$ is its open complement, and\n$\\kappa(t)\\in H^1(U,A(1))$ is the coefficient-extended Kummer class\nof the coordinate. Work on the small pro-etale sites as in those\nconventions, with cohomology sheaves [def-weil-derived-cohomology-sheaves],\nsupported cohomology [def-pur-support-cohomology], and\n$D^b_{ctf}$ as in [def-weil-finite-tor-amplitude]. Then:\n\n1. The object $Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]$ lies in\n$D^b_{ctf}(Y,\\Lambda)$ and is concentrated in degree zero after the\ndisplayed shift, with lisse rank-one cohomology sheaf.\n1. Under the long exact sequence of\n[thm-pur-with-support-exactness] for the pair\n$(s(Y),\\mathbf A^1_Y)$, there is a canonical identification\n$$\n\\Gamma\\!\\left(Y,\\mathcal H^0\\bigl(Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\bigr)\\right)\n\\cong H^2_{s(Y)}\\bigl(\\mathbf A^1_Y,\\Lambda(1)\\bigr),\n$$\nvia which the boundary of the\nKummer class of $t$ corresponds\nto an element of the space of morphisms\n$$\n\\operatorname{Hom}_{D(Y,\\Lambda)}\\bigl(\\Lambda_Y,Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\bigr).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-gysin-structure.md",
+  "place": "node lem-pur-gysin-structure, order 1946",
+  "external": [
+   {
+    "document": "Milne",
+    "place": "Under the long exact sequence of [thm-pur-with-support-exactness] for the pair $(s(Y),\\mathbf A^1_Y)$, there is a canonical identification $$ \\Gamma\\!\\left(Y,\\mathcal H^0\\bigl(Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\bigr)\\right) \\cong H^2_{s(Y)}\\bigl(\\mathbf A^1_Y,\\Lambda(1)\\bigr), $$ via which the boundary of the Kummer class of $t$ corresponds to an element of the space of morphisms $$ \\operatorname{H"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pur-affine-line-datum",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-support-cohomology",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-exceptional-inverse-image",
+  "thm-pur-with-support-exactness",
+  "lem-pur-retracted-support-localization-comparison",
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite stage of [def-pur-conventions] and the exceptional functor with the domains of [def-weil-exceptional-inverse-image]. Set $p:X\\to Y$, $\\pi=pj$ and $F=A_X(1)[0]$, with the pair $(s,j)$ and $\\kappa(t)$ of [def-pur-affine-line-datum]. Its $e\\mid n$ gives $N=n/e\\geq1$, and [lem-pur-finite-kummer-level] identifies $A$ as a module with $(\\mathbf Z/\\ell^N\\mathbf Z)^{ef}$, so $A$ is finite. Apply [lem-pur-affine-line-support-geometry] to the underlying finite-type $k$-scheme $Y$. It says that $Y,X,U$ are Noetherian, that $X,U$ are finite type over $k$, and that $j$ is quasi-compact. These are the support and closed-exactness hypotheses needed below.",
+   "uses": [
     "def-pur-conventions",
     "def-weil-exceptional-inverse-image",
     "def-pur-affine-line-datum",
     "lem-pur-finite-kummer-level",
-    "lem-pur-affine-line-support-geometry",
+    "lem-pur-affine-line-support-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "first paragraph: affine-line datum; hypotheses of the closed-support construction made explicit"
+   }
+  },
+  {
+   "text": "In this step write $R s^!_0$ for the right derived functor of $M\\mapsto s^{-1}\\ker(M\\to j_*j^*M)$ on $D^+$, as specified in [lem-pur-support-localization-triangle], and put $B_0=R s^!_0F$. This notation distinguishes it from the exceptional inverse image defined by etale transport; their comparison will be proved in step 7, after computing $B_0$. The localization lemma applies because $j$ is quasi-compact, $A$ is finite, and $F$ is a sheaf in degree zero. It gives a distinguished triangle $s_*B_0\\to F\\to Rj_*j^*F\\to(s_*B_0)[1]$, with its first arrow the support-adjunction counit. By [lem-exc-proetale-closed-exact], $s_*$ is exact. On a complex this exactness gives $\\mathcal H^q(s_*L)=s_*\\mathcal H^q(L)$, since kernels and images commute with an exact functor. Hence $s_*$ preserves quasi-isomorphisms, and the comparison from its termwise functor to $Rs_*$ is an isomorphism. The termwise functor is triangulated by [lem-sf-exact-functor-derived-triangulated]. Apply $Rp_*$ to the triangle: [lem-pc-right-derived-functor-triangulated] gives preservation of triangles and shifts. This is the finite-level functor of [def-weil-derived-direct-image], constructed by K-injectives, which exist by [prop-pur-kinjective-resolutions-exist] on the larger-universe small skeletons of [def-weil-pbc-proetale-site]. The finite-level composition isomorphisms of [lem-weil-derived-direct-image-composition], with $ps=\\mathrm{id}_Y$ and $pj=\\pi$, identify $Rp_*s_*$ with the identity and $Rp_*Rj_*$ with $R\\pi_*$. Thus, with $P=Rp_*F$ and $Q=R\\pi_*A(1)_U$, we obtain $B_0\\to P\\xrightarrow{r}Q\\xrightarrow{\\delta}B_0[1]$. Here $r$ is derived restriction from $F\\to Rj_*j^*F$. No exceptional-functor comparison is used to obtain this triangle.",
+   "uses": [
     "lem-pur-support-localization-triangle",
     "lem-exc-proetale-closed-exact",
     "lem-sf-exact-functor-derived-triangulated",
@@ -167,366 +55,467 @@
     "def-weil-derived-direct-image",
     "prop-pur-kinjective-resolutions-exist",
     "def-weil-pbc-proetale-site",
-    "lem-weil-derived-direct-image-composition",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "first paragraph through the distinguished triangle on Y"
+   }
+  },
+  {
+   "text": "By [prop-pur-gm-relative-kummer](1), the unit $A_Y(1)[0]\\to P$ is an isomorphism. By (2), the restriction of this unit along $j$ is the unit $A_Y(1)\\to\\mathcal H^0(Q)$ and is an isomorphism; this is exactly the equivalence with restriction composed with $p^*$ stated in that clause. Hence $\\mathcal H^0(r)$ is an isomorphism. The same proposition gives $\\mathcal H^1(Q)\\cong A_Y$, with $1$ sent to the edge image of $\\kappa(t)$, and $\\mathcal H^m(Q)=0$ for $m\\geq2$. There is also no negative cohomology of $P$ or $Q$: [lem-weil-pbc-dplus-injective-representative](1),(2) represents either input sheaf by a K-injective resolution zero below degree zero, and direct image applied termwise remains zero there. The module category is Grothendieck by [prop-pur-kinjective-resolutions-exist], and [lem-sp-grothendieck-enough-injectives] supplies enough injectives. Thus $P$ has cohomology only in degree zero and $Q$ only in degrees zero and one.",
+   "uses": [
     "prop-pur-gm-relative-kummer",
     "lem-weil-pbc-dplus-injective-representative",
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-sf-derived-homology-long-exact",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-grothendieck-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "first paragraph: units, Kummer generator, and all vanishing degrees"
+   }
+  },
+  {
+   "text": "Use [lem-sf-derived-homology-long-exact] on the triangle of step 2. For $m<0$, the exact segment $\\mathcal H^{m-1}(Q)\\to\\mathcal H^m(B_0)\\to\\mathcal H^m(P)$ has zero outer terms, so $\\mathcal H^m(B_0)=0$. In degrees zero and one the exact segment is $0\\to\\mathcal H^0(B_0)\\to\\mathcal H^0(P)\\xrightarrow{\\sim}\\mathcal H^0(Q)\\to\\mathcal H^1(B_0)\\to0$, giving $\\mathcal H^0(B_0)=\\mathcal H^1(B_0)=0$. Next, $0=\\mathcal H^1(P)\\to\\mathcal H^1(Q)\\xrightarrow{\\delta^1}\\mathcal H^2(B_0)\\to\\mathcal H^2(P)=0$ makes $\\delta^1$ an isomorphism. For $m\\geq3$, again $\\mathcal H^{m-1}(Q)=\\mathcal H^m(P)=0$, hence $\\mathcal H^m(B_0)=0$. Therefore $\\mathcal H^2(B_0)\\cong A_Y$ via $\\delta^1$, and all its other cohomology sheaves vanish. The argument uses kernels and images in the abelian category of module sheaves, not a conclusion from constant numerical ranks.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "first paragraph: displayed long exact sequence and degree-by-degree computation"
+   }
+  },
+  {
+   "text": "Put $C_0=B_0[2]=R s^!_0A_X(1)[2]$. By [lem-sp-derived-cohomology-shift], $\\mathcal H^m(C_0)=\\mathcal H^{m+2}(B_0)$, so only $\\mathcal H^0(C_0)$ survives, and step 4 identifies it with the constant rank-one module sheaf $A_Y$. Apply [lem-sf-derived-concentrated-single] with $r=0$ to obtain $C_0\\cong\\mathcal H^0(C_0)[0]\\cong A_Y[0]$. The canonical identification with its degree-zero cohomology uses the good-truncation maps: for a representative $C_0^\\bullet$, the maps $\\tau_{\\leq0}C_0^\\bullet\\to C_0^\\bullet$ and $\\tau_{\\leq0}C_0^\\bullet\\to\\mathcal H^0(C_0)[0]$ induce the identity on degree-zero cohomology and isomorphisms on all other (zero) cohomology groups, hence are quasi-isomorphisms. These are the truncations of [def-sbc-standard-tstructure-derived-category]: the second map is the quotient $\\ker d^0\\to\\ker d^0/\\operatorname{im}d^{-1}$ in degree zero and zero in negative degrees. Both maps are natural in chain maps and induce the identity on $\\mathcal H^0$; the resulting isomorphism in the derived category is therefore the canonical one and does not use a chosen trivialization $\\mathcal H^0(C_0)\\cong A_Y$. Thus $C_0$ is concentrated in degree zero, with constant, and in particular lisse, rank-one cohomology.",
+   "uses": [
     "lem-sp-derived-cohomology-shift",
     "lem-sf-derived-concentrated-single",
-    "def-sbc-standard-tstructure-derived-category",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "end of first paragraph: displayed shift and constant cohomology; canonical good truncation as in Stacks 08J5"
+   }
+  },
+  {
+   "text": "The constant finite module sheaf $A_Y$ is constructible by the single stratum $Y$ in [def-weil-finite-torsion-constructibility]. Moreover $A_Y[0]$ itself is K-flat in the definition of [def-weil-derived-tensor]: tensoring it with any acyclic complex is that same complex, by the mutually inverse degreewise maps $a\\otimes x\\mapsto ax$ and $x\\mapsto1\\otimes x$. Consequently for every degree-zero module sheaf $M$, $C_0\\otimes_A^L M\\cong A_Y[0]\\otimes_A M[0]\\cong M[0]$. This proves Tor amplitude $[0,0]$ by [def-weil-finite-tor-amplitude]. Together with step 5 it proves $C_0\\in D^b_{ctf}(Y,A)$. The Tor conclusion comes from the explicit tensor unit, and is not deduced from bounded constructibility. This proves the constructibility and Tor claims for the support value $C_0$, before any comparison with the separately defined exceptional inverse image.",
+   "uses": [
     "def-weil-finite-torsion-constructibility",
     "def-weil-derived-tensor",
-    "def-weil-finite-tor-amplitude",
-    "lem-pur-closed-support-exceptional-comparison",
-    "lem-pur-supported-hom",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "thm-pur-with-support-exactness"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
-    "place": "current blueprint localization and relative A1/Gm argument; support and exceptional values distinguished until the explicit relative-adjunction comparison in step 7"
+    "place": "end of first paragraph: constructibility and finite Tor amplitude, with tensor-unit verification"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Exceptional inverse image of the zero section of the affine line with finite invertible coefficients is the constant sheaf twisted and shifted by minus two",
-      "results": "{\"t\": \"2026-10-16T11:42:18Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional inverse image of the zero section of the affine line with finite invertible coefficients is the constant sheaf twisted and shifted by minus two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\"], \"digest\": \"0e0aee513c25032d\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: affine localization or quasi-coherent module hits do not state exceptional inverse image or supported Kummer purity"
-    },
-    {
-      "tool": "grep",
-      "query": "gysin|exceptionalInverseImage|purity|zeroSection",
-      "results": "{\"t\": \"2026-10-16T11:42:07Z\", \"tool\": \"grep\", \"query\": \"gysin|exceptionalInverseImage|purity|zeroSection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: no hits in Mathlib/AlgebraicGeometry"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Cohomology with support on the zero section of the affine line is the constant sheaf in degree two with a Tate twist",
-      "results": "{\"t\": \"2026-10-16T11:42:08Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology with support on the zero section of the affine line is the constant sheaf in degree two with a Tate twist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.RingedSpace.res_zero\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff_of_mem\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff\", \"AlgebraicGeometry.Proj.zero_apply\"], \"digest\": \"6c86036d5caf72ce\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: the hits define sheaf cohomology or concern ideal-sheaf support and ringed-space zero sections; none states the calculation"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Gysin\"",
-      "results": "{\"t\": \"2026-10-16T11:42:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Gysin\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.finestTopologySingle\"], \"digest\": \"58f7d1e179283216\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: finestTopologySingle constructs a Grothendieck topology; it is unrelated to Gysin or purity"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Localization triangle for a line bundle zero section and its punctured complement with Kummer generator gives a free rank one local cohomology sheaf",
-      "results": "{\"t\": \"2026-10-16T11:42:36Z\", \"tool\": \"leanfinder\", \"query\": \"Localization triangle for a line bundle zero section and its punctured complement with Kummer generator gives a free rank one local cohomology sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tildeInType\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"ModuleCat.Tilde.Localizations\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"AlgebraicGeometry.isLocalization_away_of_isAffine\", \"ModuleCat.Tilde.sectionsSubmodule\", \"AlgebraicGeometry.StructureSheaf.const\"], \"digest\": \"9f0f32e62ee47366\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: affine localization or quasi-coherent module hits do not state exceptional inverse image or supported Kummer purity"
-    },
-    {
-      "tool": "grep",
-      "query": "localCohomology|sectionsWithSupport|upperShriek|TateTwist|kummer",
-      "results": "{\"t\": \"2026-10-16T12:00:42Z\", \"tool\": \"grep\", \"query\": \"localCohomology|sectionsWithSupport|upperShriek|TateTwist|kummer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\"], \"digest\": \"a846acbebc9923a7\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: returned hits concern Kummer extensions, Kummer-Dedekind theory and binomial valuations, not sheaf-theoretic purity"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Local cohomology of a constant torsion sheaf along the zero section of an affine line is an invertible sheaf in cohomological degree two",
-      "results": "{\"t\": \"2026-10-16T12:00:44Z\", \"tool\": \"leanfinder\", \"query\": \"Local cohomology of a constant torsion sheaf along the zero section of an affine line is an invertible sheaf in cohomological degree two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tildeInType\", \"ModuleCat.Tilde.isLocallyFraction\", \"AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"ModuleCat.Tilde.isUnit_toStalk\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.StructureSheaf.locally_const_basicOpen\", \"AlgebraicGeometry.isLocalization_away_of_isAffine\"], \"digest\": \"91a828616e850355\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: the eight hits concern quasi-coherent modules and affine localization, not torsion local cohomology or exceptional inverse image"
-    },
-    {
-      "tool": "grep",
-      "query": "localCohomology|sectionsWithSupport|upperShriek|TateTwist",
-      "results": "{\"t\": \"2026-10-16T12:01:47Z\", \"tool\": \"grep\", \"query\": \"localCohomology|sectionsWithSupport|upperShriek|TateTwist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: no hits in Mathlib/AlgebraicGeometry"
-    },
-    {
-      "tool": "grep",
-      "query": "localCohomology|sectionsWithSupport|exceptionalInverseImage",
-      "results": "{\"t\": \"2026-10-16T12:48:05Z\", \"tool\": \"grep\", \"query\": \"localCohomology|sectionsWithSupport|exceptionalInverseImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"1b64f7a08010717e\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: module local cohomology defined from ideals, not pro-etale supported Kummer purity"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Cohomology of an exceptional pullback along a closed zero section reconstructed by the localization distinguished triangle",
-      "results": "{\"t\": \"2026-10-16T12:48:14Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of an exceptional pullback along a closed zero section reconstructed by the localization distinguished triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk\", \"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequence\\u03b4_singleTriangle_apply\", \"DerivedCategory.triangleOfSES\\u03b4\", \"DerivedCategory.triangleOfSES\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequence\\u03b4_singleTriangle_apply\", \"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact\\u2081\", \"DerivedCategory.triangleOfSESIso\"], \"digest\": \"5641d18ec5bedb6c\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: generic derived triangles, Ext connecting maps and quasi-isomorphisms do not state the geometric item"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The exceptional inverse image along the zero section of the affine line with finite coefficients is a rank one constant sheaf in degree two",
-      "results": "{\"t\": \"2026-10-16T13:39:29Z\", \"tool\": \"leanfinder\", \"query\": \"The exceptional inverse image along the zero section of the affine line with finite coefficients is a rank one constant sheaf in degree two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\"], \"digest\": \"ae27bf5141cfe1e6\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: the eight hits concern affine localization and quasi-coherent modules, not the exceptional inverse image calculation"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"upperShriek\"",
-      "results": "{\"t\": \"2026-10-16T13:39:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"upperShriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: Loogle returned zero hits"
-    },
-    {
-      "tool": "grep",
-      "query": "Gysin|upperShriek|exceptionalInverseImage|localCohomology",
-      "results": "{\"t\": \"2026-10-16T13:39:19Z\", \"tool\": \"grep\", \"query\": \"Gysin|upperShriek|exceptionalInverseImage|localCohomology\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: no hits in Mathlib/AlgebraicGeometry"
-    },
-    {
-      "tool": "leansearch",
-      "query": "A localization triangle for the zero section and punctured affine line computes the exceptional inverse image as a constant rank one sheaf with shift two",
-      "results": "{\"t\": \"2026-10-16T13:39:19Z\", \"tool\": \"leansearch\", \"query\": \"A localization triangle for the zero section and punctured affine line computes the exceptional inverse image as a constant rank one sheaf with shift two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.stalkIso_inv\", \"ModuleCat.Tilde.localizationToStalk_mk\", \"AlgebraicGeometry.Scheme.isoSpec_inv_image_zeroLocus\", \"ModuleCat.Tilde.stalkIso_inv\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen\", \"ModuleCat.Tilde.openToLocalization\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map\"], \"digest\": \"d9494d07888fa28c\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: the eight hits concern structure-sheaf stalks, quasi-coherent module localization and affine zero loci"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Local cohomology sheaf supported on the zero section of a line bundle is an invertible module in degree two by the Kummer class of the coordinate",
-      "results": "{\"t\": \"2026-10-16T13:39:47Z\", \"tool\": \"leanfinder\", \"query\": \"Local cohomology sheaf supported on the zero section of a line bundle is an invertible module in degree two by the Kummer class of the coordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tildeInType\", \"ModuleCat.Tilde.isLocallyFraction\", \"CommRing.relPic\", \"ModuleCat.Tilde.const\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"ModuleCat.Tilde.isUnit_toStalk\", \"ModuleCat.Tilde.isFraction\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\"], \"digest\": \"a02c8d44bfde010c\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: the eight hits concern tilde modules, relative Picard groups and affine localization, not supported torsion cohomology"
-    },
-    {
-      "tool": "grep",
-      "query": "absolute.?purity|cohomologyWithSupport|rightDerivedUpperShriek|Gysin",
-      "results": "{\"t\": \"2026-10-16T16:17:20Z\", \"tool\": \"grep\", \"query\": \"absolute.?purity|cohomologyWithSupport|rightDerivedUpperShriek|Gysin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"17a4ebe8e1b1193c\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: the three case-insensitive substring hits are finestTopologySingle in Sites/Canonical.lean, which defines a Grothendieck topology and does not concern purity"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Absolute purity for a regular closed immersion of codimension one: local etale cohomology of a finite constant sheaf is its Tate twist shifted by two",
-      "results": "{\"t\": \"2026-10-16T16:17:21Z\", \"tool\": \"leanfinder\", \"query\": \"Absolute purity for a regular closed immersion of codimension one: local etale cohomology of a finite constant sheaf is its Tate twist shifted by two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"Algebra.IsEtaleAt\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"66368f418f05d869\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: the eight returned declarations concern etale morphisms, formal unramifiedness, affine limits and etale loci; none calculates supported cohomology or an exceptional inverse image"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Exceptional inverse image of the finite constant sheaf along the zero section of an affine line is rank one in degree two, identified with supported cohomology",
-      "results": "{\"t\": \"2026-10-17T08:04:54Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional inverse image of the finite constant sheaf along the zero section of an affine line is rank one in degree two, identified with supported cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"ModuleCat.Tilde.exists_const\", \"CategoryTheory.Sheaf.H\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\"], \"digest\": \"ba33059ed7d8e5f5\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: hits concern affine structure-sheaf localization or the definition of sheaf cohomology, not exceptional inverse images or their purity calculation"
-    },
-    {
-      "tool": "grep",
-      "query": "Gysin|exceptionalInverseImage|localCohomology|rightDerivedUpperShriek",
-      "results": "{\"t\": \"2026-10-17T08:05:18Z\", \"tool\": \"grep\", \"query\": \"Gysin|exceptionalInverseImage|localCohomology|rightDerivedUpperShriek\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: zero hits"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Localization triangle of the zero section of an affine line gives a rank one constant exceptional inverse image shifted by two",
-      "results": "{\"t\": \"2026-10-17T08:05:18Z\", \"tool\": \"leansearch\", \"query\": \"Localization triangle of the zero section of an affine line gives a rank one constant exceptional inverse image shifted by two\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-17",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"upperShriek\"",
-      "results": "{\"t\": \"2026-10-17T08:05:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"upperShriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: zero hits"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Local cohomology with support at zero in the affine line is the finite coefficient unit shifted by minus two via the Kummer boundary",
-      "results": "{\"t\": \"2026-10-17T08:06:12Z\", \"tool\": \"leanfinder\", \"query\": \"Local cohomology with support at zero in the affine line is the finite coefficient unit shifted by minus two via the Kummer boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"BDeRham\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\"], \"digest\": \"fa89599ff8d09ccb\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: hits concern affine structure-sheaf localization or the definition of sheaf cohomology, not exceptional inverse images or their purity calculation"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1946,
-  "blueprint_uses": [
-    "def-pur-affine-line-datum",
-    "def-pur-conventions",
-    "def-weil-derived-direct-image",
-    "def-weil-exceptional-inverse-image",
-    "fix-prop-adjunctions",
-    "lem-amb-cartier-kummer-map",
-    "lem-amb-closed-support-hom",
+  {
+   "text": "Compare $B_0$ with $B=Rs^!F$. The zero section is a closed immersion in the affine-line datum, $X,Y$ are finite type over $k$ and $j$ is quasi-compact by step 1, and $F=A_X(1)[0]$ is bounded below. Steps 5-6 give $B_0=C_0[-2]\\cong A_Y[-2]$, which is bounded constructible by [def-weil-finite-torsion-constructibility]. Thus [lem-pur-closed-support-exceptional-comparison], applied to $i=s$ and $K=F$, gives a canonical isomorphism $\\phi:B_0\\xrightarrow{\\sim}B$ with $\\epsilon\\circ s_*\\phi=\\epsilon_0$, where $\\epsilon_0$ is the support counit and $\\epsilon$ the relative exceptional counit. Put $C=B[2]$. The isomorphism $\\phi[2]:C_0\\xrightarrow{\\sim}C$ carries the concentration, constant rank-one cohomology and finite-Tor conclusions of steps 5-6 to $C$, proving (1). The comparison lemma uses only the full bounded-below etale-origin class; no ambient adjunction on arbitrary pro-etale objects is invoked.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "lem-pur-closed-support-exceptional-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "first paragraph: comparison of the localization support value with the exceptional inverse image, after the relative A1/Gm calculation; expanded relative-adjunction argument"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-supported-hom] to $s$, $F=A_X(1)[0]$, and $a=2$. It gives the natural isomorphism\n$$H^2_{s(Y)}(X,F)\\cong\\operatorname{Hom}_{D(X_{\\mathrm{proet}},A)}(s_*A_Y,F[2]).$$\nThe support adjunction of [lem-pur-support-localization-triangle], applied to the bounded-below test object $A_Y[-2]$ and input $F$, gives\n$$\\operatorname{Hom}_X(s_*A_Y,F[2])\\cong\\operatorname{Hom}_X(s_*(A_Y[-2]),F)\\cong\\operatorname{Hom}_Y(A_Y[-2],B_0)\\cong\\operatorname{Hom}_Y(A_Y,C_0).$$\nThe first and last identifications apply the mutually inverse shift functors of [def-weil-abstract-derived-category]; exact termwise $s_*$ commutes with them by [lem-sf-exact-functor-derived-triangulated]. Now compose with postcomposition by $\\phi[2]$ from step 7 to obtain $H^2_{s(Y)}(X,F)\\cong\\operatorname{Hom}_Y(A_Y,C)$ for the actual exceptional value $C=Rs^!F[2]$. The equality $\\epsilon\\,s_*\\phi=\\epsilon_0$ proved in step 7 says exactly that this composite uses the relative exceptional adjunction on the test object $A_Y[-2]$. This establishes the claimed comparison without treating the ambient support adjoint as the transported exceptional functor.",
+   "uses": [
+    "lem-pur-supported-hom",
     "lem-pur-support-localization-triangle",
-    "lem-weil-derived-direct-image-composition",
-    "prop-pur-gm-relative-kummer",
+    "def-weil-abstract-derived-category",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "second paragraph: supported cohomology to the Hom of the actual exceptional value, using the proved counit-compatible comparison"
+   }
+  },
+  {
+   "text": "Step 7 and the canonical degree-zero truncation of step 5 identify $C$ with $\\mathcal H^0(C)[0]$. By [lem-weil-pbc-derived-single-fully-faithful], $\\operatorname{Hom}_{D(Y,A)}(A_Y[0],C)$ is therefore $\\operatorname{Hom}_{\\operatorname{Mod}(A_Y)}(A_Y,\\mathcal H^0(C))$. Evaluation at $1$ identifies this last group with $\\Gamma(Y,\\mathcal H^0(C))$: a global section $v$ defines on each site object $V$ the $A_Y(V)$-linear map $a\\mapsto a\\,v|_V$, compatible with restrictions. Conversely, an $A_Y$-linear sheaf map sends $1|_V$ to the restriction of its value at the global section $1$, and hence sends every $a\\in A_Y(V)$ to $a$ times that restriction. These constructions are inverse, including on disconnected objects of the site. Composing the inverse of step 8 with this identification gives the claimed canonical isomorphism $\\Gamma(Y,\\mathcal H^0(C))\\cong H^2_{s(Y)}(X,A(1))$. The class $\\kappa(t)$ of [def-pur-affine-line-datum] is a class in $H^1(U,A(1))$, and the pro-etale finite-torsion clause of [thm-pur-with-support-exactness] supplies its boundary $\\beta=\\partial\\kappa(t)\\in H^2_{s(Y)}(X,A(1))$. Apply the isomorphism of step 8 to $\\beta$ to obtain a morphism $A_Y\\to C$; under evaluation at $1$ it corresponds to the inverse image of $\\beta$ in $\\Gamma(Y,\\mathcal H^0(C))$. This proves precisely the asserted correspondence of the boundary class. The statement asks for this correspondence, not for a further equality with a separately constructed Cartier class.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-pur-affine-line-datum",
     "thm-pur-with-support-exactness"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-a1-kummer",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\Lambda=A$, and let\n$s:Y\\hookrightarrow\\mathbf A^1_Y$ be the zero section. Then:\n\n1. The object $Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]$ lies in\n$D^b_{ctf}(Y,\\Lambda)$ and is concentrated in degree zero after the\ndisplayed shift, with lisse rank-one cohomology sheaf.\n1. Under the long exact sequence of\n[thm-pur-with-support-exactness] for the pair\n$(s(Y),\\mathbf A^1_Y)$, there is a canonical identification\n$$\n\\Gamma\\!\\left(Y,\\mathcal H^0\\bigl(Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\bigr)\\right)\n\\cong H^2_{s(Y)}\\bigl(\\mathbf A^1_Y,\\Lambda(1)\\bigr),\n$$\nvia which the boundary of the\nKummer class of $t$ corresponds\nto an element of the space of morphisms\n$$\n\\operatorname{Hom}_{D(Y,\\Lambda)}\\bigl(\\Lambda_Y,Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\bigr).\n$$",
-    "proof": [
-      {
-        "text": "Write $p:\\mathbf A^1_Y\\to Y$, $j:\\mathbf G_{m,Y}\\hookrightarrow\\mathbf A^1_Y$\nand $\\pi=pj$ as in [def-pur-affine-line-datum]. Apply the localization\ntriangle of [lem-pur-support-localization-triangle] for the closed–open\npair $(s,j)$ and $K=\\Lambda(1)_{\\mathbf A^1_Y}$, whose first term is\nbuilt from the exceptional inverse image of\n[def-weil-exceptional-inverse-image],\n$$\ns_*Rs^!\\Lambda(1)\\longrightarrow\\Lambda(1)\\longrightarrow\nRj_*j^*\\Lambda(1)\\xrightarrow{+1},\n$$\nand then the triangulated functor $Rp_*$ of\n[def-weil-derived-direct-image]. Since $s_*$ is exact,\n$Rp_*s_*=R(ps)_*=\\operatorname{id}$, and $Rp_*Rj_*=R\\pi_*$ by the\ncomposition of derived direct images\n[lem-weil-derived-direct-image-composition], this gives a\ndistinguished triangle on $Y$\n$$\nRs^!\\Lambda(1)\\longrightarrow Rp_*\\Lambda(1)\\xrightarrow{\\ j^*\\ }\nR\\pi_*\\Lambda(1)\\xrightarrow{\\ \\delta\\ }Rs^!\\Lambda(1)[1].\n$$\nBy [prop-pur-gm-relative-kummer](1) the middle term is $\\Lambda_Y(1)$ in\ndegree $0$, via the unit of $p$. By [prop-pur-gm-relative-kummer](2),(3)\nthe right-hand term has $\\mathcal H^0=\\Lambda_Y(1)$ via the unit of\n$\\pi$, $\\mathcal H^1$ free of rank one on $\\kappa(t)$, and no other\ncohomology sheaves. By [fix-prop-adjunctions](3) the unit of $\\pi$ is\n$j^*$ composed with the unit of $p$, so $\\mathcal H^0(j^*)$ is an\nisomorphism. The long exact sequence of cohomology sheaves\n$$\n0\\to\\mathcal H^0(Rs^!\\Lambda(1))\\to R^0p_*\\Lambda(1)\\xrightarrow{\\sim}\nR^0\\pi_*\\Lambda(1)\\to\\mathcal H^1(Rs^!\\Lambda(1))\\to R^1p_*\\Lambda(1)=0\n\\to R^1\\pi_*\\Lambda(1)\\xrightarrow{\\ \\delta\\ }\\mathcal H^2(Rs^!\\Lambda(1))\n\\to R^2p_*\\Lambda(1)=0\\to\\cdots\n$$\ntherefore gives $\\mathcal H^m(Rs^!\\Lambda(1))=0$ for $m\\neq2$ (for\n$m\\geq3$ it sits between $R^{m-1}\\pi_*\\Lambda(1)=0$ and\n$R^mp_*\\Lambda(1)=0$), and an isomorphism\n$$\n\\delta:\\ \\Lambda_Y\\cdot\\kappa(t)=R^1\\pi_*\\Lambda(1)\\xrightarrow{\\ \\sim\\ }\n\\mathcal H^2(Rs^!\\Lambda(1))=\\mathcal H^0\\bigl(Rs^!\\Lambda(1)[2]\\bigr).\n$$\nSo $Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]$ is concentrated in degree zero,\nwith cohomology sheaf the constant sheaf $\\Lambda_Y$, free of rank one on\nthe boundary $\\delta\\kappa(t)$; in particular it is lisse of rank one,\nconstructible, and of finite Tor amplitude, i.e. it lies in\n$D^b_{ctf}(Y,\\Lambda)$. Constancy is read off from the triangle; it is\nnot inferred from constancy of ranks.",
-        "uses": [
-          "def-pur-affine-line-datum",
-          "lem-pur-support-localization-triangle",
-          "def-weil-exceptional-inverse-image",
-          "def-weil-derived-direct-image",
-          "lem-weil-derived-direct-image-composition",
-          "prop-pur-gm-relative-kummer",
-          "fix-prop-adjunctions"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "For the second assertion, the support identification\n[lem-amb-closed-support-hom] identifies\n$H^2_{s(Y)}(\\mathbf A^1_Y,\\Lambda(1))$ with\n$\\operatorname{Hom}_Y(\\Lambda_Y,Rs^!\\Lambda(1)[2])$.\nSince the target is concentrated in degree zero, this Hom group is\n$\\Gamma(Y,\\mathcal H^0(Rs^!\\Lambda(1)[2]))$.\nThe boundary of the coordinate class in\n[def-pur-affine-line-datum], [thm-pur-with-support-exactness]\nis precisely the supported Cartier morphism of\n[lem-amb-cartier-kummer-map]; the latter construction also gives\nits compatibility with base change of this zero-section pair.",
-        "uses": [
-          "lem-amb-closed-support-hom",
-          "def-pur-affine-line-datum",
-          "thm-pur-with-support-exactness",
-          "lem-amb-cartier-kummer-map"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
-  },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-pur-gysin-structure",
-    "worker": "stage1",
-    "summary": "Q116 repaired both returned hidden arguments by extracting lem-pur-affine-line-support-geometry and lem-pur-closed-support-exceptional-comparison as statement-only unsplit nodes. Steps 1 and 7 now cite these obligations and verify their hypotheses. The statement, Lean record and other seven proof steps are unchanged. Preserved prior report findings, citations and search evidence; new nodes were searched by two semantic phrasings, Loogle, LeanSearch and source grep. The localization/A1/Gm route remains unchanged. Repair of returned immutable head d7f39f2e7309: explicitly submit these stage-1 fields and the two unsplit prerequisites through deliver.py for stage-1 review; report answers H1, H2, H12 and H10/H11 individually. Statement, seven statement dependencies and absent Lean record remain unchanged; later stage-2 work is deferred under the human stage-1-only instruction.",
-    "blueprint": "First paragraph: steps 1-6 compute the localization support value via the relative A1/Gm proposition; step 7 proves the missing comparison with def-weil-exceptional-inverse-image using thm-sf-ambient-adjoint-class. Second paragraph: steps 8-9 identify supported cohomology with exceptional Hom and degree-zero global sections, and send the Kummer boundary through that comparison.",
-    "tool_uses": [
-      {
-        "node": "lem-pur-finite-kummer-level",
-        "why": "Generic prerequisite for the localization calculation or derived-category comparison; no unit node supplies this interface."
-      },
-      {
-        "node": "lem-exc-proetale-closed-exact",
-        "why": "Generic exactness of closed direct image used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      },
-      {
-        "node": "lem-sf-exact-functor-derived-triangulated",
-        "why": "Generic an exact functor of abelian categories induces a triangulated functor on derived categories used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      },
-      {
-        "node": "lem-pc-right-derived-functor-triangulated",
-        "why": "Generic the unbounded right derived functor is triangulated used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      },
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "Generic existence of k-injective resolutions of sheaves of modules used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      },
-      {
-        "node": "lem-weil-derived-direct-image-composition",
-        "why": "Generic composition of derived direct images used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      },
-      {
-        "node": "lem-weil-pbc-dplus-injective-representative",
-        "why": "Generic every object of d^+ is represented by a bounded below k-injective complex of injectives used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      },
-      {
-        "node": "lem-sp-grothendieck-enough-injectives",
-        "why": "Generic grothendieck abelian categories have enough injectives used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      },
-      {
-        "node": "lem-sf-derived-homology-long-exact",
-        "why": "Generic long exact cohomology sequence of a distinguished triangle in the derived category used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      },
-      {
-        "node": "lem-sp-derived-cohomology-shift",
-        "why": "Generic cohomology of a shifted object of the derived category used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      },
-      {
-        "node": "lem-sf-derived-concentrated-single",
-        "why": "Generic a complex with cohomology in a single degree is that cohomology object shifted used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      },
-      {
-        "node": "lem-weil-pbc-derived-single-fully-faithful",
-        "why": "Generic the single-complex embedding of an abelian category is fully faithful used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pur-finite-kummer-level",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-exc-proetale-closed-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-pc-right-derived-functor-triangulated",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-derived-direct-image-composition",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-sf-derived-homology-long-exact",
-    "lem-sp-derived-cohomology-shift",
-    "lem-sf-derived-concentrated-single",
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-kun-dimension-finite-type",
-    "lem-sf-proetale-constructible-origin",
-    "thm-sf-ambient-adjoint-class",
-    "lem-weil-pbc-derived-single-fully-faithful"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-Codex-Q116-c6038ba1e",
-    "group": "Q116",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q116-c6038ba1e (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, current blueprint and cited source passages. Verified all nine steps, shifts, finite-Tor argument, étale-origin comparison and counit equation; checked small cases and duplicate candidates. No repairs needed. Accepted the twelve declared tool uses. Detailed findings are in review.md."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-f11e5166e",
-    "group": "Q08",
-    "result": "pass",
-    "note": "Audited node, source, dependencies, declarations, hypotheses, universes, edge cases, docstrings, route-pivot compliance, and report sections. Immutable module compiled cleanly in sandbox and library modes via scompile.py; no substantive or mechanical defects found."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.PurityGysinStructure",
-    "declaration": "WeilConjectures.PurityFiniteSetting.gysin_structure",
-    "declarations": [
-      "WeilConjectures.PurityFiniteSetting.gysinZeroClosed",
-      "WeilConjectures.PurityFiniteSetting.gysinOpen",
-      "WeilConjectures.PurityFiniteSetting.gysinEtaleInput",
-      "WeilConjectures.PurityFiniteSetting.gysinInput",
-      "WeilConjectures.PurityFiniteSetting.gysinClosed",
-      "WeilConjectures.PurityFiniteSetting.gysinValue",
-      "WeilConjectures.PurityFiniteSetting.gysinSupport",
-      "WeilConjectures.PurityFiniteSetting.gysinEvaluate",
-      "WeilConjectures.PurityFiniteSetting.gysinHomToSections",
-      "WeilConjectures.PurityFiniteSetting.gysinGlobalClass",
-      "WeilConjectures.PurityFiniteSetting.gysinOpenCoefficient",
-      "WeilConjectures.PurityFiniteSetting.gysinKummerSection",
-      "WeilConjectures.PurityFiniteSetting.GysinSupportIdentification",
-      "WeilConjectures.PurityFiniteSetting.gysin_structure"
-    ],
-    "file": "lean/Sheaf/Paper/PurityGysinStructure.lean",
-    "statement": "theorem gysin_structure (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y ((finiteCoefficientIntrinsicRealization Y P.Ring).mapDerivedCategory.obj (P.gysinValue h Y)) ∧ (∀ q : ℤ, q ≠ 0 → IsZero ((DerivedCategory.homologyFunctor (ProSheaves P Y) q).obj (P.gysinValue h Y))) ∧ (∃ H : EtSheaves P Y, Nonempty ((comparisonUpperStar (Modules P) Y).obj H ≅ (DerivedCategory.homologyFunctor (ProSheaves P Y) 0).obj (P.gysinValue h Y)) ∧ ∃ V : Scheme.Cover.{u} Scheme.etalePrecoverage Y, ∀ i : V.I₀, Nonempty ((Etale.upperStar (Modules P) (V.f i)).obj H ≅ P.constantEtale (V.X i))) ∧ Function.Bijective (P.gysinHomToSections h Y) ∧ GysinSupportIdentification P h Y a",
-    "branch": "newtargets-dag",
-    "by": "Q08",
-    "date": "2026-10-17",
-    "existing": false,
-    "note": "Finite-level fixed-scalar presentation of the recorded exceptional functor, with intrinsic finite-Tor constructibility tested through the canonical associated-module-sheaf realization. The support isomorphism has an explicit formula using the counit- and cocycle-normalized retracted-support comparison; the actual coordinateKummer class is evaluated through derived global sections and the exact support boundary. No statement correction."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+    "place": "second paragraph: global sections, supported boundary, and the resulting morphism"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pur-conventions",
+  "def-weil-exceptional-inverse-image",
+  "def-pur-affine-line-datum",
+  "lem-pur-finite-kummer-level",
+  "lem-pur-affine-line-support-geometry",
+  "lem-pur-support-localization-triangle",
+  "lem-exc-proetale-closed-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "def-weil-derived-direct-image",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-derived-direct-image-composition",
+  "prop-pur-gm-relative-kummer",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-derived-concentrated-single",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-derived-tensor",
+  "def-weil-finite-tor-amplitude",
+  "lem-pur-closed-support-exceptional-comparison",
+  "lem-pur-supported-hom",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "thm-pur-with-support-exactness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/lem-pur-gysin-structure.proof.md",
+  "place": "current blueprint localization and relative A1/Gm argument; support and exceptional values distinguished until the explicit relative-adjunction comparison in step 7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image of the zero section of the affine line with finite invertible coefficients is the constant sheaf twisted and shifted by minus two",
+   "results": "{\"t\": \"2026-10-16T11:42:18Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional inverse image of the zero section of the affine line with finite invertible coefficients is the constant sheaf twisted and shifted by minus two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\"], \"digest\": \"0e0aee513c25032d\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: affine localization or quasi-coherent module hits do not state exceptional inverse image or supported Kummer purity"
+  },
+  {
+   "tool": "grep",
+   "query": "gysin|exceptionalInverseImage|purity|zeroSection",
+   "results": "{\"t\": \"2026-10-16T11:42:07Z\", \"tool\": \"grep\", \"query\": \"gysin|exceptionalInverseImage|purity|zeroSection\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology with support on the zero section of the affine line is the constant sheaf in degree two with a Tate twist",
+   "results": "{\"t\": \"2026-10-16T11:42:08Z\", \"tool\": \"leansearch\", \"query\": \"Cohomology with support on the zero section of the affine line is the constant sheaf in degree two with a Tate twist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.RingedSpace.res_zero\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff_of_mem\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff\", \"AlgebraicGeometry.Proj.zero_apply\"], \"digest\": \"6c86036d5caf72ce\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits define sheaf cohomology or concern ideal-sheaf support and ringed-space zero sections; none states the calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "{\"t\": \"2026-10-16T11:42:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Gysin\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.finestTopologySingle\"], \"digest\": \"58f7d1e179283216\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: finestTopologySingle constructs a Grothendieck topology; it is unrelated to Gysin or purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization triangle for a line bundle zero section and its punctured complement with Kummer generator gives a free rank one local cohomology sheaf",
+   "results": "{\"t\": \"2026-10-16T11:42:36Z\", \"tool\": \"leanfinder\", \"query\": \"Localization triangle for a line bundle zero section and its punctured complement with Kummer generator gives a free rank one local cohomology sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tildeInType\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"ModuleCat.Tilde.Localizations\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"AlgebraicGeometry.isLocalization_away_of_isAffine\", \"ModuleCat.Tilde.sectionsSubmodule\", \"AlgebraicGeometry.StructureSheaf.const\"], \"digest\": \"9f0f32e62ee47366\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: affine localization or quasi-coherent module hits do not state exceptional inverse image or supported Kummer purity"
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|sectionsWithSupport|upperShriek|TateTwist|kummer",
+   "results": "{\"t\": \"2026-10-16T12:00:42Z\", \"tool\": \"grep\", \"query\": \"localCohomology|sectionsWithSupport|upperShriek|TateTwist|kummer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\"], \"digest\": \"a846acbebc9923a7\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned hits concern Kummer extensions, Kummer-Dedekind theory and binomial valuations, not sheaf-theoretic purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cohomology of a constant torsion sheaf along the zero section of an affine line is an invertible sheaf in cohomological degree two",
+   "results": "{\"t\": \"2026-10-16T12:00:44Z\", \"tool\": \"leanfinder\", \"query\": \"Local cohomology of a constant torsion sheaf along the zero section of an affine line is an invertible sheaf in cohomological degree two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tildeInType\", \"ModuleCat.Tilde.isLocallyFraction\", \"AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"ModuleCat.Tilde.isUnit_toStalk\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"AlgebraicGeometry.StructureSheaf.locally_const_basicOpen\", \"AlgebraicGeometry.isLocalization_away_of_isAffine\"], \"digest\": \"91a828616e850355\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight hits concern quasi-coherent modules and affine localization, not torsion local cohomology or exceptional inverse image"
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|sectionsWithSupport|upperShriek|TateTwist",
+   "results": "{\"t\": \"2026-10-16T12:01:47Z\", \"tool\": \"grep\", \"query\": \"localCohomology|sectionsWithSupport|upperShriek|TateTwist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|sectionsWithSupport|exceptionalInverseImage",
+   "results": "{\"t\": \"2026-10-16T12:48:05Z\", \"tool\": \"grep\", \"query\": \"localCohomology|sectionsWithSupport|exceptionalInverseImage\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"1b64f7a08010717e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: module local cohomology defined from ideals, not pro-etale supported Kummer purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of an exceptional pullback along a closed zero section reconstructed by the localization distinguished triangle",
+   "results": "{\"t\": \"2026-10-16T12:48:14Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of an exceptional pullback along a closed zero section reconstructed by the localization distinguished triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk\", \"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequence\\u03b4_singleTriangle_apply\", \"DerivedCategory.triangleOfSES\\u03b4\", \"DerivedCategory.triangleOfSES\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequence\\u03b4_singleTriangle_apply\", \"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact\\u2081\", \"DerivedCategory.triangleOfSESIso\"], \"digest\": \"5641d18ec5bedb6c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic derived triangles, Ext connecting maps and quasi-isomorphisms do not state the geometric item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The exceptional inverse image along the zero section of the affine line with finite coefficients is a rank one constant sheaf in degree two",
+   "results": "{\"t\": \"2026-10-16T13:39:29Z\", \"tool\": \"leanfinder\", \"query\": \"The exceptional inverse image along the zero section of the affine line with finite coefficients is a rank one constant sheaf in degree two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\"], \"digest\": \"ae27bf5141cfe1e6\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight hits concern affine localization and quasi-coherent modules, not the exceptional inverse image calculation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "{\"t\": \"2026-10-16T13:39:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"upperShriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: Loogle returned zero hits"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|upperShriek|exceptionalInverseImage|localCohomology",
+   "results": "{\"t\": \"2026-10-16T13:39:19Z\", \"tool\": \"grep\", \"query\": \"Gysin|upperShriek|exceptionalInverseImage|localCohomology\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: no hits in Mathlib/AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A localization triangle for the zero section and punctured affine line computes the exceptional inverse image as a constant rank one sheaf with shift two",
+   "results": "{\"t\": \"2026-10-16T13:39:19Z\", \"tool\": \"leansearch\", \"query\": \"A localization triangle for the zero section and punctured affine line computes the exceptional inverse image as a constant rank one sheaf with shift two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.stalkIso_inv\", \"ModuleCat.Tilde.localizationToStalk_mk\", \"AlgebraicGeometry.Scheme.isoSpec_inv_image_zeroLocus\", \"ModuleCat.Tilde.stalkIso_inv\", \"AlgebraicGeometry.IsAffineOpen.isLocalization_of_eq_basicOpen\", \"ModuleCat.Tilde.openToLocalization\", \"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.IsAffineOpen.app_basicOpen_eq_away_map\"], \"digest\": \"d9494d07888fa28c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight hits concern structure-sheaf stalks, quasi-coherent module localization and affine zero loci"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cohomology sheaf supported on the zero section of a line bundle is an invertible module in degree two by the Kummer class of the coordinate",
+   "results": "{\"t\": \"2026-10-16T13:39:47Z\", \"tool\": \"leanfinder\", \"query\": \"Local cohomology sheaf supported on the zero section of a line bundle is an invertible module in degree two by the Kummer class of the coordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.tildeInType\", \"ModuleCat.Tilde.isLocallyFraction\", \"CommRing.relPic\", \"ModuleCat.Tilde.const\", \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"ModuleCat.Tilde.isUnit_toStalk\", \"ModuleCat.Tilde.isFraction\", \"AlgebraicGeometry.LocallyRingedSpace.isUnit_res_toΓSpecMapBasicOpen\"], \"digest\": \"a02c8d44bfde010c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight hits concern tilde modules, relative Picard groups and affine localization, not supported torsion cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "absolute.?purity|cohomologyWithSupport|rightDerivedUpperShriek|Gysin",
+   "results": "{\"t\": \"2026-10-16T16:17:20Z\", \"tool\": \"grep\", \"query\": \"absolute.?purity|cohomologyWithSupport|rightDerivedUpperShriek|Gysin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"17a4ebe8e1b1193c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the three case-insensitive substring hits are finestTopologySingle in Sites/Canonical.lean, which defines a Grothendieck topology and does not concern purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute purity for a regular closed immersion of codimension one: local etale cohomology of a finite constant sheaf is its Tate twist shifted by two",
+   "results": "{\"t\": \"2026-10-16T16:17:21Z\", \"tool\": \"leanfinder\", \"query\": \"Absolute purity for a regular closed immersion of codimension one: local etale cohomology of a finite constant sheaf is its Tate twist shifted by two\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.FormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"Algebra.IsEtaleAt\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"66368f418f05d869\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: the eight returned declarations concern etale morphisms, formal unramifiedness, affine limits and etale loci; none calculates supported cohomology or an exceptional inverse image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image of the finite constant sheaf along the zero section of an affine line is rank one in degree two, identified with supported cohomology",
+   "results": "{\"t\": \"2026-10-17T08:04:54Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional inverse image of the finite constant sheaf along the zero section of an affine line is rank one in degree two, identified with supported cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"ModuleCat.Tilde.exists_const\", \"CategoryTheory.Sheaf.H\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\"], \"digest\": \"ba33059ed7d8e5f5\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern affine structure-sheaf localization or the definition of sheaf cohomology, not exceptional inverse images or their purity calculation"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|exceptionalInverseImage|localCohomology|rightDerivedUpperShriek",
+   "results": "{\"t\": \"2026-10-17T08:05:18Z\", \"tool\": \"grep\", \"query\": \"Gysin|exceptionalInverseImage|localCohomology|rightDerivedUpperShriek\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization triangle of the zero section of an affine line gives a rank one constant exceptional inverse image shifted by two",
+   "results": "{\"t\": \"2026-10-17T08:05:18Z\", \"tool\": \"leansearch\", \"query\": \"Localization triangle of the zero section of an affine line gives a rank one constant exceptional inverse image shifted by two\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "{\"t\": \"2026-10-17T08:05:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"upperShriek\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cohomology with support at zero in the affine line is the finite coefficient unit shifted by minus two via the Kummer boundary",
+   "results": "{\"t\": \"2026-10-17T08:06:12Z\", \"tool\": \"leanfinder\", \"query\": \"Local cohomology with support at zero in the affine line is the finite coefficient unit shifted by minus two via the Kummer boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away\", \"BDeRham\", \"AlgebraicGeometry.StructureSheaf.const_mul_rev\"], \"digest\": \"fa89599ff8d09ccb\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits concern affine structure-sheaf localization or the definition of sheaf cohomology, not exceptional inverse images or their purity calculation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1946,
+ "blueprint_uses": [
+  "def-pur-affine-line-datum",
+  "def-pur-conventions",
+  "def-weil-derived-direct-image",
+  "def-weil-exceptional-inverse-image",
+  "fix-prop-adjunctions",
+  "lem-amb-cartier-kummer-map",
+  "lem-amb-closed-support-hom",
+  "lem-pur-support-localization-triangle",
+  "lem-weil-derived-direct-image-composition",
+  "prop-pur-gm-relative-kummer",
+  "thm-pur-with-support-exactness"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the purity conventions of this chapter ([def-pur-conventions] fixed setting),\nlet $\\Lambda=A$, and let\n$s:Y\\hookrightarrow\\mathbf A^1_Y$ be the zero section. Then:\n\n1. The object $Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]$ lies in\n$D^b_{ctf}(Y,\\Lambda)$ and is concentrated in degree zero after the\ndisplayed shift, with lisse rank-one cohomology sheaf.\n1. Under the long exact sequence of\n[thm-pur-with-support-exactness] for the pair\n$(s(Y),\\mathbf A^1_Y)$, there is a canonical identification\n$$\n\\Gamma\\!\\left(Y,\\mathcal H^0\\bigl(Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\bigr)\\right)\n\\cong H^2_{s(Y)}\\bigl(\\mathbf A^1_Y,\\Lambda(1)\\bigr),\n$$\nvia which the boundary of the\nKummer class of $t$ corresponds\nto an element of the space of morphisms\n$$\n\\operatorname{Hom}_{D(Y,\\Lambda)}\\bigl(\\Lambda_Y,Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]\\bigr).\n$$",
+  "proof": [
+   {
+    "text": "Write $p:\\mathbf A^1_Y\\to Y$, $j:\\mathbf G_{m,Y}\\hookrightarrow\\mathbf A^1_Y$\nand $\\pi=pj$ as in [def-pur-affine-line-datum]. Apply the localization\ntriangle of [lem-pur-support-localization-triangle] for the closed–open\npair $(s,j)$ and $K=\\Lambda(1)_{\\mathbf A^1_Y}$, whose first term is\nbuilt from the exceptional inverse image of\n[def-weil-exceptional-inverse-image],\n$$\ns_*Rs^!\\Lambda(1)\\longrightarrow\\Lambda(1)\\longrightarrow\nRj_*j^*\\Lambda(1)\\xrightarrow{+1},\n$$\nand then the triangulated functor $Rp_*$ of\n[def-weil-derived-direct-image]. Since $s_*$ is exact,\n$Rp_*s_*=R(ps)_*=\\operatorname{id}$, and $Rp_*Rj_*=R\\pi_*$ by the\ncomposition of derived direct images\n[lem-weil-derived-direct-image-composition], this gives a\ndistinguished triangle on $Y$\n$$\nRs^!\\Lambda(1)\\longrightarrow Rp_*\\Lambda(1)\\xrightarrow{\\ j^*\\ }\nR\\pi_*\\Lambda(1)\\xrightarrow{\\ \\delta\\ }Rs^!\\Lambda(1)[1].\n$$\nBy [prop-pur-gm-relative-kummer](1) the middle term is $\\Lambda_Y(1)$ in\ndegree $0$, via the unit of $p$. By [prop-pur-gm-relative-kummer](2),(3)\nthe right-hand term has $\\mathcal H^0=\\Lambda_Y(1)$ via the unit of\n$\\pi$, $\\mathcal H^1$ free of rank one on $\\kappa(t)$, and no other\ncohomology sheaves. By [fix-prop-adjunctions](3) the unit of $\\pi$ is\n$j^*$ composed with the unit of $p$, so $\\mathcal H^0(j^*)$ is an\nisomorphism. The long exact sequence of cohomology sheaves\n$$\n0\\to\\mathcal H^0(Rs^!\\Lambda(1))\\to R^0p_*\\Lambda(1)\\xrightarrow{\\sim}\nR^0\\pi_*\\Lambda(1)\\to\\mathcal H^1(Rs^!\\Lambda(1))\\to R^1p_*\\Lambda(1)=0\n\\to R^1\\pi_*\\Lambda(1)\\xrightarrow{\\ \\delta\\ }\\mathcal H^2(Rs^!\\Lambda(1))\n\\to R^2p_*\\Lambda(1)=0\\to\\cdots\n$$\ntherefore gives $\\mathcal H^m(Rs^!\\Lambda(1))=0$ for $m\\neq2$ (for\n$m\\geq3$ it sits between $R^{m-1}\\pi_*\\Lambda(1)=0$ and\n$R^mp_*\\Lambda(1)=0$), and an isomorphism\n$$\n\\delta:\\ \\Lambda_Y\\cdot\\kappa(t)=R^1\\pi_*\\Lambda(1)\\xrightarrow{\\ \\sim\\ }\n\\mathcal H^2(Rs^!\\Lambda(1))=\\mathcal H^0\\bigl(Rs^!\\Lambda(1)[2]\\bigr).\n$$\nSo $Rs^!\\Lambda_{\\mathbf A^1_Y}(1)[2]$ is concentrated in degree zero,\nwith cohomology sheaf the constant sheaf $\\Lambda_Y$, free of rank one on\nthe boundary $\\delta\\kappa(t)$; in particular it is lisse of rank one,\nconstructible, and of finite Tor amplitude, i.e. it lies in\n$D^b_{ctf}(Y,\\Lambda)$. Constancy is read off from the triangle; it is\nnot inferred from constancy of ranks.",
+    "uses": [
+     "def-pur-affine-line-datum",
+     "lem-pur-support-localization-triangle",
+     "def-weil-exceptional-inverse-image",
+     "def-weil-derived-direct-image",
+     "lem-weil-derived-direct-image-composition",
+     "prop-pur-gm-relative-kummer",
+     "fix-prop-adjunctions"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For the second assertion, the support identification\n[lem-amb-closed-support-hom] identifies\n$H^2_{s(Y)}(\\mathbf A^1_Y,\\Lambda(1))$ with\n$\\operatorname{Hom}_Y(\\Lambda_Y,Rs^!\\Lambda(1)[2])$.\nSince the target is concentrated in degree zero, this Hom group is\n$\\Gamma(Y,\\mathcal H^0(Rs^!\\Lambda(1)[2]))$.\nThe boundary of the coordinate class in\n[def-pur-affine-line-datum], [thm-pur-with-support-exactness]\nis precisely the supported Cartier morphism of\n[lem-amb-cartier-kummer-map]; the latter construction also gives\nits compatibility with base change of this zero-section pair.",
+    "uses": [
+     "lem-amb-closed-support-hom",
+     "def-pur-affine-line-datum",
+     "thm-pur-with-support-exactness",
+     "lem-amb-cartier-kummer-map"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pur-gysin-structure",
+  "worker": "stage1",
+  "summary": "Q116 repaired both returned hidden arguments by extracting lem-pur-affine-line-support-geometry and lem-pur-closed-support-exceptional-comparison as statement-only unsplit nodes. Steps 1 and 7 now cite these obligations and verify their hypotheses. The statement, Lean record and other seven proof steps are unchanged. Preserved prior report findings, citations and search evidence; new nodes were searched by two semantic phrasings, Loogle, LeanSearch and source grep. The localization/A1/Gm route remains unchanged. Repair of returned immutable head d7f39f2e7309: explicitly submit these stage-1 fields and the two unsplit prerequisites through deliver.py for stage-1 review; report answers H1, H2, H12 and H10/H11 individually. Statement, seven statement dependencies and absent Lean record remain unchanged; later stage-2 work is deferred under the human stage-1-only instruction.",
+  "blueprint": "First paragraph: steps 1-6 compute the localization support value via the relative A1/Gm proposition; step 7 proves the missing comparison with def-weil-exceptional-inverse-image using thm-sf-ambient-adjoint-class. Second paragraph: steps 8-9 identify supported cohomology with exceptional Hom and degree-zero global sections, and send the Kummer boundary through that comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-kummer-level",
+    "why": "Generic prerequisite for the localization calculation or derived-category comparison; no unit node supplies this interface."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic exactness of closed direct image used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic an exact functor of abelian categories induces a triangulated functor on derived categories used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic the unbounded right derived functor is triangulated used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic existence of k-injective resolutions of sheaves of modules used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic composition of derived direct images used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic every object of d^+ is represented by a bounded below k-injective complex of injectives used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic grothendieck abelian categories have enough injectives used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence of a distinguished triangle in the derived category used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   },
+   {
+    "node": "lem-sp-derived-cohomology-shift",
+    "why": "Generic cohomology of a shifted object of the derived category used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   },
+   {
+    "node": "lem-sf-derived-concentrated-single",
+    "why": "Generic a complex with cohomology in a single degree is that cohomology object shifted used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Generic the single-complex embedding of an abelian category is fully faithful used in the localization argument; it supplies no substitute geometric purity or A1/Gm computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-kummer-level",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-exc-proetale-closed-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sp-derived-cohomology-shift",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-kun-dimension-finite-type",
+  "lem-sf-proetale-constructible-origin",
+  "thm-sf-ambient-adjoint-class",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q116-c6038ba1e",
+  "group": "Q116",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q116-c6038ba1e (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, current blueprint and cited source passages. Verified all nine steps, shifts, finite-Tor argument, étale-origin comparison and counit equation; checked small cases and duplicate candidates. No repairs needed. Accepted the twelve declared tool uses. Detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f11e5166e",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Audited node, source, dependencies, declarations, hypotheses, universes, edge cases, docstrings, route-pivot compliance, and report sections. Immutable module compiled cleanly in sandbox and library modes via scompile.py; no substantive or mechanical defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityGysinStructure",
+  "declaration": "WeilConjectures.PurityFiniteSetting.gysin_structure",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.gysinZeroClosed",
+   "WeilConjectures.PurityFiniteSetting.gysinOpen",
+   "WeilConjectures.PurityFiniteSetting.gysinEtaleInput",
+   "WeilConjectures.PurityFiniteSetting.gysinInput",
+   "WeilConjectures.PurityFiniteSetting.gysinClosed",
+   "WeilConjectures.PurityFiniteSetting.gysinValue",
+   "WeilConjectures.PurityFiniteSetting.gysinSupport",
+   "WeilConjectures.PurityFiniteSetting.gysinEvaluate",
+   "WeilConjectures.PurityFiniteSetting.gysinHomToSections",
+   "WeilConjectures.PurityFiniteSetting.gysinGlobalClass",
+   "WeilConjectures.PurityFiniteSetting.gysinOpenCoefficient",
+   "WeilConjectures.PurityFiniteSetting.gysinKummerSection",
+   "WeilConjectures.PurityFiniteSetting.GysinSupportIdentification",
+   "WeilConjectures.PurityFiniteSetting.gysin_structure"
+  ],
+  "file": "lean/Sheaf/Paper/PurityGysinStructure.lean",
+  "statement": "theorem gysin_structure (P : PurityFiniteSetting.{u}) (h : P.ramificationIndex ∣ P.level) (Y : Scheme.{u}) (a : Y ⟶ Spec (CommRingCat.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] : finiteTorConstructible P.coefficients.l P.extension P.level P.level_pos Y ((finiteCoefficientIntrinsicRealization Y P.Ring).mapDerivedCategory.obj (P.gysinValue h Y)) ∧ (∀ q : ℤ, q ≠ 0 → IsZero ((DerivedCategory.homologyFunctor (ProSheaves P Y) q).obj (P.gysinValue h Y))) ∧ (∃ H : EtSheaves P Y, Nonempty ((comparisonUpperStar (Modules P) Y).obj H ≅ (DerivedCategory.homologyFunctor (ProSheaves P Y) 0).obj (P.gysinValue h Y)) ∧ ∃ V : Scheme.Cover.{u} Scheme.etalePrecoverage Y, ∀ i : V.I₀, Nonempty ((Etale.upperStar (Modules P) (V.f i)).obj H ≅ P.constantEtale (V.X i))) ∧ Function.Bijective (P.gysinHomToSections h Y) ∧ GysinSupportIdentification P h Y a",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Finite-level fixed-scalar presentation of the recorded exceptional functor, with intrinsic finite-Tor constructibility tested through the canonical associated-module-sheaf realization. The support isomorphism has an explicit formula using the counit- and cocycle-normalized retracted-support comparison; the actual coordinateKummer class is evaluated through derived global sections and the exact support boundary. No statement correction."
+ }
 }

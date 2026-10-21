@@ -15,7 +15,7 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-lem-picard-zero-dictionary",
  "title": "Adjunction morphism is compatible with base change",
- "statement": "Let k be a separably closed field [def-pc-separably-closed], let X be a smooth projective curve over k with a k-rational point \u03c3 [def-pc-smooth-projective-curve] [def-pc-rational-point], and assume that for every k-scheme T the module category on X_T has injective resolutions [def-sp-injective-resolutions]. Let T and T' be k-schemes, let i : T' \u27f6 T be a morphism, and let \u2112 \u2208 F(T) be an object of the Picard subfunctor [def-pc-f-subfunctor]. Thus its derived direct image is isomorphic to an invertible module placed in degree zero, in the sense of [def-pc-invertible-in-degree-zero]. Write i' : X_{T'} \u27f6 X_T for the base change of i [def-pc-base-change]. Then the pullback along i' of the adjunction morphism f_T^* f_{T,*} \u2112 \u27f6 \u2112 is isomorphic, as an arrow, to the adjunction morphism f_{T'}^* f_{T',*}(i'^*\u2112) \u27f6 i'^*\u2112.",
+ "statement": "Let k be a separably closed field [def-pc-separably-closed], let X be a smooth projective curve over k with a k-rational point σ [def-pc-smooth-projective-curve] [def-pc-rational-point], and assume that for every k-scheme T the module category on X_T has injective resolutions [def-sp-injective-resolutions]. Let T and T' be k-schemes, let i : T' ⟶ T be a morphism, and let ℒ ∈ F(T) be an object of the Picard subfunctor [def-pc-f-subfunctor]. Thus its derived direct image is isomorphic to an invertible module placed in degree zero, in the sense of [def-pc-invertible-in-degree-zero]. Write i' : X_{T'} ⟶ X_T for the base change of i [def-pc-base-change]. Then the pullback along i' of the adjunction morphism f_T^* f_{T,*} ℒ ⟶ ℒ is isomorphic, as an arrow, to the adjunction morphism f_{T'}^* f_{T',*}(i'^*ℒ) ⟶ i'^*ℒ.",
  "source": {
   "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
   "place": "theorem nonempty_arrowIso_pullback_directImageCounit, lines 143-175"
@@ -34,7 +34,7 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pc-arrow-iso-pullback-counit] to the same curve, rational point, family of module categories with injective resolutions, morphism i, and Picard-subfunctor object. Its field and geometrically integral hypotheses hold because k is a separably closed field and [prop-pc-xk-integral] states that a smooth projective curve over such a field is geometrically integral. The induced base-change map and pulled-back Picard object are the maps denoted i' and i'^*\u2112 here, so the resulting Arrow isomorphism is exactly the asserted compatibility.",
+   "text": "Apply [lem-pc-arrow-iso-pullback-counit] to the same curve, rational point, family of module categories with injective resolutions, morphism i, and Picard-subfunctor object. Its field and geometrically integral hypotheses hold because k is a separably closed field and [prop-pc-xk-integral] states that a smooth projective curve over such a field is geometrically integral. The induced base-change map and pulled-back Picard object are the maps denoted i' and i'^*ℒ here, so the resulting Arrow isomorphism is exactly the asserted compatibility.",
    "uses": [
     "lem-pc-arrow-iso-pullback-counit",
     "prop-pc-xk-integral"
@@ -127,7 +127,7 @@
   "module": "Sheaf.AlgebraicGeometry.Picard.AdjunctionBaseChange",
   "declaration": "AlgebraicGeometry.nonempty_arrowIso_moduleBaseChange_counit",
   "file": "lean/Sheaf/AlgebraicGeometry/Picard/AdjunctionBaseChange.lean",
-  "statement": "theorem nonempty_arrowIso_moduleBaseChange_counit {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}} (f : X \u27f6 Spec (.of k)) [IsSmoothProjectiveCurve f] (\u03c3 : Spec (.of k) \u27f6 X) (h\u03c3 : \u03c3 \u226b f = \ud835\udfd9 (Spec (.of k))) [\u2200 T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules] {T T' : Over (Spec (.of k))} (i : T' \u27f6 T) (\u2112 : picardInvertibleDirectImageClasses f \u03c3 h\u03c3 T) : let L := (fromSkeleton _).obj \u2112.1.1.val let L' := (Scheme.Modules.moduleBaseChange f i).obj L let adj := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f T.hom)) let adj' := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f T'.hom)) Nonempty (Arrow.mk ((Scheme.Modules.moduleBaseChange f i).map (adj.counit.app L)) \u2245 Arrow.mk (adj'.counit.app L'))",
+  "statement": "theorem nonempty_arrowIso_moduleBaseChange_counit {k : Type u} [Field k] [IsSepClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsSmoothProjectiveCurve f] (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ f = 𝟙 (Spec (.of k))) [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules] {T T' : Over (Spec (.of k))} (i : T' ⟶ T) (ℒ : picardInvertibleDirectImageClasses f σ hσ T) : let L := (fromSkeleton _).obj ℒ.1.1.val let L' := (Scheme.Modules.moduleBaseChange f i).obj L let adj := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f T.hom)) let adj' := Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction (pullback.snd f T'.hom)) Nonempty (Arrow.mk ((Scheme.Modules.moduleBaseChange f i).map (adj.counit.app L)) ≅ Arrow.mk (adj'.counit.app L'))",
   "branch": "sheaf-dag",
   "by": "K1",
   "date": "2026-10-11",
@@ -139,18 +139,7 @@
   "reviewer": "R-zsa1138",
   "group": "K1",
   "result": "pass",
-  "note": "IsSepClosed k (no geom-integrality added)/explicit f with IsSmoothProjectiveCurve/section \u03c3,h\u03c3/\u2200T HasInjectiveResolutions on pullback f T.hom (same universe u)/i:T'\u27f6T in Over/\u2112 in landed E1 picardInvertibleDirectImageClasses (IsInvertibleDirectImage = R0 invertible, Rq=0 q>0)/f_T=pullback.snd, i'=baseChangeMap via moduleBaseChange=tensorPullback(baseChangeMap)/counits of Classical.choose exists_tensorPullbackAdjunction/Nonempty Arrow iso; compiled against landed module in L sandbox; IsSepClosed not inferInstance; duplicate dependency module reverted to E1's landed record; reverted the delivery's change of existing node(s) def-pc-f-subfunctor (--revert-nodes; kept as on sheaf-dag)"
+  "note": "IsSepClosed k (no geom-integrality added)/explicit f with IsSmoothProjectiveCurve/section σ,hσ/∀T HasInjectiveResolutions on pullback f T.hom (same universe u)/i:T'⟶T in Over/ℒ in landed E1 picardInvertibleDirectImageClasses (IsInvertibleDirectImage = R0 invertible, Rq=0 q>0)/f_T=pullback.snd, i'=baseChangeMap via moduleBaseChange=tensorPullback(baseChangeMap)/counits of Classical.choose exists_tensorPullbackAdjunction/Nonempty Arrow iso; compiled against landed module in L sandbox; IsSepClosed not inferInstance; duplicate dependency module reverted to E1's landed record; reverted the delivery's change of existing node(s) def-pc-f-subfunctor (--revert-nodes; kept as on sheaf-dag)"
  },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- }
+ "lean_audit": {}
 }

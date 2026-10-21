@@ -1,144 +1,108 @@
 {
-  "id": "lemma-constructible-immersion-independence",
-  "blueprint": {
-    "is": "lemma-constructible-immersion-independence",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Independence of the scheme structure",
-  "statement": "Let $a\\colon Z\\to X$ and $b\\colon Z'\\to X$ be immersions with the same\nimage. Then $a^*\\mathcal F$ is finite locally constant if and only if\n$b^*\\mathcal F$ is.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-constructible-immersion-independence.md",
-    "place": "node lemma-constructible-immersion-independence, order 1169"
-  },
-  "stmt_deps": [
-    "def-constructible-finite-locally-constant"
-  ],
-  "proof": [
-    {
-      "text": "Let $W=Z\\times_XZ'$ with projections $p\\colon W\\to Z$ and $q\\colon W\\to Z'$.\nThe projection $p$ is an immersion, as a base change of $b$, and it is\nsurjective, its image being $a^{-1}(b(Z'))=a^{-1}(a(Z))=Z$. A surjective\nimmersion is a surjective closed immersion (an immersion is a closed\nimmersion into an open subscheme, and surjectivity forces that open to be\neverything), hence a universal homeomorphism. The same holds for $q$. Now\n$p^*a^*\\mathcal F\\cong q^*b^*\\mathcal F$, both being the pullback along\n$a\\circ p=b\\circ q$, so by\n[lemma-constructible-universal-homeomorphism-invariance] applied to\n$p$ and to $q$, $a^*\\mathcal F$ is finite locally constant if and only if\n$p^*a^*\\mathcal F$ is, if and only if $q^*b^*\\mathcal F$ is, if and only if\n$b^*\\mathcal F$ is.",
-      "uses": [
-        "lemma-constructible-universal-homeomorphism-invariance"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lemma-constructible-universal-homeomorphism-invariance",
-    "lemma-constructible-iso-invariance",
-    "lemma-constructible-pullback-stratification",
-    "prop-constructible-pullback"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-constructible-immersion-independence.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "lean_multiple",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1169,
-  "blueprint_uses": [
-    "def-constructible-finite-locally-constant",
-    "lemma-constructible-iso-invariance",
-    "lemma-constructible-pullback-stratification",
-    "lemma-constructible-universal-homeomorphism-invariance",
-    "prop-constructible-pullback"
-  ],
-  "lean": {
-    "module": "WeilConjectures.ConstructibleSheaf.Refinement",
-    "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset",
-    "branch": "slopmaster2",
-    "line": 71,
-    "sorry_free": true,
-    "body_lines": 13,
-    "others": [
-      {
-        "module": "WeilConjectures.ConstructibleSheaf.Refinement",
-        "declaration": "AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq",
-        "branch": "slopmaster2",
-        "line": 92,
-        "sorry_free": true,
-        "body_lines": 2
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset",
-    "AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq"
-  ],
-  "uses_not_cited": [
-    "def-constructible-finite-locally-constant",
-    "lemma-constructible-iso-invariance",
-    "lemma-constructible-pullback-stratification",
-    "prop-constructible-pullback"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset",
-        "AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset",
-          "module": "WeilConjectures.ConstructibleSheaf.Refinement",
-          "lines": [
-            66,
-            87
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq",
-          "module": "WeilConjectures.ConstructibleSheaf.Refinement",
-          "lines": [
-            89,
-            98
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\mathcal F\\in\\shv{\\et X}$, let $b\\colon Z'\\to X$ be an immersion and\nlet $a\\colon Z\\to X$ be a morphism whose image is contained in the image\nof $b$. If $b^*\\mathcal F$ is finite locally constant, then so is\n$a^*\\mathcal F$. In particular, if $a$ and $b$ are immersions with the same\nimage, then $a^*\\mathcal F$ is finite locally constant if and only if\n$b^*\\mathcal F$ is.",
-    "proof": [
-      {
-        "text": "Let $W=Z\\times_XZ'$ with projections $p\\colon W\\to Z$ and $q\\colon W\\to Z'$.\nThe projection $p$ is an immersion, as a base change of $b$, and it is\nsurjective: its image is $a^{-1}(b(Z'))$, which is all of $Z$ because\n$a(Z)\\subseteq b(Z')$. A surjective immersion is a surjective closed\nimmersion (an immersion is a closed immersion into an open subscheme, and\nsurjectivity forces that open to be everything). Suppose $b^*\\mathcal F$ is\nfinite locally constant. Then $q^*b^*\\mathcal F$ is finite locally constant\nby [prop-constructible-pullback]. Since $a\\circ p=b\\circ q$, we have\n$p^*a^*\\mathcal F\\cong q^*b^*\\mathcal F$, so $p^*a^*\\mathcal F$ is finite\nlocally constant by [lemma-constructible-iso-invariance]. Finite local\nconstancy descends along the surjective closed immersion $p$\n([lemma-constructible-universal-homeomorphism-invariance]), so\n$a^*\\mathcal F$ is finite locally constant.",
-        "uses": [
-          "prop-constructible-pullback",
-          "lemma-constructible-iso-invariance",
-          "lemma-constructible-universal-homeomorphism-invariance"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "If $a$ and $b$ are immersions with the same image, the first part applies\nto $(a,b)$ and to $(b,a)$, which gives the equivalence.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "lemma-constructible-immersion-independence",
+ "blueprint": {
+  "is": "lemma-constructible-immersion-independence",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Independence of the scheme structure",
+ "statement": "Let $a\\colon Z\\to X$ and $b\\colon Z'\\to X$ be immersions with the same\nimage. Then $a^*\\mathcal F$ is finite locally constant if and only if\n$b^*\\mathcal F$ is.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-constructible-immersion-independence.md",
+  "place": "node lemma-constructible-immersion-independence, order 1169"
+ },
+ "stmt_deps": [
+  "def-constructible-finite-locally-constant"
+ ],
+ "proof": [
+  {
+   "text": "Let $W=Z\\times_XZ'$ with projections $p\\colon W\\to Z$ and $q\\colon W\\to Z'$.\nThe projection $p$ is an immersion, as a base change of $b$, and it is\nsurjective, its image being $a^{-1}(b(Z'))=a^{-1}(a(Z))=Z$. A surjective\nimmersion is a surjective closed immersion (an immersion is a closed\nimmersion into an open subscheme, and surjectivity forces that open to be\neverything), hence a universal homeomorphism. The same holds for $q$. Now\n$p^*a^*\\mathcal F\\cong q^*b^*\\mathcal F$, both being the pullback along\n$a\\circ p=b\\circ q$, so by\n[lemma-constructible-universal-homeomorphism-invariance] applied to\n$p$ and to $q$, $a^*\\mathcal F$ is finite locally constant if and only if\n$p^*a^*\\mathcal F$ is, if and only if $q^*b^*\\mathcal F$ is, if and only if\n$b^*\\mathcal F$ is.",
+   "uses": [
+    "lemma-constructible-universal-homeomorphism-invariance"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lemma-constructible-universal-homeomorphism-invariance",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-pullback-stratification",
+  "prop-constructible-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-p1/lemma-constructible-immersion-independence.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1169,
+ "blueprint_uses": [
+  "def-constructible-finite-locally-constant",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-pullback-stratification",
+  "lemma-constructible-universal-homeomorphism-invariance",
+  "prop-constructible-pullback"
+ ],
+ "lean": {
+  "module": "WeilConjectures.ConstructibleSheaf.Refinement",
+  "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset",
+  "branch": "slopmaster2",
+  "line": 71,
+  "sorry_free": true,
+  "body_lines": 13,
+  "others": [
+   {
+    "module": "WeilConjectures.ConstructibleSheaf.Refinement",
+    "declaration": "AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq",
+    "branch": "slopmaster2",
+    "line": 92,
+    "sorry_free": true,
+    "body_lines": 2
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset",
+  "AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_upperStar_iff_of_range_eq"
+ ],
+ "uses_not_cited": [
+  "def-constructible-finite-locally-constant",
+  "lemma-constructible-iso-invariance",
+  "lemma-constructible-pullback-stratification",
+  "prop-constructible-pullback"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\mathcal F\\in\\shv{\\et X}$, let $b\\colon Z'\\to X$ be an immersion and\nlet $a\\colon Z\\to X$ be a morphism whose image is contained in the image\nof $b$. If $b^*\\mathcal F$ is finite locally constant, then so is\n$a^*\\mathcal F$. In particular, if $a$ and $b$ are immersions with the same\nimage, then $a^*\\mathcal F$ is finite locally constant if and only if\n$b^*\\mathcal F$ is.",
+  "proof": [
+   {
+    "text": "Let $W=Z\\times_XZ'$ with projections $p\\colon W\\to Z$ and $q\\colon W\\to Z'$.\nThe projection $p$ is an immersion, as a base change of $b$, and it is\nsurjective: its image is $a^{-1}(b(Z'))$, which is all of $Z$ because\n$a(Z)\\subseteq b(Z')$. A surjective immersion is a surjective closed\nimmersion (an immersion is a closed immersion into an open subscheme, and\nsurjectivity forces that open to be everything). Suppose $b^*\\mathcal F$ is\nfinite locally constant. Then $q^*b^*\\mathcal F$ is finite locally constant\nby [prop-constructible-pullback]. Since $a\\circ p=b\\circ q$, we have\n$p^*a^*\\mathcal F\\cong q^*b^*\\mathcal F$, so $p^*a^*\\mathcal F$ is finite\nlocally constant by [lemma-constructible-iso-invariance]. Finite local\nconstancy descends along the surjective closed immersion $p$\n([lemma-constructible-universal-homeomorphism-invariance]), so\n$a^*\\mathcal F$ is finite locally constant.",
+    "uses": [
+     "prop-constructible-pullback",
+     "lemma-constructible-iso-invariance",
+     "lemma-constructible-universal-homeomorphism-invariance"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "If $a$ and $b$ are immersions with the same image, the first part applies\nto $(a,b)$ and to $(b,a)$, which gives the equivalence.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,214 +1,168 @@
 {
-  "id": "lemma-weil-pbc-finite-direct-image-exact",
-  "blueprint": {
-    "is": "lemma-weil-pbc-finite-direct-image-exact",
-    "from": null,
-    "same_as": null
+ "id": "lemma-weil-pbc-finite-direct-image-exact",
+ "blueprint": {
+  "is": "lemma-weil-pbc-finite-direct-image-exact",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Exactness of finite direct image",
+ "statement": "For finite $f$, the functor $f_*:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ is exact.\nConsequently $R^qf_*=0$ for $q>0$ and $Rf_*=f_*$ on $\\Dplus(X_{\\Et})$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-finite-direct-image-exact.md",
+  "place": "node lemma-weil-pbc-finite-direct-image-exact, order 998"
+ },
+ "stmt_deps": [
+  "def-kun-separably-closed",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-fibre",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "For the original etale-sheaf declarations attached to this node, use the finite geometric-stalk formula: the pushforward stalk is a finite sum of source stalks, hence exact. Geometric stalks are conservative. These declarations are unchanged by E3.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-openclosed-point-ulift",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "Exactness of finite direct image",
-  "statement": "For finite $f$, the functor $f_*:\\Ab(X_{\\Et})\\to\\Ab(Y_{\\Et})$ is exact.\nConsequently $R^qf_*=0$ for $q>0$ and $Rf_*=f_*$ on $\\Dplus(X_{\\Et})$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-finite-direct-image-exact.md",
-    "place": "node lemma-weil-pbc-finite-direct-image-exact, order 998"
+  {
+   "text": "For the attached WeilSheaf.isZero_higherLowerStar_of_isFinite declaration, work with the actual pro-etale AdicSheaf implementation. The geometric-fibre map q of p is finite and locally of finite presentation: the target is locally Noetherian because it is locally of finite type over a field, and these morphism properties survive base change. A finite pullback of Spec R for w-contractible R is affine, say Spec S, and S is module-finite and finitely presented over R. Apply the finite w-contractibility theorem to S.",
+   "uses": [
+    "lem-ce-finite-finitely-presented-wcontractible"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-kun-separably-closed",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-geometric-fibre",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "For the original etale-sheaf declarations attached to this node, use the finite geometric-stalk formula: the pushforward stalk is a finite sum of source stalks, hence exact. Geometric stalks are conservative. These declarations are unchanged by E3.",
-      "uses": [
-        "lemma-weil-pbc-finite-stalk-formula",
-        "lemma-openclosed-point-ulift",
-        "lemma-weil-pbc-geometric-stalk-conservative"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For the attached WeilSheaf.isZero_higherLowerStar_of_isFinite declaration, work with the actual pro-etale AdicSheaf implementation. The geometric-fibre map q of p is finite and locally of finite presentation: the target is locally Noetherian because it is locally of finite type over a field, and these morphism properties survive base change. A finite pullback of Spec R for w-contractible R is affine, say Spec S, and S is module-finite and finitely presented over R. Apply the finite w-contractibility theorem to S.",
-      "uses": [
-        "lem-ce-finite-finitely-presented-wcontractible"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Cover every target pro-etale object by affine opens, and each affine open by the faithfully flat ind-etale w-contractible algebra of exists_isWContractibleRing. Compose the two coverings. This is the construction in the already proved Scheme.ProEt.exists_isWeaklyContractible_cover, retaining the ring witness. By Scheme.ProEt.isWeaklyContractible_of_iso each cover member and its finite pullback are weakly contractible. Apply GrothendieckTopology.exact_iff_of_forall_exists and exact evaluation on weakly contractible objects. Evaluation of the direct image equals evaluation on its pullback, so direct image preserves homology and finite colimits. All this is Lean-proved in private helpers of the item.",
-      "uses": [
-        "lem-weil-pbc-source-wcontractible-extension",
-        "lem-weil-pbc-source-affine-wcontractible-evaluation"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Reflect finite-colimit preservation from ordinary module sheaves through AdicSheaf.forget, then transfer it to Frobenius-equivariant sheaves with Endofunctor.IsoAlgebra.preservesFiniteColimits_mapOfNatIso. The exact functor comparison singleFunctorCompRightDerivedFunctorIso identifies the derived direct image of a degree-zero object with a degree-zero object. Positive-degree homology of the latter vanishes by DerivedCategory.isZero_of_isLE, and the comparison transports this vanishing to the stated Weil higher direct image.",
-      "uses": [],
-      "elementary": true
-    }
-  ],
-  "proof_deps": [
-    "lem-ce-finite-finitely-presented-wcontractible",
-    "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  {
+   "text": "Cover every target pro-etale object by affine opens, and each affine open by the faithfully flat ind-etale w-contractible algebra of exists_isWContractibleRing. Compose the two coverings. This is the construction in the already proved Scheme.ProEt.exists_isWeaklyContractible_cover, retaining the ring witness. By Scheme.ProEt.isWeaklyContractible_of_iso each cover member and its finite pullback are weakly contractible. Apply GrothendieckTopology.exact_iff_of_forall_exists and exact evaluation on weakly contractible objects. Evaluation of the direct image equals evaluation on its pullback, so direct image preserves homology and finite colimits. All this is Lean-proved in private helpers of the item.",
+   "uses": [
     "lem-weil-pbc-source-wcontractible-extension",
-    "lemma-openclosed-point-ulift",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-finite-direct-image-exact.md",
-    "place": "Original etale finite-stalk proof retained; E3 stage-3 proof of the attached WeilSheaf vanishing uses finite w-contractible pullbacks (Stacks 0986) and exact evaluation, followed by the exact derived-functor comparison. No unit-level route is changed."
+    "lem-weil-pbc-source-affine-wcontractible-evaluation"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "lean_multiple"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 998,
-  "blueprint_uses": [
-    "def-kun-separably-closed",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-geometric-fibre",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-openclosed-point-ulift",
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-  ],
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.Finite.Exact",
-    "declaration": "AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite",
-    "branch": "slopmaster2",
-    "line": 127,
-    "sorry_free": true,
-    "body_lines": 1,
-    "others": [
-      {
-        "module": "WeilConjectures.SixFunctors.Finite.Exact",
-        "declaration": "AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory",
-        "branch": "slopmaster2",
-        "line": 145,
-        "sorry_free": true,
-        "body_lines": 1
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite",
-    "AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory"
-  ],
-  "uses_not_cited": [
-    "def-kun-separably-closed",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-geometric-fibre",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-scheme-conventions",
-    "lemma-openclosed-point-ulift",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "If $h$ is finite, then $h_*$ on etale abelian sheaves is exact.",
-      "proof": "For a short exact sequence $0\\to F_1\\to F_2\\to F_3\\to0$, apply the stalk\nformula at every geometric $\\bar v$. A finite product of short exact\nsequences of abelian groups is exact, so the sequence of stalks of the direct\nimages is exact. Geometric stalks are conservative for etale sheaves:\ninjectivity and surjectivity can be checked after an etale neighbourhood of\neach geometric point and then sheafified. Hence the direct-image sequence is\nexact. Consequently the total right derived functor $Rh_*$ is $h_*$ applied levelwise to\ncomplexes, and in particular $R^qh_*=0$ for $q>0$; only the first of these two consequences\nis formalised.",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite",
-        "AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory"
-      ]
-    },
-    "slopmaster2": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite",
-          "module": "WeilConjectures.SixFunctors.Finite.Exact",
-          "lines": [
-            124,
-            129
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory",
-          "module": "WeilConjectures.SixFunctors.Finite.Exact",
-          "lines": [
-            138,
-            147
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_isFinite",
-          "module": "WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing",
-          "lines": [
-            107,
-            117
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "X-049e2",
-    "group": "E3",
-    "result": "pass",
-    "landing": "20261015T194212-L-1174801",
-    "kind": "interface",
-    "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four DAG records, source statements, unchanged interfaces, forced-adaptation errors, direct-importer compiles, and axiom probes."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f:X\\to Y$ be a finite morphism of schemes and let $\\mathcal A$ be a\nGrothendieck abelian coefficient category for which presheaves on small etale\nsites can be sheafified, which is concrete over sets with a forgetful functor\nthat reflects isomorphisms, preserves filtered colimits and is compatible with\nthe sheaf condition on $Y_{\\Et}$ (for instance $\\mathcal A=\\Mod_\\Lambda$).\nThen the direct image $f_*:\\shv{X_{\\Et},\\mathcal A}\\to\\shv{Y_{\\Et},\\mathcal A}$\nis exact. Consequently, whenever the derived categories of $\\mathcal A$-valued\netale sheaves on $X$ and $Y$ exist and every complex of sheaves on $X$ has a\nK-injective resolution, the total right derived functor $Rf_*$ is isomorphic\nto $f_*$ applied termwise to complexes; in particular $R^qf_*=0$ for $q>0$.",
-    "proof": [
-      {
-        "text": "*Left exactness.* By [def-weil-pbc-direct-image],\n$(f_*G)(V)=G(X\\times_YV)$ for $V\\to Y$ etale. Kernels of sheaves in the\nabelian category $\\shv{X_{\\Et},\\mathcal A}$ (and in\n$\\shv{Y_{\\Et},\\mathcal A}$) are computed sectionwise, so $f_*$ preserves\nkernels and finite products, i.e. finite limits.",
-        "uses": [
-          "def-weil-pbc-direct-image"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Epimorphisms.* Let $\\varphi:G\\to G'$ be an epimorphism of $\\mathcal A$-valued\nsheaves on $X_{\\Et}$. For $s\\in Y$ let $\\bar s$ be the geometric point of $Y$ at\nan algebraic closure of $\\kappa(s)$. Geometric stalks are colimits, so they\npreserve epimorphisms, and by [lemma-weil-pbc-finite-stalk-formula] (which\napplies since $\\overline{\\kappa(s)}$ is algebraically closed) the map\n$(f_*\\varphi)_{\\bar s}$ is identified, naturally in $\\varphi$, with\n$\\prod_{\\bar x}\\varphi_{\\bar x}:\\prod_{\\bar x}G_{\\bar x}\\to\\prod_{\\bar x}G'_{\\bar x}$,\nthe product running over the finite geometric fibre [def-weil-pbc-geometric-fibre]\nof $f$ over $\\bar s$. A finite product of epimorphisms in the abelian category\n$\\mathcal A$ is an epimorphism, so $(f_*\\varphi)_{\\bar s}$ is an epimorphism for\nevery $s\\in Y$. Let $c:f_*G'\\to Q$ be the cokernel of $f_*\\varphi$. Stalks\ncommute with cokernels, so $Q_{\\bar s}=0$ for every $s$, and the map $0\\to Q$\nis an isomorphism on all these geometric stalks; by\n[lemma-weil-pbc-geometric-stalk-conservative] (its hypotheses on $\\mathcal A$\nare among ours, and these geometric points are universe-raised as in\n[lemma-openclosed-point-ulift]) it is an isomorphism, so $Q=0$ and\n$f_*\\varphi$ is an epimorphism.\n\nA left exact functor between abelian categories which preserves epimorphisms\npreserves homology, hence finite colimits; so $f_*$ is exact.",
-        "uses": [
-          "lemma-weil-pbc-finite-stalk-formula",
-          "def-weil-pbc-geometric-fibre",
-          "lemma-weil-pbc-geometric-stalk-conservative",
-          "lemma-openclosed-point-ulift"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Derived functor.* Let $K$ be a complex of $\\mathcal A$-valued sheaves on $X$ and\n$K\\to I$ a K-injective resolution. Then $Rf_*K=f_*I$, and since $f_*$ is exact\nit carries the quasi-isomorphism $K\\to I$ to a quasi-isomorphism\n$f_*K\\to f_*I$. These quasi-isomorphisms are natural in $K$, so they give an\nisomorphism between $Rf_*$ and $f_*$ applied termwise. For a sheaf $F$ placed\nin degree $0$, $R^qf_*F=H^q(f_*F)=0$ for $q>0$.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Reflect finite-colimit preservation from ordinary module sheaves through AdicSheaf.forget, then transfer it to Frobenius-equivariant sheaves with Endofunctor.IsoAlgebra.preservesFiniteColimits_mapOfNatIso. The exact functor comparison singleFunctorCompRightDerivedFunctorIso identifies the derived direct image of a degree-zero object with a degree-zero object. Positive-degree homology of the latter vanishes by DerivedCategory.isZero_of_isLE, and the comparison transports this vanishing to the stated Weil higher direct image.",
+   "uses": [],
+   "elementary": true
   }
+ ],
+ "proof_deps": [
+  "lem-ce-finite-finitely-presented-wcontractible",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-weil-pbc-source-wcontractible-extension",
+  "lemma-openclosed-point-ulift",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-finite-direct-image-exact.md",
+  "place": "Original etale finite-stalk proof retained; E3 stage-3 proof of the attached WeilSheaf vanishing uses finite w-contractible pullbacks (Stacks 0986) and exact evaluation, followed by the exact derived-functor comparison. No unit-level route is changed."
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "lean_multiple"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 998,
+ "blueprint_uses": [
+  "def-kun-separably-closed",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-fibre",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-openclosed-point-ulift",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Finite.Exact",
+  "declaration": "AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite",
+  "branch": "slopmaster2",
+  "line": 127,
+  "sorry_free": true,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.SixFunctors.Finite.Exact",
+    "declaration": "AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory",
+    "branch": "slopmaster2",
+    "line": 145,
+    "sorry_free": true,
+    "body_lines": 1
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite",
+  "AlgebraicGeometry.Etale.rightDerivedFunctorLowerStarIsoMapDerivedCategory"
+ ],
+ "uses_not_cited": [
+  "def-kun-separably-closed",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-fibre",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions",
+  "lemma-openclosed-point-ulift",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "If $h$ is finite, then $h_*$ on etale abelian sheaves is exact.",
+   "proof": "For a short exact sequence $0\\to F_1\\to F_2\\to F_3\\to0$, apply the stalk\nformula at every geometric $\\bar v$. A finite product of short exact\nsequences of abelian groups is exact, so the sequence of stalks of the direct\nimages is exact. Geometric stalks are conservative for etale sheaves:\ninjectivity and surjectivity can be checked after an etale neighbourhood of\neach geometric point and then sheafified. Hence the direct-image sequence is\nexact. Consequently the total right derived functor $Rh_*$ is $h_*$ applied levelwise to\ncomplexes, and in particular $R^qh_*=0$ for $q>0$; only the first of these two consequences\nis formalised.",
+   "cites": []
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-049e2",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261015T194212-L-1174801",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four DAG records, source statements, unchanged interfaces, forced-adaptation errors, direct-importer compiles, and axiom probes."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f:X\\to Y$ be a finite morphism of schemes and let $\\mathcal A$ be a\nGrothendieck abelian coefficient category for which presheaves on small etale\nsites can be sheafified, which is concrete over sets with a forgetful functor\nthat reflects isomorphisms, preserves filtered colimits and is compatible with\nthe sheaf condition on $Y_{\\Et}$ (for instance $\\mathcal A=\\Mod_\\Lambda$).\nThen the direct image $f_*:\\shv{X_{\\Et},\\mathcal A}\\to\\shv{Y_{\\Et},\\mathcal A}$\nis exact. Consequently, whenever the derived categories of $\\mathcal A$-valued\netale sheaves on $X$ and $Y$ exist and every complex of sheaves on $X$ has a\nK-injective resolution, the total right derived functor $Rf_*$ is isomorphic\nto $f_*$ applied termwise to complexes; in particular $R^qf_*=0$ for $q>0$.",
+  "proof": [
+   {
+    "text": "*Left exactness.* By [def-weil-pbc-direct-image],\n$(f_*G)(V)=G(X\\times_YV)$ for $V\\to Y$ etale. Kernels of sheaves in the\nabelian category $\\shv{X_{\\Et},\\mathcal A}$ (and in\n$\\shv{Y_{\\Et},\\mathcal A}$) are computed sectionwise, so $f_*$ preserves\nkernels and finite products, i.e. finite limits.",
+    "uses": [
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Epimorphisms.* Let $\\varphi:G\\to G'$ be an epimorphism of $\\mathcal A$-valued\nsheaves on $X_{\\Et}$. For $s\\in Y$ let $\\bar s$ be the geometric point of $Y$ at\nan algebraic closure of $\\kappa(s)$. Geometric stalks are colimits, so they\npreserve epimorphisms, and by [lemma-weil-pbc-finite-stalk-formula] (which\napplies since $\\overline{\\kappa(s)}$ is algebraically closed) the map\n$(f_*\\varphi)_{\\bar s}$ is identified, naturally in $\\varphi$, with\n$\\prod_{\\bar x}\\varphi_{\\bar x}:\\prod_{\\bar x}G_{\\bar x}\\to\\prod_{\\bar x}G'_{\\bar x}$,\nthe product running over the finite geometric fibre [def-weil-pbc-geometric-fibre]\nof $f$ over $\\bar s$. A finite product of epimorphisms in the abelian category\n$\\mathcal A$ is an epimorphism, so $(f_*\\varphi)_{\\bar s}$ is an epimorphism for\nevery $s\\in Y$. Let $c:f_*G'\\to Q$ be the cokernel of $f_*\\varphi$. Stalks\ncommute with cokernels, so $Q_{\\bar s}=0$ for every $s$, and the map $0\\to Q$\nis an isomorphism on all these geometric stalks; by\n[lemma-weil-pbc-geometric-stalk-conservative] (its hypotheses on $\\mathcal A$\nare among ours, and these geometric points are universe-raised as in\n[lemma-openclosed-point-ulift]) it is an isomorphism, so $Q=0$ and\n$f_*\\varphi$ is an epimorphism.\n\nA left exact functor between abelian categories which preserves epimorphisms\npreserves homology, hence finite colimits; so $f_*$ is exact.",
+    "uses": [
+     "lemma-weil-pbc-finite-stalk-formula",
+     "def-weil-pbc-geometric-fibre",
+     "lemma-weil-pbc-geometric-stalk-conservative",
+     "lemma-openclosed-point-ulift"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Derived functor.* Let $K$ be a complex of $\\mathcal A$-valued sheaves on $X$ and\n$K\\to I$ a K-injective resolution. Then $Rf_*K=f_*I$, and since $f_*$ is exact\nit carries the quasi-isomorphism $K\\to I$ to a quasi-isomorphism\n$f_*K\\to f_*I$. These quasi-isomorphisms are natural in $K$, so they give an\nisomorphism between $Rf_*$ and $f_*$ applied termwise. For a sheaf $F$ placed\nin degree $0$, $R^qf_*F=H^q(f_*F)=0$ for $q>0$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

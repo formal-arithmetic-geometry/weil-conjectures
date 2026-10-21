@@ -1,266 +1,255 @@
 {
-  "id": "lem-kun-affine-direct-image-support-bound",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-kun-0f10",
-      "place": "Proof, affine case of clause (1): \"the affine cases of Tags 0F0X and 0F0V\"; the support estimate of 0F0X supplies the affine morphism case",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-kun-affine-direct-image-support-bound",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f10",
+   "place": "Proof, affine case of clause (1): \"the affine cases of Tags 0F0X and 0F0V\"; the support estimate of 0F0X supplies the affine morphism case",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Affine higher direct images lower the transcendence-degree support bound",
-  "statement": "Let $K$ be a field, let $X,Y$ be schemes of finite type over $K$ [def-weil-scheme-over-base], [def-weil-finite-type-morphism], and let $f:X\\to Y$ be an affine $K$-morphism [def-weil-scheme-over-base], [pqf-def-affine-morphism]. For each integer $b$, put $E_b(T)=\\{t\\in T:\\operatorname{trdeg}_K\\kappa(t)\\leq b\\}$, with $E_b(T)=\\varnothing$ for $b<0$, using [def-kun-support] and [def-kun-transcendence-degree]. Let $a\\geq0$ be an integer and $F$ a torsion abelian etale sheaf on $X$ [def-weil-pbc-torsion-etale-sheaf] whose support is contained in $E_a(X)$. Then, for every $q\\geq0$, the support of $R^qf_*F$ [def-weil-pbc-direct-image] is contained in $E_{a-q}(Y)$.",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0X, lemma-interlude-I, statement (lines 19940-19949)"
-  },
-  "stmt_deps": [
-    "pqf-def-affine-morphism",
-    "def-kun-support",
-    "def-kun-transcendence-degree",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "def-weil-pbc-direct-image",
-    "def-weil-scheme-over-base",
-    "def-weil-finite-type-morphism"
-  ],
-  "proof": [
-    {
-      "text": "Fix $q\\geq0$ and a geometric point $\\bar y$ of $Y$ whose underlying point $y$ has $b=\\operatorname{trdeg}_K\\kappa(y)>a-q$. By [lem-weil-pbc-affine-morphism-permanence], $f$ is quasi-compact and quasi-separated. Apply [prop-weil-pbc-strict-henselization-stalk-formula] to identify $(R^qf_*F)_{\\bar y}$ with $H^q(T,F_T)$, where $S=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$, $T=X\\times_Y S$, and $F_T$ is the inverse image of $F$. It suffices to prove this group zero for each such geometric point, by the definition [def-kun-support].",
-      "uses": [
-        "lem-weil-pbc-affine-morphism-permanence",
-        "prop-weil-pbc-strict-henselization-stalk-formula",
-        "def-kun-support"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F0X, lemma-interlude-I, stalk calculation using Tag 03Q9"
-      }
-    },
-    {
-      "text": "Apply [lem-kun-strict-local-algebraic-residue-models] at $\\bar y$. Write $U=\\operatorname{Spec}A$, $X_U=\\operatorname{Spec}B$ (affineness by [lem-weil-pbc-affine-morphism-permanence]), and $V_i=\\operatorname{Spec}C_i$ for its models over the separably closed field $L$, where $\\operatorname{trdeg}_K L=b$. Set $T_i=\\operatorname{Spec}(B\\otimes_A C_i)$ with projection $p_i:T_i\\to X$ and $F_i=p_i^{-1}F$. The algebra $B$ is generated over $A$ by any finite set of its $K$-algebra generators, so each $T_i$ is affine finite type over $L$. All transition maps are affine. The equality $\\varinjlim_i(B\\otimes_A C_i)=B\\otimes_A(\\varinjlim_i C_i)$ follows from the universal property of tensor product and colimit: a map from either side is a compatible family of pairs of maps from $B,C_i$ agreeing on $A$. Thus $T=\\varprojlim_iT_i$, over $X$. This uses no closed embedding into affine space.",
-      "uses": [
-        "lem-kun-strict-local-algebraic-residue-models",
-        "lem-weil-pbc-affine-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tags 0F0U and 0F0X, compatible-etale-model approximation; applied directly to an affine morphism"
-      }
-    },
-    {
-      "text": "For a point $z\\in T_i$ put $x=p_i(z)$, and let $v\\in V_i$ and $u\\in U$ be its other images. The model lemma gives $\\kappa(v)/\\kappa(u)$ algebraic. The fibre of $T_i\\to X_U$ at $x$ is obtained from $V_i$ by extending scalars from $\\kappa(u)$ to $\\kappa(x)$; its residue fields over $v$ are residue fields of $\\kappa(x)\\otimes_{\\kappa(u)}\\kappa(v)$. This tensor product is integral over $\\kappa(x)$, since each element of the algebraic extension $\\kappa(v)$ satisfies a monic polynomial and any finite collection lies in a finite field extension. Its prime quotients are algebraic fields. Hence $\\kappa(z)/\\kappa(x)$ is algebraic. By [lemma-openclosed-stalk-upperstar], a nonzero stalk of $F_i$ maps to a nonzero stalk of $F$; thus such an $x$ has $\\operatorname{trdeg}_K\\kappa(x)\\leq a$. Also $F_i$ is torsion, by the same stalk formula and [lem-weil-pbc-torsion-sheaf-characterizations].",
-      "uses": [
-        "lem-kun-strict-local-algebraic-residue-models",
-        "lemma-openclosed-stalk-upperstar",
-        "lem-weil-pbc-torsion-sheaf-characterizations"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F0X, lemma-interlude-I, residue-extension and support calculation (using compatible models)"
-      }
-    },
-    {
-      "text": "For a point $z$ in the support of $F_i$, apply [lem-kun-transcendence-degree-tower] first to $K\\subseteq\\kappa(x)\\subseteq\\kappa(z)$ and then to $K\\subseteq L\\subseteq\\kappa(z)$. The algebraic extension in the previous step has transcendence degree zero, so $b+\\operatorname{trdeg}_L\\kappa(z)=\\operatorname{trdeg}_K\\kappa(z)=\\operatorname{trdeg}_K\\kappa(x)\\leq a$. If $b>a$ no such $z$ exists. In that case all geometric stalks of $F_i$ vanish, and [lemma-weil-pbc-geometric-stalk-conservative] applied to $0\\to F_i$ gives $F_i=0$, so its cohomology is zero in every degree. If $b\\leq a$, the displayed inequality gives $\\operatorname{trdeg}_L\\kappa(z)\\leq a-b$. Apply [lem-kun-affine-support-vanishing] to the affine finite-type $L$-scheme $T_i$ and torsion sheaf $F_i$, with nonnegative bound $c=a-b$. It gives $H^q(T_i,F_i)=0$ whenever $q>a-b$, which is exactly the inequality $b>a-q$ fixed in step 1.",
-      "uses": [
-        "lem-kun-transcendence-degree-tower",
-        "lemma-weil-pbc-geometric-stalk-conservative",
-        "lem-kun-affine-support-vanishing"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F0X, lemma-interlude-I, vanishing via Tag 0F0W, including the negative support-bound case"
-      }
-    },
-    {
-      "text": "The sheaves $F_i$ have the canonical pullback transition isomorphisms since all are inverse images of $F$ along the compatible maps to $X$. On $T$ their pullbacks are all $F_T$, so their filtered colimit is $F_T$. All schemes $T_i$ are affine, hence quasi-compact and quasi-separated; the index category is small and cofiltered, and transitions are affine by step 2. Apply [lem-weil-pbc-cofiltered-etale-cohomology-continuity] to get $H^q(T,F_T)=\\varinjlim_iH^q(T_i,F_i)=0$. Step 1 now gives $(R^qf_*F)_{\\bar y}=0$ for every geometric point above every $y$ with $b>a-q$. By [def-kun-support] this is precisely the claimed support containment. This also covers $q=0$, $q>a$, and the empty scheme.",
-      "uses": [
-        "lem-weil-pbc-cofiltered-etale-cohomology-continuity",
-        "def-kun-support"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F0X, lemma-interlude-I, final passage to the limit by Tag 09YQ"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Affine higher direct images lower the transcendence-degree support bound",
+ "statement": "Let $K$ be a field, let $X,Y$ be schemes of finite type over $K$ [def-weil-scheme-over-base], [def-weil-finite-type-morphism], and let $f:X\\to Y$ be an affine $K$-morphism [def-weil-scheme-over-base], [pqf-def-affine-morphism]. For each integer $b$, put $E_b(T)=\\{t\\in T:\\operatorname{trdeg}_K\\kappa(t)\\leq b\\}$, with $E_b(T)=\\varnothing$ for $b<0$, using [def-kun-support] and [def-kun-transcendence-degree]. Let $a\\geq0$ be an integer and $F$ a torsion abelian etale sheaf on $X$ [def-weil-pbc-torsion-etale-sheaf] whose support is contained in $E_a(X)$. Then, for every $q\\geq0$, the support of $R^qf_*F$ [def-weil-pbc-direct-image] is contained in $E_{a-q}(Y)$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0X, lemma-interlude-I, statement (lines 19940-19949)"
+ },
+ "stmt_deps": [
+  "pqf-def-affine-morphism",
+  "def-kun-support",
+  "def-kun-transcendence-degree",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix $q\\geq0$ and a geometric point $\\bar y$ of $Y$ whose underlying point $y$ has $b=\\operatorname{trdeg}_K\\kappa(y)>a-q$. By [lem-weil-pbc-affine-morphism-permanence], $f$ is quasi-compact and quasi-separated. Apply [prop-weil-pbc-strict-henselization-stalk-formula] to identify $(R^qf_*F)_{\\bar y}$ with $H^q(T,F_T)$, where $S=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$, $T=X\\times_Y S$, and $F_T$ is the inverse image of $F$. It suffices to prove this group zero for each such geometric point, by the definition [def-kun-support].",
+   "uses": [
     "lem-weil-pbc-affine-morphism-permanence",
     "prop-weil-pbc-strict-henselization-stalk-formula",
-    "def-kun-support",
+    "def-kun-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0X, lemma-interlude-I, stalk calculation using Tag 03Q9"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-strict-local-algebraic-residue-models] at $\\bar y$. Write $U=\\operatorname{Spec}A$, $X_U=\\operatorname{Spec}B$ (affineness by [lem-weil-pbc-affine-morphism-permanence]), and $V_i=\\operatorname{Spec}C_i$ for its models over the separably closed field $L$, where $\\operatorname{trdeg}_K L=b$. Set $T_i=\\operatorname{Spec}(B\\otimes_A C_i)$ with projection $p_i:T_i\\to X$ and $F_i=p_i^{-1}F$. The algebra $B$ is generated over $A$ by any finite set of its $K$-algebra generators, so each $T_i$ is affine finite type over $L$. All transition maps are affine. The equality $\\varinjlim_i(B\\otimes_A C_i)=B\\otimes_A(\\varinjlim_i C_i)$ follows from the universal property of tensor product and colimit: a map from either side is a compatible family of pairs of maps from $B,C_i$ agreeing on $A$. Thus $T=\\varprojlim_iT_i$, over $X$. This uses no closed embedding into affine space.",
+   "uses": [
+    "lem-kun-strict-local-algebraic-residue-models",
+    "lem-weil-pbc-affine-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0F0U and 0F0X, compatible-etale-model approximation; applied directly to an affine morphism"
+   }
+  },
+  {
+   "text": "For a point $z\\in T_i$ put $x=p_i(z)$, and let $v\\in V_i$ and $u\\in U$ be its other images. The model lemma gives $\\kappa(v)/\\kappa(u)$ algebraic. The fibre of $T_i\\to X_U$ at $x$ is obtained from $V_i$ by extending scalars from $\\kappa(u)$ to $\\kappa(x)$; its residue fields over $v$ are residue fields of $\\kappa(x)\\otimes_{\\kappa(u)}\\kappa(v)$. This tensor product is integral over $\\kappa(x)$, since each element of the algebraic extension $\\kappa(v)$ satisfies a monic polynomial and any finite collection lies in a finite field extension. Its prime quotients are algebraic fields. Hence $\\kappa(z)/\\kappa(x)$ is algebraic. By [lemma-openclosed-stalk-upperstar], a nonzero stalk of $F_i$ maps to a nonzero stalk of $F$; thus such an $x$ has $\\operatorname{trdeg}_K\\kappa(x)\\leq a$. Also $F_i$ is torsion, by the same stalk formula and [lem-weil-pbc-torsion-sheaf-characterizations].",
+   "uses": [
     "lem-kun-strict-local-algebraic-residue-models",
     "lemma-openclosed-stalk-upperstar",
-    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0X, lemma-interlude-I, residue-extension and support calculation (using compatible models)"
+   }
+  },
+  {
+   "text": "For a point $z$ in the support of $F_i$, apply [lem-kun-transcendence-degree-tower] first to $K\\subseteq\\kappa(x)\\subseteq\\kappa(z)$ and then to $K\\subseteq L\\subseteq\\kappa(z)$. The algebraic extension in the previous step has transcendence degree zero, so $b+\\operatorname{trdeg}_L\\kappa(z)=\\operatorname{trdeg}_K\\kappa(z)=\\operatorname{trdeg}_K\\kappa(x)\\leq a$. If $b>a$ no such $z$ exists. In that case all geometric stalks of $F_i$ vanish, and [lemma-weil-pbc-geometric-stalk-conservative] applied to $0\\to F_i$ gives $F_i=0$, so its cohomology is zero in every degree. If $b\\leq a$, the displayed inequality gives $\\operatorname{trdeg}_L\\kappa(z)\\leq a-b$. Apply [lem-kun-affine-support-vanishing] to the affine finite-type $L$-scheme $T_i$ and torsion sheaf $F_i$, with nonnegative bound $c=a-b$. It gives $H^q(T_i,F_i)=0$ whenever $q>a-b$, which is exactly the inequality $b>a-q$ fixed in step 1.",
+   "uses": [
     "lem-kun-transcendence-degree-tower",
     "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-kun-affine-support-vanishing",
-    "lem-weil-pbc-cofiltered-etale-cohomology-continuity"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-kun-affine-support-vanishing"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0X, lemma-interlude-I, with the compatible models of the proof of Tag 0F0U and direct treatment of affine f"
+    "place": "Tag 0F0X, lemma-interlude-I, vanishing via Tag 0F0W, including the negative support-bound case"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "higherDirectImage|higher_direct_image|etale.*support",
-      "results": "0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For an affine morphism of finite type schemes over a field, higher etale direct image lowers the transcendence degree of support by its degree",
-      "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.IsEtaleAt.comp, Algebra.Etale.comp, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra, Algebra.Etale.exists_subalgebra_fg",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
-    },
-    {
-      "tool": "leansearch",
-      "query": "etale cohomological dimension bound using transcendence degree of support for affine morphism",
-      "results": "unavailable: service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Sheaf.H\"",
-      "results": "12 hits: CategoryTheory.Sheaf.homEquiv, CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi, CategoryTheory.Sheaf.Hom.mono_of_presheaf_mono, CategoryTheory.Presheaf.IsSheaf.hom_ext_ofArrows, CategoryTheory.Presheaf.IsSheaf.hom_ext, CategoryTheory.Sheaf.hom_ext, CategoryTheory.Sheaf.hom_ext_iff, CategoryTheory.Presheaf.homEquivAmalgamation",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
-    },
-    {
-      "tool": "grep",
-      "query": "support.*rightDerived|rightDerived.*support|transcendence.*cohomolog",
-      "results": "0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"support\", \"rightDerived\"",
-      "results": "0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Support of higher direct images under an affine morphism over a field is bounded by transcendence degree minus the cohomology degree",
-      "results": "8 hits: AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
-      "date": "2026-10-14",
-      "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
-    },
-    {
-      "tool": "grep",
-      "query": "cohomological.*dimension|support.*derived|derived.*support",
-      "results": "0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "no match: ideal-sheaf support and algebraic etale loci do not state an abelian etale derived-pushforward support bound"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Vanishing and support of right derived pushforward of torsion sheaves on the small etale site for affine scheme maps",
-      "results": "8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
-      "date": "2026-10-14",
-      "verdict": "no match: ideal-sheaf support and algebraic etale loci do not state an abelian etale derived-pushforward support bound"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Sheaf\", \"support\"",
-      "results": "12 hits: AlgebraicGeometry.Scheme.IdealSheafData.supportSet, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_support, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.Scheme.IdealSheafData.support_radical, AlgebraicGeometry.Scheme.IdealSheafData.support_pow, AlgebraicGeometry.Scheme.IdealSheafData.support_pow_succ",
-      "date": "2026-10-14",
-      "verdict": "no match: ideal-sheaf support and algebraic etale loci do not state an abelian etale derived-pushforward support bound"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-kun-0f10",
-    "by": "worker",
-    "date": "2026-10-14"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "merged_into": null,
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-kun-affine-direct-image-support-bound",
-    "worker": "stage1",
-    "summary": "Statement unchanged. Proved stalkwise using compatible strict-local models with algebraic residue-field extensions, absolute affine support vanishing and cohomology continuity. Avoided the unjustified arbitrary-subalgebra inference in the source; included negative bounds and q=0. Three new nodes, one a Mathlib leaf.",
-    "blueprint": "lem-kun-0f10, affine case of clause (1): the support estimate 0F0X. The approximation, support calculation and vanishing of 0F0X are written in five steps; affine-space embeddings are unnecessary for affine f.",
-    "tool_uses": [
-      {
-        "node": "prop-weil-pbc-strict-henselization-stalk-formula",
-        "why": "Generic Strict-henselization stalk formula used in the 0F0X stalk-and-continuity argument; this unit supplies no replacement."
-      },
-      {
-        "node": "lemma-openclosed-stalk-upperstar",
-        "why": "Generic Stalks of a pullback used in the 0F0X stalk-and-continuity argument; this unit supplies no replacement."
-      },
-      {
-        "node": "lem-weil-pbc-torsion-sheaf-characterizations",
-        "why": "Generic Characterizations of torsion abelian sheaves on the etale site used in the 0F0X stalk-and-continuity argument; this unit supplies no replacement."
-      },
-      {
-        "node": "lemma-weil-pbc-geometric-stalk-conservative",
-        "why": "Generic Conservativity of geometric stalks used in the 0F0X stalk-and-continuity argument; this unit supplies no replacement."
-      },
-      {
-        "node": "lem-weil-pbc-cofiltered-etale-cohomology-continuity",
-        "why": "Generic Ordinary etale continuity for small cofiltered categories used in the 0F0X stalk-and-continuity argument; this unit supplies no replacement."
-      }
-    ]
-  },
-  "tool_uses": [
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "lemma-openclosed-stalk-upperstar",
-    "lem-weil-pbc-torsion-sheaf-characterizations",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-cofiltered-etale-cohomology-continuity"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NU-aae0c9d44",
-    "group": "NU",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-aae0c9d44 (reviewer sub-agent of L); spot-checked: Read all mathematics and sources in full. The five-step support-bound proof, compatible strict-local models, absolute vanishing input, and Mathlib tower leaf pass; the reported Stacks subalgebra error is verified. Exact upstream condensed coefficients and base-change direction checked without assuming comparison theorems. Repaired incomplete metadata in all three new nodes; statements unchanged. Details in review.md.; 3 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.AffineDirectImageSupportBound",
-    "declaration": "AlgebraicGeometry.Scheme.affine_direct_image_support_bound",
-    "file": "lean/Sheaf/AlgebraicGeometry/AffineDirectImageSupportBound.lean",
-    "statement": "theorem affine_direct_image_support_bound {K : Type u} [Field K] {X Y : Scheme.{u}} [X.Over (Spec (.of K))] [Y.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] [LocallyOfFiniteType (Y ↘ Spec (.of K))] [QuasiCompact (Y ↘ Spec (.of K))] (f : X ⟶ Y) [f.IsOver (Spec (.of K))] [IsAffineHom f] (a : ℤ) (ha : 0 ≤ a) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : IsTorsionAbelianSheaf F) (hsupport : etaleSheafSupport F ⊆ (X ↘ Spec (.of K)).pointsOfTrdegLE a.toNat) (q : ℕ) : etaleSheafSupport ((DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((Etale.rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) ⊆ {y | 0 ≤ a - (q : ℤ) ∧ y ∈ (Y ↘ Spec (.of K)).pointsOfTrdegLE (a - (q : ℤ)).toNat}",
-    "branch": "newtargets-dag",
-    "by": "NY",
-    "date": "2026-10-15",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-45f9e40ac",
-    "group": "NY",
-    "result": "pass",
-    "note": "Verified immutable files, source and all statement dependencies, exact signature, edge cases, report sections, and maintainer gates. Server-only scompile passed in 2.7 seconds. No repository or branch changes."
+  {
+   "text": "The sheaves $F_i$ have the canonical pullback transition isomorphisms since all are inverse images of $F$ along the compatible maps to $X$. On $T$ their pullbacks are all $F_T$, so their filtered colimit is $F_T$. All schemes $T_i$ are affine, hence quasi-compact and quasi-separated; the index category is small and cofiltered, and transitions are affine by step 2. Apply [lem-weil-pbc-cofiltered-etale-cohomology-continuity] to get $H^q(T,F_T)=\\varinjlim_iH^q(T_i,F_i)=0$. Step 1 now gives $(R^qf_*F)_{\\bar y}=0$ for every geometric point above every $y$ with $b>a-q$. By [def-kun-support] this is precisely the claimed support containment. This also covers $q=0$, $q>a$, and the empty scheme.",
+   "uses": [
+    "lem-weil-pbc-cofiltered-etale-cohomology-continuity",
+    "def-kun-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0X, lemma-interlude-I, final passage to the limit by Tag 09YQ"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-permanence",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "def-kun-support",
+  "lem-kun-strict-local-algebraic-residue-models",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lem-kun-transcendence-degree-tower",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-affine-support-vanishing",
+  "lem-weil-pbc-cofiltered-etale-cohomology-continuity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0X, lemma-interlude-I, with the compatible models of the proof of Tag 0F0U and direct treatment of affine f"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "higherDirectImage|higher_direct_image|etale.*support",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an affine morphism of finite type schemes over a field, higher etale direct image lowers the transcendence degree of support by its degree",
+   "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.IsEtaleAt.comp, Algebra.Etale.comp, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra, Algebra.Etale.exists_subalgebra_fg",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale cohomological dimension bound using transcendence degree of support for affine morphism",
+   "results": "unavailable: service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf.H\"",
+   "results": "12 hits: CategoryTheory.Sheaf.homEquiv, CategoryTheory.Sheaf.Hom.epi_of_presheaf_epi, CategoryTheory.Sheaf.Hom.mono_of_presheaf_mono, CategoryTheory.Presheaf.IsSheaf.hom_ext_ofArrows, CategoryTheory.Presheaf.IsSheaf.hom_ext, CategoryTheory.Sheaf.hom_ext, CategoryTheory.Sheaf.hom_ext_iff, CategoryTheory.Presheaf.homEquivAmalgamation",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*rightDerived|rightDerived.*support|transcendence.*cohomolog",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"support\", \"rightDerived\"",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Support of higher direct images under an affine morphism over a field is bounded by transcendence degree minus the cohomology degree",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter, AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Scheme.IdealSheafData.mem_support_iff, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-14",
+   "verdict": "no match: hits do not state the torsion etale higher-direct-image support estimate"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomological.*dimension|support.*derived|derived.*support",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: ideal-sheaf support and algebraic etale loci do not state an abelian etale derived-pushforward support bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing and support of right derived pushforward of torsion sheaves on the small etale site for affine scheme maps",
+   "results": "8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-14",
+   "verdict": "no match: ideal-sheaf support and algebraic etale loci do not state an abelian etale derived-pushforward support bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"support\"",
+   "results": "12 hits: AlgebraicGeometry.Scheme.IdealSheafData.supportSet, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal_support, AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support, AlgebraicGeometry.Scheme.IdealSheafData.support, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet, AlgebraicGeometry.Scheme.IdealSheafData.support_radical, AlgebraicGeometry.Scheme.IdealSheafData.support_pow, AlgebraicGeometry.Scheme.IdealSheafData.support_pow_succ",
+   "date": "2026-10-14",
+   "verdict": "no match: ideal-sheaf support and algebraic etale loci do not state an abelian etale derived-pushforward support bound"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-kun-0f10",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "merged_into": null,
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-affine-direct-image-support-bound",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved stalkwise using compatible strict-local models with algebraic residue-field extensions, absolute affine support vanishing and cohomology continuity. Avoided the unjustified arbitrary-subalgebra inference in the source; included negative bounds and q=0. Three new nodes, one a Mathlib leaf.",
+  "blueprint": "lem-kun-0f10, affine case of clause (1): the support estimate 0F0X. The approximation, support calculation and vanishing of 0F0X are written in five steps; affine-space embeddings are unnecessary for affine f.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "Generic Strict-henselization stalk formula used in the 0F0X stalk-and-continuity argument; this unit supplies no replacement."
+   },
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Generic Stalks of a pullback used in the 0F0X stalk-and-continuity argument; this unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-torsion-sheaf-characterizations",
+    "why": "Generic Characterizations of torsion abelian sheaves on the etale site used in the 0F0X stalk-and-continuity argument; this unit supplies no replacement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks used in the 0F0X stalk-and-continuity argument; this unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-cofiltered-etale-cohomology-continuity",
+    "why": "Generic Ordinary etale continuity for small cofiltered categories used in the 0F0X stalk-and-continuity argument; this unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-cofiltered-etale-cohomology-continuity"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-aae0c9d44",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-aae0c9d44 (reviewer sub-agent of L); spot-checked: Read all mathematics and sources in full. The five-step support-bound proof, compatible strict-local models, absolute vanishing input, and Mathlib tower leaf pass; the reported Stacks subalgebra error is verified. Exact upstream condensed coefficients and base-change direction checked without assuming comparison theorems. Repaired incomplete metadata in all three new nodes; statements unchanged. Details in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineDirectImageSupportBound",
+  "declaration": "AlgebraicGeometry.Scheme.affine_direct_image_support_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineDirectImageSupportBound.lean",
+  "statement": "theorem affine_direct_image_support_bound {K : Type u} [Field K] {X Y : Scheme.{u}} [X.Over (Spec (.of K))] [Y.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] [LocallyOfFiniteType (Y ↘ Spec (.of K))] [QuasiCompact (Y ↘ Spec (.of K))] (f : X ⟶ Y) [f.IsOver (Spec (.of K))] [IsAffineHom f] (a : ℤ) (ha : 0 ≤ a) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : IsTorsionAbelianSheaf F) (hsupport : etaleSheafSupport F ⊆ (X ↘ Spec (.of K)).pointsOfTrdegLE a.toNat) (q : ℕ) : etaleSheafSupport ((DerivedCategory.Plus.homologyFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)).obj ((Etale.rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj ((DerivedCategory.Plus.singleFunctor (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F))) ⊆ {y | 0 ≤ a - (q : ℤ) ∧ y ∈ (Y ↘ Spec (.of K)).pointsOfTrdegLE (a - (q : ℤ)).toNat}",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-45f9e40ac",
+  "group": "NY",
+  "result": "pass",
+  "note": "Verified immutable files, source and all statement dependencies, exact signature, edge cases, report sections, and maintainer gates. Server-only scompile passed in 2.7 seconds. No repository or branch changes."
+ }
 }

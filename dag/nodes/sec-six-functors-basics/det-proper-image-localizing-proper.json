@@ -1,252 +1,241 @@
 {
-  "id": "det-proper-image-localizing-proper",
-  "blueprint": {
-    "is": "det-proper-image-localizing-proper",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Proper direct image on the localizing categories",
-  "statement": "Fix a prime $\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside it, with valuation ring $\\mathcal O_E$. An admissible coefficient $\\Lambda$ is a finite commutative ring $A$ annihilated by a power of $\\ell$, or one of $\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Qlb$ [sk-def-localizing-closure]; use the condensed coefficient conventions, in particular the finite-subextension convention for $\\Qlb$ [sk-def-sfb-qlbar-condensed]. Write $D(X_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_X})$ for the ordinary unbounded module-object derived category, $\\Dctf(X,\\Lambda)$ for its bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible], $\\Loc(\\Dctf(X,\\Lambda))$ for their replete triangulated closure under all small ambient direct sums [sk-def-localizing-closure], and $Rp_*$ for the total right derived module-object pushforward [sk-def-sfb-module-derived-pushpull].\n\nLet $p:X\\to Y$ be proper [def-weil-proper-morphism]. Suppose $Rp_*$ maps $\\Dctf(X,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$ and preserves direct sums of objects of $\\Loc(\\Dctf(X,\\Lambda))$. Then $Rp_*$ restricts to an exact (triangulated), sum-preserving functor $\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y,\\Lambda))$ [def-weil-triangulated-category].\n\nFor the following coefficient assertions, work in the standing scheme setting [sk-def-sfb-dc-setting]: $k$ is a field of characteristic $r>0$ different from $\\ell$, $X,Y$ are separated and of finite type over $k$, and $p$ is a proper $k$-morphism. Both hypotheses above hold for $\\Lambda=E,\\Qlb$, for finite $\\Lambda=A$, and for $\\Lambda=\\mathcal O_E$. The cases $\\mathbf Q_\\ell$ and $\\mathbf Z_\\ell$ are included by taking $E=\\mathbf Q_\\ell$.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.md",
-    "place": "node det-proper-image-localizing-proper, order None"
-  },
-  "stmt_deps": [
-    "sk-def-localizing-closure",
-    "sk-def-sfb-qlbar-condensed",
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-module-derived-pushpull",
-    "def-weil-proper-morphism",
-    "def-weil-triangulated-category",
-    "sk-def-sfb-dc-setting"
-  ],
-  "proof": [
-    {
-      "text": "The module-object pushforward $p_*$ is additive by [sk-def-sfb-module-pushforward-pullback], and $Rp_*$ is its total right derived functor computed on K-injectives by [sk-def-sfb-module-derived-pushpull]. Hence [lem-pc-right-derived-functor-triangulated] makes $Rp_*$ exact on the ambient unbounded derived categories. Put $\\mathcal L_X=\\Loc(\\Dctf(X,\\Lambda))$ and $\\mathcal L_Y=\\Loc(\\Dctf(Y,\\Lambda))$, and let $\\mathcal S$ be the full subcategory of $\\mathcal L_X$ on objects $K$ with $Rp_*K\\in\\mathcal L_Y$. By [sk-def-localizing-closure], both $\\mathcal L_X,\\mathcal L_Y$ are replete triangulated subcategories closed under small ambient sums. Exactness implies $Rp_*0\\simeq0$, commutation with shifts, and preservation of distinguished triangles, so $\\mathcal S$ contains zero, is replete, is closed under both shifts, and contains the third vertex of a distinguished triangle whenever it contains the other two. It contains $\\Dctf(X,\\Lambda)$ by the first hypothesis. For a small family $(K_s)$ in $\\mathcal S$, its ambient sum lies in $\\mathcal L_X$, and the second hypothesis gives $Rp_*(\\bigoplus_sK_s)\\simeq\\bigoplus_sRp_*K_s\\in\\mathcal L_Y$. Thus $\\mathcal S$ is itself a localizing subcategory of the ambient source containing the generators. Minimality in [sk-def-localizing-closure] gives $\\mathcal L_X\\subseteq\\mathcal S$; the reverse inclusion is its definition. The restriction is exact by [lem-weil-pbc-triangulated-functor-restriction]. Its sums are the ambient sums: maps from the ambient coproduct to any object of the full subcategory have the same universal property there. Thus the assumed ambient sum comparison also proves sum preservation of the restricted functor. No sum preservation outside $\\mathcal L_X$ was used. For the Lean size conventions, [lem-grothendieck-derived-has-coproducts] supplies ambient coproducts indexed in the Hom universe. The source closure is closed under those coproducts by lifting the indexing type and then reindexing. To cover larger existing coproducts, their nonzero summands inject into the endomorphisms of their coproduct by projection-inclusion idempotents, and hence form a Hom-universe small set. Reindex to that set, apply preservation there, and reinsert the zero summands. Thus the asserted preservation covers the original indexing universe without assuming unavailable large ambient coproducts.",
-      "uses": [
-        "sk-def-sfb-module-pushforward-pullback",
-        "sk-def-sfb-module-derived-pushpull",
-        "lem-pc-right-derived-functor-triangulated",
-        "sk-def-localizing-closure",
-        "lem-weil-pbc-triangulated-functor-restriction",
-        "lem-grothendieck-derived-has-coproducts"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
-        "place": "First paragraph: restricted-sum localizing argument; ambient exactness and restriction made explicit."
-      }
-    },
-    {
-      "text": "For $\\Lambda=E$ or $\\Qlb$, the standing schemes $X,Y$ are qcqs by [lem-weil-pbc-qcqs-over-affine], applied to their separated finite-type structure maps to $\\operatorname{Spec}k$. Apply [det-def-localizing-closure-ctf-equals-bc] to each: $\\Dctf=\\Dbc$ and their localizing closures agree. Clause (2) of [det-thm-sfb-proper-base-change-rational] now gives preservation of $\\Dctf$ by $Rp_*$. Clause (3) of [det-ambient-ind-derived-sums] puts $\\Loc(\\Dbc(X,\\Lambda))$ inside $\\Dic(X,\\Lambda)$. For every small family in that localizing closure, [sk-lem-proper-unbounded-window-ii] therefore gives precisely the ambient direct-sum comparison required in Step 1. Both hypotheses follow, so Step 1 supplies the exact sum-preserving restriction in these two cases.",
-      "uses": [
-        "lem-weil-pbc-qcqs-over-affine",
-        "det-def-localizing-closure-ctf-equals-bc",
-        "det-thm-sfb-proper-base-change-rational",
-        "det-ambient-ind-derived-sums",
-        "sk-lem-proper-unbounded-window-ii"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
-        "place": "Second paragraph, rational coefficient case: bounded constructibility, equality with Dctf, and sums on Dic."
-      }
-    },
-    {
-      "text": "For a finite commutative $\\ell$-primary ring $A$, clause (1) of [det-ctf-finite-proper-localizing] gives $Rp_*\\Dctf(X,A)\\subseteq\\Dctf(Y,A)$ and an exact sum-preserving restriction on the localizing closures. Because these closures are full and closed under ambient sums, their coproducts are ambient coproducts, so its sum comparison is exactly the second hypothesis of Step 1. Both hypotheses hold for finite $A$. No equality $\\Dctf=\\Dbc$ is needed or asserted for a nonregular finite ring.",
-      "uses": [
-        "det-ctf-finite-proper-localizing"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
-        "place": "Second paragraph, final sentence: finite coefficient case quoted there; expanded using the existing finite localizing theorem."
-      }
-    },
-    {
-      "text": "For $\\Lambda=\\mathcal O_E$, [lem-weil-pbc-qcqs-over-affine] again makes $X,Y$ qcqs, so [det-def-localizing-closure-ctf-equals-bc] identifies $\\Dctf$ with $\\Dbc$ on both schemes and identifies their localizing closures. Clause (1) of [det-thm-sfb-proper-base-change-integral] sends $\\Dbc(X,\\mathcal O_E)$ into $\\Dbc(Y,\\mathcal O_E)$, giving the first hypothesis. Properness includes finite type by [def-weil-proper-morphism], and $Y$ is quasi-compact; thus [lem-fin-finite-type-fibre-dimension-bound] supplies a uniform integer $d\\ge0$ bounding the dimensions of all fibres of $p$. Clause (3) of [det-prop-int-compactness-direct-sums] applies with this bound and gives sum preservation on $\\Loc(\\Dbc(X,\\mathcal O_E))$, hence on $\\Loc(\\Dctf(X,\\mathcal O_E))$. These are ambient sums by fullness and ambient sum closure, as in Step 1. This is the second hypothesis, and Step 1 proves the integral restriction. Setting $E=\\mathbf Q_\\ell$ in this step and Step 2 gives the $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ cases respectively.",
-      "uses": [
-        "lem-weil-pbc-qcqs-over-affine",
-        "det-def-localizing-closure-ctf-equals-bc",
-        "det-thm-sfb-proper-base-change-integral",
-        "def-weil-proper-morphism",
-        "lem-fin-finite-type-fibre-dimension-bound",
-        "det-prop-int-compactness-direct-sums"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
-        "place": "Second paragraph, final sentence: integral case quoted there; explicit bounded-constructible preservation and fibre-bound hypothesis."
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "det-proper-image-localizing-proper",
+ "blueprint": {
+  "is": "det-proper-image-localizing-proper",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Proper direct image on the localizing categories",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and a finite extension $E/\\mathbf Q_\\ell$ inside it, with valuation ring $\\mathcal O_E$. An admissible coefficient $\\Lambda$ is a finite commutative ring $A$ annihilated by a power of $\\ell$, or one of $\\mathbf Z_\\ell,\\mathcal O_E,\\mathbf Q_\\ell,E,\\Qlb$ [sk-def-localizing-closure]; use the condensed coefficient conventions, in particular the finite-subextension convention for $\\Qlb$ [sk-def-sfb-qlbar-condensed]. Write $D(X_{\\mathrm{proét}},\\Lambda)=D(\\Mod_{\\Lambda_X})$ for the ordinary unbounded module-object derived category, $\\Dctf(X,\\Lambda)$ for its bounded constructible complexes of finite Tor amplitude [sk-def-sfb-constructible], $\\Loc(\\Dctf(X,\\Lambda))$ for their replete triangulated closure under all small ambient direct sums [sk-def-localizing-closure], and $Rp_*$ for the total right derived module-object pushforward [sk-def-sfb-module-derived-pushpull].\n\nLet $p:X\\to Y$ be proper [def-weil-proper-morphism]. Suppose $Rp_*$ maps $\\Dctf(X,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$ and preserves direct sums of objects of $\\Loc(\\Dctf(X,\\Lambda))$. Then $Rp_*$ restricts to an exact (triangulated), sum-preserving functor $\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y,\\Lambda))$ [def-weil-triangulated-category].\n\nFor the following coefficient assertions, work in the standing scheme setting [sk-def-sfb-dc-setting]: $k$ is a field of characteristic $r>0$ different from $\\ell$, $X,Y$ are separated and of finite type over $k$, and $p$ is a proper $k$-morphism. Both hypotheses above hold for $\\Lambda=E,\\Qlb$, for finite $\\Lambda=A$, and for $\\Lambda=\\mathcal O_E$. The cases $\\mathbf Q_\\ell$ and $\\mathbf Z_\\ell$ are included by taking $E=\\mathbf Q_\\ell$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.md",
+  "place": "node det-proper-image-localizing-proper, order None"
+ },
+ "stmt_deps": [
+  "sk-def-localizing-closure",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-module-derived-pushpull",
+  "def-weil-proper-morphism",
+  "def-weil-triangulated-category",
+  "sk-def-sfb-dc-setting"
+ ],
+ "proof": [
+  {
+   "text": "The module-object pushforward $p_*$ is additive by [sk-def-sfb-module-pushforward-pullback], and $Rp_*$ is its total right derived functor computed on K-injectives by [sk-def-sfb-module-derived-pushpull]. Hence [lem-pc-right-derived-functor-triangulated] makes $Rp_*$ exact on the ambient unbounded derived categories. Put $\\mathcal L_X=\\Loc(\\Dctf(X,\\Lambda))$ and $\\mathcal L_Y=\\Loc(\\Dctf(Y,\\Lambda))$, and let $\\mathcal S$ be the full subcategory of $\\mathcal L_X$ on objects $K$ with $Rp_*K\\in\\mathcal L_Y$. By [sk-def-localizing-closure], both $\\mathcal L_X,\\mathcal L_Y$ are replete triangulated subcategories closed under small ambient sums. Exactness implies $Rp_*0\\simeq0$, commutation with shifts, and preservation of distinguished triangles, so $\\mathcal S$ contains zero, is replete, is closed under both shifts, and contains the third vertex of a distinguished triangle whenever it contains the other two. It contains $\\Dctf(X,\\Lambda)$ by the first hypothesis. For a small family $(K_s)$ in $\\mathcal S$, its ambient sum lies in $\\mathcal L_X$, and the second hypothesis gives $Rp_*(\\bigoplus_sK_s)\\simeq\\bigoplus_sRp_*K_s\\in\\mathcal L_Y$. Thus $\\mathcal S$ is itself a localizing subcategory of the ambient source containing the generators. Minimality in [sk-def-localizing-closure] gives $\\mathcal L_X\\subseteq\\mathcal S$; the reverse inclusion is its definition. The restriction is exact by [lem-weil-pbc-triangulated-functor-restriction]. Its sums are the ambient sums: maps from the ambient coproduct to any object of the full subcategory have the same universal property there. Thus the assumed ambient sum comparison also proves sum preservation of the restricted functor. No sum preservation outside $\\mathcal L_X$ was used. For the Lean size conventions, [lem-grothendieck-derived-has-coproducts] supplies ambient coproducts indexed in the Hom universe. The source closure is closed under those coproducts by lifting the indexing type and then reindexing. To cover larger existing coproducts, their nonzero summands inject into the endomorphisms of their coproduct by projection-inclusion idempotents, and hence form a Hom-universe small set. Reindex to that set, apply preservation there, and reinsert the zero summands. Thus the asserted preservation covers the original indexing universe without assuming unavailable large ambient coproducts.",
+   "uses": [
     "sk-def-sfb-module-pushforward-pullback",
     "sk-def-sfb-module-derived-pushpull",
     "lem-pc-right-derived-functor-triangulated",
     "sk-def-localizing-closure",
     "lem-weil-pbc-triangulated-functor-restriction",
+    "lem-grothendieck-derived-has-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
+    "place": "First paragraph: restricted-sum localizing argument; ambient exactness and restriction made explicit."
+   }
+  },
+  {
+   "text": "For $\\Lambda=E$ or $\\Qlb$, the standing schemes $X,Y$ are qcqs by [lem-weil-pbc-qcqs-over-affine], applied to their separated finite-type structure maps to $\\operatorname{Spec}k$. Apply [det-def-localizing-closure-ctf-equals-bc] to each: $\\Dctf=\\Dbc$ and their localizing closures agree. Clause (2) of [det-thm-sfb-proper-base-change-rational] now gives preservation of $\\Dctf$ by $Rp_*$. Clause (3) of [det-ambient-ind-derived-sums] puts $\\Loc(\\Dbc(X,\\Lambda))$ inside $\\Dic(X,\\Lambda)$. For every small family in that localizing closure, [sk-lem-proper-unbounded-window-ii] therefore gives precisely the ambient direct-sum comparison required in Step 1. Both hypotheses follow, so Step 1 supplies the exact sum-preserving restriction in these two cases.",
+   "uses": [
     "lem-weil-pbc-qcqs-over-affine",
     "det-def-localizing-closure-ctf-equals-bc",
     "det-thm-sfb-proper-base-change-rational",
     "det-ambient-ind-derived-sums",
-    "sk-lem-proper-unbounded-window-ii",
-    "det-ctf-finite-proper-localizing",
+    "sk-lem-proper-unbounded-window-ii"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
+    "place": "Second paragraph, rational coefficient case: bounded constructibility, equality with Dctf, and sums on Dic."
+   }
+  },
+  {
+   "text": "For a finite commutative $\\ell$-primary ring $A$, clause (1) of [det-ctf-finite-proper-localizing] gives $Rp_*\\Dctf(X,A)\\subseteq\\Dctf(Y,A)$ and an exact sum-preserving restriction on the localizing closures. Because these closures are full and closed under ambient sums, their coproducts are ambient coproducts, so its sum comparison is exactly the second hypothesis of Step 1. Both hypotheses hold for finite $A$. No equality $\\Dctf=\\Dbc$ is needed or asserted for a nonregular finite ring.",
+   "uses": [
+    "det-ctf-finite-proper-localizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
+    "place": "Second paragraph, final sentence: finite coefficient case quoted there; expanded using the existing finite localizing theorem."
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\mathcal O_E$, [lem-weil-pbc-qcqs-over-affine] again makes $X,Y$ qcqs, so [det-def-localizing-closure-ctf-equals-bc] identifies $\\Dctf$ with $\\Dbc$ on both schemes and identifies their localizing closures. Clause (1) of [det-thm-sfb-proper-base-change-integral] sends $\\Dbc(X,\\mathcal O_E)$ into $\\Dbc(Y,\\mathcal O_E)$, giving the first hypothesis. Properness includes finite type by [def-weil-proper-morphism], and $Y$ is quasi-compact; thus [lem-fin-finite-type-fibre-dimension-bound] supplies a uniform integer $d\\ge0$ bounding the dimensions of all fibres of $p$. Clause (3) of [det-prop-int-compactness-direct-sums] applies with this bound and gives sum preservation on $\\Loc(\\Dbc(X,\\mathcal O_E))$, hence on $\\Loc(\\Dctf(X,\\mathcal O_E))$. These are ambient sums by fullness and ambient sum closure, as in Step 1. This is the second hypothesis, and Step 1 proves the integral restriction. Setting $E=\\mathbf Q_\\ell$ in this step and Step 2 gives the $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ cases respectively.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "det-def-localizing-closure-ctf-equals-bc",
     "det-thm-sfb-proper-base-change-integral",
     "def-weil-proper-morphism",
     "lem-fin-finite-type-fibre-dimension-bound",
-    "det-prop-int-compactness-direct-sums",
-    "lem-grothendieck-derived-has-coproducts"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "det-prop-int-compactness-direct-sums"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
-    "place": "Both paragraphs; finite and integral cases expanded according to the unit first proof paragraph. Step 1 now records the proved generic coproduct-existence tool and the elementary nonzero-support size argument used by the Lean proof (B4, 2026-10-19); steps 2--4 remain open."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Proper derived pushforward carries constructible complexes into constructible complexes and preserves coproducts on their localizing closure",
-      "results": "Generic homological-localization and mapDerivedCategory declarations; these concern localizations or exact underived functors, not proper pushforward or constructible generators.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An exact functor preserving coproducts on a generated triangulated subcategory maps the localizing closure into the target localizing closure",
-      "results": "Triangulated.Localization.isTriangulated, pretriangulated and related localization instances, Subcategory.isoClosure_W; no proper constructible direct-image theorem.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.ObjectProperty.inverseImage, CategoryTheory.ObjectProperty.IsTriangulated",
-      "results": "ObjectProperty.instIsTriangulatedInverseImage (Subcategory.lean:580) gives only inverse-image triangulated closure; Verdier localizing-subcategory hits do not assert closure under arbitrary coproducts or geometric coefficient preservation.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "localizing|constructible|coproduct",
-      "results": "CategoryTheory/Triangulated/Pretriangulated.lean:575 concerns finite coproducts; LocalizingSubcategory.lean:12,16,17,40,43 concerns Verdier left/right localizing subcategories, a different notion. Subdirectory: CategoryTheory/Triangulated.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Proper direct image restricts to an exact coproduct preserving functor on the localizing category generated by bounded constructible complexes",
-      "results": "ExactFunctor.of, exactFunctor, instPreservesFiniteColimitsObjFunctorExactFunctor, and finite-product localization results; these concern finite-limit/colimit exactness, not triangulated proper direct images.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "def exactFunctor|def of",
-      "results": "CategoryTheory/Limits/ExactFunctor.lean:93 exactFunctor is intersection of leftExactFunctor and rightExactFunctor, :189 ExactFunctor.of; source lines 92-99 confirm finite limits and finite colimits, not the triangulated notion.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-proper-image-localizing-principle",
-    "sk-thm-sfb-proper-base-change",
-    "sk-lem-proper-unbounded-window-ii",
-    "sk-prop-ctf-finite-proper",
-    "sk-prop-int-compactness",
-    "sk-cor-ambient-ind-derived"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-prop-proper-image-localizing",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "det-proper-image-localizing-proper",
-    "worker": "stage1",
-    "group": "Q03",
-    "summary": "Reconstructed the prior attempted split against current main-20261015 sources. Wrote the restricted-sum closure argument explicitly, cited ambient derived exactness and restriction, and supplied every rational, finite and integral hypothesis through existing nodes. Made the implicit standing scheme context of the coefficient assertions explicit, while preserving the unrestricted conditional assertion. Recorded real Mathlib searches; no new nodes or leaves.",
-    "blueprint": "First paragraph of det-proper-image-localizing-proper.proof.md is Step 1. Its second paragraph rational argument is Step 2; the finite and integral cases quoted in its final sentence are Steps 3 and 4. These realize the proper-image paragraph (step 1) of sk-prop-proper-image-localizing; this item is not the whole unit key node.",
-    "tool_uses": [
-      {
-        "node": "det-ambient-ind-derived-sums",
-        "why": "Generic ambient inclusion Loc(Dbc) in Dic supplies the rational sum-domain check explicitly required by the unit proof; it is not a replacement route."
-      },
-      {
-        "node": "lem-fin-finite-type-fibre-dimension-bound",
-        "why": "Generic finite-type morphism fibre-dimension bound discharges the hypothesis of the integral direct-sum node; this unit has no separate dimension-bound theorem."
-      }
-    ],
-    "statement_correction": {
-      "old_statement": "Let $\\Lambda$ be admissible and $p\\colon X\\to Y$ proper. Suppose that $Rp_*$ maps $\\Dctf(X,\\Lambda)$ into\n$\\Dctf(Y,\\Lambda)$ and preserves direct sums of objects of $\\Loc(\\Dctf(X,\\Lambda))$. Then $Rp_*$ restricts to an\nexact, sum-preserving functor $\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y,\\Lambda))$. The hypotheses hold:\n\n- for $\\Lambda=E,\\Qlb$, by [sk-thm-sfb-proper-base-change] and [sk-lem-proper-unbounded-window-ii] (sums in\n  $\\Loc(\\Dctf(X,\\Lambda))\\subset\\Dic(X,\\Lambda)$);\n- for $\\Lambda=A$ finite, by [sk-prop-ctf-finite-proper];\n- for $\\Lambda=\\mathcal O_E$, by [sk-prop-int-compactness], using $\\Dctf=\\Dbc$.",
-      "reason": "STATEMENT-DISPUTED: the coefficient claims omitted the standing scheme setting required by rational/integral proper base change and by the qcqs Dctf=Dbc identification. Type-check failure: a general proper morphism does not give qcqs source/target or standing schemes (identity of an infinite disjoint union of Spec(k) is proper). Spell out the source intended sk-def-sfb-dc-setting only for the coefficient claims; keep the generic conditional assertion unchanged."
-    }
-  },
-  "tool_uses": [
-    "det-ambient-ind-derived-sums",
-    "lem-fin-finite-type-fibre-dimension-bound"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-cc-Q03-26af99f7a",
-    "group": "Q03",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-26af99f7a (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote review.md with no fixes. Checks: one commit with the item and its report, no new nodes, all cited ids exist and none is merged, proof_deps equals the union of the step uses, and no cycle (transitive check over 10789 nodes). Step 1 adapts the blueprint's proof paragraph 1 and uses the sum hypothesis only for families inside Loc(Dctf(X)); it correctly does not cite det-proper-image-localizing-principle, which assumes preservation of all ambient sums (citing it would be C4). I checked that the cited statements (additive p_*, K-injective total derived functor, the closed exactness lemma, sk-def-localizing-closure being replete, triangulated, sum-closed and minimal, and the Mathlib restriction leaf) give each closure property. Step 2: lem-weil-pbc-qcqs-over-affine gives qcqs X and Y; det-def-localizing-closure-ctf-equals-bc(2) gives Dctf=Dbc; rational proper base change(2) applies between standing schemes; det-ambient-ind-derived-sums(3) gives Loc(Dbc) inside Dic, closed under sums by (1); sk-lem-proper-unbounded-window-ii gives sums on Dic. Step 3: det-ctf-finite-proper-localizing(1), with no use of Dctf=Dbc for nonregular finite rings. Step 4: integral proper base change(1); proper includes finite type; lem-fin-finite-type-fibre-dimension-bound, checked against Stacks morphisms.tex lemma-morphism-finite-type-bounded-dimension (Tag 0A3V), lines 5487-5500; det-prop-int-compactness-direct-sums(3) with that d. Q_ell and Z_ell are the cases E=Q_ell. Coefficient category: ordinary unbounded D(Mod_{Lambda_X}); the finite-subextension Qlb agrees with the chapter text and the rational nodes. The pre-existing wording of sk-def-localizing-closure for Qlb is ambiguous; that belongs to its owner, not this delivery. Statement correction: the worker shows no falsity of the literal claim, but the source's own cited theorems need standing schemes and qcqs. Adding the sk-def-sfb-dc-setting hypothesis to the coefficient clauses only is recorded verbatim, keeps the generic assertion and all coefficient cases, and matches the only citer, det-sf-comp-coherence-single, whose compactification stays in the setting. The item is not a target. Accepted tool_uses: det-ambient-ind-derived-sums (the unit's proof file cites sk-cor-ambient-ind-derived) and lem-fin-finite-type-fibre-dimension-bound (generic Tag 0A3V). No SGA is used. The Mathlib searches cover all three kinds. Edge cases checked: empty X, empty family, identity, F_ell and Z/ell^2, empty fibres."
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "lean": {
-    "module": "Sheaf.SixFunctors.ProperImageLocalizingProper",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.proper_image_localizing_proper",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.CondensedRing.ProperLocalizingHypotheses",
-      "AlgebraicGeometry.ProEtale.CondensedRing.ProperLocalizingRestriction",
-      "AlgebraicGeometry.ProEtale.CondensedRing.proper_image_localizing_proper",
-      "AlgebraicGeometry.ProEtale.CondensedRing.proper_image_localizing_proper_coefficients"
-    ],
-    "file": "lean/Sheaf/SixFunctors/ProperImageLocalizingProper.lean",
-    "statement": "theorem proper_image_localizing_proper (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (A : Type) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] (_hA : ∃ n : ℕ, (ℓ ^ n : A) = 0) (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) [IsCommMonObj Λ.X] (_hΛ : Λ ∈ [Mon.mk (Profinite.continuousMapRingObj A), Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ]), Mon.mk (Profinite.padicIntegersRingObj ℓ E.val), Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ]), Mon.mk (Profinite.continuousMapRingObj E), Mon.mk (Profinite.padicAlgClRingObj ℓ)]) {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] : ProperLocalizingHypotheses Λ.X p → ProperLocalizingRestriction Λ.X p",
-    "branch": "newtargets-dag",
-    "by": "Q91",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "Aggregate statement: proper_image_localizing_proper is the conditional restriction; proper_image_localizing_proper_coefficients proves its two hypotheses in the standing scheme setting for exactly the six admissible coefficient cases. The two real-data Prop definitions only expand the hypotheses and conclusion of this node. The coefficient is bundled in Mon, so list membership identifies its multiplication as well as its underlying sheaf. No statement or dependency changes."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-7d851eb53",
-    "group": "Q91",
-    "result": "pass",
-    "note": "Commit 7d851eb touches only the report, the item node's lean field, and the new module ProperImageLocalizingProper.lean; lean.statement is verbatim in the file. Conditional theorem matches the node: six bundled admissible coefficients (finite discrete A : Type, Z_l, O_E via padicIntegersRingObj, Q_l, E, finite-subextension Qbar padicAlgClRingObj), ordinary unbounded module-object derived category, hypothesis 1 = full Dbc ⊓ finiteTorAmplitude preservation, hypothesis 2 = PreservesColimit only for families in localizingClosureProEtale, conclusion = canonical ObjectProperty.lift that IsTriangulated and preserves Discrete-indexed colimits. Coefficient theorem has exactly the sk-def-sfb-dc-setting hypotheses (char k prime, ≠ l, separated finite-type over k, k-morphism, proper). Universes: category is Category.{u+1,u+2}; sum index Type (u+2) matches the landed closure definition and is mathematically equivalent to small sums; no site-universe restriction. No duplicate notion; Prop defs have real bodies; only the two theorems use sorry (#print axioms); docstrings carry source and blueprint tag and the proof steps. Worker report and the self-declared Q91 second reading are present. nt_compile.py on the snapshot module is clean (3.8 s, no errors or warnings). No findings."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "B4",
-    "result": "pass",
-    "landing": "20261019T002507-L-2141551",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+    "place": "Second paragraph, final sentence: integral case quoted there; explicit bounded-constructible preservation and fibre-bound hypothesis."
+   }
   }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-derived-pushpull",
+  "lem-pc-right-derived-functor-triangulated",
+  "sk-def-localizing-closure",
+  "lem-weil-pbc-triangulated-functor-restriction",
+  "lem-weil-pbc-qcqs-over-affine",
+  "det-def-localizing-closure-ctf-equals-bc",
+  "det-thm-sfb-proper-base-change-rational",
+  "det-ambient-ind-derived-sums",
+  "sk-lem-proper-unbounded-window-ii",
+  "det-ctf-finite-proper-localizing",
+  "det-thm-sfb-proper-base-change-integral",
+  "def-weil-proper-morphism",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "det-prop-int-compactness-direct-sums",
+  "lem-grothendieck-derived-has-coproducts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.proof.md",
+  "place": "Both paragraphs; finite and integral cases expanded according to the unit first proof paragraph. Step 1 now records the proved generic coproduct-existence tool and the elementary nonzero-support size argument used by the Lean proof (B4, 2026-10-19); steps 2--4 remain open."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper derived pushforward carries constructible complexes into constructible complexes and preserves coproducts on their localizing closure",
+   "results": "Generic homological-localization and mapDerivedCategory declarations; these concern localizations or exact underived functors, not proper pushforward or constructible generators.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor preserving coproducts on a generated triangulated subcategory maps the localizing closure into the target localizing closure",
+   "results": "Triangulated.Localization.isTriangulated, pretriangulated and related localization instances, Subcategory.isoClosure_W; no proper constructible direct-image theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.inverseImage, CategoryTheory.ObjectProperty.IsTriangulated",
+   "results": "ObjectProperty.instIsTriangulatedInverseImage (Subcategory.lean:580) gives only inverse-image triangulated closure; Verdier localizing-subcategory hits do not assert closure under arbitrary coproducts or geometric coefficient preservation.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localizing|constructible|coproduct",
+   "results": "CategoryTheory/Triangulated/Pretriangulated.lean:575 concerns finite coproducts; LocalizingSubcategory.lean:12,16,17,40,43 concerns Verdier left/right localizing subcategories, a different notion. Subdirectory: CategoryTheory/Triangulated.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper direct image restricts to an exact coproduct preserving functor on the localizing category generated by bounded constructible complexes",
+   "results": "ExactFunctor.of, exactFunctor, instPreservesFiniteColimitsObjFunctorExactFunctor, and finite-product localization results; these concern finite-limit/colimit exactness, not triangulated proper direct images.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def exactFunctor|def of",
+   "results": "CategoryTheory/Limits/ExactFunctor.lean:93 exactFunctor is intersection of leftExactFunctor and rightExactFunctor, :189 ExactFunctor.of; source lines 92-99 confirm finite limits and finite colimits, not the triangulated notion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-proper-image-localizing-principle",
+  "sk-thm-sfb-proper-base-change",
+  "sk-lem-proper-unbounded-window-ii",
+  "sk-prop-ctf-finite-proper",
+  "sk-prop-int-compactness",
+  "sk-cor-ambient-ind-derived"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-proper-image-localizing",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "det-proper-image-localizing-proper",
+  "worker": "stage1",
+  "group": "Q03",
+  "summary": "Reconstructed the prior attempted split against current main-20261015 sources. Wrote the restricted-sum closure argument explicitly, cited ambient derived exactness and restriction, and supplied every rational, finite and integral hypothesis through existing nodes. Made the implicit standing scheme context of the coefficient assertions explicit, while preserving the unrestricted conditional assertion. Recorded real Mathlib searches; no new nodes or leaves.",
+  "blueprint": "First paragraph of det-proper-image-localizing-proper.proof.md is Step 1. Its second paragraph rational argument is Step 2; the finite and integral cases quoted in its final sentence are Steps 3 and 4. These realize the proper-image paragraph (step 1) of sk-prop-proper-image-localizing; this item is not the whole unit key node.",
+  "tool_uses": [
+   {
+    "node": "det-ambient-ind-derived-sums",
+    "why": "Generic ambient inclusion Loc(Dbc) in Dic supplies the rational sum-domain check explicitly required by the unit proof; it is not a replacement route."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic finite-type morphism fibre-dimension bound discharges the hypothesis of the integral direct-sum node; this unit has no separate dimension-bound theorem."
+   }
+  ],
+  "statement_correction": {
+   "old_statement": "Let $\\Lambda$ be admissible and $p\\colon X\\to Y$ proper. Suppose that $Rp_*$ maps $\\Dctf(X,\\Lambda)$ into\n$\\Dctf(Y,\\Lambda)$ and preserves direct sums of objects of $\\Loc(\\Dctf(X,\\Lambda))$. Then $Rp_*$ restricts to an\nexact, sum-preserving functor $\\Loc(\\Dctf(X,\\Lambda))\\to\\Loc(\\Dctf(Y,\\Lambda))$. The hypotheses hold:\n\n- for $\\Lambda=E,\\Qlb$, by [sk-thm-sfb-proper-base-change] and [sk-lem-proper-unbounded-window-ii] (sums in\n  $\\Loc(\\Dctf(X,\\Lambda))\\subset\\Dic(X,\\Lambda)$);\n- for $\\Lambda=A$ finite, by [sk-prop-ctf-finite-proper];\n- for $\\Lambda=\\mathcal O_E$, by [sk-prop-int-compactness], using $\\Dctf=\\Dbc$.",
+   "reason": "STATEMENT-DISPUTED: the coefficient claims omitted the standing scheme setting required by rational/integral proper base change and by the qcqs Dctf=Dbc identification. Type-check failure: a general proper morphism does not give qcqs source/target or standing schemes (identity of an infinite disjoint union of Spec(k) is proper). Spell out the source intended sk-def-sfb-dc-setting only for the coefficient claims; keep the generic conditional assertion unchanged."
+  }
+ },
+ "tool_uses": [
+  "det-ambient-ind-derived-sums",
+  "lem-fin-finite-type-fibre-dimension-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-26af99f7a",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-26af99f7a (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote review.md with no fixes. Checks: one commit with the item and its report, no new nodes, all cited ids exist and none is merged, proof_deps equals the union of the step uses, and no cycle (transitive check over 10789 nodes). Step 1 adapts the blueprint's proof paragraph 1 and uses the sum hypothesis only for families inside Loc(Dctf(X)); it correctly does not cite det-proper-image-localizing-principle, which assumes preservation of all ambient sums (citing it would be C4). I checked that the cited statements (additive p_*, K-injective total derived functor, the closed exactness lemma, sk-def-localizing-closure being replete, triangulated, sum-closed and minimal, and the Mathlib restriction leaf) give each closure property. Step 2: lem-weil-pbc-qcqs-over-affine gives qcqs X and Y; det-def-localizing-closure-ctf-equals-bc(2) gives Dctf=Dbc; rational proper base change(2) applies between standing schemes; det-ambient-ind-derived-sums(3) gives Loc(Dbc) inside Dic, closed under sums by (1); sk-lem-proper-unbounded-window-ii gives sums on Dic. Step 3: det-ctf-finite-proper-localizing(1), with no use of Dctf=Dbc for nonregular finite rings. Step 4: integral proper base change(1); proper includes finite type; lem-fin-finite-type-fibre-dimension-bound, checked against Stacks morphisms.tex lemma-morphism-finite-type-bounded-dimension (Tag 0A3V), lines 5487-5500; det-prop-int-compactness-direct-sums(3) with that d. Q_ell and Z_ell are the cases E=Q_ell. Coefficient category: ordinary unbounded D(Mod_{Lambda_X}); the finite-subextension Qlb agrees with the chapter text and the rational nodes. The pre-existing wording of sk-def-localizing-closure for Qlb is ambiguous; that belongs to its owner, not this delivery. Statement correction: the worker shows no falsity of the literal claim, but the source's own cited theorems need standing schemes and qcqs. Adding the sk-def-sfb-dc-setting hypothesis to the coefficient clauses only is recorded verbatim, keeps the generic assertion and all coefficient cases, and matches the only citer, det-sf-comp-coherence-single, whose compactification stays in the setting. The item is not a target. Accepted tool_uses: det-ambient-ind-derived-sums (the unit's proof file cites sk-cor-ambient-ind-derived) and lem-fin-finite-type-fibre-dimension-bound (generic Tag 0A3V). No SGA is used. The Mathlib searches cover all three kinds. Edge cases checked: empty X, empty family, identity, F_ell and Z/ell^2, empty fibres."
+ },
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.SixFunctors.ProperImageLocalizingProper",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.proper_image_localizing_proper",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.ProperLocalizingHypotheses",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ProperLocalizingRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.proper_image_localizing_proper",
+   "AlgebraicGeometry.ProEtale.CondensedRing.proper_image_localizing_proper_coefficients"
+  ],
+  "file": "lean/Sheaf/SixFunctors/ProperImageLocalizingProper.lean",
+  "statement": "theorem proper_image_localizing_proper (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (A : Type) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] (_hA : ∃ n : ℕ, (ℓ ^ n : A) = 0) (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) [IsCommMonObj Λ.X] (_hΛ : Λ ∈ [Mon.mk (Profinite.continuousMapRingObj A), Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ]), Mon.mk (Profinite.padicIntegersRingObj ℓ E.val), Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ]), Mon.mk (Profinite.continuousMapRingObj E), Mon.mk (Profinite.padicAlgClRingObj ℓ)]) {X Y : Scheme.{u}} (p : X ⟶ Y) [IsProper p] : ProperLocalizingHypotheses Λ.X p → ProperLocalizingRestriction Λ.X p",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Aggregate statement: proper_image_localizing_proper is the conditional restriction; proper_image_localizing_proper_coefficients proves its two hypotheses in the standing scheme setting for exactly the six admissible coefficient cases. The two real-data Prop definitions only expand the hypotheses and conclusion of this node. The coefficient is bundled in Mon, so list membership identifies its multiplication as well as its underlying sheaf. No statement or dependency changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7d851eb53",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Commit 7d851eb touches only the report, the item node's lean field, and the new module ProperImageLocalizingProper.lean; lean.statement is verbatim in the file. Conditional theorem matches the node: six bundled admissible coefficients (finite discrete A : Type, Z_l, O_E via padicIntegersRingObj, Q_l, E, finite-subextension Qbar padicAlgClRingObj), ordinary unbounded module-object derived category, hypothesis 1 = full Dbc ⊓ finiteTorAmplitude preservation, hypothesis 2 = PreservesColimit only for families in localizingClosureProEtale, conclusion = canonical ObjectProperty.lift that IsTriangulated and preserves Discrete-indexed colimits. Coefficient theorem has exactly the sk-def-sfb-dc-setting hypotheses (char k prime, ≠ l, separated finite-type over k, k-morphism, proper). Universes: category is Category.{u+1,u+2}; sum index Type (u+2) matches the landed closure definition and is mathematically equivalent to small sums; no site-universe restriction. No duplicate notion; Prop defs have real bodies; only the two theorems use sorry (#print axioms); docstrings carry source and blueprint tag and the proof steps. Worker report and the self-declared Q91 second reading are present. nt_compile.py on the snapshot module is clean (3.8 s, no errors or warnings). No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261019T002507-L-2141551",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

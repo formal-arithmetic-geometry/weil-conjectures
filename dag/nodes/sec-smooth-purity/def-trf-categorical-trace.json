@@ -1,236 +1,225 @@
 {
-  "id": "def-trf-categorical-trace",
-  "blueprint": {
-    "is": "def-trf-categorical-trace",
-    "from": null,
-    "same_as": []
+ "id": "def-trf-categorical-trace",
+ "blueprint": {
+  "is": "def-trf-categorical-trace",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Perfect complex and its categorical trace",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber]. Use the finite-coefficient datum of [def-trf-coefficient-conventions]: a prime $\\ell\\neq p$, a finite extension $E/\\mathbf Q_\\ell$ contained in the fixed algebraic closure $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and an integer $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Write $D(A)$ for the derived category of ordinary $A$-modules and $Q$ for the localization functor from cochain complexes [def-weil-abstract-derived-category]. Let $\\operatorname{Perf}(A)\\subset D(A)$ be its full subcategory of perfect ring complexes [def-pc-perfect-ring-complex]: objects isomorphic to bounded complexes of finitely generated projective $A$-modules. The trace chapter's notation $D^b_{\\mathrm{fin}}(A)$ in this definition means $\\operatorname{Perf}(A)$, rather than the larger finite-cohomology category of [def-weil-point-finite-cohomology-complexes]. Bounded projective complexes are representatives, with morphisms taken modulo chain homotopy [lem-pc-ring-derived-map-representative], not the category with unquotiented chain maps.\n\nHere is the explicit perfect-complex model for the defining maps. Choose a bounded projective representative $B^\\bullet$ of $P\\in\\operatorname{Perf}(A)$. Put $B^\\vee=\\operatorname{Hom}_A^\\bullet(B,A[0])$, the total module Hom complex [def-sc-module-total-hom-complex], so that $(B^\\vee)^j=\\operatorname{Hom}_A(B^{-j},A)$ and $(d^\\vee\\varphi)(x)=(-1)^{j+1}\\varphi(dx)$. Write $P^\\vee=R\\operatorname{Hom}_A(P,A)$ for this derived dual; the bounded-above projective model is K-projective [lem-sc-bounded-above-projective-kprojective]. Tensor products on these representatives use the signed direct-sum total tensor of [def-pc-tensor-complex-sheaves], applied to ordinary modules (the category with one object and only its identity morphism, with only the maximal sieve covering, and constant coefficient ring $A$):\n$$d(x\\otimes y)=dx\\otimes y+(-1)^{|x|}x\\otimes dy,\\qquad \\operatorname{sym}(x\\otimes y)=(-1)^{|x||y|}y\\otimes x.$$\nTheir images in $D(A)$ compute $\\otimes_A^L$, with unit $A[0]$: projective terms are flat [lem-weil-pbc-projective-module-flat], and bounded-above complexes of flat modules are K-flat [lem-pc-module-bounded-flat-kflat].\n\nFor each degree $i$ choose the ordinary-ring splitting package of [def-weil-pbc-strict-perfect-coefficient-package], $B^i\\xrightarrow{\\iota_i}A^{N_i}\\xrightarrow{\\pi_i}B^i$ with $\\pi_i\\iota_i=1$, taking $N_i=0$ whenever $B^i=0$. For the standard basis $u_a$ of $A^{N_i}$ put $e_{i,a}=\\pi_i(u_a)$ and $\\epsilon_{i,a}=\\operatorname{pr}_a\\iota_i$; thus $x=\\sum_a\\epsilon_{i,a}(x)e_{i,a}$. Use the evaluation and coevaluation given on this model by\n$$\\operatorname{ev}_B(\\varphi\\otimes x)=\\varphi(x),\\qquad \\operatorname{coev}_B(1)=\\sum_{i,a}e_{i,a}\\otimes\\epsilon_{i,a}.$$\nEvaluation is zero on the summands of nonzero total degree. The sum is finite, and $\\epsilon_{i,a}$ is placed in dual degree $-i$. Choose the representative isomorphism $\\alpha:Q(B)\\xrightarrow{\\sim}P$. Its derived dual is $\\alpha^\\vee:P^\\vee\\xrightarrow{\\sim}Q(B^\\vee)$, induced by precomposition with $\\alpha$. Under the strict-model identifications for derived tensor products, define\n$$\\operatorname{coev}_P=(\\alpha\\otimes_A^L(\\alpha^\\vee)^{-1})\\circ Q(\\operatorname{coev}_B):A[0]\\longrightarrow P\\otimes_A^LP^\\vee,$$\n$$\\operatorname{ev}_P=Q(\\operatorname{ev}_B)\\circ(\\alpha^\\vee\\otimes_A^L\\alpha^{-1}):P^\\vee\\otimes_A^LP\\longrightarrow A[0].$$\nThe chain-map assertions, triangle identities and independence of representatives are the subsequent assertions of lem-trf-chain-supertrace (a forward pointer, not a premise of the definition).\n\nFor an endomorphism $v:P\\to P$ in $D(A)$ define its categorical trace to be\n$$\\operatorname{tr}_A(v\\mid P):=\\operatorname{ev}_P\\circ\\operatorname{sym}_{P,P^\\vee}\\circ(v\\otimes_A^L1_{P^\\vee})\\circ\\operatorname{coev}_P\\in\\operatorname{End}_{D(A)}(A[0])\\cong A.$$\nFor the last identification, first apply the inverse of the Hom bijection for the fully faithful degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful], obtaining an $A$-linear endomorphism of $A$, then evaluate it at $1$. Its inverse sends $a\\in A$ to the derived image of multiplication by $a$ on $A[0]$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/def-trf-categorical-trace.md",
+  "place": "node def-trf-categorical-trace, order 1826",
+  "note": [
+   "*Recorded in advance* from chapter *The trace formula* of the source."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-trf-coefficient-conventions",
+  "def-weil-abstract-derived-category",
+  "def-pc-perfect-ring-complex",
+  "def-weil-point-finite-cohomology-complexes",
+  "lem-pc-ring-derived-map-representative",
+  "def-sc-module-total-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sc-bounded-above-projective-kprojective",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-pc-module-bounded-flat-kflat"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def trace|perfect complex|End.*singleFunctor",
+   "results": "2 hits: Mathlib/CategoryTheory/Shift/SingleFunctors.lean, Mathlib/CategoryTheory/Shift/SingleFunctorsLift.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
   },
-  "kind": "definition",
-  "title": "Perfect complex and its categorical trace",
-  "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber]. Use the finite-coefficient datum of [def-trf-coefficient-conventions]: a prime $\\ell\\neq p$, a finite extension $E/\\mathbf Q_\\ell$ contained in the fixed algebraic closure $\\overline{\\mathbf Q}_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and an integer $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$. Write $D(A)$ for the derived category of ordinary $A$-modules and $Q$ for the localization functor from cochain complexes [def-weil-abstract-derived-category]. Let $\\operatorname{Perf}(A)\\subset D(A)$ be its full subcategory of perfect ring complexes [def-pc-perfect-ring-complex]: objects isomorphic to bounded complexes of finitely generated projective $A$-modules. The trace chapter's notation $D^b_{\\mathrm{fin}}(A)$ in this definition means $\\operatorname{Perf}(A)$, rather than the larger finite-cohomology category of [def-weil-point-finite-cohomology-complexes]. Bounded projective complexes are representatives, with morphisms taken modulo chain homotopy [lem-pc-ring-derived-map-representative], not the category with unquotiented chain maps.\n\nHere is the explicit perfect-complex model for the defining maps. Choose a bounded projective representative $B^\\bullet$ of $P\\in\\operatorname{Perf}(A)$. Put $B^\\vee=\\operatorname{Hom}_A^\\bullet(B,A[0])$, the total module Hom complex [def-sc-module-total-hom-complex], so that $(B^\\vee)^j=\\operatorname{Hom}_A(B^{-j},A)$ and $(d^\\vee\\varphi)(x)=(-1)^{j+1}\\varphi(dx)$. Write $P^\\vee=R\\operatorname{Hom}_A(P,A)$ for this derived dual; the bounded-above projective model is K-projective [lem-sc-bounded-above-projective-kprojective]. Tensor products on these representatives use the signed direct-sum total tensor of [def-pc-tensor-complex-sheaves], applied to ordinary modules (the category with one object and only its identity morphism, with only the maximal sieve covering, and constant coefficient ring $A$):\n$$d(x\\otimes y)=dx\\otimes y+(-1)^{|x|}x\\otimes dy,\\qquad \\operatorname{sym}(x\\otimes y)=(-1)^{|x||y|}y\\otimes x.$$\nTheir images in $D(A)$ compute $\\otimes_A^L$, with unit $A[0]$: projective terms are flat [lem-weil-pbc-projective-module-flat], and bounded-above complexes of flat modules are K-flat [lem-pc-module-bounded-flat-kflat].\n\nFor each degree $i$ choose the ordinary-ring splitting package of [def-weil-pbc-strict-perfect-coefficient-package], $B^i\\xrightarrow{\\iota_i}A^{N_i}\\xrightarrow{\\pi_i}B^i$ with $\\pi_i\\iota_i=1$, taking $N_i=0$ whenever $B^i=0$. For the standard basis $u_a$ of $A^{N_i}$ put $e_{i,a}=\\pi_i(u_a)$ and $\\epsilon_{i,a}=\\operatorname{pr}_a\\iota_i$; thus $x=\\sum_a\\epsilon_{i,a}(x)e_{i,a}$. Use the evaluation and coevaluation given on this model by\n$$\\operatorname{ev}_B(\\varphi\\otimes x)=\\varphi(x),\\qquad \\operatorname{coev}_B(1)=\\sum_{i,a}e_{i,a}\\otimes\\epsilon_{i,a}.$$\nEvaluation is zero on the summands of nonzero total degree. The sum is finite, and $\\epsilon_{i,a}$ is placed in dual degree $-i$. Choose the representative isomorphism $\\alpha:Q(B)\\xrightarrow{\\sim}P$. Its derived dual is $\\alpha^\\vee:P^\\vee\\xrightarrow{\\sim}Q(B^\\vee)$, induced by precomposition with $\\alpha$. Under the strict-model identifications for derived tensor products, define\n$$\\operatorname{coev}_P=(\\alpha\\otimes_A^L(\\alpha^\\vee)^{-1})\\circ Q(\\operatorname{coev}_B):A[0]\\longrightarrow P\\otimes_A^LP^\\vee,$$\n$$\\operatorname{ev}_P=Q(\\operatorname{ev}_B)\\circ(\\alpha^\\vee\\otimes_A^L\\alpha^{-1}):P^\\vee\\otimes_A^LP\\longrightarrow A[0].$$\nThe chain-map assertions, triangle identities and independence of representatives are the subsequent assertions of lem-trf-chain-supertrace (a forward pointer, not a premise of the definition).\n\nFor an endomorphism $v:P\\to P$ in $D(A)$ define its categorical trace to be\n$$\\operatorname{tr}_A(v\\mid P):=\\operatorname{ev}_P\\circ\\operatorname{sym}_{P,P^\\vee}\\circ(v\\otimes_A^L1_{P^\\vee})\\circ\\operatorname{coev}_P\\in\\operatorname{End}_{D(A)}(A[0])\\cong A.$$\nFor the last identification, first apply the inverse of the Hom bijection for the fully faithful degree-zero embedding [lem-weil-pbc-derived-single-fully-faithful], obtaining an $A$-linear endomorphism of $A$, then evaluate it at $1$. Its inverse sends $a\\in A$ to the derived image of multiplication by $a$ on $A[0]$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/def-trf-categorical-trace.md",
-    "place": "node def-trf-categorical-trace, order 1826",
-    "note": [
-      "*Recorded in advance* from chapter *The trace formula* of the source."
-    ]
+  {
+   "tool": "leanfinder",
+   "query": "Categorical trace of an endomorphism of a perfect complex over a commutative ring using evaluation coevaluation and the derived tensor symmetry",
+   "results": "8 hits: LinearMap.trace_eq_contract', LinearMap.trace_eq_contract_apply, LinearMap.trace_eq_contract, CategoryTheory.Abelian.Ext.homLinearEquiv, LinearMap.trace_eq_contract_of_basis, DerivedCategory.instLinearSingleFunctor, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, FGModuleCat.FGModuleCatEvaluation",
+   "date": "2026-10-16",
+   "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
   },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-trf-coefficient-conventions",
-    "def-weil-abstract-derived-category",
-    "def-pc-perfect-ring-complex",
-    "def-weil-point-finite-cohomology-complexes",
-    "lem-pc-ring-derived-map-representative",
-    "def-sc-module-total-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-pbc-strict-perfect-coefficient-package",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-sc-bounded-above-projective-kprojective",
-    "lem-weil-pbc-projective-module-flat",
-    "lem-pc-module-bounded-flat-kflat"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "def trace|perfect complex|End.*singleFunctor",
-      "results": "2 hits: Mathlib/CategoryTheory/Shift/SingleFunctors.lean, Mathlib/CategoryTheory/Shift/SingleFunctorsLift.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Categorical trace of an endomorphism of a perfect complex over a commutative ring using evaluation coevaluation and the derived tensor symmetry",
-      "results": "8 hits: LinearMap.trace_eq_contract', LinearMap.trace_eq_contract_apply, LinearMap.trace_eq_contract, CategoryTheory.Abelian.Ext.homLinearEquiv, LinearMap.trace_eq_contract_of_basis, DerivedCategory.instLinearSingleFunctor, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, FGModuleCat.FGModuleCatEvaluation",
-      "date": "2026-10-16",
-      "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"trace\", \"HasRightDual\"",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Categorical trace of a dualizable perfect complex in the derived category of modules",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "categorical trace|def trace|IsPerfect|perfect complex|HasRightDual",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A bounded complex of finitely generated projective modules has a dual and the trace of its endomorphism is an endomorphism of the tensor unit",
-      "results": "8 hits: LinearMap.trace_eq_contract', LinearMap.trace_eq_contract, LinearMap.trace_eq_contract_apply, FGModuleCat.FGModuleCatEvaluation, LinearMap.trace_eq_contract_of_basis, LinearMap.trace_eq_contract_of_basis', FGModuleCat.rightRigidCategory, FGModuleCat.FGModuleCatCoevaluation",
-      "date": "2026-10-16",
-      "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Perfect\"",
-      "results": "12 hits: Aesop.ScriptGenerated.perfect, Aesop.Script.DynStructureM.State.perfect, Aesop.Script.StaticStructureM.State.perfect, Nat.Perfect, Nat.perfect_iff_sum_properDivisors, Nat.perfect_iff_sum_divisors_eq_two_mul, PerfectField, PerfectRing",
-      "date": "2026-10-16",
-      "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
-    },
-    {
-      "tool": "grep",
-      "query": "trace_eq_contract|def trace|def FGModuleCatEvaluation|def FGModuleCatCoevaluation",
-      "results": "5 hits: 48, 75, 147, 162, 164",
-      "date": "2026-10-16",
-      "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
-    },
-    {
-      "tool": "grep",
-      "query": "trace_eq_contract|def FGModuleCatEvaluation|def FGModuleCatCoevaluation",
-      "results": "2 hits: Mathlib/Algebra/Category/FGModuleCat/Basic.lean, Mathlib/Algebra/Category/FGModuleCat/Basic.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Trace in a symmetric monoidal category from a right dual with evaluation and coevaluation",
-      "results": "8 returned hits: CategoryTheory.ExactPairing.evaluation', CategoryTheory.ExactPairing.evaluation, CategoryTheory.HasRightDual.exact, CategoryTheory.ExactPairing.coevaluation, CategoryTheory.RightRigidCategory, CategoryTheory.ExactPairing, CategoryTheory.ExactPairing.coevaluation', CategoryTheory.coevaluation_comp_rightAdjointMate",
-      "date": "2026-10-16",
-      "verdict": "no whole-item match: ExactPairing supplies abstract evaluation/coevaluation for an already given dual (Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:77,103,106,236); it does not construct signed duality for perfect derived complexes or identify the scalar-valued trace. The project trace at WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:74 supplies the composite only."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"coevaluation\", \"evaluation\"",
-      "results": "12 returned hits: CategoryTheory.ExactPairing.coevaluation, CategoryTheory.ExactPairing.coevaluation', CategoryTheory.coevaluation_comp_leftAdjointMate, CategoryTheory.coevaluation_comp_rightAdjointMate, CategoryTheory.coevaluation_comp_leftAdjointMate_assoc, CategoryTheory.coevaluation_comp_rightAdjointMate_assoc, CategoryTheory.ExactPairing.coevaluation_evaluation'', CategoryTheory.ExactPairing.evaluation_coevaluation''",
-      "date": "2026-10-16",
-      "verdict": "no whole-item match: ExactPairing supplies abstract evaluation/coevaluation for an already given dual (Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:77,103,106,236); it does not construct signed duality for perfect derived complexes or identify the scalar-valued trace. The project trace at WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:74 supplies the composite only."
-    },
-    {
-      "tool": "grep",
-      "query": "def trace|def coevaluation|def evaluation|HasRightDual",
-      "results": "25 returned hits: Mathlib/Algebra/Lie/TraceForm.lean, Mathlib/NumberTheory/ModularForms/NormTrace.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/FGModuleCat/Basic.lean, Mathlib/Algebra/QuadraticAlgebra/Basic.lean",
-      "date": "2026-10-16",
-      "verdict": "no whole-item match: ExactPairing supplies abstract evaluation/coevaluation for an already given dual (Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:77,103,106,236); it does not construct signed duality for perfect derived complexes or identify the scalar-valued trace. The project trace at WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:74 supplies the composite only."
-    },
-    {
-      "tool": "grep",
-      "query": "trace|coevaluation|evaluation|HasRightDual",
-      "results": "20 returned hits: Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean. Source directory: CategoryTheory/Monoidal/Rigid",
-      "date": "2026-10-16",
-      "verdict": "no whole-item match: ExactPairing supplies abstract evaluation/coevaluation for an already given dual (Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:77,103,106,236); it does not construct signed duality for perfect derived complexes or identify the scalar-valued trace. The project trace at WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:74 supplies the composite only."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1826,
-  "blueprint_uses": [
-    "def-trf-coefficient-conventions",
-    "def-weil-derived-tensor",
-    "def-weil-finite-coefficient-point",
-    "def-weil-finite-field-fiber"
-  ],
-  "uses_not_cited": [
-    "def-trf-coefficient-conventions",
-    "def-weil-derived-tensor",
-    "def-weil-finite-coefficient-point",
-    "def-weil-finite-field-fiber"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "recorded_in_advance",
-      "text": "*Recorded in advance* from chapter *The trace formula* of the source.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"HasRightDual\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
   },
-  "pointers": [
-    {
-      "to": "lem-trf-chain-supertrace",
-      "was": [
-        "stmt"
-      ],
-      "reason": "forward pointer in the text, not a dependency: the lemma proves the triangle identities of the defined maps",
-      "date": "2026-10-09"
-    }
-  ],
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-trace-perfectness",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "def-trf-categorical-trace",
-    "worker": "stage1",
-    "summary": "STATEMENT-DISPUTED: corrected the identification of the derived perfect category with the category of unquotiented bounded projective complexes and distinguished its overloaded finite-cohomology notation. Reused existing perfect-ring, signed tensor and Hom, splitting-package, homotopy-to-derived and degree-zero fully faithful nodes. Gave the actual signed dual and finite-dual-frame evaluation/coevaluation construction and the scalar identification. Definition only; no new nodes and no proof steps. General trace in slopmaster2 covers only the categorical composite, so is not a whole-item attachment. Return repair: reread all thirteen current statement dependencies after the coefficient-conventions landing refusal. Expanded the opening to specify exactly the finite-coefficient datum taken from the now-explicit convention bundle; the trace still lives in the derived category of ordinary A-modules, and the perfect domain is distinct from finite-cohomology and pro-etale coefficient categories. Revalidated every model and scalar identification against the current DAG before rebuilding the delivery on the current baseline. Second reading: imposed zero frame sizes on zero terms so coevaluation has finite support; specified the terminal-category site; replaced representative transport prose by the two explicit composites using the representative isomorphism and its contravariant derived dual.",
-    "blueprint": "Realizes the definition paragraphs specifying perfect complexes, derived dual, evaluation and coevaluation, the trace display, and the final scalar identification; the chain-supertrace theorem remains a forward pointer."
+  {
+   "tool": "leansearch",
+   "query": "Categorical trace of a dualizable perfect complex in the derived category of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
   },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-Q25-e3e0fa159",
-    "group": "Q25",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-e3e0fa159 (reviewer sub-agent of L); spot-checked: Read the full definition, all thirteen cited statements, source passages, and unit/chapter route. Verified dual-frame formulas, signs, representative-map directions, scalar identification, and edge cases. No new nodes or delivery faults. Inherited citation and forward-lemma issues are documented in review.md; no target or coefficient-category comparison was weakened or assumed."
+  {
+   "tool": "grep",
+   "query": "categorical trace|def trace|IsPerfect|perfect complex|HasRightDual",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
   },
-  "lean": {
-    "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectCategoricalTrace",
-    "declaration": "WeilConjectures.finiteCoefficientCategoricalTrace",
-    "declarations": [
-      "DerivedCategory.perfectTraceCanonicalBraiding",
-      "DerivedCategory.perfectTraceCategory",
-      "DerivedCategory.perfectTraceModelDual",
-      "DerivedCategory.perfectTraceFrameVector",
-      "DerivedCategory.perfectTraceFrameFunctional",
-      "DerivedCategory.perfectTraceDual",
-      "DerivedCategory.perfectTraceDualMap",
-      "DerivedCategory.perfectTraceEvaluation",
-      "DerivedCategory.perfectTraceCoevaluation",
-      "DerivedCategory.perfectTraceHasRightDual",
-      "DerivedCategory.perfectTraceScalar",
-      "DerivedCategory.perfectTraceScalarInverse",
-      "DerivedCategory.perfectCategoricalTrace",
-      "WeilConjectures.finiteCoefficientCategoricalTrace"
-    ],
-    "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectCategoricalTrace.lean",
-    "statement": "def finiteCoefficientCategoricalTrace (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : IntermediateField (Padic c.l) c.Qbar) [FiniteDimensional (Padic c.l) E] (n : ℕ) (_hn : 1 ≤ n) (P : DerivedCategory (ModuleCat.{u} (Padic.coefficientExtensionRing c.l E n))) (hP : DerivedCategory.IsPerfectRingComplex P) (v : P ⟶ P) : Padic.coefficientExtensionRing c.l E n",
-    "branch": "newtargets-dag",
-    "by": "NF",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Reuses the recorded perfect-ring predicate and upstream derived monoidal/closed structures. Constructs the actual internal-Hom dual and its canonical inverse-comparison coevaluation, descends the Koszul braiding, reuses MonoidalCategory.trace, and extracts the scalar via the fully faithful single functor. Includes the exact finite-coefficient specialization, model total Hom and frame maps; no arbitrary duality datum, new axiom or postponed theorem."
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finitely generated projective modules has a dual and the trace of its endomorphism is an endomorphism of the tensor unit",
+   "results": "8 hits: LinearMap.trace_eq_contract', LinearMap.trace_eq_contract, LinearMap.trace_eq_contract_apply, FGModuleCat.FGModuleCatEvaluation, LinearMap.trace_eq_contract_of_basis, LinearMap.trace_eq_contract_of_basis', FGModuleCat.rightRigidCategory, FGModuleCat.FGModuleCatCoevaluation",
+   "date": "2026-10-16",
+   "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-6f8f4c514",
-    "group": "NF",
-    "result": "pass",
-    "note": "Wrote review.md. Checked all statement clauses, thirteen dependencies, source, signs, canonical maps, universes, edge cases, report sections, and pilot gates. Immutable module reproduced cleanly through scompile.py. No delivery errors or fixes needed; no branch changed by this reviewer."
+  {
+   "tool": "loogle",
+   "query": "\"Perfect\"",
+   "results": "12 hits: Aesop.ScriptGenerated.perfect, Aesop.Script.DynStructureM.State.perfect, Aesop.Script.StaticStructureM.State.perfect, Nat.Perfect, Nat.perfect_iff_sum_properDivisors, Nat.perfect_iff_sum_divisors_eq_two_mul, PerfectField, PerfectRing",
+   "date": "2026-10-16",
+   "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, with $A=A_{E,n}$, and define\n$D^b_{\\mathrm{fin}}(A)$ to be the category of *perfect*\n$A$-complexes, realized explicitly as the category of bounded\ncomplexes of finitely generated projective $A$-modules.\nFor $P\\in D^b_{\\mathrm{fin}}(A)$ put\n$P^\\vee=R\\operatorname{Hom}_A(P,A)$. The coevaluation and evaluation\nare\n\n$$\n\\operatorname{coev}_P:A\\longrightarrow P\\otimes_A^LP^\\vee,\\qquad\n\\operatorname{ev}_P:P^\\vee\\otimes_A^LP\\longrightarrow A,\n$$\n\nwhere $\\otimes^L_A$ is the\nderived tensor over $A$. For an\nendomorphism $v:P\\to P$, the *categorical trace* is\n\n$$\n\\operatorname{tr}_A(v\\mid P):=\n\\operatorname{ev}_P\\circ\\operatorname{sym}\\circ\n\\bigl(v\\otimes_A^L1\\bigr)\\circ\\operatorname{coev}_P\n\\in\\operatorname{End}_{D(A)}(A)\\cong A.\n$$\n\nHere $\\operatorname{End}_{D(A)}(A)\\cong A$ sends an endomorphism of\n$A$ to its degree-$0$ scalar.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "grep",
+   "query": "trace_eq_contract|def trace|def FGModuleCatEvaluation|def FGModuleCatCoevaluation",
+   "results": "5 hits: 48, 75, 147, 162, 164",
+   "date": "2026-10-16",
+   "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
+  },
+  {
+   "tool": "grep",
+   "query": "trace_eq_contract|def FGModuleCatEvaluation|def FGModuleCatCoevaluation",
+   "results": "2 hits: Mathlib/Algebra/Category/FGModuleCat/Basic.lean, Mathlib/Algebra/Category/FGModuleCat/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: the item includes the perfect derived category, its signed duality data and scalar identification; module traces, field-module duality and unrelated uses of Perfect do not state this definition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Trace in a symmetric monoidal category from a right dual with evaluation and coevaluation",
+   "results": "8 returned hits: CategoryTheory.ExactPairing.evaluation', CategoryTheory.ExactPairing.evaluation, CategoryTheory.HasRightDual.exact, CategoryTheory.ExactPairing.coevaluation, CategoryTheory.RightRigidCategory, CategoryTheory.ExactPairing, CategoryTheory.ExactPairing.coevaluation', CategoryTheory.coevaluation_comp_rightAdjointMate",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: ExactPairing supplies abstract evaluation/coevaluation for an already given dual (Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:77,103,106,236); it does not construct signed duality for perfect derived complexes or identify the scalar-valued trace. The project trace at WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:74 supplies the composite only."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coevaluation\", \"evaluation\"",
+   "results": "12 returned hits: CategoryTheory.ExactPairing.coevaluation, CategoryTheory.ExactPairing.coevaluation', CategoryTheory.coevaluation_comp_leftAdjointMate, CategoryTheory.coevaluation_comp_rightAdjointMate, CategoryTheory.coevaluation_comp_leftAdjointMate_assoc, CategoryTheory.coevaluation_comp_rightAdjointMate_assoc, CategoryTheory.ExactPairing.coevaluation_evaluation'', CategoryTheory.ExactPairing.evaluation_coevaluation''",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: ExactPairing supplies abstract evaluation/coevaluation for an already given dual (Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:77,103,106,236); it does not construct signed duality for perfect derived complexes or identify the scalar-valued trace. The project trace at WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:74 supplies the composite only."
+  },
+  {
+   "tool": "grep",
+   "query": "def trace|def coevaluation|def evaluation|HasRightDual",
+   "results": "25 returned hits: Mathlib/Algebra/Lie/TraceForm.lean, Mathlib/NumberTheory/ModularForms/NormTrace.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Colimits.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Limits.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf.lean, Mathlib/Algebra/Category/FGModuleCat/Basic.lean, Mathlib/Algebra/QuadraticAlgebra/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: ExactPairing supplies abstract evaluation/coevaluation for an already given dual (Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:77,103,106,236); it does not construct signed duality for perfect derived complexes or identify the scalar-valued trace. The project trace at WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:74 supplies the composite only."
+  },
+  {
+   "tool": "grep",
+   "query": "trace|coevaluation|evaluation|HasRightDual",
+   "results": "20 returned hits: Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean. Source directory: CategoryTheory/Monoidal/Rigid",
+   "date": "2026-10-16",
+   "verdict": "no whole-item match: ExactPairing supplies abstract evaluation/coevaluation for an already given dual (Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean:77,103,106,236); it does not construct signed duality for perfect derived complexes or identify the scalar-valued trace. The project trace at WeilConjectures/Mathlib/CategoryTheory/Monoidal/Rigid/Braided.lean:74 supplies the composite only."
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1826,
+ "blueprint_uses": [
+  "def-trf-coefficient-conventions",
+  "def-weil-derived-tensor",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-field-fiber"
+ ],
+ "uses_not_cited": [
+  "def-trf-coefficient-conventions",
+  "def-weil-derived-tensor",
+  "def-weil-finite-coefficient-point",
+  "def-weil-finite-field-fiber"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "recorded_in_advance",
+   "text": "*Recorded in advance* from chapter *The trace formula* of the source.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {},
+ "pointers": [
+  {
+   "to": "lem-trf-chain-supertrace",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: the lemma proves the triangle identities of the defined maps",
+   "date": "2026-10-09"
+  }
+ ],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-trf-categorical-trace",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: corrected the identification of the derived perfect category with the category of unquotiented bounded projective complexes and distinguished its overloaded finite-cohomology notation. Reused existing perfect-ring, signed tensor and Hom, splitting-package, homotopy-to-derived and degree-zero fully faithful nodes. Gave the actual signed dual and finite-dual-frame evaluation/coevaluation construction and the scalar identification. Definition only; no new nodes and no proof steps. General trace in slopmaster2 covers only the categorical composite, so is not a whole-item attachment. Return repair: reread all thirteen current statement dependencies after the coefficient-conventions landing refusal. Expanded the opening to specify exactly the finite-coefficient datum taken from the now-explicit convention bundle; the trace still lives in the derived category of ordinary A-modules, and the perfect domain is distinct from finite-cohomology and pro-etale coefficient categories. Revalidated every model and scalar identification against the current DAG before rebuilding the delivery on the current baseline. Second reading: imposed zero frame sizes on zero terms so coevaluation has finite support; specified the terminal-category site; replaced representative transport prose by the two explicit composites using the representative isomorphism and its contravariant derived dual.",
+  "blueprint": "Realizes the definition paragraphs specifying perfect complexes, derived dual, evaluation and coevaluation, the trace display, and the final scalar identification; the chain-supertrace theorem remains a forward pointer."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q25-e3e0fa159",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-e3e0fa159 (reviewer sub-agent of L); spot-checked: Read the full definition, all thirteen cited statements, source passages, and unit/chapter route. Verified dual-frame formulas, signs, representative-map directions, scalar identification, and edge cases. No new nodes or delivery faults. Inherited citation and forward-lemma issues are documented in review.md; no target or coefficient-category comparison was weakened or assumed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectCategoricalTrace",
+  "declaration": "WeilConjectures.finiteCoefficientCategoricalTrace",
+  "declarations": [
+   "DerivedCategory.perfectTraceCanonicalBraiding",
+   "DerivedCategory.perfectTraceCategory",
+   "DerivedCategory.perfectTraceModelDual",
+   "DerivedCategory.perfectTraceFrameVector",
+   "DerivedCategory.perfectTraceFrameFunctional",
+   "DerivedCategory.perfectTraceDual",
+   "DerivedCategory.perfectTraceDualMap",
+   "DerivedCategory.perfectTraceEvaluation",
+   "DerivedCategory.perfectTraceCoevaluation",
+   "DerivedCategory.perfectTraceHasRightDual",
+   "DerivedCategory.perfectTraceScalar",
+   "DerivedCategory.perfectTraceScalarInverse",
+   "DerivedCategory.perfectCategoricalTrace",
+   "WeilConjectures.finiteCoefficientCategoricalTrace"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectCategoricalTrace.lean",
+  "statement": "def finiteCoefficientCategoricalTrace (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : IntermediateField (Padic c.l) c.Qbar) [FiniteDimensional (Padic c.l) E] (n : ℕ) (_hn : 1 ≤ n) (P : DerivedCategory (ModuleCat.{u} (Padic.coefficientExtensionRing c.l E n))) (hP : DerivedCategory.IsPerfectRingComplex P) (v : P ⟶ P) : Padic.coefficientExtensionRing c.l E n",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Reuses the recorded perfect-ring predicate and upstream derived monoidal/closed structures. Constructs the actual internal-Hom dual and its canonical inverse-comparison coevaluation, descends the Koszul braiding, reuses MonoidalCategory.trace, and extracts the scalar via the fully faithful single functor. Includes the exact finite-coefficient specialization, model total Hom and frame maps; no arbitrary duality datum, new axiom or postponed theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6f8f4c514",
+  "group": "NF",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, thirteen dependencies, source, signs, canonical maps, universes, edge cases, report sections, and pilot gates. Immutable module reproduced cleanly through scompile.py. No delivery errors or fixes needed; no branch changed by this reviewer."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum\nand the coefficient\nconventions, with $A=A_{E,n}$, and define\n$D^b_{\\mathrm{fin}}(A)$ to be the category of *perfect*\n$A$-complexes, realized explicitly as the category of bounded\ncomplexes of finitely generated projective $A$-modules.\nFor $P\\in D^b_{\\mathrm{fin}}(A)$ put\n$P^\\vee=R\\operatorname{Hom}_A(P,A)$. The coevaluation and evaluation\nare\n\n$$\n\\operatorname{coev}_P:A\\longrightarrow P\\otimes_A^LP^\\vee,\\qquad\n\\operatorname{ev}_P:P^\\vee\\otimes_A^LP\\longrightarrow A,\n$$\n\nwhere $\\otimes^L_A$ is the\nderived tensor over $A$. For an\nendomorphism $v:P\\to P$, the *categorical trace* is\n\n$$\n\\operatorname{tr}_A(v\\mid P):=\n\\operatorname{ev}_P\\circ\\operatorname{sym}\\circ\n\\bigl(v\\otimes_A^L1\\bigr)\\circ\\operatorname{coev}_P\n\\in\\operatorname{End}_{D(A)}(A)\\cong A.\n$$\n\nHere $\\operatorname{End}_{D(A)}(A)\\cong A$ sends an endomorphism of\n$A$ to its degree-$0$ scalar.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

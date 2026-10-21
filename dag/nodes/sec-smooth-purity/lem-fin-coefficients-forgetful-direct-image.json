@@ -1,114 +1,103 @@
 {
-  "id": "lem-fin-coefficients-forgetful-direct-image",
-  "blueprint": {
-    "is": "lem-fin-coefficients-forgetful-direct-image",
-    "from": null,
-    "same_as": null
+ "id": "lem-fin-coefficients-forgetful-direct-image",
+ "blueprint": {
+  "is": "lem-fin-coefficients-forgetful-direct-image",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Changing finite coefficient rings in a direct image",
+ "statement": "Let $\\ell$ be a prime, let $A$ be a finite $\\mathbf F_\\ell$-algebra,\nand let $f:X\\to Y$ be a morphism of schemes. Forgetting the\n$A$-action on an $A$-sheaf identifies its derived direct image with\nthe derived direct image of the\nunderlying $\\mathbf F_\\ell$-sheaf, together with its induced\n$A$-action. In particular a sheaf annihilated by a prime $\\ell$ can\nbe computed using $\\mathbf F_\\ell$-coefficients.\nThe notation refers to ordinary derived categories.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coefficients-forgetful-direct-image.md",
+  "place": "node lem-fin-coefficients-forgetful-direct-image, order 1639"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Let $U:\\Mod(X,A)\\to\\Mod(X,\\mathbf F_\\ell)$ be the forgetful functor,\nthe restriction of scalars along the ring map\n$\\mathbf F_\\ell\\to A$, and let $U_Y$ be its counterpart on $Y$.",
+   "uses": [],
+   "elementary": null
   },
-  "kind": "statement",
-  "title": "Changing finite coefficient rings in a direct image",
-  "statement": "Let $\\ell$ be a prime, let $A$ be a finite $\\mathbf F_\\ell$-algebra,\nand let $f:X\\to Y$ be a morphism of schemes. Forgetting the\n$A$-action on an $A$-sheaf identifies its derived direct image with\nthe derived direct image of the\nunderlying $\\mathbf F_\\ell$-sheaf, together with its induced\n$A$-action. In particular a sheaf annihilated by a prime $\\ell$ can\nbe computed using $\\mathbf F_\\ell$-coefficients.\nThe notation refers to ordinary derived categories.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coefficients-forgetful-direct-image.md",
-    "place": "node lem-fin-coefficients-forgetful-direct-image, order 1639"
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Let $U:\\Mod(X,A)\\to\\Mod(X,\\mathbf F_\\ell)$ be the forgetful functor,\nthe restriction of scalars along the ring map\n$\\mathbf F_\\ell\\to A$, and let $U_Y$ be its counterpart on $Y$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 1: $U$ is exact and commutes with the direct image.*\nExactness is read off on underlying sheaves of abelian groups, the\nforgetful functor adding and removing no structure. On sections, both\ncomposites $U_Yf_*$ and $f_*U$ send an $A$-sheaf $F$ to the\n$\\mathbf F_\\ell$-module of sections of $F$ over $V\\times_YX$ for an\netale $V\\to Y$, with the $A$-action forgotten, by the definition of\nthe direct image in [def-weil-pbc-direct-image]; so the two\nfunctors are equal, not merely isomorphic.\n\n*Step 2: $U$ carries injective $A$-sheaves to injective\n$\\mathbf F_\\ell$-sheaves.* The left adjoint of $U$ is\n$-\\otimes_{\\mathbf F_\\ell}A$. This functor is exact: $A$ is a finite\nmodule over the field $\\mathbf F_\\ell$, hence free, hence flat, and\ntensoring with a flat module is exact. A functor whose left adjoint is\nexact preserves injective objects, because the adjunction isomorphism\n$\\operatorname{Hom}(-,\\,UJ)\\cong\\operatorname{Hom}(-\\otimes_{\\mathbf F_\\ell}A,\\,J)$ exhibits exactness of the first functor in the first\nvariable as exactness of the second.",
-      "uses": [
-        "def-weil-pbc-direct-image"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3: the derived identification.* Let $F\\to I^\\bullet$ be an\ninjective resolution of an $A$-sheaf $F$ in the abelian category of\n[def-weil-pbc-derived-categories]. The image $UI^\\bullet$ is a\ncomplex of injective $\\mathbf F_\\ell$-sheaves by Step 2; it is exact in\nnegative degrees and has $H^0=UF$, because $U$ is exact by Step 1 and\ncommutes with the differentials. Each term of $UI^\\bullet$ is\ntherefore acyclic for $f_*$ over $\\mathbf F_\\ell$, injective sheaves\nbeing acyclic for a left exact functor. Hence the complex\n$f_*(UI^\\bullet)$ computes $Rf_*(UF)$; by Step 1 it is the complex\n$U_Yf_*(I^\\bullet)$, and $f_*(I^\\bullet)$ computes $Rf_*F$ over\n$A$. The identification is the identity on underlying complexes, so it\nis natural in $F$ and $A$-linear, the resolutions being chosen\n$A$-linearly.",
-      "uses": [
-        "def-weil-pbc-derived-categories"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 4: complexes.* For a bounded-below complex $K$ of\n$A$-sheaves one applies Step 3 to a K-injective representative, whose\nunderlying complex of $\\mathbf F_\\ell$-sheaves remains acyclic for the\nsame reason in each degree; unbounded complexes are handled by the same\nargument with a K-injective representative in the sense of the\nconventions of [def-weil-pbc-derived-categories]. The induced\n$A$-actions are those carried by the resolutions, which are $A$-linear\nby construction, and the identification is compatible with the\ndifferentials because it is the identity on underlying complexes.",
-      "uses": [
-        "def-weil-pbc-derived-categories"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-derived-categories"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coefficients-forgetful-direct-image.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "long_proof_few_deps"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1639,
-  "blueprint_uses": [
-    "def-weil-pbc-derived-categories",
+  {
+   "text": "*Step 1: $U$ is exact and commutes with the direct image.*\nExactness is read off on underlying sheaves of abelian groups, the\nforgetful functor adding and removing no structure. On sections, both\ncomposites $U_Yf_*$ and $f_*U$ send an $A$-sheaf $F$ to the\n$\\mathbf F_\\ell$-module of sections of $F$ over $V\\times_YX$ for an\netale $V\\to Y$, with the $A$-action forgotten, by the definition of\nthe direct image in [def-weil-pbc-direct-image]; so the two\nfunctors are equal, not merely isomorphic.\n\n*Step 2: $U$ carries injective $A$-sheaves to injective\n$\\mathbf F_\\ell$-sheaves.* The left adjoint of $U$ is\n$-\\otimes_{\\mathbf F_\\ell}A$. This functor is exact: $A$ is a finite\nmodule over the field $\\mathbf F_\\ell$, hence free, hence flat, and\ntensoring with a flat module is exact. A functor whose left adjoint is\nexact preserves injective objects, because the adjunction isomorphism\n$\\operatorname{Hom}(-,\\,UJ)\\cong\\operatorname{Hom}(-\\otimes_{\\mathbf F_\\ell}A,\\,J)$ exhibits exactness of the first functor in the first\nvariable as exactness of the second.",
+   "uses": [
     "def-weil-pbc-direct-image"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": false
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-cbc",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\ell$ be a prime, let $A$ be a finite $\\mathbf F_\\ell$-algebra,\nand let $f:X\\to Y$ be a morphism of schemes. Forgetting the\n$A$-action on an $A$-sheaf identifies its derived direct image with\nthe derived direct image of the\nunderlying $\\mathbf F_\\ell$-sheaf, together with its induced\n$A$-action. In particular a sheaf annihilated by a prime $\\ell$ can\nbe computed using $\\mathbf F_\\ell$-coefficients.",
-    "proof": [
-      {
-        "text": "Let $U:\\Mod(X,A)\\to\\Mod(X,\\mathbf F_\\ell)$ be the forgetful functor,\nthe restriction of scalars along the ring map\n$\\mathbf F_\\ell\\to A$, and let $U_Y$ be its counterpart on $Y$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 1: $U$ is exact and commutes with the direct image.*\nExactness is read off on underlying sheaves of abelian groups, the\nforgetful functor adding and removing no structure. On sections, both\ncomposites $U_Yf_*$ and $f_*U$ send an $A$-sheaf $F$ to the\n$\\mathbf F_\\ell$-module of sections of $F$ over $V\\times_YX$ for an\netale $V\\to Y$, with the $A$-action forgotten, by the definition of\nthe direct image in [def-weil-pbc-direct-image]; so the two\nfunctors are equal, not merely isomorphic.\n\n*Step 2: $U$ carries injective $A$-sheaves to injective\n$\\mathbf F_\\ell$-sheaves.* The left adjoint of $U$ is\n$-\\otimes_{\\mathbf F_\\ell}A$. This functor is exact: $A$ is a finite\nmodule over the field $\\mathbf F_\\ell$, hence free, hence flat, and\ntensoring with a flat module is exact. A functor whose left adjoint is\nexact preserves injective objects, because the adjunction isomorphism\n$\\operatorname{Hom}(-,\\,UJ)\\cong\\operatorname{Hom}(-\\otimes_{\\mathbf F_\\ell}A,\\,J)$ exhibits exactness of the first functor in the first\nvariable as exactness of the second.",
-        "uses": [
-          "def-weil-pbc-direct-image"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 3: the derived identification.* Let $F\\to I^\\bullet$ be an\ninjective resolution of an $A$-sheaf $F$ in the abelian category of\n[def-weil-pbc-derived-categories]. The image $UI^\\bullet$ is a\ncomplex of injective $\\mathbf F_\\ell$-sheaves by Step 2; it is exact in\nnegative degrees and has $H^0=UF$, because $U$ is exact by Step 1 and\ncommutes with the differentials. Each term of $UI^\\bullet$ is\ntherefore acyclic for $f_*$ over $\\mathbf F_\\ell$, injective sheaves\nbeing acyclic for a left exact functor. Hence the complex\n$f_*(UI^\\bullet)$ computes $Rf_*(UF)$; by Step 1 it is the complex\n$U_Yf_*(I^\\bullet)$, and $f_*(I^\\bullet)$ computes $Rf_*F$ over\n$A$. The identification is the identity on underlying complexes, so it\nis natural in $F$ and $A$-linear, the resolutions being chosen\n$A$-linearly.",
-        "uses": [
-          "def-weil-pbc-derived-categories"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 4: complexes.* For a bounded-below complex $K$ of\n$A$-sheaves one applies Step 3 to a K-injective representative, whose\nunderlying complex of $\\mathbf F_\\ell$-sheaves remains acyclic for the\nsame reason in each degree; unbounded complexes are handled by the same\nargument with a K-injective representative in the sense of the\nconventions of [def-weil-pbc-derived-categories]. The induced\n$A$-actions are those carried by the resolutions, which are $A$-linear\nby construction, and the identification is compatible with the\ndifferentials because it is the identity on underlying complexes.",
-        "uses": [
-          "def-weil-pbc-derived-categories"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "*Step 3: the derived identification.* Let $F\\to I^\\bullet$ be an\ninjective resolution of an $A$-sheaf $F$ in the abelian category of\n[def-weil-pbc-derived-categories]. The image $UI^\\bullet$ is a\ncomplex of injective $\\mathbf F_\\ell$-sheaves by Step 2; it is exact in\nnegative degrees and has $H^0=UF$, because $U$ is exact by Step 1 and\ncommutes with the differentials. Each term of $UI^\\bullet$ is\ntherefore acyclic for $f_*$ over $\\mathbf F_\\ell$, injective sheaves\nbeing acyclic for a left exact functor. Hence the complex\n$f_*(UI^\\bullet)$ computes $Rf_*(UF)$; by Step 1 it is the complex\n$U_Yf_*(I^\\bullet)$, and $f_*(I^\\bullet)$ computes $Rf_*F$ over\n$A$. The identification is the identity on underlying complexes, so it\nis natural in $F$ and $A$-linear, the resolutions being chosen\n$A$-linearly.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 4: complexes.* For a bounded-below complex $K$ of\n$A$-sheaves one applies Step 3 to a K-injective representative, whose\nunderlying complex of $\\mathbf F_\\ell$-sheaves remains acyclic for the\nsame reason in each degree; unbounded complexes are handled by the same\nargument with a K-injective representative in the sense of the\nconventions of [def-weil-pbc-derived-categories]. The induced\n$A$-actions are those carried by the resolutions, which are $A$-linear\nby construction, and the identification is compatible with the\ndifferentials because it is the identity on underlying complexes.",
+   "uses": [
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-coefficients-forgetful-direct-image.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1639,
+ "blueprint_uses": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\ell$ be a prime, let $A$ be a finite $\\mathbf F_\\ell$-algebra,\nand let $f:X\\to Y$ be a morphism of schemes. Forgetting the\n$A$-action on an $A$-sheaf identifies its derived direct image with\nthe derived direct image of the\nunderlying $\\mathbf F_\\ell$-sheaf, together with its induced\n$A$-action. In particular a sheaf annihilated by a prime $\\ell$ can\nbe computed using $\\mathbf F_\\ell$-coefficients.",
+  "proof": [
+   {
+    "text": "Let $U:\\Mod(X,A)\\to\\Mod(X,\\mathbf F_\\ell)$ be the forgetful functor,\nthe restriction of scalars along the ring map\n$\\mathbf F_\\ell\\to A$, and let $U_Y$ be its counterpart on $Y$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 1: $U$ is exact and commutes with the direct image.*\nExactness is read off on underlying sheaves of abelian groups, the\nforgetful functor adding and removing no structure. On sections, both\ncomposites $U_Yf_*$ and $f_*U$ send an $A$-sheaf $F$ to the\n$\\mathbf F_\\ell$-module of sections of $F$ over $V\\times_YX$ for an\netale $V\\to Y$, with the $A$-action forgotten, by the definition of\nthe direct image in [def-weil-pbc-direct-image]; so the two\nfunctors are equal, not merely isomorphic.\n\n*Step 2: $U$ carries injective $A$-sheaves to injective\n$\\mathbf F_\\ell$-sheaves.* The left adjoint of $U$ is\n$-\\otimes_{\\mathbf F_\\ell}A$. This functor is exact: $A$ is a finite\nmodule over the field $\\mathbf F_\\ell$, hence free, hence flat, and\ntensoring with a flat module is exact. A functor whose left adjoint is\nexact preserves injective objects, because the adjunction isomorphism\n$\\operatorname{Hom}(-,\\,UJ)\\cong\\operatorname{Hom}(-\\otimes_{\\mathbf F_\\ell}A,\\,J)$ exhibits exactness of the first functor in the first\nvariable as exactness of the second.",
+    "uses": [
+     "def-weil-pbc-direct-image"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: the derived identification.* Let $F\\to I^\\bullet$ be an\ninjective resolution of an $A$-sheaf $F$ in the abelian category of\n[def-weil-pbc-derived-categories]. The image $UI^\\bullet$ is a\ncomplex of injective $\\mathbf F_\\ell$-sheaves by Step 2; it is exact in\nnegative degrees and has $H^0=UF$, because $U$ is exact by Step 1 and\ncommutes with the differentials. Each term of $UI^\\bullet$ is\ntherefore acyclic for $f_*$ over $\\mathbf F_\\ell$, injective sheaves\nbeing acyclic for a left exact functor. Hence the complex\n$f_*(UI^\\bullet)$ computes $Rf_*(UF)$; by Step 1 it is the complex\n$U_Yf_*(I^\\bullet)$, and $f_*(I^\\bullet)$ computes $Rf_*F$ over\n$A$. The identification is the identity on underlying complexes, so it\nis natural in $F$ and $A$-linear, the resolutions being chosen\n$A$-linearly.",
+    "uses": [
+     "def-weil-pbc-derived-categories"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 4: complexes.* For a bounded-below complex $K$ of\n$A$-sheaves one applies Step 3 to a K-injective representative, whose\nunderlying complex of $\\mathbf F_\\ell$-sheaves remains acyclic for the\nsame reason in each degree; unbounded complexes are handled by the same\nargument with a K-injective representative in the sense of the\nconventions of [def-weil-pbc-derived-categories]. The induced\n$A$-actions are those carried by the resolutions, which are $A$-linear\nby construction, and the identification is compatible with the\ndifferentials because it is the identity on underlying complexes.",
+    "uses": [
+     "def-weil-pbc-derived-categories"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

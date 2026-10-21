@@ -1,151 +1,140 @@
 {
-  "kind": "statement",
-  "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and the short exact coefficient diagram immediately after it; read online at https://stacks.math.columbia.edu/tag/0BED."
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED, lemma-kunneth, equation-kunneth-on-cech and the short exact coefficient diagram immediately after it; read online at https://stacks.math.columbia.edu/tag/0BED."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PicardExternalCupLeftComparisonComplexes",
+  "date": "2026-10-13",
+  "group": "U3"
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-cube",
+ "lean_audit": {},
+ "id": "lem-sc-picard-external-cup-left-cech-comparison",
+ "title": "Natural Cech cup and its scalar-model homology comparison",
+ "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}k$ and $g:Y\\to\\operatorname{Spec}k$ morphisms of quasi-compact schemes [def-pc-scheme] with affine diagonals, and $G$ a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent]. For every $\\mathcal O_X$-module $F$, use the concrete functors $T(F)$ and $P(F)$ of [lem-sc-picard-external-cup-left-cech-exact]: tensor total of the two finite-cover scalar Cech complexes extended by zero, and scalar Cech complex on the product cover of the external coefficient extended by zero, respectively. There exists a natural transformation $\\theta:T\\Rightarrow P$ on all left coefficient modules. For every quasi-coherent $F$, every cochain map $d:\\operatorname{picardExternalTotal}(f,g,F,G)\\to\\operatorname{picardScalarModel}(f\\circ\\operatorname{pr}_1,\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G)$ satisfying the normalization predicate of [lem-sc-picard-external-cup-cochain], and every natural $n$, there exist isomorphisms $a:H^n(T(F))\\cong H^n(\\operatorname{picardExternalTotal}(f,g,F,G))$ and $b:H^n(P(F))\\cong H^n(\\operatorname{picardScalarModel}(f\\circ\\operatorname{pr}_1,\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G))$ with $H^n(\\theta_F);b=a;H^n(d)$. The scalar models and their canonical homology identifications are those of [lem-sc-picard-kunneth-resolution-model]. There is no short exact sequence or connecting homomorphism in this assertion.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "lem-sc-picard-external-cup-left-cech-exact",
+  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-kunneth-resolution-model"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the natural transformation theta, the generator-coordinate equivalence e into tensor Cech homology and the product comparison b from the geometric Cech generator statement. No scalar-total cochain realization is chosen in this step.",
+   "uses": [
+    "lem-sc-picard-external-cup-left-cech-generators"
+   ],
+   "elementary": false
   },
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.PicardExternalCupLeftComparisonComplexes",
-    "date": "2026-10-13",
-    "group": "U3"
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-cube",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "id": "lem-sc-picard-external-cup-left-cech-comparison",
-  "title": "Natural Cech cup and its scalar-model homology comparison",
-  "statement": "Let $k$ be a field [def-weil-field], $f:X\\to\\operatorname{Spec}k$ and $g:Y\\to\\operatorname{Spec}k$ morphisms of quasi-compact schemes [def-pc-scheme] with affine diagonals, and $G$ a quasi-coherent $\\mathcal O_Y$-module [pqf-def-coherent]. For every $\\mathcal O_X$-module $F$, use the concrete functors $T(F)$ and $P(F)$ of [lem-sc-picard-external-cup-left-cech-exact]: tensor total of the two finite-cover scalar Cech complexes extended by zero, and scalar Cech complex on the product cover of the external coefficient extended by zero, respectively. There exists a natural transformation $\\theta:T\\Rightarrow P$ on all left coefficient modules. For every quasi-coherent $F$, every cochain map $d:\\operatorname{picardExternalTotal}(f,g,F,G)\\to\\operatorname{picardScalarModel}(f\\circ\\operatorname{pr}_1,\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G)$ satisfying the normalization predicate of [lem-sc-picard-external-cup-cochain], and every natural $n$, there exist isomorphisms $a:H^n(T(F))\\cong H^n(\\operatorname{picardExternalTotal}(f,g,F,G))$ and $b:H^n(P(F))\\cong H^n(\\operatorname{picardScalarModel}(f\\circ\\operatorname{pr}_1,\\operatorname{pr}_1^*F\\otimes\\operatorname{pr}_2^*G))$ with $H^n(\\theta_F);b=a;H^n(d)$. The scalar models and their canonical homology identifications are those of [lem-sc-picard-kunneth-resolution-model]. There is no short exact sequence or connecting homomorphism in this assertion.",
-  "stmt_deps": [
-    "def-weil-field",
-    "def-pc-scheme",
-    "pqf-def-coherent",
-    "lem-sc-picard-external-cup-left-cech-exact",
-    "lem-sc-picard-external-cup-cochain",
+  {
+   "text": "For the two scalar models apply tensor_kunneth_nat with their proved negative-term vanishing, obtaining s from the same direct sum to scalar tensor-total homology. Define the required tensor comparison a as e inverse followed by s.",
+   "uses": [
+    "lem-sc-qcoh-cech-total-tensor-nat-iso",
     "lem-sc-picard-kunneth-resolution-model"
-  ],
-  "proof": [
-    {
-      "text": "Obtain the natural transformation theta, the generator-coordinate equivalence e into tensor Cech homology and the product comparison b from the geometric Cech generator statement. No scalar-total cochain realization is chosen in this step.",
-      "uses": [
-        "lem-sc-picard-external-cup-left-cech-generators"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For the two scalar models apply tensor_kunneth_nat with their proved negative-term vanishing, obtaining s from the same direct sum to scalar tensor-total homology. Define the required tensor comparison a as e inverse followed by s.",
-      "uses": [
-        "lem-sc-qcoh-cech-total-tensor-nat-iso",
-        "lem-sc-picard-kunneth-resolution-model"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For every direct-sum summand and pure tensor x tensor y, lift x and y through the epimorphic scalar-model homology projections. Tensor Kunneth supplies a total cycle z and its homology formula. The generator formula for theta and normalization of the given d have the identical externalCup value; cancel the injective product scalarModelEquiv. DirectSum.linearMap_ext and TensorProduct.ext' extend the equality to the whole direct sum. Evaluate at e inverse of an arbitrary tensor-Cech homology class to get H(theta) followed by b equals a followed by H(d).",
-      "uses": [
-        "lem-sc-picard-external-cup-left-cech-generators",
-        "lem-sc-picard-external-cup-cochain",
-        "lem-sc-qcoh-cech-total-tensor-nat-iso"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-sc-picard-external-cup-cochain",
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every direct-sum summand and pure tensor x tensor y, lift x and y through the epimorphic scalar-model homology projections. Tensor Kunneth supplies a total cycle z and its homology formula. The generator formula for theta and normalization of the given d have the identical externalCup value; cancel the injective product scalarModelEquiv. DirectSum.linearMap_ext and TensorProduct.ext' extend the equality to the whole direct sum. Evaluate at e inverse of an arbitrary tensor-Cech homology class to get H(theta) followed by b equals a followed by H(d).",
+   "uses": [
     "lem-sc-picard-external-cup-left-cech-generators",
-    "lem-sc-picard-kunneth-resolution-model",
+    "lem-sc-picard-external-cup-cochain",
     "lem-sc-qcoh-cech-total-tensor-nat-iso"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BED equation-kunneth-on-cech; J2 implements scalar-total Kunneth comparison, cycle lifts, normalization, direct-sum/tensor extensionality and cancellation, leaving only the geometric Cech generator calculation."
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-sc-theorem-of-cube",
-      "place": "The refinement and cup construction of Tag 0BED equation-kunneth-on-cech beneath thm-sc-theorem-of-cube, with its canonical scalar homology comparison; no exact-sequence claim.",
-      "via": [
-        "lem-sc-picard-external-cup-left-comparison-complexes",
-        "lem-sc-picard-external-cup-left-homology-ladder",
-        "lem-sc-picard-external-cup-shift-left",
-        "lem-sc-picard-external-cup-quasi-iso",
-        "lem-sc-picard-kunneth-cech-models",
-        "lem-sc-picard-kunneth-qcoh-iso-exists",
-        "lem-sc-picard-kunneth-qcoh",
-        "lem-sc-picard-h1-product-injective"
-      ]
-    },
-    "same_as": []
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Natural transformation from the tensor total Cech complex to the product cover Cech complex compatible with scalar model homology and external cup",
-      "results": "Internal Server Error; service unavailable",
-      "date": "2026-10-13",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Natural transformation from the tensor total Cech complex to the product cover Cech complex compatible with scalar model homology and external cup",
-      "results": "8 hits: HomologicalComplex.ιTensorObj; AlgebraicTopology.DoldKan.Γ₀.Obj.map, Γ₀.map_app, Γ₀_map_app, PInftyToNormalizedMooreComplex, Γ₀.map, natTransPInfty_f; CategoryTheory.Idempotents.DoldKan.Γ_map_app. No Cech external-cup natural transformation.",
-      "date": "2026-10-13",
-      "verdict": "no matching statement"
-    },
-    {
-      "tool": "grep",
-      "query": "cechCup.*naturality|cech.*tensor|Cech.*Cup",
-      "results": "0 hits",
-      "date": "2026-10-13",
-      "verdict": "no matching statement"
-    }
-  ],
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechComparison",
-    "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupLeftCechComparison.lean",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCup_left_cech_comparison",
-    "statement": "theorem picardExternalCup_left_cech_comparison {k : Type w} [Field k] {X Y : Scheme.{w}} (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [CompactSpace X] [CompactSpace Y] [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)] (G : Y.Modules) [G.IsQuasicoherent] : ∃ θ : picardLeftTensorCechFunctor f g G ⟶ picardLeftProductCechFunctor f g G, ∀ (F : X.Modules) (_ : F.IsQuasicoherent) (d : picardExternalTotal f g F G ⟶ picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)), IsPicardExternalCupCochain f g F G d → ∀ n : ℕ, ∃ (a : ((picardLeftTensorCechFunctor f g G).obj F).homology (n : ℤ) ≅ (picardExternalTotal f g F G).homology (n : ℤ)) (b : ((picardLeftProductCechFunctor f g G).obj F).homology (n : ℤ) ≅ (picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)).homology (n : ℤ)), HomologicalComplex.homologyMap (θ.app F) (n : ℤ) ≫ b.hom = a.hom ≫ HomologicalComplex.homologyMap d (n : ℤ)",
-    "branch": "sheaf-dag",
-    "by": "U3",
-    "date": "2026-10-13",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.Modules.picardExternalCup_left_cech_comparison"
-    ]
-  },
-  "reviewed": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "U3",
-    "result": "pass",
-    "landing": "20261013T100149-L-2493559",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-13",
-    "by": "L",
-    "reviewer": "X-9db49",
-    "group": "J2",
-    "result": "pass",
-    "landing": "20261013T115430-L-3359275",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered files matched the packet and node statements; both delivered modules and the direct importer compiled cleanly, with only the documented generator sorryAx remaining."
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-sc-picard-external-cup-cochain",
+  "lem-sc-picard-external-cup-left-cech-generators",
+  "lem-sc-picard-kunneth-resolution-model",
+  "lem-sc-qcoh-cech-total-tensor-nat-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BED equation-kunneth-on-cech; J2 implements scalar-total Kunneth comparison, cycle lifts, normalization, direct-sum/tensor extensionality and cancellation, leaving only the geometric Cech generator calculation."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sc-theorem-of-cube",
+   "place": "The refinement and cup construction of Tag 0BED equation-kunneth-on-cech beneath thm-sc-theorem-of-cube, with its canonical scalar homology comparison; no exact-sequence claim.",
+   "via": [
+    "lem-sc-picard-external-cup-left-comparison-complexes",
+    "lem-sc-picard-external-cup-left-homology-ladder",
+    "lem-sc-picard-external-cup-shift-left",
+    "lem-sc-picard-external-cup-quasi-iso",
+    "lem-sc-picard-kunneth-cech-models",
+    "lem-sc-picard-kunneth-qcoh-iso-exists",
+    "lem-sc-picard-kunneth-qcoh",
+    "lem-sc-picard-h1-product-injective"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation from the tensor total Cech complex to the product cover Cech complex compatible with scalar model homology and external cup",
+   "results": "Internal Server Error; service unavailable",
+   "date": "2026-10-13",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation from the tensor total Cech complex to the product cover Cech complex compatible with scalar model homology and external cup",
+   "results": "8 hits: HomologicalComplex.ιTensorObj; AlgebraicTopology.DoldKan.Γ₀.Obj.map, Γ₀.map_app, Γ₀_map_app, PInftyToNormalizedMooreComplex, Γ₀.map, natTransPInfty_f; CategoryTheory.Idempotents.DoldKan.Γ_map_app. No Cech external-cup natural transformation.",
+   "date": "2026-10-13",
+   "verdict": "no matching statement"
+  },
+  {
+   "tool": "grep",
+   "query": "cechCup.*naturality|cech.*tensor|Cech.*Cup",
+   "results": "0 hits",
+   "date": "2026-10-13",
+   "verdict": "no matching statement"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PicardExternalCupLeftCechComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/PicardExternalCupLeftCechComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.picardExternalCup_left_cech_comparison",
+  "statement": "theorem picardExternalCup_left_cech_comparison {k : Type w} [Field k] {X Y : Scheme.{w}} (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)) [CompactSpace X] [CompactSpace Y] [IsAffineHom (pullback.diagonal f)] [IsAffineHom (pullback.diagonal g)] (G : Y.Modules) [G.IsQuasicoherent] : ∃ θ : picardLeftTensorCechFunctor f g G ⟶ picardLeftProductCechFunctor f g G, ∀ (F : X.Modules) (_ : F.IsQuasicoherent) (d : picardExternalTotal f g F G ⟶ picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)), IsPicardExternalCupCochain f g F G d → ∀ n : ℕ, ∃ (a : ((picardLeftTensorCechFunctor f g G).obj F).homology (n : ℤ) ≅ (picardExternalTotal f g F G).homology (n : ℤ)) (b : ((picardLeftProductCechFunctor f g G).obj F).homology (n : ℤ) ≅ (picardScalarModel (pullback.fst f g ≫ f) (externalCupCoefficients f g F G)).homology (n : ℤ)), HomologicalComplex.homologyMap (θ.app F) (n : ℤ) ≫ b.hom = a.hom ≫ HomologicalComplex.homologyMap d (n : ℤ)",
+  "branch": "sheaf-dag",
+  "by": "U3",
+  "date": "2026-10-13",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.picardExternalCup_left_cech_comparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U3",
+  "result": "pass",
+  "landing": "20261013T100149-L-2493559",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-13",
+  "by": "L",
+  "reviewer": "X-9db49",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261013T115430-L-3359275",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered files matched the packet and node statements; both delivered modules and the direct importer compiled cleanly, with only the documented generator sorryAx remaining."
+ }
 }

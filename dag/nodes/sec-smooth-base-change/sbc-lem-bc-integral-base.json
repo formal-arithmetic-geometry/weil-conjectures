@@ -1,220 +1,209 @@
 {
-  "id": "sbc-lem-bc-integral-base",
-  "blueprint": {
-    "is": "sbc-lem-bc-integral-base",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Integral base change on the source",
-  "statement": "Let $f:X\\to S$ and $n\\geq1$ invertible on $S$ be as in [sbc-def-base-change-property], and let $q\\geq1$. Consider a commutative diagram of schemes\n$$\n\\begin{array}{ccccccc}\nX & \\xleftarrow{} & X\\prime & \\xleftarrow{\\pi\\prime} & X\\prime\\prime & \\xleftarrow{h\\prime} & Y\\\\\nf\\downarrow && f\\prime\\downarrow && f\\prime\\prime\\downarrow && e\\downarrow\\\\\nS & \\xleftarrow{} & S\\prime & \\xleftarrow{\\pi} & S\\prime\\prime & \\xleftarrow{g\\prime} & T\n\\end{array}\n$$\nwhose three squares are Cartesian [sbc-def-base-change-square]. Put $h=\\pi\\prime\\circ h\\prime:Y\\to X\\prime$ and $g=\\pi\\circ g\\prime:T\\to S\\prime$. Assume $g\\prime$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions] and $\\pi$ is integral [def-weil-finite-integral-morphism]. Let $\\mathcal F$ be an abelian sheaf on $T_{\\mathrm{Et}}$ annihilated by $n$. If the degree-$q$ base-change map [sbc-def-base-change-map]\n$$\nf\\prime{}^{-1}R^qg_*\\mathcal F\\longrightarrow R^qh_*e^{-1}\\mathcal F\n$$\nis an isomorphism, then the degree-$q$ base-change map\n$$\nf\\prime\\prime{}^{-1}R^qg\\prime_*\\mathcal F\\longrightarrow R^qh\\prime_*e^{-1}\\mathcal F\n$$\nis an isomorphism. No base-change hypothesis on $f$ and no surjectivity hypothesis on $\\pi$ is required.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-universal-datum/sbc-lem-bc-integral-base.md",
-    "place": "node sbc-lem-bc-integral-base, order 1395",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0F05"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "sbc-def-base-change-property",
-    "sbc-def-base-change-map",
-    "sbc-def-base-change-square",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-finite-integral-morphism"
-  ],
-  "proof": [
-    {
-      "text": "The middle square identifies $\\pi\\prime:X\\prime\\prime\\to X\\prime$ as a base change of $\\pi:S\\prime\\prime\\to S\\prime$, so it is integral by [lem-sbc-integral-morphism-base-change]. Thus [sbc-lem-integral-etale-direct-image-exact] applies to both $\\pi$ and $\\pi\\prime$: their direct images on abelian etale sheaves are exact, and their bounded-below derived direct images are their termwise direct images.",
-      "uses": [
-        "lem-sbc-integral-morphism-base-change",
-        "sbc-lem-integral-etale-direct-image-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F05, label lemma-base-change-q-integral-bottom, proof"
-      }
-    },
-    {
-      "text": "Apply [lem-sbc-integral-underived-exchange] with coefficient ring $\\mathbf Z$ to the middle square, with integral direct-image map $\\pi$, its base change $\\pi\\prime$, and inverse-image map $f\\prime$. It gives the canonical isomorphism $f\\prime{}^{-1}\\pi_*\\cong\\pi\\prime_*f\\prime\\prime{}^{-1}$. Since the two direct images are exact, every complex computes their derived functors by [lem-weil-pbc-exact-functor-derived-functor]. Apply the underived exchange termwise: its components commute with differentials by naturality and are isomorphisms in every degree. Its derived map is the derived exchange of [sbc-def-base-change-map], as follows. For a bounded-below complex $K$, choose a resolution $K\\to I$. Exactness makes $\\pi_*K\\to\\pi_*I$ and $\\pi\\prime_*f\\prime\\prime{}^{-1}K\\to\\pi\\prime_*f\\prime\\prime{}^{-1}I$ quasi-isomorphisms. Naturality of underived exchange gives the commutative square with these two comparison maps as its vertical sides and the exchanges at $K$ and $I$ as its horizontal sides. All inverse images here are the exact termwise functors specified in [sbc-def-base-change-map]. The adjunctions $\\pi^{-1}\\dashv\\pi_*$ and $\\pi\\prime{}^{-1}\\dashv\\pi\\prime_*$ therefore descend termwise; their units and counits are the images of the sheaf units and counits. The transpose of the exchange at $I$ is explicitly $\\pi\\prime{}^{-1}f\\prime{}^{-1}\\pi_*I\\cong f\\prime\\prime{}^{-1}\\pi^{-1}\\pi_*I\\xrightarrow{f\\prime\\prime{}^{-1}\\varepsilon_\\pi}f\\prime\\prime{}^{-1}I$. Localizing this transpose is precisely the derived transpose in [sbc-def-base-change-map], so the commutative comparison square identifies the termwise exchange with that specified derived map. Hence the derived exchange $\\alpha:f\\prime{}^{-1}R\\pi_*\\to R\\pi\\prime_*f\\prime\\prime{}^{-1}$ is an isomorphism, in particular at $Rg\\prime_*\\mathcal F$.",
-      "uses": [
-        "lem-sbc-integral-underived-exchange",
-        "sbc-lem-integral-etale-direct-image-exact",
-        "lem-weil-pbc-exact-functor-derived-functor",
-        "sbc-def-base-change-map"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F05, label lemma-base-change-q-integral-bottom, proof"
-      }
-    },
-    {
-      "text": "Let $\\beta:f\\prime\\prime{}^{-1}Rg\\prime_*\\mathcal F\\to Rh\\prime_*e^{-1}\\mathcal F$ be the inner derived base-change map. Apply the vertical-pasting equation, clause (3) of [lem-weil-pbc-exchange-identity-pasting], to the square of $\\pi$ and the square of $g\\prime$. The exchanged-square convention identifies the outer map with\n$$f\\prime{}^{-1}R(\\pi g\\prime)_*\\mathcal F\\ \\cong\\ f\\prime{}^{-1}R\\pi_*Rg\\prime_*\\mathcal F\\ \\xrightarrow{\\alpha}\\ R\\pi\\prime_*f\\prime\\prime{}^{-1}Rg\\prime_*\\mathcal F\\ \\xrightarrow{R\\pi\\prime_*\\beta}\\ R\\pi\\prime_*Rh\\prime_*e^{-1}\\mathcal F\\ \\cong\\ R(\\pi\\prime h\\prime)_*e^{-1}\\mathcal F.$$\nThe composition isomorphisms are exactly those in that cited equation. By [sbc-def-base-change-map] the degree-$q$ maps are the cohomology of these derived maps. Because $\\pi\\prime_*$ is exact, [lem-weil-pbc-exact-functor-complex-cohomology] identifies $H^q(R\\pi\\prime_*\\beta)$ naturally with $\\pi\\prime_*H^q(\\beta)$. Consequently, up to the displayed isomorphisms and $H^q(\\alpha)$, the outer degree-$q$ map is $\\pi\\prime_*b$, where $b=H^q(\\beta)$ is the desired inner degree-$q$ map. The assumed isomorphism of the outer map therefore implies that $\\pi\\prime_*b$ is an isomorphism.",
-      "uses": [
-        "lem-weil-pbc-exchange-identity-pasting",
-        "sbc-def-base-change-map",
-        "sbc-lem-integral-etale-direct-image-exact",
-        "lem-weil-pbc-exact-functor-complex-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F05, label lemma-base-change-q-integral-bottom, proof"
-      }
-    },
-    {
-      "text": "Exactness of $\\pi\\prime_*$ gives $\\pi\\prime_*\\ker b=\\ker(\\pi\\prime_*b)=0$ and $\\pi\\prime_*\\operatorname{coker}b=\\operatorname{coker}(\\pi\\prime_*b)=0$, since the latter map is an isomorphism. Apply [lem-sbc-integral-direct-image-detects-zero] to each of these sheaves, again with coefficient ring $\\mathbf Z$ and integral map $\\pi\\prime$. It yields $\\ker b=0$ and $\\operatorname{coker}b=0$. In the abelian category of abelian etale sheaves a map with zero kernel and cokernel is an isomorphism, so $b$ is an isomorphism as claimed. No surjectivity of $\\pi$ was used.",
-      "uses": [
-        "sbc-lem-integral-etale-direct-image-exact",
-        "lem-sbc-integral-direct-image-detects-zero"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F05, label lemma-base-change-q-integral-bottom, proof"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "sbc-lem-bc-integral-base",
+ "blueprint": {
+  "is": "sbc-lem-bc-integral-base",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral base change on the source",
+ "statement": "Let $f:X\\to S$ and $n\\geq1$ invertible on $S$ be as in [sbc-def-base-change-property], and let $q\\geq1$. Consider a commutative diagram of schemes\n$$\n\\begin{array}{ccccccc}\nX & \\xleftarrow{} & X\\prime & \\xleftarrow{\\pi\\prime} & X\\prime\\prime & \\xleftarrow{h\\prime} & Y\\\\\nf\\downarrow && f\\prime\\downarrow && f\\prime\\prime\\downarrow && e\\downarrow\\\\\nS & \\xleftarrow{} & S\\prime & \\xleftarrow{\\pi} & S\\prime\\prime & \\xleftarrow{g\\prime} & T\n\\end{array}\n$$\nwhose three squares are Cartesian [sbc-def-base-change-square]. Put $h=\\pi\\prime\\circ h\\prime:Y\\to X\\prime$ and $g=\\pi\\circ g\\prime:T\\to S\\prime$. Assume $g\\prime$ is quasi-compact and quasi-separated [def-weil-pbc-scheme-conventions] and $\\pi$ is integral [def-weil-finite-integral-morphism]. Let $\\mathcal F$ be an abelian sheaf on $T_{\\mathrm{Et}}$ annihilated by $n$. If the degree-$q$ base-change map [sbc-def-base-change-map]\n$$\nf\\prime{}^{-1}R^qg_*\\mathcal F\\longrightarrow R^qh_*e^{-1}\\mathcal F\n$$\nis an isomorphism, then the degree-$q$ base-change map\n$$\nf\\prime\\prime{}^{-1}R^qg\\prime_*\\mathcal F\\longrightarrow R^qh\\prime_*e^{-1}\\mathcal F\n$$\nis an isomorphism. No base-change hypothesis on $f$ and no surjectivity hypothesis on $\\pi$ is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-lem-universal-datum/sbc-lem-bc-integral-base.md",
+  "place": "node sbc-lem-bc-integral-base, order 1395",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F05"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sbc-def-base-change-property",
+  "sbc-def-base-change-map",
+  "sbc-def-base-change-square",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The middle square identifies $\\pi\\prime:X\\prime\\prime\\to X\\prime$ as a base change of $\\pi:S\\prime\\prime\\to S\\prime$, so it is integral by [lem-sbc-integral-morphism-base-change]. Thus [sbc-lem-integral-etale-direct-image-exact] applies to both $\\pi$ and $\\pi\\prime$: their direct images on abelian etale sheaves are exact, and their bounded-below derived direct images are their termwise direct images.",
+   "uses": [
     "lem-sbc-integral-morphism-base-change",
-    "sbc-lem-integral-etale-direct-image-exact",
-    "lem-sbc-integral-underived-exchange",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "sbc-def-base-change-map",
-    "lem-weil-pbc-exchange-identity-pasting",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-sbc-integral-direct-image-detects-zero"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "sbc-lem-integral-etale-direct-image-exact"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
     "place": "Tag 0F05, label lemma-base-change-q-integral-bottom, proof"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "baseChangeHomologyMap|integral.*[Ee]xchange|[Ee]xchange.*integral",
-      "results": "Actual search: 4 hits; Mathlib/FieldTheory/Minpoly/Field.lean, Mathlib/RingTheory/WittVector/Domain.lean, Mathlib/RingTheory/WittVector/Domain.lean, Mathlib/RingTheory/Polynomial/IrreducibleRing.lean",
-      "date": "2026-10-14",
-      "verdict": "no full item match: hits give etale morphism properties, scheme-module pushforward composition, or integral morphism stability, not etale cohomology base-change maps."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Integral source base change preserves the isomorphism property of etale cohomology base change maps",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Integral direct image of etale sheaves detects isomorphisms and identifies base change maps under composition",
-      "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.Etale.comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.IsEtaleAt.comp, AlgebraicGeometry.IsEtale.instFormallyUnramified",
-      "date": "2026-10-14",
-      "verdict": "no full item match: hits give etale morphism properties, scheme-module pushforward composition, or integral morphism stability, not etale cohomology base-change maps."
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.IsIntegralHom",
-      "results": "Actual search: 12 hits; AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme, AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed",
-      "date": "2026-10-14",
-      "verdict": "no full item match: hits give etale morphism properties, scheme-module pushforward composition, or integral morphism stability, not etale cohomology base-change maps."
-    },
-    {
-      "tool": "grep",
-      "query": "derivedBaseChange|baseChangeMap|ReflectsIsomorphisms",
-      "results": "Actual search: 6 hits; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; directory AlgebraicGeometry",
-      "date": "2026-10-14",
-      "verdict": "no full item match: hits give etale morphism properties, scheme-module pushforward composition, or integral morphism stability, not etale cohomology base-change maps."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The base change map for a composite direct image factors through the exchange for an integral morphism and reflects isomorphisms",
-      "results": "Actual search: 8 hits; AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, RingHom.isIntegral_isStableUnderBaseChange, AlgebraicGeometry.IsIntegralHom.comp_iff, AlgebraicGeometry.IsIntegralHom.instCompScheme, WeierstrassCurve.baseChange_integralModel_eq, AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1, AlgebraicGeometry.Scheme.Modules.pushforwardComp",
-      "date": "2026-10-14",
-      "verdict": "no full item match: hits give etale morphism properties, scheme-module pushforward composition, or integral morphism stability, not etale cohomology base-change maps."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1395,
-  "blueprint_uses": [
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "sbc-def-base-change-map",
-    "sbc-def-base-change-property",
-    "sbc-lem-integral-etale-direct-image-exact"
-  ],
-  "uses_not_cited": [
-    "sbc-def-base-change-map"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-lem-universal-datum",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "sbc-lem-bc-integral-base",
-    "worker": "stage1",
-    "summary": "Corrected the ill-typed imported diagram and composite names. Reused integral exchange, exactness, zero detection, and the precise vertical-pasting formula. One new Mathlib leaf for integral scheme-morphism base-change stability. No lower-degree or surjectivity assumption added.",
-    "blueprint": "First sentence: integral direct-image exactness and exchange (steps 1-2); both displayed higher direct-image identifications and identity of the base-change maps (step 3); final conservativity argument (step 4), through the existing zero-detection node.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-exchange-identity-pasting",
-        "why": "Clause (3) gives equality of the actual pasted exchange, rather than merely that isomorphisms compose; the unit has no such formula."
-      },
-      {
-        "node": "lem-weil-pbc-exact-functor-derived-functor",
-        "why": "Generic exact-functor derivation computes integral exchange termwise; no unit-specific statement supplies this comparison."
-      },
-      {
-        "node": "lem-weil-pbc-exact-functor-complex-cohomology",
-        "why": "Generic natural cohomology comparison for exact direct image identifies the actual degree-q map; no unit-specific lemma states it."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-exchange-identity-pasting",
+  {
+   "text": "Apply [lem-sbc-integral-underived-exchange] with coefficient ring $\\mathbf Z$ to the middle square, with integral direct-image map $\\pi$, its base change $\\pi\\prime$, and inverse-image map $f\\prime$. It gives the canonical isomorphism $f\\prime{}^{-1}\\pi_*\\cong\\pi\\prime_*f\\prime\\prime{}^{-1}$. Since the two direct images are exact, every complex computes their derived functors by [lem-weil-pbc-exact-functor-derived-functor]. Apply the underived exchange termwise: its components commute with differentials by naturality and are isomorphisms in every degree. Its derived map is the derived exchange of [sbc-def-base-change-map], as follows. For a bounded-below complex $K$, choose a resolution $K\\to I$. Exactness makes $\\pi_*K\\to\\pi_*I$ and $\\pi\\prime_*f\\prime\\prime{}^{-1}K\\to\\pi\\prime_*f\\prime\\prime{}^{-1}I$ quasi-isomorphisms. Naturality of underived exchange gives the commutative square with these two comparison maps as its vertical sides and the exchanges at $K$ and $I$ as its horizontal sides. All inverse images here are the exact termwise functors specified in [sbc-def-base-change-map]. The adjunctions $\\pi^{-1}\\dashv\\pi_*$ and $\\pi\\prime{}^{-1}\\dashv\\pi\\prime_*$ therefore descend termwise; their units and counits are the images of the sheaf units and counits. The transpose of the exchange at $I$ is explicitly $\\pi\\prime{}^{-1}f\\prime{}^{-1}\\pi_*I\\cong f\\prime\\prime{}^{-1}\\pi^{-1}\\pi_*I\\xrightarrow{f\\prime\\prime{}^{-1}\\varepsilon_\\pi}f\\prime\\prime{}^{-1}I$. Localizing this transpose is precisely the derived transpose in [sbc-def-base-change-map], so the commutative comparison square identifies the termwise exchange with that specified derived map. Hence the derived exchange $\\alpha:f\\prime{}^{-1}R\\pi_*\\to R\\pi\\prime_*f\\prime\\prime{}^{-1}$ is an isomorphism, in particular at $Rg\\prime_*\\mathcal F$.",
+   "uses": [
+    "lem-sbc-integral-underived-exchange",
+    "sbc-lem-integral-etale-direct-image-exact",
     "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NX-101128606",
-    "group": "NX",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-101128606 (reviewer sub-agent of L); spot-checked: Read the full item, new node, cited statements, sources, unit/chapter route, and master morphism/coefficient definitions. All four steps are valid; the new leaf matches Mathlib. Accepted the three declared generic tool uses. No repairs needed. review.md records concrete checks, edge cases, and inherited graph issues outside this delivery."
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F05, label lemma-base-change-q-integral-bottom, proof"
+   }
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "With $f:X\\to S$ and $n$ as in [sbc-def-base-change-property] and some\n$q\\geq1$, consider\ncommutative\ndiagrams\n\n$$\n\\begin{array}{ccccccc}\nX & \\xleftarrow{\\;\\;} & X' & \\xleftarrow{\\pi'} & X'' & &\nY\\\\\nf\\big\\downarrow & & \\big\\downarrow f' & & \\big\\downarrow f'' & &\n\\big\\downarrow e\\\\\nS & \\xleftarrow{\\;\\;} & S' & \\xleftarrow{\\;\\pi\\;} & S'' & &\nT\n\\end{array}\n$$\n\nand the diagram with the outer\n$h=h'\\circ\\pi''$, $g=g'\\circ\\pi$ (as horizontal composites), all squares\nCartesian, $g'$ quasi-compact and quasi-separated, and $\\pi$ integral.\nLet $\\mathcal F$ be an abelian sheaf on $T_{\\Et}$ annihilated by $n$.\nIf\n\n$$\nf'^{-1}R^qg_*\\mathcal F\\xrightarrow{\\ \\sim\\ }R^qh_*e^{-1}\\mathcal F\n$$\n\nis an isomorphism, then\n$f''^{-1}R^qg'_*\\mathcal F\\to R^qh'_*e^{-1}\\mathcal F$ is an\nisomorphism.",
-    "proof": [
-      {
-        "text": "Since $\\pi$ and $\\pi'$ are integral, $\\pi_*$ and $\\pi'_*$ are exact\nby [sbc-lem-integral-etale-direct-image-exact] (finite case\n[lemma-weil-pbc-finite-direct-image-exact]) and\n$(f')^{-1}\\pi_*=\\pi'_*(f'')^{-1}$, so\n$\\pi'_*(f'')^{-1}R^qg'_*\\mathcal F=(f')^{-1}R^qg_*\\mathcal F$ and\n$\\pi'_*R^qh'_*e^{-1}\\mathcal F=R^qh_*e^{-1}\\mathcal F$; hence the\nassumption says that the map for $f''$ becomes an isomorphism after\n$\\pi'_*$. It remains to see that the exact functor $\\pi'_*$ is conservative;\napply it to the kernel and cokernel $\\mathcal C$ of that map, so\n$\\pi'_*\\mathcal C=0$. Let $\\bar x''$ be a geometric point of $X''$ and\n$\\bar x'$ its image. The stalk $(\\pi'_*\\mathcal C)_{\\bar x'}$ is\n$\\Gamma(\\operatorname{Spec}B,\\mathcal C)$ with\n$B$ the ring of\n$X''\\times_{X'}\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{X',\\bar x'}$ over an\naffine neighbourhood, an integral algebra over the strictly henselian ring\n$A=\\mathcal O^{\\mathrm{sh}}_{X',\\bar x'}$. Write $B=\\operatorname{colim}B_\\lambda$\nwith $B_\\lambda$ finite over $A$; each $B_\\lambda$ is a finite product of\nstrictly henselian local rings, so sections over $\\operatorname{Spec}B_\\lambda$\nare the product of the stalks at their closed points, and the stalk\n$\\mathcal C_{\\bar x''}$ is the colimit of the factors through which\n$\\bar x''$ passes. Hence $\\mathcal C_{\\bar x''}$ is a quotient of\n$(\\pi'_*\\mathcal C)_{\\bar x'}=0$, so $\\mathcal C=0$. No surjectivity of\n$\\pi$ is needed, and the map for $f''$ is an isomorphism.",
-        "uses": [
-          "sbc-lem-integral-etale-direct-image-exact",
-          "lemma-weil-pbc-finite-direct-image-exact"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Let $\\beta:f\\prime\\prime{}^{-1}Rg\\prime_*\\mathcal F\\to Rh\\prime_*e^{-1}\\mathcal F$ be the inner derived base-change map. Apply the vertical-pasting equation, clause (3) of [lem-weil-pbc-exchange-identity-pasting], to the square of $\\pi$ and the square of $g\\prime$. The exchanged-square convention identifies the outer map with\n$$f\\prime{}^{-1}R(\\pi g\\prime)_*\\mathcal F\\ \\cong\\ f\\prime{}^{-1}R\\pi_*Rg\\prime_*\\mathcal F\\ \\xrightarrow{\\alpha}\\ R\\pi\\prime_*f\\prime\\prime{}^{-1}Rg\\prime_*\\mathcal F\\ \\xrightarrow{R\\pi\\prime_*\\beta}\\ R\\pi\\prime_*Rh\\prime_*e^{-1}\\mathcal F\\ \\cong\\ R(\\pi\\prime h\\prime)_*e^{-1}\\mathcal F.$$\nThe composition isomorphisms are exactly those in that cited equation. By [sbc-def-base-change-map] the degree-$q$ maps are the cohomology of these derived maps. Because $\\pi\\prime_*$ is exact, [lem-weil-pbc-exact-functor-complex-cohomology] identifies $H^q(R\\pi\\prime_*\\beta)$ naturally with $\\pi\\prime_*H^q(\\beta)$. Consequently, up to the displayed isomorphisms and $H^q(\\alpha)$, the outer degree-$q$ map is $\\pi\\prime_*b$, where $b=H^q(\\beta)$ is the desired inner degree-$q$ map. The assumed isomorphism of the outer map therefore implies that $\\pi\\prime_*b$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-exchange-identity-pasting",
+    "sbc-def-base-change-map",
+    "sbc-lem-integral-etale-direct-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F05, label lemma-base-change-q-integral-bottom, proof"
+   }
+  },
+  {
+   "text": "Exactness of $\\pi\\prime_*$ gives $\\pi\\prime_*\\ker b=\\ker(\\pi\\prime_*b)=0$ and $\\pi\\prime_*\\operatorname{coker}b=\\operatorname{coker}(\\pi\\prime_*b)=0$, since the latter map is an isomorphism. Apply [lem-sbc-integral-direct-image-detects-zero] to each of these sheaves, again with coefficient ring $\\mathbf Z$ and integral map $\\pi\\prime$. It yields $\\ker b=0$ and $\\operatorname{coker}b=0$. In the abelian category of abelian etale sheaves a map with zero kernel and cokernel is an isomorphism, so $b$ is an isomorphism as claimed. No surjectivity of $\\pi$ was used.",
+   "uses": [
+    "sbc-lem-integral-etale-direct-image-exact",
+    "lem-sbc-integral-direct-image-detects-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F05, label lemma-base-change-q-integral-bottom, proof"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-sbc-integral-morphism-base-change",
+  "sbc-lem-integral-etale-direct-image-exact",
+  "lem-sbc-integral-underived-exchange",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sbc-integral-direct-image-detects-zero"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F05, label lemma-base-change-q-integral-bottom, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "baseChangeHomologyMap|integral.*[Ee]xchange|[Ee]xchange.*integral",
+   "results": "Actual search: 4 hits; Mathlib/FieldTheory/Minpoly/Field.lean, Mathlib/RingTheory/WittVector/Domain.lean, Mathlib/RingTheory/WittVector/Domain.lean, Mathlib/RingTheory/Polynomial/IrreducibleRing.lean",
+   "date": "2026-10-14",
+   "verdict": "no full item match: hits give etale morphism properties, scheme-module pushforward composition, or integral morphism stability, not etale cohomology base-change maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral source base change preserves the isomorphism property of etale cohomology base change maps",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral direct image of etale sheaves detects isomorphisms and identifies base change maps under composition",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.instCategoryEtale, Algebra.Etale.comp, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.IsEtaleAt.comp, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "date": "2026-10-14",
+   "verdict": "no full item match: hits give etale morphism properties, scheme-module pushforward composition, or integral morphism stability, not etale cohomology base-change maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsIntegralHom",
+   "results": "Actual search: 12 hits; AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme, AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsIntegralHom.instHasOfPostcompPropertySchemeIsSeparated, AlgebraicGeometry.IsIntegralHom, AlgebraicGeometry.IsIntegralHom.instOfIsClosedImmersion, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed",
+   "date": "2026-10-14",
+   "verdict": "no full item match: hits give etale morphism properties, scheme-module pushforward composition, or integral morphism stability, not etale cohomology base-change maps."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedBaseChange|baseChangeMap|ReflectsIsomorphisms",
+   "results": "Actual search: 6 hits; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Gluing.lean, Mathlib/AlgebraicGeometry/AffineScheme.lean, Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean; directory AlgebraicGeometry",
+   "date": "2026-10-14",
+   "verdict": "no full item match: hits give etale morphism properties, scheme-module pushforward composition, or integral morphism stability, not etale cohomology base-change maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change map for a composite direct image factors through the exchange for an integral morphism and reflects isomorphisms",
+   "results": "Actual search: 8 hits; AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, RingHom.isIntegral_isStableUnderBaseChange, AlgebraicGeometry.IsIntegralHom.comp_iff, AlgebraicGeometry.IsIntegralHom.instCompScheme, WeierstrassCurve.baseChange_integralModel_eq, AlgebraicGeometry.IsIntegralHom.instIsStableUnderCompositionScheme, AlgebraicGeometry.IsIntegralHom.instIsMultiplicativeScheme_1, AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+   "date": "2026-10-14",
+   "verdict": "no full item match: hits give etale morphism properties, scheme-module pushforward composition, or integral morphism stability, not etale cohomology base-change maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1395,
+ "blueprint_uses": [
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "sbc-def-base-change-map",
+  "sbc-def-base-change-property",
+  "sbc-lem-integral-etale-direct-image-exact"
+ ],
+ "uses_not_cited": [
+  "sbc-def-base-change-map"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-lem-bc-integral-base",
+  "worker": "stage1",
+  "summary": "Corrected the ill-typed imported diagram and composite names. Reused integral exchange, exactness, zero detection, and the precise vertical-pasting formula. One new Mathlib leaf for integral scheme-morphism base-change stability. No lower-degree or surjectivity assumption added.",
+  "blueprint": "First sentence: integral direct-image exactness and exchange (steps 1-2); both displayed higher direct-image identifications and identity of the base-change maps (step 3); final conservativity argument (step 4), through the existing zero-detection node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exchange-identity-pasting",
+    "why": "Clause (3) gives equality of the actual pasted exchange, rather than merely that isomorphisms compose; the unit has no such formula."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor derivation computes integral exchange termwise; no unit-specific statement supplies this comparison."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic natural cohomology comparison for exact direct image identifies the actual degree-q map; no unit-specific lemma states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exchange-identity-pasting",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NX-101128606",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-101128606 (reviewer sub-agent of L); spot-checked: Read the full item, new node, cited statements, sources, unit/chapter route, and master morphism/coefficient definitions. All four steps are valid; the new leaf matches Mathlib. Accepted the three declared generic tool uses. No repairs needed. review.md records concrete checks, edge cases, and inherited graph issues outside this delivery."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "With $f:X\\to S$ and $n$ as in [sbc-def-base-change-property] and some\n$q\\geq1$, consider\ncommutative\ndiagrams\n\n$$\n\\begin{array}{ccccccc}\nX & \\xleftarrow{\\;\\;} & X' & \\xleftarrow{\\pi'} & X'' & &\nY\\\\\nf\\big\\downarrow & & \\big\\downarrow f' & & \\big\\downarrow f'' & &\n\\big\\downarrow e\\\\\nS & \\xleftarrow{\\;\\;} & S' & \\xleftarrow{\\;\\pi\\;} & S'' & &\nT\n\\end{array}\n$$\n\nand the diagram with the outer\n$h=h'\\circ\\pi''$, $g=g'\\circ\\pi$ (as horizontal composites), all squares\nCartesian, $g'$ quasi-compact and quasi-separated, and $\\pi$ integral.\nLet $\\mathcal F$ be an abelian sheaf on $T_{\\Et}$ annihilated by $n$.\nIf\n\n$$\nf'^{-1}R^qg_*\\mathcal F\\xrightarrow{\\ \\sim\\ }R^qh_*e^{-1}\\mathcal F\n$$\n\nis an isomorphism, then\n$f''^{-1}R^qg'_*\\mathcal F\\to R^qh'_*e^{-1}\\mathcal F$ is an\nisomorphism.",
+  "proof": [
+   {
+    "text": "Since $\\pi$ and $\\pi'$ are integral, $\\pi_*$ and $\\pi'_*$ are exact\nby [sbc-lem-integral-etale-direct-image-exact] (finite case\n[lemma-weil-pbc-finite-direct-image-exact]) and\n$(f')^{-1}\\pi_*=\\pi'_*(f'')^{-1}$, so\n$\\pi'_*(f'')^{-1}R^qg'_*\\mathcal F=(f')^{-1}R^qg_*\\mathcal F$ and\n$\\pi'_*R^qh'_*e^{-1}\\mathcal F=R^qh_*e^{-1}\\mathcal F$; hence the\nassumption says that the map for $f''$ becomes an isomorphism after\n$\\pi'_*$. It remains to see that the exact functor $\\pi'_*$ is conservative;\napply it to the kernel and cokernel $\\mathcal C$ of that map, so\n$\\pi'_*\\mathcal C=0$. Let $\\bar x''$ be a geometric point of $X''$ and\n$\\bar x'$ its image. The stalk $(\\pi'_*\\mathcal C)_{\\bar x'}$ is\n$\\Gamma(\\operatorname{Spec}B,\\mathcal C)$ with\n$B$ the ring of\n$X''\\times_{X'}\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{X',\\bar x'}$ over an\naffine neighbourhood, an integral algebra over the strictly henselian ring\n$A=\\mathcal O^{\\mathrm{sh}}_{X',\\bar x'}$. Write $B=\\operatorname{colim}B_\\lambda$\nwith $B_\\lambda$ finite over $A$; each $B_\\lambda$ is a finite product of\nstrictly henselian local rings, so sections over $\\operatorname{Spec}B_\\lambda$\nare the product of the stalks at their closed points, and the stalk\n$\\mathcal C_{\\bar x''}$ is the colimit of the factors through which\n$\\bar x''$ passes. Hence $\\mathcal C_{\\bar x''}$ is a quotient of\n$(\\pi'_*\\mathcal C)_{\\bar x'}=0$, so $\\mathcal C=0$. No surjectivity of\n$\\pi$ is needed, and the map for $f''$ is an isomorphism.",
+    "uses": [
+     "sbc-lem-integral-etale-direct-image-exact",
+     "lemma-weil-pbc-finite-direct-image-exact"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,105 +1,94 @@
 {
-  "id": "def-weil-functional-equation-sign",
-  "blueprint": {
-    "is": "def-weil-functional-equation-sign",
-    "from": null,
-    "same_as": null
+ "id": "def-weil-functional-equation-sign",
+ "blueprint": {
+  "is": "def-weil-functional-equation-sign",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Normalized functional-equation sign",
+ "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, and let\n$q=p^a$ be the fixed prime power.\nFix $d\\in\\mathbf Z_{\\geq0}$ and an indeterminate $T$. For each integer\n$i$ with $0\\leq i\\leq2d$, let $P_i(T)\\in\\mathbf Z[T]$ satisfy\n$P_i(0)=1$, put $b_i=\\deg P_i$, and define the\ndeterminant constant\n\n$$\nD_i=(-1)^{b_i}[T^{b_i}]P_i(T).\n$$\n\nSet\n\n$$\n\\chi=\\sum_{i=0}^{2d}(-1)^ib_i,\n\\qquad\n\\Delta=\\prod_{i=0}^{2d}D_i^{(-1)^i}.\n$$\n\nAssume $d\\chi$ is even; in geometric applications this follows from the\nduality relations $b_i=b_{2d-i}$, $D_iD_{2d-i}=q^{db_i}$, and the\nevenness of the middle degree when $d$ is odd. Define\n\n$$\nh=\\frac{d\\chi}{2}\\in\\mathbf Z\n$$\n\nand\n\n$$\n\\varepsilon=\n(-1)^\\chi q^{-h}\\Delta\n\\in\\mathbf Q^\\times.\n$$\n\nNegative exponents in $\\Delta$ denote multiplicative inverses in\n$\\mathbf Q^\\times$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/def-weil-functional-equation-sign.md",
+  "place": "node def-weil-functional-equation-sign, order 2921"
+ },
+ "stmt_deps": [
+  "def-weil-determinant-constants",
+  "def-weil-finite-field-fiber",
+  "prop-weil-functional-equation-parity"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli 'weil conjecture\\|functional equation' Mathlib/; grep -rl zeta Mathlib/NumberTheory/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "only functional equations of the Gamma function (Analysis/SpecialFunctions/Gamma/*), of the Riemann and Hurwitz zeta functions and Dirichlet L-series (NumberTheory/LSeries/*), of exponential and Schroder power series (RingTheory/PowerSeries/{Exp,Schroder}.lean); NumberTheory has RiemannZeta, DedekindZeta, ZetaValues; nothing about the zeta function of a variety over a finite field, its sign, or Frobenius eigenvalues",
+   "date": "2026-10-09",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "Normalized functional-equation sign",
-  "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, and let\n$q=p^a$ be the fixed prime power.\nFix $d\\in\\mathbf Z_{\\geq0}$ and an indeterminate $T$. For each integer\n$i$ with $0\\leq i\\leq2d$, let $P_i(T)\\in\\mathbf Z[T]$ satisfy\n$P_i(0)=1$, put $b_i=\\deg P_i$, and define the\ndeterminant constant\n\n$$\nD_i=(-1)^{b_i}[T^{b_i}]P_i(T).\n$$\n\nSet\n\n$$\n\\chi=\\sum_{i=0}^{2d}(-1)^ib_i,\n\\qquad\n\\Delta=\\prod_{i=0}^{2d}D_i^{(-1)^i}.\n$$\n\nAssume $d\\chi$ is even; in geometric applications this follows from the\nduality relations $b_i=b_{2d-i}$, $D_iD_{2d-i}=q^{db_i}$, and the\nevenness of the middle degree when $d$ is odd. Define\n\n$$\nh=\\frac{d\\chi}{2}\\in\\mathbf Z\n$$\n\nand\n\n$$\n\\varepsilon=\n(-1)^\\chi q^{-h}\\Delta\n\\in\\mathbf Q^\\times.\n$$\n\nNegative exponents in $\\Delta$ denote multiplicative inverses in\n$\\mathbf Q^\\times$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-fe/def-weil-functional-equation-sign.md",
-    "place": "node def-weil-functional-equation-sign, order 2921"
+  {
+   "tool": "grep",
+   "query": "grep -rli 'betti\\|poincar\\|étale cohomology' Mathlib/; grep -rln eulerChar Mathlib/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "no file mentions Betti numbers; 'Poincar' only in Geometry/Manifold/PoincareConjecture.lean, Dynamics and MeasureTheory (no Poincaré duality); AlgebraicGeometry/Sites/ElladicCohomology.lean defines AlgebraicGeometry.Scheme.EllAdicCohomology (pro-étale H^i(X, Z_ℓ)) with no Frobenius action, duality or characteristic polynomial; Algebra/Homology/EulerCharacteristic.lean defines HomologicalComplex.eulerChar / GradedObject.eulerChar (alternating sum of finranks of a graded module), not the alternating sum of the degrees of the P_i",
+   "date": "2026-10-09",
+   "verdict": "no match; χ, D_i and Δ are the objects of def-weil-determinant-constants, whose splitter decides on them"
   },
-  "stmt_deps": [
-    "def-weil-determinant-constants",
-    "def-weil-finite-field-fiber",
-    "prop-weil-functional-equation-parity"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -rli 'weil conjecture\\|functional equation' Mathlib/; grep -rl zeta Mathlib/NumberTheory/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
-      "results": "only functional equations of the Gamma function (Analysis/SpecialFunctions/Gamma/*), of the Riemann and Hurwitz zeta functions and Dirichlet L-series (NumberTheory/LSeries/*), of exponential and Schroder power series (RingTheory/PowerSeries/{Exp,Schroder}.lean); NumberTheory has RiemannZeta, DedekindZeta, ZetaValues; nothing about the zeta function of a variety over a finite field, its sign, or Frobenius eigenvalues",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rli 'betti\\|poincar\\|étale cohomology' Mathlib/; grep -rln eulerChar Mathlib/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
-      "results": "no file mentions Betti numbers; 'Poincar' only in Geometry/Manifold/PoincareConjecture.lean, Dynamics and MeasureTheory (no Poincaré duality); AlgebraicGeometry/Sites/ElladicCohomology.lean defines AlgebraicGeometry.Scheme.EllAdicCohomology (pro-étale H^i(X, Z_ℓ)) with no Frobenius action, duality or characteristic polynomial; Algebra/Homology/EulerCharacteristic.lean defines HomologicalComplex.eulerChar / GradedObject.eulerChar (alternating sum of finranks of a graded module), not the alternating sum of the degrees of the P_i",
-      "date": "2026-10-09",
-      "verdict": "no match; χ, D_i and Δ are the objects of def-weil-determinant-constants, whose splitter decides on them"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -n '^def degree\\|^def natDegree\\|^def leadingCoeff' Mathlib/Algebra/Polynomial/Degree/Defs.lean; grep -n '^def coeff' Mathlib/Algebra/Polynomial/Basic.lean; grep -rn 'theorem coeff_zero_eq_eval_zero' Mathlib/Algebra/Polynomial/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
-      "results": "Polynomial.degree (Degree/Defs.lean:48), Polynomial.natDegree (:52), Polynomial.leadingCoeff (:56, = coeff p (natDegree p)); Polynomial.coeff (Basic.lean:564); Polynomial.coeff_zero_eq_eval_zero (Eval/Coeff.lean:57) for the normalization P_i(0)=1",
-      "date": "2026-10-09",
-      "verdict": "generalization: the primitives of the statement. b_i = deg P_i is Polynomial.natDegree P_i, [T^m]P is Polynomial.coeff P m, and D_i = (-1)^{b_i}[T^{b_i}]P_i is (-1)^(natDegree P_i) * leadingCoeff P_i; these are notions the definition is built from, not a match for the definition"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -n 'def IsSquare' Mathlib/Algebra/Group/Even.lean; grep -n 'lemma even_iff' Mathlib/Algebra/Group/Int/Even.lean; grep -n 'def ediv\\|instance : Div Int' ~/.elan/toolchains/leanprover--lean4---v4.33.1/src/lean/Init/Data/Int/DivMod/Basic.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
-      "results": "Even is the additive form of IsSquare (Algebra/Group/Even.lean:55-57); Int.even_iff : Even n ↔ n % 2 = 0 (Algebra/Group/Int/Even.lean:34); Int.ediv and the Div Int instance (core Init/Data/Int/DivMod/Basic.lean:72-73, 111)",
-      "date": "2026-10-09",
-      "verdict": "generalization: the primitives for the hypothesis 'dχ is even' (Even (d * χ)) and for h = dχ/2 (d * χ / 2 in ℤ, exact under the hypothesis)"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -n 'class DivInvMonoid\\|protected zpow' Mathlib/Algebra/Group/Defs.lean; grep -n '^class Field\\|^class DivisionRing' Mathlib/Algebra/Field/Defs.lean; grep -n 'instField' Mathlib/Algebra/Field/Rat.lean; grep -n 'structure Units' Mathlib/Algebra/Group/Units/Defs.lean; grep -n 'protected def prod' Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean; grep -n 'def negOnePow' Mathlib/Algebra/Ring/NegOnePow.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
-      "results": "zpow field of DivInvMonoid (Algebra/Group/Defs.lean:969, class at :996), Field extends DivisionRing extends DivInvMonoid (Algebra/Field/Defs.lean:116-117, 180), Rat.instField (Algebra/Field/Rat.lean:27), Units with notation ℚˣ (Algebra/Group/Units/Defs.lean:49, 62), Finset.prod (Algebra/BigOperators/Group/Finset/Defs.lean:68), Int.negOnePow : ℤ → ℤˣ (Algebra/Ring/NegOnePow.lean:30), zpow_neg (Algebra/Group/Basic.lean:422)",
-      "date": "2026-10-09",
-      "verdict": "generalization: the primitives for Δ = ∏ D_i^{(-1)^i} and ε = (-1)^χ q^{-h} Δ as elements of ℚ (or ℚˣ) with integer exponents, with negative exponents the inverses"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2921,
-  "blueprint_uses": [
-    "def-weil-determinant-constants",
-    "def-weil-finite-field-fiber"
-  ],
-  "uses_not_cited": [
-    "def-weil-determinant-constants",
-    "def-weil-finite-field-fiber"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "grep",
+   "query": "grep -n '^def degree\\|^def natDegree\\|^def leadingCoeff' Mathlib/Algebra/Polynomial/Degree/Defs.lean; grep -n '^def coeff' Mathlib/Algebra/Polynomial/Basic.lean; grep -rn 'theorem coeff_zero_eq_eval_zero' Mathlib/Algebra/Polynomial/  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "Polynomial.degree (Degree/Defs.lean:48), Polynomial.natDegree (:52), Polynomial.leadingCoeff (:56, = coeff p (natDegree p)); Polynomial.coeff (Basic.lean:564); Polynomial.coeff_zero_eq_eval_zero (Eval/Coeff.lean:57) for the normalization P_i(0)=1",
+   "date": "2026-10-09",
+   "verdict": "generalization: the primitives of the statement. b_i = deg P_i is Polynomial.natDegree P_i, [T^m]P is Polynomial.coeff P m, and D_i = (-1)^{b_i}[T^{b_i}]P_i is (-1)^(natDegree P_i) * leadingCoeff P_i; these are notions the definition is built from, not a match for the definition"
   },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "def-weil-functional-equation-sign",
-    "worker": "stage1",
-    "summary": "Definition; no Lean on either branch (the only related declaration in the sources, AlgebraicGeometry.Scheme.Modules.eulerChar on slopmaster2, is the coherent-sheaf Euler characteristic and not this object). Statement kept verbatim: it is the master text. Checked against the slopmaster2 LaTeX (def:functional-equation-sign, lines 3500-3519, which defines ε for a smooth-proper datum from def:euler-characteristic, def:determinant-constants and prop:functional-equation-parity, source 'Lecture 49, Definition 17.4'), against its three users (prop-functional-equation, thm-weil-final-functional-equation, thm-weil-final), which all write ε = (-1)^χ q^{-dχ/2} ∏ D_i^{(-1)^i}, against Milne LEC v2.21 Theorem 27.12 and Remark 27.13 (functional equation with exponent dχ/2 and sign ±1), and on X_0 = P^1 (b = (1,0,1), χ = 2, Δ = q, ε = 1, Z(1/(qT)) = qT^2 Z(T)). Notions named: the fixed prime power q (def-weil-finite-field-fiber, kept); the determinant constants D_i, the Euler characteristic χ and the alternating determinant scalar Δ (def-weil-determinant-constants, kept; the statement recomputes them for arbitrary P_i in Z[T] with P_i(0)=1, so it is more general than that node, whose P_i are the integral Frobenius factors); the hypothesis that dχ is even, which the remark in the statement asserts for the geometric data from the duality relations: that assertion is the hidden argument, now the new statement node prop-weil-functional-equation-parity (slopmaster2's prop:functional-equation-parity), added as a statement dependency so that h = dχ/2 is an integer for the data of the users. Everything else the statement uses is a Mathlib primitive (polynomial degree, coefficient and leading coefficient; Even; integer halving; zpow, Units and Finset.prod in ℚ), recorded in mathlib_searches rather than as leaf nodes. Mathlib has no zeta function of a variety, no Frobenius eigenvalues and no such sign: no match."
+  {
+   "tool": "grep",
+   "query": "grep -n 'def IsSquare' Mathlib/Algebra/Group/Even.lean; grep -n 'lemma even_iff' Mathlib/Algebra/Group/Int/Even.lean; grep -n 'def ediv\\|instance : Div Int' ~/.elan/toolchains/leanprover--lean4---v4.33.1/src/lean/Init/Data/Int/DivMod/Basic.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "Even is the additive form of IsSquare (Algebra/Group/Even.lean:55-57); Int.even_iff : Even n ↔ n % 2 = 0 (Algebra/Group/Int/Even.lean:34); Int.ediv and the Div Int instance (core Init/Data/Int/DivMod/Basic.lean:72-73, 111)",
+   "date": "2026-10-09",
+   "verdict": "generalization: the primitives for the hypothesis 'dχ is even' (Even (d * χ)) and for h = dχ/2 (d * χ / 2 in ℤ, exact under the hypothesis)"
   },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass"
-  },
-  "chapter": "sec-zeta-weil",
-  "unit": "sk-thm-fe",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, and let\n$q=p^a$ be the fixed prime power.\nFix $d\\in\\mathbf Z_{\\geq0}$ and an indeterminate $T$. For each integer\n$i$ with $0\\leq i\\leq2d$, let $P_i(T)\\in\\mathbf Z[T]$ satisfy\n$P_i(0)=1$, put $b_i=\\deg P_i$, and define the\ndeterminant constant\n\n$$\nD_i=(-1)^{b_i}[T^{b_i}]P_i(T).\n$$\n\nSet\n\n$$\n\\chi=\\sum_{i=0}^{2d}(-1)^ib_i,\n\\qquad\n\\Delta=\\prod_{i=0}^{2d}D_i^{(-1)^i}.\n$$\n\nAssume $d\\chi$ is even. Define\n\n$$\nh=\\frac{d\\chi}{2}\\in\\mathbf Z\n$$\n\nand\n\n$$\n\\varepsilon=\n(-1)^\\chi q^{-h}\\Delta\n\\in\\mathbf Q^\\times.\n$$\n\nNegative exponents in $\\Delta$ denote multiplicative inverses in\n$\\mathbf Q^\\times$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "grep",
+   "query": "grep -n 'class DivInvMonoid\\|protected zpow' Mathlib/Algebra/Group/Defs.lean; grep -n '^class Field\\|^class DivisionRing' Mathlib/Algebra/Field/Defs.lean; grep -n 'instField' Mathlib/Algebra/Field/Rat.lean; grep -n 'structure Units' Mathlib/Algebra/Group/Units/Defs.lean; grep -n 'protected def prod' Mathlib/Algebra/BigOperators/Group/Finset/Defs.lean; grep -n 'def negOnePow' Mathlib/Algebra/Ring/NegOnePow.lean  (Mathlib 0df444a360 (lean4 v4.33.1), ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/)",
+   "results": "zpow field of DivInvMonoid (Algebra/Group/Defs.lean:969, class at :996), Field extends DivisionRing extends DivInvMonoid (Algebra/Field/Defs.lean:116-117, 180), Rat.instField (Algebra/Field/Rat.lean:27), Units with notation ℚˣ (Algebra/Group/Units/Defs.lean:49, 62), Finset.prod (Algebra/BigOperators/Group/Finset/Defs.lean:68), Int.negOnePow : ℤ → ℤˣ (Algebra/Ring/NegOnePow.lean:30), zpow_neg (Algebra/Group/Basic.lean:422)",
+   "date": "2026-10-09",
+   "verdict": "generalization: the primitives for Δ = ∏ D_i^{(-1)^i} and ε = (-1)^χ q^{-h} Δ as elements of ℚ (or ℚˣ) with integer exponents, with negative exponents the inverses"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2921,
+ "blueprint_uses": [
+  "def-weil-determinant-constants",
+  "def-weil-finite-field-fiber"
+ ],
+ "uses_not_cited": [
+  "def-weil-determinant-constants",
+  "def-weil-finite-field-fiber"
+ ],
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-weil-functional-equation-sign",
+  "worker": "stage1",
+  "summary": "Definition; no Lean on either branch (the only related declaration in the sources, AlgebraicGeometry.Scheme.Modules.eulerChar on slopmaster2, is the coherent-sheaf Euler characteristic and not this object). Statement kept verbatim: it is the master text. Checked against the slopmaster2 LaTeX (def:functional-equation-sign, lines 3500-3519, which defines ε for a smooth-proper datum from def:euler-characteristic, def:determinant-constants and prop:functional-equation-parity, source 'Lecture 49, Definition 17.4'), against its three users (prop-functional-equation, thm-weil-final-functional-equation, thm-weil-final), which all write ε = (-1)^χ q^{-dχ/2} ∏ D_i^{(-1)^i}, against Milne LEC v2.21 Theorem 27.12 and Remark 27.13 (functional equation with exponent dχ/2 and sign ±1), and on X_0 = P^1 (b = (1,0,1), χ = 2, Δ = q, ε = 1, Z(1/(qT)) = qT^2 Z(T)). Notions named: the fixed prime power q (def-weil-finite-field-fiber, kept); the determinant constants D_i, the Euler characteristic χ and the alternating determinant scalar Δ (def-weil-determinant-constants, kept; the statement recomputes them for arbitrary P_i in Z[T] with P_i(0)=1, so it is more general than that node, whose P_i are the integral Frobenius factors); the hypothesis that dχ is even, which the remark in the statement asserts for the geometric data from the duality relations: that assertion is the hidden argument, now the new statement node prop-weil-functional-equation-parity (slopmaster2's prop:functional-equation-parity), added as a statement dependency so that h = dχ/2 is an integer for the data of the users. Everything else the statement uses is a Mathlib primitive (polynomial degree, coefficient and leading coefficient; Even; integer halving; zpow, Units and Finset.prod in ℚ), recorded in mathlib_searches rather than as leaf nodes. Mathlib has no zeta function of a variety, no Frobenius eigenvalues and no such sign: no match."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-fe",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $p$ be prime, let $a\\in\\mathbf Z_{\\geq1}$, and let\n$q=p^a$ be the fixed prime power.\nFix $d\\in\\mathbf Z_{\\geq0}$ and an indeterminate $T$. For each integer\n$i$ with $0\\leq i\\leq2d$, let $P_i(T)\\in\\mathbf Z[T]$ satisfy\n$P_i(0)=1$, put $b_i=\\deg P_i$, and define the\ndeterminant constant\n\n$$\nD_i=(-1)^{b_i}[T^{b_i}]P_i(T).\n$$\n\nSet\n\n$$\n\\chi=\\sum_{i=0}^{2d}(-1)^ib_i,\n\\qquad\n\\Delta=\\prod_{i=0}^{2d}D_i^{(-1)^i}.\n$$\n\nAssume $d\\chi$ is even. Define\n\n$$\nh=\\frac{d\\chi}{2}\\in\\mathbf Z\n$$\n\nand\n\n$$\n\\varepsilon=\n(-1)^\\chi q^{-h}\\Delta\n\\in\\mathbf Q^\\times.\n$$\n\nNegative exponents in $\\Delta$ denote multiplicative inverses in\n$\\mathbf Q^\\times$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

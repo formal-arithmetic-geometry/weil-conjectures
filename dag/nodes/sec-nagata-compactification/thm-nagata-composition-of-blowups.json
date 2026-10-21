@@ -1,203 +1,157 @@
 {
-  "id": "thm-nagata-composition-of-blowups",
-  "blueprint": {
-    "is": "thm-nagata-composition-of-blowups",
-    "from": null,
-    "same_as": null
+ "id": "thm-nagata-composition-of-blowups",
+ "blueprint": {
+  "is": "thm-nagata-composition-of-blowups",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "[stacks-project]",
+ "statement": "With $Z=V(\\mathcal I)$ as above, the two constructed comparison maps are\ninverse over $X$. Hence the\ncomposite is the blow-up of the finite-presentation center\n$Y(Z')=V(\\mathcal K(Z'))\\hookrightarrow X$, whose support satisfies\n\n$$\n|Y(Z')|=|Z|\\cup b(|Z'|).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/thm-nagata-composition-of-blowups.md",
+  "place": "node thm-nagata-composition-of-blowups, order 135"
+ },
+ "stmt_deps": [
+  "def-nagata-blowup-product-comparison",
+  "def-nagata-blowup-product-domination-maps",
+  "def-nagata-composition-of-blowups-comparison",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-invertible-ideal",
+  "def-nagata-proj-closed-center-finite-degree"
+ ],
+ "proof": [
+  {
+   "text": "Put $X_1=\\operatorname{Bl}_{\\mathcal I}(X)$ and\n$\\mathcal J'=\\mathcal J\\mathcal O_{X_1}$. By the extended-ideal equality,\n$\\mathcal J'=\\mathcal I_E^d\\mathcal I_{Z'}$. The product-ideal comparison\n[thm-nagata-blowup-product-ideal] therefore gives an isomorphism over\n$X$\n\n$$\n\\operatorname{Bl}_{\\mathcal J'}(X_1)\n\\xrightarrow{\\sim}\\operatorname{Bl}_{\\mathcal I\\mathcal J}(X).\n$$",
+   "uses": [
+    "thm-nagata-blowup-product-ideal"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "[stacks-project]",
-  "statement": "With $Z=V(\\mathcal I)$ as above, the two constructed comparison maps are\ninverse over $X$. Hence the\ncomposite is the blow-up of the finite-presentation center\n$Y(Z')=V(\\mathcal K(Z'))\\hookrightarrow X$, whose support satisfies\n\n$$\n|Y(Z')|=|Z|\\cup b(|Z'|).\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/thm-nagata-composition-of-blowups.md",
-    "place": "node thm-nagata-composition-of-blowups, order 135"
+  {
+   "text": "Since $\\mathcal I_E^d$ is invertible, the invertible-factor comparison\n[lemma-nagata-blowup-invertible-factor] gives a canonical isomorphism\n$\\operatorname{Bl}_{\\mathcal I_{Z'}}(X_1)\\cong \\operatorname{Bl}_{\\mathcal J'}(X_1)$. Their composite is the map\n$\\Omega_{Z,Z'}$ in the definition; the reverse composite of the inverse\ncomparisons is the stated reverse map.",
+   "uses": [
+    "lemma-nagata-blowup-invertible-factor"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-nagata-blowup-product-comparison",
-    "def-nagata-blowup-product-domination-maps",
-    "def-nagata-composition-of-blowups-comparison",
-    "def-nagata-effective-cartier-ideal",
-    "def-nagata-extended-ideal",
-    "def-nagata-global-blowup",
-    "def-nagata-invertible-ideal",
-    "def-nagata-proj-closed-center-finite-degree"
-  ],
-  "proof": [
-    {
-      "text": "Put $X_1=\\operatorname{Bl}_{\\mathcal I}(X)$ and\n$\\mathcal J'=\\mathcal J\\mathcal O_{X_1}$. By the extended-ideal equality,\n$\\mathcal J'=\\mathcal I_E^d\\mathcal I_{Z'}$. The product-ideal comparison\n[thm-nagata-blowup-product-ideal] therefore gives an isomorphism over\n$X$\n\n$$\n\\operatorname{Bl}_{\\mathcal J'}(X_1)\n\\xrightarrow{\\sim}\\operatorname{Bl}_{\\mathcal I\\mathcal J}(X).\n$$",
-      "uses": [
-        "thm-nagata-blowup-product-ideal"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Since $\\mathcal I_E^d$ is invertible, the invertible-factor comparison\n[lemma-nagata-blowup-invertible-factor] gives a canonical isomorphism\n$\\operatorname{Bl}_{\\mathcal I_{Z'}}(X_1)\\cong \\operatorname{Bl}_{\\mathcal J'}(X_1)$. Their composite is the map\n$\\Omega_{Z,Z'}$ in the definition; the reverse composite of the inverse\ncomparisons is the stated reverse map.",
-      "uses": [
-        "lemma-nagata-blowup-invertible-factor"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "For completeness, these maps are the universal lifts for the same quotient:\non the iterated blow-up the product of the tautological invertible quotients\nis the tautological quotient of $\\mathcal I\\mathcal J$, while on the\n$\\mathcal I\\mathcal J$-blow-up its two factor quotients give the tautological\nquotients for $\\mathcal I$ and for $\\mathcal J'$; multiplying by the inverse\nof the local generator of $\\mathcal I_E^d$ gives the quotient for\n$\\mathcal I_{Z'}$. Thus each composite is an $X$-morphism inducing the\noriginal tautological quotient. Uniqueness in the blow-up universal\nproperty, first over $X$ and then over $X_1$, makes both composites identities.\nThe center ideal $\\mathcal K=\\mathcal I\\mathcal J$ is finite type, hence\ndefines a finite-presentation closed immersion, and\n[lemma-nagata-composition-center-ideal] gives its support as\n$|V(\\mathcal I)|\\cup b(|Z'|)$.",
-      "uses": [
-        "lemma-nagata-composition-center-ideal"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "thm-nagata-blowup-product-ideal",
-    "lemma-nagata-blowup-invertible-factor",
-    "lemma-nagata-composition-center-ideal",
-    "cor-nagata-blowup-cartier-iso",
-    "cor-nagata-blowup-product-common-refinement",
-    "lemma-nagata-composition-extended-ideal-equality",
-    "lemma-nagata-invertible-ideal-tensor-power",
-    "lemma-nagata-product-ideal-common-blowup",
-    "prop-nagata-global-blowup-cover-independent",
-    "thm-nagata-blowup-principalizes-center",
-    "thm-nagata-blowup-universal-property"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/thm-nagata-composition-of-blowups.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 135,
-  "blueprint_uses": [
-    "cor-nagata-blowup-cartier-iso",
-    "cor-nagata-blowup-product-common-refinement",
-    "def-nagata-blowup-product-comparison",
-    "def-nagata-blowup-product-domination-maps",
-    "def-nagata-composition-of-blowups-comparison",
-    "def-nagata-effective-cartier-ideal",
-    "def-nagata-extended-ideal",
-    "def-nagata-global-blowup",
-    "def-nagata-invertible-ideal",
-    "def-nagata-proj-closed-center-finite-degree",
-    "lemma-nagata-blowup-invertible-factor",
-    "lemma-nagata-composition-center-ideal",
-    "lemma-nagata-composition-extended-ideal-equality",
-    "lemma-nagata-invertible-ideal-tensor-power",
-    "lemma-nagata-product-ideal-common-blowup",
-    "prop-nagata-global-blowup-cover-independent",
-    "thm-nagata-blowup-principalizes-center",
-    "thm-nagata-blowup-product-ideal",
-    "thm-nagata-blowup-universal-property"
-  ],
-  "lean": {
-    "module": "WeilConjectures.Blowup.AdmissibleBlowup",
-    "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp",
-    "branch": "master",
-    "line": 389,
-    "sorry_free": true,
-    "body_lines": 24
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp"
-  ],
-  "uses_not_cited": [
-    "cor-nagata-blowup-cartier-iso",
-    "cor-nagata-blowup-product-common-refinement",
-    "def-nagata-blowup-product-comparison",
-    "def-nagata-blowup-product-domination-maps",
-    "def-nagata-composition-of-blowups-comparison",
-    "def-nagata-effective-cartier-ideal",
-    "def-nagata-extended-ideal",
-    "def-nagata-global-blowup",
-    "def-nagata-invertible-ideal",
-    "def-nagata-proj-closed-center-finite-degree",
-    "lemma-nagata-composition-extended-ideal-equality",
-    "lemma-nagata-invertible-ideal-tensor-power",
-    "lemma-nagata-product-ideal-common-blowup",
-    "prop-nagata-global-blowup-cover-independent",
-    "thm-nagata-blowup-principalizes-center",
-    "thm-nagata-blowup-universal-property"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp",
-          "module": "WeilConjectures.Blowup.AdmissibleBlowup",
-          "lines": [
-            374,
-            422
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp",
-          "module": "WeilConjectures.Blowup.AdmissibleBlowup",
-          "lines": [
-            510,
-            529
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp_base_change",
-          "module": "WeilConjectures.Blowup.AdmissibleBlowup",
-          "lines": [
-            438,
-            508
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`thm:nagata-composition-of-blowups`."
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-lem-nagata-sketch-blowups",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be qcqs, let $\\mathcal I\\subseteq\\mathcal O_X$ be a finite-type\nquasi-coherent ideal with blow-up $b\\colon X'=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$,\nand let $Z'\\hookrightarrow X'$ be the closed subscheme defined by a\nfinite-type quasi-coherent ideal $\\mathcal I_{Z'}$; put $Z=V(\\mathcal I)$.\nThen there are a finite-type quasi-coherent ideal $\\mathcal K$ on $X$ with\n\n$$\n|V(\\mathcal K)|=|Z|\\cup b(|Z'|)\n$$\n\nand an isomorphism\n$\\operatorname{Bl}_{\\mathcal I_{Z'}}(X')\\cong\\operatorname{Bl}_{\\mathcal K}(X)$\nover $X$. One can take $\\mathcal K=\\mathcal K(Z')$, the isomorphism being\n$\\Omega_{Z,Z'}$.",
-    "proof": [
-      {
-        "text": "Put $X_1=\\operatorname{Bl}_{\\mathcal I}(X)$ and\n$\\mathcal J'=\\mathcal J\\mathcal O_{X_1}$. By the extended-ideal equality,\n$\\mathcal J'=\\mathcal I_E^d\\mathcal I_{Z'}$. The product-ideal comparison\n[thm-nagata-blowup-product-ideal] therefore gives an isomorphism over\n$X$\n\n$$\n\\operatorname{Bl}_{\\mathcal J'}(X_1)\n\\xrightarrow{\\sim}\\operatorname{Bl}_{\\mathcal I\\mathcal J}(X).\n$$",
-        "uses": [
-          "thm-nagata-blowup-product-ideal"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Since $\\mathcal I_E^d$ is invertible, the invertible-factor comparison\n[lemma-nagata-blowup-invertible-factor] gives a canonical isomorphism\n$\\operatorname{Bl}_{\\mathcal I_{Z'}}(X_1)\\cong \\operatorname{Bl}_{\\mathcal J'}(X_1)$. Their composite is the map\n$\\Omega_{Z,Z'}$ in the definition; the reverse composite of the inverse\ncomparisons is the stated reverse map.",
-        "uses": [
-          "lemma-nagata-blowup-invertible-factor"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "For completeness, these maps are the universal lifts for the same quotient:\non the iterated blow-up the product of the tautological invertible quotients\nis the tautological quotient of $\\mathcal I\\mathcal J$, while on the\n$\\mathcal I\\mathcal J$-blow-up its two factor quotients give the tautological\nquotients for $\\mathcal I$ and for $\\mathcal J'$; multiplying by the inverse\nof the local generator of $\\mathcal I_E^d$ gives the quotient for\n$\\mathcal I_{Z'}$. Thus each composite is an $X$-morphism inducing the\noriginal tautological quotient. Uniqueness in the blow-up universal\nproperty, first over $X$ and then over $X_1$, makes both composites identities.\nThe center ideal $\\mathcal K=\\mathcal I\\mathcal J$ is finite type, hence\ndefines a finite-presentation closed immersion, and\n[lemma-nagata-composition-center-ideal] gives its support as\n$|V(\\mathcal I)|\\cup b(|Z'|)$.",
-        "uses": [
-          "lemma-nagata-composition-center-ideal"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For completeness, these maps are the universal lifts for the same quotient:\non the iterated blow-up the product of the tautological invertible quotients\nis the tautological quotient of $\\mathcal I\\mathcal J$, while on the\n$\\mathcal I\\mathcal J$-blow-up its two factor quotients give the tautological\nquotients for $\\mathcal I$ and for $\\mathcal J'$; multiplying by the inverse\nof the local generator of $\\mathcal I_E^d$ gives the quotient for\n$\\mathcal I_{Z'}$. Thus each composite is an $X$-morphism inducing the\noriginal tautological quotient. Uniqueness in the blow-up universal\nproperty, first over $X$ and then over $X_1$, makes both composites identities.\nThe center ideal $\\mathcal K=\\mathcal I\\mathcal J$ is finite type, hence\ndefines a finite-presentation closed immersion, and\n[lemma-nagata-composition-center-ideal] gives its support as\n$|V(\\mathcal I)|\\cup b(|Z'|)$.",
+   "uses": [
+    "lemma-nagata-composition-center-ideal"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "thm-nagata-blowup-product-ideal",
+  "lemma-nagata-blowup-invertible-factor",
+  "lemma-nagata-composition-center-ideal",
+  "cor-nagata-blowup-cartier-iso",
+  "cor-nagata-blowup-product-common-refinement",
+  "lemma-nagata-composition-extended-ideal-equality",
+  "lemma-nagata-invertible-ideal-tensor-power",
+  "lemma-nagata-product-ideal-common-blowup",
+  "prop-nagata-global-blowup-cover-independent",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/thm-nagata-composition-of-blowups.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 135,
+ "blueprint_uses": [
+  "cor-nagata-blowup-cartier-iso",
+  "cor-nagata-blowup-product-common-refinement",
+  "def-nagata-blowup-product-comparison",
+  "def-nagata-blowup-product-domination-maps",
+  "def-nagata-composition-of-blowups-comparison",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-invertible-ideal",
+  "def-nagata-proj-closed-center-finite-degree",
+  "lemma-nagata-blowup-invertible-factor",
+  "lemma-nagata-composition-center-ideal",
+  "lemma-nagata-composition-extended-ideal-equality",
+  "lemma-nagata-invertible-ideal-tensor-power",
+  "lemma-nagata-product-ideal-common-blowup",
+  "prop-nagata-global-blowup-cover-independent",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-product-ideal",
+  "thm-nagata-blowup-universal-property"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Blowup.AdmissibleBlowup",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp",
+  "branch": "master",
+  "line": 389,
+  "sorry_free": true,
+  "body_lines": 24
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Scheme.IdealSheafData.exists_blowup_comp"
+ ],
+ "uses_not_cited": [
+  "cor-nagata-blowup-cartier-iso",
+  "cor-nagata-blowup-product-common-refinement",
+  "def-nagata-blowup-product-comparison",
+  "def-nagata-blowup-product-domination-maps",
+  "def-nagata-composition-of-blowups-comparison",
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-invertible-ideal",
+  "def-nagata-proj-closed-center-finite-degree",
+  "lemma-nagata-composition-extended-ideal-equality",
+  "lemma-nagata-invertible-ideal-tensor-power",
+  "lemma-nagata-product-ideal-common-blowup",
+  "prop-nagata-global-blowup-cover-independent",
+  "thm-nagata-blowup-principalizes-center",
+  "thm-nagata-blowup-universal-property"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-lem-nagata-sketch-blowups",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be qcqs, let $\\mathcal I\\subseteq\\mathcal O_X$ be a finite-type\nquasi-coherent ideal with blow-up $b\\colon X'=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$,\nand let $Z'\\hookrightarrow X'$ be the closed subscheme defined by a\nfinite-type quasi-coherent ideal $\\mathcal I_{Z'}$; put $Z=V(\\mathcal I)$.\nThen there are a finite-type quasi-coherent ideal $\\mathcal K$ on $X$ with\n\n$$\n|V(\\mathcal K)|=|Z|\\cup b(|Z'|)\n$$\n\nand an isomorphism\n$\\operatorname{Bl}_{\\mathcal I_{Z'}}(X')\\cong\\operatorname{Bl}_{\\mathcal K}(X)$\nover $X$. One can take $\\mathcal K=\\mathcal K(Z')$, the isomorphism being\n$\\Omega_{Z,Z'}$.",
+  "proof": [
+   {
+    "text": "Put $X_1=\\operatorname{Bl}_{\\mathcal I}(X)$ and\n$\\mathcal J'=\\mathcal J\\mathcal O_{X_1}$. By the extended-ideal equality,\n$\\mathcal J'=\\mathcal I_E^d\\mathcal I_{Z'}$. The product-ideal comparison\n[thm-nagata-blowup-product-ideal] therefore gives an isomorphism over\n$X$\n\n$$\n\\operatorname{Bl}_{\\mathcal J'}(X_1)\n\\xrightarrow{\\sim}\\operatorname{Bl}_{\\mathcal I\\mathcal J}(X).\n$$",
+    "uses": [
+     "thm-nagata-blowup-product-ideal"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Since $\\mathcal I_E^d$ is invertible, the invertible-factor comparison\n[lemma-nagata-blowup-invertible-factor] gives a canonical isomorphism\n$\\operatorname{Bl}_{\\mathcal I_{Z'}}(X_1)\\cong \\operatorname{Bl}_{\\mathcal J'}(X_1)$. Their composite is the map\n$\\Omega_{Z,Z'}$ in the definition; the reverse composite of the inverse\ncomparisons is the stated reverse map.",
+    "uses": [
+     "lemma-nagata-blowup-invertible-factor"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "For completeness, these maps are the universal lifts for the same quotient:\non the iterated blow-up the product of the tautological invertible quotients\nis the tautological quotient of $\\mathcal I\\mathcal J$, while on the\n$\\mathcal I\\mathcal J$-blow-up its two factor quotients give the tautological\nquotients for $\\mathcal I$ and for $\\mathcal J'$; multiplying by the inverse\nof the local generator of $\\mathcal I_E^d$ gives the quotient for\n$\\mathcal I_{Z'}$. Thus each composite is an $X$-morphism inducing the\noriginal tautological quotient. Uniqueness in the blow-up universal\nproperty, first over $X$ and then over $X_1$, makes both composites identities.\nThe center ideal $\\mathcal K=\\mathcal I\\mathcal J$ is finite type, hence\ndefines a finite-presentation closed immersion, and\n[lemma-nagata-composition-center-ideal] gives its support as\n$|V(\\mathcal I)|\\cup b(|Z'|)$.",
+    "uses": [
+     "lemma-nagata-composition-center-ideal"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

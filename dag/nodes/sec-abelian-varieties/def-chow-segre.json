@@ -1,100 +1,75 @@
 {
-  "id": "def-chow-segre",
-  "blueprint": {
-    "is": "def-chow-segre",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "definition",
-  "title": "Segre embedding",
-  "statement": "For integers $n_1,\\dots,n_m\\geq0$, let $N=\\prod_{i=1}^m(n_i+1)-1$ and let the\ncoordinates of $\\mathbf P^N_Y$ be $X_{e}$, indexed by tuples\n$e=(e_1,\\dots,e_m)$ with $0\\leq e_i\\leq n_i$. The *Segre embedding* is the\nmorphism of $Y$-schemes\n\n$$\n s:\\prod_{i=1}^m\\mathbf P^{n_i}_Y\\longrightarrow\\mathbf P^N_Y,\n$$\n\ngiven by the multihomogeneous coordinates\n\n$$\n x\\longmapsto\\bigl[\\prod_{i=1}^m x_{i,e_i}\\bigr]_{e},\n \\qquad x=(x_{i,0}:\\cdots:x_{i,n_i})_{i=1}^m.\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-symmetric-ample/def-chow-segre.md",
-    "place": "node def-chow-segre, order 476"
-  },
-  "stmt_deps": [
-    "def-nagata-affine-proj",
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-nagata-projective-space-base-change",
-    "def-weil-pbc-scheme-conventions",
-    "prop-nagata-proj-standard-open"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 476,
-  "blueprint_uses": [
-    "def-nagata-affine-proj",
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-nagata-projective-space-base-change",
-    "def-weil-pbc-scheme-conventions",
-    "prop-nagata-proj-standard-open"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre",
-    "declaration": "AlgebraicGeometry.ProjectiveSpace.segre",
-    "branch": "slopmaster2",
-    "line": 579,
-    "sorry_free": true,
-    "body_lines": 2
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.ProjectiveSpace.segre"
-  ],
-  "uses_not_cited": [
-    "def-nagata-affine-proj",
-    "def-nagata-homogeneous-localization-degree-zero",
-    "def-nagata-projective-space-base-change",
-    "def-weil-pbc-scheme-conventions",
-    "prop-nagata-proj-standard-open"
-  ],
-  "blueprint_sketch": [
-    {
-      "statement": "Let $S$ be a scheme and let $n$ and $m$ be index sets for the homogeneous\ncoordinates of $\\mathbf P^{n}_S$ and $\\mathbf P^{m}_S$. The *Segre\nembedding* is the morphism of $S$-schemes\n\n$$\ns\\colon\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S\n\\longrightarrow\\mathbf P^{n\\times m}_S,\n\\qquad\n\\bigl((x_k)_{k\\in n},(y_l)_{l\\in m}\\bigr)\n\\longmapsto\n\\bigl[x_k\\,y_l\\bigr]_{(k,l)\\in n\\times m} .\n$$\n\nIn the classical indexing this is\n$\\mathbf P^{n_1}_S\\times_S\\mathbf P^{n_2}_S\\to\\mathbf P^{N}_S$ with\n$N=(n_1+1)(n_2+1)-1$; iterating it $m-1$ times embeds an $m$-fold product\ninto $\\mathbf P^{N}_S$ with $N=\\prod_{i=1}^m(n_i+1)-1$.",
-      "proof": "",
-      "cites": []
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.ProjectiveSpace.segre"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.ProjectiveSpace.segre",
-          "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre",
-          "lines": [
-            575,
-            581
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-symmetric-ample",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $S$ be a scheme and let $n$ and $m$ be index sets for the homogeneous\ncoordinates of $\\mathbf P^{n}_S$ and $\\mathbf P^{m}_S$. The *Segre\nembedding* is the morphism of $S$-schemes\n\n$$\ns\\colon\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S\n\\longrightarrow\\mathbf P^{n\\times m}_S,\n\\qquad\n\\bigl((x_k)_{k\\in n},(y_l)_{l\\in m}\\bigr)\n\\longmapsto\n\\bigl[x_k\\,y_l\\bigr]_{(k,l)\\in n\\times m} .\n$$\n\nIterating it, for finitely many index sets $n_1,\\dots,n_m$ one obtains the\nmorphism of $S$-schemes\n\n$$\n s:\\prod_{i=1}^m\\mathbf P^{n_i}_S\\longrightarrow\n \\mathbf P^{n_1\\times\\dots\\times n_m}_S,\n \\qquad\n x\\longmapsto\\bigl[\\prod_{i=1}^m x_{i,e_i}\\bigr]_{e},\n$$\n\nwhere $x=\\bigl((x_{i,k})_{k\\in n_i}\\bigr)_{i=1}^m$ and the target coordinates\n$X_e$ are indexed by the tuples $e=(e_1,\\dots,e_m)\\in n_1\\times\\dots\\times\nn_m$. In the classical indexing $n_i=\\{0,\\dots,n_i\\}$ the target is\n$\\mathbf P^{N}_S$ with $N=\\prod_{i=1}^m(n_i+1)-1$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "def-chow-segre",
+ "blueprint": {
+  "is": "def-chow-segre",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Segre embedding",
+ "statement": "For integers $n_1,\\dots,n_m\\geq0$, let $N=\\prod_{i=1}^m(n_i+1)-1$ and let the\ncoordinates of $\\mathbf P^N_Y$ be $X_{e}$, indexed by tuples\n$e=(e_1,\\dots,e_m)$ with $0\\leq e_i\\leq n_i$. The *Segre embedding* is the\nmorphism of $Y$-schemes\n\n$$\n s:\\prod_{i=1}^m\\mathbf P^{n_i}_Y\\longrightarrow\\mathbf P^N_Y,\n$$\n\ngiven by the multihomogeneous coordinates\n\n$$\n x\\longmapsto\\bigl[\\prod_{i=1}^m x_{i,e_i}\\bigr]_{e},\n \\qquad x=(x_{i,0}:\\cdots:x_{i,n_i})_{i=1}^m.\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-symmetric-ample/def-chow-segre.md",
+  "place": "node def-chow-segre, order 476"
+ },
+ "stmt_deps": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-scheme-conventions",
+  "prop-nagata-proj-standard-open"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 476,
+ "blueprint_uses": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-scheme-conventions",
+  "prop-nagata-proj-standard-open"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Segre",
+  "declaration": "AlgebraicGeometry.ProjectiveSpace.segre",
+  "branch": "slopmaster2",
+  "line": 579,
+  "sorry_free": true,
+  "body_lines": 2
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.ProjectiveSpace.segre"
+ ],
+ "uses_not_cited": [
+  "def-nagata-affine-proj",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-nagata-projective-space-base-change",
+  "def-weil-pbc-scheme-conventions",
+  "prop-nagata-proj-standard-open"
+ ],
+ "blueprint_sketch": [
+  {
+   "statement": "Let $S$ be a scheme and let $n$ and $m$ be index sets for the homogeneous\ncoordinates of $\\mathbf P^{n}_S$ and $\\mathbf P^{m}_S$. The *Segre\nembedding* is the morphism of $S$-schemes\n\n$$\ns\\colon\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S\n\\longrightarrow\\mathbf P^{n\\times m}_S,\n\\qquad\n\\bigl((x_k)_{k\\in n},(y_l)_{l\\in m}\\bigr)\n\\longmapsto\n\\bigl[x_k\\,y_l\\bigr]_{(k,l)\\in n\\times m} .\n$$\n\nIn the classical indexing this is\n$\\mathbf P^{n_1}_S\\times_S\\mathbf P^{n_2}_S\\to\\mathbf P^{N}_S$ with\n$N=(n_1+1)(n_2+1)-1$; iterating it $m-1$ times embeds an $m$-fold product\ninto $\\mathbf P^{N}_S$ with $N=\\prod_{i=1}^m(n_i+1)-1$.",
+   "proof": "",
+   "cites": []
   }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-symmetric-ample",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $S$ be a scheme and let $n$ and $m$ be index sets for the homogeneous\ncoordinates of $\\mathbf P^{n}_S$ and $\\mathbf P^{m}_S$. The *Segre\nembedding* is the morphism of $S$-schemes\n\n$$\ns\\colon\\mathbf P^{n}_S\\times_S\\mathbf P^{m}_S\n\\longrightarrow\\mathbf P^{n\\times m}_S,\n\\qquad\n\\bigl((x_k)_{k\\in n},(y_l)_{l\\in m}\\bigr)\n\\longmapsto\n\\bigl[x_k\\,y_l\\bigr]_{(k,l)\\in n\\times m} .\n$$\n\nIterating it, for finitely many index sets $n_1,\\dots,n_m$ one obtains the\nmorphism of $S$-schemes\n\n$$\n s:\\prod_{i=1}^m\\mathbf P^{n_i}_S\\longrightarrow\n \\mathbf P^{n_1\\times\\dots\\times n_m}_S,\n \\qquad\n x\\longmapsto\\bigl[\\prod_{i=1}^m x_{i,e_i}\\bigr]_{e},\n$$\n\nwhere $x=\\bigl((x_{i,k})_{k\\in n_i}\\bigr)_{i=1}^m$ and the target coordinates\n$X_e$ are indexed by the tuples $e=(e_1,\\dots,e_m)\\in n_1\\times\\dots\\times\nn_m$. In the classical indexing $n_i=\\{0,\\dots,n_i\\}$ the target is\n$\\mathbf P^{N}_S$ with $N=\\prod_{i=1}^m(n_i+1)-1$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

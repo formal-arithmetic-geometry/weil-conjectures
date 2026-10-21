@@ -1,147 +1,136 @@
 {
-  "id": "new-integral-residue-derived-monoidal",
-  "kind": "definition",
-  "title": "Derived strong monoidality from flat-preserving ordinary pullback",
-  "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface]. For an additive exact strong monoidal left adjoint F between the monoidal Grothendieck abelian categories with functorial flat resolutions, assume F preserves flat objects. Construct the strong monoidal structure on F.leftDerivedFunctor from its canonical tensor comparison. Specializing to the actual ordinary integral pullback, a supplied ordinary monoidal structure and proof of flat preservation give a constructed monoidal structure on residueExchangeUpperStar. No data is obtained from an unproved existence theorem. A local named copy of the existing integral derived monoidal instance is definitionally equal to it and marked instance_reducible so consumers retain typeclass compatibility.",
-  "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
-  },
-  "stmt_deps": [
+ "id": "new-integral-residue-derived-monoidal",
+ "kind": "definition",
+ "title": "Derived strong monoidality from flat-preserving ordinary pullback",
+ "statement": "Use [def-weil-pbc-residue-exchange-comparison-interface]. For an additive exact strong monoidal left adjoint F between the monoidal Grothendieck abelian categories with functorial flat resolutions, assume F preserves flat objects. Construct the strong monoidal structure on F.leftDerivedFunctor from its canonical tensor comparison. Specializing to the actual ordinary integral pullback, a supplied ordinary monoidal structure and proof of flat preservation give a constructed monoidal structure on residueExchangeUpperStar. No data is obtained from an unproved existence theorem. A local named copy of the existing integral derived monoidal instance is definitionally equal to it and marked instance_reducible so consumers retain typeclass compatibility.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "proof": [
+  {
+   "text": "A flat-preserving colimit-preserving functor sends the functorial flat resolution to a K-flat complex. The kFlatMap localizer has left resolutions; therefore every derived object is isomorphic to the quotient of an object in kFlatMap.",
+   "uses": [
     "def-weil-pbc-residue-exchange-comparison-interface"
-  ],
-  "proof": [
-    {
-      "text": "A flat-preserving colimit-preserving functor sends the functorial flat resolution to a K-flat complex. The kFlatMap localizer has left resolutions; therefore every derived object is isomorphic to the quotient of an object in kFlatMap.",
-      "uses": [
-        "def-weil-pbc-residue-exchange-comparison-interface"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Apply OplaxMonoidal.ofLaxSquare to the canonical left-derived tensor comparison, its counit compatibility, and the kFlatMap resolutions. The derived tensor comparisons are invertible on these resolutions; the derived unit comparison is invertible as well.",
-      "uses": [],
-      "elementary": false
-    },
-    {
-      "text": "CoreMonoidal.ofOplaxMonoidal turns this oplax structure with invertible tensor and unit maps into a strong monoidal structure. Specialize the actual typed pull functor by unfolding its wrapper only at this API boundary.",
-      "uses": [],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-residue-exchange-comparison-interface"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-    "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors."
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "ofLaxSquare|IsIso.*tensor.*[Cc]omparison|[Dd]erived.*[Mm]onoidal",
-      "date": "2026-10-16",
-      "results": "0 hits: ",
-      "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal",
-      "date": "2026-10-16",
-      "results": "3 hits: CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_εIso, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_μIso",
-      "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Left derived functor of an additive strong monoidal functor preserving flat objects has a strong monoidal structure computed on K-flat resolutions",
-      "date": "2026-10-16",
-      "results": "8 hits: CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Tor_map",
-      "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
-    },
-    {
-      "tool": "leansearch",
-      "query": "The left derived functor of an exact strong monoidal functor preserving flat objects is strong monoidal",
-      "date": "2026-10-16",
-      "results": "8 hits: CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Functor.totalLeftDerived",
-      "verdict": "The hits supply generic ordinary module, monoidal or derived-functor ingredients. None is the specialized derived internal-module comparison stated here; the applicable generic ingredients are used in the construction."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.Paper.IntegralResidueProjectionNormalization",
-    "date": "2026-10-16",
-    "group": "D3"
+  {
+   "text": "Apply OplaxMonoidal.ofLaxSquare to the canonical left-derived tensor comparison, its counit compatibility, and the kFlatMap resolutions. The derived tensor comparisons are invertible on these resolutions; the derived unit comparison is invertible as well.",
+   "uses": [],
+   "elementary": false
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "nt-target-proetale-e",
-      "place": "Derived strong monoidality from flat-preserving ordinary pullback",
-      "via": [
-        "new-integral-residue-projection-normalization",
-        "lem-weil-pbc-integral-residue-comparisons",
-        "lem-weil-pbc-integral-residue-exchange",
-        "lem-weil-pbc-integral-finite-exchange-comparison",
-        "new-proper-continuous-basechange-app"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.Paper.IntegralResidueDerivedMonoidal",
-    "file": "lean/Sheaf/Paper/IntegralResidueDerivedMonoidal.lean",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullMonoidal",
-    "statement": "def residueExchangePullMonoidal\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal)\n    (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat) :\n    (residueExchangeUpperStar (integralCoeff ℓ E) f).Monoidal",
-    "branch": "sheaf-dag",
-    "by": "D3",
-    "date": "2026-10-16",
-    "declarations": [
-      "CategoryTheory.Functor.residue_exists_kFlatMap_iso",
-      "CategoryTheory.Functor.residueDerivedOplax",
-      "CategoryTheory.Functor.residueDerivedOplax_isIso_δ",
-      "CategoryTheory.Functor.residueDerivedOplax_isIso_η",
-      "CategoryTheory.Functor.residueDerivedMonoidal",
-      "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeIntegralDerivedMonoidal",
-      "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullMonoidal"
-    ]
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "X-56663",
-    "group": "D3",
-    "result": "pass",
-    "landing": "20261016T101204-L-2230257",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "X-56663",
-    "group": "D3",
-    "result": "pass",
-    "landing": "20261016T101204-L-2230257",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "CoreMonoidal.ofOplaxMonoidal turns this oplax structure with invertible tensor and unit maps into a strong monoidal structure. Specialize the actual typed pull functor by unfolding its wrapper only at this API boundary.",
+   "uses": [],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-residue-exchange-comparison-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
+  "note": "D3 explicit construction and proof reduction of integral residue projection normalization; source argument specialized to the actual internal-module functors."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ofLaxSquare|IsIso.*tensor.*[Cc]omparison|[Dd]erived.*[Mm]onoidal",
+   "date": "2026-10-16",
+   "results": "0 hits: ",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal",
+   "date": "2026-10-16",
+   "results": "3 hits: CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_εIso, CategoryTheory.Functor.CoreMonoidal.ofOplaxMonoidal_μIso",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left derived functor of an additive strong monoidal functor preserving flat objects has a strong monoidal structure computed on K-flat resolutions",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Tor_obj, CategoryTheory.Tor'_obj_obj, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Tor_map",
+   "verdict": "Generic ingredients were checked; no exact derived internal-module residue normalization or duplicate of this specialized API was found. Relevant generic ingredients are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The left derived functor of an exact strong monoidal functor preserving flat objects is strong monoidal",
+   "date": "2026-10-16",
+   "results": "8 hits: CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.Monoidal.ofBifunctor, CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Functor.totalLeftDerived",
+   "verdict": "The hits supply generic ordinary module, monoidal or derived-functor ingredients. None is the specialized derived internal-module comparison stated here; the applicable generic ingredients are used in the construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralResidueProjectionNormalization",
+  "date": "2026-10-16",
+  "group": "D3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "nt-target-proetale-e",
+   "place": "Derived strong monoidality from flat-preserving ordinary pullback",
+   "via": [
+    "new-integral-residue-projection-normalization",
+    "lem-weil-pbc-integral-residue-comparisons",
+    "lem-weil-pbc-integral-residue-exchange",
+    "lem-weil-pbc-integral-finite-exchange-comparison",
+    "new-proper-continuous-basechange-app"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueDerivedMonoidal",
+  "file": "lean/Sheaf/Paper/IntegralResidueDerivedMonoidal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullMonoidal",
+  "statement": "def residueExchangePullMonoidal\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal)\n    (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat) :\n    (residueExchangeUpperStar (integralCoeff ℓ E) f).Monoidal",
+  "branch": "sheaf-dag",
+  "by": "D3",
+  "date": "2026-10-16",
+  "declarations": [
+   "CategoryTheory.Functor.residue_exists_kFlatMap_iso",
+   "CategoryTheory.Functor.residueDerivedOplax",
+   "CategoryTheory.Functor.residueDerivedOplax_isIso_δ",
+   "CategoryTheory.Functor.residueDerivedOplax_isIso_η",
+   "CategoryTheory.Functor.residueDerivedMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangeIntegralDerivedMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.residueExchangePullMonoidal"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "X-56663",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261016T101204-L-2230257",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered overlay and DAG records matched against the packet, repository baseline, clean import-order compilation, forced-adaptation failure/recompile, and direct importer compilation"
+ },
+ "lean_audit": {}
 }

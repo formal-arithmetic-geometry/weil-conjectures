@@ -1,92 +1,49 @@
 {
-  "id": "lem-weil-pbc-qcoherent-normalized-pullback-square",
-  "kind": "statement",
-  "title": "The normalized comparison commutes with the canonical pullback cohomology maps",
-  "statement": "Let X and Y be quasi-compact separated schemes and F and G quasi-coherent modules [def-pc-scheme, def-weil-pbc-scheme-conventions, pqf-def-coherent, def-weil-sheaf-of-modules-category]. Suppose cX and cY are families from module cohomology [pqf-def-cohomology] to cohomology of the lifted associated etale sheaves [def-sc-etale-qcoherent-module, def-weil-pbc-etale-cohomology, def-weil-size-convention], whose transports through moduleAbelianCohomologyLarge are IsNormalizedCoherentEtaleComparison [def-pbc-canonical-coherent-etale-comparison]. For g:Y to X and psi:g*F to G [def-pc-module-pullback], there exists a coefficient sheaf morphism theta whose value on ULift.up s is ULift.up of the structural qcoherentPullbackSection formula [lem-weil-pbc-qcoherent-pullback-sections-map]. The inverse cY, after the etale cohomology pullback [def-weil-pbc-cohomology-pullback] and the cohomology map of the adjoint of theta, equals the module cohomology map [def-weil-pbc-module-cohomology-fmap] of the tensor-adjoint of psi, after the inverse cX. The assertion assumes the normalized comparisons; it supplies the structural coefficient morphism and the pullback square, but does not assert comparison existence, a simultaneous family over all schemes, or scalar compatibility.",
-  "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 01FD refinement square; etale-cohomology.tex Tag 03P2; sites-cohomology.tex Tags 03AX and 03FD"
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-pbc-scheme-conventions",
-    "pqf-def-coherent",
-    "def-weil-sheaf-of-modules-category",
-    "def-sc-etale-qcoherent-module",
-    "pqf-def-cohomology",
-    "def-weil-pbc-etale-cohomology",
-    "def-pc-module-pullback",
-    "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-module-cohomology-fmap",
-    "def-weil-size-convention",
-    "def-pbc-canonical-coherent-etale-comparison",
-    "lem-weil-pbc-qcoherent-pullback-sections-map"
-  ],
-  "proof": [
-    {
-      "text": "For each etale U over X, form the structural section map to its base change over Y, followed by psi. Unit naturality, associativity of adjunction-mate composition, and coefficient naturality show compatibility with restrictions. Apply coefficient lift to construct theta, with the stated component formula.",
-      "uses": [
-        "lem-weil-pbc-qcoherent-pullback-sections-map",
-        "lem-sc-etale-qcoherent-presheaf-functorial",
-        "lem-sc-etale-tensor-sections-map-naturality"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Refine the inverse image of a finite affine cover of X by a finite affine cover of Y. Do not assume inverse images are affine. Tuple intersections in both covers are affine by separatedness.",
-      "uses": [
-        "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
-        "lem-weil-pbc-separated-affine-open-intersection",
-        "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The original affine vanishing and normalized-edge results make the two ordinary and lifted etale Cech edges invertible.",
-      "uses": [
-        "lem-sc-etale-affine-qcoherent",
-        "new-etale-finite-affine-cech-basis",
-        "new-etale-affine-tensor-cech-vanishing",
-        "lem-weil-pbc-site-cech-mathlib-comparison",
-        "lem-weil-pbc-cech-vanishing-criterion",
-        "lem-weil-pbc-etale-cohomology-over-open",
-        "lem-weil-pbc-acyclic-cech-edge-compatibility",
-        "def-sc-module-cech-comparison",
-        "lem-sc-module-cech-beta-affine-quasi-iso",
-        "def-sp-double-complex-total",
-        "new-module-cohomology-ext-resolution-normalization",
-        "new-module-cohomology-ext-resolution-naturality"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The constructed theta has exactly the structural pullback and coefficient formula. On tuple sections ULift.down commutes with that formula. The ringed-site refinement squares therefore identify the two normalized Cech cohomology maps. The abelian refinement square uses exact etale inverse image and gives cohomologyMap followed by the adjoint of theta; the module square gives moduleCohomologyFMap of the tensor adjoint.",
-      "uses": [
-        "lem-weil-pbc-qcoherent-pullback-sections-map",
-        "lem-weil-pbc-ringed-site-cech-refinement-square",
-        "lem-weil-pbc-sets-etale-inverse-image-exact",
-        "def-weil-pbc-cohomology-pullback",
-        "def-weil-pbc-module-cohomology-fmap"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Normalized Cech comparisons and cX,cY have the same section and connecting-map normalizations, so effaceable delta-functor uniqueness identifies them. Apply the common-resolution normalization and cancel the invertible edges to obtain the claimed equality. The same zero-complex argument includes empty schemes and zero coefficients.",
-      "uses": [
-        "lem-weil-pbc-effaceable-delta-functor-universal",
-        "lem-weil-pbc-affine-morphism-cohomology-edge",
-        "lem-pc-sections-higher-direct-image-quasi-coherent"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-pbc-qcoherent-normalized-pullback-square",
+ "kind": "statement",
+ "title": "The normalized comparison commutes with the canonical pullback cohomology maps",
+ "statement": "Let X and Y be quasi-compact separated schemes and F and G quasi-coherent modules [def-pc-scheme, def-weil-pbc-scheme-conventions, pqf-def-coherent, def-weil-sheaf-of-modules-category]. Suppose cX and cY are families from module cohomology [pqf-def-cohomology] to cohomology of the lifted associated etale sheaves [def-sc-etale-qcoherent-module, def-weil-pbc-etale-cohomology, def-weil-size-convention], whose transports through moduleAbelianCohomologyLarge are IsNormalizedCoherentEtaleComparison [def-pbc-canonical-coherent-etale-comparison]. For g:Y to X and psi:g*F to G [def-pc-module-pullback], there exists a coefficient sheaf morphism theta whose value on ULift.up s is ULift.up of the structural qcoherentPullbackSection formula [lem-weil-pbc-qcoherent-pullback-sections-map]. The inverse cY, after the etale cohomology pullback [def-weil-pbc-cohomology-pullback] and the cohomology map of the adjoint of theta, equals the module cohomology map [def-weil-pbc-module-cohomology-fmap] of the tensor-adjoint of psi, after the inverse cX. The assertion assumes the normalized comparisons; it supplies the structural coefficient morphism and the pullback square, but does not assert comparison existence, a simultaneous family over all schemes, or scalar compatibility.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FD refinement square; etale-cohomology.tex Tag 03P2; sites-cohomology.tex Tags 03AX and 03FD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-coherent",
+  "def-weil-sheaf-of-modules-category",
+  "def-sc-etale-qcoherent-module",
+  "pqf-def-cohomology",
+  "def-weil-pbc-etale-cohomology",
+  "def-pc-module-pullback",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-weil-size-convention",
+  "def-pbc-canonical-coherent-etale-comparison",
+  "lem-weil-pbc-qcoherent-pullback-sections-map"
+ ],
+ "proof": [
+  {
+   "text": "For each etale U over X, form the structural section map to its base change over Y, followed by psi. Unit naturality, associativity of adjunction-mate composition, and coefficient naturality show compatibility with restrictions. Apply coefficient lift to construct theta, with the stated component formula.",
+   "uses": [
     "lem-weil-pbc-qcoherent-pullback-sections-map",
     "lem-sc-etale-qcoherent-presheaf-functorial",
-    "lem-sc-etale-tensor-sections-map-naturality",
+    "lem-sc-etale-tensor-sections-map-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Refine the inverse image of a finite affine cover of X by a finite affine cover of Y. Do not assume inverse images are affine. Tuple intersections in both covers are affine by separatedness.",
+   "uses": [
     "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
     "lem-weil-pbc-separated-affine-open-intersection",
-    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+    "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The original affine vanishing and normalized-edge results make the two ordinary and lifted etale Cech edges invertible.",
+   "uses": [
     "lem-sc-etale-affine-qcoherent",
     "new-etale-finite-affine-cech-basis",
     "new-etale-affine-tensor-cech-vanishing",
@@ -98,105 +55,149 @@
     "lem-sc-module-cech-beta-affine-quasi-iso",
     "def-sp-double-complex-total",
     "new-module-cohomology-ext-resolution-normalization",
-    "new-module-cohomology-ext-resolution-naturality",
+    "new-module-cohomology-ext-resolution-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constructed theta has exactly the structural pullback and coefficient formula. On tuple sections ULift.down commutes with that formula. The ringed-site refinement squares therefore identify the two normalized Cech cohomology maps. The abelian refinement square uses exact etale inverse image and gives cohomologyMap followed by the adjoint of theta; the module square gives moduleCohomologyFMap of the tensor adjoint.",
+   "uses": [
+    "lem-weil-pbc-qcoherent-pullback-sections-map",
     "lem-weil-pbc-ringed-site-cech-refinement-square",
     "lem-weil-pbc-sets-etale-inverse-image-exact",
     "def-weil-pbc-cohomology-pullback",
-    "def-weil-pbc-module-cohomology-fmap",
+    "def-weil-pbc-module-cohomology-fmap"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalized Cech comparisons and cX,cY have the same section and connecting-map normalizations, so effaceable delta-functor uniqueness identifies them. Apply the common-resolution normalization and cancel the invertible edges to obtain the claimed equality. The same zero-complex argument includes empty schemes and zero coefficients.",
+   "uses": [
     "lem-weil-pbc-effaceable-delta-functor-universal",
     "lem-weil-pbc-affine-morphism-cohomology-edge",
     "lem-pc-sections-higher-direct-image-quasi-coherent"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 01FD refinement square; etale-cohomology.tex Tag 03P2; sites-cohomology.tex Tags 03AX and 03FD"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "quasi coherent etale Zariski cohomology normalized comparison natural pullback",
-      "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback g ⋙ pullback f ≅ pullback (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The natural isomorphism asserting that composing sheafification with the pullback functor (along a ring sheaf morphism) is equivalent to composing the pullback functor (on presheaves) with sheafificat\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackComparison\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [HasPullback f g] [HasPullback (G.map f) (G.map g)] :\\n  G.obj (pullback f g) ⟶ pullback (G.map f) (G.map g)\", \"doc\": \"Given morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$ with a pullback $P = X \\times_Z Y$, and a functor $G : \\\\mathcal{C} \\to \\\\mathcal{D}$ that preserves the pullback of $G(f)$ and $G\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  pullback.{v} φ ⋙ pullback.{v} ψ ≅ pullback.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": freeFunctor ⋙ pullback φ ≅ freeFunctor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n",
-      "date": "2026-10-18",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Quasi coherent etale Zariski cohomology comparison natural under arbitrary scheme pullback",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).inv\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the homomorphism associated to the pseudofunctor's composition of pullback-pushforward adjunctions equals\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).inv.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).hom\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the inverse of the pseudofunctor's composition map on the opposite category is equal to the natural trans\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
-      "date": "2026-10-18",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf.H.map",
-      "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H.map\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f : F ⟶ G) (n : ℕ) : F.H n →+ G.H n\", \"doc\": \"Given a morphism of sheaves `f : F ⟶ G`, `H.map f n` is the induced additive map on cohomology\\ngroups `H F n →+ H G n`\"}\n  {\"name\": \"CategoryTheory.Sheaf.functorH_map\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] (n : ℕ) {X✝ Y✝ : CategoryTheory.Sheaf J AddCommGrpCat} (f : X✝ ⟶ Y✝) : (CategoryTheory.Sheaf.functo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.map_id_apply\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F : CategoryTheory.Sheaf J AddCommGrpCat} {n : ℕ} (x : F.H n) : (CategoryTheory.Sheaf.H.map (Categ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.map_apply\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f : F ⟶ G) {n : ℕ} (x : F.H n) : (CategoryTheory.Shea\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.map_comp_apply\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f : F ⟶ G) {n : ℕ} {G' : CategoryTheory.Sheaf J AddCo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.map_add_apply\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} {n : ℕ} (f g : F ⟶ G) (x : F.H n) : (CategoryTheory.Sh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.equiv₀_naturality\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {T : C} (hT : CategoryTheory.Limits.IsTerminal T) {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f :\", \"doc\": \"`H.equiv₀` is natural\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.equiv₀_symm_naturality\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {T : C} (hT : CategoryTheory.Limits.IsTerminal T) {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f :\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.addEquiv₀_map\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f : F ⟶ G) (x : F.H 0) : CategoryTheory.Abelian.Ext.a\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.addEquiv₀_map_assoc\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f : F ⟶ G) (x : F.H 0) {Z : CategoryTheory.Sheaf J Ad\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.longSequence_exact₁'\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {S : CategoryTheory.ShortComplex (CategoryTheory.Sheaf J AddCommGrpCat)} (hS : S.ShortExact) (n₀ n₁\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.longSequence_exact₃'\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {S : CategoryTheory.ShortComplex (CategoryTheory.Sheaf J AddCommGrpCat)} (hS : S.ShortExact) (n₀ n₁\", \"doc\": \"\"}\n",
-      "date": "2026-10-18",
-      "verdict": "no exact match"
-    },
-    {
-      "tool": "grep",
-      "query": "qcoherent.*[Cc]omparison|[Cc]omparison.*qcoherent",
-      "results": "[grep] OK 0 hit(s)\n",
-      "date": "2026-10-18",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.QcoherentCohomologyComparisonPullback",
-    "date": "2026-10-18",
-    "group": "Z7"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-direct-image-finiteness-proper",
-      "place": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b): f_* O_X = O_S and R^1 f_* O_X is finite locally free. Etale form: compatibility of 03P2 comparison with restriction between etale base objects and with scalar multiplication.; extracted from lem-weil-pbc-qcoherent-cohomology-comparison-pullback: The normalized comparison commutes with the canonical pullback cohomology maps",
-      "via": [
-        "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
-        "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
-        "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
-        "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-        "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
-        "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
-        "lem-weil-pbc-etale-compactification-constructibility",
-        "lem-weil-pbc-etale-proper-direct-image-finiteness"
-      ]
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare",
-    "file": "lean/Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.qcoherentNormalizedComparison_pullback_square",
-    "statement": "theorem qcoherentNormalizedComparison_pullback_square\n    (X Y : Scheme.{u}) [CompactSpace X] [Scheme.IsSeparated X]\n    [CompactSpace Y] [Scheme.IsSeparated Y]\n    (cX : ∀ (F : X.Modules) [F.IsQuasicoherent] (q : ℕ),\n      ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≃+\n        Sheaf.H (liftedCoherentEtaleSheaf F) q)\n    (cY : ∀ (G : Y.Modules) [G.IsQuasicoherent] (q : ℕ),\n      ((RingedSpace.moduleCohomology Y.toRingedSpace q).obj G) ≃+\n        Sheaf.H (liftedCoherentEtaleSheaf G) q)\n    (hcX : IsNormalizedCoherentEtaleComparison X\n      (fun F _ q ↦ (moduleAbelianCohomologyLarge X F q).symm.trans (cX F q)))\n    (hcY : IsNormalizedCoherentEtaleComparison Y\n      (fun G _ q ↦ (moduleAbelianCohomologyLarge Y G q).symm.trans (cY G q)))\n    (g : Y ⟶ X) (F : X.Modules) (G : Y.Modules)\n    [F.IsQuasicoherent] [G.IsQuasicoherent] (ψ : (tensorPullback g).obj F ⟶ G) :\n    ∃ θ : liftedCoherentEtaleSheaf F ⟶\n        (Etale.lowerStar AddCommGrpCat.{u + 1} g).obj (liftedCoherentEtaleSheaf G),\n      (∀ (U : X.Etale) (s : (etaleTensorSectionsSheaf F).obj.obj (op U)),\n        θ.hom.app (op U) (ULift.up s) = ULift.up\n          (qcoherentPullbackSection g F G ψ U\n            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).obj U)\n            (pullback.fst U.hom g) pullback.condition s)) ∧\n      ∀ (q : ℕ) (x : Sheaf.H (liftedCoherentEtaleSheaf F) q),\n        (cY G q).symm (Sheaf.H.map\n          ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).homEquiv\n            (liftedCoherentEtaleSheaf F) (liftedCoherentEtaleSheaf G) |>.symm θ)\n          q (Etale.cohomologyMap g (liftedCoherentEtaleSheaf F) q x)) =\n        moduleCohomologyFMap g\n          ((Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv F G ψ)\n          q ((cX F q).symm x)",
-    "branch": "sheaf-dag",
-    "by": "Z7",
-    "date": "2026-10-18"
-  },
-  "reviewed": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "C-3b9d7",
-    "group": "Z7",
-    "result": "pass",
-    "landing": "20261018T071246-L-1684153",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "C-3b9d7",
-    "group": "Z7",
-    "result": "pass",
-    "landing": "20261018T071246-L-1684153",
-    "kind": "interface",
-    "note": "independent cc review: the item theorem's statement (byte-identical to the clone) and its 4-clause proof against the two new sorry theorems and their nodes; the moved qcoherentPullbackSection (verbatim diff) with its change record; the direct importer SmoothCurveEtaleStructureDirectImages compiled against the delivered modules; axioms checked"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcoherent-pullback-sections-map",
+  "lem-sc-etale-qcoherent-presheaf-functorial",
+  "lem-sc-etale-tensor-sections-map-naturality",
+  "lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites",
+  "lem-sc-etale-affine-qcoherent",
+  "new-etale-finite-affine-cech-basis",
+  "new-etale-affine-tensor-cech-vanishing",
+  "lem-weil-pbc-site-cech-mathlib-comparison",
+  "lem-weil-pbc-cech-vanishing-criterion",
+  "lem-weil-pbc-etale-cohomology-over-open",
+  "lem-weil-pbc-acyclic-cech-edge-compatibility",
+  "def-sc-module-cech-comparison",
+  "lem-sc-module-cech-beta-affine-quasi-iso",
+  "def-sp-double-complex-total",
+  "new-module-cohomology-ext-resolution-normalization",
+  "new-module-cohomology-ext-resolution-naturality",
+  "lem-weil-pbc-ringed-site-cech-refinement-square",
+  "lem-weil-pbc-sets-etale-inverse-image-exact",
+  "def-weil-pbc-cohomology-pullback",
+  "def-weil-pbc-module-cohomology-fmap",
+  "lem-weil-pbc-effaceable-delta-functor-universal",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-sections-higher-direct-image-quasi-coherent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01FD refinement square; etale-cohomology.tex Tag 03P2; sites-cohomology.tex Tags 03AX and 03FD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quasi coherent etale Zariski cohomology normalized comparison natural pullback",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback g ⋙ pullback f ≅ pullback (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The natural isomorphism asserting that composing sheafification with the pullback functor (along a ring sheaf morphism) is equivalent to composing the pullback functor (on presheaves) with sheafificat\"}\n  {\"name\": \"CategoryTheory.Limits.pullbackComparison\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [HasPullback f g] [HasPullback (G.map f) (G.map g)] :\\n  G.obj (pullback f g) ⟶ pullback (G.map f) (G.map g)\", \"doc\": \"Given morphisms $f : X \\to Z$ and $g : Y \\to Z$ in a category $\\\\mathcal{C}$ with a pullback $P = X \\times_Z Y$, and a functor $G : \\\\mathcal{C} \\to \\\\mathcal{D}$ that preserves the pullback of $G(f)$ and $G\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  pullback.{v} φ ⋙ pullback.{v} ψ ≅ pullback.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": freeFunctor ⋙ pullback φ ≅ freeFunctor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"SheafOfModules.QuasicoherentData.I\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : ∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [inst_2 : ∀ (X : C), Cate\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the indexed data type for quasicoherent sheaves over $\\\\mathcal{O}$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quasi coherent etale Zariski cohomology comparison natural under arbitrary scheme pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).inv\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the homomorphism associated to the pseudofunctor's composition of pullback-pushforward adjunctions equals\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp f (CategoryTheory.CategoryStruct.comp g h)).inv\\n      (CategoryTheory.CategoryStruct.comp\\n        (CategoryTheory.Functor.whiskerRight\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).inv.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).hom\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the inverse of the pseudofunctor's composition map on the opposite category is equal to the natural trans\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y Z : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      (AlgebraicGeometry.Scheme.Modules.pullback g).comp (AlgebraicGeometry.Scheme.Modules.pullback f) ≅\\n        AlgebraicGeometry.Scheme.Modules.pullback (CategoryTheory.CategoryStruct.comp f g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {D' : Type u₃} →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] →\\n            {J : CategoryTheory.GrothendieckTopology C} →\\n              {K : C\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H.map",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H.map\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f : F ⟶ G) (n : ℕ) : F.H n →+ G.H n\", \"doc\": \"Given a morphism of sheaves `f : F ⟶ G`, `H.map f n` is the induced additive map on cohomology\\ngroups `H F n →+ H G n`\"}\n  {\"name\": \"CategoryTheory.Sheaf.functorH_map\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] (n : ℕ) {X✝ Y✝ : CategoryTheory.Sheaf J AddCommGrpCat} (f : X✝ ⟶ Y✝) : (CategoryTheory.Sheaf.functo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.map_id_apply\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F : CategoryTheory.Sheaf J AddCommGrpCat} {n : ℕ} (x : F.H n) : (CategoryTheory.Sheaf.H.map (Categ\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.map_apply\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f : F ⟶ G) {n : ℕ} (x : F.H n) : (CategoryTheory.Shea\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.map_comp_apply\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f : F ⟶ G) {n : ℕ} {G' : CategoryTheory.Sheaf J AddCo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.map_add_apply\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} {n : ℕ} (f g : F ⟶ G) (x : F.H n) : (CategoryTheory.Sh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.equiv₀_naturality\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {T : C} (hT : CategoryTheory.Limits.IsTerminal T) {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f :\", \"doc\": \"`H.equiv₀` is natural\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.equiv₀_symm_naturality\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {T : C} (hT : CategoryTheory.Limits.IsTerminal T) {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f :\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.addEquiv₀_map\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f : F ⟶ G) (x : F.H 0) : CategoryTheory.Abelian.Ext.a\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.addEquiv₀_map_assoc\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {F G : CategoryTheory.Sheaf J AddCommGrpCat} (f : F ⟶ G) (x : F.H 0) {Z : CategoryTheory.Sheaf J Ad\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.longSequence_exact₁'\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {S : CategoryTheory.ShortComplex (CategoryTheory.Sheaf J AddCommGrpCat)} (hS : S.ShortExact) (n₀ n₁\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Sheaf.H.longSequence_exact₃'\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} [CategoryTheory.HasSheafify J AddCommGrpCat] [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] {S : CategoryTheory.ShortComplex (CategoryTheory.Sheaf J AddCommGrpCat)} (hS : S.ShortExact) (n₀ n₁\", \"doc\": \"\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "qcoherent.*[Cc]omparison|[Cc]omparison.*qcoherent",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentCohomologyComparisonPullback",
+  "date": "2026-10-18",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b): f_* O_X = O_S and R^1 f_* O_X is finite locally free. Etale form: compatibility of 03P2 comparison with restriction between etale base objects and with scalar multiplication.; extracted from lem-weil-pbc-qcoherent-cohomology-comparison-pullback: The normalized comparison commutes with the canonical pullback cohomology maps",
+   "via": [
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcoherentNormalizedPullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.qcoherentNormalizedComparison_pullback_square",
+  "statement": "theorem qcoherentNormalizedComparison_pullback_square\n    (X Y : Scheme.{u}) [CompactSpace X] [Scheme.IsSeparated X]\n    [CompactSpace Y] [Scheme.IsSeparated Y]\n    (cX : ∀ (F : X.Modules) [F.IsQuasicoherent] (q : ℕ),\n      ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≃+\n        Sheaf.H (liftedCoherentEtaleSheaf F) q)\n    (cY : ∀ (G : Y.Modules) [G.IsQuasicoherent] (q : ℕ),\n      ((RingedSpace.moduleCohomology Y.toRingedSpace q).obj G) ≃+\n        Sheaf.H (liftedCoherentEtaleSheaf G) q)\n    (hcX : IsNormalizedCoherentEtaleComparison X\n      (fun F _ q ↦ (moduleAbelianCohomologyLarge X F q).symm.trans (cX F q)))\n    (hcY : IsNormalizedCoherentEtaleComparison Y\n      (fun G _ q ↦ (moduleAbelianCohomologyLarge Y G q).symm.trans (cY G q)))\n    (g : Y ⟶ X) (F : X.Modules) (G : Y.Modules)\n    [F.IsQuasicoherent] [G.IsQuasicoherent] (ψ : (tensorPullback g).obj F ⟶ G) :\n    ∃ θ : liftedCoherentEtaleSheaf F ⟶\n        (Etale.lowerStar AddCommGrpCat.{u + 1} g).obj (liftedCoherentEtaleSheaf G),\n      (∀ (U : X.Etale) (s : (etaleTensorSectionsSheaf F).obj.obj (op U)),\n        θ.hom.app (op U) (ULift.up s) = ULift.up\n          (qcoherentPullbackSection g F G ψ U\n            ((MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ g).obj U)\n            (pullback.fst U.hom g) pullback.condition s)) ∧\n      ∀ (q : ℕ) (x : Sheaf.H (liftedCoherentEtaleSheaf F) q),\n        (cY G q).symm (Sheaf.H.map\n          ((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).homEquiv\n            (liftedCoherentEtaleSheaf F) (liftedCoherentEtaleSheaf G) |>.symm θ)\n          q (Etale.cohomologyMap g (liftedCoherentEtaleSheaf F) q x)) =\n        moduleCohomologyFMap g\n          ((Classical.choose (exists_tensorPullbackAdjunction g)).homEquiv F G ψ)\n          q ((cX F q).symm x)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-3b9d7",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261018T071246-L-1684153",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-3b9d7",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261018T071246-L-1684153",
+  "kind": "interface",
+  "note": "independent cc review: the item theorem's statement (byte-identical to the clone) and its 4-clause proof against the two new sorry theorems and their nodes; the moved qcoherentPullbackSection (verbatim diff) with its change record; the direct importer SmoothCurveEtaleStructureDirectImages compiled against the delivered modules; axioms checked"
+ },
+ "lean_audit": {}
 }

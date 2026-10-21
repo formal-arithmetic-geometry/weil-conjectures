@@ -1,152 +1,153 @@
 {
-  "id": "lem-trf-finitary-site-enough-points",
-  "kind": "statement",
-  "title": "Finite-cover sites with finite limits have enough points",
-  "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] in the universe convention [def-weil-size-convention]. Assume that its underlying category has finite limits and every covering family of $\\mathcal C$ has a refinement that is a finite covering family. Write $\\operatorname{Sh}(\\mathcal C)$ for its topos of sheaves of sets. Then there is a set-indexed family of points $p_i:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$, where a point means a geometric morphism [def-trf-geometric-morphism], whose inverse-image functors $p_i^{-1}$ jointly reflect isomorphisms: for every morphism $a:F\\to G$ of sheaves of sets, if all $p_i^{-1}a$ are bijections then $a$ is an isomorphism.",
-  "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YQ, Proposition proposition-criterion-points (finite limits and finite refinement imply enough points); conservative family in Definition definition-enough-points."
-  },
-  "stmt_deps": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-size-convention",
-    "def-trf-geometric-morphism"
-  ],
-  "proof": [
-    {
-      "text": "Fix a sheaf $\\mathcal F$, an object $U$, and distinct sections $s,s'\\in\\mathcal F(U)$. Let $I_0=\\{0\\}$ with $U_0=U$ and $f_{00}=\\mathrm{id}_U$; then $s,s'$ are distinct in $\\varinjlim_{i\\in I_0}\\mathcal F(U_i)=\\mathcal F(U)$. Inductively, for $n\\geq0$ apply [lem-trf-point-system-refine-all] to the system over $I_n$ and the distinct images of $s,s'$, obtaining a refinement over $I_{n+1}\\supset I_n$ in which the images of $s,s'$ remain distinct and, writing $u_n(W)=\\varinjlim_{i\\in I_n}\\operatorname{Hom}_{\\mathcal C}(U_i,W)$, for every finite covering $\\{W_k\\to W\\}$ and every $f\\in u_n(W)$ the image of $f$ in $u_{n+1}(W)$ comes from some $u_{n+1}(W_k)$. Let $I=\\bigcup_nI_n$ with the induced order and transition maps; it is a nonempty directed poset (any two indices lie in a common directed $I_n$) and the system over $I$ refines each system over $I_n$. Write $u(W)=\\varinjlim_{i\\in I}\\operatorname{Hom}_{\\mathcal C}(U_i,W)=\\varinjlim_nu_n(W)$. (a) The images of $s,s'$ in $\\varinjlim_{i\\in I}\\mathcal F(U_i)$ are distinct: if they agreed, they would agree in $\\mathcal F(U_i)$ for some $i\\geq0$ in $I$; then $i\\in I_n$ for some $n$, and they would already agree in $\\varinjlim_{I_n}\\mathcal F(U_i)$, a contradiction. (b) For every finite covering $\\{W_k\\to W\\}$ and every $f\\in u(W)$: $f$ is represented by some $U_i\\to W$ with $i\\in I_n$, so it is the image of an element of $u_n(W)$; by the choice of $I_{n+1}$ its image in $u_{n+1}(W)$ is the image of some $g\\in u_{n+1}(W_k)$, and mapping $g$ to $u(W_k)$ gives an element whose image in $u(W)$ is $f$. This countable iteration supplies the step that the proof of Tag 00YQ passes over: Tag 00YP lifts only elements of the original $u'$, not of the refined $u$.",
-      "uses": [
-        "lem-trf-point-system-refine-all"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites.tex",
-        "place": "Tag 00YP (Lemma lemma-refine-all-at-once), applied countably often, in the proof of Tag 00YQ (Proposition proposition-criterion-points); the iteration is written out by the reviewer because 00YP lifts only elements of the original u'."
-      }
-    },
-    {
-      "text": "For the resulting system define $u(W)=\\varinjlim_i\\operatorname{Hom}_{\\mathcal C}(U_i,W)$ and identify the inverse image of its point with $\\varinjlim_i\\mathcal F(U_i)$. The finite-limit hypothesis gives the finite-limit part of [lem-trf-inverse-system-site-point]. For an arbitrary covering $\\{W_a\\to W\\}$, choose a finite covering refinement $\\{W_k\\to W\\}$ and maps $W_k\\to W_{a(k)}$. Step 1 gives $k$ and a class $g\\in u(W_k)$ mapping to any prescribed $f\\in u(W)$; composing $g$ with $W_k\\to W_{a(k)}$ gives a lift in $u(W_{a(k)})$. Thus the full covering family is jointly surjective, so [lem-trf-inverse-system-site-point] yields a point $p_{\\mathcal F,U,s,s'}:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$. Under the canonical colimit identification, the images of $s$ and $s'$ are the classes represented by $(U_i,\\,s|_{U_i})$ and remain distinct.",
-      "uses": [
-        "lem-trf-inverse-system-site-point"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites.tex",
-        "place": "Tags 00YC (Proposition proposition-point-limits), 00YA (Lemma lemma-point-site-topos), and the last paragraph of 00YQ (Proposition proposition-criterion-points)"
-      }
-    },
-    {
-      "text": "By the fixed-universe convention [def-weil-size-convention], take the chosen site skeleton to be $\\mathcal V$-small and sheaves to be $\\mathcal U$-valued for the fixed Grothendieck universes $\\mathcal U\\in\\mathcal V$. The collection of such sheaves (functors on a $\\mathcal V$-small category satisfying the sheaf equations), objects $U$, and section pairs $s\\ne s'$ is a $\\mathcal V$-set; choice therefore selects one point from Step 2 for each tuple, giving a set-indexed family. For a tuple and its selected point, built from the system $(U_i)_{i\\in I}$ with $U_0=U$, take $x\\in u(U)$ to be the class of $\\mathrm{id}_U:U_0\\to U$; under the identification $p^{-1}\\mathcal F\\cong\\varinjlim_i\\mathcal F(U_i)$ the stalk classes $[U,x,s]$ and $[U,x,s']$ are the images of $s,s'\\in\\mathcal F(U_0)$, which are distinct by Step 2. Hence every distinct pair of sections is separated by a selected point, and [lem-trf-point-family-conservative] implies that the selected inverse-image functors jointly reflect isomorphisms. This is the claimed set-indexed conservative family.",
-      "uses": [
-        "def-weil-size-convention",
-        "lem-trf-point-family-conservative"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites.tex",
-        "place": "Tags 00YK (Definition definition-enough-points) and 00YM (Lemma lemma-enough), with the universe convention of the project"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-size-convention",
-    "lem-trf-inverse-system-site-point",
-    "lem-trf-point-family-conservative",
+ "id": "lem-trf-finitary-site-enough-points",
+ "kind": "statement",
+ "title": "Finite-cover sites with finite limits have enough points",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology] in the universe convention [def-weil-size-convention]. Assume that its underlying category has finite limits and every covering family of $\\mathcal C$ has a refinement that is a finite covering family. Write $\\operatorname{Sh}(\\mathcal C)$ for its topos of sheaves of sets. Then there is a set-indexed family of points $p_i:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$, where a point means a geometric morphism [def-trf-geometric-morphism], whose inverse-image functors $p_i^{-1}$ jointly reflect isomorphisms: for every morphism $a:F\\to G$ of sheaves of sets, if all $p_i^{-1}a$ are bijections then $a$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YQ, Proposition proposition-criterion-points (finite limits and finite refinement imply enough points); conservative family in Definition definition-enough-points."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-trf-geometric-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Fix a sheaf $\\mathcal F$, an object $U$, and distinct sections $s,s'\\in\\mathcal F(U)$. Let $I_0=\\{0\\}$ with $U_0=U$ and $f_{00}=\\mathrm{id}_U$; then $s,s'$ are distinct in $\\varinjlim_{i\\in I_0}\\mathcal F(U_i)=\\mathcal F(U)$. Inductively, for $n\\geq0$ apply [lem-trf-point-system-refine-all] to the system over $I_n$ and the distinct images of $s,s'$, obtaining a refinement over $I_{n+1}\\supset I_n$ in which the images of $s,s'$ remain distinct and, writing $u_n(W)=\\varinjlim_{i\\in I_n}\\operatorname{Hom}_{\\mathcal C}(U_i,W)$, for every finite covering $\\{W_k\\to W\\}$ and every $f\\in u_n(W)$ the image of $f$ in $u_{n+1}(W)$ comes from some $u_{n+1}(W_k)$. Let $I=\\bigcup_nI_n$ with the induced order and transition maps; it is a nonempty directed poset (any two indices lie in a common directed $I_n$) and the system over $I$ refines each system over $I_n$. Write $u(W)=\\varinjlim_{i\\in I}\\operatorname{Hom}_{\\mathcal C}(U_i,W)=\\varinjlim_nu_n(W)$. (a) The images of $s,s'$ in $\\varinjlim_{i\\in I}\\mathcal F(U_i)$ are distinct: if they agreed, they would agree in $\\mathcal F(U_i)$ for some $i\\geq0$ in $I$; then $i\\in I_n$ for some $n$, and they would already agree in $\\varinjlim_{I_n}\\mathcal F(U_i)$, a contradiction. (b) For every finite covering $\\{W_k\\to W\\}$ and every $f\\in u(W)$: $f$ is represented by some $U_i\\to W$ with $i\\in I_n$, so it is the image of an element of $u_n(W)$; by the choice of $I_{n+1}$ its image in $u_{n+1}(W)$ is the image of some $g\\in u_{n+1}(W_k)$, and mapping $g$ to $u(W_k)$ gives an element whose image in $u(W)$ is $f$. This countable iteration supplies the step that the proof of Tag 00YQ passes over: Tag 00YP lifts only elements of the original $u'$, not of the refined $u$.",
+   "uses": [
     "lem-trf-point-system-refine-all"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00YP (iterated countably often), 00YC, 00YA, 00YM and 00YQ: all-at-once refinement, point construction, and conservative-family criterion."
+    "place": "Tag 00YP (Lemma lemma-refine-all-at-once), applied countably often, in the proof of Tag 00YQ (Proposition proposition-criterion-points); the iteration is written out by the reviewer because 00YP lifts only elements of the original u'."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Deligne criterion: a small site with finite limits and finite covering refinements has enough points",
-      "results": "8 hits including CategoryTheory.GrothendieckTopology.Point.mk, sheafification finite-limit lemmas and finite pretopology; no enough-points criterion",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "HasEnoughPoints, CategoryTheory.GrothendieckTopology.HasEnoughPoints",
-      "results": "loogle unknown identifier HasEnoughPoints; no usable match",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "HasEnoughPoints|enough points|criterion_points|Deligne [in CategoryTheory]",
-      "results": "16 hits, including Point/Over.lean and Conservative.lean definitions and unrelated Deligne references; no finite-cover criterion",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A small site with finite limits and finite cover refinements has a conservative family of points",
-      "results": "8 hits including generic Point cofilteredness and coherent-topology infrastructure; no exact criterion",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-trf-oriented-product-points-conservative",
-    "date": "2026-10-17",
-    "group": "Q54"
+  {
+   "text": "For the resulting system define $u(W)=\\varinjlim_i\\operatorname{Hom}_{\\mathcal C}(U_i,W)$ and identify the inverse image of its point with $\\varinjlim_i\\mathcal F(U_i)$. The finite-limit hypothesis gives the finite-limit part of [lem-trf-inverse-system-site-point]. For an arbitrary covering $\\{W_a\\to W\\}$, choose a finite covering refinement $\\{W_k\\to W\\}$ and maps $W_k\\to W_{a(k)}$. Step 1 gives $k$ and a class $g\\in u(W_k)$ mapping to any prescribed $f\\in u(W)$; composing $g$ with $W_k\\to W_{a(k)}$ gives a lift in $u(W_{a(k)})$. Thus the full covering family is jointly surjective, so [lem-trf-inverse-system-site-point] yields a point $p_{\\mathcal F,U,s,s'}:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$. Under the canonical colimit identification, the images of $s$ and $s'$ are the classes represented by $(U_i,\\,s|_{U_i})$ and remain distinct.",
+   "uses": [
+    "lem-trf-inverse-system-site-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YC (Proposition proposition-point-limits), 00YA (Lemma lemma-point-site-topos), and the last paragraph of 00YQ (Proposition proposition-criterion-points)"
+   }
   },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-i-curve-zero",
-  "blueprint": {
-    "from": {
-      "node": "lem-trf-local-term-locality",
-      "place": "Current main-20261015 ancestry: the pointwise conservativity step in the proof of lem-trf-oriented-product-points-conservative, realized by the Stacks finite-limit/finite-refinement enough-points criterion (Tag 00YQ).",
-      "via": [
-        "lem-trf-oriented-product-points-conservative",
-        "lem-trf-oriented-nearby-strict-local-description",
-        "lem-trf-good-oriented-nearby-kunneth",
-        "lem-trf-specialization-external-product",
-        "lem-trf-trace-specialization"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-18",
-    "item": "lem-trf-finitary-site-enough-points",
-    "worker": "stage1",
-    "summary": "Repaired the returned split. The inverse-system statements now introduce all index, transition, colimit, and stalk data explicitly and use the correct Stacks tags. Step 1 spells out the closure omitted by the source: the all-at-once refinement (00YP) is applied countably often and the union taken, so that every element of the final u is lifted (reviewer repair; the one-cover node lem-trf-point-system-refine was dropped as unused). Step 2 passes from finite refinements to arbitrary coverings and writes the two chosen images as explicit colimit classes. Step 3 uses the fixed U-in-V universe convention to justify a set-indexed family, rather than claiming that smallness alone makes all sheaves a set.",
-    "blueprint": "The split realizes the pointwise conservativity passage in the oriented-product-points proof ancestry: finite limits plus finite-cover refinements imply enough points, via the inverse-system construction of Stacks Tags 00YP (iterated), 00YC, 00YA, 00YM and 00YQ."
-  },
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q67-982ece7d2",
-    "group": "Q67",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-982ece7d2 (reviewer sub-agent of L); spot-checked: I read the whole item and all four new nodes against Stacks sites.tex: definition-point, 00YA, 00YC, 00YK, lemma-exactness-stalks, 00YM, the introduction to section-criterion-points, 00YO, 00YP and 00YQ. The item's statement matches 00YQ plus 00YK hypothesis by hypothesis and is not weakened; this node has no base-change morphism or coefficient category, and only Stacks is cited. The route stays in unit sk-i-curve-zero, so no tool_uses are needed. Three repairable faults, all fixed. (1) Step 1 had a gap (D4/E5): its 'transfinite chain' of one-cover (00YO) refinements never fixed the number of stages, yet it claimed every element of the final u is handled at a later stage. The gap is real because 00YP lifts only elements of the original u', while 00YQ needs lifting for the refined u. I rewrote Step 1 as a countable iteration: I_{n+1} is the 00YP refinement of I_n and I is their union. Distinctness holds because equality in a directed colimit is witnessed at one index; lifting holds because f in u(W) comes from some u_n(W) and is lifted in u_{n+1}. Step 1 now cites only lem-trf-point-system-refine-all, and I drop lem-trf-point-system-refine, which has no other citer. Step 3 now names x = class of id_U at index 0, so [U,x,s] is the image of s. (2) In lem-trf-point-family-conservative, 'the site functor underlying p_i' was undefined (B2); it is now u_i(U) = p_i^{-1}(h_U^#), citing def-weil-pbc-sheafification. (3) The lifting clause of lem-trf-point-system-refine-all was loose; it now says the image of f lies in the image of u(W_k) -> u(W). I also removed the unused def-weil-size-convention stmt_dep from both nodes. Step 2 checks out: finite limits commute with directed colimits, and composing the lift with W_k -> W_{a(k)} handles an arbitrary covering. Step 3's size argument is valid under the U-in-V convention. lem-trf-inverse-system-site-point is true and is not a duplicate of lem-trf-site-point-reconstruction-sets or lem-trf-site-point-fibre, which start from a given point. Small cases tested: constant inverse system, empty covering (vacuous because s ≠ s'). The rg duplicate search over DAG tags and key phrases found no duplicates. The report lists a citations.json that is not in the delivery. I could not check the Mathlib searches: there are no search tools on this machine.; 3 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-fb7563a63",
-    "group": "Q11",
-    "result": "fix",
-    "note": "Read node, 3 stmt_deps, IsSiteForCoverings and GeometricMorphism, and Stacks 00YO/00YP/00YQ. Hypotheses (small site, HasFiniteLimits, finite covering refinement with correct orientation, empty I/K allowed; the extra universe v is harmless) and the conservative conclusion match the node. Fault: sheaf values and point index in Type w, independent of the site universe u, making the statement false for w<u. Counterexample u=w+1: meet-semilattice with top, bottom and an antichain indexed by Type w, coverings = families containing an iso (trivial topology); a left-exact inverse image separates bottom from at most one antichain element, so a conservative family would inject Type w into iota:Type w. Fixed to Type (max u w), the faithful Stacks reading (site is a set, values in all sets); unchanged for w>=u. Docstring rewritten to carry node Steps 1-3, with Step 3 indexing points by inverse systems in C, not tuples of sheaves. Note for the lead: the node's proof Step 3 (V-small site, U-valued sheaves, index over all sheaves) should be reworded at stage 3; the statement field is fine. Delivered and fixed modules compile clean with nt_compile.py (3.7 s / 6.1 s). Fixes: FinitarySiteEnoughPoints.lean, lean-record.json (note), report.md (Maintainer fix section)."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.FinitarySiteEnoughPoints",
-    "declaration": "CategoryTheory.finitarySite_enoughPoints",
-    "file": "lean/Sheaf/Paper/FinitarySiteEnoughPoints.lean",
-    "statement": "theorem finitarySite_enoughPoints {C : Type u} [SmallCategory C] [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) (hfinite : ∀ (X : C) (I : Type (max u v)) (U : I → C) (f : ∀ i, U i ⟶ X), Presieve.ofArrows U f ∈ J X → ∃ (K : Type (max u v)) (_ : Finite K) (V : K → C) (g : ∀ k, V k ⟶ X) (r : K → I), Presieve.ofArrows V g ∈ J X ∧ ∀ k, ∃ (q : V k ⟶ U (r k)), q ≫ f (r k) = g k) : ∃ (ι : Type (max u w)) (p : ι → GeometricMorphism (Type (max u w)) (Sheaf J.toGrothendieck (Type (max u w)))), ∀ {F G : Sheaf J.toGrothendieck (Type (max u w))} (a : F ⟶ G), (∀ i, Function.Bijective ((p i).inverse.map a)) → IsIso a",
-    "by": "Q11",
-    "date": "2026-10-17",
-    "existing": false,
-    "branch": "newtargets-dag",
-    "note": "Sheaf values and the point index are in Type (max u w), at least the site universe u (Stacks: the site is a set, sheaves are valued in all sets). The delivered Type w admitted w < u, where the statement is false (presheaves on a meet-semilattice with top, bottom and an antichain indexed by Type w, u = w+1: a left-exact inverse image separating two antichain elements would separate the bottom, so a conservative family needs an injection Type w -> ι : Type w). The universe v of hfinite is harmless: every covering presieve has a Type u presentation and the condition does not depend on the presentation.",
-    "fixed_by": "NT-stage2-cc-fb7563a63"
+  {
+   "text": "By the fixed-universe convention [def-weil-size-convention], take the chosen site skeleton to be $\\mathcal V$-small and sheaves to be $\\mathcal U$-valued for the fixed Grothendieck universes $\\mathcal U\\in\\mathcal V$. The collection of such sheaves (functors on a $\\mathcal V$-small category satisfying the sheaf equations), objects $U$, and section pairs $s\\ne s'$ is a $\\mathcal V$-set; choice therefore selects one point from Step 2 for each tuple, giving a set-indexed family. For a tuple and its selected point, built from the system $(U_i)_{i\\in I}$ with $U_0=U$, take $x\\in u(U)$ to be the class of $\\mathrm{id}_U:U_0\\to U$; under the identification $p^{-1}\\mathcal F\\cong\\varinjlim_i\\mathcal F(U_i)$ the stalk classes $[U,x,s]$ and $[U,x,s']$ are the images of $s,s'\\in\\mathcal F(U_0)$, which are distinct by Step 2. Hence every distinct pair of sections is separated by a selected point, and [lem-trf-point-family-conservative] implies that the selected inverse-image functors jointly reflect isomorphisms. This is the claimed set-indexed conservative family.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-trf-point-family-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YK (Definition definition-enough-points) and 00YM (Lemma lemma-enough), with the universe convention of the project"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-trf-inverse-system-site-point",
+  "lem-trf-point-family-conservative",
+  "lem-trf-point-system-refine-all"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00YP (iterated countably often), 00YC, 00YA, 00YM and 00YQ: all-at-once refinement, point construction, and conservative-family criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Deligne criterion: a small site with finite limits and finite covering refinements has enough points",
+   "results": "8 hits including CategoryTheory.GrothendieckTopology.Point.mk, sheafification finite-limit lemmas and finite pretopology; no enough-points criterion",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HasEnoughPoints, CategoryTheory.GrothendieckTopology.HasEnoughPoints",
+   "results": "loogle unknown identifier HasEnoughPoints; no usable match",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasEnoughPoints|enough points|criterion_points|Deligne [in CategoryTheory]",
+   "results": "16 hits, including Point/Over.lean and Conservative.lean definitions and unrelated Deligne references; no finite-cover criterion",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A small site with finite limits and finite cover refinements has a conservative family of points",
+   "results": "8 hits including generic Point cofilteredness and coherent-topology infrastructure; no exact criterion",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-oriented-product-points-conservative",
+  "date": "2026-10-17",
+  "group": "Q54"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Current main-20261015 ancestry: the pointwise conservativity step in the proof of lem-trf-oriented-product-points-conservative, realized by the Stacks finite-limit/finite-refinement enough-points criterion (Tag 00YQ).",
+   "via": [
+    "lem-trf-oriented-product-points-conservative",
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finitary-site-enough-points",
+  "worker": "stage1",
+  "summary": "Repaired the returned split. The inverse-system statements now introduce all index, transition, colimit, and stalk data explicitly and use the correct Stacks tags. Step 1 spells out the closure omitted by the source: the all-at-once refinement (00YP) is applied countably often and the union taken, so that every element of the final u is lifted (reviewer repair; the one-cover node lem-trf-point-system-refine was dropped as unused). Step 2 passes from finite refinements to arbitrary coverings and writes the two chosen images as explicit colimit classes. Step 3 uses the fixed U-in-V universe convention to justify a set-indexed family, rather than claiming that smallness alone makes all sheaves a set.",
+  "blueprint": "The split realizes the pointwise conservativity passage in the oriented-product-points proof ancestry: finite limits plus finite-cover refinements imply enough points, via the inverse-system construction of Stacks Tags 00YP (iterated), 00YC, 00YA, 00YM and 00YQ."
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-982ece7d2",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-982ece7d2 (reviewer sub-agent of L); spot-checked: I read the whole item and all four new nodes against Stacks sites.tex: definition-point, 00YA, 00YC, 00YK, lemma-exactness-stalks, 00YM, the introduction to section-criterion-points, 00YO, 00YP and 00YQ. The item's statement matches 00YQ plus 00YK hypothesis by hypothesis and is not weakened; this node has no base-change morphism or coefficient category, and only Stacks is cited. The route stays in unit sk-i-curve-zero, so no tool_uses are needed. Three repairable faults, all fixed. (1) Step 1 had a gap (D4/E5): its 'transfinite chain' of one-cover (00YO) refinements never fixed the number of stages, yet it claimed every element of the final u is handled at a later stage. The gap is real because 00YP lifts only elements of the original u', while 00YQ needs lifting for the refined u. I rewrote Step 1 as a countable iteration: I_{n+1} is the 00YP refinement of I_n and I is their union. Distinctness holds because equality in a directed colimit is witnessed at one index; lifting holds because f in u(W) comes from some u_n(W) and is lifted in u_{n+1}. Step 1 now cites only lem-trf-point-system-refine-all, and I drop lem-trf-point-system-refine, which has no other citer. Step 3 now names x = class of id_U at index 0, so [U,x,s] is the image of s. (2) In lem-trf-point-family-conservative, 'the site functor underlying p_i' was undefined (B2); it is now u_i(U) = p_i^{-1}(h_U^#), citing def-weil-pbc-sheafification. (3) The lifting clause of lem-trf-point-system-refine-all was loose; it now says the image of f lies in the image of u(W_k) -> u(W). I also removed the unused def-weil-size-convention stmt_dep from both nodes. Step 2 checks out: finite limits commute with directed colimits, and composing the lift with W_k -> W_{a(k)} handles an arbitrary covering. Step 3's size argument is valid under the U-in-V convention. lem-trf-inverse-system-site-point is true and is not a duplicate of lem-trf-site-point-reconstruction-sets or lem-trf-site-point-fibre, which start from a given point. Small cases tested: constant inverse system, empty covering (vacuous because s ≠ s'). The rg duplicate search over DAG tags and key phrases found no duplicates. The report lists a citations.json that is not in the delivery. I could not check the Mathlib searches: there are no search tools on this machine.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fb7563a63",
+  "group": "Q11",
+  "result": "fix",
+  "note": "Read node, 3 stmt_deps, IsSiteForCoverings and GeometricMorphism, and Stacks 00YO/00YP/00YQ. Hypotheses (small site, HasFiniteLimits, finite covering refinement with correct orientation, empty I/K allowed; the extra universe v is harmless) and the conservative conclusion match the node. Fault: sheaf values and point index in Type w, independent of the site universe u, making the statement false for w<u. Counterexample u=w+1: meet-semilattice with top, bottom and an antichain indexed by Type w, coverings = families containing an iso (trivial topology); a left-exact inverse image separates bottom from at most one antichain element, so a conservative family would inject Type w into iota:Type w. Fixed to Type (max u w), the faithful Stacks reading (site is a set, values in all sets); unchanged for w>=u. Docstring rewritten to carry node Steps 1-3, with Step 3 indexing points by inverse systems in C, not tuples of sheaves. Note for the lead: the node's proof Step 3 (V-small site, U-valued sheaves, index over all sheaves) should be reworded at stage 3; the statement field is fine. Delivered and fixed modules compile clean with nt_compile.py (3.7 s / 6.1 s). Fixes: FinitarySiteEnoughPoints.lean, lean-record.json (note), report.md (Maintainer fix section)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FinitarySiteEnoughPoints",
+  "declaration": "CategoryTheory.finitarySite_enoughPoints",
+  "file": "lean/Sheaf/Paper/FinitarySiteEnoughPoints.lean",
+  "statement": "theorem finitarySite_enoughPoints {C : Type u} [SmallCategory C] [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) (hfinite : ∀ (X : C) (I : Type (max u v)) (U : I → C) (f : ∀ i, U i ⟶ X), Presieve.ofArrows U f ∈ J X → ∃ (K : Type (max u v)) (_ : Finite K) (V : K → C) (g : ∀ k, V k ⟶ X) (r : K → I), Presieve.ofArrows V g ∈ J X ∧ ∀ k, ∃ (q : V k ⟶ U (r k)), q ≫ f (r k) = g k) : ∃ (ι : Type (max u w)) (p : ι → GeometricMorphism (Type (max u w)) (Sheaf J.toGrothendieck (Type (max u w)))), ∀ {F G : Sheaf J.toGrothendieck (Type (max u w))} (a : F ⟶ G), (∀ i, Function.Bijective ((p i).inverse.map a)) → IsIso a",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false,
+  "branch": "newtargets-dag",
+  "note": "Sheaf values and the point index are in Type (max u w), at least the site universe u (Stacks: the site is a set, sheaves are valued in all sets). The delivered Type w admitted w < u, where the statement is false (presheaves on a meet-semilattice with top, bottom and an antichain indexed by Type w, u = w+1: a left-exact inverse image separating two antichain elements would separate the bottom, so a conservative family needs an injection Type w -> ι : Type w). The universe v of hfinite is harmless: every covering presieve has a Type u presentation and the condition does not depend on the presentation.",
+  "fixed_by": "NT-stage2-cc-fb7563a63"
+ },
+ "lean_audit": {}
 }

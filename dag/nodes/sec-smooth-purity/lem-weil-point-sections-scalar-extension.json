@@ -1,336 +1,325 @@
 {
-  "id": "lem-weil-point-sections-scalar-extension",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-weil-finite-coefficient-point",
-      "place": "Final paragraph: 'the same functor is obtained stagewise and then passed to the finite-stage colimit'; coherence of its stagewise sections functors with finite coefficient extension",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-weil-point-sections-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Final paragraph: 'the same functor is obtained stagewise and then passed to the finite-stage colimit'; coherence of its stagewise sections functors with finite coefficient extension",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Sections over the point commute with scalar extension",
-  "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber], a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql$, and $s=\\operatorname{Spec}k$. For finite extensions $E\\subset L$ of $\\Ql$ in $\\Qlb$ write $R_F=\\widehat{\\mathcal O}_{F,s}$ for the completed coefficient sheaf [def-weil-completed-integral-coefficients], for $F=E,L$. For $K\\in D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed] put $T_{L/E}K=K\\widehat\\otimes_{\\mathcal O_E}\\mathcal O_L$, meaning the strict-tower integral scalar extension of [def-weil-integral-scalar-extension], which belongs to $D^b_c(s,\\mathcal O_L)$ by [lem-weil-integral-scalar-extension-constructible]. Let $\\Gamma(s,-)$ be sections over the final object of $s_{\\mathrm{proet}}$, applied termwise and passed to derived categories [lem-weil-point-proetale-sections-exact]. There are isomorphisms in $D(\\mathcal O_L)$, natural in $K$,\n$$\n \\varphi_{L/E,K}:\\Gamma(s,T_{L/E}K)\\xrightarrow{\\sim}\\Gamma(s,K)\\otimes_{\\mathcal O_E}\\mathcal O_L.\n$$\nHere tensor on module complexes is termwise ordinary tensor. The isomorphism is the inverse of the composite of the canonical sections-tensor map with sections of the canonical completion comparison $\\chi_{L/E,K}:K\\otimes^L_{R_E}R_L\\xrightarrow{\\sim}T_{L/E}K$ [lem-weil-finite-free-completed-scalar-comparison]; explicitly, if $\\theta_{L/E,K}:\\Gamma(s,K)\\otimes_{\\mathcal O_E}\\mathcal O_L\\to\\Gamma(s,K\\otimes^L_{R_E}R_L)$ is induced by tensoring sections, then $\\varphi_{L/E,K}=(\\Gamma(s,\\chi_{L/E,K})\\circ\\theta_{L/E,K})^{-1}$.\n\nFor $L=E$ this is the identity under the multiplication and completeness identifications $T_{E/E}K\\cong K$. For $E\\subset L\\subset M$, let $a^{\\mathrm{int}}_{M,L,E,K}:T_{M/L}T_{L/E}K\\xrightarrow{\\sim}T_{M/E}K$ be the integral associator obtained by conjugating the ordinary derived-tensor associator $(K\\otimes^L_{R_E}R_L)\\otimes^L_{R_L}R_M\\cong K\\otimes^L_{R_E}R_M$ by the canonical comparisons $\\chi$. Write $a^{\\mathrm{mod}}$ for the module-complex associator $(N\\otimes_{\\mathcal O_E}\\mathcal O_L)\\otimes_{\\mathcal O_L}\\mathcal O_M\\cong N\\otimes_{\\mathcal O_E}\\mathcal O_M$. Then\n$$\n \\varphi_{M/E,K}\\circ\\Gamma(s,a^{\\mathrm{int}}_{M,L,E,K})\n =a^{\\mathrm{mod}}\\circ(\\varphi_{L/E,K}\\otimes_{\\mathcal O_L}\\mathcal O_M)\\circ\\varphi_{M/L,T_{L/E}K}.\n$$\nTensoring with $L$ over $\\mathcal O_L$ gives natural isomorphisms\n$$\n \\Gamma(s,T_{L/E}K)\\otimes_{\\mathcal O_L}L\\cong\n (\\Gamma(s,K)\\otimes_{\\mathcal O_E}E)\\otimes_E L\n$$\nin $D(L)$, with the same identity and composition compatibilities.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "the sentence 'the same functor is obtained stagewise and then passed to the finite-stage colimit'"
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-completed-integral-coefficients",
-    "def-weil-derived-complete-integral-detailed",
-    "def-weil-integral-scalar-extension",
-    "lem-weil-integral-scalar-extension-constructible",
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "def-weil-finite-subextension-directed-set"
-  ],
-  "proof": [
-    {
-      "text": "For each coefficient field $F$ under consideration, apply [lem-weil-pbc-continuous-coefficients-immersion-restriction] to $X=s$. Its noetherian hypothesis holds: the spectrum of a field has only one point and its coordinate ring is noetherian. Its continuous-function sheaf description identifies $R_F$ canonically with $V\\mapsto C(|V|,\\mathcal O_F)$, compatibly with the finite quotient projections. In particular $\\Gamma(s,R_F)=C(\\{*\\},\\mathcal O_F)=\\mathcal O_F$, by evaluation at the unique point. These identifications respect coefficient inclusions, since their maps to each quotient send a constant value to its residue and the inverse-limit projections determine a map uniquely. Apply [lem-weil-finite-free-completed-scalar-comparison] to $Y=s$: $R_L$ is a finite free $R_E$-module sheaf, of rank $d=[L:E]$. Choose a sheaf-module basis $b_1,\\ldots,b_d$, meaning an isomorphism $R_E^{\\oplus d}\\to R_L$. Taking sections identifies it with an isomorphism $\\mathcal O_E^{\\oplus d}\\to\\mathcal O_L$: finite direct sums of sheaves of modules are finite products, and products of sheaves are sectionwise. Thus these same global sections $b_i$ are an $\\mathcal O_E$-basis of $\\mathcal O_L$. This derives precisely the compatible basis needed below; it does not identify the completed coefficient sheaf with the discrete constant sheaf.",
-      "uses": [
-        "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-        "lem-weil-finite-free-completed-scalar-comparison"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Lemmas 4.2.12 and 6.8.2(1); finite-free comparison from the existing DAG node; evaluation on the one-point space"
-      }
-    },
-    {
-      "text": "For any sheaf $F$ of $R_E$-modules define the balanced map $\\theta_F:\\Gamma(s,F)\\otimes_{\\mathcal O_E}\\mathcal O_L\\to\\Gamma(s,F\\otimes_{R_E}R_L)$ by $n\\otimes a\\mapsto n\\otimes a$, where the tensor on the right is the image of the sectionwise tensor in the sheaf tensor product [def-pur-sheaf-tensor-product]. Under the basis of step 1, $F\\otimes_{R_E}R_L\\cong F^{\\oplus d}$: the inverse coordinate maps send $f\\otimes\\sum_i r_i b_i$ to $(r_i f)_i$. Taking sections gives $\\Gamma(s,F)^{\\oplus d}$, while the source of $\\theta_F$ has the same description, and $\\theta_F$ is the identity on each coordinate. Its inverse sends $(n_i)_i$ to $\\sum_i n_i\\otimes b_i$. In particular it is an isomorphism. For $a,c\\in\\mathcal O_L$, the equality $\\theta_F(n\\otimes ac)=c\\theta_F(n\\otimes a)$ shows $\\mathcal O_L$-linearity. Every sheaf map commutes with this formula, so it is natural. Apply degreewise to any complex; differentials commute with $\\theta$ by the same formula. The basis proves both tensor functors exact, since they are finite direct sums, so they preserve quasi-isomorphisms. Exactness of $\\Gamma(s,-)$ from [lem-weil-point-proetale-sections-exact] supplies quasi-isomorphism preservation on sections. These are inverse chain maps, not an assertion that arbitrary sheaf tensor products are computed sectionwise.",
-      "uses": [
-        "def-pur-sheaf-tensor-product",
-        "lem-weil-point-proetale-sections-exact"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Lemma 6.8.2(1); explicit finite-basis sections-tensor calculation written by the worker"
-      }
-    },
-    {
-      "text": "Choose a K-flat resolution $P\\to K$ with flat terms by [lem-pc-kflat-resolution]. Then $P\\otimes_{R_E}R_L$ computes $K\\otimes^L_{R_E}R_L$ by [lem-pur-derived-change-of-rings]. The degreewise map of step 2, applied to $P$, therefore gives $\\theta_{L/E,K}$ on derived categories: $\\Gamma(s,P)\\to\\Gamma(s,K)$ is a quasi-isomorphism by [lem-weil-point-proetale-sections-exact], and its tensor with $\\mathcal O_L$ is a quasi-isomorphism by step 1's basis. The integral input $K$ is derived complete by [def-weil-derived-complete-integral-detailed]. Hence [lem-weil-finite-free-completed-scalar-comparison] gives the specified natural isomorphism $\\chi_{L/E,K}$, and $\\Gamma(s,\\chi_{L/E,K})$ is an isomorphism. Define $\\varphi$ as the inverse of their composite, as in the statement. Naturality for chain maps follows from step 2 and naturality of $\\chi$. For an arbitrary derived morphism use a roof $K\\xleftarrow{q}H\\xrightarrow{f}J$ with $q$ a quasi-isomorphism. The termwise functors $A(C)=\\Gamma(s,C)\\otimes_{\\mathcal O_E}\\mathcal O_L$ and $B(C)=\\Gamma(s,C\\otimes_{R_E}R_L)$ both preserve every quasi-isomorphism by step 2, not only those between K-flat complexes. For a chain map $g:C\\to C'$ the formula on tensors gives $B(g)\\theta_C=\\theta_{C'}A(g)$. Applying this to $q,f$ and inverting $A(q),B(q)$ gives $B(f)B(q)^{-1}\\theta_K=\\theta_J A(f)A(q)^{-1}$, the required roof naturality. For a K-flat resolution $P\\to C$, step 2 also makes $P\\otimes_{R_E}R_L\\to C\\otimes_{R_E}R_L$ a quasi-isomorphism, so [lem-pur-derived-change-of-rings] identifies this termwise functor canonically with derived change of rings. Thus the roof calculation proves naturality and independence of representatives for the specified $\\theta_{L/E,K}$; composing with the natural $\\chi$ proves the assertion for $\\varphi$.",
-      "uses": [
-        "lem-pc-kflat-resolution",
-        "lem-pur-derived-change-of-rings",
-        "lem-weil-point-proetale-sections-exact",
-        "def-weil-derived-complete-integral-detailed",
-        "lem-weil-finite-free-completed-scalar-comparison"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Definition 3.4.10 and Lemma 3.4.12; explicit comparison using K-flat derived change of rings (Stacks Tag 06YY, sites-cohomology-lemma-derived-base-change)"
-      }
-    },
-    {
-      "text": "For $E\\subset L\\subset M$ put $R=R_E$, $S=R_L$, $U=R_M$. The complex $P\\otimes_R S$ is K-flat over $S$ with flat terms by [lem-pur-kflat-change-of-rings], so all ordinary derived tensors below are computed by the same complexes. The inverse balanced chain maps $((p\\otimes a)\\otimes b)\\mapsto p\\otimes ab$ and $p\\otimes b\\mapsto(p\\otimes1)\\otimes b$ give $(P\\otimes_R S)\\otimes_S U\\cong P\\otimes_R U$; the balancing equation $(p\\otimes a)\\otimes b=(p\\otimes1)\\otimes ab$ verifies the inverse. For a chain map $g:P\\to Q$, either order of applying $g$ and the associator sends $((p\\otimes a)\\otimes b)$ to $g(p)\\otimes ab$. For a roof $P\\xleftarrow{q}H\\xrightarrow{f}Q$, the resulting commutative squares for $q$ and $f$, with the arrows induced by $q$ inverted, give the naturality square for $f q^{-1}$, as in step 3. All tensor functors here preserve quasi-isomorphisms by the finite-free bases from step 1, so those inverses exist. Since $T_{L/E}K$ is constructible and derived complete by [lem-weil-integral-scalar-extension-constructible] and [def-weil-derived-complete-integral-detailed], the comparison [lem-weil-finite-free-completed-scalar-comparison] also applies to the input $T_{L/E}K$ for $L\\subset M$. Define the integral associator to be the following composite: $T_{M/L}T_{L/E}K\\xrightarrow{\\chi_{M/L,T_{L/E}K}^{-1}}T_{L/E}K\\otimes^L_S U\\xrightarrow{\\chi_{L/E,K}^{-1}\\otimes1}(K\\otimes^L_R S)\\otimes^L_S U\\xrightarrow{\\mathrm{assoc}}K\\otimes^L_R U\\xrightarrow{\\chi_{M/E,K}}T_{M/E}K$. Every arrow is an isomorphism and natural; the formula fixes the actual integral associator rather than taking it from a rational-only associativity theorem. The ordinary unit is $p\\otimes r\\mapsto rp$. For an identity extension the comparison $\\chi$ is the completeness unit by the finite-free comparison node, so the identity identification is $T_{E/E}K\\xrightarrow{\\chi_{E/E,K}^{-1}}K\\otimes^L_R R\\xrightarrow{\\mathrm{mult}}K$.",
-      "uses": [
-        "lem-pur-kflat-change-of-rings",
-        "lem-weil-integral-scalar-extension-constructible",
-        "def-weil-derived-complete-integral-detailed",
-        "lem-weil-finite-free-completed-scalar-comparison"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-        "place": "Stagewise functor passage: integral composition maps supplied by balanced tensors; Stacks Tag 0G7E, sites-cohomology-lemma-pullback-K-flat, for K-flat change of rings"
-      }
-    },
-    {
-      "text": "Before completion, the two sections-tensor comparisons for $E\\subset L\\subset M$ satisfy\n$$\n\\Gamma(\\alpha)\\,\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)=\\theta_{M/E,K}\\,a^{\\mathrm{mod}},\\qquad A=K\\otimes^L_R S,\n$$\nwhere $\\alpha:A\\otimes^L_S U\\to K\\otimes^L_R U$ is the ordinary associator from step 4. On complexes both sides send $((n\\otimes a)\\otimes b)$ to the section $n\\otimes ab$. Pure tensors generate the source in each degree, so the maps agree, including their coefficient actions; step 3 descends this equality to derived categories. To check every intervening completion map, abbreviate $C=\\chi_{L/E,K}$, $D=\\chi_{M/L,T_{L/E}K}$, $H=\\chi_{M/E,K}$, and $F(B)=B\\otimes^L_S U$. Thus step 4 defines $a^{\\mathrm{int}}=H\\alpha F(C^{-1})D^{-1}$. Naturality of $\\theta$ from step 3, applied to the derived isomorphism $C:A\\to T_{L/E}K$, says\n$$\n\\theta_{M/L,T_{L/E}K}(\\Gamma(C)\\otimes1)=\\Gamma(F(C))\\theta_{M/L,A}.\n$$\nWriting $\\psi_{L/E,K}=\\Gamma(\\chi_{L/E,K})\\theta_{L/E,K}$, substitution now gives the explicit cancellations\n$$\n\\begin{aligned}\n\\Gamma(a^{\\mathrm{int}})\\,\\psi_{M/L,T_{L/E}K}(\\psi_{L/E,K}\\otimes1)\n&=\\Gamma(H)\\Gamma(\\alpha)\\Gamma(F(C^{-1}))\\Gamma(D^{-1})\\Gamma(D)\\,\n\\theta_{M/L,T_{L/E}K}(\\Gamma(C)\\otimes1)(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\Gamma(H)\\Gamma(\\alpha)\\Gamma(F(C^{-1}))\\Gamma(F(C))\\,\n\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\Gamma(H)\\Gamma(\\alpha)\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\psi_{M/E,K}\\,a^{\\mathrm{mod}}.\n\\end{aligned}\n$$\nThe common domain is $(\\Gamma(s,K)\\otimes_{\\mathcal O_E}\\mathcal O_L)\\otimes_{\\mathcal O_L}\\mathcal O_M$. Multiplying by the inverse maps $\\varphi=\\psi^{-1}$ gives the statement's composition equation. For $L=E$, $\\theta(n\\otimes r)$ followed by multiplication is $rn$, so under the completeness-unit identification of step 4 the comparison is the identity. For four coefficient fields, each ordinary iterated associator sends $(((n\\otimes a)\\otimes b)\\otimes c)$ to $n\\otimes abc$; substitution of the displayed conjugation cancels each intermediate $\\chi^{-1}\\chi$, proving the iterated coherence. The comparisons $C,D,H$ are natural isomorphisms by [lem-weil-finite-free-completed-scalar-comparison].",
-      "uses": [
-        "lem-weil-finite-free-completed-scalar-comparison"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-        "place": "Stagewise finite-extension passage: explicit pure-tensor computation of identity and composition coherence"
-      }
-    },
-    {
-      "text": "Put $N=\\Gamma(s,K)$. Tensoring the integral comparison with $L$ gives $\\Gamma(s,T_{L/E}K)\\otimes_{\\mathcal O_L}L\\cong(N\\otimes_{\\mathcal O_E}\\mathcal O_L)\\otimes_{\\mathcal O_L}L\\cong N\\otimes_{\\mathcal O_E}L$, where the second map sends $(n\\otimes a)\\otimes b$ to $n\\otimes ab$ and its inverse sends $n\\otimes b$ to $(n\\otimes1)\\otimes b$. The DVR assertion [lem-weil-l-adic-extension-integers-dvr] makes $E$ the fraction field of $\\mathcal O_E$. For a nonzero $r\\in\\mathcal O_E$, multiplication by $r$ on $N\\otimes_{\\mathcal O_E}L$ is invertible, its inverse multiplying the $L$-coordinate by $r^{-1}$. Thus there are inverse maps $(N\\otimes_{\\mathcal O_E}E)\\otimes_E L\\leftrightarrows N\\otimes_{\\mathcal O_E}L$ given by $(n\\otimes x)\\otimes b\\mapsto n\\otimes xb$ and $n\\otimes b\\mapsto(n\\otimes1)\\otimes b$; moving a denominator across the tensor relation proves the other composite is the identity. These maps commute with differentials. Localization is exact: a fraction maps to zero precisely when some nonzero denominator annihilates its numerator, so localizing preserves kernels as well as images; hence all termwise localizations preserve quasi-isomorphisms. Extension from $E$ to $L$ is exact because every finite-dimensional field extension has a basis (successively choose a vector outside the span until the finite dimension is exhausted), so its underlying functor is a finite direct sum. The same reasoning applies to $L\\subset M$. Consequently these are isomorphisms in $D(L)$, natural in $K$. On a tower all localization and associativity maps send a pure tensor with coefficient factors $a,b,c$ to their product $abc$; applying step 5's integral equation and these balanced maps proves the rational identity and composition equations, including fractions since the inverted coefficients act by invertible maps.",
-      "uses": [
-        "lem-weil-l-adic-extension-integers-dvr"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-        "place": "Final sentence, passage stagewise to the finite-stage colimit; explicit localization and tensor-associativity formulas"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sections over the point commute with scalar extension",
+ "statement": "Fix the global finite-field datum [def-weil-finite-field-fiber], a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql$, and $s=\\operatorname{Spec}k$. For finite extensions $E\\subset L$ of $\\Ql$ in $\\Qlb$ write $R_F=\\widehat{\\mathcal O}_{F,s}$ for the completed coefficient sheaf [def-weil-completed-integral-coefficients], for $F=E,L$. For $K\\in D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed] put $T_{L/E}K=K\\widehat\\otimes_{\\mathcal O_E}\\mathcal O_L$, meaning the strict-tower integral scalar extension of [def-weil-integral-scalar-extension], which belongs to $D^b_c(s,\\mathcal O_L)$ by [lem-weil-integral-scalar-extension-constructible]. Let $\\Gamma(s,-)$ be sections over the final object of $s_{\\mathrm{proet}}$, applied termwise and passed to derived categories [lem-weil-point-proetale-sections-exact]. There are isomorphisms in $D(\\mathcal O_L)$, natural in $K$,\n$$\n \\varphi_{L/E,K}:\\Gamma(s,T_{L/E}K)\\xrightarrow{\\sim}\\Gamma(s,K)\\otimes_{\\mathcal O_E}\\mathcal O_L.\n$$\nHere tensor on module complexes is termwise ordinary tensor. The isomorphism is the inverse of the composite of the canonical sections-tensor map with sections of the canonical completion comparison $\\chi_{L/E,K}:K\\otimes^L_{R_E}R_L\\xrightarrow{\\sim}T_{L/E}K$ [lem-weil-finite-free-completed-scalar-comparison]; explicitly, if $\\theta_{L/E,K}:\\Gamma(s,K)\\otimes_{\\mathcal O_E}\\mathcal O_L\\to\\Gamma(s,K\\otimes^L_{R_E}R_L)$ is induced by tensoring sections, then $\\varphi_{L/E,K}=(\\Gamma(s,\\chi_{L/E,K})\\circ\\theta_{L/E,K})^{-1}$.\n\nFor $L=E$ this is the identity under the multiplication and completeness identifications $T_{E/E}K\\cong K$. For $E\\subset L\\subset M$, let $a^{\\mathrm{int}}_{M,L,E,K}:T_{M/L}T_{L/E}K\\xrightarrow{\\sim}T_{M/E}K$ be the integral associator obtained by conjugating the ordinary derived-tensor associator $(K\\otimes^L_{R_E}R_L)\\otimes^L_{R_L}R_M\\cong K\\otimes^L_{R_E}R_M$ by the canonical comparisons $\\chi$. Write $a^{\\mathrm{mod}}$ for the module-complex associator $(N\\otimes_{\\mathcal O_E}\\mathcal O_L)\\otimes_{\\mathcal O_L}\\mathcal O_M\\cong N\\otimes_{\\mathcal O_E}\\mathcal O_M$. Then\n$$\n \\varphi_{M/E,K}\\circ\\Gamma(s,a^{\\mathrm{int}}_{M,L,E,K})\n =a^{\\mathrm{mod}}\\circ(\\varphi_{L/E,K}\\otimes_{\\mathcal O_L}\\mathcal O_M)\\circ\\varphi_{M/L,T_{L/E}K}.\n$$\nTensoring with $L$ over $\\mathcal O_L$ gives natural isomorphisms\n$$\n \\Gamma(s,T_{L/E}K)\\otimes_{\\mathcal O_L}L\\cong\n (\\Gamma(s,K)\\otimes_{\\mathcal O_E}E)\\otimes_E L\n$$\nin $D(L)$, with the same identity and composition compatibilities.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "the sentence 'the same functor is obtained stagewise and then passed to the finite-stage colimit'"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-scalar-extension",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-finite-subextension-directed-set"
+ ],
+ "proof": [
+  {
+   "text": "For each coefficient field $F$ under consideration, apply [lem-weil-pbc-continuous-coefficients-immersion-restriction] to $X=s$. Its noetherian hypothesis holds: the spectrum of a field has only one point and its coordinate ring is noetherian. Its continuous-function sheaf description identifies $R_F$ canonically with $V\\mapsto C(|V|,\\mathcal O_F)$, compatibly with the finite quotient projections. In particular $\\Gamma(s,R_F)=C(\\{*\\},\\mathcal O_F)=\\mathcal O_F$, by evaluation at the unique point. These identifications respect coefficient inclusions, since their maps to each quotient send a constant value to its residue and the inverse-limit projections determine a map uniquely. Apply [lem-weil-finite-free-completed-scalar-comparison] to $Y=s$: $R_L$ is a finite free $R_E$-module sheaf, of rank $d=[L:E]$. Choose a sheaf-module basis $b_1,\\ldots,b_d$, meaning an isomorphism $R_E^{\\oplus d}\\to R_L$. Taking sections identifies it with an isomorphism $\\mathcal O_E^{\\oplus d}\\to\\mathcal O_L$: finite direct sums of sheaves of modules are finite products, and products of sheaves are sectionwise. Thus these same global sections $b_i$ are an $\\mathcal O_E$-basis of $\\mathcal O_L$. This derives precisely the compatible basis needed below; it does not identify the completed coefficient sheaf with the discrete constant sheaf.",
+   "uses": [
     "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 4.2.12 and 6.8.2(1); finite-free comparison from the existing DAG node; evaluation on the one-point space"
+   }
+  },
+  {
+   "text": "For any sheaf $F$ of $R_E$-modules define the balanced map $\\theta_F:\\Gamma(s,F)\\otimes_{\\mathcal O_E}\\mathcal O_L\\to\\Gamma(s,F\\otimes_{R_E}R_L)$ by $n\\otimes a\\mapsto n\\otimes a$, where the tensor on the right is the image of the sectionwise tensor in the sheaf tensor product [def-pur-sheaf-tensor-product]. Under the basis of step 1, $F\\otimes_{R_E}R_L\\cong F^{\\oplus d}$: the inverse coordinate maps send $f\\otimes\\sum_i r_i b_i$ to $(r_i f)_i$. Taking sections gives $\\Gamma(s,F)^{\\oplus d}$, while the source of $\\theta_F$ has the same description, and $\\theta_F$ is the identity on each coordinate. Its inverse sends $(n_i)_i$ to $\\sum_i n_i\\otimes b_i$. In particular it is an isomorphism. For $a,c\\in\\mathcal O_L$, the equality $\\theta_F(n\\otimes ac)=c\\theta_F(n\\otimes a)$ shows $\\mathcal O_L$-linearity. Every sheaf map commutes with this formula, so it is natural. Apply degreewise to any complex; differentials commute with $\\theta$ by the same formula. The basis proves both tensor functors exact, since they are finite direct sums, so they preserve quasi-isomorphisms. Exactness of $\\Gamma(s,-)$ from [lem-weil-point-proetale-sections-exact] supplies quasi-isomorphism preservation on sections. These are inverse chain maps, not an assertion that arbitrary sheaf tensor products are computed sectionwise.",
+   "uses": [
     "def-pur-sheaf-tensor-product",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1); explicit finite-basis sections-tensor calculation written by the worker"
+   }
+  },
+  {
+   "text": "Choose a K-flat resolution $P\\to K$ with flat terms by [lem-pc-kflat-resolution]. Then $P\\otimes_{R_E}R_L$ computes $K\\otimes^L_{R_E}R_L$ by [lem-pur-derived-change-of-rings]. The degreewise map of step 2, applied to $P$, therefore gives $\\theta_{L/E,K}$ on derived categories: $\\Gamma(s,P)\\to\\Gamma(s,K)$ is a quasi-isomorphism by [lem-weil-point-proetale-sections-exact], and its tensor with $\\mathcal O_L$ is a quasi-isomorphism by step 1's basis. The integral input $K$ is derived complete by [def-weil-derived-complete-integral-detailed]. Hence [lem-weil-finite-free-completed-scalar-comparison] gives the specified natural isomorphism $\\chi_{L/E,K}$, and $\\Gamma(s,\\chi_{L/E,K})$ is an isomorphism. Define $\\varphi$ as the inverse of their composite, as in the statement. Naturality for chain maps follows from step 2 and naturality of $\\chi$. For an arbitrary derived morphism use a roof $K\\xleftarrow{q}H\\xrightarrow{f}J$ with $q$ a quasi-isomorphism. The termwise functors $A(C)=\\Gamma(s,C)\\otimes_{\\mathcal O_E}\\mathcal O_L$ and $B(C)=\\Gamma(s,C\\otimes_{R_E}R_L)$ both preserve every quasi-isomorphism by step 2, not only those between K-flat complexes. For a chain map $g:C\\to C'$ the formula on tensors gives $B(g)\\theta_C=\\theta_{C'}A(g)$. Applying this to $q,f$ and inverting $A(q),B(q)$ gives $B(f)B(q)^{-1}\\theta_K=\\theta_J A(f)A(q)^{-1}$, the required roof naturality. For a K-flat resolution $P\\to C$, step 2 also makes $P\\otimes_{R_E}R_L\\to C\\otimes_{R_E}R_L$ a quasi-isomorphism, so [lem-pur-derived-change-of-rings] identifies this termwise functor canonically with derived change of rings. Thus the roof calculation proves naturality and independence of representatives for the specified $\\theta_{L/E,K}$; composing with the natural $\\chi$ proves the assertion for $\\varphi$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
     "lem-weil-point-proetale-sections-exact",
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
     "def-weil-derived-complete-integral-detailed",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10 and Lemma 3.4.12; explicit comparison using K-flat derived change of rings (Stacks Tag 06YY, sites-cohomology-lemma-derived-base-change)"
+   }
+  },
+  {
+   "text": "For $E\\subset L\\subset M$ put $R=R_E$, $S=R_L$, $U=R_M$. The complex $P\\otimes_R S$ is K-flat over $S$ with flat terms by [lem-pur-kflat-change-of-rings], so all ordinary derived tensors below are computed by the same complexes. The inverse balanced chain maps $((p\\otimes a)\\otimes b)\\mapsto p\\otimes ab$ and $p\\otimes b\\mapsto(p\\otimes1)\\otimes b$ give $(P\\otimes_R S)\\otimes_S U\\cong P\\otimes_R U$; the balancing equation $(p\\otimes a)\\otimes b=(p\\otimes1)\\otimes ab$ verifies the inverse. For a chain map $g:P\\to Q$, either order of applying $g$ and the associator sends $((p\\otimes a)\\otimes b)$ to $g(p)\\otimes ab$. For a roof $P\\xleftarrow{q}H\\xrightarrow{f}Q$, the resulting commutative squares for $q$ and $f$, with the arrows induced by $q$ inverted, give the naturality square for $f q^{-1}$, as in step 3. All tensor functors here preserve quasi-isomorphisms by the finite-free bases from step 1, so those inverses exist. Since $T_{L/E}K$ is constructible and derived complete by [lem-weil-integral-scalar-extension-constructible] and [def-weil-derived-complete-integral-detailed], the comparison [lem-weil-finite-free-completed-scalar-comparison] also applies to the input $T_{L/E}K$ for $L\\subset M$. Define the integral associator to be the following composite: $T_{M/L}T_{L/E}K\\xrightarrow{\\chi_{M/L,T_{L/E}K}^{-1}}T_{L/E}K\\otimes^L_S U\\xrightarrow{\\chi_{L/E,K}^{-1}\\otimes1}(K\\otimes^L_R S)\\otimes^L_S U\\xrightarrow{\\mathrm{assoc}}K\\otimes^L_R U\\xrightarrow{\\chi_{M/E,K}}T_{M/E}K$. Every arrow is an isomorphism and natural; the formula fixes the actual integral associator rather than taking it from a rational-only associativity theorem. The ordinary unit is $p\\otimes r\\mapsto rp$. For an identity extension the comparison $\\chi$ is the completeness unit by the finite-free comparison node, so the identity identification is $T_{E/E}K\\xrightarrow{\\chi_{E/E,K}^{-1}}K\\otimes^L_R R\\xrightarrow{\\mathrm{mult}}K$.",
+   "uses": [
     "lem-pur-kflat-change-of-rings",
     "lem-weil-integral-scalar-extension-constructible",
-    "lem-weil-l-adic-extension-integers-dvr"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
-    "place": "Final paragraph (stagewise functor); finite-free sheaf and completion inputs from Bhatt--Scholze 6.8.2(1), 3.4.10, 3.4.12; explicit sections, associator, and localization calculations"
+    "place": "Stagewise functor passage: integral composition maps supplied by balanced tensors; Stacks Tag 0G7E, sites-cohomology-lemma-pullback-K-flat, for K-flat change of rings"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Global sections of derived complete proetale sheaves commute with finite extension of l-adic coefficient fields",
-      "results": "BDeRhamPlus, instCommRingBDeRhamPlus, BDeRham, InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, WittVector.factorPowSucc_comp_fontaineThetaModPPow, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion",
-      "date": "2026-10-16",
-      "verdict": "no match: the hits concern de Rham period rings, adic-completion ring maps, and Galois functors; none states a sections comparison for derived-complete pro-etale modules"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Sheaf\", \"tensor\"",
-      "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern ordinary presheaf tensor, light condensed monoidal structure, or coefficient sheaves, not the completed pro-etale derived sections comparison and its coherence"
-    },
-    {
-      "tool": "grep",
-      "query": "proetale|ProEtale|globalSections.*[Tt]ensor|[Tt]ensor.*globalSections",
-      "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern ordinary presheaf tensor, light condensed monoidal structure, or coefficient sheaves, not the completed pro-etale derived sections comparison and its coherence"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Global sections commute with finite free extension of scalars for sheaves of modules",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An additive global sections functor commutes with tensoring by a finite free coefficient module on a ringed site",
-      "results": "LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.monoidalCategoryStruct, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', PresheafOfModules.monoidalCategory, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern ordinary presheaf tensor, light condensed monoidal structure, or coefficient sheaves, not the completed pro-etale derived sections comparison and its coherence"
-    },
-    {
-      "tool": "grep",
-      "query": "tensor.*(sections|evaluation)|((sections|evaluation).*tensor)",
-      "results": "Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: free sheaf Hom/sections equivalences and monoidal evaluation formulas do not state the completed coefficient comparison or its derived coherence"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Projection formula for evaluation of a sheaf of modules with tensor product by a finite free ring algebra, compatible with extension of scalars",
-      "results": "SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.Presentation.map_π_eq, SheafOfModules.freeHomEquiv, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.sectionMap_freeMap_freeSection, SheafOfModules.freeHomEquiv_comp_apply",
-      "date": "2026-10-16",
-      "verdict": "no match: free sheaf Hom/sections equivalences and monoidal evaluation formulas do not state the completed coefficient comparison or its derived coherence"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "def-weil-finite-coefficient-point",
-    "date": "2026-10-09"
+  {
+   "text": "Before completion, the two sections-tensor comparisons for $E\\subset L\\subset M$ satisfy\n$$\n\\Gamma(\\alpha)\\,\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)=\\theta_{M/E,K}\\,a^{\\mathrm{mod}},\\qquad A=K\\otimes^L_R S,\n$$\nwhere $\\alpha:A\\otimes^L_S U\\to K\\otimes^L_R U$ is the ordinary associator from step 4. On complexes both sides send $((n\\otimes a)\\otimes b)$ to the section $n\\otimes ab$. Pure tensors generate the source in each degree, so the maps agree, including their coefficient actions; step 3 descends this equality to derived categories. To check every intervening completion map, abbreviate $C=\\chi_{L/E,K}$, $D=\\chi_{M/L,T_{L/E}K}$, $H=\\chi_{M/E,K}$, and $F(B)=B\\otimes^L_S U$. Thus step 4 defines $a^{\\mathrm{int}}=H\\alpha F(C^{-1})D^{-1}$. Naturality of $\\theta$ from step 3, applied to the derived isomorphism $C:A\\to T_{L/E}K$, says\n$$\n\\theta_{M/L,T_{L/E}K}(\\Gamma(C)\\otimes1)=\\Gamma(F(C))\\theta_{M/L,A}.\n$$\nWriting $\\psi_{L/E,K}=\\Gamma(\\chi_{L/E,K})\\theta_{L/E,K}$, substitution now gives the explicit cancellations\n$$\n\\begin{aligned}\n\\Gamma(a^{\\mathrm{int}})\\,\\psi_{M/L,T_{L/E}K}(\\psi_{L/E,K}\\otimes1)\n&=\\Gamma(H)\\Gamma(\\alpha)\\Gamma(F(C^{-1}))\\Gamma(D^{-1})\\Gamma(D)\\,\n\\theta_{M/L,T_{L/E}K}(\\Gamma(C)\\otimes1)(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\Gamma(H)\\Gamma(\\alpha)\\Gamma(F(C^{-1}))\\Gamma(F(C))\\,\n\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\Gamma(H)\\Gamma(\\alpha)\\theta_{M/L,A}(\\theta_{L/E,K}\\otimes1)\\\\\n&=\\psi_{M/E,K}\\,a^{\\mathrm{mod}}.\n\\end{aligned}\n$$\nThe common domain is $(\\Gamma(s,K)\\otimes_{\\mathcal O_E}\\mathcal O_L)\\otimes_{\\mathcal O_L}\\mathcal O_M$. Multiplying by the inverse maps $\\varphi=\\psi^{-1}$ gives the statement's composition equation. For $L=E$, $\\theta(n\\otimes r)$ followed by multiplication is $rn$, so under the completeness-unit identification of step 4 the comparison is the identity. For four coefficient fields, each ordinary iterated associator sends $(((n\\otimes a)\\otimes b)\\otimes c)$ to $n\\otimes abc$; substitution of the displayed conjugation cancels each intermediate $\\chi^{-1}\\chi$, proving the iterated coherence. The comparisons $C,D,H$ are natural isomorphisms by [lem-weil-finite-free-completed-scalar-comparison].",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Stagewise finite-extension passage: explicit pure-tensor computation of identity and composition coherence"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-sf-compatibility",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-weil-point-sections-scalar-extension",
-    "worker": "stage1",
-    "summary": "Six steps, no new nodes: identify coefficient sections, construct the sections-tensor map by a common global basis, pass through K-flat and completed comparison maps, construct the integral associator, check coherence on tensors, and rationalize. Repaired constant/completed coefficient typing and the rational-only composition citation; the intended isomorphisms and all hypotheses are retained.",
-    "blueprint": "Realizes the final paragraph of def-weil-finite-coefficient-point: stagewise passage requires the integral/rational sections comparisons (steps 1-3,6) and identity/composition coherence (steps 4-5). This is a supporting lemma, not the unit's key statement.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-        "why": "Generic identification of completed coefficients as continuous-function sheaves, used only to evaluate their sections on the noetherian point; no result of this unit supplies the coefficient identification."
-      },
-      {
-        "node": "lem-weil-finite-free-completed-scalar-comparison",
-        "why": "Generic finite-free completed coefficient comparison; isolates completion from the finite-sum sections calculation and does not replace any step of the admissibility unit."
-      },
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "Generic resolution existence on a ringed site, used to compute the ordinary derived tensor."
-      },
-      {
-        "node": "lem-pur-derived-change-of-rings",
-        "why": "Generic computation and quasi-isomorphism invariance of derived change of rings."
-      },
-      {
-        "node": "lem-pur-kflat-change-of-rings",
-        "why": "Generic K-flat preservation, used for the ordinary integral associator."
-      },
-      {
-        "node": "lem-weil-integral-scalar-extension-constructible",
-        "why": "Preservation of the integral input category, needed to apply the completion comparison on the second extension."
-      },
-      {
-        "node": "lem-weil-l-adic-extension-integers-dvr",
-        "why": "Generic fraction-field property of the coefficient valuation ring, used only for rational localization."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings",
-    "lem-weil-integral-scalar-extension-constructible",
+  {
+   "text": "Put $N=\\Gamma(s,K)$. Tensoring the integral comparison with $L$ gives $\\Gamma(s,T_{L/E}K)\\otimes_{\\mathcal O_L}L\\cong(N\\otimes_{\\mathcal O_E}\\mathcal O_L)\\otimes_{\\mathcal O_L}L\\cong N\\otimes_{\\mathcal O_E}L$, where the second map sends $(n\\otimes a)\\otimes b$ to $n\\otimes ab$ and its inverse sends $n\\otimes b$ to $(n\\otimes1)\\otimes b$. The DVR assertion [lem-weil-l-adic-extension-integers-dvr] makes $E$ the fraction field of $\\mathcal O_E$. For a nonzero $r\\in\\mathcal O_E$, multiplication by $r$ on $N\\otimes_{\\mathcal O_E}L$ is invertible, its inverse multiplying the $L$-coordinate by $r^{-1}$. Thus there are inverse maps $(N\\otimes_{\\mathcal O_E}E)\\otimes_E L\\leftrightarrows N\\otimes_{\\mathcal O_E}L$ given by $(n\\otimes x)\\otimes b\\mapsto n\\otimes xb$ and $n\\otimes b\\mapsto(n\\otimes1)\\otimes b$; moving a denominator across the tensor relation proves the other composite is the identity. These maps commute with differentials. Localization is exact: a fraction maps to zero precisely when some nonzero denominator annihilates its numerator, so localizing preserves kernels as well as images; hence all termwise localizations preserve quasi-isomorphisms. Extension from $E$ to $L$ is exact because every finite-dimensional field extension has a basis (successively choose a vector outside the span until the finite dimension is exhausted), so its underlying functor is a finite direct sum. The same reasoning applies to $L\\subset M$. Consequently these are isomorphisms in $D(L)$, natural in $K$. On a tower all localization and associativity maps send a pure tensor with coefficient factors $a,b,c$ to their product $abc$; applying step 5's integral equation and these balanced maps proves the rational identity and composition equations, including fractions since the inverted coefficients act by invertible maps.",
+   "uses": [
     "lem-weil-l-adic-extension-integers-dvr"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-NI-150187cc5",
-    "group": "NI",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-150187cc5 (reviewer sub-agent of L); spot-checked: Read the item, all six proof steps, cited statements and source locations in full. Verified completed coefficient types, the specified completion map, integral associator, coherence and rationalization; checked torsion and ramified cases, duplicates and dependency cycles. No new nodes or repairs. Accepted seven declared tool uses. Detailed findings written to review.md."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.PointSectionsScalarExtension",
-    "declaration": "WeilConjectures.pointSectionsScalarExtension",
-    "declarations": [
-      "WeilConjectures.pointScalarAbSheafify",
-      "WeilConjectures.pointScalarAbLocallyBijective",
-      "WeilConjectures.pointScalarModuleDerived",
-      "WeilConjectures.pointCompletedSheafDerived",
-      "WeilConjectures.pointCompletedConstant",
-      "WeilConjectures.pointCompletedSections",
-      "WeilConjectures.pointCompletedSections_exact",
-      "WeilConjectures.pointCompletedSectionsAdditive",
-      "WeilConjectures.pointCompletedSectionsLimits",
-      "WeilConjectures.pointCompletedSectionsColimits",
-      "WeilConjectures.pointCompletedDerivedSections",
-      "WeilConjectures.pointIntegralModuleTensor",
-      "WeilConjectures.pointCoefficientTensors_exact",
-      "WeilConjectures.pointIntegralModuleTensorAdditive",
-      "WeilConjectures.pointIntegralModuleTensorLimits",
-      "WeilConjectures.pointIntegralModuleTensorColimits",
-      "WeilConjectures.pointIntegralModuleDerivedTensor",
-      "WeilConjectures.pointSectionsTensor_existsUnique",
-      "WeilConjectures.pointSectionsTensor",
-      "WeilConjectures.pointCompletedOrdinary_exact",
-      "WeilConjectures.pointCompletedOrdinaryLimits",
-      "WeilConjectures.pointCompletedOrdinaryColimits",
-      "WeilConjectures.pointOrdinaryDerivedComparison_existsUnique",
-      "WeilConjectures.pointOrdinaryDerivedComparison",
-      "WeilConjectures.pointDerivedSectionsTensor",
-      "WeilConjectures.pointOrdinaryTensorUnit_existsUnique",
-      "WeilConjectures.pointOrdinaryTensorUnit",
-      "WeilConjectures.pointDerivedTensorUnit",
-      "WeilConjectures.pointOrdinaryTensorAssoc_existsUnique",
-      "WeilConjectures.pointOrdinaryTensorAssoc",
-      "WeilConjectures.pointDerivedTensorAssoc",
-      "WeilConjectures.pointIntegralModuleUnit_existsUnique",
-      "WeilConjectures.pointIntegralModuleDerivedUnit",
-      "WeilConjectures.pointIntegralModuleAssoc_existsUnique",
-      "WeilConjectures.pointIntegralModuleDerivedAssoc",
-      "WeilConjectures.pointModuleRationalization",
-      "WeilConjectures.pointModuleRationalizationAdditive",
-      "WeilConjectures.pointModuleRationalizationLimits",
-      "WeilConjectures.pointModuleRationalizationColimits",
-      "WeilConjectures.pointModuleDerivedRationalization",
-      "WeilConjectures.pointCoefficientFieldTensor_exact",
-      "WeilConjectures.pointCoefficientFieldTensorAdditive",
-      "WeilConjectures.pointCoefficientFieldTensorLimits",
-      "WeilConjectures.pointCoefficientFieldTensorColimits",
-      "WeilConjectures.pointCoefficientFieldDerivedTensor",
-      "WeilConjectures.pointCoefficientFieldDerivedUnit",
-      "WeilConjectures.pointCoefficientFieldDerivedAssoc",
-      "WeilConjectures.pointTensorRationalization_existsUnique",
-      "WeilConjectures.pointDerivedTensorRationalization",
-      "WeilConjectures.pointDatumIsAlgClosed",
-      "WeilConjectures.pointIntegralConstructible_iff",
-      "WeilConjectures.pointConstructibleCompletionComparison_isIso",
-      "WeilConjectures.pointConstructibleCompletionIso",
-      "WeilConjectures.pointSectionsScalarExtensionIso",
-      "WeilConjectures.pointIntegralScalarUnit",
-      "WeilConjectures.pointIntegralScalarAssoc",
-      "WeilConjectures.pointRationalSectionsScalarExtensionIso",
-      "WeilConjectures.pointSectionsScalarExtension"
-    ],
-    "file": "lean/Sheaf/Paper/PointSectionsScalarExtension.lean",
-    "statement": "theorem pointSectionsScalarExtension (Q : Type u) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q] (F G H : Padic.FiniteCoefficientFields l Q) (hFG : F ≤ G) (hGH : G ≤ H) (K : completedIntegralDerivedCategory l F.val (Spec (.of D.k)) D hl) (hK : boundedConstructibleDerivedCompleteIntegral D l hl F.val (Spec (.of D.k)) K) : (∀ (J : completedIntegralDerivedCategory l F.val (Spec (.of D.k)) D hl) (hJ : boundedConstructibleDerivedCompleteIntegral D l hl F.val (Spec (.of D.k)) J) (f : K ⟶ J), (pointCompletedDerivedSections D.k l G.val).map ((integralScalarExtension.{u} l F.val G.val (IntermediateField.inclusion hFG) (Spec (.of D.k))).map f) ≫ (pointSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl J hJ).hom = (pointSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl K hK).hom ≫ (pointIntegralModuleDerivedTensor l F.val G.val (IntermediateField.inclusion hFG)).map ((pointCompletedDerivedSections D.k l F.val).map f)) ∧ ((pointSectionsScalarExtensionIso l F.val F.val (AlgHom.id ℚ_[l] F.val) D hl K hK).hom ≫ (pointIntegralModuleDerivedUnit l F.val).hom.app ((pointCompletedDerivedSections D.k l F.val).obj K) = (pointCompletedDerivedSections D.k l F.val).map (pointIntegralScalarUnit l F.val D hl K hK).hom) ∧ ((pointCompletedDerivedSections D.k l H.val).map (pointIntegralScalarAssoc l F.val G.val (IntermediateField.inclusion hFG) H.val (IntermediateField.inclusion hGH) D hl K hK).hom ≫ (pointSectionsScalarExtensionIso l F.val H.val ((IntermediateField.inclusion hGH).comp (IntermediateField.inclusion hFG)) D hl K hK).hom = (pointSectionsScalarExtensionIso l G.val H.val (IntermediateField.inclusion hGH) D hl _ (integralScalarExtension_constructible D l hl F.val G.val (IntermediateField.inclusion hFG) (Spec (.of D.k)) ⟨K, hK⟩)).hom ≫ (pointIntegralModuleDerivedTensor l G.val H.val (IntermediateField.inclusion hGH)).map (pointSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl K hK).hom ≫ (pointIntegralModuleDerivedAssoc l F.val G.val (IntermediateField.inclusion hFG) H.val (IntermediateField.inclusion hGH)).hom.app ((pointCompletedDerivedSections D.k l F.val).obj K)) ∧ (∀ (J : completedIntegralDerivedCategory l F.val (Spec (.of D.k)) D hl) (hJ : boundedConstructibleDerivedCompleteIntegral D l hl F.val (Spec (.of D.k)) J) (f : K ⟶ J), (pointModuleDerivedRationalization l G.val).map ((pointCompletedDerivedSections D.k l G.val).map ((integralScalarExtension.{u} l F.val G.val (IntermediateField.inclusion hFG) (Spec (.of D.k))).map f)) ≫ (pointRationalSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl J hJ).hom = (pointRationalSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl K hK).hom ≫ (pointCoefficientFieldDerivedTensor l F.val G.val (IntermediateField.inclusion hFG)).map ((pointModuleDerivedRationalization l F.val).map ((pointCompletedDerivedSections D.k l F.val).map f))) ∧ ((pointRationalSectionsScalarExtensionIso l F.val F.val (AlgHom.id ℚ_[l] F.val) D hl K hK).hom ≫ (pointCoefficientFieldDerivedUnit l F.val).hom.app ((pointModuleDerivedRationalization l F.val).obj ((pointCompletedDerivedSections D.k l F.val).obj K)) = (pointModuleDerivedRationalization l F.val).map ((pointCompletedDerivedSections D.k l F.val).map (pointIntegralScalarUnit l F.val D hl K hK).hom)) ∧ ((pointModuleDerivedRationalization l H.val).map ((pointCompletedDerivedSections D.k l H.val).map (pointIntegralScalarAssoc l F.val G.val (IntermediateField.inclusion hFG) H.val (IntermediateField.inclusion hGH) D hl K hK).hom) ≫ (pointRationalSectionsScalarExtensionIso l F.val H.val ((IntermediateField.inclusion hGH).comp (IntermediateField.inclusion hFG)) D hl K hK).hom = (pointRationalSectionsScalarExtensionIso l G.val H.val (IntermediateField.inclusion hGH) D hl _ (integralScalarExtension_constructible D l hl F.val G.val (IntermediateField.inclusion hFG) (Spec (.of D.k)) ⟨K, hK⟩)).hom ≫ (pointCoefficientFieldDerivedTensor l G.val H.val (IntermediateField.inclusion hGH)).map (pointRationalSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl K hK).hom ≫ (pointCoefficientFieldDerivedAssoc l F.val G.val (IntermediateField.inclusion hFG) H.val (IntermediateField.inclusion hGH)).hom.app ((pointModuleDerivedRationalization l F.val).obj ((pointCompletedDerivedSections D.k l F.val).obj K)))",
-    "branch": "newtargets-dag",
-    "by": "Q154",
-    "date": "2026-10-17",
-    "existing": false,
-    "note": "§1(B): the recorded scalar-extension source still passed two universe arguments to integralScalarExtension, whose current published interface has one. This dependency module updates only those obsolete universe applications, preserving the canonical sections-tensor map, completion comparison, rationalization and all six naturality/unit/tower clauses unchanged."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-1b445948a",
-    "group": "Q154",
-    "result": "pass",
-    "note": "All four fibre functors match node clauses 1-4 (objects, f⊗λ↦λ·(Γf⊗E) rational maps, φ'∘Fib(u)∘φ⁻¹ at Qbar using the recorded pointRationalSectionsScalarExtensionIso, O_E-linearity theorem); no equivalence asserted. Each ∃! selection is really unique (Loc_ϖ⊗Hom elements are pure tensors; common-stage representatives; fully faithful ulift); size descent is the inverse of an equivalence, allowed by AGENTS §5; 16 sorries, all theorems with proof docstrings. ULift.{u+1} targets in clauses 1-2 follow the recorded point_sections_finiteness; Ω:Type u matches CoefficientDatum.Qbar:Type u. §1(B) dependency repair is exactly 9 integralScalarExtension .{u,u}→.{u}, lean-only node change. lean.declarations = 53 file declarations; statement verbatim; other node copies identical. nt_compile.py on both files: exit 0, no errors or warnings. Nit only: duplicate Prop instance pointFibreBaseIsAlgClosed."
-  },
-  "blueprint_parent": {
-    "node": "sk-thm-sf-compatibility",
-    "clause": 7,
-    "from_unit": "sk-def-sf-admissible",
-    "date": "2026-10-17",
-    "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Final sentence, passage stagewise to the finite-stage colimit; explicit localization and tensor-associativity formulas"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+  "place": "Final paragraph (stagewise functor); finite-free sheaf and completion inputs from Bhatt--Scholze 6.8.2(1), 3.4.10, 3.4.12; explicit sections, associator, and localization calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of derived complete proetale sheaves commute with finite extension of l-adic coefficient fields",
+   "results": "BDeRhamPlus, instCommRingBDeRhamPlus, BDeRham, InfiniteGalois.finGaloisGroupFunctor_map_proj_eq_proj, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, WittVector.factorPowSucc_comp_fontaineThetaModPPow, IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion, IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion",
+   "date": "2026-10-16",
+   "verdict": "no match: the hits concern de Rham period rings, adic-completion ring maps, and Galois functors; none states a sections comparison for derived-complete pro-etale modules"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary presheaf tensor, light condensed monoidal structure, or coefficient sheaves, not the completed pro-etale derived sections comparison and its coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|ProEtale|globalSections.*[Tt]ensor|[Tt]ensor.*globalSections",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary presheaf tensor, light condensed monoidal structure, or coefficient sheaves, not the completed pro-etale derived sections comparison and its coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections commute with finite free extension of scalars for sheaves of modules",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive global sections functor commutes with tensoring by a finite free coefficient module on a ringed site",
+   "results": "LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.monoidalCategoryStruct, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', PresheafOfModules.monoidalCategory, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern ordinary presheaf tensor, light condensed monoidal structure, or coefficient sheaves, not the completed pro-etale derived sections comparison and its coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(sections|evaluation)|((sections|evaluation).*tensor)",
+   "results": "Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean, Mathlib/CategoryTheory/Monoidal/Rigid/Basic.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: free sheaf Hom/sections equivalences and monoidal evaluation formulas do not state the completed coefficient comparison or its derived coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for evaluation of a sheaf of modules with tensor product by a finite free ring algebra, compatible with extension of scalars",
+   "results": "SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.freeHomEquiv_freeMap, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.Presentation.map_π_eq, SheafOfModules.freeHomEquiv, PresheafOfModules.Monoidal.tensorObjMap, SheafOfModules.sectionMap_freeMap_freeSection, SheafOfModules.freeHomEquiv_comp_apply",
+   "date": "2026-10-16",
+   "verdict": "no match: free sheaf Hom/sections equivalences and monoidal evaluation formulas do not state the completed coefficient comparison or its derived coherence"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-finite-coefficient-point",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-point-sections-scalar-extension",
+  "worker": "stage1",
+  "summary": "Six steps, no new nodes: identify coefficient sections, construct the sections-tensor map by a common global basis, pass through K-flat and completed comparison maps, construct the integral associator, check coherence on tensors, and rationalize. Repaired constant/completed coefficient typing and the rational-only composition citation; the intended isomorphisms and all hypotheses are retained.",
+  "blueprint": "Realizes the final paragraph of def-weil-finite-coefficient-point: stagewise passage requires the integral/rational sections comparisons (steps 1-3,6) and identity/composition coherence (steps 4-5). This is a supporting lemma, not the unit's key statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "why": "Generic identification of completed coefficients as continuous-function sheaves, used only to evaluate their sections on the noetherian point; no result of this unit supplies the coefficient identification."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic finite-free completed coefficient comparison; isolates completion from the finite-sum sections calculation and does not replace any step of the admissibility unit."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolution existence on a ringed site, used to compute the ordinary derived tensor."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic computation and quasi-isomorphism invariance of derived change of rings."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic K-flat preservation, used for the ordinary integral associator."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Preservation of the integral input category, needed to apply the completion comparison on the second extension."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic fraction-field property of the coefficient valuation ring, used only for rational localization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-change-of-rings",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-150187cc5",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-150187cc5 (reviewer sub-agent of L); spot-checked: Read the item, all six proof steps, cited statements and source locations in full. Verified completed coefficient types, the specified completion map, integral associator, coherence and rationalization; checked torsion and ramified cases, duplicates and dependency cycles. No new nodes or repairs. Accepted seven declared tool uses. Detailed findings written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSectionsScalarExtension",
+  "declaration": "WeilConjectures.pointSectionsScalarExtension",
+  "declarations": [
+   "WeilConjectures.pointScalarAbSheafify",
+   "WeilConjectures.pointScalarAbLocallyBijective",
+   "WeilConjectures.pointScalarModuleDerived",
+   "WeilConjectures.pointCompletedSheafDerived",
+   "WeilConjectures.pointCompletedConstant",
+   "WeilConjectures.pointCompletedSections",
+   "WeilConjectures.pointCompletedSections_exact",
+   "WeilConjectures.pointCompletedSectionsAdditive",
+   "WeilConjectures.pointCompletedSectionsLimits",
+   "WeilConjectures.pointCompletedSectionsColimits",
+   "WeilConjectures.pointCompletedDerivedSections",
+   "WeilConjectures.pointIntegralModuleTensor",
+   "WeilConjectures.pointCoefficientTensors_exact",
+   "WeilConjectures.pointIntegralModuleTensorAdditive",
+   "WeilConjectures.pointIntegralModuleTensorLimits",
+   "WeilConjectures.pointIntegralModuleTensorColimits",
+   "WeilConjectures.pointIntegralModuleDerivedTensor",
+   "WeilConjectures.pointSectionsTensor_existsUnique",
+   "WeilConjectures.pointSectionsTensor",
+   "WeilConjectures.pointCompletedOrdinary_exact",
+   "WeilConjectures.pointCompletedOrdinaryLimits",
+   "WeilConjectures.pointCompletedOrdinaryColimits",
+   "WeilConjectures.pointOrdinaryDerivedComparison_existsUnique",
+   "WeilConjectures.pointOrdinaryDerivedComparison",
+   "WeilConjectures.pointDerivedSectionsTensor",
+   "WeilConjectures.pointOrdinaryTensorUnit_existsUnique",
+   "WeilConjectures.pointOrdinaryTensorUnit",
+   "WeilConjectures.pointDerivedTensorUnit",
+   "WeilConjectures.pointOrdinaryTensorAssoc_existsUnique",
+   "WeilConjectures.pointOrdinaryTensorAssoc",
+   "WeilConjectures.pointDerivedTensorAssoc",
+   "WeilConjectures.pointIntegralModuleUnit_existsUnique",
+   "WeilConjectures.pointIntegralModuleDerivedUnit",
+   "WeilConjectures.pointIntegralModuleAssoc_existsUnique",
+   "WeilConjectures.pointIntegralModuleDerivedAssoc",
+   "WeilConjectures.pointModuleRationalization",
+   "WeilConjectures.pointModuleRationalizationAdditive",
+   "WeilConjectures.pointModuleRationalizationLimits",
+   "WeilConjectures.pointModuleRationalizationColimits",
+   "WeilConjectures.pointModuleDerivedRationalization",
+   "WeilConjectures.pointCoefficientFieldTensor_exact",
+   "WeilConjectures.pointCoefficientFieldTensorAdditive",
+   "WeilConjectures.pointCoefficientFieldTensorLimits",
+   "WeilConjectures.pointCoefficientFieldTensorColimits",
+   "WeilConjectures.pointCoefficientFieldDerivedTensor",
+   "WeilConjectures.pointCoefficientFieldDerivedUnit",
+   "WeilConjectures.pointCoefficientFieldDerivedAssoc",
+   "WeilConjectures.pointTensorRationalization_existsUnique",
+   "WeilConjectures.pointDerivedTensorRationalization",
+   "WeilConjectures.pointDatumIsAlgClosed",
+   "WeilConjectures.pointIntegralConstructible_iff",
+   "WeilConjectures.pointConstructibleCompletionComparison_isIso",
+   "WeilConjectures.pointConstructibleCompletionIso",
+   "WeilConjectures.pointSectionsScalarExtensionIso",
+   "WeilConjectures.pointIntegralScalarUnit",
+   "WeilConjectures.pointIntegralScalarAssoc",
+   "WeilConjectures.pointRationalSectionsScalarExtensionIso",
+   "WeilConjectures.pointSectionsScalarExtension"
+  ],
+  "file": "lean/Sheaf/Paper/PointSectionsScalarExtension.lean",
+  "statement": "theorem pointSectionsScalarExtension (Q : Type u) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q] (F G H : Padic.FiniteCoefficientFields l Q) (hFG : F ≤ G) (hGH : G ≤ H) (K : completedIntegralDerivedCategory l F.val (Spec (.of D.k)) D hl) (hK : boundedConstructibleDerivedCompleteIntegral D l hl F.val (Spec (.of D.k)) K) : (∀ (J : completedIntegralDerivedCategory l F.val (Spec (.of D.k)) D hl) (hJ : boundedConstructibleDerivedCompleteIntegral D l hl F.val (Spec (.of D.k)) J) (f : K ⟶ J), (pointCompletedDerivedSections D.k l G.val).map ((integralScalarExtension.{u} l F.val G.val (IntermediateField.inclusion hFG) (Spec (.of D.k))).map f) ≫ (pointSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl J hJ).hom = (pointSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl K hK).hom ≫ (pointIntegralModuleDerivedTensor l F.val G.val (IntermediateField.inclusion hFG)).map ((pointCompletedDerivedSections D.k l F.val).map f)) ∧ ((pointSectionsScalarExtensionIso l F.val F.val (AlgHom.id ℚ_[l] F.val) D hl K hK).hom ≫ (pointIntegralModuleDerivedUnit l F.val).hom.app ((pointCompletedDerivedSections D.k l F.val).obj K) = (pointCompletedDerivedSections D.k l F.val).map (pointIntegralScalarUnit l F.val D hl K hK).hom) ∧ ((pointCompletedDerivedSections D.k l H.val).map (pointIntegralScalarAssoc l F.val G.val (IntermediateField.inclusion hFG) H.val (IntermediateField.inclusion hGH) D hl K hK).hom ≫ (pointSectionsScalarExtensionIso l F.val H.val ((IntermediateField.inclusion hGH).comp (IntermediateField.inclusion hFG)) D hl K hK).hom = (pointSectionsScalarExtensionIso l G.val H.val (IntermediateField.inclusion hGH) D hl _ (integralScalarExtension_constructible D l hl F.val G.val (IntermediateField.inclusion hFG) (Spec (.of D.k)) ⟨K, hK⟩)).hom ≫ (pointIntegralModuleDerivedTensor l G.val H.val (IntermediateField.inclusion hGH)).map (pointSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl K hK).hom ≫ (pointIntegralModuleDerivedAssoc l F.val G.val (IntermediateField.inclusion hFG) H.val (IntermediateField.inclusion hGH)).hom.app ((pointCompletedDerivedSections D.k l F.val).obj K)) ∧ (∀ (J : completedIntegralDerivedCategory l F.val (Spec (.of D.k)) D hl) (hJ : boundedConstructibleDerivedCompleteIntegral D l hl F.val (Spec (.of D.k)) J) (f : K ⟶ J), (pointModuleDerivedRationalization l G.val).map ((pointCompletedDerivedSections D.k l G.val).map ((integralScalarExtension.{u} l F.val G.val (IntermediateField.inclusion hFG) (Spec (.of D.k))).map f)) ≫ (pointRationalSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl J hJ).hom = (pointRationalSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl K hK).hom ≫ (pointCoefficientFieldDerivedTensor l F.val G.val (IntermediateField.inclusion hFG)).map ((pointModuleDerivedRationalization l F.val).map ((pointCompletedDerivedSections D.k l F.val).map f))) ∧ ((pointRationalSectionsScalarExtensionIso l F.val F.val (AlgHom.id ℚ_[l] F.val) D hl K hK).hom ≫ (pointCoefficientFieldDerivedUnit l F.val).hom.app ((pointModuleDerivedRationalization l F.val).obj ((pointCompletedDerivedSections D.k l F.val).obj K)) = (pointModuleDerivedRationalization l F.val).map ((pointCompletedDerivedSections D.k l F.val).map (pointIntegralScalarUnit l F.val D hl K hK).hom)) ∧ ((pointModuleDerivedRationalization l H.val).map ((pointCompletedDerivedSections D.k l H.val).map (pointIntegralScalarAssoc l F.val G.val (IntermediateField.inclusion hFG) H.val (IntermediateField.inclusion hGH) D hl K hK).hom) ≫ (pointRationalSectionsScalarExtensionIso l F.val H.val ((IntermediateField.inclusion hGH).comp (IntermediateField.inclusion hFG)) D hl K hK).hom = (pointRationalSectionsScalarExtensionIso l G.val H.val (IntermediateField.inclusion hGH) D hl _ (integralScalarExtension_constructible D l hl F.val G.val (IntermediateField.inclusion hFG) (Spec (.of D.k)) ⟨K, hK⟩)).hom ≫ (pointCoefficientFieldDerivedTensor l G.val H.val (IntermediateField.inclusion hGH)).map (pointRationalSectionsScalarExtensionIso l F.val G.val (IntermediateField.inclusion hFG) D hl K hK).hom ≫ (pointCoefficientFieldDerivedAssoc l F.val G.val (IntermediateField.inclusion hFG) H.val (IntermediateField.inclusion hGH)).hom.app ((pointModuleDerivedRationalization l F.val).obj ((pointCompletedDerivedSections D.k l F.val).obj K)))",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "§1(B): the recorded scalar-extension source still passed two universe arguments to integralScalarExtension, whose current published interface has one. This dependency module updates only those obsolete universe applications, preserving the canonical sections-tensor map, completion comparison, rationalization and all six naturality/unit/tower clauses unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b445948a",
+  "group": "Q154",
+  "result": "pass",
+  "note": "All four fibre functors match node clauses 1-4 (objects, f⊗λ↦λ·(Γf⊗E) rational maps, φ'∘Fib(u)∘φ⁻¹ at Qbar using the recorded pointRationalSectionsScalarExtensionIso, O_E-linearity theorem); no equivalence asserted. Each ∃! selection is really unique (Loc_ϖ⊗Hom elements are pure tensors; common-stage representatives; fully faithful ulift); size descent is the inverse of an equivalence, allowed by AGENTS §5; 16 sorries, all theorems with proof docstrings. ULift.{u+1} targets in clauses 1-2 follow the recorded point_sections_finiteness; Ω:Type u matches CoefficientDatum.Qbar:Type u. §1(B) dependency repair is exactly 9 integralScalarExtension .{u,u}→.{u}, lean-only node change. lean.declarations = 53 file declarations; statement verbatim; other node copies identical. nt_compile.py on both files: exit 0, no errors or warnings. Nit only: duplicate Prop instance pointFibreBaseIsAlgClosed."
+ },
+ "blueprint_parent": {
+  "node": "sk-thm-sf-compatibility",
+  "clause": 7,
+  "from_unit": "sk-def-sf-admissible",
+  "date": "2026-10-17",
+  "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ }
 }

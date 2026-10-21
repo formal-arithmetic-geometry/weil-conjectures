@@ -1,366 +1,355 @@
 {
-  "id": "lem-kun-0f14a",
-  "blueprint": {
-    "is": "lem-kun-0f14a",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Kunneth formula, one proper factor, integer coefficients",
-  "statement": "Let $k$ be a separably closed\nfield. Let $X$ be a\nproper scheme over $k$\nand let $Y$ be a\nquasi-compact and\nquasi-separated scheme over $k$. If $E\\in\\Dplus(X_{\\Et})$ has\ntorsion cohomology and\n$K\\in\\Dplus(Y_{\\Et})$, then the Kunneth map of\n[def-kun-kunneth-map] for the square\n\n$$\n\\begin{array}{ccc}\nX\\times_kY&\\xrightarrow{\\;\\operatorname{pr}_2\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle \\operatorname{pr}_1}&&\\Big\\downarrow{\\scriptstyle a_Y}\\\\\nX&\\xrightarrow{\\;a_X\\;}&\\Spec(k)\n\\end{array}\n$$\n\n$$\n\\kappa_{E,K}:\n\\RGamma(X_{\\Et},E)\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)\n\\longrightarrow\n\\RGamma\\bigl((X\\times_kY)_{\\Et},\n\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n$$\n\nis an isomorphism. (*Source:* Stacks Project, Tag\n[0F14](https://stacks.math.columbia.edu/tag/0F14), part (1).)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f14a.md",
-    "place": "node lem-kun-0f14a, order 1763",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0F14"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-kun-kunneth-map",
-    "def-kun-separably-closed",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-proper-morphism",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-torsion-etale-sheaf",
-    "def-kun-rgamma-unbounded",
-    "def-kun-derived-tensor",
-    "def-weil-pbc-derived-inverse-image"
-  ],
-  "proof": [
-    {
-      "text": "Put $S=\\Spec(k)$, $W=X\\times_kY$, $p=\\operatorname{pr}_1$, $q=\\operatorname{pr}_2$, $f=a_X$, $g=a_Y$, and $c=f p=g q$. Set $E'=p^{-1}E$ and $K'=q^{-1}K$. By [prop-weil-pbc-inverse-image-exact] inverse image is exact. Applying [lem-weil-pbc-exact-functor-complex-cohomology] to a representing complex gives $\\mathcal H^i(E')=p^{-1}\\mathcal H^i(E)$ and $\\mathcal H^i(K')=q^{-1}\\mathcal H^i(K)$. These vanish below the respective lower bounds of $E,K$; hence both inverse images are bounded below. Each $p^{-1}\\mathcal H^i(E)$ is torsion by [lem-weil-pbc-inverse-image-torsion], so $E'$ has torsion cohomology. Finally [lem-kun-proper-stability] makes $q$ proper, since it is the base change of the proper $f$. These verify all the hypotheses for the integer-coefficient proper projection formula below.",
-      "uses": [
-        "prop-weil-pbc-inverse-image-exact",
-        "lem-weil-pbc-exact-functor-complex-cohomology",
-        "lem-weil-pbc-inverse-image-torsion",
-        "lem-kun-proper-stability"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), first sentence; exact inverse image: Tag 03Q1, label lemma-stalk-pullback (1), and homology.tex Tag 010N, label lemma-exact-functor"
-      }
-    },
-    {
-      "text": "We make explicit the point-topos identification used in proper base change. By [lem-kun-0ezp] every etale $U\\to S$ is a disjoint union $\\coprod_{i\\in I}S$. Sheaf gluing over the component cover gives $F(U)=\\prod_{i\\in I}F(S)$ for every abelian sheaf $F$, naturally under maps of such objects. The constant sheaf with value an abelian group $M$ in [def-kun-constant-sheaf] has the same formula $\\underline M(U)=\\prod_{i\\in I}M$. Thus the evaluation maps $\\underline{F(S)}\\to F$ and $M\\to\\underline M(S)$ are inverse natural identifications: sections on $S$ and the constant-sheaf functor are inverse exact equivalences. These equivalences also identify tensor products: after restriction to each component $S$, the universal property of the sheaf tensor is the universal property of the tensor of the two section groups. Applied termwise, the equivalences preserve cohomology and quasi-isomorphisms and identify $D(S_{\\Et})$ with $D(\\mathbf Z)$, including bounded-below objects. They preserve K-flat complexes, since the tensor with each acyclic complex corresponds to the tensor with its acyclic image under the inverse equivalence; consequently this identification respects derived tensor and its sign symmetry. In particular, for any complex $J$ on $S$, $J\\cong\\underline{\\RGamma(S_{\\Et},J)}$: exactness of evaluation makes its derived functor equal to evaluation itself, using the resolution recipe of [def-kun-rgamma-unbounded].",
-      "uses": [
-        "lem-kun-0ezp",
-        "def-kun-constant-sheaf",
-        "def-kun-rgamma-unbounded"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), identification after proper base change; point-site decomposition as in lem-kun-0ezp, using the component covering and the sheaf axiom"
-      }
-    },
-    {
-      "text": "Let $A=\\RGamma(X_{\\Et},E)$ and $B=Rq_*E'$. If $E$ has no cohomology below $b$, then $Rf_*E$ has none below $b$ by [lem-kun-tensor-t-est]. By [lem-kun-leray-bdd] for $f$, $A\\cong\\RGamma(S_{\\Et},Rf_*E)$; step 2 identifies $Rf_*E$ with $\\underline A$, and shows $A\\in D^+(\\mathbf Z)$. The square $(p,q,f,g)$ is cartesian and $f$ is proper; $E$ is bounded below with torsion cohomology, so [thm-weil-pbc-bounded-below] gives the canonical exchange isomorphism $g^{-1}Rf_*E\\xrightarrow{\\sim}Rq_*p^{-1}E=B$. The constant-object identification and [lem-kun-pullback-constant] identify its source with $\\underline A$ on $Y_{\\Et}$. Consequently $B\\cong\\underline A$, by the inverse of this exchange isomorphism. No finite-type hypothesis on $Y$, nor invertibility hypothesis on the orders of the torsion, has been used.",
-      "uses": [
-        "lem-kun-tensor-t-est",
-        "lem-kun-leray-bdd",
-        "thm-weil-pbc-bounded-below",
-        "lem-kun-pullback-constant"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), second displayed identification; proper base change Tag 0DDE, label lemma-proper-base-change"
-      }
-    },
-    {
-      "text": "Put $T=E'\\kunotimes{\\mathbf Z}K'\\in D(W_{\\Et})$. Apply [lem-kun-0f0f] to the proper $q:W\\to Y$, the bounded-below torsion-cohomology object $E'$ of step 1, and $K\\in D^+(Y_{\\Et})$. It states that the canonical map $B\\kunotimes{\\mathbf Z}K\\longrightarrow Rq_*T$ is an isomorphism. We shall use its inverse, $Rq_*T\\xrightarrow{\\sim}B\\kunotimes{\\mathbf Z}K$, followed by the isomorphism $B\\cong\\underline A$ of step 3.",
-      "uses": [
-        "lem-kun-0f0f"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), first display; Tag 0F0F, label lemma-projection-formula-proper"
-      }
-    },
-    {
-      "text": "For clarity the Leray comparison can be taken on the whole derived category, so it needs no additional assertion about the lower bound of $T$. Use the small presentations fixed in [def-weil-size-convention], and apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the etale topoi with constant ring $\\mathbf Z$, and to $q:W\\to Y$, $g:Y\\to S$. It gives $Rc_*T\\cong Rg_*Rq_*T$. Evaluating on $S$ is exact by step 2. The recipe of [def-kun-rgamma-unbounded] identifies evaluation of $Ra_{Z,*}H$ with $\\RGamma(Z_{\\Et},H)$: on a K-injective resolution $I$ of $H$ it is the identity $\\Gamma(S,a_{Z,*}I)=\\Gamma(Z,I)$. More explicitly, choose a K-injective representative $I$ of $T$ and a K-injective resolution $j:q_*I\\to J$. The cited composition theorem says $g_*j$ is a quasi-isomorphism. Exact evaluation on $S$ makes $\\Gamma(S,g_*j)=\\Gamma(Y,j)$ a quasi-isomorphism from $\\Gamma(W,I)$ to $\\Gamma(Y,J)$. These are the defining representatives of $\\RGamma(W_{\\Et},T)$ and $\\RGamma(Y_{\\Et},Rq_*T)$, so their comparison is an isomorphism. This is the canonical derived-functor composition comparison, whose bounded-below restriction is the Leray comparison in the blueprint; no finite-cohomological-dimension theorem is required.",
-      "uses": [
-        "def-weil-size-convention",
-        "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-        "def-kun-rgamma-unbounded"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0D6E, label lemma-derived-pushforward-composition; this supplies the Leray composition used in etale-cohomology.tex Tag 0F14, label lemma-kunneth-one-proper, proof (1)"
-      }
-    },
-    {
-      "text": "Composing steps 3--5 identifies $\\RGamma(W_{\\Et},T)$ with $\\RGamma(Y_{\\Et},\\underline A\\kunotimes{\\mathbf Z}K)$. Use [lem-kun-tensor-sym] on $Y_{\\Et}$ to rewrite the latter as $\\RGamma(Y_{\\Et},K\\kunotimes{\\mathbf Z}\\underline A)$. Since $Y$ is quasi-compact and quasi-separated, $K\\in D^+(Y_{\\Et})$, and $A\\in D^+(\\mathbf Z)$ by step 3, [lem-kun-0f0e] with its variables $E:=K$ and constant complex $K:=A$ supplies the inverse isomorphism to $\\RGamma(Y_{\\Et},K)\\kunotimes{\\mathbf Z}A$. A final symmetry gives $A\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)$. Here symmetry in $D(\\mathbf Z)$ is the instance of [lem-kun-tensor-sym] on $S_{\\Et}$ under the constant-sheaf/evaluation equivalence of step 2: the termwise tensor and its sign symmetry become the ordinary ones. Denote the resulting composite isomorphism by $\\theta$. This is precisely the Leray, inverse proper projection formula, inverse proper exchange, constant-complex projection formula, and symmetry composite.",
-      "uses": [
-        "lem-kun-tensor-sym",
-        "lem-kun-0f0e"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), last sentence; Tag 0F0E, label lemma-pull-out-constant; symmetry only reorders the displayed tensor factors"
-      }
-    },
-    {
-      "text": "To identify the specified map, specialize the current [def-kun-kunneth-map] to $S=\\Spec(k)$ and $\\Lambda=\\mathbf Z$. Put $C=Rf_*E\\kunotimes{\\mathbf Z}Rg_*K$, with $T$ as in step 4. Its map $C\\to Rc_*T$ is $Rc_*(\\alpha_{E,K})\\circ\\eta_{c,C}$, where $\\alpha_{E,K}$ first applies the inverse monoidality comparison $(\\mu^c)^{-1}$, then the canonical composition maps $\\gamma_{f,p}\\otimes\\gamma_{g,q}$, and finally the pulled-back counits $p^{-1}(\\varepsilon_{f,E})\\otimes q^{-1}(\\varepsilon_{g,K})$. Thus it is exactly the adjoint-of-counits map used in clause (a) of [lem-kun-kunneth-map-agrees]. The current definition supplies these composition maps on unbounded constant-coefficient module categories, with their module actions and composite-adjunction units; restricting to the given bounded-below inputs does not change the maps. Under the exact tensor-compatible point equivalence of step 2, the Leray identifications for $f,g,c$ identify $C$ with $A\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)$ and $Rc_*T$ with $\\RGamma(W_{\\Et},T)$. Consequently its image is the displayed global-sections morphism $\\kappa_{E,K}:A\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)\\to\\RGamma(W_{\\Et},T)$. Clause (a) of [lem-kun-kunneth-map-agrees] gives $\\theta\\circ\\kappa_{E,K}=\\mathrm{id}$ for this very map and the composite of steps 3--6. Clause (a) explicitly requires $Y$ to be quasi-compact and quasi-separated, as assumed here. Its $\\ell,e,t,r$ are respectively the canonical comparison of step 5, the exchange map of step 3, the projection-formula map of step 4, and the constant-complex projection map of step 6; its two symmetries are exactly those of step 6. We use its compatibility equation, having independently checked that every factor of $\\theta$ is an isomorphism. Multiplying the equation on the left by $\\theta^{-1}$ gives $\\kappa_{E,K}=\\theta^{-1}$, so the specified Kunneth map is an isomorphism.",
-      "uses": [
-        "lem-kun-kunneth-map-agrees",
-        "def-kun-kunneth-map"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.md",
-        "place": "Clause (a), compatibility equation for theta; current def-kun-kunneth-map, alpha composite and unit/direct-image formula, compared with Stacks Tag 0F1E, label remark-define-kunneth-map"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-kun-0f14a",
+ "blueprint": {
+  "is": "lem-kun-0f14a",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Kunneth formula, one proper factor, integer coefficients",
+ "statement": "Let $k$ be a separably closed\nfield. Let $X$ be a\nproper scheme over $k$\nand let $Y$ be a\nquasi-compact and\nquasi-separated scheme over $k$. If $E\\in\\Dplus(X_{\\Et})$ has\ntorsion cohomology and\n$K\\in\\Dplus(Y_{\\Et})$, then the Kunneth map of\n[def-kun-kunneth-map] for the square\n\n$$\n\\begin{array}{ccc}\nX\\times_kY&\\xrightarrow{\\;\\operatorname{pr}_2\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle \\operatorname{pr}_1}&&\\Big\\downarrow{\\scriptstyle a_Y}\\\\\nX&\\xrightarrow{\\;a_X\\;}&\\Spec(k)\n\\end{array}\n$$\n\n$$\n\\kappa_{E,K}:\n\\RGamma(X_{\\Et},E)\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)\n\\longrightarrow\n\\RGamma\\bigl((X\\times_kY)_{\\Et},\n\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n$$\n\nis an isomorphism. (*Source:* Stacks Project, Tag\n[0F14](https://stacks.math.columbia.edu/tag/0F14), part (1).)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f14a.md",
+  "place": "node lem-kun-0f14a, order 1763",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F14"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-kun-kunneth-map",
+  "def-kun-separably-closed",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-torsion-etale-sheaf",
+  "def-kun-rgamma-unbounded",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-derived-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Put $S=\\Spec(k)$, $W=X\\times_kY$, $p=\\operatorname{pr}_1$, $q=\\operatorname{pr}_2$, $f=a_X$, $g=a_Y$, and $c=f p=g q$. Set $E'=p^{-1}E$ and $K'=q^{-1}K$. By [prop-weil-pbc-inverse-image-exact] inverse image is exact. Applying [lem-weil-pbc-exact-functor-complex-cohomology] to a representing complex gives $\\mathcal H^i(E')=p^{-1}\\mathcal H^i(E)$ and $\\mathcal H^i(K')=q^{-1}\\mathcal H^i(K)$. These vanish below the respective lower bounds of $E,K$; hence both inverse images are bounded below. Each $p^{-1}\\mathcal H^i(E)$ is torsion by [lem-weil-pbc-inverse-image-torsion], so $E'$ has torsion cohomology. Finally [lem-kun-proper-stability] makes $q$ proper, since it is the base change of the proper $f$. These verify all the hypotheses for the integer-coefficient proper projection formula below.",
+   "uses": [
     "prop-weil-pbc-inverse-image-exact",
     "lem-weil-pbc-exact-functor-complex-cohomology",
     "lem-weil-pbc-inverse-image-torsion",
-    "lem-kun-proper-stability",
+    "lem-kun-proper-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), first sentence; exact inverse image: Tag 03Q1, label lemma-stalk-pullback (1), and homology.tex Tag 010N, label lemma-exact-functor"
+   }
+  },
+  {
+   "text": "We make explicit the point-topos identification used in proper base change. By [lem-kun-0ezp] every etale $U\\to S$ is a disjoint union $\\coprod_{i\\in I}S$. Sheaf gluing over the component cover gives $F(U)=\\prod_{i\\in I}F(S)$ for every abelian sheaf $F$, naturally under maps of such objects. The constant sheaf with value an abelian group $M$ in [def-kun-constant-sheaf] has the same formula $\\underline M(U)=\\prod_{i\\in I}M$. Thus the evaluation maps $\\underline{F(S)}\\to F$ and $M\\to\\underline M(S)$ are inverse natural identifications: sections on $S$ and the constant-sheaf functor are inverse exact equivalences. These equivalences also identify tensor products: after restriction to each component $S$, the universal property of the sheaf tensor is the universal property of the tensor of the two section groups. Applied termwise, the equivalences preserve cohomology and quasi-isomorphisms and identify $D(S_{\\Et})$ with $D(\\mathbf Z)$, including bounded-below objects. They preserve K-flat complexes, since the tensor with each acyclic complex corresponds to the tensor with its acyclic image under the inverse equivalence; consequently this identification respects derived tensor and its sign symmetry. In particular, for any complex $J$ on $S$, $J\\cong\\underline{\\RGamma(S_{\\Et},J)}$: exactness of evaluation makes its derived functor equal to evaluation itself, using the resolution recipe of [def-kun-rgamma-unbounded].",
+   "uses": [
     "lem-kun-0ezp",
     "def-kun-constant-sheaf",
-    "def-kun-rgamma-unbounded",
+    "def-kun-rgamma-unbounded"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), identification after proper base change; point-site decomposition as in lem-kun-0ezp, using the component covering and the sheaf axiom"
+   }
+  },
+  {
+   "text": "Let $A=\\RGamma(X_{\\Et},E)$ and $B=Rq_*E'$. If $E$ has no cohomology below $b$, then $Rf_*E$ has none below $b$ by [lem-kun-tensor-t-est]. By [lem-kun-leray-bdd] for $f$, $A\\cong\\RGamma(S_{\\Et},Rf_*E)$; step 2 identifies $Rf_*E$ with $\\underline A$, and shows $A\\in D^+(\\mathbf Z)$. The square $(p,q,f,g)$ is cartesian and $f$ is proper; $E$ is bounded below with torsion cohomology, so [thm-weil-pbc-bounded-below] gives the canonical exchange isomorphism $g^{-1}Rf_*E\\xrightarrow{\\sim}Rq_*p^{-1}E=B$. The constant-object identification and [lem-kun-pullback-constant] identify its source with $\\underline A$ on $Y_{\\Et}$. Consequently $B\\cong\\underline A$, by the inverse of this exchange isomorphism. No finite-type hypothesis on $Y$, nor invertibility hypothesis on the orders of the torsion, has been used.",
+   "uses": [
     "lem-kun-tensor-t-est",
     "lem-kun-leray-bdd",
     "thm-weil-pbc-bounded-below",
-    "lem-kun-pullback-constant",
-    "lem-kun-0f0f",
+    "lem-kun-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), second displayed identification; proper base change Tag 0DDE, label lemma-proper-base-change"
+   }
+  },
+  {
+   "text": "Put $T=E'\\kunotimes{\\mathbf Z}K'\\in D(W_{\\Et})$. Apply [lem-kun-0f0f] to the proper $q:W\\to Y$, the bounded-below torsion-cohomology object $E'$ of step 1, and $K\\in D^+(Y_{\\Et})$. It states that the canonical map $B\\kunotimes{\\mathbf Z}K\\longrightarrow Rq_*T$ is an isomorphism. We shall use its inverse, $Rq_*T\\xrightarrow{\\sim}B\\kunotimes{\\mathbf Z}K$, followed by the isomorphism $B\\cong\\underline A$ of step 3.",
+   "uses": [
+    "lem-kun-0f0f"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), first display; Tag 0F0F, label lemma-projection-formula-proper"
+   }
+  },
+  {
+   "text": "For clarity the Leray comparison can be taken on the whole derived category, so it needs no additional assertion about the lower bound of $T$. Use the small presentations fixed in [def-weil-size-convention], and apply [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to the etale topoi with constant ring $\\mathbf Z$, and to $q:W\\to Y$, $g:Y\\to S$. It gives $Rc_*T\\cong Rg_*Rq_*T$. Evaluating on $S$ is exact by step 2. The recipe of [def-kun-rgamma-unbounded] identifies evaluation of $Ra_{Z,*}H$ with $\\RGamma(Z_{\\Et},H)$: on a K-injective resolution $I$ of $H$ it is the identity $\\Gamma(S,a_{Z,*}I)=\\Gamma(Z,I)$. More explicitly, choose a K-injective representative $I$ of $T$ and a K-injective resolution $j:q_*I\\to J$. The cited composition theorem says $g_*j$ is a quasi-isomorphism. Exact evaluation on $S$ makes $\\Gamma(S,g_*j)=\\Gamma(Y,j)$ a quasi-isomorphism from $\\Gamma(W,I)$ to $\\Gamma(Y,J)$. These are the defining representatives of $\\RGamma(W_{\\Et},T)$ and $\\RGamma(Y_{\\Et},Rq_*T)$, so their comparison is an isomorphism. This is the canonical derived-functor composition comparison, whose bounded-below restriction is the Leray comparison in the blueprint; no finite-cohomological-dimension theorem is required.",
+   "uses": [
     "def-weil-size-convention",
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-kun-rgamma-unbounded"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, label lemma-derived-pushforward-composition; this supplies the Leray composition used in etale-cohomology.tex Tag 0F14, label lemma-kunneth-one-proper, proof (1)"
+   }
+  },
+  {
+   "text": "Composing steps 3--5 identifies $\\RGamma(W_{\\Et},T)$ with $\\RGamma(Y_{\\Et},\\underline A\\kunotimes{\\mathbf Z}K)$. Use [lem-kun-tensor-sym] on $Y_{\\Et}$ to rewrite the latter as $\\RGamma(Y_{\\Et},K\\kunotimes{\\mathbf Z}\\underline A)$. Since $Y$ is quasi-compact and quasi-separated, $K\\in D^+(Y_{\\Et})$, and $A\\in D^+(\\mathbf Z)$ by step 3, [lem-kun-0f0e] with its variables $E:=K$ and constant complex $K:=A$ supplies the inverse isomorphism to $\\RGamma(Y_{\\Et},K)\\kunotimes{\\mathbf Z}A$. A final symmetry gives $A\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)$. Here symmetry in $D(\\mathbf Z)$ is the instance of [lem-kun-tensor-sym] on $S_{\\Et}$ under the constant-sheaf/evaluation equivalence of step 2: the termwise tensor and its sign symmetry become the ordinary ones. Denote the resulting composite isomorphism by $\\theta$. This is precisely the Leray, inverse proper projection formula, inverse proper exchange, constant-complex projection formula, and symmetry composite.",
+   "uses": [
     "lem-kun-tensor-sym",
-    "lem-kun-0f0e",
+    "lem-kun-0f0e"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), last sentence; Tag 0F0E, label lemma-pull-out-constant; symmetry only reorders the displayed tensor factors"
+   }
+  },
+  {
+   "text": "To identify the specified map, specialize the current [def-kun-kunneth-map] to $S=\\Spec(k)$ and $\\Lambda=\\mathbf Z$. Put $C=Rf_*E\\kunotimes{\\mathbf Z}Rg_*K$, with $T$ as in step 4. Its map $C\\to Rc_*T$ is $Rc_*(\\alpha_{E,K})\\circ\\eta_{c,C}$, where $\\alpha_{E,K}$ first applies the inverse monoidality comparison $(\\mu^c)^{-1}$, then the canonical composition maps $\\gamma_{f,p}\\otimes\\gamma_{g,q}$, and finally the pulled-back counits $p^{-1}(\\varepsilon_{f,E})\\otimes q^{-1}(\\varepsilon_{g,K})$. Thus it is exactly the adjoint-of-counits map used in clause (a) of [lem-kun-kunneth-map-agrees]. The current definition supplies these composition maps on unbounded constant-coefficient module categories, with their module actions and composite-adjunction units; restricting to the given bounded-below inputs does not change the maps. Under the exact tensor-compatible point equivalence of step 2, the Leray identifications for $f,g,c$ identify $C$ with $A\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)$ and $Rc_*T$ with $\\RGamma(W_{\\Et},T)$. Consequently its image is the displayed global-sections morphism $\\kappa_{E,K}:A\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)\\to\\RGamma(W_{\\Et},T)$. Clause (a) of [lem-kun-kunneth-map-agrees] gives $\\theta\\circ\\kappa_{E,K}=\\mathrm{id}$ for this very map and the composite of steps 3--6. Clause (a) explicitly requires $Y$ to be quasi-compact and quasi-separated, as assumed here. Its $\\ell,e,t,r$ are respectively the canonical comparison of step 5, the exchange map of step 3, the projection-formula map of step 4, and the constant-complex projection map of step 6; its two symmetries are exactly those of step 6. We use its compatibility equation, having independently checked that every factor of $\\theta$ is an isomorphism. Multiplying the equation on the left by $\\theta^{-1}$ gives $\\kappa_{E,K}=\\theta^{-1}$, so the specified Kunneth map is an isomorphism.",
+   "uses": [
     "lem-kun-kunneth-map-agrees",
     "def-kun-kunneth-map"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), lines 20301--20322; point-site and canonical-map details expanded using the cited existing DAG statements, and Leray realized by Tag 0D6E"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Scheme, IsProper",
-      "results": "loogle: unknown identifier 'IsProper'",
-      "date": "2026-10-16",
-      "verdict": "no usable query result: loogle: unknown identifier 'IsProper'"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The Kunneth exterior product in bounded below etale cohomology over a separably closed field is an isomorphism if one factor is proper and its complex has torsion cohomology, with integer coefficients",
-      "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.Extension.tensorH1Cotangent; groupCohomology.isIso_δ_of_isZero; Rep.isZero_Tor_succ_of_projective; Rep.torIso; groupHomologyIsoTor; Rep.barResolution.extIso; Rep.standardResolution.extIso",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern formally etale ring maps or group (co)homology, not the stated scheme-theoretic etale Kunneth theorem"
-    },
-    {
-      "tool": "grep",
-      "query": "kunneth|künneth|externalProduct",
-      "results": "0 hits in Mathlib/AlgebraicGeometry",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Kunneth formula for etale cohomology of a product with a proper scheme and torsion integer coefficients",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"kunneth\"",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rightDerivedGlobalSections|projectionFormula|projection_formula",
-      "results": "0 hits in Mathlib/AlgebraicGeometry",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Etale cohomology exterior product is an isomorphism for the product of a proper scheme and a quasi compact quasi separated scheme over a separably closed field",
-      "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.FormallyEtale.instForallOfFinite; Algebra.Extension.tensorH1Cotangent; Algebra.FormallyEtale.pi_iff; Algebra.etaleLocus_eq_compl_support; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.FormallyEtale.instTensorProduct; Algebra.H1Cotangent.exact_δ_mapBaseChange",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern formally etale ring maps or group (co)homology, not the stated scheme-theoretic etale Kunneth theorem"
-    },
-    {
-      "tool": "grep",
-      "query": "kunneth|künneth",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rightDerivedGlobalSections|kunneth|Kunneth",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a proper scheme over a separably closed field, derived global sections of an external tensor product of bounded below torsion sheaves is the derived tensor product of global sections",
-      "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
-      "date": "2026-10-16",
-      "verdict": "no match: the semantic hits concern light condensed module tensor structures and internal projectivity, not etale derived global sections"
-    },
-    {
-      "tool": "grep",
-      "query": "external.product|k[uü]nneth|globalSections.*tensor|tensor.*globalSections",
-      "results": "0 hits in Mathlib/AlgebraicGeometry",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1763,
-  "blueprint_uses": [
-    "def-kun-kunneth-map",
-    "def-kun-rgamma-unbounded",
-    "def-kun-separably-closed",
-    "def-kun-torsion-invertible",
-    "def-weil-pbc-scheme-conventions",
-    "lem-kun-0f0e",
-    "lem-kun-0f0f",
-    "lem-kun-kunneth-map-agrees",
-    "lem-kun-leray-bdd",
-    "lem-kun-proper-stability",
-    "lem-kun-pullback-constant",
-    "lem-kun-tensor-sym",
-    "thm-weil-pbc-bounded-below"
-  ],
-  "uses_not_cited": [
-    "def-kun-separably-closed",
-    "def-kun-torsion-invertible",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-kun-0f14a",
-    "worker": "stage1",
-    "summary": "Statement unchanged and checked against Stacks 0F14(1). Expanded exact pullback and torsion checks, derived sections over the separably closed point, and boundedness of RΓ(X,E). The proper projection formula, proper base change and qcqs constant-complex formula give an isomorphism; the existing compatibility equation identifies it with the specified map. Used general unbounded derived-pushforward composition for the Leray comparison, avoiding an unnecessary or false sharp tensor lower-bound assertion. Reused all ingredients: no new nodes, no Mathlib leaves, no attachment. Searched Mathlib twice semantically and by source; LeanSearch was unavailable. Returned-delivery repair: revalidated every cited statement against the current DAG; replaced the obsolete Kunneth-definition quotation and expanded step 7 using its explicit inverse monoidality, module-linear composition maps, derived counits and unit/direct-image formula. The same map and original hypotheses are preserved. Fresh second reading: refreshed the compatibility-node quotation after its qcqs hypothesis and explicit unbounded composite were repaired upstream; step 7 now matches each named factor to steps 3--6.",
-    "blueprint": "Realizes the three paragraphs of lem-kun-0f14a: paragraph 1 in steps 1 and 4 (proper projection formula); paragraph 2 in steps 2, 3 and 5 (point-topos identification, proper exchange, canonical Leray); paragraph 3 in steps 6 and 7 (constant-complex formula and canonical-map compatibility). This is the one-proper-factor integer clause explicitly named in the unit statement; the unit has no proof steps and this item does not state its other clauses, so no realized binding is changed.",
-    "tool_uses": [
-      {
-        "node": "prop-weil-pbc-inverse-image-exact",
-        "why": "Generic exactness of etale inverse image verifies that pullback is termwise and commutes with cohomology; no statement of this unit gives exactness itself."
-      },
-      {
-        "node": "lem-weil-pbc-exact-functor-complex-cohomology",
-        "why": "Generic exact-functor/cohomology comparison verifies the lower-bound and torsion hypotheses on p^{-1}E; the unit does not give this general homological calculation."
-      },
-      {
-        "node": "lem-weil-pbc-inverse-image-torsion",
-        "why": "Generic preservation of torsion sheaves under inverse image, applied to each cohomology sheaf; this existing node is Lean-closed and requires no new proof."
-      },
-      {
-        "node": "thm-weil-pbc-bounded-below",
-        "why": "Proper exchange is exactly the black-box input explicitly used in the imported node proof and Stacks 0F14(1); no node of the Kunneth unit replaces proper base change."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-        "why": "Generic canonical derived-functor composition gives precisely the Leray identification on ordinary etale integer-coefficient categories without extra finite-dimension or tensor-bound hypotheses. It specializes to the unit Leray route and does not replace any geometric argument."
-      }
-    ]
-  },
-  "tool_uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-weil-pbc-inverse-image-torsion",
-    "thm-weil-pbc-bounded-below",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-Q09-e25ac1e50",
-    "group": "Q09",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-e25ac1e50 (reviewer sub-agent of L); spot-checked: Read the full item, all seven steps, every cited statement, report, and unit/chapter route. Checked Stacks 0F14, 0F1E, 0DDE, 0F0F, 0F0E, and 0D6E; coefficients, exchange direction, canonical-map compatibility, and edge cases agree. No new nodes, cycles, or necessary repairs. Accepted tool uses and detailed checks are recorded in review.md."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-73e2bf391",
-    "group": "N9",
-    "result": "pass",
-    "note": "Wrote review.md. Checked the immutable module, all nine statement dependencies, Stacks sources, canonical-map identity, hypotheses, universes, edge cases, docstrings and verbatim signature. scompile.py reproduction passed without diagnostics. No delivery errors or fixes; branch head unchanged."
-  },
-  "lean": {
-    "module": "Sheaf.EtaleCohomology.KunnethOneProper",
-    "declaration": "AlgebraicGeometry.Etale.isIso_kunneth_one_proper",
-    "statement": "theorem isIso_kunneth_one_proper (k : Type u) [Field k] [IsSepClosed k] (X Y : Scheme.{u}) (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [IsProper aX] [QuasiCompact aY] [QuasiSeparated aY] (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) (hE : DerivedCategory.torsionCohomology (ULift.{u + 1} ℤ) X (DerivedCategory.Plus.ι.obj E)) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) : IsIso (kunnethMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) (pullback.fst aX aY) (pullback.snd aX aY) aX aY ((pullback.fst aX aY) ≫ aX) rfl (pullback.condition (f := aX) (g := aY)).symm (DerivedCategory.Plus.ι.obj E) (DerivedCategory.Plus.ι.obj K))",
-    "by": "N9",
-    "date": "2026-10-16",
-    "file": "lean/Sheaf/EtaleCohomology/KunnethOneProper.lean",
-    "branch": "newtargets-dag",
-    "existing": false,
-    "note": "Repair of H3: IsIso of the fully specified canonical kunnethMap, with integer coefficients encoded by ModuleCat (ULift ℤ). The exact tensor-compatible point-topos equivalence and canonical Leray comparisons identify this map with the displayed global-sections Künneth map, and preserve and reflect IsIso. Uses the existing torsionCohomology definition; no hypothesis is added."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $k$ be a separably closed\nfield. Let $X$ be a\nproper scheme over $k$\nand let $Y$ be a\nquasi-compact and\nquasi-separated scheme over $k$. If $E\\in\\Dplus(X_{\\Et})$ has\ntorsion cohomology and\n$K\\in\\Dplus(Y_{\\Et})$, then the Kunneth map of\n[def-kun-kunneth-map] for the square\n\n$$\n\\begin{array}{ccc}\nX\\times_kY&\\xrightarrow{\\;\\operatorname{pr}_2\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle \\operatorname{pr}_1}&&\\Big\\downarrow{\\scriptstyle a_Y}\\\\\nX&\\xrightarrow{\\;a_X\\;}&\\Spec(k)\n\\end{array}\n$$\n\n$$\n\\kappa_{E,K}:\n\\RGamma(X_{\\Et},E)\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)\n\\longrightarrow\n\\RGamma\\bigl((X\\times_kY)_{\\Et},\n\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n$$\n\nis an isomorphism.",
-    "proof": [
-      {
-        "text": "By [lem-kun-proper-stability] the projection\n$\\operatorname{pr}_2:X\\times_kY\\to Y$ is proper (base change of the\nproper morphism $X\\to\\Spec(k)$). The object\n$\\pr_1^{-1}E$ has torsion cohomology and lies in\n$\\Dplus((X\\times_kY)_{\\Et})$, so by [lem-kun-0f0f] the\nprojection formula gives\n\n$$\nR\\operatorname{pr}_{2,*}\n\\bigl(\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n\\cong\nR\\operatorname{pr}_{2,*}\\pr_1^{-1}E\\kunotimes{\\mathbf Z}K .\n$$",
-        "uses": [
-          "lem-kun-proper-stability",
-          "lem-kun-0f0f"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "By proper base change in the form of\n[thm-weil-pbc-bounded-below], applied to the cartesian square of\nthe statement, we have\n\n$$\nR\\operatorname{pr}_{2,*}\\pr_1^{-1}E\\cong\n\\underline{\\RGamma(X_{\\Et},E)}\n$$\n\n(the pullback of a constant object is constant by\n[lem-kun-pullback-constant], and the derived global sections of\n[def-kun-rgamma-unbounded] compute the sections of\n$Ra_{X,*}E$); here $\\RGamma(X_{\\Et},E)\\in\\Dplus(\\mathbf Z)$ is\nbounded below because $E$ is. By [lem-kun-leray-bdd],\n\n$$\n\\RGamma\\bigl((X\\times_kY)_{\\Et},\n\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n\\cong\n\\RGamma\\bigl(Y_{\\Et},\n\\underline{\\RGamma(X_{\\Et},E)}\\kunotimes{\\mathbf Z}K\\bigr) .\n$$",
-        "uses": [
-          "thm-weil-pbc-bounded-below",
-          "lem-kun-pullback-constant",
-          "def-kun-rgamma-unbounded",
-          "lem-kun-leray-bdd"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Applying [lem-kun-0f0e] (with $E:=K$ and the constant complex\n$\\underline{\\RGamma(X_{\\Et},E)}\\in\\Dplus(\\mathbf Z)$) and then the\nsymmetry [lem-kun-tensor-sym] we obtain an isomorphism $\\theta$\nfrom\n$\\RGamma((X\\times_kY)_{\\Et},\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K)$\nto\n$\\RGamma(X_{\\Et},E)\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)$. By\n[lem-kun-kunneth-map-agrees](a),\n$\\theta\\circ\\kappa_{E,K}=\\mathrm{id}$ (with $\\kappa_{E,K}$ the\nKunneth map of [def-kun-kunneth-map]), so $\\kappa_{E,K}$ is an\nisomorphism, as desired.",
-        "uses": [
-          "lem-kun-0f0e",
-          "lem-kun-tensor-sym",
-          "lem-kun-kunneth-map-agrees",
-          "def-kun-kunneth-map"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-kunneth-map-agrees.md",
+    "place": "Clause (a), compatibility equation for theta; current def-kun-kunneth-map, alpha composite and unit/direct-image formula, compared with Stacks Tag 0F1E, label remark-define-kunneth-map"
+   }
   }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-inverse-image-torsion",
+  "lem-kun-proper-stability",
+  "lem-kun-0ezp",
+  "def-kun-constant-sheaf",
+  "def-kun-rgamma-unbounded",
+  "lem-kun-tensor-t-est",
+  "lem-kun-leray-bdd",
+  "thm-weil-pbc-bounded-below",
+  "lem-kun-pullback-constant",
+  "lem-kun-0f0f",
+  "def-weil-size-convention",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-kun-tensor-sym",
+  "lem-kun-0f0e",
+  "lem-kun-kunneth-map-agrees",
+  "def-kun-kunneth-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F14, label lemma-kunneth-one-proper, proof (1), lines 20301--20322; point-site and canonical-map details expanded using the cited existing DAG statements, and Leray realized by Tag 0D6E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, IsProper",
+   "results": "loogle: unknown identifier 'IsProper'",
+   "date": "2026-10-16",
+   "verdict": "no usable query result: loogle: unknown identifier 'IsProper'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Kunneth exterior product in bounded below etale cohomology over a separably closed field is an isomorphism if one factor is proper and its complex has torsion cohomology, with integer coefficients",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.Extension.tensorH1Cotangent; groupCohomology.isIso_δ_of_isZero; Rep.isZero_Tor_succ_of_projective; Rep.torIso; groupHomologyIsoTor; Rep.barResolution.extIso; Rep.standardResolution.extIso",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern formally etale ring maps or group (co)homology, not the stated scheme-theoretic etale Kunneth theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|künneth|externalProduct",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kunneth formula for etale cohomology of a product with a proper scheme and torsion integer coefficients",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kunneth\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedGlobalSections|projectionFormula|projection_formula",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology exterior product is an isomorphism for the product of a proper scheme and a quasi compact quasi separated scheme over a separably closed field",
+   "results": "KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale; Algebra.FormallyEtale.instForallOfFinite; Algebra.Extension.tensorH1Cotangent; Algebra.FormallyEtale.pi_iff; Algebra.etaleLocus_eq_compl_support; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.FormallyEtale.instTensorProduct; Algebra.H1Cotangent.exact_δ_mapBaseChange",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern formally etale ring maps or group (co)homology, not the stated scheme-theoretic etale Kunneth theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "kunneth|künneth",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedGlobalSections|kunneth|Kunneth",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper scheme over a separably closed field, derived global sections of an external tensor product of bounded below torsion sheaves is the derived tensor product of global sections",
+   "results": "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedLightCondMod; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-16",
+   "verdict": "no match: the semantic hits concern light condensed module tensor structures and internal projectivity, not etale derived global sections"
+  },
+  {
+   "tool": "grep",
+   "query": "external.product|k[uü]nneth|globalSections.*tensor|tensor.*globalSections",
+   "results": "0 hits in Mathlib/AlgebraicGeometry",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1763,
+ "blueprint_uses": [
+  "def-kun-kunneth-map",
+  "def-kun-rgamma-unbounded",
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-scheme-conventions",
+  "lem-kun-0f0e",
+  "lem-kun-0f0f",
+  "lem-kun-kunneth-map-agrees",
+  "lem-kun-leray-bdd",
+  "lem-kun-proper-stability",
+  "lem-kun-pullback-constant",
+  "lem-kun-tensor-sym",
+  "thm-weil-pbc-bounded-below"
+ ],
+ "uses_not_cited": [
+  "def-kun-separably-closed",
+  "def-kun-torsion-invertible",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-0f14a",
+  "worker": "stage1",
+  "summary": "Statement unchanged and checked against Stacks 0F14(1). Expanded exact pullback and torsion checks, derived sections over the separably closed point, and boundedness of RΓ(X,E). The proper projection formula, proper base change and qcqs constant-complex formula give an isomorphism; the existing compatibility equation identifies it with the specified map. Used general unbounded derived-pushforward composition for the Leray comparison, avoiding an unnecessary or false sharp tensor lower-bound assertion. Reused all ingredients: no new nodes, no Mathlib leaves, no attachment. Searched Mathlib twice semantically and by source; LeanSearch was unavailable. Returned-delivery repair: revalidated every cited statement against the current DAG; replaced the obsolete Kunneth-definition quotation and expanded step 7 using its explicit inverse monoidality, module-linear composition maps, derived counits and unit/direct-image formula. The same map and original hypotheses are preserved. Fresh second reading: refreshed the compatibility-node quotation after its qcqs hypothesis and explicit unbounded composite were repaired upstream; step 7 now matches each named factor to steps 3--6.",
+  "blueprint": "Realizes the three paragraphs of lem-kun-0f14a: paragraph 1 in steps 1 and 4 (proper projection formula); paragraph 2 in steps 2, 3 and 5 (point-topos identification, proper exchange, canonical Leray); paragraph 3 in steps 6 and 7 (constant-complex formula and canonical-map compatibility). This is the one-proper-factor integer clause explicitly named in the unit statement; the unit has no proof steps and this item does not state its other clauses, so no realized binding is changed.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic exactness of etale inverse image verifies that pullback is termwise and commutes with cohomology; no statement of this unit gives exactness itself."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic exact-functor/cohomology comparison verifies the lower-bound and torsion hypotheses on p^{-1}E; the unit does not give this general homological calculation."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-torsion",
+    "why": "Generic preservation of torsion sheaves under inverse image, applied to each cohomology sheaf; this existing node is Lean-closed and requires no new proof."
+   },
+   {
+    "node": "thm-weil-pbc-bounded-below",
+    "why": "Proper exchange is exactly the black-box input explicitly used in the imported node proof and Stacks 0F14(1); no node of the Kunneth unit replaces proper base change."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic canonical derived-functor composition gives precisely the Leray identification on ordinary etale integer-coefficient categories without extra finite-dimension or tensor-bound hypotheses. It specializes to the unit Leray route and does not replace any geometric argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-inverse-image-torsion",
+  "thm-weil-pbc-bounded-below",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-e25ac1e50",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-e25ac1e50 (reviewer sub-agent of L); spot-checked: Read the full item, all seven steps, every cited statement, report, and unit/chapter route. Checked Stacks 0F14, 0F1E, 0DDE, 0F0F, 0F0E, and 0D6E; coefficients, exchange direction, canonical-map compatibility, and edge cases agree. No new nodes, cycles, or necessary repairs. Accepted tool uses and detailed checks are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-73e2bf391",
+  "group": "N9",
+  "result": "pass",
+  "note": "Wrote review.md. Checked the immutable module, all nine statement dependencies, Stacks sources, canonical-map identity, hypotheses, universes, edge cases, docstrings and verbatim signature. scompile.py reproduction passed without diagnostics. No delivery errors or fixes; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.EtaleCohomology.KunnethOneProper",
+  "declaration": "AlgebraicGeometry.Etale.isIso_kunneth_one_proper",
+  "statement": "theorem isIso_kunneth_one_proper (k : Type u) [Field k] [IsSepClosed k] (X Y : Scheme.{u}) (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [IsProper aX] [QuasiCompact aY] [QuasiSeparated aY] (E : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) (hE : DerivedCategory.torsionCohomology (ULift.{u + 1} ℤ) X (DerivedCategory.Plus.ι.obj E)) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)))) : IsIso (kunnethMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) (pullback.fst aX aY) (pullback.snd aX aY) aX aY ((pullback.fst aX aY) ≫ aX) rfl (pullback.condition (f := aX) (g := aY)).symm (DerivedCategory.Plus.ι.obj E) (DerivedCategory.Plus.ι.obj K))",
+  "by": "N9",
+  "date": "2026-10-16",
+  "file": "lean/Sheaf/EtaleCohomology/KunnethOneProper.lean",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "note": "Repair of H3: IsIso of the fully specified canonical kunnethMap, with integer coefficients encoded by ModuleCat (ULift ℤ). The exact tensor-compatible point-topos equivalence and canonical Leray comparisons identify this map with the displayed global-sections Künneth map, and preserve and reflect IsIso. Uses the existing torsionCohomology definition; no hypothesis is added."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $k$ be a separably closed\nfield. Let $X$ be a\nproper scheme over $k$\nand let $Y$ be a\nquasi-compact and\nquasi-separated scheme over $k$. If $E\\in\\Dplus(X_{\\Et})$ has\ntorsion cohomology and\n$K\\in\\Dplus(Y_{\\Et})$, then the Kunneth map of\n[def-kun-kunneth-map] for the square\n\n$$\n\\begin{array}{ccc}\nX\\times_kY&\\xrightarrow{\\;\\operatorname{pr}_2\\;}&Y\\\\\n\\Big\\downarrow{\\scriptstyle \\operatorname{pr}_1}&&\\Big\\downarrow{\\scriptstyle a_Y}\\\\\nX&\\xrightarrow{\\;a_X\\;}&\\Spec(k)\n\\end{array}\n$$\n\n$$\n\\kappa_{E,K}:\n\\RGamma(X_{\\Et},E)\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)\n\\longrightarrow\n\\RGamma\\bigl((X\\times_kY)_{\\Et},\n\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n$$\n\nis an isomorphism.",
+  "proof": [
+   {
+    "text": "By [lem-kun-proper-stability] the projection\n$\\operatorname{pr}_2:X\\times_kY\\to Y$ is proper (base change of the\nproper morphism $X\\to\\Spec(k)$). The object\n$\\pr_1^{-1}E$ has torsion cohomology and lies in\n$\\Dplus((X\\times_kY)_{\\Et})$, so by [lem-kun-0f0f] the\nprojection formula gives\n\n$$\nR\\operatorname{pr}_{2,*}\n\\bigl(\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n\\cong\nR\\operatorname{pr}_{2,*}\\pr_1^{-1}E\\kunotimes{\\mathbf Z}K .\n$$",
+    "uses": [
+     "lem-kun-proper-stability",
+     "lem-kun-0f0f"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "By proper base change in the form of\n[thm-weil-pbc-bounded-below], applied to the cartesian square of\nthe statement, we have\n\n$$\nR\\operatorname{pr}_{2,*}\\pr_1^{-1}E\\cong\n\\underline{\\RGamma(X_{\\Et},E)}\n$$\n\n(the pullback of a constant object is constant by\n[lem-kun-pullback-constant], and the derived global sections of\n[def-kun-rgamma-unbounded] compute the sections of\n$Ra_{X,*}E$); here $\\RGamma(X_{\\Et},E)\\in\\Dplus(\\mathbf Z)$ is\nbounded below because $E$ is. By [lem-kun-leray-bdd],\n\n$$\n\\RGamma\\bigl((X\\times_kY)_{\\Et},\n\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K\\bigr)\n\\cong\n\\RGamma\\bigl(Y_{\\Et},\n\\underline{\\RGamma(X_{\\Et},E)}\\kunotimes{\\mathbf Z}K\\bigr) .\n$$",
+    "uses": [
+     "thm-weil-pbc-bounded-below",
+     "lem-kun-pullback-constant",
+     "def-kun-rgamma-unbounded",
+     "lem-kun-leray-bdd"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Applying [lem-kun-0f0e] (with $E:=K$ and the constant complex\n$\\underline{\\RGamma(X_{\\Et},E)}\\in\\Dplus(\\mathbf Z)$) and then the\nsymmetry [lem-kun-tensor-sym] we obtain an isomorphism $\\theta$\nfrom\n$\\RGamma((X\\times_kY)_{\\Et},\\pr_1^{-1}E\\kunotimes{\\mathbf Z}\\pr_2^{-1}K)$\nto\n$\\RGamma(X_{\\Et},E)\\kunotimes{\\mathbf Z}\\RGamma(Y_{\\Et},K)$. By\n[lem-kun-kunneth-map-agrees](a),\n$\\theta\\circ\\kappa_{E,K}=\\mathrm{id}$ (with $\\kappa_{E,K}$ the\nKunneth map of [def-kun-kunneth-map]), so $\\kappa_{E,K}$ is an\nisomorphism, as desired.",
+    "uses": [
+     "lem-kun-0f0e",
+     "lem-kun-tensor-sym",
+     "lem-kun-kunneth-map-agrees",
+     "def-kun-kunneth-map"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

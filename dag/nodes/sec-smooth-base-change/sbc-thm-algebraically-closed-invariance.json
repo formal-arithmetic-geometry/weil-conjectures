@@ -1,262 +1,251 @@
 {
-  "id": "sbc-thm-algebraically-closed-invariance",
-  "blueprint": {
-    "is": "sbc-thm-algebraically-closed-invariance",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Invariance under extension of algebraically closed fields",
-  "statement": "Let $k\\subseteq k'$ be algebraically closed, let $C$ be a\nsmooth separated curve\nover $k$, and let $d\\geq1$ be prime to $\\operatorname{char}k$. For\nevery $q\\geq0$ the pullback map\n\n$$\nH^q(C_{\\Et},\\mathbf Z/d\\mathbf Z)\n\\xrightarrow{\\ \\sim\\ }H^q((C_{k'})_{\\Et},\\mathbf Z/d\\mathbf Z)\n$$\n\nis an isomorphism.\n(*The connected-curve input is [thm-sc-constant-invariance] of the Jacobian chapter. Stacks Tag 0A5B gives the smooth-curve route; Tag 0A5E states the corresponding result under properness.*)",
-  "source": {
+ "id": "sbc-thm-algebraically-closed-invariance",
+ "blueprint": {
+  "is": "sbc-thm-algebraically-closed-invariance",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invariance under extension of algebraically closed fields",
+ "statement": "Let $k\\subseteq k'$ be algebraically closed, let $C$ be a\nsmooth separated curve\nover $k$, and let $d\\geq1$ be prime to $\\operatorname{char}k$. For\nevery $q\\geq0$ the pullback map\n\n$$\nH^q(C_{\\Et},\\mathbf Z/d\\mathbf Z)\n\\xrightarrow{\\ \\sim\\ }H^q((C_{k'})_{\\Et},\\mathbf Z/d\\mathbf Z)\n$$\n\nis an isomorphism.\n(*The connected-curve input is [thm-sc-constant-invariance] of the Jacobian chapter. Stacks Tag 0A5B gives the smooth-curve route; Tag 0A5E states the corresponding result under properness.*)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-algebraically-closed-invariance.md",
+  "place": "node sbc-thm-algebraically-closed-invariance, order 1412",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0A5E"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-curves",
+  "def-sc-field-extension",
+  "def-sc-constant-sheaves",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Fix $d\\ge1$ invertible in $k$ and $q\\ge0$, and write $\\pi:C_{k\\prime}\\to C$ for the base-change projection. By def-sc-constant-sheaves, $\\mathbf F_d$ means the constant abelian sheaf $\\mathbf Z/d\\mathbf Z$, also when $d$ is composite; it does not mean a field of cardinality $d$. By def-sc-field-extension the comparison $\\rho^q$ is the cohomology pullback along $\\pi$. Use the natural constant-sheaf isomorphism $\\pi^{-1}(\\mathbf Z/d\\mathbf Z)_C\\cong(\\mathbf Z/d\\mathbf Z)_{C_{k\\prime}}$ to normalize its target. Thus the comparison to be proved is exactly the displayed map, not an arbitrarily chosen isomorphism between groups.",
+   "uses": [
+    "def-sc-constant-sheaves",
+    "def-sc-field-extension",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-algebraically-closed-invariance.md",
-    "place": "node sbc-thm-algebraically-closed-invariance, order 1412",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0A5E"
-      }
-    ]
+    "place": "Proof, application of thm-sc-constant-invariance, with finite component reduction made explicit"
+   }
   },
-  "stmt_deps": [
+  {
+   "text": "Apply the smooth curve/point decomposition to $C$: write it as a finite coproduct of smooth separated connected one-dimensional curves $D_i$ and copies $P_j=\\operatorname{Spec}k$. Its hypotheses hold because a curve here is separated and finite type of dimension at most one, and smoothness is assumed. Allow either or both families to be empty. All inclusions are open and closed.",
+   "uses": [
     "def-sc-curves",
-    "def-sc-field-extension",
-    "def-sc-constant-sheaves",
-    "def-weil-pbc-etale-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Fix $d\\ge1$ invertible in $k$ and $q\\ge0$, and write $\\pi:C_{k\\prime}\\to C$ for the base-change projection. By def-sc-constant-sheaves, $\\mathbf F_d$ means the constant abelian sheaf $\\mathbf Z/d\\mathbf Z$, also when $d$ is composite; it does not mean a field of cardinality $d$. By def-sc-field-extension the comparison $\\rho^q$ is the cohomology pullback along $\\pi$. Use the natural constant-sheaf isomorphism $\\pi^{-1}(\\mathbf Z/d\\mathbf Z)_C\\cong(\\mathbf Z/d\\mathbf Z)_{C_{k\\prime}}$ to normalize its target. Thus the comparison to be proved is exactly the displayed map, not an arbitrarily chosen isomorphism between groups.",
-      "uses": [
-        "def-sc-constant-sheaves",
-        "def-sc-field-extension",
-        "lemma-constructible-pullback-constant"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-algebraically-closed-invariance.md",
-        "place": "Proof, application of thm-sc-constant-invariance, with finite component reduction made explicit"
-      }
-    },
-    {
-      "text": "Apply the smooth curve/point decomposition to $C$: write it as a finite coproduct of smooth separated connected one-dimensional curves $D_i$ and copies $P_j=\\operatorname{Spec}k$. Its hypotheses hold because a curve here is separated and finite type of dimension at most one, and smoothness is assumed. Allow either or both families to be empty. All inclusions are open and closed.",
-      "uses": [
-        "def-sc-curves",
-        "lem-sbc-smooth-curve-points-decomposition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0A5B (lemma-constant-smooth-statements), first paragraph of proof"
-      }
-    },
-    {
-      "text": "For each $D_i$, use lem-sc-compactification to choose a smooth proper connected compactification with finite closed complement. Apply thm-sc-constant-invariance with $n=d$ and this compactification. Its hypotheses are exactly algebraic closure of both fields, connectedness, smoothness, separatedness, and $d\\ge1$ prime to the characteristic. Its stated conclusion is bijectivity of the canonical $\\rho^q$ for $D_i$ in every degree. Its extra proper/affine compatibility clauses are not needed. The notation and normalization of step 1 identify this with the required constant-coefficient comparison for $D_i$.",
-      "uses": [
-        "lem-sc-compactification",
-        "thm-sc-constant-invariance"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-algebraically-closed-invariance.md",
-        "place": "Proof, application of thm-sc-constant-invariance, with finite component reduction made explicit"
-      }
-    },
-    {
-      "text": "For each $P_j=\\operatorname{Spec}k$, its base change is $\\operatorname{Spec}k\\prime$ with its unique point. The finite-geometric-point cohomology theorem with a singleton index set gives zero groups in positive degrees and identifies degree zero with the geometric stalk. The constant-stalk theorem identifies these stalks with $\\mathbf Z/d\\mathbf Z$. In degree zero the map is the identity: a constant section with value $a$ pulls back to the constant section with value $a$, by the constant-pullback unit formula (composition of the constant function with the projection). Thus the canonical comparison is bijective in degree zero too; in positive degrees it is the unique map between zero groups.",
-      "uses": [
-        "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
-        "lem-weil-pbc-constant-sheaf-geometric-stalk",
-        "lem-weil-pbc-constant-pullback-unit-continuous-map"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 03QU (lemma-compare-cohomology-point), with the singleton reduction of Tag 0A5B (lemma-constant-smooth-statements), first proof paragraph. The degree-zero constant-section calculation is the agent argument written in this step, using the canonical unit formula in lem-weil-pbc-constant-pullback-unit-continuous-map; it is not a statement of Tag 03Q1."
-      }
-    },
-    {
-      "text": "Apply finite-coproduct cohomology assembly to the decomposition of $C$, and apply the finite-coproduct constant-base-change square to its structure morphism over $k$. For every summand $E_a$ the target coordinate of the comparison of $x$ equals the comparison of the restriction $x_a$. Each summand comparison is bijective by steps 3 and 4. If two classes have the same image, component injectivity gives equality of every restriction, and source assembly gives equality of the classes. Given a target class, take the preimage of each of its finitely many target coordinates by the corresponding component bijection, then use source assembly to obtain a class with those restrictions. The coordinate equation and injectivity of target assembly show that it maps to the given class. This proves bijectivity of the precise pullback. For an empty index set both products are the zero group and the same argument applies.",
-      "uses": [
-        "lem-weil-pbc-finite-coproduct-cohomology-assembly",
-        "lem-sc-finite-coproduct-constant-base-change-square"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-algebraically-closed-invariance.md",
-        "place": "Proof, application of thm-sc-constant-invariance, with finite component reduction made explicit"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-sc-constant-sheaves",
-    "def-sc-field-extension",
-    "lemma-constructible-pullback-constant",
-    "def-sc-curves",
-    "lem-sbc-smooth-curve-points-decomposition",
+    "lem-sbc-smooth-curve-points-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A5B (lemma-constant-smooth-statements), first paragraph of proof"
+   }
+  },
+  {
+   "text": "For each $D_i$, use lem-sc-compactification to choose a smooth proper connected compactification with finite closed complement. Apply thm-sc-constant-invariance with $n=d$ and this compactification. Its hypotheses are exactly algebraic closure of both fields, connectedness, smoothness, separatedness, and $d\\ge1$ prime to the characteristic. Its stated conclusion is bijectivity of the canonical $\\rho^q$ for $D_i$ in every degree. Its extra proper/affine compatibility clauses are not needed. The notation and normalization of step 1 identify this with the required constant-coefficient comparison for $D_i$.",
+   "uses": [
     "lem-sc-compactification",
-    "thm-sc-constant-invariance",
+    "thm-sc-constant-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-algebraically-closed-invariance.md",
+    "place": "Proof, application of thm-sc-constant-invariance, with finite component reduction made explicit"
+   }
+  },
+  {
+   "text": "For each $P_j=\\operatorname{Spec}k$, its base change is $\\operatorname{Spec}k\\prime$ with its unique point. The finite-geometric-point cohomology theorem with a singleton index set gives zero groups in positive degrees and identifies degree zero with the geometric stalk. The constant-stalk theorem identifies these stalks with $\\mathbf Z/d\\mathbf Z$. In degree zero the map is the identity: a constant section with value $a$ pulls back to the constant section with value $a$, by the constant-pullback unit formula (composition of the constant function with the projection). Thus the canonical comparison is bijective in degree zero too; in positive degrees it is the unique map between zero groups.",
+   "uses": [
     "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
     "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-constant-pullback-unit-continuous-map",
+    "lem-weil-pbc-constant-pullback-unit-continuous-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QU (lemma-compare-cohomology-point), with the singleton reduction of Tag 0A5B (lemma-constant-smooth-statements), first proof paragraph. The degree-zero constant-section calculation is the agent argument written in this step, using the canonical unit formula in lem-weil-pbc-constant-pullback-unit-continuous-map; it is not a statement of Tag 03Q1."
+   }
+  },
+  {
+   "text": "Apply finite-coproduct cohomology assembly to the decomposition of $C$, and apply the finite-coproduct constant-base-change square to its structure morphism over $k$. For every summand $E_a$ the target coordinate of the comparison of $x$ equals the comparison of the restriction $x_a$. Each summand comparison is bijective by steps 3 and 4. If two classes have the same image, component injectivity gives equality of every restriction, and source assembly gives equality of the classes. Given a target class, take the preimage of each of its finitely many target coordinates by the corresponding component bijection, then use source assembly to obtain a class with those restrictions. The coordinate equation and injectivity of target assembly show that it maps to the given class. This proves bijectivity of the precise pullback. For an empty index set both products are the zero group and the same argument applies.",
+   "uses": [
     "lem-weil-pbc-finite-coproduct-cohomology-assembly",
     "lem-sc-finite-coproduct-constant-base-change-square"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-algebraically-closed-invariance.md",
-    "place": "Proof: Jacobian constant-invariance route, with Stacks 0A5B component reduction and explicit point and product calculations"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "etale.*cohomology|cohomology.*baseChange",
-      "results": "0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "no match: none states algebraically closed extension invariance of finite constant etale cohomology."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Etale cohomology of a smooth curve with finite constant coefficients is invariant under algebraically closed field extension",
-      "results": "8 hits: Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.formallyEtale_iff, Algebra.Etale.exists_subalgebra_fg, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat",
-      "date": "2026-10-14",
-      "verdict": "no match: none states algebraically closed extension invariance of finite constant etale cohomology."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"cohomology\", \"Scheme\"",
-      "results": "3 hits: AlgebraicGeometry.Scheme.EllAdicCohomology, AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology, AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat",
-      "date": "2026-10-14",
-      "verdict": "no match: none states algebraically closed extension invariance of finite constant etale cohomology."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Etale cohomology base change algebraically closed fields",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Pullback on finite constant sheaf cohomology for algebraically closed base field extensions is bijective",
-      "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj, SheafOfModules.bijective_pushforwardSections, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_bijective_toPullbackObj, CategoryTheory.PreGaloisCategory.evaluation_aut_bijective_of_isGalois, SheafOfModules.pullbackObjFreeIso, CategoryTheory.PreGaloisCategory.exists_galois_representative, PresheafOfModules.homEquivOfIsLocallyBijective_apply",
-      "date": "2026-10-14",
-      "verdict": "no match: none states algebraically closed extension invariance of finite constant etale cohomology."
-    },
-    {
-      "tool": "grep",
-      "query": "base.change|invariance",
-      "results": "2 hits: Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean",
-      "date": "2026-10-14",
-      "verdict": "no match: none states algebraically closed extension invariance of finite constant etale cohomology."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1412,
-  "blueprint_uses": [
-    "def-weil-pbc-etale-cohomology",
-    "def-weil-pbc-scheme-conventions",
-    "thm-sc-constant-invariance"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-thm-vanishing",
-  "lean": {
-    "existing": true,
-    "module": "Sheaf.AlgebraicGeometry.SmoothCurveAlgClosedExtension",
-    "file": "lean/Sheaf/AlgebraicGeometry/SmoothCurveAlgClosedExtension.lean",
-    "declaration": "AlgebraicGeometry.bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension",
-    "statement": "theorem bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension {k : Type u}\n    [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))\n    [SmoothOfRelativeDimension 1 f] [IsSeparated f] [QuasiCompact f] {k' : Type u} [Field k']\n    [IsAlgClosed k'] [Algebra k k'] (d : ℕ) (hd : (d : k) ≠ 0) (q : ℕ) :\n    Function.Bijective (Etale.cohomologyMap\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) (C.constantZMod d) q)",
-    "branch": "sheaf-dag",
-    "by": "X2",
-    "date": "2026-10-14"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "X-a32f0",
-    "group": "X2",
-    "result": "pass",
-    "landing": "20261014T161711-L-1952065",
-    "kind": "interface",
-    "note": "independent Codex review: Matched delivered signatures, proofs, remaining continuity hole, nodes, change record and repaired report; verified compilation, direct importers, axioms and source-cycle necessity."
-  },
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "sbc-thm-algebraically-closed-invariance",
-    "worker": "stage1",
-    "summary": "Retained the full dimension-at-most-one curve statement and the Jacobian invariance route. Added one statement-only geometric decomposition lemma to handle point components; supplied the point comparison and exact finite-product argument. No attachment: the slopmaster2 wrapper depends on a sorry theorem. Corrected the claim that Stacks 0A5E covers the nonproper case in the report. Maintainer-reader citation repair: step 4 no longer attributes the constant-section unit formula to Stacks 03Q1, whose actual statement concerns inverse-image exactness and stalks; the written argument and cited unit-formula node are unchanged.",
-    "blueprint": "Realizes the sole proof paragraph applying thm-sc-constant-invariance, expanding its connectedness and compactification hypotheses and identifying the exact canonical pullback. The unit sk-thm-vanishing uses precisely this invariance input in its q=1 step.",
-    "tool_uses": [
-      {
-        "node": "lemma-constructible-pullback-constant",
-        "why": "Generic constant-sheaf or finite-clopen cohomology tool needed to pass from connected curve invariance to the full curve statement; the unit supplies no replacement."
-      },
-      {
-        "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
-        "why": "Generic constant-sheaf or finite-clopen cohomology tool needed to pass from connected curve invariance to the full curve statement; the unit supplies no replacement."
-      },
-      {
-        "node": "lem-weil-pbc-constant-pullback-unit-continuous-map",
-        "why": "Generic constant-sheaf or finite-clopen cohomology tool needed to pass from connected curve invariance to the full curve statement; the unit supplies no replacement."
-      },
-      {
-        "node": "lem-weil-pbc-finite-coproduct-cohomology-assembly",
-        "why": "Generic constant-sheaf or finite-clopen cohomology tool needed to pass from connected curve invariance to the full curve statement; the unit supplies no replacement."
-      },
-      {
-        "node": "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
-        "why": "Generic constant-sheaf or finite-clopen cohomology tool needed to pass from connected curve invariance to the full curve statement; the unit supplies no replacement."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lemma-constructible-pullback-constant",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-constant-pullback-unit-continuous-map",
-    "lem-weil-pbc-finite-coproduct-cohomology-assembly",
-    "lem-weil-pbc-finite-geometric-point-coproduct-cohomology"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NW-a1c37faf6",
-    "group": "NW",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-a1c37faf6 (reviewer sub-agent of L); spot-checked: Read the full delivery mathematics, cited statements, source passages, and unit/chapter route. Verified canonical pullback, abelian Z/d coefficients, composite d, point components, empty curves, and duplicate candidates. Corrected one B5 citation error: Stacks 03Q1 does not state the constant-section unit formula. Whole corrected item JSON is under fixes/dag/nodes/sec-smooth-base-change/; concrete checks and accepted tool_uses are in review.md. Mathematical statements and dependencies are unchanged.; 1 file(s) fixed by the reviewer"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $k\\subseteq k'$ be algebraically closed, let $C$ be a\nsmooth separated curve\nover $k$, and let $d\\geq1$ be prime to $\\operatorname{char}k$. For\nevery $q\\geq0$ the pullback map\n\n$$\nH^q(C_{\\Et},\\mathbf Z/d\\mathbf Z)\n\\xrightarrow{\\ \\sim\\ }H^q((C_{k'})_{\\Et},\\mathbf Z/d\\mathbf Z)\n$$\n\nis an isomorphism.",
-    "proof": [
-      {
-        "text": "This is [thm-sc-constant-invariance] of the Jacobian chapter (applied with\n$n=d$), which proves the same assertion for the constant sheaf\n$\\mathbf F_d$; this is the displayed pullback map by the definition of\nthe etale cohomology of [def-weil-pbc-etale-cohomology].",
-        "uses": [
-          "thm-sc-constant-invariance",
-          "def-weil-pbc-etale-cohomology"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "place": "Proof, application of thm-sc-constant-invariance, with finite component reduction made explicit"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-sc-constant-sheaves",
+  "def-sc-field-extension",
+  "lemma-constructible-pullback-constant",
+  "def-sc-curves",
+  "lem-sbc-smooth-curve-points-decomposition",
+  "lem-sc-compactification",
+  "thm-sc-constant-invariance",
+  "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-constant-pullback-unit-continuous-map",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "lem-sc-finite-coproduct-constant-base-change-square"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-thm-vanishing/sbc-thm-algebraically-closed-invariance.md",
+  "place": "Proof: Jacobian constant-invariance route, with Stacks 0A5B component reduction and explicit point and product calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "etale.*cohomology|cohomology.*baseChange",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: none states algebraically closed extension invariance of finite constant etale cohomology."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of a smooth curve with finite constant coefficients is invariant under algebraically closed field extension",
+   "results": "8 hits: Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.formallyEtale_iff, Algebra.Etale.exists_subalgebra_fg, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-14",
+   "verdict": "no match: none states algebraically closed extension invariance of finite constant etale cohomology."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"Scheme\"",
+   "results": "3 hits: AlgebraicGeometry.Scheme.EllAdicCohomology, AlgebraicGeometry.Scheme.instAddCommGroupEllAdicCohomology, AlgebraicGeometry.Scheme.instSubsingletonEllAdicCohomologyOfIsEmptyCarrierCarrierCommRingCat",
+   "date": "2026-10-14",
+   "verdict": "no match: none states algebraically closed extension invariance of finite constant etale cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology base change algebraically closed fields",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback on finite constant sheaf cohomology for algebraically closed base field extensions is bijective",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition.bijective_toPullbackObj, SheafOfModules.bijective_pushforwardSections, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_bijective_toPullbackObj, CategoryTheory.PreGaloisCategory.evaluation_aut_bijective_of_isGalois, SheafOfModules.pullbackObjFreeIso, CategoryTheory.PreGaloisCategory.exists_galois_representative, PresheafOfModules.homEquivOfIsLocallyBijective_apply",
+   "date": "2026-10-14",
+   "verdict": "no match: none states algebraically closed extension invariance of finite constant etale cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "base.change|invariance",
+   "results": "2 hits: Mathlib/AlgebraicGeometry/Sites/Pretopology.lean, Mathlib/AlgebraicGeometry/Sites/MorphismProperty.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: none states algebraically closed extension invariance of finite constant etale cohomology."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1412,
+ "blueprint_uses": [
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-pbc-scheme-conventions",
+  "thm-sc-constant-invariance"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-thm-vanishing",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.AlgebraicGeometry.SmoothCurveAlgClosedExtension",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothCurveAlgClosedExtension.lean",
+  "declaration": "AlgebraicGeometry.bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension",
+  "statement": "theorem bijective_cohomologyMap_constantZMod_of_smoothOfRelativeDimension {k : Type u}\n    [Field k] [IsAlgClosed k] {C : Scheme.{u}} (f : C ⟶ Spec (.of k))\n    [SmoothOfRelativeDimension 1 f] [IsSeparated f] [QuasiCompact f] {k' : Type u} [Field k']\n    [IsAlgClosed k'] [Algebra k k'] (d : ℕ) (hd : (d : k) ≠ 0) (q : ℕ) :\n    Function.Bijective (Etale.cohomologyMap\n      (pullback.fst f (Spec.map (CommRingCat.ofHom (algebraMap k k')))) (C.constantZMod d) q)",
+  "branch": "sheaf-dag",
+  "by": "X2",
+  "date": "2026-10-14"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "X-a32f0",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261014T161711-L-1952065",
+  "kind": "interface",
+  "note": "independent Codex review: Matched delivered signatures, proofs, remaining continuity hole, nodes, change record and repaired report; verified compilation, direct importers, axioms and source-cycle necessity."
+ },
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "sbc-thm-algebraically-closed-invariance",
+  "worker": "stage1",
+  "summary": "Retained the full dimension-at-most-one curve statement and the Jacobian invariance route. Added one statement-only geometric decomposition lemma to handle point components; supplied the point comparison and exact finite-product argument. No attachment: the slopmaster2 wrapper depends on a sorry theorem. Corrected the claim that Stacks 0A5E covers the nonproper case in the report. Maintainer-reader citation repair: step 4 no longer attributes the constant-section unit formula to Stacks 03Q1, whose actual statement concerns inverse-image exactness and stalks; the written argument and cited unit-formula node are unchanged.",
+  "blueprint": "Realizes the sole proof paragraph applying thm-sc-constant-invariance, expanding its connectedness and compactification hypotheses and identifying the exact canonical pullback. The unit sk-thm-vanishing uses precisely this invariance input in its q=1 step.",
+  "tool_uses": [
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic constant-sheaf or finite-clopen cohomology tool needed to pass from connected curve invariance to the full curve statement; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic constant-sheaf or finite-clopen cohomology tool needed to pass from connected curve invariance to the full curve statement; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-constant-pullback-unit-continuous-map",
+    "why": "Generic constant-sheaf or finite-clopen cohomology tool needed to pass from connected curve invariance to the full curve statement; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+    "why": "Generic constant-sheaf or finite-clopen cohomology tool needed to pass from connected curve invariance to the full curve statement; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-geometric-point-coproduct-cohomology",
+    "why": "Generic constant-sheaf or finite-clopen cohomology tool needed to pass from connected curve invariance to the full curve statement; the unit supplies no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-constant-pullback-unit-continuous-map",
+  "lem-weil-pbc-finite-coproduct-cohomology-assembly",
+  "lem-weil-pbc-finite-geometric-point-coproduct-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NW-a1c37faf6",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NW-a1c37faf6 (reviewer sub-agent of L); spot-checked: Read the full delivery mathematics, cited statements, source passages, and unit/chapter route. Verified canonical pullback, abelian Z/d coefficients, composite d, point components, empty curves, and duplicate candidates. Corrected one B5 citation error: Stacks 03Q1 does not state the constant-section unit formula. Whole corrected item JSON is under fixes/dag/nodes/sec-smooth-base-change/; concrete checks and accepted tool_uses are in review.md. Mathematical statements and dependencies are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $k\\subseteq k'$ be algebraically closed, let $C$ be a\nsmooth separated curve\nover $k$, and let $d\\geq1$ be prime to $\\operatorname{char}k$. For\nevery $q\\geq0$ the pullback map\n\n$$\nH^q(C_{\\Et},\\mathbf Z/d\\mathbf Z)\n\\xrightarrow{\\ \\sim\\ }H^q((C_{k'})_{\\Et},\\mathbf Z/d\\mathbf Z)\n$$\n\nis an isomorphism.",
+  "proof": [
+   {
+    "text": "This is [thm-sc-constant-invariance] of the Jacobian chapter (applied with\n$n=d$), which proves the same assertion for the constant sheaf\n$\\mathbf F_d$; this is the displayed pullback map by the definition of\nthe etale cohomology of [def-weil-pbc-etale-cohomology].",
+    "uses": [
+     "thm-sc-constant-invariance",
+     "def-weil-pbc-etale-cohomology"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

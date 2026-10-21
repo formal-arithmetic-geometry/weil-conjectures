@@ -1,254 +1,243 @@
 {
-  "id": "lem-finrepair-projective-from-line",
-  "blueprint": {
-    "is": "lem-finrepair-projective-from-line",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Projective constructibility from projective-line constructibility",
-  "statement": "Suppose $\\mathcal C(\\mathbf P^1_T\\to T)$ holds for every\nfinite-type $k$-scheme $T$. Then $\\mathcal C(f)$ holds for\nevery projective morphism $f:X\\to S$ between finite-type\n$k$-schemes, using the conventions of\n[def-finrepair-property-c], [def-weil-pbc-scheme-conventions].\nHere projective has the closed-embedding convention of [def-pc-projective-morphism].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-    "place": "node lem-finrepair-projective-from-line, order 1600"
-  },
-  "stmt_deps": [
-    "def-finrepair-property-c",
-    "def-weil-pbc-scheme-conventions",
-    "def-pc-projective-morphism"
-  ],
-  "proof": [
-    {
-      "text": "Use the supplied closed embedding e:X→ℙ(N;S) with f=e≫p, as in [def-pc-projective-morphism]. The index N is finite and is allowed to be empty. It suffices to prove C(e) and C(p), then apply [lem-finrepair-composition-c].",
-      "uses": [
-        "def-pc-projective-morphism",
-        "lem-finrepair-composition-c"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-        "place": "Proof; source-library implementation in F1 Projective delivery"
-      }
-    },
-    {
-      "text": "The structure projection of every finite-coordinate projective space is proper by [lemma-nagata-projective-space-base-change-proper]. Thus its composites with a finite-type map to Spec k are finite type, using [def-weil-proper-morphism] and [def-weil-finite-type-morphism]. Over the Noetherian field k, [lem-weil-pbc-finite-type-over-noetherian] makes S and ℙ(N;S) Noetherian. These instances suffice for the finite-surjection cancellation and for the quasi-compactness of open complements of closed immersions.",
-      "uses": [
-        "lemma-nagata-projective-space-base-change-proper",
-        "def-weil-proper-morphism",
-        "def-weil-finite-type-morphism",
-        "lem-weil-pbc-finite-type-over-noetherian"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-        "place": "Proof; source-library implementation in F1 Projective delivery"
-      }
-    },
-    {
-      "text": "A closed immersion into a Noetherian scheme satisfies C: by [lem-fin-closed-immersion], its underived direct image of a constructible sheaf is constructible and its positive derived images vanish. Equivalently, exactness identifies its total derived image of F[0] with (e_*F)[0]; the latter has constructible homology by [def-weil-pbc-constructible-complexes]. This proves C in [def-finrepair-property-c], and applies also to an identity and to a map from an empty scheme.",
-      "uses": [
-        "lem-fin-closed-immersion",
-        "def-weil-pbc-constructible-complexes",
-        "def-finrepair-property-c"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-        "place": "Proof; source-library implementation in F1 Projective delivery"
-      }
-    },
-    {
-      "text": "Define Z_0=S, Z_(m+1)=ℙ¹_(Z_m), with tower projection q_m:Z_m→S, using the base-change presentation [def-nagata-projective-space-base-change]. Induction gives properness of every q_m from properness of projective-line projections [lemma-nagata-projective-space-base-change-proper]. Consequently Z_m→Spec k is finite type. The identity case of Step 3 gives C(q_0). At the successor, the universally quantified hypothesis gives C(ℙ¹_(Z_m)→Z_m), and [lem-finrepair-composition-c] composes it with C(q_m). Hence C(q_m) for every m.",
-      "uses": [
-        "def-nagata-projective-space-base-change",
-        "lemma-nagata-projective-space-base-change-proper",
-        "lem-finrepair-composition-c"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-        "place": "Proof; source-library implementation in F1 Projective delivery"
-      }
-    },
-    {
-      "text": "If N is nonempty, use the source-library form of [lem-weil-pbc-symmetric-product-finite], namely ProjectiveSpace.exists_isFinite_surjective_projectiveLinePow: it supplies m and a finite surjective σ:Z_m→ℙ(N;S) with σ≫p=q_m. Unlike the older Noetherian wrapper, this existing proved declaration already handles arbitrary finite nonempty coordinate types and m=0. Apply [lem-finrepair-finite-surjection-cancellation] over the finite-type k-scheme ℙ(N;S) to the equality and Step 4, obtaining C(p). If N is empty, projective space is empty by its standard-open cover; p is then a closed immersion and Step 3 gives C(p) directly.",
-      "uses": [
-        "lem-weil-pbc-symmetric-product-finite",
-        "lem-finrepair-finite-surjection-cancellation",
-        "def-nagata-projective-space-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-        "place": "Proof; source-library implementation in F1 Projective delivery"
-      }
-    },
-    {
-      "text": "Step 3 gives C(e) and Step 5 gives C(p). Apply [lem-finrepair-composition-c], then rewrite e≫p=f. This proves the stated projective reduction without imposing any coefficient exponent beyond the original finite-ring hypothesis.",
-      "uses": [
-        "lem-finrepair-composition-c"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-        "place": "Proof; source-library implementation in F1 Projective delivery"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-finrepair-projective-from-line",
+ "blueprint": {
+  "is": "lem-finrepair-projective-from-line",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Projective constructibility from projective-line constructibility",
+ "statement": "Suppose $\\mathcal C(\\mathbf P^1_T\\to T)$ holds for every\nfinite-type $k$-scheme $T$. Then $\\mathcal C(f)$ holds for\nevery projective morphism $f:X\\to S$ between finite-type\n$k$-schemes, using the conventions of\n[def-finrepair-property-c], [def-weil-pbc-scheme-conventions].\nHere projective has the closed-embedding convention of [def-pc-projective-morphism].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
+  "place": "node lem-finrepair-projective-from-line, order 1600"
+ },
+ "stmt_deps": [
+  "def-finrepair-property-c",
+  "def-weil-pbc-scheme-conventions",
+  "def-pc-projective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use the supplied closed embedding e:X→ℙ(N;S) with f=e≫p, as in [def-pc-projective-morphism]. The index N is finite and is allowed to be empty. It suffices to prove C(e) and C(p), then apply [lem-finrepair-composition-c].",
+   "uses": [
     "def-pc-projective-morphism",
-    "lem-finrepair-composition-c",
+    "lem-finrepair-composition-c"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
+    "place": "Proof; source-library implementation in F1 Projective delivery"
+   }
+  },
+  {
+   "text": "The structure projection of every finite-coordinate projective space is proper by [lemma-nagata-projective-space-base-change-proper]. Thus its composites with a finite-type map to Spec k are finite type, using [def-weil-proper-morphism] and [def-weil-finite-type-morphism]. Over the Noetherian field k, [lem-weil-pbc-finite-type-over-noetherian] makes S and ℙ(N;S) Noetherian. These instances suffice for the finite-surjection cancellation and for the quasi-compactness of open complements of closed immersions.",
+   "uses": [
     "lemma-nagata-projective-space-base-change-proper",
     "def-weil-proper-morphism",
     "def-weil-finite-type-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
+    "place": "Proof; source-library implementation in F1 Projective delivery"
+   }
+  },
+  {
+   "text": "A closed immersion into a Noetherian scheme satisfies C: by [lem-fin-closed-immersion], its underived direct image of a constructible sheaf is constructible and its positive derived images vanish. Equivalently, exactness identifies its total derived image of F[0] with (e_*F)[0]; the latter has constructible homology by [def-weil-pbc-constructible-complexes]. This proves C in [def-finrepair-property-c], and applies also to an identity and to a map from an empty scheme.",
+   "uses": [
     "lem-fin-closed-immersion",
     "def-weil-pbc-constructible-complexes",
-    "def-finrepair-property-c",
-    "def-nagata-projective-space-base-change",
-    "lem-weil-pbc-symmetric-product-finite",
-    "lem-finrepair-finite-surjection-cancellation"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "def-finrepair-property-c"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-    "place": "Proof, with existing source-library tower, finite-surjection cancellation and symmetric-product declarations; F1 2026-10-18"
+    "place": "Proof; source-library implementation in F1 Projective delivery"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "If higher direct images of constructible etale torsion sheaves along every projective line projection are constructible, they are constructible along every projective morphism",
-      "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; PrimeSpectrum.isConstructible_comap_image; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; PrimeSpectrum.exists_range_eq_of_isConstructible; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Proj.fromOfGlobalSections",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.IsProjective",
-      "results": "none; loogle: unknown identifier 'AlgebraicGeometry.IsProjective'",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible.*projective|projective.*constructible",
-      "results": "none",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
-    },
-    {
-      "tool": "leansearch",
-      "query": "constructibility of higher etale direct images for projective morphisms from the projective line",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Projective space covered by finite surjection from product of projective lines implies preservation of constructible sheaves",
-      "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop; AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; ProjectiveSpectrum.basicOpen_eq_union_of_projection; AlgebraicGeometry.Proj.openCoverOfISupEqTop",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.IsProper",
-      "results": "AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget; AlgebraicGeometry.IsProper.instIsMultiplicativeScheme; AlgebraicGeometry.IsProper.instRespectsIsoScheme; AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsProper.stableUnderComposition; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated; AlgebraicGeometry.IsProper; AlgebraicGeometry.instIsProperOfIsFinite",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible|higher direct image",
-      "results": "none",
-      "date": "2026-10-14",
-      "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
-    },
-    {
-      "tool": "grep",
-      "query": "IsConstructibleSheaf|isConstructibleSheaf",
-      "results": "none",
-      "date": "2026-10-14",
-      "verdict": "no match: semantic hits concern Proj morphisms, structure sheaves or internally projective condensed modules; Mathlib grep has no IsConstructibleSheaf declaration"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Constructible sheaves of modules higher direct image projective scheme projective space reduction",
-      "results": "AlgebraicGeometry.Proj.fromOfGlobalSections; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget; AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc; AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc; AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero; AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict; AlgebraicGeometry.Proj.fromOfGlobalSections_resLE; LightCondensed.free_internallyProjective_iff_tensor_condition'",
-      "date": "2026-10-14",
-      "verdict": "no match: semantic hits concern Proj morphisms, structure sheaves or internally projective condensed modules; Mathlib grep has no IsConstructibleSheaf declaration"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1600,
-  "blueprint_uses": [
-    "def-finrepair-property-c",
-    "def-weil-pbc-scheme-conventions",
-    "lem-fin-closed-immersion",
-    "lem-fin-symmetric-product-finite",
-    "lem-finrepair-composition-c",
-    "lem-finrepair-finite-surjection-cancellation"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "Define Z_0=S, Z_(m+1)=ℙ¹_(Z_m), with tower projection q_m:Z_m→S, using the base-change presentation [def-nagata-projective-space-base-change]. Induction gives properness of every q_m from properness of projective-line projections [lemma-nagata-projective-space-base-change-proper]. Consequently Z_m→Spec k is finite type. The identity case of Step 3 gives C(q_0). At the successor, the universally quantified hypothesis gives C(ℙ¹_(Z_m)→Z_m), and [lem-finrepair-composition-c] composes it with C(q_m). Hence C(q_m) for every m.",
+   "uses": [
+    "def-nagata-projective-space-base-change",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-finrepair-composition-c"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
+    "place": "Proof; source-library implementation in F1 Projective delivery"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-cbc",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-finrepair-projective-from-line",
-    "worker": "stage1",
-    "summary": "Retained the symmetric-product/composition/cancellation route. Explicitly cited the existing H-projective convention; omitted unnecessary target localization, proved finite-type conditions from standard charts, verified Noetherianity using an existing lemma, and wrote the product induction and n=0 case. No new nodes.",
-    "blueprint": "First paragraph: projective embedding (global under the current convention, so localization is unnecessary). Second paragraph: finite-type product bases, product induction, symmetric-product finite surjection and cancellation, n=0, closed immersion and composition."
+  {
+   "text": "If N is nonempty, use the source-library form of [lem-weil-pbc-symmetric-product-finite], namely ProjectiveSpace.exists_isFinite_surjective_projectiveLinePow: it supplies m and a finite surjective σ:Z_m→ℙ(N;S) with σ≫p=q_m. Unlike the older Noetherian wrapper, this existing proved declaration already handles arbitrary finite nonempty coordinate types and m=0. Apply [lem-finrepair-finite-surjection-cancellation] over the finite-type k-scheme ℙ(N;S) to the equality and Step 4, obtaining C(p). If N is empty, projective space is empty by its standard-open cover; p is then a closed immersion and Step 3 gives C(p) directly.",
+   "uses": [
+    "lem-weil-pbc-symmetric-product-finite",
+    "lem-finrepair-finite-surjection-cancellation",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
+    "place": "Proof; source-library implementation in F1 Projective delivery"
+   }
   },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NA-8d30ed88c",
-    "group": "NA",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-8d30ed88c (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, master sources, and unit/chapter route. All six steps satisfy their hypotheses; H-projectivity matches the blueprint convention. Checked edge cases, duplicate/generalization candidates, and exact target coefficients and base-change expressions. No new nodes, repairs, or accepted tool_uses. Detailed findings and inherited DAG defects are recorded in review.md."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.ProjectiveConstructibilityFromLine",
-    "declaration": "AlgebraicGeometry.Etale.hasConstructibleHigherDirectImages_of_projectiveLine",
-    "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveConstructibilityFromLine.lean",
-    "statement": "theorem hasConstructibleHigherDirectImages_of_projectiveLine (k : Type u) [Field k] (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hline : ∀ (T : Scheme.{u}) [T.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] (hP : IsSmoothBaseChangeCoefficients N Λ (ProjectiveSpace (ULift.{u} (Fin 2)) T)) (hT : IsSmoothBaseChangeCoefficients N Λ T), @HasConstructibleHigherDirectImages k _ N Λ _ _ (ProjectiveSpace (ULift.{u} (Fin 2)) T) T _ _ (inferInstanceAs (LocallyOfFiniteType ((ProjectiveSpace (ULift.{u} (Fin 2)) T ↘ T) ≫ T ↘ Spec (.of k)))) (inferInstanceAs (QuasiCompact ((ProjectiveSpace (ULift.{u} (Fin 2)) T ↘ T) ≫ T ↘ Spec (.of k)))) _ _ hP hT (ProjectiveSpace (ULift.{u} (Fin 2)) T ↘ T)) {X S : Scheme.{u}} [X.Over (Spec (.of k))] [S.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (hX : IsSmoothBaseChangeCoefficients N Λ X) (hS : IsSmoothBaseChangeCoefficients N Λ S) (f : X ⟶ S) [IsProjective f] : HasConstructibleHigherDirectImages k N Λ hX hS f",
-    "branch": "newtargets-dag",
-    "by": "NL",
-    "date": "2026-10-15",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-0cdcd6744",
-    "group": "NL",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable files, all statement dependencies, sources, exact declarations, hypotheses, edge cases, docstrings, records, and verbatim signature. Server-only compile passed in 2.8 seconds. No delivery errors found; repository and branch unchanged."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "F1",
-    "result": "pass",
-    "landing": "20261018T062743-L-647282",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Step 3 gives C(e) and Step 5 gives C(p). Apply [lem-finrepair-composition-c], then rewrite e≫p=f. This proves the stated projective reduction without imposing any coefficient exponent beyond the original finite-ring hypothesis.",
+   "uses": [
+    "lem-finrepair-composition-c"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
+    "place": "Proof; source-library implementation in F1 Projective delivery"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-projective-morphism",
+  "lem-finrepair-composition-c",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-closed-immersion",
+  "def-weil-pbc-constructible-complexes",
+  "def-finrepair-property-c",
+  "def-nagata-projective-space-base-change",
+  "lem-weil-pbc-symmetric-product-finite",
+  "lem-finrepair-finite-surjection-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
+  "place": "Proof, with existing source-library tower, finite-surjection cancellation and symmetric-product declarations; F1 2026-10-18"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "If higher direct images of constructible etale torsion sheaves along every projective line projection are constructible, they are constructible along every projective morphism",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Scheme.Hom.isConstructible_preimage; PrimeSpectrum.isConstructible_comap_image; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; PrimeSpectrum.exists_range_eq_of_isConstructible; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Proj.fromOfGlobalSections",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProjective",
+   "results": "none; loogle: unknown identifier 'AlgebraicGeometry.IsProjective'",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*projective|projective.*constructible",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructibility of higher etale direct images for projective morphisms from the projective line",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective space covered by finite surjection from product of projective lines implies preservation of constructible sheaves",
+   "results": "AlgebraicGeometry.Scheme.Hom.isConstructible_image; AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop; AlgebraicGeometry.Proj.openCoverOfMapIrrelevantEqTop; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; ProjectiveSpectrum.basicOpen_eq_union_of_projection; AlgebraicGeometry.Proj.openCoverOfISupEqTop",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper",
+   "results": "AlgebraicGeometry.IsProper.instIsZariskiLocalAtTarget; AlgebraicGeometry.IsProper.instIsMultiplicativeScheme; AlgebraicGeometry.IsProper.instRespectsIsoScheme; AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsProper.stableUnderComposition; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated; AlgebraicGeometry.IsProper; AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|higher direct image",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: hits concern constructible subsets, Proj geometry or proper morphisms, not constructible etale higher direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructibleSheaf|isConstructibleSheaf",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match: semantic hits concern Proj morphisms, structure sheaves or internally projective condensed modules; Mathlib grep has no IsConstructibleSheaf declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves of modules higher direct image projective scheme projective space reduction",
+   "results": "AlgebraicGeometry.Proj.fromOfGlobalSections; AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structurePresheafCompForget; AlgebraicGeometry.ProjectiveSpectrum.Proj.toOpen_toSpec_val_c_app_assoc; AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero_assoc; AlgebraicGeometry.Proj.fromOfGlobalSections_toSpecZero; AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict; AlgebraicGeometry.Proj.fromOfGlobalSections_resLE; LightCondensed.free_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-14",
+   "verdict": "no match: semantic hits concern Proj morphisms, structure sheaves or internally projective condensed modules; Mathlib grep has no IsConstructibleSheaf declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1600,
+ "blueprint_uses": [
+  "def-finrepair-property-c",
+  "def-weil-pbc-scheme-conventions",
+  "lem-fin-closed-immersion",
+  "lem-fin-symmetric-product-finite",
+  "lem-finrepair-composition-c",
+  "lem-finrepair-finite-surjection-cancellation"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-finrepair-projective-from-line",
+  "worker": "stage1",
+  "summary": "Retained the symmetric-product/composition/cancellation route. Explicitly cited the existing H-projective convention; omitted unnecessary target localization, proved finite-type conditions from standard charts, verified Noetherianity using an existing lemma, and wrote the product induction and n=0 case. No new nodes.",
+  "blueprint": "First paragraph: projective embedding (global under the current convention, so localization is unnecessary). Second paragraph: finite-type product bases, product induction, symmetric-product finite surjection and cancellation, n=0, closed immersion and composition."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-8d30ed88c",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-8d30ed88c (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, master sources, and unit/chapter route. All six steps satisfy their hypotheses; H-projectivity matches the blueprint convention. Checked edge cases, duplicate/generalization candidates, and exact target coefficients and base-change expressions. No new nodes, repairs, or accepted tool_uses. Detailed findings and inherited DAG defects are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveConstructibilityFromLine",
+  "declaration": "AlgebraicGeometry.Etale.hasConstructibleHigherDirectImages_of_projectiveLine",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveConstructibilityFromLine.lean",
+  "statement": "theorem hasConstructibleHigherDirectImages_of_projectiveLine (k : Type u) [Field k] (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (hline : ∀ (T : Scheme.{u}) [T.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] (hP : IsSmoothBaseChangeCoefficients N Λ (ProjectiveSpace (ULift.{u} (Fin 2)) T)) (hT : IsSmoothBaseChangeCoefficients N Λ T), @HasConstructibleHigherDirectImages k _ N Λ _ _ (ProjectiveSpace (ULift.{u} (Fin 2)) T) T _ _ (inferInstanceAs (LocallyOfFiniteType ((ProjectiveSpace (ULift.{u} (Fin 2)) T ↘ T) ≫ T ↘ Spec (.of k)))) (inferInstanceAs (QuasiCompact ((ProjectiveSpace (ULift.{u} (Fin 2)) T ↘ T) ≫ T ↘ Spec (.of k)))) _ _ hP hT (ProjectiveSpace (ULift.{u} (Fin 2)) T ↘ T)) {X S : Scheme.{u}} [X.Over (Spec (.of k))] [S.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (hX : IsSmoothBaseChangeCoefficients N Λ X) (hS : IsSmoothBaseChangeCoefficients N Λ S) (f : X ⟶ S) [IsProjective f] : HasConstructibleHigherDirectImages k N Λ hX hS f",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0cdcd6744",
+  "group": "NL",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, sources, exact declarations, hypotheses, edge cases, docstrings, records, and verbatim signature. Server-only compile passed in 2.8 seconds. No delivery errors found; repository and branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261018T062743-L-647282",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -1,252 +1,174 @@
 {
-  "id": "p-product",
-  "blueprint": {
-    "is": "p-product",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The central--geometric product",
-  "statement": "For a semisimple represented degree datum ([d-monodromy]), the\nidentity components and center satisfy\n\n$$\nG^\\circ=Z(G^\\circ)^\\circ H^\\circ.\n$$\n\nThis applies to the Weil representation of a lisse Weil sheaf whose Weil\nrepresentation is semisimple.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-product/p-product.md",
-    "place": "node p-product, order 2523"
-  },
-  "stmt_deps": [
-    "d-monodromy"
-  ],
-  "proof": [
-    {
-      "text": "Use the defining representation of [d-monodromy]. By\n[lem-ag-closure-semisimple], $V$ is a semisimple $G^\\circ$-module:\n$V=\\bigoplus_iM_i$ with each $M_i$ a simple $G^\\circ$-module. Set\n$\\mathfrak g=\\operatorname{Lie}(G^\\circ)\\subseteq\\operatorname{End}(V)$,\n$\\mathfrak h=\\operatorname{Lie}(H^\\circ)$ and $T=Z(G^\\circ)^\\circ$.\nApply [lem-ag-lie-stable-subspace] to the connected group $G^\\circ$ and\nits inclusion $r:G^\\circ\\to\\operatorname{GL}(V)$, whose differential is\nthe inclusion $dr:\\mathfrak g\\subseteq\\operatorname{End}(V)$: a subspace\nof $V$ is $G^\\circ$-stable if and only if it is $\\mathfrak g$-stable.\nHence each $M_i$ is $\\mathfrak g$-stable, and its $\\mathfrak g$-stable\nsubspaces are exactly its $G^\\circ$-stable subspaces, so $M_i$ has no\n$\\mathfrak g$-stable subspaces other than $0$ and $M_i$. Thus the Lie\nrepresentation $\\mathfrak g\\subseteq\\operatorname{End}(V)$ is semisimple,\nand it is faithful because it is an inclusion. By\n[lem-ag-faithful-semisimple-lie-central-radical],\n$\\mathfrak g=Z(\\mathfrak g)+[\\mathfrak g,\\mathfrak g]$, and\n[lem-ag-closure-commutators] and [lem-ag-lie-centre] give\n\n$$\n\\mathfrak g=Z(\\mathfrak g)+[\\mathfrak g,\\mathfrak g]\n           =Z(\\mathfrak g)+\\mathfrak h\n           =\\operatorname{Lie}(T)+\\operatorname{Lie}(H^\\circ).\n$$",
-      "uses": [
-        "d-monodromy",
-        "lem-ag-closure-semisimple",
-        "lem-ag-lie-stable-subspace",
-        "lem-ag-faithful-semisimple-lie-central-radical",
-        "lem-ag-closure-commutators",
-        "lem-ag-lie-centre"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Here the middle equality holds because\n$[\\mathfrak g,\\mathfrak g]\\subseteq\\mathfrak h\\subseteq\\mathfrak g$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "The group $H^\\circ$ is connected and contains $1$, and $H\\subseteq G$, so\n$H^\\circ\\subseteq G^\\circ$ ([lem-wf-algebraic-component-cosets]); the\ncentral subgroup $T$ of $G^\\circ$ commutes with it. The product\n$T\\times H^\\circ$, embedded block-diagonally in\n$\\operatorname{GL}(V\\oplus V)$, is a closed matrix group, and the\nmultiplication map\n\n$$\n\\mu:T\\times H^\\circ\\to G^\\circ,\\qquad(t,h)\\mapsto th,\n$$\n\nis a morphism of varieties and, since $T$ is central, a group\nhomomorphism: $tht'h'=tt'hh'$. By [lem-ag-homomorphism-image-closed] its\nimage $K=TH^\\circ$ is a closed subgroup of $G^\\circ$. It is connected:\n$T$ and $H^\\circ$ are connected and contain $1$, so both lie in the\nidentity component $K^\\circ$ ([lem-wf-algebraic-component-cosets]),\nand hence $K=TH^\\circ\\subseteq K^\\circ$. Its Lie algebra is a subspace\ncontaining $\\operatorname{Lie}(T)$ and $\\operatorname{Lie}(H^\\circ)$,\nhence equals $\\mathfrak g$. Thus [lem-wf-same-lie-closed-subgroup]\ngives $K=G^\\circ$.",
-      "uses": [
-        "lem-wf-algebraic-component-cosets",
-        "lem-ag-homomorphism-image-closed",
-        "lem-wf-same-lie-closed-subgroup"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "p-product",
+ "blueprint": {
+  "is": "p-product",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The central--geometric product",
+ "statement": "For a semisimple represented degree datum ([d-monodromy]), the\nidentity components and center satisfy\n\n$$\nG^\\circ=Z(G^\\circ)^\\circ H^\\circ.\n$$\n\nThis applies to the Weil representation of a lisse Weil sheaf whose Weil\nrepresentation is semisimple.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-product/p-product.md",
+  "place": "node p-product, order 2523"
+ },
+ "stmt_deps": [
+  "d-monodromy"
+ ],
+ "proof": [
+  {
+   "text": "Use the defining representation of [d-monodromy]. By\n[lem-ag-closure-semisimple], $V$ is a semisimple $G^\\circ$-module:\n$V=\\bigoplus_iM_i$ with each $M_i$ a simple $G^\\circ$-module. Set\n$\\mathfrak g=\\operatorname{Lie}(G^\\circ)\\subseteq\\operatorname{End}(V)$,\n$\\mathfrak h=\\operatorname{Lie}(H^\\circ)$ and $T=Z(G^\\circ)^\\circ$.\nApply [lem-ag-lie-stable-subspace] to the connected group $G^\\circ$ and\nits inclusion $r:G^\\circ\\to\\operatorname{GL}(V)$, whose differential is\nthe inclusion $dr:\\mathfrak g\\subseteq\\operatorname{End}(V)$: a subspace\nof $V$ is $G^\\circ$-stable if and only if it is $\\mathfrak g$-stable.\nHence each $M_i$ is $\\mathfrak g$-stable, and its $\\mathfrak g$-stable\nsubspaces are exactly its $G^\\circ$-stable subspaces, so $M_i$ has no\n$\\mathfrak g$-stable subspaces other than $0$ and $M_i$. Thus the Lie\nrepresentation $\\mathfrak g\\subseteq\\operatorname{End}(V)$ is semisimple,\nand it is faithful because it is an inclusion. By\n[lem-ag-faithful-semisimple-lie-central-radical],\n$\\mathfrak g=Z(\\mathfrak g)+[\\mathfrak g,\\mathfrak g]$, and\n[lem-ag-closure-commutators] and [lem-ag-lie-centre] give\n\n$$\n\\mathfrak g=Z(\\mathfrak g)+[\\mathfrak g,\\mathfrak g]\n           =Z(\\mathfrak g)+\\mathfrak h\n           =\\operatorname{Lie}(T)+\\operatorname{Lie}(H^\\circ).\n$$",
+   "uses": [
     "d-monodromy",
     "lem-ag-closure-semisimple",
     "lem-ag-lie-stable-subspace",
     "lem-ag-faithful-semisimple-lie-central-radical",
     "lem-ag-closure-commutators",
-    "lem-ag-lie-centre",
+    "lem-ag-lie-centre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Here the middle equality holds because\n$[\\mathfrak g,\\mathfrak g]\\subseteq\\mathfrak h\\subseteq\\mathfrak g$.",
+   "uses": [],
+   "elementary": null
+  },
+  {
+   "text": "The group $H^\\circ$ is connected and contains $1$, and $H\\subseteq G$, so\n$H^\\circ\\subseteq G^\\circ$ ([lem-wf-algebraic-component-cosets]); the\ncentral subgroup $T$ of $G^\\circ$ commutes with it. The product\n$T\\times H^\\circ$, embedded block-diagonally in\n$\\operatorname{GL}(V\\oplus V)$, is a closed matrix group, and the\nmultiplication map\n\n$$\n\\mu:T\\times H^\\circ\\to G^\\circ,\\qquad(t,h)\\mapsto th,\n$$\n\nis a morphism of varieties and, since $T$ is central, a group\nhomomorphism: $tht'h'=tt'hh'$. By [lem-ag-homomorphism-image-closed] its\nimage $K=TH^\\circ$ is a closed subgroup of $G^\\circ$. It is connected:\n$T$ and $H^\\circ$ are connected and contain $1$, so both lie in the\nidentity component $K^\\circ$ ([lem-wf-algebraic-component-cosets]),\nand hence $K=TH^\\circ\\subseteq K^\\circ$. Its Lie algebra is a subspace\ncontaining $\\operatorname{Lie}(T)$ and $\\operatorname{Lie}(H^\\circ)$,\nhence equals $\\mathfrak g$. Thus [lem-wf-same-lie-closed-subgroup]\ngives $K=G^\\circ$.",
+   "uses": [
     "lem-wf-algebraic-component-cosets",
     "lem-ag-homomorphism-image-closed",
     "lem-wf-same-lie-closed-subgroup"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-product/p-product.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "lean_multiple"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2523,
-  "blueprint_uses": [
-    "d-monodromy",
-    "lem-ag-closure-commutators",
-    "lem-ag-closure-semisimple",
-    "lem-ag-faithful-semisimple-lie-central-radical",
-    "lem-ag-homomorphism-image-closed",
-    "lem-ag-lie-centre",
-    "lem-ag-lie-stable-subspace",
-    "lem-wf-algebraic-component-cosets",
-    "lem-wf-same-lie-closed-subgroup"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie",
-    "declaration": "AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent",
-    "branch": "slopmaster2",
-    "line": 427,
-    "sorry_free": false,
-    "body_lines": 1,
-    "others": [
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie",
-        "declaration": "AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_containsCommutators",
-        "branch": "slopmaster2",
-        "line": 438,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
-        "declaration": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy",
-        "branch": "slopmaster2",
-        "line": 567,
-        "sorry_free": true,
-        "body_lines": 2
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
-        "declaration": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq",
-        "branch": "slopmaster2",
-        "line": 578,
-        "sorry_free": false,
-        "body_lines": 2
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent",
-    "AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_containsCommutators",
-    "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy",
-    "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent",
-        "AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_containsCommutators",
-        "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy",
-        "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent",
-          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Product",
-          "lines": [
-            505,
-            562
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_containsCommutators",
-          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Product",
-          "lines": [
-            484,
-            503
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy",
-          "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
-          "lines": [
-            900,
-            910
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq",
-          "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
-          "lines": [
-            923,
-            936
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.GeneralLinearGroup.lieSubalgebra_le_center_sup",
-          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Product",
-          "lines": [
-            141,
-            225
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_commutator_mem",
-          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Product",
-          "lines": [
-            307,
-            430
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-algebraic-groups-lie-algebras",
-  "unit": "sk-p-product",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For a semisimple represented degree datum ([d-monodromy]) over an\nalgebraically closed field $k$ of characteristic zero, the\nidentity components and center satisfy\n\n$$\nG^\\circ=Z(G^\\circ)^\\circ H^\\circ:\n$$\n\nthe multiplication morphism $Z(G^\\circ)^\\circ\\times_k H^\\circ\\to G^\\circ$\nis surjective, and every $g\\in G^\\circ(k)$ is a product $g=ch$ with\n$c\\in Z(G^\\circ)^\\circ(k)$ and $h\\in H^\\circ(k)$. More generally, the\nsame holds for closed subgroup schemes $H\\subseteq G$ of\n$\\operatorname{GL}_n$ over such a $k$ such that $H$ contains the\ncommutators of $G$ and $k^n$ is a semisimple representation of\n$G^\\circ(k)$.\n\nThis applies to the Weil representation of a lisse Weil sheaf whose Weil\nrepresentation is semisimple.",
-    "proof": [
-      {
-        "text": "Throughout, $k$ is algebraically closed of characteristic zero; this is\nused through Cartier's theorem (reducedness, and\n[lem-wf-same-lie-closed-subgroup]) and through the group–Lie comparison\n[lem-ag-lie-stable-subspace], [lem-ag-lie-centre].",
-        "uses": [
-          "lem-wf-same-lie-closed-subgroup",
-          "lem-ag-lie-stable-subspace",
-          "lem-ag-lie-centre"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Reduction to the general version.* For a semisimple represented degree\ndatum ([d-monodromy]), $H\\subseteq G$ are closed subgroup schemes of\n$\\operatorname{GL}_n$, $H$ contains the commutators of $G$ by\n[lem-ag-closure-commutators], and $V=k^n$ is a semisimple\n$G^\\circ(k)$-module by [lem-ag-closure-semisimple]. So it suffices to\ntreat closed subgroup schemes $H\\subseteq G$ of $\\operatorname{GL}_n$\nsuch that $H$ contains the commutators of $G$ and $V$ is a semisimple\n$G^\\circ(k)$-module: $V=\\bigoplus_iM_i$ with each $M_i$ a simple\n$G^\\circ$-module. In characteristic zero these group schemes are reduced\n(Cartier), so they are matrix groups.",
-        "uses": [
-          "d-monodromy",
-          "lem-ag-closure-commutators",
-          "lem-ag-closure-semisimple"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*The Lie algebra.* Set\n$\\mathfrak g=\\operatorname{Lie}(G^\\circ)\\subseteq\\operatorname{End}(V)$,\n$\\mathfrak h=\\operatorname{Lie}(H^\\circ)$ and $T=Z(G^\\circ)^\\circ$.\nApply [lem-ag-lie-stable-subspace] to the connected group $G^\\circ$ and\nits inclusion $r:G^\\circ\\to\\operatorname{GL}(V)$, whose differential is\nthe inclusion $dr:\\mathfrak g\\subseteq\\operatorname{End}(V)$: a subspace\nof $V$ is $G^\\circ$-stable if and only if it is $\\mathfrak g$-stable.\nHence each $M_i$ is $\\mathfrak g$-stable, and its $\\mathfrak g$-stable\nsubspaces are exactly its $G^\\circ$-stable subspaces, so $M_i$ has no\n$\\mathfrak g$-stable subspaces other than $0$ and $M_i$. Thus the Lie\nrepresentation $\\mathfrak g\\subseteq\\operatorname{End}(V)$ is semisimple,\nand it is faithful because it is an inclusion. By\n[lem-ag-faithful-semisimple-lie-central-radical],\n$\\mathfrak g=Z(\\mathfrak g)+[\\mathfrak g,\\mathfrak g]$. Since $H$\ncontains the commutators of $G$, the Lie-inclusion step of\n[lem-ag-closure-commutators], which uses only this property of the pair,\ngives $[\\mathfrak g,\\mathfrak g]\\subseteq\\mathfrak h$, and\n[lem-ag-lie-centre] gives $Z(\\mathfrak g)=\\operatorname{Lie}(T)$. (These\nlemmas, and [lem-ag-lie-stable-subspace], [lem-wf-same-lie-closed-subgroup],\nare written over $\\overline{\\mathbf Q}_\\ell$; their proofs use only that\nthe field is algebraically closed of characteristic zero.) Hence\n\n$$\n\\mathfrak g=Z(\\mathfrak g)+[\\mathfrak g,\\mathfrak g]\n           =Z(\\mathfrak g)+\\mathfrak h\n           =\\operatorname{Lie}(T)+\\operatorname{Lie}(H^\\circ).\n$$\n\nHere the middle equality holds because\n$[\\mathfrak g,\\mathfrak g]\\subseteq\\mathfrak h\\subseteq\\mathfrak g$.",
-        "uses": [
-          "lem-ag-lie-stable-subspace",
-          "lem-ag-faithful-semisimple-lie-central-radical",
-          "lem-ag-closure-commutators",
-          "lem-ag-lie-centre",
-          "lem-wf-same-lie-closed-subgroup"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*The product.* The group $H^\\circ$ is connected and contains $1$, and\n$H\\subseteq G$, so $H^\\circ\\subseteq G^\\circ$\n([lem-wf-algebraic-component-cosets]); the central subgroup $T$ of\n$G^\\circ$ commutes with it. The product $T\\times H^\\circ$, embedded\nblock-diagonally in $\\operatorname{GL}(V\\oplus V)$, is a closed matrix\ngroup, and the multiplication map\n\n$$\n\\mu:T\\times H^\\circ\\to G^\\circ,\\qquad(t,h)\\mapsto th,\n$$\n\nis a morphism of varieties and, since $T$ is central, a group\nhomomorphism: $tht'h'=tt'hh'$. By [lem-ag-homomorphism-image-closed] its\nimage $K=TH^\\circ$ is a closed subgroup of $G^\\circ$. It is connected:\n$T$ and $H^\\circ$ are connected and contain $1$, so both lie in the\nidentity component $K^\\circ$ ([lem-wf-algebraic-component-cosets]),\nand hence $K=TH^\\circ\\subseteq K^\\circ$. Its Lie algebra is a subspace\ncontaining $\\operatorname{Lie}(T)$ and $\\operatorname{Lie}(H^\\circ)$,\nhence equals $\\mathfrak g$. Thus [lem-wf-same-lie-closed-subgroup]\ngives $K=G^\\circ$. On $k$-points this says that every $g\\in G^\\circ(k)$ is\na product $g=ch$ with $c\\in T(k)$ and $h\\in H^\\circ(k)$. Since $k$ is\nalgebraically closed, the $k$-points of $G^\\circ$ are its closed points\nand are dense, and the closed image of $\\mu$ contains them all; so the\nmultiplication morphism $T\\times_kH^\\circ\\to G^\\circ$ is surjective.",
-        "uses": [
-          "lem-wf-algebraic-component-cosets",
-          "lem-ag-homomorphism-image-closed",
-          "lem-wf-same-lie-closed-subgroup"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "d-monodromy",
+  "lem-ag-closure-semisimple",
+  "lem-ag-lie-stable-subspace",
+  "lem-ag-faithful-semisimple-lie-central-radical",
+  "lem-ag-closure-commutators",
+  "lem-ag-lie-centre",
+  "lem-wf-algebraic-component-cosets",
+  "lem-ag-homomorphism-image-closed",
+  "lem-wf-same-lie-closed-subgroup"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-product/p-product.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2523,
+ "blueprint_uses": [
+  "d-monodromy",
+  "lem-ag-closure-commutators",
+  "lem-ag-closure-semisimple",
+  "lem-ag-faithful-semisimple-lie-central-radical",
+  "lem-ag-homomorphism-image-closed",
+  "lem-ag-lie-centre",
+  "lem-ag-lie-stable-subspace",
+  "lem-wf-algebraic-component-cosets",
+  "lem-wf-same-lie-closed-subgroup"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie",
+  "declaration": "AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent",
+  "branch": "slopmaster2",
+  "line": 427,
+  "sorry_free": false,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.GeneralLinear.ClosedSubgroup.Lie",
+    "declaration": "AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_containsCommutators",
+    "branch": "slopmaster2",
+    "line": 438,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+    "declaration": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy",
+    "branch": "slopmaster2",
+    "line": 567,
+    "sorry_free": true,
+    "body_lines": 2
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.LinearAlgebraicGroup.Monodromy",
+    "declaration": "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq",
+    "branch": "slopmaster2",
+    "line": 578,
+    "sorry_free": false,
+    "body_lines": 2
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.GeneralLinearGroup.surjective_mulCenterIdentityComponent",
+  "AlgebraicGeometry.GeneralLinearGroup.exists_mul_eq_of_containsCommutators",
+  "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.surjective_mul_center_geometricMonodromy",
+  "AlgebraicGeometry.Monodromy.RepresentedDegreeDatum.exists_mem_center_mul_mem_geometricMonodromy_eq"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-p-product",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For a semisimple represented degree datum ([d-monodromy]) over an\nalgebraically closed field $k$ of characteristic zero, the\nidentity components and center satisfy\n\n$$\nG^\\circ=Z(G^\\circ)^\\circ H^\\circ:\n$$\n\nthe multiplication morphism $Z(G^\\circ)^\\circ\\times_k H^\\circ\\to G^\\circ$\nis surjective, and every $g\\in G^\\circ(k)$ is a product $g=ch$ with\n$c\\in Z(G^\\circ)^\\circ(k)$ and $h\\in H^\\circ(k)$. More generally, the\nsame holds for closed subgroup schemes $H\\subseteq G$ of\n$\\operatorname{GL}_n$ over such a $k$ such that $H$ contains the\ncommutators of $G$ and $k^n$ is a semisimple representation of\n$G^\\circ(k)$.\n\nThis applies to the Weil representation of a lisse Weil sheaf whose Weil\nrepresentation is semisimple.",
+  "proof": [
+   {
+    "text": "Throughout, $k$ is algebraically closed of characteristic zero; this is\nused through Cartier's theorem (reducedness, and\n[lem-wf-same-lie-closed-subgroup]) and through the group–Lie comparison\n[lem-ag-lie-stable-subspace], [lem-ag-lie-centre].",
+    "uses": [
+     "lem-wf-same-lie-closed-subgroup",
+     "lem-ag-lie-stable-subspace",
+     "lem-ag-lie-centre"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Reduction to the general version.* For a semisimple represented degree\ndatum ([d-monodromy]), $H\\subseteq G$ are closed subgroup schemes of\n$\\operatorname{GL}_n$, $H$ contains the commutators of $G$ by\n[lem-ag-closure-commutators], and $V=k^n$ is a semisimple\n$G^\\circ(k)$-module by [lem-ag-closure-semisimple]. So it suffices to\ntreat closed subgroup schemes $H\\subseteq G$ of $\\operatorname{GL}_n$\nsuch that $H$ contains the commutators of $G$ and $V$ is a semisimple\n$G^\\circ(k)$-module: $V=\\bigoplus_iM_i$ with each $M_i$ a simple\n$G^\\circ$-module. In characteristic zero these group schemes are reduced\n(Cartier), so they are matrix groups.",
+    "uses": [
+     "d-monodromy",
+     "lem-ag-closure-commutators",
+     "lem-ag-closure-semisimple"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The Lie algebra.* Set\n$\\mathfrak g=\\operatorname{Lie}(G^\\circ)\\subseteq\\operatorname{End}(V)$,\n$\\mathfrak h=\\operatorname{Lie}(H^\\circ)$ and $T=Z(G^\\circ)^\\circ$.\nApply [lem-ag-lie-stable-subspace] to the connected group $G^\\circ$ and\nits inclusion $r:G^\\circ\\to\\operatorname{GL}(V)$, whose differential is\nthe inclusion $dr:\\mathfrak g\\subseteq\\operatorname{End}(V)$: a subspace\nof $V$ is $G^\\circ$-stable if and only if it is $\\mathfrak g$-stable.\nHence each $M_i$ is $\\mathfrak g$-stable, and its $\\mathfrak g$-stable\nsubspaces are exactly its $G^\\circ$-stable subspaces, so $M_i$ has no\n$\\mathfrak g$-stable subspaces other than $0$ and $M_i$. Thus the Lie\nrepresentation $\\mathfrak g\\subseteq\\operatorname{End}(V)$ is semisimple,\nand it is faithful because it is an inclusion. By\n[lem-ag-faithful-semisimple-lie-central-radical],\n$\\mathfrak g=Z(\\mathfrak g)+[\\mathfrak g,\\mathfrak g]$. Since $H$\ncontains the commutators of $G$, the Lie-inclusion step of\n[lem-ag-closure-commutators], which uses only this property of the pair,\ngives $[\\mathfrak g,\\mathfrak g]\\subseteq\\mathfrak h$, and\n[lem-ag-lie-centre] gives $Z(\\mathfrak g)=\\operatorname{Lie}(T)$. (These\nlemmas, and [lem-ag-lie-stable-subspace], [lem-wf-same-lie-closed-subgroup],\nare written over $\\overline{\\mathbf Q}_\\ell$; their proofs use only that\nthe field is algebraically closed of characteristic zero.) Hence\n\n$$\n\\mathfrak g=Z(\\mathfrak g)+[\\mathfrak g,\\mathfrak g]\n           =Z(\\mathfrak g)+\\mathfrak h\n           =\\operatorname{Lie}(T)+\\operatorname{Lie}(H^\\circ).\n$$\n\nHere the middle equality holds because\n$[\\mathfrak g,\\mathfrak g]\\subseteq\\mathfrak h\\subseteq\\mathfrak g$.",
+    "uses": [
+     "lem-ag-lie-stable-subspace",
+     "lem-ag-faithful-semisimple-lie-central-radical",
+     "lem-ag-closure-commutators",
+     "lem-ag-lie-centre",
+     "lem-wf-same-lie-closed-subgroup"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The product.* The group $H^\\circ$ is connected and contains $1$, and\n$H\\subseteq G$, so $H^\\circ\\subseteq G^\\circ$\n([lem-wf-algebraic-component-cosets]); the central subgroup $T$ of\n$G^\\circ$ commutes with it. The product $T\\times H^\\circ$, embedded\nblock-diagonally in $\\operatorname{GL}(V\\oplus V)$, is a closed matrix\ngroup, and the multiplication map\n\n$$\n\\mu:T\\times H^\\circ\\to G^\\circ,\\qquad(t,h)\\mapsto th,\n$$\n\nis a morphism of varieties and, since $T$ is central, a group\nhomomorphism: $tht'h'=tt'hh'$. By [lem-ag-homomorphism-image-closed] its\nimage $K=TH^\\circ$ is a closed subgroup of $G^\\circ$. It is connected:\n$T$ and $H^\\circ$ are connected and contain $1$, so both lie in the\nidentity component $K^\\circ$ ([lem-wf-algebraic-component-cosets]),\nand hence $K=TH^\\circ\\subseteq K^\\circ$. Its Lie algebra is a subspace\ncontaining $\\operatorname{Lie}(T)$ and $\\operatorname{Lie}(H^\\circ)$,\nhence equals $\\mathfrak g$. Thus [lem-wf-same-lie-closed-subgroup]\ngives $K=G^\\circ$. On $k$-points this says that every $g\\in G^\\circ(k)$ is\na product $g=ch$ with $c\\in T(k)$ and $h\\in H^\\circ(k)$. Since $k$ is\nalgebraically closed, the $k$-points of $G^\\circ$ are its closed points\nand are dense, and the closed image of $\\mu$ contains them all; so the\nmultiplication morphism $T\\times_kH^\\circ\\to G^\\circ$ is surjective.",
+    "uses": [
+     "lem-wf-algebraic-component-cosets",
+     "lem-ag-homomorphism-image-closed",
+     "lem-wf-same-lie-closed-subgroup"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

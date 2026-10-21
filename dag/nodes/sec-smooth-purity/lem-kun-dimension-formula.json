@@ -1,227 +1,216 @@
 {
-  "id": "lem-kun-dimension-formula",
-  "blueprint": {
-    "is": "lem-kun-dimension-formula",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Dimension formula for finite type schemes",
-  "statement": "Let $K$ be a field, $X$ a scheme of finite type over $K$, and\n$x\\in X$. Then\n\n$$\n\\kundim_xX=\\kundim\\mathcal O_{X,x}+\\operatorname{trdeg}_K\\kappa(x).\n$$\n\n(*Source:* Stacks Project, Morphisms, Lemma 29.29.1,\n[Tag `02FX`](https://stacks.math.columbia.edu/tag/02FX),\napplied to $X\\to\\Spec(K)$.)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-formula.md",
-    "place": "node lem-kun-dimension-formula, order 1675",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 02FX"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-scheme-over-base",
-    "def-weil-finite-type-morphism",
-    "def-kun-topological-dimension-at-point",
-    "def-weil-pbc-krull-dimension-ring",
-    "def-weil-residue-field",
-    "def-kun-transcendence-degree"
-  ],
-  "proof": [
-    {
-      "text": "Choose an affine open U containing x using exists_isAffineOpen_mem_and_subset, put R = Γ(X,U), and equip R with the K-algebra structure φ = (f.appLE ⊤ U).hom composed with ΓSpecIso.inv. The affine-pairs criterion Scheme.Hom.finiteType_appLE and the surjectivity of ΓSpecIso.inv make this a finite type K-algebra. Let p = hU.primeIdealOf ⟨x,hx⟩; hU.isoSpec sends x to p. No reducedness or irreducibility hypothesis is needed.",
-      "uses": [
-        "def-weil-finite-type-morphism",
-        "lem-weil-pbc-lft-affine-pairs",
-        "lem-weil-pbc-affine-open-spec-points"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
-      }
-    },
-    {
-      "text": "The affine homeomorphism hU.isoSpec.hom.homeomorph preserves local topological dimension: preimages of open neighbourhoods and their induced embeddings give one inequality between the defining infima; the inverse homeomorphism gives the reverse. IsOpen.topologicalKrullDimAt_eq identifies the dimension at ⟨x,hx⟩ in U with the dimension at x in X. Thus dim_p Spec R = dim_x X.",
-      "uses": [
-        "lem-weil-pbc-dimension-at-point-open-subspace",
-        "lem-weil-pbc-affine-open-spec-points"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
-      }
-    },
-    {
-      "text": "Apply AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_add_trdeg to the finite type K-algebra R and the prime p.asIdeal. It supplies natural numbers d and r with dim(R_p)=d, trdeg_K κ(p)=r, and dim_p Spec R=d+r.",
-      "uses": [
-        "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
-      }
-    },
-    {
-      "text": "Use hU.isLocalization_stalk and IsLocalization.algEquiv to construct the R-algebra isomorphism e:R_p≃O_(X,x). IsLocalRing.ResidueField.mapEquiv gives an isomorphism er:κ(p)≃κ(x). Naturality of residues, Scheme.Hom.germ_stalkMap, and germ_res identify the canonical map K→κ(x) with ΓSpecIso.inv followed by f.appLE ⊤ U, the germ, and the residue. Since e commutes with R, er therefore commutes with K; AlgEquiv.ofRingEquiv makes this explicit. ringKrullDim_eq_of_ringEquiv and ek.trdeg_eq transport the two invariants. Cardinal.toENat converts the finite cardinal r to the natural r, and Nat.cast_add finishes the unchanged formula.",
-      "uses": [
-        "lem-weil-pbc-affine-open-stalk-localization",
-        "def-weil-residue-field",
-        "def-weil-pbc-krull-dimension-ring",
-        "def-kun-transcendence-degree"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/morphisms.tex",
-        "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-kun-dimension-formula",
+ "blueprint": {
+  "is": "lem-kun-dimension-formula",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Dimension formula for finite type schemes",
+ "statement": "Let $K$ be a field, $X$ a scheme of finite type over $K$, and\n$x\\in X$. Then\n\n$$\n\\kundim_xX=\\kundim\\mathcal O_{X,x}+\\operatorname{trdeg}_K\\kappa(x).\n$$\n\n(*Source:* Stacks Project, Morphisms, Lemma 29.29.1,\n[Tag `02FX`](https://stacks.math.columbia.edu/tag/02FX),\napplied to $X\\to\\Spec(K)$.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-formula.md",
+  "place": "node lem-kun-dimension-formula, order 1675",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02FX"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-dimension-at-point",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-residue-field",
+  "def-kun-transcendence-degree"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open U containing x using exists_isAffineOpen_mem_and_subset, put R = Γ(X,U), and equip R with the K-algebra structure φ = (f.appLE ⊤ U).hom composed with ΓSpecIso.inv. The affine-pairs criterion Scheme.Hom.finiteType_appLE and the surjectivity of ΓSpecIso.inv make this a finite type K-algebra. Let p = hU.primeIdealOf ⟨x,hx⟩; hU.isoSpec sends x to p. No reducedness or irreducibility hypothesis is needed.",
+   "uses": [
     "def-weil-finite-type-morphism",
     "lem-weil-pbc-lft-affine-pairs",
-    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
+   }
+  },
+  {
+   "text": "The affine homeomorphism hU.isoSpec.hom.homeomorph preserves local topological dimension: preimages of open neighbourhoods and their induced embeddings give one inequality between the defining infima; the inverse homeomorphism gives the reverse. IsOpen.topologicalKrullDimAt_eq identifies the dimension at ⟨x,hx⟩ in U with the dimension at x in X. Thus dim_p Spec R = dim_x X.",
+   "uses": [
     "lem-weil-pbc-dimension-at-point-open-subspace",
-    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-affine-open-spec-points"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
+   }
+  },
+  {
+   "text": "Apply AlgebraicGeometry.topologicalKrullDimAt_eq_ringKrullDim_add_trdeg to the finite type K-algebra R and the prime p.asIdeal. It supplies natural numbers d and r with dim(R_p)=d, trdeg_K κ(p)=r, and dim_p Spec R=d+r.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
+   }
+  },
+  {
+   "text": "Use hU.isLocalization_stalk and IsLocalization.algEquiv to construct the R-algebra isomorphism e:R_p≃O_(X,x). IsLocalRing.ResidueField.mapEquiv gives an isomorphism er:κ(p)≃κ(x). Naturality of residues, Scheme.Hom.germ_stalkMap, and germ_res identify the canonical map K→κ(x) with ΓSpecIso.inv followed by f.appLE ⊤ U, the germ, and the residue. Since e commutes with R, er therefore commutes with K; AlgEquiv.ofRingEquiv makes this explicit. ringKrullDim_eq_of_ringEquiv and ek.trdeg_eq transport the two invariants. Cardinal.toENat converts the finite cardinal r to the natural r, and Nat.cast_add finishes the unchanged formula.",
+   "uses": [
     "lem-weil-pbc-affine-open-stalk-localization",
     "def-weil-residue-field",
     "def-weil-pbc-krull-dimension-ring",
     "def-kun-transcendence-degree"
-  ],
-  "proof_origin": {
-    "by": "worker",
-    "document": "lean/Sheaf/AlgebraicGeometry/FiniteTypeDimensionFormula.lean",
-    "place": "B4 second reading: actual affine reduction following Stacks Tags 02FX and 00P1; all invariant transports are proved in Lean."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "For a scheme of finite type over a field the dimension at a point equals the dimension of its local ring plus the transcendence degree of its residue field",
-      "results": "IsLocalRing.finrank_cotangentSpace_eq_zero; AlgebraicGeometry.Scheme.instFieldCarrierResidueField; IsLocalRing.finrank_cotangentSpace_eq_zero_iff; IsLocalRing.finrank_CotangentSpace_eq_one; Algebra.IsStandardSmooth.relativeDimension; Algebra.Presentation.localizationAway_dimension_zero; IsLocalRing.finrank_CotangentSpace_eq_one_iff; IsLocalRing.finrank_quotient_map",
-      "date": "2026-10-14",
-      "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
-    },
-    {
-      "tool": "loogle",
-      "query": "Algebra.trdeg, ringKrullDim",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
-    },
-    {
-      "tool": "grep",
-      "query": "trdeg|dimensionAt",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
-    },
-    {
-      "tool": "leansearch",
-      "query": "dimension of finite type scheme at a point equals local ring dimension plus residue field transcendence degree",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Krull dimension of localization at a prime plus transcendence degree of residue field for a finitely generated algebra over a field",
-      "results": "IsLocalization.AtPrime.ringKrullDim_eq_height; Ring.KrullDimLE.of_isLocalization; Ring.krullDimLE_of_isLocalization_maximal; Algebra.Presentation.localizationAway_dimension_zero; Ring.DimensionLEOne.localization; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors; Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim",
-      "date": "2026-10-14",
-      "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
-    },
-    {
-      "tool": "grep",
-      "query": "trdeg.*[Dd]im|[Dd]im.*trdeg",
-      "results": "No hits",
-      "date": "2026-10-14",
-      "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "undischarged_input",
-    "proof_cites_literature"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1675,
-  "blueprint_uses": [
-    "def-kun-support"
-  ],
-  "uses_not_cited": [
-    "def-kun-support"
-  ],
-  "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Morphisms, Lemma 29.29.1 ([Tag 02FX](https://stacks.math.columbia.edu/tag/02FX)), applied to the structure morphism of the scheme of finite type over the field: the dimension of the local ring plus the transcendence degree of the residue field computes the dimension at a point. No separate proof is given.",
-  "blueprint_proof_steps": [
-    {
-      "text": "This is the recorded classical input named in the statement, Stacks Project, Morphisms, Lemma 29.29.1 ([Tag 02FX](https://stacks.math.columbia.edu/tag/02FX)), applied to the structure morphism of the scheme of finite type over the field: the dimension of the local ring plus the transcendence degree of the residue field computes the dimension at a point. No separate proof is given.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-kun-dimension-formula",
-    "worker": "stage1",
-    "summary": "Read Stacks 02FX and its affine input 00P1. Reused the existing affine formula and affine/stalk/open-dimension comparisons; no new nodes. Replaced the unrelated support dependency by the actual dimension and residue-field notions. No mathematical change to the statement.",
-    "blueprint": "The blueprint proof refers to 02FX without giving an argument. Steps 1–2 realize its reduction to an affine neighbourhood, step 3 its cited Algebra 00P1, and step 4 the local-ring and residue-field identifications."
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NI-bd62085cc",
-    "group": "NI",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-bd62085cc (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. Stacks 02FX, 00P1, 01T2, 0055 and 01HV support all four steps; the residue-field identification respects K. Edge cases, duplicate candidates and dependency cycles checked. No new nodes or repairs. Accepted the existing affine dimension formula as a generic tool."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-7155ddd4d",
-    "group": "NF",
-    "result": "pass",
-    "note": "Immutable target matches the node verbatim; dependencies and source checked; edge cases, universes, documentation, and proof placeholder gates pass; server scompile exited 0."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula",
-    "declaration": "AlgebraicGeometry.topologicalKrullDimAt_eq_stalk_dimension_add_residue_trdeg",
-    "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeDimensionFormula.lean",
-    "statement": "theorem topologicalKrullDimAt_eq_stalk_dimension_add_residue_trdeg {K : Type u} [Field K] (X : Scheme.{u}) [X.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] (x : X) : topologicalKrullDimAt x = ringKrullDim (X.presheaf.stalk x) + (Cardinal.toENat (@Algebra.trdeg K (X.residueField x) _ _ ((X ↘ Spec (.of K)).residueFieldAlgebraMap x).toAlgebra) : WithBot ℕ∞)",
-    "branch": "newtargets-dag",
-    "by": "NF",
-    "date": "2026-10-15",
-    "existing": false
-  },
-  "reviewed_proof": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "B4",
-    "result": "pass",
-    "landing": "20261016T003158-L-3926538",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $K$ be a field, $X$ a scheme of finite type over $K$, and\n$x\\in X$. Then\n\n$$\n\\kundim_xX=\\kundim\\mathcal O_{X,x}+\\operatorname{trdeg}_K\\kappa(x).\n$$",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FX, lemma-dimension-fibre-at-a-point, proof (lines 5389–5393), specialized to Spec K"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-residue-field",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-kun-transcendence-degree"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/FiniteTypeDimensionFormula.lean",
+  "place": "B4 second reading: actual affine reduction following Stacks Tags 02FX and 00P1; all invariant transports are proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme of finite type over a field the dimension at a point equals the dimension of its local ring plus the transcendence degree of its residue field",
+   "results": "IsLocalRing.finrank_cotangentSpace_eq_zero; AlgebraicGeometry.Scheme.instFieldCarrierResidueField; IsLocalRing.finrank_cotangentSpace_eq_zero_iff; IsLocalRing.finrank_CotangentSpace_eq_one; Algebra.IsStandardSmooth.relativeDimension; Algebra.Presentation.localizationAway_dimension_zero; IsLocalRing.finrank_CotangentSpace_eq_one_iff; IsLocalRing.finrank_quotient_map",
+   "date": "2026-10-14",
+   "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.trdeg, ringKrullDim",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg|dimensionAt",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "dimension of finite type scheme at a point equals local ring dimension plus residue field transcendence degree",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Krull dimension of localization at a prime plus transcendence degree of residue field for a finitely generated algebra over a field",
+   "results": "IsLocalization.AtPrime.ringKrullDim_eq_height; Ring.KrullDimLE.of_isLocalization; Ring.krullDimLE_of_isLocalization_maximal; Algebra.Presentation.localizationAway_dimension_zero; Ring.DimensionLEOne.localization; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors; Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors; ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim",
+   "date": "2026-10-14",
+   "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
+  },
+  {
+   "tool": "grep",
+   "query": "trdeg.*[Dd]im|[Dd]im.*trdeg",
+   "results": "No hits",
+   "date": "2026-10-14",
+   "verdict": "no match: no scheme/local-ring/residue-transcendence-degree dimension formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "undischarged_input",
+  "proof_cites_literature"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1675,
+ "blueprint_uses": [
+  "def-kun-support"
+ ],
+ "uses_not_cited": [
+  "def-kun-support"
+ ],
+ "blueprint_proof_text": "This is the recorded classical input named in the statement, Stacks Project, Morphisms, Lemma 29.29.1 ([Tag 02FX](https://stacks.math.columbia.edu/tag/02FX)), applied to the structure morphism of the scheme of finite type over the field: the dimension of the local ring plus the transcendence degree of the residue field computes the dimension at a point. No separate proof is given.",
+ "blueprint_proof_steps": [
+  {
+   "text": "This is the recorded classical input named in the statement, Stacks Project, Morphisms, Lemma 29.29.1 ([Tag 02FX](https://stacks.math.columbia.edu/tag/02FX)), applied to the structure morphism of the scheme of finite type over the field: the dimension of the local ring plus the transcendence degree of the residue field computes the dimension at a point. No separate proof is given.",
+   "uses": [],
+   "elementary": null
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-kun-dimension-formula",
+  "worker": "stage1",
+  "summary": "Read Stacks 02FX and its affine input 00P1. Reused the existing affine formula and affine/stalk/open-dimension comparisons; no new nodes. Replaced the unrelated support dependency by the actual dimension and residue-field notions. No mathematical change to the statement.",
+  "blueprint": "The blueprint proof refers to 02FX without giving an argument. Steps 1–2 realize its reduction to an affine neighbourhood, step 3 its cited Algebra 00P1, and step 4 the local-ring and residue-field identifications."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-bd62085cc",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-bd62085cc (reviewer sub-agent of L); spot-checked: Read the full mathematics and wrote review.md. Stacks 02FX, 00P1, 01T2, 0055 and 01HV support all four steps; the residue-field identification respects K. Edge cases, duplicate candidates and dependency cycles checked. No new nodes or repairs. Accepted the existing affine dimension formula as a generic tool."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7155ddd4d",
+  "group": "NF",
+  "result": "pass",
+  "note": "Immutable target matches the node verbatim; dependencies and source checked; edge cases, universes, documentation, and proof placeholder gates pass; server scompile exited 0."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula",
+  "declaration": "AlgebraicGeometry.topologicalKrullDimAt_eq_stalk_dimension_add_residue_trdeg",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeDimensionFormula.lean",
+  "statement": "theorem topologicalKrullDimAt_eq_stalk_dimension_add_residue_trdeg {K : Type u} [Field K] (X : Scheme.{u}) [X.Over (Spec (.of K))] [LocallyOfFiniteType (X ↘ Spec (.of K))] [QuasiCompact (X ↘ Spec (.of K))] (x : X) : topologicalKrullDimAt x = ringKrullDim (X.presheaf.stalk x) + (Cardinal.toENat (@Algebra.trdeg K (X.residueField x) _ _ ((X ↘ Spec (.of K)).residueFieldAlgebraMap x).toAlgebra) : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261016T003158-L-3926538",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $K$ be a field, $X$ a scheme of finite type over $K$, and\n$x\\in X$. Then\n\n$$\n\\kundim_xX=\\kundim\\mathcal O_{X,x}+\\operatorname{trdeg}_K\\kappa(x).\n$$",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

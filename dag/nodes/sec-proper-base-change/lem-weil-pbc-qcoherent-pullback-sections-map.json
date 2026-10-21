@@ -1,120 +1,121 @@
 {
-  "id": "lem-weil-pbc-qcoherent-pullback-sections-map",
-  "kind": "definition",
-  "title": "Structural pullback of a tensor section across a square",
-  "statement": "For a scheme morphism g:Y to X [def-pc-scheme], modules F on X and G on Y [def-weil-sheaf-of-modules-category], and a morphism psi:g*F to G [def-pc-module-pullback], define the additive map on tensor sections across a commutative square p:V to U above g [def-sc-etale-qcoherent-module]. It is the global-section unit for p, followed by normalized tensor composition for p and U.hom, transport along p followed by U.hom equals V.hom followed by g, the inverse normalized composition for V.hom and g, and the V-pullback of psi. This is the existing qcoherentPullbackSection definition, relocated without changing its type or body. No sheaf morphism or cohomology square is asserted here.",
-  "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DR; etale-cohomology.tex Tag 03P2; cohomology.tex Tag 01FD"
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-module-pullback",
-    "def-sc-etale-qcoherent-module"
-  ],
-  "proof": [
-    {
-      "text": "Compose the canonical additive global-section unit, the two normalized tensor composition isomorphisms and equality transport, followed by the additive map induced by psi. Each arrow has the required source and target. This is a real construction from the fixed tensor-pullback adjunctions; it does not select data from a new existence assertion.",
-      "uses": [
-        "lem-sc-etale-qcoherent-presheaf-functorial"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-weil-pbc-qcoherent-pullback-sections-map",
+ "kind": "definition",
+ "title": "Structural pullback of a tensor section across a square",
+ "statement": "For a scheme morphism g:Y to X [def-pc-scheme], modules F on X and G on Y [def-weil-sheaf-of-modules-category], and a morphism psi:g*F to G [def-pc-module-pullback], define the additive map on tensor sections across a commutative square p:V to U above g [def-sc-etale-qcoherent-module]. It is the global-section unit for p, followed by normalized tensor composition for p and U.hom, transport along p followed by U.hom equals V.hom followed by g, the inverse normalized composition for V.hom and g, and the V-pullback of psi. This is the existing qcoherentPullbackSection definition, relocated without changing its type or body. No sheaf morphism or cohomology square is asserted here.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DR; etale-cohomology.tex Tag 03P2; cohomology.tex Tag 01FD"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-module-pullback",
+  "def-sc-etale-qcoherent-module"
+ ],
+ "proof": [
+  {
+   "text": "Compose the canonical additive global-section unit, the two normalized tensor composition isomorphisms and equality transport, followed by the additive map induced by psi. Each arrow has the required source and target. This is a real construction from the fixed tensor-pullback adjunctions; it does not select data from a new existence assertion.",
+   "uses": [
     "lem-sc-etale-qcoherent-presheaf-functorial"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03DR; etale-cohomology.tex Tag 03P2; cohomology.tex Tag 01FD"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "scheme module tensor pullback sections naturality composition",
-      "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback g ⋙ pullback f ≅ pullback (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  conjugateEquiv ((pullbackPushforwardAdjunction.{v} φ).comp (pullbackPushforwardAdjunction.{v} ψ))\\n      (pullbackPushforwardAdjunction.{v} _) (pullbackComp.{v} φ ψ).inv =\\n    (pushforwardComp.{v} φ ψ).hom\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"PresheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullbackComp.{v} (G := 𝟭 _) φ (𝟙 R) = isoWhiskerLeft _ (pullbackId R) ≪≫ Functor.rightUnitor _\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$, $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of pullba\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  pullback.{v} φ ⋙ pullback.{v} ψ ≅ pullback.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \":\\n  (pullbackComp f (g ≫ h)).inv ≫\\n      Functor.whiskerRight (pullbackComp g h).inv _ ≫\\n        (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft _ (pullbackComp f g).hom ≫ (pullbackComp (f ≫ g) h).hom =\\n    eqToHom (by simp)\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  isoWhiskerLeft _ (pullbackComp.{v} ψ ψ') ≪≫\\n      pullbackComp.{v} (G := G ⋙ G') φ (ψ ≫ (G.sheafPushforwardContinuous RingCat.{u} K K').map ψ') =\\n    (associator _ _ _).symm ≪≫\\n      isoWhiskerRight (pullbackComp.{v} φ ψ) _ ≪≫\\n        pullbackComp.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinu\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \":\\n  pullback (Spec.map (CommRingCat.ofHom (algebraMap R S))) (Spec.map (CommRingCat.ofHom (algebraMap R T))) ≅\\n    Spec (.of <| S ⊗[R] T)\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$ induced by $R$-algebra structures on $S$ and $T$ is isomorphic\"}\n",
-      "date": "2026-10-18",
-      "verdict": "no exact match for the structural section formula"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Structural pullback of tensor sections across a commutative square defines a natural map on etale sheaves",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n",
-      "date": "2026-10-18",
-      "verdict": "no exact match for the structural section formula"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
-      "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompIso_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.CompositionIso\", \"type\": \" {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} {C₃ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₀] [CategoryTheory.Category.{v_2, u_2} C₁] [CategoryTheory.Category.{v_3, u_3} C₂] [CategoryTheory.Category.{v_4, u_4} C₃] {F₀₁ : CategoryTheory.Functor C₀ C₁} {F₁₂ : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"\"}\n",
-      "date": "2026-10-18",
-      "verdict": "no exact match for the structural section formula"
-    },
-    {
-      "tool": "grep",
-      "query": "tensorSections|etaleHom",
-      "results": "[grep] OK 0 hit(s)\n",
-      "date": "2026-10-18",
-      "verdict": "no exact match for the structural section formula"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.QcoherentCohomologyComparisonPullback",
-    "date": "2026-10-18",
-    "group": "Z7"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-direct-image-finiteness-proper",
-      "place": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b): f_* O_X = O_S and R^1 f_* O_X is finite locally free. Etale form: compatibility of 03P2 comparison with restriction between etale base objects and with scalar multiplication.; extracted from lem-weil-pbc-qcoherent-cohomology-comparison-pullback: Structural pullback of a tensor section across a square",
-      "via": [
-        "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
-        "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
-        "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
-        "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-        "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
-        "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
-        "lem-weil-pbc-etale-compactification-constructibility",
-        "lem-weil-pbc-etale-proper-direct-image-finiteness"
-      ]
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.QcoherentPullbackSections",
-    "file": "lean/Sheaf/AlgebraicGeometry/QcoherentPullbackSections.lean",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.qcoherentPullbackSection",
-    "statement": "def qcoherentPullbackSection {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (F : X.Modules) (G : Y.Modules) (ψ : (tensorPullback g).obj F ⟶ G)\n    (U : X.Etale) (V : Y.Etale) (p : V.left ⟶ U.left)\n    (h : p ≫ U.hom = V.hom ≫ g) :\n    Γ((tensorPullback U.hom).obj F, ⊤) ⟶ Γ((tensorPullback V.hom).obj G, ⊤)",
-    "branch": "sheaf-dag",
-    "by": "Z7",
-    "date": "2026-10-18"
-  },
-  "reviewed": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "C-3b9d7",
-    "group": "Z7",
-    "result": "pass",
-    "landing": "20261018T071246-L-1684153",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "C-3b9d7",
-    "group": "Z7",
-    "result": "pass",
-    "landing": "20261018T071246-L-1684153",
-    "kind": "interface",
-    "note": "independent cc review: the item theorem's statement (byte-identical to the clone) and its 4-clause proof against the two new sorry theorems and their nodes; the moved qcoherentPullbackSection (verbatim diff) with its change record; the direct importer SmoothCurveEtaleStructureDirectImages compiled against the delivered modules; axioms checked"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-qcoherent-presheaf-functorial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03DR; etale-cohomology.tex Tag 03P2; cohomology.tex Tag 01FD"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "scheme module tensor pullback sections naturality composition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": pullback g ⋙ pullback f ≅ pullback (f ≫ g)\", \"doc\": \"For any schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the composition of the pullback functors along $g$ and $f$ is naturally isomorphic to the pullback functor along the composition $\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  conjugateEquiv ((pullbackPushforwardAdjunction.{v} φ).comp (pullbackPushforwardAdjunction.{v} ψ))\\n      (pullbackPushforwardAdjunction.{v} _) (pullbackComp.{v} φ ψ).inv =\\n    (pushforwardComp.{v} φ ψ).hom\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"PresheafOfModules.pullback_comp_id\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullbackComp.{v} (G := 𝟭 _) φ (𝟙 R) = isoWhiskerLeft _ (pullbackId R) ≪≫ Functor.rightUnitor _\", \"doc\": \"For functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and natural transformations $\\\\phi : R \\\\to S$, $\\\\psi : S \\\\to T$ between presheaves of rings, the composition of pullba\"}\n  {\"name\": \"SheafOfModules.pullbackComp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  pullback.{v} φ ⋙ pullback.{v} ψ ≅ pullback.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinuous RingCat.{u} J K).map ψ)\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \":\\n  (pullbackComp f (g ≫ h)).inv ≫\\n      Functor.whiskerRight (pullbackComp g h).inv _ ≫\\n        (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft _ (pullbackComp f g).hom ≫ (pullbackComp (f ≫ g) h).hom =\\n    eqToHom (by simp)\", \"doc\": \"For any schemes $X, Y, Z, T$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, $h : Z \\\\to T$, the pullback functors associated to the compositions $f \\\\circ (g \\\\circ h)$ and $(f \\\\circ g) \\\\circ h$ are equal. \"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  isoWhiskerLeft _ (pullbackComp.{v} ψ ψ') ≪≫\\n      pullbackComp.{v} (G := G ⋙ G') φ (ψ ≫ (G.sheafPushforwardContinuous RingCat.{u} K K').map ψ') =\\n    (associator _ _ _).symm ≪≫\\n      isoWhiskerRight (pullbackComp.{v} φ ψ) _ ≪≫\\n        pullbackComp.{v} (F := F ⋙ G) (φ ≫ (F.sheafPushforwardContinu\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"∀ {X Y Z T : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T)\\n  {Z_1 : CategoryTheory.Functor T.Modules X.Modules}\\n  (h_1 :\\n    AlgebraicGeometry.Scheme.Modules.pullback\\n        (CategoryTheory.CategoryStruct.comp (CategoryTheory.CategoryStruct.comp f g) h) ⟶\\n      Z_1),\\n  CategoryTheor\", \"doc\": \"Let $X, Y, Z, T$ be schemes with morphisms $f: X \\\\to Y$, $g: Y \\\\to Z$, and $h: Z \\\\to T$. The assignment $X \\\\mapsto \\\\mathrm{Mod}(X)$ (the category of sheaves of $\\\\mathcal{O}_X$-modules) and $(f: X \\\\to \"}\n  {\"name\": \"AlgebraicGeometry.pullbackSpecIso\", \"module\": \"Mathlib.AlgebraicGeometry.Pullbacks\", \"type\": \":\\n  pullback (Spec.map (CommRingCat.ofHom (algebraMap R S))) (Spec.map (CommRingCat.ofHom (algebraMap R T))) ≅\\n    Spec (.of <| S ⊗[R] T)\", \"doc\": \"The pullback of the morphisms $\\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R)$ and $\\\\operatorname{Spec}(T) \\\\to \\\\operatorname{Spec}(R)$ induced by $R$-algebra structures on $S$ and $T$ is isomorphic\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match for the structural section formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Structural pullback of tensor sections across a commutative square defines a natural map on etale sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullback\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackIso\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"The pullback functor for sheaves of modules is isomorphic to the composition of the forgetful functor, the presheaf pullback along the underlying natural transformation, and sheafification with respec\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullback_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {D'' : Type u₄}\\n  [inst_3 : CategoryTheory.Category.{v₄, u₄} D''] {J : CategoryTheory.GrothendieckTopology C}\\n  {K :\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n  {\"name\": \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ with Grothendieck topologies $J, K$, continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{E}$, and ring sheaf m\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match for the structural section formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointCompIso_assoc",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.leftAdjointCompIso_assoc\", \"module\": \"Mathlib.CategoryTheory.Adjunction.CompositionIso\", \"type\": \" {C₀ : Type u_1} {C₁ : Type u_2} {C₂ : Type u_3} {C₃ : Type u_4} [CategoryTheory.Category.{v_1, u_1} C₀] [CategoryTheory.Category.{v_2, u_2} C₁] [CategoryTheory.Category.{v_3, u_3} C₂] [CategoryTheory.Category.{v_4, u_4} C₃] {F₀₁ : CategoryTheory.Functor C₀ C₁} {F₁₂ : CategoryTheory.Functor C₁ C₂} {\", \"doc\": \"\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match for the structural section formula"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorSections|etaleHom",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match for the structural section formula"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentCohomologyComparisonPullback",
+  "date": "2026-10-18",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical torsion constructibility input: 0GKW final sentence invokes 0GKV for prime constant coefficients. Expanded by 0GKV case (b): f_* O_X = O_S and R^1 f_* O_X is finite locally free. Etale form: compatibility of 03P2 comparison with restriction between etale base objects and with scalar multiplication.; extracted from lem-weil-pbc-qcoherent-cohomology-comparison-pullback: Structural pullback of a tensor section across a square",
+   "via": [
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcoherentPullbackSections",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcoherentPullbackSections.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.qcoherentPullbackSection",
+  "statement": "def qcoherentPullbackSection {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (F : X.Modules) (G : Y.Modules) (ψ : (tensorPullback g).obj F ⟶ G)\n    (U : X.Etale) (V : Y.Etale) (p : V.left ⟶ U.left)\n    (h : p ≫ U.hom = V.hom ≫ g) :\n    Γ((tensorPullback U.hom).obj F, ⊤) ⟶ Γ((tensorPullback V.hom).obj G, ⊤)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-3b9d7",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261018T071246-L-1684153",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-3b9d7",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261018T071246-L-1684153",
+  "kind": "interface",
+  "note": "independent cc review: the item theorem's statement (byte-identical to the clone) and its 4-clause proof against the two new sorry theorems and their nodes; the moved qcoherentPullbackSection (verbatim diff) with its change record; the direct importer SmoothCurveEtaleStructureDirectImages compiled against the delivered modules; axioms checked"
+ },
+ "lean_audit": {}
 }

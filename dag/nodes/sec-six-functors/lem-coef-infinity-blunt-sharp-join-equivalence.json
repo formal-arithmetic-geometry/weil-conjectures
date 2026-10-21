@@ -329,16 +329,5 @@
   "result": "fix",
   "note": "Statement matches the node and Kerodon 01HR/01HV/05YH clause by clause: arbitrary X,Y:SSet.{u}; recorded blunt join (end 0 to X, end 1 to Y checked) and ordered join; c given on both pure copies and on cylinder simplices (selection i->i if t(i)=0 else n+1+i, matching Mathlib castAdd/natAdd); unique by the pushout, not arbitrary; every quasicategory E in SSet.{max u v} via uliftFunctor, no universe equality; pre direction right; coherent IsFunctorEquivalence. Edge cases (empty factors, constant t, degree 0, v=0) covered. Record statement verbatim; node statement unchanged; the two added stmt_deps are landed and acyclic; no hollow defs; only sorry is the theorem proof; docstrings in place; both report sections real. FIX: the module publicly imported Sheaf.CategoryTheory.JoinSliceRightFibration (joinGenerator/orderedJoinInl/Inr), the module of lem-coef-infinity-slice-right-fibration, which reaches the item (slice-right-fibration->anodyne-cocones->pinch-comparison->slice-arrow-equivalence->item). So the statement depended on a node outside stmt_deps that cannot be added there, and the stage-3 proof imports (via AnodyneCocones->RightPinchComparison) would form an import cycle. fixes/BluntSharpJoinEquivalence.lean drops that import, imports PushoutJoinSaturation directly, writes the generator as the Kan-extension unit and the pure-copy clauses element by element over the one-element empty-ordinal value. A scratch Lean file proved this equivalent to the delivered statement (subsingleton lemma, both pure-clause iffs, cylinder formula rfl). Also adds the CellularNaturalEquivalence proof import and corrects docstring step 4 (h=kf). The lean-record override changes only note; the report gains a 'Maintainer review fix' section. nt_compile: delivered and fixed modules both clean; error control confirms diagnostics are shown; fixed import closure has no cycle (closing_cycle reports none)."
  },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- }
+ "lean_audit": {}
 }

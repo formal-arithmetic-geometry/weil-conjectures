@@ -67,30 +67,7 @@
   }
  ],
  "mathlib_match": null,
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "closed",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.GaloisCover.equivariantModulePresheaf_pointwise_of_diagonal",
-     "module": "WeilConjectures.ConstructibleSheaf.TorsorEquivariantModulePointwiseFromDiagonal",
-     "lines": [
-      27,
-      134
-     ],
-     "kind": "theorem",
-     "sorry": false
-    }
-   ],
-   "missing": [],
-   "open": []
-  }
- },
+ "lean_audit": {},
  "id": "lem-weil-pbc-torsor-equivariant-module-pointwise-from-diagonal",
  "title": "Propagation of the diagonal formula to all etale objects",
  "statement": "theorem equivariantModulePresheaf_pointwise_of_diagonal\n    {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]\n    (c : Scheme.GaloisCover (ULift.{u + 1} P) V)\n    (N N' : Rep.{u + 1} (ZMod ℓ) P)\n    (η : c.equivariantModulePresheaf ℓ N ⟶ c.equivariantModulePresheaf ℓ N')\n    (f : N.V →ₗ[ZMod ℓ] N'.V)\n    (hf : letI := c.etale\n      ∀ (s : c.equivariantSections ℓ N (Etale.mk c.π)) (x : c.P),\n        (η.app (op (Etale.mk c.π)) s).val\n            ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x) =\n          f (s.val ((pullback.lift (f := c.π) (g := c.π) (𝟙 c.P) (𝟙 c.P) rfl) x))) :\n    ∀ (W : V.Etale) (s : c.equivariantSections ℓ N W) (x : c.sectionSpace W),\n      (η.app (op W) s).val x = f (s.val x)",

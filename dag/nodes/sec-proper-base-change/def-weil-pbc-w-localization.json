@@ -1,200 +1,189 @@
 {
-  "id": "def-weil-pbc-w-localization",
-  "blueprint": {
-    "is": "def-weil-pbc-w-localization",
-    "from": null,
-    "same_as": []
+ "id": "def-weil-pbc-w-localization",
+ "blueprint": {
+  "is": "def-weil-pbc-w-localization",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The affine w-localization",
+ "statement": "Let $A$ be a commutative ring and put $X=\\operatorname{Spec}A$. Use $D(f)=\\{\\mathfrak p\\in X:f\\notin\\mathfrak p\\}$ and constructible subsets as in [def-weil-pbc-w-local]. An index is a pair $i=(\\mathcal P,(f_E)_{E\\in\\mathcal P})$, where $\\mathcal P$ is a finite partition of $X$ into nonempty constructible subsets and $f_E\\in A$ satisfies $E\\subseteq D(f_E)$. When $X$ is empty, allow the empty partition. Set\n$$B_i=\\prod_{E\\in\\mathcal P}A_{f_E},$$\nwhere $A_f=A[1/f]$ is the localization [def-weil-ring-localization-away]; the product has componentwise ring operations and the diagonal $A$-algebra structure. The empty product is the zero ring.\n\nGive the set of indices the following preorder. For $j=(\\mathcal Q,(g_F))$, put $i\\leq j$ exactly when $\\mathcal Q$ refines $\\mathcal P$ and, for every $F\\in\\mathcal Q$, its unique parent $E\\in\\mathcal P$ satisfies $F\\subseteq E$ and $f_E\\mid g_F$ in $A$. There is one arrow for each such relation. The transition $B_i\\to B_j$ has $F$-component the projection to $A_{f_E}$ followed by the unique $A$-algebra map $A_{f_E}\\to A_{g_F}$ of [lem-weil-pbc-ring-localization-universal-property]. Explicitly it sends $a/f_E^n$ to $(a/1)(f_E/1)^{-n}$ in $A_{g_F}$. If $g_F=f_Eh$, then $(h/1)(g_F/1)^{-1}$ is an inverse of $f_E/1$, so the divisibility condition supplies the required unit. For an identity arrow the component map is the identity on $A_{f_E}$ by uniqueness. For $i\\leq j\\leq k$, each component of the composite and of the direct transition is a map from the same parent localization to the same child localization and agrees on $A$; uniqueness makes them equal.\n\nThe index preorder is nonempty (take $\\{X\\}$ and denominator $1$ when $X\\ne\\varnothing$, and the empty partition otherwise). A common upper bound of $i,j$ uses the nonempty intersections $E\\cap F$ as parts, with denominator $f_Eg_F$. Thus this is a small filtered diagram of commutative $A$-algebras. Define its colimit [def-weil-pbc-category-colimit], which exists by [lem-weil-pbc-commutative-algebras-colimits-exist], by\n$$A^w=\\varinjlim_i B_i.$$\nThe structural map $A\\to A^w$ is induced by the diagonal maps $A\\to B_i$. This is an ind-Zariski presentation in the sense of [def-weil-pbc-ind-etale-algebra]: every term is a finite product of principal localizations. No assertion about points, connected components or faithful flatness is included in this definition.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-w-localization.md",
+  "place": "node def-weil-pbc-w-localization, order 1222"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-w-local",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-ring-localization-universal-property",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-commutative-algebras-colimits-exist",
+  "def-weil-pbc-ind-etale-algebra"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WLocalization|ProdStrata|Generalization.submonoid",
+   "results": "0 hits; returned top entries: none",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
   },
-  "kind": "definition",
-  "title": "The affine w-localization",
-  "statement": "Let $A$ be a commutative ring and put $X=\\operatorname{Spec}A$. Use $D(f)=\\{\\mathfrak p\\in X:f\\notin\\mathfrak p\\}$ and constructible subsets as in [def-weil-pbc-w-local]. An index is a pair $i=(\\mathcal P,(f_E)_{E\\in\\mathcal P})$, where $\\mathcal P$ is a finite partition of $X$ into nonempty constructible subsets and $f_E\\in A$ satisfies $E\\subseteq D(f_E)$. When $X$ is empty, allow the empty partition. Set\n$$B_i=\\prod_{E\\in\\mathcal P}A_{f_E},$$\nwhere $A_f=A[1/f]$ is the localization [def-weil-ring-localization-away]; the product has componentwise ring operations and the diagonal $A$-algebra structure. The empty product is the zero ring.\n\nGive the set of indices the following preorder. For $j=(\\mathcal Q,(g_F))$, put $i\\leq j$ exactly when $\\mathcal Q$ refines $\\mathcal P$ and, for every $F\\in\\mathcal Q$, its unique parent $E\\in\\mathcal P$ satisfies $F\\subseteq E$ and $f_E\\mid g_F$ in $A$. There is one arrow for each such relation. The transition $B_i\\to B_j$ has $F$-component the projection to $A_{f_E}$ followed by the unique $A$-algebra map $A_{f_E}\\to A_{g_F}$ of [lem-weil-pbc-ring-localization-universal-property]. Explicitly it sends $a/f_E^n$ to $(a/1)(f_E/1)^{-n}$ in $A_{g_F}$. If $g_F=f_Eh$, then $(h/1)(g_F/1)^{-1}$ is an inverse of $f_E/1$, so the divisibility condition supplies the required unit. For an identity arrow the component map is the identity on $A_{f_E}$ by uniqueness. For $i\\leq j\\leq k$, each component of the composite and of the direct transition is a map from the same parent localization to the same child localization and agrees on $A$; uniqueness makes them equal.\n\nThe index preorder is nonempty (take $\\{X\\}$ and denominator $1$ when $X\\ne\\varnothing$, and the empty partition otherwise). A common upper bound of $i,j$ uses the nonempty intersections $E\\cap F$ as parts, with denominator $f_Eg_F$. Thus this is a small filtered diagram of commutative $A$-algebras. Define its colimit [def-weil-pbc-category-colimit], which exists by [lem-weil-pbc-commutative-algebras-colimits-exist], by\n$$A^w=\\varinjlim_i B_i.$$\nThe structural map $A\\to A^w$ is induced by the diagonal maps $A\\to B_i$. This is an ind-Zariski presentation in the sense of [def-weil-pbc-ind-etale-algebra]: every term is a finite product of principal localizations. No assertion about points, connected components or faithful flatness is included in this definition.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-w-localization.md",
-    "place": "node def-weil-pbc-w-localization, order 1222"
+  {
+   "tool": "leansearch",
+   "query": "w-localization of rings by finite constructible stratifications",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   },
-  "stmt_deps": [
-    "def-weil-pbc-w-local",
-    "def-weil-ring-localization-away",
-    "lem-weil-pbc-ring-localization-universal-property",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-commutative-algebras-colimits-exist",
-    "def-weil-pbc-ind-etale-algebra"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "WLocalization|ProdStrata|Generalization.submonoid",
-      "results": "0 hits; returned top entries: none",
-      "date": "2026-10-14",
-      "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
-    },
-    {
-      "tool": "leansearch",
-      "query": "w-localization of rings by finite constructible stratifications",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "w-localization of a commutative ring as the filtered colimit of products of localizations at elements nonvanishing on constructible strata",
-      "results": "8 hits; returned top entries: PrimeSpectrum.PiLocalization, MaximalSpectrum.PiLocalization, PrimeSpectrum.toPiLocalization, AlgebraicGeometry.StructureSheaf.Localizations, AlgebraicGeometry.StructureSheaf.instAtPrimeLocalizationsValCarrierTopMemOpensAsIdeal, AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen, AlgebraicGeometry.StructureSheaf.instInhabitedLocalizations, IsLocalization.AtPrime",
-      "date": "2026-10-14",
-      "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"WLocalization\"",
-      "results": "0 hits; returned top entries: none",
-      "date": "2026-10-14",
-      "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
-    },
-    {
-      "tool": "grep",
-      "query": "w.local|ind.Zariski|stratification.*localization",
-      "results": "25 hits; returned top entries: Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Homotopy/LocallyContractible.lean, Mathlib/Util/Tactic.lean, Mathlib/Util/Tactic.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean",
-      "date": "2026-10-14",
-      "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "canonical ring constructed from finite subsets by localizing at units of localized quotient rings and taking the colimit of finite products",
-      "results": "8 hits; returned top entries: PrimeSpectrum.PiLocalization, IsLocalization.fintype', Algebra.EssFiniteType.isLocalization, MaximalSpectrum.PiLocalization, Algebra.essFiniteType_cond_iff, LocalizedModule.instRing, Algebra.PreSubmersivePresentation.localizationAway, IsLocalization.Away.finitePresentation",
-      "date": "2026-10-14",
-      "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"w-local\"",
-      "results": "0 hits; returned top entries: none",
-      "date": "2026-10-14",
-      "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
-    },
-    {
-      "tool": "grep",
-      "query": "WLocalization|ProdStrata|[Ii]nd[ _-]?[Zz]ariski|w-local in RingTheory",
-      "results": "0 hits; returned top entries: none",
-      "date": "2026-10-14",
-      "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "commutative algebra filtered colimit over constructible partitions of prime spectrum with principal localization factors",
-      "results": "8 hits; returned top entries: CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.R, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, CommRingCat.FilteredColimits.colimitCocone, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimitCommRing, localCohomology.hasColimitDiagram, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit",
-      "date": "2026-10-14",
-      "verdict": "no exact match: generic filtered ring colimits take a diagram as input; none supplies this partition-and-denominator diagram"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible.*[Pp]artition|[Pp]artition.*[Ll]ocalization|WLocalization",
-      "results": "0 hits; returned top entries: none",
-      "date": "2026-10-14",
-      "verdict": "no match for this construction"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1222,
-  "blueprint_uses": [
-    "def-weil-pbc-ind-etale-algebra",
-    "def-weil-pbc-w-local"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "leanfinder",
+   "query": "w-localization of a commutative ring as the filtered colimit of products of localizations at elements nonvanishing on constructible strata",
+   "results": "8 hits; returned top entries: PrimeSpectrum.PiLocalization, MaximalSpectrum.PiLocalization, PrimeSpectrum.toPiLocalization, AlgebraicGeometry.StructureSheaf.Localizations, AlgebraicGeometry.StructureSheaf.instAtPrimeLocalizationsValCarrierTopMemOpensAsIdeal, AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen, AlgebraicGeometry.StructureSheaf.instInhabitedLocalizations, IsLocalization.AtPrime",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
   },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "def-weil-pbc-w-localization",
-    "worker": "stage1",
-    "summary": "STATEMENT-DISPUTED: mere refinement does not give the claimed localization maps. Made the denominator-divisibility preorder explicit, retained the finite constructible-partition presentation and products-of-denominators common refinements, and included the zero-ring case. Reused the existing localization, universal-property, colimit and algebra-colimit-existence nodes. No new nodes or definition proof steps are needed. Read the blueprint and Stacks construction; no exact project or Mathlib declaration states this presentation.",
-    "blueprint": "Realizes the complete definition at blueprint order 1222, especially the sentences about componentwise transition maps and common refinements by intersections and products of denominators. The missing ordering condition is repaired explicitly; the unit and chapter route are unchanged.",
-    "tool_uses": []
+  {
+   "tool": "loogle",
+   "query": "\"WLocalization\"",
+   "results": "0 hits; returned top entries: none",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
   },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NE-8f3a304cd",
-    "group": "NE",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-8f3a304cd (reviewer sub-agent of L); spot-checked: Read the full definition, report, six cited statements and source locations. Refinement/divisibility maps, functor laws, filteredness and colimit hypotheses check out, including zero-ring and zero-divisor cases. No new nodes, duplicates, cycles or target weakenings. No comparison with upstream WLocalization is accepted. Detailed checks are in review.md."
+  {
+   "tool": "grep",
+   "query": "w.local|ind.Zariski|stratification.*localization",
+   "results": "25 hits; returned top entries: Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Compactness/Paracompact.lean, Mathlib/Topology/Homotopy/LocallyContractible.lean, Mathlib/Util/Tactic.lean, Mathlib/Util/Tactic.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/Localization.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
   },
-  "lean": {
-    "module": "Sheaf.RingTheory.PrincipalWLocalization",
-    "declaration": "PrincipalWLocalization.algebra",
-    "declarations": [
-      "PrincipalWLocalization.Index",
-      "PrincipalWLocalization.Refines",
-      "PrincipalWLocalization.refines_refl",
-      "PrincipalWLocalization.refines_trans",
-      "PrincipalWLocalization.indexPreorder",
-      "PrincipalWLocalization.Stage",
-      "PrincipalWLocalization.parent",
-      "PrincipalWLocalization.parent_dvd",
-      "PrincipalWLocalization.transition",
-      "PrincipalWLocalization.transition_id",
-      "PrincipalWLocalization.transition_comp",
-      "PrincipalWLocalization.diagram",
-      "PrincipalWLocalization.index_isFiltered",
-      "PrincipalWLocalization.algebra",
-      "PrincipalWLocalization.isIndPrincipalZariski"
-    ],
-    "file": "lean/Sheaf/RingTheory/PrincipalWLocalization.lean",
-    "statement": "def algebra (A : Type u) [CommRing A] : CommAlgCat.{u} A",
-    "branch": "newtargets-dag",
-    "by": "NA",
-    "date": "2026-10-15",
-    "existing": false,
-    "note": "The concrete finite constructible-partition/principal-denominator diagram and its chosen colimit. Upstream WLocalization uses generalization submonoids instead, and is not identified with this construction. The algebra object carries its ring and structural A-algebra map; helper theorems record the preorder and functor laws, filteredness and the principal ind-Zariski presentation."
+  {
+   "tool": "leanfinder",
+   "query": "canonical ring constructed from finite subsets by localizing at units of localized quotient rings and taking the colimit of finite products",
+   "results": "8 hits; returned top entries: PrimeSpectrum.PiLocalization, IsLocalization.fintype', Algebra.EssFiniteType.isLocalization, MaximalSpectrum.PiLocalization, Algebra.essFiniteType_cond_iff, LocalizedModule.instRing, Algebra.PreSubmersivePresentation.localizationAway, IsLocalization.Away.finitePresentation",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
   },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-a970569db",
-    "group": "NA",
-    "result": "pass",
-    "note": "Wrote review.md. Checked all statement clauses, six dependencies, source declarations, edge cases, docstrings, concrete definitions, sorry-only proofs, and verbatim signature. Server-only compile reproduced cleanly with the side overlay. No delivery errors or repository changes."
+  {
+   "tool": "loogle",
+   "query": "\"w-local\"",
+   "results": "0 hits; returned top entries: none",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
   },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "AUTO",
-    "group": "E1",
-    "result": "pass",
-    "landing": "20261015T154204-L-162090",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-    "sorry_before": [
-      "PrincipalWLocalization.index_isFiltered",
-      "PrincipalWLocalization.isIndPrincipalZariski",
-      "PrincipalWLocalization.parent_dvd",
-      "PrincipalWLocalization.refines_refl",
-      "PrincipalWLocalization.refines_trans",
-      "PrincipalWLocalization.transition_comp",
-      "PrincipalWLocalization.transition_id"
-    ],
-    "sorry_after": []
+  {
+   "tool": "grep",
+   "query": "WLocalization|ProdStrata|[Ii]nd[ _-]?[Zz]ariski|w-local in RingTheory",
+   "results": "0 hits; returned top entries: none",
+   "date": "2026-10-14",
+   "verdict": "no match: no returned declaration defines this finite-partition diagram and its colimit"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For a ring $A$, consider finite partitions $\\mathcal P$ of\n$\\operatorname{Spec}A$ into nonempty constructible\n[def-weil-pbc-w-local] sets. For each part $E$, choose $f_E\\in A$ with\n$E\\subset D(f_E)$. Refining a partition and multiplying its denominators\ngives a directed system of algebras $\\prod_{E\\in\\mathcal P}A_{f_E}$. Define\n\n$$\n A^w=\\varinjlim_{(\\mathcal P,(f_E))}\n          \\prod_{E\\in\\mathcal P}A_{f_E}.\n$$\n\nThe transition maps are the componentwise localization maps; common\nrefinements use intersections of parts and products of denominators. This\nspecifies an ind-Zariski [def-weil-pbc-ind-etale-algebra] algebra.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "commutative algebra filtered colimit over constructible partitions of prime spectrum with principal localization factors",
+   "results": "8 hits; returned top entries: CommRingCat.FilteredColimits.colimit, CommRingCat.FilteredColimits.R, RingHom.EssFiniteType.exists_comp_map_eq_of_isColimit, CommRingCat.FilteredColimits.colimitCocone, CommRingCat.FilteredColimits.colimitCoconeIsColimit, CommRingCat.FilteredColimits.colimitCommRing, localCohomology.hasColimitDiagram, RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit",
+   "date": "2026-10-14",
+   "verdict": "no exact match: generic filtered ring colimits take a diagram as input; none supplies this partition-and-denominator diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Pp]artition|[Pp]artition.*[Ll]ocalization|WLocalization",
+   "results": "0 hits; returned top entries: none",
+   "date": "2026-10-14",
+   "verdict": "no match for this construction"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1222,
+ "blueprint_uses": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-w-local"
+ ],
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-w-localization",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: mere refinement does not give the claimed localization maps. Made the denominator-divisibility preorder explicit, retained the finite constructible-partition presentation and products-of-denominators common refinements, and included the zero-ring case. Reused the existing localization, universal-property, colimit and algebra-colimit-existence nodes. No new nodes or definition proof steps are needed. Read the blueprint and Stacks construction; no exact project or Mathlib declaration states this presentation.",
+  "blueprint": "Realizes the complete definition at blueprint order 1222, especially the sentences about componentwise transition maps and common refinements by intersections and products of denominators. The missing ordering condition is repaired explicitly; the unit and chapter route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NE-8f3a304cd",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NE-8f3a304cd (reviewer sub-agent of L); spot-checked: Read the full definition, report, six cited statements and source locations. Refinement/divisibility maps, functor laws, filteredness and colimit hypotheses check out, including zero-ring and zero-divisor cases. No new nodes, duplicates, cycles or target weakenings. No comparison with upstream WLocalization is accepted. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PrincipalWLocalization",
+  "declaration": "PrincipalWLocalization.algebra",
+  "declarations": [
+   "PrincipalWLocalization.Index",
+   "PrincipalWLocalization.Refines",
+   "PrincipalWLocalization.refines_refl",
+   "PrincipalWLocalization.refines_trans",
+   "PrincipalWLocalization.indexPreorder",
+   "PrincipalWLocalization.Stage",
+   "PrincipalWLocalization.parent",
+   "PrincipalWLocalization.parent_dvd",
+   "PrincipalWLocalization.transition",
+   "PrincipalWLocalization.transition_id",
+   "PrincipalWLocalization.transition_comp",
+   "PrincipalWLocalization.diagram",
+   "PrincipalWLocalization.index_isFiltered",
+   "PrincipalWLocalization.algebra",
+   "PrincipalWLocalization.isIndPrincipalZariski"
+  ],
+  "file": "lean/Sheaf/RingTheory/PrincipalWLocalization.lean",
+  "statement": "def algebra (A : Type u) [CommRing A] : CommAlgCat.{u} A",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The concrete finite constructible-partition/principal-denominator diagram and its chosen colimit. Upstream WLocalization uses generalization submonoids instead, and is not identified with this construction. The algebra object carries its ring and structural A-algebra map; helper theorems record the preorder and functor laws, filteredness and the principal ind-Zariski presentation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a970569db",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all statement clauses, six dependencies, source declarations, edge cases, docstrings, concrete definitions, sorry-only proofs, and verbatim signature. Server-only compile reproduced cleanly with the side overlay. No delivery errors or repository changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "AUTO",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261015T154204-L-162090",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "PrincipalWLocalization.index_isFiltered",
+   "PrincipalWLocalization.isIndPrincipalZariski",
+   "PrincipalWLocalization.parent_dvd",
+   "PrincipalWLocalization.refines_refl",
+   "PrincipalWLocalization.refines_trans",
+   "PrincipalWLocalization.transition_comp",
+   "PrincipalWLocalization.transition_id"
+  ],
+  "sorry_after": []
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For a ring $A$, consider finite partitions $\\mathcal P$ of\n$\\operatorname{Spec}A$ into nonempty constructible\n[def-weil-pbc-w-local] sets. For each part $E$, choose $f_E\\in A$ with\n$E\\subset D(f_E)$. Refining a partition and multiplying its denominators\ngives a directed system of algebras $\\prod_{E\\in\\mathcal P}A_{f_E}$. Define\n\n$$\n A^w=\\varinjlim_{(\\mathcal P,(f_E))}\n          \\prod_{E\\in\\mathcal P}A_{f_E}.\n$$\n\nThe transition maps are the componentwise localization maps; common\nrefinements use intersections of parts and products of denominators. This\nspecifies an ind-Zariski [def-weil-pbc-ind-etale-algebra] algebra.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

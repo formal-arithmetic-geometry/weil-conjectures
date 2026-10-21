@@ -1,135 +1,110 @@
 {
-  "id": "lem-pc-k-sheaf",
-  "blueprint": {
-    "is": "lem-pc-k-sheaf",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The sheaf condition for $\\operatorname{Ker}\\sigma_T^*$",
-  "statement": "(Picard Schemes of Curves, proof of Lemma 44.4.3 (Tag\n[0B9N](https://stacks.math.columbia.edu/tag/0B9N)).)\nLet $f:X\\to S$ be a morphism of schemes as in\nDefinition [def-pc-picard-functor].\nAssume $f$ has a section $\\sigma$ and that\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for all\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/S)_{fppf})$. For a scheme $T$ over $S$ put\n$K(T):=\\operatorname{Ker}(\\sigma_T^*:\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}(T))$. Then $K$\nsatisfies the sheaf property for fppf coverings.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-cor-picard-pic-sheaf/lem-pc-k-sheaf.md",
-    "place": "node lem-pc-k-sheaf, order 809",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0B9N"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-picard-functor",
-    "def-pc-fppf-site",
-    "def-pc-pic-sigma-functor",
-    "def-pc-subfunctor"
-  ],
-  "proof": [
-    {
-      "text": "Let $\\{T_i\\to T\\}_{i\\in I}$ be an fppf covering and let\n$\\mathcal{L}_i\\in K(T_i)$ with $\\mathcal{L}_i$ and $\\mathcal{L}_j$ mapping to the same element of\n$K(T_i\\times_TT_j)$ (the restriction maps of $K$ are those of the\nsubfunctor [lem-pc-sigma-subfunctor]).\nChoose an isomorphism $\\alpha_i:\\mathcal{O}_{T_i}\\to\\sigma_{T_i}^*\\mathcal{L}_i$ for all\n$i$, and an isomorphism\n\n$$\n\\varphi_{ij}:\\mathcal{L}_i|_{X_{T_i\\times_TT_j}}\\longrightarrow\n\\mathcal{L}_j|_{X_{T_i\\times_TT_j}} .\n$$",
-      "uses": [
-        "lem-pc-sigma-subfunctor"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The composite\n\n$$\n\\alpha_j^{-1}|_{T_{ij}}\\circ\\sigma_{T_{ij}}^*\\varphi_{ij}\\circ\\alpha_i|_{T_{ij}}:\n\\mathcal{O}_{T_{ij}}\\longrightarrow\\mathcal{O}_{T_{ij}}\n$$\n\nis multiplication by some unit $u_{ij}$; replacing $\\varphi_{ij}$ by\n$u_{ij}^{-1}\\varphi_{ij}$ we may assume the composite is\nmultiplication by $1$, i.e. that the $\\varphi_{ij}$ are compatible with\nthe $\\alpha$'s along $\\sigma$.\nNow the self-map of $\\mathcal{L}_i|_{X_{T_{ijk}}}$\n\n$$\n\\varphi_{ki}\\circ\\varphi_{jk}\\circ\\varphi_{ij}\n$$\n\nis multiplication by a unit\n$u_{ijk}\\in\\Gamma(X_{T_{ijk}},\\mathcal{O}^*)$; by the equality\n$\\Gamma(X_{T_{ijk}},\\mathcal{O}^*)=\\Gamma(T_{ijk},\\mathcal{O}^*)$ (from the hypothesis)\nwe may regard $u_{ijk}$ as a unit on $T_{ijk}$, and its image under\n$\\sigma^*$ is $1$ by the $\\alpha$-compatibility —since\n$\\sigma^*:\\Gamma(X_T,\\mathcal{O}^*)\\to\\Gamma(T,\\mathcal{O}^*)$ is inverse to\nthe pullback $f^*$, $u_{ijk}=1$ and the $\\varphi_{ij}$ satisfy the cocycle\ncondition. Thus $\\{\\mathcal{L}_i|_{X_{T_i}},\\varphi_{ij}\\}$ is a descent datum\nfor invertible modules on the fppf (in particular fpqc) covering\n$\\{X_{T_i}\\to X_T\\}$; by [lem-pc-fpqc-descent] there exists an\ninvertible $\\mathcal{O}_{X_T}$-module $\\mathcal{L}$ with\n$\\mathcal{L}|_{X_{T_i}}=\\mathcal{L}_i$ (with the given gluing isomorphisms). Since the\ngluing isomorphisms are compatible with the trivializations $\\alpha_i$,\nthe module $\\sigma_T^*\\mathcal{L}$ restricts to the trivial module on $T_i$ in a\ncompatible way, so $\\sigma_T^*\\mathcal{L}\\cong\\mathcal{O}_T$ by descent: hence\n$\\mathcal{L}\\in K(T)$. Uniqueness of gluing gives the uniqueness in the sheaf\ncondition. This proves the lemma.",
-      "uses": [
-        "lem-pc-fpqc-descent"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-pc-sigma-subfunctor",
-    "lem-pc-fpqc-descent"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-cor-picard-pic-sheaf/lem-pc-k-sheaf.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 809,
-  "blueprint_uses": [
-    "def-pc-fppf-site",
-    "def-pc-pic-sigma-functor",
-    "def-pc-picard-functor",
-    "def-pc-subfunctor",
-    "lem-pc-fpqc-descent",
+ "id": "lem-pc-k-sheaf",
+ "blueprint": {
+  "is": "lem-pc-k-sheaf",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The sheaf condition for $\\operatorname{Ker}\\sigma_T^*$",
+ "statement": "(Picard Schemes of Curves, proof of Lemma 44.4.3 (Tag\n[0B9N](https://stacks.math.columbia.edu/tag/0B9N)).)\nLet $f:X\\to S$ be a morphism of schemes as in\nDefinition [def-pc-picard-functor].\nAssume $f$ has a section $\\sigma$ and that\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for all\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/S)_{fppf})$. For a scheme $T$ over $S$ put\n$K(T):=\\operatorname{Ker}(\\sigma_T^*:\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}(T))$. Then $K$\nsatisfies the sheaf property for fppf coverings.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-cor-picard-pic-sheaf/lem-pc-k-sheaf.md",
+  "place": "node lem-pc-k-sheaf, order 809",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B9N"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-picard-functor",
+  "def-pc-fppf-site",
+  "def-pc-pic-sigma-functor",
+  "def-pc-subfunctor"
+ ],
+ "proof": [
+  {
+   "text": "Let $\\{T_i\\to T\\}_{i\\in I}$ be an fppf covering and let\n$\\mathcal{L}_i\\in K(T_i)$ with $\\mathcal{L}_i$ and $\\mathcal{L}_j$ mapping to the same element of\n$K(T_i\\times_TT_j)$ (the restriction maps of $K$ are those of the\nsubfunctor [lem-pc-sigma-subfunctor]).\nChoose an isomorphism $\\alpha_i:\\mathcal{O}_{T_i}\\to\\sigma_{T_i}^*\\mathcal{L}_i$ for all\n$i$, and an isomorphism\n\n$$\n\\varphi_{ij}:\\mathcal{L}_i|_{X_{T_i\\times_TT_j}}\\longrightarrow\n\\mathcal{L}_j|_{X_{T_i\\times_TT_j}} .\n$$",
+   "uses": [
     "lem-pc-sigma-subfunctor"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-    "declaration": "AlgebraicGeometry.isSheaf_picardFunctorNormalized",
-    "branch": "slopmaster2",
-    "line": 612,
-    "sorry_free": true,
-    "body_lines": 97
+   ],
+   "elementary": false
   },
-  "blueprint_lean": [
-    "AlgebraicGeometry.isSheaf_picardFunctorNormalized"
-  ],
-  "uses_not_cited": [
-    "def-pc-fppf-site",
-    "def-pc-pic-sigma-functor",
-    "def-pc-subfunctor"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.isSheaf_picardFunctorNormalized"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.isSheaf_picardFunctorNormalized",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-          "lines": [
-            878,
-            894
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-cor-picard-pic-sheaf",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f:X\\to S$ be a morphism of schemes as in\nDefinition [def-pc-picard-functor].\nAssume $f$ has a section $\\sigma$ and that\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for all\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/S)_{fppf})$. For a scheme $T$ over $S$ put\n$K(T):=\\operatorname{Ker}(\\sigma_T^*:\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}(T))$. Then $K$\nsatisfies the sheaf property for fppf coverings.",
-    "proof": [
-      {
-        "text": "Let $\\{T_i\\to T\\}_{i\\in I}$ be an fppf covering and let\n$\\mathcal{L}_i\\in K(T_i)$ with $\\mathcal{L}_i$ and $\\mathcal{L}_j$ mapping to the same element of\n$K(T_i\\times_TT_j)$ (the restriction maps of $K$ are those of the\nsubfunctor [lem-pc-sigma-subfunctor]).\nChoose an isomorphism $\\alpha_i:\\mathcal{O}_{T_i}\\to\\sigma_{T_i}^*\\mathcal{L}_i$ for all\n$i$, and an isomorphism\n\n$$\n\\varphi_{ij}:\\mathcal{L}_i|_{X_{T_i\\times_TT_j}}\\longrightarrow\n\\mathcal{L}_j|_{X_{T_i\\times_TT_j}} .\n$$",
-        "uses": [
-          "lem-pc-sigma-subfunctor"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "The composite\n\n$$\n\\alpha_j^{-1}|_{T_{ij}}\\circ\\sigma_{T_{ij}}^*\\varphi_{ij}\\circ\\alpha_i|_{T_{ij}}:\n\\mathcal{O}_{T_{ij}}\\longrightarrow\\mathcal{O}_{T_{ij}}\n$$\n\nis multiplication by some unit $u_{ij}$; replacing $\\varphi_{ij}$ by\n$u_{ij}^{-1}\\varphi_{ij}$ we may assume the composite is\nmultiplication by $1$, i.e. that the $\\varphi_{ij}$ are compatible with\nthe $\\alpha$'s along $\\sigma$.\nNow the self-map of $\\mathcal{L}_i|_{X_{T_{ijk}}}$\n\n$$\n\\varphi_{ki}\\circ\\varphi_{jk}\\circ\\varphi_{ij}\n$$\n\nis multiplication by a unit\n$u_{ijk}\\in\\Gamma(X_{T_{ijk}},\\mathcal{O}^*)$; by the equality\n$\\Gamma(X_{T_{ijk}},\\mathcal{O}^*)=\\Gamma(T_{ijk},\\mathcal{O}^*)$ (from the hypothesis)\nwe may regard $u_{ijk}$ as a unit on $T_{ijk}$, and its image under\n$\\sigma^*$ is $1$ by the $\\alpha$-compatibility —since\n$\\sigma^*:\\Gamma(X_T,\\mathcal{O}^*)\\to\\Gamma(T,\\mathcal{O}^*)$ is inverse to\nthe pullback $f^*$, $u_{ijk}=1$ and the $\\varphi_{ij}$ satisfy the cocycle\ncondition. Thus $\\{\\mathcal{L}_i|_{X_{T_i}},\\varphi_{ij}\\}$ is a descent datum\nfor invertible modules on the fppf (in particular fpqc) covering\n$\\{X_{T_i}\\to X_T\\}$; by [lem-pc-fpqc-descent] there exists an\ninvertible $\\mathcal{O}_{X_T}$-module $\\mathcal{L}$ with\n$\\mathcal{L}|_{X_{T_i}}=\\mathcal{L}_i$ (with the given gluing isomorphisms). Since the\ngluing isomorphisms are compatible with the trivializations $\\alpha_i$,\nthe module $\\sigma_T^*\\mathcal{L}$ restricts to the trivial module on $T_i$ in a\ncompatible way, so $\\sigma_T^*\\mathcal{L}\\cong\\mathcal{O}_T$ by descent: hence\n$\\mathcal{L}\\in K(T)$. Uniqueness of gluing gives the uniqueness in the sheaf\ncondition. This proves the lemma.",
-        "uses": [
-          "lem-pc-fpqc-descent"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "The composite\n\n$$\n\\alpha_j^{-1}|_{T_{ij}}\\circ\\sigma_{T_{ij}}^*\\varphi_{ij}\\circ\\alpha_i|_{T_{ij}}:\n\\mathcal{O}_{T_{ij}}\\longrightarrow\\mathcal{O}_{T_{ij}}\n$$\n\nis multiplication by some unit $u_{ij}$; replacing $\\varphi_{ij}$ by\n$u_{ij}^{-1}\\varphi_{ij}$ we may assume the composite is\nmultiplication by $1$, i.e. that the $\\varphi_{ij}$ are compatible with\nthe $\\alpha$'s along $\\sigma$.\nNow the self-map of $\\mathcal{L}_i|_{X_{T_{ijk}}}$\n\n$$\n\\varphi_{ki}\\circ\\varphi_{jk}\\circ\\varphi_{ij}\n$$\n\nis multiplication by a unit\n$u_{ijk}\\in\\Gamma(X_{T_{ijk}},\\mathcal{O}^*)$; by the equality\n$\\Gamma(X_{T_{ijk}},\\mathcal{O}^*)=\\Gamma(T_{ijk},\\mathcal{O}^*)$ (from the hypothesis)\nwe may regard $u_{ijk}$ as a unit on $T_{ijk}$, and its image under\n$\\sigma^*$ is $1$ by the $\\alpha$-compatibility —since\n$\\sigma^*:\\Gamma(X_T,\\mathcal{O}^*)\\to\\Gamma(T,\\mathcal{O}^*)$ is inverse to\nthe pullback $f^*$, $u_{ijk}=1$ and the $\\varphi_{ij}$ satisfy the cocycle\ncondition. Thus $\\{\\mathcal{L}_i|_{X_{T_i}},\\varphi_{ij}\\}$ is a descent datum\nfor invertible modules on the fppf (in particular fpqc) covering\n$\\{X_{T_i}\\to X_T\\}$; by [lem-pc-fpqc-descent] there exists an\ninvertible $\\mathcal{O}_{X_T}$-module $\\mathcal{L}$ with\n$\\mathcal{L}|_{X_{T_i}}=\\mathcal{L}_i$ (with the given gluing isomorphisms). Since the\ngluing isomorphisms are compatible with the trivializations $\\alpha_i$,\nthe module $\\sigma_T^*\\mathcal{L}$ restricts to the trivial module on $T_i$ in a\ncompatible way, so $\\sigma_T^*\\mathcal{L}\\cong\\mathcal{O}_T$ by descent: hence\n$\\mathcal{L}\\in K(T)$. Uniqueness of gluing gives the uniqueness in the sheaf\ncondition. This proves the lemma.",
+   "uses": [
+    "lem-pc-fpqc-descent"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pc-sigma-subfunctor",
+  "lem-pc-fpqc-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-cor-picard-pic-sheaf/lem-pc-k-sheaf.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 809,
+ "blueprint_uses": [
+  "def-pc-fppf-site",
+  "def-pc-pic-sigma-functor",
+  "def-pc-picard-functor",
+  "def-pc-subfunctor",
+  "lem-pc-fpqc-descent",
+  "lem-pc-sigma-subfunctor"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+  "declaration": "AlgebraicGeometry.isSheaf_picardFunctorNormalized",
+  "branch": "slopmaster2",
+  "line": 612,
+  "sorry_free": true,
+  "body_lines": 97
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.isSheaf_picardFunctorNormalized"
+ ],
+ "uses_not_cited": [
+  "def-pc-fppf-site",
+  "def-pc-pic-sigma-functor",
+  "def-pc-subfunctor"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-picard-framework",
+ "unit": "sk-cor-picard-pic-sheaf",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f:X\\to S$ be a morphism of schemes as in\nDefinition [def-pc-picard-functor].\nAssume $f$ has a section $\\sigma$ and that\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for all\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/S)_{fppf})$. For a scheme $T$ over $S$ put\n$K(T):=\\operatorname{Ker}(\\sigma_T^*:\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}(T))$. Then $K$\nsatisfies the sheaf property for fppf coverings.",
+  "proof": [
+   {
+    "text": "Let $\\{T_i\\to T\\}_{i\\in I}$ be an fppf covering and let\n$\\mathcal{L}_i\\in K(T_i)$ with $\\mathcal{L}_i$ and $\\mathcal{L}_j$ mapping to the same element of\n$K(T_i\\times_TT_j)$ (the restriction maps of $K$ are those of the\nsubfunctor [lem-pc-sigma-subfunctor]).\nChoose an isomorphism $\\alpha_i:\\mathcal{O}_{T_i}\\to\\sigma_{T_i}^*\\mathcal{L}_i$ for all\n$i$, and an isomorphism\n\n$$\n\\varphi_{ij}:\\mathcal{L}_i|_{X_{T_i\\times_TT_j}}\\longrightarrow\n\\mathcal{L}_j|_{X_{T_i\\times_TT_j}} .\n$$",
+    "uses": [
+     "lem-pc-sigma-subfunctor"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The composite\n\n$$\n\\alpha_j^{-1}|_{T_{ij}}\\circ\\sigma_{T_{ij}}^*\\varphi_{ij}\\circ\\alpha_i|_{T_{ij}}:\n\\mathcal{O}_{T_{ij}}\\longrightarrow\\mathcal{O}_{T_{ij}}\n$$\n\nis multiplication by some unit $u_{ij}$; replacing $\\varphi_{ij}$ by\n$u_{ij}^{-1}\\varphi_{ij}$ we may assume the composite is\nmultiplication by $1$, i.e. that the $\\varphi_{ij}$ are compatible with\nthe $\\alpha$'s along $\\sigma$.\nNow the self-map of $\\mathcal{L}_i|_{X_{T_{ijk}}}$\n\n$$\n\\varphi_{ki}\\circ\\varphi_{jk}\\circ\\varphi_{ij}\n$$\n\nis multiplication by a unit\n$u_{ijk}\\in\\Gamma(X_{T_{ijk}},\\mathcal{O}^*)$; by the equality\n$\\Gamma(X_{T_{ijk}},\\mathcal{O}^*)=\\Gamma(T_{ijk},\\mathcal{O}^*)$ (from the hypothesis)\nwe may regard $u_{ijk}$ as a unit on $T_{ijk}$, and its image under\n$\\sigma^*$ is $1$ by the $\\alpha$-compatibility —since\n$\\sigma^*:\\Gamma(X_T,\\mathcal{O}^*)\\to\\Gamma(T,\\mathcal{O}^*)$ is inverse to\nthe pullback $f^*$, $u_{ijk}=1$ and the $\\varphi_{ij}$ satisfy the cocycle\ncondition. Thus $\\{\\mathcal{L}_i|_{X_{T_i}},\\varphi_{ij}\\}$ is a descent datum\nfor invertible modules on the fppf (in particular fpqc) covering\n$\\{X_{T_i}\\to X_T\\}$; by [lem-pc-fpqc-descent] there exists an\ninvertible $\\mathcal{O}_{X_T}$-module $\\mathcal{L}$ with\n$\\mathcal{L}|_{X_{T_i}}=\\mathcal{L}_i$ (with the given gluing isomorphisms). Since the\ngluing isomorphisms are compatible with the trivializations $\\alpha_i$,\nthe module $\\sigma_T^*\\mathcal{L}$ restricts to the trivial module on $T_i$ in a\ncompatible way, so $\\sigma_T^*\\mathcal{L}\\cong\\mathcal{O}_T$ by descent: hence\n$\\mathcal{L}\\in K(T)$. Uniqueness of gluing gives the uniqueness in the sheaf\ncondition. This proves the lemma.",
+    "uses": [
+     "lem-pc-fpqc-descent"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

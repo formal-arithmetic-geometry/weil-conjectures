@@ -1,402 +1,391 @@
 {
-  "id": "det-lem-int-integral-heart-triangulated",
-  "blueprint": {
-    "is": "det-lem-int-integral-heart-triangulated",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "The integral constructible category and its heart",
-  "statement": "Let $k$ be a field of characteristic $p>0$, let $\\ell$ be a prime different from $p$, and let $X$ be a separated scheme of finite type over $k$, as in [sk-def-sfb-dc-setting]. Let $E/\\mathbf Q_\\ell$ be finite, with valuation ring $\\mathcal O_E$ and uniformizer $\\pi_E$ [def-weil-l-adic-coefficient-extension]. Coefficients are the completed ring sheaf $R_X=\\mathcal O_{E,X}=p_X^*\\underline{\\mathcal O_E}$ of [sk-def-sfb-pulled-back-coefficients], and the ambient category is the ordinary unbounded derived category $D(\\operatorname{Mod}(R_X))$ of [sk-def-sfb-derived-categories]. Use the constructibility and bounded constructibility of [sk-def-sfb-constructible], the standard truncations of [def-sbc-standard-tstructure-derived-category], and the fixed-universe size convention [def-weil-size-convention].\n\n1. $\\Dbc(X,\\mathcal O_E)$ is a full triangulated subcategory of $D(\\operatorname{Mod}(R_X))$ in the sense of [def-weil-triangulated-subcategory]. Its objects are bounded, and it is stable under the standard truncations.\n2. $\\Cons(X,\\mathcal O_E)$ identifies with the objects of $\\Dbc(X,\\mathcal O_E)$ concentrated in degree $0$. It is an abelian full subcategory of $\\operatorname{Mod}(R_X)$: kernels and cokernels of its morphisms, computed in $\\operatorname{Mod}(R_X)$, belong to it. It is closed under extensions and essentially small (its isomorphism classes form a set in the chosen universe).",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.md",
-    "place": "node det-lem-int-integral-heart-triangulated, order None",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09C2"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "sk-def-sfb-dc-setting",
-    "def-weil-l-adic-coefficient-extension",
-    "sk-def-sfb-pulled-back-coefficients",
-    "sk-def-sfb-derived-categories",
-    "sk-def-sfb-constructible",
-    "def-sbc-standard-tstructure-derived-category",
-    "def-weil-size-convention",
-    "def-weil-triangulated-subcategory"
-  ],
-  "proof": [
-    {
-      "text": "Put $R=R_X$ and $\\kappa=\\mathcal O_E/\\pi_E$. The residue field $\\kappa$ is finite by [lem-weil-l-adic-extension-integers-dvr](3), and $\\pi_E\\mathcal O_E=\\mathfrak m_E$ by the choice of uniformizer. By [sk-lem-integral-models](2), an ambient $R$-complex belongs to $\\Dbc(X,\\mathcal O_E)$ if and only if it is derived complete and its derived reduction $K_1=K\\otimes_R^{\\mathbf L}\\kappa_X$ is a bounded constructible complex pulled back from the étale site. This is a theorem identifying the cohomological definition with the residue criterion, not a redefinition of $\\Dbc$. Its hypotheses hold: $\\operatorname{Spec}k$ is locally Noetherian because the only ideals of the field $k$ are $0$ and $k$. Apply [pqf-lem-locnoeth-lft] to the structure morphism to obtain local Noetherianity of $X$. Its finite-type hypothesis makes $X$ quasi-compact, since the inverse image of the affine target $\\operatorname{Spec}k$ is all of $X$ [def-weil-finite-type-morphism]. Thus $X$ is Noetherian, and $E/\\mathbf Q_\\ell$ is finite as required. The zero complex satisfies both conditions and hence belongs to $\\Dbc$.",
-      "uses": [
-        "lem-weil-l-adic-extension-integers-dvr",
-        "sk-lem-integral-models",
-        "pqf-lem-locnoeth-lft",
-        "def-weil-finite-type-morphism"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
-        "place": "Paragraph (1), the two defining conditions, with the comparison in unit proof paragraph 1 made explicit"
-      }
-    },
-    {
-      "text": "For $K\\in\\Dbc$, its shifts $K[n]$ remain derived complete by [det-pe-derived-nakayama-first-reduction]. Derived scalar extension is an exact triangulated functor by [lem-pur-derived-change-of-rings](2), so $(K[n])_1\\simeq K_1[n]$. Bounded intrinsically constructible finite-coefficient complexes are shift-stable by [lem-weil-proetale-dbc-triangulated]. Every such bounded complex has bounded constructible étale origin by [lem-weil-pbc-finite-ring-constructible-derived-origin], applied to the finite commutative ring $\\kappa$. Thus the residue criterion of step 1 gives $K[n]\\in\\Dbc$ for every integer $n$.",
-      "uses": [
-        "det-pe-derived-nakayama-first-reduction",
-        "lem-pur-derived-change-of-rings",
-        "lem-weil-proetale-dbc-triangulated",
-        "lem-weil-pbc-finite-ring-constructible-derived-origin",
-        "sk-lem-integral-models"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
-        "place": "Paragraph (1), stability under shifts"
-      }
-    },
-    {
-      "text": "Let $K\\to L\\to M\\to K[1]$ be an ambient distinguished triangle with $K,M\\in\\Dbc$. Rotate it to $M[-1]\\to K\\to L\\to M$. By step 2 and cone closure of derived complete complexes [det-pe-derived-nakayama-first-reduction], $L$ is derived complete. Apply exact derived reduction [lem-pur-derived-change-of-rings] to the original triangle. The outer vertices $K_1,M_1$ have bounded constructible cohomology. The outer-vertex closure in [lem-weil-proetale-dbc-triangulated] gives the same for $L_1$. The finite-ring origin theorem [lem-weil-pbc-finite-ring-constructible-derived-origin] supplies its bounded constructible étale representative. Hence [sk-lem-integral-models](2) gives $L\\in\\Dbc$. This works for arbitrary ambient triangles and morphisms. Together with zero and all shifts, it is precisely the full-triangulated-subcategory criterion of [def-weil-triangulated-subcategory], so the ambient distinguished triangles and shifts give the asserted triangulation and exact inclusion.",
-      "uses": [
-        "det-pe-derived-nakayama-first-reduction",
-        "lem-pur-derived-change-of-rings",
-        "lem-weil-proetale-dbc-triangulated",
-        "lem-weil-pbc-finite-ring-constructible-derived-origin",
-        "sk-lem-integral-models",
-        "def-weil-triangulated-subcategory"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
-        "place": "Paragraph (1), stability under cones and conclusion that Dbc is triangulated"
-      }
-    },
-    {
-      "text": "Boundedness is already part of the current cohomological definition [sk-def-sfb-constructible]: $\\Dbc$ consists of bounded complexes with constructible cohomology sheaves. This avoids applying a bounded-reduction assertion without its completeness hypothesis. Both standard truncations remain in $\\Dbc$ by [det-lem-int-integral-heart-local-model](3). By the same definition a module placed in degree zero belongs to $\\Dbc$ exactly when it belongs to $\\Cons$. Conversely, if $K\\in\\Dbc$ has cohomology only in degree zero, [lem-sf-derived-concentrated-single] with $r=0$ identifies $K$ with $H^0(K)[0]$. Its cohomology is constructible by the definition. The degree-zero single-complex functor is fully faithful by [lem-weil-pbc-derived-single-fully-faithful]. Thus it identifies the full module category $\\Cons$ with precisely the full subcategory of degree-zero objects of $\\Dbc$, including all their morphisms.",
-      "uses": [
-        "sk-def-sfb-constructible",
-        "det-lem-int-integral-heart-local-model",
-        "lem-sf-derived-concentrated-single",
-        "lem-weil-pbc-derived-single-fully-faithful"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
-        "place": "Paragraph (1), boundedness and standard truncations; paragraph (2), identification of the degree-zero subcategory"
-      }
-    },
-    {
-      "text": "Let $f:C\\to C'$ be a morphism of constructible $R$-modules and let $D$ be its cone in the ambient derived category. The triangulation proved above, rotated if necessary, implies $D\\in\\Dbc$. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] of $C[0]\\to C'[0]\\to D\\to C[1]$ reads $0\\to H^{-1}(D)\\to C\\xrightarrow f C'\\to H^0(D)\\to0$, since $C[0],C'[0]$ have no other cohomology. Thus the ambient kernel is $H^{-1}(D)$ and the ambient cokernel is $H^0(D)$. By [det-lem-int-integral-heart-local-model](2) these sheaves placed in degree zero lie in $\\Dbc$, so step 4 puts both in $\\Cons$.",
-      "uses": [
-        "lem-sf-derived-homology-long-exact",
-        "det-lem-int-integral-heart-local-model"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
-        "place": "Paragraph (2), kernels and cokernels of a morphism"
-      }
-    },
-    {
-      "text": "The full subcategory $\\Cons$ contains zero and finite direct sums: the cone formula of [def-weil-abstract-derived-category] makes the cone of the zero map $C[-1]\\to C'$ equal to $C'\\oplus C$ in degree zero, so the triangulation and the degree-zero identification already proved put it in $\\Cons$. It inherits addition on morphisms from modules. The kernel and cokernel from step 5 have their ambient universal properties in this full subcategory. Its images and coimages are therefore the ambient ones, and their canonical comparison is an ambient isomorphism with inverse again a morphism of the full subcategory. Hence $\\Cons$ is abelian. For an ambient short exact sequence $0\\to C'\\to C\\to C''\\to0$ with constructible ends, [lem-weil-pbc-complex-ses-triangle] applied to the degree-zero complexes gives a distinguished triangle $C'[0]\\to C[0]\\to C''[0]\\to C'[1]$. Step 3 puts $C[0]$ in $\\Dbc$ and step 4 puts $C$ in $\\Cons$, proving closure under ambient extensions.",
-      "uses": [
-        "def-weil-abstract-derived-category",
-        "lem-weil-pbc-complex-ses-triangle",
-        "sk-def-sfb-constructible"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
-        "place": "Paragraph (2), abelianness and closure under extensions"
-      }
-    },
-    {
-      "text": "We now supply the set of local data rather than assuming it classifies global gluings. Fix one stratum $S$. In the size convention [def-weil-size-convention], its pro-étale site has a fixed small skeleton [def-weil-pbc-proetale-site]. By [sk-def-sfb-constructible](1), a finite constant local model sheaf is locally $\\mathcal O_{E,U}\\otimes_{\\mathcal O_E}P$ for a finitely presented scalar module $P$. Representatives for such $P$ form a set: use the cokernels of all finite matrices over the set $\\mathcal O_E$. Cover families in a small site can be chosen from a set (discard repeated arrows), and assignments of these scalar presentations form a set. For each overlap $W=U_i\\times_SU_j$, an overlap module map between the fixed model sheaves $A,B$ is a family in $\\prod_{(V\\to W)}\\operatorname{Map}(A(V),B(V))$, subject to naturality and linearity; the index is the object set of a small slice site and all factors are sets in the chosen universe. Invertibility imposes a further condition on this set of maps. Thus the overlap isomorphisms also form a set. These data determine a sheaf up to isomorphism: for two realizations with the same data, at every test object $V\\to S$ use the local identifications on $V\\times_SU_i$ and their overlap agreement to glue a unique map on sections; glue their inverses in the same way. The equalizer sheaf axiom in [def-weil-pbc-sites-and-cohomology](1) proves these maps are inverse and natural, and they are module-linear locally and hence globally. The module structures and morphisms are the sectionwise ones of [def-weil-sheaf-of-modules-category]. Consequently there is a set of isomorphism classes of finite constant local model sheaves on each fixed $S$. No effectivity assertion for arbitrary data is needed: retain only data that have a realization.",
-      "uses": [
-        "def-weil-size-convention",
-        "def-weil-pbc-proetale-site",
-        "sk-def-sfb-constructible",
-        "def-weil-pbc-sites-and-cohomology",
-        "def-weil-sheaf-of-modules-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
-        "place": "Paragraph (2), essential smallness: finite presentations and pro-étale cover data"
-      }
-    },
-    {
-      "text": "For a finite stratification $(a_s:S_s\\to X)_s$ and chosen local-model sheaves $F_s$ from step 7, put $P=\\prod_s a_{s*}F_s$, a finite product of $R$-module sheaves. These are the module direct images and adjunctions $a_s^*\\dashv a_{s*}$ of [sk-def-sfb-module-pushforward-pullback], with the pulled-back coefficient identifications of [sk-prop-sfb-cartesian-coefficients](1). Its final assertion makes every $a_s^*$ exact and canonically naturally isomorphic to the lift of $a_s^{-1}$ on underlying abelian sheaves, with the $\\mathcal O_{E,S_s}$-action obtained through $\\alpha_{a_s}^{-1}$. Here we use only the untwisted admissible coefficient $\\mathcal O_E$, so none of the extra hypotheses for the Tate-twist clause is needed. For a constructible $C$, choose isomorphisms $\\varphi_s:a_s^*C\\xrightarrow{\\sim}F_s$. Define $u:C\\to P$ by its components $u_s=a_{s*}(\\varphi_s)\\circ\\eta_{s,C}$, where $\\eta_s$ is the adjunction unit. Let $N=\\ker u$. For each $s$, exactness of $a_s^*$ makes $a_s^*N$ the kernel of $a_s^*u$. The component $a_s^*u_s:a_s^*C\\to a_s^*a_{s*}F_s$ has the explicit left inverse $\\varepsilon_{s,a_s^*C}\\circ a_s^*a_{s*}(\\varphi_s^{-1})$, where $\\varepsilon_s$ is the adjunction counit: its composite with $a_s^*u_s$ is $\\varepsilon_{s,a_s^*C}\\circ a_s^*\\eta_{s,C}=\\mathrm{id}_{a_s^*C}$ by the triangle identity. Thus $a_s^*u_s$ is monic; since it is a component of $a_s^*u$, that map has zero kernel. Hence $a_s^*N=0$ for every $s$. The precise underlying-sheaf identification above therefore gives $a_s^{-1}U(N)=0$ for every $s$, where $U$ forgets the module action. The finite-stratum zero-detection statement [lem-weil-pbc-noetherian-stratum-detection], applied to $U(N)$ with the identity covers on the strata and the Noetherianity proved in step 1, gives $U(N)=0$, hence $N=0$. Thus $C\\to P$ is monic. Notice that we only need the split monomorphism furnished by the adjunction, not a claim that $a_s^*a_{s*}$ is the identity.",
-      "uses": [
-        "sk-def-sfb-module-pushforward-pullback",
-        "sk-prop-sfb-cartesian-coefficients",
-        "lem-weil-pbc-noetherian-stratum-detection"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
-        "place": "Paragraph (2), essential smallness: explicit determination by stratum data and global gluing"
-      }
-    },
-    {
-      "text": "There is a set of finite stratifications of the fixed scheme $X$: the locally closed subsets form a set, and their bounded scheme structures and immersion maps are sets in the chosen universes. Step 7 gives a set of possible tuples $(F_s)_s$ for each stratification, hence a set of possible sheaves $P$ in step 8. For each fixed $P$, its subobjects form a set directly: kernels of module sheaf morphisms are sectionwise by [def-weil-sheaf-of-modules-category], so a monomorphism is sectionwise injective; identify it with its image subsheaf. Such an image is specified by a subset of $P(V)$ for each object $V$ of the fixed small site, subject to the module, restriction and sheaf axioms. All such choices lie in the set $\\prod_V\\mathcal P(P(V))$. Therefore subobjects of all these $P$ form a set, and by step 8 they contain representatives of every constructible sheaf. Its isomorphism classes form a set, as required. For the empty scheme, the empty stratification gives the terminal, zero module sheaf and the same argument applies.",
-      "uses": [
-        "def-weil-size-convention",
-        "def-weil-sheaf-of-modules-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
-        "place": "Paragraph (2), final sentence that the data form a set; expanded subobject count"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "det-lem-int-integral-heart-triangulated",
+ "blueprint": {
+  "is": "det-lem-int-integral-heart-triangulated",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The integral constructible category and its heart",
+ "statement": "Let $k$ be a field of characteristic $p>0$, let $\\ell$ be a prime different from $p$, and let $X$ be a separated scheme of finite type over $k$, as in [sk-def-sfb-dc-setting]. Let $E/\\mathbf Q_\\ell$ be finite, with valuation ring $\\mathcal O_E$ and uniformizer $\\pi_E$ [def-weil-l-adic-coefficient-extension]. Coefficients are the completed ring sheaf $R_X=\\mathcal O_{E,X}=p_X^*\\underline{\\mathcal O_E}$ of [sk-def-sfb-pulled-back-coefficients], and the ambient category is the ordinary unbounded derived category $D(\\operatorname{Mod}(R_X))$ of [sk-def-sfb-derived-categories]. Use the constructibility and bounded constructibility of [sk-def-sfb-constructible], the standard truncations of [def-sbc-standard-tstructure-derived-category], and the fixed-universe size convention [def-weil-size-convention].\n\n1. $\\Dbc(X,\\mathcal O_E)$ is a full triangulated subcategory of $D(\\operatorname{Mod}(R_X))$ in the sense of [def-weil-triangulated-subcategory]. Its objects are bounded, and it is stable under the standard truncations.\n2. $\\Cons(X,\\mathcal O_E)$ identifies with the objects of $\\Dbc(X,\\mathcal O_E)$ concentrated in degree $0$. It is an abelian full subcategory of $\\operatorname{Mod}(R_X)$: kernels and cokernels of its morphisms, computed in $\\operatorname{Mod}(R_X)$, belong to it. It is closed under extensions and essentially small (its isomorphism classes form a set in the chosen universe).",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.md",
+  "place": "node det-lem-int-integral-heart-triangulated, order None",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09C2"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-constructible",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-size-convention",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=R_X$ and $\\kappa=\\mathcal O_E/\\pi_E$. The residue field $\\kappa$ is finite by [lem-weil-l-adic-extension-integers-dvr](3), and $\\pi_E\\mathcal O_E=\\mathfrak m_E$ by the choice of uniformizer. By [sk-lem-integral-models](2), an ambient $R$-complex belongs to $\\Dbc(X,\\mathcal O_E)$ if and only if it is derived complete and its derived reduction $K_1=K\\otimes_R^{\\mathbf L}\\kappa_X$ is a bounded constructible complex pulled back from the étale site. This is a theorem identifying the cohomological definition with the residue criterion, not a redefinition of $\\Dbc$. Its hypotheses hold: $\\operatorname{Spec}k$ is locally Noetherian because the only ideals of the field $k$ are $0$ and $k$. Apply [pqf-lem-locnoeth-lft] to the structure morphism to obtain local Noetherianity of $X$. Its finite-type hypothesis makes $X$ quasi-compact, since the inverse image of the affine target $\\operatorname{Spec}k$ is all of $X$ [def-weil-finite-type-morphism]. Thus $X$ is Noetherian, and $E/\\mathbf Q_\\ell$ is finite as required. The zero complex satisfies both conditions and hence belongs to $\\Dbc$.",
+   "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
     "sk-lem-integral-models",
     "pqf-lem-locnoeth-lft",
-    "def-weil-finite-type-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (1), the two defining conditions, with the comparison in unit proof paragraph 1 made explicit"
+   }
+  },
+  {
+   "text": "For $K\\in\\Dbc$, its shifts $K[n]$ remain derived complete by [det-pe-derived-nakayama-first-reduction]. Derived scalar extension is an exact triangulated functor by [lem-pur-derived-change-of-rings](2), so $(K[n])_1\\simeq K_1[n]$. Bounded intrinsically constructible finite-coefficient complexes are shift-stable by [lem-weil-proetale-dbc-triangulated]. Every such bounded complex has bounded constructible étale origin by [lem-weil-pbc-finite-ring-constructible-derived-origin], applied to the finite commutative ring $\\kappa$. Thus the residue criterion of step 1 gives $K[n]\\in\\Dbc$ for every integer $n$.",
+   "uses": [
     "det-pe-derived-nakayama-first-reduction",
     "lem-pur-derived-change-of-rings",
     "lem-weil-proetale-dbc-triangulated",
     "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "def-weil-triangulated-subcategory",
+    "sk-lem-integral-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (1), stability under shifts"
+   }
+  },
+  {
+   "text": "Let $K\\to L\\to M\\to K[1]$ be an ambient distinguished triangle with $K,M\\in\\Dbc$. Rotate it to $M[-1]\\to K\\to L\\to M$. By step 2 and cone closure of derived complete complexes [det-pe-derived-nakayama-first-reduction], $L$ is derived complete. Apply exact derived reduction [lem-pur-derived-change-of-rings] to the original triangle. The outer vertices $K_1,M_1$ have bounded constructible cohomology. The outer-vertex closure in [lem-weil-proetale-dbc-triangulated] gives the same for $L_1$. The finite-ring origin theorem [lem-weil-pbc-finite-ring-constructible-derived-origin] supplies its bounded constructible étale representative. Hence [sk-lem-integral-models](2) gives $L\\in\\Dbc$. This works for arbitrary ambient triangles and morphisms. Together with zero and all shifts, it is precisely the full-triangulated-subcategory criterion of [def-weil-triangulated-subcategory], so the ambient distinguished triangles and shifts give the asserted triangulation and exact inclusion.",
+   "uses": [
+    "det-pe-derived-nakayama-first-reduction",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-proetale-dbc-triangulated",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "sk-lem-integral-models",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (1), stability under cones and conclusion that Dbc is triangulated"
+   }
+  },
+  {
+   "text": "Boundedness is already part of the current cohomological definition [sk-def-sfb-constructible]: $\\Dbc$ consists of bounded complexes with constructible cohomology sheaves. This avoids applying a bounded-reduction assertion without its completeness hypothesis. Both standard truncations remain in $\\Dbc$ by [det-lem-int-integral-heart-local-model](3). By the same definition a module placed in degree zero belongs to $\\Dbc$ exactly when it belongs to $\\Cons$. Conversely, if $K\\in\\Dbc$ has cohomology only in degree zero, [lem-sf-derived-concentrated-single] with $r=0$ identifies $K$ with $H^0(K)[0]$. Its cohomology is constructible by the definition. The degree-zero single-complex functor is fully faithful by [lem-weil-pbc-derived-single-fully-faithful]. Thus it identifies the full module category $\\Cons$ with precisely the full subcategory of degree-zero objects of $\\Dbc$, including all their morphisms.",
+   "uses": [
     "sk-def-sfb-constructible",
     "det-lem-int-integral-heart-local-model",
     "lem-sf-derived-concentrated-single",
-    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (1), boundedness and standard truncations; paragraph (2), identification of the degree-zero subcategory"
+   }
+  },
+  {
+   "text": "Let $f:C\\to C'$ be a morphism of constructible $R$-modules and let $D$ be its cone in the ambient derived category. The triangulation proved above, rotated if necessary, implies $D\\in\\Dbc$. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] of $C[0]\\to C'[0]\\to D\\to C[1]$ reads $0\\to H^{-1}(D)\\to C\\xrightarrow f C'\\to H^0(D)\\to0$, since $C[0],C'[0]$ have no other cohomology. Thus the ambient kernel is $H^{-1}(D)$ and the ambient cokernel is $H^0(D)$. By [det-lem-int-integral-heart-local-model](2) these sheaves placed in degree zero lie in $\\Dbc$, so step 4 puts both in $\\Cons$.",
+   "uses": [
     "lem-sf-derived-homology-long-exact",
+    "det-lem-int-integral-heart-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), kernels and cokernels of a morphism"
+   }
+  },
+  {
+   "text": "The full subcategory $\\Cons$ contains zero and finite direct sums: the cone formula of [def-weil-abstract-derived-category] makes the cone of the zero map $C[-1]\\to C'$ equal to $C'\\oplus C$ in degree zero, so the triangulation and the degree-zero identification already proved put it in $\\Cons$. It inherits addition on morphisms from modules. The kernel and cokernel from step 5 have their ambient universal properties in this full subcategory. Its images and coimages are therefore the ambient ones, and their canonical comparison is an ambient isomorphism with inverse again a morphism of the full subcategory. Hence $\\Cons$ is abelian. For an ambient short exact sequence $0\\to C'\\to C\\to C''\\to0$ with constructible ends, [lem-weil-pbc-complex-ses-triangle] applied to the degree-zero complexes gives a distinguished triangle $C'[0]\\to C[0]\\to C''[0]\\to C'[1]$. Step 3 puts $C[0]$ in $\\Dbc$ and step 4 puts $C$ in $\\Cons$, proving closure under ambient extensions.",
+   "uses": [
     "def-weil-abstract-derived-category",
     "lem-weil-pbc-complex-ses-triangle",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), abelianness and closure under extensions"
+   }
+  },
+  {
+   "text": "We now supply the set of local data rather than assuming it classifies global gluings. Fix one stratum $S$. In the size convention [def-weil-size-convention], its pro-étale site has a fixed small skeleton [def-weil-pbc-proetale-site]. By [sk-def-sfb-constructible](1), a finite constant local model sheaf is locally $\\mathcal O_{E,U}\\otimes_{\\mathcal O_E}P$ for a finitely presented scalar module $P$. Representatives for such $P$ form a set: use the cokernels of all finite matrices over the set $\\mathcal O_E$. Cover families in a small site can be chosen from a set (discard repeated arrows), and assignments of these scalar presentations form a set. For each overlap $W=U_i\\times_SU_j$, an overlap module map between the fixed model sheaves $A,B$ is a family in $\\prod_{(V\\to W)}\\operatorname{Map}(A(V),B(V))$, subject to naturality and linearity; the index is the object set of a small slice site and all factors are sets in the chosen universe. Invertibility imposes a further condition on this set of maps. Thus the overlap isomorphisms also form a set. These data determine a sheaf up to isomorphism: for two realizations with the same data, at every test object $V\\to S$ use the local identifications on $V\\times_SU_i$ and their overlap agreement to glue a unique map on sections; glue their inverses in the same way. The equalizer sheaf axiom in [def-weil-pbc-sites-and-cohomology](1) proves these maps are inverse and natural, and they are module-linear locally and hence globally. The module structures and morphisms are the sectionwise ones of [def-weil-sheaf-of-modules-category]. Consequently there is a set of isomorphism classes of finite constant local model sheaves on each fixed $S$. No effectivity assertion for arbitrary data is needed: retain only data that have a realization.",
+   "uses": [
     "def-weil-size-convention",
     "def-weil-pbc-proetale-site",
+    "sk-def-sfb-constructible",
     "def-weil-pbc-sites-and-cohomology",
-    "def-weil-sheaf-of-modules-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), essential smallness: finite presentations and pro-étale cover data"
+   }
+  },
+  {
+   "text": "For a finite stratification $(a_s:S_s\\to X)_s$ and chosen local-model sheaves $F_s$ from step 7, put $P=\\prod_s a_{s*}F_s$, a finite product of $R$-module sheaves. These are the module direct images and adjunctions $a_s^*\\dashv a_{s*}$ of [sk-def-sfb-module-pushforward-pullback], with the pulled-back coefficient identifications of [sk-prop-sfb-cartesian-coefficients](1). Its final assertion makes every $a_s^*$ exact and canonically naturally isomorphic to the lift of $a_s^{-1}$ on underlying abelian sheaves, with the $\\mathcal O_{E,S_s}$-action obtained through $\\alpha_{a_s}^{-1}$. Here we use only the untwisted admissible coefficient $\\mathcal O_E$, so none of the extra hypotheses for the Tate-twist clause is needed. For a constructible $C$, choose isomorphisms $\\varphi_s:a_s^*C\\xrightarrow{\\sim}F_s$. Define $u:C\\to P$ by its components $u_s=a_{s*}(\\varphi_s)\\circ\\eta_{s,C}$, where $\\eta_s$ is the adjunction unit. Let $N=\\ker u$. For each $s$, exactness of $a_s^*$ makes $a_s^*N$ the kernel of $a_s^*u$. The component $a_s^*u_s:a_s^*C\\to a_s^*a_{s*}F_s$ has the explicit left inverse $\\varepsilon_{s,a_s^*C}\\circ a_s^*a_{s*}(\\varphi_s^{-1})$, where $\\varepsilon_s$ is the adjunction counit: its composite with $a_s^*u_s$ is $\\varepsilon_{s,a_s^*C}\\circ a_s^*\\eta_{s,C}=\\mathrm{id}_{a_s^*C}$ by the triangle identity. Thus $a_s^*u_s$ is monic; since it is a component of $a_s^*u$, that map has zero kernel. Hence $a_s^*N=0$ for every $s$. The precise underlying-sheaf identification above therefore gives $a_s^{-1}U(N)=0$ for every $s$, where $U$ forgets the module action. The finite-stratum zero-detection statement [lem-weil-pbc-noetherian-stratum-detection], applied to $U(N)$ with the identity covers on the strata and the Noetherianity proved in step 1, gives $U(N)=0$, hence $N=0$. Thus $C\\to P$ is monic. Notice that we only need the split monomorphism furnished by the adjunction, not a claim that $a_s^*a_{s*}$ is the identity.",
+   "uses": [
     "sk-def-sfb-module-pushforward-pullback",
     "sk-prop-sfb-cartesian-coefficients",
     "lem-weil-pbc-noetherian-stratum-detection"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
-    "place": "Paragraphs (1) and (2); current integral-model comparison inserted explicitly; final size argument expanded using adjunction units and sectionwise subobject counting"
+    "place": "Paragraph (2), essential smallness: explicit determination by stratum data and global gluing"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "The bounded constructible complexes of integral adic proetale sheaves form a triangulated category with an essentially small abelian heart",
-      "results": "8 hits: DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, HomotopyCategory.instIsTriangulatedIntUp, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsTriangulated, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, CategoryTheory.Functor.IsHomological.mk'",
-      "date": "2026-10-16",
-      "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Constructible\", \"IsTriangulated\"",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible.*(triangulated|abelian)|integral.*constructible",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Integral constructible proetale sheaves form an essentially small abelian category",
-      "results": "8 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.sheafIsAbelian, CategoryTheory.hasLimitsEssentiallySmallSite, CategoryTheory.IsGrothendieckAbelian.wellPowered, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.IsGrothendieckAbelian.hasLimits, CategoryTheory.IsGrothendieckAbelian.locallySmall",
-      "date": "2026-10-16",
-      "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Constructible adic sheaves are closed under kernels cokernels and extensions and their bounded derived complexes are closed under truncation",
-      "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, HasDerivedCategory.standard, DerivedCategory.IsGE, DerivedCategory.TStructure.t, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, DerivedCategory.IsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, HasDerivedCategory",
-      "date": "2026-10-16",
-      "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible|adic",
-      "results": "0 hits: ; directory Mathlib/CategoryTheory/Sites",
-      "date": "2026-10-16",
-      "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The full subcategory of constructible sheaves of modules over an adic coefficient ring is abelian and essentially small",
-      "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, CondensedMod, instAbelianLightCondMod, LightCondensed.instCountableAB4StarLightCondMod, Condensed.instAB4CondensedMod, Condensed.instAB4StarCondensedMod, Condensed.instAB5CondensedMod",
-      "date": "2026-10-16",
-      "verdict": "no match for integral constructible modules or their heart; semantic hits describe ambient condensed-module categories"
-    },
-    {
-      "tool": "grep",
-      "query": "IsTriangulated.*[Cc]onstructible|[Cc]onstructible.*IsTriangulated",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match for integral constructible modules or their heart; semantic hits describe ambient condensed-module categories"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Constructible\", \"Abelian\"",
-      "results": "0 hits: ",
-      "date": "2026-10-16",
-      "verdict": "no match for integral constructible modules or their heart; semantic hits describe ambient condensed-module categories"
-    },
-    {
-      "tool": "grep",
-      "query": "([Cc]onstructible|[Ll]isse).*(Abelian|[Ss]mall)|[Aa]dic.*[Hh]eart",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match; ambient sheaf and condensed-module results do not assert the integral constructible subcategory and its small heart"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Constructible\", \"EssentiallySmall\"",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match; ambient sheaf and condensed-module results do not assert the integral constructible subcategory and its small heart"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The subcategory of lisse constructible integral sheaves is closed under cohomology and has a small abelian heart",
-      "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CondensedAb, LightCondAb.ofSheafLightProfinite, AlgebraicGeometry.Scheme.Modules.instAbelian, LightCondensed, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.H",
-      "date": "2026-10-16",
-      "verdict": "no match; ambient sheaf and condensed-module results do not assert the integral constructible subcategory and its small heart"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-lem-int-integral-heart-local-model",
-    "sk-def-sfb-constructible"
-  ],
-  "uses_not_cited": [
-    "sk-def-sfb-constructible"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-lem-int-integral-heart",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "det-lem-int-integral-heart-triangulated",
-    "worker": "stage1",
-    "summary": "Expanded the imported two-paragraph proof into nine steps using existing nodes only. Made the standing geometric and coefficient hypotheses explicit; used the actual integral-model equivalence rather than treating completeness as a definition. Cited finite-coefficient triangulation and étale origin separately. Verified the cone kernel/cokernel identifications and ambient extension triangle. Replaced unspecified global gluing data by an explicit adjunction-unit monomorphism and a sectionwise subobject count. No new nodes or Mathlib leaves. The final clause audit also cites concentration and single-complex full faithfulness to justify the heart identification on objects and morphisms. Second reading adds the explicit Noetherianity citation and counts overlap morphisms sectionwise; no new nodes. Landing-refusal repair (2026-10-17): re-read all 23 cited proof-node statements against the current DAG; refreshed the obsolete cartesian-coefficients quote; step 8 now explicitly uses its canonical underlying-sheaf natural isomorphism and applies stratum zero detection to the underlying abelian sheaf. No statement, route, new-node or hypothesis change. Independent second reading: wrote the stratum-unit map and its retraction using the chosen local-model isomorphism explicitly; all 34 quotations revalidated.",
-    "blueprint": "Proof paragraph (1) realized by steps 1–4: completeness, exact reduction, finite constructibility, triangulation, boundedness and truncations. Paragraph (2) realized by steps 5–6 for the abelian heart and extensions, and steps 7–9 for the finite presentation/cover/gluing-data size argument. The chapter and unit route are preserved.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-l-adic-extension-integers-dvr",
-        "why": "Finiteness of the residue field permits application of the finite-ring constructibility tools; this is a generic coefficient-field fact."
-      },
-      {
-        "node": "det-pe-derived-nakayama-first-reduction",
-        "why": "Cone and shift closure for derived completeness; the integral-heart unit invokes these as generic completion facts."
-      },
-      {
-        "node": "lem-pur-derived-change-of-rings",
-        "why": "Exactness of derived reduction as a ringed-site scalar-extension functor; no heart-unit statement supplies that functorial exactness."
-      },
-      {
-        "node": "lem-weil-proetale-dbc-triangulated",
-        "why": "Triangulation for the finite residue-field complexes used in the unit residue-reduction route."
-      },
-      {
-        "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
-        "why": "Bounded finite-coefficient intrinsic constructibility has étale origin; keeps the actual hypothesis of the integral-model criterion."
-      },
-      {
-        "node": "lem-sf-derived-homology-long-exact",
-        "why": "The ambient long exact sequence identifies the kernel and cokernel; a general derived-category tool."
-      },
-      {
-        "node": "lem-weil-pbc-complex-ses-triangle",
-        "why": "An ambient short exact sequence of degree-zero complexes gives its distinguished triangle."
-      },
-      {
-        "node": "sk-prop-sfb-cartesian-coefficients",
-        "why": "Exact module inverse images for the actual pulled-back integral coefficients, used only in the size argument."
-      },
-      {
-        "node": "lem-weil-pbc-noetherian-stratum-detection",
-        "why": "Joint zero detection of finite stratum restrictions proves the global adjunction-unit map is monic; no integral-heart-unit statement supplies it."
-      },
-      {
-        "node": "lem-sf-derived-concentrated-single",
-        "why": "The general concentration theorem identifies a complex with only H^0 with a degree-zero module; it makes essential surjectivity of the heart identification explicit."
-      },
-      {
-        "node": "lem-weil-pbc-derived-single-fully-faithful",
-        "why": "Full faithfulness of the single-complex functor identifies the morphisms of the degree-zero subcategory with module morphisms."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "det-pe-derived-nakayama-first-reduction",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-proetale-dbc-triangulated",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-sf-derived-homology-long-exact",
-    "lem-weil-pbc-complex-ses-triangle",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-noetherian-stratum-detection",
-    "lem-sf-derived-concentrated-single",
-    "lem-weil-pbc-derived-single-fully-faithful"
-  ],
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-cc-Q20-14671086d",
-    "group": "Q20",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-14671086d (reviewer sub-agent of L); spot-checked: I read the item, all 8 statement dependencies and all 23 proof dependencies in full, plus the blueprint's triangulated, unit and local-model proof texts and Stacks proetale.tex 09C1/09C2. The coefficient category is D(Mod(R_X)) with R_X = p_X^* O_E throughout; completeness, Nakayama and integral-models(2) are all stated for R_X, and the item never identifies R_X with the constant sheaf C_X. Step 1: integral-models(2) is an actual if-and-only-if, the residue field is finite, and X is Noetherian. Steps 2-3: shift and cone closure of derived completeness, exact reduction to kappa, the finite-ring triangulation lemma, and both directions of the étale-origin equivalence; the item rightly does not use the 09C2 boundedness shortcut, since 09C2 assumes finite tor dimension. Step 4: boundedness holds by the cohomological definition and the degree-zero identification is correct. Step 5: kernel and cokernel are H^{-1} and H^0 of the cone, checked on a zero map and an isomorphism. Step 6: the cone of zero gives direct sums, and short exact sequences give triangles. Steps 7-9: the uniqueness-of-gluing argument, the split adjunction unit and stratum zero detection with identity covers are correct, and the subobject count is valid. Edge cases checked: empty X, and multiplication by pi on O_{E,X}. There are no new nodes, no cycle (the item is not reachable from anything it cites) and no duplicate (det-lem-coefficient-heart-small covers only E and Qlbar; prop-constructible-truncations covers another category). I accept the 11 declared generic tool_uses. Caution for later, not a fault here: the blueprint proof of local-model(3) uses this item's clause 1, so whoever splits det-lem-int-integral-heart-local-model must prove (2) and (3) directly from the cohomological definition, not by citing this item. No fixes."
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-e138488c3",
-    "group": "Q25",
-    "result": "pass",
-    "note": "Read the item node, all 8 statement dependencies, the module, the report, and the exact declarations used: CondensedConstantConstructibility (constant-model Cons/Dbc), coefficientExtensionIntegers, continuousMapRingObj, and the Mathlib classes IsTriangulated, IsClosedUnderKernels/Cokernels/Extensions and TStructure bounded/truncLE/truncGE. Hypotheses match the node with nothing stronger: char p>0, prime l != p, X separated and LocallyOfFiniteType+QuasiCompact over Spec k, E finite over Q_l in an independent universe v. All clauses are rendered: triangulated, bounded, truncation-stable; degree-0 single functor full and faithful with essImage = Dbc and t.le 0 and t.ge 0; abelian, closed under ambient kernels, cokernels and extensions; EssentiallySmall.{u+1}, which is non-vacuous since the category is Type (u+2) with homs in u+1. The helper integralHeartCoefficientRingObj is real data: Shrink.algEquiv transport of E, spectral-norm valuation ring, continuous-map condensed ring; probe confirms the pointwise MonObj. It is not a duplicate: no recorded condensed O_E exists for this chapter. The t-structure and triangulated-subcategory dependencies are Mathlib leaves used exactly; no dependency record needs repair. Only lean changed in the node; lean.statement is verbatim; one sorry; docstrings carry source, blueprint id and all 9 steps; the commit touches 3 files. nt_compile.py compiled the snapshot module in 3.1 s with no errors; probe #print axioms shows only sorryAx plus the standard axioms. Non-blocking remark: the extra IsClosedUnderIsomorphisms conjunct follows directly from the definitions."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.IntegralConstantModelHeart",
-    "declaration": "AlgebraicGeometry.ProEtale.integralConstantModelHeart",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.integralConstantModelHeart",
-      "AlgebraicGeometry.ProEtale.integralHeartCoefficientRingObj"
-    ],
-    "file": "lean/Sheaf/Paper/IntegralConstantModelHeart.lean",
-    "statement": "theorem integralConstantModelHeart (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ p) (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] : ObjectProperty.IsClosedUnderIsomorphisms (constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsTriangulated (constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ (∀ K, constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X K → DerivedCategory.TStructure.t.bounded K ∧ ∀ n : ℤ, constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧ constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧ (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).Full ∧ (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).Faithful ∧ (∀ K, (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).essImage K ↔ constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X K ∧ DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K) ∧ Nonempty (Abelian (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X)) ∧ ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ EssentiallySmall.{u + 1} (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X)",
-    "branch": "newtargets-dag",
-    "by": "Q25",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "The theorem uses the recorded finite constant scalar-model constructibility predicate, not the upstream arbitrary-presentation predicate. The real-data coefficient helper transports an arbitrary-universe finite extension through Shrink.algEquiv, using Module.Finite.small, and applies the existing continuous-function condensed ring construction to its spectral-norm valuation ring. No embedding in PadicAlgCl or equality of coefficient and scheme universes is required."
+  {
+   "text": "There is a set of finite stratifications of the fixed scheme $X$: the locally closed subsets form a set, and their bounded scheme structures and immersion maps are sets in the chosen universes. Step 7 gives a set of possible tuples $(F_s)_s$ for each stratification, hence a set of possible sheaves $P$ in step 8. For each fixed $P$, its subobjects form a set directly: kernels of module sheaf morphisms are sectionwise by [def-weil-sheaf-of-modules-category], so a monomorphism is sectionwise injective; identify it with its image subsheaf. Such an image is specified by a subset of $P(V)$ for each object $V$ of the fixed small site, subject to the module, restriction and sheaf axioms. All such choices lie in the set $\\prod_V\\mathcal P(P(V))$. Therefore subobjects of all these $P$ form a set, and by step 8 they contain representatives of every constructible sheaf. Its isomorphism classes form a set, as required. For the empty scheme, the empty stratification gives the terminal, zero module sheaf and the same argument applies.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence that the data form a set; expanded subobject count"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "sk-lem-integral-models",
+  "pqf-lem-locnoeth-lft",
+  "def-weil-finite-type-morphism",
+  "det-pe-derived-nakayama-first-reduction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "def-weil-triangulated-subcategory",
+  "sk-def-sfb-constructible",
+  "det-lem-int-integral-heart-local-model",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-noetherian-stratum-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraphs (1) and (2); current integral-model comparison inserted explicitly; final size argument expanded using adjunction units and sectionwise subobject counting"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The bounded constructible complexes of integral adic proetale sheaves form a triangulated category with an essentially small abelian heart",
+   "results": "8 hits: DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, HomotopyCategory.instIsTriangulatedIntUp, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsTriangulated, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, CategoryTheory.Functor.IsHomological.mk'",
+   "date": "2026-10-16",
+   "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"IsTriangulated\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(triangulated|abelian)|integral.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral constructible proetale sheaves form an essentially small abelian category",
+   "results": "8 hits: CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.sheafIsAbelian, CategoryTheory.hasLimitsEssentiallySmallSite, CategoryTheory.IsGrothendieckAbelian.wellPowered, AlgebraicGeometry.Scheme.Modules.instAbelian, CategoryTheory.IsGrothendieckAbelian.hasLimits, CategoryTheory.IsGrothendieckAbelian.locallySmall",
+   "date": "2026-10-16",
+   "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible adic sheaves are closed under kernels cokernels and extensions and their bounded derived complexes are closed under truncation",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, HasDerivedCategory.standard, DerivedCategory.IsGE, DerivedCategory.TStructure.t, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, DerivedCategory.IsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, HasDerivedCategory",
+   "date": "2026-10-16",
+   "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|adic",
+   "results": "0 hits: ; directory Mathlib/CategoryTheory/Sites",
+   "date": "2026-10-16",
+   "verdict": "no match for the full integral adic constructibility statement; hits concern ambient derived categories or all module sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of constructible sheaves of modules over an adic coefficient ring is abelian and essentially small",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, instAbelianCondensedMod, CondensedMod, instAbelianLightCondMod, LightCondensed.instCountableAB4StarLightCondMod, Condensed.instAB4CondensedMod, Condensed.instAB4StarCondensedMod, Condensed.instAB5CondensedMod",
+   "date": "2026-10-16",
+   "verdict": "no match for integral constructible modules or their heart; semantic hits describe ambient condensed-module categories"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTriangulated.*[Cc]onstructible|[Cc]onstructible.*IsTriangulated",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for integral constructible modules or their heart; semantic hits describe ambient condensed-module categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Abelian\"",
+   "results": "0 hits: ",
+   "date": "2026-10-16",
+   "verdict": "no match for integral constructible modules or their heart; semantic hits describe ambient condensed-module categories"
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]onstructible|[Ll]isse).*(Abelian|[Ss]mall)|[Aa]dic.*[Hh]eart",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match; ambient sheaf and condensed-module results do not assert the integral constructible subcategory and its small heart"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"EssentiallySmall\"",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match; ambient sheaf and condensed-module results do not assert the integral constructible subcategory and its small heart"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The subcategory of lisse constructible integral sheaves is closed under cohomology and has a small abelian heart",
+   "results": "8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, CondensedAb, LightCondAb.ofSheafLightProfinite, AlgebraicGeometry.Scheme.Modules.instAbelian, LightCondensed, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.Sheaf.H",
+   "date": "2026-10-16",
+   "verdict": "no match; ambient sheaf and condensed-module results do not assert the integral constructible subcategory and its small heart"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-lem-int-integral-heart-local-model",
+  "sk-def-sfb-constructible"
+ ],
+ "uses_not_cited": [
+  "sk-def-sfb-constructible"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-integral-heart",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-lem-int-integral-heart-triangulated",
+  "worker": "stage1",
+  "summary": "Expanded the imported two-paragraph proof into nine steps using existing nodes only. Made the standing geometric and coefficient hypotheses explicit; used the actual integral-model equivalence rather than treating completeness as a definition. Cited finite-coefficient triangulation and étale origin separately. Verified the cone kernel/cokernel identifications and ambient extension triangle. Replaced unspecified global gluing data by an explicit adjunction-unit monomorphism and a sectionwise subobject count. No new nodes or Mathlib leaves. The final clause audit also cites concentration and single-complex full faithfulness to justify the heart identification on objects and morphisms. Second reading adds the explicit Noetherianity citation and counts overlap morphisms sectionwise; no new nodes. Landing-refusal repair (2026-10-17): re-read all 23 cited proof-node statements against the current DAG; refreshed the obsolete cartesian-coefficients quote; step 8 now explicitly uses its canonical underlying-sheaf natural isomorphism and applies stratum zero detection to the underlying abelian sheaf. No statement, route, new-node or hypothesis change. Independent second reading: wrote the stratum-unit map and its retraction using the chosen local-model isomorphism explicitly; all 34 quotations revalidated.",
+  "blueprint": "Proof paragraph (1) realized by steps 1–4: completeness, exact reduction, finite constructibility, triangulation, boundedness and truncations. Paragraph (2) realized by steps 5–6 for the abelian heart and extensions, and steps 7–9 for the finite presentation/cover/gluing-data size argument. The chapter and unit route are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Finiteness of the residue field permits application of the finite-ring constructibility tools; this is a generic coefficient-field fact."
+   },
+   {
+    "node": "det-pe-derived-nakayama-first-reduction",
+    "why": "Cone and shift closure for derived completeness; the integral-heart unit invokes these as generic completion facts."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Exactness of derived reduction as a ringed-site scalar-extension functor; no heart-unit statement supplies that functorial exactness."
+   },
+   {
+    "node": "lem-weil-proetale-dbc-triangulated",
+    "why": "Triangulation for the finite residue-field complexes used in the unit residue-reduction route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Bounded finite-coefficient intrinsic constructibility has étale origin; keeps the actual hypothesis of the integral-model criterion."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "The ambient long exact sequence identifies the kernel and cokernel; a general derived-category tool."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "An ambient short exact sequence of degree-zero complexes gives its distinguished triangle."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Exact module inverse images for the actual pulled-back integral coefficients, used only in the size argument."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Joint zero detection of finite stratum restrictions proves the global adjunction-unit map is monic; no integral-heart-unit statement supplies it."
+   },
+   {
+    "node": "lem-sf-derived-concentrated-single",
+    "why": "The general concentration theorem identifies a complex with only H^0 with a degree-zero module; it makes essential surjectivity of the heart identification explicit."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Full faithfulness of the single-complex functor identifies the morphisms of the degree-zero subcategory with module morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "det-pe-derived-nakayama-first-reduction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-sf-derived-concentrated-single",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-14671086d",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-14671086d (reviewer sub-agent of L); spot-checked: I read the item, all 8 statement dependencies and all 23 proof dependencies in full, plus the blueprint's triangulated, unit and local-model proof texts and Stacks proetale.tex 09C1/09C2. The coefficient category is D(Mod(R_X)) with R_X = p_X^* O_E throughout; completeness, Nakayama and integral-models(2) are all stated for R_X, and the item never identifies R_X with the constant sheaf C_X. Step 1: integral-models(2) is an actual if-and-only-if, the residue field is finite, and X is Noetherian. Steps 2-3: shift and cone closure of derived completeness, exact reduction to kappa, the finite-ring triangulation lemma, and both directions of the étale-origin equivalence; the item rightly does not use the 09C2 boundedness shortcut, since 09C2 assumes finite tor dimension. Step 4: boundedness holds by the cohomological definition and the degree-zero identification is correct. Step 5: kernel and cokernel are H^{-1} and H^0 of the cone, checked on a zero map and an isomorphism. Step 6: the cone of zero gives direct sums, and short exact sequences give triangles. Steps 7-9: the uniqueness-of-gluing argument, the split adjunction unit and stratum zero detection with identity covers are correct, and the subobject count is valid. Edge cases checked: empty X, and multiplication by pi on O_{E,X}. There are no new nodes, no cycle (the item is not reachable from anything it cites) and no duplicate (det-lem-coefficient-heart-small covers only E and Qlbar; prop-constructible-truncations covers another category). I accept the 11 declared generic tool_uses. Caution for later, not a fault here: the blueprint proof of local-model(3) uses this item's clause 1, so whoever splits det-lem-int-integral-heart-local-model must prove (2) and (3) directly from the cohomological definition, not by citing this item. No fixes."
+ },
+ "lean_audit": {},
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e138488c3",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read the item node, all 8 statement dependencies, the module, the report, and the exact declarations used: CondensedConstantConstructibility (constant-model Cons/Dbc), coefficientExtensionIntegers, continuousMapRingObj, and the Mathlib classes IsTriangulated, IsClosedUnderKernels/Cokernels/Extensions and TStructure bounded/truncLE/truncGE. Hypotheses match the node with nothing stronger: char p>0, prime l != p, X separated and LocallyOfFiniteType+QuasiCompact over Spec k, E finite over Q_l in an independent universe v. All clauses are rendered: triangulated, bounded, truncation-stable; degree-0 single functor full and faithful with essImage = Dbc and t.le 0 and t.ge 0; abelian, closed under ambient kernels, cokernels and extensions; EssentiallySmall.{u+1}, which is non-vacuous since the category is Type (u+2) with homs in u+1. The helper integralHeartCoefficientRingObj is real data: Shrink.algEquiv transport of E, spectral-norm valuation ring, continuous-map condensed ring; probe confirms the pointwise MonObj. It is not a duplicate: no recorded condensed O_E exists for this chapter. The t-structure and triangulated-subcategory dependencies are Mathlib leaves used exactly; no dependency record needs repair. Only lean changed in the node; lean.statement is verbatim; one sorry; docstrings carry source, blueprint id and all 9 steps; the commit touches 3 files. nt_compile.py compiled the snapshot module in 3.1 s with no errors; probe #print axioms shows only sorryAx plus the standard axioms. Non-blocking remark: the extra IsClosedUnderIsomorphisms conjunct follows directly from the definitions."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstantModelHeart",
+  "declaration": "AlgebraicGeometry.ProEtale.integralConstantModelHeart",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralConstantModelHeart",
+   "AlgebraicGeometry.ProEtale.integralHeartCoefficientRingObj"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralConstantModelHeart.lean",
+  "statement": "theorem integralConstantModelHeart (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ p) (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] : ObjectProperty.IsClosedUnderIsomorphisms (constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsTriangulated (constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ (∀ K, constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X K → DerivedCategory.TStructure.t.bounded K ∧ ∀ n : ℤ, constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧ constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧ (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).Full ∧ (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).Faithful ∧ (∀ K, (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).essImage K ↔ constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X K ∧ DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K) ∧ Nonempty (Abelian (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X)) ∧ ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ EssentiallySmall.{u + 1} (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The theorem uses the recorded finite constant scalar-model constructibility predicate, not the upstream arbitrary-presentation predicate. The real-data coefficient helper transports an arbitrary-universe finite extension through Shrink.algEquiv, using Module.Finite.small, and applies the existing continuous-function condensed ring construction to its spectral-norm valuation ring. No embedding in PadicAlgCl or equality of coefficient and scheme universes is required."
+ }
 }

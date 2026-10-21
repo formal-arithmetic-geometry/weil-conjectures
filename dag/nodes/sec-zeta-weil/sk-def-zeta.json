@@ -205,35 +205,7 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-281ee5036 (reviewer sub-agent of L); spot-checked: Read the item (statement and six steps), the unit and chapter records and the main-20261015 sk-def-zeta source in full, plus every cited node's statement and the Comparator Weil/Definitions.lean:67-103 reference. The statement keeps every clause of the source. The added degree-0 convention for an infinite residue degree is the existing def-weil-closed-point-degree convention, needed only for arbitrary schemes, and is accepted. Steps 1-5 are correct. I re-derived m c_m = sum_i N_i c_{m-i} and checked P^1 N_n=q^n+1 with c_2=q^2+q+1, exp(T) with c_2=1/2, and the edge cases empty scheme, Spec k0 (Z=1/(1-T)), Spec k0(t) and an infinite disjoint union. Fault, C6 / stages/1-dag.md section 2: former step 6 made this definition's proof depend on prop-euler-product, a lemma about the zeta series itself. Unit sk-prop-euler uses sk-def-zeta, and units.py requires its realization to reach sk-def-zeta, whose only node is the item, so that edge would force a cycle. No cycle exists yet. Fix in fixes/dag/nodes/sec-zeta-weil/sk-def-zeta.json, changing only proof, proof_deps and split_report: removed step 6 and its deps (prop-euler-product, def-weil-point-counts-zeta); withdrew the prop-euler-product tool_use; kept [prop-euler-product] in the statement as a forward pointer, which the maintainer may record in pointers; rewrote the step-5 point-at-infinity count through the second affine chart and def-weil-affine-spectrum, replacing an uncited local-ring argument. Accepted tool_use: lem-weil-unique-subfield-of-closure. No new nodes; def-weil-point-counts-zeta is correctly same_as and not a duplicate; no SGA cited.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": [
-    "AlgebraicGeometry.Scheme.Hom.pointCount",
-    "AlgebraicGeometry.Scheme.Hom.zetaSeries"
-   ]
-  },
-  "slopmaster2": {
-   "state": "closed_part",
-   "decls": [
-    {
-     "name": "AlgebraicGeometry.Scheme.Hom.pointCount",
-     "module": null,
-     "lines": [
-      0,
-      0
-     ],
-     "kind": null,
-     "sorry": false
-    }
-   ],
-   "missing": [
-    "AlgebraicGeometry.Scheme.Hom.zetaSeries"
-   ],
-   "open": []
-  }
- },
+ "lean_audit": {},
  "lean": {
   "module": "WeilConjectures.ZetaSeries",
   "declaration": "AlgebraicGeometry.Scheme.Hom.degreeOver",

@@ -1,155 +1,100 @@
 {
-  "id": "lemma-nagata-power-torsion-localization",
-  "blueprint": {
-    "is": "lemma-nagata-power-torsion-localization",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Localization of power torsion",
-  "statement": "Let $R$ be a ring, $N$ an $R$-module, and $a,s\\in R$. Under the canonical\nlocalization map one has\n\n$$\n\\operatorname{im}\\!\\left(\\Gamma_{(a)}(N)\\to N_s\\right)\n=\\Gamma_{(a/1)}(N_s),\n$$\n\nand consequently a canonical isomorphism\n\n$$\n(N/\\Gamma_{(a)}(N))_s\n\\;\\xrightarrow{\\sim}\\;\nN_s/\\Gamma_{(a/1)}(N_s).\n$$\n\nThese isomorphisms commute with successive localization at $s$ and $t$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-power-torsion-localization.md",
-    "place": "node lemma-nagata-power-torsion-localization, order 141"
-  },
-  "stmt_deps": [
-    "def-nagata-power-torsion"
-  ],
-  "proof": [
-    {
-      "text": "The power-torsion submodule is the kernel of the map\n$N\\to N_a$ by\n[lemma-nagata-power-torsion-kernel-localization]. Localization at\n$s$ is flat, hence carries this kernel to the kernel of\n$N_s\\to (N_s)_{a/1}$. The latter kernel is\n$\\Gamma_{(a/1)}(N_s)$, proving the first equality. The universal property\nof the quotient then gives the displayed map; it is an isomorphism because\nlocalization is exact and the localized kernel is exactly the target\ntorsion submodule. For $s,t$, both composites are induced by the same map\n$N\\to N_{st}$ and therefore agree by quotient and localization\nextensionality.",
-      "uses": [
-        "lemma-nagata-power-torsion-kernel-localization"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lemma-nagata-power-torsion-kernel-localization",
-    "lemma-nagata-power-torsion-submodule"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-power-torsion-localization.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 141,
-  "blueprint_uses": [
-    "def-nagata-power-torsion",
-    "lemma-nagata-power-torsion-kernel-localization",
-    "lemma-nagata-power-torsion-submodule"
-  ],
-  "lean": {
-    "module": "WeilConjectures.Mathlib.Algebra.Module.Torsion",
-    "declaration": "Submodule.localized'_powTorsion",
-    "branch": "master",
-    "line": 118,
-    "sorry_free": true,
-    "body_lines": 1
-  },
-  "blueprint_lean": [
-    "Submodule.localized'_powTorsion"
-  ],
-  "uses_not_cited": [
-    "def-nagata-power-torsion",
-    "lemma-nagata-power-torsion-submodule"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "Let $s\\in R$. Under localization at $s$, the image of\n$\\Gamma_{(a)}(M)$ is\n$\\Gamma_{(a/1)}(M_s)$.",
-      "proof": "Localize the kernel description in\n[lemma-nagata-power-torsion-kernel-localization]. Localization is flat,\nso it preserves this kernel. The iterated localization $(M_s)_{a/1}$ is\ncanonically $M_{sa}$.",
-      "cites": [
-        "lemma-nagata-power-torsion-kernel-localization"
-      ]
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "Submodule.localized'_powTorsion",
-          "module": "WeilConjectures.Mathlib.Algebra.Module.Torsion",
-          "lines": [
-            114,
-            120
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "Submodule.localized'_torsion'",
-          "module": "WeilConjectures.Mathlib.Algebra.Module.Torsion",
-          "lines": [
-            94,
-            112
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "Submodule.localized'_powTorsion",
-          "module": "WeilConjectures.Mathlib.Algebra.Module.Torsion",
-          "lines": [
-            118,
-            124
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "Submodule.localized'_torsion'",
-          "module": "WeilConjectures.Mathlib.Algebra.Module.Torsion",
-          "lines": [
-            98,
-            116
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-lem-nagata-sketch-blowups",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $R$ be a ring, $M$ an $R$-module, $a\\in R$, and let $S\\subseteq R$ be a\nmultiplicative subset. Under the localization map $M\\to S^{-1}M$, the\nlocalization of $\\Gamma_{(a)}(M)$ is the power-torsion submodule of\n$S^{-1}M$ for the image of $a$:\n\n$$\nS^{-1}\\Gamma_{(a)}(M)=\\Gamma_{(a/1)}(S^{-1}M).\n$$",
-    "proof": [
-      {
-        "text": "Localize the kernel description in\n[lemma-nagata-power-torsion-kernel-localization]. Localization is flat,\nso it preserves this kernel. The iterated localization $(M_s)_{a/1}$ is\ncanonically $M_{sa}$.",
-        "uses": [
-          "lemma-nagata-power-torsion-kernel-localization"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "The power-torsion submodule is the kernel of the map\n$N\\to N_a$ by\n[lemma-nagata-power-torsion-kernel-localization]. Localization at\n$s$ is flat, hence carries this kernel to the kernel of\n$N_s\\to (N_s)_{a/1}$. The latter kernel is\n$\\Gamma_{(a/1)}(N_s)$, proving the first equality. The universal property\nof the quotient then gives the displayed map; it is an isomorphism because\nlocalization is exact and the localized kernel is exactly the target\ntorsion submodule. For $s,t$, both composites are induced by the same map\n$N\\to N_{st}$ and therefore agree by quotient and localization\nextensionality.",
-        "uses": [
-          "lemma-nagata-power-torsion-kernel-localization"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "lemma-nagata-power-torsion-localization",
+ "blueprint": {
+  "is": "lemma-nagata-power-torsion-localization",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Localization of power torsion",
+ "statement": "Let $R$ be a ring, $N$ an $R$-module, and $a,s\\in R$. Under the canonical\nlocalization map one has\n\n$$\n\\operatorname{im}\\!\\left(\\Gamma_{(a)}(N)\\to N_s\\right)\n=\\Gamma_{(a/1)}(N_s),\n$$\n\nand consequently a canonical isomorphism\n\n$$\n(N/\\Gamma_{(a)}(N))_s\n\\;\\xrightarrow{\\sim}\\;\nN_s/\\Gamma_{(a/1)}(N_s).\n$$\n\nThese isomorphisms commute with successive localization at $s$ and $t$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-power-torsion-localization.md",
+  "place": "node lemma-nagata-power-torsion-localization, order 141"
+ },
+ "stmt_deps": [
+  "def-nagata-power-torsion"
+ ],
+ "proof": [
+  {
+   "text": "The power-torsion submodule is the kernel of the map\n$N\\to N_a$ by\n[lemma-nagata-power-torsion-kernel-localization]. Localization at\n$s$ is flat, hence carries this kernel to the kernel of\n$N_s\\to (N_s)_{a/1}$. The latter kernel is\n$\\Gamma_{(a/1)}(N_s)$, proving the first equality. The universal property\nof the quotient then gives the displayed map; it is an isomorphism because\nlocalization is exact and the localized kernel is exactly the target\ntorsion submodule. For $s,t$, both composites are induced by the same map\n$N\\to N_{st}$ and therefore agree by quotient and localization\nextensionality.",
+   "uses": [
+    "lemma-nagata-power-torsion-kernel-localization"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lemma-nagata-power-torsion-kernel-localization",
+  "lemma-nagata-power-torsion-submodule"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-power-torsion-localization.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 141,
+ "blueprint_uses": [
+  "def-nagata-power-torsion",
+  "lemma-nagata-power-torsion-kernel-localization",
+  "lemma-nagata-power-torsion-submodule"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.Algebra.Module.Torsion",
+  "declaration": "Submodule.localized'_powTorsion",
+  "branch": "master",
+  "line": 118,
+  "sorry_free": true,
+  "body_lines": 1
+ },
+ "blueprint_lean": [
+  "Submodule.localized'_powTorsion"
+ ],
+ "uses_not_cited": [
+  "def-nagata-power-torsion",
+  "lemma-nagata-power-torsion-submodule"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $s\\in R$. Under localization at $s$, the image of\n$\\Gamma_{(a)}(M)$ is\n$\\Gamma_{(a/1)}(M_s)$.",
+   "proof": "Localize the kernel description in\n[lemma-nagata-power-torsion-kernel-localization]. Localization is flat,\nso it preserves this kernel. The iterated localization $(M_s)_{a/1}$ is\ncanonically $M_{sa}$.",
+   "cites": [
+    "lemma-nagata-power-torsion-kernel-localization"
+   ]
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-lem-nagata-sketch-blowups",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $R$ be a ring, $M$ an $R$-module, $a\\in R$, and let $S\\subseteq R$ be a\nmultiplicative subset. Under the localization map $M\\to S^{-1}M$, the\nlocalization of $\\Gamma_{(a)}(M)$ is the power-torsion submodule of\n$S^{-1}M$ for the image of $a$:\n\n$$\nS^{-1}\\Gamma_{(a)}(M)=\\Gamma_{(a/1)}(S^{-1}M).\n$$",
+  "proof": [
+   {
+    "text": "Localize the kernel description in\n[lemma-nagata-power-torsion-kernel-localization]. Localization is flat,\nso it preserves this kernel. The iterated localization $(M_s)_{a/1}$ is\ncanonically $M_{sa}$.",
+    "uses": [
+     "lemma-nagata-power-torsion-kernel-localization"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The power-torsion submodule is the kernel of the map\n$N\\to N_a$ by\n[lemma-nagata-power-torsion-kernel-localization]. Localization at\n$s$ is flat, hence carries this kernel to the kernel of\n$N_s\\to (N_s)_{a/1}$. The latter kernel is\n$\\Gamma_{(a/1)}(N_s)$, proving the first equality. The universal property\nof the quotient then gives the displayed map; it is an isomorphism because\nlocalization is exact and the localized kernel is exactly the target\ntorsion submodule. For $s,t$, both composites are induced by the same map\n$N\\to N_{st}$ and therefore agree by quotient and localization\nextensionality.",
+    "uses": [
+     "lemma-nagata-power-torsion-kernel-localization"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

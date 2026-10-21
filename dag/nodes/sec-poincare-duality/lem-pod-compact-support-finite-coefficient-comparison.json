@@ -1,154 +1,143 @@
 {
-  "id": "lem-pod-compact-support-finite-coefficient-comparison",
-  "kind": "statement",
-  "title": "Finite-coefficient comparison embedding for constant adic compact-support cohomology",
-  "statement": "Fix a finite field k0, a prime l different from its characteristic, and a separated finite-type k0-scheme X. Put Y = X times an algebraic closure of k0 and f : Y -> Spec(kbar). For n >= 0 let Lambda_n = Z/l^(n+1) (with a universe lift), and let A_n^r = Γ(Spec(kbar)_et, H^r(Rf_! (Lambda_n)_Y)) be regarded as a Z_l-module through reduction Z_l -> Lambda_n. The finiteLevelCompactSupportSections definition constructs this module explicitly, using the constant unit sheaf and the already defined etale Rf_!. For every integer r there exists an injective Qbar_l-linear map H_c^r(Y,Qbar_l) -> Qbar_l tensor over Z_l (product over n of A_n^r). On the left use the carrier of compactlySupportedCohomology of adicConstant with its canonical Weil structure forgotten. No dimension bound, smoothness, properness of X, or restriction on r is imposed. Coefficients and geometric fibre are those of def-weil-l-adic-coefficient-extension and def-weil-finite-field-fiber; compact-support cohomology and the constant Weil object are those of def-weil-ordinary-compact-cohomology and def-weil-constant-weil-structure.",
-  "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemmas 6.1.13, 6.5.8-6.5.9 and 6.7.7, Proposition 6.8.14, Remark 6.8.15; Milne, Lectures on Etale Cohomology, §18, pp. 124-125 and Theorems 19.1-19.2"
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-scheme-morphism-properties",
-    "def-weil-ordinary-compact-cohomology",
-    "def-weil-constant-weil-structure"
-  ],
-  "proof": [
-    {
-      "text": "Let Y be the geometric fibre and choose one compactification Y -> barY -> Spec(kbar). Let C = RΓ(barY_proet,j_! Z_l). On the pro-etale site j_! commutes with homotopy limits by Bhatt-Scholze Lemma 6.1.13 and preserves constructibility by Lemma 6.5.8. The constant integral lattice and its extension by zero are therefore derived complete, and finite-level comparison and compact-support compatibility identify C with R lim_n RΓ(barY_et,j_! Z/l^(n+1)). Evaluation at the algebraically closed point is exact. Its finite-level cohomology modules, restricted along Z_l -> Z/l^(n+1), are exactly the modules finiteLevelCompactSupportSections of the statement. Use the same compactification at every level, so transition maps are the usual reductions.",
-      "uses": [
-        "def-weil-integral-rational-qbar-compact-support",
-        "def-weil-finite-coefficient-point",
-        "lem-weil-constant-coefficient-objects-constructible"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The extension by zero of each finite constant sheaf is constructible, and barY is proper over an algebraically closed field with l invertible. Constructible torsion finiteness makes every finite-level compact-support cohomology group finite. For each fixed target level, the descending sequence of images from higher levels stabilizes because that target group is finite. Thus the towers are Mittag-Leffler, their first derived limits vanish, and the Milnor sequence identifies H^r(C) with the inverse limit of the finite-level H_c^r groups. The inverse limit embeds Z_l-linearly in their product.",
-      "uses": [
-        "prop-finite-compact-support-constructibility",
-        "lem-weil-pbc-mittag-leffler"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The constant Q_l object is obtained by rationalizing its constant Z_l lattice; the Qbar_l constant object is its field extension. The coefficient-compatibility theorem for compact support therefore identifies H_c^r(Y,Qbar_l) with Qbar_l tensor over Z_l H^r(C). The required commutation with cohomology follows from flatness. Indeed Q_l is the fraction field of Z_l and Qbar_l is a field extension of Q_l; both scalar extensions are flat, hence their composite is flat. Tensor the injection in Step 2 with Qbar_l and compose with this coefficient comparison. Forgetting the Weil structure commutes with the geometric cohomology calculation, so this gives the claimed injection for adicConstant. No arbitrary integral lattice is chosen: the constant lattice is specified.",
-      "uses": [
-        "def-weil-integral-rational-qbar-compact-support",
-        "def-weil-l-adic-coefficient-extension",
-        "lem-pc-flat-tensor-complex-cohom",
-        "def-weil-ordinary-compact-cohomology",
-        "def-weil-constant-weil-structure"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-pod-compact-support-finite-coefficient-comparison",
+ "kind": "statement",
+ "title": "Finite-coefficient comparison embedding for constant adic compact-support cohomology",
+ "statement": "Fix a finite field k0, a prime l different from its characteristic, and a separated finite-type k0-scheme X. Put Y = X times an algebraic closure of k0 and f : Y -> Spec(kbar). For n >= 0 let Lambda_n = Z/l^(n+1) (with a universe lift), and let A_n^r = Γ(Spec(kbar)_et, H^r(Rf_! (Lambda_n)_Y)) be regarded as a Z_l-module through reduction Z_l -> Lambda_n. The finiteLevelCompactSupportSections definition constructs this module explicitly, using the constant unit sheaf and the already defined etale Rf_!. For every integer r there exists an injective Qbar_l-linear map H_c^r(Y,Qbar_l) -> Qbar_l tensor over Z_l (product over n of A_n^r). On the left use the carrier of compactlySupportedCohomology of adicConstant with its canonical Weil structure forgotten. No dimension bound, smoothness, properness of X, or restriction on r is imposed. Coefficients and geometric fibre are those of def-weil-l-adic-coefficient-extension and def-weil-finite-field-fiber; compact-support cohomology and the constant Weil object are those of def-weil-ordinary-compact-cohomology and def-weil-constant-weil-structure.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.1.13, 6.5.8-6.5.9 and 6.7.7, Proposition 6.8.14, Remark 6.8.15; Milne, Lectures on Etale Cohomology, §18, pp. 124-125 and Theorems 19.1-19.2"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-constant-weil-structure"
+ ],
+ "proof": [
+  {
+   "text": "Let Y be the geometric fibre and choose one compactification Y -> barY -> Spec(kbar). Let C = RΓ(barY_proet,j_! Z_l). On the pro-etale site j_! commutes with homotopy limits by Bhatt-Scholze Lemma 6.1.13 and preserves constructibility by Lemma 6.5.8. The constant integral lattice and its extension by zero are therefore derived complete, and finite-level comparison and compact-support compatibility identify C with R lim_n RΓ(barY_et,j_! Z/l^(n+1)). Evaluation at the algebraically closed point is exact. Its finite-level cohomology modules, restricted along Z_l -> Z/l^(n+1), are exactly the modules finiteLevelCompactSupportSections of the statement. Use the same compactification at every level, so transition maps are the usual reductions.",
+   "uses": [
     "def-weil-integral-rational-qbar-compact-support",
     "def-weil-finite-coefficient-point",
-    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-weil-constant-coefficient-objects-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The extension by zero of each finite constant sheaf is constructible, and barY is proper over an algebraically closed field with l invertible. Constructible torsion finiteness makes every finite-level compact-support cohomology group finite. For each fixed target level, the descending sequence of images from higher levels stabilizes because that target group is finite. Thus the towers are Mittag-Leffler, their first derived limits vanish, and the Milnor sequence identifies H^r(C) with the inverse limit of the finite-level H_c^r groups. The inverse limit embeds Z_l-linearly in their product.",
+   "uses": [
     "prop-finite-compact-support-constructibility",
-    "lem-weil-pbc-mittag-leffler",
+    "lem-weil-pbc-mittag-leffler"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The constant Q_l object is obtained by rationalizing its constant Z_l lattice; the Qbar_l constant object is its field extension. The coefficient-compatibility theorem for compact support therefore identifies H_c^r(Y,Qbar_l) with Qbar_l tensor over Z_l H^r(C). The required commutation with cohomology follows from flatness. Indeed Q_l is the fraction field of Z_l and Qbar_l is a field extension of Q_l; both scalar extensions are flat, hence their composite is flat. Tensor the injection in Step 2 with Qbar_l and compose with this coefficient comparison. Forgetting the Weil structure commutes with the geometric cohomology calculation, so this gives the claimed injection for adicConstant. No arbitrary integral lattice is chosen: the constant lattice is specified.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
     "def-weil-l-adic-coefficient-extension",
     "lem-pc-flat-tensor-complex-cohom",
     "def-weil-ordinary-compact-cohomology",
     "def-weil-constant-weil-structure"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemmas 6.1.13, 6.5.8-6.5.9 and 6.7.7, Proposition 6.8.14, Remark 6.8.15; Milne, Lectures on Etale Cohomology, §18, pp. 124-125 and Theorems 19.1-19.2; comparison specialized to the constant lattice, inverse-limit inclusion and flat scalar extension written by F1."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leansearch",
-      "query": "Compactly supported l-adic cohomology as the inverse limit of finite coefficient cohomology, followed by flat scalar extension",
-      "results": "Service unavailable: Internal Server Error; recorded by msearch.py.",
-      "date": "2026-10-16"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An injective comparison from compactly supported l-adic cohomology to a scalar extension of the product of finite coefficient cohomology groups via inverse limits",
-      "results": "Eight hits concerning adic completion injections; no geometric compact-support comparison.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "TensorProduct, Function.Injective",
-      "results": "Generic flat tensor-product injectivity results, no cohomology comparison. Module.Flat.lTensor_preserves_injective_linearMap supplies the final algebraic step.",
-      "date": "2026-10-16",
-      "verdict": "ingredient only"
-    },
-    {
-      "tool": "grep",
-      "query": "adic.*compact|compact.*adic|Mittag.*[Ll]effler",
-      "results": "Nineteen Mathlib hits concerning generic Mittag-Leffler systems and compact p-adic integers; no comparison of adic and finite-coefficient compact-support cohomology. The project adic LowerStar module explicitly lists lattices, Rf_* commuting with R lim and tensor Q as missing infrastructure. The finite-tower ML ingredient is Functor.isMittagLeffler_of_exists_finite_range in Mathlib.CategoryTheory.CofilteredSystem (specialization compiled in scratch).",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "WeilConjectures.WeilSheaf.Finiteness",
-    "date": "2026-10-16",
-    "group": "F1"
-  },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "prop-cohomological-finiteness",
-      "place": "Steps 5-7, constant-coefficient finite-level bound followed by integral inverse limit and rationalization",
-      "via": []
-    },
-    "same_as": null
-  },
-  "chapter": "sec-poincare-duality",
-  "unit": "sk-lem-finite",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison",
-    "file": "lean/Sheaf/WeilSheaf/CompactSupportFiniteCoefficientComparison.lean",
-    "declaration": "AlgebraicGeometry.WeilSheaf.exists_injective_compactSupportFiniteCoefficientComparison",
-    "statement": "theorem exists_injective_compactSupportFiniteCoefficientComparison (r : ℤ) :\n    ∃ f : ((adicConstant k₀ l X).compactlySupportedCohomology r).carrier →ₗ[PadicAlgCl l]\n        PadicAlgCl l ⊗[PadicInt l]\n          (∀ n, finiteLevelCompactSupportSections (k₀ := k₀) l X n r),\n      Function.Injective f",
-    "branch": "sheaf-dag",
-    "by": "F1",
-    "date": "2026-10-16"
-  },
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "X-dcba9",
-    "group": "F1",
-    "result": "pass",
-    "landing": "20261015T191323-L-1006997",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "X-dcba9",
-    "group": "F1",
-    "result": "pass",
-    "landing": "20261015T191323-L-1006997",
-    "kind": "interface",
-    "note": "independent Codex review: Delivered Lean/DAG files matched the recorded item and node statements; all modules and required importers compiled, and the forced TraceFormula adaptation was necessary and minimal."
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "prop-finite-compact-support-constructibility",
+  "lem-weil-pbc-mittag-leffler",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pc-flat-tensor-complex-cohom",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-constant-weil-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.1.13, 6.5.8-6.5.9 and 6.7.7, Proposition 6.8.14, Remark 6.8.15; Milne, Lectures on Etale Cohomology, §18, pp. 124-125 and Theorems 19.1-19.2; comparison specialized to the constant lattice, inverse-limit inclusion and flat scalar extension written by F1."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported l-adic cohomology as the inverse limit of finite coefficient cohomology, followed by flat scalar extension",
+   "results": "Service unavailable: Internal Server Error; recorded by msearch.py.",
+   "date": "2026-10-16"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An injective comparison from compactly supported l-adic cohomology to a scalar extension of the product of finite coefficient cohomology groups via inverse limits",
+   "results": "Eight hits concerning adic completion injections; no geometric compact-support comparison.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, Function.Injective",
+   "results": "Generic flat tensor-product injectivity results, no cohomology comparison. Module.Flat.lTensor_preserves_injective_linearMap supplies the final algebraic step.",
+   "date": "2026-10-16",
+   "verdict": "ingredient only"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*compact|compact.*adic|Mittag.*[Ll]effler",
+   "results": "Nineteen Mathlib hits concerning generic Mittag-Leffler systems and compact p-adic integers; no comparison of adic and finite-coefficient compact-support cohomology. The project adic LowerStar module explicitly lists lattices, Rf_* commuting with R lim and tensor Q as missing infrastructure. The finite-tower ML ingredient is Functor.isMittagLeffler_of_exists_finite_range in Mathlib.CategoryTheory.CofilteredSystem (specialization compiled in scratch).",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.WeilSheaf.Finiteness",
+  "date": "2026-10-16",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "Steps 5-7, constant-coefficient finite-level bound followed by integral inverse limit and rationalization",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison",
+  "file": "lean/Sheaf/WeilSheaf/CompactSupportFiniteCoefficientComparison.lean",
+  "declaration": "AlgebraicGeometry.WeilSheaf.exists_injective_compactSupportFiniteCoefficientComparison",
+  "statement": "theorem exists_injective_compactSupportFiniteCoefficientComparison (r : ℤ) :\n    ∃ f : ((adicConstant k₀ l X).compactlySupportedCohomology r).carrier →ₗ[PadicAlgCl l]\n        PadicAlgCl l ⊗[PadicInt l]\n          (∀ n, finiteLevelCompactSupportSections (k₀ := k₀) l X n r),\n      Function.Injective f",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-16"
+ },
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-dcba9",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T191323-L-1006997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "X-dcba9",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261015T191323-L-1006997",
+  "kind": "interface",
+  "note": "independent Codex review: Delivered Lean/DAG files matched the recorded item and node statements; all modules and required importers compiled, and the forced TraceFormula adaptation was necessary and minimal."
+ },
+ "lean_audit": {}
 }

@@ -1,231 +1,220 @@
 {
-  "id": "def-kun-constant-sheaf",
-  "blueprint": {
-    "is": "def-kun-constant-sheaf",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "definition",
-  "title": "Constant sheaves and constant complexes",
-  "statement": "For a scheme $T$, a commutative ring $\\Lambda$ and a\n$\\Lambda$-module $M$, the *constant sheaf* $\\underline{M}$ on\n$T_{\\Et}$ is the sheafification of the constant presheaf\n$U\\mapsto M$ on the small etale site\n[def-weil-pbc-etale-site]; it is the sheaf\nof $M$-valued functions associated with the locally constant sheaf\nwith value $M$. For a complex $\\mathcal M^\\bullet$ of\n$\\Lambda$-modules, $\\underline{\\mathcal M^\\bullet}$ is the termwise\nconstant complex of sheaves, and the operations are compatible with\nshifts and with quasi-isomorphisms in $\\mathcal M^\\bullet$.",
-  "source": {
+ "id": "def-kun-constant-sheaf",
+ "blueprint": {
+  "is": "def-kun-constant-sheaf",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Constant sheaves and constant complexes",
+ "statement": "For a scheme $T$, a commutative ring $\\Lambda$ and a\n$\\Lambda$-module $M$, the *constant sheaf* $\\underline{M}$ on\n$T_{\\Et}$ is the sheafification of the constant presheaf\n$U\\mapsto M$ on the small etale site\n[def-weil-pbc-etale-site]; it is the sheaf\nof $M$-valued functions associated with the locally constant sheaf\nwith value $M$. For a complex $\\mathcal M^\\bullet$ of\n$\\Lambda$-modules, $\\underline{\\mathcal M^\\bullet}$ is the termwise\nconstant complex of sheaves, and the operations are compatible with\nshifts and with quasi-isomorphisms in $\\mathcal M^\\bullet$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-constant-sheaf.md",
+  "place": "node def-kun-constant-sheaf, order 1679"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-constructible-constant",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the constant-sheaf construction [def-constructible-constant] with values in $\\Lambda$-modules on $T_{\\Et}$ [def-weil-pbc-etale-site]. Its value at $M$ is precisely the sheafification of the presheaf with value $M$ and identity restrictions. By [lem-weil-pbc-constant-module-locally-constant], this sheaf has the natural model $U\\mapsto\\operatorname{LocallyConstant}(|U|,M)$, with coefficient maps acting by postcomposition. Thus the function description means locally constant functions, with $M$ discrete, and does not require connectedness or finiteness.",
+   "uses": [
+    "def-constructible-constant",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-constant-module-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-constant-sheaf.md",
-    "place": "node def-kun-constant-sheaf, order 1679"
+    "place": "first two sentences; Sites Example 0H7J, example-constant-sheaf; Etale Cohomology Remark 03P5, remark-constant-locally-constant-maps"
+   }
   },
-  "stmt_deps": [
-    "def-weil-pbc-etale-site",
-    "def-constructible-constant",
-    "def-weil-abstract-derived-category"
-  ],
-  "proof": [
-    {
-      "text": "Use the constant-sheaf construction [def-constructible-constant] with values in $\\Lambda$-modules on $T_{\\Et}$ [def-weil-pbc-etale-site]. Its value at $M$ is precisely the sheafification of the presheaf with value $M$ and identity restrictions. By [lem-weil-pbc-constant-module-locally-constant], this sheaf has the natural model $U\\mapsto\\operatorname{LocallyConstant}(|U|,M)$, with coefficient maps acting by postcomposition. Thus the function description means locally constant functions, with $M$ discrete, and does not require connectedness or finiteness.",
-      "uses": [
-        "def-constructible-constant",
-        "def-weil-pbc-etale-site",
-        "lem-weil-pbc-constant-module-locally-constant"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-constant-sheaf.md",
-        "place": "first two sentences; Sites Example 0H7J, example-constant-sheaf; Etale Cohomology Remark 03P5, remark-constant-locally-constant-maps"
-      }
-    },
-    {
-      "text": "Write $c$ for the constant-presheaf functor and $a$ for module sheafification. By [lem-weil-pbc-site-r-module-presheaf-sheafification-exact], presheaf finite limits and finite colimits are computed sectionwise and $a$ is exact. For every object $U$, evaluation of $c$ is the identity functor on modules, so the kernel and cokernel of $c(f)$ are respectively $c(\\ker f)$ and $c(\\operatorname{coker}f)$, with identity restrictions. Also $c(f+g)=c(f)+c(g)$ sectionwise. Since $a$ preserves finite products and coproducts, it preserves their common biproduct structure: the diagonal, codiagonal, projections and injections. Writing $f+g$ as the diagonal followed by $f\\oplus g$ followed by the codiagonal shows $a(f+g)=a(f)+a(g)$. Consequently $ac$ is additive and preserves finite limits and finite colimits. This proves exactness for arbitrary $\\Lambda$ and arbitrary modules; the finite-ring and finite-module lemma is not needed.",
-      "uses": [
-        "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-modules.tex",
-        "place": "Tag 093J, lemma-constant-exact, first sentence of proof; Tag 03EI, lemma-sheafification-exact; Tag 03CS, section-presheaves-modules"
-      }
-    },
-    {
-      "text": "For a cochain complex $\\mathcal M^\\bullet$, define its constant complex by $(\\underline{\\mathcal M^\\bullet})^r=ac(\\mathcal M^r)$ and differential $ac(d^r)$; for a chain map use $ac$ in each degree. Functoriality and additivity give $ac(d^{r+1})ac(d^r)=ac(0)=0$. Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact functor $ac$ from step 2: its termwise functor carries quasi-isomorphisms to quasi-isomorphisms and has the natural shift isomorphism with identity degree components. Explicitly both $ac(\\mathcal M[n])$ and $ac(\\mathcal M)[n]$ have term $ac(\\mathcal M^{r+n})$ and differential $(-1)^n ac(d^{r+n})$, since $ac$ is additive. Thus the definition extends to complexes up to quasi-isomorphism with precisely the claimed shift compatibility, without boundedness assumptions.",
-      "uses": [
-        "lem-weil-pbc-exact-functor-derived-factorization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 015F, lemma-right-derived-exact-functor; shift convention as in the statement of lem-weil-pbc-exact-functor-derived-factorization"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-constructible-constant",
-    "def-weil-pbc-etale-site",
-    "lem-weil-pbc-constant-module-locally-constant",
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  {
+   "text": "Write $c$ for the constant-presheaf functor and $a$ for module sheafification. By [lem-weil-pbc-site-r-module-presheaf-sheafification-exact], presheaf finite limits and finite colimits are computed sectionwise and $a$ is exact. For every object $U$, evaluation of $c$ is the identity functor on modules, so the kernel and cokernel of $c(f)$ are respectively $c(\\ker f)$ and $c(\\operatorname{coker}f)$, with identity restrictions. Also $c(f+g)=c(f)+c(g)$ sectionwise. Since $a$ preserves finite products and coproducts, it preserves their common biproduct structure: the diagonal, codiagonal, projections and injections. Writing $f+g$ as the diagonal followed by $f\\oplus g$ followed by the codiagonal shows $a(f+g)=a(f)+a(g)$. Consequently $ac$ is additive and preserves finite limits and finite colimits. This proves exactness for arbitrary $\\Lambda$ and arbitrary modules; the finite-ring and finite-module lemma is not needed.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J, lemma-constant-exact, first sentence of proof; Tag 03EI, lemma-sheafification-exact; Tag 03CS, section-presheaves-modules"
+   }
+  },
+  {
+   "text": "For a cochain complex $\\mathcal M^\\bullet$, define its constant complex by $(\\underline{\\mathcal M^\\bullet})^r=ac(\\mathcal M^r)$ and differential $ac(d^r)$; for a chain map use $ac$ in each degree. Functoriality and additivity give $ac(d^{r+1})ac(d^r)=ac(0)=0$. Apply [lem-weil-pbc-exact-functor-derived-factorization] to the exact functor $ac$ from step 2: its termwise functor carries quasi-isomorphisms to quasi-isomorphisms and has the natural shift isomorphism with identity degree components. Explicitly both $ac(\\mathcal M[n])$ and $ac(\\mathcal M)[n]$ have term $ac(\\mathcal M^{r+n})$ and differential $(-1)^n ac(d^{r+n})$, since $ac$ is additive. Thus the definition extends to complexes up to quasi-isomorphism with precisely the claimed shift compatibility, without boundedness assumptions.",
+   "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-constant-sheaf.md",
-    "place": "Definition, with its asserted function model and compatibility clauses justified by existing DAG results; exactness argument follows Stacks 093J and 03EI."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "constantSheaf|mapHomologicalComplex.*[Qq]uasi",
-      "results": "Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
-      "date": "2026-10-14",
-      "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
-    },
-    {
-      "tool": "leansearch",
-      "query": "constant sheaf functor is exact preserves quasi isomorphisms of complexes",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "constantSheaf",
-      "results": "loogle: unknown identifier 'constantSheaf'",
-      "date": "2026-10-14",
-      "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The constant sheaf of modules is the sheafification of the constant presheaf, and its termwise functor on complexes preserves shifts and quasi-isomorphisms",
-      "results": "CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.isConstant_iff_forget, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CompHausLike.LocallyConstantModule.functor",
-      "date": "2026-10-14",
-      "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An exact additive functor between abelian categories applied degreewise to cochain complexes preserves quasi-isomorphisms and commutes with shift",
-      "results": "CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism_functor, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategory",
-      "date": "2026-10-14",
-      "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"constantSheaf\"",
-      "results": "CategoryTheory.constantSheaf, CategoryTheory.constantSheafAdj, CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.instAdditiveSheafConstantSheaf, CategoryTheory.constantSheafΓAdj, CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf",
-      "date": "2026-10-14",
-      "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
-    },
-    {
-      "tool": "grep",
-      "query": "mapHomologicalComplex|mapQuasiIso|map.*[Qq]uasiIso",
-      "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean",
-      "date": "2026-10-14",
-      "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
-    },
-    {
-      "tool": "grep",
-      "query": "preservesLimits_const|preservesColimits_const|PreservesFiniteLimits \\(presheafToSheaf|constantSheaf J D\\).Additive",
-      "results": "Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean",
-      "date": "2026-10-14",
-      "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
-    },
-    {
-      "tool": "leansearch",
-      "query": "constant presheaf functor preserves limits and colimits sheafification exact",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For any site and abelian category admitting left exact sheafification, the constant sheaf functor is additive and preserves finite limits and finite colimits",
-      "results": "PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, CategoryTheory.HasSheafify.isLeftExact, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf, instAbelianLightCondMod",
-      "date": "2026-10-14",
-      "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"preservesLimits_const\"",
-      "results": "CategoryTheory.Limits.preservesLimits_const",
-      "date": "2026-10-14",
-      "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"constantSheaf\", \"Additive\"",
-      "results": "CategoryTheory.instAdditiveSheafConstantSheaf",
-      "date": "2026-10-14",
-      "verdict": "Partial match only: generic additivity and shifts, or locally constant modules on compact Hausdorff sites; none states the complete etale constant-complex construction."
-    },
-    {
-      "tool": "grep",
-      "query": "instAdditiveSheafConstantSheaf|mapHomologicalComplex_commShiftIso_hom_app_f",
-      "results": "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean",
-      "date": "2026-10-14",
-      "verdict": "Partial match only: generic additivity and shifts, or locally constant modules on compact Hausdorff sites; none states the complete etale constant-complex construction."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A constant sheaf of modules on a scheme sends every etale scheme to locally constant functions into a discrete module",
-      "results": "CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, CompHausLike.LocallyConstantModule.functor_obj_val, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.isConstant_iff_forget, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule",
-      "date": "2026-10-14",
-      "verdict": "Partial match only: generic additivity and shifts, or locally constant modules on compact Hausdorff sites; none states the complete etale constant-complex construction."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1679,
-  "blueprint_uses": [
-    "def-weil-pbc-etale-site"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "def-kun-constant-sheaf",
-    "worker": "stage1",
-    "summary": "Reused the existing constant-sheaf definition and function-model theorem; made the termwise construction explicit, proved exactness by sectionwise kernels and cokernels plus exact sheafification, and applied the existing exact-functor theorem for shifts and quasi-isomorphisms. No new nodes or statement changes. Second reading made sheafification additivity explicit and identified the unrestricted function-model source.",
-    "blueprint": "Definition sentences 1--2 realized in step 1; final sentence (termwise constant complex and compatibility) realized in steps 2--3."
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NH-d8387fd03",
-    "group": "NH",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-d8387fd03 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, unit/chapter route and source passages. All three steps preserve arbitrary coefficients and unbounded complexes; Stacks 03P5 supports the unrestricted function model. Accepted the off-unit function-model theorem as a generic tool. No new nodes or repairs; target morphisms and coefficient categories remain unchanged. Concrete checks recorded in review.md."
-  },
-  "lean": {
-    "module": "Mathlib.Algebra.Homology.Additive",
-    "declaration": "CategoryTheory.Functor.mapHomologicalComplex",
-    "statement": "def Functor.mapHomologicalComplex (F : W₁ ⥤ W₂) [F.PreservesZeroMorphisms] (c : ComplexShape ι) :\n    HomologicalComplex W₁ c ⥤ HomologicalComplex W₂ c",
-    "branch": "mathlib",
-    "by": "NB",
-    "date": "2026-10-15",
-    "existing": true,
-    "note": "Use the existing generic construction, not a duplicate specialization: F = CategoryTheory.constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), c = ComplexShape.up ℤ, for T : Scheme.{u}, Λ : Type (u + 1), [CommRing Λ]. The constant sheaf is the construction recorded by def-constructible-constant; its value at M is sheafification of the constant presheaf. The function model is the existing AlgebraicGeometry.Scheme.Etale.locallyConstantModulePresheafFunctor_iso_constantSheaf in Sheaf.ConstructibleSheaf.ConstantModuleLocallyConstant (proof dependency). mapHomologicalComplex maps objects, differentials and chain maps termwise. The existing CategoryTheory.Functor.mapCochainComplexShiftIso shift isomorphism has identity degree components. Exactness instances CategoryTheory.preservesFiniteLimits_constantSheaf and CategoryTheory.preservesFiniteColimits_constantSheaf in WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver, together with Mathlib constant-sheaf additivity, supply preservation of homology, hence quasi-isomorphisms. All specializations checked by scompile.py; no finiteness or boundedness assumptions. The primary declaration is in the recorded module. Shift compatibility is in Mathlib.Algebra.Homology.HomotopyCategory.Shift; quasi-isomorphism preservation is HomologicalComplex.quasiIso_map_of_preservesHomology in Mathlib.Algebra.Homology.QuasiIso; the derived interpretation is CategoryTheory.Functor.mapDerivedCategoryFactors in Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor. Each was read and its specialization compiled in the sandbox."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-6573d3877",
-    "group": "NB",
-    "result": "pass",
-    "note": "Immutable statements, dependencies, sources, exact declarations, universes and edge cases agree. lean.statement matches verbatim; scompile.py sandbox and library checks passed. No project clone or branch changes."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For a scheme $T$, a commutative ring $\\Lambda$ and a\n$\\Lambda$-module $M$, the *constant sheaf* $\\underline{M}$ on\n$T_{\\Et}$ is the sheafification of the constant presheaf\n$U\\mapsto M$ on the small etale site\n[def-weil-pbc-etale-site]; it is the sheaf\nof $M$-valued functions associated with the locally constant sheaf\nwith value $M$. For a complex $\\mathcal M^\\bullet$ of\n$\\Lambda$-modules, $\\underline{\\mathcal M^\\bullet}$ is the termwise\nconstant complex of sheaves,",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; shift convention as in the statement of lem-weil-pbc-exact-functor-derived-factorization"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-constructible-constant",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-constant-module-locally-constant",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-constant-sheaf.md",
+  "place": "Definition, with its asserted function model and compatibility clauses justified by existing DAG results; exactness argument follows Stacks 093J and 03EI."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constantSheaf|mapHomologicalComplex.*[Qq]uasi",
+   "results": "Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/LocalSite.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-14",
+   "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant sheaf functor is exact preserves quasi isomorphisms of complexes",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "constantSheaf",
+   "results": "loogle: unknown identifier 'constantSheaf'",
+   "date": "2026-10-14",
+   "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant sheaf of modules is the sheafification of the constant presheaf, and its termwise functor on complexes preserves shifts and quasi-isomorphisms",
+   "results": "CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.isConstant_iff_forget, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CompHausLike.LocallyConstantModule.functor",
+   "date": "2026-10-14",
+   "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor between abelian categories applied degreewise to cochain complexes preserves quasi-isomorphisms and commutes with shift",
+   "results": "CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism_functor, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-14",
+   "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\"",
+   "results": "CategoryTheory.constantSheaf, CategoryTheory.constantSheafAdj, CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.instAdditiveSheafConstantSheaf, CategoryTheory.constantSheafΓAdj, CategoryTheory.GrothendieckTopology.IsLocalSite.coconstantSheaf",
+   "date": "2026-10-14",
+   "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplex|mapQuasiIso|map.*[Qq]uasiIso",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean, Mathlib/Algebra/Homology/Localization.lean",
+   "date": "2026-10-14",
+   "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesLimits_const|preservesColimits_const|PreservesFiniteLimits \\(presheafToSheaf|constantSheaf J D\\).Additive",
+   "results": "Mathlib/CategoryTheory/Sites/Abelian.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/Sheafification.lean, Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean",
+   "date": "2026-10-14",
+   "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant presheaf functor preserves limits and colimits sheafification exact",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any site and abelian category admitting left exact sheafification, the constant sheaf functor is additive and preserves finite limits and finite colimits",
+   "results": "PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, CategoryTheory.HasSheafify.isLeftExact, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.instIsConstantObjSheafSheafCompose, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafPresheafToSheaf, CategoryTheory.instPreservesFiniteLimitsFunctorOppositeSheafLeftAdjointSheafToPresheaf, instAbelianLightCondMod",
+   "date": "2026-10-14",
+   "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"preservesLimits_const\"",
+   "results": "CategoryTheory.Limits.preservesLimits_const",
+   "date": "2026-10-14",
+   "verdict": "Partial matches only: constantSheaf and the generic complex functor cover construction/compatibility; the etale function model is supplied by the existing DAG node, not a single Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"Additive\"",
+   "results": "CategoryTheory.instAdditiveSheafConstantSheaf",
+   "date": "2026-10-14",
+   "verdict": "Partial match only: generic additivity and shifts, or locally constant modules on compact Hausdorff sites; none states the complete etale constant-complex construction."
+  },
+  {
+   "tool": "grep",
+   "query": "instAdditiveSheafConstantSheaf|mapHomologicalComplex_commShiftIso_hom_app_f",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean",
+   "date": "2026-10-14",
+   "verdict": "Partial match only: generic additivity and shifts, or locally constant modules on compact Hausdorff sites; none states the complete etale constant-complex construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constant sheaf of modules on a scheme sends every etale scheme to locally constant functions into a discrete module",
+   "results": "CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier, CompHausLike.LocallyConstantModule.functor_obj_val, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.isConstant_iff_forget, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule",
+   "date": "2026-10-14",
+   "verdict": "Partial match only: generic additivity and shifts, or locally constant modules on compact Hausdorff sites; none states the complete etale constant-complex construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1679,
+ "blueprint_uses": [
+  "def-weil-pbc-etale-site"
+ ],
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-kun-constant-sheaf",
+  "worker": "stage1",
+  "summary": "Reused the existing constant-sheaf definition and function-model theorem; made the termwise construction explicit, proved exactness by sectionwise kernels and cokernels plus exact sheafification, and applied the existing exact-functor theorem for shifts and quasi-isomorphisms. No new nodes or statement changes. Second reading made sheafification additivity explicit and identified the unrestricted function-model source.",
+  "blueprint": "Definition sentences 1--2 realized in step 1; final sentence (termwise constant complex and compatibility) realized in steps 2--3."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NH-d8387fd03",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-d8387fd03 (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, unit/chapter route and source passages. All three steps preserve arbitrary coefficients and unbounded complexes; Stacks 03P5 supports the unrestricted function model. Accepted the off-unit function-model theorem as a generic tool. No new nodes or repairs; target morphisms and coefficient categories remain unchanged. Concrete checks recorded in review.md."
+ },
+ "lean": {
+  "module": "Mathlib.Algebra.Homology.Additive",
+  "declaration": "CategoryTheory.Functor.mapHomologicalComplex",
+  "statement": "def Functor.mapHomologicalComplex (F : W₁ ⥤ W₂) [F.PreservesZeroMorphisms] (c : ComplexShape ι) :\n    HomologicalComplex W₁ c ⥤ HomologicalComplex W₂ c",
+  "branch": "mathlib",
+  "by": "NB",
+  "date": "2026-10-15",
+  "existing": true,
+  "note": "Use the existing generic construction, not a duplicate specialization: F = CategoryTheory.constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), c = ComplexShape.up ℤ, for T : Scheme.{u}, Λ : Type (u + 1), [CommRing Λ]. The constant sheaf is the construction recorded by def-constructible-constant; its value at M is sheafification of the constant presheaf. The function model is the existing AlgebraicGeometry.Scheme.Etale.locallyConstantModulePresheafFunctor_iso_constantSheaf in Sheaf.ConstructibleSheaf.ConstantModuleLocallyConstant (proof dependency). mapHomologicalComplex maps objects, differentials and chain maps termwise. The existing CategoryTheory.Functor.mapCochainComplexShiftIso shift isomorphism has identity degree components. Exactness instances CategoryTheory.preservesFiniteLimits_constantSheaf and CategoryTheory.preservesFiniteColimits_constantSheaf in WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver, together with Mathlib constant-sheaf additivity, supply preservation of homology, hence quasi-isomorphisms. All specializations checked by scompile.py; no finiteness or boundedness assumptions. The primary declaration is in the recorded module. Shift compatibility is in Mathlib.Algebra.Homology.HomotopyCategory.Shift; quasi-isomorphism preservation is HomologicalComplex.quasiIso_map_of_preservesHomology in Mathlib.Algebra.Homology.QuasiIso; the derived interpretation is CategoryTheory.Functor.mapDerivedCategoryFactors in Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor. Each was read and its specialization compiled in the sandbox."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6573d3877",
+  "group": "NB",
+  "result": "pass",
+  "note": "Immutable statements, dependencies, sources, exact declarations, universes and edge cases agree. lean.statement matches verbatim; scompile.py sandbox and library checks passed. No project clone or branch changes."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For a scheme $T$, a commutative ring $\\Lambda$ and a\n$\\Lambda$-module $M$, the *constant sheaf* $\\underline{M}$ on\n$T_{\\Et}$ is the sheafification of the constant presheaf\n$U\\mapsto M$ on the small etale site\n[def-weil-pbc-etale-site]; it is the sheaf\nof $M$-valued functions associated with the locally constant sheaf\nwith value $M$. For a complex $\\mathcal M^\\bullet$ of\n$\\Lambda$-modules, $\\underline{\\mathcal M^\\bullet}$ is the termwise\nconstant complex of sheaves,",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

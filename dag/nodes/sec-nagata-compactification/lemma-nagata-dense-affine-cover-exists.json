@@ -1,180 +1,133 @@
 {
-  "id": "lemma-nagata-dense-affine-cover-exists",
-  "blueprint": {
-    "is": "lemma-nagata-dense-affine-cover-exists",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Existence of a finite affine cover with dense total intersection",
-  "statement": "Let $X$ be quasi-compact and quasi-separated and assume that $X$ has only\nfinitely many irreducible components $Z_1,\\dots,Z_r$ with generic points\n$\\eta_j$. Then there is a finite affine open covering\n\n$$\n X=U_1\\cup\\dots\\cup U_m\n$$\n\nsuch that $\\eta_j\\in U_i$ for every $i,j$. If moreover $X\\to Y$ is of finite\ntype with $Y$ affine, one may take each $U_i$ affine of finite type over $Y$.\nIn particular the open subscheme $U:=U_1\\cap\\dots\\cap U_m$ is dense in $X$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/lemma-nagata-dense-affine-cover-exists.md",
-    "place": "node lemma-nagata-dense-affine-cover-exists, order 318"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "By [lem-chow-affine-through-generic-points] applied to the finite list\n$\\eta_1,\\dots,\\eta_r$, for every $x\\in X$ there is an affine open $U_x$\ncontaining $x$ and all the $\\eta_j$. Quasi-compactness of $X$ lets us pick a\nfinite subcover $U_1,\\dots,U_m$ among them. If $X\\to Y$ is of finite type, an\nopen subscheme of $X$ is again of finite type over $Y$ (open immersions are of\nfinite type), so each $U_i$ is affine of finite type over $Y$. Finally $U\\cap\nZ_j$ is a nonempty open subset of the irreducible space $Z_j$ (it contains\n$\\eta_j$), hence dense in $Z_j$; since this holds for all $j$ and\n$X=Z_1\\cup\\dots\\cup Z_r$, the open $U$ is dense in $X$.",
-      "uses": [
-        "lem-chow-affine-through-generic-points"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-chow-affine-through-generic-points",
-    "lemma-nagata-affine-neighbourhood-generic-points"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/lemma-nagata-dense-affine-cover-exists.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "multiple_detailed_forms",
-    "lean_multiple",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 318,
-  "blueprint_uses": [
-    "def-weil-pbc-scheme-conventions",
-    "lem-chow-affine-through-generic-points",
-    "lemma-nagata-affine-neighbourhood-generic-points"
-  ],
-  "lean": {
-    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Properties",
-    "declaration": "AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset",
-    "branch": "slopmaster2",
-    "line": 232,
-    "sorry_free": true,
-    "body_lines": 10,
-    "others": [
-      {
-        "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Limits",
-        "declaration": "AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter",
-        "branch": "slopmaster2",
-        "line": 170,
-        "sorry_free": true,
-        "body_lines": 11
-      },
-      {
-        "module": "WeilConjectures.Mathlib.Topology.Sober",
-        "declaration": "dense_iInf_of_genericPoints_subset",
-        "branch": "slopmaster2",
-        "line": 45,
-        "sorry_free": true,
-        "body_lines": 2
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset",
-    "AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter",
-    "dense_iInf_of_genericPoints_subset"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions",
-    "lemma-nagata-affine-neighbourhood-generic-points"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "Let $X$ be quasi-compact and quasi-separated and assume that it has finitely\nmany irreducible components, with generic points\n$\\eta_1,\\ldots,\\eta_r$. There is a finite affine open cover\n$(U_1,\\ldots,U_n)$ whose total intersection is dense in $X$.",
-      "proof": "For every $x\\in X$, apply\n[lemma-nagata-affine-neighbourhood-generic-points] to obtain an affine\nopen containing $x$ and every $\\eta_i$. Quasi-compactness gives a finite\nsubcover. Its total intersection contains the generic point of every\nirreducible component, and is therefore dense.",
-      "cites": [
-        "lemma-nagata-affine-neighbourhood-generic-points"
-      ]
-    },
-    {
-      "statement": "Let $X$ be a quasi-compact and quasi-separated scheme with finitely many\nirreducible components $Z_1,\\dots,Z_r$, with generic points $\\eta_j$. Then\nthere is a finite affine open covering $X=U_1\\cup\\dots\\cup U_m$ such that\n$\\eta_j\\in U_i$ for all $i$ and $j$. For any such covering the open\n\n$$\nU:=U_1\\cap\\dots\\cap U_m\n$$\n\nis dense in $X$.",
-      "proof": "By [lem-chow-affine-through-generic-points] every $x\\in X$ has an affine\nopen neighbourhood containing all the $\\eta_j$; since $X$ is quasi-compact,\nfinitely many of them cover $X$. For the density statement note that\n$U\\cap Z_j$ is an open subset of $Z_j$ containing $\\eta_j$, hence is dense in\nthe irreducible space $Z_j$; as $X=Z_1\\cup\\dots\\cup Z_r$, the closure of $U$\ncontains every $Z_j$ and therefore equals $X$.",
-      "cites": [
-        "lem-chow-affine-through-generic-points"
-      ]
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset",
-        "AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter",
-        "dense_iInf_of_genericPoints_subset"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Properties",
-          "lines": [
-            228,
-            245
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter",
-          "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Limits",
-          "lines": [
-            166,
-            185
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "dense_iInf_of_genericPoints_subset",
-          "module": "WeilConjectures.Mathlib.Topology.Sober",
-          "lines": [
-            43,
-            49
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-lem-nagata-sketch-affine-cover",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be a quasi-compact scheme with finitely many irreducible\ncomponents $Z_1,\\dots,Z_r$, with generic points $\\eta_j$. Then there is a\nfinite affine open covering $X=U_1\\cup\\dots\\cup U_m$ such that\n$\\eta_j\\in U_i$ for all $i$ and $j$; in particular the total intersection\n\n$$\nU:=U_1\\cap\\dots\\cap U_m\n$$\n\nis dense in $X$. More generally, in any scheme the intersection of finitely\nmany open subsets each of which contains the generic points of all\nirreducible components is dense.",
-    "proof": [
-      {
-        "text": "**Step 1: an affine open through $x$ and all generic points.** Let\n$x\\in X$. A generic point $\\eta_j$ lies in no irreducible component other\nthan $Z_j$: if $\\eta_j\\in Z_k$ then $Z_j=\\overline{\\{\\eta_j\\}}\\subseteq Z_k$,\nso $j=k$. The union $B$ of the finitely many components not containing $x$\nis closed and misses $x$, so there is an affine open $W\\ni x$ with\n$W\\cap B=\\emptyset$. Every point of $W$ lies on some component, which then\ncontains $x$; hence $W$, and therefore its closure $\\overline W$, lies in\nthe union of the components through $x$. If $x\\in Z_j$, then $W\\cap Z_j$ is\na nonempty open subset of the irreducible space $Z_j$, so it contains\n$\\eta_j$.\n\nNow let $\\eta_k$ be the generic point of a component with $x\\notin Z_k$.\nThen $\\eta_k\\notin\\overline W$ (it lies on no component through $x$) and\n$\\eta_k$ lies on no component other than $Z_k$, so\n$\\overline W\\cup\\bigcup_{l\\neq k}Z_l$ is a closed set missing $\\eta_k$, and\nthere is an affine open $V_k\\ni\\eta_k$ disjoint from it. Every point of\n$V_k$ lies on some component, which can only be $Z_k$; thus $V_k\\subseteq\nZ_k\\setminus\\bigcup_{l\\neq k}Z_l$. Consequently the $V_k$ are pairwise\ndisjoint, and each is disjoint from $W$. A finite disjoint union of affine\nopens is affine (Stacks, Tag\n[01I5](https://stacks.math.columbia.edu/tag/01I5)), so\n$U_x:=W\\cup\\bigcup_{x\\notin Z_k}V_k$ is an affine open containing $x$ and\nall the $\\eta_j$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "**Step 2: the cover.** Since $X$ is quasi-compact, finitely many of the\n$U_x$ cover $X$; call them $U_1,\\dots,U_m$. Each contains every $\\eta_j$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "**Step 3: density.** Let $U$ be a finite intersection of open subsets each\ncontaining the generic points of all irreducible components (in an\narbitrary scheme), so $U$ is open and contains all these generic points.\nEvery point $y$ lies on some irreducible component $Z$, with generic point\n$\\eta\\in U$; then $U\\cap Z$ is a nonempty open subset of the irreducible\nspace $Z$, hence dense in $Z$, so $y\\in\\overline{U\\cap Z}\\subseteq\n\\overline U$. Thus $U$ is dense. Applied to $U_1,\\dots,U_m$ this gives the\ndensity of $U_1\\cap\\dots\\cap U_m$.\n\nWhen $X$ is moreover quasi-separated, Step 1 is also\n[lem-chow-affine-through-generic-points] applied to all the $\\eta_j$.",
-        "uses": [
-          "lem-chow-affine-through-generic-points"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "lemma-nagata-dense-affine-cover-exists",
+ "blueprint": {
+  "is": "lemma-nagata-dense-affine-cover-exists",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Existence of a finite affine cover with dense total intersection",
+ "statement": "Let $X$ be quasi-compact and quasi-separated and assume that $X$ has only\nfinitely many irreducible components $Z_1,\\dots,Z_r$ with generic points\n$\\eta_j$. Then there is a finite affine open covering\n\n$$\n X=U_1\\cup\\dots\\cup U_m\n$$\n\nsuch that $\\eta_j\\in U_i$ for every $i,j$. If moreover $X\\to Y$ is of finite\ntype with $Y$ affine, one may take each $U_i$ affine of finite type over $Y$.\nIn particular the open subscheme $U:=U_1\\cap\\dots\\cap U_m$ is dense in $X$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/lemma-nagata-dense-affine-cover-exists.md",
+  "place": "node lemma-nagata-dense-affine-cover-exists, order 318"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "By [lem-chow-affine-through-generic-points] applied to the finite list\n$\\eta_1,\\dots,\\eta_r$, for every $x\\in X$ there is an affine open $U_x$\ncontaining $x$ and all the $\\eta_j$. Quasi-compactness of $X$ lets us pick a\nfinite subcover $U_1,\\dots,U_m$ among them. If $X\\to Y$ is of finite type, an\nopen subscheme of $X$ is again of finite type over $Y$ (open immersions are of\nfinite type), so each $U_i$ is affine of finite type over $Y$. Finally $U\\cap\nZ_j$ is a nonempty open subset of the irreducible space $Z_j$ (it contains\n$\\eta_j$), hence dense in $Z_j$; since this holds for all $j$ and\n$X=Z_1\\cup\\dots\\cup Z_r$, the open $U$ is dense in $X$.",
+   "uses": [
+    "lem-chow-affine-through-generic-points"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-chow-affine-through-generic-points",
+  "lemma-nagata-affine-neighbourhood-generic-points"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-affine-cover/lemma-nagata-dense-affine-cover-exists.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "multiple_detailed_forms",
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 318,
+ "blueprint_uses": [
+  "def-weil-pbc-scheme-conventions",
+  "lem-chow-affine-through-generic-points",
+  "lemma-nagata-affine-neighbourhood-generic-points"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Properties",
+  "declaration": "AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset",
+  "branch": "slopmaster2",
+  "line": 232,
+  "sorry_free": true,
+  "body_lines": 10,
+  "others": [
+   {
+    "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Limits",
+    "declaration": "AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter",
+    "branch": "slopmaster2",
+    "line": 170,
+    "sorry_free": true,
+    "body_lines": 11
+   },
+   {
+    "module": "WeilConjectures.Mathlib.Topology.Sober",
+    "declaration": "dense_iInf_of_genericPoints_subset",
+    "branch": "slopmaster2",
+    "line": 45,
+    "sorry_free": true,
+    "body_lines": 2
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_isAffineOpen_cover_genericPoints_subset",
+  "AlgebraicGeometry.exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter",
+  "dense_iInf_of_genericPoints_subset"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions",
+  "lemma-nagata-affine-neighbourhood-generic-points"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $X$ be quasi-compact and quasi-separated and assume that it has finitely\nmany irreducible components, with generic points\n$\\eta_1,\\ldots,\\eta_r$. There is a finite affine open cover\n$(U_1,\\ldots,U_n)$ whose total intersection is dense in $X$.",
+   "proof": "For every $x\\in X$, apply\n[lemma-nagata-affine-neighbourhood-generic-points] to obtain an affine\nopen containing $x$ and every $\\eta_i$. Quasi-compactness gives a finite\nsubcover. Its total intersection contains the generic point of every\nirreducible component, and is therefore dense.",
+   "cites": [
+    "lemma-nagata-affine-neighbourhood-generic-points"
+   ]
+  },
+  {
+   "statement": "Let $X$ be a quasi-compact and quasi-separated scheme with finitely many\nirreducible components $Z_1,\\dots,Z_r$, with generic points $\\eta_j$. Then\nthere is a finite affine open covering $X=U_1\\cup\\dots\\cup U_m$ such that\n$\\eta_j\\in U_i$ for all $i$ and $j$. For any such covering the open\n\n$$\nU:=U_1\\cap\\dots\\cap U_m\n$$\n\nis dense in $X$.",
+   "proof": "By [lem-chow-affine-through-generic-points] every $x\\in X$ has an affine\nopen neighbourhood containing all the $\\eta_j$; since $X$ is quasi-compact,\nfinitely many of them cover $X$. For the density statement note that\n$U\\cap Z_j$ is an open subset of $Z_j$ containing $\\eta_j$, hence is dense in\nthe irreducible space $Z_j$; as $X=Z_1\\cup\\dots\\cup Z_r$, the closure of $U$\ncontains every $Z_j$ and therefore equals $X$.",
+   "cites": [
+    "lem-chow-affine-through-generic-points"
+   ]
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-lem-nagata-sketch-affine-cover",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be a quasi-compact scheme with finitely many irreducible\ncomponents $Z_1,\\dots,Z_r$, with generic points $\\eta_j$. Then there is a\nfinite affine open covering $X=U_1\\cup\\dots\\cup U_m$ such that\n$\\eta_j\\in U_i$ for all $i$ and $j$; in particular the total intersection\n\n$$\nU:=U_1\\cap\\dots\\cap U_m\n$$\n\nis dense in $X$. More generally, in any scheme the intersection of finitely\nmany open subsets each of which contains the generic points of all\nirreducible components is dense.",
+  "proof": [
+   {
+    "text": "**Step 1: an affine open through $x$ and all generic points.** Let\n$x\\in X$. A generic point $\\eta_j$ lies in no irreducible component other\nthan $Z_j$: if $\\eta_j\\in Z_k$ then $Z_j=\\overline{\\{\\eta_j\\}}\\subseteq Z_k$,\nso $j=k$. The union $B$ of the finitely many components not containing $x$\nis closed and misses $x$, so there is an affine open $W\\ni x$ with\n$W\\cap B=\\emptyset$. Every point of $W$ lies on some component, which then\ncontains $x$; hence $W$, and therefore its closure $\\overline W$, lies in\nthe union of the components through $x$. If $x\\in Z_j$, then $W\\cap Z_j$ is\na nonempty open subset of the irreducible space $Z_j$, so it contains\n$\\eta_j$.\n\nNow let $\\eta_k$ be the generic point of a component with $x\\notin Z_k$.\nThen $\\eta_k\\notin\\overline W$ (it lies on no component through $x$) and\n$\\eta_k$ lies on no component other than $Z_k$, so\n$\\overline W\\cup\\bigcup_{l\\neq k}Z_l$ is a closed set missing $\\eta_k$, and\nthere is an affine open $V_k\\ni\\eta_k$ disjoint from it. Every point of\n$V_k$ lies on some component, which can only be $Z_k$; thus $V_k\\subseteq\nZ_k\\setminus\\bigcup_{l\\neq k}Z_l$. Consequently the $V_k$ are pairwise\ndisjoint, and each is disjoint from $W$. A finite disjoint union of affine\nopens is affine (Stacks, Tag\n[01I5](https://stacks.math.columbia.edu/tag/01I5)), so\n$U_x:=W\\cup\\bigcup_{x\\notin Z_k}V_k$ is an affine open containing $x$ and\nall the $\\eta_j$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**Step 2: the cover.** Since $X$ is quasi-compact, finitely many of the\n$U_x$ cover $X$; call them $U_1,\\dots,U_m$. Each contains every $\\eta_j$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "**Step 3: density.** Let $U$ be a finite intersection of open subsets each\ncontaining the generic points of all irreducible components (in an\narbitrary scheme), so $U$ is open and contains all these generic points.\nEvery point $y$ lies on some irreducible component $Z$, with generic point\n$\\eta\\in U$; then $U\\cap Z$ is a nonempty open subset of the irreducible\nspace $Z$, hence dense in $Z$, so $y\\in\\overline{U\\cap Z}\\subseteq\n\\overline U$. Thus $U$ is dense. Applied to $U_1,\\dots,U_m$ this gives the\ndensity of $U_1\\cap\\dots\\cap U_m$.\n\nWhen $X$ is moreover quasi-separated, Step 1 is also\n[lem-chow-affine-through-generic-points] applied to all the $\\eta_j$.",
+    "uses": [
+     "lem-chow-affine-through-generic-points"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

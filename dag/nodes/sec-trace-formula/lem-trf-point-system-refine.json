@@ -1,182 +1,183 @@
 {
-  "id": "lem-trf-point-system-refine",
-  "kind": "statement",
-  "title": "One-cover refinement of a pointed inverse system",
-  "statement": "Let $\\mathcal C$ be a category with a site precoverage $P$ satisfying the site axioms [def-weil-pbc-sites-and-cohomology]. Let $J$ be a nonempty directed preorder-category, let $V:J^{op}\\to\\mathcal C$ be an inverse-system diagram, and let $F$ be a sheaf of sets on $P.toGrothendieck$. Thus the stalk is $\\varinjlim_J (V^{rightOp}\\mathbin{\\triangleright}F.val)$ and, for $W\\in\\mathcal C$, $u'(W)=\\varinjlim_J(V^{rightOp}\\mathbin{\\triangleright}\\operatorname{yoneda}(W))$. Let $K$ be a finite type, let $\\{W_k\\xrightarrow{wk_k}W\\}_{k\\in K}$ be a covering, let $s\\ne s'$ in $\\varinjlim_J(V^{rightOp}\\mathbin{\\triangleright}F.val)$, and let $f\\in u'(W)$. Then there are a nonempty directed preorder-category $I$, an inverse-system diagram $U:I^{op}\\to\\mathcal C$, an order embedding $e:J\\hookrightarrow_o I$, and an identification $e\\mathbin{\\triangleright}U^{rightOp}=V^{rightOp}$ such that the two images of $s,s'$ under the canonical map $\\operatorname{colimit.pre}(U^{rightOp}\\mathbin{\\triangleright}F.val,e)$ are distinct, and for some $k\\in K$ the image of $f$ under the canonical map $\\operatorname{colimit.pre}(U^{rightOp}\\mathbin{\\triangleright}\\operatorname{yoneda}(W),e)$ lies in the range of the map induced by $\\operatorname{yoneda.map}(wk_k)$ from $\\varinjlim_I(U^{rightOp}\\mathbin{\\triangleright}\\operatorname{yoneda}(W_k))$ to $\\varinjlim_I(U^{rightOp}\\mathbin{\\triangleright}\\operatorname{yoneda}(W))$. The displayed Yoneda colimits use the canonical universe lift when the category and hom universes differ.",
-  "source": {
+ "id": "lem-trf-point-system-refine",
+ "kind": "statement",
+ "title": "One-cover refinement of a pointed inverse system",
+ "statement": "Let $\\mathcal C$ be a category with a site precoverage $P$ satisfying the site axioms [def-weil-pbc-sites-and-cohomology]. Let $J$ be a nonempty directed preorder-category, let $V:J^{op}\\to\\mathcal C$ be an inverse-system diagram, and let $F$ be a sheaf of sets on $P.toGrothendieck$. Thus the stalk is $\\varinjlim_J (V^{rightOp}\\mathbin{\\triangleright}F.val)$ and, for $W\\in\\mathcal C$, $u'(W)=\\varinjlim_J(V^{rightOp}\\mathbin{\\triangleright}\\operatorname{yoneda}(W))$. Let $K$ be a finite type, let $\\{W_k\\xrightarrow{wk_k}W\\}_{k\\in K}$ be a covering, let $s\\ne s'$ in $\\varinjlim_J(V^{rightOp}\\mathbin{\\triangleright}F.val)$, and let $f\\in u'(W)$. Then there are a nonempty directed preorder-category $I$, an inverse-system diagram $U:I^{op}\\to\\mathcal C$, an order embedding $e:J\\hookrightarrow_o I$, and an identification $e\\mathbin{\\triangleright}U^{rightOp}=V^{rightOp}$ such that the two images of $s,s'$ under the canonical map $\\operatorname{colimit.pre}(U^{rightOp}\\mathbin{\\triangleright}F.val,e)$ are distinct, and for some $k\\in K$ the image of $f$ under the canonical map $\\operatorname{colimit.pre}(U^{rightOp}\\mathbin{\\triangleright}\\operatorname{yoneda}(W),e)$ lies in the range of the map induced by $\\operatorname{yoneda.map}(wk_k)$ from $\\varinjlim_I(U^{rightOp}\\mathbin{\\triangleright}\\operatorname{yoneda}(W_k))$ to $\\varinjlim_I(U^{rightOp}\\mathbin{\\triangleright}\\operatorname{yoneda}(W))$. The displayed Yoneda colimits use the canonical universe lift when the category and hom universes differ.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YO (Lemma lemma-refine), proof of Tag 00YP"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "By clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise], choose $j_0\\in J$ and a representative $f':V_{j_0}\\to W$ of $f$. Let $J_0=\\{j\\in J\\mid j\\ge j_0\\}$; it is directed, and the canonical map from the colimit over $J_0$ to the colimit over $J$ is bijective by the elementwise criterion (every index admits an upper bound in $J_0$, and equality is witnessed at a later index). For each $j\\in J_0$ and $k\\in K$, form $V_{j,k}=V_j\\times_{W,f'\\circ g_{jj_0}}W_k$. The fibre products exist and $\\{V_{j,k}\\to V_j\\}_{k\\in K}$ is a covering by axiom (iii) in [def-weil-pbc-sites-and-cohomology].",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YO (Lemma lemma-refine), proof of Tag 00YP"
+    "place": "Tag 00YO (Lemma lemma-refine), proof: first paragraph, representation of f and construction of V_{j,k}"
+   }
   },
-  "stmt_deps": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-weil-pbc-category-colimit"
-  ],
-  "proof": [
-    {
-      "text": "By clause (1) of [lem-weil-pbc-filtered-colimit-sets-elementwise], choose $j_0\\in J$ and a representative $f':V_{j_0}\\to W$ of $f$. Let $J_0=\\{j\\in J\\mid j\\ge j_0\\}$; it is directed, and the canonical map from the colimit over $J_0$ to the colimit over $J$ is bijective by the elementwise criterion (every index admits an upper bound in $J_0$, and equality is witnessed at a later index). For each $j\\in J_0$ and $k\\in K$, form $V_{j,k}=V_j\\times_{W,f'\\circ g_{jj_0}}W_k$. The fibre products exist and $\\{V_{j,k}\\to V_j\\}_{k\\in K}$ is a covering by axiom (iii) in [def-weil-pbc-sites-and-cohomology].",
-      "uses": [
-        "lem-weil-pbc-filtered-colimit-sets-elementwise",
-        "def-weil-pbc-sites-and-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites.tex",
-        "place": "Tag 00YO (Lemma lemma-refine), proof: first paragraph, representation of f and construction of V_{j,k}"
-      }
-    },
-    {
-      "text": "For every $j\\in J_0$, the sheaf equalizer condition in [def-weil-pbc-sites-and-cohomology] makes the restriction map $\\mathcal F(V_j)\\to\\prod_{k\\in K}\\mathcal F(V_{j,k})$ injective. These maps commute with the transition maps in $j$, and a filtered colimit of injective maps of sets is injective by clause (3) of [lem-weil-pbc-filtered-colimit-sets-elementwise] (two elements with equal image are equal after some transition, hence equal by injectivity at that index). Hence, after passing to filtered colimits, [lem-weil-pbc-filtered-colimits-commute-finite-limits] identifies the map $\\mathcal F_{p'}\\to\\prod_{k\\in K}\\varinjlim_{j\\in J_0}\\mathcal F(V_{j,k})$ with an injective map (the finite product is a finite limit). Since $s\\ne s'$, their images differ in at least one coordinate; choose $k_0\\in K$ for which their images in $\\varinjlim_{j\\in J_0}\\mathcal F(V_{j,k_0})$ are distinct.",
-      "uses": [
-        "def-weil-pbc-sites-and-cohomology",
-        "lem-weil-pbc-filtered-colimit-sets-elementwise",
-        "lem-weil-pbc-filtered-colimits-commute-finite-limits"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites.tex",
-        "place": "Tag 00YO (Lemma lemma-refine), proof: sheaf restriction injection, Categories Lemma 002W, and choice of k"
-      }
-    },
-    {
-      "text": "Construct the refined index poset as the disjoint union $I=J^{(0)}\\amalg J_0^{(1)}$. Put $j^{(0)}\\le j'^{(0)}$ and $j^{(1)}\\le j'^{(1)}$ exactly when $j\\le j'$ in $J$, put $j^{(0)}\\le j'^{(1)}$ exactly when $j\\le j'$, and impose no relation $j^{(1)}\\le j'^{(0)}$. Set $U_{j^{(0)}}=V_j$ and $U_{j^{(1)}}=V_{j,k_0}$. The poset is directed: an upper bound for two indices is obtained by choosing in $J_0$ an element above their underlying indices and taking its $(1)$-copy. Define transition maps for an order relation by $g$ on two $(0)$-copies, by the pullback of $g$ along $W_{k_0}\\to W$ on two $(1)$-copies, and, for $j^{(0)}\\le j'^{(1)}$, by the projection $V_{j',k_0}\\to V_{j'}$ followed by $g_{j'j}$; these maps satisfy the identity and composition laws by the pullback universal property. The $(0)$-copy of $J$ is the original subsystem, so this is a refinement of the given system.",
-      "uses": [
-        "def-weil-pbc-sites-and-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites.tex",
-        "place": "Tag 00YO (Lemma lemma-refine), proof: construction of I=J\\amalg J_0, ordering, objects and transition maps"
-      }
-    },
-    {
-      "text": "The $(1)$-copy $J_0^{(1)}$ is cofinal in $I$, so the elementwise filtered-colimit criterion [lem-weil-pbc-filtered-colimit-sets-elementwise] identifies the colimit over $I$ with the colimit over $J_0$ of the sets $\\mathcal F(V_{j,k_0})$. Therefore the images of $s,s'$ remain distinct by the choice of $k_0$. For every $j\\in J_0$, the projection $V_{j,k_0}\\to V_j$ followed by $g_{jj_0}$ and $f'$ factors through $W_{k_0}$ by the pullback definition. Thus the image of $f$ in $u(W)$ is represented by a morphism through $W_{k_0}$, proving the required conclusion.",
-      "uses": [
-        "lem-weil-pbc-filtered-colimit-sets-elementwise"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites.tex",
-        "place": "Tag 00YO (Lemma lemma-refine), proof: distinctness in the refined colimit and factorization through W_k"
-      }
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "For every $j\\in J_0$, the sheaf equalizer condition in [def-weil-pbc-sites-and-cohomology] makes the restriction map $\\mathcal F(V_j)\\to\\prod_{k\\in K}\\mathcal F(V_{j,k})$ injective. These maps commute with the transition maps in $j$, and a filtered colimit of injective maps of sets is injective by clause (3) of [lem-weil-pbc-filtered-colimit-sets-elementwise] (two elements with equal image are equal after some transition, hence equal by injectivity at that index). Hence, after passing to filtered colimits, [lem-weil-pbc-filtered-colimits-commute-finite-limits] identifies the map $\\mathcal F_{p'}\\to\\prod_{k\\in K}\\varinjlim_{j\\in J_0}\\mathcal F(V_{j,k})$ with an injective map (the finite product is a finite limit). Since $s\\ne s'$, their images differ in at least one coordinate; choose $k_0\\in K$ for which their images in $\\varinjlim_{j\\in J_0}\\mathcal F(V_{j,k_0})$ are distinct.",
+   "uses": [
     "def-weil-pbc-sites-and-cohomology",
     "lem-weil-pbc-filtered-colimit-sets-elementwise",
     "lem-weil-pbc-filtered-colimits-commute-finite-limits"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YO (Lemma lemma-refine), proof"
+    "place": "Tag 00YO (Lemma lemma-refine), proof: sheaf restriction injection, Categories Lemma 002W, and choice of k"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "finite covering|directed colimit|refinement",
-      "results": "0 hits",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "refinement of directed inverse system preserving distinct colimit sections and factoring one morphism through a finite cover",
-      "results": "8 hits including ModuleCat.directLimitIsColimit_desc, DirectLimit.setoid, and AlgebraicGeometry.Scheme.OpenCover.isColimitCoconeOfLocallyDirected; none states the site refinement lemma",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Meq.refine, GrothendieckTopology.Point",
-      "results": "loogle unknown identifier GrothendieckTopology.Point; no usable match",
-      "date": "2026-10-18",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "refinement of directed inverse system preserving distinct colimit sections and factoring one morphism through a finite cover",
-      "results": "8 hits about InverseSystem and finite inverse-system sections; none states this site lemma",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-trf-point-system-refine-all",
-    "date": "2026-10-18",
-    "group": "Q28"
+  {
+   "text": "Construct the refined index poset as the disjoint union $I=J^{(0)}\\amalg J_0^{(1)}$. Put $j^{(0)}\\le j'^{(0)}$ and $j^{(1)}\\le j'^{(1)}$ exactly when $j\\le j'$ in $J$, put $j^{(0)}\\le j'^{(1)}$ exactly when $j\\le j'$, and impose no relation $j^{(1)}\\le j'^{(0)}$. Set $U_{j^{(0)}}=V_j$ and $U_{j^{(1)}}=V_{j,k_0}$. The poset is directed: an upper bound for two indices is obtained by choosing in $J_0$ an element above their underlying indices and taking its $(1)$-copy. Define transition maps for an order relation by $g$ on two $(0)$-copies, by the pullback of $g$ along $W_{k_0}\\to W$ on two $(1)$-copies, and, for $j^{(0)}\\le j'^{(1)}$, by the projection $V_{j',k_0}\\to V_{j'}$ followed by $g_{j'j}$; these maps satisfy the identity and composition laws by the pullback universal property. The $(0)$-copy of $J$ is the original subsystem, so this is a refinement of the given system.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YO (Lemma lemma-refine), proof: construction of I=J\\amalg J_0, ordering, objects and transition maps"
+   }
   },
-  "chapter": "sec-trace-formula",
-  "unit": "sk-i-curve-zero",
-  "blueprint": {
-    "from": {
-      "node": "lem-trf-local-term-locality",
-      "place": "The one-cover refinement used inside the all-at-once refinement (Tag 00YO) in the proof of lem-trf-finitary-site-enough-points.",
-      "via": [
-        "lem-trf-point-system-refine-all",
-        "lem-trf-finitary-site-enough-points",
-        "lem-trf-oriented-product-points-conservative",
-        "lem-trf-oriented-nearby-strict-local-description",
-        "lem-trf-good-oriented-nearby-kunneth",
-        "lem-trf-specialization-external-product",
-        "lem-trf-trace-specialization"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-18",
-    "item": "lem-trf-point-system-refine",
-    "worker": "stage1",
-    "summary": "Split the one-cover refinement of Tag 00YO into four steps. Step 1 represents the given morphism in a tail of the directed system and forms the pullbacks along the finite covering. Step 2 uses the sheaf equalizer injection and filtered-colimit commutation with finite products to choose one cover member preserving distinctness. Step 3 gives the full disjoint-union index poset and all transition maps omitted in the source. Step 4 uses cofinality of the refined summand to preserve distinctness and verifies the factorization through the selected cover member.",
-    "blueprint": "The split realizes the one-cover refinement used inside the all-at-once refinement (Tag 00YO) in the proof of lem-trf-finitary-site-enough-points.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q30-b627725ea",
-    "group": "Q30",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-b627725ea (reviewer sub-agent of L); spot-checked: I read the whole item. I checked it against Stacks sites.tex lemma-refine (Tag 00YO), the definition of refinement and of u just before it, and its use in lemma-refine-all-at-once (00YP) and the parent lem-trf-point-system-refine-all. I read the statements of all four cited nodes: def-weil-pbc-sites-and-cohomology (site axiom (iii) and the sheaf equalizer), def-weil-pbc-category-colimit, and the Mathlib leaves lem-weil-pbc-filtered-colimit-sets-elementwise and lem-weil-pbc-filtered-colimits-commute-finite-limits. The statement matches 00YO hypothesis by hypothesis and is not weakened. Step 1 represents f at j0 by clause (1) and forms the fibre products by axiom (iii). Step 2 uses the sheaf injection and commutation with the finite product (Categories 002W). Step 3: the order on J amalg J0, with no back relations, is a directed poset; I checked the transition maps (g x id on (1)-copies, projection then g on mixed pairs) for the identity and composition laws in all mixed cases. Step 4: J0^(1) is cofinal, s and s' stay distinct, and f'.pr1 = (W_k0 -> W).pr2 gives the factorization. Edge cases tested: J a singleton, K empty (vacuous), f already factoring, a one-member cover. There are no new nodes and no duplicate in the DAG or the blueprint snapshots. The route uses only definitions and Mathlib leaves, so no tool_uses are needed; no SGA is cited. Fixes, in fixes/dag/nodes/sec-trace-formula/lem-trf-point-system-refine.json: (1) B4: four single-backslash \\to/\\times in steps 1 and 4 decoded as TAB characters, and \\amalg in step 3's source.place decoded as BEL; all restored. (2) C1/C3: step 2 used, without citing it, that a filtered colimit of injections is injective; clause (3) of lem-weil-pbc-filtered-colimit-sets-elementwise is now named in the text and uses (it was already in proof_deps). (3) Step 1 named the canonical map J->J0 in the wrong direction; it is now J0->J. Remark: the report claims a citations.json that is not in the commit; this does not affect the DAG.; 1 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-9b4e1be42",
-    "group": "Q121",
-    "result": "pass",
-    "note": "Reviewed immutable node, dependencies, source, Lean signature, correction and sole citer. Universe and edge-case checks pass; scompile.py reproduced a clean compile. No blocking faults. Recorded review.md, including an empty-cover wording clarification."
-  },
-  "statement_change": {
-    "date": "2026-10-18",
-    "by": "N6 stage 2",
-    "old_statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology]. Let $(J,\\geq,V_j,g_{jj'})$ be a directed inverse system of objects of $\\mathcal C$: $J$ is a nonempty directed poset, each $j\\geq j'$ has a transition $g_{jj'}:V_j\\to V_{j'}$, and $g_{jj}=\\mathrm{id}$, $g_{j'j''}g_{jj'}=g_{jj''}$. Put $u'(W)=\\varinjlim_{j\\in J}\\operatorname{Hom}_{\\mathcal C}(V_j,W)$ and $\\mathcal F_{p'}=\\varinjlim_{j\\in J}\\mathcal F(V_j)$ for a sheaf of sets $\\mathcal F$ on $\\mathcal C$ (filtered colimits of sets [def-weil-pbc-category-colimit]). Let $s\\ne s'$ in $\\mathcal F_{p'}$, let $\\{W_k\\to W\\}_{k\\in K}$ be a covering of $\\mathcal C$ with $K$ finite, and let $f\\in u'(W)$. Then there is a directed inverse system $(I,\\geq,U_i,f_{ii'})$ of objects of $\\mathcal C$ refining the given one, i.e. $J\\subset I$, the order of $J$ is the one induced from $I$, $U_j=V_j$ and $f_{jj'}=g_{jj'}$ for $j\\geq j'$ in $J$, such that the images of $s,s'$ under the canonical map $\\mathcal F_{p'}\\to\\varinjlim_{i\\in I}\\mathcal F(U_i)$ remain distinct and the image of $f$ under the canonical map $u'(W)\\to u(W)=\\varinjlim_{i\\in I}\\operatorname{Hom}_{\\mathcal C}(U_i,W)$ lies in the image of $u(W_k)\\to u(W)$ (composition with $W_k\\to W$) for some $k\\in K$.",
-    "what": "The landed statement describes the system, the stalk, u, u' and the refinement only informally (an implicit subset J of I, implicit canonical maps u'->u and F_{p'}->F_p, and an unspecified notion of finite covering and sheaf of sets on a site). The correction states the same Tag 00YO content with these objects explicit: the site as a precoverage satisfying the site axioms, the sheaf on P.toGrothendieck, the inverse system as a diagram over a directed preorder (Stacks' directed set, Categories 002V), the refinement as an order embedding with an identification of the restricted diagram, the canonical maps as colimit.pre, and the factorization through u(W_k) as membership in the range of the map induced by yoneda.map(wk_k), with the canonical universe lift of the representables. No hypothesis is added and no conclusion clause is weakened.",
-    "source": {
-      "document": "literature/stacks-project/sites.tex",
-      "place": "Tag 00YO (Lemma lemma-refine), definitions of u and p immediately preceding the lemma, and proof of Tag 00YP"
-    },
-    "citers": [
-      {
-        "id": "lem-trf-point-system-refine-all",
-        "holds": false,
-        "note": "Its proof applies this lemma at successor stages; with the universe-general Lean (index Type w, sheaf Type (max w t)) the universes of its Lean statement are reachable, but its Lean statement requires PartialOrder on the refined index and an explicit representative b : U_i -> W_k, whereas this lemma yields a directed preorder (Stacks' directed set) and range membership, so its recorded proof and interface must be rechecked; not edited here."
-      }
-    ]
-  },
-  "lean": {
-    "module": "Sheaf.Paper.PointSystemRefine",
-    "declaration": "CategoryTheory.pointSystemRefine",
-    "file": "lean/Sheaf/Paper/PointSystemRefine.lean",
-    "statement": "theorem pointSystemRefine {C : Type u} [Category.{v} C] (P : Precoverage C) (hP : P.IsSiteForCoverings) {J : Type w} [Preorder J] [Nonempty J] [IsDirected J (· ≤ ·)] (V : Jᵒᵖ ⥤ C) (F : Sheaf P.toGrothendieck (Type (max w t))) {K : Type r} [Finite K] {W : C} (Wk : K → C) (wk : ∀ k, Wk k ⟶ W) (hcover : Presieve.ofArrows Wk wk ∈ P W) (s s' : colimit (V.rightOp ⋙ F.1)) (hs : s ≠ s') (f : colimit (V.rightOp ⋙ uliftYoneda.{w}.obj W)) : ∃ (I : Type w) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (U : Iᵒᵖ ⥤ C) (e : J ↪o I) (h : e.toOrderHom.toFunctor ⋙ U.rightOp = V.rightOp), (((eqToHom (congrArg (fun X : J ⥤ Cᵒᵖ => colimit (X ⋙ F.1)) h).symm) ≫ colimit.pre (U.rightOp ⋙ F.1) e.toOrderHom.toFunctor) s ≠ ((eqToHom (congrArg (fun X : J ⥤ Cᵒᵖ => colimit (X ⋙ F.1)) h).symm) ≫ colimit.pre (U.rightOp ⋙ F.1) e.toOrderHom.toFunctor) s') ∧ (∃ k : K, ∃ g : colimit (U.rightOp ⋙ uliftYoneda.{w}.obj (Wk k)), colimMap (U.rightOp.whiskerLeft (uliftYoneda.map (wk k))) g = ((eqToHom (congrArg (fun X : J ⥤ Cᵒᵖ => colimit (X ⋙ uliftYoneda.{w}.obj W)) h).symm) ≫ colimit.pre (U.rightOp ⋙ uliftYoneda.{w}.obj W) e.toOrderHom.toFunctor) f)",
-    "branch": "newtargets-dag",
-    "by": "Q121",
-    "date": "2026-10-18",
-    "existing": false,
-    "fixed_by": "NT-stage2-cc-4daee0855"
+  {
+   "text": "The $(1)$-copy $J_0^{(1)}$ is cofinal in $I$, so the elementwise filtered-colimit criterion [lem-weil-pbc-filtered-colimit-sets-elementwise] identifies the colimit over $I$ with the colimit over $J_0$ of the sets $\\mathcal F(V_{j,k_0})$. Therefore the images of $s,s'$ remain distinct by the choice of $k_0$. For every $j\\in J_0$, the projection $V_{j,k_0}\\to V_j$ followed by $g_{jj_0}$ and $f'$ factors through $W_{k_0}$ by the pullback definition. Thus the image of $f$ in $u(W)$ is represented by a morphism through $W_{k_0}$, proving the required conclusion.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YO (Lemma lemma-refine), proof: distinctness in the refined colimit and factorization through W_k"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YO (Lemma lemma-refine), proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "finite covering|directed colimit|refinement",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "refinement of directed inverse system preserving distinct colimit sections and factoring one morphism through a finite cover",
+   "results": "8 hits including ModuleCat.directLimitIsColimit_desc, DirectLimit.setoid, and AlgebraicGeometry.Scheme.OpenCover.isColimitCoconeOfLocallyDirected; none states the site refinement lemma",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Meq.refine, GrothendieckTopology.Point",
+   "results": "loogle unknown identifier GrothendieckTopology.Point; no usable match",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "refinement of directed inverse system preserving distinct colimit sections and factoring one morphism through a finite cover",
+   "results": "8 hits about InverseSystem and finite inverse-system sections; none states this site lemma",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-point-system-refine-all",
+  "date": "2026-10-18",
+  "group": "Q28"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The one-cover refinement used inside the all-at-once refinement (Tag 00YO) in the proof of lem-trf-finitary-site-enough-points.",
+   "via": [
+    "lem-trf-point-system-refine-all",
+    "lem-trf-finitary-site-enough-points",
+    "lem-trf-oriented-product-points-conservative",
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-point-system-refine",
+  "worker": "stage1",
+  "summary": "Split the one-cover refinement of Tag 00YO into four steps. Step 1 represents the given morphism in a tail of the directed system and forms the pullbacks along the finite covering. Step 2 uses the sheaf equalizer injection and filtered-colimit commutation with finite products to choose one cover member preserving distinctness. Step 3 gives the full disjoint-union index poset and all transition maps omitted in the source. Step 4 uses cofinality of the refined summand to preserve distinctness and verifies the factorization through the selected cover member.",
+  "blueprint": "The split realizes the one-cover refinement used inside the all-at-once refinement (Tag 00YO) in the proof of lem-trf-finitary-site-enough-points.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-b627725ea",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-b627725ea (reviewer sub-agent of L); spot-checked: I read the whole item. I checked it against Stacks sites.tex lemma-refine (Tag 00YO), the definition of refinement and of u just before it, and its use in lemma-refine-all-at-once (00YP) and the parent lem-trf-point-system-refine-all. I read the statements of all four cited nodes: def-weil-pbc-sites-and-cohomology (site axiom (iii) and the sheaf equalizer), def-weil-pbc-category-colimit, and the Mathlib leaves lem-weil-pbc-filtered-colimit-sets-elementwise and lem-weil-pbc-filtered-colimits-commute-finite-limits. The statement matches 00YO hypothesis by hypothesis and is not weakened. Step 1 represents f at j0 by clause (1) and forms the fibre products by axiom (iii). Step 2 uses the sheaf injection and commutation with the finite product (Categories 002W). Step 3: the order on J amalg J0, with no back relations, is a directed poset; I checked the transition maps (g x id on (1)-copies, projection then g on mixed pairs) for the identity and composition laws in all mixed cases. Step 4: J0^(1) is cofinal, s and s' stay distinct, and f'.pr1 = (W_k0 -> W).pr2 gives the factorization. Edge cases tested: J a singleton, K empty (vacuous), f already factoring, a one-member cover. There are no new nodes and no duplicate in the DAG or the blueprint snapshots. The route uses only definitions and Mathlib leaves, so no tool_uses are needed; no SGA is cited. Fixes, in fixes/dag/nodes/sec-trace-formula/lem-trf-point-system-refine.json: (1) B4: four single-backslash \\to/\\times in steps 1 and 4 decoded as TAB characters, and \\amalg in step 3's source.place decoded as BEL; all restored. (2) C1/C3: step 2 used, without citing it, that a filtered colimit of injections is injective; clause (3) of lem-weil-pbc-filtered-colimit-sets-elementwise is now named in the text and uses (it was already in proof_deps). (3) Step 1 named the canonical map J->J0 in the wrong direction; it is now J0->J. Remark: the report claims a citations.json that is not in the commit; this does not affect the DAG.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9b4e1be42",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Reviewed immutable node, dependencies, source, Lean signature, correction and sole citer. Universe and edge-case checks pass; scompile.py reproduced a clean compile. No blocking faults. Recorded review.md, including an empty-cover wording clarification."
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "N6 stage 2",
+  "old_statement": "Let $\\mathcal C$ be a site [def-weil-pbc-sites-and-cohomology]. Let $(J,\\geq,V_j,g_{jj'})$ be a directed inverse system of objects of $\\mathcal C$: $J$ is a nonempty directed poset, each $j\\geq j'$ has a transition $g_{jj'}:V_j\\to V_{j'}$, and $g_{jj}=\\mathrm{id}$, $g_{j'j''}g_{jj'}=g_{jj''}$. Put $u'(W)=\\varinjlim_{j\\in J}\\operatorname{Hom}_{\\mathcal C}(V_j,W)$ and $\\mathcal F_{p'}=\\varinjlim_{j\\in J}\\mathcal F(V_j)$ for a sheaf of sets $\\mathcal F$ on $\\mathcal C$ (filtered colimits of sets [def-weil-pbc-category-colimit]). Let $s\\ne s'$ in $\\mathcal F_{p'}$, let $\\{W_k\\to W\\}_{k\\in K}$ be a covering of $\\mathcal C$ with $K$ finite, and let $f\\in u'(W)$. Then there is a directed inverse system $(I,\\geq,U_i,f_{ii'})$ of objects of $\\mathcal C$ refining the given one, i.e. $J\\subset I$, the order of $J$ is the one induced from $I$, $U_j=V_j$ and $f_{jj'}=g_{jj'}$ for $j\\geq j'$ in $J$, such that the images of $s,s'$ under the canonical map $\\mathcal F_{p'}\\to\\varinjlim_{i\\in I}\\mathcal F(U_i)$ remain distinct and the image of $f$ under the canonical map $u'(W)\\to u(W)=\\varinjlim_{i\\in I}\\operatorname{Hom}_{\\mathcal C}(U_i,W)$ lies in the image of $u(W_k)\\to u(W)$ (composition with $W_k\\to W$) for some $k\\in K$.",
+  "what": "The landed statement describes the system, the stalk, u, u' and the refinement only informally (an implicit subset J of I, implicit canonical maps u'->u and F_{p'}->F_p, and an unspecified notion of finite covering and sheaf of sets on a site). The correction states the same Tag 00YO content with these objects explicit: the site as a precoverage satisfying the site axioms, the sheaf on P.toGrothendieck, the inverse system as a diagram over a directed preorder (Stacks' directed set, Categories 002V), the refinement as an order embedding with an identification of the restricted diagram, the canonical maps as colimit.pre, and the factorization through u(W_k) as membership in the range of the map induced by yoneda.map(wk_k), with the canonical universe lift of the representables. No hypothesis is added and no conclusion clause is weakened.",
+  "source": {
+   "document": "literature/stacks-project/sites.tex",
+   "place": "Tag 00YO (Lemma lemma-refine), definitions of u and p immediately preceding the lemma, and proof of Tag 00YP"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-point-system-refine-all",
+    "holds": false,
+    "note": "Its proof applies this lemma at successor stages; with the universe-general Lean (index Type w, sheaf Type (max w t)) the universes of its Lean statement are reachable, but its Lean statement requires PartialOrder on the refined index and an explicit representative b : U_i -> W_k, whereas this lemma yields a directed preorder (Stacks' directed set) and range membership, so its recorded proof and interface must be rechecked; not edited here."
+   }
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointSystemRefine",
+  "declaration": "CategoryTheory.pointSystemRefine",
+  "file": "lean/Sheaf/Paper/PointSystemRefine.lean",
+  "statement": "theorem pointSystemRefine {C : Type u} [Category.{v} C] (P : Precoverage C) (hP : P.IsSiteForCoverings) {J : Type w} [Preorder J] [Nonempty J] [IsDirected J (· ≤ ·)] (V : Jᵒᵖ ⥤ C) (F : Sheaf P.toGrothendieck (Type (max w t))) {K : Type r} [Finite K] {W : C} (Wk : K → C) (wk : ∀ k, Wk k ⟶ W) (hcover : Presieve.ofArrows Wk wk ∈ P W) (s s' : colimit (V.rightOp ⋙ F.1)) (hs : s ≠ s') (f : colimit (V.rightOp ⋙ uliftYoneda.{w}.obj W)) : ∃ (I : Type w) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (U : Iᵒᵖ ⥤ C) (e : J ↪o I) (h : e.toOrderHom.toFunctor ⋙ U.rightOp = V.rightOp), (((eqToHom (congrArg (fun X : J ⥤ Cᵒᵖ => colimit (X ⋙ F.1)) h).symm) ≫ colimit.pre (U.rightOp ⋙ F.1) e.toOrderHom.toFunctor) s ≠ ((eqToHom (congrArg (fun X : J ⥤ Cᵒᵖ => colimit (X ⋙ F.1)) h).symm) ≫ colimit.pre (U.rightOp ⋙ F.1) e.toOrderHom.toFunctor) s') ∧ (∃ k : K, ∃ g : colimit (U.rightOp ⋙ uliftYoneda.{w}.obj (Wk k)), colimMap (U.rightOp.whiskerLeft (uliftYoneda.map (wk k))) g = ((eqToHom (congrArg (fun X : J ⥤ Cᵒᵖ => colimit (X ⋙ uliftYoneda.{w}.obj W)) h).symm) ≫ colimit.pre (U.rightOp ⋙ uliftYoneda.{w}.obj W) e.toOrderHom.toFunctor) f)",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-4daee0855"
+ },
+ "lean_audit": {}
 }

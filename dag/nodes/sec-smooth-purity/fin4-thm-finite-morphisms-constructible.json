@@ -1,229 +1,218 @@
 {
-  "id": "fin4-thm-finite-morphisms-constructible",
-  "blueprint": {
-    "is": "fin4-thm-finite-morphisms-constructible",
-    "from": null,
-    "same_as": [
-      "lem-fin-finite-morphism"
-    ]
-  },
-  "kind": "statement",
-  "title": "Finite morphisms preserve constructibility",
-  "statement": "Let $f:X\\to S$ be a finite\nmorphism with $S$ of finite type over $k$, and let $F$ be a\nconstructible\n$\\Lambda$-sheaf on $X_{{\\mathrm{et}}}$ (the ring $\\Lambda$ of\n[sbc-def-coefficient-conventions]). Then the higher direct\nimages $R^qf_*F$ of [def-weil-pbc-direct-image] are\nconstructible on\n$S_{{\\mathrm{et}}}$ for every $q\\geq0$, and $R^qf_*F=0$ for $q>0$:\nthe vanishing bound $2\\cdot0$ of the zero relative dimension.",
-  "source": {
+ "id": "fin4-thm-finite-morphisms-constructible",
+ "blueprint": {
+  "is": "fin4-thm-finite-morphisms-constructible",
+  "from": null,
+  "same_as": [
+   "lem-fin-finite-morphism"
+  ]
+ },
+ "kind": "statement",
+ "title": "Finite morphisms preserve constructibility",
+ "statement": "Let $f:X\\to S$ be a finite\nmorphism with $S$ of finite type over $k$, and let $F$ be a\nconstructible\n$\\Lambda$-sheaf on $X_{{\\mathrm{et}}}$ (the ring $\\Lambda$ of\n[sbc-def-coefficient-conventions]). Then the higher direct\nimages $R^qf_*F$ of [def-weil-pbc-direct-image] are\nconstructible on\n$S_{{\\mathrm{et}}}$ for every $q\\geq0$, and $R^qf_*F=0$ for $q>0$:\nthe vanishing bound $2\\cdot0$ of the zero relative dimension.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/fin4-thm-finite-morphisms-constructible.md",
+  "place": "node fin4-thm-finite-morphisms-constructible, order 1773"
+ },
+ "stmt_deps": [
+  "sbc-def-coefficient-conventions",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-fin-finite-morphism] to the given finite morphism $f:X\\to S$ and constructible $\\Lambda$-module sheaf $F$. Its base hypothesis is exactly that $S$ is of finite type over $k$. Its coefficient convention is the same finite commutative ring $\\Lambda$ annihilated by the fixed positive integer $N$, with $N$ invertible on the schemes; thus its $f_*$ and $R^qf_*$ are those of the constant-ring module category in [def-weil-pbc-direct-image], not a change of coefficient category. The cited statement gives that $f_*F$ is constructible and that $R^qf_*F=0$ for every $q>0$. No exactness assertion beyond these two clauses is taken from this citation.",
+   "uses": [
+    "lem-fin-finite-morphism",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/fin4-thm-finite-morphisms-constructible.md",
-    "place": "node fin4-thm-finite-morphisms-constructible, order 1773"
+    "place": "Proof, first sentence: apply lem-fin-finite-morphism; underlying literature: Stacks 095R (lemma-finite-pushforward-constructible) and 03QP (proposition-finite-higher-direct-image-zero), as resolved in the cited node"
+   }
   },
-  "stmt_deps": [
-    "sbc-def-coefficient-conventions",
+  {
+   "text": "For degree zero use the module-sheaf injective-resolution computation of [def-weil-pbc-direct-image]. Choose $0\\to F\\to I^0\\xrightarrow{d^0}I^1\\to\\cdots$, with the resolution complex zero in negative degrees. Clause (2) of [lem-weil-pbc-module-direct-image-left-exact] sends its initial exact sequence to $0\\to f_*F\\to f_*I^0\\xrightarrow{f_*d^0}f_*I^1$. Consequently $R^0f_*F=\\mathcal H^0(f_*I^\\bullet)=\\ker(f_*d^0)\\cong f_*F$, since the preceding term is zero. Thus $R^0f_*F$ has the constructibility witness obtained in step 1, composed with this module-sheaf isomorphism.",
+   "uses": [
     "def-weil-pbc-direct-image",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "Apply [lem-fin-finite-morphism] to the given finite morphism $f:X\\to S$ and constructible $\\Lambda$-module sheaf $F$. Its base hypothesis is exactly that $S$ is of finite type over $k$. Its coefficient convention is the same finite commutative ring $\\Lambda$ annihilated by the fixed positive integer $N$, with $N$ invertible on the schemes; thus its $f_*$ and $R^qf_*$ are those of the constant-ring module category in [def-weil-pbc-direct-image], not a change of coefficient category. The cited statement gives that $f_*F$ is constructible and that $R^qf_*F=0$ for every $q>0$. No exactness assertion beyond these two clauses is taken from this citation.",
-      "uses": [
-        "lem-fin-finite-morphism",
-        "def-weil-pbc-direct-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/fin4-thm-finite-morphisms-constructible.md",
-        "place": "Proof, first sentence: apply lem-fin-finite-morphism; underlying literature: Stacks 095R (lemma-finite-pushforward-constructible) and 03QP (proposition-finite-higher-direct-image-zero), as resolved in the cited node"
-      }
-    },
-    {
-      "text": "For degree zero use the module-sheaf injective-resolution computation of [def-weil-pbc-direct-image]. Choose $0\\to F\\to I^0\\xrightarrow{d^0}I^1\\to\\cdots$, with the resolution complex zero in negative degrees. Clause (2) of [lem-weil-pbc-module-direct-image-left-exact] sends its initial exact sequence to $0\\to f_*F\\to f_*I^0\\xrightarrow{f_*d^0}f_*I^1$. Consequently $R^0f_*F=\\mathcal H^0(f_*I^\\bullet)=\\ker(f_*d^0)\\cong f_*F$, since the preceding term is zero. Thus $R^0f_*F$ has the constructibility witness obtained in step 1, composed with this module-sheaf isomorphism.",
-      "uses": [
-        "def-weil-pbc-direct-image",
-        "lem-weil-pbc-module-direct-image-left-exact"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 05TD, lemma-left-exact-higher-derived, proof of (3): compute H^0 from the initial left exact sequence; the computation is written out here"
-      }
-    },
-    {
-      "text": "For $q>0$, step 1 identifies $R^qf_*F$ with the zero module sheaf. Take the finite constructible locally closed partition and the etale trivializations witnessing constructibility of $f_*F$ in step 1, in the sense of [def-weil-pbc-etale-constructible-sheaf]. On each of these same trivializations, the zero sheaf is the constant sheaf with value the zero $\\Lambda$-module, whose underlying set has one element. Thus the same partition witnesses constructibility of $R^qf_*F$: restrictions of its isomorphism to zero supply the required constant finite-module trivializations. If $S$ is empty the empty partition works. Together with step 2 this gives constructibility for all $q\\geq0$ and vanishing for $q>2\\cdot0=0$.",
-      "uses": [
-        "def-weil-pbc-etale-constructible-sheaf"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, condition (3), and Tag 03RW, definition-constructible: use the constant zero module on every stratum"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-fin-finite-morphism",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "def-weil-pbc-etale-constructible-sheaf"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/fin4-thm-finite-morphisms-constructible.md",
-    "place": "Proof: reuse the prescribed finite-morphism lemma; expand the degree-zero kernel and constant-zero constructibility arguments (Stacks 05TD, 095E)"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "constructible.*(pushforward|directImage)|(pushforward|directImage).*constructible",
-      "results": "No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Finite morphism preserves constructible etale module sheaves and has vanishing higher direct images",
-      "results": "UNAVAILABLE: service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.IsFinite, CategoryTheory.Sheaf",
-      "results": "No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a finite morphism of schemes the higher direct images of a constructible etale sheaf of modules are constructible and vanish in positive degrees",
-      "results": "Hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, SheafOfModules.IsFiniteType, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.isFinitePresentation. The hits concern constructible subsets, general sheaf functors, finite-type module sheaves, or condensed modules; none states constructible small-etale module direct image and positive-degree vanishing for finite scheme morphisms.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible|higher.*direct.*image",
-      "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean. Read FinitePresentation.lean:117-124: Chevalley for subsets, not constructible etale sheaves.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Pushforward along a finite scheme map is exact on small etale sheaves and preserves finite locally constant sheaves on constructible strata",
-      "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts, SheafOfModules.bijective_pushforwardSections. The hits concern constructible subsets, general sheaf functors, finite-type module sheaves, or condensed modules; none states constructible small-etale module direct image and positive-degree vanishing for finite scheme morphisms.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "IsConstructible.*(lowerStar|pushforward)|(lowerStar|pushforward).*IsConstructible",
-      "results": "No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "For a finite map of schemes, small etale direct image sends a constructible finite coefficient module sheaf to a constructible sheaf, and its derived functors vanish above zero",
-      "results": "Hits: SheafOfModules.IsFiniteType, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat. These concern module finite type/presentation, constructible subsets, and condensed module categories; none states finite small-etale constructible direct image and higher vanishing.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A finite morphism induces an exact functor on etale module sheaves with finite stalks on finitely many locally closed pieces",
-      "results": "Hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, ModuleCat.localizedModule_functor_map_exact, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, Algebra.isOpen_etaleLocus, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, SheafOfModules.IsFiniteType. Read the returned declaration types: etale morphism instances, localization of modules, sheafification finite limits, and the finite-type sheaf predicate; none gives finite etale-site constructible direct image or higher vanishing.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1773,
-  "blueprint_uses": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-scheme-conventions",
-    "lem-fin-finite-morphism",
-    "sbc-def-coefficient-conventions"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-constructible-complexes",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "fin4-thm-finite-morphisms-constructible",
-    "worker": "stage1",
-    "summary": "Repair of the merge-lock return: reread every proof citation and statement convention in the current shared DAG, rechecked their hypotheses and verbatim citation quotes, and clarified step 1 in the constant-ring module category. Rebuild the delivery on the current base using deliver.py --no-push. The original statement and three-step route remain valid. No new nodes or Mathlib leaves; no Lean work.",
-    "blueprint": "Realizes the first proof sentence by applying lem-fin-finite-morphism (step 1); steps 2-3 expand its implicit passage from f_*F and positive-degree vanishing to constructibility in every nonnegative degree. The finite-stalk and finite-image arguments remain below that existing lemma, as prescribed.",
-    "tool_uses": [
-      {
-        "node": "lem-fin-finite-morphism",
-        "why": "The blueprint explicitly prescribes this generic finite-morphism tool from sk-prop-sf-cbc; it supplies constructibility and positive-degree vanishing, and this unit states no replacement proof."
-      },
-      {
-        "node": "lem-weil-pbc-module-direct-image-left-exact",
-        "why": "Generic module direct-image kernel preservation for the elementary R^0 computation; no statement of this unit provides this foundational functor property."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-fin-finite-morphism",
     "lem-weil-pbc-module-direct-image-left-exact"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-Q35-1455352b1",
-    "group": "Q35",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-1455352b1 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, dependencies, unit/chapter route, blueprint and cited Stacks sources. The finite-morphism lemma supplies positive-degree vanishing and constructibility of f_*F; the degree-zero kernel computation is valid in the constant-Λ module category, and the zero-sheaf constructibility argument is correct. Hypotheses, base-change morphism, coefficient category, edge cases, searches, duplicate audit, and accepted tool uses all check out. No repairs or dropped nodes required."
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD, lemma-left-exact-higher-derived, proof of (3): compute H^0 from the initial left exact sequence; the computation is written out here"
+   }
   },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.FiniteMorphismsConstructible",
-    "declaration": "AlgebraicGeometry.Etale.finiteMorphisms_constructible",
-    "file": "lean/Sheaf/AlgebraicGeometry/FiniteMorphismsConstructible.lean",
-    "statement": "theorem finiteMorphisms_constructible (k : Type u) [Field k] {X S : Scheme.{u}} [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (f : X ⟶ S) [IsFinite f] (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ] (hcoeff : IsSmoothBaseChangeCoefficients N Λ S) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : @Scheme.IsConstructibleEtaleModuleSheaf X Λ _ hcoeff.2.1 F) : (∀ q : ℕ, @Scheme.IsConstructibleEtaleModuleSheaf S Λ _ hcoeff.2.1 ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) ∧ (∀ q : ℕ, q > 0 → IsZero ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))))",
-    "branch": "newtargets-dag",
-    "by": "Q20",
-    "date": "2026-10-16",
-    "existing": false
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-75435299e",
-    "group": "Q20",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable declarations, all statement dependencies, blueprint and Stacks sources, hypotheses, conclusions, universes, edge cases, docstrings, report sections, and verbatim statement equality. Reproduced per-file compilation through scompile.py without diagnostics. No delivery faults or repairs required."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f:X\\to S$ be a finite\nmorphism with $S$ of finite type over $k$, and let $F$ be a\nconstructible\n$\\Lambda$-sheaf on $X_{{\\mathrm{et}}}$ (the ring $\\Lambda$ of\n[sbc-def-coefficient-conventions]). Then the higher direct\nimages $R^qf_*F$ of [def-weil-pbc-direct-image] are\nconstructible on\n$S_{{\\mathrm{et}}}$ for every $q\\geq0$, and $R^qf_*F=0$ for $q>0$.",
-    "proof": [
-      {
-        "text": "Apply [lem-fin-finite-morphism], which proves both\nconstructibility of $f_*F$ and exactness of finite direct image.\nIt uses the finite-stalk formula and the earlier finite-image\nconstructibility proof, with no cardinality or general finiteness input.",
-        "uses": [
-          "lem-fin-finite-morphism"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "For $q>0$, step 1 identifies $R^qf_*F$ with the zero module sheaf. Take the finite constructible locally closed partition and the etale trivializations witnessing constructibility of $f_*F$ in step 1, in the sense of [def-weil-pbc-etale-constructible-sheaf]. On each of these same trivializations, the zero sheaf is the constant sheaf with value the zero $\\Lambda$-module, whose underlying set has one element. Thus the same partition witnesses constructibility of $R^qf_*F$: restrictions of its isomorphism to zero supply the required constant finite-module trivializations. If $S$ is empty the empty partition works. Together with step 2 this gives constructibility for all $q\\geq0$ and vanishing for $q>2\\cdot0=0$.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, condition (3), and Tag 03RW, definition-constructible: use the constant zero module on every stratum"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-fin-finite-morphism",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/fin4-thm-finite-morphisms-constructible.md",
+  "place": "Proof: reuse the prescribed finite-morphism lemma; expand the degree-zero kernel and constant-zero constructibility arguments (Stacks 05TD, 095E)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constructible.*(pushforward|directImage)|(pushforward|directImage).*constructible",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite morphism preserves constructible etale module sheaves and has vanishing higher direct images",
+   "results": "UNAVAILABLE: service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, CategoryTheory.Sheaf",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism of schemes the higher direct images of a constructible etale sheaf of modules are constructible and vanish in positive degrees",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, SheafOfModules.IsFiniteType, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.isFinitePresentation. The hits concern constructible subsets, general sheaf functors, finite-type module sheaves, or condensed modules; none states constructible small-etale module direct image and positive-degree vanishing for finite scheme morphisms.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|higher.*direct.*image",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean. Read FinitePresentation.lean:117-124: Chevalley for subsets, not constructible etale sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward along a finite scheme map is exact on small etale sheaves and preserves finite locally constant sheaves on constructible strata",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfForallEffectiveEpiHasPullbackOfPreservesFiniteLimits, CategoryTheory.Presheaf.instHasSheafComposeCoherentTopologyOfProjectiveOfPreservesFiniteProducts, SheafOfModules.bijective_pushforwardSections. The hits concern constructible subsets, general sheaf functors, finite-type module sheaves, or condensed modules; none states constructible small-etale module direct image and positive-degree vanishing for finite scheme morphisms.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstructible.*(lowerStar|pushforward)|(lowerStar|pushforward).*IsConstructible",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite map of schemes, small etale direct image sends a constructible finite coefficient module sheaf to a constructible sheaf, and its derived functors vanish above zero",
+   "results": "Hits: SheafOfModules.IsFiniteType, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Hom.isConstructible_image, SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat. These concern module finite type/presentation, constructible subsets, and condensed module categories; none states finite small-etale constructible direct image and higher vanishing.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite morphism induces an exact functor on etale module sheaves with finite stalks on finitely many locally closed pieces",
+   "results": "Hits: AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.of_comp, ModuleCat.localizedModule_functor_map_exact, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, Algebra.isOpen_etaleLocus, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, SheafOfModules.IsFiniteType. Read the returned declaration types: etale morphism instances, localization of modules, sheafification finite limits, and the finite-type sheaf predicate; none gives finite etale-site constructible direct image or higher vanishing.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1773,
+ "blueprint_uses": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-fin-finite-morphism",
+  "sbc-def-coefficient-conventions"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "fin4-thm-finite-morphisms-constructible",
+  "worker": "stage1",
+  "summary": "Repair of the merge-lock return: reread every proof citation and statement convention in the current shared DAG, rechecked their hypotheses and verbatim citation quotes, and clarified step 1 in the constant-ring module category. Rebuild the delivery on the current base using deliver.py --no-push. The original statement and three-step route remain valid. No new nodes or Mathlib leaves; no Lean work.",
+  "blueprint": "Realizes the first proof sentence by applying lem-fin-finite-morphism (step 1); steps 2-3 expand its implicit passage from f_*F and positive-degree vanishing to constructibility in every nonnegative degree. The finite-stalk and finite-image arguments remain below that existing lemma, as prescribed.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-morphism",
+    "why": "The blueprint explicitly prescribes this generic finite-morphism tool from sk-prop-sf-cbc; it supplies constructibility and positive-degree vanishing, and this unit states no replacement proof."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic module direct-image kernel preservation for the elementary R^0 computation; no statement of this unit provides this foundational functor property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-morphism",
+  "lem-weil-pbc-module-direct-image-left-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q35-1455352b1",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-1455352b1 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, dependencies, unit/chapter route, blueprint and cited Stacks sources. The finite-morphism lemma supplies positive-degree vanishing and constructibility of f_*F; the degree-zero kernel computation is valid in the constant-Λ module category, and the zero-sheaf constructibility argument is correct. Hypotheses, base-change morphism, coefficient category, edge cases, searches, duplicate audit, and accepted tool uses all check out. No repairs or dropped nodes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteMorphismsConstructible",
+  "declaration": "AlgebraicGeometry.Etale.finiteMorphisms_constructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteMorphismsConstructible.lean",
+  "statement": "theorem finiteMorphisms_constructible (k : Type u) [Field k] {X S : Scheme.{u}} [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (f : X ⟶ S) [IsFinite f] (N : ℕ) (Λ : Type (u + 1)) [CommRing Λ] (hcoeff : IsSmoothBaseChangeCoefficients N Λ S) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : @Scheme.IsConstructibleEtaleModuleSheaf X Λ _ hcoeff.2.1 F) : (∀ q : ℕ, @Scheme.IsConstructibleEtaleModuleSheaf S Λ _ hcoeff.2.1 ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) ∧ (∀ q : ℕ, q > 0 → IsZero ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F))))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-16",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-75435299e",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable declarations, all statement dependencies, blueprint and Stacks sources, hypotheses, conclusions, universes, edge cases, docstrings, report sections, and verbatim statement equality. Reproduced per-file compilation through scompile.py without diagnostics. No delivery faults or repairs required."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f:X\\to S$ be a finite\nmorphism with $S$ of finite type over $k$, and let $F$ be a\nconstructible\n$\\Lambda$-sheaf on $X_{{\\mathrm{et}}}$ (the ring $\\Lambda$ of\n[sbc-def-coefficient-conventions]). Then the higher direct\nimages $R^qf_*F$ of [def-weil-pbc-direct-image] are\nconstructible on\n$S_{{\\mathrm{et}}}$ for every $q\\geq0$, and $R^qf_*F=0$ for $q>0$.",
+  "proof": [
+   {
+    "text": "Apply [lem-fin-finite-morphism], which proves both\nconstructibility of $f_*F$ and exactness of finite direct image.\nIt uses the finite-stalk formula and the earlier finite-image\nconstructibility proof, with no cardinality or general finiteness input.",
+    "uses": [
+     "lem-fin-finite-morphism"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

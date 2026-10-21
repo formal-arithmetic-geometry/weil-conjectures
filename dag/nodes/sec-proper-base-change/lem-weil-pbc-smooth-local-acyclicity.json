@@ -1,313 +1,302 @@
 {
-  "id": "lem-weil-pbc-smooth-local-acyclicity",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "thm-weil-pbc-direct-image-finiteness-proper",
-      "place": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW.",
-      "via": [
-        "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
-        "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
-        "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
-        "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-        "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
-        "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
-        "lem-weil-pbc-etale-compactification-constructibility",
-        "lem-weil-pbc-etale-proper-direct-image-finiteness"
-      ]
-    },
-    "same_as": []
+ "id": "lem-weil-pbc-smooth-local-acyclicity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW.",
+   "via": [
+    "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
   },
-  "kind": "statement",
-  "title": "Smooth morphisms are universally locally acyclic",
-  "statement": "Let $f:X\\to S$ be a smooth morphism of schemes [def-sbc-smooth-morphisms]. Then $f$ is universally locally acyclic [def-weil-pbc-local-acyclicity-abelian-sheaf]: for every scheme morphism $S'\\to S$, every geometric point $\\bar x'$ of $X'=X\\times_S S'$, and every positive integer $n$ prime to its residue characteristic, the base-change morphism $X'\\to S'$ is locally acyclic at $\\bar x'$ relative to $\\underline{\\mathbf Z/n\\mathbf Z}$. In particular $f$ itself is locally acyclic. Neither properness nor a bound on the relative dimension is assumed.",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJQ, proposition-smooth-locally-acyclic"
-  },
-  "stmt_deps": [
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-local-acyclicity-abelian-sheaf"
-  ],
-  "proof": [
-    {
-      "text": "It suffices to prove local acyclicity for every smooth morphism: for an arbitrary $S\\prime\\to S$, the base change is smooth by [lem-pc-proper-base-change](2), and the definition [def-weil-pbc-local-acyclicity-abelian-sheaf] then upgrades that assertion to universal local acyclicity. We therefore fix a smooth $f$, a geometric $\\bar x$, its image $\\bar s$, and $n\\geq1$ prime to the residue characteristic at $\\bar x$.",
-      "uses": [
-        "lem-pc-proper-base-change",
-        "def-weil-pbc-local-acyclicity-abelian-sheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0GJQ, first sentence"
-      }
-    },
-    {
-      "text": "The injection of residue fields $\\kappa(s)\\to\\kappa(x)$ gives the same characteristic. In an affine neighbourhood $U=\\operatorname{Spec}R$ of $s$, $n$ is not in the prime of $s$; replace $S$ by the affine basic open $D(n)\\subset U$ and $X$ by its inverse image. Smoothness is preserved by [lem-pc-proper-base-change](2). This replacement does not change either strict henselization or their map: every pointed etale neighbourhood can be refined by an affine open around its marked point lying over these opens. The full subcategories of such neighbourhoods are initial by [lem-weil-pbc-colimit-initial-full-subcategory](1), so their ring colimits [def-weil-pbc-strict-henselization-limit] and canonical maps [lem-weil-pbc-strict-henselization-functoriality](4) agree. Consequently the fibre and restriction map in the definition of local acyclicity are unchanged. Now $S$ is affine and $n$ is invertible everywhere on it.",
-      "uses": [
-        "lem-pc-proper-base-change",
-        "def-weil-pbc-strict-henselization-limit",
-        "lem-weil-pbc-colimit-initial-full-subcategory",
-        "lem-weil-pbc-strict-henselization-functoriality",
-        "def-weil-pbc-local-acyclicity-abelian-sheaf"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0GJQ, torsion-hypothesis check; open restriction of the strict-local construction"
-      }
-    },
-    {
-      "text": "Fix any $\\bar t:\\operatorname{Spec}K\\to A=S_{(\\bar s)}$, without an algebraicity restriction, and compose with $A\\to S$ to obtain $g$. The source is affine and the now affine target is quasi-separated, so $g$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1). Take $M=\\mathbf Z/n\\mathbf Z$ and $F=\\underline M$ on $\\operatorname{Spec}K$. Its geometric stalks are $M$ by [lem-weil-pbc-constant-sheaf-geometric-stalk], hence every stalk is torsion of order dividing the now invertible $n$. Applying [sbc-thm-smooth-base-change] to $X\\times_S\\operatorname{Spec}K$ proves that $f^{-1}R^qg_*F\\to R^qh_*e^{-1}F$ is an isomorphism for every $q\\geq0$.",
-      "uses": [
-        "lem-weil-pbc-qcqs-morphism-permanence",
-        "lem-weil-pbc-constant-sheaf-geometric-stalk",
-        "sbc-thm-smooth-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tags 0GJQ and 0EYU, application of smooth base change"
-      }
-    },
-    {
-      "text": "By [lem-weil-pbc-exchange-strict-local-cohomology], the exchange isomorphism gives the canonical isomorphism $H^q(A\\times_S\\operatorname{Spec}K,F)\\to H^q(B\\times_S\\operatorname{Spec}K,F)$ for $B=X_{(\\bar x)}$. The selected $\\bar t$ supplies the map $\\operatorname{Spec}K\\to A$ required in [lem-weil-pbc-strict-local-geometric-fibre-test]; its equivalence therefore gives the canonical isomorphism $H^q(\\operatorname{Spec}K,F)\\to H^q(B\\times_A\\operatorname{Spec}K,F)$. This last fibre product is precisely the vanishing-cycle fibre $V$ in [def-weil-pbc-local-acyclicity-abelian-sheaf].",
-      "uses": [
-        "lem-weil-pbc-exchange-strict-local-cohomology",
-        "lem-weil-pbc-strict-local-geometric-fibre-test",
-        "def-weil-pbc-local-acyclicity-abelian-sheaf"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tags 0EZU and 0EZV, making the strict-local reduction in Tag 0GJQ explicit"
-      }
-    },
-    {
-      "text": "The field $K$ is algebraically closed, hence separably closed; as a local ring with maximal ideal zero it is henselian (the idempotent-lifting condition modulo zero is tautological), hence strictly henselian. Also $n$ is invertible in $K$. Thus [sbc-lem-strict-henselian-constant-cohomology] applied to $\\operatorname{Spec}K$ gives zero cohomology in every positive degree. Its degree-zero identification with $M$ is the constant-section map: the germ map is an isomorphism by [lem-weil-pbc-strictly-henselian-sections-stalk], and its composite with the constant-section map is the isomorphism of [lem-weil-pbc-constant-sheaf-geometric-stalk]. The pullback coefficient on $V$ is $\\underline M_V$ by [lemma-constructible-pullback-constant]. To identify the map on sections, use the constant-sheaf/global-sections adjunction [def-constructible-constant] and the inverse-image adjunction [def-weil-pbc-inverse-image]. For any $p:Z\\to W$, their composite identifies $\\operatorname{Hom}(p^{-1}\\underline M_W,H)$ with $\\operatorname{Hom}(M,\\Gamma(Z,H))$, since $\\Gamma(W,p_*H)=\\Gamma(Z,H)$ by [def-weil-pbc-direct-image]. Consequently the canonical inverse comparison $\\underline M_Z\\to p^{-1}\\underline M_W$ of [lemma-constructible-pullback-constant] transposes to the section map $M\\to\\Gamma(W,\\underline M_W)\\to\\Gamma(Z,p^{-1}\\underline M_W)$, the second arrow being the inverse-image unit. Under the comparison this is the unit $M\\to\\Gamma(Z,\\underline M_Z)$ of the constant-sheaf adjunction. Thus pullback along $V\\to\\operatorname{Spec}K$ sends the constant section $m$ to the constant section $m$. We conclude $H^q(V,\\underline M_V)=0$ for $q>0$, and $M\\to H^0(V,\\underline M_V)$ sending $m$ to its constant section is an isomorphism.",
-      "uses": [
-        "sbc-lem-strict-henselian-constant-cohomology",
-        "lem-weil-pbc-strictly-henselian-sections-stalk",
-        "lem-weil-pbc-constant-sheaf-geometric-stalk",
-        "lemma-constructible-pullback-constant",
-        "def-constructible-constant",
-        "def-weil-pbc-inverse-image",
-        "def-weil-pbc-direct-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0GJQ, final cohomology calculation; Tag 03QO; sites.tex Tag 0H7J, example-constant-sheaf, and blueprint lemma-constructible-pullback-constant, Proof (composite adjunction and its unit)"
-      }
-    },
-    {
-      "text": "For completeness this is the required canonical $\\alpha$, not merely an abstract isomorphism. The constant-section map $M\\to(\\underline M_X)_{\\bar x}$ is an isomorphism by [lem-weil-pbc-constant-sheaf-geometric-stalk]. By the definition [def-weil-pbc-local-acyclicity-abelian-sheaf], $\\alpha$ first takes the unique strict-local section with that germ, then restricts it to $V$. The lift of $\\bar x$ to the strict-local closed point is given by [lem-weil-pbc-strict-henselization-functoriality](1). The compatibility formula of [lem-weil-pbc-inverse-image-stalk-germ] identifies the germ of a pulled-back constant section with its original germ. Therefore the section with germ $m$ is the constant section $m$, by [lem-weil-pbc-strictly-henselian-sections-stalk] and [lemma-constructible-pullback-constant]. Apply the adjunction calculation in step 5, using [def-constructible-constant], [def-weil-pbc-inverse-image] and the canonical comparison of [lemma-constructible-pullback-constant], first to $B\\to X$ and then to $V\\to B$: in each case the unit pullback of the constant section $m$ is the constant section $m$ under that comparison. Thus its restriction is constant $m$. Thus $\\alpha$ composed with $M\\cong(\\underline M_X)_{\\bar x}$ is the isomorphism in the preceding step. As $\\bar t$, $\\bar x$ and $n$ were arbitrary, $f$ is locally acyclic. Step 1 proves universal local acyclicity, with no properness or dimension hypothesis.",
-      "uses": [
-        "lem-weil-pbc-constant-sheaf-geometric-stalk",
-        "def-weil-pbc-local-acyclicity-abelian-sheaf",
-        "lem-weil-pbc-strictly-henselian-sections-stalk",
-        "lemma-constructible-pullback-constant",
-        "lem-weil-pbc-inverse-image-stalk-germ",
-        "lem-weil-pbc-strict-henselization-functoriality",
-        "def-constructible-constant",
-        "def-weil-pbc-inverse-image"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0GJQ, conclusion; Tag 0GJP, canonical alpha; sites.tex Tag 0H7J, example-constant-sheaf, and blueprint lemma-constructible-pullback-constant, Proof (composite adjunction and its unit)"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Smooth morphisms are universally locally acyclic",
+ "statement": "Let $f:X\\to S$ be a smooth morphism of schemes [def-sbc-smooth-morphisms]. Then $f$ is universally locally acyclic [def-weil-pbc-local-acyclicity-abelian-sheaf]: for every scheme morphism $S'\\to S$, every geometric point $\\bar x'$ of $X'=X\\times_S S'$, and every positive integer $n$ prime to its residue characteristic, the base-change morphism $X'\\to S'$ is locally acyclic at $\\bar x'$ relative to $\\underline{\\mathbf Z/n\\mathbf Z}$. In particular $f$ itself is locally acyclic. Neither properness nor a bound on the relative dimension is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJQ, proposition-smooth-locally-acyclic"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-local-acyclicity-abelian-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "It suffices to prove local acyclicity for every smooth morphism: for an arbitrary $S\\prime\\to S$, the base change is smooth by [lem-pc-proper-base-change](2), and the definition [def-weil-pbc-local-acyclicity-abelian-sheaf] then upgrades that assertion to universal local acyclicity. We therefore fix a smooth $f$, a geometric $\\bar x$, its image $\\bar s$, and $n\\geq1$ prime to the residue characteristic at $\\bar x$.",
+   "uses": [
     "lem-pc-proper-base-change",
-    "def-weil-pbc-local-acyclicity-abelian-sheaf",
+    "def-weil-pbc-local-acyclicity-abelian-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJQ, first sentence"
+   }
+  },
+  {
+   "text": "The injection of residue fields $\\kappa(s)\\to\\kappa(x)$ gives the same characteristic. In an affine neighbourhood $U=\\operatorname{Spec}R$ of $s$, $n$ is not in the prime of $s$; replace $S$ by the affine basic open $D(n)\\subset U$ and $X$ by its inverse image. Smoothness is preserved by [lem-pc-proper-base-change](2). This replacement does not change either strict henselization or their map: every pointed etale neighbourhood can be refined by an affine open around its marked point lying over these opens. The full subcategories of such neighbourhoods are initial by [lem-weil-pbc-colimit-initial-full-subcategory](1), so their ring colimits [def-weil-pbc-strict-henselization-limit] and canonical maps [lem-weil-pbc-strict-henselization-functoriality](4) agree. Consequently the fibre and restriction map in the definition of local acyclicity are unchanged. Now $S$ is affine and $n$ is invertible everywhere on it.",
+   "uses": [
+    "lem-pc-proper-base-change",
     "def-weil-pbc-strict-henselization-limit",
     "lem-weil-pbc-colimit-initial-full-subcategory",
     "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-local-acyclicity-abelian-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJQ, torsion-hypothesis check; open restriction of the strict-local construction"
+   }
+  },
+  {
+   "text": "Fix any $\\bar t:\\operatorname{Spec}K\\to A=S_{(\\bar s)}$, without an algebraicity restriction, and compose with $A\\to S$ to obtain $g$. The source is affine and the now affine target is quasi-separated, so $g$ is quasi-compact and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1). Take $M=\\mathbf Z/n\\mathbf Z$ and $F=\\underline M$ on $\\operatorname{Spec}K$. Its geometric stalks are $M$ by [lem-weil-pbc-constant-sheaf-geometric-stalk], hence every stalk is torsion of order dividing the now invertible $n$. Applying [sbc-thm-smooth-base-change] to $X\\times_S\\operatorname{Spec}K$ proves that $f^{-1}R^qg_*F\\to R^qh_*e^{-1}F$ is an isomorphism for every $q\\geq0$.",
+   "uses": [
     "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "sbc-thm-smooth-base-change",
+    "sbc-thm-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0GJQ and 0EYU, application of smooth base change"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exchange-strict-local-cohomology], the exchange isomorphism gives the canonical isomorphism $H^q(A\\times_S\\operatorname{Spec}K,F)\\to H^q(B\\times_S\\operatorname{Spec}K,F)$ for $B=X_{(\\bar x)}$. The selected $\\bar t$ supplies the map $\\operatorname{Spec}K\\to A$ required in [lem-weil-pbc-strict-local-geometric-fibre-test]; its equivalence therefore gives the canonical isomorphism $H^q(\\operatorname{Spec}K,F)\\to H^q(B\\times_A\\operatorname{Spec}K,F)$. This last fibre product is precisely the vanishing-cycle fibre $V$ in [def-weil-pbc-local-acyclicity-abelian-sheaf].",
+   "uses": [
     "lem-weil-pbc-exchange-strict-local-cohomology",
     "lem-weil-pbc-strict-local-geometric-fibre-test",
+    "def-weil-pbc-local-acyclicity-abelian-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0EZU and 0EZV, making the strict-local reduction in Tag 0GJQ explicit"
+   }
+  },
+  {
+   "text": "The field $K$ is algebraically closed, hence separably closed; as a local ring with maximal ideal zero it is henselian (the idempotent-lifting condition modulo zero is tautological), hence strictly henselian. Also $n$ is invertible in $K$. Thus [sbc-lem-strict-henselian-constant-cohomology] applied to $\\operatorname{Spec}K$ gives zero cohomology in every positive degree. Its degree-zero identification with $M$ is the constant-section map: the germ map is an isomorphism by [lem-weil-pbc-strictly-henselian-sections-stalk], and its composite with the constant-section map is the isomorphism of [lem-weil-pbc-constant-sheaf-geometric-stalk]. The pullback coefficient on $V$ is $\\underline M_V$ by [lemma-constructible-pullback-constant]. To identify the map on sections, use the constant-sheaf/global-sections adjunction [def-constructible-constant] and the inverse-image adjunction [def-weil-pbc-inverse-image]. For any $p:Z\\to W$, their composite identifies $\\operatorname{Hom}(p^{-1}\\underline M_W,H)$ with $\\operatorname{Hom}(M,\\Gamma(Z,H))$, since $\\Gamma(W,p_*H)=\\Gamma(Z,H)$ by [def-weil-pbc-direct-image]. Consequently the canonical inverse comparison $\\underline M_Z\\to p^{-1}\\underline M_W$ of [lemma-constructible-pullback-constant] transposes to the section map $M\\to\\Gamma(W,\\underline M_W)\\to\\Gamma(Z,p^{-1}\\underline M_W)$, the second arrow being the inverse-image unit. Under the comparison this is the unit $M\\to\\Gamma(Z,\\underline M_Z)$ of the constant-sheaf adjunction. Thus pullback along $V\\to\\operatorname{Spec}K$ sends the constant section $m$ to the constant section $m$. We conclude $H^q(V,\\underline M_V)=0$ for $q>0$, and $M\\to H^0(V,\\underline M_V)$ sending $m$ to its constant section is an isomorphism.",
+   "uses": [
     "sbc-lem-strict-henselian-constant-cohomology",
     "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
     "lemma-constructible-pullback-constant",
     "def-constructible-constant",
     "def-weil-pbc-inverse-image",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-inverse-image-stalk-germ"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJQ, proposition-smooth-locally-acyclic; strict-local reduction expanded with Tags 0EZU and 0EZV"
+    "place": "Tag 0GJQ, final cohomology calculation; Tag 03QO; sites.tex Tag 0H7J, example-constant-sheaf, and blueprint lemma-constructible-pullback-constant, Proof (composite adjunction and its unit)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "A smooth morphism of schemes is universally locally acyclic for constant cyclic torsion coefficients prime to residue characteristic",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  f.Etale ↔ f.FormallyUnramified ∧ f.Smooth\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative rings, $ f $ is étale if and only if it is both formally unramified (admits no nontrivial derivations) and smooth (induces a flat algebra wi\"}\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Smooth scheme morphisms have acyclic geometric Milnor fibres for etale cohomology with Z n coefficients",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  f.Etale ↔ f.FormallyUnramified ∧ f.Smooth\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative rings, $ f $ is étale if and only if it is both formally unramified (admits no nontrivial derivations) and smooth (induces a flat algebra wi\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"IsSmooth\", \"cohomology\"",
-      "results": "[loogle] OK 0 hit(s)\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "smooth.*acyclic|acyclic.*smooth",
-      "results": "[grep] OK 0 hit(s)\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Smooth morphisms are universally locally acyclic",
-      "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Smooth scheme morphisms have universally cohomologically acyclic strict local fibres for cyclic coefficients of invertible order",
-      "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    HomologicalComplex.Acyclic K\", \"doc\": \"For a cochain complex $ K $ in a preadditive category $ C $ with integer indices, the image of $ K $ under the quotient functor to the homotopy category belongs to the acyclic subcategory (consisting \"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    ∀ (n : ℤ), HomologicalComplex.ExactAt K n\", \"doc\": \"A cochain complex $ K $ in the homotopy category belongs to the acyclic subcategory if and only if it is exact at every integer index $ n $, meaning the image of the differential at each degree equals\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Smooth morphisms are universally locally acyclic for prime to characteristic constant torsion etale sheaves",
-      "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.IsEtale.of_comp\nAlgebraicGeometry.IsEtale.instFormallyUnramified\nAlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\nAlgebraicGeometry.IsEtale.instIsSmooth\nAlgebraicGeometry.IsEtale\nRingHom.etale_iff_formallyUnramified_and_smooth\nAlgebraicGeometry.isSmooth_iff\nAlgebraicGeometry.isSmoothOfRelativeDimension_iff",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Smooth\", \"acyclic\"",
-      "results": "[loogle] OK 0 hit(s)\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "smooth.*acyclic|acyclic.*smooth",
-      "results": "[grep] OK 0 hit(s)\n",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Smooth morphisms are universally locally acyclic",
-      "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Geometric vanishing cycle fibres of smooth morphisms have trivial positive etale cohomology with invertible torsion coefficients",
-      "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.IsEtale.of_comp\nAlgebra.etaleLocus_eq_compl_support\nAlgebraicGeometry.IsEtale.instFormallyUnramified\nAlgebra.FormallyEtale.of_unramified_and_smooth\nAlgebra.FormallyEtale.subsingleton_h1Cotangent\nAlgebra.Etale.formallyEtale\nAlgebra.formallyEtale_iff\nAlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
-    "by": "worker",
-    "date": "2026-10-14"
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-weil-pbc-smooth-local-acyclicity",
-    "worker": "stage1",
-    "summary": "Rebased onto the current DAG and reread the changed def-weil-pbc-local-acyclicity-abelian-sheaf statement; its universal-base-change clause and strict-local fibre clause still support the same six-step proof. Read 0GJQ and its smooth-base-change and strict-local sources; retained the statement, made invertibility local, expanded the strict-local reduction via 0EZV, and checked the canonical alpha. Two unsplit comparison tools created; existing lem-pc-proper-base-change(2) reused instead of a duplicate Mathlib leaf.",
-    "blueprint": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW.",
-    "tool_uses": [
-      {
-        "node": "lem-pc-proper-base-change",
-        "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
-      },
-      {
-        "node": "lem-weil-pbc-strict-henselization-functoriality",
-        "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
-      },
-      {
-        "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
-        "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
-      },
-      {
-        "node": "sbc-thm-smooth-base-change",
-        "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
-      },
-      {
-        "node": "sbc-lem-strict-henselian-constant-cohomology",
-        "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
-      },
-      {
-        "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
-        "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pc-proper-base-change",
-    "lem-weil-pbc-strict-henselization-functoriality",
+  {
+   "text": "For completeness this is the required canonical $\\alpha$, not merely an abstract isomorphism. The constant-section map $M\\to(\\underline M_X)_{\\bar x}$ is an isomorphism by [lem-weil-pbc-constant-sheaf-geometric-stalk]. By the definition [def-weil-pbc-local-acyclicity-abelian-sheaf], $\\alpha$ first takes the unique strict-local section with that germ, then restricts it to $V$. The lift of $\\bar x$ to the strict-local closed point is given by [lem-weil-pbc-strict-henselization-functoriality](1). The compatibility formula of [lem-weil-pbc-inverse-image-stalk-germ] identifies the germ of a pulled-back constant section with its original germ. Therefore the section with germ $m$ is the constant section $m$, by [lem-weil-pbc-strictly-henselian-sections-stalk] and [lemma-constructible-pullback-constant]. Apply the adjunction calculation in step 5, using [def-constructible-constant], [def-weil-pbc-inverse-image] and the canonical comparison of [lemma-constructible-pullback-constant], first to $B\\to X$ and then to $V\\to B$: in each case the unit pullback of the constant section $m$ is the constant section $m$ under that comparison. Thus its restriction is constant $m$. Thus $\\alpha$ composed with $M\\cong(\\underline M_X)_{\\bar x}$ is the isomorphism in the preceding step. As $\\bar t$, $\\bar x$ and $n$ were arbitrary, $f$ is locally acyclic. Step 1 proves universal local acyclicity, with no properness or dimension hypothesis.",
+   "uses": [
     "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "sbc-thm-smooth-base-change",
-    "sbc-lem-strict-henselian-constant-cohomology",
-    "lem-weil-pbc-strictly-henselian-sections-stalk"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NS-901338f0d",
-    "group": "NS",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-901338f0d (reviewer sub-agent of L); spot-checked: Read the full mathematics; checked all six steps, both new nodes against 0EZU/0EZV, canonical maps, hypotheses, edge cases, duplicates and target coefficient categories. Replaced the inaccurate 08J6-backed transpose citation with an explicit adjunction calculation. Statements unchanged; review.md and corrected item JSON written.; 1 file(s) fixed by the reviewer"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-a60364fb6",
-    "group": "NP",
-    "result": "pass",
-    "note": "Wrote review.md. Immutable files match the commit; source, dependencies, canonical maps, hypotheses, edge cases, universes, signature, report sections, and pilot gates pass. Server-only compilation reproduced cleanly. No fixes or repository changes."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.SmoothLocalAcyclicity",
-    "declaration": "AlgebraicGeometry.Etale.smooth_localAcyclicity",
-    "file": "lean/Sheaf/AlgebraicGeometry/SmoothLocalAcyclicity.lean",
-    "statement": "theorem smooth_localAcyclicity {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] : IsUniversallyLocallyAcyclic f ∧ IsLocallyAcyclic f",
-    "branch": "newtargets-dag",
-    "by": "NP",
-    "date": "2026-10-15",
-    "existing": false
+    "def-weil-pbc-local-acyclicity-abelian-sheaf",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-constructible-constant",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJQ, conclusion; Tag 0GJP, canonical alpha; sites.tex Tag 0H7J, example-constant-sheaf, and blueprint lemma-constructible-pullback-constant, Proof (composite adjunction and its unit)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pc-proper-base-change",
+  "def-weil-pbc-local-acyclicity-abelian-sheaf",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "sbc-thm-smooth-base-change",
+  "lem-weil-pbc-exchange-strict-local-cohomology",
+  "lem-weil-pbc-strict-local-geometric-fibre-test",
+  "sbc-lem-strict-henselian-constant-cohomology",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lemma-constructible-pullback-constant",
+  "def-constructible-constant",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJQ, proposition-smooth-locally-acyclic; strict-local reduction expanded with Tags 0EZU and 0EZV"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism of schemes is universally locally acyclic for constant cyclic torsion coefficients prime to residue characteristic",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  f.Etale ↔ f.FormallyUnramified ∧ f.Smooth\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative rings, $ f $ is étale if and only if it is both formally unramified (admits no nontrivial derivations) and smooth (induces a flat algebra wi\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth scheme morphisms have acyclic geometric Milnor fibres for etale cohomology with Z n coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension 0 R S], Algebra.Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"RingHom.etale_iff_formallyUnramified_and_smooth\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S),\\n  f.Etale ↔ f.FormallyUnramified ∧ f.Smooth\", \"doc\": \"For a ring homomorphism $ f : R \\\\to S $ between commutative rings, $ f $ is étale if and only if it is both formally unramified (admits no nontrivial derivations) and smooth (induces a flat algebra wi\"}\n  {\"name\": \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ (n : ℕ) (R : Type u) (S : Type v) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.IsStandardSmoothOfRelativeDimension n R S], ∃ g, g.Etale\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension $ n $ over a commutative ring $ R $, then there exists an étale algebra homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ from the polynomial ri\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"cohomology\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*acyclic|acyclic.*smooth",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth morphisms are universally locally acyclic",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n  This kind of search is not available now. It is recorded as unavailable; use the other kinds and grep, and do not write a verdict for it.\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth scheme morphisms have universally cohomologically acyclic strict local fibres for cyclic coefficients of invertible order",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    HomologicalComplex.Acyclic K\", \"doc\": \"For a cochain complex $ K $ in a preadditive category $ C $ with integer indices, the image of $ K $ under the quotient functor to the homotopy category belongs to the acyclic subcategory (consisting \"}\n  {\"name\": \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_exactAt\", \"module\": \"Mathlib/Algebra/Homology/HomotopyCategory/Acyclic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] (K : CochainComplex C ℤ),\\n  HomotopyCategory.subcategoryAcyclic C ((HomotopyCategory.quotient C (ComplexShape.up ℤ)).obj K) ↔\\n    ∀ (n : ℤ), HomologicalComplex.ExactAt K n\", \"doc\": \"A cochain complex $ K $ in the homotopy category belongs to the acyclic subcategory if and only if it is exact at every integer index $ n $, meaning the image of the differential at each degree equals\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth morphisms are universally locally acyclic for prime to characteristic constant torsion etale sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.IsEtale.of_comp\nAlgebraicGeometry.IsEtale.instFormallyUnramified\nAlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\nAlgebraicGeometry.IsEtale.instIsSmooth\nAlgebraicGeometry.IsEtale\nRingHom.etale_iff_formallyUnramified_and_smooth\nAlgebraicGeometry.isSmooth_iff\nAlgebraicGeometry.isSmoothOfRelativeDimension_iff",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Smooth\", \"acyclic\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*acyclic|acyclic.*smooth",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth morphisms are universally locally acyclic",
+   "results": "[leansearch] UNAVAILABLE 0 hit(s) | service unavailable: Internal Server Error\n",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric vanishing cycle fibres of smooth morphisms have trivial positive etale cohomology with invertible torsion coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.IsEtale.of_comp\nAlgebra.etaleLocus_eq_compl_support\nAlgebraicGeometry.IsEtale.instFormallyUnramified\nAlgebra.FormallyEtale.of_unramified_and_smooth\nAlgebra.FormallyEtale.subsingleton_h1Cotangent\nAlgebra.Etale.formallyEtale\nAlgebra.formallyEtale_iff\nAlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-pbc-smooth-local-acyclicity",
+  "worker": "stage1",
+  "summary": "Rebased onto the current DAG and reread the changed def-weil-pbc-local-acyclicity-abelian-sheaf statement; its universal-base-change clause and strict-local fibre clause still support the same six-step proof. Read 0GJQ and its smooth-base-change and strict-local sources; retained the statement, made invertibility local, expanded the strict-local reduction via 0EZV, and checked the canonical alpha. Two unsplit comparison tools created; existing lem-pc-proper-base-change(2) reused instead of a duplicate Mathlib leaf.",
+  "blueprint": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
+   },
+   {
+    "node": "sbc-thm-smooth-base-change",
+    "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
+   },
+   {
+    "node": "sbc-lem-strict-henselian-constant-cohomology",
+    "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Requested generic tool for the strict-local smooth-base-change argument of Stacks 0GJQ; no same-unit statement supplies this general ingredient. The maintainer judges acceptance."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "sbc-thm-smooth-base-change",
+  "sbc-lem-strict-henselian-constant-cohomology",
+  "lem-weil-pbc-strictly-henselian-sections-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NS-901338f0d",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-901338f0d (reviewer sub-agent of L); spot-checked: Read the full mathematics; checked all six steps, both new nodes against 0EZU/0EZV, canonical maps, hypotheses, edge cases, duplicates and target coefficient categories. Replaced the inaccurate 08J6-backed transpose citation with an explicit adjunction calculation. Statements unchanged; review.md and corrected item JSON written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {},
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a60364fb6",
+  "group": "NP",
+  "result": "pass",
+  "note": "Wrote review.md. Immutable files match the commit; source, dependencies, canonical maps, hypotheses, edge cases, universes, signature, report sections, and pilot gates pass. Server-only compilation reproduced cleanly. No fixes or repository changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothLocalAcyclicity",
+  "declaration": "AlgebraicGeometry.Etale.smooth_localAcyclicity",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothLocalAcyclicity.lean",
+  "statement": "theorem smooth_localAcyclicity {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] : IsUniversallyLocallyAcyclic f ∧ IsLocallyAcyclic f",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-15",
+  "existing": false
+ }
 }

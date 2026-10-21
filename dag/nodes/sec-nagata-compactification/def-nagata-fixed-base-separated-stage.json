@@ -1,106 +1,83 @@
 {
-  "id": "def-nagata-fixed-base-separated-stage",
-  "blueprint": {
-    "is": "def-nagata-fixed-base-separated-stage",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "definition",
-  "title": "Selected stage for fixed-base separatedness",
-  "statement": "Under the hypotheses of\n[lemma-nagata-fixed-base-separated-stage-exists], choose one witness\nand define $\\alpha_{\\mathrm{sep}}$ to be its index component. Eventual\nseparatedness is recorded only in the following specification lemma.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-envelope/def-nagata-fixed-base-separated-stage.md",
-    "place": "node def-nagata-fixed-base-separated-stage, order 394"
-  },
-  "stmt_deps": [
-    "lemma-nagata-fixed-base-separated-stage-exists"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "bypassed"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 394,
-  "blueprint_uses": [
-    "lemma-nagata-fixed-base-separated-stage-exists"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "status",
-      "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Scheme.separatedStage",
-          "module": "WeilConjectures.AlgebraicGeometry.SeparatedEnvelope",
-          "lines": [
-            55,
-            62
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-prop-nagata-sketch-envelope",
-  "split_report": {
-    "date": "2026-10-10",
-    "item": "def-nagata-fixed-base-separated-stage",
-    "worker": "stage1",
-    "summary": "Checked the selected-index definition against its blueprint source and the separated-stage existence dependency. The blueprint marks this stage-by-stage bookkeeping as bypassed by the direct finite-presentation and Noetherian-descent formalization, so the definition has no proof steps and requires no new nodes. The Lean source contains the underlying separatedness theorem but no declaration of this explicit alpha_sep definition.",
-    "blueprint": "The node statement is the imported blueprint node itself (order 394); its status note says the stage bookkeeping is bypassed. The whole blueprint was searched for this definition and no other matching node was found."
-  },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-nfb2413",
-    "group": "C1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nfb2413 (reviewer sub-agent of L); spot-checked: Statement word for word as blueprint order 394 (B3 ok); stmt_deps lemma-nagata-fixed-base-separated-stage-exists kept: cited by bracket as source of the chosen witness, the statement cites no definition, not created from the item, no cycle; no proof steps; no duplicate (lemma-nagata-fixed-base-separated-eventually states the property, def-nagata-finite-type-closed-in-fp applies this definition; def-nagata-separated-descent-stage is a different stage). FIX more, RETURN less: blueprint.same_as [] -> null; split_report.date 2026-10-11 -> 2026-10-10 UTC (date -u 20:50 UTC). Second reading by C1 missed both metadata faults (it endorsed same_as []).; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.NagataFixedBaseSeparatedStage",
-    "declaration": "AlgebraicGeometry.nagataSeparatedStage",
-    "file": "lean/Sheaf/AlgebraicGeometry/NagataFixedBaseSeparatedStage.lean",
-    "statement": "def nagataSeparatedStage {I : Type u} [Category.{u} I] [IsCofiltered I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc : IsLimit c) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] {S : Scheme.{u}} (t : D ⟶ (Functor.const I).obj S) [∀ i, QuasiCompact (t.app i)] (i₀ : I) [IsSeparated (c.π.app i₀ ≫ t.app i₀)] : I",
-    "branch": "sheaf-dag",
-    "by": "M1",
-    "date": "2026-10-11",
-    "existing": false,
-    "note": "General cofiltered qcqs system with affine transitions and quasi-compact structure maps, matching the recorded dependency; no finite-presentation approximation hypothesis."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-nfs1123",
-    "group": "M1",
-    "result": "pass",
-    "note": "Binders = section variables of recorded dep Scheme.exists_isSeparated_app_of_isLimit verbatim: cofiltered I : Type u with Category.{u} (single universe), qcqs stages, affine transitions, t : D ⟶ const S with quasi-compact components, i₀ + IsSeparated (c.π.app i₀ ≫ t.app i₀) for 'X→S separated'; body Classical.choose of the dep (no sorry, axioms propext/choice/Quot.sound); returns index I; no FP hypothesis (node says none needed); #check ok; citer def-nagata-finite-type-closed-in-fp usable as nagataSeparatedStage F.isLimit F.p i₀ and Classical.choose_spec gives lemma-…-eventually; no duplicate definition in Sheaf or source"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Under the hypotheses of\n[lemma-nagata-fixed-base-separated-stage-exists], choose one witness\nand define $\\alpha_{\\mathrm{sep}}$ to be its index component.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "def-nagata-fixed-base-separated-stage",
+ "blueprint": {
+  "is": "def-nagata-fixed-base-separated-stage",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Selected stage for fixed-base separatedness",
+ "statement": "Under the hypotheses of\n[lemma-nagata-fixed-base-separated-stage-exists], choose one witness\nand define $\\alpha_{\\mathrm{sep}}$ to be its index component. Eventual\nseparatedness is recorded only in the following specification lemma.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-envelope/def-nagata-fixed-base-separated-stage.md",
+  "place": "node def-nagata-fixed-base-separated-stage, order 394"
+ },
+ "stmt_deps": [
+  "lemma-nagata-fixed-base-separated-stage-exists"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "bypassed"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 394,
+ "blueprint_uses": [
+  "lemma-nagata-fixed-base-separated-stage-exists"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "status",
+   "text": "**Status.** Bypassed by the formalized route: the finite-presentation and\nNoetherian descent is done in one step by\n`AlgebraicGeometry.Scheme.exists_isPullback_of_finitePresentation_of_isSeparated`\nand `AlgebraicGeometry.Scheme.nonempty_noetherianApproximation`, so\nthis stage-by-stage bookkeeping is never carried out.",
+   "where": "statement"
   }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-prop-nagata-sketch-envelope",
+ "split_report": {
+  "date": "2026-10-10",
+  "item": "def-nagata-fixed-base-separated-stage",
+  "worker": "stage1",
+  "summary": "Checked the selected-index definition against its blueprint source and the separated-stage existence dependency. The blueprint marks this stage-by-stage bookkeeping as bypassed by the direct finite-presentation and Noetherian-descent formalization, so the definition has no proof steps and requires no new nodes. The Lean source contains the underlying separatedness theorem but no declaration of this explicit alpha_sep definition.",
+  "blueprint": "The node statement is the imported blueprint node itself (order 394); its status note says the stage bookkeeping is bypassed. The whole blueprint was searched for this definition and no other matching node was found."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-nfb2413",
+  "group": "C1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-nfb2413 (reviewer sub-agent of L); spot-checked: Statement word for word as blueprint order 394 (B3 ok); stmt_deps lemma-nagata-fixed-base-separated-stage-exists kept: cited by bracket as source of the chosen witness, the statement cites no definition, not created from the item, no cycle; no proof steps; no duplicate (lemma-nagata-fixed-base-separated-eventually states the property, def-nagata-finite-type-closed-in-fp applies this definition; def-nagata-separated-descent-stage is a different stage). FIX more, RETURN less: blueprint.same_as [] -> null; split_report.date 2026-10-11 -> 2026-10-10 UTC (date -u 20:50 UTC). Second reading by C1 missed both metadata faults (it endorsed same_as []).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NagataFixedBaseSeparatedStage",
+  "declaration": "AlgebraicGeometry.nagataSeparatedStage",
+  "file": "lean/Sheaf/AlgebraicGeometry/NagataFixedBaseSeparatedStage.lean",
+  "statement": "def nagataSeparatedStage {I : Type u} [Category.{u} I] [IsCofiltered I] {D : I ⥤ Scheme.{u}} {c : Cone D} (hc : IsLimit c) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)] {S : Scheme.{u}} (t : D ⟶ (Functor.const I).obj S) [∀ i, QuasiCompact (t.app i)] (i₀ : I) [IsSeparated (c.π.app i₀ ≫ t.app i₀)] : I",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "General cofiltered qcqs system with affine transitions and quasi-compact structure maps, matching the recorded dependency; no finite-presentation approximation hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-nfs1123",
+  "group": "M1",
+  "result": "pass",
+  "note": "Binders = section variables of recorded dep Scheme.exists_isSeparated_app_of_isLimit verbatim: cofiltered I : Type u with Category.{u} (single universe), qcqs stages, affine transitions, t : D ⟶ const S with quasi-compact components, i₀ + IsSeparated (c.π.app i₀ ≫ t.app i₀) for 'X→S separated'; body Classical.choose of the dep (no sorry, axioms propext/choice/Quot.sound); returns index I; no FP hypothesis (node says none needed); #check ok; citer def-nagata-finite-type-closed-in-fp usable as nagataSeparatedStage F.isLimit F.p i₀ and Classical.choose_spec gives lemma-…-eventually; no duplicate definition in Sheaf or source"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Under the hypotheses of\n[lemma-nagata-fixed-base-separated-stage-exists], choose one witness\nand define $\\alpha_{\\mathrm{sep}}$ to be its index component.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,126 +1,101 @@
 {
-  "id": "lemma-nagata-conrad-blowup-base-change-reduction",
-  "blueprint": {
-    "is": "lemma-nagata-conrad-blowup-base-change-reduction",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Reduction by base change along an admissible blow-up",
-  "statement": "Let $X$ be qcqs, let $U,V\\subseteq X$ be open, let $p\\colon Y\\to X$ be a\nmorphism and let $f\\colon U\\to Y$ be a section of $p$ over $U$. Let\n$q\\colon X'\\to X$ be a $V$-admissible blow-up, write $p'\\colon Y\\times_XX'\\to X'$ for the base change of $p$ and $f'\\colon q^{-1}(U)\\to Y\\times_XX'$ for the\nbase change of $f$. If the conclusion of\n[thm-nagata-conrad-elimination] holds for the data\n$(X',q^{-1}(U),q^{-1}(V),p',f')$, then it holds for $(X,U,V,p,f)$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-blowup-base-change-reduction.md",
-    "place": "node lemma-nagata-conrad-blowup-base-change-reduction, order 218"
-  },
-  "stmt_deps": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-conrad-quasi-domination",
-    "def-nagata-global-blowup",
-    "def-nagata-conrad-elimination-conclusion"
-  ],
-  "proof": [
-    {
-      "text": "Let $X''\\to X'$ be a $q^{-1}(V)$-admissible blow-up solving the problem\nupstairs. By [lemma-nagata-admissible-blowup-comp] the composite\n$X''\\to X'\\to X$ is again a $V$-admissible blow-up of $X$: there is a\n$V$-admissible centre $K$ on $X$ and an isomorphism\n$X''\\cong\\operatorname{Bl}_K(X)$ over $X$. The conclusion of the theorem\ndepends on the blow-up only through its total space over $X$, so it suffices\nto produce it for $X''\\to X$. The extension of $f$ is the extension of $f'$\nfollowed by the projection $Y\\times_XX'\\to Y$; that it is a section of $p$ and\nextends $f$ follows from the two projection formulas defining $f'$. For the\nclosedness of the graph, the square exhibiting $Y\\times_XX''$ as\n$(Y\\times_XX')\\times_{X'}X''$ is cartesian, and the two graphs correspond\nunder the resulting isomorphism.",
-      "uses": [
-        "lemma-nagata-admissible-blowup-comp"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lemma-nagata-admissible-blowup-comp",
-    "prop-nagata-global-blowup-cover-independent"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-blowup-base-change-reduction.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 218,
-  "blueprint_uses": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-conrad-quasi-domination",
-    "def-nagata-global-blowup",
-    "lemma-nagata-admissible-blowup-comp",
-    "prop-nagata-global-blowup-cover-independent"
-  ],
-  "lean": {
-    "module": "WeilConjectures.Blowup.PartialSectionExtensionReduction",
-    "declaration": "AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup",
-    "branch": "slopmaster2",
-    "line": 154,
-    "sorry_free": true,
-    "body_lines": 47
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup"
-  ],
-  "uses_not_cited": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-conrad-quasi-domination",
-    "def-nagata-global-blowup",
-    "prop-nagata-global-blowup-cover-independent"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup",
-          "module": "WeilConjectures.Blowup.PartialSectionExtensionReduction",
-          "lines": [
-            146,
-            216
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "pointers": [
-    {
-      "to": "thm-nagata-conrad-elimination",
-      "was": [
-        "stmt"
-      ],
-      "reason": "the statement refers to the conclusion of the theorem as a predicate; the predicate is now def-nagata-conrad-elimination-conclusion",
-      "date": "2026-10-09"
-    }
-  ],
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-thm-nagata-sketch-conrad",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Say that data $(X,U,V,p,f)$, consisting of a scheme $X$, opens\n$U,V\\subseteq X$, a morphism $p\\colon Y\\to X$ and a section\n$f\\colon U\\to Y$ of $p$ over $U$, *admit an extension* if there are a\n$V$-admissible blow-up $\\pi\\colon\\widetilde X\\to X$, an open\n$W\\subseteq\\widetilde X$ containing $\\pi^{-1}(U)$ and a morphism\n$g\\colon W\\to Y$ with $p\\circ g=\\pi|_W$ and\n$g|_{\\pi^{-1}(U)}=f\\circ\\pi|_{\\pi^{-1}(U)}$, whose graph is closed in\n$Y\\times_X\\widetilde X$ (the conclusion of [thm-nagata-conrad-elimination]).\n\nLet $X$ be qcqs, let $U,V\\subseteq X$ be open, let $p\\colon Y\\to X$ be a\nmorphism and let $f\\colon U\\to Y$ be a section of $p$ over $U$. Let\n$q\\colon X'\\to X$ be a $V$-admissible blow-up, write $p'\\colon Y\\times_XX'\\to X'$ for the base change of $p$ and $f'\\colon q^{-1}(U)\\to Y\\times_XX'$ for the\nbase change of $f$. If the data $(X',q^{-1}(U),q^{-1}(V),p',f')$ admit an\nextension, then so do $(X,U,V,p,f)$.",
-    "proof": [
-      {
-        "text": "Let $X''\\to X'$ be a $q^{-1}(V)$-admissible blow-up solving the problem\nupstairs. By [lemma-nagata-admissible-blowup-comp] the composite\n$X''\\to X'\\to X$ is again a $V$-admissible blow-up of $X$: there is a\n$V$-admissible centre $K$ on $X$ and an isomorphism\n$X''\\cong\\operatorname{Bl}_K(X)$ over $X$. The conclusion of the theorem\ndepends on the blow-up only through its total space over $X$, so it suffices\nto produce it for $X''\\to X$. The extension of $f$ is the extension of $f'$\nfollowed by the projection $Y\\times_XX'\\to Y$; that it is a section of $p$ and\nextends $f$ follows from the two projection formulas defining $f'$. For the\nclosedness of the graph, the square exhibiting $Y\\times_XX''$ as\n$(Y\\times_XX')\\times_{X'}X''$ is cartesian, and the two graphs correspond\nunder the resulting isomorphism.",
-        "uses": [
-          "lemma-nagata-admissible-blowup-comp"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "lemma-nagata-conrad-blowup-base-change-reduction",
+ "blueprint": {
+  "is": "lemma-nagata-conrad-blowup-base-change-reduction",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Reduction by base change along an admissible blow-up",
+ "statement": "Let $X$ be qcqs, let $U,V\\subseteq X$ be open, let $p\\colon Y\\to X$ be a\nmorphism and let $f\\colon U\\to Y$ be a section of $p$ over $U$. Let\n$q\\colon X'\\to X$ be a $V$-admissible blow-up, write $p'\\colon Y\\times_XX'\\to X'$ for the base change of $p$ and $f'\\colon q^{-1}(U)\\to Y\\times_XX'$ for the\nbase change of $f$. If the conclusion of\n[thm-nagata-conrad-elimination] holds for the data\n$(X',q^{-1}(U),q^{-1}(V),p',f')$, then it holds for $(X,U,V,p,f)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-blowup-base-change-reduction.md",
+  "place": "node lemma-nagata-conrad-blowup-base-change-reduction, order 218"
+ },
+ "stmt_deps": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-conrad-quasi-domination",
+  "def-nagata-global-blowup",
+  "def-nagata-conrad-elimination-conclusion"
+ ],
+ "proof": [
+  {
+   "text": "Let $X''\\to X'$ be a $q^{-1}(V)$-admissible blow-up solving the problem\nupstairs. By [lemma-nagata-admissible-blowup-comp] the composite\n$X''\\to X'\\to X$ is again a $V$-admissible blow-up of $X$: there is a\n$V$-admissible centre $K$ on $X$ and an isomorphism\n$X''\\cong\\operatorname{Bl}_K(X)$ over $X$. The conclusion of the theorem\ndepends on the blow-up only through its total space over $X$, so it suffices\nto produce it for $X''\\to X$. The extension of $f$ is the extension of $f'$\nfollowed by the projection $Y\\times_XX'\\to Y$; that it is a section of $p$ and\nextends $f$ follows from the two projection formulas defining $f'$. For the\nclosedness of the graph, the square exhibiting $Y\\times_XX''$ as\n$(Y\\times_XX')\\times_{X'}X''$ is cartesian, and the two graphs correspond\nunder the resulting isomorphism.",
+   "uses": [
+    "lemma-nagata-admissible-blowup-comp"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lemma-nagata-admissible-blowup-comp",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-blowup-base-change-reduction.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 218,
+ "blueprint_uses": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-conrad-quasi-domination",
+  "def-nagata-global-blowup",
+  "lemma-nagata-admissible-blowup-comp",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Blowup.PartialSectionExtensionReduction",
+  "declaration": "AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup",
+  "branch": "slopmaster2",
+  "line": 154,
+  "sorry_free": true,
+  "body_lines": 47
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_isAdmissible_extend_partialSection_of_blowup"
+ ],
+ "uses_not_cited": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-conrad-quasi-domination",
+  "def-nagata-global-blowup",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "pointers": [
+  {
+   "to": "thm-nagata-conrad-elimination",
+   "was": [
+    "stmt"
+   ],
+   "reason": "the statement refers to the conclusion of the theorem as a predicate; the predicate is now def-nagata-conrad-elimination-conclusion",
+   "date": "2026-10-09"
+  }
+ ],
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-thm-nagata-sketch-conrad",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Say that data $(X,U,V,p,f)$, consisting of a scheme $X$, opens\n$U,V\\subseteq X$, a morphism $p\\colon Y\\to X$ and a section\n$f\\colon U\\to Y$ of $p$ over $U$, *admit an extension* if there are a\n$V$-admissible blow-up $\\pi\\colon\\widetilde X\\to X$, an open\n$W\\subseteq\\widetilde X$ containing $\\pi^{-1}(U)$ and a morphism\n$g\\colon W\\to Y$ with $p\\circ g=\\pi|_W$ and\n$g|_{\\pi^{-1}(U)}=f\\circ\\pi|_{\\pi^{-1}(U)}$, whose graph is closed in\n$Y\\times_X\\widetilde X$ (the conclusion of [thm-nagata-conrad-elimination]).\n\nLet $X$ be qcqs, let $U,V\\subseteq X$ be open, let $p\\colon Y\\to X$ be a\nmorphism and let $f\\colon U\\to Y$ be a section of $p$ over $U$. Let\n$q\\colon X'\\to X$ be a $V$-admissible blow-up, write $p'\\colon Y\\times_XX'\\to X'$ for the base change of $p$ and $f'\\colon q^{-1}(U)\\to Y\\times_XX'$ for the\nbase change of $f$. If the data $(X',q^{-1}(U),q^{-1}(V),p',f')$ admit an\nextension, then so do $(X,U,V,p,f)$.",
+  "proof": [
+   {
+    "text": "Let $X''\\to X'$ be a $q^{-1}(V)$-admissible blow-up solving the problem\nupstairs. By [lemma-nagata-admissible-blowup-comp] the composite\n$X''\\to X'\\to X$ is again a $V$-admissible blow-up of $X$: there is a\n$V$-admissible centre $K$ on $X$ and an isomorphism\n$X''\\cong\\operatorname{Bl}_K(X)$ over $X$. The conclusion of the theorem\ndepends on the blow-up only through its total space over $X$, so it suffices\nto produce it for $X''\\to X$. The extension of $f$ is the extension of $f'$\nfollowed by the projection $Y\\times_XX'\\to Y$; that it is a section of $p$ and\nextends $f$ follows from the two projection formulas defining $f'$. For the\nclosedness of the graph, the square exhibiting $Y\\times_XX''$ as\n$(Y\\times_XX')\\times_{X'}X''$ is cartesian, and the two graphs correspond\nunder the resulting isomorphism.",
+    "uses": [
+     "lemma-nagata-admissible-blowup-comp"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

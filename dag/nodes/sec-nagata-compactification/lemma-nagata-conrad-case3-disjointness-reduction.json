@@ -1,209 +1,184 @@
 {
-  "id": "lemma-nagata-conrad-case3-disjointness-reduction",
-  "blueprint": {
-    "is": "lemma-nagata-conrad-case3-disjointness-reduction",
-    "from": null,
-    "same_as": null
+ "id": "lemma-nagata-conrad-case3-disjointness-reduction",
+ "blueprint": {
+  "is": "lemma-nagata-conrad-case3-disjointness-reduction",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The disjointness reduction in Case 3 (Conrad)",
+ "statement": "Let $X$ be qcqs, let $U\\subseteq V\\subseteq X$ be quasi-compact open\nsubschemes, let $p\\colon Y\\to X$ be a morphism with $Y$ qcqs, and let\n$f\\colon U\\to Y$ be a section of $p$ over $U$ whose image is closed in\n$p^{-1}(V)$. There is a $V$-admissible blow-up\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ such that, after\nbase change along $q$, the closure of the image of $f$ is disjoint from the\npart lying over $\\overline{q^{-1}(V\\setminus U)}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-case3-disjointness-reduction.md",
+  "place": "node lemma-nagata-conrad-case3-disjointness-reduction, order 214"
+ },
+ "stmt_deps": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-constructible-closed-support",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-qc-open-complement-ideal",
+  "def-nagata-scheme-theoretic-image"
+ ],
+ "proof": [
+  {
+   "text": "We produce the two centres required by\n[lemma-nagata-conrad-disjointness-blowup], applied with $Z=Y$, with the\nopen immersions $U\\subseteq V\\subseteq X$, and with $f(U)=\\Gamma_f$ in the\nrole of the scheme lying over $U$.",
+   "uses": [
+    "lemma-nagata-conrad-disjointness-blowup"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "The disjointness reduction in Case 3 (Conrad)",
-  "statement": "Let $X$ be qcqs, let $U\\subseteq V\\subseteq X$ be quasi-compact open\nsubschemes, let $p\\colon Y\\to X$ be a morphism with $Y$ qcqs, and let\n$f\\colon U\\to Y$ be a section of $p$ over $U$ whose image is closed in\n$p^{-1}(V)$. There is a $V$-admissible blow-up\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ such that, after\nbase change along $q$, the closure of the image of $f$ is disjoint from the\npart lying over $\\overline{q^{-1}(V\\setminus U)}$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-case3-disjointness-reduction.md",
-    "place": "node lemma-nagata-conrad-case3-disjointness-reduction, order 214"
+  {
+   "text": "Let $\\mathcal H$ be the ideal of the reduced structure on the closed subset\n$\\overline{V\\setminus U}$, so $V(\\mathcal H)=\\overline{V\\setminus U}$; since\n$V\\setminus U$ is closed in $V$, its closure misses $U$. Give $X\\setminus V$\na finite type closed subscheme structure $V(\\mathcal K)$ using\n[lemma-nagata-qc-open-complement-ideal-exists].",
+   "uses": [
+    "lemma-nagata-qc-open-complement-ideal-exists"
+   ],
+   "elementary": false
   },
-  "stmt_deps": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-constructible-closed-support",
-    "def-nagata-extended-ideal",
-    "def-nagata-global-blowup",
-    "def-nagata-qc-open-complement-ideal",
-    "def-nagata-scheme-theoretic-image"
-  ],
-  "proof": [
-    {
-      "text": "We produce the two centres required by\n[lemma-nagata-conrad-disjointness-blowup], applied with $Z=Y$, with the\nopen immersions $U\\subseteq V\\subseteq X$, and with $f(U)=\\Gamma_f$ in the\nrole of the scheme lying over $U$.",
-      "uses": [
-        "lemma-nagata-conrad-disjointness-blowup"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Let $\\mathcal H$ be the ideal of the reduced structure on the closed subset\n$\\overline{V\\setminus U}$, so $V(\\mathcal H)=\\overline{V\\setminus U}$; since\n$V\\setminus U$ is closed in $V$, its closure misses $U$. Give $X\\setminus V$\na finite type closed subscheme structure $V(\\mathcal K)$ using\n[lemma-nagata-qc-open-complement-ideal-exists].",
-      "uses": [
-        "lemma-nagata-qc-open-complement-ideal-exists"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "We first check $p\\bigl(p^{-1}(V(\\mathcal H^2))\\cap\\overline{f(U)}\\bigr) \\subseteq X\\setminus V$ as sets. Indeed a point of the left-hand side lies\nin $\\overline{V\\setminus U}$, and if it lay in $V$ then, $f(U)$ being closed\nin $p^{-1}(V)$, the point of $\\overline{f(U)}$ above it would lie in $f(U)$\nand so map into $U$, which is disjoint from $\\overline{V\\setminus U}$. As\n$\\mathcal K$ is of finite type,\n[lemma-nagata-finite-type-ideal-power-in-ideal] gives an $n$ with\n\n$$\n\\mathcal K^n\\cdot\\mathcal O_Y\\subseteq\n\\mathcal H^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}} .\n$$",
-      "uses": [
-        "lemma-nagata-finite-type-ideal-power-in-ideal"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "The ideal $\\mathcal H$ need not be of finite type. By\n[lemma-nagata-ideal-directed-union-finite-type] it is the directed\nsupremum of its finite type quasi-coherent subideals $\\mathcal I_{1,\\alpha}$;\nproducts and inverse images of ideals commute with directed suprema, so\n$\\mathcal H^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}}$ is the directed\nsupremum of the $\\mathcal I_{1,\\alpha}^2\\cdot\\mathcal O_Y+ \\mathcal I_{\\overline{f(U)}}$, and\n[lemma-nagata-finite-type-ideal-compact] applied to the finite type\nideal $(\\mathcal K\\cdot\\mathcal O_Y)^n$ produces an $\\alpha$ with\n\n$$\n\\mathcal K^n\\cdot\\mathcal O_Y\\subseteq\n\\mathcal I_{1,\\alpha}^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}} .\n$$",
-      "uses": [
-        "lemma-nagata-ideal-directed-union-finite-type",
-        "lemma-nagata-finite-type-ideal-compact"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Now take $\\mathcal I_1=\\mathcal I_{1,\\alpha}$ and\n$\\mathcal I_2=\\mathcal I_{1,\\alpha}^2+\\mathcal K^n$, so that\n$T_2=V(\\mathcal I_2)=T_1\\cap V(\\mathcal K^n)$ is disjoint from $V$, and\n$\\mathcal I=\\mathcal I_1+\\mathcal I_2$. The centre $\\mathcal I$ is of finite\ntype and $V(\\mathcal I)\\subseteq V(\\mathcal I_2)\\subseteq X\\setminus V$, so\nthe blow-up is $V$-admissible; the containment\n$\\overline{V\\setminus U}=V(\\mathcal H)\\subseteq V(\\mathcal I_{1,\\alpha})$\nholds because $\\mathcal I_{1,\\alpha}\\subseteq\\mathcal H$, the scheme $f(U)$\nlies over $U$ because $f$ is a section of $p$, and the displayed containment\nis hypothesis (3) of [def-nagata-conrad-disjointness-setup]. So\n[lemma-nagata-conrad-disjointness-blowup] applies and gives the\nassertion.",
-      "uses": [
-        "def-nagata-conrad-disjointness-setup",
-        "lemma-nagata-conrad-disjointness-blowup"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(Conrad additionally arranges $\\mathcal I_{1,\\alpha}|_U=\\mathcal O_U$; this\nis not needed here, because $V(\\mathcal I)\\subseteq V(\\mathcal K^n)$ is\nalready disjoint from $V$, hence from $U$.)",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "lemma-nagata-conrad-disjointness-blowup",
-    "lemma-nagata-qc-open-complement-ideal-exists",
-    "lemma-nagata-finite-type-ideal-power-in-ideal",
+  {
+   "text": "We first check $p\\bigl(p^{-1}(V(\\mathcal H^2))\\cap\\overline{f(U)}\\bigr) \\subseteq X\\setminus V$ as sets. Indeed a point of the left-hand side lies\nin $\\overline{V\\setminus U}$, and if it lay in $V$ then, $f(U)$ being closed\nin $p^{-1}(V)$, the point of $\\overline{f(U)}$ above it would lie in $f(U)$\nand so map into $U$, which is disjoint from $\\overline{V\\setminus U}$. As\n$\\mathcal K$ is of finite type,\n[lemma-nagata-finite-type-ideal-power-in-ideal] gives an $n$ with\n\n$$\n\\mathcal K^n\\cdot\\mathcal O_Y\\subseteq\n\\mathcal H^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}} .\n$$",
+   "uses": [
+    "lemma-nagata-finite-type-ideal-power-in-ideal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal $\\mathcal H$ need not be of finite type. By\n[lemma-nagata-ideal-directed-union-finite-type] it is the directed\nsupremum of its finite type quasi-coherent subideals $\\mathcal I_{1,\\alpha}$;\nproducts and inverse images of ideals commute with directed suprema, so\n$\\mathcal H^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}}$ is the directed\nsupremum of the $\\mathcal I_{1,\\alpha}^2\\cdot\\mathcal O_Y+ \\mathcal I_{\\overline{f(U)}}$, and\n[lemma-nagata-finite-type-ideal-compact] applied to the finite type\nideal $(\\mathcal K\\cdot\\mathcal O_Y)^n$ produces an $\\alpha$ with\n\n$$\n\\mathcal K^n\\cdot\\mathcal O_Y\\subseteq\n\\mathcal I_{1,\\alpha}^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}} .\n$$",
+   "uses": [
     "lemma-nagata-ideal-directed-union-finite-type",
-    "lemma-nagata-finite-type-ideal-compact",
+    "lemma-nagata-finite-type-ideal-compact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Now take $\\mathcal I_1=\\mathcal I_{1,\\alpha}$ and\n$\\mathcal I_2=\\mathcal I_{1,\\alpha}^2+\\mathcal K^n$, so that\n$T_2=V(\\mathcal I_2)=T_1\\cap V(\\mathcal K^n)$ is disjoint from $V$, and\n$\\mathcal I=\\mathcal I_1+\\mathcal I_2$. The centre $\\mathcal I$ is of finite\ntype and $V(\\mathcal I)\\subseteq V(\\mathcal I_2)\\subseteq X\\setminus V$, so\nthe blow-up is $V$-admissible; the containment\n$\\overline{V\\setminus U}=V(\\mathcal H)\\subseteq V(\\mathcal I_{1,\\alpha})$\nholds because $\\mathcal I_{1,\\alpha}\\subseteq\\mathcal H$, the scheme $f(U)$\nlies over $U$ because $f$ is a section of $p$, and the displayed containment\nis hypothesis (3) of [def-nagata-conrad-disjointness-setup]. So\n[lemma-nagata-conrad-disjointness-blowup] applies and gives the\nassertion.",
+   "uses": [
     "def-nagata-conrad-disjointness-setup",
-    "lemma-nagata-constructible-closed-support",
-    "lemma-nagata-qc-open-complement-ideal",
-    "prop-nagata-global-blowup-cover-independent"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-case3-disjointness-reduction.md",
-    "place": "## Proof"
+    "lemma-nagata-conrad-disjointness-blowup"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 214,
-  "blueprint_uses": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-conrad-disjointness-setup",
-    "def-nagata-constructible-closed-support",
-    "def-nagata-extended-ideal",
-    "def-nagata-global-blowup",
-    "def-nagata-qc-open-complement-ideal",
-    "def-nagata-scheme-theoretic-image",
-    "lemma-nagata-conrad-disjointness-blowup",
-    "lemma-nagata-constructible-closed-support",
-    "lemma-nagata-finite-type-ideal-compact",
-    "lemma-nagata-finite-type-ideal-power-in-ideal",
-    "lemma-nagata-ideal-directed-union-finite-type",
-    "lemma-nagata-qc-open-complement-ideal",
-    "lemma-nagata-qc-open-complement-ideal-exists",
-    "prop-nagata-global-blowup-cover-independent"
-  ],
-  "lean": {
-    "module": "WeilConjectures.Blowup.QuasiAffineGeneralReduction",
-    "declaration": "AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le",
-    "branch": "slopmaster2",
-    "line": 69,
-    "sorry_free": true,
-    "body_lines": 87
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le"
-  ],
-  "uses_not_cited": [
-    "def-nagata-admissible-blowup",
-    "def-nagata-constructible-closed-support",
-    "def-nagata-extended-ideal",
-    "def-nagata-global-blowup",
-    "def-nagata-qc-open-complement-ideal",
-    "def-nagata-scheme-theoretic-image",
-    "lemma-nagata-constructible-closed-support",
-    "lemma-nagata-qc-open-complement-ideal",
-    "prop-nagata-global-blowup-cover-independent"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le",
-          "module": "WeilConjectures.Blowup.QuasiAffineGeneralReduction",
-          "lines": [
-            58,
-            180
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-nagata-compactification",
-  "unit": "sk-thm-nagata-sketch-conrad",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $X$ be qcqs, let $U\\subseteq V\\subseteq X$ be quasi-compact open\nsubschemes, let $p\\colon Y\\to X$ be a morphism with $Y$ qcqs, and let\n$f\\colon U\\to Y$ be a section of $p$ over $U$ whose image is closed in\n$p^{-1}(V)$. There is a $V$-admissible blow-up\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ with the\nfollowing property. Let $Z'$ be a scheme with morphisms $r\\colon Z'\\to Y$\nand $p'\\colon Z'\\to\\widetilde X$ such that $p\\circ r=q\\circ p'$, and let $Y'$\nbe a scheme with a morphism $f_Y\\colon Y'\\to U$ and a quasi-compact morphism\n$f'\\colon Y'\\to Z'$ such that $r\\circ f'=f\\circ f_Y$ (for instance the base\nchanges of $Y$ and of $f$ along $q$). Then the closure of $f'(Y')$ is\ndisjoint from $p'^{-1}\\bigl(\\overline{q^{-1}(V\\setminus U)}\\bigr)$.",
-    "proof": [
-      {
-        "text": "We produce the two ideals $\\mathcal I_1,\\mathcal I_2$ required by\n[lemma-nagata-conrad-disjointness-blowup], applied to the opens\n$U\\subseteq V\\subseteq X$, to $p\\colon Y\\to X$ in the role of $Z\\to X$, and\nto $f\\colon U\\to Y$ in the role of the morphism whose source lies over\n$U$ (indeed $p\\circ f$ is the inclusion of $U$). The morphism $f$ is\nquasi-compact, since $U$ is quasi-compact and $Y$ is quasi-separated, so\nits scheme-theoretic image $\\overline{f(U)}$ has underlying set the\nclosure of $f(U)$.",
-        "uses": [
-          "lemma-nagata-conrad-disjointness-blowup"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Let $\\mathcal H$ be the ideal of the reduced structure on the closed subset\n$\\overline{V\\setminus U}$, so $V(\\mathcal H)=\\overline{V\\setminus U}$; since\n$V\\setminus U$ is closed in $V$, its closure misses $U$. Give $X\\setminus V$\na finite type closed subscheme structure $V(\\mathcal K)$ using\n[lemma-nagata-qc-open-complement-ideal-exists].",
-        "uses": [
-          "lemma-nagata-qc-open-complement-ideal-exists"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "We first check $p\\bigl(p^{-1}(V(\\mathcal H^2))\\cap\\overline{f(U)}\\bigr) \\subseteq X\\setminus V$ as sets. Indeed a point of the left-hand side lies\nin $\\overline{V\\setminus U}$, and if it lay in $V$ then, $f(U)$ being closed\nin $p^{-1}(V)$, the point of $\\overline{f(U)}$ above it would lie in $f(U)$\nand so map into $U$, which is disjoint from $\\overline{V\\setminus U}$. As\n$\\mathcal K$ is of finite type,\n[lemma-nagata-finite-type-ideal-power-in-ideal] gives an $n$ with\n\n$$\n\\mathcal K^n\\cdot\\mathcal O_Y\\subseteq\n\\mathcal H^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}} .\n$$",
-        "uses": [
-          "lemma-nagata-finite-type-ideal-power-in-ideal"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "The ideal $\\mathcal H$ need not be of finite type. By\n[lemma-nagata-ideal-directed-union-finite-type] it is the directed\nsupremum of its finite type quasi-coherent subideals $\\mathcal I_{1,\\alpha}$;\nproducts and inverse images of ideals commute with directed suprema, so\n$\\mathcal H^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}}$ is the directed\nsupremum of the $\\mathcal I_{1,\\alpha}^2\\cdot\\mathcal O_Y+ \\mathcal I_{\\overline{f(U)}}$, and\n[lemma-nagata-finite-type-ideal-compact] applied to the finite type\nideal $(\\mathcal K\\cdot\\mathcal O_Y)^n$ produces an $\\alpha$ with\n\n$$\n\\mathcal K^n\\cdot\\mathcal O_Y\\subseteq\n\\mathcal I_{1,\\alpha}^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}} .\n$$",
-        "uses": [
-          "lemma-nagata-ideal-directed-union-finite-type",
-          "lemma-nagata-finite-type-ideal-compact"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "Now take $\\mathcal I_1=\\mathcal I_{1,\\alpha}$ and\n$\\mathcal I_2=\\mathcal I_{1,\\alpha}^2+\\mathcal K^n$, so that\n$T_2=V(\\mathcal I_2)=T_1\\cap V(\\mathcal K^n)$ is disjoint from $V$, and\n$\\mathcal I=\\mathcal I_1+\\mathcal I_2$. The centre $\\mathcal I$ is of finite\ntype and $V(\\mathcal I)\\subseteq V(\\mathcal I_2)\\subseteq X\\setminus V$, so\nthe blow-up is $V$-admissible. The hypotheses of\n[lemma-nagata-conrad-disjointness-blowup] hold: $V\\setminus U\\subseteq\n\\overline{V\\setminus U}=V(\\mathcal H)\\subseteq V(\\mathcal I_{1,\\alpha})$\nbecause $\\mathcal I_{1,\\alpha}\\subseteq\\mathcal H$; $V(\\mathcal I_2)\\cap V=\\varnothing$;\n$p(f(U))=U$ because $f$ is a section of $p$; and\n$\\mathcal I_2\\mathcal O_Y=\\mathcal I_{1,\\alpha}^2\\mathcal O_Y+\\mathcal K^n\\mathcal O_Y\n\\subseteq\\mathcal I_{1,\\alpha}^2\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}}$ by\nthe last display. Its blow-up is $q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$,\nand for every $Z',r,p',Y',f_Y,f'$ as in the statement (where\n$f_Y\\colon Y'\\to U$ and $r\\circ f'=f\\circ f_Y$) it gives that\n$\\overline{f'(Y')}$ is disjoint from\n$p'^{-1}\\bigl(\\overline{q^{-1}(V\\setminus U)}\\bigr)$, which is the\nassertion.",
-        "uses": [
-          "lemma-nagata-conrad-disjointness-blowup"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "(Conrad additionally arranges $\\mathcal I_{1,\\alpha}|_U=\\mathcal O_U$; this\nis not needed here, because $V(\\mathcal I)\\subseteq V(\\mathcal K^n)$ is\nalready disjoint from $V$, hence from $U$.)",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "(Conrad additionally arranges $\\mathcal I_{1,\\alpha}|_U=\\mathcal O_U$; this\nis not needed here, because $V(\\mathcal I)\\subseteq V(\\mathcal K^n)$ is\nalready disjoint from $V$, hence from $U$.)",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "lemma-nagata-conrad-disjointness-blowup",
+  "lemma-nagata-qc-open-complement-ideal-exists",
+  "lemma-nagata-finite-type-ideal-power-in-ideal",
+  "lemma-nagata-ideal-directed-union-finite-type",
+  "lemma-nagata-finite-type-ideal-compact",
+  "def-nagata-conrad-disjointness-setup",
+  "lemma-nagata-constructible-closed-support",
+  "lemma-nagata-qc-open-complement-ideal",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-thm-nagata-sketch-conrad/lemma-nagata-conrad-case3-disjointness-reduction.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 214,
+ "blueprint_uses": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-conrad-disjointness-setup",
+  "def-nagata-constructible-closed-support",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-qc-open-complement-ideal",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-conrad-disjointness-blowup",
+  "lemma-nagata-constructible-closed-support",
+  "lemma-nagata-finite-type-ideal-compact",
+  "lemma-nagata-finite-type-ideal-power-in-ideal",
+  "lemma-nagata-ideal-directed-union-finite-type",
+  "lemma-nagata-qc-open-complement-ideal",
+  "lemma-nagata-qc-open-complement-ideal-exists",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "lean": {
+  "module": "WeilConjectures.Blowup.QuasiAffineGeneralReduction",
+  "declaration": "AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le",
+  "branch": "slopmaster2",
+  "line": 69,
+  "sorry_free": true,
+  "body_lines": 87
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le"
+ ],
+ "uses_not_cited": [
+  "def-nagata-admissible-blowup",
+  "def-nagata-constructible-closed-support",
+  "def-nagata-extended-ideal",
+  "def-nagata-global-blowup",
+  "def-nagata-qc-open-complement-ideal",
+  "def-nagata-scheme-theoretic-image",
+  "lemma-nagata-constructible-closed-support",
+  "lemma-nagata-qc-open-complement-ideal",
+  "prop-nagata-global-blowup-cover-independent"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-nagata-compactification",
+ "unit": "sk-thm-nagata-sketch-conrad",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $X$ be qcqs, let $U\\subseteq V\\subseteq X$ be quasi-compact open\nsubschemes, let $p\\colon Y\\to X$ be a morphism with $Y$ qcqs, and let\n$f\\colon U\\to Y$ be a section of $p$ over $U$ whose image is closed in\n$p^{-1}(V)$. There is a $V$-admissible blow-up\n$q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$ with the\nfollowing property. Let $Z'$ be a scheme with morphisms $r\\colon Z'\\to Y$\nand $p'\\colon Z'\\to\\widetilde X$ such that $p\\circ r=q\\circ p'$, and let $Y'$\nbe a scheme with a morphism $f_Y\\colon Y'\\to U$ and a quasi-compact morphism\n$f'\\colon Y'\\to Z'$ such that $r\\circ f'=f\\circ f_Y$ (for instance the base\nchanges of $Y$ and of $f$ along $q$). Then the closure of $f'(Y')$ is\ndisjoint from $p'^{-1}\\bigl(\\overline{q^{-1}(V\\setminus U)}\\bigr)$.",
+  "proof": [
+   {
+    "text": "We produce the two ideals $\\mathcal I_1,\\mathcal I_2$ required by\n[lemma-nagata-conrad-disjointness-blowup], applied to the opens\n$U\\subseteq V\\subseteq X$, to $p\\colon Y\\to X$ in the role of $Z\\to X$, and\nto $f\\colon U\\to Y$ in the role of the morphism whose source lies over\n$U$ (indeed $p\\circ f$ is the inclusion of $U$). The morphism $f$ is\nquasi-compact, since $U$ is quasi-compact and $Y$ is quasi-separated, so\nits scheme-theoretic image $\\overline{f(U)}$ has underlying set the\nclosure of $f(U)$.",
+    "uses": [
+     "lemma-nagata-conrad-disjointness-blowup"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Let $\\mathcal H$ be the ideal of the reduced structure on the closed subset\n$\\overline{V\\setminus U}$, so $V(\\mathcal H)=\\overline{V\\setminus U}$; since\n$V\\setminus U$ is closed in $V$, its closure misses $U$. Give $X\\setminus V$\na finite type closed subscheme structure $V(\\mathcal K)$ using\n[lemma-nagata-qc-open-complement-ideal-exists].",
+    "uses": [
+     "lemma-nagata-qc-open-complement-ideal-exists"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "We first check $p\\bigl(p^{-1}(V(\\mathcal H^2))\\cap\\overline{f(U)}\\bigr) \\subseteq X\\setminus V$ as sets. Indeed a point of the left-hand side lies\nin $\\overline{V\\setminus U}$, and if it lay in $V$ then, $f(U)$ being closed\nin $p^{-1}(V)$, the point of $\\overline{f(U)}$ above it would lie in $f(U)$\nand so map into $U$, which is disjoint from $\\overline{V\\setminus U}$. As\n$\\mathcal K$ is of finite type,\n[lemma-nagata-finite-type-ideal-power-in-ideal] gives an $n$ with\n\n$$\n\\mathcal K^n\\cdot\\mathcal O_Y\\subseteq\n\\mathcal H^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}} .\n$$",
+    "uses": [
+     "lemma-nagata-finite-type-ideal-power-in-ideal"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "The ideal $\\mathcal H$ need not be of finite type. By\n[lemma-nagata-ideal-directed-union-finite-type] it is the directed\nsupremum of its finite type quasi-coherent subideals $\\mathcal I_{1,\\alpha}$;\nproducts and inverse images of ideals commute with directed suprema, so\n$\\mathcal H^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}}$ is the directed\nsupremum of the $\\mathcal I_{1,\\alpha}^2\\cdot\\mathcal O_Y+ \\mathcal I_{\\overline{f(U)}}$, and\n[lemma-nagata-finite-type-ideal-compact] applied to the finite type\nideal $(\\mathcal K\\cdot\\mathcal O_Y)^n$ produces an $\\alpha$ with\n\n$$\n\\mathcal K^n\\cdot\\mathcal O_Y\\subseteq\n\\mathcal I_{1,\\alpha}^2\\cdot\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}} .\n$$",
+    "uses": [
+     "lemma-nagata-ideal-directed-union-finite-type",
+     "lemma-nagata-finite-type-ideal-compact"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Now take $\\mathcal I_1=\\mathcal I_{1,\\alpha}$ and\n$\\mathcal I_2=\\mathcal I_{1,\\alpha}^2+\\mathcal K^n$, so that\n$T_2=V(\\mathcal I_2)=T_1\\cap V(\\mathcal K^n)$ is disjoint from $V$, and\n$\\mathcal I=\\mathcal I_1+\\mathcal I_2$. The centre $\\mathcal I$ is of finite\ntype and $V(\\mathcal I)\\subseteq V(\\mathcal I_2)\\subseteq X\\setminus V$, so\nthe blow-up is $V$-admissible. The hypotheses of\n[lemma-nagata-conrad-disjointness-blowup] hold: $V\\setminus U\\subseteq\n\\overline{V\\setminus U}=V(\\mathcal H)\\subseteq V(\\mathcal I_{1,\\alpha})$\nbecause $\\mathcal I_{1,\\alpha}\\subseteq\\mathcal H$; $V(\\mathcal I_2)\\cap V=\\varnothing$;\n$p(f(U))=U$ because $f$ is a section of $p$; and\n$\\mathcal I_2\\mathcal O_Y=\\mathcal I_{1,\\alpha}^2\\mathcal O_Y+\\mathcal K^n\\mathcal O_Y\n\\subseteq\\mathcal I_{1,\\alpha}^2\\mathcal O_Y+\\mathcal I_{\\overline{f(U)}}$ by\nthe last display. Its blow-up is $q\\colon\\widetilde X=\\operatorname{Bl}_{\\mathcal I}(X)\\to X$,\nand for every $Z',r,p',Y',f_Y,f'$ as in the statement (where\n$f_Y\\colon Y'\\to U$ and $r\\circ f'=f\\circ f_Y$) it gives that\n$\\overline{f'(Y')}$ is disjoint from\n$p'^{-1}\\bigl(\\overline{q^{-1}(V\\setminus U)}\\bigr)$, which is the\nassertion.",
+    "uses": [
+     "lemma-nagata-conrad-disjointness-blowup"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(Conrad additionally arranges $\\mathcal I_{1,\\alpha}|_U=\\mathcal O_U$; this\nis not needed here, because $V(\\mathcal I)\\subseteq V(\\mathcal K^n)$ is\nalready disjoint from $V$, hence from $U$.)",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

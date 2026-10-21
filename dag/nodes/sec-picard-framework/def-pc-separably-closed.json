@@ -1,161 +1,128 @@
 {
-  "id": "def-pc-separably-closed",
-  "blueprint": {
-    "is": "def-pc-separably-closed",
-    "from": null,
-    "same_as": null
+ "id": "def-pc-separably-closed",
+ "blueprint": {
+  "is": "def-pc-separably-closed",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Separably closed fields",
+ "statement": "A field $k$ is *separably closed* if every nonconstant separable\npolynomial $f\\in k[T]$ has a root in $k$ (equivalently, $k$ has no\nnontrivial finite separable field extension; the equivalence of the two\nformulations is [lem-pc-sepclosed-finite-sep-trivial]).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-dense-points/def-pc-separably-closed.md",
+  "place": "node def-pc-separably-closed, order 747"
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-polynomial-ring",
+  "def-pc-separable-polynomial",
+  "def-weil-polynomial-root",
+  "def-pc-field-extension",
+  "def-pc-field-tower"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -n 'class IsSepClosed\\|theorem exists_root\\|theorem of_exists_root' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
+   "results": "class IsSepClosed (k) [Field k] : Prop where splits_of_separable : ∀ p : k[X], p.Separable → p.Splits (line 66); IsSepClosed.exists_root [IsSepClosed k] (p) (hp : p.degree ≠ 0) (hsep : p.Separable) : ∃ x, IsRoot p x (line 95); IsSepClosed.of_exists_root (H : ∀ p, p.Monic → Irreducible p → Separable p → ∃ x, p.eval x = 0) : IsSepClosed k (line 176)",
+   "date": "2026-10-09",
+   "verdict": "match: Mathlib's definition is the polynomial formulation, in the form 'every separable polynomial splits'; it is equivalent to the root form of the statement by exists_root (one direction) and of_exists_root (the other: a monic irreducible polynomial is nonconstant)"
   },
-  "kind": "definition",
-  "title": "Separably closed fields",
-  "statement": "A field $k$ is *separably closed* if every nonconstant separable\npolynomial $f\\in k[T]$ has a root in $k$ (equivalently, $k$ has no\nnontrivial finite separable field extension; the equivalence of the two\nformulations is [lem-pc-sepclosed-finite-sep-trivial]).",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-dense-points/def-pc-separably-closed.md",
-    "place": "node def-pc-separably-closed, order 747"
+  {
+   "tool": "grep",
+   "query": "grep -n 'algebraMap_surjective\\|eq_bot_of_isSepClosed_of_isSeparable\\|separableClosure_eq_bot_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
+   "results": "IsSepClosed.algebraMap_surjective [IsSepClosed k] [Algebra k K] [Algebra.IsSeparable k K] (line 198); IntermediateField.eq_bot_of_isSepClosed_of_isSeparable (line 219); IsSepClosed.separableClosure_eq_bot_iff (line 331)",
+   "date": "2026-10-09",
+   "verdict": "the second formulation (no nontrivial finite separable extension) is not Mathlib's definition; Mathlib proves the polynomial form implies it (algebraMap_surjective) — the content of lem-pc-sepclosed-finite-sep-trivial"
   },
-  "stmt_deps": [
-    "def-weil-field",
-    "def-weil-polynomial-ring",
-    "def-pc-separable-polynomial",
-    "def-weil-polynomial-root",
-    "def-pc-field-extension",
-    "def-pc-field-tower"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -n 'class IsSepClosed\\|theorem exists_root\\|theorem of_exists_root' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
-      "results": "class IsSepClosed (k) [Field k] : Prop where splits_of_separable : ∀ p : k[X], p.Separable → p.Splits (line 66); IsSepClosed.exists_root [IsSepClosed k] (p) (hp : p.degree ≠ 0) (hsep : p.Separable) : ∃ x, IsRoot p x (line 95); IsSepClosed.of_exists_root (H : ∀ p, p.Monic → Irreducible p → Separable p → ∃ x, p.eval x = 0) : IsSepClosed k (line 176)",
-      "date": "2026-10-09",
-      "verdict": "match: Mathlib's definition is the polynomial formulation, in the form 'every separable polynomial splits'; it is equivalent to the root form of the statement by exists_root (one direction) and of_exists_root (the other: a monic irreducible polynomial is nonconstant)"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -n 'algebraMap_surjective\\|eq_bot_of_isSepClosed_of_isSeparable\\|separableClosure_eq_bot_iff' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
-      "results": "IsSepClosed.algebraMap_surjective [IsSepClosed k] [Algebra k K] [Algebra.IsSeparable k K] (line 198); IntermediateField.eq_bot_of_isSepClosed_of_isSeparable (line 219); IsSepClosed.separableClosure_eq_bot_iff (line 331)",
-      "date": "2026-10-09",
-      "verdict": "the second formulation (no nontrivial finite separable extension) is not Mathlib's definition; Mathlib proves the polynomial form implies it (algebraMap_surjective) — the content of lem-pc-sepclosed-finite-sep-trivial"
-    },
-    {
-      "tool": "leansearch",
-      "query": "separably closed field every separable polynomial has a root",
-      "results": "IsSepClosed.exists_root, IsSepClosed.of_exists_root, IsSepClosed.exists_eval₂_eq_zero_of_injective, IsSepClosed.mk (FieldTheory.IsSepClosed)",
-      "date": "2026-10-09",
-      "verdict": "match (confirmed)"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "separably closed field: every nonconstant separable polynomial has a root",
-      "results": "IsSepClosed.exists_root, IsSepClosed.exists_aeval_eq_zero, IsSepClosed.of_exists_root, IsSepClosed.exists_eval₂_eq_zero",
-      "date": "2026-10-09",
-      "verdict": "match (confirmed)"
-    },
-    {
-      "tool": "grep",
-      "query": "sed -n 62,68p;93,97p;174,178p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
-      "results": "class IsSepClosed: splits_of_separable : ∀ p : k[X], p.Separable → p.Splits (66); exists_root (p) (hp : p.degree ≠ 0) (hsep : p.Separable) : ∃ x, IsRoot p x (95); of_exists_root (H : ∀ p, Monic → Irreducible → Separable → ∃ x, eval x p = 0) (176)",
-      "date": "2026-10-09",
-      "verdict": "confirmed"
-    }
-  ],
-  "mathlib_match": {
-    "declaration": "IsSepClosed",
-    "file": "Mathlib/FieldTheory/IsSepClosed.lean",
-    "how": "the first (polynomial) formulation, specializing in one line each way: Mathlib's `IsSepClosed k` (line 66) says every separable `p : k[X]` splits; 'every nonconstant separable polynomial has a root' follows by `IsSepClosed.exists_root` (line 95) and implies it by `IsSepClosed.of_exists_root` (line 176). The parenthetical second formulation is not the definition; its equivalence is lem-pc-sepclosed-finite-sep-trivial (pointer) Re-check 2026-10-09: types read; `exists_root` assumes `p.degree ≠ 0`, which for a separable p (hence p ≠ 0, degree ≠ ⊥) is exactly 'nonconstant', so the node's root form follows; conversely a monic irreducible polynomial is nonconstant, so the node's root form gives the hypothesis of `of_exists_root`."
+  {
+   "tool": "leansearch",
+   "query": "separably closed field every separable polynomial has a root",
+   "results": "IsSepClosed.exists_root, IsSepClosed.of_exists_root, IsSepClosed.exists_eval₂_eq_zero_of_injective, IsSepClosed.mk (FieldTheory.IsSepClosed)",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
   },
-  "status": "mathlib",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses",
-    "mentions_mathlib"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 747,
-  "blueprint_uses": [],
-  "blueprint_notes": [
-    {
-      "label": "implementation_note",
-      "text": "*Implementation note.* This is the same notion as [def-kun-separably-closed],\nwhich carries the Lean name `IsSepClosed`. Mathlib's `IsSepClosed k` is stated in\nthe polynomial form used here: every separable polynomial over $k$ splits. The source\nattached `\\lean{IsSepClosed}` to the pointer remark\n[rem-ptr-pc-separably-closed-1], a fragment left over from splitting this\ndefinition.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "IsSepClosed.iff_exists_root",
-          "module": "WeilConjectures.Mathlib.FieldTheory.IsSepClosed",
-          "lines": [
-            104,
-            112
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "IsSepClosed.iff_forall_finrank_eq_one",
-          "module": "WeilConjectures.Mathlib.FieldTheory.IsSepClosed",
-          "lines": [
-            124,
-            148
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "tool": "leanfinder",
+   "query": "separably closed field: every nonconstant separable polynomial has a root",
+   "results": "IsSepClosed.exists_root, IsSepClosed.exists_aeval_eq_zero, IsSepClosed.of_exists_root, IsSepClosed.exists_eval₂_eq_zero",
+   "date": "2026-10-09",
+   "verdict": "match (confirmed)"
   },
-  "pointers": [
-    {
-      "to": "lem-pc-sepclosed-finite-sep-trivial",
-      "was": [
-        "stmt"
-      ],
-      "reason": "forward pointer in the text, not a dependency: the lemma proves the two formulations equivalent",
-      "date": "2026-10-09"
-    }
-  ],
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "def-pc-separably-closed",
-    "worker": "stage1",
-    "summary": "Checked the statement against the blueprint (master order 747; no slopmaster2 Lean). Statement kept. Named its notions as stmt_deps: field (def-weil-field), polynomial ring and degree for 'nonconstant' (def-weil-polynomial-ring), separable polynomial (new Mathlib leaf def-pc-separable-polynomial = Polynomial.Separable, coprime with the formal derivative), root (def-weil-polynomial-root), and for the parenthetical second formulation field extension (def-pc-field-extension) and finite separable extension (def-pc-field-tower). Mathlib match IsSepClosed, which is the polynomial formulation in 'every separable polynomial splits' form, equivalent to the root form by IsSepClosed.exists_root / IsSepClosed.of_exists_root; status mathlib. pointers left as is. def-kun-separably-closed states the same notion in the second formulation: a merge candidate."
-  },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass; Mathlib leaf (IsSepClosed, first formulation)"
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-prop-picard-dense-points",
-  "lean": {
-    "module": "Mathlib.FieldTheory.IsSepClosed",
-    "declaration": "IsSepClosed",
-    "declarations": [
-      "IsSepClosed",
-      "IsSepClosure"
-    ],
-    "statement": "class IsSepClosed : Prop where splits_of_separable : ∀ p : k[X], p.Separable → p.Splits; class IsSepClosure [Algebra k K] : Prop where sep_closed : IsSepClosed K; separable : Algebra.IsSeparable k K",
-    "branch": "mathlib",
-    "by": "L",
-    "date": "2026-10-11",
-    "existing": true,
-    "note": "Separably closed fields are `[IsSepClosed k]`, a separable closure `[IsSepClosure k K]` (mathlib_match; R1 dea4865ec, R-sht; STATE STRICT HENSELIZATION TRIPLES). Lead note 2026-10-11 15:21 UTC: recorded by bookkeeping agent B-1521 of L; name and signature read in the pinned Mathlib of the slopmaster2 checkout (.lake/packages/mathlib)."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "A field $k$ is *separably closed* if every nonconstant separable\npolynomial $f\\in k[T]$ has a root in $k$ (equivalently, $k$ has no\nnontrivial finite separable field extension; the equivalence of the two\nformulations is [lem-pc-sepclosed-finite-sep-trivial]).",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "grep",
+   "query": "sed -n 62,68p;93,97p;174,178p ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/FieldTheory/IsSepClosed.lean",
+   "results": "class IsSepClosed: splits_of_separable : ∀ p : k[X], p.Separable → p.Splits (66); exists_root (p) (hp : p.degree ≠ 0) (hsep : p.Separable) : ∃ x, IsRoot p x (95); of_exists_root (H : ∀ p, Monic → Irreducible → Separable → ∃ x, eval x p = 0) (176)",
+   "date": "2026-10-09",
+   "verdict": "confirmed"
   }
+ ],
+ "mathlib_match": {
+  "declaration": "IsSepClosed",
+  "file": "Mathlib/FieldTheory/IsSepClosed.lean",
+  "how": "the first (polynomial) formulation, specializing in one line each way: Mathlib's `IsSepClosed k` (line 66) says every separable `p : k[X]` splits; 'every nonconstant separable polynomial has a root' follows by `IsSepClosed.exists_root` (line 95) and implies it by `IsSepClosed.of_exists_root` (line 176). The parenthetical second formulation is not the definition; its equivalence is lem-pc-sepclosed-finite-sep-trivial (pointer) Re-check 2026-10-09: types read; `exists_root` assumes `p.degree ≠ 0`, which for a separable p (hence p ≠ 0, degree ≠ ⊥) is exactly 'nonconstant', so the node's root form follows; conversely a monic irreducible polynomial is nonconstant, so the node's root form gives the hypothesis of `of_exists_root`."
+ },
+ "status": "mathlib",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses",
+  "mentions_mathlib"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 747,
+ "blueprint_uses": [],
+ "blueprint_notes": [
+  {
+   "label": "implementation_note",
+   "text": "*Implementation note.* This is the same notion as [def-kun-separably-closed],\nwhich carries the Lean name `IsSepClosed`. Mathlib's `IsSepClosed k` is stated in\nthe polynomial form used here: every separable polynomial over $k$ splits. The source\nattached `\\lean{IsSepClosed}` to the pointer remark\n[rem-ptr-pc-separably-closed-1], a fragment left over from splitting this\ndefinition.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {},
+ "pointers": [
+  {
+   "to": "lem-pc-sepclosed-finite-sep-trivial",
+   "was": [
+    "stmt"
+   ],
+   "reason": "forward pointer in the text, not a dependency: the lemma proves the two formulations equivalent",
+   "date": "2026-10-09"
+  }
+ ],
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-pc-separably-closed",
+  "worker": "stage1",
+  "summary": "Checked the statement against the blueprint (master order 747; no slopmaster2 Lean). Statement kept. Named its notions as stmt_deps: field (def-weil-field), polynomial ring and degree for 'nonconstant' (def-weil-polynomial-ring), separable polynomial (new Mathlib leaf def-pc-separable-polynomial = Polynomial.Separable, coprime with the formal derivative), root (def-weil-polynomial-root), and for the parenthetical second formulation field extension (def-pc-field-extension) and finite separable extension (def-pc-field-tower). Mathlib match IsSepClosed, which is the polynomial formulation in 'every separable polynomial splits' form, equivalent to the root form by IsSepClosed.exists_root / IsSepClosed.of_exists_root; status mathlib. pointers left as is. def-kun-separably-closed states the same notion in the second formulation: a merge candidate."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass; Mathlib leaf (IsSepClosed, first formulation)"
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-picard-dense-points",
+ "lean": {
+  "module": "Mathlib.FieldTheory.IsSepClosed",
+  "declaration": "IsSepClosed",
+  "declarations": [
+   "IsSepClosed",
+   "IsSepClosure"
+  ],
+  "statement": "class IsSepClosed : Prop where splits_of_separable : ∀ p : k[X], p.Separable → p.Splits; class IsSepClosure [Algebra k K] : Prop where sep_closed : IsSepClosed K; separable : Algebra.IsSeparable k K",
+  "branch": "mathlib",
+  "by": "L",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Separably closed fields are `[IsSepClosed k]`, a separable closure `[IsSepClosure k K]` (mathlib_match; R1 dea4865ec, R-sht; STATE STRICT HENSELIZATION TRIPLES). Lead note 2026-10-11 15:21 UTC: recorded by bookkeeping agent B-1521 of L; name and signature read in the pinned Mathlib of the slopmaster2 checkout (.lake/packages/mathlib)."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "A field $k$ is *separably closed* if every nonconstant separable\npolynomial $f\\in k[T]$ has a root in $k$ (equivalently, $k$ has no\nnontrivial finite separable field extension; the equivalence of the two\nformulations is [lem-pc-sepclosed-finite-sep-trivial]).",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,214 +1,203 @@
 {
-  "id": "lem-pc-flat-filtered-complex-comparison",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-pc-flat-base-change-cohom",
-      "place": "Step 2: flatness passes the Cech spectral-sequence page comparison to the abutment",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-pc-flat-filtered-complex-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-base-change-cohom",
+   "place": "Step 2: flatness passes the Cech spectral-sequence page comparison to the abutment",
+   "via": []
   },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-semicon",
-  "kind": "statement",
-  "title": "Flat comparison of filtered cochain complexes",
-  "statement": "Let $A\\to B$ be a flat homomorphism of commutative rings [def-weil-pbc-flat-ring-map]. Let $(C^\\bullet,F)$ be a bounded-below cochain complex of $A$-modules [def-pc-cochain-complex-modules] with a finite, exhaustive decreasing filtration by subcomplexes [def-sp-filtration], and let $(D^\\bullet,F)$ be such a filtered complex of $B$-modules. Suppose $u:C^\\bullet\\otimes_A B\\to D^\\bullet$ is a filtered cochain map. For the convergent spectral sequences [thm-sp-spectral-object-yields] of these filtrations, flatness canonically identifies every page $E_r(C\\otimes_A B)$ with $E_r(C)\\otimes_A B$, compatibly with differentials. If the induced map $E_2^{p,q}(C)\\otimes_A B\\to E_2^{p,q}(D)$ is an isomorphism for every $(p,q)$, then $H^n(u):H^n(C)\\otimes_A B\\to H^n(D)$ is an isomorphism for every $n$.",
-  "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0BDU, definition-spectral-sequence, and lemma-spectral-sequence-filtered-complex-functorial; applied in Cohomology of Schemes, Tag 02KH, quasi-separated case"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-flat-ring-map",
-    "def-pc-cochain-complex-modules",
-    "def-sp-filtration",
-    "thm-sp-spectral-object-yields",
-    "def-pc-flat-filtered-scalar-extension"
-  ],
-  "proof": [
-    {
-      "text": "Apply the functorial filtered-complex spectral-sequence construction [thm-sp-spectral-object-yields] to the filtered complexes C and C\\otimes_A B; the filtration F^pC\\otimes_A B is a filtration of C\\otimes_A B by subcomplexes because tensoring with the flat A-module B preserves the injections F^{p+1}C\\to F^pC\\to C [lem-weil-pbc-flat-tensor-exact], and it is again finite. By right exactness of the tensor product, gr^p(C\\otimes_A B)=(gr^pC)\\otimes_A B. The canonical map H^{p+q}(gr^pC)\\otimes_A B\\to H^{p+q}((gr^pC)\\otimes_A B) is an isomorphism by [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$); it is compatible with the boundary maps d_1 by naturality. Thus the E_1-page of C\\otimes_A B is canonically E_1(C)\\otimes_A B, compatibly with d_1.",
-      "uses": [
-        "thm-sp-spectral-object-yields",
-        "lem-weil-pbc-flat-tensor-exact",
-        "lem-pc-flat-tensor-complex-cohom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/homology.tex",
-        "place": "Tag 0BDU, definition-spectral-sequence, and the filtered-complex construction; flat tensor exactness in the proof of Tag 02KH"
-      }
-    },
-    {
-      "text": "Induct on r. Suppose the canonical map E_r(C)\\otimes_A B\\to E_r(C\\otimes_A B) is an isomorphism and commutes with d_r. By [thm-sp-spectral-object-yields] (a), E_{r+1} is naturally the cohomology of the page complex (E_r,d_r). Since the filtration is finite, each page complex through a given bidegree has only finitely many nonzero terms, and [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$) gives E_{r+1}(C)\\otimes_A B\\cong H(E_r(C)\\otimes_A B,d_r\\otimes1)\\cong E_{r+1}(C\\otimes_A B), compatibly with the page identifications. This proves the asserted canonical identification on every page. The filtered map u gives a morphism of these spectral sequences by the functoriality clause (c) of [thm-sp-spectral-object-yields]. Its E_2 map is an isomorphism by hypothesis, so by [lem-sp-page-induction] it is an isomorphism on every page E_r, r\\geq2, and on E_\\infty (for the finite filtration the pages stabilize, and E_\\infty is the one of [def-sp-convergence] appearing in clause (b) of [thm-sp-spectral-object-yields]).",
-      "uses": [
-        "thm-sp-spectral-object-yields",
-        "lem-pc-flat-tensor-complex-cohom",
-        "lem-sp-page-induction",
-        "def-sp-convergence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/homology.tex",
-        "place": "Lemma-spectral-sequence-filtered-complex-functorial and the page-by-page comparison argument following Tag 0BDU"
-      }
-    },
-    {
-      "text": "For each total degree n, the convergence clause (b) of [thm-sp-spectral-object-yields] identifies E_\\infty^{p,n-p} with the graded piece of the finite induced filtration on H^n(C\\otimes_A B) and on H^n(D), and H^n(u):H^n(C\\otimes_A B)\\to H^n(D) is a filtered map on these abutments inducing the E_\\infty map. Step 2 gives an isomorphism on every graded piece. Apply [lem-sp-finite-filtration-induction] to this filtered map; its finite-filtration hypothesis holds by clause (b). Hence H^n(C\\otimes_A B)\\to H^n(D) is an isomorphism. Composing with the canonical isomorphism H^n(C)\\otimes_A B\\cong H^n(C\\otimes_A B) of [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$), H^n(u):H^n(C)\\otimes_A B\\to H^n(D) is an isomorphism for every n.",
-      "uses": [
-        "thm-sp-spectral-object-yields",
-        "lem-sp-finite-filtration-induction",
-        "lem-pc-flat-tensor-complex-cohom"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/homology.tex",
-        "place": "Tag 0BDU convergence of a filtered complex and Lemma 0127 (finite-filtration induction)"
-      }
-    }
-  ],
-  "proof_deps": [
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "kind": "statement",
+ "title": "Flat comparison of filtered cochain complexes",
+ "statement": "Let $A\\to B$ be a flat homomorphism of commutative rings [def-weil-pbc-flat-ring-map]. Let $(C^\\bullet,F)$ be a bounded-below cochain complex of $A$-modules [def-pc-cochain-complex-modules] with a finite, exhaustive decreasing filtration by subcomplexes [def-sp-filtration], and let $(D^\\bullet,F)$ be such a filtered complex of $B$-modules. Suppose $u:C^\\bullet\\otimes_A B\\to D^\\bullet$ is a filtered cochain map. For the convergent spectral sequences [thm-sp-spectral-object-yields] of these filtrations, flatness canonically identifies every page $E_r(C\\otimes_A B)$ with $E_r(C)\\otimes_A B$, compatibly with differentials. If the induced map $E_2^{p,q}(C)\\otimes_A B\\to E_2^{p,q}(D)$ is an isomorphism for every $(p,q)$, then $H^n(u):H^n(C)\\otimes_A B\\to H^n(D)$ is an isomorphism for every $n$.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0BDU, definition-spectral-sequence, and lemma-spectral-sequence-filtered-complex-functorial; applied in Cohomology of Schemes, Tag 02KH, quasi-separated case"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "def-pc-cochain-complex-modules",
+  "def-sp-filtration",
+  "thm-sp-spectral-object-yields",
+  "def-pc-flat-filtered-scalar-extension"
+ ],
+ "proof": [
+  {
+   "text": "Apply the functorial filtered-complex spectral-sequence construction [thm-sp-spectral-object-yields] to the filtered complexes C and C\\otimes_A B; the filtration F^pC\\otimes_A B is a filtration of C\\otimes_A B by subcomplexes because tensoring with the flat A-module B preserves the injections F^{p+1}C\\to F^pC\\to C [lem-weil-pbc-flat-tensor-exact], and it is again finite. By right exactness of the tensor product, gr^p(C\\otimes_A B)=(gr^pC)\\otimes_A B. The canonical map H^{p+q}(gr^pC)\\otimes_A B\\to H^{p+q}((gr^pC)\\otimes_A B) is an isomorphism by [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$); it is compatible with the boundary maps d_1 by naturality. Thus the E_1-page of C\\otimes_A B is canonically E_1(C)\\otimes_A B, compatibly with d_1.",
+   "uses": [
     "thm-sp-spectral-object-yields",
     "lem-weil-pbc-flat-tensor-exact",
+    "lem-pc-flat-tensor-complex-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0BDU, definition-spectral-sequence, and the filtered-complex construction; flat tensor exactness in the proof of Tag 02KH"
+   }
+  },
+  {
+   "text": "Induct on r. Suppose the canonical map E_r(C)\\otimes_A B\\to E_r(C\\otimes_A B) is an isomorphism and commutes with d_r. By [thm-sp-spectral-object-yields] (a), E_{r+1} is naturally the cohomology of the page complex (E_r,d_r). Since the filtration is finite, each page complex through a given bidegree has only finitely many nonzero terms, and [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$) gives E_{r+1}(C)\\otimes_A B\\cong H(E_r(C)\\otimes_A B,d_r\\otimes1)\\cong E_{r+1}(C\\otimes_A B), compatibly with the page identifications. This proves the asserted canonical identification on every page. The filtered map u gives a morphism of these spectral sequences by the functoriality clause (c) of [thm-sp-spectral-object-yields]. Its E_2 map is an isomorphism by hypothesis, so by [lem-sp-page-induction] it is an isomorphism on every page E_r, r\\geq2, and on E_\\infty (for the finite filtration the pages stabilize, and E_\\infty is the one of [def-sp-convergence] appearing in clause (b) of [thm-sp-spectral-object-yields]).",
+   "uses": [
+    "thm-sp-spectral-object-yields",
     "lem-pc-flat-tensor-complex-cohom",
     "lem-sp-page-induction",
-    "lem-sp-finite-filtration-induction",
     "def-sp-convergence"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0BDU filtered-complex spectral sequence and functoriality, with finite-filtration comparison as in Lemma 0127; applied in Cohomology Tag 02KH"
+    "place": "Lemma-spectral-sequence-filtered-complex-functorial and the page-by-page comparison argument following Tag 0BDU"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "flat tensor filtered complex spectral sequence comparison isomorphism E2 abutment",
-      "results": "HomologicalComplex.ι_mapBifunctorFlipIso_hom and total-complex symmetry declarations; no spectral-sequence comparison",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Module.Flat, SpectralSequence, IsIso",
-      "results": "unknown identifier SpectralSequence",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "SpectralSequence|spectral sequence|filtered complex in Mathlib/Algebra/Homology",
-      "results": "none",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "flat tensor product of a filtered complex preserves spectral sequence and cohomology",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-11",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "isomorphism of spectral sequences on second page yields isomorphism of filtered abutments",
-      "results": "HomologicalComplex.HomologySequence.isIso_homologyMap_τ₃ and quasi-isomorphism declarations; no spectral-sequence comparison",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "E_infty|abutment|SpectralSequence in Mathlib",
-      "results": "none",
-      "date": "2026-10-11",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "lem-pc-flat-base-change-cohom",
-    "by": "worker",
-    "date": "2026-10-10"
-  },
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-pc-flat-filtered-complex-comparison",
-    "worker": "stage1",
-    "summary": "Split the flat filtered-complex comparison into (1) the E_1 identification after flat tensoring, using the filtered-complex spectral-sequence construction and exactness of tensor with a flat module, (2) induction through all pages and the functorial comparison map, and (3) passage from E_infinity to cohomology by finite-filtration induction. No new nodes were needed; all non-elementary inputs are existing nodes whose statements were checked verbatim.",
-    "blueprint": "Realizes Step 2 of lem-pc-flat-base-change-cohom: flatness passes the filtered Cech spectral-sequence page comparison to the abutment.",
-    "tool_uses": [
-      {
-        "node": "thm-sp-spectral-object-yields",
-        "why": "Generic filtered-complex spectral-sequence construction and functorial page identifications are required by the item's comparison argument."
-      },
-      {
-        "node": "lem-sp-finite-filtration-induction",
-        "why": "The final passage from isomorphisms on E_infinity graded pieces to the abutment is the generic finite-filtration induction."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sp-page-induction",
+  {
+   "text": "For each total degree n, the convergence clause (b) of [thm-sp-spectral-object-yields] identifies E_\\infty^{p,n-p} with the graded piece of the finite induced filtration on H^n(C\\otimes_A B) and on H^n(D), and H^n(u):H^n(C\\otimes_A B)\\to H^n(D) is a filtered map on these abutments inducing the E_\\infty map. Step 2 gives an isomorphism on every graded piece. Apply [lem-sp-finite-filtration-induction] to this filtered map; its finite-filtration hypothesis holds by clause (b). Hence H^n(C\\otimes_A B)\\to H^n(D) is an isomorphism. Composing with the canonical isomorphism H^n(C)\\otimes_A B\\cong H^n(C\\otimes_A B) of [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$), H^n(u):H^n(C)\\otimes_A B\\to H^n(D) is an isomorphism for every n.",
+   "uses": [
     "thm-sp-spectral-object-yields",
-    "lem-sp-finite-filtration-induction"
-  ],
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-ffc2226",
-    "group": "G1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffc2226 (reviewer sub-agent of L); spot-checked: Checked steps against thm-sp-spectral-object-yields (a)-(c), lem-sp-finite-filtration-induction, lem-pc-flat-tensor-complex-cohom, lem-sp-page-induction. FIX more, RETURN less: (1) C1 Step 2: E_2-iso to E_r/E_infty-iso of the morphism of spectral sequences re-derived inline; now cites lem-sp-page-induction (+def-sp-convergence for E_infty), added as tool use. (2) C1/class b Steps 1-2: flat tensor commuting with cohomology of gr^p C and of page complexes was restated inline from lem-weil-pbc-flat-tensor-exact; now cites lem-pc-flat-tensor-complex-cohom, with elementary stupid-truncation remark since that node assumes a bounded complex (gr^pC is only bounded below). (3) C1 Step 3: spectral argument gives H^n(C(x)B)->H^n(D); the identification H^n(C)(x)B = H^n(C(x)B) needed for the stated conclusion was missing; now cited from lem-pc-flat-tensor-complex-cohom. Second reading by G1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.Paper.FlatFilteredComplexComparison",
-    "declaration": "CategoryTheory.flatFilteredComplex_comparison",
-    "declarations": [
-      "CategoryTheory.flatFilteredComplex_comparison"
-    ],
-    "file": "lean/Sheaf/Paper/FlatFilteredComplexComparison.lean",
-    "statement": "theorem flatFilteredComplex_comparison (A : Type u) (B : Type v) [CommRing A] [CommRing B] (φ : A →+* B) (hφ : φ.Flat) (C : FilteredObject (CochainComplex (ModuleCat.{max u v w} A) ℤ)) (D : FilteredObject (CochainComplex (ModuleCat.{max u v w} B) ℤ)) (hCfin : C.filtration.IsFinite) (hDfin : D.filtration.IsFinite) (hC : ∃ N : ℤ, ∀ i : ℤ, i < N → IsZero (C.obj.X i)) (hD : ∃ N : ℤ, ∀ i : ℤ, i < N → IsZero (D.obj.X i)) (f : ModuleCat.filteredScalarObject.{u, v, w} φ C ⟶ D) (MA : FilteredPageTwoModel (ModuleCat.{max u v w} A)) (MB : FilteredPageTwoModel (ModuleCat.{max u v w} B)) : ∃ (s : ∀ p : ℤ, (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).obj (C.filtration.step p : CochainComplex (ModuleCat.{max u v w} A) ℤ) ≅ ((ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.step p : CochainComplex (ModuleCat.{max u v w} B) ℤ)) (g : ∀ (a b : ℤ) (hab : a ≤ b), (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).obj (C.filtration.complexQuotient a b hab) ≅ (ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.complexQuotient a b hab) (e : ∀ (r : ℤ) (hr : 2 ≤ r), (ModuleCat.filteredScalarComplex.{u, v, w} φ (ComplexShape.up' (⟨r, 1 - r⟩ : ℤ × ℤ))).obj ((MA.S.obj C).page r hr) ≅ (MB.S.obj (ModuleCat.filteredScalarObject.{u, v, w} φ C)).page r hr), (∀ p : ℤ, (s p).hom ≫ ((ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.step p).arrow = (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).map (C.filtration.step p).arrow) ∧ (∀ (a b : ℤ) (hab : a ≤ b), (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).map (C.filtration.complexQuotientπ a b hab) ≫ (g a b hab).hom = (s a).hom ≫ (ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.complexQuotientπ a b hab) ∧ (∀ (r : ℤ) (hr : 2 ≤ r) (p q : ℤ), (e r hr).hom.f (p, q) ≫ (MB.pageIso (ModuleCat.filteredScalarObject.{u, v, w} φ C) p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (MB.φ (ModuleCat.filteredScalarObject.{u, v, w} φ C) p r hr) (p + q)) = (ModuleCat.filteredScalarFunctor.{u, v, w} φ).map ((MA.pageIso C p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (MA.φ C p r hr) (p + q))) ≫ (ModuleCat.flatFilteredHomologyIso.{u, v, w} φ hφ (C.filtration.complexQuotient (p - r + 1) (p + 1) (by omega)) (p + q)).hom ≫ HomologicalComplex.homologyMap (g (p - r + 1) (p + 1) (by omega)).hom (p + q)) ∧ ((∀ p q : ℤ, IsIso ((e 2 le_rfl).hom.f (p, q) ≫ ((MB.S.map f).hom 2).f (p, q))) → ∀ n : ℤ, IsIso ((ModuleCat.flatFilteredHomologyIso.{u, v, w} φ hφ C.obj n).hom ≫ HomologicalComplex.homologyMap f.hom n))",
-    "branch": "sheaf-dag",
-    "by": "U1",
-    "date": "2026-10-11",
-    "existing": false,
-    "fixed_by": "R-ffc"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-ffc",
-    "group": "U1",
-    "result": "fix",
-    "note": "rings A,B + flat φ (RingHom.Flat); C,D FilteredObject of CochainComplex with IsFinite + bounded-below; f : scalar-extended filtered object ⟶ D; spectral sequences = any FilteredPageTwoModel MA,MB (dropped Classical.choose-of-sorried finite model); s/g tied by inclusion/projection eqns; page isos e r (r≥2) tied to pageIso image description via flat homology base change; E2-iso ⇒ H^n iso via flatFilteredHomologyIso ≫ homologyMap f; dropped duplicate new node(s) def-pc-finite-filtered-spectral-model (--drop-nodes; not merged, the item points at the landed declaration)"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed_proof": {
-    "date": "2026-10-20",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "H1",
-    "result": "pass",
-    "landing": "20261020T174759-L-796003",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-    "sorry_before": [
-      "CategoryTheory.flatFilteredComplex_comparison"
-    ],
-    "sorry_after": [
-      "CategoryTheory.flatFilteredComplex_comparison"
-    ]
+    "lem-sp-finite-filtration-induction",
+    "lem-pc-flat-tensor-complex-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0BDU convergence of a filtered complex and Lemma 0127 (finite-filtration induction)"
+   }
   }
+ ],
+ "proof_deps": [
+  "thm-sp-spectral-object-yields",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-flat-tensor-complex-cohom",
+  "lem-sp-page-induction",
+  "lem-sp-finite-filtration-induction",
+  "def-sp-convergence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0BDU filtered-complex spectral sequence and functoriality, with finite-filtration comparison as in Lemma 0127; applied in Cohomology Tag 02KH"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flat tensor filtered complex spectral sequence comparison isomorphism E2 abutment",
+   "results": "HomologicalComplex.ι_mapBifunctorFlipIso_hom and total-complex symmetry declarations; no spectral-sequence comparison",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, SpectralSequence, IsIso",
+   "results": "unknown identifier SpectralSequence",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SpectralSequence|spectral sequence|filtered complex in Mathlib/Algebra/Homology",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "flat tensor product of a filtered complex preserves spectral sequence and cohomology",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-11",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "isomorphism of spectral sequences on second page yields isomorphism of filtered abutments",
+   "results": "HomologicalComplex.HomologySequence.isIso_homologyMap_τ₃ and quasi-isomorphism declarations; no spectral-sequence comparison",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "E_infty|abutment|SpectralSequence in Mathlib",
+   "results": "none",
+   "date": "2026-10-11",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "lem-pc-flat-base-change-cohom",
+  "by": "worker",
+  "date": "2026-10-10"
+ },
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-pc-flat-filtered-complex-comparison",
+  "worker": "stage1",
+  "summary": "Split the flat filtered-complex comparison into (1) the E_1 identification after flat tensoring, using the filtered-complex spectral-sequence construction and exactness of tensor with a flat module, (2) induction through all pages and the functorial comparison map, and (3) passage from E_infinity to cohomology by finite-filtration induction. No new nodes were needed; all non-elementary inputs are existing nodes whose statements were checked verbatim.",
+  "blueprint": "Realizes Step 2 of lem-pc-flat-base-change-cohom: flatness passes the filtered Cech spectral-sequence page comparison to the abutment.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-spectral-object-yields",
+    "why": "Generic filtered-complex spectral-sequence construction and functorial page identifications are required by the item's comparison argument."
+   },
+   {
+    "node": "lem-sp-finite-filtration-induction",
+    "why": "The final passage from isomorphisms on E_infinity graded pieces to the abutment is the generic finite-filtration induction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-page-induction",
+  "thm-sp-spectral-object-yields",
+  "lem-sp-finite-filtration-induction"
+ ],
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ffc2226",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ffc2226 (reviewer sub-agent of L); spot-checked: Checked steps against thm-sp-spectral-object-yields (a)-(c), lem-sp-finite-filtration-induction, lem-pc-flat-tensor-complex-cohom, lem-sp-page-induction. FIX more, RETURN less: (1) C1 Step 2: E_2-iso to E_r/E_infty-iso of the morphism of spectral sequences re-derived inline; now cites lem-sp-page-induction (+def-sp-convergence for E_infty), added as tool use. (2) C1/class b Steps 1-2: flat tensor commuting with cohomology of gr^p C and of page complexes was restated inline from lem-weil-pbc-flat-tensor-exact; now cites lem-pc-flat-tensor-complex-cohom, with elementary stupid-truncation remark since that node assumes a bounded complex (gr^pC is only bounded below). (3) C1 Step 3: spectral argument gives H^n(C(x)B)->H^n(D); the identification H^n(C)(x)B = H^n(C(x)B) needed for the stated conclusion was missing; now cited from lem-pc-flat-tensor-complex-cohom. Second reading by G1 missed (1)-(3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FlatFilteredComplexComparison",
+  "declaration": "CategoryTheory.flatFilteredComplex_comparison",
+  "declarations": [
+   "CategoryTheory.flatFilteredComplex_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/FlatFilteredComplexComparison.lean",
+  "statement": "theorem flatFilteredComplex_comparison (A : Type u) (B : Type v) [CommRing A] [CommRing B] (φ : A →+* B) (hφ : φ.Flat) (C : FilteredObject (CochainComplex (ModuleCat.{max u v w} A) ℤ)) (D : FilteredObject (CochainComplex (ModuleCat.{max u v w} B) ℤ)) (hCfin : C.filtration.IsFinite) (hDfin : D.filtration.IsFinite) (hC : ∃ N : ℤ, ∀ i : ℤ, i < N → IsZero (C.obj.X i)) (hD : ∃ N : ℤ, ∀ i : ℤ, i < N → IsZero (D.obj.X i)) (f : ModuleCat.filteredScalarObject.{u, v, w} φ C ⟶ D) (MA : FilteredPageTwoModel (ModuleCat.{max u v w} A)) (MB : FilteredPageTwoModel (ModuleCat.{max u v w} B)) : ∃ (s : ∀ p : ℤ, (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).obj (C.filtration.step p : CochainComplex (ModuleCat.{max u v w} A) ℤ) ≅ ((ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.step p : CochainComplex (ModuleCat.{max u v w} B) ℤ)) (g : ∀ (a b : ℤ) (hab : a ≤ b), (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).obj (C.filtration.complexQuotient a b hab) ≅ (ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.complexQuotient a b hab) (e : ∀ (r : ℤ) (hr : 2 ≤ r), (ModuleCat.filteredScalarComplex.{u, v, w} φ (ComplexShape.up' (⟨r, 1 - r⟩ : ℤ × ℤ))).obj ((MA.S.obj C).page r hr) ≅ (MB.S.obj (ModuleCat.filteredScalarObject.{u, v, w} φ C)).page r hr), (∀ p : ℤ, (s p).hom ≫ ((ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.step p).arrow = (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).map (C.filtration.step p).arrow) ∧ (∀ (a b : ℤ) (hab : a ≤ b), (ModuleCat.filteredScalarComplex.{u, v, w} φ (.up ℤ)).map (C.filtration.complexQuotientπ a b hab) ≫ (g a b hab).hom = (s a).hom ≫ (ModuleCat.filteredScalarObject.{u, v, w} φ C).filtration.complexQuotientπ a b hab) ∧ (∀ (r : ℤ) (hr : 2 ≤ r) (p q : ℤ), (e r hr).hom.f (p, q) ≫ (MB.pageIso (ModuleCat.filteredScalarObject.{u, v, w} φ C) p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (MB.φ (ModuleCat.filteredScalarObject.{u, v, w} φ C) p r hr) (p + q)) = (ModuleCat.filteredScalarFunctor.{u, v, w} φ).map ((MA.pageIso C p q r hr).hom ≫ image.ι (HomologicalComplex.homologyMap (MA.φ C p r hr) (p + q))) ≫ (ModuleCat.flatFilteredHomologyIso.{u, v, w} φ hφ (C.filtration.complexQuotient (p - r + 1) (p + 1) (by omega)) (p + q)).hom ≫ HomologicalComplex.homologyMap (g (p - r + 1) (p + 1) (by omega)).hom (p + q)) ∧ ((∀ p q : ℤ, IsIso ((e 2 le_rfl).hom.f (p, q) ≫ ((MB.S.map f).hom 2).f (p, q))) → ∀ n : ℤ, IsIso ((ModuleCat.flatFilteredHomologyIso.{u, v, w} φ hφ C.obj n).hom ≫ HomologicalComplex.homologyMap f.hom n))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-11",
+  "existing": false,
+  "fixed_by": "R-ffc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ffc",
+  "group": "U1",
+  "result": "fix",
+  "note": "rings A,B + flat φ (RingHom.Flat); C,D FilteredObject of CochainComplex with IsFinite + bounded-below; f : scalar-extended filtered object ⟶ D; spectral sequences = any FilteredPageTwoModel MA,MB (dropped Classical.choose-of-sorried finite model); s/g tied by inclusion/projection eqns; page isos e r (r≥2) tied to pageIso image description via flat homology base change; E2-iso ⇒ H^n iso via flatFilteredHomologyIso ≫ homologyMap f; dropped duplicate new node(s) def-pc-finite-filtered-spectral-model (--drop-nodes; not merged, the item points at the landed declaration)"
+ },
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261020T174759-L-796003",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.flatFilteredComplex_comparison"
+  ],
+  "sorry_after": [
+   "CategoryTheory.flatFilteredComplex_comparison"
+  ]
+ }
 }

@@ -1,162 +1,151 @@
 {
-  "id": "def-sbc-smooth-morphisms",
-  "blueprint": {
-    "is": "def-sbc-smooth-morphisms",
-    "from": null,
-    "same_as": null
+ "id": "def-sbc-smooth-morphisms",
+ "blueprint": {
+  "is": "def-sbc-smooth-morphisms",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "definition",
+ "title": "Smooth morphisms",
+ "statement": "A morphism of schemes $f:X\\to Y$ [def-weil-pbc-scheme-conventions] is *smooth* if it is locally of finite presentation [def-sbc-locally-finite-presentation] and formally smooth [def-sbc-formally-smooth], the latter meaning that for every first order thickening $T\\subset T'$ of affine schemes over $Y$ [def-sbc-first-order-thickening] and every morphism $T\\to X$ over $Y$ there is a morphism $T'\\to X$ over $Y$ whose restriction to $T$ is the given one ([Stacks Project, Definition 37.11.1](https://stacks.math.columbia.edu/tag/02H0)); by [Lemma 37.11.7](https://stacks.math.columbia.edu/tag/02H6) this is the notion of a smooth morphism of [Stacks Project, Section 29.35](https://stacks.math.columbia.edu/tag/01V4), defined there affine-locally by smooth ring maps.\n\nLet $n\\geq0$ be an integer. A smooth morphism $f:X\\to Y$ is *smooth of relative dimension $n$ at a point* $x\\in X$ if the fibre $X_{f(x)}=X\\times_Y\\operatorname{Spec}\\kappa(f(x))$ [def-pc-base-change] through $x$ has dimension $n$ at $x$, that is $\\dim_x\\bigl(X_{f(x)}\\bigr)=n$ [def-kun-dimension]; $f$ is *smooth of relative dimension $n$* if it is smooth and this holds at every point $x\\in X$. (For a smooth morphism the function $x\\mapsto\\dim_x(X_{f(x)})$ is locally constant, [Stacks Project, Lemma 29.35.12](https://stacks.math.columbia.edu/tag/02G1), so this is the notion of [Stacks Project, Definition 29.35.11](https://stacks.math.columbia.edu/tag/02G2): $f$ smooth with all nonempty fibres equidimensional of dimension $n$.) An *etale* morphism is a smooth morphism of relative dimension zero.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-smooth/def-sbc-smooth-morphisms.md",
+  "place": "node def-sbc-smooth-morphisms, order 1374",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02H0"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02H6"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01V4"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02G2"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 02G1"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-sbc-locally-finite-presentation",
+  "def-sbc-formally-smooth",
+  "def-sbc-first-order-thickening",
+  "def-pc-base-change",
+  "def-kun-dimension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "'^class|^def|^abbrev' in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "results": "line 62: class AlgebraicGeometry.Smooth (f : X ⟶ Y): for all affine opens U ⊆ Y, V ⊆ f⁻¹ᵁ U the ring map Γ(Y,U) → Γ(X,V) is RingHom.Smooth (Stacks Definition 29.35.2, Tag 01V5, affine-local form); line 135: class SmoothOfRelativeDimension n f: every x has affine opens U, V ∋ x with Γ(Y,U) → Γ(X,V) IsStandardSmoothOfRelativeDimension n; line 241: Smooth → LocallyOfFinitePresentation; line 113: Smooth → Flat; lemma Smooth.iff_forall_exists_isStandardSmooth",
+   "date": "2026-10-09",
+   "verdict": "same notion, different definition: Mathlib's Smooth is the Stacks Section 29.35 definition, which the node's definition (locally of finite presentation + formally smooth, Tag 02H0) equals by Stacks Lemma 37.11.7 (Tag 02H6), a theorem rather than a one-line specialization; SmoothOfRelativeDimension n is Stacks Definition 29.35.11 (Tag 02G2) in standard-smooth form"
   },
-  "kind": "definition",
-  "title": "Smooth morphisms",
-  "statement": "A morphism of schemes $f:X\\to Y$ [def-weil-pbc-scheme-conventions] is *smooth* if it is locally of finite presentation [def-sbc-locally-finite-presentation] and formally smooth [def-sbc-formally-smooth], the latter meaning that for every first order thickening $T\\subset T'$ of affine schemes over $Y$ [def-sbc-first-order-thickening] and every morphism $T\\to X$ over $Y$ there is a morphism $T'\\to X$ over $Y$ whose restriction to $T$ is the given one ([Stacks Project, Definition 37.11.1](https://stacks.math.columbia.edu/tag/02H0)); by [Lemma 37.11.7](https://stacks.math.columbia.edu/tag/02H6) this is the notion of a smooth morphism of [Stacks Project, Section 29.35](https://stacks.math.columbia.edu/tag/01V4), defined there affine-locally by smooth ring maps.\n\nLet $n\\geq0$ be an integer. A smooth morphism $f:X\\to Y$ is *smooth of relative dimension $n$ at a point* $x\\in X$ if the fibre $X_{f(x)}=X\\times_Y\\operatorname{Spec}\\kappa(f(x))$ [def-pc-base-change] through $x$ has dimension $n$ at $x$, that is $\\dim_x\\bigl(X_{f(x)}\\bigr)=n$ [def-kun-dimension]; $f$ is *smooth of relative dimension $n$* if it is smooth and this holds at every point $x\\in X$. (For a smooth morphism the function $x\\mapsto\\dim_x(X_{f(x)})$ is locally constant, [Stacks Project, Lemma 29.35.12](https://stacks.math.columbia.edu/tag/02G1), so this is the notion of [Stacks Project, Definition 29.35.11](https://stacks.math.columbia.edu/tag/02G2): $f$ smooth with all nonempty fibres equidimensional of dimension $n$.) An *etale* morphism is a smooth morphism of relative dimension zero.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-def-smooth/def-sbc-smooth-morphisms.md",
-    "place": "node def-sbc-smooth-morphisms, order 1374",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 02H0"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 02H6"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01V4"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 02G2"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 02G1"
-      }
-    ]
+  {
+   "tool": "grep",
+   "query": "-rl 'FormallySmooth' in Mathlib/AlgebraicGeometry/",
+   "results": "only stalk-level lemmas in Morphisms/Smooth.lean (formallySmooth_stalkMap_iff, exists_smooth_of_formallySmooth_stalk); no scheme-level formally smooth class, so Mathlib cannot state the node's definition verbatim",
+   "date": "2026-10-09",
+   "verdict": "no match for the lifting-property form"
   },
-  "stmt_deps": [
-    "def-weil-pbc-scheme-conventions",
-    "def-sbc-locally-finite-presentation",
-    "def-sbc-formally-smooth",
-    "def-sbc-first-order-thickening",
-    "def-pc-base-change",
-    "def-kun-dimension"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "'^class|^def|^abbrev' in Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
-      "results": "line 62: class AlgebraicGeometry.Smooth (f : X ⟶ Y): for all affine opens U ⊆ Y, V ⊆ f⁻¹ᵁ U the ring map Γ(Y,U) → Γ(X,V) is RingHom.Smooth (Stacks Definition 29.35.2, Tag 01V5, affine-local form); line 135: class SmoothOfRelativeDimension n f: every x has affine opens U, V ∋ x with Γ(Y,U) → Γ(X,V) IsStandardSmoothOfRelativeDimension n; line 241: Smooth → LocallyOfFinitePresentation; line 113: Smooth → Flat; lemma Smooth.iff_forall_exists_isStandardSmooth",
-      "date": "2026-10-09",
-      "verdict": "same notion, different definition: Mathlib's Smooth is the Stacks Section 29.35 definition, which the node's definition (locally of finite presentation + formally smooth, Tag 02H0) equals by Stacks Lemma 37.11.7 (Tag 02H6), a theorem rather than a one-line specialization; SmoothOfRelativeDimension n is Stacks Definition 29.35.11 (Tag 02G2) in standard-smooth form"
-    },
-    {
-      "tool": "grep",
-      "query": "-rl 'FormallySmooth' in Mathlib/AlgebraicGeometry/",
-      "results": "only stalk-level lemmas in Morphisms/Smooth.lean (formallySmooth_stalkMap_iff, exists_smooth_of_formallySmooth_stalk); no scheme-level formally smooth class, so Mathlib cannot state the node's definition verbatim",
-      "date": "2026-10-09",
-      "verdict": "no match for the lifting-property form"
-    },
-    {
-      "tool": "grep",
-      "query": "'^class|^abbrev' in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
-      "results": "line 41: class AlgebraicGeometry.Etale (f : X ⟶ Y) (defined via standard etale / unramified + smooth)",
-      "date": "2026-10-09",
-      "verdict": "match for the etale clause (same notion; Stacks lemma-etale-smooth-unramified, Tag 02GK, identifies etale with smooth of relative dimension 0)"
-    },
-    {
-      "tool": "leansearch",
-      "query": "formally smooth morphism of schemes infinitesimal lifting property first order thickening (also: smooth morphism of schemes)",
-      "results": "AlgebraicGeometry.IsSmooth (deprecated alias, since 2026-02-09, of AlgebraicGeometry.Smooth, Morphisms/Smooth.lean:62/69), Algebra.FormallySmooth.* (ring level)",
-      "date": "2026-10-09",
-      "verdict": "same notion via Stacks 02H6, not a one-line specialization; unchanged"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "formally smooth morphism of schemes: lifting along first order thickenings of affine schemes",
-      "results": "AlgebraicGeometry.FormallyUnramified, formallyUnramified_iff, IsSmooth ('A morphism f : X → Y of schemes is smooth'); no lifting characterization of Smooth for schemes",
-      "date": "2026-10-09",
-      "verdict": "no match for the lifting-property form"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n '^class|deprecated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
-      "results": "Smooth.lean:62 class Smooth (affine-locally RingHom.Smooth), 69 deprecated alias IsSmooth, 135 class SmoothOfRelativeDimension; Etale.lean:41 class Etale, 48 deprecated alias IsEtale; no FormallySmooth class or lifting criterion for schemes",
-      "date": "2026-10-09",
-      "verdict": "confirmed: recorded match exists; the agreement with the node's definition remains Stacks 02H6; unchanged"
-    }
-  ],
-  "mathlib_match": {
-    "declaration": "AlgebraicGeometry.Smooth",
-    "file": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
-    "how": "same notion, not a one-line specialization: Mathlib defines Smooth affine-locally by smooth ring maps (Stacks Definition 29.35.2, Tag 01V5) and SmoothOfRelativeDimension n by standard smooth presentations of relative dimension n (Tag 02G2); the identification with the node's definition (locally of finite presentation and formally smooth) is Stacks Lemma 37.11.7, Tag 02H6. Etale: AlgebraicGeometry.Etale in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean"
+  {
+   "tool": "grep",
+   "query": "'^class|^abbrev' in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "results": "line 41: class AlgebraicGeometry.Etale (f : X ⟶ Y) (defined via standard etale / unramified + smooth)",
+   "date": "2026-10-09",
+   "verdict": "match for the etale clause (same notion; Stacks lemma-etale-smooth-unramified, Tag 02GK, identifies etale with smooth of relative dimension 0)"
   },
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1374,
-  "blueprint_uses": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "leansearch",
+   "query": "formally smooth morphism of schemes infinitesimal lifting property first order thickening (also: smooth morphism of schemes)",
+   "results": "AlgebraicGeometry.IsSmooth (deprecated alias, since 2026-02-09, of AlgebraicGeometry.Smooth, Morphisms/Smooth.lean:62/69), Algebra.FormallySmooth.* (ring level)",
+   "date": "2026-10-09",
+   "verdict": "same notion via Stacks 02H6, not a one-line specialization; unchanged"
   },
-  "split_report": {
-    "date": "2026-10-09",
-    "item": "def-sbc-smooth-morphisms",
-    "worker": "stage1",
-    "summary": "Repaired the garbled statement from Stacks Tag 02H0 (the blueprint source is the only copy; the parent commit's LaTeX and slopmaster2 have no definition): removed the duplicated clause 'smooth morphisms by flatness and smooth fibres is ... a criterion stated below' (a pointer to sbc-lem-smooth-criterion, which depends on this node, not a dependency) and the duplicated 'being'; replaced the blueprint's gloss of formal smoothness (extension Zariski-locally on T' for a nilpotent ideal, which is not what Tag 02H0 says) by the Stacks text (lifting against first order thickenings of affine schemes); restored the dangling 'A fibre through that point has dimension n' as the definition of 'smooth of relative dimension n at x' via dim_x of the fibre X_{f(x)}, with Tags 02G1/02G2 cited for the agreement with Stacks; kept the etale clause. Statement dependencies: scheme conventions, locally of finite presentation (new, Mathlib leaf), formally smooth (new, unsplit), first order thickening (new, unsplit), fibre (def-pc-base-change), dimension at a point (def-kun-dimension). Mathlib has AlgebraicGeometry.Smooth / SmoothOfRelativeDimension / Etale for the same notions, by the affine-local (Tag 01V5) definition; recorded as a match of the notion, with the equivalence Tag 02H6 noted."
+  {
+   "tool": "leanfinder",
+   "query": "formally smooth morphism of schemes: lifting along first order thickenings of affine schemes",
+   "results": "AlgebraicGeometry.FormallyUnramified, formallyUnramified_iff, IsSmooth ('A morphism f : X → Y of schemes is smooth'); no lifting characterization of Smooth for schemes",
+   "date": "2026-10-09",
+   "verdict": "no match for the lifting-property form"
   },
-  "reviewed": {
-    "date": "2026-10-09",
-    "by": "L",
-    "result": "pass"
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-def-smooth",
-  "lean": {
-    "module": "Mathlib.AlgebraicGeometry.Morphisms.Smooth",
-    "declaration": "AlgebraicGeometry.Smooth",
-    "declarations": [
-      "AlgebraicGeometry.Smooth",
-      "AlgebraicGeometry.SmoothOfRelativeDimension",
-      "AlgebraicGeometry.Etale"
-    ],
-    "statement": "class Smooth (f : X ⟶ Y) : Prop",
-    "branch": "mathlib",
-    "by": "K1",
-    "date": "2026-10-11",
-    "existing": true,
-    "note": "Reuse the existing notions, not new predicates: Smooth and SmoothOfRelativeDimension are in Mathlib.AlgebraicGeometry.Morphisms.Smooth; Etale is in Mathlib.AlgebraicGeometry.Morphisms.Etale. Smooth has ambient {X Y : Scheme.{u}}; SmoothOfRelativeDimension has (n : ℕ) {X Y : Scheme.{u}} (f : X ⟶ Y). Stacks 02H6 identifies Smooth with locally of finite presentation and the dependency FormallySmooth (02H0). Standard-smooth charts of relative dimension n have differentials free of rank n; Stacks 02G1 identifies that rank with dimension at x of the fibre and 02G2 defines constant relative dimension. Etale.iff_smoothOfRelativeDimension_zero identifies the final clause. No node statement or dependencies changed; the duplicate sandbox module was removed in the second reading."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-dsm1444",
-    "group": "K1",
-    "result": "pass",
-    "note": "Smooth = Mathlib class smooth_appLE (affine-local smooth ring maps) = lfp + formally smooth by Stacks 02H6; SmoothOfRelativeDimension n (standard-smooth charts of rel dim n at every x) = smooth with dim_x fibre = n everywhere by 02G1/02G2 (Omega rank = fibre dim, smooth locally standard smooth); n:ℕ covers n=0; Etale = SmoothOfRelativeDimension 0 by Etale.iff_smoothOfRelativeDimension_zero; empty X vacuous both sides; no private copy kept"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "A morphism of schemes $f:X\\to Y$ is *smooth* if it is locally of\nfinite presentation and formally smooth, the latter meaning that every\nmorphism $T\\to X$ over $Y$ from a closed subscheme $T\\subset T'$\ndefined by a nilpotent ideal sheaf extends, Zariski locally on $T'$,\nto a morphism $T'\\to X$ over $Y$. A smooth morphism $f$ has\n*relative dimension $n$ at a point $x\\in X$* if the fibre\n$X_{f(x)}$ through that point has dimension $n$ at $x$; it has relative dimension\n$n$ if this holds at every point. An\n*etale* morphism is a smooth\nmorphism of relative dimension zero.\n\nThis notion of smoothness agrees with the one defined by local standard\nsmooth presentations (Stacks Project, Tag `02H6`). Smooth morphisms are\nexactly the flat morphisms locally of finite presentation with smooth\nfibres, and the relative dimension of a smooth morphism at $x$ is a\nlocally constant function of $x$.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "grep",
+   "query": "rg -n '^class|deprecated' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry/Morphisms/Etale.lean",
+   "results": "Smooth.lean:62 class Smooth (affine-locally RingHom.Smooth), 69 deprecated alias IsSmooth, 135 class SmoothOfRelativeDimension; Etale.lean:41 class Etale, 48 deprecated alias IsEtale; no FormallySmooth class or lifting criterion for schemes",
+   "date": "2026-10-09",
+   "verdict": "confirmed: recorded match exists; the agreement with the node's definition remains Stacks 02H6; unchanged"
   }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Smooth",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+  "how": "same notion, not a one-line specialization: Mathlib defines Smooth affine-locally by smooth ring maps (Stacks Definition 29.35.2, Tag 01V5) and SmoothOfRelativeDimension n by standard smooth presentations of relative dimension n (Tag 02G2); the identification with the node's definition (locally of finite presentation and formally smooth) is Stacks Lemma 37.11.7, Tag 02H6. Etale: AlgebraicGeometry.Etale in Mathlib/AlgebraicGeometry/Morphisms/Etale.lean"
+ },
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1374,
+ "blueprint_uses": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-09",
+  "item": "def-sbc-smooth-morphisms",
+  "worker": "stage1",
+  "summary": "Repaired the garbled statement from Stacks Tag 02H0 (the blueprint source is the only copy; the parent commit's LaTeX and slopmaster2 have no definition): removed the duplicated clause 'smooth morphisms by flatness and smooth fibres is ... a criterion stated below' (a pointer to sbc-lem-smooth-criterion, which depends on this node, not a dependency) and the duplicated 'being'; replaced the blueprint's gloss of formal smoothness (extension Zariski-locally on T' for a nilpotent ideal, which is not what Tag 02H0 says) by the Stacks text (lifting against first order thickenings of affine schemes); restored the dangling 'A fibre through that point has dimension n' as the definition of 'smooth of relative dimension n at x' via dim_x of the fibre X_{f(x)}, with Tags 02G1/02G2 cited for the agreement with Stacks; kept the etale clause. Statement dependencies: scheme conventions, locally of finite presentation (new, Mathlib leaf), formally smooth (new, unsplit), first order thickening (new, unsplit), fibre (def-pc-base-change), dimension at a point (def-kun-dimension). Mathlib has AlgebraicGeometry.Smooth / SmoothOfRelativeDimension / Etale for the same notions, by the affine-local (Tag 01V5) definition; recorded as a match of the notion, with the equivalence Tag 02H6 noted."
+ },
+ "reviewed": {
+  "date": "2026-10-09",
+  "by": "L",
+  "result": "pass"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-def-smooth",
+ "lean": {
+  "module": "Mathlib.AlgebraicGeometry.Morphisms.Smooth",
+  "declaration": "AlgebraicGeometry.Smooth",
+  "declarations": [
+   "AlgebraicGeometry.Smooth",
+   "AlgebraicGeometry.SmoothOfRelativeDimension",
+   "AlgebraicGeometry.Etale"
+  ],
+  "statement": "class Smooth (f : X ⟶ Y) : Prop",
+  "branch": "mathlib",
+  "by": "K1",
+  "date": "2026-10-11",
+  "existing": true,
+  "note": "Reuse the existing notions, not new predicates: Smooth and SmoothOfRelativeDimension are in Mathlib.AlgebraicGeometry.Morphisms.Smooth; Etale is in Mathlib.AlgebraicGeometry.Morphisms.Etale. Smooth has ambient {X Y : Scheme.{u}}; SmoothOfRelativeDimension has (n : ℕ) {X Y : Scheme.{u}} (f : X ⟶ Y). Stacks 02H6 identifies Smooth with locally of finite presentation and the dependency FormallySmooth (02H0). Standard-smooth charts of relative dimension n have differentials free of rank n; Stacks 02G1 identifies that rank with dimension at x of the fibre and 02G2 defines constant relative dimension. Etale.iff_smoothOfRelativeDimension_zero identifies the final clause. No node statement or dependencies changed; the duplicate sandbox module was removed in the second reading."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-dsm1444",
+  "group": "K1",
+  "result": "pass",
+  "note": "Smooth = Mathlib class smooth_appLE (affine-local smooth ring maps) = lfp + formally smooth by Stacks 02H6; SmoothOfRelativeDimension n (standard-smooth charts of rel dim n at every x) = smooth with dim_x fibre = n everywhere by 02G1/02G2 (Omega rank = fibre dim, smooth locally standard smooth); n:ℕ covers n=0; Etale = SmoothOfRelativeDimension 0 by Etale.iff_smoothOfRelativeDimension_zero; empty X vacuous both sides; no private copy kept"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "A morphism of schemes $f:X\\to Y$ is *smooth* if it is locally of\nfinite presentation and formally smooth, the latter meaning that every\nmorphism $T\\to X$ over $Y$ from a closed subscheme $T\\subset T'$\ndefined by a nilpotent ideal sheaf extends, Zariski locally on $T'$,\nto a morphism $T'\\to X$ over $Y$. A smooth morphism $f$ has\n*relative dimension $n$ at a point $x\\in X$* if the fibre\n$X_{f(x)}$ through that point has dimension $n$ at $x$; it has relative dimension\n$n$ if this holds at every point. An\n*etale* morphism is a smooth\nmorphism of relative dimension zero.\n\nThis notion of smoothness agrees with the one defined by local standard\nsmooth presentations (Stacks Project, Tag `02H6`). Smooth morphisms are\nexactly the flat morphisms locally of finite presentation with smooth\nfibres, and the relative dimension of a smooth morphism at $x$ is a\nlocally constant function of $x$.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

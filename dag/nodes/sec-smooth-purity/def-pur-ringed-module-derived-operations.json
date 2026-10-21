@@ -1,125 +1,118 @@
 {
-  "id": "def-pur-ringed-module-derived-operations",
-  "kind": "definition",
-  "title": "Canonical module and derived operations for an exact ringed-site pullback",
-  "status": "split",
-  "statement": "Let $C,D$ be categories with objects in universe $u+1$, morphisms in universe $u$, essentially small in universe $u+1$, with Grothendieck topologies $J,K$. Let $R$ on $(C,J)$ and $S$ on $(D,K)$ be sheaves of commutative rings with elements in universe $u+1$. Write $\\operatorname{Mod}(R),\\operatorname{Mod}(S)$ for sheaves of modules in the same element universe [def-weil-sheaf-of-modules-category] and $\\operatorname{Der}(R),\\operatorname{Der}(S)$ for their ordinary unbounded derived categories with the standard localization size [def-weil-abstract-derived-category]. For $F:C\\to D$, an operation datum consists of continuity of $F$, a ring map $\\varphi:R\\to F_*S$ (after forgetting commutativity), a right-adjoint structure on the sectionwise module direct image $F_{*,\\varphi}$, additivity of its specified left adjoint $F^*_{\\varphi}$ and of $F_{*,\\varphi}$, preservation of finite limits and finite colimits by $F^*_{\\varphi}$, and K-injective resolutions in $\\operatorname{Mod}(S)$ [def-pur-kinjective-complex]. Define $\\mathrm{pullback}=F^*_{\\varphi}$, $\\mathrm{pushforward}=F_{*,\\varphi}$, $\\mathrm{left}$ to be the exact termwise pullback localized at quasi-isomorphisms, and $\\mathrm{right}=RF_{*,\\varphi}$ to be the ordinary K-injective right derived functor. The module adjunction is the specified canonical pullback/pushforward adjunction; the derived adjunction is its canonical exact-left/right-derived adjunction. Their units, counits, standard shifts and representative comparisons are those of these constructions. This is a definition of the datum and its associated constructions, not an assertion of existence for every continuous ringed-site map.",
-  "stmt_deps": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category",
-    "def-pur-kinjective-complex"
-  ],
-  "source": {
-    "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
-    "place": "Modules on Sites, Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); Cohomology on Sites, Tag 07A6 (lemma-adjoint). Existing exact-pullback specialization and ordinary unbounded K-injective construction in RingedProjectionRestriction.lean."
+ "id": "def-pur-ringed-module-derived-operations",
+ "kind": "definition",
+ "title": "Canonical module and derived operations for an exact ringed-site pullback",
+ "status": "split",
+ "statement": "Let $C,D$ be categories with objects in universe $u+1$, morphisms in universe $u$, essentially small in universe $u+1$, with Grothendieck topologies $J,K$. Let $R$ on $(C,J)$ and $S$ on $(D,K)$ be sheaves of commutative rings with elements in universe $u+1$. Write $\\operatorname{Mod}(R),\\operatorname{Mod}(S)$ for sheaves of modules in the same element universe [def-weil-sheaf-of-modules-category] and $\\operatorname{Der}(R),\\operatorname{Der}(S)$ for their ordinary unbounded derived categories with the standard localization size [def-weil-abstract-derived-category]. For $F:C\\to D$, an operation datum consists of continuity of $F$, a ring map $\\varphi:R\\to F_*S$ (after forgetting commutativity), a right-adjoint structure on the sectionwise module direct image $F_{*,\\varphi}$, additivity of its specified left adjoint $F^*_{\\varphi}$ and of $F_{*,\\varphi}$, preservation of finite limits and finite colimits by $F^*_{\\varphi}$, and K-injective resolutions in $\\operatorname{Mod}(S)$ [def-pur-kinjective-complex]. Define $\\mathrm{pullback}=F^*_{\\varphi}$, $\\mathrm{pushforward}=F_{*,\\varphi}$, $\\mathrm{left}$ to be the exact termwise pullback localized at quasi-isomorphisms, and $\\mathrm{right}=RF_{*,\\varphi}$ to be the ordinary K-injective right derived functor. The module adjunction is the specified canonical pullback/pushforward adjunction; the derived adjunction is its canonical exact-left/right-derived adjunction. Their units, counits, standard shifts and representative comparisons are those of these constructions. This is a definition of the datum and its associated constructions, not an assertion of existence for every continuous ringed-site map.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-kinjective-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Modules on Sites, Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); Cohomology on Sites, Tag 07A6 (lemma-adjoint). Existing exact-pullback specialization and ordinary unbounded K-injective construction in RingedProjectionRestriction.lean."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "structure Operation|def derivedAdjunction|def moduleAdjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "Mathlib supplies the ordinary module adjunction. The exact combined operation datum and its fixed ordinary/derived constructions already exist in Sheaf.Paper.RingedProjectionRestriction; re-export those declarations without a second definition."
   },
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_match": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "structure Operation|def derivedAdjunction|def moduleAdjunction",
-      "results": "0 hits: ",
-      "date": "2026-10-18",
-      "verdict": "Mathlib supplies the ordinary module adjunction. The exact combined operation datum and its fixed ordinary/derived constructions already exist in Sheaf.Paper.RingedProjectionRestriction; re-export those declarations without a second definition."
-    },
-    {
-      "tool": "leansearch",
-      "query": "Canonical pullback pushforward and derived adjunction for sheaves of modules on ringed sites",
-      "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; TopCat.Sheaf.instIsLeftAdjointPullback; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
-      "date": "2026-10-18",
-      "verdict": "Mathlib supplies the ordinary module adjunction. The exact combined operation datum and its fixed ordinary/derived constructions already exist in Sheaf.Paper.RingedProjectionRestriction; re-export those declarations without a second definition."
-    },
-    {
-      "tool": "loogle",
-      "query": "SheafOfModules.pullback, SheafOfModules.pushforward, SheafOfModules.pullbackPushforwardAdjunction",
-      "results": "5 hits: SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.conjugateEquiv_pullbackId_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
-      "date": "2026-10-18",
-      "verdict": "Mathlib supplies the ordinary module adjunction. The exact combined operation datum and its fixed ordinary/derived constructions already exist in Sheaf.Paper.RingedProjectionRestriction; re-export those declarations without a second definition."
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n ProjectionRestriction\\.(Mod|Der|Operation) dag/nodes --glob def-*.json; rg -n namespace.*ProjectionRestriction|structure.Operation|def.derivedAdjunction /home/ubuntu/weil-src-slopmaster2/WeilConjectures; rg -n structure.Operation|def.derivedAdjunction lean/Sheaf; blueprint_refs.py search ringed module operations",
-      "results": "No definition node binds these declarations; no upstream ProjectionRestriction operation. Project RingedProjectionRestriction.lean has Operation at line 213 and derivedAdjunction at line 296, with Mod and Der above. blueprint_refs search: 0 blueprint nodes match. Generic proetale-operations is scheme-specific with identified coefficients; system-tensor-mate-arrows fixes arithmetic coefficient towers. Neither owns this general-site datum.",
-      "date": "2026-10-18",
-      "verdict": "Existing project definitions, missing definition-node ownership: reuse existing declarations as explicitly requested in the immutable-head return."
-    }
-  ],
-  "created": {
-    "by": "worker",
-    "item": "lem-pur-ringed-refinement-coefficient-square",
-    "date": "2026-10-18",
-    "group": "NA"
+  {
+   "tool": "leansearch",
+   "query": "Canonical pullback pushforward and derived adjunction for sheaves of modules on ringed sites",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; TopCat.Sheaf.instIsLeftAdjointPullback; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-18",
+   "verdict": "Mathlib supplies the ordinary module adjunction. The exact combined operation datum and its fixed ordinary/derived constructions already exist in Sheaf.Paper.RingedProjectionRestriction; re-export those declarations without a second definition."
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": null,
-      "place": "sk-thm-purity-transport Steps 2–3: actual ringed module and ordinary derived operations underlying coefficient change of the clopen refinement mate.",
-      "via": [
-        "lem-pur-ringed-refinement-coefficient-square",
-        "lem-pur-compact-support-condensed-realization",
-        "lem-pur-condensed-exceptional-reconstruction",
-        "nt-target-smooth-purity-qbar"
-      ]
-    },
-    "same_as": []
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, SheafOfModules.pushforward, SheafOfModules.pullbackPushforwardAdjunction",
+   "results": "5 hits: SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.conjugateEquiv_pullbackId_hom; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-18",
+   "verdict": "Mathlib supplies the ordinary module adjunction. The exact combined operation datum and its fixed ordinary/derived constructions already exist in Sheaf.Paper.RingedProjectionRestriction; re-export those declarations without a second definition."
   },
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-purity-transport",
-  "lean": {
-    "module": "Sheaf.Paper.RingedProjectionRestriction",
-    "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Mod",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.derived",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Der",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.ExactModel",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.pullback",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.pushforward",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.left",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.right",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftShift",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftModel",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftModelShift",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.rightShift",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.rightComparison",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.moduleAdjunction",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.derivedAdjunction",
-      "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.derivedCounit"
-    ],
-    "statement": "structure Operation (F : C ⥤ D) (R : Sheaf J CommRingCat.{u + 1})\n    (S : Sheaf K CommRingCat.{u + 1})",
-    "branch": "newtargets-dag",
-    "by": "NA",
-    "date": "2026-10-18",
-    "existing": true,
-    "note": "Definition-node ownership requested by the immutable-head f535b5a8d4dc return. Re-exports the existing general-site Mod, Der and Operation with its fixed canonical operations and adjunctions. The main theorem ringedProjectionRestriction and all localization/restriction conclusions are not part of this definition node. No copied Lean definition or theorem is introduced."
-  },
-  "reviewed": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-e6ea3085d",
-    "group": "NA",
-    "result": "pass",
-    "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-e6ea3085d",
-    "group": "NA",
-    "result": "pass",
-    "note": "Repairs the f535b5a8d4dc return: the theorem-node stmt_dep lem-weil-pbc-ringed-projection-restriction is replaced by the new existing:true definition node def-pur-ringed-module-derived-operations. That node's lean.statement is verbatim RingedProjectionRestriction.lean lines 213-214; all 17 listed declarations exist; its statement matches the Operation fields (continuity, coefficient map after forget2, IsRightAdjoint, additivity, finite limits/colimits, K-injectives) and its derived left/right/adjunction constructions; no existence claim; no duplicate definition node; stmt_deps exist at head. The item module is byte-identical to the substance-checked f535 version and the node changes only stmt_deps and lean.note. Re-verified: lean.statement verbatim, all 51 declarations present, pi/beta/h/r/delta/chi pinned by unit/adjunct/representative equations, chi never inverted, no extra hypotheses or universe equalities, one sorry, no hollow definitions, docstrings with source/blueprint, both report sections present. nt_compile --json clean twice (46.1 s, 43.8 s, limit 60 s). Advisory: the delivery records 58.9 s; split the finite section if landing times out."
+  {
+   "tool": "grep",
+   "query": "rg -n ProjectionRestriction\\.(Mod|Der|Operation) dag/nodes --glob def-*.json; rg -n namespace.*ProjectionRestriction|structure.Operation|def.derivedAdjunction /home/ubuntu/weil-src-slopmaster2/WeilConjectures; rg -n structure.Operation|def.derivedAdjunction lean/Sheaf; blueprint_refs.py search ringed module operations",
+   "results": "No definition node binds these declarations; no upstream ProjectionRestriction operation. Project RingedProjectionRestriction.lean has Operation at line 213 and derivedAdjunction at line 296, with Mod and Der above. blueprint_refs search: 0 blueprint nodes match. Generic proetale-operations is scheme-specific with identified coefficients; system-tensor-mate-arrows fixes arithmetic coefficient towers. Neither owns this general-site datum.",
+   "date": "2026-10-18",
+   "verdict": "Existing project definitions, missing definition-node ownership: reuse existing declarations as explicitly requested in the immutable-head return."
   }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-ringed-refinement-coefficient-square",
+  "date": "2026-10-18",
+  "group": "NA"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Steps 2–3: actual ringed module and ordinary derived operations underlying coefficient change of the clopen refinement mate.",
+   "via": [
+    "lem-pur-ringed-refinement-coefficient-square",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.RingedProjectionRestriction",
+  "declaration": "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Mod",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.derived",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Der",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.ExactModel",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.pullback",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.pushforward",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.left",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.right",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftModel",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.leftModelShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.rightShift",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.rightComparison",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.moduleAdjunction",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.derivedAdjunction",
+   "AlgebraicGeometry.Scheme.ProjectionRestriction.Operation.derivedCounit"
+  ],
+  "statement": "structure Operation (F : C ⥤ D) (R : Sheaf J CommRingCat.{u + 1})\n    (S : Sheaf K CommRingCat.{u + 1})",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition-node ownership requested by the immutable-head f535b5a8d4dc return. Re-exports the existing general-site Mod, Der and Operation with its fixed canonical operations and adjunctions. The main theorem ringedProjectionRestriction and all localization/restriction conclusions are not part of this definition node. No copied Lean definition or theorem is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6ea3085d",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6ea3085d",
+  "group": "NA",
+  "result": "pass",
+  "note": "Repairs the f535b5a8d4dc return: the theorem-node stmt_dep lem-weil-pbc-ringed-projection-restriction is replaced by the new existing:true definition node def-pur-ringed-module-derived-operations. That node's lean.statement is verbatim RingedProjectionRestriction.lean lines 213-214; all 17 listed declarations exist; its statement matches the Operation fields (continuity, coefficient map after forget2, IsRightAdjoint, additivity, finite limits/colimits, K-injectives) and its derived left/right/adjunction constructions; no existence claim; no duplicate definition node; stmt_deps exist at head. The item module is byte-identical to the substance-checked f535 version and the node changes only stmt_deps and lean.note. Re-verified: lean.statement verbatim, all 51 declarations present, pi/beta/h/r/delta/chi pinned by unit/adjunct/representative equations, chi never inverted, no extra hypotheses or universe equalities, one sorry, no hollow definitions, docstrings with source/blueprint, both report sections present. nt_compile --json clean twice (46.1 s, 43.8 s, limit 60 s). Advisory: the delivery records 58.9 s; split the finite section if landing times out."
+ }
 }

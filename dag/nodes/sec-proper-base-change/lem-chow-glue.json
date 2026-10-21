@@ -1,197 +1,150 @@
 {
-  "id": "lem-chow-glue",
-  "blueprint": {
-    "is": "lem-chow-glue",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Gluing the projections",
-  "statement": "In the situation of [lem-chow-graph], put\n\n$$\n V_i:=p_i^{-1}(U_i)\\subseteq\\widetilde X\n$$\n\nand $X':=V_1\\cup\\dots\\cup V_m$. Then for all $i,j$, $U\\subseteq V_i\\cap V_j$\nis scheme-theoretically dense, and the morphisms $p_i|_{V_i}:V_i\\to U_i$ glue\nto a morphism\n\n$$\n \\pi:X'\\longrightarrow X\n$$\n\nover $Y$. (Here $X$ is identified with the separated scheme in which the\naffine opens $U_i\\subseteq X$ sit; $X$ is separated over $Y$ since $X\\to Y$ is\nproper.) One has $\\pi|_U=\\operatorname{id}_U$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-glue.md",
-    "place": "node lem-chow-glue, order 1058"
-  },
-  "stmt_deps": [
+ "id": "lem-chow-glue",
+ "blueprint": {
+  "is": "lem-chow-glue",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Gluing the projections",
+ "statement": "In the situation of [lem-chow-graph], put\n\n$$\n V_i:=p_i^{-1}(U_i)\\subseteq\\widetilde X\n$$\n\nand $X':=V_1\\cup\\dots\\cup V_m$. Then for all $i,j$, $U\\subseteq V_i\\cap V_j$\nis scheme-theoretically dense, and the morphisms $p_i|_{V_i}:V_i\\to U_i$ glue\nto a morphism\n\n$$\n \\pi:X'\\longrightarrow X\n$$\n\nover $Y$. (Here $X$ is identified with the separated scheme in which the\naffine opens $U_i\\subseteq X$ sit; $X$ is separated over $Y$ since $X\\to Y$ is\nproper.) One has $\\pi|_U=\\operatorname{id}_U$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-glue.md",
+  "place": "node lem-chow-glue, order 1058"
+ },
+ "stmt_deps": [
+  "lem-chow-graph",
+  "def-nagata-affine-proj",
+  "def-nagata-dense-compactification",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Since $U\\subseteq\\widetilde X$ is scheme-theoretically dense by\n[lem-chow-graph] (i), and $V_i\\cap V_j$ is an open\nsubscheme of $\\widetilde X$, the open $U\\subseteq V_i\\cap V_j$ is\nscheme-theoretically dense in $V_i\\cap V_j$ (restriction of density to opens).\nThe two morphisms $p_i|_{V_i\\cap V_j}$ and $p_j|_{V_i\\cap V_j}$ take values in\n$U_i\\cap U_j\\subseteq X$ and agree on $U$; by\n[lem-chow-agree-on-dense-open] (whose hypotheses hold: $X$ is\nseparated over $Y$ because it is proper over $Y$), they agree. Hence the\nmorphisms $p_i|_{V_i}$ are compatible on overlaps and glue to a morphism\n$\\pi:X'\\to X$ (gluing of schemes coincides with gluing of morphisms), and to\nsee $\\pi|_U=\\operatorname{id}_U$: each $p_i|_{V_i}$ restricts on $U\\subseteq\nV_i$ to the identity on $U$ (the open immersion $U\\hookrightarrow U_i$ and the\ncomposite $U\\hookrightarrow\\widetilde X\\hookrightarrow Z_i$ are the same\nmorphism by construction of the diagonal morphism $j$ in\n[lem-chow-graph]).",
+   "uses": [
     "lem-chow-graph",
-    "def-nagata-affine-proj",
-    "def-nagata-dense-compactification",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-scheme-image-factor",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "Since $U\\subseteq\\widetilde X$ is scheme-theoretically dense by\n[lem-chow-graph] (i), and $V_i\\cap V_j$ is an open\nsubscheme of $\\widetilde X$, the open $U\\subseteq V_i\\cap V_j$ is\nscheme-theoretically dense in $V_i\\cap V_j$ (restriction of density to opens).\nThe two morphisms $p_i|_{V_i\\cap V_j}$ and $p_j|_{V_i\\cap V_j}$ take values in\n$U_i\\cap U_j\\subseteq X$ and agree on $U$; by\n[lem-chow-agree-on-dense-open] (whose hypotheses hold: $X$ is\nseparated over $Y$ because it is proper over $Y$), they agree. Hence the\nmorphisms $p_i|_{V_i}$ are compatible on overlaps and glue to a morphism\n$\\pi:X'\\to X$ (gluing of schemes coincides with gluing of morphisms), and to\nsee $\\pi|_U=\\operatorname{id}_U$: each $p_i|_{V_i}$ restricts on $U\\subseteq\nV_i$ to the identity on $U$ (the open immersion $U\\hookrightarrow U_i$ and the\ncomposite $U\\hookrightarrow\\widetilde X\\hookrightarrow Z_i$ are the same\nmorphism by construction of the diagonal morphism $j$ in\n[lem-chow-graph]).",
-      "uses": [
-        "lem-chow-graph",
-        "lem-chow-agree-on-dense-open"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-chow-graph",
-    "lem-chow-agree-on-dense-open",
-    "lem-chow-closed-model",
-    "lem-chow-tuple-immersion",
-    "lemma-nagata-dense-flat-pullback",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lemma-nagata-scheme-image-ideal-qc"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-glue.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "lean_multiple"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1058,
-  "blueprint_uses": [
-    "def-nagata-affine-proj",
-    "def-nagata-dense-compactification",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-scheme-image-factor",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "def-weil-pbc-scheme-conventions",
-    "lem-chow-agree-on-dense-open",
-    "lem-chow-closed-model",
-    "lem-chow-graph",
-    "lem-chow-tuple-immersion",
-    "lemma-nagata-dense-flat-pullback",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lemma-nagata-scheme-image-ideal-qc"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
-    "declaration": "AlgebraicGeometry.ChowGraph.modificationMap",
-    "branch": "slopmaster2",
-    "line": 169,
-    "sorry_free": true,
-    "body_lines": 4,
-    "others": [
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
-        "declaration": "AlgebraicGeometry.ChowGraph.projPreimage",
-        "branch": "slopmaster2",
-        "line": 88,
-        "sorry_free": true,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
-        "declaration": "AlgebraicGeometry.ChowGraph.projRestrict",
-        "branch": "slopmaster2",
-        "line": 92,
-        "sorry_free": true,
-        "body_lines": 1
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.ChowGraph.modificationMap",
-    "AlgebraicGeometry.ChowGraph.projPreimage",
-    "AlgebraicGeometry.ChowGraph.projRestrict"
-  ],
-  "uses_not_cited": [
-    "def-nagata-affine-proj",
-    "def-nagata-dense-compactification",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-scheme-image-factor",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "def-weil-pbc-scheme-conventions",
-    "lem-chow-closed-model",
-    "lem-chow-tuple-immersion",
-    "lemma-nagata-dense-flat-pullback",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lemma-nagata-scheme-image-ideal-qc"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "In the situation of [lem-chow-graph] put $V_i:=p_i^{-1}(U_i)$ and\n$X':=V_1\\cup\\dots\\cup V_m$, an open subscheme of $Z$. Then the morphisms\n$p_i|_{V_i}\\colon V_i\\to U_i\\subseteq X$ glue to a morphism of $S$-schemes\n\n$$\n\\pi\\colon X'\\longrightarrow X\n$$\n\nwith $\\pi|_{V_i}=p_i|_{V_i}$, and $\\pi|_U=\\mathrm{id}_U$.\n\nIn the formalisation $V_i$ is the preimage under $p_i$ of the image of $U_i$ in\n$Z_i$, and $V_i$, $U$ and $X'$ are all opens of $Z$; the last assertion reads\nthat the composition of the open immersion $U\\to X'$ with $\\pi$ is the inclusion\n$U\\to X$.",
-      "proof": "By [lem-chow-graph](3) we have $U\\subseteq V_i$ for every $i$, and\n$p_i|_U\\colon U\\to U_i\\subseteq X$ is the inclusion. Since $U$ is\nscheme-theoretically dense in $Z$ and $V_i\\cap V_j\\subseteq Z$ is open, $U$ is\nscheme-theoretically dense in $V_i\\cap V_j$. The two morphisms\n$p_i|_{V_i\\cap V_j}$ and $p_j|_{V_i\\cap V_j}$ into $X$ agree on $U$, and\n$X\\to S$ is separated, so they are equal by\n[lem-chow-agree-on-dense-open]. Hence the $p_i|_{V_i}$ glue to\n$\\pi\\colon X'\\to X$, and $\\pi|_U=\\mathrm{id}_U$.",
-      "cites": [
-        "lem-chow-graph",
-        "lem-chow-agree-on-dense-open"
-      ]
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.ChowGraph.modificationMap",
-        "AlgebraicGeometry.ChowGraph.projPreimage",
-        "AlgebraicGeometry.ChowGraph.projRestrict"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.ChowGraph.modificationMap",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
-          "lines": [
-            160,
-            173
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowGraph.projPreimage",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
-          "lines": [
-            86,
-            88
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowGraph.projRestrict",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
-          "lines": [
-            90,
-            93
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-chow",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the situation of [lem-chow-graph], assume that the underlying space of $X$\nis noetherian, that $m\\geq1$, and that $f\\colon X\\to S$ is separated. Put\n$V_i:=p_i^{-1}(U_i)$, the preimage under $p_i$ of the image of $U_i$ in $Z_i$,\nand $X':=V_1\\cup\\dots\\cup V_m$, an open subscheme of $Z$. Then the morphisms\n$p_i|_{V_i}\\colon V_i\\to U_i\\subseteq X$ glue to a morphism of $S$-schemes\n\n$$\n\\pi\\colon X'\\longrightarrow X\n$$\n\nwith $\\pi|_{V_i}=p_i|_{V_i}$, and $\\pi|_U$ is the inclusion $U\\subseteq X$.",
-    "proof": [
-      {
-        "text": "By [lem-chow-graph](3) we have $U\\subseteq V_i$ for every $i$, and\n$p_i|_U\\colon U\\to U_i\\subseteq X$ is the inclusion. Since $U$ is\nscheme-theoretically dense in $Z$ and $V_i\\cap V_j\\subseteq Z$ is open, $U$ is\nscheme-theoretically dense in $V_i\\cap V_j$. The two morphisms\n$p_i|_{V_i\\cap V_j}$ and $p_j|_{V_i\\cap V_j}$ into $X$ agree on $U$, and\n$X\\to S$ is separated, so they are equal by\n[lem-chow-agree-on-dense-open]. Hence the $p_i|_{V_i}$ glue to\n$\\pi\\colon X'\\to X$, and $\\pi|_U=\\mathrm{id}_U$.",
-        "uses": [
-          "lem-chow-graph",
-          "lem-chow-agree-on-dense-open"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+    "lem-chow-agree-on-dense-open"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-chow-graph",
+  "lem-chow-agree-on-dense-open",
+  "lem-chow-closed-model",
+  "lem-chow-tuple-immersion",
+  "lemma-nagata-dense-flat-pullback",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-scheme-image-ideal-qc"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/lem-chow-glue.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "lean_multiple"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1058,
+ "blueprint_uses": [
+  "def-nagata-affine-proj",
+  "def-nagata-dense-compactification",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-chow-agree-on-dense-open",
+  "lem-chow-closed-model",
+  "lem-chow-graph",
+  "lem-chow-tuple-immersion",
+  "lemma-nagata-dense-flat-pullback",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-scheme-image-ideal-qc"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
+  "declaration": "AlgebraicGeometry.ChowGraph.modificationMap",
+  "branch": "slopmaster2",
+  "line": 169,
+  "sorry_free": true,
+  "body_lines": 4,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
+    "declaration": "AlgebraicGeometry.ChowGraph.projPreimage",
+    "branch": "slopmaster2",
+    "line": 88,
+    "sorry_free": true,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma.Glue",
+    "declaration": "AlgebraicGeometry.ChowGraph.projRestrict",
+    "branch": "slopmaster2",
+    "line": 92,
+    "sorry_free": true,
+    "body_lines": 1
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.ChowGraph.modificationMap",
+  "AlgebraicGeometry.ChowGraph.projPreimage",
+  "AlgebraicGeometry.ChowGraph.projRestrict"
+ ],
+ "uses_not_cited": [
+  "def-nagata-affine-proj",
+  "def-nagata-dense-compactification",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-chow-closed-model",
+  "lem-chow-tuple-immersion",
+  "lemma-nagata-dense-flat-pullback",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-scheme-image-ideal-qc"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "In the situation of [lem-chow-graph] put $V_i:=p_i^{-1}(U_i)$ and\n$X':=V_1\\cup\\dots\\cup V_m$, an open subscheme of $Z$. Then the morphisms\n$p_i|_{V_i}\\colon V_i\\to U_i\\subseteq X$ glue to a morphism of $S$-schemes\n\n$$\n\\pi\\colon X'\\longrightarrow X\n$$\n\nwith $\\pi|_{V_i}=p_i|_{V_i}$, and $\\pi|_U=\\mathrm{id}_U$.\n\nIn the formalisation $V_i$ is the preimage under $p_i$ of the image of $U_i$ in\n$Z_i$, and $V_i$, $U$ and $X'$ are all opens of $Z$; the last assertion reads\nthat the composition of the open immersion $U\\to X'$ with $\\pi$ is the inclusion\n$U\\to X$.",
+   "proof": "By [lem-chow-graph](3) we have $U\\subseteq V_i$ for every $i$, and\n$p_i|_U\\colon U\\to U_i\\subseteq X$ is the inclusion. Since $U$ is\nscheme-theoretically dense in $Z$ and $V_i\\cap V_j\\subseteq Z$ is open, $U$ is\nscheme-theoretically dense in $V_i\\cap V_j$. The two morphisms\n$p_i|_{V_i\\cap V_j}$ and $p_j|_{V_i\\cap V_j}$ into $X$ agree on $U$, and\n$X\\to S$ is separated, so they are equal by\n[lem-chow-agree-on-dense-open]. Hence the $p_i|_{V_i}$ glue to\n$\\pi\\colon X'\\to X$, and $\\pi|_U=\\mathrm{id}_U$.",
+   "cites": [
+    "lem-chow-graph",
+    "lem-chow-agree-on-dense-open"
+   ]
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-chow",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the situation of [lem-chow-graph], assume that the underlying space of $X$\nis noetherian, that $m\\geq1$, and that $f\\colon X\\to S$ is separated. Put\n$V_i:=p_i^{-1}(U_i)$, the preimage under $p_i$ of the image of $U_i$ in $Z_i$,\nand $X':=V_1\\cup\\dots\\cup V_m$, an open subscheme of $Z$. Then the morphisms\n$p_i|_{V_i}\\colon V_i\\to U_i\\subseteq X$ glue to a morphism of $S$-schemes\n\n$$\n\\pi\\colon X'\\longrightarrow X\n$$\n\nwith $\\pi|_{V_i}=p_i|_{V_i}$, and $\\pi|_U$ is the inclusion $U\\subseteq X$.",
+  "proof": [
+   {
+    "text": "By [lem-chow-graph](3) we have $U\\subseteq V_i$ for every $i$, and\n$p_i|_U\\colon U\\to U_i\\subseteq X$ is the inclusion. Since $U$ is\nscheme-theoretically dense in $Z$ and $V_i\\cap V_j\\subseteq Z$ is open, $U$ is\nscheme-theoretically dense in $V_i\\cap V_j$. The two morphisms\n$p_i|_{V_i\\cap V_j}$ and $p_j|_{V_i\\cap V_j}$ into $X$ agree on $U$, and\n$X\\to S$ is separated, so they are equal by\n[lem-chow-agree-on-dense-open]. Hence the $p_i|_{V_i}$ glue to\n$\\pi\\colon X'\\to X$, and $\\pi|_U=\\mathrm{id}_U$.",
+    "uses": [
+     "lem-chow-graph",
+     "lem-chow-agree-on-dense-open"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

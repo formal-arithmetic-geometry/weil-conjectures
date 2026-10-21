@@ -1,369 +1,358 @@
 {
-  "id": "sbc-thm-adic-smooth-base-change",
-  "blueprint": {
-    "is": "sbc-thm-adic-smooth-base-change",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Adic smooth base change",
-  "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its ring of integers $A=\\mathcal O_E$, and a uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Consider a cartesian square [sbc-def-base-change-square]\n$$\n\\begin{array}{ccc}\nY&\\xrightarrow{h}&X\\\\\ne\\downarrow&&\\downarrow f\\\\\nT&\\xrightarrow{g}&S.\n\\end{array}\n$$\nAssume $f$ smooth [def-sbc-smooth-morphisms], $g$ quasi-compact and quasi-separated, all four schemes noetherian [def-weil-pbc-scheme-conventions], and $\\ell$ invertible on $S$. Use the adic coefficient datum [def-weil-pbc-adic-coefficient-datum], indexed here by $n\\geq0$ with $A_n=A/I^{n+1}$ and $I=(\\varpi)$; every $A_n$ is finite of order invertible on the four schemes and perfect over $A$. At a corner $W$, the integral coefficient sheaf is $A_W=\\varprojlim_n(A_n)_W$ and $D(W_{\\mathrm{proet}},A)=D(\\operatorname{Mod}(A_W))$. Write $D_{\\mathrm{comp}}(W,A)$ for its full subcategory of derived $I$-complete objects [def-weil-pbc-intrinsic-completion]. Completed pullback is [def-weil-pbc-completed-pullback]; completed direct image means the restriction of ordinary $Ru_*$ to complete objects [def-weil-pbc-proetale-operations, lem-sbc-completed-operations-linear-natural-exchange].\n\nAssume $T$ has finite dimension, as required for $\\Dbc(T_{\\mathrm{proet}},A)$ in [def-weil-pbc-bounded-constructible-complete]. Let $K$ belong to that category, and suppose each canonical reduction\n$$K_n=K\\otimes^L_{A_T}(A_n)_T$$\nis in the essential image of $\\Dbc(T_{\\mathrm{et}},A_n)$ under the comparison inverse image [def-weil-pbc-proetale-modules]. Then the canonical completed adjunction-mate exchange of [lem-sbc-completed-operations-linear-natural-exchange]\n$$\n\\alpha_K:Lf^*_{\\mathrm{comp}}Rg_{*,\\mathrm{comp}}K\n\\longrightarrow Rh_{*,\\mathrm{comp}}Le^*_{\\mathrm{comp}}K\n$$\nis an isomorphism in $D_{\\mathrm{comp}}(X,A)$.\n\nIf $X$ also has finite dimension and there exist integers $a\\leq b$ such that, for every $n\\geq0$, all four finite-coefficient objects\n$$\nRg_{n,*}K_n,\\qquad Lf_n^*Rg_{n,*}K_n,\\qquad Le_n^*K_n,\\qquad Rh_{n,*}Le_n^*K_n\n$$\nhave constructible cohomology [def-weil-proetale-constructible-sheaf] and zero cohomology outside $[a,b]$, then both endpoints belong to $\\Dbc(X_{\\mathrm{proet}},A)$ and $\\alpha_K$ is an isomorphism in that full subcategory. The subscript $n$ on an operation denotes the same scheme morphism with coefficient sheaves $(A_n)_W$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-adic-smooth-base-change.md",
-    "place": "node sbc-thm-adic-smooth-base-change, order 1443"
-  },
-  "stmt_deps": [
-    "def-weil-l-adic-coefficient-extension",
-    "sbc-def-base-change-square",
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-intrinsic-completion",
-    "def-weil-pbc-completed-pullback",
-    "def-weil-pbc-proetale-operations",
-    "lem-sbc-completed-operations-linear-natural-exchange",
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-pbc-proetale-modules",
-    "def-weil-proetale-constructible-sheaf"
-  ],
-  "proof": [
-    {
-      "text": "The full-category definition [def-weil-pbc-bounded-constructible-complete] gives derived completeness of $K$. Put $P_m=A/I^m$ for $m\\geq1$, so the datum's $P_m$ is this statement's $A_{m-1}$; no level is lost by the reindexing. Use the canonical reduction tower of [def-weil-pbc-adic-coefficient-datum], including its normalization maps. For each $n$, choose the assumed bounded constructible etale origin $L_n$ and an isomorphism $\\nu_T^*L_n\\simeq K_n$. By the finite-coefficient definition [def-weil-pbc-proetale-modules], this says $K_n\\in\\Dbc(T_{\\mathrm{proet}},A_n)$. These choices are used only to apply the finite theorem, not to define the integral map.",
-      "uses": [
-        "def-weil-pbc-bounded-constructible-complete",
-        "def-weil-pbc-adic-coefficient-datum",
-        "def-weil-pbc-proetale-modules"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tags 099M (lemma-naive-completion) and 09C1 (definition-Dbc); blueprint proof, finite levels"
-      }
-    },
-    {
-      "text": "For each $n$, apply [sbc-thm-finite-proetale-smooth-base-change] with $\\Lambda=A_n$ and input $K_n$. Step 1 supplies exactly its bounded constructible etale-origin hypothesis. The square is cartesian, $f$ is smooth, $g$ is qcqs, and all schemes are noetherian. Take $N=|A_n|\\geq1$: the order of the finite additive group annihilates $A_n$, and $N$ is invertible on $S$ by the coefficient assumptions. Thus its canonical exchange\n$$\\delta_n:Lf_n^*Rg_{n,*}K_n\\longrightarrow Rh_{n,*}Le_n^*K_n$$\nis invertible. This asserts invertibility in the ambient category and needs no properness or preservation of constructibility by direct image.",
-      "uses": [
-        "sbc-thm-finite-proetale-smooth-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0EYU, theorem-smooth-base-change; finite pro-etale transport as in the cited node"
-      }
-    },
-    {
-      "text": "Write $G=Rg_*K$, $E=Le^*_{\\mathrm{comp}}K$, $B=Lf^*_{\\mathrm{comp}}G$, and $D=Rh_*E$. By [prop-weil-pbc-direct-image-limits], $G$ and $D$ are complete once $K$ and $E$ are complete; by [lemma-weil-pbc-completed-pullback-reduction], $E$ and $B$ are complete and their reductions are the corresponding finite pullbacks of the actual reductions of their inputs. For the direct-image reductions use the canonical perfect projection maps of [lemma-weil-pbc-perfect-projection-formula], first for $g$ and $K$, then for $h$ and $E$. These apply to arbitrary scheme morphisms because $P_m$ is perfect; the properness-only final clause is unused. Consequently the reductions of $G,E,B,D$, after restriction to their completed coefficient sheaves, are canonically isomorphic to the restrictions of $Rg_{n,*}K_n,Le_n^*K_n,Lf_n^*Rg_{n,*}K_n,Rh_{n,*}Le_n^*K_n$, respectively. To identify finite and integral operations after restriction, apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $R_W=A_W$ and $S_W=(A_n)_W$ on each edge; the coefficient isomorphisms and their commutative projection squares are those of [lem-weil-pbc-profinite-coefficient-inverse-image]. We claim these comparisons in the ambient completed-coefficient categories, and do not infer full faithfulness of derived restriction of scalars.",
-      "uses": [
-        "prop-weil-pbc-direct-image-limits",
-        "lemma-weil-pbc-completed-pullback-reduction",
-        "lemma-weil-pbc-perfect-projection-formula",
-        "lem-weil-pbc-ring-sheaf-change-adjunction",
-        "lem-weil-pbc-profinite-coefficient-inverse-image"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 099N, lemma-pushforward-Noetherian-case (1),(4),(5); Tag 0944, sites-cohomology-lemma-projection-formula; Tags 0D6D/0D6E/07A6 for coefficient restriction"
-      }
-    },
-    {
-      "text": "Use [lem-sbc-completed-operations-linear-natural-exchange] for this square and complete $K$. It defines the specified map $\\alpha_K$ by the completed unit, pullback-composition square, and counit, and identifies this very mate with the finite-level completed exchange under the canonical finite-reduction and direct-image/limit comparisons. In the notation of step 3, let $c_{B,n},c_{D,n}$ be the isomorphisms from the restrictions of the actual endpoint reductions to the restrictions of the finite endpoints. The identification gives the equation\n$$c_{D,n}\\,\\operatorname{Res}(\\alpha_K\\otimes^L A_n)=\\operatorname{Res}(\\delta_n)\\,c_{B,n}.$$\nIn particular every finite reduction of $\\alpha_K$ becomes an isomorphism after restriction. Restriction reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction], so these actual reductions are isomorphisms. The equality is provided by the cited mate comparison, not deduced from naturality alone or from faithfulness of derived evaluations.",
-      "uses": [
-        "lem-sbc-completed-operations-linear-natural-exchange",
-        "lem-weil-pbc-ring-sheaf-change-adjunction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 07A7, remark-base-change, with the general completed-mate/finite-level refinement of the cited node; Tag 099N"
-      }
-    },
-    {
-      "text": "Both $B$ and $D$ are derived complete by step 3, and every canonical reduction of $\\alpha_K:B\\to D$ is invertible by steps 2 and 4. The final assertion of [lem-weil-pbc-levelwise-isomorphism-cones] therefore proves that $\\alpha_K$ itself is invertible. Both endpoints lie over $X$, since $f:X\\to S$ and $h:Y\\to X$. This proves the assertion in $D_{\\mathrm{comp}}(X,A)$.",
-      "uses": [
-        "lem-weil-pbc-levelwise-isomorphism-cones"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tags 099M/099Q: derived-complete detection by finite reductions"
-      }
-    },
-    {
-      "text": "Assume the extra interval condition. It applies in particular to the two finite endpoints in step 3. Their cohomology is therefore constructible and vanishes outside $[a,b]$. The isomorphisms of step 3 give $A_X$-linear isomorphisms on cohomology with the actual quotient-coefficient reductions $B_n,D_n$. These cohomology isomorphisms are $(A_n)_X$-linear: [lem-weil-pbc-constant-completion-equivalence] identifies $A_X/I^{n+1}A_X$ with $(A_n)_X$. Locally lift a section $r$ of $(A_n)_X$ to $\\widetilde r$ in $A_X$. For such a cohomology isomorphism $\\phi$, $\\phi(rx)=\\phi(\\widetilde r x)=\\widetilde r\\phi(x)=r\\phi(x)$. The identity is independent of the lift because $I^{n+1}$ kills both cohomology sheaves; local identities glue. Thus the actual $B_n,D_n$ are intrinsically constructible with the same interval. Their own canonical strict reduction towers and normalization cocycles are supplied by [def-weil-pbc-adic-coefficient-datum]. Apply [lem-weil-pbc-normalized-constructible-local-effectivity] separately to these two towers on the noetherian scheme $X$. It supplies common finite stratifications, pro-etale coverings, bounded adic-lisse finite-type local complexes and normalization-compatible reduction isomorphisms, precisely the full uniform-tower condition. No preservation theorem for a nonproper direct image is assumed.",
-      "uses": [
-        "lem-weil-pbc-constant-completion-equivalence",
-        "def-weil-pbc-adic-coefficient-datum",
-        "lem-weil-pbc-normalized-constructible-local-effectivity"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tags 09AL/09BU/09BV/09BW/09BX and normalized-system assembly of the cited local-effectivity node; Tag 093M for the quotient identification"
-      }
-    },
-    {
-      "text": "We must also construct compatible etale-origin witnesses, which the full category definition requires. Let $J=B$ or $J=D$ and write $J_n=J\\otimes^L_{A_X}(A_n)_X$ for its actual reductions. By step 6, [lem-weil-pbc-normalized-constructible-local-effectivity] gives each $J_n$ a bounded constructible etale origin: a bounded constructible $H_n\\in D(X_{\\mathrm{et}},A_n)$ with $\\gamma_n:\\nu_X^*H_n\\xrightarrow{\\sim}J_n$. In particular $J_n\\in D^+(X_{\\mathrm{proet}},A_n)$ and $H_n\\in D^+(X_{\\mathrm{et}},A_n)$, so $(H_n,\\gamma_n)$ is an etale-origin witness. The canonical normalization isomorphisms $\\rho_{m,n}:J_m\\otimes^L_{(A_m)_X}(A_n)_X\\xrightarrow{\\sim}J_n$ $(m\\geq n)$ of the actual reduction tower, with $\\rho_{n,n}=1$ and the quotient cocycle $\\rho_{m,n}(\\rho_{k,m}\\otimes^LA_n)=\\rho_{k,n}$, are supplied by [def-weil-pbc-adic-coefficient-datum]; here $A_n=P_{n+1}$ in its indexing. These are exactly the hypotheses of [lem-weil-pbc-normalized-etale-origin-witnesses] on the scheme $X$ with $M_n=J_n$. It gives $H_m\\otimes^L_{A_m}A_n\\in D^+(X_{\\mathrm{et}},A_n)$ and unique isomorphisms $\\beta_{m,n}:H_m\\otimes^L_{A_m}A_n\\xrightarrow{\\sim}H_n$ with $\\gamma_n\\circ\\nu_X^*\\beta_{m,n}=\\rho_{m,n}\\circ(\\gamma_m\\otimes^LA_n)$, $\\beta_{n,n}=1$ and $\\beta_{m,n}(\\beta_{k,m}\\otimes^LA_n)=\\beta_{k,n}$. Taking $\\beta_n=\\beta_{n+1,n}$ gives the compatible witnesses, with the quotient cocycle for the composites, that the definition requires. No finite Tor dimension of $A_n$ over $A_m$ is used.",
-      "uses": [
-        "lem-weil-pbc-normalized-constructible-local-effectivity",
-        "def-weil-pbc-adic-coefficient-datum",
-        "lem-weil-pbc-normalized-etale-origin-witnesses"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 09AL, lemma-compare-constructible-derived, and bounded-below comparison; Tag 07A4, sites-cohomology-lemma-pullback-tensor-product, and Tag 0G7E"
-      }
-    },
-    {
-      "text": "The scheme $X$ is noetherian of finite dimension in the conditional assertion, and $\\ell$ is invertible on $X$ by pullback of its inverse on $S$. Completeness from step 3, uniform local models from step 6, and compatible witnesses from step 7 verify every membership clause of [def-weil-pbc-bounded-constructible-complete] for $B,D$. This category is full: the map $\\alpha_K$, its ambient inverse from step 5, and their two inverse identities are morphisms and identities in this same subcategory. The resulting isomorphism is therefore in $\\Dbc(X_{\\mathrm{proet}},A)$.",
-      "uses": [
-        "def-weil-pbc-bounded-constructible-complete"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-adic-smooth-base-change.md",
-        "place": "Proof, final clause: constructible landing; definitions and fullness"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "sbc-thm-adic-smooth-base-change",
+ "blueprint": {
+  "is": "sbc-thm-adic-smooth-base-change",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Adic smooth base change",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its ring of integers $A=\\mathcal O_E$, and a uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Consider a cartesian square [sbc-def-base-change-square]\n$$\n\\begin{array}{ccc}\nY&\\xrightarrow{h}&X\\\\\ne\\downarrow&&\\downarrow f\\\\\nT&\\xrightarrow{g}&S.\n\\end{array}\n$$\nAssume $f$ smooth [def-sbc-smooth-morphisms], $g$ quasi-compact and quasi-separated, all four schemes noetherian [def-weil-pbc-scheme-conventions], and $\\ell$ invertible on $S$. Use the adic coefficient datum [def-weil-pbc-adic-coefficient-datum], indexed here by $n\\geq0$ with $A_n=A/I^{n+1}$ and $I=(\\varpi)$; every $A_n$ is finite of order invertible on the four schemes and perfect over $A$. At a corner $W$, the integral coefficient sheaf is $A_W=\\varprojlim_n(A_n)_W$ and $D(W_{\\mathrm{proet}},A)=D(\\operatorname{Mod}(A_W))$. Write $D_{\\mathrm{comp}}(W,A)$ for its full subcategory of derived $I$-complete objects [def-weil-pbc-intrinsic-completion]. Completed pullback is [def-weil-pbc-completed-pullback]; completed direct image means the restriction of ordinary $Ru_*$ to complete objects [def-weil-pbc-proetale-operations, lem-sbc-completed-operations-linear-natural-exchange].\n\nAssume $T$ has finite dimension, as required for $\\Dbc(T_{\\mathrm{proet}},A)$ in [def-weil-pbc-bounded-constructible-complete]. Let $K$ belong to that category, and suppose each canonical reduction\n$$K_n=K\\otimes^L_{A_T}(A_n)_T$$\nis in the essential image of $\\Dbc(T_{\\mathrm{et}},A_n)$ under the comparison inverse image [def-weil-pbc-proetale-modules]. Then the canonical completed adjunction-mate exchange of [lem-sbc-completed-operations-linear-natural-exchange]\n$$\n\\alpha_K:Lf^*_{\\mathrm{comp}}Rg_{*,\\mathrm{comp}}K\n\\longrightarrow Rh_{*,\\mathrm{comp}}Le^*_{\\mathrm{comp}}K\n$$\nis an isomorphism in $D_{\\mathrm{comp}}(X,A)$.\n\nIf $X$ also has finite dimension and there exist integers $a\\leq b$ such that, for every $n\\geq0$, all four finite-coefficient objects\n$$\nRg_{n,*}K_n,\\qquad Lf_n^*Rg_{n,*}K_n,\\qquad Le_n^*K_n,\\qquad Rh_{n,*}Le_n^*K_n\n$$\nhave constructible cohomology [def-weil-proetale-constructible-sheaf] and zero cohomology outside $[a,b]$, then both endpoints belong to $\\Dbc(X_{\\mathrm{proet}},A)$ and $\\alpha_K$ is an isomorphism in that full subcategory. The subscript $n$ on an operation denotes the same scheme morphism with coefficient sheaves $(A_n)_W$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-adic-smooth-base-change.md",
+  "place": "node sbc-thm-adic-smooth-base-change, order 1443"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sbc-def-base-change-square",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-proetale-operations",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The full-category definition [def-weil-pbc-bounded-constructible-complete] gives derived completeness of $K$. Put $P_m=A/I^m$ for $m\\geq1$, so the datum's $P_m$ is this statement's $A_{m-1}$; no level is lost by the reindexing. Use the canonical reduction tower of [def-weil-pbc-adic-coefficient-datum], including its normalization maps. For each $n$, choose the assumed bounded constructible etale origin $L_n$ and an isomorphism $\\nu_T^*L_n\\simeq K_n$. By the finite-coefficient definition [def-weil-pbc-proetale-modules], this says $K_n\\in\\Dbc(T_{\\mathrm{proet}},A_n)$. These choices are used only to apply the finite theorem, not to define the integral map.",
+   "uses": [
     "def-weil-pbc-bounded-constructible-complete",
     "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-proetale-modules",
-    "sbc-thm-finite-proetale-smooth-base-change",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M (lemma-naive-completion) and 09C1 (definition-Dbc); blueprint proof, finite levels"
+   }
+  },
+  {
+   "text": "For each $n$, apply [sbc-thm-finite-proetale-smooth-base-change] with $\\Lambda=A_n$ and input $K_n$. Step 1 supplies exactly its bounded constructible etale-origin hypothesis. The square is cartesian, $f$ is smooth, $g$ is qcqs, and all schemes are noetherian. Take $N=|A_n|\\geq1$: the order of the finite additive group annihilates $A_n$, and $N$ is invertible on $S$ by the coefficient assumptions. Thus its canonical exchange\n$$\\delta_n:Lf_n^*Rg_{n,*}K_n\\longrightarrow Rh_{n,*}Le_n^*K_n$$\nis invertible. This asserts invertibility in the ambient category and needs no properness or preservation of constructibility by direct image.",
+   "uses": [
+    "sbc-thm-finite-proetale-smooth-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYU, theorem-smooth-base-change; finite pro-etale transport as in the cited node"
+   }
+  },
+  {
+   "text": "Write $G=Rg_*K$, $E=Le^*_{\\mathrm{comp}}K$, $B=Lf^*_{\\mathrm{comp}}G$, and $D=Rh_*E$. By [prop-weil-pbc-direct-image-limits], $G$ and $D$ are complete once $K$ and $E$ are complete; by [lemma-weil-pbc-completed-pullback-reduction], $E$ and $B$ are complete and their reductions are the corresponding finite pullbacks of the actual reductions of their inputs. For the direct-image reductions use the canonical perfect projection maps of [lemma-weil-pbc-perfect-projection-formula], first for $g$ and $K$, then for $h$ and $E$. These apply to arbitrary scheme morphisms because $P_m$ is perfect; the properness-only final clause is unused. Consequently the reductions of $G,E,B,D$, after restriction to their completed coefficient sheaves, are canonically isomorphic to the restrictions of $Rg_{n,*}K_n,Le_n^*K_n,Lf_n^*Rg_{n,*}K_n,Rh_{n,*}Le_n^*K_n$, respectively. To identify finite and integral operations after restriction, apply [lem-weil-pbc-ring-sheaf-change-adjunction] with $R_W=A_W$ and $S_W=(A_n)_W$ on each edge; the coefficient isomorphisms and their commutative projection squares are those of [lem-weil-pbc-profinite-coefficient-inverse-image]. We claim these comparisons in the ambient completed-coefficient categories, and do not infer full faithfulness of derived restriction of scalars.",
+   "uses": [
     "prop-weil-pbc-direct-image-limits",
     "lemma-weil-pbc-completed-pullback-reduction",
     "lemma-weil-pbc-perfect-projection-formula",
     "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (1),(4),(5); Tag 0944, sites-cohomology-lemma-projection-formula; Tags 0D6D/0D6E/07A6 for coefficient restriction"
+   }
+  },
+  {
+   "text": "Use [lem-sbc-completed-operations-linear-natural-exchange] for this square and complete $K$. It defines the specified map $\\alpha_K$ by the completed unit, pullback-composition square, and counit, and identifies this very mate with the finite-level completed exchange under the canonical finite-reduction and direct-image/limit comparisons. In the notation of step 3, let $c_{B,n},c_{D,n}$ be the isomorphisms from the restrictions of the actual endpoint reductions to the restrictions of the finite endpoints. The identification gives the equation\n$$c_{D,n}\\,\\operatorname{Res}(\\alpha_K\\otimes^L A_n)=\\operatorname{Res}(\\delta_n)\\,c_{B,n}.$$\nIn particular every finite reduction of $\\alpha_K$ becomes an isomorphism after restriction. Restriction reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction], so these actual reductions are isomorphisms. The equality is provided by the cited mate comparison, not deduced from naturality alone or from faithfulness of derived evaluations.",
+   "uses": [
     "lem-sbc-completed-operations-linear-natural-exchange",
-    "lem-weil-pbc-levelwise-isomorphism-cones",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change, with the general completed-mate/finite-level refinement of the cited node; Tag 099N"
+   }
+  },
+  {
+   "text": "Both $B$ and $D$ are derived complete by step 3, and every canonical reduction of $\\alpha_K:B\\to D$ is invertible by steps 2 and 4. The final assertion of [lem-weil-pbc-levelwise-isomorphism-cones] therefore proves that $\\alpha_K$ itself is invertible. Both endpoints lie over $X$, since $f:X\\to S$ and $h:Y\\to X$. This proves the assertion in $D_{\\mathrm{comp}}(X,A)$.",
+   "uses": [
+    "lem-weil-pbc-levelwise-isomorphism-cones"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099M/099Q: derived-complete detection by finite reductions"
+   }
+  },
+  {
+   "text": "Assume the extra interval condition. It applies in particular to the two finite endpoints in step 3. Their cohomology is therefore constructible and vanishes outside $[a,b]$. The isomorphisms of step 3 give $A_X$-linear isomorphisms on cohomology with the actual quotient-coefficient reductions $B_n,D_n$. These cohomology isomorphisms are $(A_n)_X$-linear: [lem-weil-pbc-constant-completion-equivalence] identifies $A_X/I^{n+1}A_X$ with $(A_n)_X$. Locally lift a section $r$ of $(A_n)_X$ to $\\widetilde r$ in $A_X$. For such a cohomology isomorphism $\\phi$, $\\phi(rx)=\\phi(\\widetilde r x)=\\widetilde r\\phi(x)=r\\phi(x)$. The identity is independent of the lift because $I^{n+1}$ kills both cohomology sheaves; local identities glue. Thus the actual $B_n,D_n$ are intrinsically constructible with the same interval. Their own canonical strict reduction towers and normalization cocycles are supplied by [def-weil-pbc-adic-coefficient-datum]. Apply [lem-weil-pbc-normalized-constructible-local-effectivity] separately to these two towers on the noetherian scheme $X$. It supplies common finite stratifications, pro-etale coverings, bounded adic-lisse finite-type local complexes and normalization-compatible reduction isomorphisms, precisely the full uniform-tower condition. No preservation theorem for a nonproper direct image is assumed.",
+   "uses": [
     "lem-weil-pbc-constant-completion-equivalence",
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AL/09BU/09BV/09BW/09BX and normalized-system assembly of the cited local-effectivity node; Tag 093M for the quotient identification"
+   }
+  },
+  {
+   "text": "We must also construct compatible etale-origin witnesses, which the full category definition requires. Let $J=B$ or $J=D$ and write $J_n=J\\otimes^L_{A_X}(A_n)_X$ for its actual reductions. By step 6, [lem-weil-pbc-normalized-constructible-local-effectivity] gives each $J_n$ a bounded constructible etale origin: a bounded constructible $H_n\\in D(X_{\\mathrm{et}},A_n)$ with $\\gamma_n:\\nu_X^*H_n\\xrightarrow{\\sim}J_n$. In particular $J_n\\in D^+(X_{\\mathrm{proet}},A_n)$ and $H_n\\in D^+(X_{\\mathrm{et}},A_n)$, so $(H_n,\\gamma_n)$ is an etale-origin witness. The canonical normalization isomorphisms $\\rho_{m,n}:J_m\\otimes^L_{(A_m)_X}(A_n)_X\\xrightarrow{\\sim}J_n$ $(m\\geq n)$ of the actual reduction tower, with $\\rho_{n,n}=1$ and the quotient cocycle $\\rho_{m,n}(\\rho_{k,m}\\otimes^LA_n)=\\rho_{k,n}$, are supplied by [def-weil-pbc-adic-coefficient-datum]; here $A_n=P_{n+1}$ in its indexing. These are exactly the hypotheses of [lem-weil-pbc-normalized-etale-origin-witnesses] on the scheme $X$ with $M_n=J_n$. It gives $H_m\\otimes^L_{A_m}A_n\\in D^+(X_{\\mathrm{et}},A_n)$ and unique isomorphisms $\\beta_{m,n}:H_m\\otimes^L_{A_m}A_n\\xrightarrow{\\sim}H_n$ with $\\gamma_n\\circ\\nu_X^*\\beta_{m,n}=\\rho_{m,n}\\circ(\\gamma_m\\otimes^LA_n)$, $\\beta_{n,n}=1$ and $\\beta_{m,n}(\\beta_{k,m}\\otimes^LA_n)=\\beta_{k,n}$. Taking $\\beta_n=\\beta_{n+1,n}$ gives the compatible witnesses, with the quotient cocycle for the composites, that the definition requires. No finite Tor dimension of $A_n$ over $A_m$ is used.",
+   "uses": [
     "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "def-weil-pbc-adic-coefficient-datum",
     "lem-weil-pbc-normalized-etale-origin-witnesses"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived, and bounded-below comparison; Tag 07A4, sites-cohomology-lemma-pullback-tensor-product, and Tag 0G7E"
+   }
+  },
+  {
+   "text": "The scheme $X$ is noetherian of finite dimension in the conditional assertion, and $\\ell$ is invertible on $X$ by pullback of its inverse on $S$. Completeness from step 3, uniform local models from step 6, and compatible witnesses from step 7 verify every membership clause of [def-weil-pbc-bounded-constructible-complete] for $B,D$. This category is full: the map $\\alpha_K$, its ambient inverse from step 5, and their two inverse identities are morphisms and identities in this same subcategory. The resulting isomorphism is therefore in $\\Dbc(X_{\\mathrm{proet}},A)$.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-adic-smooth-base-change.md",
-    "place": "## Proof, expanded using Stacks Tags 0EYU, 099N, 099M, 0944, 07A7, 09AL and the existing coefficient/tower comparison statements"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Smooth base change for derived adically complete pro etale sheaves via finite coefficient reductions",
-      "results": "8 hits; logged top results: Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.FormallyEtale.instForallOfFinite, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.Etale.comp",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern algebraic smoothness, normalization, or ordinary sheaf adjunctions, not completed pro-etale smooth base change"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Smooth, CategoryTheory.IsIso",
-      "results": "1 hits; logged top results: AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern algebraic smoothness, normalization, or ordinary sheaf adjunctions, not completed pro-etale smooth base change"
-    },
-    {
-      "tool": "grep",
-      "query": "smooth.*baseChange|baseChange.*smooth|completed.*exchange|adic.*base.change",
-      "results": "24 hits; logged top results: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/RingHom/Etale.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern algebraic smoothness, normalization, or ordinary sheaf adjunctions, not completed pro-etale smooth base change"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Smooth base change for completed l adic sheaves on the pro etale site",
-      "results": "8 hits; logged top results: Algebra.Smooth.baseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.IsStandardSmooth.baseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern algebraic smoothness, normalization, or ordinary sheaf adjunctions, not completed pro-etale smooth base change"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The base change adjunction mate for smooth pullback and derived direct image is an isomorphism for adic complete sheaves when every torsion reduction has etale origin",
-      "results": "8 hits; logged top results: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
-      "date": "2026-10-16",
-      "verdict": "no match: hits concern algebraic smoothness, normalization, or ordinary sheaf adjunctions, not completed pro-etale smooth base change"
-    },
-    {
-      "tool": "grep",
-      "query": "smooth.*cohom|cohom.*smooth|completedPullback|derivedComplete",
-      "results": "0 hits; logged top results: none",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "IsIso.*(baseChange|base_change)|derivedComplete|DerivedComplete|proEtale|ProEtale",
-      "results": "15 hits; logged top results: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf pullback/pushforward constructions and pro-etale cohomology definitions do not state smooth exchange for completed integral coefficients"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Inverse image of sheaves commutes with derived pushforward for a smooth cartesian square and finite coefficients, then detects isomorphisms after adic completion",
-      "results": "8 hits; logged top results: SheafOfModules.pushforwardCongr, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullbackIso, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pullbackPushforwardAdjunction",
-      "date": "2026-10-16",
-      "verdict": "no match: ordinary sheaf pullback/pushforward constructions and pro-etale cohomology definitions do not state smooth exchange for completed integral coefficients"
-    },
-    {
-      "tool": "grep",
-      "query": "smooth.*baseChange|baseChange.*smooth|completed.*exchange|adic.*base.change",
-      "results": "24 hits; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean",
-      "date": "2026-10-17",
-      "verdict": "no match: ordinary algebraic base change and module sheaf adjunctions do not state completed smooth cohomological exchange"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Smooth base change for completed l adic sheaves on the pro etale site",
-      "results": "0 hits; ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
-      "date": "2026-10-17",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "AlgebraicGeometry.Smooth, CategoryTheory.IsIso",
-      "results": "1 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth",
-      "date": "2026-10-17",
-      "verdict": "no match: ordinary algebraic base change and module sheaf adjunctions do not state completed smooth cohomological exchange"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Smooth base change for derived adically complete pro etale sheaves via finite coefficient reductions",
-      "results": "8 hits; RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.instForallOfFinite, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.Etale.comp, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.localization_base, Algebra.IsEtaleAt.comp",
-      "date": "2026-10-17",
-      "verdict": "no match: ordinary algebraic base change and module sheaf adjunctions do not state completed smooth cohomological exchange"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The base change adjunction mate for smooth pullback and derived direct image is an isomorphism for adic complete sheaves when every torsion reduction has etale origin",
-      "results": "8 hits; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
-      "date": "2026-10-17",
-      "verdict": "no match: ordinary algebraic base change and module sheaf adjunctions do not state completed smooth cohomological exchange"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1443,
-  "blueprint_uses": [
-    "def-sbc-smooth-morphisms",
-    "def-weil-pbc-completed-pullback",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "sbc-def-base-change-square",
-    "sbc-thm-finite-proetale-smooth-base-change",
-    "sbc-thm-smooth-base-change",
-    "thm-weil-pbc-complete-proetale"
-  ],
-  "uses_not_cited": [
-    "def-sbc-smooth-morphisms",
-    "sbc-def-base-change-square"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-rem-rest",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "sbc-thm-adic-smooth-base-change",
-    "worker": "stage1",
-    "summary": "Expanded the finite-reduction proof into eight steps, with general completed adjunction-mate comparison and derived-complete detection, and an explicit constructible-membership argument including normalization-compatible etale witnesses. Reused existing nodes only. STATEMENT-DISPUTED: the imported landing was on S although both endpoints are on X; corrected to X and made the finite-dimension domain conditions of the existing Dbc notation explicit. Distinguished completed coefficient sheaves from finite constant coefficients. Removed the inapplicable proper-base-change theorem as a proof dependency. Q75 resumed from the repository proof after confirming that the sandbox had no prior item or report. Rechecked every cited statement and the current blueprint, removed obsolete further-quotient discussion from step 2, and made the tensor-balancing cocycle in the compatible-witness argument explicit. No new nodes.",
-    "blueprint": "Realizes the single blueprint proof paragraph: completed actions and perfect projection formula in steps 1 and 3; finite-level smooth exchange in step 2; identification of the specified completed mate in step 4; inverse-limit/completeness detection in step 5; constructible landing in steps 6-8. The unit sk-rem-rest is a roadmap with no numbered steps, and this node is not its key statement.",
-    "tool_uses": [
-      {
-        "node": "prop-weil-pbc-direct-image-limits",
-        "why": "Provides completeness and direct-image/derived-limit commutation for arbitrary g and h; the smooth unit has no direct-image completion theorem."
-      },
-      {
-        "node": "lemma-weil-pbc-completed-pullback-reduction",
-        "why": "Identifies actual reductions of completed pullback and supplies completeness for f and e; these are generic completion formulas, not a smooth-base-change assertion."
-      },
-      {
-        "node": "lemma-weil-pbc-perfect-projection-formula",
-        "why": "Identifies finite reductions of Rg_*K and Rh_*E using perfect quotient coefficients without properness; the unit supplies no projection formula."
-      },
-      {
-        "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
-        "why": "Compares finite and completed coefficient operations after exact restriction and reflects isomorphisms; needed to type the reduction argument."
-      },
-      {
-        "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
-        "why": "Supplies canonical inverse-image coefficient isomorphisms and commutative quotient squares needed for coefficient restriction along every edge."
-      },
-      {
-        "node": "lem-weil-pbc-levelwise-isomorphism-cones",
-        "why": "Detects an isomorphism between complete objects from invertibility of all actual quotient reductions; no smoothness enters this general tool."
-      },
-      {
-        "node": "lem-weil-pbc-constant-completion-equivalence",
-        "why": "Provides A_X/I^m A_X = (A/I^m)_X to make cohomology comparisons quotient-linear; used only for coefficient bookkeeping in the conditional landing."
-      },
-      {
-        "node": "lem-weil-pbc-normalized-constructible-local-effectivity",
-        "why": "Turns a normalized reduction tower with constructible cohomology in one interval into the common local models required by the integral category; no base-change invertibility is asserted."
-      },
-      {
-        "node": "lem-weil-pbc-normalized-etale-origin-witnesses",
-        "why": "Lifts the normalizations of the actual reduction towers of the two endpoints to compatible etale-origin witnesses; a generic site-comparison lemma with no smooth-base-change content, and no node of the smooth unit gives it."
-      }
-    ]
-  },
-  "tool_uses": [
-    "prop-weil-pbc-direct-image-limits",
-    "lemma-weil-pbc-completed-pullback-reduction",
-    "lemma-weil-pbc-perfect-projection-formula",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-levelwise-isomorphism-cones",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-normalized-constructible-local-effectivity",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "thm-weil-pbc-site-comparison",
-    "lem-weil-pbc-normalized-etale-origin-witnesses"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q75-9be722708",
-    "group": "Q75",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-9be722708 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and all 8 steps, the 17 proof-dependency and 12 statement-dependency statements, the blueprint_update texts of the six cited nodes that have one, the proof of lem-sbc-completed-operations-linear-natural-exchange, the master, main-20261015 and main-20261017 blueprint texts (identical to each other), and Stacks 099N, 09B1 and 09AL. No SGA source is used and there are no new nodes. (1) The square and exchange morphism match 0EYU and the finite theorem's orientation: α_K is the completed unit-θ-counit mate. The coefficients are the completed sheaf A_W, explicitly not identified with constant A; the finite levels (A_n)_W are the same sheaves as Λ_{W,Proet}. The inherited S→X landing correction is right, since both endpoints are on X. The finite-dimension conditions are exactly what the Dbc notation requires, and |A_n| is a power of ℓ and A_n is perfect, so those assumptions are automatic. The target is not weakened. (2) Steps 1–6 and 8 check out. In step 2 all hypotheses of the finite theorem hold with N=|A_n|. Step 3 only claims comparisons after restriction, which ring-sheaf-change-adjunction (b, d) and profinite-coefficient-inverse-image support. In step 4, the 'finite-level exchange' of the cited mate lemma (its steps 13–16) is the restricted ambient (P_n)-exchange at K_n, which is the same map as δ_n of step 2. Step 5 is the last sentence of levelwise-isomorphism-cones. In step 6 the lift argument for (A_n)-linearity and the hypotheses of normalized-constructible-local-effectivity hold. (3) Long step 7 (2457 characters): the argument is correct, but it hides a lemma that is already a DAG node, lem-weil-pbc-normalized-etale-origin-witnesses (Q92, 2026-10-17, unsplit; its statement gives D^+ membership of the lifted tensors, unique β_{m,n} with the γ/ρ equation, β_{n,n}=1, and the cocycle). That is a C5 duplication and a hidden lemma. FIX: step 7 now cites it, with the origins taken from step 6 and ρ from the adic datum. The four nodes that only step 7 used are removed from proof_deps and split_report.tool_uses, and the witness lemma is added as a tool use. This creates no cycle. Accepted tool uses: direct-image-limits, completed-pullback-reduction, perfect-projection-formula, ring-sheaf-change-adjunction, profinite-coefficient-inverse-image, levelwise-isomorphism-cones, constant-completion-equivalence, normalized-constructible-local-effectivity, normalized-etale-origin-witnesses. The corrected item is in fixes/dag/nodes/sec-smooth-base-change/sbc-thm-adic-smooth-base-change.json and the details are in review.md.; 1 file(s) fixed by the reviewer"
-  },
-  "lean": {
-    "module": "Sheaf.Paper.AdicSmoothBaseChange",
-    "declaration": "WeilConjectures.adicSmoothBaseChange",
-    "declarations": [
-      "WeilConjectures.sbcAdicFiniteCohomology",
-      "WeilConjectures.adicSmoothBaseChange"
-    ],
-    "file": "lean/Sheaf/Paper/AdicSmoothBaseChange.lean",
-    "statement": "theorem adicSmoothBaseChange {X S T Y : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S} {h : Y ⟶ X} {e : Y ⟶ T} (sq : ChosenCartesianSquare h e f g) [IsNoetherian X] [IsNoetherian S] [IsNoetherian T] [IsNoetherian Y] [Smooth f] [QuasiCompact g] [QuasiSeparated g] (_hT : ∃ d : ℕ, topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (_hl : IsUnit (l : Γ(S, ⊤))) (_horder : ∀ n : ℕ, IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(S, ⊤)) ∧ IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(X, ⊤)) ∧ IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(T, ⊤)) ∧ IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(Y, ⊤))) (K : PbcIntegralConstructible l E T) (_horigin : ∀ n : ℕ, ∃ L : Etale.BoundedConstructibleDerivedCategory (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) T, Nonempty ((pbcDerivedFunctionRealization T (pbcIntegralDatum l E) n).obj ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ProEtale.PbcQuotient (pbcIntegralDatum l E) n)) T).mapDerivedCategory.obj L.obj) ≅ (sbcReduction l E T n).obj K.obj)) : IsIso (sbcExchangeApp l E sq ((pbcConstructibleInclusion l E T).obj K)) ∧ ((∃ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞)) → (∃ a b : ℤ, a ≤ b ∧ ∀ n : ℕ, ∀ i : ℤ, (IsConstructibleProEtaleCoefficientModuleSheaf S (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E S n ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj)) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E S n ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj)) i))) ∧ (IsConstructibleProEtaleCoefficientModuleSheaf X (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E X n ((sbcFinitePull l E f n).obj ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj))) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E X n ((sbcFinitePull l E f n).obj ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj))) i))) ∧ (IsConstructibleProEtaleCoefficientModuleSheaf Y (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E Y n ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj)) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E Y n ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj)) i))) ∧ (IsConstructibleProEtaleCoefficientModuleSheaf X (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E X n ((sbcFinitePush l E h n).obj ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj))) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E X n ((sbcFinitePush l E h n).obj ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj))) i)))) → ∃ (hB : PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E) ((sbcPull l E f).obj ((sbcPush l E g).obj ((pbcConstructibleInclusion l E T).obj K))).obj) (hD : PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E) ((sbcPush l E h).obj ((sbcPull l E e).obj ((pbcConstructibleInclusion l E T).obj K))).obj), IsIso (ObjectProperty.homMk (P := PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E)) (X := ⟨((sbcPull l E f).obj ((sbcPush l E g).obj ((pbcConstructibleInclusion l E T).obj K))).obj, hB⟩) (Y := ⟨((sbcPush l E h).obj ((sbcPull l E e).obj ((pbcConstructibleInclusion l E T).obj K))).obj, hD⟩) (sbcExchangeApp l E sq ((pbcConstructibleInclusion l E T).obj K)).hom))",
-    "branch": "newtargets-dag",
-    "by": "N5",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "Uses the published ULift valuation-ring specialization pbcIntegralDatum, the existing intrinsic complete/constructible categories, and the exact sbcExchangeApp. The helper only restricts finite cohomology along the canonical constant/function coefficient isomorphism; no new constructibility predicate or alternate map is defined."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-97c50e20c",
-    "group": "N5",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable statements, all twelve dependencies, sources, canonical constructions, universes, edge cases, docstrings and verbatim signature. Per-file scompile.py reproduction passed without diagnostics. No defects or fixes; branch unchanged."
+    "place": "Proof, final clause: constructible landing; definitions and fullness"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-modules",
+  "sbc-thm-finite-proetale-smooth-base-change",
+  "prop-weil-pbc-direct-image-limits",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-weil-pbc-levelwise-isomorphism-cones",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-normalized-constructible-local-effectivity",
+  "lem-weil-pbc-normalized-etale-origin-witnesses"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/sbc-thm-adic-smooth-base-change.md",
+  "place": "## Proof, expanded using Stacks Tags 0EYU, 099N, 099M, 0944, 07A7, 09AL and the existing coefficient/tower comparison statements"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change for derived adically complete pro etale sheaves via finite coefficient reductions",
+   "results": "8 hits; logged top results: Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.FormallyEtale.instForallOfFinite, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.Etale.comp",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern algebraic smoothness, normalization, or ordinary sheaf adjunctions, not completed pro-etale smooth base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.IsIso",
+   "results": "1 hits; logged top results: AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern algebraic smoothness, normalization, or ordinary sheaf adjunctions, not completed pro-etale smooth base change"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*baseChange|baseChange.*smooth|completed.*exchange|adic.*base.change",
+   "results": "24 hits; logged top results: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/RingHom/Etale.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean, Mathlib/RingTheory/RingHom/StandardSmooth.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern algebraic smoothness, normalization, or ordinary sheaf adjunctions, not completed pro-etale smooth base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change for completed l adic sheaves on the pro etale site",
+   "results": "8 hits; logged top results: Algebra.Smooth.baseChange, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.IsStandardSmooth.baseChange, RingHom.isStandardSmooth_isStableUnderBaseChange, RingHom.Smooth.isStableUnderBaseChange, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern algebraic smoothness, normalization, or ordinary sheaf adjunctions, not completed pro-etale smooth base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change adjunction mate for smooth pullback and derived direct image is an isomorphism for adic complete sheaves when every torsion reduction has etale origin",
+   "results": "8 hits; logged top results: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-16",
+   "verdict": "no match: hits concern algebraic smoothness, normalization, or ordinary sheaf adjunctions, not completed pro-etale smooth base change"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*cohom|cohom.*smooth|completedPullback|derivedComplete",
+   "results": "0 hits; logged top results: none",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsIso.*(baseChange|base_change)|derivedComplete|DerivedComplete|proEtale|ProEtale",
+   "results": "15 hits; logged top results: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf pullback/pushforward constructions and pro-etale cohomology definitions do not state smooth exchange for completed integral coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves commutes with derived pushforward for a smooth cartesian square and finite coefficients, then detects isomorphisms after adic completion",
+   "results": "8 hits; logged top results: SheafOfModules.pushforwardCongr, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pullbackIso, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-16",
+   "verdict": "no match: ordinary sheaf pullback/pushforward constructions and pro-etale cohomology definitions do not state smooth exchange for completed integral coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*baseChange|baseChange.*smooth|completed.*exchange|adic.*base.change",
+   "results": "24 hits; Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean, Mathlib/RingTheory/Smooth/Fiber.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary algebraic base change and module sheaf adjunctions do not state completed smooth cohomological exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth base change for completed l adic sheaves on the pro etale site",
+   "results": "0 hits; ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Smooth, CategoryTheory.IsIso",
+   "results": "1 hits; AlgebraicGeometry.Scheme.Hom.instIsIsoNormalizationPullbackOfSmooth",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary algebraic base change and module sheaf adjunctions do not state completed smooth cohomological exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change for derived adically complete pro etale sheaves via finite coefficient reductions",
+   "results": "8 hits; RingHom.Etale.isStableUnderBaseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.instForallOfFinite, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, Algebra.Etale.comp, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.localization_base, Algebra.IsEtaleAt.comp",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary algebraic base change and module sheaf adjunctions do not state completed smooth cohomological exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The base change adjunction mate for smooth pullback and derived direct image is an isomorphism for adic complete sheaves when every torsion reduction has etale origin",
+   "results": "8 hits; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackIso, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary algebraic base change and module sheaf adjunctions do not state completed smooth cohomological exchange"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1443,
+ "blueprint_uses": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-completed-pullback",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "sbc-def-base-change-square",
+  "sbc-thm-finite-proetale-smooth-base-change",
+  "sbc-thm-smooth-base-change",
+  "thm-weil-pbc-complete-proetale"
+ ],
+ "uses_not_cited": [
+  "def-sbc-smooth-morphisms",
+  "sbc-def-base-change-square"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "sbc-thm-adic-smooth-base-change",
+  "worker": "stage1",
+  "summary": "Expanded the finite-reduction proof into eight steps, with general completed adjunction-mate comparison and derived-complete detection, and an explicit constructible-membership argument including normalization-compatible etale witnesses. Reused existing nodes only. STATEMENT-DISPUTED: the imported landing was on S although both endpoints are on X; corrected to X and made the finite-dimension domain conditions of the existing Dbc notation explicit. Distinguished completed coefficient sheaves from finite constant coefficients. Removed the inapplicable proper-base-change theorem as a proof dependency. Q75 resumed from the repository proof after confirming that the sandbox had no prior item or report. Rechecked every cited statement and the current blueprint, removed obsolete further-quotient discussion from step 2, and made the tensor-balancing cocycle in the compatible-witness argument explicit. No new nodes.",
+  "blueprint": "Realizes the single blueprint proof paragraph: completed actions and perfect projection formula in steps 1 and 3; finite-level smooth exchange in step 2; identification of the specified completed mate in step 4; inverse-limit/completeness detection in step 5; constructible landing in steps 6-8. The unit sk-rem-rest is a roadmap with no numbered steps, and this node is not its key statement.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Provides completeness and direct-image/derived-limit commutation for arbitrary g and h; the smooth unit has no direct-image completion theorem."
+   },
+   {
+    "node": "lemma-weil-pbc-completed-pullback-reduction",
+    "why": "Identifies actual reductions of completed pullback and supplies completeness for f and e; these are generic completion formulas, not a smooth-base-change assertion."
+   },
+   {
+    "node": "lemma-weil-pbc-perfect-projection-formula",
+    "why": "Identifies finite reductions of Rg_*K and Rh_*E using perfect quotient coefficients without properness; the unit supplies no projection formula."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Compares finite and completed coefficient operations after exact restriction and reflects isomorphisms; needed to type the reduction argument."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Supplies canonical inverse-image coefficient isomorphisms and commutative quotient squares needed for coefficient restriction along every edge."
+   },
+   {
+    "node": "lem-weil-pbc-levelwise-isomorphism-cones",
+    "why": "Detects an isomorphism between complete objects from invertibility of all actual quotient reductions; no smoothness enters this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Provides A_X/I^m A_X = (A/I^m)_X to make cohomology comparisons quotient-linear; used only for coefficient bookkeeping in the conditional landing."
+   },
+   {
+    "node": "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "why": "Turns a normalized reduction tower with constructible cohomology in one interval into the common local models required by the integral category; no base-change invertibility is asserted."
+   },
+   {
+    "node": "lem-weil-pbc-normalized-etale-origin-witnesses",
+    "why": "Lifts the normalizations of the actual reduction towers of the two endpoints to compatible etale-origin witnesses; a generic site-comparison lemma with no smooth-base-change content, and no node of the smooth unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-direct-image-limits",
+  "lemma-weil-pbc-completed-pullback-reduction",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-levelwise-isomorphism-cones",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-normalized-constructible-local-effectivity",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-normalized-etale-origin-witnesses"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-9be722708",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-9be722708 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and all 8 steps, the 17 proof-dependency and 12 statement-dependency statements, the blueprint_update texts of the six cited nodes that have one, the proof of lem-sbc-completed-operations-linear-natural-exchange, the master, main-20261015 and main-20261017 blueprint texts (identical to each other), and Stacks 099N, 09B1 and 09AL. No SGA source is used and there are no new nodes. (1) The square and exchange morphism match 0EYU and the finite theorem's orientation: α_K is the completed unit-θ-counit mate. The coefficients are the completed sheaf A_W, explicitly not identified with constant A; the finite levels (A_n)_W are the same sheaves as Λ_{W,Proet}. The inherited S→X landing correction is right, since both endpoints are on X. The finite-dimension conditions are exactly what the Dbc notation requires, and |A_n| is a power of ℓ and A_n is perfect, so those assumptions are automatic. The target is not weakened. (2) Steps 1–6 and 8 check out. In step 2 all hypotheses of the finite theorem hold with N=|A_n|. Step 3 only claims comparisons after restriction, which ring-sheaf-change-adjunction (b, d) and profinite-coefficient-inverse-image support. In step 4, the 'finite-level exchange' of the cited mate lemma (its steps 13–16) is the restricted ambient (P_n)-exchange at K_n, which is the same map as δ_n of step 2. Step 5 is the last sentence of levelwise-isomorphism-cones. In step 6 the lift argument for (A_n)-linearity and the hypotheses of normalized-constructible-local-effectivity hold. (3) Long step 7 (2457 characters): the argument is correct, but it hides a lemma that is already a DAG node, lem-weil-pbc-normalized-etale-origin-witnesses (Q92, 2026-10-17, unsplit; its statement gives D^+ membership of the lifted tensors, unique β_{m,n} with the γ/ρ equation, β_{n,n}=1, and the cocycle). That is a C5 duplication and a hidden lemma. FIX: step 7 now cites it, with the origins taken from step 6 and ρ from the adic datum. The four nodes that only step 7 used are removed from proof_deps and split_report.tool_uses, and the witness lemma is added as a tool use. This creates no cycle. Accepted tool uses: direct-image-limits, completed-pullback-reduction, perfect-projection-formula, ring-sheaf-change-adjunction, profinite-coefficient-inverse-image, levelwise-isomorphism-cones, constant-completion-equivalence, normalized-constructible-local-effectivity, normalized-etale-origin-witnesses. The corrected item is in fixes/dag/nodes/sec-smooth-base-change/sbc-thm-adic-smooth-base-change.json and the details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicSmoothBaseChange",
+  "declaration": "WeilConjectures.adicSmoothBaseChange",
+  "declarations": [
+   "WeilConjectures.sbcAdicFiniteCohomology",
+   "WeilConjectures.adicSmoothBaseChange"
+  ],
+  "file": "lean/Sheaf/Paper/AdicSmoothBaseChange.lean",
+  "statement": "theorem adicSmoothBaseChange {X S T Y : Scheme.{u}} {f : X ⟶ S} {g : T ⟶ S} {h : Y ⟶ X} {e : Y ⟶ T} (sq : ChosenCartesianSquare h e f g) [IsNoetherian X] [IsNoetherian S] [IsNoetherian T] [IsNoetherian Y] [Smooth f] [QuasiCompact g] [QuasiSeparated g] (_hT : ∃ d : ℕ, topologicalKrullDim T ≤ (d : WithBot ℕ∞)) (_hl : IsUnit (l : Γ(S, ⊤))) (_horder : ∀ n : ℕ, IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(S, ⊤)) ∧ IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(X, ⊤)) ∧ IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(T, ⊤)) ∧ IsUnit (Nat.card (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) : Γ(Y, ⊤))) (K : PbcIntegralConstructible l E T) (_horigin : ∀ n : ℕ, ∃ L : Etale.BoundedConstructibleDerivedCategory (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) T, Nonempty ((pbcDerivedFunctionRealization T (pbcIntegralDatum l E) n).obj ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ProEtale.PbcQuotient (pbcIntegralDatum l E) n)) T).mapDerivedCategory.obj L.obj) ≅ (sbcReduction l E T n).obj K.obj)) : IsIso (sbcExchangeApp l E sq ((pbcConstructibleInclusion l E T).obj K)) ∧ ((∃ d : ℕ, topologicalKrullDim X ≤ (d : WithBot ℕ∞)) → (∃ a b : ℤ, a ≤ b ∧ ∀ n : ℕ, ∀ i : ℤ, (IsConstructibleProEtaleCoefficientModuleSheaf S (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E S n ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj)) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E S n ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj)) i))) ∧ (IsConstructibleProEtaleCoefficientModuleSheaf X (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E X n ((sbcFinitePull l E f n).obj ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj))) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E X n ((sbcFinitePull l E f n).obj ((sbcFinitePush l E g n).obj ((sbcReduction l E T n).obj K.obj))) i))) ∧ (IsConstructibleProEtaleCoefficientModuleSheaf Y (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E Y n ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj)) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E Y n ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj)) i))) ∧ (IsConstructibleProEtaleCoefficientModuleSheaf X (ProEtale.PbcQuotient (pbcIntegralDatum l E) n) (sbcAdicFiniteCohomology l E X n ((sbcFinitePush l E h n).obj ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj))) i) ∧ ((i < a ∨ b < i) → IsZero (sbcAdicFiniteCohomology l E X n ((sbcFinitePush l E h n).obj ((sbcFinitePull l E e n).obj ((sbcReduction l E T n).obj K.obj))) i)))) → ∃ (hB : PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E) ((sbcPull l E f).obj ((sbcPush l E g).obj ((pbcConstructibleInclusion l E T).obj K))).obj) (hD : PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E) ((sbcPush l E h).obj ((sbcPull l E e).obj ((pbcConstructibleInclusion l E T).obj K))).obj), IsIso (ObjectProperty.homMk (P := PbcIsBoundedConstructibleComplete X (pbcIntegralDatum l E)) (X := ⟨((sbcPull l E f).obj ((sbcPush l E g).obj ((pbcConstructibleInclusion l E T).obj K))).obj, hB⟩) (Y := ⟨((sbcPush l E h).obj ((sbcPull l E e).obj ((pbcConstructibleInclusion l E T).obj K))).obj, hD⟩) (sbcExchangeApp l E sq ((pbcConstructibleInclusion l E T).obj K)).hom))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "Uses the published ULift valuation-ring specialization pbcIntegralDatum, the existing intrinsic complete/constructible categories, and the exact sbcExchangeApp. The helper only restricts finite cohomology along the canonical constant/function coefficient isomorphism; no new constructibility predicate or alternate map is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-97c50e20c",
+  "group": "N5",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all twelve dependencies, sources, canonical constructions, universes, edge cases, docstrings and verbatim signature. Per-file scompile.py reproduction passed without diagnostics. No defects or fixes; branch unchanged."
+ }
 }

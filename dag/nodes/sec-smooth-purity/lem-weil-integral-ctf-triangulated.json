@@ -1,226 +1,215 @@
 {
-  "id": "lem-weil-integral-ctf-triangulated",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "def-weil-finite-tor-amplitude",
-      "place": "Integral-stage paragraph of def-weil-finite-tor-amplitude: every reduction has finite Tor amplitude with one interval independent of j, and define D^b_ctf(Y,O_E) accordingly",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-weil-integral-ctf-triangulated",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-tor-amplitude",
+   "place": "Integral-stage paragraph of def-weil-finite-tor-amplitude: every reduction has finite Tor amplitude with one interval independent of j, and define D^b_ctf(Y,O_E) accordingly",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Integral finite-Tor-amplitude complexes form a triangulated subcategory",
-  "statement": "For the global finite-field datum [def-weil-finite-field-fiber], with characteristic $p$, fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and a scheme $Y$ on which $\\ell$ is invertible; put $A_{E,j}=\\mathcal O_E/\\varpi_E^j$ for $j\\geq1$. Let $D^b_c(Y,\\mathcal O_E)\\subset D(Y_{\\mathrm{proet}},\\mathcal O_E)$ be the derived-complete bounded constructible category [def-weil-derived-complete-integral-detailed], a triangulated subcategory [lem-weil-integral-constructible-triangulated], and for $K\\in D(Y_{\\mathrm{proet}},\\mathcal O_E)$ let $K\\otimes^L_{\\mathcal O_E}A_{E,j}\\in D(Y_{\\mathrm{proet}},A_{E,j})$ be its derived reduction [def-weil-integral-derived-reduction]. Let $P$ be the property of $K\\in D(Y_{\\mathrm{proet}},\\mathcal O_E)$: $K\\in D^b_c(Y,\\mathcal O_E)$, and there are integers $a\\leq b$ such that $K\\otimes^L_{\\mathcal O_E}A_{E,j}$ has Tor amplitude in $[a,b]$ [def-weil-proetale-tor-amplitude] for every $j\\geq1$. Then $P$ is closed under isomorphisms and defines a full triangulated subcategory of $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ [def-weil-triangulated-subcategory]: $0$ satisfies $P$; $K$ satisfies $P$ if and only if $K[m]$ does, for every $m\\in\\mathbf Z$; and for every distinguished triangle $K\\to L\\to M\\to K[1]$ with $K$ and $M$ satisfying $P$, also $L$ satisfies $P$.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral finite-Tor-amplitude complexes form a triangulated subcategory",
+ "statement": "For the global finite-field datum [def-weil-finite-field-fiber], with characteristic $p$, fix a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ with valuation ring $\\mathcal O_E$ and uniformizer $\\varpi_E$, and a scheme $Y$ on which $\\ell$ is invertible; put $A_{E,j}=\\mathcal O_E/\\varpi_E^j$ for $j\\geq1$. Let $D^b_c(Y,\\mathcal O_E)\\subset D(Y_{\\mathrm{proet}},\\mathcal O_E)$ be the derived-complete bounded constructible category [def-weil-derived-complete-integral-detailed], a triangulated subcategory [lem-weil-integral-constructible-triangulated], and for $K\\in D(Y_{\\mathrm{proet}},\\mathcal O_E)$ let $K\\otimes^L_{\\mathcal O_E}A_{E,j}\\in D(Y_{\\mathrm{proet}},A_{E,j})$ be its derived reduction [def-weil-integral-derived-reduction]. Let $P$ be the property of $K\\in D(Y_{\\mathrm{proet}},\\mathcal O_E)$: $K\\in D^b_c(Y,\\mathcal O_E)$, and there are integers $a\\leq b$ such that $K\\otimes^L_{\\mathcal O_E}A_{E,j}$ has Tor amplitude in $[a,b]$ [def-weil-proetale-tor-amplitude] for every $j\\geq1$. Then $P$ is closed under isomorphisms and defines a full triangulated subcategory of $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ [def-weil-triangulated-subcategory]: $0$ satisfies $P$; $K$ satisfies $P$ if and only if $K[m]$ does, for every $m\\in\\mathbf Z$; and for every distinguished triangle $K\\to L\\to M\\to K[1]$ with $K$ and $M$ satisfying $P$, also $L$ satisfies $P$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Cohomology on Sites, Lemma 21.46.4 (Tag 08G2, label lemma-cone-tor-amplitude), part (2), applied to the reductions, which carry distinguished triangles of $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ to distinguished triangles of $D(Y_{\\mathrm{proet}},A_{E,j})$ and commute with shifts; the integral category follows the blueprint node def-weil-finite-tor-amplitude (literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-finite-tor-amplitude.md)"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-integral-derived-reduction",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-triangulated-subcategory",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "def-weil-derived-complete",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof": [
+  {
+   "text": "For each $j\\geq1$ write $R_j(K)=K\\otimes^L_{\\mathcal O_E}A_{E,j}$. By the derived-reduction definition this is change of rings along $\\pi_j:\\widehat{\\mathcal O}_{E,Y}\\to(A_{E,j})_Y$. Apply the exact derived-change-of-rings functor to this morphism of sheaves of commutative rings on the same site. Thus $R_j$ preserves distinguished triangles, zero objects and isomorphisms, and has the shift comparison $R_j(K[m])\\cong R_j(K)[m]$. If $K\\in D^b_c(Y,\\mathcal O_E)$, every $R_j(K)$ is bounded constructible by the integral-category definition. All finite-stage applications below are consequently on the small pro-etale site, with coefficient ring $A_{E,j}$.",
+   "uses": [
+    "def-weil-integral-derived-reduction",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Cohomology on Sites, Lemma 21.46.4 (Tag 08G2, label lemma-cone-tor-amplitude), part (2), applied to the reductions, which carry distinguished triangles of $D(Y_{\\mathrm{proet}},\\mathcal O_E)$ to distinguished triangles of $D(Y_{\\mathrm{proet}},A_{E,j})$ and commute with shifts; the integral category follows the blueprint node def-weil-finite-tor-amplitude (literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-finite-tor-amplitude.md)"
+    "place": "Tag 06YY, label lemma-derived-base-change, applied to the identity of the site and the coefficient projection"
+   }
   },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-derived-complete-integral-detailed",
-    "lem-weil-integral-constructible-triangulated",
-    "def-weil-integral-derived-reduction",
-    "def-weil-proetale-tor-amplitude",
-    "def-weil-triangulated-subcategory",
-    "def-pc-kflat-complex",
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-integral-reduction-tower-well-defined",
-    "def-weil-derived-complete",
-    "def-weil-integral-reduction-tower"
-  ],
-  "proof": [
-    {
-      "text": "For each $j\\geq1$ write $R_j(K)=K\\otimes^L_{\\mathcal O_E}A_{E,j}$. By the derived-reduction definition this is change of rings along $\\pi_j:\\widehat{\\mathcal O}_{E,Y}\\to(A_{E,j})_Y$. Apply the exact derived-change-of-rings functor to this morphism of sheaves of commutative rings on the same site. Thus $R_j$ preserves distinguished triangles, zero objects and isomorphisms, and has the shift comparison $R_j(K[m])\\cong R_j(K)[m]$. If $K\\in D^b_c(Y,\\mathcal O_E)$, every $R_j(K)$ is bounded constructible by the integral-category definition. All finite-stage applications below are consequently on the small pro-etale site, with coefficient ring $A_{E,j}$.",
-      "uses": [
-        "def-weil-integral-derived-reduction",
-        "lem-pur-derived-change-of-rings",
-        "def-weil-derived-complete-integral-detailed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 06YY, label lemma-derived-base-change, applied to the identity of the site and the coefficient projection"
-      }
-    },
-    {
-      "text": "Isomorphism invariance: if $K\\cong L$ and $P(K)$ holds, the integral constructible triangulated-subcategory lemma gives $L\\in D^b_c(Y,\\mathcal O_E)$. For every $j$ the reduction isomorphism $R_j(K)\\cong R_j(L)$ induces, after derived tensor with any degree-zero $A_{E,j}$-module sheaf $N$, isomorphisms on cohomology. The same reasoning applies to any isomorphism between two objects of $D(Y_{\\mathrm{proet}},A_{E,j})$, so Tor amplitude in a specified interval is invariant under such an isomorphism. Therefore the same uniform interval $[a,b]$ works for $L$. For the zero object, the integral subcategory contains zero, and $R_j(0)$ is zero. Derived tensor of zero with any $N$ is computed by the zero K-flat complex and is zero, so $[0,0]$ works simultaneously for all $j$.",
-      "uses": [
-        "lem-weil-integral-constructible-triangulated",
-        "def-weil-proetale-tor-amplitude",
-        "def-weil-derived-tensor"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08FZ, label definition-tor-amplitude, and the zero complex in the derived-tensor construction"
-      }
-    },
-    {
-      "text": "Let $P(K)$ have uniform Tor interval $[a,b]$, and fix $m\\in\\mathbf Z$. The integral constructible subcategory contains $K[m]$. For each $j\\geq1$, specialize [lem-weil-finite-ctf-triangulated] with the same prime $\\ell$, extension $E$, valuation ring and uniformizer, scheme $Y$, and $n=j$. Its coefficient ring is exactly $A_{E,j}$; the finite-stage statement explicitly binds these coefficient data to the coefficient-extension definition. Every $R_j(K)$ is bounded constructible by step 1 and has Tor amplitude in $[a,b]$ by $P(K)$, so the explicit shift clause of the finite-stage triangulated lemma gives Tor amplitude $[a-m,b-m]$ for $R_j(K)[m]$. The comparison in step 1 and isomorphism invariance in step 2 give the same interval for $R_j(K[m])$, independently of $j$. Thus $P(K[m])$. Conversely apply this implication with $-m$ to $K[m]$ and use $(K[m])[-m]\\cong K$ and step 2.",
-      "uses": [
-        "lem-weil-integral-constructible-triangulated",
-        "lem-weil-finite-ctf-triangulated"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08G2, label lemma-cone-tor-amplitude, translation, as recorded with its interval in lem-weil-finite-ctf-triangulated"
-      }
-    },
-    {
-      "text": "Let $K\\to L\\to M\\to K[1]$ be distinguished, with $P(K)$ and $P(M)$. Choose their uniform Tor intervals $[a_K,b_K]$ and $[a_M,b_M]$ and put $a=\\min(a_K,a_M)$ and $b=\\max(b_K,b_M)$. Then $a\\leq b$. For every $j$ and every degree-zero $A_{E,j}$-module sheaf $N$, an integer outside $[a,b]$ is outside each original interval, so the defining tensor cohomology vanishes for both $R_j(K)$ and $R_j(M)$. Both therefore have Tor amplitude in the common interval $[a,b]$, which is independent of $j$.",
-      "uses": [
-        "def-weil-proetale-tor-amplitude"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08FZ, label definition-tor-amplitude: enlarging the interval"
-      }
-    },
-    {
-      "text": "The integral constructible triangulated-subcategory lemma gives $L\\in D^b_c(Y,\\mathcal O_E)$. For each $j$, step 1 gives the distinguished triangle $R_j(K)\\to R_j(L)\\to R_j(M)\\to R_j(K)[1]$. Its outside vertices are bounded constructible and have the common Tor interval of step 4. Apply the explicit extension clause of the finite-stage triangulated lemma, with the same $\\ell,E,Y$ and $n=j\\geq1$, in $D(Y_{\\mathrm{proet}},A_{E,j})$: $R_j(L)$ has Tor amplitude in $[a,b]$. Since neither endpoint of this interval depends on $j$, this proves $P(L)$.",
-      "uses": [
-        "lem-weil-integral-constructible-triangulated",
-        "lem-weil-finite-ctf-triangulated"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08G2, label lemma-cone-tor-amplitude, part (2), for each reduced distinguished triangle"
-      }
-    },
-    {
-      "text": "Take the full subcategory on the objects satisfying $P$. Step 2 supplies isomorphism closure and zero; step 3 supplies closure under every integer shift (in both directions); steps 4-5 supply extension closure in distinguished triangles. These are precisely the conditions in the definition of a full triangulated subcategory, so this subcategory has the asserted triangulation inherited from the ambient derived category.",
-      "uses": [
-        "def-weil-triangulated-subcategory"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08G2 applied as above; subcategory criterion: literature/stacks-project/derived.tex, Tag 05QM, label definition-triangulated-subcategory"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-integral-derived-reduction",
-    "lem-pur-derived-change-of-rings",
-    "def-weil-derived-complete-integral-detailed",
+  {
+   "text": "Isomorphism invariance: if $K\\cong L$ and $P(K)$ holds, the integral constructible triangulated-subcategory lemma gives $L\\in D^b_c(Y,\\mathcal O_E)$. For every $j$ the reduction isomorphism $R_j(K)\\cong R_j(L)$ induces, after derived tensor with any degree-zero $A_{E,j}$-module sheaf $N$, isomorphisms on cohomology. The same reasoning applies to any isomorphism between two objects of $D(Y_{\\mathrm{proet}},A_{E,j})$, so Tor amplitude in a specified interval is invariant under such an isomorphism. Therefore the same uniform interval $[a,b]$ works for $L$. For the zero object, the integral subcategory contains zero, and $R_j(0)$ is zero. Derived tensor of zero with any $N$ is computed by the zero K-flat complex and is zero, so $[0,0]$ works simultaneously for all $j$.",
+   "uses": [
     "lem-weil-integral-constructible-triangulated",
     "def-weil-proetale-tor-amplitude",
-    "def-weil-derived-tensor",
-    "lem-weil-finite-ctf-triangulated",
+    "def-weil-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, label definition-tor-amplitude, and the zero complex in the derived-tensor construction"
+   }
+  },
+  {
+   "text": "Let $P(K)$ have uniform Tor interval $[a,b]$, and fix $m\\in\\mathbf Z$. The integral constructible subcategory contains $K[m]$. For each $j\\geq1$, specialize [lem-weil-finite-ctf-triangulated] with the same prime $\\ell$, extension $E$, valuation ring and uniformizer, scheme $Y$, and $n=j$. Its coefficient ring is exactly $A_{E,j}$; the finite-stage statement explicitly binds these coefficient data to the coefficient-extension definition. Every $R_j(K)$ is bounded constructible by step 1 and has Tor amplitude in $[a,b]$ by $P(K)$, so the explicit shift clause of the finite-stage triangulated lemma gives Tor amplitude $[a-m,b-m]$ for $R_j(K)[m]$. The comparison in step 1 and isomorphism invariance in step 2 give the same interval for $R_j(K[m])$, independently of $j$. Thus $P(K[m])$. Conversely apply this implication with $-m$ to $K[m]$ and use $(K[m])[-m]\\cong K$ and step 2.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-finite-ctf-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G2, label lemma-cone-tor-amplitude, translation, as recorded with its interval in lem-weil-finite-ctf-triangulated"
+   }
+  },
+  {
+   "text": "Let $K\\to L\\to M\\to K[1]$ be distinguished, with $P(K)$ and $P(M)$. Choose their uniform Tor intervals $[a_K,b_K]$ and $[a_M,b_M]$ and put $a=\\min(a_K,a_M)$ and $b=\\max(b_K,b_M)$. Then $a\\leq b$. For every $j$ and every degree-zero $A_{E,j}$-module sheaf $N$, an integer outside $[a,b]$ is outside each original interval, so the defining tensor cohomology vanishes for both $R_j(K)$ and $R_j(M)$. Both therefore have Tor amplitude in the common interval $[a,b]$, which is independent of $j$.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, label definition-tor-amplitude: enlarging the interval"
+   }
+  },
+  {
+   "text": "The integral constructible triangulated-subcategory lemma gives $L\\in D^b_c(Y,\\mathcal O_E)$. For each $j$, step 1 gives the distinguished triangle $R_j(K)\\to R_j(L)\\to R_j(M)\\to R_j(K)[1]$. Its outside vertices are bounded constructible and have the common Tor interval of step 4. Apply the explicit extension clause of the finite-stage triangulated lemma, with the same $\\ell,E,Y$ and $n=j\\geq1$, in $D(Y_{\\mathrm{proet}},A_{E,j})$: $R_j(L)$ has Tor amplitude in $[a,b]$. Since neither endpoint of this interval depends on $j$, this proves $P(L)$.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-finite-ctf-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08G2, label lemma-cone-tor-amplitude, part (2), for each reduced distinguished triangle"
+   }
+  },
+  {
+   "text": "Take the full subcategory on the objects satisfying $P$. Step 2 supplies isomorphism closure and zero; step 3 supplies closure under every integer shift (in both directions); steps 4-5 supply extension closure in distinguished triangles. These are precisely the conditions in the definition of a full triangulated subcategory, so this subcategory has the asserted triangulation inherited from the ambient derived category.",
+   "uses": [
     "def-weil-triangulated-subcategory"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change) and 08G2 (lemma-cone-tor-amplitude), part (2), applied to each reduction with a common interval; finite-stage shift bounds as in lem-weil-finite-ctf-triangulated"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "tor.?amplitude|finiteTor",
-      "results": "none",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Uniform finite Tor amplitude of all reductions of an adic complex is stable under shifts and distinguished triangles",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"torAmplitude\"",
-      "results": "none",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived complete constructible integral complexes whose reductions have uniformly bounded Tor amplitude form a triangulated subcategory",
-      "results": "DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
-      "date": "2026-10-14",
-      "verdict": "no match: generic t-structures and homological kernels do not state uniform Tor bounds for integral pro-etale reductions"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Intersection of inverse images of interval bounded tensor cohomology properties under triangulated functors is closed under extensions",
-      "results": "DerivedCategory.TStructure.t, CategoryTheory.Functor.mem_homologicalKernel_trW_iff, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, CategoryTheory.Functor.mem_homologicalKernel_W_iff, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.IsHomological, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.instIsLEObjSingleFunctor",
-      "date": "2026-10-14",
-      "verdict": "no match: generic t-structures and homological kernels do not state uniform Tor bounds for integral pro-etale reductions"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Objects of a derived category with uniformly bounded tensor cohomology after all coefficient quotient functors form a triangulated subcategory",
-      "results": "DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor",
-      "date": "2026-10-14",
-      "verdict": "no match: cohomological t-structure bounds alone do not give uniform Tor bounds under every coefficient reduction"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "def-weil-finite-tor-amplitude",
-    "date": "2026-10-09"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-def-sf-operations",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-weil-integral-ctf-triangulated",
-    "worker": "stage1",
-    "summary": "Reuse exact derived change of rings and the existing finite-stage quantitative shift/extension lemma. Check that integral coefficients are the completed sheaf, each reduction changes its coefficient category, and the minimum/maximum Tor bounds remain uniform in j. No new nodes. Second reading restored the source coefficient scope (global characteristic p, ell different from p, ell invertible on Y) and made finite-coefficient Tor isomorphism invariance explicit. Return repair: re-read the current finite-stage sibling after its coefficient-definition reference changed; explicitly matched all finite-stage parameters in steps 3 and 5 and refreshed both verbatim citations. Its quantitative interval clauses are unchanged. Final second reading independently revalidated current dependency statements and all citation quotes; removed the stale claim that the statement was unchanged.",
-    "blueprint": "Realizes the integral-stage paragraph of def-weil-finite-tor-amplitude: the subcategory defined by a uniform Tor interval across all reductions is triangulated. This is a supporting construction for the unit, not its key statement.",
-    "tool_uses": []
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NN-0dde332d7",
-    "group": "NN",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-0dde332d7 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, unit/chapter route, and source passages. Exact reduction uses completed integral coefficients and lands in the finite constant-sheaf category; quantitative shift and extension bounds remain uniform in j. Checked edge cases, DAG reuse candidates, dependencies, and absence of circularity. No new nodes, fixes, or accepted tool_uses. Detailed review written to review.md; no target coefficient comparison is certified by this helper."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.IntegralCtfTriangulated",
-    "declaration": "WeilConjectures.integral_ctf_isTriangulated",
-    "file": "lean/Sheaf/Paper/IntegralCtfTriangulated.lean",
-    "statement": "theorem integral_ctf_isTriangulated (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) [∀ y : Y, Invertible (l : Y.residueField y)] : ObjectProperty.IsClosedUnderIsomorphisms.{u + 2, u + 2} (integralCtfProperty D l hl E Y) ∧ @ObjectProperty.IsTriangulated.{u + 2, u + 2} (completedIntegralDerivedCategory l E Y D hl) inferInstance inferInstance inferInstance inferInstance (fun (n : ℤ) ↦ inferInstance) inferInstance (integralCtfProperty D l hl E Y)",
-    "branch": "newtargets-dag",
-    "by": "NZ",
-    "date": "2026-10-15",
-    "existing": false,
-    "declarations": [
-      "WeilConjectures.integralCtfProperty",
-      "WeilConjectures.integral_ctf_isTriangulated"
-    ]
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-26a22ba19",
-    "group": "NZ",
-    "result": "pass",
-    "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
+    "place": "Tag 08G2 applied as above; subcategory criterion: literature/stacks-project/derived.tex, Tag 05QM, label definition-triangulated-subcategory"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-integral-derived-reduction",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-integral-constructible-triangulated",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-derived-tensor",
+  "lem-weil-finite-ctf-triangulated",
+  "def-weil-triangulated-subcategory"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change) and 08G2 (lemma-cone-tor-amplitude), part (2), applied to each reduction with a common interval; finite-stage shift bounds as in lem-weil-finite-ctf-triangulated"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tor.?amplitude|finiteTor",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform finite Tor amplitude of all reductions of an adic complex is stable under shifts and distinguished triangles",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "none",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete constructible integral complexes whose reductions have uniformly bounded Tor amplitude form a triangulated subcategory",
+   "results": "DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-14",
+   "verdict": "no match: generic t-structures and homological kernels do not state uniform Tor bounds for integral pro-etale reductions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Intersection of inverse images of interval bounded tensor cohomology properties under triangulated functors is closed under extensions",
+   "results": "DerivedCategory.TStructure.t, CategoryTheory.Functor.mem_homologicalKernel_trW_iff, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, CategoryTheory.Functor.mem_homologicalKernel_W_iff, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.IsHomological, CategoryTheory.Functor.isHomological_of_localization, DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: generic t-structures and homological kernels do not state uniform Tor bounds for integral pro-etale reductions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Objects of a derived category with uniformly bounded tensor cohomology after all coefficient quotient functors form a triangulated subcategory",
+   "results": "DerivedCategory.TStructure.t, DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.IsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor",
+   "date": "2026-10-14",
+   "verdict": "no match: cohomological t-structure bounds alone do not give uniform Tor bounds under every coefficient reduction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "def-weil-finite-tor-amplitude",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-weil-integral-ctf-triangulated",
+  "worker": "stage1",
+  "summary": "Reuse exact derived change of rings and the existing finite-stage quantitative shift/extension lemma. Check that integral coefficients are the completed sheaf, each reduction changes its coefficient category, and the minimum/maximum Tor bounds remain uniform in j. No new nodes. Second reading restored the source coefficient scope (global characteristic p, ell different from p, ell invertible on Y) and made finite-coefficient Tor isomorphism invariance explicit. Return repair: re-read the current finite-stage sibling after its coefficient-definition reference changed; explicitly matched all finite-stage parameters in steps 3 and 5 and refreshed both verbatim citations. Its quantitative interval clauses are unchanged. Final second reading independently revalidated current dependency statements and all citation quotes; removed the stale claim that the statement was unchanged.",
+  "blueprint": "Realizes the integral-stage paragraph of def-weil-finite-tor-amplitude: the subcategory defined by a uniform Tor interval across all reductions is triangulated. This is a supporting construction for the unit, not its key statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-0dde332d7",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-0dde332d7 (reviewer sub-agent of L); spot-checked: Read the full item, report, cited statements, unit/chapter route, and source passages. Exact reduction uses completed integral coefficients and lands in the finite constant-sheaf category; quantitative shift and extension bounds remain uniform in j. Checked edge cases, DAG reuse candidates, dependencies, and absence of circularity. No new nodes, fixes, or accepted tool_uses. Detailed review written to review.md; no target coefficient comparison is certified by this helper."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCtfTriangulated",
+  "declaration": "WeilConjectures.integral_ctf_isTriangulated",
+  "file": "lean/Sheaf/Paper/IntegralCtfTriangulated.lean",
+  "statement": "theorem integral_ctf_isTriangulated (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Y : AlgebraicGeometry.Scheme.{u}) [∀ y : Y, Invertible (l : Y.residueField y)] : ObjectProperty.IsClosedUnderIsomorphisms.{u + 2, u + 2} (integralCtfProperty D l hl E Y) ∧ @ObjectProperty.IsTriangulated.{u + 2, u + 2} (completedIntegralDerivedCategory l E Y D hl) inferInstance inferInstance inferInstance inferInstance (fun (n : ℤ) ↦ inferInstance) inferInstance (integralCtfProperty D l hl E Y)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-15",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.integralCtfProperty",
+   "WeilConjectures.integral_ctf_isTriangulated"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-26a22ba19",
+  "group": "NZ",
+  "result": "pass",
+  "note": "All hypotheses, conclusions, dependencies, docstrings, edge cases, universes, source correspondence, and ten-file compiler evidence checked; no findings."
+ }
 }

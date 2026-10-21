@@ -1,182 +1,171 @@
 {
-  "id": "def-sf-fullcd-class",
-  "blueprint": {
-    "is": "def-sf-fullcd-class",
-    "from": null,
-    "same_as": []
+ "id": "def-sf-fullcd-class",
+ "blueprint": {
+  "is": "def-sf-fullcd-class",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "The class-restricted full cohomological-dimension datum",
+ "statement": "Fix the global finite-field datum $(p_0,a,q,k_0,k)$ with $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p_0$, a finite extension $E/\\mathbf Q_\\ell$, a chosen uniformizer $\\varpi_E$ of its valuation ring $\\mathcal O_E$, and an integer $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$, with its finite discrete coefficient convention [def-weil-l-adic-coefficient-extension]. Let $Y$ and $\\overline X$ be finite-type $k$-schemes [def-weil-scheme-over-base, def-weil-finite-type-morphism], and let $p:\\overline X\\to Y$ be a proper finite-type morphism over $k$ [def-weil-proper-morphism].\n\nFor any scheme $T$, use the small pro-étale site $T_{\\mathrm{proet}}$ and its constant-$A$ module category $\\mathsf M_T=\\operatorname{Mod}(T_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-site]. Write $D_T=D(\\mathsf M_T)$ and $\\iota_T\\mathcal F=\\mathcal F[0]$ for the object represented by the complex with $\\mathcal F$ in degree zero and zero elsewhere, as in [def-weil-full-cohomological-dimension]. Use the finite-level total derived direct images of [def-weil-derived-direct-image] and the cohomology-sheaf functors $\\mathcal H_T^r:D_T\\to\\mathsf M_T$ [def-weil-derived-cohomology-sheaves].\n\nA sheaf $\\mathcal F\\in\\mathsf M_{\\overline X}$ belongs to the coefficient class of [def-sf-fullcd-used-class] if there exist a sheaf $\\mathcal G$ of modules over the constant ring $A$ on $\\overline X_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves] and an isomorphism of $A$-module sheaves $\\nu_{\\overline X}^*\\mathcal G\\cong\\mathcal F$. Here $\\nu_{\\overline X}$ is the comparison morphism [def-weil-pbc-site-comparison-morphism]. Membership means existence of a witness, with no chosen witness as additional data; no constructibility condition is imposed on $\\mathcal G$.\n\nFor $c\\in\\mathbf Z_{\\geq0}$, define $\\operatorname{FullCD}_{\\mathrm{cls}}(p,A;c)$ to be the conjunction of the following two clauses.\n\n1. For every $\\mathcal F\\in\\mathsf M_{\\overline X}$ in this class and every integer $r>c$,\n$$\n \\mathcal H_Y^r\\bigl(Rp_*(\\iota_{\\overline X}\\mathcal F)\\bigr)=0\n \\quad\\text{in }\\mathsf M_Y.\n$$\n2. For every object $v:V\\to Y$ of $Y_{\\mathrm{proet}}$, form the fibre product $\\overline X_V=\\overline X\\times_YV$ [def-pc-fibre-product], with projections $g_V:\\overline X_V\\to\\overline X$ and $p_V:\\overline X_V\\to V$. For every $\\mathcal F\\in\\mathsf M_{\\overline X}$ in this class and every integer $r>c$,\n$$\n \\mathcal H_V^r\\bigl(R(p_V)_*(\\iota_{\\overline X_V}(g_V^*\\mathcal F))\\bigr)=0\n \\quad\\text{in }\\mathsf M_V.\n$$\nHere $g_V^*\\mathcal F=\\mathcal F|_{\\overline X_V}$ is the module-sheaf pullback of [def-weil-proetale-inverse-image], namely inverse image followed by extension of scalars from $g_V^{-1}A_{\\overline X}$ to $A_{\\overline X_V}$. Both clauses use the same coefficient ring $A$ and the same bound $c$. The quantifier in clause 2 is over sheaves on the original source $\\overline X$, followed by pullback; it is not a quantifier over all sheaves on $\\overline X_V$. There is no finite-type requirement on $V$ or $\\overline X_V$. This defines the class form of the two clauses of $\\operatorname{FullCD}(p,A;c)$ [def-weil-full-cohomological-dimension] by restricting their original-source sheaf quantifier to the essential image just specified.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/def-sf-fullcd-class.md",
+  "place": "node def-sf-fullcd-class, order 1799"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-proetale-site",
+  "def-weil-full-cohomological-dimension",
+  "def-weil-derived-direct-image",
+  "def-weil-derived-cohomology-sheaves",
+  "def-sf-fullcd-used-class",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-pc-fibre-product",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FullCohomologicalDimension|HasCohomologicalDimensionLE|etaleOrigin|proetale",
+   "results": "10 hits, all in Mathlib/AlgebraicGeometry/Sites/Proetale.lean or ElladicCohomology.lean: pro-étale topology and site definitions or comments, not the class-restricted FullCD predicate. Read Proetale.lean in full. Scope: AlgebraicGeometry.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "kind": "definition",
-  "title": "The class-restricted full cohomological-dimension datum",
-  "statement": "Fix the global finite-field datum $(p_0,a,q,k_0,k)$ with $k=\\overline{\\mathbf F}_q$ [def-weil-finite-field-fiber]. Fix a prime $\\ell\\ne p_0$, a finite extension $E/\\mathbf Q_\\ell$, a chosen uniformizer $\\varpi_E$ of its valuation ring $\\mathcal O_E$, and an integer $n\\geq1$. Put $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n\\mathcal O_E$, with its finite discrete coefficient convention [def-weil-l-adic-coefficient-extension]. Let $Y$ and $\\overline X$ be finite-type $k$-schemes [def-weil-scheme-over-base, def-weil-finite-type-morphism], and let $p:\\overline X\\to Y$ be a proper finite-type morphism over $k$ [def-weil-proper-morphism].\n\nFor any scheme $T$, use the small pro-étale site $T_{\\mathrm{proet}}$ and its constant-$A$ module category $\\mathsf M_T=\\operatorname{Mod}(T_{\\mathrm{proet}},A)$ [def-weil-pbc-proetale-site]. Write $D_T=D(\\mathsf M_T)$ and $\\iota_T\\mathcal F=\\mathcal F[0]$ for the object represented by the complex with $\\mathcal F$ in degree zero and zero elsewhere, as in [def-weil-full-cohomological-dimension]. Use the finite-level total derived direct images of [def-weil-derived-direct-image] and the cohomology-sheaf functors $\\mathcal H_T^r:D_T\\to\\mathsf M_T$ [def-weil-derived-cohomology-sheaves].\n\nA sheaf $\\mathcal F\\in\\mathsf M_{\\overline X}$ belongs to the coefficient class of [def-sf-fullcd-used-class] if there exist a sheaf $\\mathcal G$ of modules over the constant ring $A$ on $\\overline X_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves] and an isomorphism of $A$-module sheaves $\\nu_{\\overline X}^*\\mathcal G\\cong\\mathcal F$. Here $\\nu_{\\overline X}$ is the comparison morphism [def-weil-pbc-site-comparison-morphism]. Membership means existence of a witness, with no chosen witness as additional data; no constructibility condition is imposed on $\\mathcal G$.\n\nFor $c\\in\\mathbf Z_{\\geq0}$, define $\\operatorname{FullCD}_{\\mathrm{cls}}(p,A;c)$ to be the conjunction of the following two clauses.\n\n1. For every $\\mathcal F\\in\\mathsf M_{\\overline X}$ in this class and every integer $r>c$,\n$$\n \\mathcal H_Y^r\\bigl(Rp_*(\\iota_{\\overline X}\\mathcal F)\\bigr)=0\n \\quad\\text{in }\\mathsf M_Y.\n$$\n2. For every object $v:V\\to Y$ of $Y_{\\mathrm{proet}}$, form the fibre product $\\overline X_V=\\overline X\\times_YV$ [def-pc-fibre-product], with projections $g_V:\\overline X_V\\to\\overline X$ and $p_V:\\overline X_V\\to V$. For every $\\mathcal F\\in\\mathsf M_{\\overline X}$ in this class and every integer $r>c$,\n$$\n \\mathcal H_V^r\\bigl(R(p_V)_*(\\iota_{\\overline X_V}(g_V^*\\mathcal F))\\bigr)=0\n \\quad\\text{in }\\mathsf M_V.\n$$\nHere $g_V^*\\mathcal F=\\mathcal F|_{\\overline X_V}$ is the module-sheaf pullback of [def-weil-proetale-inverse-image], namely inverse image followed by extension of scalars from $g_V^{-1}A_{\\overline X}$ to $A_{\\overline X_V}$. Both clauses use the same coefficient ring $A$ and the same bound $c$. The quantifier in clause 2 is over sheaves on the original source $\\overline X$, followed by pullback; it is not a quantifier over all sheaves on $\\overline X_V$. There is no finite-type requirement on $V$ or $\\overline X_V$. This defines the class form of the two clauses of $\\operatorname{FullCD}(p,A;c)$ [def-weil-full-cohomological-dimension] by restricting their original-source sheaf quantifier to the essential image just specified.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-fullcd-etale-origin/def-sf-fullcd-class.md",
-    "place": "node def-sf-fullcd-class, order 1799"
+  {
+   "tool": "leansearch",
+   "query": "Uniform vanishing of higher direct images of sheaves of modules of etale origin after pro etale base change",
+   "results": "8 hits about étale ring maps, scheme sites and stability of étale/proper morphisms under base change; none defines the predicate.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-scheme-over-base",
-    "def-weil-finite-type-morphism",
-    "def-weil-proper-morphism",
-    "def-weil-pbc-proetale-site",
-    "def-weil-full-cohomological-dimension",
-    "def-weil-derived-direct-image",
-    "def-weil-derived-cohomology-sheaves",
-    "def-sf-fullcd-used-class",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-pc-fibre-product",
-    "def-weil-proetale-inverse-image"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "FullCohomologicalDimension|HasCohomologicalDimensionLE|etaleOrigin|proetale",
-      "results": "10 hits, all in Mathlib/AlgebraicGeometry/Sites/Proetale.lean or ElladicCohomology.lean: pro-étale topology and site definitions or comments, not the class-restricted FullCD predicate. Read Proetale.lean in full. Scope: AlgebraicGeometry.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Uniform vanishing of higher direct images of sheaves of modules of etale origin after pro etale base change",
-      "results": "8 hits about étale ring maps, scheme sites and stability of étale/proper morphisms under base change; none defines the predicate.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A morphism of schemes has uniform cohomological dimension at most c on sheaves of finite coefficient modules of etale origin, including pullbacks along every object of the pro etale site.",
-      "results": "8 hits about étale morphisms and sites plus CochainComplex.IsKProjective; none defines a uniform derived direct-image bound restricted to étale-origin sheaves.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf, \"cohomological\"",
-      "results": "0 hits; no error reported.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "CohomologicalDimension|cohomological dimension|cohomologicalDimension",
-      "results": "0 hits in Mathlib/CategoryTheory; no error reported. Scope: CategoryTheory.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Define a cohomological dimension bound for a functor restricted to the essential image of an inverse image functor, uniformly after base change.",
-      "results": "8 hits in Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean: DerivedCategory.isGE_Q_obj_iff, isLE_Q_obj_iff, the corresponding instances, singleFunctor support instances, IsGE, and exists_iso_Q_obj_of_isGE_of_isLE. Read the support definitions and lemmas; these concern one derived object and do not define the sheaf-class and base-change quantifiers.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "cohomological.{0,8}dimension|etale.{0,8}origin|FullCD",
-      "results": "Zero hits across Mathlib; grep completed successfully.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A functor on derived categories of sheaves has higher cohomology zero above a fixed degree for all sheaves in the essential image of another functor, and this bound holds after every base change.",
-      "results": "Eight hits concerning cohomological support of individual derived objects. Read DerivedCategory.isGE_iff and DerivedCategory.isLE_iff in Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:90-119: they characterize vanishing for a single object, not this class-restricted sheaf quantifier and its uniform base-change clause. No exact match.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"cohomologicalDimension\"",
-      "results": "Zero hits; service returned successfully with no error.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1799,
-  "blueprint_uses": [
-    "def-sf-fullcd-used-class",
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-derived-direct-image",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-full-cohomological-dimension",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-scheme-morphism-properties",
-    "lem-sf-fullcd-class-restriction",
-    "lem-sf-proetale-constructible-origin"
-  ],
-  "uses_not_cited": [
-    "def-weil-derived-cohomology-sheaves",
-    "def-weil-derived-direct-image",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-pbc-proetale-site",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes has uniform cohomological dimension at most c on sheaves of finite coefficient modules of etale origin, including pullbacks along every object of the pro etale site.",
+   "results": "8 hits about étale morphisms and sites plus CochainComplex.IsKProjective; none defines a uniform derived direct-image bound restricted to étale-origin sheaves.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-fullcd-etale-origin",
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.SfClassFullCohomologicalDimension",
-    "declaration": "AlgebraicGeometry.ProEtale.sfClassFullCohomologicalDimension",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.sfClassFullCohomologicalDimension"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/SfClassFullCohomologicalDimension.lean",
-    "statement": "def sfClassFullCohomologicalDimension {X Y : Scheme.{u}} (p : X ⟶ Y) (A : Type u) [CommRing A] (c : ℕ) : Prop",
-    "branch": "newtargets-dag",
-    "by": "NY",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "§1(B): the now-published HasCohomologicalDimensionLEOnEtaleOrigin has the two required vanishing clauses, but its FullCohomologicalDimension module imports legacy pro-etale Derived.Comparison and ExceptionalAdjoint modules, incompatible with the recorded intrinsic finite-coefficient import closure. This module renders those same two clauses using the compatible finite-coefficient operations and canonical chosen pullbacks. It uses the essential-image definition of etale origin, without the false explanatory identification of all such sheaves with constructible sheaves."
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"cohomological\"",
+   "results": "0 hits; no error reported.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-579de47d0",
-    "group": "NY",
-    "result": "pass",
-    "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
+  {
+   "tool": "grep",
+   "query": "CohomologicalDimension|cohomological dimension|cohomologicalDimension",
+   "results": "0 hits in Mathlib/CategoryTheory; no error reported. Scope: CategoryTheory.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "def-sf-fullcd-class",
-    "worker": "stage1",
-    "summary": "Audited the definition against its blueprint source, the unit, every retained notion, and the finite-level all-sheaf FullCD definition. Corrected the false equality between all étale-origin sheaves and constructible sheaves; retained the full essential-image class. Made the degree-zero embedding and constant-coefficient pullback explicit, preserving both vanishing clauses and the original-source sheaf quantifier under arbitrary site-object base change. Reused all notion nodes; no new nodes or Mathlib leaves. No exact project attachment or Mathlib definition found.",
-    "blueprint": "The complete defining paragraph and both displayed vanishing clauses of blueprint def-sf-fullcd-class (order 1799); realizes the class-form notation used by the unit sk-prop-sf-fullcd-etale-origin. Corrects only the erroneous explanatory identification with constructibility; no unit route is replaced."
+  {
+   "tool": "leanfinder",
+   "query": "Define a cohomological dimension bound for a functor restricted to the essential image of an inverse image functor, uniformly after base change.",
+   "results": "8 hits in Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean: DerivedCategory.isGE_Q_obj_iff, isLE_Q_obj_iff, the corresponding instances, singleFunctor support instances, IsGE, and exists_iso_Q_obj_of_isGE_of_isLE. Read the support definitions and lemmas; these concern one derived object and do not define the sheaf-class and base-change quantifiers.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-NO-e75031b6a",
-    "group": "NO",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-e75031b6a (reviewer sub-agent of L); spot-checked: Read the full definition, all fourteen cited statements, master sources, and unit/chapter route. Both vanishing clauses preserve the original-source sheaf quantifier and finite constant coefficients. Stacks 09AJ–09AK and the infinite-module counterexample justify removing the false constructibility identification. No new nodes, missing direct citations, or repairs. Concrete checks recorded in review.md."
+  {
+   "tool": "grep",
+   "query": "cohomological.{0,8}dimension|etale.{0,8}origin|FullCD",
+   "results": "Zero hits across Mathlib; grep completed successfully.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, an integer\n$n\\geq1$, $A=A_{E,n}$ with the\nfinite-torsion\ncoefficient convention, $k=\\Fbar$, finite-type $k$-schemes $Y$ and\n$\\overline X$, and a proper\nfinite-type $k$-morphism $p:\\overline X\\to Y$. Use the\nsmall pro-étale sites, the\nderived direct image $Rp_*$, and\nthe cohomology-sheaf\nfunctor $\\mathcal H^r$. Call a sheaf $\\mathcal F$ of $A$-modules on\n$\\overline X_{\\Proet}$ a *coefficient sheaf of the blueprint's class*\nif it is of étale origin,\n$\\mathcal F\\cong\\nu_{\\overline X}^*\\mathcal G$ for a sheaf $\\mathcal G$\nof $A$-modules on $\\overline X_{\\Et}$ in the sense of\n[def-weil-pbc-etale-sheaves], the comparison morphism\n$\\nu_{\\overline X}$ being that of\n[def-weil-pbc-site-comparison-morphism]; this is the class of\n[def-sf-fullcd-used-class], read on the source $\\overline X$, and by\n[lem-sf-proetale-constructible-origin] it is also the class of\nconstructible pro-étale coefficient sheaves. For an integer\n$c\\in\\mathbf Z_{\\geq0}$, write\n$\\operatorname{FullCD}_{\\mathrm{cls}}(p,A;c)$ if\n\n$$\n\\mathcal H^r(Rp_*\\mathcal F)=0\\qquad(r\\in\\mathbf Z,\\ r>c)\n$$\n\nfor every coefficient sheaf $\\mathcal F$ of that class on\n$\\overline X_{\\Proet}$, and if, for every object $V\\to Y$ of\n$Y_{\\Proet}$ and every such $\\mathcal F$, the base change\n$p_V:\\overline X\\times_YV\\to V$ of $p$ satisfies\n\n$$\n\\mathcal H^r\\bigl(R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV})\\bigr)=0\n\\qquad(r\\in\\mathbf Z,\\ r>c),\n$$\n\nthe restriction $\\mathcal F|_{\\overline X\\times_YV}$ being the pullback\nalong the projection $\\overline X\\times_YV\\to\\overline X$, which is again\nof étale origin on the base-changed source by\n[lem-sf-fullcd-class-restriction].",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "A functor on derived categories of sheaves has higher cohomology zero above a fixed degree for all sheaves in the essential image of another functor, and this bound holds after every base change.",
+   "results": "Eight hits concerning cohomological support of individual derived objects. Read DerivedCategory.isGE_iff and DerivedCategory.isLE_iff in Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:90-119: they characterize vanishing for a single object, not this class-restricted sheaf quantifier and its uniform base-change clause. No exact match.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomologicalDimension\"",
+   "results": "Zero hits; service returned successfully with no error.",
+   "date": "2026-10-16",
+   "verdict": "no match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1799,
+ "blueprint_uses": [
+  "def-sf-fullcd-used-class",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-full-cohomological-dimension",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-scheme-morphism-properties",
+  "lem-sf-fullcd-class-restriction",
+  "lem-sf-proetale-constructible-origin"
+ ],
+ "uses_not_cited": [
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-site",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-fullcd-etale-origin",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfClassFullCohomologicalDimension",
+  "declaration": "AlgebraicGeometry.ProEtale.sfClassFullCohomologicalDimension",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfClassFullCohomologicalDimension"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SfClassFullCohomologicalDimension.lean",
+  "statement": "def sfClassFullCohomologicalDimension {X Y : Scheme.{u}} (p : X ⟶ Y) (A : Type u) [CommRing A] (c : ℕ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "§1(B): the now-published HasCohomologicalDimensionLEOnEtaleOrigin has the two required vanishing clauses, but its FullCohomologicalDimension module imports legacy pro-etale Derived.Comparison and ExceptionalAdjoint modules, incompatible with the recorded intrinsic finite-coefficient import closure. This module renders those same two clauses using the compatible finite-coefficient operations and canonical chosen pullbacks. It uses the essential-image definition of etale origin, without the false explanatory identification of all such sheaves with constructible sheaves."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-579de47d0",
+  "group": "NY",
+  "result": "pass",
+  "note": "Statement, dependencies, declarations, universes, edge cases, canonical maps, report sections, and compiler evidence checked; no findings."
+ },
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "def-sf-fullcd-class",
+  "worker": "stage1",
+  "summary": "Audited the definition against its blueprint source, the unit, every retained notion, and the finite-level all-sheaf FullCD definition. Corrected the false equality between all étale-origin sheaves and constructible sheaves; retained the full essential-image class. Made the degree-zero embedding and constant-coefficient pullback explicit, preserving both vanishing clauses and the original-source sheaf quantifier under arbitrary site-object base change. Reused all notion nodes; no new nodes or Mathlib leaves. No exact project attachment or Mathlib definition found.",
+  "blueprint": "The complete defining paragraph and both displayed vanishing clauses of blueprint def-sf-fullcd-class (order 1799); realizes the class-form notation used by the unit sk-prop-sf-fullcd-etale-origin. Corrects only the erroneous explanatory identification with constructibility; no unit route is replaced."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-NO-e75031b6a",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-e75031b6a (reviewer sub-agent of L); spot-checked: Read the full definition, all fourteen cited statements, master sources, and unit/chapter route. Both vanishing clauses preserve the original-source sheaf quantifier and finite constant coefficients. Stacks 09AJ–09AK and the infinite-module counterexample justify removing the false constructibility identification. No new nodes, missing direct citations, or repairs. Concrete checks recorded in review.md."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Fix the global finite-field datum, a prime $\\ell\\ne p$, an integer\n$n\\geq1$, $A=A_{E,n}$ with the\nfinite-torsion\ncoefficient convention, $k=\\Fbar$, finite-type $k$-schemes $Y$ and\n$\\overline X$, and a proper\nfinite-type $k$-morphism $p:\\overline X\\to Y$. Use the\nsmall pro-étale sites, the\nderived direct image $Rp_*$, and\nthe cohomology-sheaf\nfunctor $\\mathcal H^r$. Call a sheaf $\\mathcal F$ of $A$-modules on\n$\\overline X_{\\Proet}$ a *coefficient sheaf of the blueprint's class*\nif it is of étale origin,\n$\\mathcal F\\cong\\nu_{\\overline X}^*\\mathcal G$ for a sheaf $\\mathcal G$\nof $A$-modules on $\\overline X_{\\Et}$ in the sense of\n[def-weil-pbc-etale-sheaves], the comparison morphism\n$\\nu_{\\overline X}$ being that of\n[def-weil-pbc-site-comparison-morphism]; this is the class of\n[def-sf-fullcd-used-class], read on the source $\\overline X$, and by\n[lem-sf-proetale-constructible-origin] it is also the class of\nconstructible pro-étale coefficient sheaves. For an integer\n$c\\in\\mathbf Z_{\\geq0}$, write\n$\\operatorname{FullCD}_{\\mathrm{cls}}(p,A;c)$ if\n\n$$\n\\mathcal H^r(Rp_*\\mathcal F)=0\\qquad(r\\in\\mathbf Z,\\ r>c)\n$$\n\nfor every coefficient sheaf $\\mathcal F$ of that class on\n$\\overline X_{\\Proet}$, and if, for every object $V\\to Y$ of\n$Y_{\\Proet}$ and every such $\\mathcal F$, the base change\n$p_V:\\overline X\\times_YV\\to V$ of $p$ satisfies\n\n$$\n\\mathcal H^r\\bigl(R(p_V)_*(\\mathcal F|_{\\overline X\\times_YV})\\bigr)=0\n\\qquad(r\\in\\mathbf Z,\\ r>c),\n$$\n\nthe restriction $\\mathcal F|_{\\overline X\\times_YV}$ being the pullback\nalong the projection $\\overline X\\times_YV\\to\\overline X$, which is again\nof étale origin on the base-changed source by\n[lem-sf-fullcd-class-restriction].",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

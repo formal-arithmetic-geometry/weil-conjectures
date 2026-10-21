@@ -1,271 +1,159 @@
 {
-  "id": "lem-pc-fpqc-descent",
-  "blueprint": {
-    "is": "lem-pc-fpqc-descent",
-    "from": null,
-    "same_as": null
+ "id": "lem-pc-fpqc-descent",
+ "blueprint": {
+  "is": "lem-pc-fpqc-descent",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "FPQC descent for quasi-coherent modules",
+ "statement": "(Descent, Proposition 35.5.2, Tag\n[023T](https://stacks.math.columbia.edu/tag/023T), and Descent,\nSection 35.7.) Let $\\{f_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of\nschemes.\n\n1. The functor $\\mathcal{M}\\mapsto(f_i^*\\mathcal{M},\\mathrm{can})_{i\\in I}$\nfrom quasi-coherent $\\mathcal{O}_S$-modules to descent data of\nquasi-coherent modules for this covering (quasi-coherent\n$\\mathcal{O}_{S_i}$-modules $\\mathcal{M}_i$ with isomorphisms\n$\\varphi_{ii'}:\\mathrm{pr}_1^*\\mathcal{M}_i\\to\\mathrm{pr}_2^*\\mathcal{M}_{i'}$\non $S_i\\times_SS_{i'}$ satisfying the cocycle condition on the triple\nproducts) is an equivalence of categories: every descent datum is\neffective.\n2. The equivalence preserves and reflects flatness, finite presentation\nand finite local freeness (of a given rank $r$): a quasi-coherent\n$\\mathcal{M}$ has one of these properties if and only if every\n$f_i^*\\mathcal{M}$ has it.\n3. In particular (*descent of invertible modules*, [def-sc-invertible-module]):\ninvertible $\\mathcal{O}_{S_i}$-modules with gluing isomorphisms\nsatisfying the cocycle condition glue to an invertible\n$\\mathcal{O}_S$-module $\\mathcal{L}$ with $f_i^*\\mathcal{L}\\cong\\mathcal{L}_i$\ncompatibly with the gluing data; and if an invertible\n$\\mathcal{O}_S$-module $\\mathcal{L}$ admits trivializations\n$f_i^*\\mathcal{L}\\cong\\mathcal{O}_{S_i}$ whose two pullbacks to every\n$S_i\\times_SS_{i'}$ agree (i.e. compatible with the canonical gluing\nisomorphisms), then $\\mathcal{L}\\cong\\mathcal{O}_S$. (Without the\ncompatibility this fails already for Zariski coverings.)\n\nApplied to the fpqc covering $\\{X_{T_i}\\to X_T\\}$ obtained by base change\nfrom an fpqc covering $\\{T_i\\to T\\}$ and a morphism $X\\to T$, this is\nthe form in which the statement is used: cartesian families\n$\\mathcal{L}_i$ on $X_{T_i}$ satisfying the cocycle condition glue to an\ninvertible $\\mathcal{L}$ on $X_T$ with $\\mathcal{L}|_{X_{T_i}}\\cong\\mathcal{L}_i$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-descent/lem-pc-fpqc-descent.md",
+  "place": "node lem-pc-fpqc-descent, order 763",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 023T"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 023N"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 022D"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 022B"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-sc-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1: the affine case for modules.* Let $A\\to B$ be a faithfully\nflat ring map, and let\n\n$$\n\\Delta:B\\longrightarrow B\\otimes_AB,\\quad \\Delta(b)=b\\otimes1\n$$\n\nbe the canonical inclusion; write $B^{\\otimes r}$ for the $r$-fold\ntensor product. A *descent datum* for the covering\n$\\{\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)\\}$ on a $B$-module $N$ is an isomorphism\n\n$$\n\\psi:N\\otimes_AB\\longrightarrow B\\otimes_AN\n$$\n\nof $B\\otimes_AB$-modules satisfying the\n*cocycle condition*: the two isomorphisms\n\n$$\nN\\otimes_AB\\otimes_AB\\longrightarrow B\\otimes_AB\\otimes_AN\n$$\n\nobtained by applying $\\psi$ to the first two, resp. to the last two,\ntensor factors, agree. *Claim: the functor from $A$-modules to\n$B$-modules with descent datum (an $A$-module $M$ goes to\n$M\\otimes_AB$ with the canonical swap isomorphism) is an equivalence.*\n\nThe classical proof (EGA 0$_{IV}$, (2.5.7); Bourbaki, Alg. comm. V,\n§1, no. 9; this is the argument of Stacks, Descent,\nProposition 35.3.9, Tag [023N](https://stacks.math.columbia.edu/tag/023N), which states that for a faithfully flat\n$R\\to A$ the functor $M\\mapsto(A\\otimes_RM,\\mathrm{can})$ from\n$R$-modules to modules with descent datum is an equivalence),\nwhich we reproduce: given $(N,\\psi)$, put\n\n$$\nN_0:=\\ker\\bigl(N\\longrightarrow B\\otimes_AN\\bigr),\n\\qquad\nn\\longmapsto\\psi(n\\otimes1)-1\\otimes n .\n$$\n\nThe cocycle condition says precisely that the (twisted) Amitsur-type\ncomplex\n\n$$\n0\\to N_0\\to N\\to B\\otimes_AN\\to B\\otimes_AB\\otimes_AN\\to\\cdots\n$$\n\n(the differentials are the alternating sums of the cyclic permutations\nof the tensor factors, with the first map $N\\to B\\otimes_AN$ the\ndifference above; in degree $r$, $\\sum_{j=0}^{r+1}(-1)^j$ of the\n$r$-fold multiplications with $\\psi$ applied to the appropriate\nfactors) is a complex, and the maps\n\n$$\ns(b_1\\otimes\\cdots\\otimes b_p\\otimes n):=b_1\\otimes\\cdots\\otimes\nb_{p-1}\\otimes\\psi^{-1}(b_p\\otimes n)\n$$\n\nsatisfy $ds+sd=\\mathrm{id}$ (the two double sums cancel pairwise;\nonly the top and bottom terms – which are $\\mathrm{id}$ and\n$N_0$-inclusion-composed terms – remain; the cocycle condition is\nwhat makes the $\\psi$-twisted pieces cancel). Hence the complex is\nsplit exact; in particular the composite\n\n$$\nN_0\\otimes_AB\\longrightarrow N\\otimes_AB\\cong B\\otimes_AN\n$$\n\nhas image the kernel of $B\\otimes_AN\\to B\\otimes_AB\\otimes_AN$, which\nby the exactness is $N_0\\otimes_AB$; the exactness in degree zero\nsays this kernel is mapped isomorphically onto its image, and the\ncocycle argument with the contracting homotopy identifies this image\nwith all of $N$: $N_0\\otimes_AB\\cong N$, compatibly with the descent\ndata. The faithfulness (an $A$-map vanishing after $\\otimes_AB$\nvanishes) and the fullness (a map of descent data is determined by –\nand arises from – the induced map on the kernels, by the same\nexactness) are then immediate: a morphism $N\\to N'$ compatible with\nthe data maps the kernel $N_0$ into $N_0'$; conversely a map\n$N_0\\to N_0'$ yields a map of the $\\otimes_AB$-modules which is\ncompatible with the kernels and the exactness shows it comes from a\nunique such $A$-map. This proves the claim.",
+   "uses": [],
+   "elementary": null
   },
-  "kind": "statement",
-  "title": "FPQC descent for quasi-coherent modules",
-  "statement": "(Descent, Proposition 35.5.2, Tag\n[023T](https://stacks.math.columbia.edu/tag/023T), and Descent,\nSection 35.7.) Let $\\{f_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of\nschemes.\n\n1. The functor $\\mathcal{M}\\mapsto(f_i^*\\mathcal{M},\\mathrm{can})_{i\\in I}$\nfrom quasi-coherent $\\mathcal{O}_S$-modules to descent data of\nquasi-coherent modules for this covering (quasi-coherent\n$\\mathcal{O}_{S_i}$-modules $\\mathcal{M}_i$ with isomorphisms\n$\\varphi_{ii'}:\\mathrm{pr}_1^*\\mathcal{M}_i\\to\\mathrm{pr}_2^*\\mathcal{M}_{i'}$\non $S_i\\times_SS_{i'}$ satisfying the cocycle condition on the triple\nproducts) is an equivalence of categories: every descent datum is\neffective.\n2. The equivalence preserves and reflects flatness, finite presentation\nand finite local freeness (of a given rank $r$): a quasi-coherent\n$\\mathcal{M}$ has one of these properties if and only if every\n$f_i^*\\mathcal{M}$ has it.\n3. In particular (*descent of invertible modules*, [def-sc-invertible-module]):\ninvertible $\\mathcal{O}_{S_i}$-modules with gluing isomorphisms\nsatisfying the cocycle condition glue to an invertible\n$\\mathcal{O}_S$-module $\\mathcal{L}$ with $f_i^*\\mathcal{L}\\cong\\mathcal{L}_i$\ncompatibly with the gluing data; and if an invertible\n$\\mathcal{O}_S$-module $\\mathcal{L}$ admits trivializations\n$f_i^*\\mathcal{L}\\cong\\mathcal{O}_{S_i}$ whose two pullbacks to every\n$S_i\\times_SS_{i'}$ agree (i.e. compatible with the canonical gluing\nisomorphisms), then $\\mathcal{L}\\cong\\mathcal{O}_S$. (Without the\ncompatibility this fails already for Zariski coverings.)\n\nApplied to the fpqc covering $\\{X_{T_i}\\to X_T\\}$ obtained by base change\nfrom an fpqc covering $\\{T_i\\to T\\}$ and a morphism $X\\to T$, this is\nthe form in which the statement is used: cartesian families\n$\\mathcal{L}_i$ on $X_{T_i}$ satisfying the cocycle condition glue to an\ninvertible $\\mathcal{L}$ on $X_T$ with $\\mathcal{L}|_{X_{T_i}}\\cong\\mathcal{L}_i$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-descent/lem-pc-fpqc-descent.md",
-    "place": "node lem-pc-fpqc-descent, order 763",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 023T"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 023N"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 022D"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 022B"
-      }
-    ]
-  },
-  "stmt_deps": [
+  {
+   "text": "*Step 2: properties in the affine case.* Let $A\\to B$ be faithfully\nflat and $M$ an $A$-module; put $M_B:=B\\otimes_AM$. If $M$ is flat,\nfinitely presented, or finite locally free of rank $r$, then so is\n$M_B$ (base change). Conversely:\n\n- *Flatness.* Let $N'\\to N$ be an injective map of $A$-modules. As $B$ is\n  flat, $B\\otimes_AN'\\to B\\otimes_AN$ is injective, and\n  $B\\otimes_A(M\\otimes_AN')=M_B\\otimes_B(B\\otimes_AN')\\to\n  M_B\\otimes_B(B\\otimes_AN)=B\\otimes_A(M\\otimes_AN)$ is injective when\n  $M_B$ is $B$-flat. By faithful flatness (a map of $A$-modules is\n  injective as soon as it is so after $B\\otimes_A-$),\n  $M\\otimes_AN'\\to M\\otimes_AN$ is injective: $M$ is flat.\n- *Finite generation.* If $M_B$ is generated by finitely many elements,\n  each is a finite sum $\\sum b\\otimes m$; let $M'\\subseteq M$ be the\n  submodule generated by the finitely many $m$'s occurring. Then\n  $B\\otimes_AM'\\to M_B$ is surjective, i.e. $B\\otimes_A(M/M')=0$, so\n  $M/M'=0$ by faithful flatness: $M$ is finite.\n- *Finite presentation.* If $M_B$ is finitely presented, then $M$ is\n  finite by the previous item; choose a surjection $A^n\\to M$ with\n  kernel $K$. By flatness $0\\to B\\otimes_AK\\to B^n\\to M_B\\to0$ is exact,\n  and the kernel of a surjection from a finite free module onto a\n  finitely presented module is finite (Schanuel's lemma); so\n  $B\\otimes_AK$ is finite, hence $K$ is finite by the previous item, and\n  $M$ is finitely presented.\n- *Finite local freeness of rank $r$.* A module is finite locally free\n  if and only if it is finitely presented and flat (Stacks, Algebra,\n  Lemma 10.78.2), so this follows from the two previous items. Its rank\n  at $\\mathfrak p\\in\\operatorname{Spec}(A)$ is the dimension of\n  $M\\otimes\\kappa(\\mathfrak p)$, and for $\\mathfrak q\\in\\operatorname{Spec}(B)$ over\n  $\\mathfrak p$ (which exists as $\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)$ is surjective)\n  $M_B\\otimes\\kappa(\\mathfrak q)=(M\\otimes\\kappa(\\mathfrak p))\n  \\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)$ has the same dimension;\n  so $M$ has constant rank $r$ when $M_B$ does.\n\nIn particular, as invertible modules are exactly the finite locally\nfree modules of rank $1$ ([def-sc-invertible-module]), an $A$-module\n$M$ is invertible if and only if $M_B$ is; so the descended module\n$N_0$ of Step 1 is invertible whenever $N$ is.",
+   "uses": [
     "def-sc-invertible-module"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1: the affine case for modules.* Let $A\\to B$ be a faithfully\nflat ring map, and let\n\n$$\n\\Delta:B\\longrightarrow B\\otimes_AB,\\quad \\Delta(b)=b\\otimes1\n$$\n\nbe the canonical inclusion; write $B^{\\otimes r}$ for the $r$-fold\ntensor product. A *descent datum* for the covering\n$\\{\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)\\}$ on a $B$-module $N$ is an isomorphism\n\n$$\n\\psi:N\\otimes_AB\\longrightarrow B\\otimes_AN\n$$\n\nof $B\\otimes_AB$-modules satisfying the\n*cocycle condition*: the two isomorphisms\n\n$$\nN\\otimes_AB\\otimes_AB\\longrightarrow B\\otimes_AB\\otimes_AN\n$$\n\nobtained by applying $\\psi$ to the first two, resp. to the last two,\ntensor factors, agree. *Claim: the functor from $A$-modules to\n$B$-modules with descent datum (an $A$-module $M$ goes to\n$M\\otimes_AB$ with the canonical swap isomorphism) is an equivalence.*\n\nThe classical proof (EGA 0$_{IV}$, (2.5.7); Bourbaki, Alg. comm. V,\n§1, no. 9; this is the argument of Stacks, Descent,\nProposition 35.3.9, Tag [023N](https://stacks.math.columbia.edu/tag/023N), which states that for a faithfully flat\n$R\\to A$ the functor $M\\mapsto(A\\otimes_RM,\\mathrm{can})$ from\n$R$-modules to modules with descent datum is an equivalence),\nwhich we reproduce: given $(N,\\psi)$, put\n\n$$\nN_0:=\\ker\\bigl(N\\longrightarrow B\\otimes_AN\\bigr),\n\\qquad\nn\\longmapsto\\psi(n\\otimes1)-1\\otimes n .\n$$\n\nThe cocycle condition says precisely that the (twisted) Amitsur-type\ncomplex\n\n$$\n0\\to N_0\\to N\\to B\\otimes_AN\\to B\\otimes_AB\\otimes_AN\\to\\cdots\n$$\n\n(the differentials are the alternating sums of the cyclic permutations\nof the tensor factors, with the first map $N\\to B\\otimes_AN$ the\ndifference above; in degree $r$, $\\sum_{j=0}^{r+1}(-1)^j$ of the\n$r$-fold multiplications with $\\psi$ applied to the appropriate\nfactors) is a complex, and the maps\n\n$$\ns(b_1\\otimes\\cdots\\otimes b_p\\otimes n):=b_1\\otimes\\cdots\\otimes\nb_{p-1}\\otimes\\psi^{-1}(b_p\\otimes n)\n$$\n\nsatisfy $ds+sd=\\mathrm{id}$ (the two double sums cancel pairwise;\nonly the top and bottom terms – which are $\\mathrm{id}$ and\n$N_0$-inclusion-composed terms – remain; the cocycle condition is\nwhat makes the $\\psi$-twisted pieces cancel). Hence the complex is\nsplit exact; in particular the composite\n\n$$\nN_0\\otimes_AB\\longrightarrow N\\otimes_AB\\cong B\\otimes_AN\n$$\n\nhas image the kernel of $B\\otimes_AN\\to B\\otimes_AB\\otimes_AN$, which\nby the exactness is $N_0\\otimes_AB$; the exactness in degree zero\nsays this kernel is mapped isomorphically onto its image, and the\ncocycle argument with the contracting homotopy identifies this image\nwith all of $N$: $N_0\\otimes_AB\\cong N$, compatibly with the descent\ndata. The faithfulness (an $A$-map vanishing after $\\otimes_AB$\nvanishes) and the fullness (a map of descent data is determined by –\nand arises from – the induced map on the kernels, by the same\nexactness) are then immediate: a morphism $N\\to N'$ compatible with\nthe data maps the kernel $N_0$ into $N_0'$; conversely a map\n$N_0\\to N_0'$ yields a map of the $\\otimes_AB$-modules which is\ncompatible with the kernels and the exactness shows it comes from a\nunique such $A$-map. This proves the claim.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Step 2: properties in the affine case.* Let $A\\to B$ be faithfully\nflat and $M$ an $A$-module; put $M_B:=B\\otimes_AM$. If $M$ is flat,\nfinitely presented, or finite locally free of rank $r$, then so is\n$M_B$ (base change). Conversely:\n\n- *Flatness.* Let $N'\\to N$ be an injective map of $A$-modules. As $B$ is\n  flat, $B\\otimes_AN'\\to B\\otimes_AN$ is injective, and\n  $B\\otimes_A(M\\otimes_AN')=M_B\\otimes_B(B\\otimes_AN')\\to\n  M_B\\otimes_B(B\\otimes_AN)=B\\otimes_A(M\\otimes_AN)$ is injective when\n  $M_B$ is $B$-flat. By faithful flatness (a map of $A$-modules is\n  injective as soon as it is so after $B\\otimes_A-$),\n  $M\\otimes_AN'\\to M\\otimes_AN$ is injective: $M$ is flat.\n- *Finite generation.* If $M_B$ is generated by finitely many elements,\n  each is a finite sum $\\sum b\\otimes m$; let $M'\\subseteq M$ be the\n  submodule generated by the finitely many $m$'s occurring. Then\n  $B\\otimes_AM'\\to M_B$ is surjective, i.e. $B\\otimes_A(M/M')=0$, so\n  $M/M'=0$ by faithful flatness: $M$ is finite.\n- *Finite presentation.* If $M_B$ is finitely presented, then $M$ is\n  finite by the previous item; choose a surjection $A^n\\to M$ with\n  kernel $K$. By flatness $0\\to B\\otimes_AK\\to B^n\\to M_B\\to0$ is exact,\n  and the kernel of a surjection from a finite free module onto a\n  finitely presented module is finite (Schanuel's lemma); so\n  $B\\otimes_AK$ is finite, hence $K$ is finite by the previous item, and\n  $M$ is finitely presented.\n- *Finite local freeness of rank $r$.* A module is finite locally free\n  if and only if it is finitely presented and flat (Stacks, Algebra,\n  Lemma 10.78.2), so this follows from the two previous items. Its rank\n  at $\\mathfrak p\\in\\operatorname{Spec}(A)$ is the dimension of\n  $M\\otimes\\kappa(\\mathfrak p)$, and for $\\mathfrak q\\in\\operatorname{Spec}(B)$ over\n  $\\mathfrak p$ (which exists as $\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)$ is surjective)\n  $M_B\\otimes\\kappa(\\mathfrak q)=(M\\otimes\\kappa(\\mathfrak p))\n  \\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)$ has the same dimension;\n  so $M$ has constant rank $r$ when $M_B$ does.\n\nIn particular, as invertible modules are exactly the finite locally\nfree modules of rank $1$ ([def-sc-invertible-module]), an $A$-module\n$M$ is invertible if and only if $M_B$ is; so the descended module\n$N_0$ of Step 1 is invertible whenever $N$ is.",
-      "uses": [
-        "def-sc-invertible-module"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Step 3: the general covering.* Now let $\\{S_i\\to S\\}_{i\\in I}$ be\nan fpqc covering and $\\xi=(\\mathcal{M}_i,\\varphi_{ii'})$ a descent\ndatum of quasi-coherent modules. The datum and the statement are local\non $S$ (the descent data restrict along morphisms $S'\\to S$, i.e. along\nthe base changed covering; base changes of fpqc coverings are fpqc,\nTopologies, Lemma 34.9.8, Tag\n[022D](https://stacks.math.columbia.edu/tag/022D)), so it suffices\nto treat $S$ affine; by definition of an fpqc covering\n(Topologies, Definition 34.9.1, Tag\n[022B](https://stacks.math.columbia.edu/tag/022B)) the affine\n$S=\\operatorname{Spec}(A)$ is covered by standard fpqc coverings of finite\nsubfamilies, and a finite standard fpqc covering\n$\\{V_k=\\operatorname{Spec}(B_k)\\to\\operatorname{Spec}(A)\\}_k$ is precisely a faithfully flat map\n$A\\to B:=\\prod_kB_k$ (the product over the finitely many $k$:\n$\\operatorname{Spec}(\\prod B_k)=\\bigsqcup_k\\operatorname{Spec}(B_k)$). The restriction of the\ndatum to the $V_k$ is a descent datum for the covering\n$\\{\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)\\}$ (the covering is the sum of the\n$V_k$; a quasi-coherent module on the affine $\\operatorname{Spec}(B)$ is a\n$B$-module $N$, namely the product of the modules of global sections\non the pieces, and the isomorphisms are the product of the pieces; the\ncocycle condition is the compatibility over the intersections, checked\non the original $S_i$'s by the refinement: the standard argument of\nStacks 35.5.2: the descent data pull back along refinements and agree\non common refinements), which is effective by Step 1. This yields a\nquasi-coherent $\\mathcal{O}_S$-module restricting to $\\mathcal{M}_i$\nwith the given $\\varphi_{ii'}$; the identification is constructed with\nthe same standard refinement-compatibility argument (faithfulness over\nthe common refinements). For a general $S$, glue the modules so\nobtained over an affine open cover: on the overlaps the two descended\nmodules restrict to descents of the same datum, hence are canonically\nisomorphic by the full faithfulness of Step 1 applied to the common\nrefinement, and these isomorphisms satisfy the cocycle condition by the\nuniqueness in the full faithfulness. The full faithfulness of the\nfunctor $\\mathcal{M}\\mapsto(f_i^*\\mathcal{M},\\mathrm{can})$ follows in the\nsame way from the affine case, since morphisms of quasi-coherent\nmodules glue Zariski locally. This proves (1).\n\nFor (2): flatness, finite presentation and finite local freeness of rank\n$r$ of a quasi-coherent module are Zariski-local on $S$, and each\n$f_i^*\\mathcal{M}$ has the property if and only if its restrictions to\nan affine open cover of $S_i$ have it. Hence, with the reduction above,\nit suffices to treat $\\mathcal{M}=\\widetilde M$ on $S=\\operatorname{Spec}(A)$ and a\nfinite standard covering, i.e. a faithfully flat $A\\to B=\\prod_kB_k$,\nwhere $B\\otimes_AM=\\prod_k(B_k\\otimes_AM)$ has the property if and only\nif each factor has it; this is Step 2.\n\nFor (3): an invertible module is a finite locally free module of rank\n$1$ ([def-sc-invertible-module]), so by (1) the datum descends to a\nquasi-coherent $\\mathcal{L}$, which is invertible by (2). For the last\nassertion: the compatible trivializations form an isomorphism of descent\ndata between $(f_i^*\\mathcal{L},\\mathrm{can})$ and\n$(\\mathcal{O}_{S_i},\\mathrm{id})=(f_i^*\\mathcal{O}_S,\\mathrm{can})$, which by\nthe full faithfulness in (1) comes from an isomorphism\n$\\mathcal{L}\\cong\\mathcal{O}_S$.",
-      "uses": [
-        "def-sc-invertible-module"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*Step 3: the general covering.* Now let $\\{S_i\\to S\\}_{i\\in I}$ be\nan fpqc covering and $\\xi=(\\mathcal{M}_i,\\varphi_{ii'})$ a descent\ndatum of quasi-coherent modules. The datum and the statement are local\non $S$ (the descent data restrict along morphisms $S'\\to S$, i.e. along\nthe base changed covering; base changes of fpqc coverings are fpqc,\nTopologies, Lemma 34.9.8, Tag\n[022D](https://stacks.math.columbia.edu/tag/022D)), so it suffices\nto treat $S$ affine; by definition of an fpqc covering\n(Topologies, Definition 34.9.1, Tag\n[022B](https://stacks.math.columbia.edu/tag/022B)) the affine\n$S=\\operatorname{Spec}(A)$ is covered by standard fpqc coverings of finite\nsubfamilies, and a finite standard fpqc covering\n$\\{V_k=\\operatorname{Spec}(B_k)\\to\\operatorname{Spec}(A)\\}_k$ is precisely a faithfully flat map\n$A\\to B:=\\prod_kB_k$ (the product over the finitely many $k$:\n$\\operatorname{Spec}(\\prod B_k)=\\bigsqcup_k\\operatorname{Spec}(B_k)$). The restriction of the\ndatum to the $V_k$ is a descent datum for the covering\n$\\{\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)\\}$ (the covering is the sum of the\n$V_k$; a quasi-coherent module on the affine $\\operatorname{Spec}(B)$ is a\n$B$-module $N$, namely the product of the modules of global sections\non the pieces, and the isomorphisms are the product of the pieces; the\ncocycle condition is the compatibility over the intersections, checked\non the original $S_i$'s by the refinement: the standard argument of\nStacks 35.5.2: the descent data pull back along refinements and agree\non common refinements), which is effective by Step 1. This yields a\nquasi-coherent $\\mathcal{O}_S$-module restricting to $\\mathcal{M}_i$\nwith the given $\\varphi_{ii'}$; the identification is constructed with\nthe same standard refinement-compatibility argument (faithfulness over\nthe common refinements). For a general $S$, glue the modules so\nobtained over an affine open cover: on the overlaps the two descended\nmodules restrict to descents of the same datum, hence are canonically\nisomorphic by the full faithfulness of Step 1 applied to the common\nrefinement, and these isomorphisms satisfy the cocycle condition by the\nuniqueness in the full faithfulness. The full faithfulness of the\nfunctor $\\mathcal{M}\\mapsto(f_i^*\\mathcal{M},\\mathrm{can})$ follows in the\nsame way from the affine case, since morphisms of quasi-coherent\nmodules glue Zariski locally. This proves (1).\n\nFor (2): flatness, finite presentation and finite local freeness of rank\n$r$ of a quasi-coherent module are Zariski-local on $S$, and each\n$f_i^*\\mathcal{M}$ has the property if and only if its restrictions to\nan affine open cover of $S_i$ have it. Hence, with the reduction above,\nit suffices to treat $\\mathcal{M}=\\widetilde M$ on $S=\\operatorname{Spec}(A)$ and a\nfinite standard covering, i.e. a faithfully flat $A\\to B=\\prod_kB_k$,\nwhere $B\\otimes_AM=\\prod_k(B_k\\otimes_AM)$ has the property if and only\nif each factor has it; this is Step 2.\n\nFor (3): an invertible module is a finite locally free module of rank\n$1$ ([def-sc-invertible-module]), so by (1) the datum descends to a\nquasi-coherent $\\mathcal{L}$, which is invertible by (2). For the last\nassertion: the compatible trivializations form an isomorphism of descent\ndata between $(f_i^*\\mathcal{L},\\mathrm{can})$ and\n$(\\mathcal{O}_{S_i},\\mathrm{id})=(f_i^*\\mathcal{O}_S,\\mathrm{can})$, which by\nthe full faithfulness in (1) comes from an isomorphism\n$\\mathcal{L}\\cong\\mathcal{O}_S$.",
+   "uses": [
     "def-sc-invertible-module"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-descent/lem-pc-fpqc-descent.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps",
-    "lean_multiple"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 763,
-  "blueprint_uses": [
-    "def-sc-invertible-module"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Descent",
-    "declaration": "AlgebraicGeometry.bijective_toDescentData_map",
-    "branch": "slopmaster2",
-    "line": 115,
-    "sorry_free": true,
-    "body_lines": 1,
-    "others": [
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.Descent",
-        "declaration": "AlgebraicGeometry.exists_isQuasicoherent_toDescentData_iso",
-        "branch": "slopmaster2",
-        "line": 125,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.Descent",
-        "declaration": "AlgebraicGeometry.isFinitePresentation_of_toDescentData_iso",
-        "branch": "slopmaster2",
-        "line": 136,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.Descent",
-        "declaration": "AlgebraicGeometry.isLocallyFree_of_toDescentData_iso",
-        "branch": "slopmaster2",
-        "line": 150,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.Descent",
-        "declaration": "AlgebraicGeometry.isInvertible_of_toDescentData_iso",
-        "branch": "slopmaster2",
-        "line": 179,
-        "sorry_free": true,
-        "body_lines": 4
-      }
-    ],
-    "note": "Lean refresh 7d675a26 (L): sorry-free on 7d675a263"
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.bijective_toDescentData_map",
-    "AlgebraicGeometry.exists_isQuasicoherent_toDescentData_iso",
-    "AlgebraicGeometry.isFinitePresentation_of_toDescentData_iso",
-    "AlgebraicGeometry.isLocallyFree_of_toDescentData_iso",
-    "AlgebraicGeometry.isInvertible_of_toDescentData_iso"
-  ],
-  "proof_split_by": "labels",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.bijective_toDescentData_map",
-        "AlgebraicGeometry.exists_isQuasicoherent_toDescentData_iso",
-        "AlgebraicGeometry.isFinitePresentation_of_toDescentData_iso",
-        "AlgebraicGeometry.isLocallyFree_of_toDescentData_iso",
-        "AlgebraicGeometry.isInvertible_of_toDescentData_iso"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.bijective_toDescentData_map",
-          "module": "WeilConjectures.AlgebraicGeometry.Descent",
-          "lines": [
-            111,
-            120
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.exists_isQuasicoherent_toDescentData_iso",
-          "module": "WeilConjectures.AlgebraicGeometry.Descent",
-          "lines": [
-            180,
-            190
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.isFinitePresentation_of_toDescentData_iso",
-          "module": "WeilConjectures.AlgebraicGeometry.Descent",
-          "lines": [
-            139,
-            149
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.isLocallyFree_of_toDescentData_iso",
-          "module": "WeilConjectures.AlgebraicGeometry.Descent",
-          "lines": [
-            151,
-            166
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.isInvertible_of_toDescentData_iso",
-          "module": "WeilConjectures.AlgebraicGeometry.Descent",
-          "lines": [
-            330,
-            343
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.isFiniteLocallyFreeOfRank_of_toDescentData_iso",
-          "module": "WeilConjectures.AlgebraicGeometry.Descent",
-          "lines": [
-            310,
-            328
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.isQuasicoherent_of_toDescentData_iso",
-          "module": "WeilConjectures.AlgebraicGeometry.Descent",
-          "lines": [
-            122,
-            137
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-pc-fpqc-descent`; `sk-thm-picard-descent`, part (D1"
-        },
-        {
-          "name": "AlgebraicGeometry.exists_toDescentData_iso",
-          "module": "WeilConjectures.AlgebraicGeometry.Descent",
-          "lines": [
-            168,
-            178
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-pc-fpqc-descent`; `sk-thm-picard-descent`, part (D1"
-        },
-        {
-          "name": "AlgebraicGeometry.isFiniteLocallyFreeOfRank_of_toDescentData_iso_of_isQuasicoherent",
-          "module": "WeilConjectures.AlgebraicGeometry.Descent",
-          "lines": [
-            292,
-            307
-          ],
-          "kind": "theorem",
-          "sorry": false,
-          "partial": "`lem-pc-fpqc-descent`; `sk-thm-picard-descent`, part (D1"
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-thm-picard-descent",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\{f_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of\nschemes.\n\n1. The functor $\\mathcal{M}\\mapsto(f_i^*\\mathcal{M},\\mathrm{can})_{i\\in I}$\nfrom quasi-coherent $\\mathcal{O}_S$-modules to descent data of\nquasi-coherent modules for this covering (quasi-coherent\n$\\mathcal{O}_{S_i}$-modules $\\mathcal{M}_i$ with isomorphisms\n$\\varphi_{ii'}:\\mathrm{pr}_1^*\\mathcal{M}_i\\to\\mathrm{pr}_2^*\\mathcal{M}_{i'}$\non $S_i\\times_SS_{i'}$ satisfying the cocycle condition on the triple\nproducts) is an equivalence of categories: every descent datum is\neffective.\n2. The equivalence preserves and reflects flatness, finite presentation\nand finite local freeness (of a given rank $r$): a quasi-coherent\n$\\mathcal{M}$ has one of these properties if and only if every\n$f_i^*\\mathcal{M}$ has it.\n3. In particular (*descent of invertible modules*, [def-sc-invertible-module]):\ninvertible $\\mathcal{O}_{S_i}$-modules with gluing isomorphisms\nsatisfying the cocycle condition glue to an invertible\n$\\mathcal{O}_S$-module $\\mathcal{L}$ with $f_i^*\\mathcal{L}\\cong\\mathcal{L}_i$\ncompatibly with the gluing data; and if an invertible\n$\\mathcal{O}_S$-module $\\mathcal{L}$ admits trivializations\n$f_i^*\\mathcal{L}\\cong\\mathcal{O}_{S_i}$ whose two pullbacks to every\n$S_i\\times_SS_{i'}$ agree (i.e. compatible with the canonical gluing\nisomorphisms), then $\\mathcal{L}\\cong\\mathcal{O}_S$. (Without the\ncompatibility this fails already for Zariski coverings.)\n\nIn particular, applied to the fpqc covering $\\{X_{T_i}\\to X_T\\}$ obtained by base change\nfrom an fpqc covering $\\{T_i\\to T\\}$ and a morphism $X\\to T$: cartesian families\n$\\mathcal{L}_i$ on $X_{T_i}$ satisfying the cocycle condition glue to an\ninvertible $\\mathcal{L}$ on $X_T$ with $\\mathcal{L}|_{X_{T_i}}\\cong\\mathcal{L}_i$.",
-    "proof": [
-      {
-        "text": "*Step 1: the affine case for modules.* Let $A\\to B$ be a faithfully\nflat ring map, and let\n\n$$\n\\Delta:B\\longrightarrow B\\otimes_AB,\\quad \\Delta(b)=b\\otimes1\n$$\n\nbe the canonical inclusion; write $B^{\\otimes r}$ for the $r$-fold\ntensor product. A *descent datum* for the covering\n$\\{\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)\\}$ on a $B$-module $N$ is an isomorphism\n\n$$\n\\psi:N\\otimes_AB\\longrightarrow B\\otimes_AN\n$$\n\nof $B\\otimes_AB$-modules satisfying the\n*cocycle condition*: the two isomorphisms\n\n$$\nN\\otimes_AB\\otimes_AB\\longrightarrow B\\otimes_AB\\otimes_AN\n$$\n\nobtained by applying $\\psi$ to the first two, resp. to the last two,\ntensor factors, agree. *Claim: the functor from $A$-modules to\n$B$-modules with descent datum (an $A$-module $M$ goes to\n$M\\otimes_AB$ with the canonical swap isomorphism) is an equivalence.*\n\nThe classical proof (EGA 0$_{IV}$, (2.5.7); Bourbaki, Alg. comm. V,\n§1, no. 9; this is the argument of Stacks, Descent,\nProposition 35.3.9, Tag [023N](https://stacks.math.columbia.edu/tag/023N), which states that for a faithfully flat\n$R\\to A$ the functor $M\\mapsto(A\\otimes_RM,\\mathrm{can})$ from\n$R$-modules to modules with descent datum is an equivalence),\nwhich we reproduce: given $(N,\\psi)$, put\n\n$$\nN_0:=\\ker\\bigl(N\\longrightarrow B\\otimes_AN\\bigr),\n\\qquad\nn\\longmapsto\\psi(n\\otimes1)-1\\otimes n .\n$$\n\nThe cocycle condition says precisely that the (twisted) Amitsur-type\ncomplex\n\n$$\n0\\to N_0\\to N\\to B\\otimes_AN\\to B\\otimes_AB\\otimes_AN\\to\\cdots\n$$\n\n(the differentials are the alternating sums of the cyclic permutations\nof the tensor factors, with the first map $N\\to B\\otimes_AN$ the\ndifference above; in degree $r$, $\\sum_{j=0}^{r+1}(-1)^j$ of the\n$r$-fold multiplications with $\\psi$ applied to the appropriate\nfactors) is a complex, and the maps\n\n$$\ns(b_1\\otimes\\cdots\\otimes b_p\\otimes n):=b_1\\otimes\\cdots\\otimes\nb_{p-1}\\otimes\\psi^{-1}(b_p\\otimes n)\n$$\n\nsatisfy $ds+sd=\\mathrm{id}$ (the two double sums cancel pairwise;\nonly the top and bottom terms – which are $\\mathrm{id}$ and\n$N_0$-inclusion-composed terms – remain; the cocycle condition is\nwhat makes the $\\psi$-twisted pieces cancel). Hence the complex is\nsplit exact; in particular the composite\n\n$$\nN_0\\otimes_AB\\longrightarrow N\\otimes_AB\\cong B\\otimes_AN\n$$\n\nhas image the kernel of $B\\otimes_AN\\to B\\otimes_AB\\otimes_AN$, which\nby the exactness is $N_0\\otimes_AB$; the exactness in degree zero\nsays this kernel is mapped isomorphically onto its image, and the\ncocycle argument with the contracting homotopy identifies this image\nwith all of $N$: $N_0\\otimes_AB\\cong N$, compatibly with the descent\ndata. The faithfulness (an $A$-map vanishing after $\\otimes_AB$\nvanishes) and the fullness (a map of descent data is determined by –\nand arises from – the induced map on the kernels, by the same\nexactness) are then immediate: a morphism $N\\to N'$ compatible with\nthe data maps the kernel $N_0$ into $N_0'$; conversely a map\n$N_0\\to N_0'$ yields a map of the $\\otimes_AB$-modules which is\ncompatible with the kernels and the exactness shows it comes from a\nunique such $A$-map. This proves the claim.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 2: properties in the affine case.* Let $A\\to B$ be faithfully\nflat and $M$ an $A$-module; put $M_B:=B\\otimes_AM$. If $M$ is flat,\nfinitely presented, or finite locally free of rank $r$, then so is\n$M_B$ (base change). Conversely:\n\n- *Flatness.* Let $N'\\to N$ be an injective map of $A$-modules. As $B$ is\n  flat, $B\\otimes_AN'\\to B\\otimes_AN$ is injective, and\n  $B\\otimes_A(M\\otimes_AN')=M_B\\otimes_B(B\\otimes_AN')\\to\n  M_B\\otimes_B(B\\otimes_AN)=B\\otimes_A(M\\otimes_AN)$ is injective when\n  $M_B$ is $B$-flat. By faithful flatness (a map of $A$-modules is\n  injective as soon as it is so after $B\\otimes_A-$),\n  $M\\otimes_AN'\\to M\\otimes_AN$ is injective: $M$ is flat.\n- *Finite generation.* If $M_B$ is generated by finitely many elements,\n  each is a finite sum $\\sum b\\otimes m$; let $M'\\subseteq M$ be the\n  submodule generated by the finitely many $m$'s occurring. Then\n  $B\\otimes_AM'\\to M_B$ is surjective, i.e. $B\\otimes_A(M/M')=0$, so\n  $M/M'=0$ by faithful flatness: $M$ is finite.\n- *Finite presentation.* If $M_B$ is finitely presented, then $M$ is\n  finite by the previous item; choose a surjection $A^n\\to M$ with\n  kernel $K$. By flatness $0\\to B\\otimes_AK\\to B^n\\to M_B\\to0$ is exact,\n  and the kernel of a surjection from a finite free module onto a\n  finitely presented module is finite (Schanuel's lemma); so\n  $B\\otimes_AK$ is finite, hence $K$ is finite by the previous item, and\n  $M$ is finitely presented.\n- *Finite local freeness of rank $r$.* A module is finite locally free\n  if and only if it is finitely presented and flat (Stacks, Algebra,\n  Lemma 10.78.2), so this follows from the two previous items. Its rank\n  at $\\mathfrak p\\in\\operatorname{Spec}(A)$ is the dimension of\n  $M\\otimes\\kappa(\\mathfrak p)$, and for $\\mathfrak q\\in\\operatorname{Spec}(B)$ over\n  $\\mathfrak p$ (which exists as $\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)$ is surjective)\n  $M_B\\otimes\\kappa(\\mathfrak q)=(M\\otimes\\kappa(\\mathfrak p))\n  \\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)$ has the same dimension;\n  so $M$ has constant rank $r$ when $M_B$ does.\n\nIn particular, as invertible modules are exactly the finite locally\nfree modules of rank $1$ ([def-sc-invertible-module]), an $A$-module\n$M$ is invertible if and only if $M_B$ is; so the descended module\n$N_0$ of Step 1 is invertible whenever $N$ is.",
-        "uses": [
-          "def-sc-invertible-module"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 3: the general covering.* Now let $\\{S_i\\to S\\}_{i\\in I}$ be\nan fpqc covering and $\\xi=(\\mathcal{M}_i,\\varphi_{ii'})$ a descent\ndatum of quasi-coherent modules. The datum and the statement are local\non $S$ (the descent data restrict along morphisms $S'\\to S$, i.e. along\nthe base changed covering; base changes of fpqc coverings are fpqc,\nTopologies, Lemma 34.9.8, Tag\n[022D](https://stacks.math.columbia.edu/tag/022D)), so it suffices\nto treat $S$ affine; by definition of an fpqc covering\n(Topologies, Definition 34.9.1, Tag\n[022B](https://stacks.math.columbia.edu/tag/022B)) the affine\n$S=\\operatorname{Spec}(A)$ is covered by standard fpqc coverings of finite\nsubfamilies, and a finite standard fpqc covering\n$\\{V_k=\\operatorname{Spec}(B_k)\\to\\operatorname{Spec}(A)\\}_k$ is precisely a faithfully flat map\n$A\\to B:=\\prod_kB_k$ (the product over the finitely many $k$:\n$\\operatorname{Spec}(\\prod B_k)=\\bigsqcup_k\\operatorname{Spec}(B_k)$). The restriction of the\ndatum to the $V_k$ is a descent datum for the covering\n$\\{\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)\\}$ (the covering is the sum of the\n$V_k$; a quasi-coherent module on the affine $\\operatorname{Spec}(B)$ is a\n$B$-module $N$, namely the product of the modules of global sections\non the pieces, and the isomorphisms are the product of the pieces; the\ncocycle condition is the compatibility over the intersections, checked\non the original $S_i$'s by the refinement: the standard argument of\nStacks 35.5.2: the descent data pull back along refinements and agree\non common refinements), which is effective by Step 1. This yields a\nquasi-coherent $\\mathcal{O}_S$-module restricting to $\\mathcal{M}_i$\nwith the given $\\varphi_{ii'}$; the identification is constructed with\nthe same standard refinement-compatibility argument (faithfulness over\nthe common refinements). For a general $S$, glue the modules so\nobtained over an affine open cover: on the overlaps the two descended\nmodules restrict to descents of the same datum, hence are canonically\nisomorphic by the full faithfulness of Step 1 applied to the common\nrefinement, and these isomorphisms satisfy the cocycle condition by the\nuniqueness in the full faithfulness. The full faithfulness of the\nfunctor $\\mathcal{M}\\mapsto(f_i^*\\mathcal{M},\\mathrm{can})$ follows in the\nsame way from the affine case, since morphisms of quasi-coherent\nmodules glue Zariski locally. This proves (1).\n\nFor (2): flatness, finite presentation and finite local freeness of rank\n$r$ of a quasi-coherent module are Zariski-local on $S$, and each\n$f_i^*\\mathcal{M}$ has the property if and only if its restrictions to\nan affine open cover of $S_i$ have it. Hence, with the reduction above,\nit suffices to treat $\\mathcal{M}=\\widetilde M$ on $S=\\operatorname{Spec}(A)$ and a\nfinite standard covering, i.e. a faithfully flat $A\\to B=\\prod_kB_k$,\nwhere $B\\otimes_AM=\\prod_k(B_k\\otimes_AM)$ has the property if and only\nif each factor has it; this is Step 2.\n\nFor (3): an invertible module is a finite locally free module of rank\n$1$ ([def-sc-invertible-module]), so by (1) the datum descends to a\nquasi-coherent $\\mathcal{L}$, which is invertible by (2). For the last\nassertion: the compatible trivializations form an isomorphism of descent\ndata between $(f_i^*\\mathcal{L},\\mathrm{can})$ and\n$(\\mathcal{O}_{S_i},\\mathrm{id})=(f_i^*\\mathcal{O}_S,\\mathrm{can})$, which by\nthe full faithfulness in (1) comes from an isomorphism\n$\\mathcal{L}\\cong\\mathcal{O}_S$.",
-        "uses": [
-          "def-sc-invertible-module"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-sc-invertible-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-descent/lem-pc-fpqc-descent.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps",
+  "lean_multiple"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 763,
+ "blueprint_uses": [
+  "def-sc-invertible-module"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Descent",
+  "declaration": "AlgebraicGeometry.bijective_toDescentData_map",
+  "branch": "slopmaster2",
+  "line": 115,
+  "sorry_free": true,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.Descent",
+    "declaration": "AlgebraicGeometry.exists_isQuasicoherent_toDescentData_iso",
+    "branch": "slopmaster2",
+    "line": 125,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.Descent",
+    "declaration": "AlgebraicGeometry.isFinitePresentation_of_toDescentData_iso",
+    "branch": "slopmaster2",
+    "line": 136,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.Descent",
+    "declaration": "AlgebraicGeometry.isLocallyFree_of_toDescentData_iso",
+    "branch": "slopmaster2",
+    "line": 150,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.Descent",
+    "declaration": "AlgebraicGeometry.isInvertible_of_toDescentData_iso",
+    "branch": "slopmaster2",
+    "line": 179,
+    "sorry_free": true,
+    "body_lines": 4
+   }
+  ],
+  "note": "Lean refresh 7d675a26 (L): sorry-free on 7d675a263"
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.bijective_toDescentData_map",
+  "AlgebraicGeometry.exists_isQuasicoherent_toDescentData_iso",
+  "AlgebraicGeometry.isFinitePresentation_of_toDescentData_iso",
+  "AlgebraicGeometry.isLocallyFree_of_toDescentData_iso",
+  "AlgebraicGeometry.isInvertible_of_toDescentData_iso"
+ ],
+ "proof_split_by": "labels",
+ "lean_audit": {},
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-descent",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\{f_i:S_i\\to S\\}_{i\\in I}$ be an fpqc covering of\nschemes.\n\n1. The functor $\\mathcal{M}\\mapsto(f_i^*\\mathcal{M},\\mathrm{can})_{i\\in I}$\nfrom quasi-coherent $\\mathcal{O}_S$-modules to descent data of\nquasi-coherent modules for this covering (quasi-coherent\n$\\mathcal{O}_{S_i}$-modules $\\mathcal{M}_i$ with isomorphisms\n$\\varphi_{ii'}:\\mathrm{pr}_1^*\\mathcal{M}_i\\to\\mathrm{pr}_2^*\\mathcal{M}_{i'}$\non $S_i\\times_SS_{i'}$ satisfying the cocycle condition on the triple\nproducts) is an equivalence of categories: every descent datum is\neffective.\n2. The equivalence preserves and reflects flatness, finite presentation\nand finite local freeness (of a given rank $r$): a quasi-coherent\n$\\mathcal{M}$ has one of these properties if and only if every\n$f_i^*\\mathcal{M}$ has it.\n3. In particular (*descent of invertible modules*, [def-sc-invertible-module]):\ninvertible $\\mathcal{O}_{S_i}$-modules with gluing isomorphisms\nsatisfying the cocycle condition glue to an invertible\n$\\mathcal{O}_S$-module $\\mathcal{L}$ with $f_i^*\\mathcal{L}\\cong\\mathcal{L}_i$\ncompatibly with the gluing data; and if an invertible\n$\\mathcal{O}_S$-module $\\mathcal{L}$ admits trivializations\n$f_i^*\\mathcal{L}\\cong\\mathcal{O}_{S_i}$ whose two pullbacks to every\n$S_i\\times_SS_{i'}$ agree (i.e. compatible with the canonical gluing\nisomorphisms), then $\\mathcal{L}\\cong\\mathcal{O}_S$. (Without the\ncompatibility this fails already for Zariski coverings.)\n\nIn particular, applied to the fpqc covering $\\{X_{T_i}\\to X_T\\}$ obtained by base change\nfrom an fpqc covering $\\{T_i\\to T\\}$ and a morphism $X\\to T$: cartesian families\n$\\mathcal{L}_i$ on $X_{T_i}$ satisfying the cocycle condition glue to an\ninvertible $\\mathcal{L}$ on $X_T$ with $\\mathcal{L}|_{X_{T_i}}\\cong\\mathcal{L}_i$.",
+  "proof": [
+   {
+    "text": "*Step 1: the affine case for modules.* Let $A\\to B$ be a faithfully\nflat ring map, and let\n\n$$\n\\Delta:B\\longrightarrow B\\otimes_AB,\\quad \\Delta(b)=b\\otimes1\n$$\n\nbe the canonical inclusion; write $B^{\\otimes r}$ for the $r$-fold\ntensor product. A *descent datum* for the covering\n$\\{\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)\\}$ on a $B$-module $N$ is an isomorphism\n\n$$\n\\psi:N\\otimes_AB\\longrightarrow B\\otimes_AN\n$$\n\nof $B\\otimes_AB$-modules satisfying the\n*cocycle condition*: the two isomorphisms\n\n$$\nN\\otimes_AB\\otimes_AB\\longrightarrow B\\otimes_AB\\otimes_AN\n$$\n\nobtained by applying $\\psi$ to the first two, resp. to the last two,\ntensor factors, agree. *Claim: the functor from $A$-modules to\n$B$-modules with descent datum (an $A$-module $M$ goes to\n$M\\otimes_AB$ with the canonical swap isomorphism) is an equivalence.*\n\nThe classical proof (EGA 0$_{IV}$, (2.5.7); Bourbaki, Alg. comm. V,\n§1, no. 9; this is the argument of Stacks, Descent,\nProposition 35.3.9, Tag [023N](https://stacks.math.columbia.edu/tag/023N), which states that for a faithfully flat\n$R\\to A$ the functor $M\\mapsto(A\\otimes_RM,\\mathrm{can})$ from\n$R$-modules to modules with descent datum is an equivalence),\nwhich we reproduce: given $(N,\\psi)$, put\n\n$$\nN_0:=\\ker\\bigl(N\\longrightarrow B\\otimes_AN\\bigr),\n\\qquad\nn\\longmapsto\\psi(n\\otimes1)-1\\otimes n .\n$$\n\nThe cocycle condition says precisely that the (twisted) Amitsur-type\ncomplex\n\n$$\n0\\to N_0\\to N\\to B\\otimes_AN\\to B\\otimes_AB\\otimes_AN\\to\\cdots\n$$\n\n(the differentials are the alternating sums of the cyclic permutations\nof the tensor factors, with the first map $N\\to B\\otimes_AN$ the\ndifference above; in degree $r$, $\\sum_{j=0}^{r+1}(-1)^j$ of the\n$r$-fold multiplications with $\\psi$ applied to the appropriate\nfactors) is a complex, and the maps\n\n$$\ns(b_1\\otimes\\cdots\\otimes b_p\\otimes n):=b_1\\otimes\\cdots\\otimes\nb_{p-1}\\otimes\\psi^{-1}(b_p\\otimes n)\n$$\n\nsatisfy $ds+sd=\\mathrm{id}$ (the two double sums cancel pairwise;\nonly the top and bottom terms – which are $\\mathrm{id}$ and\n$N_0$-inclusion-composed terms – remain; the cocycle condition is\nwhat makes the $\\psi$-twisted pieces cancel). Hence the complex is\nsplit exact; in particular the composite\n\n$$\nN_0\\otimes_AB\\longrightarrow N\\otimes_AB\\cong B\\otimes_AN\n$$\n\nhas image the kernel of $B\\otimes_AN\\to B\\otimes_AB\\otimes_AN$, which\nby the exactness is $N_0\\otimes_AB$; the exactness in degree zero\nsays this kernel is mapped isomorphically onto its image, and the\ncocycle argument with the contracting homotopy identifies this image\nwith all of $N$: $N_0\\otimes_AB\\cong N$, compatibly with the descent\ndata. The faithfulness (an $A$-map vanishing after $\\otimes_AB$\nvanishes) and the fullness (a map of descent data is determined by –\nand arises from – the induced map on the kernels, by the same\nexactness) are then immediate: a morphism $N\\to N'$ compatible with\nthe data maps the kernel $N_0$ into $N_0'$; conversely a map\n$N_0\\to N_0'$ yields a map of the $\\otimes_AB$-modules which is\ncompatible with the kernels and the exactness shows it comes from a\nunique such $A$-map. This proves the claim.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 2: properties in the affine case.* Let $A\\to B$ be faithfully\nflat and $M$ an $A$-module; put $M_B:=B\\otimes_AM$. If $M$ is flat,\nfinitely presented, or finite locally free of rank $r$, then so is\n$M_B$ (base change). Conversely:\n\n- *Flatness.* Let $N'\\to N$ be an injective map of $A$-modules. As $B$ is\n  flat, $B\\otimes_AN'\\to B\\otimes_AN$ is injective, and\n  $B\\otimes_A(M\\otimes_AN')=M_B\\otimes_B(B\\otimes_AN')\\to\n  M_B\\otimes_B(B\\otimes_AN)=B\\otimes_A(M\\otimes_AN)$ is injective when\n  $M_B$ is $B$-flat. By faithful flatness (a map of $A$-modules is\n  injective as soon as it is so after $B\\otimes_A-$),\n  $M\\otimes_AN'\\to M\\otimes_AN$ is injective: $M$ is flat.\n- *Finite generation.* If $M_B$ is generated by finitely many elements,\n  each is a finite sum $\\sum b\\otimes m$; let $M'\\subseteq M$ be the\n  submodule generated by the finitely many $m$'s occurring. Then\n  $B\\otimes_AM'\\to M_B$ is surjective, i.e. $B\\otimes_A(M/M')=0$, so\n  $M/M'=0$ by faithful flatness: $M$ is finite.\n- *Finite presentation.* If $M_B$ is finitely presented, then $M$ is\n  finite by the previous item; choose a surjection $A^n\\to M$ with\n  kernel $K$. By flatness $0\\to B\\otimes_AK\\to B^n\\to M_B\\to0$ is exact,\n  and the kernel of a surjection from a finite free module onto a\n  finitely presented module is finite (Schanuel's lemma); so\n  $B\\otimes_AK$ is finite, hence $K$ is finite by the previous item, and\n  $M$ is finitely presented.\n- *Finite local freeness of rank $r$.* A module is finite locally free\n  if and only if it is finitely presented and flat (Stacks, Algebra,\n  Lemma 10.78.2), so this follows from the two previous items. Its rank\n  at $\\mathfrak p\\in\\operatorname{Spec}(A)$ is the dimension of\n  $M\\otimes\\kappa(\\mathfrak p)$, and for $\\mathfrak q\\in\\operatorname{Spec}(B)$ over\n  $\\mathfrak p$ (which exists as $\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)$ is surjective)\n  $M_B\\otimes\\kappa(\\mathfrak q)=(M\\otimes\\kappa(\\mathfrak p))\n  \\otimes_{\\kappa(\\mathfrak p)}\\kappa(\\mathfrak q)$ has the same dimension;\n  so $M$ has constant rank $r$ when $M_B$ does.\n\nIn particular, as invertible modules are exactly the finite locally\nfree modules of rank $1$ ([def-sc-invertible-module]), an $A$-module\n$M$ is invertible if and only if $M_B$ is; so the descended module\n$N_0$ of Step 1 is invertible whenever $N$ is.",
+    "uses": [
+     "def-sc-invertible-module"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: the general covering.* Now let $\\{S_i\\to S\\}_{i\\in I}$ be\nan fpqc covering and $\\xi=(\\mathcal{M}_i,\\varphi_{ii'})$ a descent\ndatum of quasi-coherent modules. The datum and the statement are local\non $S$ (the descent data restrict along morphisms $S'\\to S$, i.e. along\nthe base changed covering; base changes of fpqc coverings are fpqc,\nTopologies, Lemma 34.9.8, Tag\n[022D](https://stacks.math.columbia.edu/tag/022D)), so it suffices\nto treat $S$ affine; by definition of an fpqc covering\n(Topologies, Definition 34.9.1, Tag\n[022B](https://stacks.math.columbia.edu/tag/022B)) the affine\n$S=\\operatorname{Spec}(A)$ is covered by standard fpqc coverings of finite\nsubfamilies, and a finite standard fpqc covering\n$\\{V_k=\\operatorname{Spec}(B_k)\\to\\operatorname{Spec}(A)\\}_k$ is precisely a faithfully flat map\n$A\\to B:=\\prod_kB_k$ (the product over the finitely many $k$:\n$\\operatorname{Spec}(\\prod B_k)=\\bigsqcup_k\\operatorname{Spec}(B_k)$). The restriction of the\ndatum to the $V_k$ is a descent datum for the covering\n$\\{\\operatorname{Spec}(B)\\to\\operatorname{Spec}(A)\\}$ (the covering is the sum of the\n$V_k$; a quasi-coherent module on the affine $\\operatorname{Spec}(B)$ is a\n$B$-module $N$, namely the product of the modules of global sections\non the pieces, and the isomorphisms are the product of the pieces; the\ncocycle condition is the compatibility over the intersections, checked\non the original $S_i$'s by the refinement: the standard argument of\nStacks 35.5.2: the descent data pull back along refinements and agree\non common refinements), which is effective by Step 1. This yields a\nquasi-coherent $\\mathcal{O}_S$-module restricting to $\\mathcal{M}_i$\nwith the given $\\varphi_{ii'}$; the identification is constructed with\nthe same standard refinement-compatibility argument (faithfulness over\nthe common refinements). For a general $S$, glue the modules so\nobtained over an affine open cover: on the overlaps the two descended\nmodules restrict to descents of the same datum, hence are canonically\nisomorphic by the full faithfulness of Step 1 applied to the common\nrefinement, and these isomorphisms satisfy the cocycle condition by the\nuniqueness in the full faithfulness. The full faithfulness of the\nfunctor $\\mathcal{M}\\mapsto(f_i^*\\mathcal{M},\\mathrm{can})$ follows in the\nsame way from the affine case, since morphisms of quasi-coherent\nmodules glue Zariski locally. This proves (1).\n\nFor (2): flatness, finite presentation and finite local freeness of rank\n$r$ of a quasi-coherent module are Zariski-local on $S$, and each\n$f_i^*\\mathcal{M}$ has the property if and only if its restrictions to\nan affine open cover of $S_i$ have it. Hence, with the reduction above,\nit suffices to treat $\\mathcal{M}=\\widetilde M$ on $S=\\operatorname{Spec}(A)$ and a\nfinite standard covering, i.e. a faithfully flat $A\\to B=\\prod_kB_k$,\nwhere $B\\otimes_AM=\\prod_k(B_k\\otimes_AM)$ has the property if and only\nif each factor has it; this is Step 2.\n\nFor (3): an invertible module is a finite locally free module of rank\n$1$ ([def-sc-invertible-module]), so by (1) the datum descends to a\nquasi-coherent $\\mathcal{L}$, which is invertible by (2). For the last\nassertion: the compatible trivializations form an isomorphism of descent\ndata between $(f_i^*\\mathcal{L},\\mathrm{can})$ and\n$(\\mathcal{O}_{S_i},\\mathrm{id})=(f_i^*\\mathcal{O}_S,\\mathrm{can})$, which by\nthe full faithfulness in (1) comes from an isomorphism\n$\\mathcal{L}\\cong\\mathcal{O}_S$.",
+    "uses": [
+     "def-sc-invertible-module"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

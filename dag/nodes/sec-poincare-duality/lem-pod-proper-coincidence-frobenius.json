@@ -1,325 +1,314 @@
 {
-  "id": "lem-pod-proper-coincidence-frobenius",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "prop-cohomological-finiteness",
-      "place": "step 4 of its split (source: ## Proof, Step 6; Deligne, Weil I (literature/deligne-weil-I_PMIHES-1974-43.pdf), (1.3), p. 274: 'Pour X propre, les deux coincident')",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-pod-proper-coincidence-frobenius",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "step 4 of its split (source: ## Proof, Step 6; Deligne, Weil I (literature/deligne-weil-I_PMIHES-1974-43.pdf), (1.3), p. 274: 'Pour X propre, les deux coincident')",
+   "via": []
   },
-  "kind": "statement",
-  "title": "The proper coincidence of compact-support and ordinary cohomology commutes with the Frobenius transport",
-  "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ contained in the chosen algebraic closure $\\Qlb$, an integer $n\\geq1$ and a coefficient ring $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$. Let $Y_0$ be a proper [def-weil-proper-morphism] $k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, $s=\\Spec k$, and let $a_Y:Y\\to s$ (proper), $g_Y:Y\\to Y$, $g_s:s\\to s$, the exchange maps $\\operatorname{FrEx}_{Y,*}(M)$, $\\operatorname{FrEx}_{Y,!}(M)$ [def-weil-frobenius-square-exchange] and the transports $\\tau_M:\\RGamma(Y,M)\\to\\RGamma(Y,Lg_Y^*M)$, $\\tau_{c,M}:\\RGammac(Y,M)\\to\\RGammac(Y,Lg_Y^*M)$ for $M\\in D^b_c(Y,\\Lambda)$ be those of [def-weil-frobenius-cohomology-transport], with $\\RGamma(Y,-)=\\operatorname{Fib}_s(Ra_{Y*}(-))$ and $\\RGammac(Y,-)=\\operatorname{Fib}_s(Ra_{Y!}(-))$ [def-weil-ordinary-compact-cohomology, def-weil-finite-coefficient-point]. Let $\\kappa_M:Ra_{Y!}M\\xrightarrow{\\sim}Ra_{Y*}M$, natural in $M\\in D^b_c(Y,\\Lambda)$, be the identification of the compact-support direct image [def-compact-support-direct-image-detailed, def-weil-integral-rational-qbar-compact-support] with the derived direct image [def-weil-derived-direct-image] of [prop-weil-proper-compact-coincidence], computed with the compactification $Y\\xrightarrow{\\operatorname{id}}Y\\xrightarrow{a_Y}s$, the base change of $Y_0\\xrightarrow{\\operatorname{id}}Y_0\\to\\Spec k_0$. Use this same identity compactification to construct $\\operatorname{FrEx}_{Y,!}$ in [def-weil-frobenius-square-exchange] and hence $\\tau_{c,M}$ in [def-weil-frobenius-cohomology-transport]. Then for every $M\\in D^b_c(Y,\\Lambda)$:\n\n1. $\\operatorname{FrEx}_{Y,*}(M)\\circ Lg_s^*(\\kappa_M)=\\kappa_{Lg_Y^*M}\\circ\\operatorname{FrEx}_{Y,!}(M)$ as morphisms $Lg_s^*Ra_{Y!}M\\to Ra_{Y*}Lg_Y^*M$;\n\n2. $\\tau_M\\circ\\operatorname{Fib}_s(\\kappa_M)=\\operatorname{Fib}_s(\\kappa_{Lg_Y^*M})\\circ\\tau_{c,M}$ as morphisms $\\RGammac(Y,M)\\to\\RGamma(Y,Lg_Y^*M)$; hence, for every integer $i$, $\\mathrm H^i(\\tau_M)\\circ\\mathrm H^i(\\operatorname{Fib}_s\\kappa_M)=\\mathrm H^i(\\operatorname{Fib}_s\\kappa_{Lg_Y^*M})\\circ\\mathrm H^i(\\tau_{c,M})$ on $H^i_c(Y,M)$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-    "place": "## Proof, Step 6: 'it is Frobenius-equivariant because both operators are those of Step 5', asserted without argument; cf. Deligne, La conjecture de Weil I (literature/deligne-weil-I_PMIHES-1974-43.pdf), (1.3) p. 274 ('Pour X propre, les deux coincident') and (1.12) p. 278"
-  },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-proper-morphism",
-    "def-weil-frobenius-square-exchange",
-    "def-weil-frobenius-cohomology-transport",
-    "def-weil-ordinary-compact-cohomology",
-    "def-weil-finite-coefficient-point",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-derived-direct-image",
-    "prop-weil-proper-compact-coincidence",
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-integral-rational-qbar-compact-support"
-  ],
-  "proof": [
-    {
-      "text": "*Step 1 (finite coefficients).* Use the identity compactification fixed in the statement. By [def-weil-extension-by-zero], for $j=\\operatorname{id}_Y$ every object factors through $j$, so $P_M=M$ and $j_!M=M$, on objects and morphisms. Thus [def-compact-support-direct-image-detailed] gives $Ra_{Y!,n}=Ra_{Y*,n}$; the proper comparison $\\kappa$ of [prop-weil-proper-compact-coincidence] is this identification. In [lem-trf-open-square-exchange] put $U'=Y'=U=Y$ and $j'=j=\\operatorname{id}_Y$. Its restriction-to-$U'$ clause now says that the entire open-square map $b_{g_Y}$ is the identity under the pullback identifications. Consequently the two arrows defining $\\operatorname{FrEx}_{Y,!}$ in [def-weil-frobenius-square-exchange] (2) are $\\operatorname{FrEx}_{Y,*}(M)$ followed by $Ra_{Y*}(\\operatorname{id})$. This proves clause 1 at $\\Lambda=A_{E,n}$, including the specified identifications $Lg_s^*\\kappa_M$ on the source and $\\kappa_{Lg_Y^*M}$ on the target.",
-      "uses": [
-        "def-weil-extension-by-zero",
-        "def-compact-support-direct-image-detailed",
-        "prop-weil-proper-compact-coincidence",
-        "lem-trf-open-square-exchange",
-        "def-weil-frobenius-square-exchange"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-        "place": "## Proof, Step 6 (the proper case)"
-      }
-    },
-    {
-      "text": "*Step 2 (integral and field coefficients).* Use the same identity compactification at every level. The formulas in [def-weil-derived-direct-image] and [def-weil-integral-rational-qbar-compact-support] give the same strict coefficient tower for $Ra_{Y!}M$ and $Ra_{Y*}M$: at level $m$ both are $\\operatorname{Res}_mRa_{Y*,m}(M\\otimes^L A_{E,m})$, with the same quotient-induced transitions. Indeed, [lem-sf-compact-support-restriction-of-scalars] specifies the compact-support restriction comparison as the direct-image restriction comparison composed with $j_!\\operatorname{Res}=\\operatorname{Res}j_!$; for $j=\\operatorname{id}$ the latter identification is the identity. On the simultaneous section models of [lem-coef-semilinear-derived-sections], extension by zero along the identity is the identity functor, with identity adjunction unit and counit. Its open-adjunction mate $b$ is therefore the identity system map. In the notation of [def-weil-frobenius-square-exchange], $\\mathcal J_{\\operatorname{id}}=\\operatorname{id}$, $p=a_Y$, and $e_{a_Y}^{c}=\\mathcal F_{a_Y}(\\operatorname{id})\\circ e_{a_Y}=e_{a_Y}$ as system maps. Under $\\kappa$, the canonical comparisons $\\alpha_!,\\beta_!$ in that definition are $\\alpha_*,\\beta_*$: their source and target system operations and their defining units and counits coincide. Thus the two integral exchange composites are the same $\\beta_*\\circ\\mathcal L_s(e_{a_Y})\\circ\\alpha_*$, proving clause 1 for $\\mathcal O_E$. Applying the scalar-localization functor to this equality proves it for $E$; representing an object and these equal morphisms at a common finite field stage proves it for $\\Qlb$, exactly as prescribed in [def-weil-frobenius-square-exchange]. This uses equality of specified system maps before $R\\varprojlim$, rather than inferring equality from their finite evaluations.",
-      "uses": [
-        "def-weil-derived-direct-image",
-        "def-weil-integral-rational-qbar-compact-support",
-        "lem-coef-semilinear-derived-sections",
-        "def-weil-frobenius-square-exchange",
-        "lem-sf-compact-support-restriction-of-scalars"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-        "place": "## Proof, Step 6 (the proper case)"
-      }
-    },
-    {
-      "text": "*Step 3 (point complexes).* Write $F=\\operatorname{Fib}_s$, $G=Lg_s^*$, $N_!=Ra_{Y!}M$, $N_*=Ra_{Y*}M$, and $M'=Lg_Y^*M$. Naturality of the point transport [lem-weil-frobenius-point-transport-natural] (2), applied to $\\kappa_M:N_!\\to N_*$, says $\\iota_{N_*}\\circ F(\\kappa_M)=F(G\\kappa_M)\\circ\\iota_{N_!}$. Clause 1 and functoriality of $F$ [def-weil-finite-coefficient-point] now give\n$$\n\\begin{aligned}\n\\tau_M\\circ F(\\kappa_M)\n&=F(\\operatorname{FrEx}_{Y,*}(M))\\circ\\iota_{N_*}\\circ F(\\kappa_M)\\\\\n&=F(\\operatorname{FrEx}_{Y,*}(M))\\circ F(G\\kappa_M)\\circ\\iota_{N_!}\\\\\n&=F(\\kappa_{M'})\\circ F(\\operatorname{FrEx}_{Y,!}(M))\\circ\\iota_{N_!}\\\\\n&=F(\\kappa_{M'})\\circ\\tau_{c,M}.\n\\end{aligned}\n$$\nThe first and last equalities are the two transport composites of [def-weil-frobenius-cohomology-transport]. Their source and target are the cohomology complexes of [def-weil-ordinary-compact-cohomology]. This is clause 2 at the complex level.",
-      "uses": [
-        "lem-weil-frobenius-point-transport-natural",
-        "def-weil-finite-coefficient-point",
-        "def-weil-frobenius-cohomology-transport",
-        "def-weil-ordinary-compact-cohomology"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-        "place": "## Proof, Step 6 (the proper case)"
-      }
-    },
-    {
-      "text": "*Step 4 (cohomology).* Applying $\\mathrm H^i$ to the point-complex equality of Step 3 gives, for every integer $i$, $\\mathrm H^i(\\tau_M)\\circ\\mathrm H^i(\\operatorname{Fib}_s\\kappa_M)=\\mathrm H^i(\\operatorname{Fib}_s\\kappa_{Lg_Y^*M})\\circ\\mathrm H^i(\\tau_{c,M})$ on $H_c^i(Y,M)$, using the definitions of ordinary and compact-support cohomology in [def-weil-ordinary-compact-cohomology] and preservation of composition by the cohomology functor.",
-      "uses": [
-        "def-weil-ordinary-compact-cohomology"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-        "place": "## Proof, Step 6 (the proper case)"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-compact-support-direct-image-detailed",
-    "def-weil-derived-direct-image",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The proper coincidence of compact-support and ordinary cohomology commutes with the Frobenius transport",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ contained in the chosen algebraic closure $\\Qlb$, an integer $n\\geq1$ and a coefficient ring $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$. Let $Y_0$ be a proper [def-weil-proper-morphism] $k_0$-scheme, put $Y=Y_0\\times_{k_0}k$, $s=\\Spec k$, and let $a_Y:Y\\to s$ (proper), $g_Y:Y\\to Y$, $g_s:s\\to s$, the exchange maps $\\operatorname{FrEx}_{Y,*}(M)$, $\\operatorname{FrEx}_{Y,!}(M)$ [def-weil-frobenius-square-exchange] and the transports $\\tau_M:\\RGamma(Y,M)\\to\\RGamma(Y,Lg_Y^*M)$, $\\tau_{c,M}:\\RGammac(Y,M)\\to\\RGammac(Y,Lg_Y^*M)$ for $M\\in D^b_c(Y,\\Lambda)$ be those of [def-weil-frobenius-cohomology-transport], with $\\RGamma(Y,-)=\\operatorname{Fib}_s(Ra_{Y*}(-))$ and $\\RGammac(Y,-)=\\operatorname{Fib}_s(Ra_{Y!}(-))$ [def-weil-ordinary-compact-cohomology, def-weil-finite-coefficient-point]. Let $\\kappa_M:Ra_{Y!}M\\xrightarrow{\\sim}Ra_{Y*}M$, natural in $M\\in D^b_c(Y,\\Lambda)$, be the identification of the compact-support direct image [def-compact-support-direct-image-detailed, def-weil-integral-rational-qbar-compact-support] with the derived direct image [def-weil-derived-direct-image] of [prop-weil-proper-compact-coincidence], computed with the compactification $Y\\xrightarrow{\\operatorname{id}}Y\\xrightarrow{a_Y}s$, the base change of $Y_0\\xrightarrow{\\operatorname{id}}Y_0\\to\\Spec k_0$. Use this same identity compactification to construct $\\operatorname{FrEx}_{Y,!}$ in [def-weil-frobenius-square-exchange] and hence $\\tau_{c,M}$ in [def-weil-frobenius-cohomology-transport]. Then for every $M\\in D^b_c(Y,\\Lambda)$:\n\n1. $\\operatorname{FrEx}_{Y,*}(M)\\circ Lg_s^*(\\kappa_M)=\\kappa_{Lg_Y^*M}\\circ\\operatorname{FrEx}_{Y,!}(M)$ as morphisms $Lg_s^*Ra_{Y!}M\\to Ra_{Y*}Lg_Y^*M$;\n\n2. $\\tau_M\\circ\\operatorname{Fib}_s(\\kappa_M)=\\operatorname{Fib}_s(\\kappa_{Lg_Y^*M})\\circ\\tau_{c,M}$ as morphisms $\\RGammac(Y,M)\\to\\RGamma(Y,Lg_Y^*M)$; hence, for every integer $i$, $\\mathrm H^i(\\tau_M)\\circ\\mathrm H^i(\\operatorname{Fib}_s\\kappa_M)=\\mathrm H^i(\\operatorname{Fib}_s\\kappa_{Lg_Y^*M})\\circ\\mathrm H^i(\\tau_{c,M})$ on $H^i_c(Y,M)$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+  "place": "## Proof, Step 6: 'it is Frobenius-equivariant because both operators are those of Step 5', asserted without argument; cf. Deligne, La conjecture de Weil I (literature/deligne-weil-I_PMIHES-1974-43.pdf), (1.3) p. 274 ('Pour X propre, les deux coincident') and (1.12) p. 278"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-finite-coefficient-point",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-direct-image",
+  "prop-weil-proper-compact-coincidence",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support"
+ ],
+ "proof": [
+  {
+   "text": "*Step 1 (finite coefficients).* Use the identity compactification fixed in the statement. By [def-weil-extension-by-zero], for $j=\\operatorname{id}_Y$ every object factors through $j$, so $P_M=M$ and $j_!M=M$, on objects and morphisms. Thus [def-compact-support-direct-image-detailed] gives $Ra_{Y!,n}=Ra_{Y*,n}$; the proper comparison $\\kappa$ of [prop-weil-proper-compact-coincidence] is this identification. In [lem-trf-open-square-exchange] put $U'=Y'=U=Y$ and $j'=j=\\operatorname{id}_Y$. Its restriction-to-$U'$ clause now says that the entire open-square map $b_{g_Y}$ is the identity under the pullback identifications. Consequently the two arrows defining $\\operatorname{FrEx}_{Y,!}$ in [def-weil-frobenius-square-exchange] (2) are $\\operatorname{FrEx}_{Y,*}(M)$ followed by $Ra_{Y*}(\\operatorname{id})$. This proves clause 1 at $\\Lambda=A_{E,n}$, including the specified identifications $Lg_s^*\\kappa_M$ on the source and $\\kappa_{Lg_Y^*M}$ on the target.",
+   "uses": [
     "def-weil-extension-by-zero",
-    "def-weil-finite-coefficient-point",
-    "def-weil-frobenius-cohomology-transport",
-    "def-weil-frobenius-square-exchange",
-    "def-weil-integral-rational-qbar-compact-support",
-    "def-weil-ordinary-compact-cohomology",
-    "lem-coef-semilinear-derived-sections",
-    "lem-sf-compact-support-restriction-of-scalars",
-    "lem-trf-open-square-exchange",
-    "lem-weil-frobenius-point-transport-natural",
-    "prop-weil-proper-compact-coincidence"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
-    "place": "Agent expansion of ## Proof, Step 6: identity-compactification exchange, equality on simultaneous coefficient systems, and point-transport naturality; cf. Deligne Weil I (1.3), p. 274."
-  },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "grep -rli -E 'etale cohomology|étale cohomology|proetale|ProEt|compactly supported|Frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-      "results": "AlgebraicGeometry/Sites/Proetale.lean (the pro-etale topology and the site S.ProEt, no sheaf cohomology computations) and AlgebraicGeometry/Sites/ElladicCohomology.lean (Scheme.ellAdicSheaf, Scheme.EllAdicCohomology: H^i(X_proet, Z_l) as a bare definition, no direct images, no compact supports, no Frobenius, no computation of H^0)",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "grep -rn -i -E 'beck.chevalley|exchange|properBaseChange|compactSupport' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
-      "results": "CategoryTheory/Adjunction/Mates.lean (abstract mates of squares of adjunctions); no compact-support direct image of schemes, no comparison Rf_! = Rf_* for proper f, no Frobenius exchange",
-      "date": "2026-10-09",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "extension by zero identity open immersion commutation base change derived direct image",
-      "results": "AlgebraicGeometry.Scheme.Hom.appIso_inv_app_presheafMap; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.Scheme.Hom.appIso_hom; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Hom.app_invApp'; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom",
-      "date": "2026-10-16",
-      "verdict": "no match for the four-stage derived Frobenius comparison"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.NatTrans.naturality",
-      "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
-      "date": "2026-10-16",
-      "verdict": "no match for the four-stage derived Frobenius comparison; generic categorical naturality only"
-    },
-    {
-      "tool": "grep",
-      "query": "extensionByZero|extension_by_zero|compactSupport|CompactSupport",
-      "results": "Mathlib/Topology/Algebra/ConstMulAction.lean; Mathlib/Topology/Algebra/ConstMulAction.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
-      "date": "2026-10-16",
-      "verdict": "no match for the four-stage derived Frobenius comparison"
-    },
-    {
-      "tool": "grep",
-      "query": "Frobenius.*compact|compact.*Frobenius|proper.*exchange",
-      "results": "No hits",
-      "date": "2026-10-17",
-      "verdict": "no match for the specified four-stage derived Frobenius exchange and transport comparison"
-    },
-    {
-      "tool": "leansearch",
-      "query": "proper morphism compactly supported cohomology ordinary cohomology Frobenius compatibility",
-      "results": "AlgebraicGeometry.IsProper.mk; RingHom.map_frobeniusEquiv_symm; AlgebraicGeometry.IsProper; Perfection.coeff_frobenius; AlgebraicGeometry.isProper_iff; AlgebraicGeometry.isProper_eq; RingHom.map_frobenius; AlgebraicGeometry.IsProper.instMorphismRestrict",
-      "date": "2026-10-17",
-      "verdict": "no match for the specified four-stage derived Frobenius exchange and transport comparison"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.NatTrans.naturality",
-      "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
-      "date": "2026-10-17",
-      "verdict": "no match for the specified four-stage derived Frobenius exchange and transport comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "proper pushforward compact support direct image comparison Frobenius equivariance",
-      "results": "CompactlySupportedContinuousMap.compLinearMap; hasCompactMulSupport_comp_left; SheafOfModules.pushforward_map_val; hasCompactSupport_comp_left; SheafOfModules.pushforwardComp_hom_app_val_app; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; SheafOfModules.pushforwardSections_coe; AlgebraicGeometry.Scheme.Modules.pushforwardComp",
-      "date": "2026-10-17",
-      "verdict": "no match for the specified four-stage derived Frobenius exchange and transport comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "extension by zero identity open immersion commutation base change derived direct image",
-      "results": "AlgebraicGeometry.Scheme.Hom.appIso_inv_app_presheafMap; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.Scheme.Hom.appIso_hom; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Hom.app_invApp'; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom",
-      "date": "2026-10-17",
-      "verdict": "no match for the specified four-stage derived Frobenius exchange and transport comparison"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "worker",
-    "item": "prop-cohomological-finiteness",
-    "date": "2026-10-09"
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-poincare-duality",
-  "unit": "sk-thm-sf-compatibility",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-pod-proper-coincidence-frobenius",
-    "worker": "stage1",
-    "summary": "Revalidated the earlier four-step split against the current ancestor blueprint, Deligne Weil I, and every cited node statement. Verified all 15 verbatim citation excerpts and exact coverage; refreshed the logged Mathlib searches with two semantic phrasings. The identity-compactification and simultaneous-system calculations require no new nodes or leaves.",
-    "blueprint": "Realizes ## Proof, Step 6 (the proper case): the identity compactification comparison and Frobenius-equivariance, followed by the induced equality on cohomology.",
-    "tool_uses": [
-      {
-        "node": "prop-weil-proper-compact-coincidence",
-        "why": "The proper-case step uses its stated identification Ra_{Y!} \\cong Ra_{Y*} to identify the comparison \\kappa with the identity compactification comparison; this generic proper comparison is supplied outside the finiteness unit."
-      },
-      {
-        "node": "lem-trf-open-square-exchange",
-        "why": "The chosen compactification formula uses the normalized open-exchange map; the whole open is Y here."
-      },
-      {
-        "node": "lem-coef-semilinear-derived-sections",
-        "why": "The existing exchange definition uses simultaneous system adjunction maps; setting the open immersion to the identity gives its identity mate before inverse limit."
-      },
-      {
-        "node": "lem-weil-frobenius-point-transport-natural",
-        "why": "The transport definition separates this generic naturality assertion from its construction; clause 2 is applied to the proper comparison morphism."
-      },
-      {
-        "node": "lem-sf-compact-support-restriction-of-scalars",
-        "why": "Its specified composite becomes the ordinary direct-image scalar restriction comparison for the identity open, proving that the two actual coefficient towers have equal transition maps."
-      }
-    ],
-    "statement_correction": "The compactification used for the exchange was implicit; it is now explicitly the identity compactification already fixed for kappa. The source proper-case assertion and its use by prop-cohomological-finiteness are unchanged."
-  },
-  "tool_uses": [
+    "def-compact-support-direct-image-detailed",
     "prop-weil-proper-compact-coincidence",
     "lem-trf-open-square-exchange",
+    "def-weil-frobenius-square-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+    "place": "## Proof, Step 6 (the proper case)"
+   }
+  },
+  {
+   "text": "*Step 2 (integral and field coefficients).* Use the same identity compactification at every level. The formulas in [def-weil-derived-direct-image] and [def-weil-integral-rational-qbar-compact-support] give the same strict coefficient tower for $Ra_{Y!}M$ and $Ra_{Y*}M$: at level $m$ both are $\\operatorname{Res}_mRa_{Y*,m}(M\\otimes^L A_{E,m})$, with the same quotient-induced transitions. Indeed, [lem-sf-compact-support-restriction-of-scalars] specifies the compact-support restriction comparison as the direct-image restriction comparison composed with $j_!\\operatorname{Res}=\\operatorname{Res}j_!$; for $j=\\operatorname{id}$ the latter identification is the identity. On the simultaneous section models of [lem-coef-semilinear-derived-sections], extension by zero along the identity is the identity functor, with identity adjunction unit and counit. Its open-adjunction mate $b$ is therefore the identity system map. In the notation of [def-weil-frobenius-square-exchange], $\\mathcal J_{\\operatorname{id}}=\\operatorname{id}$, $p=a_Y$, and $e_{a_Y}^{c}=\\mathcal F_{a_Y}(\\operatorname{id})\\circ e_{a_Y}=e_{a_Y}$ as system maps. Under $\\kappa$, the canonical comparisons $\\alpha_!,\\beta_!$ in that definition are $\\alpha_*,\\beta_*$: their source and target system operations and their defining units and counits coincide. Thus the two integral exchange composites are the same $\\beta_*\\circ\\mathcal L_s(e_{a_Y})\\circ\\alpha_*$, proving clause 1 for $\\mathcal O_E$. Applying the scalar-localization functor to this equality proves it for $E$; representing an object and these equal morphisms at a common finite field stage proves it for $\\Qlb$, exactly as prescribed in [def-weil-frobenius-square-exchange]. This uses equality of specified system maps before $R\\varprojlim$, rather than inferring equality from their finite evaluations.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "def-weil-integral-rational-qbar-compact-support",
     "lem-coef-semilinear-derived-sections",
-    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-square-exchange",
     "lem-sf-compact-support-restriction-of-scalars"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q84-416ef0963",
-    "group": "Q84",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-416ef0963 (reviewer sub-agent of L); spot-checked: I read the item, all 13 cited node statements (the blueprint_update statements are identical to the current ones), unit sk-lem-finite, the citer prop-cohomological-finiteness Step 4, the current blueprint main-20261015 Step 6 ('Frobenius-equivariant because both operators are those of Step 5', which it asserts without argument), and Deligne Weil I (1.3) p.274 ('Pour X propre, les deux coincident') and (1.12) p.278. Hypotheses check out: proper implies separated finite type, so the transport and compact-support definitions apply. kappa is the specified identification for the identity compactification that the proof of prop-weil-proper-compact-coincidence constructs, not just an isomorphism that exists. The statement now says FrEx_! uses the same identity compactification. This only makes explicit a choice that def-weil-frobenius-square-exchange (2) already treats as part of the construction. It is recorded and is not a weakening. Step 1: with j=id the sheafification of P_M=M is canonically M. lem-trf-open-square-exchange's restriction-to-U' clause on the whole open gives b=id, and naturality of FrEx_* reduces clause 1 to that normalization, which I checked by hand. Step 2: the towers are the same, and the transitions agree through the composite named in lem-sf-compact-support-restriction-of-scalars. J_id=id and b=id on the lem-coef-semilinear-derived-sections models, so e^c=e and alpha_!,beta_! equal alpha_*,beta_*. E is handled by localization and Qbar by common-stage classes; no rational object is reduced. Step 3: the naturality in lem-weil-frobenius-point-transport-natural (2) gives the correct 4-line chain, with domains and targets matching. Step 4 is functoriality of H^i. Edge cases (empty Y, M=0, Y_0=Spec k_0, n=1, all i) need no exceptions. There are no new nodes. An rg search of dag/nodes found no duplicate and no cycle; the only citer is the ancestor. No SGA is cited. I accept the five declared tool_uses: prop-weil-proper-compact-coincidence, lem-trf-open-square-exchange, lem-coef-semilinear-derived-sections, lem-weil-frobenius-point-transport-natural and lem-sf-compact-support-restriction-of-scalars. No fixes were written."
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+    "place": "## Proof, Step 6 (the proper case)"
+   }
   },
-  "blueprint_parent": {
-    "node": "sk-thm-sf-compatibility",
-    "clause": 7,
-    "from_unit": "sk-lem-finite",
-    "date": "2026-10-17",
-    "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+  {
+   "text": "*Step 3 (point complexes).* Write $F=\\operatorname{Fib}_s$, $G=Lg_s^*$, $N_!=Ra_{Y!}M$, $N_*=Ra_{Y*}M$, and $M'=Lg_Y^*M$. Naturality of the point transport [lem-weil-frobenius-point-transport-natural] (2), applied to $\\kappa_M:N_!\\to N_*$, says $\\iota_{N_*}\\circ F(\\kappa_M)=F(G\\kappa_M)\\circ\\iota_{N_!}$. Clause 1 and functoriality of $F$ [def-weil-finite-coefficient-point] now give\n$$\n\\begin{aligned}\n\\tau_M\\circ F(\\kappa_M)\n&=F(\\operatorname{FrEx}_{Y,*}(M))\\circ\\iota_{N_*}\\circ F(\\kappa_M)\\\\\n&=F(\\operatorname{FrEx}_{Y,*}(M))\\circ F(G\\kappa_M)\\circ\\iota_{N_!}\\\\\n&=F(\\kappa_{M'})\\circ F(\\operatorname{FrEx}_{Y,!}(M))\\circ\\iota_{N_!}\\\\\n&=F(\\kappa_{M'})\\circ\\tau_{c,M}.\n\\end{aligned}\n$$\nThe first and last equalities are the two transport composites of [def-weil-frobenius-cohomology-transport]. Their source and target are the cohomology complexes of [def-weil-ordinary-compact-cohomology]. This is clause 2 at the complex level.",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-finite-coefficient-point",
+    "def-weil-frobenius-cohomology-transport",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+    "place": "## Proof, Step 6 (the proper case)"
+   }
   },
-  "lean": {
-    "module": "Sheaf.Paper.ProperCoincidenceFrobenius",
-    "declaration": "WeilConjectures.properCoincidenceFrobenius",
-    "declarations": [
-      "WeilConjectures.properFrobeniusFiberOver",
-      "WeilConjectures.properFrobeniusBaseOver",
-      "WeilConjectures.properFrobeniusFiberHomOver",
-      "WeilConjectures.properFrobeniusFiberSeparated",
-      "WeilConjectures.properFrobeniusFiberLocallyFiniteType",
-      "WeilConjectures.properFrobeniusFiberQuasiCompact",
-      "WeilConjectures.properFrobeniusFiberProper",
-      "WeilConjectures.properFrobeniusCompactification_eq",
-      "WeilConjectures.properFrobeniusFiniteComparison",
-      "WeilConjectures.properFrobeniusSystemOpenId",
-      "WeilConjectures.properFrobeniusPointPrime",
-      "WeilConjectures.properFrobeniusFiberPrime",
-      "WeilConjectures.properFrobeniusIntegralAmbient",
-      "WeilConjectures.properFrobeniusIntegralComparison",
-      "WeilConjectures.properFrobeniusGaloisIso",
-      "WeilConjectures.properFrobeniusIntegralFunctor",
-      "WeilConjectures.properFrobeniusIntegralExchange",
-      "WeilConjectures.properFrobeniusRationalFunctor",
-      "WeilConjectures.properFrobeniusRationalExchange",
-      "WeilConjectures.properFrobeniusIntegralIso",
-      "WeilConjectures.properFrobeniusRationalIso_existsUnique",
-      "WeilConjectures.properFrobeniusRationalIso",
-      "WeilConjectures.properFrobeniusFiniteRingFinite",
-      "WeilConjectures.properFrobeniusFiniteFibre",
-      "WeilConjectures.properFrobeniusFiniteHomology",
-      "WeilConjectures.properFrobeniusFiniteExchange",
-      "WeilConjectures.properFrobeniusFiniteIso",
-      "WeilConjectures.properFrobeniusFinitePointIso",
-      "WeilConjectures.properFrobeniusFinitePulledPointIso",
-      "WeilConjectures.properCoincidenceFrobeniusFinite",
-      "WeilConjectures.properFrobeniusIntegralPointIso",
-      "WeilConjectures.properFrobeniusIntegralPulledPointIso",
-      "WeilConjectures.properFrobeniusIntegralHomology",
-      "WeilConjectures.properCoincidenceFrobeniusIntegral",
-      "WeilConjectures.properFrobeniusRationalPointIso",
-      "WeilConjectures.properFrobeniusRationalPulledPointIso",
-      "WeilConjectures.properFrobeniusRationalHomology",
-      "WeilConjectures.properCoincidenceFrobeniusRational",
-      "WeilConjectures.properFrobeniusQbarSide",
-      "WeilConjectures.properFrobeniusQbarExchange",
-      "WeilConjectures.properFrobeniusQbarComparison",
-      "WeilConjectures.properFrobeniusQbarSourceIso_existsUnique",
-      "WeilConjectures.properFrobeniusQbarSourceIso",
-      "WeilConjectures.properFrobeniusQbarTargetIso_existsUnique",
-      "WeilConjectures.properFrobeniusQbarTargetIso",
-      "WeilConjectures.properFrobeniusQbarPointIso",
-      "WeilConjectures.properFrobeniusQbarPulledPointIso",
-      "WeilConjectures.properFrobeniusQbarHomology",
-      "WeilConjectures.properCoincidenceFrobenius"
-    ],
-    "file": "lean/Sheaf/Paper/ProperCoincidenceFrobenius.lean",
-    "statement": "theorem properCoincidenceFrobenius (K : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left) : (properFrobeniusQbarSourceIso D Y₀ l Ω).hom.app K ≫ (properFrobeniusQbarExchange D Y₀ l Ω false).app K = (properFrobeniusQbarExchange D Y₀ l Ω true).app K ≫ (properFrobeniusQbarTargetIso D Y₀ l Ω).hom.app K ∧ (properFrobeniusQbarPointIso D Y₀ l Ω K).hom ≫ (frobeniusCohomologyTransport D l Fact.out Y₀ Ω (Compactification.ofIsProper Y₀.hom) K).1 = (frobeniusCohomologyTransport D l Fact.out Y₀ Ω (Compactification.ofIsProper Y₀.hom) K).2 ≫ (properFrobeniusQbarPulledPointIso D Y₀ l Ω K).hom ∧ ∀ i : ℤ, (properFrobeniusQbarHomology.{u, v} Ω i).map (properFrobeniusQbarPointIso D Y₀ l Ω K).hom ≫ (frobeniusCohomologyMap D l Fact.out Y₀ Ω (Compactification.ofIsProper Y₀.hom) K i).1 = (frobeniusCohomologyMap D l Fact.out Y₀ Ω (Compactification.ofIsProper Y₀.hom) K i).2 ≫ (properFrobeniusQbarHomology.{u, v} Ω i).map (properFrobeniusQbarPulledPointIso D Y₀ l Ω K).hom",
-    "branch": "newtargets-dag",
-    "by": "Q02",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "Repair of 8f75559cb4da: canonical identity-open comparison before cohomology; actual recorded Frobenius exchange, complex transport and degreewise maps for finite, integral, rational and algebraically closed coefficients. All four theorem signatures are in the module; the main declaration is the algebraically closed case. Helper choices have unique component specifications, never bare Nonempty isomorphism data."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-df539fe6d",
-    "group": "Q02",
-    "result": "fix",
-    "note": "Item correct in substance; the 8f75559c RETURN is fully repaired: identity compactification ofIsProper everywhere; canonical κ (finite: eqToIso of the true compactification equality + sfIntrinsicDerivedOpenId + leftUnitor; integral: compactRealization + whole-system identity-open cancellation before the limit; rational/Qbar: ∃!-pinned localization/stage class, Hom types equal by rfl or the commonStageDerivedPullback spec, so not arbitrary); clause 1 with the recorded finiteExchange/finiteCompact/modelExchange/modelRationalExchange/commonStageExchange; complex clause 2 with transport .1 = ordinary and .2 = compact, correctly oriented, on Lg_Y^*M; ∀ i : ℤ via frobeniusCohomologyMap*; all four coefficient cases; statement verbatim; 49/49 declarations. nt_compile --json item alone against live: clean, 26.5/26.9 s. FIX: the DerivedPullbackTensorHom.lean dependency edit is ineffective (alternating runs: live 44.5/44.4 s vs delivered 43.1/42.6 s); fixes/DerivedPullbackTensorHom.lean = live text. Maintainer: its dep record note/by is overwritten (NQ to Q02) and should land with --revert-nodes. Advisory: three plain proof-step imports are not used by the statements."
+  {
+   "text": "*Step 4 (cohomology).* Applying $\\mathrm H^i$ to the point-complex equality of Step 3 gives, for every integer $i$, $\\mathrm H^i(\\tau_M)\\circ\\mathrm H^i(\\operatorname{Fib}_s\\kappa_M)=\\mathrm H^i(\\operatorname{Fib}_s\\kappa_{Lg_Y^*M})\\circ\\mathrm H^i(\\tau_{c,M})$ on $H_c^i(Y,M)$, using the definitions of ordinary and compact-support cohomology in [def-weil-ordinary-compact-cohomology] and preservation of composition by the cohomology functor.",
+   "uses": [
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+    "place": "## Proof, Step 6 (the proper case)"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-extension-by-zero",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-frobenius-square-exchange",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-trf-open-square-exchange",
+  "lem-weil-frobenius-point-transport-natural",
+  "prop-weil-proper-compact-coincidence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/prop-cohomological-finiteness.md",
+  "place": "Agent expansion of ## Proof, Step 6: identity-compactification exchange, equality on simultaneous coefficient systems, and point-transport naturality; cf. Deligne Weil I (1.3), p. 274."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "grep -rli -E 'etale cohomology|étale cohomology|proetale|ProEt|compactly supported|Frobenius' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "AlgebraicGeometry/Sites/Proetale.lean (the pro-etale topology and the site S.ProEt, no sheaf cohomology computations) and AlgebraicGeometry/Sites/ElladicCohomology.lean (Scheme.ellAdicSheaf, Scheme.EllAdicCohomology: H^i(X_proet, Z_l) as a bare definition, no direct images, no compact supports, no Frobenius, no computation of H^0)",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "grep -rn -i -E 'beck.chevalley|exchange|properBaseChange|compactSupport' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry",
+   "results": "CategoryTheory/Adjunction/Mates.lean (abstract mates of squares of adjunctions); no compact-support direct image of schemes, no comparison Rf_! = Rf_* for proper f, no Frobenius exchange",
+   "date": "2026-10-09",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero identity open immersion commutation base change derived direct image",
+   "results": "AlgebraicGeometry.Scheme.Hom.appIso_inv_app_presheafMap; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.Scheme.Hom.appIso_hom; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Hom.app_invApp'; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom",
+   "date": "2026-10-16",
+   "verdict": "no match for the four-stage derived Frobenius comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-16",
+   "verdict": "no match for the four-stage derived Frobenius comparison; generic categorical naturality only"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|compactSupport|CompactSupport",
+   "results": "Mathlib/Topology/Algebra/ConstMulAction.lean; Mathlib/Topology/Algebra/ConstMulAction.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Support.lean; Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
+   "date": "2026-10-16",
+   "verdict": "no match for the four-stage derived Frobenius comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*compact|compact.*Frobenius|proper.*exchange",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match for the specified four-stage derived Frobenius exchange and transport comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "proper morphism compactly supported cohomology ordinary cohomology Frobenius compatibility",
+   "results": "AlgebraicGeometry.IsProper.mk; RingHom.map_frobeniusEquiv_symm; AlgebraicGeometry.IsProper; Perfection.coeff_frobenius; AlgebraicGeometry.isProper_iff; AlgebraicGeometry.isProper_eq; RingHom.map_frobenius; AlgebraicGeometry.IsProper.instMorphismRestrict",
+   "date": "2026-10-17",
+   "verdict": "no match for the specified four-stage derived Frobenius exchange and transport comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality; CategoryTheory.Limits.PullbackCone.isoMk; CategoryTheory.Limits.PushoutCocone.isoMk; CategoryTheory.Limits.PullbackCone.isoMk_hom_hom; CategoryTheory.Limits.PullbackCone.isoMk_inv_hom; CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom; CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom; CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-17",
+   "verdict": "no match for the specified four-stage derived Frobenius exchange and transport comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "proper pushforward compact support direct image comparison Frobenius equivariance",
+   "results": "CompactlySupportedContinuousMap.compLinearMap; hasCompactMulSupport_comp_left; SheafOfModules.pushforward_map_val; hasCompactSupport_comp_left; SheafOfModules.pushforwardComp_hom_app_val_app; AlgebraicGeometry.Scheme.Modules.pushforward_map_app; SheafOfModules.pushforwardSections_coe; AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+   "date": "2026-10-17",
+   "verdict": "no match for the specified four-stage derived Frobenius exchange and transport comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero identity open immersion commutation base change derived direct image",
+   "results": "AlgebraicGeometry.Scheme.Hom.appIso_inv_app_presheafMap; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.Scheme.Hom.appIso_hom; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Hom.app_invApp'; AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom",
+   "date": "2026-10-17",
+   "verdict": "no match for the specified four-stage derived Frobenius exchange and transport comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "prop-cohomological-finiteness",
+  "date": "2026-10-09"
+ },
+ "lean_audit": {},
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-thm-sf-compatibility",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-proper-coincidence-frobenius",
+  "worker": "stage1",
+  "summary": "Revalidated the earlier four-step split against the current ancestor blueprint, Deligne Weil I, and every cited node statement. Verified all 15 verbatim citation excerpts and exact coverage; refreshed the logged Mathlib searches with two semantic phrasings. The identity-compactification and simultaneous-system calculations require no new nodes or leaves.",
+  "blueprint": "Realizes ## Proof, Step 6 (the proper case): the identity compactification comparison and Frobenius-equivariance, followed by the induced equality on cohomology.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-proper-compact-coincidence",
+    "why": "The proper-case step uses its stated identification Ra_{Y!} \\cong Ra_{Y*} to identify the comparison \\kappa with the identity compactification comparison; this generic proper comparison is supplied outside the finiteness unit."
+   },
+   {
+    "node": "lem-trf-open-square-exchange",
+    "why": "The chosen compactification formula uses the normalized open-exchange map; the whole open is Y here."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "The existing exchange definition uses simultaneous system adjunction maps; setting the open immersion to the identity gives its identity mate before inverse limit."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "The transport definition separates this generic naturality assertion from its construction; clause 2 is applied to the proper comparison morphism."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Its specified composite becomes the ordinary direct-image scalar restriction comparison for the identity open, proving that the two actual coefficient towers have equal transition maps."
+   }
+  ],
+  "statement_correction": "The compactification used for the exchange was implicit; it is now explicitly the identity compactification already fixed for kappa. The source proper-case assertion and its use by prop-cohomological-finiteness are unchanged."
+ },
+ "tool_uses": [
+  "prop-weil-proper-compact-coincidence",
+  "lem-trf-open-square-exchange",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-sf-compact-support-restriction-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-416ef0963",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-416ef0963 (reviewer sub-agent of L); spot-checked: I read the item, all 13 cited node statements (the blueprint_update statements are identical to the current ones), unit sk-lem-finite, the citer prop-cohomological-finiteness Step 4, the current blueprint main-20261015 Step 6 ('Frobenius-equivariant because both operators are those of Step 5', which it asserts without argument), and Deligne Weil I (1.3) p.274 ('Pour X propre, les deux coincident') and (1.12) p.278. Hypotheses check out: proper implies separated finite type, so the transport and compact-support definitions apply. kappa is the specified identification for the identity compactification that the proof of prop-weil-proper-compact-coincidence constructs, not just an isomorphism that exists. The statement now says FrEx_! uses the same identity compactification. This only makes explicit a choice that def-weil-frobenius-square-exchange (2) already treats as part of the construction. It is recorded and is not a weakening. Step 1: with j=id the sheafification of P_M=M is canonically M. lem-trf-open-square-exchange's restriction-to-U' clause on the whole open gives b=id, and naturality of FrEx_* reduces clause 1 to that normalization, which I checked by hand. Step 2: the towers are the same, and the transitions agree through the composite named in lem-sf-compact-support-restriction-of-scalars. J_id=id and b=id on the lem-coef-semilinear-derived-sections models, so e^c=e and alpha_!,beta_! equal alpha_*,beta_*. E is handled by localization and Qbar by common-stage classes; no rational object is reduced. Step 3: the naturality in lem-weil-frobenius-point-transport-natural (2) gives the correct 4-line chain, with domains and targets matching. Step 4 is functoriality of H^i. Edge cases (empty Y, M=0, Y_0=Spec k_0, n=1, all i) need no exceptions. There are no new nodes. An rg search of dag/nodes found no duplicate and no cycle; the only citer is the ancestor. No SGA is cited. I accept the five declared tool_uses: prop-weil-proper-compact-coincidence, lem-trf-open-square-exchange, lem-coef-semilinear-derived-sections, lem-weil-frobenius-point-transport-natural and lem-sf-compact-support-restriction-of-scalars. No fixes were written."
+ },
+ "blueprint_parent": {
+  "node": "sk-thm-sf-compatibility",
+  "clause": 7,
+  "from_unit": "sk-lem-finite",
+  "date": "2026-10-17",
+  "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperCoincidenceFrobenius",
+  "declaration": "WeilConjectures.properCoincidenceFrobenius",
+  "declarations": [
+   "WeilConjectures.properFrobeniusFiberOver",
+   "WeilConjectures.properFrobeniusBaseOver",
+   "WeilConjectures.properFrobeniusFiberHomOver",
+   "WeilConjectures.properFrobeniusFiberSeparated",
+   "WeilConjectures.properFrobeniusFiberLocallyFiniteType",
+   "WeilConjectures.properFrobeniusFiberQuasiCompact",
+   "WeilConjectures.properFrobeniusFiberProper",
+   "WeilConjectures.properFrobeniusCompactification_eq",
+   "WeilConjectures.properFrobeniusFiniteComparison",
+   "WeilConjectures.properFrobeniusSystemOpenId",
+   "WeilConjectures.properFrobeniusPointPrime",
+   "WeilConjectures.properFrobeniusFiberPrime",
+   "WeilConjectures.properFrobeniusIntegralAmbient",
+   "WeilConjectures.properFrobeniusIntegralComparison",
+   "WeilConjectures.properFrobeniusGaloisIso",
+   "WeilConjectures.properFrobeniusIntegralFunctor",
+   "WeilConjectures.properFrobeniusIntegralExchange",
+   "WeilConjectures.properFrobeniusRationalFunctor",
+   "WeilConjectures.properFrobeniusRationalExchange",
+   "WeilConjectures.properFrobeniusIntegralIso",
+   "WeilConjectures.properFrobeniusRationalIso_existsUnique",
+   "WeilConjectures.properFrobeniusRationalIso",
+   "WeilConjectures.properFrobeniusFiniteRingFinite",
+   "WeilConjectures.properFrobeniusFiniteFibre",
+   "WeilConjectures.properFrobeniusFiniteHomology",
+   "WeilConjectures.properFrobeniusFiniteExchange",
+   "WeilConjectures.properFrobeniusFiniteIso",
+   "WeilConjectures.properFrobeniusFinitePointIso",
+   "WeilConjectures.properFrobeniusFinitePulledPointIso",
+   "WeilConjectures.properCoincidenceFrobeniusFinite",
+   "WeilConjectures.properFrobeniusIntegralPointIso",
+   "WeilConjectures.properFrobeniusIntegralPulledPointIso",
+   "WeilConjectures.properFrobeniusIntegralHomology",
+   "WeilConjectures.properCoincidenceFrobeniusIntegral",
+   "WeilConjectures.properFrobeniusRationalPointIso",
+   "WeilConjectures.properFrobeniusRationalPulledPointIso",
+   "WeilConjectures.properFrobeniusRationalHomology",
+   "WeilConjectures.properCoincidenceFrobeniusRational",
+   "WeilConjectures.properFrobeniusQbarSide",
+   "WeilConjectures.properFrobeniusQbarExchange",
+   "WeilConjectures.properFrobeniusQbarComparison",
+   "WeilConjectures.properFrobeniusQbarSourceIso_existsUnique",
+   "WeilConjectures.properFrobeniusQbarSourceIso",
+   "WeilConjectures.properFrobeniusQbarTargetIso_existsUnique",
+   "WeilConjectures.properFrobeniusQbarTargetIso",
+   "WeilConjectures.properFrobeniusQbarPointIso",
+   "WeilConjectures.properFrobeniusQbarPulledPointIso",
+   "WeilConjectures.properFrobeniusQbarHomology",
+   "WeilConjectures.properCoincidenceFrobenius"
+  ],
+  "file": "lean/Sheaf/Paper/ProperCoincidenceFrobenius.lean",
+  "statement": "theorem properCoincidenceFrobenius (K : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left) : (properFrobeniusQbarSourceIso D Y₀ l Ω).hom.app K ≫ (properFrobeniusQbarExchange D Y₀ l Ω false).app K = (properFrobeniusQbarExchange D Y₀ l Ω true).app K ≫ (properFrobeniusQbarTargetIso D Y₀ l Ω).hom.app K ∧ (properFrobeniusQbarPointIso D Y₀ l Ω K).hom ≫ (frobeniusCohomologyTransport D l Fact.out Y₀ Ω (Compactification.ofIsProper Y₀.hom) K).1 = (frobeniusCohomologyTransport D l Fact.out Y₀ Ω (Compactification.ofIsProper Y₀.hom) K).2 ≫ (properFrobeniusQbarPulledPointIso D Y₀ l Ω K).hom ∧ ∀ i : ℤ, (properFrobeniusQbarHomology.{u, v} Ω i).map (properFrobeniusQbarPointIso D Y₀ l Ω K).hom ≫ (frobeniusCohomologyMap D l Fact.out Y₀ Ω (Compactification.ofIsProper Y₀.hom) K i).1 = (frobeniusCohomologyMap D l Fact.out Y₀ Ω (Compactification.ofIsProper Y₀.hom) K i).2 ≫ (properFrobeniusQbarHomology.{u, v} Ω i).map (properFrobeniusQbarPulledPointIso D Y₀ l Ω K).hom",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of 8f75559cb4da: canonical identity-open comparison before cohomology; actual recorded Frobenius exchange, complex transport and degreewise maps for finite, integral, rational and algebraically closed coefficients. All four theorem signatures are in the module; the main declaration is the algebraically closed case. Helper choices have unique component specifications, never bare Nonempty isomorphism data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df539fe6d",
+  "group": "Q02",
+  "result": "fix",
+  "note": "Item correct in substance; the 8f75559c RETURN is fully repaired: identity compactification ofIsProper everywhere; canonical κ (finite: eqToIso of the true compactification equality + sfIntrinsicDerivedOpenId + leftUnitor; integral: compactRealization + whole-system identity-open cancellation before the limit; rational/Qbar: ∃!-pinned localization/stage class, Hom types equal by rfl or the commonStageDerivedPullback spec, so not arbitrary); clause 1 with the recorded finiteExchange/finiteCompact/modelExchange/modelRationalExchange/commonStageExchange; complex clause 2 with transport .1 = ordinary and .2 = compact, correctly oriented, on Lg_Y^*M; ∀ i : ℤ via frobeniusCohomologyMap*; all four coefficient cases; statement verbatim; 49/49 declarations. nt_compile --json item alone against live: clean, 26.5/26.9 s. FIX: the DerivedPullbackTensorHom.lean dependency edit is ineffective (alternating runs: live 44.5/44.4 s vs delivered 43.1/42.6 s); fixes/DerivedPullbackTensorHom.lean = live text. Maintainer: its dep record note/by is overwritten (NQ to Q02) and should land with --revert-nodes. Advisory: three plain proof-step imports are not used by the statements."
+ }
 }

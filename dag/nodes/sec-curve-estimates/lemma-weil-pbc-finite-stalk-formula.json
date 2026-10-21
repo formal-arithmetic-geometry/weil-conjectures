@@ -1,162 +1,126 @@
 {
-  "id": "lemma-weil-pbc-finite-stalk-formula",
-  "blueprint": {
-    "is": "lemma-weil-pbc-finite-stalk-formula",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Geometric stalk formula for finite direct image",
-  "statement": "Let $f:X\\to Y$ be finite, let $F$ be an etale sheaf of abelian groups on $X$,\nand let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point. If\n$\\{\\bar x\\}$ is the finite set of geometric points of $X_{\\bar y}$, then\n\n$$\n (f_*F)_{\\bar y}\\xrightarrow{\\sim}\n \\prod_{\\bar x\\in|X_{\\bar y}|}F_{\\bar x}.\n$$\n\nFor a finite set, this product is also the direct sum.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-finite-stalk-formula.md",
-    "place": "node lemma-weil-pbc-finite-stalk-formula, order 997"
-  },
-  "stmt_deps": [
-    "def-kun-separably-closed",
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-geometric-fibre",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "After base change to the strict henselization at $\\bar y$, the finite scheme\n$X_{\\bar y}$ is the spectrum of a finite algebra over a strictly henselian\nlocal ring, hence a finite disjoint union of strictly henselian local schemes\nindexed by the geometric points $\\bar x$. Sections over a disjoint union are\nthe corresponding product of stalks, as computed by the stalk description of\nthe geometric-stalk convention and the definition of the direct image; for a\nfinite index set this product is the direct sum.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
-    "lem-fin-finite-splitting",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-finite-stalk-formula.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "lean_multiple",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 997,
-  "blueprint_uses": [
-    "def-kun-separably-closed",
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-geometric-fibre",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-scheme-conventions",
-    "lem-fin-finite-splitting",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-  ],
-  "lean": {
-    "module": "WeilConjectures.SixFunctors.Finite.Stalk",
-    "declaration": "AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi",
-    "branch": "slopmaster2",
-    "line": 292,
-    "sorry_free": true,
-    "body_lines": 12,
-    "others": [
-      {
-        "module": "WeilConjectures.SixFunctors.Finite.Stalk",
-        "declaration": "AlgebraicGeometry.Etale.stalkRestrict",
-        "branch": "slopmaster2",
-        "line": 117,
-        "sorry_free": true,
-        "body_lines": 2
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi",
-    "AlgebraicGeometry.Etale.stalkRestrict"
-  ],
-  "uses_not_cited": [
-    "def-kun-separably-closed",
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-geometric-fibre",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-scheme-conventions",
-    "lem-fin-finite-splitting",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_sketch": [
-    {
-      "statement": "Let $h:W\\to V$ be finite and let $\\bar v:\\operatorname{Spec}\\Omega\\to V$ be a geometric\npoint with $\\Omega$ algebraically closed. For every sheaf $F$ on $W_{\\mathrm{et}}$ there\nis a canonical bijection\n\n$$\n(h_*F)_{\\bar v}\\;\\cong\\;\n\\prod_{\\bar w\\,|\\,\\bar v}F_{\\bar w},\n$$\n\nwhere the index runs over the finite geometric fibre of $h$ over $\\bar v$ and the\n$\\bar w$-th component is restriction of stalks.",
-      "proof": "The formalisation avoids the strict henselisation: it works with the category of\n*split neighbourhoods* of $\\bar v$ (pointed etale neighbourhoods $(U,\\bar u)$ together\nwith a decomposition of $W\\times_VU$ into pairwise disjoint clopen pieces indexed by the\ngeometric points $\\bar w$ over $\\bar v$, the $\\bar w$-th piece containing $(\\bar u,\\bar w)$), shows\nthat these are cofinal among all pointed etale neighbourhoods (by [lem-fin-finite-splitting]\napplied to $h$ there is a split neighbourhood $(V',\\bar v')$, and for any pointed etale\nneighbourhood $(U,\\bar u)$ the base change of its decomposition to $U\\times_VV'$ is again one;\nStacks 00UJ applied to an affine chart), that the $\\bar w$-th pieces are cofinal among the pointed etale neighbourhoods of\n$\\bar w$ (an etale-local section lemma for finite algebras with a unique point), and that a\nsheaf sends the disjoint clopen cover into a product; finite products commute with the\nfiltered colimit since the coefficients satisfy AB5. The restriction to geometric points\nwith algebraically closed residue field suffices for all uses, since these already form a\nconservative family (Lemma [lemma-weil-pbc-geometric-stalk-conservative]).",
-      "cites": [
-        "lem-fin-finite-splitting",
-        "lemma-weil-pbc-geometric-stalk-conservative"
-      ]
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi",
-        "AlgebraicGeometry.Etale.stalkRestrict"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi",
-          "module": "WeilConjectures.SixFunctors.Finite.Stalk",
-          "lines": [
-            290,
-            308
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.stalkRestrict",
-          "module": "WeilConjectures.SixFunctors.Finite.Stalk",
-          "lines": [
-            116,
-            123
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-curve-estimates",
-  "unit": "sk-prop-cd",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f:X\\to Y$ be a finite morphism of schemes, let $\\mathcal A$ be a\nGrothendieck abelian coefficient category for which presheaves on small etale\nsites can be sheafified (for instance abelian groups), and let\n$\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point with $\\Omega$\nalgebraically closed. For an $\\mathcal A$-valued etale sheaf $G$ on $X$ and a\ngeometric point $\\bar x$ of the geometric fibre of $f$ over $\\bar y$, the\n*restriction of stalks* $(f_*G)_{\\bar y}\\to G_{\\bar x}$ sends the germ of a\nsection of $G$ over $U\\times_YX$, for a pointed etale neighbourhood $U$ of\n$\\bar y$, to its germ at the pointed etale neighbourhood $U\\times_YX$ of\n$\\bar x$. These maps together give an isomorphism\n\n$$\n (f_*G)_{\\bar y}\\xrightarrow{\\sim}\n \\prod_{\\bar x\\in|X_{\\bar y}|}G_{\\bar x},\n$$\n\nnatural in $G$, where the product runs over the finite geometric fibre of $f$\nover $\\bar y$. For a finite set, this product is also the direct sum.",
-    "proof": [
-      {
-        "text": "After base change to the strict henselization at $\\bar y$, the finite scheme\n$X_{\\bar y}$ is the spectrum of a finite algebra over a strictly henselian\nlocal ring, hence a finite disjoint union of strictly henselian local schemes\nindexed by the geometric points $\\bar x$. Sections over a disjoint union are\nthe corresponding product of stalks, as computed by the stalk description of\nthe geometric-stalk convention and the definition of the direct image; for a\nfinite index set this product is the direct sum.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "Alternatively, one can avoid the strict henselisation and work with the category of\n*split neighbourhoods* of $\\bar y$ (pointed etale neighbourhoods $(U,\\bar u)$ together\nwith a decomposition of $X\\times_YU$ into pairwise disjoint clopen pieces indexed by the\ngeometric points $\\bar x$ over $\\bar y$, the $\\bar x$-th piece containing $(\\bar x,\\bar u)$). These\nare cofinal among all pointed etale neighbourhoods: by [lem-fin-finite-splitting]\napplied to $f$ there is a split neighbourhood $(Y',\\bar y')$, and for any pointed etale\nneighbourhood $(U,\\bar u)$ the base change of its decomposition to $U\\times_YY'$ is again one\n(Stacks 00UJ applied to an affine chart). The $\\bar x$-th pieces are cofinal among the pointed\netale neighbourhoods of $\\bar x$ (an etale-local section lemma for finite algebras with a unique\npoint), and the sheaf $G$ sends the disjoint clopen cover to a product; finite products commute\nwith the filtered colimit since the coefficients satisfy AB5. Hence\n$(f_*G)_{\\bar y}=\\varinjlim_{(U,\\bar u)}G(X\\times_YU)\\cong\\prod_{\\bar x}G_{\\bar x}$, the\n$\\bar x$-th component being the restriction of stalks, and the isomorphism is natural in $G$\nbecause every map involved is.",
-        "uses": [
-          "lem-fin-finite-splitting"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ "id": "lemma-weil-pbc-finite-stalk-formula",
+ "blueprint": {
+  "is": "lemma-weil-pbc-finite-stalk-formula",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Geometric stalk formula for finite direct image",
+ "statement": "Let $f:X\\to Y$ be finite, let $F$ be an etale sheaf of abelian groups on $X$,\nand let $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point. If\n$\\{\\bar x\\}$ is the finite set of geometric points of $X_{\\bar y}$, then\n\n$$\n (f_*F)_{\\bar y}\\xrightarrow{\\sim}\n \\prod_{\\bar x\\in|X_{\\bar y}|}F_{\\bar x}.\n$$\n\nFor a finite set, this product is also the direct sum.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-finite-stalk-formula.md",
+  "place": "node lemma-weil-pbc-finite-stalk-formula, order 997"
+ },
+ "stmt_deps": [
+  "def-kun-separably-closed",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-fibre",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "After base change to the strict henselization at $\\bar y$, the finite scheme\n$X_{\\bar y}$ is the spectrum of a finite algebra over a strictly henselian\nlocal ring, hence a finite disjoint union of strictly henselian local schemes\nindexed by the geometric points $\\bar x$. Sections over a disjoint union are\nthe corresponding product of stalks, as computed by the stalk description of\nthe geometric-stalk convention and the definition of the direct image; for a\nfinite index set this product is the direct sum.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "lem-fin-finite-splitting",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-cd/lemma-weil-pbc-finite-stalk-formula.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 997,
+ "blueprint_uses": [
+  "def-kun-separably-closed",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-fibre",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions",
+  "lem-fin-finite-splitting",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Finite.Stalk",
+  "declaration": "AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi",
+  "branch": "slopmaster2",
+  "line": 292,
+  "sorry_free": true,
+  "body_lines": 12,
+  "others": [
+   {
+    "module": "WeilConjectures.SixFunctors.Finite.Stalk",
+    "declaration": "AlgebraicGeometry.Etale.stalkRestrict",
+    "branch": "slopmaster2",
+    "line": 117,
+    "sorry_free": true,
+    "body_lines": 2
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi",
+  "AlgebraicGeometry.Etale.stalkRestrict"
+ ],
+ "uses_not_cited": [
+  "def-kun-separably-closed",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-fibre",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-scheme-conventions",
+  "lem-fin-finite-splitting",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $h:W\\to V$ be finite and let $\\bar v:\\operatorname{Spec}\\Omega\\to V$ be a geometric\npoint with $\\Omega$ algebraically closed. For every sheaf $F$ on $W_{\\mathrm{et}}$ there\nis a canonical bijection\n\n$$\n(h_*F)_{\\bar v}\\;\\cong\\;\n\\prod_{\\bar w\\,|\\,\\bar v}F_{\\bar w},\n$$\n\nwhere the index runs over the finite geometric fibre of $h$ over $\\bar v$ and the\n$\\bar w$-th component is restriction of stalks.",
+   "proof": "The formalisation avoids the strict henselisation: it works with the category of\n*split neighbourhoods* of $\\bar v$ (pointed etale neighbourhoods $(U,\\bar u)$ together\nwith a decomposition of $W\\times_VU$ into pairwise disjoint clopen pieces indexed by the\ngeometric points $\\bar w$ over $\\bar v$, the $\\bar w$-th piece containing $(\\bar u,\\bar w)$), shows\nthat these are cofinal among all pointed etale neighbourhoods (by [lem-fin-finite-splitting]\napplied to $h$ there is a split neighbourhood $(V',\\bar v')$, and for any pointed etale\nneighbourhood $(U,\\bar u)$ the base change of its decomposition to $U\\times_VV'$ is again one;\nStacks 00UJ applied to an affine chart), that the $\\bar w$-th pieces are cofinal among the pointed etale neighbourhoods of\n$\\bar w$ (an etale-local section lemma for finite algebras with a unique point), and that a\nsheaf sends the disjoint clopen cover into a product; finite products commute with the\nfiltered colimit since the coefficients satisfy AB5. The restriction to geometric points\nwith algebraically closed residue field suffices for all uses, since these already form a\nconservative family (Lemma [lemma-weil-pbc-geometric-stalk-conservative]).",
+   "cites": [
+    "lem-fin-finite-splitting",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ]
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-curve-estimates",
+ "unit": "sk-prop-cd",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f:X\\to Y$ be a finite morphism of schemes, let $\\mathcal A$ be a\nGrothendieck abelian coefficient category for which presheaves on small etale\nsites can be sheafified (for instance abelian groups), and let\n$\\bar y:\\operatorname{Spec}\\Omega\\to Y$ be a geometric point with $\\Omega$\nalgebraically closed. For an $\\mathcal A$-valued etale sheaf $G$ on $X$ and a\ngeometric point $\\bar x$ of the geometric fibre of $f$ over $\\bar y$, the\n*restriction of stalks* $(f_*G)_{\\bar y}\\to G_{\\bar x}$ sends the germ of a\nsection of $G$ over $U\\times_YX$, for a pointed etale neighbourhood $U$ of\n$\\bar y$, to its germ at the pointed etale neighbourhood $U\\times_YX$ of\n$\\bar x$. These maps together give an isomorphism\n\n$$\n (f_*G)_{\\bar y}\\xrightarrow{\\sim}\n \\prod_{\\bar x\\in|X_{\\bar y}|}G_{\\bar x},\n$$\n\nnatural in $G$, where the product runs over the finite geometric fibre of $f$\nover $\\bar y$. For a finite set, this product is also the direct sum.",
+  "proof": [
+   {
+    "text": "After base change to the strict henselization at $\\bar y$, the finite scheme\n$X_{\\bar y}$ is the spectrum of a finite algebra over a strictly henselian\nlocal ring, hence a finite disjoint union of strictly henselian local schemes\nindexed by the geometric points $\\bar x$. Sections over a disjoint union are\nthe corresponding product of stalks, as computed by the stalk description of\nthe geometric-stalk convention and the definition of the direct image; for a\nfinite index set this product is the direct sum.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Alternatively, one can avoid the strict henselisation and work with the category of\n*split neighbourhoods* of $\\bar y$ (pointed etale neighbourhoods $(U,\\bar u)$ together\nwith a decomposition of $X\\times_YU$ into pairwise disjoint clopen pieces indexed by the\ngeometric points $\\bar x$ over $\\bar y$, the $\\bar x$-th piece containing $(\\bar x,\\bar u)$). These\nare cofinal among all pointed etale neighbourhoods: by [lem-fin-finite-splitting]\napplied to $f$ there is a split neighbourhood $(Y',\\bar y')$, and for any pointed etale\nneighbourhood $(U,\\bar u)$ the base change of its decomposition to $U\\times_YY'$ is again one\n(Stacks 00UJ applied to an affine chart). The $\\bar x$-th pieces are cofinal among the pointed\netale neighbourhoods of $\\bar x$ (an etale-local section lemma for finite algebras with a unique\npoint), and the sheaf $G$ sends the disjoint clopen cover to a product; finite products commute\nwith the filtered colimit since the coefficients satisfy AB5. Hence\n$(f_*G)_{\\bar y}=\\varinjlim_{(U,\\bar u)}G(X\\times_YU)\\cong\\prod_{\\bar x}G_{\\bar x}$, the\n$\\bar x$-th component being the restriction of stalks, and the isomorphism is natural in $G$\nbecause every map involved is.",
+    "uses": [
+     "lem-fin-finite-splitting"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

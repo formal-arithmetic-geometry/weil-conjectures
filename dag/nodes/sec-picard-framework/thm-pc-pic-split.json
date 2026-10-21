@@ -1,263 +1,125 @@
 {
-  "id": "thm-pc-pic-split",
-  "blueprint": {
-    "is": "thm-pc-pic-split",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "The split exact sequence for the Picard functor",
-  "statement": "(Picard Schemes of Curves, Lemma 44.4.3, Tag\n[0B9N](https://stacks.math.columbia.edu/tag/0B9N).)\nLet $f:X\\to S$ be a morphism of schemes as in\nDefinition [def-pc-picard-functor].\nAssume $f$ has a section $\\sigma$ and that\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for all\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/S)_{fppf})$. Then the sequence\n\n$$\n0\\longrightarrow\\operatorname{Pic}(T)\\xrightarrow{\\ f_T^*\\ }\\operatorname{Pic}(X_T)\n\\xrightarrow{\\ }\\operatorname{Pic}_{X/S}(T)\\longrightarrow 0\n$$\n\nis exact and split, the splitting being given by\n$\\sigma_T^*:\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}(T)$ (i.e. for every $T$,\n$\\operatorname{Pic}(X_T)=\\operatorname{Pic}(T)\\oplus K(T)$ with\n$K(T)=\\operatorname{Ker}\\sigma_T^*$, and $\\operatorname{Pic}_{X/S}$ is the fppf\nsheafification of the presheaf $K$).",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/thm-pc-pic-split.md",
-    "place": "node thm-pc-pic-split, order 815",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0B9N"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-pc-picard-functor",
-    "def-pc-pic-sigma-functor",
-    "def-pc-subfunctor"
-  ],
-  "proof": [
-    {
-      "text": "Since $\\sigma$ is a section of $f$, we have\n$\\sigma_T^*\\circ f_T^*=\\mathrm{id}_{\\operatorname{Pic}(T)}$; hence $f_T^*$ is injective and, by\nthe splitting lemma for abelian groups,\n$\\operatorname{Pic}(X_T)=f_T^*(\\operatorname{Pic}(T))\\oplus K(T)$ (for $\\mathcal{L}\\in\\operatorname{Pic}(X_T)$,\n$\\mathcal{L}=f_T^*\\sigma_T^*\\mathcal{L}\\otimes(\\mathcal{L}\\otimes f_T^*\\sigma_T^*\\mathcal{L}^{-1})$ with\nthe second factor in $K(T)$). By [lem-pc-pic-exact] the kernel of\n$\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}_{X/S}(T)$ is exactly $f_T^*(\\operatorname{Pic}(T))$, in particular\n$K(T)\\subseteq\\operatorname{Pic}_{X/S}(T)$ (already as a subset, compatibly with the\nrestriction maps). By [lem-pc-k-sheaf] the presheaf $K$ is an fppf\nsheaf, and it is clear from the construction (the sheafification of the\npointwise split presheaf $T\\mapsto\\operatorname{Pic}(X_T)$ is its splitting, the first\nsummand $T\\mapsto\\operatorname{Pic}(T)$ being fppf-locally trivializable exactly\nthrough the descent condition, cf. the argument of\n[lem-pc-k-sheaf]) that $\\operatorname{Pic}_{X/S}$ is the sheafification of $K$.\nConsequently the third map is surjective and the sequence is split.",
-      "uses": [
-        "lem-pc-pic-exact",
-        "lem-pc-k-sheaf"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "thm-pc-pic-split",
+ "blueprint": {
+  "is": "thm-pc-pic-split",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The split exact sequence for the Picard functor",
+ "statement": "(Picard Schemes of Curves, Lemma 44.4.3, Tag\n[0B9N](https://stacks.math.columbia.edu/tag/0B9N).)\nLet $f:X\\to S$ be a morphism of schemes as in\nDefinition [def-pc-picard-functor].\nAssume $f$ has a section $\\sigma$ and that\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for all\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/S)_{fppf})$. Then the sequence\n\n$$\n0\\longrightarrow\\operatorname{Pic}(T)\\xrightarrow{\\ f_T^*\\ }\\operatorname{Pic}(X_T)\n\\xrightarrow{\\ }\\operatorname{Pic}_{X/S}(T)\\longrightarrow 0\n$$\n\nis exact and split, the splitting being given by\n$\\sigma_T^*:\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}(T)$ (i.e. for every $T$,\n$\\operatorname{Pic}(X_T)=\\operatorname{Pic}(T)\\oplus K(T)$ with\n$K(T)=\\operatorname{Ker}\\sigma_T^*$, and $\\operatorname{Pic}_{X/S}$ is the fppf\nsheafification of the presheaf $K$).",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/thm-pc-pic-split.md",
+  "place": "node thm-pc-pic-split, order 815",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0B9N"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-pc-picard-functor",
+  "def-pc-pic-sigma-functor",
+  "def-pc-subfunctor"
+ ],
+ "proof": [
+  {
+   "text": "Since $\\sigma$ is a section of $f$, we have\n$\\sigma_T^*\\circ f_T^*=\\mathrm{id}_{\\operatorname{Pic}(T)}$; hence $f_T^*$ is injective and, by\nthe splitting lemma for abelian groups,\n$\\operatorname{Pic}(X_T)=f_T^*(\\operatorname{Pic}(T))\\oplus K(T)$ (for $\\mathcal{L}\\in\\operatorname{Pic}(X_T)$,\n$\\mathcal{L}=f_T^*\\sigma_T^*\\mathcal{L}\\otimes(\\mathcal{L}\\otimes f_T^*\\sigma_T^*\\mathcal{L}^{-1})$ with\nthe second factor in $K(T)$). By [lem-pc-pic-exact] the kernel of\n$\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}_{X/S}(T)$ is exactly $f_T^*(\\operatorname{Pic}(T))$, in particular\n$K(T)\\subseteq\\operatorname{Pic}_{X/S}(T)$ (already as a subset, compatibly with the\nrestriction maps). By [lem-pc-k-sheaf] the presheaf $K$ is an fppf\nsheaf, and it is clear from the construction (the sheafification of the\npointwise split presheaf $T\\mapsto\\operatorname{Pic}(X_T)$ is its splitting, the first\nsummand $T\\mapsto\\operatorname{Pic}(T)$ being fppf-locally trivializable exactly\nthrough the descent condition, cf. the argument of\n[lem-pc-k-sheaf]) that $\\operatorname{Pic}_{X/S}$ is the sheafification of $K$.\nConsequently the third map is surjective and the sequence is split.",
+   "uses": [
     "lem-pc-pic-exact",
     "lem-pc-k-sheaf"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/thm-pc-pic-split.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "lean_multiple",
-    "lean_over_10_lines"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 815,
-  "blueprint_uses": [
-    "def-pc-pic-sigma-functor",
-    "def-pc-picard-functor",
-    "def-pc-subfunctor",
-    "lem-pc-k-sheaf",
-    "lem-pc-pic-exact"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-    "declaration": "AlgebraicGeometry.injective_pic_map_snd",
-    "branch": "slopmaster2",
-    "line": 507,
-    "sorry_free": true,
-    "body_lines": 11,
-    "others": [
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-        "declaration": "AlgebraicGeometry.pic_map_sectionBaseChange_snd",
-        "branch": "slopmaster2",
-        "line": 359,
-        "sorry_free": true,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-        "declaration": "AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized",
-        "branch": "slopmaster2",
-        "line": 568,
-        "sorry_free": true,
-        "body_lines": 10
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-        "declaration": "AlgebraicGeometry.bijective_pic_split",
-        "branch": "slopmaster2",
-        "line": 599,
-        "sorry_free": true,
-        "body_lines": 32
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.injective_pic_map_snd",
-    "AlgebraicGeometry.pic_map_sectionBaseChange_snd",
-    "AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized",
-    "AlgebraicGeometry.bijective_pic_split"
-  ],
-  "uses_not_cited": [
-    "def-pc-pic-sigma-functor",
-    "def-pc-subfunctor"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.injective_pic_map_snd",
-        "AlgebraicGeometry.pic_map_sectionBaseChange_snd",
-        "AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized",
-        "AlgebraicGeometry.bijective_pic_split"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.injective_pic_map_snd",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-          "lines": [
-            661,
-            684
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.pic_map_sectionBaseChange_snd",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-          "lines": [
-            686,
-            693
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-          "lines": [
-            909,
-            931
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.bijective_pic_split",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-          "lines": [
-            997,
-            1046
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.isLocallySurjective_picardFunctorNormalized_ι",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-          "lines": [
-            695,
-            719
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.isIso_picardFunctorNormalized_ι_comp_toPicardFunctor",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-          "lines": [
-            933,
-            947
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.isIso_presheafToSheaf_map_picardFunctorNormalized_ι",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-          "lines": [
-            962,
-            974
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.sheafifyPicardFunctorNormalizedIso",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
-          "lines": [
-            976,
-            985
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.picMulEquivProdPicardFunctorNormalized",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Group",
-          "lines": [
-            306,
-            317
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.range_pic_mapHom_snd_eq_ker_toPicardFunctorHom",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Group",
-          "lines": [
-            365,
-            383
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.surjective_toPicardFunctorHom",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Group",
-          "lines": [
-            385,
-            395
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.picardFunctorNormalizedMulEquiv",
-          "module": "WeilConjectures.AlgebraicGeometry.Picard.Group",
-          "lines": [
-            397,
-            406
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-picard-framework",
-  "unit": "sk-prop-picard-pic-split",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $f:X\\to S$ be a morphism of schemes as in\nDefinition [def-pc-picard-functor].\nAssume $f$ has a section $\\sigma$ and that\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for all\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/S)_{fppf})$. Then the sequence\n\n$$\n0\\longrightarrow\\operatorname{Pic}(T)\\xrightarrow{\\ f_T^*\\ }\\operatorname{Pic}(X_T)\n\\xrightarrow{\\ }\\operatorname{Pic}_{X/S}(T)\\longrightarrow 0\n$$\n\nis exact and split, the splitting being given by\n$\\sigma_T^*:\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}(T)$ (i.e. for every $T$,\n$\\operatorname{Pic}(X_T)=\\operatorname{Pic}(T)\\oplus K(T)$ with\n$K(T)=\\operatorname{Ker}\\sigma_T^*$, and $\\operatorname{Pic}_{X/S}$ is the fppf\nsheafification of the presheaf $K$).",
-    "proof": [
-      {
-        "text": "Since $\\sigma$ is a section of $f$, we have\n$\\sigma_T^*\\circ f_T^*=\\mathrm{id}_{\\operatorname{Pic}(T)}$; hence $f_T^*$ is injective and, by\nthe splitting lemma for abelian groups,\n$\\operatorname{Pic}(X_T)=f_T^*(\\operatorname{Pic}(T))\\oplus K(T)$ (for $\\mathcal{L}\\in\\operatorname{Pic}(X_T)$,\n$\\mathcal{L}=f_T^*\\sigma_T^*\\mathcal{L}\\otimes(\\mathcal{L}\\otimes f_T^*\\sigma_T^*\\mathcal{L}^{-1})$ with\nthe second factor in $K(T)$). By [lem-pc-pic-exact] the kernel of\n$\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}_{X/S}(T)$ is exactly $f_T^*(\\operatorname{Pic}(T))$, in particular\n$K(T)\\subseteq\\operatorname{Pic}_{X/S}(T)$ (already as a subset, compatibly with the\nrestriction maps). By [lem-pc-k-sheaf] the presheaf $K$ is an fppf\nsheaf, and it is clear from the construction (the sheafification of the\npointwise split presheaf $T\\mapsto\\operatorname{Pic}(X_T)$ is its splitting, the first\nsummand $T\\mapsto\\operatorname{Pic}(T)$ being fppf-locally trivializable exactly\nthrough the descent condition, cf. the argument of\n[lem-pc-k-sheaf]) that $\\operatorname{Pic}_{X/S}$ is the sheafification of $K$.\nConsequently the third map is surjective and the sequence is split.",
-        "uses": [
-          "lem-pc-pic-exact",
-          "lem-pc-k-sheaf"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-pc-pic-exact",
+  "lem-pc-k-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-picard-pic-split/thm-pc-pic-split.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple",
+  "lean_over_10_lines"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 815,
+ "blueprint_uses": [
+  "def-pc-pic-sigma-functor",
+  "def-pc-picard-functor",
+  "def-pc-subfunctor",
+  "lem-pc-k-sheaf",
+  "lem-pc-pic-exact"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+  "declaration": "AlgebraicGeometry.injective_pic_map_snd",
+  "branch": "slopmaster2",
+  "line": 507,
+  "sorry_free": true,
+  "body_lines": 11,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+    "declaration": "AlgebraicGeometry.pic_map_sectionBaseChange_snd",
+    "branch": "slopmaster2",
+    "line": 359,
+    "sorry_free": true,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+    "declaration": "AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized",
+    "branch": "slopmaster2",
+    "line": 568,
+    "sorry_free": true,
+    "body_lines": 10
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.Picard.Defs",
+    "declaration": "AlgebraicGeometry.bijective_pic_split",
+    "branch": "slopmaster2",
+    "line": 599,
+    "sorry_free": true,
+    "body_lines": 32
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.injective_pic_map_snd",
+  "AlgebraicGeometry.pic_map_sectionBaseChange_snd",
+  "AlgebraicGeometry.bijective_toPicardFunctor_picardFunctorNormalized",
+  "AlgebraicGeometry.bijective_pic_split"
+ ],
+ "uses_not_cited": [
+  "def-pc-pic-sigma-functor",
+  "def-pc-subfunctor"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-picard-framework",
+ "unit": "sk-prop-picard-pic-split",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $f:X\\to S$ be a morphism of schemes as in\nDefinition [def-pc-picard-functor].\nAssume $f$ has a section $\\sigma$ and that\n$\\mathcal{O}_T\\to f_{T,*}\\mathcal{O}_{X_T}$ is an isomorphism for all\n$T\\in\\operatorname{Ob}((\\mathit{Sch}/S)_{fppf})$. Then the sequence\n\n$$\n0\\longrightarrow\\operatorname{Pic}(T)\\xrightarrow{\\ f_T^*\\ }\\operatorname{Pic}(X_T)\n\\xrightarrow{\\ }\\operatorname{Pic}_{X/S}(T)\\longrightarrow 0\n$$\n\nis exact and split, the splitting being given by\n$\\sigma_T^*:\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}(T)$ (i.e. for every $T$,\n$\\operatorname{Pic}(X_T)=\\operatorname{Pic}(T)\\oplus K(T)$ with\n$K(T)=\\operatorname{Ker}\\sigma_T^*$, and $\\operatorname{Pic}_{X/S}$ is the fppf\nsheafification of the presheaf $K$).",
+  "proof": [
+   {
+    "text": "Since $\\sigma$ is a section of $f$, we have\n$\\sigma_T^*\\circ f_T^*=\\mathrm{id}_{\\operatorname{Pic}(T)}$; hence $f_T^*$ is injective and, by\nthe splitting lemma for abelian groups,\n$\\operatorname{Pic}(X_T)=f_T^*(\\operatorname{Pic}(T))\\oplus K(T)$ (for $\\mathcal{L}\\in\\operatorname{Pic}(X_T)$,\n$\\mathcal{L}=f_T^*\\sigma_T^*\\mathcal{L}\\otimes(\\mathcal{L}\\otimes f_T^*\\sigma_T^*\\mathcal{L}^{-1})$ with\nthe second factor in $K(T)$). By [lem-pc-pic-exact] the kernel of\n$\\operatorname{Pic}(X_T)\\to\\operatorname{Pic}_{X/S}(T)$ is exactly $f_T^*(\\operatorname{Pic}(T))$, in particular\n$K(T)\\subseteq\\operatorname{Pic}_{X/S}(T)$ (already as a subset, compatibly with the\nrestriction maps). By [lem-pc-k-sheaf] the presheaf $K$ is an fppf\nsheaf, and it is clear from the construction (the sheafification of the\npointwise split presheaf $T\\mapsto\\operatorname{Pic}(X_T)$ is its splitting, the first\nsummand $T\\mapsto\\operatorname{Pic}(T)$ being fppf-locally trivializable exactly\nthrough the descent condition, cf. the argument of\n[lem-pc-k-sheaf]) that $\\operatorname{Pic}_{X/S}$ is the sheafification of $K$.\nConsequently the third map is surjective and the sequence is split.",
+    "uses": [
+     "lem-pc-pic-exact",
+     "lem-pc-k-sheaf"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

@@ -1,128 +1,103 @@
 {
-  "id": "lem-sc-constant-locus-closed",
-  "blueprint": {
-    "is": "lem-sc-constant-locus-closed",
-    "from": null,
-    "same_as": null
+ "id": "lem-sc-constant-locus-closed",
+ "blueprint": {
+  "is": "lem-sc-constant-locus-closed",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "The locus of parameters with constant fibre is closed",
+ "statement": "Let $k$ be a field, $X$ a $k$-scheme proper over $k$, $Z$ a\n$k$-scheme separated over $k$, $Y$ a $k$-scheme and\n$f:X\\times_kY\\to Z$ a morphism. For $y\\in Y$ let\n$\\bar y:\\Spec\\overline{\\kappa(y)}\\to Y$ be a geometric point over $y$\n(an algebraic closure of $\\kappa(y)$) and let\n\n$$\nf_{\\bar y}:X_{\\overline{\\kappa(y)}}\\longrightarrow Z_{\\overline{\\kappa(y)}}\n$$\n\nbe the base change of $(f,\\operatorname{pr}_2):X\\times_kY\\to Z\\times_kY$\nalong $\\bar y$. Then\n\n$$\nL:=\\{y\\in Y: f_{\\bar y}(X_{\\overline{\\kappa(y)}})\\ \\text{is a single point}\\}\n$$\n\nis closed in $Y$.\n\n*Remark.* Constancy has to be measured on the geometric fibre, not by\nthe set-theoretic image $f(\\operatorname{pr}_2^{-1}(y))\\subseteq Z$:\nfor $k$ algebraically closed of characteristic $\\ne2$,\n$X=\\Spec k\\sqcup\\Spec k$, $Y=Z=\\mathbf A^1_k$ and $f$ given by\n$t\\mapsto t$ on the first copy and $t\\mapsto -t$ on the second, the\nset $f(\\operatorname{pr}_2^{-1}(y))$ is a single point exactly when $y$\nis the generic point or $y=0$, and this set is not closed. With the\ndefinition above, $L=\\{0\\}$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-const-locus/lem-sc-constant-locus-closed.md",
+  "place": "node lem-sc-constant-locus-closed, order 486",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01UA"
+   }
+  ]
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Consider the morphism\n\n$$\n\\Phi=(f\\circ\\operatorname{pr}_{13},\\,f\\circ\\operatorname{pr}_{23}):\nX\\times_kX\\times_kY\\longrightarrow Z\\times_kZ,\\qquad\n\\Phi(x_1,x_2,y)=(f(x_1,y),f(x_2,y)),\n$$\n\nthe projection $\\pi:X\\times_kX\\times_kY\\to Y$, and the diagonal\n$\\Delta_Z\\subseteq Z\\times_kZ$. Since $Z$ is separated over $k$,\n$\\Delta_Z$ is closed, so $U:=\\Phi^{-1}(Z\\times_kZ\\smallsetminus\\Delta_Z)$\nis open in $X\\times_kX\\times_kY$. If $X=\\emptyset$ then $L=\\emptyset$\nis closed, so assume $X\\ne\\emptyset$.",
+   "uses": [],
+   "elementary": null
   },
-  "kind": "statement",
-  "title": "The locus of parameters with constant fibre is closed",
-  "statement": "Let $k$ be a field, $X$ a $k$-scheme proper over $k$, $Z$ a\n$k$-scheme separated over $k$, $Y$ a $k$-scheme and\n$f:X\\times_kY\\to Z$ a morphism. For $y\\in Y$ let\n$\\bar y:\\Spec\\overline{\\kappa(y)}\\to Y$ be a geometric point over $y$\n(an algebraic closure of $\\kappa(y)$) and let\n\n$$\nf_{\\bar y}:X_{\\overline{\\kappa(y)}}\\longrightarrow Z_{\\overline{\\kappa(y)}}\n$$\n\nbe the base change of $(f,\\operatorname{pr}_2):X\\times_kY\\to Z\\times_kY$\nalong $\\bar y$. Then\n\n$$\nL:=\\{y\\in Y: f_{\\bar y}(X_{\\overline{\\kappa(y)}})\\ \\text{is a single point}\\}\n$$\n\nis closed in $Y$.\n\n*Remark.* Constancy has to be measured on the geometric fibre, not by\nthe set-theoretic image $f(\\operatorname{pr}_2^{-1}(y))\\subseteq Z$:\nfor $k$ algebraically closed of characteristic $\\ne2$,\n$X=\\Spec k\\sqcup\\Spec k$, $Y=Z=\\mathbf A^1_k$ and $f$ given by\n$t\\mapsto t$ on the first copy and $t\\mapsto -t$ on the second, the\nset $f(\\operatorname{pr}_2^{-1}(y))$ is a single point exactly when $y$\nis the generic point or $y=0$, and this set is not closed. With the\ndefinition above, $L=\\{0\\}$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-const-locus/lem-sc-constant-locus-closed.md",
-    "place": "node lem-sc-constant-locus-closed, order 486",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01UA"
-      }
-    ]
+  {
+   "text": "*Claim: $y\\in L$ if and only if $\\pi^{-1}(y)\\subseteq\\Phi^{-1}(\\Delta_Z)$,\ni.e. $L=Y\\smallsetminus\\pi(U)$.* Put $K=\\overline{\\kappa(y)}$. The base\nchange of $\\pi$ along $\\bar y$ is $X_K\\times_KX_K$, and the map\n$X_K\\times_KX_K\\to\\pi^{-1}(y)$ is surjective (base change of the\nsurjection $\\Spec K\\to\\Spec\\kappa(y)$). On $X_K\\times_KX_K$ the morphism\n$\\Phi$ factors as\n$f_{\\bar y}\\times f_{\\bar y}:X_K\\times_KX_K\\to Z_K\\times_KZ_K$ followed\nby the projection $Z_K\\times_KZ_K=(Z\\times_kZ)_K\\to Z\\times_kZ$, under\nwhich the preimage of $\\Delta_Z$ is $\\Delta_{Z_K}$. Hence\n$\\pi^{-1}(y)\\subseteq\\Phi^{-1}(\\Delta_Z)$ iff\n$f_{\\bar y}\\times f_{\\bar y}$ maps $X_K\\times_KX_K$ into $\\Delta_{Z_K}$.",
+   "uses": [],
+   "elementary": null
   },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "Consider the morphism\n\n$$\n\\Phi=(f\\circ\\operatorname{pr}_{13},\\,f\\circ\\operatorname{pr}_{23}):\nX\\times_kX\\times_kY\\longrightarrow Z\\times_kZ,\\qquad\n\\Phi(x_1,x_2,y)=(f(x_1,y),f(x_2,y)),\n$$\n\nthe projection $\\pi:X\\times_kX\\times_kY\\to Y$, and the diagonal\n$\\Delta_Z\\subseteq Z\\times_kZ$. Since $Z$ is separated over $k$,\n$\\Delta_Z$ is closed, so $U:=\\Phi^{-1}(Z\\times_kZ\\smallsetminus\\Delta_Z)$\nis open in $X\\times_kX\\times_kY$. If $X=\\emptyset$ then $L=\\emptyset$\nis closed, so assume $X\\ne\\emptyset$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "*Claim: $y\\in L$ if and only if $\\pi^{-1}(y)\\subseteq\\Phi^{-1}(\\Delta_Z)$,\ni.e. $L=Y\\smallsetminus\\pi(U)$.* Put $K=\\overline{\\kappa(y)}$. The base\nchange of $\\pi$ along $\\bar y$ is $X_K\\times_KX_K$, and the map\n$X_K\\times_KX_K\\to\\pi^{-1}(y)$ is surjective (base change of the\nsurjection $\\Spec K\\to\\Spec\\kappa(y)$). On $X_K\\times_KX_K$ the morphism\n$\\Phi$ factors as\n$f_{\\bar y}\\times f_{\\bar y}:X_K\\times_KX_K\\to Z_K\\times_KZ_K$ followed\nby the projection $Z_K\\times_KZ_K=(Z\\times_kZ)_K\\to Z\\times_kZ$, under\nwhich the preimage of $\\Delta_Z$ is $\\Delta_{Z_K}$. Hence\n$\\pi^{-1}(y)\\subseteq\\Phi^{-1}(\\Delta_Z)$ iff\n$f_{\\bar y}\\times f_{\\bar y}$ maps $X_K\\times_KX_K$ into $\\Delta_{Z_K}$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "If $f_{\\bar y}(X_K)=\\{z\\}$, then $z$ is the image of a $K$-point of\n$X_K$ (which is of finite type over the algebraically closed $K$), so\n$z$ is a $K$-point, and the only point of $Z_K\\times_KZ_K$ lying over\n$(z,z)$ is the point of $\\Spec(K\\otimes_KK)$, which is on\n$\\Delta_{Z_K}$. Conversely, suppose $f_{\\bar y}\\times f_{\\bar y}$ maps\ninto $\\Delta_{Z_K}$. For $K$-points $x_1,x_2$ of $X_K$, the $K$-point\n$(x_1,x_2)$ maps to the $K$-point $(f_{\\bar y}(x_1),f_{\\bar y}(x_2))$,\nwhich lies on $\\Delta_{Z_K}$ only if $f_{\\bar y}(x_1)=f_{\\bar y}(x_2)$.\nFor an arbitrary point $x\\in X_K$, the closed subset\n$\\overline{\\{x\\}}$ contains a closed point $x'$, a $K$-point; choose a\npoint of $X_K\\times_KX_K$ with projections $x$ and $x'$ (the fibre\nproduct of $\\Spec\\kappa(x)$ and $\\Spec\\kappa(x')$ over $K$ is\nnonempty); its image lies on $\\Delta_{Z_K}$, so\n$f_{\\bar y}(x)=f_{\\bar y}(x')$. Thus $f_{\\bar y}(X_K)$ is a single\npoint (it is nonempty, as $X_K\\ne\\emptyset$). This proves the claim.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "Finally $\\pi$ is the base change of $X\\times_kX\\to\\Spec k$ along\n$Y\\to\\Spec k$; it is flat and locally of finite presentation ($X$ is of\nfinite type over the field $k$), hence open (Stacks Project, Morphisms,\nLemma 29.26.10, [Tag 01UA](https://stacks.math.columbia.edu/tag/01UA)).\nSo $\\pi(U)$ is open and $L=Y\\smallsetminus\\pi(U)$ is closed in $Y$.",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-const-locus/lem-sc-constant-locus-closed.md",
-    "place": "## Proof"
+  {
+   "text": "If $f_{\\bar y}(X_K)=\\{z\\}$, then $z$ is the image of a $K$-point of\n$X_K$ (which is of finite type over the algebraically closed $K$), so\n$z$ is a $K$-point, and the only point of $Z_K\\times_KZ_K$ lying over\n$(z,z)$ is the point of $\\Spec(K\\otimes_KK)$, which is on\n$\\Delta_{Z_K}$. Conversely, suppose $f_{\\bar y}\\times f_{\\bar y}$ maps\ninto $\\Delta_{Z_K}$. For $K$-points $x_1,x_2$ of $X_K$, the $K$-point\n$(x_1,x_2)$ maps to the $K$-point $(f_{\\bar y}(x_1),f_{\\bar y}(x_2))$,\nwhich lies on $\\Delta_{Z_K}$ only if $f_{\\bar y}(x_1)=f_{\\bar y}(x_2)$.\nFor an arbitrary point $x\\in X_K$, the closed subset\n$\\overline{\\{x\\}}$ contains a closed point $x'$, a $K$-point; choose a\npoint of $X_K\\times_KX_K$ with projections $x$ and $x'$ (the fibre\nproduct of $\\Spec\\kappa(x)$ and $\\Spec\\kappa(x')$ over $K$ is\nnonempty); its image lies on $\\Delta_{Z_K}$, so\n$f_{\\bar y}(x)=f_{\\bar y}(x')$. Thus $f_{\\bar y}(X_K)$ is a single\npoint (it is nonempty, as $X_K\\ne\\emptyset$). This proves the claim.",
+   "uses": [],
+   "elementary": null
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "long_proof_few_deps"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 486,
-  "blueprint_uses": [],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity",
-    "declaration": "AlgebraicGeometry.isClosed_setOf_subsingleton_image",
-    "branch": "slopmaster2",
-    "line": 182,
-    "sorry_free": true,
-    "body_lines": 4
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.isClosed_setOf_subsingleton_image"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.isClosed_setOf_subsingleton_image"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.isClosed_setOf_subsingleton_image",
-          "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity",
-          "lines": [
-            169,
-            189
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-const-locus",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $k$ be a field, $X$ a $k$-scheme proper over $k$, $Z$ a\n$k$-scheme separated over $k$, $Y$ a $k$-scheme and\n$f:X\\times_kY\\to Z$ a morphism of $k$-schemes. For $y\\in Y$ let\n$\\bar y:\\Spec\\overline{\\kappa(y)}\\to Y$ be a geometric point over $y$\n(an algebraic closure of $\\kappa(y)$) and let\n\n$$\nf_{\\bar y}:X_{\\overline{\\kappa(y)}}\\longrightarrow Z_{\\overline{\\kappa(y)}}\n$$\n\nbe the base change of $(f,\\operatorname{pr}_2):X\\times_kY\\to Z\\times_kY$\nalong $\\bar y$. Then\n\n$$\nL:=\\{y\\in Y: f_{\\bar y}(X_{\\overline{\\kappa(y)}})\\ \\text{consists of at most one point}\\}\n$$\n\nis closed in $Y$.\n\nFor $X$ nonempty, $f_{\\bar y}(X_{\\overline{\\kappa(y)}})$ consists of at\nmost one point exactly when it is a single point. Constancy has to be\nmeasured on the geometric fibre, not by the set-theoretic image\n$f(\\operatorname{pr}_2^{-1}(y))\\subseteq Z$: for $k$ algebraically closed\nof characteristic $\\ne2$, $X=\\Spec k\\sqcup\\Spec k$, $Y=Z=\\mathbf A^1_k$\nand $f$ given by $t\\mapsto t$ on the first copy and $t\\mapsto -t$ on the\nsecond, the set $f(\\operatorname{pr}_2^{-1}(y))$ is a single point exactly\nwhen $y$ is the generic point or $y=0$, and this set is not closed. With\nthe definition above, $L=\\{0\\}$.",
-    "proof": [
-      {
-        "text": "Consider the morphism\n\n$$\n\\Phi=(f\\circ\\operatorname{pr}_{13},\\,f\\circ\\operatorname{pr}_{23}):\nX\\times_kX\\times_kY\\longrightarrow Z\\times_kZ,\\qquad\n\\Phi(x_1,x_2,y)=(f(x_1,y),f(x_2,y)),\n$$\n\nthe projection $\\pi:X\\times_kX\\times_kY\\to Y$, and the diagonal\n$\\Delta_Z\\subseteq Z\\times_kZ$. Since $Z$ is separated over $k$,\n$\\Delta_Z$ is closed, so $U:=\\Phi^{-1}(Z\\times_kZ\\smallsetminus\\Delta_Z)$\nis open in $X\\times_kX\\times_kY$. If $X=\\emptyset$ then every\n$f_{\\bar y}(X_{\\overline{\\kappa(y)}})$ is empty, so $L=Y$ is closed;\nassume from now on $X\\ne\\emptyset$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Claim: $y\\in L$ if and only if $\\pi^{-1}(y)\\subseteq\\Phi^{-1}(\\Delta_Z)$,\ni.e. $L=Y\\smallsetminus\\pi(U)$.* Put $K=\\overline{\\kappa(y)}$. The base\nchange of $\\pi$ along $\\bar y$ is $X_K\\times_KX_K$, and the map\n$X_K\\times_KX_K\\to\\pi^{-1}(y)$ is surjective (base change of the\nsurjection $\\Spec K\\to\\Spec\\kappa(y)$). On $X_K\\times_KX_K$ the morphism\n$\\Phi$ factors as\n$f_{\\bar y}\\times f_{\\bar y}:X_K\\times_KX_K\\to Z_K\\times_KZ_K$ followed\nby the projection $Z_K\\times_KZ_K=(Z\\times_kZ)_K\\to Z\\times_kZ$, under\nwhich the preimage of $\\Delta_Z$ is $\\Delta_{Z_K}$. Hence\n$\\pi^{-1}(y)\\subseteq\\Phi^{-1}(\\Delta_Z)$ iff\n$f_{\\bar y}\\times f_{\\bar y}$ maps $X_K\\times_KX_K$ into $\\Delta_{Z_K}$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "If $f_{\\bar y}(X_K)=\\{z\\}$, then $z$ is the image of a $K$-point of\n$X_K$ (which is of finite type over the algebraically closed $K$), so\n$z$ is a $K$-point, and the only point of $Z_K\\times_KZ_K$ lying over\n$(z,z)$ is the point of $\\Spec(K\\otimes_KK)$, which is on\n$\\Delta_{Z_K}$. Conversely, suppose $f_{\\bar y}\\times f_{\\bar y}$ maps\ninto $\\Delta_{Z_K}$. For $K$-points $x_1,x_2$ of $X_K$, the $K$-point\n$(x_1,x_2)$ maps to the $K$-point $(f_{\\bar y}(x_1),f_{\\bar y}(x_2))$,\nwhich lies on $\\Delta_{Z_K}$ only if $f_{\\bar y}(x_1)=f_{\\bar y}(x_2)$.\nFor an arbitrary point $x\\in X_K$, the closed subset\n$\\overline{\\{x\\}}$ contains a closed point $x'$, a $K$-point; choose a\npoint of $X_K\\times_KX_K$ with projections $x$ and $x'$ (the fibre\nproduct of $\\Spec\\kappa(x)$ and $\\Spec\\kappa(x')$ over $K$ is\nnonempty); its image lies on $\\Delta_{Z_K}$, so\n$f_{\\bar y}(x)=f_{\\bar y}(x')$. Thus $f_{\\bar y}(X_K)$ is a single\npoint (it is nonempty, as $X_K\\ne\\emptyset$). This proves the claim.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "Finally $\\pi$ is the base change of $X\\times_kX\\to\\Spec k$ along\n$Y\\to\\Spec k$; it is flat and locally of finite presentation ($X$ is of\nfinite type over the field $k$), hence open (Stacks Project, Morphisms,\nLemma 29.26.10, [Tag 01UA](https://stacks.math.columbia.edu/tag/01UA)).\nSo $\\pi(U)$ is open and $L=Y\\smallsetminus\\pi(U)$ is closed in $Y$.",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Finally $\\pi$ is the base change of $X\\times_kX\\to\\Spec k$ along\n$Y\\to\\Spec k$; it is flat and locally of finite presentation ($X$ is of\nfinite type over the field $k$), hence open (Stacks Project, Morphisms,\nLemma 29.26.10, [Tag 01UA](https://stacks.math.columbia.edu/tag/01UA)).\nSo $\\pi(U)$ is open and $L=Y\\smallsetminus\\pi(U)$ is closed in $Y$.",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-const-locus/lem-sc-constant-locus-closed.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "long_proof_few_deps"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 486,
+ "blueprint_uses": [],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity",
+  "declaration": "AlgebraicGeometry.isClosed_setOf_subsingleton_image",
+  "branch": "slopmaster2",
+  "line": 182,
+  "sorry_free": true,
+  "body_lines": 4
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.isClosed_setOf_subsingleton_image"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-const-locus",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $k$ be a field, $X$ a $k$-scheme proper over $k$, $Z$ a\n$k$-scheme separated over $k$, $Y$ a $k$-scheme and\n$f:X\\times_kY\\to Z$ a morphism of $k$-schemes. For $y\\in Y$ let\n$\\bar y:\\Spec\\overline{\\kappa(y)}\\to Y$ be a geometric point over $y$\n(an algebraic closure of $\\kappa(y)$) and let\n\n$$\nf_{\\bar y}:X_{\\overline{\\kappa(y)}}\\longrightarrow Z_{\\overline{\\kappa(y)}}\n$$\n\nbe the base change of $(f,\\operatorname{pr}_2):X\\times_kY\\to Z\\times_kY$\nalong $\\bar y$. Then\n\n$$\nL:=\\{y\\in Y: f_{\\bar y}(X_{\\overline{\\kappa(y)}})\\ \\text{consists of at most one point}\\}\n$$\n\nis closed in $Y$.\n\nFor $X$ nonempty, $f_{\\bar y}(X_{\\overline{\\kappa(y)}})$ consists of at\nmost one point exactly when it is a single point. Constancy has to be\nmeasured on the geometric fibre, not by the set-theoretic image\n$f(\\operatorname{pr}_2^{-1}(y))\\subseteq Z$: for $k$ algebraically closed\nof characteristic $\\ne2$, $X=\\Spec k\\sqcup\\Spec k$, $Y=Z=\\mathbf A^1_k$\nand $f$ given by $t\\mapsto t$ on the first copy and $t\\mapsto -t$ on the\nsecond, the set $f(\\operatorname{pr}_2^{-1}(y))$ is a single point exactly\nwhen $y$ is the generic point or $y=0$, and this set is not closed. With\nthe definition above, $L=\\{0\\}$.",
+  "proof": [
+   {
+    "text": "Consider the morphism\n\n$$\n\\Phi=(f\\circ\\operatorname{pr}_{13},\\,f\\circ\\operatorname{pr}_{23}):\nX\\times_kX\\times_kY\\longrightarrow Z\\times_kZ,\\qquad\n\\Phi(x_1,x_2,y)=(f(x_1,y),f(x_2,y)),\n$$\n\nthe projection $\\pi:X\\times_kX\\times_kY\\to Y$, and the diagonal\n$\\Delta_Z\\subseteq Z\\times_kZ$. Since $Z$ is separated over $k$,\n$\\Delta_Z$ is closed, so $U:=\\Phi^{-1}(Z\\times_kZ\\smallsetminus\\Delta_Z)$\nis open in $X\\times_kX\\times_kY$. If $X=\\emptyset$ then every\n$f_{\\bar y}(X_{\\overline{\\kappa(y)}})$ is empty, so $L=Y$ is closed;\nassume from now on $X\\ne\\emptyset$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Claim: $y\\in L$ if and only if $\\pi^{-1}(y)\\subseteq\\Phi^{-1}(\\Delta_Z)$,\ni.e. $L=Y\\smallsetminus\\pi(U)$.* Put $K=\\overline{\\kappa(y)}$. The base\nchange of $\\pi$ along $\\bar y$ is $X_K\\times_KX_K$, and the map\n$X_K\\times_KX_K\\to\\pi^{-1}(y)$ is surjective (base change of the\nsurjection $\\Spec K\\to\\Spec\\kappa(y)$). On $X_K\\times_KX_K$ the morphism\n$\\Phi$ factors as\n$f_{\\bar y}\\times f_{\\bar y}:X_K\\times_KX_K\\to Z_K\\times_KZ_K$ followed\nby the projection $Z_K\\times_KZ_K=(Z\\times_kZ)_K\\to Z\\times_kZ$, under\nwhich the preimage of $\\Delta_Z$ is $\\Delta_{Z_K}$. Hence\n$\\pi^{-1}(y)\\subseteq\\Phi^{-1}(\\Delta_Z)$ iff\n$f_{\\bar y}\\times f_{\\bar y}$ maps $X_K\\times_KX_K$ into $\\Delta_{Z_K}$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "If $f_{\\bar y}(X_K)=\\{z\\}$, then $z$ is the image of a $K$-point of\n$X_K$ (which is of finite type over the algebraically closed $K$), so\n$z$ is a $K$-point, and the only point of $Z_K\\times_KZ_K$ lying over\n$(z,z)$ is the point of $\\Spec(K\\otimes_KK)$, which is on\n$\\Delta_{Z_K}$. Conversely, suppose $f_{\\bar y}\\times f_{\\bar y}$ maps\ninto $\\Delta_{Z_K}$. For $K$-points $x_1,x_2$ of $X_K$, the $K$-point\n$(x_1,x_2)$ maps to the $K$-point $(f_{\\bar y}(x_1),f_{\\bar y}(x_2))$,\nwhich lies on $\\Delta_{Z_K}$ only if $f_{\\bar y}(x_1)=f_{\\bar y}(x_2)$.\nFor an arbitrary point $x\\in X_K$, the closed subset\n$\\overline{\\{x\\}}$ contains a closed point $x'$, a $K$-point; choose a\npoint of $X_K\\times_KX_K$ with projections $x$ and $x'$ (the fibre\nproduct of $\\Spec\\kappa(x)$ and $\\Spec\\kappa(x')$ over $K$ is\nnonempty); its image lies on $\\Delta_{Z_K}$, so\n$f_{\\bar y}(x)=f_{\\bar y}(x')$. Thus $f_{\\bar y}(X_K)$ is a single\npoint (it is nonempty, as $X_K\\ne\\emptyset$). This proves the claim.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Finally $\\pi$ is the base change of $X\\times_kX\\to\\Spec k$ along\n$Y\\to\\Spec k$; it is flat and locally of finite presentation ($X$ is of\nfinite type over the field $k$), hence open (Stacks Project, Morphisms,\nLemma 29.26.10, [Tag 01UA](https://stacks.math.columbia.edu/tag/01UA)).\nSo $\\pi(U)$ is open and $L=Y\\smallsetminus\\pi(U)$ is closed in $Y$.",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

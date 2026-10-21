@@ -1,242 +1,231 @@
 {
-  "id": "sk-lem-sp-tower-bound",
-  "blueprint": {
-    "is": "sk-lem-sp-tower-bound",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Direct image preserves constructible towers",
-  "statement": "Work in the standing setting [sk-def-sfb-dc-setting]: fix primes $p\\ne\\ell$, a field $k$ of characteristic $p>0$, separated finite-type $k$-schemes $X,Y$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a smooth $k$-morphism of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms]; more generally the assertion holds for a separated finite-type $k$-morphism with all geometric fibres of dimension at most $d$ [def-kun-topological-krull-dimension]. Fix a compactification $f=\\bar f\\circ j$, with $j$ an open immersion and $\\bar f$ proper. On the derived categories of the coefficient towers [sk-def-sp-coefficient-towers], put\n$$Rf_{!,\\bullet}=R\\bar f_{*,\\bullet}\\circ j_{!,\\bullet}:D^+(\\operatorname{Tow}(X,\\mathcal O_E))\\longrightarrow D^+(\\operatorname{Tow}(Y,\\mathcal O_E)),$$\nwhere $j_{!,\\bullet}$ is levelwise extension by zero. With the levelwise identification of [sk-lem-sp-tower-levels], equivalently clause (1) of [det-sp-tower-shriek-levels], one has\n$$(Rf_{!,\\bullet}C_\\bullet)_n\\simeq Rf_{!,\\mathcal O_E/\\ell^n}C_n.$$\nIf $C_\\bullet\\in\\Dctf(X_{\\mathrm{proet}},\\mathcal O_E/\\ell^\\bullet)$ [sk-def-sp-normalized-towers], then $Rf_{!,\\bullet}C_\\bullet\\in\\Dctf(Y_{\\mathrm{proet}},\\mathcal O_E/\\ell^\\bullet)$. Here finite-level $\\Dctf$ and Tor amplitude have the meaning of [det-def-sfb-constructible-tor-amplitude]. No normalization of the input tower is required.",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/_section.md",
-    "place": "node sk-lem-sp-tower-bound, order 1825",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0F10"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "sk-def-sfb-dc-setting",
-    "def-weil-l-adic-coefficient-extension",
-    "def-sbc-smooth-morphisms",
-    "def-kun-topological-krull-dimension",
-    "sk-def-sp-coefficient-towers",
-    "sk-lem-sp-tower-levels",
-    "det-sp-tower-shriek-levels",
-    "sk-def-sp-normalized-towers",
-    "det-def-sfb-constructible-tor-amplitude"
-  ],
-  "proof": [
-    {
-      "text": "By [sk-def-sp-normalized-towers], there are integers $a\\leq b$, independent of $n$, for which every $C_n$ is constructible of Tor amplitude $[a,b]$. Testing the definition [det-def-sfb-constructible-tor-amplitude] with the coefficient module itself gives $\\mathcal H^q(C_n)=0$ for $q\\notin[a,b]$. In the tower category [sk-def-sp-coefficient-towers], kernels and cokernels are formed componentwise: the component transition maps restrict to kernels and descend to quotients. Consequently cohomology is componentwise, and the zero components in degrees $q<a$ make the cohomology tower zero there. Thus $C_\\bullet$ belongs to the bounded-below domain of $Rf_{!,\\bullet}$.",
-      "uses": [
-        "sk-def-sp-normalized-towers",
-        "det-def-sfb-constructible-tor-amplitude",
-        "sk-def-sp-coefficient-towers"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
-        "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
-      }
-    },
-    {
-      "text": "Write $D_\\bullet=Rf_{!,\\bullet}C_\\bullet$. Apply clause (1) of [det-sp-tower-shriek-levels] to the supplied compactification and the bounded-below tower from step 1. It gives, for every $n\\geq1$, $D_n\\simeq Rf_{!,A_n}C_n$, where $A_n=\\mathcal O_E/\\ell^n$. This is precisely the tower operation in the statement; no levelwise choices or alteration of transition maps are made.",
-      "uses": [
-        "det-sp-tower-shriek-levels"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
-        "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
-      }
-    },
-    {
-      "text": "Apply the finite-ring assertion of [det-sp-tower-bound-uniform] to each $C_n$. Its standing geometric hypotheses are exactly those made explicit in the statement; the bound is on the geometric fibres of $f$, not those of its proper compactification. Its coefficient hypotheses hold: [def-weil-l-adic-coefficient-extension] gives a uniformizer $\\varpi_E$ and a unit-power decomposition $\\ell=u\\varpi_E^e$ with $e\\geq1$, since $|\\ell|_E<1$. Therefore $A_n=\\mathcal O_E/(\\varpi_E^{en})$ is one of its finite commutative coefficient rings, and is killed by $\\ell^n$. The cited finite-ring assertion gives $Rf_{!,A_n}C_n\\in\\Dctf(Y_{\\mathrm{proet}},A_n)$ with Tor interval $[a,b+2d]$. Step 2 identifies this object with $D_n$. Both $d$ and $[a,b]$ are independent of $n$, so this is a common output Tor interval, including all finite-level constructibility assertions.",
-      "uses": [
-        "det-sp-tower-bound-uniform",
-        "def-weil-l-adic-coefficient-extension"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
-        "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
-      }
-    },
-    {
-      "text": "For each $n$, test the Tor interval of $D_n$ with the degree-zero tensor unit $A_{n,Y}$ in [det-def-sfb-constructible-tor-amplitude]. Since $D_n\\otimes^L_{A_{n,Y}}A_{n,Y}\\simeq D_n$, its cohomology vanishes outside $[a,b+2d]$. The levels are constructible by step 3, have the common Tor interval from that step and now a common cohomological interval. These are exactly all conditions defining $\\Dctf(Y_{\\mathrm{proet}},\\mathcal O_E/\\ell^\\bullet)$ in [sk-def-sp-normalized-towers]. Thus $D_\\bullet$ belongs to the stated category. The normalization condition in that definition is separate and is never used.",
-      "uses": [
-        "det-def-sfb-constructible-tor-amplitude",
-        "sk-def-sp-normalized-towers"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
-        "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "sk-lem-sp-tower-bound",
+ "blueprint": {
+  "is": "sk-lem-sp-tower-bound",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Direct image preserves constructible towers",
+ "statement": "Work in the standing setting [sk-def-sfb-dc-setting]: fix primes $p\\ne\\ell$, a field $k$ of characteristic $p>0$, separated finite-type $k$-schemes $X,Y$, and a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$ [def-weil-l-adic-coefficient-extension]. Let $f:X\\to Y$ be a smooth $k$-morphism of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms]; more generally the assertion holds for a separated finite-type $k$-morphism with all geometric fibres of dimension at most $d$ [def-kun-topological-krull-dimension]. Fix a compactification $f=\\bar f\\circ j$, with $j$ an open immersion and $\\bar f$ proper. On the derived categories of the coefficient towers [sk-def-sp-coefficient-towers], put\n$$Rf_{!,\\bullet}=R\\bar f_{*,\\bullet}\\circ j_{!,\\bullet}:D^+(\\operatorname{Tow}(X,\\mathcal O_E))\\longrightarrow D^+(\\operatorname{Tow}(Y,\\mathcal O_E)),$$\nwhere $j_{!,\\bullet}$ is levelwise extension by zero. With the levelwise identification of [sk-lem-sp-tower-levels], equivalently clause (1) of [det-sp-tower-shriek-levels], one has\n$$(Rf_{!,\\bullet}C_\\bullet)_n\\simeq Rf_{!,\\mathcal O_E/\\ell^n}C_n.$$\nIf $C_\\bullet\\in\\Dctf(X_{\\mathrm{proet}},\\mathcal O_E/\\ell^\\bullet)$ [sk-def-sp-normalized-towers], then $Rf_{!,\\bullet}C_\\bullet\\in\\Dctf(Y_{\\mathrm{proet}},\\mathcal O_E/\\ell^\\bullet)$. Here finite-level $\\Dctf$ and Tor amplitude have the meaning of [det-def-sfb-constructible-tor-amplitude]. No normalization of the input tower is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/_section.md",
+  "place": "node sk-lem-sp-tower-bound, order 1825",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F10"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-smooth-morphisms",
+  "def-kun-topological-krull-dimension",
+  "sk-def-sp-coefficient-towers",
+  "sk-lem-sp-tower-levels",
+  "det-sp-tower-shriek-levels",
+  "sk-def-sp-normalized-towers",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "By [sk-def-sp-normalized-towers], there are integers $a\\leq b$, independent of $n$, for which every $C_n$ is constructible of Tor amplitude $[a,b]$. Testing the definition [det-def-sfb-constructible-tor-amplitude] with the coefficient module itself gives $\\mathcal H^q(C_n)=0$ for $q\\notin[a,b]$. In the tower category [sk-def-sp-coefficient-towers], kernels and cokernels are formed componentwise: the component transition maps restrict to kernels and descend to quotients. Consequently cohomology is componentwise, and the zero components in degrees $q<a$ make the cohomology tower zero there. Thus $C_\\bullet$ belongs to the bounded-below domain of $Rf_{!,\\bullet}$.",
+   "uses": [
     "sk-def-sp-normalized-towers",
     "det-def-sfb-constructible-tor-amplitude",
-    "sk-def-sp-coefficient-towers",
-    "det-sp-tower-shriek-levels",
-    "det-sp-tower-bound-uniform",
-    "def-weil-l-adic-coefficient-extension"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
     "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Compactly supported derived direct image preserves constructible towers of finite coefficient sheaves with uniform Tor amplitude",
-      "results": "Hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforward, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.pushforwardComp",
-      "date": "2026-10-16",
-      "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.rightDerived",
-      "results": "No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible.*tower|tower.*constructible|compactSupport.*[Tt]or|[Tt]or.*compactSupport",
-      "results": "No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived pushforward with proper support of finite torsion constructible sheaves has Tor amplitude bounded by twice fibre dimension uniformly in the coefficient exponent",
-      "results": "Hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff",
-      "date": "2026-10-16",
-      "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Compactly supported direct image preserves constructible inverse systems with uniform finite Tor dimension",
-      "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, HasCompactSupport.comp_homeomorph, CompactlySupportedContinuousMap.comp, CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, HasCompactSupport.comp_isClosedEmbedding, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, CompactlySupportedContinuousMap.rec",
-      "date": "2026-10-16",
-      "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
-    },
-    {
-      "tool": "grep",
-      "query": "torAmplitudeIn|finiteTorDimension|constructible",
-      "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
-      "date": "2026-10-16",
-      "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "compactly supported direct image preserves constructible towers",
-      "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.ConstructibleSetData.map_comp, Topology.IsConstructible.image_of_isOpenEmbedding, PrimeSpectrum.BasicConstructibleSetData.map_comp, Topology.IsConstructible.image_of_isClosedEmbedding, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsConstructible.preimage_of_isClosedEmbedding, Topology.isConstructible_preimage_iff_of_isOpenEmbedding",
-      "date": "2026-10-16",
-      "verdict": "no exact match: hits concern constructible subsets or ordinary presheaf pushforward, not derived compact-support preservation of coefficient towers"
-    },
-    {
-      "tool": "loogle",
-      "query": "derived direct image constructible tower",
-      "results": "No hits. loogle: Unknown identifier `derived`",
-      "date": "2026-10-16",
-      "verdict": "invalid Loogle query: unknown identifier derived; superseded by the valid quoted-name search"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible.*(inverse|system|[Tt]or)|([Tt]ower|[Tt]or).*constructible",
-      "results": "Hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
-      "date": "2026-10-16",
-      "verdict": "no exact match: hits concern constructible subsets or ordinary presheaf pushforward, not derived compact-support preservation of coefficient towers"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"pushforward\"",
-      "results": "Hits: PresheafOfModules.pushforward₀Obj, PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, PresheafOfModules.pushforwardId, PresheafOfModules.pushforward, PresheafOfModules.pushforward₀Obj_obj_carrier, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforwardCompToPresheaf",
-      "date": "2026-10-16",
-      "verdict": "no exact match: hits concern constructible subsets or ordinary presheaf pushforward, not derived compact-support preservation of coefficient towers"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "proof_cites_literature",
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1825,
-  "blueprint_uses": [
-    "sk-def-sp-normalized-towers",
-    "sk-lem-sp-tower-levels",
-    "sk-thm-sf-ctf-stability"
-  ],
-  "blueprint_tags": [
-    "sketch"
-  ],
-  "uses_not_cited": [
+  {
+   "text": "Write $D_\\bullet=Rf_{!,\\bullet}C_\\bullet$. Apply clause (1) of [det-sp-tower-shriek-levels] to the supplied compactification and the bounded-below tower from step 1. It gives, for every $n\\geq1$, $D_n\\simeq Rf_{!,A_n}C_n$, where $A_n=\\mathcal O_E/\\ell^n$. This is precisely the tower operation in the statement; no levelwise choices or alteration of transition maps are made.",
+   "uses": [
+    "det-sp-tower-shriek-levels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
+    "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
+   }
+  },
+  {
+   "text": "Apply the finite-ring assertion of [det-sp-tower-bound-uniform] to each $C_n$. Its standing geometric hypotheses are exactly those made explicit in the statement; the bound is on the geometric fibres of $f$, not those of its proper compactification. Its coefficient hypotheses hold: [def-weil-l-adic-coefficient-extension] gives a uniformizer $\\varpi_E$ and a unit-power decomposition $\\ell=u\\varpi_E^e$ with $e\\geq1$, since $|\\ell|_E<1$. Therefore $A_n=\\mathcal O_E/(\\varpi_E^{en})$ is one of its finite commutative coefficient rings, and is killed by $\\ell^n$. The cited finite-ring assertion gives $Rf_{!,A_n}C_n\\in\\Dctf(Y_{\\mathrm{proet}},A_n)$ with Tor interval $[a,b+2d]$. Step 2 identifies this object with $D_n$. Both $d$ and $[a,b]$ are independent of $n$, so this is a common output Tor interval, including all finite-level constructibility assertions.",
+   "uses": [
+    "det-sp-tower-bound-uniform",
+    "def-weil-l-adic-coefficient-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
+    "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
+   }
+  },
+  {
+   "text": "For each $n$, test the Tor interval of $D_n$ with the degree-zero tensor unit $A_{n,Y}$ in [det-def-sfb-constructible-tor-amplitude]. Since $D_n\\otimes^L_{A_{n,Y}}A_{n,Y}\\simeq D_n$, its cohomology vanishes outside $[a,b+2d]$. The levels are constructible by step 3, have the common Tor interval from that step and now a common cohomological interval. These are exactly all conditions defining $\\Dctf(Y_{\\mathrm{proet}},\\mathcal O_E/\\ell^\\bullet)$ in [sk-def-sp-normalized-towers]. Thus $D_\\bullet$ belongs to the stated category. The normalization condition in that definition is separate and is never used.",
+   "uses": [
+    "det-def-sfb-constructible-tor-amplitude",
     "sk-def-sp-normalized-towers"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-lem-sp-tower-bound",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "sk-lem-sp-tower-bound",
-    "worker": "stage1",
-    "summary": "Reused the existing finite-ring uniform bound and tower shriek evaluation without creating nodes. Made the inherited scheme/coefficient setting explicit, expanded the bounded-below and tensor-unit arguments, and recorded the incorrect 0F10 attribution and stale ctf-stability identifier in the report.",
-    "blueprint": "All of the single unit proof paragraph: finite-level constructibility and the common [a,b+2d] Tor bound are supplied by the existing in-unit det-sp-tower-bound-uniform; evaluation by det-sp-tower-shriek-levels; common cohomological bounds and membership are written out."
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-Codex-N3-d1b34a20a",
-    "group": "N3",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-d1b34a20a (reviewer sub-agent of L); spot-checked: Read the item, all four steps, cited statements, blueprint sources and unit/chapter route. Verified finite coefficients, bounded-below evaluation, uniform [a,b+2d] bounds and edge cases. Confirmed the reported 0F10 misattribution; the proof uses the existing uniform-bound theorem instead. No new nodes, cycles returning to the item, unsupported category identifications or required repairs. Full review written to review.md."
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-5bf31724f",
-    "group": "Q24",
-    "result": "pass",
-    "note": "Read the node, all 9 stmt_deps and their Lean records, and the modules SmoothPurityTowerShriekLevels (Base/Operations/F/finiteF/Fcomparison/Laws), SmoothPurityNormalizedTowers (spConstructibleTorTowers, spDerivedCoefficientEvaluation), SpCoefficientTowersAbelian and Compactification. Clause by clause: p≠ℓ, char-p field k, separated finite-type X,Y over Spec k, finite E; smooth-of-rel-dim-d OR geometric-fibre topologicalKrullDim≤d (separably closed points, universe u enough); arbitrary Compactification; Rf_! = exact termwise j_! then total Rp_*, transported by the section-preserving realization; conjunct 1 D+ preserved, conjunct 2 natural level iso (Fcomparison), conjunct 3 spConstructibleTorTowers preserved without normalization. Holds for all b,o, since the conjuncts follow from the fields pushEvaluation/openEvaluation and are tested level by level; no extra assumptions. Shared universe u forced by recorded Base/normalized-tower interfaces; site universes untouched. Real defs (mapDerivedCategory of realization, conjugated F), single sorry, docstrings with source/blueprint and 4 proof steps, lines ≤100, node diff lean-only, statement verbatim, report has Worker report and Second reading by Q24 (author self-check, accepted form). No duplicates found. Edge cases d=0, empty schemes/fibres, n=0, zero/nonsurjective towers, ramified E, ℓ=2 ok. nt_compile --json: rc 0, 6.7 s, no errors or warnings. No blocking findings."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.SmoothPurityTowerBound",
-    "declaration": "AlgebraicGeometry.ProEtale.sp_tower_bound",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.spTowerShriekRealization",
-      "AlgebraicGeometry.ProEtale.spTowerCompactSupport",
-      "AlgebraicGeometry.ProEtale.sp_tower_bound"
-    ],
-    "file": "lean/Sheaf/Paper/SmoothPurityTowerBound.lean",
-    "statement": "theorem sp_tower_bound (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hlp : l ≠ p) (X Y : Over (Spec (CommRingCat.of k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (d : ℕ) (_hd : SmoothOfRelativeDimension d f.left ∨ ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (CommRingCat.of Ω) ⟶ Y.left), topologicalKrullDim (pullback f.left s : Scheme.{u}) ≤ (d : WithBot ℕ∞)) (c : Compactification f.left) (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b) (DX : SpCoefficientTowersAbelian l E X.left) (DY : SpCoefficientTowersAbelian l E Y.left) : (∀ C : spDerivedCoefficientTowers l E X.left DX, (∃ a : ℤ, @DerivedCategory.IsGE (spCoefficientTowers l E X.left) _ _ DX.hasDerived C a) → ∃ a : ℤ, @DerivedCategory.IsGE (spCoefficientTowers l E Y.left) _ _ DY.hasDerived ((spTowerCompactSupport l E b o c DX DY).obj C) a) ∧ (∀ n : ℕ, Nonempty (@DerivedCategory.Plus.ι (spCoefficientTowers l E X.left) _ _ DX.hasDerived ⋙ spTowerCompactSupport l E b o c DX DY ⋙ spDerivedCoefficientEvaluation l E Y.left DY n ≅ @DerivedCategory.Plus.ι (spCoefficientTowers l E X.left) _ _ DX.hasDerived ⋙ spDerivedCoefficientEvaluation l E X.left DX n ⋙ SpTowerShriek.finiteF l E b c n)) ∧ (∀ C : spDerivedCoefficientTowers l E X.left DX, spConstructibleTorTowers l E X.left DX C → (∃ a : ℤ, @DerivedCategory.IsGE (spCoefficientTowers l E X.left) _ _ DX.hasDerived C a) ∧ spConstructibleTorTowers l E Y.left DY ((spTowerCompactSupport l E b o c DX DY).obj C))",
-    "branch": "newtargets-dag",
-    "by": "Q24",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "The geometric operations are those of det-sp-tower-shriek-levels, transported by its section-normalized realization equivalence to the original coefficient towers. The level comparison is a natural isomorphism restricted to D+; the preservation clause uses exactly spConstructibleTorTowers, without normalization. The geometric hypothesis explicitly allows smooth pure relative dimension d or the general geometric fibre bound."
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
+    "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
+   }
   }
+ ],
+ "proof_deps": [
+  "sk-def-sp-normalized-towers",
+  "det-def-sfb-constructible-tor-amplitude",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-tower-shriek-levels",
+  "det-sp-tower-bound-uniform",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-bound/sk-lem-sp-tower-bound.proof.md",
+  "place": "The single proof paragraph: finite-level preservation, followed by the uniform interval argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compactly supported derived direct image preserves constructible towers of finite coefficient sheaves with uniform Tor amplitude",
+   "results": "Hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.pushforward, SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_obj_val, AlgebraicGeometry.Scheme.Modules.pushforwardComp",
+   "date": "2026-10-16",
+   "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.rightDerived",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*tower|tower.*constructible|compactSupport.*[Tt]or|[Tt]or.*compactSupport",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward with proper support of finite torsion constructible sheaves has Tor amplitude bounded by twice fibre dimension uniformly in the coefficient exponent",
+   "results": "Hits: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.isGE_iff, DerivedCategory.isLE_iff",
+   "date": "2026-10-16",
+   "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported direct image preserves constructible inverse systems with uniform finite Tor dimension",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, HasCompactSupport.comp_homeomorph, CompactlySupportedContinuousMap.comp, CategoryTheory.Sheaf.instPreservesFiniteLimitsFunctorOppositeSheafToPresheafOfHasFiniteLimits, HasCompactSupport.comp_isClosedEmbedding, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, CompactlySupportedContinuousMap.rec",
+   "date": "2026-10-16",
+   "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn|finiteTorDimension|constructible",
+   "results": "Hits: Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean, Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean",
+   "date": "2026-10-16",
+   "verdict": "no match: sheaf pushforward and ordinary t-structure results do not assert constructible coefficient-tower preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactly supported direct image preserves constructible towers",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, PrimeSpectrum.ConstructibleSetData.map_comp, Topology.IsConstructible.image_of_isOpenEmbedding, PrimeSpectrum.BasicConstructibleSetData.map_comp, Topology.IsConstructible.image_of_isClosedEmbedding, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, Topology.IsConstructible.preimage_of_isClosedEmbedding, Topology.isConstructible_preimage_iff_of_isOpenEmbedding",
+   "date": "2026-10-16",
+   "verdict": "no exact match: hits concern constructible subsets or ordinary presheaf pushforward, not derived compact-support preservation of coefficient towers"
+  },
+  {
+   "tool": "loogle",
+   "query": "derived direct image constructible tower",
+   "results": "No hits. loogle: Unknown identifier `derived`",
+   "date": "2026-10-16",
+   "verdict": "invalid Loogle query: unknown identifier derived; superseded by the valid quoted-name search"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(inverse|system|[Tt]or)|([Tt]ower|[Tt]or).*constructible",
+   "results": "Hits: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean",
+   "date": "2026-10-16",
+   "verdict": "no exact match: hits concern constructible subsets or ordinary presheaf pushforward, not derived compact-support preservation of coefficient towers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforward\"",
+   "results": "Hits: PresheafOfModules.pushforward₀Obj, PresheafOfModules.pushforward₀_obj, PresheafOfModules.pushforward₀, PresheafOfModules.pushforwardId, PresheafOfModules.pushforward, PresheafOfModules.pushforward₀Obj_obj_carrier, PresheafOfModules.pushforward₀CompToPresheaf, PresheafOfModules.pushforwardCompToPresheaf",
+   "date": "2026-10-16",
+   "verdict": "no exact match: hits concern constructible subsets or ordinary presheaf pushforward, not derived compact-support preservation of coefficient towers"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "proof_cites_literature",
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1825,
+ "blueprint_uses": [
+  "sk-def-sp-normalized-towers",
+  "sk-lem-sp-tower-levels",
+  "sk-thm-sf-ctf-stability"
+ ],
+ "blueprint_tags": [
+  "sketch"
+ ],
+ "uses_not_cited": [
+  "sk-def-sp-normalized-towers"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower-bound",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "sk-lem-sp-tower-bound",
+  "worker": "stage1",
+  "summary": "Reused the existing finite-ring uniform bound and tower shriek evaluation without creating nodes. Made the inherited scheme/coefficient setting explicit, expanded the bounded-below and tensor-unit arguments, and recorded the incorrect 0F10 attribution and stale ctf-stability identifier in the report.",
+  "blueprint": "All of the single unit proof paragraph: finite-level constructibility and the common [a,b+2d] Tor bound are supplied by the existing in-unit det-sp-tower-bound-uniform; evaluation by det-sp-tower-shriek-levels; common cohomological bounds and membership are written out."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-Codex-N3-d1b34a20a",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-d1b34a20a (reviewer sub-agent of L); spot-checked: Read the item, all four steps, cited statements, blueprint sources and unit/chapter route. Verified finite coefficients, bounded-below evaluation, uniform [a,b+2d] bounds and edge cases. Confirmed the reported 0F10 misattribution; the proof uses the existing uniform-bound theorem instead. No new nodes, cycles returning to the item, unsupported category identifications or required repairs. Full review written to review.md."
+ },
+ "lean_audit": {},
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bf31724f",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Read the node, all 9 stmt_deps and their Lean records, and the modules SmoothPurityTowerShriekLevels (Base/Operations/F/finiteF/Fcomparison/Laws), SmoothPurityNormalizedTowers (spConstructibleTorTowers, spDerivedCoefficientEvaluation), SpCoefficientTowersAbelian and Compactification. Clause by clause: p≠ℓ, char-p field k, separated finite-type X,Y over Spec k, finite E; smooth-of-rel-dim-d OR geometric-fibre topologicalKrullDim≤d (separably closed points, universe u enough); arbitrary Compactification; Rf_! = exact termwise j_! then total Rp_*, transported by the section-preserving realization; conjunct 1 D+ preserved, conjunct 2 natural level iso (Fcomparison), conjunct 3 spConstructibleTorTowers preserved without normalization. Holds for all b,o, since the conjuncts follow from the fields pushEvaluation/openEvaluation and are tested level by level; no extra assumptions. Shared universe u forced by recorded Base/normalized-tower interfaces; site universes untouched. Real defs (mapDerivedCategory of realization, conjugated F), single sorry, docstrings with source/blueprint and 4 proof steps, lines ≤100, node diff lean-only, statement verbatim, report has Worker report and Second reading by Q24 (author self-check, accepted form). No duplicates found. Edge cases d=0, empty schemes/fibres, n=0, zero/nonsurjective towers, ramified E, ℓ=2 ok. nt_compile --json: rc 0, 6.7 s, no errors or warnings. No blocking findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerBound",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_tower_bound",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spTowerShriekRealization",
+   "AlgebraicGeometry.ProEtale.spTowerCompactSupport",
+   "AlgebraicGeometry.ProEtale.sp_tower_bound"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerBound.lean",
+  "statement": "theorem sp_tower_bound (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hlp : l ≠ p) (X Y : Over (Spec (CommRingCat.of k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] (d : ℕ) (_hd : SmoothOfRelativeDimension d f.left ∨ ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (CommRingCat.of Ω) ⟶ Y.left), topologicalKrullDim (pullback f.left s : Scheme.{u}) ≤ (d : WithBot ℕ∞)) (c : Compactification f.left) (b : SpTowerShriek.Base l E) (o : SpTowerShriek.Operations l E b) (DX : SpCoefficientTowersAbelian l E X.left) (DY : SpCoefficientTowersAbelian l E Y.left) : (∀ C : spDerivedCoefficientTowers l E X.left DX, (∃ a : ℤ, @DerivedCategory.IsGE (spCoefficientTowers l E X.left) _ _ DX.hasDerived C a) → ∃ a : ℤ, @DerivedCategory.IsGE (spCoefficientTowers l E Y.left) _ _ DY.hasDerived ((spTowerCompactSupport l E b o c DX DY).obj C) a) ∧ (∀ n : ℕ, Nonempty (@DerivedCategory.Plus.ι (spCoefficientTowers l E X.left) _ _ DX.hasDerived ⋙ spTowerCompactSupport l E b o c DX DY ⋙ spDerivedCoefficientEvaluation l E Y.left DY n ≅ @DerivedCategory.Plus.ι (spCoefficientTowers l E X.left) _ _ DX.hasDerived ⋙ spDerivedCoefficientEvaluation l E X.left DX n ⋙ SpTowerShriek.finiteF l E b c n)) ∧ (∀ C : spDerivedCoefficientTowers l E X.left DX, spConstructibleTorTowers l E X.left DX C → (∃ a : ℤ, @DerivedCategory.IsGE (spCoefficientTowers l E X.left) _ _ DX.hasDerived C a) ∧ spConstructibleTorTowers l E Y.left DY ((spTowerCompactSupport l E b o c DX DY).obj C))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The geometric operations are those of det-sp-tower-shriek-levels, transported by its section-normalized realization equivalence to the original coefficient towers. The level comparison is a natural isomorphism restricted to D+; the preservation clause uses exactly spConstructibleTorTowers, without normalization. The geometric hypothesis explicitly allows smooth pure relative dimension d or the general geometric fibre bound."
+ }
 }

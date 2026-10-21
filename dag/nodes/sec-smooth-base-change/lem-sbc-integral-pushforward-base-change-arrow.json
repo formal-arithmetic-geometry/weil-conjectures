@@ -1,277 +1,266 @@
 {
-  "id": "lem-sbc-integral-pushforward-base-change-arrow",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "sbc-lem-bc-universal-test",
-      "place": "Proof, final sentence invoking integral base change: converse implication supplied by the pushforward identification in the proof of 0F05",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sbc-integral-pushforward-base-change-arrow",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sbc-lem-bc-universal-test",
+   "place": "Proof, final sentence invoking integral base change: converse implication supplied by the pushforward identification in the proof of 0F05",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Integral pushforward identifies a base-change arrow with the pasted arrow",
-  "statement": "Let $f':X'\\to S'$ and $\\pi:S''\\to S'$ be morphisms of schemes [def-weil-pbc-scheme-conventions], with $\\pi$ integral [def-weil-finite-integral-morphism]. Form $X''=X'\\times_{S'}S''$, with projections $\\pi':X''\\to X'$ and $f'':X''\\to S''$ [sbc-def-base-change-square]. Let $g':T\\to S''$ be quasi-compact and quasi-separated, set $Y=X''\\times_{S''}T$, and let $h':Y\\to X''$, $e:Y\\to T$ be its projections. Set $g=\\pi\\circ g'$ and $h=\\pi'\\circ h'$. Let $q\\geq0$ and $F$ be an abelian etale sheaf on $T$ [def-weil-pbc-abelian-etale-sheaves]. For higher direct images and inverse images [def-weil-pbc-direct-image, def-weil-pbc-inverse-image], there are natural isomorphisms\n$$\\pi'_* (f'')^{-1}R^qg'_*F\\cong(f')^{-1}R^qg_*F,\\qquad\n\\pi'_*R^qh'_*e^{-1}F\\cong R^qh_*e^{-1}F.$$\nUnder these isomorphisms $\\pi'_*(\\operatorname{BC}^q_{f'',g'}(F))$ equals $\\operatorname{BC}^q_{f',g}(F)$ [sbc-def-base-change-map]. Thus if the former base-change arrow over $S''$ is an isomorphism, the pasted base-change arrow over $S'$ is an isomorphism.",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F05, lemma-base-change-q-integral-bottom, proof: the two displayed pushforward equalities; Tag 04C2, lemma-what-integral; precise arrow identity in AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_comp, WeilConjectures/SixFunctors/Etale/SmoothBaseChange/IntegralBaseChange.lean:183-213"
-  },
-  "stmt_deps": [
-    "def-weil-finite-integral-morphism",
-    "sbc-def-base-change-square",
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-inverse-image",
-    "sbc-def-base-change-map",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "Apply [lem-sbc-integral-morphism-base-change] to the Cartesian square with integral vertical map $\\pi:S''\\to S'$ and base map $f':X'\\to S'$. Its base change $\\pi'$ is integral. By [sbc-lem-integral-etale-direct-image-exact], both $\\pi_*$ and $\\pi'_*$ are exact on abelian etale sheaves and their bounded-below derived functors are their termwise functors. Also $(f')^{-1}$ and $(f'')^{-1}$ are exact by [prop-weil-pbc-inverse-image-exact].",
-      "uses": [
-        "lem-sbc-integral-morphism-base-change",
-        "sbc-lem-integral-etale-direct-image-exact",
-        "prop-weil-pbc-inverse-image-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F05, lemma-base-change-q-integral-bottom, proof; Tag 04C2, lemma-what-integral; Tag 0EYP, lemma-integral-pushforward-commutes-with-base-change"
-      }
-    },
-    {
-      "text": "Use [lem-sbc-integral-underived-exchange] with coefficient ring $\\mathbf Z$, $(f,f',g,g')=(\\pi,\\pi',f',f'')$. This gives the canonical exchange isomorphism $E:(f')^{-1}\\pi_*\\xrightarrow{\\sim}\\pi'_*(f'')^{-1}$ on abelian sheaves. Apply it termwise: naturality makes $E$ commute with every differential. All four functors are exact by step 1, so [lem-weil-pbc-exact-functor-derived-functor](2) identifies their bounded-below derived functors with the termwise functors. Clause (2) of [lem-weil-pbc-localization-universal-property] descends this termwise natural isomorphism to $D^+$. To identify it with the canonical derived exchange, apply [lem-weil-pbc-derived-exchange-termwise](a),(b): choose a bounded below K-injective resolution $K\\xrightarrow{\\sim}QI$ and a K-injective resolution $j:(f'')^{-1}I\\to J$. With the source and target comparison isomorphisms specified there, the derived exchange is the class of $\\pi'_*(j)\\circ E_I$. Exactness of $\\pi'_*$ from step 1 implies that $\\pi'_*(j)$ is a quasi-isomorphism, since the natural cohomology comparison of [lem-weil-pbc-exact-functor-complex-cohomology] identifies its cohomology maps with $\\pi'_*H^r(j)$. Under the exact-functor comparisons, naturality of the descended $E$ with respect to the resolution maps identifies this class with its component at $K$. Thus it is exactly the canonical derived exchange, and is an isomorphism. Thus $E_K:(f')^{-1}R\\pi_*K\\xrightarrow{\\sim}R\\pi'_*(f'')^{-1}K$ for every $K\\in D^+(S''_{\\mathrm{Et}})$.",
-      "uses": [
-        "lem-sbc-integral-underived-exchange",
-        "lem-weil-pbc-exact-functor-derived-functor",
-        "lem-weil-pbc-localization-universal-property",
-        "lem-weil-pbc-derived-exchange-termwise",
-        "lem-weil-pbc-exact-functor-complex-cohomology"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F05, lemma-base-change-q-integral-bottom, proof; Tag 04C2, lemma-what-integral; Tag 0EYP, lemma-integral-pushforward-commutes-with-base-change"
-      }
-    },
-    {
-      "text": "Set $K=Rg'_*F[0]$. Let $A:(f')^{-1}Rg_*F[0]\\xrightarrow{\\sim}(f')^{-1}R\\pi_*Rg'_*F[0]$ and $B:Rh_*e^{-1}F[0]\\xrightarrow{\\sim}R\\pi'_*Rh'_*e^{-1}F[0]$ be the composition comparisons of [def-weil-pbc-derived-direct-image-composition], using $g=\\pi\\circ g'$ and $h=\\pi'\\circ h'$. Apply clause (3) of [lem-weil-pbc-exchange-identity-pasting] to the two squares, with $(f,f',g,g')=(\\pi,\\pi',f',f'')$ and $(e,e',g'')=(g',h',e)$. By [sbc-def-base-change-map] the exchange on this exchanged square is precisely the specified base-change map. The pasting identity is therefore\n$$B\\circ\\operatorname{BC}_{f',g}(F[0])=R\\pi'_*\\bigl(\\operatorname{BC}_{f'',g'}(F[0])\\bigr)\\circ E_K\\circ A.$$\nThis records the arrow itself, with the comparison maps inserted, rather than just identifying its endpoints.",
-      "uses": [
-        "def-weil-pbc-derived-direct-image-composition",
-        "lem-weil-pbc-exchange-identity-pasting",
-        "sbc-def-base-change-map"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0E46, remark-compose-base-change; applied to Tag 0F05, lemma-base-change-q-integral-bottom"
-      }
-    },
-    {
-      "text": "For an exact functor $P$, [lem-weil-pbc-exact-functor-complex-cohomology] identifies $H^q(PC)$ with $P(H^qC)$ naturally: $P$ preserves the kernel of $d^q$, the image of $d^{q-1}$, and their quotient. These comparisons descend to $D^+$ because cohomology inverts quasi-isomorphisms and their naturality holds on maps of complexes, hence also on inverses of quasi-isomorphisms. Apply them to the exact functors $\\pi_*,\\pi'_*,(f')^{-1},(f'')^{-1}$ from step 1. With the higher-image convention of [def-weil-pbc-direct-image] and the degreewise map of [sbc-def-base-change-map], $H^q(E_K\\circ A)$ is a natural isomorphism\n$C:(f')^{-1}R^qg_*F\\xrightarrow{\\sim}\\pi'_*(f'')^{-1}R^qg'_*F$,\nand $H^q(B)$ is a natural isomorphism\n$D:R^qh_*e^{-1}F\\xrightarrow{\\sim}\\pi'_*R^qh'_*e^{-1}F$.\nTheir inverses are the two isomorphisms in the statement.",
-      "uses": [
-        "lem-weil-pbc-exact-functor-complex-cohomology",
-        "def-weil-pbc-direct-image",
-        "sbc-def-base-change-map"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F05, lemma-base-change-q-integral-bottom, proof; Tag 04C2, lemma-what-integral; Tag 0EYP, lemma-integral-pushforward-commutes-with-base-change"
-      }
-    },
-    {
-      "text": "Apply $H^q$ to the equality in step 3. The naturality of the cohomology comparisons used in step 4 gives exactly\n$$D\\circ\\operatorname{BC}^q_{f',g}(F)=\\pi'_*\\bigl(\\operatorname{BC}^q_{f'',g'}(F)\\bigr)\\circ C.$$\nMultiplying by $D^{-1}$ and $C^{-1}$ identifies the pushed-forward arrow with the pasted arrow under the stated isomorphisms. If $b=\\operatorname{BC}^q_{f'',g'}(F)$ has inverse $b^{-1}$, then $\\pi'_*(b)$ has inverse $\\pi'_*(b^{-1})$, since a functor preserves identities and composition. Consequently the pasted arrow $D^{-1}\\pi'_*(b)C$ has inverse $C^{-1}\\pi'_*(b^{-1})D$. This proves the final implication.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F05, lemma-base-change-q-integral-bottom, proof; Tag 04C2, lemma-what-integral; Tag 0EYP, lemma-integral-pushforward-commutes-with-base-change"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-derived-direct-image-composition",
-    "def-weil-pbc-direct-image",
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Integral pushforward identifies a base-change arrow with the pasted arrow",
+ "statement": "Let $f':X'\\to S'$ and $\\pi:S''\\to S'$ be morphisms of schemes [def-weil-pbc-scheme-conventions], with $\\pi$ integral [def-weil-finite-integral-morphism]. Form $X''=X'\\times_{S'}S''$, with projections $\\pi':X''\\to X'$ and $f'':X''\\to S''$ [sbc-def-base-change-square]. Let $g':T\\to S''$ be quasi-compact and quasi-separated, set $Y=X''\\times_{S''}T$, and let $h':Y\\to X''$, $e:Y\\to T$ be its projections. Set $g=\\pi\\circ g'$ and $h=\\pi'\\circ h'$. Let $q\\geq0$ and $F$ be an abelian etale sheaf on $T$ [def-weil-pbc-abelian-etale-sheaves]. For higher direct images and inverse images [def-weil-pbc-direct-image, def-weil-pbc-inverse-image], there are natural isomorphisms\n$$\\pi'_* (f'')^{-1}R^qg'_*F\\cong(f')^{-1}R^qg_*F,\\qquad\n\\pi'_*R^qh'_*e^{-1}F\\cong R^qh_*e^{-1}F.$$\nUnder these isomorphisms $\\pi'_*(\\operatorname{BC}^q_{f'',g'}(F))$ equals $\\operatorname{BC}^q_{f',g}(F)$ [sbc-def-base-change-map]. Thus if the former base-change arrow over $S''$ is an isomorphism, the pasted base-change arrow over $S'$ is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F05, lemma-base-change-q-integral-bottom, proof: the two displayed pushforward equalities; Tag 04C2, lemma-what-integral; precise arrow identity in AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_comp, WeilConjectures/SixFunctors/Etale/SmoothBaseChange/IntegralBaseChange.lean:183-213"
+ },
+ "stmt_deps": [
+  "def-weil-finite-integral-morphism",
+  "sbc-def-base-change-square",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "sbc-def-base-change-map",
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sbc-integral-morphism-base-change] to the Cartesian square with integral vertical map $\\pi:S''\\to S'$ and base map $f':X'\\to S'$. Its base change $\\pi'$ is integral. By [sbc-lem-integral-etale-direct-image-exact], both $\\pi_*$ and $\\pi'_*$ are exact on abelian etale sheaves and their bounded-below derived functors are their termwise functors. Also $(f')^{-1}$ and $(f'')^{-1}$ are exact by [prop-weil-pbc-inverse-image-exact].",
+   "uses": [
     "lem-sbc-integral-morphism-base-change",
-    "lem-sbc-integral-underived-exchange",
-    "lem-weil-pbc-derived-exchange-termwise",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-exchange-identity-pasting",
-    "lem-weil-pbc-localization-universal-property",
-    "prop-weil-pbc-inverse-image-exact",
-    "sbc-def-base-change-map",
-    "sbc-lem-integral-etale-direct-image-exact"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "sbc-lem-integral-etale-direct-image-exact",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F05 proof, expanding the arrow identification via Tag 0E46 vertical pasting and Tags 0EYP, 04C2; no lower-degree hypothesis used"
+    "place": "Tag 0F05, lemma-base-change-q-integral-bottom, proof; Tag 04C2, lemma-what-integral; Tag 0EYP, lemma-integral-pushforward-commutes-with-base-change"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "integral.*baseChange|baseChange.*integral|IsIntegralHom",
-      "results": "0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Integral pushforward identifies higher direct images and base change morphisms",
-      "results": "service unavailable: Internal Server Error; 0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Integral morphism pushforward identifies etale base change maps before and after an integral change of base",
-      "results": "8 hits: RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, Algebra.IsEtaleAt.comp, Algebra.Etale.comp, Algebra.Etale.baseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.isIntegral_isStableUnderBaseChange",
-      "date": "2026-10-14",
-      "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf, \"pushforward\"",
-      "results": "12 hits: CategoryTheory.Functor.sheafPushforwardContinuous, CategoryTheory.Adjunction.sheafPushforwardContinuous, CategoryTheory.Functor.sheafPushforwardContinuousId, CategoryTheory.Functor.sheafPushforwardContinuous_obj_obj_obj, CategoryTheory.Functor.sheafPushforwardContinuousIso, CategoryTheory.Functor.sheafPushforwardContinuousId', CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'",
-      "date": "2026-10-14",
-      "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Pushing forward the etale cohomology base change map along an integral morphism gives the original base change map under canonical comparison isomorphisms",
-      "results": "8 hits: KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, Algebra.Etale.comp, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, Algebra.IsEtaleAt.comp, KaehlerDifferential.isBaseChange",
-      "date": "2026-10-14",
-      "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Exact direct image along integral scheme morphisms commutes with the etale cohomological base change comparison morphism",
-      "results": "8 hits: Algebra.H1Cotangent.exact_δ_mapBaseChange, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.H1Cotangent.exact_map_δ",
-      "date": "2026-10-14",
-      "verdict": "no match: Zariski module pushforward and cotangent exactness do not identify etale cohomological base-change arrows"
-    },
-    {
-      "tool": "grep",
-      "query": "baseChangeHomologyMap|derivedBaseChangeMap|higherDirectImage",
-      "results": "0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "no match: Zariski module pushforward and cotangent exactness do not identify etale cohomological base-change arrows"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Integral pushforward identifies etale higher direct image base change arrows for pasted Cartesian squares",
-      "results": "; 8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.isPullback_natTrans_ι_toBase, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'",
-      "date": "2026-10-14",
-      "verdict": "no match: general scheme etale stability, sheaf pushforward composition or Zariski module functors do not state this integral etale cohomological arrow identification"
-    },
-    {
-      "tool": "grep",
-      "query": "baseChangeHomologyMap|derivedBaseChangeMap|higherDirectImage",
-      "results": "; 0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "no match: general scheme etale stability, sheaf pushforward composition or Zariski module functors do not state this integral etale cohomological arrow identification"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Sheaf, \"pushforward\"",
-      "results": "; 12 hits: CategoryTheory.Functor.sheafPushforwardContinuous, CategoryTheory.Adjunction.sheafPushforwardContinuous, CategoryTheory.Functor.sheafPushforwardContinuousId, CategoryTheory.Functor.sheafPushforwardContinuous_obj_obj_obj, CategoryTheory.Functor.sheafPushforwardContinuousIso, CategoryTheory.Functor.sheafPushforwardContinuousId', CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'",
-      "date": "2026-10-14",
-      "verdict": "no match: general scheme etale stability, sheaf pushforward composition or Zariski module functors do not state this integral etale cohomological arrow identification"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Integral direct image of abelian etale sheaves identifies base change maps",
-      "results": "service unavailable: Internal Server Error; 0 hits: ",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Exact pushforward and Beck Chevalley pasting identify cohomology comparison morphisms under an integral base change",
-      "results": "; 8 hits: SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp_hom_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.comp_pushforward",
-      "date": "2026-10-14",
-      "verdict": "no match: general scheme etale stability, sheaf pushforward composition or Zariski module functors do not state this integral etale cohomological arrow identification"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "item": "sbc-lem-bc-universal-test",
-    "by": "worker",
-    "date": "2026-10-14"
-  },
-  "chapter": "sec-smooth-base-change",
-  "unit": "sk-lem-universal-datum",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lem-sbc-integral-pushforward-base-change-arrow",
-    "worker": "stage1",
-    "summary": "Expanded both canonical pushforward identifications and the actual arrow compatibility using existing integral exactness, exchange, derived composition and vertical pasting nodes. No new nodes or statement changes. Lean counterpart rests on a sorry in integral underived exchange.",
-    "blueprint": "sbc-lem-bc-universal-test proof, final normalization/integral-base-change sentence: the converse pushforward implication in Tag 0F05.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-exact-functor-derived-functor",
-        "why": "Generic exact-functor, integral-exchange or exchange-pasting infrastructure for the integral pushforward argument; no node in the universal-datum unit supplies this tool. This realizes its prescribed integral-base-change route."
-      },
-      {
-        "node": "lem-weil-pbc-exchange-identity-pasting",
-        "why": "Generic exact-functor, integral-exchange or exchange-pasting infrastructure for the integral pushforward argument; no node in the universal-datum unit supplies this tool. This realizes its prescribed integral-base-change route."
-      },
-      {
-        "node": "prop-weil-pbc-inverse-image-exact",
-        "why": "Generic exact-functor, integral-exchange or exchange-pasting infrastructure for the integral pushforward argument; no node in the universal-datum unit supplies this tool. This realizes its prescribed integral-base-change route."
-      },
-      {
-        "node": "lem-weil-pbc-derived-exchange-termwise",
-        "why": "Generic resolution formula identifies the descended underived exchange with the canonical derived exchange; this compatibility is needed for the vertical-pasting identity, and is not supplied within the universal-datum unit."
-      }
-    ]
-  },
-  "tool_uses": [
+  {
+   "text": "Use [lem-sbc-integral-underived-exchange] with coefficient ring $\\mathbf Z$, $(f,f',g,g')=(\\pi,\\pi',f',f'')$. This gives the canonical exchange isomorphism $E:(f')^{-1}\\pi_*\\xrightarrow{\\sim}\\pi'_*(f'')^{-1}$ on abelian sheaves. Apply it termwise: naturality makes $E$ commute with every differential. All four functors are exact by step 1, so [lem-weil-pbc-exact-functor-derived-functor](2) identifies their bounded-below derived functors with the termwise functors. Clause (2) of [lem-weil-pbc-localization-universal-property] descends this termwise natural isomorphism to $D^+$. To identify it with the canonical derived exchange, apply [lem-weil-pbc-derived-exchange-termwise](a),(b): choose a bounded below K-injective resolution $K\\xrightarrow{\\sim}QI$ and a K-injective resolution $j:(f'')^{-1}I\\to J$. With the source and target comparison isomorphisms specified there, the derived exchange is the class of $\\pi'_*(j)\\circ E_I$. Exactness of $\\pi'_*$ from step 1 implies that $\\pi'_*(j)$ is a quasi-isomorphism, since the natural cohomology comparison of [lem-weil-pbc-exact-functor-complex-cohomology] identifies its cohomology maps with $\\pi'_*H^r(j)$. Under the exact-functor comparisons, naturality of the descended $E$ with respect to the resolution maps identifies this class with its component at $K$. Thus it is exactly the canonical derived exchange, and is an isomorphism. Thus $E_K:(f')^{-1}R\\pi_*K\\xrightarrow{\\sim}R\\pi'_*(f'')^{-1}K$ for every $K\\in D^+(S''_{\\mathrm{Et}})$.",
+   "uses": [
+    "lem-sbc-integral-underived-exchange",
     "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-derived-exchange-termwise",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F05, lemma-base-change-q-integral-bottom, proof; Tag 04C2, lemma-what-integral; Tag 0EYP, lemma-integral-pushforward-commutes-with-base-change"
+   }
+  },
+  {
+   "text": "Set $K=Rg'_*F[0]$. Let $A:(f')^{-1}Rg_*F[0]\\xrightarrow{\\sim}(f')^{-1}R\\pi_*Rg'_*F[0]$ and $B:Rh_*e^{-1}F[0]\\xrightarrow{\\sim}R\\pi'_*Rh'_*e^{-1}F[0]$ be the composition comparisons of [def-weil-pbc-derived-direct-image-composition], using $g=\\pi\\circ g'$ and $h=\\pi'\\circ h'$. Apply clause (3) of [lem-weil-pbc-exchange-identity-pasting] to the two squares, with $(f,f',g,g')=(\\pi,\\pi',f',f'')$ and $(e,e',g'')=(g',h',e)$. By [sbc-def-base-change-map] the exchange on this exchanged square is precisely the specified base-change map. The pasting identity is therefore\n$$B\\circ\\operatorname{BC}_{f',g}(F[0])=R\\pi'_*\\bigl(\\operatorname{BC}_{f'',g'}(F[0])\\bigr)\\circ E_K\\circ A.$$\nThis records the arrow itself, with the comparison maps inserted, rather than just identifying its endpoints.",
+   "uses": [
+    "def-weil-pbc-derived-direct-image-composition",
     "lem-weil-pbc-exchange-identity-pasting",
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-derived-exchange-termwise"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NM-aebceced0",
-    "group": "NM",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-aebceced0 (reviewer sub-agent of L); spot-checked: Read all five steps, every cited statement, unit/chapter route, and source passages. Canonical derived exchange and vertical pasting establish the actual arrow identity in abelian/Z coefficients. Edge cases pass; no new nodes or fixes. Accepted four declared tool uses. review.md records a distant inherited missing dependency; the Lean counterpart rests on sorry and is not certified finished."
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E46, remark-compose-base-change; applied to Tag 0F05, lemma-base-change-q-integral-bottom"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "For an exact functor $P$, [lem-weil-pbc-exact-functor-complex-cohomology] identifies $H^q(PC)$ with $P(H^qC)$ naturally: $P$ preserves the kernel of $d^q$, the image of $d^{q-1}$, and their quotient. These comparisons descend to $D^+$ because cohomology inverts quasi-isomorphisms and their naturality holds on maps of complexes, hence also on inverses of quasi-isomorphisms. Apply them to the exact functors $\\pi_*,\\pi'_*,(f')^{-1},(f'')^{-1}$ from step 1. With the higher-image convention of [def-weil-pbc-direct-image] and the degreewise map of [sbc-def-base-change-map], $H^q(E_K\\circ A)$ is a natural isomorphism\n$C:(f')^{-1}R^qg_*F\\xrightarrow{\\sim}\\pi'_*(f'')^{-1}R^qg'_*F$,\nand $H^q(B)$ is a natural isomorphism\n$D:R^qh_*e^{-1}F\\xrightarrow{\\sim}\\pi'_*R^qh'_*e^{-1}F$.\nTheir inverses are the two isomorphisms in the statement.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-direct-image",
+    "sbc-def-base-change-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F05, lemma-base-change-q-integral-bottom, proof; Tag 04C2, lemma-what-integral; Tag 0EYP, lemma-integral-pushforward-commutes-with-base-change"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-a31af2b28",
-    "group": "NS",
-    "result": "pass",
-    "note": "Immutable files verified against commit; statement, dependencies, edge cases, docstrings, report sections, and pilot gates checked. Server-only compile passed; no delivery errors found."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.IntegralPushforwardBaseChangeArrow",
-    "declaration": "AlgebraicGeometry.Etale.integralPushforward_baseChange_arrow",
-    "file": "lean/Sheaf/AlgebraicGeometry/IntegralPushforwardBaseChangeArrow.lean",
-    "statement": "theorem integralPushforward_baseChange_arrow {X' S' S'' X'' T Y : Scheme.{u}} {f' : X' ⟶ S'} {f'' : X'' ⟶ S''} {π' : X'' ⟶ X'} {g' : T ⟶ S''} {h' : Y ⟶ X''} {e : Y ⟶ T} (π : S'' ⟶ S') [IsIntegralHom π] [QuasiCompact g'] [QuasiSeparated g'] (sqπ : ChosenCartesianSquare π' f'' f' π) (sq : ChosenCartesianSquare h' e f'' g') (q : ℕ) : Nonempty (Arrow.mk (Functor.whiskerRight (Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor _ 0) (Functor.whiskerRight (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq.flip) (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)))) (lowerStar AddCommGrpCat.{u + 1} π')) ≅ Arrow.mk (Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor _ 0) (Functor.whiskerRight (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (sq.toCommSq.flip.vert_comp sqπ.toCommSq.flip)) (DerivedCategory.Plus.homologyFunctor _ (q : ℤ))))) ∧ ∀ (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}), IsIso ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq.flip).app ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) → IsIso ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (sq.toCommSq.flip.vert_comp sqπ.toCommSq.flip)).app ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))",
-    "branch": "newtargets-dag",
-    "by": "NS",
-    "date": "2026-10-15",
-    "existing": false,
-    "note": "An arrow isomorphism in the functor category gives the two endpoint natural isomorphisms and their arrow compatibility. Uses abelian sheaves directly and the recorded exchange in its bounded-below presentation, with cohomology in nonnegative degree. The second conjunct states the final isomorphism implication explicitly."
+  {
+   "text": "Apply $H^q$ to the equality in step 3. The naturality of the cohomology comparisons used in step 4 gives exactly\n$$D\\circ\\operatorname{BC}^q_{f',g}(F)=\\pi'_*\\bigl(\\operatorname{BC}^q_{f'',g'}(F)\\bigr)\\circ C.$$\nMultiplying by $D^{-1}$ and $C^{-1}$ identifies the pushed-forward arrow with the pasted arrow under the stated isomorphisms. If $b=\\operatorname{BC}^q_{f'',g'}(F)$ has inverse $b^{-1}$, then $\\pi'_*(b)$ has inverse $\\pi'_*(b^{-1})$, since a functor preserves identities and composition. Consequently the pasted arrow $D^{-1}\\pi'_*(b)C$ has inverse $C^{-1}\\pi'_*(b^{-1})D$. This proves the final implication.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F05, lemma-base-change-q-integral-bottom, proof; Tag 04C2, lemma-what-integral; Tag 0EYP, lemma-integral-pushforward-commutes-with-base-change"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-derived-direct-image-composition",
+  "def-weil-pbc-direct-image",
+  "lem-sbc-integral-morphism-base-change",
+  "lem-sbc-integral-underived-exchange",
+  "lem-weil-pbc-derived-exchange-termwise",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "lem-weil-pbc-localization-universal-property",
+  "prop-weil-pbc-inverse-image-exact",
+  "sbc-def-base-change-map",
+  "sbc-lem-integral-etale-direct-image-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F05 proof, expanding the arrow identification via Tag 0E46 vertical pasting and Tags 0EYP, 04C2; no lower-degree hypothesis used"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "integral.*baseChange|baseChange.*integral|IsIntegralHom",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral pushforward identifies higher direct images and base change morphisms",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral morphism pushforward identifies etale base change maps before and after an integral change of base",
+   "results": "8 hits: RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, Algebra.IsEtaleAt.comp, Algebra.Etale.comp, Algebra.Etale.baseChange, KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.isIntegral_isStableUnderBaseChange",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"pushforward\"",
+   "results": "12 hits: CategoryTheory.Functor.sheafPushforwardContinuous, CategoryTheory.Adjunction.sheafPushforwardContinuous, CategoryTheory.Functor.sheafPushforwardContinuousId, CategoryTheory.Functor.sheafPushforwardContinuous_obj_obj_obj, CategoryTheory.Functor.sheafPushforwardContinuousIso, CategoryTheory.Functor.sheafPushforwardContinuousId', CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushing forward the etale cohomology base change map along an integral morphism gives the original base change map under canonical comparison isomorphisms",
+   "results": "8 hits: KaehlerDifferential.isBaseChange_of_formallyEtale, RingHom.Etale.isStableUnderBaseChange, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, Algebra.Etale.comp, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange, Algebra.IsEtaleAt.comp, KaehlerDifferential.isBaseChange",
+   "date": "2026-10-14",
+   "verdict": "no match: hits give general scheme/ring or sheaf functors, not this full statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact direct image along integral scheme morphisms commutes with the etale cohomological base change comparison morphism",
+   "results": "8 hits: Algebra.H1Cotangent.exact_δ_mapBaseChange, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.H1Cotangent.exact_map_δ",
+   "date": "2026-10-14",
+   "verdict": "no match: Zariski module pushforward and cotangent exactness do not identify etale cohomological base-change arrows"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeHomologyMap|derivedBaseChangeMap|higherDirectImage",
+   "results": "0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: Zariski module pushforward and cotangent exactness do not identify etale cohomological base-change arrows"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral pushforward identifies etale higher direct image base change arrows for pasted Cartesian squares",
+   "results": "; 8 hits: AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Cover.RelativeGluingData.isPullback_natTrans_ι_toBase, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'",
+   "date": "2026-10-14",
+   "verdict": "no match: general scheme etale stability, sheaf pushforward composition or Zariski module functors do not state this integral etale cohomological arrow identification"
+  },
+  {
+   "tool": "grep",
+   "query": "baseChangeHomologyMap|derivedBaseChangeMap|higherDirectImage",
+   "results": "; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "no match: general scheme etale stability, sheaf pushforward composition or Zariski module functors do not state this integral etale cohomological arrow identification"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"pushforward\"",
+   "results": "; 12 hits: CategoryTheory.Functor.sheafPushforwardContinuous, CategoryTheory.Adjunction.sheafPushforwardContinuous, CategoryTheory.Functor.sheafPushforwardContinuousId, CategoryTheory.Functor.sheafPushforwardContinuous_obj_obj_obj, CategoryTheory.Functor.sheafPushforwardContinuousIso, CategoryTheory.Functor.sheafPushforwardContinuousId', CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'",
+   "date": "2026-10-14",
+   "verdict": "no match: general scheme etale stability, sheaf pushforward composition or Zariski module functors do not state this integral etale cohomological arrow identification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral direct image of abelian etale sheaves identifies base change maps",
+   "results": "service unavailable: Internal Server Error; 0 hits: ",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact pushforward and Beck Chevalley pasting identify cohomology comparison morphisms under an integral base change",
+   "results": "; 8 hits: SheafOfModules.pullbackComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp_hom_app_val_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.ExponentiableMorphism.pushforwardComp, CategoryTheory.ExponentiableMorphism.comp_pushforward",
+   "date": "2026-10-14",
+   "verdict": "no match: general scheme etale stability, sheaf pushforward composition or Zariski module functors do not state this integral etale cohomological arrow identification"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "sbc-lem-bc-universal-test",
+  "by": "worker",
+  "date": "2026-10-14"
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-universal-datum",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lem-sbc-integral-pushforward-base-change-arrow",
+  "worker": "stage1",
+  "summary": "Expanded both canonical pushforward identifications and the actual arrow compatibility using existing integral exactness, exchange, derived composition and vertical pasting nodes. No new nodes or statement changes. Lean counterpart rests on a sorry in integral underived exchange.",
+  "blueprint": "sbc-lem-bc-universal-test proof, final normalization/integral-base-change sentence: the converse pushforward implication in Tag 0F05.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic exact-functor, integral-exchange or exchange-pasting infrastructure for the integral pushforward argument; no node in the universal-datum unit supplies this tool. This realizes its prescribed integral-base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-identity-pasting",
+    "why": "Generic exact-functor, integral-exchange or exchange-pasting infrastructure for the integral pushforward argument; no node in the universal-datum unit supplies this tool. This realizes its prescribed integral-base-change route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Generic exact-functor, integral-exchange or exchange-pasting infrastructure for the integral pushforward argument; no node in the universal-datum unit supplies this tool. This realizes its prescribed integral-base-change route."
+   },
+   {
+    "node": "lem-weil-pbc-derived-exchange-termwise",
+    "why": "Generic resolution formula identifies the descended underived exchange with the canonical derived exchange; this compatibility is needed for the vertical-pasting identity, and is not supplied within the universal-datum unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-exchange-identity-pasting",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-derived-exchange-termwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NM-aebceced0",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NM-aebceced0 (reviewer sub-agent of L); spot-checked: Read all five steps, every cited statement, unit/chapter route, and source passages. Canonical derived exchange and vertical pasting establish the actual arrow identity in abelian/Z coefficients. Edge cases pass; no new nodes or fixes. Accepted four declared tool uses. review.md records a distant inherited missing dependency; the Lean counterpart rests on sorry and is not certified finished."
+ },
+ "lean_audit": {},
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a31af2b28",
+  "group": "NS",
+  "result": "pass",
+  "note": "Immutable files verified against commit; statement, dependencies, edge cases, docstrings, report sections, and pilot gates checked. Server-only compile passed; no delivery errors found."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralPushforwardBaseChangeArrow",
+  "declaration": "AlgebraicGeometry.Etale.integralPushforward_baseChange_arrow",
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralPushforwardBaseChangeArrow.lean",
+  "statement": "theorem integralPushforward_baseChange_arrow {X' S' S'' X'' T Y : Scheme.{u}} {f' : X' ⟶ S'} {f'' : X'' ⟶ S''} {π' : X'' ⟶ X'} {g' : T ⟶ S''} {h' : Y ⟶ X''} {e : Y ⟶ T} (π : S'' ⟶ S') [IsIntegralHom π] [QuasiCompact g'] [QuasiSeparated g'] (sqπ : ChosenCartesianSquare π' f'' f' π) (sq : ChosenCartesianSquare h' e f'' g') (q : ℕ) : Nonempty (Arrow.mk (Functor.whiskerRight (Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor _ 0) (Functor.whiskerRight (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq.flip) (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)))) (lowerStar AddCommGrpCat.{u + 1} π')) ≅ Arrow.mk (Functor.whiskerLeft (DerivedCategory.Plus.singleFunctor _ 0) (Functor.whiskerRight (derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (sq.toCommSq.flip.vert_comp sqπ.toCommSq.flip)) (DerivedCategory.Plus.homologyFunctor _ (q : ℤ))))) ∧ ∀ (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}), IsIso ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} sq.toCommSq.flip).app ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) → IsIso ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1} (sq.toCommSq.flip.vert_comp sqπ.toCommSq.flip)).app ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "An arrow isomorphism in the functor category gives the two endpoint natural isomorphisms and their arrow compatibility. Uses abelian sheaves directly and the recorded exchange in its bounded-below presentation, with cohomology in nonnegative degree. The second conjunct states the final isomorphism implication explicitly."
+ }
 }

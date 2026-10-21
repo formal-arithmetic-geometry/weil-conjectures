@@ -1,493 +1,482 @@
 {
-  "id": "det-lem-int-ext-continuity",
-  "blueprint": {
-    "is": "det-lem-int-ext-continuity",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Continuity of Ext out of integral constructible complexes",
-  "statement": "Fix primes $p\\ne\\ell$, a field $k$ of characteristic $p>0$, and a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting]. Let $E/\\mathbf Q_\\ell$ be finite with valuation ring $\\mathcal O_E$, regarded as a condensed coefficient ring [sk-def-sfb-condensed-ring], and put $\\mathcal O_{E,X}=p_X^*\\underline{\\mathcal O_E}$ [sk-def-sfb-pulled-back-coefficients]. Use the ordinary derived category $D(X_{\\mathrm{proét}},\\mathcal O_E)=D(\\operatorname{Mod}_{\\mathcal O_{E,X}})$ [sk-def-sfb-derived-categories], [sk-def-sfb-module-objects], and its bounded constructible subcategory $\\Dbc(X,\\mathcal O_E)$ [sk-def-sfb-constructible], [sk-def-sfb-bounded-constructible]. Let $I$ be a small filtered category [def-weil-pbc-category-colimit] in the universes of [def-weil-size-convention], and let $(K_i^\\bullet)_{i\\in I}$ be a diagram of complexes of $\\mathcal O_{E,X}$-modules for which there is $b\\in\\mathbf Z$ with $K_i^r=0$ whenever $r<b$, for every $i$. Write $K^\\bullet=\\varinjlim_i K_i^\\bullet$ for the termwise colimit in module sheaves. For every $C\\in\\Dbc(X,\\mathcal O_E)$ and every $q\\in\\mathbf Z$, the canonical map is an isomorphism of abelian groups:\n$$\n\\varinjlim_i\\operatorname{Hom}_{D(X_{\\mathrm{proét}},\\mathcal O_E)}(C,K_i^\\bullet[q])\\longrightarrow\\operatorname{Hom}_{D(X_{\\mathrm{proét}},\\mathcal O_E)}(C,K^\\bullet[q]).\n$$",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.md",
-    "place": "node det-lem-int-ext-continuity, order None"
-  },
-  "stmt_deps": [
-    "sk-def-sfb-dc-setting",
-    "sk-def-sfb-condensed-ring",
-    "sk-def-sfb-pulled-back-coefficients",
-    "sk-def-sfb-derived-categories",
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-constructible",
-    "sk-def-sfb-bounded-constructible",
-    "def-weil-pbc-category-colimit",
-    "def-weil-size-convention"
-  ],
-  "proof": [
-    {
-      "text": "Fix the diagram and colimit in the statement. By [det-lem-constructible-ext-continuity-devissage], the objects $D$ for which $\\varinjlim_i\\operatorname{Hom}(D,K_i[q])\\to\\operatorname{Hom}(D,K[q])$ is bijective for every $q$ form a class closed under shifts, isomorphisms and distinguished extensions. Clause (1), and only clause (1), of [det-lem-int-ext-formula] expresses $C$ as a finite extension of shifts of $a_!L$, with $a=i\\circ u:S\\hookrightarrow Z\\hookrightarrow X$, $i$ closed and $u$ open, and $L\\in\\Cons(S,\\mathcal O_E)$ locally the completion of a finitely generated module. It suffices to treat these pieces. All these schemes are in the standing finite-type setting, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (the base is a field). Opens are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], and locally Noetherian schemes are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Thus $S,Z,X$ and $V=X\\setminus Z$ are qcqs; in particular the complementary open immersion $j:V\\hookrightarrow X$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence].",
-      "uses": [
-        "det-lem-constructible-ext-continuity-devissage",
-        "det-lem-int-ext-formula",
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-        "lem-weil-pbc-locally-noetherian-quasi-separated",
-        "lem-weil-pbc-qcqs-morphism-permanence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
-        "place": "reduction by finite filtration; checking the standing qcqs hypotheses"
-      }
-    },
-    {
-      "text": "Put $P=L^\\vee:=R\\mathcal Hom_{\\mathcal O_{E,S}}(L,\\mathcal O_{E,S})$, the derived dual. By [det-lem-int-integral-heart-dualizable], applied with ambient scheme $S$, constructible sheaf $L$ and whole stratum $S$ ($L$ has the required local form by clause (1) of [det-lem-int-ext-formula]), $P$ has Tor amplitude $[0,1]$. Clause (2) of [det-lem-int-ext-formula] gives, for every $K'\\in D(X_{\\mathrm{pro\\acute et}},\\mathcal O_E)$, an isomorphism natural in $K'$: $R\\operatorname{Hom}_X(a_!L,K')\\simeq R\\Gamma(S,P\\otimes^{\\mathbf L}u^*R\\underline\\Gamma_ZK')$, where $R\\operatorname{Hom}_X(A,B)=R\\Gamma(X,R\\mathcal Hom_{\\mathcal O_{E,X}}(A,B))$. Apply it to $K'=K[q]$ and take $H^0$. Left side: for $A,B$ in the derived category of a scheme $T$ of the setting, $\\operatorname{Hom}(A,B)\\cong\\operatorname{Hom}(\\mathcal O_{E,T}\\otimes^{\\mathbf L}A,B)\\cong\\operatorname{Hom}(\\mathcal O_{E,T},R\\mathcal Hom(A,B))$ by the unit of the derived monoidal structure and the tensor–internal-Hom adjunction [sk-def-sfb-derived-tensor-hom], naturally in $B$; and for any $N$, choosing a K-injective $J$ representing $N$ (which exists by [def-pur-ringed-site-zeroth-hypercohomology]), $\\operatorname{Hom}(\\mathcal O_{E,T},N[q])=\\operatorname{Hom}_{K}(\\mathcal O_{E,T},J[q])$ by [lem-weil-pbc-kinjective-hom-derived], i.e. degree-$q$ global cycles of $J$ modulo global boundaries, which is $H^q\\Gamma(T,J)=H^q(T,N)$ by the definition of derived sections [def-pur-ringed-site-zeroth-hypercohomology]. With $q=0$ this gives $H^0R\\operatorname{Hom}_X(a_!L,K[q])\\cong\\operatorname{Hom}_X(a_!L,K[q])$. Right side: $R\\underline\\Gamma_Z$ and $u^*$ commute with shifts, being triangulated [lem-pc-right-derived-functor-triangulated], [lem-sf-exact-functor-derived-triangulated] (the module pullback is exact by [sk-prop-sfb-cartesian-coefficients]), and $P\\otimes^{\\mathbf L}-$ commutes with shifts because it is computed termwise as the total complex of a fixed K-flat representative of $P$ tensored with the argument [sk-def-sfb-derived-tensor-hom]; so the right side is $H^0(S,N[q])=H^q(S,N)$ with $N=P\\otimes^{\\mathbf L}u^*R\\underline\\Gamma_ZK$, by the same K-injective computation. We have therefore obtained, naturally in $K$,\n$$\\operatorname{Hom}_X(a_!L,K[q])\\cong H^q(S,P\\otimes^{\\mathbf L}u^*R\\underline\\Gamma_ZK).$$",
-      "uses": [
-        "det-lem-int-ext-formula",
-        "det-lem-int-integral-heart-dualizable",
-        "sk-def-sfb-derived-tensor-hom",
-        "def-pur-ringed-site-zeroth-hypercohomology",
-        "lem-weil-pbc-kinjective-hom-derived",
-        "lem-pc-right-derived-functor-triangulated",
-        "lem-sf-exact-functor-derived-triangulated",
-        "sk-prop-sfb-cartesian-coefficients"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
-        "place": "'By [det-lem-int-ext-formula](2), Hom(a_!L,K[q])=H^q RGamma(S,L^vee (x)^L u^*RGamma_Z K)'"
-      }
-    },
-    {
-      "text": "The hypotheses on the ambient category in the bounded-flat-model theorem hold as follows. Abelian sheaves are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], applied to the constant ring $\\mathbf Z$, and their closed symmetric sheaf tensor is [sk-def-sfb-sheaf-tensor]. For an abelian sheaf $M$ take the direct sum of free sheaves $\\mathbf Z_U$ indexed by pairs $(U,s)$ with $s\\in M(U)$; send its generator to $s$. This is a natural epimorphism, since every local section is in its image. Each $\\mathbf Z_U$ is flat by [lem-weil-pbc-free-sheaf-flat], taking $P=\\mathbf Z$; tensor is right exact by closedness. Their direct sum is flat: tensor distributes over it, and direct sums of exact sequences are exact, being filtered colimits of finite subsums in the Grothendieck category. Thus [lem-sfb-modobj-flat-resolutions] gives functorial flat resolutions of $\\mathcal O_{E,S}$-module objects. This module category is Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], and closed symmetric monoidal for the relative tensor by [def-sfb-modobj-symmetric-tensor] and [def-sfb-modobj-internal-hom]; the tensor preserves colimits in each variable and hence is additive. Apply [lem-sc-source-tor-amplitude-flat-model] to $P$ in the closed monoidal category of $\\mathcal O_{E,S}$-module sheaves, with its relative tensor and K-flat derived tensor [sk-def-sfb-derived-tensor-hom]. Fix a flat complex $F=[F^0\\to F^1]$ representing $P$. Its bounded flat terms make it K-flat: tensor with an acyclic complex is the cone of a map between acyclic complexes, so is acyclic. Define $T(B^\\bullet)=\\operatorname{Tot}(F\\otimes u^*i^*B^\\bullet)$, which represents $\\Phi B:=P\\otimes^{\\mathbf L}u^*i^*B$. The pullbacks are exact by [sk-prop-sfb-cartesian-coefficients] and preserve colimits: the module pullback/pushforward adjunction is [def-sfb-module-upper-lower-adjunction], so apply [lem-weil-pbc-left-adjoint-preserves-colimits]. Each tensor $F^s\\otimes-$ preserves colimits, since it is left adjoint to internal Hom [def-sfb-modobj-internal-hom]. Explicitly $T(B)^n=(F^0\\otimes u^*i^*B^n)\\oplus(F^1\\otimes u^*i^*B^{n-1})$, and the tensor differential is natural in $B$. Thus $\\varinjlim_iT(B_i)=T(\\varinjlim_iB_i)$ as complexes; if all $B_i$ vanish below $b$, so do all $T(B_i)$. Exactness and flatness show that $T$ preserves quasi-isomorphisms. Applying [det-pe-bounded-continuity-sections] to this actual bounded-below diagram on the qcqs scheme $S$ gives\n$$\\varinjlim_iH^q(S,\\Phi K_i)\\cong H^q(S,\\Phi K).$$",
-      "uses": [
-        "lem-sc-source-tor-amplitude-flat-model",
-        "sk-def-sfb-derived-tensor-hom",
-        "sk-prop-sfb-cartesian-coefficients",
-        "def-sfb-module-upper-lower-adjunction",
-        "lem-weil-pbc-left-adjoint-preserves-colimits",
-        "def-sfb-modobj-internal-hom",
-        "det-pe-bounded-continuity-sections",
-        "lem-weil-pbc-ring-sheaves-grothendieck",
-        "sk-def-sfb-sheaf-tensor",
-        "lem-weil-pbc-free-sheaf-flat",
-        "lem-sfb-modobj-flat-resolutions",
-        "def-sfb-modobj-symmetric-tensor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
-        "place": "finite Tor amplitude and continuity of the first fiber term"
-      }
-    },
-    {
-      "text": "To handle the other fiber term, choose the functorial K-injective resolution $I(-)$ of [lem-weil-pbc-kinjective-functorial-existence], available because module sheaves are Grothendieck abelian [lem-weil-pbc-ring-sheaves-grothendieck]. Since $j^*$ is exact and left adjoint to $j_*$, [lem-weil-pbc-right-adjoint-preserves-kinjective] shows that applying $j_*$ termwise to $I(j^*K_i)$ and $I(j^*K)$ preserves K-injectivity, so these strict complexes compute $Rj_*j^*K_i$ and $Rj_*j^*K$. The complexes $A_i=j_*I(j^*K_i)$ and $A=j_*I(j^*K)$ and their cocone represent $Rj_*j^*K_i$ and $Rj_*j^*K$. These objects have cohomology zero below $b$: apply the quadrant and convergence assertions of [thm-sp-truncation-e2] to the left exact functor $j_*$ and $j^*K_i$ (respectively $j^*K$); every possible term in a total degree $<b$ is zero. Replace $A_i,A$ functorially by the quotients $J_i=A_i/\\tau_{\\le b-1}A_i$, $J=A/\\tau_{\\le b-1}A$ of the standard truncation subcomplexes [def-sbc-standard-tstructure-derived-category]. Their only possibly nonzero terms are in degrees $\\ge b-1$ (in degree $b-1$ the term $A^{b-1}/\\ker d^{b-1}$), so they vanish termwise below $b-1$; the kernel $\\tau_{\\le b-1}A_i$ of $A_i\\to J_i$ has cohomology $H^n(A_i)=0$ for $n\\le b-1$, so $A_i\\to J_i$ (and $A\\to J$) is a quasi-isomorphism and $J_i,J$ represent the same derived objects. Exactness of module-sheaf filtered colimits [lem-weil-pbc-ring-sheaves-grothendieck] gives\n$$H^r(\\varinjlim_iJ_i)=\\varinjlim_iH^r(J_i).$$\nThe qcqs direct-image theorem [det-lem-bounded-continuity-direct-image], applied to $j$ and the diagram $j^*K_i$, identifies the last sheaf with $H^r(J)$ for every $r$, because exact colimit-preserving $j^*$ identifies $\\varinjlim_i j^*K_i$ with $j^*K$. Thus the cocone map $\\varinjlim_iJ_i\\to J$ is a quasi-isomorphism. Step 3 now applies to $T(J_i)$, which have the common termwise lower bound $b-1$ (Step 3's bound argument holds for any integer): their colimit is $T(\\varinjlim_iJ_i)$, and its map to $T(J)$ is a quasi-isomorphism. The sections theorem [det-pe-bounded-continuity-sections] therefore gives\n$$\\varinjlim_iH^q(S,\\Phi Rj_*j^*K_i)\\cong H^q(S,\\Phi Rj_*j^*K).$$",
-      "uses": [
-        "lem-weil-pbc-kinjective-functorial-existence",
-        "lem-weil-pbc-right-adjoint-preserves-kinjective",
-        "lem-weil-pbc-ring-sheaves-grothendieck",
-        "thm-sp-truncation-e2",
-        "def-sbc-standard-tstructure-derived-category",
-        "det-lem-bounded-continuity-direct-image",
-        "det-pe-bounded-continuity-sections"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
-        "place": "continuity of the $Rj_*j^*$ term, using explicit bounded representatives"
-      }
-    },
-    {
-      "text": "For each $B$, clause (3) of [det-lem-formal-closed-support-derived] supplies the natural fiber formula $R\\underline\\Gamma_ZB\\simeq i^*\\operatorname{fib}(B\\to Rj_*j^*B)$. Exact pullbacks induce triangulated functors [lem-sf-exact-functor-derived-triangulated], tensor with the K-flat $F$ is triangulated [lem-sc-source-kflat-tensor-left-triangulated], and derived sections are triangulated [lem-pc-right-derived-functor-triangulated]. Hence, putting $Q(B)=R\\Gamma(S,P\\otimes^{\\mathbf L}u^*R\\underline\\Gamma_ZB)$, $A(B)=R\\Gamma(S,\\Phi B)$ and $B'(B)=R\\Gamma(S,\\Phi Rj_*j^*B)$, there is a natural triangle $Q(B)\\to A(B)\\to B'(B)\\to Q(B)[1]$. Notice that $u^*$, rather than $u^*i^*$, is applied to $R\\underline\\Gamma_ZB$, which already lives on $Z$. Its long exact cohomology sequence [lem-sf-derived-homology-long-exact] contains\n$$H^{q-1}A(K_i)\\to H^{q-1}B'(K_i)\\to H^qQ(K_i)\\to H^qA(K_i)\\to H^qB'(K_i).$$\nTaking filtered colimits preserves exactness by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. The cocone gives a commutative diagram from this exact row to the corresponding row for $K$. The first, second, fourth and fifth vertical arrows are isomorphisms by Steps 3 and 4. The five lemma [lem-weil-pbc-five-lemma] makes the middle arrow $\\varinjlim_iH^qQ(K_i)\\to H^qQ(K)$ an isomorphism.",
-      "uses": [
-        "det-lem-formal-closed-support-derived",
-        "lem-sf-exact-functor-derived-triangulated",
-        "lem-sc-source-kflat-tensor-left-triangulated",
-        "lem-pc-right-derived-functor-triangulated",
-        "lem-sf-derived-homology-long-exact",
-        "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-        "lem-weil-pbc-five-lemma"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
-        "place": "fiber comparison and its explicit five-term exact rows"
-      }
-    },
-    {
-      "text": "The natural Hom identification constructed in Step 2 identifies the comparison in Step 5 with $\\varinjlim_i\\operatorname{Hom}(a_!L,K_i[q])\\to\\operatorname{Hom}(a_!L,K[q])$; every map was induced by the original colimit cocone. Thus each stratum piece belongs to the comparison class of Step 1. Apply its closure under shifts and distinguished extensions [det-lem-constructible-ext-continuity-devissage] successively along the finite filtration given by clause (1) of [det-lem-int-ext-formula]. The resulting comparison is the asserted isomorphism for $C$ in every degree $q$.",
-      "uses": [
-        "det-lem-constructible-ext-continuity-devissage",
-        "det-lem-int-ext-formula"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
-        "place": "conclusion along the finite filtration"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-pur-ringed-site-zeroth-hypercohomology",
-    "def-sbc-standard-tstructure-derived-category",
-    "def-sfb-modobj-internal-hom",
-    "def-sfb-modobj-symmetric-tensor",
-    "def-sfb-module-upper-lower-adjunction",
-    "det-lem-bounded-continuity-direct-image",
+ "id": "det-lem-int-ext-continuity",
+ "blueprint": {
+  "is": "det-lem-int-ext-continuity",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Continuity of Ext out of integral constructible complexes",
+ "statement": "Fix primes $p\\ne\\ell$, a field $k$ of characteristic $p>0$, and a separated finite-type $k$-scheme $X$ [sk-def-sfb-dc-setting]. Let $E/\\mathbf Q_\\ell$ be finite with valuation ring $\\mathcal O_E$, regarded as a condensed coefficient ring [sk-def-sfb-condensed-ring], and put $\\mathcal O_{E,X}=p_X^*\\underline{\\mathcal O_E}$ [sk-def-sfb-pulled-back-coefficients]. Use the ordinary derived category $D(X_{\\mathrm{proét}},\\mathcal O_E)=D(\\operatorname{Mod}_{\\mathcal O_{E,X}})$ [sk-def-sfb-derived-categories], [sk-def-sfb-module-objects], and its bounded constructible subcategory $\\Dbc(X,\\mathcal O_E)$ [sk-def-sfb-constructible], [sk-def-sfb-bounded-constructible]. Let $I$ be a small filtered category [def-weil-pbc-category-colimit] in the universes of [def-weil-size-convention], and let $(K_i^\\bullet)_{i\\in I}$ be a diagram of complexes of $\\mathcal O_{E,X}$-modules for which there is $b\\in\\mathbf Z$ with $K_i^r=0$ whenever $r<b$, for every $i$. Write $K^\\bullet=\\varinjlim_i K_i^\\bullet$ for the termwise colimit in module sheaves. For every $C\\in\\Dbc(X,\\mathcal O_E)$ and every $q\\in\\mathbf Z$, the canonical map is an isomorphism of abelian groups:\n$$\n\\varinjlim_i\\operatorname{Hom}_{D(X_{\\mathrm{proét}},\\mathcal O_E)}(C,K_i^\\bullet[q])\\longrightarrow\\operatorname{Hom}_{D(X_{\\mathrm{proét}},\\mathcal O_E)}(C,K^\\bullet[q]).\n$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.md",
+  "place": "node det-lem-int-ext-continuity, order None"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-constructible",
+  "sk-def-sfb-bounded-constructible",
+  "def-weil-pbc-category-colimit",
+  "def-weil-size-convention"
+ ],
+ "proof": [
+  {
+   "text": "Fix the diagram and colimit in the statement. By [det-lem-constructible-ext-continuity-devissage], the objects $D$ for which $\\varinjlim_i\\operatorname{Hom}(D,K_i[q])\\to\\operatorname{Hom}(D,K[q])$ is bijective for every $q$ form a class closed under shifts, isomorphisms and distinguished extensions. Clause (1), and only clause (1), of [det-lem-int-ext-formula] expresses $C$ as a finite extension of shifts of $a_!L$, with $a=i\\circ u:S\\hookrightarrow Z\\hookrightarrow X$, $i$ closed and $u$ open, and $L\\in\\Cons(S,\\mathcal O_E)$ locally the completion of a finitely generated module. It suffices to treat these pieces. All these schemes are in the standing finite-type setting, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (the base is a field). Opens are Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], and locally Noetherian schemes are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. Thus $S,Z,X$ and $V=X\\setminus Z$ are qcqs; in particular the complementary open immersion $j:V\\hookrightarrow X$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence].",
+   "uses": [
     "det-lem-constructible-ext-continuity-devissage",
-    "det-lem-formal-closed-support-derived",
+    "det-lem-int-ext-formula",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
+    "place": "reduction by finite filtration; checking the standing qcqs hypotheses"
+   }
+  },
+  {
+   "text": "Put $P=L^\\vee:=R\\mathcal Hom_{\\mathcal O_{E,S}}(L,\\mathcal O_{E,S})$, the derived dual. By [det-lem-int-integral-heart-dualizable], applied with ambient scheme $S$, constructible sheaf $L$ and whole stratum $S$ ($L$ has the required local form by clause (1) of [det-lem-int-ext-formula]), $P$ has Tor amplitude $[0,1]$. Clause (2) of [det-lem-int-ext-formula] gives, for every $K'\\in D(X_{\\mathrm{pro\\acute et}},\\mathcal O_E)$, an isomorphism natural in $K'$: $R\\operatorname{Hom}_X(a_!L,K')\\simeq R\\Gamma(S,P\\otimes^{\\mathbf L}u^*R\\underline\\Gamma_ZK')$, where $R\\operatorname{Hom}_X(A,B)=R\\Gamma(X,R\\mathcal Hom_{\\mathcal O_{E,X}}(A,B))$. Apply it to $K'=K[q]$ and take $H^0$. Left side: for $A,B$ in the derived category of a scheme $T$ of the setting, $\\operatorname{Hom}(A,B)\\cong\\operatorname{Hom}(\\mathcal O_{E,T}\\otimes^{\\mathbf L}A,B)\\cong\\operatorname{Hom}(\\mathcal O_{E,T},R\\mathcal Hom(A,B))$ by the unit of the derived monoidal structure and the tensor–internal-Hom adjunction [sk-def-sfb-derived-tensor-hom], naturally in $B$; and for any $N$, choosing a K-injective $J$ representing $N$ (which exists by [def-pur-ringed-site-zeroth-hypercohomology]), $\\operatorname{Hom}(\\mathcal O_{E,T},N[q])=\\operatorname{Hom}_{K}(\\mathcal O_{E,T},J[q])$ by [lem-weil-pbc-kinjective-hom-derived], i.e. degree-$q$ global cycles of $J$ modulo global boundaries, which is $H^q\\Gamma(T,J)=H^q(T,N)$ by the definition of derived sections [def-pur-ringed-site-zeroth-hypercohomology]. With $q=0$ this gives $H^0R\\operatorname{Hom}_X(a_!L,K[q])\\cong\\operatorname{Hom}_X(a_!L,K[q])$. Right side: $R\\underline\\Gamma_Z$ and $u^*$ commute with shifts, being triangulated [lem-pc-right-derived-functor-triangulated], [lem-sf-exact-functor-derived-triangulated] (the module pullback is exact by [sk-prop-sfb-cartesian-coefficients]), and $P\\otimes^{\\mathbf L}-$ commutes with shifts because it is computed termwise as the total complex of a fixed K-flat representative of $P$ tensored with the argument [sk-def-sfb-derived-tensor-hom]; so the right side is $H^0(S,N[q])=H^q(S,N)$ with $N=P\\otimes^{\\mathbf L}u^*R\\underline\\Gamma_ZK$, by the same K-injective computation. We have therefore obtained, naturally in $K$,\n$$\\operatorname{Hom}_X(a_!L,K[q])\\cong H^q(S,P\\otimes^{\\mathbf L}u^*R\\underline\\Gamma_ZK).$$",
+   "uses": [
     "det-lem-int-ext-formula",
     "det-lem-int-integral-heart-dualizable",
-    "det-pe-bounded-continuity-sections",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-sc-source-kflat-tensor-left-triangulated",
-    "lem-sc-source-tor-amplitude-flat-model",
-    "lem-sf-derived-homology-long-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-sfb-modobj-flat-resolutions",
-    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-five-lemma",
-    "lem-weil-pbc-free-sheaf-flat",
-    "lem-weil-pbc-kinjective-functorial-existence",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
     "sk-def-sfb-derived-tensor-hom",
-    "sk-def-sfb-sheaf-tensor",
-    "sk-prop-sfb-cartesian-coefficients",
-    "thm-sp-truncation-e2"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "def-pur-ringed-site-zeroth-hypercohomology",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-exact-functor-derived-triangulated",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
-    "place": "Continuity proof, retaining filtration and fiber route; derived dual made explicit using the integral-heart lemma; explicit bounded flat and direct-image models"
+    "place": "'By [det-lem-int-ext-formula](2), Hom(a_!L,K[q])=H^q RGamma(S,L^vee (x)^L u^*RGamma_Z K)'"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "derived Hom from an integral constructible pro-etale complex commutes with filtered colimits of bounded-below complexes",
-      "results": "8 hits: DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; localCohomology.diagram; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; CategoryTheory.Functor.leftDerived_map_eq; CategoryTheory.ProjectiveResolution.leftDerived_app_eq. No constructible pro-etale continuity theorem.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "compactness of bounded constructible integral pro-etale sheaves for bounded-below filtered colimits",
-      "results": "8 hits: Condensed.profiniteSolid; LightProfinite.hasSheafify; Condensed.lanSheafProfinite; LightCondensed; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; CondensedMod.IsSolid; CondensedMod.ofSheafCompHaus; CondensedMod.ofSheafProfinite. No relevant theorem.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Ext, CategoryTheory.Limits.PreservesFilteredColimits",
-      "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Ext'.",
-      "date": "2026-10-16",
-      "verdict": "invalid identifier query; not absence evidence; superseded by valid second-reader query"
-    },
-    {
-      "tool": "loogle",
-      "query": "HomologicalComplex, FilteredColimit, Ext",
-      "results": "0 hits; loogle: unknown identifier 'FilteredColimit'.",
-      "date": "2026-10-16",
-      "verdict": "invalid identifier query; not absence evidence; superseded by valid second-reader query"
-    },
-    {
-      "tool": "grep",
-      "query": "(Ext|RHom|Hom).*([Cc]olimit|filtered)|([Cc]olimit|filtered).*(Ext|RHom|Hom) [Mathlib]",
-      "results": "The recorded command ran with a subdirectory beginning Mathlib, under a root already ending Mathlib. The resulting zero hits are not evidence of absence; see corrected second-reader search.",
-      "date": "2026-10-16",
-      "verdict": "invalid search scope; superseded by second-reader searches"
-    },
-    {
-      "tool": "grep",
-      "query": "PreservesFilteredColimits|colimitLimitIso|PreservesHomology [Mathlib/Algebra/Homology]",
-      "results": "The recorded command ran with a subdirectory beginning Mathlib, under a root already ending Mathlib. The resulting zero hits are not evidence of absence; see corrected second-reader search.",
-      "date": "2026-10-16",
-      "verdict": "invalid search scope; superseded by second-reader searches"
-    },
-    {
-      "tool": "leansearch",
-      "query": "derived Hom from a bounded constructible sheaf commutes with filtered colimits of bounded below complexes",
-      "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize; CategoryTheory.Limits.colimitLimitIso; instPreservesHomologyFunctorAddCommGrpCatColim; HomologicalComplex.ab5OfSize; HomologicalComplex.hasExactColimitsOfShape; CategoryTheory.HasExt...; HomologicalComplex.isColimitOfEval; CategoryTheory.Sheaf.hasFilteredColimitsOfSize. No target theorem.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "filtered colimits commute with derived Hom from finite Tor amplitude sheaf complexes",
-      "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize; CategoryTheory.Limits.colimitLimitIso; instPreservesHomologyFunctorAddCommGrpCatColim; ModuleCat.FilteredColimits.ι_colimitDesc; AddCommGrpCat.FilteredColimits.colimitCocone; HomologicalComplex.isColimitOfEval; AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit; AddCommMonCat.FilteredColimits.colimitCoconeIsColimit. No target theorem.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A dualizable object in a derived category is compact relative to filtered colimits with a uniform lower cohomological bound",
-      "results": "8 returned hits;  Top results: DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE. No integral constructible pro-etale Ext-continuity statement among the returned results.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "PreservesFilteredColimits, coyoneda",
-      "results": "0 returned hits; loogle: unknown identifier 'PreservesFilteredColimits' Top results: . No integral constructible pro-etale Ext-continuity statement among the returned results.",
-      "date": "2026-10-16",
-      "verdict": "invalid identifier query; not absence evidence; superseded by valid second-reader query"
-    },
-    {
-      "tool": "grep",
-      "query": "IsCompactObject|IsFinitelyPresentable|Dualizable",
-      "results": "0 returned hits;  Top results: . No integral constructible pro-etale Ext-continuity statement among the returned results.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "(Ext|RHom|Hom).*([Cc]olimit|filtered)|([Cc]olimit|filtered).*(Ext|RHom|Hom)",
-      "results": "25 returned hits;  Top results: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/HomologicalComplexLimitsEventuallyConstant.lean, Mathlib/Algebra/Homology/ModelCategory/Lifting.lean, Mathlib/Algebra/Homology/CochainComplexPlus.lean, Mathlib/Algebra/Homology/CommSq.lean, Mathlib/Algebra/Homology/CommSq.lean, Mathlib/Algebra/Homology/CommSq.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean. No integral constructible pro-etale Ext-continuity statement among the returned results.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"colimit\", \"hom\"",
-      "results": "12 returned hits;  Top results: CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom, CategoryTheory.Limits.IsColimit.OfNatIso.homOfCocone, CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom_homOfCocone, CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom_fac, CategoryTheory.Limits.IsColimit.OfNatIso.homOfCocone_coconeOfHom, CategoryTheory.Limits.IsColimit.descCoconeMorphism_hom, CategoryTheory.Limits.IsColimit.hom_isIso, CategoryTheory.Limits.IsColimit.homEquiv. No integral constructible pro-etale Ext-continuity statement among the returned results.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"Ext\", \"colimit\"",
-      "results": "12 hits; ; top results: CategoryTheory.Limits.IsColimit.extendIso, CategoryTheory.Limits.IsColimit.ofExtendIso, CategoryTheory.Limits.IsColimit.extendIsoEquiv, CategoryTheory.Limits.IsColimit.hom_ext, CategoryTheory.Limits.colimit.desc_extend, CategoryTheory.Limits.colimit.hom_ext, CategoryTheory.Limits.colimit.hom_ext_iff, CategoryTheory.Limits.BinaryCofan.IsColimit.hom_ext. Returned types concern AB5, ordinary colimits, the Ext definition, or standard truncation bounds, not integral constructible pro-etale Hom continuity. Actual search time: 2026-10-16T16:27:56Z.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible.*(colimit|Ext)|Ext.*filtered|filtered.*Ext",
-      "results": "5 hits; ; top results: Mathlib/FieldTheory/CardinalEmb.lean, Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean, Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean, Mathlib/CategoryTheory/Filtered/Basic.lean, Mathlib/CategoryTheory/Filtered/Basic.lean. Returned types concern AB5, ordinary colimits, the Ext definition, or standard truncation bounds, not integral constructible pro-etale Hom continuity. Actual search time: 2026-10-16T16:27:59Z.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Ext from a bounded constructible integral sheaf commutes with filtered colimits bounded below",
-      "results": "8 hits; ; top results: CategoryTheory.Limits.colimitLimitIso, CommGrpCat.FilteredColimits.colimit, CategoryTheory.Sheaf.ab5ofSize, CommSemiRingCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.M, ModuleCat.FilteredColimits.M.mk, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup. Returned types concern AB5, ordinary colimits, the Ext definition, or standard truncation bounds, not integral constructible pro-etale Hom continuity. Actual search time: 2026-10-16T16:27:59Z.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "derived Hom from integral constructible pro-etale sheaves preserves filtered colimits of uniformly bounded below complexes",
-      "results": "8 hits; ; top results: Condensed.instAB5CondensedMod, Condensed.profiniteSolid, LightCondensed.instIsGrothendieckAbelianLightCondMod, Ext, Condensed.hasExactColimitsOfShape, instHasColimitsCondensedMod, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE. Returned types concern AB5, ordinary colimits, the Ext definition, or standard truncation bounds, not integral constructible pro-etale Hom continuity. Actual search time: 2026-10-16T16:28:01Z.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "Ext.*colimit|colimit.*Ext",
-      "results": "0 hits; ; . No integral constructible pro-etale Ext-continuity theorem among these results.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "Ext colimit filtered derived Hom",
-      "results": "0 hits; loogle: Unknown identifier `colimit`; . No integral constructible pro-etale Ext-continuity theorem among these results.",
-      "date": "2026-10-17",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "integral constructible Ext continuity filtered colimits bounded below",
-      "results": "8 hits; ; Condensed.instAB5CondensedMod, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity, localCohomology.ofDiagram, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity, localCohomology.hasColimitDiagram, localCohomology.diagram. No integral constructible pro-etale Ext-continuity theorem among these results.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "derived Hom from constructible integral pro-etale sheaves commutes with filtered colimits of uniformly bounded below complexes",
-      "results": "8 hits; ; HomologicalComplex.instHasFilteredColimitsOfSize, HomologicalComplex.preservesColimitsOfShape_of_eval, instPreservesHomologyFunctorAddCommGrpCatColim, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.ab5OfSize, HomologicalComplex.isColimitOfEval, HomologicalComplex.instPreservesColimitEval, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat. No integral constructible pro-etale Ext-continuity theorem among these results.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "compact constructible objects derived category integral coefficients filtered colimit Ext bounded below",
-      "results": "8 hits; ; DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.hasExt_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE. No integral constructible pro-etale Ext-continuity theorem among these results.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "unreachable"
-  ],
-  "blueprint_kind": "lemma",
-  "blueprint_order": null,
-  "blueprint_uses": [
-    "det-lem-int-ext-formula",
-    "sk-cor-pe-bounded-continuity",
-    "sk-lem-constructible-ext-continuity"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_snapshot": "main-20261015",
-  "chapter": "sec-six-functors-basics",
-  "unit": "sk-lem-int-ext",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "det-lem-int-ext-continuity",
-    "worker": "stage1",
-    "summary": "Audited the imported six-step continuity proof against the main-20261015 blueprint, the unit route, and every cited node statement. No new nodes are needed: all non-elementary facts used by the six steps are already stated by existing dependencies; the union of step uses equals proof_deps. Checked the long Steps 2–4 for hidden sublemmas and found each is one explicit bounded-model/five-term comparison argument; no additional node is warranted. Maintainer reader (2026-10-17): Step 2 no longer re-proves clause (2) of det-lem-int-ext-formula inline; it cites that clause and only converts its RHom isomorphism into the degree-q Hom identification.",
-    "blueprint": "Step 1 realizes finite-filtration reduction and qcqs hypotheses; Step 2 realizes 'By [det-lem-int-ext-formula](2), Hom(a_!L,K[q])=H^q RGamma(...)' by citing formula clause (2) and taking H^q; Steps 3–4 realize bounded continuity for the two fiber terms by explicit flat and K-injective models; Step 5 realizes the fiber comparison via exact triangles and the five lemma; Step 6 applies finite-filtration devissage.",
-    "tool_uses": [
-      {
-        "node": "det-lem-constructible-ext-continuity-devissage",
-        "why": "The comparison-class closure is the generic triangulated five-lemma argument for finite filtrations; it is used with integral generators supplied by this unit, not the field-only generation consequence."
-      },
-      {
-        "node": "lem-weil-pbc-finite-type-over-noetherian",
-        "why": "Noetherian permanence checks the qcqs hypotheses on the strata in the prescribed filtration; it replaces no geometric step."
-      },
-      {
-        "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-        "why": "Noetherian open subschemes ensure that the complementary open and strata are quasi-compact."
-      },
-      {
-        "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-        "why": "Quasi-separatedness of the Noetherian strata is a general scheme tool needed by bounded continuity."
-      },
-      {
-        "node": "lem-weil-pbc-qcqs-morphism-permanence",
-        "why": "General qcqs permanence checks the complementary open immersion against the direct-image theorem."
-      },
-      {
-        "node": "lem-sc-source-tor-amplitude-flat-model",
-        "why": "A generic bounded flat representative realizes the derived dual of amplitude [0,1] as an actual complex, so the existing continuity theorem with a termwise lower bound applies."
-      },
-      {
-        "node": "lem-sc-source-kflat-tensor-left-triangulated",
-        "why": "Generic K-flat tensor triangulatedness allows the prescribed closed-support fiber triangle to be tensored with the derived dual."
-      },
-      {
-        "node": "lem-weil-pbc-free-sheaf-flat",
-        "why": "Free abelian sheaves on site objects provide the functorial flat epimorphism required to apply the existing module-object flat-resolution theorem."
-      },
-      {
-        "node": "lem-sfb-modobj-flat-resolutions",
-        "why": "Generic inheritance of functorial flat resolutions supplies a hypothesis of the bounded-flat-model theorem for the relative module tensor."
-      },
-      {
-        "node": "lem-weil-pbc-ring-sheaves-grothendieck",
-        "why": "General ringed-site AB5 and Grothendieck structure provide exact filtered sheaf colimits and the hypothesis for functorial K-injective resolutions."
-      },
-      {
-        "node": "lem-weil-pbc-kinjective-functorial-existence",
-        "why": "Functorial resolutions realize the direct-image comparison by one strict diagram of complexes, with no alternative geometric argument."
-      },
-      {
-        "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-        "why": "The generic adjoint lemma justifies deriving the exact open adjunction in the generator Hom calculation."
-      },
-      {
-        "node": "lem-weil-pbc-kinjective-hom-derived",
-        "why": "The generic localization bijection identifies maps from the coefficient unit with global cycles modulo boundaries."
-      },
-      {
-        "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-        "why": "Generic adjoint colimit preservation gives termwise pullback/tensor compatibility with the original cocone."
-      },
-      {
-        "node": "lem-pc-right-derived-functor-triangulated",
-        "why": "Generic right-derived triangulatedness supplies the triangle of derived sections in the unit fiber argument."
-      },
-      {
-        "node": "lem-sf-derived-homology-long-exact",
-        "why": "The generic long exact cohomology sequence gives the displayed five consecutive terms of that fiber triangle."
-      },
-      {
-        "node": "lem-sf-exact-functor-derived-triangulated",
-        "why": "Generic exact-functor triangulatedness applies the exact coefficient pullbacks to that same fiber triangle."
-      },
-      {
-        "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-        "why": "Exact filtered colimits in abelian groups preserve the displayed long exact rows."
-      },
-      {
-        "node": "lem-weil-pbc-five-lemma",
-        "why": "The five lemma is the formal comparison step for the fiber triangle, as required by the unit route."
-      },
-      {
-        "node": "thm-sp-truncation-e2",
-        "why": "Only the quadrant and convergence clauses of the generic bounded-below hypercohomology spectral sequence prove that Rj_* preserves the lower cohomological bound."
-      }
-    ]
-  },
-  "tool_uses": [
-    "det-lem-constructible-ext-continuity-devissage",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-qcqs-morphism-permanence",
+  {
+   "text": "The hypotheses on the ambient category in the bounded-flat-model theorem hold as follows. Abelian sheaves are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], applied to the constant ring $\\mathbf Z$, and their closed symmetric sheaf tensor is [sk-def-sfb-sheaf-tensor]. For an abelian sheaf $M$ take the direct sum of free sheaves $\\mathbf Z_U$ indexed by pairs $(U,s)$ with $s\\in M(U)$; send its generator to $s$. This is a natural epimorphism, since every local section is in its image. Each $\\mathbf Z_U$ is flat by [lem-weil-pbc-free-sheaf-flat], taking $P=\\mathbf Z$; tensor is right exact by closedness. Their direct sum is flat: tensor distributes over it, and direct sums of exact sequences are exact, being filtered colimits of finite subsums in the Grothendieck category. Thus [lem-sfb-modobj-flat-resolutions] gives functorial flat resolutions of $\\mathcal O_{E,S}$-module objects. This module category is Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck], and closed symmetric monoidal for the relative tensor by [def-sfb-modobj-symmetric-tensor] and [def-sfb-modobj-internal-hom]; the tensor preserves colimits in each variable and hence is additive. Apply [lem-sc-source-tor-amplitude-flat-model] to $P$ in the closed monoidal category of $\\mathcal O_{E,S}$-module sheaves, with its relative tensor and K-flat derived tensor [sk-def-sfb-derived-tensor-hom]. Fix a flat complex $F=[F^0\\to F^1]$ representing $P$. Its bounded flat terms make it K-flat: tensor with an acyclic complex is the cone of a map between acyclic complexes, so is acyclic. Define $T(B^\\bullet)=\\operatorname{Tot}(F\\otimes u^*i^*B^\\bullet)$, which represents $\\Phi B:=P\\otimes^{\\mathbf L}u^*i^*B$. The pullbacks are exact by [sk-prop-sfb-cartesian-coefficients] and preserve colimits: the module pullback/pushforward adjunction is [def-sfb-module-upper-lower-adjunction], so apply [lem-weil-pbc-left-adjoint-preserves-colimits]. Each tensor $F^s\\otimes-$ preserves colimits, since it is left adjoint to internal Hom [def-sfb-modobj-internal-hom]. Explicitly $T(B)^n=(F^0\\otimes u^*i^*B^n)\\oplus(F^1\\otimes u^*i^*B^{n-1})$, and the tensor differential is natural in $B$. Thus $\\varinjlim_iT(B_i)=T(\\varinjlim_iB_i)$ as complexes; if all $B_i$ vanish below $b$, so do all $T(B_i)$. Exactness and flatness show that $T$ preserves quasi-isomorphisms. Applying [det-pe-bounded-continuity-sections] to this actual bounded-below diagram on the qcqs scheme $S$ gives\n$$\\varinjlim_iH^q(S,\\Phi K_i)\\cong H^q(S,\\Phi K).$$",
+   "uses": [
     "lem-sc-source-tor-amplitude-flat-model",
-    "lem-sc-source-kflat-tensor-left-triangulated",
+    "sk-def-sfb-derived-tensor-hom",
+    "sk-prop-sfb-cartesian-coefficients",
+    "def-sfb-module-upper-lower-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-sfb-modobj-internal-hom",
+    "det-pe-bounded-continuity-sections",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "sk-def-sfb-sheaf-tensor",
     "lem-weil-pbc-free-sheaf-flat",
     "lem-sfb-modobj-flat-resolutions",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "def-sfb-modobj-symmetric-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
+    "place": "finite Tor amplitude and continuity of the first fiber term"
+   }
+  },
+  {
+   "text": "To handle the other fiber term, choose the functorial K-injective resolution $I(-)$ of [lem-weil-pbc-kinjective-functorial-existence], available because module sheaves are Grothendieck abelian [lem-weil-pbc-ring-sheaves-grothendieck]. Since $j^*$ is exact and left adjoint to $j_*$, [lem-weil-pbc-right-adjoint-preserves-kinjective] shows that applying $j_*$ termwise to $I(j^*K_i)$ and $I(j^*K)$ preserves K-injectivity, so these strict complexes compute $Rj_*j^*K_i$ and $Rj_*j^*K$. The complexes $A_i=j_*I(j^*K_i)$ and $A=j_*I(j^*K)$ and their cocone represent $Rj_*j^*K_i$ and $Rj_*j^*K$. These objects have cohomology zero below $b$: apply the quadrant and convergence assertions of [thm-sp-truncation-e2] to the left exact functor $j_*$ and $j^*K_i$ (respectively $j^*K$); every possible term in a total degree $<b$ is zero. Replace $A_i,A$ functorially by the quotients $J_i=A_i/\\tau_{\\le b-1}A_i$, $J=A/\\tau_{\\le b-1}A$ of the standard truncation subcomplexes [def-sbc-standard-tstructure-derived-category]. Their only possibly nonzero terms are in degrees $\\ge b-1$ (in degree $b-1$ the term $A^{b-1}/\\ker d^{b-1}$), so they vanish termwise below $b-1$; the kernel $\\tau_{\\le b-1}A_i$ of $A_i\\to J_i$ has cohomology $H^n(A_i)=0$ for $n\\le b-1$, so $A_i\\to J_i$ (and $A\\to J$) is a quasi-isomorphism and $J_i,J$ represent the same derived objects. Exactness of module-sheaf filtered colimits [lem-weil-pbc-ring-sheaves-grothendieck] gives\n$$H^r(\\varinjlim_iJ_i)=\\varinjlim_iH^r(J_i).$$\nThe qcqs direct-image theorem [det-lem-bounded-continuity-direct-image], applied to $j$ and the diagram $j^*K_i$, identifies the last sheaf with $H^r(J)$ for every $r$, because exact colimit-preserving $j^*$ identifies $\\varinjlim_i j^*K_i$ with $j^*K$. Thus the cocone map $\\varinjlim_iJ_i\\to J$ is a quasi-isomorphism. Step 3 now applies to $T(J_i)$, which have the common termwise lower bound $b-1$ (Step 3's bound argument holds for any integer): their colimit is $T(\\varinjlim_iJ_i)$, and its map to $T(J)$ is a quasi-isomorphism. The sections theorem [det-pe-bounded-continuity-sections] therefore gives\n$$\\varinjlim_iH^q(S,\\Phi Rj_*j^*K_i)\\cong H^q(S,\\Phi Rj_*j^*K).$$",
+   "uses": [
     "lem-weil-pbc-kinjective-functorial-existence",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "thm-sp-truncation-e2",
+    "def-sbc-standard-tstructure-derived-category",
+    "det-lem-bounded-continuity-direct-image",
+    "det-pe-bounded-continuity-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
+    "place": "continuity of the $Rj_*j^*$ term, using explicit bounded representatives"
+   }
+  },
+  {
+   "text": "For each $B$, clause (3) of [det-lem-formal-closed-support-derived] supplies the natural fiber formula $R\\underline\\Gamma_ZB\\simeq i^*\\operatorname{fib}(B\\to Rj_*j^*B)$. Exact pullbacks induce triangulated functors [lem-sf-exact-functor-derived-triangulated], tensor with the K-flat $F$ is triangulated [lem-sc-source-kflat-tensor-left-triangulated], and derived sections are triangulated [lem-pc-right-derived-functor-triangulated]. Hence, putting $Q(B)=R\\Gamma(S,P\\otimes^{\\mathbf L}u^*R\\underline\\Gamma_ZB)$, $A(B)=R\\Gamma(S,\\Phi B)$ and $B'(B)=R\\Gamma(S,\\Phi Rj_*j^*B)$, there is a natural triangle $Q(B)\\to A(B)\\to B'(B)\\to Q(B)[1]$. Notice that $u^*$, rather than $u^*i^*$, is applied to $R\\underline\\Gamma_ZB$, which already lives on $Z$. Its long exact cohomology sequence [lem-sf-derived-homology-long-exact] contains\n$$H^{q-1}A(K_i)\\to H^{q-1}B'(K_i)\\to H^qQ(K_i)\\to H^qA(K_i)\\to H^qB'(K_i).$$\nTaking filtered colimits preserves exactness by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. The cocone gives a commutative diagram from this exact row to the corresponding row for $K$. The first, second, fourth and fifth vertical arrows are isomorphisms by Steps 3 and 4. The five lemma [lem-weil-pbc-five-lemma] makes the middle arrow $\\varinjlim_iH^qQ(K_i)\\to H^qQ(K)$ an isomorphism.",
+   "uses": [
+    "det-lem-formal-closed-support-derived",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-sc-source-kflat-tensor-left-triangulated",
     "lem-pc-right-derived-functor-triangulated",
     "lem-sf-derived-homology-long-exact",
-    "lem-sf-exact-functor-derived-triangulated",
     "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
-    "lem-weil-pbc-five-lemma",
-    "thm-sp-truncation-e2"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q154-74d131e8a",
-    "group": "Q154",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-74d131e8a (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 continuity, formula, bound and unit texts, the unit record, and all 35 cited and 9 statement-dependency nodes. The statement matches the blueprint and the formula node's coefficient category: condensed O_E, the ordinary uncompleted D(Mod_{O_E,X}), Dbc as defined in sk-def-sfb-constructible, and a common termwise lower bound. Nothing is weakened, there are no new nodes, and the item has no duplicate (the constructible-ext-continuity nodes only cover lisse L) and creates no cycle. Step 1: the devissage closure, formula clause (1) and the Noetherian/qcqs chain all hold. Step 3 (2512 chars) is one bounded-flat-model argument: the Z_U functorial flat resolution, a two-term K-flat F, T commuting with colimits, and sections continuity on qcqs S. It may stay. Step 4 (2169 chars) is one explicit model argument: K-injective j_*I(j^*K_i), the lower bound from truncation-e2 (3),(5),(6), the b-1 truncation index (correct), and direct-image continuity. It may stay. Steps 5 and 6: natural triangle, exact five-term rows and the five lemma; correct. FIX: Step 2 (2342 chars) re-proved clause (2) of det-lem-int-ext-formula inline. That clause is an existing node in the same unit, already defines L^vee as RHom, and is what the blueprint proof cites. The corrected Step 2 cites clause (2) applied to K[q] and only converts RHom to Hom/H^q (tensor-RHom adjunction, the K-injective computation, shift compatibility). Tor amplitude [0,1] still comes from det-lem-int-integral-heart-dualizable. def-sfb-module-open-lower-shriek and its adjunction leave proof_deps. I accept the 20 declared tool_uses.; 1 file(s) fixed by the reviewer"
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
+    "place": "fiber comparison and its explicit five-term exact rows"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "lean": {
-    "module": "Sheaf.SixFunctors.IntegralExtHomContinuity",
-    "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralExtHomContinuous",
-    "file": "lean/Sheaf/SixFunctors/IntegralExtHomContinuity.lean",
-    "statement": "theorem integralExtHomContinuous {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (C : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left))) (hC : constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X.left C) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (K : I ⥤ CochainComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)) ℤ) [HasColimit K] (b : ℤ) (hK : ∀ i : I, ∀ r : ℤ, r < b → IsZero ((K.obj i).X r)) (q : ℤ) : IsIso (homContinuityComparison (K ⋙ DerivedCategory.Q) (DerivedCategory.Q.mapCocone (colimit.cocone K)) C q)",
-    "branch": "newtargets-dag",
-    "by": "Q48",
-    "date": "2026-10-18",
-    "existing": false,
-    "fixed_by": "NT-stage2-cc-c348f8a50"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-c348f8a50",
-    "group": "Q48",
-    "result": "fix",
-    "note": "Read node, 9 stmt deps, source chain (formula lemma, devissage, constructibility modules) and compiled delivered + fixed module via nt_compile.py --json (exit 0, no errors; tool hides warnings). Fixes: F1 H3 Dbc must be sk-def-sfb-constructible's constant-model notion (constantModelBoundedConstructible), not general boundedConstructible; F2 H3 index category was Type u, now Type (u+1) SmallCategory per size convention/devissage; F3 H4 private integralExtHomDiagram/Comparison duplicated landed homContinuityComparison, replaced; F5 H8 step-by-step proof docstring; F6 unused imports replaced. F4: N2 has since landed a sk-def-sfb-module-objects record, so land with --revert-nodes sk-def-sfb-module-objects (item uses Mathlib Mod over condensedRingObj, same as N2's abbrev and siblings). Fix files: fixes/IntegralExtHomContinuity.lean, fixes/det-lem-int-ext-continuity.report.md."
+  {
+   "text": "The natural Hom identification constructed in Step 2 identifies the comparison in Step 5 with $\\varinjlim_i\\operatorname{Hom}(a_!L,K_i[q])\\to\\operatorname{Hom}(a_!L,K[q])$; every map was induced by the original colimit cocone. Thus each stratum piece belongs to the comparison class of Step 1. Apply its closure under shifts and distinguished extensions [det-lem-constructible-ext-continuity-devissage] successively along the finite filtration given by clause (1) of [det-lem-int-ext-formula]. The resulting comparison is the asserted isomorphism for $C$ in every degree $q$.",
+   "uses": [
+    "det-lem-constructible-ext-continuity-devissage",
+    "det-lem-int-ext-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
+    "place": "conclusion along the finite filtration"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pur-ringed-site-zeroth-hypercohomology",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sfb-modobj-internal-hom",
+  "def-sfb-modobj-symmetric-tensor",
+  "def-sfb-module-upper-lower-adjunction",
+  "det-lem-bounded-continuity-direct-image",
+  "det-lem-constructible-ext-continuity-devissage",
+  "det-lem-formal-closed-support-derived",
+  "det-lem-int-ext-formula",
+  "det-lem-int-integral-heart-dualizable",
+  "det-pe-bounded-continuity-sections",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-free-sheaf-flat",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-prop-sfb-cartesian-coefficients",
+  "thm-sp-truncation-e2"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-ext/sk-lem-int-ext-continuity.proof.md",
+  "place": "Continuity proof, retaining filtration and fiber route; derived dual made explicit using the integral-heart lemma; explicit bounded flat and direct-image models"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "derived Hom from an integral constructible pro-etale complex commutes with filtered colimits of bounded-below complexes",
+   "results": "8 hits: DerivedCategory.instEssSurjArrowHomotopyCategoryIntUpMapArrowQh; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; localCohomology.diagram; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; CategoryTheory.Functor.leftDerived_map_eq; CategoryTheory.ProjectiveResolution.leftDerived_app_eq. No constructible pro-etale continuity theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactness of bounded constructible integral pro-etale sheaves for bounded-below filtered colimits",
+   "results": "8 hits: Condensed.profiniteSolid; LightProfinite.hasSheafify; Condensed.lanSheafProfinite; LightCondensed; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; CondensedMod.IsSolid; CondensedMod.ofSheafCompHaus; CondensedMod.ofSheafProfinite. No relevant theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Ext, CategoryTheory.Limits.PreservesFilteredColimits",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.Ext'.",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier query; not absence evidence; superseded by valid second-reader query"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, FilteredColimit, Ext",
+   "results": "0 hits; loogle: unknown identifier 'FilteredColimit'.",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier query; not absence evidence; superseded by valid second-reader query"
+  },
+  {
+   "tool": "grep",
+   "query": "(Ext|RHom|Hom).*([Cc]olimit|filtered)|([Cc]olimit|filtered).*(Ext|RHom|Hom) [Mathlib]",
+   "results": "The recorded command ran with a subdirectory beginning Mathlib, under a root already ending Mathlib. The resulting zero hits are not evidence of absence; see corrected second-reader search.",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope; superseded by second-reader searches"
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesFilteredColimits|colimitLimitIso|PreservesHomology [Mathlib/Algebra/Homology]",
+   "results": "The recorded command ran with a subdirectory beginning Mathlib, under a root already ending Mathlib. The resulting zero hits are not evidence of absence; see corrected second-reader search.",
+   "date": "2026-10-16",
+   "verdict": "invalid search scope; superseded by second-reader searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived Hom from a bounded constructible sheaf commutes with filtered colimits of bounded below complexes",
+   "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize; CategoryTheory.Limits.colimitLimitIso; instPreservesHomologyFunctorAddCommGrpCatColim; HomologicalComplex.ab5OfSize; HomologicalComplex.hasExactColimitsOfShape; CategoryTheory.HasExt...; HomologicalComplex.isColimitOfEval; CategoryTheory.Sheaf.hasFilteredColimitsOfSize. No target theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimits commute with derived Hom from finite Tor amplitude sheaf complexes",
+   "results": "8 hits: HomologicalComplex.instHasFilteredColimitsOfSize; CategoryTheory.Limits.colimitLimitIso; instPreservesHomologyFunctorAddCommGrpCatColim; ModuleCat.FilteredColimits.ι_colimitDesc; AddCommGrpCat.FilteredColimits.colimitCocone; HomologicalComplex.isColimitOfEval; AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit; AddCommMonCat.FilteredColimits.colimitCoconeIsColimit. No target theorem.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizable object in a derived category is compact relative to filtered colimits with a uniform lower cohomological bound",
+   "results": "8 returned hits;  Top results: DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.IsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE. No integral constructible pro-etale Ext-continuity statement among the returned results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PreservesFilteredColimits, coyoneda",
+   "results": "0 returned hits; loogle: unknown identifier 'PreservesFilteredColimits' Top results: . No integral constructible pro-etale Ext-continuity statement among the returned results.",
+   "date": "2026-10-16",
+   "verdict": "invalid identifier query; not absence evidence; superseded by valid second-reader query"
+  },
+  {
+   "tool": "grep",
+   "query": "IsCompactObject|IsFinitelyPresentable|Dualizable",
+   "results": "0 returned hits;  Top results: . No integral constructible pro-etale Ext-continuity statement among the returned results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(Ext|RHom|Hom).*([Cc]olimit|filtered)|([Cc]olimit|filtered).*(Ext|RHom|Hom)",
+   "results": "25 returned hits;  Top results: Mathlib/Algebra/Homology/LocalCohomology.lean, Mathlib/Algebra/Homology/HomologicalComplexLimitsEventuallyConstant.lean, Mathlib/Algebra/Homology/ModelCategory/Lifting.lean, Mathlib/Algebra/Homology/CochainComplexPlus.lean, Mathlib/Algebra/Homology/CommSq.lean, Mathlib/Algebra/Homology/CommSq.lean, Mathlib/Algebra/Homology/CommSq.lean, Mathlib/Algebra/Homology/ShortComplex/Abelian.lean. No integral constructible pro-etale Ext-continuity statement among the returned results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"hom\"",
+   "results": "12 returned hits;  Top results: CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom, CategoryTheory.Limits.IsColimit.OfNatIso.homOfCocone, CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom_homOfCocone, CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom_fac, CategoryTheory.Limits.IsColimit.OfNatIso.homOfCocone_coconeOfHom, CategoryTheory.Limits.IsColimit.descCoconeMorphism_hom, CategoryTheory.Limits.IsColimit.hom_isIso, CategoryTheory.Limits.IsColimit.homEquiv. No integral constructible pro-etale Ext-continuity statement among the returned results.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Ext\", \"colimit\"",
+   "results": "12 hits; ; top results: CategoryTheory.Limits.IsColimit.extendIso, CategoryTheory.Limits.IsColimit.ofExtendIso, CategoryTheory.Limits.IsColimit.extendIsoEquiv, CategoryTheory.Limits.IsColimit.hom_ext, CategoryTheory.Limits.colimit.desc_extend, CategoryTheory.Limits.colimit.hom_ext, CategoryTheory.Limits.colimit.hom_ext_iff, CategoryTheory.Limits.BinaryCofan.IsColimit.hom_ext. Returned types concern AB5, ordinary colimits, the Ext definition, or standard truncation bounds, not integral constructible pro-etale Hom continuity. Actual search time: 2026-10-16T16:27:56Z.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(colimit|Ext)|Ext.*filtered|filtered.*Ext",
+   "results": "5 hits; ; top results: Mathlib/FieldTheory/CardinalEmb.lean, Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean, Mathlib/CategoryTheory/Presentable/LocallyPresentable.lean, Mathlib/CategoryTheory/Filtered/Basic.lean, Mathlib/CategoryTheory/Filtered/Basic.lean. Returned types concern AB5, ordinary colimits, the Ext definition, or standard truncation bounds, not integral constructible pro-etale Hom continuity. Actual search time: 2026-10-16T16:27:59Z.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ext from a bounded constructible integral sheaf commutes with filtered colimits bounded below",
+   "results": "8 hits; ; top results: CategoryTheory.Limits.colimitLimitIso, CommGrpCat.FilteredColimits.colimit, CategoryTheory.Sheaf.ab5ofSize, CommSemiRingCat.FilteredColimits.colimit, ModuleCat.FilteredColimits.M, ModuleCat.FilteredColimits.M.mk, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup. Returned types concern AB5, ordinary colimits, the Ext definition, or standard truncation bounds, not integral constructible pro-etale Hom continuity. Actual search time: 2026-10-16T16:27:59Z.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived Hom from integral constructible pro-etale sheaves preserves filtered colimits of uniformly bounded below complexes",
+   "results": "8 hits; ; top results: Condensed.instAB5CondensedMod, Condensed.profiniteSolid, LightCondensed.instIsGrothendieckAbelianLightCondMod, Ext, Condensed.hasExactColimitsOfShape, instHasColimitsCondensedMod, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE. Returned types concern AB5, ordinary colimits, the Ext definition, or standard truncation bounds, not integral constructible pro-etale Hom continuity. Actual search time: 2026-10-16T16:28:01Z.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*colimit|colimit.*Ext",
+   "results": "0 hits; ; . No integral constructible pro-etale Ext-continuity theorem among these results.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ext colimit filtered derived Hom",
+   "results": "0 hits; loogle: Unknown identifier `colimit`; . No integral constructible pro-etale Ext-continuity theorem among these results.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "integral constructible Ext continuity filtered colimits bounded below",
+   "results": "8 hits; ; Condensed.instAB5CondensedMod, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀, CategoryTheory.IsGrothendieckAbelian.IsPresentable.surjectivity, localCohomology.ofDiagram, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity, localCohomology.hasColimitDiagram, localCohomology.diagram. No integral constructible pro-etale Ext-continuity theorem among these results.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived Hom from constructible integral pro-etale sheaves commutes with filtered colimits of uniformly bounded below complexes",
+   "results": "8 hits; ; HomologicalComplex.instHasFilteredColimitsOfSize, HomologicalComplex.preservesColimitsOfShape_of_eval, instPreservesHomologyFunctorAddCommGrpCatColim, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.ab5OfSize, HomologicalComplex.isColimitOfEval, HomologicalComplex.instPreservesColimitEval, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat. No integral constructible pro-etale Ext-continuity theorem among these results.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact constructible objects derived category integral coefficients filtered colimit Ext bounded below",
+   "results": "8 hits; ; DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.hasExt_iff, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isLE. No integral constructible pro-etale Ext-continuity theorem among these results.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "unreachable"
+ ],
+ "blueprint_kind": "lemma",
+ "blueprint_order": null,
+ "blueprint_uses": [
+  "det-lem-int-ext-formula",
+  "sk-cor-pe-bounded-continuity",
+  "sk-lem-constructible-ext-continuity"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_snapshot": "main-20261015",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-ext",
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "det-lem-int-ext-continuity",
+  "worker": "stage1",
+  "summary": "Audited the imported six-step continuity proof against the main-20261015 blueprint, the unit route, and every cited node statement. No new nodes are needed: all non-elementary facts used by the six steps are already stated by existing dependencies; the union of step uses equals proof_deps. Checked the long Steps 2–4 for hidden sublemmas and found each is one explicit bounded-model/five-term comparison argument; no additional node is warranted. Maintainer reader (2026-10-17): Step 2 no longer re-proves clause (2) of det-lem-int-ext-formula inline; it cites that clause and only converts its RHom isomorphism into the degree-q Hom identification.",
+  "blueprint": "Step 1 realizes finite-filtration reduction and qcqs hypotheses; Step 2 realizes 'By [det-lem-int-ext-formula](2), Hom(a_!L,K[q])=H^q RGamma(...)' by citing formula clause (2) and taking H^q; Steps 3–4 realize bounded continuity for the two fiber terms by explicit flat and K-injective models; Step 5 realizes the fiber comparison via exact triangles and the five lemma; Step 6 applies finite-filtration devissage.",
+  "tool_uses": [
+   {
+    "node": "det-lem-constructible-ext-continuity-devissage",
+    "why": "The comparison-class closure is the generic triangulated five-lemma argument for finite filtrations; it is used with integral generators supplied by this unit, not the field-only generation consequence."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Noetherian permanence checks the qcqs hypotheses on the strata in the prescribed filtration; it replaces no geometric step."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Noetherian open subschemes ensure that the complementary open and strata are quasi-compact."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Quasi-separatedness of the Noetherian strata is a general scheme tool needed by bounded continuity."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "General qcqs permanence checks the complementary open immersion against the direct-image theorem."
+   },
+   {
+    "node": "lem-sc-source-tor-amplitude-flat-model",
+    "why": "A generic bounded flat representative realizes the derived dual of amplitude [0,1] as an actual complex, so the existing continuity theorem with a termwise lower bound applies."
+   },
+   {
+    "node": "lem-sc-source-kflat-tensor-left-triangulated",
+    "why": "Generic K-flat tensor triangulatedness allows the prescribed closed-support fiber triangle to be tensored with the derived dual."
+   },
+   {
+    "node": "lem-weil-pbc-free-sheaf-flat",
+    "why": "Free abelian sheaves on site objects provide the functorial flat epimorphism required to apply the existing module-object flat-resolution theorem."
+   },
+   {
+    "node": "lem-sfb-modobj-flat-resolutions",
+    "why": "Generic inheritance of functorial flat resolutions supplies a hypothesis of the bounded-flat-model theorem for the relative module tensor."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "General ringed-site AB5 and Grothendieck structure provide exact filtered sheaf colimits and the hypothesis for functorial K-injective resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-functorial-existence",
+    "why": "Functorial resolutions realize the direct-image comparison by one strict diagram of complexes, with no alternative geometric argument."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "The generic adjoint lemma justifies deriving the exact open adjunction in the generator Hom calculation."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "The generic localization bijection identifies maps from the coefficient unit with global cycles modulo boundaries."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic adjoint colimit preservation gives termwise pullback/tensor compatibility with the original cocone."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic right-derived triangulatedness supplies the triangle of derived sections in the unit fiber argument."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "The generic long exact cohomology sequence gives the displayed five consecutive terms of that fiber triangle."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact-functor triangulatedness applies the exact coefficient pullbacks to that same fiber triangle."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "why": "Exact filtered colimits in abelian groups preserve the displayed long exact rows."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "The five lemma is the formal comparison step for the fiber triangle, as required by the unit route."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Only the quadrant and convergence clauses of the generic bounded-below hypercohomology spectral sequence prove that Rj_* preserves the lower cohomological bound."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-lem-constructible-ext-continuity-devissage",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "lem-sc-source-kflat-tensor-left-triangulated",
+  "lem-weil-pbc-free-sheaf-flat",
+  "lem-sfb-modobj-flat-resolutions",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma",
+  "thm-sp-truncation-e2"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-74d131e8a",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-74d131e8a (reviewer sub-agent of L); spot-checked: I read the item, the main-20261015 continuity, formula, bound and unit texts, the unit record, and all 35 cited and 9 statement-dependency nodes. The statement matches the blueprint and the formula node's coefficient category: condensed O_E, the ordinary uncompleted D(Mod_{O_E,X}), Dbc as defined in sk-def-sfb-constructible, and a common termwise lower bound. Nothing is weakened, there are no new nodes, and the item has no duplicate (the constructible-ext-continuity nodes only cover lisse L) and creates no cycle. Step 1: the devissage closure, formula clause (1) and the Noetherian/qcqs chain all hold. Step 3 (2512 chars) is one bounded-flat-model argument: the Z_U functorial flat resolution, a two-term K-flat F, T commuting with colimits, and sections continuity on qcqs S. It may stay. Step 4 (2169 chars) is one explicit model argument: K-injective j_*I(j^*K_i), the lower bound from truncation-e2 (3),(5),(6), the b-1 truncation index (correct), and direct-image continuity. It may stay. Steps 5 and 6: natural triangle, exact five-term rows and the five lemma; correct. FIX: Step 2 (2342 chars) re-proved clause (2) of det-lem-int-ext-formula inline. That clause is an existing node in the same unit, already defines L^vee as RHom, and is what the blueprint proof cites. The corrected Step 2 cites clause (2) applied to K[q] and only converts RHom to Hom/H^q (tensor-RHom adjunction, the K-injective computation, shift compatibility). Tor amplitude [0,1] still comes from det-lem-int-integral-heart-dualizable. def-sfb-module-open-lower-shriek and its adjunction leave proof_deps. I accept the 20 declared tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralExtHomContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralExtHomContinuous",
+  "file": "lean/Sheaf/SixFunctors/IntegralExtHomContinuity.lean",
+  "statement": "theorem integralExtHomContinuous {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (C : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left))) (hC : constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X.left C) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (K : I ⥤ CochainComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)) ℤ) [HasColimit K] (b : ℤ) (hK : ∀ i : I, ∀ r : ℤ, r < b → IsZero ((K.obj i).X r)) (q : ℤ) : IsIso (homContinuityComparison (K ⋙ DerivedCategory.Q) (DerivedCategory.Q.mapCocone (colimit.cocone K)) C q)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-c348f8a50"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c348f8a50",
+  "group": "Q48",
+  "result": "fix",
+  "note": "Read node, 9 stmt deps, source chain (formula lemma, devissage, constructibility modules) and compiled delivered + fixed module via nt_compile.py --json (exit 0, no errors; tool hides warnings). Fixes: F1 H3 Dbc must be sk-def-sfb-constructible's constant-model notion (constantModelBoundedConstructible), not general boundedConstructible; F2 H3 index category was Type u, now Type (u+1) SmallCategory per size convention/devissage; F3 H4 private integralExtHomDiagram/Comparison duplicated landed homContinuityComparison, replaced; F5 H8 step-by-step proof docstring; F6 unused imports replaced. F4: N2 has since landed a sk-def-sfb-module-objects record, so land with --revert-nodes sk-def-sfb-module-objects (item uses Mathlib Mod over condensedRingObj, same as N2's abbrev and siblings). Fix files: fixes/IntegralExtHomContinuity.lean, fixes/det-lem-int-ext-continuity.report.md."
+ }
 }

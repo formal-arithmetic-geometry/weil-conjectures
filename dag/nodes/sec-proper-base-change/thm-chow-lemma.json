@@ -1,534 +1,329 @@
 {
-  "id": "thm-chow-lemma",
-  "blueprint": {
-    "is": "thm-chow-lemma",
-    "from": null,
-    "same_as": null
+ "id": "thm-chow-lemma",
+ "blueprint": {
+  "is": "thm-chow-lemma",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Chow's lemma",
+ "statement": "In the situation of [lem-chow-glue], the morphism\n$\\pi:X'\\to X$ is proper and surjective, and\n\n$$\n \\pi^{-1}(U)\\xrightarrow{\\sim}U\n$$\n\nis an isomorphism.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/thm-chow-lemma.md",
+  "place": "node thm-chow-lemma, order 1061",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01W2"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01W6"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 01IQ"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "lem-chow-glue"
+ ],
+ "proof": [
+  {
+   "text": "*Properness of $\\pi$.* By [lem-chow-preimage] the\nrestrictions $\\pi^{-1}(U_i)\\to U_i$ are proper for every member of the finite\naffine open cover $X=U_1\\cup\\dots\\cup U_m$. Properness is local on the target\n(Stacks Project, Morphisms, Lemma 29.42.3, Tag\n[01W2](https://stacks.math.columbia.edu/tag/01W2): a morphism $g:W\\to S$ is\nproper as soon as there is an open cover $S=\\bigcup_jS_j$ with\n$g^{-1}(S_j)\\to S_j$ proper for all $j$); applying this to $g=\\pi$, $S=X$,\n$S_j=U_j$ shows that $\\pi$ is proper.",
+   "uses": [
+    "lem-chow-preimage"
+   ],
+   "elementary": false
   },
-  "kind": "statement",
-  "title": "Chow's lemma",
-  "statement": "In the situation of [lem-chow-glue], the morphism\n$\\pi:X'\\to X$ is proper and surjective, and\n\n$$\n \\pi^{-1}(U)\\xrightarrow{\\sim}U\n$$\n\nis an isomorphism.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/thm-chow-lemma.md",
-    "place": "node thm-chow-lemma, order 1061",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01W2"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01W6"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 01IQ"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "lem-chow-glue"
-  ],
-  "proof": [
-    {
-      "text": "*Properness of $\\pi$.* By [lem-chow-preimage] the\nrestrictions $\\pi^{-1}(U_i)\\to U_i$ are proper for every member of the finite\naffine open cover $X=U_1\\cup\\dots\\cup U_m$. Properness is local on the target\n(Stacks Project, Morphisms, Lemma 29.42.3, Tag\n[01W2](https://stacks.math.columbia.edu/tag/01W2): a morphism $g:W\\to S$ is\nproper as soon as there is an open cover $S=\\bigcup_jS_j$ with\n$g^{-1}(S_j)\\to S_j$ proper for all $j$); applying this to $g=\\pi$, $S=X$,\n$S_j=U_j$ shows that $\\pi$ is proper.",
-      "uses": [
-        "lem-chow-preimage"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*Surjectivity of $\\pi$.* A proper morphism has closed image (Stacks Project,\nMorphisms, Lemma 29.42.7, Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)). Hence $\\pi(X')\\subseteq X$\nis closed; it contains $U$ (since $\\pi|_U=\\operatorname{id}_U$ by\n[lem-chow-glue]), and $U$ is dense in $X$ (it is\nscheme-theoretically dense after the reduction of\n[lem-chow-graph], hence topologically dense). Thus\n$\\pi(X')=X$, i.e. $\\pi$ is surjective.",
-      "uses": [
-        "lem-chow-glue",
-        "lem-chow-graph"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The isomorphism over $U$.* Identify $U$ with an open subscheme of\n$\\pi^{-1}(U)\\subseteq X'$ via the inclusion of the dense open. We apply Stacks\nProject, Morphisms, Lemma 29.42.7 (Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)) to the diagram whose\ncomposite $U\\to\\pi^{-1}(U)\\to U$ is the identity (hence proper) and whose\nsecond member $\\pi^{-1}(U)\\to U$ is separated over $U$ (the morphism\n$\\pi^{-1}(U)\\to U$ is the base change of the separated morphism $\\pi$, see the\nfirst step of the proof of [lem-chow-preimage]): the\nlemma yields that $U\\to\\pi^{-1}(U)$ is proper, hence closed, so $U$ is closed\nin $\\pi^{-1}(U)$. On the other hand $U$ is scheme-theoretically dense in\n$\\widetilde X$ by [lem-chow-graph] (i), and\n$\\pi^{-1}(U)\\subseteq\\widetilde X$ is open, so $U$ is dense in $\\pi^{-1}(U)$.\nA closed and dense subscheme of a scheme coincides with it: $U=\\pi^{-1}(U)$\ninside $X'$, and $\\pi^{-1}(U)\\to U$ is the isomorphism inverse to the\ninclusion.",
-      "uses": [
-        "lem-chow-preimage",
-        "lem-chow-graph"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The closed immersion $i$.* The composed morphism $i$ is an immersion:\n$X'\\subseteq\\widetilde X$ is open ($X'=\\bigcup_iV_i$ with the\n$V_i\\subseteq\\widetilde X$ open), and the remaining factors are closed\nimmersions by [lem-chow-graph] (iii) and\n[lem-chow-segre]; a composite of an open immersion\nand closed immersions is an immersion. Its source is proper over $Y$: $\\pi$ is\nproper by the first paragraph and $f:X\\to Y$ is proper by hypothesis, so\n$f\\circ\\pi:X'\\to Y$ is the composite of two proper morphisms, hence proper. By\nTag [01W6](https://stacks.math.columbia.edu/tag/01W6) once more, now with\n$X=X'$, $S=Y$, $Y'=\\mathbf P^N_Y$ (separated over $Y$, being projective), the\nmorphism $X'\\to\\mathbf P^N_Y=i$ is proper. A proper immersion is a closed\nimmersion (Stacks Project, Schemes, Lemma 26.10.4, Tag\n[01IQ](https://stacks.math.columbia.edu/tag/01IQ): an immersion is a closed\nimmersion iff its image is closed; here the image is closed by properness, Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)). Hence $i$ is a closed\nimmersion.",
-      "uses": [
-        "lem-chow-graph",
-        "lem-chow-segre"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "*The factorization.* Both $f\\circ\\pi$ and the composite $X'\\xrightarrow{i}\n\\mathbf P^N_Y\\to Y$ are equal to the structure morphism of the $Y$-scheme\n$X'$: all schemes involved are defined over $Y$ and every morphism displayed\nis a morphism over $Y$ (the open immersions $V_i\\subseteq\\widetilde X$, the\nclosed immersions and the projections $p_i$ are all over $Y$, and $\\pi$ is a\nmorphism of $Y$-schemes by [lem-chow-glue]). Hence\n$f\\circ\\pi=p\\circ i$ with $p:\\mathbf P^N_Y\\to Y$.",
-      "uses": [
-        "lem-chow-glue"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "lem-chow-preimage",
+  {
+   "text": "*Surjectivity of $\\pi$.* A proper morphism has closed image (Stacks Project,\nMorphisms, Lemma 29.42.7, Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)). Hence $\\pi(X')\\subseteq X$\nis closed; it contains $U$ (since $\\pi|_U=\\operatorname{id}_U$ by\n[lem-chow-glue]), and $U$ is dense in $X$ (it is\nscheme-theoretically dense after the reduction of\n[lem-chow-graph], hence topologically dense). Thus\n$\\pi(X')=X$, i.e. $\\pi$ is surjective.",
+   "uses": [
     "lem-chow-glue",
+    "lem-chow-graph"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The isomorphism over $U$.* Identify $U$ with an open subscheme of\n$\\pi^{-1}(U)\\subseteq X'$ via the inclusion of the dense open. We apply Stacks\nProject, Morphisms, Lemma 29.42.7 (Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)) to the diagram whose\ncomposite $U\\to\\pi^{-1}(U)\\to U$ is the identity (hence proper) and whose\nsecond member $\\pi^{-1}(U)\\to U$ is separated over $U$ (the morphism\n$\\pi^{-1}(U)\\to U$ is the base change of the separated morphism $\\pi$, see the\nfirst step of the proof of [lem-chow-preimage]): the\nlemma yields that $U\\to\\pi^{-1}(U)$ is proper, hence closed, so $U$ is closed\nin $\\pi^{-1}(U)$. On the other hand $U$ is scheme-theoretically dense in\n$\\widetilde X$ by [lem-chow-graph] (i), and\n$\\pi^{-1}(U)\\subseteq\\widetilde X$ is open, so $U$ is dense in $\\pi^{-1}(U)$.\nA closed and dense subscheme of a scheme coincides with it: $U=\\pi^{-1}(U)$\ninside $X'$, and $\\pi^{-1}(U)\\to U$ is the isomorphism inverse to the\ninclusion.",
+   "uses": [
+    "lem-chow-preimage",
+    "lem-chow-graph"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "*The closed immersion $i$.* The composed morphism $i$ is an immersion:\n$X'\\subseteq\\widetilde X$ is open ($X'=\\bigcup_iV_i$ with the\n$V_i\\subseteq\\widetilde X$ open), and the remaining factors are closed\nimmersions by [lem-chow-graph] (iii) and\n[lem-chow-segre]; a composite of an open immersion\nand closed immersions is an immersion. Its source is proper over $Y$: $\\pi$ is\nproper by the first paragraph and $f:X\\to Y$ is proper by hypothesis, so\n$f\\circ\\pi:X'\\to Y$ is the composite of two proper morphisms, hence proper. By\nTag [01W6](https://stacks.math.columbia.edu/tag/01W6) once more, now with\n$X=X'$, $S=Y$, $Y'=\\mathbf P^N_Y$ (separated over $Y$, being projective), the\nmorphism $X'\\to\\mathbf P^N_Y=i$ is proper. A proper immersion is a closed\nimmersion (Stacks Project, Schemes, Lemma 26.10.4, Tag\n[01IQ](https://stacks.math.columbia.edu/tag/01IQ): an immersion is a closed\nimmersion iff its image is closed; here the image is closed by properness, Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)). Hence $i$ is a closed\nimmersion.",
+   "uses": [
     "lem-chow-graph",
     "lem-chow-segre"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/thm-chow-lemma.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "detailed_form",
-    "two_proofs",
-    "padded_uses",
-    "proof_cites_literature",
-    "lean_multiple"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 1061,
-  "blueprint_uses": [
-    "def-nagata-affine-proj",
-    "def-nagata-dense-compactification",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-scheme-image-factor",
-    "def-nagata-scheme-theoretic-closure",
-    "def-nagata-scheme-theoretic-image",
-    "def-weil-pbc-scheme-conventions",
-    "lem-chow-agree-on-dense-open",
-    "lem-chow-closed-model",
-    "lem-chow-glue",
-    "lem-chow-graph",
-    "lem-chow-preimage",
-    "lem-chow-scheme-theoretic-closure",
-    "lem-chow-segre",
-    "lem-chow-tuple-immersion",
-    "lem-weil-pbc-proper-closed-image",
-    "lem-weil-pbc-proper-composition",
-    "lem-weil-pbc-proper-immersion-closed",
-    "lemma-nagata-dense-affine-cover-exists",
-    "lemma-nagata-dense-flat-pullback",
-    "lemma-nagata-immersion-open-in-scheme-image",
-    "lemma-nagata-projective-space-base-change-proper",
-    "lemma-nagata-projective-target-local",
-    "lemma-nagata-scheme-image-ideal-qc"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-    "declaration": "AlgebraicGeometry.ChowModification",
-    "branch": "master",
-    "line": 117,
-    "sorry_free": false,
-    "body_lines": 1,
-    "others": [
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-        "declaration": "AlgebraicGeometry.ChowModification.exists_dense_isIso_restrict",
-        "branch": "master",
-        "line": 171,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-        "declaration": "AlgebraicGeometry.ChowModification.index",
-        "branch": "master",
-        "line": 125,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-        "declaration": "AlgebraicGeometry.ChowModification.isImmersion_toProjectiveSpace",
-        "branch": "master",
-        "line": 148,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-        "declaration": "AlgebraicGeometry.ChowModification.isProper_modificationMap",
-        "branch": "master",
-        "line": 141,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-        "declaration": "AlgebraicGeometry.ChowModification.modificationMap",
-        "branch": "master",
-        "line": 134,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-        "declaration": "AlgebraicGeometry.ChowModification.surjective_modificationMap",
-        "branch": "master",
-        "line": 144,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-        "declaration": "AlgebraicGeometry.ChowModification.toProjectiveSpace",
-        "branch": "master",
-        "line": 138,
-        "sorry_free": false,
-        "body_lines": 1
-      },
-      {
-        "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-        "declaration": "AlgebraicGeometry.ChowModification.toProjectiveSpace_over",
-        "branch": "master",
-        "line": 163,
-        "sorry_free": false,
-        "body_lines": 1
-      }
-    ]
-  },
-  "blueprint_lean": [
-    "AlgebraicGeometry.ChowModification",
-    "AlgebraicGeometry.ChowModification.exists_dense_isIso_restrict",
-    "AlgebraicGeometry.ChowModification.index",
-    "AlgebraicGeometry.ChowModification.isImmersion_toProjectiveSpace",
-    "AlgebraicGeometry.ChowModification.isProper_modificationMap",
-    "AlgebraicGeometry.ChowModification.modificationMap",
-    "AlgebraicGeometry.ChowModification.surjective_modificationMap",
-    "AlgebraicGeometry.ChowModification.toProjectiveSpace",
-    "AlgebraicGeometry.ChowModification.toProjectiveSpace_over"
-  ],
-  "proof_split_by": "labels",
-  "blueprint_sketch": [
-    {
-      "statement": "Let $S$ be a noetherian scheme and let $f\\colon X\\to S$ be a separated morphism\nof finite type. Then there are an integer $n\\geq0$, a scheme $X'$ over $S$, a\nmorphism $\\pi\\colon X'\\to X$ and an immersion $i\\colon X'\\to\\mathbf P^n_S$ of\n$S$-schemes such that\n\n1. $\\pi$ is proper and surjective, and\n1. there is a dense open subscheme $U\\subseteq X$ such that\n$\\pi^{-1}(U)\\to U$ is an isomorphism.\n\nThe formalisation makes $X'$, the index set of the homogeneous coordinates of\nthe ambient projective space, $\\pi$ and $i$ four separate definitions rather\nthan existentially bound data, so that a consumer gets properness, surjectivity\nand the immersion property by typeclass inference; all four are read off a\nsingle auxiliary choice, `ChowModification.data`. Following\n[def-nagata-projective-space-base-change], $\\mathbf P^n_S$ is\n$\\mathbf P(N;S)$ for a finite type $N$ of homogeneous coordinates. Finally,\n[lem-chow-graph] needs the covering of Step 1 to be nonempty; this costs\nnothing, since $m=0$ happens only for $X$ empty, and one may then replace the\ncovering by the one-element covering $\\{X^{*}\\}$.",
-      "proof": "By the scheme conventions [def-weil-pbc-scheme-conventions] (Stacks 01T6, 0BA8, 01T8, 01KV) the scheme $X$ is\nnoetherian and has finitely many irreducible components, and it is\nquasi-compact and quasi-separated.\n\n*Step 1: the cover.* By [lemma-nagata-dense-affine-cover-exists] there is a finite\naffine open covering $X=U_1\\cup\\dots\\cup U_m$ whose members all contain the\ngeneric points of the irreducible components of $X$, and\n$U:=U_1\\cap\\dots\\cap U_m$ is a dense open subscheme of $X$.\n\n*Step 2: reduction to $U$ scheme-theoretically dense.* Let\n$X^{*}\\subseteq X$ be the scheme-theoretic image of $U\\to X$, as in\n[lem-chow-scheme-theoretic-closure]. Then $X^{*}\\to S$ is again separated\nof finite type, $X^{*}=\\bigcup_iU_i^{*}$ is a finite affine open covering with\n$\\bigcap_iU_i^{*}=U$, and $U$ is scheme-theoretically dense in $X^{*}$.\nIt suffices to produce, for $X^{*}$ with the covering $\\{U_i^{*}\\}$ and the\nsame open $U$, a proper surjective morphism $\\pi^{*}\\colon X'\\to X^{*}$ and an\nimmersion $X'\\to\\mathbf P^n_S$ such that $(\\pi^{*})^{-1}(U)\\to U$ is an\nisomorphism; this is exactly what Steps 3–7 below construct. Indeed,\n$X^{*}\\to X$ is a surjective closed immersion, hence proper and surjective, and\nit is an isomorphism over $U$; so $\\pi:=(X^{*}\\to X)\\circ\\pi^{*}$ is proper and\nsurjective, $U$ is a dense open subscheme of $X$, and\n$\\pi^{-1}(U)=(\\pi^{*})^{-1}(U)\\to U$ is an isomorphism. We may therefore\nreplace $X$ by $X^{*}$ and $U_i$ by $U_i^{*}$, and assume from now on that $U$\nis scheme-theoretically dense in $X$.\n\n*Step 3: the graph.* Apply [lem-chow-graph] to obtain immersions\n$j_i\\colon U_i\\to\\mathbf P^{n_i}_S$, their closed models $Z_i$, the\nscheme-theoretic image $Z$ of $j=(j_1|_U,\\dots,j_m|_U)$, the proper\nprojections $p_i\\colon Z\\to Z_i$, and the closed immersion\n$Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$.\n\n*Step 4: the modification.* Put $V_i:=p_i^{-1}(U_i)$ and\n$X':=V_1\\cup\\dots\\cup V_m$. By [lem-chow-glue] the morphisms\n$p_i|_{V_i}$ glue to $\\pi\\colon X'\\to X$ with $\\pi|_U=\\mathrm{id}_U$, and by\n[lem-chow-preimage] we have $\\pi^{-1}(U_i)=V_i$ with\n$\\pi^{-1}(U_i)\\to U_i$ proper.\n\n*Step 5: $\\pi$ is proper and surjective.* Properness is local on the\ntarget by 01W2, and $X=\\bigcup_iU_i$ is an open covering with\n$\\pi^{-1}(U_i)\\to U_i$ proper; hence $\\pi$ is proper. In particular\n$\\pi(X')\\subseteq X$ is closed. It contains $U$ because\n$\\pi|_U=\\mathrm{id}_U$, and $U$ is dense in $X$; therefore $\\pi(X')=X$.\n\n*Step 6: $\\pi$ is an isomorphism over $U$.* Repeat the argument of\n[lem-chow-preimage] with $U_i$ replaced by $U$: the identity\n$U\\to U$ is proper, $\\pi^{-1}(U)\\to U$ is separated, so\n01W6 shows that $U\\to\\pi^{-1}(U)$ is universally closed and\nhence $U$ is closed in $\\pi^{-1}(U)$; and $U$ is dense in the open subscheme\n$\\pi^{-1}(U)\\subseteq Z$. Thus $U=\\pi^{-1}(U)$ and $\\pi^{-1}(U)\\to U$ is the\nidentity.\n\n*Step 7: the immersion.* Put $N=\\prod_i(n_i+1)-1$. Composing the closed\nimmersion $Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ of\n[lem-chow-graph](1) with the Segre embedding, which is a closed\nimmersion by [lem-chow-segre], gives a closed immersion\n$Z\\to\\mathbf P^N_S$. The subscheme $X'\\subseteq Z$ is open, so the composition\n$i\\colon X'\\to\\mathbf P^N_S$ is an immersion. Taking $n:=N$ completes the\nproof.",
-      "cites": [
-        "def-nagata-projective-space-base-change",
-        "lem-chow-graph",
-        "def-weil-pbc-scheme-conventions",
-        "lemma-nagata-dense-affine-cover-exists",
-        "lem-chow-scheme-theoretic-closure",
-        "lem-chow-glue",
-        "lem-chow-preimage",
-        "lem-chow-segre"
-      ]
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "sorry_here",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.ChowModification",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            101,
-            119
-          ],
-          "kind": "def",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.exists_dense_isIso_restrict",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            167,
-            173
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.index",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            123,
-            127
-          ],
-          "kind": "def",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.isImmersion_toProjectiveSpace",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            146,
-            148
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.isProper_modificationMap",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            140,
-            141
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.modificationMap",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            132,
-            134
-          ],
-          "kind": "def",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.surjective_modificationMap",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            143,
-            144
-          ],
-          "kind": "theorem",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.toProjectiveSpace",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            136,
-            138
-          ],
-          "kind": "def",
-          "sorry": true
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.toProjectiveSpace_over",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            150,
-            165
-          ],
-          "kind": "theorem",
-          "sorry": true
-        }
-      ],
-      "missing": [],
-      "open": []
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.ChowModification",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            289,
-            307
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.exists_dense_isIso_restrict",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            356,
-            362
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.index",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            311,
-            315
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.isImmersion_toProjectiveSpace",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            334,
-            337
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.isProper_modificationMap",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            328,
-            329
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.modificationMap",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            320,
-            322
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.surjective_modificationMap",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            331,
-            332
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.toProjectiveSpace",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            324,
-            326
-          ],
-          "kind": "def",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.toProjectiveSpace_over",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            339,
-            354
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.ChowModification.nonempty_data",
-          "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
-          "lines": [
-            259,
-            282
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-chow",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $S$ be a noetherian scheme and let $f\\colon X\\to S$ be a separated morphism\nof finite type. Then there are a finite set $N$, a scheme $X'$, a\nmorphism $\\pi\\colon X'\\to X$ and an immersion $i\\colon X'\\to\\mathbf P^N_S$\ninto the projective space over $S$ with homogeneous coordinates indexed by $N$\n[def-nagata-projective-space-base-change], such that $i$ followed by the\nstructure morphism $\\mathbf P^N_S\\to S$ equals $f\\circ\\pi$, and\n\n1. $\\pi$ is proper and surjective, and\n1. there is a dense open subscheme $U\\subseteq X$ such that\n$\\pi^{-1}(U)\\to U$ is an isomorphism.",
-    "proof": [
-      {
-        "text": "By the scheme conventions [def-weil-pbc-scheme-conventions] (Stacks 01T6, 0BA8, 01T8, 01KV) the scheme $X$ is\nnoetherian and has finitely many irreducible components, and it is\nquasi-compact and quasi-separated.",
-        "uses": [
-          "def-weil-pbc-scheme-conventions"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 1: the cover.* By [lemma-nagata-dense-affine-cover-exists] there is a finite\naffine open covering $X=U_1\\cup\\dots\\cup U_m$ whose members all contain the\ngeneric points of the irreducible components of $X$, and\n$U:=U_1\\cap\\dots\\cap U_m$ is a dense open subscheme of $X$.",
-        "uses": [
-          "lemma-nagata-dense-affine-cover-exists"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 2: reduction to $U$ scheme-theoretically dense.* Let\n$X^{*}\\subseteq X$ be the scheme-theoretic image of $U\\to X$, as in\n[lem-chow-scheme-theoretic-closure]. Then $X^{*}\\to S$ is again separated\nof finite type, $X^{*}=\\bigcup_iU_i^{*}$ is a finite affine open covering with\n$\\bigcap_iU_i^{*}=U$, and $U$ is scheme-theoretically dense in $X^{*}$.\nIt suffices to produce, for $X^{*}$ with the covering $\\{U_i^{*}\\}$ and the\nsame open $U$, a proper surjective morphism $\\pi^{*}\\colon X'\\to X^{*}$ and an\nimmersion $X'\\to\\mathbf P^n_S$ such that $(\\pi^{*})^{-1}(U)\\to U$ is an\nisomorphism; this is exactly what Steps 3–7 below construct. Indeed,\n$X^{*}\\to X$ is a surjective closed immersion, hence proper and surjective, and\nit is an isomorphism over $U$; so $\\pi:=(X^{*}\\to X)\\circ\\pi^{*}$ is proper and\nsurjective, $U$ is a dense open subscheme of $X$, and\n$\\pi^{-1}(U)=(\\pi^{*})^{-1}(U)\\to U$ is an isomorphism. We may therefore\nreplace $X$ by $X^{*}$ and $U_i$ by $U_i^{*}$, and assume from now on that $U$\nis scheme-theoretically dense in $X$. (The covering may be assumed nonempty,\nas [lem-chow-graph] requires: $m=0$ happens only for $X$ empty, and one may then\nreplace the covering by the one-element covering $\\{X^{*}\\}$.)",
-        "uses": [
-          "lem-chow-scheme-theoretic-closure",
-          "lem-chow-graph"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 3: the graph.* Apply [lem-chow-graph] to obtain immersions\n$j_i\\colon U_i\\to\\mathbf P^{n_i}_S$, their closed models $Z_i$, the\nscheme-theoretic image $Z$ of $j=(j_1|_U,\\dots,j_m|_U)$, the proper\nprojections $p_i\\colon Z\\to Z_i$, and the closed immersion\n$Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$.",
-        "uses": [
-          "lem-chow-graph"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 4: the modification.* Put $V_i:=p_i^{-1}(U_i)$ and\n$X':=V_1\\cup\\dots\\cup V_m$. By [lem-chow-glue] the morphisms\n$p_i|_{V_i}$ glue to $\\pi\\colon X'\\to X$ with $\\pi|_U=\\mathrm{id}_U$, and by\n[lem-chow-preimage] we have $\\pi^{-1}(U_i)=V_i$ with\n$\\pi^{-1}(U_i)\\to U_i$ proper.",
-        "uses": [
-          "lem-chow-glue",
-          "lem-chow-preimage"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 5: $\\pi$ is proper and surjective.* Properness is local on the\ntarget by 01W2, and $X=\\bigcup_iU_i$ is an open covering with\n$\\pi^{-1}(U_i)\\to U_i$ proper; hence $\\pi$ is proper. In particular\n$\\pi(X')\\subseteq X$ is closed. It contains $U$ because\n$\\pi|_U=\\mathrm{id}_U$, and $U$ is dense in $X$; therefore $\\pi(X')=X$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "*Step 6: $\\pi$ is an isomorphism over $U$.* Repeat the argument of\n[lem-chow-preimage] with $U_i$ replaced by $U$: the identity\n$U\\to U$ is proper, $\\pi^{-1}(U)\\to U$ is separated, so\n01W6 shows that $U\\to\\pi^{-1}(U)$ is universally closed and\nhence $U$ is closed in $\\pi^{-1}(U)$; and $U$ is dense in the open subscheme\n$\\pi^{-1}(U)\\subseteq Z$. Thus $U=\\pi^{-1}(U)$ and $\\pi^{-1}(U)\\to U$ is the\nidentity.",
-        "uses": [
-          "lem-chow-preimage"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Step 7: the immersion.* Put $N=\\prod_i(n_i+1)-1$. Composing the closed\nimmersion $Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ of\n[lem-chow-graph](1) with the Segre embedding, which is a closed\nimmersion by [lem-chow-segre], gives a closed immersion\n$Z\\to\\mathbf P^N_S$. The subscheme $X'\\subseteq Z$ is open, so the composition\n$i\\colon X'\\to\\mathbf P^N_S$ is an immersion. Taking $n:=N$ completes the\nproof.",
-        "uses": [
-          "lem-chow-graph",
-          "lem-chow-segre"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Properness of $\\pi$.* By [lem-chow-preimage] the\nrestrictions $\\pi^{-1}(U_i)\\to U_i$ are proper for every member of the finite\naffine open cover $X=U_1\\cup\\dots\\cup U_m$. Properness is local on the target\n(Stacks Project, Morphisms, Lemma 29.42.3, Tag\n[01W2](https://stacks.math.columbia.edu/tag/01W2): a morphism $g:W\\to S$ is\nproper as soon as there is an open cover $S=\\bigcup_jS_j$ with\n$g^{-1}(S_j)\\to S_j$ proper for all $j$); applying this to $g=\\pi$, $S=X$,\n$S_j=U_j$ shows that $\\pi$ is proper.",
-        "uses": [
-          "lem-chow-preimage"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*Surjectivity of $\\pi$.* A proper morphism has closed image (Stacks Project,\nMorphisms, Lemma 29.42.7, Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)). Hence $\\pi(X')\\subseteq X$\nis closed; it contains $U$ (since $\\pi|_U=\\operatorname{id}_U$ by\n[lem-chow-glue]), and $U$ is dense in $X$ (it is\nscheme-theoretically dense after the reduction of\n[lem-chow-graph], hence topologically dense). Thus\n$\\pi(X')=X$, i.e. $\\pi$ is surjective.",
-        "uses": [
-          "lem-chow-glue",
-          "lem-chow-graph"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*The isomorphism over $U$.* Identify $U$ with an open subscheme of\n$\\pi^{-1}(U)\\subseteq X'$ via the inclusion of the dense open. We apply Stacks\nProject, Morphisms, Lemma 29.42.7 (Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)) to the diagram whose\ncomposite $U\\to\\pi^{-1}(U)\\to U$ is the identity (hence proper) and whose\nsecond member $\\pi^{-1}(U)\\to U$ is separated over $U$ (the morphism\n$\\pi^{-1}(U)\\to U$ is the base change of the separated morphism $\\pi$, see the\nfirst step of the proof of [lem-chow-preimage]): the\nlemma yields that $U\\to\\pi^{-1}(U)$ is proper, hence closed, so $U$ is closed\nin $\\pi^{-1}(U)$. On the other hand $U$ is scheme-theoretically dense in\n$\\widetilde X$ by [lem-chow-graph] (i), and\n$\\pi^{-1}(U)\\subseteq\\widetilde X$ is open, so $U$ is dense in $\\pi^{-1}(U)$.\nA closed and dense subscheme of a scheme coincides with it: $U=\\pi^{-1}(U)$\ninside $X'$, and $\\pi^{-1}(U)\\to U$ is the isomorphism inverse to the\ninclusion.",
-        "uses": [
-          "lem-chow-preimage",
-          "lem-chow-graph"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*The closed immersion $i$.* The composed morphism $i$ is an immersion:\n$X'\\subseteq\\widetilde X$ is open ($X'=\\bigcup_iV_i$ with the\n$V_i\\subseteq\\widetilde X$ open), and the remaining factors are closed\nimmersions by [lem-chow-graph] (iii) and\n[lem-chow-segre]; a composite of an open immersion\nand closed immersions is an immersion. Its source is proper over $Y$: $\\pi$ is\nproper by the first paragraph and $f:X\\to Y$ is proper by hypothesis, so\n$f\\circ\\pi:X'\\to Y$ is the composite of two proper morphisms, hence proper. By\nTag [01W6](https://stacks.math.columbia.edu/tag/01W6) once more, now with\n$X=X'$, $S=Y$, $Y'=\\mathbf P^N_Y$ (separated over $Y$, being projective), the\nmorphism $X'\\to\\mathbf P^N_Y=i$ is proper. A proper immersion is a closed\nimmersion (Stacks Project, Schemes, Lemma 26.10.4, Tag\n[01IQ](https://stacks.math.columbia.edu/tag/01IQ): an immersion is a closed\nimmersion iff its image is closed; here the image is closed by properness, Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)). Hence $i$ is a closed\nimmersion.",
-        "uses": [
-          "lem-chow-graph",
-          "lem-chow-segre"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "*The factorization.* Both $f\\circ\\pi$ and the composite $X'\\xrightarrow{i}\n\\mathbf P^N_Y\\to Y$ are equal to the structure morphism of the $Y$-scheme\n$X'$: all schemes involved are defined over $Y$ and every morphism displayed\nis a morphism over $Y$ (the open immersions $V_i\\subseteq\\widetilde X$, the\nclosed immersions and the projections $p_i$ are all over $Y$, and $\\pi$ is a\nmorphism of $Y$-schemes by [lem-chow-glue]). Hence\n$f\\circ\\pi=p\\circ i$ with $p:\\mathbf P^N_Y\\to Y$.",
-        "uses": [
-          "lem-chow-glue"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "*The factorization.* Both $f\\circ\\pi$ and the composite $X'\\xrightarrow{i}\n\\mathbf P^N_Y\\to Y$ are equal to the structure morphism of the $Y$-scheme\n$X'$: all schemes involved are defined over $Y$ and every morphism displayed\nis a morphism over $Y$ (the open immersions $V_i\\subseteq\\widetilde X$, the\nclosed immersions and the projections $p_i$ are all over $Y$, and $\\pi$ is a\nmorphism of $Y$-schemes by [lem-chow-glue]). Hence\n$f\\circ\\pi=p\\circ i$ with $p:\\mathbf P^N_Y\\to Y$.",
+   "uses": [
+    "lem-chow-glue"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "lem-chow-preimage",
+  "lem-chow-glue",
+  "lem-chow-graph",
+  "lem-chow-segre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-chow/thm-chow-lemma.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [
+  "detailed_form",
+  "two_proofs",
+  "padded_uses",
+  "proof_cites_literature",
+  "lean_multiple"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 1061,
+ "blueprint_uses": [
+  "def-nagata-affine-proj",
+  "def-nagata-dense-compactification",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-scheme-image-factor",
+  "def-nagata-scheme-theoretic-closure",
+  "def-nagata-scheme-theoretic-image",
+  "def-weil-pbc-scheme-conventions",
+  "lem-chow-agree-on-dense-open",
+  "lem-chow-closed-model",
+  "lem-chow-glue",
+  "lem-chow-graph",
+  "lem-chow-preimage",
+  "lem-chow-scheme-theoretic-closure",
+  "lem-chow-segre",
+  "lem-chow-tuple-immersion",
+  "lem-weil-pbc-proper-closed-image",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-immersion-closed",
+  "lemma-nagata-dense-affine-cover-exists",
+  "lemma-nagata-dense-flat-pullback",
+  "lemma-nagata-immersion-open-in-scheme-image",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-projective-target-local",
+  "lemma-nagata-scheme-image-ideal-qc"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+  "declaration": "AlgebraicGeometry.ChowModification",
+  "branch": "master",
+  "line": 117,
+  "sorry_free": false,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+    "declaration": "AlgebraicGeometry.ChowModification.exists_dense_isIso_restrict",
+    "branch": "master",
+    "line": 171,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+    "declaration": "AlgebraicGeometry.ChowModification.index",
+    "branch": "master",
+    "line": 125,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+    "declaration": "AlgebraicGeometry.ChowModification.isImmersion_toProjectiveSpace",
+    "branch": "master",
+    "line": 148,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+    "declaration": "AlgebraicGeometry.ChowModification.isProper_modificationMap",
+    "branch": "master",
+    "line": 141,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+    "declaration": "AlgebraicGeometry.ChowModification.modificationMap",
+    "branch": "master",
+    "line": 134,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+    "declaration": "AlgebraicGeometry.ChowModification.surjective_modificationMap",
+    "branch": "master",
+    "line": 144,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+    "declaration": "AlgebraicGeometry.ChowModification.toProjectiveSpace",
+    "branch": "master",
+    "line": 138,
+    "sorry_free": false,
+    "body_lines": 1
+   },
+   {
+    "module": "WeilConjectures.AlgebraicGeometry.ChowLemma",
+    "declaration": "AlgebraicGeometry.ChowModification.toProjectiveSpace_over",
+    "branch": "master",
+    "line": 163,
+    "sorry_free": false,
+    "body_lines": 1
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.ChowModification",
+  "AlgebraicGeometry.ChowModification.exists_dense_isIso_restrict",
+  "AlgebraicGeometry.ChowModification.index",
+  "AlgebraicGeometry.ChowModification.isImmersion_toProjectiveSpace",
+  "AlgebraicGeometry.ChowModification.isProper_modificationMap",
+  "AlgebraicGeometry.ChowModification.modificationMap",
+  "AlgebraicGeometry.ChowModification.surjective_modificationMap",
+  "AlgebraicGeometry.ChowModification.toProjectiveSpace",
+  "AlgebraicGeometry.ChowModification.toProjectiveSpace_over"
+ ],
+ "proof_split_by": "labels",
+ "blueprint_sketch": [
+  {
+   "statement": "Let $S$ be a noetherian scheme and let $f\\colon X\\to S$ be a separated morphism\nof finite type. Then there are an integer $n\\geq0$, a scheme $X'$ over $S$, a\nmorphism $\\pi\\colon X'\\to X$ and an immersion $i\\colon X'\\to\\mathbf P^n_S$ of\n$S$-schemes such that\n\n1. $\\pi$ is proper and surjective, and\n1. there is a dense open subscheme $U\\subseteq X$ such that\n$\\pi^{-1}(U)\\to U$ is an isomorphism.\n\nThe formalisation makes $X'$, the index set of the homogeneous coordinates of\nthe ambient projective space, $\\pi$ and $i$ four separate definitions rather\nthan existentially bound data, so that a consumer gets properness, surjectivity\nand the immersion property by typeclass inference; all four are read off a\nsingle auxiliary choice, `ChowModification.data`. Following\n[def-nagata-projective-space-base-change], $\\mathbf P^n_S$ is\n$\\mathbf P(N;S)$ for a finite type $N$ of homogeneous coordinates. Finally,\n[lem-chow-graph] needs the covering of Step 1 to be nonempty; this costs\nnothing, since $m=0$ happens only for $X$ empty, and one may then replace the\ncovering by the one-element covering $\\{X^{*}\\}$.",
+   "proof": "By the scheme conventions [def-weil-pbc-scheme-conventions] (Stacks 01T6, 0BA8, 01T8, 01KV) the scheme $X$ is\nnoetherian and has finitely many irreducible components, and it is\nquasi-compact and quasi-separated.\n\n*Step 1: the cover.* By [lemma-nagata-dense-affine-cover-exists] there is a finite\naffine open covering $X=U_1\\cup\\dots\\cup U_m$ whose members all contain the\ngeneric points of the irreducible components of $X$, and\n$U:=U_1\\cap\\dots\\cap U_m$ is a dense open subscheme of $X$.\n\n*Step 2: reduction to $U$ scheme-theoretically dense.* Let\n$X^{*}\\subseteq X$ be the scheme-theoretic image of $U\\to X$, as in\n[lem-chow-scheme-theoretic-closure]. Then $X^{*}\\to S$ is again separated\nof finite type, $X^{*}=\\bigcup_iU_i^{*}$ is a finite affine open covering with\n$\\bigcap_iU_i^{*}=U$, and $U$ is scheme-theoretically dense in $X^{*}$.\nIt suffices to produce, for $X^{*}$ with the covering $\\{U_i^{*}\\}$ and the\nsame open $U$, a proper surjective morphism $\\pi^{*}\\colon X'\\to X^{*}$ and an\nimmersion $X'\\to\\mathbf P^n_S$ such that $(\\pi^{*})^{-1}(U)\\to U$ is an\nisomorphism; this is exactly what Steps 3–7 below construct. Indeed,\n$X^{*}\\to X$ is a surjective closed immersion, hence proper and surjective, and\nit is an isomorphism over $U$; so $\\pi:=(X^{*}\\to X)\\circ\\pi^{*}$ is proper and\nsurjective, $U$ is a dense open subscheme of $X$, and\n$\\pi^{-1}(U)=(\\pi^{*})^{-1}(U)\\to U$ is an isomorphism. We may therefore\nreplace $X$ by $X^{*}$ and $U_i$ by $U_i^{*}$, and assume from now on that $U$\nis scheme-theoretically dense in $X$.\n\n*Step 3: the graph.* Apply [lem-chow-graph] to obtain immersions\n$j_i\\colon U_i\\to\\mathbf P^{n_i}_S$, their closed models $Z_i$, the\nscheme-theoretic image $Z$ of $j=(j_1|_U,\\dots,j_m|_U)$, the proper\nprojections $p_i\\colon Z\\to Z_i$, and the closed immersion\n$Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$.\n\n*Step 4: the modification.* Put $V_i:=p_i^{-1}(U_i)$ and\n$X':=V_1\\cup\\dots\\cup V_m$. By [lem-chow-glue] the morphisms\n$p_i|_{V_i}$ glue to $\\pi\\colon X'\\to X$ with $\\pi|_U=\\mathrm{id}_U$, and by\n[lem-chow-preimage] we have $\\pi^{-1}(U_i)=V_i$ with\n$\\pi^{-1}(U_i)\\to U_i$ proper.\n\n*Step 5: $\\pi$ is proper and surjective.* Properness is local on the\ntarget by 01W2, and $X=\\bigcup_iU_i$ is an open covering with\n$\\pi^{-1}(U_i)\\to U_i$ proper; hence $\\pi$ is proper. In particular\n$\\pi(X')\\subseteq X$ is closed. It contains $U$ because\n$\\pi|_U=\\mathrm{id}_U$, and $U$ is dense in $X$; therefore $\\pi(X')=X$.\n\n*Step 6: $\\pi$ is an isomorphism over $U$.* Repeat the argument of\n[lem-chow-preimage] with $U_i$ replaced by $U$: the identity\n$U\\to U$ is proper, $\\pi^{-1}(U)\\to U$ is separated, so\n01W6 shows that $U\\to\\pi^{-1}(U)$ is universally closed and\nhence $U$ is closed in $\\pi^{-1}(U)$; and $U$ is dense in the open subscheme\n$\\pi^{-1}(U)\\subseteq Z$. Thus $U=\\pi^{-1}(U)$ and $\\pi^{-1}(U)\\to U$ is the\nidentity.\n\n*Step 7: the immersion.* Put $N=\\prod_i(n_i+1)-1$. Composing the closed\nimmersion $Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ of\n[lem-chow-graph](1) with the Segre embedding, which is a closed\nimmersion by [lem-chow-segre], gives a closed immersion\n$Z\\to\\mathbf P^N_S$. The subscheme $X'\\subseteq Z$ is open, so the composition\n$i\\colon X'\\to\\mathbf P^N_S$ is an immersion. Taking $n:=N$ completes the\nproof.",
+   "cites": [
+    "def-nagata-projective-space-base-change",
+    "lem-chow-graph",
+    "def-weil-pbc-scheme-conventions",
+    "lemma-nagata-dense-affine-cover-exists",
+    "lem-chow-scheme-theoretic-closure",
+    "lem-chow-glue",
+    "lem-chow-preimage",
+    "lem-chow-segre"
+   ]
+  }
+ ],
+ "lean_audit": {},
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-chow",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $S$ be a noetherian scheme and let $f\\colon X\\to S$ be a separated morphism\nof finite type. Then there are a finite set $N$, a scheme $X'$, a\nmorphism $\\pi\\colon X'\\to X$ and an immersion $i\\colon X'\\to\\mathbf P^N_S$\ninto the projective space over $S$ with homogeneous coordinates indexed by $N$\n[def-nagata-projective-space-base-change], such that $i$ followed by the\nstructure morphism $\\mathbf P^N_S\\to S$ equals $f\\circ\\pi$, and\n\n1. $\\pi$ is proper and surjective, and\n1. there is a dense open subscheme $U\\subseteq X$ such that\n$\\pi^{-1}(U)\\to U$ is an isomorphism.",
+  "proof": [
+   {
+    "text": "By the scheme conventions [def-weil-pbc-scheme-conventions] (Stacks 01T6, 0BA8, 01T8, 01KV) the scheme $X$ is\nnoetherian and has finitely many irreducible components, and it is\nquasi-compact and quasi-separated.",
+    "uses": [
+     "def-weil-pbc-scheme-conventions"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 1: the cover.* By [lemma-nagata-dense-affine-cover-exists] there is a finite\naffine open covering $X=U_1\\cup\\dots\\cup U_m$ whose members all contain the\ngeneric points of the irreducible components of $X$, and\n$U:=U_1\\cap\\dots\\cap U_m$ is a dense open subscheme of $X$.",
+    "uses": [
+     "lemma-nagata-dense-affine-cover-exists"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 2: reduction to $U$ scheme-theoretically dense.* Let\n$X^{*}\\subseteq X$ be the scheme-theoretic image of $U\\to X$, as in\n[lem-chow-scheme-theoretic-closure]. Then $X^{*}\\to S$ is again separated\nof finite type, $X^{*}=\\bigcup_iU_i^{*}$ is a finite affine open covering with\n$\\bigcap_iU_i^{*}=U$, and $U$ is scheme-theoretically dense in $X^{*}$.\nIt suffices to produce, for $X^{*}$ with the covering $\\{U_i^{*}\\}$ and the\nsame open $U$, a proper surjective morphism $\\pi^{*}\\colon X'\\to X^{*}$ and an\nimmersion $X'\\to\\mathbf P^n_S$ such that $(\\pi^{*})^{-1}(U)\\to U$ is an\nisomorphism; this is exactly what Steps 3–7 below construct. Indeed,\n$X^{*}\\to X$ is a surjective closed immersion, hence proper and surjective, and\nit is an isomorphism over $U$; so $\\pi:=(X^{*}\\to X)\\circ\\pi^{*}$ is proper and\nsurjective, $U$ is a dense open subscheme of $X$, and\n$\\pi^{-1}(U)=(\\pi^{*})^{-1}(U)\\to U$ is an isomorphism. We may therefore\nreplace $X$ by $X^{*}$ and $U_i$ by $U_i^{*}$, and assume from now on that $U$\nis scheme-theoretically dense in $X$. (The covering may be assumed nonempty,\nas [lem-chow-graph] requires: $m=0$ happens only for $X$ empty, and one may then\nreplace the covering by the one-element covering $\\{X^{*}\\}$.)",
+    "uses": [
+     "lem-chow-scheme-theoretic-closure",
+     "lem-chow-graph"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 3: the graph.* Apply [lem-chow-graph] to obtain immersions\n$j_i\\colon U_i\\to\\mathbf P^{n_i}_S$, their closed models $Z_i$, the\nscheme-theoretic image $Z$ of $j=(j_1|_U,\\dots,j_m|_U)$, the proper\nprojections $p_i\\colon Z\\to Z_i$, and the closed immersion\n$Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$.",
+    "uses": [
+     "lem-chow-graph"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 4: the modification.* Put $V_i:=p_i^{-1}(U_i)$ and\n$X':=V_1\\cup\\dots\\cup V_m$. By [lem-chow-glue] the morphisms\n$p_i|_{V_i}$ glue to $\\pi\\colon X'\\to X$ with $\\pi|_U=\\mathrm{id}_U$, and by\n[lem-chow-preimage] we have $\\pi^{-1}(U_i)=V_i$ with\n$\\pi^{-1}(U_i)\\to U_i$ proper.",
+    "uses": [
+     "lem-chow-glue",
+     "lem-chow-preimage"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 5: $\\pi$ is proper and surjective.* Properness is local on the\ntarget by 01W2, and $X=\\bigcup_iU_i$ is an open covering with\n$\\pi^{-1}(U_i)\\to U_i$ proper; hence $\\pi$ is proper. In particular\n$\\pi(X')\\subseteq X$ is closed. It contains $U$ because\n$\\pi|_U=\\mathrm{id}_U$, and $U$ is dense in $X$; therefore $\\pi(X')=X$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "*Step 6: $\\pi$ is an isomorphism over $U$.* Repeat the argument of\n[lem-chow-preimage] with $U_i$ replaced by $U$: the identity\n$U\\to U$ is proper, $\\pi^{-1}(U)\\to U$ is separated, so\n01W6 shows that $U\\to\\pi^{-1}(U)$ is universally closed and\nhence $U$ is closed in $\\pi^{-1}(U)$; and $U$ is dense in the open subscheme\n$\\pi^{-1}(U)\\subseteq Z$. Thus $U=\\pi^{-1}(U)$ and $\\pi^{-1}(U)\\to U$ is the\nidentity.",
+    "uses": [
+     "lem-chow-preimage"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Step 7: the immersion.* Put $N=\\prod_i(n_i+1)-1$. Composing the closed\nimmersion $Z\\to\\mathbf P^{n_1}_S\\times_S\\dots\\times_S\\mathbf P^{n_m}_S$ of\n[lem-chow-graph](1) with the Segre embedding, which is a closed\nimmersion by [lem-chow-segre], gives a closed immersion\n$Z\\to\\mathbf P^N_S$. The subscheme $X'\\subseteq Z$ is open, so the composition\n$i\\colon X'\\to\\mathbf P^N_S$ is an immersion. Taking $n:=N$ completes the\nproof.",
+    "uses": [
+     "lem-chow-graph",
+     "lem-chow-segre"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Properness of $\\pi$.* By [lem-chow-preimage] the\nrestrictions $\\pi^{-1}(U_i)\\to U_i$ are proper for every member of the finite\naffine open cover $X=U_1\\cup\\dots\\cup U_m$. Properness is local on the target\n(Stacks Project, Morphisms, Lemma 29.42.3, Tag\n[01W2](https://stacks.math.columbia.edu/tag/01W2): a morphism $g:W\\to S$ is\nproper as soon as there is an open cover $S=\\bigcup_jS_j$ with\n$g^{-1}(S_j)\\to S_j$ proper for all $j$); applying this to $g=\\pi$, $S=X$,\n$S_j=U_j$ shows that $\\pi$ is proper.",
+    "uses": [
+     "lem-chow-preimage"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*Surjectivity of $\\pi$.* A proper morphism has closed image (Stacks Project,\nMorphisms, Lemma 29.42.7, Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)). Hence $\\pi(X')\\subseteq X$\nis closed; it contains $U$ (since $\\pi|_U=\\operatorname{id}_U$ by\n[lem-chow-glue]), and $U$ is dense in $X$ (it is\nscheme-theoretically dense after the reduction of\n[lem-chow-graph], hence topologically dense). Thus\n$\\pi(X')=X$, i.e. $\\pi$ is surjective.",
+    "uses": [
+     "lem-chow-glue",
+     "lem-chow-graph"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The isomorphism over $U$.* Identify $U$ with an open subscheme of\n$\\pi^{-1}(U)\\subseteq X'$ via the inclusion of the dense open. We apply Stacks\nProject, Morphisms, Lemma 29.42.7 (Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)) to the diagram whose\ncomposite $U\\to\\pi^{-1}(U)\\to U$ is the identity (hence proper) and whose\nsecond member $\\pi^{-1}(U)\\to U$ is separated over $U$ (the morphism\n$\\pi^{-1}(U)\\to U$ is the base change of the separated morphism $\\pi$, see the\nfirst step of the proof of [lem-chow-preimage]): the\nlemma yields that $U\\to\\pi^{-1}(U)$ is proper, hence closed, so $U$ is closed\nin $\\pi^{-1}(U)$. On the other hand $U$ is scheme-theoretically dense in\n$\\widetilde X$ by [lem-chow-graph] (i), and\n$\\pi^{-1}(U)\\subseteq\\widetilde X$ is open, so $U$ is dense in $\\pi^{-1}(U)$.\nA closed and dense subscheme of a scheme coincides with it: $U=\\pi^{-1}(U)$\ninside $X'$, and $\\pi^{-1}(U)\\to U$ is the isomorphism inverse to the\ninclusion.",
+    "uses": [
+     "lem-chow-preimage",
+     "lem-chow-graph"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The closed immersion $i$.* The composed morphism $i$ is an immersion:\n$X'\\subseteq\\widetilde X$ is open ($X'=\\bigcup_iV_i$ with the\n$V_i\\subseteq\\widetilde X$ open), and the remaining factors are closed\nimmersions by [lem-chow-graph] (iii) and\n[lem-chow-segre]; a composite of an open immersion\nand closed immersions is an immersion. Its source is proper over $Y$: $\\pi$ is\nproper by the first paragraph and $f:X\\to Y$ is proper by hypothesis, so\n$f\\circ\\pi:X'\\to Y$ is the composite of two proper morphisms, hence proper. By\nTag [01W6](https://stacks.math.columbia.edu/tag/01W6) once more, now with\n$X=X'$, $S=Y$, $Y'=\\mathbf P^N_Y$ (separated over $Y$, being projective), the\nmorphism $X'\\to\\mathbf P^N_Y=i$ is proper. A proper immersion is a closed\nimmersion (Stacks Project, Schemes, Lemma 26.10.4, Tag\n[01IQ](https://stacks.math.columbia.edu/tag/01IQ): an immersion is a closed\nimmersion iff its image is closed; here the image is closed by properness, Tag\n[01W6](https://stacks.math.columbia.edu/tag/01W6)). Hence $i$ is a closed\nimmersion.",
+    "uses": [
+     "lem-chow-graph",
+     "lem-chow-segre"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "*The factorization.* Both $f\\circ\\pi$ and the composite $X'\\xrightarrow{i}\n\\mathbf P^N_Y\\to Y$ are equal to the structure morphism of the $Y$-scheme\n$X'$: all schemes involved are defined over $Y$ and every morphism displayed\nis a morphism over $Y$ (the open immersions $V_i\\subseteq\\widetilde X$, the\nclosed immersions and the projections $p_i$ are all over $Y$, and $\\pi$ is a\nmorphism of $Y$-schemes by [lem-chow-glue]). Hence\n$f\\circ\\pi=p\\circ i$ with $p:\\mathbf P^N_Y\\to Y$.",
+    "uses": [
+     "lem-chow-glue"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

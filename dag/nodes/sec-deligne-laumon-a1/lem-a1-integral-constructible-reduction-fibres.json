@@ -1,453 +1,454 @@
 {
-  "id": "lem-a1-integral-constructible-reduction-fibres",
-  "kind": "statement",
-  "title": "Ordinary finite quotients and adic fibres of an integral constructible heart object",
-  "statement": "Let $k$ be a field, let $\\ell$ be a prime invertible in $k$, let $T$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], and fix a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $A$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. On the small pro-etale site put $B_T=\\varprojlim_{n\\ge1}(A/\\varpi^n)_T$ [def-weil-completed-integral-coefficients]. Let $F$ be an object of the integral heart of [prop-weil-pbc-integral-tstructure] in the completed constructible category with compatible etale-origin witnesses [def-weil-pbc-bounded-constructible-complete], and regard $F$ as its degree-zero sheaf of $B_T$-modules [def-weil-sheaf-of-modules-category]. Write $QF$ for its image under raw rationalization [def-weil-pbc-rational-category], with adic geometric fibres normalized as in [lem-per-adic-heart-pullback-fibres].\n\nFor each $n\\ge1$, the ordinary sheaf quotient $F_n=F/\\varpi^nF$ is canonically of etale origin: there is a constructible sheaf $G_n$ of $(A/\\varpi^n)_T$-modules on $T_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves] with $\\nu_T^*G_n\\cong F_n$, where $\\nu_T$ is the comparison morphism [def-weil-pbc-site-comparison-morphism]. The quotient maps give compatible transition maps $G_{n+1}\\to G_n$ and $G_{n+1}/\\varpi^nG_{n+1}\\cong G_n$. There is one finite locally closed stratification of $T$ [def-constructible-stratification] on each stratum of which every $F_n$ is finite locally constant as a pro-etale sheaf and every $G_n$ is finite locally constant as an etale sheaf. Finite locally constant means locally isomorphic to a constant sheaf of a finite module.\n\nFor a geometric point $\\bar x$ [def-weil-geometric-point], with etale stalks as in [def-weil-pbc-geometric-stalks], put $P_{\\bar x}=\\varprojlim_n(G_n)_{\\bar x}$. This is a finitely generated $A$-module [def-weil-finitely-generated-module], the projections induce $P_{\\bar x}/\\varpi^nP_{\\bar x}\\cong(G_n)_{\\bar x}$, and there is a natural isomorphism of adic coefficient fibres\n$$(QF)_{\\bar x}\\cong P_{\\bar x}\\otimes_A E.$$\nThese identifications are natural in integral sheaf morphisms. In particular, if $u:B_T\\to F$ is such a morphism, the induced maps $(A/\\varpi^n)_T\\to G_n$ are compatible and their values at $1$ determine $a_{\\bar x}\\in P_{\\bar x}$; the fibre of $Qu$ sends $1$ to $a_{\\bar x}\\otimes1$. These are ordinary degree-zero quotients, not assertions that $F\\otimes^L_{B_T}(A/\\varpi^n)_T$ is concentrated in degree zero; torsion in the integral local models is allowed.",
-  "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.10 and Proposition 6.8.11(3) (integral heart and finite-module local models); Lemmas 5.1.2 and 5.1.4, Corollary 5.1.5 (finite discrete local systems and comparison); Lemma 6.8.2, Proposition 6.8.4(1), and Proposition 6.8.14(2) (completed/rational fibre normalization). The combined quotient and fibre comparison, including torsion local models, is agent-formulated from these results."
-  },
-  "stmt_deps": [
-    "def-weil-scheme-morphism-properties",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-completed-integral-coefficients",
-    "prop-weil-pbc-integral-tstructure",
-    "def-weil-pbc-bounded-constructible-complete",
-    "def-weil-pbc-rational-category",
-    "lem-per-adic-heart-pullback-fibres",
-    "def-weil-pbc-etale-sheaves",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-constructible-stratification",
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-geometric-point",
-    "def-weil-finitely-generated-module"
-  ],
-  "proof": [
-    {
-      "text": "The structure map $T\\to\\operatorname{Spec}k$ is finite type. Apply [lem-weil-pbc-finite-type-over-noetherian] to the Noetherian one-point base, and [lem-fin-finite-type-fibre-dimension-bound] to its sole fibre, to obtain that $T$ is Noetherian and finite-dimensional. The unit $\\ell\\in k$ stays invertible in its local rings. By [prop-weil-pbc-integral-tstructure], $F$ has only its degree-zero ambient cohomology. Apply condition (iii) of [lem-weil-pbc-integral-stratified-perfect-characterization] to this object. It gives one finite locally closed stratification, and on each stratum $S$ a pro-etale covering on which $F|_S$ is $B_S\\otimes_A\\underline N$ for a finitely presented $A$-module $N$. This covering and $N$ are chosen before $n$; $N$ need not be free.",
-      "uses": [
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-fin-finite-type-fibre-dimension-bound",
-        "prop-weil-pbc-integral-tstructure",
-        "lem-weil-pbc-integral-stratified-perfect-characterization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Definition 6.8.10 and Proposition 6.8.11(3); the completed-category local-model comparison is the cited characterization"
-      }
-    },
-    {
-      "text": "For the immersion $i:S\\to T$, [lem-weil-pbc-proetale-immersion-limit-preservation] gives exact ordinary inverse image and preservation of the coefficient limit. The finite coefficient sheaves restrict to the same constant sheaves on $S$; hence $i^{-1}B_T=B_S$. For a pro-etale site object, [lem-weil-proetale-weakly-etale-localization] identifies restriction with the slice site and identifies constant coefficients. Limits are sectionwise and cokernels are sheafified sectionwise cokernels by [lem-weil-pbc-module-sheaves-colimits-forgetful]; the identical slice coverings show that both commute with this restriction. Thus the completed coefficients restrict to the same completed coefficients on the chart. Thus restricting an ordinary cokernel $F/\\varpi^nF$ gives $(F|_S)/\\varpi^n(F|_S)$, also after passing to the covering of Step 1. By [lem-weil-pbc-completed-constant-sheaf-reduction], $B_S$ is flat over the constant $A$ and $B_S\\otimes_A A/\\varpi^n$ is the constant coefficient sheaf $(A/\\varpi^n)_S$. All identifications use the quotient maps, so they commute with $n$ and multiplication by coefficients.",
-      "uses": [
-        "lem-pur-integral-twist-line-inverse-image",
-        "lem-weil-pbc-proetale-immersion-limit-preservation",
-        "lem-weil-proetale-weakly-etale-localization",
-        "lem-weil-pbc-module-sheaves-colimits-forgetful",
-        "lem-weil-pbc-completed-constant-sheaf-reduction"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Lemma 6.8.2(1), Remark 6.8.15; Stacks sites-modules.tex Tag 093M (lemma-completion-flat), proetale.tex Tag 09AA (lemma-closed-immersion)"
-      }
-    },
-    {
-      "text": "On a chart with local model $B\\otimes_A\\underline N$, the balanced tensor relations give\n$$ (B\\otimes_A\\underline N)/\\varpi^n(B\\otimes_A\\underline N)\\cong(B/\\varpi^nB)\\otimes_A\\underline N\\cong\\underline{N/\\varpi^nN}.$$\nFor the first map, send the class of $b\\otimes m$ to $\\bar b\\otimes m$; its inverse sends $\\bar b\\otimes m$ to the class of $b\\otimes m$, independent of the lift $b$. The second map follows from Step 2 and exactness of the constant-module functor [lem-weil-pbc-constant-module-section-properties]. By [lem-weil-l-adic-extension-integers-dvr] and [lem-weil-valued-dvr-finite-quotients], $A/\\varpi^n$ is a finite ring. Since a finite generating set of $N$ gives a surjection $(A/\\varpi^n)^r\\to N/\\varpi^nN$, its quotient is finite. Consequently all $F_n$ are finite locally constant on the single stratification in Step 1.",
-      "uses": [
-        "lem-weil-pbc-constant-module-section-properties",
-        "lem-weil-l-adic-extension-integers-dvr",
-        "lem-weil-valued-dvr-finite-quotients"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Definition 6.8.10; ordinary balanced tensor quotient computation and finite constant-module models"
-      }
-    },
-    {
-      "text": "Apply [lem-weil-pbc-finite-ring-constructible-sheaf-origin] with the finite ring $A/\\varpi^n$ to $F_n$. Take its canonical etale representative $G_n=\\nu_{T,*}F_n$ with the comparison counit as isomorphism; this choice is justified by full faithfulness and essential image, and [prop-weil-pbc-site-comparison-finite-level] identifies the unit with an isomorphism. To check the same strata, use [lem-weil-pbc-comparison-pullback]: $\\nu_S^*(G_n|_S)\\cong F_n|_S$. By [det-pe-finite-local-systems-twist], the latter has an etale finite locally constant representative on $S$. Full faithfulness at $S$ identifies this representative with $G_n|_S$. This proves constructibility of $G_n$ and finite local constancy on exactly the strata already chosen, for every $n$.",
-      "uses": [
-        "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-        "prop-weil-pbc-site-comparison-finite-level",
-        "lem-weil-pbc-comparison-pullback",
-        "det-pe-finite-local-systems-twist"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Stacks proetale.tex Tag 09AK (lemma-compare-constructible) and Tag 099Y (lemma-compare-locally-constant); comparison restriction compatibility"
-      }
-    },
-    {
-      "text": "The quotient $F_{n+1}\\to F_n$ is linear over $A/\\varpi^{n+1}$, with $F_n$ regarded by restriction of scalars. Both have etale origin. Full faithfulness from [prop-weil-pbc-site-comparison-finite-level] lifts it uniquely to $G_{n+1}\\to G_n$; uniqueness gives every transition-composition equation. The identity\n$$ (F/\\varpi^{n+1}F)/\\varpi^n(F/\\varpi^{n+1}F)=F/\\varpi^nF $$\nis the ordinary quotient identity: both quotient maps have kernel $\\varpi^nF$ because $\\varpi^{n+1}F\\subseteq\\varpi^nF$. Exactness of $\\nu_T^*$ in the same cited proposition carries $G_{n+1}/\\varpi^nG_{n+1}$ to this quotient. Full faithfulness reflects its canonical map to $G_n$ as an isomorphism. This also proves the quotient cocycle; no derived concentration assertion was used.",
-      "uses": [
-        "prop-weil-pbc-site-comparison-finite-level"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Finite-level comparison and the elementary iterated ordinary quotient identity"
-      }
-    },
-    {
-      "text": "Fix $\\bar x$. By [prop-weil-pbc-geometric-stalks-exact], the transitions of $M_n=(G_n)_{\\bar x}$ induce $M_{n+1}/\\varpi^nM_{n+1}\\cong M_n$. These modules are finite: restrict to its stratum using [lemma-openclosed-stalk-upperstar], then use an etale trivializing neighbourhood and [lem-weil-pbc-constant-sheaf-geometric-stalk]. Apply [lem-pod-adic-limit-finite-modules](1) to this normalized tower. It gives that $P_{\\bar x}=\\varprojlim_nM_n$ is finitely generated over $A$ and that its projection induces $P_{\\bar x}/\\varpi^nP_{\\bar x}\\cong M_n$, including possible torsion. These are the projection-induced maps, not arbitrarily chosen module isomorphisms.",
-      "uses": [
-        "prop-weil-pbc-geometric-stalks-exact",
-        "lemma-openclosed-stalk-upperstar",
-        "lem-weil-pbc-constant-sheaf-geometric-stalk",
-        "lem-pod-adic-limit-finite-modules"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Stacks algebra.tex Tags 09B8 (lemma-limit-complete) and 031D (lemma-finite-over-complete-ring); etale-cohomology.tex Tag 03PT (lemma-stalk-exact)"
-      }
-    },
-    {
-      "text": "Here is the fibre comparison with torsion retained until rationalization. At $\\bar x$ choose a geometric lift to a chart of Step 1. The stalk comparisons [lem-cbc-proetale-comparison-stalk] and [lem-pur-proetale-inverse-image-stalk], followed by [lem-weil-proetale-constant-sheaf-stalk], identify the entire finite tower $M_n$ with $(N/\\varpi^nN)_n$. By [lem-pod-adic-limit-finite-modules](2), its limit is $N$ via the residue maps. Under [lem-per-continuous-rational-derived-realization], $QF$ on this chart is $E_S\\otimes_A N$. Choose a finite presentation $A^a\\xrightarrow{D}A^b\\to N\\to0$. The normalized adic fibre of the free coefficient modules is $E^a,E^b$, and the constant matrix $D$ induces the same matrix over $E$, by the finite-level normalization of [lem-per-adic-heart-pullback-fibres]. Exactness of its fibre functor identifies the fibre of the cokernel with $\\operatorname{coker}(D:E^a\\to E^b)=N\\otimes_AE$, the last equality being [lem-weil-pbc-tensor-right-exact]. Together with $P_{\\bar x}\\cong N$, this gives $(QF)_{\\bar x}\\cong P_{\\bar x}\\otimes_AE$. The map sends each generator to the tensor of its compatible residue classes. Therefore changing a presentation or a trivializing chart gives the same map, since those generators still have the same residues; it is the canonical coefficient comparison. This calculation kills torsion only after tensoring with $E$.",
-      "uses": [
-        "lem-cbc-proetale-comparison-stalk",
-        "lem-pur-proetale-inverse-image-stalk",
-        "lem-weil-proetale-constant-sheaf-stalk",
-        "lem-pod-adic-limit-finite-modules",
-        "lem-per-continuous-rational-derived-realization",
-        "lem-per-adic-heart-pullback-fibres",
-        "lem-weil-pbc-tensor-right-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Lemma 6.8.2, Definition 6.8.10, Propositions 6.8.11(3) and 6.8.14(2); finite-presentation computation with the normalized exact adic fibre"
-      }
-    },
-    {
-      "text": "All constructions are functorial in an integral morphism: take ordinary quotients, apply the fully faithful comparison of Step 4, take etale stalks, then inverse limits and tensor with $E$. The comparisons of Step 7 use these same quotient maps and are natural, as are rational realization and the normalized fibre functor in [lem-per-continuous-rational-derived-realization] and [lem-per-adic-heart-pullback-fibres]. For the source $B_T$, Step 2 gives the constant system $(A/\\varpi^n)_T$, and its fibre limit is $A$ by [lem-pod-adic-limit-finite-modules](2). Thus $u:B_T\\to F$ gives compatible maps $(A/\\varpi^n)_T\\to G_n$. Their stalk values $a_n$ at $1$ satisfy $a_{n+1}\\bmod\\varpi^n=a_n$, so they define $a_{\\bar x}=(a_n)_n\\in P_{\\bar x}$. Tensoring the resulting map $A\\to P_{\\bar x}$ with $E$ sends $1$ to $a_{\\bar x}\\otimes1$, which is the fibre of $Qu$ by naturality. All quotients above were ordinary cokernels.",
-      "uses": [
-        "lem-per-continuous-rational-derived-realization",
-        "lem-per-adic-heart-pullback-fibres",
-        "lem-pod-adic-limit-finite-modules"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-        "place": "Canonical quotient, inverse-limit, and localization maps in Lemma 6.8.2 and Propositions 6.8.4(1), 6.8.14(2)"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-pur-integral-twist-line-inverse-image",
+ "id": "lem-a1-integral-constructible-reduction-fibres",
+ "kind": "statement",
+ "title": "Ordinary finite quotients and adic fibres of an integral constructible heart object",
+ "statement": "Let $k$ be a field, let $\\ell$ be a prime invertible in $k$, let $T$ be a separated finite-type $k$-scheme [def-weil-scheme-morphism-properties], and fix a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $A$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. On the small pro-etale site put $B_T=\\varprojlim_{n\\ge1}(A/\\varpi^n)_T$ [def-weil-completed-integral-coefficients]. Let $F$ be an object of the integral heart of [prop-weil-pbc-integral-tstructure] in the completed constructible category with compatible etale-origin witnesses [def-weil-pbc-bounded-constructible-complete], and regard $F$ as its degree-zero sheaf of $B_T$-modules [def-weil-sheaf-of-modules-category]. Write $QF$ for its image under raw rationalization [def-weil-pbc-rational-category], with adic geometric fibres normalized as in [lem-per-adic-heart-pullback-fibres].\n\nFor each $n\\ge1$, the ordinary sheaf quotient $F_n=F/\\varpi^nF$ is canonically of etale origin: there is a constructible sheaf $G_n$ of $(A/\\varpi^n)_T$-modules on $T_{\\mathrm{et}}$ [def-weil-pbc-etale-sheaves] with $\\nu_T^*G_n\\cong F_n$, where $\\nu_T$ is the comparison morphism [def-weil-pbc-site-comparison-morphism]. The quotient maps give compatible transition maps $G_{n+1}\\to G_n$ and $G_{n+1}/\\varpi^nG_{n+1}\\cong G_n$. There is one finite locally closed stratification of $T$ [def-constructible-stratification] on each stratum of which every $F_n$ is finite locally constant as a pro-etale sheaf and every $G_n$ is finite locally constant as an etale sheaf. Finite locally constant means locally isomorphic to a constant sheaf of a finite module.\n\nFor a geometric point $\\bar x$ [def-weil-geometric-point], with etale stalks as in [def-weil-pbc-geometric-stalks], put $P_{\\bar x}=\\varprojlim_n(G_n)_{\\bar x}$. This is a finitely generated $A$-module [def-weil-finitely-generated-module], the projections induce $P_{\\bar x}/\\varpi^nP_{\\bar x}\\cong(G_n)_{\\bar x}$, and there is a natural isomorphism of adic coefficient fibres\n$$(QF)_{\\bar x}\\cong P_{\\bar x}\\otimes_A E.$$\nThese identifications are natural in integral sheaf morphisms. In particular, if $u:B_T\\to F$ is such a morphism, the induced maps $(A/\\varpi^n)_T\\to G_n$ are compatible and their values at $1$ determine $a_{\\bar x}\\in P_{\\bar x}$; the fibre of $Qu$ sends $1$ to $a_{\\bar x}\\otimes1$. These are ordinary degree-zero quotients, not assertions that $F\\otimes^L_{B_T}(A/\\varpi^n)_T$ is concentrated in degree zero; torsion in the integral local models is allowed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3) (integral heart and finite-module local models); Lemmas 5.1.2 and 5.1.4, Corollary 5.1.5 (finite discrete local systems and comparison); Lemma 6.8.2, Proposition 6.8.4(1), and Proposition 6.8.14(2) (completed/rational fibre normalization). The combined quotient and fibre comparison, including torsion local models, is agent-formulated from these results."
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-completed-integral-coefficients",
+  "prop-weil-pbc-integral-tstructure",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "lem-per-adic-heart-pullback-fibres",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-constructible-stratification",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-geometric-point",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "The structure map $T\\to\\operatorname{Spec}k$ is finite type. Apply [lem-weil-pbc-finite-type-over-noetherian] to the Noetherian one-point base, and [lem-fin-finite-type-fibre-dimension-bound] to its sole fibre, to obtain that $T$ is Noetherian and finite-dimensional. The unit $\\ell\\in k$ stays invertible in its local rings. By [prop-weil-pbc-integral-tstructure], $F$ has only its degree-zero ambient cohomology. Apply condition (iii) of [lem-weil-pbc-integral-stratified-perfect-characterization] to this object. It gives one finite locally closed stratification, and on each stratum $S$ a pro-etale covering on which $F|_S$ is $B_S\\otimes_A\\underline N$ for a finitely presented $A$-module $N$. This covering and $N$ are chosen before $n$; $N$ need not be free.",
+   "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-fin-finite-type-fibre-dimension-bound",
     "prop-weil-pbc-integral-tstructure",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10 and Proposition 6.8.11(3); the completed-category local-model comparison is the cited characterization"
+   }
+  },
+  {
+   "text": "For the immersion $i:S\\to T$, [lem-weil-pbc-proetale-immersion-limit-preservation] gives exact ordinary inverse image and preservation of the coefficient limit. The finite coefficient sheaves restrict to the same constant sheaves on $S$; hence $i^{-1}B_T=B_S$. For a pro-etale site object, [lem-weil-proetale-weakly-etale-localization] identifies restriction with the slice site and identifies constant coefficients. Limits are sectionwise and cokernels are sheafified sectionwise cokernels by [lem-weil-pbc-module-sheaves-colimits-forgetful]; the identical slice coverings show that both commute with this restriction. Thus the completed coefficients restrict to the same completed coefficients on the chart. Thus restricting an ordinary cokernel $F/\\varpi^nF$ gives $(F|_S)/\\varpi^n(F|_S)$, also after passing to the covering of Step 1. By [lem-weil-pbc-completed-constant-sheaf-reduction], $B_S$ is flat over the constant $A$ and $B_S\\otimes_A A/\\varpi^n$ is the constant coefficient sheaf $(A/\\varpi^n)_S$. All identifications use the quotient maps, so they commute with $n$ and multiplication by coefficients.",
+   "uses": [
+    "lem-pur-integral-twist-line-inverse-image",
     "lem-weil-pbc-proetale-immersion-limit-preservation",
     "lem-weil-proetale-weakly-etale-localization",
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), Remark 6.8.15; Stacks sites-modules.tex Tag 093M (lemma-completion-flat), proetale.tex Tag 09AA (lemma-closed-immersion)"
+   }
+  },
+  {
+   "text": "On a chart with local model $B\\otimes_A\\underline N$, the balanced tensor relations give\n$$ (B\\otimes_A\\underline N)/\\varpi^n(B\\otimes_A\\underline N)\\cong(B/\\varpi^nB)\\otimes_A\\underline N\\cong\\underline{N/\\varpi^nN}.$$\nFor the first map, send the class of $b\\otimes m$ to $\\bar b\\otimes m$; its inverse sends $\\bar b\\otimes m$ to the class of $b\\otimes m$, independent of the lift $b$. The second map follows from Step 2 and exactness of the constant-module functor [lem-weil-pbc-constant-module-section-properties]. By [lem-weil-l-adic-extension-integers-dvr] and [lem-weil-valued-dvr-finite-quotients], $A/\\varpi^n$ is a finite ring. Since a finite generating set of $N$ gives a surjection $(A/\\varpi^n)^r\\to N/\\varpi^nN$, its quotient is finite. Consequently all $F_n$ are finite locally constant on the single stratification in Step 1.",
+   "uses": [
     "lem-weil-pbc-constant-module-section-properties",
     "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10; ordinary balanced tensor quotient computation and finite constant-module models"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-ring-constructible-sheaf-origin] with the finite ring $A/\\varpi^n$ to $F_n$. Take its canonical etale representative $G_n=\\nu_{T,*}F_n$ with the comparison counit as isomorphism; this choice is justified by full faithfulness and essential image, and [prop-weil-pbc-site-comparison-finite-level] identifies the unit with an isomorphism. To check the same strata, use [lem-weil-pbc-comparison-pullback]: $\\nu_S^*(G_n|_S)\\cong F_n|_S$. By [det-pe-finite-local-systems-twist], the latter has an etale finite locally constant representative on $S$. Full faithfulness at $S$ identifies this representative with $G_n|_S$. This proves constructibility of $G_n$ and finite local constancy on exactly the strata already chosen, for every $n$.",
+   "uses": [
     "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
     "prop-weil-pbc-site-comparison-finite-level",
     "lem-weil-pbc-comparison-pullback",
-    "det-pe-finite-local-systems-twist",
+    "det-pe-finite-local-systems-twist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Stacks proetale.tex Tag 09AK (lemma-compare-constructible) and Tag 099Y (lemma-compare-locally-constant); comparison restriction compatibility"
+   }
+  },
+  {
+   "text": "The quotient $F_{n+1}\\to F_n$ is linear over $A/\\varpi^{n+1}$, with $F_n$ regarded by restriction of scalars. Both have etale origin. Full faithfulness from [prop-weil-pbc-site-comparison-finite-level] lifts it uniquely to $G_{n+1}\\to G_n$; uniqueness gives every transition-composition equation. The identity\n$$ (F/\\varpi^{n+1}F)/\\varpi^n(F/\\varpi^{n+1}F)=F/\\varpi^nF $$\nis the ordinary quotient identity: both quotient maps have kernel $\\varpi^nF$ because $\\varpi^{n+1}F\\subseteq\\varpi^nF$. Exactness of $\\nu_T^*$ in the same cited proposition carries $G_{n+1}/\\varpi^nG_{n+1}$ to this quotient. Full faithfulness reflects its canonical map to $G_n$ as an isomorphism. This also proves the quotient cocycle; no derived concentration assertion was used.",
+   "uses": [
+    "prop-weil-pbc-site-comparison-finite-level"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Finite-level comparison and the elementary iterated ordinary quotient identity"
+   }
+  },
+  {
+   "text": "Fix $\\bar x$. By [prop-weil-pbc-geometric-stalks-exact], the transitions of $M_n=(G_n)_{\\bar x}$ induce $M_{n+1}/\\varpi^nM_{n+1}\\cong M_n$. These modules are finite: restrict to its stratum using [lemma-openclosed-stalk-upperstar], then use an etale trivializing neighbourhood and [lem-weil-pbc-constant-sheaf-geometric-stalk]. Apply [lem-pod-adic-limit-finite-modules](1) to this normalized tower. It gives that $P_{\\bar x}=\\varprojlim_nM_n$ is finitely generated over $A$ and that its projection induces $P_{\\bar x}/\\varpi^nP_{\\bar x}\\cong M_n$, including possible torsion. These are the projection-induced maps, not arbitrarily chosen module isomorphisms.",
+   "uses": [
     "prop-weil-pbc-geometric-stalks-exact",
     "lemma-openclosed-stalk-upperstar",
     "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-pod-adic-limit-finite-modules",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Stacks algebra.tex Tags 09B8 (lemma-limit-complete) and 031D (lemma-finite-over-complete-ring); etale-cohomology.tex Tag 03PT (lemma-stalk-exact)"
+   }
+  },
+  {
+   "text": "Here is the fibre comparison with torsion retained until rationalization. At $\\bar x$ choose a geometric lift to a chart of Step 1. The stalk comparisons [lem-cbc-proetale-comparison-stalk] and [lem-pur-proetale-inverse-image-stalk], followed by [lem-weil-proetale-constant-sheaf-stalk], identify the entire finite tower $M_n$ with $(N/\\varpi^nN)_n$. By [lem-pod-adic-limit-finite-modules](2), its limit is $N$ via the residue maps. Under [lem-per-continuous-rational-derived-realization], $QF$ on this chart is $E_S\\otimes_A N$. Choose a finite presentation $A^a\\xrightarrow{D}A^b\\to N\\to0$. The normalized adic fibre of the free coefficient modules is $E^a,E^b$, and the constant matrix $D$ induces the same matrix over $E$, by the finite-level normalization of [lem-per-adic-heart-pullback-fibres]. Exactness of its fibre functor identifies the fibre of the cokernel with $\\operatorname{coker}(D:E^a\\to E^b)=N\\otimes_AE$, the last equality being [lem-weil-pbc-tensor-right-exact]. Together with $P_{\\bar x}\\cong N$, this gives $(QF)_{\\bar x}\\cong P_{\\bar x}\\otimes_AE$. The map sends each generator to the tensor of its compatible residue classes. Therefore changing a presentation or a trivializing chart gives the same map, since those generators still have the same residues; it is the canonical coefficient comparison. This calculation kills torsion only after tensoring with $E$.",
+   "uses": [
     "lem-cbc-proetale-comparison-stalk",
     "lem-pur-proetale-inverse-image-stalk",
     "lem-weil-proetale-constant-sheaf-stalk",
+    "lem-pod-adic-limit-finite-modules",
     "lem-per-continuous-rational-derived-realization",
     "lem-per-adic-heart-pullback-fibres",
     "lem-weil-pbc-tensor-right-exact"
-  ],
-  "proof_origin": {
-    "by": "agent",
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Combined consequence of Definition 6.8.10 and Propositions 6.8.11(3), 6.8.14(2); finite-module comparison supplied by the cited Stacks nodes. This combined statement is not a verbatim proposition in the paper."
+    "place": "Lemma 6.8.2, Definition 6.8.10, Propositions 6.8.11(3) and 6.8.14(2); finite-presentation computation with the normalized exact adic fibre"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "adic.*[Ss]heaf|[Ss]heaf.*adic|[Cc]onstructible.*[Ss]heaf|[Ss]heaf.*[Cc]onstructible",
-      "results": "{\"t\": \"2026-10-18T02:41:47Z\", \"tool\": \"grep\", \"query\": \"adic.*[Ss]heaf|[Ss]heaf.*adic|[Cc]onstructible.*[Ss]heaf|[Ss]heaf.*[Cc]onstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\"], \"digest\": \"f4c68c9cd8ed88c0\"}",
-      "date": "2026-10-18",
-      "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Geometric fibres of a constructible completed integral coefficient sheaf are inverse limits of finite etale quotient stalks and rationalization inverts the uniformizer",
-      "results": "{\"t\": \"2026-10-18T02:41:47Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibres of a constructible completed integral coefficient sheaf are inverse limits of finite etale quotient stalks and rationalization inverts the uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.isIso_toLimit\", \"Profinite.lim\", \"Profinite.asLimit\", \"Profinite.asLimitConeIso\", \"Profinite.asLimit'\", \"Profinite.isoAsLimitConeLift\", \"Profinite.lim'\", \"Profinite.isIso_asLimitCone_lift\"], \"digest\": \"791b30131efed6d4\"}",
-      "date": "2026-10-18",
-      "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"adic\", \"sheaf\"",
-      "results": "{\"t\": \"2026-10-18T02:41:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"adic\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_bot\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_inf\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_mul\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_top\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_sup\"], \"digest\": \"7b4e05e16802d042\"}",
-      "date": "2026-10-18",
-      "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An integral constructible adic sheaf has all ordinary finite quotients locally constant on one finite stratification, with fibres the inverse limits of their etale stalks",
-      "results": "{\"t\": \"2026-10-18T02:41:48Z\", \"tool\": \"leanfinder\", \"query\": \"An integral constructible adic sheaf has all ordinary finite quotients locally constant on one finite stratification, with fibres the inverse limits of their etale stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"Condensed.isColimitLocallyConstantPresheaf\", \"Profinite.exists_locallyConstant_finite_aux\", \"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.ofSheafProfinite\", \"Module.isLocallyConstant_rankAtStalk\", \"Profinite.exists_locallyConstant_fin_two\"], \"digest\": \"71d4ca1b7e4bb2e9\"}",
-      "date": "2026-10-18",
-      "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
-    },
-    {
-      "tool": "grep",
-      "query": "constructible.*sheaf|sheaf.*constructible|adic.*sheaf|sheaf.*adic",
-      "results": "{\"t\": \"2026-10-18T03:05:36Z\", \"tool\": \"grep\", \"query\": \"constructible.*sheaf|sheaf.*constructible|adic.*sheaf|sheaf.*adic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\"], \"digest\": \"f4c68c9cd8ed88c0\"}",
-      "date": "2026-10-18",
-      "verdict": "no match: hits concern coefficient-sheaf definitions, scheme etale loci, ordinary module completion, module-sheaf finiteness, or condensed/profinite constructions; none gives the integral constructible quotient and adic fibre comparison"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Constructible sheaves of modules over completed l-adic integers reduce to finite etale sheaves with finitely generated inverse limit stalks",
-      "results": "{\"t\": \"2026-10-18T03:05:37Z\", \"tool\": \"leansearch\", \"query\": \"Constructible sheaves of modules over completed l-adic integers reduce to finite etale sheaves with finitely generated inverse limit stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.IsFiniteType.mk\", \"SheafOfModules.IsFinitePresentation.mk\", \"CondensedMod.ofSheafProfinite\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"SheafOfModules.Finite.hasFiniteLimits\", \"SheafOfModules.IsFiniteType\"], \"digest\": \"ae8788c24be12b5f\"}",
-      "date": "2026-10-18",
-      "verdict": "no match: hits concern coefficient-sheaf definitions, scheme etale loci, ordinary module completion, module-sheaf finiteness, or condensed/profinite constructions; none gives the integral constructible quotient and adic fibre comparison"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"adic\", \"sheaf\"",
-      "results": "{\"t\": \"2026-10-18T03:05:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"adic\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_bot\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_inf\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_mul\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_top\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_sup\"], \"digest\": \"7b4e05e16802d042\"}",
-      "date": "2026-10-18",
-      "verdict": "no match: hits concern coefficient-sheaf definitions, scheme etale loci, ordinary module completion, module-sheaf finiteness, or condensed/profinite constructions; none gives the integral constructible quotient and adic fibre comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An integral constructible adic sheaf has ordinary finite quotients of etale origin and geometric coefficient fibres given by the inverse limit of their stalks",
-      "results": "{\"t\": \"2026-10-18T03:05:38Z\", \"tool\": \"leanfinder\", \"query\": \"An integral constructible adic sheaf has ordinary finite quotients of etale origin and geometric coefficient fibres given by the inverse limit of their stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.IsEtaleAt\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"aefaab44a517be1d\"}",
-      "date": "2026-10-18",
-      "verdict": "no match: hits concern coefficient-sheaf definitions, scheme etale loci, ordinary module completion, module-sheaf finiteness, or condensed/profinite constructions; none gives the integral constructible quotient and adic fibre comparison"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Finite reductions of a constructible sheaf over a complete discrete valuation ring form a normalized inverse system of finite locally constant etale sheaves",
-      "results": "{\"t\": \"2026-10-18T03:05:46Z\", \"tool\": \"leanfinder\", \"query\": \"Finite reductions of a constructible sheaf over a complete discrete valuation ring form a normalized inverse system of finite locally constant etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.transitionMap\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\", \"Profinite.exists_locallyConstant_finite_aux\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"Condensed.isColimitLocallyConstantPresheaf\"], \"digest\": \"29d9817485f2c276\"}",
-      "date": "2026-10-18",
-      "verdict": "no match: hits concern coefficient-sheaf definitions, scheme etale loci, ordinary module completion, module-sheaf finiteness, or condensed/profinite constructions; none gives the integral constructible quotient and adic fibre comparison"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-a1-adic-section-closed-support",
-    "date": "2026-10-18",
-    "group": "Q59"
-  },
-  "chapter": "sec-deligne-laumon-a1",
-  "unit": "sk-l-dl-a1-endpoints",
-  "blueprint": {
-    "from": {
-      "node": "sk-l-dl-a1-endpoints",
-      "place": "Proof, first two sentences: a section on the compactification must have closed nonzero-fibre support; supplies the integral finite-reduction/fibre comparison used to prove that assertion, not the assertion itself",
-      "via": [
-        "lem-a1-adic-section-closed-support",
-        "lem-a1-constructible-degree-zero-proper-support"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-18",
-    "item": "lem-a1-integral-constructible-reduction-fibres",
-    "worker": "stage1",
-    "summary": "Split without new nodes. Use the existing completed-category stratified finite-module characterization, compute ordinary quotients before descending them, descend transition maps and quotient normalization by exact full faithfulness, and reconstruct finite stalk modules by the existing normalized-tower theorem. A finite-presentation computation gives the natural rational fibre comparison while allowing torsion. The statement is unchanged.",
-    "blueprint": "Realizes the first two sentences of sk-l-dl-a1-endpoints proof, through lem-a1-constructible-degree-zero-proper-support and lem-a1-adic-section-closed-support: the integral quotient/fibre input for closed nonzero-section support. It does not replace the endpoint unit route.",
-    "tool_uses": [
-      {
-        "node": "lem-pur-integral-twist-line-inverse-image",
-        "why": "Supply the canonical inverse-image isomorphism for the completed coefficient sheaf and all finite constant reductions along the locally closed stratum immersion; the endpoint unit has no replacement for this generic coefficient compatibility."
-      },
-      {
-        "node": "lem-weil-proetale-weakly-etale-localization",
-        "why": "Identify pro-etale chart restriction with the slice site and preserve constant coefficients. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-        "why": "Use sectionwise limits and sheafified sectionwise cokernels to check chart restriction. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-pbc-finite-type-over-noetherian",
-        "why": "Check the Noetherian hypothesis of the integral completed-category tools from the finite-type structure map. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-fin-finite-type-fibre-dimension-bound",
-        "why": "Check finite dimension by applying the generic finite-type fibre bound over a field. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "prop-weil-pbc-integral-tstructure",
-        "why": "Identify the integral heart with ambient degree-zero cohomology. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
-        "why": "Supply stratified finite-module local models for the precise completed category including compatible witnesses. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
-        "why": "Exact restriction to a stratum and preservation of the completed coefficient limit. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-per-continuous-rational-derived-realization",
-        "why": "Use the precise continuous-coefficient realization, its restriction comparisons and naturality. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
-        "why": "Identify the ordinary completed coefficient quotients with finite constant rings. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-pbc-constant-module-section-properties",
-        "why": "Exactness of the constant-module construction in the local ordinary quotient computation. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-l-adic-extension-integers-dvr",
-        "why": "Verify the DVR and finite residue-field hypotheses of the finite-quotient tool. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-valued-dvr-finite-quotients",
-        "why": "Finiteness of the coefficient rings, without any freeness assumption on local modules. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-        "why": "Descend intrinsic finite-ring constructible sheaves to etale sheaves. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "prop-weil-pbc-site-comparison-finite-level",
-        "why": "Exact fully faithful finite-level inverse image for unique descent of transitions and quotient isomorphisms. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-pbc-comparison-pullback",
-        "why": "Keep the same strata under the etale/pro-etale comparison. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "det-pe-finite-local-systems-twist",
-        "why": "Finite, possibly nonfree, local modules are etale locally constant on each stratum. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "prop-weil-pbc-geometric-stalks-exact",
-        "why": "Preserve ordinary quotient normalization when taking etale stalks. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lemma-openclosed-stalk-upperstar",
-        "why": "Identify a stalk with the stalk after restriction to its stratum or trivializing etale neighbourhood. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
-        "why": "Compute finite constant etale stalks. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-pod-adic-limit-finite-modules",
-        "why": "Reconstruct a finite A-module, including torsion, from its normalized tower and identify complete local models. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-cbc-proetale-comparison-stalk",
-        "why": "Identify finite-level etale and pro-etale stalks naturally. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-pur-proetale-inverse-image-stalk",
-        "why": "Use geometric lifts to local-model charts without treating non-torsion ordinary stalks as adic fibres. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-proetale-constant-sheaf-stalk",
-        "why": "Compute the finite constant local models at a lifted geometric point. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      },
-      {
-        "node": "lem-weil-pbc-tensor-right-exact",
-        "why": "Compute the rational fibre from a finite presentation by a cokernel. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-pur-integral-twist-line-inverse-image",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-fin-finite-type-fibre-dimension-bound",
-    "prop-weil-pbc-integral-tstructure",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
+  {
+   "text": "All constructions are functorial in an integral morphism: take ordinary quotients, apply the fully faithful comparison of Step 4, take etale stalks, then inverse limits and tensor with $E$. The comparisons of Step 7 use these same quotient maps and are natural, as are rational realization and the normalized fibre functor in [lem-per-continuous-rational-derived-realization] and [lem-per-adic-heart-pullback-fibres]. For the source $B_T$, Step 2 gives the constant system $(A/\\varpi^n)_T$, and its fibre limit is $A$ by [lem-pod-adic-limit-finite-modules](2). Thus $u:B_T\\to F$ gives compatible maps $(A/\\varpi^n)_T\\to G_n$. Their stalk values $a_n$ at $1$ satisfy $a_{n+1}\\bmod\\varpi^n=a_n$, so they define $a_{\\bar x}=(a_n)_n\\in P_{\\bar x}$. Tensoring the resulting map $A\\to P_{\\bar x}$ with $E$ sends $1$ to $a_{\\bar x}\\otimes1$, which is the fibre of $Qu$ by naturality. All quotients above were ordinary cokernels.",
+   "uses": [
     "lem-per-continuous-rational-derived-realization",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "lem-weil-pbc-comparison-pullback",
-    "det-pe-finite-local-systems-twist",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-openclosed-stalk-upperstar",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-pod-adic-limit-finite-modules",
-    "lem-cbc-proetale-comparison-stalk",
-    "lem-pur-proetale-inverse-image-stalk",
-    "lem-weil-proetale-constant-sheaf-stalk",
-    "lem-weil-pbc-tensor-right-exact"
-  ],
-  "reviewed": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-Codex-Q59-686d13ef2",
-    "group": "Q59",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q59-686d13ef2 (reviewer sub-agent of L); spot-checked: Step 2 lacked a node supporting pullback of completed and finite constant coefficient sheaves along a locally closed immersion; its weakly-etale localization citation does not cover closed immersions. Added existing node lem-pur-integral-twist-line-inverse-image to Step 2, proof_deps, and tool_uses in fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-integral-constructible-reduction-fibres.json. All other mathematics, hypotheses, sources, edge cases, and route checks pass.; 1 file(s) fixed by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-d044f2e8c",
-    "group": "N1",
-    "result": "fix",
-    "note": "Mathematics and statement pass. Complete fixes repair H6 local proofs and H11 independent reading; principal signature unchanged. Snapshot and corrected module compile successfully through scompile.py. Findings and evidence are in review.md; replacements are under fixes/. No repository or branch changed."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.IntegralConstructibleReductionFibres",
-    "declaration": "AlgebraicGeometry.Scheme.A1Integral.integralConstructibleReductionFibres",
-    "declarations": [
-      "AlgebraicGeometry.Scheme.A1Integral.Heart",
-      "AlgebraicGeometry.Scheme.A1Integral.toIntegral",
-      "AlgebraicGeometry.Scheme.A1Integral.underlying",
-      "AlgebraicGeometry.Scheme.A1Integral.scalarData",
-      "AlgebraicGeometry.Scheme.A1Integral.scalarData_map_id",
-      "AlgebraicGeometry.Scheme.A1Integral.scalarData_map_comp",
-      "AlgebraicGeometry.Scheme.A1Integral.scalarPresheaf",
-      "AlgebraicGeometry.Scheme.A1Integral.scalarMap_naturality",
-      "AlgebraicGeometry.Scheme.A1Integral.scalars",
-      "AlgebraicGeometry.Scheme.A1Integral.quotient",
-      "AlgebraicGeometry.Scheme.A1Integral.quotientProjection",
-      "AlgebraicGeometry.Scheme.A1Integral.quotientTransition_condition",
-      "AlgebraicGeometry.Scheme.A1Integral.quotientTransition",
-      "AlgebraicGeometry.Scheme.A1Integral.quotientTower",
-      "AlgebraicGeometry.Scheme.A1Integral.etaleTower",
-      "AlgebraicGeometry.Scheme.A1Integral.stalkTower",
-      "AlgebraicGeometry.Scheme.A1Integral.limitFiber",
-      "AlgebraicGeometry.Scheme.A1Integral.sheafFiber",
-      "AlgebraicGeometry.Scheme.A1Integral.rawFiberComparison_eq",
-      "AlgebraicGeometry.Scheme.A1Integral.rawFiberComparison",
-      "AlgebraicGeometry.Scheme.A1Integral.singlePullCounit",
-      "AlgebraicGeometry.Scheme.A1Integral.coefficientUnit",
-      "AlgebraicGeometry.Scheme.A1Integral.regularCounit_isIso",
-      "AlgebraicGeometry.Scheme.A1Integral.pointFinalArrow",
-      "AlgebraicGeometry.Scheme.A1Integral.integralOne",
-      "AlgebraicGeometry.Scheme.A1Integral.coefficientOne",
-      "AlgebraicGeometry.Scheme.A1Integral.sectionResidue",
-      "AlgebraicGeometry.Scheme.A1Integral.integralConstructibleReductionFibres"
-    ],
-    "file": "lean/Sheaf/Paper/IntegralConstructibleReductionFibres.lean",
-    "statement": "theorem integralConstructibleReductionFibres (W : PerAdic.Base k) : (∀ (M : Heart l E W.scheme) (n : ℕ), IsIso ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} (PbcIntegralRing l E)) W.scheme).counit.app ((scalars l E W.scheme).obj ((quotient l E W.scheme n).obj M.obj))) ∧ (∀ U : W.scheme.Etale, (Ideal.span {pbcUniformizer l E}) ^ (n + 1) • (⊤ : Submodule (PbcIntegralRing l E) ((((etaleTower l E W.scheme).obj M.obj).obj (op n)).obj.obj (op U))) = ⊥)) ∧ (∀ (M : Heart l E W.scheme) (n : ℕ), ∃ h : ((pbcUniformizer l E) ^ (n + 1) • 𝟙 (((etaleTower l E W.scheme).obj M.obj).obj (op (n + 1)))) ≫ ((etaleTower l E W.scheme).obj M.obj).map (homOfLE (Nat.le_succ n)).op = 0, Nonempty (IsColimit (CokernelCofork.ofπ (((etaleTower l E W.scheme).obj M.obj).map (homOfLE (Nat.le_succ n)).op) h))) ∧ (∀ M : Heart l E W.scheme, ∃ S : FiniteLocallyClosedStratification W.scheme, (∀ (i : Fin S.n) (n : ℕ), ∃ C : (S.domain i).Cover.{u} proetalePrecoverage, ∀ j : C.I₀, ∃ N : ModuleCat.{u + 1} (PbcIntegralRing l E), Finite N ∧ Nonempty ((ProEtale.upperStar (ModuleCat.{u + 1} (PbcIntegralRing l E)) (C.f j ≫ S.immersion i)).obj ((scalars l E W.scheme).obj ((quotient l E W.scheme n).obj M.obj)) ≅ (constantSheaf (ProEt.topology (C.X j)) (ModuleCat.{u + 1} (PbcIntegralRing l E))).obj N)) ∧ (∀ (i : Fin S.n) (n : ℕ), ∃ C : (S.domain i).Cover.{u} etalePrecoverage, ∀ j : C.I₀, ∃ N : ModuleCat.{u + 1} (PbcIntegralRing l E), Finite N ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} (PbcIntegralRing l E)) (C.f j ≫ S.immersion i)).obj (((etaleTower l E W.scheme).obj M.obj).obj (op n)) ≅ (constantSheaf (C.X j).smallEtaleTopology (ModuleCat.{u + 1} (PbcIntegralRing l E))).obj N))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ W.scheme) (M : Heart l E W.scheme), Module.Finite (PbcIntegralRing l E) ((limitFiber l E W.scheme x).obj M.obj) ∧ ∀ n : ℕ, Function.Surjective (limit.π ((stalkTower l E W.scheme x).obj M.obj) (op n)).hom ∧ LinearMap.ker (limit.π ((stalkTower l E W.scheme x).obj M.obj) (op n)).hom = (Ideal.span {pbcUniformizer l E}) ^ (n + 1) • (⊤ : Submodule (PbcIntegralRing l E) ((limitFiber l E W.scheme x).obj M.obj))) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ W.scheme), ∃ c : toIntegral l E W.scheme ⋙ pbcRationalization W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E) ⋙ PerAdic.fiber l E W.scheme x ≅ underlying l E W.scheme ⋙ limitFiber l E W.scheme x ⋙ ModuleCat.extendScalars (PerAdic.integerToField l E), ∀ (M : Heart l E W.scheme) (a : coefficientUnit l E W.scheme ⟶ M.obj), ∃ b : (limitFiber l E W.scheme x).obj M.obj, (∀ n : ℕ, (limit.π ((stalkTower l E W.scheme x).obj M.obj) (op n)).hom b = sectionResidue l E W.scheme x M.obj a n) ∧ (c.hom.app M).hom ((rawFiberComparison l E W.scheme x).inv.app M ((sheafFiber l E W.scheme x).map a (coefficientOne l E W.scheme x))) = (1 : E) ⊗ₜ[PbcIntegralRing l E, PerAdic.integerToField l E] b",
-    "branch": "newtargets-dag",
-    "by": "N1",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "Ordinary cokernel quotients with their canonical etale direct images and strict transitions; one common finite-lisse partition, projection-normalized finite inverse-limit stalks, and a natural comparison to the recorded raw rational adic fibre. The section normalization uses the actual pullback/derived-counit/completion-unit vector, with no freeness or derived-concentration hypothesis. Maintainer repair: structural laws and fibre-presentation equality are named sorry theorems; all data and the principal statement are unchanged.",
-    "fixed_by": "NT-stage2-Codex-d044f2e8c"
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Canonical quotient, inverse-limit, and localization maps in Lemma 6.8.2 and Propositions 6.8.4(1), 6.8.14(2)"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-pur-integral-twist-line-inverse-image",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "prop-weil-pbc-integral-tstructure",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-comparison-pullback",
+  "det-pe-finite-local-systems-twist",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Combined consequence of Definition 6.8.10 and Propositions 6.8.11(3), 6.8.14(2); finite-module comparison supplied by the cited Stacks nodes. This combined statement is not a verbatim proposition in the paper."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "adic.*[Ss]heaf|[Ss]heaf.*adic|[Cc]onstructible.*[Ss]heaf|[Ss]heaf.*[Cc]onstructible",
+   "results": "{\"t\": \"2026-10-18T02:41:47Z\", \"tool\": \"grep\", \"query\": \"adic.*[Ss]heaf|[Ss]heaf.*adic|[Cc]onstructible.*[Ss]heaf|[Ss]heaf.*[Cc]onstructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\"], \"digest\": \"f4c68c9cd8ed88c0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric fibres of a constructible completed integral coefficient sheaf are inverse limits of finite etale quotient stalks and rationalization inverts the uniformizer",
+   "results": "{\"t\": \"2026-10-18T02:41:47Z\", \"tool\": \"leansearch\", \"query\": \"Geometric fibres of a constructible completed integral coefficient sheaf are inverse limits of finite etale quotient stalks and rationalization inverts the uniformizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ProfiniteGrp.isIso_toLimit\", \"Profinite.lim\", \"Profinite.asLimit\", \"Profinite.asLimitConeIso\", \"Profinite.asLimit'\", \"Profinite.isoAsLimitConeLift\", \"Profinite.lim'\", \"Profinite.isIso_asLimitCone_lift\"], \"digest\": \"791b30131efed6d4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adic\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-18T02:41:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"adic\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_bot\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_inf\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_mul\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_top\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_sup\"], \"digest\": \"7b4e05e16802d042\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral constructible adic sheaf has all ordinary finite quotients locally constant on one finite stratification, with fibres the inverse limits of their etale stalks",
+   "results": "{\"t\": \"2026-10-18T02:41:48Z\", \"tool\": \"leanfinder\", \"query\": \"An integral constructible adic sheaf has all ordinary finite quotients locally constant on one finite stratification, with fibres the inverse limits of their etale stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"Condensed.isColimitLocallyConstantPresheaf\", \"Profinite.exists_locallyConstant_finite_aux\", \"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.ofSheafProfinite\", \"Module.isLocallyConstant_rankAtStalk\", \"Profinite.exists_locallyConstant_fin_two\"], \"digest\": \"71d4ca1b7e4bb2e9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*sheaf|sheaf.*constructible|adic.*sheaf|sheaf.*adic",
+   "results": "{\"t\": \"2026-10-18T03:05:36Z\", \"tool\": \"grep\", \"query\": \"constructible.*sheaf|sheaf.*constructible|adic.*sheaf|sheaf.*adic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\", \"Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean\"], \"digest\": \"f4c68c9cd8ed88c0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern coefficient-sheaf definitions, scheme etale loci, ordinary module completion, module-sheaf finiteness, or condensed/profinite constructions; none gives the integral constructible quotient and adic fibre comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves of modules over completed l-adic integers reduce to finite etale sheaves with finitely generated inverse limit stalks",
+   "results": "{\"t\": \"2026-10-18T03:05:37Z\", \"tool\": \"leansearch\", \"query\": \"Constructible sheaves of modules over completed l-adic integers reduce to finite etale sheaves with finitely generated inverse limit stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.IsFiniteType.mk\", \"SheafOfModules.IsFinitePresentation.mk\", \"CondensedMod.ofSheafProfinite\", \"AlgebraicGeometry.Scheme.Modules.instHasLimits\", \"SheafOfModules.Finite.hasFiniteLimits\", \"SheafOfModules.IsFiniteType\"], \"digest\": \"ae8788c24be12b5f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern coefficient-sheaf definitions, scheme etale loci, ordinary module completion, module-sheaf finiteness, or condensed/profinite constructions; none gives the integral constructible quotient and adic fibre comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"adic\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-18T03:05:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"adic\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.le_radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_bot\", \"AlgebraicGeometry.Scheme.IdealSheafData.support_radical\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_inf\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_mul\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_top\", \"AlgebraicGeometry.Scheme.IdealSheafData.radical_sup\"], \"digest\": \"7b4e05e16802d042\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern coefficient-sheaf definitions, scheme etale loci, ordinary module completion, module-sheaf finiteness, or condensed/profinite constructions; none gives the integral constructible quotient and adic fibre comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral constructible adic sheaf has ordinary finite quotients of etale origin and geometric coefficient fibres given by the inverse limit of their stalks",
+   "results": "{\"t\": \"2026-10-18T03:05:38Z\", \"tool\": \"leanfinder\", \"query\": \"An integral constructible adic sheaf has ordinary finite quotients of etale origin and geometric coefficient fibres given by the inverse limit of their stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.IsEtaleAt\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"aefaab44a517be1d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern coefficient-sheaf definitions, scheme etale loci, ordinary module completion, module-sheaf finiteness, or condensed/profinite constructions; none gives the integral constructible quotient and adic fibre comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite reductions of a constructible sheaf over a complete discrete valuation ring form a normalized inverse system of finite locally constant etale sheaves",
+   "results": "{\"t\": \"2026-10-18T03:05:46Z\", \"tool\": \"leanfinder\", \"query\": \"Finite reductions of a constructible sheaf over a complete discrete valuation ring form a normalized inverse system of finite locally constant etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightProfinite.transitionMap\", \"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"CondensedMod.ofSheafProfinite\", \"LightCondMod.ofSheafLightProfinite\", \"Profinite.exists_locallyConstant_finite_aux\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"Condensed.isColimitLocallyConstantPresheaf\"], \"digest\": \"29d9817485f2c276\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern coefficient-sheaf definitions, scheme etale loci, ordinary module completion, module-sheaf finiteness, or condensed/profinite constructions; none gives the integral constructible quotient and adic fibre comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-adic-section-closed-support",
+  "date": "2026-10-18",
+  "group": "Q59"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-l-dl-a1-endpoints",
+ "blueprint": {
+  "from": {
+   "node": "sk-l-dl-a1-endpoints",
+   "place": "Proof, first two sentences: a section on the compactification must have closed nonzero-fibre support; supplies the integral finite-reduction/fibre comparison used to prove that assertion, not the assertion itself",
+   "via": [
+    "lem-a1-adic-section-closed-support",
+    "lem-a1-constructible-degree-zero-proper-support"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-integral-constructible-reduction-fibres",
+  "worker": "stage1",
+  "summary": "Split without new nodes. Use the existing completed-category stratified finite-module characterization, compute ordinary quotients before descending them, descend transition maps and quotient normalization by exact full faithfulness, and reconstruct finite stalk modules by the existing normalized-tower theorem. A finite-presentation computation gives the natural rational fibre comparison while allowing torsion. The statement is unchanged.",
+  "blueprint": "Realizes the first two sentences of sk-l-dl-a1-endpoints proof, through lem-a1-constructible-degree-zero-proper-support and lem-a1-adic-section-closed-support: the integral quotient/fibre input for closed nonzero-section support. It does not replace the endpoint unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-twist-line-inverse-image",
+    "why": "Supply the canonical inverse-image isomorphism for the completed coefficient sheaf and all finite constant reductions along the locally closed stratum immersion; the endpoint unit has no replacement for this generic coefficient compatibility."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identify pro-etale chart restriction with the slice site and preserve constant coefficients. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Use sectionwise limits and sheafified sectionwise cokernels to check chart restriction. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Check the Noetherian hypothesis of the integral completed-category tools from the finite-type structure map. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Check finite dimension by applying the generic finite-type fibre bound over a field. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Identify the integral heart with ambient degree-zero cohomology. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Supply stratified finite-module local models for the precise completed category including compatible witnesses. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Exact restriction to a stratum and preservation of the completed coefficient limit. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-per-continuous-rational-derived-realization",
+    "why": "Use the precise continuous-coefficient realization, its restriction comparisons and naturality. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Identify the ordinary completed coefficient quotients with finite constant rings. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-section-properties",
+    "why": "Exactness of the constant-module construction in the local ordinary quotient computation. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Verify the DVR and finite residue-field hypotheses of the finite-quotient tool. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Finiteness of the coefficient rings, without any freeness assumption on local modules. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+    "why": "Descend intrinsic finite-ring constructible sheaves to etale sheaves. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "prop-weil-pbc-site-comparison-finite-level",
+    "why": "Exact fully faithful finite-level inverse image for unique descent of transitions and quotient isomorphisms. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Keep the same strata under the etale/pro-etale comparison. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "det-pe-finite-local-systems-twist",
+    "why": "Finite, possibly nonfree, local modules are etale locally constant on each stratum. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Preserve ordinary quotient normalization when taking etale stalks. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "Identify a stalk with the stalk after restriction to its stratum or trivializing etale neighbourhood. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Compute finite constant etale stalks. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Reconstruct a finite A-module, including torsion, from its normalized tower and identify complete local models. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-cbc-proetale-comparison-stalk",
+    "why": "Identify finite-level etale and pro-etale stalks naturally. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-stalk",
+    "why": "Use geometric lifts to local-model charts without treating non-torsion ordinary stalks as adic fibres. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "Compute the finite constant local models at a lifted geometric point. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "Compute the rational fibre from a finite presentation by a cokernel. This is a generic coefficient, site, geometric or algebraic input; the endpoint unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-integral-twist-line-inverse-image",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "prop-weil-pbc-integral-tstructure",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-constant-module-section-properties",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "lem-weil-pbc-comparison-pullback",
+  "det-pe-finite-local-systems-twist",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-openclosed-stalk-upperstar",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-cbc-proetale-comparison-stalk",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q59-686d13ef2",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q59-686d13ef2 (reviewer sub-agent of L); spot-checked: Step 2 lacked a node supporting pullback of completed and finite constant coefficient sheaves along a locally closed immersion; its weakly-etale localization citation does not cover closed immersions. Added existing node lem-pur-integral-twist-line-inverse-image to Step 2, proof_deps, and tool_uses in fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-integral-constructible-reduction-fibres.json. All other mathematics, hypotheses, sources, edge cases, and route checks pass.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d044f2e8c",
+  "group": "N1",
+  "result": "fix",
+  "note": "Mathematics and statement pass. Complete fixes repair H6 local proofs and H11 independent reading; principal signature unchanged. Snapshot and corrected module compile successfully through scompile.py. Findings and evidence are in review.md; replacements are under fixes/. No repository or branch changed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstructibleReductionFibres",
+  "declaration": "AlgebraicGeometry.Scheme.A1Integral.integralConstructibleReductionFibres",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.A1Integral.Heart",
+   "AlgebraicGeometry.Scheme.A1Integral.toIntegral",
+   "AlgebraicGeometry.Scheme.A1Integral.underlying",
+   "AlgebraicGeometry.Scheme.A1Integral.scalarData",
+   "AlgebraicGeometry.Scheme.A1Integral.scalarData_map_id",
+   "AlgebraicGeometry.Scheme.A1Integral.scalarData_map_comp",
+   "AlgebraicGeometry.Scheme.A1Integral.scalarPresheaf",
+   "AlgebraicGeometry.Scheme.A1Integral.scalarMap_naturality",
+   "AlgebraicGeometry.Scheme.A1Integral.scalars",
+   "AlgebraicGeometry.Scheme.A1Integral.quotient",
+   "AlgebraicGeometry.Scheme.A1Integral.quotientProjection",
+   "AlgebraicGeometry.Scheme.A1Integral.quotientTransition_condition",
+   "AlgebraicGeometry.Scheme.A1Integral.quotientTransition",
+   "AlgebraicGeometry.Scheme.A1Integral.quotientTower",
+   "AlgebraicGeometry.Scheme.A1Integral.etaleTower",
+   "AlgebraicGeometry.Scheme.A1Integral.stalkTower",
+   "AlgebraicGeometry.Scheme.A1Integral.limitFiber",
+   "AlgebraicGeometry.Scheme.A1Integral.sheafFiber",
+   "AlgebraicGeometry.Scheme.A1Integral.rawFiberComparison_eq",
+   "AlgebraicGeometry.Scheme.A1Integral.rawFiberComparison",
+   "AlgebraicGeometry.Scheme.A1Integral.singlePullCounit",
+   "AlgebraicGeometry.Scheme.A1Integral.coefficientUnit",
+   "AlgebraicGeometry.Scheme.A1Integral.regularCounit_isIso",
+   "AlgebraicGeometry.Scheme.A1Integral.pointFinalArrow",
+   "AlgebraicGeometry.Scheme.A1Integral.integralOne",
+   "AlgebraicGeometry.Scheme.A1Integral.coefficientOne",
+   "AlgebraicGeometry.Scheme.A1Integral.sectionResidue",
+   "AlgebraicGeometry.Scheme.A1Integral.integralConstructibleReductionFibres"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralConstructibleReductionFibres.lean",
+  "statement": "theorem integralConstructibleReductionFibres (W : PerAdic.Base k) : (∀ (M : Heart l E W.scheme) (n : ℕ), IsIso ((ProEtale.comparisonAdjunction (ModuleCat.{u + 1} (PbcIntegralRing l E)) W.scheme).counit.app ((scalars l E W.scheme).obj ((quotient l E W.scheme n).obj M.obj))) ∧ (∀ U : W.scheme.Etale, (Ideal.span {pbcUniformizer l E}) ^ (n + 1) • (⊤ : Submodule (PbcIntegralRing l E) ((((etaleTower l E W.scheme).obj M.obj).obj (op n)).obj.obj (op U))) = ⊥)) ∧ (∀ (M : Heart l E W.scheme) (n : ℕ), ∃ h : ((pbcUniformizer l E) ^ (n + 1) • 𝟙 (((etaleTower l E W.scheme).obj M.obj).obj (op (n + 1)))) ≫ ((etaleTower l E W.scheme).obj M.obj).map (homOfLE (Nat.le_succ n)).op = 0, Nonempty (IsColimit (CokernelCofork.ofπ (((etaleTower l E W.scheme).obj M.obj).map (homOfLE (Nat.le_succ n)).op) h))) ∧ (∀ M : Heart l E W.scheme, ∃ S : FiniteLocallyClosedStratification W.scheme, (∀ (i : Fin S.n) (n : ℕ), ∃ C : (S.domain i).Cover.{u} proetalePrecoverage, ∀ j : C.I₀, ∃ N : ModuleCat.{u + 1} (PbcIntegralRing l E), Finite N ∧ Nonempty ((ProEtale.upperStar (ModuleCat.{u + 1} (PbcIntegralRing l E)) (C.f j ≫ S.immersion i)).obj ((scalars l E W.scheme).obj ((quotient l E W.scheme n).obj M.obj)) ≅ (constantSheaf (ProEt.topology (C.X j)) (ModuleCat.{u + 1} (PbcIntegralRing l E))).obj N)) ∧ (∀ (i : Fin S.n) (n : ℕ), ∃ C : (S.domain i).Cover.{u} etalePrecoverage, ∀ j : C.I₀, ∃ N : ModuleCat.{u + 1} (PbcIntegralRing l E), Finite N ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} (PbcIntegralRing l E)) (C.f j ≫ S.immersion i)).obj (((etaleTower l E W.scheme).obj M.obj).obj (op n)) ≅ (constantSheaf (C.X j).smallEtaleTopology (ModuleCat.{u + 1} (PbcIntegralRing l E))).obj N))) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ W.scheme) (M : Heart l E W.scheme), Module.Finite (PbcIntegralRing l E) ((limitFiber l E W.scheme x).obj M.obj) ∧ ∀ n : ℕ, Function.Surjective (limit.π ((stalkTower l E W.scheme x).obj M.obj) (op n)).hom ∧ LinearMap.ker (limit.π ((stalkTower l E W.scheme x).obj M.obj) (op n)).hom = (Ideal.span {pbcUniformizer l E}) ^ (n + 1) • (⊤ : Submodule (PbcIntegralRing l E) ((limitFiber l E W.scheme x).obj M.obj))) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ W.scheme), ∃ c : toIntegral l E W.scheme ⋙ pbcRationalization W.scheme (pbcIntegralDatum l E) (pbcUniformizer l E) ⋙ PerAdic.fiber l E W.scheme x ≅ underlying l E W.scheme ⋙ limitFiber l E W.scheme x ⋙ ModuleCat.extendScalars (PerAdic.integerToField l E), ∀ (M : Heart l E W.scheme) (a : coefficientUnit l E W.scheme ⟶ M.obj), ∃ b : (limitFiber l E W.scheme x).obj M.obj, (∀ n : ℕ, (limit.π ((stalkTower l E W.scheme x).obj M.obj) (op n)).hom b = sectionResidue l E W.scheme x M.obj a n) ∧ (c.hom.app M).hom ((rawFiberComparison l E W.scheme x).inv.app M ((sheafFiber l E W.scheme x).map a (coefficientOne l E W.scheme x))) = (1 : E) ⊗ₜ[PbcIntegralRing l E, PerAdic.integerToField l E] b",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Ordinary cokernel quotients with their canonical etale direct images and strict transitions; one common finite-lisse partition, projection-normalized finite inverse-limit stalks, and a natural comparison to the recorded raw rational adic fibre. The section normalization uses the actual pullback/derived-counit/completion-unit vector, with no freeness or derived-concentration hypothesis. Maintainer repair: structural laws and fibre-presentation equality are named sorry theorems; all data and the principal statement are unchanged.",
+  "fixed_by": "NT-stage2-Codex-d044f2e8c"
+ },
+ "lean_audit": {}
 }

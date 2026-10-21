@@ -1,425 +1,426 @@
 {
-  "id": "lem-sp-varying-ring-graph-summand",
-  "kind": "statement",
-  "title": "Graph-supported comparison for semilinear sum extension",
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sp-tower-geometric",
-  "statement": "Let $e:U\\to T$ be a separated etale morphism of finite type of schemes, and choose a compactification $e=pj$ with $j:U\\hookrightarrow\\overline U$ quasi-compact open and $p:\\overline U\\to T$ proper. Let $R_1\\leftarrow R_2\\leftarrow\\cdots$ be any inverse sequence of commutative rings. For each scheme use its small pro-etale site and constant ring sheaves $(R_n)$, and write $\\mathscr S_Z$ for the category of strict semilinear module sections $M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$ as in [lem-coef-semilinear-derived-sections]. Let $e_{\\Sigma!,\\bullet}$ be levelwise sheafification of the direct-sum presheaf\n$$V\\longmapsto\\bigoplus_{t:V\\to U\\,/T}M_n(V,t)$$\nof [def-weil-extension-by-zero-presheaf]. Its derived functor is the exact degreewise functor, denoted $De_{\\Sigma!,\\bullet}$.\n\nThe graph $\\Gamma_t:V\\to\\overline U\\times_TV$ of each lift $t$ is an open and closed immersion. The section equal to $m\\in M_n(V,t)$ on this graph and zero on its complement is a section of $j_!M_n$ on $\\overline U\\times_TV$. The sum of these maps on the presheaf summands induces a module-sheaf map $e_{\\Sigma!,\\bullet}M\\to p_{*,\\bullet}j_{!,\\bullet}M$, natural in $M$ and compatible with all pro-etale restrictions and semilinear transitions. Using the simultaneous derived operations and their comparison maps of [lem-coef-semilinear-derived-sections], the degreewise graph map followed by the derived direct-image comparison gives a natural transformation\n$$\\theta:De_{\\Sigma!,\\bullet}\\longrightarrow Rp_{*,\\bullet}j_{!,\\bullet}$$\nin the ordinary derived categories of sections. Its evaluation at $n$ is the analogous graph natural transformation of functors from $D(U_{\\mathrm{proet}},R_n)$ to $D(T_{\\mathrm{proet}},R_n)$. If $T,U,\\overline U$ are separated of finite type over a field $k$ of characteristic $p>0$, $R_n$ is a finite ring killed by a power of a prime $\\ell\\ne p$, and the input is the etale pullback $\\nu_U^*L$ of a bounded constructible finite-Tor complex, then $\\theta_n$ equals the inverse of the finite etale sum-extension normalization of [lem-pur-etale-support-map-compatibility] transported via the specified compact-support comparison of [lem-sp-et-proet-coefficient-compatibility]. Here the sum-extension site comparison $\\nu_T^*e_{\\Sigma!}^{\\mathrm{et}}\\simeq e_{\\Sigma!}^{\\mathrm{proet}}\\nu_U^*$ is the adjunction-preserving one obtained from the localized-site direct-image identification [lem-weil-pbc-localize-ringed-site-morphism]. This assertion specifies the graph map and its finite evaluation, without asserting it is an isomorphism on arbitrary inputs.",
-  "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F4L (lemma-shriek-into-star-separated-etale), graph-section construction; more-etale.tex Tags 0F4Y (lemma-separated-etale-shriek) and 0GKM (lemma-Rf-shriek-for-quasi-finite), proper-support and derived compactification normalization. Tag 03S5 (proposition-describe-jshriek) gives the fibre-sum stalk formula, not the proper-support description. Agent-formulated graph-to-compactification map on varying-ring pro-etale sections, extracted from returned step 5. Site comparison: proetale.tex Tag 09AF (lemma-jshriek-comparison); these sources alone do not state the tower enhancement."
-  },
-  "stmt_deps": [
-    "def-pc-scheme",
-    "def-weil-proper-morphism",
-    "def-weil-open-immersion",
-    "def-weil-finite-type-morphism",
-    "def-weil-etale-morphism",
-    "def-weil-unramified-morphism",
-    "def-pc-fibre-product",
-    "def-weil-pbc-proetale-site",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-extension-by-zero-presheaf",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "lem-sp-et-proet-coefficient-compatibility",
-    "lem-pur-etale-support-map-compatibility",
-    "sk-def-sfb-dc-setting",
-    "def-sp-semilinear-constant-ring-operations"
-  ],
-  "proof": [
-    {
-      "text": "For a pro-etale test object V→T and a lift t:V→U, base change of the separated etale map e makes U×_T V→V separated etale. Its graph Γ_t is a section, hence an open and closed immersion by the etale-section lemma. The open immersion U×_T V→\\overline U×_T V carries this graph to an open subscheme, while the same graph is closed in the latter product because it is a section of the separated base change of the proper morphism p. The graph therefore has an open-and-closed decomposition in the open part and a closed image in the compactification, exactly the geometry used for extension by zero. In particular the graph is clopen in the whole compactified product, since its open immersion is the composite of the graph open immersion with the base-changed open immersion.",
-      "uses": [
-        "def-pc-fibre-product",
-        "def-weil-etale-morphism",
-        "def-weil-proper-morphism",
-        "def-weil-open-immersion",
-        "lem-weil-pbc-etale-section-clopen-immersion",
-        "lem-weil-pbc-section-separated-closed-immersion",
-        "lem-weil-pbc-open-immersion-base-change",
-        "lem-weil-pbc-separated-base-change",
-        "lem-weil-pbc-etale-scheme-base-change"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F4L graph-section construction; Schemes Tag 01KT, section of a separated morphism; base-change stability; Morphisms Tag 02GO (lemma-base-change-etale)"
-      }
-    },
-    {
-      "text": "Put $\\overline U_V=\\overline U\\times_TV$. Since Step 1 makes $\\Gamma_t$ clopen in $\\overline U_V$, use the disjoint open cover $\\overline U_V=\\Gamma_t\\amalg(\\overline U_V\\setminus\\Gamma_t)$ to glue $m\\in M_n(V,t)$ and zero as sections of $j_!M_n$. On the graph, which lies in $U\\times_TV$, open extension restricts to $M_n$; hence the gluing exists, is unique and is linear. Pullback of this cover along $V'\\to V$ is the graph/complement cover for $t|_{V'}$, so uniqueness proves compatibility with restrictions. Finite sums of these maps define a presheaf-module map from [def-weil-extension-by-zero-presheaf] to $p_*j_!M_n$. Sheafification and [lem-pur-site-restriction-module-adjunction-exact] give the module-sheaf map. For a semilinear transition, both composites have the transitioned value on the same graph and zero on the complement; uniqueness proves the transition identity, without any flatness assumption on the ring maps.",
-      "uses": [
-        "def-weil-extension-by-zero-presheaf",
-        "def-weil-sheaf-of-modules-category",
-        "lem-pur-site-restriction-module-adjunction-exact",
-        "lem-coef-semilinear-derived-sections",
-        "def-pc-fibre-product"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F4L, first paragraph of the proof (graph sections and zero extension); Tag 03S5 fibre-sum presheaf formula"
-      }
-    },
-    {
-      "text": "The maps of Step 2 are natural in the coefficient sheaf because a module morphism commutes with restriction to the graph and to its complement. Apply the simultaneous section models for exact levelwise operations and their adjunction-mate comparisons from [lem-coef-semilinear-derived-sections]. The underived map sheafifies and then derives to a natural transformation θ:De_{Σ!,bullet}→Rp_{*,bullet}j_{!,bullet}. No inverse or isomorphism assertion is used in this construction.",
-      "uses": [
-        "lem-coef-semilinear-derived-sections",
-        "lem-pur-site-restriction-module-adjunction-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
-        "place": "Local pairs paragraph: etale fibre sums and their tower-level derived operations"
-      }
-    },
-    {
-      "text": "The evaluation clause of [lem-coef-semilinear-derived-sections] applies to any strict inverse ring system, with no restriction to $\\mathcal O_E/\\ell^n$. Evaluation preserves the exact sum extension, open extension, derived direct image, the sheaf map of Step 2, and the specified adjunction comparisons used in Step 3. Thus evaluation of $\\theta$ is precisely the analogous graph natural transformation $\\theta_n:D(U_{\\mathrm{proet}},R_n)\\to D(T_{\\mathrm{proet}},R_n)$ formed by the degreewise map followed by the derived direct-image comparison. No compact-support evaluation theorem for a special coefficient tower is needed.",
-      "uses": [
-        "lem-coef-semilinear-derived-sections"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
-        "place": "Levels: evaluation preserves the compact-support operations and their counits"
-      }
-    },
-    {
-      "text": "For the finite comparison fix a finite ring $A=R_n$. By [lem-weil-proetale-weakly-etale-localization], $U_{\\mathrm{proet}}$ is the ringed slice $T_{\\mathrm{proet}}/U$, with the same constant $A$-sheaf. Apply [lem-weil-pbc-localize-ringed-site-morphism] to the etale/pro-etale comparison and the object $U$. Its direct-image comparison is the identity on etale test objects, with the restricted ring action. Both $\\nu_T^*e_{\\Sigma!}^{\\mathrm{et}}$ and $e_{\\Sigma!}^{\\mathrm{proet}}\\nu_U^*$ are left adjoint to the resulting common right adjoint $\\nu_{U,*}e_{\\mathrm{proet}}^*=e_{\\mathrm{et}}^*\\nu_{T,*}$, using the exact slice sum-extension adjunction. The unique comparison preserving these adjunctions is\n$$\\sigma:\\nu_T^*e_{\\Sigma!}^{\\mathrm{et}}\\xrightarrow{\\sim}e_{\\Sigma!}^{\\mathrm{proet}}\\nu_U^*.$$\nOn an etale test object $W\\to T$ it sends the image of a presheaf generator $(t,m)$ to the image of $(t,\\eta_M(m))$: indeed the two adjunction units put $m$ in the same lift summand, and the localized direct-image identity changes neither $W$ nor $t$. This is an assertion about generators before sheafification, not an objectwise direct-sum formula for sheaf sections.",
-      "uses": [
-        "lem-weil-proetale-weakly-etale-localization",
-        "lem-weil-pbc-localize-ringed-site-morphism",
-        "lem-pur-site-restriction-module-adjunction-exact",
-        "def-weil-pbc-etale-sum-extension",
-        "def-weil-extension-by-zero-presheaf",
-        "lem-amb-etale-adjoint-locality"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tag 09AF (lemma-jshriek-comparison), adjunction proof; module refinement using the localized ringed-site identity"
-      }
-    },
-    {
-      "text": "Write $G^{\\mathrm{et}}_M:e_{\\Sigma!}^{\\mathrm{et}}M\\to p_*^{\\mathrm{et}}j_!^{\\mathrm{et}}M$ and $G^{\\mathrm{proet}}_N$ for the graph sheaf maps, and $o_M:\\nu_{\\overline U}^*j_!^{\\mathrm{et}}M\\xrightarrow{\\sim}j_!^{\\mathrm{proet}}\\nu_U^*M$ for the canonical open comparison. Let $d_{p,F}:\\nu_T^*p_*^{\\mathrm{et}}F\\to p_*^{\\mathrm{proet}}\\nu_{\\overline U}^*F$ be the underived counit mate of the inverse pullback comparison. Then\n$$G^{\\mathrm{proet}}_{\\nu_U^*M}\\sigma_M=p_*^{\\mathrm{proet}}(o_M)d_{p,j_!^{\\mathrm{et}}M}\\nu_T^*(G^{\\mathrm{et}}_M).$$\nTo check this equality, transpose under $\\nu_T^*\\dashv\\nu_{T,*}$ and test a generator $(t,m)$ on an etale $W\\to T$. The mate $d_p$ sends a section on $\\overline U\\times_TW$ to its comparison pullback: this is the underived counit formula, restriction to $W$, followed by the localization identity. The comparison pullback preserves restrictions, zero and the sheaf gluing. The open comparison $o$ is the identity after restriction to the open. Consequently both sides have value $\\eta_M(m)$ on the same $\\Gamma_t$ and zero on its complement. The classical module comparison identifies values of $\\nu_U^*M$ on etale test objects with $M$ by its unit. Linearity and the sheafification universal property prove equality for every $M$. Testing here suffices because the maps have been transposed to maps of etale sheaves with source $e_{\\Sigma!}^{\\mathrm{et}}M$.",
-      "uses": [
-        "lem-cbc-proetale-extension-zero-comparison",
-        "def-weil-pbc-adjunction-mate",
-        "lem-weil-pbc-comparison-pullback",
-        "lem-weil-pbc-localize-ringed-site-morphism",
-        "det-pe-classical-sheaves-modules",
-        "def-weil-pbc-site-comparison-morphism",
-        "def-weil-pbc-etale-sum-extension"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/etale-cohomology.tex",
-        "place": "Tag 0F4L (lemma-shriek-into-star-separated-etale), graph calculation; proetale.tex Tag 09AF (lemma-jshriek-comparison); agent check of both transposed sheaf maps"
-      }
-    },
-    {
-      "text": "We check the derived comparison as a mate, rather than infer it from degree-zero agreement. For a bounded-below complex $P$ on $\\overline U_{\\mathrm{et}}$, write $Q$ for localization and\n$$\\gamma_P^{\\mathrm{et}}:Q(p_*^{\\mathrm{et}}P)\\to Rp_*^{\\mathrm{et}}QP,\\qquad \\gamma_{\\nu^*P}^{\\mathrm{proet}}:Q(p_*^{\\mathrm{proet}}\\nu^*P)\\to Rp_*^{\\mathrm{proet}}Q\\nu^*P.$$\nLet $a:\\nu_{\\overline U}^*p_{\\mathrm{et}}^*\\simeq p_{\\mathrm{proet}}^*\\nu_T^*$ and let $b_p$ be the specified derived counit mate of $a^{-1}$. The canonical Hom formula of [lem-pc-pre-derived-adjoint-functors-general], with $s=t=1$ and $f=1_{p_*P}$, says that the transpose of $\\gamma_P$ is $Q(\\varepsilon_P^0)$, the termwise underived counit. Thus the two maps\n$$b_{p,QP}\\nu_T^*(\\gamma_P^{\\mathrm{et}}),\\qquad \\gamma_{\\nu^*P}^{\\mathrm{proet}}Q(d_{p,P})$$\nhave transposes respectively $\\nu_{\\overline U}^*Q(\\varepsilon_P^{0,\\mathrm{et}})a^{-1}$ and $Q(\\varepsilon_{\\nu^*P}^{0,\\mathrm{proet}}p_{\\mathrm{proet}}^*(d_{p,P}))$. They are equal by the defining underived mate equation, degree by degree. The derived adjunction bijection gives\n$$b_{p,QP}\\nu_T^*(\\gamma_P^{\\mathrm{et}})=\\gamma_{\\nu^*P}^{\\mathrm{proet}}Q(d_{p,P}).$$\nExact pullbacks and $a$ are applied termwise throughout. This computation uses no preservation of injective resolutions by $\\nu^*$ and no invertibility of $\\gamma$.",
-      "uses": [
-        "lem-pc-pre-derived-adjoint-functors-general",
-        "def-weil-pbc-adjunction-mate",
-        "lem-weil-pbc-comparison-pullback",
-        "lem-sf-comparison-pullback-exact",
-        "lem-weil-pbc-comparison-direct-image-canonical-mate"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), canonical Hom formula; agent calculation with the underived and derived counit mates"
-      }
-    },
-    {
-      "text": "Now assume the finite clause of the item: $k$ is any field of characteristic $p>0$, $A$ is finite of $\\ell$-power exponent with $\\ell\\ne p$, the schemes are separated finite type over $k$, and $L$ is bounded constructible finite-Tor. The schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] ($\\operatorname{Spec}k$ is Noetherian since its only ideals are $0,k$), and $p$ is qcqs because it is proper. Choose a bounded representative $K$ of $L$ and put $P=j_!^{\\mathrm{et}}K$ in Step 7. Apply $Q$ to Step 6 degreewise, then the pro-etale comparison $\\gamma$. Naturality of $\\gamma$ for $o_K$, followed by Step 7, gives explicitly\n$$\\begin{aligned}\n\\theta_n(\\nu_U^*L)\\sigma_L\n&=\\gamma^{\\mathrm{proet}}Q(G^{\\mathrm{proet}}_{\\nu_U^*K})\\sigma_K\\\\\n&=Rp_*^{\\mathrm{proet}}(o_K)\\gamma^{\\mathrm{proet}}_{\\nu^*P}Q(d_{p,P})\\nu_T^*Q(G^{\\mathrm{et}}_K)\\\\\n&=Rp_*^{\\mathrm{proet}}(o_K)b_{p,QP}\\nu_T^*(\\gamma_P^{\\mathrm{et}}Q(G^{\\mathrm{et}}_K))\\\\\n&=c_{e,A}^c(L)\\nu_T^*((c_e^{c,\\mathrm{et}}(L))^{-1}).\n\\end{aligned}$$\nHere $c_e^{c,\\mathrm{et}}$ is the sum-extension normalization of [lem-pur-etale-support-map-compatibility], whose inverse is exactly $\\gamma^{\\mathrm{et}}Q(G^{\\mathrm{et}})$; $c_{e,A}^c=Rp_*^{\\mathrm{proet}}(o)b_p$ is precisely the compact-support site comparison defined in [lem-sp-et-proet-coefficient-compatibility]. Thus the displayed equation proves the requested finite normalization with the specified $\\sigma$, not just existence of an isomorphism. These are identities of the natural transformations on representatives, so [lem-weil-pbc-localization-universal-property] makes them equal as derived natural transformations; no finite-field hypothesis on $k$ or coefficient-change assertion is used.",
-      "uses": [
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "def-weil-proper-morphism",
-        "lem-pur-etale-support-map-compatibility",
-        "lem-sp-et-proet-coefficient-compatibility",
-        "lem-weil-pbc-comparison-direct-image-canonical-mate",
-        "lem-sf-comparison-pullback-exact",
-        "lem-weil-pbc-localization-universal-property"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tags 0F4Y (lemma-separated-etale-shriek), 0GKM (lemma-Rf-shriek-for-quasi-finite); agent assembly of the graph and mate equalities in Steps 6–7"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sp-varying-ring-graph-summand",
+ "kind": "statement",
+ "title": "Graph-supported comparison for semilinear sum extension",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let $e:U\\to T$ be a separated etale morphism of finite type of schemes, and choose a compactification $e=pj$ with $j:U\\hookrightarrow\\overline U$ quasi-compact open and $p:\\overline U\\to T$ proper. Let $R_1\\leftarrow R_2\\leftarrow\\cdots$ be any inverse sequence of commutative rings. For each scheme use its small pro-etale site and constant ring sheaves $(R_n)$, and write $\\mathscr S_Z$ for the category of strict semilinear module sections $M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$ as in [lem-coef-semilinear-derived-sections]. Let $e_{\\Sigma!,\\bullet}$ be levelwise sheafification of the direct-sum presheaf\n$$V\\longmapsto\\bigoplus_{t:V\\to U\\,/T}M_n(V,t)$$\nof [def-weil-extension-by-zero-presheaf]. Its derived functor is the exact degreewise functor, denoted $De_{\\Sigma!,\\bullet}$.\n\nThe graph $\\Gamma_t:V\\to\\overline U\\times_TV$ of each lift $t$ is an open and closed immersion. The section equal to $m\\in M_n(V,t)$ on this graph and zero on its complement is a section of $j_!M_n$ on $\\overline U\\times_TV$. The sum of these maps on the presheaf summands induces a module-sheaf map $e_{\\Sigma!,\\bullet}M\\to p_{*,\\bullet}j_{!,\\bullet}M$, natural in $M$ and compatible with all pro-etale restrictions and semilinear transitions. Using the simultaneous derived operations and their comparison maps of [lem-coef-semilinear-derived-sections], the degreewise graph map followed by the derived direct-image comparison gives a natural transformation\n$$\\theta:De_{\\Sigma!,\\bullet}\\longrightarrow Rp_{*,\\bullet}j_{!,\\bullet}$$\nin the ordinary derived categories of sections. Its evaluation at $n$ is the analogous graph natural transformation of functors from $D(U_{\\mathrm{proet}},R_n)$ to $D(T_{\\mathrm{proet}},R_n)$. If $T,U,\\overline U$ are separated of finite type over a field $k$ of characteristic $p>0$, $R_n$ is a finite ring killed by a power of a prime $\\ell\\ne p$, and the input is the etale pullback $\\nu_U^*L$ of a bounded constructible finite-Tor complex, then $\\theta_n$ equals the inverse of the finite etale sum-extension normalization of [lem-pur-etale-support-map-compatibility] transported via the specified compact-support comparison of [lem-sp-et-proet-coefficient-compatibility]. Here the sum-extension site comparison $\\nu_T^*e_{\\Sigma!}^{\\mathrm{et}}\\simeq e_{\\Sigma!}^{\\mathrm{proet}}\\nu_U^*$ is the adjunction-preserving one obtained from the localized-site direct-image identification [lem-weil-pbc-localize-ringed-site-morphism]. This assertion specifies the graph map and its finite evaluation, without asserting it is an isomorphism on arbitrary inputs.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F4L (lemma-shriek-into-star-separated-etale), graph-section construction; more-etale.tex Tags 0F4Y (lemma-separated-etale-shriek) and 0GKM (lemma-Rf-shriek-for-quasi-finite), proper-support and derived compactification normalization. Tag 03S5 (proposition-describe-jshriek) gives the fibre-sum stalk formula, not the proper-support description. Agent-formulated graph-to-compactification map on varying-ring pro-etale sections, extracted from returned step 5. Site comparison: proetale.tex Tag 09AF (lemma-jshriek-comparison); these sources alone do not state the tower enhancement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "def-pc-fibre-product",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-extension-by-zero-presheaf",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-pur-etale-support-map-compatibility",
+  "sk-def-sfb-dc-setting",
+  "def-sp-semilinear-constant-ring-operations"
+ ],
+ "proof": [
+  {
+   "text": "For a pro-etale test object V→T and a lift t:V→U, base change of the separated etale map e makes U×_T V→V separated etale. Its graph Γ_t is a section, hence an open and closed immersion by the etale-section lemma. The open immersion U×_T V→\\overline U×_T V carries this graph to an open subscheme, while the same graph is closed in the latter product because it is a section of the separated base change of the proper morphism p. The graph therefore has an open-and-closed decomposition in the open part and a closed image in the compactification, exactly the geometry used for extension by zero. In particular the graph is clopen in the whole compactified product, since its open immersion is the composite of the graph open immersion with the base-changed open immersion.",
+   "uses": [
     "def-pc-fibre-product",
     "def-weil-etale-morphism",
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-open-immersion",
-    "def-weil-pbc-adjunction-mate",
-    "def-weil-pbc-etale-sum-extension",
-    "def-weil-pbc-site-comparison-morphism",
     "def-weil-proper-morphism",
-    "def-weil-sheaf-of-modules-category",
-    "det-pe-classical-sheaves-modules",
-    "lem-amb-etale-adjoint-locality",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-coef-semilinear-derived-sections",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-pur-etale-support-map-compatibility",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sf-comparison-pullback-exact",
-    "lem-sp-et-proet-coefficient-compatibility",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-etale-scheme-base-change",
+    "def-weil-open-immersion",
     "lem-weil-pbc-etale-section-clopen-immersion",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "lem-weil-pbc-open-immersion-base-change",
     "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
     "lem-weil-pbc-separated-base-change",
-    "lem-weil-proetale-weakly-etale-localization"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L graph-section construction; Schemes Tag 01KT, section of a separated morphism; base-change stability; Morphisms Tag 02GO (lemma-base-change-etale)"
+   }
+  },
+  {
+   "text": "Put $\\overline U_V=\\overline U\\times_TV$. Since Step 1 makes $\\Gamma_t$ clopen in $\\overline U_V$, use the disjoint open cover $\\overline U_V=\\Gamma_t\\amalg(\\overline U_V\\setminus\\Gamma_t)$ to glue $m\\in M_n(V,t)$ and zero as sections of $j_!M_n$. On the graph, which lies in $U\\times_TV$, open extension restricts to $M_n$; hence the gluing exists, is unique and is linear. Pullback of this cover along $V'\\to V$ is the graph/complement cover for $t|_{V'}$, so uniqueness proves compatibility with restrictions. Finite sums of these maps define a presheaf-module map from [def-weil-extension-by-zero-presheaf] to $p_*j_!M_n$. Sheafification and [lem-pur-site-restriction-module-adjunction-exact] give the module-sheaf map. For a semilinear transition, both composites have the transitioned value on the same graph and zero on the complement; uniqueness proves the transition identity, without any flatness assumption on the ring maps.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-coef-semilinear-derived-sections",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L, first paragraph of the proof (graph sections and zero extension); Tag 03S5 fibre-sum presheaf formula"
+   }
+  },
+  {
+   "text": "The maps of Step 2 are natural in the coefficient sheaf because a module morphism commutes with restriction to the graph and to its complement. Apply the simultaneous section models for exact levelwise operations and their adjunction-mate comparisons from [lem-coef-semilinear-derived-sections]. The underived map sheafifies and then derives to a natural transformation θ:De_{Σ!,bullet}→Rp_{*,bullet}j_{!,bullet}. No inverse or isomorphism assertion is used in this construction.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
-    "place": "Local pairs paragraph and Levels paragraph; tower graph normalization supplied by the agent from Stacks Tags 0F4L, 0F4Y, 0GKM and 09AF"
+    "place": "Local pairs paragraph: etale fibre sums and their tower-level derived operations"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "Etale sum extension to compact support via clopen graph of each lift on pro etale sheaves",
-      "results": "{\"n_hits\": 8, \"top\": [\"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePair.homEquiv_symm_apply\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"StandardEtalePair.lift\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"note\": \"\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: hits are generic and do not state this derived varying-coefficient lemma."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Extension by zero along graph section defines comparison etale shriek to proper pushforward for varying coefficient modules",
-      "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.pushforwardSections_coe\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"SheafOfModules.pushforwardSections\"], \"note\": \"\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: hits are generic and do not state this derived varying-coefficient lemma."
-    },
-    {
-      "tool": "loogle",
-      "query": "\"SheafOfModules\", \"extension\"",
-      "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "graph.*(shriek|extensionByZero)|sum.*extension|proetale.*support",
-      "results": "{\"n_hits\": 15, \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/MDifferentiable.lean\", \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/MDifferentiable.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean\"], \"note\": \"\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: hits are generic and do not state this derived varying-coefficient lemma."
-    },
-    {
-      "tool": "leansearch",
-      "query": "clopen graph support comparison from etale sum extension to compactified derived direct image",
-      "results": "{\"n_hits\": 8, \"top\": [\"TopologicalSpace.Clopens.ext_iff\", \"TopologicalSpace.Clopens.toOpens\", \"TopologicalSpace.Clopens.ext\", \"HasCompactSupport.comp_isClosedEmbedding\", \"TopologicalSpace.Clopens.toCloseds\", \"IsClopen.compl\", \"TopologicalSpace.Clopens.coe_toOpens\", \"HasCompactMulSupport.comp_isClosedEmbedding\"], \"note\": \"\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: hits are generic and do not state this derived varying-coefficient lemma."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-sp-coefficient-tower-shriek-calculus",
-    "date": "2026-10-17",
-    "group": "Q107"
+  {
+   "text": "The evaluation clause of [lem-coef-semilinear-derived-sections] applies to any strict inverse ring system, with no restriction to $\\mathcal O_E/\\ell^n$. Evaluation preserves the exact sum extension, open extension, derived direct image, the sheaf map of Step 2, and the specified adjunction comparisons used in Step 3. Thus evaluation of $\\theta$ is precisely the analogous graph natural transformation $\\theta_n:D(U_{\\mathrm{proet}},R_n)\\to D(T_{\\mathrm{proet}},R_n)$ formed by the degreewise map followed by the derived direct-image comparison. No compact-support evaluation theorem for a special coefficient tower is needed.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+    "place": "Levels: evaluation preserves the compact-support operations and their counits"
+   }
   },
-  "blueprint": {
-    "from": {
-      "node": "det-sp-tower-gluing",
-      "place": "Local pairs paragraph: the etale fibre-sum comparison and its extension-by-zero realization on the compactification.",
-      "via": [
-        "lem-sp-coefficient-tower-shriek-calculus"
-      ]
-    },
-    "same_as": [],
-    "is": null
+  {
+   "text": "For the finite comparison fix a finite ring $A=R_n$. By [lem-weil-proetale-weakly-etale-localization], $U_{\\mathrm{proet}}$ is the ringed slice $T_{\\mathrm{proet}}/U$, with the same constant $A$-sheaf. Apply [lem-weil-pbc-localize-ringed-site-morphism] to the etale/pro-etale comparison and the object $U$. Its direct-image comparison is the identity on etale test objects, with the restricted ring action. Both $\\nu_T^*e_{\\Sigma!}^{\\mathrm{et}}$ and $e_{\\Sigma!}^{\\mathrm{proet}}\\nu_U^*$ are left adjoint to the resulting common right adjoint $\\nu_{U,*}e_{\\mathrm{proet}}^*=e_{\\mathrm{et}}^*\\nu_{T,*}$, using the exact slice sum-extension adjunction. The unique comparison preserving these adjunctions is\n$$\\sigma:\\nu_T^*e_{\\Sigma!}^{\\mathrm{et}}\\xrightarrow{\\sim}e_{\\Sigma!}^{\\mathrm{proet}}\\nu_U^*.$$\nOn an etale test object $W\\to T$ it sends the image of a presheaf generator $(t,m)$ to the image of $(t,\\eta_M(m))$: indeed the two adjunction units put $m$ in the same lift summand, and the localized direct-image identity changes neither $W$ nor $t$. This is an assertion about generators before sheafification, not an objectwise direct-sum formula for sheaf sections.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-etale-sum-extension",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF (lemma-jshriek-comparison), adjunction proof; module refinement using the localized ringed-site identity"
+   }
   },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-sp-varying-ring-graph-summand",
-    "worker": "stage1",
-    "summary": "Repaired the returned split without changing the statement or creating nodes. Added the etale base-change and pro-etale slice citations, corrected the gluing cover to the compactified product, removed the special coefficient-tower evaluation citation, and replaced the unsupported transport assertion by the degree-zero graph equality, the derived/underived mate comparison-unit calculation from the canonical Hom formula, and an explicit composite equality for the finite normalization.",
-    "blueprint": "Steps 1–3 realize the Local pairs paragraph of det-sp-tower-gluing; Step 4 realizes Levels for the arbitrary strict ring system via lem-coef-semilinear-derived-sections; Steps 5–8 check the specified site and finite graph normalization in Local pairs by graph generators and canonical adjunction mates.",
-    "tool_uses": [
-      {
-        "node": "lem-pur-etale-support-map-compatibility",
-        "why": "Its finite ordinary-etale statement supplies the graph-section normalization that the tower item transports levelwise."
-      },
-      {
-        "node": "lem-sp-et-proet-coefficient-compatibility",
-        "why": "Its statement supplies the specified etale/pro-etale coefficient and compact-support comparison used only for the finite evaluation clause."
-      },
-      {
-        "node": "lem-coef-semilinear-derived-sections",
-        "why": "Its statement supplies the simultaneous derived section model and evaluation compatibility for the varying-ring tower."
-      },
-      {
-        "node": "lem-weil-pbc-localize-ringed-site-morphism",
-        "why": "Its statement supplies the localized-site direct-image identification and adjunction-preserving ringed-site comparison."
-      },
-      {
-        "node": "lem-pc-pre-derived-adjoint-functors-general",
-        "why": "Only its canonical Hom formula for derived adjoints is used in the three-line transpose calculation; no geometric route is substituted."
-      },
-      {
-        "node": "det-pe-classical-sheaves-modules",
-        "why": "Its sheaf-level comparison unit identifies the values on etale test objects used to check the graph sections."
-      },
-      {
-        "node": "lem-weil-pbc-finite-type-over-noetherian",
-        "why": "Generic Noetherian ascent verifies the hypothesis of the ordinary-etale graph normalization."
-      },
-      {
-        "node": "lem-weil-proetale-weakly-etale-localization",
-        "why": "Its ringed slice equivalence identifies the sum-extension adjunction at the pro-etale site."
-      },
-      {
-        "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-        "why": "Its counit-mate normalization specifies b_p in the finite comparison."
-      },
-      {
-        "node": "lem-weil-pbc-comparison-pullback",
-        "why": "Its pullback square is the one whose mate defines the proper direct-image comparison."
-      },
-      {
-        "node": "lem-cbc-proetale-extension-zero-comparison",
-        "why": "The canonical open-extension comparison supplies o, used on degree-zero graph sections and termwise on complexes."
-      },
-      {
-        "node": "lem-sf-comparison-pullback-exact",
-        "why": "Exact site pullback descends the generator and mate equalities to derived categories."
-      },
-      {
-        "node": "lem-amb-etale-adjoint-locality",
-        "why": "Only the exact etale sum-extension adjunction is used, not its compact-support right-adjoint conclusion."
-      },
-      {
-        "node": "lem-weil-pbc-localization-universal-property",
-        "why": "Equality of natural transformations is checked on representative complexes."
-      }
-    ]
+  {
+   "text": "Write $G^{\\mathrm{et}}_M:e_{\\Sigma!}^{\\mathrm{et}}M\\to p_*^{\\mathrm{et}}j_!^{\\mathrm{et}}M$ and $G^{\\mathrm{proet}}_N$ for the graph sheaf maps, and $o_M:\\nu_{\\overline U}^*j_!^{\\mathrm{et}}M\\xrightarrow{\\sim}j_!^{\\mathrm{proet}}\\nu_U^*M$ for the canonical open comparison. Let $d_{p,F}:\\nu_T^*p_*^{\\mathrm{et}}F\\to p_*^{\\mathrm{proet}}\\nu_{\\overline U}^*F$ be the underived counit mate of the inverse pullback comparison. Then\n$$G^{\\mathrm{proet}}_{\\nu_U^*M}\\sigma_M=p_*^{\\mathrm{proet}}(o_M)d_{p,j_!^{\\mathrm{et}}M}\\nu_T^*(G^{\\mathrm{et}}_M).$$\nTo check this equality, transpose under $\\nu_T^*\\dashv\\nu_{T,*}$ and test a generator $(t,m)$ on an etale $W\\to T$. The mate $d_p$ sends a section on $\\overline U\\times_TW$ to its comparison pullback: this is the underived counit formula, restriction to $W$, followed by the localization identity. The comparison pullback preserves restrictions, zero and the sheaf gluing. The open comparison $o$ is the identity after restriction to the open. Consequently both sides have value $\\eta_M(m)$ on the same $\\Gamma_t$ and zero on its complement. The classical module comparison identifies values of $\\nu_U^*M$ on etale test objects with $M$ by its unit. Linearity and the sheafification universal property prove equality for every $M$. Testing here suffices because the maps have been transposed to maps of etale sheaves with source $e_{\\Sigma!}^{\\mathrm{et}}M$.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "det-pe-classical-sheaves-modules",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-etale-sum-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L (lemma-shriek-into-star-separated-etale), graph calculation; proetale.tex Tag 09AF (lemma-jshriek-comparison); agent check of both transposed sheaf maps"
+   }
   },
-  "tool_uses": [
+  {
+   "text": "We check the derived comparison as a mate, rather than infer it from degree-zero agreement. For a bounded-below complex $P$ on $\\overline U_{\\mathrm{et}}$, write $Q$ for localization and\n$$\\gamma_P^{\\mathrm{et}}:Q(p_*^{\\mathrm{et}}P)\\to Rp_*^{\\mathrm{et}}QP,\\qquad \\gamma_{\\nu^*P}^{\\mathrm{proet}}:Q(p_*^{\\mathrm{proet}}\\nu^*P)\\to Rp_*^{\\mathrm{proet}}Q\\nu^*P.$$\nLet $a:\\nu_{\\overline U}^*p_{\\mathrm{et}}^*\\simeq p_{\\mathrm{proet}}^*\\nu_T^*$ and let $b_p$ be the specified derived counit mate of $a^{-1}$. The canonical Hom formula of [lem-pc-pre-derived-adjoint-functors-general], with $s=t=1$ and $f=1_{p_*P}$, says that the transpose of $\\gamma_P$ is $Q(\\varepsilon_P^0)$, the termwise underived counit. Thus the two maps\n$$b_{p,QP}\\nu_T^*(\\gamma_P^{\\mathrm{et}}),\\qquad \\gamma_{\\nu^*P}^{\\mathrm{proet}}Q(d_{p,P})$$\nhave transposes respectively $\\nu_{\\overline U}^*Q(\\varepsilon_P^{0,\\mathrm{et}})a^{-1}$ and $Q(\\varepsilon_{\\nu^*P}^{0,\\mathrm{proet}}p_{\\mathrm{proet}}^*(d_{p,P}))$. They are equal by the defining underived mate equation, degree by degree. The derived adjunction bijection gives\n$$b_{p,QP}\\nu_T^*(\\gamma_P^{\\mathrm{et}})=\\gamma_{\\nu^*P}^{\\mathrm{proet}}Q(d_{p,P}).$$\nExact pullbacks and $a$ are applied termwise throughout. This computation uses no preservation of injective resolutions by $\\nu^*$ and no invertibility of $\\gamma$.",
+   "uses": [
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND (lemma-pre-derived-adjoint-functors-general), canonical Hom formula; agent calculation with the underived and derived counit mates"
+   }
+  },
+  {
+   "text": "Now assume the finite clause of the item: $k$ is any field of characteristic $p>0$, $A$ is finite of $\\ell$-power exponent with $\\ell\\ne p$, the schemes are separated finite type over $k$, and $L$ is bounded constructible finite-Tor. The schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] ($\\operatorname{Spec}k$ is Noetherian since its only ideals are $0,k$), and $p$ is qcqs because it is proper. Choose a bounded representative $K$ of $L$ and put $P=j_!^{\\mathrm{et}}K$ in Step 7. Apply $Q$ to Step 6 degreewise, then the pro-etale comparison $\\gamma$. Naturality of $\\gamma$ for $o_K$, followed by Step 7, gives explicitly\n$$\\begin{aligned}\n\\theta_n(\\nu_U^*L)\\sigma_L\n&=\\gamma^{\\mathrm{proet}}Q(G^{\\mathrm{proet}}_{\\nu_U^*K})\\sigma_K\\\\\n&=Rp_*^{\\mathrm{proet}}(o_K)\\gamma^{\\mathrm{proet}}_{\\nu^*P}Q(d_{p,P})\\nu_T^*Q(G^{\\mathrm{et}}_K)\\\\\n&=Rp_*^{\\mathrm{proet}}(o_K)b_{p,QP}\\nu_T^*(\\gamma_P^{\\mathrm{et}}Q(G^{\\mathrm{et}}_K))\\\\\n&=c_{e,A}^c(L)\\nu_T^*((c_e^{c,\\mathrm{et}}(L))^{-1}).\n\\end{aligned}$$\nHere $c_e^{c,\\mathrm{et}}$ is the sum-extension normalization of [lem-pur-etale-support-map-compatibility], whose inverse is exactly $\\gamma^{\\mathrm{et}}Q(G^{\\mathrm{et}})$; $c_{e,A}^c=Rp_*^{\\mathrm{proet}}(o)b_p$ is precisely the compact-support site comparison defined in [lem-sp-et-proet-coefficient-compatibility]. Thus the displayed equation proves the requested finite normalization with the specified $\\sigma$, not just existence of an isomorphism. These are identities of the natural transformations on representatives, so [lem-weil-pbc-localization-universal-property] makes them equal as derived natural transformations; no finite-field hypothesis on $k$ or coefficient-change assertion is used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism",
     "lem-pur-etale-support-map-compatibility",
     "lem-sp-et-proet-coefficient-compatibility",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "det-pe-classical-sheaves-modules",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-proetale-weakly-etale-localization",
     "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-cbc-proetale-extension-zero-comparison",
     "lem-sf-comparison-pullback-exact",
-    "lem-amb-etale-adjoint-locality",
     "lem-weil-pbc-localization-universal-property"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-NM-6ae2368fb",
-    "group": "NM",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-6ae2368fb (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement, all 8 steps, and the statement of every cited node. I also read Stacks 0F4L (etale-cohomology.tex l.11517), 0F4Y (more-etale.tex l.200) and 09AF (proetale.tex l.5076), the unit sk-prop-sp-tower-geometric, and the Local pairs and Levels paragraphs of det-sp-tower-gluing. The statement is unchanged and no new nodes are created. Step 1: the graph is a section of the separated étale base change, so it is open and closed there; it is open in the compactified product because U×V→Ū×V is an open immersion; it is closed because it is a section of the separated base change of p. So it is clopen in the whole compactified product. Step 2: gluing on that open cover gives a unique section, which makes the map compatible with restrictions and with semilinear transitions, with no flatness needed. Steps 3–4 use only the general section-model and evaluation clauses of lem-coef-semilinear-derived-sections; the coefficient-tower citation that caused the earlier return is gone. Step 5: I recomputed σ as the comparison that preserves the adjunctions, using the shared right adjoint from lem-weil-pbc-localize-ringed-site-morphism and lem-weil-proetale-weakly-etale-localization; it sends the generator (t,m) to (t,η m). Step 6: I unwound the mate d_p using def-weil-pbc-adjunction-mate; both transposes have value η(m) on the graph and zero off it. Step 7: setting s=t=1 and f=1 in the Hom formula gives that the transpose of γ_P is Q(ε⁰_P). The normalization of b_p and the mate equation for d_p then give the claimed equality, without inverting γ. Step 8: I checked each line of the chain against Steps 6 and 7 and the naturality of γ. The last line follows from two cited statements: lem-pur-etale-support-map-compatibility gives the formula for (c^c_e)^{-1}, and lem-sp-et-proet-coefficient-compatibility defines c^c as Rp_*(o)∘b_p. The Noetherian and qcqs hypotheses are verified there. I tested the edge cases (no lifts, empty U, zero module, e=id, zero ring, nonflat transitions); the item has no cycle and duplicates no existing node. Accepted tool_uses (off the unit's route): lem-coef-semilinear-derived-sections, lem-pur-etale-support-map-compatibility and lem-sp-et-proet-coefficient-compatibility. The other declared tool uses are on the route and need no acceptance. One harmless leftover: def-weil-unramified-morphism is listed in stmt_deps but not used; I left it. No changes."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.VaryingRingGraphSummand",
-    "declaration": "AlgebraicGeometry.ProEtale.VaryingRingGraph.varyingRingGraphSummand",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumSite",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumSite_continuous",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelCoefficientMap",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.coefficientMap_naturality",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumCoefficientMap",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumRestriction",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumRestriction_isRightAdjoint",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sum",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumAdjunction",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sum_exact",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sum_additive",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sum_limits",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sum_colimits",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.restrictionSections",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.pushSections",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.generator",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.restrictionPushAdjunction_existsUnique",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.restrictionPushAdjunction",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.restrictionComparison",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.geometricSumAdjunction",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.graph",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.graph_clopen",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.graphArrow",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.graphMap_existsUnique",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.graphMap",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.onHomotopy",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.theta_existsUnique",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.theta",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelPull_isRightAdjoint",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSum",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSumAdjunction",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSum_exact",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSum_additive",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSum_limits",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSum_colimits",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSite_continuous",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelRestriction",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelRestrictionSections",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelPushSections",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelRestrictionAdjunction_existsUnique",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelRestrictionComparison",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelGenerator",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelGraphMap_existsUnique",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelGraphMap",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelOnHomotopy",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelTheta_existsUnique",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelTheta",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.ev",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.Ev",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.ordinaryPullEvaluation",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumEvaluationInv",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumEvaluationInv_isIso",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumEvaluation",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.openEvaluationInv",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.openEvaluationInv_isIso",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.openEvaluation",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.pullEvaluation",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.pushEvaluation",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.pushEvaluation_isIso",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.varyingRingGraphSummand",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.sitePull",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.siteSumInv",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.siteSumInv_isIso",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.siteSumComparison",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.finiteSupportComparison",
-      "AlgebraicGeometry.ProEtale.VaryingRingGraph.finite_normalization"
-    ],
-    "file": "lean/Sheaf/Paper/VaryingRingGraphSummand.lean",
-    "statement": "theorem varyingRingGraphSummand {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e) [QuasiCompact c.i] (n : ℕ) (M : SemilinearProperOpen.Derived C τ U) : (Ev C τ T n).map ((theta C τ e c).app M) ≫ (pushEvaluation C τ c.g n).app ((SemilinearProperOpen.J C τ c.i).obj M) ≫ (StrictTower.moduleDirectImage (C n) c.g).rightDerivedFunctor.map ((openEvaluation C τ c.i n).hom.app M) = (sumEvaluation C τ e n).hom.app M ≫ (levelTheta (C n) e c).app ((Ev C τ U n).obj M)",
-    "branch": "newtargets-dag",
-    "by": "NB",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "The declarations jointly state all clauses: graph_clopen; graphMap_existsUnique and its uniquely normalized graphMap; exact sum extension and theta fixed by its derived-unit word on every homotopy representative; varyingRingGraphSummand with invertible evaluation comparisons; finite_normalization with the localized-site adjunction mate and the specified proper/open support mate. Reuses the published arbitrary-ring operations registered by def-sp-semilinear-constant-ring-operations, added to stmt_deps; the mate-pasting theorem itself is not a statement dependency. No statement correction or dependency repair."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-44edbc443",
-    "group": "NB",
-    "result": "pass",
-    "note": "Re-delivery of the H2 RETURN of 4720c777bda7. VaryingRingGraphSummand.lean is byte-identical (sha256 fa3f906a…), so the earlier full substance check (graph_clopen, graphMap, theta, evaluation clause, finite_normalization, edge cases, universes, no hollow defs, docstrings) carries over. Item delta: stmt_dep lem-sf-semilinear-proper-open-mate-pasting replaced by new def node def-sp-semilinear-constant-ring-operations, plus the lean.note; nothing else changed. New node: kind definition, existing:true on unchanged Sheaf.SixFunctors.SemilinearProperOpenMatePasting; all 42 listed declarations exist there; statement 'abbrev Modules (X : Scheme.{u})' matches line 86 verbatim; TeX matches coefficients/ringSystem/Modules=Systems/Derived=DS/push/pull=leftAdjoint/adj/extension/J/E/evalPushOrdinary/evalPullInv/evalP/evalR; nothing is .choose of the theorem; 9 definition stmt_deps, all live, no theorem, no cycle; no competing def node on the module. nt_compile --json clean: SemilinearProperOpenMatePasting 30.4 s, item 8.8 s, exit 0, no warnings. Earlier advisories A1–A3 optional."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F4Y (lemma-separated-etale-shriek), 0GKM (lemma-Rf-shriek-for-quasi-finite); agent assembly of the graph and mate equalities in Steps 6–7"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-open-immersion",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "det-pe-classical-sheaves-modules",
+  "lem-amb-etale-adjoint-locality",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-separated-base-change",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gluing.proof.md",
+  "place": "Local pairs paragraph and Levels paragraph; tower graph normalization supplied by the agent from Stacks Tags 0F4L, 0F4Y, 0GKM and 09AF"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale sum extension to compact support via clopen graph of each lift on pro etale sheaves",
+   "results": "{\"n_hits\": 8, \"top\": [\"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePair.homEquiv_symm_apply\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"StandardEtalePair.lift\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are generic and do not state this derived varying-coefficient lemma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along graph section defines comparison etale shriek to proper pushforward for varying coefficient modules",
+   "results": "{\"n_hits\": 8, \"top\": [\"SheafOfModules.pushforwardSections_coe\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"SheafOfModules.pushforwardSections_unitHomEquiv\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_presheaf_map\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"SheafOfModules.pushforwardSections\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are generic and do not state this derived varying-coefficient lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extension\"",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "graph.*(shriek|extensionByZero)|sum.*extension|proetale.*support",
+   "results": "{\"n_hits\": 15, \"top\": [\"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/MDifferentiable.lean\", \"Mathlib/NumberTheory/ModularForms/EisensteinSeries/MDifferentiable.lean\", \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/DayConvolution.lean\", \"Mathlib/Analysis/LocallyConvex/WeakOperatorTopology.lean\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are generic and do not state this derived varying-coefficient lemma."
+  },
+  {
+   "tool": "leansearch",
+   "query": "clopen graph support comparison from etale sum extension to compactified derived direct image",
+   "results": "{\"n_hits\": 8, \"top\": [\"TopologicalSpace.Clopens.ext_iff\", \"TopologicalSpace.Clopens.toOpens\", \"TopologicalSpace.Clopens.ext\", \"HasCompactSupport.comp_isClosedEmbedding\", \"TopologicalSpace.Clopens.toCloseds\", \"IsClopen.compl\", \"TopologicalSpace.Clopens.coe_toOpens\", \"HasCompactMulSupport.comp_isClosedEmbedding\"], \"note\": \"\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: hits are generic and do not state this derived varying-coefficient lemma."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-coefficient-tower-shriek-calculus",
+  "date": "2026-10-17",
+  "group": "Q107"
+ },
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs paragraph: the etale fibre-sum comparison and its extension-by-zero realization on the compactification.",
+   "via": [
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-varying-ring-graph-summand",
+  "worker": "stage1",
+  "summary": "Repaired the returned split without changing the statement or creating nodes. Added the etale base-change and pro-etale slice citations, corrected the gluing cover to the compactified product, removed the special coefficient-tower evaluation citation, and replaced the unsupported transport assertion by the degree-zero graph equality, the derived/underived mate comparison-unit calculation from the canonical Hom formula, and an explicit composite equality for the finite normalization.",
+  "blueprint": "Steps 1–3 realize the Local pairs paragraph of det-sp-tower-gluing; Step 4 realizes Levels for the arbitrary strict ring system via lem-coef-semilinear-derived-sections; Steps 5–8 check the specified site and finite graph normalization in Local pairs by graph generators and canonical adjunction mates.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-support-map-compatibility",
+    "why": "Its finite ordinary-etale statement supplies the graph-section normalization that the tower item transports levelwise."
+   },
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Its statement supplies the specified etale/pro-etale coefficient and compact-support comparison used only for the finite evaluation clause."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Its statement supplies the simultaneous derived section model and evaluation compatibility for the varying-ring tower."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Its statement supplies the localized-site direct-image identification and adjunction-preserving ringed-site comparison."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Only its canonical Hom formula for derived adjoints is used in the three-line transpose calculation; no geometric route is substituted."
+   },
+   {
+    "node": "det-pe-classical-sheaves-modules",
+    "why": "Its sheaf-level comparison unit identifies the values on etale test objects used to check the graph sections."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian ascent verifies the hypothesis of the ordinary-etale graph normalization."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Its ringed slice equivalence identifies the sum-extension adjunction at the pro-etale site."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Its counit-mate normalization specifies b_p in the finite comparison."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Its pullback square is the one whose mate defines the proper direct-image comparison."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "The canonical open-extension comparison supplies o, used on degree-zero graph sections and termwise on complexes."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exact site pullback descends the generator and mate equalities to derived categories."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Only the exact etale sum-extension adjunction is used, not its compact-support right-adjoint conclusion."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Equality of natural transformations is checked on representative complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-support-map-compatibility",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "det-pe-classical-sheaves-modules",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-NM-6ae2368fb",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-6ae2368fb (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's statement, all 8 steps, and the statement of every cited node. I also read Stacks 0F4L (etale-cohomology.tex l.11517), 0F4Y (more-etale.tex l.200) and 09AF (proetale.tex l.5076), the unit sk-prop-sp-tower-geometric, and the Local pairs and Levels paragraphs of det-sp-tower-gluing. The statement is unchanged and no new nodes are created. Step 1: the graph is a section of the separated étale base change, so it is open and closed there; it is open in the compactified product because U×V→Ū×V is an open immersion; it is closed because it is a section of the separated base change of p. So it is clopen in the whole compactified product. Step 2: gluing on that open cover gives a unique section, which makes the map compatible with restrictions and with semilinear transitions, with no flatness needed. Steps 3–4 use only the general section-model and evaluation clauses of lem-coef-semilinear-derived-sections; the coefficient-tower citation that caused the earlier return is gone. Step 5: I recomputed σ as the comparison that preserves the adjunctions, using the shared right adjoint from lem-weil-pbc-localize-ringed-site-morphism and lem-weil-proetale-weakly-etale-localization; it sends the generator (t,m) to (t,η m). Step 6: I unwound the mate d_p using def-weil-pbc-adjunction-mate; both transposes have value η(m) on the graph and zero off it. Step 7: setting s=t=1 and f=1 in the Hom formula gives that the transpose of γ_P is Q(ε⁰_P). The normalization of b_p and the mate equation for d_p then give the claimed equality, without inverting γ. Step 8: I checked each line of the chain against Steps 6 and 7 and the naturality of γ. The last line follows from two cited statements: lem-pur-etale-support-map-compatibility gives the formula for (c^c_e)^{-1}, and lem-sp-et-proet-coefficient-compatibility defines c^c as Rp_*(o)∘b_p. The Noetherian and qcqs hypotheses are verified there. I tested the edge cases (no lifts, empty U, zero module, e=id, zero ring, nonflat transitions); the item has no cycle and duplicates no existing node. Accepted tool_uses (off the unit's route): lem-coef-semilinear-derived-sections, lem-pur-etale-support-map-compatibility and lem-sp-et-proet-coefficient-compatibility. The other declared tool uses are on the route and need no acceptance. One harmless leftover: def-weil-unramified-morphism is listed in stmt_deps but not used; I left it. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.VaryingRingGraphSummand",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRingGraph.varyingRingGraphSummand",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumSite",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumSite_continuous",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelCoefficientMap",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.coefficientMap_naturality",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumCoefficientMap",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumRestriction",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumRestriction_isRightAdjoint",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sum",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumAdjunction",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sum_exact",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sum_additive",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sum_limits",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sum_colimits",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.restrictionSections",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.pushSections",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.generator",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.restrictionPushAdjunction_existsUnique",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.restrictionPushAdjunction",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.restrictionComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.geometricSumAdjunction",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.graph",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.graph_clopen",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.graphArrow",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.graphMap_existsUnique",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.graphMap",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.onHomotopy",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.theta_existsUnique",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.theta",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelPull_isRightAdjoint",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSum",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSumAdjunction",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSum_exact",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSum_additive",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSum_limits",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSum_colimits",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelSite_continuous",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelRestriction",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelRestrictionSections",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelPushSections",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelRestrictionAdjunction_existsUnique",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelRestrictionComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelGenerator",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelGraphMap_existsUnique",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelGraphMap",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelOnHomotopy",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelTheta_existsUnique",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.levelTheta",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.ev",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.Ev",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.ordinaryPullEvaluation",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumEvaluationInv",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumEvaluationInv_isIso",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sumEvaluation",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.openEvaluationInv",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.openEvaluationInv_isIso",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.openEvaluation",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.pullEvaluation",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.pushEvaluation",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.pushEvaluation_isIso",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.varyingRingGraphSummand",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.sitePull",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.siteSumInv",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.siteSumInv_isIso",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.siteSumComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.finiteSupportComparison",
+   "AlgebraicGeometry.ProEtale.VaryingRingGraph.finite_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/VaryingRingGraphSummand.lean",
+  "statement": "theorem varyingRingGraphSummand {U T : Scheme.{u}} (e : U ⟶ T) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e) [QuasiCompact c.i] (n : ℕ) (M : SemilinearProperOpen.Derived C τ U) : (Ev C τ T n).map ((theta C τ e c).app M) ≫ (pushEvaluation C τ c.g n).app ((SemilinearProperOpen.J C τ c.i).obj M) ≫ (StrictTower.moduleDirectImage (C n) c.g).rightDerivedFunctor.map ((openEvaluation C τ c.i n).hom.app M) = (sumEvaluation C τ e n).hom.app M ≫ (levelTheta (C n) e c).app ((Ev C τ U n).obj M)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The declarations jointly state all clauses: graph_clopen; graphMap_existsUnique and its uniquely normalized graphMap; exact sum extension and theta fixed by its derived-unit word on every homotopy representative; varyingRingGraphSummand with invertible evaluation comparisons; finite_normalization with the localized-site adjunction mate and the specified proper/open support mate. Reuses the published arbitrary-ring operations registered by def-sp-semilinear-constant-ring-operations, added to stmt_deps; the mate-pasting theorem itself is not a statement dependency. No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-44edbc443",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery of the H2 RETURN of 4720c777bda7. VaryingRingGraphSummand.lean is byte-identical (sha256 fa3f906a…), so the earlier full substance check (graph_clopen, graphMap, theta, evaluation clause, finite_normalization, edge cases, universes, no hollow defs, docstrings) carries over. Item delta: stmt_dep lem-sf-semilinear-proper-open-mate-pasting replaced by new def node def-sp-semilinear-constant-ring-operations, plus the lean.note; nothing else changed. New node: kind definition, existing:true on unchanged Sheaf.SixFunctors.SemilinearProperOpenMatePasting; all 42 listed declarations exist there; statement 'abbrev Modules (X : Scheme.{u})' matches line 86 verbatim; TeX matches coefficients/ringSystem/Modules=Systems/Derived=DS/push/pull=leftAdjoint/adj/extension/J/E/evalPushOrdinary/evalPullInv/evalP/evalR; nothing is .choose of the theorem; 9 definition stmt_deps, all live, no theorem, no cycle; no competing def node on the module. nt_compile --json clean: SemilinearProperOpenMatePasting 30.4 s, item 8.8 s, exit 0, no warnings. Earlier advisories A1–A3 optional."
+ },
+ "lean_audit": {}
 }

@@ -1,347 +1,348 @@
 {
-  "id": "lem-sf-etale-generic-hom-triangle",
-  "kind": "statement",
-  "title": "Internal-Hom comparison respects the finite stratification triangles",
-  "statement": "Let $A$ be a finite commutative ring, $g:X'\\to X$ a morphism of schemes and $M\\in D(X_{\\mathrm{et}},A)$. Use ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of sheaves of modules over the constant ring sheaf $A_T$ on small etale sites [def-weil-pbc-derived-categories], derived tensor $\\otimes_A^L$ [def-kun-derived-tensor], and derived internal Hom $\\mathscr H_T(U,V)=R\\mathcal Hom_{A_T}(U,V)$ [def-pur-derived-internal-hom]. Scheme inverse images on these categories are exact constant-coefficient inverse images [prop-weil-pbc-inverse-image-modules-exact]. For every $K$ let $\\beta_{K,M}:g^*\\mathscr H_X(K,M)\\to\\mathscr H_{X'}(g^*K,g^*M)$ be the transpose of pulled-back evaluation under the canonical derived tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For every distinguished triangle $K'\\to K\\to K''\\to K'[1]$ [def-weil-triangulated-category], the three maps $\\beta_{K'',M},\\beta_{K,M},\\beta_{K',M}$, and the shift of $\\beta_{K'',M}$ form a morphism between the distinguished triangles\n$$g^*\\mathscr H_X(K'',M)\\to g^*\\mathscr H_X(K,M)\\to g^*\\mathscr H_X(K',M)\\to g^*\\mathscr H_X(K'',M)[1]$$\nand\n$$\\mathscr H_{X'}(g^*K'',g^*M)\\to\\mathscr H_{X'}(g^*K,g^*M)\\to\\mathscr H_{X'}(g^*K',g^*M)\\to\\mathscr H_{X'}(g^*K'',g^*M)[1],$$\nusing the canonical cochain shift and sign conventions. In particular, if two of the three comparison maps are isomorphisms, so is the third.",
-  "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated); agent compatibility of the evaluation-induced comparison with signed triangle maps."
-  },
-  "stmt_deps": [
-    "def-weil-pbc-derived-categories",
-    "def-pur-derived-internal-hom",
-    "def-kun-derived-tensor",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-triangulated-category"
-  ],
-  "proof": [
-    {
-      "text": "Put $F=g^*$. By [prop-weil-pbc-inverse-image-modules-exact], $F$ is exact on ordinary constant-$A$ module sheaves. Consequently its termwise derived functor preserves distinguished triangles and commutes with cochain shifts by [lem-sf-exact-functor-derived-triangulated]. Apply [lem-sf-hom-triangulated] first on $X$ and then on $X'$ to the given triangle and its $F$-image. Its first-variable clause gives exactly the two reversed Hom triangles in the statement, the first followed by $F$. These results are unbounded and require neither constructibility nor invertibility of the coefficient order.",
-      "uses": [
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "lem-sf-exact-functor-derived-triangulated",
-        "lem-sf-hom-triangulated"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
-      }
-    },
-    {
-      "text": "Fix a complex representing $M$ and a K-injective representative $I$ for it; take a K-injective resolution $q:FI\\to J$ on $X'$ [prop-pur-kinjective-resolutions-exist]. Thus $J$ represents $FM$, since $F$ is exact. For a complex $E$ representing $K$, [def-pur-derived-internal-hom] gives $H(E,I)$ representing $\\mathscr H_X(K,M)$ and $H'(FE,J)$ representing $\\mathscr H_{X'}(FK,FM)$. Using [lem-sf-etale-hom-complex-pullback], form\n$$b_E:H_F=F H(E,I)\\xrightarrow{c_{E,I}}H'(FE,FI)\\xrightarrow{H'(1,q)}H'(FE,J).$$\nThis is a chain map, natural contravariantly in $E$. Its first term computes $F\\mathscr H_X(K,M)$ by exactness of $F$. No claim that $FI$ is K-injective is made: the last arrow uses the actual resolution $q$.",
-      "uses": [
-        "prop-pur-kinjective-resolutions-exist",
-        "def-pur-derived-internal-hom",
-        "lem-sf-etale-hom-complex-pullback",
-        "prop-weil-pbc-inverse-image-modules-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
-      }
-    },
-    {
-      "text": "Identify $Qb_E$ with $\\beta_{K,M}$ by its evaluation, rather than choosing an isomorphism of Hom objects. First choose $E$ K-flat with flat terms and choose a K-flat resolution $P\\to H(E,I)$ [lem-pc-kflat-resolution]. The pullbacks $FE,FP$ remain K-flat, and the canonical tensor comparison is computed on these representatives [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-site-derived-tensor-descent]. On each bidegree $(n,p)$ the tensor transpose of $b_E$ is precisely $q^{p+n}\\circ F(\\mathrm{ev}_{n,p})$, by the defining component formula of [lem-sf-etale-hom-complex-pullback]. After precomposing with $FP\\otimes FE$, this is the pullback of the ordinary Hom evaluation followed by $q$. Hence it represents $F(\\mathrm{ev}_{K,M})$ under the derived tensor comparison. The tensor-Hom bijection and its evaluation formula [lem-sf-ringed-derived-closed-symmetric-monoidal] make its transpose unique, so $Qb_E=\\beta_{K,M}$. For arbitrary $E$, replace it by a K-flat resolution: naturality of $b_E$, exactness of $F$, and the quasi-isomorphism invariance of Hom into K-injectives [lem-pur-rhom-well-defined] give the same identity. Here $Q$ denotes localization to the derived category [def-weil-abstract-derived-category].",
-      "uses": [
-        "lem-pc-kflat-resolution",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "lem-weil-pbc-site-derived-tensor-descent",
-        "lem-sf-etale-hom-complex-pullback",
-        "lem-sf-ringed-derived-closed-symmetric-monoidal",
-        "lem-pur-rhom-well-defined",
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "def-weil-abstract-derived-category"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
-      }
-    },
-    {
-      "text": "The chain maps $b_E$ commute with precomposition in every chain map $E\\to E'$ by the naturality clause of [lem-sf-etale-hom-complex-pullback] and componentwise Hom functoriality [def-pur-hom-complex]. Their source and target functors invert quasi-isomorphisms by [def-pur-derived-internal-hom] and exactness of $F$. Thus their naturality squares descend to every derived morphism: they commute with localized chain maps and with inverses of localized quasi-isomorphisms, hence with their composites. By step 3 this is naturality of the actual $\\beta$ in its contravariant variable.",
-      "uses": [
-        "lem-sf-etale-hom-complex-pullback",
-        "def-pur-hom-complex",
-        "def-pur-derived-internal-hom",
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "def-weil-abstract-derived-category"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
-      }
-    },
-    {
-      "text": "Keep the same $I,J,q$ for $E$ and $E[m]$. The shift square for $c$ is the last equality of [lem-sf-etale-hom-complex-pullback]. Postcomposition with $q$ respects the source-shift maps as well: in degree $n$ its $p$-component on both paths is $(-1)^{mn}q^{p+n-m}f^{p-m}$, by [def-pur-hom-complex]. Therefore $b_{E[m]}$ identifies with $b_E[-m]$ under the signed source-shift maps. By steps 2--3 and the signed shift identifications of [lem-weil-pbc-ringed-internal-hom-exact-restriction], this descends to $\\beta_{K[m],M}=\\beta_{K,M}[-m]$ under those identifications. The termwise $F$ commutes with shifts by [lem-sf-exact-functor-derived-triangulated]. This verifies the required shift square including its signs, without using preservation of infinite products.",
-      "uses": [
-        "lem-sf-etale-hom-complex-pullback",
-        "def-pur-hom-complex",
-        "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-        "lem-sf-exact-functor-derived-triangulated"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
-      }
-    },
-    {
-      "text": "Write the input arrows as $u:K'\\to K$, $v:K\\to K''$ and $w:K''\\to K'[1]$. Naturality from step 4 at $v$ and $u$ gives the first two comparison squares between the reversed triangles. For the boundary, use naturality at the shifted arrow $w[-1]:K''[-1]\\to K'$ and the shift identity of step 5 to replace the component at $K''[-1]$ by $\\beta_{K'',M}[1]$. The last-arrow sign in the reversed triangle is the same on both rows by [lem-sf-hom-triangulated]; multiplying the naturality equality by that common sign gives exactly the third square. Thus the three specified maps, with the specified shifted first component, form a morphism of the two distinguished triangles. Apply [lem-sf-triangle-morphism-iso] to this morphism: any two invertible components force the third to be invertible.",
-      "uses": [
-        "lem-sf-hom-triangulated",
-        "lem-sf-triangle-morphism-iso"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sf-etale-generic-hom-triangle",
+ "kind": "statement",
+ "title": "Internal-Hom comparison respects the finite stratification triangles",
+ "statement": "Let $A$ be a finite commutative ring, $g:X'\\to X$ a morphism of schemes and $M\\in D(X_{\\mathrm{et}},A)$. Use ordinary unbounded derived categories $D(T_{\\mathrm{et}},A)$ of sheaves of modules over the constant ring sheaf $A_T$ on small etale sites [def-weil-pbc-derived-categories], derived tensor $\\otimes_A^L$ [def-kun-derived-tensor], and derived internal Hom $\\mathscr H_T(U,V)=R\\mathcal Hom_{A_T}(U,V)$ [def-pur-derived-internal-hom]. Scheme inverse images on these categories are exact constant-coefficient inverse images [prop-weil-pbc-inverse-image-modules-exact]. For every $K$ let $\\beta_{K,M}:g^*\\mathscr H_X(K,M)\\to\\mathscr H_{X'}(g^*K,g^*M)$ be the transpose of pulled-back evaluation under the canonical derived tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For every distinguished triangle $K'\\to K\\to K''\\to K'[1]$ [def-weil-triangulated-category], the three maps $\\beta_{K'',M},\\beta_{K,M},\\beta_{K',M}$, and the shift of $\\beta_{K'',M}$ form a morphism between the distinguished triangles\n$$g^*\\mathscr H_X(K'',M)\\to g^*\\mathscr H_X(K,M)\\to g^*\\mathscr H_X(K',M)\\to g^*\\mathscr H_X(K'',M)[1]$$\nand\n$$\\mathscr H_{X'}(g^*K'',g^*M)\\to\\mathscr H_{X'}(g^*K,g^*M)\\to\\mathscr H_{X'}(g^*K',g^*M)\\to\\mathscr H_{X'}(g^*K'',g^*M)[1],$$\nusing the canonical cochain shift and sign conventions. In particular, if two of the three comparison maps are isomorphisms, so is the third.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JC (lemma-RHom-triangulated); agent compatibility of the evaluation-induced comparison with signed triangle maps."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pur-derived-internal-hom",
+  "def-kun-derived-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [
+  {
+   "text": "Put $F=g^*$. By [prop-weil-pbc-inverse-image-modules-exact], $F$ is exact on ordinary constant-$A$ module sheaves. Consequently its termwise derived functor preserves distinguished triangles and commutes with cochain shifts by [lem-sf-exact-functor-derived-triangulated]. Apply [lem-sf-hom-triangulated] first on $X$ and then on $X'$ to the given triangle and its $F$-image. Its first-variable clause gives exactly the two reversed Hom triangles in the statement, the first followed by $F$. These results are unbounded and require neither constructibility nor invertibility of the coefficient order.",
+   "uses": [
     "prop-weil-pbc-inverse-image-modules-exact",
     "lem-sf-exact-functor-derived-triangulated",
-    "lem-sf-hom-triangulated",
+    "lem-sf-hom-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
+   }
+  },
+  {
+   "text": "Fix a complex representing $M$ and a K-injective representative $I$ for it; take a K-injective resolution $q:FI\\to J$ on $X'$ [prop-pur-kinjective-resolutions-exist]. Thus $J$ represents $FM$, since $F$ is exact. For a complex $E$ representing $K$, [def-pur-derived-internal-hom] gives $H(E,I)$ representing $\\mathscr H_X(K,M)$ and $H'(FE,J)$ representing $\\mathscr H_{X'}(FK,FM)$. Using [lem-sf-etale-hom-complex-pullback], form\n$$b_E:H_F=F H(E,I)\\xrightarrow{c_{E,I}}H'(FE,FI)\\xrightarrow{H'(1,q)}H'(FE,J).$$\nThis is a chain map, natural contravariantly in $E$. Its first term computes $F\\mathscr H_X(K,M)$ by exactness of $F$. No claim that $FI$ is K-injective is made: the last arrow uses the actual resolution $q$.",
+   "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "def-pur-derived-internal-hom",
     "lem-sf-etale-hom-complex-pullback",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-pur-rhom-well-defined",
-    "def-weil-abstract-derived-category",
-    "def-pur-hom-complex",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-sf-triangle-morphism-iso"
-  ],
-  "proof_origin": {
-    "by": "agent",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "The evaluation induced derived internal Hom pullback comparison is a morphism of distinguished triangles in the first variable",
-      "results": "CategoryTheory.Pretriangulated.preadditiveYoneda_map_distinguished; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso; DerivedCategory.triangleOfSESIso; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₂; DerivedCategory.triangleOfSESδ; CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₁",
-      "date": "2026-10-17",
-      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Exact inverse image of sheaves and canonical Hom comparison commute with the signed mapping cone and shift",
-      "results": "CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv; CochainComplex.mappingCone.mapHomologicalComplexXIso'; CochainComplex.mappingCone.mapHomologicalComplexIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc; CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.mappingCone.map_δ; CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom",
-      "date": "2026-10-17",
-      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived internal Hom base change natural transformation compatible with distinguished triangles and shifts",
-      "results": "CategoryTheory.Pretriangulated.Triangle.functorHomMk; CategoryTheory.Pretriangulated.Triangle.π₁Toπ₂; CategoryTheory.NatTrans.leftDerivedToHomotopyCategory; CategoryTheory.Functor.homologySequenceδ_naturality_assoc; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.NatTrans.CommShiftCore; HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; CategoryTheory.SingleFunctors.Hom.mk",
-      "date": "2026-10-17",
-      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The canonical internal Hom base change comparison is compatible with distinguished triangles and shifts in the first variable",
-      "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
-      "date": "2026-10-17",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The canonical internal Hom base change comparison is compatible with distinguished triangles and shifts in the first variable",
-      "results": "CategoryTheory.Adjunction.IsTriangulated.commShift; CategoryTheory.Pretriangulated.preadditiveCoyoneda_homologySequenceδ_apply; CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; CategoryTheory.Functor.comp_homologySequenceδ; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁; CategoryTheory.Pretriangulated.preadditiveYoneda_homologySequenceδ_apply; CategoryTheory.Pretriangulated.preadditiveYoneda_map_distinguished; CategoryTheory.Functor.homologySequence_comp",
-      "date": "2026-10-17",
-      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"NatTrans\", \"IsTriangulated\"",
-      "results": "No hits",
-      "date": "2026-10-17",
-      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-    },
-    {
-      "tool": "grep",
-      "query": "(internalHom.*(triangulat|shift)|(triangulat|shift).*internalHom)",
-      "results": "No hits",
-      "date": "2026-10-17",
-      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"internalHom\", \"Triangle\"",
-      "results": "CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.right_triangle_components; CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.left_triangle_components",
-      "date": "2026-10-17",
-      "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The evaluation induced derived internal Hom pullback comparison is compatible with distinguished triangles in the first variable",
-      "results": "{\"t\": \"2026-10-17T15:08:46Z\", \"tool\": \"leanfinder\", \"query\": \"The evaluation induced derived internal Hom pullback comparison is compatible with distinguished triangles in the first variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁\", \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism\", \"CategoryTheory.ExponentiableMorphism.ev_naturality\", \"CategoryTheory.Adjunction.IsTriangulated.commShift\", \"CategoryTheory.ExponentiableMorphism.ev_naturality_assoc\", \"CategoryTheory.Pretriangulated.preadditiveYoneda_map_distinguished\", \"CategoryTheory.ExponentiableMorphism.ev_coev_assoc\"], \"digest\": \"3ac2a26b20d5c319\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"internalHom\", \"CommShift\"",
-      "results": "{\"t\": \"2026-10-17T15:08:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"internalHom\\\", \\\"CommShift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
-    },
-    {
-      "tool": "grep",
-      "query": "internalHom.*(triangulat|shift)|(triangulat|shift).*internalHom",
-      "results": "{\"t\": \"2026-10-17T15:08:47Z\", \"tool\": \"grep\", \"query\": \"internalHom.*(triangulat|shift)|(triangulat|shift).*internalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Canonical derived internal Hom base change is a morphism of distinguished triangles",
-      "results": "{\"t\": \"2026-10-17T15:08:47Z\", \"tool\": \"leansearch\", \"query\": \"Canonical derived internal Hom base change is a morphism of distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.Pretriangulated.complete_distinguished_triangle_morphism\", \"CategoryTheory.Pretriangulated.completeDistinguishedTriangleMorphism\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"DerivedCategory.triangleOfSESIso\", \"CategoryTheory.Functor.IsHomological.mk\", \"DerivedCategory.mem_distTriang_iff\", \"HomotopyCategory.Pretriangulated.rotate_distinguished_triangle\", \"HomotopyCategory.Pretriangulated.distinguishedTriangles\"], \"digest\": \"3023e32bd147a297\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Exact inverse image commutes with the natural transformation of contravariant derived sheaf Hom functors and their shift structures",
-      "results": "{\"t\": \"2026-10-17T15:09:24Z\", \"tool\": \"leanfinder\", \"query\": \"Exact inverse image commutes with the natural transformation of contravariant derived sheaf Hom functors and their shift structures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafComposeIso_inv_fac\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.sheafComposeIso_inv_fac_assoc\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\"], \"digest\": \"8a9ea14e311adb96\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"homComplex\", \"shift\"",
-      "results": "{\"t\": \"2026-10-17T15:09:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"homComplex\\\", \\\"shift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.leftUnshift_leftShift\", \"CochainComplex.HomComplex.Cochain.rightUnshift_rightShift\", \"CochainComplex.HomComplex.Cochain.leftShift\", \"CochainComplex.HomComplex.Cochain.leftUnshift\", \"CochainComplex.HomComplex.Cochain.rightShift\", \"CochainComplex.HomComplex.Cochain.rightUnshift\", \"CochainComplex.HomComplex.Cocycle.leftShift\", \"CochainComplex.HomComplex.Cocycle.leftUnshift\"], \"digest\": \"1441be6901a21a28\"}",
-      "date": "2026-10-17",
-      "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-sf-etale-generic-exchange-algclosed",
-    "date": "2026-10-17",
-    "group": "Q57"
-  },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-biduality-general",
-  "blueprint": {
-    "from": {
-      "node": "thm-weil-etale-geometric-biduality",
-      "place": "Proof paragraph 4, \"The induction hypothesis over ... together with [lem-weil-geometric-generic-duality]\"; devissage of the canonical Hom comparison along the finite stratum filtration",
-      "via": [
-        "lem-sf-etale-generic-exchange-algclosed"
-      ]
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-sf-etale-generic-hom-triangle",
-    "worker": "stage1",
-    "summary": "Kept the statement unchanged. Reused ordinary-etale Hom exactness and the two-of-three triangle lemma. Added only the ordinary Hom-complex pullback comparison with its signed source-shift equality. Identified its derived model with the specified evaluation transpose using K-flat test representatives, then checked all three triangle squares. Read Stacks 0GMX, 03EL, 0A8X, 08J7, 08J9 and 08JC; checked unboundedness and product issues. No Lean or compiler work.",
-    "blueprint": "Realizes the devissage compatibility below paragraph 4 of thm-weil-etale-geometric-biduality (main-20261015), through lem-sf-etale-generic-exchange-algclosed: the canonical Hom comparison can be propagated through the finite stratum filtration. No geometric route, unit, or target statement is changed.",
-    "tool_uses": [
-      {
-        "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
-        "why": "The actual external tensor-Hom bijection and its evaluation counit on arbitrary small ringed sites; the internal currying isomorphism alone is not this statement."
-      },
-      {
-        "node": "prop-weil-pbc-inverse-image-modules-exact",
-        "why": "Exactness and constant-ring identification of ordinary etale inverse image; no unit-specific generic-duality theorem replaces this foundational tool."
-      },
-      {
-        "node": "lem-sf-hom-triangulated",
-        "why": "Existing ordinary-etale first-variable Hom triangle exactness is reused; the new work is compatibility of the actual comparison, not re-proving exactness."
-      },
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "Functorial unbounded K-injective resolution on a small ringed site, used for I and J."
-      },
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "K-flat representatives with flat terms, used only to identify the evaluation transpose."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "why": "Generic pullback of K-flat models and the natural derived tensor comparison."
-      },
-      {
-        "node": "lem-weil-pbc-site-derived-tensor-descent",
-        "why": "Computes tensor on the two K-flat representatives P and E."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-        "why": "Generic ringed-site tensor-Hom adjunction and signed source shifts, with no boundedness assumptions."
-      },
-      {
-        "node": "lem-pur-rhom-well-defined",
-        "why": "Quasi-isomorphism invariance of Hom into a K-injective target; no assertion that pullback preserves K-injectivity."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sf-hom-triangulated",
-    "prop-pur-kinjective-resolutions-exist",
+  {
+   "text": "Identify $Qb_E$ with $\\beta_{K,M}$ by its evaluation, rather than choosing an isomorphism of Hom objects. First choose $E$ K-flat with flat terms and choose a K-flat resolution $P\\to H(E,I)$ [lem-pc-kflat-resolution]. The pullbacks $FE,FP$ remain K-flat, and the canonical tensor comparison is computed on these representatives [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-site-derived-tensor-descent]. On each bidegree $(n,p)$ the tensor transpose of $b_E$ is precisely $q^{p+n}\\circ F(\\mathrm{ev}_{n,p})$, by the defining component formula of [lem-sf-etale-hom-complex-pullback]. After precomposing with $FP\\otimes FE$, this is the pullback of the ordinary Hom evaluation followed by $q$. Hence it represents $F(\\mathrm{ev}_{K,M})$ under the derived tensor comparison. The tensor-Hom bijection and its evaluation formula [lem-sf-ringed-derived-closed-symmetric-monoidal] make its transpose unique, so $Qb_E=\\beta_{K,M}$. For arbitrary $E$, replace it by a K-flat resolution: naturality of $b_E$, exactness of $F$, and the quasi-isomorphism invariance of Hom into K-injectives [lem-pur-rhom-well-defined] give the same identity. Here $Q$ denotes localization to the derived category [def-weil-abstract-derived-category].",
+   "uses": [
     "lem-pc-kflat-resolution",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sf-etale-hom-complex-pullback",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-pur-rhom-well-defined",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
+   }
+  },
+  {
+   "text": "The chain maps $b_E$ commute with precomposition in every chain map $E\\to E'$ by the naturality clause of [lem-sf-etale-hom-complex-pullback] and componentwise Hom functoriality [def-pur-hom-complex]. Their source and target functors invert quasi-isomorphisms by [def-pur-derived-internal-hom] and exactness of $F$. Thus their naturality squares descend to every derived morphism: they commute with localized chain maps and with inverses of localized quasi-isomorphisms, hence with their composites. By step 3 this is naturality of the actual $\\beta$ in its contravariant variable.",
+   "uses": [
+    "lem-sf-etale-hom-complex-pullback",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
+   }
+  },
+  {
+   "text": "Keep the same $I,J,q$ for $E$ and $E[m]$. The shift square for $c$ is the last equality of [lem-sf-etale-hom-complex-pullback]. Postcomposition with $q$ respects the source-shift maps as well: in degree $n$ its $p$-component on both paths is $(-1)^{mn}q^{p+n-m}f^{p-m}$, by [def-pur-hom-complex]. Therefore $b_{E[m]}$ identifies with $b_E[-m]$ under the signed source-shift maps. By steps 2--3 and the signed shift identifications of [lem-weil-pbc-ringed-internal-hom-exact-restriction], this descends to $\\beta_{K[m],M}=\\beta_{K,M}[-m]$ under those identifications. The termwise $F$ commutes with shifts by [lem-sf-exact-functor-derived-triangulated]. This verifies the required shift square including its signs, without using preservation of infinite products.",
+   "uses": [
+    "lem-sf-etale-hom-complex-pullback",
+    "def-pur-hom-complex",
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-well-defined"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-Q150-85111b94a",
-    "group": "Q150",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-85111b94a (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sf-etale-hom-complex-pullback, every cited statement, Stacks 0GMX (sites-modules l.3787) and 08JC (sites-cohomology l.8948, details omitted, so proof_origin=agent is right), and paragraph 4 of the main-20261015 proof of thm-weil-etale-geometric-biduality. The item statement is unchanged, and beta is the same evaluation transpose on ordinary constant-A etale modules as in the parent. New node: I checked by hand that c is a chain map (the 0GMX comparison is natural, F is additive), that the signed reindexing s: f -> (-1)^{mn} f^{p-m} is a chain map into H[-m], and that s' c = c[-m] F(s). It is true for arbitrary g and unbounded complexes, it is not a clause of the item, and it duplicates nothing: the existing pullback-internal-hom nodes are for etale g, perfect complexes, isomorphisms or finite free modules. Item steps: (1) the rows come from lem-sf-hom-triangulated on X and X', using the trivial M-triangle for its second hypothesis, plus exactness of F. (2) b_E=H'(1,q)c uses no K-injectivity of FI. (3) On K-flat representatives FP,FE, the transpose of b_E is q F(ev) in each component, and the closed-monoidal bijection then forces Qb_E=beta; general E follows by naturality and rhom-well-defined. (4) Naturality descends through the localization. (5) The shift argument is robust to the universal-sign convention. (6) The third square is naturality at w[-1] plus step 5; triangle-morphism-iso covers any two of the three maps. Route: all nine declared tool_uses are accepted generic ringed-site tools, the other off-unit nodes are closed or Mathlib leaves, there is no cycle, and no SGA is cited. Fix (B3): stmt_deps of the new node lists lem-pc-sheaf-modules-tensor-closed, but the text never cited it although 'transpose' depends on it. I added the citation in fixes/dag/nodes/sec-six-functors/lem-sf-etale-hom-complex-pullback.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-94cd56f57",
-    "group": "Q54",
-    "result": "pass",
-    "note": "Re-delivery fixes the RETURN of a92b21c18b16. H3: no CommShift binders remain. Lg^* uses the global commShiftLeftDerivedUpperStar. The contravariant RHom shift is an explicit construction: first-factor tensor shift commShiftDerivedTensorFlipObj, transported by rightAdjointUniq through derivedTensorHomAdjunction, then commShiftDerivedHomObj, with shiftFunctorOpIso. It is normalised by (-1)^(n(n-1)/2), which cancels the (-1)^(nm) Koszul mismatch the library documents and equals 1 at n=1. A probe proves the synthesized instance equals this construction by rfl and that the degree-1 shift is 1 times the raw adjunction transport. Beta is the homEquiv transpose of the inverse leftDerivedUpperStarTensorIso followed by pulled-back evaluation (real data). Clauses match the node: finite CommRing A in Type (u+1), arbitrary g, unbounded M, distinguished T, hom1/2/3 = beta(obj3/obj2/obj1), comm3 with beta(K'')[1], three two-of-three implications. H4 lean.note justifies derivedHom and leftDerivedUpperStarTensorIso. H8: six-step docstring, source/blueprint docstrings everywhere. Only the item's lean field changed; statement verbatim; 13 declarations present; 5 sorrys, all in theorems, none in a def; no line over 100 columns; imports used. nt_compile --json: exit 0, no diagnostics, 12-17 s. Remarks, not blocking: the 4 helper coherence/naturality theorems have no DAG nodes of their own (content covered by lem-weil-pbc-ringed-internal-hom-exact-restriction and proof step 5); distinguishedness of the rows is presupposed via lem-sf-hom-triangulated, not restated."
-  },
-  "lean": {
-    "module": "Sheaf.SixFunctors.EtaleGenericHomTriangle",
-    "declaration": "AlgebraicGeometry.Etale.etale_internalHom_pullback_triangle",
-    "declarations": [
-      "AlgebraicGeometry.Etale.etaleInternalHomTensorShift_naturality",
-      "AlgebraicGeometry.Etale.etaleInternalHomTensorShiftIso",
-      "AlgebraicGeometry.Etale.etaleInternalHomSourceShiftIso",
-      "AlgebraicGeometry.Etale.etaleInternalHomFlipRawShiftComponent",
-      "AlgebraicGeometry.Etale.etaleInternalHomFlipShiftComponent",
-      "AlgebraicGeometry.Etale.etaleInternalHomFlipShiftComponent_naturality",
-      "AlgebraicGeometry.Etale.etaleInternalHomFlipShiftIso",
-      "AlgebraicGeometry.Etale.etaleInternalHomFlipShiftIso_zero",
-      "AlgebraicGeometry.Etale.etaleInternalHomFlipShiftIso_add",
-      "AlgebraicGeometry.Etale.etaleInternalHomFlipCommShift",
-      "AlgebraicGeometry.Etale.etaleInternalHomFlipCommShift_instance",
-      "AlgebraicGeometry.Etale.etaleInternalHomPullbackComparison",
-      "AlgebraicGeometry.Etale.etale_internalHom_pullback_triangle"
-    ],
-    "file": "lean/Sheaf/SixFunctors/EtaleGenericHomTriangle.lean",
-    "statement": "theorem etale_internalHom_pullback_triangle (A : Type (u + 1)) [CommRing A] [Finite A] {X X' : Scheme.{u}} (g : X' ⟶ X) (M : DerivedCategoryModule A X) (T : Triangle (DerivedCategoryModule A X)) (hT : T ∈ distTriang (DerivedCategoryModule A X)) : ((∃ φ : (L((g)^*[ModuleCat.{u + 1} A])).mapTriangle.obj (((RHom(X)[ModuleCat.{u + 1} A]).flip.obj M).mapTriangle.obj ((triangleOpEquivalence (DerivedCategoryModule A X)).functor.obj (op T))) ⟶ (((RHom(X')[ModuleCat.{u + 1} A]).flip.obj ((L((g)^*[ModuleCat.{u + 1} A])).obj M)).mapTriangle.obj ((triangleOpEquivalence (DerivedCategoryModule A X')).functor.obj (op ((L((g)^*[ModuleCat.{u + 1} A])).mapTriangle.obj T)))), φ.hom₁ = etaleInternalHomPullbackComparison A g (T.obj₃) M ∧ φ.hom₂ = etaleInternalHomPullbackComparison A g (T.obj₂) M ∧ φ.hom₃ = etaleInternalHomPullbackComparison A g (T.obj₁) M)) ∧ (IsIso (etaleInternalHomPullbackComparison A g (T.obj₃) M) ∧ IsIso (etaleInternalHomPullbackComparison A g (T.obj₂) M) → IsIso (etaleInternalHomPullbackComparison A g (T.obj₁) M)) ∧ (IsIso (etaleInternalHomPullbackComparison A g (T.obj₃) M) ∧ IsIso (etaleInternalHomPullbackComparison A g (T.obj₁) M) → IsIso (etaleInternalHomPullbackComparison A g (T.obj₂) M)) ∧ (IsIso (etaleInternalHomPullbackComparison A g (T.obj₂) M) ∧ IsIso (etaleInternalHomPullbackComparison A g (T.obj₁) M) → IsIso (etaleInternalHomPullbackComparison A g (T.obj₃) M))",
-    "branch": "newtargets-dag",
-    "by": "Q54",
-    "date": "2026-10-17",
-    "existing": false,
-    "note": "Repair of a92b21c18b16, H3/H4/H8. No arbitrary CommShift binders remain. The contravariant Hom shift has explicit canonical data: the first-variable tensor shift is assembled from commShiftDerivedTensorFlipObj, its adjunction mate is constructed by derivedTensorHomAdjunction/rightAdjointUniq, and commShiftDerivedHomObj moves the target shift outside Hom. The opposite-category shift produces etaleInternalHomFlipRawShiftComponent, with the signed Hom-complex reindexing. The explicit factor (-1)^(n*(n-1)/2) produces etaleInternalHomFlipShiftComponent: it preserves the canonical degree-one map and cancels the raw (-1)^(n*m) composition discrepancy; named naturality/zero/addition theorems supply only proofs, not data. Derived.Shift supplies the unchanged global commShiftLeftDerivedUpperStar. For def-pur-derived-internal-hom we use Etale.derivedHom = MonoidalClosed.internalHom: this is the right adjoint of the same unbounded K-flat derived tensor, hence canonically the Hom-complex/K-injective RHom of derivedInternalHomOfUniverses under the standard equivalence from sheaves of ModuleCat A to modules over the constant ring sheaf. The recorded general SheafOfModules interface has a different categorical encoding and cannot directly type the node's DerivedCategoryModule objects; no private Hom functor is introduced. For lem-weil-pbc-ringed-topoi-derived-tensor-pullback we use the existing Etale.leftDerivedUpperStarTensorIso, the same canonical comparison specialized to exact constant-coefficient etale inverse image. Its components are the derived oplax tensor comparison, characterized on K-flat representatives by the pullback of the ordinary tensor map, not an arbitrary isomorphism. These two specialization choices were accepted in substance in the returned review. Beta remains exactly homEquiv of the inverse canonical tensor comparison followed by pulled-back evaluation. The docstring gives all six node proof steps, and lean.statement is the complete signature verbatim."
+  {
+   "text": "Write the input arrows as $u:K'\\to K$, $v:K\\to K''$ and $w:K''\\to K'[1]$. Naturality from step 4 at $v$ and $u$ gives the first two comparison squares between the reversed triangles. For the boundary, use naturality at the shifted arrow $w[-1]:K''[-1]\\to K'$ and the shift identity of step 5 to replace the component at $K''[-1]$ by $\\beta_{K'',M}[1]$. The last-arrow sign in the reversed triangle is the same on both rows by [lem-sf-hom-triangulated]; multiplying the naturality equality by that common sign gives exactly the third square. Thus the three specified maps, with the specified shifted first component, form a morphism of the two distinguished triangles. Apply [lem-sf-triangle-morphism-iso] to this morphism: any two invertible components force the third to be invertible.",
+   "uses": [
+    "lem-sf-hom-triangulated",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
+   }
   }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-hom-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-pur-derived-internal-hom",
+  "lem-sf-etale-hom-complex-pullback",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pur-rhom-well-defined",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J7 (section-internal-hom), 08J9 (lemma-internal-hom) and 08JC (lemma-RHom-triangulated); agent evaluation and signed-shift comparison argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation induced derived internal Hom pullback comparison is a morphism of distinguished triangles in the first variable",
+   "results": "CategoryTheory.Pretriangulated.preadditiveYoneda_map_distinguished; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso; DerivedCategory.triangleOfSESIso; CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₂; DerivedCategory.triangleOfSESδ; CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₁",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of sheaves and canonical Hom comparison commute with the signed mapping cone and shift",
+   "results": "CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv; CochainComplex.mappingCone.mapHomologicalComplexXIso'; CochainComplex.mappingCone.mapHomologicalComplexIso; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv; CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc; CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.mappingCone.map_δ; CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom base change natural transformation compatible with distinguished triangles and shifts",
+   "results": "CategoryTheory.Pretriangulated.Triangle.functorHomMk; CategoryTheory.Pretriangulated.Triangle.π₁Toπ₂; CategoryTheory.NatTrans.leftDerivedToHomotopyCategory; CategoryTheory.Functor.homologySequenceδ_naturality_assoc; CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; CategoryTheory.NatTrans.CommShiftCore; HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; CategoryTheory.SingleFunctors.Hom.mk",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical internal Hom base change comparison is compatible with distinguished triangles and shifts in the first variable",
+   "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical internal Hom base change comparison is compatible with distinguished triangles and shifts in the first variable",
+   "results": "CategoryTheory.Adjunction.IsTriangulated.commShift; CategoryTheory.Pretriangulated.preadditiveCoyoneda_homologySequenceδ_apply; CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; CategoryTheory.Functor.comp_homologySequenceδ; CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁; CategoryTheory.Pretriangulated.preadditiveYoneda_homologySequenceδ_apply; CategoryTheory.Pretriangulated.preadditiveYoneda_map_distinguished; CategoryTheory.Functor.homologySequence_comp",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"NatTrans\", \"IsTriangulated\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "grep",
+   "query": "(internalHom.*(triangulat|shift)|(triangulat|shift).*internalHom)",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHom\", \"Triangle\"",
+   "results": "CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.right_triangle_components; CategoryTheory.MonoidalCategory.DayConvolutionInternalHom.left_triangle_components",
+   "date": "2026-10-17",
+   "verdict": "no match: no declaration of the stated ordinary-etale derived comparison, interval bound or coherence identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The evaluation induced derived internal Hom pullback comparison is compatible with distinguished triangles in the first variable",
+   "results": "{\"t\": \"2026-10-17T15:08:46Z\", \"tool\": \"leanfinder\", \"query\": \"The evaluation induced derived internal Hom pullback comparison is compatible with distinguished triangles in the first variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₁\", \"CategoryTheory.ExponentiableMorphism.ev_coev\", \"CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism\", \"CategoryTheory.ExponentiableMorphism.ev_naturality\", \"CategoryTheory.Adjunction.IsTriangulated.commShift\", \"CategoryTheory.ExponentiableMorphism.ev_naturality_assoc\", \"CategoryTheory.Pretriangulated.preadditiveYoneda_map_distinguished\", \"CategoryTheory.ExponentiableMorphism.ev_coev_assoc\"], \"digest\": \"3ac2a26b20d5c319\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHom\", \"CommShift\"",
+   "results": "{\"t\": \"2026-10-17T15:08:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"internalHom\\\", \\\"CommShift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*(triangulat|shift)|(triangulat|shift).*internalHom",
+   "results": "{\"t\": \"2026-10-17T15:08:47Z\", \"tool\": \"grep\", \"query\": \"internalHom.*(triangulat|shift)|(triangulat|shift).*internalHom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived internal Hom base change is a morphism of distinguished triangles",
+   "results": "{\"t\": \"2026-10-17T15:08:47Z\", \"tool\": \"leansearch\", \"query\": \"Canonical derived internal Hom base change is a morphism of distinguished triangles\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.Pretriangulated.complete_distinguished_triangle_morphism\", \"CategoryTheory.Pretriangulated.completeDistinguishedTriangleMorphism\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\", \"DerivedCategory.triangleOfSESIso\", \"CategoryTheory.Functor.IsHomological.mk\", \"DerivedCategory.mem_distTriang_iff\", \"HomotopyCategory.Pretriangulated.rotate_distinguished_triangle\", \"HomotopyCategory.Pretriangulated.distinguishedTriangles\"], \"digest\": \"3023e32bd147a297\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image commutes with the natural transformation of contravariant derived sheaf Hom functors and their shift structures",
+   "results": "{\"t\": \"2026-10-17T15:09:24Z\", \"tool\": \"leanfinder\", \"query\": \"Exact inverse image commutes with the natural transformation of contravariant derived sheaf Hom functors and their shift structures\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafComposeIso_inv_fac\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.sheafComposeIso_inv_fac_assoc\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.IsCoverDense.sheafHom_restrict_eq\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\"], \"digest\": \"8a9ea14e311adb96\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homComplex\", \"shift\"",
+   "results": "{\"t\": \"2026-10-17T15:09:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"homComplex\\\", \\\"shift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.Cochain.leftUnshift_leftShift\", \"CochainComplex.HomComplex.Cochain.rightUnshift_rightShift\", \"CochainComplex.HomComplex.Cochain.leftShift\", \"CochainComplex.HomComplex.Cochain.leftUnshift\", \"CochainComplex.HomComplex.Cochain.rightShift\", \"CochainComplex.HomComplex.Cochain.rightUnshift\", \"CochainComplex.HomComplex.Cocycle.leftShift\", \"CochainComplex.HomComplex.Cocycle.leftUnshift\"], \"digest\": \"1441be6901a21a28\"}",
+   "date": "2026-10-17",
+   "verdict": "no match: generic shift, cochain, Ext, or sheaf pullback infrastructure; no ordinary sheaf-Hom-complex pullback comparison with signed source-shift compatibility"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-etale-generic-exchange-algclosed",
+  "date": "2026-10-17",
+  "group": "Q57"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "from": {
+   "node": "thm-weil-etale-geometric-biduality",
+   "place": "Proof paragraph 4, \"The induction hypothesis over ... together with [lem-weil-geometric-generic-duality]\"; devissage of the canonical Hom comparison along the finite stratum filtration",
+   "via": [
+    "lem-sf-etale-generic-exchange-algclosed"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-etale-generic-hom-triangle",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused ordinary-etale Hom exactness and the two-of-three triangle lemma. Added only the ordinary Hom-complex pullback comparison with its signed source-shift equality. Identified its derived model with the specified evaluation transpose using K-flat test representatives, then checked all three triangle squares. Read Stacks 0GMX, 03EL, 0A8X, 08J7, 08J9 and 08JC; checked unboundedness and product issues. No Lean or compiler work.",
+  "blueprint": "Realizes the devissage compatibility below paragraph 4 of thm-weil-etale-geometric-biduality (main-20261015), through lem-sf-etale-generic-exchange-algclosed: the canonical Hom comparison can be propagated through the finite stratum filtration. No geometric route, unit, or target statement is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The actual external tensor-Hom bijection and its evaluation counit on arbitrary small ringed sites; the internal currying isomorphism alone is not this statement."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness and constant-ring identification of ordinary etale inverse image; no unit-specific generic-duality theorem replaces this foundational tool."
+   },
+   {
+    "node": "lem-sf-hom-triangulated",
+    "why": "Existing ordinary-etale first-variable Hom triangle exactness is reused; the new work is compatibility of the actual comparison, not re-proving exactness."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Functorial unbounded K-injective resolution on a small ringed site, used for I and J."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat representatives with flat terms, used only to identify the evaluation transpose."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic pullback of K-flat models and the natural derived tensor comparison."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Computes tensor on the two K-flat representatives P and E."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site tensor-Hom adjunction and signed source shifts, with no boundedness assumptions."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Quasi-isomorphism invariance of Hom into a K-injective target; no assertion that pullback preserves K-injectivity."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sf-hom-triangulated",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-85111b94a",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-85111b94a (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sf-etale-hom-complex-pullback, every cited statement, Stacks 0GMX (sites-modules l.3787) and 08JC (sites-cohomology l.8948, details omitted, so proof_origin=agent is right), and paragraph 4 of the main-20261015 proof of thm-weil-etale-geometric-biduality. The item statement is unchanged, and beta is the same evaluation transpose on ordinary constant-A etale modules as in the parent. New node: I checked by hand that c is a chain map (the 0GMX comparison is natural, F is additive), that the signed reindexing s: f -> (-1)^{mn} f^{p-m} is a chain map into H[-m], and that s' c = c[-m] F(s). It is true for arbitrary g and unbounded complexes, it is not a clause of the item, and it duplicates nothing: the existing pullback-internal-hom nodes are for etale g, perfect complexes, isomorphisms or finite free modules. Item steps: (1) the rows come from lem-sf-hom-triangulated on X and X', using the trivial M-triangle for its second hypothesis, plus exactness of F. (2) b_E=H'(1,q)c uses no K-injectivity of FI. (3) On K-flat representatives FP,FE, the transpose of b_E is q F(ev) in each component, and the closed-monoidal bijection then forces Qb_E=beta; general E follows by naturality and rhom-well-defined. (4) Naturality descends through the localization. (5) The shift argument is robust to the universal-sign convention. (6) The third square is naturality at w[-1] plus step 5; triangle-morphism-iso covers any two of the three maps. Route: all nine declared tool_uses are accepted generic ringed-site tools, the other off-unit nodes are closed or Mathlib leaves, there is no cycle, and no SGA is cited. Fix (B3): stmt_deps of the new node lists lem-pc-sheaf-modules-tensor-closed, but the text never cited it although 'transpose' depends on it. I added the citation in fixes/dag/nodes/sec-six-functors/lem-sf-etale-hom-complex-pullback.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94cd56f57",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Re-delivery fixes the RETURN of a92b21c18b16. H3: no CommShift binders remain. Lg^* uses the global commShiftLeftDerivedUpperStar. The contravariant RHom shift is an explicit construction: first-factor tensor shift commShiftDerivedTensorFlipObj, transported by rightAdjointUniq through derivedTensorHomAdjunction, then commShiftDerivedHomObj, with shiftFunctorOpIso. It is normalised by (-1)^(n(n-1)/2), which cancels the (-1)^(nm) Koszul mismatch the library documents and equals 1 at n=1. A probe proves the synthesized instance equals this construction by rfl and that the degree-1 shift is 1 times the raw adjunction transport. Beta is the homEquiv transpose of the inverse leftDerivedUpperStarTensorIso followed by pulled-back evaluation (real data). Clauses match the node: finite CommRing A in Type (u+1), arbitrary g, unbounded M, distinguished T, hom1/2/3 = beta(obj3/obj2/obj1), comm3 with beta(K'')[1], three two-of-three implications. H4 lean.note justifies derivedHom and leftDerivedUpperStarTensorIso. H8: six-step docstring, source/blueprint docstrings everywhere. Only the item's lean field changed; statement verbatim; 13 declarations present; 5 sorrys, all in theorems, none in a def; no line over 100 columns; imports used. nt_compile --json: exit 0, no diagnostics, 12-17 s. Remarks, not blocking: the 4 helper coherence/naturality theorems have no DAG nodes of their own (content covered by lem-weil-pbc-ringed-internal-hom-exact-restriction and proof step 5); distinguishedness of the rows is presupposed via lem-sf-hom-triangulated, not restated."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.EtaleGenericHomTriangle",
+  "declaration": "AlgebraicGeometry.Etale.etale_internalHom_pullback_triangle",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleInternalHomTensorShift_naturality",
+   "AlgebraicGeometry.Etale.etaleInternalHomTensorShiftIso",
+   "AlgebraicGeometry.Etale.etaleInternalHomSourceShiftIso",
+   "AlgebraicGeometry.Etale.etaleInternalHomFlipRawShiftComponent",
+   "AlgebraicGeometry.Etale.etaleInternalHomFlipShiftComponent",
+   "AlgebraicGeometry.Etale.etaleInternalHomFlipShiftComponent_naturality",
+   "AlgebraicGeometry.Etale.etaleInternalHomFlipShiftIso",
+   "AlgebraicGeometry.Etale.etaleInternalHomFlipShiftIso_zero",
+   "AlgebraicGeometry.Etale.etaleInternalHomFlipShiftIso_add",
+   "AlgebraicGeometry.Etale.etaleInternalHomFlipCommShift",
+   "AlgebraicGeometry.Etale.etaleInternalHomFlipCommShift_instance",
+   "AlgebraicGeometry.Etale.etaleInternalHomPullbackComparison",
+   "AlgebraicGeometry.Etale.etale_internalHom_pullback_triangle"
+  ],
+  "file": "lean/Sheaf/SixFunctors/EtaleGenericHomTriangle.lean",
+  "statement": "theorem etale_internalHom_pullback_triangle (A : Type (u + 1)) [CommRing A] [Finite A] {X X' : Scheme.{u}} (g : X' ⟶ X) (M : DerivedCategoryModule A X) (T : Triangle (DerivedCategoryModule A X)) (hT : T ∈ distTriang (DerivedCategoryModule A X)) : ((∃ φ : (L((g)^*[ModuleCat.{u + 1} A])).mapTriangle.obj (((RHom(X)[ModuleCat.{u + 1} A]).flip.obj M).mapTriangle.obj ((triangleOpEquivalence (DerivedCategoryModule A X)).functor.obj (op T))) ⟶ (((RHom(X')[ModuleCat.{u + 1} A]).flip.obj ((L((g)^*[ModuleCat.{u + 1} A])).obj M)).mapTriangle.obj ((triangleOpEquivalence (DerivedCategoryModule A X')).functor.obj (op ((L((g)^*[ModuleCat.{u + 1} A])).mapTriangle.obj T)))), φ.hom₁ = etaleInternalHomPullbackComparison A g (T.obj₃) M ∧ φ.hom₂ = etaleInternalHomPullbackComparison A g (T.obj₂) M ∧ φ.hom₃ = etaleInternalHomPullbackComparison A g (T.obj₁) M)) ∧ (IsIso (etaleInternalHomPullbackComparison A g (T.obj₃) M) ∧ IsIso (etaleInternalHomPullbackComparison A g (T.obj₂) M) → IsIso (etaleInternalHomPullbackComparison A g (T.obj₁) M)) ∧ (IsIso (etaleInternalHomPullbackComparison A g (T.obj₃) M) ∧ IsIso (etaleInternalHomPullbackComparison A g (T.obj₁) M) → IsIso (etaleInternalHomPullbackComparison A g (T.obj₂) M)) ∧ (IsIso (etaleInternalHomPullbackComparison A g (T.obj₂) M) ∧ IsIso (etaleInternalHomPullbackComparison A g (T.obj₁) M) → IsIso (etaleInternalHomPullbackComparison A g (T.obj₃) M))",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Repair of a92b21c18b16, H3/H4/H8. No arbitrary CommShift binders remain. The contravariant Hom shift has explicit canonical data: the first-variable tensor shift is assembled from commShiftDerivedTensorFlipObj, its adjunction mate is constructed by derivedTensorHomAdjunction/rightAdjointUniq, and commShiftDerivedHomObj moves the target shift outside Hom. The opposite-category shift produces etaleInternalHomFlipRawShiftComponent, with the signed Hom-complex reindexing. The explicit factor (-1)^(n*(n-1)/2) produces etaleInternalHomFlipShiftComponent: it preserves the canonical degree-one map and cancels the raw (-1)^(n*m) composition discrepancy; named naturality/zero/addition theorems supply only proofs, not data. Derived.Shift supplies the unchanged global commShiftLeftDerivedUpperStar. For def-pur-derived-internal-hom we use Etale.derivedHom = MonoidalClosed.internalHom: this is the right adjoint of the same unbounded K-flat derived tensor, hence canonically the Hom-complex/K-injective RHom of derivedInternalHomOfUniverses under the standard equivalence from sheaves of ModuleCat A to modules over the constant ring sheaf. The recorded general SheafOfModules interface has a different categorical encoding and cannot directly type the node's DerivedCategoryModule objects; no private Hom functor is introduced. For lem-weil-pbc-ringed-topoi-derived-tensor-pullback we use the existing Etale.leftDerivedUpperStarTensorIso, the same canonical comparison specialized to exact constant-coefficient etale inverse image. Its components are the derived oplax tensor comparison, characterized on K-flat representatives by the pullback of the ordinary tensor map, not an arbitrary isomorphism. These two specialization choices were accepted in substance in the returned review. Beta remains exactly homEquiv of the inverse canonical tensor comparison followed by pulled-back evaluation. The docstring gives all six node proof steps, and lean.statement is the complete signature verbatim."
+ },
+ "lean_audit": {}
 }

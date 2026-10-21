@@ -1,195 +1,184 @@
 {
-  "id": "def-kun-truncations",
-  "blueprint": {
-    "is": "def-kun-truncations",
-    "from": null,
-    "same_as": []
+ "id": "def-kun-truncations",
+ "blueprint": {
+  "is": "def-kun-truncations",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Truncations and homotopy colimits",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], and let $E^\\bullet$ be a cochain complex of $\\mathcal A$, with differentials $d^i:E^i\\to E^{i+1}$ and $d^{i+1}d^i=0$ [def-weil-abstract-derived-category]. In the etale application, $T$ is a scheme, $T_{\\Et}$ is its small etale site [def-weil-pbc-etale-site], and $\\mathcal A=\\Ab(T_{\\Et})$, or $\\mathcal A=\\Mod(T_{\\Et},R)$ for a fixed commutative coefficient ring $R$ [def-weil-pbc-etale-sheaves]. Integers index cohomological degrees, with the shift convention $(E[1])^i=E^{i+1}$ and differential $d_{E[1]}^i=-d_E^{i+1}$.\n\nFor $n\\in\\mathbf Z$, the stupid truncations are the complexes\n$$\n (\\sigma_{\\ge n}E)^i=\\begin{cases}0&i<n,\\\\ E^i&i\\ge n,\\end{cases}\n \\qquad\n (\\sigma_{\\le n}E)^i=\\begin{cases}E^i&i\\le n,\\\\ 0&i>n.\\end{cases}\n$$\nTheir differentials equal $d^i$ when both adjacent terms are retained and are zero otherwise. Thus $\\sigma_{\\ge n}E$ is a subcomplex and $\\sigma_{\\le n}E$ is a quotient complex. These are constructions on complexes, not in general functors on the derived category.\n\nThe good (canonical) truncations are\n$$\n (\\tau_{\\le n}E)^i=\\begin{cases}E^i&i<n,\\\\ \\ker d^n&i=n,\\\\ 0&i>n,\\end{cases}\n \\qquad\n (\\tau_{\\ge n}E)^i=\\begin{cases}0&i<n,\\\\ \\operatorname{coker}d^{n-1}&i=n,\\\\ E^i&i>n.\\end{cases}\n$$\nThe differential into $\\ker d^n$ and the differential out of $\\operatorname{coker}d^{n-1}$ are induced by $d^{n-1}$ and $d^n$, respectively; all other differentials are retained or zero as appropriate. The induced maps of kernels and cokernels define these constructions on morphisms of complexes. They retain $H^i(E)$ for $i\\le n$ and $i\\ge n$, respectively, and have zero cohomology outside the retained range. Their images in $D(\\mathcal A)$ are the truncation functors of the standard t-structure [def-sbc-standard-tstructure-derived-category].\n\nFor $K\\in D(\\mathcal A)$, the successive-truncation triangle is\n$$\n \\tau_{\\le n-1}K\\longrightarrow\\tau_{\\le n}K\n \\longrightarrow H^n(K)[-n]\\longrightarrow(\\tau_{\\le n-1}K)[1]\n$$\n[lem-weil-pbc-truncation-triangle]. Here $H^n(K)[-n]$ is the complex with its only nonzero term $H^n(K)$ in degree $n$. For bounded-below complexes and the left exact additive functors between Grothendieck abelian categories specified in [def-sp-truncation-couple], applying the derived functor to these triangles and taking cohomology constructs the truncation exact couple. In the cartesian-square, bounded-below setting of [def-weil-pbc-hypercohomology-filtrations], these are the triangles used for the hypercohomology filtrations. The individual triangle is not itself the bigraded exact couple.\n\nLet $\\mathcal T$ be a triangulated category [def-weil-triangulated-category] with countable coproducts, and let $(E_j,u_j:E_j\\to E_{j+1})_{j\\in\\mathbf N}$ be a sequence. Write $B=\\bigoplus_{j\\in\\mathbf N}E_j$ and $\\iota_j:E_j\\to B$ for its coprojections; a coproduct is the colimit of the corresponding discrete diagram [def-weil-pbc-category-colimit]. Define $s:B\\to B$ by $s\\iota_j=\\iota_{j+1}u_j$. A homotopy colimit of the sequence is a cone object $H$ in a distinguished triangle\n$$\n B\\xrightarrow{\\,1-s\\,}B\\longrightarrow H\\longrightarrow B[1].\n$$\nWe write $H=\\operatorname{hocolim}_jE_j$ for such a choice; this triangle specifies the notion and does not specify a functorial choice of cones.\n\nFor a small category $I$ and a diagram $(F_i)_{i\\in I}$ of abelian etale sheaves on $T$, its sheaf colimit [def-weil-pbc-category-colimit] is $P^\\#$, where $P(U)=\\operatorname{colim}_{i\\in I}F_i(U)$ is the objectwise presheaf colimit and $(-)^\\#$ is sheafification [def-weil-pbc-sheafification; lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]. For sheaves of $R_T$-modules the same construction is performed in module presheaves, and its underlying abelian sheaf is the abelian sheaf colimit [lem-weil-pbc-module-sheaves-colimits-forgetful].\n\nFor an abelian sheaf $F$ on $T_{\\Et}$, if $\\bar t:\\operatorname{Spec}\\Omega\\to T$ is a geometric point, let $\\mathcal N_{\\bar t}$ be its category of pointed etale neighbourhoods [def-weil-pbc-pointed-etale-neighbourhoods]. Then\n$$\n F_{\\bar t}=\\operatorname{colim}_{\\mathcal N_{\\bar t}^{\\mathrm{op}}}F(U)\n$$\n[def-weil-pbc-geometric-stalks], with the index category filtered by [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered]. For abelian sheaves, the stalk functor commutes with arbitrary small colimits and, degree by degree, with colimits of complexes [lem-kun-stalks-commute-colimits]. For $R_T$-module sheaves this applies to the underlying abelian sheaves using [lem-weil-pbc-module-sheaves-colimits-forgetful], with the induced $R$-actions. Colimits of complexes here mean termwise colimits in the category of complexes, not colimits in the derived category.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-truncations.md",
+  "place": "node def-kun-truncations, order 1690"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-etale-sheaves",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-pbc-truncation-triangle",
+  "def-sp-truncation-couple",
+  "def-weil-pbc-hypercohomology-filtrations",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-kun-stalks-commute-colimits"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|homotopy colimit|def stupidTrunc|def truncLE|def truncGE",
+   "results": "Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean:40 HomologicalComplex.stupidTrunc; Embedding/TruncLE.lean:75 HomologicalComplex.truncLE; Embedding/TruncGE.lean:102 HomologicalComplex.truncGE'; CategoryTheory/Triangulated/TStructure/TruncLEGT.lean:38 TStructure.truncLE. Read StupidTrunc.lean:30-79, CochainComplex.lean:392-425 and TruncLEGT.lean:30-95: matching parts only.",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
   },
-  "kind": "definition",
-  "title": "Truncations and homotopy colimits",
-  "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], and let $E^\\bullet$ be a cochain complex of $\\mathcal A$, with differentials $d^i:E^i\\to E^{i+1}$ and $d^{i+1}d^i=0$ [def-weil-abstract-derived-category]. In the etale application, $T$ is a scheme, $T_{\\Et}$ is its small etale site [def-weil-pbc-etale-site], and $\\mathcal A=\\Ab(T_{\\Et})$, or $\\mathcal A=\\Mod(T_{\\Et},R)$ for a fixed commutative coefficient ring $R$ [def-weil-pbc-etale-sheaves]. Integers index cohomological degrees, with the shift convention $(E[1])^i=E^{i+1}$ and differential $d_{E[1]}^i=-d_E^{i+1}$.\n\nFor $n\\in\\mathbf Z$, the stupid truncations are the complexes\n$$\n (\\sigma_{\\ge n}E)^i=\\begin{cases}0&i<n,\\\\ E^i&i\\ge n,\\end{cases}\n \\qquad\n (\\sigma_{\\le n}E)^i=\\begin{cases}E^i&i\\le n,\\\\ 0&i>n.\\end{cases}\n$$\nTheir differentials equal $d^i$ when both adjacent terms are retained and are zero otherwise. Thus $\\sigma_{\\ge n}E$ is a subcomplex and $\\sigma_{\\le n}E$ is a quotient complex. These are constructions on complexes, not in general functors on the derived category.\n\nThe good (canonical) truncations are\n$$\n (\\tau_{\\le n}E)^i=\\begin{cases}E^i&i<n,\\\\ \\ker d^n&i=n,\\\\ 0&i>n,\\end{cases}\n \\qquad\n (\\tau_{\\ge n}E)^i=\\begin{cases}0&i<n,\\\\ \\operatorname{coker}d^{n-1}&i=n,\\\\ E^i&i>n.\\end{cases}\n$$\nThe differential into $\\ker d^n$ and the differential out of $\\operatorname{coker}d^{n-1}$ are induced by $d^{n-1}$ and $d^n$, respectively; all other differentials are retained or zero as appropriate. The induced maps of kernels and cokernels define these constructions on morphisms of complexes. They retain $H^i(E)$ for $i\\le n$ and $i\\ge n$, respectively, and have zero cohomology outside the retained range. Their images in $D(\\mathcal A)$ are the truncation functors of the standard t-structure [def-sbc-standard-tstructure-derived-category].\n\nFor $K\\in D(\\mathcal A)$, the successive-truncation triangle is\n$$\n \\tau_{\\le n-1}K\\longrightarrow\\tau_{\\le n}K\n \\longrightarrow H^n(K)[-n]\\longrightarrow(\\tau_{\\le n-1}K)[1]\n$$\n[lem-weil-pbc-truncation-triangle]. Here $H^n(K)[-n]$ is the complex with its only nonzero term $H^n(K)$ in degree $n$. For bounded-below complexes and the left exact additive functors between Grothendieck abelian categories specified in [def-sp-truncation-couple], applying the derived functor to these triangles and taking cohomology constructs the truncation exact couple. In the cartesian-square, bounded-below setting of [def-weil-pbc-hypercohomology-filtrations], these are the triangles used for the hypercohomology filtrations. The individual triangle is not itself the bigraded exact couple.\n\nLet $\\mathcal T$ be a triangulated category [def-weil-triangulated-category] with countable coproducts, and let $(E_j,u_j:E_j\\to E_{j+1})_{j\\in\\mathbf N}$ be a sequence. Write $B=\\bigoplus_{j\\in\\mathbf N}E_j$ and $\\iota_j:E_j\\to B$ for its coprojections; a coproduct is the colimit of the corresponding discrete diagram [def-weil-pbc-category-colimit]. Define $s:B\\to B$ by $s\\iota_j=\\iota_{j+1}u_j$. A homotopy colimit of the sequence is a cone object $H$ in a distinguished triangle\n$$\n B\\xrightarrow{\\,1-s\\,}B\\longrightarrow H\\longrightarrow B[1].\n$$\nWe write $H=\\operatorname{hocolim}_jE_j$ for such a choice; this triangle specifies the notion and does not specify a functorial choice of cones.\n\nFor a small category $I$ and a diagram $(F_i)_{i\\in I}$ of abelian etale sheaves on $T$, its sheaf colimit [def-weil-pbc-category-colimit] is $P^\\#$, where $P(U)=\\operatorname{colim}_{i\\in I}F_i(U)$ is the objectwise presheaf colimit and $(-)^\\#$ is sheafification [def-weil-pbc-sheafification; lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact]. For sheaves of $R_T$-modules the same construction is performed in module presheaves, and its underlying abelian sheaf is the abelian sheaf colimit [lem-weil-pbc-module-sheaves-colimits-forgetful].\n\nFor an abelian sheaf $F$ on $T_{\\Et}$, if $\\bar t:\\operatorname{Spec}\\Omega\\to T$ is a geometric point, let $\\mathcal N_{\\bar t}$ be its category of pointed etale neighbourhoods [def-weil-pbc-pointed-etale-neighbourhoods]. Then\n$$\n F_{\\bar t}=\\operatorname{colim}_{\\mathcal N_{\\bar t}^{\\mathrm{op}}}F(U)\n$$\n[def-weil-pbc-geometric-stalks], with the index category filtered by [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered]. For abelian sheaves, the stalk functor commutes with arbitrary small colimits and, degree by degree, with colimits of complexes [lem-kun-stalks-commute-colimits]. For $R_T$-module sheaves this applies to the underlying abelian sheaves using [lem-weil-pbc-module-sheaves-colimits-forgetful], with the induced $R$-actions. Colimits of complexes here mean termwise colimits in the category of complexes, not colimits in the derived category.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/def-kun-truncations.md",
-    "place": "node def-kun-truncations, order 1690"
+  {
+   "tool": "leansearch",
+   "query": "Canonical truncation of complexes and homotopy colimit of a sequence in a triangulated category",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
   },
-  "stmt_deps": [
-    "def-sp-abelian",
-    "def-weil-abstract-derived-category",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-etale-sheaves",
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-weil-pbc-truncation-triangle",
-    "def-sp-truncation-couple",
-    "def-weil-pbc-hypercohomology-filtrations",
-    "def-weil-triangulated-category",
-    "def-weil-pbc-category-colimit",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-weil-pbc-pointed-etale-neighbourhoods",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-kun-stalks-commute-colimits"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "hocolim|homotopyColimit|homotopy colimit|def stupidTrunc|def truncLE|def truncGE",
-      "results": "Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean:40 HomologicalComplex.stupidTrunc; Embedding/TruncLE.lean:75 HomologicalComplex.truncLE; Embedding/TruncGE.lean:102 HomologicalComplex.truncGE'; CategoryTheory/Triangulated/TStructure/TruncLEGT.lean:38 TStructure.truncLE. Read StupidTrunc.lean:30-79, CochainComplex.lean:392-425 and TruncLEGT.lean:30-95: matching parts only.",
-      "date": "2026-10-14",
-      "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Canonical truncation of complexes and homotopy colimit of a sequence in a triangulated category",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Stupid and canonical truncations of cochain complexes of abelian sheaves and sequential homotopy colimits as cones of identity minus shift",
-      "results": "CochainComplex.shortComplexTruncLE, shortComplexTruncLEX₃ToTruncGE, πTruncGE; HomotopyCategory.spectralObjectMappingCone and mappingConeCompTriangleh_distinguished. These cover truncation or cone constructions, not the full definition.",
-      "date": "2026-10-14",
-      "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"trunc\"",
-      "results": "UInt16/32/64/8/USize.ofNatTruncate and BitVec.truncate; irrelevant numerical truncation hits.",
-      "date": "2026-10-14",
-      "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
-    },
-    {
-      "tool": "grep",
-      "query": "hocolim|homotopyColimit|homotopy colimit|mapping telescope",
-      "results": "No hits in Mathlib/CategoryTheory.",
-      "date": "2026-10-14",
-      "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
-    },
-    {
-      "tool": "grep",
-      "query": "colimit.*sheaf|sheaf.*colimit|presheafToSheaf.*[Cc]olimit",
-      "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean:295-296, Point/OfIsCofiltered.lean:186-187 and Point/Basic.lean:28,44,145 give point-fiber and colimit infrastructure; not all clauses of this definition.",
-      "date": "2026-10-14",
-      "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Sequential homotopy colimit in triangulated category defined by distinguished triangle from identity minus shift on countable coproduct",
-      "results": "HomotopyCategory.Pretriangulated.distinguished_cocone_triangle, distinguishedTriangles; CochainComplex.mappingCone.triangleh and trianglehOfDegreewiseSplit. Cones in a homotopy category, not a sequential telescope in an arbitrary triangulated category.",
-      "date": "2026-10-14",
-      "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"truncLE\"",
-      "results": "ComplexShape.Embedding.IsTruncLE and its instances; HomologicalComplex.truncLE' and HomologicalComplex.truncLE. Matching truncation notions only.",
-      "date": "2026-10-14",
-      "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Mapping telescope for a direct system in an additive triangulated category with coproducts, and intelligent truncation of a cochain complex",
-      "results": "CochainComplex.shortComplexTruncLEX₃ToTruncGE, ιTruncLE, πTruncGE, shortComplexTruncLE; TStructure.truncGEδLT and truncGEπ; HomotopyCategory.spectralObjectMappingCone and CochainComplex.mappingConeCompTriangle. Constituent truncation and cone constructions; no declaration stating the full bundled definition.",
-      "date": "2026-10-14",
-      "verdict": "no match for the whole item; component notions already represented by existing DAG nodes"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [
-    "cites_outside_uses"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1690,
-  "blueprint_uses": [
-    "def-sp-truncation-couple",
-    "def-weil-pbc-hypercohomology-filtrations"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-hypercohomology-filtrations"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "leanfinder",
+   "query": "Stupid and canonical truncations of cochain complexes of abelian sheaves and sequential homotopy colimits as cones of identity minus shift",
+   "results": "CochainComplex.shortComplexTruncLE, shortComplexTruncLEX₃ToTruncGE, πTruncGE; HomotopyCategory.spectralObjectMappingCone and mappingConeCompTriangleh_distinguished. These cover truncation or cone constructions, not the full definition.",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "def-kun-truncations",
-    "worker": "stage1",
-    "summary": "Expanded the definition into explicit stupid and good truncation formulas, distinguished the successive triangle from the bounded-below truncation exact couple, specified the telescope endomorphism, and cited existing nodes for the standard t-structure, colimits, module forgetful functor, pointed-neighbourhood filtering and stalk commutation. No new nodes; no whole-item Lean attachment or Mathlib match.",
-    "blueprint": "Realizes all paragraphs of blueprint def-kun-truncations: stupid and canonical truncations; successive triangle and its spectral-sequence use; telescope homotopy colimit; sheaf colimits and geometric stalks.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-truncation-triangle",
-        "why": "Its statement supplies the successive distinguished triangle in any abelian derived category; it does not replace a Kunneth proof step."
-      },
-      {
-        "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-        "why": "Its first clause supplies the sheafification-of-sectionwise-colimits construction on any site."
-      },
-      {
-        "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-        "why": "Its clauses (2),(3) justify the coefficient-module version and its underlying abelian colimit."
-      },
-      {
-        "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-        "why": "Its statement supplies the filtered opposite indexing category for the geometric stalk definition."
-      }
-    ]
+  {
+   "tool": "loogle",
+   "query": "\"trunc\"",
+   "results": "UInt16/32/64/8/USize.ofNatTruncate and BitVec.truncate; irrelevant numerical truncation hits.",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
   },
-  "tool_uses": [
-    "lem-weil-pbc-truncation-triangle",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
-  ],
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NZ-370da0446",
-    "group": "NZ",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-370da0446 (reviewer sub-agent of L); spot-checked: Reviewed item, unit/chapter route, all 17 dependencies and cited sources, blueprint, searches, edge cases, and coefficient conventions. The triangle/exact-couple correction is mathematically necessary and properly documented; no new nodes or repair faults remain. Review written to review.md."
+  {
+   "tool": "grep",
+   "query": "hocolim|homotopyColimit|homotopy colimit|mapping telescope",
+   "results": "No hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
   },
-  "lean": {
-    "module": "Sheaf.CategoryTheory.TruncationsAndHomotopyColimits",
-    "declaration": "CategoryTheory.IsSequentialHomotopyColimit",
-    "file": "lean/Sheaf/CategoryTheory/TruncationsAndHomotopyColimits.lean",
-    "statement": "def IsSequentialHomotopyColimit {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [HasCountableCoproducts C] (E : ℕ → C) (u : ∀ j : ℕ, E j ⟶ E (j + 1)) (H : C) : Prop",
-    "branch": "newtargets-dag",
-    "by": "ND",
-    "date": "2026-10-15",
-    "existing": false,
-    "note": "The new declaration is the general sequential homotopy-colimit predicate. The other component notions of this composite definition are reused, without aliases or copies, through public imports; their exact expressions and declarations are mapped clause by clause in the module documentation and worker report."
+  {
+   "tool": "grep",
+   "query": "colimit.*sheaf|sheaf.*colimit|presheafToSheaf.*[Cc]olimit",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean:295-296, Point/OfIsCofiltered.lean:186-187 and Point/Basic.lean:28,44,145 give point-fiber and colimit infrastructure; not all clauses of this definition.",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
   },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-90f3a0de1",
-    "group": "ND",
-    "result": "pass",
-    "note": "Checked all 17 dependencies, source, clauses, edge cases, signature and pilot gates; no delivery errors. Context clone advanced externally; immutable snapshot remained the review basis."
+  {
+   "tool": "leanfinder",
+   "query": "Sequential homotopy colimit in triangulated category defined by distinguished triangle from identity minus shift on countable coproduct",
+   "results": "HomotopyCategory.Pretriangulated.distinguished_cocone_triangle, distinguishedTriangles; CochainComplex.mappingCone.triangleh and trianglehOfDegreewiseSplit. Cones in a homotopy category, not a sequential telescope in an arbitrary triangulated category.",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
   },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For a complex $\\mathcal E^\\bullet$ of etale sheaves, the\n*stupid truncations* $\\sigma_{\\ge n}$ and $\\sigma_{\\le n}$\nare obtained by replacing the terms in degrees $<n$ (resp. $>n$)\nby $0$. The *good (canonical) truncations* $\\tau_{\\ge n}$,\n$\\tau_{\\le n}$ are the truncation functors of the standard\nt-structure on $D(T_{\\Et})$: they keep the cohomology objects in the\nretained range and kill those outside it. The triangle\n\n$$\n\\tau_{\\le n-1}K\\to\\tau_{\\le n}K\\to\\mathcal H^n(K)[-n]\\to\n$$\n\nis the truncation couple of [def-sp-truncation-couple].\n\nIn a triangulated category with countable direct sums, the\n*homotopy colimit* of a sequence $E_0\\to E_1\\to\\cdots$ is\nspecified by a distinguished triangle\n\n$$\n\\bigoplus_nE_n\\xrightarrow{\\,1-\\mathrm{shift}\\,}\\bigoplus_nE_n\n\\longrightarrow\\operatorname{hocolim}_nE_n\\longrightarrow\n\\bigl(\\bigoplus_nE_n\\bigr)[1].\n$$\n\nThe colimit of etale sheaves is the sheafification of the objectwise\ncolimit of the underlying presheaves. Geometric stalks are computed\nby filtered colimits of sections over\npointed etale\nneighbourhoods.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "loogle",
+   "query": "\"truncLE\"",
+   "results": "ComplexShape.Embedding.IsTruncLE and its instances; HomologicalComplex.truncLE' and HomologicalComplex.truncLE. Matching truncation notions only.",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; constituent matches reused through existing DAG nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping telescope for a direct system in an additive triangulated category with coproducts, and intelligent truncation of a cochain complex",
+   "results": "CochainComplex.shortComplexTruncLEX₃ToTruncGE, ιTruncLE, πTruncGE, shortComplexTruncLE; TStructure.truncGEδLT and truncGEπ; HomotopyCategory.spectralObjectMappingCone and CochainComplex.mappingConeCompTriangle. Constituent truncation and cone constructions; no declaration stating the full bundled definition.",
+   "date": "2026-10-14",
+   "verdict": "no match for the whole item; component notions already represented by existing DAG nodes"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_outside_uses"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1690,
+ "blueprint_uses": [
+  "def-sp-truncation-couple",
+  "def-weil-pbc-hypercohomology-filtrations"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-hypercohomology-filtrations"
+ ],
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-kun-truncations",
+  "worker": "stage1",
+  "summary": "Expanded the definition into explicit stupid and good truncation formulas, distinguished the successive triangle from the bounded-below truncation exact couple, specified the telescope endomorphism, and cited existing nodes for the standard t-structure, colimits, module forgetful functor, pointed-neighbourhood filtering and stalk commutation. No new nodes; no whole-item Lean attachment or Mathlib match.",
+  "blueprint": "Realizes all paragraphs of blueprint def-kun-truncations: stupid and canonical truncations; successive triangle and its spectral-sequence use; telescope homotopy colimit; sheaf colimits and geometric stalks.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Its statement supplies the successive distinguished triangle in any abelian derived category; it does not replace a Kunneth proof step."
+   },
+   {
+    "node": "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+    "why": "Its first clause supplies the sheafification-of-sectionwise-colimits construction on any site."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Its clauses (2),(3) justify the coefficient-module version and its underlying abelian colimit."
+   },
+   {
+    "node": "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "why": "Its statement supplies the filtered opposite indexing category for the geometric stalk definition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+ ],
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NZ-370da0446",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NZ-370da0446 (reviewer sub-agent of L); spot-checked: Reviewed item, unit/chapter route, all 17 dependencies and cited sources, blueprint, searches, edge cases, and coefficient conventions. The triangle/exact-couple correction is mathematically necessary and properly documented; no new nodes or repair faults remain. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TruncationsAndHomotopyColimits",
+  "declaration": "CategoryTheory.IsSequentialHomotopyColimit",
+  "file": "lean/Sheaf/CategoryTheory/TruncationsAndHomotopyColimits.lean",
+  "statement": "def IsSequentialHomotopyColimit {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [HasCountableCoproducts C] (E : ℕ → C) (u : ∀ j : ℕ, E j ⟶ E (j + 1)) (H : C) : Prop",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-15",
+  "existing": false,
+  "note": "The new declaration is the general sequential homotopy-colimit predicate. The other component notions of this composite definition are reused, without aliases or copies, through public imports; their exact expressions and declarations are mapped clause by clause in the module documentation and worker report."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-90f3a0de1",
+  "group": "ND",
+  "result": "pass",
+  "note": "Checked all 17 dependencies, source, clauses, edge cases, signature and pilot gates; no delivery errors. Context clone advanced externally; immutable snapshot remained the review basis."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For a complex $\\mathcal E^\\bullet$ of etale sheaves, the\n*stupid truncations* $\\sigma_{\\ge n}$ and $\\sigma_{\\le n}$\nare obtained by replacing the terms in degrees $<n$ (resp. $>n$)\nby $0$. The *good (canonical) truncations* $\\tau_{\\ge n}$,\n$\\tau_{\\le n}$ are the truncation functors of the standard\nt-structure on $D(T_{\\Et})$: they keep the cohomology objects in the\nretained range and kill those outside it. The triangle\n\n$$\n\\tau_{\\le n-1}K\\to\\tau_{\\le n}K\\to\\mathcal H^n(K)[-n]\\to\n$$\n\nis the truncation couple of [def-sp-truncation-couple].\n\nIn a triangulated category with countable direct sums, the\n*homotopy colimit* of a sequence $E_0\\to E_1\\to\\cdots$ is\nspecified by a distinguished triangle\n\n$$\n\\bigoplus_nE_n\\xrightarrow{\\,1-\\mathrm{shift}\\,}\\bigoplus_nE_n\n\\longrightarrow\\operatorname{hocolim}_nE_n\\longrightarrow\n\\bigl(\\bigoplus_nE_n\\bigr)[1].\n$$\n\nThe colimit of etale sheaves is the sheafification of the objectwise\ncolimit of the underlying presheaves. Geometric stalks are computed\nby filtered colimits of sections over\npointed etale\nneighbourhoods.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

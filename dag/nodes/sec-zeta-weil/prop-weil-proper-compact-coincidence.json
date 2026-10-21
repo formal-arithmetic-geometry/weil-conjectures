@@ -1,231 +1,220 @@
 {
-  "id": "prop-weil-proper-compact-coincidence",
-  "blueprint": {
-    "is": "prop-weil-proper-compact-coincidence",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Proper coincidence of compact-support and ordinary cohomology",
-  "statement": "In the notation of\n[def-weil-ordinary-compact-cohomology], if $Y$ is\nproper then the\ncompact-support direct image and the ordinary direct image agree,\n\n$$\nRa_{Y!}\\cong Ra_{Y*},\n$$\n\nso that $H_c^i(Y,K)\\cong H^i(Y,K)$ for every $K$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.md",
-    "place": "node prop-weil-proper-compact-coincidence, order 2871"
-  },
-  "stmt_deps": [
-    "def-weil-ordinary-compact-cohomology",
-    "def-weil-derived-direct-image",
-    "def-compact-support-direct-image-detailed",
-    "def-weil-proper-morphism",
-    "def-weil-compact-support-finite-action",
-    "def-weil-compact-support-coefficient-action"
-  ],
-  "proof": [
-    {
-      "text": "Use the finite-field and coefficient data of [def-weil-ordinary-compact-cohomology]. In particular $Y$ is a separated finite-type $k$-scheme and $\\ell$ is invertible in $k$. Since $Y$ is proper over $k$, $a_Y:Y\\to s=\\operatorname{Spec}k$ is proper by [def-weil-proper-morphism]. Thus $c_0=(\\operatorname{id}_Y,a_Y)$ is a compactification by [def-weil-compactifications-refinements]. For $j=\\operatorname{id}_Y$, every object $V\\to Y$ factors through $j$, so the presheaf defining $j_!M$ in [def-weil-extension-by-zero] is exactly $M$, on sections, restriction maps and morphisms; it is already a sheaf. Hence $j_!$ is naturally the identity, including on complexes. The formula of [def-compact-support-direct-image-detailed] therefore gives $Ra_{Y!,n}^{c_0}\\cong Ra_{Y*,n}$ for every $n\\geq1$. Bounded constructible finite-coefficient objects have etale origin by [lem-sf-proetale-constructible-origin], so [prop-compactification-coherence-detailed] identifies the compactification-independent functor with this value on its required domain; its identity and cocycle clauses make this identification natural and independent of a common refinement.",
-      "uses": [
-        "def-weil-ordinary-compact-cohomology",
-        "def-weil-proper-morphism",
-        "def-weil-compactifications-refinements",
-        "def-weil-extension-by-zero",
-        "def-compact-support-direct-image-detailed",
-        "lem-sf-proetale-constructible-origin",
-        "prop-compactification-coherence-detailed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
-        "place": "first paragraph, through the finite-level identification and compactification independence"
-      }
-    },
-    {
-      "text": "For integral coefficients choose $c_0$ at every level in [def-weil-integral-rational-qbar-compact-support], and put $K_n=K\\otimes^L_{\\mathcal O_E}A_{E,n}$. The two towers defining $Ra_{Y!}K$ there and $Ra_{Y*}K$ in [def-weil-derived-direct-image] have the same terms $\\operatorname{Res}_n Ra_{Y*,n}K_n$. Their transition maps also agree: [lem-sf-compact-support-restriction-of-scalars] specifies the compact-support coefficient comparison as $j_!\\operatorname{Res}=\\operatorname{Res}j_!$ followed by the ordinary derived-direct-image coefficient comparison. For $j=\\operatorname{id}_Y$ the first map is the identity on every section, so both transitions are the same reduction map $K_{n+1}\\to\\operatorname{Res}K_n$ followed by the same ordinary coefficient comparison. Thus the tower identifications commute with every transition, and taking the derived limit of this identical diagram yields $Ra_{Y!}K\\cong Ra_{Y*}K$, naturally in $K$.",
-      "uses": [
-        "def-weil-integral-rational-qbar-compact-support",
-        "def-weil-derived-direct-image",
-        "lem-sf-compact-support-restriction-of-scalars"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
-        "place": "first paragraph, passage from all finite coefficient levels to the integral functor"
-      }
-    },
-    {
-      "text": "For $\\Lambda=E$, [def-weil-derived-direct-image] and [def-weil-integral-rational-qbar-compact-support] use the rationalized category of [def-weil-rationalization-karoubi]. Apply localization to the integral isomorphism and its inverse: on a morphism $u\\otimes a$ its naturality equation is the integral naturality equation for $u$ multiplied by $a\\in E$. The two composites remain identities, giving $Ra_{Y!}\\cong Ra_{Y*}$ over $E$. For $\\Lambda=\\Qlb$, use [def-weil-algebraically-closed-coefficients]: on an object $(E,K_E)$ take the isomorphism over $E$, and on a morphism represented over a common extension $L$ use its naturality equation over $L$. The finite-level comparisons above are identities after choosing $c_0$, so extension of coefficients sends each comparison to the comparison for the extended coefficients. Consequently these equations agree after every further extension and define a natural isomorphism in the common-stage category. This treats all four coefficient rings in the statement's notation.",
-      "uses": [
-        "def-weil-derived-direct-image",
-        "def-weil-integral-rational-qbar-compact-support",
-        "def-weil-rationalization-karoubi",
-        "def-weil-algebraically-closed-coefficients"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
-        "place": "first paragraph, the functor identification for rational and algebraically closed coefficients"
-      }
-    },
-    {
-      "text": "For each coefficient ring $\\Lambda$ and $K\\in D^b_c(Y,\\Lambda)$ of [def-weil-ordinary-compact-cohomology], apply $\\operatorname{Fib}_s$ to the isomorphism $Ra_{Y!}K\\cong Ra_{Y*}K$ and its inverse. Their composites remain identities. The displayed definitions give $\\RGammac(Y,K)\\cong\\RGamma(Y,K)$. Applying the degree-$i$ cohomology functor to these two inverse maps again gives inverse maps, hence $H_c^i(Y,K)\\cong H^i(Y,K)$ for every integer $i$. For a Weil complex the same assertion applies to its underlying complex, as stipulated in that definition.",
-      "uses": [
-        "def-weil-ordinary-compact-cohomology"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
-        "place": "first paragraph, from applying Fib_s to the final cohomology conclusion"
-      }
-    }
-  ],
-  "proof_deps": [
+ "id": "prop-weil-proper-compact-coincidence",
+ "blueprint": {
+  "is": "prop-weil-proper-compact-coincidence",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Proper coincidence of compact-support and ordinary cohomology",
+ "statement": "In the notation of\n[def-weil-ordinary-compact-cohomology], if $Y$ is\nproper then the\ncompact-support direct image and the ordinary direct image agree,\n\n$$\nRa_{Y!}\\cong Ra_{Y*},\n$$\n\nso that $H_c^i(Y,K)\\cong H^i(Y,K)$ for every $K$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.md",
+  "place": "node prop-weil-proper-compact-coincidence, order 2871"
+ },
+ "stmt_deps": [
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-derived-direct-image",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-proper-morphism",
+  "def-weil-compact-support-finite-action",
+  "def-weil-compact-support-coefficient-action"
+ ],
+ "proof": [
+  {
+   "text": "Use the finite-field and coefficient data of [def-weil-ordinary-compact-cohomology]. In particular $Y$ is a separated finite-type $k$-scheme and $\\ell$ is invertible in $k$. Since $Y$ is proper over $k$, $a_Y:Y\\to s=\\operatorname{Spec}k$ is proper by [def-weil-proper-morphism]. Thus $c_0=(\\operatorname{id}_Y,a_Y)$ is a compactification by [def-weil-compactifications-refinements]. For $j=\\operatorname{id}_Y$, every object $V\\to Y$ factors through $j$, so the presheaf defining $j_!M$ in [def-weil-extension-by-zero] is exactly $M$, on sections, restriction maps and morphisms; it is already a sheaf. Hence $j_!$ is naturally the identity, including on complexes. The formula of [def-compact-support-direct-image-detailed] therefore gives $Ra_{Y!,n}^{c_0}\\cong Ra_{Y*,n}$ for every $n\\geq1$. Bounded constructible finite-coefficient objects have etale origin by [lem-sf-proetale-constructible-origin], so [prop-compactification-coherence-detailed] identifies the compactification-independent functor with this value on its required domain; its identity and cocycle clauses make this identification natural and independent of a common refinement.",
+   "uses": [
     "def-weil-ordinary-compact-cohomology",
     "def-weil-proper-morphism",
     "def-weil-compactifications-refinements",
     "def-weil-extension-by-zero",
     "def-compact-support-direct-image-detailed",
     "lem-sf-proetale-constructible-origin",
-    "prop-compactification-coherence-detailed",
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+    "place": "first paragraph, through the finite-level identification and compactification independence"
+   }
+  },
+  {
+   "text": "For integral coefficients choose $c_0$ at every level in [def-weil-integral-rational-qbar-compact-support], and put $K_n=K\\otimes^L_{\\mathcal O_E}A_{E,n}$. The two towers defining $Ra_{Y!}K$ there and $Ra_{Y*}K$ in [def-weil-derived-direct-image] have the same terms $\\operatorname{Res}_n Ra_{Y*,n}K_n$. Their transition maps also agree: [lem-sf-compact-support-restriction-of-scalars] specifies the compact-support coefficient comparison as $j_!\\operatorname{Res}=\\operatorname{Res}j_!$ followed by the ordinary derived-direct-image coefficient comparison. For $j=\\operatorname{id}_Y$ the first map is the identity on every section, so both transitions are the same reduction map $K_{n+1}\\to\\operatorname{Res}K_n$ followed by the same ordinary coefficient comparison. Thus the tower identifications commute with every transition, and taking the derived limit of this identical diagram yields $Ra_{Y!}K\\cong Ra_{Y*}K$, naturally in $K$.",
+   "uses": [
     "def-weil-integral-rational-qbar-compact-support",
     "def-weil-derived-direct-image",
-    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-sf-compact-support-restriction-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+    "place": "first paragraph, passage from all finite coefficient levels to the integral functor"
+   }
+  },
+  {
+   "text": "For $\\Lambda=E$, [def-weil-derived-direct-image] and [def-weil-integral-rational-qbar-compact-support] use the rationalized category of [def-weil-rationalization-karoubi]. Apply localization to the integral isomorphism and its inverse: on a morphism $u\\otimes a$ its naturality equation is the integral naturality equation for $u$ multiplied by $a\\in E$. The two composites remain identities, giving $Ra_{Y!}\\cong Ra_{Y*}$ over $E$. For $\\Lambda=\\Qlb$, use [def-weil-algebraically-closed-coefficients]: on an object $(E,K_E)$ take the isomorphism over $E$, and on a morphism represented over a common extension $L$ use its naturality equation over $L$. The finite-level comparisons above are identities after choosing $c_0$, so extension of coefficients sends each comparison to the comparison for the extended coefficients. Consequently these equations agree after every further extension and define a natural isomorphism in the common-stage category. This treats all four coefficient rings in the statement's notation.",
+   "uses": [
+    "def-weil-derived-direct-image",
+    "def-weil-integral-rational-qbar-compact-support",
     "def-weil-rationalization-karoubi",
     "def-weil-algebraically-closed-coefficients"
-  ],
-  "proof_origin": {
-    "by": "document",
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
-    "place": "first paragraph"
+    "place": "first paragraph, the functor identification for rational and algebraically closed coefficients"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "proper scheme compact support direct image ordinary direct image agree derived cohomology",
-      "results": "8 hits, all unrelated scheme support/quasi-separatedness declarations; no compact-support or derived direct-image coincidence.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "rightDerivedLowerShriek rightDerivedLowerStar IsProper",
-      "results": "0 hits; loogle reported Unknown identifier `rightDerivedLowerShriek`.",
-      "date": "2026-10-17",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "grep",
-      "query": "compactlySupportedGlobalSectionsIsoOfIsProper|derivedLowerShriekObjIsoOfIsProper (WeilConjectures)",
-      "results": "0 Mathlib hits.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "For a proper scheme, compactly supported derived direct image is isomorphic to ordinary derived direct image and compactly supported cohomology equals ordinary cohomology",
-      "results": "8 hits, all IsProper morphism declarations (AlgebraicGeometry.IsProper and composition/finite variants); no compact-support direct-image theorem.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "extension by zero along the identity functor is isomorphic to the identity and direct image with proper support equals pushforward",
-      "results": "8 hits for identity pushforward/restriction of modules and sheaves; none for compact-support derived image of pro-etale coefficient complexes.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "lowerShriek|compactlySupported|proper.support",
-      "results": "No lowerShriek, compactlySupported or proper.support declarations in Mathlib/AlgebraicGeometry.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2871,
-  "blueprint_uses": [
-    "def-compact-support-direct-image-detailed",
-    "def-weil-derived-direct-image",
-    "def-weil-ordinary-compact-cohomology",
-    "def-weil-scheme-morphism-properties"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "uses_not_cited": [
-    "def-weil-scheme-morphism-properties"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-zeta-weil",
-  "unit": "sk-input-weights",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "In the notation of\n[def-weil-ordinary-compact-cohomology], if $Y$ is\nproper then the\ncompact-support direct image and the ordinary direct image agree,\n\n$$\nRa_{Y!}\\cong Ra_{Y*},\n$$\n\nso that $H_c^i(Y,K)\\cong H^i(Y,K)$ for every $K$.",
-    "proof": [
-      {
-        "text": "If $Y$ is proper, the identity is a compactification of the structure\nmorphism $a_Y$, namely\n$Y\\xrightarrow{\\operatorname{id}}Y\\xrightarrow{a_Y}\\Spec k$\nwith $a_Y$ proper, so at every finite coefficient level\n$Ra_{Y!,n}=Ra_{Y*,n}$ by\n[def-compact-support-direct-image-detailed], and the comparison maps of\nthat definition are identities for the identity refinement; hence the\ncompactification-independent functor $Ra_{Y!}$ is naturally\nidentified with the ordinary derived direct image $Ra_{Y*}$ of\n[def-weil-derived-direct-image]. Applying the equivalence\n$\\operatorname{Fib}_s$ of\n[def-weil-ordinary-compact-cohomology] to both sides gives\n$\\RGammac(Y,K)\\cong\\RGamma(Y,K)$, hence\n$H_c^i(Y,K)\\cong H^i(Y,K)$ for every $K$, by the definitions of the\nordinary and compactly supported cohomology groups in\n[def-weil-ordinary-compact-cohomology].",
-        "uses": [
-          "def-compact-support-direct-image-detailed",
-          "def-weil-derived-direct-image",
-          "def-weil-ordinary-compact-cohomology"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
-  },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "prop-weil-proper-compact-coincidence",
-    "worker": "stage1",
-    "summary": "Identity compactification gives the finite-level proper comparison directly from extension by zero and the compact-support formula, with compactification coherence on the etale-origin domain. The integral tower terms and transition maps coincide; localization and common finite stages give the rational and algebraically closed comparisons. Applying Fib_s and cohomology gives the conclusion. No new nodes.",
-    "blueprint": "Step 1 realizes the identity compactification and finite-level comparison of the current blueprint proof; steps 2 and 3 spell out its passage to the integral, rational and common-stage functors; step 4 realizes its Fib_s and cohomology conclusion."
-  },
-  "reviewed": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-cc-NE-4150efe88",
-    "group": "NE",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-4150efe88 (reviewer sub-agent of L); spot-checked: I read the item, the cited node statements, the unit and the main-20261015 source in full; no changes. The statement matches main-20261015 prop-weil-proper-compact-coincidence.md verbatim; only the master parenthetical was dropped, with no weakening. Step 1: (id_Y, a_Y) is a compactification (def-weil-proper-morphism, def-weil-compactifications-refinements); j_! along the identity is sheafification of M itself (def-weil-extension-by-zero); Rf_{!,n}^{c0}=Ra_{Y*,n}; constructible-origin (ii) puts D^b_c inside the coherence domain of prop-compactification-coherence-detailed. Removing cor-cbc-proper-coincidence was correct, since it assumes the identification. Step 2: the integral towers have equal terms and equal transitions (lem-sf-compact-support-restriction-of-scalars = j_!Res identity followed by the same direct-image Res lemma). The integral definition fixes c and says independence of c is a separate statement, so using c0 is a legitimate instance; the DAG has no integral independence node. Step 3: localization (same objects, Hom tensor E) and common-stage representatives. I cross-checked against lem-pur-compact-support-integral-coefficient-comparison that with j=id the coefficient comparison reduces to the direct-image one. Step 4: Fib_s and H^i, elementary. All statement dependencies are in the transitive route of sk-input-weights; no tool uses. No new nodes; no duplicates found in a DAG-wide search. Edge cases: empty Y, Spec k, K=0, P^1; A^1 shows properness is needed. Source field still names the master copy, which is the import convention."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.ProperCompactCoincidence",
-    "declaration": "WeilConjectures.properCompactCoincidence",
-    "statement": "theorem properCompactCoincidence (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (E₀ : Padic.FiniteCoefficientFields l Ω) (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of D.k))] [IsProper (Y ↘ Spec (CommRingCat.of D.k))] (c : Compactification (Y ↘ Spec (CommRingCat.of D.k))) (n : ℕ) (hn : 1 ≤ n) : Nonempty ((intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y).ι ⋙ @sfIntrinsicCompactSupport Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) c (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n) _ (Padic.finite_coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n hn) ≅ (intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y).ι ⋙ proEtaleConstantDerivedDirectImage (Y ↘ Spec (CommRingCat.of D.k)) (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n)) ∧ Nonempty (sfCompactSupportFiniteIntegralFunctor l D.k (finiteFieldDatumPrimeUnit D l hl) c (Coefficient.{u} l Ω E₀) ⋙ (sfIntegralConstructible l (Coefficient.{u} l Ω E₀) (Spec (.of D.k))).ι ≅ (sfIntegralConstructible l (Coefficient.{u} l Ω E₀) Y).ι ⋙ sfCompletedDerivedDirectImage l (Coefficient.{u} l Ω E₀) (Y ↘ Spec (.of D.k))) ∧ Nonempty (sfCompactSupportFiniteFunctor l D.k (finiteFieldDatumPrimeUnit D l hl) c (Coefficient.{u} l Ω E₀) ≅ sfCompactSupportFiniteFunctor l D.k (finiteFieldDatumPrimeUnit D l hl) (Compactification.ofIsProper (Y ↘ Spec (.of D.k))) (Coefficient.{u} l Ω E₀)) ∧ (∀ S : SfCompactSupportCoefficientAction l D.k (finiteFieldDatumPrimeUnit D l hl) Ω c, ∀ S₀ : SfCompactSupportCoefficientAction l D.k (finiteFieldDatumPrimeUnit D l hl) Ω (Compactification.ofIsProper (Y ↘ Spec (.of D.k))), Nonempty (S.system.functor ≅ S₀.system.functor)) ∧ (∀ K : (intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y).FullSubcategory, Nonempty (finiteCompactSections D l (Coefficient.{u} l Ω E₀) Y c n hn K.obj ≅ finiteOrdinarySections D l (Coefficient.{u} l Ω E₀) Y n hn K.obj) ∧ ∀ i : ℤ, Nonempty (finiteCompactCohomology D l (Coefficient.{u} l Ω E₀) Y c n hn K.obj i ≅ finiteOrdinaryCohomology D l (Coefficient.{u} l Ω E₀) Y n hn K.obj i)) ∧ (∀ K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E₀) Y, Nonempty (sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (finiteFieldDatumPrimeUnit D l hl) c K ≅ integralImage D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ Nonempty (integralCompactSections D l hl (Coefficient.{u} l Ω E₀) Y c K ≅ integralOrdinarySections D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ ∀ i : ℤ, Nonempty (integralCompactCohomology D l hl (Coefficient.{u} l Ω E₀) Y c K i ≅ integralOrdinaryCohomology D l hl (Coefficient.{u} l Ω E₀) Y K i)) ∧ (∀ K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E₀) Y, Nonempty (sfRationalCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (finiteFieldDatumPrimeUnit D l hl) c K.obj ≅ rationalImage D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ Nonempty (rationalCompactSections D l hl (Coefficient.{u} l Ω E₀) Y c K ≅ rationalOrdinarySections D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ ∀ i : ℤ, Nonempty (rationalCompactCohomology D l hl (Coefficient.{u} l Ω E₀) Y c K i ≅ rationalOrdinaryCohomology D l hl (Coefficient.{u} l Ω E₀) Y K i)) ∧ (∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω Y, Nonempty (sfQbarCompactSupportValue l D.k (finiteFieldDatumPrimeUnit D l hl) Ω c K.stage K.obj.obj ≅ qbarImage D l hl Y Ω K) ∧ Nonempty (qbarCompactSections D l hl Y Ω c K ≅ qbarOrdinarySections D l hl Y Ω K) ∧ ∀ i : ℤ, Nonempty (qbarCompactCohomology D l hl Y Ω c K i ≅ qbarOrdinaryCohomology D l hl Y Ω K i))",
-    "branch": "newtargets-dag",
-    "by": "NP",
-    "date": "2026-10-17",
-    "existing": false,
-    "file": "lean/Sheaf/Paper/ProperCompactCoincidence.lean",
-    "declarations": [
-      "WeilConjectures.properCompactPointOver",
-      "WeilConjectures.properCompactCoincidence"
-    ],
-    "note": "The rational and algebraically closed ordinary functors use the same direct-image construction at Compactification.ofIsProper (identity open immersion); the final clauses identify the actual ordinary image, section and cohomology declarations. The two added landed statement dependencies supply the normalized functor actions.",
-    "fixed_by": "NT-stage2-cc-3c5be6468"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-3c5be6468",
-    "group": "NP",
-    "result": "fix",
-    "note": "Read node, 6 stmt_deps (nodes and Lean), source, module, report. Clauses 1-2 are natural isos of recorded finite/integral functors (sfIntrinsicCompactSupport vs proEtaleConstantDerivedDirectImage; F^c vs sfCompletedDerivedDirectImage); clauses 5-8 give sections and H^i isos for every K and i at all four coefficient levels; the rational/Qbar ordinary Ra_* exists only objectwise (rationalImage/qbarImage), so the functor comparison at Compactification.ofIsProper plus objectwise isos is accepted. Only hypothesis is IsProper; no extra assumptions or universe restriction; added stmt_deps acyclic; point Over instance is real data with no conflict; docstrings and gates ok; statement verbatim. Finding: clause 4 used ∃ S ∃ S₀ over SfCompactSupportCoefficientAction, weaker than the node and the project convention (sfFieldShriekCompositionQbar_existsUnique quantifies over all actions; actions are not evidently unique). Fixed to ∀ S ∀ S₀ in fixes/ProperCompactCoincidence.lean, the lean-record statement and the report. nt_compile --json: delivered 11.6 s clean, fixed 9.0 s clean, error-injection control rejected."
+  {
+   "text": "For each coefficient ring $\\Lambda$ and $K\\in D^b_c(Y,\\Lambda)$ of [def-weil-ordinary-compact-cohomology], apply $\\operatorname{Fib}_s$ to the isomorphism $Ra_{Y!}K\\cong Ra_{Y*}K$ and its inverse. Their composites remain identities. The displayed definitions give $\\RGammac(Y,K)\\cong\\RGamma(Y,K)$. Applying the degree-$i$ cohomology functor to these two inverse maps again gives inverse maps, hence $H_c^i(Y,K)\\cong H^i(Y,K)$ for every integer $i$. For a Weil complex the same assertion applies to its underlying complex, as stipulated in that definition.",
+   "uses": [
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+    "place": "first paragraph, from applying Fib_s to the final cohomology conclusion"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-proper-morphism",
+  "def-weil-compactifications-refinements",
+  "def-weil-extension-by-zero",
+  "def-compact-support-direct-image-detailed",
+  "lem-sf-proetale-constructible-origin",
+  "prop-compactification-coherence-detailed",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-direct-image",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-input-weights/prop-weil-proper-compact-coincidence.proof.md",
+  "place": "first paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "proper scheme compact support direct image ordinary direct image agree derived cohomology",
+   "results": "8 hits, all unrelated scheme support/quasi-separatedness declarations; no compact-support or derived direct-image coincidence.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedLowerShriek rightDerivedLowerStar IsProper",
+   "results": "0 hits; loogle reported Unknown identifier `rightDerivedLowerShriek`.",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupportedGlobalSectionsIsoOfIsProper|derivedLowerShriekObjIsoOfIsProper (WeilConjectures)",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper scheme, compactly supported derived direct image is isomorphic to ordinary derived direct image and compactly supported cohomology equals ordinary cohomology",
+   "results": "8 hits, all IsProper morphism declarations (AlgebraicGeometry.IsProper and composition/finite variants); no compact-support direct-image theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero along the identity functor is isomorphic to the identity and direct image with proper support equals pushforward",
+   "results": "8 hits for identity pushforward/restriction of modules and sheaves; none for compact-support derived image of pro-etale coefficient complexes.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|compactlySupported|proper.support",
+   "results": "No lowerShriek, compactlySupported or proper.support declarations in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2871,
+ "blueprint_uses": [
+  "def-compact-support-direct-image-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-scheme-morphism-properties"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "uses_not_cited": [
+  "def-weil-scheme-morphism-properties"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-input-weights",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "In the notation of\n[def-weil-ordinary-compact-cohomology], if $Y$ is\nproper then the\ncompact-support direct image and the ordinary direct image agree,\n\n$$\nRa_{Y!}\\cong Ra_{Y*},\n$$\n\nso that $H_c^i(Y,K)\\cong H^i(Y,K)$ for every $K$.",
+  "proof": [
+   {
+    "text": "If $Y$ is proper, the identity is a compactification of the structure\nmorphism $a_Y$, namely\n$Y\\xrightarrow{\\operatorname{id}}Y\\xrightarrow{a_Y}\\Spec k$\nwith $a_Y$ proper, so at every finite coefficient level\n$Ra_{Y!,n}=Ra_{Y*,n}$ by\n[def-compact-support-direct-image-detailed], and the comparison maps of\nthat definition are identities for the identity refinement; hence the\ncompactification-independent functor $Ra_{Y!}$ is naturally\nidentified with the ordinary derived direct image $Ra_{Y*}$ of\n[def-weil-derived-direct-image]. Applying the equivalence\n$\\operatorname{Fib}_s$ of\n[def-weil-ordinary-compact-cohomology] to both sides gives\n$\\RGammac(Y,K)\\cong\\RGamma(Y,K)$, hence\n$H_c^i(Y,K)\\cong H^i(Y,K)$ for every $K$, by the definitions of the\nordinary and compactly supported cohomology groups in\n[def-weil-ordinary-compact-cohomology].",
+    "uses": [
+     "def-compact-support-direct-image-detailed",
+     "def-weil-derived-direct-image",
+     "def-weil-ordinary-compact-cohomology"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "prop-weil-proper-compact-coincidence",
+  "worker": "stage1",
+  "summary": "Identity compactification gives the finite-level proper comparison directly from extension by zero and the compact-support formula, with compactification coherence on the etale-origin domain. The integral tower terms and transition maps coincide; localization and common finite stages give the rational and algebraically closed comparisons. Applying Fib_s and cohomology gives the conclusion. No new nodes.",
+  "blueprint": "Step 1 realizes the identity compactification and finite-level comparison of the current blueprint proof; steps 2 and 3 spell out its passage to the integral, rational and common-stage functors; step 4 realizes its Fib_s and cohomology conclusion."
+ },
+ "reviewed": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-cc-NE-4150efe88",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-4150efe88 (reviewer sub-agent of L); spot-checked: I read the item, the cited node statements, the unit and the main-20261015 source in full; no changes. The statement matches main-20261015 prop-weil-proper-compact-coincidence.md verbatim; only the master parenthetical was dropped, with no weakening. Step 1: (id_Y, a_Y) is a compactification (def-weil-proper-morphism, def-weil-compactifications-refinements); j_! along the identity is sheafification of M itself (def-weil-extension-by-zero); Rf_{!,n}^{c0}=Ra_{Y*,n}; constructible-origin (ii) puts D^b_c inside the coherence domain of prop-compactification-coherence-detailed. Removing cor-cbc-proper-coincidence was correct, since it assumes the identification. Step 2: the integral towers have equal terms and equal transitions (lem-sf-compact-support-restriction-of-scalars = j_!Res identity followed by the same direct-image Res lemma). The integral definition fixes c and says independence of c is a separate statement, so using c0 is a legitimate instance; the DAG has no integral independence node. Step 3: localization (same objects, Hom tensor E) and common-stage representatives. I cross-checked against lem-pur-compact-support-integral-coefficient-comparison that with j=id the coefficient comparison reduces to the direct-image one. Step 4: Fib_s and H^i, elementary. All statement dependencies are in the transitive route of sk-input-weights; no tool uses. No new nodes; no duplicates found in a DAG-wide search. Edge cases: empty Y, Spec k, K=0, P^1; A^1 shows properness is needed. Source field still names the master copy, which is the import convention."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperCompactCoincidence",
+  "declaration": "WeilConjectures.properCompactCoincidence",
+  "statement": "theorem properCompactCoincidence (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (E₀ : Padic.FiniteCoefficientFields l Ω) (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of D.k))] [IsProper (Y ↘ Spec (CommRingCat.of D.k))] (c : Compactification (Y ↘ Spec (CommRingCat.of D.k))) (n : ℕ) (hn : 1 ≤ n) : Nonempty ((intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y).ι ⋙ @sfIntrinsicCompactSupport Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) c (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n) _ (Padic.finite_coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n hn) ≅ (intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y).ι ⋙ proEtaleConstantDerivedDirectImage (Y ↘ Spec (CommRingCat.of D.k)) (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n)) ∧ Nonempty (sfCompactSupportFiniteIntegralFunctor l D.k (finiteFieldDatumPrimeUnit D l hl) c (Coefficient.{u} l Ω E₀) ⋙ (sfIntegralConstructible l (Coefficient.{u} l Ω E₀) (Spec (.of D.k))).ι ≅ (sfIntegralConstructible l (Coefficient.{u} l Ω E₀) Y).ι ⋙ sfCompletedDerivedDirectImage l (Coefficient.{u} l Ω E₀) (Y ↘ Spec (.of D.k))) ∧ Nonempty (sfCompactSupportFiniteFunctor l D.k (finiteFieldDatumPrimeUnit D l hl) c (Coefficient.{u} l Ω E₀) ≅ sfCompactSupportFiniteFunctor l D.k (finiteFieldDatumPrimeUnit D l hl) (Compactification.ofIsProper (Y ↘ Spec (.of D.k))) (Coefficient.{u} l Ω E₀)) ∧ (∀ S : SfCompactSupportCoefficientAction l D.k (finiteFieldDatumPrimeUnit D l hl) Ω c, ∀ S₀ : SfCompactSupportCoefficientAction l D.k (finiteFieldDatumPrimeUnit D l hl) Ω (Compactification.ofIsProper (Y ↘ Spec (.of D.k))), Nonempty (S.system.functor ≅ S₀.system.functor)) ∧ (∀ K : (intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y).FullSubcategory, Nonempty (finiteCompactSections D l (Coefficient.{u} l Ω E₀) Y c n hn K.obj ≅ finiteOrdinarySections D l (Coefficient.{u} l Ω E₀) Y n hn K.obj) ∧ ∀ i : ℤ, Nonempty (finiteCompactCohomology D l (Coefficient.{u} l Ω E₀) Y c n hn K.obj i ≅ finiteOrdinaryCohomology D l (Coefficient.{u} l Ω E₀) Y n hn K.obj i)) ∧ (∀ K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E₀) Y, Nonempty (sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (finiteFieldDatumPrimeUnit D l hl) c K ≅ integralImage D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ Nonempty (integralCompactSections D l hl (Coefficient.{u} l Ω E₀) Y c K ≅ integralOrdinarySections D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ ∀ i : ℤ, Nonempty (integralCompactCohomology D l hl (Coefficient.{u} l Ω E₀) Y c K i ≅ integralOrdinaryCohomology D l hl (Coefficient.{u} l Ω E₀) Y K i)) ∧ (∀ K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E₀) Y, Nonempty (sfRationalCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (finiteFieldDatumPrimeUnit D l hl) c K.obj ≅ rationalImage D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ Nonempty (rationalCompactSections D l hl (Coefficient.{u} l Ω E₀) Y c K ≅ rationalOrdinarySections D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ ∀ i : ℤ, Nonempty (rationalCompactCohomology D l hl (Coefficient.{u} l Ω E₀) Y c K i ≅ rationalOrdinaryCohomology D l hl (Coefficient.{u} l Ω E₀) Y K i)) ∧ (∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω Y, Nonempty (sfQbarCompactSupportValue l D.k (finiteFieldDatumPrimeUnit D l hl) Ω c K.stage K.obj.obj ≅ qbarImage D l hl Y Ω K) ∧ Nonempty (qbarCompactSections D l hl Y Ω c K ≅ qbarOrdinarySections D l hl Y Ω K) ∧ ∀ i : ℤ, Nonempty (qbarCompactCohomology D l hl Y Ω c K i ≅ qbarOrdinaryCohomology D l hl Y Ω K i))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/ProperCompactCoincidence.lean",
+  "declarations": [
+   "WeilConjectures.properCompactPointOver",
+   "WeilConjectures.properCompactCoincidence"
+  ],
+  "note": "The rational and algebraically closed ordinary functors use the same direct-image construction at Compactification.ofIsProper (identity open immersion); the final clauses identify the actual ordinary image, section and cohomology declarations. The two added landed statement dependencies supply the normalized functor actions.",
+  "fixed_by": "NT-stage2-cc-3c5be6468"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c5be6468",
+  "group": "NP",
+  "result": "fix",
+  "note": "Read node, 6 stmt_deps (nodes and Lean), source, module, report. Clauses 1-2 are natural isos of recorded finite/integral functors (sfIntrinsicCompactSupport vs proEtaleConstantDerivedDirectImage; F^c vs sfCompletedDerivedDirectImage); clauses 5-8 give sections and H^i isos for every K and i at all four coefficient levels; the rational/Qbar ordinary Ra_* exists only objectwise (rationalImage/qbarImage), so the functor comparison at Compactification.ofIsProper plus objectwise isos is accepted. Only hypothesis is IsProper; no extra assumptions or universe restriction; added stmt_deps acyclic; point Over instance is real data with no conflict; docstrings and gates ok; statement verbatim. Finding: clause 4 used ∃ S ∃ S₀ over SfCompactSupportCoefficientAction, weaker than the node and the project convention (sfFieldShriekCompositionQbar_existsUnique quantifies over all actions; actions are not evidently unique). Fixed to ∀ S ∀ S₀ in fixes/ProperCompactCoincidence.lean, the lean-record statement and the report. nt_compile --json: delivered 11.6 s clean, fixed 9.0 s clean, error-injection control rejected."
+ }
 }

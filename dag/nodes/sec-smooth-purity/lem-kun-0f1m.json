@@ -1,295 +1,284 @@
 {
-  "id": "lem-kun-0f1m",
-  "blueprint": {
-    "is": "lem-kun-0f1m",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Tor amplitude and K-flat resolutions",
-  "statement": "Let $\\Lambda$ be a commutative ring, $T$ a scheme, and $\\Lambda_T$ its constant sheaf of rings [def-kun-constant-sheaf] on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site]. Let $E\\in D(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories] and $a\\in\\mathbf Z$. Then $E$ has tor amplitude in $[a,\\infty)$ [def-kun-tor-amplitude] if and only if $E$ is represented by a K-flat complex $\\mathcal E^\\bullet$ [def-kun-derived-tensor] of flat $\\Lambda_T$-module sheaves [def-pc-flat-sheaf-modules] with $\\mathcal E^i=0$ for $i<a$. Moreover, the representing complex may be chosen so that any termwise module pullback is again K-flat with flat terms: explicitly, for every morphism of ringed sites (or ringed topoi) $u:(\\mathcal C',\\mathcal O')\\to(T_{\\Et},\\Lambda_T)$, $u^*\\mathcal E^\\bullet=u^{-1}\\mathcal E^\\bullet\\otimes_{u^{-1}\\Lambda_T}\\mathcal O'$ is K-flat over $\\mathcal O'$ with flat terms [lem-weil-pbc-ringed-topos-kflat-pullback].",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1m.md",
-    "place": "node lem-kun-0f1m, order 1725",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 0F1M"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "def-kun-constant-sheaf",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-derived-categories",
-    "def-kun-tor-amplitude",
+ "id": "lem-kun-0f1m",
+ "blueprint": {
+  "is": "lem-kun-0f1m",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tor amplitude and K-flat resolutions",
+ "statement": "Let $\\Lambda$ be a commutative ring, $T$ a scheme, and $\\Lambda_T$ its constant sheaf of rings [def-kun-constant-sheaf] on the small etale site $T_{\\Et}$ [def-weil-pbc-etale-site]. Let $E\\in D(T_{\\Et},\\Lambda)$ [def-weil-pbc-derived-categories] and $a\\in\\mathbf Z$. Then $E$ has tor amplitude in $[a,\\infty)$ [def-kun-tor-amplitude] if and only if $E$ is represented by a K-flat complex $\\mathcal E^\\bullet$ [def-kun-derived-tensor] of flat $\\Lambda_T$-module sheaves [def-pc-flat-sheaf-modules] with $\\mathcal E^i=0$ for $i<a$. Moreover, the representing complex may be chosen so that any termwise module pullback is again K-flat with flat terms: explicitly, for every morphism of ringed sites (or ringed topoi) $u:(\\mathcal C',\\mathcal O')\\to(T_{\\Et},\\Lambda_T)$, $u^*\\mathcal E^\\bullet=u^{-1}\\mathcal E^\\bullet\\otimes_{u^{-1}\\Lambda_T}\\mathcal O'$ is K-flat over $\\mathcal O'$ with flat terms [lem-weil-pbc-ringed-topos-kflat-pullback].",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-0f1m.md",
+  "place": "node lem-kun-0f1m, order 1725",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 0F1M"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-kun-constant-sheaf",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-derived-categories",
+  "def-kun-tor-amplitude",
+  "def-kun-derived-tensor",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Suppose $E$ is represented by the asserted K-flat complex $\\mathcal E^\\bullet$. For every module sheaf $\\mathcal M$ in degree zero, [def-kun-derived-tensor] computes $E\\otimes^L_\\Lambda\\mathcal M$ by $\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal M$. Its degree $i$ term is $\\mathcal E^i\\otimes_\\Lambda\\mathcal M=0$ for $i<a$, so its cohomology vanishes there. This is exactly the lower tor-amplitude condition of [def-kun-tor-amplitude].",
+   "uses": [
     "def-kun-derived-tensor",
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-ringed-topos-kflat-pullback"
-  ],
-  "proof": [
-    {
-      "text": "Suppose $E$ is represented by the asserted K-flat complex $\\mathcal E^\\bullet$. For every module sheaf $\\mathcal M$ in degree zero, [def-kun-derived-tensor] computes $E\\otimes^L_\\Lambda\\mathcal M$ by $\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal M$. Its degree $i$ term is $\\mathcal E^i\\otimes_\\Lambda\\mathcal M=0$ for $i<a$, so its cohomology vanishes there. This is exactly the lower tor-amplitude condition of [def-kun-tor-amplitude].",
-      "uses": [
-        "def-kun-derived-tensor",
-        "def-kun-tor-amplitude"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0F1M, implication (2) implies (1)"
-      }
-    },
-    {
-      "text": "Work with small site presentations in the fixed larger universe of [def-weil-size-convention], so the small-site tensor and colimit results below apply. Assume the lower tor-amplitude condition. Choose a representing complex $G^\\bullet$ for $E$, and apply [lem-kun-flat-resolution-existence] to obtain a quasi-isomorphism $\\mathcal K^\\bullet\\to G^\\bullet$ with $\\mathcal K^\\bullet$ K-flat and termwise flat. For every module sheaf $\\mathcal M$ in degree zero, [def-kun-derived-tensor] identifies $H^n(\\mathcal K^\\bullet\\otimes_\\Lambda\\mathcal M)$ with $H^n(E\\otimes^L_\\Lambda\\mathcal M)$; it is zero for $n<a$ by [def-kun-tor-amplitude]. In particular, testing with the tensor unit $\\Lambda_T$ gives $H^n(\\mathcal K^\\bullet)=0$ for $n<a$.",
-      "uses": [
-        "lem-kun-flat-resolution-existence",
-        "def-kun-derived-tensor",
-        "def-kun-tor-amplitude",
-        "def-weil-size-convention"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0F1M, first paragraph of the converse; Tag 06YS (lemma-K-flat-resolution)"
-      }
-    },
-    {
-      "text": "All hypotheses of [lem-kun-tor-cokernel-flat] now hold for $\\mathcal K^\\bullet$: its terms are flat and the required tensor cohomology vanishes for every module sheaf in every degree below $a$. Consequently $\\mathcal N=\\operatorname{coker}(\\mathcal K^{a-1}\\to\\mathcal K^a)$ is flat.",
-      "uses": [
-        "lem-kun-tor-cokernel-flat"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0F1M, cokernel construction using the argument of lemma-last-one-flat"
-      }
-    },
-    {
-      "text": "Form $\\mathcal E^\\bullet=\\tau_{\\ge a}\\mathcal K^\\bullet$ using [def-kun-truncations]: its terms are zero below $a$, $\\mathcal N$ in degree $a$, and $\\mathcal K^i$ above $a$; the differential from $\\mathcal N$ is induced by $d^a$. All terms are flat by the preceding steps. The canonical map is the quotient $q:\\mathcal K^\\bullet\\to\\mathcal E^\\bullet$. In degree $a$, the induced differential has kernel $\\ker(d^a)/\\operatorname{im}(d^{a-1})$ and there are no incoming boundaries, so $H^a(q)$ is the canonical isomorphism onto this quotient. In degree $a+1$ its incoming image is still $\\operatorname{im}(d^a)$, and all higher differentials are unchanged; hence $H^i(q)$ is an isomorphism for every $i\\ge a$. Below $a$, the source cohomology vanishes by step 2 and the target terms are zero. Thus $q$ is a quasi-isomorphism, and $\\mathcal E^\\bullet$ represents $E$.",
-      "uses": [
-        "def-kun-truncations"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0F1M, displayed lower good truncation"
-      }
-    },
-    {
-      "text": "Put $\\mathcal I=\\operatorname{im}(d^{a-1})$. The sequence $0\\to\\mathcal I\\to\\mathcal K^a\\to\\mathcal N\\to0$ is short exact. Both $\\mathcal K^a$ and $\\mathcal N$ are flat, so the last assertion of [lem-weil-pbc-site-flat-quotient-tensor-ses] makes $\\mathcal I$ flat. The kernel complex $\\mathcal L^\\bullet=\\ker(q)$ has terms $\\mathcal K^i$ for $i<a$, $\\mathcal I$ at $a$, and zero above $a$, with the induced differential. It is bounded above with flat terms, hence K-flat by [lem-kun-kflat-criteria](1). We have a degreewise short exact sequence $0\\to\\mathcal L^\\bullet\\to\\mathcal K^\\bullet\\to\\mathcal E^\\bullet\\to0$.",
-      "uses": [
-        "lem-weil-pbc-site-flat-quotient-tensor-ses",
-        "lem-kun-kflat-criteria"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0F1M, kernel complex; Tags 03EY (lemma-flat-ses) and 06YQ (lemma-bounded-flat-K-flat)"
-      }
-    },
-    {
-      "text": "We verify K-flatness of $\\mathcal E^\\bullet$ directly; a degreewise short exact sequence need not be a cone triangle in the homotopy category. Let $A^\\bullet$ be any acyclic complex. Since each $\\mathcal E^p$ is flat, [lem-weil-pbc-site-flat-quotient-tensor-ses] applied in degree $p$ with the sheaf $A^q$ gives $0\\to\\mathcal L^p\\otimes A^q\\to\\mathcal K^p\\otimes A^q\\to\\mathcal E^p\\otimes A^q\\to0$. Taking the direct sum over $p+q=n$ preserves exactness: finite direct sums of these sequences are exact by the biproduct identities, and their filtered colimit over finite subsets of the small set $\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$ is exact by [lem-pc-module-filtered-colimits-tensor]. For either chain map $f$, its tensor map in bidegree $(p,q)$ is $f^p\\otimes1$; the identities $d f^p=f^{p+1}d$ and $(-1)^p(f^p\\otimes d_A)=(f^p\\otimes1)(-1)^p(1\\otimes d_A)$ show that these maps commute with the total differentials. Thus we obtain a degreewise short exact sequence of total tensor complexes. The first two complexes are acyclic by K-flatness of $\\mathcal L$ and $\\mathcal K$ and [def-kun-derived-tensor]. The long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] has the exact segment $H^n(\\mathcal K\\otimes A)\\to H^n(\\mathcal E\\otimes A)\\to H^{n+1}(\\mathcal L\\otimes A)$. Both outside terms are zero, so $H^n(\\mathcal E\\otimes A)=0$ for all $n$. The definition of K-flatness proves the claim.",
-      "uses": [
-        "lem-weil-pbc-site-flat-quotient-tensor-ses",
-        "lem-pc-module-filtered-colimits-tensor",
-        "def-kun-derived-tensor",
-        "lem-weil-pbc-complex-ses-homology-long-exact"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), expanding its argument at the invocation in Tag 0F1M"
-      }
-    },
-    {
-      "text": "For any morphism of ringed sites or ringed topoi $u:(\\mathcal C',\\mathcal O')\\to(T_{\\Et},\\Lambda_T)$, the complex just constructed is K-flat with flat terms, exactly the two hypotheses of [lem-weil-pbc-ringed-topos-kflat-pullback]. Its conclusion says that the termwise module pullback $u^*\\mathcal E^\\bullet$ is K-flat with flat $\\mathcal O'$-module terms. This supplies the final assertion, simultaneously for every such $u$, without requiring exactness of module pullback or flatness of the map of coefficient sheaves.",
-      "uses": [
-        "lem-weil-pbc-ringed-topos-kflat-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0G7E (lemma-pullback-K-flat), used in the final paragraph of Tag 0F1M"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-kun-derived-tensor",
-    "def-kun-tor-amplitude",
-    "lem-kun-flat-resolution-existence",
-    "def-weil-size-convention",
-    "lem-kun-tor-cokernel-flat",
-    "def-kun-truncations",
-    "lem-weil-pbc-site-flat-quotient-tensor-ses",
-    "lem-kun-kflat-criteria",
-    "lem-pc-module-filtered-colimits-tensor",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "lem-weil-pbc-ringed-topos-kflat-pullback"
-  ],
-  "proof_origin": {
-    "by": "document",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), with the tensor short-exact-sequence proof of Tag 0G7B and the general pullback theorem Tag 0G7E"
+    "place": "Tag 0F1M, implication (2) implies (1)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "torAmplitude|KFlat|kFlat|k_flat",
-      "results": "No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CochainComplex, \"flat\"",
-      "results": "No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "A derived category object has Tor amplitude bounded below if and only if it admits a bounded below K-flat complex of flat sheaves representing it",
-      "results": "DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.instIsGEObjSingleFunctor; inspected hits concern support or ordinary good truncations, with no flat-term, lower Tor-amplitude, K-flatness, and pullback conclusion.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Tor amplitude bounded below equivalent to a bounded below complex of flat module sheaves which is K-flat",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Truncating a K-flat complex with flat terms at its lower Tor amplitude bound gives a flat cokernel and a K-flat bounded below flat model stable under pullback",
-      "results": "HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside; HomologicalComplex.instIsStrictlySupportedTruncGE_1; HomologicalComplex.instIsStrictlySupportedStupidTrunc_1; HomologicalComplex.instIsStrictlySupportedTruncLE_1; HomologicalComplex.instIsStrictlySupportedTruncLE; CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE; HomologicalComplex.instIsStrictlySupportedTruncGE; HomologicalComplex.acyclic_truncGE_iff_isSupportedOutside; inspected hits concern support or ordinary good truncations, with no flat-term, lower Tor-amplitude, K-flatness, and pullback conclusion.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "tor.?amplitude|K.flat|kFlat",
-      "results": "No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An object of a derived category with Tor amplitude bounded below has a quasi-isomorphic complex of flat objects supported in the same lower range, preserved by extension of scalars",
-      "results": "DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.IsGE. These signatures only supply ordinary cohomological support and representative complexes, with no flatness, K-flatness or Tor-amplitude equivalence.",
-      "date": "2026-10-16",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1725,
-  "blueprint_uses": [
+  {
+   "text": "Work with small site presentations in the fixed larger universe of [def-weil-size-convention], so the small-site tensor and colimit results below apply. Assume the lower tor-amplitude condition. Choose a representing complex $G^\\bullet$ for $E$, and apply [lem-kun-flat-resolution-existence] to obtain a quasi-isomorphism $\\mathcal K^\\bullet\\to G^\\bullet$ with $\\mathcal K^\\bullet$ K-flat and termwise flat. For every module sheaf $\\mathcal M$ in degree zero, [def-kun-derived-tensor] identifies $H^n(\\mathcal K^\\bullet\\otimes_\\Lambda\\mathcal M)$ with $H^n(E\\otimes^L_\\Lambda\\mathcal M)$; it is zero for $n<a$ by [def-kun-tor-amplitude]. In particular, testing with the tensor unit $\\Lambda_T$ gives $H^n(\\mathcal K^\\bullet)=0$ for $n<a$.",
+   "uses": [
+    "lem-kun-flat-resolution-existence",
     "def-kun-derived-tensor",
     "def-kun-tor-amplitude",
-    "def-kun-truncations",
-    "lem-kun-flat-resolution-existence",
-    "lem-kun-kflat-criteria",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0F1M, first paragraph of the converse; Tag 06YS (lemma-K-flat-resolution)"
+   }
+  },
+  {
+   "text": "All hypotheses of [lem-kun-tor-cokernel-flat] now hold for $\\mathcal K^\\bullet$: its terms are flat and the required tensor cohomology vanishes for every module sheaf in every degree below $a$. Consequently $\\mathcal N=\\operatorname{coker}(\\mathcal K^{a-1}\\to\\mathcal K^a)$ is flat.",
+   "uses": [
     "lem-kun-tor-cokernel-flat"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0F1M, cokernel construction using the argument of lemma-last-one-flat"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-kun-0f1m",
-    "worker": "Q29",
-    "summary": "Read Stacks 0F1M and its tensor and pullback inputs. Replaced the imported single paragraph by seven checked steps, corrected the quotient map direction, removed the invalid cone inference and the unsupported inverse-image argument, and reused existing general ringed-site tools. No new nodes.",
-    "blueprint": "Steps 1-2 realize the model/amplitude paragraphs; step 3 the cokernel; steps 4-6 the lower truncation, flat kernel, and K-flatness; step 7 the pullback paragraph. The chapter and unit route are unchanged.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-site-flat-quotient-tensor-ses",
-        "why": "Generic sheaf-module tensor exactness and kernel flatness used in the truncation construction; the unit has no such statement."
-      },
-      {
-        "node": "lem-pc-module-filtered-colimits-tensor",
-        "why": "Generic exact filtered colimits justify exact direct sums of tensor sequences; no replacement of the unit route."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
-        "why": "General ringed-topos theorem provides the pullback input explicitly invoked in Stacks 0F1M; the unit derived-monoidal lemma does not state K-flat model preservation."
-      }
-    ]
+  {
+   "text": "Form $\\mathcal E^\\bullet=\\tau_{\\ge a}\\mathcal K^\\bullet$ using [def-kun-truncations]: its terms are zero below $a$, $\\mathcal N$ in degree $a$, and $\\mathcal K^i$ above $a$; the differential from $\\mathcal N$ is induced by $d^a$. All terms are flat by the preceding steps. The canonical map is the quotient $q:\\mathcal K^\\bullet\\to\\mathcal E^\\bullet$. In degree $a$, the induced differential has kernel $\\ker(d^a)/\\operatorname{im}(d^{a-1})$ and there are no incoming boundaries, so $H^a(q)$ is the canonical isomorphism onto this quotient. In degree $a+1$ its incoming image is still $\\operatorname{im}(d^a)$, and all higher differentials are unchanged; hence $H^i(q)$ is an isomorphism for every $i\\ge a$. Below $a$, the source cohomology vanishes by step 2 and the target terms are zero. Thus $q$ is a quasi-isomorphism, and $\\mathcal E^\\bullet$ represents $E$.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0F1M, displayed lower good truncation"
+   }
   },
-  "tool_uses": [
+  {
+   "text": "Put $\\mathcal I=\\operatorname{im}(d^{a-1})$. The sequence $0\\to\\mathcal I\\to\\mathcal K^a\\to\\mathcal N\\to0$ is short exact. Both $\\mathcal K^a$ and $\\mathcal N$ are flat, so the last assertion of [lem-weil-pbc-site-flat-quotient-tensor-ses] makes $\\mathcal I$ flat. The kernel complex $\\mathcal L^\\bullet=\\ker(q)$ has terms $\\mathcal K^i$ for $i<a$, $\\mathcal I$ at $a$, and zero above $a$, with the induced differential. It is bounded above with flat terms, hence K-flat by [lem-kun-kflat-criteria](1). We have a degreewise short exact sequence $0\\to\\mathcal L^\\bullet\\to\\mathcal K^\\bullet\\to\\mathcal E^\\bullet\\to0$.",
+   "uses": [
+    "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "lem-kun-kflat-criteria"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0F1M, kernel complex; Tags 03EY (lemma-flat-ses) and 06YQ (lemma-bounded-flat-K-flat)"
+   }
+  },
+  {
+   "text": "We verify K-flatness of $\\mathcal E^\\bullet$ directly; a degreewise short exact sequence need not be a cone triangle in the homotopy category. Let $A^\\bullet$ be any acyclic complex. Since each $\\mathcal E^p$ is flat, [lem-weil-pbc-site-flat-quotient-tensor-ses] applied in degree $p$ with the sheaf $A^q$ gives $0\\to\\mathcal L^p\\otimes A^q\\to\\mathcal K^p\\otimes A^q\\to\\mathcal E^p\\otimes A^q\\to0$. Taking the direct sum over $p+q=n$ preserves exactness: finite direct sums of these sequences are exact by the biproduct identities, and their filtered colimit over finite subsets of the small set $\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$ is exact by [lem-pc-module-filtered-colimits-tensor]. For either chain map $f$, its tensor map in bidegree $(p,q)$ is $f^p\\otimes1$; the identities $d f^p=f^{p+1}d$ and $(-1)^p(f^p\\otimes d_A)=(f^p\\otimes1)(-1)^p(1\\otimes d_A)$ show that these maps commute with the total differentials. Thus we obtain a degreewise short exact sequence of total tensor complexes. The first two complexes are acyclic by K-flatness of $\\mathcal L$ and $\\mathcal K$ and [def-kun-derived-tensor]. The long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] has the exact segment $H^n(\\mathcal K\\otimes A)\\to H^n(\\mathcal E\\otimes A)\\to H^{n+1}(\\mathcal L\\otimes A)$. Both outside terms are zero, so $H^n(\\mathcal E\\otimes A)=0$ for all $n$. The definition of K-flatness proves the claim.",
+   "uses": [
     "lem-weil-pbc-site-flat-quotient-tensor-ses",
     "lem-pc-module-filtered-colimits-tensor",
+    "def-kun-derived-tensor",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), expanding its argument at the invocation in Tag 0F1M"
+   }
+  },
+  {
+   "text": "For any morphism of ringed sites or ringed topoi $u:(\\mathcal C',\\mathcal O')\\to(T_{\\Et},\\Lambda_T)$, the complex just constructed is K-flat with flat terms, exactly the two hypotheses of [lem-weil-pbc-ringed-topos-kflat-pullback]. Its conclusion says that the termwise module pullback $u^*\\mathcal E^\\bullet$ is K-flat with flat $\\mathcal O'$-module terms. This supplies the final assertion, simultaneously for every such $u$, without requiring exactness of module pullback or flatness of the map of coefficient sheaves.",
+   "uses": [
     "lem-weil-pbc-ringed-topos-kflat-pullback"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-Q29-d93ce42d1",
-    "group": "Q29",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-d93ce42d1 (reviewer sub-agent of L); spot-checked: Read the complete item, seven proof steps, all cited statements, master blueprint, route, and Stacks sources 0F1M/0G7E and supporting lemmas. Verified truncation boundaries, tensor exactness, coefficient category, arbitrary pullback, small cases, duplicate candidates, and absence of dependency cycles. No new nodes or repairs. Accepted the three declared generic tool uses; detailed findings are in review.md."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-4530ffc54",
-    "group": "Q06",
-    "result": "pass",
-    "note": "Checked node/source clause-by-clause, dependencies, universes, edge cases, docstrings, proofs, report sections, and clean scompile.py evidence; no findings."
-  },
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution",
-    "declaration": "AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model",
-    "declarations": [
-      "AlgebraicGeometry.Etale.torModelCoefficientRing",
-      "AlgebraicGeometry.Etale.torModelRing",
-      "AlgebraicGeometry.Etale.torModelScalarUnit",
-      "AlgebraicGeometry.Etale.torModelRestriction",
-      "AlgebraicGeometry.Etale.torModelRestriction_additive",
-      "AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model"
-    ],
-    "file": "lean/Sheaf/AlgebraicGeometry/TorAmplitudeKFlatResolution.lean",
-    "statement": "theorem DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) (E : DerivedCategoryModule Λ T) (a : ℤ) : DerivedCategory.hasTorAmplitudeGE Λ T a E ↔ ∃ P : CochainComplex (SheafOfModules.{u + 1} (torModelRing Λ T)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (R := torModelCoefficientRing Λ T) P ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := T.smallEtaleTopology) (R := torModelCoefficientRing Λ T) (P.X i)) ∧ (∀ i : ℤ, i < a → IsZero (P.X i)) ∧ Nonempty (_root_.DerivedCategory.Q.obj (((torModelRestriction Λ T).mapHomologicalComplex (.up ℤ)).obj P) ≅ E) ∧ (∀ {D : Type uD} [Category.{vD} D] [EssentiallySmall.{u + 1} D] (J : GrothendieckTopology D) (RI S : Sheaf J CommRingCat.{u + 1}) (uInv : Sheaf T.smallEtaleTopology (Type (u + 1)) ⥤ Sheaf J (Type (u + 1))) (uPush : Sheaf J (Type (u + 1)) ⥤ Sheaf T.smallEtaleTopology (Type (u + 1))) (_adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] (I : SheafOfModules.AlgebraicInverseImage uInv (torModelCoefficientRing Λ T) RI) (c : RI ⟶ S) (uStar : SheafOfModules.{u + 1} (torModelRing Λ T) ⥤ SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)) (hobj : ∀ M : SheafOfModules.{u + 1} (torModelRing Λ T), uStar.obj M = SheafOfModules.changeOfRings c (I.modules.obj M)) (_hmap : ∀ {M N : SheafOfModules.{u + 1} (torModelRing Λ T)} (f : M ⟶ N), uStar.map f = eqToHom (hobj M) ≫ SheafOfModules.changeOfRingsHom c (I.modules.obj M) (I.modules.map f) ≫ eqToHom (hobj N).symm) [uStar.Additive], CochainComplex.IsKFlatIndependentCoefficients (R := S) ((uStar.mapHomologicalComplex (.up ℤ)).obj P) ∧ ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{uD, vD, u + 1, u + 1} (J := J) (R := S) (((uStar.mapHomologicalComplex (.up ℤ)).obj P).X i))",
-    "branch": "newtargets-dag",
-    "by": "Q06",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "The representative is a complex over the sheafified constant commutative ring. Its canonical restriction along the constant-presheaf sheafification unit is the module-valued representative of E. No arbitrary equivalence or map is chosen. The independent-coefficient K-flat predicate and IsFlatOnSite are the recorded pullback and flatness interfaces. The existential representative precedes all ringed-topos pullback data; the same P is used in every pullback conclusion. Small etale objects have universe u+1 and morphisms u, with coefficients u+1; target site universes are independent."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\Lambda$ be a commutative ring, $T$ a scheme,\n$E\\in D(T_{\\Et},\\Lambda)$, and $a\\in\\mathbf Z$. Then $E$ has tor\namplitude in $[a,\\infty)$ in the sense of\n[def-kun-tor-amplitude] if and only if $E$ can be represented\nby a K-flat complex $\\mathcal E^\\bullet$ of flat\n$\\Lambda_T$-module sheaves with $\\mathcal E^i=0$ for $i<a$;\nmoreover $\\mathcal E^\\bullet$ may be chosen so that any pullback is\nagain K-flat with flat terms.",
-    "proof": [
-      {
-        "text": "*The model gives the amplitude.* Suppose $E$ is represented by a\nK-flat complex $\\mathcal E^\\bullet$ of flat sheaves with\n$\\mathcal E^i=0$ for $i<a$, and let $\\mathcal M$ be a\n$\\Lambda_T$-module sheaf placed in degree $0$. Since\n$\\mathcal E^\\bullet$ is K-flat, the derived tensor product\n$E\\kunotimes{\\Lambda}\\mathcal M$ of\n[def-kun-derived-tensor] is computed by\n$\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal M$, whose terms in degrees\n$<a$ vanish; hence $H^i(E\\kunotimes{\\Lambda}\\mathcal M)=0$ for\n$i<a$, so $E$ has tor amplitude in $[a,\\infty)$ in the sense of\n[def-kun-tor-amplitude].\n*The amplitude gives the model.* Assume $E$ has tor amplitude in\n$[a,\\infty)$. Taking $\\mathcal M=\\Lambda_T$ shows $H^i(E)=0$ for\n$i<a$. By [lem-kun-flat-resolution-existence] there is a K-flat\ncomplex $\\mathcal K^\\bullet$ with flat terms and a quasi-isomorphism\n$\\mathcal K^\\bullet\\to E$. For every $\\mathcal M$ the cohomology of\n$\\mathcal K^\\bullet\\otimes_\\Lambda\\mathcal M$ computes\n$H^*(E\\kunotimes{\\Lambda}\\mathcal M)$, so the tor-amplitude\nhypothesis gives\n$H^n(\\mathcal K^\\bullet\\otimes_\\Lambda\\mathcal M)=0$ for all $n<a$\nand all $\\mathcal M$; by [lem-kun-tor-cokernel-flat] the sheaf\n\n$$\n\\mathcal N=\\operatorname{coker}\\bigl(\\mathcal K^{a-1}\\to\\mathcal\nK^a\\bigr)\n$$\n\nis flat. Set\n\n$$\n\\mathcal E^\\bullet=\\tau_{\\ge a}\\mathcal K^\\bullet=\n\\bigl(\\cdots\\to0\\to\\mathcal N\\to\\mathcal K^{a+1}\\to\n\\mathcal K^{a+2}\\to\\cdots\\bigr),\n$$\n\nthe good truncation of $\\mathcal K^\\bullet$ in the sense of\n[def-kun-truncations], with the degree-$a$ term replaced by the flat\nsheaf $\\mathcal N$. Since $H^i(\\mathcal K^\\bullet)=H^i(E)=0$ for\n$i<a$, the natural map $\\mathcal E^\\bullet\\to\\mathcal K^\\bullet$ is\na quasi-isomorphism, and $\\mathcal E^i=0$ for $i<a$. Its kernel\n\n$$\n\\mathcal L^\\bullet=\\bigl(\\cdots\\to\\mathcal K^{a-1}\\to\\mathcal\nI\\to0\\to\\cdots\\bigr),\\qquad\n\\mathcal I=\\operatorname{im}\\bigl(\\mathcal K^{a-1}\\to\\mathcal\nK^a\\bigr),\n$$\n\nis a bounded-above complex of flat sheaves: $\\mathcal I$ is flat,\nbeing the kernel of the surjection $\\mathcal K^a\\twoheadrightarrow \\mathcal N$ between the flat sheaves $\\mathcal K^a$ and\n$\\mathcal N$ (the Tor sequence\n$0=\\operatorname{Tor}_1(\\mathcal K^a,\\mathcal M)\\to \\operatorname{Tor}_1(\\mathcal N,\\mathcal M)=0\\to\\mathcal I\\otimes_\\Lambda\\mathcal M\\to\\mathcal K^a\\otimes_\\Lambda\\mathcal M\\to\\mathcal N\\otimes_\\Lambda\\mathcal M\\to0$ is exact). Hence\n$\\mathcal L^\\bullet$ is K-flat by [lem-kun-kflat-criteria](1),\nand the short exact sequence\n$0\\to\\mathcal L^\\bullet\\to\\mathcal K^\\bullet\\to\\mathcal E^\\bullet\\to0$ exhibits $\\mathcal E^\\bullet$ as the cone of a map of\nK-flat complexes, so $\\mathcal E^\\bullet$ is K-flat by\n[lem-kun-kflat-criteria](2).\n*Pullback.* Pullback along a morphism of schemes is exact, carries\nflat module sheaves to flat module sheaves, and commutes with tensor\nproducts and with the truncation construction above; applied to a\nK-flat complex with flat terms it again produces a K-flat complex with\nflat terms (the pullback of an acyclic complex is acyclic), and applied\nto the quasi-isomorphisms above it produces the corresponding\nquasi-isomorphisms. Hence the model $\\mathcal E^\\bullet$ may be chosen\nso that every pullback is again K-flat with flat terms, as asserted.",
-        "uses": [
-          "def-kun-derived-tensor",
-          "def-kun-tor-amplitude",
-          "lem-kun-flat-resolution-existence",
-          "lem-kun-tor-cokernel-flat",
-          "def-kun-truncations",
-          "lem-kun-kflat-criteria"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat), used in the final paragraph of Tag 0F1M"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "lem-kun-flat-resolution-existence",
+  "def-weil-size-convention",
+  "lem-kun-tor-cokernel-flat",
+  "def-kun-truncations",
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "lem-kun-kflat-criteria",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), with the tensor short-exact-sequence proof of Tag 0G7B and the general pullback theorem Tag 0G7E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torAmplitude|KFlat|kFlat|k_flat",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, \"flat\"",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A derived category object has Tor amplitude bounded below if and only if it admits a bounded below K-flat complex of flat sheaves representing it",
+   "results": "DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.instIsGEObjSingleFunctor; inspected hits concern support or ordinary good truncations, with no flat-term, lower Tor-amplitude, K-flatness, and pullback conclusion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tor amplitude bounded below equivalent to a bounded below complex of flat module sheaves which is K-flat",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Truncating a K-flat complex with flat terms at its lower Tor amplitude bound gives a flat cokernel and a K-flat bounded below flat model stable under pullback",
+   "results": "HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside; HomologicalComplex.instIsStrictlySupportedTruncGE_1; HomologicalComplex.instIsStrictlySupportedStupidTrunc_1; HomologicalComplex.instIsStrictlySupportedTruncLE_1; HomologicalComplex.instIsStrictlySupportedTruncLE; CategoryTheory.Triangulated.TStructure.instIsGEObjTruncGE; HomologicalComplex.instIsStrictlySupportedTruncGE; HomologicalComplex.acyclic_truncGE_iff_isSupportedOutside; inspected hits concern support or ordinary good truncations, with no flat-term, lower Tor-amplitude, K-flatness, and pullback conclusion.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tor.?amplitude|K.flat|kFlat",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object of a derived category with Tor amplitude bounded below has a quasi-isomorphic complex of flat objects supported in the same lower range, preserved by extension of scalars",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.IsGE. These signatures only supply ordinary cohomological support and representative complexes, with no flatness, K-flatness or Tor-amplitude equivalence.",
+   "date": "2026-10-16",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1725,
+ "blueprint_uses": [
+  "def-kun-derived-tensor",
+  "def-kun-tor-amplitude",
+  "def-kun-truncations",
+  "lem-kun-flat-resolution-existence",
+  "lem-kun-kflat-criteria",
+  "lem-kun-tor-cokernel-flat"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-kun-0f1m",
+  "worker": "Q29",
+  "summary": "Read Stacks 0F1M and its tensor and pullback inputs. Replaced the imported single paragraph by seven checked steps, corrected the quotient map direction, removed the invalid cone inference and the unsupported inverse-image argument, and reused existing general ringed-site tools. No new nodes.",
+  "blueprint": "Steps 1-2 realize the model/amplitude paragraphs; step 3 the cokernel; steps 4-6 the lower truncation, flat kernel, and K-flatness; step 7 the pullback paragraph. The chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-flat-quotient-tensor-ses",
+    "why": "Generic sheaf-module tensor exactness and kernel flatness used in the truncation construction; the unit has no such statement."
+   },
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Generic exact filtered colimits justify exact direct sums of tensor sequences; no replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "General ringed-topos theorem provides the pullback input explicitly invoked in Stacks 0F1M; the unit derived-monoidal lemma does not state K-flat model preservation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-site-flat-quotient-tensor-ses",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-d93ce42d1",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-d93ce42d1 (reviewer sub-agent of L); spot-checked: Read the complete item, seven proof steps, all cited statements, master blueprint, route, and Stacks sources 0F1M/0G7E and supporting lemmas. Verified truncation boundaries, tensor exactness, coefficient category, arbitrary pullback, small cases, duplicate candidates, and absence of dependency cycles. No new nodes or repairs. Accepted the three declared generic tool uses; detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4530ffc54",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Checked node/source clause-by-clause, dependencies, universes, edge cases, docstrings, proofs, report sections, and clean scompile.py evidence; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution",
+  "declaration": "AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model",
+  "declarations": [
+   "AlgebraicGeometry.Etale.torModelCoefficientRing",
+   "AlgebraicGeometry.Etale.torModelRing",
+   "AlgebraicGeometry.Etale.torModelScalarUnit",
+   "AlgebraicGeometry.Etale.torModelRestriction",
+   "AlgebraicGeometry.Etale.torModelRestriction_additive",
+   "AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TorAmplitudeKFlatResolution.lean",
+  "statement": "theorem DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u}) (E : DerivedCategoryModule Λ T) (a : ℤ) : DerivedCategory.hasTorAmplitudeGE Λ T a E ↔ ∃ P : CochainComplex (SheafOfModules.{u + 1} (torModelRing Λ T)) ℤ, CochainComplex.IsKFlatIndependentCoefficients (R := torModelCoefficientRing Λ T) P ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := T.smallEtaleTopology) (R := torModelCoefficientRing Λ T) (P.X i)) ∧ (∀ i : ℤ, i < a → IsZero (P.X i)) ∧ Nonempty (_root_.DerivedCategory.Q.obj (((torModelRestriction Λ T).mapHomologicalComplex (.up ℤ)).obj P) ≅ E) ∧ (∀ {D : Type uD} [Category.{vD} D] [EssentiallySmall.{u + 1} D] (J : GrothendieckTopology D) (RI S : Sheaf J CommRingCat.{u + 1}) (uInv : Sheaf T.smallEtaleTopology (Type (u + 1)) ⥤ Sheaf J (Type (u + 1))) (uPush : Sheaf J (Type (u + 1)) ⥤ Sheaf T.smallEtaleTopology (Type (u + 1))) (_adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] (I : SheafOfModules.AlgebraicInverseImage uInv (torModelCoefficientRing Λ T) RI) (c : RI ⟶ S) (uStar : SheafOfModules.{u + 1} (torModelRing Λ T) ⥤ SheafOfModules.{u + 1} ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)) (hobj : ∀ M : SheafOfModules.{u + 1} (torModelRing Λ T), uStar.obj M = SheafOfModules.changeOfRings c (I.modules.obj M)) (_hmap : ∀ {M N : SheafOfModules.{u + 1} (torModelRing Λ T)} (f : M ⟶ N), uStar.map f = eqToHom (hobj M) ≫ SheafOfModules.changeOfRingsHom c (I.modules.obj M) (I.modules.map f) ≫ eqToHom (hobj N).symm) [uStar.Additive], CochainComplex.IsKFlatIndependentCoefficients (R := S) ((uStar.mapHomologicalComplex (.up ℤ)).obj P) ∧ ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{uD, vD, u + 1, u + 1} (J := J) (R := S) (((uStar.mapHomologicalComplex (.up ℤ)).obj P).X i))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "The representative is a complex over the sheafified constant commutative ring. Its canonical restriction along the constant-presheaf sheafification unit is the module-valued representative of E. No arbitrary equivalence or map is chosen. The independent-coefficient K-flat predicate and IsFlatOnSite are the recorded pullback and flatness interfaces. The existential representative precedes all ringed-topos pullback data; the same P is used in every pullback conclusion. Small etale objects have universe u+1 and morphisms u, with coefficients u+1; target site universes are independent."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\Lambda$ be a commutative ring, $T$ a scheme,\n$E\\in D(T_{\\Et},\\Lambda)$, and $a\\in\\mathbf Z$. Then $E$ has tor\namplitude in $[a,\\infty)$ in the sense of\n[def-kun-tor-amplitude] if and only if $E$ can be represented\nby a K-flat complex $\\mathcal E^\\bullet$ of flat\n$\\Lambda_T$-module sheaves with $\\mathcal E^i=0$ for $i<a$;\nmoreover $\\mathcal E^\\bullet$ may be chosen so that any pullback is\nagain K-flat with flat terms.",
+  "proof": [
+   {
+    "text": "*The model gives the amplitude.* Suppose $E$ is represented by a\nK-flat complex $\\mathcal E^\\bullet$ of flat sheaves with\n$\\mathcal E^i=0$ for $i<a$, and let $\\mathcal M$ be a\n$\\Lambda_T$-module sheaf placed in degree $0$. Since\n$\\mathcal E^\\bullet$ is K-flat, the derived tensor product\n$E\\kunotimes{\\Lambda}\\mathcal M$ of\n[def-kun-derived-tensor] is computed by\n$\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal M$, whose terms in degrees\n$<a$ vanish; hence $H^i(E\\kunotimes{\\Lambda}\\mathcal M)=0$ for\n$i<a$, so $E$ has tor amplitude in $[a,\\infty)$ in the sense of\n[def-kun-tor-amplitude].\n*The amplitude gives the model.* Assume $E$ has tor amplitude in\n$[a,\\infty)$. Taking $\\mathcal M=\\Lambda_T$ shows $H^i(E)=0$ for\n$i<a$. By [lem-kun-flat-resolution-existence] there is a K-flat\ncomplex $\\mathcal K^\\bullet$ with flat terms and a quasi-isomorphism\n$\\mathcal K^\\bullet\\to E$. For every $\\mathcal M$ the cohomology of\n$\\mathcal K^\\bullet\\otimes_\\Lambda\\mathcal M$ computes\n$H^*(E\\kunotimes{\\Lambda}\\mathcal M)$, so the tor-amplitude\nhypothesis gives\n$H^n(\\mathcal K^\\bullet\\otimes_\\Lambda\\mathcal M)=0$ for all $n<a$\nand all $\\mathcal M$; by [lem-kun-tor-cokernel-flat] the sheaf\n\n$$\n\\mathcal N=\\operatorname{coker}\\bigl(\\mathcal K^{a-1}\\to\\mathcal\nK^a\\bigr)\n$$\n\nis flat. Set\n\n$$\n\\mathcal E^\\bullet=\\tau_{\\ge a}\\mathcal K^\\bullet=\n\\bigl(\\cdots\\to0\\to\\mathcal N\\to\\mathcal K^{a+1}\\to\n\\mathcal K^{a+2}\\to\\cdots\\bigr),\n$$\n\nthe good truncation of $\\mathcal K^\\bullet$ in the sense of\n[def-kun-truncations], with the degree-$a$ term replaced by the flat\nsheaf $\\mathcal N$. Since $H^i(\\mathcal K^\\bullet)=H^i(E)=0$ for\n$i<a$, the natural map $\\mathcal E^\\bullet\\to\\mathcal K^\\bullet$ is\na quasi-isomorphism, and $\\mathcal E^i=0$ for $i<a$. Its kernel\n\n$$\n\\mathcal L^\\bullet=\\bigl(\\cdots\\to\\mathcal K^{a-1}\\to\\mathcal\nI\\to0\\to\\cdots\\bigr),\\qquad\n\\mathcal I=\\operatorname{im}\\bigl(\\mathcal K^{a-1}\\to\\mathcal\nK^a\\bigr),\n$$\n\nis a bounded-above complex of flat sheaves: $\\mathcal I$ is flat,\nbeing the kernel of the surjection $\\mathcal K^a\\twoheadrightarrow \\mathcal N$ between the flat sheaves $\\mathcal K^a$ and\n$\\mathcal N$ (the Tor sequence\n$0=\\operatorname{Tor}_1(\\mathcal K^a,\\mathcal M)\\to \\operatorname{Tor}_1(\\mathcal N,\\mathcal M)=0\\to\\mathcal I\\otimes_\\Lambda\\mathcal M\\to\\mathcal K^a\\otimes_\\Lambda\\mathcal M\\to\\mathcal N\\otimes_\\Lambda\\mathcal M\\to0$ is exact). Hence\n$\\mathcal L^\\bullet$ is K-flat by [lem-kun-kflat-criteria](1),\nand the short exact sequence\n$0\\to\\mathcal L^\\bullet\\to\\mathcal K^\\bullet\\to\\mathcal E^\\bullet\\to0$ exhibits $\\mathcal E^\\bullet$ as the cone of a map of\nK-flat complexes, so $\\mathcal E^\\bullet$ is K-flat by\n[lem-kun-kflat-criteria](2).\n*Pullback.* Pullback along a morphism of schemes is exact, carries\nflat module sheaves to flat module sheaves, and commutes with tensor\nproducts and with the truncation construction above; applied to a\nK-flat complex with flat terms it again produces a K-flat complex with\nflat terms (the pullback of an acyclic complex is acyclic), and applied\nto the quasi-isomorphisms above it produces the corresponding\nquasi-isomorphisms. Hence the model $\\mathcal E^\\bullet$ may be chosen\nso that every pullback is again K-flat with flat terms, as asserted.",
+    "uses": [
+     "def-kun-derived-tensor",
+     "def-kun-tor-amplitude",
+     "lem-kun-flat-resolution-existence",
+     "lem-kun-tor-cokernel-flat",
+     "def-kun-truncations",
+     "lem-kun-kflat-criteria"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

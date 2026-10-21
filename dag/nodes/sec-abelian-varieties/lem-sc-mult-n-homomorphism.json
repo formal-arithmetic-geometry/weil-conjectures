@@ -1,131 +1,106 @@
 {
-  "id": "lem-sc-mult-n-homomorphism",
-  "blueprint": {
-    "is": "lem-sc-mult-n-homomorphism",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Multiplication by $n$ is a homomorphism",
-  "statement": "Let $G$ be a commutative group scheme\nover a field $k$, with multiplication $m$, inverse $i$, unit $e$\nand structure morphism $p:G\\to\\Spec k$. Define\n$[0]:=e\\circ p:G\\to G$ and, inductively,\n$[n+1]:=m\\circ([n],\\mathrm{id}_G):G\\to G$. Then for all\n$n,m\\geq0$:\n\n1. **(a)** $[n]$ is a homomorphism of group schemes and\n$[n](R)(x)=nx$ for every $k$-algebra $R$ and $x\\in G(R)$;\n1. **(b)** $m\\circ([n],[m])=[n+m]$ and $[n]\\circ[m]=[nm]$;\n1. **(c)** $[n]\\circ e=e$ and $[n]\\circ i=i\\circ[n]$.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-hom/lem-sc-mult-n-homomorphism.md",
-    "place": "node lem-sc-mult-n-homomorphism, order 494"
-  },
-  "stmt_deps": [],
-  "proof": [
-    {
-      "text": "We work on $R$-points, where the functor of points is faithful\n([def-sc-group-scheme]); write $\\cdot$ for the group law of\n$G(R)$ and $e$ for its unit.",
-      "uses": [
-        "def-sc-group-scheme"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(a) By induction on $n$ one has $[n](R)(x)=x\\cdot\\ldots\\cdot x$\n($n$ factors): this holds for $n=0$ by the definition of $[0]$, for\n$n=1$ because $[1]=m\\circ(e\\circ p,\\mathrm{id}_G)$ is the identity,\nand in general because $[n+1](R)(x)=[n](R)(x)\\cdot x$. The map\n$x\\mapsto x\\cdot\\ldots\\cdot x$ is a homomorphism of groups because\n$G(R)$ is commutative, and $[n]$ is a morphism of schemes by\nconstruction; hence $[n]$ is a homomorphism of group schemes in the\nsense of [def-sc-group-scheme].",
-      "uses": [
-        "def-sc-group-scheme"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "(b) Both identities follow from (a) on $R$-points:\n$[n](x)\\cdot[m](x)=(n+m)x=[n+m](x)$ and\n$[n]([m](x))=n(mx)=(nm)x=[nm](x)$.",
-      "uses": [],
-      "elementary": null
-    },
-    {
-      "text": "(c) $[n](R)(e)=ne=e$ and\n$[n](R)(i(x))=n(-x)=-(nx)=i([n](R)(x))$, again by (a).",
-      "uses": [],
-      "elementary": null
-    }
-  ],
-  "proof_deps": [
+ "id": "lem-sc-mult-n-homomorphism",
+ "blueprint": {
+  "is": "lem-sc-mult-n-homomorphism",
+  "from": null,
+  "same_as": null
+ },
+ "kind": "statement",
+ "title": "Multiplication by $n$ is a homomorphism",
+ "statement": "Let $G$ be a commutative group scheme\nover a field $k$, with multiplication $m$, inverse $i$, unit $e$\nand structure morphism $p:G\\to\\Spec k$. Define\n$[0]:=e\\circ p:G\\to G$ and, inductively,\n$[n+1]:=m\\circ([n],\\mathrm{id}_G):G\\to G$. Then for all\n$n,m\\geq0$:\n\n1. **(a)** $[n]$ is a homomorphism of group schemes and\n$[n](R)(x)=nx$ for every $k$-algebra $R$ and $x\\in G(R)$;\n1. **(b)** $m\\circ([n],[m])=[n+m]$ and $[n]\\circ[m]=[nm]$;\n1. **(c)** $[n]\\circ e=e$ and $[n]\\circ i=i\\circ[n]$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-hom/lem-sc-mult-n-homomorphism.md",
+  "place": "node lem-sc-mult-n-homomorphism, order 494"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "We work on $R$-points, where the functor of points is faithful\n([def-sc-group-scheme]); write $\\cdot$ for the group law of\n$G(R)$ and $e$ for its unit.",
+   "uses": [
     "def-sc-group-scheme"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-hom/lem-sc-mult-n-homomorphism.md",
-    "place": "## Proof"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 494,
-  "blueprint_uses": [
+  {
+   "text": "(a) By induction on $n$ one has $[n](R)(x)=x\\cdot\\ldots\\cdot x$\n($n$ factors): this holds for $n=0$ by the definition of $[0]$, for\n$n=1$ because $[1]=m\\circ(e\\circ p,\\mathrm{id}_G)$ is the identity,\nand in general because $[n+1](R)(x)=[n](R)(x)\\cdot x$. The map\n$x\\mapsto x\\cdot\\ldots\\cdot x$ is a homomorphism of groups because\n$G(R)$ is commutative, and $[n]$ is a morphism of schemes by\nconstruction; hence $[n]$ is a homomorphism of group schemes in the\nsense of [def-sc-group-scheme].",
+   "uses": [
     "def-sc-group-scheme"
-  ],
-  "lean": {
-    "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Defs",
-    "declaration": "AlgebraicGeometry.isMonHom_npow_id",
-    "branch": "slopmaster2",
-    "line": 66,
-    "sorry_free": true,
-    "body_lines": 1
+   ],
+   "elementary": false
   },
-  "blueprint_lean": [
-    "AlgebraicGeometry.isMonHom_npow_id"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.isMonHom_npow_id"
-      ]
-    },
-    "slopmaster2": {
-      "state": "closed",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.isMonHom_npow_id",
-          "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Defs",
-          "lines": [
-            62,
-            70
-          ],
-          "kind": "theorem",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": []
-    }
+  {
+   "text": "(b) Both identities follow from (a) on $R$-points:\n$[n](x)\\cdot[m](x)=(n+m)x=[n+m](x)$ and\n$[n]([m](x))=n(mx)=(nm)x=[nm](x)$.",
+   "uses": [],
+   "elementary": null
   },
-  "chapter": "sec-abelian-varieties",
-  "unit": "sk-prop-av-mult-hom",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $G$ be a commutative group scheme\nover a field $k$, with multiplication $m$, inverse $i$, unit $e$\nand structure morphism $p:G\\to\\Spec k$. Define\n$[0]:=e\\circ p:G\\to G$ and, inductively,\n$[n+1]:=m\\circ([n],\\mathrm{id}_G):G\\to G$. Then for all\n$n,n'\\geq0$:\n\n1. **(a)** $[n]$ is a homomorphism of group schemes and\n$[n](R)(x)=nx$ for every $k$-algebra $R$ and $x\\in G(R)$;\n1. **(b)** $m\\circ([n],[n'])=[n+n']$ and $[n]\\circ[n']=[nn']$;\n1. **(c)** $[n]\\circ e=e$ and $[n]\\circ i=i\\circ[n]$.",
-    "proof": [
-      {
-        "text": "We work on $R$-points, where the functor of points is faithful\n([def-sc-group-scheme]); write $\\cdot$ for the group law of\n$G(R)$ and $e$ for its unit.",
-        "uses": [
-          "def-sc-group-scheme"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "(a) By induction on $n$ one has $[n](R)(x)=x\\cdot\\ldots\\cdot x$\n($n$ factors): this holds for $n=0$ by the definition of $[0]$, for\n$n=1$ because $[1]=m\\circ(e\\circ p,\\mathrm{id}_G)$ is the identity,\nand in general because $[n+1](R)(x)=[n](R)(x)\\cdot x$. The map\n$x\\mapsto x\\cdot\\ldots\\cdot x$ is a homomorphism of groups because\n$G(R)$ is commutative, and $[n]$ is a morphism of schemes by\nconstruction; hence $[n]$ is a homomorphism of group schemes in the\nsense of [def-sc-group-scheme].",
-        "uses": [
-          "def-sc-group-scheme"
-        ],
-        "elementary": false
-      },
-      {
-        "text": "(b) Both identities follow from (a) on $R$-points:\n$[n](x)\\cdot[n'](x)=(n+n')x=[n+n'](x)$ and\n$[n]([n'](x))=n(n'x)=(nn')x=[nn'](x)$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "(c) $[n](R)(e)=ne=e$ and\n$[n](R)(i(x))=n(-x)=-(nx)=i([n](R)(x))$, again by (a).",
-        "uses": [],
-        "elementary": null
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "(c) $[n](R)(e)=ne=e$ and\n$[n](R)(i(x))=n(-x)=-(nx)=i([n](R)(x))$, again by (a).",
+   "uses": [],
+   "elementary": null
   }
+ ],
+ "proof_deps": [
+  "def-sc-group-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-abelian-varieties/sk-prop-av-mult-hom/lem-sc-mult-n-homomorphism.md",
+  "place": "## Proof"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "imported",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 494,
+ "blueprint_uses": [
+  "def-sc-group-scheme"
+ ],
+ "lean": {
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.Defs",
+  "declaration": "AlgebraicGeometry.isMonHom_npow_id",
+  "branch": "slopmaster2",
+  "line": 66,
+  "sorry_free": true,
+  "body_lines": 1
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.isMonHom_npow_id"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-mult-hom",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $G$ be a commutative group scheme\nover a field $k$, with multiplication $m$, inverse $i$, unit $e$\nand structure morphism $p:G\\to\\Spec k$. Define\n$[0]:=e\\circ p:G\\to G$ and, inductively,\n$[n+1]:=m\\circ([n],\\mathrm{id}_G):G\\to G$. Then for all\n$n,n'\\geq0$:\n\n1. **(a)** $[n]$ is a homomorphism of group schemes and\n$[n](R)(x)=nx$ for every $k$-algebra $R$ and $x\\in G(R)$;\n1. **(b)** $m\\circ([n],[n'])=[n+n']$ and $[n]\\circ[n']=[nn']$;\n1. **(c)** $[n]\\circ e=e$ and $[n]\\circ i=i\\circ[n]$.",
+  "proof": [
+   {
+    "text": "We work on $R$-points, where the functor of points is faithful\n([def-sc-group-scheme]); write $\\cdot$ for the group law of\n$G(R)$ and $e$ for its unit.",
+    "uses": [
+     "def-sc-group-scheme"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(a) By induction on $n$ one has $[n](R)(x)=x\\cdot\\ldots\\cdot x$\n($n$ factors): this holds for $n=0$ by the definition of $[0]$, for\n$n=1$ because $[1]=m\\circ(e\\circ p,\\mathrm{id}_G)$ is the identity,\nand in general because $[n+1](R)(x)=[n](R)(x)\\cdot x$. The map\n$x\\mapsto x\\cdot\\ldots\\cdot x$ is a homomorphism of groups because\n$G(R)$ is commutative, and $[n]$ is a morphism of schemes by\nconstruction; hence $[n]$ is a homomorphism of group schemes in the\nsense of [def-sc-group-scheme].",
+    "uses": [
+     "def-sc-group-scheme"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "(b) Both identities follow from (a) on $R$-points:\n$[n](x)\\cdot[n'](x)=(n+n')x=[n+n'](x)$ and\n$[n]([n'](x))=n(n'x)=(nn')x=[nn'](x)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "(c) $[n](R)(e)=ne=e$ and\n$[n](R)(i(x))=n(-x)=-(nx)=i([n](R)(x))$, again by (a).",
+    "uses": [],
+    "elementary": null
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

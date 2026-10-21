@@ -1,167 +1,156 @@
 {
-  "id": "lem-kun-separable-smooth-colimit",
-  "blueprint": {
-    "is": "lem-kun-separable-smooth-colimit",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Separable extensions are filtered colimits of smooth algebras",
-  "statement": "Let $L/K$ be a separable extension of fields. Then $L$ is a filtered\ncolimit of finitely generated smooth $K$-algebras, and the colimit may be\ntaken over smooth $K$-subalgebras of $L$ with the inclusions as transition\nmaps; consequently $\\Spec(L)$ is the inverse limit of the corresponding\naffine smooth $K$-schemes with affine transition morphisms.\n(*Source:* Stacks Project, Algebra, Lemma 10.158.11,\n[Tag `07BV`](https://stacks.math.columbia.edu/tag/07BV); the\nfinitely generated case is the imported statement\n[lem-kun-fg-separable-smooth] and the algebraic case is proved in this\nchapter.)",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
-    "place": "node lem-kun-separable-smooth-colimit, order 1757",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 07BV"
-      }
-    ]
-  },
-  "stmt_deps": [
-    "lem-kun-fg-separable-smooth"
-  ],
-  "proof": [
-    {
-      "text": "For a finite subset s of L, construct F = IntermediateField.adjoin K s. This field is finitely generated (IntermediateField.fg_adjoin_finset), equivalently essentially of finite type (IntermediateField.essFiniteType_iff). The hypothesis hsep makes F/K separably generated, so [lem-weil-pbc-separably-generated-separable] makes it separable. Apply [lem-kun-fg-separable-smooth] to F/K to obtain a nonempty directed family of finitely generated smooth subalgebras covering F.",
-      "uses": [
-        "lem-weil-pbc-separably-generated-separable",
-        "lem-kun-fg-separable-smooth"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
-        "place": "## Proof, first three sentences"
-      }
-    },
-    {
-      "text": "Induction on a finite set in a directed covering family puts all its elements in a single member: choose any index for the empty set, and a common upper bound for the induction member and a member containing the inserted element. Apply this inside F to the lifts of s. Map the resulting subalgebra along F.val into L; Subalgebra.equivMapOfInjective transfers smoothness by Algebra.Smooth.of_equiv, and Subalgebra.FG.map transfers finite generation. Thus every finite subset of L lies in a finitely generated smooth subalgebra.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
-        "place": "## Proof, first three sentences"
-      }
-    },
-    {
-      "text": "Apply finite-subset coverage to the empty set to get nonemptiness, to the union of finite generating sets of two smooth finitely generated subalgebras to get a common upper bound (Algebra.adjoin_le), and to singleton sets to get elementwise coverage.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
-        "place": "## Proof, first three sentences"
-      }
-    },
-    {
-      "text": "Give the smooth-subalgebra index its directed-order instance. The underlying cocone of types is a colimit by Types.FilteredColimit.isColimitOf': coverage gives surjectivity, and each inclusion is injective by Subtype.ext, so equal elements are already equal at their own index. The forgetful functor from CommRingCat preserves filtered colimits and reflects isomorphisms; reflect the colimit with isColimitOfReflects. Apply [lem-weil-pbc-spec-colimit-limit], using isLimitOfPreserves Scheme.Spec hc.op and the affine-source/affine-target instance. Smoothness of each algebra is its index predicate.",
-      "uses": [
-        "lem-weil-pbc-spec-colimit-limit"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
-        "place": "## Proof, final sentence"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-kun-fg-separable-smooth",
+ "id": "lem-kun-separable-smooth-colimit",
+ "blueprint": {
+  "is": "lem-kun-separable-smooth-colimit",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Separable extensions are filtered colimits of smooth algebras",
+ "statement": "Let $L/K$ be a separable extension of fields. Then $L$ is a filtered\ncolimit of finitely generated smooth $K$-algebras, and the colimit may be\ntaken over smooth $K$-subalgebras of $L$ with the inclusions as transition\nmaps; consequently $\\Spec(L)$ is the inverse limit of the corresponding\naffine smooth $K$-schemes with affine transition morphisms.\n(*Source:* Stacks Project, Algebra, Lemma 10.158.11,\n[Tag `07BV`](https://stacks.math.columbia.edu/tag/07BV); the\nfinitely generated case is the imported statement\n[lem-kun-fg-separable-smooth] and the algebraic case is proved in this\nchapter.)",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
+  "place": "node lem-kun-separable-smooth-colimit, order 1757",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 07BV"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "lem-kun-fg-separable-smooth"
+ ],
+ "proof": [
+  {
+   "text": "For a finite subset s of L, construct F = IntermediateField.adjoin K s. This field is finitely generated (IntermediateField.fg_adjoin_finset), equivalently essentially of finite type (IntermediateField.essFiniteType_iff). The hypothesis hsep makes F/K separably generated, so [lem-weil-pbc-separably-generated-separable] makes it separable. Apply [lem-kun-fg-separable-smooth] to F/K to obtain a nonempty directed family of finitely generated smooth subalgebras covering F.",
+   "uses": [
     "lem-weil-pbc-separably-generated-separable",
-    "lem-weil-pbc-spec-colimit-limit"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
-    "place": "## Proof; formalized by C2 using finite-subset coverage and the forgetful-functor colimit criterion"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1757,
-  "blueprint_uses": [
-    "lem-kun-algebraic-separable-smooth",
     "lem-kun-fg-separable-smooth"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
+    "place": "## Proof, first three sentences"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sf-kunneth-ordinary",
-  "split_report": {
-    "date": "2026-10-11",
-    "item": "lem-kun-separable-smooth-colimit",
-    "worker": "stage1",
-    "summary": "Split the imported paragraph into the directed-union argument, the algebraic/transcendental cases, the iterated filtered-colimit construction, and the affine Spec inverse-limit consequence. Added one statement-only support node for the combined categorical and affine-spectrum fact; no Lean declaration states the item. Reviewer R-ssc3030: dropped the support node lem-kun-filtered-colimit-spec-limit (false as stated: no compatibility between the inner presentations, directedness needs finite generation); replaced by the elementary Tag 07BV cofinality argument; algebraic case covered by the fg node.",
-    "blueprint": "Realizes the node proof paragraph: first three sentences; classification of finitely generated subextensions; sentence on a filtered colimit of filtered colimits; and final sentence identifying Spec(L) as an inverse limit."
+  {
+   "text": "Induction on a finite set in a directed covering family puts all its elements in a single member: choose any index for the empty set, and a common upper bound for the induction member and a member containing the inserted element. Apply this inside F to the lifts of s. Map the resulting subalgebra along F.val into L; Subalgebra.equivMapOfInjective transfers smoothness by Algebra.Smooth.of_equiv, and Subalgebra.FG.map transfers finite generation. Thus every finite subset of L lies in a finitely generated smooth subalgebra.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
+    "place": "## Proof, first three sentences"
+   }
   },
-  "reviewed": {
-    "date": "2026-10-10",
-    "by": "L",
-    "reviewer": "R-ssc3030",
-    "group": "G1",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ssc3030 (reviewer sub-agent of L); spot-checked: Read whole packet; checked steps against fg node, algebraic node, spec-colimit-limit and both citers (popescu-resolve-separable, lem-kun-0f1c use exactly the stated subalgebra/inclusion form; C4 ok). FIX more, RETURN less: (1) new node lem-kun-filtered-colimit-spec-limit false/ill-typed as stated (Grothendieck construction needs compatible inner presentations; union of arbitrary inner subalgebras need not be directed without finite generation), dropped and replaced by the elementary Tag 07BV cofinality argument over the set of fg smooth subalgebras (class d); (2) C4: algebraic node gives no subalgebra/inclusion clause, so step 2 now uses the fg node, which covers finite separable extensions; (3) separability of subextensions folded as elementary (Tag 030R); step 4 now cites spec-colimit-limit on the directed set S.; 1 file(s) fixed by the reviewer"
+  {
+   "text": "Apply finite-subset coverage to the empty set to get nonemptiness, to the union of finite generating sets of two smooth finitely generated subalgebras to get a common upper bound (Algebra.adjoin_le), and to singleton sets to get elementwise coverage.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
+    "place": "## Proof, first three sentences"
+   }
   },
-  "lean": {
-    "module": "WeilConjectures.FieldTheory.SeparableSmoothColimit",
-    "declaration": "FieldTheory.separable_extension_is_filtered_colimit_smooth",
-    "declarations": [
-      "FieldTheory.smoothSubalgebraDiagram",
-      "FieldTheory.smoothSubalgebraCocone",
-      "FieldTheory.separable_extension_is_filtered_colimit_smooth"
-    ],
-    "file": "lean/WeilConjectures/FieldTheory/SeparableSmoothColimit.lean",
-    "statement": "theorem separable_extension_is_filtered_colimit_smooth {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L] (hsep : Algebra.IsSeparableExtension K L) : Nonempty {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG} ∧ Directed (· ≤ ·) (fun A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG} => A.1) ∧ (∀ x : L, ∃ A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}, x ∈ A.1) ∧ Nonempty (IsColimit (smoothSubalgebraCocone K L)) ∧ Nonempty (IsLimit (Scheme.Spec.mapCone (smoothSubalgebraCocone K L).op)) ∧ (∀ A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}, Algebra.Smooth K A.1) ∧ (∀ (A B : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}) (f : B ⟶ A), IsAffineHom (Spec.map (CommRingCat.ofHom (Subalgebra.inclusion (leOfHom f)).toRingHom)))",
-    "branch": "sheaf-dag",
-    "by": "C1",
-    "date": "2026-10-11",
-    "existing": false,
-    "note": "2026-10-20 (U): retired Sheaf twin Sheaf.FieldTheory.SeparableSmoothColimit; points at its upstream twin."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-11",
-    "by": "L",
-    "reviewer": "R-ssc0804",
-    "group": "C1",
-    "result": "fix",
-    "note": "K u/L v fields+Algebra, hsep = recorded Algebra.IsSeparableExtension (H12); index = all FG smooth subalgebras (Algebra.Smooth, Subalgebra.FG), Nonempty+Directed(<=)+cover = filtered union; IsColimit of inclusion cocone in CommRingCat; Spec mapCone op IsLimit; smooth + IsAffineHom transitions; docstring proof; FIX H9: dropped unused imports GammaSpecAdjunction, Limits.Opposites (recompiled clean)"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-12",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "C2",
-    "result": "pass",
-    "landing": "20261012T144057-L-2090152",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $L/K$ be a separable extension of fields. Then $L$ is a filtered\ncolimit of finitely generated smooth $K$-algebras, and the colimit may be\ntaken over smooth $K$-subalgebras of $L$ with the inclusions as transition\nmaps; consequently $\\Spec(L)$ is the inverse limit of the corresponding\naffine smooth $K$-schemes with affine transition morphisms.",
-    "proof": [
-      {
-        "text": "The finitely generated subextensions $L_j/K$ of $L$ form a filtered\nsystem, the subextension generated by two of them being finitely generated,\nand their union is $L$. Each $L_j/K$ is separable because $L/K$ is. If\n$L_j/K$ is algebraic, it is finite and\n[lem-kun-algebraic-separable-smooth] exhibits it as a filtered colimit of\nsmooth $K$-algebras; otherwise it is finitely generated and transcendental,\nand [lem-kun-fg-separable-smooth] exhibits it as such a colimit. A\nfiltered colimit of filtered colimits of smooth $K$-algebras is again a\nfiltered colimit of smooth $K$-algebras, so $L$ is one; the description of\n$\\Spec(L)$ as the inverse limit follows because the transition maps are\ninclusions of affine schemes, hence affine morphisms.",
-        "uses": [
-          "lem-kun-algebraic-separable-smooth",
-          "lem-kun-fg-separable-smooth"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Give the smooth-subalgebra index its directed-order instance. The underlying cocone of types is a colimit by Types.FilteredColimit.isColimitOf': coverage gives surjectivity, and each inclusion is injective by Subtype.ext, so equal elements are already equal at their own index. The forgetful functor from CommRingCat preserves filtered colimits and reflects isomorphisms; reflect the colimit with isColimitOfReflects. Apply [lem-weil-pbc-spec-colimit-limit], using isLimitOfPreserves Scheme.Spec hc.op and the affine-source/affine-target instance. Smoothness of each algebra is its index predicate.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
+    "place": "## Proof, final sentence"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-kun-fg-separable-smooth",
+  "lem-weil-pbc-separably-generated-separable",
+  "lem-weil-pbc-spec-colimit-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-separable-smooth-colimit.md",
+  "place": "## Proof; formalized by C2 using finite-subset coverage and the forgetful-functor colimit criterion"
+ },
+ "mathlib_searches": [],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1757,
+ "blueprint_uses": [
+  "lem-kun-algebraic-separable-smooth",
+  "lem-kun-fg-separable-smooth"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "split_report": {
+  "date": "2026-10-11",
+  "item": "lem-kun-separable-smooth-colimit",
+  "worker": "stage1",
+  "summary": "Split the imported paragraph into the directed-union argument, the algebraic/transcendental cases, the iterated filtered-colimit construction, and the affine Spec inverse-limit consequence. Added one statement-only support node for the combined categorical and affine-spectrum fact; no Lean declaration states the item. Reviewer R-ssc3030: dropped the support node lem-kun-filtered-colimit-spec-limit (false as stated: no compatibility between the inner presentations, directedness needs finite generation); replaced by the elementary Tag 07BV cofinality argument; algebraic case covered by the fg node.",
+  "blueprint": "Realizes the node proof paragraph: first three sentences; classification of finitely generated subextensions; sentence on a filtered colimit of filtered colimits; and final sentence identifying Spec(L) as an inverse limit."
+ },
+ "reviewed": {
+  "date": "2026-10-10",
+  "by": "L",
+  "reviewer": "R-ssc3030",
+  "group": "G1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-ssc3030 (reviewer sub-agent of L); spot-checked: Read whole packet; checked steps against fg node, algebraic node, spec-colimit-limit and both citers (popescu-resolve-separable, lem-kun-0f1c use exactly the stated subalgebra/inclusion form; C4 ok). FIX more, RETURN less: (1) new node lem-kun-filtered-colimit-spec-limit false/ill-typed as stated (Grothendieck construction needs compatible inner presentations; union of arbitrary inner subalgebras need not be directed without finite generation), dropped and replaced by the elementary Tag 07BV cofinality argument over the set of fg smooth subalgebras (class d); (2) C4: algebraic node gives no subalgebra/inclusion clause, so step 2 now uses the fg node, which covers finite separable extensions; (3) separability of subextensions folded as elementary (Tag 030R); step 4 now cites spec-colimit-limit on the directed set S.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.FieldTheory.SeparableSmoothColimit",
+  "declaration": "FieldTheory.separable_extension_is_filtered_colimit_smooth",
+  "declarations": [
+   "FieldTheory.smoothSubalgebraDiagram",
+   "FieldTheory.smoothSubalgebraCocone",
+   "FieldTheory.separable_extension_is_filtered_colimit_smooth"
+  ],
+  "file": "lean/WeilConjectures/FieldTheory/SeparableSmoothColimit.lean",
+  "statement": "theorem separable_extension_is_filtered_colimit_smooth {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L] (hsep : Algebra.IsSeparableExtension K L) : Nonempty {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG} ∧ Directed (· ≤ ·) (fun A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG} => A.1) ∧ (∀ x : L, ∃ A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}, x ∈ A.1) ∧ Nonempty (IsColimit (smoothSubalgebraCocone K L)) ∧ Nonempty (IsLimit (Scheme.Spec.mapCone (smoothSubalgebraCocone K L).op)) ∧ (∀ A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}, Algebra.Smooth K A.1) ∧ (∀ (A B : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}) (f : B ⟶ A), IsAffineHom (Spec.map (CommRingCat.ofHom (Subalgebra.inclusion (leOfHom f)).toRingHom)))",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-11",
+  "existing": false,
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.FieldTheory.SeparableSmoothColimit; points at its upstream twin."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-11",
+  "by": "L",
+  "reviewer": "R-ssc0804",
+  "group": "C1",
+  "result": "fix",
+  "note": "K u/L v fields+Algebra, hsep = recorded Algebra.IsSeparableExtension (H12); index = all FG smooth subalgebras (Algebra.Smooth, Subalgebra.FG), Nonempty+Directed(<=)+cover = filtered union; IsColimit of inclusion cocone in CommRingCat; Spec mapCone op IsLimit; smooth + IsAffineHom transitions; docstring proof; FIX H9: dropped unused imports GammaSpecAdjunction, Limits.Opposites (recompiled clean)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-12",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261012T144057-L-2090152",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $L/K$ be a separable extension of fields. Then $L$ is a filtered\ncolimit of finitely generated smooth $K$-algebras, and the colimit may be\ntaken over smooth $K$-subalgebras of $L$ with the inclusions as transition\nmaps; consequently $\\Spec(L)$ is the inverse limit of the corresponding\naffine smooth $K$-schemes with affine transition morphisms.",
+  "proof": [
+   {
+    "text": "The finitely generated subextensions $L_j/K$ of $L$ form a filtered\nsystem, the subextension generated by two of them being finitely generated,\nand their union is $L$. Each $L_j/K$ is separable because $L/K$ is. If\n$L_j/K$ is algebraic, it is finite and\n[lem-kun-algebraic-separable-smooth] exhibits it as a filtered colimit of\nsmooth $K$-algebras; otherwise it is finitely generated and transcendental,\nand [lem-kun-fg-separable-smooth] exhibits it as such a colimit. A\nfiltered colimit of filtered colimits of smooth $K$-algebras is again a\nfiltered colimit of smooth $K$-algebras, so $L$ is one; the description of\n$\\Spec(L)$ as the inverse limit follows because the transition maps are\ninclusions of affine schemes, hence affine morphisms.",
+    "uses": [
+     "lem-kun-algebraic-separable-smooth",
+     "lem-kun-fg-separable-smooth"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ }
 }

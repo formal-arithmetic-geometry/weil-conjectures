@@ -314,16 +314,5 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-2a85cdb41 (reviewer sub-agent of L); spot-checked: The item's statement is word-for-word the main-20261015 blueprint definition, checked by diff with no differences. The hypotheses are an arbitrary monoidal category and an arbitrary monoid object, with nothing added or dropped and nothing weakened. The delivery has no new nodes and no proof steps; the unit's realized fields are rightly left alone because this is a detail node, not the unit's key node. The pinned slopmaster2 Mathlib is not on this machine, so I read Mathlib/CategoryTheory/Monoidal/Mod.lean and Action/Basic.lean in the live build's Mathlib, and every cited line number matches. Specializing D = C with selfLeftAction (Basic.lean:174-181, which uses tensor, whiskering, the left unitor and the associator) gives each clause directly. Clause 1: ModObj (59-65) gives the unit law gamma o (eta x M) = lambda_M and the associativity law gamma o (mu x M) = gamma o (R x gamma) o alpha_{R,R,M}, with the associator pointing the same way; one_smul_self and mul_smul_self (154-161) confirm this. Clause 2: IsModHom (187-188) is gamma_M then f = (R x f) then gamma_N, and Mod.Hom (264-267) bundles the map with that condition. Clause 3: ModObj.regular (102-103) sets the action to mu, and Mod.regular (336-338) bundles it. Clause 4: Mod (227-230), Mod.id (300), Mod.comp (308-310), the Category instance (313-316) and Mod.forget (347-349) use the ambient identities, composition and underlying data. So this is a valid Mathlib leaf with one declaration per clause (B8). The dependency det-def-sfb-ring-object-monoid (matched to MonObj) supplies exactly the monoid data and laws used, and it does not depend on the item. I searched the whole snapshot DAG for duplicates and found none: sk-def-sfb-module-objects is the broader unit key node, det-def-sfb-module-objects-sheaves is the sheaf case, det-def-sfb-module-objects-category is the faithfulness/category theorem, and lem-pod-equivalence-induces-module-objects is a different notion of module object in a category with finite products. The recorded searches cover LeanSearch, Loogle/LeanFinder and grep, all with real hits, and failed queries are labelled as failures, not as absence. Edge cases checked: the trivial monoid (the action must be lambda), Z/n in abelian groups, R = 0, and M = 0. There are no route steps, no tool_uses, no target base-change comparison and no SGA source. No fixes were made."
  },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- }
+ "lean_audit": {}
 }

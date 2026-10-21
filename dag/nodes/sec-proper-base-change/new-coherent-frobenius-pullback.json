@@ -1,156 +1,157 @@
 {
-  "id": "new-coherent-frobenius-pullback",
-  "kind": "statement",
-  "title": "Coherent structural pullback commutes with additive power maps",
-  "statement": "Let j:Y -> X be any morphism of schemes. Let additive endomorphisms FrZ and FrZK of their underlying Zariski structure sheaves be sectionwise pth power. The coherent additive endomorphisms defined by conjugating these maps through the fixed module/abelian comparison [def-pbc-canonical-coherent-etale-comparison] commute with moduleCohomologyFMap j for the structural module coefficient map [def-weil-pbc-module-cohomology-fmap]. This is an equality on the actual right-derived module cohomology groups. No fields, properness, flatness, etale comparison or tensor-product isomorphism are required.",
-  "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 01FB and 01FD; sites-cohomology.tex Tag 03FD; derived.tex Tag 06XR: coefficient naturality, resolution normalization, and Ext composition"
-  },
-  "stmt_deps": [
-    "def-pbc-canonical-coherent-etale-comparison",
-    "def-weil-pbc-module-cohomology-fmap",
-    "def-sc-ringed-space-module-cohomology"
-  ],
-  "proof": [
-    {
-      "text": "Use coefficient transport with the fixed module/Ext equivalences. Their coefficient naturality and identity-edge formula identify module fmap with Ext inverse image, the constant-integer-sheaf comparison, and the adjoint coefficient map.",
-      "uses": [
-        "new-module-cohomology-coefficient-transport",
-        "new-module-cohomology-ext-resolution-naturality",
-        "new-module-cohomology-ext-resolution-edge",
-        "def-pc-flat-cohomology-comparison"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "On every open the structural ring homomorphism commutes with pth powers. The adjunction square for the structural coefficient morphism therefore identifies invImage.map FrZ followed by coeff with coeff followed by FrZK. Apply exact-functor Ext coefficient naturality to obtain the power square in small Ext.",
-      "uses": [
-        "def-pc-flat-cohomology-comparison"
-      ],
-      "elementary": false
-    },
-    {
-      "text": "Changing the Ext universe commutes with coefficient postcomposition: map both sides to Hom in a common derived category and use composition. Hence coherentAdditiveEndomorphism is conjugation of the same small-Ext map. Conjugate the square by the fixed module/Ext equivalences and cancel the target equivalence, proving the stated equality.",
-      "uses": [
-        "def-pbc-canonical-coherent-etale-comparison",
-        "new-module-cohomology-ext-resolution-naturality"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+ "id": "new-coherent-frobenius-pullback",
+ "kind": "statement",
+ "title": "Coherent structural pullback commutes with additive power maps",
+ "statement": "Let j:Y -> X be any morphism of schemes. Let additive endomorphisms FrZ and FrZK of their underlying Zariski structure sheaves be sectionwise pth power. The coherent additive endomorphisms defined by conjugating these maps through the fixed module/abelian comparison [def-pbc-canonical-coherent-etale-comparison] commute with moduleCohomologyFMap j for the structural module coefficient map [def-weil-pbc-module-cohomology-fmap]. This is an equality on the actual right-derived module cohomology groups. No fields, properness, flatness, etale comparison or tensor-product isomorphism are required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FB and 01FD; sites-cohomology.tex Tag 03FD; derived.tex Tag 06XR: coefficient naturality, resolution normalization, and Ext composition"
+ },
+ "stmt_deps": [
+  "def-pbc-canonical-coherent-etale-comparison",
+  "def-weil-pbc-module-cohomology-fmap",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Use coefficient transport with the fixed module/Ext equivalences. Their coefficient naturality and identity-edge formula identify module fmap with Ext inverse image, the constant-integer-sheaf comparison, and the adjoint coefficient map.",
+   "uses": [
     "new-module-cohomology-coefficient-transport",
     "new-module-cohomology-ext-resolution-naturality",
     "new-module-cohomology-ext-resolution-edge",
-    "def-pc-flat-cohomology-comparison",
-    "def-pbc-canonical-coherent-etale-comparison"
-  ],
-  "proof_origin": {
-    "by": "Q4 stage-3 worker",
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tags 01FB and 01FD; sites-cohomology.tex Tag 03FD; derived.tex Tag 06XR: coefficient naturality, resolution normalization, and Ext composition"
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "The canonical etale to Zariski coherent cohomology comparison commutes with additive p power Frobenius and structural pullback",
-      "results": "Eight results, including Witt vector and etale ring results; none states a scheme cohomology comparison square.",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"H.map\"",
-      "results": "Twelve generic map results, none states this comparison square.",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "coherent.*comparison|comparison.*coherent",
-      "results": "Nine generic site comparison results; local search in both library roots found the canonical comparison definitions and the assigned theorem, but no power or structural pullback square for these definitions.",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The canonical etale Zariski comparison for quasi coherent sheaves is natural for Frobenius and scheme pullback",
-      "results": "Eight pullback and quasi-coherence results, including freeFunctorCompPullbackIso, pullbackCongr and sheafificationCompPullback; no cohomology comparison square.",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "coherentAdditiveEndomorphism|Frobenius.*cohomology",
-      "results": "0 hits; none proves structural coherent Frobenius naturality through the fixed Ext comparisons. Top results: ",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"mapFunctor\", \"map_comp\"",
-      "results": "0 hits; none proves structural coherent Frobenius naturality through the fixed Ext comparisons. Top results: ",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "An additive power endomorphism of the structure sheaf commutes with structural pullback on coherent cohomology via the fixed module to Ext comparison",
-      "results": "8 hits; none proves structural coherent Frobenius naturality through the fixed Ext comparisons. Top results: CategoryTheory.Sheaf.H, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
-      "date": "2026-10-18",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "Sheaf.AlgebraicGeometry.CoherentFrobeniusComparison",
-    "date": "2026-10-18",
-    "group": "Q4"
+  {
+   "text": "On every open the structural ring homomorphism commutes with pth powers. The adjunction square for the structural coefficient morphism therefore identifies invImage.map FrZ followed by coeff with coeff followed by FrZK. Apply exact-functor Ext coefficient naturality to obtain the power square in small Ext.",
+   "uses": [
+    "def-pc-flat-cohomology-comparison"
+   ],
+   "elementary": false
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
-      "place": "Proof, final paragraph: proper coherent base change identifies E tensor k′ with H¹ of the base-changed structure sheaf and carries Frobenius to Frobenius",
-      "via": [
-        "lem-weil-pbc-coherent-frobenius-comparison"
-      ]
-    },
-    "same_as": []
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-p1",
-  "lean": {
-    "existing": false,
-    "module": "Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback",
-    "file": "lean/Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean",
-    "declaration": "AlgebraicGeometry.Scheme.Modules.coherentFrobenius_pullback",
-    "statement": "theorem coherentFrobenius_pullback\n    {X Y : Scheme.{u}} (j : Y ⟶ X) (p q : ℕ)\n      (FrZ : (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj (unit X) ⟶\n        (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj (unit X))\n      (FrZK : (SheafOfModules.toSheaf.{u} Y.ringCatSheaf).obj (unit Y) ⟶\n        (SheafOfModules.toSheaf.{u} Y.ringCatSheaf).obj (unit Y))\n      (hFrZ : ∀ (U : X.Opensᵒᵖ) (s : Γ(X, U.unop)), FrZ.hom.app U s = s ^ p)\n      (hFrZK : ∀ (U : Y.Opensᵒᵖ) (s : Γ(Y, U.unop)), FrZK.hom.app U s = s ^ p)\n      (v : (RingedSpace.moduleCohomology X.toRingedSpace q).obj (unit X)) :\n      coherentAdditiveEndomorphism Y (unit Y) q FrZK\n        (moduleCohomologyFMap j\n          (SheafOfModules.unitToPushforwardObjUnit j.toRingCatSheafHom) q v) =\n        moduleCohomologyFMap j\n          (SheafOfModules.unitToPushforwardObjUnit j.toRingCatSheafHom) q\n            (coherentAdditiveEndomorphism X (unit X) q FrZ v)",
-    "branch": "sheaf-dag",
-    "by": "Q4",
-    "date": "2026-10-18"
-  },
-  "reviewed": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "Q4",
-    "result": "pass",
-    "landing": "20261018T071213-L-1674975",
-    "kind": "interface",
-    "note": "new node of a stage-3 delivery, read against its source by the reviewer"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "Q4",
-    "result": "pass",
-    "landing": "20261018T071213-L-1674975",
-    "kind": "interface",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "Changing the Ext universe commutes with coefficient postcomposition: map both sides to Hom in a common derived category and use composition. Hence coherentAdditiveEndomorphism is conjugation of the same small-Ext map. Conjugate the square by the fixed module/Ext equivalences and cancel the target equivalence, proving the stated equality.",
+   "uses": [
+    "def-pbc-canonical-coherent-etale-comparison",
+    "new-module-cohomology-ext-resolution-naturality"
+   ],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "new-module-cohomology-coefficient-transport",
+  "new-module-cohomology-ext-resolution-naturality",
+  "new-module-cohomology-ext-resolution-edge",
+  "def-pc-flat-cohomology-comparison",
+  "def-pbc-canonical-coherent-etale-comparison"
+ ],
+ "proof_origin": {
+  "by": "Q4 stage-3 worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01FB and 01FD; sites-cohomology.tex Tag 03FD; derived.tex Tag 06XR: coefficient naturality, resolution normalization, and Ext composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical etale to Zariski coherent cohomology comparison commutes with additive p power Frobenius and structural pullback",
+   "results": "Eight results, including Witt vector and etale ring results; none states a scheme cohomology comparison square.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"H.map\"",
+   "results": "Twelve generic map results, none states this comparison square.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherent.*comparison|comparison.*coherent",
+   "results": "Nine generic site comparison results; local search in both library roots found the canonical comparison definitions and the assigned theorem, but no power or structural pullback square for these definitions.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical etale Zariski comparison for quasi coherent sheaves is natural for Frobenius and scheme pullback",
+   "results": "Eight pullback and quasi-coherence results, including freeFunctorCompPullbackIso, pullbackCongr and sheafificationCompPullback; no cohomology comparison square.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coherentAdditiveEndomorphism|Frobenius.*cohomology",
+   "results": "0 hits; none proves structural coherent Frobenius naturality through the fixed Ext comparisons. Top results: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapFunctor\", \"map_comp\"",
+   "results": "0 hits; none proves structural coherent Frobenius naturality through the fixed Ext comparisons. Top results: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive power endomorphism of the structure sheaf commutes with structural pullback on coherent cohomology via the fixed module to Ext comparison",
+   "results": "8 hits; none proves structural coherent Frobenius naturality through the fixed Ext comparisons. Top results: CategoryTheory.Sheaf.H, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CoherentFrobeniusComparison",
+  "date": "2026-10-18",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "Proof, final paragraph: proper coherent base change identifies E tensor k′ with H¹ of the base-changed structure sheaf and carries Frobenius to Frobenius",
+   "via": [
+    "lem-weil-pbc-coherent-frobenius-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.coherentFrobenius_pullback",
+  "statement": "theorem coherentFrobenius_pullback\n    {X Y : Scheme.{u}} (j : Y ⟶ X) (p q : ℕ)\n      (FrZ : (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj (unit X) ⟶\n        (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj (unit X))\n      (FrZK : (SheafOfModules.toSheaf.{u} Y.ringCatSheaf).obj (unit Y) ⟶\n        (SheafOfModules.toSheaf.{u} Y.ringCatSheaf).obj (unit Y))\n      (hFrZ : ∀ (U : X.Opensᵒᵖ) (s : Γ(X, U.unop)), FrZ.hom.app U s = s ^ p)\n      (hFrZK : ∀ (U : Y.Opensᵒᵖ) (s : Γ(Y, U.unop)), FrZK.hom.app U s = s ^ p)\n      (v : (RingedSpace.moduleCohomology X.toRingedSpace q).obj (unit X)) :\n      coherentAdditiveEndomorphism Y (unit Y) q FrZK\n        (moduleCohomologyFMap j\n          (SheafOfModules.unitToPushforwardObjUnit j.toRingCatSheafHom) q v) =\n        moduleCohomologyFMap j\n          (SheafOfModules.unitToPushforwardObjUnit j.toRingCatSheafHom) q\n            (coherentAdditiveEndomorphism X (unit X) q FrZ v)",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261018T071213-L-1674975",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261018T071213-L-1674975",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "lean_audit": {}
 }

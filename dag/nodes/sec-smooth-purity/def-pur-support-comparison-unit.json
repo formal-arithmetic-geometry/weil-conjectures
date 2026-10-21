@@ -1,96 +1,89 @@
 {
-  "id": "def-pur-support-comparison-unit",
-  "kind": "definition",
-  "title": "Canonical etale to pro-etale support comparison unit",
-  "statement": "For a commutative ring A, a scheme T, and a closed immersion i : Z ⟶ T, using [def-pur-support-cohomology] and [def-weil-pbc-proetale-modules], define the canonical ordinary support comparison unit from the etale supported-sections kernel to the pro-etale supported-sections functor as the unique map normalized by the adjunction unit on sections and the kernel inclusion [def-weil-pbc-site-comparison-morphism].",
-  "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-support-site-comparison.proof.md",
-    "place": "First proof paragraph: etaleSupportKernel, supportComparisonUnit_existsUnique, and supportComparisonUnit."
+ "id": "def-pur-support-comparison-unit",
+ "kind": "definition",
+ "title": "Canonical etale to pro-etale support comparison unit",
+ "statement": "For a commutative ring A, a scheme T, and a closed immersion i : Z ⟶ T, using [def-pur-support-cohomology] and [def-weil-pbc-proetale-modules], define the canonical ordinary support comparison unit from the etale supported-sections kernel to the pro-etale supported-sections functor as the unique map normalized by the adjunction unit on sections and the kernel inclusion [def-weil-pbc-site-comparison-morphism].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-support-site-comparison.proof.md",
+  "place": "First proof paragraph: etaleSupportKernel, supportComparisonUnit_existsUnique, and supportComparisonUnit."
+ },
+ "stmt_deps": [
+  "def-pur-support-cohomology",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "supportComparisonUnit|etaleSupportKernel",
+   "results": "No Mathlib match; source and project declarations are in SupportSiteComparison.lean.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match"
   },
-  "stmt_deps": [
-    "def-pur-support-cohomology",
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-site-comparison-morphism"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "supportComparisonUnit|etaleSupportKernel",
-      "results": "No Mathlib match; source and project declarations are in SupportSiteComparison.lean.",
-      "date": "2026-10-18",
-      "verdict": "no Mathlib match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "canonical etale pro-etale support comparison unit",
-      "results": "No exact Mathlib declaration; the published project declaration is used.",
-      "date": "2026-10-18",
-      "verdict": "no Mathlib match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "canonical etale pro-etale support comparison unit",
-      "results": "No exact declaration beyond the published project supportComparisonUnit.",
-      "date": "2026-10-18",
-      "verdict": "no exact match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-pur-relative-support-bottom-descent",
-    "date": "2026-10-18",
-    "group": "Q72"
+  {
+   "tool": "leansearch",
+   "query": "canonical etale pro-etale support comparison unit",
+   "results": "No exact Mathlib declaration; the published project declaration is used.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match"
   },
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "lem-pur-frame-independence",
-      "place": "First proof paragraph uses the canonical support comparison unit.",
-      "via": [
-        "lem-pur-relative-support-bottom-descent"
-      ]
-    },
-    "same_as": []
-  },
-  "lean_audit": {
-    "master": {
-      "state": "none"
-    },
-    "slopmaster2": {
-      "state": "none"
-    }
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-a1-kummer",
-  "lean": {
-    "module": "Sheaf.AlgebraicGeometry.SupportSiteComparison",
-    "declaration": "AlgebraicGeometry.ProEtale.supportComparisonUnit",
-    "branch": "newtargets-dag",
-    "by": "Q72",
-    "date": "2026-10-18",
-    "existing": true,
-    "note": "The published SupportSiteComparison module contains the exact canonical definition, chosen from supportComparisonUnit_existsUnique; this definition node exposes that notion so statement dependencies rest on a definition.",
-    "statement": "def supportComparisonUnit"
-  },
-  "reviewed": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-0582b0b15",
-    "group": "Q72",
-    "result": "pass",
-    "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-0582b0b15",
-    "group": "Q72",
-    "result": "pass",
-    "note": "Re-delivery after d22a5c0338c1 (PASS, landing failed because two proof_deps were in no step's uses). Diffed the full snapshot against d22a: the only changes are Step 6 citing lem-sp-grothendieck-edge-maps (its left edge R^n(GF)->G R^nF is the grothendieckLeftEdgeMap used in relativeSupportEdge), Step 8 citing lem-weil-pbc-module-abelian-derived-direct-image-comparison (holds for any f and any Lambda, so it applies to the open complement), the matching uses, statement_change.old_proof plus an extended 'what', and two docstring lines in the module (no signature change). proof_deps now equals the union of uses exactly; steps are under 2000 chars; old_proof/old_statement/old_stmt_deps/old_proof_deps equal the live/side base exactly; both citers hold, statement mathematically unchanged. Re-checked hypotheses (frame = Ideal.span of the c functions via IsPullback, ringKrullDim codimension, smooth/etale/closed immersion) and all six clauses against the node; edge cases c=0, empty cover, negative r, no universe restriction. Statement verbatim, 36 declarations match, 16/16 proofs sorry, docstrings ok. nt_compile --json exit 0 in 16.4 s, no diagnostics."
+  {
+   "tool": "leanfinder",
+   "query": "canonical etale pro-etale support comparison unit",
+   "results": "No exact declaration beyond the published project supportComparisonUnit.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-relative-support-bottom-descent",
+  "date": "2026-10-18",
+  "group": "Q72"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "First proof paragraph uses the canonical support comparison unit.",
+   "via": [
+    "lem-pur-relative-support-bottom-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {},
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportSiteComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.supportComparisonUnit",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The published SupportSiteComparison module contains the exact canonical definition, chosen from supportComparisonUnit_existsUnique; this definition node exposes that notion so statement dependencies rest on a definition.",
+  "statement": "def supportComparisonUnit"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0582b0b15",
+  "group": "Q72",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0582b0b15",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Re-delivery after d22a5c0338c1 (PASS, landing failed because two proof_deps were in no step's uses). Diffed the full snapshot against d22a: the only changes are Step 6 citing lem-sp-grothendieck-edge-maps (its left edge R^n(GF)->G R^nF is the grothendieckLeftEdgeMap used in relativeSupportEdge), Step 8 citing lem-weil-pbc-module-abelian-derived-direct-image-comparison (holds for any f and any Lambda, so it applies to the open complement), the matching uses, statement_change.old_proof plus an extended 'what', and two docstring lines in the module (no signature change). proof_deps now equals the union of uses exactly; steps are under 2000 chars; old_proof/old_statement/old_stmt_deps/old_proof_deps equal the live/side base exactly; both citers hold, statement mathematically unchanged. Re-checked hypotheses (frame = Ideal.span of the c functions via IsPullback, ringKrullDim codimension, smooth/etale/closed immersion) and all six clauses against the node; edge cases c=0, empty cover, negative r, no universe restriction. Statement verbatim, 36 declarations match, 16/16 proofs sorry, docstrings ok. nt_compile --json exit 0 in 16.4 s, no diagnostics."
+ }
 }
