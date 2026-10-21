@@ -82,7 +82,18 @@ on f, V, or q. -/
 theorem affineRealizationRawEvaluation_bijective {X S : Scheme.{u}} (f : X ⟶ S)
     (G : X.Modules) [G.IsQuasicoherent] (q : ℕ) (V : S.Etale) :
     Function.Bijective (affineRealizationRawEvaluation f G q V) := by
-  sorry
+  let e := coherentEtaleRestrictionIso (Limits.pullback.snd V.hom f) G
+  have hc : Function.Bijective (Sheaf.H.map e.hom q) :=
+    ConcreteCategory.bijective_of_isIso ((Sheaf.functorH _ q).map e.hom)
+  let := Etale.isIso_rawRestrictedCohomologyComparison f q
+    (liftedCoherentEtaleSheaf G) V
+  unfold affineRealizationRawEvaluation
+  exact hc.comp
+    ((Etale.sheafHDerivedEquiv
+      ((Etale.upperStar AddCommGrpCat.{u + 1} (Limits.pullback.snd V.hom f)).obj
+        (liftedCoherentEtaleSheaf G)) q).symm.bijective.comp
+      (ConcreteCategory.bijective_of_isIso
+        (Etale.rawRestrictedCohomologyComparison f q (liftedCoherentEtaleSheaf G) V)))
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical cohomology class in the abelian higher direct image. The inverse
