@@ -21,108 +21,101 @@
  ],
  "proof": [
   {
-   "text": "Apply clause (ii) of [lem-sf-proetale-constructible-origin] to the given intrinsically bounded constructible $A$-complex $K$. Choose $K_e\\in D^b_c(X_{\\mathrm{et}},A)$ and $\\alpha:\\nu_X^*K_e\\cong K$. The coefficient is the finite stage $A_{E,n}$ required there; no Noetherian hypothesis on $X$ is needed.",
+   "text": "Convert the intrinsic fixed-module lisse restrictions on each stratum to finite constant models. Descend each constructible homology sheaf to the etale site. Apply the existing boundedConstructible_of_homology theorem, then translate source-library constructibility to the recorded finite-value etale constructibility predicate. No Noetherian hypothesis on the scheme is introduced.",
    "uses": [
-    "lem-sf-proetale-constructible-origin"
+    "lem-sf-proetale-lisse-finite-models",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+    "place": "Tag 06YY, lemma-derived-base-change; K-flat coefficient reduction and bounded etale-origin domain calculation"
    }
   },
   {
-   "text": "Apply [lem-pur-coefficient-pullback-comparison] to the geometric inverse image $\\nu_X^{-1}$, the constant ring map $A\\to B$, and $K_e$, and also to $\\nu_Z^{-1}$ and $E_e=j_!^{\\mathrm{et},A}K_e$. Its derived comparisons give B-linear isomorphisms $\\delta_X:\\nu_X^*S_X^{\\mathrm{et}}K_e\\cong S_X\\nu_X^*K_e$ and $\\delta_Z:\\nu_Z^*S_Z^{\\mathrm{et}}E_e\\cong S_Z\\nu_Z^*E_e$. The geometric morphisms and constant-scalar lifts are [def-weil-pbc-site-comparison-morphism]; their module inverse images are exact by [prop-weil-pbc-site-comparison-finite-level]. The scalar functors are the K-flat derived extensions of [lem-pur-derived-change-of-rings]. Thus this is an application to the actual ringed topoi, not a comparison merely after forgetting B-linearity. Compose $\\delta_X$ with $S_X\\alpha$ to obtain the first comparison in the statement.",
+   "text": "Take a flat complex P supported in [a,b] representing K; it is K-flat because it is bounded above. Sheafified scalar extension E followed by exact conservative restriction U is tensor by the constant target coefficient module. Hence E preserves quasi-isomorphisms between K-flat complexes. The transpose of the ordinary adjunction unit computes any chosen left adjoint to D(U) on P. Apply this to the published pbcFixedScalarExtension. The complex E(P) retains its zero terms outside [a,b], so the reduction is concentrated in that interval over B.",
    "uses": [
-    "lem-pur-coefficient-pullback-comparison",
-    "def-weil-pbc-site-comparison-morphism",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "lem-pur-derived-change-of-rings"
+    "lem-sc-source-tor-amplitude-flat-model",
+    "lem-sfb-bounded-above-flat-kflat",
+    "def-pur-finite-reduction-system",
+    "lem-pur-finite-reduction-restrict-tensor",
+    "lem-sfb-exact-right-adjoint-kflat-representative",
+    "def-weil-pbc-witness-compatibility",
+    "def-sf-categorical-proetale-tor-amplitude"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+    "place": "Tag 06YY, lemma-derived-base-change; K-flat coefficient reduction and bounded etale-origin domain calculation"
    }
   },
   {
-   "text": "On either site the underlying A-complex of $S_TH$ is $H\\otimes_A^LB$. Indeed choose a flat-term K-flat resolution $P\\to H$ by [lem-pc-kflat-resolution]. Derived scalar extension is represented by $P\\otimes_AB$ by [lem-pur-derived-change-of-rings]; after restriction its terms are the ordinary A-module tensors by [lem-pur-change-of-rings-tensor-comparison]. The same K-flat $P$ computes derived tensor with the degree-zero A-module B by [def-weil-derived-tensor] on the pro-etale site and [def-kun-derived-tensor] on the etale site. Scalar restriction [def-pc-sheaf-restrict-scalars] changes only the action, hence cohomology as an abelian sheaf is unchanged. In particular apply the given Tor-amplitude condition [def-weil-finite-tor-amplitude] to the A-module sheaf B on $X_{\\mathrm{proet}}$: $S_XK$ has cohomology only in $[a,b]$, as a B-complex as well as after restriction.",
+   "text": "The published B-linear reduction comparison, composed with scalar extension of alpha, identifies the comparison pullback of the etale reduction with the pro-etale reduction. Exact faithful comparison reflects zero homology and therefore the interval [a,b].",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-change-of-rings-tensor-comparison",
-    "def-weil-derived-tensor",
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-finite-tor-amplitude",
-    "def-kun-derived-tensor"
+    "def-weil-pbc-witness-compatibility",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+    "place": "Tag 06YY, lemma-derived-base-change; K-flat coefficient reduction and bounded etale-origin domain calculation"
    }
   },
   {
-   "text": "The exact etale extension by zero of [lem-weil-pbc-extension-by-zero-exact] commutes with cohomology, so $E_e=j_!^{\\mathrm{et},A}K_e$ is bounded: $\\mathcal H^q(E_e)=j_!^{\\mathrm{et},A}\\mathcal H^q(K_e)$. Apply [lem-cbc-proetale-extension-zero-comparison] degreewise. Both open extensions are exact (on the pro-etale site by [lem-cbc-proetale-extension-zero]), so its natural sheaf isomorphism descends to $\\nu_Z^*E_e\\cong j_!^A\\nu_X^*K_e\\cong j_!^AK$. Exactness of comparison inverse image is supplied by [prop-weil-pbc-site-comparison-finite-level].",
+   "text": "Exact etale open extension preserves boundedness. Exact pro-etale open extension preserves the reduction interval. The canonical etale open/scalar isomorphism followed by open site comparison and scalar site comparison gives exactly openReductionComparison. Reflect concentration through the exact faithful site comparison to obtain the bound on the etale open reduction.",
    "uses": [
     "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sfb-finite-extension-by-zero-exact",
     "lem-cbc-proetale-extension-zero-comparison",
-    "lem-cbc-proetale-extension-zero",
-    "prop-weil-pbc-site-comparison-finite-level"
+    "lem-coef-etale-open-comparison-data",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+    "place": "Tag 06YY, lemma-derived-base-change; K-flat coefficient reduction and bounded etale-origin domain calculation"
    }
   },
   {
-   "text": "Compose $\\delta_Z$ from step 2, scalar extension of the isomorphism of step 4, and the B-linear open comparison of [lem-fix-open-scalar-tensor-normalization]. The result is the required canonical B-linear chain of isomorphisms $\\nu_Z^*S_Z^{\\mathrm{et}}E_e\\cong S_Zj_!^AK\\cong j_!^BS_XK$. Its last term has cohomology only in $[a,b]$: by [lem-cbc-proetale-extension-zero], $j_!^B$ is exact and $\\mathcal H^q(j_!^BS_XK)=j_!^B\\mathcal H^q(S_XK)$, and step 3 gives the vanishing. This proves the asserted range on the pro-etale side without any flatness assumption on $A\\to B$.",
+   "text": "Exact scalar restriction preserves boundedness. Use the displayed etale reductions as the two retained complexes and their canonical reductionComparison and openReductionComparison as their origin isomorphisms. The complex equalities and HEq clauses are reflexive. The unreduced open-origin isomorphism is openComparison composed with open extension of alpha.",
    "uses": [
-    "lem-fix-open-scalar-tensor-normalization",
-    "lem-cbc-proetale-extension-zero"
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-etale-origin-witness",
+    "lem-cbc-proetale-extension-zero-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
-   }
-  },
-  {
-   "text": "For $T=X,Z$ put respectively $H=S_X^{\\mathrm{et}}K_e,S_Z^{\\mathrm{et}}E_e$. Exactness in [prop-weil-pbc-site-comparison-finite-level] gives $\\mathcal H^q(\\nu_T^*H)=\\nu_T^*\\mathcal H^q(H)$: exact inverse image preserves the kernels, images and quotients defining cohomology. Steps 2--5 show that this is zero for $q\\notin[a,b]$. The same cited node, now at the finite coefficient B, gives the sheaf unit $\\mathcal H^q(H)\\cong\\nu_{T,*}\\nu_T^*\\mathcal H^q(H)=0$. Thus both etale scalar extensions have precisely the asserted vanishing range, and are bounded. By step 3 their underlying A-complexes are the two derived tensors in the statement; restriction changes no kernels or quotients, so those are bounded too. Together with bounded $K_e,E_e$ from steps 1 and 4, the displayed isomorphisms give bounded etale-origin pairs in the sense of [def-weil-pbc-etale-origin-witness].",
-   "uses": [
-    "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-pbc-etale-origin-witness"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+    "place": "Tag 06YY, lemma-derived-base-change; K-flat coefficient reduction and bounded etale-origin domain calculation"
    }
   }
  ],
  "proof_deps": [
-  "lem-sf-proetale-constructible-origin",
-  "lem-pur-coefficient-pullback-comparison",
-  "def-weil-pbc-site-comparison-morphism",
-  "prop-weil-pbc-site-comparison-finite-level",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-kflat-resolution",
-  "lem-pur-change-of-rings-tensor-comparison",
-  "def-weil-derived-tensor",
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-finite-tor-amplitude",
-  "def-kun-derived-tensor",
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sc-source-tor-amplitude-flat-model",
+  "lem-sfb-bounded-above-flat-kflat",
+  "def-pur-finite-reduction-system",
+  "lem-pur-finite-reduction-restrict-tensor",
+  "lem-sfb-exact-right-adjoint-kflat-representative",
+  "def-weil-pbc-witness-compatibility",
+  "def-sf-categorical-proetale-tor-amplitude",
+  "lem-weil-pbc-exact-functor-bounded-below",
   "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sfb-finite-extension-by-zero-exact",
   "lem-cbc-proetale-extension-zero-comparison",
-  "lem-cbc-proetale-extension-zero",
-  "lem-fix-open-scalar-tensor-normalization",
+  "lem-coef-etale-open-comparison-data",
+  "def-pc-sheaf-restrict-scalars",
   "def-weil-pbc-etale-origin-witness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); boundedness assembly from the cited comparison and open-extension statements"
+  "place": "Tags 06YY, 07A4 and 0G7E; bounded flat model (lemma-tor-amplitude) and exact faithful comparison; A3 proof restoration, 2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -232,15 +225,8 @@
   ]
  },
  "tool_uses": [
-  "lem-sf-proetale-constructible-origin",
-  "lem-pur-coefficient-pullback-comparison",
-  "prop-weil-pbc-site-comparison-finite-level",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-kflat-resolution",
-  "lem-pur-change-of-rings-tensor-comparison",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-cbc-proetale-extension-zero"
+  "lem-cbc-proetale-extension-zero-comparison"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -266,7 +252,7 @@
    "AlgebraicGeometry.ProEtale.FiniteReductionOrigin.reduction_open_etale_origin"
   ],
   "file": "lean/Sheaf/Paper/ReductionOpenEtaleOrigin.lean",
-  "statement": "theorem reduction_open_etale_origin (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n) {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (coefficient l E n)))) (_hc : ∀ q : ℤ, @Scheme.IsConstructibleProEtaleFixedModuleSheaf X (coefficient l E n) _ (Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n (hm.trans hmn))) ((_root_.DerivedCategory.homologyFunctor _ q).obj K)) (_hb : _root_.DerivedCategory.TStructure.t.bounded K) (a b : ℤ) (_hab : a ≤ b) (_ht : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (coefficient l E n)) X a b K) : ∃ Ke : Etale.DerivedCategoryModule (coefficient l E n) X, @Etale.DerivedCategory.isBoundedConstructible (coefficient l E n) _ (Equiv.ulift.finite_iff.mpr (Padic.finite_coefficientExtensionRing l E n (hm.trans hmn))) X Ke ∧ ∃ α : (nu (coefficient l E n) X).obj Ke ≅ K, _root_.DerivedCategory.TStructure.t.bounded Ke ∧ _root_.DerivedCategory.TStructure.t.bounded ((etaleOpen (coefficient l E n) j).obj Ke) ∧ _root_.DerivedCategory.TStructure.t.bounded ((pbcFixedScalarExtension X.smallEtaleTopology (coefficientMap l E m n hmn)).obj Ke) ∧ _root_.DerivedCategory.TStructure.t.bounded ((pbcFixedScalarExtension Z.smallEtaleTopology (coefficientMap l E m n hmn)).obj ((etaleOpen (coefficient l E n) j).obj Ke)) ∧ _root_.DerivedCategory.homologyConcentratedIn a b ((pbcFixedScalarExtension X.smallEtaleTopology (coefficientMap l E m n hmn)).obj Ke) ∧ _root_.DerivedCategory.homologyConcentratedIn a b ((pbcFixedScalarExtension Z.smallEtaleTopology (coefficientMap l E m n hmn)).obj ((etaleOpen (coefficient l E n) j).obj Ke)) ∧ _root_.DerivedCategory.TStructure.t.bounded ((Sheaf.derivedRestrictScalars X.smallEtaleTopology (coefficientMap l E m n hmn)).obj ((pbcFixedScalarExtension X.smallEtaleTopology (coefficientMap l E m n hmn)).obj Ke)) ∧ _root_.DerivedCategory.TStructure.t.bounded ((Sheaf.derivedRestrictScalars Z.smallEtaleTopology (coefficientMap l E m n hmn)).obj ((pbcFixedScalarExtension Z.smallEtaleTopology (coefficientMap l E m n hmn)).obj ((etaleOpen (coefficient l E n) j).obj Ke))) ∧ ∃ (hx : _root_.DerivedCategory.TStructure.t.plus ((pbcFixedScalarExtension (Scheme.ProEt.topology X) (coefficientMap l E m n hmn)).obj K)) (hz : _root_.DerivedCategory.TStructure.t.plus ((proEtaleOpen (coefficient l E m) j).obj ((pbcFixedScalarExtension (Scheme.ProEt.topology X) (coefficientMap l E m n hmn)).obj K))) (wx : Scheme.FixedEtaleOriginWitness X (coefficient l E m) ⟨(pbcFixedScalarExtension (Scheme.ProEt.topology X) (coefficientMap l E m n hmn)).obj K, hx⟩) (wz : Scheme.FixedEtaleOriginWitness Z (coefficient l E m) ⟨(proEtaleOpen (coefficient l E m) j).obj ((pbcFixedScalarExtension (Scheme.ProEt.topology X) (coefficientMap l E m n hmn)).obj K), hz⟩), wx.complex.obj = (pbcFixedScalarExtension X.smallEtaleTopology (coefficientMap l E m n hmn)).obj Ke ∧ HEq wx.iso (reductionComparison (coefficientMap l E m n hmn) α) ∧ wz.complex.obj = (pbcFixedScalarExtension Z.smallEtaleTopology (coefficientMap l E m n hmn)).obj ((etaleOpen (coefficient l E n) j).obj Ke) ∧ HEq wz.iso (openReductionComparison (coefficientMap l E m n hmn) j α) ∧ Nonempty ((nu (coefficient l E n) Z).obj ((etaleOpen (coefficient l E n) j).obj Ke) ≅ (proEtaleOpen (coefficient l E n) j).obj K)",
+  "statement": "theorem reduction_open_etale_origin\n    (D : WeilConjectures.FiniteFieldDatum.{u})\n    (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    (m n : ℕ) (hm : 1 ≤ m) (hmn : m ≤ n)\n    {X Z : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j]\n    (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X)\n      (ModuleCat.{u + 1} (coefficient l E n))))\n    (_hc : ∀ q : ℤ, @Scheme.IsConstructibleProEtaleFixedModuleSheaf X\n      (coefficient l E n) _\n      (Equiv.ulift.finite_iff.mpr\n        (Padic.finite_coefficientExtensionRing l E n (hm.trans hmn)))\n      ((_root_.DerivedCategory.homologyFunctor _ q).obj K))\n    (_hb : _root_.DerivedCategory.TStructure.t.bounded K)\n    (a b : ℤ) (_hab : a ≤ b)\n    (_ht : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (coefficient l E n)) X a b K) :\n    ∃ Ke : Etale.DerivedCategoryModule (coefficient l E n) X,\n      @Etale.DerivedCategory.isBoundedConstructible (coefficient l E n) _\n        (Equiv.ulift.finite_iff.mpr\n          (Padic.finite_coefficientExtensionRing l E n (hm.trans hmn))) X Ke ∧\n      ∃ α : (nu (coefficient l E n) X).obj Ke ≅ K,\n        _root_.DerivedCategory.TStructure.t.bounded Ke ∧\n        _root_.DerivedCategory.TStructure.t.bounded\n          ((etaleOpen (coefficient l E n) j).obj Ke) ∧\n        _root_.DerivedCategory.TStructure.t.bounded\n          ((@pbcFixedScalarExtension.{u} X.Etale inferInstance\n          (essentiallySmallSelf.{0, u, u + 1} _) X.smallEtaleTopology\n          _ _ inferInstance inferInstance (coefficientMap l E m n hmn)).obj Ke) ∧\n        _root_.DerivedCategory.TStructure.t.bounded\n          ((@pbcFixedScalarExtension.{u} Z.Etale inferInstance\n          (essentiallySmallSelf.{0, u, u + 1} _) Z.smallEtaleTopology\n          _ _ inferInstance inferInstance (coefficientMap l E m n hmn)).obj\n            ((etaleOpen (coefficient l E n) j).obj Ke)) ∧\n        _root_.DerivedCategory.homologyConcentratedIn a b\n          ((@pbcFixedScalarExtension.{u} X.Etale inferInstance\n          (essentiallySmallSelf.{0, u, u + 1} _) X.smallEtaleTopology\n          _ _ inferInstance inferInstance (coefficientMap l E m n hmn)).obj Ke) ∧\n        _root_.DerivedCategory.homologyConcentratedIn a b\n          ((@pbcFixedScalarExtension.{u} Z.Etale inferInstance\n          (essentiallySmallSelf.{0, u, u + 1} _) Z.smallEtaleTopology\n          _ _ inferInstance inferInstance (coefficientMap l E m n hmn)).obj\n            ((etaleOpen (coefficient l E n) j).obj Ke)) ∧\n        _root_.DerivedCategory.TStructure.t.bounded\n          ((Sheaf.derivedRestrictScalars X.smallEtaleTopology (coefficientMap l E m n hmn)).obj\n            ((@pbcFixedScalarExtension.{u} X.Etale inferInstance\n          (essentiallySmallSelf.{0, u, u + 1} _) X.smallEtaleTopology\n          _ _ inferInstance inferInstance (coefficientMap l E m n hmn)).obj\n              Ke)) ∧\n        _root_.DerivedCategory.TStructure.t.bounded\n          ((Sheaf.derivedRestrictScalars Z.smallEtaleTopology (coefficientMap l E m n hmn)).obj\n            ((@pbcFixedScalarExtension.{u} Z.Etale inferInstance\n          (essentiallySmallSelf.{0, u, u + 1} _) Z.smallEtaleTopology\n          _ _ inferInstance inferInstance (coefficientMap l E m n hmn)).obj\n              ((etaleOpen (coefficient l E n) j).obj Ke))) ∧\n        ∃ (hx : _root_.DerivedCategory.TStructure.t.plus\n            ((@pbcFixedScalarExtension.{u} X.ProEt inferInstance\n              (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology X)\n              _ _ inferInstance inferInstance\n              (coefficientMap l E m n hmn)).obj K))\n          (hz : _root_.DerivedCategory.TStructure.t.plus\n            ((proEtaleOpen (coefficient l E m) j).obj\n              ((@pbcFixedScalarExtension.{u} X.ProEt inferInstance\n              (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology X)\n              _ _ inferInstance inferInstance\n                (coefficientMap l E m n hmn)).obj K)))\n          (wx : Scheme.FixedEtaleOriginWitness X (coefficient l E m)\n            ⟨(@pbcFixedScalarExtension.{u} X.ProEt inferInstance\n              (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology X)\n              _ _ inferInstance inferInstance\n              (coefficientMap l E m n hmn)).obj K, hx⟩)\n          (wz : Scheme.FixedEtaleOriginWitness Z (coefficient l E m)\n            ⟨(proEtaleOpen (coefficient l E m) j).obj\n              ((@pbcFixedScalarExtension.{u} X.ProEt inferInstance\n              (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology X)\n              _ _ inferInstance inferInstance\n                (coefficientMap l E m n hmn)).obj K), hz⟩),\n          wx.complex.obj =\n            (@pbcFixedScalarExtension.{u} X.Etale inferInstance\n          (essentiallySmallSelf.{0, u, u + 1} _) X.smallEtaleTopology\n          _ _ inferInstance inferInstance (coefficientMap l E m n hmn)).obj Ke ∧\n          HEq wx.iso (reductionComparison (coefficientMap l E m n hmn) α) ∧\n          wz.complex.obj =\n            (@pbcFixedScalarExtension.{u} Z.Etale inferInstance\n          (essentiallySmallSelf.{0, u, u + 1} _) Z.smallEtaleTopology\n          _ _ inferInstance inferInstance (coefficientMap l E m n hmn)).obj\n              ((etaleOpen (coefficient l E n) j).obj Ke) ∧\n          HEq wz.iso (openReductionComparison (coefficientMap l E m n hmn) j α) ∧\n          Nonempty ((nu (coefficient l E n) Z).obj\n            ((etaleOpen (coefficient l E n) j).obj Ke) ≅\n              (proEtaleOpen (coefficient l E n) j).obj K)",
   "branch": "newtargets-dag",
   "by": "Q150",
   "date": "2026-10-21",
@@ -280,5 +266,15 @@
   "group": "Q150",
   "result": "pass",
   "note": "Clean nt_compile 14.3 s at load ~205. All node clauses match the Lean: actual O_E/ϖ^n→O_E/ϖ^m quotient map, intrinsic D^b_c hypothesis, Stacks 0651 Tor amplitude [a,b], ∃ Ke bounded constructible with α, four boundedness clauses, two [a,b] concentration clauses, two restricted-scalar boundedness clauses, FixedEtaleOriginWitness pinned by complex equality + HEq to canonical reductionComparison/openReductionComparison, ν_Z E_e ≅ j_! K. /tmp probe proved the witness and Nonempty clauses from the canonical maps (HEq consistent). No hollow defs, docstrings ok, only main theorem sorry, edge cases j=id/X=∅/m=n/non-flat allowed, no universe restriction. Advisories: (1) torAmplitudeIn and pbcFixedScalarExtension are owned by def-sf-categorical-proetale-tor-amplitude and def-weil-pbc-witness-compatibility, not in stmt_deps; (2) openReductionComparison takes a different canonical route than step 5, equal by mate coherence, for stage 3; (3) last clause is Nonempty although openOriginComparison is defined; (4) def-weil-proetale-constructible-sheaf superset record on ProEtaleFixedModuleConstructible keeps both decls (the repair asked of NX), live record unchanged since base, old ProEtaleConstructibleSheaf module no longer a primary lean.module (no sorry); (5) FiniteTorAmplitudeSites and five proof-plan imports unused in the statement, accepted under the plan-import convention."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-fc61f",
+  "group": "A3",
+  "result": "fix",
+  "landing": "20261021T162107-L-270444",
+  "kind": "proof",
+  "note": "independent cc review: delivered ReductionOpenEtaleOrigin.lean vs quarantine archive (only explicit universe/instance arguments to pbcFixedScalarExtension + new proof) and node lem-fix-reduction-open-etale-origin vs the declarations the proof uses"
  }
 }

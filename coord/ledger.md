@@ -23024,3 +23024,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:19 L: merged deliver/NJ/lem-sfb-supported-finite-stage-topology-defect (reviewer FIX; first push; new nodes: 2)
 - 16:19 L: merged deliver/Q21/lem-sf-open-exchange-roos-restriction (stage 2; reviewer PASS; parallel immutable checks)
 - 16:21 L: returned deliver/K9/Sheaf.Paper.OrderedExchangeCoefficientComparison (reviewer RETURN: (the landing tools, head 9734b5470) the delivery did not land: (d) user Sheaf.Paper.IntegralPullbackStrictRoosNormalizat)
+- 16:21 L: merged deliver/A3/Sheaf.Paper.ReductionOpenEtaleOrigin (stage 3; reviewer FIX; first push; landing 20261021T162107-L-270444 (proof); batch 20261021T162105; modules 1; new nodes 0; change records: coord/changes/A3-reduction-open-etale-origin-universes.md)
