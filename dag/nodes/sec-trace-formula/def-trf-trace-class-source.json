@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-trf-trace-class-source",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Trace-class source",
- "statement": "In the setting of [def-trf-correspondence], for an admissible\ncohomological correspondence\n$u:Lc_2^*K\\to Rc_1^!K$ put\n\n$$\n\\mathcal H_c(K):=\nR\\mathcal Hom_A\\bigl(Lc_2^*K,Rc_1^!K\\bigr)\\in D(C,A).\n$$\n\nBy the tensor–internal-Hom\nadjunction, the correspondence $u$ is equivalently a section (the\n*mate*) $\\widetilde u:A_C\\to\\mathcal H_c(K)$, i.e. an element of\n$\\Hom_{D(C,A)}(A_C,\\mathcal H_c(K))$: the adjunction isomorphism\n\n$$\n\\Hom_{D(C,A)}(A_C,R\\mathcal Hom_A(Lc_2^*K,Rc_1^!K))\n\\cong\n\\Hom_{D(C,A)}(Lc_2^*K,Rc_1^!K)\n$$\n\nidentifies $\\widetilde u$ with $u$.",
+ "statement": "Use the finite-coefficient setting of [def-trf-correspondence]: $s=\\operatorname{Spec}k$ for the fixed algebraic closure of the finite field, $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$ with $n\\geq1$ and $\\ell\\ne\\operatorname{char}k$, $X$ and $C$ separated finite-type $k$-schemes, $c=(c_1,c_2):C\\to X\\times_s X$, $K\\in D^b_{ctf}(X,A)$ [def-weil-finite-tor-amplitude], and an admissible cohomological correspondence\n$$\nu:Lc_2^*K\\longrightarrow Rc_1^!K.\n$$\nHere $D^b_{ctf}$ is the finite-Tor subcategory of the bounded constructible finite-torsion category [def-weil-finite-torsion-constructibility], and all operations are those of [def-weil-derived-pullback-tensor-hom]. Put $M=Lc_2^*K$, $N=Rc_1^!K$, and define the trace-class source by\n$$\n\\mathcal H_c(K):=R\\mathcal Hom_A(M,N)\\in D(C,A).\n$$\nThe internal Hom is taken in the ambient derived category of $A_C$-modules on the small pro-etale site of $C$; $A_C$ denotes the constant coefficient sheaf placed in degree zero. Use the derived tensor–internal-Hom adjunction and its unit object $A_C$ from [lem-sf-ringed-derived-closed-symmetric-monoidal]. Write $\\lambda_M:A_C\\otimes_A^L M\\xrightarrow{\\sim}M$ for the left unit isomorphism and $\\eta^M$ for the unit of $-\\otimes_A^L M\\dashv R\\mathcal Hom_A(M,-)$. Define the mate, as specified data, by\n$$\n\\widetilde u:=R\\mathcal Hom_A(M,u\\circ\\lambda_M)\\circ\\eta^M_{A_C}:\n A_C\\longrightarrow\\mathcal H_c(K).\n$$\nEquivalently, $\\widetilde u$ is the image of $u\\circ\\lambda_M$ under the adjunction bijection. Thus the canonical bijection\n$$\n\\operatorname{Hom}_{D(C,A)}(A_C,R\\mathcal Hom_A(M,N))\n\\xrightarrow{\\sim}\\operatorname{Hom}_{D(C,A)}(M,N)\n$$\nis the inverse adjunction bijection followed by precomposition with $\\lambda_M^{-1}$, and identifies $\\widetilde u$ with $u$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/def-trf-trace-class-source.md",
   "place": "node def-trf-trace-class-source, order 2280"
@@ -16,14 +16,72 @@
   "def-trf-correspondence",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-finite-tor-amplitude",
-  "def-weil-finite-torsion-constructibility"
+  "def-weil-finite-torsion-constructibility",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def curry|def uncurry|homEquiv",
+   "results": "25 hits in Free, DayConvolution, Reflection and other monoidal files. These are abstract equivalences, not the concrete derived internal Hom of a correspondence.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "traceClassSource|uncurry.*mate|cohomological.*correspondence",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism from the monoidal unit to internal Hom corresponds to a morphism between the two objects",
+   "results": "CategoryTheory.MonoidalClosed.curryHomEquiv', curry', uncurry' and general enriched/closed constructions. Read Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:460-487: the mate bijection is available assuming a closed monoidal structure, but no derived ringed-site structure is supplied.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry, CategoryTheory.MonoidalCategory.leftUnitor",
+   "results": "Loogle returned zero hits with note: unknown identifier 'CategoryTheory.MonoidalCategory.leftUnitor'. Corrected by the subsequent curry query; this malformed query is not evidence of absence.",
+   "date": "2026-10-21",
+   "verdict": "invalid query: unknown identifier; corrected in subsequent search"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.curry",
+   "results": "12 hits: curry, uncurry_curry, curry_uncurry, injectivity and naturality lemmas in Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean. Abstract formal part only.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed monoidal category the internal Hom represents maps after tensoring and a morphism has a curried name from the tensor unit",
+   "results": "8 hits including CategoryTheory.MonoidalClosed.curry', uncurry', curryHomEquiv', and CartesianClosed.curry. Read the closed definitions at Basic.lean:460,464,481; they require the closed structure, not a construction of the derived ringed-site operations.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom of the pullback and exceptional inverse image of a cohomological correspondence with its tensor Hom adjoint mate",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, pullbackObjUnitToUnit, pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, and ExponentiableMorphism currying. Underived sheaf pullbacks and locally cartesian closed constructions do not state this definition.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def curryHomEquiv|def curry.|def uncurry.|uncurry._curry",
+   "results": "5 hits at Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:146,150,460,464,475. Read through line 487, including curryHomEquiv' at 481: generic currying and inverse identity, not the concrete derived category structure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -50,5 +108,26 @@
    "AlgebraicGeometry.ProEtale.Correspondence.uncurry'_mate"
   ],
   "note": "attached by the lead's tool attach.py 2026-10-16 23:00 UTC for group Q65, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: traceClassSource defines the internal-Hom source, mate defines the"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-trf-trace-class-source",
+  "worker": "stage1",
+  "group": "NI",
+  "summary": "Definition split, no new nodes. Read main-20261015 and Stacks 08J9/0FPT. Retained the finite-coefficient correspondence and ambient internal Hom; explicitly constructed its mate from the tensor–Hom unit and the left unitor. Added the existing closed symmetric monoidal derived-category theorem as a statement prerequisite. No additional constructibility assertion or adjoint hypothesis was introduced. The inherited historical Lean attachment has no corresponding declarations in the current read clone, so is not claimed as a current attachment.",
+  "blueprint": "The internal-Hom display, the sentence defining the mate, and the final adjunction bijection of def-trf-trace-class-source, in sk-d-corr: ordinary pullback is c_2, exceptional pullback is c_1. This is a definition, not the key node of the unit; no unit realization edited."
+ },
+ "mathlib_candidate": {
+  "declaration": "CategoryTheory.MonoidalClosed.curryHomEquiv'",
+  "file": "Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+  "note": "Lines 460-487 implement the abstract mate correspondence, conditional on the monoidal closed structure. The concrete derived ringed-site structure is not supplied by Mathlib; use the existing project lemma, not a whole-item Mathlib leaf."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NI-27ca0bf1d",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-27ca0bf1d (reviewer sub-agent of L); spot-checked: This is a definition split with no new nodes. The base statement is the blueprint text, which is identical in main-20261015 (order 2624) and master (order 2280): H_c(K)=RHom_A(Lc_2^*K,Rc_1^!K) in D(C,A), and the mate ũ:A_C→H_c(K) comes from the tensor–internal-Hom adjunction. The delivery adds one stmt_dep, the existing lem-sf-ringed-derived-closed-symmetric-monoidal (Stacks 08J9 at sites-cohomology l.8896 and 0FPT at l.13136; no SGA). It supplies the unit A_C[0], the unitor and Hom(K⊗L,M)≅Hom(K,RHom(L,M)) with counit e. Its hypotheses hold: the pro-étale site sits on a V-small skeleton and A_C is commutative. Its tensor (K-flat first factor) and its def-pur-derived-internal-hom are the same as in def-weil-derived-pullback-tensor-hom. The explicit mate ũ=RHom(M,u∘λ_M)∘η^M_{A_C} type-checks and is the adjoint of u∘λ_M; with e∘(ũ⊗1)=u∘λ_M, precomposing with λ^{-1} gives back u. So the delivery makes the blueprint's implicit choice explicit and changes nothing. The setting (k=F̄_q, A=A_{E,n}, ℓ≠p, separated finite-type X and C, c_2 ordinary leg, c_1 exceptional leg, admissible u, K in D^b_ctf) agrees with def-trf-correspondence and its blueprint_update and with def-trf-coefficient-conventions. Nothing is strengthened and no constructibility of RHom is claimed. The new edge is acyclic (closure of 255 nodes without the item), and the citers (def-trf-trace-class, lem-trf-trace-map-from-external-duality and others) use only H_c and ũ↔u. Checked on a point with K=A (ũ=a), on K=0 and on C=∅. The item is not on the route-pivot drop list and has no repair note; live (side-live) is still imported. Mathlib curryHomEquiv' is correctly recorded only as a candidate. Minor: the report says the source path was updated, but source still names the master file at order 2280 (harmless, same text). Maintainer: a parallel N5 delivery of the same item (99b6ac9e) adds the same deps; land only one."
  }
 }
