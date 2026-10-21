@@ -20649,3 +20649,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:23 L: merged deliver/NM/sk-def-av (reviewer PASS; first push; new nodes: 0)
 - 07:23 L: merged deliver/Q141/def-nagata-sheaf-rees-algebra (reviewer PASS; first push; new nodes: 0)
 - 07:23 L: merged deliver/Q56/lem-cbc-ringed-open-strict-reduction (reviewer FIX; first push; new nodes: 0)
+- 07:23 L: merged deliver/Q115/def-nagata-extended-ideal (reviewer FIX; first push; new nodes: 0)

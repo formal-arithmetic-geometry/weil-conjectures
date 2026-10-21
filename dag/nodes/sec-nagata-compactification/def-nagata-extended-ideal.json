@@ -3,16 +3,23 @@
  "blueprint": {
   "is": "def-nagata-extended-ideal",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Extended ideal along a morphism",
- "statement": "For $f\\colon Y\\to X$ and a quasi-coherent ideal\n$\\mathcal I\\subseteq\\mathcal O_X$, define\n$\\mathcal I\\mathcal O_Y$ to be the image ideal of the composite\n\n$$\nf^*\\mathcal I\\longrightarrow f^*\\mathcal O_X\n\\longrightarrow\\mathcal O_Y.\n$$",
+ "statement": "Let $f\\colon Y\\to X$ be a morphism of schemes [def-pc-scheme] and let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent sheaf of ideals [pqf-def-coherent]. Write $i\\colon V(\\mathcal I)\\hookrightarrow X$ for the closed subscheme cut out by $\\mathcal I$, that is, the closed immersion [def-weil-closed-immersion] whose ideal sheaf $\\ker(\\mathcal O_X\\to i_*\\mathcal O_{V(\\mathcal I)})$ [def-sbc-closed-immersion-ideal-sheaf] is $\\mathcal I$ [lem-weil-pbc-quasi-coherent-ideal-closed-subscheme], and let $p\\colon P=Y\\times_XV(\\mathcal I)\\to Y$ be the first projection of the fibre product [def-pc-fibre-product]. Define the *extended ideal* along $f$ by\n\n$$\n\\mathcal I\\mathcal O_Y:=\\ker\\bigl(p^\\sharp\\colon\\mathcal O_Y\\longrightarrow p_*\\mathcal O_P\\bigr)\\subseteq\\mathcal O_Y.\n$$",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/def-nagata-extended-ideal.md",
   "place": "node def-nagata-extended-ideal, order 77"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-quasi-coherent-ideal-closed-subscheme",
+  "def-pc-fibre-product"
+ ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
@@ -24,10 +31,64 @@
     "Mathlib.AlgebraicGeometry.IdealSheaf.Functorial:39 (def)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "grep",
+   "query": "def comap|def comapIso|lemma ideal_comap|image.*[Ii]deal",
+   "results": "Seven hits in AlgebraicGeometry/IdealSheaf: comap (Functorial.lean:39), comapIso (Functorial.lean:43), ideal_comap_of_isOpenImmersion (Functorial.lean:199), plus unrelated image occurrences in Basic.lean and Subscheme.lean. Read Functorial.lean:33-55 and Basic.lean:689-705.",
+   "date": "2026-10-21",
+   "verdict": "match: comap at Functorial.lean:39-40 is the defining construction; no module-image comparison in these hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of a quasi-coherent ideal sheaf of a scheme along a morphism",
+   "results": "SheafOfModules.pullback; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.IdealSheafData.ideal_map; AlgebraicGeometry.Scheme.IdealSheafData.comap_bot; AlgebraicGeometry.Scheme.IdealSheafData.le_map_iff_comap_le; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom; SheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match for the module-image comparison; related pullback/ideal constructions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.comap",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.comap; AlgebraicGeometry.Scheme.IdealSheafData.comap_id; AlgebraicGeometry.Scheme.IdealSheafData.comap_mono; AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le; AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap; AlgebraicGeometry.Scheme.IdealSheafData.map_gc; AlgebraicGeometry.Scheme.IdealSheafData.comapIso; AlgebraicGeometry.Scheme.IdealSheafData.comap_comp",
+   "date": "2026-10-21",
+   "verdict": "match: comap gives the kernel-of-first-projection construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The pullback or extension of a quasi-coherent ideal sheaf along a scheme morphism is the kernel ideal of the base-changed closed subscheme",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.comap; AlgebraicGeometry.Scheme.IdealSheafData.map; AlgebraicGeometry.Scheme.Hom.ker; AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion; AlgebraicGeometry.Scheme.IdealSheafData.comapIso; AlgebraicGeometry.Scheme.IdealSheafData.map_bot; AlgebraicGeometry.Scheme.ker_morphismRestrict_ideal; AlgebraicGeometry.Scheme.ker_ideal_of_isPullback_of_isOpenImmersion",
+   "date": "2026-10-21",
+   "verdict": "match: comap gives the kernel-of-first-projection construction"
+  },
+  {
+   "tool": "grep",
+   "query": "toModules|toModulesι|tensorPullback|imageSubobject",
+   "results": "No hits for toModules|toModulesι|tensorPullback|imageSubobject in Mathlib/AlgebraicGeometry/IdealSheaf.",
+   "date": "2026-10-21",
+   "verdict": "no match for the module-image comparison; related pullback/ideal constructions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData.comap, CategoryTheory.Limits.image",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match for the module-image comparison; related pullback/ideal constructions only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The image of the pulled back ideal inclusion into the structure sheaf equals the ideal of the inverse image closed subscheme",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.ideal_map; AlgebraicGeometry.Scheme.IdealSheafData.le_map_comap; AlgebraicGeometry.Scheme.IdealSheafData.map_ideal'; AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal; AlgebraicGeometry.Scheme.IdealSheafData.map_ideal; AlgebraicGeometry.Scheme.IdealSheafData.ideal_map_of_isAffineHom; AlgebraicGeometry.Scheme.IdealSheafData.comap_map_le; AlgebraicGeometry.Scheme.IdealSheafData.comap",
+   "date": "2026-10-21",
+   "verdict": "no match for the module-image comparison; related pullback/ideal constructions only"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.comap",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean",
+  "line": 39,
+  "how": "exact: lines 39-40 define I.comap f := (pullback.fst f I.subschemeι).ker. Rename Mathlib's X,Y to the statement's Y,X. IdealSheafData records a quasi-coherent ideal by its affine ideals (Basic.lean:65); subschemeι is its associated closed subscheme inclusion (Subscheme.lean:472). Hom.ker (Basic.lean:692) computes the kernel ideal, with the actual affine kernel formula Hom.ker_apply (Basic.lean:702) for quasi-compact morphisms. The projection here is a closed immersion: the subschemeι instance is ClosedImmersion.lean:94 and base-change stability is line 382; it is affine by line 151, hence quasi-compact. The separate module-image characterization is retained in the existing theorem lem-pc-closed-subscheme-base-change-ideal-image, rather than claimed as part of this Mathlib match."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -61,5 +122,20 @@
   "statement": "For $f\\colon Y\\to X$ and a quasi-coherent ideal\n$\\mathcal I\\subseteq\\mathcal O_X$ with closed subscheme\n$V(\\mathcal I)\\hookrightarrow X$, define $\\mathcal I\\mathcal O_Y$ to be the\nideal sheaf of the closed subscheme\n\n$$\nY\\times_XV(\\mathcal I)\\hookrightarrow Y,\n$$\n\nthat is, the kernel ideal of the first projection\n$Y\\times_XV(\\mathcal I)\\to Y$. Equivalently, it is the image ideal of the\ncomposite $f^*\\mathcal I\\to f^*\\mathcal O_X\\to\\mathcal O_Y$.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-extended-ideal",
+  "worker": "stage1",
+  "summary": "Followed blueprint_update main-20261015: use the actual kernel ideal of the first projection as the definition, giving an exact Mathlib leaf at IdealSheafData.comap:39-40. Added the four existing definition nodes for schemes, ideal sheaves, closed immersions and fibre products. The former image-only wording and the update's equivalent image characterization are a property of this construction, already stated by lem-pc-closed-subscheme-base-change-ideal-image (Stacks 01JU (1)); that theorem is not a dependency here because its proof transitively uses this definition. Its exact statement and source were read, so no duplicate comparison node is created. The report records this extracted property and its existing node as a pointer for the maintainer. No proof steps, new nodes, or Lean edits. Maintainer-reader FIX (2026-10-21): the closed subscheme V(I) of an arbitrary quasi-coherent ideal was cited to def-weil-closed-immersion, which defines closed immersions only, and quasi-coherence to the ideal-sheaf-of-a-closed-immersion node; the statement now cites pqf-def-coherent for quasi-coherence and the Mathlib leaf lem-weil-pbc-quasi-coherent-ideal-closed-subscheme (IdealSheafData.subscheme/subschemeι, the same subschemeι as in IdealSheafData.comap) for the existence of V(I) with ideal I.",
+  "blueprint": "Realizes the defining sentence of main-20261015/sec-nagata-compactification/sk-lem-nagata-sketch-closure/def-nagata-extended-ideal.md: the ideal sheaf of Y times_X V(I), namely the kernel of the first projection. Its final equivalent image sentence is already the property in lem-pc-closed-subscheme-base-change-ideal-image; it is not a new construction dependency. The unit sk-lem-nagata-sketch-closure is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-a02e36f8d",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-a02e36f8d (reviewer sub-agent of L); spot-checked: I read the whole item (a definition, no new nodes and no proof steps) against the master and main-20261015 blueprint texts, Stacks 01JU (1) (schemes.tex lines 3330-3352) and Mathlib. Mathlib's IdealSheafData.comap (Functorial.lean:39-40) is (pullback.fst f I.subschemeι).ker, and Hom.ker (Basic.lean:692, ker_apply at line 702) is the honest kernel because the projection is a closed immersion and so quasi-compact. The mathlib_match is therefore exact, with no hypothesis on f weakened. The switch from the image definition to the kernel definition follows blueprint_update. The equivalent image form already exists as the reviewed node lem-pc-closed-subscheme-base-change-ideal-image (01JU), which reaches the item, so it stays a pointer; its proof uses the comap affine formula, so nothing is circular in substance. I tested I=0, I=O_X, f=id, empty Y, and the nonflat case Z->Z/2 with I=(2), where the kernel is 0, the image is 0 and I⊗B≠0; all agree. No duplicate definition exists. FIX, one B3 fault: quasi-coherence of an arbitrary ideal was cited to def-sbc-closed-immersion-ideal-sheaf, and the closed subscheme V(I) to def-weil-closed-immersion, which defines neither. The statement now cites pqf-def-coherent and the Mathlib leaf lem-weil-pbc-quasi-coherent-ideal-closed-subscheme (IdealSheafData.subscheme/subschemeι, no cycle), with stmt_deps updated. Maintainer notes: (1) source still names the master file at order 77 and should point to the main-20261015 file (maintainer-owned field). (2) Citers that take the image form 'from the definition' should be repointed: sk-lem-nagata-boundary-divisor to lem-pc-ideal-sheaf-comap-affine-extension, lem-per-regular-point-blowup-domination to lem-pc-closed-subscheme-base-change-ideal-image (both repoints acyclic). The imported lemma-nagata-extended-ideal-affine-chart and thm-nagata-blowup-universal-property should do the same when they are split.; 1 file(s) fixed by the reviewer"
  }
 }
