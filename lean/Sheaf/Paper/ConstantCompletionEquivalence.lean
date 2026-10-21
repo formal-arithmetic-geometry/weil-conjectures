@@ -34,6 +34,12 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import Mathlib.RingTheory.Ideal.Span
+import Mathlib.RingTheory.Finiteness.Defs
+import Sheaf.Paper.RingedTopoiTensorSections
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionTensorComparison
+import all Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
+import Mathlib.CategoryTheory.Adjunction.Whiskering
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
@@ -59,6 +65,7 @@ for sheaves, tensor products, derived internal Hom or local completeness.
 @[expose] public noncomputable section
 
 set_option synthInstance.maxSize 2048
+set_option backward.isDefEq.respectTransparency.types false
 
 universe u
 
@@ -257,6 +264,252 @@ theorem flat_and_quotients (J : GrothendieckTopology C) (A : Type u) [CommRing A
           (constantSection (J := J) (a : A)).val (op U)))) := by
   sorry
 
+section CoefficientIdeal
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private theorem extension_eq_of_span {R B : Sheaf J CommRingCat.{u}}
+    (φ : R ⟶ B) (K : RingedSiteIdeal R) (L : RingedSiteIdeal B)
+    (h : ∀ U, L.sections U =
+      Ideal.span (Set.range (fun a : K.sections U ↦ φ.hom.app (op U) a))) :
+    K.extension φ = L := by
+  apply ((K.existsUnique_extension φ).unique ?_ ?_)
+  · exact (K.existsUnique_extension φ).exists.choose_spec
+  · intro U b
+    constructor
+    · intro hb
+      refine ⟨⊤, J.top_mem _, ?_⟩
+      intro V g _
+      rw [← h V]
+      exact L.restriction g b hb
+    · rintro ⟨S, hS, hb⟩
+      exact L.local_mem U b S hS (fun V g hg ↦ by rw [h V]; exact hb V g hg)
+
+private theorem coefficientKernel_extension (A : Type u) [CommRing A]
+    [IsNoetherianRing A] (I : Ideal A) :
+    (kernelIdeal (quotient J A I 0)).extension (coefficientMap J A I) =
+      kernelIdeal (projection J A I 0) := by
+  let φ := coefficientMap J A I
+  let K := kernelIdeal (quotient J A I 0)
+  let L := kernelIdeal (projection J A I 0)
+  apply extension_eq_of_span φ K L
+  intro U
+  have hK : K.sections U = RingHom.ker ((quotient J A I 0).hom.app (op U)).hom :=
+    (kernelIdeal_existsUnique (quotient J A I 0)).exists.choose_spec U
+  have hL : L.sections U = RingHom.ker ((projection J A I 0).hom.app (op U)).hom :=
+    (kernelIdeal_existsUnique (projection J A I 0)).exists.choose_spec U
+  rw [hL, ((flat_and_quotients J A I).2.1 0 U).2]
+  apply le_antisymm
+  · apply Ideal.span_le.mpr
+    rintro _ ⟨a, rfl⟩
+    apply Ideal.subset_span
+    refine ⟨⟨(constantSection (J := J) a.val).val (op U), ?_⟩, rfl⟩
+    rw [hK, ((flat_and_quotients J A I).2.2 0 U).2]
+    exact Ideal.subset_span ⟨a, rfl⟩
+  · apply Ideal.span_le.mpr
+    rintro _ ⟨a, rfl⟩
+    have ha : a.val ∈ Ideal.span (Set.range (fun b : ↥(I ^ (0 + 1)) ↦
+        (constantSection (J := J) (b : A)).val (op U))) := by
+      rw [← ((flat_and_quotients J A I).2.2 0 U).2, ← hK]
+      exact a.property
+    change φ.hom.app (op U) a.val ∈ _
+    have hle : Ideal.span (Set.range (fun b : ↥(I ^ (0 + 1)) ↦
+        (constantSection (J := J) (b : A)).val (op U))) ≤
+        Ideal.comap (φ.hom.app (op U)).hom
+          (Ideal.span (Set.range (fun b : ↥(I ^ (0 + 1)) ↦
+            (algebraSection φ b).val (op U)))) := by
+      apply Ideal.span_le.mpr
+      rintro _ ⟨b, rfl⟩
+      exact Ideal.subset_span ⟨b, rfl⟩
+    exact hle ha
+
+private theorem coefficientKernel_quotient (A : Type u) [CommRing A] [IsNoetherianRing A]
+    (I : Ideal A) :
+    (kernelIdeal (quotient J A I 0)).IsQuotientIso (coefficientMap J A I) := by
+  let φ := coefficientMap J A I
+  let K := kernelIdeal (quotient J A I 0)
+  have he := coefficientKernel_extension (J := J) A I
+  have hk (U : C) : K.sections U =
+      RingHom.ker ((quotient J A I 0).hom.app (op U)).hom :=
+    (kernelIdeal_existsUnique (quotient J A I 0)).exists.choose_spec U
+  have hl (U : C) : (K.extension φ).sections U =
+      RingHom.ker ((projection J A I 0).hom.app (op U)).hom := by
+    rw [he]
+    exact (kernelIdeal_existsUnique (projection J A I 0)).exists.choose_spec U
+  have hc (U : C) (a : (constant J A).obj.obj (op U)) :
+      (projection J A I 0).hom.app (op U) (φ.hom.app (op U) a) =
+        (quotient J A I 0).hom.app (op U) a := by
+    exact congrArg (fun f ↦ f.hom.app (op U) a)
+      (limit.lift_π (quotientCone J A I) (op 0))
+  constructor
+  · intro U a
+    rw [hl, hk]
+    change (projection J A I 0).hom.app (op U) (φ.hom.app (op U) a) = 0 ↔
+      (quotient J A I 0).hom.app (op U) a = 0
+    rw [hc]
+  · intro U b
+    refine ⟨⊤, J.top_mem _, ?_⟩
+    intro V g _
+    obtain ⟨a, ha⟩ := ((flat_and_quotients J A I).2.2 0 V).1
+      ((projection J A I 0).hom.app (op V) ((completed J A I).obj.map g.op b))
+    refine ⟨a, ?_⟩
+    rw [hl]
+    change (projection J A I 0).hom.app (op V)
+      ((completed J A I).obj.map g.op b - φ.hom.app (op V) a) = 0
+    rw [map_sub, hc, ha, sub_self]
+private theorem ideal_generated_global_sections
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{u}) (I : RingedSiteIdeal R)
+    (r : ℕ) (b : Fin r → (R.obj ⋙ CategoryTheory.forget CommRingCat).sections)
+    (hs : ∀ U : C, I.sections U =
+      Ideal.span (Set.range (fun i ↦ (b i).val (op U)))) :
+    ∃ σ : I.module.GeneratingSections, ∃ e : σ.I ≃ Fin r,
+      ∀ i : σ.I, SheafOfModules.sectionsMap I.inclusion (σ.s i) = b (e i) := by
+  classical
+  let s (i : ULift.{u} (Fin r)) : I.module.sections :=
+    { val := fun U ↦ ⟨(b i.down).val U, by
+        rw [hs]
+        exact Ideal.subset_span ⟨i.down, rfl⟩⟩
+      property := by
+        intro U V f
+        apply Subtype.ext
+        exact (b i.down).property f }
+  let π := I.module.freeHomEquiv.symm s
+  have hπ : Epi π := by
+    constructor
+    intro M f g hfg
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro x
+    let x' : I.sections U.unop := x
+    have hx : (x' : R.obj.obj U) ∈
+        Ideal.span (Set.range (fun i ↦ (b i).val U)) := by
+      rw [← hs]
+      exact x'.property
+    have hgen (i : ULift.{u} (Fin r)) :
+        f.val.app U (s i |>.val U) = g.val.app U (s i |>.val U) := by
+      have h := congrArg (fun k ↦
+        (SheafOfModules.sectionsMap k (SheafOfModules.freeSection i)).val U) hfg
+      dsimp only [π] at h
+      have h' := h
+      simp only [SheafOfModules.sectionsMap_comp,
+        SheafOfModules.sectionsMap_freeHomEquiv_symm_freeSection] at h
+      exact h
+    have hind : ∀ (y : R.obj.obj U),
+        y ∈ Ideal.span (Set.range (fun i ↦ (b i).val U)) →
+        ∀ hy : y ∈ I.sections U.unop,
+          f.val.app U ⟨y, hy⟩ = g.val.app U ⟨y, hy⟩ := by
+      intro y hy
+      induction hy using Submodule.span_induction with
+      | mem y hy =>
+          rcases hy with ⟨i, rfl⟩
+          intro hi
+          exact hgen ⟨i⟩
+      | zero =>
+          intro hzero
+          change f.val.app U 0 = g.val.app U 0
+          simp only [map_zero]
+      | add y z hy hz ihy ihz =>
+          intro hsum
+          change f.val.app U (⟨y, by rw [hs]; exact hy⟩ +
+              ⟨z, by rw [hs]; exact hz⟩) = _
+          rw [map_add, ihy, ihz]
+          exact (map_add (g.val.app U).hom _ _).symm
+      | smul c y hy ih =>
+          intro hprod
+          change f.val.app U (c • ⟨y, by rw [hs]; exact hy⟩) = _
+          rw [map_smul, ih]
+          exact (map_smul (g.val.app U).hom c _).symm
+    exact hind x'.val hx x'.property
+  refine ⟨{ I := ULift.{u} (Fin r), s := s, epi := hπ }, Equiv.ulift, ?_⟩
+  intro i
+  rfl
+
+
+private def overIdeal {R : Sheaf J CommRingCat.{u}} (K : RingedSiteIdeal R) (U : C) :
+    RingedSiteIdeal (R.over U) where
+  sections V := K.sections V.left
+  restriction g a ha := K.restriction g.left a ha
+  local_mem V a S hS ha :=
+    K.local_mem V.left a (Sieve.overEquiv V S) ((J.mem_over_iff S).mp hS)
+      (fun W g hg ↦ ha (Over.mk (g ≫ V.hom)) (Over.homMk g)
+        ((Sieve.overEquiv_iff S g).mp hg))
+
+private theorem ideal_finiteType_of_span {R : Sheaf J CommRingCat.{u}}
+    (K : RingedSiteIdeal R) (r : ℕ)
+    (b : Fin r → (R.obj ⋙ CategoryTheory.forget CommRingCat).sections)
+    (hs : ∀ U : C, K.sections U = Ideal.span (Set.range (fun i ↦ (b i).val (op U)))) :
+    SheafOfModules.IsFiniteType.{u, u, u} K.module := by
+  let bs (U : C) (i : Fin r) :
+      ((R.over U).obj ⋙ CategoryTheory.forget CommRingCat).sections :=
+    { val := fun V ↦ (b i).val (op V.unop.left)
+      property := fun f ↦ (b i).property ((Over.forget U).op.map f) }
+  have hg (U : C) := ideal_generated_global_sections (R.over U) (overIdeal K U)
+    r (bs U) (fun V ↦ hs V.left)
+  let σ (U : C) : (K.module.over U).GeneratingSections := (hg U).choose
+  have hσ (U : C) : (σ U).IsFiniteType := by
+    obtain ⟨e, _⟩ := (hg U).choose_spec
+    exact ⟨Finite.of_equiv (Fin r) e.symm⟩
+  let q : SheafOfModules.LocalGeneratorsData.{u} K.module :=
+    { I := C
+      X := id
+      coversTop := fun _ ↦ GrothendieckTopology.covering_of_eq_top J (by simp)
+      generators := σ }
+  constructor
+  refine ⟨q, ?_⟩
+  exact { isFiniteType := hσ }
+
+private theorem span_subtype_images
+    {A B : Type*} [CommRing A] [CommRing B] (f : A →+* B)
+    (I : Ideal A) {ι : Type*} (a : ι → A) (ha : Ideal.span (Set.range a) = I) :
+    Ideal.span (Set.range (fun x : I ↦ f x)) =
+      Ideal.span (Set.range (fun i ↦ f (a i))) := by
+  have h : Ideal.span (Set.range (fun x : I ↦ f x)) = Ideal.map f I := by
+    unfold Ideal.map
+    congr 1
+    ext x
+    simp only [Set.mem_range, Set.mem_image, SetLike.mem_coe]
+    constructor
+    · rintro ⟨y, rfl⟩
+      exact ⟨y, y.property, rfl⟩
+    · rintro ⟨y, hy, rfl⟩
+      exact ⟨⟨y, hy⟩, rfl⟩
+  rw [h, ← ha, Ideal.map_span]
+  congr 1
+  ext y
+  simp only [Set.mem_image, Set.mem_range]
+  constructor
+  · rintro ⟨z, ⟨i, rfl⟩, rfl⟩
+    exact ⟨i, rfl⟩
+  · rintro ⟨i, rfl⟩
+    exact ⟨a i, ⟨i, rfl⟩, rfl⟩
+
+
+private theorem coefficientKernel_finiteType (A : Type u) [CommRing A] [IsNoetherianRing A]
+    (I : Ideal A) :
+    SheafOfModules.IsFiniteType.{u, u, u} (kernelIdeal (quotient J A I 0)).module := by
+  obtain ⟨r, a, ha⟩ := Submodule.fg_iff_exists_fin_generating_family.mp
+    I.fg_of_isNoetherianRing
+  apply ideal_finiteType_of_span (kernelIdeal (quotient J A I 0)) r
+    (fun i ↦ constantSection (J := J) (a i))
+  intro U
+  have hk : (kernelIdeal (quotient J A I 0)).sections U =
+      RingHom.ker ((quotient J A I 0).hom.app (op U)).hom :=
+    (kernelIdeal_existsUnique (quotient J A I 0)).exists.choose_spec U
+  rw [hk, ((flat_and_quotients J A I).2.2 0 U).2]
+  let f : A →+* (constant J A).obj.obj (op U) :=
+    ((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).app (op U)).hom
+  exact span_subtype_images f (I ^ (0 + 1)) a
+    (by simpa only [Nat.zero_add, pow_one] using ha)
+
+end CoefficientIdeal
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction along the canonical completion map gives the asserted equivalence.
 Source: Stacks 099I and the opening of 099L
 (blueprint: lem-weil-pbc-constant-completion-equivalence).
@@ -270,7 +523,16 @@ theorem equivalence (J : GrothendieckTopology C) (A : Type u) [CommRing A]
         ObjectProperty.FullSubcategory (IsComplete (quotient J A I 0)),
       Nonempty (e.functor ⋙ ObjectProperty.ι (IsComplete (quotient J A I 0)) ≅
         ObjectProperty.ι (IsComplete (projection J A I 0)) ⋙ dres (coefficientMap J A I)) := by
-  sorry
+  let := HasDerivedCategory.standard (Mod (constant J A))
+  let := HasDerivedCategory.standard (Mod (completed J A I))
+  let (U : C) := HasDerivedCategory.standard (Mod ((constant J A).over U))
+  let (U : C) := HasDerivedCategory.standard (Mod ((completed J A I).over U))
+  have h := flat_ringed_ideal_complete_equivalence
+    (coefficientMap J A I) (kernelIdeal (quotient J A I 0))
+    (coefficientKernel_finiteType (J := J) A I) (flat_and_quotients J A I).1
+    (coefficientKernel_quotient (J := J) A I)
+  rw [coefficientKernel_extension (J := J) A I] at h
+  exact h
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -399,12 +661,298 @@ def tensorSection {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) (M : Mod R)
       (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ M)).app U
         (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)
 
+section ScalarTransitions
+variable {R S T : Sheaf J CommRingCat.{u}}
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private def resCompIso (φ : R ⟶ S) (τ : S ⟶ T) (ψ : R ⟶ T) (h : φ ≫ τ = ψ) :
+    res τ ⋙ res φ ≅ res ψ := by
+  subst ψ
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · refine { hom := { val := { app := fun U ↦ ?_, naturality := ?_ } }
+             inv := { val := { app := fun U ↦ ?_, naturality := ?_ } }
+             hom_inv_id := ?_
+             inv_hom_id := ?_ }
+    · exact ModuleCat.ofHom
+        (X := ((res φ).obj ((res τ).obj M)).val.obj U)
+        (Y := ((res (φ ≫ τ)).obj M).val.obj U)
+        { toFun := fun m ↦ m
+          map_add' := fun _ _ ↦ rfl
+          map_smul' := fun _ _ ↦ rfl }
+    · intros; ext; rfl
+    · exact ModuleCat.ofHom
+        (X := ((res (φ ≫ τ)).obj M).val.obj U)
+        (Y := ((res φ).obj ((res τ).obj M)).val.obj U)
+        { toFun := fun m ↦ m
+          map_add' := fun _ _ ↦ rfl
+          map_smul' := fun _ _ ↦ rfl }
+    · intros; ext; rfl
+    · ext; rfl
+    · ext; rfl
+  · intros; ext; rfl
+
+private def transitionLift (φ : R ⟶ S) (τ : S ⟶ T) (ψ : R ⟶ T) (h : φ ≫ τ = ψ)
+    (M : Mod R) : (change φ).obj M ⟶ (res τ).obj ((change ψ).obj M) :=
+  (SheafOfModules.RingedTensor.tensorHomEquiv φ _ _).symm
+    (SheafOfModules.RingedTensor.tensorHomEquiv ψ M _ (𝟙 _) ≫
+      (resCompIso φ τ ψ h).inv.app ((change ψ).obj M))
+
+private theorem transitionLift_one (φ : R ⟶ S) (τ : S ⟶ T) (ψ : R ⟶ T) (h : φ ≫ τ = ψ)
+    (M : Mod R) (U : Cᵒᵖ) (m : M.val.obj U) :
+    (transitionLift φ τ ψ h M).val.app U (tensorSection φ M U 1 m) =
+      tensorSection ψ M U 1 m := by
+  have hh := (SheafOfModules.RingedTensor.tensorHomEquiv φ _ _).apply_symm_apply
+    (SheafOfModules.RingedTensor.tensorHomEquiv ψ M _ (𝟙 _) ≫
+      (resCompIso φ τ ψ h).inv.app ((change ψ).obj M))
+  subst ψ
+  change (transitionLift φ τ (φ ≫ τ) rfl M).val.app U (tensorSection φ M U 1 m) = _
+  exact congrArg (fun k ↦ k.val.app U m) hh
+
+private theorem tensorSection_smul (φ : R ⟶ S) (M : Mod R)
+    (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
+    tensorSection φ M U s m = s • tensorSection φ M U 1 m := by
+  let η := (PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).unit.app
+    (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ M)
+  have h := (η.app U).hom.map_smul s
+    ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)
+  change η.app U ((s * 1) ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m) = _ at h
+  rw [mul_one] at h
+  exact h
+
+private theorem transitionLift_tmul (φ : R ⟶ S) (τ : S ⟶ T) (ψ : R ⟶ T)
+    (h : φ ≫ τ = ψ) (M : Mod R) (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
+    (transitionLift φ τ ψ h M).val.app U (tensorSection φ M U s m) =
+      tensorSection ψ M U (τ.hom.app U s) m := by
+  rw [tensorSection_smul φ, map_smul, transitionLift_one,
+    tensorSection_smul ψ M U (τ.hom.app U s)]
+  rfl
+
+private theorem tensorSection_map (φ : R ⟶ S) {M N : Mod R} (f : M ⟶ N)
+    (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
+    ((change φ).map f).val.app U (tensorSection φ M U s m) =
+      tensorSection φ N U s (f.val.app U m) := by
+  let η := (PresheafOfModules.sheafificationAdjunction (𝟙 (siteModuleRings S).obj)).unit
+  let k : SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ M ⟶
+      SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ N :=
+    { app := fun V ↦ (ModuleCat.extendScalars (φ.hom.app V).hom).map (f.val.app V)
+      naturality := SheafOfModules.changeOfRingsHom_naturality φ M f }
+  have h := congrArg (fun t ↦ t.app U
+    (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] m)) (η.naturality k)
+  change tensorSection φ N U s (f.val.app U m) =
+    ((change φ).map f).val.app U (tensorSection φ M U s m) at h
+  exact h.symm
+
+private theorem restrictedTensor_hom_ext (φ : R ⟶ S) (M : Mod R) (N : Mod R)
+    (f g : (res φ).obj ((change φ).obj M) ⟶ N)
+    (h : ∀ U s m, f.val.app U (tensorSection φ M U s m) =
+      g.val.app U (tensorSection φ M U s m)) : f = g := by
+  apply (SheafOfModules.toSheaf (siteModuleRings R)).map_injective
+  apply ((sheafificationAdjunction J AddCommGrpCat).homEquiv
+    (SheafOfModules.changeOfRingsPresheaf.{u, u, u} φ M).presheaf
+    ((SheafOfModules.toSheaf (siteModuleRings R)).obj N)).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  ext U z
+  induction z using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | tmul s m => exact h U s m
+  | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
+
+private def scalarTransition (φ : R ⟶ S) (τ : S ⟶ T) (ψ : R ⟶ T) (h : φ ≫ τ = ψ) :
+    change φ ⋙ res φ ⟶ change ψ ⋙ res ψ where
+  app M := (res φ).map (transitionLift φ τ ψ h M) ≫
+    (resCompIso φ τ ψ h).hom.app ((change ψ).obj M)
+  naturality M N f := by
+    apply restrictedTensor_hom_ext φ M
+    intro U s m
+    subst ψ
+    change (transitionLift φ τ (φ ≫ τ) rfl N).val.app U
+        (((change φ).map f).val.app U (tensorSection φ M U s m)) =
+      ((change (φ ≫ τ)).map f).val.app U
+        ((transitionLift φ τ (φ ≫ τ) rfl M).val.app U (tensorSection φ M U s m))
+    rw [tensorSection_map, transitionLift_tmul, transitionLift_tmul, tensorSection_map]
+
+private theorem scalarTransition_tmul (φ : R ⟶ S) (τ : S ⟶ T) (ψ : R ⟶ T)
+    (h : φ ≫ τ = ψ) (M : Mod R) (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
+    ((scalarTransition φ τ ψ h).app M).val.app U (tensorSection φ M U s m) =
+      tensorSection ψ M U (τ.hom.app U s) m := by
+  subst ψ
+  exact transitionLift_tmul φ τ (φ ≫ τ) rfl M U s m
+
+private theorem resCompIso_hom_apply (φ : R ⟶ S) (τ : S ⟶ T) (ψ : R ⟶ T)
+    (h : φ ≫ τ = ψ) (M : Mod T) (U : Cᵒᵖ) (m : M.val.obj U) :
+    ((resCompIso φ τ ψ h).hom.app M).val.app U m = m := by
+  subst ψ
+  rfl
+
+private theorem resCompIso_inv_apply (φ : R ⟶ S) (τ : S ⟶ T) (ψ : R ⟶ T)
+    (h : φ ≫ τ = ψ) (M : Mod T) (U : Cᵒᵖ) (m : M.val.obj U) :
+    ((resCompIso φ τ ψ h).inv.app M).val.app U m = m := by
+  subst ψ
+  rfl
+
+end ScalarTransitions
+
+section FiniteComparisons
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+variable {R B S : Sheaf J CommRingCat.{u}}
+
+private theorem scalarLinear_of_kernel_span
+    {R B S : Type u} [CommRing R] [CommRing B] [CommRing S]
+    (φ : R →+* B) (q : R →+* S) (p : B →+* S)
+    (h : p.comp φ = q) (hq : Function.Surjective q)
+    (hk : RingHom.ker p = Ideal.span (φ '' (RingHom.ker q : Set R)))
+    (M : ModuleCat B) (N : ModuleCat S)
+    (f : (ModuleCat.restrictScalars φ).obj M ⟶ (ModuleCat.restrictScalars q).obj N)
+    (b : B) (m : M) : f (b • m) = p b • f m := by
+  have hz (d : B) (hd : d ∈ RingHom.ker p) : ∀ m : M, f (d • m) = 0 := by
+    rw [hk] at hd
+    change d ∈ Submodule.span B (φ '' (RingHom.ker q : Set R)) at hd
+    induction hd using Submodule.span_induction with
+    | mem d hd =>
+      obtain ⟨a, ha, rfl⟩ := hd
+      intro m
+      have hf := f.hom.map_smul a m
+      change f (φ a • m) = q a • f m at hf
+      rw [show q a = 0 from ha, zero_smul] at hf
+      exact hf
+    | zero => intro m; simp only [zero_smul, map_zero]
+    | add d e hd he ihd ihe =>
+      intro m
+      rw [add_smul, map_add, ihd, ihe, add_zero]
+    | smul a d hd ih =>
+      intro m
+      change f ((a * d) • m) = 0
+      rw [mul_comm a d, mul_smul]
+      exact ih (a • m)
+  obtain ⟨a, ha⟩ := hq (p b)
+  have hφ (a : R) : p (φ a) = q a := congrArg (fun f : R →+* S ↦ f a) h
+  have hd : b - φ a ∈ RingHom.ker p := by
+    change p (b - φ a) = 0
+    rw [map_sub, hφ, ha, sub_self]
+  have he := hz (b - φ a) hd m
+  rw [sub_smul, map_sub] at he
+  rw [sub_eq_zero] at he
+  rw [he]
+  have hf := f.hom.map_smul a m
+  change f (φ a • m) = q a • f m at hf
+  exact hf.trans (congrArg (fun s : S ↦ s • f m) ha)
+
+private def quotientRestrictionHomEquiv (φ : R ⟶ B) (q : R ⟶ S) (p : B ⟶ S)
+    (h : φ ≫ p = q)
+    (hq : ∀ U : Cᵒᵖ, Function.Surjective (q.hom.app U))
+    (hk : ∀ U : Cᵒᵖ, RingHom.ker (p.hom.app U).hom =
+      Ideal.span ((φ.hom.app U).hom '' (RingHom.ker (q.hom.app U).hom : Set _)))
+    (M : Mod B) (N : Mod S) :
+    ((res φ).obj M ⟶ (res q).obj N) ≃ (M ⟶ (res p).obj N) where
+  toFun f :=
+    { val :=
+        { app := fun U ↦ ModuleCat.ofHom
+            (X := M.val.obj U) (Y := ((res p).obj N).val.obj U)
+            { toFun := fun m ↦ f.val.app U m
+              map_add' := fun x y ↦ (f.val.app U).hom.map_add x y
+              map_smul' := fun b m ↦ scalarLinear_of_kernel_span
+                (φ.hom.app U).hom (q.hom.app U).hom (p.hom.app U).hom
+                (congrArg (fun t : R ⟶ S ↦ (t.hom.app U).hom) h)
+                (hq U) (hk U) (M.val.obj U) (N.val.obj U) (f.val.app U) b m }
+          naturality := by
+            intro U V i
+            ext m
+            exact congrArg (fun t ↦ t m) (f.val.naturality i) } }
+  invFun g := (res φ).map g ≫ (resCompIso φ p q h).hom.app N
+  left_inv f := by subst q; ext U m; rfl
+  right_inv f := by subst q; ext U m; rfl
+
+private def quotientTensorAdjunction (φ : R ⟶ B) (q : R ⟶ S) (p : B ⟶ S)
+    (h : φ ≫ p = q)
+    (hq : ∀ U : Cᵒᵖ, Function.Surjective (q.hom.app U))
+    (hk : ∀ U : Cᵒᵖ, RingHom.ker (p.hom.app U).hom =
+      Ideal.span ((φ.hom.app U).hom '' (RingHom.ker (q.hom.app U).hom : Set _))) :
+    res φ ⋙ change q ⊣ res p :=
+  Adjunction.mkOfHomEquiv
+    { homEquiv := fun M N ↦ (SheafOfModules.RingedTensor.tensorHomEquiv q _ _).trans
+        (quotientRestrictionHomEquiv φ q p h hq hk M N)
+      homEquiv_naturality_left_symm := by
+        intro M M' N f g
+        change (SheafOfModules.RingedTensor.tensorHomEquiv q _ _).symm
+          ((quotientRestrictionHomEquiv φ q p h hq hk M N).symm (f ≫ g)) = _
+        have hh : (quotientRestrictionHomEquiv φ q p h hq hk M N).symm (f ≫ g) =
+            (res φ).map f ≫ (quotientRestrictionHomEquiv φ q p h hq hk M' N).symm g := by
+          subst q
+          ext U m
+          rfl
+        rw [hh]
+        have hn := (SheafOfModules.RingedTensor.tensorAdjunction q)
+          |>.homEquiv_naturality_left_symm ((res φ).map f)
+            ((quotientRestrictionHomEquiv φ q p h hq hk M' N).symm g)
+        simp only [SheafOfModules.RingedTensor.tensorAdjunction,
+          Adjunction.mkOfHomEquiv_homEquiv] at hn
+        exact hn
+      homEquiv_naturality_right := by
+        intro M N N' f g
+        change (quotientRestrictionHomEquiv φ q p h hq hk M N')
+          (SheafOfModules.RingedTensor.tensorHomEquiv q _ _ (f ≫ g)) = _
+        have hn := (SheafOfModules.RingedTensor.tensorAdjunction q).homEquiv_naturality_right f g
+        simp only [SheafOfModules.RingedTensor.tensorAdjunction,
+          Adjunction.mkOfHomEquiv_homEquiv] at hn
+        rw [hn]
+        rfl }
+
+private theorem quotientTensorIso_exists (φ : R ⟶ B) (q : R ⟶ S) (p : B ⟶ S)
+    (h : φ ≫ p = q)
+    (hq : ∀ U : Cᵒᵖ, Function.Surjective (q.hom.app U))
+    (hk : ∀ U : Cᵒᵖ, RingHom.ker (p.hom.app U).hom =
+      Ideal.span ((φ.hom.app U).hom '' (RingHom.ker (q.hom.app U).hom : Set _))) :
+    ∃! e : res φ ⋙ change q ≅ change p,
+      ∀ (M : Mod B) (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U),
+        (e.hom.app M).val.app U (tensorSection q ((res φ).obj M) U s m) =
+          tensorSection p M U s m := by
+  let adj₁ := quotientTensorAdjunction φ q p h hq hk
+  let adj₂ := SheafOfModules.RingedTensor.tensorAdjunction p
+  let e := Adjunction.leftAdjointUniq adj₁ adj₂
+  have he (M : Mod B) (U : Cᵒᵖ) (m : M.val.obj U) :
+      (e.hom.app M).val.app U (tensorSection q ((res φ).obj M) U 1 m) =
+        tensorSection p M U 1 m := by
+    have he := congrArg (fun t : M ⟶ (res p).obj ((change p).obj M) ↦ t.val.app U m)
+      (Adjunction.homEquiv_leftAdjointUniq_hom_app adj₁ adj₂ M)
+    change ((quotientRestrictionHomEquiv φ q p h hq hk M ((change p).obj M))
+      (SheafOfModules.RingedTensor.tensorHomEquiv q ((res φ).obj M) _ (e.hom.app M))).val.app
+        U m = _ at he
+    change (e.hom.app M).val.app U (tensorSection q ((res φ).obj M) U 1 m) =
+      tensorSection p M U 1 m at he
+    exact he
+  have ht (M : Mod B) (U : Cᵒᵖ) (s : S.obj.obj U) (m : M.val.obj U) :
+      (e.hom.app M).val.app U (tensorSection q ((res φ).obj M) U s m) =
+        tensorSection p M U s m := by
+    rw [tensorSection_smul q, map_smul, he, tensorSection_smul p M U s m]
+  refine ⟨e, ht, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply (SheafOfModules.RingedTensor.tensorHomEquiv q ((res φ).obj M) _).injective
+  ext U m
+  exact (he' M U 1 m).trans (ht M U 1 m).symm
+
+end FiniteComparisons
+
+-- Subsequent proofs use the section formulas instead of reducing these constructions.
+attribute [irreducible] resCompIso transitionLift scalarTransition
+  quotientRestrictionHomEquiv quotientTensorAdjunction
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The finite comparison before localization, uniquely fixed on sheafified pure tensors.
 Source: Stacks 099L, 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence).
-Proof: both tensors are the cokernel of the same finite row of multiplication maps on M,
-namely the monomials generating I^(n+1). Thus the formula sends s tensor m to itself
-and is invertible, S_n-linear, natural in M and compatible with all quotient transitions.
-Pure tensors generate after sheafification, proving uniqueness. -/
+Proof: the finite quotients have the same kernel after extending the constant ideal.
+Consequently restriction-linear maps to a finite-quotient module are completion-linear.
+The two tensor functors are therefore left adjoints to the same restriction functor.
+Uniqueness of left adjoints gives the comparison, and the adjunction unit gives its
+pure-tensor formula. The formula on tensors with first factor one determines it uniquely. -/
 theorem finiteComparison_existsUnique (J : GrothendieckTopology C) (A : Type u)
     [CommRing A] [IsNoetherianRing A] (I : Ideal A) (n : ℕ) :
     ∃! e : res (coefficientMap J A I) ⋙ change (quotient J A I n) ≅
@@ -414,7 +962,16 @@ theorem finiteComparison_existsUnique (J : GrothendieckTopology C) (A : Type u)
         (e.hom.app M).val.app U
           (tensorSection (quotient J A I n) ((res (coefficientMap J A I)).obj M) U s m) =
             tensorSection (projection J A I n) M U s m := by
-  sorry
+  apply quotientTensorIso_exists (coefficientMap J A I) (quotient J A I n)
+    (projection J A I n)
+  · exact limit.lift_π (quotientCone J A I) (op n)
+  · intro U
+    exact ((flat_and_quotients J A I).2.2 n U.unop).1
+  · intro U
+    rw [← Ideal.map_span, Ideal.span_eq,
+      ((flat_and_quotients J A I).2.2 n U.unop).2, Ideal.map_span, ← Set.range_comp']
+    exact ((flat_and_quotients J A I).2.1 n U.unop).2
+
 
 /-- The canonical finite comparison, with its pure-tensor normalization fixed uniquely.
 Source: Stacks 099L (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -497,7 +1054,25 @@ theorem reductionStep_existsUnique (b : Bool) (n : ℕ) :
         (t.app M).val.app U (tensorSection (finiteMap J A I b (n + 1)) M U s m) =
           tensorSection (finiteMap J A I b n) M U
             ((transition J A I n).hom.app U s) m := by
-  sorry
+  have h : finiteMap J A I b (n + 1) ≫ transition J A I n = finiteMap J A I b n := by
+    cases b with
+    | false =>
+      simpa only [finiteMap, Functor.const_obj_map, Functor.const_obj_obj,
+        Category.id_comp, finiteSystem,
+        Functor.ofOpSequence_map_homOfLE_succ, Category.id_comp] using (quotient_step J A I n).symm
+    | true =>
+      simpa only [finiteMap, projection, finiteSystem,
+        Functor.ofOpSequence_map_homOfLE_succ] using
+          limit.w (finiteSystem J A I) (homOfLE (Nat.le_succ n)).op
+  let t := scalarTransition (finiteMap J A I b (n + 1)) (transition J A I n)
+    (finiteMap J A I b n) h
+  refine ⟨t, scalarTransition_tmul _ _ _ h, ?_⟩
+  intro t' ht'
+  apply NatTrans.ext
+  funext M
+  apply restrictedTensor_hom_ext (finiteMap J A I b (n + 1)) M
+  intro U s m
+  exact (ht' M U s m).trans (scalarTransition_tmul _ _ _ h M U s m).symm
 
 /-- The actual finite quotient transition with its uniquely specified tensor formula.
 Source: Stacks 099L (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -1025,6 +1600,8 @@ def tresFactors {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
   letI := (siteRestrictScalars_exact φ).2
   (tres φ).mapDerivedCategoryFactors.symm
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The finite comparisons form a strict tower isomorphism, with all quotient transitions.
 The normalization identifies each component with the S_n-linear comparison above.
 Source: Stacks 099L, 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence).
@@ -1039,7 +1616,78 @@ theorem reductionTowerComparison_existsUnique (J : GrothendieckTopology C) (A : 
         (x : ((change (quotient J A I n)).obj ((res (coefficientMap J A I)).obj M)).val.obj U),
         ((e.hom.app M).app (op n)).val.app U x =
           ((finiteComparison J A I n).hom.app M).val.app U x := by
-  sorry
+  let φ := coefficientMap J A I
+  have hφ (n : ℕ) : φ ≫ projection J A I n = quotient J A I n := by
+    exact limit.lift_π (quotientCone J A I) (op n)
+  let en (n : ℕ) : res φ ⋙ reduction J A I false n ≅
+      reduction J A I true n ⋙ res φ :=
+    Functor.isoWhiskerRight (finiteComparison J A I n) (res (quotient J A I n)) ≪≫
+      Functor.isoWhiskerLeft (change (projection J A I n))
+        (resCompIso φ (projection J A I n) (quotient J A I n) (hφ n)).symm
+  have hen (n : ℕ) (M : Mod (completed J A I)) (U : Cᵒᵖ)
+      (x : ((change (quotient J A I n)).obj ((res φ).obj M)).val.obj U) :
+      ((en n).hom.app M).val.app U x =
+        ((finiteComparison J A I n).hom.app M).val.app U x := by
+    change ((resCompIso φ (projection J A I n) (quotient J A I n) (hφ n)).inv.app
+      ((change (projection J A I n)).obj M)).val.app U
+        (((finiteComparison J A I n).hom.app M).val.app U x) = _
+    exact resCompIso_inv_apply φ (projection J A I n) (quotient J A I n) (hφ n)
+      ((change (projection J A I n)).obj M) U
+      (((finiteComparison J A I n).hom.app M).val.app U x)
+  have hfinite (n : ℕ) (M : Mod (completed J A I)) (U : Cᵒᵖ)
+      (s : (finite J A I n).obj.obj U) (m : M.val.obj U) :
+      ((finiteComparison J A I n).hom.app M).val.app U
+          (tensorSection (quotient J A I n) ((res φ).obj M) U s m) =
+        tensorSection (projection J A I n) M U s m :=
+    (finiteComparison_existsUnique J A I n).exists.choose_spec M U s m
+  clear_value en
+  have hstep (M : Mod (completed J A I)) (n : ℕ) :
+      ((reductionTower J A I false).obj ((res φ).obj M)).map
+          (homOfLE (Nat.le_succ n)).op ≫ (en n).hom.app M =
+        (en (n + 1)).hom.app M ≫
+          ((tres φ).obj ((reductionTower J A I true).obj M)).map
+            (homOfLE (Nat.le_succ n)).op := by
+    simp only [reductionTower, tres, Functor.whiskeringRight_obj_obj,
+      Functor.comp_map, Functor.flip_obj_map,
+      Functor.ofOpSequence_map_homOfLE_succ]
+    apply restrictedTensor_hom_ext (quotient J A I (n + 1)) ((res φ).obj M)
+    intro U s m
+    change ((en n).hom.app M).val.app U
+        (((reductionStep J A I false n).app ((res φ).obj M)).val.app U
+          (tensorSection (quotient J A I (n + 1)) ((res φ).obj M) U s m)) =
+      ((reductionStep J A I true n).app M).val.app U
+        (((en (n + 1)).hom.app M).val.app U
+          (tensorSection (quotient J A I (n + 1)) ((res φ).obj M) U s m))
+    rw [hen, hen, hfinite]
+    rw [show ((reductionStep J A I false n).app ((res φ).obj M)).val.app U
+        (tensorSection (quotient J A I (n + 1)) ((res φ).obj M) U s m) =
+      tensorSection (quotient J A I n) ((res φ).obj M) U
+        ((transition J A I n).hom.app U s) m from
+          (reductionStep_existsUnique J A I false n).exists.choose_spec _ U s m]
+    rw [hfinite]
+    exact ((reductionStep_existsUnique J A I true n).exists.choose_spec M U s m).symm
+  let e : res φ ⋙ reductionTower J A I false ≅
+      reductionTower J A I true ⋙ tres φ :=
+    NatIso.ofComponents
+      (fun M ↦ NatIso.ofComponents (fun n ↦ (en n.unop).app M)
+        (fun f ↦ (NatTrans.ofOpSequence
+          (F := (reductionTower J A I false).obj ((res φ).obj M))
+          (G := (tres φ).obj ((reductionTower J A I true).obj M))
+          (fun n ↦ (en n).hom.app M) (hstep M)).naturality f))
+      (by
+        intro M N f
+        apply NatTrans.ext
+        funext n
+        exact (en n.unop).hom.naturality f)
+  refine ⟨e, fun M n U x ↦ hen n M U x, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply NatTrans.ext
+  funext n
+  ext U x
+  exact (he' M n.unop U x).trans (hen n.unop M U x).symm
 
 /-- The strict tower comparison with the prescribed S_n-linear finite components.
 Source: Stacks 099L (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -1232,6 +1880,165 @@ def limitRestriction {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
       (tres φ).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ ordinaryLimit R :=
   (limitRestriction_existsUnique φ).exists.choose
 
+section ExactScalarExtension
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+/-- The proved extension-tensor comparison, selected once for each module. -/
+private def extensionTensorComponent {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
+    (M : Mod R) :
+    (SheafOfModules.monoidalCategory R).tensorObj
+      ((res φ).obj (SheafOfModules.unit (siteModuleRings B))) M ≅
+        (res φ).obj ((change φ).obj M) :=
+  (SheafOfModules.exists_extensionTensorComparison φ M).choose
+
+/-- Its section formula is the original balanced tensor map. -/
+private theorem extensionTensorComponent_pure {R B : Sheaf J CommRingCat.{u}}
+    (φ : R ⟶ B) (M : Mod R) (U : Cᵒᵖ) (s : B.obj.obj U) (m : M.val.obj U) :
+    (extensionTensorComponent φ M).hom.val.app U
+        (SheafOfModules.RingedTensor.pure R
+          ((res φ).obj (SheafOfModules.unit (siteModuleRings B))) M U s m) =
+      tensorSection φ M U s m :=
+  (SheafOfModules.exists_extensionTensorComparison φ M).choose_spec U s m
+
+attribute [irreducible] extensionTensorComponent
+
+/-- The pure-tensor comparison is natural in the module argument.
+Source: Stacks 03EK; the component is exists_extensionTensorComparison. -/
+private def extensionTensorIso {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
+    letI := SheafOfModules.monoidalCategory R
+    MonoidalCategory.tensorLeft ((res φ).obj (SheafOfModules.unit (siteModuleRings B))) ≅
+      change φ ⋙ res φ := by
+  letI := SheafOfModules.monoidalCategory R
+  let N := (res φ).obj (SheafOfModules.unit (siteModuleRings B))
+  refine NatIso.ofComponents (extensionTensorComponent φ) ?_
+  intro M M' f
+  apply SheafOfModules.RingedTensor.pure_hom_ext R N M
+  intro U s m
+  change (extensionTensorComponent φ M').hom.val.app U
+      ((MonoidalCategory.whiskerLeft N f).val.app U
+        (SheafOfModules.RingedTensor.pure R N M U s m)) =
+    ((change φ).map f).val.app U
+      ((extensionTensorComponent φ M).hom.val.app U
+        (SheafOfModules.RingedTensor.pure R N M U s m))
+  rw [← MonoidalCategory.id_tensorHom, SheafOfModules.RingedTensor.pure_map]
+  change (extensionTensorComponent φ M').hom.val.app U
+      (SheafOfModules.RingedTensor.pure R N M' U s (f.val.app U m)) = _
+  rw [extensionTensorComponent_pure, extensionTensorComponent_pure]
+  exact (tensorSection_map φ f U s m).symm
+
+/-- Flatness of the target ring makes scalar extension exact.
+Source: Stacks 03EK. Identify its restriction with tensoring by the flat target,
+reflect finite limits through restriction, and use the extension adjunction for colimits. -/
+private theorem change_exact {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
+    (hflat : SheafOfModules.IsFlat
+      ((res φ).obj (SheafOfModules.unit (siteModuleRings B)))) :
+    PreservesFiniteLimits (change φ) ∧ PreservesFiniteColimits (change φ) := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let N := (res φ).obj (SheafOfModules.unit (siteModuleRings B))
+  have : PreservesFiniteLimits (MonoidalCategory.tensorRight N) := hflat.1
+  have : PreservesFiniteLimits (MonoidalCategory.tensorLeft N) :=
+    preservesFiniteLimits_of_natIso
+      (BraidedCategory.tensorLeftIsoTensorRight N).symm
+  have : PreservesFiniteLimits (change φ ⋙ res φ) :=
+    preservesFiniteLimits_of_natIso (extensionTensorIso φ)
+  have : (res φ).ReflectsIsomorphisms := siteRestrictScalars_reflectsIsomorphisms φ
+  have : PreservesFiniteLimits (res φ) := (siteRestrictScalars_exact φ).1
+  have : ReflectsFiniteLimits (res φ) :=
+    { reflects := fun K _ _ ↦ reflectsLimitsOfShape_of_reflectsIsomorphisms }
+  have hleft : PreservesFiniteLimits (change φ) :=
+    preservesFiniteLimits_of_reflects_of_preserves (change φ) (res φ)
+  have : PreservesColimitsOfSize.{0, 0} (change φ) :=
+    (SheafOfModules.RingedTensor.tensorAdjunction φ).leftAdjoint_preservesColimits
+  have hright : PreservesFiniteColimits (change φ) := inferInstance
+  exact ⟨hleft, hright⟩
+
+end ExactScalarExtension
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The exact restriction/limit square derives by the tower adjunction.
+The abstract ring parameters prevent elaboration from unfolding a completion limit. -/
+private theorem derivedLimitRestriction_of_flat {R B : Sheaf J CommRingCat.{u}}
+    (φ : R ⟶ B) (hflat : SheafOfModules.IsFlat
+      ((res φ).obj (SheafOfModules.unit (siteModuleRings B)))) :
+    ∃ e : rlim B ⋙ dres φ ≅
+        tdres φ ⋙ rlim R,
+      ∀ P : CochainComplex (ℕᵒᵖ ⥤ Mod B) ℤ,
+        (dres φ).map ((limitComparison B).app P) ≫
+          e.hom.app ((TQ B).obj P) =
+        (resFactors φ).inv.app
+            ((ordinaryLimit B).obj P) ≫
+          (Q R).map ((limitRestriction φ).hom.app P) ≫
+          (limitComparison R).app
+            (((tres φ).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ≫
+          (rlim R).map ((tresFactors φ).hom.app P) := by
+  let := HasDerivedCategory.standard (Mod R)
+  let := HasDerivedCategory.standard (Mod B)
+  let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod R)
+  let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod B)
+  have : IsGrothendieckAbelian.{u} (ℕᵒᵖ ⥤ Mod B) := by
+    have := smallModuleDiagrams_isGrothendieckAbelian J (siteModuleRings B)
+      (ULiftHom.{u} (ULift.{u} ℕᵒᵖ))
+    exact IsGrothendieckAbelian.of_equivalence
+      (ULiftHomULiftCategory.equiv.{u, u} ℕᵒᵖ).congrLeft.symm
+  have hex := change_exact φ hflat
+  have : PreservesFiniteLimits (change φ) := hex.1
+  have : PreservesFiniteColimits (change φ) := hex.2
+  let E := (Functor.whiskeringRight ℕᵒᵖ (Mod R) (Mod B)).obj (change φ)
+  have : E.Additive := inferInstance
+  have : PreservesFiniteLimits E := ⟨fun K _ _ ↦ inferInstance⟩
+  have : PreservesFiniteColimits E := ⟨fun K _ _ ↦ inferInstance⟩
+  have : E.PreservesHomology := {}
+  have adj : E ⊣ tres φ :=
+    Adjunction.whiskerRight ℕᵒᵖ (SheafOfModules.RingedTensor.tensorAdjunction φ)
+  have : (tres φ).PreservesKInjectiveComplexes := adj.preservesKInjectiveComplexes
+  have : PreservesLimitsOfSize.{u, u} (res φ) := siteRestrictScalars_preservesLimits φ
+  have : PreservesLimitsOfSize.{0, 0} (res φ) := preservesLimitsOfSize_shrink (res φ)
+  have : (lim : (ℕᵒᵖ ⥤ Mod B) ⥤ Mod B).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  have : (lim : (ℕᵒᵖ ⥤ Mod R) ⥤ Mod R).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  let c : (lim : (ℕᵒᵖ ⥤ Mod B) ⥤ Mod B) ⋙ res φ ≅
+      tres φ ⋙ (lim : (ℕᵒᵖ ⥤ Mod R) ⥤ Mod R) := preservesLimitNatIso (res φ)
+  obtain ⟨e, he⟩ := towerComparison_existsLimitIso (res φ) (dres φ) (tdres φ)
+    (rlim B) (rlim R) (resFactors φ).hom (tresFactors φ).hom
+    (limitComparison B) (limitComparison R)
+    (fun _ _ ↦ inferInstance) (fun _ _ ↦ inferInstance)
+    (strictLimit B).computation
+    (fun P hP ↦ by
+      have := hP
+      change IsIso ((limitComparison R).app
+        (((tres φ).mapHomologicalComplex (.up ℤ)).obj P))
+      exact (strictLimit R).computation _ inferInstance) c
+  refine ⟨e, ?_⟩
+  intro P
+  have h := he P
+  have hc : (NatTrans.mapHomologicalComplex c.hom (.up ℤ)).app P =
+      (limitRestriction φ).hom.app P := by
+    apply HomologicalComplex.hom_ext
+    intro q
+    apply limit.hom_ext
+    intro n
+    change c.hom.app (P.X q) ≫ limit.π _ n = _
+    exact (preservesLimitIso_hom_π (res φ) (P.X q) n).trans
+      ((limitRestriction_existsUnique φ).exists.choose_spec P q n.unop).symm
+  rw [hc] at h
+  apply (cancel_epi ((resFactors φ).hom.app ((ordinaryLimit B).obj P))).mp
+  change (resFactors φ).hom.app ((ordinaryLimit B).obj P) ≫
+      (dres φ).map ((limitComparison B).app P) ≫ e.hom.app ((TQ B).obj P) =
+    (resFactors φ).hom.app ((ordinaryLimit B).obj P) ≫
+      (resFactors φ).inv.app ((ordinaryLimit B).obj P) ≫
+        (Q R).map ((limitRestriction φ).hom.app P) ≫
+          (limitComparison R).app (((tres φ).mapHomologicalComplex (.up ℤ)).obj P) ≫
+            (rlim R).map ((tresFactors φ).hom.app P)
+  rw [Iso.hom_inv_id_app_assoc]
+  exact h
+
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction identifies total right derived limits of strict towers, canonically.
 The comparison is normalized by the ordinary limit coordinate comparison and both
 right-derived universal transformations. Source: Stacks 0940 and 0A07
@@ -1254,12 +2061,27 @@ theorem derivedLimitRestriction (J : GrothendieckTopology C) (A : Type u) [CommR
           (limitComparison (constant J A)).app
             (((tres (coefficientMap J A I)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ≫
           (rlim (constant J A)).map ((tresFactors (coefficientMap J A I)).hom.app P) := by
-  sorry
+  exact derivedLimitRestriction_of_flat (coefficientMap J A I)
+    (flat_and_quotients J A I).1
 
 /-- Forget a module sheaf to its underlying sheaf of sets.
 Source: Stacks 03D2 (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
 abbrev underlying (O : Sheaf J CommRingCat.{u}) : Mod O ⥤ Sheaf J (Type u) :=
   SheafOfModules.toSheaf (siteModuleRings O) ⋙ sheafCompose J (forget AddCommGrpCat)
+
+/-- A sheaf map with a fixed section formula is unique. -/
+private theorem sheaf_map_existsUnique_of_formula {X Y : Sheaf J (Type u)}
+    (q : X ⟶ Y) (f : ∀ U : Cᵒᵖ, X.obj.obj U → Y.obj.obj U)
+    (hq : ∀ U x, q.hom.app U x = f U x) :
+    ∃! q' : X ⟶ Y, ∀ U x, q'.hom.app U x = f U x := by
+  refine ⟨q, hq, ?_⟩
+  intro q' hq'
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext U
+  apply ConcreteCategory.hom_ext
+  intro m
+  exact (hq' U m).trans (hq U m).symm
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -1271,18 +2093,10 @@ theorem insertion_existsUnique {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) (M
     ∃! q : (underlying R).obj M ⟶ (underlying S).obj ((change φ).obj M),
       ∀ (U : Cᵒᵖ) (m : M.val.obj U), q.hom.app U m = tensorSection φ M U 1 m := by
   let η := (scalarExtensionUnit_exists J φ).choose
-  let q : (underlying R).obj M ⟶ (underlying S).obj ((change φ).obj M) :=
-    (underlying R).map (η.app M)
-  refine ⟨q, ?_, ?_⟩
-  · intro U m
-    exact (scalarExtensionUnit_exists J φ).choose_spec M U m
-  intro q' hq'
-  apply Sheaf.hom_ext
-  apply NatTrans.ext
-  funext U
-  apply ConcreteCategory.hom_ext
-  intro m
-  exact (hq' U m).trans ((scalarExtensionUnit_exists J φ).choose_spec M U m).symm
+  exact sheaf_map_existsUnique_of_formula
+    ((underlying R).map (η.app M))
+    (fun U m ↦ tensorSection φ M U 1 m)
+    ((scalarExtensionUnit_exists J φ).choose_spec M)
 
 /-- The actual scalar-extension insertion, including sheafification.
 Source: Stacks 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -1395,34 +2209,42 @@ def pull {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
+/-- Addition transport and underlying naturality make the algebraic module lift additive.
+Abstracting the lift avoids repeatedly reducing the full inverse-image data record. -/
+private theorem algebraModules_additive {R : Sheaf J CommRingCat.{u}}
+    {RI : Sheaf J' CommRingCat.{u}}
+    (AI : SheafOfModules.AlgebraicInverseImage L R RI) : AI.modules.Additive := by
+  constructor
+  intro M N f g
+  ext U x
+  let e := AI.moduleUnderlying
+  let y := (e.hom.app M).hom.app U x
+  have hy : (e.inv.app M).hom.app U y = x :=
+    congrFun (congrArg (fun t ↦ t.hom.app U) (e.hom_inv_id_app M)) x
+  have hn (k : M ⟶ N) :
+      (e.inv.app N).hom.app U ((L.map ((underlying R).map k)).hom.app U y) =
+        (AI.modules.map k).val.app U x := by
+    have hh := congrFun
+      (congrArg (fun t ↦ t.hom.app U) (e.inv.naturality k)) y
+    change _ = (AI.modules.map k).val.app U
+      ((e.inv.app M).hom.app U y) at hh
+    exact hh.trans (congrArg ((AI.modules.map k).val.app U) hy)
+  have h := AI.moduleAdd N ((underlying R).obj M)
+    ((underlying R).map f) ((underlying R).map g) ((underlying R).map (f + g))
+    (fun _ _ ↦ rfl) U y
+  exact (hn (f + g)).symm.trans
+    (h.trans (congrArg₂ (fun (a b : (AI.modules.obj N).val.obj U) ↦ a + b)
+      (hn f) (hn g)))
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- This prescribed module pullback is additive.
 Source: Stacks 03D2 (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: the algebraic inverse-image lift preserves addition by its generalized-section
 moduleAdd identity. The scalar-extension functor is additive, hence so is their composite. -/
 theorem pull_additive {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
     (c : F.rings.obj R ⟶ S) : (pull F c).Additive := by
-  have hm : (F.algebra R).modules.Additive := by
-    constructor
-    intro M N f g
-    ext U x
-    let e := (F.algebra R).moduleUnderlying
-    let y := (e.hom.app M).hom.app U x
-    have hy : (e.inv.app M).hom.app U y = x :=
-      congrFun (congrArg (fun t ↦ t.hom.app U) (e.hom_inv_id_app M)) x
-    have hn (k : M ⟶ N) :
-        (e.inv.app N).hom.app U ((L.map ((underlying R).map k)).hom.app U y) =
-          ((F.algebra R).modules.map k).val.app U x := by
-      have hh := congrFun
-        (congrArg (fun t ↦ t.hom.app U) (e.inv.naturality k)) y
-      change _ = ((F.algebra R).modules.map k).val.app U
-        ((e.inv.app M).hom.app U y) at hh
-      exact hh.trans (congrArg (((F.algebra R).modules.map k).val.app U) hy)
-    have h := (F.algebra R).moduleAdd N ((underlying R).obj M)
-      ((underlying R).map f) ((underlying R).map g) ((underlying R).map (f + g))
-      (fun _ _ ↦ rfl) U y
-    exact (hn (f + g)).symm.trans
-      (h.trans (congrArg₂ (fun (a b : ((F.algebra R).modules.obj N).val.obj U) ↦ a + b)
-        (hn f) (hn g)))
+  have := algebraModules_additive (F.algebra R)
   change ((F.algebra R).modules ⋙ change c).Additive
   infer_instance
 
@@ -1468,33 +2290,36 @@ private theorem kan_precomp
   have fac (s : Functor.RightExtension (P ⋙ Q) (P ⋙ G)) :
       Functor.whiskerLeft (P ⋙ Q) (lift s) ≫
         ((Functor.associator P Q T).hom ≫ Functor.whiskerLeft P ε) = s.hom := by
-    apply NatTrans.ext
-    funext X
-    have h := congrArg (fun t ↦ t.app (P.obj X))
-      (T.liftOfIsRightKanExtension_fac ε s.left
-        (K.preimage ((Functor.associator P Q s.left).inv ≫ s.hom)))
-    have hp := congrArg (fun t ↦ t.app X)
-      (K.map_preimage ((Functor.associator P Q s.left).inv ≫ s.hom))
-    change (lift s).app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) = _
-    rw [Category.id_comp]
-    exact (h.trans hp).trans (Category.id_comp _)
+    as_aux_lemma =>
+      apply NatTrans.ext
+      funext X
+      have h := congrArg (fun t ↦ t.app (P.obj X))
+        (T.liftOfIsRightKanExtension_fac ε s.left
+          (K.preimage ((Functor.associator P Q s.left).inv ≫ s.hom)))
+      have hp := congrArg (fun t ↦ t.app X)
+        (K.map_preimage ((Functor.associator P Q s.left).inv ≫ s.hom))
+      change (lift s).app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) = _
+      rw [Category.id_comp]
+      exact (h.trans hp).trans (Category.id_comp _)
+  clear_value lift
   refine ⟨⟨IsTerminal.ofUniqueHom
     (fun s ↦ CostructuredArrow.homMk (lift s) (fac s)) ?_⟩⟩
-  intro s m
-  apply CostructuredArrow.hom_ext
-  apply T.hom_ext_of_isRightKanExtension ε
-  apply K.map_injective
-  have h := CostructuredArrow.w m
-  apply NatTrans.ext
-  funext X
-  have h' := congrArg (fun t ↦ t.app X) h
-  have h'' := congrArg (fun t ↦ t.app X) (fac s)
-  have hh := h'.trans h''.symm
-  change m.left.app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) = _ at hh
-  rw [Category.id_comp] at hh
-  change _ = (lift s).app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) at hh
-  rw [Category.id_comp] at hh
-  exact hh
+  as_aux_lemma =>
+    intro s m
+    apply CostructuredArrow.hom_ext
+    apply T.hom_ext_of_isRightKanExtension ε
+    apply K.map_injective
+    have h := CostructuredArrow.w m
+    apply NatTrans.ext
+    funext X
+    have h' := congrArg (fun t ↦ t.app X) h
+    have h'' := congrArg (fun t ↦ t.app X) (fac s)
+    have hh := h'.trans h''.symm
+    change m.left.app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) = _ at hh
+    rw [Category.id_comp] at hh
+    change _ = (lift s).app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) at hh
+    rw [Category.id_comp] at hh
+    exact hh
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -1512,6 +2337,43 @@ private theorem kan_change
   exact (Functor.isRightKanExtension_iff_of_iso₂
     (Functor.whiskerRight i.inv T ≫ ε)
     (Functor.whiskerRight i.inv T ≫ ε ≫ j.hom) j (Iso.refl T) (by simp)).1 hε
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Transport a homotopy-level derived counit to complexes, with abstract categories.
+The quotient comparison is invertible, so the transport preserves every computation
+component that is already an isomorphism. -/
+private theorem cochain_derived_counit
+    {A₀ B₀ : Type*} [Category A₀] [Category B₀] [Abelian A₀] [Abelian B₀]
+    [HasDerivedCategory A₀] [HasDerivedCategory B₀]
+    (E : A₀ ⥤ B₀) [E.Additive]
+    (T : DerivedCategory A₀ ⥤ DerivedCategory B₀)
+    (ε : DerivedCategory.Qh ⋙ T ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    [T.IsRightKanExtension ε] :
+    ∃ β : DerivedCategory.Q ⋙ T ⟶
+        E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q,
+      T.IsRightKanExtension β ∧
+        ∀ P : CochainComplex A₀ ℤ,
+          IsIso (ε.app ((HomotopyCategory.quotient A₀ (.up ℤ)).obj P)) →
+            IsIso (β.app P) := by
+  let q := HomotopyCategory.quotient A₀ (.up ℤ)
+  let H := E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  let α := (Functor.associator q DerivedCategory.Qh T).hom ≫ Functor.whiskerLeft q ε
+  have : T.IsRightKanExtension α := kan_precomp q DerivedCategory.Qh T H ε
+  let i := DerivedCategory.quotientCompQhIso A₀
+  let j : q ⋙ H ≅ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (E.mapHomotopyCategoryFactors (.up ℤ)) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso B₀)
+  let β : DerivedCategory.Q ⋙ T ⟶
+      E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    Functor.whiskerRight i.inv T ≫ α ≫ j.hom
+  refine ⟨β, kan_change T i j α, ?_⟩
+  intro P hP
+  have := hP
+  dsimp [β, α]
+  infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -1540,27 +2402,11 @@ theorem derivedPull_exists (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L
   have : T.IsRightKanExtension ε :=
     Functor.IsLeftDerivedFunctor.isRightKanExtension T ε
       (HomotopyCategory.quasiIso (Mod R) (.up ℤ))
-  let q := HomotopyCategory.quotient (Mod R) (.up ℤ)
-  let H := (pull F c).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
-  let α := (Functor.associator q DerivedCategory.Qh T).hom ≫ Functor.whiskerLeft q ε
-  have : T.IsRightKanExtension α := kan_precomp q DerivedCategory.Qh T H ε
-  let i := DerivedCategory.quotientCompQhIso (Mod R)
-  let j : q ⋙ H ≅ (pull F c).mapHomologicalComplex (.up ℤ) ⋙ Q S :=
-    (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight ((pull F c).mapHomotopyCategoryFactors (.up ℤ)) _ ≪≫
-      Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso (Mod S))
-  let β : Q R ⋙ T ⟶ (pull F c).mapHomologicalComplex (.up ℤ) ⋙ Q S :=
-    Functor.whiskerRight i.inv T ≫ α ≫ j.hom
-  have hβ : T.IsRightKanExtension β := kan_change T i j α
-  refine ⟨{ functor := T
-            comparison := β
-            universal := ⟨hβ⟩
-            computation := ?_ }⟩
-  intro P hp hf
-  have := hc P hp hf
-  dsimp [β, α]
-  infer_instance
+  obtain ⟨β, hβ, hcomp⟩ := cochain_derived_counit (pull F c) T ε
+  exact ⟨{ functor := T
+           comparison := β
+           universal := ⟨hβ⟩
+           computation := fun P hp hf ↦ hcomp P (hc P hp hf) }⟩
 
 variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [hL : PreservesFiniteLimits L]
