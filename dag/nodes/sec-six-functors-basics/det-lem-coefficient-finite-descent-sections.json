@@ -23,11 +23,12 @@
  ],
  "proof": [
   {
-   "text": "First work with sheaves of sets. Put $P(U)=\\varinjlim_\\alpha\\mathcal F_\\alpha(U)$. The sectionwise-colimit theorem makes $P$ the presheaf colimit. By the sheafification adjunction, $P^\\#$ is the sheaf colimit: a map from $P^\\#$ to any sheaf is exactly a compatible family of maps from the $\\mathcal F_\\alpha$. Concretely $P(U)$ is the disjoint union of the $\\mathcal F_\\alpha(U)$ modulo eventual equality. Filteredness makes the relation 'equal after mapping to a common stage' transitive: take a common cocone on the finitely many stages and arrows witnessing two successive equalities. Thus each element has a stage representative and equality of representatives is witnessed at a common stage. This also explains every use of a common stage below, for a filtered category as well as for a directed poset.",
+   "text": "First work with sheaves of sets. Put $P(U)=\\varinjlim_\\alpha\\mathcal F_\\alpha(U)$. The sectionwise-colimit theorem makes $P$ the presheaf colimit. By the sheafification adjunction, $P^\\#$ is the sheaf colimit: a map from $P^\\#$ to any sheaf is exactly a compatible family of maps from the $\\mathcal F_\\alpha$. Concretely $P(U)$ is the disjoint union of the $\\mathcal F_\\alpha(U)$ modulo eventual equality. Filteredness makes the relation 'equal after mapping to a common stage' transitive: take a common cocone on the finitely many stages and arrows witnessing two successive equalities. Thus each element has a stage representative and equality of representatives is witnessed at a common stage. This also explains every use of a common stage below, for a filtered category as well as for a directed poset. In Lean, presheaf_colimit constructs this comparison from Sheaf.isColimitSheafifyCocone and identifies its legs. The proved larger-universe set-sheafification theorem supplies local injectivity and local surjectivity for the value universe max(u+1,v). Mathlib Types.FilteredColimit supplies representatives and eventual equality, including the same-stage version that equalizes parallel arrows.",
    "uses": [
     "lem-weil-pbc-presheaf-colimits-sectionwise",
     "def-weil-pbc-sheafification",
-    "def-weil-pbc-category-colimit"
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-large-set-sheafification"
    ],
    "elementary": true,
    "source": {
@@ -36,7 +37,7 @@
    }
   },
   {
-   "text": "Every covering of a quasi-compact object $T$ admits a finite affine refinement. Indeed choose finitely many affine opens covering $T$; over each one use the finite affine refinement in the definition of a pro-étale covering, and take the finite union of the resulting families. The composite family is a covering by the site axioms. No assertion about the quasi-compactness of overlaps is made here.",
+   "text": "First suppose T is affine. Extract a pro-etale precoverage family inside the given covering sieve and its QuasiCompactCover certificate. Apply QuasiCompactCover.exists_hom to obtain a finite affine refinement. Its arrows have affine source and affine target, so this finite family is itself quasi-compact, and hence remains a pro-etale cover. For general quasi-compact T, choose a finite subcover of its affine open cover, pull the given covering sieve back to each affine member, and apply the affine case. Compose these finitely many finite families. GrothendieckTopology.bindOfArrows proves that the composite family covers T; every composite lies in the original sieve by downward closure. This is implemented by finite_affine_cover_of_affine and finite_affine_cover. No quasi-separatedness of T is used.",
    "uses": [
     "sk-def-pe-site",
     "def-weil-pbc-quasi-compact-scheme",
@@ -49,9 +50,9 @@
    }
   },
   {
-   "text": "The local description of sheafification says that any section of $P^\\#$ is locally represented in $P$, and that equal images of two sections of $P$ become equal on a covering. Suppose sections $s\\in\\mathcal F_\\alpha(T)$ and $t\\in\\mathcal F_\\beta(T)$ have equal images in $P^\\#(T)$ with $T$ quasi-compact. Refine the equality covering by the finite affine family of step 2. On each member equality in $P$ is witnessed at a later stage by step 1. A common cocone on these finitely many witnesses gives one stage at which the restrictions of $s$ and $t$ agree everywhere on the covering. The sheaf condition at that stage gives equality on $T$. This proves injectivity in clause (1), and applies to every quasi-compact overlap used below.",
+   "text": "The local injectivity of the presheaf-to-sheaf colimit comparison gives a covering equalizer sieve for any two same-stage sections with equal images. On each member, Types.FilteredColimit.isColimit_eq_iff′ gives one later arrow making the restrictions equal, including equalization of parallel arrows. Apply the finite affine refinement of step 2. A finite cocone on all the witnesses and the arrows out of the original index produces one common arrow. Naturality and separatedness of the sheaf at that stage prove equality on T. This is eventual_equality. Finally represent any two elements in the section colimit at one common stage; the canonical leg equations and eventual equality prove injectivity of colimit.desc.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-large-set-sheafification",
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
@@ -61,12 +62,12 @@
    }
   },
   {
-   "text": "If $V$ is quasi-separated and $A,B\\to V$ are affine objects of a covering, then $A\\times_V B$ is quasi-compact. It is the pullback of the quasi-compact diagonal $V\\to V\\times_{\\operatorname{Spec}\\mathbf Z}V$ along $A\\times_{\\operatorname{Spec}\\mathbf Z}B\\to V\\times_{\\operatorname{Spec}\\mathbf Z}V$. Its projection to $A\\times_{\\operatorname{Spec}\\mathbf Z}B$ is quasi-compact by base change. The latter is affine by the affine-spectrum fibre-product theorem, so its whole inverse image is quasi-compact by the definition of a quasi-compact morphism. Now let $s\\in P^\\#(V)$. Choose local representatives and refine to a finite affine cover as in step 2. Move their finitely many stages to a common stage. On each pairwise overlap their images in $P^\\#$ agree; step 3 and the just-proved quasi-compactness give equality at a later stage. Take a common cocone on the finitely many overlap witnesses. The resulting sections are compatible and glue in that stage sheaf to a section on $V$ mapping to $s$. Together with step 3 this proves the quasi-separated case of clause (1).",
+   "text": "If $V$ is quasi-separated and $A,B\\to V$ are affine objects of a covering, then $A\\times_V B$ is quasi-compact. It is the pullback of the quasi-compact diagonal $V\\to V\\times_{\\operatorname{Spec}\\mathbf Z}V$ along $A\\times_{\\operatorname{Spec}\\mathbf Z}B\\to V\\times_{\\operatorname{Spec}\\mathbf Z}V$. Its projection to $A\\times_{\\operatorname{Spec}\\mathbf Z}B$ is quasi-compact by base change. The latter is affine by the affine-spectrum fibre-product theorem, so its whole inverse image is quasi-compact by the definition of a quasi-compact morphism. Now let $s\\in P^\\#(V)$. Choose local representatives and refine to a finite affine cover as in step 2. Move their finitely many stages to a common stage. On each pairwise overlap their images in $P^\\#$ agree; step 3 and the just-proved quasi-compactness give equality at a later stage. Take a common cocone on the finitely many overlap witnesses. The resulting sections are compatible and glue in that stage sheaf to a section on $V$ mapping to $s$. Together with step 3 this proves the quasi-separated case of clause (1). The Lean proof section_representative transports the scheme pullback compactness across PreservesPullback.iso for the forgetful functor X.ProEt to schemes. finite_common_arrow makes all overlap equalities hold after a single arrow. Presieve.isSheafFor_arrows_iff_pullbacks glues the resulting family, and separatedness of the colimit sheaf identifies its image with the original section.",
    "uses": [
     "def-weil-quasi-separated-morphism",
     "lem-pc-quasi-compact-base-change",
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-large-set-sheafification",
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
@@ -76,9 +77,9 @@
    }
   },
   {
-   "text": "Instead assume all transition maps are injective on every object. Then $\\mathcal F_\\alpha(U)\\to P(U)$ is injective for every $U$: if $s,t\\in\\mathcal F_\\alpha(U)$ have the same image, there are arrows $f,g:\\alpha\\to\\beta$ with $\\mathcal F(f)(s)=\\mathcal F(g)(t)$. Filteredness gives $h:\\beta\\to\\gamma$ with $hf=hg$. Applying $\\mathcal F(h)$ and using injectivity of $\\mathcal F(hf)$ gives $s=t$. If two sections of $\\mathcal F_\\alpha(U)$ have equal images in $P^\\#(U)$, the local equality description of sheafification and this sectionwise injectivity make them locally equal in $\\mathcal F_\\alpha$, hence equal by its sheaf condition. Thus $\\mathcal F_\\alpha(U)\\to P^\\#(U)$ is injective for every $U$, with no compactness hypothesis. For $s\\in P^\\#(V)$ use local representatives and a finite refinement as in step 2, and move the representatives to one stage $\\alpha$. On any overlap they agree in $P^\\#$, so they agree already in $\\mathcal F_\\alpha$ by the preceding injectivity, even when that overlap is not quasi-compact. They glue to a representative on $V$. This proves the injective-transition case of clause (1) without quasi-separatedness.",
+   "text": "Instead assume all transition maps are injective on every object. Then $\\mathcal F_\\alpha(U)\\to P(U)$ is injective for every $U$: if $s,t\\in\\mathcal F_\\alpha(U)$ have the same image, there are arrows $f,g:\\alpha\\to\\beta$ with $\\mathcal F(f)(s)=\\mathcal F(g)(t)$. Filteredness gives $h:\\beta\\to\\gamma$ with $hf=hg$. Applying $\\mathcal F(h)$ and using injectivity of $\\mathcal F(hf)$ gives $s=t$. If two sections of $\\mathcal F_\\alpha(U)$ have equal images in $P^\\#(U)$, the local equality description of sheafification and this sectionwise injectivity make them locally equal in $\\mathcal F_\\alpha$, hence equal by its sheaf condition. Thus $\\mathcal F_\\alpha(U)\\to P^\\#(U)$ is injective for every $U$, with no compactness hypothesis. For $s\\in P^\\#(V)$ use local representatives and a finite refinement as in step 2, and move the representatives to one stage $\\alpha$. On any overlap they agree in $P^\\#$, so they agree already in $\\mathcal F_\\alpha$ by the preceding injectivity, even when that overlap is not quasi-compact. They glue to a representative on $V$. This proves the injective-transition case of clause (1) without quasi-separatedness. In Lean, stage_injective proves this on every object from local_equality and separatedness. section_representative uses it on the overlaps before any compactness argument; the identity arrow already makes the two restrictions agree at their common stage. It then uses the same finite-stage gluing as in step 4.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
+    "lem-weil-pbc-large-set-sheafification",
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
@@ -88,7 +89,7 @@
    }
   },
   {
-   "text": "For abelian sheaves, forgetting to sets preserves filtered colimits and sheafification. The sheafification adjunction and its fully faithful right adjoint therefore show that the induced forgetful functor on sheaves preserves the given filtered colimit. Apply the set comparison of steps 3--5 to the underlying set diagram. The canonical comparison from the colimit of underlying groups to the underlying group colimit is an isomorphism. Its composite with the underlying abelian section comparison is the set section comparison, by colimit.post_desc. Bijectivity of this first comparison transfers injectivity and conditional bijectivity to the abelian comparison. Universe shrinking supplies filtered-colimit preservation at the site-cover and diagram sizes separately. This step is now proved in Lean from the set comparison, which remains open.",
+   "text": "For abelian sheaves, forgetting to sets preserves filtered colimits and sheafification. The sheafification adjunction and its fully faithful right adjoint therefore show that the induced forgetful functor on sheaves preserves the given filtered colimit. Apply the set comparison of steps 3--5 to the underlying set diagram. The canonical comparison from the colimit of underlying groups to the underlying group colimit is an isomorphism. Its composite with the underlying abelian section comparison is the set section comparison, by colimit.post_desc. Bijectivity of this first comparison transfers injectivity and conditional bijectivity to the abelian comparison. Universe shrinking supplies filtered-colimit preservation at the site-cover and diagram sizes separately. This step is now proved in Lean from the set comparison, which is now completely proved.",
    "uses": [
     "lem-weil-pbc-presheaf-colimits-sectionwise",
     "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
@@ -142,10 +143,10 @@
   "lem-weil-pbc-presheaf-colimits-sectionwise",
   "def-weil-pbc-sheafification",
   "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-large-set-sheafification",
   "sk-def-pe-site",
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-sheafification-sections-local",
   "def-weil-quasi-separated-morphism",
   "lem-pc-quasi-compact-base-change",
   "lem-weil-pbc-fibre-product-affine-spectra",
@@ -160,7 +161,9 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tag 0738 (lemma-directed-colimits-sections), proofs of (1)--(4); steps 1--5 remain open. Steps 6--9 are implemented using Mathlib sheafification compatibility and the source-library abelian coefficient colimit."
+  "place": "Tag 0738 (lemma-directed-colimits-sections), proofs of (1)--(4). All nine steps are implemented in Lean; the original unit coefficient-colimit route and all public statements are preserved.",
+  "group": "A9",
+  "date": "2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -265,9 +268,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-site-sheafification-sections-local"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -313,12 +314,12 @@
   "note": "The three declarations jointly state clause (1) for sets and abelian groups and every assertion of clause (2). Uses the existing canonical colimit.desc of an evaluated sheaf-colimit cocone, with its IsColimit certificate, and the coefficient inclusion maps. No new definitions, extra quasi-separatedness, universe equality, or statement change."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T7",
+  "group": "A9",
   "result": "pass",
-  "landing": "20261019T005430-L-2770176",
+  "landing": "20261021T023253-L-2943136",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
