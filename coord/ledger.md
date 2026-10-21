@@ -20828,3 +20828,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:58 L: merged deliver/NP/lem-weil-pbc-flat-scalar-koszul-tower-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 07:58 L: merged deliver/NM/lem-sf-open-extension-scalar-restriction-coherence (stage 2; reviewer PASS; parallel immutable checks)
 - 07:58 L: returned deliver/Q26/lem-sfb-internal-section-scalar-adjunction (reviewer RETURN: L: independent stage-2 immutable head 8c16bc95777c: H3 (H4 aspect): internalAdjunction is a free field constrained only )
+- 07:58 L: returned deliver/NA/lem-weil-pbc-stratum-completion-unit-restriction (reviewer RETURN: L: independent stage-2 immutable head ac665650e32a: incremental DAG validation: reach: def-sfb-fixed-scalar-geometric-ad)
