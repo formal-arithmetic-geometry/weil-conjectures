@@ -23268,3 +23268,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T18:03:12Z L: superseded stage-1 delivery Q12/lem-fd-whole-tower-integral-pullback-comparison at d9737ec07e9cd14f80bc539f04cc4fc80d088f74; current completion retained; packet archived at refs/superseded/Q12/lem-fd-whole-tower-integral-pullback-comparison/d9737ec07e9cd14f80bc539f04cc4fc80d088f74; stale return retired.
 - 18:05 L: merged deliver/Q06/lem-sfb-polynomial-derived-bar-comparison (reviewer PASS; first push; new nodes: 2)
 - 2026-10-21T18:05:13Z L: superseded stage-1 delivery N9/lem-sfb-tame-inertia-continuous-koszul at b1ffc8ef439129853218aef47d634a9033501492; current completion retained; packet archived at refs/superseded/N9/lem-sfb-tame-inertia-continuous-koszul/b1ffc8ef439129853218aef47d634a9033501492; stale return retired.
+- 18:05 L: merged deliver/Q20/lem-pur-closed-finite-adjoint-counit-transport (stage 2; reviewer PASS; parallel immutable checks)
+- 18:05 L: merged deliver/N7/lem-sfb-dense-lattice-derived-invariants-comparison (stage 2; reviewer PASS; parallel immutable checks)
