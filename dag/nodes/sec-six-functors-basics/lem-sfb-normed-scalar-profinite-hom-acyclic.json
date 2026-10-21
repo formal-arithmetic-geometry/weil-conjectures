@@ -11,7 +11,11 @@
   "def-sfb-continuous-map-condensed-ring",
   "def-weil-size-convention",
   "sk-def-sfb-module-objects",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "def-sfb-bundled-continuous-scalar-ring",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-condensed-free-module-adjunction",
+  "def-sfb-right-derived-single-unit"
  ],
  "proof": [
   {
@@ -473,5 +477,33 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-6160a3934 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It answers the E2 RETURN of 6f0dfe97, and every point of that RETURN is repaired. (1) Statement: both nodes now take F=E, any finite extension of Q_ell, with the report section 'Source error'. I verified the Omega counterexample myself: on the Cantor set, with T=beta(S_disc) and an alpha-orthogonal basis, f=W(y)-W(x) is an Omega-valued Cech 1-cocycle, and a primitive would give h with h-w in Omega; Baire gives a point with infinitely many nonzero coordinates. So H^1(S,C(-,Omega)) is nonzero and the old item fails at P = Cantor set. The narrowing is forced by falsity, not a weakening. main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md lines 19-25 (paragraph (3)) makes no Omega claim; the clause was an agent addition, so no unit or target changes. (2) Step 1 now cites lem-pc-sheaf-modules-tensor-closed (C1/C4). (3) lem-sfb-modobj-grothendieck is now in tool_uses. Steps: the Grothendieck chain (Step 1), Hom(A[P]|_S,N|_S)=N(S x P) by Yoneda on the slice (Step 2), the Cech identification over the disjoint union of the cover (Step 3), the general-site Cech criterion hypotheses (1)-(3) and the arbitrary-ring module/abelian comparison (Step 4), and the sectionwise quasi-isomorphism and naturality in P (Step 5) all hold. The new node lem-sfb-normed-scalar-profinite-cech-exact is true for E: Bhatt-Scholze Lemma 4.3.9(2)-(4) with G=1 and Lemma 4.3.7 give H^i(S,C(-,E))=0 for i>0, and applied to the fibre powers this gives Cech exactness. It is self-contained, statement only, and strictly smaller than the item. rg -L found no duplicate (read: lem-exc-coinduced-continuous-acyclic, lem-sc-group-coinduced-acyclic, lem-exc-cochains-derived-invariants, lem-sfb-continuous-coefficient-free-rank). No SGA is cited. Edge cases checked: P empty, P a point, empty surjection. Maintainer note: two other-group citers rely on the removed Omega case and must be reopened. One is lem-sfb-prime-to-ell-condensed-acyclicity step 2, named in the report. The other is NR's lem-sfb-profinite-algcl-derived-invariants-comparison step 2, which applies the item to B=C(-,Omega) and is missing from the report's citer audit."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NormedScalarProfiniteHomAcyclic",
+  "declaration": "Profinite.NormedScalarHom.normed_scalar_profinite_hom_acyclic",
+  "declarations": [
+   "Profinite.NormedScalarHom.homFunctor",
+   "Profinite.NormedScalarHom.generator",
+   "Profinite.NormedScalarHom.evaluation",
+   "Profinite.NormedScalarHom.parameterMap",
+   "Profinite.NormedScalarHom.resolutionAugmentation",
+   "Profinite.NormedScalarHom.Assertion",
+   "Profinite.NormedScalarHom.normed_scalar_profinite_hom_acyclic"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NormedScalarProfiniteHomAcyclic.lean",
+  "statement": "theorem normed_scalar_profinite_hom_acyclic (ell : ℕ) [Fact ell.Prime] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ell] E] [FiniteDimensional ℚ_[ell] E] : CompleteSpace E ∧ Assertion E",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The full comparison is Assertion E. Its function object is the actual tensor right adjoint on the actual free internal module; the counit-defined evaluation identifies its sections with C(S × P,E), with the S-coordinate action and both restriction formulas. The canonical unbounded right-derived single unit and every nonnegative injective-resolution augmentation are invertible, with chain-level parameter naturality and the canonical degree-zero normalization. HasDerivedCategory.standard fixes the larger localization universe inside Assertion. The free-module functor/adjunction and canonical right-derived single unit are cited through new existing:true definition nodes, replacing the two theorem-only statement dependencies returned under H2. No Lean construction or theorem signature changes. The existing NY reviewed pass is a stage-1 split review; lean and reviewed_lean were absent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-551f7a8c2",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery answering the H2 RETURN of e8abced2b64d. The Lean module is byte-identical (sha256 1f5968db…), and the clause-by-clause H3 re-check is clean: finite normed E/Q_ell, continuousScalarRing, actual free module and Mod.ihom, evaluation bijective, additive, with S-coordinate action and both restriction laws, IsIso of rightDerivedSingleUnit and of Q.map of every injective-resolution augmentation, chain-level parameter naturality, degree-zero normalization, CompleteSpace E as a conclusion; edge cases P=∅/pt and S=∅ are covered. H2 is repaired by the new existing:true definition nodes def-sfb-condensed-free-module-adjunction (InternalBar.free/freeAdjunction, CondensedInternalBarResolution.lean:53,60) and def-sfb-right-derived-single-unit (Functor.rightDerivedSingleUnit, RightDerivedSingleZeroUnit.lean:34). Their TeX matches the Lean constructions, their deps exist live, their statements are verbatim, and no live definition node owns these declarations. The item node differs from live only in stmt_deps/lean, the six other dep records are byte-identical to live, and the dropped theorem deps supply nothing still used. Advisory: conjunct 9 restates rightDerivedSingleUnit_zero and conjunct 8 is formal naturality. No file changed, so no compile."
  }
 }

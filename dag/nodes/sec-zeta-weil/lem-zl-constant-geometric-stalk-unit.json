@@ -19,7 +19,9 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-completed-integral-coefficients",
   "def-weil-rationalization-karoubi",
-  "lem-weil-isomorphism-derived-pullback"
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-zl-finite-regular-coefficient-comparisons"
  ],
  "proof": [
   {
@@ -325,5 +327,64 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-fa4383aed (reviewer sub-agent of L); spot-checked: I read all 8 steps in full and checked every cited statement; there are no new nodes and the statement is unchanged from the base. Batch 5: I recomputed the target closure (/tmp/nsrev/b5.py). Without the item's new proof it has 18410 nodes, and the new proof adds only lem-pur-proetale-finite-constant-sections (generic). Both flagged citations are already in the closure without the item. lem-pod-canonical-coefficient-pullback-reduction only normalizes λ_R=κ^{-1} and its quotient projections, and claims nothing about Frobenius on cohomology. lem-trf-integral-point-transport-tower-powers is generic coherence of whole-system point transport with powers. The closure of neither reaches a trace-formula or Poincaré theorem or an assumption leaf, so both are accepted, as lem-trf-integral-pullback-comparison-realization was in the Q60 ruling. Steps: step 1, the return g_Y^n x̄ = x̄ g_s^n, follows from the unique-subfield lemma. Step 2 gives the finite unit d_{f,m} through prop-weil-pbc-proetale-constant-ring-map and the constant-sections formula (Γ = A_m). Step 3 checks the tensor compositor, shows c_mλ_m = d by the pod lemma's finite λ_n formula, and identifies θ^{[r]} by an induction with base and step written out. Step 4 computes the transport res, ins, c, κ, d as a ↦ a, with naturality for the iterates. Step 5 checks strict compatibility with reductions. Step 6: R_s is derived complete, χ for L=E is the strict-cone unit, and lim A_m = O_E by completeness. Step 7: the pod normalization, the trf compositor realization and the trf power transport with N=B_s ∈ D^b_c match the ν/κ^{-1} normalization. Step 8: rationalization is ⊗E with no torsion ⊗E. I tested the empty scheme, Spec F_q, degree d | n, m=1, ramified E and nonseparated or nonreduced Y_0. No duplicates: I checked pod-frobenius-fixes-unit-section, pur-twist-frobenius-scalar, zl-normalized-coefficient-unit-realization and the stalk lemma. All 13 off-unit tool uses are declared, and the unit cites sk-thm-trace-transport. Advisory: the embedding F_{q^n} ↪ k must be a k_0-embedding; this is implicit, as in def-weil-local-frobenius-trace."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantGeometricStalkUnit",
+  "declaration": "WeilConjectures.ConstantGeometricStalkUnit.rationalOperator_unit",
+  "declarations": [
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteUnitHom",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteUnitHom_isIso",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteUnit",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralChainUnit_existsUnique",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralChainUnit",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralChainUnit_isIso",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralUnit",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteUnit_canonicalWeil",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralUnit_canonicalWeil",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteUnit_reduction",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralUnit_projection",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteSection",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralSection",
+   "WeilConjectures.ConstantGeometricStalkUnit.section_isIso",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteSectionsUnit",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralSectionsUnit",
+   "WeilConjectures.ConstantGeometricStalkUnit.section_reductions",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteStalkUnit",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralStalkUnit",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteWeilIterate",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteTransportIterate",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteOperator",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralStalk",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralWeilIterate",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralTransportIterate",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralOperator",
+   "WeilConjectures.ConstantGeometricStalkUnit.embeddingPoint_compatible",
+   "WeilConjectures.ConstantGeometricStalkUnit.embeddingPoint",
+   "WeilConjectures.ConstantGeometricStalkUnit.embeddingPoint_return",
+   "WeilConjectures.ConstantGeometricStalkUnit.finiteOperator_unit",
+   "WeilConjectures.ConstantGeometricStalkUnit.integralOperator_unit",
+   "WeilConjectures.ConstantGeometricStalkUnit.rationalRegular",
+   "WeilConjectures.ConstantGeometricStalkUnit.rationalFibreComparison",
+   "WeilConjectures.ConstantGeometricStalkUnit.rationalStalkUnitLarge",
+   "WeilConjectures.ConstantGeometricStalkUnit.rationalStalkUnit_existsUnique",
+   "WeilConjectures.ConstantGeometricStalkUnit.rationalStalkUnit",
+   "WeilConjectures.ConstantGeometricStalkUnit.rationalOperator_unit",
+   "WeilConjectures.ConstantGeometricStalkUnit.rationalOperator_scalar"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantGeometricStalkUnit.lean",
+  "statement": "theorem rationalOperator_unit (n : ℕ) (hn : 1 ≤ n) (x : D.extensionPoints Y₀ n hn) (ι : D.extensionSubfield n hn →+* D.k) (hι : ι.comp (D.extensionEmbedding n hn) = algebraMap D.k₀ D.k) : (localFrobeniusOperator l E D hl Y₀ (constantWeilRationalComplex l E D hl Y₀) (embeddingPoint D Y₀ n hn x ι hι) (n - 1) (embeddingPoint_return D Y₀ n hn x ι hι)).hom ≫ (rationalStalkUnit l E D hl Y₀ (embeddingPoint D Y₀ n hn x ι hι)).hom = (rationalStalkUnit l E D hl Y₀ (embeddingPoint D Y₀ n hn x ι hι)).hom",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The finite, integral and rational clauses and their canonical compatibility maps are recorded together in declarations. Finite indices m encode exponent m+1. Every base-field embedding is explicit in embeddingPoint and the three operator theorems."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb59783d0",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Re-delivery repairs both RETURN findings of f022a82d. (1) The item no longer cites lem-pod-canonical-coefficient-pullback-reduction; the new def node def-zl-finite-regular-coefficient-comparisons (H12 fields OK, statement cites all stmt_deps, item cites it) gives abbrev aliases of the published finite regular complex, kappa_m, lambda_m, c_m (real data, no new choice). (2) The local finiteComposition is deleted; finiteCanonicalPullbackComposition = unit-preserving openSquareDerivedPullbackModel transport of integralFiniteCanonicalPullbackComposition = proEtaleCanonicalPullbackComposition (0D6D) specialized to constant rings, which is the compositor def-weil-local-frobenius-trace prescribes at finite level; directions correct. Item diff vs previous delivery is only these substitutions plus a congrArg type ascription. Item changes only lean+stmt_deps; the added def-weil-inverse-image-pullback-comparison is a landed node (allowed). Statements verbatim; all 38+5 declarations present; new module has no sorry. Clause review and edge cases (n=1, m=0, empty Y, every k0-embedding) unchanged and correct. Advisory: the def module uses decls of theorem nodes lem-pod-canonical (data via sorry'd isIso helper) and lem-trf-open-square-exchange (proved ∃!) outside its stmt_deps; accepted as canonical. No compile (no change)."
  }
 }

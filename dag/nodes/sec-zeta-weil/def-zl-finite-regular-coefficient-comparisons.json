@@ -1,0 +1,114 @@
+{
+ "id": "def-zl-finite-regular-coefficient-comparisons",
+ "kind": "definition",
+ "title": "Finite regular coefficient comparisons and prescribed pullback compositor",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and $A_m=\\mathcal O_E/\\varpi_E^{m+1}$ for $m\\in\\mathbf N$ [def-weil-l-adic-coefficient-extension]. For a scheme $Y$ with its small pro-etale site [def-weil-pbc-proetale-site], define the regular coefficient complex $B_{Y,m}[0]$ to be the degree-zero complex of the regular module over the constant ring sheaf $B_{Y,m}=(A_m)_Y$. For an isomorphism $g:X\\to Y$, let $c_m:g^{-1}B_{Y,m}[0]\\xrightarrow{\\sim}B_{X,m}[0]$ be the constant-section coefficient comparison of [def-weil-constant-weil-structure], with the transported module action. Let $\\kappa_m:g^{-1}B_{Y,m}[0]\\to g_m^*B_{Y,m}[0]$ be the termwise map $z\\mapsto z\\otimes1$ of [def-weil-inverse-image-pullback-comparison](a), and let $\\lambda_m$ be its inverse, the multiplication $z\\otimes b\\mapsto c_m^{-1}(b)z$. These are the existing coefficient constructions, with no new choice. For arbitrary scheme maps $f:X\\to Y$ and $g:Y\\to Z$, define the compositor for the intrinsic finite derived pullbacks of [def-weil-derived-pullback-tensor-hom] to be the canonical ringed-site compositor of [lem-weil-pbc-proetale-derived-pullback-composition] specialized to the constant rings $B_{Z,m},B_{Y,m},B_{X,m}$, transported to intrinsic coordinates by the unique comparison of the tensor pullback with the intrinsic exact module inverse image that preserves their adjunction units on every section. This transport is applied termwise and descended to the derived category; its direction is $L(f\\mathbin{\\gg}g)^*\\cong Lg^*\\mathbin{\\gg}Lf^*$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-tracetodeterminant/prop-every-iterate-trace.proof.md",
+  "place": "Constant-sheaf clause, reviewed expansion steps 2 and 3; Stacks 03D6 tensor-unit comparison and 0D6D canonical composition"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-constant-weil-structure",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical finite regular coefficient complex and the coefficient comparison c, tensor unit kappa and inverse lambda for pullback along an isomorphism",
+   "results": "{\"t\": \"2026-10-21T18:58:27Z\", \"tool\": \"leansearch\", \"query\": \"Canonical finite regular coefficient complex and the coefficient comparison c, tensor unit kappa and inverse lambda for pullback along an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.rightUnitor'_inv\", \"HomologicalComplex.leftUnitor'_inv\", \"HomologicalComplex.leftUnitor'_inv_comm\", \"HomologicalComplex.rightUnitor'\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"HomologicalComplex.Hom.isoApp_inv\", \"HomologicalComplex₂.total.mapIso\", \"HomologicalComplex.rightUnitor\"], \"digest\": \"bd5fa39f767dc1d1\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. The project search locates the existing plain finite definitions in CanonicalCoefficientPullbackReduction.lean; the definition node reexports them without a second construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackObjUnitToUnit",
+   "results": "{\"t\": \"2026-10-21T18:58:43Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullbackObjUnitToUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\"], \"digest\": \"5fce283749d5e928\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. The project search locates the existing plain finite definitions in CanonicalCoefficientPullbackReduction.lean; the definition node reexports them without a second construction."
+  },
+  {
+   "tool": "grep",
+   "query": "canonicalCoefficientFinite|sfIntrinsicDerivedPullbackComp",
+   "results": "{\"t\": \"2026-10-21T18:58:42Z\", \"tool\": \"grep\", \"query\": \"canonicalCoefficientFinite|sfIntrinsicDerivedPullbackComp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. The project search locates the existing plain finite definitions in CanonicalCoefficientPullbackReduction.lean; the definition node reexports them without a second construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l canonicalCoefficientFinite(Complex|Comparison|Kappa)|canonicalCoefficientLambdaFinite dag/nodes; rg -n same names lean/WeilConjectures and lean/Sheaf; tools/blueprint_refs.py search finite regular coefficient",
+   "results": "Only lem-pod-canonical-coefficient-pullback-reduction records the four plain definitions. No definition node carries them; no WeilConjectures match and no blueprint-node match. Existing published regular complex and maps are reused as transparent aliases. ProEtaleConstantOpenSquareExchange.lean supplies the uniquely unit-preserving coordinate bridge.",
+   "date": "2026-10-21",
+   "verdict": "Definition ownership is absent; reuse the existing data, and expose the prescribed compositor by actual coordinate transport."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-constant-geometric-stalk-unit",
+  "date": "2026-10-21",
+  "group": "Q31"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-every-iterate-trace",
+   "place": "Constant-sheaf clause, reviewed expansion steps 2 and 3: finite regular coefficients, tensor-unit comparison and prescribed pullback composition",
+   "via": [
+    "lem-zl-constant-geometric-stalk-unit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-tracetodeterminant",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteRegularCoefficientComparisons",
+  "declaration": "WeilConjectures.finiteCanonicalPullbackComposition",
+  "declarations": [
+   "WeilConjectures.finiteRegularCoefficientComplex",
+   "WeilConjectures.finiteRegularKappa",
+   "WeilConjectures.finiteRegularLambda",
+   "WeilConjectures.finiteRegularComparison",
+   "WeilConjectures.finiteCanonicalPullbackComposition"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteRegularCoefficientComparisons.lean",
+  "statement": "def finiteCanonicalPullbackComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (m : ℕ) : finiteDerivedPullback l E m (f ≫ g) ≅ finiteDerivedPullback l E m g ⋙ finiteDerivedPullback l E m f",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The four finite objects/maps are transparent aliases of the existing published constructions, with no private copies. The actual additional definition transports integralFiniteCanonicalPullbackComposition through openSquareDerivedPullbackModel, whose adjunction-unit normalization fixes the coordinate identification. Thus no second intrinsic compositor is constructed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb59783d0",
+  "group": "Q31",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-eb59783d0",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Re-delivery repairs both RETURN findings of f022a82d. (1) The item no longer cites lem-pod-canonical-coefficient-pullback-reduction; the new def node def-zl-finite-regular-coefficient-comparisons (H12 fields OK, statement cites all stmt_deps, item cites it) gives abbrev aliases of the published finite regular complex, kappa_m, lambda_m, c_m (real data, no new choice). (2) The local finiteComposition is deleted; finiteCanonicalPullbackComposition = unit-preserving openSquareDerivedPullbackModel transport of integralFiniteCanonicalPullbackComposition = proEtaleCanonicalPullbackComposition (0D6D) specialized to constant rings, which is the compositor def-weil-local-frobenius-trace prescribes at finite level; directions correct. Item diff vs previous delivery is only these substitutions plus a congrArg type ascription. Item changes only lean+stmt_deps; the added def-weil-inverse-image-pullback-comparison is a landed node (allowed). Statements verbatim; all 38+5 declarations present; new module has no sorry. Clause review and edge cases (n=1, m=0, empty Y, every k0-embedding) unchanged and correct. Advisory: the def module uses decls of theorem nodes lem-pod-canonical (data via sorry'd isIso helper) and lem-trf-open-square-exchange (proved ∃!) outside its stmt_deps; accepted as canonical. No compile (no change)."
+ }
+}

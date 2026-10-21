@@ -1,0 +1,114 @@
+{
+ "id": "def-sfb-condensed-free-module-adjunction",
+ "kind": "definition",
+ "title": "Free internal condensed modules and the free-forgetful adjunction",
+ "status": "split",
+ "statement": "Fix the small coherent profinite site $J$ of [def-weil-size-convention]. Let $R$ be a commutative condensed ring [sk-def-sfb-condensed-ring], regarded as a commutative monoid object of the tensor category of abelian sheaves, and let $\\operatorname{Mod}_R$ be its category of internal modules [sk-def-sfb-module-objects]. Define the free internal module functor $L_R:\\operatorname{Sh}(J,\\operatorname{Set})\\to\\operatorname{Mod}_R$ as the composite of the free abelian sheaf functor (apply the free abelian group functor and sheafify) and the free internal $R$-module functor. Define its adjunction with the forgetful functor $U_R$ to condensed sets by composing these two free-forgetful adjunctions. Thus $L_R(X)=R[X]$, its unit is the canonical generator map $X\\to U_R(R[X])$, and a map of condensed sets is carried to the functorial map of free modules. In universe $u$, use profinite sets in $u$, sets and abelian groups in $u+1$, and internal modules in $u+2$.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary internal condensed-module expansion: the free internal R-module on a condensed set and its canonical free-forgetful adjunction, preceding the profinite-parameter column computation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "freeForgetAdjunction|composeAndSheafify CategoryTheory",
+   "results": "{\"t\": \"2026-10-21T19:24:57Z\", \"tool\": \"grep\", \"query\": \"freeForgetAdjunction|composeAndSheafify\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/Groupoid/FreeGroupoidOfCategory.lean\", \"Mathlib/CategoryTheory/Sites/Adjunction.lean\", \"Mathlib/CategoryTheory/Sites/Adjunction.lean\", \"Mathlib/CategoryTheory/Sites/Adjunction.lean\"], \"digest\": \"ed3e7bcd6d9d1b13\"}",
+   "date": "2026-10-21",
+   "verdict": "Mathlib gives constant-ring or light condensed modules, or the generic sheaf/free-module adjunctions. The exact internal-module composite already exists as InternalBar.free/freeAdjunction in Sheaf.CategoryTheory.CondensedInternalBarResolution; bind it with existing:true."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The free internal module on a condensed set is left adjoint to forgetting an internal module to its underlying condensed set",
+   "results": "{\"t\": \"2026-10-21T19:24:57Z\", \"tool\": \"leansearch\", \"query\": \"The free internal module on a condensed set is left adjoint to forgetting an internal module to its underlying condensed set\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.freeForgetAdjunction\", \"LightCondensed.freeForgetAdjunction\", \"ModuleCat.adj\", \"PresheafOfModules.freeAdjunction\", \"TopModuleCat.freeAdj\", \"Condensed.free\", \"Condensed.setAbAdjunction\", \"ModuleCat.instIsRightAdjointForget\"], \"digest\": \"c61c48722ad3cc22\"}",
+   "date": "2026-10-21",
+   "verdict": "Mathlib gives constant-ring or light condensed modules, or the generic sheaf/free-module adjunctions. The exact internal-module composite already exists as InternalBar.free/freeAdjunction in Sheaf.CategoryTheory.CondensedInternalBarResolution; bind it with existing:true."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Free modules over a commutative condensed ring as free abelian sheaves followed by the free internal module functor and their composite adjunction",
+   "results": "{\"t\": \"2026-10-21T19:25:00Z\", \"tool\": \"leanfinder\", \"query\": \"Free modules over a commutative condensed ring as free abelian sheaves followed by the free internal module functor and their composite adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.free\", \"Condensed.freeForgetAdjunction\", \"LightCondensed.freeForgetAdjunction\", \"LightCondensed.free\", \"Condensed.freeAb\", \"Condensed.setAbAdjunction\", \"CondensedMod.LocallyConstant.adjunction\", \"Condensed.profiniteFree\"], \"digest\": \"391b94d3e29149f6\"}",
+   "date": "2026-10-21",
+   "verdict": "Mathlib gives constant-ring or light condensed modules, or the generic sheaf/free-module adjunctions. The exact internal-module composite already exists as InternalBar.free/freeAdjunction in Sheaf.CategoryTheory.CondensedInternalBarResolution; bind it with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"InternalBar\\.(free|freeAdjunction)\" lean/WeilConjectures lean/Sheaf; definition-node ownership scan; blueprint_refs.py search \"free internal module\"",
+   "results": "Definition ownership scan: no definition node records InternalBar.free or InternalBar.freeAdjunction; only theorem node lem-sfb-condensed-internal-bar-resolution lists them. Exact source definitions: lean/Sheaf/CategoryTheory/CondensedInternalBarResolution.lean:53,60. Project callers: ProfiniteConstantDerivedFunctions.lean:98,181,663,779. blueprint search: 0 blueprint nodes match free internal module. def-sfb-condensed-equivariant-bar-data owns freeParameter, but not the free functor or its adjunction.",
+   "date": "2026-10-21",
+   "verdict": "An existing declaration has no definition node owning this interface. Add only an existing:true definition record; do not duplicate Lean code."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normed-scalar-profinite-hom-acyclic",
+  "date": "2026-10-21",
+  "group": "NA"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open-direct-image input, below the trivial scalar prime-to-ell acyclicity input: profinite-parameter column computation before totalizing the internal group nerve; Free internal condensed modules and the free-forgetful adjunction",
+   "via": [
+    "lem-sfb-normed-scalar-profinite-hom-acyclic",
+    "lem-sfb-prime-to-ell-condensed-acyclicity",
+    "lem-sfb-prime-to-ell-derived-invariants-reduction",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedInternalBarResolution",
+  "declaration": "Profinite.CondensedAction.InternalBar.freeAdjunction",
+  "declarations": [
+   "Profinite.CondensedAction.InternalBar.free",
+   "Profinite.CondensedAction.InternalBar.freeAdjunction"
+  ],
+  "statement": "def freeAdjunction : free R ⊣\n    Mod.forget R.X ⋙ sheafCompose (coherentTopology Profinite.{u})\n      (forget AddCommGrpCat.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership required by return H2: these two existing plain definitions construct the functor and composite adjunction without choosing exists_resolution. The theorem node lem-sfb-condensed-internal-bar-resolution states exactness of a bar resolution and does not own this independent definition notion. No Lean module is added."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-551f7a8c2",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-551f7a8c2",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery answering the H2 RETURN of e8abced2b64d. The Lean module is byte-identical (sha256 1f5968db…), and the clause-by-clause H3 re-check is clean: finite normed E/Q_ell, continuousScalarRing, actual free module and Mod.ihom, evaluation bijective, additive, with S-coordinate action and both restriction laws, IsIso of rightDerivedSingleUnit and of Q.map of every injective-resolution augmentation, chain-level parameter naturality, degree-zero normalization, CompleteSpace E as a conclusion; edge cases P=∅/pt and S=∅ are covered. H2 is repaired by the new existing:true definition nodes def-sfb-condensed-free-module-adjunction (InternalBar.free/freeAdjunction, CondensedInternalBarResolution.lean:53,60) and def-sfb-right-derived-single-unit (Functor.rightDerivedSingleUnit, RightDerivedSingleZeroUnit.lean:34). Their TeX matches the Lean constructions, their deps exist live, their statements are verbatim, and no live definition node owns these declarations. The item node differs from live only in stmt_deps/lean, the six other dep records are byte-identical to live, and the dropped theorem deps supply nothing still used. Advisory: conjunct 9 restates rightDerivedSingleUnit_zero and conjunct 8 is formal naturality. No file changed, so no compile."
+ }
+}

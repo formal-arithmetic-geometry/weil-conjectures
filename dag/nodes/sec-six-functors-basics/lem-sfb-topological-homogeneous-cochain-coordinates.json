@@ -509,5 +509,29 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-0217ebb0e (reviewer sub-agent of L); spot-checked: I read the full item, a first split with no new nodes and 12 steps; there is no repair note, so this is not a 10-21 re-split. The statement and stmt_deps are byte-identical to the unsplit side-live node, and the item is absent from live, so nothing supersedes it. I read Stacks 0DVG (etale-cohomology.tex 9007-9045): it allows arbitrary topological abelian coefficients, and its inhomogeneous differential and degree-0 map gv-v match the item. The homogeneous coordinate change is not in Stacks, and proof_origin=agent says so honestly. I re-derived every step: δ²=0 by the (i,j) pairing with signs (-1)^{i+j-1} and (-1)^{i+j}; continuity of P_n; continuity of Ψ, which needs the joint continuity the statement assumes; equivariance via (ax_{i-1})^{-1}(ax_i)=x_{i-1}^{-1}x_i; ΦΨ=id; ΨΦ=id by telescoping, with no commutativity used; the first, internal and final omission terms (p_{i-1}g_ig_{i+1}=p_{i+1}); d=ΦδΨ, which gives d²=0 and Ψd=δΨ; coefficient naturality via u(gv)=gu(v); restriction along any continuous h: Φ_H(F∘h)=Φ_J(F)∘h and Ψ_H(f∘h)=Ψ_J(f)∘h; and the derived isomorphism from functoriality of Q, stated in derived form. Both cited nodes are Mathlib-leaf definitions, so there is no route issue, no tool_uses and no SGA. Small cases: trivial J (δ is 0 from even degrees and id from odd degrees, d the same), V=0, and n=1. No hypothesis beyond the stated ones is used. There is no duplicate: the sc homogeneous nodes need compact/discrete groups, open stabilisers and iterated maps, and the sfb bar nodes are condensed; Mathlib's homogeneousCochains and inhomogeneousCochainsIso are not exact matches. The parent's uses of Φ/Ψ, the restriction and the naturality are all supplied. The blueprint.from.node repair to det-thm-sf-ctf-stability-direct-images matches the via chain, which I checked. Advisory only: topological field and vector space are cited only via def-weil-field, following the DAG-wide convention. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.TopologicalHomogeneousCochainCoordinates",
+  "declaration": "ContinuousCohomology.exists_jointContinuousCochainCoordinates",
+  "declarations": [
+   "ContinuousCohomology.JointContinuousCochainCoordinates",
+   "ContinuousCohomology.exists_jointContinuousCochainCoordinates",
+   "ContinuousCohomology.jointContinuousCochainCoordinates_naturality"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/TopologicalHomogeneousCochainCoordinates.lean",
+  "statement": "theorem exists_jointContinuousCochainCoordinates (E : Type u) [Field E] [TopologicalSpace E] [IsTopologicalDivisionRing E] (J : Type v) [Group J] [TopologicalSpace J] [IsTopologicalGroup J] (V : Type w) [AddCommGroup V] [Module E V] [TopologicalSpace V] [IsTopologicalAddGroup V] [ContinuousSMul E V] (ρ : J →* V ≃ₗ[E] V) (hρ : Continuous (fun p : J × V ↦ ρ p.1 p.2)) [HasDerivedCategory.{r} (ModuleCat.{max v w t} E)] : ∃ B C : CochainComplex (ModuleCat.{max v w t} E) ℤ, Nonempty (JointContinuousCochainCoordinates E J V ρ B C)",
+  "branch": "sheaf-dag",
+  "by": "NX",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main existence theorem specifies the actual homogeneous/inhomogeneous complexes, their evaluation images, both coordinate arrows, and their derived isomorphism via JointContinuousCochainCoordinates. The second theorem states simultaneous coefficient/restriction naturality for both arrows on complexes and after localization. All function spaces are jointly continuous; no compactness or discreteness assumptions. Carrier and ambient universes are independent."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-612f90f0b",
+  "group": "NX",
+  "result": "pass",
+  "note": "Read node, both stmt_deps (Field, DerivedCategory), Stacks 0DVG, module, report, citer lem-sfb-continuous-cochain-finite-index-transfer. Statement verbatim; non-lean node fields = side-live; no name collisions. Hypotheses exact (topological field/group/TVS, ρ : J →* V ≃ₗ V with joint continuity), nothing stronger. B/C pinned by injective evaluations with exact images (continuous equivariant / continuous), delta via succAbove with (-1)^i, differential via contractNth matching the node incl. final face and gv-v, zero in negative degrees, iso pinned by partialProd/ratio formulas, derived iso = Q.map of both arrows (derived form). Simultaneous coefficient/restriction naturality with uniquely pinned maps, cochain and derived squares; provable without hρ. Independent universes with ambient max v w t. Citer's ℕ-indexed continuousInhomogeneousComplex is downstream and compatible with the characterization; Mathlib TopRep (iterated maps), all-function groupCohomology and the project's compact/discrete theorem are not matches. Docstrings carry source, blueprint and 12 steps; sorry only. Advisory: possibly redundant Data.Fin.Tuple.Basic import. No files changed, no compile."
  }
 }
