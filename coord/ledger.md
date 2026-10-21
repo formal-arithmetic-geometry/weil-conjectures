@@ -23400,3 +23400,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:55 L: merged deliver/Q01/lem-sfb-field-action-derived-section-transport (reviewer FIX; first push; new nodes: 0)
 - 2026-10-21T18:55:41Z L: superseded stage-1 delivery NU/sk-thm-acyclicity at f5761603bf879cd5cea49b865f42915af624f029; current completion retained; packet archived at refs/superseded/NU/sk-thm-acyclicity/f5761603bf879cd5cea49b865f42915af624f029; stale return retired.
 - 18:56 L: returned deliver/NL/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F + C5/B9: this delivery again works around the 2026-10-19 drop (the drop list is unchanged since 10-19 21:37, and no)
+- 18:56 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
