@@ -20,9 +20,111 @@
   "def-weil-derived-complete-integral-detailed",
   "def-weil-finite-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $J_L=\\mathcal O_L(d)$ for the unshifted Tate line. By prop-weil-twist-preserves, $J_L$ is locally free of rank one over $R_L$. Tensoring a complex with $R_L[0]$ is the identity, and tensoring with $J_L[0]$ is locally the identity; both therefore take acyclic complexes to acyclic complexes. By the definition of K-flatness, these degree-zero complexes, and their shifts, are K-flat with flat terms. The derived-change-of-rings computation thus uses these very complexes as their own resolutions. In particular all ordinary scalar comparisons below are represented by the displayed module maps, with no auxiliary choices. The specified natural comparison $\\chi$ identifies this computation with the strict-tower functors on complete inputs; its finite-freeness assertion applies to every coefficient inclusion, including repeated fields.",
+   "uses": [
+    "prop-weil-twist-preserves",
+    "def-pc-kflat-complex",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Agent calculation implementing coefficient transport, Step 3 of sk-thm-purity-transport"
+   }
+  },
+  {
+   "text": "For each $L$, clause 2 of lem-weil-constant-coefficient-objects-constructible gives derived completeness and bounded constructibility of $U_L$, with its actual derived reductions $(\\mathcal O_L/\\varpi_L^j)_S[0]$ for every $j\\geq1$. Tensoring such a reduction with any module sheaf $M[0]$ is $M[0]$ by coefficient multiplication. Thus its Tor interval is $[0,0]$, independent of $j$, which is precisely the integral finite-Tor condition in def-weil-finite-tor-amplitude. No equality of cohomological support with $\\{0\\}$ is needed.",
+   "uses": [
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Agent calculation implementing coefficient transport, Step 3 of sk-thm-purity-transport"
+   }
+  },
+  {
+   "text": "Apply prop-weil-twist-preserves to $U_L$ with twist $d$: $U_L(d)$ is derived complete and constructible, and its reductions retain Tor interval $[0,0]$. Closure under shifts in lem-weil-integral-ctf-triangulated gives $T_L=U_L(d)[2d]$ in the integral constructible finite-Tor category. More explicitly, reduction commutes with this canonical shift, and for each finite coefficient module $M$, the tensor of the reduced $T_L$ with $M[0]$ is the corresponding line-tensor module placed in degree $-2d$. The uniform interval is therefore $[-2d,-2d]$. This is a containing Tor interval also when $S$ is empty.",
+   "uses": [
+    "prop-weil-twist-preserves",
+    "lem-weil-integral-ctf-triangulated",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Agent calculation implementing coefficient transport, Step 3 of sk-thm-purity-transport"
+   }
+  },
+  {
+   "text": "On the degree-zero models of step 1, $u_{H/L}$ is multiplication $x\\otimes b\\mapsto\\iota_{H/L}(x)b$, with inverse $b\\mapsto1\\otimes b$. The ordinary associator sends $(x\\otimes b)\\otimes c$ to $x\\otimes\\iota_{F/E}(b)c$. Consequently $u_F\\alpha_{U_0}$ sends this tensor to $\\iota_{F/E_0}(x)\\iota_{F/E}(b)c$, and $vB(u_E)$ sends it to $\\iota_{F/E}(\\iota_{E/E_0}(x)b)c$, the same section since coefficient inclusions compose. Equality on pure tensors gives equality on tensor presheaves and hence their sheafifications and derived images. The resolving comparison is the canonical one from step 1, so this proves the equation for the specified $u$ maps.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Agent calculation implementing coefficient transport, Step 3 of sk-thm-purity-transport"
+   }
+  },
+  {
+   "text": "Let $b_{H/L}:J_L\\otimes_{R_L}R_H\\to J_H$ be the canonical twist-line base change of lem-weil-integral-twist-base-change. Put $w_{H/L}=u_{H/L}(d)\\beta_{H/L,U_L}$ before shifting. The termwise formula in lem-weil-integral-twist-derived-scalar identifies this composite with $(x\\otimes l)\\otimes b\\mapsto\\iota_{H/L}(x)b\\,b_{H/L}(l\\otimes1)$, using the coefficient action $R_H\\otimes J_H\\cong J_H$. In the tower, $w_{F/E_0}\\alpha_{U_0(d)}$ on $((x\\otimes l)\\otimes b)\\otimes c$ has value $\\iota_{F/E_0}(x)\\iota_{F/E}(b)c\\,b_{F/E_0}(l\\otimes1)$. The successive path $w_{F/E}B(w_{E/E_0})$ has value $\\iota_{F/E_0}(x)\\iota_{F/E}(b)c\\,b_{F/E}(b_{E/E_0}(l\\otimes1)\\otimes1)$. These are equal by the tower compatibility explicitly asserted for $b$. The same pure-tensor/sheafification argument proves equality of these unshifted maps. Each $w$ is an isomorphism since both its factors are.",
+   "uses": [
+    "lem-weil-integral-twist-base-change",
+    "lem-weil-integral-twist-derived-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Agent calculation implementing coefficient transport, Step 3 of sk-thm-purity-transport"
+   }
+  },
+  {
+   "text": "Take $n=2d$. On a complex $P$, termwise coefficient extension identifies $(P[n])^r\\otimes R_H=P^{r+n}\\otimes R_H=(P\\otimes R_H)[n]^r$ by the identity on tensors, which also respects the differential $(-1)^n d_P\\otimes1$. Thus the specified $s$ is exactly this comparison. For two extensions, applying these identity component maps twice and then $\\alpha_P[n]$ gives $\\alpha_{P[n]}$ followed by the direct shift comparison: both send $(z\\otimes b)\\otimes c$ to $z\\otimes\\iota_{F/E}(b)c$. The same component calculation commutes with each $w$. Shift the equality of step 5 using these identities. Its direct composite is $q_{F/E_0}\\alpha_{T_0}$, and its successive composite is $q_{F/E}B(q_{E/E_0})$, by the defining formula for $q$. The equality is for the specified completed normalization as well: the chain-shift compatibility of the actual quotient-map comparison $\\chi$ is precisely lem-weil-completed-scalar-chain-shift. No inverse to $\\chi$ at chain level is used.",
+   "uses": [
+    "lem-weil-completed-scalar-chain-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Agent calculation implementing coefficient transport, Step 3 of sk-thm-purity-transport"
+   }
+  },
+  {
+   "text": "The composite defining $q_{H/L}$ is an isomorphism, so $AT_0\\cong T_E$ by $q_{E/E_0}$. The isomorphism-closure in lem-weil-integral-ctf-triangulated and step 3 put $AT_0$ in the required category. For an identity coefficient extension, multiplication $x\\otimes b\\mapsto xb$ is the canonical coefficient unitor, $b_{L/L}$ is the tensor-power unitor (the zero twist is coefficient multiplication), and $s$ is the componentwise comparison of step 6. In the formulas of steps 4 and 5 replace the relevant inclusion by the identity; the same products and the same tensor-power maps result on both paths. Hence both equations include repeated fields. Under $\\chi$ the identity functor is identified by the natural completeness map, as specified by lem-weil-finite-free-completed-scalar-comparison, rather than assumed strictly equal to its completion.",
+   "uses": [
+    "lem-weil-integral-ctf-triangulated",
+    "lem-weil-integral-twist-base-change",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Agent calculation implementing coefficient transport, Step 3 of sk-thm-purity-transport"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-twist-preserves",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-integral-ctf-triangulated",
+  "lem-weil-integral-twist-base-change",
+  "lem-weil-integral-twist-derived-scalar",
+  "lem-weil-completed-scalar-chain-shift"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+  "place": "Explicit coefficient-unit, Tate-line and shift calculations implementing coefficient transport in sk-thm-purity-transport Step 3; source gives the transport requirement, not this auxiliary coherence calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -80,10 +182,39 @@
    "results": "8 hits: CochainComplex.HomComplex.Cochain.rightUnshift_units_smul, CochainComplex.HomComplex.Cochain.leftUnshift_units_smul, CochainComplex.HomComplex.Cochain.shift_units_smul, CochainComplex.HomComplex.Cochain.rightShift_units_smul, CochainComplex.HomComplex.Cochain.leftShift_units_smul, HomologicalComplex.dgoEquivHomologicalComplex_unitIso, CochainComplex.HomComplex.Cochain.units_smul_comp, CochainComplex.HomComplex.δ_units_smul",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of a shifted rank one Tate coefficient sheaf has coherent multiplication unit comparisons in a tower",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Valuation.HasExtension.instIsScalarTowerInteger\", \"TensorProduct.CompatibleSMul.isScalarTower\", \"Units.instIsScalarTower\", \"Unitization.instIsScalarTower\", \"Algebra.Extension.instIsScalarTowerCotangent\", \"PiTensorProduct.isScalarTower'\", \"Derivation.instIsScalarTower\", \"TrivSqZeroExt.isScalarTower\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern module scalar towers, Hom-complex shifts or free-module maps, not all clauses for completed coefficient units and Tate lines"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical coefficient unit multiplication and shifted Tate twist scalar extension comparisons commute with a tower of finite l adic coefficient extensions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.H1Cotangent.map_comp\", \"ModuleCat.extendScalarsComp\", \"AdicCompletion.instIsScalarTower\", \"Algebra.Generators.CotangentSpace.compEquiv_symm_inr\", \"Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange\", \"Algebra.Extension.CotangentSpace.map_comp_apply\", \"Algebra.Extension.CotangentSpace.map_comp\", \"AdicCompletion.tensor_map_id_left_eq_map\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern module scalar towers, Hom-complex shifts or free-module maps, not all clauses for completed coefficient units and Tate lines"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|extendScalars_assoc",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern module scalar towers, Hom-complex shifts or free-module maps, not all clauses for completed coefficient units and Tate lines",
+   "directory": "Mathlib/Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars associator and multiplication unitor commute with shifting an invertible coefficient sheaf concentrated in one degree",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"CochainComplex.HomComplex.Cochain.shift_units_smul\", \"CochainComplex.HomComplex.Cochain.rightUnshift_units_smul\", \"CochainComplex.HomComplex.Cochain.leftUnshift_units_smul\", \"CochainComplex.HomComplex.Cochain.rightShift_units_smul\", \"CategoryTheory.CommShift₂Setup.hε\", \"SheafOfModules.unitToPushforwardObjUnit_val_app_apply\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern module scalar towers, Hom-complex shifts or free-module maps, not all clauses for completed coefficient units and Tate lines"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-adic-scalar-trace-coherence",
@@ -102,5 +233,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-shifted-tate-unit-scalar-coherence",
+  "worker": "stage1",
+  "summary": "Kept the statement and prescribed normalizations unchanged. Reused existing constant-unit, twist preservation, finite-free completion and canonical twist-line base-change nodes; wrote both tower equations on actual degree-zero models and canonical shifts. Checked empty schemes, d=0, repeated fields and ramified coefficient extensions. No new nodes.",
+  "blueprint": "Realizes coefficient-extension transport in thm-pur-rational-and-qbar-purity and sk-thm-purity-transport Step 3, at the completed unit and shifted Tate-unit vertices of lem-pur-adic-scalar-trace-coherence."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N7-2553cf383",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-2553cf383 (reviewer sub-agent of L); spot-checked: PASS: I read the item in full, with all ten cited statements and the main-20261015 source (Step 2 of thm-pur-rational-and-qbar-purity.proof, Step 3 of sk-thm-purity-transport: transitivity of transport in coefficient extensions). The delivery keeps the statement and stmt_deps byte-identical to side-live and adds no new nodes. proof_deps is exactly the union of the step uses. The dependency closure has no cycle and does not reach the item or its parent. No dropped nodes and no SGA references. Step 1: R_L[0] and J_L=O_L(d)[0] are K-flat with flat terms, since prop-weil-twist-preserves makes the line locally free of rank one, so lem-pur-derived-change-of-rings computes C on these models. Steps 2–3: clause 2 of lem-weil-constant-coefficient-objects-constructible gives reductions (A_{L,j})_S[0] with Tor interval [0,0]; twist preservation keeps it, and the shift moves it to [-2d,-2d] (degree 0 to -2d, checked). Step 4: I recomputed the unit equation on ((x⊗b)⊗c); both sides give ι_{F/E0}(x)ι_{F/E}(b)c. Step 5: from the β chain formula, w=u(d)β is (x⊗l)⊗b ↦ ι(x)b·b(l⊗1); the two paths agree by the tower compatibility that lem-weil-integral-twist-base-change states. Hypotheses hold: ℓ invertible since ℓ≠p, U_L complete constructible by Step 2, d≥0. Step 6: s is the identity on components and the differentials (-1)^n d⊗1 agree; I checked that naturality of s plus α_{P[n]}=α_P[n] gives the shifted equation, with no Koszul sign. Step 7: q is an isomorphism, so iso-closure in lem-weil-integral-ctf-triangulated puts AT_0 in the category. Identity extensions follow because the cited lemmas allow E=F, and the χ identity case is quoted from lem-weil-finite-free-completed-scalar-comparison. Edge cases checked: d=0, repeated fields, S empty, ramified extensions, S a point. Advisory: Step 5 could have cited the existing lem-weil-integral-twist-scalar-coherence (Q53) at C=U_0 instead of redoing the three-line computation. The citation of lem-weil-completed-scalar-chain-shift in Step 6 is correct but not strictly needed. def-pc-kflat-complex (sec-picard-framework) is a definition already in the closure through lem-pur-derived-change-of-rings; record it as a tool use if the route check flags it."
  }
 }
