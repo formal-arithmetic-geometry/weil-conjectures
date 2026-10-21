@@ -2,7 +2,7 @@
  "id": "lem-cbc-exact-linear-koszul-fiber",
  "kind": "statement",
  "title": "Exact linear functors preserve the signed Koszul completion model",
- "statement": "Let $(\\mathcal C,R)$ and $(\\mathcal D,S)$ be small ringed sites, and let a commutative ring $A$ act on $R,S$ by global sections. Let $F:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(S)$ [def-weil-sheaf-of-modules-category] be additive, exact and $A$-linear: $F(a f)=aF(f)$ for every $a\\in A$ and module map $f$. Suppose its canonical countable-product comparison $F(\\prod_m M_m)\\to\\prod_m F(M_m)$, characterized by the projections, is invertible. Assume countable products are exact in both module categories. Fix $r\\ge0$ and $a_1,\\ldots,a_r\\in A$. For $m\\ge1$ set $Q_m(R)=\\bigotimes_{i=1}^r[R\\xrightarrow{a_i^m}R]$ in degrees $[-r,0]$, with transitions multiplication by $a_i$ in degree $-1$ and identity in degree $0$ in each factor; define $Q_m(S)$ similarly. Use the total tensor convention [def-pc-tensor-complex-sheaves]. For a complex $C$, set $B_R(C)=\\prod_m(C\\otimes_R Q_m(R))$, let $s$ be the transition shift, and define\n$$H_R(C)^q=B_R(C)^q\\oplus B_R(C)^{q-1},\\qquad d(x,y)=(dx,(1-s)x-dy).$$\nLet $\\eta_C:C\\to H_R(C)$ be $c\\mapsto((c\\otimes1)_m,0)$. Define $H_S(FC)$ and its unit by the same formulas. There is a natural chain isomorphism\n$$h_C:F(H_R(C))\\xrightarrow{\\sim}H_S(FC),\\qquad h_C F(\\eta_C)=\\eta_{FC},$$\nusing the canonical finite-biproduct comparisons and countable-product comparison, with the same ordering of Koszul factors. It descends to the ordinary unbounded derived categories [def-weil-abstract-derived-category, lem-sf-exact-functor-derived-triangulated]. Thus invertibility of $\\eta_C$ in the derived category implies invertibility of $\\eta_{FC}$. The empty scalar list is allowed. This is a statement about the explicit signed model, not a choice of a map between unspecified cones.",
+ "statement": "Let $(\\mathcal C,R)$ and $(\\mathcal D,S)$ be small ringed sites with commutative structure sheaves $R,S$, and let a commutative ring $A$ act on $R,S$ by global sections. Let $F:\\operatorname{Mod}(R)\\to\\operatorname{Mod}(S)$ [def-weil-sheaf-of-modules-category] be additive [def-weil-pbc-additive-functor], exact and $A$-linear: $F(a f)=aF(f)$ for every $a\\in A$ and module map $f$. Suppose its canonical countable-product comparison [def-weil-category-product] $F(\\prod_m M_m)\\to\\prod_m F(M_m)$, characterized by the projections, is invertible. Assume countable products are exact in both module categories. Fix $r\\ge0$ and $a_1,\\ldots,a_r\\in A$. For $m\\ge1$ set $Q_m(R)=\\bigotimes_{i=1}^r[R\\xrightarrow{a_i^m}R]$ in degrees $[-r,0]$, with transitions multiplication by $a_i$ in degree $-1$ and identity in degree $0$ in each factor; define $Q_m(S)$ similarly. Use the total tensor convention [def-pc-tensor-complex-sheaves]. For a complex $C$, set $B_R(C)=\\prod_m(C\\otimes_R Q_m(R))$, let $s$ be the transition shift, and define\n$$H_R(C)^q=B_R(C)^q\\oplus B_R(C)^{q-1},\\qquad d(x,y)=(dx,(1-s)x-dy).$$\nLet $\\eta_C:C\\to H_R(C)$ be $c\\mapsto((c\\otimes1)_m,0)$. Define $H_S(FC)$ and its unit by the same formulas. There is a natural chain isomorphism\n$$h_C:F(H_R(C))\\xrightarrow{\\sim}H_S(FC),\\qquad h_C F(\\eta_C)=\\eta_{FC},$$\nusing the canonical finite-biproduct comparisons and countable-product comparison, with the same ordering of Koszul factors. It descends to the ordinary unbounded derived categories [def-weil-abstract-derived-category, lem-sf-exact-functor-derived-triangulated]. Thus invertibility of $\\eta_C$ in the derived category implies invertibility of $\\eta_{FC}$. The empty scalar list is allowed. This is a statement about the explicit signed model, not a choice of a map between unspecified cones.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
   "place": "Old intrinsic-completeness argument: signed fiber and unit comparison; Stacks 0A0E (algebraization.tex, lemma-derived-completion-koszul) supplies the Koszul model; the general exact-linear-functor refinement is agent-written."
@@ -11,11 +11,134 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-tensor-complex-sheaves",
   "def-weil-abstract-derived-category",
-  "lem-sf-exact-functor-derived-triangulated"
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-pbc-additive-functor",
+  "def-weil-category-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T_m(C)=C\\otimes_R Q_m(R)$. For $J\\subseteq\\{1,\\ldots,r\\}$ let $e_J$ denote the tensor having degree $-1$ exactly in the factors indexed by $J$. The multiplication maps $M\\otimes_R R\\to M$, $z\\otimes b\\mapsto bz$, with inverse $z\\mapsto z\\otimes1$, commute with restrictions and thus give inverse sheaf maps by [def-pur-sheaf-tensor-product]. Expanding the finitely many summands in the total tensor of [def-pc-tensor-complex-sheaves] gives $T_m(C)^q=\\bigoplus_J C^{q+|J|}e_J$ up to these specified canonical identifications. Set $\\epsilon(J,i)=(-1)^{|\\{j\\in J:j<i\\}|}$. On the $J$ summand, for $z$ of degree $p=q+|J|$, the differential is\n$$d(z e_J)=(d_Cz)e_J+\\sum_{i\\in J}(-1)^p\\epsilon(J,i)a_i^m z e_{J\\setminus\\{i\\}}.$$\nThe first sign is the total-tensor sign, and $\\epsilon$ counts the earlier degree $-1$ factors. The transition $t_m:T_{m+1}(C)\\to T_m(C)$ on the $J$ summand is multiplication by $a_J=\\prod_{i\\in J}a_i$. These are descriptions of module maps on finite summands; the notation does not assume an elementwise description of an arbitrary functor. For $r=0$ there is only $J=\\varnothing$, and $a_J=1$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; elementary finite-coordinate calculation with the total differential of def-pc-tensor-complex-sheaves"
+   }
+  },
+  {
+   "text": "For any finite family $(M_J)$ define $b:F(\\bigoplus_J M_J)\\to\\bigoplus_J F(M_J)$ by $\\pi_Jb=F(\\pi_J)$, and define $b^{-1}$ on the $J$th inclusion to be $F(\\iota_J)$. Additivity [def-weil-pbc-additive-functor] gives $F(0)=0$ and preservation of finite sums of maps. Hence $F(\\pi_J)F(\\iota_K)=\\delta_{JK}$ and $\\sum_J F(\\iota_J)F(\\pi_J)=F(1)=1$, proving the two inverse identities. For a map $v$ between finite biproducts, its $(K,J)$ entry after conjugating $F(v)$ by these comparisons is $F(\\pi_Kv\\iota_J)$, by functoriality. Thus the comparisons are natural and carry every entry $a v$ to $aF(v)$ by the assumed $A$-linearity. The empty-family case is also valid: $1_{F(0)}=F(1_0)=F(0)=0$, so $F(0)$ is a zero object.",
+   "uses": [
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 00ZY, definition-preadditive, additive functors; explicit biproduct identities"
+   }
+  },
+  {
+   "text": "Apply the comparisons of Step 2 to the coordinates of Step 1, using precisely the same ordered subsets on the $R$ and $S$ sides. They give degreewise isomorphisms $\\alpha_{m,C}:F(T_m(C))\\to T_m(FC)$. Every entry of the differential in Step 1 is either $d_C$, zero, or a signed scalar $(-1)^{q+|J|}\\epsilon(J,i)a_i^m$ times an identity. Its $F$-image is respectively $F(d_C)$, zero, or that same scalar times $1_{F(C^{q+|J|})}$. Thus $d\\alpha_{m,C}=\\alpha_{m,C}F(d)$ entry by entry, proving that $\\alpha_{m,C}$ is a chain isomorphism. The transition entry $a_J1$ similarly gives\n$$\\alpha_{m,C}F(t_m^R)=t_m^S\\alpha_{m+1,C}.$$\nA chain map $u:C\\to D$ acts on the $J$ summand by $u^{q+|J|}$, so the same entry calculation proves naturality in $C$. The inclusion $\\iota_m:C\\to T_m(C)$ into $J=\\varnothing$ satisfies $\\alpha_{m,C}F(\\iota_m)=\\iota_m'$ because Step 2 preserves the specified inclusions. This establishes tower and unit compatibility, without identifying $F(R)$ with $S$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; agent-written signed-model comparison refining the final paragraph of literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md"
+   }
+  },
+  {
+   "text": "Let $\\phi$ be the assumed invertible product comparison, degree by degree. Define $\\beta_C:F(B_R(C))\\to B_S(FC)$ by composing $\\phi$ with the product of the $\\alpha_{m,C}$ of Step 3. Its characterizing formula is\n$$\\operatorname{pr}_m\\beta_C=\\alpha_{m,C}F(\\operatorname{pr}_m).$$\nThe product of the inverses $\\alpha_{m,C}^{-1}$ is inverse to the product of the $\\alpha_{m,C}$, as checked at each projection [def-weil-category-product], so $\\beta_C$ is degreewise invertible. Projecting its differential equation to level $m$ reduces it to the chain equation for $\\alpha_{m,C}$, hence it is a chain isomorphism. Projecting the shift equation gives\n$$\\operatorname{pr}_m\\beta_CF(s_R)=\\alpha_{m,C}F(t_m^R)F(\\operatorname{pr}_{m+1})=t_m^S\\operatorname{pr}_{m+1}\\beta_C.$$\nConsequently $\\beta_CF(s_R)=s_S\\beta_C$, and additivity gives $\\beta_CF(1-s_R)=(1-s_S)\\beta_C$. Naturality follows by projecting to each $m$ and using Step 3. All equalities concern the canonical product comparison, rather than an arbitrary product isomorphism.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; agent-written signed-model comparison refining the final paragraph of literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md"
+   }
+  },
+  {
+   "text": "Define $h_C^q$ as the canonical binary-biproduct comparison of Step 2 followed by $\\beta_C^q\\oplus\\beta_C^{q-1}$. In these coordinates the source differential has block entries $F(d_B),0,F(1-s_R),-F(d_B)$. Step 4 and additivity [def-weil-pbc-additive-functor] identify them with the target entries $d_B,0,1-s_S,-d_B$. Equivalently, writing $(x,y)$ for the two source coordinates, both $d_Sh_C$ and $h_CF(d_R)$ have coordinates\n$$(d_B\\beta_Cx,\\ (1-s_S)\\beta_Cx-d_B\\beta_Cy).$$\nThus $h_C$ is a chain map. Each $h_C^q$ is invertible by construction, and its degreewise inverse is a chain map by multiplying the differential equation by those inverses. The naturality of the binary comparison and of $\\beta$ proves naturality of $h$. Directly, the stipulated fibre differential squares to zero because $d_B(1-s)=(1-s)d_B$, so its signs are consistent with the asserted model.",
+   "uses": [
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; agent-written signed-model comparison refining the final paragraph of literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md"
+   }
+  },
+  {
+   "text": "Let $e_C:C\\to B_R(C)$ have projections $\\iota_m$. Each $\\iota_m$ is a chain map by the total differential [def-pc-tensor-complex-sheaves], and $t_m\\iota_{m+1}=\\iota_m$ since transitions on the empty subset are identities. Hence $(1-s)e_C=0$, so $\\eta_C=(e_C,0)$ is a chain map. Step 4, followed by the inclusion identity of Step 3, gives\n$$\\operatorname{pr}_m\\beta_CF(e_C)=\\alpha_{m,C}F(\\iota_m)=\\iota_m'=\\operatorname{pr}_me_{FC}.$$\nThe product universal property [def-weil-category-product] proves $\\beta_CF(e_C)=e_{FC}$. In the second fibre coordinate $F(0)=0$ [def-weil-pbc-additive-functor]. The canonical binary comparison therefore gives the strict chain-map equality $h_CF(\\eta_C)=\\eta_{FC}$, including its zero second coordinate.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-category-product",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; agent-written signed-model comparison refining the final paragraph of literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-koszul-fibre-linear-descent] separately to the sites $\\mathcal C$ and $\\mathcal D$, their commutative structure sheaves $R,S$, and the respective images of the scalar list in global sections. Its exact-countable-product hypothesis is assumed for each module category, and it permits $r=0$ and arbitrary unbounded coefficient complexes. Its displayed differential is exactly $(dx,(1-s)x-dy)$; its transitions, diagonal action on chain maps, and degree-zero coaugmentation are exactly those used here. It follows that $H_R,H_S$ preserve quasi-isomorphisms and induce functors on the ordinary unbounded derived categories with the same units. Independently [lem-sf-exact-functor-derived-triangulated] applies to the assumed additive exact $F$ between the abelian module categories, and supplies its termwise derived functor $F_D$. Thus both composites $F_DH_R$ and $H_SF_D$ are defined on these derived categories; no boundedness or preservation of infinite coproducts by $F$ is needed.",
+   "uses": [
+    "lem-sbc-koszul-fibre-linear-descent",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul, with the signed-model descent of lem-sbc-koszul-fibre-linear-descent; termwise exact-functor descent: derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "Use the localization universal property [lem-weil-pbc-localization-universal-property](2) for the quasi-isomorphism localization from source complexes to $D(\\operatorname{Mod}(R))$ [def-weil-abstract-derived-category]. Step 7 supplies the two factorizations; the localized chain isomorphisms of Step 5 form a natural isomorphism before this factorization, so they descend to $h:F_DH_R\\xrightarrow{\\sim}H_SF_D$. The same localization property (3), applied to Step 6, yields $h_CF_D(\\eta_C)=\\eta_{F_DC}$ under the canonical factorization identifications. If $\\eta_C$ is invertible, its image under the functor $F_D$ is invertible, and $\\eta_{F_DC}$ is their composite with the invertible $h_C$. Its inverse is $F_D(\\eta_C^{-1})h_C^{-1}$. This proves the final implication for arbitrary derived objects as well as for displayed representatives.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural transformations and isomorphisms descend, with the explicit unit identity from Step 6"
+   }
+  },
+  {
+   "text": "For the allowed empty list, $T_m(C)=C$ and all transitions are identities. Steps 3 and 4 reduce to identity finite-coordinate comparisons and the assumed comparison $F(\\prod_m C)\\cong\\prod_m FC$. The first coordinate of $\\eta_C$ is the diagonal into this product, so Step 6 remains valid. For $r=1$ the differential on the negative Koszul summand is exactly $(-1)^{q+1}a_1^m$ and the transition there is $a_1$, checking the two sign and transition formulas at the first nontrivial case. Scalars equal to zero or units cause no division in any step; no regular-sequence hypothesis has been used.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; agent-written signed-model comparison refining the final paragraph of literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-additive-functor",
+  "def-weil-category-product",
+  "lem-sbc-koszul-fibre-linear-descent",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Final paragraph on exactness and countable-product preservation; explicit signed Koszul tower, product, fibre and unit comparison, supported by Stacks Tag 0A0E and the cited general descent results"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +174,52 @@
    "results": "[leansearch] OK 8 hit(s) CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.exactFunctor, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.mapExtLinearMap, CategoryTheory.ExactFunctor.of, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.ExactFunctor, CategoryTheory.Functor.totalRightDerivedUnit",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary ring localization, simplicial/Dold-Kan comparisons, generic exact functors or geometric/module pullback, not this ringed strict completion statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive linear functor preserving countable products commutes with the signed Koszul completion fiber and its canonical augmentation",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicTopology.DoldKan.map_PInfty_f, AlgebraicTopology.DoldKan.Γ₀'_map_F, AlgebraicTopology.DoldKan.map_Q, AlgebraicTopology.DoldKan.map_P, AlgebraicTopology.map_alternatingFaceMapComplex, AlgebraicTopology.DoldKan.compatibility_N₂_N₁_karoubi, CategoryTheory.Idempotents.DoldKan.η_hom_app_f, AlgebraicTopology.DoldKan.N₁",
+   "date": "2026-10-21",
+   "verdict": "no match: results provide Dold-Kan, scalar-matrix, complex-mapping or exact-functor infrastructure; none states the signed Koszul tower comparison with its specified unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"Functor\"",
+   "results": "[loogle] OK 0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "no match: results provide Dold-Kan, scalar-matrix, complex-mapping or exact-functor infrastructure; none states the signed Koszul tower comparison with its specified unit."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Ff]unctor|[Ff]unctor.*Koszul|completion.*[Ff]iber",
+   "results": "[grep] OK 0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "no match: results provide Dold-Kan, scalar-matrix, complex-mapping or exact-functor infrastructure; none states the signed Koszul tower comparison with its specified unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact linear functor preserving products commutes with the homotopy inverse limit of Koszul complexes",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.ExactFunctor.of, CategoryTheory.ExactFunctor, CategoryTheory.exactFunctor, CategoryTheory.Functor.preservesHomologyOfExact, CategoryTheory.leftExactFunctor, CategoryTheory.LeftExactFunctor.of, CategoryTheory.Functor.exact_tfae, CategoryTheory.exactFunctor_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: results provide Dold-Kan, scalar-matrix, complex-mapping or exact-functor infrastructure; none states the signed Koszul tower comparison with its specified unit."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul|koszul",
+   "results": "[grep] OK 1 hit(s): Mathlib/Algebra/Homology/LocalCohomology.lean; Mathlib/Algebra/Homology; LocalCohomology.lean:45 is only a future-work comment.",
+   "date": "2026-10-21",
+   "verdict": "no match: results provide Dold-Kan, scalar-matrix, complex-mapping or exact-functor infrastructure; none states the signed Koszul tower comparison with its specified unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving finite sums and products sends scalar matrices of Koszul complexes to the same matrices and respects completion coaugmentation",
+   "results": "[leanfinder] OK 8 hit(s): CategoryTheory.Functor.mapMatComp, ChainComplex.map_chain_complex_of, AlgebraicTopology.DoldKan.map_PInfty_f, AlgebraicTopology.DoldKan.Γ₀'_map_F, AlgebraicTopology.DoldKan.map_Q, CategoryTheory.Functor.mapMat__obj_ι, AlgebraicTopology.DoldKan.map_P, CategoryTheory.Preadditive.DoldKan.N",
+   "date": "2026-10-21",
+   "verdict": "no match: results provide Dold-Kan, scalar-matrix, complex-mapping or exact-functor infrastructure; none states the signed Koszul tower comparison with its specified unit."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-completed-extension-zero-comparison",
@@ -72,5 +237,29 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-exact-linear-koszul-fiber",
+  "worker": "stage1",
+  "summary": "Q53: made commutativity of R,S explicit as required by the tensor convention; proved the comparison via finite subset coordinates, biproduct identities, scalar differential and transition entries, canonical product projections, and the signed fibre matrix. Verified strict unit compatibility and reused the existing Koszul-fibre descent and exact-functor/localization leaves. No new nodes.",
+  "blueprint": "Realizes the intrinsic-completeness part of lem-cbc-completed-extension-zero-comparison and the final proof paragraph applying exactness and countable-product preservation to defining derived limits; only the conditional exact-linear algebraic comparison is asserted here.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-koszul-fibre-linear-descent",
+    "why": "Generic descent of precisely the signed Koszul fibre functor and its degree-zero unit on an arbitrary small ringed site with exact countable products; the compact-support base-change unit has no equally general descent node. This preserves the specified Koszul-completion route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-koszul-fibre-linear-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-003433662",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-003433662 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, every cited statement and the base text in side-live, which was unsplit. There is no re-split note for this item, and the delivery adds no new nodes. Statement change: it adds 'commutative structure sheaves R,S'. The tensor nodes it cites (def-pc-tensor-complex-sheaves, def-pur-sheaf-tensor-product) are defined only for commutative rings, so this is a typing clarification and not a new hypothesis. It also adds citations for additive and product. The only citer, lem-cbc-completed-extension-zero-comparison (F=e_! on commutative A_T), is unaffected. Steps 1-6 are elementary and I checked each one. Step 1: the Koszul signs (-1)^p·epsilon(J,i), the transitions a_J and the explicit unit isomorphism. Step 2: the biproduct comparison through its two biproduct identities, with A-linearity of the entries. Step 3: the entrywise chain, transition and inclusion compatibility. Step 4: pr_m s = t_m pr_{m+1}, and beta is invertible through the assumed comparison phi. Step 5: I multiplied out the fibre block matrices. Step 6: (1-s)e=0 and the strict unit equality. Step 7: the statement of lem-sbc-koszul-fibre-linear-descent has the same Q_m, transitions, fibre (dx,(1-s)x-dy), coaugmentation, r=0 case and exact-products hypothesis, applied separately to R and S. lem-sf-exact-functor-derived-triangulated gives F_D. Step 8: localization universal property clauses (2) and (3) descend h and the unit. Edge cases tested: F=0, r=0 (constant tower), r=1 with a=0, and unbounded C. Stacks 0A0E (algebraization.tex:1091) is cited only for the model, and the proof is agent-written. No SGA. No cycle: the closure has 204 nodes and does not contain the item. proof_deps equals the union of the step uses. I accept the tool use of lem-sbc-koszul-fibre-linear-descent (unit sk-rem-rest, generic descent of the exact model). Advisory: steps 4-5 could instead cite lem-cbc-exact-product-functor-roos-chain-maps from the same unit, but the direct argument is correct and short."
+ }
 }

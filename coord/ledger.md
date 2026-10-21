@@ -20564,3 +20564,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:08 L: merged deliver/Q41/pur7710-def-ind-etale-tests (stage 2; reviewer PASS; parallel immutable checks)
 - 07:08 L: merged deliver/NI/lem-cbc-constant-derived-limit-resolution-unit (stage 2; reviewer PASS; parallel immutable checks)
 - 07:10 L: returned deliver/Q88/lemma-nagata-finite-type-to-separated-target (reviewer RETURN: C3/C4 (major): following the blueprint_update, the item's master statement 'T→B of finite type and Y→B separated ⇒ T→Y o)
+- 07:13 L: merged deliver/Q53/lem-cbc-exact-linear-koszul-fiber (reviewer PASS; first push; new nodes: 0)
