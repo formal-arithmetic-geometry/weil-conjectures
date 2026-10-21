@@ -19,9 +19,65 @@
   "def-weil-pbc-adic-coefficient-datum",
   "lem-weil-pbc-continuous-coefficients-immersion-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the coefficient-sheaf identification in the statement throughout. Put $B=\\bigoplus_i M_i$ in $D$, write $\\iota_i:M_i\\to B$ for the coprojections, and set $G(N)=R\\operatorname{Hom}_{A_X}(K,N)\\in D(A)$ using the scalar-valued definition of global derived Hom. Apply the existing bounded-below compactness theorem with $T=X$, the same $E,A,\\varpi,K$, and this family. Its scheme and constructibility hypotheses are exactly ours; the given common lower bound is sufficient, and a small countable family is in particular small. It gives an isomorphism $\\alpha:\\bigoplus_iG(M_i)\\to G(B)$ whose composite with the $i$th coprojection is $G(\\iota_i)$. This invokes the stronger, already existing derived-Hom theorem; no compactness assertion for unbounded-below families is used.",
+   "uses": [
+    "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+    "def-weil-pbc-adic-global-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12 (and Lemma 6.8.11(3) for the coefficient-category convention); existing common-lower-bound formulation."
+   }
+  },
+  {
+   "text": "Apply $H^q:D(A)\\to\\operatorname{Mod}(A)$ to $\\alpha$. The derived-module cohomology-coproduct theorem, with $R=A$ and $E_i=G(M_i)$, identifies $H^q(\\bigoplus_iG(M_i))$ with $\\bigoplus_iH^qG(M_i)$ by the maps induced by its coprojections. It has no boundedness requirement on these $E_i$. Consequently the composite $\\beta:\\bigoplus_iH^qG(M_i)\\to H^qG(B)$ is an isomorphism of $A$-modules, and its $i$th component is $H^qG(\\iota_i)$. This is valid for every integer $q$, including negative $q$, and for the empty family.",
+   "uses": [
+    "lem-pc-derived-module-homology-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 07D9, Lemma lemma-derived-products, clauses (1)-(2); termwise sums and exactness of module sums."
+   }
+  },
+  {
+   "text": "Apply the ringed-site closed symmetric monoidal theorem to the small site $X_{\\mathrm{proet}}$ and $\\mathcal O=A_X$. Its tensor-Hom adjunction and symmetry make $H_K(N)=R\\mathcal Hom_{A_X}(K,N)$ a right adjoint of $K\\otimes^{\\mathbf L}-$, as required by the sections-model theorem. That theorem gives $\\theta_N:H^qG(N)\\cong\\operatorname{Hom}_D(K,N[q])$ for every $N$, naturally in $N$. To check coefficients, use the definition of $G$: its derived sections are computed on K-injective complexes of $A_X$-modules. Forgetting $A$ from their global-section complexes gives exactly the complexes defining abelian-group-valued derived sections in the model theorem. Kernels and images are unchanged on forgetting scalars, so the displayed cohomology identification applies to the underlying groups of $H^qG(N)$. Multiplication by $a\\in A$ comes from the constant scalar section and is postcomposition by $a\\,1_N$ on the model Hom complex. Naturality of the model identification for that endomorphism shows that $\\theta_N$ is $A$-linear. Its stated naturality on K-injective target maps descends through localization and therefore applies to every derived coprojection $\\iota_i$. No boundedness or flatness of $N$ is required.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "def-weil-pbc-adic-global-derived-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 and 08J9 (derived tensor-Hom adjunction), 08JA (global derived Hom), and 0A96 (K-flat/K-injective model); shifted Hom complex in every degree."
+   }
+  },
+  {
+   "text": "Conjugate $\\beta$ by $\\bigoplus_i\\theta_{M_i}$ and $\\theta_B$. On the $i$th summand, naturality gives $u:K\\to M_i[q]\\mapsto\\iota_i[q]\\circ u:K\\to B[q]$. The universal property of the module direct sum therefore identifies this conjugate with precisely the canonical map in the statement. Since all three maps used in the conjugation are isomorphisms, the required map is an isomorphism. For $I=\\varnothing$, $B=0$ and both sides are zero, in agreement with the same argument.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.12, passage to cohomology and the coprojection-induced comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-constructible-bounded-below-compactness",
+  "def-weil-pbc-adic-global-derived-hom",
+  "lem-pc-derived-module-homology-coproduct",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-internal-hom-sections-model"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.12; its cohomological consequence via Stacks Tags 07D9, 08J7, 08J9 and 08JA."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +120,52 @@
    "results": "[grep] OK 0 hit(s); searched Mathlib/CategoryTheory",
    "date": "2026-10-21",
    "verdict": "no match: zero hits in the relevant Mathlib subdirectory"
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|adic|pro.?etale).*(coproduct|[Hh]om)|[Hh]om.*constructible",
+   "results": "[grep] OK 0 hit(s); none; searched Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Morphisms out of a bounded constructible integral adic complex preserve uniformly bounded below direct sums",
+   "results": "[leansearch] OK 8 hit(s); AdicCompletion.sum_lof, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, CategoryTheory.MorphismProperty.instIsStableUnderCoproductsMonomorphismsOfAB4OfSize, AdicCompletion.sum_of, AdicCompletion.sum, AdicCompletion.sumEquivOfFintype_apply, AdicCompletion.sumInv_apply, AdicCompletion.sumInv_comp_sum",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern ordinary algebraic adic completion, generic derived-category infrastructure or scheme quasi-compactness, not constructible integral pro-etale sources and uniformly bounded-below coproducts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"coproduct\"",
+   "results": "[loogle] OK 0 hit(s); none",
+   "date": "2026-10-21",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a constructible complete integral pro etale complex commutes with countable coproducts with a common cohomological lower bound",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, DerivedCategory.left_fac_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE, CategoryTheory.Functor.mapDerivedCategoryFactorsh, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern ordinary algebraic adic completion, generic derived-category infrastructure or scheme quasi-compactness, not constructible integral pro-etale sources and uniformly bounded-below coproducts"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|pro.?etale",
+   "results": "[grep] OK 0 hit(s); none; searched Mathlib/Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded constructible ell adic source is compact relative to uniformly connective families in the derived category of pro etale sheaves",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.QuasiCompactCover, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty', AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_preimage_eq, AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty, AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern ordinary algebraic adic completion, generic derived-category infrastructure or scheme quasi-compactness, not constructible integral pro-etale sources and uniformly bounded-below coproducts"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-lisse-e-constructible-integral-lattice",
@@ -88,5 +186,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-integral-constructible-hom-sums",
+  "worker": "stage1",
+  "summary": "Kept the statement and coefficient hypotheses unchanged. Reused the existing stronger global derived-Hom coproduct theorem, then passed to cohomology using the module coproduct theorem and the all-degree ringed-site sections model. Checked naturality, A-linearity, negative degrees and the empty family. No new nodes and no Mathlib leaves; no finished Lean attachment found. Preserved inherited search records and added the six Q48 searches actually logged.",
+  "blueprint": "Ancestor thm-weil-pbc-finite-extension, historical first sentence \"Choose an integral lattice for K\", through lem-weil-pbc-lisse-e-constructible-integral-lattice, lem-weil-pbc-condensed-e-realization and nt-target-proetale-e. This item supplies the cohomological form of Bhatt-Scholze 6.8.12 used in the historical Ext denominator argument; it does not replace any step of the proper-base-change unit. The current main-20261015 proof uses integral-to-rational transport. Whole-blueprint searches found no same-statement blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-module-homology-coproduct",
+    "why": "Generic cohomology of coproducts in the derived category of modules; the proper-base-change unit supplies no such general homological-algebra statement."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic all-degree identification of derived global internal Hom with shifted derived morphisms, including naturality; this does not replace the unit route."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site tensor-Hom adjunction and symmetry identify the internal Hom as the right adjoint required by the sections-model theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-module-homology-coproduct",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-e698543b2",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-e698543b2 (reviewer sub-agent of L); spot-checked: I read the item, the five nodes it cites and the source: Bhatt–Scholze 1309.1198, Lemma 6.8.12, together with its use in 6.8.13. The delivery has no new nodes, and the statement, stmt_deps and blueprint fields are byte-identical to the live unsplit node, so the target is not weakened. The item is not on the 2026-10-19 drop list, and its dependency closure (2654 nodes) contains no cycle. Step 1 applies the existing same-unit lem-weil-pbc-integral-constructible-bounded-below-compactness: it has the same E, O_E, ϖ, noetherian finite-dimensional base with ℓ invertible and bounded-constructible-complete K, and covers any small family with a common lower bound. Its legs are G(ι_i). Step 2 uses lem-pc-derived-module-homology-coproduct (Stacks 07D9), which allows unbounded complexes and the empty family. Step 3 uses the closed symmetric monoidal structure plus symmetry to make RHom(K,−) a right adjoint, as the sections model needs; the sections model then gives H^q RΓ = Hom_D(K,M[q]) in every degree, naturally in M. The A-linearity check is correct: both RΓ's are computed on K-injective complexes with the same global sections, and naturality for the map a·1 gives linearity. Step 4 is an elementary conjugation that yields u ↦ ι_i[q]∘u. I checked the empty family, a singleton, negative q and torsion K. Duplicate search: lem-integral-window-coproduct-comparison uses a different, condensed finite-window setting, so it is not a duplicate. I accept the three generic homological-algebra tool_uses (picard, sf-biduality and int-ext units). No SGA source is used, and no fixes were needed."
  }
 }
