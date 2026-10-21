@@ -21916,3 +21916,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:29 L: returned deliver/Q73/lem-pur-inverse-image-scalar-unit-normalization (reviewer RETURN: L: independent stage-2 immutable head 334650707987: H13+H4. Item maths correct: unrestricted h/R on actual ProEt sites; )
 - 09:29 L: returned deliver/NW/lem-trf-completion-unit-strict-quotient-model (reviewer RETURN: L: independent stage-2 immutable head 43763eb2cdb6: H2/C5: delivery added theorem stmt_dep lem-weil-integral-reduction-t)
 - 09:29 L: returned deliver/NV/lem-weil-pbc-flat-scalar-tower-limit-square (reviewer RETURN: L: independent stage-2 immutable head 5703f407c8c9: H2: stmt_deps add theorem node lem-weil-pbc-exact-adjoint-tower-mode)
+- 09:29 L: returned deliver/Q36/lem-sf-completed-coefficient-free-resolution (reviewer RETURN: L: independent stage-2 immutable head 5c777a52d4dd: H2/theorem stmt_dep: lem-weil-integral-scalar-extension-well-defined)
