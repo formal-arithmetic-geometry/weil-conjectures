@@ -23,10 +23,9 @@
  ],
  "proof": [
   {
-   "text": "Put $P_n=A/I^n$, write $r_n:\\underline A_X\\to(P_n)_X$ for the constant quotient map, and $\\pi_n:A_X\\to(P_n)_X$ for the actual limit projections. By definition $s_X;\\pi_n=r_n$. By the profinite-coefficient inverse-image theorem (system $Q_n=P_n$, finite by the datum), $c_e;\\pi_n=e^{-1}(\\pi_n);c_{P_n}$, where $(P_n)_X$ is the constant ring sheaf of $P_n$ (that theorem identifies it with the sheafified $\\operatorname{Cont}(\\pi_0(|U|),P_n)$ of the datum) and $c_{P_n}$ is adjoint to the map fixing constant sections, i.e. the structure map of [def-weil-proetale-inverse-image]. Under this identification $r_n$ is the constant-sheaf map of the quotient $A\\to P_n$, so clause 3 of the isomorphism inverse-image theorem gives $c_A;r_n=e^{-1}(r_n);c_{P_n}$. Consequently\n$$c_A;s_X;\\pi_n=c_A;r_n=e^{-1}(r_n);c_{P_n}=e^{-1}(s_X);e^{-1}(\\pi_n);c_{P_n}=e^{-1}(s_X);c_e;\\pi_n.$$\nThe projections of the sectionwise compatible-family limit are jointly injective, proving $c_A;s_X=e^{-1}(s_X);c_e$. All these are the actual coefficient maps in the statement.",
+   "text": "Put $P_n=A/I^n$, write $r_n:\\underline A_X\\to(P_n)_X$ for the constant quotient map, and $\\pi_n:A_X\\to(P_n)_X$ for the actual limit projections. By definition $s_X;\\pi_n=r_n$. By the profinite-coefficient inverse-image theorem (system $Q_n=P_n$, finite by the datum), $c_e;\\pi_n=e^{-1}(\\pi_n);c_{P_n}$, where $(P_n)_X$ is the constant ring sheaf of $P_n$ (that theorem identifies it with the sheafified $\\operatorname{Cont}(\\pi_0(|U|),P_n)$ of the datum) and $c_{P_n}$ is adjoint to the map fixing constant sections, i.e. the structure map of [def-weil-proetale-inverse-image]. Under this identification $r_n$ is the constant-sheaf map of the quotient $A\\to P_n$, so the proved naturality lemma proEtaleConstantInverseImageMap_naturality in the profinite-coefficient inverse-image module gives $c_A;r_n=e^{-1}(r_n);c_{P_n}$. Consequently\n$$c_A;s_X;\\pi_n=c_A;r_n=e^{-1}(r_n);c_{P_n}=e^{-1}(s_X);e^{-1}(\\pi_n);c_{P_n}=e^{-1}(s_X);c_e;\\pi_n.$$\nThe projections of the sectionwise compatible-family limit are jointly injective, proving $c_A;s_X=e^{-1}(s_X);c_e$. All these are the actual coefficient maps in the statement.",
    "uses": [
     "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-proetale-isomorphism-inverse-image",
     "lem-weil-pbc-profinite-coefficient-inverse-image",
     "def-weil-proetale-inverse-image"
    ],
@@ -73,11 +72,10 @@
    }
   },
   {
-   "text": "The underlying sheaf inverse image of $e$ is an equivalence by the isomorphism inverse-image theorem. The completed coefficient structure map $c_e$ is invertible by the profinite-coefficient inverse-image theorem: it is the inverse-image limit comparison followed by the limit of the constant quotient isomorphisms. Thus this is an equivalence of ringed topoi on the chosen small sites. Apply ringed-presentation transport with both rings equal to $A_X$ and structural map exactly $c_e$. Its module adjunction is the same $F\\dashv G$ as in Step 4, and is an exact equivalence. In particular $F$ and $G$ preserve finite limits and finite colimits, as required for the exact-functor derived-linearity theorem.",
+   "text": "For the automorphism e, use pbcIsoModulePullback_isEquivalence and pbcIsoModulePullback_eq_completed of [def-wf-automorphism-completed-transport]. Rewriting the latter equality identifies the specified completedModulePullback with that exact equivalence, so it preserves finite limits and colimits. The specified adjunction pbcActualModuleAdjunction, an instance of [lem-weil-pbc-ringed-topoi-module-adjunction], makes completedModuleDirectImage its right adjoint. An adjoint of an equivalence is an equivalence, and thus also preserves finite limits and colimits. This uses the already stated normalized comparison rather than rebuilding a ringed presentation.",
    "uses": [
-    "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-ringed-presentation-transport"
+    "def-wf-automorphism-completed-transport",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -98,12 +96,12 @@
    }
   },
   {
-   "text": "Fix any finite tuple generating $I$. Apply the automorphism-completion-unit comparison to this datum, $e$, and the coefficient map already used above. Its hypotheses are precisely the Noetherian datum, additive-torsion $A/I$, finite perfect quotients, and the chosen small site in the statement. It gives preservation of the full subcategory where the intrinsic completion unit is invertible, for this generating tuple and every representative. The functor of that theorem is the ordinary K-flat derived pullback $Le^*$ along $c_e$ of [lem-weil-pbc-ringed-topoi-derived-pullback], not the termwise functor of Step 6. It is $A$-linear by ringed derived-pullback linearity, with $R=A$ and $s_A=s_B$ the global scalar sections $b\\mapsto s_X(b)$: its hypothesis that $c_e$ carries $e^{-1}s_X(b)$ to $s_X(b)$ is the adjunct form of Step 2 on the final object, since $c_e^\\#=\\eta_{A_X};e_*(c_e)$ and $\\eta$ sends a global section to its inverse image. Restrict $Le^*$ to the preserved full subcategory. Its Hom sets, scalar actions and addition are inherited unchanged. Thus for parallel maps of complete objects, $H_{\\mathrm{comp}}(bf)=bH_{\\mathrm{comp}}(f)$ and $H_{\\mathrm{comp}}(f+g)=H_{\\mathrm{comp}}(f)+H_{\\mathrm{comp}}(g)$, as asserted.",
+   "text": "Fix any finite tuple generating I. The equality pbcIsoModulePullback_eq_completed transfers module A-linearity from Step 4 to the exact transport functor of [def-wf-automorphism-completed-transport]. Step 6 then gives A-linearity and additivity of its exact derived descent. Transfer both properties along the inverse of pbcIsoOrdinaryDerivedComparison to completedOrdinaryPullback. To prove completeness, put H=pbcIsoAmbientPullback and alpha_K:completedOrdinaryPullback(K)≅H(K). Choose the actual wfCompletionRepresentative D of completedOrdinaryPullback(K), with realization realD. Apply the final unit-comparison clause of [lem-sf-automorphism-completion-unit-comparison] to the chosen source representative of K and the target representative D, realized as realD followed by alpha_K. It supplies c with H(intrinsicUnit_K);c=intrinsicUnit_{H(K),D,realD;alpha_K}. The left side is invertible when K is complete. By the explicit definition of intrinsicCompletionUnit, the target unit at completedOrdinaryPullback(K),D,realD is alpha_K followed by the unit just shown invertible. This proves completeness for exactly the published representative, without a separate representative-invariance lemma. Lift completedOrdinaryPullback through ObjectProperty.lift using this preservation. Its underlying inclusion composite is definitionally the ambient pullback; morphisms inherit the same addition and A-action, so ambient map_add and map_smul prove the two restricted map equations.",
    "uses": [
+    "def-wf-automorphism-completed-transport",
     "lem-sf-automorphism-completion-unit-comparison",
     "def-weil-pbc-intrinsic-completion",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pur-ringed-derived-pullback-linear"
+    "def-weil-pbc-completed-pullback"
    ],
    "elementary": false,
    "source": {
@@ -114,23 +112,21 @@
  ],
  "proof_deps": [
   "def-weil-pbc-adic-coefficient-datum",
-  "lem-weil-proetale-isomorphism-inverse-image",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "def-weil-proetale-inverse-image",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
   "def-weil-linear-category",
-  "lem-weil-pbc-ringed-presentation-transport",
+  "def-wf-automorphism-completed-transport",
   "lem-weil-linear-abelian-derived-category",
   "lem-cbc-exact-linear-derived-functor",
   "lem-sf-automorphism-completion-unit-comparison",
   "def-weil-pbc-intrinsic-completion",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-pur-ringed-derived-pullback-linear"
+  "def-weil-pbc-completed-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
-  "place": "Second sentence, tensor Frobenius coefficient transport; quotient-projection and adjunction calculations, using existing exact transport and completion theorems"
+  "place": "Second sentence; quotient projection and adjunct scalar calculations, exact transport via the already stated pbcIsoModulePullback_eq_completed and pbcIsoOrdinaryDerivedComparison, and the existing automorphism intrinsic-unit comparison; Lean proof by E3, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -253,11 +249,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ringed-presentation-transport",
-  "lem-weil-proetale-isomorphism-inverse-image",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-pur-ringed-derived-pullback-linear"
+  "lem-weil-pbc-profinite-coefficient-inverse-image"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -294,5 +287,15 @@
   "group": "Q06",
   "result": "pass",
   "note": "Re-delivery of af4f9f84 (RETURN H2/H11, maths found correct there). Delta: the Lean module only drops the citation-only imports PbcQbarCompletedPullback/CompletedDirectImageLimits (H9); all 8 signatures are byte-identical. The theorem stmt_deps lem-weil-pbc-ringed-koszul-completion-reflector and prop-weil-pbc-direct-image-limits are replaced by new existing:true def nodes: def-sf-complete-derived-subcategory (wfCompletionRepresentative/WfIsComplete/WfCompleteCategory on WeilCompletedTensorReflector) and def-sf-completed-module-direct-image (completedCoefficientDirectImageMap = unit ≫ f_*c_f, completedModuleDirectImage = pushforward with action along c_f^# on CompletedTowerDirectImage). TeX statements match the live bodies; check_existing reports no failures and no notes; ids not live; no competing def owner. Body owners cited (intrinsic-completion, proetale-inverse-image, completed-pullback); pbcModules/pbcAdicCompletion/PbcCompletedDerived owners uncited = base convention, advisory. Report has a real clause-by-clause '## Second reading by Q06' (H11 fixed) and a Worker report. No stmt_dep dropped vs live (8 kept, 4 added); item not landed or superseded; lean.statement verbatim; all 8 declarations present. Maths re-confirmed: scalar squares and section equation, canonical c_e, Le^* = completedOrdinaryPullback (universal K-flat left-derived functor; keeps the u+1/u universes), preservation for every tuple incl. r=0, H pinned by H⋙ι = ι⋙Le^*; edge cases e=id, empty X, zero A, I=A, I=0, b=0/1 admitted. No file changed, nothing compiled; worker reports a clean compile (6.7/6.9 s) and an OK dry run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T130003-L-2479235",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
