@@ -14,9 +14,114 @@
   "def-pur-hom-complex",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-sfb-ringed-site-bounded-dual-components] for the given bounded $E$, with exactly the same small ringed site and commutative $R$. Its projection isomorphisms identify $D^q$ with $(E^{-q})^\\vee$, identify its differential with $\\phi\\mapsto(-1)^{q+1}\\phi d_E^{-q-1}$, and give $D^q=0$ outside $[-b,-a]$. Only these clauses are used; the bidual clause is unnecessary. Write $S=\\{i\\in\\mathbf Z:a\\leq i\\leq b\\}$, a finite set, and $T=\\operatorname{Tot}(F\\otimes_R D)$, $H=\\mathcal Hom_R^\\bullet(E,F)$.",
+   "uses": [
+    "lem-sfb-ringed-site-bounded-dual-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, ordinary dual terms in the second paragraph; Tag 0A8X, section-hom-complexes, Hom differential."
+   }
+  },
+  {
+   "text": "By [def-pc-tensor-complex-sheaves], $T^n=\\bigoplus_{p+q=n}F^p\\otimes_R D^q$. A tensor factor with $D^q=0$ is zero: its presheaf tensor product is sectionwise zero by bilinearity, and its sheafification is zero by the universal property in [def-weil-presheaf-modules-sheafification], using [def-pur-sheaf-tensor-product]. For $q$ in $[-b,-a]$ put $i=-q$; then $p=n+i$. Define an isomorphism $T^n\\to A_n:=\\bigoplus_{i\\in S}F^{n+i}\\otimes_R(E^i)^\\vee$ on each surviving summand by this reindexing and step 1's projection, and on each zero summand by zero. Define its inverse on the $i$th summand by the inverse projection and the total-complex inclusion at $(n+i,-i)$. Both composites are identities after precomposition with every coproduct inclusion. Thus these are inverse sheaf maps. This argument includes $S=\\varnothing$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, displayed terms of the tensor complex; explicit finite-support reindexing."
+   }
+  },
+  {
+   "text": "By [def-pur-hom-complex], $H^n=\\prod_{r\\in\\mathbf Z}\\mathcal Hom_R(E^r,F^{r+n})$. Outside $S$ each factor is zero: on every slice there is just one linear map from the zero module sheaf, by [def-pur-sheaf-hom]. Projection onto the $S$-factors and insertion of zero maps in all other factors are mutually inverse, checked on product projections. For $B_i=\\mathcal Hom_R(E^i,F^{n+i})$, the finite product $P_n=\\prod_{i\\in S}B_i$ is also their coproduct: let $u_i:B_i\\to P_n$ have $i$th component the identity and other components zero. For maps $g_i:B_i\\to Z$, their extension is $\\sum_{i\\in S}g_i\\pi_i$, since $\\pi_j u_i$ is the identity for $i=j$ and zero otherwise, and $\\sum_i u_i\\pi_i=1$ after every product projection. Sums of morphisms are available in the abelian module-sheaf category [def-weil-sheaf-of-modules-category]. This gives the asserted canonical identification $H^n\\cong\\bigoplus_{i\\in S}B_i$, including the empty product, which is the zero sheaf.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, displayed terms of the Hom complex; Tag 0A8X, section-hom-complexes, product definition."
+   }
+  },
+  {
+   "text": "Construct $\\epsilon^n$ before asserting its invertibility. For $p+q=n$, a section $y\\in F^p(U)$ and $\\phi\\in D^q(U)$ determine a family with just the $r=-q$ component nonzero. On an object $V\\to U$ of the slice this component sends $x\\in E^{-q}(V)$ to $y|_V\\,\\phi_V(x)\\in F^p(V)$, where $\\phi$ is projected as in step 1. This is linear in $x$, compatible with restriction to every $V\\to U$, additive and $R(U)$-balanced in $y,\\phi$. The descriptions in [def-pur-sheaf-hom, def-pur-hom-complex] therefore give a linear map from the presheaf tensor to $H^n$. The tensor definition [def-pur-sheaf-tensor-product] and the sheafification universal property [def-weil-presheaf-modules-sheafification] extend it uniquely to $F^p\\otimes_R D^q\\to H^n$. The coproduct property defining $T^n$ then gives $\\epsilon^n$. Its prescribed homogeneous formula contains no extra sign.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final displayed canonical comparison; Tag 0A8X, section-hom-complexes, homogeneous-map description."
+   }
+  },
+  {
+   "text": "Check $d_H\\epsilon^n=\\epsilon^{n+1}d_T$ on each tensor summand and then on pure tensors before sheafification; equality there implies equality of sheaf maps by the uniqueness in [def-weil-presheaf-modules-sheafification]. For $y$ of degree $p$ and $\\phi$ of degree $q$, step 1 and [def-pc-tensor-complex-sheaves] give $d_T(y\\otimes\\phi)=d_Fy\\otimes\\phi+(-1)^{p+q+1}y\\otimes(\\phi d_E)$. Put $f=\\epsilon^n(y\\otimes\\phi)$, supported at $r=-q$. By [def-pur-hom-complex], $(d_Hf)^r=d_F^{r+n}f^r-(-1)^n f^{r+1}d_E^r$. The only possible terms are $x\\mapsto(d_Fy)\\phi(x)$ at $r=-q$ and $x\\mapsto(-1)^{p+q+1}y\\phi(d_Ex)$ at $r=-q-1$. Linearity of $d_F$ justifies the first equality on every slice. These are exactly the images of the two tensor differential terms above, and every other component is zero. Hence the maps $\\epsilon^n$ form the required chain map, with precisely the differential comparison in the statement.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, differential d(f)=d_F f-(-1)^n f d_E; Tag 08JJ, lemma-dual-perfect-complex, termwise comparison."
+   }
+  },
+  {
+   "text": "Under the identifications of steps 2 and 3, the $i$th source inclusion is the tensor summand at $(p,q)=(n+i,-i)$, with $D^{-i}$ identified with $(E^i)^\\vee$. By step 4 its composite with the $j$th target projection is zero if $j\\ne i$, and if $j=i$ it is exactly $y\\otimes\\phi\\mapsto(x\\mapsto y\\phi(x))$, namely $\\theta_{i,F^{n+i}}$. Coproduct inclusions and product projections determine a morphism uniquely. Consequently the matrix of $\\epsilon^n$ is the finite diagonal map $\\bigoplus_{i\\in S}\\theta_{i,F^{n+i}}$, with the stated canonical identifications, rather than an unspecified isomorphism between the two objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, last three displays and reduction to module evaluation."
+   }
+  },
+  {
+   "text": "For each $i\\in S$ the hypothesis applies to the module sheaf $M=F^{n+i}$, so $\\theta_{i,F^{n+i}}$ has an inverse sheaf morphism. Form the opposite diagonal map using these inverses. Multiplying the two finite matrices gives the identity on each diagonal and zero off the diagonal, in both orders. Conjugating by steps 2 and 3 gives $g^n:H^n\\to T^n$ with $g^n\\epsilon^n=1$ and $\\epsilon^n g^n=1$. For empty $S$ these are the unique maps between zero sheaves. Thus every actual component $\\epsilon^n$ is invertible; the argument requires no bound on any degree of $F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, final reduction to invertible module comparisons; explicit inverse matrix."
+   }
+  },
+  {
+   "text": "From step 5, $d_H^n\\epsilon^n=\\epsilon^{n+1}d_T^n$. Composing on the left with $g^{n+1}$ and on the right with $g^n$ gives $g^{n+1}d_H^n=d_T^n g^n$. Hence the $g^n$ form an inverse chain map, and the two composites with $\\epsilon$ are identities componentwise by step 7. All constructions use the bounded support of $E$, the stated termwise comparisons, and the ordinary Hom and tensor definitions. In particular no K-flat resolution, finite-free retract, or boundedness of $F$ was invoked.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JJ, lemma-dual-perfect-complex, invertibility of evaluation, completed by inversion of the chain-map identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-bounded-dual-components",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, last three displays and final sentence; Tag 0A8X, section-hom-complexes. Explicit finite-support maps, inverse matrices, and differential calculation fill in the ordinary-complex argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +150,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"dualTensorHomEquivOfBasis\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"Let $R$ be a commutative semiring, and let $M$ and $N$ be modules over $R$. If $M$ is a free module with a finite basis, then there is an $R$-linear isomorphism between the tensor product of the dual \"}\n  {\"name\": \"lTensorHomEquivHomLTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": P ⊗[R] (M →ₗ[R] Q) ≃ₗ[R] M →ₗ[R] P ⊗[R] Q\", \"doc\": \"Let $R$ be a commutative semiring, and let $P, Q$ be $R$-modules and $M$ be a free $R$-module. There is a canonical $R$-linear isomorphism: $$ P \\\\otimes_R \\\\text{Hom}_R(M, Q) \\\\cong \\\\text{Hom}_R(M, P \\\\o\"}\n  {\"name\": \"dualTensorHomEquiv\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": Module.Dual R M ⊗[R] N ≃ₗ[R] M →ₗ[R] N\", \"doc\": \"For a commutative semiring $ R $, a free $ R $-module $ M $, and an $ R $-module $ N $, the tensor product of the dual module $ M^* $ with $ N $ is linearly isomorphic to the module of $ R $-linear ma\"}\n  {\"name\": \"HomologicalComplex.Hom.isoOfComponents_app\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \"(f : ∀ i, C₁.X i ≅ C₂.X i) (hf : ∀ i j, c.Rel i j → (f i).hom ≫ C₂.d i j = C₁.d i j ≫ (f j).hom) (i : ι) :\\n  isoApp (isoOfComponents f hf) i = f i\", \"doc\": \"For homological complexes $C_1$ and $C_2$ in a category $V$ with zero morphisms, parameterized by an index type $\\\\iota$ and shape $c$, if there exists a family of isomorphisms $f_i : C_1.X(i) \\\\cong C_\"}\n  {\"name\": \"HomologicalComplex.Hom.isoApp\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplex\", \"type\": \"(f : C₁ ≅ C₂) (i : ι) : C₁.X i ≅ C₂.X i\", \"doc\": \"Given an isomorphism $ f : C₁ \\\\cong C₂ $ between homological complexes in a category $ V $ with shape $ c $, and an index $ i $, this constructs the induced isomorphism $ C₁.X(i) \\\\cong C₂.X(i) $ by ap\"}\n  {\"name\": \"quasiIsoAt_of_isIso\", \"module\": \"Mathlib.Algebra.Homology.QuasiIso\", \"type\": \"(f : K ⟶ L) [IsIso f] (i : ι) [K.HasHomology i] [L.HasHomology i] : QuasiIsoAt f i\", \"doc\": \"If $ f : K \\to L $ is an isomorphism of homological complexes and both $ K $ and $ L $ have homology at index $ i $, then the induced map on homology $ H_i(f) : H_i(K) \\to H_i(L) $ is an isomorphism. Th\"}\n  {\"name\": \"HomologicalComplex.biprodXIso\", \"module\": \"Mathlib.Algebra.Homology.HomologicalComplexBiprod\", \"type\": \"(i : ι) : (K ⊞ L).X i ≅ (K.X i) ⊞ (L.X i)\", \"doc\": \"For each index $i$, the $i$-th component of the biproduct complex $K ⊞ L$ is isomorphic to the biproduct of the $i$-th components $K.X i$ and $L.X i$. This follows from the evaluation functor at index\"}\n  {\"name\": \"CategoryTheory.ShortComplex.isIso_leftRightHomologyComparison'_of_homologyData\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.Homology\", \"type\": \"(h : S.HomologyData) : IsIso (leftRightHomologyComparison' h.left h.right)\", \"doc\": \"For any short complex $ S $ equipped with homology data, the morphism from the left homology object to the right homology object of $ S $ is an isomorphism.\"}",
    "date": "2026-10-21",
    "verdict": "no match: module contraction, monoidal-complex unitors, and componentwise isomorphisms do not supply the internal sheaf Hom finite-support block identification."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, CategoryTheory.MonoidalClosed",
+   "results": "[loogle] OK 0 hit(s)\n{\"top\": [], \"note\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: module contraction and rigid hom-set equivalences do not give this internal sheaf Hom complex, its finite-support identifications, or the sign-free chain-map formula; monoidal-complex unitors and evaluation corepresentability do not state it."
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*[Ee]val|[Ee]val.*homComplex|tensor.*[Hh]om.*[Ii]so",
+   "results": "[grep] OK 25 hit(s)\n{\"top\": [\"Mathlib/LinearAlgebra/QuadraticForm/QuadraticModuleCat/Monoidal.lean\", \"Mathlib/RingTheory/Ideal/CotangentBaseChange.lean\", \"Mathlib/RepresentationTheory/FDRep.lean\", \"Mathlib/RepresentationTheory/Rep/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Transport.lean\", \"Mathlib/CategoryTheory/Monoidal/Transport.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean\"], \"note\": \"\", \"digest\": \"23b6748b494b9734\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: module contraction and rigid hom-set equivalences do not give this internal sheaf Hom complex, its finite-support identifications, or the sign-free chain-map formula; monoidal-complex unitors and evaluation corepresentability do not state it."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For bounded complexes of module sheaves, tensoring with the dual complex equals the internal Hom complex if all termwise tensor dual Hom maps are isomorphisms",
+   "results": "[leansearch] OK 8 hit(s)\n{\"top\": [\"dualTensorHomEquivOfBasis\", \"dualTensorHomEquiv\", \"lTensorHomEquivHomLTensor\", \"CategoryTheory.tensorRightHomEquiv\", \"dualTensorHomEquivOfBasis_toLinearMap\", \"HomologicalComplex.tensorObj\", \"FDRep.dualTensorIsoLinHom\", \"map_dualTensorHom\"], \"note\": \"\", \"digest\": \"d9fcb2aa8c9ca464\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: module contraction and rigid hom-set equivalences do not give this internal sheaf Hom complex, its finite-support identifications, or the sign-free chain-map formula; monoidal-complex unitors and evaluation corepresentability do not state it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded cochain complex of sheaves on a ringed site, termwise tensor dual Hom isomorphisms assemble to an isomorphism of the ordinary tensor complex with the internal Hom complex",
+   "results": "[leanfinder] OK 8 hit(s)\n{\"top\": [\"instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Sheaf.monoidalCategory\", \"HomologicalComplex.rightUnitor\", \"HomologicalComplex.rightUnitor'\", \"HomologicalComplex.rightUnitor'_inv\", \"HomologicalComplex.leftUnitor\", \"HomologicalComplex.rightUnitor'_inv_comm\"], \"note\": \"\", \"digest\": \"328b77a8d93f3b4b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: module contraction and rigid hom-set equivalences do not give this internal sheaf Hom complex, its finite-support identifications, or the sign-free chain-map formula; monoidal-complex unitors and evaluation corepresentability do not state it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a closed symmetric monoidal abelian category the ordinary Hom complex from a bounded complex with dualizable terms is its termwise dual tensor any complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] {ι : Type u_2} {c : ComplexShape ι} {i₀ i₁ : ι} (hi₀₁ : c.Rel i₀ i₁)\\n  (h : i₀ ≠ i₁) (X : C) {K : HomologicalComplex C c}\\n  (g : Homol\", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms and a zero object, distinct indices $i_0 \\\\neq i_1$, and a homological complex $K$, the composition of the evaluation functor at $i_0$ with the Coyoneda\"}\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C]\\n  [inst_2 : CategoryTheory.Limits.HasZeroObject C] {ι : Type u_2} {c : ComplexShape ι} {i₀ i₁ : ι} (hi₀₁ : c.Rel i₀ i₁)\\n  (h : i₀ ≠ i₁) (X : C) {K : HomologicalComplex C c}\\n  (φ₀ : ((Ho\", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms and a zero object, indices $i_0 \\\\neq i_1$, and a homological complex $K$, the inverse of the natural isomorphism between $\\\\text{Hom}(X, K_{i_0})$ and c\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.tensorObjPreadditiveCoyonedaObjAdjunction\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] →\\n        (G : C) → CategoryTheory.IsGrothendieckAbelian.tensorObj G ⊣ CategoryTheory.preadditiveCoyonedaObj G\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, this defines an adjunction where the tensor functor $ \\\\text{tensorObj} \\\\, G $ (constructing objects in $ \\\\mathcal{C} $ from $ \\\\\"}\n  {\"name\": \"CategoryTheory.IsGrothendieckAbelian.tensorObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [CategoryTheory.IsGrothendieckAbelian.{v, v, u} C] →\\n        (G : C) → CategoryTheory.Functor (ModuleCat (CategoryTheory.End G)ᵐᵒᵖ) C\", \"doc\": \"For any object $ G $ in a Grothendieck abelian category $ \\\\mathcal{C} $, this defines a functor from the category of modules over the opposite ring $ \\\\text{End}(G)^{\\\\text{op}} $ back to $ \\\\mathcal{C} \"}\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\\n        {ι : Type u_2} →\\n          {c : ComplexShape ι} →\\n            {i₀ i₁ : ι} →\\n              (hi₀₁ : c.Rel i₀ i₁)\", \"doc\": \"For a category $\\\\mathcal{C}$ with zero morphisms and a zero object, indices $i_0 \\\\neq i_1$, and a homological complex $K$, the composition of the evaluation functor at $i_0$ with the Coyoneda embeddin\"}\n  {\"name\": \"CategoryTheory.tensorRightHomEquiv_symm_coevaluation_comp_whiskerLeft\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {X Y : C}\\n  [inst_2 : CategoryTheory.HasLeftDual X] [inst_3 : CategoryTheory.HasLeftDual Y] (f : X ⟶ Y),\\n  (CategoryTheory.tensorRightHomEquiv (CategoryTheory.MonoidalCategoryStruct.tensorUnit C)\", \"doc\": \"In a monoidal category with dual objects, applying the inverse of the tensor-hom equivalence to the composition of the coevaluation map with the left whiskering of a morphism $ f: X \\to Y $ yields the \"}\n  {\"name\": \"CategoryTheory.tensorLeftHomEquiv\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      (X Y Y' Z : C) →\\n        [CategoryTheory.ExactPairing Y Y'] →\\n          (CategoryTheory.MonoidalCategoryStruct.tensorObj Y' X ⟶ Z) ≃\\n            (X ⟶ CategoryTheory.MonoidalCatego\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, given objects $X,Z$ and dual objects $Y,Y'$ (with an exact pairing), there is a natural equivalence between the hom-set $\\\\text{Hom}(Y' \\\\otimes X, Z)$ and $\\\\\"}\n  {\"name\": \"CategoryTheory.tensorLeftHomEquiv_symm_coevaluation_comp_whiskerRight\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Rigid/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {X Y : C}\\n  [inst_2 : CategoryTheory.HasRightDual X] [inst_3 : CategoryTheory.HasRightDual Y] (f : X ⟶ Y),\\n  (CategoryTheory.tensorLeftHomEquiv (CategoryTheory.MonoidalCategoryStruct.tensorUnit C\", \"doc\": \"In a rigid monoidal category $\\\\mathcal{C}$, for objects $X,Y$ with right duals $X^*, Y^*$ and a morphism $f : X \\\\to Y$, the inverse of the left tensor-hom equivalence applied to the composition of the\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: module contraction and rigid hom-set equivalences do not give this internal sheaf Hom complex, its finite-support identifications, or the sign-free chain-map formula; monoidal-complex unitors and evaluation corepresentability do not state it."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-site-strict-perfect-hom",
@@ -60,7 +200,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Documented blueprint location det-thm-sf-ctf-stability-internal-hom; Second paragraph, final sentence: coefficient duality from local strictly perfect representatives; last three displays and final sentence; finite-support sum/product reindexing and compatibility with the Hom and tensor differentials from section-hom-complexes (original item step 5). The computed ancestor is null because the existing parent item created.item is a Lean module name, not a DAG node.",
+   "place": "Proof of det-thm-sf-ctf-stability-internal-hom (sk-thm-sf-ctf-stability-internal-hom.proof.md), second paragraph ('The formula'), final sentence: 'Since $P$ is a locally constant perfect complex it is dualizable with dual $P^\\vee$, and $\\mathcal Hom_S(P,-)\\simeq P^\\vee\\otimes^{\\mathbf L}-$', i.e. the second isomorphism $R\\mathcal Hom_S(P,a^!L)\\simeq P^\\vee\\otimes^{\\mathbf L}a^!L$ of the statement display. This item supplies the ordinary finite-support evaluation calculation in its ringed-site perfect-duality justification (Stacks 08JJ, final three displays). The ancestor computation is null because the existing created.item chain ends at a Lean module name; retain the inherited via chain.",
    "via": [
     "lem-sfb-ringed-site-strict-perfect-hom",
     "lem-sfb-ringed-site-perfect-duality"
@@ -68,5 +208,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ringed-site-bounded-evaluation-assembly",
+  "worker": "stage1",
+  "summary": "Checked Stacks 08JJ and 0A8X, the current internal-Hom blueprint display, every cited node statement, and the scheme-only Lean assembly theorem. Retained the statement. Reused the existing bounded dual-components node and supplied explicit finite-support source and target identifications, sheaf-level construction, two-component sign calculation, diagonal inverse, and inverse chain-map identity. No new nodes, no attachment, no added hypotheses.",
+  "blueprint": "Realizes the ordinary evaluation calculation underlying the second displayed isomorphism RHom_S(P,a^!L) ≅ P^∨ tensor^L a^!L in det-thm-sf-ctf-stability-internal-hom, through the existing ringed-site perfect-duality and strictly-perfect-Hom parents. The item is not the unit key node, so no unit realized fields change.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NE-2f02d6605",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-2f02d6605 (reviewer sub-agent of L); spot-checked: Read in full: the item, Stacks 08JJ (sites-cohomology.tex lines 13048–13133, last three displays), 0A8X (Hom differential, line 8592), 11912, and the statement of every cited node: bounded-dual-components, def-pc-tensor-complex-sheaves, def-pur-hom-complex, def-pur-sheaf-hom, def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification and def-weil-sheaf-of-modules-category. Statement and stmt_deps are unchanged from base; this is the first split of an unsplit node, with no new nodes. The coefficient category is O-module sheaves on a small ringed site with commutative O throughout, and no hypothesis is added. I recomputed the sign: with d_D φ=(-1)^{q+1}φ d_E and the tensor sign (-1)^p, the tensor side gives (-1)^{n+1}yφ(d_E x) at r=-q-1, and the Hom differential -(-1)^n f d_E gives the same. The r=-q term is (d_F y)φ(x) on both sides by R-linearity, so no extra sign is needed, as the item states. Zero tensor factors (via the sheafification universal property), the finite product equal to the biproduct, the construction on slices (balanced because R is commutative, then extended through sheafification), the diagonal matrix of θ's, the diagonal inverse and the inverse chain map are all correct. Edge cases tested: a>b, E in a single degree, F unbounded, R=0, and an explicit sign check with E=R→R. The scheme-only lem-pc evaluation nodes are not duplicates and do not apply on a general ringed site. The only non-definition cite is the same-unit dual-components node, whose proof uses only definitions, so there is no cycle. tool_uses is empty. Mathlib searches cover all three kinds with no match. The one change: the report wrongly says the current blueprint has no proof paragraph. sk-thm-sf-ctf-stability-internal-hom.proof.md exists, and its second paragraph ('The formula') ends with the sentence this item serves: P is dualizable and cHom_S(P,-) ≃ P^∨⊗^L -. The corrected blueprint.from.place names that sentence instead of the statement display. from.node=null and via are kept as inherited.; 1 file(s) fixed by the reviewer"
  }
 }
