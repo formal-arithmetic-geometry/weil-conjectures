@@ -22366,3 +22366,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:04 L: merged deliver/K5/Sheaf.Paper.EtaleDerivedDirectImageCoherence (stage 3; reviewer PASS; first push; landing 20261021T120425-L-3891691 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:04 L: merged deliver/K8/Sheaf.Algebra.Homology.BoundedFreeFiniteSubcomplex (stage 3; reviewer PASS; first push; landing 20261021T120428-L-3893995 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:04 L: merged deliver/M1/Sheaf.Paper.FiniteFieldStratifiedPerfectModels (stage 3; reviewer PASS; first push; landing 20261021T120432-L-3895239 (proof); batch 20261021T120309; modules 1; new nodes 0)
+- 12:04 L: merged deliver/N2/Sheaf.CategoryTheory.StrictRoosHomotopyFunctor (stage 3; reviewer PASS; after a return; landing 20261021T120435-L-3895816 (interface); batch 20261021T120309; modules 1; new nodes 0; change records: coord/changes/StrictRoosHomotopyFunctorProofContext.md)

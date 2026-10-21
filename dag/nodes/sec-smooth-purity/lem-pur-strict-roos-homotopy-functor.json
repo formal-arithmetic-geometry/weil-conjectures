@@ -65,7 +65,7 @@
    }
   },
   {
-   "text": "Define $T^i:\\mathscr R(X)^i\\to\\mathscr R(Y)^{i-1}$ by $T^i(y,x)=(-H^{i-1}y,H^ix)$. With the differential of [def-weil-strict-roos-model], the two components of $D_Y^{i-1}T^i+T^{i+1}D_X^i$ are $((d_Y^{i-2}H^{i-1}+H^id_X^{i-1})y+(H^iv_X^i-v_Y^{i-1}H^i)x,\\ (d_Y^{i-1}H^i+H^{i+1}d_X^i)x)$. The mixed term is zero by Step 4. The remaining diagonal blocks are $F^{i-1}-G^{i-1}$ and $F^i-G^i$, again by Step 4. Thus $D_YT+TD_X=\\mathscr R(f)-\\mathscr R(g)$, which is the required homotopy with the stated signs and degrees.",
+   "text": "Define $T^i:\\mathscr R(X)^i\\to\\mathscr R(Y)^{i-1}$ by $T^i(y,x)=(-H^{i-1}y,H^ix)$. With the differential of [def-weil-strict-roos-model], the two components of $D_Y^{i-1}T^i+T^{i+1}D_X^i$ are $((d_Y^{i-2}H^{i-1}+H^id_X^{i-1})y+(H^iv_X^i-v_Y^{i-1}H^i)x,\\ (d_Y^{i-1}H^i+H^{i+1}d_X^i)x)$. The mixed term is zero by Step 4. The remaining diagonal blocks are $F^{i-1}-G^{i-1}$ and $F^i-G^i$, again by Step 4. Thus $D_YT+TD_X=\\mathscr R(f)-\\mathscr R(g)$, which is the required homotopy with the stated signs and degrees. In Lean, perform the same signed block calculation first on the unshifted cone: in its coordinates P_X^(i+1)⊕P_X^i use diag(−H^(i+1),H^i). The first and second diagonal equations are the product homotopy equations, and the mixed equation is H v_X=v_Y H. Apply Homotopy.shift (−1), whose extra minus sign, followed by the prescribed biproduct braiding, gives exactly T=(−H,H) in the roosχ coordinates. The shift-coordinate identity is proved by substituting the two degree equalities, so the projection formulas hold in every integer degree without identifying unequal dependent types.",
    "uses": [
     "def-weil-strict-roos-model"
    ],
@@ -88,7 +88,7 @@
    }
   },
   {
-   "text": "Define the functor on homotopy categories by $X\\mapsto\\mathscr R(X)$ and $[f]\\mapsto[\\mathscr R(f)]$. Steps 4 and 5 make the map on classes independent of the representative. Step 3 gives preservation of identities, composition, addition and zero after taking classes, with the operations of Step 6. Thus the resulting functor $K(\\operatorname{Tow}(\\mathcal A))\\to K(\\mathcal A)$ is additive. No assertion about cones of arbitrary morphisms in a triangulated category is used: the construction uses the fixed strict cone of [def-weil-strict-roos-model].",
+   "text": "Define the functor on homotopy categories by $X\\mapsto\\mathscr R(X)$ and $[f]\\mapsto[\\mathscr R(f)]$. Steps 4 and 5 make the map on classes independent of the representative. Step 3 gives preservation of identities, composition, addition and zero after taking classes, with the operations of Step 6. Thus the resulting functor $K(\\operatorname{Tow}(\\mathcal A))\\to K(\\mathcal A)$ is additive. No assertion about cones of arbitrary morphisms in a triangulated category is used: the construction uses the fixed strict cone of [def-weil-strict-roos-model]. In Lean this is CategoryTheory.Quotient.lift, with factorization equality Quotient.lift_spec. Additivity descends using Functor.additive_of_full_essSurj_comp for the homotopy quotient, which is full and essentially surjective.",
    "uses": [
     "def-weil-strict-roos-model"
    ],
@@ -99,7 +99,7 @@
    }
   },
   {
-   "text": "Assume the $k$-linearity of [def-weil-linear-category]. For $c\\in k$, $\\pi_{Y,n}(cF)=c(\\pi_{Y,n}F)=cf_n\\pi_{X,n}$, so uniqueness of the product map [def-weil-category-product] gives $(cf)_P=cF$. Composing with biproduct projections similarly gives $\\mathscr R(cf)=c\\mathscr R(f)$. The module structure on chain maps is componentwise; the chain-map equations are stable under scalars by bilinearity of composition. If $f-g=dh+hd$, then $cf-cg=d(ch)+(ch)d$, and $ch$ is transition-compatible whenever $h$ is. Thus scalar multiplication is well-defined on both homotopy quotients, and $[\\mathscr R(cf)]=c[\\mathscr R(f)]$. Together with Step 3 this proves $k$-linearity of both functors.",
+   "text": "Assume the $k$-linearity of [def-weil-linear-category]. For $c\\in k$, $\\pi_{Y,n}(cF)=c(\\pi_{Y,n}F)=cf_n\\pi_{X,n}$, so uniqueness of the product map [def-weil-category-product] gives $(cf)_P=cF$. Composing with biproduct projections similarly gives $\\mathscr R(cf)=c\\mathscr R(f)$. The module structure on chain maps is componentwise; the chain-map equations are stable under scalars by bilinearity of composition. If $f-g=dh+hd$, then $cf-cg=d(ch)+(ch)d$, and $ch$ is transition-compatible whenever $h$ is. Thus scalar multiplication is well-defined on both homotopy quotients, and $[\\mathscr R(cf)]=c[\\mathscr R(f)]$. Together with Step 3 this proves $k$-linearity of both functors. In Lean the linearity of the same quotient lift follows from Functor.linear_of_full_essSurj_comp and its already established strict factorization; the lift is constructed before quantifying over k.",
    "uses": [
     "def-weil-linear-category",
     "def-weil-strict-roos-model",
@@ -123,7 +123,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 014E (definition-cone), 08TC (definition-derived-limit), 013H (definition-complexes-notation); explicit strict-model calculation, with homology.tex Tag 0112 and dga.tex Tag 09MJ for conventions"
+  "place": "Tags 014E (definition-cone), 08TC (definition-derived-limit), 013H (definition-complexes-notation); explicit strict-model calculation, with homology.tex Tag 0112 and dga.tex Tag 09MJ for conventions; N2 Lean realization: product projection universal property, signed unshifted-cone calculation followed by shift (−1), and Mathlib quotient descent (2026-10-21)"
  },
  "mathlib_searches": [
   {
@@ -259,5 +259,15 @@
   "group": "Q29",
   "result": "pass",
   "note": "Delivers roosF_homotopy_functor in Sheaf.CategoryTheory.StrictRoosHomotopyFunctor, sorry-only; node record differs from live only in lean. Clause check: Abelian + HasCountableProducts, no extra assumptions; existing roosP/roosU/roosF/roosχ reused; Homotopy in ℕᵒᵖ⥤A = transition-compatible levelwise homotopy (not stronger); the two projection equations at degree (p+1)+1, all p and n, pin T(y,x)=(−Hy,Hx). Hand-checked roosχ coordinates (XIsoOfEq, homotopyCofiber.XIsoBiprod, braiding) and the [−1] shift sign: differential is (−dy−vx,dx), and DT+TD=(F−G) holds under Mathlib's f=hd+dh+g convention, so the statement is provable. RF pinned by quotient⋙RF=roosF⋙quotient, Additive; ∀ k:Type w CommRing, Linear k A ⇒ roosF.Linear k ∧ RF.Linear k. Universes u,v,w independent. No duplicate in side-live lean or Mathlib. Docstrings have source places, blueprint tag and all 8 steps; lean.statement verbatim; no line over 100 chars; report has both required sections. nt_compile --json on the snapshot: 15.6 s, exit 0, no errors or warnings. Advisory: unused OfSequence dependency import."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T120435-L-3895816",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
