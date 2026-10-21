@@ -175,6 +175,16 @@
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Agent naturality check from strict chain formulas, functoriality of the Hom-complex adjunction (Tag 0A90), and the scalar-adjunction evaluation normalization."
    }
+  },
+  {
+   "text": "Stage-3 Lean reduction: use [lem-sfb-internal-hom-finite-free-stage] at every coefficient stage, and [lem-sfb-internal-hom-filtered-continuity] for the colimit denominator, target cocone quasi-isomorphism and source tensor cocone isomorphism. Exact colimits preserve the objectwise comparison quasi-isomorphisms (the generic isStableUnderColimitsOfShape_quasiIso instance). The strict naturality square is proved by colimit.hom_ext and comparison.naturality. Functoriality proves the denominator square. Rewrite the first square to obtain a quasi-isomorphism of the composite source-post then a_colim, and apply quasiIso_of_comp_left to conclude that a_colim is a quasi-isomorphism. This is a genuine decomposition of filteredColimit_comparison, with no change to any original signature.",
+   "uses": [
+    "lem-sfb-internal-hom-finite-free-stage",
+    "lem-sfb-internal-hom-filtered-continuity",
+    "def-sfb-internal-hom-strict-roof",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -199,12 +209,15 @@
   "def-weil-pbc-category-colimit",
   "lem-sfb-dc-hom-scalar-adjunction",
   "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-  "lem-sc-hom-complex-projections"
+  "lem-sc-hom-complex-projections",
+  "lem-sfb-internal-hom-finite-free-stage",
+  "lem-sfb-internal-hom-filtered-continuity",
+  "def-sfb-internal-hom-strict-roof"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-hom-preserves.proof.md",
-  "place": "Final paragraph: passage from finite coefficient extensions to their filtered colimit. Agent conditional ring-sheaf elaboration, repaired with strict chain maps and natural resolution zigzags; chain transposition from Stacks 0A90 and its 08J9 realization. Bhatt–Scholze 6.8.12–6.8.15 is context, not this statement verbatim. Stage-3 strict scalar naturality: direct generator and projection calculation using the ordinary scalar-adjunction unit and its functoriality; other unfinished portions retain their recorded plans. Stage-3 R4: scalarComparison_existsUnique is proved by slice sheafification descent, the ordinary scalar adjunction, Hom-product lifting and the signed differential formula. Four original auxiliary holes remain unchanged."
+  "place": "Final paragraph: passage from finite coefficient extensions to their filtered colimit. Agent conditional ring-sheaf elaboration, repaired with strict chain maps and natural resolution zigzags; chain transposition from Stacks 0A90 and its 08J9 realization. Bhatt–Scholze 6.8.12–6.8.15 is context, not this statement verbatim. Stage-3 strict scalar naturality: direct generator and projection calculation using the ordinary scalar-adjunction unit and its functoriality; other unfinished portions retain their recorded plans. Stage-3 R4: scalarComparison_existsUnique is proved by slice sheafification descent, the ordinary scalar adjunction, Hom-product lifting and the signed differential formula. Four original auxiliary holes remain unchanged. R6: filteredColimit_comparison is reduced to finite-free stages and continuity at the colimit, combined by exact colimits, strict cocone equations and two-out-of-three. The unchanged initial definitions and comparison_existsUnique moved into a publicly reexported data module to avoid a proof import cycle."
  },
  "mathlib_searches": [
   {
@@ -373,18 +386,6 @@
   "module": "Sheaf.Paper.DerivedInternalHomFilteredColimit",
   "declaration": "WeilConjectures.SfbHomFilteredColimit.derivedInternalHom_filteredColimit_comparison",
   "declarations": [
-   "WeilConjectures.SfbHomFilteredColimit.Modules",
-   "WeilConjectures.SfbHomFilteredColimit.tensor",
-   "WeilConjectures.SfbHomFilteredColimit.tensorFixed",
-   "WeilConjectures.SfbHomFilteredColimit.homFixed",
-   "WeilConjectures.SfbHomFilteredColimit.tensorGenerator",
-   "WeilConjectures.SfbHomFilteredColimit.homValue",
-   "WeilConjectures.SfbHomFilteredColimit.resolutionUnit",
-   "WeilConjectures.SfbHomFilteredColimit.Normalized",
-   "WeilConjectures.SfbHomFilteredColimit.comparison_existsUnique",
-   "WeilConjectures.SfbHomFilteredColimit.comparison",
-   "WeilConjectures.SfbHomFilteredColimit.roofDenominator",
-   "WeilConjectures.SfbHomFilteredColimit.Continuous",
    "WeilConjectures.SfbHomFilteredColimit.filteredColimit_comparison",
    "WeilConjectures.SfbHomFilteredColimit.underlyingCoefficient",
    "WeilConjectures.SfbHomFilteredColimit.ModuleDiagram",
@@ -405,16 +406,16 @@
   "by": "Q10",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Universal representative formulation: P is any K-flat representative of K, L any strictly bounded-below representative of the second derived input, and E the ordinary scalar-extension functor with its specified objects and maps. Exact finite-free-colimit scalar extension computes its derived functor on these representatives. The actual map in D(S) is derivedComparison, fixed by pure-tensor evaluation and the actual localization factorization. Auxiliary declarations give its strict termwise-colimit formula, scalar-adjunction normalization and naturality. No mathematical hypothesis or clause of the node is changed."
+  "note": "Universal representative formulation: P is any K-flat representative of K, L any strictly bounded-below representative of the second derived input, and E the ordinary scalar-extension functor with its specified objects and maps. Exact finite-free-colimit scalar extension computes its derived functor on these representatives. The actual map in D(S) is derivedComparison, fixed by pure-tensor evaluation and the actual localization factorization. Auxiliary declarations give its strict termwise-colimit formula, scalar-adjunction normalization and naturality. No mathematical hypothesis or clause of the node is changed. R6: the unchanged strict representative definitions are now attached to def-sfb-internal-hom-strict-models and def-sfb-internal-hom-strict-roof in Sheaf.Paper.DerivedInternalHomFilteredColimitData; comparison_existsUnique is attached to lem-sfb-internal-hom-comparison-exists. The original module publicly reexports that data module, preserving existing consumers."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R4",
+  "reviewer": "C-b5c9a",
+  "group": "R6",
   "result": "pass",
-  "landing": "20261020T221331-L-4175439",
+  "landing": "20261021T005750-L-1889871",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: moved Modules..Continuous block byte-identical to live (modulo blueprint tags, same file options); filteredColimit_comparison signature unchanged, proof complete from finite-free stage + filtered continuity (both checked true) + exact-colimit quasiIso stability + 2-of-3; all 4 modules compile (item 33.2 s at 560 s limit vs published 36.8 s; 60 s timeout was load ~85); axioms propext/Classical.choice/Quot.sound/sorryAx; 0 importers"
  }
 }

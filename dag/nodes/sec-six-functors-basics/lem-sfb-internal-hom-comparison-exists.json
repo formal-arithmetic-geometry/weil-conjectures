@@ -1,0 +1,115 @@
+{
+ "id": "lem-sfb-internal-hom-comparison-exists",
+ "kind": "statement",
+ "title": "Existence and uniqueness of the strict evaluation comparison",
+ "statement": "Use the strict tensor, Hom, generators and normalization of [def-sfb-internal-hom-strict-models]. For every pair of cochain complexes P,L, there is a unique natural transformation a:tensorFixed(homFixed(P)(L)) -> tensorFixed(I_R(L)) followed by homFixed(P), satisfying Normalized(a). This is the unchanged original comparison_existsUnique assertion.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.12 and Proposition 6.8.14 (continuity and coefficient passage), Remark 6.8.15 (ambient operations); conditional ring-sheaf comparison is an agent formulation of the argument extracted from returned step 8, not a verbatim assertion of the source."
+ },
+ "stmt_deps": [
+  "def-sfb-internal-hom-strict-models"
+ ],
+ "proof": [
+  {
+   "text": "Send t tensor f to the cochain x maps to t tensor f(x), followed by eta. Balancedness gives a sheaf morphism; the Hom and total differentials agree because t has degree zero. The formula commutes with all coefficient maps. Sheafified pure tensors and Hom-product projections detect equality, proving uniqueness.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-hom-complex",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pur-hom-complex",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Subargument of lem-sfb-dc-hom-filtered-colimit, steps 2--9, with strict representative normalizations retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A finite free module sheaf tensored with a Hom complex is Hom into the finite free tensor",
+   "results": "freeHomEquiv, freeHomEquiv_comp_apply, freeHomEquiv_symm_comp and ordinary tensor infrastructure; no strict Hom-complex roof theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"QuasiIso\", \"colimMap\"",
+   "results": "No matching declarations. Project source search found the proved generic isStableUnderColimitsOfShape_quasiIso instance, used in the parent proof.",
+   "date": "2026-10-21",
+   "verdict": "Generic exact-colimit infrastructure is used, but does not prove the coefficient-stage or continuity lemma."
+  },
+  {
+   "tool": "grep",
+   "query": "(finiteFree|finite_free).*(Hom|homComplex)",
+   "results": "No Mathlib search hits. Blueprint searches finite free Hom and Hom filtered colimit each returned zero matches.",
+   "date": "2026-10-21",
+   "verdict": "No duplicate of the strict representative statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict tensor Hom evaluation natural transformation on complexes of sheaves and filtered colimit continuity of derived Hom",
+   "results": "Returned NatTrans.mapHomologicalComplex, NatTrans.rightDerivedToHomotopyCategory, HomologicalComplex.instHasFilteredColimitsOfSize, HomologicalComplex.isColimitOfEval, sheafHom and colimit homology infrastructure. A finite-free search also returned rTensorHomEquivHomRTensor, lTensorHomEquivHomLTensor, dualTensorHomEquivOfBasis and SheafOfModules.free.",
+   "date": "2026-10-21",
+   "verdict": "These provide ordinary module adjunction or generic complex-colimit constructions, not the strict coefficient tensor-Hom normalization, finite-free stage roof, or augmentation transport of continuity stated here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DerivedInternalHomFilteredColimit",
+  "date": "2026-10-21",
+  "group": "R6"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph of lem-sfb-dc-hom-preserves.proof.md: finite coefficient extension and passage to the filtered coefficient colimit.",
+   "via": [
+    "lem-sfb-dc-hom-filtered-colimit"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DerivedInternalHomFilteredColimitData",
+  "file": "lean/Sheaf/Paper/DerivedInternalHomFilteredColimitData.lean",
+  "declaration": "WeilConjectures.SfbHomFilteredColimit.comparison_existsUnique",
+  "statement": "theorem comparison_existsUnique (R : Sheaf J CommRingCat.{max u v r})\n    (P L : CochainComplex (Modules.{u, v, r} J R) ℤ) :\n    ∃! a : tensorFixed.{u, v, r} J R ((homFixed.{u, v, r} J R P).obj L) ⟶\n      tensorFixed.{u, v, r} J R ((coefficientHomResolution.{r, u, v} J R).obj L) ⋙\n        homFixed.{u, v, r} J R P,\n      Normalized.{u, v, r} J R P L a",
+  "branch": "sheaf-dag",
+  "by": "R6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5c9a",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261021T005750-L-1889871",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5c9a",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261021T005750-L-1889871",
+  "kind": "interface",
+  "note": "independent cc review: moved Modules..Continuous block byte-identical to live (modulo blueprint tags, same file options); filteredColimit_comparison signature unchanged, proof complete from finite-free stage + filtered continuity (both checked true) + exact-colimit quasiIso stability + 2-of-3; all 4 modules compile (item 33.2 s at 560 s limit vs published 36.8 s; 60 s timeout was load ~85); axioms propext/Classical.choice/Quot.sound/sorryAx; 0 importers"
+ }
+}
