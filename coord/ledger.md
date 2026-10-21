@@ -23342,3 +23342,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:30 L: merged deliver/NP/lem-sfb-integral-cubical-chain-diagonal (reviewer PASS; first push; new nodes: 0)
 - 2026-10-21T18:30:29Z L: superseded stage-1 delivery Q20/lem-sfb-lattice-supported-hom-reduction-tower at a9a151b7b3f61dc3af77403b07d16cbad033f591; current completion retained; packet archived at refs/superseded/Q20/lem-sfb-lattice-supported-hom-reduction-tower/a9a151b7b3f61dc3af77403b07d16cbad033f591; stale return retired.
 - 18:30 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 18:30 L: merged deliver/Q01/lem-sfb-root-coordinate-supported-vanishing (stage 2; reviewer PASS; parallel immutable checks)

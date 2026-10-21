@@ -16,7 +16,8 @@
   "def-sfb-lisse-coefficient-module",
   "def-weil-regular-scheme",
   "def-trf-strict-normal-crossings-boundary",
-  "det-lem-formal-closed-support-adjunction"
+  "det-lem-formal-closed-support-adjunction",
+  "def-sfb-strict-local-kummer-tame-module"
  ],
  "proof": [
   {
@@ -288,5 +289,32 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-3708abe0b (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, the parent boundary-acyclicity and sibling puncture-invariance uses, blueprint main-20261015 direct-images ¶(3) (context only; agent origin and null from.node are correct), and ILO XVI Thm 3.1.1, §2.1/Def 2.1.1 and Cor 3.1.3. No SGA cited. One fault, E1/C4 in step 1: regularity of D_n=V(x_{a,n}) applied lem-sfb-snc-finite-root-regular-ring to V(t_a) with the restricted t_b. That lemma needs pairwise distinct integral branches, but V(t_a,t_b) can be reducible or empty (a line meeting a conic in 2 points). The needed J-face case appears only inside that lemma's proof (its B_{J,K} induction). Step 1 also skipped the J-localization and left the nonzerodivisor claim unjustified. FIX: new statement-only node lem-sfb-snc-finite-root-face-regular (C_n/(x_j)_{j∈J} is regular; true; same ILO IX 2.1 / Stacks 0BIA source; DAG and Mathlib searched, no duplicate). Step 1 now cites it plus lem-weil-pbc-localization-of-regular-ring (declared tool_use), and gets the nonzerodivisor property from freeness. Steps 2-6 checked: purity-node hypotheses hold; the multiplier m/n=ℓ^s kills A_s at index nℓ^s, which is prime to p; the 0EYM hypotheses hold (qcqs principal opens, affine transitions, the exchange maps are the same θ) and filtered colimits are exact, so the fibre is 0; the pe site comparison applies to D^+ and is compatible with units; X×_VU=T_J and W×_XX'=T_{J∪a}; clause 4 of det-lem formal-closed-support. New purity node: true (unique factorization of c_{D,A}, ILO XVI 3.1.1, additivity gives the factor e). It is needed: every per Gysin/purity node reaches the item, a cycle I verified mechanically. New coefficient criterion: true for E (R lim plus coherent colimits). For Ω the cone of the unit is uniquely ℓ-divisible, so this is a genuine analytic node. A Baire test (G=Z_p, degree 2) found no counterexample; higher degrees remain the risk. It is not a relabel of the item. Accepted as WANTED, like the earlier norm-Ω nodes. Batch-5: lem-asd-ordinary-supported-kummer→lem-pod-etale-stalk-tensor-scalar is a generic stalk/tensor lemma, not a Poincaré-duality step, so accepted; def-trf-SNC is a general definition and already a stmt_dep, so accepted. Declared tool uses accepted. Fixes: fixes/dag/nodes/sec-six-functors-basics/{lem-sfb-root-coordinate-supported-vanishing,lem-sfb-snc-finite-root-face-regular}.json; review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RootCoordinateSupportedVanishing",
+  "declaration": "AlgebraicGeometry.ProEtale.rootCoordinate_supported_vanishing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coordinateSupportRing",
+   "AlgebraicGeometry.ProEtale.coordinateSupportSection",
+   "AlgebraicGeometry.ProEtale.coordinateSupportIdeal",
+   "AlgebraicGeometry.ProEtale.coordinateSupportComplement",
+   "AlgebraicGeometry.ProEtale.RootCoordinateSupportedVanishing",
+   "AlgebraicGeometry.ProEtale.rootCoordinate_supported_vanishing"
+  ],
+  "file": "lean/Sheaf/Paper/RootCoordinateSupportedVanishing.lean",
+  "statement": "theorem rootCoordinate_supported_vanishing (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E Ω : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [NormedField Ω] [NormedAlgebra E Ω] [IsAlgClosure E Ω] (Y : Scheme.{u}) (y : Y ⟶ Spec (.of k)) [LocallyOfFiniteType y] [QuasiCompact y] [IsSeparated y] (hY : IsRegularScheme Y) (A : Type u) [CommRing A] (b : Spec (.of A) ⟶ Y) [Etale b] (r : ℕ) (t : Fin r → A) (H : (Spec (.of A)).IdealSheafData) (hH : IsStrictNormalCrossingsBoundary H) (hproduct : H = Scheme.IdealSheafData.ofIdealTop (Ideal.span {(Scheme.ΓSpecIso (CommRingCat.of A)).inv (∏ i, t i)})) (hbranches : Set.range (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({t i} : Set A)) = Set.image (Set.image Subtype.val) (irreducibleComponents (H.support : Set (Spec (.of A))))) (R : Type u) [CommRing R] (a : A →+* R) [WeaklyEtale (Spec.map (CommRingCat.ofHom a))] : RootCoordinateSupportedVanishing (Profinite.continuousCoefficientRingObj E) p (fun i ↦ a (t i)) ∧ RootCoordinateSupportedVanishing (Profinite.continuousCoefficientRingObj Ω) p (fun i ↦ a (t i))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the landed compatible-root algebra, all-continuous coefficient construction, lisse predicate and actual K-injective closed-support functor. Helpers spell out only the displayed coordinate localization, section, scheme-theoretic divisor, complementary principal open, and the quantified vanishing formula. The added landed definition node owns tameRootAlgebra; its strict-local tameness predicate is not imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d9d5eaa85",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Clause-by-clause match to the node: p,ℓ distinct primes; char-p field k; E finite over ℚ_ℓ and Ω=IsAlgClosure with NormedAlgebra (forces the extended norm, no completeness assumed); continuousCoefficientRingObj = C(S,F) all-continuous; supportModules = internal modules over condensedRingObj on Scheme.ProEt; Y regular separated finite type (lft+qc); etale affine chart; SNC hH/hproduct/hbranches identical to landed root-tower siblings; U=Spec R weakly etale; T = tameRootAlgebra quotient presentation of the prime-to-p divisibility colimit; T_J = Localization.Away of ∏_{b∈J} t_b; D_{a,J} scheme-theoretically cut out by t_a, complement = basicOpen of the same section; ∀ lisse N (finite free locally, rank 0 included), ∀ J, a∉J: IsZero of closedSupport(=supportKernel e ⋙ supportPullback d).rightDerivedFunctor of N|_{T_J}[0], for both E and Ω. Edge cases r=0, J=∅, empty divisor and rank 0 covered. Node diff vs live: only lean plus the landed owner def-sfb-strict-local-kummer-tame-module added to stmt_deps. lean.statement verbatim; docstrings have source, blueprint id and the 6-step proof; one sorry; helpers have real bodies; imports exist. Advisory: continuousCoefficientRingObj is owned by def-weil-pbc-condensed-e-module-category (worker reports an rfl check against the cited continuousMapRingObjOfUniverse; same pattern as landed siblings). No compile run, per instructions."
  }
 }
