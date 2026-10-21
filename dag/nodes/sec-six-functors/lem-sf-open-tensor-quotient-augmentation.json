@@ -31,7 +31,10 @@
   "def-sf-tensor-completion-comparison",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-sf-integral-open-reduction-comparison",
-  "lem-sf-open-finite-constructibility-interval"
+  "lem-sf-open-finite-constructibility-interval",
+  "def-sf-integral-open-operations",
+  "def-sf-integral-open-reduction-comparison-data",
+  "def-sf-open-semilinear-tensor-model-data"
  ],
  "proof": [
   {
@@ -339,5 +342,45 @@
   "group": "Q142",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-5eb65573a (reviewer sub-agent of L); spot-checked: Q142 lem-sf-open-tensor-quotient-augmentation 5eb65573: one commit, item and report only, 0 new nodes. Statement and stmt_deps are byte-identical to side-live. The item is still unsplit live, so there is no supersession. It is a new node from the Q100 parent re-split and has no repair note of its own. Both of Q100's FIX citations are present. No SGA, proof_deps equals the union of step uses, three search kinds recorded, and the full closure walk finds no cycle. Sources: Stacks 0E8I (sites-modules.tex:4051) and 0GL1 (sites-cohomology.tex:4578, 'Details omitted'); steps 1, 5 and 6 write out those details. Steps: (1) the kflat-resolution, semilinear-tensor-model, tensor-pullback (K-flatness preserved) and open-normalization (inverse = adjunct of u⊗1) statements give the representatives and the chain isomorphism. (2) r_Q has formula [x]⊗a↦[x⊗a|_U], strict transitions and augmentations; integral-open-reduction-comparison identifies it with r_j(K) and gives completeness; ℓ≠p, and the quasi-compactness of j is only shown in step 4 (forward reference, not circular, advisory). (3) Scalar restriction on the extension-presheaf summands is elementary and correct. (4) X is Noetherian by 01T6 plus finite type. finite-constructibility-interval applies with the uniform interval of def-weil-derived-complete-integral-detailed (read in full). immersion-completed-pullback-comparison gives j^*P in the integral category, and the strata clause (intersect with U) is elementary. (5) The balancing maps (x⊗y)⊗a↦(x⊗a)⊗(y⊗1) and the inverse with ab were rechecked: no factor exchange, signs and every quotient transition preserved. (6) and (7) Both routes give [(x⊗1)⊗(j^*y⊗1)] (rechecked by hand), matching def-sf-tensor-completion-comparison (first Roos coordinate the unit tensors, shifted coordinate 0). The equality holds for strict systems before localization, and no j_!/limit commutation is used. Edge cases: U=∅, U=X, K=0, P=0, n=1, odd degree. Duplicate candidates read: cbc-ringed-open-strict-reduction, cbc-ringed-open-scalar-limit-coherence, sf-open-quotient-koszul-completeness; none states the augmented tensor square. All eight declared tool_uses accepted as generic black boxes, the same tools the parent was accepted with."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenTensorQuotientAugmentation",
+  "declaration": "WeilConjectures.OpenTensorQuotient.openTensorQuotientAugmentation",
+  "declarations": [
+   "WeilConjectures.OpenTensorQuotient.Towers",
+   "WeilConjectures.OpenTensorQuotient.extendTower",
+   "WeilConjectures.OpenTensorQuotient.totalSection",
+   "WeilConjectures.OpenTensorQuotient.transpose",
+   "WeilConjectures.OpenTensorQuotient.reductionTower",
+   "WeilConjectures.OpenTensorQuotient.Balanced",
+   "WeilConjectures.OpenTensorQuotient.finiteTotal",
+   "WeilConjectures.OpenTensorQuotient.Augmentation",
+   "WeilConjectures.OpenTensorQuotient.RoosNormalization",
+   "WeilConjectures.OpenTensorQuotient.forgetSystems",
+   "WeilConjectures.OpenTensorQuotient.ScalarCompatibility",
+   "WeilConjectures.OpenTensorQuotient.ScalarComparison",
+   "WeilConjectures.OpenTensorQuotient.StrictSquare",
+   "WeilConjectures.OpenTensorQuotient.derivedGamma",
+   "WeilConjectures.OpenTensorQuotient.FiniteGeometry",
+   "WeilConjectures.OpenTensorQuotient.FiniteExtensionModel",
+   "WeilConjectures.OpenTensorQuotient.RestrictionPartitions",
+   "WeilConjectures.OpenTensorQuotient.IntegralGeometry",
+   "WeilConjectures.OpenTensorQuotient.Comparison",
+   "WeilConjectures.OpenTensorQuotient.openTensorQuotientAugmentation"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenTensorQuotientAugmentation.lean",
+  "statement": "theorem openTensorQuotientAugmentation (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) [U.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (U ↘ Spec (.of D.k))] [QuasiCompact (U ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [j.IsOver (Spec (.of D.k))] : ∃ (SX : CoefficientDerivedSystemCalculus l E X) (SU : CoefficientDerivedSystemCalculus l E U) (_cX : CoefficientDerivedSystemCoherence l E X SX) (_cU : CoefficientDerivedSystemCoherence l E U SU) (o : IntegralOpenReduction.Operations l E j) (st : IntegralOpenReduction.TensorComparison l E j o) (AX : OpenSemilinearTensor.OrdinaryReduction l E X) (AU : OpenSemilinearTensor.OrdinaryReduction l E U) (m : OpenSemilinearTensor.Comparison l E j o SX SU AX AU st) (c : IntegralOpenReduction.Comparison l E j o SX SU st), Nonempty (Comparison l E j o SX SU AX AU st m c)",
+  "branch": "sheaf-dag",
+  "by": "Q08",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db979775d",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 62b2fd41 (H2/H12). Item Lean module byte-identical (sha df7fea3f); item node differs from side-live only in lean+stmt_deps (+def-sf-integral-open-operations, +def-sf-integral-open-reduction-comparison-data, +def-sf-open-semilinear-tensor-model-data; theorem lem-sf-open-semilinear-tensor-model gone); lean.statement verbatim. New def nodes are existing:true owners of the plain structures in IntegralOpenReductionComparison (20 decls) and OpenSemilinearTensorModel (21 decls); signatures verbatim (l.486-487, l.270-274), all decls exist, theorems excluded, no overlap with the operations owner, no competing live def owner. Statements checked field by field (TensorComparison generators, AugmentedPresentation, StrictModel ∀/∃ shape, Comparison dFormula/reductionD/systemUnit/systemCounit/realizedUnit/Counit word orders; TotalComparison generator/summand without sign, OrdinaryReduction quotient eqs, Computation, KFlatPreservation, RepresentativeSquare, Comparison components). Their stmt_deps own the used notions (CoefficientReductionPresentation sits inside CoefficientDerivedSystemCalculus); no cycle. Item mathematics re-read: binders (finite type over k, l≠p, open immersion over k, no QC-j/Noetherian/finite-Tor), r_• pinned to st.ordinary + completeAgreement with r_j, IntegralGeometry/FiniteGeometry/RestrictionPartitions match the node, strict square via Balanced.coefficients, Augmentation.sections, reduction, lowerRouteFormula, square, derivedSquare through the real transpose, RoosNormalization. Edge cases U=∅, j=id, K=0/P=0, n+1 indexing, odd degrees. Advisories: Nonempty ℋ^q iso, Nonempty FiniteExtensionModel bridge, existential o/SX/SU, owner docstrings name the theorem nodes. No compile (no file changed)."
  }
 }

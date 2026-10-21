@@ -26,7 +26,8 @@
   "def-sf-comparison-derived-pullback",
   "lem-pur-bounded-site-adjunction-transpose",
   "def-kun-projection-formula-map",
-  "lem-pur-etale-open-derived-tensor"
+  "lem-pur-etale-open-derived-tensor",
+  "def-weil-proetale-constructible-sheaf"
  ],
  "proof": [
   {
@@ -339,5 +340,37 @@
   "group": "Q117",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-c84e5bddc (reviewer sub-agent of L); spot-checked: I read the whole delivery against the cited statements and sources and found no fault; I made no fixes. It is a split with no new nodes: the item's 7 steps assemble existing nodes. The statement and stmt_deps match the live side copy. There is no repair note, the item is not on the drop list, nothing cites back to the item, and no SGA source is used. Step 1: lem-pur-bounded-site-adjunction-transpose is applied with the same B and compactification, and lem-kun-dimension-finite-type gives the bound D (empty case handled). Its D+ hypotheses hold because f^x preserves D+ (def-weil-exceptional-inverse-image). Step 2: the coherence lemma's Ex is the mate of theta = a_r^-1, which is exactly the transpose b_r of the canonical-mate node, so actual maps are identified. Its pi is the def-kun-projection-formula-map and def-exchange-projection projection. Step 3: I checked the composite chain: naturality of b, the open coherence equality, Step 2, then naturality of pi^p. Step 4: the finite projection formula is used on D^b_c x D^b_ctf, and theta^p as in def-pur-co-smoothness (2) is identified factor by factor. Step 5: conjugates are identified by equal transposes (Stacks 0B65) and mate-pasting clauses 1-4. Step 6: co-smooth-exchange-transport plus thm-cbc-finite-torsion give the exchanges for arbitrary base change and open restriction. Step 7: constructible-origin (ii) and full faithfulness on D+ give independence of the origin. Sources checked: Stacks 0B65, 07A4, 0GL1, 0F7C/0F7D/0F7F, 09AK, and the blueprint proof of co-smooth-etale-locality. Batch-5 flag on lem-weil-finite-compact-projection-formula: accepted. It is the general finite projection formula, not a step of the trace-formula or Poincare-duality proofs. Recomputed without the item's new deps, the batch-5 closure already contains it (via fix-prop-projection-formula, lem-coef-dual-formula-scalar-transpose, thm-sf-ctf-stability, sk-thm-rationality), and the flagged path ends in the generic lem-pod-lisse-module node. I accept the 12 tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteSiteCounitProjectionTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteSiteCounitProjectionTransport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteSiteProjectionInput_plus_source",
+   "AlgebraicGeometry.ProEtale.finiteSiteProjectionInput_plus",
+   "AlgebraicGeometry.ProEtale.finiteSiteCounitProjectionTransport",
+   "AlgebraicGeometry.ProEtale.finiteSiteCounitAndTranspose",
+   "AlgebraicGeometry.ProEtale.finiteSiteProjections_isIso",
+   "AlgebraicGeometry.ProEtale.finiteSiteTensorTranspose",
+   "AlgebraicGeometry.ProEtale.finiteSiteThetaTransport",
+   "AlgebraicGeometry.ProEtale.finiteSiteDiagramTransposes",
+   "AlgebraicGeometry.ProEtale.finiteSiteExchangeTransposes",
+   "AlgebraicGeometry.ProEtale.finiteSiteOriginIndependence",
+   "AlgebraicGeometry.ProEtale.finiteSiteConstructibleOrigin"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteSiteCounitProjectionTransport.lean",
+  "statement": "theorem finiteSiteCounitProjectionTransport (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of P.field.k)) (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f ≫ aY = aX) (c : Compactification f) (M : Etale.DerivedCategoryModule P.Coefficient X) (K : Etale.DerivedCategoryModule P.Coefficient Y) (hM : Etale.DerivedCategory.isBoundedConstructible P.Coefficient X M) (hK : WeilConjectures.finiteTorConstructibleEtale P.coefficients.l P.extension P.level P.level_pos Y K) : D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).map (((Etale.projectionMapOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).app M).app K) ≫ (compactSupportSiteComparison P.Coefficient c).inv.app ⟨_, finiteSiteProjectionInput_plus P f M K hM hK⟩ ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).map (comparisonOpenTensorIso P.Coefficient f M K).hom = (derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso (ModuleCat.{u + 1} P.Coefficient) ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).obj M)).hom.app K ≫ ((derivedTensor (ModuleCat.{u + 1} P.Coefficient) Y).map ((compactSupportSiteComparison P.Coefficient c).inv.app ⟨M, finiteSiteProjectionInput_plus_source P X M hM⟩)).app (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K) ≫ ((projectionMapOfCompactification (ModuleCat.{u + 1} P.Coefficient) c).app (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) X).obj M)).app (D(comparisonUpperStar (ModuleCat.{u + 1} P.Coefficient) Y).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All clauses are the named theorem family in declarations. Tensor composites are characterized by existence and uniqueness with forward-projection/counit normalization, avoiding coefficient-specific monoidal elaboration; finiteSiteThetaTransport also names the published theta map. The dimension bound is supplied by finiteSiteCounitAndTranspose, not added as a geometric hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b84dc6769",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Read item node, 20 stmt_deps, report, and all 11 sorry'd theorems against node and source (blueprint co-smooth-etale-locality Steps 1/3; Stacks 0B65/07A4/0GL1/0F7F/09AK). Projection square: types checked, B∘C_Y(P^e)=P^p∘(B⊗1) with canonical comparisonOpenTensorIso and monoidal comparison; Etale/ProEtale projectionMapOfCompactification are the actual proper-mate/open projections. Counit clause = landed boundedSiteAdjunctionTranspose (∃ d harmless: forward map independent of d). θ: finiteSiteTensorTranspose at E=1,e=λ gives upstream dualizingComplexTensorMap, matching def-pur-co-smoothness's C_X θ rendering. Diagram, exchange (arbitrary g), origin and independence clauses use actual landed maps. stmt_deps gained only landed def-weil-proetale-constructible-sheaf (allowed). Statement verbatim, declarations match, lines ≤100, docstrings OK, no import cycle. Advisory only: comparisonOpenTensorIso and compactExchangeTransport* are owned by proof_dep theorem nodes (need a def-node owner); finiteSiteThetaTransport is a special case of the transpose clause; 7 unused private proof imports. No fix, no compile."
  }
 }
