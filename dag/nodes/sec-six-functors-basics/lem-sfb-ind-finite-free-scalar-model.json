@@ -20,9 +20,8 @@
  ],
  "proof": [
   {
-   "text": "Choose $R$-module isomorphisms $S_i\\cong R^{\\oplus d_i}$. Additivity and the unit isomorphism of sheaf tensor give $S_i\\otimes_R M\\cong M^{\\oplus d_i}$ naturally in $M$. A finite direct sum of a short exact sequence is short exact: its kernel and cokernel maps are the direct sums of the component kernel and cokernel maps. Thus every functor $S_i\\otimes_R-$ on $R$-modules is exact, including $d_i=0$. No compatible choice of bases is needed.",
+   "text": "Choose each finite-free isomorphism. Express its finite product of units as a finite coproduct using the finite biproduct colimit/limit isomorphism, including rank zero. Tensor preserves coefficient-sized colimits; hence left tensor by this coproduct is a finite colimit of tensorLeft of the unit. The latter is isomorphic to the identity. Finite colimits in an abelian category are exact for a finite discrete index (the colimit is also a limit), so each stage tensor functor preserves finite limits.",
    "uses": [
-    "lem-pc-sheaf-modules-tensor-closed",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
@@ -32,12 +31,11 @@
    }
   },
   {
-   "text": "For an $R$-module sheaf $M$, the given underlying-module colimit $S=\\varinjlim_iS_i$ and preservation of small colimits by sheaf tensor give $\\varinjlim_i(S_i\\otimes_R M)\\cong S\\otimes_R M$ in $\\operatorname{Mod}(R)$. Apply the cited colimit theorem to $M\\otimes_R-$ and use symmetry to put the coefficient first. The extension/tensor comparison identifies the target with $U(EM)$. Write the resulting canonical isomorphism as $\\lambda_M$. Its $i$-th leg is $q_i\\otimes1$, followed by the extension/tensor comparison. The diagram is small in the coefficient universe, exactly as the colimit theorem requires.",
+   "text": "Use the normalized extension/tensor comparison, proved privately at independent site and coefficient universes by the existing sheafification construction: identify the two presheaf tensors, sheafify, and compare restriction with sheafification after forgetting to abelian sheaves. The resulting comparison is invertible and sends each local pure tensor to itself. Naturality in the input module follows from pure-tensor extensionality. For the supplied underlying-module colimit, tensorRight of each module preserves that colimit, giving its termwise tensor cocone.",
    "uses": [
     "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "lem-pc-sheaf-modules-tensor-closed",
-    "lem-weil-pbc-extension-tensor-comparison",
-    "def-weil-pbc-category-colimit"
+    "def-weil-pbc-category-colimit",
+    "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": false,
    "source": {
@@ -46,7 +44,7 @@
    }
   },
   {
-   "text": "Step 1 turns any short exact sequence of $R$-modules into an $I$-diagram of short exact sequences, since coefficient transitions induce natural tensor maps. The assumed exactness of $I$-colimits, together with $\\lambda$, proves its image under $UE$ is short exact. Restriction $U$ is exact by the ordinary scalar-adjunction lemma. It also reflects exactness: kernels are sectionwise and cokernels are sheafified sectionwise cokernels by the module-category definition; restricting actions changes neither underlying abelian sheaf nor either construction. Hence the $S$-module sequence obtained by $E$ is short exact. Scalar extension is additive by its sheafified tensor definition, so $E$ is exact.",
+   "text": "The tensor functors of the stages preserve finite limits by Step 1. Their pointwise colimit does so by the assumed exact I-colimits. Tensor preservation of coefficient-small colimits identifies this colimit functor with tensorLeft of the colimit coefficient. The ordinary comparison of Step 2 identifies it with restriction composed with E. Restriction preserves finite limits and colimits by the ordinary adjunction theorem and reflects isomorphisms through the conservative forgetful functor to abelian sheaves. Thus it reflects finite limits and E preserves them. The ordinary adjunction makes E a left adjoint, so it preserves finite colimits.",
    "uses": [
     "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
     "def-pc-sheaf-restrict-scalars",
@@ -64,7 +62,6 @@
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-extension-tensor-comparison",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
@@ -99,11 +96,10 @@
    }
   },
   {
-   "text": "The exact-functor derived-functor lemma makes $(D(E),\\phi)$ a left derived functor of termwise $E$. The K-flat-derived extension $E^{\\mathbf L}$ is that left derived functor by the change-of-rings theorem. Their universal properties give unique maps in both directions respecting counits; the composites also respect counits and hence are identities. This identifies the two derived functors, so the canonical counit $\\epsilon_A:E^{\\mathbf L}(Q_RA)\\to Q_S(EA)$ is invertible and natural. Explicitly, take any K-flat resolution $p:P\\to A$, which exists by the resolution lemma. Naturality of the counit says $\\epsilon_A\\circ E^{\\mathbf L}(Q_Rp)=Q_S(Ep)\\circ\\epsilon_P$. On K-flat $P$, $\\epsilon_P$ is the canonical model comparison; under the model $E^{\\mathbf L}(Q_RA)\\cong Q_S(EP)$ this equation says exactly $\\epsilon_A=Q_S(Ep)$. Step 6 makes $Ep$ a quasi-isomorphism even when $A$ is not K-flat. The argument applies to every resolution, with the canonical resolution comparisons of the cited change-of-rings theorem.",
+   "text": "Apply the exact-functor derived-functor theorem to E and its canonical mapDerivedCategory factorization. The supplied universal left-derived counit is then invertible on every complex. For every quasi-isomorphism p:P to A, form e as T applied to the inverse of Q(p), followed by the invertible counit at P. Counit naturality and functoriality cancel Q(p) with its inverse to prove e followed by Q(Ep) equals the counit at A. This argument applies to every P, and in particular to all K-flat P, without choosing a resolution.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-kflat-resolution"
+    "lem-pur-derived-change-of-rings"
    ],
    "elementary": false,
    "source": {
@@ -112,7 +108,7 @@
    }
   },
   {
-   "text": "Exact restriction preserves quasi-isomorphisms by exact-functor cohomology. Therefore $UE$ preserves them; through $\\kappa$ so does $A\\mapsto\\varinjlim_i(S_i\\otimes_RA)$. The chain and coefficient squares of Step 5 descend by the localization universal property, whose fully faithful precomposition preserves their equations. Concretely, multiply a naturality square for a quasi-isomorphism by the inverses of its images to obtain the square for the inverted arrow. For the counits and a coefficient map $h:S\\to S'$ between diagrams satisfying the hypotheses, restrict $S'$-modules along $h$. The chain equation $E'p\\circ h_P=h_A\\circ Ep$ for coefficient tensor maps becomes, after localization, the square comparing $Q(Ep)$ and $Q(E'p)$. These are precisely the two counits by Step 7. Thus both identifications respect coefficient maps and inverted quasi-isomorphisms. Every argument used individual degrees or ordinary unbounded localization.",
+   "text": "Exact restriction and E preserve quasi-isomorphisms. Conjugating by the chain comparison gives quasi-isomorphism preservation for tensorColimit. Set KD to T followed by derived restriction and construct theta by composing the counit, the canonical restriction factorization, and the inverse chain comparison. For a coefficient map construct betaS by transposing the unit for the target extension through the source ordinary adjunction and the sectionwise-identity restriction-composition isomorphism. Its pure-tensor formula follows from the normalized units and scalar linearity. Restrict betaS to obtain beta, and define L by conjugation with the two supplied normalized comparisons. Pure-tensor extensionality and the cocone equation prove its required leg formula. Compose the source derived counit, Q(betaS), and the inverse target counit/restriction comparison to obtain a natural transformation after precomposition with Q. Fully faithful precomposition with localization gives betaD. Its defining equation is the displayed derived counit square, so compatibility includes all derived arrows, also inverted quasi-isomorphisms.",
    "uses": [
     "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
     "lem-weil-pbc-exact-functor-complex-cohomology",
@@ -126,26 +122,23 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-sheaf-modules-tensor-closed",
   "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-weil-pbc-extension-tensor-comparison",
   "def-weil-pbc-category-colimit",
+  "def-weil-presheaf-modules-sheafification",
   "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
   "def-pc-sheaf-restrict-scalars",
   "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-derived-functor",
   "lem-pur-derived-change-of-rings",
-  "lem-pc-kflat-resolution",
   "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Agent assembly of Tag 03EU (lemma-colimits-flat), part (2), and Tag 03EP (lemma-tensor-commute-colimits), part (2), with the cited unbounded exact-functor and K-flat-derived comparison lemmas. The chain and coefficient normalization calculations are written here."
+  "place": "U9 Lean proof of Stacks 03EU(2) and 03EP(2) with 03CY, exact-functor derived factorization (015F), and fully faithful localization precomposition. Finite free objects use finite biproducts; the independent-universe extension comparison is proved privately, and counit naturality treats every quasi-isomorphism without choosing a K-flat resolution."
  },
  "mathlib_searches": [
   {
@@ -291,13 +284,10 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-sheaf-modules-tensor-closed",
   "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-weil-pbc-extension-tensor-comparison",
   "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
   "lem-weil-pbc-exact-functor-derived-functor",
   "lem-pur-derived-change-of-rings",
-  "lem-pc-kflat-resolution",
   "lem-weil-pbc-localization-universal-property"
  ],
  "reviewed": {
@@ -338,5 +328,15 @@
   "group": "Q98",
   "result": "pass",
   "note": "Item lean-only change; statement, stmt_deps and proof match side-live; not dropped; first stage-2 delivery. lean.statement matches the file verbatim; all 11 declarations present; one sorry. Clause check: EssentiallySmall.{r} site with independent u/v/r and wR/wS/wT; D : I ⥤ Under R with IsFiltered and HasExactColimitsOfShape; algebra colimit hc plus module colimit hcModules; hfree is ∃ d, Nonempty(≅ ∏ᶜ Fin d unit), covering d=0 with no compatible bases. Exactness of E via PreservesFiniteLimits/Colimits; all quasi-isos preserved; IsIso m.ε on the canonical universal counit (DerivedChangeOfRingsCochainModel pins E to changeOfRings and T/ε to a universal left-derived pair, so quantifying over every m is sound); for every K-flat resolution p, e.hom = T(inv Qp)≫ε_P and e.hom≫Q(Ep)=ε_A. κ is a natural iso from colim of the tensor diagram to U∘E, Normalized on sheafification-unit pure tensors with q_i; KD/θ/κD clause for the derived category; CoefficientCompatible over all F, τ, h with βS pinned on pure tensors, L pinned on legs, the κ square, and the derived square in D(S) (the canonical universal-property map). Read the DerivedChangeOfRingsCochainModel, changeOfRings, tensorObjIsoSheafification and cochainModulesMonoidal sources and Stacks 03EU. No recompile (no file changed); worker reports clean scompile. Advisory: KD and K-flat second equations are formal consequences of naturality, as the node's own clauses are; pureTensor duplicates CochainPullback.moduleTmul, owned by theorem node lem-pur-module-tensor-generator-calculus and not citable without a stmt_dep; second reading is the author's own re-read."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261021T140935-L-2777756",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
