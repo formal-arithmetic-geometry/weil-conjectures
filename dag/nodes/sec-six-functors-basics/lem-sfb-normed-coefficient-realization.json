@@ -17,9 +17,162 @@
   "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-module-derived-pushpull"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $d=\\dim_{\\mathbf Q_\\ell}E$. For each $x\\in E$, the $d+1$ vectors $1,x,\\ldots,x^d$ are linearly dependent, so $x$ satisfies a nonzero polynomial over $\\mathbf Q_\\ell$. Apply [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] to obtain a $\\mathbf Q_\\ell$-embedding $i:E\\to\\overline{\\mathbf Q}_\\ell$. Its image $E'=i(E)$ is a subfield containing $\\mathbf Q_\\ell$, and $i$ corestricted to its image is an algebra isomorphism $\\sigma:E\\to E'$. The images of a basis of $E$ form a basis of $E'$, so $E'$ is finite of degree $d$.",
+   "uses": [
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09GU, lemma-map-into-algebraic-closure; elementary finite-dimensional reduction and image construction"
+   }
+  },
+  {
+   "text": "The function $x\\mapsto|i(x)|$ is an absolute value on $E$: injectivity gives its zero condition, and multiplication and the triangle inequality follow by applying those in the algebraic closure. Since $i$ fixes $\\mathbf Q_\\ell$, it extends the normalized $\\ell$-adic absolute value. By [lem-weil-l-adic-extension-absolute-value] it equals the supplied norm on $E$. Hence $|\\sigma(x)-\\sigma(y)|=|x-y|$ and both $\\sigma$ and its inverse are continuous. The equation $|\\sigma(x)|=|x|$ gives $\\sigma(A)=\\{z\\in E':|z|\\le1\\}=A'$; restricting the isometry gives the required topological ring isomorphism $A\\cong A'$.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+    "place": "spectralNorm_unique_field_norm_ext, line 770, as recorded by lem-weil-l-adic-extension-absolute-value; application to the pulled-back absolute value"
+   }
+  },
+  {
+   "text": "For $B=A,E$ let $s_B:B\\cong B'$ be the isomorphism just constructed. On every profinite set $S$, postcomposition $h\\mapsto s_B\\circ h$ gives an isomorphism $C(S,B)\\cong C(S,B')$, with inverse postcomposition by $s_B^{-1}$. These maps commute with restrictions and pointwise ring operations by [sk-def-sfb-condensed-ring]. The square involving $A\\hookrightarrow E$ and $A'\\hookrightarrow E'$ commutes because $s_A$ is the restriction of $s_E$. Applying the functor $p_Z^*$ of [sk-def-sfb-pulled-back-coefficients] gives ring isomorphisms $c_Z^B:B_Z\\cong B'_Z$ and the commuting inclusion square on every scheme $Z$.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/_section.md",
+    "place": "continuous-map formula and functoriality; sk-def-sfb-pulled-back-coefficients, functoriality of pullback from the point"
+   }
+  },
+  {
+   "text": "Fix $B$ and omit its superscript. Put $R_Z=B_Z$, $S_Z=B'_Z$ and $P_Z=\\operatorname{Res}_{c_Z^{-1}}$. Thus $P_ZM$ has the same underlying abelian sheaf, and $s\\in S_Z$ acts as $c_Z^{-1}(s)$ on $M$. By clauses 4--5 of [sk-def-sfb-change-of-scalars], $P_Z$ and $\\operatorname{Res}_{c_Z}$ are additive exact inverse equivalences, and $\\operatorname{Ext}_{c_Z}\\cong P_Z$. The latter isomorphism is $s\\otimes m\\mapsto c_Z^{-1}(s)m$, with inverse $m\\mapsto1\\otimes m$. The exact-functor result [lem-weil-pbc-exact-functor-derived-functor] identifies its left derived functor with termwise $P_Z$, so the stated derived extension $J_Z^B$ is $D(P_Z)$. By [lem-sf-exact-functor-derived-triangulated] it is exact as a triangulated functor; termwise inverse scalar restriction gives its inverse on the localized categories.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict; derived.tex Tag 015F, lemma-right-derived-exact-functor; application to an invertible coefficient map"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exact-functor-complex-cohomology], $H^n(J_ZK)\\cong P_ZH^n(K)$ for every integer $n$. The inverse equivalence has the same property. Since both functors carry zero to zero, every upper or lower cohomological bound is preserved in both directions. This proves the assertion about bounds without choosing a common bound in advance.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; natural cohomology comparison recorded in the cited node"
+   }
+  },
+  {
+   "text": "For any stratum or covering morphism $g:W\\to Z$, pulling back the action $R_Z\\otimes M\\to M$ precomposed with $c_Z^{-1}\\otimes M$ gives the pulled-back action precomposed with $(g^*c_Z)^{-1}\\otimes g^*M$. Thus inverse scalar restriction commutes with the $\\operatorname{mapMod}(g^*)$ used in [def-sfb-constructible-module]. On $W$, clause 5 of [sk-def-sfb-change-of-scalars] identifies the regular $g^*R_Z$-module with the regular $g^*S_Z$-module by $g^*c_Z$. The exact additive equivalence therefore carries a presentation $(g^*R_Z)^m\\to(g^*R_Z)^n\\to M\\to0$ to a presentation $(g^*S_Z)^m\\to(g^*S_Z)^n\\to P(M)\\to0$, and its inverse does the reverse. This is precisely finite presentation in [def-sfb-finitely-presented-module]. Consequently the same local covers in [def-sfb-locally-finitely-presented] and the same finite stratification work for $M$ and its scalar transport. Applying this to each cohomology module from step 5 proves bounded constructibility in both directions by [sk-def-sfb-bounded-constructible].",
+   "uses": [
+    "def-sfb-constructible-module",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-finitely-presented-module",
+    "def-sfb-locally-finitely-presented",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-bounded-constructible/_section.md",
+    "place": "stratified locally finitely presented definition; explicit transport of each finite cokernel presentation"
+   }
+  },
+  {
+   "text": "Let $f:X\\to Y$. Naturality in the coefficient ring of the point-pullback comparison defining $\\alpha_f$ in [sk-def-sfb-coefficient-morphisms] gives $c_X\\alpha_{f,R}=\\alpha_{f,S}f^*(c_Y)$. Taking adjoints gives $f_*(c_X)\\eta_{f,R}=\\eta_{f,S}c_Y$, since $\\eta_f$ is the stated mate of $\\alpha_f$. Using the inverse of this equality, the two actions of $S_Y$ on $f_*^{\\mathrm{Ab}}M$ in $P_Y f_{*,R}M$ and $f_{*,S}P_XM$ coincide: both first send $s$ to $\\eta_{f,R}(c_Y^{-1}s)$, then use the original action. By the explicit definition of module direct image in [sk-def-sfb-module-pushforward-pullback], the identity of the underlying abelian sheaf is therefore a natural module isomorphism $\\gamma_M:P_Y f_{*,R}M\\cong f_{*,S}P_XM$.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "sk-def-sfb-module-pushforward-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/_section.md",
+    "place": "naturality of alpha from point pullback and its mate eta; explicit module pushforward definition in sk-def-sfb-module-pushforward-pullback"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-comap-preserves-k-injectives] to the condensed ring isomorphism $s_B^{-1}$. Its hypothesis holds for every scheme: extension along its pullback is inverse scalar restriction by [sk-def-sfb-change-of-scalars], hence an exact equivalence and in particular finite-limit preserving. Thus $P_X$ sends K-injectives to K-injectives. For a K-injective resolution $K\\to I$, exactness makes $P_XK\\to P_XI$ a quasi-isomorphism. The definition [sk-def-sfb-module-derived-pushpull] consequently computes both sides of the required comparison on this one resolution: they are represented by $P_Y f_{*,R}I$ and $f_{*,S}P_XI$. Termwise $\\gamma_I$ from step 7 is an isomorphism between them. It is natural in maps of K-injective complexes, hence in their homotopy category. The localization map from homotopy morphisms into a K-injective to derived morphisms is bijective by [lem-sc-kinjective-quasi-iso-comparison]; together with resolution existence in [sk-def-sfb-derived-categories], this makes the K-injective homotopy category equivalent to the derived source category. This defines the natural isomorphism $J_Y Rf_{*,R}\\cong Rf_{*,S}J_X$ on the ordinary unbounded categories.",
+   "uses": [
+    "lem-sfb-comap-preserves-k-injectives",
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-derived-categories",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-preserves-k-injectives.md",
+    "place": "flat restriction preserves K-injectives; ambient total-derived computation in sk-def-sfb-module-derived-pushpull"
+   }
+  },
+  {
+   "text": "For the corresponding ordinary inverse-image comparison, the tensor description in [sk-def-sfb-module-pushforward-pullback] gives $\\beta:P_X f_R^*\\cong f_S^*P_Y$ by $a\\otimes m\\mapsto c_X(a)\\otimes m$, with inverse $b\\otimes m\\mapsto c_X^{-1}(b)\\otimes m$. The coefficient identity in step 7 is exactly the balancing relation needed for these maps. The adjunction unit $m\\mapsto1\\otimes m$ is fixed by this formula. The counit on a tensor $a\\otimes n$ is the underlying inverse-image counit followed by scalar multiplication by $a$; on the changed side multiplication by $c_X(a)$ on $P_XM$ is, by definition, multiplication by $a$. Hence $\\beta$ and $\\gamma$ satisfy the actual unit and counit squares of the module adjunction; in particular $\\gamma$ is its counit mate, with no choice of an unrelated adjunction.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict, and the explicit module pullback/pushforward adjunction in sk-def-sfb-module-pushforward-pullback; balanced tensor and counit calculation"
+   }
+  },
+  {
+   "text": "The $S$ coefficients are the admissible embedded finite-field or integer-ring coefficients, so [sk-prop-sfb-cartesian-coefficients] gives exactness of $f_S^*$. Since $P_X,P_Y$ are exact equivalences and $\\beta$ is invertible, $f_R^*$ is exact too. By [lem-weil-pbc-exact-functor-derived-functor], their total left derived functors are the termwise functors, so all complexes can be used as the left resolving class. Apply [lem-sfb-resolving-derived-adjunction-normalization] to the two module adjunctions: with any source complex and a K-injective target $I$, the derived Hom transpose is the localized ordinary Hom transpose. The same target $P_XI$ computes the changed adjunction by step 8. Step 9 makes these ordinary transposes agree, so their localized transposes agree as well. Therefore the derived $\\gamma$ constructed in step 8 is the mate of the localized $\\beta$ and identifies the derived counits. Equality holds on all derived morphisms by the localization universal property [lem-weil-pbc-localization-universal-property]. This proves the final normalization clause for both $B=A$ and $B=E$.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors, and Tag 015F; normalization of transposes on K-injective targets as stated in lem-sfb-resolving-derived-adjunction-normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-l-adic-extension-absolute-value",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-change-of-scalars",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-sfb-constructible-module",
+  "def-sfb-finitely-presented-module",
+  "def-sfb-locally-finitely-presented",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-comap-preserves-k-injectives",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-categories",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.1 and Remark 6.8.15 supply coefficient conventions; agent-written coordinate and derived-adjunction argument using Stacks 09GU, 03CZ, 010N, 015F, 09T5 and the cited existing DAG results. The general ring-object constructibility convention is the blueprint definition, not an identification with a different coefficient model."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +208,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ContinuousLinearEquiv.arrowCongrSL_apply\", \"module\": \"Mathlib/Topology/Algebra/Module/StrongTopology\", \"type\": \"∀ {𝕜 : Type u_1} {𝕜₂ : Type u_2} {𝕜₃ : Type u_3} {𝕜₄ : Type u_4} {E : Type u_5} {F : Type u_6} {G : Type u_7}\\n  {H : Type u_8} [inst : AddCommGroup E] [inst_1 : AddCommGroup F] [inst_2 : AddCommGroup G] [inst_3 : AddCommGroup H]\\n  [inst_4 : NormedField 𝕜] [inst_5 : NormedField 𝕜₂] [inst_6 : NormedFi\", \"doc\": \"Given continuous linear equivalences $ e_{12} : E ≃_{SL[σ_{12}]} F $ and $ e_{43} : H ≃_{SL[σ_{43}]} G $, this constructs a continuous linear equivalence between the spaces of continuous linear maps $\"}\n  {\"name\": \"ContinuousLinearEquiv.arrowCongrSL\", \"module\": \"Mathlib/Topology/Algebra/Module/StrongTopology\", \"type\": \"{𝕜 : Type u_1} →\\n  {𝕜₂ : Type u_2} →\\n    {𝕜₃ : Type u_3} →\\n      {𝕜₄ : Type u_4} →\\n        {E : Type u_5} →\\n          {F : Type u_6} →\\n            {G : Type u_7} →\\n              {H : Type u_8} →\\n                [inst : AddCommGroup E] →\\n                  [inst_1 : AddCommGroup F] →\\n                 \", \"doc\": \"Given continuous linear equivalences $ e_{12} : E ≃_{SL[σ_{12}]} F $ and $ e_{43} : H ≃_{SL[σ_{43}]} G $, this constructs a continuous linear equivalence between the spaces of continuous linear maps $\"}\n  {\"name\": \"ContinuousLinearEquiv.arrowCongrEquiv_apply\", \"module\": \"Mathlib/Topology/Algebra/Module/Equiv\", \"type\": \"∀ {R₁ : Type u_1} {R₂ : Type u_2} {R₃ : Type u_3} [inst : Semiring R₁] [inst_1 : Semiring R₂] [inst_2 : Semiring R₃]\\n  {σ₁₂ : R₁ →+* R₂} {σ₂₁ : R₂ →+* R₁} [inst_3 : RingHomInvPair σ₁₂ σ₂₁] [inst_4 : RingHomInvPair σ₂₁ σ₁₂]\\n  {σ₂₃ : R₂ →+* R₃} {σ₁₃ : R₁ →+* R₃} [inst_5 : RingHomCompTriple σ₁₂ σ₂₃ σ₁₃\", \"doc\": \"Given semirings $R_1,R_2,R_3,R_4$ with compatible ring homomorphisms and their inverses, and topological modules $M_1,M_2,M_3,M_4$ over these semirings, the congruence equivalence $e_{12}.\\text{arrowCo\"}\n  {\"name\": \"ContinuousLinearEquiv.arrowCongr_apply\", \"module\": \"Mathlib/Topology/Algebra/Module/StrongTopology\", \"type\": \"∀ {𝕜 : Type u_1} {E : Type u_2} {F : Type u_3} {G : Type u_4} {H : Type u_5} [inst : AddCommGroup E]\\n  [inst_1 : AddCommGroup F] [inst_2 : AddCommGroup G] [inst_3 : AddCommGroup H] [inst_4 : NormedField 𝕜]\\n  [inst_5 : Module 𝕜 E] [inst_6 : Module 𝕜 F] [inst_7 : Module 𝕜 G] [inst_8 : Module 𝕜 H] [ins\", \"doc\": \"Let $\\\\mathbb{k}$ be a semiring, and let $E, F, H, G$ be topological $\\\\mathbb{k}$-modules. Let $e_1: E \\\\to F$ and $e_2: H \\\\to G$ be continuous linear equivalences, and let $f: E \\\\to H$ be a continuous \"}\n  {\"name\": \"ContinuousLinearEquiv.arrowCongrSL_toLinearEquiv_apply\", \"module\": \"Mathlib/Topology/Algebra/Module/StrongTopology\", \"type\": \"∀ {𝕜 : Type u_1} {𝕜₂ : Type u_2} {𝕜₃ : Type u_3} {𝕜₄ : Type u_4} {E : Type u_5} {F : Type u_6} {G : Type u_7}\\n  {H : Type u_8} [inst : AddCommGroup E] [inst_1 : AddCommGroup F] [inst_2 : AddCommGroup G] [inst_3 : AddCommGroup H]\\n  [inst_4 : NormedField 𝕜] [inst_5 : NormedField 𝕜₂] [inst_6 : NormedFi\", \"doc\": \"Given continuous linear equivalences $ e_{12} : E ≃_{SL[σ_{12}]} F $ and $ e_{43} : H ≃_{SL[σ_{43}]} G $, this constructs a continuous linear equivalence between the spaces of continuous linear maps $\"}\n  {\"name\": \"ContinuousLinearEquiv.arrowCongr\", \"module\": \"Mathlib/Topology/Algebra/Module/StrongTopology\", \"type\": \"{𝕜 : Type u_1} →\\n  {E : Type u_2} →\\n    {F : Type u_3} →\\n      {G : Type u_4} →\\n        {H : Type u_5} →\\n          [inst : AddCommGroup E] →\\n            [inst_1 : AddCommGroup F] →\\n              [inst_2 : AddCommGroup G] →\\n                [inst_3 : AddCommGroup H] →\\n                  [inst_4 : Norme\", \"doc\": \"Given continuous linear equivalences $ e_1 : E ≃_{L[𝕜]} F $ and $ e_2 : H ≃_{L[𝕜]} G $, this constructs a continuous linear equivalence between the spaces of continuous linear maps $ E →_{L[𝕜]} H $ an\"}\n  {\"name\": \"ContinuousLinearEquiv.integrable_comp_iff\", \"module\": \"Mathlib/MeasureTheory/Function/L1Space/Integrable\", \"type\": \"∀ {α : Type u_1} {m : MeasurableSpace α} {μ : MeasureTheory.Measure α} {E : Type u_8} {H : Type u_9}\\n  [inst : NormedAddCommGroup E] [inst_1 : NormedAddCommGroup H] {𝕜 : Type u_10} {𝕜' : Type u_11}\\n  [inst_2 : NontriviallyNormedField 𝕜] [inst_3 : NontriviallyNormedField 𝕜'] [inst_4 : NormedSpace 𝕜' \", \"doc\": \"For any function $\\\\phi : \\\\alpha \\\\to H$ and continuous linear equivalence $L : H \\\\simeq_{\\\\sigma} E$, the composition $L \\\\circ \\\\phi$ is integrable with respect to measure $\\\\mu$ if and only if $\\\\phi$ its\"}\n  {\"name\": \"ContDiffMapSupportedIn.structureMapLM_eq_of_scalars\", \"module\": \"Mathlib/Analysis/Distribution/ContDiffMapSupportedIn\", \"type\": \"∀ (𝕜 : Type u_1) {E : Type u_2} {F : Type u_3} [inst : NontriviallyNormedField 𝕜] [inst_1 : NormedAddCommGroup E]\\n  [inst_2 : NormedSpace ℝ E] [inst_3 : NormedAddCommGroup F] [inst_4 : NormedSpace ℝ F] [inst_5 : NormedSpace 𝕜 F]\\n  [inst_6 : SMulCommClass ℝ 𝕜 F] {n : ℕ∞} {K : TopologicalSpace.Compact\", \"doc\": \"For a nontrivially normed field $𝕜'$, a normed space $F$ over $𝕜'$, and compatible scalar multiplication between $ℝ$ and $𝕜'$, the structure maps $\\\\mathrm{structureMapLM}$ for $n$-times continuously d\"}",
    "date": "2026-10-21",
    "verdict": "no match: returned declarations concern scalar adic completion, generic module presentations, condensed discreteness, or normed spaces; none states the pro-etale coefficient/category comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every algebraic extension of a field admits an algebra homomorphism into an algebraically closed extension field",
+   "results": "{\"t\": \"2026-10-21T03:43:00Z\", \"tool\": \"leanfinder\", \"query\": \"Every algebraic extension of a field admits an algebra homomorphism into an algebraically closed extension field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsAlgClosed.lift\", \"IsAlgClosed.lift_def\", \"Field.embEquivOfIsAlgClosed\", \"NumberField.Embeddings.instNonemptyRingHomOfIsAlgebraicRatOfIsAlgClosed\", \"Field.nonempty_algHom_of_exist_roots\", \"IntermediateField.Lifts.nonempty_algHom_of_exist_lifts_finset\", \"Field.nonempty_algHom_of_aeval_eq_zero_subset\", \"Field.embProdEmbOfIsAlgebraic\"], \"digest\": \"bc0412573bfa7c2c\"}",
+   "date": "2026-10-21",
+   "verdict": "ingredient match only: IsAlgClosed.lift is already carried by lem-weil-pbc-algebraic-extension-embeds-algebraically-closed; it does not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def lift|theorem.*lift|def.*lift",
+   "results": "{\"t\": \"2026-10-21T03:43:07Z\", \"tool\": \"grep\", \"query\": \"noncomputable def lift|theorem.*lift|def.*lift\", \"sub\": \"FieldTheory/IsAlgClosed\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\"], \"digest\": \"4d76820e72e99686\"}",
+   "date": "2026-10-21",
+   "verdict": "ingredient match only: IsAlgClosed.lift is already carried by lem-weil-pbc-algebraic-extension-embeds-algebraically-closed; it does not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAlgClosed.lift",
+   "results": "{\"t\": \"2026-10-21T03:43:08Z\", \"tool\": \"loogle\", \"query\": \"IsAlgClosed.lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"IsAlgClosed.lift\", \"Field.absoluteGaloisGroup.map_toFun_apply\", \"Field.absoluteGaloisGroup.map_toFun_symm_apply\"], \"digest\": \"9760de7c88d90328\"}",
+   "date": "2026-10-21",
+   "verdict": "ingredient match only: IsAlgClosed.lift is already carried by lem-weil-pbc-algebraic-extension-embeds-algebraically-closed; it does not state the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of a sheaf of rings by a ring isomorphism preserves bounded constructible complexes and commutes with derived direct image",
+   "results": "{\"t\": \"2026-10-21T03:43:51Z\", \"tool\": \"leansearch\", \"query\": \"Change of a sheaf of rings by a ring isomorphism preserves bounded constructible complexes and commutes with derived direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoCommRingCatApp\", \"SheafOfModules.pushforward\", \"AlgebraicGeometry.Spec.sheafedSpaceMap\", \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"AlgebraicGeometry.LocallyRingedSpace.homOfSheafedSpaceHomOfIsIso\", \"AlgebraicGeometry.LocallyRingedSpace.isoOfSheafedSpaceIso\", \"AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso\", \"SheafOfModules.sheafificationCompPullback\"], \"digest\": \"b4759f493b94c371\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits concern ordinary sheaf pushforward comparisons or scheme isomorphisms; no finite normed coefficient realization with bounded constructibility and derived counit normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of normed p-adic coefficient fields induces exact equivalences of derived categories of sheaves commuting with pushforward",
+   "results": "{\"t\": \"2026-10-21T03:43:52Z\", \"tool\": \"leanfinder\", \"query\": \"An isomorphism of normed p-adic coefficient fields induces exact equivalences of derived categories of sheaves commuting with pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardCongr\", \"CategoryTheory.Functor.sheafPushforwardContinuousIso\", \"SheafOfModules.pushforwardNatIso\", \"CategoryTheory.Functor.sheafPushforwardContinuousIso_hom\", \"SheafOfModules.pushforwardCongr_symm\", \"SheafOfModules.pushforwardCongr_inv_app_val_app\", \"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforwardNatIso_hom\"], \"digest\": \"5ab359526cc0ff31\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits concern ordinary sheaf pushforward comparisons or scheme isomorphisms; no finite normed coefficient realization with bounded constructibility and derived counit normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-lower-star-preserves",
@@ -75,5 +263,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-normed-coefficient-realization",
+  "worker": "stage1",
+  "group": "Q69",
+  "summary": "Realized the normed coefficient field by the existing algebraic embedding and uniqueness of absolute value; wrote inverse-scalar formulas for the exact equivalences, finite presentations, direct-image comparison, and normalized counit mate. Reused existing results throughout: no new nodes, no statement change, no Lean writing or compilation.",
+  "blueprint": "Expands the normed-field/integer-ring presentation clause of lem-sfb-dc-lower-star-preserves (current blueprint node order 1781), specifically the returned step 1 identified by this item's blueprint.from.place. It supplies coefficient-presentation equivalence, not a replacement proof of open finiteness.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-comap-preserves-k-injectives",
+    "why": "Generic restriction-of-scalars result needed to compute both ambient direct images on the same K-injective resolution; the open-coefficients unit has no replacement for this categorical tool."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic normalization theorem identifies derived transposes with ordinary transposes on resolving representatives, used solely to verify the final counit mate clause."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-comap-preserves-k-injectives",
+  "lem-sfb-resolving-derived-adjunction-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-ea1b56737",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-ea1b56737 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to the live one and the delivery adds 0 new nodes. Live and side-live still have the item unsplit, there is no re-split note and no drop entry. There is no cycle: none of the 3170 transitive dependencies of the cited nodes is the item or its parent. Source: Bhatt–Scholze Def. 6.8.1 and Rem. 6.8.15, conventions only; the proof is agent-written. Checks by step. 1: the embedding comes from the 09GU leaf, and E' is finite of degree d. 2: uniqueness of the absolute value makes the embedding isometric, so A maps onto O_{E'} with the restricted topology. 3: condensed-ring and pulled-back functoriality. 4: P = Res_{c^{-1}} is an exact equivalence with Ext_c ≅ P (clause 5). J = L(Ext_c) ≅ D(P) by uniqueness of derived functors, and it is triangulated. 5: cohomology commutes with P. 6: the stratification and cover transport is checked; the regular module maps to the regular module through g^*c, and the elementary flag is acceptable. 7: c_X α_R = α_S f^*c_Y and f_*(c_X)η_R = η_S c_Y, both verified, so the identity of f_*^{Ab}M is linear. 8: comap-preserves-K-injectives is applied to s^{-1} with the directions checked, and both Rf_* are computed on I and P_X I. 9: β(a⊗m) = c_X(a)⊗m; linearity, balancing, unit and counit verified. 10: the S coefficients are admissible, so pullback is exact, and the resolving normalization gives the derived counit mate. Tags 09GU, 03CZ, 015F, 010N and 09T5 match tags/tags. Edge cases tested: E = Q_ℓ, zero objects, presentations with m or n = 0, the empty scheme, f = id. No duplicate: condensed-coefficient-iso-constructible concerns D_ctf, and ring-isomorphism-tensor-transport and base-coefficient-condensed-identification cover other statements. Accepted tool_use: lem-sfb-resolving-derived-adjunction-normalization, generic and off-unit. The declared comap-preserves-K-injectives is on the route, so declaring it is harmless. Advisory: step 10 says 'embedded finite-field' where it means the finite subextension E' and O_{E'}; this is clear from context, so I made no fix."
  }
 }

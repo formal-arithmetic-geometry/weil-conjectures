@@ -20107,3 +20107,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: merged deliver/Q67/lem-sfb-localized-direct-image-comparison (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: merged deliver/Q03/lem-cbc-derived-constant-tower-normalization (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: merged deliver/Q68/lem-sfb-normalized-immersion-comparison-coherence (reviewer PASS; first push; new nodes: 0)
+- 03:59 L: merged deliver/Q69/lem-sfb-normed-coefficient-realization (reviewer PASS; first push; new nodes: 0)
