@@ -231,5 +231,31 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-d8432159b (reviewer sub-agent of L); spot-checked: Read the item and recomputed all 7 steps; no new nodes, and the statement is unchanged from base. Steps 1, 2, 4 and 6 apply lem-amb-mate-unit-counit (Mathlib mateEquiv_counit, Mates.lean l.123, no invertibility hypothesis) to γ^p at K=C_X^A J, β^A at J, β^B at T_X^e J and γ^e at J; each tuple (L1,R1,L2,R2,G,H) is correctly typed and the equations are in the right orientation. Steps 3 and 5 are the naturality squares of δ_X at ε^e_{A,J} and of d_B at γ^e_J, plus the assumed cube identity. Both sides reduce to C_X^B(T_X^e(ε^e_{A,J})∘c^e_P)∘d_{B,T_Y^eP}∘p_B(δ_{Y,P}). The mate convention matches def-weil-pbc-adjunction-mate. The cube hypothesis agrees verbatim with lem-sfb-etale-proetale-scalar-pullback-cube at M=P, and the parent lem-sfb-etale-proetale-scalar-mate discharges it that way and uses U♭=V♭ correctly. Sources read: blueprint main-20261015 det-prop-scalar-six-direct-image.proof.md, (2) Formal properties and Finite rings paragraphs; Stacks 07A7 sites-cohomology.tex remark-base-change l.4033 (base-change map = adjoint of pulled-back counit). Edge cases checked: f=id, a=id, J=0, non-flat Z→Z/2; no qcqs, boundedness or flatness is used. No SGA source, no duplicate node in the DAG, not a re-split and not a dropped item. The sandbox citations.json the report mentions was not delivered and is not required. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleProEtaleScalarCounitTransposes",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleProEtale_scalar_counit_transposes",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarSiteDirectImageU",
+   "AlgebraicGeometry.ProEtale.scalarSiteDirectImageV",
+   "AlgebraicGeometry.ProEtale.scalarSiteCounitTranspose",
+   "AlgebraicGeometry.ProEtale.scalarSiteCounitNormalForm",
+   "AlgebraicGeometry.ProEtale.etaleProEtale_scalar_counit_transposes"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleProEtaleScalarCounitTransposes.lean",
+  "statement": "theorem etaleProEtale_scalar_counit_transposes {A B : Type (u + 1)} [CommRing A] [CommRing B] (a : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) (J : Etale.DerivedCategoryModule A X) (_hCube : (scalarPullbackProEtaleIso a f).hom.app ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj (R(Etale.lowerStar (ModuleCat.{u + 1} A) f).obj J)) ≫ (pbcFixedScalarExtension (Scheme.ProEt.topology X) a).map ((directImageComparisonAmbientPullbackIso A f).hom.app (R(Etale.lowerStar (ModuleCat.{u + 1} A) f).obj J)) ≫ (pbcComparisonReduction X a).hom.app (L(Etale.upperStar (ModuleCat.{u + 1} A) f).obj (R(Etale.lowerStar (ModuleCat.{u + 1} A) f).obj J)) = L(upperStar (ModuleCat.{u + 1} B) f).map ((pbcComparisonReduction Y a).hom.app (R(Etale.lowerStar (ModuleCat.{u + 1} A) f).obj J)) ≫ (directImageComparisonAmbientPullbackIso B f).hom.app ((Etale.scalarExtension a Y).obj (R(Etale.lowerStar (ModuleCat.{u + 1} A) f).obj J)) ≫ (comparisonUpperStar (ModuleCat.{u + 1} B) X).mapDerivedCategory.map ((Etale.scalarPullbackIso a f).hom.app (R(Etale.lowerStar (ModuleCat.{u + 1} A) f).obj J))) : scalarSiteCounitTranspose a f J (scalarSiteDirectImageU a f J) = scalarSiteCounitNormalForm a f J ∧ scalarSiteCounitTranspose a f J (scalarSiteDirectImageV a f J) = scalarSiteCounitNormalForm a f J",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The canonical d_R, beta_R and pro-etale scalar/pullback helpers are reused from EtaleProEtaleScalarMate; delta is pbcComparisonReduction and the etale comparison/mate are Etale.scalarPullbackIso and Etale.scalarMate. The theorem assumes precisely the cube at r_A J and asserts each counit transpose equals the specified normal form. No inverse of a direct-image mate or boundedness/flatness/geometric condition is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-099865766",
+  "group": "NB",
+  "result": "pass",
+  "note": "Clause-by-clause match: f any morphism, a:A→+*B on Type(u+1) (recorded convention), cube assumed only at P=r_A J with correct orientation, U/V/q♭/normal form exactly as node; canonical d (localized comparisonUpperStarCompUpperStarIso), c^e=Etale.scalarPullbackIso (dep record), c^p=scalarPullbackProEtaleIso, δ=pbcComparisonReduction, β/γ as mateEquiv with correct types; 7-step proof recomputed, statement true and non-vacuous; no qcqs/bounded/flatness/β-inverse; helpers are real composites; docstrings with source+blueprint+proof steps; lean.statement verbatim; only item lean record added, dep records identical to live; nt_compile --json clean 25.7 s. Maintainer notes: item imports EtaleProEtaleScalarMate whose owner's proof_deps cite the item → stage-3 import cycle (declared under stages/2 §3.7; split helpers into a def-node module, cf. Q129); d/β/c^p/δ interfaces are inherited parent helpers, not the stmt_dep records' declarations (advisory)."
  }
 }
