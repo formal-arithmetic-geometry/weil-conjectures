@@ -14,7 +14,10 @@
   "def-pc-tensor-complex-sheaves",
   "lem-pur-derived-change-of-rings",
   "def-pc-sheaf-restrict-scalars",
-  "def-weil-derived-complete"
+  "def-weil-derived-complete",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-pur-integral-derived-operations",
+  "def-sp-completed-uniformizer-section"
  ],
  "proof": [
   {
@@ -442,5 +445,37 @@
   "group": "Q101",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-7f722289f (reviewer sub-agent of L); spot-checked: PASS. I read and recomputed all nine steps. There are no new nodes, the statement is unchanged, and there is no cycle. No repair note applies and no other group has split the item, so the re-split rule is out. No SGA is cited. Step 2: the tensor differential d(x,y)=(dx+(-1)^{k+1}π^j y,dy) and the quotient sign y↦(-1)^k y onto Q[1] are both correct. Step 3: Z_{j+r}→Z_j is π^r=0, and with the mapping-cone criterion of lem-weil-pbc-ringed-strict-tower-homotopy-limit Rlim of the inclusion is an isomorphism. For the constant tower, the section z_j=-Σ_{i<j}y_i checks out and the diagonal map is a quasi-isomorphism. The augmentation clause of lem-weil-strict-roos-comparison then identifies the unit, using only each level's own r_n. Step 4: the (-1)^{pq} interchange matches the n-, j- and internal terms of the differential. Step 5: the differentials of H_0⊗L_j and of the n-Roos model of Q_n⊗L_j agree exactly. Step 6 gives the unit with components h⊗1 and zero shift. Steps 7-8: the K-flat test is applied with the K-flat factor in the second variable, and the cone/swap argument is valid. With q=f, the composite P→P⊗B_j is exactly c_n=[γ_n][q]^{-1} of def-weil-integral-reduction-tower. Step 9 is the 'Equivalently' clause of def-weil-derived-complete. Duplicate search: lem-weil-pbc-torsion-limit-sheaf-completeness has constant Noetherian coefficients and bounded complexes, and lem-pur-regular-quotient-completion-unit and lem-pur-roos-intrinsic-completeness-equivalence are equivalences of completeness notions; none duplicates the item. The declared tool_uses (products, Roos, tower, triangle and K-flat foundations) are generic black boxes and are accepted. Advisory: def-weil-derived-complete carries the convention ℓ≠p, and the item's last clause is scoped to that convention."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PowerTorsionSheafLimitComplete",
+  "declaration": "WeilConjectures.PowerTorsionLimit.power_torsion_sheaf_limit_complete",
+  "declarations": [
+   "WeilConjectures.PowerTorsionLimit.roos",
+   "WeilConjectures.PowerTorsionLimit.tensorTower",
+   "WeilConjectures.PowerTorsionLimit.completion",
+   "WeilConjectures.PowerTorsionLimit.unit_condition",
+   "WeilConjectures.PowerTorsionLimit.unit",
+   "WeilConjectures.PowerTorsionLimit.coordinateZero",
+   "WeilConjectures.PowerTorsionLimit.coordinateOne",
+   "WeilConjectures.PowerTorsionLimit.evaluation",
+   "WeilConjectures.PowerTorsionLimit.columns",
+   "WeilConjectures.PowerTorsionLimit.rowCoordinate",
+   "WeilConjectures.PowerTorsionLimit.columnCoordinate",
+   "WeilConjectures.PowerTorsionLimit.power_torsion_sheaf_limit_complete"
+  ],
+  "file": "lean/Sheaf/Paper/PowerTorsionSheafLimitComplete.lean",
+  "statement": "theorem power_torsion_sheaf_limit_complete (Q : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E T) ℤ) (hQ : ∀ n : ℕ, ∃ r : ℕ, 1 ≤ r ∧ ∀ (a : ℤ) (U : T.ProEtᵒᵖ) (x : ((Q.obj (op n)).X a).val.obj U), (@id ((completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U) ((uniformizer l E T).val U)) ^ r • x = 0) : ∃ η : 𝟭 (CochainComplex (integralTowerModules l E T) ℤ) ⟶ completion l E T, (∀ P, η.app P = unit l E T P) ∧ (∀ n : ℕ, QuasiIso (unit l E T (Q.obj (op n)))) ∧ ∃ (β : (roos l E T).obj (Q ⋙ completion l E T) ≅ (roos l E T).obj (columns l E T Q)), (∀ (p q : Bool) (k : ℤ) (n j : ℕ), β.hom.f k ≫ columnCoordinate l E T Q p q k n j = if p && q then -rowCoordinate l E T Q p q k n j else rowCoordinate l E T Q p q k n j) ∧ (∀ (k : ℤ) (n j : ℕ), (((roos l E T).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η)) ≫ β.hom).f k ≫ columnCoordinate l E T Q false false k n j = coordinateZero l E T Q k n ≫ (koszulRepresentativeAugmentation (completedIntegralCommRingSheafUnrestricted l E T) (Q.obj (op n)) (uniformizer l E T) j).f k ∧ (((roos l E T).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η)) ≫ β.hom).f k ≫ columnCoordinate l E T Q true false k n j = coordinateOne l E T Q k n ≫ (koszulRepresentativeAugmentation (completedIntegralCommRingSheafUnrestricted l E T) (Q.obj (op n)) (uniformizer l E T) j).f (k - 1) ∧ (((roos l E T).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η)) ≫ β.hom).f k ≫ columnCoordinate l E T Q false true k n j = 0 ∧ (((roos l E T).map (Q.rightUnitor.inv ≫ Functor.whiskerLeft Q η)) ≫ β.hom).f k ≫ columnCoordinate l E T Q true true k n j = 0) ∧ QuasiIso (unit l E T ((roos l E T).obj Q)) ∧ ∃ (P : (IntegralOnSlice.Good l E T none).FullSubcategory) (f : P.obj ⟶ (roos l E T).obj Q) (eP : DerivedCategory.Q.obj P.obj ≅ DerivedCategory.Q.obj ((roos l E T).obj Q)) (s : DerivedCategory.Q.obj ((completion l E T).obj ((roos l E T).obj Q)) ≅ DerivedCategory.Q.obj ((roos l E T).obj ((IntegralOnSlice.tower l E T none).obj P.obj))), QuasiIso f ∧ eP.hom = DerivedCategory.Q.map f ∧ DerivedCategory.Q.map (unit l E T ((roos l E T).obj Q)) ≫ s.hom = eP.inv ≫ DerivedCategory.Q.map (IntegralOnSlice.roosUnit l E T none P.obj) ∧ (∀ j : ℕ, DerivedCategory.Q.map (unit l E T ((roos l E T).obj Q)) ≫ s.hom ≫ DerivedCategory.Q.map (evaluation l E T ((IntegralOnSlice.tower l E T none).obj P.obj) j) = eP.inv ≫ DerivedCategory.Q.map (((IntegralOnSlice.augmentation l E T none).app P.obj).app (op j))) ∧ (∃ (hprod : HasProduct (fun j : ℕ ↦ (IntegralOnSlice.derivedTower l E T none P).obj (op j))), (fun [_hp : HasProduct (fun j : ℕ ↦ (IntegralOnSlice.derivedTower l E T none P).obj (op j))] ↦ ∃ (p : DerivedCategory.Q.obj ((roos l E T).obj Q) ⟶ ∏ᶜ fun j : ℕ ↦ (IntegralOnSlice.derivedTower l E T none P).obj (op j)) (δ : (∏ᶜ fun j : ℕ ↦ (IntegralOnSlice.derivedTower l E T none P).obj (op j)) ⟶ (DerivedCategory.Q.obj ((roos l E T).obj Q))⟦(1 : ℤ)⟧), IsDerivedLimitTriangle (fun j : ℕ ↦ (IntegralOnSlice.derivedTower l E T none P).map (homOfLE j.le_succ).op) (DerivedCategory.Q.obj ((roos l E T).obj Q)) p δ ∧ ∀ j : ℕ, p ≫ Pi.π _ j = eP.inv ≫ DerivedCategory.Q.map (((IntegralOnSlice.augmentation l E T none).app P.obj).app (op j))) (_hp := hprod)) ∧ IntegralOnSlice.IsComplete l E T none (DerivedCategory.Q.obj ((roos l E T).obj Q))",
+  "branch": "newtargets-dag",
+  "by": "Q129",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e6023e9f7",
+  "group": "Q129",
+  "result": "pass",
+  "note": "Re-delivery of 5c013ff4bc98 RETURN (H2/H12). The Lean module is byte-identical (sha256 c2169b63), so the prior full clause check stands (r_n per level, zero-homotopy unit, β (1,1) sign, inclusions, s pinned by roosUnit, augmentation projections, IsDerivedLimitTriangle, IsComplete none). The item's stmt_deps swap lem-a1-principal-koszul-strict-replacement → new def-sp-completed-uniformizer-section, as instructed. The new node (image of ϖ_E in Γ(T_proét, Ô_{E,T}); deps def-weil-l-adic-coefficient-extension and def-weil-completed-integral-coefficients) has an existing:true record for PrincipalKoszulStrictReplacement.uniformizer: plain sectionsMk def, statement verbatim vs live, universes t,u independent. No duplicate definition node in the live DAG. Advisories: live docstring still tags lem-a1; L⊗Q tensor order documented; Roos functor from a non-stmt_dep module. No compile (no FIX)."
  }
 }

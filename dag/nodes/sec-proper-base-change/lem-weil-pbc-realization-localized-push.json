@@ -250,5 +250,30 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-106d7b66b (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item at 106d7b66 with 7 steps and no new nodes, every cited statement, and Bhatt–Scholze Lemma 6.7.2 and Remark 6.8.15. The source covers the non-proper case for finite type over a field (quasi-excellent, ℓ-coprime). A DFS over the whole DAG finds no cycle. The statement is unchanged. Its β is the F⊣r adjunct of d^{-1}∘Rh_*(η_T), which is the stated normalization. The coefficient categories are I_T and its raw ϖ-localization, with nothing silently identified. Steps 2, 4, 6 and 7 check out against their cited statements. Step 2: h is qcqs by qcqs-morphism-permanence (1); A is a DVR, ℓ=uϖ^e with e>0, P_n is perfect; M is bounded by characterization (iii). Step 4: the unit-adjunct identity holds. Step 6: g commutes with every leg ℓ^{-n}η because ℓ is invertible on both vertices. Step 7: K-injective representation plus reflection by r_U. Step 3 is correct after fix 2: direct-image-limits plus the ringed-topoi composition identify Rh_{*,A}M with the completed tower of def-weil-derived-direct-image, and lem-sf-integral-direct-image-constructible (any field K_0) then gives membership in I_U. Edge cases tested: T empty, M=0, h=id, an open immersion, ramified E with e>1, ℓ-torsion M (both sides 0), and non-algebraically-closed k. Two faults are repaired in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-realization-localized-push.json. (1) C3, step 1: unit compatibility (internal unit to m↦1⊗m) came from the proof of lem-weil-pbc-continuous-module-encoding-scalar-extension, whose statement gives only Nonempty ≅. Step 1 now derives it from the encoding's commutation with restriction of scalars and the canonical comparison of left adjoints. It also states that the encodings intertwine derived scalar extension and h_* (by chart scheme-naturality), which step 5 needs because the continuity lemmas are stated for internal condensed modules. (2) Step 3: prop-weil-pbc-direct-image-limits uses the coefficient identification of lem-weil-pbc-profinite-coefficient-inverse-image, while d uses the chart-transported one. Step 3 now cites that node and shows the two agree: their projections are both precomposition. Tool uses: I accept lem-sf-integral-direct-image-constructible, which is a sec-smooth-purity chapter back edge with no node cycle. Maintainer note: its closure contains the proper-base-change theorems. I also added the generic lem-weil-l-adic-extension-integers-dvr and prop-pur-kinjective-resolutions-exist to split_report.tool_uses. The characterization lemma was declared as a tool but is in the item's own unit.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.RealizationLocalizedPush",
+  "declaration": "WeilConjectures.realization_localized_push",
+  "declarations": [
+   "WeilConjectures.realizationDetailedEncoding",
+   "WeilConjectures.RealizationScalarFunctorData.scalarMap",
+   "WeilConjectures.RealizationScalarFunctorData.moduleEncoding",
+   "WeilConjectures.RealizationLocalizedPushData",
+   "WeilConjectures.realization_localized_push"
+  ],
+  "file": "lean/Sheaf/Paper/RealizationLocalizedPush.lean",
+  "statement": "theorem realization_localized_push (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] [T.Over (Spec (.of k))] [U.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] [IsSeparated (T ↘ Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [h.IsOver (Spec (.of k))] : Nonempty (RealizationLocalizedPushData l E h sT sU)",
+  "branch": "sheaf-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-700754ac1",
+  "group": "NG",
+  "result": "pass",
+  "note": "First S2 delivery; node identical to live except lean. All clauses match the node and BS 6.7.2/6.8.15: no properness, hypotheses not stronger. scalarMap, integralPullback (=completedCoefficientMap), rationalPullback (sectionwise normalized) and beta (unique adjunct = Rh(eta_T) then d.inv from ring-sheaf-change) are all pinned; beta is natural and iso at every M; completed uses the actual Roos SfIntegralDirectImage. Statement verbatim, 1 sorry, docstrings with source, blueprint tag and 7 steps; no name collisions. Edge cases ok (empty T, M=0, h=id or open immersion, ramified E, torsion). Not recompiled per the 2026-10-21 rule; worker reports scompile clean. Advisories: def-weil-derived-direct-image and integral-characterization declarations used without being stmt_deps; completed and continuous_direct_image isos unnormalized but only 'agrees' or extra true clauses; scalarMap repeats NC realizationPullScalarMap; many proof-only imports."
+ }
 }

@@ -244,5 +244,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-874d9a43c (reviewer sub-agent of L); spot-checked: Read the item's five steps, every cited statement, and blueprint main-20261015 sk-lem-sp-reduction-direct-image proof Steps 1 and 4 (the item is the open half of the Step 4 cocycle; parent det-sp Step 5 pastes it with the proper cocycle). Statement, coefficients (def-weil-pbc-proetale-modules) and e_j are exactly those of def-sp-reduction-direct-image-comparison; nothing weakened, no new nodes, no SGA. Item not dropped, unsplit on side-live, no repair note. Step 1: the conjugate of beta runs R_U P_B -> P_A R_Z, the same direction as b of lem-weil-pbc-ring-sheaf-change-adjunction with u=j and constant rings; the constant-ring compatibility holds. Step 2 is genuinely elementary: restriction keeps the abelian sheaf, and b is the identity on j^{-1}N; it descends because Lj^* is termwise, using the localization lemma (2),(3). Step 3: lem-sfb's unit equation plus uniqueness in lem-weil-pbc-conjugate-iso-unit-equation give alpha^c = rho. Minor point: that det-sp's 'canonical' alpha is the lem-sfb map comes from det-sp proof Step 7; accepted, since this is the standard associator. Step 4: I recomputed both conjugates with (tau tau')^c = tau'^c tau^c and mate-pasting (2),(3); they match Step 2, and injectivity of the conjugate bijection finishes. Step 5: I redid the cancellation of S(r_B), naturality of r_C, Step 4 and naturality of alpha (det-sp 4); the result is exactly the stated identity. Edge cases checked: empty U, j=id, identity ring maps, nonflat Z/l^2->F_l, zero ring. Duplicate grep: lem-sp-open-scalar-site-coherence, lem-fix-open-scalar-exchange and others state different things. The three tool_uses (lem-pur-sheaf-ring-derived-coefficient-adjunction, lem-weil-pbc-ring-sheaf-change-adjunction, lem-sfb-successive-derived-quotient-normalization) are generic black-box tools; accepted. Stacks tags 07A6, 0D6D and 0B65 are correct."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ProEtaleOpenScalarCocycle",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleOpenScalarCocycle",
+  "file": "lean/Sheaf/SecSmoothPurity/ProEtaleOpenScalarCocycle.lean",
+  "statement": "theorem proEtaleOpenScalarCocycle (ℓ : ℕ) (hℓ : ℓ.Prime) {A B C : Type u} [CommRing A] [CommRing B] [CommRing C] [Finite A] [Finite B] [Finite C] (hA : ∃ n : ℕ, (ℓ : A) ^ n = 0) (hB : ∃ n : ℕ, (ℓ : B) ^ n = 0) (hC : ∃ n : ℕ, (ℓ : C) ^ n = 0) (φ : A →+* B) (ψ : B →+* C) {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] (M : proEtaleDerivedCategory U A) : (scalarExtensionFunctor_composition φ ψ Z).hom.app ((sfIntrinsicExtensionByZero j A).mapDerivedCategory.obj M) ≫ (reductionOpenScalarIso (ψ.comp φ) j).hom.app M = (scalarExtensionFunctor ψ Z).map ((reductionOpenScalarIso φ j).hom.app M) ≫ (reductionOpenScalarIso ψ j).hom.app ((scalarExtensionFunctor φ U).obj M) ≫ (sfIntrinsicExtensionByZero j C).mapDerivedCategory.map ((scalarExtensionFunctor_composition φ ψ U).hom.app M)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b52b4e67d",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Lean theorem proEtaleOpenScalarCocycle matches the node clause by clause: alpha is the unit-normalized scalarExtensionFunctor_composition (exists-unique choose), every e is reductionOpenScalarIso (openScalarIso transported through reductionOpenModel), j_! is sfIntrinsicExtensionByZero.mapDerivedCategory; orientation recomputed, both sides run from T^{BC}T^{AB}j_!^A M to j_!^C T^{AC} M. No extra assumptions (no boundedness, flatness, quasi-compactness, Nontrivial or universe restriction). Edge cases covered (empty U/Z, j=id, identity maps, zero rings, unbounded M, nonflat maps). Node differs from side-live only in lean; lean.statement matches the file verbatim; no dependency record changes, no new nodes, sorry only, source and blueprint docstrings with all 5 steps, both report sections present. No duplicate cocycle in project Lean or Mathlib. Not recompiled per the 2026-10-21 instruction; worker compile clean. Advisory: hl/hA/hB/hC do not enter the type but are the node's own hypotheses."
+ }
 }

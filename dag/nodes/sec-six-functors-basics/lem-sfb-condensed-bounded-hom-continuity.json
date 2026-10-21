@@ -187,5 +187,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-6652d5380 (reviewer sub-agent of L); spot-checked: I read the item in full. It has no new nodes, and its statement, stmt_deps and blueprint fields are byte-identical to Q62's copy; the empty proof was filled with 4 steps. The proof realizes paragraph 2 of lem-sfb-constructible-cocone-hom-surj.proof.md (main-20261015), in which sheaf continuity is extended to K by the five lemma. The argument matches the parent's old steps 2-3 on the NP base. Step 1: the first part of det-lem-constructible-ext-continuity-devissage holds on any scheme, with no lower bound and no Noetherian hypothesis, and gives closure under shifts, isomorphisms and extensions; identifying the arbitrary termwise cocone with the chosen colimit is correct. Step 2: lem-weil-pbc-condensed-sheaf-ext-continuity has exactly the item's hypotheses (topologically Noetherian X, finite E, common termwise lower bound a). Its constructibility condition matches def-sfb-constructible-module + def-sfb-locally-finitely-presented + def-sfb-finitely-presented-module, and its coefficient ring p_X^*C(-,E) is the same construction as sk-def-sfb-pullback-from-point. Step 3: the cone witness applies to Mod_{E_X}; the (TR2) rotation F_j->F_r[n]->F_i[1]->F_j[1] is correct and the strong induction is properly set up. Step 4 is elementary. I found no cycle in the 3355-node closure and no SGA. Tool use accepted: lem-weil-pbc-condensed-sheaf-ext-continuity, which is off-route, but the route node sk-lem-constructible-ext-continuity needs locally Noetherian, quasi-compact X, so citing it would add a hypothesis (E1). det-lem and the cone witness are on the route through sk-lem-constructible-ext-continuity and sk-cor-coefficient-heart-ii. Edge cases checked: K=0, K=M[0], two cohomology sheaves, empty X, unbounded-above N_i. Advisory only: the step does not say that the module colimit equals the sheaf colimit, which is one standard line."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.CondensedBoundedHomContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_boundedConstructible_condensed_hom_colimit",
+  "file": "lean/Sheaf/Paper/CondensedBoundedHomContinuity.lean",
+  "statement": "theorem isIso_boundedConstructible_condensed_hom_colimit (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (K : PadicSubfieldConstructible X ℓ E) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (N : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ℤ) (c : Cocone N) (hc : ∀ r : ℤ, IsColimit ((HomologicalComplex.eval _ _ r).mapCocone c)) (hN : ∃ a : ℤ, ∀ (i : I) (r : ℤ), r < a → IsZero ((N.obj i).X r)) (n : ℤ) : IsIso (colimit.desc _ ((DerivedCategory.Q ⋙ shiftFunctor _ n ⋙ preadditiveCoyoneda.obj (op K.obj)).mapCocone c))",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93d67f355",
+  "group": "NM",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and source (main-20261015 cocone-hom-surj proof para 2): prime l, E : FiniteIntermediateField l (stmt_dep type), X : Scheme.{u} with NoetherianSpace only, K : PadicSubfieldConstructible X l E (existing:true def-sfb-dcons-subfield), I : Type (u+1) small filtered, N : I ⥤ CochainComplex (Mod … padicSubfieldRingObj) ℤ, cocone c with degreewise IsColimit hc, uniform termwise bound ∃ a ∀ i r, ∀ n : IsIso of colimit.desc of (Q ⋙ shift n ⋙ preadditiveCoyoneda (op K.obj)).mapCocone c = canonical comparison (defeq to homContinuityComparison of det-lem devissage). No stronger hypotheses or universe restriction; statement verbatim; node delta = lean record only; no duplicate found; docstrings/source/proof steps present; sorry only; no new defs. Edge cases K=0, K=M[0], empty X, n≤0, empty I excluded by IsFiltered, unbounded-above N. No recompile per 2026-10-21 rule. Advisory: base-case Lean uses Padic.FiniteCoefficientFields (proof-level bridge); citers over Type-0 field index must lift to Type (u+1)."
+ }
 }

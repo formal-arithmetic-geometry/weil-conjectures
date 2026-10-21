@@ -209,5 +209,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-2e83fc5bc (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement matches main-20261015 sk-lem-regular-smooth verbatim, including the stalkwise dim O_{X,i(z)} = dim O_{Z,z} + c. Step 1: a_Z = a_X∘i follows from the definition of an S-morphism (def-weil-scheme-over-base). Step 2: lem-trf-regular-perfect-field-smooth applies to a_Z. Its hypotheses are k perfect, Z regular and Z locally of finite type, all assumed by the item, and I checked it against Stacks 0B8X (varieties.tex:4730). Step 3: the sk-def-purity-conv neighbourhood U = Spec A with J = (f_1..f_c) A-regular, the 01QO form of a closed immersion, the stalk-localization leaf and the 00CT quotient-localization leaf give O_X ≅ A_p and O_Z ≅ A_p/JA_p, with J ⊆ p. Step 4: smooth ⇒ regular, so A_p is Noetherian local, and the localization leaf (Mathlib Regular/Flat.lean:75-79, read) makes the f_j/1 a regular sequence in A_p. Step 5: ringKrullDim_add_length_eq_ringKrullDim_of_isRegular (KrullDimension/Regular.lean:210-214, read), plus JA_p = (f_j/1) and isomorphism invariance of dimension. Cases checked: a line in A² at its generic and at a closed point, the origin in A², c = 0 with a clopen component, and Z empty. Route: the two tool_uses (the regular–smooth criterion and the smooth ⇒ regular lemma) are exactly the generic black boxes the unit step invokes, so I accept them; the other citations are definitions or Mathlib leaves; the unit's realized fields are correct. Batch-5: lem-trf-regular-perfect-field-smooth is a generic 0B8X lemma and unsplit with empty proof_deps, and lem-trf-regular-sequence-dimension-formula is a pure-algebra Mathlib leaf. Neither closure reaches the trace formula or Poincaré duality, and neither is part of either assumption, so I accept both. Duplicates: the sibling lem-pur-regular-immersion-smooth-structure is recorded in same_as and not cited, so there is no cycle. Declining the IsRegularImmersion attachment is correct, because its all-points definition fails for c = 0. The item is not in the dropped list and has no repair note. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularImmersionSmoothStructure",
+  "declaration": "AlgebraicGeometry.regularImmersion_smooth_structure_and_stalk_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularImmersionSmoothStructure.lean",
+  "statement": "theorem regularImmersion_smooth_structure_and_stalk_dimension {k : Type u} [Field k] [PerfectField k] {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (c : ℕ) (hi : WeilConjectures.PurityConventions.IsRegularOfPureCodimension i c) (aX : X ⟶ Spec (.of k)) [Smooth aX] [LocallyOfFiniteType (i ≫ aX)] (hZ : IsRegularScheme Z) : Smooth aX ∧ Smooth (i ≫ aX) ∧ ∀ z : Z, ringKrullDim (X.presheaf.stalk (i z)) = ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f19461ac0",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Only the lean field changed vs the live node; lean.statement is verbatim in the file. Clauses checked: PerfectField k; IsClosedImmersion i + IsRegularOfPureCodimension i c (sk-def-purity-conv, PurityConventions.lean:408, c=0 allowed, nothing required off Z); Smooth aX; Z's structure map is the composite i ≫ aX; IsRegularScheme Z (02IT form); LocallyOfFiniteType (i ≫ aX); conclusion Smooth aX ∧ Smooth (i ≫ aX) ∧ ∀ z, ringKrullDim stalk(i z) = ringKrullDim stalk z + c. Universe u is forced by Spec k. No extra assumptions. Edge cases ok: c=0 clopen, empty Z, line/origin in A², char 0/p. The upstream IsRegularImmersion requires generators at every x ∈ X (c=0 forces an iso), so it is not this statement; the same_as sibling has a componentwise conclusion. No definitions; sorry-only proof; docstrings carry source, blueprint tag and proof steps 1-5; not dropped. Advisory: unused Over import; redundant LocallyOfFiniteType hypothesis kept because the node states it. Not compiled per the 10-21 rule (worker: scompile clean 5.0 s; deliver2 --no-push OK)."
  }
 }

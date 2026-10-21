@@ -21,7 +21,12 @@
   "def-weil-proetale-locally-constant-sheaf",
   "def-weil-open-immersion",
   "def-weil-proetale-tor-amplitude",
-  "def-weil-derived-cohomology-sheaves"
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-derived-complete",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-reduction-tower",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-pur-localized-ringed-site"
  ],
  "proof": [
   {
@@ -317,5 +322,42 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-94f9c7825 (reviewer sub-agent of L); spot-checked: I read the item (8 steps, no new nodes; statement and stmt_deps identical to live, where the item is still unsplit; not in the dropped list; no repair note; no SGA) against Stacks 098F (l. 2781-2807, section sigma and Zariski partition) and the 09C3 base case (finite disjoint affine-open decomposition). I also read every cited statement.\n\nChecks:\n- Step 2: the finite-coproduct node (V_alpha affine so qcqs, I finite), the local-surjectivity epi criterion, subcanonicity and Yoneda give s with ps=1. The scheme-coproduct node gives disjoint clopen images, and the open factorization applies to s on U_alpha.\n- Step 3: the clopen extension F~(V)=F(V x_T U) is correct; on the complement piece V x_T Z both sheaves take the value at the empty scheme, a singleton.\n- Step 4: the evaluation-exact node applies with W=U terminal, and Hom(C^r,H)=H(U)^r.\n- Step 5: the sectionwise ring inverse limit.\n- Step 6: only the arbitrary-R paragraphs of lem-pur-clopen-ringed-module-gluing and lem-pur-finite-product-derived-tensor-calculus are used (ell-invertibility belongs only to the unused constant-coefficient clause). The scalar-extension comparison is natural in coefficient maps.\n- Step 7: the Roos-triangle definition with the product presupposed; r_U preserves products through the equivalence, and pr_n r_U(1-s) = pr_n - r_U f_n pr_{n+1}.\n- Step 8: relocalization plus a hypothesis quantified over all site objects and all k_V-modules L.\n- Edge cases: empty T, empty J, rank 0, differing ranks, zero ring, ell not invertible all hold. No cycle in a 261-node closure.\n\nFault (C4), steps 1-2: restricting the constant module local models along site arrows was attributed to lem-weil-proetale-weakly-etale-localization. That node only identifies the constant ring sheaf (clause 2).\n\nFIX: cite the existing lem-pe-constant-module-restriction-universes (the same model M persists under restriction along any arrow W->U) in steps 1 and 2. I recomputed proof_deps and declared it in split_report.tool_uses. All other tool_uses are accepted as site-generic tools, since unit sk-rem-sf-pf-done is a stepless assembly remark.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfClopenLisseCompleteLocalization",
+  "declaration": "WeilConjectures.sf_clopen_lisse_complete_localization",
+  "declarations": [
+   "WeilConjectures.sfClopenSiteInclusion",
+   "WeilConjectures.sfClopenSiteInclusionContinuous",
+   "WeilConjectures.sfClopenRingRestriction",
+   "WeilConjectures.sfClopenModuleRestriction",
+   "WeilConjectures.SfClopenCoefficientRestriction",
+   "WeilConjectures.sfClopenSliceHasDerived",
+   "WeilConjectures.sfClopenDerivedRestriction",
+   "WeilConjectures.sfClopenFiniteDerivedRestriction",
+   "WeilConjectures.sfClopenComplexRestriction",
+   "WeilConjectures.sfClopenLocalizationIso",
+   "WeilConjectures.sfClopenFiniteComplexRestriction",
+   "WeilConjectures.sfClopenFiniteLocalizationIso",
+   "WeilConjectures.sfClopenReductionCounit",
+   "WeilConjectures.SfResidueTorAmplitudeOnEveryObject",
+   "WeilConjectures.SfClopenCompleteRestriction",
+   "WeilConjectures.sf_clopen_lisse_complete_localization"
+  ],
+  "file": "lean/Sheaf/Paper/SfClopenLisseCompleteLocalization.lean",
+  "statement": "theorem sf_clopen_lisse_complete_localization (T : Scheme.{t}) (hT : IsAffine T) (hweak : ∀ (F G : Sheaf (Scheme.ProEt.topology T) (Type (max u (t + 1)))) (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (Scheme.ProEt.mk (𝟙 T))))) (J : Type v) [Finite J] (F : J → scalarReductionTarget l E T 0) (hF : ∀ j : J, IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses T (Padic.coefficientExtensionRing l E 1) (fun N ↦ Module.Finite (ULift.{t + 1} (Padic.coefficientExtensionRing l E 1)) N) (F j)) : ∃ (n : ℕ) (U : Fin n → T.Opens), (⨆ i, U i) = ⊤ ∧ Pairwise (fun i j ↦ Disjoint (U i) (U j)) ∧ ∀ i : Fin n, IsClosed (U i : Set T) ∧ IsCompact (U i : Set T) ∧ (∀ (A B : Sheaf (Scheme.ProEt.topology (U i).toScheme) (Type (max u (t + 1)))) (f : A ⟶ B), Epi f → Function.Surjective (f.hom.app (op (Scheme.ProEt.mk (𝟙 (U i).toScheme))))) ∧ (∀ j : J, ∃ r : ℕ, Nonempty ((F j).over (Scheme.ProEt.mk (U i).ι) ≅ proEtaleConstantModuleSheafOverOfUniverses T (Padic.coefficientExtensionRing l E 1) (Scheme.ProEt.mk (U i).ι) (ModuleCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E 1)) (Fin r → ULift.{t + 1} (Padic.coefficientExtensionRing l E 1))))) ∧ (∀ C : Sheaf (Scheme.ProEt.topology (U i).toScheme) CommRingCat.{max w (t + 1)}, (SheafOfModules.evaluation.{max w (t + 1)} ((sheafCompose _ (forget₂ CommRingCat.{max w (t + 1)} RingCat.{max w (t + 1)})).obj C) (op (Scheme.ProEt.mk (𝟙 (U i).toScheme)))).PreservesHomology ∧ ∀ r : ℕ, Projective (∏ᶜ fun _ : Fin r ↦ SheafOfModules.unit ((sheafCompose _ (forget₂ CommRingCat.{max w (t + 1)} RingCat.{max w (t + 1)})).obj C))) ∧ ∃ d : SfClopenCoefficientRestriction l E T (U i), Nonempty (SfClopenCompleteRestriction d)",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper structures spell out the canonical coefficient, derived-reduction and augmented-tower compatibilities in this statement. Ordinary restriction is Mathlib SheafOfModules.pushforward followed by restrictScalars. No new completeness, coefficient, derived tensor or locally constant notion is introduced. Positive exponent n+1 is indexed by n : ℕ. H2 repair: the termwise tower definitions are recorded under def-weil-integral-reduction-tower; the well-definedness, tensor descent and clopen gluing theorems occur only in proof_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf3edf3ff",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Re-delivery after the d79b H2/H13 RETURN. Lean delta is exactly the requested inlining of the Mathlib pushforward bodies, plus the theorem modules becoming plain proof-plan imports; the signature is byte-identical and the Tor module is unchanged. Item stmt_deps: the three theorem nodes are dropped (kept in proof_deps), and five landed def nodes are added, each with a live lean record. The def-weil-integral-reduction-tower record is a superset existing:true record (NW's 5 + unrestrictedTower* = P_n, γ_n, τ_n, publicly re-exported). The tor-amplitude record is a superset (NK's 5 + 2 ringed-site predicates; public import of NK's module). Other item fields equal live; the item is not dropped. Every clause matches the node. Coefficient isos are pinned by constant sections and limit projections; reduction/quotient/tower are pinned by pure tensors, counits (K-flat plus naturality) and the augmentation; no hollow field. Edge cases (empty T and J, rank 0, exponent one, no ℓ-invertibility, independent universes) hold. Advisories: scalarReduction* are owned by the theorem lem-weil-derived-scalar-extension-restriction-adjunction (base-era, outside stmt_deps); some re-exported decls are unlisted in records; empty partition pieces are harmless; the second reading is an author self-reread. No compile (no file changed)."
  }
 }

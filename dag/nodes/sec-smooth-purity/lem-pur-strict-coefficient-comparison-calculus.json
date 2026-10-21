@@ -11,7 +11,10 @@
   "def-weil-sheaf-of-modules-category",
   "def-pc-tensor-complex-sheaves",
   "def-pur-sheaf-tensor-product",
-  "lem-pur-cochain-pullback-tensor-coherence"
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-weil-pbc-system-scalar-coherence",
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-cochain-coefficient-arrows"
  ],
  "proof": [
   {
@@ -252,5 +255,51 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-1f79b5f5d (reviewer sub-agent of L); spot-checked: First split of lem-pur-strict-coefficient-comparison-calculus. Q06 created this node in the re-split of lem-pur-scalar-extension-tower-coherence; it has no repair note of its own, so the re-split rules do not bind it. Changes against side-live: only proof, proof_deps, proof_origin, status, split_report and the mathlib_searches, which went from 8 to 13 records with the inherited ones kept; the statement and every other field are unchanged. 0 new nodes; proof_deps equals the union of the step uses. Not in route-pivot-dropped, no SGA cited. The cited nodes' 144-node closure does not contain the item, so there is no cycle. The only cited statement, lem-pur-cochain-pullback-tensor-coherence, is in the same unit (sk-def-purity-conv); the other four cited nodes are definitions or Mathlib leaves. All of the former parent steps 3-7 (verbatim in Q06 packet lines 81-110) reappear here in fuller form: kappa in Steps 1-2, sigma and signs in 3-4, the square in 6, transitions in 5, unit and composition in 7-8. I read every cited statement. The cochain lemma gives c, its formulas, and the composition isomorphism a_P with its scalar-multiplication formula (which also covers u^{-1} commuting with tensor). def-pur-sheaf-tensor-product makes the tensor the sheafified sectionwise tensor, and def-weil-presheaf-modules-sheafification gives unique factorisation through sheafification, so no plus construction is assumed (C4 fine). def-pc-tensor-complex-sheaves gives the direct-sum Tot with the (-1)^p sign. In Step 1 I checked both factorisations in the lemma's u∘v convention: their coefficient maps i_X φ^a and φ^b u^{-1}i_Y are equal by hypothesis. I recomputed by hand every generator trace in Steps 2-8. These were: the kappa and kappa^{-1} formulas and their balancing; sigma's balancing and inverse; the differential summands; transitions for arbitrary semilinear rho; the full square on b⊗(a⊗(x⊗y)), where both routes give (b i(a)⊗(1⊗x))⊗(1⊗(1⊗y)); the U unit identities; A and its inverse; and successive kappa and sigma, which give d i12(b) i02(a)⊗(1⊗x) and (d i12(b)⊗x)⊗(1⊗y). Edge cases checked: the zero ring, the non-flat map Z→Z/2, zero transitions, odd or negative p, unbounded complexes. Stacks 03EL (sites-modules:3649), 07A4 (sites-cohomology:3684) and 03CY were checked against the tags file. The Mathlib hits pullbackComp, pullback_assoc, extendScalarsComp and extendScalars_assoc were verified at the lines given; none is an exact match. Advisory 1: the item's kappa and square are the inverse form of the cochain lemma's coefficient clause; this overlap belongs to the node as Q06 created it, and Step 6 could cite that clause. Advisory 2: the proof is 7513 characters with 0 new nodes, all elementary; if the length policy is applied, the natural cut is kappa / sigma / units-composition."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.StrictCoefficientComparisonCalculus",
+  "declaration": "CategoryTheory.CochainPullback.StrictCoefficient.strictCoefficientComparisonCalculus",
+  "declarations": [
+   "CategoryTheory.CochainPullback.StrictCoefficient.Index",
+   "CategoryTheory.CochainPullback.StrictCoefficient.total",
+   "CategoryTheory.CochainPullback.StrictCoefficient.totalMap",
+   "CategoryTheory.CochainPullback.StrictCoefficient.totalIso",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Diagram",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Diagram.ringed",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Diagram.square",
+   "CategoryTheory.CochainPullback.StrictCoefficient.scalarComp",
+   "CategoryTheory.CochainPullback.StrictCoefficient.scalarUnit",
+   "CategoryTheory.CochainPullback.StrictCoefficient.diagramComp",
+   "CategoryTheory.CochainPullback.StrictCoefficient.diagramUnit",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.Normalized",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.kappaC",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.sigmaRC",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.sigmaSC",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.pullArrow",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.tensorArrow",
+   "CategoryTheory.CochainPullback.StrictCoefficient.squareArrow",
+   "CategoryTheory.CochainPullback.StrictCoefficient.tensorArrowFor",
+   "CategoryTheory.CochainPullback.StrictCoefficient.TensorTransitionLaws",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.KappaTransitionLaws",
+   "CategoryTheory.CochainPullback.StrictCoefficient.TensorLaws",
+   "CategoryTheory.CochainPullback.StrictCoefficient.Comparisons.Laws",
+   "CategoryTheory.CochainPullback.StrictCoefficient.strictCoefficientComparisonCalculus"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/StrictCoefficientComparisonCalculus.lean",
+  "statement": "theorem strictCoefficientComparisonCalculus (d : Diagram (J := J) (K := K)) (k : ∀ i : Index, Comparison (d.ringed i)) : ∃! e : Comparisons d, e.Normalized k ∧ e.Laws k",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The product diagram records all three coefficient rows and inverse-sequence arrows. The full normalized uniqueness statement includes explicit squares for arbitrary semilinear chain transitions, units, successive extensions, and the coefficient/tensor square. Scalar units and associators reuse the landed restriction comparisons and actual scalar adjunctions. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-635921f3e",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery after RETURN on 3e097a34a3cb (H2 only; that review accepted the mathematics in full). Diff against that snapshot: the Lean module only drops the unused Preord (public) and Sheafification (private) imports; no declaration, signature, docstring or proof changed; one sorry. stmt_deps now cites the definition node def-weil-pbc-system-scalar-coherence (owns systemScalarRestrictionUnit/Composition; live signatures match scalarComp/scalarUnit) instead of the theorem lem-pur-system-scalar-coherence, and adds def-pur-cochain-tensor-coherence-data and def-pur-cochain-coefficient-arrows, which own every project declaration used (Modules, Complex, RingedPullback, Comparison, pull, comparison, CoefficientSquare, IsScalarAssociation, extensionFunctor/Pullback/Adjunction, extend). Against side-live: only stmt_deps additions and the new lean record; statement, proof and proof_deps unchanged; module not yet live. Statement field verbatim; 25 declarations listed; report has Worker report, Second reading by NE and a repair section. No compile: no file changed; worker reports a clean compile (44.4/43.5 s)."
  }
 }

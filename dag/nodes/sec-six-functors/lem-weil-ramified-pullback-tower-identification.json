@@ -299,5 +299,41 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-76a56cb6a (reviewer sub-agent of L); spot-checked: I read the item, all nine steps and the statements of all ten cited nodes (plus def-weil-pbc-algebraic-inverse-image and def-weil-l-adic-coefficient-extension). 0 new nodes; the statement is unchanged. Live status is unsplit; the item is not dropped and has no repair note of its own (the re-split note is on parent alpha). Compared with prior run 1f15ff07, which the reader passed and the landing refused, only Step 2 and the summary changed. No SGA citation. No cycle: the 1143-node closure contains neither the item nor alpha. Step 1: DVR clause 5 gives t=u·v^e; |t|<1 forces e≥1 and (t^m)=(v^{em}). Step 2: the limit map c with pi^L_{em}c=j_m pi^E_m is correct, and the finite-level naturality square of the c^g maps gives c_X r^E=r^L g^{-1}c_Y, which Step 6 needs so the two H-actions agree. Step 3: the quotient clause of constant-completion-equivalence matches Stacks 093M (sites-modules.tex l.8261), with Noetherian PIDs on a small site; t^mS=v^{em}S. Step 4: the inverse balanced maps are right and give the stated normalization. Step 5: plain g^{-1} is an algebraic inverse-image presentation, and the cancellation needs only c^g. Step 6: I recomputed both sides on generators and they match the item's formula with p read as p⊗1, termwise for arbitrary complexes. Steps 7-8: q j_{m+1}=j_m q, q j_m=iota_m and q pi_{em}=pi_m, so T_{m,em}∘d~_m is the same-index map, as alpha's Step 3 uses; no injectivity is claimed (Q_l(l^{1/2}) example). Step 9 holds. No duplicates: coef-finite-free-extension, coef-dual-formula-scalar-transpose and pod-lisse-scalar-fiber-reductions state other things. I accept the four tool_uses (integers-dvr; absolute-value, a Mathlib leaf; the quotient clause of constant-completion-equivalence; algebraic-inverse-image-tensor-comparison). No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RamifiedPullbackTowerIdentification",
+  "declaration": "WeilConjectures.RamifiedPullback.identification",
+  "declarations": [
+   "WeilConjectures.RamifiedPullback.ring",
+   "WeilConjectures.RamifiedPullback.Mod",
+   "WeilConjectures.RamifiedPullback.scalarWitness",
+   "WeilConjectures.RamifiedPullback.scalar",
+   "WeilConjectures.RamifiedPullback.scalar_additive",
+   "WeilConjectures.RamifiedPullback.scalarCx",
+   "WeilConjectures.RamifiedPullback.tensor",
+   "WeilConjectures.RamifiedPullback.constantMap",
+   "WeilConjectures.RamifiedPullback.index",
+   "WeilConjectures.RamifiedPullback.coefficientModule",
+   "WeilConjectures.RamifiedPullback.transition",
+   "WeilConjectures.RamifiedPullback.pullTensor",
+   "WeilConjectures.RamifiedPullback.ramifiedMap",
+   "WeilConjectures.RamifiedPullback.Coefficients",
+   "WeilConjectures.RamifiedPullback.Identification",
+   "WeilConjectures.RamifiedPullback.identification"
+  ],
+  "file": "lean/Sheaf/Paper/RamifiedPullbackTowerIdentification.lean",
+  "statement": "theorem identification {X Y : Scheme.{t}} (g : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : Nonempty (Identification l E L ι g)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0eb24c0d9",
+  "group": "NS",
+  "result": "pass",
+  "note": "Lean record only (item node otherwise unchanged; 8 stmt_dep records identical to live); statement verbatim; 16/16 declarations recorded. Every clause matches the node: e≥1 pinned by ideal equality + unique_index; completedMap pinned by finite projections (ρ_n); j_m by quotient_formula; coefficientIso (W=X,Y) by s⊗a↦j_m(a)π_em(s) plus coefficient_transitions; levelIso natural on all complexes, pinned by the node's local formula with p⊗1 (S_X-linear, constant B_X, generators → determined); transitions m+1→m / e(m+1)→em; sameIndex pinned by the ι_n/π_n formula, = levelIso≫T_{m,em}, no injectivity claimed; no unit data. Hypotheses: ℓ a stalk unit on X and Y, not stronger; universes t/u kept independent. scalar = .choose of derivedChangeOfRingsIndependentCoefficients with objects and maps pinned. Docstrings carry source + blueprint and the 9 proof steps; only sorry is the statement. Advisories: integralOperationsPullback* tower decls owned by theorem lem-pur-integral-operations-well-defined (not a stmt_dep; reached via def-pur-integral-derived-operations re-export; stmt_deps unchanged from stage-1, as Q101 precedent), and derivedChangeOfRingsIndependentCoefficients owner not a stmt_dep. No compile run (no file changed)."
  }
 }

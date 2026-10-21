@@ -128,22 +128,27 @@
    "WeilConjectures.canonicalIntegralReductionTowerMap",
    "WeilConjectures.canonicalIntegralReductionTowerMap_naturality",
    "WeilConjectures.canonicalIntegralReductionTowerCone",
-   "WeilConjectures.unrestrictedIntegralTensorSection"
+   "WeilConjectures.unrestrictedIntegralTensorSection",
+   "WeilConjectures.unrestrictedTowerFiniteComplex",
+   "WeilConjectures.unrestrictedTowerComplex",
+   "WeilConjectures.unrestrictedTowerTensorSection",
+   "WeilConjectures.unrestrictedTowerUnit",
+   "WeilConjectures.unrestrictedTowerTransition"
   ],
   "statement": "def canonicalIntegralReductionTower (P : CochainComplex (scalarReductionSource l E Y) ℤ) : ℕᵒᵖ ⥤ DerivedCategory (scalarReductionSource l E Y)",
   "branch": "sheaf-dag",
-  "by": "NW",
+  "by": "Q28",
   "date": "2026-10-21",
   "existing": true,
-  "note": "§1(B), repair of the completion-unit delivery: retain the existing canonical augmented reduction tower and explicitly record its sheafified pure-tensor section unrestrictedIntegralTensorSection. The previous declarations list omitted this definition used to render the node's gamma_n(x)=x tensor 1. IntegralReductionTowerCanonical publicly imports IntegralReductionTowerWellDefinedUnrestricted, which publicly imports IntegralReductionTowerUnrestricted, where this existing section is defined with blueprint def-weil-integral-reduction-tower. The consumer spelling unrestrictedTowerTensorSection is definitionally this section, with identical arguments and value. Its well-definedness theorem conclusion is not needed to state the consumer. No declaration, mathematical statement, or construction is changed."
+  "note": "§1(B), repair of the completion-unit delivery: retain the existing canonical augmented reduction tower and explicitly record its sheafified pure-tensor section unrestrictedIntegralTensorSection. The previous declarations list omitted this definition used to render the node's gamma_n(x)=x tensor 1. IntegralReductionTowerCanonical publicly imports IntegralReductionTowerWellDefinedUnrestricted, which publicly imports IntegralReductionTowerUnrestricted, where this existing section is defined with blueprint def-weil-integral-reduction-tower. The consumer spelling unrestrictedTowerTensorSection is definitionally this section, with identical arguments and value. Its well-definedness theorem conclusion is not needed to state the consumer. No declaration, mathematical statement, or construction is changed. §1(B), Q28 H2 repair: also record the existing termwise finite reduction, its restricted-scalar complex, pure-tensor wrapper, chain-level unit and transition. These are precisely P_n, its completed-scalar reading, gamma_n and tau_n in this definition node, all publicly re-exported by IntegralReductionTowerCanonical. Their earlier ownership only in the well-definedness theorem record did not expose the definition interface used to state the clopen comparison. All five previously recorded declarations are retained; the well-definedness theorem itself is a proof dependency only. No Lean construction is changed."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-6ed7dd040",
-  "group": "NW",
-  "result": "fix",
-  "note": "Re-delivery after the 43763eb2 C5 RETURN. stmt_deps now cites def-weil-integral-reduction-tower instead of the theorem node. That node gets a §1(B) superset existing:true record (4 decls kept, unrestrictedIntegralTensorSection added; live record is still base Q63, not overwritten), accepted. Only other change: the import, to IntegralReductionTowerCanonical, which re-exports publicly. FIX: the Lean still used unrestrictedTowerTensorSection, a wrapper recorded under the theorem node that is no longer a stmt_dep, and left the newly recorded def-node decl unused. Renamed both occurrences (lines 86, 261) to unrestrictedIntegralTensorSection (the wrapper's whole body, same arguments). fixes/: complete CompletionUnitStrictQuotientModel.lean and the item lean-record.json (statement + note); refit_record and check_lean_text clean, statement verbatim. Compile: nt_compile timed out at 60 s (load 133); lcompile(timeout=560) clean in 49.5 s and 27.4 s on re-run, vs 18.3 s for the delivered file. Mathematics re-checked: hypotheses, K-flat Q with arbitrary q, pinned OrdinaryModel/DerivedModel, zero shifted-coordinate cone, unit formula, two-resolution clause, naturality, independent universes, edge cases, 7-step docstring, sorry only. Advisory: the dependency's canonical adjunction is only an existential S."
+  "reviewer": "NT-stage2-cc-cf3edf3ff",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Re-delivery after the d79b H2/H13 RETURN. Lean delta is exactly the requested inlining of the Mathlib pushforward bodies, plus the theorem modules becoming plain proof-plan imports; the signature is byte-identical and the Tor module is unchanged. Item stmt_deps: the three theorem nodes are dropped (kept in proof_deps), and five landed def nodes are added, each with a live lean record. The def-weil-integral-reduction-tower record is a superset existing:true record (NW's 5 + unrestrictedTower* = P_n, γ_n, τ_n, publicly re-exported). The tor-amplitude record is a superset (NK's 5 + 2 ringed-site predicates; public import of NK's module). Other item fields equal live; the item is not dropped. Every clause matches the node. Coefficient isos are pinned by constant sections and limit projections; reduction/quotient/tower are pinned by pure tensors, counits (K-flat plus naturality) and the augmentation; no hollow field. Edge cases (empty T and J, rank 0, exponent one, no ℓ-invertibility, independent universes) hold. Advisories: scalarReduction* are owned by the theorem lem-weil-derived-scalar-extension-restriction-adjunction (base-era, outside stmt_deps); some re-exported decls are unlisted in records; empty partition pieces are harmless; the second reading is an author self-reread. No compile (no file changed)."
  },
  "reviewed_proof": {
   "date": "2026-10-18",

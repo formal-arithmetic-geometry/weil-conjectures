@@ -228,5 +228,28 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-813d24e64 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and the statements of all 15 cited nodes. The statement is byte-identical to side-live and the delivery creates no new nodes. There is no cycle: the 3224-node closure does not reach the item. The item is not superseded, not in the dropped list, and has no repair note. Source checked: main-20261015 sk-lem-integral-models-operations.proof.md paragraph (3); the item is used by step 3 of det-lem-integral-models-operations. Step 1: U and Z are Noetherian (open-subscheme node; closed immersion of finite type by closed-immersion-proper (a) plus finite-type-over-noetherian), hence qcqs, so clause (2) of sk-def-sfb-constructible applies. Step 2: the minimal-closed-subset property gives the descending chain condition, every subset of |T| is quasi-compact so j is quasi-compact, proper-fp-permanence (e) makes the composite strata immersions, and these form finite stratifications whose strata are constructible in a Noetherian space. Step 3: ringed-open-closed (quasi-compact complement) gives j^-1 j_! ≅ id, i^-1 i_* ≅ id, the two zero restrictions and exactness. The transport node identifies the internal j_!, i_* and pullback with the sectionwise ones on the same pro-étale site, via the α ring isomorphism. Steps 4–6: the pullback composition isomorphism (sk-def-sfb-module-pushforward-pullback) keeps the old covers and P's, and the complement gets the zero model with a rank-zero presentation; this is elementary and correct. Edge cases checked: empty T, U or Z, Λ = 0, nonreduced Z, infinite covers. Overlap: lem-sf-open-extension-zero-constant-model-constructible is a special case of the open half (finite-type k-schemes, reduced Z), not a duplicate; it could later be derived from this item. Minor point: steps 5 and 6 need T qcqs, which step 1 states only for U and Z; it follows at once from T Noetherian by the same cited nodes, so it is not counted as a fault. Accepted tool_uses: lem-weil-pbc-proetale-ringed-open-closed, lem-sfb-internal-module-operations-transport, sk-def-sfb-module-pushforward-pullback."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.ScalarModelImmersionExtension",
+  "declaration": "AlgebraicGeometry.ProEtale.scalarModelImmersionExtension",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ScalarModelImmersionExtensionAssertions",
+   "AlgebraicGeometry.ProEtale.scalarModelImmersionExtension"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarModelImmersionExtension.lean",
+  "statement": "theorem scalarModelImmersionExtension (ℓ : ℕ) [Fact ℓ.Prime] {U Z T : Scheme.{u}} [IsNoetherian T] (j : U ⟶ T) [IsOpenImmersion j] (i : Z ⟶ T) [IsClosedImmersion i] (_hComplement : Set.range j = (Set.range i)ᶜ) : (∀ (A : Type u) [CommRing A] [Finite A], ScalarModelImmersionExtensionAssertions (cartesianFinitePointRing A) j i) ∧ ScalarModelImmersionExtensionAssertions (Profinite.continuousMapRingObj (PadicInt ℓ)) j i ∧ ScalarModelImmersionExtensionAssertions (Profinite.continuousMapRingObj (Padic ℓ)) j i ∧ (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, ScalarModelImmersionExtensionAssertions (Profinite.padicIntegersRingObj ℓ E.1) j i ∧ ScalarModelImmersionExtensionAssertions (Profinite.continuousMapRingObj E.1) j i) ∧ ScalarModelImmersionExtensionAssertions (Profinite.padicAlgClRingObj ℓ) j i",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The assertion packages exactness, both constructibility conclusions, and the extension of every adapted source stratification by the complementary scheme, retaining the old restrictions up to module isomorphism and giving the additional stratum zero restriction. The theorem lists exactly the admissible untwisted coefficients of CartesianUntwistedAssertions, including finite-subextension-valued Qbar."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-93299afe2",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Delivery changes only the item node's lean field and adds Sheaf/Paper/ScalarModelImmersionExtension.lean; no dependency records or new nodes. H3: hypotheses exact (IsNoetherian T, IsOpenImmersion j, IsClosedImmersion i with complementary range; no field, reducedness, ell-invertibility or universe restriction). Coefficient list identical to CartesianUntwistedAssertions, including padicAlgClRingObj for Qbar. Functors are the canonical CondensedRing upperStar, lowerStar and openImmersionLowerShriek. All clauses present: exactness of both functors, preservation of constructibility, extended stratification R with Fin R.n equiv Option (Fin S.n) and Over-isos to s_a then j, t_b then i, and i or j, retained-model isomorphisms, IsZero on the added stratum. Clauses are mathematically true: R exists because T is Noetherian; edge cases empty T/U/Z, Lambda=0, non-reduced Z, infinite covers. H4: existing open-extension and rational closed-support theorems are field special cases, not duplicates. Helper is a fully written Prop conjunction listed in lean.declarations, not hollow. lean.statement verbatim, sorry only, source and blueprint docstrings, six-step proof docstring, report has Worker report and Second reading by Q01. No compile run because no file was changed; worker reports a clean scompile."
+ }
 }

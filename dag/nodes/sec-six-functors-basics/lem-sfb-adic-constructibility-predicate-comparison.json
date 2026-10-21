@@ -294,5 +294,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-515cbfd50 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 11 stmt_deps and 13 proof_deps, the blueprint main-20261015 sk-def-sfb-constructible (_section, local-model and its proof, constructible-module), det-existence-restriction.proof.md, and HRS Ex. 3.1 / Thm 6.2(2)-(3), which serve as context only. The item is not dropped and is still unsplit live, created by the parent's PASSed 10-21 re-split; the statement is byte-identical to base and there are no new nodes. Two stmt_deps were added and the statement uses both; proof_deps equal the union of the step uses; no cycle; no SGA. blueprint.from.node is now the real blueprint ancestor lem-sfb-dc-proper-pushforward-left-adjoint-e, with via [parent, grandparent]. Step 1: the section-action equivalence keeps the sheaf, sections and restrictions, and cartesian-coefficients (1) plus its last paragraph identify mapMod(g^*) over g^*Λ_X with modules over Λ_V. Step 2: the qcqs branch holds via the locally-Noetherian⇒QS leaf; the subspace descending-chain argument with F'_n=∩_{j≤n}F_j is checked, giving Noetherian strata as the local-triviality lemmas require. Step 3: the converse holds for all families by the final assertion of det-def-sfb-constructible-local-model. Step 4: the O_E case is (i)⇒(ii) of lem-sfb-integral-lfp-constant-model-comparison, whose hypotheses match exactly and which allows torsion and a changed stratification. Steps 5-6: E^c_X of the pbc lemma is the same p_X^* as sk-def-sfb-pullback-from-point; P=E^r or Q̄^r is finitely presented, and Λ(*)=Q̄_ℓ for the finite-subextension ring; locally closed strata are constructible because X is Noetherian, as the definition states. Step 7 is elementary: the same bounded D(Mod_{Λ_X}) with H^n substituted degree by degree. Edge cases checked: empty X, rank 0, O_E/π^n, characteristic ℓ, non-separated X. No duplicate: only the cited integral special case states the comparison. All 7 declared tool_uses are accepted as generic coefficient and topology tools. Maintainer note: the certificate node's case (iii) says C(-,Q̄_ℓ) while the item, the qbar nodes and the Lean use the finite-subextension ring; the certificate owner's prose should be aligned, and this is not a fault of the delivery."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.AdicConstructibilityPredicateComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.adicConstructibilityPredicateComparison",
+  "file": "lean/Sheaf/Paper/AdicConstructibilityPredicateComparison.lean",
+  "statement": "theorem adicConstructibilityPredicateComparison (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (_hΛ : CondensedRing.IsEllAdicCoefficient ℓ Λ inferInstance) : (∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X), IsConstructibleModuleObject (condensedRingObj Λ X) M ↔ IsConstantModelConstructible Λ X M) ∧ boundedConstructible (condensedRingObj Λ X) = constantModelBoundedConstructible Λ X",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c892ffd8",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read the item, all 11 stmt_deps and their Lean (IsConstructibleModuleObject, boundedConstructible, IsConstantModelConstructible/HasFiniteConstantLocalModel/constantModelBoundedConstructible, IsEllAdicCoefficient with 3 constructors incl. padicAlgClRingObj = finite-subextension ring). Hypotheses exactly CompactSpace + IsLocallyNoetherian (qcqs branch selected), commutative certified Λ indexed by the same MonObj; conjunct 1 = ∀M iff of the two recorded predicates (independent stratifications, torsion allowed); conjunct 2 = ObjectProperty equality on the same ordinary D(Mod_{Λ_X}), no completeness/Tor condition. lean.statement verbatim; only the item lean field + new module differ from live; imports exist; 7-step docstring, source/blueprint docstrings, sorry only; edge cases (empty X, rank 0, O_E/π^n, char ℓ, non-separated, universes) covered; no duplicate (only the O_E special case exists). No compile (no FIX). Advisory: stage 3 needs integralCondensedRing vs padicIntegersRingObj identification; certificate prose (iii) C(-,Q̄_ℓ) vs finite-subextension Lean."
+ }
 }

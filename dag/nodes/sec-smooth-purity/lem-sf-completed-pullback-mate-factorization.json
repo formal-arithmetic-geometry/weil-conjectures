@@ -213,5 +213,30 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-b134eaaa9 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read all five steps in full. This is an ordinary first split of an item that had no proof: NV created it unsplit in 9ae4c040, there is no repair note, the live copy is still unsplit, nothing cited is dropped, and no SGA source is used. The delivery adds no new nodes. Its only statement change adds lem-coef-derived-tower-counit-projections as the citation for the canonical adjunction Δ⊣Rlim. That is warranted, because the ringed-limit node gives only the K-injective model. The hypotheses and conclusions are unchanged, and the added dependency creates no cycle. Step 1 unwinds def-weil-pbc-completed-pullback and the α^F_K of lem-sf-exact-pullback-counit-normalization into L_Y(a_K)v_{Y,HK}, with a_K=H̃(i_K)j_K^{-1}. The definition's canonical map C→RlimΔC is the unit of the induced adjunction: Stacks Tag 0FND (derived.tex l.9517ff) builds the derived Hom bijection as the colimit over resolutions of the chain-level adjunct, so this is what the cited node states (C3 holds). Steps 2-3 are the mate/unit naturality and the triangle identity. I checked them, and they agree with the existing Mathlib leaf lem-pur-mate-unit-compatibility plus naturality of β. Citing that leaf would be optional and is not a fault. Step 4 gives ε_{H̃M}Δ_Y(α)=a_K, and evaluating at n with e_n(ε)=π_n gives p_nα=F_D(q_n). Step 5 uses naturality of the evaluation transitions on the counit morphism and the strict quotient composition law. I accept the tool uses of the ringed strict-tower limit and the derived-tower counit projections; both are generic category tools. Edge cases hold: g=id (β=id by the triangle identity), K=0, and the non-complete K=B[1/ℓ]. Mathlib searches cover all three kinds. None of the four mate and tower-normalization nodes I checked states this identity."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SfCompletedPullbackMateFactorization",
+  "declaration": "AlgebraicGeometry.Scheme.ExactPullbackNormalization.completed_pullback_mate_factorization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.limitMate",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.quotientAugmentation",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.pulledProjection",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.quotientTransition",
+   "AlgebraicGeometry.Scheme.ExactPullbackNormalization.completed_pullback_mate_factorization"
+  ],
+  "file": "lean/Sheaf/Paper/SfCompletedPullbackMateFactorization.lean",
+  "statement": "theorem completed_pullback_mate_factorization : (∀ K : DerivedCategory (pbcModules X (pbcAdicCompletion X d)), exactAugmentation d g K = (moduleFunctor d g).mapDerivedCategory.map (d.completionUnit X K) ≫ limitMate d g ((completedReductionTower X d).obj K)) ∧ (∀ (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))) (n : ℕ), exactAugmentation d g K ≫ pulledProjection d g n K = (moduleFunctor d g).mapDerivedCategory.map (quotientAugmentation d n K)) ∧ (∀ (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))) (a b : ℕ) (h : a ≤ b), pulledProjection d g b K ≫ (moduleFunctor d g).mapDerivedCategory.map (quotientTransition d a b h K) = pulledProjection d g a K) ∧ (∀ (K : DerivedCategory (pbcModules X (pbcAdicCompletion X d))) (a b c : ℕ) (hab : a ≤ b) (hbc : b ≤ c), pulledProjection d g c K ≫ (moduleFunctor d g).mapDerivedCategory.map (quotientTransition d b c hbc K) ≫ (moduleFunctor d g).mapDerivedCategory.map (quotientTransition d a b hab K) = pulledProjection d g c K ≫ (moduleFunctor d g).mapDerivedCategory.map (quotientTransition d a c (hab.trans hbc) K)) ∧ (∀ (K K' : DerivedCategory (pbcModules X (pbcAdicCompletion X d))) (f : K ⟶ K'), (moduleFunctor d g).mapDerivedCategory.map f ≫ exactAugmentation d g K' = exactAugmentation d g K ≫ (completedTowerRlim d Y).map ((towerFunctor d g).mapDerivedCategory.map ((completedReductionTower X d).map f)))",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-918413949",
+  "group": "NE",
+  "result": "pass",
+  "note": "Node changes only in lean; statement verbatim; no stmt_dep added. All clauses match: limitMate = unit_Y ≫ Rlim(constantIso.hom (= j⁻¹) ≫ F^Tow ε_X); completionUnit = L_X(i_K)v_X; α^F = the dependency's exactAugmentation; conjuncts give the factorization, p_nα=F_D(q_n), transitions for all a≤b, composites, naturality in every unbounded K; no completeness/product/universe extras. completedConstantRlimUnit equals the derived-adjunction unit by the ∃! representative pin, so conjunct 1 is true. Helpers are canonical composites; only the theorem is sorry; docstrings complete. Advisories: conjunct 4 follows from 3; plain defs come from theorem-owned modules (stmt_dep from stage 1, not added); unused OfSequence import. No file changed, no compile."
  }
 }
