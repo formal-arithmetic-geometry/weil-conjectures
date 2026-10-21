@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-nagata-immersion-shrink-to-closed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Quasi-compact open on which an immersion is closed",
@@ -18,9 +18,52 @@
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "closedShrink|exists_isCompact_isClosedImmersion|exists.*[Cc]losed.*[Ii]mmersion|IsImmersion",
+   "results": "Mathlib/AlgebraicGeometry/PointsPi.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/QuasiAffine.lean; Mathlib/AlgebraicGeometry/Artinian.lean; Mathlib/AlgebraicGeometry/Artinian.lean. No match: the pinned Mathlib has coborderRange and liftCoborder, not a chosen quasi-compact closed-immersion neighbourhood. Read Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean:51-65 and 90-97; coborderRange is not required quasi-compact.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An immersion of a quasi compact scheme is closed in a quasi compact open neighbourhood of its image",
+   "results": "AlgebraicGeometry.Scheme.Hom.isLocallyClosed_range; AlgebraicGeometry.IsImmersion.isLocallyClosed_range; AlgebraicGeometry.IsImmersion.mk; AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion; AlgebraicGeometry.instIsClosedImmersionLiftCoborder; AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact; AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion; AlgebraicGeometry.IsClosedImmersion.isClosedEmbedding. No match: locally closed image and coborder factorization statements do not define the selected quasi-compact open.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsClosedImmersion",
+   "results": "AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion; AlgebraicGeometry.instIsClosedImmersionLiftCoborder; AlgebraicGeometry.IsImmersion.isImmersion_iff_exists; AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact. No match: immersion factorizations and instIsClosedImmersionLiftCoborder do not define a chosen quasi-compact open.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an immersion of schemes with quasi-compact source choose a quasi-compact open neighbourhood of the image where the morphism is a closed immersion",
+   "results": "AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact; AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact; AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion; AlgebraicGeometry.instIsClosedImmersionLiftCoborder; AlgebraicGeometry.Scheme.instQuasiCompactToImage; AlgebraicGeometry.instLocallyQuasiFiniteOfIsImmersion; AlgebraicGeometry.IsClosedImmersion; AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion. No match: quasi-affineness, image factorizations and compact-open characterizations do not select the witness of this definition.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A chosen compact open subscheme containing the range of an immersion from a compact scheme with a closed immersion into it, closedShrink",
+   "results": "AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion; AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact; AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact; AlgebraicGeometry.isCompact_iff_exists; AlgebraicGeometry.Scheme.instQuasiCompactToImage; AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι; AlgebraicGeometry.instIsClosedImmersionLiftCoborder; AlgebraicGeometry.compactSpace_iff_exists. No match: quasi-affineness, image factorizations and compact-open characterizations do not select the witness of this definition.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "closedShrink|compact.*[Oo]pen|[Oo]pen.*compact|coborder",
+   "results": "56; 57; 61; 64; 65. No match: the pinned Mathlib has coborderRange and liftCoborder, not a chosen quasi-compact closed-immersion neighbourhood. Read Mathlib/AlgebraicGeometry/Morphisms/Immersion.lean:51-65 and 90-97; coborderRange is not required quasi-compact.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -45,5 +88,21 @@
   "statement": "Under the hypotheses of\n[lemma-nagata-immersion-shrink-to-closed-exists], choose one witness and\ndefine\n\n$$\nY^{\\mathrm{cl}}(i)=W.\n$$",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-immersion-shrink-to-closed",
+  "worker": "stage1",
+  "summary": "Definition-only split. Retain exactly the blueprint choice of one witness of lemma-nagata-immersion-shrink-to-closed-exists as the sole statement dependency. Checked its full statement and the current blueprint, searched all imported blueprint nodes and pinned Mathlib in two phrasings; no new nodes are needed. The existing witness theorem supplies all required hypotheses and properties. No claim or proof is added to the definition. The current read clone contains closedShrink at FinitePresentationModel.lean:53; record this in the report while obeying the explicit instruction to deliver a split rather than repeat ATTACH.",
+  "blueprint": "main-20261015, def-nagata-immersion-shrink-to-closed, entire defining paragraph and displayed equation: choose a witness of the preceding existence lemma and name its open Y^{cl}(i). The definition has no proof paragraphs.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-1c701bbb4",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-1c701bbb4 (reviewer sub-agent of L); spot-checked: The definition is unchanged and matches main-20261015 def-nagata-immersion-shrink-to-closed (order 392), which chooses a witness W of lemma-nagata-immersion-shrink-to-closed-exists (order 391: an immersion with quasi-compact source, a quasi-compact open W containing i(X), and X->W a closed immersion). stmt_deps is exactly that lemma, which supplies all the objects and hypotheses. Choosing W determines X->W uniquely, because W->Y is a monomorphism and i(X) lies in W. The properties lemma cites this definition and is not cited by it, so there is no cycle. The definition stays on the route of step 1 of unit sk-prop-nagata-sketch-fp-models (shrink to the quasi-compact open where the immersion is closed). Compared with side-live, where the item is still imported, only same_as=[], mathlib_searches, status and split_report changed. Live and side-live are both still imported and the item is in no dropped list. There are no new nodes. Mathlib coborderRange (Immersion.lean:56) is not quasi-compact in general, for example the empty map into an infinite disjoint union of affines, so the 'no match' verdict is right. Project Lean FinitePresentationModel.lean:53-78 has closedShrink := exists_isCompact_isClosedImmersion.choose, tagged with this blueprint id; the report records it and the maintainer may attach it. rg over dag/nodes found no duplicate definition. Edge cases checked: X empty (W can be empty), the identity of a quasi-compact Y, and a closed immersion into a non-quasi-compact Y. No new nodes, no steps, no tool_uses, no fixes."
  }
 }
