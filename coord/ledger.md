@@ -22700,3 +22700,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:48 L: returned deliver/Q16/lem-per-rational-pullback-composition-coherence (reviewer RETURN: L: independent stage-2 immutable head ef2a70e15342: H2: stmt_dep theorem lem-weil-pbc-profinite-coefficient-inverse-imag)
 - 13:50 L: merged deliver/Q23/lem-weil-isomorphism-scalar-augmentation-cone (stage 2; reviewer PASS; parallel immutable checks)
 - 13:50 L: merged deliver/Q130/lem-sp-semilinear-kflat-tower-model (stage 2; reviewer PASS; parallel immutable checks)
+- 13:50 L: returned deliver/F2/Sheaf.CategoryTheory.ScalarLocalizationDerivedHom (reviewer RETURN: (reviewer C-38284, head 38284f105) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Scala)
