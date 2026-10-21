@@ -315,5 +315,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-764572f36 (reviewer sub-agent of L); spot-checked: Read the full item: unchanged statement, 6 steps, no new nodes. Also read every cited statement, unit sk-prop-open-coefficients step 3, the parent's step 4, and HRS 2305.18131 Lemma 5.3(1)/(5.4), Remark 5.4 and Lemma 5.6. The mathematics is correct. Step 1: exact transport from internal to section-ring modules, with K-injectivity handled explicitly. Step 2: tail colimit with the actual legs q_F, cartesian coefficients including Q̄ℓ, finite freeness, flatness. Step 3: a degreewise bounded-below representative, and tensor plus exact filtered colimits give H^q(B⊗A)=colim H^q(F⊗A). Step 4: elementary, using naturality of α, α_{R_Y}=1 and biproducts. Step 5: the cocone equation, then 2-out-of-3 on colimits. Step 6: the hypotheses of ring-sheaf-change-adjunction hold through the coefficient-change square, the direction of d matches, and the adjunct formula gives d∘rγ=δ_B. Edge cases checked: F=E, C=0, X empty, f=id, C unbounded above; the common lower bound is kept (Remark 5.4). One fault, C7, repaired: step 5 used lem-weil-pbc-condensed-qcqs-pushforward-continuity (unit sk-thm-properbasechange) as a declared tool, although the unit's route names sk-cor-pe-bounded-continuity at that point. The route node det-pe-bounded-continuity-direct-image (reviewed PASS) states exactly the needed continuity for qcqs f, any ring sheaf and a common bound a. It also avoids an unstated identification of the off-route node's π^{-1}a^* coefficients with p_X^*. The fix file repoints step 5 and adds a sentence on restriction to R_Y-modules, recomputes proof_deps and removes that tool_uses entry. Cycle check is clean. Accepted the remaining generic tool uses. Advisory: step 6 reads the statement's 'canonical pullback/tensor identification' as μ_{B_Y,A} composed with LB_Y≅B_X after restriction; stage 2 should pin the same convention.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.QlbarDirectImageComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_derivedPushHom_padicAlgCl_of_boundedBelow",
+  "file": "lean/Sheaf/Paper/QlbarDirectImageComparison.lean",
+  "statement": "theorem isIso_derivedPushHom_padicAlgCl_of_boundedBelow (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (C : DerivedCategory.Plus (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E))) : IsIso ((derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) f).app C.obj)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d6f67c7dc",
+  "group": "N7",
+  "result": "pass",
+  "note": "Clause-by-clause match: Fact ℓ.Prime; E : PadicAlgCl.FiniteIntermediateField ℓ; f qcqs with no other geometric hypothesis; E_X = condensedRingObj (continuousMapRingObj E) X; Q̄_ℓ,Z = condensedRingObj padicAlgClRingObj (finite-subextension-valued convention); C : DerivedCategory.Plus of the ambient module category; conclusion IsIso ((derivedPushHom (padicSubfieldRingObjToPadicAlgCl ℓ E) f).app C.obj). derivedPushHom is the canonical mate of derivedComapLowerStarIso (DAG node def-sfb-derived-push-hom); its adjunct equals derivedPullIso⁻¹ followed by T^X(counit), matching the node's description, and the docstring pins this convention. Upstream qlbar comparisons all assume IsProper, so this is not a duplicate. Proof is sorry only, no hollow definitions, docstrings carry the source place and blueprint id with all six proof steps, lean.statement is verbatim the file signature, all imported modules exist, universes follow the Scheme.{u}/Ab.{u+1} convention, and the report has both required sections. Advisory: derivedPushHom and the subfield coefficient declarations are owned by nodes outside stmt_deps; stage 2 cannot change stmt_deps and these are the exact canonical objects. Nothing was compiled because no file was changed."
+ }
 }

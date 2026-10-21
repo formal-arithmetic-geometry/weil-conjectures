@@ -16,7 +16,9 @@
   "sk-lem-coefficient-heart",
   "def-constructible-stratification",
   "sk-def-sfb-change-of-scalars",
-  "sk-def-sfb-module-lower-shriek"
+  "sk-def-sfb-module-lower-shriek",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map"
  ],
  "proof": [
   {
@@ -253,5 +255,29 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-1ae51b64b (reviewer sub-agent of L); spot-checked: The six-step split of lem-sfb-lattice-subquotient-filtration follows blueprint main-20261015 generators proof (1) and sk-lem-integral-models proof (4) in order. Steps 1 and 3 get the lattices from sk-lem-stratified-lattice (01T6 gives Noetherianity) and order the strata with common-stratification (1). Step 4 gets the lisse filtration from det-lem-coefficient-heart-filtration, Step 5 pushes it forward with the exact, transitive a_! of the coherence lemma (composite-immersion argument checked), and Step 6 rationalizes with det-prop-scalar-six-pullback(2). The statement is identical to the landed base; there are no new nodes, no cycle, no SGA, and no re-split note. I tested S or X empty, L=0, varying rank, Spec k, G_m in A^1 and the nodal P^1 without a global lattice. Batch-5: lem-sfb-integral-rationalization-exact reaches sec-poincare-duality only through definitions and the Galois correspondence of finite local systems (def-pod-l-adic-representations via the stmt_dep def-sfb-monodromy-realization-data). It is used only for exactness of localization, which neither the trace formula nor Poincare duality gives, so I accepted it. FIX, two repairs: (C1/C4) Step 2 equated the continuous-function coefficient inclusion of the rationalization lemma with the pulled-back O_E->E without a citation; I added lem-sfb-continuous-ring-universe-realization, which applies naturally to both O_E and E, and recorded it as a tool_use. (C4, minor) Step 6 did not say that the clause-(2) a_! of the coherence lemma is the statement's a_{b!} of sk-def-sfb-module-lower-shriek on O_E and the a_! of sk-lem-coefficient-heart on E; I added that via the coherence lemma's i_*u_! identification. I accepted tool_uses for the coherence lemma and scalar-six-pullback.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.LatticeSubquotientFiltration",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_latticeSubquotientFiltration",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.LatticeSubquotientFiltrationData",
+   "AlgebraicGeometry.ProEtale.LatticeSubquotientFiltration",
+   "AlgebraicGeometry.ProEtale.exists_latticeSubquotientFiltration"
+  ],
+  "file": "lean/Sheaf/Paper/LatticeSubquotientFiltration.lean",
+  "statement": "theorem exists_latticeSubquotientFiltration (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hpℓ : p ≠ ℓ) (S X : Scheme.{u}) [S.Over (Spec (.of k))] [X.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (a : S ⟶ X) [a.IsOver (Spec (.of k))] [IsImmersion a] : LatticeSubquotientFiltration ℓ E k a",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The two real Prop definitions package exactly this node’s conclusion and install the canonical spectral-norm condensed coefficient rings; no extra mathematical hypotheses. The added recorded continuous-map nodes supply the universe-polymorphic rings and inclusion. The lattice monomorphism’s extension/restriction adjoint is required to be an isomorphism. Filtration terms are actual subobjects, quotients are cokernels, and both locally closed extensions use the existing coefficient-heart i_* u_! functor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bf820da03",
+  "group": "N0",
+  "result": "pass",
+  "note": "Statement verbatim = base; only lean + stmt_deps changed (added landed def-sfb-continuous-map-condensed-ring(-map), allowed). lean.statement verbatim in file. All clauses checked: recorded abstract E/O_E (spectral norm), pulled-back continuous condensed rings via condensedRingObj, canonical O_E→E inclusion, IsLisseCoefficientModule (Mod.IsFree per pro-étale cover member, varying rank), FiniteLocallyClosedStratification with open prefixes, lattices as Mono ι with IsIso extend/restrict adjoint, Subobject filtration ⊥..⊤ non-strict, cokernel ≅ extendScalars of a_{b!}(M b) along R.immersion b ≫ a; Noetherian derived not assumed; edge cases (empty S/X, rank 0, empty strata, open/closed a) and universes (E,k : Type u) ok; docstrings/source/blueprint tags and 6-step plan present; no hollow defs, sorry-only. Advisory: a_{b!} via closure i_*u_! (same as landed coefficient-heart, proof step 6) rather than chosen-compactification lowerShriek; stage 3 needs E-model/universe transports; non-public Noetherian import reached transitively. No compile (none changed)."
+ }
 }

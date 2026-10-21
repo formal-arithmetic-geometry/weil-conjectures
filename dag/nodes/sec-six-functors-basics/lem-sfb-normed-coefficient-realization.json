@@ -294,5 +294,31 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-ea1b56737 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is byte-identical to the live one and the delivery adds 0 new nodes. Live and side-live still have the item unsplit, there is no re-split note and no drop entry. There is no cycle: none of the 3170 transitive dependencies of the cited nodes is the item or its parent. Source: Bhatt–Scholze Def. 6.8.1 and Rem. 6.8.15, conventions only; the proof is agent-written. Checks by step. 1: the embedding comes from the 09GU leaf, and E' is finite of degree d. 2: uniqueness of the absolute value makes the embedding isometric, so A maps onto O_{E'} with the restricted topology. 3: condensed-ring and pulled-back functoriality. 4: P = Res_{c^{-1}} is an exact equivalence with Ext_c ≅ P (clause 5). J = L(Ext_c) ≅ D(P) by uniqueness of derived functors, and it is triangulated. 5: cohomology commutes with P. 6: the stratification and cover transport is checked; the regular module maps to the regular module through g^*c, and the elementary flag is acceptable. 7: c_X α_R = α_S f^*c_Y and f_*(c_X)η_R = η_S c_Y, both verified, so the identity of f_*^{Ab}M is linear. 8: comap-preserves-K-injectives is applied to s^{-1} with the directions checked, and both Rf_* are computed on I and P_X I. 9: β(a⊗m) = c_X(a)⊗m; linearity, balancing, unit and counit verified. 10: the S coefficients are admissible, so pullback is exact, and the resolving normalization gives the derived counit mate. Tags 09GU, 03CZ, 015F, 010N and 09T5 match tags/tags. Edge cases tested: E = Q_ℓ, zero objects, presentations with m or n = 0, the empty scheme, f = id. No duplicate: condensed-coefficient-iso-constructible concerns D_ctf, and ring-isomorphism-tensor-transport and base-coefficient-condensed-identification cover other statements. Accepted tool_use: lem-sfb-resolving-derived-adjunction-normalization, generic and off-unit. The declared comap-preserves-K-injectives is on the route, so declaring it is harmless. Advisory: step 10 says 'embedded finite-field' where it means the finite subextension E' and O_{E'}; this is clear from context, so I made no fix."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.NormedCoefficientRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.NormedCoefficientRealization.normed_coefficient_realization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.NormedCoefficientRealization.condenseMap",
+   "AlgebraicGeometry.ProEtale.NormedCoefficientRealization.transport",
+   "AlgebraicGeometry.ProEtale.NormedCoefficientRealization.pullComparison",
+   "AlgebraicGeometry.ProEtale.NormedCoefficientRealization.IsCoefficientTransport",
+   "AlgebraicGeometry.ProEtale.NormedCoefficientRealization.normed_coefficient_realization"
+  ],
+  "file": "lean/Sheaf/Paper/NormedCoefficientRealization.lean",
+  "statement": "theorem normed_coefficient_realization (ℓ : ℕ) [Fact ℓ.Prime] (E Ω : Type u) [NormedField E] [NormedField Ω] [Algebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] [Algebra ℚ_[ℓ] Ω] [IsAlgClosure ℚ_[ℓ] Ω] (hE : ∀ x : ℚ_[ℓ], ‖algebraMap ℚ_[ℓ] E x‖ = ‖x‖) (hΩ : ∀ x : ℚ_[ℓ], ‖algebraMap ℚ_[ℓ] Ω x‖ = ‖x‖) : ∃ (E' : IntermediateField ℚ_[ℓ] Ω) (_ : FiniteDimensional ℚ_[ℓ] E') (σ : E ≃ₐ[ℚ_[ℓ]] E') (_hσ : Continuous σ) (_hσi : Continuous σ.symm) (τ : Padic.coefficientExtensionIntegers ℓ E ≃+* Padic.coefficientExtensionIntegers ℓ E') (_hτ : Continuous τ) (_hτi : Continuous τ.symm) (sE : Mon.mk (Profinite.continuousCoefficientRingObj E) ≅ Mon.mk (Profinite.continuousCoefficientRingObj E')) (sA : Mon.mk (Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionIntegers ℓ E)) ≅ Mon.mk (Profinite.continuousCoefficientRingObj (Padic.coefficientExtensionIntegers ℓ E'))), Isometry σ ∧ Isometry τ ∧ (∀ x : E, x ∈ Padic.coefficientExtensionIntegers ℓ E ↔ ‖x‖ ≤ 1) ∧ (∀ x : E', x ∈ Padic.coefficientExtensionIntegers ℓ E' ↔ ‖x‖ ≤ 1) ∧ (∀ x, (τ x : E') = σ (x : E)) ∧ sE.hom = condenseMap σ.toRingHom _hσ ∧ sA.hom = condenseMap τ.toRingHom _hτ ∧ condenseMap (Padic.coefficientExtensionIntegers ℓ E).subtype continuous_subtype_val ≫ sE.hom = sA.hom ≫ condenseMap (Padic.coefficientExtensionIntegers ℓ E').subtype continuous_subtype_val ∧ IsCoefficientTransport sE ∧ IsCoefficientTransport sA",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helpers give actual sectionwise postcomposition, termwise inverse scalar restriction and the point-induced pullback comparison. IsCoefficientTransport packages the existing derived extension, exactness, both bounds, general ring-object bounded constructibility and the counit-normalized ambient direct-image comparison. No new coefficient category or constructibility predicate is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-14d799518",
+  "group": "O4",
+  "result": "pass",
+  "note": "Read item, report, module, and all 8 stmt_dep records plus the exact side-live decls. All clauses match: Fact prime ℓ; NormedField E, finite over Q_ℓ, with hE; Ω IsAlgClosure with hΩ (more general than PadicAlgCl). ∃ finite E' with isometric σ; τ the restriction; norm ≤ 1 membership iffs tie the spectral integer ring to the given norm. sE/sA pinned to condenseMap postcomposition; inclusion square. transport = canonical D(Res_{c⁻¹}): equivalence and triangulated; IsLE/IsGE and boundedConstructible (general ring-object predicate) iffs both ways. ∀ f, ∃ γ uniquely pinned by the counit equation vs the actual derived adjunction and the point-induced pullComparison; directions checked. Edge cases (E=Q_ℓ, ℓ=2, empty scheme, f=id, zero complex) ok. Shared Type u is the dep convention. One sorry; docstrings with source, blueprint and 10 steps; statement verbatim; node otherwise identical to side-live. Advisory: A1 coefficientMap/derivedComapUpperStarIso owners not in stmt_deps; A2 Nonempty L(Ext)≅transport (all clauses on the canonical functor; acceptable); A3 proof-only imports. No compile: no file changed."
+ }
 }

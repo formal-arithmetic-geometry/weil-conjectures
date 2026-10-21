@@ -23,7 +23,9 @@
   "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
   "prop-weil-pbc-derived-inverse-image-adjunction",
   "def-weil-pbc-direct-image",
-  "lem-sbc-abelian-higher-direct-image-class-compatibility"
+  "lem-sbc-abelian-higher-direct-image-class-compatibility",
+  "def-weil-pbc-abelian-higher-image-class",
+  "def-sbc-raw-affine-restricted-cohomology"
  ],
  "proof": [
   {
@@ -320,5 +322,47 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-6afd046fe (reviewer sub-agent of L); spot-checked: Read the whole item (8 steps; no new nodes, no re-split note) and every cited statement. Source checked at Stacks 03Q8 (etale-cohomology.tex l.7509-7531) and 072W (sites-cohomology.tex l.747-789). The statement correction is justified and accepted. In the base, kappa used the existential family of lem-sbc-abelian-higher-direct-image-natural-comparison, which is unchanged when every e is replaced by -e; the case f=id on a separably closed point, F=Z, q=0 forces +1. The corrected kappa is the explicit c_h of class-compatibility, which is also the map that natural-comparison's own proof lifts. 'E is an isomorphism' is an added conclusion and no hypothesis changed. The only citer, the parent affine-realization, uses only kappa_V(z)=iota_V(c_raw(z)) and is unaffected. Steps 1-8 are mathematically correct: shift-sign invariance of cycles and boundaries, the counit and triangle computation of the adjunct, sheafification uniqueness of E, and coefficient naturality. Edge cases q=0 and empty X_V hold. Duplicate candidates were read (raw-restricted natural-iso, comparison-naturality, raw-restricted-cohomology-class, evaluation-functor-iso, module locally-bijective, the Zariski higher-direct-image node) and none is a duplicate. FIX, three repairable faults, all fixed in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-raw-restricted-class-normalization.json. (1) C1/C4: steps 1, 4 and 7 used Gamma(X_V, j_V^{-1}I) = I(X_V) and that cohomology pullback along the etale t_X is restriction of sections, without citing a node. Added lem-weil-pbc-etale-inverse-image-restriction, lem-weil-pbc-cohomology-pullback-functorial (clauses 4 and 5) and lem-weil-pbc-inverse-image-composition; step 4 is no longer marked elementary. (2) C1/E1: step 3 now cites lem-sbc-raw-restricted-homotopy-sections-iso for the chainEvaluation formula. Step 7 now checks the site theorem's morphism-of-sites hypotheses (lem-weil-pbc-etale-base-change-continuous; u_s = f^{-1}, exact) and identifies P with P^q_F through step 1. (3) B: removed stmt_dep sbc-lem-higher-direct-image-presheaf, which the corrected statement no longer cites (the item has no Lean record). proof_deps recomputed as the union of step uses. A BFS over 359 nodes shows no cycle. The 8 generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RawRestrictedClassNormalization",
+  "declaration": "AlgebraicGeometry.Etale.rawRestrictedClassNormalization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.normalizationRestrictionComplex",
+   "AlgebraicGeometry.Etale.normalizationRestrictionAugmentation",
+   "AlgebraicGeometry.Etale.normalizationRestrictionAugmentation_quasiIso",
+   "AlgebraicGeometry.Etale.normalizationRestrictionComplex_isKInjective",
+   "AlgebraicGeometry.Etale.normalizationRestrictedResolution",
+   "AlgebraicGeometry.Etale.normalizationSectionsIso",
+   "AlgebraicGeometry.Etale.normalizationPresheafComplex",
+   "AlgebraicGeometry.Etale.normalizationRestrictedIso",
+   "AlgebraicGeometry.Etale.normalizationResolutionClass",
+   "AlgebraicGeometry.Etale.normalizationIota",
+   "AlgebraicGeometry.Etale.normalizationRestrictedPresheaf",
+   "AlgebraicGeometry.Etale.normalizationChartMap",
+   "AlgebraicGeometry.Etale.normalizationCohomologyRestriction",
+   "AlgebraicGeometry.Etale.normalizationClass_add",
+   "AlgebraicGeometry.Etale.normalizationKappaComponent",
+   "AlgebraicGeometry.Etale.normalizationKappaComponent_naturality",
+   "AlgebraicGeometry.Etale.normalizationKappa",
+   "AlgebraicGeometry.Etale.normalizationLift",
+   "AlgebraicGeometry.Etale.normalizationRawCoefficient",
+   "AlgebraicGeometry.Etale.normalizationRestrictedCoefficient",
+   "AlgebraicGeometry.Etale.normalizationHigherCoefficient",
+   "AlgebraicGeometry.Etale.rawRestrictedClassNormalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RawRestrictedClassNormalization.lean",
+  "statement": "theorem rawRestrictedClassNormalization {X S : Scheme.{u}} (f : X ⟶ S) (q : ℕ) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) : (∃ c : abelianHigherDirectImageRawPresheaf f q F ≅ normalizationRestrictedPresheaf f q F, ∀ V : S.Etale, c.hom.app (op V) = rawRestrictedCohomologyComparison f q F V) ∧ (∀ (V V' : S.Etale) (t : V' ⟶ V), (normalizationRestrictedPresheaf f q F).map t.op = normalizationCohomologyRestriction f q F t) ∧ (∀ (V : S.Etale) (z : (abelianHigherDirectImageRawPresheaf f q F).obj (op V)), (normalizationKappa f q F).app (op V) z = abelianHigherDirectImageClass f q F V z) ∧ IsIso (normalizationLift f q F) ∧ (∀ (V : S.Etale) (z : (abelianHigherDirectImageRawPresheaf f q F).obj (op V)), normalizationIota f q F V (rawRestrictedCohomologyComparison f q F V z) = abelianHigherDirectImageClass f q F V z) ∧ (∀ (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (φ : F ⟶ G), (∀ V : S.Etale, (normalizationRawCoefficient f q φ).app (op V) ≫ rawRestrictedCohomologyComparison f q G V = rawRestrictedCohomologyComparison f q F V ≫ normalizationRestrictedCoefficient f q φ V) ∧ (∀ V : S.Etale, normalizationRestrictedCoefficient f q φ V ≫ normalizationIota f q G V = normalizationIota f q F V ≫ (normalizationHigherCoefficient f q φ).hom.app (op V)) ∧ (normalizationRawCoefficient f q φ ≫ normalizationKappa f q G = normalizationKappa f q F ≫ (normalizationHigherCoefficient f q φ).hom) ∧ ((presheafToSheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}).map (normalizationRawCoefficient f q φ) ≫ normalizationLift f q G = normalizationLift f q F ≫ normalizationHigherCoefficient f q φ))",
+  "branch": "sheaf-dag",
+  "by": "Q158",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c42a3d30b",
+  "group": "Q158",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (bc0785c3579e). The diff against that head shows the requested route-1 repair exactly: theorem stmt_dep sbc-lem-higher-direct-image-presheaf removed, no decl from AbelianHigherDirectImagePresheaf used (grep), import switched to AbelianHigherDirectImageNaturalComparison (owner of abelianHigherDirectImageRawPresheaf). kappa is now built from abelianHigherDirectImageClass (def-weil-pbc-abelian-higher-image-class, the explicit adjunct/H0/shift/generator class, l.119-135) via AddMonoidHom.mk', with additivity and naturality as separately named sorry theorems with source/blueprint/proof docstrings; both true. Landed definition stmt_deps added: def-weil-pbc-abelian-higher-image-class, def-sbc-raw-affine-restricted-cohomology. Node differs from base only in lean + these two defs. lean.statement verbatim; 25 decls = lean.declarations; lines <=98 chars; only helper/main theorems sorry. Mathematics as previously accepted: c components pinned, P restriction pinned to cohomology pullback, explicit 072W iota, E = sheafification lift, IsIso E, iota(c z)=kappa z, coefficient naturality; no extra hypotheses, u/u+1, q=0/empty chart covered. Not compiled (no file changed); worker reports clean scompile and a passing deliver2 --no-push dry run."
  }
 }
