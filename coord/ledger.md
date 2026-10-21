@@ -23343,3 +23343,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T18:30:29Z L: superseded stage-1 delivery Q20/lem-sfb-lattice-supported-hom-reduction-tower at a9a151b7b3f61dc3af77403b07d16cbad033f591; current completion retained; packet archived at refs/superseded/Q20/lem-sfb-lattice-supported-hom-reduction-tower/a9a151b7b3f61dc3af77403b07d16cbad033f591; stale return retired.
 - 18:30 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 18:30 L: merged deliver/Q01/lem-sfb-root-coordinate-supported-vanishing (stage 2; reviewer PASS; parallel immutable checks)
+- 18:30 L: returned deliver/O1/lem-sfb-snc-tame-finite-fibre-classification (reviewer RETURN: L: independent stage-2 immutable head 508ed569d1bf: Main statement correct: hypotheses carried by SNCResidualChart plus )
