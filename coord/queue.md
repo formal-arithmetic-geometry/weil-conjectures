@@ -1,6 +1,6 @@
 # Work queue
 
-130 items; claim with `tools/claim.py next <group> [--stage N]`.
+127 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (12 clusters, 941 modules)
 
@@ -47,7 +47,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `sk-thm-pe-wc-cover` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (28)
+## Stage 2: nodes to state (25)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -58,7 +58,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
-| `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
 | `lem-sfb-dense-lattice-derived-invariants-comparison` | 1 | state | 0 |
 | `lem-sfb-faithfully-flat-normal-ring-descent` | 1 | state | 0 |
 | `lem-sfb-finite-closed-cover-resolution` | 1 | state | 0 |
@@ -66,14 +65,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
 | `lem-sfb-lattice-supported-hom-finite-comparison` | 1 | state | 0 |
 | `lem-sfb-nonnegative-derived-totalization` | 1 | state | 0 |
-| `lem-sfb-partial-kummer-boundary-unit-model` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
 | `lem-sfb-root-tower-coordinate-face` | 1 | state | 0 |
 | `lem-sfb-root-tower-puncture-invariance` | 1 | state | 0 |
 | `lem-sfb-simplex-lattice-shuffle-boundary` | 1 | state | 0 |
 | `lem-sfb-snc-finite-root-regular-ring` | 1 | state | 0 |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 1 | state | 0 |
-| `lem-sfb-snc-universal-residual-charts` | 1 | state | 0 |
 | `lem-sfb-tame-root-tower-extension` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-zl-raw-heart-adic-lisse-stratification` | 1 | state | 0 |
