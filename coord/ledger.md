@@ -19524,7 +19524,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:00 L: merged deliver/A2/Sheaf.SixFunctors.FlatModelGeneration (stage 3; reviewer PASS; first push; landing 20261021T020049-L-2580122 (interface); batch 20261021T020043; modules 1; new nodes 0; change records: coord/changes/A2-flat-model-generation-proof-scope.md)
 - 02:00 L: merged deliver/A3/Sheaf.Paper.CondensedOpenClosedRecollement (stage 3; reviewer PASS; first push; landing 20261021T020051-L-2580496 (proof); batch 20261021T020043; modules 1; new nodes 0; change records: coord/changes/A3-restore-condensed-open-closed-recollement.md)
 - 02:00 L: merged deliver/B2/Sheaf.AlgebraicGeometry.FiniteDiscreteCtfOrigin (stage 3; reviewer PASS; first push; landing 20261021T020052-L-2580695 (proof); batch 20261021T020043; modules 1; new nodes 0; change records: coord/changes/finite-discrete-ctf-origin-restoration.md)
-- 02:00 L: merged deliver/B2/Sheaf.SixFunctors.FlatModel (stage 3; reviewer PASS; first push; landing 20261021T020054-L-2581227 (proof); batch 20261021T020043; modules 1; new nodes 0; change records: coord/changes/B2-restore-flat-model.md)
 - 02:00 L: merged deliver/B3/Sheaf.Paper.ExceptionalCoefficientComparison (stage 3; reviewer PASS; first push; landing 20261021T020055-L-2581770 (proof); batch 20261021T020043; modules 1; new nodes 0; change records: coord/changes/B3-exceptional-coefficient-normalization.md)
 - 02:00 L: merged deliver/B4/Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowsPreoverlap (stage 3; reviewer PASS; first push; landing 20261021T020057-L-2582139 (proof); batch 20261021T020043; modules 1; new nodes 0; change records: coord/changes/B4-relative-mv-direct-image-rows-preoverlap-restoration.md)
 - 02:00 L: merged deliver/B4/Sheaf.Paper.FiniteDiscreteRealizationFunctor (stage 3; reviewer PASS; first push; landing 20261021T020058-L-2582584 (proof); batch 20261021T020043; modules 1; new nodes 0)
@@ -19550,3 +19549,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:01 L: merged deliver/T3/Sheaf.SixFunctors.SemilinearProperOpenMatePasting (stage 3; reviewer PASS; first push; landing 20261021T020141-L-2591101 (proof); batch 20261021T020043; modules 1; new nodes 0)
 - 02:04 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 02:05 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
+
+- 10:08 L: batch 20261021T020043 dependency take-out
