@@ -21107,3 +21107,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:17 L: merged deliver/NB/def-sfb-padic-integers-condensed-ring (stage 2; reviewer PASS; parallel immutable checks)
 - 08:17 L: merged deliver/NG/lem-weil-pbc-coherent-affine-base-change-edge-naturality (stage 2; reviewer PASS; parallel immutable checks)
 - 08:17 L: merged deliver/NG/lem-weil-pbc-flat-curve-derived-structure-model (stage 2; reviewer PASS; parallel immutable checks)
+- 08:17 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
