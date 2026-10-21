@@ -16,9 +16,147 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-derived-complete"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout in the single category $\\mathcal A=\\operatorname{Mod}(R)$ on the small pro-etale site of $T$. Countable products in this category are exact by [lem-weil-proetale-countable-products-exact]. Consequently [lem-weil-strict-roos-comparison] computes the total derived limit of every strict tower $X$ by $\\mathsf R(X)=\\operatorname{Cone}(1-s_X:\\prod X_i\\to\\prod X_i)[-1]$, naturally for strict maps and strict augmentations. Use reordered coordinates $(v,u)$ with differential $(dv,-du-(1-s_X)v)$. Its evaluation is $\\mathrm{pr}_i(v)$ and an augmented family $a_i:M\\to X_i$ induces $m\\mapsto((a_i m)_i,0)$. This fixes both the models and the units; it does not assert that a lift in an abstract triangulated category is unique.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 3.1.9, 3.2.3(1), 4.2.8; Stacks sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok), strict augmentation normalization"
+   }
+  },
+  {
+   "text": "Fix $n$ and write $Q=Q_n$, $r=r_n$, and $M_j=Q\\otimes_R L_j$. The tensor convention [def-pc-tensor-complex-sheaves] gives $M_j^k=Q^k\\oplus Q^{k+1}$ and $d(x,y)=(dx+(-1)^{k+1}\\pi^j y,dy)$. The degree-zero inclusion $i_j(x)=(x,0)$ is compatible with the transitions $(x,y)\\mapsto(x,\\pi y)$. Its quotient is $Q[1]$: the quotient identification in degree $k$ sends $y$ to $(-1)^k y$, so its differential is $-d_Q$ and its transition is multiplication by $\\pi$. Thus there is a short exact sequence of complexes of strict $j$-towers $0\\to\\operatorname{const}(Q)\\xrightarrow{i}M_\\bullet\\to Z_\\bullet\\to0$, where every $Z_j=Q[1]$ and every transition is $\\pi$. Exactness is levelwise by [lem-weil-tower-category-levelwise-abelian], and [lem-weil-pbc-complex-ses-triangle] gives its distinguished triangle in the derived category of towers. No splitting as complexes, nor eventual vanishing of the differential on $M_j$, is being assumed.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence: explicit principal Koszul calculation; tensor convention Stacks homology.tex Tag 012Z (definition-associated-simple-complex)"
+   }
+  },
+  {
+   "text": "The composite $Z_{j+r}\\to Z_j$ is $\\pi^r=0$ on $Q[1]$. The exact total derived-limit functor and its pro-zero criterion in [lem-weil-pbc-ringed-strict-tower-homotopy-limit] therefore give $R\\lim_j Z_j=0$ and $R\\lim_j\\operatorname{const}(Q)\\xrightarrow{\\sim}R\\lim_j M_j$. The diagonal identifies $Q$ with the first limit: on the constant tower $1-s$ has kernel the diagonal, and the chain section solving $z_j-z_{j+1}=y_j$ is $z_1=0$, $z_j=-\\sum_{i<j}y_i$. The resulting split product sequence identifies its fibre with $Q$. By the augmentation clause of [lem-weil-strict-roos-comparison], the resulting isomorphism is precisely $u_Q:Q\\to\\mathsf R_j(Q\\otimes L_j)$ with product components $i_j$ and zero shifted component. The inclusions and all these constructions commute with every $R$-linear chain map $Q\\to Q'$. Hence $u_{Q_n}$ is a strict natural map of $n$-towers and a quasi-isomorphism at each $n$; the argument used only $r_n$, separately at each level.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence, power-torsion calculation; Bhatt-Scholze Lemma 3.4.12 and Lemma 3.5.7 proof; Stacks Tag 0941 for the total-limit model"
+   }
+  },
+  {
+   "text": "For $X_{n,j}=Q_n\\otimes_RL_j$, interchange the two product coordinates $\\prod_n\\prod_jX_{n,j}^a\\cong\\prod_j\\prod_nX_{n,j}^a$ by $(x_{n,j})\\mapsto(x_{n,j})$. In the iterated Roos complexes let $p\\in\\{0,1\\}$ be the outer $n$-Roos degree and $q\\in\\{0,1\\}$ the inner $j$-Roos degree. On the summand of total degree $a+p+q$ multiply this coordinate interchange by $(-1)^{pq}$. The source differential is $-(1-s_n)+(-1)^p(-(1-s_j))+(-1)^{p+q}d_X$, with each term mapping to its corresponding new degree. Under interchange the $n$-term acquires $(-1)^q$ and the $j$-term acquires $(-1)^p$, exactly the signs in the target differential. The internal term has the same sign on both sides. This proves the chain-map identity; the reverse formula is its inverse since $(-1)^{2pq}=1$. There are only four Roos summands in each total degree, so products commute with these finite sums even for unbounded $X$. The formula is natural for both transitions and every strict map. It fixes all terms with $q=0$ and therefore carries the strict $j$-inclusions to the corresponding inclusions after interchange. By step 1 this is the asserted canonical interchange of iterated derived-limit Roos models.",
+   "uses": [
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence: explicit double-Roos coordinate calculation, with Stacks derived.tex Tag 014E (definition-cone)"
+   }
+  },
+  {
+   "text": "Put $H_0=\\mathsf R_n(Q_\\bullet)$, representing $H$ by step 1. For each $j$, tensoring its two Roos product coordinates with $L_j$ commutes with the products: each degree of $L_j$ is a single copy of $R$ and only the two degrees $-1,0$ occur. Explicitly, for Roos degree $p$, $Q$-degree $a$ and $L_j$-degree $b$, both $H_0\\otimes L_j$ and $\\mathsf R_n(Q_n\\otimes L_j)$ have the product summand $\\prod_n(Q_n^a\\otimes L_j^b)$ and differential $-(1-s_n)+(-1)^p d_Q+(-1)^{p+a}d_{L_j}$. The coordinate identities therefore give a chain isomorphism $\\gamma_j:H_0\\otimes L_j\\xrightarrow{\\sim}\\mathsf R_n(Q_n\\otimes L_j)$. The components $(\\pi,1)$ of $L_{j+1}\\to L_j$ commute with this formula, so the $\\gamma_j$ form an isomorphism of strict $j$-towers. It sends $h\\otimes1$ to the $n$-Roos image of the inclusions $Q_n\\to Q_n\\otimes L_j$ and preserves the projections to $Q_n\\otimes L_j$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Reduction-as-a-two-term-cone sentence and completeness sentence: finite direct-sum/product tensor calculation"
+   }
+  },
+  {
+   "text": "Apply $\\mathsf R_n$ to the strict natural levelwise quasi-isomorphism $u_{Q_n}$ of step 3. It is a quasi-isomorphism because [lem-weil-tower-category-levelwise-abelian] detects exactness levelwise and [lem-weil-strict-roos-comparison] makes $\\mathsf R_n$ a functor on the derived category of strict towers. Compose with the interchange of step 4 and $\\mathsf R_j(\\gamma_j^{-1})$ from step 5. This gives an isomorphism $H_0\\to\\mathsf R_j(H_0\\otimes L_j)$. To identify this map, the first arrow puts every $j$-Roos degree in $q=0$ and every Koszul degree in $b=0$. The interchange sign there is $(-1)^{p\\cdot0}=1$; $\\gamma_j^{-1}$ then sends the component to $h\\otimes1$. Thus the composite has product component $(h\\mapsto h\\otimes1)_j$ and zero shifted $j$-product component. It is exactly the specified Koszul completion unit of $H$, and its $j$th projection is the degree-zero inclusion $H_0\\to H_0\\otimes L_j$. This argument never forms a common exponent for the $Q_n$.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Completeness sentence: naturality and identification of the completion unit under double-product interchange"
+   }
+  },
+  {
+   "text": "By [lem-sp-ell-coefficient-fiber], multiplication by $\\pi^j$ on $R$ is injective, $R/\\pi^jR=(O/\\pi^j)_T=:B_j$, and the augmented $L_j\\to B_j$ is a finite free K-flat resolution. Choose one flat-term K-flat resolution $f:P\\to H_0$ by [lem-pc-kflat-resolution]. The map $P\\otimes L_j\\to H_0\\otimes L_j$ is a quasi-isomorphism by [lem-pur-kflat-tensor-quasiiso-independent]. Also $P\\otimes L_j\\to P\\otimes B_j$ is a quasi-isomorphism: the cone of $L_j\\to B_j$ is acyclic by [lem-pur-quasi-iso-cone-acyclic], tensoring it with $P$ is acyclic by [def-pc-kflat-complex], and [lem-pc-tensor-mapping-cone-iso] identifies this with the cone of the tensor map. Here the interchange $x\\otimes y\\mapsto(-1)^{ab}y\\otimes x$ in degrees $(a,b)$ is a chain isomorphism by the differential in [def-pc-tensor-complex-sheaves], so the K-flat test applies with $P$ on either side. Finally [lem-pur-derived-change-of-rings] identifies $P\\otimes B_j$ with the scalar extension of $H$, and [def-pc-sheaf-restrict-scalars] regards its underlying complex as an $R$-complex. The span $H_0\\otimes L_j\\leftarrow P\\otimes L_j\\to\\operatorname{Res}(P\\otimes B_j)$ therefore gives the claimed isomorphism with restricted derived reduction for every $j$.",
+   "uses": [
+    "lem-sp-ell-coefficient-fiber",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-mapping-cone-iso",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YL (section-flat), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change); regular coefficient resolution as in the blueprint coefficient calculation"
+   }
+  },
+  {
+   "text": "Use the same $P$ for every $j$. The augmentations $L_j\\to B_j$ commute with $(\\pi,1)$ and quotient reduction, and both arrows in the span in step 7 commute with them. The two spans are therefore levelwise quasi-isomorphisms of entire strict towers, so [lem-weil-strict-roos-comparison] gives the claimed derived-limit comparison. The square whose top map is $P\\to P\\otimes L_j$, $p\\mapsto p\\otimes1$, whose bottom map is $P\\to P\\otimes B_j$, $p\\mapsto p\\otimes\\overline1$, and whose right map is tensor augmentation commutes literally. Together with $f$, this identifies the $j$th projection of the unit of step 6 with the canonical quotient reduction map, rather than an arbitrary morphism to an isomorphic reduction object. The inclusion and augmentation formulas are those of [def-pur-principal-koszul-quotient-towers], in the right-tensor convention; since $1$ has degree zero its symmetry contributes no sign.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "def-pur-principal-koszul-quotient-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E (lemma-derived-completion-koszul), principal Koszul and quotient augmentations; Stacks sites-cohomology.tex Tag 0941 for strict-tower naturality"
+   }
+  },
+  {
+   "text": "The strict quotient-reduction tower has its natural distinguished Roos triangle by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Transport that triangle along the completion-unit isomorphism of steps 6--8. Its first map is $H\\to\\prod_j^D\\operatorname{Res}(H\\otimes_R^LB_j)$ with exactly the quotient-reduction components just identified; the second remains $1-s$. This is the Roos-triangle condition in [def-weil-derived-complete], and proves the final completeness assertion.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-derived-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.5.2 and Lemma 3.5.7 proof, completeness of the total limit; distinguished-triangle convention of def-weil-derived-complete"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-weil-derived-complete",
+  "lem-pc-kflat-resolution",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sp-ell-coefficient-fiber",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Completeness sentence, expanded using Bhatt-Scholze Lemmas 3.4.12 and 3.5.7 and explicit signed Roos models; not an appeal to normalized reconstruction"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -117,10 +255,108 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: the returned declarations concern ordinary adic modules, local cohomology, general fractions or ordinary limits; none supplies this sheaf-coefficient statement and its specified comparison maps."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|derived.complete|Koszul|Roos",
+   "results": {
+    "subdirectory": "Algebra/Homology",
+    "count": 1,
+    "hits": [
+     "Mathlib/Algebra/Homology/LocalCohomology.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits are ordinary adic completion, local cohomology, ordinary complex limits or general localization; none states the arbitrary power-torsion sheaf-complex theorem with these strict completion units."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AdicCompletion\"",
+   "results": {
+    "subdirectory": "",
+    "count": 12,
+    "hits": [
+     "AdicCompletion",
+     "AdicCompletion.AdicCauchySequence",
+     "AdicCompletion.IsAdicCauchy",
+     "AdicCompletion.instAdd",
+     "AdicCompletion.instAddCommGroup",
+     "AdicCompletion.instNeg",
+     "AdicCompletion.instSub",
+     "AdicCompletion.instZero"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits are ordinary adic completion, local cohomology, ordinary complex limits or general localization; none states the arbitrary power-torsion sheaf-complex theorem with these strict completion units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An inverse limit of unbounded complexes of sheaves individually annihilated by powers of a regular element is derived complete with its canonical Koszul completion unit",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "localCohomology.diagram",
+     "localCohomology.ofDiagram",
+     "localCohomology",
+     "BDeRhamPlus",
+     "localCohomology.ofSelfLERadical",
+     "IsAdicComplete",
+     "AdicCompletion.map_exact",
+     "CondensedMod.ofSheafProfinite"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits are ordinary adic completion, local cohomology, ordinary complex limits or general localization; none states the arbitrary power-torsion sheaf-complex theorem with these strict completion units."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of inverse limits of power torsion sheaf complexes and commuting two homotopy inverse limits",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomologicalComplex.instHasLimit",
+     "AdicCompletion",
+     "HomologicalComplex.instHasLimitsOfShape",
+     "instHasLimitsOfShapeCondensed",
+     "HomologicalComplex.instHasFiniteLimits",
+     "SheafOfModules.hasLimit",
+     "InverseSystem.invLimEquiv",
+     "HomologicalComplexUpToQuasiIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits are ordinary adic completion, local cohomology, ordinary complex limits or general localization; none states the arbitrary power-torsion sheaf-complex theorem with these strict completion units."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical map from a complex annihilated by a power of pi to the homotopy inverse limit of its tensor Koszul complexes is a quasi isomorphism",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "CochainComplex.cm5b.instQuasiIsoIntP",
+     "CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'",
+     "Rep.standardComplex.instQuasiIsoNatεToSingle₀",
+     "Rep.standardComplex.quasiIso_forget₂_εToSingle₀",
+     "HomologicalComplexUpToQuasiIso.Qh_inverts_quasiIso",
+     "HomotopyCategory.quasiIso_eq_quasiIso_map_quotient",
+     "HomotopyCategory.quasiIso_eq_subcategoryAcyclic_W",
+     "DerivedCategory.isIso_Q_map_iff_quasiIso"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: hits are ordinary adic completion, local cohomology, ordinary complex limits or general localization; none states the arbitrary power-torsion sheaf-complex theorem with these strict completion units."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-sp-tower",
@@ -137,5 +373,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-power-torsion-sheaf-limit-complete",
+  "worker": "stage1",
+  "summary": "Nine steps prove levelwise power-torsion completeness by a pro-zero quotient tower, compute the signed double-Roos interchange and finite-free tensor comparison, and identify the actual Koszul and quotient units on one K-flat model. No common exponent, normalization, constructibility or boundedness is used. No new nodes.",
+  "blueprint": "Expands the sk-lem-sp-tower proof sentence: The complex C is derived complete as a limit of complexes killed by powers of ell. The regular uniformizer and quotient calculation realizes its preceding reduction-as-cone sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Exact countable products of modules over the actual completed sheaf R, needed to compute all strict limits by termwise Roos models. No statement of the reconstruction unit supplies this general-purpose fact."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "The generic unbounded exact-product comparison with total derived inverse limit, including its normalization on strict augmentations. No statement of the reconstruction unit supplies this general-purpose fact."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Levelwise exactness in the abelian strict-tower category, needed for the quotient sequence and levelwise quasi-isomorphisms. No statement of the reconstruction unit supplies this general-purpose fact."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "The generic distinguished triangle of a short exact sequence, applied to complexes in the strict-tower category. No statement of the reconstruction unit supplies this general-purpose fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "The exact total derived inverse-limit functor, pro-zero criterion, and functorial Roos triangles; the unit needs these foundations rather than normalized reconstruction. No statement of the reconstruction unit supplies this general-purpose fact."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "An unbounded flat-term K-flat resolution on the ringed site, used uniformly for all quotient levels. No statement of the reconstruction unit supplies this general-purpose fact."
+   },
+   {
+    "node": "lem-pur-kflat-tensor-quasiiso-independent",
+    "why": "Tensoring a quasi-isomorphism with the supplied K-flat L_j preserves quasi-isomorphisms, in independent site/coefficient universes. No statement of the reconstruction unit supplies this general-purpose fact."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "The generic equivalence between a quasi-isomorphism and an acyclic cone. No statement of the reconstruction unit supplies this general-purpose fact."
+   },
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "The generic tensor/cone isomorphism, used to apply K-flatness to the quotient augmentation. No statement of the reconstruction unit supplies this general-purpose fact."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "The generic unbounded K-flat computation of scalar extension to the finite quotient. No statement of the reconstruction unit supplies this general-purpose fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-7f722289f",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-7f722289f (reviewer sub-agent of L); spot-checked: PASS. I read and recomputed all nine steps. There are no new nodes, the statement is unchanged, and there is no cycle. No repair note applies and no other group has split the item, so the re-split rule is out. No SGA is cited. Step 2: the tensor differential d(x,y)=(dx+(-1)^{k+1}π^j y,dy) and the quotient sign y↦(-1)^k y onto Q[1] are both correct. Step 3: Z_{j+r}→Z_j is π^r=0, and with the mapping-cone criterion of lem-weil-pbc-ringed-strict-tower-homotopy-limit Rlim of the inclusion is an isomorphism. For the constant tower, the section z_j=-Σ_{i<j}y_i checks out and the diagonal map is a quasi-isomorphism. The augmentation clause of lem-weil-strict-roos-comparison then identifies the unit, using only each level's own r_n. Step 4: the (-1)^{pq} interchange matches the n-, j- and internal terms of the differential. Step 5: the differentials of H_0⊗L_j and of the n-Roos model of Q_n⊗L_j agree exactly. Step 6 gives the unit with components h⊗1 and zero shift. Steps 7-8: the K-flat test is applied with the K-flat factor in the second variable, and the cone/swap argument is valid. With q=f, the composite P→P⊗B_j is exactly c_n=[γ_n][q]^{-1} of def-weil-integral-reduction-tower. Step 9 is the 'Equivalently' clause of def-weil-derived-complete. Duplicate search: lem-weil-pbc-torsion-limit-sheaf-completeness has constant Noetherian coefficients and bounded complexes, and lem-pur-regular-quotient-completion-unit and lem-pur-roos-intrinsic-completeness-equivalence are equivalences of completeness notions; none duplicates the item. The declared tool_uses (products, Roos, tower, triangle and K-flat foundations) are generic black boxes and are accepted. Advisory: def-weil-derived-complete carries the convention ℓ≠p, and the item's last clause is scoped to that convention."
  }
 }
