@@ -1,0 +1,130 @@
+{
+ "id": "def-pur-principal-cone-tower",
+ "kind": "definition",
+ "title": "Augmented positive-power cone tower of a chain endomorphism",
+ "status": "split",
+ "statement": "Let A be an abelian category with countable products and P a cochain complex. For an endomorphism μ of P define C_n=Cone(μ^(n+1)), with adjacent square (μ,1), hence transition C_(n+1)→C_n. The degree-zero inclusions P→C_n form a compatible augmentation. Put Λ_μ(P)=Cone(1-shift:∏C_n→∏C_n)[-1], and define P→Λ_μ(P) by the product of inclusions and zero homotopy. These are actual chain constructions; no regularity or flatness is assumed.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites-cohomology.tex Tag 0941 for the normalized strict Roos model"
+ },
+ "proof": [
+  {
+   "text": "The endomorphism power recursion proves that (μ,1) is a commuting square. Functor.ofOpSequence gives the tower. Cone map formulas show that the target inclusions are compatible.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "After every product projection the augmentation followed by 1-shift is the difference of equal compatible inclusions, so is zero. The mapping-cocone lift with zero homotopy defines the normalized unit.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Singleton Koszul completion and its strict augmented cone model, specialized without identifying site and coefficient universes."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A principal scalar cone tower computes the normalized derived completion and its local vanishing criterion on a ringed site",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData fields and ModuleCat.tilde/structure-sheaf constructions; none states a cone-tower completion or its normalized unit criterion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"IsIso\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "principal.*[Cc]omplet|[Cc]omplet.*principal|mappingCone.*[Ll]imit",
+   "results": "2 Mathlib hits: IsPrincipalIdealRing for adicCompletionIntegers and isComplete_iff_ultrafilter. Source/Sheaf search found the existing ringed reflector and regular-quotient criterion, whose SmallCategory/coefficient universes coincide, and PrincipalKoszulStrictReplacement, whose tensor model differs from the concrete scalar cones.",
+   "date": "2026-10-21",
+   "verdict": "no matching concrete independent-universe statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A chain complex with an endomorphism has a tower of mapping cones of its positive powers, with transitions given by the endomorphism and identity and a compatible canonical augmentation",
+   "results": "8 hits: CochainComplex.mappingCone.map_id, CochainComplex.mappingCone, CochainComplex.mappingConeCompTriangle, CochainComplex.mappingCone.id, CochainComplex.mappingCone.shiftIso, CochainComplex.mappingCone.map_comp, CochainComplex.mappingCone.liftCochain, ChainComplex.augment. These are generic mapping-cone and augmentation APIs, not a compatible power-cone tower with its product unit. The construction uses those generic APIs.",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete statement"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RoosIntrinsicCompletenessEquivalence",
+  "date": "2026-10-21",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+   "place": "Principal scalar-cone subargument of the five-way equivalence",
+   "via": [
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.PrincipalConeTower",
+  "file": "lean/Sheaf/Algebra/Homology/PrincipalConeTower.lean",
+  "declaration": "CochainComplex.PrincipalCone.unit",
+  "statement": "def unit : P ⟶ completion μ",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-21",
+  "declarations": [
+   "CochainComplex.PrincipalCone.level",
+   "CochainComplex.PrincipalCone.square",
+   "CochainComplex.PrincipalCone.step",
+   "CochainComplex.PrincipalCone.tower",
+   "CochainComplex.PrincipalCone.compatible",
+   "CochainComplex.PrincipalCone.productUnit",
+   "CochainComplex.PrincipalCone.oneSubShift",
+   "CochainComplex.PrincipalCone.productUnit_comp",
+   "CochainComplex.PrincipalCone.completion",
+   "CochainComplex.PrincipalCone.unit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261021T225104-L-3766544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261021T225104-L-3766544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

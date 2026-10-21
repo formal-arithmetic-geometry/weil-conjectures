@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-integral-principal-cone-local-criterion",
+ "kind": "statement",
+ "title": "Local vanishing criterion for the independent-universe principal cone completion",
+ "status": "split",
+ "statement": "On the actual small pro-etale site of a scheme T, use the completed integral coefficient ring R and its actual slice restrictions. Let σ be any natural global section and μ its scalar chain endomorphism on a complex P. For K≅Q(P), the cone completion Λ_μ(P) is locally derived (σ)-complete. Moreover K is locally derived (σ)-complete if and only if the specified map K→Q(Λ_μ(P)), induced by the degree-zero cone inclusions and zero homotopy, is invertible. Local completeness means vanishing of RHom(R_U[1/s],K|U) for every U and every section on its slice that is locally divisible by σ on a covering sieve. Site, coefficient and localization sizes are independent. No K-flatness, regularity or boundedness is required.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-principal-cone-tower",
+  "def-pur-integral-derived-operations",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-site-derived-restriction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites-cohomology.tex Tag 0941 for the normalized strict Roos model"
+ },
+ "proof": [
+  {
+   "text": "Take a small model of the essentially small ringed site in the coefficient universe. Exact restriction is an equivalence of module categories; its induced derived equivalence preserves the scalar, products, cones, localizations and slice RHom tests.",
+   "uses": [
+    "lem-weil-pbc-ringed-equivalence-slices",
+    "lem-weil-pbc-ringed-equivalence-local-tests"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ringed Koszul completion reflector to the singleton σ and the image ideal of multiplication by σ. The negative singleton Koszul tensor complex identifies with Cone(μ^(n+1)), with (μ,1) transitions and the given degree-zero augmentation. Exact countable products identify its derived limit with the specified mapping cocone.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-proetale-countable-products-exact",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideal image consists of sections locally divisible by σ; this is exactly the covering-sieve condition on every slice. The reflector gives output completeness and invertibility of its specified unit exactly for complete inputs. Transport these statements and the unit equation back along the equivalence and along Q(P)≅K. The same argument includes σ=0 and P=0.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-equivalence-slices",
+  "lem-weil-pbc-ringed-equivalence-local-tests",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-proetale-countable-products-exact",
+  "def-weil-strict-roos-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Singleton Koszul completion and its strict augmented cone model, specialized without identifying site and coefficient universes."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A principal scalar cone tower computes the normalized derived completion and its local vanishing criterion on a ringed site",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData fields and ModuleCat.tilde/structure-sheaf constructions; none states a cone-tower completion or its normalized unit criterion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"IsIso\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "principal.*[Cc]omplet|[Cc]omplet.*principal|mappingCone.*[Ll]imit",
+   "results": "2 Mathlib hits: IsPrincipalIdealRing for adicCompletionIntegers and isComplete_iff_ultrafilter. Source/Sheaf search found the existing ringed reflector and regular-quotient criterion, whose SmallCategory/coefficient universes coincide, and PrincipalKoszulStrictReplacement, whose tensor model differs from the concrete scalar cones.",
+   "date": "2026-10-21",
+   "verdict": "no matching concrete independent-universe statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cocone of one minus shift on products of cones of powers of a scalar is derived complete, and its canonical unit is invertible exactly when local internal Hom from scalar localizations vanishes",
+   "results": "8 hits: CategoryTheory.Localization.HasProductsOfShapeAux.isLimitMapCone, CochainComplex.mappingCone.shiftIso, CategoryTheory.Functor.mapCoconeMapCocone_inv_hom, CategoryTheory.Limits.Cocones.eta, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv, CategoryTheory.Limits.CoconeMorphism.hom_inv_id, CategoryTheory.Limits.instIsIsoHomInvCocone, CategoryTheory.Limits.IsColimit.OfNatIso.coconeOfHom_homOfCocone. These compare generic cocones and localization products; none is a scalar-completion or local-RHom vanishing criterion.",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete statement"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RoosIntrinsicCompletenessEquivalence",
+  "date": "2026-10-21",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+   "place": "Principal scalar-cone subargument of the five-way equivalence",
+   "via": [
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPrincipalConeLocalCriterion",
+  "file": "lean/Sheaf/Paper/IntegralPrincipalConeLocalCriterion.lean",
+  "declaration": "WeilConjectures.IntegralPrincipalCone.localCriterion",
+  "statement": "theorem localCriterion\n    (σ : ∀ U : T.ProEtᵒᵖ, (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)\n    (_hσ : ∀ {U V : T.ProEtᵒᵖ} (f : U ⟶ V),\n      (completedIntegralCoefficientSheafUnrestricted l E T).obj.map f (σ U) = σ V)\n    (P : IntegralOnSlice.Cx l E T none) (μ : End P)\n    (_hμ : ∀ (q : ℤ) (U : T.ProEtᵒᵖ) (x : (P.X q).val.obj U),\n      (μ.f q).val.app U x = σ U • x)\n    (K : IntegralOnSlice.D l E T none) (e : DerivedCategory.Q.obj P ≅ K) :\n    locallyComplete l E T σ (DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion μ)) ∧\n      (locallyComplete l E T σ K ↔\n        IsIso (e.inv ≫ DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ)))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-21",
+  "declarations": [
+   "WeilConjectures.IntegralPrincipalCone.localTest",
+   "WeilConjectures.IntegralPrincipalCone.locallyComplete",
+   "WeilConjectures.IntegralPrincipalCone.localCriterion"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261021T225104-L-3766544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261021T225104-L-3766544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

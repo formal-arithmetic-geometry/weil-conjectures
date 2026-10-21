@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-integral-principal-cone-quotient-augmentation",
+ "kind": "statement",
+ "title": "Normalized levelwise principal-cone augmentation to actual integral quotients",
+ "status": "split",
+ "statement": "For the actual completed integral coefficient ring on the pro-etale site of a scheme T, let P be any K-flat cochain complex and μ the chain endomorphism acting by the actual constant uniformizer. There are maps a_n:Cone(μ^(n+1))→Res_n(P tensor R_n) that are quasi-isomorphisms, commute strictly with the adjacent (μ,1) cone and actual quotient transitions, and whose composites with the unshifted cone inclusions are exactly the specified x↦1 tensor x quotient augmentations. Site and coefficient universes are independent; n=0 denotes the first positive power and individual terms of P need not be flat.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-principal-cone-tower",
+  "def-pur-integral-derived-operations",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0999, 099B and 0A0E; sites-cohomology.tex Tag 0941 for the normalized strict Roos model"
+ },
+ "proof": [
+  {
+   "text": "The completed_exact theorem for the actual completed projection gives its short exact principal-quotient sequence. Equality of sheaf morphisms on sections identifies the scalar for the positive uniformizer power and the ring-map projection with those in the regular-quotient cone interface.",
+   "uses": [
+    "lem-a1-principal-koszul-strict-replacement",
+    "def-sp-completed-uniformizer-section"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the existing normalized cochain change-of-rings model at each quotient. Its object and morphism equations prove equality of its ordinary extension functor with IntegralOnSlice.reduction. Induction on powers and linearity identify the chain scalar with the positive power of the given endomorphism. The normalized regular-quotient augmentation is a quasi-isomorphism on the K-flat complex. Transport it through the scalar equality and the equality of extension functors.",
+   "uses": [
+    "def-sfb-derived-change-of-rings-cochain-model",
+    "lem-cbc-regular-quotient-cone-augmentation",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The section normalization of the ordinary coefficient unit, together with the defining generator formula of IntegralOnSlice.augmentation, identifies the transported unit exactly. Thus the transported augmentation in every degree is cone.snd followed by the actual quotient augmentation. The cone summand formulas and naturality of that augmentation prove the adjacent transition equation and the inclusion equation. These calculations also cover the zero complex and the first positive power.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-pur-principal-cone-tower"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-principal-koszul-strict-replacement",
+  "def-sp-completed-uniformizer-section",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "lem-cbc-regular-quotient-cone-augmentation",
+  "def-pur-integral-derived-operations",
+  "def-pur-principal-cone-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0A0E and 093M, using the existing normalized regular-quotient cone augmentation and the actual quotient functor normalizations."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A principal scalar cone tower computes the normalized derived completion and its local vanishing criterion on a ringed site",
+   "results": "8 hits: SheafOfModules.LocalGeneratorsData fields and ModuleCat.tilde/structure-sheaf constructions; none states a cone-tower completion or its normalized unit criterion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"IsIso\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "principal.*[Cc]omplet|[Cc]omplet.*principal|mappingCone.*[Ll]imit",
+   "results": "2 Mathlib hits: IsPrincipalIdealRing for adicCompletionIntegers and isComplete_iff_ultrafilter. Source/Sheaf search found the existing ringed reflector and regular-quotient criterion, whose SmallCategory/coefficient universes coincide, and PrincipalKoszulStrictReplacement, whose tensor model differs from the concrete scalar cones.",
+   "date": "2026-10-21",
+   "verdict": "no matching concrete independent-universe statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a regular principal quotient, the mapping cone of scalar multiplication on a K-flat complex maps quasi-isomorphically to its quotient extension, compatibly with powers and quotient tower augmentations",
+   "results": "8 hits: CochainComplex.mappingCone, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.quasiIso_descShortComplex, HomologicalComplex.instIsMultiplicativeQuasiIso, CochainComplex.cm5b.instQuasiIsoIntP, ModuleCat.smulShortComplex, Submodule.Quotient.instSMul', ModuleCat.smulShortComplex_g. The ordinary module scalar short complex and generic cone quasi-isomorphism are ingredients, but do not state the sheaf K-flat quotient augmentation with its two strict tower equations. The proof uses the existing regular-quotient interface built from them.",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete statement"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RoosIntrinsicCompletenessEquivalence",
+  "date": "2026-10-21",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+   "place": "Principal scalar-cone subargument of the five-way equivalence",
+   "via": [
+    "lem-pur-roos-intrinsic-completeness-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralPrincipalConeQuotientAugmentation",
+  "file": "lean/Sheaf/Paper/IntegralPrincipalConeQuotientAugmentation.lean",
+  "declaration": "WeilConjectures.integralPrincipalConeQuotientAugmentation",
+  "statement": "theorem integralPrincipalConeQuotientAugmentation\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : AlgebraicGeometry.Scheme.{t})\n    (P : IntegralOnSlice.Cx l E T none)\n    (_hP : CochainComplex.IsKFlatIndependentCoefficients\n      (R := IntegralOnSlice.ring l E T none) P)\n    (μ : End P)\n    (_hμ : ∀ (q : ℤ) (U : T.ProEtᵒᵖ) (x : (P.X q).val.obj U),\n      (μ.f q).val.app U x =\n        (integralConstantToCompletionOfUniverses l E T).hom.app U\n          ((toSheafify (AlgebraicGeometry.Scheme.ProEt.topology T)\n            ((Functor.const T.ProEtᵒᵖ).obj\n              (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))))).app U\n                (ULift.up (Padic.coefficientExtensionUniformizer l E))) • x) :\n    ∃ a : ∀ n : ℕ, CochainComplex.PrincipalCone.level μ n ⟶\n        ((IntegralOnSlice.tower l E T none).obj P).obj (op n),\n      (∀ n, QuasiIso (a n)) ∧\n      (∀ n, CochainComplex.PrincipalCone.step μ n ≫ a n =\n        a (n + 1) ≫ integralOperationsTowerStep\n          ((IntegralOnSlice.tower l E T none).obj P) n) ∧\n      (∀ n, CochainComplex.mappingCone.inr (μ ^ (n + 1)) ≫ a n =\n        ((IntegralOnSlice.augmentation l E T none).app P).app (op n))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261021T225104-L-3766544",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261021T225104-L-3766544",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,85 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
+module
+
+public import Sheaf.CategoryTheory.StrictRoosModel
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.CategoryTheory.Functor.OfSequence
+
+/-! # The augmented tower of powers of a chain endomorphism
+
+Source: Stacks Tags 0A0E and 0941.
+(blueprint: def-pur-principal-cone-tower) -/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+universe v u
+open CategoryTheory CategoryTheory.Limits Opposite
+namespace CochainComplex.PrincipalCone
+
+variable {A : Type u} [Category.{v} A] [Abelian A]
+  {P : CochainComplex A ℤ} (μ : End P)
+
+/-- The positive-power cone at level n, representing exponent n+1.
+Source: Stacks 0A0E (blueprint: def-pur-principal-cone-tower). -/
+def level (n : ℕ) := mappingCone (μ ^ (n + 1))
+
+/-- The square (μ,1) between consecutive powers commutes.
+Source: Stacks 0A0E (blueprint: def-pur-principal-cone-tower).
+Proof: the power recursion in the endomorphism monoid is composition. -/
+theorem square (n : ℕ) : (μ ^ (n + 1 + 1)) ≫ 𝟙 P = μ ≫ (μ ^ (n + 1)) := by
+  simpa only [Category.comp_id, End.mul_def] using pow_succ μ (n + 1)
+
+/-- The transition acts by μ on the source and by 1 on the target.
+Source: Stacks 0A0E (blueprint: def-pur-principal-cone-tower). -/
+def step (n : ℕ) : level μ (n + 1) ⟶ level μ n :=
+  mappingCone.map _ _ μ (𝟙 P) (square μ n)
+
+/-- The inverse tower, indexed by positive powers.
+Source: Stacks 0A0E (blueprint: def-pur-principal-cone-tower). -/
+def tower : ℕᵒᵖ ⥤ CochainComplex A ℤ := CategoryTheory.Functor.ofOpSequence (step μ)
+
+/-- The degree-zero maps respect the transitions.
+Source: Stacks 0A0E (blueprint: def-pur-principal-cone-tower).
+Proof: the target map of each cone square is the identity. -/
+theorem compatible (n : ℕ) :
+    mappingCone.inr (μ ^ (n + 1 + 1)) ≫ step μ n =
+      mappingCone.inr (μ ^ (n + 1)) := by
+  simp [step, mappingCone.map]
+
+variable [HasCountableProducts A]
+
+/-- The product of degree-zero inclusions.
+Source: Stacks 0941 (blueprint: def-pur-principal-cone-tower). -/
+def productUnit : P ⟶ ∏ᶜ (fun n : ℕ ↦ (tower μ).obj (op n)) :=
+  Pi.lift (fun n ↦ mappingCone.inr (μ ^ (n + 1)))
+
+/-- One minus the transition shift.
+Source: Stacks 0941 (blueprint: def-pur-principal-cone-tower). -/
+def oneSubShift := towerTransitionEndomorphism
+  (K := fun n : ℕ ↦ (tower μ).obj (op n)) (step μ)
+
+/-- Compatibility annihilates one minus the shift.
+Source: Stacks 0941 (blueprint: def-pur-principal-cone-tower).
+Proof: each product projection is the difference of consecutive compatible inclusions. -/
+theorem productUnit_comp : productUnit μ ≫ oneSubShift μ = 0 := by
+  apply Pi.hom_ext
+  intro n
+  simp only [oneSubShift, towerTransitionEndomorphism, Preadditive.comp_sub,
+    Category.comp_id, Preadditive.sub_comp, towerProductShift, Category.assoc,
+    Pi.lift_π, productUnit, Pi.lift_π_assoc, compatible, sub_self, zero_comp]
+
+/-- The strict Roos completion of the cone tower.
+Source: Stacks 0941 (blueprint: def-pur-principal-cone-tower). -/
+def completion := mappingCocone (oneSubShift μ)
+
+/-- The zero homotopy supplies the normalized Roos augmentation.
+Source: Stacks 0941 (blueprint: def-pur-principal-cone-tower). -/
+def unit : P ⟶ completion μ :=
+  mappingCocone.lift _ (productUnit μ) 0 (by simp [productUnit_comp])
+
+end CochainComplex.PrincipalCone

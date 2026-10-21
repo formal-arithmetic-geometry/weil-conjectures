@@ -5,8 +5,6 @@ Authors: SHEAF group NL
 -/
 module
 
-public import Sheaf.Paper.IntrinsicCompletionCompleted
-public import Sheaf.Paper.KoszulReconstruction
 public import Sheaf.CategoryTheory.StrictRoosModel
 public import Mathlib.CategoryTheory.Endomorphism
 public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
@@ -22,6 +20,13 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.CategoryTheory.RingedSectionLocalizationOfUniverses
 public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import Mathlib.Data.List.TFAE
+import all Sheaf.Paper.IntegralDerivedOperationsOnSlices
+import all Sheaf.Paper.IntegralReductionTowerWellDefined
+import Sheaf.Paper.IntegralPrincipalConeLocalCriterion
+import Sheaf.Paper.IntegralPrincipalConeQuotientComparison
+import Sheaf.Algebra.Homology.SitePerfectModelRestriction
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
 
 /-! # Roos and intrinsic completeness for completed local-field coefficients
 
@@ -36,7 +41,7 @@ second condition tests every section of the sheaf ideal, not only the constant t
 The representative is K-flat with flat terms. The three displayed units retain their
 specified quotient, degree-zero Koszul, and explicit (u,0) normalizations.
 The integral one-generator chain models and their normalized units are defined here;
-the general intrinsic-completion and reconstruction interfaces remain imported intact.
+the proof uses these concrete integral models throughout.
 -/
 
 @[expose] public noncomputable section
@@ -45,7 +50,7 @@ set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-universe t u
+universe t u w w'
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
 
@@ -148,8 +153,7 @@ Proof: compose the indicated powers of the same endomorphism. Both sides are its
 theorem integralKoszulStep_square (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :
     (integralKoszulScalar l E T P ^ (n + 1 + 1)) ≫ 𝟙 P =
       integralKoszulScalar l E T P ≫ (integralKoszulScalar l E T P ^ (n + 1)) := by
-  simpa only [Category.comp_id, End.mul_def] using
-    (pow_succ (integralKoszulScalar l E T P) (n + 1))
+  exact CochainComplex.PrincipalCone.square (integralKoszulScalar l E T P) n
 
 /-- The specified transition, multiplication by t in degree -1 and identity in degree 0.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
@@ -172,7 +176,7 @@ theorem integralKoszulUnit_compatible (P : IntegralOnSlice.Cx l E T none) (n : �
     CochainComplex.mappingCone.inr (integralKoszulScalar l E T P ^ (n + 1 + 1)) ≫
         integralKoszulStep l E T P n =
       CochainComplex.mappingCone.inr (integralKoszulScalar l E T P ^ (n + 1)) := by
-  simp [integralKoszulStep, CochainComplex.mappingCone.map]
+  exact CochainComplex.PrincipalCone.compatible (integralKoszulScalar l E T P) n
 
 /-- The product of the degree-zero inclusions.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
@@ -190,12 +194,7 @@ def integralKoszulOneSubShift (P : IntegralOnSlice.Cx l E T none) :=
 
 private theorem integralKoszulProductUnit_comp (P : IntegralOnSlice.Cx l E T none) :
     integralKoszulProductUnit l E T P ≫ integralKoszulOneSubShift l E T P = 0 := by
-  apply Pi.hom_ext
-  intro n
-  simp only [integralKoszulOneSubShift, towerTransitionEndomorphism,
-    Preadditive.comp_sub, Category.comp_id, Preadditive.sub_comp,
-    towerProductShift, Category.assoc, Pi.lift_π, integralKoszulProductUnit,
-    Pi.lift_π_assoc, integralKoszulUnit_compatible, sub_self, zero_comp]
+  exact CochainComplex.PrincipalCone.productUnit_comp (integralKoszulScalar l E T P)
 
 /-- The explicit fiber has differential (dx,(1-s)x-dy), as in the owning node.
 Source: Stacks 0A0E (blueprint: lem-pur-roos-intrinsic-completeness-equivalence). -/
@@ -286,6 +285,346 @@ noncomputable def integralCompletionLocalTest
       (ringedSectionLocalizationOfUniverses (IntegralOnSlice.ring l E T (some U)) s)),
       ringedSiteDerivedRestrictionOfUniverses (IntegralOnSlice.rings l E T none) U K)
 
+section CompletionProof
+
+variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+  [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : AlgebraicGeometry.Scheme.{t})
+
+private def localizationRepresentativeIso
+    {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w'} B]
+    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    {K L : DerivedCategory A} (e : K ≅ L) :
+    DerivedCategory.Q.obj
+        ((F.mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage K)) ≅
+      DerivedCategory.Q.obj
+        ((F.mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage L)) :=
+  (F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage K)).symm ≪≫
+    F.mapDerivedCategory.mapIso
+      (DerivedCategory.Q.objObjPreimageIso K ≪≫ e ≪≫
+        (DerivedCategory.Q.objObjPreimageIso L).symm) ≪≫
+    F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage L)
+
+attribute [local irreducible] localizationRepresentativeIso
+
+private def integralCompletionLocalTest_iso
+    {K L : IntegralOnSlice.D l E T none} (e : K ≅ L) (U : T.ProEt)
+    (s : ((IntegralOnSlice.ring l E T (some U)).obj ⋙ forget CommRingCat).sections) :
+    integralCompletionLocalTest l E T K U s ≅ integralCompletionLocalTest l E T L U s := by
+  letI : HasSheafify (IntegralOnSlice.topology T (some U))
+      CommRingCat.{max u (t + 1)} :=
+    letI : EssentiallySmall.{max u (t + 1)} (IntegralOnSlice.Site T (some U)) :=
+      essentiallySmallSelf _
+    hasSheafifyEssentiallySmallSite _ _
+  letI := HasDerivedCategory.standard
+    (SheafOfModules.{max u (t + 1)} ((IntegralOnSlice.rings l E T none).over U))
+  let F := SheafOfModules.overFunctor.{max u (t + 1)}
+    (IntegralOnSlice.rings l E T none) U
+  letI : F.Additive := inferInstance
+  letI : PreservesFiniteLimits F :=
+    (SheafOfModules.overFunctor_exact_ofUniverses (IntegralOnSlice.rings l E T none) U).1
+  letI : PreservesFiniteColimits F :=
+    (SheafOfModules.overFunctor_exact_ofUniverses (IntegralOnSlice.rings l E T none) U).2
+  let er := localizationRepresentativeIso F e
+  exact (IntegralOnSlice.hom l E T (some U)).mapIso (Iso.prod (Iso.refl _) er)
+
+attribute [local irreducible] integralCompletionLocalTest_iso
+
+private theorem integralLocallyComplete_iso
+    (σ : ∀ U : T.ProEtᵒᵖ, (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)
+    {K L : IntegralOnSlice.D l E T none} (e : K ≅ L)
+    (h : IntegralPrincipalCone.locallyComplete l E T σ K) :
+    IntegralPrincipalCone.locallyComplete l E T σ L := by
+  intro U s hs
+  exact (integralCompletionLocalTest_iso l E T e U s).isZero_iff.mp (h U s hs)
+
+private theorem integralScalar_natural {U V : T.ProEtᵒᵖ} (g : U ⟶ V) :
+    (completedIntegralCoefficientSheafUnrestricted l E T).obj.map g
+        (integralCompletionScalarValue l E T U) = integralCompletionScalarValue l E T V := by
+  let α := Functor.whiskerRight
+    (toSheafify (AlgebraicGeometry.Scheme.ProEt.topology T)
+      ((Functor.const T.ProEtᵒᵖ).obj
+        (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E)))))
+    (forget₂ CommRingCat RingCat) ≫ (integralConstantToCompletionOfUniverses l E T).hom
+  exact (CategoryTheory.congr_fun (α.naturality g)
+    (ULift.up (Padic.coefficientExtensionUniformizer l E))).symm
+
+private theorem signedFiberUnit {A : Type*} [Category* A] [Abelian A]
+    [HasDerivedCategory A] {P B : CochainComplex A ℤ} (f : B ⟶ B)
+    (a : P ⟶ B) (ha : a ≫ f = 0)
+    (hpos : CochainComplex.HomComplex.δ (-1) 0
+        (0 : CochainComplex.HomComplex.Cochain P B (-1)) +
+      CochainComplex.HomComplex.Cochain.ofHom (a ≫ f) = 0)
+    (hneg : CochainComplex.HomComplex.δ (-1) 0
+        (0 : CochainComplex.HomComplex.Cochain P B (-1)) +
+      CochainComplex.HomComplex.Cochain.ofHom (a ≫ (-f)) = 0) :
+    IsIso (DerivedCategory.Q.map (CochainComplex.mappingCocone.lift f a 0 hpos)) ↔
+      IsIso (DerivedCategory.Q.map (CochainComplex.mappingCocone.lift (-f) a 0 hneg)) := by
+  let c := CochainComplex.mappingCone.map (-f) f (𝟙 B) (-𝟙 B) (by simp)
+  let c' := CochainComplex.mappingCone.map f (-f) (𝟙 B) (-𝟙 B) (by simp)
+  have hc : c ≫ c' = 𝟙 _ := by
+    dsimp only [c, c']
+    rw [← CochainComplex.mappingCone.map_comp]
+    simpa using CochainComplex.mappingCone.map_id (-f)
+  have hc' : c' ≫ c = 𝟙 _ := by
+    dsimp only [c, c']
+    rw [← CochainComplex.mappingCone.map_comp]
+    simpa using CochainComplex.mappingCone.map_id f
+  let e : CochainComplex.mappingCocone (-f) ≅ CochainComplex.mappingCocone f :=
+    (shiftFunctor _ (-1 : ℤ)).mapIso ⟨c, c', hc, hc'⟩
+  have hu : CochainComplex.mappingCocone.lift (-f) a 0 hneg ≫ e.hom =
+      CochainComplex.mappingCocone.lift f a 0 hpos := by
+    simpa only [e, c, Functor.mapIso_hom, Category.id_comp, Category.comp_id] using
+      (completedCoconeLift_natural A (-f) f (𝟙 B) (-𝟙 B) (by simp)
+        (𝟙 P) a a (by simp [ha]) ha (by simp)).symm
+  have huQ := congrArg DerivedCategory.Q.map hu
+  rw [Functor.map_comp] at huQ
+  rw [← huQ]
+  exact ⟨fun h ↦ by
+    have := h
+    exact IsIso.of_isIso_comp_right _ (DerivedCategory.Q.map e.hom), fun h ↦ by
+      have := h
+      infer_instance⟩
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- The strict mapping-cocone model has the actual localized projections.
+Source: Stacks Tag 08TC. Exact products identify both product vertices; mapping the
+mapping-cocone triangle and transporting those vertices gives the required triangle. -/
+private theorem integralStrictRoosTriangle {A : Type*} [Category* A] [Abelian A]
+    [HasDerivedCategory.{w} A] [HasCountableProducts A] [CountableAB4Star A]
+    [HasCountableProducts (DerivedCategory A)]
+    (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) :
+    ∃ δ, IsDerivedLimitTriangle
+      (K := fun n ↦ DerivedCategory.Q.obj (C.obj (op n)))
+      (fun n ↦ DerivedCategory.Q.map (integralOperationsTowerStep C n))
+      (DerivedCategory.Q.obj (integralOperationsRoos C))
+      (Pi.lift (fun n ↦ DerivedCategory.Q.map
+        (CochainComplex.mappingCocone.fst
+          (towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
+            (integralOperationsTowerStep C)) ≫
+            Pi.π (fun n ↦ C.obj (op n)) n))) δ := by
+  dsimp only [integralOperationsRoos]
+  let Q := DerivedCategory.Q (C := A)
+  let P := fun n ↦ C.obj (op n)
+  let D := fun n ↦ Q.obj (P n)
+  obtain ⟨_, hp, _⟩ := derivedCategory_countableProducts_core.{0} A
+  obtain ⟨hlim⟩ := hp ℕ P
+  let : PreservesLimit (Discrete.functor P) Q :=
+    preservesLimit_of_preserves_limit_cone (limit.isLimit _) hlim
+  let e : Q.obj (∏ᶜ P) ≅ ∏ᶜ D := PreservesProduct.iso Q P
+  have he (n : ℕ) : e.hom ≫ Pi.π D n = Q.map (Pi.π P n) := by
+    exact piComparison_comp_π Q P n
+  dsimp only [D] at he
+  let t := towerTransitionEndomorphism (K := P) (integralOperationsTowerStep C)
+  have hmid : Q.map t ≫ e.hom = e.hom ≫
+      towerTransitionEndomorphism (K := D)
+        (fun n ↦ Q.map (integralOperationsTowerStep C n)) := by
+    apply Pi.hom_ext
+    intro n
+    rw [Category.assoc, he, ← Q.map_comp]
+    rw [(towerTransitionEndomorphism_eq_iff (K := P) (integralOperationsTowerStep C) t).mp rfl n]
+    simp only [Functor.map_sub, Functor.map_comp]
+    rw [Category.assoc, (towerTransitionEndomorphism_eq_iff (K := D)
+      (fun n ↦ Q.map (integralOperationsTowerStep C n)) _).mp rfl n]
+    simp only [Preadditive.comp_sub, ← Category.assoc, D, he]
+  let T := Q.mapTriangle.obj (CochainComplex.mappingCocone.triangle t)
+  refine ⟨e.inv ≫ T.mor₃, ?_⟩
+  apply Pretriangulated.isomorphic_distinguished T
+    (DerivedCategory.mappingCocone_triangle_distinguished t)
+  refine Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm ?_ ?_ ?_
+  · change (Pi.lift (fun n ↦ Q.map
+        (CochainComplex.mappingCocone.fst t ≫ Pi.π P n))) ≫ e.inv =
+      𝟙 _ ≫ Q.map (CochainComplex.mappingCocone.fst t)
+    rw [Category.id_comp]
+    apply (cancel_mono e.hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    apply Pi.hom_ext
+    intro n
+    simp only [Category.assoc, he, Pi.lift_π, Functor.map_comp]
+  · change towerTransitionEndomorphism (fun n ↦ Q.map (integralOperationsTowerStep C n)) ≫
+      e.inv = e.inv ≫ Q.map t
+    apply (cancel_mono e.hom).1
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    rw [hmid]
+    simp only [Iso.inv_hom_id_assoc]
+  · change (e.inv ≫ T.mor₃) ≫ (shiftFunctor _ (1 : ℤ)).map (𝟙 _) = e.inv ≫ T.mor₃
+    rw [(shiftFunctor (DerivedCategory A) (1 : ℤ)).map_id T.obj₁, Category.comp_id]
+
+
+private theorem integralRoosIso {C : Type*} [Category* C] [HasZeroObject C]
+    [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [Pretriangulated C] {X : ℕ → C} [HasProduct X]
+    (f : ∀ n, X (n + 1) ⟶ X n) {K L : C}
+    (p : K ⟶ ∏ᶜ X) (q : L ⟶ ∏ᶜ X)
+    (δ : ∏ᶜ X ⟶ K⟦(1 : ℤ)⟧) (ε : ∏ᶜ X ⟶ L⟦(1 : ℤ)⟧)
+    (hp : IsDerivedLimitTriangle f K p δ) (hq : IsDerivedLimitTriangle f L q ε) :
+    Nonempty (K ≅ L) := by
+  let T := Pretriangulated.Triangle.mk p (towerTransitionEndomorphism f) δ
+  let S := Pretriangulated.Triangle.mk q (towerTransitionEndomorphism f) ε
+  let e := Pretriangulated.isoTriangleOfIso₁₂ T.rotate S.rotate
+    ((Pretriangulated.rotate_distinguished_triangle _).mp hp)
+    ((Pretriangulated.rotate_distinguished_triangle _).mp hq)
+    (Iso.refl _) (Iso.refl _) (by simp [T, S])
+  exact ⟨(shiftFunctor C (1 : ℤ)).preimageIso (Pretriangulated.Triangle.π₃.mapIso e)⟩
+
+private theorem integralRoosTransport {C : Type*} [Category* C] [HasZeroObject C]
+    [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive]
+    [Pretriangulated C] {X : ℕ → C} [HasProduct X]
+    (f : ∀ n, X (n + 1) ⟶ X n) {K L : C} (e : K ≅ L)
+    (q : L ⟶ ∏ᶜ X) (δ : ∏ᶜ X ⟶ L⟦(1 : ℤ)⟧)
+    (hq : IsDerivedLimitTriangle f L q δ) :
+    IsDerivedLimitTriangle f K (e.hom ≫ q) (δ ≫ e.inv⟦(1 : ℤ)⟧') := by
+  apply Pretriangulated.isomorphic_distinguished _ hq _
+  refine Pretriangulated.Triangle.isoMk _ _ e (Iso.refl _) (Iso.refl _) ?_ ?_ ?_
+  · simp
+  · simp
+  · simp [← Functor.map_comp]
+
+private theorem integralGlobalUnit (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :
+    ((IntegralOnSlice.augmentation l E T none).app P).app (op n) =
+      unrestrictedTowerUnit l E T P n := by
+  ext i U x
+  exact ((IntegralOnSlice.augmentation_existsUnique l E T none).exists.choose_spec
+    P n i U x).trans (unrestrictedTowerUnit_condition l E T P n i U x).symm
+
+private theorem integralQuotientLocallyComplete
+    (P : IntegralOnSlice.Cx l E T none)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients
+      (R := IntegralOnSlice.ring l E T none) P) :
+    IntegralPrincipalCone.locallyComplete l E T (integralCompletionScalarValue l E T)
+      (DerivedCategory.Q.obj
+        (integralOperationsRoos ((IntegralOnSlice.tower l E T none).obj P))) := by
+  have hμ := (integralKoszulScalar_existsUnique l E T P).exists.choose_spec
+  have hlocal := (IntegralPrincipalCone.localCriterion l E T
+    (integralCompletionScalarValue l E T) (integralScalar_natural l E T)
+    P (integralKoszulScalar l E T P) hμ (DerivedCategory.Q.obj P) (Iso.refl _)).1
+  obtain ⟨c, _⟩ := integralPrincipalConeQuotientComparison l E T P hP
+    (integralKoszulScalar l E T P) hμ
+  exact integralLocallyComplete_iso l E T _ c hlocal
+
+private theorem evaluatedSequence {A B : Type*} [Category* A] [Category* B]
+    (X : ℕ → A ⥤ B) (f : ∀ n, X (n + 1) ⟶ X n) (a : A) :
+    (Functor.ofOpSequence f).flip.obj a =
+      Functor.ofOpSequence (X := fun n ↦ (X n).obj a) (fun n ↦ (f n).app a) := by
+  let F := (Functor.ofOpSequence f).flip.obj a
+  let G := Functor.ofOpSequence (X := fun n ↦ (X n).obj a) (fun n ↦ (f n).app a)
+  let α : F ⟶ G := NatTrans.ofOpSequence (fun n ↦ 𝟙 (G.obj (op n))) (by
+    intro n
+    change (((Functor.ofOpSequence f).map (homOfLE n.le_succ).op).app a) ≫ 𝟙 _ =
+      𝟙 _ ≫ G.map (homOfLE n.le_succ).op
+    simp only [Functor.ofOpSequence_map_homOfLE_succ, G,
+      Category.id_comp, Category.comp_id])
+  have (n : ℕᵒᵖ) : IsIso (α.app n) := by
+    change IsIso (𝟙 _)
+    infer_instance
+  have : IsIso α := NatIso.isIso_of_isIso_app α
+  exact Functor.ext_of_iso (asIso α) (fun _ ↦ rfl) (fun _ ↦ rfl)
+
+private theorem integralGlobalTower
+    (P : IntegralOnSlice.Cx l E T none) :
+    (IntegralOnSlice.tower l E T none).obj P =
+      Functor.ofOpSequence (X := fun n ↦ unrestrictedTowerComplex l E T n P)
+        (fun n ↦ unrestrictedTowerTransition l E T P n) := by
+  rw [IntegralOnSlice.globalTower_eq]
+  exact evaluatedSequence _ _ P
+
+private def integralLegacyComplexTower
+    (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p) (P : IntegralOnSlice.Cx l E T none) :
+    ℕᵒᵖ ⥤ IntegralOnSlice.Cx l E T none :=
+  Functor.ofOpSequence (X := fun n ↦ integralTowerComplex l E T D hl n P)
+    (fun n ↦ integralTowerTransition l E T D hl P n)
+
+private theorem integralLegacyTower_eq
+    (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p) (P : IntegralOnSlice.Cx l E T none) :
+    (IntegralOnSlice.tower l E T none).obj P = integralLegacyComplexTower l E T D hl P := by
+  rw [integralGlobalTower]
+  simp only [integralLegacyComplexTower, integralTowerTransition_eq, integralTowerComplex]
+
+private theorem integralAugmentation_cast
+    (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p) (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :
+    ((IntegralOnSlice.augmentation l E T none).app P).app (op n) ≫
+        eqToHom (congrArg (fun B : ℕᵒᵖ ⥤ IntegralOnSlice.Cx l E T none ↦ B.obj (op n))
+          (integralLegacyTower_eq l E T D hl P)) =
+      integralTowerUnit l E T D hl P n := by
+  rw [integralGlobalUnit, integralTowerUnit_eq]
+  change unrestrictedTowerUnit l E T P n ≫
+    eqToHom (show unrestrictedTowerComplex l E T n P =
+      unrestrictedTowerComplex l E T n P from rfl) = _
+  simp only [eqToHom_refl, Category.comp_id]
+
+private theorem roosProjection_cast {A : Type*} [Category* A] [Abelian A]
+    [HasCountableProducts A] (C D : ℕᵒᵖ ⥤ CochainComplex A ℤ) (h : C = D) (n : ℕ) :
+    eqToHom (congrArg integralOperationsRoos h) ≫
+        (CochainComplex.mappingCocone.fst
+          (towerTransitionEndomorphism (K := fun k ↦ D.obj (op k))
+            (integralOperationsTowerStep D)) ≫ Pi.π (fun k ↦ D.obj (op k)) n) =
+      (CochainComplex.mappingCocone.fst
+          (towerTransitionEndomorphism (K := fun k ↦ C.obj (op k))
+            (integralOperationsTowerStep C)) ≫ Pi.π (fun k ↦ C.obj (op k)) n) ≫
+        eqToHom (congrArg (fun B : ℕᵒᵖ ⥤ CochainComplex A ℤ ↦ B.obj (op n)) h) := by
+  subst D
+  simp
+
+private theorem integralRoosUnit_projection
+    (P : IntegralOnSlice.Cx l E T none) (n : ℕ) :
+    IntegralOnSlice.roosUnit l E T none P ≫
+        (CochainComplex.mappingCocone.fst
+          (towerTransitionEndomorphism
+            (K := fun k ↦ ((IntegralOnSlice.tower l E T none).obj P).obj (op k))
+            (integralOperationsTowerStep ((IntegralOnSlice.tower l E T none).obj P))) ≫
+          Pi.π (fun k ↦ ((IntegralOnSlice.tower l E T none).obj P).obj (op k)) n) =
+      ((IntegralOnSlice.augmentation l E T none).app P).app (op n) := by
+  simp only [IntegralOnSlice.roosUnit, CochainComplex.mappingCocone.lift_fst_assoc,
+    IntegralOnSlice.productAugmentation, Pi.lift_π]
+
+private theorem invMapId_comp {A B : Type*} [Category* A] [Category* B]
+    (F : A ⥤ B) (P : A) {X Y : B} (a : X ⟶ F.obj P) (b : F.obj P ⟶ Y) :
+    a ≫ inv (F.map (𝟙 P)) ≫ b = a ≫ b := by
+  simp only [CategoryTheory.Functor.map_id, IsIso.inv_id, Category.id_comp]
+
+private theorem productLift_transport {A : Type*} [Category* A]
+    {X Y : A} {Z : ℕ → A} [HasProduct Z]
+    (κ : X ⟶ Y) (a : ∀ n, X ⟶ Z n) (b : ∀ n, Y ⟶ Z n)
+    (h : ∀ n, a n = κ ≫ b n) : Pi.lift a = κ ≫ Pi.lift b := by
+  apply Pi.hom_ext
+  intro n
+  simp only [Category.assoc, Pi.lift_π]
+  exact h n
+
+private theorem integralLegacyIdentityLeg
+    (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p)
+    (P : IntegralOnSlice.Cx l E T none)
+    (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
+      (R := completedIntegralCommRingSheaf l E T D hl) (𝟙 P))
+    (K : IntegralOnSlice.D l E T none) (e : DerivedCategory.Q.obj P ≅ K) (n : ℕ) :
+    ((integralReductionTowerCone l E T D hl (𝟙 P) hq).extend e.inv).π.app (op n) =
+      e.inv ≫ DerivedCategory.Q.map (integralTowerUnit l E T D hl P n) := by
+  change e.inv ≫ (inv (DerivedCategory.Q.map (𝟙 P)) ≫
+    DerivedCategory.Q.map (integralTowerUnit l E T D hl P n)) = _
+  exact invMapId_comp _ _ _ _
+
+end CompletionProof
+
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  unrestrictedTowerUnit unrestrictedTowerTransition DerivedCategory.Q
+  HasDerivedCategory.standard scalarReductionExistence scalarReductionDerivedExistence
+  unrestrictedIntegralReductionExistence IntegralOnSlice.reductionWitness
+
+private noncomputable def integralAuxiliaryDatum (p : ℕ) [Fact p.Prime] :
+    FiniteFieldDatum.{0} :=
+  { p := p
+    a := 1
+    q := p
+    prime := Fact.out
+    exponent_pos := le_refl 1
+    cardinality_eq := (pow_one p).symm
+    k₀ := ZMod p
+    card_base := by simp [Nat.card_eq_fintype_card]
+    k := AlgebraicClosure (ZMod p) }
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The five completeness conditions for the specified canonical units are equivalent.
 There is no geometric finiteness or cohomological boundedness assumption.
 
@@ -294,36 +633,28 @@ and Tag 099B, lemma-derived-completion
 (blueprint: lem-pur-roos-intrinsic-completeness-equivalence).
 
 Proof:
-1. Apply lem-weil-pbc-ringed-koszul-completion-reflector to the completed ring and t.
-   Its ideal is tR, so its local vanishing condition, on every slice and every local
-   section, is exactly the second condition. It identifies that condition with the
-   invertibility of the specified Koszul unit, and makes its completion locally complete.
-2. Use def-pur-completed-coefficient-presentation-transport: the projection-normalized
-   coefficient isomorphism identifies the continuous-function and constant-quotient
-   completed rings. Exact restriction along its inverse preserves t, tensor, strict
-   quotient towers, products and their total derived limits. Transport
-   prop-weil-pbc-koszul-reconstruction. The cone model here is the negative one-generator
-   Koszul tensor model. Its unit-preserving comparison identifies (iii) with (v), and
-   shows that the quotient completion is locally complete.
-3. Apply lem-weil-pbc-completed-koszul-quotient-comparison to the single generator t.
-   It identifies the explicit signed product fiber with the strict quotient completion,
-   preserving its (u,0) unit. Relabel positive exponents by n+1 and use the unique
-   unit-compatible comparison between total right derived limits. Thus (iv) and (v)
-   are equivalent. The independent-universe integral interfaces retain these formulas.
-4. The single representative gives a strict quotient augmentation. By
-   def-weil-strict-roos-model and lem-weil-strict-roos-derivation its zero-homotopy
-   lift is the derived-limit unit. The exact products of
-   lem-weil-proetale-countable-products-exact and the triangle from
-   lem-weil-pbc-ringed-strict-tower-homotopy-limit give L -> B -> B -> L[1], whose
-   first map composed with comp_K has exactly the quotient components c_n.
-5. If (v) holds, transport this distinguished triangle along comp_K. Its first map
-   becomes c, giving the Roos convention (i) by def-weil-derived-complete.
-6. Conversely rotate the triangle in (i) and that for L. Both begin with the same
-   arrow 1-s. TR3 extends the two identity maps of B to a triangle morphism;
-   lem-sf-triangle-morphism-iso makes its last component an isomorphism. Shift back
-   to identify K with L. Local vanishing is invariant under isomorphism, so K
-   satisfies (ii). Steps 1--3 conclude all five equivalences. This use of TR3 does
-   not identify its arbitrary lift with the prescribed completion unit. -/
+1. The independent-universe singleton cone criterion identifies local vanishing with
+   invertibility of the specified cone-completion unit and makes its output complete.
+2. The regular principal-quotient augmentation gives a levelwise quasi-isomorphism
+   from the scalar cones to the actual quotient reductions, preserving transitions
+   and augmentations. Exact products and the cone triangle give an isomorphism of
+   their Roos objects preserving the entire zero-homotopy units. Naturality and
+   representative normalization of the completion unit give (iii) iff (v).
+3. The square (1,-1) identifies the signed and unsigned cone models. After shifting
+   by minus one it preserves the product-component unit and its zero homotopy,
+   proving (iii) iff (iv).
+4. Localization preserves countable products because these products are exact.
+   Transporting the mapping-cocone triangle through its product comparison gives
+   the strict Roos triangle with the actual localized product projections.
+5. For (i), normalize the legacy quotient transitions. Rotate the asserted triangle
+   and the strict Roos triangle to start at the same arrow 1-s. The identity maps of
+   its two vertices extend to a triangle isomorphism. Shift back and transport local
+   vanishing from the quotient Roos object to K, proving (ii). No arbitrary TR3 map
+   is identified with the prescribed completion unit.
+6. For (v), transport the strict Roos triangle along the specified, invertible unit.
+   Its product projections are the quotient augmentations. The identity resolution
+   of the given K-flat representative and the auxiliary finite-field datum at p
+   therefore witness exactly the published global Roos condition (i). -/
 theorem roosIntrinsicCompletenessEquivalence
     (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (_hpl : p ≠ l)
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -346,6 +677,151 @@ theorem roosIntrinsicCompletenessEquivalence
       IsIso (integralKoszulLimitUnit l E T K P.obj e),
       IsIso (integralKoszulIntrinsicUnit l E T K P.obj e),
       IsIso ((IntegralOnSlice.completionUnit l E T none).app K)] := by
-  sorry
+  classical
+  let : HasExactLimitsOfShape (Discrete ℕ) (IntegralOnSlice.Mod l E T none) :=
+    IntegralOnSlice.sliceProductsExact l E T none
+  let : HasFiniteBiproducts (IntegralOnSlice.Mod l E T none) :=
+    Abelian.hasFiniteBiproducts
+  let : CountableAB4Star (IntegralOnSlice.Mod l E T none) :=
+    CountableAB4Star.of_hasExactLimitsOfShape_nat (IntegralOnSlice.Mod l E T none)
+  let : HasCountableProducts (IntegralOnSlice.D l E T none) :=
+    derivedCategory_hasCountableProducts (IntegralOnSlice.Mod l E T none)
+  have hμ := (integralKoszulScalar_existsUnique l E T P.obj).exists.choose_spec
+  have hlocal := IntegralPrincipalCone.localCriterion l E T
+    (integralCompletionScalarValue l E T) (integralScalar_natural l E T)
+    P.obj (integralKoszulScalar l E T P.obj) hμ K e
+  obtain ⟨c, hc⟩ := integralPrincipalConeQuotientComparison l E T P.obj P.property.1
+    (integralKoszulScalar l E T P.obj) hμ
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  have h35 : IsIso (integralKoszulLimitUnit l E T K P.obj e) ↔
+      IsIso ((IntegralOnSlice.completionUnit l E T none).app K) := by
+    have hn := (IntegralOnSlice.completionUnit l E T none).naturality e.inv
+    have hp : (IntegralOnSlice.completionUnit l E T none).app
+        (DerivedCategory.Q.obj P.obj) ≫
+          (IntegralOnSlice.completionComparison l E T none).hom.app P =
+        DerivedCategory.Q.map (IntegralOnSlice.roosUnit l E T none P.obj) :=
+      (IntegralOnSlice.completionUnit_existsUnique l E T none).exists.choose_spec P
+    have hnorm : (IntegralOnSlice.completionUnit l E T none).app K ≫
+        (IntegralOnSlice.completion l E T none).map e.inv ≫
+          (IntegralOnSlice.completionComparison l E T none).hom.app P =
+        e.inv ≫ DerivedCategory.Q.map (IntegralOnSlice.roosUnit l E T none P.obj) := by
+      rw [← Category.assoc, ← hn, Functor.id_map, Category.assoc, hp]
+    rw [← isIso_comp_right_iff _
+      ((IntegralOnSlice.completion l E T none).map e.inv ≫
+        (IntegralOnSlice.completionComparison l E T none).hom.app P), hnorm]
+    rw [← hc]
+    change IsIso (e.inv ≫ DerivedCategory.Q.map
+      (CochainComplex.PrincipalCone.unit (integralKoszulScalar l E T P.obj))) ↔ _
+    simp only [← Category.assoc, isIso_comp_right_iff]
+  have h34 : IsIso (integralKoszulLimitUnit l E T K P.obj e) ↔
+      IsIso (integralKoszulIntrinsicUnit l E T K P.obj e) := by
+    simp only [integralKoszulLimitUnit, integralKoszulIntrinsicUnit, isIso_comp_left_iff]
+    exact signedFiberUnit _ _ (integralKoszulProductUnit_comp l E T P.obj)
+      (integralKoszulLimitUnit_condition l E T P.obj)
+      (integralKoszulIntrinsicUnit_condition l E T P.obj)
+  tfae_have 1 → 2 := by
+    rintro ⟨D, hl, P₀, G, q, hq, e₀, hprod, δ, hδ⟩
+    let := hprod
+    let C : ℕᵒᵖ ⥤ IntegralOnSlice.Cx l E T none :=
+      Functor.ofOpSequence (X := fun n ↦ integralTowerComplex l E T D hl n P₀)
+        (fun n ↦ integralTowerTransition l E T D hl P₀ n)
+    obtain ⟨ε, hε⟩ := integralStrictRoosTriangle (A := IntegralOnSlice.Mod l E T none) C
+    simp only [integralReductionTower, Functor.ofOpSequence_map_homOfLE_succ] at hδ
+    have hε' := hε
+    simp only [integralOperationsTowerStep, C,
+      Functor.ofOpSequence_map_homOfLE_succ] at hε'
+    set_option backward.isDefEq.respectTransparency true in
+    obtain ⟨i⟩ := integralRoosIso _ _ _ δ ε hδ hε'
+    have hc₀ := integralQuotientLocallyComplete l E T P₀ hq.2
+    have hC : (IntegralOnSlice.tower l E T none).obj P₀ = C := by
+      rw [integralGlobalTower]
+      simp only [C, integralTowerTransition_eq, integralTowerComplex]
+      rfl
+    have hc₁ := (congrArg (fun B : ℕᵒᵖ ⥤ IntegralOnSlice.Cx l E T none ↦
+      IntegralPrincipalCone.locallyComplete l E T (integralCompletionScalarValue l E T)
+        (DerivedCategory.Q.obj (integralOperationsRoos B))) hC).mp hc₀
+    change IntegralPrincipalCone.locallyComplete l E T (integralCompletionScalarValue l E T) K
+    exact integralLocallyComplete_iso l E T (integralCompletionScalarValue l E T) i.symm hc₁
+  tfae_have 2 ↔ 3 := hlocal.2
+  tfae_have 3 ↔ 4 := h34
+  tfae_have 3 ↔ 5 := h35
+  tfae_have 5 → 1 := by
+    intro hK
+    let := hK
+    let D := integralAuxiliaryDatum p
+    have hl : l ≠ D.p := _hpl.symm
+    let C := integralLegacyComplexTower l E T D hl P.obj
+    let j := DerivedCategory.Q.mapIso (eqToIso (congrArg integralOperationsRoos
+      (integralLegacyTower_eq l E T D hl P.obj)))
+    let κ₀ := e.inv ≫ DerivedCategory.Q.map (IntegralOnSlice.roosUnit l E T none P.obj)
+    have hκ₀ : IsIso κ₀ := by
+      dsimp only [κ₀]
+      rw [← hc, ← Category.assoc]
+      change IsIso (integralKoszulLimitUnit l E T K P.obj e ≫ c.hom)
+      have := h35.mpr hK
+      infer_instance
+    let κ : K ⟶ DerivedCategory.Q.obj (integralOperationsRoos C) := κ₀ ≫ j.hom
+    have hκ : IsIso κ := by dsimp only [κ]; infer_instance
+    have hκπ (n : ℕ) :
+        κ ≫ DerivedCategory.Q.map
+          (CochainComplex.mappingCocone.fst
+            (towerTransitionEndomorphism (K := fun k ↦ C.obj (op k))
+              (integralOperationsTowerStep C)) ≫ Pi.π (fun k ↦ C.obj (op k)) n) =
+          e.inv ≫ DerivedCategory.Q.map (integralTowerUnit l E T D hl P.obj n) := by
+      simp only [κ, κ₀, j, Functor.mapIso_hom, eqToIso.hom,
+        Category.assoc, ← Functor.map_comp]
+      rw [roosProjection_cast _ _ (integralLegacyTower_eq l E T D hl P.obj) n,
+        ← Category.assoc, integralRoosUnit_projection, integralAugmentation_cast]
+    obtain ⟨δ, hδ⟩ := integralStrictRoosTriangle (A := IntegralOnSlice.Mod l E T none) C
+    set_option backward.isDefEq.respectTransparency true in
+    set_option backward.isDefEq.respectTransparency.types true in
+    have h := integralRoosTransport
+      (C := IntegralOnSlice.D l E T none)
+      (X := fun n : ℕ ↦
+        (DerivedCategory.Q (C := IntegralOnSlice.Mod l E T none)).obj (C.obj (op n)))
+      (fun (n : ℕ) ↦
+        (DerivedCategory.Q (C := IntegralOnSlice.Mod l E T none)).map
+          (integralOperationsTowerStep C n))
+      (asIso κ) _ δ hδ
+    let ε : (∏ᶜ fun n ↦ DerivedCategory.Q.obj (C.obj (op n))) ⟶
+        (shiftFunctor (IntegralOnSlice.D l E T none) (1 : ℤ)).obj K :=
+      δ ≫ (shiftFunctor (IntegralOnSlice.D l E T none) (1 : ℤ)).map (asIso κ).inv
+    have hqid : CochainComplex.IsKFlatResolutionIndependentCoefficients
+        (R := IntegralOnSlice.ring l E T none) (𝟙 P.obj) :=
+      ⟨inferInstance, P.property.1⟩
+    let : HasCountableProducts (completedIntegralDerivedCategory l E T D hl) :=
+      inferInstanceAs (HasCountableProducts (IntegralOnSlice.D l E T none))
+    have hq : CochainComplex.IsKFlatResolutionIndependentCoefficients
+        (R := completedIntegralCommRingSheaf l E T D hl) (𝟙 P.obj) :=
+      hqid
+    change IsDerivedCompleteUnrestricted l E T K
+    refine ⟨D, hl, ?_⟩
+    set_option backward.isDefEq.respectTransparency true in
+    set_option backward.isDefEq.respectTransparency.types true in
+    refine ⟨P.obj, P.obj, 𝟙 P.obj, hq, e, ?_⟩
+    dsimp only
+    refine ⟨inferInstance, ?_⟩
+    have hstep (n : ℕ) :
+        DerivedCategory.Q.map (integralOperationsTowerStep C n) =
+          (integralReductionTower l E T D hl P.obj).map (homOfLE n.le_succ).op := by
+      simp only [C, integralLegacyComplexTower, integralOperationsTowerStep,
+        integralReductionTower, Functor.ofOpSequence_map_homOfLE_succ]
+      erw [Functor.ofOpSequence_map_homOfLE_succ]
+      rfl
+    refine ⟨ε, ?_⟩
+    have hπ : (Pi.lift (fun n ↦
+        ((integralReductionTowerCone l E T D hl (𝟙 P.obj) hq).extend e.inv).π.app (op n))) =
+        κ ≫ Pi.lift (fun n ↦ DerivedCategory.Q.map
+          (CochainComplex.mappingCocone.fst
+            (towerTransitionEndomorphism (K := fun k ↦ C.obj (op k))
+              (integralOperationsTowerStep C)) ≫ Pi.π (fun k ↦ C.obj (op k)) n)) := by
+      exact productLift_transport κ _ _ (fun n ↦
+        (integralLegacyIdentityLeg l E T D hl P.obj hq K e n).trans (hκπ n).symm)
+    rw [funext hstep] at h
+    rw [hπ]
+    exact h
+  tfae_finish
+
 
 end WeilConjectures
