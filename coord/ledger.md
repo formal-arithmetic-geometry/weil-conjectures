@@ -20202,3 +20202,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:06 L: returned deliver/Q37/det-sp-scalar-extension-functor (reviewer RETURN: C5/D1. The item's statement, stmt_deps and Lean record are unchanged. Steps 1-4 and 7 are byte-identical to the landed 7)
 - 04:06 L: merged deliver/Q01/lem-pur-strict-roos-homotopy-functor (reviewer FIX; first push; new nodes: 0)
 - 04:06 L: merged deliver/O4/lem-sbc-reflector-adjunction-unit-formulas (reviewer PASS; first push; new nodes: 0)
+- 04:06 L: merged deliver/NQ/lem-weil-finite-free-completed-scalar-comparison (reviewer PASS; after a return; new nodes: 5)
