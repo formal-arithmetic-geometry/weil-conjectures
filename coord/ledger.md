@@ -23207,3 +23207,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:35 L: returned deliver/NM/lem-sfb-root-tower-coordinate-face (reviewer RETURN: L: independent stage-2 immutable head ae952e25753c: H2/H3: the delivery adds theorem stmt_deps lem-sfb-snc-universal-res)
 - 17:35 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 17:36 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 17:37 L: merged deliver/Q06/lem-sfb-snc-tame-root-etale-extension (reviewer PASS; first push; new nodes: 1)
