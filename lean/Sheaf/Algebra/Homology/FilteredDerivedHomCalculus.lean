@@ -64,7 +64,42 @@ theorem graded_laws (bounded : Bool) (p : ℤ) :
     (∀ (K L M : Complex A bounded) (f : K ⟶ L) (g : L ⟶ M),
       FilteredObject.gradedMapSteps (f ≫ g).hom p =
         FilteredObject.gradedMapSteps f.hom p ≫ FilteredObject.gradedMapSteps g.hom p) := by
-  sorry
+  have hπ {K M : Complex A bounded} (f : K ⟶ M) :
+      K.obj.filtration.complexQuotientπ p (p + 1) (by omega) ≫
+          FilteredObject.gradedMapSteps f.hom p =
+        FilteredObject.restrictionSteps f.hom p ≫
+          M.obj.filtration.complexQuotientπ p (p + 1) (by omega) :=
+    Classical.choose_spec (FilteredObject.exists_gradedMap_steps K.obj M.obj f.hom p)
+  have hr {K M : Complex A bounded} (f : K ⟶ M) :
+      FilteredObject.restrictionSteps f.hom p ≫ (M.obj.filtration.step p).arrow =
+        (K.obj.filtration.step p).arrow ≫ f.hom.hom :=
+    Classical.choose_spec (f.hom.preserves p)
+  constructor
+  · intro K
+    have hi : FilteredObject.restrictionSteps (𝟙 K : K ⟶ K).hom p = 𝟙 _ := by
+      apply (cancel_mono (K.obj.filtration.step p).arrow).1
+      have h := hr (𝟙 K : K ⟶ K)
+      change FilteredObject.restrictionSteps (𝟙 K : K ⟶ K).hom p ≫
+        (K.obj.filtration.step p).arrow = (K.obj.filtration.step p).arrow ≫ 𝟙 _ at h
+      simpa only [Category.id_comp, Category.comp_id] using h
+    apply (cancel_epi (cokernel.π (Subobject.ofLE (K.obj.filtration.step (p + 1))
+      (K.obj.filtration.step p) (K.obj.filtration.antitone_step (by omega))))).1
+    change K.obj.filtration.complexQuotientπ p (p + 1) (by omega) ≫ _ = _
+    rw [hπ, hi, Category.id_comp]
+    exact (Category.comp_id
+      (K.obj.filtration.complexQuotientπ p (p + 1) (by omega))).symm
+  · intro K M N f g
+    have hc : FilteredObject.restrictionSteps (f ≫ g).hom p =
+        FilteredObject.restrictionSteps f.hom p ≫
+          FilteredObject.restrictionSteps g.hom p := by
+      apply (cancel_mono (N.obj.filtration.step p).arrow).1
+      rw [hr, Category.assoc, hr, ← Category.assoc, hr, Category.assoc]
+      rfl
+    apply (cancel_epi (cokernel.π (Subobject.ofLE (K.obj.filtration.step (p + 1))
+      (K.obj.filtration.step p) (K.obj.filtration.antitone_step (by omega))))).1
+    change K.obj.filtration.complexQuotientπ p (p + 1) (by omega) ≫ _ = _
+    rw [hπ, hc, Category.assoc, ← hπ, ← Category.assoc, ← hπ, Category.assoc]
+    rfl
 
 /-- The underlying complex functor.
 Source: Stacks, 05S2 (blueprint: lem-trf-filtered-derived-hom-calculus). -/
