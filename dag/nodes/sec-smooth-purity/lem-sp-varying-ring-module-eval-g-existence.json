@@ -13,7 +13,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EK; unit-normalized componentwise inverse-image adjunction"
+  "place": "Zheng Construction 4.1; explicit evaluation right coextension and Mathlib Adjunction/Mates iterated_mateEquiv_conjugateEquiv; U1, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -59,19 +59,33 @@
  "statement": "The Lean declaration `lem-sp-varying-ring-module-eval-g-existence` has the displayed unit-normalized ordinary pullback evaluation statement.",
  "proof": [
   {
-   "text": "Construct the comparison by the componentwise inverse-image adjunction and the level adjunction; the ordinary direct-image comparison transports the system unit to the level unit and the component maps assemble naturally.",
+   "text": "Construct a right adjoint C_n to evaluation on modules over any ring sheaf A on the vertical sequence site. At (m,V), C_n(M) is the product indexed by PLift(n <= m) of M(V), restricted along A(m,V) -> A(n,V); thus it is zero for m < n. Restrictions are those of M, with the unique compatible inequality. Check functoriality and scalar compatibility by the commuting horizontal/vertical square in the product site. The vertical-slice sheaf criterion reduces gluing and uniqueness to those for M. The unit is horizontal restriction; the counit is evaluation at the reflexive inequality. The two triangle identities are identity restriction maps. Transport this adjunction across evaluation_ring.",
+   "uses": [
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the mate of moduleEvalP.hom under the two evaluation/right-coextension adjunctions. Its map on every section of every coextension is the identity: the normalized moduleEvalP map is identity, and horizontal restriction in coextension is the identity map on M(V). Hence it is an isomorphism, since the forgetful functors to presheaves and to abelian groups reflect isomorphisms.",
    "uses": [
     "def-sp-varying-ring-operations",
-    "lem-coef-semilinear-derived-sections",
+    "def-coef-semilinear-system-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let alpha be the inverse mate of moduleEvalP.hom under moduleAdj and the single-ring pullback/direct-image adjunction. Mathlib iterated_mateEquiv_conjugateEquiv identifies its iterated mate with its conjugate under the composite adjunctions. Step 2 and conjugateEquiv_of_iso imply alpha is invertible. Take d = (asIso alpha).symm. The identity unit_mateEquiv_symm followed by direct image of d.hom gives the required normalized unit equation, since alpha followed by d.hom is identity.",
+   "uses": [
+    "def-sp-varying-ring-operations",
     "def-cbc-strict-constant-tower-operations"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sp-varying-ring-operations",
-  "lem-coef-semilinear-derived-sections",
-  "def-cbc-strict-constant-tower-operations"
+  "def-cbc-strict-constant-tower-operations",
+  "def-coef-semilinear-system-models",
+  "def-sp-varying-ring-operations"
  ],
  "lean": {
   "existing": false,
@@ -96,25 +110,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D9",
-  "result": "pass",
-  "landing": "20261021T002131-L-1490244",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.VaryingRing.evalJInv_isIso",
-   "AlgebraicGeometry.ProEtale.VaryingRing.evalPMate_isIso",
-   "AlgebraicGeometry.ProEtale.VaryingRing.extension_exact",
-   "AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalG_exists",
-   "AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalG_unique"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.VaryingRing.evalJInv_isIso",
-   "AlgebraicGeometry.ProEtale.VaryingRing.evalPMate_isIso",
-   "AlgebraicGeometry.ProEtale.VaryingRing.extension_exact",
-   "AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalG_exists"
-  ]
+  "reviewer": "C-42de1",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140925-L-2775784",
+  "kind": "interface",
+  "note": "independent cc review: delivered VaryingRingOperations.lean vs live sheaf-dag and vs the prior run's (23729633) FIX file (differ only in the alias hunk); node files vs live (proof fields only); corrected file + 9 direct importers + 2 name users compiled; axioms probed"
  },
  "lean_audit": {}
 }

@@ -35,7 +35,7 @@
    "text": "For pull_exact, take additivity of the left adjoint from additivity of push. Apply the componentwise short-complex exactness criterion of semilinearDerivedSections. The already stated unit-normalized moduleEvalG identifies each evaluation of pull with exact evaluation followed by the existing exact single-ring pullback. Transport exactness through that natural isomorphism and use the abelian exact-functor criterion to obtain preservation of finite limits and finite colimits. This step uses the retained moduleEvalG_existsUnique statement in this same node, without introducing a replacement hole.",
    "uses": [
     "lem-coef-semilinear-derived-sections",
-    "lem-cbc-strict-tower-proper-open-calculus"
+    "def-cbc-strict-constant-tower-operations"
    ],
    "elementary": false,
    "source": {
@@ -46,7 +46,7 @@
   {
    "text": "For pull_isRightAdjoint at an open immersion, evaluation of a semilinear system is continuous module pushforward along the level inclusion and therefore has a left adjoint. Transfer the small-site module adjunction through AsSmall for the independent object and Hom universes. Thus evaluation preserves all limits. The existing single-ring open pullback is also a right adjoint, so moduleEvalG makes every level evaluation of the system pullback limit preserving. The conservative limit-preserving forgetful functor from sequence-site modules to presheaves of abelian groups reflects limits, and presheaf limits are pointwise. Hence the system pullback preserves all limits. Its source is Grothendieck abelian and consequently complete, well-powered and has a small coseparator. Apply the special adjoint functor theorem.",
    "uses": [
-    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-cbc-strict-tower-open-extension",
     "prop-pur-kinjective-resolutions-exist"
    ],
    "elementary": false,
@@ -54,19 +54,81 @@
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03DI; alternative proof of adjoint existence using Mathlib Adjunction/AdjointFunctorTheorems.lean and GrothendieckCategory/Coseparator.lean"
    }
+  },
+  {
+   "text": "For an open immersion, Over.map is left adjoint to proEtaleBaseChange on the small pro-etale sites, and both functors are continuous. Lift this adjunction to the product sequence sites. The adjoint transpose of the constant coefficient map is invertible, first levelwise by constantRingIso and left-adjoint uniqueness, then as a ring sheaf. Continuous module pushforward along the inverse transpose is therefore left adjoint to the original direct image. The identity-on-sections evaluation comparison for these explicit pullbacks has an invertible mate under evaluation/right-coextension. Compose with the chosen pullback comparisons and conjugate through the two evaluation adjunctions and the two open-extension adjunctions. This gives extensionEvaluation_exists. Componentwise exactness and the exact single-ring moduleJ then prove extension_exact, including the empty open.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-coef-semilinear-derived-sections",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ, 06XN, 0FND; Zheng Construction 4.1 and Lemma 4.10; explicit adjunction and localization argument."
+   }
+  },
+  {
+   "text": "Identify sequence-site module sheaves with strict ring systems by the existing strictSystemSequenceEquivalence. Its source ring sheaf is definitionally the actual systemRing; its evaluation map is identity on every section, so pushforwardCongr identifies its evaluation with the actual coefficient evaluation. Transport the ordinary singleton extension and adjunction to the actual Modules category. Its normalized derived comparison shows that its ordinary functor preserves quasi-isomorphisms between flat-term independently K-flat complexes. Every level complex has a flat-term independently K-flat resolution (systemLevel_kFlatResolution). Apply the normalized resolving-class derived adjunction theorem to obtain a normalized derived left adjoint to evaluation on this same resolving class.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-system-level-left-extension",
+    "lem-pur-normalized-left-extension",
+    "lem-pur-system-single-derived-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ, 06XN, 0FND; Zheng Construction 4.1 and Lemma 4.10; explicit adjunction and localization argument."
+   }
+  },
+  {
+   "text": "Use the unit normalization of moduleEvalG to identify its mate under the ordinary geometric adjunctions with moduleEvalP. The iterated-mates/conjugates identity therefore makes its inverse mate under the two finite evaluation-left-extension adjunctions invertible. The pro-etale algebraic inverse image with the constant ring map preserves flat-term independently K-flat complexes, by the ringed-topos pullback theorem. The exact-square factorization for evalG and the normalized derived-extension comparison now make the corresponding derived finite-extension mate invertible. A second application of iterated mates identifies its conjugate with evalPMate. This proves evalPMate_isIso without claiming evaluation preserves arbitrary K-injectives and without a flatness hypothesis on coefficient transitions.",
+   "uses": [
+    "lem-pur-extension-evaluation-comparison",
+    "lem-sp-proetale-algebraic-inverse-image",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ, 06XN, 0FND; Zheng Construction 4.1 and Lemma 4.10; explicit adjunction and localization argument."
+   }
+  },
+  {
+   "text": "For an open immersion, the units of the explicit continuous pullbacks are restriction along the site-adjunction counit. On every section, moduleEvalP and openEval_exists are identities, so their unit square commutes. Transport that equation along the two left-adjoint uniqueness isomorphisms; moduleEvalG_unique identifies the resulting pullback comparison with moduleEvalG. Its mate under the evaluation/right-coextension adjunctions remains invertible. Iterated mates therefore make the ordinary open-extension inverse mate invertible. For exact functors, construct the derived adjunction from the homotopy adjunction and the invertible localization comparisons; its unit is the localized ordinary unit. Applying the exact-square factorization to the ordinary inverse mate proves invertibility after localization. Finally transport between adjunctions on the same functors to the prescribed jAdj and levelJAdj. The resulting transformation is exactly evalJInv.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-cbc-strict-tower-open-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ, 06XN, 0FND; Zheng Construction 4.1 and Lemma 4.10; explicit adjunction and localization argument."
+   }
   }
  ],
  "proof_deps": [
   "def-cbc-strict-constant-tower-operations",
   "def-coef-semilinear-system-models",
-  "lem-cbc-strict-tower-proper-open-calculus",
   "lem-coef-semilinear-derived-sections",
-  "prop-pur-kinjective-resolutions-exist"
+  "def-cbc-strict-tower-open-extension",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-normalized-left-extension",
+  "lem-pur-extension-evaluation-comparison",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DA and 03DI; S3 specialization, 2026-10-21. Continuous-pushforward composition, componentwise exactness, and the Mathlib special adjoint functor theorem. Four original obligations remain."
+  "place": "Tags 03DI, 03DJ, 06XN, 0FND; Zheng 4.1 and 4.10. U1, 2026-10-21: explicit coextensions, continuous open pullbacks, normalized finite left extensions, and iterated mates; all four original obligations proved, no new holes."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -227,24 +289,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D9",
-  "result": "pass",
-  "landing": "20261021T002131-L-1490244",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.VaryingRing.evalJInv_isIso",
-   "AlgebraicGeometry.ProEtale.VaryingRing.evalPMate_isIso",
-   "AlgebraicGeometry.ProEtale.VaryingRing.extension_exact",
-   "AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalG_exists",
-   "AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalG_unique"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.VaryingRing.evalJInv_isIso",
-   "AlgebraicGeometry.ProEtale.VaryingRing.evalPMate_isIso",
-   "AlgebraicGeometry.ProEtale.VaryingRing.extension_exact",
-   "AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalG_exists"
-  ]
+  "reviewer": "C-42de1",
+  "group": "U1",
+  "result": "fix",
+  "landing": "20261021T140925-L-2775784",
+  "kind": "interface",
+  "note": "independent cc review: delivered VaryingRingOperations.lean vs live sheaf-dag and vs the prior run's (23729633) FIX file (differ only in the alias hunk); node files vs live (proof fields only); corrected file + 9 direct importers + 2 name users compiled; axioms probed"
  }
 }
