@@ -19,106 +19,60 @@
  ],
  "proof": [
   {
-   "text": "First fix the tensor convention without changing the quotient maps. By [lem-weil-pbc-etale-constant-ring-module-equivalence], regard an $A_T$-module sheaf as an $A$-module-valued sheaf by scalar restriction, with the same underlying abelian sheaf. Apply [lem-pc-sites-module-sheafification-tensor] to the constant ring presheaf $U\\mapsto A$ and these two scalar-restricted sheaves: their module sheafifications are the original $A_T$-module sheaves, and the displayed isomorphism identifies their tensor over $A_T$ with the sheafification of $U\\mapsto F(U)\\otimes_A G(U)$. This identification sends the image of $x\\otimes y$ to the image of that same pure tensor. It respects maps by the cited naturality. Its unit identification sends $a\\otimes b$ to $ab$: both maps have this formula before sheafification. Hence the constant-coefficient tensor convention of the geometric-stalk lemma below applies to the tensor and $m$ of the item.",
+   "text": "Work directly with the existing sheafified tensor on A-module-valued sheaves. The geometric stalk functor is strong monoidal, as in [lem-pod-etale-stalk-tensor-scalar](1), with its canonical unit identification eta and tensor comparison mu (Mathlib.CategoryTheory.Sites.Point.Monoidal). For normalized identifications iF,iG, oplax naturality and unit coherence give stalk(m) followed by delta, iF tensor iG, and multiplication = eta. The latter three maps and eta are invertible, so stalk(m) is invertible on E intersect D. Off E intersect D one factor is zero, and the identity on its tensor is zero by additivity; mu therefore identifies the tensor stalk with a zero object.",
    "uses": [
-    "lem-weil-pbc-etale-constant-ring-module-equivalence",
-    "lem-pc-sites-module-sheafification-tensor"
+    "lem-pod-etale-stalk-tensor-scalar",
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW, label lemma-sheafification-tensor; apply to the constant ring presheaf. Agent specialization to the supplied quotient maps."
-   }
+   "elementary": false
   },
   {
-   "text": "Put $B=F\\otimes_{A_T}G$. By [lem-pod-etale-stalk-tensor-scalar](1), $(B)_{\\bar t}=F_{\\bar t}\\otimes_A G_{\\bar t}$ naturally, with pure tensor germs and the unit identified as in step 1. Thus $m_{\\bar t}$ sends $c$ to $q_{\\bar t}(c)\\otimes s_{\\bar t}(1)$. If $t\\in E\\cap D$, this is $c\\mapsto c\\otimes1$ in $A\\otimes_A A$. Multiplication $a\\otimes b\\mapsto ab$ is its inverse, since $(ab)\\otimes1=a\\otimes b$ by the balancing relation and $c\\cdot1=c$. If $t\\notin E\\cap D$, at least one tensor factor is zero; every pure tensor is then zero, so $B_{\\bar t}=0$ and $m_{\\bar t}:A\\to0$. Consequently every $m_{\\bar t}$ is surjective. Its kernel is zero on $E\\cap D$ and all of $A$ elsewhere, exactly the kernel of $r_{\\bar t}$.",
+   "text": "Use the jointly faithful family of universe-lifted geometric stalks supplied by [lemma-weil-pbc-geometric-stalk-conservative] (the existing jointlyFaithful consequence for module coefficients). Every stalk of m is epic: it is invertible on the intersection, and has zero target outside it. If m followed by f equals m followed by g, stalkwise epimorphic cancellation gives equal stalk maps of f and g, hence f=g. Thus m is epic directly, without computing a cokernel.",
    "uses": [
-    "lem-pod-etale-stalk-tensor-scalar"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks); tensor compatibility via sites-modules Tag 03EL (lemma-tensor-product-pullback). Agent quotient-kernel argument."
-   }
-  },
-  {
-   "text": "The category of module sheaves is abelian by [lem-pur-ringed-site-module-category-abelian], since the site here is small. By [lem-weil-pbc-module-sheaves-colimits-forgetful](1), forgetting to abelian sheaves preserves kernels and cokernels; compose it with the exact stalk functor of [prop-weil-pbc-geometric-stalks-exact]. If a module sheaf $M$ has all stalks zero, the underlying map $M\\to0$ is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative], so $M=0$. This also detects zero morphisms: the image of a map zero on all stalks has all stalks zero by exactness, hence is zero, and the map is zero. Now take $C=\\operatorname{coker}(m)$ in the module category. Exactness gives $C_{\\bar t}=\\operatorname{coker}(m_{\\bar t})=0$ by step 2, whence $C=0$. By [lem-weil-pbc-preadditive-epi-iff-cokernel-zero], $m$ is an epimorphism.",
-   "uses": [
-    "lem-pur-ringed-site-module-category-abelian",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-preadditive-epi-iff-cokernel-zero"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks); tensor compatibility via sites-modules Tag 03EL (lemma-tensor-product-pullback). Agent quotient-kernel argument."
-   }
-  },
-  {
-   "text": "Let $k:K\\hookrightarrow A_T$ be the kernel of $m$. By [lem-weil-pbc-module-sheaves-colimits-forgetful] and [prop-weil-pbc-geometric-stalks-exact], $K_{\\bar t}\\to A$ is the kernel of $m_{\\bar t}$. For $t\\in E\\cap D$, step 2 gives $K_{\\bar t}=0$, so $(r\\circ k)_{\\bar t}=0$. Outside the intersection $r_{\\bar t}=0$, so again $(r\\circ k)_{\\bar t}=0$. The zero-morphism test proved in step 3 using [lemma-weil-pbc-geometric-stalk-conservative] gives $r\\circ k=0$. This uses the normalization of the quotient maps, rather than just the abstract isomorphism types of their stalks.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "prop-weil-pbc-geometric-stalks-exact",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks); tensor compatibility via sites-modules Tag 03EL (lemma-tensor-product-pullback). Agent quotient-kernel argument."
-   }
+   "elementary": false
   },
   {
-   "text": "By the definition of $k$, the complex $K\\xrightarrow{k}A_T\\xrightarrow{m}B$ is exact at $A_T$. Step 3 makes its second map epic and step 4 gives $r\\circ k=0$. Apply [lem-weil-pbc-abelian-exact-epi-cokernel](a), with $h=k$, the epimorphism $m$, and $\\varphi=r$. It produces a unique $A_T$-linear morphism $e:B\\to H$ with $e\\circ m=r$. Equivalently, uniqueness follows by cancellation of the epimorphism $m$.",
+   "text": "Let k=kernel.ι(m). To show k followed by r is zero, check the lifted geometric stalks. On E intersect D, map(k) followed by map(m) is zero by the kernel equation, so map(k)=0 because map(m) is invertible. Outside the intersection, the target stalk of r is zero. Joint faithfulness gives k followed by r=0. Apply [lem-weil-pbc-abelian-exact-epi-cokernel](a), concretely ShortComplex.kernelSequence_exact and Exact.desc, to construct e0 with m followed by e0=r. This uses the existing abelian category of ModuleCat-valued sheaves; no change to a ringed-site module category is necessary.",
    "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
     "lem-weil-pbc-abelian-exact-epi-cokernel"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tags 0109 (definition-abelian-category) and 010E (definition-exact); cokernel descent along an epimorphism, as stated in lem-weil-pbc-abelian-exact-epi-cokernel(a). Agent specialization."
-   }
+   "elementary": false
   },
   {
-   "text": "At a geometric point in $E\\cap D$, the equation $e_{\\bar t}\\circ m_{\\bar t}=r_{\\bar t}$ reads $e_{\\bar t}(c\\otimes1)=c$. Every pure tensor is $(ab)\\otimes1=a\\otimes b$, so $e_{\\bar t}(a\\otimes b)=ab$. This is the inverse from step 2, with inverse $c\\mapsto c\\otimes1$. Off the intersection both $B_{\\bar t}$ and $H_{\\bar t}$ are zero, so $e_{\\bar t}$ is the unique map $0\\to0$, an isomorphism. Apply [lemma-weil-pbc-geometric-stalk-conservative] to the underlying abelian map of $e$: it is an isomorphism of abelian sheaves. Its inverse is $A_T$-linear: for $a\\in A_T(U)$ and $h\\in H(U)$, write $h=e_U(b)$; then $e_U(ab)=a h$, so $e_U^{-1}(a h)=a e_U^{-1}(h)$. Thus $e$ is an isomorphism of module sheaves, with exactly the asserted stalk normalization.",
+   "text": "On the intersection stalk(r) is invertible by its normalized identification and the invertible unit identification. The equation map(m) followed by map(e0)=map(r), with map(m) invertible, proves map(e0) invertible. Off the intersection both source and target stalks are zero, so map(e0) is invertible there too. Apply [lemma-weil-pbc-geometric-stalk-conservative] directly to the module-valued sheaf map e0 to obtain the required isomorphism e. Uniqueness among all maps follows by cancellation of the epic m.",
    "uses": [
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks); tensor compatibility via sites-modules Tag 03EL (lemma-tensor-product-pullback). Agent quotient-kernel argument."
-   }
+   "elementary": false
   },
   {
-   "text": "For any object $U$ of the etale site and $a,b\\in A_T(U)$, the tensor definition [def-pur-sheaf-tensor-product] gives $q(a)\\otimes s(b)=ab\\,(q(1)\\otimes s(1))=m(ab)$ as sections of $B$ over $U$. Here the equality follows from $A_T(U)$-bilinearity before sheafification and hence remains true after sheafification. Applying $e$ and $e\\circ m=r$ yields $e(q(a)\\otimes s(b))=r(ab)$. This finishes every clause, including the epic generator, uniqueness, section formula and stalk inverse. The assumed flatness is compatible with the proof but is not needed by this argument.",
+   "text": "The descent equation gives (q tensor s) followed by e.hom = lambda followed by r. Apply lax tensor naturality for the existing sheaf-to-presheaf functor [def-pur-sheaf-tensor-product] and evaluate its component on a tensor b. This gives exactly the displayed local-section formula, including locally constant sections of the tensor unit.",
    "uses": [
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW, label lemma-sheafification-tensor; apply to the constant ring presheaf. Agent specialization to the supplied quotient maps."
-   }
+   "elementary": true
+  },
+  {
+   "text": "For any specified normalized iF,iG,iH on E intersect D, compare the normalization equation of the first step with map(m) followed by map(e.hom) followed by iH=eta. Cancel the epic map(m). Precomposing the resulting equality with mu and using mu followed by delta=id gives mu followed by map(e.hom) followed by iH = (iF tensor iG) followed by multiplication. Evaluate on iF.inv(a) tensor iG.inv(b) to get ab. For the asserted inverse formula, apply the injective map map(e.hom) followed by iH to both sides: the left becomes c by the inverse identities, and the right becomes c times 1=c by the multiplication formula. Off the intersection the already proved zero-stalk results imply the map is zero. The flatness and the three original epimorphism assumptions are retained unchanged; the normalized-stalk argument suffices.",
+   "uses": [
+    "lem-pod-etale-stalk-tensor-scalar"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-constant-ring-module-equivalence",
-  "lem-pc-sites-module-sheafification-tensor",
   "lem-pod-etale-stalk-tensor-scalar",
-  "lem-pur-ringed-site-module-category-abelian",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "prop-weil-pbc-geometric-stalks-exact",
+  "def-pur-sheaf-tensor-product",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-preadditive-epi-iff-cokernel-zero",
-  "lem-weil-pbc-abelian-exact-epi-cokernel",
-  "def-pur-sheaf-tensor-product"
+  "lem-weil-pbc-abelian-exact-epi-cokernel"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-  "place": "Final paragraph, \"Tensor and the two counits are transported as well\"; normalized support-quotient refinement, using the cited Stacks tensor, exactness and abelian-category facts."
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03PT and 03PU, specialized to the normalized quotient-tensor refinement of lem-pur-kunneth-supported; A6 Lean proof uses the existing strong monoidal stalk and jointly faithful geometric-stalk APIs directly, kernel-sequence descent, and monoidal naturality."
  },
  "mathlib_searches": [
   {
@@ -238,10 +192,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-etale-constant-ring-module-equivalence",
-  "lem-pc-sites-module-sheafification-tensor",
   "lem-pod-etale-stalk-tensor-scalar",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "reviewed": {
@@ -275,5 +226,15 @@
   "group": "N8",
   "result": "pass",
   "note": "Clause-by-clause match against the node: 3 Epi quotient maps from the unit (= constant A_T); flatness via the recorded exactFunctor(tensorRight F) predicate; the normalized stalk hypothesis (on support: an iso to A with stalk(q) ≫ i = canonical η; off support: IsZero) applied to E, D, E∩D; m = λ⁻¹ ≫ (q ⊗ s); Epi m; e iso with m ≫ e = r and uniqueness over all morphisms; section formula with ab = λ∘μ (ring multiplication on A_T(U)); stalk a⊗b ↦ ab and inverse c ↦ c⊗1 for every normalized identification; zero-to-zero off E∩D. No extra hypotheses. A : Type (u+1) is the project-standard encoding (EtaleStalkTensorScalar, SupportQuotientProduct via ULift), not a silent restriction. Mathlib Point.Monoidal η/μ and sheafFiber are canonical. lean.statement verbatim; declarations present; node changes only lean; docstrings carry source, blueprint id and 7 proof steps; sorry only; worker report and second reading present. Edge cases checked: empty T, A=0, empty/disjoint E,D, E=D=all points. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T110916-L-3794126",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
