@@ -21368,3 +21368,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:51 L: merged deliver/Q34/lem-sfb-qlbar-internal-hom-coefficient-comparison (reviewer FIX; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q79/lem-coef-compact-support-normalized-realization (reviewer PASS; first push; new nodes: 0); claim not held by Q79: not your claim
 - 08:51 L: merged deliver/Q145/lem-per-rational-module-realization-functor (reviewer FIX; first push; new nodes: 0)
+- 08:51 L: merged deliver/Q121/lem-trf-point-transport-cone-comparison-descent (reviewer PASS; first push; new nodes: 0); claim not held by Q121: not your claim
