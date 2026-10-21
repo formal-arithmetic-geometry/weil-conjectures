@@ -20,111 +20,117 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-sp-varying-ring-proper-open-pasting] on the given inverse ring sequence; its system category and simultaneous section models are those of [lem-coef-semilinear-derived-sections] used in the statement. It constructs the clopen lift, intrinsic $\\alpha_Q$ and its proper mate on the system category. Its $\\beta^{-1}$ is the open-adjunction transpose of inverse-image composition after the open unit, which is the inverse formula of $\\beta$ in [lem-sf-open-tensor-normalization] for ring systems; so its $\\alpha_Q$ and $\\gamma_Q$ are the stated $\\alpha_Q$ and $\\Gamma_Q$. No levelwise choice is involved.",
+   "text": "Apply the varying-ring proper/open construction [lem-sp-varying-ring-proper-open-pasting] to the inverse sequence $C_1\\leftarrow C_2\\leftarrow\\cdots$ on each fixed small pro-etale skeleton. Its componentwise clopen lift gives $s=(k,r):U\\to V_W$, the projection $\\pi_s$ and the normalized map $\\alpha_Q$; the component maps commute with all semilinear transitions. The simultaneous section models of [lem-coef-semilinear-derived-sections] then give exact termwise inverse images, derived direct images, open extensions, their units and counits, and the displayed derived mate $\\Gamma_Q$. The open-unit normalization is the one supplied by [lem-sf-open-tensor-normalization], so this is the stated intrinsic construction rather than a map chosen after evaluation. S4 realizes the foundational comparisons in Lean as follows. Naturality of the displayed transpose is homEquiv_naturality_right_square applied to the whiskered open unit followed by the inverse square compositor. The already proved varying-ring cartesian counit theorem places P_g(J_j M) in the essential image of J_j'; full faithfulness of open extension makes the specified counit invertible, and the hom-equivalence counit formula proves betaInv invertible. For a clopen immersion the varying-ring derived clopen isomorphism identifies J with R. Transfer full faithfulness along this isomorphism: the proper-adjunction unit on J(M) is invertible, so its composite with R applied to the inverse open unit is the specified invertible openToS. These arguments use only equality of the underlying functors; they do not identify different chosen adjunction structures. For scalar restriction, its prescribed evaluation equations identify every evaluated functor with exact level restriction. Componentwise preservation of finite limits and colimits then proves exactness; preservation of binary products gives additivity. The other steps below remain the plans for the remaining unfinished statements. C8 realizes the termwise scalar-restriction functor by the generic ringed-sequence-site tower construction. The compatible maps of constant ring sheaves give a natural transformation from the constant B sheaf to the coefficient sequence. Composing with the evaluation-ring identifications supplies compatible structural ring maps. The generic construction gives the evaluated functor equations and the section formulas. Componentwise functor extensionality, followed by the transition formulas, proves uniqueness of the entire functor.",
    "uses": [
     "lem-sp-varying-ring-proper-open-pasting",
     "lem-coef-semilinear-derived-sections",
-    "lem-sf-open-tensor-normalization"
+    "lem-sf-open-tensor-normalization",
+    "def-sp-varying-ring-proper-open-arrows",
+    "def-coef-ringed-sequence-site",
+    "def-coef-semilinear-system-models"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B, open case"
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open, open-immersion case; the strict-system realization is the coefficient-system extension recorded in the cited nodes."
    }
   },
   {
-   "text": "Form $\\lambda_Q$ by conjugating cartesian $\\beta$, cancelling the open unit, identifying $J_s\\cong S_s$, and composing $S_qS_s\\cong S_r$. Apply [lem-sf-adjunct-conjugate-open-factor] to $\\alpha_Q$, with $f=\\pi_sP_q$ followed by $J_sP_sP_q\\varepsilon_r$, using $P_sP_q\\cong P_r$. Expanding alpha and cancelling beta inverse proves the transport hypothesis of that lemma by naturality of the open compositor. The clopen unit formula turns its adjunct into the composite-adjunction unit followed by counit. The triangle identity makes it the inverse of the $S_qS_s\\cong S_r$ compositor. Thus the open adjunct is $\\lambda_Q^{-1}$; multiplying by $\\lambda_Q$ gives the asserted restriction identity.",
+   "text": "Restrict $p$ to $W$ and then to $V_W=V\\times_ZW$ [def-pc-fibre-product]. By the clopen construction of [lem-sp-varying-ring-proper-open-pasting], $s=(k,r)$ is open and closed, $bs=k$, $qs=r$ and $V_W=s(U)\\amalg C$ with $C$ open. On sections over this decomposition, $J_sP_sF=F|_{s(U)}\\times0$, so $J_s=S_s$ and $\\pi_s$ is the unit $\\eta_s:F\\to S_sP_sF$ of $P_s\\dashv S_s$; these are termwise identities of exact functors, hence identities on the simultaneous section models of [lem-coef-semilinear-derived-sections]. Since $\\beta=\\beta_{i,p}:P_pJ_i\\cong J_bP_q$ is an isomorphism of left adjoints of $P_iS_p$ and $S_qP_b$ (composite adjunctions), its conjugate is an isomorphism $c:P_iS_p\\cong S_qP_b$, characterized by its unit equation [lem-weil-pbc-conjugate-iso-unit-equation], applied in opposite categories. Then $\\lambda_Q$ is the composite of $c J_k$, $S_qP_bJ_bJ_s\\cong S_qJ_s$ (open unit), $J_s=S_s$ and the compositor $S_qS_s\\cong S_r$. To compute $\\lambda_Q\\circ P_i\\Gamma_Q$, transport $P_i\\Gamma_Q$ along $c$: by the change-of-adjunction and pasting clauses 1 and 3 of [lem-weil-pbc-mate-pasting], it becomes the $(P_r\\dashv S_r,\\ P_q\\dashv S_q)$-mate of the square $P_b\\alpha_Q\\circ P_b\\beta^{-1}$, which under the open unit is $\\pi_sP_q:P_q\\to J_sP_sP_q=J_sP_r$. With $\\pi_s=\\eta_s$ and $J_s=S_s$ this mate is $(S_qS_s\\varepsilon_r)\\circ(S_q\\eta_sP_sP_qS_r)\\circ(\\eta_qS_r)$, i.e. $(S_qS_s\\varepsilon_r)\\circ(\\eta^{(sq)}S_r)$ for the unit of the composite adjunction $P_sP_q\\dashv S_qS_s$. By the triangle identities this is the inverse of the compositor $S_qS_s\\cong S_r$. Hence $\\lambda_Q\\circ P_i\\Gamma_Q=1$ under the open unit $P_iJ_i=1$ of [lem-sf-open-tensor-normalization], and since the $J_i\\dashv P_i$ adjunct of $\\Gamma_Q$ is $P_i\\Gamma_Q$ composed with that unit, it is $\\lambda_Q^{-1}$; the adjunction bijection makes $\\Gamma_Q$ the unique such map. No equality is inferred from evaluation. C8 proves the two pi_components equations separately. For the image equation, identify openToS with the canonical left-to-right transformation of the adjoint triple J_s, P_s, R_s; cancel its invertible image under P_s and use the open triangle identity. For the complement equation, the ordinary varying-ring component theorem and invertibility of the ordinary projector on an extended object imply that P_c J_s has zero objects. Exact localization of this composite preserves zero objects, and the derived composition isomorphism shows the target of the restricted projector is zero. T3 realizes this step in gamma_adjunct. A proved generic projection-square formula identifies beta inverse followed by alpha and the proper counit with J_b applied to pi_s followed by the transported counit and the open compositor. The equality is transported through the composite Hom equivalence using conjugateIsoEquiv and unit_conjugateEquiv. The invertible open unit cancels the restriction/extension factor. Naturality of J_s to S_s identifies the resulting pi_s word with the proper unit. The generic composite-adjunction calculation identifies this word with the inverse conjugate of the transported inverse-image compositor. Equality transport in the arrow s q = r gives the specified sComp followed by the equality isomorphism. Consequently the open adjunct of gamma composed with lambda is identity; canceling lambda gives the adjunct equation and the Hom-equivalence unit formula gives the second equation. All auxiliary lemmas are private and proved, and the argument is intrinsic before evaluation.",
    "uses": [
-    "lem-sf-adjunct-conjugate-open-factor",
-    "lem-sf-semilinear-clopen-unit-projector",
+    "def-pc-fibre-product",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
     "lem-weil-pbc-mate-pasting",
     "lem-sf-open-tensor-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B; conjugate and clopen-unit calculation"
+    "place": "Tag 0F7B open case and Tags 03S3, 03S5 for restriction to a clopen section; adjunction unit/counit mate calculation."
    }
   },
   {
-   "text": "The intrinsic alpha pasting and identity clauses of [lem-sp-varying-ring-proper-open-pasting] give the displayed vertical and horizontal mate equations, including refinement squares. Their compositors are the specified ones.",
+   "text": "For vertical and horizontal pasting, use the two pasting identities in [lem-sp-varying-ring-proper-open-pasting]. Its intrinsic clopen construction says that the $a$-map for the outer rectangle is the pasted $a$-map, with the canonical inverse-image and open-extension compositors. Applying the mate correspondence to these equalities gives exactly $\\Gamma_{Q_2Q_1}=(S_{p_2}\\Gamma_{Q_1})\\circ(\\Gamma_{Q_2}S_{r_1})$ vertically and $\\Gamma_{Q_2Q_1}=(\\Gamma_{Q_2}J_k)\\circ(J_j\\Gamma_{Q_1})$ horizontally, with parenthesization handled by the canonical compositors. The identity cases are the identity clauses of the same construction.",
    "uses": [
-    "lem-sp-varying-ring-proper-open-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C and 0F7D, proper/open composition"
-   }
-  },
-  {
-   "text": "Take proper-adjunction mates of the two equal alpha words of [lem-sf-semilinear-alpha-pullback]. The generic exchange-mate cube and mate pasting identify their transposes with the two displayed words containing $E_p,E_r$ and the endpoint beta maps. This proves the base-change equation intrinsically.",
-   "uses": [
-    "lem-sf-semilinear-alpha-pullback",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-exchange-mate-cube"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7F, proper/open base change"
-   }
-  },
-  {
-   "text": "Use [lem-sf-semilinear-scalar-ordinary-comparison] to construct the exact sectionwise restriction $\\rho^0$ and its unit-preserving ordinary comparisons, including preservation of $\\alpha_Q$. For $\\rho=D(\\rho^0)$, [lem-sf-semilinear-scalar-derived-comparison] supplies their localized comparisons and invertible direct-image mates. Paste the preserved alpha square with the $p$ and $r$ scalar squares and take mates. Mate pasting identifies $\\rho\\Gamma_Q$ with the constant-$B$ mate through these specified comparisons.",
-   "uses": [
-    "lem-sf-semilinear-scalar-ordinary-comparison",
-    "lem-sf-semilinear-scalar-derived-comparison",
+    "lem-sp-varying-ring-proper-open-pasting",
     "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7; scalar-restriction mate equation"
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C and 0F7D, lemma-shriek-proper-and-open-compose and lemma-shriek-proper-and-open-compose-horizontal; mate pasting remarks 0E46 and 0E47."
    }
   },
   {
-   "text": "Evaluation of the varying-ring mate is the constant-$C_n$ mate by [lem-sp-varying-ring-proper-open-pasting]. For finite $C_n$ apply the finite etale-origin clause of [lem-cbc-strict-tower-proper-open-calculus] to the constant tower on the evaluated input. This is the specified finite comparison. The witness is bounded below exactly as required there.",
+   "text": "For a base change (h:Z_1\\to Z), use the induced fibre-product square and write (a,c,d) for its projections. The open comparison (\beta) is normalized by the open unit, so its pullback square commutes with the corresponding (\beta_{i,h}) and (\beta_{k,a}); this is the termwise section-model assertion of [lem-sf-open-tensor-normalization]. The clopen lift pulls back to (s_1=(k_1,r_1)), and the projection (pi_s) pulls back to (pi_{s_1}): on the decomposition into (s(U)) and its complement both maps are ((x,y)\\mapsto(x,0)). Consequently the underived alpha square is the pasted square obtained from (alpha_Q), (\beta), and the two pullback maps. Apply the mate correspondence to this equality, inserting the pullback-square mates (E_p:P_hS_p\\to S_{p_1}P_a) and (E_r:P_cS_r\\to S_{r_1}P_d). Naturality moves the beta factors to the two ends; the adjacent unit-counit pairs cancel by the triangle identities. The remaining equality is\n$$(S_{p_1}\\beta_{k,a})\\circ(E_pJ_k)\\circ(P_h\\Gamma_Q)=(\\Gamma_{Q_1}P_d)\\circ(J_{i_1}E_r)\\circ(\\beta_{i,h}S_r).$$\nAll operations and mate transposes are simultaneous system maps by [lem-coef-semilinear-derived-sections], so this is an equality before evaluation.",
    "uses": [
-    "lem-sp-varying-ring-proper-open-pasting",
-    "lem-cbc-strict-tower-proper-open-calculus"
+    "def-pc-fibre-product",
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B, finite etale-origin normalization"
+    "place": "Tag 0F7F, lemma-shriek-proper-and-open-base-change; strict-tower base-change equation."
    }
   },
   {
-   "text": "The normalized compositor coherence of [lem-sf-semilinear-compositor-coherence] removes every parenthesization ambiguity in these equations. Repeated binary reassociation reduces a finite pasting to a fixed bracketing; each move preserves the mate by step 3.",
+   "text": "Let $B\\to C_n$ be compatible with the inverse system and let $\\rho$ be termwise restriction of scalars from semilinear systems to constant-$B$ towers; it is exact, so $\\rho P_v=P^{\\mathcal T}_v\\rho$, $\\rho J_a=J_a\\rho$ termwise, and $\\rho\\alpha_Q=\\alpha^{\\mathcal T}_Q\\rho$ because $\\beta$ and $\\pi_s$ are the same maps of underlying sheaves. Define $d_v:\\rho S_v\\to S^{\\mathcal T}_v\\rho$ at the system level as the mate of $P^{\\mathcal T}_v\\rho=\\rho P_v$, namely $(S^{\\mathcal T}_v\\rho\\varepsilon_v)\\circ(\\eta^{\\mathcal T}_v\\rho S_v)$. Evaluation intertwines the system units and counits with the level ones [lem-coef-semilinear-derived-sections], so $\\operatorname{ev}_nd_v$ is the mate of the level comparison $b$ of [lem-weil-pbc-ring-sheaf-change-adjunction]; by its adjunct clause (take $t=\\varepsilon$, $t^\\sharp=1$) this mate is its isomorphism $d$. Quasi-isomorphisms of towers are detected levelwise, so $d_v$ is an isomorphism. Now paste squares as in clause 1 of [lem-weil-pbc-mate-pasting]: $\\alpha_Q$ followed by the $p$-square of $\\rho$, and the $r$-square of $\\rho$ followed by $\\alpha^{\\mathcal T}_Q$, are equal squares $P^{\\mathcal T}_pJ_i\\rho\\to\\rho J_kP_r$ since $\\rho\\alpha_Q=\\alpha^{\\mathcal T}_Q\\rho$. Their mates are therefore equal: $(d_pJ_k)\\circ\\rho\\Gamma_Q=(\\gamma^{\\mathcal T}_Q\\rho)\\circ(J_id_r)$, with $\\gamma^{\\mathcal T}_Q$ the normalized mate of [lem-cbc-strict-tower-proper-open-calculus]. This is an equality of system maps, not a consequence of faithfulness. For the evaluation: by [lem-sp-varying-ring-proper-open-pasting], whose $\\gamma_Q$ is literally $\\Gamma_Q$, $\\operatorname{ev}_n\\Gamma_Q$ is the constant-$C_n$ clopen-projection mate of [lem-cbc-strict-tower-proper-open-calculus]; for finite $C_n$ and an input whose $n$-th level is $\\nu^*L_n$ with $L_n\\in D^+(U_{\\mathrm{et}},C_n)$, the evaluation clause of that node (with $B=\\Lambda_n=C_n$) identifies it with the specified finite proper/open comparison. C8 realizes the ordinary evaluation comparison before taking mates. For the square of sequence-site evaluation and scheme base change, compare the structural ring maps using the adjunction normalization of constant coefficients. Pushforward composition and congruence then construct a comparison whose hom and inverse are both identities on sections. Lift this comparison to constant diagrams; sectionwise extensionality proves uniqueness. For inverse image, identify the level direct-image comparison with the existing moduleEvalP by its section normalization. Lift the existing moduleEvalG isomorphism to constant diagrams. Its unit equation, evaluated at each diagram index, identifies the mate of its inverse with the direct-image comparison. The mates equivalence therefore identifies the specified inverse-image comparison with an invertible map. V2 proves rhoPushOrdinary_existsUnique: at each index, combine pushforward composition and scalar restriction using the naturality square for constant coefficient maps. Both directions are identities on sections. The normalized transition formula for rhoOrdinary makes these comparisons natural in the tower index. Assemble them with NatIso.ofComponents; equality on every section proves uniqueness of the full tower comparison. Generic transport lemmas preserve the normalization without unfolding the chosen functor data. U4 proves evalR_isIso and evalJInv_isIso without changing any operation or comparison. The section-normalized ordinary direct-image square is the constant-diagram lift of moduleEvalP. The ordinary mate equation and uniqueness of moduleEvalG identify the specified inverse-image square with its constant-diagram lift. Exact derived square composition factors it into the varying-ring evaluation square and the ordinary diagonal square. Mate pasting identifies the derived direct-image comparison with the composite of the existing invertible evalPMate and constant-tower chi comparisons, up to the exact composition isomorphisms. For open extension, inverse mate pasting uses the existing varying-ring evalJInv. The diagonal open comparison is invertible because the ordinary constant-diagram inverse mate is compConstIso; exact localization preserves its invertibility. To prove this last assertion, compute derived Hom normalization from localization_unit_app, apply the derivedMate_comparison formula on cochain complexes, cancel the exact-functor factorization isomorphisms, and transport from an arbitrary complex representative. Canonical uniqueness of left adjoints transfers this assertion to each specified open adjunction. All auxiliary lemmas are private and completely proved.",
    "uses": [
-    "lem-sf-semilinear-compositor-coherence"
+    "def-sp-varying-ring-operations",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-pod-derived-exact-square-composition",
+    "lem-pur-derived-mate-comparison",
+    "lem-sf-cbc-constant-tower-direct-image-normalization",
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B and the coefficient-system extension; scalar-restriction naturality is the termwise construction on the ringed diagram sites."
+   }
+  },
+  {
+   "text": "V2 proves compositor_associativity. The section formula for pushComp expresses both threefold direct-image composites as restriction along the canonical iterated fiber-product map. The associativity of Over.pullbackComp identifies those maps, and presheaf composition gives the ordinary direct-image coherence equation. Apply Adjunction.leftAdjointCompIso_assoc to obtain ordinary inverse-image coherence. The exact-derived coherence calculation in [lem-cbc-strict-tower-direct-image-coherence] descends this equation to pComp. Conjugation and its whiskering laws give the sComp equation. Applying leftAdjointCompIso_assoc to the open adjunctions gives the jComp equation. Equality transport is handled by equality elimination, preserving all specified adjunctions and compositors.",
+   "uses": [
+    "lem-cbc-strict-tower-direct-image-coherence",
+    "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, compositor coherence"
+    "place": "Tags 0D6D and 07A7; canonical direct-image composition and adjunction conjugation."
    }
   }
  ],
  "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-coef-semilinear-system-models",
+  "def-pc-fibre-product",
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-cbc-strict-tower-direct-image-coherence",
   "lem-cbc-strict-tower-proper-open-calculus",
   "lem-coef-semilinear-derived-sections",
-  "lem-sf-adjunct-conjugate-open-factor",
+  "lem-pod-derived-exact-square-composition",
+  "lem-pur-derived-mate-comparison",
+  "lem-sf-cbc-constant-tower-direct-image-normalization",
   "lem-sf-open-tensor-normalization",
-  "lem-sf-semilinear-alpha-pullback",
-  "lem-sf-semilinear-clopen-unit-projector",
-  "lem-sf-semilinear-compositor-coherence",
-  "lem-sf-semilinear-scalar-derived-comparison",
-  "lem-sf-semilinear-scalar-ordinary-comparison",
   "lem-sp-varying-ring-proper-open-pasting",
-  "lem-weil-pbc-exchange-mate-cube",
-  "lem-weil-pbc-mate-pasting"
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-  "place": "Sentence on units, counits and coefficient comparisons; short assembly of the six finer arguments requested by the human on 2026-10-21. Prior construction and stage-3 calculations are retained as the sources of the extracted arguments, rather than appended to this proof."
+  "place": "The maps used here are tensor reassociation, evaluation, and adjunction units and counits; intrinsic proper/open mate and pasting argument (parent step 2). S4, 2026-10-21: naturality, cartesian and clopen invertibility, and scalar-restriction exactness proved using the specified existing constructions and Mathlib adjunction/full-faithfulness APIs. C8, 2026-10-21: proved rhoOrdinary_existsUnique, evalPushOrdinary_existsUnique, evalPullInv_isIso and pi_components using the actual ringed-sequence construction, section-normalized pushforward comparisons, the ordinary level unit equation, and exact localization of the complementary zero functor. V2, 2026-10-21: proved rhoPushOrdinary_existsUnique and compositor_associativity. The former assembles section-normalized scalar/direct-image comparisons as a tower isomorphism; the latter proves ordinary sectionwise coherence, descends it by exact localization, and transfers it through the specified adjunctions. T3, 2026-10-21: proved gamma_adjunct by generic adjunction transport, cancellation of the invertible open unit, the clopen projection formula, and conjugation of the composite inverse-image compositor. No new proof dependencies. U4, 2026-10-21: proved the two derived evaluation mate invertibility clauses from existing varying-ring comparisons, exact square composition, constant-diagram direct-image normalization, and a proved private exact-localization inverse mate argument; no new statements or holes."
  },
  "mathlib_searches": [
   {
@@ -337,10 +343,10 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261021T020141-L-2591101",
-  "kind": "proof",
+  "landing": "20261021T061713-L-1815513",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "tool_uses": [
