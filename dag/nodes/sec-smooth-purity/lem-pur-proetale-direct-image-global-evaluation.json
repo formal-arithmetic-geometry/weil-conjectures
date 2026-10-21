@@ -2,7 +2,7 @@
  "id": "lem-pur-proetale-direct-image-global-evaluation",
  "kind": "statement",
  "title": "Normalized derived global sections after pro-etale direct image",
- "statement": "Fix the finite coefficient datum of [def-pur-conventions], with $A=A_{E,n}$. Let $f:T\\to Y$ and $g:Y\\to W$ be morphisms of $k$-schemes [def-pc-scheme]. Use the ordinary constant-$A$ module categories on small pro-etale sites [def-weil-pbc-proetale-modules], their bounded-below derived categories [def-weil-pbc-derived-categories], and their direct images and exact inverse images [def-weil-pbc-proetale-operations]. Derived global sections mean the right derived evaluation at the final object; use the finite derived direct image of [def-weil-derived-direct-image].\n\nThere is a canonical natural isomorphism of functors on $D^+(T_{\\mathrm{proet}},A)$\n$$\\ell_f:R\\Gamma(Y,Rf_*(-))\\xrightarrow{\\sim}R\\Gamma(T,-).$$\nOn a bounded-below K-injective representative $J$ [def-pur-kinjective-complex] of $L$ it is induced by the identity of section complexes $\\Gamma(Y,f_*J)=\\Gamma(T,J)$. This is natural for all derived morphisms, not only chain maps between specified complexes, and compatible with shifts. For the canonical direct-image composition comparison $c_{g,f}:R(gf)_*\\cong Rg_*Rf_*$ [lem-weil-derived-direct-image-composition], one has\n$$\\ell_{gf,L}=\\ell_{f,L}\\circ\\ell_{g,Rf_*L}\\circ R\\Gamma(W,c_{g,f,L}).$$\nThe comparison for an identity is the identity. If $j:U\\hookrightarrow T$ is an open immersion [def-weil-open-immersion], the composite\n$$R\\Gamma(T,L)\\xrightarrow{R\\Gamma(T,\\eta_j)}R\\Gamma(T,Rj_*j^*L)\\xrightarrow{\\ell_{j,j^*L}}R\\Gamma(U,j^*L)$$\nis the canonical restriction map, where $\\eta_j$ is the open adjunction unit. In particular these comparisons identify derived global sections of a pushed-forward support-localization triangle with derived global sections of the original triangle, with the same third arrow and its shift comparison.",
+ "statement": "Fix the finite coefficient datum of [def-pur-conventions], with $A=A_{E,n}$. Let $f:T\\to Y$ and $g:Y\\to W$ be morphisms of $k$-schemes [def-pc-scheme]. Use the ordinary constant-$A$ module categories on small pro-etale sites [def-weil-pbc-proetale-modules], their bounded-below derived categories [def-weil-pbc-bounded-derived-subcategories], and their direct images and exact inverse images [def-weil-pbc-proetale-operations]. Derived global sections mean the right derived evaluation at the final object; use the finite derived direct image of [def-weil-derived-direct-image].\n\nThere is a canonical natural isomorphism of functors on $D^+(T_{\\mathrm{proet}},A)$\n$$\\ell_f:R\\Gamma(Y,Rf_*(-))\\xrightarrow{\\sim}R\\Gamma(T,-).$$\nOn a bounded-below K-injective representative $J$ [def-pur-kinjective-complex] of $L$ it is induced by the identity of section complexes $\\Gamma(Y,f_*J)=\\Gamma(T,J)$. This is natural for all derived morphisms, not only chain maps between specified complexes, and compatible with shifts. For the canonical direct-image composition comparison $c_{g,f}:R(gf)_*\\cong Rg_*Rf_*$ [lem-weil-derived-direct-image-composition], one has\n$$\\ell_{gf,L}=\\ell_{f,L}\\circ\\ell_{g,Rf_*L}\\circ R\\Gamma(W,c_{g,f,L}).$$\nThe comparison for an identity is the identity. If $j:U\\hookrightarrow T$ is an open immersion [def-weil-open-immersion], the composite\n$$R\\Gamma(T,L)\\xrightarrow{R\\Gamma(T,\\eta_j)}R\\Gamma(T,Rj_*j^*L)\\xrightarrow{\\ell_{j,j^*L}}R\\Gamma(U,j^*L)$$\nis the canonical restriction map, where $\\eta_j$ is the open adjunction unit. In particular these comparisons identify derived global sections of a pushed-forward support-localization triangle with derived global sections of the original triangle, with the same third arrow and its shift comparison.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0D6H, lemma-Leray-unbounded, and Tag 0D6E, lemma-derived-pushforward-composition; K-injective final-object normalization and open-unit compatibility of old item Step 9"
@@ -11,16 +11,145 @@
   "def-pur-conventions",
   "def-pc-scheme",
   "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-bounded-derived-subcategories",
   "def-weil-pbc-proetale-operations",
   "def-weil-derived-direct-image",
   "lem-weil-derived-direct-image-composition",
   "def-weil-open-immersion",
   "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on compatible small site models from [def-weil-pbc-proetale-site]. The coefficient sheaf in [def-weil-pbc-proetale-modules] is identified with the ordinary constant ring sheaf, preserving constants and the structural coefficient map, by [prop-weil-pbc-proetale-constant-ring-map]. All functors below are in these ordinary module categories. Choose a complex representing $L$. If its cohomology vanishes below $a$, replace it by its good truncation with degree $a$ term $K^a/\\operatorname{im}(d^{a-1})$, original terms above $a$ and zero terms below $a$. The quotient map is a quasi-isomorphism: in degree $a$ its kernel modulo boundaries is $H^a(K)$, above $a$ the cohomology is unchanged, and below $a$ both cohomologies vanish. Thus [lem-sc-bounded-below-injective-resolution] supplies a bounded-below K-injective resolution $K\\to J$. The same construction applies to the source of every derived morphism under consideration.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-proetale-modules",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU, definition-unbounded-derived-category; bounded-below resolution input as stated in lem-sc-bounded-below-injective-resolution"
+   }
+  },
+  {
+   "text": "The module adjunction $f^*\\dashv f_*$ and exactness of $f^*$ are those of [def-weil-pbc-proetale-operations]. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] with $u=f_*$ and $v=f^*$: $f_*J$ is K-injective on $Y$. It is still bounded below, since an additive termwise functor sends zero terms to zero. The same applies to $g_*f_*J$ and $(gf)_*J$. Thus these particular representatives can be used without another resolution when computing any of the iterated direct images in the statement; these are exactly the finite functors in [def-weil-derived-direct-image].",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "def-weil-derived-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ, lemma-adjoint-preserve-K-injectives"
+   }
+  },
+  {
+   "text": "By [pur7710-def-derived-sections], $R\\Gamma(T,L)$ is computed by $\\Gamma(T,J)$, while $R\\Gamma(Y,Rf_*L)$ is computed by $\\Gamma(Y,f_*J)$ using Step 2. By the sectionwise definition [def-weil-proetale-module-direct-image], in degree $r$ the latter is $J^r(Y\\times_YT)=J^r(T)$, using the canonical terminal-object isomorphism. This identification has the same $A$-action, restrictions, and differential on both sides. Define $\\ell_{f,L}$ by the resulting identity of section complexes and the canonical resolution identifications of [lem-sf-kinjective-derived-map-computation]. It is an isomorphism, since the displayed chain map is an isomorphism in every degree.",
+   "uses": [
+    "pur7710-def-derived-sections",
+    "def-weil-proetale-module-direct-image",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y, lemma-K-injective-defined, and 070K, lemma-enough-K-injectives-implies; final-object calculation of Tag 0D6H, sites-cohomology-lemma-Leray-unbounded"
+   }
+  },
+  {
+   "text": "For any derived morphism $h:L\\to L'$, choose K-injective models $J,J'$. The bijection of [lem-weil-pbc-kinjective-hom-derived] represents $h$ by a unique homotopy class $b:J\\to J'$. The formula of [lem-sf-kinjective-derived-map-computation] computes $Rf_*(h)$ by $f_*b$ and computes the two global-sections maps by $\\Gamma(Y,f_*b)$ and $\\Gamma(T,b)$. These chain maps are equal under Step 3, so the naturality square for $\\ell_f$ commutes for every derived $h$. Any homotopy is carried to the same section homotopy by additive termwise evaluation. Changing $J$ or $J'$ uses precisely the transition maps of the same cited computation lemma, so the construction is independent of the resolutions. This proves canonical naturality, including maps originally given as roofs.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, and Tag 070Y, lemma-K-injective-defined; resolution-transition calculation"
+   }
+  },
+  {
+   "text": "The derived functors carry the shift comparisons and triangulated structures of [lem-pc-right-derived-functor-triangulated]. A shift of $J$ is again K-injective: maps from an acyclic $M$ into $J[n]$ correspond to maps from the acyclic $M[-n]$ into $J$, and the latter are null-homotopic. Use $J[n]$ to compute both sides of $\\ell_f$ at $L[n]$. Degreewise evaluation gives $\\Gamma(Y,f_*(J[n]))=\\Gamma(T,J[n])=\\Gamma(T,J)[n]$; all shifted differentials carry the identical factor $(-1)^n$. Thus $\\ell_{f,L[n]}$ agrees with $\\ell_{f,L}[n]$ through the canonical shift comparisons. Independence of resolutions in Step 4 identifies this computation with the specified derived shift comparisons.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "def-pur-kinjective-complex",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05SU, lemma-derived-shift; Tag 070Y, lemma-K-injective-defined; triangulated derived-functor input"
+   }
+  },
+  {
+   "text": "Use the canonical composition comparison of [lem-weil-derived-direct-image-composition]. Its finite ordinary module comparison is the ringed-topos comparison, whose representative is specified by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]: for a resolution $v:f_*J\\to H$ it is represented by $g_*v$. Here $f_*J$ is already K-injective, so take $H=f_*J$ and $v=1$. Hence on this model $c_{g,f,L}$ is the canonical identification $(gf)_*J=g_*f_*J$. Evaluating at the final object of $W$, the right side of the asserted equation is the chain of identifications\n$$\\Gamma(W,(gf)_*J)=\\Gamma(W,g_*f_*J)=\\Gamma(Y,f_*J)=\\Gamma(T,J).$$\nTheir composite is the direct final-object identification defining $\\ell_{gf,L}$. On fibre products both maps are induced by the unique canonical isomorphism from the iterated pullback of the final object to $T$, so their equality is independent of the parenthesization. Step 4 transports this equality to $L$. For an identity morphism the same computation uses $1_*J=J$ and gives the identity comparison.",
+   "uses": [
+    "lem-weil-derived-direct-image-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-proetale-module-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, normalized by the identity resolution; Tag 0D6H, lemma-Leray-unbounded"
+   }
+  },
+  {
+   "text": "For an open $j:U\\hookrightarrow T$, choose a K-injective resolution $v:j^*J\\to H$ using [prop-pur-kinjective-resolutions-exist]. The derived adjunction of [def-weil-pbc-proetale-operations], with the representative characterization in [lem-pc-pre-derived-adjoint-functors-general], represents the actual unit at $L=QJ$ by\n$$J\\xrightarrow{\\eta_{j,J}}j_*j^*J\\xrightarrow{j_*v}j_*H.$$\nIndeed under that characterization this chain map is adjoint to $v:j^*J\\to H$, whose class becomes the identity of $j^*L$ after the resolution identification. Both $J$ and $j_*H$ are K-injective by Step 2, so their global-sections map computes $R\\Gamma(T,\\eta_j)$. By [lem-pur-proetale-open-unit-evaluation], evaluation of the first arrow at $T$ is restriction $\\Gamma(T,J)\\to\\Gamma(U,j^*J)$; evaluation of the second, followed by $\\ell_{j,j^*L}$, is $\\Gamma(U,v)$. Their composite is exactly restriction followed by its K-injective resolution map, which defines the canonical derived restriction $R\\Gamma(T,L)\\to R\\Gamma(U,j^*L)$. This calculation works for arbitrary open immersions, without quasi-compactness. Step 4 makes it natural in all derived morphisms.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-proetale-operations",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-pur-proetale-open-unit-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0DVC, lemma-pre-derived-adjoint-functors; Tag 09BN, proetale-lemma-open-immersion, with the unit normalization from lem-pur-proetale-open-unit-evaluation"
+   }
+  },
+  {
+   "text": "Finally let $B\\to C\\to D\\xrightarrow{d}B[1]$ be the original support-localization triangle. The derived functors in [lem-pc-right-derived-functor-triangulated] carry it and its pushforward to distinguished triangles. Apply the natural isomorphism $\\ell_f$ to its three vertices. Step 4 gives commutative squares for the first two maps and for $d$; Step 5 identifies the fourth-vertex comparison with $\\ell_{f,B}[1]$ through the functors' shift maps. Explicitly the last square reads $\\ell_{f,B[1]}\\,R\\Gamma(Y,Rf_*d)=R\\Gamma(T,d)\\,\\ell_{f,D}$ before this shift identification. Thus it is the given third arrow itself, with its given sign and shift comparison, that is identified. If the triangle was rewritten using a composite pushforward, Step 6 gives the same comparisons, and Step 7 identifies its open-unit arrow with restriction.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070K, lemma-enough-K-injectives-implies; naturality for the given connecting morphism and the shift calculation in Step 5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-kinjective-complex",
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-module-direct-image",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-proetale-open-unit-evaluation",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "pur7710-def-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6H and 0D6E; representative-level normalization, open unit and triangle compatibility assembled explicitly from derived.tex Tags 08BJ, 070I, 070Y, 0DVC and the cited DAG statements"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +185,52 @@
    "results": "CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback; TopCat.Presheaf.SheafConditionEqualizerProducts.w; PresheafOfModules.Sheafify.app_eq_of_isLocallyInjective; CategoryTheory.Functor.IsCoverDense.Types.appHom_valid_glue; TopCat.Presheaf.generateEquivalenceOpensLe_unitIso; TopCat.Presheaf.generateEquivalenceOpensLe_counitIso; TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map; TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff",
    "date": "2026-10-21",
    "verdict": "no match: abstract composition, underived pseudofunctor and sheafification hits do not state the normalized pro-etale derived global comparison and its open-unit compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|rightDerived).*([Gg]lobal[Ss]ections|[Ss]ections)|[Ll]eray",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits are abstract comparison or underived section constructions; they do not supply the finite pro-etale models and all normalization clauses of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived global sections of derived direct image is global sections on the source",
+   "results": "CategoryTheory.Sheaf.Γ; CategoryTheory.instIsRightAdjointSheafΓ; AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ; CategoryTheory.Functor.rightDerived; AlgebraicGeometry.LocallyRingedSpace.Γ; AlgebraicGeometry.Scheme.Γ; AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ; AlgebraicGeometry.PresheafedSpace.Γ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits are abstract comparison or underived section constructions; they do not supply the finite pro-etale models and all normalization clauses of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint; CategoryTheory.Functor.rightDerivedNatTrans_comp; CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc; CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits are abstract comparison or underived section constructions; they do not supply the finite pro-etale models and all normalization clauses of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray derived sections comparison normalized by evaluation at final objects compatible with shifts and adjunction unit restriction",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.sheafComposeNatTrans_fac; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'; CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits are abstract comparison or underived section constructions; they do not supply the finite pro-etale models and all normalization clauses of this item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections composed with derived pushforward of ordinary constant ring module sheaves agree with global sections on the source via K injective representatives",
+   "results": "SheafOfModules.pushforwardSections_unitHomEquiv; SheafOfModules.unitToPushforwardObjUnit_val_app_apply; SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; SheafOfModules.pushforwardNatIso_hom; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pushforwardSections_coe",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits are abstract comparison or underived section constructions; they do not supply the finite pro-etale models and all normalization clauses of this item"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComparison|derivedη_fac_app|pushforwardSections_unitHomEquiv",
+   "results": "Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits are abstract comparison or underived section constructions; they do not supply the finite pro-etale models and all normalization clauses of this item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-retracted-support-localization-comparison",
@@ -78,5 +249,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-proetale-direct-image-global-evaluation",
+  "worker": "stage1",
+  "summary": "Proved the normalized global comparison on bounded-below K-injectives, including arbitrary derived maps, shifts, the canonical composition comparison, actual open unit and the existing triangle third arrow. Reused all supporting facts; no new nodes. Corrected the bounded-derived-category reference from the etale-only definition to the generic one.",
+  "blueprint": "Nearest ancestor prop-pur-affine-line-orientation-uniqueness Step 3 and sk-prop-a1 global-sections paragraph after localization and Rp_*; expands the final-object obligation extracted through lem-pur-retracted-support-localization-comparison.",
+  "tool_uses": [
+   {
+    "node": "def-pur-kinjective-complex",
+    "why": "K-injective definition used to check stability under shifts. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "def-weil-derived-direct-image",
+    "why": "Fixes the finite-level functor used by the unit. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-bounded-derived-subcategories",
+    "why": "Generic definition makes the pro-etale D+ notation precise. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-proetale-modules",
+    "why": "Finite coefficient and bounded-below category definitions are needed to interpret the item. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Exact inverse image and actual module adjunction justify the K-injective and unit calculations. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Small pro-etale models and ordinary module categories are the setting for final-object evaluation. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "def-weil-proetale-module-direct-image",
+    "why": "Sectionwise pushforward formula gives the final-object equality. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Fraction-level characterization identifies the displayed map with the actual derived adjunction unit. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic triangulated and shift structure for the already specified derived functors. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-proetale-open-unit-evaluation",
+    "why": "Exact open-unit section formula is required to identify restriction. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic ringed-site resolution theorem supplies the bounded-below model required by this unit. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Computes all derived maps and changes of model, needed beyond chain-map naturality. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Supplies the canonical c in the item. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Homotopy-to-derived Hom bijection covers arbitrary derived morphisms. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Abstract exact-left-adjoint criterion computes pushforward without re-resolving. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Supplies the representative normalization of the canonical finite comparison. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Resolves the open pullback without assuming that arbitrary inverse images preserve K-injectives. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Identifies the published finite coefficient sheaf and its structural map with the ordinary constant sheaf. No statement of sk-prop-a1 supplies this generic tool."
+   },
+   {
+    "node": "pur7710-def-derived-sections",
+    "why": "Defines coefficient-linear derived final-object sections computed by K-injectives. No statement of sk-prop-a1 supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-kinjective-complex",
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-module-direct-image",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-proetale-open-unit-evaluation",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "pur7710-def-derived-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-abb7d18f9",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-abb7d18f9 (reviewer sub-agent of L); spot-checked: Q87 abb7d18f is a first split with 8 steps and no new nodes. The item is not on the 10-19 drop list and is still unsplit live; there is no repair note and no cycle (closure check over all 19 cited nodes). The only statement change replaces the étale-only def-weil-pbc-derived-categories with def-weil-pbc-bounded-derived-subcategories for pro-étale D+. That is a correct citation repair and the report names it. Step checks: S1, the good truncation is a quasi-isomorphism and the constant-ring identification comes from prop-weil-pbc-proetale-constant-ring-map. S2, f_* preserves K-injectives (exact left adjoint f^* from def-weil-pbc-proetale-operations). S3, (f_*J)(Y)=J(T) with the A-action via rho^f_A. S4, naturality for every derived map via kinjective-hom-derived and the transition and cocycle clauses of sf-kinjective-derived-map-computation. S5, J[n] is K-injective and the (-1)^n differentials match. S6, kappa with j=1 gives the identity (gf)_*J=g_*f_*J, and the composite types check. S7, I recomputed the unit through the 0DVC-type characterization (t=id, s=v, adjunct v gives id), and open-unit-evaluation at V=T gives restriction; edge cases U empty and U=T hold, and no quasi-compactness is assumed. S8, naturality at the given d plus the Step 5 shift identification keeps the third arrow and its sign. Sources: Stacks 0D6H (sites-cohomology.tex:4403) and 0D6E (:4011) were read; no SGA is cited. All declared tool_uses are generic black boxes and I accept them; open-unit-evaluation is in sk-prop-a1-kummer, which is in route. Advisory for the maintainer: the finite c_{g,f}=kappa identification (Step 6) is pinned only in the proof, Step 1, of lem-weil-derived-direct-image-composition, and the shift comparison of lem-pc-right-derived-functor-triangulated is unspecified. The item inherits this from its parent, and the Lean universal compositor satisfies the same K-injective normalization. Consider stating the normalization in clause 1 of that node."
  }
 }
