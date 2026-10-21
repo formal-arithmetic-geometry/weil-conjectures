@@ -388,5 +388,23 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-588436763 (reviewer sub-agent of L); spot-checked: Read the item in full: statement, 6 steps, source, blueprint and searches. It has no new nodes. Also read parent lem-sfb-countable-normed-orthogonal-basis, lem-sfb-finite-ultrametric-best-approximation (existence of a minimizer only, so not a duplicate), stmt_dep def-weil-l-adic-coefficient-extension clause 1, and main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md paragraph (3). That paragraph has no norm lemma, so proof_origin=agent with an honest place and a WANTED reference is correct. The statement is self-contained, is unchanged from the base, and matches exactly how step 1 of the parent uses it. Checked every step. Step 2: z=w-a^{-1}u gives a(x-z)=u+ab, so ||u+ab||>=|a|d. Step 3: ultrametric case split A<=B / A>B, using |-1|=1. Step 4: substitution, including n=0. Step 5: a_n=0 from d>0, then old independence. Step 6: W+Eb=W+Ex. All steps are genuinely elementary, so uses=[] is right. My own tests in Q_l^2 with sup norm, W=E(1,1), x=(1,0): the equal-norm case |a|=|a'| with a non-unique minimizer (w=0 or w=(1,1)) satisfies the formula. A non-minimizing w=c(1,1) with |c|>1 breaks it, so the minimality hypothesis is necessary and actually used. n=0 reduces to homogeneity. Duplicate search over snapshot/dag/nodes (ultrametric, nearest, best approximation, orthogonality formula, residual) found no equivalent node. Mathlib searches cover LeanSearch, LeanFinder/Loogle and grep; Ultra.lean has only the ultrametric inequality, so no-match is accepted. The blueprint.from.node fill (det-thm-sf-ctf-stability-direct-images, taken from the last via node) is consistent. No route uses, no tool_uses, no SGA, no re-split note applies. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.UltrametricOrthogonalExtension",
+  "declaration": "Padic.ultrametric_orthogonal_extension",
+  "file": "lean/Sheaf/SixFunctors/UltrametricOrthogonalExtension.lean",
+  "statement": "theorem ultrametric_orthogonal_extension (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (V : Type v) [AddCommGroup V] [Module E V] (norm : V → NNReal) (hscale : ∀ (a : E) (z : V), norm (a • z) = Real.toNNReal (coefficientExtensionAbsoluteValue l E a) * norm z) (htriangle : ∀ (z₁ z₂ : V), norm (z₁ + z₂) ≤ max (norm z₁) (norm z₂)) (hdefinite : ∀ z : V, norm z = 0 ↔ z = 0) (n : ℕ) (b : Fin n → V) (hlin : LinearIndependent E b) (horth : ∀ (a : Fin n → E), norm (∑ i, a i • b i) = Finset.univ.sup (fun i => Real.toNNReal (coefficientExtensionAbsoluteValue l E (a i)) * norm (b i))) (x : V) (hx : x ∉ (Submodule.span E (Set.range b) : Set V)) (w : V) (hw : w ∈ Submodule.span E (Set.range b)) (hmin : norm (x - w) = sInf (Set.image (fun z : V => norm (x - z)) (Submodule.span E (Set.range b) : Set V))) : x - w ≠ 0 ∧ (∀ (a : Fin (n + 1) → E), norm (∑ i, a i • Fin.snoc (α := fun _ => V) b (x - w) i) = Finset.univ.sup (fun i => Real.toNNReal (coefficientExtensionAbsoluteValue l E (a i)) * norm (Fin.snoc (α := fun _ => V) b (x - w) i))) ∧ LinearIndependent E (Fin.snoc (α := fun _ => V) b (x - w)) ∧ Submodule.span E (Set.range (Fin.snoc (α := fun _ => V) b (x - w))) = Submodule.span E (Set.range b) + Submodule.span E ({x} : Set V)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9e207c9d",
+  "group": "NK",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of the node maps onto the Lean: spectral absolute value via coefficientExtensionAbsoluteValue (binders match), explicit NNReal norm with scaling, ultrametric and definiteness axioms, Fin n family with linear independence and the Finset.sup orthogonality formula (empty sup = 0 gives n = 0), span W, x ∉ W, w ∈ W, minimality as sInf of a nonempty set bounded below by 0. Conclusions: x−w ≠ 0, enlarged formula for Fin.snoc, linear independence, span = W ⊔ span{x}. Same quantifier order, no extra assumptions, independent universes u and v. lean.statement verbatim (substring check), no statement_change, no duplicate in side-live lean/Sheaf or the DAG (best-approximation sibling only asserts existence). No definitions, proof only sorry, docstrings carry source place, blueprint tag and the 6 steps; report has both sections. No compile run because nothing changed. Advisory: the parent countable-basis node uses NormedSpace and will need the routine identification of ‖a‖ with coefficientExtensionAbsoluteValue at proof stage."
  }
 }

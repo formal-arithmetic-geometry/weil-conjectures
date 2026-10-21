@@ -1,21 +1,69 @@
-# Stage-1 worker report
+## Worker report
 
-1. Files written: `dag/nodes/sec-six-functors-basics/lem-sfb-ultrametric-orthogonal-extension.json` (statement, split; no Mathlib match), `citations.json` (empty: the six proof steps cite no nodes), and this report. No new nodes and no new Mathlib leaves. The search command wrote `searches.jsonl`; all seven actual results were read and appended to the item's inherited search records.
-2. Attachments: none. Searches of `lean/WeilConjectures/` for the blueprint tag and nearest-point, best-approximation, nonarchimedean and orthogonal terminology found no declaration stating the item. The Sheaf search likewise supplied no attachment.
-3. WANTED: a textbook reference for orthogonality of a best-approximation residual in an ultrametric normed vector space, for lem-sfb-ultrametric-orthogonal-extension. The available blueprint paragraph (3) does not contain this auxiliary. No absent reference is presented as read; the complete elementary proof is explicitly agent-written.
-4. Issues corrected: the inherited source place attributed a geometric norm-projection induction to paragraph (3), although that paragraph only assembles proper and open direct images. The source place and proof origin now state the distinction. `blueprint.from.node` was null; `blueprint_refs.py ancestor` also reports None because the created.item chain ends at a module name. The existing last via node lem-sfb-admissible-direct-image explicitly points to the imported det-thm-sf-ctf-stability-direct-images; that verified ancestor now fills the null field, and the existing via list is retained. The mathematical statement and its sole statement dependency are unchanged. No statement dispute or unit/chapter route change.
-5. Unfinished work: none for this one-level split; the external bibliographic reference remains WANTED. No Lean files written, no compilers invoked, and no repository files changed by the worker.
+The module `Sheaf.SixFunctors.UltrametricOrthogonalExtension` states
+`Padic.ultrametric_orthogonal_extension` with proof `sorry`.  It uses
+`NNReal` for the norm codomain, so the empty family has maximum `0` through
+`Finset.sup`.  The scalar absolute value is the recorded
+`Padic.coefficientExtensionAbsoluteValue l E`, converted to `NNReal` with
+`Real.toNNReal`.
 
-## Not duplicates
+The Lean binders render the node hypothesis by hypothesis:
 
-No new nodes. Whole-blueprint searches for orthogonal, nearest, and ultrametric found no equivalent imported node (the apparent nearest hit was a t-structure). Whole-DAG searches identify this item and its existing countable-basis parent; the existing finite-ultrametric-best-approximation lemma asserts existence of a minimizer, which is already an assumption here. We do not cite that existence result or duplicate it. The existing integral-scalar-contractive lemma contains an ultrametric norm calculation but does not state this residual extension.
+- `l`, `[Fact l.Prime]`, `E`, `[Field E]`, `[Algebra (Padic l) E]`, and
+  `[FiniteDimensional (Padic l) E]` give the prime and finite coefficient
+  extension.
+- `V`, `[AddCommGroup V]`, and `[Module E V]` give the vector space.  The
+  explicit `norm : V → NNReal` has scalar homogeneity `hscale`, the
+  ultrametric inequality `htriangle`, and definiteness `hdefinite`.
+- `n`, `b : Fin n → V`, `hlin`, and `horth` render the old finite linearly
+  independent orthogonal family and its maximum formula.  `Finset.sup` makes
+  `n = 0` exactly the stated empty-family case.
+- `Submodule.span E (Set.range b)` is `W`; `hx` is `x ∉ W`, `hw` is `w ∈ W`,
+  and `hmin` is `‖x-w‖ = inf_{u∈W} ‖x-u‖`, written as `sInf` of the image of
+  the span under `fun z => norm (x-z)`.
+- The conclusion's first conjunct is `x - w ≠ 0`.  Its second conjunct is
+  the displayed maximum formula for `Fin.snoc b (x-w)`, i.e. the enlarged
+  family.  The last two conjuncts state linear independence and that its span
+  is `W + E x`, rendered as the sum with `Submodule.span E ({x} : Set V)`.
 
-## Review by NK
+The only statement dependency used is the definition node
+`def-weil-l-adic-coefficient-extension`, specifically
+`Sheaf.NumberTheory.Padics.CoefficientExtension` declaration
+`Padic.coefficientExtensionAbsoluteValue`.  I read its complete signature and
+docstring; it is the unique extended absolute value supplied by the recorded
+finite extension construction.  No dependency module or new definition node
+is needed.
 
-I read the entire current source file main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md, the chapter and unit records, the existing countable-normed-orthogonal-basis parent, and the finite-ultrametric-best-approximation statement. The actual blueprint paragraph (3) provides context only. This item is an auxiliary in the parent's explicit induction, so its proof is my elementary argument. No new-node sources are involved. I read def-weil-l-adic-coefficient-extension: it defines the extended absolute value; the item retains that statement dependency. Its completeness, local compactness, and DVR claims are not used. All remaining notions and norm axioms needed for this argument are written explicitly in the item's statement.
+The recorded searches were checked and rerun conceptually against the current
+tree: LeanFinder and LeanSearch return only inner-product/orthonormal basis
+extension results; Loogle's `Nonarchimedean` query is rejected as an unknown
+identifier; grep in `Mathlib/Analysis/Normed` finds ultrametric norm basics but
+no nearest-point orthogonal-extension theorem.  `rg` over `lean/Sheaf` and
+`lean/WeilConjectures` found no declaration for this item or its terminology.
+The exact search records are retained in the node's `mathlib_searches` field.
 
-For C1 and C4, each of the six steps has an empty uses list because it uses only the stated hypotheses, the previously established calculation, and elementary field/vector-space/order algebra, fully displayed. Thus there are no citation quotes to supply: citations.json is []. Step 1 proves the residual is nonzero and uses the order defining property of an infimum of a nonempty set bounded below by zero. Step 2 applies that minimum only at z=w-a^{-1}u, whose membership in W follows from linear closure; the a=0 case is separate, so no inverse of zero occurs. Step 3 establishes the lower bound for the other summand with u=(u+ab)-ab, alongside the given ultrametric upper bound. It does not quote the unequal-norm theorem or a projection theorem: both norm-order cases are written out. Step 4 substitutes the old formula rather than assuming any new orthogonality. Step 5 explicitly eliminates a_n using the positive residual norm, then uses precisely the old independence hypothesis. Step 6 writes both span inclusions using b=x-w and x=b+w. Each is short algebra from the hypotheses; none hides an external comparison, compactness, minimizer-existence, or linear-algebra extension lemma. All steps are shorter than 2000 characters. This addresses B1-B10 and C1-C8 without adding artificial nodes, and D1-D5 because the argument stays in the item rather than being moved into a new statement.
+Edge cases checked before writing the statement include `n = 0`, `a = 0`,
+`u = 0`, equal competing norms in the ultrametric case split, and a concrete
+maximum-norm example in `E^2` with `W = E(1,0)` and `x = (0,1)`.  The
+minimizer set is nonempty because `0 ∈ W`; no uniqueness, completeness of `V`,
+or unrecorded existence of `w` is asserted.  Zero vectors and the identity
+scalar cases remain included.
 
-For E1-E7 I checked n=0 (W=0, w=0, homogeneity), a=0, u=0, the potentially cancelling equal-norm case A=B, and A>B separately. In the equal-norm case the minimizing property supplies the needed lower bound even though the bare ultrametric inequality would not. For a concrete check, in E^2 with the maximum norm, W=E(1,0), x=(0,1), and w=(t,0) with |t|<=1, all such w are minimizers; the formula max(|c-at|,|a|)=max(|c|,|a|) agrees with the proof, including |t|=1 and c=at. The proof never asserts uniqueness of w, completeness of V, or existence of w without its stated hypothesis. Nonzero old basis vectors follow from the old independence; their positivity need not be assumed separately. Spanning is W+Ex, not just W+E(x-w) left unidentified.
+Validation with the prescribed `scompile.py` was clean for the module after
+the final edit, with no errors or warnings.  No global build or direct git
+command was used.
 
-I also read the actual Mathlib candidates: Analysis/Normed/Group/Ultra.lean gives the ultrametric inequality and unequal-norm maximum formula, Analysis/InnerProductSpace/Projection/Minimal.lean has RCLike and InnerProductSpace hypotheses, Analysis/Normed/Unbundled/FiniteExtension.lean constructs the basis-coordinate norm, and Analysis/CStarAlgebra/GelfandDuality.lean concerns zero products in complex C-star algebras. None states the item's full conclusion under its hypotheses. The seven new queries, their exact result records, and the second phrasings are preserved verbatim in the item. The four inherited records were retained as earlier searches, not claimed as newly run. No Mathlib leaf is asserted.
+## Second reading by NK
+
+I reread the copied DAG node, the complete module, and the dependency
+declaration.  Every node hypothesis has one corresponding Lean binder: the
+finite extension data, vector-space operations, three norm axioms, finite
+family independence and formula, span membership/exclusion, and the exact
+infimum equality.  Every conclusion clause is present in order: nonzero
+residual, enlarged maximum formula, independence, and the span equality.
+The `Fin.snoc` family uses the old entries on `Fin.castSucc` and the residual
+at `Fin.last`, so it is the same family indexed by `0,…,n`; `Finset.sup` gives
+the required value for the empty old family.  The source proof steps in the
+node are all elementary residual, ultrametric, independence, and span
+calculations and are represented in the theorem docstring; none is silently
+proved in the statement.  The final compile was rerun after this rereading.
