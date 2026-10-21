@@ -52,10 +52,11 @@
    }
   },
   {
-   "text": "The unit isomorphism for the sheaf tensor product in [lem-pc-sheaf-modules-tensor-closed] identifies $\\mathcal G\\otimes_R R$ naturally with $\\mathcal G$ for every module sheaf $\\mathcal G$. Tensoring with $R$ therefore identifies each exact sequence with itself. Consequently the regular module sheaf $R$ is flat by [def-pc-flat-sheaf-modules]. This uses the sheaf tensor unit, not any claim that sections of every flat sheaf are flat.",
+   "text": "Install the existing independent-coefficient monoidal, symmetric, closed and preadditive structures on module sheaves. The regular sheaf is the tensor unit, which is categorically flat by its unitors. The comparison siteSheafTensorRightIso identifies categorical right-tensor exactness with IsFlatOnSite.",
    "uses": [
     "lem-pc-sheaf-modules-tensor-closed",
-    "def-pc-flat-sheaf-modules"
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": true,
    "source": {
@@ -64,21 +65,22 @@
    }
   },
   {
-   "text": "Apply [lem-pc-sites-modules-coproduct-flat] to the constant families with value $R$ indexed by $\\{1,\\ldots,m\\}$ and $\\{1,\\ldots,n\\}$. Step 4 supplies flatness of each summand, so $R^{\\oplus m}$ and $R^{\\oplus n}$ are flat. The specified isomorphisms with $P$ and $Q$ induce natural isomorphisms of their tensor functors; exactness, hence flatness [def-pc-flat-sheaf-modules], follows for $P$ and $Q$. The same cited coproduct statement with empty index set proves that the zero module sheaf is flat. Thus every term of $C_u$, $P[0]$ and $Q[0]$ is flat, including their zero terms.",
+   "text": "For a finite family of categorically flat objects, tensor preserves its coproduct. Thus tensorLeft of the coproduct is naturally isomorphic to the pointwise family of tensorLeft functors followed by the finite coproduct functor. The family preserves finite limits by evaluation, and finite coproducts preserve finite limits in an abelian category because they are finite biproducts. Closedness supplies finite-colimit preservation and symmetry gives right-tensor exactness. This proves the required finite instance of coproduct flatness directly, without the same-universe general coproduct theorem. Transport along eP and eQ. A single complex has its given flat object at zero and zero elsewhere; zero objects are flat by additivity. In the cone, use homotopyCofiber.XIsoBiprod: at -1 its second summand is zero and at 0 its first summand is zero; elsewhere both summands vanish. Transport flatness along the canonical biproduct isomorphisms and siteSheafTensorRightIso.",
    "uses": [
-    "lem-pc-sites-modules-coproduct-flat",
-    "def-pc-flat-sheaf-modules"
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03EU (lemma-colimits-flat), (2), including the empty coproduct"
    }
   },
   {
-   "text": "All three complexes vanish in degrees greater than $0$. Apply [lem-pc-bounded-above-flat-kflat-site] separately to $C_u$, $P[0]$ and $Q[0]$, using their termwise flatness from step 5 and the common upper bound $0$. All three are K-flat for the given arbitrary ringed site. Together with the specific quasi-isomorphism $\\epsilon$ from step 3, the definition [def-pc-kflat-complex] says precisely that $\\epsilon:C_u\\to T[0]$ is a K-flat resolution. No property of the cokernel beyond its cokernel universal property, and no scalar origin for $u$ or $R$, entered the argument.",
+   "text": "The single complexes vanish above zero. The cone does too, since its terms are the biproducts of P[0]^(i+1) and Q[0]^i. This supplies IsStrictlyLE 0 for all three complexes. Apply isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite to each, using termwise site-flatness from Step 5. Pair the cone K-flatness with the normalized augmentation quasi-isomorphism from Step 3 to obtain precisely IsKFlatResolutionIndependentCoefficients.",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
     "def-pc-kflat-complex"
    ],
    "elementary": false,
@@ -96,14 +98,14 @@
   "def-pc-quasi-iso-modules",
   "lem-pc-sheaf-modules-tensor-closed",
   "def-pc-flat-sheaf-modules",
-  "lem-pc-sites-modules-coproduct-flat",
-  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
   "def-pc-kflat-complex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 06YQ specialized using the tensor unit, Tag 03EU(2), and the canonical cone augmentation of Tag 0152; cone formula in derived-definition-cone"
+  "place": "Tag 06YQ via the proved independent-universe bounded-flat criterion; finite instance of Modules on Sites Tag 03EU(2) proved directly from finite biproduct exactness; Mathlib normalized cone augmentation and differential formula"
  },
  "mathlib_searches": [
   {
@@ -234,9 +236,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-sites-modules-coproduct-flat",
-  "lem-pc-bounded-above-flat-kflat-site"
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -268,5 +268,15 @@
   "group": "Q50",
   "result": "pass",
   "note": "Every node clause matches the Lean: the cone of u[0] stands for C_u (the node allows Cone(u[0])), the augmentation is Mathlib's canonical cone map (zero on P, q on Q), plus QuasiIso, termwise IsFlatOnSite and IsKFlatIndependentCoefficients for C_u, P[0] and Q[0], the K-flat resolution, inr ≫ ε = q[0], and the +u differential via inl_v_d. Hypotheses are Mono, the cokernel IsColimit of the given q, ranks m,n ≥ 0 including 0, an arbitrary CommRingCat sheaf and EssentiallySmall.{r} with u, v, r independent; nothing extra. Edge cases m=0, n=0, u iso, ℤ with u=2, zero ring and empty site are all fine. No duplicate: the helpers only name mappingCone and descShortComplex, consistent with the parent's scalarCyclicComplex. Docstrings and the 6 proof steps are present, imports are the stmt/proof_deps modules, lean.statement matches the file verbatim, and the node copy changes only its lean field. nt_compile --json is clean (34.8 s, EXIT 0). Advisory: stage 3 needs the independent-universe bounded-flat K-flat interface."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261021T120945-L-4019136",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
