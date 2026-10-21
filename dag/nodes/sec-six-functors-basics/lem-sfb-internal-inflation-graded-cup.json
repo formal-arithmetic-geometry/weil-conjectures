@@ -304,5 +304,38 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-b3adfae7d (reviewer sub-agent of L); spot-checked: I read the item, the report and every cited statement in full. The statement is unchanged, there are no new nodes, and no repair note applies. The only citer is lem-sfb-internal-bar-ordered-cup: its steps 1, 5 and 6 use exactly the item's adjunction, ordered-formula and unit clauses. Source: main-20261015 direct-images proof paragraph (3) has no monoidal content, so the item is correctly marked agent-written with a WANTED reference; the null blueprint ancestor is inherited. Steps 1–2: the action-topos presentation holds (small profinite site with finite limits, p_K exact, identity tensor and unit comparisons), and the K-injective canonical derived adjunction (ringed-projection-mate-exact) is the same as the adjunction of lem-sp-canonical-right-derived-adjunction-shift. That theorem's hypotheses (exact additive left adjoint, additive right adjoint, K-injectives) come from the product-inflation node and lem-sfb-grothendieck-k-injective. Step 3: the mate formula matches Mathlib Adjunction.rightAdjointLaxMonoidal (Monoidal/Functor.lean:947-950). Step 4: I recomputed the transpose (counit naturality, the mate equation, naturality of t), and L(r)=r follows from the pur shifted-tensor calculus. Step 5: I re-derived the three equalities. λ_{S_q}=κ_{I,q} because the s^2 sign at first degree 0 is 1, and the naturality of t^2 in the first variable for arbitrary derived f is stated in lem-weil-pbc-derived-tensor-shift-descent. Step 6: there is one K-flat summand in degree p+q, the signs are (-1)^{pq}, they are universal, and they equal 1 at p=0 or q=0. Step 7: the shift types check (f[-q][p+q]=x, g[p+q]=y[p]). Edge cases checked: p=q=0, q=0, trivial G, zero ring. No cycle (closure of 584 nodes excludes the item), no SGA. The duplicate search (cup with adjunction, composition or lax monoidal) found only ordinary-module and pairing nodes, none stating this law. I accept the eight declared tool uses, all generic infrastructure. Advisory only: step 1 relies on the identification of R_K-modules with linear actions, which the action-topos node takes for granted rather than states separately."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalInflationGradedCup",
+  "declaration": "CategoryTheory.CondensedDerivedRestriction.internalInflationGradedCup",
+  "declarations": [
+   "CategoryTheory.CondensedDerivedRestriction.shiftedUnitTensorFromComparison",
+   "CategoryTheory.CondensedDerivedRestriction.trivialDerivedShift",
+   "CategoryTheory.CondensedDerivedRestriction.inflatedCoefficientIso",
+   "CategoryTheory.CondensedDerivedRestriction.inflatedShiftedCoefficientIso",
+   "CategoryTheory.CondensedDerivedRestriction.negativelyShiftedArrow",
+   "CategoryTheory.CondensedDerivedRestriction.inflationPhi",
+   "CategoryTheory.CondensedDerivedRestriction.baseShiftedUnitTensor",
+   "CategoryTheory.CondensedDerivedRestriction.actionShiftedUnitTensor",
+   "CategoryTheory.CondensedDerivedRestriction.inflationGradedCup",
+   "CategoryTheory.CondensedDerivedRestriction.internalInflationStructure",
+   "CategoryTheory.CondensedDerivedRestriction.inflationPhiIdentity",
+   "CategoryTheory.CondensedDerivedRestriction.inflationCupTranspose",
+   "CategoryTheory.CondensedDerivedRestriction.internalInflationGradedCup"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalInflationGradedCup.lean",
+  "statement": "theorem internalInflationGradedCup : ∃ t : ℕ → ℕ → ℤ, (∀ p q : ℕ, t p q = 1 ∨ t p q = -1) ∧ (∀ p : ℕ, t p 0 = 1) ∧ (∀ q : ℕ, t 0 q = 1) ∧ ∀ (A : CondensedBar.Ring.{u}) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (p q : ℕ) (x : coefficient A G ⟶ (coefficient A G)⟦(p : ℤ)⟧) (y : coefficient A G ⟶ (coefficient A G)⟦(q : ℤ)⟧), inflationGradedCup A G p q (inflationPhi A G p x) (inflationPhi A G q y) = t p q • inflationPhi A G (p + q) (ShiftedHom.comp x y (by simp [Nat.cast_add, add_comm]))",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9598db767",
+  "group": "O2",
+  "result": "pass",
+  "note": "First delivery; only the item's lean record changed; statement verbatim, sorry-only, ≤100-char lines, all stated proof-dependency modules imported. Ring: CondensedBar.Ring.{u}. G: six profinite classes in Type u. Ordinary DerivedCategory.{u+1}. Structure clause: IsTriangulated, ∃ Braided with toMonoidal pinned to derivedTrivialMonoidal, and the canonical invariant-inclusion `adjunction A G` CommShift. Φ is a genuine Equiv from shiftEquiv', the inflated coefficient iso and adjunction.homEquiv. Identity-to-cupUnit and tensor-of-arrows clauses stated; transpose recomputed by hand and matches. The ∃ t (±1, t p 0 = t 0 q = 1) precedes A, G, x, y; ShiftedHom.comp x y = x ≫ y⟦p⟧' ≫ add iso, so the order is y[p]∘x; fixed comparisons come from upstream shiftTensorShiftIso. Edge cases covered: p or q = 0, zero ring, trivial group, arbitrary derived arrows. Advisories: (A1) TrivialTensorModel/UnitModel conjuncts are choose_spec of the dependency's derivedTrivialTensorExist, redundant but harmless; (A2) declarations of def-sfb-condensed-derived-cup and def-sfb-condensed-derived-invariants are used outside the item's stmt_deps (they are stmt_deps of the cited restriction calculus), which S2 cannot fix. No compile: no file changed."
  }
 }

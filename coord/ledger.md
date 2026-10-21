@@ -23729,3 +23729,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:48 L: merged deliver/O4/lem-sfb-parameter-cochain-completion-boundary-descent (reviewer FIX; after a return; new nodes: 3)
 - 20:48 L: returned deliver/H1/Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate (reviewer RETURN: (reviewer C-86ddd, head 86dddfcac) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Aff)
 - 20:49 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 20:49 L: merged deliver/O2/lem-sfb-internal-inflation-graded-cup (stage 2; reviewer PASS; parallel immutable checks)
+- 20:49 L: merged deliver/NA/lem-sfb-norm-algcl-bar-augmentation (stage 2; reviewer PASS; parallel immutable checks)
+- 20:49 L: merged deliver/NC/lem-sfb-lisse-lattice-potential-kummer-tameness (stage 2; reviewer PASS; parallel immutable checks)

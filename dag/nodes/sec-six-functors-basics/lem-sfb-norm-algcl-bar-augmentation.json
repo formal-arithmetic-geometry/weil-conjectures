@@ -13,7 +13,9 @@
   "def-weil-abstract-derived-category",
   "def-sfb-continuous-map-condensed-ring",
   "def-sfb-condensed-action-module",
-  "lem-sfb-condensed-derived-invariant-bar"
+  "lem-sfb-condensed-derived-invariant-bar",
+  "def-sfb-bundled-continuous-scalar-ring",
+  "def-sfb-ind-unipotent-system"
  ],
  "proof": [
   {
@@ -301,5 +303,36 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-50b7280a1 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Source: main-20261015 sk-thm-sf-ctf-stability-direct-images paragraph (3), which only gives the direct-image route, so proof_origin=agent and the WANTED lines are right. The item statement is unchanged (same stmt_deps), there is no re-split note for this item, and no SGA is cited. Steps: 1 matches internal and sectionwise modules via sheaf-tensor-closed, the module equivalence and the tensor comparison, with internal Hom moved by uniqueness of adjoints. 2 identifies the Čech complex of a finite family with the fibre powers of one surjection T=⊔T_i, matching def-weil-pbc-site-cech-complex component by component. 3 checks hypotheses (1)–(3) of the site Čech criterion (B = all objects, finite families cofinal), then gets enough injectives from modobj-grothendieck and the ringed evaluation comparison for an arbitrary ring sheaf, giving A(V)[0]→J•(V) quasi-iso. 4 evaluates Hom(A[P],N)(S)=N(S×P) through the slice Hom, correctly elementary. 5 turns sectionwise exactness into a quasi-isomorphism of sheaf complexes. 6 totalizes with the first-quadrant column comparison and gives the actual j_A; I checked the trivial-action bar differential and d^0=0. 7 gives resolution independence by lift, uniqueness up to homotopy and the (−1)^q total-homotopy sign. 8 gives H^0(j_A)=1. New node lem-sfb-norm-algcl-profinite-cech-exact: unsplit and self-contained (B1/B2), strictly smaller than the item, with no group, derived Hom or totalization, so it is not D1/D2. It mirrors the accepted complete-field pair normed-scalar-profinite-hom-acyclic → normed-scalar-profinite-cech-exact. With step 3 it is equivalent to Ω̲-acyclicity on profinite sets, which the DAG already assumes elsewhere (profinite-algcl-derived-invariants-comparison step 2/4; norm-completion-positive-cohomology-mono). Not a duplicate of normed-scalar-profinite-cech-exact (finite E), local-norm-algcl-cocycle-descent, prime-to-ell-cochain-finite-quotient-descent (both group cochains) or procyclic-scalar-cochain-evaluation. Cases I tested, with no counterexample: the empty surjection, split and finite surjections (finite-evaluation contraction), cocycles valued in one finite F, H^1 over V=ℕ∪{∞} via density of Ω-cosets in the completion, and two-sheeted closed covers via a retraction. General truth is not proved here; the node stays honestly WANTED. Advisory B3: neither the new node nor the inherited item cites def-weil-algebraic-closure. The generic tool_uses in split_report are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NormAlgclBarAugmentation",
+  "declaration": "Profinite.NormAlgclBar.norm_algcl_bar_augmentation",
+  "declarations": [
+   "Profinite.NormAlgclBar.augmentationComponent",
+   "Profinite.NormAlgclBar.augmentationComponent_comm",
+   "Profinite.NormAlgclBar.augmentation",
+   "Profinite.NormAlgclBar.derivedAugmentation",
+   "Profinite.NormAlgclBar.invariantResolutionAugmentation",
+   "Profinite.NormAlgclBar.scalarModule",
+   "Profinite.NormAlgclBar.evaluation",
+   "Profinite.NormAlgclBar.ModelAssertion",
+   "Profinite.NormAlgclBar.Assertion",
+   "Profinite.NormAlgclBar.norm_algcl_bar_augmentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NormAlgclBarAugmentation.lean",
+  "statement": "theorem norm_algcl_bar_augmentation (ℓ : ℕ) [Fact ℓ.Prime] (Ω : Type u) [NormedField Ω] [Algebra ℚ_[ℓ] Ω] [IsAlgClosure ℚ_[ℓ] Ω] (hΩ : ∀ a : ℚ_[ℓ], ‖algebraMap ℚ_[ℓ] Ω a‖ = ‖a‖) : Assertion ℓ Ω",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the existing compatible equivariant internal-Hom bar model and all-continuous scalar ring. The actual augmentation has specified (q,0) components induced by I.ι.f 0; no arbitrary derived isomorphism or termwise acyclicity hypothesis. Categorical structures and compatible model existence are conclusions; all compatible models and all augmentation-preserving resolution lifts satisfy the comparison. Added landed definition dependencies only for the scalar bundle and the existing lifted additive p-adic integer group."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-999544cc4",
+  "group": "NA",
+  "result": "pass",
+  "note": "Read the item node, its 8 stmt_deps (all byte-identical to side-live; the 2 added are landed def nodes, allowed by brief-stage2 §5), the source place (paragraph (3)), the delivered NormAlgclBarAugmentation module and the dependency Lean in CondensedEquivariantBarData, CondensedDerivedInvariantBar, CondensedActionModule, ContinuousScalarRing and IndUnipotentSystem. Every clause matches: Ω NormedField+IsAlgClosure+norm extension with no completeness (the citer's binder), all-continuous continuousScalarRing, IntegerGroup ℓ, trivial action act=1, Mod plus standard derived categories (the same as the bar node). Evaluation is bijective onto C(S×H^q,Ω) and true; d^0=0; j_A is the actual (cochains.map I.ι.f0) composed with ιTotal n 0 and then localized; IsIso in D(Mod A); independence over all lifts f with I.ι≫f=J.ι and all Models; the H^0 square is between the pinned augmentations. All conjuncts are true, as is augmentationComponent_comm. Edge cases q=0, empty S, negative degrees, ℓ=2 and universes are fine. No hollow defs; only 2 named sorrys; docstrings and the 8 proof steps are present; statement verbatim; no line over 100; proof-dependency imports are present. Advisory: the bar-data decls are owned by def-sfb-condensed-equivariant-bar-data, which is not in stmt_deps (it arrives by re-export); some conjuncts are redundant; def-weil-algebraic-closure is not cited. No compile (no file changed)."
  }
 }

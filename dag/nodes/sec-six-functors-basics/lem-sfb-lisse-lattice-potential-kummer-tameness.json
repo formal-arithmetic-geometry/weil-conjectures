@@ -19,7 +19,10 @@
   "def-weil-surjective-morphism",
   "def-weil-regular-scheme",
   "def-trf-strict-normal-crossings-boundary",
-  "def-sc-ring-strict-henselization"
+  "def-sc-ring-strict-henselization",
+  "def-sfb-strict-local-kummer-tame-module",
+  "def-sfb-norm-continuous-monodromy-data",
+  "def-sfb-continuous-map-condensed-ring-map"
  ],
  "proof": [
   {
@@ -330,5 +333,36 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-43ac363e2 (reviewer sub-agent of L); spot-checked: I read all 8 steps of the item, the new node lem-sfb-strict-local-prime-to-p-kummer-splitting, every cited statement, Bhatt–Scholze 6.8.1–6.8.4 (pp. 58–60) and ILO IX Prop. 2.1 with its proof (pp. 133–134). The item statement is unchanged. In live and side-live the item is still unsplit, it is not dropped and it has no re-split note; this is a first split. The proof is sound: one residual cover H from the finite-set monodromy torsor; the congruence kernel K_n is an ℓ-group (filtration quotients Mat_d(κ), char κ = ℓ); the image Q_n ⊂ K_n gives a Q_n-torsor P_n; the new node splits P_n at a finite root level m_n prime to p; compatible bases are built by lifting GL_d and the lattice is rebuilt on the tower T by the integral lisse equivalence. No uniform root level is needed, which is correct because infinite tame image is allowed. The new node is true: a prime-to-p group forces tameness (no wild inertia, no inseparability, no defect), and Abhyankar gives π1^t = ∏Ẑ'(1)^r, abelian, so the cover splits at n = exponent of G. I tested r=0, a strictly henselian DVR with G = Z/ℓ, G = S_3 with p ≥ 5, and disconnected P; G = Z/p is correctly excluded. It is not a duplicate: the snc-tame-root-etale and finite-fibre nodes assume the splitting it proves, and lem-per-snc-parameter-root-quotient gives only a normal form; its future splitter should cite that node or Stacks pione Abhyankar, not SGA 1 XIII 5.3. Batch-5 flags: cor-galois-lisse-representations (only clause (1), a generic Galois correspondence; its closure contains no Poincaré duality or trace-formula theorem) and lem-trf-regular-local-ufd-boundary-factorization (pure commutative algebra) are both accepted. All 13 tool_uses are generic and accepted. Two C1 repairs, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-lisse-lattice-potential-kummer-tameness.json: step 5 applied cor-galois(1), which is about étale sheaves, to a pro-étale sheaf, so I added det-pe-finite-local-systems-twist on U for the étale model and the transport back; step 8 used an uncited comparison for g^*(A_E⊗M_0), so I added def-sfb-condensed-pullback-tensor-comparison together with Cartesian coefficients (1). No cycle is created. proof_deps is updated to the union of the uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseLatticePotentialKummerTameness",
+  "declaration": "AlgebraicGeometry.ProEtale.lisseLattice_potential_kummer_tame",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.latticeIntegralCondensedRing",
+   "AlgebraicGeometry.ProEtale.latticeIntegralCondensedRing_comm",
+   "AlgebraicGeometry.ProEtale.latticeIntegralCoefficient_comm",
+   "AlgebraicGeometry.ProEtale.latticeResidualCondensedRing",
+   "AlgebraicGeometry.ProEtale.latticeResidualCondensedRing_comm",
+   "AlgebraicGeometry.ProEtale.latticeResidualCondensedMap",
+   "AlgebraicGeometry.ProEtale.latticeRationalCondensedMap",
+   "AlgebraicGeometry.ProEtale.latticeResidualModule",
+   "AlgebraicGeometry.ProEtale.latticeRationalModule",
+   "AlgebraicGeometry.ProEtale.lisseLattice_potential_kummer_tame"
+  ],
+  "file": "lean/Sheaf/Paper/LisseLatticePotentialKummerTameness.lean",
+  "statement": "theorem lisseLattice_potential_kummer_tame (p : ℕ) [Fact p.Prime] (_hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (S : Scheme.{u}) [S.Over (Spec (.of k))] [ConnectedSpace S] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] (M₀ : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (latticeIntegralCondensedRing ℓ E).X S)) (_hM₀ : IsLisseCoefficientModule (latticeIntegralCondensedRing ℓ E).X M₀) : ∃ (H : Scheme.{u}) (c : H ⟶ S), ConnectedSpace H ∧ IsFinite c ∧ Etale c ∧ Surjective c ∧ Mod.IsFree (condensedRingObj (latticeResidualCondensedRing ℓ E).X H) ((CondensedRing.upperStar (latticeResidualCondensedRing ℓ E).X c).obj (latticeResidualModule ℓ E S M₀)) ∧ ∀ (Y : Scheme.{u}) [Y.Over (Spec (.of k))], LocallyOfFiniteType (Y ↘ Spec (.of k)) → QuasiCompact (Y ↘ Spec (.of k)) → IsSeparated (Y ↘ Spec (.of k)) → IsRegularScheme Y → ∀ (D : Y.IdealSheafData), IsStrictNormalCrossingsBoundary D → ∀ (W : Scheme.{u}) (w : W ⟶ Y), IsOpenImmersion w → Set.range w = (D.support : Set Y)ᶜ → ∀ (g : W ⟶ S), (∃ h : W ⟶ H, h ≫ c = g) → IsStrictLocalKummerTameModule p (normContinuousRing E).X D w ((CondensedRing.upperStar (normContinuousRing E).X g).obj (latticeRationalModule ℓ E S M₀))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Stage-2 statement on the reviewed NF stage-1 split. Uses the already landed strict-local Kummer-tameness predicate and normContinuousRing; adds their definition nodes and the existing continuous-map functoriality node to stmt_deps. Helpers only bundle the recorded integral/residual coefficients and their canonical maps and ordinary tensor scalar extensions. No independent mathematical notion or theorem is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af57d0ddd",
+  "group": "NC",
+  "result": "pass",
+  "note": "Item differs from side-live only in lean and 3 added landed def stmt_deps (strict-local-kummer-tame-module, norm-continuous-monodromy-data, continuous-map-condensed-ring-map); first stage-2 delivery (live/side-live lean null). lean.statement verbatim; 10 declarations present; no name clash. All clauses match: p≠ℓ primes, CharP k p, NormedAlgebra forces the unique extended norm so coefficientExtensionIntegers is O_E; S connected (nonempty) LOFT+QC+separated; M0 IsLisseCoefficientModule (rank 0 allowed); M = actual extendScalars along O_E↪E; ∃H c connected finite etale surjective before ∀(Y,D,W,g); residual clause = IsFree of c^* extendScalars to C(-,O_E/ϖ), which is M0/ϖM0 and 'constant' over the residue field; g factors through H; conclusion = IsStrictLocalKummerTameModule p (normContinuousRing E) over all geometric points, parameter tuples, full compatible prime-to-p root tower, r=0 identity. Edge cases d=0, r=0, empty/disconnected Y ok; universes forced by the framework. Helpers real (recorded continuous-map rings, Quotient.mk/subtype postcomposition, actual extendScalars); only the theorem is sorry; docstrings carry source, blueprint and all 8 proof steps; imports and lines ok. Advisory: sfbCondensedIntegers bundles the same ring with the spectral-norm topology, not reusable without a topology-agreement proof; the integral-lisse equivalence is stated for E : Type (u+1) (stage-3 concern). No compile (no file changed)."
  }
 }
