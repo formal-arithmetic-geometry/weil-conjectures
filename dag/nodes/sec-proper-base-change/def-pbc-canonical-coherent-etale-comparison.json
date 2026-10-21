@@ -36,6 +36,11 @@
     "new-module-cohomology-ext-resolution-naturality"
    ],
    "elementary": false
+  },
+  {
+   "text": "Fix the native bundled sheaf-cohomology group instances in the universe comparison before specializing the site to a scheme. Evaluate this comparison as the original canonical Ext universe map. Compose with the fixed resolution-isomorphism component using a generic module/functor construction and prove coefficient naturality before specialization. Construct the additive action by generic module conjugation through the same fixed small-resolution isomorphism, using the native cohomology-functor coefficient map. Its component formula, together with the original large-comparison component formula and Ext universe naturality, proves pointwise equality with the old large-Ext action in the Frobenius-comparison consumer. The module-group cache retains its original construction. Rebundle the scalar comparison generically by the identity on additive equivalences.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -46,7 +51,7 @@
   "new-module-cohomology-ext-resolution-naturality"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "A2 repair worker, preserving the B2 comparison proof and original large action",
   "document": "literature/stacks-project/homology.tex; etale-cohomology.tex",
   "place": "Tags 010T, 03P2, 03FD; explicit additive-map construction, dimension shifting, and uniqueness. The fixed module comparison retains its resolution-isomorphism component; Ext.chgUniv represents the identical derived morphism and gives a component/naturality API without unfolding resolutions."
  },
@@ -134,7 +139,16 @@
    "AlgebraicGeometry.Scheme.Modules.coherentExtUniverseEquiv_comp",
    "AlgebraicGeometry.Scheme.Modules.coherentSheafUniverseEquiv_naturality",
    "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge_component",
-   "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge_naturality"
+   "AlgebraicGeometry.Scheme.Modules.moduleAbelianCohomologyLarge_naturality",
+   "AlgebraicGeometry.Scheme.Modules.coherentConjugateEndomorphism",
+   "AlgebraicGeometry.Scheme.Modules.coherentAdditiveEndomorphism_apply",
+   "AlgebraicGeometry.Scheme.Modules.coherentModuleConjugateEndomorphism",
+   "AlgebraicGeometry.Scheme.Modules.coherentModuleConjugateEndomorphism_apply",
+   "AlgebraicGeometry.Scheme.Modules.coherentSheafUniverseEquiv",
+   "AlgebraicGeometry.Scheme.Modules.coherentSheafUniverseEquiv_apply",
+   "AlgebraicGeometry.Scheme.Modules.coherentModuleUniverseComparison",
+   "AlgebraicGeometry.Scheme.Modules.coherentModuleUniverseComparison_apply",
+   "AlgebraicGeometry.Scheme.Modules.coherentScalarEquiv"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/CanonicalCoherentEtaleComparison.lean",
   "statement": "def canonicalCoherentEtaleComparison {k : Type u} [Field k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsProper f] (F : X.Modules)\n    [F.IsQuasicoherent] (q : ℕ) :\n    CoherentEtale.Target X F q ≃+ coherentModuleGroup X F q",
@@ -161,13 +175,13 @@
   "note": "Reviewed immutable modules, dependencies, source passages, canonical constructions, all statement clauses, edge cases, docstrings, reports, and verbatim signatures. Server compiles passed at 56.1 s and 2.2 s. No project changes or global build."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-3809e",
-  "group": "B2",
-  "result": "fix",
-  "landing": "20261020T230711-L-602865",
+  "reviewer": "C-4bc82",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261021T014657-L-2442192",
   "kind": "interface",
-  "note": "independent cc review: Delivered item, new degree-zero module, adapted CanonicalCoherentEtaleComparison and six consumers matched against the base/quarantine originals, the adopted WeilConjectures ModuleCohomologyExtResolutionNaturality(+Extension), the DAG nodes and the change records; all compiled, plus two quarantined importers, original-vs-adapted forced-adaptation compiles, #print axioms and old=new scratch proofs for coherentExtUniverseEquiv and coherentModuleGroup"
+  "note": "independent cc review: Delivered item, adapted CanonicalCoherentEtaleComparison and CoherentFrobeniusComparison against live=base, change record, 3 node files; original consumer fails against the new deps (forced); all 6 direct importers + delivered set compiled clean (900 s limit); #print axioms; old=new action certified by the private coherentAdditiveEndomorphism_large"
  }
 }

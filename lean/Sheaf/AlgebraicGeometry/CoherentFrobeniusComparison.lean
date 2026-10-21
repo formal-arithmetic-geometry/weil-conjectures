@@ -32,6 +32,56 @@ private theorem comparison_conjugate
   simp only [Equiv.apply_symm_apply, Equiv.trans_apply, h]
   exact congrArg t ((e.trans n).apply_symm_apply x).symm
 
+section
+attribute [local irreducible] moduleAbelianCohomologyLarge coherentExtUniverseEquiv
+  coherentAdditiveEndomorphism moduleCohomologyFMap Abelian.Ext
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types false
+
+private lemma conjugate_transport
+    {A B C : Type*}
+    (e : A ≃ B) (U : B ≃ C) (d : A ≃ C) (f : B → B) (g : C → C)
+    (hd : ∀ x, d x = U (e x))
+    (h : ∀ x, U (f x) = g (U x)) (v : A) :
+    d.symm (g (d v)) = e.symm (f (e v)) := by
+  apply d.injective
+  rw [Equiv.apply_symm_apply, hd, hd, Equiv.apply_symm_apply]
+  exact (h (e v)).symm
+
+/-- The small presentation gives exactly the original large-Ext action.
+Both comparisons use the same resolution-isomorphism component, and change of
+Ext universe commutes with coefficient postcomposition. -/
+private theorem coherentAdditiveEndomorphism_large
+    (X : Scheme.{u}) (F : X.Modules) (q : ℕ)
+    (a : (SheafOfModules.toSheaf X.ringCatSheaf).obj F ⟶
+      (SheafOfModules.toSheaf X.ringCatSheaf).obj F)
+    (v : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :
+    coherentAdditiveEndomorphism X F q a v =
+      (moduleAbelianCohomologyLarge X F q).toEquiv.symm
+        (@Sheaf.H.map _ _ _ inferInstance (HasExt.standard _) _ _ a q
+          ((moduleAbelianCohomologyLarge X F q).toEquiv v)) := by
+  let U := @coherentExtUniverseEquiv
+    (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+    inferInstance inferInstance (comparisonHasExt X) (HasExt.standard _)
+    ((constantSheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}).obj
+      (AddCommGrpCat.of (ULift.{u} ℤ)))
+    ((SheafOfModules.toSheaf X.ringCatSheaf).obj F) q
+  let e := ((moduleCohomologyExtResolutionNatIso X q).app F).addCommGroupIsoToAddEquiv
+  have he (x : (RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :
+      moduleAbelianCohomologyLarge X F q x =
+        U (e x) := by
+    exact moduleAbelianCohomologyLarge_component X F q x
+  have h := conjugate_transport e.toEquiv U.toEquiv
+    (moduleAbelianCohomologyLarge X F q).toEquiv
+    (fun x ↦ Sheaf.H.map a q x)
+    (fun x ↦ @Sheaf.H.map _ _ _ inferInstance (HasExt.standard _) _ _ a q x)
+    he (fun x ↦ @coherentSheafUniverseEquiv_naturality
+      X.Opens inferInstance (Opens.grothendieckTopology X) inferInstance
+      (comparisonHasExt X) (HasExt.standard _) _ _ q a x) v
+  exact (coherentAdditiveEndomorphism_apply X F q a v).trans h.symm
+
+end
+
 /-- Frobenius commutes with the canonical comparisons and field extension.
 Source: Stacks Project, Tags 0A3P, 03P2, 03FD and 02KH.
 (blueprint: lem-weil-pbc-coherent-frobenius-comparison).
@@ -96,12 +146,13 @@ theorem coherent_frobenius_comparison
   refine ⟨hpower.1, ?_, ?_, ?_⟩
   · intro x
     unfold structureCoherentEtaleComparison canonicalCoherentEtaleComparison
-      structureCoherentFrobenius coherentAdditiveEndomorphism
-    exact comparison_conjugate (moduleAbelianCohomologyLarge X (unit X) q).toEquiv
+      structureCoherentFrobenius coherentScalarEquiv
+    exact (comparison_conjugate (moduleAbelianCohomologyLarge X (unit X) q).toEquiv
       (normalizedCoherentEtaleComparison f (unit X) q).toEquiv
       (@Sheaf.H.map _ _ _ inferInstance (HasExt.standard _) _ _ FrZ q)
       (Sheaf.H.map FrE q)
-      (hpower.2 FrE hFrE) x
+      (hpower.2 FrE hFrE) x).trans
+        (coherentAdditiveEndomorphism_large X (unit X) q FrZ _).symm
   · intro x
     unfold structureCoherentEtaleComparisonOfPullback
     change structureCoherentEtaleComparison g q _ = _
