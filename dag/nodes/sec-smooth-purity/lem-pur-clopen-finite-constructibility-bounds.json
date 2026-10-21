@@ -19,9 +19,130 @@
   "def-weil-abstract-derived-category",
   "def-weil-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the strata as subschemes, not only as point sets. Each clopen $X_i$ is retrocompact in $X$: its intersection with a quasi-compact open $W$ is closed in $W$, hence quasi-compact. A constructible stratum $S\\subset X$ restricts to a constructible subset of $X_i$ by [lem-weil-pbc-constructible-open-restriction]. Write its immersion as a closed immersion $S\\hookrightarrow V$ followed by an open immersion $V\\hookrightarrow X$. Base change along $X_i\\hookrightarrow X$ gives a closed immersion $S\\times_X X_i\\hookrightarrow V\\times_X X_i$ and an open immersion $V\\times_X X_i\\hookrightarrow X_i$ by the two cited base-change lemmas. Thus the restricted stratum is an actual locally closed subscheme. Conversely, a stratum $T\\hookrightarrow X_i$ factors as $T\\hookrightarrow V\\hookrightarrow X_i$ with the first arrow closed and the second open. The same $V$ is open in $X$ (the open subsets and restricted structure sheaves agree), so this is a locally closed immersion into $X$. Its image is constructible in $X$ by [lem-weil-pbc-constructible-image-retrocompact-open], since $X_i$ is retrocompact open. These constructions retain the original subscheme structures.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-constructible-open-restriction",
+    "lem-weil-pbc-constructible-image-retrocompact-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 005J (lemma-open-immersion-constructible-inverse-image), 09YD (lemma-quasi-compact-open-immersion-constructible-image); schemes.tex Tag 01JY (lemma-base-change-immersion), morphisms.tex Tag 01QR (lemma-base-change-closed-immersion); elementary clopen specialization"
+   }
+  },
+  {
+   "text": "Suppose $F$ is constructible. Choose its finite disjoint stratification $X=\\bigsqcup_\\nu S_\\nu$ from [def-weil-finite-torsion-constructibility]. For fixed $i$, the strata $S_\\nu\\times_X X_i$ of step 1 are finite in number, disjoint and cover $X_i$. Restrict a pro-etale covering trivializing $F|_{S_\\nu}$ to the open subscheme $S_\\nu\\times_X X_i$: by the base-change covering axiom of the site it is still a covering, with precisely the same finite constant module on each restricted trivialization. Thus the local constant finite-module models remain valid, and $F|_{X_i}$ is constructible. Empty strata may be omitted.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-finite-torsion-constructibility.md",
+    "place": "Definition of constructible sheaf: restrict a finite stratification and its trivializing covers"
+   }
+  },
+  {
+   "text": "Conversely, for each $i$ choose a finite disjoint constructibility stratification $X_i=\\bigsqcup_{\\nu\\in J_i}S_{i,\\nu}$ for $F|_{X_i}$. The finite set $\\bigsqcup_{i\\in I}J_i$ indexes a disjoint covering stratification of $X$; its strata are locally closed and constructible in $X$ by step 1. The restriction of $F$ to $S_{i,\\nu}$ is exactly the restriction of $F|_{X_i}$ to that same subscheme. Hence the chosen locally constant finite-module model and its trivializing cover apply without change. This proves the reverse implication by [def-weil-finite-torsion-constructibility].",
+   "uses": [
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-finite-torsion-constructibility.md",
+    "place": "Definition of constructible sheaf: finite union of the component stratifications"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-clopen-ringed-module-gluing] with $R=A_X$. It identifies $R|_{X_i}$ with $A_{X_i}$ and gives the exact module restriction equivalence with zero insertions $e_i$. In particular a module sheaf is zero if all its restrictions are zero: under the displayed quasi-inverse its sections are the product of zero modules. By [lem-pur-finite-product-derived-tensor-calculus], degreewise restriction induces the unbounded derived equivalence and $H^m(r_iK)\\cong r_iH^m(K)$ for every integer $m$. Consequently $H^m(K)=0$ iff every $H^m(r_iK)=0$. Apply this separately for each $m\\notin[a,b]$ to get precisely the claimed fixed cohomological interval. Apply the sheaf equivalence established in steps 2 and 3 to each $H^m(K)$ to get the assertion about constructible cohomology.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-finite-product-derived-tensor-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent finite-clopen finite-coefficient argument, inherited old step 8"
+   }
+  },
+  {
+   "text": "Assume all $r_iK$ have Tor amplitude in the same $[a,b]$. Let $M$ be any $A_X$-module sheaf in degree zero. The tensor comparison of [lem-pur-finite-product-derived-tensor-calculus] identifies\n$$r_i(K\\otimes_A^{\\mathbf L}M)\\cong r_iK\\otimes_A^{\\mathbf L}r_iM.$$\nExact degreewise restriction leaves $r_iM$ in degree zero. The right side therefore has zero cohomology outside $[a,b]$ by the component Tor hypothesis and [def-weil-proetale-tor-amplitude]. For every $m\\notin[a,b]$, step 4 detects the vanishing of $H^m(K\\otimes_A^{\\mathbf L}M)$ from these component vanishings. Since $M$ was arbitrary, this is exactly Tor amplitude of $K$ in $[a,b]$.",
+   "uses": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent finite-clopen finite-coefficient argument, inherited old step 8"
+   }
+  },
+  {
+   "text": "Assume instead that $K$ has Tor amplitude in $[a,b]$. Fix $i$ and any $A_{X_i}$-module sheaf $N$ in degree zero. Use the module zero insertion $M=e_iN$ from [lem-pur-clopen-ringed-module-gluing], also placed in degree zero. Its $i$th restriction is $N$, and its other restrictions are zero. The global Tor hypothesis says $K\\otimes_A^{\\mathbf L}M$ has cohomology only in $[a,b]$. Restricting this complex and using the cohomology and tensor comparisons of [lem-pur-finite-product-derived-tensor-calculus] gives\n$$r_i(K\\otimes_A^{\\mathbf L}e_iN)\\cong r_iK\\otimes_A^{\\mathbf L}N,$$\nagain concentrated in $[a,b]$. Because every $N$ was permitted, [def-weil-proetale-tor-amplitude] gives the required Tor interval for $r_iK$. This proves the other implication without assuming that an arbitrary component test object was originally the restriction of a globally given one.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent finite-clopen finite-coefficient argument, inherited old step 8"
+   }
+  },
+  {
+   "text": "The equivalence of [lem-pur-finite-product-derived-tensor-calculus] is fully faithful on all objects and essentially surjective on tuples. By step 4 and [def-weil-finite-torsion-constructibility], a complex is bounded constructible exactly when all its component complexes are: in the reverse direction choose component cohomological intervals $[c_i,d_i]$ and, for nonempty finite $I$, use $c=\\min_i c_i$, $d=\\max_i d_i$. Vanishing outside $[c_i,d_i]$ implies vanishing outside $[c,d]$, so step 4 applies to any inverse image of the tuple. Likewise, for a tuple in $D^b_{ctf}$, choose component Tor intervals $[u_i,v_i]$ as in [def-weil-finite-tor-amplitude], enlarge them to $[\\min_i u_i,\\max_i v_i]$, and apply step 5. Step 6 proves preservation in the forward direction. Thus this equivalence restricts to both asserted full subcategories. The same argument uses any preassigned common cohomological or Tor interval, proving the final assertion about bounds, not just the existence of some bounds.",
+   "uses": [
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent finite-clopen finite-coefficient argument, inherited old step 8"
+   }
+  },
+  {
+   "text": "The empty cases require no minimum or maximum. Empty components have zero module categories by [lem-pur-clopen-ringed-module-gluing] and zero derived categories by [lem-pur-finite-product-derived-tensor-calculus]. If $I$ is empty the covering condition forces $X$ empty, so the unique derived object is zero. The zero sheaf is locally constant with the finite zero module as its model, hence constructible by [def-weil-finite-torsion-constructibility]; on the empty scheme one can use the empty stratification. Its cohomology in every degree is zero. Tensoring its zero complex with any complex gives the zero complex, so [def-weil-proetale-tor-amplitude] holds for every interval $[a,b]$. Thus all the assertions, including the subcategory equivalences and arbitrary common bounds, hold also for empty $X$, empty $I$, and covers containing empty components.",
+   "uses": [
+    "lem-pur-clopen-ringed-module-gluing",
+    "lem-pur-finite-product-derived-tensor-calculus",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+    "place": "Final invertibility assertion: agent finite-clopen finite-coefficient argument, inherited old step 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-constructible-open-restriction",
+  "lem-weil-pbc-constructible-image-retrocompact-open",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-site",
+  "lem-pur-clopen-ringed-module-gluing",
+  "lem-pur-finite-product-derived-tensor-calculus",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final invertibility assertion, finite-level constructibility/bounds subargument of lem-pur-finite-clopen-derived-decomposition (old step 8); expanded using Stacks Tags 005J, 09YD, 01JY and 01QR and the two existing clopen algebra lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +178,52 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.gluedCover_J\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (𝒰 : X.OpenCover), (AlgebraicGeometry.Scheme.Cover.gluedCover 𝒰).J = 𝒰.I₀\", \"doc\": \"For any open cover $\\\\mathcal{U}$ of a scheme $X$, the indexing category $J$ of the glued cover constructed from $\\\\mathcal{U}$ coincides with the index set $I_0$ of the original open cover $\\\\mathcal{U}\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData.openCover\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"(D : AlgebraicGeometry.Scheme.GlueData) → D.glued.OpenCover\", \"doc\": \"For any gluing data $ D $, the open cover of the glued scheme $ D.\\\\text{glued} $ is formed by the inclusion morphisms $ \\\\iota_i : U(i) \\\\to D.\\\\text{glued} $, which are open immersions whose images cove\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"{S : AlgebraicGeometry.Scheme} →\\n  {𝒰 : S.OpenCover} →\\n    [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀] →\\n      [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] →\\n        (d : AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰) →\\n          [inst_2 : Small.{u, u_1} 𝒰.I₀] → [inst_3 : Q\", \"doc\": \"The open cover of the glued scheme $\\\\varinjlim F$ constructed from relative gluing data, formed by canonical open immersion morphisms $\\\\iota_j : F(j) \\\\to \\\\varinjlim F$ for each object $j$ in the small\"}\n  {\"name\": \"CochainComplex.cm5b.instIsStrictlyGEBiprodIntMappingConeIdIOfHAddOfNat\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  (CochainComplex.mappingCone (CategoryTheory.CategoryStruct.id (Cochain\", \"doc\": \"In an abelian category with enough injectives, if $ K $ is a cochain complex strictly supported in degree $ n+1 $ and $ L $ is strictly supported in degree $ n $, then the biproduct of the mapping con\"}\n  {\"name\": \"CochainComplex.cm5b.instIsStrictlyGEI\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.EnoughInjectives C] {K : CochainComplex C ℤ} (n : ℤ) [K.IsStrictlyGE n],\\n  (CochainComplex.cm5b.I K).IsStrictlyGE n\", \"doc\": \"In an abelian category $\\\\mathcal{C}$ with enough injectives, this constructs a cochain complex $I K$ where each object $X^n$ is the injective replacement of $K.X^n$ from the original complex $K$, and \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Cover.RelativeGluingData.cover_I₀\", \"module\": \"Mathlib/AlgebraicGeometry/RelativeGluing\", \"type\": \"∀ {S : AlgebraicGeometry.Scheme} {𝒰 : S.OpenCover} [inst : CategoryTheory.Category.{u_2, u_1} 𝒰.I₀]\\n  [inst_1 : AlgebraicGeometry.Scheme.Cover.LocallyDirected 𝒰] (d : AlgebraicGeometry.Scheme.Cover.RelativeGluingData 𝒰)\\n  [inst_2 : Small.{u, u_1} 𝒰.I₀] [inst_3 : Quiver.IsThin 𝒰.I₀], d.cover.I₀ = 𝒰.I\", \"doc\": \"Given a scheme $ S $ with an open cover $ \\\\mathcal{U} $, where the zeroth component $ \\\\mathcal{U}_0 $ forms a small, thin category equipped with a locally directed structure, the zeroth component of t\"}\n  {\"name\": \"CochainComplex.cm5b\", \"module\": \"Mathlib/Algebra/Homology/Factorizations/CM5b\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.Abelian C]\\n  [CategoryTheory.EnoughInjectives C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (n : ℤ) [K.IsStrictlyGE (n + 1)]\\n  [L.IsStrictlyGE n],\\n  ∃ L',\\n    ∃ (_ : L'.IsStrictlyGE n),\\n      ∃ i p,\\n        ∃ (_ : Ca\", \"doc\": \"Given cochain complexes $ K $ and $ L $ in an abelian category $ \\\\mathcal{C} $ with $ K $ strictly supported in degrees $ \\\\geq n+1 $ and $ L $ strictly supported in degrees $ \\\\geq n $, there exists a \"}\n  {\"name\": \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Fractions\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] {X Y : CochainComplex C ℤ} (a b : ℤ) [X.IsStrictlyGE a] [X.IsStrictlyLE b]\\n  [Y.IsStrictlyGE a] (f : DerivedCategory.Q.obj X ⟶ DerivedCategory.Q.obj Y),\\n  ∃ X',\\n    ∃ (_ : X\", \"doc\": \"Given cochain complexes $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ with integer indices, where $X$ is strictly supported in degrees $\\\\geq a$ and $\\\\leq b$, and $Y$ is strictly supported in degree\"}",
    "date": "2026-10-21",
    "verdict": "No match: topological constructible subsets, etale topology and bounded complexes do not state finite-coefficient constructible sheaves with fixed-interval Tor detection."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of sheaves and fixed cohomological and Tor amplitude bounds are detected on finite disjoint clopen covers of a scheme",
+   "results": "OK 8 hit(s): Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, AlgebraicGeometry.Scheme.isNilpotent_of_isNilpotent_cover, Topology.IsLocallyConstructible.iff_of_isOpenCover, Topology.IsLocallyConstructible.of_isOpenCover', AlgebraicGeometry.isLocallyNoetherian_iff_openCover, AlgebraicGeometry.Scheme.zero_of_zero_cover, AlgebraicGeometry.IsLocalAtTarget.iff_of_iSup_eq_top, AlgebraicGeometry.IsZariskiLocalAtTarget.iff_of_iSup_eq_top",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern constructible subsets, sections of topological sheaves, general sheaf colimits, or bounded representatives, rather than the full finite-coefficient pro-etale sheaf constructibility and Tor-interval statement."
+  },
+  {
+   "tool": "grep",
+   "query": "(torAmplitude|tor_amplitude|TorAmplitude|constructible).*(clopen|disjoint)|(clopen|disjoint).*constructible",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern constructible subsets, sections of topological sheaves, general sheaf colimits, or bounded representatives, rather than the full finite-coefficient pro-etale sheaf constructibility and Tor-interval statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of sheaves on a finite disjoint union has a fixed Tor amplitude interval if and only if each component does",
+   "results": "OK 8 hit(s): CategoryTheory.Sheaf.instHasFiniteCoproducts, CategoryTheory.SheafOfTypes.finitary_extensive, TopCat.Presheaf.IsSheaf, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, TopCat.Sheaf.objSupIsoProdEqLocus, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f, CategoryTheory.Sheaf.instHasFiniteColimits, TopCat.Sheaf.isProductOfDisjoint",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern constructible subsets, sections of topological sheaves, general sheaf colimits, or bounded representatives, rather than the full finite-coefficient pro-etale sheaf constructibility and Tor-interval statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"IsConstructible\"",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern constructible subsets, sections of topological sheaves, general sheaf colimits, or bounded representatives, rather than the full finite-coefficient pro-etale sheaf constructibility and Tor-interval statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The bounded constructible derived category on a finite disjoint union is the product of the bounded constructible derived categories of its components",
+   "results": "OK 8 hit(s): DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isLE, HomologicalComplex.ab5OfSize, HomologicalComplex.isSeparator_coproduct_separatingFamily, DerivedCategory.instIsGEObjSingleFunctor, Condensed.instPreservesFiniteProductsOppositeCompHausVal",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern constructible subsets, sections of topological sheaves, general sheaf colimits, or bounded representatives, rather than the full finite-coefficient pro-etale sheaf constructibility and Tor-interval statement."
+  },
+  {
+   "tool": "grep",
+   "query": "isProductOfDisjoint|iff_isConstructible_of_isOpenCover|exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": "OK 6 hit(s): Mathlib/Topology/Constructible.lean, Mathlib/Topology/Sheaves/SheafCondition/PairwiseIntersections.lean, Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/Properties.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean",
+   "date": "2026-10-21",
+   "verdict": "No match: the hits concern constructible subsets, sections of topological sheaves, general sheaf colimits, or bounded representatives, rather than the full finite-coefficient pro-etale sheaf constructibility and Tor-interval statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-clopen-derived-decomposition",
@@ -79,5 +242,60 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-clopen-finite-constructibility-bounds",
+  "worker": "stage1",
+  "group": "Q154",
+  "summary": "Unchanged statement. Eight explicit steps prove finite-stratification restriction/gluing, cohomological detection, both fixed-interval Tor implications using arbitrary degree-zero test modules and zero insertion, restriction to bounded constructible/ctf subcategories and the empty cases. Reuses the two existing sibling clopen algebra lemmas; creates no nodes. Searches found no exact finished project declaration or Mathlib match.",
+  "blueprint": "def-pur-section-invariant final invertibility assertion: finite-level constructibility and bounds part of lem-pur-finite-clopen-derived-decomposition, old step 8. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic scheme base-change tool for the open part of a restricted locally closed stratum; does not replace the purity unit route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme base-change tool for the closed part of a restricted locally closed stratum; does not replace the purity unit route."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-open-restriction",
+    "why": "Generic topological constructible-inverse-image tool, Stacks 005J; no purity result is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-image-retrocompact-open",
+    "why": "Generic topological constructible-image tool, Stacks 09YD; clopen components satisfy its retrocompactness hypothesis by an explicit closed-subset argument."
+   },
+   {
+    "node": "def-weil-finite-torsion-constructibility",
+    "why": "The statement already uses this global finite-coefficient definition; steps unpack its finite stratifications and bounded constructible full subcategory."
+   },
+   {
+    "node": "def-weil-proetale-tor-amplitude",
+    "why": "The statement already uses this definition with all module-sheaf test objects in degree zero and a specified common interval."
+   },
+   {
+    "node": "def-weil-finite-tor-amplitude",
+    "why": "The statement already uses this definition of the finite-coefficient bounded constructible finite-Tor full subcategory."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-constructible-open-restriction",
+  "lem-weil-pbc-constructible-image-retrocompact-open",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-proetale-tor-amplitude",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-9009c977e",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-9009c977e (reviewer sub-agent of L); spot-checked: Q154 9009c977 is a split with no new nodes, and I read all of it. The statement and stmt_deps are unchanged, and nothing cites SGA. The item is not on the dropped list and not split live (side-live shows it unsplit). All eight steps follow from the cited statements. Step 1 builds the real strata S×_X X_i: X_i is retrocompact, the open/closed base-change leaves give the immersion, 005J restricts constructibility to X_i and 09YD lifts it back to X; I checked both lemmas in topology.tex at the cited labels. Steps 2-3 restrict and glue the finite stratifications; the composite-pullback identification they use is elementary. Step 4 detects vanishing through the module-gluing sibling (unit F≅G(rF)) and H^m(r_iK)≅r_iH^m(K) from the calculus sibling. Step 5 shows global Tor amplitude from the components, testing every degree-zero M with r_i(K⊗^L M)≅r_iK⊗^L r_iM. Step 6 shows the converse using zero insertion e_iN. Step 7 restricts the equivalence to D^b_c and D^b_ctf, taking min/max of finitely many intervals and keeping any preassigned common bound. Step 8 covers the empty cases. Both siblings are same-unit and unsplit with empty proof_deps, so there is no cycle. Small cases checked: two points with shifted A; the residue module over A_{E,2}, which is in D^b_c but has no finite Tor amplitude, so Tor is correctly kept as its own condition; I empty and I a singleton. Advisory: lem-sf-finite-cover-ctf-locality (another unit, sk-thm-sf-tensor-hom) overlaps only the gluing direction, so it is not a duplicate. The worker's tool_uses entries for the four Mathlib leaves are unnecessary but harmless. The report names citations.json, searches.jsonl and prepare.py, which are not in the commit. No fixes."
  }
 }
