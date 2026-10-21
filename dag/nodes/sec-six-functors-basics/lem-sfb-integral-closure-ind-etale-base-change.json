@@ -12,9 +12,81 @@
   "def-weil-pbc-integral-closure",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a filtered presentation of $S$ by finitely presented etale $R$-algebras using [def-weil-pbc-ind-etale-algebra]. By [lem-weil-pbc-filtered-category-directed-cofinal], reindex it by a nonempty directed set $I$, retaining $S$ and its coprojections $a_i:S_i\\to S$ as the colimit in commutative $R$-algebras. Choose a common ambient universe for the diagram and its algebra carriers. Put $D_i=S_i\\otimes_R B$, $E_i=S_i\\otimes_R C$, $D=S\\otimes_R B$, and $E=S\\otimes_R C$. For every transition $u:i\\le j$ use $a_u\\otimes1$ on these tensor products. By [lem-sfb-integral-closure-etale-base-change], $q_i:E_i\\to\\overline{S_i}^{\\,D_i}$ is an isomorphism, with $q_i(s\\otimes c)=s\\otimes c$. Denote its composite with the subring inclusion by $f_i:E_i\\to D_i$; in particular $f_i$ is injective. All the rings $R,B,S_i$ satisfy that leaf's hypotheses, without hypotheses on the transition maps.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "lem-sfb-integral-closure-etale-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; finite-stage case Tag 03GE, lemma-integral-closure-commutes-etale."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise], applied with $N=C$ and $N=B$, every element of $E$ or $D$ lifts to a stage; an element at a stage mapping to zero is zero after a later transition. The stage-to-limit and transition maps are ring maps. The tensor map $f:E\\to D$ induced by $C\\subseteq B$ commutes with them: on $s\\otimes c$ both composites give $a_i(s)\\otimes c$, and pure tensors generate [def-weil-pbc-module-tensor-product]. For $t\\in E$, lift it to $t_i\\in E_i$. The element $f_i(t_i)$ is integral over $S_i$ by step 1. Map its monic annihilating polynomial coefficientwise along $a_i$; the resulting monic polynomial over $S$ annihilates $f(t)$ because ring maps preserve sums and products [def-weil-pbc-integral-closure]. Thus $f$ lands in $C_S$ and defines the required $S$-algebra map $q:E\\to C_S$. Its pure-tensor formula is the one in the statement.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; finite-stage case Tag 03GE, lemma-integral-closure-commutes-etale."
+   }
+  },
+  {
+   "text": "If $q(t)=0$, lift $t$ to $t_i\\in E_i$. Then $f_i(t_i)$ maps to zero in $D$. The eventual-zero clause of [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] for $N=B$ gives $u:i\\le j$ with $(a_u\\otimes1)f_i(t_i)=0$. By the pure-tensor compatibility this is $f_j((a_u\\otimes1)t_i)=0$. The injectivity of $f_j$ from step 1 gives $(a_u\\otimes1)t_i=0$; its image in $E$ is $t$, so $t=0$. Applying this to a difference proves that $q$ is injective.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; finite-stage case Tag 03GE, lemma-integral-closure-commutes-etale."
+   }
+  },
+  {
+   "text": "Let $x\\in C_S$ and lift its underlying element to $x_i\\in D_i$ using [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] with $N=B$. For any $S_i$-algebra $T$ obtained from $S_j$ ($j\\ge i$) or $S$, the maps $T\\otimes_{S_i}(S_i\\otimes_R B)\\to T\\otimes_R B$, $t\\otimes(s\\otimes b)\\mapsto ts\\otimes b$, and $t\\otimes b\\mapsto t\\otimes(1\\otimes b)$ are mutually inverse: balancing moves $s$ to the first factor, and the formulas preserve multiplication and units. Likewise $T\\otimes_{S_i}S_i\\cong T$ via $t\\otimes s\\mapsto ts$ [def-weil-pbc-module-tensor-product]. Under these identifications $1\\otimes x_i$ over $S$ is $x$. Restrict the directed system to indices $j\\ge i$; it still has colimit $S$, since every index has a common upper bound with $i$, and any compatible cocone on the tail extends uniquely by those upper bounds. The colimit is also one in commutative rings: a cocone of commutative rings $(T,(b_j)_{j\\ge i})$ on the tail becomes a cocone of commutative $R$-algebras when $T$ is given the structure map $b_j\\circ(R\\to S_j)$, which is independent of $j$ because the transition maps are $R$-algebra maps and any two indices have a common upper bound; the induced $R$-algebra map $S\\to T$ is the unique ring map compatible with the $b_j$, since such a map is automatically $R$-linear for this structure. Apply [lem-weil-pbc-integral-tensor-generators-colimit-descent] with initial index $i$, $B_0=S_i$, $C_0=D_i$, the structure map $S_i\\to D_i$, and the singleton $\\{x_i\\}$. Its integrality hypothesis is exactly $x\\in C_S$. It gives $j\\ge i$ for which the image $x_j$ of $x_i$ in $D_j$ is integral over $S_j$.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-integral-tensor-generators-colimit-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; finite-stage case Tag 03GE, lemma-integral-closure-commutes-etale."
+   }
+  },
+  {
+   "text": "By the finite-stage isomorphism $q_j$ in step 1, there exists $t_j\\in E_j$ with $f_j(t_j)=x_j$. Its image $t$ in $E$ satisfies $q(t)=x$: their underlying elements in $D$ agree by the compatibility checked in step 2, and the inclusion $C_S\\subseteq D$ is injective. This proves surjectivity. Together with step 3, $q$ is a bijective $S$-algebra homomorphism, hence an isomorphism (its inverse preserves operations by applying the injective map $q$). Zero rings cause no exception, and the nonempty index used above comes from filteredness, not from a hypothesis that a ring is nonzero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth, proof; finite-stage case Tag 03GE, lemma-integral-closure-commutes-etale."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ind-etale-algebra",
+  "def-weil-pbc-integral-closure",
+  "def-weil-pbc-module-tensor-product",
+  "lem-sfb-integral-closure-etale-base-change",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-integral-tensor-generators-colimit-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0CBF, lemma-integral-closure-commutes-colim-smooth: expanded tensor-colimit and integral-element descent argument, with Tag 03GE for the etale stages."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +129,45 @@
    "results": "{\"t\": \"2026-10-21T17:10:10Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure is preserved by ind etale scalar extension, equivalently tensoring the integral closure with a filtered colimit of etale algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"Algebra.Etale.baseChange\", \"Algebra.IsIntegral.tensorProduct\", \"RingHom.Etale.isStableUnderBaseChange\", \"RingHom.isIntegral_isStableUnderBaseChange\", \"Algebra.Etale.exists_subalgebra_fg\", \"TensorProduct.toIntegralClosure_bijective_of_tower\", \"Algebra.IsPushout.isIntegral'\"], \"digest\": \"2c69229ad464ff1d\"}",
    "date": "2026-10-21",
    "verdict": "no match: TensorProduct.toIntegralClosure_bijective_of_smooth is for a single smooth algebra, not a filtered colimit; the other hits define integral closure or preserve integrality/etaleness rather than this comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "toIntegralClosure_bijective|integralClosure.*[Cc]olimit|[Ii]ndEtale.*[Ii]ntegral",
+   "results": "{\"t\": \"2026-10-21T17:44:04Z\", \"tool\": \"grep\", \"query\": \"toIntegralClosure_bijective|integralClosure.*[Cc]olimit|[Ii]ndEtale.*[Ii]ntegral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/RingTheory/Smooth/IntegralClosure.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\"], \"digest\": \"f8a50a1e7a726b91\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for filtered-colimit assertion: smooth base change covers each stage only; tower and localization lemmas do not assert the ind-etale case."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure commutes with ind etale base change",
+   "results": "{\"t\": \"2026-10-21T17:44:04Z\", \"tool\": \"leansearch\", \"query\": \"Integral closure commutes with ind etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"integralClosure\", \"IsIntegralClosure\", \"integralClosure.isIntegral\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"IsIntegralClosure.isIntegral_algebra\", \"IsIntegrallyClosed.of_equiv\", \"IsIntegralClosure.lift\"], \"digest\": \"3eba1f246a68e4b2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for filtered-colimit assertion: smooth base change covers each stage only; tower and localization lemmas do not assert the ind-etale case."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"integralClosure\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-21T17:44:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"integralClosure\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"mem_adjoin_map_integralClosure_of_isStandardEtale\"], \"digest\": \"fb5c99245432ccfb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for filtered-colimit assertion: smooth base change covers each stage only; tower and localization lemmas do not assert the ind-etale case."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure in an algebra commutes with scalar extension by a filtered colimit of etale algebras",
+   "results": "{\"t\": \"2026-10-21T17:44:06Z\", \"tool\": \"leanfinder\", \"query\": \"Integral closure in an algebra commutes with scalar extension by a filtered colimit of etale algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure\", \"IsLocalization.Away.integralClosure\", \"IsLocalization.integralClosure\", \"IsIntegralClosure.tower_top\", \"IsIntegralClosure.of_isIntegralClosure_of_isIntegrallyClosedIn\", \"IsIntegralClosure.isIntegral_algebra\", \"Algebra.IsPushout.isIntegral'\", \"IsIntegralClosure.of_isIntegrallyClosedIn\"], \"digest\": \"7d7f6933d5c34290\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for filtered-colimit assertion: smooth base change covers each stage only; tower and localization lemmas do not assert the ind-etale case."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical tensor product map to integral closure is bijective for ind smooth or ind etale scalar extension",
+   "results": "{\"t\": \"2026-10-21T17:46:23Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical tensor product map to integral closure is bijective for ind smooth or ind etale scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.toIntegralClosure_bijective_of_tower\", \"TensorProduct.toIntegralClosure_mvPolynomial_bijective\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalization\", \"TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway\", \"Module.FaithfullyFlat.bijective_of_tensorProduct\", \"Algebra.Etale.baseChange\", \"Algebra.IsStandardSmooth.baseChange\", \"Algebra.Etale.exists_subalgebra_fg\"], \"digest\": \"11ef9cfd20d297cd\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for filtered-colimit assertion: smooth base change covers each stage only; tower and localization lemmas do not assert the ind-etale case."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-snc-tame-root-etale-extension",
@@ -86,5 +193,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-integral-closure-ind-etale-base-change",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0CBF using directed reindexing, tensor element lifting and eventual zero, and singleton integral-element descent. Added one Mathlib leaf for the finite etale stage; statement retained. No new unsplit lemma, Lean edit, or build.",
+  "blueprint": "Current main-20261015 det-thm-sf-ctf-stability-direct-images proof, paragraph (3), open direct image: finite tame root extension input; comparison of the concrete finite normalization with its strict-local pullback. The split realizes precisely the integral-closure base-change input in the finite tame normalization strict-local comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-category-directed-cofinal",
+    "why": "Generic reindexing of the ind-etale presentation; no replacement of a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "why": "Generic elementwise tensor-colimit calculus for this algebra presentation; no node of the unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-integral-tensor-generators-colimit-descent",
+    "why": "Generic finite-family integrality descent specialized to a singleton in a tensor stage; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-integral-tensor-generators-colimit-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-a224aeacf",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-a224aeacf (reviewer sub-agent of L); spot-checked: The item matches Stacks 0CBF (algebra.tex l.40749) specialized to ind-étale, with no hypothesis added. The new leaf matches 03GE (l.40631) and specializes Mathlib TensorProduct.toIntegralClosure_bijective_of_smooth (Smooth/IntegralClosure.lean:380, map at :39-48). Steps 1-3 and 5 are correct: f_i injective from the stage isomorphisms; the monic equation pushed along a_i⊗1; eventual zero for N=B then injectivity of f_j; preimage under q_j. Edge cases S=0, B=0, R→B non-injective and non-injective transitions all hold. Two repairable faults, both fixed in fixes/. (1) C4/B3, step 1: the leaf defined étale inline as finite presentation plus unique square-zero lifting, but the S_i are étale in the DAG's sense (def-weil-pbc-scheme-conventions → def-weil-etale-morphism: lfp, flat, unramified). Identifying the two is Stacks 08WD and no node carries it. The leaf now states étale as Spec T→Spec R étale [def-weil-etale-morphism, def-weil-affine-spectrum], and its how names Spec_iff (RingHomProperties.lean:360) with the HasRingHomProperty instance (Morphisms/Etale.lean:56), RingHom.etale_algebraMap (RingHom/Etale.lean:37) and Etale→Smooth (Etale/Basic.lean:223). (2) E1-type gap, step 4: lem-weil-pbc-integral-tensor-generators-colimit-descent (Lean: F : I ⥤ CommRingCat) needs a colimit in commutative rings, while S is the colimit in R-algebras. I added the elementary connected-diagram argument. The descent application is checked: B_0=S_i, C_0=D_i, φ_0 the structure map, s={x_i}; the hypothesis is x∈C_S under the tensor-cancellation identifications. No duplicates among the 03GE/03GG/0CBF/integral-closure hits: trait normalization charts, weakly-étale Noetherian normalization, localization, integral base change. The three tool_uses are generic algebra and accepted. No SGA source is cited.; 2 file(s) fixed by the reviewer"
  }
 }

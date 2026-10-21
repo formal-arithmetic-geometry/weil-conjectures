@@ -23258,3 +23258,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:58 L: merged deliver/Q34/lem-pur-compact-support-arrow-scalar-transport (stage 2; reviewer PASS; parallel immutable checks)
 - 17:58 L: returned deliver/Q03/lem-sfb-wstrict-lisse-component-cohomology (reviewer RETURN: L: independent stage-2 immutable head e7da645c097d: H2: stmt_dep lem-weil-pbc-condensed-qcqs-pushforward-continuity is a)
 - 17:59 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 18:00 L: merged deliver/Q35/lem-sfb-integral-closure-ind-etale-base-change (reviewer FIX; first push; new nodes: 1)
