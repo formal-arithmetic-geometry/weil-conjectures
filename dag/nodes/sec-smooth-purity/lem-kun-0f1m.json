@@ -41,17 +41,17 @@
    }
   },
   {
-   "text": "Work with small site presentations in the fixed larger universe of [def-weil-size-convention], so the small-site tensor and colimit results below apply. Assume the lower tor-amplitude condition. Choose a representing complex $G^\\bullet$ for $E$, and apply [lem-kun-flat-resolution-existence] to obtain a quasi-isomorphism $\\mathcal K^\\bullet\\to G^\\bullet$ with $\\mathcal K^\\bullet$ K-flat and termwise flat. For every module sheaf $\\mathcal M$ in degree zero, [def-kun-derived-tensor] identifies $H^n(\\mathcal K^\\bullet\\otimes_\\Lambda\\mathcal M)$ with $H^n(E\\otimes^L_\\Lambda\\mathcal M)$; it is zero for $n<a$ by [def-kun-tor-amplitude]. In particular, testing with the tensor unit $\\Lambda_T$ gives $H^n(\\mathcal K^\\bullet)=0$ for $n<a$.",
+   "text": "Use the small presentations of [def-weil-size-convention]. If $E$ has lower tor bound $a$, choose a representative $G^\\bullet$ and a K-flat flat-term resolution $K^\\bullet\\to G^\\bullet$ by [lem-kun-flat-resolution-existence]. By [def-kun-derived-tensor] and [def-kun-tor-amplitude], $H^n(K^\\bullet\\otimes_\\Lambda M)=0$ for every module sheaf $M$ and $n<a$. Taking $M=\\Lambda_T$ also gives $H^n(K^\\bullet)=0$ for $n<a$.",
    "uses": [
+    "def-weil-size-convention",
     "lem-kun-flat-resolution-existence",
     "def-kun-derived-tensor",
-    "def-kun-tor-amplitude",
-    "def-weil-size-convention"
+    "def-kun-tor-amplitude"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0F1M, first paragraph of the converse; Tag 06YS (lemma-K-flat-resolution)"
+    "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), resolution and tensor tests"
    }
   },
   {
@@ -66,65 +66,47 @@
    }
   },
   {
-   "text": "Form $\\mathcal E^\\bullet=\\tau_{\\ge a}\\mathcal K^\\bullet$ using [def-kun-truncations]: its terms are zero below $a$, $\\mathcal N$ in degree $a$, and $\\mathcal K^i$ above $a$; the differential from $\\mathcal N$ is induced by $d^a$. All terms are flat by the preceding steps. The canonical map is the quotient $q:\\mathcal K^\\bullet\\to\\mathcal E^\\bullet$. In degree $a$, the induced differential has kernel $\\ker(d^a)/\\operatorname{im}(d^{a-1})$ and there are no incoming boundaries, so $H^a(q)$ is the canonical isomorphism onto this quotient. In degree $a+1$ its incoming image is still $\\operatorname{im}(d^a)$, and all higher differentials are unchanged; hence $H^i(q)$ is an isomorphism for every $i\\ge a$. Below $a$, the source cohomology vanishes by step 2 and the target terms are zero. Thus $q$ is a quasi-isomorphism, and $\\mathcal E^\\bullet$ represents $E$.",
+   "text": "Apply [lem-kun-lower-truncation-flat-model] to $K^\\bullet$: its terms are flat, its cohomology vanishes below $a$, and step 3 gives the flat boundary cokernel. It supplies $P^\\bullet=\\tau_{\\ge a}K^\\bullet$ with flat terms and zero terms below $a$, a quasi-isomorphism $q:K^\\bullet\\to P^\\bullet$, and a degreewise short exact sequence $0\\to L^\\bullet\\to K^\\bullet\\to P^\\bullet\\to0$ with $L^\\bullet$ K-flat. Thus $P^\\bullet$ represents $E$.",
    "uses": [
-    "def-kun-truncations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0F1M, displayed lower good truncation"
-   }
-  },
-  {
-   "text": "Put $\\mathcal I=\\operatorname{im}(d^{a-1})$. The sequence $0\\to\\mathcal I\\to\\mathcal K^a\\to\\mathcal N\\to0$ is short exact. Both $\\mathcal K^a$ and $\\mathcal N$ are flat, so the last assertion of [lem-weil-pbc-site-flat-quotient-tensor-ses] makes $\\mathcal I$ flat. The kernel complex $\\mathcal L^\\bullet=\\ker(q)$ has terms $\\mathcal K^i$ for $i<a$, $\\mathcal I$ at $a$, and zero above $a$, with the induced differential. It is bounded above with flat terms, hence K-flat by [lem-kun-kflat-criteria](1). We have a degreewise short exact sequence $0\\to\\mathcal L^\\bullet\\to\\mathcal K^\\bullet\\to\\mathcal E^\\bullet\\to0$.",
-   "uses": [
-    "lem-weil-pbc-site-flat-quotient-tensor-ses",
-    "lem-kun-kflat-criteria"
+    "lem-kun-lower-truncation-flat-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0F1M, kernel complex; Tags 03EY (lemma-flat-ses) and 06YQ (lemma-bounded-flat-K-flat)"
+    "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), lower truncation and kernel paragraphs"
    }
   },
   {
-   "text": "We verify K-flatness of $\\mathcal E^\\bullet$ directly; a degreewise short exact sequence need not be a cone triangle in the homotopy category. Let $A^\\bullet$ be any acyclic complex. Since each $\\mathcal E^p$ is flat, [lem-weil-pbc-site-flat-quotient-tensor-ses] applied in degree $p$ with the sheaf $A^q$ gives $0\\to\\mathcal L^p\\otimes A^q\\to\\mathcal K^p\\otimes A^q\\to\\mathcal E^p\\otimes A^q\\to0$. Taking the direct sum over $p+q=n$ preserves exactness: finite direct sums of these sequences are exact by the biproduct identities, and their filtered colimit over finite subsets of the small set $\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$ is exact by [lem-pc-module-filtered-colimits-tensor]. For either chain map $f$, its tensor map in bidegree $(p,q)$ is $f^p\\otimes1$; the identities $d f^p=f^{p+1}d$ and $(-1)^p(f^p\\otimes d_A)=(f^p\\otimes1)(-1)^p(1\\otimes d_A)$ show that these maps commute with the total differentials. Thus we obtain a degreewise short exact sequence of total tensor complexes. The first two complexes are acyclic by K-flatness of $\\mathcal L$ and $\\mathcal K$ and [def-kun-derived-tensor]. The long exact cohomology sequence [lem-weil-pbc-complex-ses-homology-long-exact] has the exact segment $H^n(\\mathcal K\\otimes A)\\to H^n(\\mathcal E\\otimes A)\\to H^{n+1}(\\mathcal L\\otimes A)$. Both outside terms are zero, so $H^n(\\mathcal E\\otimes A)=0$ for all $n$. The definition of K-flatness proves the claim.",
+   "text": "In this short exact sequence $L^\\bullet$ and $K^\\bullet$ are K-flat and the quotient $P^\\bullet$ has flat terms. The two-out-of-three conclusion of [lem-kun-kflat-short-exact-quotient] therefore proves that $P^\\bullet$ is K-flat.",
    "uses": [
-    "lem-weil-pbc-site-flat-quotient-tensor-ses",
-    "lem-pc-module-filtered-colimits-tensor",
-    "def-kun-derived-tensor",
-    "lem-weil-pbc-complex-ses-homology-long-exact"
+    "lem-kun-kflat-short-exact-quotient"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), expanding its argument at the invocation in Tag 0F1M"
+    "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), statement and proof invoked in the K-flatness paragraph of Tag 0F1M"
    }
   },
   {
-   "text": "For any morphism of ringed sites or ringed topoi $u:(\\mathcal C',\\mathcal O')\\to(T_{\\Et},\\Lambda_T)$, the complex just constructed is K-flat with flat terms, exactly the two hypotheses of [lem-weil-pbc-ringed-topos-kflat-pullback]. Its conclusion says that the termwise module pullback $u^*\\mathcal E^\\bullet$ is K-flat with flat $\\mathcal O'$-module terms. This supplies the final assertion, simultaneously for every such $u$, without requiring exactness of module pullback or flatness of the map of coefficient sheaves.",
+   "text": "For this fixed $P^\\bullet$, [lem-weil-pbc-ringed-topos-kflat-pullback] applies to every ringed-site or ringed-topos morphism $u$, since $P^\\bullet$ is K-flat with flat terms. Hence every termwise $u^*P^\\bullet$ is K-flat with flat terms. This gives the same representative for all pullbacks. Together with step 1 this proves the equivalence and the moreover assertion.",
    "uses": [
     "lem-weil-pbc-ringed-topos-kflat-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (lemma-pullback-K-flat), used in the final paragraph of Tag 0F1M"
+    "place": "Tag 0G7E (lemma-pullback-K-flat), applied in Tag 0F1M"
    }
   }
  ],
  "proof_deps": [
   "def-kun-derived-tensor",
   "def-kun-tor-amplitude",
-  "lem-kun-flat-resolution-existence",
   "def-weil-size-convention",
+  "lem-kun-flat-resolution-existence",
   "lem-kun-tor-cokernel-flat",
-  "def-kun-truncations",
-  "lem-weil-pbc-site-flat-quotient-tensor-ses",
-  "lem-kun-kflat-criteria",
-  "lem-pc-module-filtered-colimits-tensor",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-kun-lower-truncation-flat-model",
+  "lem-kun-kflat-short-exact-quotient",
   "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "proof_origin": {
@@ -202,11 +184,11 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-kunneth-ordinary",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "lem-kun-0f1m",
-  "worker": "Q29",
-  "summary": "Read Stacks 0F1M and its tensor and pullback inputs. Replaced the imported single paragraph by seven checked steps, corrected the quotient map direction, removed the invalid cone inference and the unsupported inverse-image argument, and reused existing general ringed-site tools. No new nodes.",
-  "blueprint": "Steps 1-2 realize the model/amplitude paragraphs; step 3 the cokernel; steps 4-6 the lower truncation, flat kernel, and K-flatness; step 7 the pullback paragraph. The chapter and unit route are unchanged.",
+  "worker": "Q105",
+  "summary": "Repair of the human-requested re-split: separated the lower good-truncation/quasi-isomorphism/flat-kernel construction and the total-tensor short-exact-sequence K-flatness argument into two statement-only unsplit nodes. The original statement and full route are preserved; the assembly is below 3000 characters. All previous proof details are retained in report.md for the subsequent workers.",
+  "blueprint": "Steps 1-3 realize the model-to-amplitude and resolution/cokernel paragraphs of blueprint_update. Step 4 cites the new node carrying the lower truncation and flat bounded-above kernel argument; step 5 cites the new node carrying the full tensor short-exact-sequence proof; step 6 retains the general pullback theorem. The previously repaired quotient direction and absence of a homotopy cone inference are preserved.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-site-flat-quotient-tensor-ses",
@@ -228,12 +210,12 @@
   "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-15",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q29-d93ce42d1",
-  "group": "Q29",
+  "reviewer": "NT-cc-Q105-3bf735e40",
+  "group": "Q105",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-d93ce42d1 (reviewer sub-agent of L); spot-checked: Read the complete item, seven proof steps, all cited statements, master blueprint, route, and Stacks sources 0F1M/0G7E and supporting lemmas. Verified truncation boundaries, tensor exactness, coefficient category, arbitrary pullback, small cases, duplicate candidates, and absence of dependency cycles. No new nodes or repairs. Accepted the three declared generic tool uses; detailed findings are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-3bf735e40 (reviewer sub-agent of L); spot-checked: The re-split follows the human's 2026-10-21 note. I compared the base proof (7 steps, live node, unchanged since base) with the delivery step by step. Base steps 4–5 (truncation τ≥a K, quasi-isomorphism check at degrees <a, a and a+1, I=im d^{a-1} flat, kernel L bounded above with flat terms and K-flat, degreewise SES) became lem-kun-lower-truncation-flat-model. Base step 6 (total-tensor SES with exact direct sums, chain-map signs, long exact sequence giving K-flatness) became lem-kun-kflat-short-exact-quotient. Steps 1–3 and the pullback step stay in the item; the assembly is about 2170 characters. Nothing was shortened; the two new nodes are of comparable size; neither restates the item; there is no cycle. Both new statements were checked against Stacks sites-cohomology Tag 0F1M (line 12472) and Tag 0G7B (line 3097) and are true. Small cases: an identity complex gives P=0 and L=K; Z with multiplication by ℓ violates the flat-cokernel hypothesis, which is consistent; 0→Z→Z→Z/2→0 shows the flat-P hypothesis is needed. The K-flat conventions of def-kun-derived-tensor and def-pc-kflat-complex agree through the stated sign symmetry. The statement and its Λ_T coefficient category are unchanged. Duplicate scans of the snapshot, live and side-live found nothing: kflat-criteria(2) is about triangles, site-flat-quotient-tensor-ses about single sheaves, and Q33's lem-pe-successive-quotient-flat-complex-sequence is a different SES with no K-flat claim. All three kinds of Mathlib search are recorded. The Lean declaration is still sorry (TorAmplitudeKFlatResolution.lean:165), so splitting is allowed. Accepted tool use: lem-weil-pbc-ringed-topos-kflat-pullback (step 6). The split_report still lists two tool uses the item no longer cites (site-flat-quotient-tensor-ses, module-filtered-colimits-tensor). Advisories: the new nodes' blueprint.from.place names Stacks tags instead of blueprint sentences; the new nodes have no lean_audit field (tool-filled); the review snapshot's other-chapter symlinks are dangling, so I read those nodes from clones/side-live. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
