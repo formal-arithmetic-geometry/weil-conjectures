@@ -17,35 +17,16 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSections
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
-import Sheaf.AlgebraicGeometry.IsRegularScheme
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.Topology.Connected.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Sheaf.AlgebraicGeometry.GeometricIrreducibilityFiniteSeparableTest
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Connected
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+import Sheaf.AlgebraicGeometry.BertiniFiniteCoverBaseCodimension
+import Sheaf.AlgebraicGeometry.BertiniFiniteCoverTransverseComponent
 import Sheaf.AlgebraicGeometry.BertiniIrreducibleMember
-import WeilConjectures.AlgebraicGeometry.Picard.ZeroScheme
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.AlgebraicGeometry.Properties
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
-import Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion
-import Mathlib.Algebra.MvPolynomial.Basic
-import WeilConjectures.RingTheory.FiniteTypeDomainDimensionLocalRingLocalization
-import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import WeilConjectures.AlgebraicGeometry.Regular
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.AlgebraicGeometry.Artinian
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.Topology.Sets.Closeds
-import Mathlib.CategoryTheory.MorphismProperty.Comma
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
-import WeilConjectures.AlgebraicGeometry.InvertibleGeneratingSectionsFibre
-import Sheaf.AlgebraicGeometry.ClosedPointField
-import WeilConjectures.RingTheory.Etale.LocalDimension
+import WeilConjectures.AlgebraicGeometry.Modules.HomSection
+import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 
 /-! # Simultaneous irreducibility on a finite étale cover
 
@@ -64,6 +45,251 @@ open scoped AlgebraicGeometry
 
 namespace AlgebraicGeometry
 
+open Scheme.Modules Opposite MonoidalCategory
+
+noncomputable section
+
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+
+private def tensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    tensorPullback f ≅ Scheme.Modules.pullback f :=
+  (Classical.choose (exists_tensorPullbackAdjunction f)).leftAdjointUniq
+    (pullbackPushforwardAdjunction f)
+
+attribute [local irreducible] tensorPullback tensorPullbackObj
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tensorUnit_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules) :
+    tensorSectionsUnit f M =
+      (show Γ(M, ⊤) ⟶ Γ((tensorPullback f).obj M, ⊤) from
+        ((Classical.choose (exists_tensorPullbackAdjunction f)).unit.app M).app ⊤) := by
+  unfold tensorSectionsUnit
+  have hi : (homOfLE f.preimage_top.ge).op = 𝟙 (op (⊤ : X.Opens)) := rfl
+  erw [hi, ((tensorPullback f).obj M).presheaf.map_id, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tensorUnit_smul {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules)
+    (r : Γ(Y, ⊤)) (s : Γ(M, ⊤)) :
+    tensorSectionsUnit f M (r • s) = f.appTop r • tensorSectionsUnit f M s := by
+  rw [tensorUnit_eq]
+  exact Hom.app_smul _ r s
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tensorUnit_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (M : Y.Modules)
+    (s : Γ(M, ⊤)) :
+    ((tensorComparison f).hom.app M).app ⊤
+      (tensorSectionsUnit f M s) = pullbackSection f s := by
+  rw [tensorUnit_eq]
+  exact congrArg (fun t ↦ t.app ⊤ s)
+    ((Classical.choose (exists_tensorPullbackAdjunction f)).unit_leftAdjointUniq_hom_app
+      (pullbackPushforwardAdjunction f) M)
+
+private theorem zeroLocus_section_iso {X : Scheme.{u}} {M N : X.Modules}
+    (e : M ≅ N) (s : Γ(M, ⊤)) :
+    (homOfGlobalSection N (e.hom.app ⊤ s)).zeroLocus =
+      (homOfGlobalSection M s).zeroLocus := by
+  have h : homOfGlobalSection M s ≫ e.hom =
+      homOfGlobalSection N (e.hom.app ⊤ s) := by
+    apply unit_hom_ext
+    simp only [Hom.comp_app, ConcreteCategory.comp_apply, homOfGlobalSection_app_one,
+      presheaf_map_id_apply]
+  exact Hom.zeroLocus_eq_of_arrowIso _ _
+    (Arrow.isoMk (Iso.refl _) e.symm (by
+      change 𝟙 _ ≫ homOfGlobalSection M s =
+        homOfGlobalSection N (e.hom.app ⊤ s) ≫ e.inv
+      rw [← h, Category.assoc, Iso.hom_inv_id, Category.comp_id, Category.id_comp]))
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem zeroLocus_tensorUnit {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : Y.Modules) [M.IsInvertible] (s : Γ(M, ⊤)) :
+    (homOfGlobalSection M s).zeroLocus.comap f =
+      (homOfGlobalSection ((tensorPullback f).obj M) (tensorSectionsUnit f M s)).zeroLocus := by
+  have := IsInvertible.sheafOfModules_isInvertible M
+  have : SheafOfModules.IsInvertible.{u, u, u} (unit Y) :=
+    IsInvertible.sheafOfModules_isInvertible (𝟙_ Y.Modules)
+  rw [Hom.comap_zeroLocus]
+  let e := (tensorComparison f).app M
+  have he := zeroLocus_section_iso e (tensorSectionsUnit f M s)
+  change (homOfGlobalSection _
+    (((tensorComparison f).hom.app M).app ⊤ (tensorSectionsUnit f M s))).zeroLocus = _ at he
+  rw [tensorUnit_comparison] at he
+  rw [← he]
+  apply Hom.zeroLocus_eq_of_arrowIso _ _
+  refine Arrow.isoMk (pullbackObjUnitIso f) (Iso.refl _) ?_
+  change (pullbackObjUnitIso f).hom ≫
+    homOfGlobalSection _ (pullbackSection f s) =
+      (Scheme.Modules.pullback f).map (homOfGlobalSection M s) ≫ 𝟙 _
+  symm
+  rw [Category.comp_id]
+  rw [← cancel_epi (pullbackObjUnitIso f).inv, Iso.inv_hom_id_assoc]
+  apply unit_hom_ext
+  have h := pullbackSection_app_one f (homOfGlobalSection M s)
+  simpa only [Scheme.Hom.preimage_top, homOfGlobalSection_app_one,
+    presheaf_map_id_apply] using h.symm
+
+
+private theorem memberIdeal_eq_comap
+    {k : Type u} [Field k] {Y : Scheme.{u}} [Y.Over (Spec (.of k))]
+    (L : Y.Modules) [L.IsInvertible]
+    {V : Type v} [AddCommGroup V] [Module k V]
+    (r : ℕ) (b : Module.Basis (Fin r) k V) (ψ : V →+ Γ(L, ⊤))
+    (hlinear : ∀ (c : k) (v : V),
+      ψ (c • v) = (Y ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv c) • ψ v)
+    (v : V) :
+    linearSystemMemberIdeal (Y ↘ Spec (.of k)) L (fun i ↦ ψ (b i)) k (b.repr v) =
+      (homOfGlobalSection L (ψ v)).zeroLocus.comap
+        (pullback.fst (Y ↘ Spec (.of k))
+          (Spec.map (CommRingCat.ofHom (algebraMap k k)))) := by
+  unfold linearSystemMemberIdeal
+  rw [zeroLocus_tensorUnit]
+  congr 1
+  congr 1
+  have heq : ψ v = ∑ i : Fin r,
+      (Y ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv (b.repr v i)) • ψ (b i) := by
+    conv_lhs => rw [← b.sum_repr v, map_sum]
+    exact Finset.sum_congr rfl (fun i _ ↦ hlinear _ _)
+  rw [heq, map_sum]
+  apply Finset.sum_congr rfl
+  intro i _
+  rw [tensorUnit_smul]
+  congr 1
+  · have h := congrArg (fun q : pullback (Y ↘ Spec (.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k k))) ⟶ Spec (.of k) ↦
+          q.appTop ((Scheme.ΓSpecIso (.of k)).inv (b.repr v i)))
+      (pullback.condition (f := Y ↘ Spec (.of k))
+        (g := Spec.map (CommRingCat.ofHom (algebraMap k k))))
+    have hi : (Spec.map (CommRingCat.ofHom (algebraMap k k))).appTop
+        ((Scheme.ΓSpecIso (.of k)).inv (b.repr v i)) =
+        (Scheme.ΓSpecIso (.of k)).inv (b.repr v i) := by
+      rw [show Spec.map (CommRingCat.ofHom (algebraMap k k)) = 𝟙 _ from
+        Scheme.Spec.map_id _, Scheme.Hom.id_appTop]
+      rfl
+    simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply] at h
+    rw [hi] at h
+    exact h.symm
+  · simp only [tensorUnit_eq, id_eq]; rfl
+
+private theorem geometric_member_of_bertini
+    {k : Type u} [Field k] {Y : Scheme.{u}} [Y.Over (Spec (.of k))]
+    (L : Y.Modules) [L.IsInvertible]
+    {V : Type v} [AddCommGroup V] [Module k V]
+    (r : ℕ) (b : Module.Basis (Fin r) k V) (ψ : V →+ Γ(L, ⊤))
+    (hlinear : ∀ (c : k) (v : V),
+      ψ (c • v) = (Y ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv c) • ψ v)
+    (v : V)
+    (h : GeometricallyIrreducible
+      ((linearSystemMemberIdeal (Y ↘ Spec (.of k)) L (fun i ↦ ψ (b i)) k
+        (b.repr v)).subschemeι ≫
+        pullback.snd (Y ↘ Spec (.of k))
+          (Spec.map (CommRingCat.ofHom (algebraMap k k))))) :
+    GeometricallyIrreducible ((homOfGlobalSection L (ψ v)).zeroLocus.subschemeι ≫
+      (Y ↘ Spec (.of k))) := by
+  rw [memberIdeal_eq_comap L r b ψ hlinear v] at h
+  let J := (homOfGlobalSection L (ψ v)).zeroLocus
+  let f := Y ↘ Spec (.of k)
+  let g := Spec.map (CommRingCat.ofHom (algebraMap k k))
+  have hg : g = 𝟙 _ := by
+    exact Scheme.Spec.map_id _
+  have : IsIso g := hg ▸ inferInstance
+  let p := pullback.fst f g
+  let e := (J.comapIso p) ≪≫ asIso (pullback.snd p J.subschemeι)
+  have he' : e.hom ≫ J.subschemeι = (J.comap p).subschemeι ≫ p := by
+    change ((J.comapIso p).hom ≫ pullback.snd p J.subschemeι) ≫ J.subschemeι = _
+    rw [Category.assoc, ← pullback.condition, ← Category.assoc, J.comapIso_hom_fst]
+  have hright : pullback.snd f g ≫ g = pullback.snd f g :=
+    (congrArg (fun q ↦ pullback.snd f g ≫ q) hg).trans (Category.comp_id _)
+  have he : e.hom ≫ J.subschemeι ≫ f =
+      (J.comap p).subschemeι ≫ pullback.snd f g := by
+    rw [← Category.assoc, he', Category.assoc]
+    have hp : p ≫ f = pullback.snd f g :=
+      (pullback.condition (f := f) (g := g)).trans hright
+    rw [hp]
+  rw [← he] at h
+  exact (MorphismProperty.cancel_left_of_respectsIso
+    (P := @GeometricallyIrreducible) e.hom _).mp h
+
+private theorem exists_open_on_finiteCover
+    (k : Type u) [Field k] [IsAlgClosed k]
+    (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsAffine X] [ConnectedSpace X]
+    [Smooth (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
+    [QuasiCompact (X ↘ Spec (.of k))]
+    (d : ℕ) (hd : 2 ≤ d) (hdim : X.IsPureDimension d)
+    (T : Scheme.{u}) [ConnectedSpace T] (π : T ⟶ X) [IsFinite π] [Etale π]
+    (S : Finset X) (hclosed : ∀ x ∈ S, IsClosed ({x} : Set X))
+    (U₀ : X.Opens) (hU₀ : (U₀ : Set X) = (S : Set X)ᶜ)
+    (L : X.Modules) [L.IsInvertible]
+    (V : Type v) [AddCommGroup V] [Module k V]
+    (r : ℕ) (b : Module.Basis (Fin r) k V) (ψ : V →+ Γ(L, ⊤))
+    (hlinear : ∀ (c : k) (v : V),
+      ψ (c • v) = (X ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv c) • ψ v)
+    (hgen : Epi (((Scheme.Modules.tensorPullback U₀.ι).obj L).freeHomEquiv.symm
+      (fun i : ULift.{u} (Fin r) ↦ SheafOfModules.unitHomEquiv _
+        (Scheme.Modules.homOfGlobalSection _
+          (Scheme.Modules.tensorSectionsUnit U₀.ι L (ψ (b i.down)))))))
+    [IsImmersion (@ProjectiveSpace.homOfGeneratingSections
+      (ULift.{u} (Fin r)) inferInstance U₀.toScheme (Spec (.of k))
+      (U₀.ι ≫ (X ↘ Spec (.of k))) ((Scheme.Modules.tensorPullback U₀.ι).obj L)
+      (Scheme.Modules.IsInvertible.of_iso
+        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction U₀.ι)).leftAdjointUniq
+          (Scheme.Modules.pullbackPushforwardAdjunction U₀.ι)).app L).symm)
+      (fun i : ULift.{u} (Fin r) ↦ SheafOfModules.unitHomEquiv _
+        (Scheme.Modules.homOfGlobalSection _
+          (Scheme.Modules.tensorSectionsUnit U₀.ι L (ψ (b i.down))))) hgen)] :
+    ∃ U : (Spec (.of (MvPolynomial (Fin r) k))).Opens,
+      (U : Set (Spec (.of (MvPolynomial (Fin r) k)))).Nonempty ∧
+      ∀ v : V,
+        Set.range (Spec.map (CommRingCat.ofHom
+          (MvPolynomial.eval₂Hom (RingHom.id k) (fun i ↦ b.repr v i)))) ⊆ (U : Set _) →
+        GeometricallyIrreducible
+          (((homOfGlobalSection L (ψ v)).zeroLocus.comap π).subschemeι ≫
+            π ≫ (X ↘ Spec (.of k))) := by
+  classical
+  let f := X ↘ Spec (.of k)
+  let : T.Over (Spec (.of k)) := ⟨π ≫ f⟩
+  have : Smooth (T ↘ Spec (.of k)) := show Smooth (π ≫ f) from inferInstance
+  have : LocallyOfFiniteType (T ↘ Spec (.of k)) := inferInstance
+  have : QuasiCompact (T ↘ Spec (.of k)) := show QuasiCompact (π ≫ f) from inferInstance
+  have : GeometricallyConnected (T ↘ Spec (.of k)) :=
+    GeometricallyConnected.of_connectedSpace_of_isSepClosed _
+  have : GeometricallyIrreducible (T ↘ Spec (.of k)) :=
+    GeometricallyIrreducible.of_smooth_of_geometricallyConnected _
+  let LT := (tensorPullback π).obj L
+  have : LT.IsInvertible := IsInvertible.of_iso ((tensorComparison π).app L).symm
+  let ψT : V →+ Γ(LT, ⊤) := (tensorSectionsUnit π L).hom.comp ψ
+  have hlinearT (c : k) (v : V) :
+      ψT (c • v) = (T ↘ Spec (.of k)).appTop
+        ((Scheme.ΓSpecIso (.of k)).inv c) • ψT v := by
+    change tensorSectionsUnit π L (ψ (c • v)) = _
+    rw [hlinear, tensorUnit_smul]
+    rfl
+  let : Module k Γ(LT, ⊤) := Module.compHom Γ(LT, ⊤)
+    (Scheme.globalSectionsRingHom k (X := T))
+  let ψL : V →ₗ[k] Γ(LT, ⊤) := { ψT with map_smul' := hlinearT }
+  have : FiniteDimensional k V := Module.Finite.of_basis b
+  have hcomp := bertini_finiteCover_transverse_component k X d hd hdim T π S
+    hclosed U₀ hU₀ L V r b ψ hlinear hgen
+  have hbase := bertini_finiteCover_base_codimension k X d hdim T π S
+    hclosed U₀ hU₀ L V r b ψ hgen
+  obtain ⟨U, hU, hmem⟩ := exists_open_geometricallyIrreducible_linearSystemMember
+    k T LT V ψL hcomp (fun B hB ↦ by
+      rw [hbase B hB]
+      exact_mod_cast hd) r b
+  refine ⟨U, hU, fun v hv ↦ ?_⟩
+  have ha : Set.range (Spec.map
+      (CommRingCat.ofHom (MvPolynomial.aeval (R := k) (b.repr v)).toRingHom)) ⊆ U := hv
+  have hm := hmem k (b.repr v) ha
+  have hg := geometric_member_of_bertini LT r b ψT hlinearT v hm
+  change GeometricallyIrreducible
+    ((homOfGlobalSection ((tensorPullback π).obj L)
+      (tensorSectionsUnit π L (ψ v))).zeroLocus.subschemeι ≫ π ≫ f) at hg
+  rw [← zeroLocus_tensorUnit π L (ψ v)] at hg
+  exact hg
+
 /-- General sections cut geometrically irreducible subschemes simultaneously on `X` and `T`.
 A finite set of closed points represents the reduced finite set of rational points: over
 an algebraically closed field, closed points of a finite-type scheme are exactly rational
@@ -74,160 +300,17 @@ precisely a `k`-linear map for the canonical action on global sections.
 Source: main-20261015 blueprint, `lem-zl-bertini-finite-cover-curve.proof.md`, paragraph 3;
 Stacks Project, Tag 0G4F (blueprint: lem-zl-bertini-finite-cover-irreducible-system).
 
-Proof (the DAG's fifteen steps):
-1. Write $X=\operatorname{Spec}A$. By [def-weil-finite-integral-morphism],
-   $T=\operatorname{Spec}B$ with $B$ finite as an $A$-module. If $a_1,\ldots,a_m$ generate $A$
-   over $k$ and $b_1,\ldots,b_n$ generate $B$ as an $A$-module, these elements together generate
-   $B$ as a $k$-algebra: every element of $B$ is an $A$-linear combination of the $b_j$. Thus
-   $T$ is affine of finite type over $k$. Form $L_T=\pi^*L$ and the linear map
-   $\psi_T(v)=\pi^*\psi(v)$ using the tensor formula in [def-pc-module-pullback]. A local frame
-   $e$ of $L$ pulls back to a frame $1\otimes e$ of $L_T$, so it is invertible. Etaleness
-   includes flatness by [def-weil-etale-morphism]; hence [lem-pc-zero-scheme-properties]
-   identifies $Z(\psi_T(v))$ with $T\times_X H_v=T_v$. Uses: def-weil-finite-integral-morphism,
-   def-pc-module-pullback, def-weil-etale-morphism, lem-pc-zero-scheme-properties.
-2. By [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], $\pi$ is smooth. Its composition with
-   the smooth map $X\to\operatorname{Spec}k$ is smooth by [lem-trf-smooth-composition], so both
-   $X$ and $T$ are smooth over $k$. Apply [lem-weil-pbc-smooth-scheme-over-field-regular] to
-   each, then [lem-sc-regular-connected-integral] using their assumed nonempty connectedness.
-   Both schemes are integral; in particular $A$ and $B$ are domains by [def-pc-integral-scheme].
-   Uses: lem-weil-pbc-etale-smooth-zero-dimensional-fibres, lem-trf-smooth-composition,
-   lem-weil-pbc-smooth-scheme-over-field-regular, lem-sc-regular-connected-integral,
-   def-pc-integral-scheme.
-3. Every finite separable field extension $E/k$ is isomorphic to $k$ over $k$: the minimal
-   polynomial of each element splits over the algebraically closed field $k$ and, being
-   irreducible, is linear. Thus $\operatorname{Spec}(A\otimes_kE)$ and
-   $\operatorname{Spec}(B\otimes_kE)$ are isomorphic to the integral, hence irreducible schemes
-   $X$ and $T$. Apply [lem-zl-geometric-irreducibility-finite-separable-test] separately to $A$
-   and $B$. It follows that $X$ and $T$ are geometrically irreducible over $k$. Uses:
-   lem-zl-geometric-irreducibility-finite-separable-test, def-pc-integral-scheme.
-4. Every closed point of either finite-type $k$-scheme has residue field finite over $k$ by
-   [lem-kun-closed-point-field], hence equal to $k$. A $k$-rational point maps to a
-   $k$-rational, therefore closed, point under $\pi$. Since $X$ is integral of pure dimension
-   $d$, $\dim A=d$ by [lem-weil-pbc-spec-topological-krull-dimension-ring]. For every closed
-   $x\in X$, [lem-weil-pbc-finite-type-domain-dimension-local-ring-localization] gives
-   $\dim\mathcal O_{X,x}=d$. For every closed $t\in T$, with $x=\pi(t)$, the affine etale ring
-   map $A\to B$ gives $\dim\mathcal O_{T,t}=\dim\mathcal O_{X,x}=d$ by
-   [lem-sc-etale-local-dimension]. Finally [lem-sc-scheme-stalk-dimension-generalization-chains]
-   identifies these dimensions with $\operatorname{codim}(\{x\},X)$ and
-   $\operatorname{codim}(\{t\},T)$. Uses: lem-kun-closed-point-field,
-   lem-weil-pbc-spec-topological-krull-dimension-ring,
-   lem-weil-pbc-finite-type-domain-dimension-local-ring-localization,
-   lem-sc-etale-local-dimension, lem-sc-scheme-stalk-dimension-generalization-chains.
-5. The support of the common zero scheme on $X$ is exactly $S$: all sections vanish on $S$, and
-   at every point outside $S$ some section is nonzero in the fibre by
-   [lem-weil-pbc-invertible-generating-sections-fibre]. On $T$ the support is exactly
-   $\pi^{-1}S$, since locally the pullback ideal is generated by the images of the same finitely
-   many section coefficients. This asserts equality of supports, without asserting that the base
-   schemes are reduced. Each fibre over $s\in S$ has dimension zero by
-   [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] and is affine of finite type over $k$
-   (its ring is $B\otimes_A k$). By [lem-weil-pbc-finite-type-dim-zero-artinian] it has finitely
-   many points. These points are $k$-rational and closed in $T$ by the preceding step. Thus both
-   base supports are finite sets of closed points, and all their irreducible components have
-   codimension $d\ge2$ by the preceding step. This verifies hypothesis (ii) of
-   [lem-zl-bertini-irreducible-member] for both systems. Uses:
-   lem-weil-pbc-invertible-generating-sections-fibre,
-   lem-weil-pbc-etale-smooth-zero-dimensional-fibres,
-   lem-weil-pbc-finite-type-dim-zero-artinian, lem-zl-bertini-irreducible-member.
-6. The open $T\setminus\pi^{-1}S$ is nonempty. Otherwise the underlying space of the nonempty
-   scheme $T$ would be a finite set of closed points, with no strict generalizations;
-   [lem-sc-scheme-stalk-dimension-generalization-chains] would give dimension zero for all its
-   local rings, contrary to dimension $d\ge2$ at closed points. By
-   [lem-sc-lft-over-field-jacobson-space], closed points are dense in $T$, so choose a closed
-   $t$ in this open and set $x=\pi(t)$. Both are $k$-rational and $x\notin S$. Uses:
-   lem-sc-scheme-stalk-dimension-generalization-chains, lem-sc-lft-over-field-jacobson-space.
-7. Choose $v_1\in V$ with $s_1=\psi(v_1)$ nonzero at $x$, using
-   [lem-weil-pbc-invertible-generating-sections-fibre], and extend $v_1$ to a basis
-   $v_1,e_2,\ldots,e_r$ of $V$. Near $x$, use $s_1$ as frame and put $a_i=\psi(e_i)/s_1$. By
-   [def-weil-pbc-morphism-to-projective-space-by-sections] and
-   [lem-weil-pbc-projective-space-standard-charts], these are the pullbacks of the polynomial
-   coordinates $T_i/T_1$ on the corresponding affine chart. The assumed immersion gives a
-   surjection from the local ring of projective space at the image of $x$ onto $\mathcal
-   O_{X,x}$: factor it as an open immersion after a closed immersion and use
-   [def-weil-closed-immersion]. It therefore gives a surjection on maximal ideals modulo their
-   squares. The maximal ideal of the chart at this $k$-point is generated by $T_i/T_1-a_i(x)$
-   (subtracting a polynomial's value expresses it in these generators). Consequently the classes
-   of $a_i-a_i(x)$ span $\mathfrak m_x/\mathfrak m_x^2$. They are the local coefficients of
-   $\psi(w_i)$, where $w_i=e_i-a_i(x)v_1$ vanishes at $x$. Uses:
-   lem-weil-pbc-invertible-generating-sections-fibre,
-   def-weil-pbc-morphism-to-projective-space-by-sections,
-   lem-weil-pbc-projective-space-standard-charts, def-weil-closed-immersion.
-8. For each of the two regular local rings $R=\mathcal O_{X,x}$ and $R=\mathcal O_{T,t}$, let
-   $\mathfrak m$ be its maximal ideal and put $e=\dim_k\mathfrak m/\mathfrak m^2$. Regularity
-   and $\dim R=d$ imply $e\le d$ by [def-weil-regular-scheme]. Lift a basis of this cotangent
-   space to $e$ elements of $\mathfrak m$; they generate $\mathfrak m$ by
-   [lem-weil-pbc-nakayama-local-generators], since $\mathfrak m$ is finite over the Noetherian
-   ring $R$. Applying [lem-weil-pbc-noetherian-height-quotient-bound] with $J=\mathfrak
-   P=\mathfrak m$ gives $d\le e$, since $R/\mathfrak m=k$ has height zero. Hence $e=d$ for both
-   local rings. Uses: def-weil-regular-scheme, lem-weil-pbc-nakayama-local-generators,
-   lem-weil-pbc-noetherian-height-quotient-bound.
-9. Because $\pi$ is etale it is unramified by [def-weil-etale-morphism]. At the rational points
-   $t,x$, [lem-sc-rational-unramified-cotangent-criterion] gives a surjection $\mathfrak
-   m_x/\mathfrak m_x^2\to\mathfrak m_t/\mathfrak m_t^2$. Thus the pulled-back classes of
-   $a_i-a_i(x)$ span the latter space, of dimension $d\ge2$. Choose two $k$-linear combinations
-   of the $w_i$, denoted $v_2,v_3$, whose pulled-back coefficients have independent cotangent
-   classes at $t$. Their coefficients at $x$ are also independent, since any relation at $x$
-   would pull back to a relation at $t$. The sections $\psi(v_2),\psi(v_3)$ vanish at $x$, their
-   pullbacks vanish at $t$, and $\psi(v_1)$ and its pullback are nonzero at these points. Uses:
-   def-weil-etale-morphism, lem-sc-rational-unramified-cotangent-criterion.
-10. In each local ring $R$ of step 8, let $f,g$ be the coefficients of these two sections in the
-   frame $\psi(v_1)$ or its pullback. Their independent classes extend to a basis of $\mathfrak
-   m/\mathfrak m^2$; lifting the rest and applying [lem-weil-pbc-nakayama-local-generators]
-   extends $f,g$ to a minimal set of $d$ generators of $\mathfrak m$. By
-   [lem-weil-pbc-regular-local-generators-regular-sequence], $R/(f)$ and $R/(f,g)$ are regular
-   local rings of dimensions $d-1,d-2$. By [lem-sc-regular-local-domain], they and $R$ are
-   domains. Thus $(0)\subsetneq(f)\subsetneq\mathfrak p=(f,g)$ is a strict chain of prime
-   ideals: $f\ne0$ and $g\notin(f)$ follow from their independent cotangent classes. The height
-   of $\mathfrak p$ is at least two. It is at most two by
-   [lem-weil-pbc-noetherian-height-quotient-bound] with $J=\mathfrak P=\mathfrak p$ and two
-   generators, because $\mathfrak P/J=0$ has height zero in the domain $R/\mathfrak p$. Hence
-   $\operatorname{ht}_R(\mathfrak p)=2$. Uses: lem-weil-pbc-nakayama-local-generators,
-   lem-weil-pbc-regular-local-generators-regular-sequence, lem-sc-regular-local-domain,
-   lem-weil-pbc-noetherian-height-quotient-bound.
-11. For each pair $(Y,y)=(X,x),(T,t)$ choose an affine neighbourhood $W=\operatorname{Spec}C$ on
-   which the chosen frame is invertible; write the section coefficients as $f,g\in C$ and
-   $R=C_{\mathfrak m_y}$. By [lem-weil-pbc-primes-of-localization], the prime $(f,g)R$ contracts
-   to a prime $\mathfrak q\subseteq\mathfrak m_y$ of $C$. It is minimal over $(f,g)C$: a smaller
-   prime containing this ideal would extend to a smaller prime containing the prime ideal
-   $(f,g)R$, which is impossible. The same inclusion-preserving prime correspondence identifies
-   all chains below $\mathfrak q$ with chains below $(f,g)R$, so $\operatorname{ht}_C\mathfrak
-   q=2$. By [lem-pc-zero-scheme-properties] and
-   [lem-weil-pbc-spec-irreducible-components-minimal-primes], $V(\mathfrak q)$ is an irreducible
-   component of the intersection of the two zero schemes inside $W$. Uses:
-   lem-weil-pbc-primes-of-localization, lem-pc-zero-scheme-properties,
-   lem-weil-pbc-spec-irreducible-components-minimal-primes.
-12. Take the closure $Z_Y$ of this component in the global intersection $Z(\psi_Y(v_2))\cap
-   Z(\psi_Y(v_3))$. The open-subspace correspondence
-   [lem-weil-pbc-open-subspace-irreducible-closed-correspondence] preserves strict inclusions
-   and shows that this closure is an irreducible component of the global intersection. It
-   contains $y$. At its generic point its codimension in $Y$ is two, by
-   [lem-sc-scheme-stalk-dimension-generalization-chains] and the height calculation of step 11.
-   Since $\psi_Y(v_1)$ is nonzero at $y$, this component is not contained in $Z(\psi_Y(v_1))$.
-   Thus hypothesis (i) of [lem-zl-bertini-irreducible-member] holds on both $X$ and $T$, with
-   the same $v_1,v_2,v_3$. Uses: lem-weil-pbc-open-subspace-irreducible-closed-correspondence,
-   lem-sc-scheme-stalk-dimension-generalization-chains, lem-zl-bertini-irreducible-member.
-13. Apply [lem-zl-bertini-irreducible-member] to $(X,L,V,\psi)$ and $(T,L_T,V,\psi_T)$. Finite
-   type and geometric irreducibility were established in steps 1--3, condition (ii) in step 5,
-   and condition (i) in step 12. The precise meaning of general in that lemma yields nonempty
-   Zariski opens $U_X,U_T\subseteq\mathbf A(V)$ such that $H_v$ and $T_v$, respectively, are
-   geometrically irreducible on these opens. Their parameter spaces are the same: the pullback
-   system has domain $V$, even if a linear map of sections has a kernel. Uses:
-   lem-zl-bertini-irreducible-member.
-14. Set $U_{\rm irr}=U_X\cap U_T$. In any basis the coordinate ring of $\mathbf A(V)$ is a
-   polynomial ring over $k$, a domain by [lem-weil-pbc-polynomial-ring-domain]. Its nilradical
-   is the proper prime ideal $(0)$, so [lem-zl-spectrum-irreducible-nilradical-prime] makes its
-   spectrum irreducible. Hence the two nonempty opens meet. For every $v\in U_{\rm irr}(k)$ both
-   schemes are geometrically irreducible, as required. In particular they are nonempty and
-   connected, by specializing geometric irreducibility to $k$ and using that two disjoint
-   nonempty clopen pieces would contradict irreducibility. Uses:
-   lem-weil-pbc-polynomial-ring-domain, lem-zl-spectrum-irreducible-nilradical-prime,
-   def-pc-geometrically-irreducible, def-weil-connected-scheme.
-15. The morphism $T_v\to H_v$ is the base change of the finite etale morphism $\pi$, hence is
-   finite etale by the base-change functor of [def-weil-pbc-finite-etale-category]. If $H_v$ is
-   smooth over $k$, then $T_v\to H_v$ is smooth by
-   [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], and $T_v\to\operatorname{Spec}k$ is
-   smooth by [lem-trf-smooth-composition]. The connectedness of both schemes was proved in step
-   14. This gives every clause of the final assertion. Uses: def-weil-pbc-finite-etale-category,
-   lem-weil-pbc-etale-smooth-zero-dimensional-fibres, lem-trf-smooth-composition.
+Proof: apply irreducible Bertini to the tensor-pulled-back system on T.
+Smoothness and connectedness over an algebraically closed field give geometric
+irreducibility of T. The base-codimension lemma verifies the common-zero condition,
+and the transverse-component lemma supplies the codimension-two witness. Linearity
+identifies the section with the basis-coordinate combination in the Bertini conclusion.
+Zero schemes commute with tensor pullback; the self-field base change and the ideal-sheaf
+pullback isomorphisms identify the resulting member with T_v. The finite etale map π has
+nonempty clopen image in connected X, hence is surjective. Its base change T_v → H_v is
+surjective, so geometric irreducibility descends from T_v to H_v. Finite etaleness is
+preserved by base change, and smoothness by composition. Geometric irreducibility implies
+connectedness.
 -/
 theorem exists_open_geometricallyIrreducible_finiteCover_linearSystem
     (k : Type u) [Field k] [IsAlgClosed k]
@@ -284,6 +367,49 @@ theorem exists_open_geometricallyIrreducible_finiteCover_linearSystem
           ConnectedSpace
             (pullback π (Scheme.Modules.homOfGlobalSection L (ψ v)).zeroLocus.subschemeι :
               Scheme.{u})) := by
-  sorry
+  classical
+  have : Surjective π := by
+    have hc : IsClopen (Set.range π) :=
+      ⟨π.isClosedMap.isClosed_range, π.isOpenMap.isOpen_range⟩
+    exact ⟨fun x ↦ (hc.eq_univ (Set.range_nonempty π) ▸ Set.mem_univ x : x ∈ Set.range π)⟩
+  obtain ⟨U, hU, hT⟩ := exists_open_on_finiteCover k X d _hd _hdim T π S
+    _hclosed U₀ _hU₀ L V r b ψ _hlinear hgen
+  refine ⟨U, hU, fun v hv ↦ ?_⟩
+  have ht := hT v hv
+  let J := (homOfGlobalSection L (ψ v)).zeroLocus
+  let e := J.comapIso π
+  have he' : e.hom ≫ pullback.snd π J.subschemeι ≫ J.subschemeι =
+      (J.comap π).subschemeι ≫ π := by
+    change (J.comapIso π).hom ≫ pullback.snd π J.subschemeι ≫ J.subschemeι = _
+    rw [← pullback.condition, ← Category.assoc, J.comapIso_hom_fst]
+  have he : e.hom ≫ pullback.snd π J.subschemeι ≫ J.subschemeι ≫
+      (X ↘ Spec (.of k)) = (J.comap π).subschemeι ≫ π ≫
+        (X ↘ Spec (.of k)) := by
+    simpa only [Category.assoc] using
+      congrArg (fun q ↦ q ≫ (X ↘ Spec (.of k))) he'
+  have htv : GeometricallyIrreducible
+      (pullback.snd π J.subschemeι ≫ J.subschemeι ≫ (X ↘ Spec (.of k))) := by
+    rw [← he] at ht
+    exact (MorphismProperty.cancel_left_of_respectsIso
+      (P := @GeometricallyIrreducible) e.hom _).mp ht
+  have : GeometricallyIrreducible
+      (pullback.snd π J.subschemeι ≫ J.subschemeι ≫ (X ↘ Spec (.of k))) := htv
+  have hx : GeometricallyIrreducible (J.subschemeι ≫ (X ↘ Spec (.of k))) :=
+    GeometricallyIrreducible.of_surjective (pullback.snd π J.subschemeι) _
+  refine ⟨hx, htv, ?_⟩
+  intro hs
+  have : Smooth (J.subschemeι ≫ (X ↘ Spec (.of k))) := hs
+  have : GeometricallyIrreducible (J.subschemeι ≫ (X ↘ Spec (.of k))) := hx
+  have : GeometricallyIrreducible
+      (pullback.snd π J.subschemeι ≫ J.subschemeι ≫ (X ↘ Spec (.of k))) := htv
+  have : IrreducibleSpace J.subscheme :=
+    GeometricallyIrreducible.irreducibleSpace_of_subsingleton
+      (J.subschemeι ≫ (X ↘ Spec (.of k)))
+  have : IrreducibleSpace (pullback π J.subschemeι : Scheme.{u}) :=
+    GeometricallyIrreducible.irreducibleSpace_of_subsingleton
+      (pullback.snd π J.subschemeι ≫ J.subschemeι ≫ (X ↘ Spec (.of k)))
+  exact ⟨inferInstance, inferInstance, inferInstance, inferInstance, inferInstance⟩
+
+end
 
 end AlgebraicGeometry

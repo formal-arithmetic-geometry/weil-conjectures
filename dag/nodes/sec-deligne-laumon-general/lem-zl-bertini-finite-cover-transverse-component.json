@@ -1,0 +1,262 @@
+{
+ "id": "lem-zl-bertini-finite-cover-transverse-component",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Paragraph 3, independent differentials and the codimension-two component, condition (3) of Stacks Tag 0G4F",
+   "via": [
+    "lem-zl-bertini-finite-cover-irreducible-system"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A transverse codimension-two witness for an immersive system on a finite cover",
+ "statement": "Let $k$ be algebraically closed, $X$ a smooth connected affine finite-type $k$-scheme of pure dimension $d\\ge2$, and $\\pi:T\\to X$ a finite etale map with T connected. Let S be any finite set of closed points, $U_0=X\\setminus S$, L an invertible module, V a finite-dimensional k-vector space with finite basis b, and $\\psi:V\\to\\Gamma(X,L)$ a k-linear map. Suppose its basis sections generate on U0 and their associated projective morphism is an immersion. Then there exist $v_1,v_2,v_3\\in V$ and an irreducible closed subset W of T, maximal among those contained in $|Z(\\pi^*\\psi(v_2))|\\cap|Z(\\pi^*\\psi(v_3))|$, such that W is not contained in $|Z(\\pi^*\\psi(v_1))|$ and has codimension exactly two. This is only condition (3) in Tag 0G4F, with no assertion about any general divisor. Scheme and morphism notions are [def-weil-pbc-scheme-conventions, def-weil-scheme-morphism-properties], invertibility and generation are [def-sc-invertible-module, def-weil-pbc-generating-sections], the associated morphism is [def-weil-pbc-morphism-to-projective-space-by-sections], tensor pullback is [def-pc-module-pullback], zero schemes are [def-pc-zero-scheme], connectedness is [def-weil-connected-scheme], and pure dimension is [def-weil-pure-dimension]. No vanishing on S is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 3, independent differentials and the codimension-two component, condition (3) of Stacks Tag 0G4F"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-scheme-morphism-properties",
+  "def-sc-invertible-module",
+  "def-weil-pbc-generating-sections",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "def-pc-module-pullback",
+  "def-pc-zero-scheme",
+  "def-weil-connected-scheme",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Finite etale T over affine finite-type X is affine finite type and smooth over k. Smoothness gives regular local rings; connected regular X and T are integral.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism",
+    "lem-trf-smooth-composition",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every closed point of either finite-type $k$-scheme has residue field finite over $k$ by [lem-kun-closed-point-field], hence equal to $k$. A $k$-rational point maps to a $k$-rational, therefore closed, point under $\\pi$. Since $X$ is integral of pure dimension $d$, $\\dim A=d$ by [lem-weil-pbc-spec-topological-krull-dimension-ring]. For every closed $x\\in X$, [lem-weil-pbc-finite-type-domain-dimension-local-ring-localization] gives $\\dim\\mathcal O_{X,x}=d$. For every closed $t\\in T$, with $x=\\pi(t)$, the affine etale ring map $A\\to B$ gives $\\dim\\mathcal O_{T,t}=\\dim\\mathcal O_{X,x}=d$ by [lem-sc-etale-local-dimension]. Finally [lem-sc-scheme-stalk-dimension-generalization-chains] identifies these dimensions with $\\operatorname{codim}(\\{x\\},X)$ and $\\operatorname{codim}(\\{t\\},T)$.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+    "lem-sc-etale-local-dimension",
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QP (lemma-dimension-etale-extension); algebra.tex Tag 00OS; properties.tex Tag 02IZ"
+   }
+  },
+  {
+   "text": "The inverse image of S is a finite set of closed points. Finiteness of pi gives finite fibres. Etaleness gives local quasi-finiteness, hence discrete fibres; the fibre over a closed point of S is closed in T, so each of its points is closed in T. A finite union of these fibres is the required finite closed set. This does not use vanishing of any section on S.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The open $T\\setminus\\pi^{-1}S$ is nonempty. Otherwise the underlying space of the nonempty scheme $T$ would be a finite set of closed points, with no strict generalizations; [lem-sc-scheme-stalk-dimension-generalization-chains] would give dimension zero for all its local rings, contrary to dimension $d\\ge2$ at closed points. By [lem-sc-lft-over-field-jacobson-space], closed points are dense in $T$, so choose a closed $t$ in this open and set $x=\\pi(t)$. Both are $k$-rational and $x\\notin S$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-sc-lft-over-field-jacobson-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), closed-point density"
+   }
+  },
+  {
+   "text": "Choose $v_1\\in V$ with $s_1=\\psi(v_1)$ nonzero at $x$, using [lem-weil-pbc-invertible-generating-sections-fibre], and extend $v_1$ to a basis $v_1,e_2,\\ldots,e_r$ of $V$. Near $x$, use $s_1$ as frame and put $a_i=\\psi(e_i)/s_1$. By [def-weil-pbc-morphism-to-projective-space-by-sections] and [lem-weil-pbc-projective-space-standard-charts], these are the pullbacks of the polynomial coordinates $T_i/T_1$ on the corresponding affine chart. The assumed immersion gives a surjection from the local ring of projective space at the image of $x$ onto $\\mathcal O_{X,x}$: factor it as an open immersion after a closed immersion and use [def-weil-closed-immersion]. It therefore gives a surjection on maximal ideals modulo their squares. The maximal ideal of the chart at this $k$-point is generated by $T_i/T_1-a_i(x)$ (subtracting a polynomial's value expresses it in these generators). Consequently the classes of $a_i-a_i(x)$ span $\\mathfrak m_x/\\mathfrak m_x^2$. They are the local coefficients of $\\psi(w_i)$, where $w_i=e_i-a_i(x)v_1$ vanishes at $x$.",
+   "uses": [
+    "lem-weil-pbc-invertible-generating-sections-fibre",
+    "def-weil-pbc-morphism-to-projective-space-by-sections",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01NE and 01NF (projective space by sections and its charts); morphisms.tex Tag 01QO"
+   }
+  },
+  {
+   "text": "For each of the two regular local rings $R=\\mathcal O_{X,x}$ and $R=\\mathcal O_{T,t}$, let $\\mathfrak m$ be its maximal ideal and put $e=\\dim_k\\mathfrak m/\\mathfrak m^2$. Regularity and $\\dim R=d$ imply $e\\le d$ by [def-weil-regular-scheme]. Lift a basis of this cotangent space to $e$ elements of $\\mathfrak m$; they generate $\\mathfrak m$ by [lem-weil-pbc-nakayama-local-generators], since $\\mathfrak m$ is finite over the Noetherian ring $R$. Applying [lem-weil-pbc-noetherian-height-quotient-bound] with $J=\\mathfrak P=\\mathfrak m$ gives $d\\le e$, since $R/\\mathfrak m=k$ has height zero. Hence $e=d$ for both local rings.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-noetherian-height-quotient-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00DV (lemma-NAK); regular local ring definition and the Noetherian height bound"
+   }
+  },
+  {
+   "text": "Because $\\pi$ is etale it is unramified by [def-weil-etale-morphism]. At the rational points $t,x$, [lem-sc-rational-unramified-cotangent-criterion] gives a surjection $\\mathfrak m_x/\\mathfrak m_x^2\\to\\mathfrak m_t/\\mathfrak m_t^2$. Thus the pulled-back classes of $a_i-a_i(x)$ span the latter space, of dimension $d\\ge2$. Choose two $k$-linear combinations of the $w_i$, denoted $v_2,v_3$, whose pulled-back coefficients have independent cotangent classes at $t$. Their coefficients at $x$ are also independent, since any relation at $x$ would pull back to a relation at $t$. The sections $\\psi(v_2),\\psi(v_3)$ vanish at $x$, their pullbacks vanish at $t$, and $\\psi(v_1)$ and its pullback are nonzero at these points.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-sc-rational-unramified-cotangent-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0B2G (lemma-injective-tangent-spaces-unramified), rational cotangent formulation"
+   }
+  },
+  {
+   "text": "In each local ring $R$ of step 8, let $f,g$ be the coefficients of these two sections in the frame $\\psi(v_1)$ or its pullback. Their independent classes extend to a basis of $\\mathfrak m/\\mathfrak m^2$; lifting the rest and applying [lem-weil-pbc-nakayama-local-generators] extends $f,g$ to a minimal set of $d$ generators of $\\mathfrak m$. By [lem-weil-pbc-regular-local-generators-regular-sequence], $R/(f)$ and $R/(f,g)$ are regular local rings of dimensions $d-1,d-2$. By [lem-sc-regular-local-domain], they and $R$ are domains. Thus $(0)\\subsetneq(f)\\subsetneq\\mathfrak p=(f,g)$ is a strict chain of prime ideals: $f\\ne0$ and $g\\notin(f)$ follow from their independent cotangent classes. The height of $\\mathfrak p$ is at least two. It is at most two by [lem-weil-pbc-noetherian-height-quotient-bound] with $J=\\mathfrak P=\\mathfrak p$ and two generators, because $\\mathfrak P/J=0$ has height zero in the domain $R/\\mathfrak p$. Hence $\\operatorname{ht}_R(\\mathfrak p)=2$.",
+   "uses": [
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-noetherian-height-quotient-bound"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DV (lemma-NAK), 00NQ (lemma-regular-ring-CM), 00NP (lemma-regular-domain) and the Noetherian height bound"
+   }
+  },
+  {
+   "text": "For each pair $(Y,y)=(X,x),(T,t)$ choose an affine neighbourhood $W=\\operatorname{Spec}C$ on which the chosen frame is invertible; write the section coefficients as $f,g\\in C$ and $R=C_{\\mathfrak m_y}$. By [lem-weil-pbc-primes-of-localization], the prime $(f,g)R$ contracts to a prime $\\mathfrak q\\subseteq\\mathfrak m_y$ of $C$. It is minimal over $(f,g)C$: a smaller prime containing this ideal would extend to a smaller prime containing the prime ideal $(f,g)R$, which is impossible. The same inclusion-preserving prime correspondence identifies all chains below $\\mathfrak q$ with chains below $(f,g)R$, so $\\operatorname{ht}_C\\mathfrak q=2$. By [lem-pc-zero-scheme-properties] and [lem-weil-pbc-spec-irreducible-components-minimal-primes], $V(\\mathfrak q)$ is an irreducible component of the intersection of the two zero schemes inside $W$.",
+   "uses": [
+    "lem-weil-pbc-primes-of-localization",
+    "lem-pc-zero-scheme-properties",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00E3 (lemma-spec-localization) and 00ES (lemma-irreducible, minimal-prime components), applied to the quotient C/(f,g)"
+   }
+  },
+  {
+   "text": "Take the closure in T of the affine minimal-prime component through t. The open-subspace order correspondence shows it is maximal in the global two-section intersection. Its generic point has coheight two. Since the first section is nonzero at t, this component is not contained in its zero locus.",
+   "uses": [
+    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
+    "lem-sc-scheme-stalk-dimension-generalization-chains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0G4F (lemma-bertini-irreducible), condition (3); properties.tex Tag 02IZ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "lem-trf-smooth-composition",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-connected-integral",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring",
+  "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
+  "lem-sc-etale-local-dimension",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-sc-lft-over-field-jacobson-space",
+  "lem-weil-pbc-invertible-generating-sections-fibre",
+  "def-weil-pbc-morphism-to-projective-space-by-sections",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "def-weil-closed-immersion",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-sc-rational-unramified-cotangent-criterion",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-pc-zero-scheme-properties",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Paragraph 3, expanded using the original reviewed cotangent, regular-parameter, localization, and component arguments. This is the remaining geometric input; its Lean proof is not yet supplied."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An immersive linear system on a smooth variety of dimension at least two has two sections whose common zero locus has a codimension two component avoiding a third section, also after an etale cover",
+   "results": "8 hits: IsImmersion; Scheme.zeroLocus; RingedSpace.zeroLocus; Scheme.zeroLocus_def; IsImmersion.comp; IsImmersion.isImmersion_iff_exists; IsImmersion.mk; IsImmersion.comp_iff. No codimension-two witness.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two independent cotangent classes at a smooth point cut out a codimension two irreducible component",
+   "results": "8 hits: Algebra.Generators.cotangentRestrict_bijective_of_isCompl; Algebra.smoothLocus_eq_compl_support_inter; Algebra.Generators.disjoint_ker_toKaehler_of_linearIndependent; Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential; Algebra.PreSubmersivePresentation.cotangentComplexAux_zero_iff; WeierstrassCurve.Affine.CoordinateRing.XYIdeal'_eq; Algebra.IsSmoothAt.exists_notMem_isStandardSmooth; Algebra.etaleLocus_eq_compl_support. None chooses original-system sections or globalizes the local component. Additional Loogle query \"CotangentSpace\" found cotangent finrank and Nakayama APIs only.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "coheight.*zeroLocus|zeroLocus.*coheight|independent.*cotangent|cotangent.*independent in Mathlib/AlgebraicGeometry, Mathlib/RingTheory/RegularLocalRing, Mathlib/RingTheory/Ideal",
+   "results": "No hits. Read projectiveSpace_standardCharts, rational_unramified_iff_cotangent_surjective and isRegular_and_quotients_of_generators: they provide separate inputs, not the desired choice and globalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniFiniteCoverIrreducibleSystem",
+  "date": "2026-10-21",
+  "group": "M5"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BertiniFiniteCoverTransverseComponent",
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniFiniteCoverTransverseComponent.lean",
+  "declaration": "AlgebraicGeometry.bertini_finiteCover_transverse_component",
+  "statement": "theorem bertini_finiteCover_transverse_component\n    (k : Type u) [Field k] [IsAlgClosed k]\n    (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsAffine X] [ConnectedSpace X]\n    [Smooth (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    (d : ℕ) (hd : 2 ≤ d) (hdim : X.IsPureDimension d)\n    (T : Scheme.{u}) [ConnectedSpace T] (π : T ⟶ X) [IsFinite π] [Etale π]\n    (S : Finset X) (hclosed : ∀ x ∈ S, IsClosed ({x} : Set X))\n    (U₀ : X.Opens) (hU₀ : (U₀ : Set X) = (S : Set X)ᶜ)\n    (L : X.Modules) [L.IsInvertible]\n    (V : Type v) [AddCommGroup V] [Module k V]\n    (r : ℕ) (b : Module.Basis (Fin r) k V) (ψ : V →+ Γ(L, ⊤))\n    (hlinear : ∀ (c : k) (v : V),\n      ψ (c • v) = (X ↘ Spec (.of k)).appTop ((Scheme.ΓSpecIso (.of k)).inv c) • ψ v)\n    (hgen : Epi (((Scheme.Modules.tensorPullback U₀.ι).obj L).freeHomEquiv.symm\n      (fun i : ULift.{u} (Fin r) ↦ SheafOfModules.unitHomEquiv _\n        (Scheme.Modules.homOfGlobalSection _\n          (Scheme.Modules.tensorSectionsUnit U₀.ι L (ψ (b i.down)))))))\n    [IsImmersion (@ProjectiveSpace.homOfGeneratingSections\n      (ULift.{u} (Fin r)) inferInstance U₀.toScheme (Spec (.of k))\n      (U₀.ι ≫ (X ↘ Spec (.of k))) ((Scheme.Modules.tensorPullback U₀.ι).obj L)\n      (Scheme.Modules.IsInvertible.of_iso\n        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction U₀.ι)).leftAdjointUniq\n          (Scheme.Modules.pullbackPushforwardAdjunction U₀.ι)).app L).symm)\n      (fun i : ULift.{u} (Fin r) ↦ SheafOfModules.unitHomEquiv _\n        (Scheme.Modules.homOfGlobalSection _\n          (Scheme.Modules.tensorSectionsUnit U₀.ι L (ψ (b i.down))))) hgen)] :\n    letI : ((Scheme.Modules.tensorPullback π).obj L).IsInvertible :=\n      Scheme.Modules.IsInvertible.of_iso\n        (((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction π)).leftAdjointUniq\n          (Scheme.Modules.pullbackPushforwardAdjunction π)).app L).symm\n    ∃ (v₁ v₂ v₃ : V) (W : TopologicalSpace.IrreducibleCloseds T),\n      Maximal (fun Z : TopologicalSpace.IrreducibleCloseds T ↦\n        (Z : Set T) ⊆\n          (Scheme.Modules.homOfGlobalSection ((Scheme.Modules.tensorPullback π).obj L)\n            (Scheme.Modules.tensorSectionsUnit π L (ψ v₂))).zeroLocus.support ∩\n          (Scheme.Modules.homOfGlobalSection ((Scheme.Modules.tensorPullback π).obj L)\n            (Scheme.Modules.tensorSectionsUnit π L (ψ v₃))).zeroLocus.support) W ∧\n      ¬ (W : Set T) ⊆\n        (Scheme.Modules.homOfGlobalSection ((Scheme.Modules.tensorPullback π).obj L)\n          (Scheme.Modules.tensorSectionsUnit π L (ψ v₁))).zeroLocus.support ∧\n      Order.coheight W = 2",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261021T130053-L-2509187",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261021T130053-L-2509187",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

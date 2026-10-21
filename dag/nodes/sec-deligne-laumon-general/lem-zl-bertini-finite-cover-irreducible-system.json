@@ -35,247 +35,84 @@
  ],
  "proof": [
   {
-   "text": "Write $X=\\operatorname{Spec}A$. By [def-weil-finite-integral-morphism], $T=\\operatorname{Spec}B$ with $B$ finite as an $A$-module. If $a_1,\\ldots,a_m$ generate $A$ over $k$ and $b_1,\\ldots,b_n$ generate $B$ as an $A$-module, these elements together generate $B$ as a $k$-algebra: every element of $B$ is an $A$-linear combination of the $b_j$. Thus $T$ is affine of finite type over $k$. Form $L_T=\\pi^*L$ and the linear map $\\psi_T(v)=\\pi^*\\psi(v)$ using the tensor formula in [def-pc-module-pullback]. A local frame $e$ of $L$ pulls back to a frame $1\\otimes e$ of $L_T$, so it is invertible. Etaleness includes flatness by [def-weil-etale-morphism]; hence [lem-pc-zero-scheme-properties] identifies $Z(\\psi_T(v))$ with $T\\times_X H_v=T_v$.",
+   "text": "Both X and T are smooth over k and connected. Over an algebraically closed (hence separably closed) field, connectedness implies geometric connectedness by the proved source theorem. A smooth geometrically connected morphism is geometrically irreducible by GeometricallyIrreducible.of_smooth_of_geometricallyConnected, also proved in the source regular-scheme module. This replaces the finite-separable tensor test.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-trf-smooth-composition",
+    "lem-weil-separably-closed-geometrically-connected",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-connected-integral"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form LT = pi*L by tensor pullback and psiT using tensorSectionsUnit. The adjunction comparison identifies this pullback with the usual pullback, proves invertibility, and identifies zero schemes. The scalar identity for psi and naturality of the unit make psiT k-linear. Its domain still has the given finite basis.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-zero-scheme-pullback"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the base-codimension lemma on T and use d >= 2 for the base-condition inequality. The transverse-component lemma verifies the other geometric hypothesis of irreducible Bertini. This gives one nonempty coefficient open for the pulled-back system on T; no second application on X is needed.",
+   "uses": [
+    "lem-zl-bertini-finite-cover-base-codimension",
+    "lem-zl-bertini-finite-cover-transverse-component",
+    "lem-zl-bertini-irreducible-member"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expanding v in the given basis and using the scalar identity identifies psi(v) with the parameter combination. The unit preserves sums and the compatible scalars. The self-field base change is canonically isomorphic to the original scheme. Ideal-sheaf comapIso then identifies the pulled-back zero scheme with the chosen categorical pullback Tv. Transport geometric irreducibility through these isomorphisms.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-pc-zero-scheme-pullback",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The finite etale map pi has open and closed image in connected X. Its nonempty source makes that image nonempty, hence all of X, so pi is surjective. The restriction Tv -> Hv is its base change and is surjective. The proved source theorem GeometricallyIrreducible.of_surjective descends geometric irreducibility from Tv to Hv. Thus the single open for T already works simultaneously for both schemes.",
    "uses": [
     "def-weil-finite-integral-morphism",
-    "def-pc-module-pullback",
     "def-weil-etale-morphism",
-    "lem-pc-zero-scheme-properties"
+    "def-weil-connected-scheme",
+    "def-pc-geometrically-irreducible"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01WH (definition-integral), 02GI (definition-etale); zero schemes on trivializing affine opens"
-   }
+   "elementary": true
   },
   {
-   "text": "By [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], $\\pi$ is smooth. Its composition with the smooth map $X\\to\\operatorname{Spec}k$ is smooth by [lem-trf-smooth-composition], so both $X$ and $T$ are smooth over $k$. Apply [lem-weil-pbc-smooth-scheme-over-field-regular] to each, then [lem-sc-regular-connected-integral] using their assumed nonempty connectedness. Both schemes are integral; in particular $A$ and $B$ are domains by [def-pc-integral-scheme].",
+   "text": "The restriction Tv -> Hv is the base change of pi and is therefore finite etale. If Hv is smooth, compose this smooth etale restriction with its structure map. Specializing the two geometric irreducibility assertions to the base field gives irreducible, hence connected, source schemes.",
    "uses": [
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-weil-pbc-finite-etale-category",
+    "def-weil-etale-morphism",
     "lem-trf-smooth-composition",
-    "lem-weil-pbc-smooth-scheme-over-field-regular",
-    "lem-sc-regular-connected-integral",
-    "def-pc-integral-scheme"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 056S (lemma-smooth-regular); properties.tex Tags 0569 and 033N; morphisms.tex Tag 01VA"
-   }
-  },
-  {
-   "text": "Every finite separable field extension $E/k$ is isomorphic to $k$ over $k$: the minimal polynomial of each element splits over the algebraically closed field $k$ and, being irreducible, is linear. Thus $\\operatorname{Spec}(A\\otimes_kE)$ and $\\operatorname{Spec}(B\\otimes_kE)$ are isomorphic to the integral, hence irreducible schemes $X$ and $T$. Apply [lem-zl-geometric-irreducibility-finite-separable-test] separately to $A$ and $B$. It follows that $X$ and $T$ are geometrically irreducible over $k$.",
-   "uses": [
-    "lem-zl-geometric-irreducibility-finite-separable-test",
-    "def-pc-integral-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 037K (lemma-geometrically-irreducible), finite-separable test"
-   }
-  },
-  {
-   "text": "Every closed point of either finite-type $k$-scheme has residue field finite over $k$ by [lem-kun-closed-point-field], hence equal to $k$. A $k$-rational point maps to a $k$-rational, therefore closed, point under $\\pi$. Since $X$ is integral of pure dimension $d$, $\\dim A=d$ by [lem-weil-pbc-spec-topological-krull-dimension-ring]. For every closed $x\\in X$, [lem-weil-pbc-finite-type-domain-dimension-local-ring-localization] gives $\\dim\\mathcal O_{X,x}=d$. For every closed $t\\in T$, with $x=\\pi(t)$, the affine etale ring map $A\\to B$ gives $\\dim\\mathcal O_{T,t}=\\dim\\mathcal O_{X,x}=d$ by [lem-sc-etale-local-dimension]. Finally [lem-sc-scheme-stalk-dimension-generalization-chains] identifies these dimensions with $\\operatorname{codim}(\\{x\\},X)$ and $\\operatorname{codim}(\\{t\\},T)$.",
-   "uses": [
-    "lem-kun-closed-point-field",
-    "lem-weil-pbc-spec-topological-krull-dimension-ring",
-    "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
-    "lem-sc-etale-local-dimension",
-    "lem-sc-scheme-stalk-dimension-generalization-chains"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 07QP (lemma-dimension-etale-extension); algebra.tex Tag 00OS; properties.tex Tag 02IZ"
-   }
-  },
-  {
-   "text": "The support of the common zero scheme on $X$ is exactly $S$: all sections vanish on $S$, and at every point outside $S$ some section is nonzero in the fibre by [lem-weil-pbc-invertible-generating-sections-fibre]. On $T$ the support is exactly $\\pi^{-1}S$, since locally the pullback ideal is generated by the images of the same finitely many section coefficients. This asserts equality of supports, without asserting that the base schemes are reduced. Each fibre over $s\\in S$ has dimension zero by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] and is affine of finite type over $k$ (its ring is $B\\otimes_A k$). By [lem-weil-pbc-finite-type-dim-zero-artinian] it has finitely many points. These points are $k$-rational and closed in $T$ by the preceding step. Thus both base supports are finite sets of closed points, and all their irreducible components have codimension $d\\ge2$ by the preceding step. This verifies hypothesis (ii) of [lem-zl-bertini-irreducible-member] for both systems.",
-   "uses": [
-    "lem-weil-pbc-invertible-generating-sections-fibre",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "lem-weil-pbc-finite-type-dim-zero-artinian",
-    "lem-zl-bertini-irreducible-member"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F (lemma-bertini-irreducible), condition (4)"
-   }
-  },
-  {
-   "text": "The open $T\\setminus\\pi^{-1}S$ is nonempty. Otherwise the underlying space of the nonempty scheme $T$ would be a finite set of closed points, with no strict generalizations; [lem-sc-scheme-stalk-dimension-generalization-chains] would give dimension zero for all its local rings, contrary to dimension $d\\ge2$ at closed points. By [lem-sc-lft-over-field-jacobson-space], closed points are dense in $T$, so choose a closed $t$ in this open and set $x=\\pi(t)$. Both are $k$-rational and $x\\notin S$.",
-   "uses": [
-    "lem-sc-scheme-stalk-dimension-generalization-chains",
-    "lem-sc-lft-over-field-jacobson-space"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0478 (lemma-locally-finite-type-Jacobson), closed-point density"
-   }
-  },
-  {
-   "text": "Choose $v_1\\in V$ with $s_1=\\psi(v_1)$ nonzero at $x$, using [lem-weil-pbc-invertible-generating-sections-fibre], and extend $v_1$ to a basis $v_1,e_2,\\ldots,e_r$ of $V$. Near $x$, use $s_1$ as frame and put $a_i=\\psi(e_i)/s_1$. By [def-weil-pbc-morphism-to-projective-space-by-sections] and [lem-weil-pbc-projective-space-standard-charts], these are the pullbacks of the polynomial coordinates $T_i/T_1$ on the corresponding affine chart. The assumed immersion gives a surjection from the local ring of projective space at the image of $x$ onto $\\mathcal O_{X,x}$: factor it as an open immersion after a closed immersion and use [def-weil-closed-immersion]. It therefore gives a surjection on maximal ideals modulo their squares. The maximal ideal of the chart at this $k$-point is generated by $T_i/T_1-a_i(x)$ (subtracting a polynomial's value expresses it in these generators). Consequently the classes of $a_i-a_i(x)$ span $\\mathfrak m_x/\\mathfrak m_x^2$. They are the local coefficients of $\\psi(w_i)$, where $w_i=e_i-a_i(x)v_1$ vanishes at $x$.",
-   "uses": [
-    "lem-weil-pbc-invertible-generating-sections-fibre",
-    "def-weil-pbc-morphism-to-projective-space-by-sections",
-    "lem-weil-pbc-projective-space-standard-charts",
-    "def-weil-closed-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01NE and 01NF (projective space by sections and its charts); morphisms.tex Tag 01QO"
-   }
-  },
-  {
-   "text": "For each of the two regular local rings $R=\\mathcal O_{X,x}$ and $R=\\mathcal O_{T,t}$, let $\\mathfrak m$ be its maximal ideal and put $e=\\dim_k\\mathfrak m/\\mathfrak m^2$. Regularity and $\\dim R=d$ imply $e\\le d$ by [def-weil-regular-scheme]. Lift a basis of this cotangent space to $e$ elements of $\\mathfrak m$; they generate $\\mathfrak m$ by [lem-weil-pbc-nakayama-local-generators], since $\\mathfrak m$ is finite over the Noetherian ring $R$. Applying [lem-weil-pbc-noetherian-height-quotient-bound] with $J=\\mathfrak P=\\mathfrak m$ gives $d\\le e$, since $R/\\mathfrak m=k$ has height zero. Hence $e=d$ for both local rings.",
-   "uses": [
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-nakayama-local-generators",
-    "lem-weil-pbc-noetherian-height-quotient-bound"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00DV (lemma-NAK); regular local ring definition and the Noetherian height bound"
-   }
-  },
-  {
-   "text": "Because $\\pi$ is etale it is unramified by [def-weil-etale-morphism]. At the rational points $t,x$, [lem-sc-rational-unramified-cotangent-criterion] gives a surjection $\\mathfrak m_x/\\mathfrak m_x^2\\to\\mathfrak m_t/\\mathfrak m_t^2$. Thus the pulled-back classes of $a_i-a_i(x)$ span the latter space, of dimension $d\\ge2$. Choose two $k$-linear combinations of the $w_i$, denoted $v_2,v_3$, whose pulled-back coefficients have independent cotangent classes at $t$. Their coefficients at $x$ are also independent, since any relation at $x$ would pull back to a relation at $t$. The sections $\\psi(v_2),\\psi(v_3)$ vanish at $x$, their pullbacks vanish at $t$, and $\\psi(v_1)$ and its pullback are nonzero at these points.",
-   "uses": [
-    "def-weil-etale-morphism",
-    "lem-sc-rational-unramified-cotangent-criterion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0B2G (lemma-injective-tangent-spaces-unramified), rational cotangent formulation"
-   }
-  },
-  {
-   "text": "In each local ring $R$ of step 8, let $f,g$ be the coefficients of these two sections in the frame $\\psi(v_1)$ or its pullback. Their independent classes extend to a basis of $\\mathfrak m/\\mathfrak m^2$; lifting the rest and applying [lem-weil-pbc-nakayama-local-generators] extends $f,g$ to a minimal set of $d$ generators of $\\mathfrak m$. By [lem-weil-pbc-regular-local-generators-regular-sequence], $R/(f)$ and $R/(f,g)$ are regular local rings of dimensions $d-1,d-2$. By [lem-sc-regular-local-domain], they and $R$ are domains. Thus $(0)\\subsetneq(f)\\subsetneq\\mathfrak p=(f,g)$ is a strict chain of prime ideals: $f\\ne0$ and $g\\notin(f)$ follow from their independent cotangent classes. The height of $\\mathfrak p$ is at least two. It is at most two by [lem-weil-pbc-noetherian-height-quotient-bound] with $J=\\mathfrak P=\\mathfrak p$ and two generators, because $\\mathfrak P/J=0$ has height zero in the domain $R/\\mathfrak p$. Hence $\\operatorname{ht}_R(\\mathfrak p)=2$.",
-   "uses": [
-    "lem-weil-pbc-nakayama-local-generators",
-    "lem-weil-pbc-regular-local-generators-regular-sequence",
-    "lem-sc-regular-local-domain",
-    "lem-weil-pbc-noetherian-height-quotient-bound"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00DV (lemma-NAK), 00NQ (lemma-regular-ring-CM), 00NP (lemma-regular-domain) and the Noetherian height bound"
-   }
-  },
-  {
-   "text": "For each pair $(Y,y)=(X,x),(T,t)$ choose an affine neighbourhood $W=\\operatorname{Spec}C$ on which the chosen frame is invertible; write the section coefficients as $f,g\\in C$ and $R=C_{\\mathfrak m_y}$. By [lem-weil-pbc-primes-of-localization], the prime $(f,g)R$ contracts to a prime $\\mathfrak q\\subseteq\\mathfrak m_y$ of $C$. It is minimal over $(f,g)C$: a smaller prime containing this ideal would extend to a smaller prime containing the prime ideal $(f,g)R$, which is impossible. The same inclusion-preserving prime correspondence identifies all chains below $\\mathfrak q$ with chains below $(f,g)R$, so $\\operatorname{ht}_C\\mathfrak q=2$. By [lem-pc-zero-scheme-properties] and [lem-weil-pbc-spec-irreducible-components-minimal-primes], $V(\\mathfrak q)$ is an irreducible component of the intersection of the two zero schemes inside $W$.",
-   "uses": [
-    "lem-weil-pbc-primes-of-localization",
-    "lem-pc-zero-scheme-properties",
-    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00E3 (lemma-spec-localization) and 00ES (lemma-irreducible, minimal-prime components), applied to the quotient C/(f,g)"
-   }
-  },
-  {
-   "text": "Take the closure $Z_Y$ of this component in the global intersection $Z(\\psi_Y(v_2))\\cap Z(\\psi_Y(v_3))$. The open-subspace correspondence [lem-weil-pbc-open-subspace-irreducible-closed-correspondence] preserves strict inclusions and shows that this closure is an irreducible component of the global intersection. It contains $y$. At its generic point its codimension in $Y$ is two, by [lem-sc-scheme-stalk-dimension-generalization-chains] and the height calculation of step 11. Since $\\psi_Y(v_1)$ is nonzero at $y$, this component is not contained in $Z(\\psi_Y(v_1))$. Thus hypothesis (i) of [lem-zl-bertini-irreducible-member] holds on both $X$ and $T$, with the same $v_1,v_2,v_3$.",
-   "uses": [
-    "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
-    "lem-sc-scheme-stalk-dimension-generalization-chains",
-    "lem-zl-bertini-irreducible-member"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F (lemma-bertini-irreducible), condition (3); properties.tex Tag 02IZ"
-   }
-  },
-  {
-   "text": "Apply [lem-zl-bertini-irreducible-member] to $(X,L,V,\\psi)$ and $(T,L_T,V,\\psi_T)$. Finite type and geometric irreducibility were established in steps 1--3, condition (ii) in step 5, and condition (i) in step 12. The precise meaning of general in that lemma yields nonempty Zariski opens $U_X,U_T\\subseteq\\mathbf A(V)$ such that $H_v$ and $T_v$, respectively, are geometrically irreducible on these opens. Their parameter spaces are the same: the pullback system has domain $V$, even if a linear map of sections has a kernel.",
-   "uses": [
-    "lem-zl-bertini-irreducible-member"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F (lemma-bertini-irreducible), conclusion"
-   }
-  },
-  {
-   "text": "Set $U_{\\rm irr}=U_X\\cap U_T$. In any basis the coordinate ring of $\\mathbf A(V)$ is a polynomial ring over $k$, a domain by [lem-weil-pbc-polynomial-ring-domain]. Its nilradical is the proper prime ideal $(0)$, so [lem-zl-spectrum-irreducible-nilradical-prime] makes its spectrum irreducible. Hence the two nonempty opens meet. For every $v\\in U_{\\rm irr}(k)$ both schemes are geometrically irreducible, as required. In particular they are nonempty and connected, by specializing geometric irreducibility to $k$ and using that two disjoint nonempty clopen pieces would contradict irreducibility.",
-   "uses": [
-    "lem-weil-pbc-polynomial-ring-domain",
-    "lem-zl-spectrum-irreducible-nilradical-prime",
     "def-pc-geometrically-irreducible",
     "def-weil-connected-scheme"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0G4F, intersecting the two general conditions; polynomial domain and irreducibility definitions"
-   }
-  },
-  {
-   "text": "The morphism $T_v\\to H_v$ is the base change of the finite etale morphism $\\pi$, hence is finite etale by the base-change functor of [def-weil-pbc-finite-etale-category]. If $H_v$ is smooth over $k$, then $T_v\\to H_v$ is smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], and $T_v\\to\\operatorname{Spec}k$ is smooth by [lem-trf-smooth-composition]. The connectedness of both schemes was proved in step 14. This gives every clause of the final assertion.",
-   "uses": [
-    "def-weil-pbc-finite-etale-category",
-    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
-    "lem-trf-smooth-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01WL (finite base change), 02GO (etale base change), 02GK (etale implies smooth), 01VA (smooth composition)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-finite-integral-morphism",
-  "def-pc-module-pullback",
   "def-weil-etale-morphism",
-  "lem-pc-zero-scheme-properties",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
   "lem-trf-smooth-composition",
+  "lem-weil-separably-closed-geometrically-connected",
   "lem-weil-pbc-smooth-scheme-over-field-regular",
   "lem-sc-regular-connected-integral",
-  "def-pc-integral-scheme",
-  "lem-zl-geometric-irreducibility-finite-separable-test",
-  "lem-kun-closed-point-field",
-  "lem-weil-pbc-spec-topological-krull-dimension-ring",
-  "lem-weil-pbc-finite-type-domain-dimension-local-ring-localization",
-  "lem-sc-etale-local-dimension",
-  "lem-sc-scheme-stalk-dimension-generalization-chains",
-  "lem-weil-pbc-invertible-generating-sections-fibre",
-  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "def-pc-module-pullback",
+  "lem-pc-zero-scheme-pullback",
+  "lem-zl-bertini-finite-cover-base-codimension",
+  "lem-zl-bertini-finite-cover-transverse-component",
   "lem-zl-bertini-irreducible-member",
-  "lem-sc-lft-over-field-jacobson-space",
-  "def-weil-pbc-morphism-to-projective-space-by-sections",
-  "lem-weil-pbc-projective-space-standard-charts",
-  "def-weil-closed-immersion",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-nakayama-local-generators",
-  "lem-weil-pbc-noetherian-height-quotient-bound",
-  "lem-sc-rational-unramified-cotangent-criterion",
-  "lem-weil-pbc-regular-local-generators-regular-sequence",
-  "lem-sc-regular-local-domain",
-  "lem-weil-pbc-primes-of-localization",
-  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
-  "lem-weil-pbc-open-subspace-irreducible-closed-correspondence",
-  "lem-weil-pbc-polynomial-ring-domain",
-  "lem-zl-spectrum-irreducible-nilradical-prime",
   "def-pc-geometrically-irreducible",
+  "def-weil-finite-integral-morphism",
   "def-weil-connected-scheme",
   "def-weil-pbc-finite-etale-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
-  "place": "Paragraph 3, with the local cotangent, height-two and global-component arguments supplied explicitly from the cited Stacks lemmas"
+  "place": "Paragraph 3, implemented with one application of BertiniIrreducibleMember, the proved base-codimension lemma, and the separate transverse-component argument. Surjectivity of a nonempty finite etale cover and the proved source GeometricallyIrreducible.of_surjective replace the second Bertini application and intersection of parameter opens. Source geometric-connectedness and coheight APIs replace the finite-separable and finite-Artinian-support detours."
  },
  "mathlib_searches": [
   {
@@ -434,7 +271,6 @@
  },
  "tool_uses": [
   "lem-pc-zero-scheme-properties",
-  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
   "lem-weil-pbc-smooth-scheme-over-field-regular",
   "lem-sc-regular-connected-integral",
   "lem-kun-closed-point-field",
@@ -472,5 +308,15 @@
   "group": "O4",
   "result": "pass",
   "note": "Statement matches node and blueprint paragraph 3 (Tag 0G4F): every hypothesis checked against the recorded declarations (IsPureDimension, IsInvertible, GeneratingSections epi via tensorSectionsUnit, homOfGeneratingSections immersion, zeroLocus support for vanishing on reduced S, chosen pullback for T_v). Closed points stand for X(k), equivalent over algebraically closed k for finite type. Additive map plus appTop(ΓSpecIso.inv c) identity = globalSectionsRingHom k-linearity. A(V) via basis k-points as in BertiniIrreducibleMember; GeometricallyIrreducible conjuncts for H_v and T_v; smooth implication gives smooth T_v, finite etale T_v→H_v, both connected (advisory: finite/etale/connected placed inside the implication, a valid reading of the node and sufficient for the parent). Node equals side-live apart from lean; statement verbatim; not dropped or landed elsewhere; all imports exist; 15-step proof docstring with source places; only sorry; no new notions (H4 searched Bertini* modules). No compile run since no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261021T130053-L-2509187",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
