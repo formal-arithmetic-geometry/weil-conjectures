@@ -13,9 +13,142 @@
   "def-weil-pbc-adjunction-mate",
   "lem-sfb-adjunction-oplax-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p_{U,V},a$ for the tensor and unit isomorphisms of $E$, and $q_{Y,Z},b$ for those of $F$, with orientations as in [def-sfb-strong-monoidal-functor]. Write $m',e'$ for the given lax structure of $R'$. Throughout, juxtaposition means composition with the rightmost map first. Put $K=R'F$ and define\n$$n_{Y,Z}=R'(q_{Y,Z})m'_{FY,FZ},\\qquad v=R'(b)e'.$$\nThese have domains $KY\\otimes KZ$ and $\\mathbf1_{\\mathcal A'}$, respectively. For maps $f:Y\\to Y'$, $g:Z\\to Z'$, naturality of $q$ and $m'$ gives\n$$K(f\\otimes g)n_{Y,Z}=R'(q_{Y',Z'})m'_{FY',FZ'}(Kf\\otimes Kg)=n_{Y',Z'}(Kf\\otimes Kg).$$",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category), 0FFL (definition-functor-monoidal-categories); agent calculation with the displayed coherence identities."
+   }
+  },
+  {
+   "text": "Check associativity of these particular maps $n$. Expanding its left side and moving $R'(q_{Y,Z})$ through $m'$ by naturality gives\n$$K(\\alpha^{\\mathcal B})n_{Y\\otimes Z,W}(n_{Y,Z}\\otimes1)=R'\\bigl(F(\\alpha^{\\mathcal B})q_{Y\\otimes Z,W}(q_{Y,Z}\\otimes1)\\bigr)m'_{FY\\otimes FZ,FW}(m'_{FY,FZ}\\otimes1).$$\nThe strong associativity equation for $F$ replaces the expression inside $R'$ by $q_{Y,Z\\otimes W}(1\\otimes q_{Z,W})\\alpha^{\\mathcal B'}$. The lax associativity equation for $R'$ then replaces $R'(\\alpha^{\\mathcal B'})m'_{FY\\otimes FZ,FW}(m'_{FY,FZ}\\otimes1)$ by $m'_{FY,FZ\\otimes FW}(1\\otimes m'_{FZ,FW})\\alpha^{\\mathcal A'}$. Moving $R'(1\\otimes q_{Z,W})$ back through $m'$ yields exactly\n$$n_{Y,Z\\otimes W}(1\\otimes n_{Z,W})\\alpha^{\\mathcal A'}_{KY,KZ,KW}.$$\nThis is the required associativity equation, using only the specified axioms.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category), 0FFL (definition-functor-monoidal-categories); agent calculation with the displayed coherence identities."
+   }
+  },
+  {
+   "text": "The two unit equations for $n,v$ follow by these expansions, with the unitors carrying their indicated category superscripts:\n$$\\begin{aligned}\nK(\\lambda^{\\mathcal B}_Y)n_{\\mathbf1,Y}(v\\otimes1)&=R'\\bigl(F(\\lambda^{\\mathcal B}_Y)q_{\\mathbf1,Y}(b\\otimes1)\\bigr)m'_{\\mathbf1_{\\mathcal B'},FY}(e'\\otimes1)\\\\\n&=R'(\\lambda^{\\mathcal B'}_{FY})m'_{\\mathbf1_{\\mathcal B'},FY}(e'\\otimes1)=\\lambda^{\\mathcal A'}_{KY},\\\\\nK(\\rho^{\\mathcal B}_Y)n_{Y,\\mathbf1}(1\\otimes v)&=R'\\bigl(F(\\rho^{\\mathcal B}_Y)q_{Y,\\mathbf1}(1\\otimes b)\\bigr)m'_{FY,\\mathbf1_{\\mathcal B'}}(1\\otimes e')\\\\\n&=R'(\\rho^{\\mathcal B'}_{FY})m'_{FY,\\mathbf1_{\\mathcal B'}}(1\\otimes e')=\\rho^{\\mathcal A'}_{KY}.\n\\end{aligned}$$\nThe first equality in each line uses naturality of $m'$, the second uses the corresponding unit equation for $F$, and the last uses that of $R'$. Thus $n,v$ are a lax structure on $K$.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category), 0FFL (definition-functor-monoidal-categories); agent calculation with the displayed coherence identities."
+   }
+  },
+  {
+   "text": "Put $H=ER$ and set\n$$k_{Y,Z}=\\beta_{Y\\otimes Z}^{-1}n_{Y,Z}(\\beta_Y\\otimes\\beta_Z),\\qquad w=\\beta_{\\mathbf1}^{-1}v.$$\nThese are natural: for $f:Y\\to Y'$, $g:Z\\to Z'$, substitution and naturality of $\\beta,n$ give $H(f\\otimes g)k_{Y,Z}=k_{Y',Z'}(Hf\\otimes Hg)$. They satisfy coherence by direct cancellation. Specifically, postcomposing the two sides of the associativity equation for $k$ with $\\beta_{Y\\otimes(Z\\otimes W)}$ reduces them to\n$$K(\\alpha^{\\mathcal B})n_{Y\\otimes Z,W}(n_{Y,Z}\\otimes1)((\\beta_Y\\otimes\\beta_Z)\\otimes\\beta_W)$$\nand\n$$n_{Y,Z\\otimes W}(1\\otimes n_{Z,W})\\alpha^{\\mathcal A'}((\\beta_Y\\otimes\\beta_Z)\\otimes\\beta_W),$$\nusing naturality of $\\beta$ and the associator. These agree by Step 2. Postcomposing the left and right unit equations with $\\beta_Y$ gives respectively $K(\\lambda^{\\mathcal B})n_{\\mathbf1,Y}(v\\otimes\\beta_Y)=\\beta_Y\\lambda^{\\mathcal A'}_{HY}$ and $K(\\rho^{\\mathcal B})n_{Y,\\mathbf1}(\\beta_Y\\otimes v)=\\beta_Y\\rho^{\\mathcal A'}_{HY}$, which follow from Step 3 and naturality of the unitors. Cancellation of $\\beta$ proves the equations for $k,w$.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category), 0FFL (definition-functor-monoidal-categories); agent calculation with the displayed coherence identities."
+   }
+  },
+  {
+   "text": "Full faithfulness means that every map between objects $EU,EV$ has exactly one inverse image under $E$. Define $m_{Y,Z}:RY\\otimes RZ\\to R(Y\\otimes Z)$ and $e:\\mathbf1_{\\mathcal A}\\to R\\mathbf1_{\\mathcal B}$ by\n$$E(m_{Y,Z})=k_{Y,Z}p_{RY,RZ}^{-1},\\qquad E(e)=wa^{-1}.$$\nThe displayed arrows have exactly the required image domains and codomains, so fullness supplies them. To check naturality apply $E$ to $R(f\\otimes g)m_{Y,Z}=m_{Y',Z'}(Rf\\otimes Rg)$ and precompose with $p_{RY,RZ}$. Naturality of $p$ turns this into $H(f\\otimes g)k_{Y,Z}=k_{Y',Z'}(Hf\\otimes Hg)$, proved in Step 4. Since $p$ is invertible and $E$ is faithful, the desired equation holds.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category), 0FFL (definition-functor-monoidal-categories); agent calculation with the displayed coherence identities."
+   }
+  },
+  {
+   "text": "Check all three coherences for $m,e$ by the same explicit substitutions. For associativity apply $E$ and precompose both sides with\n$$t=p_{RY\\otimes RZ,RW}(p_{RY,RZ}\\otimes1).$$\nNaturality and associativity of $p$ turn the left side into $H(\\alpha^{\\mathcal B})k_{Y\\otimes Z,W}(k_{Y,Z}\\otimes1)$ and the right side into $k_{Y,Z\\otimes W}(1\\otimes k_{Z,W})\\alpha^{\\mathcal A'}_{HY,HZ,HW}$. These agree by Step 4. For left unitality, apply $E$ and precompose with $p_{\\mathbf1,RY}(a\\otimes1)$: naturality of $p$ and its left unit equation reduce the two sides to $H(\\lambda^{\\mathcal B})k_{\\mathbf1,Y}(w\\otimes1)$ and $\\lambda^{\\mathcal A'}_{HY}$. For right unitality precompose instead with $p_{RY,\\mathbf1}(1\\otimes a)$, obtaining $H(\\rho^{\\mathcal B})k_{Y,\\mathbf1}(1\\otimes w)$ and $\\rho^{\\mathcal A'}_{HY}$. Step 4 gives both equalities. Cancel these isomorphisms and use faithfulness. Thus $m,e$ are lax monoidal. Their defining equations are precisely\n$$\\beta_{Y\\otimes Z}E(m_{Y,Z})p_{RY,RZ}=R'(q_{Y,Z})m'_{FY,FZ}(\\beta_Y\\otimes\\beta_Z),\\qquad \\beta_{\\mathbf1}E(e)a=R'(b)e',$$\nso $\\beta$ is monoidal. Conversely these two equations force the displayed values of $E(m),E(e)$; faithfulness forces $m,e$ themselves, proving uniqueness.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category), 0FFL (definition-functor-monoidal-categories); agent calculation with the displayed coherence identities."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-adjunction-oplax-mate] to the lax structure just constructed and to the given lax structure on $R'$. Write $u,u'$ for the adjunction units, and $d_{X,Y},d_0$ and $d'_{U,V},d'_0$ for the resulting oplax maps. The cited statement supplies their coherence and their actual transposes\n$$\\Phi(d_{X,Y})=m_{LX,LY}(u_X\\otimes u_Y),\\quad \\Phi(d_0)=e,$$\nwith the analogous primed formulas. Use the specified Hom-bijection compatibility in the item (with the mate convention of [def-weil-pbc-adjunction-mate]), at $h=1_{LX}$. Naturality of $\\Phi'$ in its target gives the exact unit comparison\n$$\\beta_{LX}E(u_X)=\\Phi'(\\gamma_X^{-1})=R'(\\gamma_X^{-1})u'_{EX}.$$\nThis uses the given comparison of adjunctions, rather than choosing a new adjunction for either underlying functor.",
+   "uses": [
+    "lem-sfb-adjunction-oplax-mate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation from the specified comparison of adjunctions; mate formulas in Mathlib/CategoryTheory/Monoidal/Functor.lean:1064-1066, as stated in lem-sfb-adjunction-oplax-mate."
+   }
+  },
+  {
+   "text": "For $X,Y\\in\\mathcal A$, let\n$$s_{X,Y}=q_{LX,LY}(\\gamma_X^{-1}\\otimes\\gamma_Y^{-1}):L'EX\\otimes L'EY\\longrightarrow F(LX\\otimes LY).$$\nIt is invertible. The monoidality equation from Step 6, naturality of $p$, and the unit comparison from Step 7 give\n$$\\begin{aligned}\n\\beta_{LX\\otimes LY}E\\bigl(m_{LX,LY}(u_X\\otimes u_Y)\\bigr)\n&=R'(q_{LX,LY})m'_{FLX,FLY}\\bigl(\\beta_{LX}E(u_X)\\otimes\\beta_{LY}E(u_Y)\\bigr)p_{X,Y}^{-1}\\\\\n&=R'(s_{X,Y})m'_{L'EX,L'EY}(u'_{EX}\\otimes u'_{EY})p_{X,Y}^{-1}.\n\\end{aligned}$$\nThe last equality is naturality of $m'$ for the two arrows $\\gamma_X^{-1},\\gamma_Y^{-1}$; all maps have domain $E(X\\otimes Y)$ and codomain $R'F(LX\\otimes LY)$.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor",
+    "lem-sfb-adjunction-oplax-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation with the mate tensor formula, Mathlib/CategoryTheory/Monoidal/Functor.lean:1066."
+   }
+  },
+  {
+   "text": "By the specified Hom compatibility, the left side of Step 8 is $\\Phi'(F(d_{X,Y})\\gamma_{X\\otimes Y}^{-1})$. By naturality in both variables of the primed Hom bijection and the primed tensor-mate formula in [lem-sfb-adjunction-oplax-mate], its right side is\n$$\\Phi'\\bigl(s_{X,Y}d'_{EX,EY}L'(p_{X,Y}^{-1})\\bigr).$$\nInjectivity of that bijection therefore proves the exact tensor transport identity\n$$F(d_{X,Y})=q_{LX,LY}(\\gamma_X^{-1}\\otimes\\gamma_Y^{-1})d'_{EX,EY}L'(p_{X,Y}^{-1})\\gamma_{X\\otimes Y}.$$\nThis is precisely the tensor comparison for $L'$ transported under the specified strong structures and $\\gamma$; no tensor comparison is identified merely up to an unspecified isomorphism.",
+   "uses": [
+    "lem-sfb-adjunction-oplax-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation with the mate tensor formula, Mathlib/CategoryTheory/Monoidal/Functor.lean:1066."
+   }
+  },
+  {
+   "text": "For the unit, the defining equation in Step 6 gives\n$$\\beta_{\\mathbf1_{\\mathcal B}}E(e)=R'(b)e'a^{-1}.$$\nThe Hom compatibility and the unit-mate formulas in [lem-sfb-adjunction-oplax-mate] turn this into\n$$\\Phi'\\bigl(F(d_0)\\gamma_{\\mathbf1_{\\mathcal A}}^{-1}\\bigr)=\\Phi'\\bigl(bd'_0L'(a^{-1})\\bigr).$$\nBoth maps being transposed have domain $L'E\\mathbf1_{\\mathcal A}$ and codomain $F\\mathbf1_{\\mathcal B}$. Injectivity proves\n$$F(d_0)=bd'_0L'(a^{-1})\\gamma_{\\mathbf1_{\\mathcal A}}.$$\nThus the unit mate, as well as the tensor mate, is the transported specified mate.",
+   "uses": [
+    "lem-sfb-adjunction-oplax-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent calculation with the mate unit formula, Mathlib/CategoryTheory/Monoidal/Functor.lean:1065."
+   }
+  },
+  {
+   "text": "If $d'_{U,V}$ and $d'_0$ are invertible, each factor on the right sides of the identities in Steps 9 and 10 is invertible: this includes $L'(p^{-1}),L'(a^{-1})$, since applying a functor to a two-sided inverse gives a two-sided inverse. Hence $F(d_{X,Y})$ and $F(d_0)$ have inverses. For either arrow $z$, fullness of $F$ lifts $F(z)^{-1}$ to an arrow $z^*$; faithfulness applied to $F(z^*z)=1$ and $F(zz^*)=1$ gives $z^*z=1$ and $zz^*=1$. Therefore every $d_{X,Y}$ and $d_0$ is invertible. This also shows that no essential-surjectivity or strictness assumption was needed in the calculations beyond the hypotheses already given.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Agent two-sided-inverse calculation in the fully faithful setting of Tag 001J (definition-equivalence-categories)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-strong-monoidal-functor",
+  "def-sfb-monoidal-category",
+  "lem-sfb-adjunction-oplax-mate",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 001J, 0FFK, 0FFL for the setting and coherence conventions; explicit full-faithful lifting and transpose calculations, using lem-sfb-adjunction-oplax-mate (Mathlib leftAdjointOplaxMonoidal:1064-1066)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +184,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ where $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is oplax monoidal, the lax monoidal structure on the right adjoint $G$ \"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ where $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is oplax monoidal, the unit morphism $\\\\varepsilon$ of the induced lax m\"}\n  {\"name\": \"CategoryTheory.Adjunction.isMonoidal_comp\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D] {E : Type u₃}\\n  [inst_4 : CategoryTheory.Category.{v₃, u₃} E] [inst_5 : CategoryTheory.M\", \"doc\": \"Given monoidal categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{E}$ and adjunctions $F \\\\dashv G$ between $\\\\mathcal{C}$ and $\\\\mathcal{D}$, $F' \\\\dashv G'$ between $\\\\mathcal{D}$ and $\\\\mathcal{E}$, where $F\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} {inst : CategoryTheory.Category.{v₁, u₁} C} {inst_1 : CategoryTheory.MonoidalCategory C} {D : Type u₂}\\n  {inst_2 : CategoryTheory.Category.{v₂, u₂} D} {inst_3 : CategoryTheory.MonoidalCategory D}\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {adj : F ⊣ G} {inst_\", \"doc\": \"For objects $X, Y$ in a monoidal category $\\\\mathcal{D}$, the lax monoidal structure map $\\\\mu_G: G(X) \\\\otimes G(Y) \\\\to G(X \\\\otimes Y)$ of the right adjoint $G$ equals the composition of the unit $\\\\eta$\"}\n  {\"name\": \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n          [inst_3 : CategoryTheory.MonoidalCategory D] →\\n            {F : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, and an adjunction $F \\\\dashv G$ where $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$ is oplax monoidal, the right adjoint $G$ inherits a lax monoidal struct\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"For objects $X, Y$ in category $\\\\mathcal{D}$, the composition of $F$ applied to the lax monoidal coherence morphism $\\\\mu_{G,X,Y}$ followed by the counit $\\\\epsilon_{X \\\\otimes Y}$ of the adjunction $F \\\\\"}\n  {\"name\": \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.MonoidalCategory C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.MonoidalCategory D]\\n  {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [inst_\", \"doc\": \"For monoidal categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F \\\\dashv G$ where $F$ is oplax monoidal and $G$ is lax monoidal, and objects $X,Y,Z \\\\in \\\\mathcal{D}$, the composition of $F$'s a\"}\n  {\"name\": \"CategoryTheory.Adjunction.IsMonoidal\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Functor\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      {D : Type u₂} →\\n        [inst_2 : CategoryTheory.Category.{v₂, u₂} D] →\\n          [inst_3 : CategoryTheory.MonoidalCategory D] →\\n            {F : CategoryTheory.Functor C D} →\\n   \", \"doc\": \"Given an adjunction between functors $ F $ and $ G $ between monoidal categories $ \\\\mathcal{C} $ and $ \\\\mathcal{D} $, where $ F $ is oplax monoidal and $ G $ is lax monoidal, this proposition asserts \"}",
    "date": "2026-10-21",
    "verdict": "No one-line match for this combined assertion: Mathlib supplies strong-structure transfer and monoidal mates separately, not unique lax lifting through the given square and equality of its specified adjunction mates."
+  },
+  {
+   "tool": "grep",
+   "query": "LaxMonoidal.*(of|transport)|laxMonoidal.*(Of|Transport)|leftAdjointOplaxMonoidal|fullyFaithful",
+   "results": "Logged 25 hits: Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean, Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean, Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean, Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean, Mathlib/CategoryTheory/Monoidal/Opposite/Mon.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean, Mathlib/CategoryTheory/Monoidal/Multifunctor.lean. Subdirectory: CategoryTheory/Monoidal. ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib leftAdjointOplaxMonoidal and strong natural-isomorphism transport; neither gives the full faithful square-lifting and the specified tensor/unit mate identities in one-line specializations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointOplaxMonoidal",
+   "results": "Logged 4 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_η, CategoryTheory.Adjunction.leftAdjointOplaxMonoidal_δ. ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib leftAdjointOplaxMonoidal and strong natural-isomorphism transport; neither gives the full faithful square-lifting and the specified tensor/unit mate identities in one-line specializations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A lax monoidal structure transports uniquely through a fully faithful strong monoidal functor and its adjunction mates transport compatibly",
+   "results": "Logged 8 hits: CategoryTheory.Functor.Monoidal.coreMonoidalTransport, CategoryTheory.Functor.Monoidal.transport, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Functor.FullyFaithful.monObj_one, CategoryTheory.LaxMonoidalFunctor.noConfusion, CategoryTheory.LaxMonoidalFunctor.mk.injEq, CategoryTheory.Functor.Monoidal.toLaxMonoidal, CategoryTheory.Functor.Monoidal.ofLaxMonoidal. ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib leftAdjointOplaxMonoidal and strong natural-isomorphism transport; neither gives the full faithful square-lifting and the specified tensor/unit mate identities in one-line specializations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport a lax monoidal right adjoint through fully faithful strong monoidal equivalences and identify the oplax mate of the specified adjunction",
+   "results": "Logged 8 hits: CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε, CategoryTheory.mateEquiv, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.mateEquiv_counit. ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib leftAdjointOplaxMonoidal and strong natural-isomorphism transport; neither gives the full faithful square-lifting and the specified tensor/unit mate identities in one-line specializations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lax monoidal structure on a functor can be recovered by postcomposing with a fully faithful strong monoidal functor; compatibility with left adjoint mates",
+   "results": "Logged 8 hits: CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Functor.Monoidal.map_μ_δ, CategoryTheory.Functor.Monoidal.map_η_ε, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Functor.LaxMonoidal.tensorHom_ε_comp_μ. ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib leftAdjointOplaxMonoidal and strong natural-isomorphism transport; neither gives the full faithful square-lifting and the specified tensor/unit mate identities in one-line specializations."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-pd-proetale-section-module-functors",
@@ -75,5 +243,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pd-monoidal-adjunction-equivalence-transport",
+  "worker": "stage1",
+  "summary": "Q15 gave the explicit full-faithful construction, checked naturality, associativity, both unit equations and uniqueness, and compared tensor and unit mates by their actual Hom transposes. No statement change, new node or attachment. Mathlib and project-source partial results were read; none states every clause of the item.",
+  "blueprint": "No imported blueprint ancestor (blueprint_refs ancestor returns None). This realizes the named original Step 3 / retained Step 6 of def-pd-proetale-section-module-functors, on the nt-target-poincare-isiso comparison route, without changing the Verdier-exchange unit. Whole-blueprint searches for monoidal equivalence and lax monoidal found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-adjunction-oplax-mate",
+    "why": "The generic lax-right-adjoint to oplax-left-adjoint theorem supplies the actual transpose formulas and coherence; the Verdier-exchange unit has no generic monoidal adjunction theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-adjunction-oplax-mate"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-116280af0",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-116280af0 (reviewer sub-agent of L); spot-checked: PASS, no fixes. I read the whole delivery: one commit with only the item and its report, no new nodes, statement, stmt_deps, blueprint and source unchanged against clones/live and clones/side-live (where the item is still unsplit). The item, its parent and its via node are not on the 2026-10-19 route-pivot drop list, there is no repair or re-split note for it, and nothing cites SGA. I redid all 11 steps. Steps 1-3: n=R'(q)m' and v=R'(b)e' are a lax structure on R'F; the associativity and unit calculations are correct. Steps 4-6: the structure is moved to ER by conjugating with beta and lifted through the fully faithful E using p^{-1} and a^{-1}. The coherence checks precompose with p(p⊗1), p(a⊗1) and p(1⊗a), and the defining equations force uniqueness. Step 7: taking h=1 in the Hom condition gives beta E(u)=R'(gamma^{-1})u'. I also checked that the statement's 'equivalently' is right: the Hom condition holds exactly when beta is the mate of gamma^{-1} under def-weil-pbc-adjunction-mate (with L2=L', G=E, H=F). Steps 8-10: the tensor transport F(d)=q(gamma^{-1}⊗gamma^{-1})d'L'(p^{-1})gamma and the unit transport F(d0)=b d0' L'(a^{-1})gamma are correct, with matching domains and codomains. Step 11: inverses are lifted by fullness and the inverse identities follow from faithfulness. Each cited node's statement gives exactly what its step takes from it. The mate formulas agree with Mathlib leftAdjointOplaxMonoidal at Monoidal/Functor.lean 1064-1066. The Stacks tags 001J, 0FFK and 0FFL match the labels at categories.tex lines 351, 9170 and 9238. Edge cases checked: terminal categories; identity E, F with identity or nontrivial gamma; non-strict, non-braided categories; R' only lax; essential surjectivity is assumed but not used, which is harmless. No duplicate found among about 30 lax/oplax nodes in sec-proetale-coefficients, including monoidal-finite-free-transport, restricted-transport-comparison-linear, monoidal-adjunction-unit-counit and strong-monoidal-of-invertible-oplax. The only citer, def-pd-proetale-section-module-functors Step 3, uses the statement as written. Accepted tool_use: lem-sfb-adjunction-oplax-mate, a generic Mathlib-leaf mate theorem with no counterpart in the Verdier-exchange unit."
  }
 }

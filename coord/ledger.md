@@ -20248,3 +20248,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:08 L: returned deliver/ND/lem-sfb-closed-support-bounded-continuity (reviewer RETURN: L: independent stage-2 immutable head b5d521be4a42: H2: the delivery adds theorem node det-lem-formal-closed-support-adj)
 - 04:08 L: returned deliver/Q05/lem-sfb-hom-kflat-chain-transpose (reviewer RETURN: L: independent stage-2 immutable head c2bcee5fc184: file-only compilation failed: overlay WeilConjectures.Mathlib.Linear)
 - 2026-10-21T04:08:53Z L: superseded stage-1 delivery Q27/def-weil-common-stage-derived-direct-image at a5489c690d9e6d8b005f2c3e5c7489389cb1e132; current completion retained; packet archived at refs/superseded/Q27/def-weil-common-stage-derived-direct-image/a5489c690d9e6d8b005f2c3e5c7489389cb1e132; stale return retired.
+- 04:09 L: merged deliver/Q15/lem-pd-monoidal-adjunction-equivalence-transport (reviewer PASS; first push; new nodes: 0)
