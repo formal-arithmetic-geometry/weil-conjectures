@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-affine-finite-type-is-quasi-affine",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Affine schemes are quasi-affine",
@@ -13,15 +13,11 @@
   "place": "node lemma-nagata-affine-finite-type-is-quasi-affine, order 186"
  },
  "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
   "lemma-nagata-quasi-affine-immersion-affine-space-exists"
  ],
- "proof": [
-  {
-   "text": "The identity of $U$ realizes the canonical map\n$U\\to\\operatorname{Spec}\\Gamma(U,\\mathcal O_U)$ as an open immersion, and\n$U$ is quasi-compact. This is the defining quasi-affine property, and a\nfinite-type structure morphism is in particular locally of finite type.",
-   "uses": [],
-   "elementary": null
-  }
- ],
+ "proof": [],
  "proof_deps": [],
  "proof_origin": {
   "by": "agent",
@@ -34,10 +30,49 @@
    "query": "AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine",
    "results": [],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every affine scheme is quasi-affine",
+   "results": "OK 8 hits, led by AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine (Mathlib/AlgebraicGeometry/QuasiAffine), with type ∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X], X.IsQuasiAffine. Other hits include Scheme.IsQuasiAffine and Scheme.IsQuasiAffine.of_isAffineHom.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IsQuasiAffine, AlgebraicGeometry.IsAffine",
+   "results": "OK 1 hit: AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine, Mathlib.AlgebraicGeometry.QuasiAffine, {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsAffine X] : X.IsQuasiAffine.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "instIsQuasiAffineOfIsAffine|class IsQuasiAffine|IsAffine.*IsQuasiAffine|IsQuasiAffine.*IsAffine",
+   "results": "AlgebraicGeometry: OK 6 hits. Mathlib/AlgebraicGeometry/QuasiAffine.lean:34 class IsQuasiAffine; :39 instance (priority := low) [IsAffine X] : X.IsQuasiAffine where; :93 IsQuasiAffine.of_isAffineHom. Other hits: AffineTransitionLimit.lean:1055 and QuasiAffine.lean:115,118. Read QuasiAffine.lean:31–49 and AffineScheme.lean:58–62,561–564.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every affine scheme is quasi-affine",
+   "results": "OK 8 hits, led by AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine (Mathlib.AlgebraicGeometry.QuasiAffine), [IsAffine X] : X.IsQuasiAffine; also Scheme.IsQuasiAffine, quasiSeparatedSpace_of_isAffine, Scheme.IsQuasiAffine.of_isAffineHom, Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen, AffineScheme, Scheme.IsQuasiAffine.mk, IsAffine.recOn.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteType|LocallyOfFiniteType",
+   "results": "Subdirectory argument AlgebraicGeometry/Morphisms/FiniteType.lean: OK 5 hits (single-file output parsed by the tool as file/line fields): imports at lines 11,12 and LocallyOfFiniteType class at lines 43–46. Read module documentation at lines 16–21: finite type means locally of finite type and quasi-compact.",
+   "date": "2026-10-21",
+   "verdict": "match: finite type includes LocallyOfFiniteType by definition"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine",
+  "file": "Mathlib/AlgebraicGeometry/QuasiAffine.lean",
+  "how": "Exact main assertion, line 39: [IsAffine U] : U.IsQuasiAffine, with no extra hypothesis on U or on a base. Mathlib/AlgebraicGeometry/AffineScheme.lean:59–62 defines IsAffine by IsIso U.toSpecΓ and :561–564 supplies CompactSpace U, so in this specialization the canonical map is an isomorphism (hence an open immersion), agreeing with the blueprint notion without needing a comparison theorem. For the final applicability clause, finite type is the conjunction LocallyOfFiniteType f and QuasiCompact f (Mathlib/AlgebraicGeometry/Morphisms/FiniteType.lean:16–21, class LocallyOfFiniteType at :43–46); conjunction projection gives the remaining hypothesis of lemma-nagata-quasi-affine-immersion-affine-space-exists. That clause checks hypotheses of the cited lemma; it does not assert a further construction."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found"
@@ -67,5 +102,20 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-affine-finite-type-is-quasi-affine",
+  "worker": "stage1",
+  "summary": "Confirmed the imported statement verbatim against both blueprint snapshots and the quasi-affine and finite-type definitions in Stacks Tags 01P6 and 01T1. Recorded the exact Mathlib instance at QuasiAffine.lean:39 and all four required logged searches. The finite-type application is just projection of its defining conjunction. Added existing scheme/affineness and finite-type definition dependencies, retained the statement reference to the affine-space immersion lemma, and removed the unnecessary imported proof because this item is a Mathlib leaf. No new node or Lean file.",
+  "blueprint": "The only paragraph of the item proof (affine U gives a quasi-compact canonical open immersion; finite type implies locally finite type) is realized by the Mathlib match and the finite-type defining conjunction. This is the affine special case supplying the hypotheses in unit sk-prop-nagata-sketch-zmt, part (ii), not a replacement of its affine-space-immersion argument."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-fbfc853e9",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-fbfc853e9 (reviewer sub-agent of L); spot-checked: The item statement matches both blueprint snapshots (master order 186, main-20261015 order 194) byte for byte, and neither has a blueprint_update. Making it a Mathlib leaf is correct. Clause 1: AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine is at QuasiAffine.lean:39. IsAffine gives IsIso toSpecΓ (AffineScheme.lean:59-60) and compactSpace_of_isAffine (AffineScheme.lean:561-564), which together give the Stacks 01P6 (properties.tex:2407) / unit (ii) sense of quasi-affine directly, with no hidden comparison theorem. Clause 2 only checks the hypotheses of lemma-nagata-quasi-affine-immersion-affine-space-exists: quasi-affine X plus locally of finite type, and finite type gives the latter by conjunction projection from def-weil-finite-type-morphism (morphisms.tex:2657; FiniteType.lean:16-21, 43-46). The added stmt_deps def-pc-scheme and def-weil-finite-type-morphism are correct and create no cycle. The four logged searches all match. Edge cases checked: Spec 0, a non-affine base, non-Noetherian A. No duplicate: the DAG grep finds the instance only in this item. There is no SGA citation, no repair note and no dropped entry. Maintainer note: the imported parent lemma has no definition node for quasi-affine scheme among its stmt_deps; this is not a fault of this delivery."
  }
 }
