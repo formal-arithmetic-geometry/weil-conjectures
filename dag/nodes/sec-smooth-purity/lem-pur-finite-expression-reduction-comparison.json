@@ -251,5 +251,30 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-62b91cb47 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full and accept the split. The diff against side-live is limited to proof, proof_deps, proof_origin, searches, status and split_report; the statement, stmt_deps, source and blueprint are unchanged, and the item is still unsplit live. There are no new nodes, no SGA citation and no repair note. Source: blueprint main-20261015 def-weil-frobenius-coefficient-twists l.16-17, correctly marked as an agent-written proof. Steps 1-4: a size induction over the four constructors of def-pur-completed-operation-expressions with the claim stated; the leaves are normalized by the input and closure hypotheses. The tensor and pullback steps are well typed: \\hat T and \\hat F are functors by def-pur-integral-derived-operations, β_T(S_{P1},S_{P2}) has source \\hat T(𝓛S_{P1},𝓛S_{P2}) and β_F(S_Q) has source \\hat F_f(𝓛S_Q), as in lem-pur-completed-primitive-counit-comparison. They are invertible by the item's own hypotheses, and the inverses are taken in the right order. Step 5: functoriality of 𝓡 and the counit come from evaluation-calculus, and effectivity gives levelwise isomorphisms for M=R lim Res, which is 𝓛. The step to a whole-system isomorphism uses the detection clause of evaluation-calculus, which this step cites but does not name; maintainer note: name it. Step 6: the strict transitions give a natural transformation that descends to D (as in the natural t_{m,n} of semilinear-derived-sections); composing the squares for 𝓡β and e gives exactly the item's equation, including m=n, without any detection of equality. Step 7: S empty means the claim is vacuous, I empty still has units, and repeated inputs are allowed. Small cases checked: a single input, a single unit, T(i,i) and F_g F_f i. No cycle: only the parent cites the item. No duplicate: lem-pur-integral-realization-recursion and lem-pur-integral-coherence-tower are different statements. The parent's step 3 uses exactly this conditional statement. Accepted tool_uses: lem-coef-derived-system-evaluation-calculus, lem-coef-normalized-dvr-effectivity and lem-coef-semilinear-derived-sections, which are generic coefficient-system tools already listed in the parent's tool_uses. The review_split 'no such node' messages are a false positive: the tool does not follow the chapter symlinks."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteExpressionReductionComparison",
+  "declaration": "WeilConjectures.FiniteExpressionReduction.finiteExpressionReductionComparison",
+  "declarations": [
+   "WeilConjectures.FiniteExpressionReduction.systemValue",
+   "WeilConjectures.FiniteExpressionReduction.completedValue",
+   "WeilConjectures.FiniteExpressionReduction.beta",
+   "WeilConjectures.FiniteExpressionReduction.gamma",
+   "WeilConjectures.FiniteExpressionReduction.finiteExpressionReductionComparison"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteExpressionReductionComparison.lean",
+  "statement": "theorem finiteExpressionReductionComparison (_hInvertible : ∀ (a : S) (x : W a), IsUnit (l : (W a).presheaf.stalk x)) (hUnit : ∀ a : S, IsNormalizedCoefficientSequence l E (W a) (ringedSiteDualityUnit.{t + 1, t, u} (coefficientSequenceTopology (Scheme.ProEt.topology (W a))) (coefficientSequenceCommRingSheaf l E (W a)))) (hTensor : ∀ (a : S) (A B : coefficientSequenceDerived l E (W a)), IsNormalizedCoefficientSequence l E (W a) A → IsNormalizedCoefficientSequence l E (W a) B → IsNormalizedCoefficientSequence l E (W a) ((D a).systemClosed.tensor.obj (A, B))) (hPull : ∀ {a b : S} (f : W a ⟶ W b) (A : coefficientSequenceDerived l E (W b)), IsNormalizedCoefficientSequence l E (W b) A → IsNormalizedCoefficientSequence l E (W a) ((PrimitiveCounit.pull l E f).obj A)) {a : S} (P : Expression W location a) (N : ∀ k : I, coefficientSequenceDerived l E (W (location k))) (hN : ∀ k : I, IsNormalizedCoefficientSequence l E (W (location k)) (N k)) : IsNormalizedCoefficientSequence l E (W a) (systemValue l E W D N P) ∧ IsIso (beta l E W D ρ C P N) ∧ IsIso (gamma l E W D ρ C P N) ∧ (∀ {m n : ℕ} (h : n ≤ m), (coefficientSequenceDerivedEvaluation l E (W a) m).map (gamma l E W D ρ C P N) ≫ (coefficientSequenceDerivedTransition l E (W a) h).app (systemValue l E W D N P) = (coefficientSequenceDerivedTransition l E (W a) h).app ((D a).reduction.obj (completedValue l E W N P)) ≫ (normalizedDVRRes l E (W a) h).map ((coefficientSequenceDerivedEvaluation l E (W a) n).map (gamma l E W D ρ C P N)))",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0010e3cca",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Item node differs from side-live only in lean; the 12 dep nodes are byte-identical; statement verbatim; declarations exact; one sorry. Lean matches the node: systemValue/completedValue use the recorded tensor, pull, unit and integralCompletedTensor/integralDerivedPullback. beta is identities at leaves and functor image followed by PrimitiveCounit.tensorBeta/pullBeta (r then L(T(e,e))/L(F(e))). gamma = R(beta) followed by the adjunction counit. The primitive-iso hypothesis is tensor_iso/geometric_iso of the pinned Comparisons record (typing X=W a, Y=W b, rhoX=rho a correct; the other fields are conclusions of the primitive theorem). hUnit/hTensor/hPull are the closure assumptions, no stronger than the node. Conclusions: normalization, IsIso beta, IsIso gamma, and the transition square in the node's order including m=n. Edge cases (empty I/S, repeated inputs, f=id) and independent universes t,u,s,i checked. No hollow defs; docstrings with source and blueprint; both report sections present. Advisory: proof-only plain imports (H9); PrimitiveCounit.pull duplicate belongs to the dependency. Not compiled, no file changed."
  }
 }

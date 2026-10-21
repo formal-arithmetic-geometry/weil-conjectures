@@ -22706,3 +22706,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:53 L: merged deliver/NP/lem-dl-a1-galois-prime-residue-lifting (stage 2; reviewer PASS; parallel immutable checks)
 - 13:53 L: merged deliver/NQ/lem-sfb-finite-local-model-rhom-continuity (stage 2; reviewer PASS; parallel immutable checks)
 - 13:53 L: returned deliver/Q21/lem-sf-open-exchange-roos-restriction (reviewer RETURN: L: independent stage-2 immutable head cab34a758f38: H2: delivery adds theorem stmt_deps that supply only plain definitio)
+- 13:55 L: merged deliver/Q02/lem-pur-finite-expression-reduction-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 13:55 L: merged deliver/Q17/lem-per-rational-realization-scalar-coherence (stage 2; reviewer PASS; parallel immutable checks)
+- 13:55 L: merged deliver/NC/det-picard-rr-duality (stage 2; reviewer PASS; parallel immutable checks)

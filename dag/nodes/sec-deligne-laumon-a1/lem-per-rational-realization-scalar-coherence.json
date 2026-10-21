@@ -407,5 +407,48 @@
   "group": "Q150",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-1ca43986e (reviewer sub-agent of L); spot-checked: I read the whole delivery: 0 new nodes, the statement and stmt_deps are unchanged against side-live (where the item is still unsplit), there is no repair note for the item and it is not on the dropped list. Steps 1-4: the coefficient square is equal on each finite projection; θ=t^{-1}s is built from ringed derived composition comparisons over the identity topos on flat-term K-flat models; fractions use ϖ_E=uϖ_L^e being invertible in L; the field towers flatten to m⊗l⊗p↦ml⊗p, which matches the associators of prop-weil-pbc-scalar-extension. Step 5: S is finite free of rank [L:E], and ϖ_E=uϖ_L^e with e≥1 is exactly the hypothesis of completion transport; the Koszul reflector units are identified with the quotient completion by the constant-completion equivalence. Step 6: I checked each hypothesis of the reflected-adjunction square (canonical adjunctions, pushforward completion γ allowing a non-iso ring map, κ_A and κ_B, δ=β^{-1}); \\hatβ=Λ_L(β)κ is the inverse of \\hatδ and agrees with step 6 of the prop ('balancing followed by κ^{-1}'). Step 7: I verified \\hatβ C(η_E)=η_Lβ by naturality, with γ=η via def-weil-pbc-completed-pullback. Step 8: after precomposing by the isomorphism J_LQ(Cγ_E), the α formulas cancel the completion units and both routes are l'⊗b'⊗p↦l'i(b')⊗p. Step 9 applies the pasting, tower and localization-composition clauses of the cited nodes. Sources checked: Bhatt-Scholze pp.58-62 (Lemma 6.8.2, Prop 6.8.14, Rem 6.8.15) and the Stacks tags 0G7E/0D6D/0A0E/0A0G/099B against their labels; there is no SGA. All 11 off-unit statement citations are generic tools declared in tool_uses, and I accept them. Batch-5 flag: lem-weil-pbc-localization-inverse-image-coherence reaches lem-trf-geometric-inverse-image-exact, which is only exactness of geometric inverse image, a general topos fact and no part of the trace formula or Poincare duality; it is already a stmt_dep of the same-unit pullback-comparison node. Accepted. Edge cases E=L, g=id, ramified e>1 and K=0 all hold. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalRealizationScalarCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.rationalRealizationScalarCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.RationalRealizationScalarComparison",
+   "AlgebraicGeometry.Scheme.rationalRealizationScalarCoherence",
+   "AlgebraicGeometry.Scheme.rationalScalarStrictPullComparison",
+   "AlgebraicGeometry.Scheme.RationalRealizationScalarMixed",
+   "AlgebraicGeometry.Scheme.rationalRealizationScalarMixed",
+   "AlgebraicGeometry.Scheme.RationalRealizationScalarTower",
+   "AlgebraicGeometry.Scheme.rationalRealizationScalarTower",
+   "AlgebraicGeometry.Scheme.RationalRealizationScalarUnit",
+   "AlgebraicGeometry.Scheme.rationalRealizationScalarUnit",
+   "AlgebraicGeometry.Scheme.rationalRealizationScalarPentagon",
+   "AlgebraicGeometry.Scheme.rationalRealizationScalarMixedTower",
+   "AlgebraicGeometry.Scheme.rationalScalarStrictUnitIso",
+   "AlgebraicGeometry.Scheme.rationalScalarStrictPullComp",
+   "AlgebraicGeometry.Scheme.rationalScalarPullModuleUnit",
+   "AlgebraicGeometry.Scheme.RationalScalarPullComposition",
+   "AlgebraicGeometry.Scheme.rationalScalarPullComposition",
+   "AlgebraicGeometry.Scheme.rationalRealizationScalarMixedComp",
+   "AlgebraicGeometry.Scheme.RationalScalarPullIdentity",
+   "AlgebraicGeometry.Scheme.rationalScalarPullIdentity",
+   "AlgebraicGeometry.Scheme.rationalRealizationScalarMixedIdentity",
+   "AlgebraicGeometry.Scheme.rationalRealizationStageTheta",
+   "AlgebraicGeometry.Scheme.rationalRealizationStageTower"
+  ],
+  "file": "lean/Sheaf/Paper/RationalRealizationScalarCoherence.lean",
+  "statement": "theorem rationalRealizationScalarCoherence (sE : RationalModuleRealization l E X) (sF : RationalModuleRealization l F X) : Nonempty (RationalRealizationScalarComparison l E F i X sE sF)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The primary theorem constructs the normalized raw scalar comparison; companion declarations state the mixed square for the recorded alpha, strict completion-unit normalization, successive coefficient associators, identity and pentagon laws, ambient pullback identity/composition, and their mixed pasting equations. StageTheta and StageTower transport to the published literally identity-normalized scalar system. All coefficient categories, tensor functors, fraction maps and strict completion units are the recorded dependencies; no pair category or unramified hypothesis is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5daa8686e",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Read node, report, full module and dep decls (RationalModuleRealization, RationalRealizationPullbackComparison, pbcReductionNormalization, pbcActualCompletedPullback_tower ∃!, pbcScalarOrdinaryPullIso/CompletedPullIso/CompletedPull_rational, pbcRationalScalarComp/Unit, pbcStageAssociator_laws). Node differs from side-live only in lean; not dropped, no repair note. Every clause rendered with the published objects: θ (T⋙J_F ≅ J_E⋙ext c) pinned on all raw objects by integral_normalization via canonical pbcReductionNormalization; coefficient pinned pointwise; tower with pbcRationalScalarComp; unit; ambient and raw pentagon for general embeddings (dep has only the stage pentagon); mixed square with the specific α, ordinary/ambient pinned on generators and K-flat counits, exact strict completion-unit equation, raw pinned to descent of pbcScalarCompletedPullIso transported by the ∃! tower isos; composition/identity/tower pasting. No extra hypotheses (no unramified, no pair category), universes as in deps; edge cases E=F, g=id, e>1, empty X, K=0 ok. Defs real, 11 theorems sorry-only, docstrings/H9/verbatim statement ok. No recompile (2026-10-21 rule); worker clean 36-40 s + dry-run OK. Advisories: proEtaleRingInverseImageComp, pbcActualDerivedPullCompIso, pbcActualStrictCompletedPull owners not stmt_deps (no dep added); coefficient field = continuousCoefficientMap (pinned field); RationalScalarPullComposition/Identity.compatibility overlap Q16 sibling lem-per-rational-pullback-composition-coherence (unlanded, no name clash)."
  }
 }

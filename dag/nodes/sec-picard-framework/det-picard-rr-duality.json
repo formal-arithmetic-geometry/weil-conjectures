@@ -25,7 +25,12 @@
   "def-pc-field-extension",
   "def-pc-base-change",
   "def-pc-module-pullback",
-  "sk-thm-picard-duality"
+  "sk-thm-picard-duality",
+  "def-sc-field-linear-module-cohomology-operations",
+  "def-pc-flat-cohomology-comparison",
+  "def-a1-relative-differentials-pullback-map",
+  "def-pc-module-cohomology-ext-resolution-equiv",
+  "def-pc-residue-trace-pairing"
  ],
  "proof": [
   {
@@ -419,5 +424,30 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-3a2608fe8 (reviewer sub-agent of L); spot-checked: I read in full the item, the new node, every cited statement, the base item proof, blueprint main-20261015 sk-thm-picard-rr-duality(.proof).md Steps 0-(4) and the Tate ASENS 1968 residue construction. This is a re-delivery of d848c959, which got a FIX. The new node is byte-identical to that run's. The item changes only steps 2, 3, 4 and 8, which now spell out the hypotheses of the rewritten lem-pc-regular-curve-divisor-calculus (3) (skyscraper through kappa(x), pushforward along i_x) and sk-thm-picard-duality (n in {0,1}, integral case). I checked these against the current statements and they are correct. The live item is still imported, not superseded, has no repair note, and its statement is unchanged. The route matches the blueprint: divisor-induction Riemann-Roch in step 2 avoids the cycle through the parent sk-thm-picard-rr; steps 3-5 give (1)-(3); steps 6-9 give (4). Step 8 is right that the pulled principal-parts tuple is zero at closed points of C_K over the generic point, and delta is argued through extClass. New node lem-pc-tate-residue-field-extension: statement-only, self-contained, true and not a restatement. Test with k=F_p(s), x=(t^p-s), eta=t^{p-1}dt/(t^p-s): residue 1 on both sides via the residue theorem. rg -L found only the NK local-calculus, reciprocity and principal-parts nodes, so it is not a duplicate. Batch-5 finding: all three listed citations reach the flagged chapter only via def-pod-ring-scalar-extension, the general definition of scalar extension of modules, not part of the trace formula or Poincare duality, and it was already in the base closure via sk-thm-picard-duality. The delivery adds 9 closure nodes, none flagged, so I accept all three. Two repairable faults, C1/E1 and E1/C4. (1) Step 1 used lem-sc-smooth-omega-finite-locally-free, which needs relative dimension d, without citing a node for it. This is the d848c959 FIX, lost in this head; I re-applied it with lem-sc-curve-base-change-relative-dimension-one, T=Spec k. (2) Step 6 got regularity of C_K and C_E from lem-sc-smooth-regular, whose 'smooth curve' hypothesis presupposes the integrality the step is proving. I replaced it with lem-weil-pbc-smooth-scheme-over-field-regular, which assumes no integrality and is already in the item's closure (0 new nodes, no batch-5 or cycle impact), and added it to proof_deps and tool_uses. Corrected item: fixes/dag/nodes/sec-picard-framework/det-picard-rr-duality.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.PicardRRDuality",
+  "declaration": "AlgebraicGeometry.Scheme.picard_rr_duality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.picardRRModuleTrace",
+   "AlgebraicGeometry.Scheme.picardRRModuleBaseChangeValue",
+   "AlgebraicGeometry.Scheme.PicardRRDualityFieldExtension",
+   "AlgebraicGeometry.Scheme.picard_rr_duality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/PicardRRDuality.lean",
+  "statement": "theorem picard_rr_duality (k : Type u) [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsSmoothProjectiveCurve (C ↘ Spec (.of k))] [GeometricallyConnected (C ↘ Spec (.of k))] (L : C.Modules) [L.IsInvertible] : (∃ e : scalarCohomology (C ↘ Spec (.of k)) (MonoidalCategoryStruct.tensorObj (C := C.Modules) (dual L) (C ↘ Spec (.of k)).relativeDifferentials) 0 ≃ₗ[k] Module.Dual k (scalarCohomology (C ↘ Spec (.of k)) L 1), ∀ b a, e b a = picardRRModuleTrace k C (scalarCohomologyMap (C ↘ Spec (.of k)) (evalTensor L (C ↘ Spec (.of k)).relativeDifferentials) 1 (scalarCohomologyCup (C ↘ Spec (.of k)) L (MonoidalCategoryStruct.tensorObj (C := C.Modules) (dual L) (C ↘ Spec (.of k)).relativeDifferentials) 1 0 a b))) ∧ Module.finrank k (scalarCohomology (C ↘ Spec (.of k)) (C ↘ Spec (.of k)).relativeDifferentials 0) = arithmeticGenus k C ∧ Module.finrank k (scalarCohomology (C ↘ Spec (.of k)) (C ↘ Spec (.of k)).relativeDifferentials 1) = 1 ∧ (C ↘ Spec (.of k)).relativeDifferentials.degree k = 2 * (arithmeticGenus k C : ℤ) - 2 ∧ (2 * (arithmeticGenus k C : ℤ) - 2 < L.degree k → Subsingleton (scalarCohomology (C ↘ Spec (.of k)) L 1) ∧ (Module.finrank k (scalarCohomology (C ↘ Spec (.of k)) L 0) : ℤ) = L.degree k + 1 - (arithmeticGenus k C : ℤ)) ∧ ∀ (K : Type u) [Field K] [Algebra k K], PicardRRDualityFieldExtension k C L K",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All four clauses are stated on recorded right-derived module cohomology. Helpers transport the existing residue trace and canonical flat cohomology comparison through the constructed common-resolution equivalence. The field-extension predicate states the canonical differential comparison, normalized cohomology equivalences, and the cd scalar-extension equation for the trace pairing on Hom(L,omega), canonically H0(L-dual tensor omega). Added only already-landed statement dependencies used by these canonical constructions. No parent Riemann-Roch theorem is imported, avoiding its dependency cycle."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3d7afcc2",
+  "group": "NC",
+  "result": "pass",
+  "note": "Re-delivery of 850e357f3fd5 makes exactly the two stmt_deps corrections that RETURN asked for. (1) The theorem node new-module-cohomology-ext-resolution-naturality is replaced by def-pc-module-cohomology-ext-resolution-equiv, which owns the plain def moduleCohomologyExtResolutionEquiv. (2) def-pc-residue-trace-pairing is added and Curve.ResidueTrace is imported publicly; PicardDuality is now proof-only. The Lean diff is imports only; the node diff is stmt_deps only. Both dep records equal side-live. All 5 stmt_deps added since live are definition nodes owning used declarations. Re-checked the unchanged statement against the node's four clauses: e pinned by trace∘evalTensor∘cup; h0/h1/deg ω and the deg>2g-2 clause correct in ℤ; clause (4) has the differential iso pinned on generators, β pinned by H.baseChange on pure tensors, and the cd pairing equation; no hollow defs, no extra hypotheses, sorry only. Advisories: sk-thm-picard-duality remains as a base theorem stmt_dep (the tool forbids dropping it); clause (4) is stated on Hom(L,ω); the second reading was written by the author. No file changed, so no compile."
  }
 }
