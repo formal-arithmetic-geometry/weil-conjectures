@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-small-strict-henselization-ind-etale",
+ "kind": "statement",
+ "title": "Ind-etale affine charts for the small representative strict henselization",
+ "statement": "Let S be a scheme, s:Spec Ω→S an algebraically closed geometric point, i:Spec R→S an affine open immersion containing the image of the closed point of s, A a commutative ring, e:Spec A≅S_(s), and a:R→A a ring map whose spectrum composed with i equals e followed by the strict henselization structural map. Equip A with the algebra structure induced by a. Then A is ind-etale over R.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex",
+  "place": "Tag 04HX, cofinal system of affine pointed neighbourhoods; Tag 04GW, canonical colimit identification."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Let cmp be smallStrictHenselizationColimitIso, the final-functor colimit isomorphism from the small representative diagram to the full affine diagram. Choose one representative neighbourhood, possible by cofilteredness. The inverse coprojection equation for cmp, followed by Spec and the inverse global-sections identification, identifies Spec(cmp.inv) followed by strictLocalizationToBase with the small-model structural morphism: the full cone equation gives one side and exists_strictHenselizationStructuralMap gives the other. This proves the private structural-map compatibility lemma.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose e with Spec of cmp.inv, giving Spec A isomorphic to the full strict localization. The compatibility lemma rewrites the given chart-map equation to the hypothesis of the upstream affine-chart ind-etale theorem. Apply that theorem. The algebra structure is unchanged, since the same ring map a is supplied.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 04HX and 04GW; canonical cofinal-colimit transport written in Lean by G3, 2026-10-20."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "Algebra.IndEtale",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "Generic colimit comparison API is used; no strict henselization theorem in Mathlib.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization_indEtale_of_affine_chart",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "Generic colimit comparison API is used; no strict henselization theorem in Mathlib.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Final.colimitIso",
+   "results": "7 hits: CategoryTheory.Functor.Final.colimitIso, CategoryTheory.Functor.Final.colimitIso_hom, CategoryTheory.Functor.Final.colimitIso_inv, CategoryTheory.Functor.Final.ι_colimitIso_hom, CategoryTheory.Functor.Final.ι_colimitIso_inv, CategoryTheory.Functor.Final.ι_colimitIso_hom_assoc, CategoryTheory.Functor.Final.ι_colimitIso_inv_assoc",
+   "date": "2026-10-20",
+   "verdict": "Generic colimit comparison API is used; no strict henselization theorem in Mathlib.",
+   "digest": "11251f906be0cab4"
+  },
+  {
+   "tool": "grep",
+   "query": "smallStrictHenselizationColimitIso|strictLocalizationToBase",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "Generic colimit comparison API is used; no strict henselization theorem in Mathlib.",
+   "digest": "4f53cda18c2baa0c"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The strict henselization is ind etale over an affine chart; final functor colimit comparison",
+   "results": "8 hits: Profinite.Extend.isColimitCocone, HenselianLocalRing.toIsLocalRing, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage, HenselianLocalRing.casesOn, localCohomology.isoOfFinal, AlgebraicGeometry.instHasColimitOverSchemeTopMorphismProperty, AlgebraicGeometry.preservesColimit_Γ, AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone",
+   "date": "2026-10-20",
+   "verdict": "Generic colimit comparison API is used; no strict henselization theorem in Mathlib.",
+   "digest": "02d527241c009bf4"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale",
+  "date": "2026-10-20",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-p1-exchange-geometric-stalk",
+   "place": "The strict local affine chart used to identify geometric stalks, made precise using the canonical comparison of representative and full neighbourhood colimits.",
+   "via": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmallStrictHenselizationIndEtale.lean",
+  "declaration": "AlgebraicGeometry.Scheme.smallStrictHenselization_indEtale_of_affine_chart",
+  "statement": "theorem smallStrictHenselization_indEtale_of_affine_chart\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]\n    (s : Spec (.of Ω) ⟶ S) (R : CommRingCat.{u})\n    (i : Spec R ⟶ S) [IsOpenImmersion i]\n    (hs : s (IsLocalRing.closedPoint Ω) ∈ Set.range i)\n    (e : Spec (.of A) ≅ strictHenselizationScheme s)\n    (a : R →+* A)\n    (ha : Spec.map (CommRingCat.ofHom a) ≫ i =\n      e.hom ≫ strictHenselizationStructuralMap s) :\n    letI : Algebra R A := a.toAlgebra\n    Algebra.IndEtale R A",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-13fea",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261021T061122-L-1709106",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-13fea",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261021T061122-L-1709106",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
+ }
+}

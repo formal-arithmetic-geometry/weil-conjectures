@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 
 /-! # The canonical coordinate ring of a geometric strict-local base is ind-etale
@@ -64,7 +64,7 @@ theorem strictLocalBase_indEtale {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAl
   let A := Scheme.strictHenselizationRing s
   let ρ : R →+* A := (Spec.preimage b).hom
   have hρ : ρ.IndEtale := by
-    have h := Scheme.strictHenselization_indEtale_of_affine_chart
+    have h := Scheme.smallStrictHenselization_indEtale_of_affine_chart
       s R i ⟨y, hy⟩ (Iso.refl _) ρ (by
         change Spec.map (Spec.preimage b) ≫ i = 𝟙 _ ≫ _
         simpa only [Spec.map_preimage, Category.id_comp] using hb)

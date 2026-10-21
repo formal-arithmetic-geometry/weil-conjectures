@@ -14,7 +14,7 @@ import WeilConjectures.RingTheory.FiniteRingMapQuasiFinite
 import Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition
 import Sheaf.RingTheory.IndEtaleStability
 import WeilConjectures.RingTheory.QuasiFiniteFourRings
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import WeilConjectures.RingTheory.FiniteLocalHenselian
 import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 import WeilConjectures.Mathlib.RingTheory.Henselian
@@ -23,7 +23,6 @@ import Mathlib.FieldTheory.IsSepClosed
 import Mathlib.RingTheory.Etale.Basic
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 import Sheaf.RingTheory.IndEtaleUniverseTransport
-import WeilConjectures.AlgebraicGeometry.StrictHenselization
 
 /-!
 # Strict henselization under a quasi-finite ring map

@@ -6,10 +6,11 @@ module
 
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.Algebra.Regular.SMul
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 
@@ -74,7 +75,7 @@ theorem regular_divisor_strict_local_limit
   let b : R ⟶ H := Spec.preimage (strictHenselizationStructuralMap barY)
   have hb : Spec.map b = strictHenselizationStructuralMap barY := Spec.map_preimage _
   have hi : b.hom.IndEtale := by
-    have h := strictHenselization_indEtale_of_affine_chart barY R (𝟙 (Spec R))
+    have h := smallStrictHenselization_indEtale_of_affine_chart barY R (𝟙 (Spec R))
       (by simp) (Iso.refl _) b.hom (by
         change Spec.map b ≫ 𝟙 (Spec R) = strictHenselizationStructuralMap barY
         rw [Category.comp_id]

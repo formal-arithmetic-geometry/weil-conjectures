@@ -19,7 +19,7 @@ import WeilConjectures.RingTheory.StrictHenselizationNoetherian
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import WeilConjectures.RingTheory.StrictHenselizationFaithfullyFlat

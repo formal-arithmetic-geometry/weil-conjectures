@@ -69,7 +69,7 @@
   {
    "text": "The affine-chart ind-etale theorem applied to $\\operatorname{Spec}A$ and $\\operatorname{Spec}B$ gives that $A\\to R$ and $B\\to H$ are ind-etale. By base-change stability $B\\to C=R\\otimes_A B$ is ind-etale. The localization $C\\to D$ is ind-etale as well: $C_{\\mathfrak n}=\\varinjlim_{f\\notin\\mathfrak n}C_f$, with the system directed by taking products of denominators. A fraction $c/f$ is represented in $C_f$, and an equality of two fractions holds after further inverting one element outside $\\mathfrak n$, which verifies the colimit description. Each $C\\to C_f$ is etale of finite presentation by the principal-localization clause applied to the identity etale $C$-algebra. Thus it is ind-etale by definition. Composition stability now makes $B\\to D$ ind-etale. We have exhibited $D$ and $H$ as ind-etale algebras over the same ring $B$.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
     "lem-weil-pbc-ind-etale-stability",
     "lem-weil-pbc-etale-algebra-finite-presentation-localization",
     "def-weil-pbc-ind-etale-algebra"
@@ -117,14 +117,14 @@
   "lem-weil-pbc-quasi-finite-four-rings",
   "lem-weil-pbc-separable-first-purely-inseparable",
   "lem-weil-pbc-sepclosed-finite-extension-unique-embedding",
-  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
   "lem-weil-pbc-strict-henselization-functoriality",
   "thm-weil-pbc-weak-etale-strict-local"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 05WR (lemma-quasi-finite-strict-henselization), with its henselian-local construction expanded using Tags 00PN, 04GJ and 04GH; the final uniqueness is implemented by more-algebra.tex Tag 092Z using existing ind-etale tool nodes."
+  "place": "Tag 05WR (lemma-quasi-finite-strict-henselization), with its henselian-local construction expanded using Tags 00PN, 04GJ and 04GH; the final uniqueness is implemented by more-algebra.tex Tag 092Z using existing ind-etale tool nodes. G3, 2026-10-20: the small-model affine-chart call uses the proved corollary of the upstream full-colimit theorem after retirement of the old Sheaf copy."
  },
  "mathlib_searches": [
   {
@@ -311,5 +311,15 @@
   "result": "pass",
   "note": "Statement, dependencies, source alignment, docstrings, edge cases, and canonical localization constraints checked; per-file scompile passed cleanly."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-13fea",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261021T061122-L-1709106",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
+ }
 }

@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 import Sheaf.Paper.StrictHenselizationPointEvaluationProperties
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 
 /-! # Ind-etale affine strict-local base change
 
@@ -60,7 +60,7 @@ private theorem structural_proAffineEtale
   let a := Spec.preimage (strictHenselizationStructuralMap s ≫ S.isoSpec.hom)
   have ha : Spec.map a ≫ S.isoSpec.inv = strictHenselizationStructuralMap s := by
     simp only [a, Spec.map_preimage, Category.assoc, Iso.hom_inv_id, Category.comp_id]
-  have hR := strictHenselization_indEtale_of_affine_chart s Γ(S, ⊤) S.isoSpec.inv
+  have hR := smallStrictHenselization_indEtale_of_affine_chart s Γ(S, ⊤) S.isoSpec.inv
     ⟨S.isoSpec.hom (s (IsLocalRing.closedPoint Ω)), by simp⟩
     (Iso.refl _) a.hom (by
       change Spec.map a ≫ S.isoSpec.inv = 𝟙 _ ≫ strictHenselizationStructuralMap s

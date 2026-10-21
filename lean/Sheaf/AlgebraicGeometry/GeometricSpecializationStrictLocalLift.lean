@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
@@ -42,7 +42,7 @@ Proof:
 `strictHenselizationResidue`. Choose an affine open chart containing s. Every point
 of a local spectrum generalizes its closed point, so the structural morphism factors
 through this chart.
-2. `strictHenselization_indEtale_of_affine_chart` makes the resulting chart ring map
+2. `smallStrictHenselization_indEtale_of_affine_chart` makes the resulting chart ring map
 ind-etale, hence weakly etale. Composing with the open immersion shows that the
 structural morphism is weakly etale and in particular flat.
 3. Flat morphisms lift generalizations. Lift t along the structural morphism starting
@@ -83,7 +83,7 @@ theorem exists_geometricPoint_strictHenselization_lift
   have hb : Spec.map (CommRingCat.ofHom b) = g := Spec.map_preimage g
   let : Algebra R H := b.toAlgebra
   have : Algebra.IndEtale R H :=
-    strictHenselization_indEtale_of_affine_chart barS R i
+    smallStrictHenselization_indEtale_of_affine_chart barS R i
       (by simpa only [hbarS] using hs) (Iso.refl _) b
       (by simpa only [hb, Iso.refl_hom, Category.id_comp] using hg)
   have : Algebra.WeaklyEtale R H := inferInstance

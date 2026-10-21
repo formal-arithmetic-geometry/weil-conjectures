@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.ProjectiveFiniteAffineNeighbourhood
 import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import Sheaf.AlgebraicGeometry.ArtinTensorEtaleAcyclic
 import Sheaf.Paper.StrictHenselizationFunctoriality

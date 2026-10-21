@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import WeilConjectures.RingTheory.MapIntoHenselianColimit
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 
 /-! # Lifting compatible residue embeddings through strict henselizations
 
@@ -178,7 +178,7 @@ theorem Etale.exists_compatibleStrictHenselizationResidueLift
       Subsingleton.elim (ι (ν (IsLocalRing.closedPoint Ω))) (IsLocalRing.closedPoint k)]
       using hσ
   have : Algebra.IndEtale R A :=
-    strictHenselization_indEtale_of_affine_chart (ν ≫ ι ≫ σ) R i hs eA a ha
+    smallStrictHenselization_indEtale_of_affine_chart (ν ≫ ι ≫ σ) R i hs eA a ha
   have hspec :
       ρB ≫ Spec.map (CommRingCat.ofHom ((IsLocalRing.residue B).comp b)) =
       ρB ≫ Spec.map (CommRingCat.ofHom

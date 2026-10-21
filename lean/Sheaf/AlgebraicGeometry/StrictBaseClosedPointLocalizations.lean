@@ -16,7 +16,7 @@ import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
 import Mathlib.FieldTheory.SeparableClosure
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 
 /-! # Strict localizations above the closed point of a strict-local base change
@@ -82,7 +82,7 @@ private theorem structural_weaklyEtale
   let α : R ⟶ strictHenselizationRing y := Spec.preimage l
   have hα : Spec.map α = l := Spec.map_preimage l
   have hind : α.hom.IndEtale :=
-    strictHenselization_indEtale_of_affine_chart y R i hmem (Iso.refl _)
+    smallStrictHenselization_indEtale_of_affine_chart y R i hmem (Iso.refl _)
       α.hom (by
         change Spec.map α ≫ i = 𝟙 _ ≫ strictHenselizationStructuralMap y
         rw [Category.id_comp, hα]

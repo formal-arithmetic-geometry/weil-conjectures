@@ -23,7 +23,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselization
 
 import Sheaf.Paper.StrictHenselizationFunctoriality
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
 
 /-! # The geometric core of a smooth strict localization
@@ -378,7 +378,7 @@ private theorem smooth_strict_local_core_function
   obtain ⟨_, _, _, _, _, _, _, b, hb, _, _⟩ := hpres
   let : Algebra R H := b.hom.toAlgebra
   have hind : Algebra.IndEtale R H :=
-    strictHenselization_indEtale_of_affine_chart s R j
+    smallStrictHenselization_indEtale_of_affine_chart s R j
       (hsj (Set.mem_range_self (IsLocalRing.closedPoint Ω))) (Iso.refl _) b.hom (by
         change Spec.map b ≫ j = 𝟙 _ ≫ strictHenselizationStructuralMap s
         simpa only [Category.id_comp] using hb)

@@ -26,12 +26,12 @@
  ],
  "proof": [
   {
-   "text": "Use strictHenselizationResidue, clause (1) of strict-henselization functoriality, with the residue-field embedding induced by the geometric point. It gives a strictly henselian local structure on A = strictHenselizationRing t, a unique compatible residue identification, and the resulting marked closed-point lift l with l followed by j equal to t. Choose an affine open Spec B of T through t. Since every point of Spec A generalizes its closed point, j factors through this open. Apply strictHenselization_indEtale_of_affine_chart to the spectrum preimage of that factorization. The resulting ring map is ind-etale and therefore weakly etale. The affine ring/scheme criterion and composition with the etale open immersion make j weakly etale.",
+   "text": "Use strictHenselizationResidue, clause (1) of strict-henselization functoriality, with the residue-field embedding induced by the geometric point. It gives a strictly henselian local structure on A = strictHenselizationRing t, a unique compatible residue identification, and the resulting marked closed-point lift l with l followed by j equal to t. Choose an affine open Spec B of T through t. Since every point of Spec A generalizes its closed point, j factors through this open. Apply smallStrictHenselization_indEtale_of_affine_chart to the spectrum preimage of that factorization. The resulting ring map is ind-etale and therefore weakly etale. The affine ring/scheme criterion and composition with the etale open immersion make j weakly etale.",
    "uses": [
     "lem-weil-pbc-strict-henselization-functoriality",
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
     "lem-weil-pbc-ind-etale-stability",
     "def-weil-pbc-ind-etale-algebra",
     "def-weil-pbc-proetale-site",
@@ -115,7 +115,7 @@
   "lem-weil-pbc-strict-henselization-functoriality",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-structural-map",
-  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
   "lem-weil-pbc-ind-etale-stability",
   "def-weil-pbc-ind-etale-algebra",
   "def-weil-pbc-proetale-site",
@@ -136,7 +136,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0993, lemma-classical-point, proof; Tag 0991, section-points, geometric-stalk paragraph; Lean implementation by E4, with weakly etale diagonal uniqueness and reflective sheafification for colimit preservation"
+  "place": "Tag 0993, lemma-classical-point, proof; Tag 0991, section-points, geometric-stalk paragraph; Lean implementation by E4, with weakly etale diagonal uniqueness and reflective sheafification for colimit preservation G3, 2026-10-20: the small-model affine-chart call uses the proved corollary of the upstream full-colimit theorem after retirement of the old Sheaf copy."
  },
  "mathlib_searches": [
   {
@@ -337,13 +337,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-a1ac7",
-  "group": "E4",
+  "reviewer": "C-13fea",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261018T062735-L-644046",
-  "kind": "proof",
-  "note": "independent cc review: delivered ProEtaleClassicalStalk.lean (signature byte-equal to clone, axioms clean, compiles) and its importer ProEtaleComparisonStalk compiled against it; node proof/proof_deps vs the Lean helpers; removed ProEtaleSiteComparison import vs dag/units (sk-prop-sf-comparison realized empty; the comparison-morphism unit does not route through this item)"
+  "landing": "20261021T061122-L-1709106",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
  }
 }

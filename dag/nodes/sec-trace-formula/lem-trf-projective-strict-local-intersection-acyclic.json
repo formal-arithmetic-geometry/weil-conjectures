@@ -34,7 +34,7 @@
    "text": "The images of $x$ and $u$ lie in the open $V$, and so do all their generizations, hence the whole images of the canonical maps $P_{(x)}\\to P$ and $P_{(u)}\\to P$; so both factor through $V$, and $x,u$ are geometric points of $V$. The open immersion $V\\hookrightarrow P$ is etale, so ind-etale invariance [lem-trf-ind-etale-strict-local-invariance] identifies $V_{(x)}\\cong P_{(x)}$ and $V_{(u)}\\cong P_{(u)}$ over $P$. Write $P_{(x)}=\\operatorname{Spec}B_x$ and $P_{(u)}=\\operatorname{Spec}B_u$ with the $R$-algebra structures given by these factorizations through $V=\\operatorname{Spec}R$; they are ind-etale $R$-algebras by [lem-weil-pbc-strict-henselization-affine-chart-ind-etale]. By clause (1) of [lem-weil-pbc-strict-henselization-functoriality], each of $B_x,B_u$ is a strictly henselian local ring [def-weil-pbc-henselian-terminology]. A local ring has connected spectrum, so $\\operatorname{Spec}B_x$ (resp. $\\operatorname{Spec}B_u$) is its own unique connected component and that component is strictly henselian: this is the second, equivalent form of the etale-acyclicity hypothesis of [lem-trf-artin-tensor-etale-acyclic].",
    "uses": [
     "lem-trf-ind-etale-strict-local-invariance",
-    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
     "lem-weil-pbc-strict-henselization-functoriality",
     "def-weil-pbc-henselian-terminology",
     "lem-trf-artin-tensor-etale-acyclic"
@@ -69,13 +69,13 @@
   "lem-pd-projective-finite-affine-neighbourhood",
   "lem-trf-artin-tensor-etale-acyclic",
   "lem-trf-ind-etale-strict-local-invariance",
-  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
   "lem-weil-pbc-strict-henselization-functoriality"
  ],
  "proof_origin": {
   "by": "document",
   "document": "https://www.mathi.uni-heidelberg.de/~schmidt/papers/algebraic_tame_site.pdf",
-  "place": "Hübner–Schmidt Proposition 7.14 (i), Definition 7.8, Proposition 7.9, Theorem 7.10; common-affine specialization following Orgogozo Proposition 2.3"
+  "place": "Hübner–Schmidt Proposition 7.14 (i), Definition 7.8, Proposition 7.9, Theorem 7.10; common-affine specialization following Orgogozo Proposition 2.3 G3, 2026-10-20: the small-model affine-chart call uses the proved corollary of the upstream full-colimit theorem after retirement of the old Sheaf copy."
  },
  "mathlib_searches": [
   {
@@ -203,5 +203,15 @@
   "result": "pass",
   "note": "Lean signature matches node clause by clause: IsAffine B, IsProjective p (H-projective + quasi-compact), independent geometric points Ωx/Ωu : Type u, W = pullback over P of the upstream canonical strictHenselizationStructuralMap (unique by its characterization) whose source is the real affine-neighbourhood colimit strictHenselizationScheme (recorded Sheaf module re-exports upstream: one definition), arbitrary sheaf on W's small étale site with IsTorsionAbelianSheaf, IsZero of Etale.cohomology AddCommGrpCat.{u+1} W i on single 0 A for all i>0. No extra hypotheses; edge cases (empty W, empty P, i=1, A=0, coincident points) covered; universes bound per convention. Proof only sorry; source/blueprint docstrings and 3-step proof present; lean.statement verbatim; added stmt_dep def-weil-pbc-strict-henselization-structural-map is recorded and imported. nt_compile --json on snapshot file: rc 0, 6.6 s, no errors/warnings (error path sanity-checked). No duplicate found. Minor: the 'Second reading by Q24' section was written by the author (dispatcher would not start another agent); covered by this independent review. Statement text does not cite the added structural-map dependency; no tool requires it."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-13fea",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261021T061122-L-1709106",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
+ }
 }

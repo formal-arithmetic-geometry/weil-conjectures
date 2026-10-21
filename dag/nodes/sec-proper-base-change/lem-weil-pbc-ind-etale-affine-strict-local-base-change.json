@@ -49,7 +49,7 @@
   {
    "text": "For any affine S and geometric point s, take the global affine chart S.isoSpec.inv. The affine-chart ind-etaleness theorem, with the coordinate map obtained by Spec.preimage, says that the strict-local structural map is pro-affine-etale. The equivalence proAffineEtale_Spec_iff and invariance under the affine-spectrum isomorphism translate between ring and scheme formulations. For a pointed map h over an affine pro-affine-etale f, composition and cancellation in the source-library proAffineEtale API make h pro-affine-etale: h followed by the target structural map equals the source structural map followed by f. This is precisely the ind-etale relative-map argument, expressed on affine schemes.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
     "def-weil-pbc-ind-etale-algebra"
    ],
    "elementary": false
@@ -76,7 +76,7 @@
  "proof_deps": [
   "def-pc-fibre-product",
   "def-weil-pbc-ind-etale-algebra",
-  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
   "lem-weil-pbc-strict-henselization-functoriality",
   "lem-weil-pbc-strict-henselization-local-structure",
   "lem-weil-pbc-strict-henselization-point-evaluation-properties",
@@ -85,7 +85,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 0GIP, case (2); alternative ind-etale proof using Tag 04HX and Olivier, more-algebra.tex theorem-olivier (Tag 092Z). Lean proof by F5 uses the existing proAffineEtale scheme API for affine base change and cancellation, avoiding explicit tensor-product coordinates."
+  "place": "Tag 0GIP, case (2); alternative ind-etale proof using Tag 04HX and Olivier, more-algebra.tex theorem-olivier (Tag 092Z). Lean proof by F5 uses the existing proAffineEtale scheme API for affine base change and cancellation, avoiding explicit tensor-product coordinates. G3, 2026-10-20: the small-model affine-chart call uses the proved corollary of the upstream full-colimit theorem after retirement of the old Sheaf copy."
  },
  "mathlib_searches": [
   {
@@ -184,13 +184,13 @@
   "note": "The four functorial maps are existentially supplied and characterized by structural-map and canonical geometric-point evaluation equations. The unique isomorphism is characterized by its two projections and its structural-map equation. The added statement dependency is the existing landed evaluation construction; no new notion is defined."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F5",
+  "reviewer": "C-13fea",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261018T062750-L-649294",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T061122-L-1709106",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
  }
 }

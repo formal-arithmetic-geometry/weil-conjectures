@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import WeilConjectures.ZetaSeries
 import Sheaf.AlgebraicGeometry.StrictLocalCoefficientChart
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 
 /-!
 # Coefficient field and an étale presentation of a strict localization
@@ -40,7 +40,7 @@ second paragraph (blueprint: lem-kun-strict-local-coefficient-presentation).
 Proof: take the affine chart and compatible coefficient field from
 `exists_strictLocal_coefficient_chart`. The affine-spectrum chart contains the point, and
 its composite with the spectrum of the chosen structural ring map is the strict-local
-structural map. Apply `strictHenselization_indEtale_of_affine_chart` with the identity
+structural map. Apply `smallStrictHenselization_indEtale_of_affine_chart` with the identity
 identification of the strict-local spectrum. Unpack the ind-étale ring presentation to a
 small filtered ring diagram with compatible maps from the chart ring and colimit vertex
 the actual strict-local ring. Regard those structural maps as objects under the chart
@@ -90,7 +90,7 @@ theorem exists_strictLocal_coefficient_presentation
     rfl
   let : Algebra Γ(U.toScheme, ⊤) (strictHenselizationRing s) := a.hom.toAlgebra
   have hind : Algebra.IndEtale Γ(U.toScheme, ⊤) (strictHenselizationRing s) :=
-    strictHenselization_indEtale_of_affine_chart s Γ(U.toScheme, ⊤)
+    smallStrictHenselization_indEtale_of_affine_chart s Γ(U.toScheme, ⊤)
       (U.toScheme.isoSpec.inv ≫ U.ι) hi (Iso.refl _) a.hom (by simpa using he)
   have hh : a.hom.IndEtale := hind
   obtain ⟨I, hI, hFilt, D, t, b, hb, hStages⟩ :=

@@ -18,7 +18,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtale
 
@@ -41,7 +41,7 @@ private theorem small_strictHenselization_structural_flat
     RingHom.Flat b.hom := by
   let : Algebra R (strictHenselizationRing barY) := b.hom.toAlgebra
   have he : Algebra.IndEtale R (strictHenselizationRing barY) :=
-    strictHenselization_indEtale_of_affine_chart
+    smallStrictHenselization_indEtale_of_affine_chart
       (A := strictHenselizationRing barY) barY R (𝟙 _)
       ⟨barY (IsLocalRing.closedPoint Ω), rfl⟩ (Iso.refl _) b.hom
       (by

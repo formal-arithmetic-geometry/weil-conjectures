@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootPurityData
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
 import WeilConjectures.AlgebraicGeometry.Morphisms.RegularIntegralDivisorEtalePurity
 import Mathlib.AlgebraicGeometry.Morphisms.IsIso
@@ -39,7 +39,7 @@ private theorem finiteEtaleModel_small_strictHenselization_flat
     RingHom.Flat b.hom := by
   let : Algebra R (strictHenselizationRing barY) := b.hom.toAlgebra
   have he : Algebra.IndEtale R (strictHenselizationRing barY) :=
-    strictHenselization_indEtale_of_affine_chart
+    smallStrictHenselization_indEtale_of_affine_chart
       (A := strictHenselizationRing barY) barY R (𝟙 _)
       ⟨barY (IsLocalRing.closedPoint Ω), rfl⟩ (Iso.refl _) b.hom
       (by

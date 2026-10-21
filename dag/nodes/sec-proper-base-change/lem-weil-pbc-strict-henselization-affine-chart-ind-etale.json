@@ -23,14 +23,15 @@
  ],
  "proof": [
   {
-   "text": "Factor the geometric point through i using the singleton spectrum of the field. Apply etale_local_ring_triples to obtain cofilteredness of affine pointed neighbourhoods, cofinality of the chart subcategory, the equivalence E with residue triples, the diagram comparison and compatible universal colimit cocones cn and c. Transfer cofilteredness to the full chart subcategory and filteredness along E. Cocone naturality shows the composites from R agree along every morphism; a common filtered successor shows all composites agree, giving rho.",
+   "text": "Factor the geometric point through the chart. Apply etale_local_ring_triples for the chart category equivalence E, diagram comparison, universal cocones and compatible comparison isomorphism t. Apply etaleResidueTriples_filtered_colimit to obtain filteredness, its ring colimit c and compatible map rho from R.",
    "uses": [
-    "lem-weil-pbc-etale-local-ring-triples"
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-etale-triples-filtered-colimit"
    ],
    "elementary": false
   },
   {
-   "text": "The inverse small-model equivalence followed by strictHenselizationAffineInclusion is an equivalence onto the full affine category. Its opposite final-functor colimit isomorphism cmp0 identifies the actual small representative colimit strictHenselizationRing with the full affine colimit. Compose with the unique isomorphism to cn and its given isomorphism to c to obtain ringIso. On any small representative, the inverse coprojection equation for cmp0 and the Spec-global-sections identification turn the full affine cone structural map into the characterizing composite of exists_strictHenselizationStructuralMap. This proves compatibility of the small and full structural morphisms.",
+   "text": "Use isColimitSmallStrictHenselizationCocone to compare the full affine colimit with cn, then t and uniqueness of the triples colimit to obtain ringIso. On a small representative isomorphic to the pointed chart, the diagram comparison and cocone equations identify the R-map. The strictHenselizationStructuralMap_eq equation for the full affine cone and naturality of isoSpec identify its spectrum with strictLocalizationToBase.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-strict-henselization-structural-map"
@@ -38,25 +39,21 @@
    "elementary": false
   },
   {
-   "text": "Use the pointed chart object in the chart subcategory. The R-map clause of the diagram comparison and its coprojection equation identify the image of the chart coprojection with rho. Cancel ringIso.hom to obtain the chart coprojection into the small colimit. Taking spectra and using the structural-map comparison from the preceding step shows that Spec(rho followed by ringIso.inv), followed by i, is strictHenselizationStructuralMap.",
-   "uses": [],
-   "elementary": true
-  },
-  {
-   "text": "The affine category is essentially small by its equivalence with the ring-written representative category; the full chart subcategory inherits essential smallness. Whisker c by the inverse small-model equivalence of the opposite chart category followed by E, obtaining a small filtered ring colimit presentation. Full faithfulness of Spec sends the prescribed e to a ring isomorphism eRing to A. Transport the cocone to A along ringIso.symm followed by eRing. Cancel the mono i in ha and apply Spec faithfulness to identify the transported R-map with a. The structural maps of triples define a natural transformation from constant R; every stage is etale by HasRingHomProperty.Spec_iff and each composite with its cocone leg equals a. RingHom.IndEtale.iff_exists gives the conclusion.",
+   "text": "Take a small model of the chart category, transport its filtered ring colimit to A using e and ringIso, and form the compatible natural transformation from constant R using the triple structure maps. Cancel the open immersion i and use Spec faithfulness to identify the induced map with a. Each stage is etale by the affine criterion; RingHom.IndEtale.iff_exists proves ind-etaleness.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-etale-triples-filtered-colimit",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/algebra.tex",
-  "place": "Tag 04HX (lemma-describe-etale-local-ring), affine chart and triples colimit; Tag 04GW (lemma-strict-henselization-different); C4 repair on 2026-10-17 adds the small representative colimit comparison and proves structural-map compatibility against upstream e47efb5a5, adapting returned commit 3cc76cfb5."
+  "place": "Tags 04HX and 04GW; G3, 2026-10-20, records the existing adopted upstream proof after retiring the Sheaf copy. No upstream proof is edited."
  },
  "mathlib_searches": [
   {
@@ -95,14 +92,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationAffineChartIndEtale.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationAffineChartIndEtale.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselization_indEtale_of_affine_chart",
-  "statement": "theorem strictHenselization_indEtale_of_affine_chart\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]\n    (s : Spec (.of Ω) ⟶ S) (R : CommRingCat.{u})\n    (i : Spec R ⟶ S) [IsOpenImmersion i]\n    (hs : s (IsLocalRing.closedPoint Ω) ∈ Set.range i)\n    (e : Spec (.of A) ≅ strictHenselizationScheme s)\n    (a : R →+* A)\n    (ha : Spec.map (CommRingCat.ofHom a) ≫ i =\n      e.hom ≫ strictHenselizationStructuralMap s) :\n    letI : Algebra R A := a.toAlgebra\n    Algebra.IndEtale R A",
+  "statement": "theorem strictHenselization_indEtale_of_affine_chart\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω] [CommRing A]\n    (s : Spec (.of Ω) ⟶ S) (R : CommRingCat.{u})\n    (i : Spec R ⟶ S) [IsOpenImmersion i]\n    (hs : s (IsLocalRing.closedPoint Ω) ∈ Set.range i)\n    (e : Spec (.of A) ≅ strictLocalization s)\n    (a : R →+* A)\n    (ha : Spec.map (CommRingCat.ofHom a) ≫ i =\n      e.hom ≫ strictLocalizationToBase s) :\n    letI : Algebra R A := a.toAlgebra\n    Algebra.IndEtale R A",
   "branch": "sheaf-dag",
   "by": "K2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "G3 retirement, 2026-10-20: the upstream theorem uses the full affine colimit. The small-model corollary is lem-weil-pbc-small-strict-henselization-ind-etale, proved by the canonical comparison over the base."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -115,14 +113,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C4",
+  "reviewer": "C-13fea",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261017T003416-L-3313282",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T061122-L-1709106",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
  },
  "lean_audit": {}
 }

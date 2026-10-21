@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Sheaf.Paper.StrictHenselizationFunctoriality
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Reflective
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import Sheaf.RingTheory.IndEtaleStability
 
 /-!
@@ -171,7 +171,7 @@ private theorem classicalStalk_weaklyEtale
     IsOpenImmersion.lift_fac i _ _
   let a := Spec.preimage f
   have ha : Spec.map a = f := Spec.map_preimage _
-  have he := strictHenselization_indEtale_of_affine_chart t B i
+  have he := smallStrictHenselization_indEtale_of_affine_chart t B i
     (by convert hti using 1; exact congrArg t (Subsingleton.elim _ _))
     (Iso.refl _) a.hom (by
       change Spec.map a ≫ i = 𝟙 _ ≫ strictHenselizationStructuralMap t

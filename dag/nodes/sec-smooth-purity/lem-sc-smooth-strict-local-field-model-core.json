@@ -88,7 +88,7 @@
   {
    "text": "Apply the affine-chart ind-etale theorem to the structural A-map b of the chart presentation. The proved source-library ind-etale-to-weakly-etale instance (Algebra.IndEtale.weaklyEtale in WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale) makes the ring flat over A. Since A is a domain and the strict localization is nonzero, flatness implies torsion freeness and faithfulness: multiplication by each nonzero a in A is injective, by tensoring its injective multiplication map on A. Thus b is injective. The injection into Q=Frac(R) extends by IsFractionRing.lift to i:Y.functionField -> Q, since functionField_isFractionRing_of_isAffineOpen identifies Y.functionField as the fraction field of A. The lift equation on A, together with IsAffineOpen.fromSpecStalk_eq_fromSpecStalk and the structural equation of b, proves the required equality of scheme morphisms.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
     "lem-weil-pbc-ind-etale-stability",
     "def-weil-pbc-flat-ring-map",
     "def-pc-integral-scheme",
@@ -103,7 +103,7 @@
   {
    "text": "The affine-chart theorem gives Algebra.IndEtale A R for the structural b. Give Q the Y.functionField-algebra induced by i; the lift equation supplies the compatible A-scalar tower. Apply the already proved source-library theorem Algebra.IndEtale.isSeparable_of_algHom_to_isLocalRing (WeilConjectures.RingTheory.ProEtale.IndEtale) to R -> Q, with fraction field Y.functionField of A. Every image of r in R is separable, hence integral, over Y.functionField. Express each element of Q as a quotient of images of elements of R by IsFractionRing.div_surjective. Integral elements over a field are closed under products and inverses, hence each quotient is algebraic. This proves the conclusion with exactly the algebra structure induced by i.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
     "def-weil-pbc-ind-etale-algebra"
    ],
    "elementary": false,
@@ -128,7 +128,7 @@
   "lem-kun-dimension-formula",
   "lem-sc-strict-henselization-dimension",
   "def-kun-dimension",
-  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
   "lem-weil-pbc-ind-etale-stability",
   "def-weil-pbc-flat-ring-map",
   "def-pc-integral-scheme",
@@ -160,7 +160,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-sc-affine-torsion-cd.md",
-  "place": "Local calculation in dimension d; F3 Lean proof 2026-10-17. The chart comparison uses the canonical strictHenselizationAffineDiagram colimit; regularity and dimension use existing strict-henselization theorems; residue uses functoriality; flatness of the ind-etale chart algebra gives injection and the source ind-etale separability API gives algebraicity of all fractions."
+  "place": "Local calculation in dimension d; F3 Lean proof 2026-10-17. The chart comparison uses the canonical strictHenselizationAffineDiagram colimit; regularity and dimension use existing strict-henselization theorems; residue uses functoriality; flatness of the ind-etale chart algebra gives injection and the source ind-etale separability API gives algebraicity of all fractions. G3, 2026-10-20: the small-model affine-chart call uses the proved corollary of the upstream full-colimit theorem after retirement of the old Sheaf copy."
  },
  "mathlib_searches": [
   {
@@ -203,14 +203,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
+  "reviewer": "C-13fea",
+  "group": "G3",
   "result": "pass",
-  "landing": "20261017T003420-L-3314722",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T061122-L-1709106",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
  },
  "lean_audit": {}
 }

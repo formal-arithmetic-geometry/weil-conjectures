@@ -33,7 +33,7 @@
   {
    "text": "Apply the affine-chart ind-etaleness lemma to $(S,s,U,H_S,a)$ and $(T,t,V,H_T,b)$, with the identity spectrum identifications. Its chart contains the respective geometric point and its required structural-map equality is exactly the factorization in step 1. It gives $A\\to H_S$ and $B\\to H_T$ ind-etale. Since $A\\to B$ is ind-etale by hypothesis, stability under composition makes $A\\to H_T$ ind-etale. Now $H_S,H_T$ are both ind-etale $A$-algebras, and $h$ is the $A$-algebra map checked in step 1. The relative-map clause of ind-etale stability therefore makes $h$ ind-etale, hence weakly etale. This uses no finite-presentation hypothesis on $B$ itself.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
     "lem-weil-pbc-ind-etale-stability"
    ],
    "elementary": false,
@@ -72,7 +72,7 @@
    "text": "Finally let $L=S_{(s)}=\\operatorname{Spec}H_S$ with its canonical structural map $j:L\\to S$. For an affine open $U=\\operatorname{Spec}A$ containing the image of $s$, the local-spectrum argument of step 1 shows that the entire map $j$ factors through $U$. Applying the affine-chart ind-etaleness lemma with the identity $\\operatorname{Spec}H_S=L$ gives $A\\to H_S$ ind-etale. Thus $j$ satisfies the local affine hypothesis at every point of $L$, using the whole affine source $L$ and this one target chart. Functoriality, clause (1), gives the closed geometric lift $\\widetilde s:\\operatorname{Spec}\\Omega\\to L$ of $s$: it is induced by the residue map $H_S\\to\\kappa(s)^{\\mathrm{sep}}\\subset\\Omega$, where the separable closure is taken inside the given geometric field. Apply steps 1--3 to $j$ and $\\widetilde s$. Since $j\\widetilde s=s$, the result is the canonical isomorphism $L_{(\\widetilde s)}\\to S_{(s)}=L$. This proves the localization-again clause for its specified closed geometric point. The inverse-limit construction used throughout is unchanged, being the definition in step 1.",
    "uses": [
     "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-small-strict-henselization-ind-etale",
     "lem-weil-pbc-strict-henselization-functoriality"
    ],
    "elementary": false,
@@ -89,14 +89,14 @@
   "def-weil-pbc-strict-henselization-structural-map",
   "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
   "lem-weil-pbc-strict-henselization-functoriality",
   "thm-weil-pbc-weak-etale-strict-local"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 04HX affine-chart presentation combined with proetale.tex Tags 097J, 097K, 097M, 097N and more-algebra.tex Tag 092Z. This writes the argument using existing DAG tools instead of rebuilding the filtered-colimit proof in algebra.tex Tag 0GIP."
+  "place": "Tag 04HX affine-chart presentation combined with proetale.tex Tags 097J, 097K, 097M, 097N and more-algebra.tex Tag 092Z. This writes the argument using existing DAG tools instead of rebuilding the filtered-colimit proof in algebra.tex Tag 0GIP. G3, 2026-10-20: the small-model affine-chart call uses the proved corollary of the upstream full-colimit theorem after retirement of the old Sheaf copy."
  },
  "mathlib_searches": [
   {
@@ -277,5 +277,15 @@
   "result": "pass",
   "note": "Statement, dependencies, canonical-map clauses, docstrings, edge cases, and compiler evidence checked; no substantive or mechanical findings."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-13fea",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261021T061122-L-1709106",
+  "kind": "interface",
+  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
+ }
 }

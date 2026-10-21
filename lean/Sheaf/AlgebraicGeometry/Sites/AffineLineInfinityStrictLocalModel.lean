@@ -16,7 +16,7 @@ import Mathlib.RingTheory.KrullDimension.Polynomial
 import Mathlib.RingTheory.KrullDimension.Field
 import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso
-import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
 import Mathlib.RingTheory.Flat.Basic
 
@@ -27,6 +27,8 @@ Source: blueprint `thm-sc-affine-torsion-cd`, compactification and local calcula
 
 @[expose] public section
 
+-- The public statement is taken out below; the retained helpers are intentionally private.
+set_option linter.privateModule false
 set_option autoImplicit false
 set_option linter.style.haveILetI false
 set_option backward.isDefEq.respectTransparency false
@@ -150,7 +152,7 @@ private theorem infinity_strictLocal_principalOpen
     rw [Spec.map_preimage]
     exact hl
   letI : Algebra C R := α.toAlgebra
-  have hind : Algebra.IndEtale C R := strictHenselization_indEtale_of_affine_chart t
+  have hind : Algebra.IndEtale C R := smallStrictHenselization_indEtale_of_affine_chart t
     (.of C) c htc (Iso.refl _) α (by simpa only [Iso.refl_hom, Category.id_comp] using hα)
   have hflat : Module.Flat C R := by
     change CommAlgCat.flat C (CommAlgCat.of C R)
