@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal T=D(X_{\\mathrm{pro\\acute et}},\\Lambda)$, $\\mathcal S=\\Dctf(X,\\Lambda)$, $\\mathcal D=\\Loc(\\mathcal S)$ and $\\mathcal T\\prime=\\Loc(\\Dctf(Y,\\Lambda))$. By [det-def-localizing-closure-existence], clauses 1 and 2 applied separately to $X$ and $Y$, $\\mathcal T$ is triangulated with arbitrary small direct sums, and $\\mathcal D$ and $\\mathcal T\\prime$ are full replete triangulated subcategories closed under their ambient small direct sums. For a small family $(K_i)$ in either subcategory, its ambient coproduct belongs to that subcategory by closure. For every test object $L$ of the subcategory, fullness identifies the maps from that coproduct to $L$, and from each $K_i$ to $L$, with the ambient maps; the ambient coproduct universal property therefore remains the coproduct universal property in the subcategory. Thus both subcategories have the required small direct sums. By [def-weil-triangulated-subcategory], each of these full triangulated subcategories, with the shift and the distinguished triangles of $\\mathcal T$ (resp. of $D(Y_{\\mathrm{pro\\acute et}},\\Lambda)$) whose vertices lie in it, is itself a triangulated category, and its inclusion is exact; so $\\mathcal D$ and $\\mathcal T\\prime$ are triangulated categories with arbitrary small direct sums. These are exactly the module-object ambient categories and the defining localizing intersections of [sk-def-localizing-closure], in its fixed indexing universe. In particular $\\mathcal D$ is the smallest such subcategory of $\\mathcal T$ containing $\\mathcal S$, and the functors in the statement have domain $\\mathcal D$ and codomain $\\mathcal T\\prime$.",
+   "text": "Put S = Dctf(X,Lambda) and P = Loc(S). Apply [det-def-localizing-closure-existence] to obtain that P is replete, triangulated and closed under all existing ambient coproducts. The full inclusion is fully faithful and exact by [def-weil-triangulated-subcategory]. Its inherited triangulations are those in the statement.",
    "uses": [
     "det-def-localizing-closure-existence",
     "sk-def-localizing-closure",
@@ -27,19 +27,42 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/_section.md",
-    "place": "Statement and proof: the source and target localizing categories; ambient structures supplied by sk-def-localizing-closure-existence.md, clauses 1 and 2."
+    "place": "node sk-lem-sf-determination, order 1532"
    }
   },
   {
-   "text": "Apply [det-sf-determination-localizing] with ambient domain $\\mathcal T$, generator class $\\mathcal S$, target $\\mathcal T\\prime$, and its explicitly allowed restricted functor domain $\\Loc(\\mathcal S)=\\mathcal D$. Step 1 checks its triangulated-category, coproduct and localizing-closure premises. The functors $F_1,F_2$ are exact and preserve these sums by hypothesis. The phrase transformation of exact functors has precisely the shift-compatible meaning spelled out in that node: if $c_{a,K}:F_a(K[1])\\xrightarrow{\\sim}F_a(K)[1]$ are the given shift isomorphisms, then $c_{2,K}\\eta_{K[1]}=\\eta_K[1]c_{1,K}$. Thus the cited lemma makes $\\mathcal C_\\eta=\\{K\\in\\mathcal D:\\eta_K\\text{ is invertible}\\}$ a triangulated coproduct-closed subcategory. The hypothesis of this item says $\\mathcal S\\subset\\mathcal C_\\eta$. Moreover $\\mathcal C_\\eta$ is closed under isomorphisms, since for an isomorphism $u:K\\to K'$ in $\\mathcal D$ naturality gives $\\eta_{K'}=F_2(u)\\eta_KF_1(u)^{-1}$; it is closed under sums taken in $\\mathcal T$, because by Step 1 these are the sums in $\\mathcal D$; and for a distinguished triangle of $\\mathcal T$ with two vertices in $\\mathcal C_\\eta$ the third lies in the replete triangulated $\\mathcal D$, hence is a triangle of $\\mathcal D$, hence lies in $\\mathcal C_\\eta$. So $\\mathcal C_\\eta$ is one of the full replete triangulated subcategories of $\\mathcal T$ intersected in [sk-def-localizing-closure], whatever repleteness convention is read into the minimality clause of the cited lemma. The final implication of the cited statement, equivalently this minimality, therefore gives $\\Loc(\\mathcal S)\\subset\\mathcal C_\\eta$, which is the required invertibility at every $K\\in\\Loc(\\Dctf(X,\\Lambda))$. No extension of either functor to the ambient $\\mathcal T$ is asserted or needed.",
+   "text": "Apply the proved small-support argument of [lem-exc-coproduct-preservation-universe-extension] to each restricted-domain functor. In any existing coproduct the nonzero summands inject into its endomorphisms by coordinate idempotents. Thus their index type is small in the Hom universe u+1. Remove zero summands, shrink this support, use the assumed coproduct preservation and restore zero summands. This gives preservation of every existing coproduct indexed in the ambient object universe u+2, without asserting existence of all such coproducts. The recorded Lean helpers are private, so their complete proofs are reproduced as private helpers in this module.",
    "uses": [
-    "det-sf-determination-localizing",
-    "sk-def-localizing-closure"
+    "lem-exc-coproduct-preservation-universe-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/det-sf-determination-localizing.md",
-    "place": "Statement, restricted-domain alternative and final consequence; its proof realizes the unit proof through shifts, cones (Stacks Tag 014A), direct sums, and minimality."
+    "document": "lean/WeilConjectures/CategoryTheory/CompactTestsRightAdjointCoproducts.lean",
+    "place": "Private helpers coproduct_small_support and preservesCoproducts_of_small; also the private helpers in lean/Sheaf/Paper/UnboundedLocalizingPullback.lean."
+   }
+  },
+  {
+   "text": "The upstream NatTrans.isoLocus instances make the isomorphism locus replete and triangulated: shift compatibility gives shift stability, zero is carried to zero, and [lem-sf-triangle-two-out-of-three] gives triangle closure. Map this property along the fully faithful exact inclusion P.ι into the ambient derived category; Mathlib ObjectProperty.map preserves triangulated structure and is replete. For a diagram of objects in this image with an existing ambient coproduct, lift the diagram to P using repleteness. The inclusion creates its coproduct by ambient closure of P. Lift the witnessing isomorphisms to see each component of the diagram lies in isoLocus. Mathlib isIso_app_coconePt_of_preservesColimit, using Step 2, gives invertibility at its colimit. The preserved colimit comparison puts the ambient coproduct in the image. Consequently the image of isoLocus is a localizing ambient property.",
+   "uses": [
+    "lem-sf-triangle-two-out-of-three",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/_section.md",
+    "place": "node sk-lem-sf-determination, order 1532"
+   }
+  },
+  {
+   "text": "Each ambient generator K has its canonical lift to P, by the containment clause of [det-def-localizing-closure-existence]; hη makes its component invertible, so S is contained in the ambient image of isoLocus. The defining intersection [sk-def-localizing-closure] puts every source object in this ambient image. Lift its witnessing isomorphism through P.ι and apply repleteness of isoLocus. This proves every component invertible, without extending either functor to the ambient derived category.",
+   "uses": [
+    "det-def-localizing-closure-existence",
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/_section.md",
+    "place": "node sk-lem-sf-determination, order 1532"
    }
   }
  ],
@@ -47,12 +70,13 @@
   "det-def-localizing-closure-existence",
   "sk-def-localizing-closure",
   "def-weil-triangulated-subcategory",
-  "det-sf-determination-localizing"
+  "lem-exc-coproduct-preservation-universe-extension",
+  "lem-sf-triangle-two-out-of-three"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/sk-lem-sf-determination.proof.md",
-  "place": "Entire proof paragraph, using its existing generic detail det-sf-determination-localizing after checking the ambient categories."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-sf-determination/_section.md",
+  "place": "Blueprint proof: shifts, cones, sums and minimality. Lean realization by W7 uses the upstream isoLocus instances and ambient ObjectProperty.map; the existing proved small-support universe-extension criterion supplies the index-universe bridge."
  },
  "mathlib_searches": [
   {
@@ -180,5 +204,15 @@
   "group": "NR",
   "result": "pass",
   "note": "isIso_app_of_constructibleFiniteTor matches sk-lem-sf-determination clause by clause: admissible Λ via IsLocalizingAdmissibleCoefficient; F₁,F₂ on localizingClosureProEtale X/Y full subcategories (restricted domain, inherited triangulations); exact = CommShift+IsTriangulated; sums = PreservesColimitsOfShape Discrete I for I : Type (u+1) (closure uses existing u+2-indexed coproducts, but the small-nonzero-support argument (UnboundedLocalizingPullback.preservesCoproducts_of_small) makes u+1 preservation sufficient, so the statement is true and general); η with NatTrans.CommShift; hypothesis on the exact Dctf predicate; conclusion iso on all of Loc. Helper instance is a projection of the proved localizingClosure_exists (Prop class, no diamond, no duplicate). Node differs from live only in lean; statement verbatim; ≤100 cols; single sorry. nt_compile --json rc 0 clean in 48.4 s. Advisories: docstring omits the u+2→u+1 sum reduction; LocalizingIsoLocus import unused in the statement (proof dependency); second reading by the same worker; compile time close to the 60 s limit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261021T120906-L-3988794",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
