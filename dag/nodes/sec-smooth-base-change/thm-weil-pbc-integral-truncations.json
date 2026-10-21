@@ -38,144 +38,69 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-adic-tor-flat-cohomology], the all-level Tor hypothesis is equivalent both to flat ambient cohomology and to flat cohomology of the supplied local models. We use the explicit Tor condition and the ambient flatness consequence. By [def-weil-pbc-bounded-constructible-complete], $K$ is intrinsically complete, its canonical reduction tower is uniformly bounded constructible, and it has compatible etale-origin witnesses. The finite, perfect quotient requirements in [def-weil-pbc-adic-coefficient-datum] hold by [lem-weil-pbc-standard-quotients-perfect]. Write $F(X)=X_\\bullet$ for the reduction functor of that datum. It is additive and triangulated: on K-flat complexes the termwise tensor construction preserves shifts and cones, and the datum verifies descent through quasi-isomorphisms. Fix [prop-weil-pbc-rlim-functoriality]. For every complete $X$ the completion-unit comparison $\\operatorname{comp}_X:X\\xrightarrow{\\sim}R\\varprojlim F(X)$ is natural and respects projections by [prop-weil-pbc-koszul-reconstruction].",
+   "text": "Keep the actual ambient truncation functors. Integral stratified-perfect closure gives membership of their values; the standard truncation API gives the cohomology, additivity and distinguished canonical triangle. Exact countable products of completed coefficient module sheaves give the ambient derived products.",
    "uses": [
-    "lem-weil-pbc-adic-tor-flat-cohomology",
-    "def-weil-pbc-bounded-constructible-complete",
-    "lem-weil-pbc-standard-quotients-perfect",
-    "def-weil-pbc-adic-coefficient-datum",
-    "prop-weil-pbc-rlim-functoriality",
-    "prop-weil-pbc-koszul-reconstruction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-    "place": "Proof, canonical reduction tower, coefficient hypotheses and completion comparison"
-   }
-  },
-  {
-   "text": "Apply [prop-weil-pbc-levelwise-truncations] with cutoff $m$: its (TC) follows from our condition for every $q$, and its Noetherian hypothesis is part of the given base assumptions. We obtain the strict derived towers $M^-_\\bullet=\\tau^{\\le m}F(K)$ and $M^+_\\bullet=\\tau^{\\ge m+1}F(K)$, the normalization isomorphisms identifying reduced truncation triangles, uniform bounded constructibility, and compatible truncated etale-origin witnesses. The proposition asserts existence of common bounded adic-lisse models; it does not identify those models with truncations of the originally chosen models or assert finite locally free terms. No such stronger assertion is used below.",
-   "uses": [
-    "prop-weil-pbc-levelwise-truncations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-    "place": "Proof, first sentence applying the levelwise proposition, with its current uniform-model statement"
-   }
-  },
-  {
-   "text": "In the ambient $D(\\operatorname{Mod}(A_T))$, put $A^-K=\\tau^{\\le m}K$ and $A^+K=\\tau^{\\ge m+1}K$. Their canonical maps, cohomology and standard bounds are those of [def-kun-truncations], and [lem-sf-derived-truncation-triangle] gives the natural distinguished triangle $A^-K\\to K\\to A^+K\\to A^-K[1]$. Both end terms belong to the integral category by the standard-truncation closure in [lem-weil-pbc-integral-stratified-perfect-characterization]; its hypotheses are precisely our finite extension, Noetherian finite-dimensional base and invertibility of $\\ell$. In particular they are complete. Their cohomology sheaves are input cohomology sheaves or zero, hence flat by step 1. Apply [lem-weil-pbc-adic-tor-flat-cohomology] to each end term. It gives, for every $n$, $\\mathcal H^i(F(A^\\pm K)_n)\\simeq\\mathcal H^i(A^\\pm K)\\otimes_{A_T}R_n$. Thus these reductions have cohomology only in degrees $\\le m$ and $\\ge m+1$, respectively.",
-   "uses": [
-    "def-kun-truncations",
-    "lem-sf-derived-truncation-triangle",
     "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-adic-tor-flat-cohomology"
+    "def-weil-derived-limit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-    "place": "Proof, reconstruction of the two truncations; use the existing integral truncation-closure theorem to supply complete canonical objects first"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the triangulated functor $F$ to the ambient triangle of step 3. Cohomology in the tower category is levelwise: kernels and cokernels are computed levelwise by [lem-weil-tower-category-levelwise-abelian], so the kernel modulo the differential image computing cohomology is also levelwise. Consequently $F(A^-K)$ lies in degrees $\\le m$ and $F(A^+K)$ in degrees $\\ge m+1$ for the standard t-structure of [def-sbc-standard-tstructure-derived-category] on $D(\\operatorname{Tow}_A(T))$. The truncation uniqueness and adjunctions of [lem-weil-heart-short-exact-triangles](1) identify this triangle, with identity on $F(K)$, with its canonical truncation triangle. Denote the resulting natural isomorphisms by $E^\\pm:F(A^\\pm K)\\xrightarrow{\\sim}M^\\pm_\\bullet$. At level $n$ apply the same uniqueness in $D(\\operatorname{Mod}(R_n))$ to the scalar-extension triangle, which is distinguished by [lem-pur-derived-change-of-rings]. This gives $R_n$-linear isomorphisms $a_n^\\pm:(A^\\pm K)\\otimes^L R_n\\xrightarrow{\\sim}M_n^\\pm$. Exact restriction of scalars from [def-weil-pbc-adic-coefficient-datum] preserves cohomology and the triangle; uniqueness in $D(\\operatorname{Mod}(A_T))$ therefore identifies the evaluation of $E^\\pm$ with the restriction of $a_n^\\pm$. This constructs coherent tower comparisons, rather than inferring them from independent level isomorphisms.",
+   "text": "Identify independent-coefficient K-flatness of a degree-zero single with flatness of its module. Scalar extension preserves flat sheaves. Apply the tensor cohomological bounds to two canonical truncation triangles and isolate the degree-q single. This shows quotient reductions of an object with flat cohomology again have flat cohomology, and the next scalar extension of each single is concentrated in degree zero. Hence ambient flat cohomology implies all-level Tor compatibility without any finiteness or DVR hypothesis.",
    "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-weil-heart-short-exact-triangles",
-    "lem-pur-derived-change-of-rings",
-    "def-weil-pbc-adic-coefficient-datum"
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-scalar-tensor-comparison-universes",
+    "lem-weil-pbc-ringed-tensor-cohomological-bounds"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-    "place": "Proof, reconstruction and compatibility of truncations, using the canonical strict-tower triangles"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $L^\\pm=R\\varprojlim M^\\pm_\\bullet$, the two objects defined in the statement. Set $\\phi^\\pm=(R\\varprojlim E^\\pm)\\operatorname{comp}_{A^\\pm K}:A^\\pm K\\xrightarrow{\\sim}L^\\pm$. These are natural isomorphisms by [prop-weil-pbc-rlim-functoriality] and the natural completion comparison of [prop-weil-pbc-koszul-reconstruction]; completeness was established in step 3. If $p_n^\\pm:L^\\pm\\to M_n^\\pm$ is a derived-limit projection and $v_n:A^\\pm K\\to F(A^\\pm K)_n$ the scalar-extension map, projection naturality gives $p_n^\\pm\\phi^\\pm=a_n^\\pm v_n$. The adjoint of the projection on the complete canonical tower $F(A^\\pm K)$ is the isomorphism stated by [lem-weil-pbc-finite-reduction-reconstruction]. Taking adjoints under [lem-weil-derived-scalar-extension-restriction-adjunction] in the displayed equality consequently gives $b_n^\\pm(\\phi^\\pm\\otimes1)=a_n^\\pm$, where $b_n^\\pm:L^\\pm\\otimes^L R_n\\to M_n^\\pm$ is the projection adjoint. Both right-hand factors are isomorphisms in $D(\\operatorname{Mod}(R_n))$, so $b_n^\\pm$ is an isomorphism there. The finite-reduction lemma is used only for the already complete objects $A^\\pm K$ and their canonical towers, never directly for the arbitrary towers $M^\\pm_\\bullet$.",
+   "text": "For the converse use the lifted integral cohomology torsion normal form. Tor_1 vanishing makes the cokernel of the nilpotent torsion endomorphism zero. The endomorphism and all its powers are epic, so a power which is zero forces the torsion summand to vanish. The sectionwise finite free remaining summand is flat by the equational criterion. The existing private finite-stratum flat-descent helpers from the adic Tor criterion descend flatness to the ambient cohomology. The single-complex equivalence gives exactly the stated K-flat formulation.",
    "uses": [
-    "prop-weil-pbc-rlim-functoriality",
-    "prop-weil-pbc-koszul-reconstruction",
-    "lem-weil-pbc-finite-reduction-reconstruction",
-    "lem-weil-derived-scalar-extension-restriction-adjunction"
+    "lem-weil-pbc-integral-cohomology-torsion-normal-form",
+    "lem-weil-pbc-adic-tor-implies-flat-cohomology",
+    "def-pc-kflat-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-    "place": "Proof, uniform reconstruction and finite-reduction comparisons, with the canonical-tower hypothesis checked"
-   }
+   "elementary": false
   },
   {
-   "text": "The isomorphisms $\\phi^\\pm$ identify the limits with objects already in [def-weil-pbc-bounded-constructible-complete], so they have intrinsic completeness and the required actual canonical reduction towers and compatible etale-origin witnesses. Equivalently the witnesses supplied in step 2 are carried to these towers through the $b_n^\\pm$. To check the necessary normalization equality, write $t_n^\\pm$ for the strict transition and $\\rho_n^\\pm$ for its normalization as in [def-weil-pbc-bounded-constructible-tower]. The adjoint of $\\rho_n^\\pm(b_{n+1}^\\pm\\otimes1)$, after scalar-extension reassociation, is $t_n^\\pm p_{n+1}^\\pm$. This equals $p_n^\\pm$, the adjoint of $b_n^\\pm$, by the tower projection equation. Equality in the adjunction bijection of [lem-weil-derived-scalar-extension-restriction-adjunction] proves $b_n^\\pm=\\rho_n^\\pm(b_{n+1}^\\pm\\otimes1)$; iteration proves compatibility with all quotient normalizations. This proves clause 1. The isomorphisms $\\phi^\\pm$ and the standard bounds in step 3 also give $\\mathcal H^i(L^-)=0$ for $i>m$ and $\\mathcal H^i(L^+)=0$ for $i\\le m$, independently of the next step.",
+   "text": "Apply derived coefficient extension to the actual canonical truncation triangle. The lower endpoint has its upper bound by right t-exactness; flat cohomology and the tensor Tor bound give the upper endpoint its lower bound. Uniqueness of truncation triangles, with identity on the middle vertex, gives both normalized finite reduction isomorphisms. Apply the same argument after exact scalar restriction to obtain ambient level comparisons.",
    "uses": [
-    "def-weil-pbc-bounded-constructible-complete",
+    "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove naturality of the normalized reduction transition using the scalar adjunction hom equivalence, the unit, and the restriction-composition comparison. Uniqueness of morphisms into lower truncations and out of upper truncations then proves coherence of the ambient level comparisons along the entire canonical sequence. Each ambient truncation is intrinsically complete by the already proved membership theorem. Apply actual completed reduction reconstruction to it. Products of the coherent comparison isomorphisms conjugate 1 minus shift, and transport of the resulting Roos triangles yields the two required derived-limit assertions.",
+   "uses": [
+    "lem-weil-pbc-actual-completed-reduction-reconstruction",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
     "def-weil-pbc-bounded-constructible-tower",
-    "lem-weil-derived-scalar-extension-restriction-adjunction"
+    "def-weil-derived-limit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-    "place": "Proof, integral-category membership, normalization equations and independent end-term vanishing"
-   }
-  },
-  {
-   "text": "Apply [lem-sf-derived-truncation-triangle] with $b=m+1$ to $F(K)$ in the abelian strict-tower derived category. Its end terms are exactly the canonical tower truncations $M^-_\\bullet,M^+_\\bullet$ from [prop-weil-pbc-levelwise-truncations]. This is one distinguished triangle of strict-tower derived objects. Its naturality is the kernel/cokernel construction of [def-kun-truncations]: chain maps induce maps of kernels and cokernels, and truncation preserves quasi-isomorphisms because it retains the original cohomology in the specified degrees and gives zero elsewhere. Applying the triangulated functor [prop-weil-pbc-rlim-functoriality], and identifying the middle term through the natural $\\operatorname{comp}_K$ of [prop-weil-pbc-koszul-reconstruction], yields $L^-\\to K\\to L^+\\to L^-[1]$, natural in $K$. The triangle comparison $E^\\pm$ of step 4 and naturality of the completion unit show that $\\phi^-,1_K,\\phi^+$ identify this image triangle with the ambient truncation triangle of step 3, including all its maps.",
-   "uses": [
-    "lem-sf-derived-truncation-triangle",
-    "prop-weil-pbc-levelwise-truncations",
-    "def-kun-truncations",
-    "prop-weil-pbc-rlim-functoriality",
-    "prop-weil-pbc-koszul-reconstruction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-    "place": "Proof, final sentences: strict-tower truncation triangle and its triangulated derived-limit image; Stacks truncation remark"
-   }
-  },
-  {
-   "text": "Apply [lem-sf-derived-homology-long-exact] to step 7. For $i\\le m$, the adjacent $\\mathcal H^{i-1}(L^+)$ and $\\mathcal H^i(L^+)$ vanish by step 6, hence $\\mathcal H^i(L^-)\\to\\mathcal H^i(K)$ is an isomorphism. For $i\\ge m+1$, the adjacent $\\mathcal H^i(L^-)$ and $\\mathcal H^{i+1}(L^-)$ vanish, hence $\\mathcal H^i(K)\\to\\mathcal H^i(L^+)$ is an isomorphism. The standard t-structure of [def-sbc-standard-tstructure-derived-category] and the uniqueness and adjunction assertion of [lem-weil-heart-short-exact-triangles](1) characterize this triangle by its end-term bounds, with its maps and fixed middle term, without a boundedness hypothesis on the whole ambient derived category. By the standard-truncation closure in [lem-weil-pbc-integral-stratified-perfect-characterization], the ambient canonical functors restrict to the entire integral category. On the Tor subcategory the constructed limits compute those same functors. Their outputs again satisfy the all-level Tor condition: the normalized reductions in step 6 have, by [prop-weil-pbc-levelwise-truncations](3), input level cohomology sheaves or zero, so each higher Tor sheaf is an input zero Tor sheaf or that of zero. Finally the kernel and cokernel maps in [def-kun-truncations] preserve sums of morphisms, and the triangulated inverse-limit functor is additive. This proves additivity on both asserted domains and completes clauses 2 and 3.",
-   "uses": [
-    "lem-sf-derived-homology-long-exact",
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-weil-heart-short-exact-triangles",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "prop-weil-pbc-levelwise-truncations",
-    "def-kun-truncations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-    "place": "Proof, cohomology, canonical characterization, and the distinction between unconditional ambient functors and conditional reduction comparisons"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-adic-tor-flat-cohomology",
-  "def-weil-pbc-bounded-constructible-complete",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "def-weil-pbc-adic-coefficient-datum",
-  "prop-weil-pbc-rlim-functoriality",
-  "prop-weil-pbc-koszul-reconstruction",
-  "prop-weil-pbc-levelwise-truncations",
-  "def-kun-truncations",
-  "lem-sf-derived-truncation-triangle",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-tower-category-levelwise-abelian",
-  "def-sbc-standard-tstructure-derived-category",
-  "lem-weil-heart-short-exact-triangles",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-finite-reduction-reconstruction",
+  "def-weil-derived-limit",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-scalar-tensor-comparison-universes",
+  "lem-weil-pbc-ringed-tensor-cohomological-bounds",
+  "lem-weil-pbc-integral-cohomology-torsion-normal-form",
+  "lem-weil-pbc-adic-tor-implies-flat-cohomology",
   "def-weil-pbc-bounded-constructible-tower",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-derived-scalar-extension-restriction-adjunction"
+  "lem-weil-pbc-actual-completed-reduction-reconstruction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-  "place": "Proof, repaired against current levelwise statement and existing integral stratified-perfect characterization; ordinary truncations from Stacks homology.tex section-truncations (0118) and derived.tex remark-truncation-distinguished-triangle (08J5)"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-base-change/sk-thm-sbc-karoubian/thm-weil-pbc-integral-truncations.md",
+  "place": "C1 proof: actual ambient truncations, tensor cohomological bounds and canonical-triangle uniqueness; coherent canonical-tower reconstruction. The two separate source results carry their own nodes."
  },
  "mathlib_searches": [
   {
@@ -350,16 +275,7 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-rlim-functoriality",
-  "prop-weil-pbc-koszul-reconstruction",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-pbc-finite-reduction-reconstruction",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-heart-short-exact-triangles",
-  "def-kun-truncations",
-  "lem-weil-derived-scalar-extension-restriction-adjunction"
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -385,26 +301,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "E7",
+  "reviewer": "COMPILER",
+  "group": "C1",
   "result": "pass",
-  "landing": "20261019T002536-L-2150417",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.pbcCompletedCountableAB4Star",
-   "AlgebraicGeometry.Scheme.pbcIntegralCanonicalTruncations_mem",
-   "AlgebraicGeometry.Scheme.pbc_flat_cohomology_torCompatible",
-   "AlgebraicGeometry.Scheme.pbc_integral_truncation_properties",
-   "AlgebraicGeometry.Scheme.pbc_integral_truncations",
-   "AlgebraicGeometry.Scheme.pbc_torCompatible_iff_flat_cohomology"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.pbc_flat_cohomology_torCompatible",
-   "AlgebraicGeometry.Scheme.pbc_integral_truncations",
-   "AlgebraicGeometry.Scheme.pbc_torCompatible_iff_flat_cohomology"
-  ]
+  "landing": "20261021T020101-L-2583698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

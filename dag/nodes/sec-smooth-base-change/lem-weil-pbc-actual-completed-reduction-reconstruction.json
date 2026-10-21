@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-actual-completed-reduction-reconstruction",
+ "kind": "statement",
+ "title": "Canonical quotient reconstruction in the actual completed coefficient presentation",
+ "statement": "Let T be any scheme and d an adic coefficient datum [def-weil-pbc-adic-coefficient-datum]. Suppose the derived category of module sheaves over its actual completed coefficient sheaf has countable products. Every intrinsically complete object K [def-weil-pbc-bounded-constructible-complete] is a derived limit [def-weil-derived-limit] of the sequence whose nth object is the restriction of K tensor^L R_n along the completed projection to R_n. The adjacent map is the restriction of the normalized quotient transition, followed by the canonical composition comparison for restrictions. No constructibility, boundedness, flatness or truncation hypothesis is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "Final assertion: every derived I-complete object is the derived limit of its canonical strict quotient tower; transported through the actual completed-ring and finite-ring comparisons."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Choose a K-flat model in the constant-completed coefficient presentation. Transport the supplied completeness certificate to this model using invariance of intrinsic completion under quasi-isomorphism. Apply the normalized completed Koszul reduction Roos triangle and the invertible completion unit to obtain a Roos triangle with first vertex the constant-presentation image of K.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-completed-koszul-reduction-roos-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The completed-ring comparison is an isomorphism. Scalar extension and restriction along it are exact inverse equivalences, hence preserve countable products and distinguished triangles. Transport the preceding Roos triangle to actual completed coefficients. At each quotient level compare K-flat derived extension using the normalized finite constant coefficient comparison. Both adjuncts of each adjacent square are the direct quotient unit, so the comparisons intertwine all adjacent maps.",
+   "uses": [
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The product of the level comparison isomorphisms conjugates the two transition endomorphisms. Transport the two product vertices and the first vertex through these isomorphisms. This gives exactly the distinguished Roos triangle of the displayed sequence. This argument includes zero and unit ideals and the empty scheme.",
+   "uses": [
+    "def-weil-derived-limit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "lem-weil-pbc-completed-koszul-reduction-roos-triangle",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-koszul-reconstruction.md",
+  "place": "Canonical-tower consequence of Koszul reconstruction, with normalized coefficient presentation transport."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived complete complex is the homotopy inverse limit of its derived reductions modulo the powers of an ideal",
+   "results": "8 hits: BDeRhamPlus, AdicCompletion, Hausdorffification, IsAdicComplete, ordinary completion evaluation, and localCohomology.",
+   "date": "2026-10-21",
+   "verdict": "No derived sheaf reconstruction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDerivedLimit",
+   "results": "0 hits: unknown identifier IsDerivedLimit.",
+   "date": "2026-10-21",
+   "verdict": "The project defines this predicate outside Mathlib; supplemented by source search."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedLimit|IsAdicComplete",
+   "results": "25 hits, all ordinary adic completeness or local-field instances.",
+   "date": "2026-10-21",
+   "verdict": "No derived sheaf Roos reconstruction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived complete complex is the homotopy inverse limit of its derived quotient reductions modulo all powers of an ideal",
+   "results": "8 hits: ordinary AdicCompletion, HasDerivedCategory and HasDerivedCategory.standard, ordinary compatible residue submodules/subrings, and HomologicalComplex.instHasLimit. No derived sheaf completion reconstruction.",
+   "date": "2026-10-21",
+   "verdict": "Ingredients only; no exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralCanonicalTruncations",
+  "date": "2026-10-21",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-integral-truncations",
+   "place": "Canonical-tower reconstruction used on each intrinsically complete ambient truncation.",
+   "via": [
+    "prop-weil-pbc-koszul-reconstruction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ActualCompletedReductionReconstruction",
+  "file": "lean/Sheaf/Paper/ActualCompletedReductionReconstruction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_actual_completed_reduction_reconstruction",
+  "statement": "theorem pbc_actual_completed_reduction_reconstruction\n    [HasCountableProducts (PbcCompletedDerived T d)]\n    (K : PbcCompletedDerived T d) (hK : PbcIsIntrinsicallyComplete T d K) :\n    let M : ℕᵒᵖ ⥤ PbcCompletedDerived T d :=\n    Functor.ofOpSequence\n        (X := fun n ↦ (pbcDerivedRestrict (pbcAdicProjection T d n)).obj\n          ((pbcCompletedReduction T d n).obj K))\n        (fun n ↦ (pbcDerivedRestrict (pbcAdicProjection T d (n + 1))).map\n          (pbcReductionTransition (pbcAdicProjection T d (n + 1))\n            (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)) (pbcAdicProjection T d n)\n            (pbcAdicProjection_comp T d (n + 1) n (Nat.le_succ n)) K) ≫\n          (pbcDerivedRestrictComp (pbcAdicProjection T d (n + 1))\n            (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)) (pbcAdicProjection T d n)\n            (pbcAdicProjection_comp T d (n + 1) n (Nat.le_succ n))).hom.app\n              ((pbcCompletedReduction T d n).obj K))\n    IsDerivedLimit\n      (K := fun n ↦ M.obj (op n))\n      (fun n ↦ M.map (homOfLE (Nat.le_succ n)).op) K",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261021T020101-L-2583698",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261021T020101-L-2583698",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
