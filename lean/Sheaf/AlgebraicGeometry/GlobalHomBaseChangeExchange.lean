@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.GlobalHomPullbackComparison
 import Sheaf.AlgebraicGeometry.GlobalSectionsBaseChangeMate
-import Sheaf.AlgebraicGeometry.InternalHomBaseChangeExchange
+import WeilConjectures.AlgebraicGeometry.MixedInternalHomBaseChangeExchange
 
 /-!
 # The exchange square for global Hom comparisons
@@ -36,6 +36,16 @@ private theorem schemeGlobalSectionsDirectImageIso_eq_mixed
     [∀ (R : Type u) [Ring R], HasDerivedCategory.{w} (ModuleCat.{u} R)]
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     schemeGlobalSectionsDirectImageIso f = mixedGlobalSectionsDirectImageIso f := by
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem schemeHomTensorPullbackIso_eq_mixed
+    [∀ Z : Scheme.{u},
+      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    schemeHomTensorPullbackIso f = mixedHomTensorPullbackIso f := by
+  ext Z
   rfl
 
 private theorem globalMate_postcomp
@@ -170,7 +180,9 @@ theorem schemeGlobalHom_baseChange_exchange
     ((𝟙 ((derivedPullback g).obj ((schemeDerivedDirectImage f).obj M))).op,
       schemeDerivedBaseChangeMap f (pullback.snd f g) g
         (pullback.fst f g) pullback.condition N)
-  have hi := schemeInternalHom_baseChange_exchange f g M N
+  have hi := mixedInternalHom_baseChange_exchange f g M N
+  simp only [← schemeHomTensorPullbackIso_eq_mixed] at hi
+  dsimp only [mixedHomDirectImageComparison] at hi
   change schemeDerivedBaseChangeMap f (pullback.snd f g) g (pullback.fst f g)
       pullback.condition E ≫
       (schemeDerivedDirectImage (pullback.snd f g)).map a ≫ b =
