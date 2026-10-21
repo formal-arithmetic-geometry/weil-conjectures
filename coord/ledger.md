@@ -23387,3 +23387,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:50 L: merged deliver/NN/lem-sfb-profinite-algcl-derived-invariants-comparison (reviewer PASS; first push; new nodes: 4)
 - 18:50 L: returned deliver/NK/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D2 together with a hidden circularity (D4/C6 kind). New node lem-sfb-norm-support-generator-scalar says the support scal)
 - 18:50 L: merged deliver/NW/lem-sfb-internal-homogeneous-functions-injective (reviewer PASS; first push; new nodes: 0)
+- 2026-10-21T18:50:45Z L: superseded stage-1 delivery O3/lem-sfb-snc-finite-root-face-regular at 7e650f8f2066119b7f1655eb3c2f364034289ed4; current completion retained; packet archived at refs/superseded/O3/lem-sfb-snc-finite-root-face-regular/7e650f8f2066119b7f1655eb3c2f364034289ed4; stale return retired.
