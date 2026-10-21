@@ -22542,3 +22542,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:31 L: returned deliver/ND/lem-sfb-continuous-algcl-proper-scalar-comparison (reviewer RETURN: E2/E1/D (false inputs, major gap): steps 1-6 never use any property of B and prove pi_M invertible for EVERY degree-zero)
 - 13:31 L: returned deliver/ND/lem-sfb-continuous-algcl-proper-scalar-comparison (reviewer RETURN: E2/E1/D (false inputs, major gap): steps 1-6 never use any property of B and prove pi_M invertible for EVERY degree-zero)
 - 13:32 L: merged deliver/NO/lem-dl-a1-integral-normal-residue-etale-splitting (reviewer FIX; first push; new nodes: 2)
+- 2026-10-21T13:32:21Z L: superseded stage-1 delivery NF/lem-sfb-qcqs-integral-finite-model-completeness at 0fd73773405b494712a12e4342196f0ef1284d5c; current completion retained; packet archived at refs/superseded/NF/lem-sfb-qcqs-integral-finite-model-completeness/0fd73773405b494712a12e4342196f0ef1284d5c; stale return retired.
