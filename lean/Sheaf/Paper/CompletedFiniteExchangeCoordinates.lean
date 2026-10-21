@@ -10,6 +10,10 @@ public import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
 import all Sheaf.Paper.CompletedTowerDirectImage
 import all Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import Sheaf.Paper.RingedOpenStrictReduction
+import all Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import all Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import all Sheaf.Paper.OpenClosedAdjunctionTransport
 
 /-!
 # Fixed finite coordinates for completed-ring open exchange
@@ -252,6 +256,226 @@ constant-ring comparison and balancing make these maps mutually inverse. -/
   rw [hz] at hi'
   exact hi'
 
+
+attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjunction
+
+private def finiteOpenRing {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
+    coefficients (cbcFiniteRing d n) W ≅
+      ((cbcOpenSiteFunctor e he).sheafPushforwardContinuous CommRingCat.{u + 1}
+        (ProEt.topology W) (ProEt.topology T)).obj (coefficients (cbcFiniteRing d n) T) := by
+  have : (cbcOpenSiteFunctor e he).IsCocontinuous
+      (ProEt.topology W) (ProEt.topology T) :=
+    ProEt.isCocontinuous_overMap (cbcOpenWeaklyEtale e he)
+  exact ((cbcOpenSiteFunctor e he).pushforwardContinuousSheafificationCompatibility
+    CommRingCat.{u + 1} (ProEt.topology W) (ProEt.topology T)).app
+      ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))
+
+private theorem finiteOpenRing_unit {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
+    toSheafify (ProEt.topology W)
+        ((Functor.const W.ProEtᵒᵖ).obj (cbcFiniteRing d n)) ≫
+      (finiteOpenRing d e he n).hom.hom =
+    Functor.whiskerLeft (cbcOpenSiteFunctor e he).op
+      (toSheafify (ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))) := by
+  have : (cbcOpenSiteFunctor e he).IsCocontinuous
+      (ProEt.topology W) (ProEt.topology T) :=
+    ProEt.isCocontinuous_overMap (cbcOpenWeaklyEtale e he)
+  exact (cbcOpenSiteFunctor e he).toSheafify_pullbackSheafificationCompatibility
+    CommRingCat.{u + 1} (ProEt.topology W) (ProEt.topology T)
+    ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))
+
+attribute [local irreducible] finiteOpenRing
+
+private theorem finiteOpenRing_projection {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
+    cbcFiniteProjection d W n ≫ (finiteOpenRing d e he n).hom =
+      cbcCompletedRestrictionMap d e he ≫
+        ((cbcOpenSiteFunctor e he).sheafPushforwardContinuous CommRingCat.{u + 1}
+          (ProEt.topology W) (ProEt.topology T)).map (cbcFiniteProjection d T n) := by
+  let G := (cbcOpenSiteFunctor e he).sheafPushforwardContinuous CommRingCat.{u + 1}
+    (ProEt.topology W) (ProEt.topology T)
+  have hfin : (pbcLevelConstantComparison W d n).hom ≫
+        cbcFiniteRestrictionMap d e he n =
+      (finiteOpenRing d e he n).hom ≫ G.map (pbcLevelConstantComparison T d n).hom := by
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext _ _ _
+      (G.obj (reductionCoefficient T d n)).property
+    ext V b
+    change (cbcFiniteRestrictionMap d e he n).hom.app V
+        ((pbcLevelConstantComparison W d n).hom.hom.app V
+          ((toSheafify (ProEt.topology W)
+            ((Functor.const W.ProEtᵒᵖ).obj (cbcFiniteRing d n))).app V b)) =
+      (pbcLevelConstantComparison T d n).hom.hom.app
+        ((cbcOpenSiteFunctor e he).op.obj V)
+        ((finiteOpenRing d e he n).hom.hom.app V
+          ((toSheafify (ProEt.topology W)
+            ((Functor.const W.ProEtᵒᵖ).obj (cbcFiniteRing d n))).app V b))
+    erw [(pbcLevelConstantComparison_exists W d n).exists.choose_spec V b]
+    have hc := ConcreteCategory.congr_hom (congr_app (finiteOpenRing_unit d e he n) V) b
+    change (finiteOpenRing d e he n).hom.hom.app V
+        ((toSheafify (ProEt.topology W)
+          ((Functor.const W.ProEtᵒᵖ).obj (cbcFiniteRing d n))).app V b) = _ at hc
+    erw [hc, (pbcLevelConstantComparison_exists T d n).exists.choose_spec]
+    exact ConcreteCategory.congr_hom
+      ((cbcFiniteRestrictionMap_exists d e he n).exists.choose_spec V)
+      (pbcQuotientConstant W d n V b ⊥)
+  have hcomp := (cbcCompletedRestrictionMap_exists d e he).exists.choose_spec n
+  change cbcCompletedRestrictionMap d e he ≫
+      G.map (pbcAdicProjection T d n) =
+    pbcAdicProjection W d n ≫ cbcFiniteRestrictionMap d e he n at hcomp
+  unfold cbcFiniteProjection
+  apply (cancel_mono (G.map (pbcLevelConstantComparison T d n).hom)).mp
+  change (pbcAdicProjection W d n ≫ (pbcLevelConstantComparison W d n).inv ≫
+      (finiteOpenRing d e he n).hom) ≫ G.map (pbcLevelConstantComparison T d n).hom =
+    (cbcCompletedRestrictionMap d e he ≫ G.map
+      (pbcAdicProjection T d n ≫ (pbcLevelConstantComparison T d n).inv)) ≫
+        G.map (pbcLevelConstantComparison T d n).hom
+  rw [G.map_comp]
+  simp only [Category.assoc, ← G.map_comp, Iso.inv_hom_id, Category.comp_id]
+  rw [hcomp]
+  erw [← hfin]
+  change pbcAdicProjection W d n ≫
+      ((pbcLevelConstantComparison W d n).inv ≫
+        (pbcLevelConstantComparison W d n).hom ≫ cbcFiniteRestrictionMap d e he n) = _
+  rw [Iso.inv_hom_id_assoc]
+
+private def finiteOpenAdjunction {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
+    SheafOfModules.pushforward.{u + 1} (F := cbcOpenSiteFunctor e he)
+      (J := ProEt.topology W) (K := ProEt.topology T)
+      ((sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+        (finiteOpenRing d e he n).hom) ⊣ moduleDirectImage (cbcFiniteRing d n) e := by
+  let F := proEtaleBaseChange e
+  let G := cbcOpenSiteFunctor e he
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ e
+    (cbcOpenWeaklyEtale e he) trivial
+  let R := coefficients (cbcFiniteRing d n) T
+  let S := coefficients (cbcFiniteRing d n) W
+  let c := finiteOpenRing d e he n
+  let ψ := proEtaleRingDirectImageMap e R S (constantRingIso (cbcFiniteRing d n) e)
+  have hψ : ψ = proEtaleConstantDirectImageMap e CommRingCat.{u + 1}
+      (cbcFiniteRing d n) := by
+    change (proEtaleSheafAdjunction e CommRingCat.{u + 1}).homEquiv _ _
+      (((proEtaleSheafAdjunction e CommRingCat.{u + 1}).homEquiv _ _).symm _) = _
+    exact Equiv.apply_symm_apply _ _
+  have H₁ : Functor.whiskerRight (NatTrans.op a.counit) R.obj =
+      ψ.hom ≫ F.op.whiskerLeft c.hom.hom := by
+    apply sheafify_hom_ext (ProEt.topology T) _ _
+      (((proEtaleSheafDirectImage e CommRingCat.{u + 1}).obj
+        ((G.sheafPushforwardContinuous CommRingCat.{u + 1}
+          (ProEt.topology W) (ProEt.topology T)).obj R)).property)
+    rw [hψ]
+    have hψunit : toSheafify (ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n)) ≫
+        (proEtaleConstantDirectImageMap e CommRingCat.{u + 1}
+          (cbcFiniteRing d n)).hom =
+      F.op.whiskerLeft (toSheafify (ProEt.topology W)
+        ((Functor.const W.ProEtᵒᵖ).obj (cbcFiniteRing d n))) := by
+      exact (sheafificationAdjunction (ProEt.topology T) CommRingCat.{u + 1}).homEquiv
+        _ _ |>.apply_symm_apply _
+    rw [← Category.assoc]
+    erw [hψunit]
+    ext V b
+    have hc := ConcreteCategory.congr_hom
+      (congr_app (finiteOpenRing_unit d e he n) (F.op.obj V)) b
+    have hn := ConcreteCategory.congr_hom
+      ((toSheafify (ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))).naturality
+          (a.counit.app V.unop).op) b
+    exact hn.symm.trans hc.symm
+  have H₂ : c.hom.hom ≫ G.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op a.unit) S.obj = 𝟙 S.obj := by
+    apply NatTrans.ext
+    funext V
+    apply (cancel_mono (c.hom.hom.app V)).mp
+    dsimp
+    rw [Category.id_comp]
+    have hn := c.hom.hom.naturality (a.unit.app V.unop).op
+    dsimp at hn
+    rw [Category.assoc, Category.assoc, hn]
+    have hh := congrArg (fun t ↦ t.app (G.op.obj V)) H₁
+    dsimp at hh
+    erw [← Category.assoc (ψ.hom.app (G.op.obj V))
+      (c.hom.hom.app (F.op.obj (G.op.obj V)))
+      (R.obj.map (G.map (a.unit.app V.unop)).op), ← hh]
+    rw [← Functor.map_comp, ← op_comp]
+    erw [a.left_triangle_components]
+    change c.hom.hom.app V ≫ R.obj.map (𝟙 (G.op.obj V)) = c.hom.hom.app V
+    rw [R.obj.map_id]
+    exact Category.comp_id _
+  let Rr := (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  let Sr := (sheafCompose (ProEt.topology W)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S
+  let φr : Sr ⟶ (G.sheafPushforwardContinuous RingCat.{u + 1}
+      (ProEt.topology W) (ProEt.topology T)).obj Rr :=
+    (sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c.hom
+  let ψr : Rr ⟶ (F.sheafPushforwardContinuous RingCat.{u + 1}
+      (ProEt.topology T) (ProEt.topology W)).obj Sr :=
+    ⟨Functor.whiskerRight ψ.hom (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
+  have H₁r : Functor.whiskerRight (NatTrans.op a.counit) Rr.obj =
+      ψr.hom ≫ F.op.whiskerLeft φr.hom := by
+    apply NatTrans.ext
+    funext V
+    exact congrArg (fun z ↦ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map (z.app V)) H₁
+  have H₂r : φr.hom ≫ G.op.whiskerLeft ψr.hom ≫
+      Functor.whiskerRight (NatTrans.op a.unit) Sr.obj = 𝟙 Sr.obj := by
+    apply NatTrans.ext
+    funext V
+    exact congrArg (fun z ↦ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map (z.app V)) H₂
+  change SheafOfModules.pushforward.{u + 1} (F := G) φr ⊣
+    SheafOfModules.pushforward.{u + 1} (F := F) ψr
+  exact SheafOfModules.pushforwardPushforwardAdj (F := G) (G := F) a φr ψr H₁r H₂r
+
+private theorem finiteOpenAdjunction_unit {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ)
+    (M : ProEtale.StrictTower.Modules (cbcFiniteRing d n) T)
+    (Z : T.ProEt) (m : M.val.obj (op Z)) :
+    ((finiteOpenAdjunction d e he n).unit.app M).val.app (op Z) m =
+      M.val.map ((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ e
+        (cbcOpenWeaklyEtale e he) trivial).counit.app Z).op m := by
+  unfold finiteOpenAdjunction
+  rfl
+
+attribute [local irreducible] finiteOpenAdjunction
+
+private def finiteOpenModel {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :=
+  (proEtaleRingModuleAdjunction e _ _ (constantRingIso (cbcFiniteRing d n) e)).leftAdjointUniq
+    (finiteOpenAdjunction d e he n)
+
+private theorem finiteOpenModel_generator {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ)
+    (M : ProEtale.StrictTower.Modules (cbcFiniteRing d n) T) (V : W.ProEt) (Z : T.ProEt)
+    (f : V ⟶ (proEtaleBaseChange e).obj Z) (m : M.val.obj (op Z)) :
+    ((finiteOpenModel d e he n).hom.app M).val.app (op V)
+      (((modulePullback (cbcFiniteRing d n) e).obj M).val.map f.op
+        (((proEtaleRingModuleAdjunction e _ _
+          (constantRingIso (cbcFiniteRing d n) e)).unit.app M).val.app (op Z) m)) =
+      M.val.map
+        (((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ e
+          (cbcOpenWeaklyEtale e he) trivial).homEquiv V Z).symm f).op m := by
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ e
+    (cbcOpenWeaklyEtale e he) trivial
+  let b := proEtaleRingModuleAdjunction e _ _ (constantRingIso (cbcFiniteRing d n) e)
+  have hunit := b.unit_leftAdjointUniq_hom_app (finiteOpenAdjunction d e he n) M
+  have hn := ((finiteOpenModel d e he n).hom.app M).val.naturality f.op
+  have hx := congrArg (fun z ↦ z.hom ((b.unit.app M).val.app (op Z) m)) hn
+  have hu : ((finiteOpenModel d e he n).hom.app M).val.app
+        (op ((proEtaleBaseChange e).obj Z)) ((b.unit.app M).val.app (op Z) m) =
+      M.val.map (a.counit.app Z).op m := by
+    rw [← finiteOpenAdjunction_unit d e he n M Z m]
+    exact congrArg (fun z ↦ z.val.app (op Z) m) hunit
+  change _ = M.val.map ((cbcOpenSiteFunctor e he).map f).op
+    (((finiteOpenModel d e he n).hom.app M).val.app
+      (op ((proEtaleBaseChange e).obj Z)) ((b.unit.app M).val.app (op Z) m)) at hx
+  rw [hu] at hx
+  have hc := M.val.map_comp_apply (a.counit.app Z).op
+    ((cbcOpenSiteFunctor e he).map f).op m
+  exact hx.trans (hc.symm.trans (by rfl))
+
 /-- Open restriction commutes with finite scalar restriction, normalized on the
 inverse-image unit generators. The site adjunction supplies the actual restricted
 section, so no unidentified comparison of underlying abelian sheaves is used.
@@ -273,7 +497,120 @@ theorem cbcFiniteOpenRestriction_existsUnique {W T : Scheme.{u}}
           M.val.map
             (((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ e
               (cbcOpenWeaklyEtale e he) trivial).homEquiv V Z).symm f).op m := by
-  sorry
+  let E := finiteOpenModel d e he n
+  have hφ := finiteOpenRing_projection d e he n
+  have hs (V : W.ProEtᵒᵖ) (r : (pbcAdicCompletion W d).obj.obj V) :
+      (finiteOpenRing d e he n).hom.hom.app V ((cbcFiniteProjection d W n).hom.app V r) =
+        (cbcFiniteProjection d T n).hom.app ((cbcOpenSiteFunctor e he).op.obj V)
+          ((cbcCompletedRestrictionMap d e he).hom.app V r) :=
+    congrArg (fun z ↦ z.hom.app V r) hφ
+  let qM (M : ProEtale.StrictTower.Modules (cbcFiniteRing d n) T) :
+      ((modulePullback (cbcFiniteRing d n) e ⋙ cbcFiniteRes d W n).obj M) ≅
+        ((cbcFiniteRes d T n ⋙ cbcOpenRestriction d e he).obj M) :=
+    { hom :=
+        { val :=
+            { app V := ModuleCat.ofHom
+                (X := (((modulePullback (cbcFiniteRing d n) e ⋙
+                  cbcFiniteRes d W n).obj M).val.obj V))
+                (Y := (((cbcFiniteRes d T n ⋙
+                  cbcOpenRestriction d e he).obj M).val.obj V))
+                { toFun := (E.hom.app M).val.app V
+                  map_add' := map_add ((E.hom.app M).val.app V).hom
+                  map_smul' := by
+                    intro r x
+                    change (E.hom.app M).val.app V
+                        ((cbcFiniteProjection d W n).hom.app V r •
+                          (show ((modulePullback (cbcFiniteRing d n) e).obj M).val.obj V
+                            from x)) = _
+                    rw [map_smul]
+                    change (finiteOpenRing d e he n).hom.hom.app V
+                        ((cbcFiniteProjection d W n).hom.app V r) •
+                        (show M.val.obj ((cbcOpenSiteFunctor e he).op.obj V)
+                          from (E.hom.app M).val.app V x) = _
+                    rw [hs]
+                    rfl }
+              naturality := by
+                intro V V' f
+                ext x
+                exact congrArg (fun z ↦ z.hom x) ((E.hom.app M).val.naturality f) } }
+      inv :=
+        { val :=
+            { app V := ModuleCat.ofHom
+                (X := (((cbcFiniteRes d T n ⋙
+                  cbcOpenRestriction d e he).obj M).val.obj V))
+                (Y := (((modulePullback (cbcFiniteRing d n) e ⋙
+                  cbcFiniteRes d W n).obj M).val.obj V))
+                { toFun := (E.inv.app M).val.app V
+                  map_add' := map_add ((E.inv.app M).val.app V).hom
+                  map_smul' := by
+                    intro r x
+                    change (E.inv.app M).val.app V
+                        ((cbcFiniteProjection d T n).hom.app
+                          ((cbcOpenSiteFunctor e he).op.obj V)
+                          ((cbcCompletedRestrictionMap d e he).hom.app V r) •
+                          (show M.val.obj ((cbcOpenSiteFunctor e he).op.obj V) from x)) = _
+                    rw [← hs V r]
+                    exact map_smul ((E.inv.app M).val.app V).hom
+                      ((cbcFiniteProjection d W n).hom.app V r)
+                      (show ((SheafOfModules.pushforward.{u + 1}
+                        (F := cbcOpenSiteFunctor e he)
+                        ((sheafCompose (ProEt.topology W)
+                          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+                          (finiteOpenRing d e he n).hom)).obj M).val.obj V from x) }
+              naturality := by
+                intro V V' f
+                ext x
+                exact congrArg (fun z ↦ z.hom x) ((E.inv.app M).val.naturality f) } }
+      hom_inv_id := by
+        ext V x
+        exact congrArg (fun z ↦ z.val.app V x) (E.hom_inv_id_app M)
+      inv_hom_id := by
+        ext V x
+        exact congrArg (fun z ↦ z.val.app V x) (E.inv_hom_id_app M) }
+  let q := NatIso.ofComponents qM (fun f ↦ by
+    ext V x
+    exact congrArg (fun z ↦ z.val.app V x) (E.hom.naturality f))
+  have hq : ∀ (M : ProEtale.StrictTower.Modules (cbcFiniteRing d n) T)
+      (V : W.ProEt) (Z : T.ProEt) (f : V ⟶ (proEtaleBaseChange e).obj Z)
+      (m : M.val.obj (op Z)),
+      (q.hom.app M).val.app (op V)
+        (((modulePullback (cbcFiniteRing d n) e).obj M).val.map f.op
+          (((proEtaleRingModuleAdjunction e _ _
+            (constantRingIso (cbcFiniteRing d n) e)).unit.app M).val.app (op Z) m)) =
+        M.val.map (((MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ e
+          (cbcOpenWeaklyEtale e he) trivial).homEquiv V Z).symm f).op m :=
+    finiteOpenModel_generator d e he n
+  refine ⟨q, hq, ?_⟩
+  intro q' hq'
+  apply Iso.ext
+  ext M V x
+  let a := MorphismProperty.Over.mapPullbackAdj @WeaklyEtale ⊤ e
+    (cbcOpenWeaklyEtale e he) trivial
+  let m := (q.hom.app M).val.app V x
+  let z := (((modulePullback (cbcFiniteRing d n) e).obj M).val.map
+    (a.unit.app V.unop).op
+      (((proEtaleRingModuleAdjunction e _ _
+        (constantRingIso (cbcFiniteRing d n) e)).unit.app M).val.app
+          (op ((cbcOpenSiteFunctor e he).obj V.unop)) m))
+  have hz : z = x := by
+    apply (ConcreteCategory.bijective_of_isIso
+      ((SheafOfModules.evaluation _ V).map (q.hom.app M))).injective
+    have h := hq M V.unop ((cbcOpenSiteFunctor e he).obj V.unop)
+      (a.unit.app V.unop) m
+    have hid : (a.homEquiv V.unop ((cbcOpenSiteFunctor e he).obj V.unop)).symm
+        (a.unit.app V.unop) = 𝟙 _ := a.homEquiv_symm_unit _
+    change (q.hom.app M).val.app V z = (q.hom.app M).val.app V x
+    change (q.hom.app M).val.app V z = M.val.map
+      ((a.homEquiv V.unop ((cbcOpenSiteFunctor e he).obj V.unop)).symm
+        (a.unit.app V.unop)).op m at h
+    rw [hid] at h
+    have hm : M.val.map (𝟙 _).op m = m := by
+      have hh := congrArg (fun k ↦ k.hom m) (M.val.map_id _)
+      exact hh
+    exact h.trans hm
+  rw [← hz]
+  exact (hq' M V.unop _ (a.unit.app V.unop) m).trans
+    (hq M V.unop _ (a.unit.app V.unop) m).symm
 
 /-- The uniquely normalized finite open-restriction comparison.
 Source: Stacks 03DI (blueprint: def-cbc-completed-finite-exchange-coordinates). -/
@@ -292,16 +629,388 @@ def cbcFiniteOpenRes {W T : Scheme.{u}}
     (cbcOpenAdjunction d e he)).symm
       (TwoSquare.mk _ _ _ _ (cbcFiniteOpenRestriction d e he n).hom)).natTrans
 
+private def finiteSliceRing (T : Scheme.{u}) (W : T.ProEt) (n : ℕ) :
+    (coefficients (cbcFiniteRing d n) T).over W ≅
+      cbcSliceRing W (coefficients (cbcFiniteRing d n) W.left) :=
+  ((ProEt.topology T).overPullback CommRingCat.{u + 1} W).mapIso
+      (pbcLevelConstantComparison T d n) ≪≫
+    cbcFiniteRestriction W d n ≪≫
+    ((cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{u + 1}
+      ((ProEt.topology T).over W) (ProEt.topology W.left)).mapIso
+        (pbcLevelConstantComparison W.left d n).symm
+
+private theorem finiteSliceRing_unit (T : Scheme.{u}) (W : T.ProEt) (n : ℕ)
+    (V : Over W) (b : cbcFiniteRing d n) :
+    (finiteSliceRing d T W n).hom.hom.app (op V)
+      ((toSheafify (ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))).app (op V.left) b) =
+    (toSheafify (ProEt.topology W.left)
+      ((Functor.const W.left.ProEtᵒᵖ).obj (cbcFiniteRing d n))).app
+        (op ((cbcSliceFunctor T W).obj V)) b := by
+  apply (ConcreteCategory.bijective_of_isIso
+    ((pbcLevelConstantComparison W.left d n).hom.hom.app
+      (op ((cbcSliceFunctor T W).obj V)))).injective
+  change (pbcLevelConstantComparison W.left d n).hom.hom.app _
+    ((pbcLevelConstantComparison W.left d n).inv.hom.app _
+      ((cbcFiniteSliceMap d T W n).hom.app (op V)
+        ((pbcLevelConstantComparison T d n).hom.hom.app (op V.left)
+          ((toSheafify (ProEt.topology T)
+            ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))).app (op V.left) b)))) = _
+  have hi := ConcreteCategory.congr_hom
+    (congrArg (fun f ↦ f.hom.app
+      (op ((cbcSliceFunctor T W).obj V))) (pbcLevelConstantComparison W.left d n).inv_hom_id)
+    ((cbcFiniteSliceMap d T W n).hom.app (op V)
+      ((pbcLevelConstantComparison T d n).hom.hom.app (op V.left)
+        ((toSheafify (ProEt.topology T)
+          ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))).app (op V.left) b)))
+  change (pbcLevelConstantComparison W.left d n).hom.hom.app _
+    ((pbcLevelConstantComparison W.left d n).inv.hom.app _ _) = _ at hi
+  erw [hi]
+  erw [(pbcLevelConstantComparison_exists T d n).exists.choose_spec,
+    (pbcLevelConstantComparison_exists W.left d n).exists.choose_spec]
+  exact ConcreteCategory.congr_hom
+    ((cbcFiniteSliceMap_exists d T W n).exists.choose_spec V)
+    (pbcQuotientConstant T d n (op V.left) b ⊥)
+
+private def openSliceForget {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) :
+    cbcSliceFunctor T (cbcOpenObject e he) ⋙ cbcOpenSiteFunctor e he ≅
+      Over.forget (cbcOpenObject e he) :=
+  NatIso.ofComponents (fun V ↦ MorphismProperty.Over.isoMk (Iso.refl _) (by
+    change 𝟙 _ ≫ V.left.hom = V.hom.left ≫ e
+    exact (MorphismProperty.Over.w V.hom).symm))
+    (by
+      intro V V' f
+      apply MorphismProperty.Over.Hom.ext
+      change f.left.left ≫ 𝟙 _ = 𝟙 _ ≫ f.left.left
+      simp)
+
+private theorem openSliceContinuous {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) :
+    (cbcSliceFunctor T (cbcOpenObject e he)).IsContinuous
+      ((ProEt.topology T).over (cbcOpenObject e he)) (ProEt.topology W) :=
+  cbcSliceFunctor_continuous T (cbcOpenObject e he)
+
+private theorem openSliceCompContinuous {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) :
+    (cbcSliceFunctor T (cbcOpenObject e he) ⋙ cbcOpenSiteFunctor e he).IsContinuous
+      ((ProEt.topology T).over (cbcOpenObject e he)) (ProEt.topology T) :=
+  @Functor.isContinuous_comp _ _ _ _ _ _ (cbcSliceFunctor T (cbcOpenObject e he))
+    (cbcOpenSiteFunctor e he) ((ProEt.topology T).over (cbcOpenObject e he))
+    (ProEt.topology W) (ProEt.topology T) (openSliceContinuous e he)
+    (cbcOpenSiteFunctor_continuous e he)
+
+attribute [local instance] openSliceContinuous openSliceCompContinuous
+
+private theorem finiteOpenSliceSquare {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
+    (finiteSliceRing d T (cbcOpenObject e he) n).hom ≫
+      ((cbcSliceFunctor T (cbcOpenObject e he)).sheafPushforwardContinuous
+        CommRingCat.{u + 1} ((ProEt.topology T).over (cbcOpenObject e he))
+        (ProEt.topology W)).map (finiteOpenRing d e he n).hom =
+    (show (coefficients (cbcFiniteRing d n) T).over (cbcOpenObject e he) ⟶
+      ((Functor.sheafPushforwardContinuous
+        (cbcSliceFunctor T (cbcOpenObject e he) ⋙ cbcOpenSiteFunctor e he)
+        CommRingCat.{u + 1}
+          ((ProEt.topology T).over (cbcOpenObject e he)) (ProEt.topology T)).obj
+          (coefficients (cbcFiniteRing d n) T)) from
+      ⟨Functor.whiskerRight (NatTrans.op (openSliceForget e he).hom)
+        (coefficients (cbcFiniteRing d n) T).obj⟩) := by
+  let O := cbcOpenObject e he
+  let L := Over.forget O
+  let C := ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))
+  let c := (L.pushforwardContinuousSheafificationCompatibility CommRingCat.{u + 1}
+    ((ProEt.topology T).over O) (ProEt.topology T)).app C
+  apply (cancel_epi c.hom).mp
+  apply Sheaf.hom_ext
+  apply sheafify_hom_ext _ _ _
+    (((cbcSliceFunctor T O ⋙ cbcOpenSiteFunctor e he).sheafPushforwardContinuous
+      CommRingCat.{u + 1} ((ProEt.topology T).over O) (ProEt.topology T)).obj
+        (coefficients (cbcFiniteRing d n) T)).property
+  change (toSheafify _ _ ≫ c.hom.hom) ≫
+      (finiteSliceRing d T (cbcOpenObject e he) n).hom.hom ≫
+      (Functor.whiskerLeft (cbcSliceFunctor T O).op
+        (finiteOpenRing d e he n).hom.hom) =
+    (toSheafify _ _ ≫ c.hom.hom) ≫
+      Functor.whiskerRight (NatTrans.op (openSliceForget e he).hom)
+        (coefficients (cbcFiniteRing d n) T).obj
+  erw [L.toSheafify_pullbackSheafificationCompatibility CommRingCat.{u + 1}
+    ((ProEt.topology T).over O) (ProEt.topology T) C]
+  ext V b
+  change (finiteOpenRing d e he n).hom.hom.app _
+    ((finiteSliceRing d T (cbcOpenObject e he) n).hom.hom.app V
+      ((toSheafify (ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))).app (op V.unop.left) b)) = _
+  rw [finiteSliceRing_unit]
+  have hc := ConcreteCategory.congr_hom
+    (congr_app (finiteOpenRing_unit d e he n)
+      (op ((cbcSliceFunctor T (cbcOpenObject e he)).obj V.unop))) b
+  have hn := ConcreteCategory.congr_hom
+    ((toSheafify (ProEt.topology T)
+      ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))).naturality
+      ((openSliceForget e he).hom.app V.unop).op) b
+  change (toSheafify (ProEt.topology T)
+      ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))).app
+      (op ((cbcOpenSiteFunctor e he).obj
+        ((cbcSliceFunctor T (cbcOpenObject e he)).obj V.unop))) b =
+    (coefficients (cbcFiniteRing d n) T).obj.map
+      ((openSliceForget e he).hom.app V.unop).op
+      ((toSheafify (ProEt.topology T)
+        ((Functor.const T.ProEtᵒᵖ).obj (cbcFiniteRing d n))).app
+        (op V.unop.left) b) at hn
+  exact hc.trans hn
+
+private theorem finiteSliceRing_projection (T : Scheme.{u}) (W : T.ProEt) (n : ℕ) :
+    CbcOpenRingSquare W (cbcCompletedRestriction W d) (finiteSliceRing d T W n)
+      (cbcFiniteProjection d T n) (cbcFiniteProjection d W.left n) := by
+  let F := (cbcSliceFunctor T W).sheafPushforwardContinuous CommRingCat.{u + 1}
+    ((ProEt.topology T).over W) (ProEt.topology W.left)
+  let O := (ProEt.topology T).overPullback CommRingCat.{u + 1} W
+  have h := (cbcCompletedSliceMap_exists d T W).exists.choose_spec n
+  change (cbcCompletedSliceMap d T W) ≫ F.map (pbcAdicProjection W.left d n) =
+    O.map (pbcAdicProjection T d n) ≫ cbcFiniteSliceMap d T W n at h
+  change O.map (cbcFiniteProjection d T n) ≫ (finiteSliceRing d T W n).hom =
+    (cbcCompletedSliceMap d T W) ≫ F.map (cbcFiniteProjection d W.left n)
+  dsimp only [cbcFiniteProjection, finiteSliceRing, Functor.mapIso_hom,
+    Iso.trans_hom, Iso.symm_hom, cbcFiniteRestriction, asIso_hom]
+  change (O.map (pbcAdicProjection T d n ≫ (pbcLevelConstantComparison T d n).inv) ≫
+      O.map (pbcLevelConstantComparison T d n).hom) ≫ cbcFiniteSliceMap d T W n ≫
+        F.map (pbcLevelConstantComparison W.left d n).inv =
+      cbcCompletedSliceMap d T W ≫
+        F.map (pbcAdicProjection W.left d n ≫ (pbcLevelConstantComparison W.left d n).inv)
+  rw [← O.map_comp, Category.assoc, Iso.inv_hom_id, Category.comp_id,
+    F.map_comp]
+  exact (congrArg (fun z ↦ z ≫ F.map (pbcLevelConstantComparison W.left d n).inv)
+    h.symm).trans (Category.assoc _ _ _)
+
+attribute [local irreducible] finiteSliceRing
+
+private theorem sliceModulePushforward_isEquivalence
+    (T : Scheme.{u}) (W : T.ProEt)
+    {R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    {S : Sheaf (ProEt.topology W.left) CommRingCat.{u + 1}}
+    (c : R.over W ≅ cbcSliceRing W S) :
+    (SheafOfModules.pushforward.{u + 1} (F := cbcSliceFunctor T W)
+      (J := (ProEt.topology T).over W) (K := ProEt.topology W.left)
+      (R := (sheafCompose (ProEt.topology W.left)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)
+      (S := ((sheafCompose (ProEt.topology T)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).over W)
+      ((sheafCompose ((ProEt.topology T).over W)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c.hom)).IsEquivalence := by
+  let a := ProEt.sliceEquiv T W
+  let := ProEt.sliceDense T W
+  have : a.symm.inverse.IsDenseSubsite ((ProEt.topology T).over W)
+      (ProEt.topology W.left) := inferInstanceAs
+    ((ProEt.sliceEquiv T W).functor.IsDenseSubsite
+      ((ProEt.topology T).over W) (ProEt.topology W.left))
+  let Rr := (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  let Sr := (sheafCompose (ProEt.topology W.left)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S
+  let cr : Rr.over W ≅
+      (a.functor.sheafPushforwardContinuous RingCat.{u + 1}
+        ((ProEt.topology T).over W) (ProEt.topology W.left)).obj Sr :=
+    (sheafCompose ((ProEt.topology T).over W)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso c
+  obtain ⟨q, hq⟩ := ProEt.module_transport (ProEt.topology W.left)
+    ((ProEt.topology T).over W) a.symm Sr (Rr.over W) cr
+  let P := SheafOfModules.pushforward.{u + 1} (F := cbcSliceFunctor T W)
+    (J := (ProEt.topology T).over W) (K := ProEt.topology W.left)
+    (R := Sr) (S := Rr.over W)
+    ((sheafCompose ((ProEt.topology T).over W)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c.hom)
+  let E : q.functor ≅ P :=
+    ((SheafOfModules.fullyFaithfulForget _).whiskeringRight _).preimageIso (eqToIso hq)
+  exact Functor.isEquivalence_of_iso E
+
+private def finiteModuleToSlice {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
+    ProEtale.StrictTower.Modules (cbcFiniteRing d n) W ⥤
+      SheafOfModules.{u + 1} (((sheafCompose (ProEt.topology T)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+          (coefficients (cbcFiniteRing d n) T)).over (cbcOpenObject e he)) := by
+  have : (cbcSliceFunctor T (cbcOpenObject e he)).IsContinuous
+      ((ProEt.topology T).over (cbcOpenObject e he)) (ProEt.topology W) :=
+    cbcSliceFunctor_continuous T (cbcOpenObject e he)
+  exact SheafOfModules.pushforward.{u + 1} (F := cbcSliceFunctor T (cbcOpenObject e he))
+    (J := (ProEt.topology T).over (cbcOpenObject e he)) (K := ProEt.topology W)
+    (R := (sheafCompose (ProEt.topology W)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients (cbcFiniteRing d n) W))
+    (S := ((sheafCompose (ProEt.topology T)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+        (coefficients (cbcFiniteRing d n) T)).over (cbcOpenObject e he))
+    ((sheafCompose ((ProEt.topology T).over (cbcOpenObject e he))
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+        (finiteSliceRing d T (cbcOpenObject e he) n).hom)
+
+private def finiteRestrictionToSlice {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
+    (SheafOfModules.pushforward.{u + 1} (F := cbcOpenSiteFunctor e he)
+      (J := ProEt.topology W) (K := ProEt.topology T)
+      (R := (sheafCompose (ProEt.topology T)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+          (coefficients (cbcFiniteRing d n) T))
+      (S := (sheafCompose (ProEt.topology W)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+          (coefficients (cbcFiniteRing d n) W))
+      ((sheafCompose (ProEt.topology W)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+          (finiteOpenRing d e he n).hom)) ⋙ finiteModuleToSlice d e he n ≅
+      SheafOfModules.overFunctor.{u + 1}
+        ((sheafCompose (ProEt.topology T)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+            (coefficients (cbcFiniteRing d n) T)) (cbcOpenObject e he) := by
+  have : (cbcSliceFunctor T (cbcOpenObject e he)).IsContinuous
+      ((ProEt.topology T).over (cbcOpenObject e he)) (ProEt.topology W) :=
+    cbcSliceFunctor_continuous T (cbcOpenObject e he)
+  have : (cbcOpenSiteFunctor e he).IsContinuous (ProEt.topology W) (ProEt.topology T) :=
+    cbcOpenSiteFunctor_continuous e he
+  have : (cbcSliceFunctor T (cbcOpenObject e he) ⋙ cbcOpenSiteFunctor e he).IsContinuous
+      ((ProEt.topology T).over (cbcOpenObject e he)) (ProEt.topology T) :=
+    Functor.isContinuous_comp _ _ _ (ProEt.topology W) _
+  let S := (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients (cbcFiniteRing d n) T)
+  let RW := (sheafCompose (ProEt.topology W)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients (cbcFiniteRing d n) W)
+  let φ : S.over (cbcOpenObject e he) ⟶
+      ((cbcSliceFunctor T (cbcOpenObject e he)).sheafPushforwardContinuous RingCat.{u + 1}
+        ((ProEt.topology T).over (cbcOpenObject e he)) (ProEt.topology W)).obj RW :=
+    (sheafCompose ((ProEt.topology T).over (cbcOpenObject e he))
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      (finiteSliceRing d T (cbcOpenObject e he) n).hom
+  let ψ : RW ⟶ ((cbcOpenSiteFunctor e he).sheafPushforwardContinuous RingCat.{u + 1}
+      (ProEt.topology W) (ProEt.topology T)).obj S := (sheafCompose (ProEt.topology W)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (finiteOpenRing d e he n).hom
+  refine SheafOfModules.pushforwardComp (F := cbcSliceFunctor T (cbcOpenObject e he))
+    (G := cbcOpenSiteFunctor e he) (J := (ProEt.topology T).over (cbcOpenObject e he))
+    (K := ProEt.topology W) (K' := ProEt.topology T) φ ψ ≪≫ ?_
+  refine (SheafOfModules.pushforwardCongr ?_) ≪≫
+    (SheafOfModules.pushforwardNatIso (F := cbcSliceFunctor T (cbcOpenObject e he) ⋙
+      cbcOpenSiteFunctor e he) (G := Over.forget (cbcOpenObject e he))
+      (𝟙 (S.over (cbcOpenObject e he))) (openSliceForget e he)).symm
+  apply Sheaf.hom_ext
+  apply NatTrans.ext
+  funext V
+  exact congrArg (fun z ↦ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map
+    (z.hom.app V)) (finiteOpenSliceSquare d e he n)
+
+private theorem openObject_subsingleton {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (V : T.ProEt) :
+    Subsingleton (V ⟶ cbcOpenObject e he) := by
+  let := he
+  constructor
+  intro f g
+  apply MorphismProperty.Over.Hom.ext
+  apply (cancel_mono e).mp
+  exact (MorphismProperty.Over.w f).trans (MorphismProperty.Over.w g).symm
+
+private def sliceExtension_fullyFaithful {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e)
+    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
+    (SheafOfModules.localizedSystemExtension.{u + 1, u, 0} R
+      (cbcOpenObject e he)).FullyFaithful := by
+  let Rr := (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  let a := SheafOfModules.extensionSheafAdjunction Rr (cbcOpenObject e he)
+  have h (M : SheafOfModules.{u + 1} (Rr.over (cbcOpenObject e he))) :
+      IsIso (a.unit.app M) :=
+    SheafOfModules.extensionSheafAdjunction_unit_isIso Rr (cbcOpenObject e he)
+      (openObject_subsingleton e he) M
+  have : IsIso a.unit := NatIso.isIso_of_isIso_app _
+  exact a.fullyFaithfulLOfIsIsoUnit
+
+private def finiteExtensionAdjunction {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
+    cbcRingedOpenExtension (cbcOpenObject e he)
+      (finiteSliceRing d T (cbcOpenObject e he) n) ⊣ modulePullback (cbcFiniteRing d n) e := by
+  have : (finiteModuleToSlice d e he n).IsEquivalence :=
+    sliceModulePushforward_isEquivalence T (cbcOpenObject e he)
+      (finiteSliceRing d T (cbcOpenObject e he) n)
+  let Q := (finiteModuleToSlice d e he n).asEquivalence
+  let R := (sheafCompose (ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (coefficients (cbcFiniteRing d n) T)
+  let a := AlgebraicGeometry.ProEtale.openAdjunctionTransport Q _ _ _
+    (SheafOfModules.extensionSheafAdjunction R (cbcOpenObject e he))
+    (finiteRestrictionToSlice d e he n)
+  exact a.ofNatIsoRight (finiteOpenModel d e he n).symm
+
+private def finiteExtensionComparison {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :=
+  (finiteExtensionAdjunction d e he n).leftAdjointUniq
+    (@moduleJAdj.{u} (cbcFiniteRing d n) _ W T e he)
+
+private theorem finiteExtension_unit_isIso {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
+    IsIso (@moduleJAdj.{u} (cbcFiniteRing d n) _ W T e he).unit := by
+  have : (finiteModuleToSlice d e he n).IsEquivalence :=
+    sliceModulePushforward_isEquivalence T (cbcOpenObject e he)
+      (finiteSliceRing d T (cbcOpenObject e he) n)
+  let F := cbcRingedOpenExtension (cbcOpenObject e he)
+    (finiteSliceRing d T (cbcOpenObject e he) n)
+  let hF : F.FullyFaithful := Functor.FullyFaithful.comp
+    (Functor.FullyFaithful.ofFullyFaithful (finiteModuleToSlice d e he n))
+    (sliceExtension_fullyFaithful e he (coefficients (cbcFiniteRing d n) T))
+  let hJ := hF.ofIso (finiteExtensionComparison d e he n)
+  let := hJ.full
+  let := hJ.faithful
+  infer_instance
+
+private def completedExtension_fullyFaithful {W T : Scheme.{u}}
+    (e : W ⟶ T) (he : IsOpenImmersion e) : (cbcOpenShriek d e he).FullyFaithful := by
+  have : (cbcModuleToSlice d T (cbcOpenObject e he)).IsEquivalence :=
+    sliceModulePushforward_isEquivalence T (cbcOpenObject e he)
+      (cbcCompletedRestriction (cbcOpenObject e he) d)
+  exact Functor.FullyFaithful.comp
+    (Functor.FullyFaithful.ofFullyFaithful (cbcModuleToSlice d T (cbcOpenObject e he)))
+    (sliceExtension_fullyFaithful e he (pbcAdicCompletion T d))
+
 /-- The normalized open-extension comparison is invertible.
 Source: Stacks 03DI (blueprint: def-cbc-completed-finite-exchange-coordinates).
-Proof: both extensions are the same direct-sum extension followed by sheafification,
-with scalars restricted along the finite projection. The mate sends each extension
-summand to the identical summand. Its inverse does the same; sheafification gives
-the two inverse identities. -/
+Proof: the finite extension unit is invertible, and the adjunct of the specified
+mate is this unit followed by the fixed open-restriction isomorphism. The existing
+ringed-slice scalar comparison places its target in the essential image of the
+fully faithful completed extension. Its counit is therefore invertible, and the
+adjunction formula expresses the mate as a composite of two isomorphisms. -/
 @[instance] theorem cbcFiniteOpenRes_isIso {W T : Scheme.{u}}
     (e : W ⟶ T) (he : IsOpenImmersion e) (n : ℕ) :
     IsIso (cbcFiniteOpenRes d e he n) := by
-  sorry
+  let := he
+  let a := @moduleJAdj.{u} (cbcFiniteRing d n) _ W T e he
+  let b := cbcOpenAdjunction d e he
+  have := finiteExtension_unit_isIso d e he n
+  let hb := completedExtension_fullyFaithful d e he
+  let := hb.full
+  let := hb.faithful
+  let θ := cbcOpenRestrictIso (cbcOpenObject e he)
+    (cbcCompletedRestriction (cbcOpenObject e he) d)
+    (finiteSliceRing d T (cbcOpenObject e he) n)
+    (cbcFiniteProjection d T n) (cbcFiniteProjection d W n)
+    (finiteSliceRing_projection d T (cbcOpenObject e he) n)
+  let χ := θ ≪≫ Functor.isoWhiskerRight (finiteExtensionComparison d e he n)
+    (cbcFiniteRes d T n)
+  have h (M : ProEtale.StrictTower.Modules (cbcFiniteRing d n) W) :
+      IsIso ((cbcFiniteOpenRes d e he n).app M) := by
+    let f := (cbcFiniteOpenRes d e he n).app M
+    have hf : b.homEquiv _ _ f =
+        (cbcFiniteRes d W n).map (a.unit.app M) ≫
+          (cbcFiniteOpenRestriction d e he n).hom.app ((moduleJ (cbcFiniteRing d n) e).obj M) := by
+      rw [Adjunction.homEquiv_unit]
+      exact (unit_mateEquiv_symm a b
+        (TwoSquare.mk _ _ _ _ (cbcFiniteOpenRestriction d e he n).hom) M).symm
+    have hi : IsIso (b.homEquiv _ _ f) := by
+      rw [hf]
+      infer_instance
+    have hs : (cbcOpenShriek d e he).essImage
+        (((moduleJ (cbcFiniteRing d n) e) ⋙ cbcFiniteRes d T n).obj M) :=
+      ⟨(cbcFiniteRes d W n).obj M, ⟨χ.app M⟩⟩
+    have : IsIso (b.counit.app _) := b.isIso_counit_app_iff_mem_essImage.mpr hs
+    have heq : f = (cbcOpenShriek d e he).map (b.homEquiv _ _ f) ≫ b.counit.app _ :=
+      ((b.homEquiv _ _).symm_apply_apply f).symm
+    change IsIso f
+    rw [heq]
+    infer_instance
+  exact NatIso.isIso_of_isIso_app _
 
 /-- Finite coordinates for the source of the ordinary exchange, built by the
 specified open and pullback mates.
