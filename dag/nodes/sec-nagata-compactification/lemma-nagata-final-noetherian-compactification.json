@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-final-noetherian-compactification",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Property of the selected Noetherian compactification",
@@ -13,29 +13,123 @@
   "place": "node lemma-nagata-final-noetherian-compactification, order 376"
  },
  "stmt_deps": [
-  "def-nagata-final-noetherian-compactification"
+  "def-nagata-final-noetherian-compactification",
+  "def-nagata-compactification"
  ],
  "proof": [
   {
-   "text": "The base is Noetherian and the descended morphism is separated and of\nfinite presentation, hence of finite type. Therefore\n[thm-nagata-noetherian] applies to the\nexplicitly selected recursive construction and gives the assertion.",
+   "text": "Write $g:Y_{\\lambda_Y}\\to S_{\\lambda_Y}$ for the selected descended morphism. By [lemma-nagata-final-descended-model], $S_{\\lambda_Y}$ is Noetherian and $g$ is separated and of finite presentation. These are properties of the selected model itself; no replacement model or new compactification is chosen.",
+   "uses": [
+    "lemma-nagata-final-descended-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-cor-nagata-sketch-fp/lemma-nagata-final-noetherian-compactification.proof.md",
+    "place": "First sentence: Noetherian base and separated finitely presented descended morphism"
+   }
+  },
+  {
+   "text": "Finite presentation in [def-sbc-locally-finite-presentation] includes quasi-compactness. On affine charts a finitely presented algebra has the form $A[t_1,\\ldots,t_n]/(r_1,\\ldots,r_m)$; the images of the finitely many $t_i$ generate it as an $A$-algebra, irrespective of the relations. Thus $g$ is locally of finite type and quasi-compact, hence of finite type by [def-weil-finite-type-morphism]. This is the elementary implication of Stacks Tag 01TW (morphisms, lemma-finite-presentation-finite-type).",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-cor-nagata-sketch-fp/lemma-nagata-final-noetherian-compactification.proof.md",
+    "place": "First sentence, the implication finite presentation hence finite type; Stacks Tag 01TW"
+   }
+  },
+  {
+   "text": "Apply [thm-nagata-noetherian] to $X=Y_{\\lambda_Y}$, base $S_{\\lambda_Y}$, and morphism $g$. Step 1 supplies the Noetherian base and separatedness, and step 2 supplies finite type. Its assertion about the recursively constructed factorization gives that $\\mathsf C_{\\mathrm{Noeth}}(Y_{\\lambda_Y}/S_{\\lambda_Y})$ is a compactification of $g$. We use this assertion about that construction, rather than merely its consequent that $g$ is compactifiable.",
    "uses": [
     "thm-nagata-noetherian"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-cor-nagata-sketch-fp/lemma-nagata-final-noetherian-compactification.proof.md",
+    "place": "Second sentence: apply thm-nagata-noetherian to the explicitly selected recursive construction"
+   }
+  },
+  {
+   "text": "By [def-nagata-final-noetherian-compactification], $C_{Y,\\lambda_Y}$ is precisely $\\mathsf C_{\\mathrm{Noeth}}(Y_{\\lambda_Y}/S_{\\lambda_Y})$. Substituting this defining equality in step 3 proves the assertion for the selected $C_{Y,\\lambda_Y}$. In the terminology of [def-nagata-compactification], its factorization has a quasi-compact open immersion $j$, a proper map $p$, and $j;p=g$, as required.",
+   "uses": [
+    "def-nagata-final-noetherian-compactification",
+    "def-nagata-compactification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-cor-nagata-sketch-fp/lemma-nagata-final-noetherian-compactification.proof.md",
+    "place": "Second sentence, identification of the explicitly selected construction with the object in the statement"
+   }
   }
  ],
  "proof_deps": [
-  "thm-nagata-noetherian",
-  "lemma-nagata-final-descended-model"
+  "def-nagata-compactification",
+  "def-nagata-final-noetherian-compactification",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lemma-nagata-final-descended-model",
+  "thm-nagata-noetherian"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-cor-nagata-sketch-fp/lemma-nagata-final-noetherian-compactification.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-cor-nagata-sketch-fp/lemma-nagata-final-noetherian-compactification.proof.md",
+  "place": "Whole proof; elementary affine-algebra expansion of the first sentence using Stacks Tag 01TW"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Compactification|compactification|compactifiable",
+   "results": "No hits under Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The selected Noetherian compactification of a separated morphism of finite presentation is a compactification",
+   "results": "Eight hits, including TopologicalSpace.NoetherianSpace.isCompact, AlgebraicGeometry.IsNoetherian.toCompactSpace, AlgebraicGeometry.isProper_eq and isProper_iff, and AlgebraicGeometry.quasiCompact_of_noetherianSpace_source. These concern compactness/properness, not a selected compactification.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Compactification, AlgebraicGeometry.IsNoetherian",
+   "results": "Zero hits: loogle: unknown identifier 'AlgebraicGeometry.Compactification'. This query could not identify the project-specific notion.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The selected recursive Noetherian compactification of a separated finitely presented descended scheme over a Noetherian base is a compactification",
+   "results": "Eight hits, including AlgebraicGeometry.IsNoetherian.toCompactSpace, isNoetherian_iff, quasiCompact_of_noetherianSpace_source and IsNoetherian. None constructs or certifies the selected compactification.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "grep",
+   "query": "Nagata|nagata|compactif|LocallyOfFinitePresentation.*LocallyOfFiniteType",
+   "results": "Two hits: Mathlib/AlgebraicGeometry/Noetherian.lean:274-275, LocallyOfFinitePresentation.iff_locallyOfFiniteType. No Nagata or compactification hit.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyOfFinitePresentation, AlgebraicGeometry.LocallyOfFiniteType",
+   "results": "Three hits in Mathlib: AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation (Morphisms/FinitePresentation.lean), instLocallyOfFinitePresentationOfIsLocallyNoetherianOfLocallyOfFiniteType and LocallyOfFinitePresentation.iff_locallyOfFiniteType (Noetherian.lean). These give the auxiliary finite-type implication, not the item.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; auxiliary finite-type implication found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nagata compactification theorem separated finite type morphism factors as an open immersion followed by a proper morphism over a Noetherian scheme",
+   "results": "Eight hits: AlgebraicGeometry.isProper_iff, IsProper.of_valuativeCriterion, isProper_eq, instIsProperOfIsFinite, IsProper.instOfIsFinite, IsFinite, Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat, and IsImmersion.isImmersion_iff_exists_of_quasiCompact. None states Nagata compactification or certifies the selected construction.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -75,5 +169,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-final-noetherian-compactification",
+  "worker": "stage1",
+  "summary": "Expanded the current blueprint proof into four steps, citing the selected descended-model properties, writing out the elementary finite-presentation-to-finite-type implication, applying the theorem that certifies the recursive Noetherian construction, and substituting the defining equality for the selected final compactification. Added the compactification definition as a statement dependency. No new nodes and no statement change. All Mathlib searches were executed through msearch.py and read; no Mathlib match for the item.",
+  "blueprint": "main-20261015, lemma-nagata-final-noetherian-compactification.proof.md: step 1 realizes the first sentence hypotheses; step 2 expands hence of finite type; step 3 realizes application of thm-nagata-noetherian to the selected recursive construction; step 4 identifies it with C_{Y,lambda_Y} as defined at order 382."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-9b091d5ea",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-9b091d5ea (reviewer sub-agent of L); spot-checked: I read the whole delivery: 0 new nodes, statement unchanged and verbatim equal to master and main-20261015, stmt_deps correctly gain def-nagata-compactification. The 4 steps realise the main-20261015 proof.md exactly. Step 1: the statement of lemma-nagata-final-descended-model gives an fp, separated model over a Noetherian S_{λ_Y}. Step 2: elementary fp ⇒ ft from the chart form in def-sbc-locally-finite-presentation and def-weil-finite-type-morphism, citing Stacks Tag 01TW (morphisms.tex:4230). Under the 2026-10-10 rule this is an accepted elementary step, and no DAG node states it. Step 3: the hypotheses of thm-nagata-noetherian (Noetherian base, separated, finite type, via def-nagata-noetherian-compactification and blueprint_update) are all met, and the theorem certifies the selected C_Noeth itself. Step 4: substitutes the displayed definition C_{Y,λ_Y}=C_Noeth(Y_{λ_Y}/S_{λ_Y}); the DAG's quasi-compact open immersion sense is kept, so nothing is weakened. The route follows the unit sk-cor-nagata-sketch-fp (descend, Noetherian Nagata, base change). There is no SGA, no tool use and no duplicate (grep for C_{Y,λ_Y}/C_Noeth). No repair note applies, the item is still imported in live and side-live, and the parallel Q116 def split leaves its statement unchanged. Edge cases (empty model, zero-variable algebras) are fine. Minor and not faults: the import field uses_not_cited is now stale, and source still names master order 376."
  }
 }
