@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.EtaleMonodromyRealizationData
 import Sheaf.Paper.MonodromyLimitRationalExact
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Whiskering
-import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
+import WeilConjectures.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.ConstructibleSheaf.Simple
 import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
 import WeilConjectures.ConstructibleSheaf.OfForget

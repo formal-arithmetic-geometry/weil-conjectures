@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.Data.ZMod.Basic
-import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
+import WeilConjectures.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.AlgebraicGeometry.FiniteLocalCyclicModuleForget
 import WeilConjectures.AlgebraicGeometry.KilledSheafModuleLift
 import WeilConjectures.ConstructibleSheaf.Pullback

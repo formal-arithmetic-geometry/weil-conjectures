@@ -15,8 +15,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.Defs.Filter
-import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
-import Sheaf.AlgebraicGeometry.SetLocalSystemCalculus
+import WeilConjectures.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
 
 /-!

@@ -101,14 +101,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteLocalAbelianForget.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteLocalAbelianForget",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteLocalAbelianForget.lean",
   "declaration": "AlgebraicGeometry.Scheme.finite_local_abelian_forget_iff",
-  "statement": "theorem finite_local_abelian_forget_iff {Y : Scheme.{u}}\n    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    IsFiniteLocallyConstantEtaleSheafOfSets\n      ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G) ↔\n    IsLocallyConstantSheaf G ∧\n      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),\n        Finite (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj G)",
+  "statement": "theorem finite_local_abelian_forget_iff {Y : Scheme.{u}}\n    (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :\n    IsFiniteLocallyConstantSheafOfTypes\n      ((sheafCompose Y.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G) ↔\n    IsLocallyConstantSheaf G ∧\n      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y),\n        Finite (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj G)",
   "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-12"
+  "by": "F5",
+  "date": "2026-10-21",
+  "note": "Retirement of the duplicate Sheaf module: IsLisseEtaleSheafOfSets abbreviates IsFiniteLocallyConstantSheafOfTypes. All six remaining direct consumers use the unchanged proved upstream declaration. The mathematical node and its parent dependency edges are retained."
  },
  "lean_audit": {
   "master": {
@@ -133,13 +134,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V3",
+  "reviewer": "C-6ab37",
+  "group": "F5",
   "result": "pass",
-  "landing": "20261012T085354-L-45797",
+  "landing": "20261021T003506-L-1643472",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn Sheaf stub + 6 import swaps vs live clone; old signature (IsLisseEtaleSheafOfSets abbrev) vs upstream WeilConjectures.AlgebraicGeometry.FiniteLocalAbelianForget.finite_local_abelian_forget_iff via a compiling probe; node lean record vs upstream signature; retire-items.tsv line 47"
  }
 }
