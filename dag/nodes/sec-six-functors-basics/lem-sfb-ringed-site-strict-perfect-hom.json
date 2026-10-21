@@ -15,50 +15,65 @@
  },
  "proof": [
   {
-   "text": "Apply [lem-sfb-ringed-site-finite-retract-dual-exact] to the chosen retraction of each $E^i$. Each $(E^i)^\\vee$ has a finite-free retraction, each $\\delta_{E^i}$ is invertible, and every $\\mathcal Hom_R(E^i,-)$ is exact.",
+   "text": "Construct scalar evaluation on underlying presheaves by y tensor phi mapping to the local map x mapping to phi(x) times the restriction of y, and descend it through the sheafification adjunction. Evaluation out of the coefficient sheaf is invertible by evaluation at 1. For a finite-free retract, apply the two contravariant additive Hom functors and tensoring to the finite dual-basis identity. The sum of the unit inverses between the corresponding inclusions and projections is an inverse to scalar evaluation. This argument works with independent site and coefficient universes.",
    "uses": [
-    "lem-sfb-ringed-site-finite-retract-dual-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
-   }
-  },
-  {
-   "text": "Choose bounds $[a,b]$ for $E$. By [lem-sfb-ringed-site-bounded-dual-components], $D^q\\cong(E^{-q})^\\vee$ and $D$ has bounds $[-b,-a]$. Transport the retractions from step 1 across these isomorphisms. This is the required degreewise package; its inclusions and projections need not be chain maps. Apply [lem-sfb-ringed-site-finite-retract-dual-exact] to these retractions to obtain exactness of $\\mathcal Hom_R(D^q,-)$.",
-   "uses": [
-    "lem-sfb-ringed-site-bounded-dual-components",
-    "lem-sfb-ringed-site-finite-retract-dual-exact",
+    "lem-pur-ringed-site-pullback-dual-free-chart",
+    "lem-pur-independent-ringed-tensorator-existence",
     "def-weil-pbc-strict-perfect-coefficient-package"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
    }
   },
   {
-   "text": "The fixed augmentation $F\\to I(F)$ is a quasi-isomorphism by [def-pur-derived-internal-hom]. Apply [lem-pc-bounded-exact-term-hom-quasi-iso] with bounded exact-Hom source $E$ for arbitrary $F$, and with source $D$ and target $O$. These give exactly both required augmentation comparisons; the cited theorem permits unbounded targets.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-pc-bounded-exact-term-hom-quasi-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
-   }
-  },
-  {
-   "text": "By [lem-sfb-ringed-site-bounded-dual-components], the signed ordinary bidual has components $(-1)^i\\delta_{E^i}$, hence is degreewise invertible by step 1. Inverting its chain-map equation gives an inverse chain map. For every $i,M$, [lem-pc-finite-projective-internal-hom-evaluation] applies to the chosen finite-free retraction of $E^i$ and supplies $\\theta_{i,M}$. Apply [lem-sfb-ringed-site-bounded-evaluation-assembly] to obtain an invertible ordinary evaluation for arbitrary $F$. The formulas in [lem-sfb-ringed-site-duality-maps] are precisely the signed bidual and sign-free evaluation used by these two nodes, so these are the actual maps in the statement.",
+   "text": "Apply bounded dual components to identify each degree of D with the sole possibly nonzero Hom factor Hom(E^(-n),O), and to obtain support in [-b,-a]. Apply the contravariant additive internal-Hom functor to the specified finite-free retraction. Its value on a finite power of O is again a finite power of O: use the finite biproduct identification and Hom(O,O)=O. Transport this retraction through the canonical degree identification to construct the dual coefficient package.",
    "uses": [
     "lem-sfb-ringed-site-bounded-dual-components",
-    "lem-pc-finite-projective-internal-hom-evaluation",
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-pur-ringed-site-pullback-dual-free-chart",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
+   }
+  },
+  {
+   "text": "The finite-retract dual-exact theorem gives an invertible termwise bidual map. Its slice formula identifies it with the delta of bounded dual components. The latter theorem factors its chain map beta degreewise as the signed delta followed by the inverse of its canonical gamma. Thus beta is componentwise invertible. Its local formula is exactly RingedSiteBidualFormula, so uniqueness identifies beta with the actual ordinary signed bidual map.",
+   "uses": [
+    "lem-sfb-ringed-site-finite-retract-dual-exact",
+    "lem-sfb-ringed-site-bounded-dual-components",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
+   }
+  },
+  {
+   "text": "The finite-retract dual-exact theorem makes internal Hom out of each term exact. Translate the specified finite product retract into the finite-free coproduct convention by the canonical biproduct and index-equivalence isomorphisms. Apply the independent-universe bounded exact-term Hom theorem to the fixed K-injective augmentation, which is a quasi-isomorphism. Do this first for E and arbitrary F, then for D and the coefficient complex, using the boundedness and coefficient package already constructed.",
+   "uses": [
+    "lem-sfb-ringed-site-finite-retract-dual-exact",
+    "lem-sfb-independent-bounded-exact-term-hom",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
+   }
+  },
+  {
+   "text": "The module evaluation theta of bounded evaluation assembly agrees with the scalar evaluation of the first step by its pure-tensor formula and the sheafification adjunction. Hence each theta is invertible on the specified finite-free retract. Apply assembly to obtain the evaluation isomorphism epsilon. Its nonzero Hom-factor formula and its vanishing off-diagonal formula give RingedSiteEvaluationFormula; the normalized sole-factor projection acts on sections as the coefficient Hom projection. Uniqueness then identifies epsilon with every actual ordinary evaluation, including arbitrary unbounded targets.",
+   "uses": [
     "lem-sfb-ringed-site-bounded-evaluation-assembly",
     "lem-sfb-ringed-site-duality-maps"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 08JH, lemma-Rhom-strictly-perfect; Tag 08JJ, lemma-dual-perfect-complex, bounded strictly perfect calculation in the final two paragraphs."
@@ -66,19 +81,21 @@
   }
  ],
  "proof_deps": [
-  "lem-sfb-ringed-site-finite-retract-dual-exact",
-  "lem-sfb-ringed-site-bounded-dual-components",
+  "lem-pur-ringed-site-pullback-dual-free-chart",
+  "lem-pur-independent-ringed-tensorator-existence",
   "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-sfb-ringed-site-bounded-dual-components",
+  "lem-sc-hom-complex-projections",
+  "lem-sfb-ringed-site-finite-retract-dual-exact",
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-sfb-independent-bounded-exact-term-hom",
   "def-pur-derived-internal-hom",
-  "lem-pc-bounded-exact-term-hom-quasi-iso",
-  "lem-pc-finite-projective-internal-hom-evaluation",
-  "lem-sfb-ringed-site-bounded-evaluation-assembly",
-  "lem-sfb-ringed-site-duality-maps"
+  "lem-sfb-ringed-site-bounded-evaluation-assembly"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08JH and 08JJ; the local ordinary calculation, without local-to-global descent."
+  "place": "Tags 08JH and 08JJ, bounded strictly perfect calculations. The proof uses the stated ringed-site finite-retract, bounded-dual and bounded-evaluation assembly declarations. The bounded exact-term Hom comparison is instantiated through its existing independent-universe extension; termwise scalar evaluation is proved directly by the finite dual-basis identity."
  },
  "mathlib_searches": [
   {
@@ -178,12 +195,12 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-5ec52588e (reviewer sub-agent of L); spot-checked: Re-split note answered: the 5-step, 3221-character base proof is now a 4-step, 1637-character assembly with 3 new statement-only nodes; I found no newer live or side-live re-split and nothing dropped. Old step map: step 1 → new finite-retract-dual-exact plus existing lem-pc-finite-projective-internal-hom-evaluation (same b⊗φ↦(e↦bφ(e)) map, same p∘i=1 hypothesis); step 2 → existing lem-pc-bounded-exact-term-hom-quasi-iso (already cited; arbitrary targets); step 3 → new bounded-dual-components plus transported retractions; step 4 → components (−1)^iδ plus the dual-basis inverse; step 5 → new bounded-evaluation-assembly. Hand checks: Σλ_j(t)t_j=pit=t, φ=Σφ(t_j)λ_j, both composites of δ with its inverse are identities, and a retract of exact Hom(R^r,−) is exact. D^q=Hom(E^{-q},R) with support [−b,−a]; d_D=(−1)^{q+1}φd_E; d_{D'}=−d^{∨∨}; β has components (−1)^iδ and is a chain map. The tensor differential sign (−1)^{p+q+1} matches the Hom differential, so ε has no extra sign, matching the lem-sfb-ringed-site-duality-maps normalizations; sums are finite in each degree, so unbounded F is allowed. Edge cases r=0, R=0, odd one-term and two-term complexes, characteristic 2 all check out. Sources: Stacks sites-cohomology 08JH (l.11912) and 08JJ (l.13048), final paragraphs; no SGA. Not duplicates: the pc evaluation-assembly nodes are scheme-open only (the new node strictly generalizes them, advisory); the sf/pod finite-projective nodes are D^b_ctf over F̄_q. No cycles: new stmt_deps are definitions only. Both tool_uses accepted as generic ringed-site black boxes. Maintainer: new nodes have blueprint.from.node=null because the item's created.item is a Lean module name; set it to lem-sfb-ringed-site-perfect-duality and regenerate."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U6",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261020T221355-L-4179459",
+  "landing": "20261021T193357-L-1142759",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
@@ -205,8 +222,5 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-bounded-exact-term-hom-quasi-iso",
-  "lem-pc-finite-projective-internal-hom-evaluation"
- ]
+ "tool_uses": []
 }
