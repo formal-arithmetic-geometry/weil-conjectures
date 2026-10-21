@@ -16,117 +16,65 @@
  ],
  "proof": [
   {
-   "text": "Write $c_{g,f}:(gf)_*\\to g_*f_*$ and $u_T:(\\mathrm{id}_T)_*\\to\\mathrm{id}$. Construct these first on module sheaves using [def-weil-pbc-direct-image]. For $V\\to Z$ etale, the map $a:(V\\times_ZY)\\times_YX\\to V\\times_ZX$ preserving the projections to $V,X$ is an isomorphism: its inverse has projections $(v,f(x)),x$. The universal property in [def-pc-fibre-product] verifies both inverse identities. Put $(c_{g,f,F})_V=F(a)$, so it has exactly the required direction $F(V\\times_ZX)\\to F((V\\times_ZY)\\times_YX)$. Put $(u_{T,F})_V=F(b)$, where $b:V\\to V\\times_TT$ has projections $\\mathrm{id}_V,V\\to T$. Naturality in $V$ follows because the two scheme maps have the same projections; naturality in $F$ is the naturality of a sheaf morphism at $a,b$. These maps are $\\Lambda$-linear: restriction respects the module action, and pullback of each constant scalar along $a,b$ is that same scalar. Inverses come from $a^{-1},b^{-1}$.",
+   "text": "Use the existing constant-coefficient etale adjunction upperStarLowerStarAdjunction for [def-weil-pbc-inverse-image] and [def-weil-pbc-direct-image]. The inverse image preserves monomorphisms by the source-library instances, so Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms, the criterion of [lem-exc-rg-right-adjoint-preserves-injectives], supplies preservation of injectives for each direct image. The existing Grothendieck abelian instances supply enough injectives in the category Sheaf(T.smallEtaleTopology, ModuleCat Lambda).",
+   "uses": [
+    "def-weil-pbc-inverse-image",
+    "def-weil-pbc-direct-image",
+    "lem-exc-rg-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let c be the already constructed lowerStarComp comparison, and define d as the inverse of Functor.rightDerivedFunctorPlusCompIso' applied to c. This is the existing composition construction for bounded-below right derived functors, obtained by uniqueness of the right derived functor [lem-weil-pbc-right-derived-plus-injective]. Its factorization equation rightDerivedFunctorPlusCompIso'_fac, evaluated at I, and rightDerivedFunctorPlusCompUnit_app give alpha(fg) followed by d equal to Q(c.inv) followed by alpha(g) at fI and Rg(alpha(f)). Cancel the forward composition comparison to prove the equation, then cancel Q(c.inv)Q(c.hom). This proves the required normalization on every complex, in particular injective complexes.",
    "uses": [
     "def-weil-pbc-direct-image",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition, underived comparison made explicit from the direct-image formula; fibre-product universal property"
-   }
-  },
-  {
-   "text": "The comparisons just constructed obey the underived associativity and unit equations. At $V\\to W$, both associativity composites are obtained by applying $F$ to the map from $((V\\times_WZ)\\times_ZY)\\times_YX$ to $V\\times_WX$ that preserves the projections to $V$ and $X$. The two maps are equal by [def-pc-fibre-product]; contravariance gives $(h_*c_{g,f})c_{h,gf}=(c_{h,g}f_*)c_{hg,f}$. For either unit composite the resulting map from $V\\times_YX$ to itself preserves both projections, hence is the identity. Thus $(u_Yf_*)c_{\\mathrm{id}_Y,f}=\\mathrm{id}$ and $(f_*u_X)c_{f,\\mathrm{id}_X}=\\mathrm{id}$. These are equalities of natural transformations of module sheaves, and therefore hold degree by degree for complexes too.",
-   "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, underived associativity and unit comparisons underlying the composition formula; explicit universal-property verification"
-   }
-  },
-  {
-   "text": "For every scheme map $v$, constant-coefficient module inverse image $v^{-1}$ is exact and left adjoint to $v_*$ by clause (3) of [prop-weil-pbc-inverse-image-modules-exact]. It therefore preserves monomorphisms, and [lem-exc-rg-right-adjoint-preserves-injectives] applies to this adjunction: $v_*$ sends injective module sheaves to injective module sheaves. It is additive by [def-weil-pbc-direct-image]. Hence it acts on complexes and homotopies; a zero term stays zero. In particular $f_*I$, $g_*f_*I$ and all composite direct images of a bounded-below injective complex $I$ are again bounded-below complexes of injectives. This uses the constant ring identification in the cited exactness proposition, not flatness of a scheme morphism.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-exc-rg-right-adjoint-preserves-injectives",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 015Z, lemma-adjoint-preserve-injectives, (a) implies (c); sites-modules.tex Tag 04JC, lemma-flat-pullback-exact, constant-ring case"
-   }
-  },
-  {
-   "text": "The module categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. For every edge $v$ denote the natural derived-functor map by $\\alpha^v_L:Q(v_*L)\\to Rv_*(QL)$. [lem-weil-pbc-right-derived-plus-injective] gives this map and says it is invertible whenever $L$ is a bounded-below injective complex. For such $I$ put\n$$t_{g,f,I}=Rg_*(\\alpha^f_I)\\circ\\alpha^g_{f_*I},\\qquad D_{g,f,I}=t_{g,f,I}\\circ Q(c_{g,f,I})\\circ(\\alpha^{gf}_I)^{-1}.$$\nStep 3 ensures that $\\alpha^g_{f_*I}$ is invertible, so $D_{g,f,I}:R(gf)_*(QI)\\to Rg_*Rf_*(QI)$ is an isomorphism. Naturality of $\\alpha$ and $c$ shows that $D_{g,f,I}$ commutes with every $Q(k)$ for a chain map $k:I\\to J$. Additive functors preserve the chain-homotopy equation, so the same assertion holds for homotopy classes. This formula is precisely the stipulated normalization, with all three computation isomorphisms displayed.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
     "lem-weil-pbc-right-derived-plus-injective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05TI, lemma-enough-injectives-right-derived, and 05TH, lemma-injective-acyclic; injectives.tex Tag 01DU, theorem-sheaves-modules-injectives"
-   }
+   "elementary": true
   },
   {
-   "text": "For $K\\in D^+(X_{\\mathrm{et}},\\Lambda)$ choose $e:QI\\xrightarrow{\\sim}K$ with $I$ bounded below and injective, using [lem-weil-pbc-dplus-injective-representative]. Write $A=R(gf)_*$, $B=Rg_*Rf_*$, and define\n$$d_{g,f,K}=B(e)\\circ D_{g,f,I}\\circ A(e)^{-1}.$$\nFor another choice $e':QJ\\xrightarrow{\\sim}K$, [lem-weil-pbc-kinjective-hom-derived] represents $(e')^{-1}e$ by a homotopy class $k:I\\to J$. The equation $B(Qk)D_{g,f,I}=D_{g,f,J}A(Qk)$ from step 4 proves equality of the two displayed formulas after substituting $e=e'Qk$. For a map $r:K\\to K'$, represent $(e')^{-1}re$ by a homotopy class in the same way; that equation gives $B(r)d_K=d_{K'}A(r)$. Thus these components form a natural isomorphism. Any natural transformation with the prescribed components on $QI$ must satisfy the displayed conjugation formula by naturality at $e$; hence it equals $d_{g,f}$.",
+   "text": "To prove uniqueness of the natural transformation, take an arbitrary bounded-below derived object K and a cohomological lower bound n. By [lem-weil-pbc-dplus-injective-representative], choose a bounded-below complex L of injective objects and e:QI isomorphic to K. The source-library quotient instances verify that I has injective terms. Naturality at e of both candidate transformations and equality at QI imply equality at K, after cancellation of the invertible R(fg)(e). No lift of a morphism between distinct representatives is needed.",
    "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 013K, lemma-injective-resolutions-exist; 070J, lemma-bounded-below-injectives-K-injective; 070I, lemma-K-injective, (3); explicit conjugation argument"
-   }
-  },
-  {
-   "text": "For the identity map on $T$ set $D_{T,I}=Q(u_{T,I})\\circ(\\alpha^{\\mathrm{id}_T}_I)^{-1}:R(\\mathrm{id}_T)_*(QI)\\to QI$. The map $\\alpha^{\\mathrm{id}_T}_I$ is invertible by [lem-weil-pbc-right-derived-plus-injective]. Naturality of $u_T$ and $\\alpha$ makes $D_{T,I}$ natural on chain maps and on homotopy classes. Apply exactly the conjugation formula of step 5, now with $A=R(\\mathrm{id}_T)_*$ and $B=\\mathrm{id}$, to obtain $d_T$. The representative existence and the Hom bijection used there are [lem-weil-pbc-dplus-injective-representative] and [lem-weil-pbc-kinjective-hom-derived]. This gives the required identity normalization and its uniqueness.",
-   "uses": [
-    "lem-weil-pbc-right-derived-plus-injective",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05TH, lemma-injective-acyclic; 013K and 070I; identity specialization of the explicit conjugation argument"
-   }
-  },
-  {
-   "text": "Evaluate the associativity equation at $QI$. Step 3 permits computing with $I,f_*I,g_*f_*I$. Put\n$$t=Rh_*Rg_*(\\alpha^f_I)\\circ Rh_*(\\alpha^g_{f_*I})\\circ\\alpha^h_{g_*f_*I}.$$\nExpanding the left side with step 4 gives\n$$t\\circ Q((h_*c_{g,f,I})\\circ c_{h,gf,I})\\circ(\\alpha^{hgf}_I)^{-1}.$$\nIndeed the two occurrences of $Rh_*(\\alpha^{gf}_I)$ cancel, and naturality gives\n$$Rh_*Q(c_{g,f,I})\\circ\\alpha^h_{(gf)_*I}=\\alpha^h_{g_*f_*I}\\circ Q(h_*c_{g,f,I}).$$\nFor the right side first use naturality of $d_{h,g}$ at $\\alpha^f_I:Q(f_*I)\\to Rf_*(QI)$, then apply its normalized formula at $Q(f_*I)$. Cancellation of $\\alpha^{hg}_{f_*I}$ leaves\n$$t\\circ Q(c_{h,g,f_*I}\\circ c_{hg,f,I})\\circ(\\alpha^{hgf}_I)^{-1}.$$\nStep 2 identifies the middle factors, proving equality at $QI$. Every object is isomorphic to such a $QI$ by [lem-weil-pbc-dplus-injective-representative], so naturality at that isomorphism proves equality everywhere. The natural maps $\\alpha$ and their injective computation are those of [lem-weil-pbc-right-derived-plus-injective].",
-   "uses": [
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-right-derived-plus-injective"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tags 05TH and 013K; associativity checked by expanding the normalized comparisons"
-   }
-  },
-  {
-   "text": "For the left unit, naturality of $d_Y$ at $\\alpha^f_I:Q(f_*I)\\to Rf_*(QI)$ and its formula in step 6 give, after inserting step 4,\n$$(d_YRf_*)_{QI}\\circ d_{\\mathrm{id}_Y,f,QI}=\\alpha^f_I\\circ Q(u_{Y,f_*I}\\circ c_{\\mathrm{id}_Y,f,I})\\circ(\\alpha^f_I)^{-1}=\\mathrm{id}.$$\nFor the right unit use naturality of $\\alpha^f$ at $u_{X,I}:(\\mathrm{id}_X)_*I\\to I$; the expansion is\n$$(Rf_*d_X)_{QI}\\circ d_{f,\\mathrm{id}_X,QI}=\\alpha^f_I\\circ Q(f_*u_{X,I}\\circ c_{f,\\mathrm{id}_X,I})\\circ(\\alpha^f_I)^{-1}=\\mathrm{id}.$$\nIn both cases the last equality is the underived unit equality in step 2. The $\\alpha^f_I$ and other cancelled computation maps are invertible by [lem-weil-pbc-right-derived-plus-injective] and step 3. Finally [lem-weil-pbc-dplus-injective-representative] and naturality extend the equations from $QI$ to every $K$. None of these constructions used finiteness, properness, torsion, or invertibility of a coefficient.",
-   "uses": [
-    "lem-weil-pbc-right-derived-plus-injective",
     "lem-weil-pbc-dplus-injective-representative"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tags 05TH and 013K; explicit identity-comparison calculation"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Take e(T) to be the existing lowerStarIdDerivedPlus. Its lemma lowerStarIdDerivedPlus_hom_app_fac gives exactly the identity normalization [lem-weil-pbc-right-derived-plus-injective].",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Functor.rightDerivedFunctorPlusCompIso'_assoc to the four lowerStarComp isomorphisms; lowerStarComp_assoc' supplies its underived compatibility [lem-weil-pbc-direct-image-composition-coherence]. Bundle the resulting equality of forward transformations as equality of composite isomorphisms and take their inverses. The inverse of a composite reverses its order, giving precisely the stated associativity equation for d.",
+   "uses": [
+    "lem-weil-pbc-direct-image-composition-coherence",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the right identity of the scheme composition, compare the forward derived compositor with the identity comparison whiskered by Rf. The universal property of the composite derived functor [lem-weil-pbc-right-derived-plus-injective] reduces equality to its composite unit on an arbitrary bounded-below complex I. Apply the compositor factorization, naturality of lowerStarIdDerivedPlus at alpha(f), and its normalization. The remaining comparison is exactly lowerStarComp_id_right [lem-weil-pbc-direct-image-composition-coherence]. Inverting the compositor yields the desired unit law. For the left identity, lowerStarIdDerivedPlus_inv_comp_rightDerivedFunctorPlusCompIso' applies: its underived hypothesis follows from lowerStarComp_id_left and cancellation of lowerStarId.inv followed by lowerStarId.hom. Bundle this identity as an equality of isomorphisms and take inverses to obtain the other unit law.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-direct-image-composition-coherence"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image",
-  "def-pc-fibre-product",
-  "prop-weil-pbc-inverse-image-modules-exact",
   "lem-exc-rg-right-adjoint-preserves-injectives",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-weil-pbc-right-derived-plus-injective",
   "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-pbc-direct-image-composition-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6E, lemma-derived-pushforward-composition, bounded-below constant-ring version. Agent-written injective-model proof using derived.tex Tags 013K, 05TH, 05TI, 070I, 070J and homology.tex Tag 015Z; normalization, associativity and units expanded explicitly."
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition, bounded-below constant-coefficient specialization. K5 uses the already proved source-library PlusComp and UpperLowerStarCoherence API; uniqueness uses Mathlib injective representatives, and coherence is obtained from underived coherence and the generic derived-compositor associativity theorem."
  },
  "mathlib_searches": [
   {
@@ -248,8 +196,6 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-weil-pbc-right-derived-plus-injective"
  ],
  "reviewed": {
@@ -278,5 +224,15 @@
   "result": "pass",
   "note": "Audited node, dependencies, source, Lean module, docstrings, edge cases, and report sections; ordinary étale framework and canonical comparisons are correct, with no pro-étale substitute or stronger assumptions. scompile.py compiled sandbox and library successfully; review.md records all checks."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261021T120425-L-3891691",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
