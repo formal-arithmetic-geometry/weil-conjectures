@@ -23,31 +23,30 @@
  ],
  "proof": [
   {
-   "text": "For a condensed coefficient ring $\\Lambda$, use the monoidal natural isomorphism $f^{-1}p_Y^*\\cong p_X^*$ of [sk-def-sfb-pullback-from-point-comp]. Its component is precisely $\\alpha_f$ by [sk-def-sfb-coefficient-morphisms], and [lem-sfb-alpha-iso] states that this component is invertible. The coefficient-morphism statement also identifies it as an isomorphism of ring objects, so this proves the displayed comparison as a map of sheaves of rings, uniformly for all admissible coefficients, including finite rings.",
+   "text": "For every admissible $\\Lambda$, $\\alpha_f$ is the ring-object isomorphism of [sk-def-sfb-coefficient-morphisms], and its invertibility is [lem-sfb-alpha-iso]. This proves the untwisted part of (1).",
    "uses": [
-    "sk-def-sfb-pullback-from-point-comp",
     "sk-def-sfb-coefficient-morphisms",
     "lem-sfb-alpha-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "paragraph 1: coefficient comparison (1)"
+    "place": "paragraph 1"
    }
   },
   {
-   "text": "For the twist assertion, $\\ell$ is invertible on both schemes and the coefficient belongs to the list in [det-prop-sfb-cartesian-coefficients-twists]. Apply its comparison $f^{-1}(\\Lambda_Y(d))\\cong\\Lambda_X(d)$ for every integer $d$. This is compatible with the same $\\alpha_f$ and the module structures, as required to interpret it as the twisted coefficient comparison. Its list includes the finite $\\ell$-power-torsion rings $A$. Thus it proves exactly the Tate-twist portion of (1) on the domain where those twists were defined.",
+   "text": "When $\\ell$ is invertible on $X,Y$, [det-prop-sfb-cartesian-coefficients-twists] gives $f^{-1}\\Lambda_Y(d)\\cong\\Lambda_X(d)$ along $\\alpha_f$, for all $d$, including finite $\\ell$-power-torsion $A$.",
    "uses": [
     "det-prop-sfb-cartesian-coefficients-twists"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "paragraph 2: existing detailed Tate-twist comparison"
+    "place": "paragraph 2"
    }
   },
   {
-   "text": "For $E\\subset F$ finite over $\\mathbf Q_\\ell$ and $d=[F:E]$, choose an $\\cO_E$-basis $b_1,\\ldots,b_d$ of $\\cO_F$ using [lem-sfb-local-field-integral-basis]. With that basis, [det-prop-sfb-cartesian-coefficients-finite-free] supplies the basis-induced isomorphisms $\\cO_{E,X}^{\\,d}\\cong\\cO_{F,X}$ and $E_X^{\\,d}\\cong F_X$. These are isomorphisms of modules over the respective coefficient sheaves, for arbitrary $X$. A module is finite free of rank $d$ precisely when it is isomorphic to the direct sum of $d$ copies of its ring; hence these two displayed isomorphisms prove (2). No flatness converse or claim that inverse image commutes with arbitrary inverse limits is used.",
+   "text": "Choose an integral basis for $E\\subset F$ by [lem-sfb-local-field-integral-basis]. Then [det-prop-sfb-cartesian-coefficients-finite-free] identifies $\\mathcal O_{F,X}$ and $F_X$ with $d=[F:E]$ copies of their respective base rings, proving (2).",
    "uses": [
     "lem-sfb-local-field-integral-basis",
     "det-prop-sfb-cartesian-coefficients-finite-free"
@@ -55,40 +54,53 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "paragraph 3: finite-free coefficient extension (2)"
+    "place": "paragraph 3"
    }
   },
   {
-   "text": "We check the category hypotheses needed for the final exactness assertion. Work with the small skeletons of $X_{\\mathrm{proét}}$ and $Y_{\\mathrm{proét}}$ fixed in [def-weil-pbc-proetale-site]. Apply [lem-pur-ringed-site-grothendieck-abelian] with the constant sheaf of rings $\\mathbf Z$: a sheaf of abelian groups has the unique $\\mathbf Z$-action $n\\cdot m$ by repeated addition (for a section of the constant integer sheaf, define this locally where that section is constant and glue), so this identifies its module category with $\\Sh(-,\\Ab)$ and makes the latter abelian with equalizers and coequalizers. The tensor product of [sk-def-sfb-sheaf-tensor] is closed symmetric monoidal, and [det-def-sfb-sheaf-tensor-closed] says that tensoring in either variable is additive and preserves all colimits. In particular tensoring with either coefficient ring preserves finite colimits. The pulled-back coefficient rings are commutative monoid objects by [sk-def-sfb-pulled-back-coefficients]. Consequently [lem-sfb-modobj-abelian] makes both categories of coefficient module objects abelian. These checks also give all the closedness, braiding and colimit hypotheses for extension along an invertible coefficient map in the next step.",
+   "text": "Use the small sites of [def-weil-pbc-proetale-site]. Their abelian sheaf categories are abelian by [lem-weil-pbc-site-sheaves-enough-injectives], hence have equalizers and coequalizers. The tensor is closed symmetric monoidal by [sk-def-sfb-sheaf-tensor], additive and colimit-preserving by [det-def-sfb-sheaf-tensor-closed]. Thus [lem-sfb-modobj-abelian] applies to the rings $\\Lambda_X,\\Lambda_Y$ of [sk-def-sfb-pulled-back-coefficients].",
    "uses": [
     "def-weil-pbc-proetale-site",
-    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
     "sk-def-sfb-sheaf-tensor",
     "det-def-sfb-sheaf-tensor-closed",
-    "sk-def-sfb-pulled-back-coefficients",
-    "lem-sfb-modobj-abelian"
+    "lem-sfb-modobj-abelian",
+    "sk-def-sfb-pulled-back-coefficients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "final sentence of the statement: category hypotheses for exact module inverse image"
+    "place": "final exactness sentence: category hypotheses"
    }
   },
   {
-   "text": "By [def-sfb-module-upper-star], module pullback is $\\operatorname{Ext}_{\\alpha_f}\\circ\\operatorname{mapMod}(f^{-1})$. Step 1 makes $\\alpha_f$ invertible. The source ring $f^{-1}\\Lambda_Y$ is commutative since it is isomorphic as a ring object to the commutative $\\Lambda_X$. Thus step 4 and this observation supply the hypotheses of [def-sfb-modobj-extension-along-iso], so it is naturally isomorphic to $G=\\operatorname{Res}_{\\alpha_f^{-1}}\\circ\\operatorname{mapMod}(f^{-1})$. Explicitly, if the transported action on $f^{-1}M$ is $\\widetilde\\gamma:f^{-1}\\Lambda_Y\\otimes f^{-1}M\\to f^{-1}M$, its $\\Lambda_X$-action under $G$ is $\\widetilde\\gamma\\circ(\\alpha_f^{-1}\\otimes1)$. By [def-sfb-modobj-restriction], restriction changes only this action, leaving all underlying objects and arrows unchanged. Hence, for the two forgetful functors, $U_XG=f^{-1}U_Y$ literally; this states precisely in what sense module pullback is the sheaf inverse-image functor.",
+   "text": "By [def-sfb-module-upper-star], $f^*=\\operatorname{Ext}_{\\alpha_f}\\operatorname{mapMod}(f^{-1})$. The source ring is commutative by $\\alpha_f$. Steps 1 and 4 allow [def-sfb-modobj-extension-along-iso], giving $f^*\\cong G:=\\operatorname{Res}_{\\alpha_f^{-1}}\\operatorname{mapMod}(f^{-1})$. The action is $\\widetilde\\gamma\\circ(\\alpha_f^{-1}\\otimes1)$. Both factors commute with forgetful functors by [sk-def-sfb-transport] and [def-sfb-modobj-restriction]; hence $U_XG=f^{-1}U_Y$.",
    "uses": [
     "def-sfb-module-upper-star",
     "def-sfb-modobj-extension-along-iso",
+    "sk-def-sfb-transport",
     "def-sfb-modobj-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "final sentence of the statement; scalar extension in def-sfb-module-upper-star and def-sfb-modobj-extension-along-iso"
+    "place": "final exactness sentence: the canonical inverse-image lift"
    }
   },
   {
-   "text": "The abelian sheaf inverse image $f^{-1}$ is exact by clause 4 of [det-pe-topos-functoriality-inverse-image]. By clause 3 it preserves finite limits of underlying sheaves of sets. Since clause 4 computes abelian inverse image on those underlying sheaves, it preserves the zero abelian sheaf (whose underlying sheaf is terminal) and binary products with their projections. The canonical injections into a binary biproduct are the product maps with components identity and zero; zero maps factor through the zero object. Hence it also preserves these injections. It preserves the diagonal by the product universal property and the codiagonal by the coproduct universal property of the same finite biproduct. For $h,k:M\\to N$, applying it to $h+k=\\nabla_N\\circ(h\\oplus k)\\circ\\Delta_M$ therefore gives $f^{-1}(h+k)=f^{-1}h+f^{-1}k$, proving additivity. Apply [det-prop-sfb-module-pullback-exact-lifted] to $\\mathcal C=\\Sh(Y_{\\mathrm{proét}},\\Ab)$, $\\mathcal D=\\Sh(X_{\\mathrm{proét}},\\Ab)$, $\\mathcal R=\\Lambda_Y$, $\\mathcal S=\\Lambda_X$, $F=f^{-1}$ and the functor $G$ of step 5. Step 4 verifies the abelian, additive monoidal and right-exact tensor hypotheses, and step 5 verifies the required equality of underlying functors. Thus $G$ is additive and exact. The natural isomorphism $f^*\\cong G$ of step 5 identifies their kernel and cokernel diagrams by its invertible components, so $f^*$ is exact too. This proves the final assertion for every untwisted admissible coefficient without any invertibility condition on $\\ell$ in the schemes.",
+   "text": "By clauses 3–4 of [det-pe-topos-functoriality-inverse-image], $f^{-1}$ preserves terminal objects and binary products on underlying sets, hence also the zero abelian sheaf and binary products with their induced group laws. Zero arrows factor through zero, so are preserved. Apply [lem-sfb-products-zero-additive]: abelian inverse image is additive.",
+   "uses": [
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-sfb-products-zero-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
+    "place": "final exactness sentence: additivity"
+   }
+  },
+  {
+   "text": "Abelian $f^{-1}$ is exact by [det-pe-topos-functoriality-inverse-image]. Steps 4–6 verify all hypotheses of [det-prop-sfb-module-pullback-exact-lifted] for $F=f^{-1}$ and the lift $G$: abelian ambient categories, additive right-exact tensors, additive exact $F$, and $U_XG=FU_Y$. Therefore $G$ preserves finite limits and finite colimits.",
    "uses": [
     "det-pe-topos-functoriality-inverse-image",
     "det-prop-sfb-module-pullback-exact-lifted"
@@ -96,28 +108,41 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
-    "place": "final sentence of the statement: exactness of module inverse image"
+    "place": "final exactness sentence: apply exact lifting"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-finite-exactness-nat-iso] to the inverse of the comparison $f^*\\cong G$ from step 5. Thus $f^*$ preserves finite limits and finite colimits, as asserted; its specified comparison with $G$ supplies the canonical identification. All untwisted steps apply without inverting $\\ell$ on $X,Y$.",
+   "uses": [
+    "lem-sfb-finite-exactness-nat-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients.proof.md",
+    "place": "final exactness sentence: transfer exactness"
    }
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-pullback-from-point-comp",
   "sk-def-sfb-coefficient-morphisms",
   "lem-sfb-alpha-iso",
   "det-prop-sfb-cartesian-coefficients-twists",
   "lem-sfb-local-field-integral-basis",
   "det-prop-sfb-cartesian-coefficients-finite-free",
   "def-weil-pbc-proetale-site",
-  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
   "sk-def-sfb-sheaf-tensor",
   "det-def-sfb-sheaf-tensor-closed",
-  "sk-def-sfb-pulled-back-coefficients",
   "lem-sfb-modobj-abelian",
+  "sk-def-sfb-pulled-back-coefficients",
   "def-sfb-module-upper-star",
   "def-sfb-modobj-extension-along-iso",
+  "sk-def-sfb-transport",
   "def-sfb-modobj-restriction",
   "det-pe-topos-functoriality-inverse-image",
-  "det-prop-sfb-module-pullback-exact-lifted"
+  "lem-sfb-products-zero-additive",
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-sfb-finite-exactness-nat-iso"
  ],
  "proof_origin": {
   "by": "agent",
@@ -289,16 +314,12 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-cartesian-coefficients",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "sk-prop-sfb-cartesian-coefficients",
   "worker": "stage1",
-  "summary": "Audited the earlier sandbox split against the current blueprint and every cited statement. Made the domain of the referenced Tate-twist definition and the finite p-adic coefficient-field convention explicit. Retained the uniform untwisted ring comparison and finite-free clauses. Added the missing ring-object citation, all category hypotheses for exactness, and the precise comparison of scalar extension with restriction along alpha inverse, before applying the exact-lift theorem. Reused the existing sheaf comparisons and exactness inputs; removed unused eta and qbar-colimit proof dependencies. Second reading supplied the missing existence of an integral basis as a strictly smaller algebraic input, clarified natural isomorphism of module pullback with the inverse-image lift, and made commutativity and additivity checks explicit. Repair of landing L: inherited the now-installed authoritative chapter/unit binding, restored the helper placement, and filled the three unit realization entries without altering its route. Current repair re-read the expanded Tate-twist definition and the corrected pullback references; reconstructed the sandbox item from current baseline metadata and refreshed every citation. The existing chapter/unit records now validate the helper placement. Independent second reading tightened step 6: finite-limit preservation on underlying sheaves gives zero objects and finite biproducts, so the explicit additivity calculation needs no inference about abelian colimits from set-sheaf colimits. Fresh integral-closure and local-field Mathlib searches confirm only partial candidates.",
-  "blueprint": "Steps 1, 2, 3 realize respectively proof paragraphs 1, 2, 3. Steps 4–6 prove the final sentence of the item statement, whose proof was implicit in the sketch. The twists and finite-free nodes are exactly the existing detailed nodes named there.",
+  "summary": "Repair of the 2026-10-21 coarse-proof return. Statement unchanged. Replaced the implicit biproduct/additivity argument and exactness-transport argument by two searched Mathlib leaves. Reused the existing generic abelianness theorem directly instead of rebuilding abelian sheaves as integer modules. Expanded the explicit mapMod forgetful citation. The eight assembly steps total 2545 characters; every substantive input is a cited statement. No parent clause is restated as a new node.",
+  "blueprint": "Steps 1, 2, 3 realize blueprint proof paragraphs 1, 2, 3. Steps 4–8 refine the final exactness sentence; the two new Mathlib leaves discharge the generic additivity and natural-isomorphism invariance arguments formerly embedded in step 6.",
   "tool_uses": [
-   {
-    "node": "lem-pur-ringed-site-grothendieck-abelian",
-    "why": "Used only with the constant sheaf Z to obtain the abelian sheaf categories and their colimits on the chosen small pro-etale sites; this generic ringed-site fact does not replace any geometric step of the coefficient unit."
-   },
    {
     "node": "det-prop-sfb-cartesian-coefficients-twists",
     "why": "Step 2 takes the Tate-twist comparison f^{-1}(Lambda_Y(d)) = Lambda_X(d) from this detailed node, which the unit's own proof paragraph 2 names as its details; it is bound to unit sk-prop-an only by placement of its blueprint file, so citing it follows this unit's route rather than replacing it."
@@ -310,6 +331,10 @@
    {
     "node": "det-prop-sfb-module-pullback-exact-lifted",
     "why": "Step 6 uses only the generic statement that a functor of module categories lifting an additive exact functor is exact; it expands the unit's final sentence 'is the exact functor f^{-1}', for which this unit has no node."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaves-enough-injectives",
+    "why": "Only its abelianness clause for a small site is used to verify the ambient category hypotheses; no step of the coefficient route is replaced."
    }
   ]
  },
@@ -317,15 +342,16 @@
   "lem-pur-ringed-site-grothendieck-abelian",
   "det-prop-sfb-cartesian-coefficients-twists",
   "lem-sfb-modobj-abelian",
-  "det-prop-sfb-module-pullback-exact-lifted"
+  "det-prop-sfb-module-pullback-exact-lifted",
+  "lem-weil-pbc-site-sheaves-enough-injectives"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-ND-8ff833ca5",
-  "group": "ND",
+  "reviewer": "NT-cc-Q30-e65595e9f",
+  "group": "Q30",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-8ff833ca5 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all six steps, the new node and the statements of all 24 cited nodes. I also read the blueprint main-20261015 item section and its three proof paragraphs, the finite-free and twist detail sources and the module-pullback-exact (-lifted/-main) proofs, plus the unit and chapter records. Statement correction: the twist part is now restricted to the domain of sk-def-sp-tate-twist (ℓ invertible, finite A killed by a power of ℓ). This is genuine, not a weakening: the twists exist only there, and the Spec F_ℓ counterexample (μ_ℓ=0) is correct. The untwisted clauses still hold for arbitrary f. Coefficients (Q̄_ℓ is the finite-subextension condensed ring; admissible list as in sk-def-localizing-closure) and α_f: f^*Λ_Y→Λ_X match the blueprint in direction and category. Step checks: (1) the component of the monoidal iso is a ring isomorphism; (2) det-twists has exactly these hypotheses; (3) the new basis existence plus the basis-conditional det-finite-free gives O_{E,X}^d≅O_{F,X} and E_X^d≅F_X; (4) all hypotheses of lem-sfb-modobj-abelian hold; (5) the hypotheses of the restriction equivalence hold, Ext_α≅Res_{α^{-1}}, and U_X G=f^{-1}U_Y; (6) additivity follows from biproducts, and the exact-lift lemma applies. Acyclic. qlbar-colimit-x is reached through the detail nodes. The new node lem-sfb-local-field-integral-basis is true (tested on E=F, unramified, and Q_ℓ(√ℓ)), self-contained and correctly sourced. It is not elementary and not a restatement of the parent, and I found no duplicate in a whole-DAG search. Mathlib's IsIntegralClosure.finite/module_free/rank (lines 175/183/192) need the unit ball identified with the integral closure, so they do not make it a leaf; unsplit is correct. FIX: I added split_report.tool_uses entries for the three undeclared off-unit statements: det-prop-sfb-cartesian-coefficients-twists (the unit step's own detail node, filed under sk-prop-an), lem-sfb-modobj-abelian and det-prop-sfb-module-pullback-exact-lifted (both generic module-object tools). I also accept the declared lem-pur-ringed-site-grothendieck-abelian. Nothing else in the whole-file fix differs from the delivery.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-e65595e9f (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 8 steps, both new nodes, the statement of every cited node, the blueprint main-20261015 section and the unit record. This delivery answers the human's 2026-10-21 re-split note (proof 5449 chars; steps 4, 5 and 6 too long). The new proof is 2545 chars, the longest step 478. It adds two new nodes, both exact Mathlib leaves. The ℤ-module detour is replaced by the existing small-site abelian Mathlib leaf lem-weil-pbc-site-sheaves-enough-injectives. Compared field by field with the live ND node, only proof, proof_deps and split_report differ; the statement and stmt_deps are byte-identical, so no target is weakened. Step checks: (1) the coefficient-morphisms node gives the ring-object iso and lem-sfb-alpha-iso gives invertibility, with no condition on ℓ. (2) The twist detail node is used only on its domain (ℓ invertible). (3) An integral basis plus the basis-conditional finite-free node; tested E=F and ramified F/E. (4) Every hypothesis of lem-sfb-modobj-abelian is checked: abelian, tensor additive in each variable, R⊗− preserves finite colimits. (5) Every hypothesis of def-sfb-modobj-extension-along-iso is checked: braided, closed, equalizers and coequalizers, α iso, source ring commutative. Res_{α^{-1}} goes Mod_{f*Λ_Y}→Mod_{Λ_X} with action γ̃∘(α^{-1}⊗1). U_X G=f^{-1}U_Y follows from transport clause 1 and the restriction node. (6) Clauses 3–4 of topos functoriality give preservation of binary products and zero arrows, so the new leaf gives additivity. (7) Every hypothesis of the exact-lifted lemma is in force. (8) The nat-iso leaf transfers exactness to f* along the inverse of the step-5 comparison. New leaves: Functor.additive_of_preserves_binary_products (AdditiveFunctor.lean:234–239) and preservesFinite(Co)Limits_of_natIso (Preserves/Finite.lean:92–94, 248–250); all lines read, exact matches. Searches are recorded with all three kinds. Neither leaf is a duplicate: lem-sfb-preserving-colimits-additive uses a different criterion. Neither restates a clause of the parent. No cycle, all ids exist, no SGA. review_split's FAIL comes only from the earlier ND node lem-sfb-local-field-integral-basis, which is now split; that is not this delivery's fault. Accepted tool_uses: det-prop-sfb-cartesian-coefficients-twists, lem-sfb-modobj-abelian, det-prop-sfb-module-pullback-exact-lifted, lem-weil-pbc-site-sheaves-enough-injectives. Maintainer note: the node-level tool_uses still lists lem-pur-ringed-site-grothendieck-abelian, which the proof no longer cites; drop it at the merge. The split_report tool_uses entry for the exact-lifted lemma says step 6; it is now step 7 (cosmetic)."
  },
  "lean_audit": {
   "master": {
