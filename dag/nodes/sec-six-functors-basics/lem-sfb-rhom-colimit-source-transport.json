@@ -16,9 +16,108 @@
   "def-sfb-internal-hom-strict-models",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $J$ for the fixed functorial K-injective replacement and put $B_L(T)=\\mathcal Hom^\\bullet(L,J(T))$ for a source complex $L$. These are exactly the strict models in the statement, by [def-sfb-internal-hom-strict-models, def-pur-derived-internal-hom]. For the colimit cocone $u_i:N_i\\to N_\\infty$, set $C_L=\\operatorname{colim}_i B_L(N_i)$ and let $a_L:C_L\\to B_L(N_\\infty)$ be the unique map with $a_L\\iota_i=B_L(u_i)$ [def-weil-pbc-category-colimit]. The termwise construction is a colimit of complexes: the induced differential squares to zero and the degreewise universal maps commute with it, as can be checked after each colimit injection. For a chain map $v:L\\to L'$, precomposition and postcomposition commute componentwise [def-pur-hom-complex], so\n$$B_v(N_\\infty)B_{L'}(u_i)=B_L(u_i)B_v(N_i).$$\nPrecomposing with each $\\iota_i$ proves $B_v(N_\\infty)a_{L'}=a_L\\operatorname{colim}_i B_v(N_i)$ as an equality of chain maps. Thus $L\\mapsto a_L$ is a contravariant functor to the category of arrows of complexes.",
+   "uses": [
+    "def-sfb-internal-hom-strict-models",
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-category-colimit",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 0A95 (lemma-RHom-well-defined), 08J7 (section-internal-hom); agent calculation of the specified colimit cocones."
+   }
+  },
+  {
+   "text": "The category $\\mathcal M$ has all small colimits and exact filtered colimits by [lem-pur-ringed-site-grothendieck-abelian]; its small-site and commutative-coefficient hypotheses are precisely those assumed here. Apply [src-weil-homology-preserves-exact-colimits] with $\\mathcal C=\\mathcal M$, the given small filtered category $I$, and the cochain shape on $\\mathbf Z$. For every integer $q$, this gives the natural identification $H^q(\\operatorname{colim}_i X_i)=\\operatorname{colim}_i H^q(X_i)$. Consequently a natural transformation of $I$-diagrams of complexes which is a quasi-isomorphism at every index induces a quasi-isomorphism of termwise colimits: after this identification its $q$-th cohomology map is the colimit of an objectwise isomorphism, whose inverse is the colimit of the inverse natural transformation. There is no boundedness condition in the cited homology statement.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "src-weil-homology-preserves-exact-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded, first paragraph (exact filtered colimits); exact-colimit homology statement src-weil-homology-preserves-exact-colimits, project DegreewiseLimits.lean."
+   }
+  },
+  {
+   "text": "If $v:L\\to L'$ is a quasi-isomorphism, apply [lem-pur-rhom-well-defined] with source map $v$ and target map $1_{J(T)}$. It says that $B_v(T):B_{L'}(T)\\to B_L(T)$ is a quasi-isomorphism for every $T$; both target complexes are the same K-injective complex. These maps form a natural transformation in $T$ by step 1. Step 2 shows that $\\operatorname{colim}_i B_v(N_i)$ is also a quasi-isomorphism. Let $Q$ be the derived localization [def-weil-abstract-derived-category]. The arrow-valued functor $L\\mapsto Q(a_L)$ therefore sends every source quasi-isomorphism to an isomorphism of arrows: both its endpoint maps are isomorphisms, and their inverses give an inverse square. By the universal property of localization it factors through $D(\\mathcal M)^{\\mathrm{op}}$. Its right endpoint is $A\\mapsto H(A,N_\\infty)$ by [def-pur-derived-internal-hom], and its left endpoint is the meaning of the termwise-colimit model with variable derived source. Its arrow at $A$ is $\\alpha_A$. This constructs the canonical representative identifications and proves independence of the source representative; the identifications depend only on its specified identification with $A$, by uniqueness of the factorization.",
+   "uses": [
+    "lem-pur-rhom-well-defined",
+    "def-weil-abstract-derived-category",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 0A95 (lemma-RHom-well-defined), 08J7 (section-internal-hom); agent calculation of the specified colimit cocones."
+   }
+  },
+  {
+   "text": "For $e:A\\xrightarrow{\\sim}A'$, apply the functor of arrows constructed in step 3 to $e$ (contravariantly). Its right endpoint is $H(e,N_\\infty)$ and its left endpoint is the induced map denoted $\\operatorname{colim}_i H(e,N_i)$. The fact that it is a morphism of arrows is exactly\n$$H(e,N_\\infty)\\alpha_{A'}=\\alpha_A\\operatorname{colim}_iH(e,N_i).$$\nApplying the same functor to $e^{-1}$ gives inverses to both vertical maps. In particular this notation for a derived source isomorphism does not require a chain-map representative of $e$: the maps are defined by the localized construction of step 3. For a chain-map representative they recover step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 0A95 (lemma-RHom-well-defined), 08J7 (section-internal-hom); agent calculation of the specified colimit cocones."
+   }
+  },
+  {
+   "text": "The general existence of a source-shift natural isomorphism of sheaf Hom complexes is [lem-pur-hom-complex-shift-left]. To specify the normalization used here, use the product and differential in [def-pur-hom-complex]: in degree $q$ reindex $p'=p+n$ and multiply by $c_q=(-1)^{nq}$. The inverse reindexes back and multiplies by the same $c_q$, whose square is $1$. After reindexing, the domain differential on $f$ is $d_Jf-(-1)^{q+n}fd_L$, while the differential on $\\mathcal Hom^\\bullet(L,J(T))[-n]$ is $(-1)^nd_Jf-(-1)^qfd_L$. Since $c_{q+1}=(-1)^nc_q$, multiplying these two expressions gives exactly $s^{q+1}d=d s^q$. Thus the stated map is a chain isomorphism. Postcomposition with $J(h)$ for any chain map $h:T\\to T'$ commutes with this reindexing and scalar. It is therefore natural in $T$, with a sign independent of $T$, and its image under $Q$ is the specified $s_{A,n,T}$.",
+   "uses": [
+    "lem-pur-hom-complex-shift-left",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 0A95 (lemma-RHom-well-defined), 08J7 (section-internal-hom); agent calculation of the specified colimit cocones."
+   }
+  },
+  {
+   "text": "For any diagram $X_i$ of complexes, the termwise-colimit shift identification $\\operatorname{colim}_i(X_i[-n])\\cong(\\operatorname{colim}_i X_i)[-n]$ is the identity under $(\\operatorname{colim}_i X_i[-n])^q=\\operatorname{colim}_i X_i^{q-n}$. The differentials agree because both are $(-1)^n$ times the differential induced from the $X_i$, and the structure maps agree in each degree. Apply this to $X_i=B_L(N_i)$ and take the colimit of the chain isomorphisms of step 5. Their inverses likewise induce an inverse, giving the chain-level map whose image is $t$. Naturality of step 5 for $u_i$ says\n$$s_{L,n,N_\\infty}B_{L[n]}(u_i)=B_L(u_i)[-n]s_{L,n,N_i}.$$\nCompose the two candidate maps from $\\operatorname{colim}_iB_{L[n]}(N_i)$ with each colimit injection. They are equal by this formula and by the defining equations for $a_L$ and $a_{L[n]}$. Uniqueness in [def-weil-pbc-category-colimit] gives equality of the chain maps. Applying $Q$, which commutes with shifts by [def-weil-abstract-derived-category], proves $s_{A,n,N_\\infty}\\alpha_{A[n]}=\\alpha_A[-n]t$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 0A95 (lemma-RHom-well-defined), 08J7 (section-internal-hom); agent calculation of the specified colimit cocones."
+   }
+  },
+  {
+   "text": "For a natural transformation $h:N\\to N'$ of target diagrams, its colimit $h_\\infty$ satisfies $h_\\infty u_i=u'_i h_i$. Functoriality of $J$ and postcomposition give $B_L(h_\\infty)a_L=a'_L\\operatorname{colim}_iB_L(h_i)$ after testing on each injection, exactly as in step 1. Precomposition by a source map commutes with these postcompositions; step 3 retains these equalities under localization. The source-shift maps commute with them by the degreewise formula of step 5, as does the colimit-shift identification of step 6. This proves naturality of both squares in the target diagram. Solving the squares gives $\\alpha_A=H(e,N_\\infty)\\alpha_{A'}(\\operatorname{colim}_iH(e,N_i))^{-1}$ and $\\alpha_{A[n]}=s_{A,n,N_\\infty}^{-1}\\alpha_A[-n]t$, the asserted conjugations. Every argument used arbitrary integer degrees and arbitrary complexes; filteredness was used only for step 2.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X (section-hom-complexes), 0A95 (lemma-RHom-well-defined), 08J7 (section-internal-hom); agent calculation of the specified colimit cocones."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-internal-hom-strict-models",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-category-colimit",
+  "def-pur-hom-complex",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-pur-rhom-well-defined",
+  "def-weil-abstract-derived-category",
+  "lem-pur-hom-complex-shift-left"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X, 0A95, 08J7 and 07A5; explicit source-localization and cocone calculation expanding the transport extracted from the parent continuity proof."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +153,52 @@
    "results": "Hits read: CochainComplex.HomComplex.Cochain.rightShift_v, CochainComplex.HomComplex.Cochain.rightUnshift_v, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv, CochainComplex.HomComplex.Cochain.shift_v, CochainComplex.HomComplex.Cochain.rightShiftAddEquiv, CochainComplex.HomComplex.Cochain.rightShiftLinearEquiv, CochainComplex.HomComplex.Cochain.rightUnshift_comp, CochainComplex.shiftEval_hom_app",
    "date": "2026-10-21",
    "verdict": "no match: the results give general shifts, colimits or cohomology infrastructure, not the canonical internal-sheaf-Hom comparison with the asserted transport and boundary identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal sheaf Hom from a quasi-isomorphic source commutes with the canonical filtered colimit comparison and signed source shifts",
+   "results": "Returned 8 hits. CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, DerivedCategory.instCommShiftHomotopyCategoryIntUpQh, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits give ordinary cochain shifts, exact-functor derived shifts, or abstract colimit naturality; none states the strict internal-sheaf-Hom comparison with source localization and the specified signed normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "(colimit|colim).*(homFixed|internalHom|derivedHom)|(homFixed|internalHom|derivedHom).*(colimit|colim)",
+   "results": "Returned 0 hits. ",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits give ordinary cochain shifts, exact-functor derived shifts, or abstract colimit naturality; none states the strict internal-sheaf-Hom comparison with source localization and the specified signed normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of a functor colimit comparison under a natural isomorphism and homological source shifts",
+   "results": "Returned 8 hits. CategoryTheory.Limits.IsColimit.mapCoconeEquiv, CategoryTheory.Limits.HasColimit.isoOfNatIso_ι_hom_assoc, CategoryTheory.Limits.preservesColimit_of_natIso, CategoryTheory.Limits.HasColimit.isoOfNatIso_hom_desc, CategoryTheory.Limits.colimit_map_colimitObjIsoColimitCompEvaluation_hom, CategoryTheory.Limits.HasColimit.isoOfNatIso_ι_inv_assoc, CategoryTheory.Functor.isoShift_hom_naturality, CategoryTheory.Limits.HasColimit.isoOfNatIso_hom_desc_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits give ordinary cochain shifts, exact-functor derived shifts, or abstract colimit naturality; none states the strict internal-sheaf-Hom comparison with source localization and the specified signed normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"shift\"",
+   "results": "Returned 0 hits. ",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits give ordinary cochain shifts, exact-functor derived shifts, or abstract colimit naturality; none states the strict internal-sheaf-Hom comparison with source localization and the specified signed normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "leftShift|shift.*[Nn]aturality|isoOfNatIso_hom_desc",
+   "results": "Returned 25 hits. Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Shift/Quotient.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/SingleFunctors.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits give ordinary cochain shifts, exact-functor derived shifts, or abstract colimit naturality; none states the strict internal-sheaf-Hom comparison with source localization and the specified signed normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cochain internal Hom source shift isomorphism signed reindexing Hom of L shifted by n into M equals Hom L M shifted by negative n",
+   "results": "Returned 8 hits. CochainComplex.HomComplex.Cochain.rightUnshift, CochainComplex.HomComplex.Cochain.leftUnshift, CochainComplex.HomComplex.Cochain.rightUnshift_v, CochainComplex.HomComplex.Cochain.rightShift, CochainComplex.HomComplex.Cochain.leftShift, CochainComplex.HomComplex.Cochain.leftUnshift_v, CochainComplex.HomComplex.Cochain.rightShiftLinearEquiv, CochainComplex.HomComplex.Cochain.leftShiftLinearEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: read hits give ordinary cochain shifts, exact-functor derived shifts, or abstract colimit naturality; none states the strict internal-sheaf-Hom comparison with source localization and the specified signed normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-rhom-continuity-triangle-closure",
@@ -77,5 +218,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-rhom-colimit-source-transport",
+  "worker": "stage1",
+  "summary": "Kept the statement and strict target models unchanged. Proved source representative independence by exact filtered-colimit homology and localization of the arrow-valued comparison; wrote the precomposition and signed-shift cocone equations explicitly. Reused existing nodes throughout; no new nodes. Read Stacks Hom differential and quasi-isomorphism invariance and checked every cited statement.",
+  "blueprint": "Realizes the source-isomorphism and signed-source-shift transport extracted from old steps 2--3 of lem-sfb-rhom-continuity-triangle-closure, supporting the final coefficient-colimit sentence of lem-sfb-dc-hom-preserves.proof.md in main-20261015. No change to chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic small-ringed-site exact filtered-colimit infrastructure; not a replacement for a coefficient-preservation argument of this unit."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic unbounded homology/exact-colimit theorem used to invert source quasi-isomorphisms after the termwise colimit."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic K-injective Hom quasi-isomorphism invariance required for source localization."
+   },
+   {
+    "node": "lem-pur-hom-complex-shift-left",
+    "why": "Generic sheaf-Hom source-shift natural isomorphism, used with the explicit normalization checked here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "src-weil-homology-preserves-exact-colimits",
+  "lem-pur-rhom-well-defined",
+  "lem-pur-hom-complex-shift-left"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-4361a8ed8",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-4361a8ed8 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The item is an ordinary one-level split of a node created today by Q56's re-split of lem-sfb-rhom-continuity-triangle-closure. The repair note is for that parent only. The item is unsplit on live and side-live, and its statement is byte-identical. The parent uses it only for source-iso invariance and the alpha_{A[n]} ~ alpha_A[-n] conjugation, which are clauses of this statement. Sources checked: sites-cohomology 08JC l.8948 (details omitted, so recorded as agent), 0A95 l.8754 (source quasi-iso with K-injective target quasi-iso gives a quasi-iso of Hom complexes, no source hypothesis), and the 0A8X Hom differential, which matches def-pur-hom-complex. Step 1: cocone map a_L and the precomposition square, tested on injections. Step 2: the homology-preserves-exact-colimits node applies because Mod(O) is Grothendieck with exact filtered colimits, so termwise colimits preserve quasi-isos. Step 3: 0A95 with identity on J(T), then step 2; L->Q(a_L) inverts quasi-isos into Arr(D), so it factors through the localization, and the right endpoint is RHom(-,N_inf) by uniqueness. Step 4 is the naturality square. Step 5 sign checked by hand: the domain differential is d_I f-(-1)^{q+n} f d_L and the target differential is (-1)^n times it; c_q=(-1)^{nq} satisfies c_{q+1}=(-1)^n c_q. Step 6 injection test: s a_{L[n]} iota_i = B_L(u_i)[-n] s_i = a_L[-n] t iota_i, then Q commutes with shifts. Step 7: target naturality and the conjugation formulas. Edge cases checked: n=0, n=+-1, zero source, constant or one-object I, e=id; no boundedness is used. No cycle (BFS over 212 nodes), no SGA, and no duplicate found by DAG rg and blueprint search. The four declared tool_uses are accepted as generic infrastructure: ringed-site Grothendieck, homology/exact colimits, rhom-well-defined, hom-complex-shift-left. Advisory only: the shift-left citation is decorative, and step 2 overlaps the quasi-iso clause of the sibling lem-sfb-rhom-colimit-cohomology-ladder."
  }
 }
