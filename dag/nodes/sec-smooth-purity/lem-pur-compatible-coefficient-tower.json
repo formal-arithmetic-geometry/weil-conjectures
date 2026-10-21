@@ -16,9 +16,138 @@
   "def-weil-linear-category",
   "def-weil-linear-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each object $U$ put $P_n(M)(U)=M(U)\\otimes_{R(U)}B_n(U)$, with $B_n(U)$ acting on the second factor. For $a\\in R(U)$ the proposed transition respects balancing because\n$$ax\\otimes b_n(z)=x\\otimes r_n(a)b_n(z)=x\\otimes b_n(r_{n+1}(a)z).$$\nIt respects addition in both variables. Thus $q_n(x\\otimes z)=x\\otimes b_n(z)$ is an additive map of tensors. Give $P_n(M)$ the $S$-action $s(x\\otimes z)=x\\otimes p_n(s)z$. Then\n$$q_n(x\\otimes p_{n+1}(s)z)=x\\otimes p_n(s)b_n(z)=s q_n(x\\otimes z).$$\nThe maps commute with restriction along every arrow of the site because $b_n,r_n,p_n$ are maps of ring sheaves and the tensor restrictions send $x\\otimes z$ to $x|\\otimes z|$. Hence $q_n$ is a morphism of presheaves of $S$-modules. These are ordinary tensor generators and relations checks, using [def-pur-sheaf-tensor-product, def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), presheaf tensor construction; explicit compatible-coefficient calculation"
+   }
+  },
+  {
+   "text": "Sheafify $P_n(M)$ as a presheaf of $B_n$-modules. Its sheafification is $M\\otimes_R B_n$ by [def-pur-sheaf-tensor-product]. By [lem-pc-sites-module-sheafification-interface] the underlying abelian sheaf is the abelian sheafification of $P_n(M)$. If instead $P_n(M)$ is sheafified as an $S$-module, its underlying abelian sheaf is the same one. The $S$-action obtained from $p_n$ on $M\\otimes_R B_n$ extends the original action on $P_n(M)$, so it equals the sheafified $S$-action by the uniqueness of action extension in that lemma. Consequently this $S$-module sheafification is canonically $V_n(M)$. Apply the lemma's unique factorization to $P_{n+1}(M)\\xrightarrow{q_n}P_n(M)\\to V_n(M)$, obtaining $t_n:V_{n+1}(M)\\to V_n(M)$. Additive maps out of the abelian sheafification are determined by their composites with its unit, by [def-weil-pbc-sheafification]. On a presheaf tensor, an additive map is determined by pure tensors. Therefore $t_n$ is the unique $S$-linear sheaf map with the formula in the statement. This does not assume that arbitrary sheaf sections are global pure tensors.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), underlying abelian sheafification, uniqueness of the module action and factorization; Tag 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "For an $R$-linear sheaf map $f:M\\to N$, the maps $P_n(M)\\to P_n(N)$ given by $x\\otimes z\\mapsto f(x)\\otimes z$ respect balancing, restrictions and the $S$-action. Their unique sheafified maps $V_n(f)$ exist by [def-weil-presheaf-modules-sheafification]. The two composites $t_n(N)V_{n+1}(f)$ and $V_n(f)t_n(M)$ send $x\\otimes z$ to $f(x)\\otimes b_n(z)$, hence agree by step 2's uniqueness. Identity and composition likewise send a generator to $x\\otimes z$ and $g(f(x))\\otimes z$. Finally $(f+g)(x)\\otimes z=f(x)\\otimes z+g(x)\\otimes z$ and $0(x)\\otimes z=0$; uniqueness gives $V_n(f+g)=V_n(f)+V_n(g)$ and $V_n(0)=0$.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules) and 03EK (section-tensor-product); tensor generator calculations"
+   }
+  },
+  {
+   "text": "Take $(V_n(M),t_n(M))_{n\\geq1}$ as a tower in the sense of [def-weil-inverse-system]. The commuting squares of step 3 make $(V_n(f))_n$ a morphism of towers, and identities, compositions and sums are componentwise. For $m>n$ the map is the composite $t_n\\cdots t_{m-1}$; associativity supplies all tower functor identities, without an additional coherence choice. Zero objects and biproducts in the tower category are the componentwise ones, with transitions the corresponding zero or block diagonal maps; their universal properties follow componentwise. Since the functor preserves zero maps and addition by step 3, it sends the biproduct equations $\\pi_i\\iota_j=\\delta_{ij}$ and $\\iota_1\\pi_1+\\iota_2\\pi_2=1$ to the same equations. Thus $V$ is an additive functor to the strict tower category.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent strict-tower refinement of Tag 03EK: adjacent transitions and componentwise morphisms"
+   }
+  },
+  {
+   "text": "For a cochain complex $K$, apply $V$ to each $K^i$ and to $d_K^i$. The relation $d^{i+1}d^i=0$ remains true since $V$ preserves composition and zero. Each transition is a cochain map because step 3 applied to $f=d_K^i$ gives $t_n^{i+1}V_{n+1}(d_K^i)=V_n(d_K^i)t_n^i$. The same equation for any cochain map gives the termwise cochain functor. If $h^i:K^i\\to L^{i-1}$ is a homotopy from $f$ to $g$, its equation is $f^i-g^i=d_L^{i-1}h^i+h^{i+1}d_K^i$. Applying the additive functor gives\n$$V(f^i)-V(g^i)=V(d_L^{i-1})V(h^i)+V(h^{i+1})V(d_K^i),$$\nso $(V(h^i))_i$ is the required homotopy in towers. Its components are tower morphisms by step 3.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Section complexes, cochain homotopy equation immediately before lemma-compose-homotopy-cochain; direct additive calculation"
+   }
+  },
+  {
+   "text": "Use $(K[a])^i=K^{i+a}$ and $d_{K[a]}^i=(-1)^a d_K^{i+a}$ for $a\\in\\mathbf Z$. The comparison $V(K[a])\\to V(K)[a]$ is the identity on each object $V(K^{i+a})$. It is a cochain map because additivity gives $V((-1)^a d)=(-1)^a V(d)$, including negative integers $a$. Naturality in $K$ is the identity on the components $V(f^{i+a})$. At level $n$, the square with the transition and the two shift comparisons has $t_n(K^{i+a})$ on both paths, so the level comparisons form a comparison of towers. The comparison for zero is the identity. For $a,b\\in\\mathbf Z$, both the direct comparison for $a+b$ and the composite comparisons have the identity on $V(K^{i+a+b})$ after the canonical reindexing; their differentials agree since $(-1)^{a+b}=(-1)^a(-1)^b$. This proves the unit and addition coherence for all integer shifts.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G (definition-shift-cochain), and following paragraph on zero and iterated shifts; explicit termwise comparison"
+   }
+  },
+  {
+   "text": "Fix $n$ and write $U_{B_n}$ and $U_S$ for the forgetful functors from module sheaves to abelian sheaves. The site is small in the module universe, so abelian sheafification exists and [lem-weil-pbc-module-sheaves-colimits-forgetful], clause (1), applies to both ring sheaves. Both forgetful functors preserve kernels and cokernels, and $U_S\\operatorname{Res}_{p_n}=U_{B_n}$ by [def-pc-sheaf-restrict-scalars]. It follows by the formula $H^i=\\ker d^i/\\operatorname{im}d^{i-1}$ that the underlying abelian sheaves of $H^i(\\operatorname{Res}_{p_n}K)$ and $H^i(K)$ are canonically the same, naturally in the complex $K$. Explicitly images are kernels of cokernels, so the same underlying kernel, image and quotient are used on both sides.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian): kernels, cokernels and exactness correspond to those of underlying abelian sheaves"
+   }
+  },
+  {
+   "text": "A module-sheaf map whose underlying abelian-sheaf map is invertible has a module-linear inverse: if $u$ is module-linear and $v=u^{-1}$, then $u(v(a y))=a y=u(a v(y))$, and injectivity of $u$ gives $v(a y)=a v(y)$ on every object. Thus both forgetful functors reflect isomorphisms. By step 7, a cochain map of $B_n$-modules induces isomorphisms on cohomology exactly when its restriction along $p_n$ does. This proves preservation and reflection of quasi-isomorphisms using their definition in [def-weil-abstract-derived-category]. No exactness assertion about the tensor functor itself is needed.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), and direct linearity check for the inverse of an underlying abelian-sheaf isomorphism"
+   }
+  },
+  {
+   "text": "For $a\\in k$ write $a_R,a_S$ for its global sections, and $a_n$ for their common image in $B_n$. Restrictions of these global sections act on every local section. On module-sheaf Hom groups define $(af)(x)=a_R f(x)$, or $a_S f(x)$ on the target. These are module maps since the coefficient rings are commutative; addition and the module axioms hold on sections, and composition is $k$-bilinear. On tower morphisms take this action componentwise: it preserves the transition squares because transitions are $S$-linear. This gives the $k$-linear category structures of [def-weil-linear-category]. On presheaf pure tensors,\n$$V_n(af)(x\\otimes z)=a_R f(x)\\otimes z=f(x)\\otimes a_n z=a_S\\bigl(f(x)\\otimes z\\bigr).$$\nBy step 2's uniqueness the sheaf maps satisfy $V_n(af)=aV_n(f)$ at every level. Together with additivity, this is exactly the $k$-linear-functor condition [def-weil-linear-functor].",
+   "uses": [
+    "def-weil-linear-category",
+    "def-weil-linear-functor",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), balancing relation; dga.tex Tags 09MJ and 09MK, linear categories and functors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-pbc-sheafification",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-inverse-system",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-linear-category",
+  "def-weil-linear-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03CY and 03DA; homology.tex Tag 011G and cochain homotopy equation. Explicit strict-tower, shift-coherence and common-scalar calculations refining the final integral scalar-extension paragraph of def-weil-rationalization-karoubi."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +183,45 @@
    "results": "; TensorProduct.map, TensorProduct.map₂, TensorProduct.toLinearMap_congr, LinearMap.baseChange, TensorProduct.directLimitLeft_rTensor_of, TensorProduct.instDirectedSystemCoeLinearMapIdLTensor, LinearEquiv.congr_trans_rTensor, TensorProduct.instDirectedSystemCoeLinearMapIdRTensor",
    "date": "2026-10-21",
    "verdict": "no match: restriction of scalars and ordinary module tensor are ingredients, not the compatible sheaf tensor-tower functor with these clauses"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Tt]ower|[Tt]ower.*tensor|restrictScalars",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply restriction of scalars, presheaf tensors or general shift ingredients, not the compatible sheaf tensor tower with all clauses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Termwise additive functor on sheaf module complexes commutes with homotopies and integer shifts",
+   "results": "HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory; HomotopyCategory.instLinearIntUpShiftFunctor; DerivedCategory.instAdditiveShiftFunctorInt; Homotopy.shift; CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt; CategoryTheory.Functor.mapCochainComplexShiftIso; CochainComplex.shiftFunctorAdd_hom_app_f; HomotopyCategory.homologyShiftIso_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply restriction of scalars, presheaf tensors or general shift ingredients, not the compatible sheaf tensor tower with all clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply restriction of scalars, presheaf tensors or general shift ingredients, not the compatible sheaf tensor tower with all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible coefficient maps of sheaves of rings give an additive tensor functor to inverse systems of module sheaves preserving cochain homotopies and shifts",
+   "results": "LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CondensedMod.ofSheafProfinite; LightCondMod.ofSheafLightProfinite; PresheafOfModules.Monoidal.tensorObj; CondensedMod.ofSheafCompHaus",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply restriction of scalars, presheaf tensors or general shift ingredients, not the compatible sheaf tensor tower with all clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor extension of scalars for sheaves of modules with a natural transformation induced by a homomorphism of coefficient ring sheaves and compatible scalar actions",
+   "results": "PresheafOfModules.Monoidal.tensorObjMap; SheafOfModules.restrictScalars; PresheafOfModules.Monoidal.tensorObj; PresheafOfModules.Monoidal.tensorHom; SheafOfModules.pushforwardSections; SheafOfModules.restrictScalars_map_val; PresheafOfModules.Monoidal.tensorObj_map_tmul; SheafOfModules.unitToPushforwardObjUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply restriction of scalars, presheaf tensors or general shift ingredients, not the compatible sheaf tensor tower with all clauses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-integral-scalar-extension-well-defined",
@@ -77,5 +241,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-compatible-coefficient-tower",
+  "worker": "stage1",
+  "summary": "Constructed and checked the strict tensor tower through presheaf tensors and module sheafification; proved functoriality, additivity, cochain homotopy and coherent signed shifts explicitly, used the existing faithful exact forgetful theorem for restriction quasi-isomorphisms, and checked common global-scalar linearity. No statement change or new nodes.",
+  "blueprint": "Realizes the final integral scalar-extension paragraph of def-weil-rationalization-karoubi in the current main-20261015 blueprint: finite-level ordinary coefficient tensors, their strict transition maps and action on cochain maps, homotopies, shifts and common scalars; via lem-weil-integral-scalar-extension-well-defined and def-weil-integral-scalar-extension.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Clause (1) is the general ringed-site forgetful-kernel/cokernel tool for both S and B_n. No unit-specific purity result replaces it; it leaves the scalar-tower route unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-6d802feb0",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6d802feb0 (reviewer sub-agent of L); spot-checked: I read the whole item and all 9 steps. The statement is byte-identical to live side-live. The item is not dropped, has no repair note, and live still has it unsplit. There are no new nodes. Step 1: balancing and S-linearity follow from b_n r_{n+1}=r_n and b_n p_{n+1}=p_n. Step 2: lem-pc-sites-module-sheafification-interface (Stacks 03CY, l.815) gives the unique compatible action, which identifies the S-sheafification with Res_{p_n}(M⊗_R B_n); t_n is unique via the sheafification unit and pure tensors. Steps 3–6: the functoriality, additive tower, homotopy and shift arguments are correct and elementary; shifts use the Stacks 011G convention (−1)^a d, and coherence follows from (−1)^{a+b}=(−1)^a(−1)^b. Steps 7–8: the quasi-isomorphism clause for Res_{p_n} follows from U_S Res=U_{B_n}, exact forgetful functors (03DA) and reflection of isomorphisms. Step 9: k-linearity needs r_n(a_R)=p_n(a_S), which is exactly the hypothesis. Small cases tested: one-object site, zero objects, identity tower, ℤ→ℤ/2^n, nonflat B_n. The source agrees with the final scalar-extension paragraph of def-weil-rationalization-karoubi in main-20261015, and the citer lem-weil-integral-scalar-extension-well-defined uses exactly the item's clauses. Tool use accepted: lem-weil-pbc-module-sheaves-colimits-forgetful clause (1), the generic exactness of the forgetful functor. Advisory: the same-unit lem-pur-sheaf-ring-coefficient-ordinary-adjunction could replace it in step 7. No duplicate found; the adic restriction nodes are specialised and correctly not used."
  }
 }
