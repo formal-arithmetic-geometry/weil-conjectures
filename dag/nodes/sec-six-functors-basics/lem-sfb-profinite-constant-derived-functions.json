@@ -17,9 +17,139 @@
   "def-sfb-profinite-test-objects",
   "def-sfb-continuous-map-condensed-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\Lambda=C_F$, $A=\\Lambda[P]$, $N=M_F[0]$ and $B=p_X^*\\Lambda$. Work interchangeably with internal modules and their section-ring module sheaves: the exact equivalence preserves underlying sheaves, tensor and its derived model, and takes the right-adjoint internal Hom to K-injective derived sheaf Hom with the same evaluation. It likewise transports the entire direct-image functor and its derived adjunction. On the condensed-point site the same exact monoidal equivalence identifies internal and sectionwise modules; preservation of K-flat and K-injective resolutions follows by transporting their defining Hom/tensor acyclicity tests. Thus no change of coefficient category or completion is involved.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-module-object-ringed-site-derived-comparison",
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08J7 and 08J9; internal/sectionwise transport by the cited exact monoidal equivalences."
+   }
+  },
+  {
+   "text": "There is a canonical identification $p_X^{-1}h_P=h_{X[P]}$. Indeed, on a geometrically w-contractible affine test $V$ both sides are $C(\\pi_0V,P)$, with the same restrictions; geometric w-contractibility implies the site evaluation criterion needed by the two cited evaluation statements. Such affines cover every affine test by the single-cover theorem; arbitrary tests have affine open covers. Consequently the identifications determine an equality of sheaves. Pullback also takes $A$ to $B[h_{X[P]}]$: for any $B$-module $T$, the pullback adjunction and the free-module adjunction identify maps from either object to $T$ with maps $h_P\\to p_{X*}(\\operatorname{Forget}T)$, since module direct image has that underlying sheaf. Yoneda gives the isomorphism, normalized on generators. Similarly $\\rho_P^*p_X^*N=p_{X[P]}^*N$ by composition of the condensed-point pullbacks.",
+   "uses": [
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "lem-weil-pbc-proetale-point-components-maps",
+    "lem-weil-pbc-source-affine-wcontractible-evaluation",
+    "det-pe-hypercover-single-cover",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1; component evaluation and the free-module universal property."
+   }
+  },
+  {
+   "text": "The small pro-etale site of $X[P]$ is the slice $X_{\\mathrm{proet}}/X[P]$; use only clause (1) of the localization node. Put $U=X[P]$ and take a K-injective resolution $p_X^*N\\to J$. The free-generator adjunction, applied on each slice over $V$, identifies $\\mathcal Hom_B(B[h_U],J)(V)$ with $J(V\\times_XU)$, degree by degree and with the same differential. By preservation of K-injectives under localization, $J|_U$ is K-injective and resolves $p_{X[P]}^*N$. Thus the identical complex $\\mathcal Hom_B(B[h_U],J)=\\rho_{P*}(J|_U)$ computes both $R\\mathcal Hom_B(p_X^*A,p_X^*N)$ and $R(\\rho_P)_*p_{X[P]}^*N$. This is the canonical derived identification, natural in the object, the parameter maps and further localization because its degreewise maps evaluate the same free generator.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-kinjective-restrict-localized",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "03DI and 03DJ, derived using sites-cohomology 08FI and 08J7."
+   }
+  },
+  {
+   "text": "Pull back the evaluation $R\\mathcal Hom_\\Lambda(A,N)\\otimes_\\Lambda^{\\mathbf L}A\\to N$ along $p_X$, using its exact inverse image and canonical derived tensor comparison. Transposition defines\n$\\beta_X:p_X^*R\\mathcal Hom_\\Lambda(A,N)\\to R\\mathcal Hom_B(p_X^*A,p_X^*N)$.\nThis defines a morphism before any assertion that it is invertible. Under restriction to a slice it is the same evaluation-adjoint morphism: the cited slice evaluation/transposition identities identify the two transposes. In particular its restriction to a test $W$ is $\\beta_W$, using the cartesian coefficient identification for $p_W$.",
+   "uses": [
+    "lem-weil-pbc-profinite-point-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08J7 tensor-Hom adjunction; derived monoidal pullback and evaluation normalization as in the cited nodes."
+   }
+  },
+  {
+   "text": "Let $W\\to X$ be a geometrically w-contractible affine test and put $S=\\pi_0W$. The component morphism gives $p_W^*=\\pi_W^*q_S^*$. Restriction $q_S^*$ from the profinite site to its slice over $S$ commutes with derived internal Hom for arbitrary unbounded complexes. The component theorem then identifies\n$\\pi_W^*q_S^*R\\mathcal Hom_\\Lambda(A,N)$ with $R\\mathcal Hom_{p_W^*\\Lambda}(p_W^*A,p_W^*N)$.\nBoth arrows are normalized by evaluation, so their composite is precisely the restriction of $\\beta_X$ constructed in step 4. Hence $\\beta_X|_W$ is invertible. Every affine test has such a cover by the single-cover theorem. The cone therefore has all cohomology sheaves zero locally and hence globally; $\\beta_X$ is invertible. Compose its inverse with step 3 to obtain $\\delta_{X,P,M_F}$ in the direction stated in the item.",
+   "uses": [
+    "lem-zl-component-relative-profinite-site",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sfb-wcontractible-component-derived-hom",
+    "det-pe-hypercover-single-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1); restriction of derived internal Hom is Stacks 08JB."
+   }
+  },
+  {
+   "text": "The slice identification evaluates a free generator, and $\\beta_X$ is the transpose of pulled-back evaluation. Thus the inverse composite has exactly the specified degree-zero exponential-law normalization, sending a section on $V[P]$ to its corresponding $P$-indexed function. Uniqueness of transposes gives naturality in $N$ and in maps $h_{P'}\\to h_P$, hence in $M$ and continuous maps $P'\\to P$. The same argument on a slice, with the slice evaluation identities, gives pro-etale base change. If a base-changed scheme is not affine, this equality holds on its affine open cover and glues. These are equalities of the derived morphisms, since they are obtained by transposing identical evaluation morphisms.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-weil-pbc-profinite-point-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08J7 and 08JB; uniqueness of tensor-Hom transposes and slice compatibility."
+   }
+  },
+  {
+   "text": "Choose bases only to check the remaining linear-map clause. The supplied constant models are $B^r$ and $B^s$, since continuous functions into a finite product are products of continuous functions. On every slice an arbitrary map between them is a matrix of sections of $B$; all comparison maps above are $B$-linear and respect finite sums. They therefore commute with this matrix, including matrices not pulled back from the condensed point. This description is independent of the checking bases. Over $X[Q]$, repeat the construction in that slice. A continuous $\\alpha:Q\\times P'\\to P$ induces a map of parameter objects over $X[Q]$. Transposing the two proposed composites gives the same evaluation morphism there: for a local family $f$, it sends $(q,p')$ to $u(q)(f(q,\\alpha(q,p')))$. This notation describes evaluation on the entire parameter object, not evaluation only at its points. The equality follows from the free-generator adjunction and associativity of composition, so it holds over $X[Q]$, including all higher derived terms by the same transposition identity.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08J7 and 08JB; formal linearity and evaluation on the slice, with finite free models."
+   }
+  },
+  {
+   "text": "Finally apply the coefficient map $C_E\\to C_\\Omega$ and the module map $M_E\\to\\operatorname{Res}M_\\Omega$, $x\\mapsto1\\otimes x$. The free-generator coefficient-extension identification sends the generator $[a]$ to $[a]$. The canonical coefficient-comparison arrows for internal Hom and direct image are mates of these evaluation/module maps. After scalar restriction both composites in the requested square transpose to the identical map, evaluating a function and then applying $x\\mapsto1\\otimes x$. Hence their mates agree. This argument uses the derived extension/restriction adjunction (K-flat tensor for extension) and does not assert that scalar extension is exact or that the scalar-comparison arrows themselves are isomorphisms. All operations used the original sheaves $C(Q,F)$ and $C(Q,F\\otimes_E M)$; no finite-subextension-valued or completed model has entered.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08J7: compatibility of evaluation with coefficient maps, by uniqueness of adjunction mates; derived coefficient extension is ringed pullback for the identity topos."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "lem-weil-pbc-proetale-point-components-maps",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "det-pe-hypercover-single-cover",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-kinjective-restrict-localized",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-zl-component-relative-profinite-site",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sfb-wcontractible-component-derived-hom",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proposition 4.3(1), combined with Stacks slice localization and derived tensor-Hom. The parameter identification and coherence argument are written here, not asserted to be a theorem quoted verbatim in the blueprint."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +206,45 @@
    "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, TopCat.Presheaf.pushforwardPullbackAdjunction, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality, LightCondensed.ihomPoints, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
    "date": "2026-10-21",
    "verdict": "no match: LightCondensed.ihomPoints is underived, light and over an ordinary discrete scalar ring; the other hits are ordinary sheaf adjunctions, not this derived comparison for internal continuous coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pushforward along a profinite parameter scheme equals pulled back derived internal Hom from the free condensed module",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.internallyProjective_iff_tensor_condition'\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underived light condensed Hom, discrete coefficients, ordinary sheaf pullback or solidification, not the asserted unbounded all-continuous comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"ihom\"",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.ihomPoints_apply\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underived light condensed Hom, discrete coefficients, ordinary sheaf pullback or solidification, not the asserted unbounded all-continuous comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(profinite|Profinite).*(rightDerived|derivedHom)|(rightDerived|derivedHom).*(profinite|Profinite)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underived light condensed Hom, discrete coefficients, ordinary sheaf pullback or solidification, not the asserted unbounded all-continuous comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived functions of profinite parameters commute with pullback from condensed modules to schemes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullback\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullback\", \"LocallyConstant.comapₗ\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.pullbackComp\", \"CondensedMod.IsSolid.isIso_solidification_map\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underived light condensed Hom, discrete coefficients, ordinary sheaf pullback or solidification, not the asserted unbounded all-continuous comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme inverse image preserves derived internal Hom out of a free profinite condensed module",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern underived light condensed Hom, discrete coefficients, ordinary sheaf pullback or solidification, not the asserted unbounded all-continuous comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-root-tower-boundary-acyclicity",
@@ -103,5 +268,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-profinite-constant-derived-functions",
+  "worker": "stage1",
+  "summary": "Preserved the all-continuous statement and its internal unbounded coefficient category. Constructed the canonical map by evaluation, proved invertibility on the geometrically w-contractible affine basis using HRS Proposition 4.3(1), and checked arbitrary linear maps, whole parameter families and scalar mates. Added one general statement-only input; the slice identity is a three-line K-injective-model calculation, so no separate node was retained after DAG, blueprint and logged Mathlib searches; no Lean written or run.",
+  "blueprint": "Paragraph (3), open direct image: profinite parameter functions on the closed stratum, independently of a root tower or a normal crossings boundary",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic tool: internal/sectionwise module equivalence; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic tool: exact monoidal transport of module tensors and K-flat complexes; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-sfb-module-object-ringed-site-derived-comparison",
+    "why": "Generic tool: transport of derived internal Hom with its evaluation; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic tool: transport of direct image/pullback and adjunction; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-point-basis-evaluation",
+    "why": "Generic tool: basis evaluation of condensed inverse image; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-point-components-maps",
+    "why": "Generic tool: representability of profinite parameter sheaves; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-source-affine-wcontractible-evaluation",
+    "why": "Generic tool: geometric w-contractibility implies the categorical evaluation property; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "det-pe-hypercover-single-cover",
+    "why": "Generic tool: existence of covers by geometrically w-contractible affines; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "Generic tool: exact monoidal point pullback and cartesian coefficient identifications; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic tool: equivalence of the pro-etale site of an object with the slice site (clause 1 only); the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic tool: monoidal derived pullback, also for change of coefficient rings; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Generic tool: coherence of evaluation and transposition under slice restriction; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-zl-component-relative-profinite-site",
+    "why": "Generic tool: component geometric morphism and factorization of the condensed-point morphism; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic tool: unbounded derived internal Hom commutes with localization; the open-direct-image step of this unit does not replace this general fact."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "General K-injective restriction theorem on small ringed sites, needed to compute the slice direct image from the same model; this unit has no replacement."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "General K-injective model of derived internal Hom on ringed sites, needed for the termwise slice calculation; this is a definition tool, not a change of unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Its general ringed-topos derived adjunction supplies derived scalar extension versus exact restriction for the identity geometric morphism with coefficient map C_E to C_Omega, without a flatness hypothesis."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-module-object-ringed-site-derived-comparison",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "lem-weil-pbc-proetale-point-components-maps",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "det-pe-hypercover-single-cover",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-zl-component-relative-profinite-site",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-kinjective-restrict-localized",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-e3c57fdb6",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-e3c57fdb6 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node, all 18 cited node statements, and HRS 2305.18131 §3 (Example 3.1, (3.1)/(3.2)), Lemma 4.1, construction (4.1) and Prop 4.3 with its proof and (4.2). On side-live the item is unsplit and its statement is identical. Neither the item nor any cited node is in route-pivot-dropped. There is no re-split note, no SGA citation, and no DAG cycle. The item is true. Its target is Rρ_*ρ^*N' = RHom_B(B[h_{X[P]}],N'), with p_X^{-1}h_P = h_{X[P]}. This leaves the claim that p_X^* commutes with RHom(Λ[P],N), and it can be checked on w-contractible W by p_W = q_S π_W: the slice restriction q_S^* commutes with RHom, and π_W^* does by HRS 4.3(1). I re-derived that clause from (4.2) plus full faithfulness of π_U^* for arbitrary unbounded K, L. The RΓ clause is full faithfulness applied to (Λ_S, K). Step checks: step 2 combines basis evaluation with the components-maps bijection, both natural in V, and covers affine X by det-pe-hypercover-single-cover (quasi-compact). Step 3 is an elementary slice calculation using K-injective restriction (08FI) and is correctly marked. Step 4 constructs β before claiming invertibility. Step 5 uses exact restriction of RHom plus the new node, then concludes globally because cohomology sheaves vanishing on a cover vanish. Step 6 checks the H^0 exponential law. Step 7 checks matrix linearity because M_F = C_F^r, and the X[Q]-family version. Step 8: the mate under derived extension/restriction from projection-mate-exact; free modules are flat; no exactness of scalar extension is claimed. Edge cases P empty, P a point, M = 0 and non-complete Ω all pass. The new node lem-sfb-wcontractible-component-derived-hom is exactly HRS 4.3(1) plus its RΓ corollary. It is not a restatement of the item and duplicates none of the lem-zl-condensed-*/contractible-* or wstrict-lisse nodes, which are lisse, scalar or underived only. FIX, B3: the new node used 'commutative condensed ring' and 'unbounded derived categories' with no definition nodes. I added sk-def-sfb-condensed-ring, def-weil-sheaf-of-modules-category and def-weil-abstract-derived-category to its text and stmt_deps, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-wcontractible-component-derived-hom.json. Batch-5: both flagged citations of lem-zl-component-relative-profinite-site reach sec-trace-formula only through the general definition def-trf-geometric-morphism. That definition is not part of the trace formula or Poincaré duality, so I accept it. I recomputed the closure; the only other trace-formula node, lem-trf-localization-essentially-surjective, is reached through an existing generic chain and was not flagged. I accept all 17 declared tool_uses as generic site, topos or ringed-site tools.; 1 file(s) fixed by the reviewer"
  }
 }
