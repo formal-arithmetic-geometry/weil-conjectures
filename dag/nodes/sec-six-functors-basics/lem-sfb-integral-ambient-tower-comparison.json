@@ -20,9 +20,131 @@
   "def-weil-pbc-site-comparison-morphism",
   "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-l-adic-extension-integers-dvr], $A$ is a domain and every ideal is principal, so every ideal is finitely generated and $A$ is Noetherian. Its uniformizer is nonzero, hence multiplication by $\\varpi^n$ is injective, with cokernel $P_n$ by the definition of that quotient. Thus $[A\\xrightarrow{\\varpi^n}A]$ in degrees $-1,0$, augmented to $P_n$, is the asserted finite free resolution. By [lem-weil-valued-dvr-finite-quotients], $P_n$ is finite. Since $|\\ell|_E=\\ell^{-1}<1$, the element $\\ell$ belongs to the maximal ideal $(\\varpi)$, say $\\ell=\\varpi a$ with $a\\in A$. Consequently $\\ell^n=\\varpi^n a^n$ annihilates $P_n$. In particular $A/I$ is additive torsion, and every $P_n$ is perfect. These verify every algebraic hypothesis in [def-weil-pbc-adic-coefficient-datum].",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(3), specialization to the DVR coefficient datum; elementary verification of its algebraic hypotheses"
+   }
+  },
+  {
+   "text": "The ring homeomorphism in [lem-sfb-integers-profinite-tower] identifies $A$ with $\\varprojlim_nP_n$ through the reduction maps. By [sk-prop-sfb-qlbar-colimit-x], its pulled-back condensed ring $A_Z$ is canonically $\\varprojlim_n(P_n)_Z$, and the finite coefficients here are the constant sheaves. The isomorphisms of [sk-prop-sfb-cartesian-coefficients] give $f^{-1}A_Y\\cong A_X$ and $f^{-1}(P_n)_Y\\cong(P_n)_X$. Their compatibility with the quotient projections is the explicit identity $\\pi_{X,n}c_f=c_{f,n}f^{-1}\\pi_{Y,n}$ of [lem-weil-pbc-profinite-coefficient-inverse-image]. Thus both the coefficients and their specified quotient arrows are exactly the adic datum, rather than merely abstractly isomorphic ring sheaves.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 6.5 coefficient sheaves; Lemma 6.5.9, coefficient identification"
+   }
+  },
+  {
+   "text": "Use these ring identifications throughout. By [sk-def-sfb-module-derived-pushpull], $M$ is computed by the total K-injective derived module direct image, with its induced $A_Y$-action. This is the ordinary ringed-topos direct image used below. The scalar-restriction comparisons of [lem-pur-completed-coefficient-pushforward-comparison] identify $Rf_{*,A}\\operatorname{Res}_{X,n}$ with $\\operatorname{Res}_{Y,n}Rf_{*,P_n}$. In particular the finite-level target, after restriction, is $Rf_{*,A}(\\operatorname{Res}_{X,n}K_n)$; its action has not been replaced by an arbitrary action on an isomorphic abelian complex. The cited comparison applies to strict coefficient systems as well as individual levels. Its auxiliary prime $p\\ne\\ell$ can be chosen arbitrarily: it imposes no characteristic condition on $X$ or $Y$.",
+   "uses": [
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-pur-completed-coefficient-pushforward-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied to quotient restriction"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-completed-constant-sheaf-reduction], extending the free resolution of step 1 from the constant $A$-sheaf to $A_Z$ represents $(P_n)_Z$ by $[A_Z\\xrightarrow{\\varpi^n}A_Z]$. In particular this is a perfect coefficient complex in the completed-coefficient ambient category. Apply [lemma-weil-pbc-perfect-projection-formula] to obtain, for every $n$, the canonical isomorphism\n$$\\pi_n:M\\otimes^L_{A_Y}(P_n)_Y\\longrightarrow Rf_{*,A}(\\operatorname{Res}_{X,n}K_n)$$\nin $D(A_Y)$, where the source is also viewed by restriction. There is no boundedness assumption on $K$ in this projection formula. This use is the perfect-coefficient case of Bhatt--Scholze Lemma 6.5.9(3); it does not infer a levelwise statement from the pro-object assertion 6.5.9(1).",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lemma-weil-pbc-perfect-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(3), perfect scalar complexes"
+   }
+  },
+  {
+   "text": "Retain the quotient actions by constructing the morphism before restriction. On the strict system categories of [lem-pur-coefficient-system-derived-comparison], use the exact levelwise pullback $f_P^*$ and its derived right adjoint $Rf_{P,*}$. The hypothesis $A\\cong\\varprojlim P_n$ was checked in step 2. Form the strict derived reduction systems $B_Z$ of [lem-weil-pbc-reduction-pullback-derived-tower], retaining the $(P_n)_Z$-actions from their tensor construction. Exact inverse image commutes with derived coefficient change, so $f_P^*B_Y(M)\\cong B_X(f_A^*M)$. Reduce the ambient counit $\\varepsilon:f_A^*M\\to K$ and take its adjunct. This gives\n$$\\beta:B_Y(M)\\longrightarrow Rf_{P,*}B_X(K).$$\nIts evaluations $\\beta_n$ are morphisms in $D((P_n)_Y)$, and its construction is in the derived category of coefficient systems. By [lem-pur-diagram-ring-restriction-pushforward], restriction of its target is $Rf_{*,A}^{\\operatorname{Tow}}B_X(K)$. After restriction, its defining adjunct is exactly the tensor-pullback comparison followed by $\\varepsilon\\otimes1$. Therefore it is the morphism $h_K$ of [lem-weil-pbc-augmented-diagram-projection-mate], whose evaluations are $\\pi_n$. By step 4 each restricted $\\beta_n$ is an isomorphism. Exact restriction detects acyclic complexes, since it leaves the underlying abelian sheaves unchanged; applying this to the cone proves that each $\\beta_n$ is an isomorphism in $D((P_n)_Y)$.",
+   "uses": [
+    "lem-pur-coefficient-system-derived-comparison",
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-weil-pbc-augmented-diagram-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; counit-tensor mate on the coefficient diagram site"
+   }
+  },
+  {
+   "text": "For $b\\ge a$, the source transition of $\\beta$ is induced by $q_{b,a}:P_b\\to P_a$, and its target transition is derived direct image of the corresponding restricted transition of $K_\\bullet$. On the tensor-pullback adjuncts the compatibility square reads\n$$(1\\otimes q_{b,a})\\,(\\varepsilon\\otimes1)=(\\varepsilon\\otimes1)\\,(1\\otimes q_{b,a});$$\nboth composites send a local pure tensor $x\\otimes u$ to $\\varepsilon(x)\\otimes q_{b,a}(u)$. The normalized strict-tower mate of [lem-weil-pbc-augmented-diagram-projection-mate] asserts this compatibility before evaluation and also gives\n$$h_K i_{Y,M}=Rf_{*,A}^{\\operatorname{Tow}}(i_{X,K})\\chi_K.$$\nHere $i$ is the quotient augmentation and $\\chi$ the constant-tower comparison in that node. Thus the isomorphisms of step 5 commute with all quotient maps and, after restriction, constitute the specified augmented derived strict-tower comparison. They are not a choice of unrelated levelwise isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-augmented-diagram-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim, strict tower interpretation; explicit quotient-transition square"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-completed-coefficient-pushforward-comparison] to the derived complete $K$. It gives both completeness of the ordinary $M=Rf_{*,A}K$ and the canonical isomorphism\n$$M\\xrightarrow{\\sim}R\\varprojlim_n\\operatorname{Res}_{Y,n}Rf_{*,P_n}K_n,$$\nwhose $n$-th projection is $Rf_{*,A}$ of $K\\to\\operatorname{Res}_{X,n}K_n$, followed by the coefficient-restriction comparison. For clarity, its limit comparison is the strict-tower comparison of [lem-weil-ringed-tower-pushforward-limit-comparison], obtained from $f_*\\lim=\\lim f_*^{\\operatorname{Tow}}$. The augmented equality in step 6 identifies this map with the completion map for $M$ after the reduction isomorphisms $\\beta_n$: apply $R\\lim$ to that equality and use the projection-normalized limit comparison. This proves the assertion for the canonical completion map, not just the existence of an isomorphism to the same limit object. All categories here are ordinary uncompleted ambient derived categories; completeness is a property of $M$.",
+   "uses": [
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim; proetale.tex Tag 099N, lemma-pushforward-Noetherian-case (1),(4), via completed-coefficient comparison"
+   }
+  },
+  {
+   "text": "Finally fix the specified $L_n\\in D^+(X_{\\mathrm{et}},P_n)$ and isomorphism $\\theta_n:K_n\\xrightarrow{\\sim}\\nu_X^*L_n$. Apply [sk-thm-pe-direct-image-comparison] with the discrete commutative ring $\\Lambda=P_n$. Its hypotheses on $f$ are exactly quasi-compactness and quasi-separatedness, and its derived comparison assumes precisely the bounded-below condition on $L_n$. If $c_n:\\nu_Y^*Rf_{\\mathrm{et},*,P_n}L_n\\xrightarrow{\\sim}Rf_{*,P_n}\\nu_X^*L_n$ is that canonical comparison, the desired map is $c_n^{-1}\\circ Rf_{*,P_n}(\\theta_n)$. It is an isomorphism in the finite-coefficient module derived category. No assertion for unbounded etale-origin complexes has been used. None of the preceding coefficient or tower arguments required properness or constructibility.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.4.3, bounded-below comparison for a qcqs morphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-sfb-integers-profinite-tower",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.5.9(2),(3) and 5.4.3; specialization and coefficient/tower normalization using the existing DAG"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +180,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib/RingTheory/Smooth/NoetherianDescent\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (A : Type u) (B : Type u_2) [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra A B] [Algebra.Etale A B],\\n  ∃ A₀ B₀ x x_1, A₀.FG ∧ Algebra.Etale (↥A₀) B₀ ∧ Nonempty (B ≃ₐ[A] TensorProduct (↥A₀) A B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.FormallyEtale.instForallOfFinite\", \"module\": \"Mathlib/RingTheory/Etale/Pi\", \"type\": \"∀ {R : Type u_1} {I : Type u_2} (A : I → Type u_3) [inst : CommRing R] [inst_1 : (i : I) → CommRing (A i)]\\n  [inst_2 : (i : I) → Algebra R (A i)] [Finite I] [∀ (i : I), Algebra.FormallyEtale R (A i)],\\n  Algebra.FormallyEtale R ((i : I) → A i)\", \"doc\": \"If $ I $ is a finite set and each algebra $ A_i $ over a commutative ring $ R $ is formally étale, then the product algebra $ \\\\prod_{i \\\\in I} A_i $ is also formally étale over $ R $.\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S} {n : ℕ},\\n  RingHom.IsStandardSmoothOfRelativeDimension n f → ∃ g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"For any ring homomorphism $ f : R \\\\to S $ that is standard smooth of relative dimension $ n $, there exists an étale ring homomorphism $ g : R[x_1, \\\\dots, x_n] \\\\to S $ such that $ g \\\\circ C = f $, whe\"}\n  {\"name\": \"StandardEtalePair.instFormallyEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.FormallyEtale R P.Ring\", \"doc\": \"For any commutative ring $ R $ and standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is a formally étale $ R $-algebra. This instance asserts that the standard étale ring extension, con\"}\n  {\"name\": \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"module\": \"Mathlib/RingTheory/RingHom/StandardSmooth\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] {f : R →+* S},\\n  f.IsStandardSmooth → ∃ n g, g.comp MvPolynomial.C = f ∧ g.Etale\", \"doc\": \"Given a standard smooth ring homomorphism $ f : R \\to S $, there exists a natural number $ n $ and an étale ring homomorphism $ g : R[x_1,\\\\ldots,x_n]_f \\\\to S $ such that $ g $ composed with the canonic\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}",
    "date": "2026-10-21",
    "verdict": "no match: returned declarations concern scalar adic completion, generic module presentations, condensed discreteness, or normed spaces; none states the pro-etale coefficient/category comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(Proetale|SheafOfModules).*(adic|Adic|[Cc]omplet)|([Cc]omplet|adic|Adic).*(Proetale|SheafOfModules)",
+   "results": "Hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations gives the pro-etale integral coefficient, finite reduction and strict derived-limit comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image of adically complete sheaves is the derived inverse limit of its finite coefficient reductions",
+   "results": "Hits: AdicCompletion, IsAdicComplete.of_lift, IsAdicComplete.of_comp_lift, AdicCompletion.module, AdicCompletion.sumInv_comp_sum, AdicCompletion.subring, AdicCompletion.submodule, AdicCompletion.ofLinearEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations gives the pro-etale integral coefficient, finite reduction and strict derived-limit comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DerivedCategory",
+   "results": "Hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations gives the pro-etale integral coefficient, finite reduction and strict derived-limit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes the ordinary derived pushforward of complete pro etale integral modules commutes with finite quotient reduction and derived inverse limits",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τr, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, SheafOfModules.pushforwardComp",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations gives the pro-etale integral coefficient, finite reduction and strict derived-limit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A perfect coefficient complex satisfies the projection formula for unbounded derived direct image on ringed topoi and finite quotient transition maps",
+   "results": "Hits: CochainComplex.IsKProjective, localCohomology.diagram, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.isKProjective_of_projective, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.Functor.mapProjectiveResolution_complex, DerivedCategory.left_fac_of_isStrictlyGE, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-21",
+   "verdict": "no match: none of the returned declarations gives the pro-etale integral coefficient, finite reduction and strict derived-limit comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-lower-star-preserves",
@@ -73,10 +230,99 @@
  "blueprint": {
   "from": {
    "node": "lem-sfb-dc-lower-star-preserves",
-   "place": "Returned proof step 1, integral adic hypotheses and coefficient identifications; step 3, the ordinary coefficient-linear direct image and strict reduction tower; step 4, étale-origin comparison",
+   "place": "Integral paragraph of lem-sfb-dc-lower-star-preserves.proof.md: completeness from Rlim, perfect-coefficient reduction, and etale-origin direct-image comparison",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-integral-ambient-tower-comparison",
+  "worker": "stage1",
+  "summary": "Verified the DVR hypotheses, retained the ordinary condensed-coefficient direct image, and assembled the existing perfect projection formula and strict coefficient-system adjunction with unit-normalized reconstruction and bounded-below etale comparison. No new nodes and no statement change.",
+  "blueprint": "Realizes the integral paragraph: scalar adic hypotheses and coefficient identifications (steps 1-3), perfect finite reduction (4-6), completeness and canonical strict reconstruction (7), etale-origin comparison (8). The ambient comparison is independent of finiteness conclusions above it.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-coefficient-system-derived-comparison",
+    "why": "General adjunction on finite-coefficient strict systems constructs coefficient-linear maps before forgetting actions. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "General completed-ring coefficient restriction and ordinary direct-image reconstruction, retaining strict towers. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-pur-diagram-ring-restriction-pushforward",
+    "why": "Compares quotient-system direct image and ambient strict-tower direct image before evaluation. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Completeness of the scalar coefficient ring is needed for the coefficient-system adjunction. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "DVR structure and nonzero uniformizer verify the scalar hypotheses; no geometric direct-image argument is replaced. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-augmented-diagram-projection-mate",
+    "why": "General augmented strict-tower mate supplies compatibility with transition maps and completion units. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "why": "Turns the scalar finite free resolution into the specified quotient sheaf resolution. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Normalizes the ring identification against every quotient projection. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-pullback-derived-tower",
+    "why": "Normalizes reduction and pullback of strict systems on K-flat representatives. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "General ringed-topos strict derived-limit comparison, with specified projections. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "lemma-weil-pbc-perfect-projection-formula",
+    "why": "The general perfect-coefficient tool gives actual finite-level projection isomorphisms. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Identifies the canonical pulled-back coefficient ring and exact inverse image. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Identifies the continuous condensed coefficient sheaf with the finite quotient limit. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "General bounded-below etale/proetale comparison gives the final finite-level identification. This is a generic tool for the integral route; the open-coefficient unit supplies no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-coefficient-system-derived-comparison",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-sfb-integers-profinite-tower",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lemma-weil-pbc-perfect-projection-formula",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-707508a99",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-707508a99 (reviewer sub-agent of L); spot-checked: I read the item, all 17 cited statements, unit sk-prop-open-coefficients, the parent step that cites the item (lem-sfb-dc-lower-star-preserves step 2), and Bhatt–Scholze Lemma 5.4.3, Remark 5.4.4 and Lemma 6.5.9 with its proof (pp. 50–51). The delivery is one commit with no new nodes and the statement unchanged. The item was created 2026-10-21, so it is not in the dropped list, and the snapshot has no re-split note for it. All proof_deps exist and are unmerged. The transitive closure has 3233 nodes and contains neither the item nor its parent, so there is no cycle. The off-route citations (lem-pur-completed-coefficient-pushforward-comparison, lem-pur-diagram-ring-restriction-pushforward, lem-weil-l-adic-extension-integers-dvr) are generic tools declared in tool_uses; I accept them. The route follows the unit's integral paragraph: completeness (step 7), reduction through the two-term perfect resolution of P_n (steps 4–6, BS 6.5.9(3) rather than the pro-object clause (1)), and the étale comparison (step 8, BS 5.4.3/09A6, D^+ only). Step by step: step 1 (PID, so Noetherian; ϖ^n injective; ℓ=ϖa, so ℓ^n kills P_n; P_n perfect) matches every hypothesis of def-weil-pbc-adic-coefficient-datum. Step 2: the coefficient identifications and the projection identity π∘c_u=c_{u,n}∘u^{-1}π are stated by the cited nodes. Step 3: the auxiliary prime p in the cited completed-coefficient nodes plays no role in their statements. Step 4: the perfect projection formula holds for any morphism and unbounded K. Step 5: the map is built on (P_n)-systems through the coefficient-system adjunction and the diagram restriction/pushforward comparison, then identified with h_K by comparing adjuncts (a standard mate fact, compressed). Exact restriction then detects that each β_n is an isomorphism. Step 6: compatibility with transitions and the equation h_K i = G^Tow(i)χ_K are asserted before evaluation in the mate node. Step 7: since M is complete, the completion map is an isomorphism, and R lim of the levelwise isomorphism β is an isomorphism, so the stated clause follows; the extra normalization in the step is compressed but not needed. Step 8: Λ=P_n, f qcqs, L_n in D^+. Edge cases checked: n=1, E=Q_ℓ, ramified E, K=0, f=id, characteristic ℓ. No duplicate found: det-thm-sfb-proper-base-change-integral, lem-sfb-admissible-direct-image and lem-sfb-adic-constructible-finite-reductions are narrower or different. No fixes. Advisory only: steps 5 and 7 compress the coherences noted above."
  }
 }
