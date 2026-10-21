@@ -1,0 +1,139 @@
+{
+ "id": "lem-sfb-derived-cokernel-adjoint-exchange",
+ "kind": "statement",
+ "title": "Exact exchange for derived cokernel adjunctions",
+ "statement": "Let A,B,A',B' be abelian categories with derived categories [def-weil-abstract-derived-category], and n a natural number. Let E⊣R and E'⊣R' be additive adjunctions; R and R' are exact and R' is fully faithful. Suppose each ordinary unit X→REX (and X'→R'E'X') is the cokernel of n times the identity. Let L⊣D(R), L'⊣D(R') be shift-compatible derived adjunctions, with natural comparison morphisms ε:Q L→E_complex Q and ε' of the same kind. Suppose classes H,H' of complexes admit resolutions of every complex by quasi-isomorphisms, multiplication by n is monic in every term of each resolving complex, ε and ε' are invertible there, and the derived units there agree with the termwise ordinary units via ε and the exact-functor factorization. For exact additive F:A→A', G:B→B' and ρ:R F≅G R', there are isomorphisms e:E G≅F E' and θ:L D(G)≅D(F) L', normalized by the ordinary and derived mate-unit equations. θ commutes with shifts. On every complex P, θ followed by the target universal comparison equals the source universal comparison followed by the complex map induced by e, with the canonical exact-functor factorizations inserted.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraphs 4 and 5, generic homological-algebra consequence; an agent lemma, not a verbatim statement of the source.",
+  "external": [
+   {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "lemma-derived-adjoint (Tag 09T5); canonical triangles of short exact sequences (Tag 0152)."
+   }
+  ]
+ },
+ "proof": [
+  {
+   "text": "Exactness of F preserves the cokernel of n. The ordinary mate is the unique map of the two cokernel units; comparing their universal properties proves it invertible and fixes its unit equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Extend the two normalized unit equations from resolving complexes along resolution quasi-isomorphisms, using naturality of the unit, ε and the exact-functor factorization. Cancel the isomorphisms induced by the resolutions.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For any complex with termwise monic n, the unit is a degreewise cokernel, hence the multiplication sequence is short exact. A resolving quasi-isomorphism gives a map of multiplication short exact sequences. Its first two components are quasi-isomorphisms, so its third is too. Exact faithful R' reflects quasi-isomorphisms via homology, so ε' computes on this complex. F preserves monicity of n and therefore ε' computes on F of every source resolving complex.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the adjunction mate of D(ρ). Apply the target adjunction to its comparison with ε, and use the normalized units and ordinary mate equation. This proves the representative formula; on resolving complexes both ε comparisons are invertible, hence the mate is invertible. Extend by resolution and essential surjectivity of Q. Its inverse is θ. Units, counits, D(ρ), and thus the mate and its inverse commute with shifts.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraphs 4 and 5; explicit exact-adjunction comparison and canonical shifted boundary calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact adjunction comparison for derived cokernel modulo an integer using resolutions with multiplication monic",
+   "results": "General derived adjunction unit and counit formulas; no exact match.",
+   "date": "2026-10-21",
+   "verdict": "The hits give generic derived units and counits, not exchange under only termwise multiplication monicity."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact, CategoryTheory.Adjunction",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCokernelAdjointExchange|normalizedScalarBoundary|mapShiftedHom_singleδ",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.Ext.Map: mapShiftedHom_singleδ and its primed version.",
+   "date": "2026-10-21",
+   "verdict": "These give naturality of the canonical connecting map, but do not state the adjunction comparison or normalized identification squares."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact change of coefficients for derived cokernel adjunctions using resolutions on which multiplication by an integer is monic",
+   "results": "Mathlib.CategoryTheory.Abelian.Transfer: CategoryTheory.AbelianOfAdjunction.hasCokernels; Mathlib.Algebra.Category.ModuleCat.Kernels: ModuleCat.cokernelIsColimit; Mathlib.CategoryTheory.Functor.Derived.Adjunction: CategoryTheory.Adjunction.derived_counit; Mathlib.Algebra.Homology.ExactSequenceFour: CategoryTheory.ComposableArrows.Exact.cokerIsoKer'; Mathlib.CategoryTheory.Functor.Derived.Adjunction: CategoryTheory.Adjunction.derivedε; Mathlib.CategoryTheory.Functor.Derived.Adjunction: CategoryTheory.Adjunction.derivedη_fac_app_assoc; Mathlib.Algebra.Homology.ShortComplex.Exact: CategoryTheory.ShortComplex.Exact.gIsCokernel; Mathlib.CategoryTheory.Preadditive.Projective.Resolution: CategoryTheory.ProjectiveResolution.cokernelCofork",
+   "date": "2026-10-21",
+   "verdict": "No exact match. General derived counits and ordinary cokernels; no exact exchange theorem on the specified resolving classes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DivisibleExtensionDerivedReduction",
+  "date": "2026-10-21",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-divisible-extension-derived-reduction",
+   "place": "Inverse-image comparison in proof step 10.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.CokernelAdjointExchange",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/CokernelAdjointExchange.lean",
+  "declaration": "CategoryTheory.derivedCokernelAdjointExchange",
+  "statement": "theorem CategoryTheory.derivedCokernelAdjointExchange :\n    ∃ e : E ⋙ G ≅ F ⋙ E',\n      (∀ X, F.map (a.unit.app X) ≫ ρ.hom.app (E.obj X) ≫\n        R'.map (e.hom.app X) = a'.unit.app (F.obj X)) ∧\n      ∃ θ : L ⋙ G.mapDerivedCategory ≅ F.mapDerivedCategory ⋙ L',\n        NatTrans.CommShift θ.hom ℤ ∧\n        (∀ X, ad'.unit.app (F.mapDerivedCategory.obj X) ≫\n          R'.mapDerivedCategory.map (θ.inv.app X) =\n          F.mapDerivedCategory.map (ad.unit.app X) ≫\n            (CategoryTheory.Functor.mapDerivedCategorySquareIso ρ).hom.app (L.obj X)) ∧\n        ∀ P : CochainComplex A ℤ,\n          θ.hom.app (DerivedCategory.Q.obj P) ≫\n            L'.map (F.mapDerivedCategoryFactors.hom.app P) ≫\n            ε'.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =\n          G.mapDerivedCategory.map (ε.app P) ≫\n            G.mapDerivedCategoryFactors.hom.app ((E.mapHomologicalComplex (.up ℤ)).obj P) ≫\n            DerivedCategory.Q.map ((NatIso.mapHomologicalComplex e (.up ℤ)).hom.app P)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f0d81",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T061727-L-1821358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f0d81",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T061727-L-1821358",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 2 new generic modules vs live DivisibleExtensionDerivedReduction: public theorem statements identical, Presentation/Identifications abbrevs field-for-field equal to old structures (change record lists all users), 5 holes closed with clean axioms, all 6 direct importers compiled"
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "id": "def-sfb-scalar-reduction-presentation",
+ "kind": "definition",
+ "title": "Scalar reduction presentations in additive categories",
+ "statement": "Let A be a preadditive category and B a category, with a functor R:B→A, and n a natural number. A scalar reduction presentation consists of a short exact complex S in A [def-weil-pbc-exact-sequence], two objects H,Q of B, maps i:RH→S.X₁ and p:S.X₃→RQ, equations i followed by n times the identity equals zero and n times the identity followed by p equals zero, and proofs that RH→S.X₁→S.X₁ and S.X₃→S.X₃→RQ are short exact. Their middle and first arrows, respectively, are multiplication by n. Specializing R to restriction of integral and residue sheaves gives precisely the extension, Kummer and quotient data used for divisible reduction, including epimorphy on S.X₁ and monicity on S.X₃.",
+ "stmt_deps": [
+  "def-weil-pbc-exact-sequence"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraph 4, extension with torsion kernel and reduction quotient; general record abstracted from the concrete presentation, not a verbatim source definition."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "The same ten data/proof fields as the original concrete Presentation, abstracted over its two additive categories and restriction functor."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DivisibleExtensionDerivedReduction",
+  "date": "2026-10-21",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-divisible-extension-derived-reduction",
+   "place": "The explicit presentation data in the divisible reduction statement.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "proof": [
+  {
+   "text": "Take the record with fields S, exact, H, Q, i, p, wi, wp, kummer, quotient, in that order. No object is selected by existence: all data and all three short exact sequence proofs are explicit fields. Specialization to the coefficient restriction functor is the previous concrete Presentation record field for field.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Data of a short exact extension with a second short exact sequence presenting the n torsion kernel and a third presenting the quotient by n under a restriction functor",
+   "results": "CategoryTheory.Abelian.Ext.covariantSequence; contravariantSequence; covariant_sequence_exact₂'; contravariant_sequence_exact₃'.",
+   "date": "2026-10-21",
+   "verdict": "General Ext exact sequences do not package these three explicit short exact sequences and residue objects."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortComplex\", \"ShortExact\"",
+   "results": "12 hits, including ShortComplex.ShortExact, shortExact, ShortExact.exact, ShortExact.op and shortExact_of_iso.",
+   "date": "2026-10-21",
+   "verdict": "Use ShortComplex.ShortExact for each component; there is no matching presentation record."
+  },
+  {
+   "tool": "grep",
+   "query": "ScalarReductionPresentation|kummer.*quotient|quotient.*kummer",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No matching record."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A record of a short exact extension with a torsion kernel presentation and a quotient presentation for multiplication by a natural number",
+   "results": "Mathlib.GroupTheory.GroupExtension.Defs: GroupExtension.rec; Mathlib.RingTheory.Regular.Category: ModuleCat.smulShortComplex; Mathlib.GroupTheory.GroupExtension.Defs: AddGroupExtension; Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass: CategoryTheory.ShortComplex.ShortExact.extClass; Mathlib.RingTheory.Regular.Category: ModuleCat.smulShortComplex_exact; Mathlib.GroupTheory.GroupExtension.Defs: GroupExtension.recOn; Mathlib.RingTheory.Regular.Category: IsSMulRegular.smulShortComplex_shortExact; Mathlib.GroupTheory.GroupExtension.Defs: AddGroupExtension.mk",
+   "date": "2026-10-21",
+   "verdict": "No exact match. ModuleCat.smulShortComplex packages a single multiplication complex in a module category, not this combined record in two arbitrary categories."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DivisibleExtensionDerivedReduction",
+  "file": "lean/Sheaf/Paper/DivisibleExtensionDerivedReduction.lean",
+  "declaration": "CategoryTheory.ScalarReductionPresentation",
+  "statement": "structure CategoryTheory.ScalarReductionPresentation\n    {A B : Type*} [Category* A] [Category* B] [Preadditive A]\n    (R : B ⥤ A) (n : ℕ)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f0d81",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T061727-L-1821358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f0d81",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T061727-L-1821358",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 2 new generic modules vs live DivisibleExtensionDerivedReduction: public theorem statements identical, Presentation/Identifications abbrevs field-for-field equal to old structures (change record lists all users), 5 holes closed with clean axioms, all 6 direct importers compiled"
+ }
+}

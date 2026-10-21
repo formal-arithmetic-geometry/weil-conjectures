@@ -1,0 +1,137 @@
+{
+ "id": "lem-sfb-normalized-scalar-boundary-naturality",
+ "kind": "statement",
+ "title": "Naturality of normalized scalar reduction boundaries",
+ "statement": "Let A,B,A',B' be abelian categories with derived categories [def-weil-abstract-derived-category]. Let exact additive functors R:B→A, R':B'→A', F:A→A', G:B→B' have an isomorphism ρ:R F≅G R'. Let L⊣D(R), L'⊣D(R') commute with shifts, and let a shift-compatible θ:L D(G)≅D(F) L' satisfy the derived mate-unit equation. Let S,S' be short exact sequences [def-weil-pbc-exact-sequence], let f:S'≅F(S), and choose H,Q in B and H',Q' in B', with h:H'≅GH and q:Q'≅GQ. Let i:RH→S.X₁ and i':R'H'→S'.X₁ give short exact multiplication sequences with final map n times the identity. Let p:S.X₃→RQ and p':S'.X₃→R'Q'. Suppose αF:L(S.X₃[0])≅Q[0] and αB:L(S.X₁[0])≅H[1], and primed versions, are normalized by the derived unit: αF has adjunct p[0], while αB has adjunct the canonical Kummer connecting morphism, using the canonical single and shift comparisons. Assume i' followed by f₁ equals R'(h) followed by ρ inverse and F(i), and f₃ followed by F(p) equals p' followed by R'(q) and ρ inverse. Then both α squares commute with θ, f, h and q. The boundaries b=αF inverse followed by L(δS) and αB[1], with the canonical [1][1]→[2] comparison, and b' satisfy D(G)(b) followed by the shift and single comparisons equals the single comparison followed by q inverse, b' and h[2].",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraphs 4 and 5, generic homological-algebra consequence; an agent lemma, not a verbatim statement of the source.",
+  "external": [
+   {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "lemma-derived-adjoint (Tag 09T5); canonical triangles of short exact sequences (Tag 0152)."
+   }
+  ]
+ },
+ "proof": [
+  {
+   "text": "Prove that the derived square induced by ρ commutes with the canonical single-complex comparisons. Expand exact-functor factorization isomorphisms; the required complex equation is ρ naturality in degree zero and equality out of zero in other degrees. The shift version follows from shift compatibility.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The target adjunction is injective on morphisms. Apply it to the quotient identification square. The mate-unit equation and quotient-unit normalizations reduce it to the assumed equation for p and p' and naturality of the single comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the target adjunction to the Kummer identification square. The equation for i and i' defines a map between the image multiplication sequence and the primed multiplication sequence, with components ρ followed by R'(h inverse), f₁ inverse, f₁ inverse. Naturality of the canonical single triangle and exact preservation of its boundary give the required adjunct equality, including its sign.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The exact image of δS commutes with f by naturality of the short exact sequence triangle. Express b as a composition in shifted Hom. Functoriality of shifted composition, θ naturality, the two identification squares, and naturality of the shift-add isomorphism give the degree-two boundary square.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraphs 4 and 5; explicit exact-adjunction comparison and canonical shifted boundary calculation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of normalized quotient and Kummer identifications and their degree two boundary under a shift compatible derived adjunction mate",
+   "results": "CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit; CategoryTheory.Adjunction.CommShift.compatibilityCounit_left; CategoryTheory.Adjunction.CommShift.compatibilityUnit_right; CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift; general Dold-Kan natural-isomorphism formulas.",
+   "date": "2026-10-21",
+   "verdict": "Search returned shift-adjunction compatibility and Dold-Kan comparisons; none states these normalized squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShiftedHom.map_naturality, CategoryTheory.Adjunction",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCokernelAdjointExchange|normalizedScalarBoundary|mapShiftedHom_singleδ",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.Ext.Map: mapShiftedHom_singleδ and its primed version.",
+   "date": "2026-10-21",
+   "verdict": "These give naturality of the canonical connecting map, but do not state the adjunction comparison or normalized identification squares."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of normalized quotient and Kummer isomorphisms and their degree two boundary under an exact inverse image and a derived adjunction mate",
+   "results": "Mathlib.CategoryTheory.Abelian.RightDerived: CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality; Mathlib.CategoryTheory.Abelian.RightDerived: CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; Mathlib.CategoryTheory.Abelian.LeftDerived: CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality; Mathlib.CategoryTheory.Abelian.LeftDerived: CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality; Mathlib.AlgebraicTopology.DoldKan.NReflectsIso: AlgebraicTopology.DoldKan.instReflectsIsomorphismsSimplicialObjectKaroubiChainComplexNatN₁; Mathlib.AlgebraicTopology.DoldKan.Normalized: AlgebraicTopology.DoldKan.PInftyToNormalizedMooreComplex_naturality; Mathlib.AlgebraicGeometry.Normalization: AlgebraicGeometry.Scheme.Hom.normalizationCoprodIso_inv_coprodDesc_fromNormalization; Mathlib.CategoryTheory.Abelian.LeftDerived: CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Naturality for projective and injective resolutions and Dold-Kan; no normalized quotient, Kummer and boundary squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DivisibleExtensionDerivedReduction",
+  "date": "2026-10-21",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-divisible-extension-derived-reduction",
+   "place": "Inverse-image comparison in proof step 10.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedCategory.NormalizedScalarBoundaryNaturality",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/NormalizedScalarBoundaryNaturality.lean",
+  "declaration": "CategoryTheory.normalizedScalarBoundaryNaturality",
+  "statement": "theorem CategoryTheory.normalizedScalarBoundaryNaturality :\n    let b := aF.inv ≫ (ShiftedHom.map hS.singleδ L).comp aB.hom (show (1 : ℤ) + 1 = 2 from rfl)\n    let b' := aF'.inv ≫ (ShiftedHom.map hS'.singleδ L').comp aB'.hom\n      (show (1 : ℤ) + 1 = 2 from rfl)\n    (G.mapDerivedCategory.map aF.hom ≫ (G.mapDerivedCategorySingleFunctor 0).hom.app Q =\n      θ.hom.app ((DerivedCategory.singleFunctor A 0).obj S.X₃) ≫\n        L'.map ((F.mapDerivedCategorySingleFunctor 0).hom.app S.X₃) ≫\n        L'.map ((DerivedCategory.singleFunctor A' 0).map f.inv.τ₃) ≫ aF'.hom ≫\n        (DerivedCategory.singleFunctor B' 0).map q.hom) ∧\n    (G.mapDerivedCategory.map aB.hom ≫\n        (G.mapDerivedCategory.commShiftIso (1 : ℤ)).hom.app\n          ((DerivedCategory.singleFunctor B 0).obj H) ≫\n        ((G.mapDerivedCategorySingleFunctor 0).hom.app H)⟦(1 : ℤ)⟧' =\n      θ.hom.app ((DerivedCategory.singleFunctor A 0).obj S.X₁) ≫\n        L'.map ((F.mapDerivedCategorySingleFunctor 0).hom.app S.X₁) ≫\n        L'.map ((DerivedCategory.singleFunctor A' 0).map f.inv.τ₁) ≫ aB'.hom ≫\n        ((DerivedCategory.singleFunctor B' 0).map h.hom)⟦(1 : ℤ)⟧') ∧\n    (ShiftedHom.map b G.mapDerivedCategory ≫\n        ((G.mapDerivedCategorySingleFunctor 0).hom.app H)⟦(2 : ℤ)⟧' =\n      (G.mapDerivedCategorySingleFunctor 0).hom.app Q ≫\n        (DerivedCategory.singleFunctor B' 0).map q.inv ≫ b' ≫\n        ((DerivedCategory.singleFunctor B' 0).map h.hom)⟦(2 : ℤ)⟧')",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f0d81",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T061727-L-1821358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f0d81",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T061727-L-1821358",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 2 new generic modules vs live DivisibleExtensionDerivedReduction: public theorem statements identical, Presentation/Identifications abbrevs field-for-field equal to old structures (change record lists all users), 5 holes closed with clean axioms, all 6 direct importers compiled"
+ }
+}

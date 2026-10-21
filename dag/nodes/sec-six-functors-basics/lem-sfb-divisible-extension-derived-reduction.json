@@ -34,16 +34,15 @@
  ],
  "proof": [
   {
-   "text": "Put $Z=\\mathbf Z_{\\mathcal C}$ and let $E=-\\otimes_Z R$ on sheaves. Apply the module adjunction to the identity morphism of the topos with ring map $Z\\to R$: $E\\dashv\\operatorname{Res}$. Restriction keeps the underlying abelian sheaf; the sectionwise kernel and sheafified cokernel formulas therefore show that it is exact. The exact-functor results identify its everywhere-defined right derived functor with termwise restriction. Derived change of rings gives the everywhere-defined $LE=Lq$, so the derived-adjoint-functors theorem gives $Lq\\dashv\\operatorname{Res}$. Its unit $\\eta$ is the derived ordinary unit: on a K-flat complex $P$, under $Lq(P)\\simeq E(P)$, it is $P\\to\\operatorname{Res}E(P)$, $x\\mapsto x\\otimes1$. Indeed, in the pre-derived adjunction formula take the target complex to be $E(P)$, its restriction resolution to be the identity, and the map $P\\to\\operatorname{Res}E(P)$ to be the ordinary unit; its ordinary adjunct is $\\mathrm{id}_{E(P)}$. The formula then says that its derived adjunct is also the identity. The termwise unit commutes with shifts: the maps in each degree are unchanged and both shifted differentials acquire the same sign. For a resolution $P\\to A$, use $P[k]\\to A[k]$ to compute the shifted object; its scalar extension is $(P\\otimes_Z R)[k]$, and its unit is the shift of the unit on $P$. Under the canonical resolution isomorphisms this proves $\\eta_{A[k]}=\\eta_A[k]$, with the shift isomorphisms of $Lq$ and restriction understood.",
+   "text": "Construct the ordinary extension/restriction adjunction directly on sheaves: the inverse formulas send a tensor map to its value at x⊗1 and send an ordinary map to its scalar-linear extension. The actual scalar-extension functor is isomorphic to this tensor functor by its tensor adjunction. Restriction is exact. On the K-flat resolving class, normalized derived adjunction compatibility, essential constancy of the exact restriction denominator categories, and the left-derived universal property give the derived adjunction. Its unit on a K-flat complex is the image of the termwise ordinary unit. Choose the derived left shift structure by the adjunction with exact restriction; its unit therefore commutes with shifts.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
     "def-pc-sheaf-restrict-scalars",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-pur-sheaf-tensor-product",
     "lem-pur-derived-change-of-rings",
-    "lem-pc-derived-adjoint-functors",
-    "lem-pc-pre-derived-adjoint-functors-general"
+    "new-derived-adjunction-compatibility",
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
@@ -52,11 +51,13 @@
    }
   },
   {
-   "text": "The sequence $0\\to Z\\xrightarrow{n}Z\\to R\\to0$ is exact as a sequence of sheaves: a section of a constant sheaf is locally an integer (respectively a residue class), integer multiplication by $n\\ge1$ is injective, and residue classes lift locally to integers. For any $Z$-module sheaf $A$, there is a natural isomorphism $A\\otimes_Z R\\simeq A/nA$. The mutually inverse local formulas are $a\\otimes\\bar k\\mapsto ka\\bmod nA$ and $a\\bmod nA\\mapsto a\\otimes\\bar1$. Changing a lift $k$ by $n\\ell$ changes the first expression by $n\\ell a$, and $na\\otimes\\bar1=a\\otimes\\bar n=0$ makes the second well defined; sheafification glues these local formulas. Here $A/nA$ is the sheaf cokernel, not necessarily the quotient of global sections.",
+   "text": "Construct the residue action of an n-annihilated integer-module sheaf by the sectionwise ZMod action and actual module-sheafification; the underlying integral sheaf is canonically the given one. Restriction is fully faithful: locally every constant residue scalar lifts to an integer, so an additive integer-linear map commutes with every residue scalar. Kernels of n and cokernels of n therefore carry the required residue-module structures, giving Presentation. For any ordinary extension/restriction adjunction, its unit is a cokernel of n: compare with the actual cokernel and use the adjunction and full faithfulness of restriction. This proves ordinary reduction is A/nA without a quotient of global sections.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
     "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category"
+    "lem-pur-torsion-sheaf-constant-module",
+    "def-weil-sheaf-of-modules-category",
+    "def-sfb-scalar-reduction-presentation"
    ],
    "elementary": true,
    "source": {
@@ -84,7 +85,8 @@
     "lem-sf-derived-homology-long-exact",
     "def-weil-abstract-derived-category",
     "def-pc-sheaf-restrict-scalars",
-    "def-weil-triangulated-category"
+    "def-weil-triangulated-category",
+    "def-sfb-normalized-reduction-identifications"
    ],
    "elementary": false,
    "source": {
@@ -120,7 +122,6 @@
   {
    "text": "For a map of extensions f and compatible maps h:H→H' and q:Fbar→Fbar', prove the two normalized identification squares by injectivity of the derived scalar adjunction's Hom equivalence. For alphaF, the adjuncts agree after the invertible single/restriction comparison: naturality of eta and the quotient-unit equations reduce this to f_3 followed by p' equals p followed by Res(q). For alphaB, naturality of eta and the Kummer-unit equations reduce the adjuncts to f_1 followed by kappa' equals kappa followed by Res(h[1]). The latter is naturality of the canonical single short-exact triangle for the map of Kummer sequences with components Res(h), f_1, f_1, followed by naturality of the single/restriction and shift comparisons. Thus no simultaneous K-flat diagram replacement is needed: the normalization equations already determine all the relevant morphisms by the adjunction.",
    "uses": [
-    "lem-pc-derived-adjoint-functors",
     "lem-weil-pbc-derived-single-fully-faithful",
     "lem-sf-derived-ses-triangle",
     "lem-pur-derived-change-of-rings",
@@ -148,14 +149,12 @@
    }
   },
   {
-   "text": "The complex $Z[0]$ is K-flat because tensoring any complex with it is the identity; hence $Lq(Z)=R[0]$. The cohomology quotient calculation of steps 2–5 shows that $\\alpha_F Lq(s):R[0]\\to\\bar F[0]$ is $\\bar s$: in degree zero it sends the local residue class of an integer $k$ to the class of $s(k)$. Single-complex fully faithfulness identifies the derived morphism with this sheaf map. By the unit formula for an adjunction, naturality of $\\eta$ for $s$ and for the derived morphism $\\partial_S$, and the shift compatibility in step 1, the adjunct of $d_{S,n}\\bar s$ equals\n$$\\begin{aligned}\n\\operatorname{Res}(d_{S,n}\\bar s)\\eta_Z\n&=(\\operatorname{Res}\\alpha_B)[1]\\,\\operatorname{Res}Lq(\\partial_S)\\,\\operatorname{Res}Lq(s)\\,\\eta_Z\\\\\n&=(\\operatorname{Res}\\alpha_B)[1]\\,\\operatorname{Res}Lq(\\partial_S)\\,\\eta_F s\\\\\n&=\\bigl((\\operatorname{Res}\\alpha_B)\\eta_B\\bigr)[1]\\,\\partial_S s\n=\\kappa_B[1]\\,\\partial_S s.\n\\end{aligned}$$\nThe cancellations in the first line use $\\bar s=\\alpha_F Lq(s)$ and the definition of $d_{S,n}$. The last equality is exactly the normalization proved in step 6.",
+   "text": "The single integer unit is K-flat: its tensor with any complex is isomorphic to that complex by the right unitor. The ordinary adjunct of the coefficient map is an isomorphism, by the unit-object Hom equivalences. Apply the normalized derived unit formula on this K-flat single complex to obtain the uniquely normalized coefficient isomorphism. For s, single-object full faithfulness gives its unique residue reduction. The quotient-unit equation proves the coefficient equation. For the final adjunct formula, expand the boundary, cancel the quotient isomorphism, and use naturality of the derived unit followed by its shift compatibility and the normalized Kummer equation. This is precisely s followed by the extension boundary and the shifted Kummer boundary, with both restriction/shift comparisons shown explicitly.",
    "uses": [
     "def-pc-kflat-complex",
     "def-pur-sheaf-tensor-product",
     "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-derived-single-fully-faithful",
-    "lem-pc-derived-adjoint-functors",
-    "lem-pc-pre-derived-adjoint-functors-general"
+    "lem-weil-pbc-derived-single-fully-faithful"
    ],
    "elementary": false,
    "source": {
@@ -164,13 +163,11 @@
    }
   },
   {
-   "text": "Finally let $u^{-1}$ be an exact inverse-image functor as in the statement. Since it is a left adjoint preserving finite limits, it preserves the constant rings: a constant object is the coproduct of copies of the final object, and it preserves this coproduct and the final object. Exactness preserves $\\ker n$, $\\operatorname{coker}n$ and both short exact sequences, including the injectivity/epimorphy hypotheses. The ringed-topoi tensor-pullback theorem says that $u^{-1}P$ is again flat-term K-flat, so the exactness of $u^{-1}$ makes it a resolution of $u^{-1}A$. Its scalar-reduction complex is\n$$u^{-1}(P/nP)=(u^{-1}P)/n(u^{-1}P).$$\nIndeed exactness preserves the cokernel and the tensor-pullback comparison identifies the two scalar-extension models. The termwise units $P\\to P/nP$ are preserved by this equality. The exact-functor factorization gives the termwise triangulated action on derived categories. Explicitly, for a short exact sequence $0\\to X\\xrightarrow{a}Y\\xrightarrow{b}T\\to0$, let $q:C(a)\\to T$ be $b$ on the $Y$ summand and zero on $X[1]$, and let $p:C(a)\\to X[1]$ be the projection; its canonical boundary is $-p\\circ q^{-1}$ (Stacks Tag 0152, label lemma-derived-canonical-delta-functor). Additivity identifies $u^{-1}C(a)$ with $C(u^{-1}a)$, with exactly the same differential matrix, and sends $q,p$ to the corresponding maps $q',p'$. Exactness makes $u^{-1}q$ a quasi-isomorphism, so applying $u^{-1}$ to the boundary gives $-p'\\circ(q')^{-1}$, the boundary of the pulled-back sequence. It also commutes with the truncation zigzags because it preserves kernels and images. The equation $(-i)H^{-1}(t)=H^{-1}(\\delta_B)$ is consequently preserved, so uniqueness in step 6 preserves the normalized $\\alpha_B$ as well. Thus $\\alpha_F$, $\\alpha_B$, $d_{S,n}$ and the displayed adjunct formula all commute with $u^{-1}$ under the induced constant-ring identifications.",
+   "text": "Apply the generic derived cokernel adjunction exchange theorem. The ordinary unit is a cokernel of n; flat-term K-flat resolutions have termwise monic n. Exact inverse image preserves these multiplication short exact sequences. The generic theorem proves the mate comparison is invertible and provides its universal-counit representative formula and shift compatibility, without assuming preservation of K-flatness. Apply the normalized scalar boundary naturality theorem to the given extension, quotient and Kummer presentation isomorphisms. Its mate-unit normalization identifies both α squares, and its shifted-composition formula is exactly the displayed degree-two boundary square.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-complex-ses-triangle",
-    "def-weil-pbc-constant-sheaf"
+    "lem-sfb-derived-cokernel-adjoint-exchange",
+    "lem-sfb-normalized-scalar-boundary-naturality",
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false,
    "source": {
@@ -185,27 +182,30 @@
   "def-pc-sheaf-restrict-scalars",
   "def-pur-sheaf-tensor-product",
   "def-sbc-standard-tstructure-derived-category",
+  "def-sfb-normalized-reduction-identifications",
+  "def-sfb-scalar-reduction-presentation",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
   "def-weil-triangulated-category",
-  "lem-pc-derived-adjoint-functors",
   "lem-pc-kflat-resolution",
-  "lem-pc-pre-derived-adjoint-functors-general",
   "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-torsion-sheaf-constant-module",
   "lem-sf-derived-homology-long-exact",
   "lem-sf-derived-ses-triangle",
+  "lem-sfb-derived-cokernel-adjoint-exchange",
+  "lem-sfb-normalized-scalar-boundary-naturality",
   "lem-weil-pbc-complex-ses-triangle",
   "lem-weil-pbc-derived-single-fully-faithful",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "new-derived-adjunction-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
-  "place": "Paragraphs 4–5; agent homological-algebra expansion using Stacks K-flat resolutions, canonical short-exact triangles and derived adjunction. Step 7 simplified by C6: use the normalized adjunction and naturality of canonical single triangles directly, instead of diagram K-flat replacements."
+  "place": "Paragraphs 4–5; V2 complete Lean proof, retaining the multiplication-triangle and normalized Kummer route. Derived adjunction is obtained by normalized resolving-class compatibility. Inverse-image comparison uses exact cokernel exchange rather than preservation of K-flatness."
  },
  "mathlib_searches": [
   {
@@ -496,13 +496,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C6",
+  "reviewer": "C-f0d81",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261019T002518-L-2145246",
+  "landing": "20261021T061727-L-1821358",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered item + 2 new generic modules vs live DivisibleExtensionDerivedReduction: public theorem statements identical, Presentation/Identifications abbrevs field-for-field equal to old structures (change record lists all users), 5 holes closed with clean axioms, all 6 direct importers compiled"
  }
 }

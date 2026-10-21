@@ -1,0 +1,103 @@
+{
+ "id": "def-sfb-normalized-reduction-identifications",
+ "kind": "definition",
+ "title": "Normalized reduction identification data",
+ "statement": "Let A,B be categories with shifts by the integers on B, and L:A→B and R:B→A functors. Fix X₁,X₃,Z in A, H,Q in B, c:RQ→Z, η₁:X₁→RLX₁, η₃:X₃→RLX₃, p:X₃→Z and κ:X₁→R(H[1]). A normalized reduction identification is a record of isomorphisms αF:LX₃≅Q and αB:LX₁≅H[1], together with the equations η₃ followed by R(αF) and c equals p and η₁ followed by R(αB) equals κ. Specialization to the derived scalar adjunction unit and the quotient and Kummer maps is exactly the normalized identification data in the divisible extension reduction statement.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraphs 4 and 5, normalized quotient and Kummer identifications; abstract record of the same data, not a verbatim source definition."
+ },
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "The four fields of the existing Identifications record, abstracted over categories, functors and normalization maps."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DivisibleExtensionDerivedReduction",
+  "date": "2026-10-21",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-divisible-extension-derived-reduction",
+   "place": "The normalized identification data in the divisible reduction statement.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-geo-cartier",
+ "proof": [
+  {
+   "text": "Use the record with precisely four fields alphaF, alphaB, quotient_unit and kummer_unit. Its specialization has exactly the previous Identifications field types: insert the derived scalar unit for η₁ and η₃, the canonical single/restriction isomorphism for c, the single quotient map for p and the canonical restricted Kummer boundary for κ. No existence or arbitrary object choice is used in the definition.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of normalized quotient and Kummer identifications and their degree two boundary under a shift compatible derived adjunction mate",
+   "results": "CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit; CategoryTheory.Adjunction.CommShift.compatibilityCounit_left; CategoryTheory.Adjunction.CommShift.compatibilityUnit_right; CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift; general Dold-Kan natural-isomorphism formulas.",
+   "date": "2026-10-21",
+   "verdict": "Search returned shift-adjunction compatibility and Dold-Kan comparisons; none states these normalized squares."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShiftedHom.map_naturality, CategoryTheory.Adjunction",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedCokernelAdjointExchange|normalizedScalarBoundary|mapShiftedHom_singleδ",
+   "results": "Mathlib.Algebra.Homology.DerivedCategory.Ext.Map: mapShiftedHom_singleδ and its primed version.",
+   "date": "2026-10-21",
+   "verdict": "These give naturality of the canonical connecting map, but do not state the adjunction comparison or normalized identification squares."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A record of quotient and shifted torsion isomorphisms normalized by an adjunction unit and a Kummer connecting morphism",
+   "results": "Mathlib.NumberTheory.NumberField.Ideal.Basic: Ideal.torsionMapQuot_apply; Mathlib.NumberTheory.NumberField.Ideal.Basic: Ideal.torsionMapQuot; Mathlib.CategoryTheory.Shift.Quotient: CategoryTheory.Quotient.LiftCommShift.iso; Mathlib.CategoryTheory.Shift.Quotient: CategoryTheory.Quotient.liftCommShift_commShiftIso; Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas: normalizedFactorsEquivOfQuotEquiv; Mathlib.CategoryTheory.Quotient: CategoryTheory.Quotient.natIsoLift; Mathlib.RingTheory.Congruence.Hom: RingCon.comapQuotientEquivOfSurj; Mathlib.CategoryTheory.Shift.Quotient: CategoryTheory.Quotient.LiftCommShift.iso_hom_app",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Quotient category and number-field torsion constructions; none packages these four normalization fields."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DivisibleExtensionDerivedReduction",
+  "file": "lean/Sheaf/Paper/DivisibleExtensionDerivedReduction.lean",
+  "declaration": "CategoryTheory.NormalizedReductionIdentifications",
+  "statement": "structure CategoryTheory.NormalizedReductionIdentifications\n    {A B : Type*} [Category* A] [Category* B] [HasShift B ℤ]\n    (L : A ⥤ B) (R : B ⥤ A) (X₁ X₃ : A) (H Q : B) (Z : A)\n    (c : R.obj Q ⟶ Z) (eta₁ : X₁ ⟶ R.obj (L.obj X₁))\n    (eta₃ : X₃ ⟶ R.obj (L.obj X₃)) (p : X₃ ⟶ Z)\n    (k : X₁ ⟶ R.obj (H⟦(1 : ℤ)⟧))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f0d81",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T061727-L-1821358",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-f0d81",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T061727-L-1821358",
+  "kind": "interface",
+  "note": "independent cc review: delivered item + 2 new generic modules vs live DivisibleExtensionDerivedReduction: public theorem statements identical, Presentation/Identifications abbrevs field-for-field equal to old structures (change record lists all users), 5 holes closed with clean axioms, all 6 direct importers compiled"
+ }
+}
