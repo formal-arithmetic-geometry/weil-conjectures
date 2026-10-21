@@ -17,9 +17,113 @@
   "def-pc-tensor-complex-sheaves",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\operatorname{Mod}(R)$ in the coefficient universe $w$, using the small skeleton prescribed by [def-weil-size-convention]. The Grothendieck assertion of [prop-pur-kinjective-resolutions-exist] applies to this small ringed site. By [lem-pc-sheaf-modules-tensor-closed], its sheafified tensor is symmetric monoidal, closed and additive in both variables. By [lem-trf-site-functorial-flat-resolution], it has functorial flat resolutions without identifying the site and coefficient universes. These verify every categorical hypothesis of the general derived-monoidal theorem used below; no condition on $M$ or the terms of $P$ has been introduced.",
+   "uses": [
+    "def-weil-size-convention",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-trf-site-functorial-flat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A5, section-unbounded, first paragraph; sites-modules.tex Tag 03EO, lemma-internal-hom-adjoint-tensor; functorial flat cover is the existing independent-universe site theorem"
+   }
+  },
+  {
+   "text": "The K-flatness convention in the general theorem is [def-sfb-preserves-kflat-quasi-iso]. It agrees here with [def-pc-kflat-complex]. Indeed, the latter implies that $f\\otimes1_P$ is a quasi-isomorphism for every quasi-isomorphism $f$, by [lem-pur-kflat-tensor-quasiiso-independent]. For the other order use the symmetry of [lem-pc-sheaf-modules-tensor-closed]: on the degree-$(i,j)$ summand the signed swap is $x\\otimes y\\mapsto(-1)^{ij}y\\otimes x$. The total differential of [def-pc-tensor-complex-sheaves] gives coefficients $(-1)^{ij}$ on $d y\\otimes x$ and $(-1)^{ij+j}$ on $y\\otimes d x$ in both composites with this swap. Thus it is a natural chain isomorphism, so $1_P\\otimes f$ is conjugate to $f\\otimes1_P$ and is a quasi-isomorphism. Conversely, apply preservation to $0\\to X$ for an acyclic $X$: its tensor with $P$ is $0\\to\\operatorname{Tot}(X\\otimes P)$, so that total complex is acyclic. This also checks that both conventions use the identical signed direct-sum total tensor.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "def-pc-kflat-complex",
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YN and 06YP, definition-K-flat and lemma-K-flat-quasi-isomorphism; signed symmetry calculation for the two K-flat conventions"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-derived-monoidal] to $\\mathcal A$. Denote its derived tensor by $B$ and the multiplication of its lax localization by $\\mu_{X,Y}:B(Q_RX,Q_RY)\\to Q_R\\operatorname{Tot}(X\\otimes_RY)$. The theorem says that $B$ is the two-variable left derived tensor and is computed by replacing either argument by a K-flat resolution; consequently $\\mu_{X,Y}$ is an isomorphism whenever $X$ is K-flat, with $Y$ arbitrary. In particular the identity resolution $P\\to P$ computes $\\mu_{P,Y}$ for every $Y$. The multiplication is a natural transformation in both homotopy-category variables, so its naturality also holds for every pair of chain maps.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Derived tensor theorem: two-variable left derived tensor, computation by either K-flat argument, and lax localization"
+   }
+  },
+  {
+   "text": "Write $T$ for the tensor fixed in the statement. For flat-term K-flat $A,B$, let $\\beta_{A,B}:Q_R\\operatorname{Tot}(A\\otimes_RB)\\xrightarrow{\\sim}T(Q_RA,Q_RB)$ be the natural comparison of [lem-weil-pbc-site-derived-tensor-descent]. On these pairs $\\beta_{A,B}\\mu_{A,B}$ is a natural isomorphism from the restriction of the bifunctor $B$ of step 3 to that of $T$. The transformation-extension clause of that node extends it uniquely to $\\theta:B\\xrightarrow{\\sim}T$: extend its inverse too; the two composites restrict to identities and hence are identities by the uniqueness clause. Define $m_{X,Y}=\\mu_{X,Y}\\theta^{-1}_{Q_RX,Q_RY}$. This is natural for chain maps and is invertible when $X$ is K-flat. Its normalization is $m_{A,B}=\\beta_{A,B}^{-1}$ on flat-term K-flat pairs. Thus this uses precisely the tensor $T$ named in the item.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Compare the two-variable derived tensor with the specified flat-term K-flat descent, using its extension and uniqueness clauses"
+   }
+  },
+  {
+   "text": "For every $P,M$ there is a chain isomorphism $\\delta_{P,M}:\\operatorname{Tot}(P\\otimes_RM[0])\\xrightarrow{\\sim}T_M(P)$. In degree $q$, every summand indexed by $(i,j)$ with $j\\ne0$ is zero, while the sole remaining summand has $(i,j)=(q,0)$ and is $P^q\\otimes_RM$. Projection to that summand and its inclusion are inverse. The differential of [def-pc-tensor-complex-sheaves] on it is $d_P^q\\otimes1_M+(-1)^q1\\otimes0=d_P^q\\otimes1_M$. The map induced by $u$ and $f[0]$ is, on this same summand, $u^q\\otimes f$, so $\\delta$ is natural in both variables. Set $c_{P,M}=Q_R(\\delta_{P,M})\\,m_{P,M[0]}$; both factors are isomorphisms by step 4 and the hypothesis that $P$ is K-flat.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor, specialized to degree zero; direct calculation of the total complex"
+   }
+  },
+  {
+   "text": "For $u:P\\to P'$ and $f:M\\to M'$, naturality of the lax-localization multiplication in [lem-sfb-derived-monoidal] and of $\\theta$ from [lem-weil-pbc-site-derived-tensor-descent] gives\n$$Q_R\\operatorname{Tot}(u\\otimes f[0])\\,m_{P,M[0]}=m_{P',M'[0]}\\,T(Q_Ru,Q_R(f[0])).$$\nThe summand calculation in step 5 gives $\\delta_{P',M'}\\operatorname{Tot}(u\\otimes f[0])=T(u,f)\\delta_{P,M}$. Compose these two equations to obtain\n$$Q_R(T(u,f))\\,c_{P,M}=c_{P',M'}\\,T(Q_Ru,Q_R(f[0])),$$\nwhich is exactly the asserted naturality square, including its specified right-hand map.",
+   "uses": [
+    "lem-sfb-derived-monoidal",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "Naturality of lax localization and of the uniquely normalized tensor identification"
+   }
+  },
+  {
+   "text": "To check the resolution normalization explicitly, choose flat-term K-flat resolutions $p:A\\to P$ and $b:B\\to M[0]$ using [lem-pc-kflat-resolution]. Naturality of $m$ and its normalization in step 4 give\n$$c_{P,M}\\,T(Q_Rp,Q_Rb)\\,\\beta_{A,B}=Q_R\\bigl(\\delta_{P,M}\\operatorname{Tot}(p\\otimes b)\\bigr).$$\nHere $T(Q_Rp,Q_Rb)\\beta_{A,B}$ is an isomorphism: the two resolution maps become isomorphisms under localization, and $\\beta$ is the comparison of [lem-weil-pbc-site-derived-tensor-descent]. Hence this equation uniquely determines $c_{P,M}$ and is exactly the computation obtained by resolving both factors and then applying the augmentations and the degree-zero identification. It holds for every such pair of resolutions, so every auxiliary choice yields the same $c_{P,M}$. The either-argument computation of [lem-sfb-derived-monoidal] also permits the identity resolution of the already K-flat $P$; it has the same $m_{P,M[0]}$ and hence the same $c_{P,M}$. None of these steps bounds $P$ or assumes its individual terms or $M$ flat.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS and 06YU, lemma-K-flat-resolution and definition-derived-tor with its preceding resolution-independence construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-trf-site-functorial-flat-resolution",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-pc-kflat-complex",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "def-pc-tensor-complex-sheaves",
+  "lem-sfb-derived-monoidal",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU and preceding construction, using the existing general derived-monoidal theorem for its natural counit; explicit comparison with the specified ringed-site descent and degree-zero summands."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +166,52 @@
    "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, CategoryTheory.Tor, Module.Flat.iff_preservesFiniteLimits_tensorLeft, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module flatness, objectwise Tor, or underived total tensor only; no natural derived-to-termwise comparison on arbitrary ringed sites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat sheaf complex tensored with module in degree zero computes the derived tensor naturally on ringed sites",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_lTensor_preserves_shortComplex_exact, CategoryTheory.Sheaf.monoidalCategory, Module.Flat.iff_rTensor_exact, CategoryTheory.Tor'_obj_obj",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness, Tor from projective resolutions, sheaf monoidality or underived tensor only; none states this ringed-site unbounded derived comparison with its naturality and normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of a K-flat complex with a sheaf in degree zero is the termwise tensor complex",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.lTensor_exact, Module.Flat.rTensor_exact, HomologicalComplex.tensorObj, Module.Flat.ker_lTensor_eq, CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness, Tor from projective resolutions, sheaf monoidality or underived tensor only; none states this ringed-site unbounded derived comparison with its naturality and normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.tensorObj",
+   "results": "12 hits: HomologicalComplex.tensorObj, HomologicalComplex.rightUnitor, HomologicalComplex.leftUnitor, HomologicalComplex.rightUnitor', HomologicalComplex.ιTensorObj, HomologicalComplex.leftUnitor', HomologicalComplex.associator, HomologicalComplex.tensorHom",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness, Tor from projective resolutions, sheaf monoidality or underived tensor only; none states this ringed-site unbounded derived comparison with its naturality and normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|QObjTensorSingle|tensorLeftCounit",
+   "results": "0 hits: ; Mathlib/Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness, Tor from projective resolutions, sheaf monoidality or underived tensor only; none states this ringed-site unbounded derived comparison with its naturality and normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One K-flat factor suffices to compute derived tensor without termwise flatness and the comparison is natural",
+   "results": "8 hits: CategoryTheory.Tor'_obj_obj, Module.Flat.rTensor_shortComplex_exact, CategoryTheory.Tor_obj, CategoryTheory.Tor', CategoryTheory.Tor, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, CategoryTheory.Tor'_map_app",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness, Tor from projective resolutions, sheaf monoidality or underived tensor only; none states this ringed-site unbounded derived comparison with its naturality and normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObj|tensorHom",
+   "results": "5 hits: 48, 52, 54, 56, 60; Mathlib/Algebra/Homology/Monoidal.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness, Tor from projective resolutions, sheaf monoidality or underived tensor only; none states this ringed-site unbounded derived comparison with its naturality and normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-reduction-flat-model",
@@ -82,5 +228,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-ringed-kflat-single-tensor-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement. Reused the existing general derived-monoidal theorem after verifying Grothendieckness, closed symmetric additive tensor, independent-universe functorial flat resolutions, and equivalence of the two K-flat predicates. Identified its tensor with the specified flat-term descent by unique extension, calculated the single-factor total complex and its maps, and wrote the resolution-normalization equation. No new nodes.",
+  "blueprint": "Realizes the final sentence of the current lem-sf-reduction-flat-model proof: the K-flat computation with an arbitrary test module in degree zero, with the tensor and map normalization needed by its split step 4. The generic tools do not replace the flat-model or coefficient-reduction route.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Only its Grothendieck assertion for module sheaves on a small ringed site is used; no such categorical input is supplied by the flat-model unit."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Supplies the generic closed symmetric additive sheaf tensor and its symmetry, needed to apply derived-monoidal theory."
+   },
+   {
+    "node": "lem-trf-site-functorial-flat-resolution",
+    "why": "Supplies functorial flat resolutions on essentially small ringed sites in an independent coefficient universe."
+   },
+   {
+    "node": "lem-pur-kflat-tensor-quasiiso-independent",
+    "why": "Identifies the acyclic-tensor K-flat predicate with quasi-isomorphism preservation without flat terms or universe equalities."
+   },
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "General categorical construction supplies a natural derived-tensor counit invertible with either K-flat factor; it is used as a tool, not to replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Its uniqueness of extension identifies the general tensor with the tensor explicitly fixed by the item."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site flat-term K-flat resolutions are used only to verify the normalization against arbitrary auxiliary choices."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-sfb-derived-monoidal",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-25b831954",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-25b831954 (reviewer sub-agent of L); spot-checked: I read the item in full, with every cited statement. The delivery is one commit containing the item and its report. There are no new nodes, no unit change and no re-split note. Statement and stmt_deps are unchanged and the statement is true. Source: Stacks sites-cohomology 06YU (definition-derived-tor and the paragraph before it), plus 06YN/06YP/06YS. Small cases checked: P=0; P=R[0]; [Z-2->Z] with Z/2, giving H^-1=Tor_1; contractible [N-1->N] with N not flat. Step 1: the hypotheses of lem-sfb-derived-monoidal hold (Grothendieck on the w-small skeleton, closed symmetric additive tensor, functorial flat resolutions). Step 2: the two K-flat conventions agree; I recomputed the swap signs (-1)^{ij} and (-1)^{ij+j}. Step 3: reading mu as the derived counit, invertible with one K-flat argument, is the stated meaning of 'computed by replacing either argument' (confirmed in that node's steps 4, 5 and 8), so this is not C3. Step 4: theta comes from the extension/uniqueness clause in the statement of lem-weil-pbc-site-derived-tensor-descent, and m_{A,B}=beta^{-1}. Step 5: the degree-zero identification is elementary. Steps 6 and 7: I checked the naturality composite and the normalization equation c T(Qp,Qb) beta = Q(delta Tot(p tensor b)), which gives independence of choices. tool_uses: all 7 accepted as generic tools; the unit cites no units. Batch-5: lem-trf-site-functorial-flat-resolution is the generic fact that module sheaves have functorial flat resolutions (free-presheaf cover). Neither assumption gives it and it is no trace-formula/Poincaré-duality-specific step; the item's closure gains only this one trf node (182 vs 180 nodes), so accepted. No duplicate: lem-pc-kflat-single-tensor-representative and lem-pc-kflat-derived-tensor-comparison are for schemes only, lem-weil-pbc-source-kflat-tensor-single-model is for modules over a ring, and lem-sf-ringed-derived-native-tensor uses the native tensor. Advisory: citing lem-sf-ringed-derived-native-tensor in step 3 would remove steps 1-2 and the trf citation. No fixes written."
  }
 }
