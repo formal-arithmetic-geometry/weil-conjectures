@@ -1,6 +1,6 @@
 # Work queue
 
-213 items; claim with `tools/claim.py next <group> [--stage N]`.
+210 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (23 clusters, 988 modules)
 
@@ -51,10 +51,10 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-internal-action-site-presentation` | 4012 | none |
 | `lem-sfb-root-tower-inner-support` | 4012 | none |
 | `lem-sfb-root-tower-lisse-morphism-extension` | 4012 | none |
-| `lem-pe-profinite-sections-finite-quotient` | - | none |
+| `lem-pe-internal-module-sectionwise-short-exact` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (31)
+## Stage 2: nodes to state (25)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -74,25 +74,19 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sf-open-exchange-roos-restriction` | 1 | state | 0 |
 | `lem-sfb-complete-group-forgetful-automorphisms` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
-| `lem-sfb-continuous-algcl-open-finiteness` | 1 | state | 0 |
-| `lem-sfb-continuous-algcl-open-scalar-comparison` | 1 | state | 0 |
 | `lem-sfb-derived-cech-image-totalization` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
 | `lem-sfb-pointed-finite-etale-limit-cover` | 1 | state | 0 |
-| `lem-sfb-prime-to-ell-linear-image-finite` | 1 | state | 0 |
-| `lem-sfb-qcqs-rational-integral-localizing-generators` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
-| `lem-sfb-totally-disconnected-coefficient-realization` | 1 | state | 0 |
 | `lem-sp-cofinal-finite-reduction-constructibility` | 1 | state | 0 |
 | `lem-sp-supported-etale-tensor-origin` | 1 | state | 0 |
-| `lem-weil-pbc-finite-free-strict-tower-transport` | 1 | state | 0 |
 | `lem-weil-point-derived-tensor-tower-coherence` | 1 | state | 0 |
 
-Not open yet: 375 nodes that below a finished node, not needed, 110 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 375 nodes that below a finished node, not needed, 110 nodes that wait for a statement dependency (bottom-up), 14 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (136)
+## Stage 3: modules to prove (139)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -112,11 +106,14 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CompletedCoefficientPushforwardComparison` | - | 1 | proof | 2 |
 | `Sheaf.Paper.FiniteStagePairCategory` | - | 8 | proof | 2 |
 | `Sheaf.Paper.PbcDescentFunctors` | - | 1 | proof | 2 |
+| `Sheaf.Paper.PbcScalarExtension` | - | 16 | proof | 2 |
 | `Sheaf.Paper.CompletedDirectImageLimits` | 3 | 2 | proof | 3 |
 | `Sheaf.Paper.IntegralCompletedLocalPerfectCriterion` | 4 | 1 | proof | 3 |
 | `Sheaf.Paper.RingedProjectionRestriction` | 4 | 1 | proof | 3 |
 | `Sheaf.Paper.ConstantCompletionEquivalence` | 6 | 14 | proof | 3 |
 | `Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated` | - | 1 | proof | 3 |
+| `Sheaf.CategoryTheory.FiniteFreeCompletionTransport` | - | 4 | proof | 3 |
+| `Sheaf.CategoryTheory.FiniteFreeStrictTowerTransport` | - | 1 | proof | 3 |
 | `Sheaf.Paper.CompletedExchangeCoherence` | - | 9 | proof | 3 |
 | `Sheaf.Paper.CompletedKoszulReductionRoosTriangle` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | - | 5 | proof | 3 |
@@ -235,15 +232,13 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.TopBaseChangePresheaf` | - | 1 | proof | 18 |
 | `Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge` | - | 1 | proof | 19 |
 
-## Stage 3: waiting for statements of dependencies (4)
+## Stage 3: waiting for statements of dependencies (2)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
 | module | distance to a target | sorry | waits for (first unstated node) |
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | `lem-sfb-integral-ambient-tower-comparison` |
-| `Sheaf.CategoryTheory.FiniteFreeCompletionTransport` | - | 4 | `lem-weil-pbc-finite-free-strict-tower-transport` |
-| `Sheaf.Paper.PbcScalarExtension` | - | 16 | `lem-weil-pbc-finite-free-strict-tower-transport` |
 | `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | `lem-weil-point-derived-tensor-tower-coherence` |
 
 ## Stage 3: held for an open upstream PR (5)
