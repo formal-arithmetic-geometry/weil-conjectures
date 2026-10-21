@@ -35,7 +35,27 @@
   "def-compact-support-direct-image-detailed",
   "def-weil-derived-pullback-tensor-hom",
   "lem-cbc-proetale-extension-zero-comparison",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "def-pur-finite-site-coordinates",
+  "def-pur-supported-projective-chern",
+  "def-pur-supported-projective-site-arrows",
+  "def-pur-finite-site-tensor-projection",
+  "def-pur-proetale-projective-coefficient",
+  "def-pur-proetale-projection-integration",
+  "def-pur-proetale-affine-line-counit",
+  "def-pur-proetale-ordered-integration",
+  "def-pur-proetale-frame-integration",
+  "def-pur-proetale-vector-integration",
+  "def-pur-proetale-vector-integration-arrows",
+  "def-pur-vector-tensor-site-equations",
+  "lem-amb-finite-tate-site-descent",
+  "def-sp-p1-comparison-arrows",
+  "lem-kun-tensor-sym",
+  "def-pur-vector-purity-normalization",
+  "def-pur-open-site-comparison-arrows",
+  "def-pur-bounded-site-transpose-arrows",
+  "def-sf-compact-support-site-comparison-construction",
+  "def-pur-vector-integration-adjunction-arrows"
  ],
  "proof": [
   {
@@ -437,5 +457,36 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-0924b2967 (reviewer sub-agent of L); spot-checked: Read the item, all 11 steps, the four new statement-only helpers, the unit and chapter records, the cited statements and the Stacks sources (09AF, 0GL1, 06XS, 0F7C/D/F, 03EM, 04TQ, 0B65). Steps 6, 7, 9 and 10, flagged by the return, now each cite a general helper and check its hypotheses. (1) lem-pur-bounded-site-adjunction-transpose is true. The bounded adjunction of thm-sf-ambient-adjoint-class Step 5 is built from lem-sf-class-compact-support-comparison, which is b_p^{-1}∘Rp_*(e_j^{-1}), i.e. B^{-1}. Unwinding Φ^{-1}(1) by naturality of B and ε^e and the ν triangle identity gives ε^p F_p(ρ_K) B = C_Y(ε^e_K), and the transpose formula follows. It generalizes the closed case lem-coef-site-closed-counit-transport and is not a duplicate. (2) lem-pur-open-projection-site-transport is true: γκ=1 by adjuncts, γ is invertible by 0GL1, j_!L is flat so both sides are in D^+, and C is compatible through the unit-normalized e_j. It is the derived extension of the sheaf-level normalization nodes. (3) lem-pur-compact-support-site-coherence is invertible on D^+, and its refinement, composition and restriction identities type-check and hold. It partly overlaps a clause of lem-sp-et-proet-coefficient-compatibility, but that node assumes separated schemes and ctf inputs and has no restriction clause, so this is not a duplicate. (4) lem-pur-degree-zero-derived-map-gluing is true: local vanishing of the cohomology sheaves, then truncation, then 06XS(1) with a=b=0, then sheaf-Hom gluing; the empty cover is fine. Step hypotheses checked: F=L_V(d)[2d] with t=1 and G=π̄^*K in D^+ (Step 7); finite cover, local concentration and a third use for uniqueness on C_S M^e (Step 9); dim of the completion finite by lem-kun-dimension-finite-type, D=0 for empty S, and π^× K≅J bounded by vector-bundle purity, so η^p=ρ_K C_V(η^e) as the statement says (Step 10). The four new nodes have the right shape (unsplit, no proof, created.item, blueprint.from/via, three search kinds), are in the item's own unit and restate no clause of the item. No new off-unit citation; the earlier tool uses stand. The statement is not weakened, the coefficient categories stay ordinary constant-A on both sites, and no SGA is cited. No fixes written. One remark for whoever later splits the transpose helper: it will need the construction in lem-sf-class-compact-support-comparison Step 5. Review written to review.md."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.VectorIntegrationSiteComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.VectorIntegrationSite.finiteTypeSiteComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.ProjectiveCompatibility",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.projectiveComparison",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.openCounitComparison",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.IntegrationCompatibility",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.vectorIntegrationSiteComparison",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.vectorTensorComparison",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.vectorExponentIndependence",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.twistCompatibility",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.FiniteTypeSiteCompatibility",
+   "AlgebraicGeometry.ProEtale.VectorIntegrationSite.finiteTypeSiteComparison"
+  ],
+  "file": "lean/Sheaf/Paper/VectorIntegrationSiteComparison.lean",
+  "statement": "theorem finiteTypeSiteComparison (P : WeilConjectures.PurityFiniteSetting.{u}) (m : ℕ) (S : Scheme.{u}) (aS : S ⟶ Spec (CommRingCat.of P.field.k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (d : ℕ) (F : S.Modules) [F.IsFiniteLocallyFreeOfRank d] : FiniteTypeSiteCompatibility P m S aS d F",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The declarations jointly render the clauses; n and r index positive levels by their predecessors. The generic Noetherian/invertible-prime statements are specialized by the finite-field wrapper. Source comparisons use the published canonical Nagata compactification; canonical compactification transport gives the projective completion in the node. Repair F1/F2: cite dedicated existing-definition owners for the open, bounded-transpose and ordinary vector-purity coordinate helpers, and the published compact-support comparison owner. Repair F3: TensorCompatibilityData.ordinary_normalization identifies the ordinary adjunct with VectorPurityGammaNormalized via the canonical signed tensor symmetry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82ecd4fa5",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 7845f3f7. Only VectorTensorSiteEquations.lean changed (new ordinary_normalization field); the other 12 modules are identical. F1/F2 fixed: existing:true def nodes def-pur-open-site-comparison-arrows (openProjectionExtension/RestrictionComparison), def-pur-bounded-site-transpose-arrows (boundedSiteTranspose/Rho) and def-pur-vector-integration-adjunction-arrows (5 Etale.vectorBundlePurity* defs), signatures verbatim to the live source, node texts match the bodies; compactSupportSiteComparison cited via def-sf-compact-support-site-comparison-construction. F3 fixed: ∃ γ with VectorPurityGammaNormalized (unique: integration counit plus invertible projection) and adjunct = derivedTensorSymmetry ≫ γ.app K; the HEq sides have definitionally equal types (same letI instances, same rightDerivedUpperShriekAdjunction), so it is an Eq; the signed symmetry matches the coefficient-first projection convention. Mechanical finding: finite_tate_site_descent is used via .choose/choose_spec (twistComparison, exponent transition), constructed objects; lem-kun-tensor-sym's own recorded declaration is the def derivedTensorSymmetry; both genuine, PASS on that point. Item statement and proof equal live; not landed by another group. Advisory: boilerplate theorem stmt_deps in the retained new nodes; Nagata compactification instead of the projective completion; second readings are self-checks. No file changed, no compile."
+ }
 }
