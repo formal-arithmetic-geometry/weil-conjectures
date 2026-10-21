@@ -15,6 +15,8 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 import all Sheaf.Paper.CoefficientRingedSequenceSite
 import all Sheaf.Paper.SemilinearSystemModels
+import all Sheaf.AlgebraicGeometry.VaryingRingOperations
+import all Sheaf.AlgebraicGeometry.StrictTowerDirectImageCoherence
 import all Sheaf.AlgebraicGeometry.VaryingRingProperOpenArrows
 import Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
@@ -56,6 +58,29 @@ private theorem map_iso_transport
     c ≫ F.map a.inv ≫ F.map f ≫ F.map b.hom = c ≫ F.map g := by
   rw [← F.map_comp, h, F.map_comp, ← Category.assoc (F.map a.inv),
     ← F.map_comp, a.inv_hom_id, F.map_id, Category.id_comp]
+
+private theorem normalized_iso_transport
+    {A B : Type*} [Category A] [Category B] {K : GrothendieckTopology B}
+    {S : Sheaf K RingCat} {F F' G G' : A ⥤ SheafOfModules.{u} S}
+    (hF : F = F') (hG : G = G') (d : F' ≅ G') (V : A → B → Type u)
+    (hd : ∀ M U, HEq (fun x ↦ (d.hom.app M).val.app (op U) x)
+      (fun x : V M U ↦ x))
+    (hi : ∀ M U, HEq (fun x ↦ (d.inv.app M).val.app (op U) x)
+      (fun x : V M U ↦ x)) :
+    ∃ e : F ≅ G,
+      (∀ M U, HEq (fun x ↦ (e.hom.app M).val.app (op U) x) (fun x : V M U ↦ x)) ∧
+      (∀ M U, HEq (fun x ↦ (e.inv.app M).val.app (op U) x) (fun x : V M U ↦ x)) := by
+  subst F' G'
+  exact ⟨d, hd, hi⟩
+
+private theorem normalized_square
+    {A B D E M N : Type u} (hA : A = M) (hB : B = N) (hD : D = M) (hE : E = N)
+    (a : A → B) (b : B → E) (c : A → D) (d : D → E) (t : M → N)
+    (ha : HEq a t) (hb : HEq b (fun x : N ↦ x))
+    (hc : HEq c (fun x : M ↦ x)) (hd : HEq d t) :
+    (fun x ↦ b (a x)) = (fun x ↦ d (c x)) := by
+  subst A B D E
+  rw [eq_of_heq ha, eq_of_heq hb, eq_of_heq hc, eq_of_heq hd]
 
 private theorem chosen_unit_isIso_congr
     {A B : Type*} [Category A] [Category B] (F G : A ⥤ B)
@@ -132,6 +157,53 @@ private theorem constant_diagram_mate
   apply NatTrans.ext
   funext m
   simpa [constant_diagram_square] using h M
+
+private theorem pushforward_restrict_eq
+    {A B : Type (u + 1)} [Category.{u} A] [Category.{u} B]
+    (J : GrothendieckTopology A) (K : GrothendieckTopology B)
+    (F : A ⥤ B) [F.IsContinuous J K]
+    {R : Sheaf K RingCat.{u + 1}} {S T : Sheaf J RingCat.{u + 1}}
+    (p : T ⟶ S) (q : S ⟶ (F.sheafPushforwardContinuous RingCat.{u + 1} J K).obj R) :
+    SheafOfModules.pushforward.{u + 1} q ⋙ SheafOfModules.restrictScalars p =
+      SheafOfModules.pushforward (p ≫ q) := by
+  rfl
+
+private theorem sequence_push_scalar_normalized (n : ℕ)
+    {A B : Type (u + 1)} [Category.{u} A] [Category.{u} B]
+    (J : GrothendieckTopology A) (K : GrothendieckTopology B) (F : A ⥤ B)
+    [F.IsContinuous J K]
+    [((𝟭 ℕ).prod F).IsContinuous (coefficientSequenceTopology J)
+      (coefficientSequenceTopology K)]
+    [(Prod.sectR n A).IsContinuous J (coefficientSequenceTopology J)]
+    [(Prod.sectR n B).IsContinuous K (coefficientSequenceTopology K)]
+    [(Prod.sectR n A ⋙ (𝟭 ℕ).prod F).IsContinuous J (coefficientSequenceTopology K)]
+    [(F ⋙ Prod.sectR n B).IsContinuous J (coefficientSequenceTopology K)]
+    {R : Sheaf (coefficientSequenceTopology J) RingCat.{u + 1}}
+    {S : Sheaf (coefficientSequenceTopology K) RingCat.{u + 1}}
+    {r : Sheaf J RingCat.{u + 1}} {s : Sheaf K RingCat.{u + 1}}
+    (a : r ⟶ ((Prod.sectR n A).sheafPushforwardContinuous RingCat.{u + 1}
+      J (coefficientSequenceTopology J)).obj R)
+    (b : s ⟶ ((Prod.sectR n B).sheafPushforwardContinuous RingCat.{u + 1}
+      K (coefficientSequenceTopology K)).obj S)
+    (φ₀ : R ⟶ (((𝟭 ℕ).prod F).sheafPushforwardContinuous RingCat.{u + 1}
+      (coefficientSequenceTopology J) (coefficientSequenceTopology K)).obj S)
+    (ψ : r ⟶ (F.sheafPushforwardContinuous RingCat.{u + 1} J K).obj s)
+    (he : a ≫ ((Prod.sectR n A).sheafPushforwardContinuous RingCat.{u + 1}
+      J (coefficientSequenceTopology J)).map φ₀ =
+      ψ ≫ (F.sheafPushforwardContinuous RingCat.{u + 1} J K).map b) :
+    ∃ d : SheafOfModules.pushforward.{u + 1} φ₀ ⋙ SheafOfModules.pushforward a ≅
+        SheafOfModules.pushforward b ⋙ SheafOfModules.pushforward ψ,
+      (∀ (M : SheafOfModules.{u + 1} S) (U : A),
+        HEq (fun x ↦ (d.hom.app M).val.app (op U) x)
+          (fun x : M.val.obj (op (n, F.obj U)) ↦ x)) ∧
+      (∀ (M : SheafOfModules.{u + 1} S) (U : A),
+        HEq (fun x ↦ (d.inv.app M).val.app (op U) x)
+          (fun x : M.val.obj (op (n, F.obj U)) ↦ x)) := by
+  let d : SheafOfModules.pushforward.{u + 1} φ₀ ⋙ SheafOfModules.pushforward a ≅
+        SheafOfModules.pushforward b ⋙ SheafOfModules.pushforward ψ :=
+    SheafOfModules.pushforwardComp a φ₀ ≪≫
+      SheafOfModules.pushforwardCongr he ≪≫ (SheafOfModules.pushforwardComp ψ b).symm
+  exact ⟨d, fun _ _ ↦ HEq.rfl, fun _ _ ↦ HEq.rfl⟩
 
 namespace AlgebraicGeometry.ProEtale.SemilinearProperOpen
 
@@ -1069,6 +1141,140 @@ instance rho_colimits (X : Scheme.{u}) :
 Source: Stacks 03CZ (blueprint: lem-sf-semilinear-proper-open-mate-pasting). -/
 abbrev rho (X : Scheme.{u}) := (rhoOrdinary C τ B φ hφ X).mapDerivedCategory
 
+attribute [local irreducible] rhoOrdinary
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+set_option maxHeartbeats 600000 in
+-- Compare the scalar maps on the two ringed sequence sites.
+private theorem rho_level_push {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    ∃ d : (push C τ f ⋙ rhoOrdinary C τ B φ hφ Y) ⋙
+        (evaluation ℕᵒᵖ (StrictTower.Modules B Y)).obj (op n) ≅
+      (rhoOrdinary C τ B φ hφ X ⋙ StrictTower.towerDirectImage B f) ⋙
+        (evaluation ℕᵒᵖ (StrictTower.Modules B Y)).obj (op n),
+      (∀ (M : Modules C τ X) (U : Y.ProEt),
+        HEq (fun x ↦ (d.hom.app M).val.app (op U) x)
+          (fun x : M.val.obj (op (n, (proEtaleBaseChange f).obj U)) ↦ x)) ∧
+      (∀ (M : Modules C τ X) (U : Y.ProEt),
+        HEq (fun x ↦ (d.inv.app M).val.app (op U) x)
+          (fun x : M.val.obj (op (n, (proEtaleBaseChange f).obj U)) ↦ x)) := by
+  have eY : rhoOrdinary C τ B φ hφ Y ⋙
+      (evaluation ℕᵒᵖ (StrictTower.Modules B Y)).obj (op n) =
+      SemilinearSections.evaluation (ProEt.topology Y) (coefficients C Y)
+        (transition C τ Y) n ⋙ levelRestriction C B φ Y n := by
+    unfold rhoOrdinary
+    exact (rhoOrdinary_existsUnique C τ B φ Y hφ).choose_spec.1.1 n
+  have eX : rhoOrdinary C τ B φ hφ X ⋙
+      (evaluation ℕᵒᵖ (StrictTower.Modules B X)).obj (op n) =
+      SemilinearSections.evaluation (ProEt.topology X) (coefficients C X)
+        (transition C τ X) n ⋙ levelRestriction C B φ X n := by
+    unfold rhoOrdinary
+    exact (rhoOrdinary_existsUnique C τ B φ X hφ).choose_spec.1.1 n
+  let rY := (sheafCompose (ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      ((constantSheaf (ProEt.topology Y) CommRingCat.{u + 1}).map
+        (CommRingCat.ofHom (φ n)))
+  let rX := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      ((constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map
+        (CommRingCat.ofHom (φ n)))
+  let a := rY ≫ eqToHom (SemilinearSections.evaluation_ring
+    (ProEt.topology Y) (coefficients C Y) (transition C τ Y) n).symm
+  let b := rX ≫ eqToHom (SemilinearSections.evaluation_ring
+    (ProEt.topology X) (coefficients C X) (transition C τ X) n).symm
+  let ψ := (sheafCompose (ProEt.topology Y)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
+      (proEtaleRingDirectImageMap f (StrictTower.coefficients B Y)
+        (StrictTower.coefficients B X) (StrictTower.constantRingIso B f))
+  have he : a ≫ ((Prod.sectR n Y.ProEt).sheafPushforwardContinuous RingCat.{u + 1}
+      (ProEt.topology Y) (coefficientSequenceTopology (ProEt.topology Y))).map
+        (VaryingRing.ringMap C τ f) = ψ ≫
+      ((proEtaleBaseChange f).sheafPushforwardContinuous RingCat.{u + 1}
+        (ProEt.topology Y) (ProEt.topology X)).map b := by
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    have ha : a.hom.app U = rY.hom.app U := by
+      dsimp only [a, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app]
+      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+      rfl
+    have hb : b.hom.app ((proEtaleBaseChange f).op.obj U) =
+        rX.hom.app ((proEtaleBaseChange f).op.obj U) := by
+      dsimp only [b, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app]
+      rw [ObjectProperty.eqToHom_hom, eqToHom_app]
+      rfl
+    change a.hom.app U ≫ _ = ψ.hom.app U ≫
+      b.hom.app ((proEtaleBaseChange f).op.obj U)
+    rw [ha, hb]
+    change rY.hom.app U ≫ (VaryingRing.ringMap C τ f).hom.app (op (n, U.unop)) =
+      ψ.hom.app U ≫ rX.hom.app ((proEtaleBaseChange f).op.obj U)
+    dsimp only [ψ]
+    rw [show proEtaleRingDirectImageMap f (StrictTower.coefficients B Y)
+        (StrictTower.coefficients B X) (StrictTower.constantRingIso B f) =
+        proEtaleConstantDirectImageMap f CommRingCat.{u + 1} (CommRingCat.of B) from
+      ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _).apply_symm_apply _]
+    exact congrArg (fun t ↦ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).map
+      (t.hom.app U)) (VaryingRing.constantMap_naturality f (CommRingCat.ofHom (φ n)))
+  have := Functor.isContinuous_comp (Prod.sectR n Y.ProEt)
+    ((𝟭 ℕ).prod (proEtaleBaseChange f))
+    (ProEt.topology Y) (coefficientSequenceTopology (ProEt.topology Y))
+    (coefficientSequenceTopology (ProEt.topology X))
+  have := Functor.isContinuous_comp (proEtaleBaseChange f) (Prod.sectR n X.ProEt)
+    (ProEt.topology Y) (ProEt.topology X)
+    (coefficientSequenceTopology (ProEt.topology X))
+  obtain ⟨d, hd, hi⟩ := sequence_push_scalar_normalized n
+    (ProEt.topology Y) (ProEt.topology X) (proEtaleBaseChange f) a b
+      (VaryingRing.ringMap C τ f) ψ he
+  have hL : (push C τ f ⋙ rhoOrdinary C τ B φ hφ Y) ⋙
+        (evaluation ℕᵒᵖ (StrictTower.Modules B Y)).obj (op n) =
+      SheafOfModules.pushforward (VaryingRing.ringMap C τ f) ⋙
+        SheafOfModules.pushforward a  := by
+    have hE : SemilinearSections.evaluation (ProEt.topology Y) (coefficients C Y)
+        (transition C τ Y) n ⋙ levelRestriction C B φ Y n =
+        SheafOfModules.pushforward a := by
+      exact pushforward_restrict_eq (ProEt.topology Y)
+        (coefficientSequenceTopology (ProEt.topology Y)) (Prod.sectR n Y.ProEt) rY _
+    have hP : push C τ f = SheafOfModules.pushforward (VaryingRing.ringMap C τ f) :=
+      push_eq C τ f
+    exact (congrArg (fun F : Modules C τ Y ⥤ StrictTower.Modules B Y ↦
+      push C τ f ⋙ F) (eY.trans hE)).trans
+        (congrArg (fun F : Modules C τ X ⥤ Modules C τ Y ↦
+          F ⋙ SheafOfModules.pushforward a) hP)
+  have hR : (rhoOrdinary C τ B φ hφ X ⋙ StrictTower.towerDirectImage B f) ⋙
+        (evaluation ℕᵒᵖ (StrictTower.Modules B Y)).obj (op n) =
+      SheafOfModules.pushforward b ⋙ SheafOfModules.pushforward ψ := by
+    have hE : SemilinearSections.evaluation (ProEt.topology X) (coefficients C X)
+        (transition C τ X) n ⋙ levelRestriction C B φ X n =
+        SheafOfModules.pushforward b := by
+      exact pushforward_restrict_eq (ProEt.topology X)
+        (coefficientSequenceTopology (ProEt.topology X)) (Prod.sectR n X.ProEt) rX _
+    exact congrArg (fun F : Modules C τ X ⥤ StrictTower.Modules B X ↦
+      F ⋙ StrictTower.moduleDirectImage B f) (eX.trans hE)
+  exact normalized_iso_transport hL hR d
+    (fun M U ↦ M.val.obj (op (n, (proEtaleBaseChange f).obj U))) hd hi
+
+private theorem rho_section_type (X : Scheme.{u}) (M : Modules C τ X)
+    (n : ℕ) (U : X.ProEt) :
+    ((((rhoOrdinary C τ B φ hφ X).obj M).obj (op n)).val.obj (op U) : Type (u + 1)) =
+      (M.val.obj (op (n, U)) : Type (u + 1)) := by
+  have e : rhoOrdinary C τ B φ hφ X ⋙
+      (evaluation ℕᵒᵖ (StrictTower.Modules B X)).obj (op n) =
+      SemilinearSections.evaluation (ProEt.topology X) (coefficients C X)
+        (transition C τ X) n ⋙ levelRestriction C B φ X n := by
+    unfold rhoOrdinary
+    exact (rhoOrdinary_existsUnique C τ B φ X hφ).choose_spec.1.1 n
+  exact congrArg (fun N : StrictTower.Modules B X ↦ (N.val.obj (op U) : Type (u + 1)))
+    (Functor.congr_obj e M)
+
+private theorem rho_transition (X : Scheme.{u}) (M : Modules C τ X)
+    (n m : ℕ) (h : n ≤ m) (U : X.ProEt) :
+    HEq (fun x ↦ ((((rhoOrdinary C τ B φ hφ X).obj M).map
+      (homOfLE h).op).val.app (op U)) x)
+      (fun x : M.val.obj (op (m, U)) ↦
+        M.val.map (Prod.mkHom (homOfLE h) (𝟙 U)).op x) := by
+  unfold rhoOrdinary
+  exact (rhoOrdinary_existsUnique C τ B φ X hφ).choose_spec.1.2 M n m h U
+
 /-- Direct image and scalar restriction commute by the identity on component sections.
 Source: the ring-sheaf change adjunction; Stacks 03CZ and 03D7
 (blueprint: lem-sf-semilinear-proper-open-mate-pasting).
@@ -1081,7 +1287,64 @@ theorem rhoPushOrdinary_existsUnique {X Y : Scheme.{u}} (f : X ⟶ Y) :
       ∀ (M : Modules C τ X) (n : ℕ) (U : Y.ProEt),
         HEq (fun x ↦ ((((e.hom.app M).app (op n)).val.app (op U)) x))
           (fun x : M.val.obj (op (n, (proEtaleBaseChange f).obj U)) ↦ x) := by
-  sorry
+  let F := push C τ f ⋙ rhoOrdinary C τ B φ hφ Y
+  let G := rhoOrdinary C τ B φ hφ X ⋙ StrictTower.towerDirectImage B f
+  choose d hd hi using (rho_level_push C τ B φ hφ f)
+  let eM (M : Modules C τ X) : F.obj M ≅ G.obj M :=
+    NatIso.ofComponents (fun n ↦ (d n.unop).app M) (by
+      intro m n h
+      ext U x
+      have hFm := rho_section_type C τ B φ hφ Y ((push C τ f).obj M) m.unop U.unop
+      have hFn := rho_section_type C τ B φ hφ Y ((push C τ f).obj M) n.unop U.unop
+      have hGm := rho_section_type C τ B φ hφ X M m.unop
+        ((proEtaleBaseChange f).obj U.unop)
+      have hGn := rho_section_type C τ B φ hφ X M n.unop
+        ((proEtaleBaseChange f).obj U.unop)
+      have htF := rho_transition C τ B φ hφ Y ((push C τ f).obj M)
+        n.unop m.unop (leOfHom h.unop) U.unop
+      have htG := rho_transition C τ B φ hφ X M n.unop m.unop (leOfHom h.unop)
+        ((proEtaleBaseChange f).obj U.unop)
+      have hp : (fun x ↦ ((push C τ f).obj M).val.map
+          (Prod.mkHom (homOfLE (leOfHom h.unop)) (𝟙 U.unop)).op x) =
+          (fun x ↦ M.val.map (Prod.mkHom (homOfLE (leOfHom h.unop))
+            (𝟙 ((proEtaleBaseChange f).obj U.unop))).op x) := by
+        change (fun x ↦ M.val.presheaf.map ((siteMap f).map
+          (Prod.mkHom (homOfLE (leOfHom h.unop)) (𝟙 U.unop))).op x) =
+          (fun x ↦ M.val.presheaf.map (Prod.mkHom (homOfLE (leOfHom h.unop))
+            (𝟙 ((proEtaleBaseChange f).obj U.unop))).op x)
+        simp only [siteMap, Functor.prod_map, Functor.id_map,
+          CategoryTheory.Functor.map_id]
+        rfl
+      rw [hp] at htF
+      have hh : (homOfLE (leOfHom h.unop)).op = h := Subsingleton.elim _ _
+      simp only [hh] at htF htG
+      exact congrFun (normalized_square hFm hFn hGm hGn
+        (fun x ↦ ((F.obj M).map h).val.app U x)
+        (fun x ↦ ((d n.unop).hom.app M).val.app U x)
+        (fun x ↦ ((d m.unop).hom.app M).val.app U x)
+        (fun x ↦ ((G.obj M).map h).val.app U x)
+        (fun x : M.val.obj (op (m.unop, (proEtaleBaseChange f).obj U.unop)) ↦
+          M.val.map (Prod.mkHom (homOfLE (leOfHom h.unop))
+            (𝟙 ((proEtaleBaseChange f).obj U.unop))).op x)
+        (by exact htF)
+        (hd n.unop M U.unop) (hd m.unop M U.unop)
+        (by exact htG)) x)
+  let e : F ≅ G := NatIso.ofComponents eM (by
+    intro M N g
+    apply NatTrans.ext
+    funext n
+    exact (d n.unop).hom.naturality g)
+  refine ⟨e.symm, ?_, ?_⟩
+  · intro M n U
+    exact hi n M U
+  · intro e' he'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply NatTrans.ext
+    funext n
+    ext U x
+    exact congrFun (eq_of_heq ((he' M n.unop U.unop).trans (hi n.unop M U.unop).symm)) x
 
 /-- The ordinary inverse-image scalar comparison is the transpose of the uniquely
 section-normalized direct-image comparison. Source: the ring-sheaf change adjunction
@@ -1235,11 +1498,7 @@ private theorem sequence_push_evaluation_normalized
       (∀ (M : SheafOfModules.{u + 1} S) (U : A),
         HEq (fun x ↦ (d.inv.app M).val.app (op U) x)
           (fun x : M.val.obj (op (n, F.obj U)) ↦ x)) := by
-  let d : SheafOfModules.pushforward.{u + 1} φ₀ ⋙ SheafOfModules.pushforward a ≅
-        SheafOfModules.pushforward b ⋙ SheafOfModules.pushforward ψ :=
-    SheafOfModules.pushforwardComp a φ₀ ≪≫
-      SheafOfModules.pushforwardCongr he ≪≫ (SheafOfModules.pushforwardComp ψ b).symm
-  exact ⟨d, fun _ _ ↦ HEq.rfl, fun _ _ ↦ HEq.rfl⟩
+  exact sequence_push_scalar_normalized n J K F a b φ₀ ψ he
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
@@ -1634,6 +1893,152 @@ theorem gamma_finite {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
 
 end FiniteEvaluation
 
+private theorem push_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g)
+    (M : Modules C τ X) (n : ℕ) (U : Y.ProEt)
+    (x : ((push C τ f).obj M).val.obj (op (n, U))) :
+    ((eqToIso (congrArg (push C τ) e)).hom.app M).val.app (op (n, U)) x =
+      M.val.map (Prod.mkHom (𝟙 n)
+        (eqToHom (congrArg (fun t ↦ (proEtaleBaseChange t).obj U) e.symm))).op x := by
+  cases e
+  change x = M.val.map (𝟙 _) x
+  rw [PresheafOfModules.map_id]
+  rfl
+
+private theorem push_map_apply {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {M N : Modules C τ X} (a : M ⟶ N) (n : ℕ) (U : Y.ProEt)
+    (x : ((push C τ f).obj M).val.obj (op (n, U))) :
+    (((push C τ f).map a).val.app (op (n, U))) x =
+      a.val.app (op (n, (proEtaleBaseChange f).obj U)) x := by
+  rfl
+
+private theorem push_obj_map_apply {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M : Modules C τ X) (n : ℕ) {U V : Y.ProEt} (a : U ⟶ V)
+    (x : ((push C τ f).obj M).val.obj (op (n, V))) :
+    (((push C τ f).obj M).val.map (Prod.mkHom (𝟙 n) a).op) x =
+      M.val.map (Prod.mkHom (𝟙 n) ((proEtaleBaseChange f).map a)).op x := by
+  rfl
+
+private theorem pushComp_apply {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
+    (M : Modules C τ X) (n : ℕ) (U : Z.ProEt)
+    (x : ((push C τ f ⋙ push C τ g).obj M).val.obj (op (n, U))) :
+    ((pushComp C τ f g).hom.app M).val.app (op (n, U)) x =
+      M.val.map (Prod.mkHom (𝟙 n)
+        ((MorphismProperty.Over.pullbackComp
+          (P := @WeaklyEtale.{u}) (Q := ⊤) f g).hom.app U)).op x := by
+  exact (pushComp_existsUnique C τ f g).choose_spec.1 M n U x
+
+private theorem push_coherence {X Y Z T : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T) :
+    Functor.isoWhiskerLeft (push C τ f) (pushComp C τ g h) ≪≫
+        pushComp C τ f (g ≫ h) =
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight (pushComp C τ f g) (push C τ h) ≪≫
+        pushComp C τ (f ≫ g) h ≪≫
+        eqToIso (congrArg (push C τ) (Category.assoc f g h)) := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  cases U using Opposite.rec
+  rename_i U
+  rcases U with ⟨n, U⟩
+  ext x
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_inv_app, Category.id_comp,
+    SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
+  erw [push_map_apply C τ h ((pushComp C τ f g).hom.app M) n U]
+  erw [pushComp_apply C τ f g M n ((proEtaleBaseChange h).obj U)]
+  erw [pushComp_apply C τ (f ≫ g) h M n U]
+  conv_rhs => erw [push_transport C τ (Category.assoc f g h) M n U]
+  conv_lhs => erw [pushComp_apply C τ g h ((push C τ f).obj M) n U x]
+  conv_lhs => erw [pushComp_apply C τ f (g ≫ h) M n U]
+  conv_lhs => erw [push_obj_map_apply C τ f M n
+    ((MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) g h).hom.app U)]
+  apply StrictTower.restriction_pasting M.val _ _ _ _ _ _ x
+  apply Prod.hom_ext
+  · simp
+  · exact StrictTower.site_pasting (P := @WeaklyEtale) (Q := ⊤) f g h U
+
+private theorem pull_coherence {X Y Z T : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T) :
+    pullComp C τ f (g ≫ h) ≪≫
+        Functor.isoWhiskerRight (pullComp C τ g h) (pull C τ f) =
+      eqToIso (congrArg (pull C τ) (Category.assoc f g h).symm) ≪≫
+        pullComp C τ (f ≫ g) h ≪≫
+        Functor.isoWhiskerLeft (pull C τ h) (pullComp C τ f g) := by
+  have hh := Adjunction.leftAdjointCompIso_assoc
+    (ordinaryAdj C τ h) (ordinaryAdj C τ g) (ordinaryAdj C τ f)
+    (ordinaryAdj C τ (g ≫ h)) (ordinaryAdj C τ (f ≫ g))
+    (ordinaryAdj C τ (f ≫ g ≫ h))
+    (pushComp C τ g h) (pushComp C τ f g)
+    (pushComp C τ (f ≫ g) h ≪≫
+      eqToIso (congrArg (push C τ) (Category.assoc f g h)))
+    (pushComp C τ f (g ≫ h)) (push_coherence C τ f g h)
+  have ht := StrictTower.mate_transport (pull C τ) (push C τ)
+    (fun f ↦ ordinaryAdj C τ f) (ordinaryAdj C τ h)
+    (ordinaryAdj C τ (f ≫ g)) (Category.assoc f g h) (pushComp C τ (f ≫ g) h)
+  rw [ht] at hh
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  have hi := congr_app (congrArg Iso.inv hh) M
+  simpa only [pullComp, Iso.symm_hom, Iso.trans_inv, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Functor.associator_inv_app, Functor.associator_hom_app,
+    Iso.symm_inv, Iso.trans_hom, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Category.id_comp, Category.comp_id, Category.assoc,
+    eqToIso.inv, eqToIso.hom] using hi.symm
+
+private theorem pull_derived_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g) :
+    (Functor.mapDerivedCategoryNatIso (eqToIso (congrArg (pull C τ) e))).hom =
+      (eqToIso (congrArg (P C τ) e)).hom := by
+  cases e
+  exact Functor.mapDerivedCategoryNatIso_refl
+
+private theorem p_coherence {X Y Z T : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T) :
+    pComp C τ f (g ≫ h) ≪≫
+        Functor.isoWhiskerRight (pComp C τ g h) (P C τ f) =
+      eqToIso (congrArg (P C τ) (Category.assoc f g h).symm) ≪≫
+        pComp C τ (f ≫ g) h ≪≫
+        Functor.isoWhiskerLeft (P C τ h) (pComp C τ f g) := by
+  have hh := StrictTower.descend_coherence (pull C τ h) (pull C τ g) (pull C τ f)
+    (pull C τ (g ≫ h)) (pull C τ (f ≫ g))
+    (pull C τ (f ≫ g ≫ h)) (pull C τ ((f ≫ g) ≫ h))
+    (pullComp C τ g h) (pullComp C τ f g)
+    (pullComp C τ f (g ≫ h)) (pullComp C τ (f ≫ g) h)
+    (eqToIso (congrArg (pull C τ) (Category.assoc f g h).symm))
+    (pull_coherence C τ f g h)
+  rw [pull_derived_transport C τ (Category.assoc f g h).symm] at hh
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  simpa only [pComp, P, Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Category.assoc, Functor.map_comp] using congr_app hh M
+
+private theorem conjugate_transport
+    {A B I : Type*} [Category A] [Category B]
+    (L : I → A ⥤ B) (R₀ : I → B ⥤ A) (a : ∀ i, L i ⊣ R₀ i)
+    {L' : A ⥤ B} {R' : B ⥤ A} (a' : L' ⊣ R')
+    {i j : I} (e : i = j) (d : L i ≅ L') :
+    conjugateIsoEquiv a' (a j) (eqToIso (congrArg L e.symm) ≪≫ d) =
+      conjugateIsoEquiv a' (a i) d ≪≫ eqToIso (congrArg R₀ e) := by
+  cases e
+  simp
+
+private theorem jComp_transport {X Y Z : Scheme.{u}}
+    (f : X ⟶ Y) (g : Y ⟶ Z) (k : X ⟶ Z)
+    [IsOpenImmersion f] [IsOpenImmersion g] [IsOpenImmersion k] (e : f ≫ g = k) :
+    Adjunction.leftAdjointCompIso (jAdj C τ f) (jAdj C τ g) (jAdj C τ k)
+        ((pComp C τ f g).symm ≪≫ eqToIso (congrArg (P C τ) e)) =
+      jComp C τ f g ≪≫ jCongr C τ e := by
+  subst k
+  simp only [jCongr, eqToIso_refl, Iso.trans_refl, jComp]
+
 /-- Coherence of the specified compositors makes iterated pasting independent of
 parenthesization, for inverse image, its right-adjoint mate, and open extension.
 Source: Stacks 0F7C--0F7F; Mathlib mateEquiv_hcomp and mateEquiv_vcomp
@@ -1669,6 +2074,68 @@ theorem compositor_associativity :
       (jComp C τ g h).hom.app ((J C τ f).obj M) ≫
         (jComp C τ f (g ≫ h)).hom.app M ≫
         (jCongr C τ (Category.assoc f g h)).inv.app M) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro X Y Z T f g h M
+    have hp := congr_app (congrArg Iso.hom (p_coherence C τ f g h)) M
+    have hp' := congrArg (fun q ↦
+      (eqToIso (congrArg (P C τ) (Category.assoc f g h))).hom.app M ≫ q) hp
+    simpa only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+      Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Category.assoc, eqToIso.hom, eqToIso.inv, eqToHom_trans_assoc,
+      eqToHom_refl, NatTrans.id_app, Category.id_comp] using hp'.symm
+  · intro X Y Z T f g h M
+    have hp := congrArg Iso.hom (p_coherence C τ f g h)
+    simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom] at hp
+    have hh := StrictTower.conjugate_triangle_assoc (adj C τ h) (adj C τ g) (adj C τ f)
+      (adj C τ (g ≫ h)) (adj C τ (f ≫ g)) (adj C τ (f ≫ g ≫ h))
+      (pComp C τ g h) (pComp C τ f g)
+      (eqToIso (congrArg (P C τ) (Category.assoc f g h).symm) ≪≫
+        pComp C τ (f ≫ g) h) (pComp C τ f (g ≫ h))
+      (by simpa only [Iso.trans_hom, Category.assoc] using hp.symm)
+    have ht := congrArg Iso.hom (conjugate_transport (P C τ) (R C τ)
+      (fun f ↦ adj C τ f) ((adj C τ h).comp (adj C τ (f ≫ g)))
+      (Category.assoc f g h) (pComp C τ (f ≫ g) h))
+    simp only [Iso.trans_hom, conjugateIsoEquiv_apply_hom] at ht
+    simp only [Iso.trans_hom] at hh
+    rw [ht] at hh
+    have hm := congr_app hh M
+    apply (cancel_mono
+      ((eqToIso (congrArg (R C τ) (Category.assoc f g h))).hom.app M)).1
+    simpa only [sComp, conjugateIsoEquiv_apply_hom, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc,
+      Iso.inv_hom_id_app, Category.comp_id] using hm.symm
+  · intro X Y Z T f g h _ _ _ M
+    have hi : Functor.isoWhiskerLeft (P C τ h) (pComp C τ f g).symm ≪≫
+        ((pComp C τ (f ≫ g) h).symm ≪≫
+          eqToIso (congrArg (P C τ) (Category.assoc f g h))) =
+        (Functor.associator _ _ _).symm ≪≫
+          Functor.isoWhiskerRight (pComp C τ g h).symm (P C τ f) ≪≫
+          (pComp C τ f (g ≫ h)).symm := by
+      have hp := congrArg Iso.symm (p_coherence C τ f g h)
+      apply Iso.ext
+      apply NatTrans.ext
+      funext N
+      simpa only [Iso.trans_inv, Iso.trans_hom, NatTrans.comp_app,
+        Functor.isoWhiskerLeft_inv, Functor.isoWhiskerRight_inv,
+        Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+        Functor.whiskerLeft_app, Functor.whiskerRight_app,
+        Functor.associator_inv_app, Category.id_comp, Category.assoc,
+        Iso.symm_hom, eqToIso.inv, eqToIso.hom] using
+          (congr_app (congrArg Iso.hom hp) N).symm
+    have hh := Adjunction.leftAdjointCompIso_assoc
+      (jAdj C τ f) (jAdj C τ g) (jAdj C τ h)
+      (jAdj C τ (f ≫ g)) (jAdj C τ (g ≫ h)) (jAdj C τ (f ≫ g ≫ h))
+      (pComp C τ f g).symm (pComp C τ g h).symm
+      (pComp C τ f (g ≫ h)).symm
+      ((pComp C τ (f ≫ g) h).symm ≪≫
+        eqToIso (congrArg (P C τ) (Category.assoc f g h))) hi
+    rw [jComp_transport C τ (f ≫ g) h (f ≫ g ≫ h) (Category.assoc f g h)] at hh
+    have hm := congr_app (congrArg Iso.hom hh) M
+    apply (cancel_mono ((jCongr C τ (Category.assoc f g h)).hom.app M)).1
+    simpa only [jComp, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Functor.associator_inv_app,
+      Category.id_comp, Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using hm.symm
 
 end AlgebraicGeometry.ProEtale.SemilinearProperOpen
