@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-sfb-open-projection-formula] for the given open immersion $j$ and the abelian sheaves $L,M$. Its canonical map is defined as the adjoint of $j^*_{\\Ab}L\\otimes M\\to j^*_{\\Ab}(L\\otimes j^{\\Ab}_!M)$ using the unit of $j^{\\Ab}_!\\dashv j^*_{\\Ab}$, exactly the projection map of the statement, and the cited lemma asserts that it is an isomorphism. No restriction on $L$ or $M$ is imposed.",
+   "text": "Apply [lem-sfb-open-projection-formula] to $j,L,M$. Its map is the adjoint of the unit-induced map $j^*_{\\Ab}L\\otimes M\\to j^*_{\\Ab}(L\\otimes j^{\\Ab}_!M)$, hence is precisely the canonical map in the statement, and it is invertible.",
    "uses": [
     "lem-sfb-open-projection-formula"
    ],
@@ -38,10 +38,9 @@
    }
   },
   {
-   "text": "Take the linear extension by zero of [def-sfb-module-linear-open-lower-shriek] for the same $\\Lambda$ and $j$. Its source is $\\Mod_{j^*\\Lambda_X}$ and its target is $\\Mod_{\\Lambda_X}$. On an action $\\gamma_M:j^*\\Lambda_X\\otimes M\\to M$ it has action $\\Lambda_X\\otimes j^{\\Ab}_!M\\cong j^{\\Ab}_!(j^*\\Lambda_X\\otimes M)\\xrightarrow{j^{\\Ab}_!\\gamma_M}j^{\\Ab}_!M$, using the inverse of the projection isomorphism from step 1. This is precisely the linearization operation of [sk-def-sfb-transport], parts 3 and 4. On a module morphism it applies $j^{\\Ab}_!$. The cited linear-extension node also gives the lifted adjunction $j^{\\mathrm{lin}}_!\\dashv\\operatorname{mapMod}(j^*_{\\Ab})$ and exactness.",
+   "text": "Take $j^{\\mathrm{lin}}_!$ from [def-sfb-module-linear-open-lower-shriek]. It has the required source and target, action $(\\mathrm{projection})^{-1}$ followed by $j^{\\Ab}_!$ of the action, underlying functor $j^{\\Ab}_!$, and adjunction to $\\operatorname{mapMod}(j^*_{\\Ab})$. Thus the specified linearization and its adjunction are available for this $\\Lambda,j$.",
    "uses": [
-    "def-sfb-module-linear-open-lower-shriek",
-    "sk-def-sfb-transport"
+    "def-sfb-module-linear-open-lower-shriek"
    ],
    "elementary": false,
    "source": {
@@ -50,10 +49,9 @@
    }
   },
   {
-   "text": "For $M\\in\\Mod_{\\Lambda_U}$ restrict its action along $\\alpha_j:j^*\\Lambda_X\\to\\Lambda_U$ and then apply step 2. Thus $j_!=j^{\\mathrm{lin}}_!\\circ\\operatorname{Res}_{\\alpha_j}$ is the functor of [def-sfb-module-open-lower-shriek]. Restriction changes the action by precomposing with $\\alpha_j\\otimes1$ and leaves underlying objects and morphisms unchanged ([sk-def-sfb-change-of-scalars], part 1). Consequently the underlying sheaf is $j^{\\Ab}_!M$. Exactness is explicitly asserted for this composite in [def-sfb-module-open-lower-shriek], for an arbitrary commutative condensed ring and an arbitrary open immersion.",
+   "text": "Define $j_!=j^{\\mathrm{lin}}_!\\circ\\operatorname{Res}_{\\alpha_j}$ using [def-sfb-module-open-lower-shriek]. Its statement gives both the underlying sheaf $j^{\\Ab}_!M$ and exactness for every commutative condensed ring and open immersion, as required.",
    "uses": [
-    "def-sfb-module-open-lower-shriek",
-    "sk-def-sfb-change-of-scalars"
+    "def-sfb-module-open-lower-shriek"
    ],
    "elementary": false,
    "source": {
@@ -62,14 +60,9 @@
    }
   },
   {
-   "text": "The coefficient morphism $\\alpha_j$ is an isomorphism of ring objects by the last sentence of [sk-def-sfb-coefficient-morphisms]; this statement applies to every condensed ring, not only to a selected list of coefficients. Apply [sk-def-sfb-change-of-scalars], parts 3 and 5, in $\\Sh(U_{\\mathrm{proét}},\\Ab)$: equalizers of abelian sheaves are computed objectwise (the equalizer of the two sheaf-condition bijections is again a bijection), and coequalizers are the sheafifications of the objectwise cokernels of the difference of the maps (the sheafification adjunction gives the required universal property); its tensor is closed symmetric monoidal and preserves colimits in each variable by [sk-def-sfb-sheaf-tensor]. The ring $j^*\\Lambda_X$ is commutative, and $\\alpha_j$ is invertible. These give $\\operatorname{Res}_{\\alpha_j}\\dashv\\operatorname{Coext}_{\\alpha_j}$ and $\\operatorname{Coext}_{\\alpha_j}\\cong\\operatorname{Res}_{\\alpha_j^{-1}}\\cong\\operatorname{Ext}_{\\alpha_j}$. This is the scalar adjunction and its identification $\\operatorname{Coext}_{\\alpha_j}\\cong\\operatorname{Ext}_{\\alpha_j}$ appearing explicitly in [def-sfb-module-open-lower-shriek-adjunction]. For $M\\in\\Mod_{\\Lambda_U}$ and $N\\in\\Mod_{\\Lambda_X}$ the natural Hom bijections are\n$$\n\\Hom(j^{\\mathrm{lin}}_!\\operatorname{Res}_{\\alpha_j}M,N)\n\\cong\\Hom(\\operatorname{Res}_{\\alpha_j}M,\\operatorname{mapMod}(j^*_{\\Ab})N)\n\\cong\\Hom(M,\\operatorname{Coext}_{\\alpha_j}\\operatorname{mapMod}(j^*_{\\Ab})N)\n\\cong\\Hom(M,\\operatorname{Ext}_{\\alpha_j}\\operatorname{mapMod}(j^*_{\\Ab})N).\n$$\nThe first bijection is the linear adjunction of step 2, and the second and third are precisely the scalar adjunction and identification in the cited adjunction node. The last argument is $j^*N$ by [def-sfb-module-upper-star]. This proves $j_!\\dashv j^*$ with the required direction of restriction of scalars.",
+   "text": "Use the adjunction of [def-sfb-module-open-lower-shriek-adjunction] for this same $\\Lambda,j$. Its left functor is the composite in step 3. Its right functor is $\\operatorname{Ext}_{\\alpha_j}\\circ\\operatorname{mapMod}(j^*_{\\Ab})=j^*$, including the natural identification $\\operatorname{Coext}_{\\alpha_j}\\cong\\operatorname{Ext}_{\\alpha_j}$ stated there. Hence it supplies exactly $j_!\\dashv j^*$.",
    "uses": [
-    "sk-def-sfb-coefficient-morphisms",
-    "def-sfb-module-open-lower-shriek-adjunction",
-    "def-sfb-module-linear-open-lower-shriek",
-    "def-sfb-module-upper-star",
-    "sk-def-sfb-sheaf-tensor",
-    "sk-def-sfb-change-of-scalars"
+    "def-sfb-module-open-lower-shriek-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -78,10 +71,9 @@
    }
   },
   {
-   "text": "Given the specified compactification $c=(X\\xrightarrow{i}\\bar X\\xrightarrow{g}Y)$, define $f^c_!$ to be $g_*\\circ i_!$ as in [def-sfb-module-compactification-lower-shriek]. The functor $i_!$ lands in $\\Mod_{\\Lambda_{\\bar X}}$ and $g_*$ starts in that same category, so this is a functor $\\Mod_{\\Lambda_X}\\to\\Mod_{\\Lambda_Y}$. For a chosen compactification define $f_!$ to be this functor, as in [def-sfb-module-lower-shriek]. These are definitions for the specified choice; no comparison between different compactifications is used.",
+   "text": "For the specified compactification $c=(i,g)$ define $f^c_!=g_*\\circ i_!$ by [def-sfb-module-compactification-lower-shriek]. The target of $i_!$ and source of $g_*$ are both $\\Mod_{\\Lambda_{\\bar X}}$, so the composite has the stated type. The compactification includes quasi-compactness of $i$ as required by the cited definition.",
    "uses": [
-    "def-sfb-module-compactification-lower-shriek",
-    "def-sfb-module-lower-shriek"
+    "def-sfb-module-compactification-lower-shriek"
    ],
    "elementary": true,
    "source": {
@@ -90,13 +82,11 @@
    }
   },
   {
-   "text": "By [def-sfb-module-open-lower-shriek] the underlying sheaf of $i_!M$ is $i^{\\Ab}_!M$, and by [def-sfb-module-lower-star] the underlying sheaf of $g_*N$ is $g^{\\Ab}_*N$. Hence the underlying sheaf functor of the composite is $g^{\\Ab}_*i^{\\Ab}_!$, the abelian lower shriek for this same compactification ([sk-def-sfb-finite-lower-shriek]). The two module functors are additive, $i_!$ is exact, and $g_*$ is left exact by the two cited module nodes. In particular each preserves the zero object and kernels. For a module map $a$, $g_*i_!(\\ker a)\\cong g_*(\\ker(i_!a))\\cong\\ker(g_*i_!a)$; thus their additive composite is left exact, as asserted.",
+   "text": "Choose a compactification $c$ and set $f_!=f^c_!$ by [def-sfb-module-lower-shriek]. That node asserts that its underlying functor is $g^{\\Ab}_*\\circ i^{\\Ab}_!$ for this same $c$, and that $f_!$ is additive and left exact. These give the final two assertions with no comparison of different compactifications.",
    "uses": [
-    "def-sfb-module-open-lower-shriek",
-    "def-sfb-module-lower-star",
-    "sk-def-sfb-finite-lower-shriek"
+    "def-sfb-module-lower-shriek"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-lower-shriek.proof.md",
     "place": "statement and accompanying proof"
@@ -106,22 +96,15 @@
  "proof_deps": [
   "lem-sfb-open-projection-formula",
   "def-sfb-module-linear-open-lower-shriek",
-  "sk-def-sfb-transport",
   "def-sfb-module-open-lower-shriek",
-  "sk-def-sfb-change-of-scalars",
-  "sk-def-sfb-coefficient-morphisms",
   "def-sfb-module-open-lower-shriek-adjunction",
-  "def-sfb-module-upper-star",
-  "sk-def-sfb-sheaf-tensor",
   "def-sfb-module-compactification-lower-shriek",
-  "def-sfb-module-lower-shriek",
-  "def-sfb-module-lower-star",
-  "sk-def-sfb-finite-lower-shriek"
+  "def-sfb-module-lower-shriek"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/sk-def-sfb-module-lower-shriek.proof.md",
-  "place": "summary proof, expanded using the six existing detail nodes and their accompanying proofs"
+  "place": "Summary proof assembled from the six existing detail nodes; internal linearization, exactness and scalar-adjunction arguments are delegated to their precise statements."
  },
  "mathlib_searches": [
   {
@@ -317,19 +300,19 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-module-lower-shriek",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "sk-def-sfb-module-lower-shriek",
   "worker": "stage1",
-  "summary": "Repaired the returned delivery by including the existing unit record with only its realized and realized_by fields changed: the item realizes its statement and the six existing detail nodes realize its summary proof. Refreshed the current chapter/unit binding, reread every cited statement, repaired the changed pullback and compactification quotations, and added the explicitly invoked scalar-change node to step 4 uses. Retained the six-step construction and documented compactification wording correction. No new nodes, Lean edits, compilation or push.",
-  "blueprint": "The summary proof sentences on projection formula, linearization, scalar restriction, open adjunction, compactification and chosen lower shriek are realized respectively by steps 1 through 6; the associated detail proofs supply the displayed action, adjunction and exactness calculation."
+  "summary": "Repair of the human re-split request: kept the statement and all Lean/import metadata unchanged. Replaced the 4733-character proof by a short assembly of six already existing detail nodes. In particular the former long step 4 now uses the exact open-adjunction statement, which already includes the scalar adjunction and Coext-to-Ext identification, rather than repeating its ambient-category proof. No new nodes are needed: each extracted argument already has its own blueprint/DAG node. Recorded all six citations verbatim and realized the unit without changing its route.",
+  "blueprint": "The six sentences of the summary proof are realized in order by the projection-formula, linear-open-extension, open-extension, open-adjunction, compactification and chosen-lower-shriek detail nodes. Each is cited directly in the corresponding assembly step."
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q65-c9f7562f1",
-  "group": "Q65",
+  "reviewer": "NT-cc-Q29-90f8997a8",
+  "group": "Q29",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q65-c9f7562f1 (reviewer sub-agent of L); spot-checked: Read the complete item, all 19 cited statements and source places, and unit/chapter route. All six steps have correctly typed scalar changes and adjunctions; edge cases pass. The compactification wording correction is justified. No new nodes or repairs. Detailed checks and one inherited downstream missing reference are recorded in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-90f8997a8 (reviewer sub-agent of L); spot-checked: Diff against the earlier node (Q27 run snapshot): statement, stmt_deps, blueprint, import_flags, lean and lean_audit are byte-identical. Only proof, proof_deps, proof_origin and split_report changed; in the unit only realized and realized_by. The proof shrank from 4733 to 1876 characters (longest step 396), as the human's re-split asked. The six steps follow main-20261015 sk-def-sfb-module-lower-shriek.proof.md sentence by sentence and cite its six detail nodes, all of the same unit, so there is no off-unit use and no tool_uses. Each step's claim is in the cited statement: (1) the projection map is the unit-adjoint map, an iso for arbitrary abelian L and M; (2) j^lin_! has the action (proj)^-1 followed by j_!(action) and is left adjoint to mapMod(j*_Ab); (3) j_! = j^lin_! o Res_alpha_j, with underlying sheaf j^Ab_! M, exact; Res of def-sfb-modobj-restriction is the same functor as change-of-scalars clause 1; (4) the adjunction node states j_! left adjoint to Ext o mapMod with Coext = Ext; its j* is def-sfb-module-upper-star, the same formula as the pullback clause of sk-def-sfb-module-pushforward-pullback; alpha_j invertible is in that node's proof, and change-of-scalars clause 5 gives Ext = Res_inv = Coext; (5) the compactification of sk-def-nagata-sketch-data includes a quasi-compact open immersion, and the elementary type check is correct; (6) the chosen-c lower shriek node gives the underlying functor g^Ab_* o i^Ab_! and left exactness. proof_deps equals the union of uses; the closure contains no cycle; nothing is merged or missing; no new nodes; no SGA. Edge cases checked: j = id, U empty, Lambda = 0, the (id, id) compactification. No fixes."
  },
  "lean_audit": {
   "master": {
