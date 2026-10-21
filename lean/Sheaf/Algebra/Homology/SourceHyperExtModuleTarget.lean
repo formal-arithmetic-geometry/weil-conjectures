@@ -16,7 +16,7 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import WeilConjectures.Algebra.Homology.HomComplex
-import Sheaf.CategoryTheory.DoubleComplexTotal
+import WeilConjectures.CategoryTheory.DoubleComplexTotal
 import WeilConjectures.Algebra.Homology.ExactCouple.DoubleComplex
 import Mathlib.CategoryTheory.Abelian.Injective.Ext
 

@@ -16,7 +16,7 @@ public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 import WeilConjectures.Algebra.Homology.ExactCouple.DoubleComplex
 import WeilConjectures.CategoryTheory.Abelian.Filtration
 import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-import Sheaf.CategoryTheory.DoubleComplexTotal
+import WeilConjectures.CategoryTheory.DoubleComplexTotal
 
 /-!
 # The column-cone spectral sequence of a bounded-below total map

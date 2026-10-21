@@ -10,7 +10,8 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.Algebra.Homology.Embedding.Extend
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 
 /-!

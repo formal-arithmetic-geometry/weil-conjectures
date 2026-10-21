@@ -5,7 +5,8 @@ Authors: SHEAF group S3
 -/
 module
 
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 
 /-! # Bicomplex maps preserve the first total filtration
 

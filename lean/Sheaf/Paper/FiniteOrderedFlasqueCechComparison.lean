@@ -6,7 +6,8 @@ Authors: SHEAF group NH
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 public import Mathlib.Topology.Sheaves.Flasque
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic

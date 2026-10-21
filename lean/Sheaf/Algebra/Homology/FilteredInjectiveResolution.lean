@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.FiniteFilteredLocalization
 import Sheaf.CategoryTheory.EnoughStrictFilteredInjectives
 import Sheaf.Paper.FiniteFilteredGradedExactness
-import Sheaf.CategoryTheory.DoubleComplexTotal
+import WeilConjectures.CategoryTheory.DoubleComplexTotal
 import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 import Mathlib.Algebra.Homology.HomologySequence
 import Mathlib.Algebra.Homology.HomologySequenceLemmas

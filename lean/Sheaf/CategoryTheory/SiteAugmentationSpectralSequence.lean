@@ -6,7 +6,8 @@ Authors: SHEAF group Q12
 module
 
 public import Sheaf.TraceFormula.SiteAugmentationAcyclicCech
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 
 import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 import Sheaf.CategoryTheory.KInjectiveComputes

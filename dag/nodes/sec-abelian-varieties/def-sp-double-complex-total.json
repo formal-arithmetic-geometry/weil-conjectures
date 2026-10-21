@@ -139,7 +139,7 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-dct1934 (reviewer sub-agent of L); spot-checked: Statement checked: d_I+(-1)^p d_II matches Stacks 012Z and Mathlib (ComplexShapeSigns.lean:159 eps2(p,_)=c.eps p, TotalComplex.lean:69); d^2=0 cross-term cancellation, filtrations by subcomplexes, F^0/F^{n+1} bounds and graded pieces ((-1)^p d_II, d_I) correct; citing nodes (thm-sp-double-complex-spectral-sequences, lem-sc-boundary-cech-injective-middle, lem-sc-cech-h1-map-natural, lem-pc-grothendieck-ss-double-complex-model) use the same convention. Not a Mathlib leaf: filtrations/graded pieces absent. FIX more, RETURN less: B3 two grep mathlib_searches records falsely said no hits (HasTotal is at TotalComplex.lean:45; HomologicalComplex2 in 10 files of Algebra/Homology); corrected results/verdicts. Second reading missed this.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.DoubleComplexTotal",
+  "module": "WeilConjectures.CategoryTheory.DoubleComplexTotal",
   "declaration": "HomologicalComplex₂.firstFiltration",
   "declarations": [
    "HomologicalComplex₂",
@@ -167,13 +167,13 @@
    "HomologicalComplex₂.secondFiltration_finite",
    "HomologicalComplex₂.secondFiltration_graded"
   ],
-  "file": "lean/Sheaf/CategoryTheory/DoubleComplexTotal.lean",
-  "statement": "def firstFiltration (n : ℤ) : DecreasingFiltration ((K.total (ComplexShape.up ℤ)).X n)",
+  "file": "lean/WeilConjectures/CategoryTheory/DoubleComplexTotal.lean",
+  "statement": "noncomputable def firstFiltration (n : ℤ) : PBCDecreasingFiltration ((K.total (ComplexShape.up ℤ)).X n)",
   "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-11",
-  "existing": false,
-  "note": "Mixed record required by reviewer R-dct0742: the first ten declarations are existing Mathlib declarations, not declarations of the delivered module. HomologicalComplex₂ (Mathlib.Algebra.Homology.HomologicalBicomplex) with both shapes up ℤ is exactly the commuting double complex; columns are K.X p and rows K.flip.X q. HomologicalComplex₂.total/ιTotal/ιTotalOrZero (Mathlib.Algebra.Homology.TotalComplex) are reused directly. TotalComplexShape is the actual global class name (not ComplexShape.TotalComplexShape); ComplexShape.ε₂ is in Mathlib.Algebra.Homology.ComplexShapeSigns. Its TensorSigns instance at lines 182-192 and total-shape instance at 156-159 give ε₁=1 and ε₂(p,q)=p.negOnePow=(-1)^p. HomologicalComplex.homology/homologyFunctor are in Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex; Functor.mapHomologicalComplex is in Mathlib.Algebra.Homology.Additive. First quadrant is the Prop hypothesis ∀ p q : ℤ, p < 0 ∨ q < 0 → IsZero ((K.X p).X q); hasTotal_of_firstQuadrant derives the diagonal coproduct existence, so it is not extra input. The source up ℕ version and hasTotal_up_nat are in WeilConjectures.Mathlib.Algebra.Homology.TotalComplex, and use the same signs; restricting an integer first-quadrant bicomplex to nonnegative indices, or extending a natural-indexed bicomplex by zero, gives the forms used by the spectral-sequence citer. Only firstFiltration and secondFiltration are new construction data; other new declarations are theorem statements with sorry."
+  "by": "S2",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Retirement S2, 2026-10-21: the duplicate Sheaf.CategoryTheory.DoubleComplexTotal is withdrawn in favour of the fully proved adopted source twin. The first ten declarations in this mixed record remain existing Mathlib declarations. The remaining declarations are now provided by WeilConjectures.CategoryTheory.DoubleComplexTotal, with exactly the same finite sums of image subobjects, first-quadrant hypotheses, subcomplex restrictions, bounds, canonical graded-piece isomorphisms and signed differentials. The source packages firstFiltration and secondFiltration as PBCDecreasingFiltration rather than the official DecreasingFiltration; their step subobjects and cokernels are definitionally identical. All active direct consumers use those steps and retain their declaration text and proofs. CanonicalFiltration is explicitly imported wherever the withdrawn module exposed its compatibility API. No mathematical dependency or unit route is removed."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -184,14 +184,14 @@
   "note": "Abelian C; K : HomologicalComplex2 (up Z)(up Z) recorded with total/iTotalOrZero/eps2=(-1)^p checked in ComplexShapeSigns; first quadrant as IsZero Prop hK; F'/F'' step p = sup over Icc p n of images of iTotalOrZero (i,n-i)/(n-i,i), antitone; subcomplex lifts of total d; step0=top, step(n+1)=bot, Tot^n=0 for n<0; graded via canonical lift of iTotalOrZero and gradedPiece's cokernel.pi, differential (-1)^p d_II resp. d_I, delta^2=0; all R-dct0742 points"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F2",
-  "result": "pass",
-  "landing": "20261012T085236-L-13531",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-890d5",
+  "group": "S2",
+  "result": "fix",
+  "landing": "20261021T061643-L-1806495",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf.CategoryTheory.DoubleComplexTotal vs adopted twin WeilConjectures.CategoryTheory.DoubleComplexTotal (identical statements, PBCDecreasingFiltration packaging); 16 import-only consumer migrations, node lean record and change record Users vs import graph and computed users; whole 20-module chain incl. SmartTruncationDecalageTower, AcyclicCechEdgeCompatibility and RingedSiteCechRefinementSquare compiled in sandbox"
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

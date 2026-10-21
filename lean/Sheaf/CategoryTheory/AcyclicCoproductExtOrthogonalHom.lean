@@ -18,7 +18,7 @@ import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.CategoryTheory.DoubleComplexTotal
+import WeilConjectures.CategoryTheory.DoubleComplexTotal
 import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 import Sheaf.CategoryTheory.FirstQuadrantRowCollapse
 

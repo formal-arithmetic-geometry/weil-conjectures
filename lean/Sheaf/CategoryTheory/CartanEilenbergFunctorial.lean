@@ -5,7 +5,8 @@ Authors: SHEAF group K1
 -/
 module
 
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 import WeilConjectures.CategoryTheory.CartanEilenbergAugmentedComparison

@@ -6,10 +6,11 @@ Authors: SHEAF group G4
 module
 
 public import Sheaf.CategoryTheory.FilteredComplexDecalageTower
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import all Sheaf.CategoryTheory.DoubleComplexTotal
+import all WeilConjectures.CategoryTheory.DoubleComplexTotal
 import all WeilConjectures.Algebra.Homology.UpperTruncationStepQuotient
 
 /-! # Horizontal smart truncations map into decalage

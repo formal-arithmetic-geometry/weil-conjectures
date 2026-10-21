@@ -5,7 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.CategoryTheory.SiteCechComplex
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
 

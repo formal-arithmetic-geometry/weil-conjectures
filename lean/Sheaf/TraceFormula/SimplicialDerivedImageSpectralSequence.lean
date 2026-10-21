@@ -20,7 +20,7 @@ public import Mathlib.CategoryTheory.Functor.Currying
 import Sheaf.AlgebraicGeometry.TotalSimplicialEtaleSite
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
-import Sheaf.CategoryTheory.DoubleComplexTotal
+import WeilConjectures.CategoryTheory.DoubleComplexTotal
 import Sheaf.CategoryTheory.KInjectiveComputes
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.CategoryTheory.RingedSiteModules

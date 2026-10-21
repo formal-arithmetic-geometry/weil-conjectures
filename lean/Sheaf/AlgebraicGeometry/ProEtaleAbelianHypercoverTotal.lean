@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 public import Mathlib.Algebra.Homology.Embedding.Extend
-public import Sheaf.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.DoubleComplexTotal
+public import WeilConjectures.CategoryTheory.CanonicalFiltration
 public import Mathlib.CategoryTheory.Preadditive.FunctorCategory
 public import Mathlib.Algebra.Category.Grp.AB
 import Sheaf.AlgebraicGeometry.ProEtaleAbelianEvaluationColimits
