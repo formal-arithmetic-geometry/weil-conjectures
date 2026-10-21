@@ -22077,3 +22077,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:08 L: returned deliver/NE/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer RETURN: A6/A7/B10, superseded, same content re-pushed. The item's stage-3 Lean landed after the human re-split note: svc.log l.7)
 - 10:09 L: merged deliver/NP/def-sfb-tensor-symmetry-pure-equation (reviewer FIX; first push; new nodes: 0)
 - 10:09 L: returned deliver/Q08/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: A6/A7/B10/G4: superseded by the live Lean closure; this is the 6th push. Earlier heads: 34c7d1f PASS refused at landing;)
+- 10:09 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
