@@ -20108,3 +20108,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: merged deliver/Q03/lem-cbc-derived-constant-tower-normalization (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: merged deliver/Q68/lem-sfb-normalized-immersion-comparison-coherence (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: merged deliver/Q69/lem-sfb-normed-coefficient-realization (reviewer PASS; first push; new nodes: 0)
+- 2026-10-21T03:59:31Z L: superseded stage-1 delivery Q47/lem-sfb-coefficient-push-filtered-legs at fab024268a29d3b4269595a032ffbbb4fc304563; current completion retained; packet archived at refs/superseded/Q47/lem-sfb-coefficient-push-filtered-legs/fab024268a29d3b4269595a032ffbbb4fc304563; stale return retired.
