@@ -17,9 +17,122 @@
   "def-weil-pbc-category-colimit",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout in the fixed universe. The category $\\mathcal M$ has all the required small colimits and exact filtered colimits by [lem-pur-ringed-site-grothendieck-abelian]. For a complex diagram $K$ its termwise colimit is a complex: the induced differentials have square zero because their composites with every colimit leg do. A cocone of complexes factors uniquely degreewise, and these degreewise factorizations commute with the differentials by the same cocone equations. Thus the termwise construction is indeed the colimit complex. This uses smallness of the site and of $I$, but no boundedness.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits): exact filtered colimits of module sheaves"
+   }
+  },
+  {
+   "text": "Write $Z_i^q=\\ker(d_i^q)$ and $B_i^q=\\operatorname{im}(d_i^{q-1})$. These form diagrams since the transition chain maps commute with $d$. Apply the exact colimit functor of [lem-pur-ringed-site-grothendieck-abelian] to $0\\to Z_i^q\\to K_i^q\\to B_i^{q+1}\\to0$ and to the monomorphisms $B_i^{q+1}\\to K_i^{q+1}$. The resulting factorization of $d_\\infty^q$ identifies its kernel with $\\varinjlim Z_i^q$ and its image with $\\varinjlim B_i^{q+1}$. Now apply that same exact functor to $0\\to B_i^q\\to Z_i^q\\to H^q(K_i)\\to0$. The quotient of the identified cycles by the identified boundaries is $\\varinjlim H^q(K_i)$, proving the asserted isomorphism by the definition of cohomology [def-weil-abstract-derived-category]. Denote its inverse by $\\theta_K^q:\\varinjlim H^q(K_i)\\xrightarrow{\\sim}H^q(K_\\infty)$. Every identification was induced by the kernel inclusion or the quotient map, so it commutes with maps of diagrams and satisfies $\\theta_K^q\\circ\\iota_i=H^q(K_i\\to K_\\infty)$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits), applied to cycles and boundaries"
+   }
+  },
+  {
+   "text": "For an objectwise quasi-isomorphism $K_i\\to L_i$, the maps $H^q(K_i)\\to H^q(L_i)$ are isomorphisms [def-weil-abstract-derived-category]. Their inverses form a natural transformation, so their colimit is an isomorphism. Step 2 then shows that $K_\\infty\\to L_\\infty$ is a quasi-isomorphism. If all $H^q(K_i)$ vanish for $q<a$, step 2 gives $H^q(K_\\infty)=\\varinjlim 0=0$ for $q<a$. The bound $a$ must be common to the diagram; no bound was used to construct $\\theta$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits), consequences for cohomology"
+   }
+  },
+  {
+   "text": "Put $J_i=I(N_i)$, $J_\\infty=I(N_\\infty)$, and $t_i=I(N_i\\to N_\\infty)$, using the fixed replacement functor [def-sfb-internal-hom-strict-models, def-pur-derived-internal-hom]. For a source complex $P$, set $F(P)=\\varinjlim_i\\mathcal Hom^\\bullet(P,J_i)$ and $G(P)=\\mathcal Hom^\\bullet(P,J_\\infty)$. Postcomposition by $t_i$ induces the chain map $a_P:F(P)\\to G(P)$. For any source chain map $f:P\\to P'$, pre- and postcomposition commute componentwise [def-pur-hom-complex], hence $a_P F(f)=G(f)a_{P'}$. A source quasi-isomorphism induces quasi-isomorphisms of all these Hom complexes by [lem-pur-rhom-well-defined-universes], applied with the identity on each K-injective target. Step 3 makes $F(f)$ a quasi-isomorphism as well. Consequently $QF,QG$ and $Qa$ descend to the source derived category by its localization property [def-weil-abstract-derived-category]. Naturality for an inverted quasi-isomorphism follows by multiplying the chain-map naturality equality by its two inverses; hence the equality holds for every derived source morphism. The descended component $Qa_P$ is precisely $\\alpha_P$ from the statement, with no assertion that the colimit of K-injectives is K-injective.",
+   "uses": [
+    "def-sfb-internal-hom-strict-models",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "lem-pur-rhom-well-defined-universes",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A95 (lemma-RHom-well-defined) and 08J7 (section-internal-hom); naturality of the fixed target cocone"
+   }
+  },
+  {
+   "text": "For a target complex $J$, define $s_{P,J}:\\mathcal Hom^\\bullet(P[1],J)\\to\\mathcal Hom^\\bullet(P,J)[-1]$ by $(s^n f)^p=(-1)^n f^{p-1}$. This is an invertible product reindexing. Substituting $d_{P[1]}=-d_P$ into the Hom differential [def-pur-hom-complex] gives, on both sides of $s^{n+1}d=d s^n$, the component $(-1)^{n+1}d_J f^{p-1}-f^p d_P^p$. Thus it is a chain isomorphism with exactly the stipulated sign. For a target chain map $t:J\\to J'$, both $s_{P,J'}\\mathcal Hom(P[1],t)$ and $\\mathcal Hom(P,t)[-1]s_{P,J}$ send $f$ in degree $n$ to $((-1)^n t f^{p-1})_p$. The same identity holds after taking the termwise colimit: shifts merely relabel degrees and multiply differentials by $-1$, so commute with this colimit. In particular $s_\\infty a_{P[1]}=a_P[-1](\\varinjlim_i s_i)$. These equalities also descend through inverted source quasi-isomorphisms as in step 4. This proves the required source-shift compatibility of $\\alpha$, without commuting any infinite product with a colimit.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 0A8X (section-hom-complexes), explicit signed source shift for Tag 08JC (lemma-RHom-triangulated)"
+   }
+  },
+  {
+   "text": "For each target $N_i$, and for $N_\\infty$, [lem-weil-pbc-ringed-internal-hom-exact-restriction] sends the given distinguished triangle contravariantly to a distinguished triangle of derived internal Homs, with the signed shift identification. Applying [lem-sf-derived-homology-long-exact] gives the second displayed row and the corresponding row before colimiting for each $i$. More explicitly, the arrow preceding $H^q(H(C,N))$ is the composite $H^{q-1}(H(A,N))\\cong H^q(H(A[1],N))\\xrightarrow{H^q(H(w,N))}H^q(H(C,N))$, where the first isomorphism is induced by the inverse of $s$ from step 5. The arrows at $C,B,A$ are precomposition by $v,u,w$, respectively, with the same formula translated in degree for $w$. This realizes the arrows prescribed in the statement. A rotation convention that negates a boundary negates it for every target; multiplication by $-1$ does not change its image or kernel, so exactness holds with the stated normalization in every integer degree.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated); derived.tex Tag 05RS (lemma-cohomology-homological)"
+   }
+  },
+  {
+   "text": "For each $i$, write $r_{X,i}=H(X,N_i\\to N_\\infty)$. The precomposition equalities of step 4 for $u,v,w$ give $r_{B,i}H(v,N_i)=H(v,N_\\infty)r_{C,i}$ and $r_{A,i}H(u,N_i)=H(u,N_\\infty)r_{B,i}$, and also $r_{C,i}H(w,N_i)=H(w,N_\\infty)r_{A[1],i}$. By step 5, $s_\\infty r_{A[1],i}=r_{A,i}[-1]s_i$. Composing the latter two equalities with $s_i^{-1}$ gives the connecting square after the identification $H^q(H(A[1],N))=H^{q-1}(H(A,N))$. These are morphisms of the reversed Hom triangles; equivalently their cohomology ladders are the morphisms of long exact sequences in [lem-weil-pbc-derived-cohomology-ladder]. This verifies the connecting square by its actual precomposition and shift maps. The same argument for a transition $N_i\\to N_j$ makes the rows into an $I$-diagram of exact sequences. All equalities hold for the derived $w$, by the localization argument of step 4.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "lem-weil-pbc-derived-cohomology-ladder"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), target naturality; derived.tex Tag 05RS (lemma-cohomology-homological)"
+   }
+  },
+  {
+   "text": "Take the colimit of the exact rows of step 7. Exactness of filtered colimits [lem-pur-ringed-site-grothendieck-abelian] gives the first displayed row: at each spot, factor the preceding arrow through its image and apply exactness to $0\\to\\operatorname{im}(d_{k-1})\\to E_k\\to\\operatorname{im}(d_k)\\to0$. The resulting kernel equals the preceding image, just as in step 2. For $K_i=\\mathcal Hom^\\bullet(X,J_i)$, naturality of $\\theta$ from step 2 shows that $c_X^q=H^q(\\alpha_X)\\circ\\theta_K^q$ has $c_X^q\\circ\\iota_i=H^q(r_{X,i})$. Thus the universal colimit maps of the stagewise ladders are exactly the asserted vertical arrows under the cohomology-colimit identification. For each horizontal arrow, composing its proposed square with every $\\iota_i$ gives the commuting square of step 7, including its specified signed connecting square. The universal property of the colimit makes the two composites equal. Varying $q$ proves every square and every exact spot of the infinite ladder. Only finite exact sequences were colimited at each spot; there is no boundedness or continuity hypothesis.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits), applied to the natural long exact sequences of Tag 08JC"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sfb-internal-hom-strict-models",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-pur-rhom-well-defined-universes",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-cohomology-ladder"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JC (lemma-RHom-triangulated), with the omitted target-naturality details written explicitly; sites-modules.tex Tag 03DB (lemma-limits-colimits) and derived.tex Tag 05RS (lemma-cohomology-homological)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +175,52 @@
    "results": "Hits read: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, DerivedCategory.HomologySequence.exact₃, CochainComplex.mappingCone.homologySequenceδ_triangleh, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc",
    "date": "2026-10-21",
    "verdict": "no match: the results give general shifts, colimits or cohomology infrastructure, not the canonical internal-sheaf-Hom comparison with the asserted transport and boundary identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "(internalHom|RHom).*(colimit|colim)|(colimit|colim).*(internalHom|RHom)",
+   "results": "Returned 19 hits; Mathlib/Geometry/RingedSpace/LocallyRingedSpace/HasColimits.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Equalizers.lean. Read generic cohomology/colimit and connecting-map candidates in their pinned source.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic exact colimit, homology and triangle naturality results do not state the canonical internal-sheaf-Hom cocone comparison with signed source shifts."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologySequence\", \"δ\"",
+   "results": "Returned 12 hits; CategoryTheory.Functor.homologySequenceδ, CategoryTheory.Functor.homologySequenceδ_naturality, CategoryTheory.Functor.homologySequenceδ_naturality_assoc, CategoryTheory.Functor.comp_homologySequenceδ, CategoryTheory.Functor.homologySequenceδ_comp, CategoryTheory.Functor.comp_homologySequenceδ_assoc, CategoryTheory.Functor.homologySequenceδ_comp_assoc, DerivedCategory.HomologySequence.δ. Read generic cohomology/colimit and connecting-map candidates in their pinned source.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic exact colimit, homology and triangle naturality results do not state the canonical internal-sheaf-Hom cocone comparison with signed source shifts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived internal sheaf Hom filtered colimit comparison commutes with the connecting maps of the source triangle long exact cohomology sequence",
+   "results": "Returned 8 hits; CategoryTheory.Limits.colimitLimitIso, DerivedCategory.HomologySequence.δ.congr_simp, DerivedCategory.HomologySequence.δ, DerivedCategory.HomologySequence.comp_δ, instPreservesHomologyFunctorAddCommGrpCatColim, HomologicalComplex.instHasFilteredColimitsOfSize, DerivedCategory.HomologySequence.δ_comp_assoc, HomologicalComplex.hasExactColimitsOfShape. Read generic cohomology/colimit and connecting-map candidates in their pinned source.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic exact colimit, homology and triangle naturality results do not state the canonical internal-sheaf-Hom cocone comparison with signed source shifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom source triangle naturality of long exact cohomology under a filtered colimit of target complexes",
+   "results": "Returned 8 hits; CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc, CategoryTheory.Functor.comp_homologySequenceδ_assoc, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, CategoryTheory.Functor.homologySequence_comp_assoc, CochainComplex.mappingCone.homologySequenceδ_triangleh, CategoryTheory.Functor.comp_homologySequenceδ. Read generic cohomology/colimit and connecting-map candidates in their pinned source.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic exact colimit, homology and triangle naturality results do not state the canonical internal-sheaf-Hom cocone comparison with signed source shifts."
+  },
+  {
+   "tool": "grep",
+   "query": "(homologySequenceδ_naturality|mapHomologyIso|preservesHomologyOfExact|hasExactColimitsOfShape)",
+   "results": "Returned 25 hits; Mathlib/CategoryTheory/ObjectProperty/FunctorCategory/PreservesLimits.lean, Mathlib/Condensed/AB.lean, Mathlib/Condensed/AB.lean, Mathlib/Condensed/AB.lean, Mathlib/Condensed/AB.lean, Mathlib/Topology/Sheaves/Abelian.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/CategoryTheory/Sites/Point/Basic.lean. Read generic cohomology/colimit and connecting-map candidates in their pinned source.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic exact colimit, homology and triangle naturality results do not state the canonical internal-sheaf-Hom cocone comparison with signed source shifts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact filtered colimits of sheaf module complexes preserve cohomology and the natural derived internal Hom triangle connecting squares",
+   "results": "Returned 8 hits; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Functor.homologySequence_exact₂, CategoryTheory.Functor.homologySequence_exact₃, CategoryTheory.Functor.homologySequence_exact₁. Read generic cohomology/colimit and connecting-map candidates in their pinned source.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic exact colimit, homology and triangle naturality results do not state the canonical internal-sheaf-Hom cocone comparison with signed source shifts."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-rhom-continuity-triangle-closure",
@@ -85,5 +240,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-rhom-colimit-cohomology-ladder",
+  "worker": "stage1",
+  "summary": "Eight steps, no new nodes and no statement change. Reused the small-ringed-site Grothendieck lemma for exact colimits and the existing internal-Hom exactness and derived-cohomology lemmas. Wrote cycles/boundaries, quasi-isomorphism preservation, localization in the source, the signed shift formula, and all connecting-square identifications explicitly. No infinite-product/colimit interchange or bound on the complexes is used.",
+  "blueprint": "Realizes the final inverting-ell and finite-coefficient-colimit sentence of lem-sfb-dc-hom-preserves.proof.md, through the continuity triangle-closure extraction recorded in blueprint.from.place; this is its formal cohomology-ladder input.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic exact filtered colimits in module sheaves; the restricted-functors unit supplies no ambient sheaf exactness theorem."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined-universes",
+    "why": "Generic source quasi-isomorphism invariance into K-injective targets, needed to localize the cocone comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic unbounded ringed-site internal-Hom exactness with signed shifts; no geometric base-change conclusion is used."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic derived cohomology exact sequence, already a Mathlib leaf."
+   },
+   {
+    "node": "lem-weil-pbc-derived-cohomology-ladder",
+    "why": "Generic cohomology naturality for triangle morphisms, already a Mathlib leaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pur-rhom-well-defined-universes",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-cohomology-ladder"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-ef9828c28",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-ef9828c28 (reviewer sub-agent of L); spot-checked: The item statement is unchanged from the base (diffed against the live clone, where the item is still unsplit; created by Q56 in the re-split of lem-sfb-rhom-continuity-triangle-closure). The repair note in coord/repair-notes is for that parent, not this item, so this is an ordinary first split of an empty proof. The item is not on the route-pivot-dropped list. No new nodes; 8 steps, each under 2000 characters. Sources are Stacks only: 08JC (sites-cohomology l.8948), 03DB (sites-modules l.1358), 05RS (derived l.3618); all checked, no SGA. Steps 1–3: exactness of filtered colimits from lem-pur-ringed-site-grothendieck-abelian (same hypotheses) gives the colimit complex, ker d_∞ = colim Z and im d_∞ = colim B, so H^q(colim) = colim H^q, naturally, with θ∘ι_i = H^q(leg). Quasi-isomorphisms and common lower bounds are preserved. Step 4: source quasi-isomorphism invariance of the internal Hom complexes into K-injective targets comes from lem-pur-rhom-well-defined-universes with s = id, then step 3 for the colimit, so F, G and a descend through the localisation; no colimit of K-injectives is used. Step 5: I rechecked by hand the sign of s, (s^n f)^p = (−1)^n f^{p−1}, against the def-pur-hom-complex differential and d_{K[−1]} = −d_K; both sides give (−1)^{n+1} d_J f^{p−1} − f^p d_P^p, and s commutes with postcomposition and with termwise colimits. Step 6: rows exact by lem-weil-pbc-ringed-internal-hom-exact-restriction plus the long exact sequence. The triangle lemma does not specify its shift isomorphism, but changing the connecting arrow by any isomorphism of its source leaves kernel and image unchanged, so exactness holds with the s-normalised boundary (advisory: the worker only argued the ±1 case). Steps 7–8: stagewise squares are checked directly, the filtered colimit of exact rows is exact, c_X∘ι_i = H^q(r_{X,i}), and testing each square on the legs gives commutativity, including the connecting square. Edge cases checked: one-object site, constant diagram, terminal-object index, split triangle with w = 0, and K_i = (R→R, ·i) over divisibility. Duplicate search (rg -L) found only étale or forgetful colimit nodes, nothing for the ringed-site complex statement. All five tool_uses are generic and accepted. No changes."
  }
 }
