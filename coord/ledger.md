@@ -20119,3 +20119,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:00 L: merged deliver/Q34/lem-sfb-bounded-bifunctor-devissage (stage 2; reviewer PASS; parallel immutable checks)
 - 04:00 L: merged deliver/N6/lem-sfb-internal-hom-localization-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 04:00 L: returned deliver/NF/lem-pe-comparison-etale-slice-abelian-pullback (reviewer RETURN: L: independent stage-2 immutable head 5f16e096d875: H3: third conjunct quantifies existentially over rhoE : Etale.upperS)
+- 2026-10-21T04:00:17Z L: superseded stage-1 delivery Q28/lem-sp-proetale-direct-image-scalar-cocycle at 2f0f090ee7674b7de7395d732c9536952d50e248; current completion retained; packet archived at refs/superseded/Q28/lem-sp-proetale-direct-image-scalar-cocycle/2f0f090ee7674b7de7395d732c9536952d50e248; stale return retired.
