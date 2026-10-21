@@ -46,6 +46,44 @@ theorem topologicalKrullDim_subscheme_of_isInvertible
     (d : ℕ) (hd : 1 ≤ d) (hX : topologicalKrullDim X = (d : WithBot ℕ∞))
     (J : X.IdealSheafData) (hJ : J.IsInvertible) [Nonempty J.subscheme] :
     topologicalKrullDim J.subscheme = ((d - 1 : ℕ) : WithBot ℕ∞) := by
-  sorry
+  classical
+  have hlocal (x : J.subscheme) :
+      ∃ V : J.subscheme.Opens, x ∈ V ∧
+        topologicalKrullDim V = ((d - 1 : ℕ) : WithBot ℕ∞) := by
+    obtain ⟨U, hxU, a, ha, hgen⟩ := hJ (J.subschemeι x)
+    have : Nonempty U.1 := ⟨⟨J.subschemeι x, hxU⟩⟩
+    let g := J.subschemeCover.f U
+    have hrange : g.opensRange = J.subschemeι ⁻¹ᵁ U.1 :=
+      J.opensRange_subschemeCover_map U
+    have hxg : x ∈ g.opensRange := by rw [hrange]; exact hxU
+    obtain ⟨z, hz⟩ := hxg
+    have hI : J.ideal U ≠ ⊤ :=
+      Ideal.Quotient.nontrivial_iff.mp (PrimeSpectrum.nonempty_iff_nontrivial.mp ⟨z⟩)
+    have hna : ¬ IsUnit a := fun hu ↦ hI (hgen.trans (Ideal.span_singleton_eq_top.mpr hu))
+    let := ((f.appLE ⊤ U.1 (by simp)).hom.comp
+      (Scheme.ΓSpecIso (.of k)).inv.hom).toAlgebra
+    have := U.2.algebra_finiteType_of_field f
+    have hdrop := effective_cartier_affine_dimension_drop k Γ(X, U.1) a
+      (nonZeroDivisors.ne_zero ha) hna
+    have hspec : topologicalKrullDim (Spec (.of Γ(X, U.1))) = (d : WithBot ℕ∞) := by
+      change topologicalKrullDim (PrimeSpectrum Γ(X, U.1)) = _
+      rw [PrimeSpectrum.topologicalKrullDim_eq_ringKrullDim, ← U.2.topologicalKrullDim_eq]
+      exact (topologicalKrullDim_opens_eq f U.1).trans hX
+    rw [hspec] at hdrop
+    have hdim : topologicalKrullDim (Spec (.of (Γ(X, U.1) ⧸ J.ideal U))) =
+        ((d - 1 : ℕ) : WithBot ℕ∞) := by
+      rw [hgen]
+      apply ENat.WithBot.add_one_cancel.mp
+      rw [hdrop]
+      exact_mod_cast (Nat.sub_add_cancel hd).symm
+    refine ⟨g.opensRange, ⟨z, hz⟩, ?_⟩
+    exact g.isOpenEmbedding.isEmbedding.topologicalKrullDim_eq_range.symm.trans hdim
+  choose V hxV hdim using hlocal
+  refine le_antisymm ?_ ?_
+  · refine topologicalKrullDim_le_of_iSup_eq_top V ?_ _ fun x ↦ (hdim x).le
+    exact eq_top_iff.mpr fun x _ ↦ TopologicalSpace.Opens.mem_iSup.mpr ⟨x, hxV x⟩
+  · obtain ⟨x⟩ := ‹Nonempty J.subscheme›
+    rw [← hdim x]
+    exact topologicalKrullDim_subspace_le J.subscheme (V x)
 
 end AlgebraicGeometry
