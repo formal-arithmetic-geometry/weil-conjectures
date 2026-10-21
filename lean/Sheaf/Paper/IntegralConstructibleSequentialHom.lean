@@ -13,7 +13,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.CategoryTheory.Category.ULift
-public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import all Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Bounded-below sequential Hom continuity for integral constructible complexes -/
 
