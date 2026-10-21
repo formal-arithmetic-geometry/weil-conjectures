@@ -240,7 +240,13 @@ private theorem cohomology_restriction_naturality
       ((U.filtration.cohomologyImage n).step p).arrow ≫
         HomologicalComplex.homologyMap f.hom n from
       Classical.choose_spec ((cohomologyFilteredMap f n).preserves p)]
-  dsimp only [DecreasingFiltration.cohomologyImage, DecreasingFiltration.step]
+  change factorThruImageSubobject
+      (HomologicalComplex.homologyMap (U.filtration.step p).arrow n) ≫
+        (imageSubobject (HomologicalComplex.homologyMap (U.filtration.step p).arrow n)).arrow ≫
+          HomologicalComplex.homologyMap f.hom n =
+    (HomologicalComplex.homologyMap s n ≫ factorThruImageSubobject
+      (HomologicalComplex.homologyMap (W.filtration.step p).arrow n)) ≫
+        (imageSubobject (HomologicalComplex.homologyMap (W.filtration.step p).arrow n)).arrow
   rw [← Category.assoc, imageSubobject_arrow_comp, Category.assoc,
     imageSubobject_arrow_comp, ← HomologicalComplex.homologyMap_comp,
     ← HomologicalComplex.homologyMap_comp, hs]
