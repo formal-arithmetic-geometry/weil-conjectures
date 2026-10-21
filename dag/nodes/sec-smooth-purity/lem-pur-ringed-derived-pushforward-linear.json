@@ -19,80 +19,56 @@
  ],
  "proof": [
   {
-   "text": "First check the stated scalar structures on module sheaves. For $A$-modules $M,N$ and $f:M\\to N$, centrality gives $(r f)_U(a x)=s_A(r)|_U a f_U(x)=a s_A(r)|_U f_U(x)$; hence $r f$ is $A$-linear. It commutes with restrictions because both the scalar section and $f$ do. The additive and scalar axioms on each Hom group follow sectionwise from the module axioms and the unital ring map $s_A$. For composable module maps, $g\\circ(r f)=r(g\\circ f)=(r g)\\circ f$, since $g$ is $A$-linear. Thus these Hom groups give the stated $R$-linear category; the same calculation with $B$ gives its $R$-linear category. Local centrality, rather than commutativity of $R$ alone, is what makes $r f$ a module morphism.",
+   "text": "For each module M construct the endomorphism multiplying its U-sections by s(r)_U. Centrality makes it module-linear, and compatibility of the section with restrictions makes it natural. The module axioms and ring homomorphism s give R → End(M). Restrict the canonical End(N)-module structure on Hom(M,N) along this map. Naturality of scalar endomorphisms proves both scalar-composition laws. This constructs LA and LB with exactly the required evaluation formulas.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-weil-linear-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Tags 09MJ (definition-linear-category), 09MK (definition-functor-linear-categories); elementary sectionwise verification of the prescribed central action"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $F=u_*:\\operatorname{Mod}(B)\\to\\operatorname{Mod}(A)$. Its underlying additive sheaf functor and $A$-action are those in the ringed-topos morphism definition. A generalized element $x$ of $FN$ has an adjoint transpose $\\widetilde x$ in $N$. By that action formula and the compatibility hypothesis, the transpose of $s_A(r)x$ is $c(u^{-1}s_A(r))\\widetilde x=s_B(r)\\widetilde x$. Naturality of the sheaf adjunction in $N$ therefore identifies the transposes of $F(r f)(x)$ and $s_A(r)F(f)(x)$ for every module morphism $f$. They are equal, so $F(r f)=rF(f)$. The given additive direct image also has $F(f+g)=F(f)+F(g)$. This proves $R$-linearity of the underived module functor without assuming that the geometric morphism comes from a functor between the sites.",
+   "text": "For the underlying set sheaf T of u_*M, let z₀:T→T be the zero generalized element. Apply module_linear with the constant unit section and x=y=z=z₀. Preservation of one gives transpose(z₀)=transpose(z₀)+transpose(z₀), so cancellation gives transpose(z₀)=0. Next apply module_linear with the constant section s_A(r), x=id, y=z₀ and z=multiplication by s_A(r). Compatibility identifies the scalar after inverse image with s_B(r). Naturality of the underlying comparison and of the adjunction identifies u_*(r id_M) with r id_(u_*M). The scalar-identity criterion for linear functors proves underived linearity; additivity is a field of the ringed-topos morphism.",
    "uses": [
     "def-weil-pbc-ringed-topos-morphism",
     "def-weil-linear-functor"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D6 (definition-pushforward); the adjoint-transpose action formula in def-weil-pbc-ringed-topos-morphism"
-   }
+   "elementary": true
   },
   {
-   "text": "The smallness hypothesis makes $\\operatorname{Mod}(B)$ Grothendieck abelian by the arbitrary-ring-sheaf theorem. The K-injective existence theorem therefore supplies a quasi-isomorphism $a:N\\to I$ for every complex $N$, with $I$ K-injective. Apply $F$ degreewise. Its additivity sends a homotopy equation $f-g=dh+hd$ to the same equation for $Ff,Fg,Fh$ and identifies the cone differential $\\left(\\begin{smallmatrix}d&f\\\\0&-d\\end{smallmatrix}\\right)$ with the corresponding differential after $F$; finite biproducts are preserved by an additive functor. Thus $Q_A F:K(B)\\to D(A)$ respects shifts and cone triangles, hence is exact as a functor of triangulated categories. The total-derived theorem applies to this functor and gives the canonical $RF=Ru_*$ and comparison $\\eta_I:Q_A(FI)\\xrightarrow{\\sim}RF(Q_B I)$ for K-injective $I$. Exactness here concerns cone triangles, not exactness of $F$ on module sheaves.",
+   "text": "The module category over B is Grothendieck abelian. The existing Grothendieck K-injective resolution instance gives, for every complex N, a quasi-isomorphism N→I with I K-injective. Only this part of the stronger functorial degreewise-injective resolution theorem is needed. Use this enough hypothesis in the existing canonical rightDerivedFunctorOfQuasiIsoResolutions construction.",
    "uses": [
     "lem-weil-pbc-ring-sheaves-grothendieck",
     "lem-pur-kinjective-degreewise-existence",
-    "def-weil-abstract-derived-category",
+    "def-sfb-right-derived-functor",
     "lem-weil-pbc-kinjective-total-derived"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); injectives.tex Tags 079Q (remark-existence-D), 079P (theorem-K-injective-embedding-grothendieck)"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix complexes $N,N\\prime$ and resolutions $a:N\\to I$, $b:N\\prime\\to J$. Write $c_a=\\eta_I^{-1}\\circ RF(Q_Ba)$ and $c_b=\\eta_J^{-1}\\circ RF(Q_Bb)$. For every derived morphism $h:Q_BN\\to Q_BN\\prime$, the arbitrary-resolution computation theorem gives a unique homotopy class $g:I\\to J$ satisfying $Q_Bg=(Q_Bb)\\circ h\\circ(Q_Ba)^{-1}$ and $c_b\\circ RF(h)\\circ c_a^{-1}=Q_A(Fg)$. Here $Fg$ can be computed with any chain-map representative. These are the specified derived-functor comparisons, so they compute the canonical $Ru_*$ rather than a newly chosen functor. By the linear-derived-category theorem, $Q_A,Q_B$ preserve addition and the componentwise central scalar action.",
+   "text": "Give the type of K-injective complexes the category induced by their images in the homotopy category. Let L be its inclusion followed by Qh. The Hom bijection into a K-injective target proves L is full. Resolve a chosen complex representative of each derived object; the resolution quasi-isomorphism and quotientCompQhIso show that L is essentially surjective.",
    "uses": [
-    "lem-sf-kinjective-derived-map-computation",
-    "lem-weil-linear-abelian-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined); arbitrary-resolution formula as stated in lem-sf-kinjective-derived-map-computation"
-   }
-  },
-  {
-   "text": "Use the same resolutions for two parallel derived morphisms $h,k$, represented by homotopy classes $g,t:I\\to J$ as in the preceding step. Choose chain-map representatives for $g,t$. Linearity of $Q_B$ and bilinearity of composition show that $r g$ represents $r h$ and $g+t$ represents $h+k$: for example $Q_B(r g)=r\\big((Q_Bb)h(Q_Ba)^{-1}\\big)=(Q_Bb)(r h)(Q_Ba)^{-1}$. By the comparison formula and the degreewise calculation of step 2, $$c_b RF(r h)c_a^{-1}=Q_A(F(r g))=Q_A(r Fg)=r\\big(c_b RF(h)c_a^{-1}\\big).$$ Cancel the fixed comparison isomorphisms using $R$-bilinearity of composition to obtain $RF(rh)=rRF(h)$. The identical calculation with $g+t$ gives $c_b RF(h+k)c_a^{-1}=Q_A(Fg)+Q_A(Ft)=c_b(RF(h)+RF(k))c_a^{-1}$, hence $RF(h+k)=RF(h)+RF(k)$. All derived objects admit complex representatives by the definition of $D(B)$ (or its essentially surjective localization); conjugation by any presentation isomorphisms preserves these two equalities by bilinearity. Thus the conclusion holds for every pair of derived objects.",
-   "uses": [
-    "lem-sf-kinjective-derived-map-computation",
-    "lem-weil-linear-abelian-derived-category",
-    "def-weil-linear-category",
+    "lem-weil-pbc-kinjective-hom-derived",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I and 070Y, via the cited arbitrary-resolution formula; elementary linear calculation with that formula"
-   }
+   "elementary": true
   },
   {
-   "text": "The two equalities just proved say that $Ru_*$ is an $R$-linear functor. On a complex $N$, multiplication by the actual global section $s_B(r)$ is the chain endomorphism $r\\operatorname{id}_N$, whose derived image is $r\\operatorname{id}_{Q_BN}$ because $Q_B$ is linear. Consequently $Ru_*(r\\operatorname{id})=r\\operatorname{id}_{Ru_*N}$; on the representative $F I$ this is multiplication by the actual section $s_A(r)$, by step 2. This proves also the final scalar-endomorphism assertion.",
+   "text": "The derived unit, restricted to K-injective complexes, is an isomorphism from the restriction of F.mapHomotopyCategory ⋙ Qh to L ⋙ RF. The former is additive and R-linear by the underived scalar calculation and the linearity of the homotopy and derived localizations. Transport these properties along the unit isomorphism, then descend them along the full essentially surjective L using Mathlib Functor.additive_of_full_essSurj_comp and Functor.linear_of_full_essSurj_comp. This proves additivity and linearity of exactly the canonical RF, without choosing any new derived functor or using exactness of the module direct image.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-linear-abelian-derived-category",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply linearity to r times the identity and use preservation of identities. The evaluation formulas defining LA and LB identify these scalar maps with multiplication by the actual compatible sections.",
    "uses": [
     "def-weil-linear-functor",
     "lem-weil-linear-abelian-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Tag 09MK (definition-functor-linear-categories); scalar endomorphisms by the induced linear structures"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -102,15 +78,16 @@
   "def-weil-linear-functor",
   "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-pur-kinjective-degreewise-existence",
-  "def-weil-abstract-derived-category",
+  "def-sfb-right-derived-functor",
   "lem-weil-pbc-kinjective-total-derived",
-  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category",
   "lem-weil-linear-abelian-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 070I, 070Y, 070K, with the central scalar action of sites-modules.tex Tag 03D6 and dga.tex Tags 09MJ–09MK. The scalar computation is written here, not asserted verbatim by Tag 070K."
+  "place": "Tags 070I, 070Y and 070K; sites-modules.tex Tag 03D6; dga.tex Tags 09MJ and 09MK. B9 implements the scalar calculation and transports additivity and linearity through the derived unit restricted to the full essentially surjective category of K-injectives."
  },
  "mathlib_searches": [
   {
@@ -304,5 +281,15 @@
   "group": "NV",
   "result": "pass",
   "note": "Only lean record + new module RingedDerivedPushforwardLinear.lean (one sorry theorem, no defs); statement verbatim. Clause check: RingedToposMorphism B A direction (inverse Sh(C)->Sh(D), ringMap u^-1A->B, modules Mod B->Mod A) matches; sA/sB into RingCat.sectionsSubring = compatible global sections; centralA/B kept, no commutativity; generalized-element `compatible` is equivalent to c(u^-1 sA r)=sB r via terminal sheaf + leftExact; LA/LB pinned sectionwise; D(A),D(B) linear via DerivedCategory.instLinear; Ru_* = u.modules.rightDerivedFunctorOfQuasiIsoResolutions enough (Classical.choose of stmt_dep exists_rightDerived_of_enough_isKInjective), enough in conclusion, no exactness; conclusion Additive ∧ Functor.Linear ∧ r•𝟙 preservation. Edge cases R=0, r=0/1, empty sites, noncommutative coeffs covered. No duplicate. Docstrings source+blueprint+6-step plan. nt_compile --json clean 26.4 s. Advisory: def-sfb-right-derived-functor (owner of rightDerivedFunctorOfQuasiIsoResolutions) not in stmt_deps; S2 cannot change stmt_deps."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261021T100827-L-4155872",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
