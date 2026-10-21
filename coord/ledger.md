@@ -21316,3 +21316,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:45 L: merged deliver/O4/lem-sfb-flat-constant-module-scalar-mono (stage 2; reviewer PASS; parallel immutable checks)
 - 08:45 L: merged deliver/Q110/lem-weil-pbc-kinjective-fiber-triangle-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 08:45 L: merged deliver/Q58/lem-sfb-module-direct-image-open-pasting (stage 2; reviewer PASS; parallel immutable checks)
+- 08:45 L: returned deliver/Q135/lem-weil-pbc-finite-free-strict-tower-transport (reviewer RETURN: L: independent stage-2 immutable head 18784eb845a7: H2: the item adds theorem stmt_dep lem-weil-pbc-ringed-strict-tower-)
