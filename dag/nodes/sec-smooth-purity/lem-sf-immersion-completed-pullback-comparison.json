@@ -22,79 +22,51 @@
  ],
  "proof": [
   {
-   "text": "Put $F=u^*$, with scalars transported through the canonical $c_u:u^{-1}B_X\\cong B_Y$. The finite projection and transition equations in [lem-weil-pbc-profinite-coefficient-inverse-image] identify this map with the structure map used in completed pullback, and identify $F((A_n)_X)$ with $(A_n)_Y$. Apply [lem-weil-pbc-proetale-immersion-limit-preservation] with $R=B_X$, $S=B_Y$ and this ring isomorphism: $F$ is additive, exact and preserves countable products. The lemma permits arbitrary schemes and locally closed immersions; no quasi-compactness of the complementary open is required. By [lem-sf-exact-functor-derived-triangulated], termwise $F$ induces the triangulated derived functor. Exactness identifies it with $Lu^*$: applying $F$ to a quasi-isomorphism from a resolving complex is still a quasi-isomorphism.",
+   "text": "The DVR and finite-quotient perfectness lemmas check $(R,(\\varpi))$: $R$ is Noetherian, $A_1$ is additive torsion, and every $A_n$ is finite perfect. Use [def-pur-completed-coefficient-presentation-transport] for the lifted presentation. The profinite-coefficient comparison identifies $c_u$ by every finite projection. Immersion limit preservation makes $F=u^*$ exact and product-preserving; exact descent is triangulated. By [lem-pur-roos-intrinsic-completeness-equivalence], (i)$\\Rightarrow$(iv),(v), complete $K$ is intrinsically complete and its specified quotient unit $\\operatorname{comp}_K$ is invertible. The auxiliary distinct prime in that lemma can be $2$ or $3$.",
    "uses": [
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-sf-exact-functor-derived-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AA, lemma-closed-immersion (1); composition with open-slice restriction; coefficient identification as in the cited profinite-coefficient lemma"
-   }
-  },
-  {
-   "text": "Choose one K-flat representative $P\\to K$ with flat terms, and use its strict quotient tower $M_n=P\\otimes_{B_X}(A_n)_X$. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $FP$ is K-flat with flat terms. The canonical module tensor comparison [lem-weil-pbc-ringed-topoi-module-pullback-tensor] therefore gives chain isomorphisms $F(M_n)\\cong FP\\otimes_{B_Y}(A_n)_Y$, computing the asserted comparisons in $D((A_n)_Y)$. Here the scalar actions are those of Step 1, so these are finite-ring-linear maps, not just maps after forgetting scalars. Naturality of the module tensor comparison for $B_X\\to(A_n)_X$ and for every quotient $(A_m)_X\\to(A_n)_X$ ($m\\ge n$) gives commutative squares with the chain maps $p\\mapsto p\\otimes1$ and $1_P\\otimes\\rho_{m,n}$. Hence this is an isomorphism of strict quotient towers together with their maps from the constant tower. In particular it identifies the levelwise pullback tower used in [def-weil-pbc-completed-pullback].",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "def-weil-pbc-completed-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback), naturality in coefficient quotient maps"
-   }
-  },
-  {
-   "text": "The coefficient pair $(\\mathcal O_E,(\\varpi))$ is a Noetherian adic coefficient datum in the sense of [def-weil-pbc-adic-coefficient-datum], so that [def-weil-pbc-completed-pullback] applies to it: $\\mathcal O_E$ is a discrete valuation ring, hence Noetherian [lem-weil-l-adic-extension-integers-dvr]; every $A_n$ is a finite ring [lem-weil-valued-dvr-finite-quotients], so $A_1$ is a finite additive group and in particular torsion; and $A_n$ is perfect over $\\mathcal O_E$, resolved by $[\\mathcal O_E\\xrightarrow{\\varpi^n}\\mathcal O_E]$ [lem-weil-pbc-standard-quotients-perfect]. The coefficient sheaf of that datum is $B_T$, since the constant sheaf $(A_n)_T$ is also the sheafification of $W\\mapsto\\operatorname{Cont}(\\pi_0(|W|),A_n)$ [lem-weil-pbc-profinite-coefficient-inverse-image]. First verify invertibility of the actual source completion unit $\\eta_K:K\\to R\\lim M_\\bullet$, rather than selecting an arbitrary isomorphism with that target. The coefficient ring is $R=\\mathcal O_E$, the ideal is $(\\varpi)$, and the quotients are $A_n$ as in the statement. By [lem-weil-pbc-constant-completion-equivalence], quotient-tower completion is canonically Koszul completion, respecting its unit. By [lem-weil-pbc-ringed-koszul-completion-reflector] its value $N=R\\lim M_\\bullet$ satisfies local derived completeness, and the canonical unit is invertible precisely on locally complete objects. The hypothesis [def-weil-derived-complete] says $K$ is a derived limit of this reduction tower, even though it does not specify a canonical arrow to a fixed model. By [lem-weil-derived-limit-existence], any two such derived limits are isomorphic as objects, so $K\\cong N$. Local derived completeness is invariant under isomorphisms, since the vanishing condition on derived internal Hom is; thus $K$ satisfies it. The reflector criterion now proves that this particular $\\eta_K$ is an isomorphism. This argument removes the ambiguity about completion units inherent in the triangulated definition. Finally, $K$ lies in the domain of $Lu^*_{\\mathrm{comp}}$: it is derived $(\\varpi)$-complete in the sense of [def-weil-pbc-intrinsic-completion]. With $r=1$ and $a_1=\\varpi$, that definition uses the Koszul tower $Q_m$ of the reflector lemma, and its unit is the chain map $c\\mapsto(u_C(c),0)$ into the mapping fibre $F(C)$, whose differential is $(x,y)\\mapsto(dx,(1-s)x-dy)$. The chain isomorphism $(x,y)\\mapsto(-y,x)$ carries $F(C)$ onto the strict Roos complex $\\operatorname{Roos}(C\\otimes Q_\\bullet)$ of [lem-sf-strict-roos-derived-limit-comparison], with differential $(y,x)\\mapsto(-dy-(1-s)x,dx)$. It carries the unit to $c\\mapsto(0,u_C(c))$, and $\\operatorname{Roos}(u)$ of that is $\\eta$ of the component map $C\\to L_I$. So the intrinsic unit is the reflector unit, which is an isomorphism because $K$ satisfies the local condition.",
-   "uses": [
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "def-weil-derived-complete",
-    "lem-weil-derived-limit-existence",
     "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
     "lem-weil-pbc-standard-quotients-perfect",
     "def-weil-pbc-adic-coefficient-datum",
+    "def-pur-completed-coefficient-presentation-transport",
     "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "def-weil-pbc-intrinsic-completion",
-    "lem-sf-strict-roos-derived-limit-comparison",
-    "def-weil-pbc-completed-pullback"
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-roos-intrinsic-completeness-equivalence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B (lemma-derived-completion), 0A0E (lemma-derived-completion-koszul); proetale.tex Tag 099M (lemma-naive-completion), with completed-coefficient comparison supplied by the cited equivalence"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+    "place": "Returned localization Step 6; assembly preserving original comparison Steps 1–6, using existing normalizations and the two separate native-map arguments"
    }
   },
   {
-   "text": "For a strict tower of complexes $M_\\bullet$, let $P_M=\\prod_nM_n$ and $s_M$ have components $t_n\\operatorname{pr}_{n+1}$. Countable products of modules over $B_X$ and $B_Y$ are exact by [lem-weil-proetale-countable-products-exact]. Thus [lem-sf-strict-roos-derived-limit-comparison] identifies $\\operatorname{Cone}(1-s_M)[-1]$ with the functorial total $R\\lim M_\\bullet$, respecting every evaluation. Let $\\sigma:F(P_M)\\xrightarrow{\\sim}\\prod_nF(M_n)$ be the product comparison from Step 1. For each $n$, $\\operatorname{pr}_n\\sigma F(s_M)=F(t_n)\\operatorname{pr}_{n+1}\\sigma$; hence $\\sigma F(1-s_M)=(1-s_{FM})\\sigma$. The coordinatewise map $(F(y),F(x))\\mapsto(\\sigma F(y),\\sigma F(x))$ is consequently a chain isomorphism between the two Roos complexes: their differentials are $(y,x)\\mapsto(-dy-(1-s)x,dx)$, and the displayed equation identifies both coordinates. Combining with the cited evaluation-compatible Roos models gives the specified natural isomorphism $\\chi_M:F(R\\lim M_\\bullet)\\xrightarrow{\\sim}R\\lim F(M_\\bullet)$. Each evaluation is the second-coordinate projection, so $e_n\\chi_M=F(e_n)$. This is a construction on strict towers, not an arbitrary completion of a triangle morphism.",
+   "text": "Apply [lem-weil-pbc-reduction-pullback-derived-tower] to $Q_{T,n}=(A_n)_T$: its $\\tau$ identifies the finite-ring-linear derived reductions, quotient augmentations and all transitions. Countable products are exact on both sites. Thus [lem-cbc-exact-product-functor-strict-limit] gives its specified Roos isomorphism $\\lambda_M$. On a K-injective tower resolution its augmentation clause applied to $\\gamma=\\varepsilon_{X,M}:\\Delta_XL_XM\\to M$ gives $\\lambda_M=\\beta_M$: the source adjunct is the identity, and the target adjunct is the defined mate. Its Roos projection equation gives evaluation compatibility. Use the counit-normalization node to identify actual $Lu^*$ and strict completed pullback with these exact constructions, preserving their units and evaluations.",
    "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower",
     "lem-weil-proetale-countable-products-exact",
-    "lem-sf-strict-roos-derived-limit-comparison"
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-sf-exact-pullback-counit-normalization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 07KC (lemma-products), 08TC (definition-derived-limit); strict evaluation-compatible zigzag as stated in lem-sf-strict-roos-derived-limit-comparison"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+    "place": "Returned localization Step 6; assembly preserving original comparison Steps 1–6, using existing normalizations and the two separate native-map arguments"
    }
   },
   {
-   "text": "On $P$ the strict quotient maps give the Roos chain map $p\\mapsto(0,(p\\otimes1)_n)$. Under the strict comparison of Step 4, its image under $F$ is $Fp\\mapsto(0,(Fp\\otimes1)_n)$, by Step 2 and the defining projection equations for $\\sigma$. By the construction in [def-weil-pbc-completed-pullback], this latter map represents exactly the specified comparison $Lu^*K\\to Lu^*_{\\mathrm{comp}}K$: its constant-tower unit and subsequent strict-tower map have these coordinates in the functorial Roos model. Thus that comparison equals $\\chi_M\\circ F(\\eta_K)$ followed by $R\\lim$ of the tower identification of Step 2. It is an isomorphism by Steps 3 and 4. The same equality proves compatibility with the completion unit and every finite projection. For $m\\ge n$ the projection square commutes because its components are $1_{FP}\\otimes\\rho_{m,n}$ on the identified strict towers; the equations for a succession $l\\ge m\\ge n$ follow from $\\rho_{l,n}=\\rho_{m,n}\\rho_{l,m}$. In particular all successive quotient comparisons agree. Finally the target tower is the quotient tower of $FK$ (Step 2), so this isomorphism identifies $FK$ with its derived limit through its quotient maps. This is derived completeness by [def-weil-derived-complete].",
+   "text": "The factorization node gives $\\alpha^F_K=\\beta_{K_\\bullet}F_D(\\operatorname{comp}_K)$. Both factors are invertible by Steps 1–2, hence so is the actual comparison. Its projections are the quotient augmentations; $\\tau$ makes the target the reduction tower of $FK$. Thus $FK$ is derived complete. The strict transition equations include all successive quotients.",
    "uses": [
-    "def-weil-pbc-completed-pullback",
+    "lem-sf-completed-pullback-mate-factorization",
     "def-weil-derived-complete"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N (lemma-pushforward-Noetherian-case), (2),(5), together with the strict-unit construction in def-weil-pbc-completed-pullback"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+    "place": "Returned localization Step 6; assembly preserving original comparison Steps 1–6, using existing normalizations and the two separate native-map arguments"
    }
   },
   {
-   "text": "Suppose now $K\\in D^b_c(X,R)$ as defined in [def-weil-derived-complete-integral-detailed]. Its reductions $K_n$ are intrinsically constructible and vanish outside one interval $[r,s]$, independently of $n$. The equivalence [lem-sf-proetale-constructible-origin] identifies this finite-torsion condition with bounded constructible etale origin. Apply [lem-weil-pbc-pullback-preserves-bounded-constructible] with $\\Lambda=A_n=P_n$ for the adic datum $(\\mathcal O_E,(\\varpi))$ checked in Step 3, and $g=u$: each $u_n^*K_n$ is bounded constructible and has cohomology in the same $[r,s]$. Applying the origin equivalence on $Y$ gives the intrinsic finite-torsion condition required by the integral definition. By Step 2 these are exactly the reductions of $FK$, and Step 5 gives its derived completeness. Therefore $FK$ belongs to that precise integral category, with the same uniform interval. Only this last paragraph invokes the global finite-torsion coefficient conventions implicit in the integral category; the preceding comparison and completeness argument applied to all derived-complete $B_X$-complexes on arbitrary schemes.",
+   "text": "For integral $K$, its reductions are intrinsically constructible with one interval $[r,s]$. Pass to finite etale origin on $X$, apply finite pullback preserving bounded constructibility and the same $[r,s]$, and return to intrinsic constructibility on $Y$. Step 2 identifies these with the reductions of $FK$; Step 3 supplies completeness. These are precisely the integral definition's conditions.",
    "uses": [
     "def-weil-derived-complete-integral-detailed",
     "lem-sf-proetale-constructible-origin",
@@ -102,37 +74,34 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-pullback-preserves-bounded-constructible.md",
-    "place": "Statement and proof; intrinsic/etale-origin comparison is proetale.tex Tag 09AK (lemma-compare-constructible), as stated in lem-sf-proetale-constructible-origin"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+    "place": "Returned localization Step 6; assembly preserving original comparison Steps 1–6, using existing normalizations and the two separate native-map arguments"
    }
   }
  ],
  "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-sf-exact-pullback-counit-normalization",
+  "lem-sf-completed-pullback-mate-factorization",
   "def-weil-derived-complete",
   "def-weil-derived-complete-integral-detailed",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-pbc-intrinsic-completion",
-  "lem-sf-exact-functor-derived-triangulated",
   "lem-sf-proetale-constructible-origin",
-  "lem-sf-strict-roos-derived-limit-comparison",
-  "lem-weil-derived-limit-existence",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-pullback-preserves-bounded-constructible",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-valued-dvr-finite-quotients"
+  "lem-weil-pbc-pullback-preserves-bounded-constructible"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AA (lemma-closed-immersion), Tag 099M (lemma-naive-completion), Tag 099N (lemma-pushforward-Noetherian-case); strict Roos and completion-unit argument assembled from existing DAG tools"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Returned localization Step 6; assembly preserving original comparison Steps 1–6, using existing normalizations and the two separate native-map arguments"
  },
  "mathlib_searches": [
   {
@@ -233,67 +202,71 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sf-immersion-completed-pullback-comparison",
   "worker": "stage1",
-  "summary": "Six-step split using existing nodes only. Separates exact immersion pullback, strict finite quotient identifications, invertibility of the canonical source completion unit, product-coordinate Roos comparison, compatibility of the specified completed comparison with all projections, and integral constructibility with uniform bounds. Statement retained.",
-  "blueprint": "Realizes the integral-stage ordinary/completed inverse-image comparison of prop-sf-localization-all-stages, returned proof Step 6. The current main-20261015 statement is the parent context; no change to the supported-localization unit route.",
+  "summary": "Substantial repair of C5 and D1/D2: delete the two unmerged duplicate normalization tasks; directly reuse strict tensor-tower, exact-product/Roos, completeness-equivalence and coefficient-presentation nodes. Two separate statement-only tasks now isolate universal-counit normalization and the actual completed-comparison factorization. Statement and prior metadata retained; complete old proof preserved in report with its argument allocation.",
+  "blueprint": "prop-sf-localization-all-stages, returned integral Step 6; old comparison Steps 1–6 allocated across existing nodes, two new native-map lemmas and the short assembly.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "why": "Identifies the actual completed and finite coefficient ring maps, including projections; the localization unit does not supply that coefficient calculation."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "why": "Supplies exactness and countable-product preservation for module inverse image along a locally closed immersion; a generic site tool needed below the localization route."
-   },
-   {
-    "node": "lem-sf-exact-functor-derived-triangulated",
-    "why": "Generic exact-abelian-functor descent to unbounded derived categories."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic ringed-topos K-flat pullback and tensor comparison, needed for the finite reduction calculations."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "why": "Generic underived tensor comparison, whose naturality is used at chain level for all quotient transitions."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Generic comparison of completed-coefficient quotient completion with the Koszul reflector, including the actual units."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "why": "Generic universal property that proves invertibility of the specified completion unit from the object-level completeness hypothesis."
-   },
-   {
-    "node": "lem-weil-derived-limit-existence",
-    "why": "Generic uniqueness up to isomorphism of derived-limit objects, needed to compare the triangulated completeness definition with a strict model."
-   },
-   {
-    "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Generic exactness of countable products of module sheaves permits the strict Roos computation."
-   },
-   {
-    "node": "lem-sf-strict-roos-derived-limit-comparison",
-    "why": "Generic evaluation-compatible comparison between strict Roos complexes and the total right derived inverse limit."
-   },
-   {
-    "node": "lem-sf-proetale-constructible-origin",
-    "why": "Generic equivalence of intrinsic finite constructibility and etale-origin constructibility, preventing a change of coefficient category."
-   },
-   {
-    "node": "lem-weil-pbc-pullback-preserves-bounded-constructible",
-    "why": "Generic finite-coefficient pullback theorem with preservation of the specified cohomological interval."
-   },
-   {
     "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Noetherianity of O_E (DVR), a hypothesis of the adic coefficient datum required before completed pullback is defined; no node of the localization unit states it."
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
    },
    {
     "node": "lem-weil-pbc-standard-quotients-perfect",
-    "why": "Perfectness of O_E/varpi^n over O_E, the remaining hypothesis of the adic coefficient datum; generic coefficient fact outside the localization unit."
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
+   },
+   {
+    "node": "def-weil-pbc-adic-coefficient-datum",
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
+   },
+   {
+    "node": "def-pur-completed-coefficient-presentation-transport",
+    "why": "Existing exact equivalence of the two integral coefficient presentations."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
+   },
+   {
+    "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-pullback-derived-tower",
+    "why": "Generic ringed-topos tensor/tower comparison with counit and augmentation normalization."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic exact-product functor Roos comparison, including its derived augmentation clause."
+   },
+   {
+    "node": "def-weil-derived-complete",
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
+   },
+   {
+    "node": "def-weil-derived-complete-integral-detailed",
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-preserves-bounded-constructible",
+    "why": "Generic coefficient, exactness or finite constructibility tool used inside the existing localization route; no unit argument is replaced."
    }
   ]
  },
@@ -311,15 +284,22 @@
   "lem-sf-proetale-constructible-origin",
   "lem-weil-pbc-pullback-preserves-bounded-constructible",
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-standard-quotients-perfect"
+  "lem-weil-pbc-standard-quotients-perfect",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q07-902bb4026",
-  "group": "Q07",
+  "reviewer": "NT-cc-NV-9ae4c0407",
+  "group": "NV",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-902bb4026 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, the parent prop-sf-localization-all-stages (DAG Step 6 cites the item; Step 5 checks the datum), the main-20261015 blueprint statement and proof, unit sk-prop-sf-localization, and Stacks proetale 09AA (closed-immersion pullback commutes with limits), 099M (naive completion) and 099N (2),(5) (completed pullback). Coefficients are B_T = lim (A_n)_T, the completed sheaf, not the constant O_E. The coefficient map is the canonical isomorphism c_u of lem-weil-pbc-profinite-coefficient-inverse-image. The comparison is the strict-tower map specified in def-weil-pbc-completed-pullback, with no choice of cone map. Steps 1–6 are correct against the cited statements: exact, product-preserving u^{-1}⊗B_Y; K-flat and tensor naturality for the quotient squares; the Roos coordinate identity σF(1−s)=(1−s)σ with e_nχ=F(e_n); the unit argument through constant-completion, reflector and uniqueness of derived limits; integral constructibility through the origin equivalence and finite pullback with [r,s] preserved. Small cases (Y empty, u = id, open and closed immersions, K = A_1 in degree 0) behave correctly. No duplicate among about 20 candidates; it is not a restatement of a parent clause; no new nodes. Fixed one E1/C1 gap: the completed pullback needs a Noetherian adic datum and K derived I-complete in the Koszul sense of def-weil-pbc-intrinsic-completion, and neither was verified. Step 3 now checks the datum (lem-weil-l-adic-extension-integers-dvr, lem-weil-valued-dvr-finite-quotients, lem-weil-pbc-standard-quotients-perfect, profinite-coefficient lemma). It shows the intrinsic Koszul unit equals the reflector unit through the chain isomorphism (x,y)->(-y,x) onto the strict Roos complex. Step 6 points to the datum, proof_deps are updated, and two tool_uses are added. The graph stays acyclic and the statement is unchanged. All 12 declared tool_uses are accepted as generic tools.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-9ae4c0407 (reviewer sub-agent of L); spot-checked: This re-split repairs the RETURN of 3eb1dc03 as prescribed. The statement is unchanged. Live still carries the Q07 six-step proof, so no other group has superseded this delivery. Nothing is in the dropped list, no SGA is cited, and there is no cycle. The item assembly is 2205 characters in 4 steps. Step 1 checks the adic datum: lem-weil-l-adic-extension-integers-dvr gives a PID; lem-weil-pbc-standard-quotients-perfect gives the finite free resolution and finite sets. lem-weil-pbc-profinite-coefficient-inverse-image makes c_u an isomorphism. The last clause of lem-weil-pbc-proetale-immersion-limit-preservation makes u^{-1}(-)⊗B_Y exact and limit-preserving. lem-pur-roos-intrinsic-completeness-equivalence (i)=>(iv),(v) gives intrinsic completeness and invertibility of the specified comp_K; old Step 3, including the Koszul sign, lives inside that lemma. Step 2 cites lem-weil-pbc-reduction-pullback-derived-tower for τ on whole towers, with augmentation, transitions and Q_n-linear evaluations. It cites lem-cbc-exact-product-functor-strict-limit for λ and its projection equation. Applying its augmentation clause on a K-injective tower with γ=ε gives λ=β (checked). Step 3: α^F=β·F_D(comp) is invertible, the actual α=d^{-1}α^F e is invertible, and τ makes this FK's own reduction limit, which is completeness. Step 4 is old Step 6 unchanged, with [r,s] preserved. New node lem-sf-exact-pullback-counit-normalization (2576 characters) is true: G is exact, so its universal counit ε is invertible; F_D with ξ is also an absolute derived functor, so e is unique because Q_X is a localization. New node lem-sf-completed-pullback-mate-factorization (2528 characters) is true for every K by the adjunct expansion and the triangle identity; its projection equations are correct. Cases u=id, Y empty, K=0 and K=A_1 were checked. Neither node is a duplicate: lem-weil-pbc-pulled-reduction-strict-tower-comparison identifies α with the completion unit of N, a different and circular route; def-sf-pull-completion-comparison and lem-sp-completion-mate-comparison are different. Neither node restates an item clause. Every old argument is placed in a new or existing node, and the two new nodes are of comparable size. Advisory: the def-pur-completed-coefficient-presentation-transport citation in Step 1 is barely needed. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-17",

@@ -1,0 +1,90 @@
+{
+ "id": "lem-sf-exact-pullback-counit-normalization",
+ "kind": "statement",
+ "title": "Counit normalization of exact pullback and its strict completed construction",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], with small pro-etale sites [def-weil-pbc-proetale-site]. Fix a Noetherian adic datum $(A,I)$, $P_n=A/I^n$ for $n\\ge1$, and $B_T=\\varprojlim_n(P_n)_T$ for $T=X,Y$ [def-weil-pbc-adic-coefficient-datum]. Assume the projection-defined coefficient map $c_g:g^{-1}B_X\\to B_Y$ of [def-weil-pbc-completed-pullback] is an isomorphism. Use module sheaves, their unbounded derived categories and strict inverse sequences [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-inverse-system].\n\nWrite $G(M)=g^{-1}M\\otimes_{g^{-1}B_X,c_g}B_Y$ for the recorded ordinary module pullback, and $F(M)$ for $g^{-1}M$ with scalars transported along $c_g^{-1}$ [def-pc-sheaf-restrict-scalars]. Let $m:G\\xrightarrow{\\sim}F$ be the module isomorphism sending $x\\otimes b$ to $b\\cdot x$. Assume $F$ is additive and exact. Denote its termwise derived descent by $F_D$, with localization comparison $\\xi_P:F_D(Q_XP)\\xrightarrow{\\sim}Q_Y(FP)$ [lem-sf-exact-functor-derived-triangulated]. Let $L$ be the specified K-flat left-derived pullback of [def-weil-pbc-completed-pullback], with its universal counit $\\epsilon_P:L(Q_XP)\\to Q_Y(GP)$, where $Q_T$ denotes localization of cochain complexes at quasi-isomorphisms [def-pc-kflat-complex].\n\nThere is a unique natural isomorphism $e:L\\xrightarrow{\\sim}F_D$ satisfying\n$$\\xi_P e_{Q_XP}=Q_Y(m_P)\\epsilon_P$$\nfor every complex $P$. The corresponding universal-counit-normalized isomorphism on derived strict towers identifies the specified left-derived levelwise pullback with $F_D^{\\mathrm{Tow}}$. It agrees with $e$ under every tower evaluation and with $\\Delta e$ on constant towers, using the exact-localization comparisons, where $\\Delta$ denotes constant towers.\n\nFor $K\\in D(\\operatorname{Mod}(B_X))$, let $K_\\bullet$ be its strict derived quotient tower. Applying total right derived limit to this tower isomorphism gives an isomorphism $d_K$ from the actual ambient strict completed pullback to $L_YF_D^{\\mathrm{Tow}}K_\\bullet$, where $L_Y=R\\lim$. Let $\\alpha_K$ be the actual comparison defined by the strict quotient augmentation in [def-weil-pbc-completed-pullback], and let $\\alpha^F_K:F_DK\\to L_YF_D^{\\mathrm{Tow}}K_\\bullet$ be the same augmented construction with exact termwise $F$. Then\n$$d_K\\alpha_K=\\alpha^F_K e_K.$$\nThe isomorphism $d_K$ commutes with each derived-limit evaluation through the preceding tower comparison. These assertions hold for every unbounded $K$, using the ambient augmented construction even when $K$ is not intrinsically complete.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Returned localization proof Step 6, old immersion-comparison Step 1 and the normalization part of Step 5; native SfImmersionCompletedPullbackComparison.lean derivedIso_exists and strictIso_exists; supporting completed construction: Stacks proetale.tex, Tag 099N, lemma-pushforward-Noetherian-case (2),(5); the native counit and mate equalities are agent-written refinements."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "exact module pullback left derived counit identifies universal left derived pullback with termwise exact functor on complexes and strict towers",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.totalLeftDerivedCounit, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Adjunction.derived_counit, CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "universal left derived exact inverse image comparison preserves original derived counits and quotient augmentation on strict towers",
+   "results": "8 hits: CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.LocalizerMorphism.guitartExact_of_isLeftDerivabilityStructure, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Functor.leftDerivedFunctorIsoMapDerivedCategory'",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.totalLeftDerivedCounit",
+   "results": "2 hits: CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.totalLeftDerivedCounit",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedFunctorIsoMapDerivedCategory|[Cc]ompleted[Pp]ull|ordinaryToCompleted",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "counit normalized exact sheaf module pullback left derived functor termwise strict tower comparison",
+   "results": "8 hits: CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.Functor.totalLeftDerivedCounit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, CategoryTheory.plusPlusAdjunction_counit_app_val, SheafOfModules.pullback, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CompHausLike.LocallyConstant.counit, CategoryTheory.Sheaf.adjunction_counit_app_val",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-immersion-completed-pullback-comparison",
+  "date": "2026-10-21",
+  "group": "NV"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Returned localization proof Step 6, old immersion-comparison Step 1 and the normalization part of Step 5; native SfImmersionCompletedPullbackComparison.lean derivedIso_exists and strictIso_exists",
+   "via": [
+    "lem-sf-immersion-completed-pullback-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

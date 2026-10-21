@@ -1,0 +1,82 @@
+{
+ "id": "lem-sf-completed-pullback-mate-factorization",
+ "kind": "statement",
+ "title": "Factorization of the actual completed-pullback comparison through the limit mate",
+ "statement": "Let $g:Y\\to X$ be a morphism of schemes [def-pc-scheme], with small pro-etale sites [def-weil-pbc-proetale-site]. Fix a Noetherian adic datum $(A,I)$, $P_n=A/I^n$ for $n\\ge1$, and $B_T=\\varprojlim_n(P_n)_T$ for $T=X,Y$ [def-weil-pbc-adic-coefficient-datum]. Assume the projection-defined coefficient map $c_g:g^{-1}B_X\\to B_Y$ of [def-weil-pbc-completed-pullback] is an isomorphism. Use module sheaves, their unbounded derived categories and strict inverse sequences [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-inverse-system].\n\nPut $F(M)=g^{-1}M\\otimes_{g^{-1}B_X,c_g}B_Y$, and assume $F$ is additive and exact. Let $F_D:D(\\operatorname{Mod}(B_X))\\to D(\\operatorname{Mod}(B_Y))$ and $F_D^{\\mathrm{Tow}}$ be exact termwise pullback, identified with the specified left-derived functors by their original universal counits as in [lem-sf-exact-pullback-counit-normalization]. Fix the canonical constant-tower/total-right-derived-limit adjunctions $\\Delta_T\\dashv L_T$, with unit $v_T$ and counit $\\varepsilon_T$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Let $j:F_D^{\\mathrm{Tow}}\\Delta_X\\xrightarrow{\\sim}\\Delta_YF_D$ be the identification induced from equality on ordinary constant towers and those counit-normalized comparisons. For a derived strict tower $M$ define its right mate\n$$\\beta_M=L_Y(F_D^{\\mathrm{Tow}}\\varepsilon_{X,M})\\,L_Y(j_{L_XM}^{-1})\\,v_{Y,F_DL_XM}.$$\nFor $K\\in D(\\operatorname{Mod}(B_X))$ let $i_K:\\Delta_XK\\to K_\\bullet$ be its strict quotient augmentation, and put $\\operatorname{comp}_K=L_X(i_K)v_{X,K}$, with the quotient tower and unit of [def-weil-pbc-completed-pullback]. Denote by $\\alpha^F_K:F_DK\\to L_YF_D^{\\mathrm{Tow}}K_\\bullet$ the actual ambient ordinary-to-completed comparison after the counit-normalized identifications above.\n\nThe following identity holds naturally in every unbounded $K$:\n$$\\alpha^F_K=\\beta_{K_\\bullet}\\,F_D(\\operatorname{comp}_K).$$\nHere $\\alpha^F_K$ is the projection-defined K-injective/strict-augmentation map specified in [def-weil-pbc-completed-pullback], rather than an arbitrary map to the limit object. If $p_n:L_YF_D^{\\mathrm{Tow}}K_\\bullet\\to F_D(K_n)$ is its specified evaluation and $q_{n,K}:K\\to K_n$ the quotient augmentation, then\n$$p_n\\alpha^F_K=F_D(q_{n,K}).$$\nFor every $m\\ge n$, $F_D(\\rho_{m,n})p_m=p_n$, where $\\rho_{m,n}:K_m\\to K_n$ is the strict quotient transition, and these identities respect composite quotient transitions. No completeness of $K$ or countable-product preservation by $F$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/prop-sf-localization-all-stages.md",
+  "place": "Returned localization proof Step 6, old immersion-comparison Step 5; native SfImmersionCompletedPullbackComparison.lean ordinaryToCompleted_eq and completedProjection_compatibility; supporting completed construction: Stacks proetale.tex, Tag 099N, lemma-pushforward-Noetherian-case (2),(5); the native counit and mate equalities are agent-written refinements."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "lem-sf-exact-pullback-counit-normalization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "ordinary completed pullback comparison factors as inverse image of source completion unit followed by constant tower derived inverse limit adjunction mate",
+   "results": "8 hits: PresheafOfModules.pullbackComp, CategoryTheory.Limits.map_lift_pullbackComparison, CategoryTheory.Limits.pullbackComparison, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.Limits.pullbackComparison_comp_fst_assoc, CategoryTheory.Limits.map_lift_pullbackComparison_assoc, CategoryTheory.Limits.pullbackComparison_comp_snd_assoc, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict quotient tower ordinary to completed pullback unit equals right mate composed with source completion map",
+   "results": "8 hits: CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom_assoc, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom_app, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit, CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom_app_assoc, CategoryTheory.ChosenPullbacksAlong.unit_pullbackId_hom_assoc, CategoryTheory.MorphismProperty.Over.mapPullbackAdj_unit_app",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "12 hits: CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ompletion.*[Ff]actor|[Rr]lim.*[Mm]ate|[Cc]ompleted.*[Cc]omparison",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/EllipticCurve/LFunction.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean, Mathlib/RingTheory/AdicCompletion/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "completion unit derived inverse limit constant tower adjunction mate factorization",
+   "results": "8 hits: CategoryTheory.Limits.constLimAdj, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Limits.colimConstAdj, UniformSpaceCat.adj, Profinite.toProfiniteAdjToCompHaus, CategoryTheory.Localization.HasProductsOfShapeAux.adj, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived counits and mates are ingredients; no hit identifies these specified sheaf pullbacks, their strict augmented construction, and the asserted normalized maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-immersion-completed-pullback-comparison",
+  "date": "2026-10-21",
+  "group": "NV"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "blueprint": {
+  "from": {
+   "node": "prop-sf-localization-all-stages",
+   "place": "Returned localization proof Step 6, old immersion-comparison Step 5; native SfImmersionCompletedPullbackComparison.lean ordinaryToCompleted_eq and completedProjection_compatibility",
+   "via": [
+    "lem-sf-immersion-completed-pullback-comparison"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
