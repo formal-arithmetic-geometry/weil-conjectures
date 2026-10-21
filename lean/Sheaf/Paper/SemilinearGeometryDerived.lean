@@ -186,6 +186,19 @@ structure Geometry extends GeometryBase.{c, v, r} J B τ J' uInv uPush adjSet wh
       (inverseImage n).moduleUnderlying.hom.app M =
         (inverseImage m).moduleUnderlying.hom.app ((res.{c, v, max c v r} (coefficientMap.{c, v,
           max c v r} J B τ h)).obj M)
+  /-- Termwise inverse image carries the horizontal transition of the actual
+  system to the coefficient-restriction inverse image of that transition.
+  This equation is imposed before taking complexes or localizing; specifying
+  evaluation on component objects alone does not specify horizontal maps. -/
+  ordinaryPullTransition : ∀ {m n : ℕ} (h : n ≤ m)
+    (M : Systems.{c, v, max c v r} J B τ),
+    (transition.{c, v, max c v r} J' coefficients coefficientTransition h).app (pull.obj M) ≫
+        (res.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J'
+          coefficients coefficientTransition h)).map ((ordinaryPullEvaluation n).hom.app M) =
+      (ordinaryPullEvaluation m).hom.app M ≫
+        (inverseImage m).modules.map
+          ((transition.{c, v, max c v r} J B τ h).app M) ≫
+        (restrictionPullback h).hom.app ((evaluation.{c, v, max c v r} J B τ n).obj M)
   /-- Coefficient pullback is the scalar-adjunction transpose of the localized
   identity-on-underlying-sheaves restriction comparison. -/
   coefficientPullback_transpose : ∀ {m n : ℕ} (h : n ≤ m)

@@ -3,7 +3,7 @@
  "kind": "definition",
  "title": "Derived geometric system operations and normalization",
  "status": "split",
- "statement": "For a geometric base over a strict ring tower [def-coef-semilinear-geometry-base], with ordinary derived calculus A [def-coef-semilinear-derived-calculus], define its normalized derived geometric interface as follows. Specify derived level adjunctions and pull/push evaluation isomorphisms with both unit and counit equations. Fix the ordinary pull/push evaluation identifications to the identity on component section carriers and impose the ordinary unit equation. Fix the derived system and level Hom equivalences on every complex and K-injective target by localization of the ordinary transpose followed by the inverse canonical right-derived comparison; fix derived pull evaluation by localization of its ordinary identification. Fix coefficient pullback as the scalar-adjunction transpose of the localized identity-on-underlying-sheaves restriction comparison. Fix level tensor pullback on all generalized pure tensors and on total K-flat representatives with flat terms, using the signed total-summand and localization equations [def-coef-semilinear-system-models]. Fix the system tensor comparison by its ordinary component tensor equations and its own total-representative localization square, and impose its derived evaluation square. All equations concern the constructed system maps before evaluation.",
+ "statement": "For a geometric base over a strict ring tower [def-coef-semilinear-geometry-base], with ordinary derived calculus A [def-coef-semilinear-derived-calculus], define its normalized derived geometric interface as follows. Specify derived level adjunctions and pull/push evaluation isomorphisms with both unit and counit equations. Fix the ordinary pull/push evaluation identifications to the identity on component section carriers and impose the ordinary unit equation. Fix the derived system and level Hom equivalences on every complex and K-injective target by localization of the ordinary transpose followed by the inverse canonical right-derived comparison; fix derived pull evaluation by localization of its ordinary identification. Require ordinary inverse image to preserve every horizontal restriction-form transition: after the ordinary evaluation identifications, the transition of pull(M) is the level inverse image of the transition of M followed by the identity-on-underlying-sheaves coefficient restriction comparison. This is an equation of ordinary module-system maps, before taking complexes or localization. Fix coefficient pullback as the scalar-adjunction transpose of the localized identity-on-underlying-sheaves restriction comparison. Fix level tensor pullback on all generalized pure tensors and on total K-flat representatives with flat terms, using the signed total-summand and localization equations [def-coef-semilinear-system-models]. Fix the system tensor comparison by its ordinary component tensor equations and its own total-representative localization square, and impose its derived evaluation square. All equations concern the constructed system maps before evaluation.",
  "stmt_deps": [
   "def-coef-semilinear-derived-calculus",
   "def-coef-semilinear-system-models",
@@ -104,5 +104,47 @@
   "group": "NF",
   "result": "fix",
   "note": "Re-delivery after the RETURN of fae3d3347b17. Both H3 findings are repaired. (1) Data.tensorEvaluation is now pinned by tensorEvaluationModel (TensorComparisonModel for evaluation n) with tensorEvaluationModel_ordinary = ordinaryEvaluationTensor, the unique identity-on-pure-tensors map; the summand and derived equations on flat-term K-flat representatives fix it on every object, so homEvaluation and target.tensorEvaluation become canonical. (2) Data.scalarTensor is pinned by scalarTensorModel (ScalarTensorComparisonModel: pure-tensor rule (x⊗y)⊗1↦(x⊗1)⊗(y⊗1) through the model's E, summand rule, kflat preservation, localized square via scalarEpsilonIso and tensorModelIso); orientation checked against homReductionTranspose. All other modules are byte-identical to the previously reviewed version; clause table, edge cases (empty site, zero rings, equal indices, nonflat maps, constant Z tower sign test), universes (c, v independent, coefficients at max c v r) and one-definition checks pass; lean.statement is verbatim. Mechanical H8 defect: scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel lacked Source/(blueprint: def-coef-semilinear-system-models) docstrings. fixes/SemilinearSystemModels.lean is a complete replacement with docstring-only changes. nt_compile of all seven modules is clean both as delivered and with the fix (max 27.6 s per file). Maintainer note: the item's top-level source.place still mentions enhanced sections; a stage-2 FIX cannot change it."
+ },
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "C5 stage 2",
+  "old_statement": "For a geometric base over a strict ring tower [def-coef-semilinear-geometry-base], with ordinary derived calculus A [def-coef-semilinear-derived-calculus], define its normalized derived geometric interface as follows. Specify derived level adjunctions and pull/push evaluation isomorphisms with both unit and counit equations. Fix the ordinary pull/push evaluation identifications to the identity on component section carriers and impose the ordinary unit equation. Fix the derived system and level Hom equivalences on every complex and K-injective target by localization of the ordinary transpose followed by the inverse canonical right-derived comparison; fix derived pull evaluation by localization of its ordinary identification. Fix coefficient pullback as the scalar-adjunction transpose of the localized identity-on-underlying-sheaves restriction comparison. Fix level tensor pullback on all generalized pure tensors and on total K-flat representatives with flat terms, using the signed total-summand and localization equations [def-coef-semilinear-system-models]. Fix the system tensor comparison by its ordinary component tensor equations and its own total-representative localization square, and impose its derived evaluation square. All equations concern the constructed system maps before evaluation.",
+  "what": "Componentwise evaluation isomorphisms alone do not state compatibility with the actual horizontal transition maps. The source describes termwise inverse image of systems. Add its ordinary transition square, rather than assuming any derived transition or resolution conclusion.",
+  "source": {
+   "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+   "place": "Construction 4.1 and Lemma 4.10: inverse image on the ringed sequence topos, including horizontal arrows."
+  },
+  "citers": [
+   {
+    "id": "def-coef-semilinear-geometry-ops",
+    "holds": true,
+    "note": "The interface still presents the termwise geometric construction. The added ordinary horizontal-map equation makes explicit that intended construction; this consumer takes Geometry as input or invokes its existence and does not construct a competing Geometry."
+   },
+   {
+    "id": "lem-coef-semilinear-derived-sections",
+    "holds": true,
+    "note": "The interface still presents the termwise geometric construction. The added ordinary horizontal-map equation makes explicit that intended construction; this consumer takes Geometry as input or invokes its existence and does not construct a competing Geometry."
+   },
+   {
+    "id": "lem-pur-system-pushforward-restriction-transition",
+    "holds": true,
+    "note": "The interface still presents the termwise geometric construction. The added ordinary horizontal-map equation makes explicit that intended construction; this consumer takes Geometry as input or invokes its existence and does not construct a competing Geometry."
+   },
+   {
+    "id": "lem-pur-quotient-diagram-projection-evaluation",
+    "holds": true,
+    "note": "Its Presentation carries a canonical quotient-system Geometry and the existence theorem builds the termwise geometric construction. The added ordinary horizontal-transition square is satisfied by that construction; no Geometry literal or positional constructor requires adaptation. The evaluation and projection formulas retain their intended meaning."
+   }
+  ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261021T143849-L-14061",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
