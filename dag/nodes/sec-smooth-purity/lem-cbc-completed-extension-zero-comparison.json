@@ -78,11 +78,10 @@
    }
   },
   {
-   "text": "Apply functorial $R\\lim$ to Step 4 and follow it by $\\lambda_{j\\prime}^{-1}$ from Step 2. The completed-pullback definition identifies its endpoints with $Lg^*_{\\mathrm{comp}}j_!K$ and $j\\prime_!Lg^*_{U,\\mathrm{comp}}K$. This is exactly the specified finite-exchange/limit comparison and is natural. The augmented reduction comparison, normalized $\\lambda$, and the presentation-transport unit equation preserve its canonical quotient units. Step 3 proves both endpoints complete.",
+   "text": "Apply functorial $R\\lim$ to Step 4 and follow it by $\\lambda_{j\\prime}^{-1}$ from Step 2. The completed-pullback definition identifies its endpoints with $Lg^*_{\\mathrm{comp}}j_!K$ and $j\\prime_!Lg^*_{U,\\mathrm{comp}}K$. This is exactly the specified finite-exchange/limit comparison and is natural. The augmented reduction comparison, normalized $\\lambda$, and the presentation-transport unit equation preserve its canonical quotient units. Step 3 proves both endpoints complete. For the shared-presentation unit identity, project the universal left-derived properties directly from the ordinary and strict-tower pullback constructors. Their normalized comparisons conjugate the exact constant-tower square: its factorization equations and uniqueness give the constant comparison. Identify the constant/Rlim units by their derived adjunction factorization. Naturality then transports that unit and the strict quotient augmentation, proving cbcDatumCompletedTransport_unit without the larger presentation-transport module.",
    "uses": [
     "prop-weil-pbc-rlim-functoriality",
-    "def-weil-pbc-completed-pullback",
-    "lem-cbc-adic-pullback-presentation-transport"
+    "def-weil-pbc-completed-pullback"
    ],
    "elementary": false,
    "source": {
@@ -107,13 +106,12 @@
   "lemma-weil-pbc-completed-pullback-reduction",
   "lem-cbc-completed-ring-strict-finite-exchange",
   "prop-weil-pbc-rlim-functoriality",
-  "def-weil-pbc-completed-pullback",
-  "lem-cbc-adic-pullback-presentation-transport"
+  "def-weil-pbc-completed-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-  "place": "Finite reduction and derived limits; workload re-split into four statement-only lemmas, keeping existing canonical limit/scalar/transport nodes."
+  "place": "Finite reduction and derived limits; workload re-split into four statement-only lemmas, keeping existing canonical limit/scalar/transport nodes. G5: the remaining transport-unit hole is proved by universal-counit normalization, the exact constant square, and adjunction-unit naturality; presentation universality is projected directly from the constructors."
  },
  "mathlib_searches": [
   {
@@ -518,6 +516,7 @@
   "module": "Sheaf.Paper.CompletedOpenExchangeTransport",
   "declaration": "AlgebraicGeometry.Scheme.completedOpenExchangeComparison",
   "declarations": [
+   "CategoryTheory.Functor.ExactDerivedCounitNormalization",
    "AlgebraicGeometry.Scheme.cbcDatumFiniteCoefficient_eq",
    "AlgebraicGeometry.Scheme.cbcDatumCoefficient_eq",
    "AlgebraicGeometry.Scheme.cbcDatumModulePull_eq",
@@ -554,13 +553,13 @@
   "note": "Wrote review.md. Checked immutable statements, all statement dependencies, sources, canonical transports, docstrings, edge cases, universes, and verbatim signature. Per-file scompile.py compilation passed without diagnostics. No delivery defects found; branch head unchanged."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
+  "reviewer": "C-e2fa6",
+  "group": "G5",
   "result": "pass",
-  "landing": "20261019T005409-L-2763900",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T233720-L-853080",
+  "kind": "interface",
+  "note": "independent cc review: cbcDatumCompletedTransport_unit proof (counit normalization → exact constant square → uniqueness of completedPullbackConstantIso → adjunction-unit identification → naturality) against node lem-cbc-completed-extension-zero-comparison Step 5; refactored _exists statements against change record (definitional fold); 18 direct importers compiled against the delivered item in a sandbox"
  }
 }
