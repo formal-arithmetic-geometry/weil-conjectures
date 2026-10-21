@@ -39,95 +39,72 @@
  ],
  "proof": [
   {
-   "text": "On objects set $\\Phi(E,K)=(E,\\Phi_EK)$. For a morphism represented by $(M,u)$, use the composite\n$$\nT^S_{M/E}\\Phi_EK\\xrightarrow{\\beta_{M/E,K}}\n\\Phi_MT^T_{M/E}K\\xrightarrow{\\Phi_M(u)}\n\\Phi_MT^T_{M/F}L\\xrightarrow{\\beta_{M/F,L}^{-1}}\nT^S_{M/F}\\Phi_FL.\n$$\nIts source and target are the $M$-stage scalar extensions of the assigned objects, so it is a target morphism representative by the finite-stage pair-category definition. The comparison components are isomorphisms by hypothesis, and $\\Phi_M$ is a functor.",
+   "text": "Apply [lem-sbc-coherent-pair-functor-descent] to $\\mathcal A_E=\\mathcal C_E(T)$, $\\mathcal B_E=\\mathcal C_E(S)$, $U=T^T$, $V=T^S$, $b=\\beta$. Its unit and tower hypotheses are precisely the assumed ones. It gives the additive functor $(E,K)\\mapsto(E,\\Phi_EK)$ with the displayed representative formula, including independence of common stage and representative.",
    "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-pbc-finite-stage-pair-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.md",
-    "place": "## Proof, first sentence and displayed composite"
-   }
-  },
-  {
-   "text": "Write $d_M(u)=\\beta_{M/F,L}^{-1}\\circ\\Phi_M(u)\\circ\\beta_{M/E,K}$. For $M\\subseteq N$ and $A\\in\\mathcal C_H(T)$ with $H\\subseteq M$, the assumed associator equation for $\\beta$ reads\n$$\\beta_{N/H,A}=\\Phi_N(a^T_{N,M,H,A})\\circ\\beta_{N/M,T^T_{M/H}A}\\circ T^S_{N/M}(\\beta_{M/H,A})\\circ(a^S_{N,M,H,\\Phi_H A})^{-1}.$$\nNaturality at $u$ reads\n$$\\Phi_N(T^T_{N/M}u)\\circ\\beta_{N/M,T^T_{M/E}K}=\\beta_{N/M,T^T_{M/F}L}\\circ T^S_{N/M}(\\Phi_Mu).$$\nSubstitute the first equation at $(H,A)=(E,K),(F,L)$ and the pair-category formula $u_N=a^T_{N,M,F,L}\\circ T^T_{N/M}(u)\\circ(a^T_{N,M,E,K})^{-1}$ into $d_N(u_N)$. The inverse $\\Phi_N(a^T_{N,M,F,L})$ cancels the left associator in $\\Phi_N(u_N)$, and its right associator cancels $\\Phi_N(a^T_{N,M,E,K})$. The displayed naturality equation then cancels the two remaining $\\beta_{N/M}$ components, leaving\n$$d_N(u_N)=a^S_{N,M,F,\\Phi_FL}\\circ T^S_{N/M}(d_M(u))\\circ(a^S_{N,M,E,\\Phi_EK})^{-1}.$$\nThis is exactly the target transport of $d_M(u)$. If $u_P=v_P$ witnesses equivalence, this equality gives equal target representatives $d_P(u_P)=d_P(v_P)$, so the assignment is well defined.",
-   "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "def-weil-pbc-finite-stage-pair-category"
+    "lem-sbc-coherent-pair-functor-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.md",
-    "place": "## Proof, independence-of-M and equivalent-representative sentences"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, object and representative formulas and independence of common stage"
    }
   },
   {
-   "text": "For the identity representative at $E$, the assumed unit equation $\\beta_{E/E}=1$ gives $d_E(1_K)=1_{\\Phi_EK}$. For composable maps $u:A\\to B$ and $v:B\\to C$ represented at one common stage $P$, the adjacent factors $\\beta_{P/F,L}\\circ\\beta_{P/F,L}^{-1}$ cancel, giving $d_P(v)\\circ d_P(u)=d_P(v\\circ u)$. The transport equality of step 2 makes this calculation apply to the pair-category composition formula even when the initial stages differ. Also $d_P(u+v)=d_P(u)+d_P(v)$, since exact functors are additive and composition is bilinear. The common-stage calculus supplies the additive categories on which this is an additive functor.",
+   "text": "Apply [lem-weil-pbc-pair-functor-shift-coherence] to this functor, with the given exact stage shift comparisons: it supplies coherent shifts and shift-compatible $\\kappa_E:\\Phi j_E^T\\simeq j_E^S\\Phi_E$. By [lem-weil-pbc-distinguished-diagram-lifting], any distinguished triangle is isomorphic to $j_E^T\\Delta$ for a distinguished stage triangle $\\Delta$. Its image is isomorphic to $j_E^S\\Phi_E\\Delta$ via $\\kappa_E$ on the vertices: the first two squares are naturality and the last is precisely shift compatibility. The latter triangle is distinguished since $\\Phi_E$ and $j_E^S$ are exact, the inclusion by [thm-weil-pbc-verdier-axioms]. Distinguishedness is invariant under triangle isomorphism, so $\\Phi$ is exact. [def-weil-pbc-qbar-category] identifies these pair categories with the stated coefficient categories.",
    "uses": [
-    "def-weil-pbc-finite-stage-pair-category",
-    "prop-weil-pbc-common-stage-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.md",
-    "place": "## Proof, well-definedness and additivity sentences"
-   }
-  },
-  {
-   "text": "Descend the stage shift comparison as a compatible transformation between the composites of the shift stage morphism and the given morphism. The betaCommShift equation is exactly Hom.comm after expanding the two composite comparisons. Its components are images of the finite-stage shift isomorphisms, hence yield a natural isomorphism on pair categories. Check zero and addition componentwise using the finite-stage CommShift laws and functor_map_ι. The comparison ιCompFunctorIso is compatible with this shift structure, because its components and the inclusion shift components are identities. By the common-stage distinguished-triangle criterion from [thm-weil-pbc-verdier-axioms], every distinguished source triangle is isomorphic to an included distinguished stage triangle. At that stage, the functor is exact, and the target inclusion is exact by the same Verdier theorem. Transport exactness through ιCompFunctorIso, then through mapTriangleCompIso and the given triangle isomorphism. Thus the descended functor preserves distinguished triangles. By [def-weil-pbc-qbar-category] these are the required coefficient categories.",
-   "uses": [
-    "prop-weil-pbc-scalar-extension",
-    "prop-weil-pbc-common-stage-calculus",
-    "def-weil-pbc-common-stage-cones",
-    "def-weil-pbc-qbar-category",
-    "thm-weil-pbc-verdier-axioms"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.md",
-    "place": "## Proof, exactness and Qbar-identification sentences"
-   }
-  },
-  {
-   "text": "For another compatible family $\\Psi$ with comparison $\\gamma$, let $\\eta_E:\\Phi_E\\to\\Psi_E$ be a compatible natural transformation. Compatibility means\n$$\\eta_{M,T^T_{M/E}K}\\circ\\beta_{M/E,K}=\\gamma_{M/E,K}\\circ T^S_{M/E}(\\eta_{E,K}).$$\nDefine $\\eta_{(E,K)}=[E,\\eta_{E,K}]$. At stage $M$ the naturality square for $[M,u]$ is the equality\n$$T^S_{M/F}(\\eta_{F,L})\\circ d_M^\\Phi(u)=d_M^\\Psi(u)\\circ T^S_{M/E}(\\eta_{E,K}).$$\nIndeed, the left side is $\\gamma_{M/F,L}^{-1}\\circ\\eta_{M,T^T_{M/F}L}\\circ\\Phi_M(u)\\circ\\beta_{M/E,K}$. Naturality of $\\eta_M$ replaces its middle two factors by $\\Psi_M(u)\\circ\\eta_{M,T^T_{M/E}K}$; compatibility then gives the right side. Step 2 ensures the equality defines an equality of classes independent of the chosen stage. Identity transformations descend to identities and vertical composites descend to composites because their components are $[E,1]$ and $[E,\\theta_{E,K}\\circ\\eta_{E,K}]$. For horizontally composed families, the comparison is $\\Phi_M(\\gamma_{M/E,K})\\circ\\beta_{M/E,\\Psi_EK}$; substituting it into $d_M$ gives precisely the composite of the two descended assignments. Whiskering and horizontal composition therefore agree with finite-stage operations as well. Every equation between compatible transformations, formed with these operations, holds componentwise already at $E$, hence holds between the descended classes.",
-   "uses": [
-    "def-weil-pbc-finite-stage-pair-category",
+    "lem-weil-pbc-pair-functor-shift-coherence",
+    "lem-weil-pbc-distinguished-diagram-lifting",
+    "thm-weil-pbc-verdier-axioms",
+    "def-weil-triangulated-category",
+    "def-weil-pbc-triangles-with-shift",
     "def-weil-pbc-qbar-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.md",
-    "place": "## Proof, natural transformations and their equations sentence"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, exactness and identification with Qbar coefficient categories"
    }
   },
   {
-   "text": "The finite-stage rational transport proposition supplies the exact functors $Rf_{*,E}$ and $Lg_E^*$ and their exchange transformation on $\\Dbc(-,E)$ (with the integral-operation hypotheses required there). The scalar-extension proposition supplies their coherent comparison isomorphisms and states that scalar extension of the exchange map is the exchange map at the larger stage. These are respectively the hypotheses for steps 1–4 and the compatibility equation in step 5, so they give the asserted exact functors and exchange transformation on the Qbar categories.",
+   "text": "For compatible transformations use [lem-sbc-coherent-pair-functor-descent], whose compatibility equation gives the components $[E,\\eta_{E,K}]$ and their naturality. Identities and vertical composites have components $[E,1]$ and $[E,\\theta_{E,K}\\circ\\eta_{E,K}]$. Its compatibility with composition of functor families identifies descended composites; applying the component formula to whiskerings gives horizontal composition. Equations hold componentwise already at $E$. The same argument applies to composites on different schemes.",
+   "uses": [
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, compatible natural transformations and their equations"
+   }
+  },
+  {
+   "text": "[prop-weil-pbc-rational-transport] gives the exact rationalized direct images, completed pullbacks and exchange for the supplied constructibility-preserving integral operations. [prop-weil-pbc-scalar-extension] gives their coherent comparisons and compatibility of the exchange with coefficient extension. Apply steps 1–3 to these families and their composites to obtain the claimed functors and exchange on the categories of [def-weil-pbc-qbar-category].",
    "uses": [
     "prop-weil-pbc-rational-transport",
     "prop-weil-pbc-scalar-extension",
     "def-weil-pbc-qbar-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.md",
-    "place": "## Proof, final sentence"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, final sentence: direct image, pullback and exchange"
    }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-scalar-extension",
-  "def-weil-pbc-finite-stage-pair-category",
-  "prop-weil-pbc-common-stage-calculus",
-  "def-weil-pbc-common-stage-cones",
+  "lem-sbc-coherent-pair-functor-descent",
+  "lem-weil-pbc-pair-functor-shift-coherence",
+  "lem-weil-pbc-distinguished-diagram-lifting",
+  "thm-weil-pbc-verdier-axioms",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-triangles-with-shift",
   "def-weil-pbc-qbar-category",
   "prop-weil-pbc-rational-transport",
-  "thm-weil-pbc-verdier-axioms"
+  "prop-weil-pbc-scalar-extension"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.md",
-  "place": "Proof, stagewise shift and exactness descent; C2 Lean implementation using the common-stage distinguished-triangle criterion"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+  "place": "Proof, re-split on 2026-10-21: existing coherent additive descent, extracted shift-coherence node, common-stage triangle lifting, and finite-stage operation application."
  },
  "mathlib_searches": [
   {
@@ -192,19 +169,25 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-14",
+  "date": "2026-10-21",
   "item": "prop-weil-pbc-descent-functors",
   "worker": "stage1",
-  "summary": "Second reading repaired the coherence calculation, functor laws, shift and triangle exactness, and natural-transformation descent; added existing common-stage and rational-transport citations. The statement is unchanged and no auxiliary nodes are needed.",
-  "blueprint": "Realizes the complete ## Proof paragraph of blueprint node prop-weil-pbc-descent-functors: displayed stagewise composite; independence under M subset N and equivalent representatives; additivity/exactness and natural transformations; Qbar identification; and final applications to Rf_* , Lg^* and exchange maps."
+  "summary": "Human-requested re-split. Reuse the existing general coherent additive pair-functor/transformations node instead of duplicating it; extract the substantial integer-shift and inclusion-comparison coherence argument as one statement-only node. Assemble exactness using the existing distinguished-diagram lifting theorem. Preserve the statement and all inherited blueprint and maintainer metadata. The report retains the old proof and assigns every argument to its supporting node or explicit assembly.",
+  "blueprint": "Steps 1, 3 realize the object/arrow, independence and transformation sentences; the new node realizes the shift-compatibility content of the exactness sentence; step 2 finishes triangle exactness and the Qbar identification; step 4 realizes the final operations/exchange sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Its generic coherent additive pair-category construction and transformation/equation clauses give exactly the non-triangulated descent needed here. The PBC unit has no other node giving this general theorem; this reuses an existing argument without changing the coefficient route."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-ND-4e14b57af",
-  "group": "ND",
+  "reviewer": "NT-cc-NP-f973d1bb6",
+  "group": "NP",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-4e14b57af (reviewer sub-agent of L); spot-checked: Read the item, all six proof steps, cited statements, blueprint route, and source locations. Transport, shifts, triangle exactness, and transformation descent check out. Corrected step 1’s mathematical notation in the whole-file JSON under fixes/. No new nodes or tool_uses. The pair-category construction does not discharge the master condensed-category or exchange-map comparison obligations. Concrete checks are recorded in review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-f973d1bb6 (reviewer sub-agent of L); spot-checked: Re-split as the human requested (repair note 2026-10-21). The item proof is now a 4-step assembly of 2170 characters, and the one new statement-only node, lem-weil-pbc-pair-functor-shift-coherence, carries the shift part of old step 4: integer-shift naturality, the zero/addition laws, and the shift compatibility of kappa_E that the third square of the image triangle needs. No argument is dropped. Old steps 1-3 and 5 (formulas, independence, additivity, transformations, composites, equations) are covered by the existing split node lem-sbc-coherent-pair-functor-descent. Its pair category, transport formula, unit/pentagon hypotheses, tower equation and compatibility equation match def-weil-pbc-finite-stage-pair-category and prop-weil-pbc-scalar-extension exactly; I checked the types. That node is a declared tool use, it does not reach the item, and I accept it as a generic tool. Step 2 is correct: lem-weil-pbc-distinguished-diagram-lifting gives triangle ≅ j_M Delta through the identity vertex isomorphisms; kappa naturality gives the first two squares and the new node gives the third; Phi_M is exact, j_M is exact (thm-weil-pbc-verdier-axioms), and distinguished triangles are closed under isomorphism. Step 4 matches rational-transport (constructibility qualification kept) and scalar-extension (comparisons in the beta direction, exchange compatibility). The new node is true: naturality follows from the shift equation plus naturality of s_M, and kappa is the identity since beta_{E/E}=1 and T_{E/E}=id. Small cases (Phi=id; n=0; m=-n types) check out. No duplicate in the DAG; the near candidates are circular (they cite the item) or about other categories. No cycles, no SGA. Its statement matches the current main-20261015 statement and proof.md. Maintainer note: the off-unit lem-weil-pbc-distinguished-diagram-lifting and thm-weil-pbc-verdier-axioms (sk-prop-sf-cbc) are not declared in tool_uses; verdier-axioms was already cited by the base proof. Accept both as generic tools and record them at merge. No fixes."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -262,5 +245,8 @@
   "landing": "20261019T002513-L-2143196",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+ },
+ "tool_uses": [
+  "lem-sbc-coherent-pair-functor-descent"
+ ]
 }

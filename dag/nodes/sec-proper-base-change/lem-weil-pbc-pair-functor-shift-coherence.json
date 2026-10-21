@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-pair-functor-shift-coherence",
+ "kind": "statement",
+ "title": "Integer-shift coherence for a prescribed pair-category functor",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and noetherian finite-dimensional schemes $T,S$ on which $\\ell$ is invertible. For $H=T,S$, use the finite-stage categories $\\mathcal C_E(H)$ and pair category $\\mathcal P_H$ of [def-weil-pbc-finite-stage-pair-category], with their canonical integer shifts and inclusion functors $j_E^H$ from [prop-weil-pbc-common-stage-calculus]. Write $\\sigma^H_{F/E,n,K}:T^H_{F/E}(K[n])\\xrightarrow{\\sim}(T^H_{F/E}K)[n]$ for the iterated scalar shift comparisons of [prop-weil-pbc-scalar-extension]. Use the meaning of exact functor from [def-weil-triangulated-category].\n\nLet $\\Phi_E:\\mathcal C_E(T)\\to\\mathcal C_E(S)$ be additive functors [def-weil-pbc-additive-functor] equipped with natural isomorphisms $s_{E,n,K}:\\Phi_E(K[n])\\xrightarrow{\\sim}(\\Phi_EK)[n]$ for every $n\\in\\mathbf Z$, satisfying the zero and addition coherence equations. Let $\\beta_{F/E}:T^S_{F/E}\\Phi_E\\xrightarrow{\\sim}\\Phi_F T^T_{F/E}$ be natural isomorphisms satisfying $\\beta_{E/E}=1$ and\n$$\\beta_{G/E,K}\\circ a^S_{G,F,E,\\Phi_EK}=\\Phi_G(a^T_{G,F,E,K})\\circ\\beta_{G/F,T^T_{F/E}K}\\circ T^S_{G/F}(\\beta_{F/E,K})$$\nfor $E\\subseteq F\\subseteq G$. Suppose, for every $E\\subseteq F$, $n$ and $K$, that\n$$s_{F,n,T^T_{F/E}K}\\circ\\Phi_F(\\sigma^T_{F/E,n,K})\\circ\\beta_{F/E,K[n]}=(\\beta_{F/E,K})[n]\\circ\\sigma^S_{F/E,n,\\Phi_EK}\\circ T^S_{F/E}(s_{E,n,K}).$$\nLet $G:\\mathcal P_T\\to\\mathcal P_S$ be an additive functor with object formula $G(E,K)=(E,\\Phi_EK)$ and representative formula\n$$G[M,u]=[M,\\beta_{M/F,L}^{-1}\\circ\\Phi_M(u)\\circ\\beta_{M/E,K}]$$\nfor $u:T^T_{M/E}K\\to T^T_{M/F}L$.\n\nThen $s_{n,(E,K)}=[E,s_{E,n,K}]$ are the components of natural isomorphisms $s_n:G(-[n])\\xrightarrow{\\sim}(G-)[n]$. They satisfy the zero and addition coherence equations. Explicitly, for categories $\\mathcal A=\\mathcal P_T$, $\\mathcal B=\\mathcal P_S$, write $z^H_X:X[0]\\xrightarrow{\\sim}X$ and $c^H_{n,m,X}:X[n+m]\\xrightarrow{\\sim}(X[n])[m]$ for the canonical shift identifications, where $H=\\mathcal A,\\mathcal B$. Then\n$$s_{0,X}=(z^{\\mathcal B}_{GX})^{-1}\\circ G(z^{\\mathcal A}_X),$$\n$$s_{n+m,X}=(c^{\\mathcal B}_{n,m,GX})^{-1}\\circ(s_{n,X})[m]\\circ s_{m,X[n]}\\circ G(c^{\\mathcal A}_{n,m,X}).$$\nMoreover there is a natural isomorphism $\\kappa_E:Gj_E^T\\xrightarrow{\\sim}j_E^S\\Phi_E$ with identity components. It is compatible with these shift comparisons: if $s^{Gj_E^T}$ and $s^{j_E^S\\Phi_E}$ denote the composite shift comparisons, then\n$$s^{j_E^S\\Phi_E}_{n,K}\\circ\\kappa_{E,K[n]}=(\\kappa_{E,K})[n]\\circ s^{Gj_E^T}_{n,K}.$$\nNo preservation of distinguished triangles by $G$ is assumed or concluded.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+  "place": "Proof, exactness sentence; the shift-compatibility argument is written out by NP from the finite-stage comparisons. Compare lean/Sheaf/Paper/PbcDescentFunctors.lean:172-273, shiftHom, shiftIso, descendedCommShift and inclusionComp_commShift."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-common-stage-calculus",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-additive-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent functors on finite coefficient stage pair categories inherit natural integer shift comparisons compatible with zero and addition and stage inclusions",
+   "results": "Eight hits: HasShift.Induced.add, HasShift.induced, Functor.ShiftSequence.induced_shiftMap, SingleFunctors.shiftIso, Functor.ShiftSequence.induced, Functor.ShiftSequence, shiftFunctor_of_induced, ShiftMkCore.add. These construct shifts or shift sequences, not the stage-pair descent and its inclusion compatibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "descendedCommShift|StageSystem|PairCategory|CommShift.*(desc|colimit)|(desc|colimit).*CommShift",
+   "results": "No hits in Mathlib/CategoryTheory for stage systems, pair categories or descended CommShift.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of coherent shift isomorphisms to a filtered pair category with zero and addition coherence and shift compatible inclusion comparisons",
+   "results": "Eight hits: Pseudofunctor.DescentData.isoMk, Functor.ShiftSequence.induced.isoZero, ShiftMkCore.mk, TwistShiftData.shiftMkCore, Functor.CommShift.ofHasShiftOfFullyFaithful, Functor.FullyFaithful.hasShift, ShiftMkCore.zero, HasShift.induced. Fully faithful shift transfer and induced shifts do not apply to an arbitrary descended functor between already fixed pair-category shifts.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.NatTrans.CommShift",
+   "results": "Twelve hits: NatTrans.CommShift.id, isoRefl_hom, CommShift, Functor.CommShift.ofIso_compatibility, NatTrans.CommShift.of_core, leftUnitor, rightUnitor, of_iso_inv, of_iso_symm, of_isIso, Functor.CommShift.ofComp_compatibility, NatTrans.CommShift.comp. These are the definition and formal operations, not the stage-pair coherence theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor induced by a morphism of directed category systems commutes with integer shifts when each stage functor and comparison natural isomorphism commutes coherently with shifts",
+   "results": "Eight hits: Functor.ShiftSequence.induced_shiftMap, shiftFunctor_of_induced, Functor.shiftMap, Functor.ShiftSequence.induced, induced.shiftIso, Functor.CommShift.ofInduced, Functor.map_shiftFunctorComm, induced.shiftIso_hom_app_obj. Induced-shift constructions assume a different universal situation; none gives this pair-category statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def ofInduced|ofHasShiftOfFullyFaithful|class CommShift|class NatTrans.CommShift",
+   "results": "Eight hits in Shift: Adjunction.lean:208, CommShift.lean:147,346,488,503,505, CommShiftTwo.lean:84,173. Read CommShift.lean:138-169 and 470-507 and Induced.lean:20-135. The class specifies precisely the zero/add laws; ofHasShiftOfFullyFaithful assumes a fully faithful functor and changes the source shift, while Induced assumes fully faithful precomposition. Neither is this lemma.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "prop-weil-pbc-descent-functors",
+  "date": "2026-10-21",
+  "group": "NP"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "prop-weil-pbc-descent-functors",
+   "place": "Proof: exactness sentence, specifically descent of the finite-stage shift comparisons and their coherence, made explicit in the previous split step 4 (Descend the stage shift comparison; check zero and addition; inclusion comparison compatible with shifts).",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
