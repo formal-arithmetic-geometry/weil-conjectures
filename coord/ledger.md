@@ -23423,3 +23423,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:08 L: merged deliver/Q01/lem-sfb-continuous-cochain-finite-index-transfer (reviewer PASS; first push; new nodes: 1)
 - 19:08 L: returned deliver/O3/def-per-support-condition (reviewer RETURN: I read the delivered definition in full: 0 new nodes, no proof steps, 5 stmt_deps, each statement read. Source main-2026)
 - 19:09 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 2026-10-21T19:09:47Z L: superseded stage-1 delivery N5/lem-sf-open-external-tensor-normalization at 030a7987f0943b5273c684ea2eb2ec029a5110b7; current completion retained; packet archived at refs/superseded/N5/lem-sf-open-external-tensor-normalization/030a7987f0943b5273c684ea2eb2ec029a5110b7; stale return retired.
