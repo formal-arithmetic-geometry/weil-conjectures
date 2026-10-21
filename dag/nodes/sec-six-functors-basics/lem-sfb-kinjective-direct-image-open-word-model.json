@@ -17,9 +17,137 @@
   "def-pur-kinjective-complex",
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the additive exact section-ring equivalences $E_T$ and the comparisons for direct images, inverse images and open adjunctions of [lem-sfb-internal-module-operations-transport]. On the stipulated small sites, [prop-pur-kinjective-resolutions-exist] gives a K-injective resolution of every sectionwise module complex. Exactness of $E_T$ and its inverse identifies acyclic complexes. Additivity transports the equation $f=dh+hd$ degree by degree, and full faithfulness identifies the maps from each acyclic complex. Hence a complex is K-injective exactly when its image under $E_T$ is, and the resolutions transfer back. The same comparisons identify the specified operations on these representatives. This proves the existence and section-ring assertion of (i); here 'same' is through the canonical comparisons, not a literal equality of the two categories.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 07A5 (section-unbounded); Theorem 079P (injectives-theorem-K-injective-embedding-grothendieck), applied through the section-ring equivalence"
+   }
+  },
+  {
+   "text": "For a scheme morphism $a$, the adjunction $a^*\\dashv a_*$ is the specified one in [sk-def-sfb-module-pushforward-pullback], and its left adjoint is additive exact by [det-prop-sfb-module-pullback-exact-main]. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to obtain preservation by $a_*$. For an open $j$, [sk-def-sfb-module-lower-shriek] gives the exact left adjoint $j_!$ of $j^*$; apply the same lemma to this adjunction to obtain preservation by $j^*$. No exactness of the right adjoint $a_*$ is used.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "sk-def-sfb-module-lower-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives), once for each kind of letter"
+   }
+  },
+  {
+   "text": "Induct on word length: the empty word fixes $I$, and if $uI$ is K-injective then $F(uI)$ is K-injective by the letter result of step 2. This proves preservation for every word. All letters are additive. If $t-t'=dh+hd$, degreewise application of any letter gives $F(t)-F(t')=dF(h)+F(h)d$; iterating proves that every word acts on homotopy classes. In particular it sends a homotopy equivalence and its chosen inverse homotopies to a homotopy equivalence. These observations also apply to the empty word.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ: iteration of the preservation assertion, and the defining homotopy equation"
+   }
+  },
+  {
+   "text": "For a letter $F=a_*$, [lem-sf-kinjective-derived-map-computation] supplies the isomorphism $\\epsilon_{F,L}:F^{\\mathrm d}(QL)\\to Q(FL)$ for K-injective $L$, namely the inverse derived unit using the identity resolution of $L$. It also supplies $\\epsilon_{F,L'}F^{\\mathrm d}(Qs)\\epsilon_{F,L}^{-1}=Q(Fs)$ for a map $s:L\\to L'$ between K-injectives. For $F=j^*$ the exact induced functor has $F^{\\mathrm d}Q=QF$ with its canonical factorization identification, so the same equation follows by its defining action on maps, and $\\epsilon_{F,L}$ is that identification. Thus both kinds of letter have the same evaluation rule.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), with arbitrary-resolution map formula; exact restrictions use their induced-functor definition"
+   }
+  },
+  {
+   "text": "Construct the evaluations by induction. For the empty word put $e_{1,a}=Qa$. If $w=Fu$, define $e_{Fu,a}=\\epsilon_{F,uI}\\circ F^{\\mathrm d}(e_{u,a})$. Step 3 verifies that $uI$ is K-injective, so step 4 applies at every stage. Every factor is invertible. This definition is precisely iteration of the derived units, with the exact-induced identifications for restriction letters. It works simultaneously for all the specified words using the one initial resolution $a:N\\to I$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y: recursive use of the evaluation at a K-injective complex"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-kinjective-hom-derived], the derived arrow $(Qb)h(Qa)^{-1}:QI\\to QJ$ lifts to one and only one homotopy class $t:I\\to J$. Prove the formula of (ii) by induction on $w$. For the empty word it is this defining equality. For $w=Fu$, substitute the formula for $u$ into the recursive evaluations: the conjugated map becomes $\\epsilon_{F,uJ}F^{\\mathrm d}(Q(ut))\\epsilon_{F,uI}^{-1}$, which is $Q(Fut)$ by the one-letter computation of step 4. The latter is exactly the identity-resolution specialization of [lem-sf-kinjective-derived-map-computation] for a direct-image letter; for an exact restriction it is the defining map formula. This proves the assertion for arbitrary derived arrows, rather than just arrows of complexes.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), assertion (3), and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "Apply step 6 with $h=1_{QN}$ and $b=a'$ to obtain $e_{w,a'}e_{w,a}^{-1}=Q(wu)$. The reverse transition lifts the inverse derived arrow; [lem-weil-pbc-kinjective-hom-derived] implies that both composites are identity homotopy classes. Thus $u$ is a homotopy equivalence, and step 3 shows that $wu$ is also one. For three resolutions the product of the two lifted transitions equals the third by that same bijectivity; applying $w$ and $Q$ gives the cocycle equation. This also shows explicitly why applying a possibly nonexact direct image to these transition maps is legitimate.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), bijectivity on maps into K-injectives"
+   }
+  },
+  {
+   "text": "For an underived natural transformation $\\theta:w\\to v$, its degreewise components on a complex form a chain map: $\\theta_{I^{n+1}}w(d^n)=v(d^n)\\theta_{I^n}$ is naturality for $d^n$. For a complex $N$ with resolution $a$, define $\\theta^{\\mathrm d}_{QN}=e_{v,a}^{-1}Q(\\theta_I)e_{w,a}$. For a change of resolution represented by $u:I\\to I'$, naturality gives $v(u)\\theta_I=\\theta_{I'}w(u)$. Substitute the transition formulas of step 7; the two choices of $a$ give the same component. This construction uses only a representative complex for each derived object, which exists by the localization definition. If a localization model uses isomorphic objects, transport the component along that isomorphism; the arbitrary-arrow naturality checked next makes this transport independent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070Y: agent construction using the evaluation formulas and naturality of the given transformation"
+   }
+  },
+  {
+   "text": "For $h:QN\\to QN'$ choose the homotopy class $t:I\\to J$ of step 6. The desired naturality square, conjugated by its four evaluation isomorphisms, is $Q(vt)Q(\\theta_I)=Q(\\theta_J)Q(wt)$, which follows from naturality of $\\theta$ on the chain map $t$. Changing $t$ by a homotopy changes neither side by step 3. This proves naturality for every derived arrow and independence of all homotopic choices. The evaluation formula determines every component on every object, so it determines a unique natural transformation. If $\\theta$ is invertible, applying the construction to $\\theta^{-1}$ gives its inverse by cancellation of the evaluations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070Y: conjugation of naturality by the established arbitrary-arrow formula"
+   }
+  },
+  {
+   "text": "For identities and vertical composites, conjugation cancels the middle evaluation, giving respectively $Q(1_{wI})$ and $Q(\\psi_I\\theta_I)$. To check whiskering, first note the concatenation formula $e_{ux,a}=e_{u,1_{xI}}\\circ u^{\\mathrm d}(e_{x,a})$, where $xI$ is K-injective. Induction on the length of $u$ proves it directly from step 5: for $u=1$ it is $e_{x,a}$, and adding $F$ inserts $\\epsilon_{F,uxI}$ on both sides. Right whiskering $\\theta x$ therefore evaluates to $Q(\\theta_{xI})$, since $xI$ may use its identity resolution. Left whiskering $y\\theta$ evaluates to $Q(y\\theta_I)$ by step 6 applied to the map $\\theta_I:wI\\to vI$ between the K-injective word images. These are exactly the underived whiskerings evaluated on $I$. Thus both whiskerings and vertical composition are preserved with the canonical evaluation identifications.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y: finite induction on evaluation for concatenated words and conjugation of transformations"
+   }
+  },
+  {
+   "text": "Evaluate a finite composite-and-whiskering expression on a common $I$. Step 10 identifies its value with $Q$ of the corresponding underived expression at $I$. Equal underived expressions therefore have equal evaluated values. Cancel the source and target evaluation isomorphisms to obtain equality on each derived object, hence equality of natural transformations. Reparenthesizing inserts only the canonical functor associators: their components identify $(Fu)I$ with $F(uI)$, and the concatenation calculation of step 10 gives the same evaluation on either side. This proves the final diagram assertion, including identity letters, empty words and all canonical associators. All resolutions and map computations above are unbounded, and no support or constructibility condition has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y: conclusion of the finite word evaluation argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-def-sfb-module-pushforward-pullback",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "sk-def-sfb-module-lower-shriek",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 08BJ, 070I and 070Y; explicit finite-word induction and natural-transformation descent from these results, with existence from sites-cohomology Section 07A5 and injectives Theorem 079P."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +190,52 @@
    "results": "4 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean, Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean",
    "date": "2026-10-21",
    "verdict": "no match: K-injective and bounded-below derived-functor files provide ingredients, not the simultaneous module-word theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "PreservesKInjective|IsKInjective|rightDerivedNatTrans",
+   "results": "24 hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: bounded-below/cohomological right-derived maps, generic localization transformations or K-injective hom bijections are ingredients, not the complete internal-module word preservation/evaluation/whiskering statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedNatTrans\"",
+   "results": "9 hits: CategoryTheory.Functor.rightDerivedNatTrans_id, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.Functor.rightDerivedNatTrans_fac, CategoryTheory.Functor.rightDerivedNatTrans_app, CategoryTheory.Functor.rightDerivedNatTrans_comp, CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc, CategoryTheory.Functor.rightDerivedNatTrans_app_assoc, CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: bounded-below/cohomological right-derived maps, generic localization transformations or K-injective hom bijections are ingredients, not the complete internal-module word preservation/evaluation/whiskering statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Iterated unbounded derived pushforwards and open restrictions on a common K injective resolution preserve natural transformation diagrams",
+   "results": "8 hits: CategoryTheory.Functor.toRightDerivedZero, SheafOfModules.pushforwardNatTrans, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality, CategoryTheory.InjectiveResolution.iso_hom_naturality, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.NatTrans.rightDerived, CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: bounded-below/cohomological right-derived maps, generic localization transformations or K-injective hom bijections are ingredients, not the complete internal-module word preservation/evaluation/whiskering statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite composite of right derived functors preserving K injective complexes computes natural transformations on a common K injective resolution",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.NatTrans.rightDerived, CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: bounded-below/cohomological right-derived maps, generic localization transformations or K-injective hom bijections are ingredients, not the complete internal-module word preservation/evaluation/whiskering statement."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedNatTrans|rightDerived.*[Cc]omp",
+   "results": "5 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: bounded-below/cohomological right-derived maps, generic localization transformations or K-injective hom bijections are ingredients, not the complete internal-module word preservation/evaluation/whiskering statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent evaluation of composites of unbounded derived functors at K injective objects and descent of whiskered natural transformations",
+   "results": "8 hits: CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.NatTrans.rightDerived, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: bounded-below/cohomological right-derived maps, generic localization transformations or K-injective hom bijections are ingredients, not the complete internal-module word preservation/evaluation/whiskering statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-derived-direct-image-open-coherence",
@@ -85,5 +255,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-kinjective-direct-image-open-word-model",
+  "worker": "stage1",
+  "summary": "Retained the complete statement. Split into section-ring resolution transfer, preservation by each adjoint and word, recursive canonical evaluations, arbitrary-arrow and resolution-transition computations, explicit descent of transformations, and composition/whiskering checks. Reused eight existing nodes; no new nodes. No Lean code or compiler was used.",
+  "blueprint": "The inherited from.place identifies common-model canonicity of the Rq_*Rr_* = R(qr)_* comparison, reached through derived-direct-image-open-coherence and localizing-lower-shriek-composition from det-cor-affine-space-rational-induction. Steps 1–7 establish that common model and its evaluations; steps 8–11 establish the transformation and finite-diagram descent needed for its canonicity. The affine-space induction and its unit route are not replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic additive exact section-ring equivalence and operation comparisons; no affine-space unit lemma supplies the ambient coefficient-category identification."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General small-ringed-site existence of unbounded K-injective resolutions, an ambient tool absent from the affine-space induction."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic exactness of module inverse image, used only to verify the exact-left-adjoint hypothesis."
+   },
+   {
+    "node": "sk-def-sfb-module-pushforward-pullback",
+    "why": "The specified module adjunction supplies the left adjoint of each direct image."
+   },
+   {
+    "node": "sk-def-sfb-module-lower-shriek",
+    "why": "The specified exact open extension by zero supplies the left adjoint of restriction."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-left-adjoint criterion for preservation of K-injectives."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic localization bijection into a K-injective complex, used to lift derived arrows and compare resolutions."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic one-letter derived-unit evaluation and arbitrary-arrow computation, iterated along the given word route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-module-operations-transport",
+  "prop-pur-kinjective-resolutions-exist",
+  "det-prop-sfb-module-pullback-exact-main",
+  "sk-def-sfb-module-pushforward-pullback",
+  "sk-def-sfb-module-lower-shriek",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-kinjective-derived-map-computation"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-780b243dd",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-780b243dd (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item with its 11 steps, every cited statement, and Stacks 08BJ, 070Y, 070I, 079P, 07A5 at their labels. There are no new nodes. The statement and its stmt_deps are unchanged (diff −4 lines, proof fields only). No re-split note or dropped list applies. Step 1: lem-sfb-internal-module-operations-transport gives additive exact E_T and the operation comparisons, using invertible α as the item assumes. prop-pur-kinjective-resolutions-exist needs a small site and a commutative ring sheaf, both satisfied. Step 2: 08BJ is applied twice. For a_* the exact left adjoint a^* comes from det-prop-sfb-module-pullback-exact-main, valid for any morphism. For j^* the exact left adjoint is j_!, from sk-def-sfb-module-lower-shriek. I recomputed the following myself. Step 4: the identity-resolution case c_1=η^{-1} gives ε RF(Qs) ε^{-1}=Q(Fs). Step 6: the induction on words. Step 7: transitions are homotopy equivalences by the hom-bijection. Step 8: resolution independence via v(u)θ_I=θ_{I'}w(u). Step 10: the concatenation formula e_{ux,a}=e_{u,1}∘u^d(e_{x,a}) and both whiskerings. Edge cases checked: empty word, empty open, acyclic input, identities. No boundedness or exactness of a_* is used. The duplicate search found nothing: the one-letter case is the cited derived-map-computation node, and no node states the word-level descent. The eight declared tool_uses are generic tools from other units and are accepted. Minor: the report mentions a citations.json that the branch does not carry."
  }
 }

@@ -20946,3 +20946,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/Q36/lem-pur-degree-zero-derived-map-gluing (reviewer PASS; after a return; new nodes: 2)
 - 08:09 L: merged deliver/NB/lem-sfb-unit-tensor-braiding (reviewer PASS; first push; new nodes: 0)
 - 08:09 L: merged deliver/NV/lem-sfb-ind-finite-free-scalar-model (reviewer PASS; first push; new nodes: 0)
+- 08:09 L: merged deliver/Q09/lem-sfb-kinjective-direct-image-open-word-model (reviewer PASS; first push; new nodes: 0)
