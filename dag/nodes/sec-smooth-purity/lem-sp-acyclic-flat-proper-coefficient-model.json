@@ -18,75 +18,70 @@
  ],
  "proof": [
   {
-   "text": "Put $D=r_{*,A}C$, $E=C_B$ and $H=r_{*,B}E$. The module categories are Grothendieck abelian with enough injectives by [lem-weil-pbc-module-sheaves-grothendieck-abelian] and [lem-weil-pbc-module-sheaves-enough-injectives]; direct images are additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Both $C,E$ are bounded below and their terms are acyclic for the respective direct images. Clause (3) of [lemma-weil-pbc-leray-acyclicity], applied to their identity quasi-isomorphisms, makes the canonical comparisons $\\alpha_A:QD\\to Rr_{*,A}QC$ and $\\alpha_B:QH\\to Rr_{*,B}QE$ isomorphisms. Bounded-below injective representatives are K-injective by [lem-weil-pbc-dplus-injective-representative], so these are also the unbounded comparisons.",
+   "text": "Put D = r_* C and E = C_B. Additive functors preserve zero objects, so D has the same finite support bound as C and E retains its lower bound. Convert exactness of tensorRight with each term of C and D to exactness on both sides using braided symmetry. Apply the already proved source theorem CochainComplex.kFlat_of_bounded_of_flat to obtain the project's quasi-isomorphism K-flat predicates for C and D. This uses the existing ModuleCat-valued sheaf instances directly, without changing to the separate SheafOfModules encoding.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); source WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat, kFlat_of_bounded_of_flat"
+   }
+  },
+  {
+   "text": "Identify positive homology of the unbounded right derived direct image of a single object with its classical positive right derived functors, using homologyRightDerivedFunctorObjSingleFunctorIso. Thus the terms of C and E are right acyclic. Apply the existing bounded-below acyclic-unit theorem [src-right-derived-functor-plus-acyclic-unit]. The canonical rightDerivedFunctorPlusCompatibility identifies its image under the bounded-below inclusion with rightDerivedFunctorUnit. Whiskering that unit with the homotopy quotient factor gives exactly properAcyclicComparison. Both canonical comparison maps are therefore invertible.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lemma-weil-pbc-leray-acyclicity",
-    "lem-weil-pbc-dplus-injective-representative"
+    "src-right-derived-functor-plus-acyclic-unit",
+    "def-weil-pbc-direct-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015E (lemma-leray-acyclicity), canonical comparison on bounded-below acyclic complexes"
+    "place": "Tag 015E (lemma-leray-acyclicity); source RightDerivedFunctor.PlusHomology and PlusCompatibility"
    }
   },
   {
-   "text": "The complexes $C,D$ are bounded with flat terms, so [lem-pc-bounded-above-flat-kflat-site] makes them K-flat. The canonical scalar-extension computations of [lem-pur-derived-change-of-rings] identify $T_W(QC)=QE$ and $T_V(QD)=Q(D\\otimes_{A_V}B_V)$ naturally. They resolve the first factor and require no flatness of $B$.",
+   "text": "Reuse the proved preservation and derived-unit normalization results of [def-weil-pbc-witness-compatibility]. Let E_T be ordinary sheafified extension of scalars and U_T exact faithful restriction. The ordinary extension/restriction composite is tensorRight with the sheafification of the constant A-module B: compose sheafification/restriction compatibility, ModuleCat.extendScalarsCompRestrictScalarsIso and the sheafification/tensor comparison. Acyclic tensoring by a K-flat complex and faithfulness and exactness of U_T show that E_T preserves quasi-isomorphisms between K-flat complexes. Its left derived counit is consequently invertible on C and D. The chosen scalar-extension left adjoint is canonically isomorphic to this left derived functor by Adjunction.leftAdjointUniq. The derived-unit factorization and naturality of the exact restriction comparison identify scalarExtensionRepresentative with this isomorphism followed by the left derived counit. Hence both specified scalar representatives are invertible. This resolves the first tensor factor only and imposes no flatness condition on B.",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pur-derived-change-of-rings"
+    "def-weil-pbc-witness-compatibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YQ (lemma-bounded-flat-K-flat) and 06YY (lemma-derived-base-change)"
+    "place": "Tags 06YQ and 06YY; source KFlatAcyclic, LeftDerivedFunctor.Defs, and the construction used in Sheaf.Paper.WitnessCompatibility"
    }
   },
   {
-   "text": "Let $e_C:r_A^*D\\to C$ be the termwise counit. Apply [lem-sp-etale-derived-chain-transpose] with $K=C,M=D,f=1_D$: $\\alpha_A$ has inverse transpose $Q(e_C)$. The canonical comparison $\\lambda$ of the statement is the inverse of the normalized scalar/pullback isomorphism $\\operatorname{scalarPullbackIso}(\\varphi,r)$ of [def-pur-etale-scalar-pullback-iso] (on K-flat representatives it is the ordinary reassociation fixed by that normalization), which is exactly the $\\lambda$ of [lem-sp-flat-coefficient-chain-transpose]. By the definition of $q_r$ and naturality of $\\lambda$, the inverse transpose of $q_r(QC)T_V(\\alpha_A)$ is $T_W(Q(e_C))\\lambda^{-1}_{QD}$. Apply [lem-sp-flat-coefficient-chain-transpose] with $P=D,K=C,h=e_C$. Its ordinary adjunct is precisely the displayed $\\pi_C$, degree by degree, and its derived adjunct is $\\alpha_B Q\\pi_C$. Injectivity of the same Hom bijection gives\n$$q_r(QC)T_V(\\alpha_A)=\\alpha_B Q\\pi_C.$$\nThe isomorphisms of Steps 1 and 2 give the claimed representation.",
+   "text": "Use the unit and counit factorization equations of the canonical derived adjunctions, obtained from Adjunction.derivedη_fac_app and derivedε_fac_app with the homotopy quotient factors included. Apply the K-flat normalization of scalarPullbackIso from [def-pur-etale-scalar-pullback-iso] at D. A generic mate calculation expands both mates into unit, square and counit, moves the comparison maps by naturality, and substitutes those two factorization equations and the normalization at D. Its conclusion is the required displayed square. Mapping the ordinary mate to cochain complexes agrees degreewise with the mate of the mapped square; a generic additive-functor lemma verifies this by extensionality on each degree. Therefore the chain-map term in the square is exactly properCoefficientComplexMap, retaining the B-linear structure.",
    "uses": [
-    "def-pur-etale-scalar-pullback-iso",
-    "lem-sp-etale-derived-chain-transpose",
-    "lem-sp-flat-coefficient-chain-transpose"
+    "lem-pur-etale-scalar-mate-projection",
+    "def-pur-etale-scalar-pullback-iso"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), more-etale.tex 0GL6, assembly of the two chain-transpose calculations"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FND; Stacks 0GL6; canonical derived-adjunction and scalar-pullback normalization formulas"
    }
   },
   {
-   "text": "For $h:C\\to C'$, naturality of the ordinary counit gives $h e_C=e_{C'}r_A^*(r_{*,A}h)$. The naturality clause of [lem-sp-flat-coefficient-chain-transpose] applies to $(r_{*,A}h,h)$, so the representing $\\pi$ square commutes. Naturality of $\\alpha$ in [lem-sp-etale-derived-chain-transpose] and of the scalar computations in [lem-pur-derived-change-of-rings] gives all the specified identification squares. Thus the equality in Step 3 is natural in $h$.",
-   "uses": [
-    "lem-sp-etale-derived-chain-transpose",
-    "lem-sp-flat-coefficient-chain-transpose",
-    "lem-pur-derived-change-of-rings"
-   ],
+   "text": "Package the acyclic comparisons, the scalar representatives (transposes of the localized ordinary scalar unit), and the mapped ordinary coefficient mate as natural transformations. Their naturality gives the six required equations, with the mate equation in the stated orientation. These arguments apply to every chain map, hence in particular to maps between the stipulated bounded acyclic flat models.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, naturality of adjunction and coefficient representatives"
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings); naturality of adjunction transposes"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lemma-weil-pbc-leray-acyclicity",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-derived-change-of-rings",
+  "src-right-derived-functor-plus-acyclic-unit",
+  "def-weil-pbc-direct-image",
+  "lem-pur-etale-scalar-mate-projection",
   "def-pur-etale-scalar-pullback-iso",
-  "lem-sp-etale-derived-chain-transpose",
-  "lem-sp-flat-coefficient-chain-transpose"
+  "def-weil-pbc-witness-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), short assembly using 015E and the two statement-only chain-transpose nodes and the normalized scalar/pullback isomorphism."
+  "place": "Tag 0GL6, via the existing source K-flat and bounded-below acyclic-unit theorems, canonical derived-adjunction factorizations (derived.tex 0FND), and the K-flat normalization of scalarPullbackIso. J3: private proved generic mate and scalar-counit calculations; no new unproved intermediate statement."
  },
  "mathlib_searches": [
   {
@@ -303,5 +298,15 @@
   "date": "2026-10-18",
   "fixed_by": "NT-stage2-cc-38e363716"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261021T061350-L-1764762",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
