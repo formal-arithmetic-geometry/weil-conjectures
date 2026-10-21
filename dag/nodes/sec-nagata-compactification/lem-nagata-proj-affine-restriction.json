@@ -29,7 +29,7 @@
    "elementary": true
   },
   {
-   "text": "Quasi-coherent affine section base change identifies the underlying section restriction with scalar extension. Tensoring commutes with the direct-sum grading. Under the decomposition equivalences the total comparison is the direct sum of the degreewise comparisons; its bijectivity implies bijectivity in each degree. Apply affine Proj base change (the source primitive Proj.isPullback_map_of_isGradedBaseChange used by lem-nagata-affine-proj-scalar-extension), and paste with the canonical affine spectrum identifications. Transport along the identity-induced grading isomorphisms to get the asserted pullback square.",
+   "text": "Quasi-coherent affine section base change gives bijective total scalar extension. Decomposition and tensor/direct-sum commutation imply bijectivity in each degree. This proves gradeRestriction_baseChange and packages the actual section rings as source GradedAlgebraData. Apply its isPullback_relProjFunctor_map (which uses the affine Proj scalar-extension primitive and the affine spectrum inclusion identity). Transport along the identity grading isomorphisms using gradeIso_naturality and gradeIso_hom_base.",
    "uses": [
     "lem-weil-pbc-quasi-coherent-affine-section-base-change",
     "lem-nagata-affine-proj-scalar-extension",
@@ -53,10 +53,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F3",
+  "group": "U2",
   "date": "2026-10-22",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01NO and 01NP; the coefficientwise base-change verification is expanded using direct-sum linear algebra."
+  "place": "Tags 01NO and 01NP, through the source affine-data API and direct-sum base change."
  },
  "mathlib_searches": [
   {
@@ -147,23 +147,26 @@
   "declarations": [
    "AlgebraicGeometry.RelativeProjAlgebra.localTransition_isPullback",
    "AlgebraicGeometry.RelativeProjAlgebra.localTransition_id",
-   "AlgebraicGeometry.RelativeProjAlgebra.localTransition_comp"
+   "AlgebraicGeometry.RelativeProjAlgebra.localTransition_comp",
+   "AlgebraicGeometry.RelativeProjAlgebra.gradeRestriction_baseChange",
+   "AlgebraicGeometry.RelativeProjAlgebra.gradeIso_naturality"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/RelativeProjAffineRestriction.lean",
   "existing": false,
   "branch": "sheaf-dag",
   "by": "F3",
   "date": "2026-10-22",
-  "statement": "theorem localTransition_isPullback {V W : X.affineOpens} (h : W ≤ V) :\n    IsPullback (A.localTransition h) (A.localBase W) (A.localBase V) (X.homOfLE h)"
+  "statement": "theorem localTransition_isPullback {V W : X.affineOpens} (h : W ≤ V) :\n    IsPullback (A.localTransition h) (A.localBase W) (A.localBase V) (X.homOfLE h)",
+  "note": "U2, 2026-10-22: degreewise base change now supplies affineData for the source library. localTransition_isPullback is transported from affineData.isPullback_relProjFunctor_map; the original identity and composition theorem signatures and proofs remain."
  },
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
-  "result": "pass",
-  "landing": "20261021T214753-L-1850992",
+  "reviewer": "C-bb960",
+  "group": "U2",
+  "result": "fix",
+  "landing": "20261021T233802-L-862758",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item withdrawal + RelativeProjAffineRestriction bridge (affineData/realization over source relProjGluingData) + RelativeProjectiveSpace.construction migration against nodes lemma-nagata-relative-proj-exists, lem-nagata-proj-affine-restriction, def-nagata-relative-proj, change record and live clone; 2 delivered modules and all 7 direct importers of RelativeProjectiveSpace compiled clean in sandbox"
  }
 }

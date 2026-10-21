@@ -6,9 +6,9 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeProjData
+public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 import WeilConjectures.AlgebraicGeometry.RelativeProj.GradedTensor
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentAffineSectionBaseChange
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine restriction of relative Proj charts
 
@@ -56,14 +56,20 @@ private theorem baseChange_of_directSum
 
 variable {X : Scheme.{u}} (A : RelativeProjAlgebra X)
 
-private noncomputable instance sectionAlgebra (V : X.affineOpens) :
+/-- The section algebra structure supplied by the algebra sheaf.
+Source: Stacks, Tag 01LH (blueprint: def-nagata-relative-proj). -/
+noncomputable instance sectionAlgebra (V : X.affineOpens) :
     Algebra Γ(X, V.1) (A.sections V) := (A.algebra.obj.hom.hom.app (op V.1)).hom.toAlgebra
 
-private noncomputable def grade (V : X.affineOpens) (n : ℕ) :
+/-- Homogeneous section images as submodules over the base section ring.
+Source: Stacks, Tag 01LH (blueprint: def-nagata-relative-proj). -/
+noncomputable def grade (V : X.affineOpens) (n : ℕ) :
     Submodule Γ(X, V.1) (A.sections V) :=
   ((Sigma.ι A.piece n ≫ A.decomposition.hom).val.app (op V.1)).hom.range
 
-private noncomputable instance gradeRing (V : X.affineOpens) : GradedAlgebra (A.grade V) where
+/-- The section grading, with its base-module structure.
+Source: Stacks, Tag 01LH (blueprint: def-nagata-relative-proj). -/
+noncomputable instance gradeRing (V : X.affineOpens) : GradedAlgebra (A.grade V) where
   toDecomposition :=
     { decompose' := DirectSum.decompose (A.sectionGrade V)
       left_inv := fun a ↦ (DirectSum.decompose (A.sectionGrade V)).left_inv a
@@ -71,13 +77,19 @@ private noncomputable instance gradeRing (V : X.affineOpens) : GradedAlgebra (A.
   one_mem := A.sectionGrade_one V
   mul_mem := A.sectionGrade_mul V
 
-private def toGrade (V : X.affineOpens) : A.sectionGrade V →+*ᵍ A.grade V :=
+/-- Identity on sections, viewed as a map to the submodule grading.
+Source: Stacks, Tag 01LH (blueprint: def-nagata-relative-proj). -/
+def toGrade (V : X.affineOpens) : A.sectionGrade V →+*ᵍ A.grade V :=
   { RingHom.id _ with map_mem := fun ha ↦ ha }
 
-private def fromGrade (V : X.affineOpens) : A.grade V →+*ᵍ A.sectionGrade V :=
+/-- Identity on sections, viewed as a map to the additive-subgroup grading.
+Source: Stacks, Tag 01LH (blueprint: def-nagata-relative-proj). -/
+def fromGrade (V : X.affineOpens) : A.grade V →+*ᵍ A.sectionGrade V :=
   { RingHom.id _ with map_mem := fun ha ↦ ha }
 
-private lemma toGrade_irrelevant (V : X.affineOpens) :
+/-- The identity grading comparison preserves the irrelevant ideal.
+Source: Stacks, Tag 01LH (blueprint: def-nagata-relative-proj). -/
+lemma toGrade_irrelevant (V : X.affineOpens) :
     HomogeneousIdeal.irrelevant (A.grade V) ≤
       (HomogeneousIdeal.irrelevant (A.sectionGrade V)).map (A.toGrade V) := by
   apply (HomogeneousIdeal.toIdeal_irrelevant_le _).mpr
@@ -85,7 +97,9 @@ private lemma toGrade_irrelevant (V : X.affineOpens) :
   exact Ideal.mem_map_of_mem (A.toGrade V)
     (HomogeneousIdeal.mem_irrelevant_of_mem _ hn hx)
 
-private lemma fromGrade_irrelevant (V : X.affineOpens) :
+/-- The inverse grading comparison preserves the irrelevant ideal.
+Source: Stacks, Tag 01LH (blueprint: def-nagata-relative-proj). -/
+lemma fromGrade_irrelevant (V : X.affineOpens) :
     HomogeneousIdeal.irrelevant (A.sectionGrade V) ≤
       (HomogeneousIdeal.irrelevant (A.grade V)).map (A.fromGrade V) := by
   apply (HomogeneousIdeal.toIdeal_irrelevant_le _).mpr
@@ -93,7 +107,9 @@ private lemma fromGrade_irrelevant (V : X.affineOpens) :
   exact Ideal.mem_map_of_mem (A.fromGrade V)
     (HomogeneousIdeal.mem_irrelevant_of_mem _ hn hx)
 
-private noncomputable def gradeIso (V : X.affineOpens) :
+/-- The local Proj is unchanged by retaining the base-module structure of its grading.
+Source: Stacks, Tag 01LH (blueprint: def-nagata-relative-proj). -/
+noncomputable def gradeIso (V : X.affineOpens) :
     A.localProj V ≅ Proj (A.grade V) where
   hom := Proj.map (A.fromGrade V) (A.fromGrade_irrelevant V)
   inv := Proj.map (A.toGrade V) (A.toGrade_irrelevant V)
@@ -108,7 +124,9 @@ private noncomputable def gradeIso (V : X.affineOpens) :
       (show (A.toGrade V).comp (A.fromGrade V) = .id _ from
         GradedRingHom.ext fun _ ↦ rfl) _ (by simp)).trans Proj.map_id
 
-private lemma gradeIso_hom_base (V : X.affineOpens) :
+/-- The grading comparison respects the structural morphism.
+Source: Stacks, Tag 01LH (blueprint: def-nagata-relative-proj). -/
+lemma gradeIso_hom_base (V : X.affineOpens) :
     (A.gradeIso V).hom ≫ Proj.toSpecOfAlgebra (A.grade V) ≫ V.2.isoSpec.inv =
       A.localBase V := by
   dsimp only [gradeIso, Proj.toSpecOfAlgebra, localBase]
@@ -148,21 +166,16 @@ namespace AlgebraicGeometry.RelativeProjAlgebra
 
 variable {X : Scheme.{u}} (A : RelativeProjAlgebra X)
 
-/-- Restriction of affine Proj charts is cartesian over the affine inclusion.
+/-- Section restriction as a homomorphism of submodule-graded algebras.
+Source: Stacks, Tag 01NO (blueprint: def-nagata-relative-proj). -/
+def gradeRestriction {V W : X.affineOpens} (h : W ≤ V) : A.grade V →+*ᵍ A.grade W :=
+  { A.restriction h with map_mem := fun ha ↦ A.restriction_mem h _ _ ha }
 
-Source: Stacks Project, Constructions, Tag 01NO (lemma-proj-inclusion)
-(blueprint: lem-nagata-proj-affine-restriction).
-
-Proof: the homogeneous section images are submodules because their inclusions are linear.
-Their underlying additive groups give the specified internal grading. Quasi-coherence of
-the underlying algebra identifies its affine section restriction with scalar extension.
-Decompose source and target into homogeneous components: tensor products commute with
-these direct sums, so the bijective total tensor map is bijective in each degree.
-Apply base change for affine Proj, and transport the base spectra through the canonical
-affine identifications. This does not assume that the degree-zero algebra equals the base.
--/
-theorem localTransition_isPullback {V W : X.affineOpens} (h : W ≤ V) :
-    IsPullback (A.localTransition h) (A.localBase W) (A.localBase V) (X.homOfLE h) := by
+/-- Affine section restrictions are base change in every degree.
+Source: Stacks, Tag 01NO (blueprint: lem-nagata-proj-affine-restriction). -/
+theorem gradeRestriction_baseChange {V W : X.affineOpens} (h : W ≤ V) :
+    (A.gradeRestriction h).IsGradedBaseChangeAlong
+      (X.presheaf.map (homOfLE (X := X.Opens) h).op).hom := by
   classical
   let R := Γ(X, V.1)
   let S := Γ(X, W.1)
@@ -172,8 +185,7 @@ theorem localTransition_isPullback {V W : X.affineOpens} (h : W ≤ V) :
   let : Algebra R S := f.toAlgebra
   let : Algebra R E := ((algebraMap S E).comp f).toAlgebra
   let : IsScalarTower R S E := .of_algebraMap_eq' rfl
-  let ψ : A.grade V →+*ᵍ A.grade W :=
-    { A.restriction h with map_mem := fun ha ↦ A.restriction_mem h _ _ ha }
+  let ψ := A.gradeRestriction h
   have hψ : ∀ r : R, ψ (algebraMap R C r) = algebraMap R E r := by
     intro r
     exact congrArg (fun q ↦ q r)
@@ -202,29 +214,67 @@ theorem localTransition_isPullback {V W : X.affineOpens} (h : W ≤ V) :
     change c (TensorProduct.comm R S C (1 ⊗ₜ[R] a)) = ψ a
     rw [TensorProduct.comm_tmul]
     simpa only [one_smul] using ht' a 1
-  have hg := GradedRingHom.gradedBaseChange_of_total ψ hψ hb
-  have hp := Proj.isPullback_map_of_isGradedBaseChange ψ hg
-  have w : Spec.map (CommRingCat.ofHom f) ≫ V.2.isoSpec.inv =
-      W.2.isoSpec.inv ≫ X.homOfLE h := by
-    exact specMap_res_isoSpec_inv h
-  have hn : (A.gradeIso W).hom ≫ Proj.map ψ hg.irrelevant_le =
+  exact GradedRingHom.gradedBaseChange_of_total ψ hψ hb
+
+/-- The affine graded-algebra data of the given quasi-coherent algebra sheaf.
+All rings and restrictions are the actual section rings and section restrictions.
+Degreewise base change follows from total quasi-coherent base change by direct sums.
+Source: Stacks, Tags 01LH and 01NO (blueprint: def-nagata-relative-proj). -/
+noncomputable def affineData : X.GradedAlgebraData where
+  obj V := A.sections V
+  algebra V := A.sectionAlgebra V
+  grading := A.grade
+  gradedAlgebra := A.gradeRing
+  res h := A.gradeRestriction h
+  res_id V a := by
+    change A.algebra.obj.right.obj.map (𝟙 (op V.1)) a = a
+    simp
+  res_res h k a := by
+    exact (congrArg (fun q ↦ q a)
+      (A.algebra.obj.right.obj.map_comp
+        (homOfLE (X := X.Opens) k).op (homOfLE (X := X.Opens) h).op)).symm
+  isGradedBaseChangeAlong h := A.gradeRestriction_baseChange h
+
+/-- The chart grading comparisons commute with affine restriction.
+Source: Stacks, Tag 01NO (blueprint: lem-nagata-proj-affine-restriction). -/
+lemma gradeIso_naturality {V W : X.affineOpens} (h : W ≤ V) :
+    (A.gradeIso W).hom ≫ A.affineData.relProjFunctor.map (homOfLE h) =
       A.localTransition h ≫ (A.gradeIso V).hom := by
-    dsimp only [gradeIso, localTransition]
-    rw [← Proj.map_comp, ← Proj.map_comp]
-    apply Proj.map_congr
-    exact GradedRingHom.ext fun _ ↦ rfl
-  refine (hp.paste_vert (IsPullback.of_vert_isIso ⟨w⟩)).of_iso
-    (A.gradeIso W).symm (A.gradeIso V).symm (Iso.refl _) (Iso.refl _) ?_ ?_ ?_ ?_
+  dsimp only [gradeIso, localTransition, Scheme.GradedAlgebraData.relProjFunctor]
+  rw [← Proj.map_comp, ← Proj.map_comp]
+  apply Proj.map_congr
+  exact GradedRingHom.ext fun _ ↦ rfl
+
+/-- Restriction of affine Proj charts is cartesian over the affine inclusion.
+
+Source: Stacks Project, Constructions, Tag 01NO (lemma-proj-inclusion)
+(blueprint: lem-nagata-proj-affine-restriction).
+
+Proof: the homogeneous section images are submodules because their inclusions are linear.
+Their underlying additive groups give the specified internal grading. Quasi-coherence of
+the underlying algebra identifies its affine section restriction with scalar extension.
+Decompose source and target into homogeneous components: tensor products commute with
+these direct sums, so the bijective total tensor map is bijective in each degree.
+Apply base change for affine Proj, and transport the base spectra through the canonical
+affine identifications. This does not assume that the degree-zero algebra equals the base.
+-/
+theorem localTransition_isPullback {V W : X.affineOpens} (h : W ≤ V) :
+    IsPullback (A.localTransition h) (A.localBase W) (A.localBase V) (X.homOfLE h) := by
+  have hp := A.affineData.isPullback_relProjFunctor_map h
+  refine hp.of_iso (A.gradeIso W).symm (A.gradeIso V).symm
+    (Iso.refl _) (Iso.refl _) ?_ ?_ ?_ ?_
   · apply (cancel_epi (A.gradeIso W).hom).mp
     simp only [Iso.symm_hom, ← Category.assoc, Iso.hom_inv_id, Category.id_comp]
-    rw [hn]
+    rw [A.gradeIso_naturality h]
     simp
   · simp only [Iso.refl_hom, Category.comp_id, Iso.symm_hom]
     rw [← A.gradeIso_hom_base W]
-    simp
+    simp only [Iso.inv_hom_id_assoc]
+    rfl
   · simp only [Iso.refl_hom, Category.comp_id, Iso.symm_hom]
     rw [← A.gradeIso_hom_base V]
-    simp
+    simp only [Iso.inv_hom_id_assoc]
+    rfl
   · simp
 
 /-- Identity restriction induces the identity on Proj.
@@ -252,5 +302,75 @@ theorem localTransition_comp {U V W : X.affineOpens} (h : U ≤ V) (k : V ≤ W)
   exact (Proj.map_congr hh _
     (HomogeneousIdeal.irrelevant_le_map_comp (A.irrelevant_le k)
       (A.irrelevant_le h))).trans (Proj.map_comp _ _ _ _)
+
+/-- Identify the source-library affine chart with the inverse image of its base open.
+Source: Stacks, Tag 01NQ (blueprint: lemma-nagata-relative-proj-exists). -/
+noncomputable def affineRestrictionIso (V : X.affineOpens) :
+    Proj (A.affineData.grading V) ≅ (A.affineData.relProjHom ⁻¹ᵁ V.1).toScheme := by
+  apply IsOpenImmersion.isoOfRangeEq (A.affineData.relProjι V)
+    (A.affineData.relProjHom ⁻¹ᵁ V.1).ι
+  rw [Scheme.Opens.range_ι]
+  exact congrArg (fun U : A.affineData.relProj.Opens ↦ (U : Set A.affineData.relProj))
+    (A.affineData.relProjHom_preimage V).symm
+
+/-- The restriction identification followed by inclusion is the source-library chart map.
+Source: Stacks, Tag 01NQ (blueprint: lemma-nagata-relative-proj-exists). -/
+lemma affineRestrictionIso_hom_ι (V : X.affineOpens) :
+    (A.affineRestrictionIso V).hom ≫ (A.affineData.relProjHom ⁻¹ᵁ V.1).ι =
+      A.affineData.relProjι V := by
+  unfold affineRestrictionIso
+  exact IsOpenImmersion.isoOfRangeEq_hom_fac _ _ _
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The source-library relative Proj, equipped with the sheaf-input chart interface.
+This explicitly constructs the datum; no witness is selected from an existence theorem.
+The glued scheme and its structure map are the source library's `relProj` and `relProjHom`.
+Source: Stacks, Tags 01LH and 01NQ (blueprint: lemma-nagata-relative-proj-exists). -/
+noncomputable def realization : RelativeProjData A where
+  gluing := A.affineData.relProjGluingData
+  localIso V := (A.gradeIso V).symm
+  local_over V := by
+    rw [← A.gradeIso_hom_base V]
+    simp only [Iso.symm_hom, ← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+    rfl
+  local_transition V W h := by
+    change A.affineData.relProjFunctor.map (homOfLE h) ≫ (A.gradeIso V).inv =
+      (A.gradeIso W).inv ≫ A.localTransition h
+    apply (cancel_epi (A.gradeIso W).hom).mp
+    simp only [← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+    rw [A.gradeIso_naturality h]
+    simp
+  restrictionIso V := (A.affineRestrictionIso V).symm ≪≫ (A.gradeIso V).symm
+  restriction_ι V := by
+    change (A.affineRestrictionIso V).inv ≫ (A.gradeIso V).inv ≫
+      (A.gradeIso V).hom ≫ A.affineData.relProjι V = _
+    rw [Iso.inv_hom_id_assoc, ← A.affineRestrictionIso_hom_ι V]
+    simp only [Iso.inv_hom_id_assoc]
+    rfl
+  restriction_over V := by
+    change (A.affineRestrictionIso V).inv ≫ (A.gradeIso V).inv ≫
+      A.localBase V ≫ V.1.ι = _
+    rw [← A.gradeIso_hom_base V]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    change (A.affineRestrictionIso V).inv ≫ A.affineData.toOpen V ≫ V.1.ι = _
+    rw [← A.affineData.relProjι_relProjHom V, ← A.affineRestrictionIso_hom_ι V]
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    rfl
+  restriction_compatibility V W h := by
+    apply (cancel_epi (A.gradeIso W).inv).mp
+    apply (cancel_mono (A.gradeIso V).hom).mp
+    simp only [Iso.trans_inv, Iso.symm_inv, Iso.trans_hom, Iso.symm_hom,
+      Category.assoc, Iso.inv_hom_id_assoc]
+    rw [← A.gradeIso_naturality h]
+    apply (cancel_mono (A.affineRestrictionIso V).hom).mp
+    apply (cancel_mono (A.affineData.relProjHom ⁻¹ᵁ V.1).ι).mp
+    simp only [Category.assoc, Iso.inv_hom_id_assoc]
+    change (A.affineRestrictionIso W).hom ≫ A.affineData.relProj.homOfLE
+      (A.affineData.relProjHom.preimage_mono h) ≫ (A.affineData.relProjHom ⁻¹ᵁ V.1).ι =
+      A.affineData.relProjFunctor.map (homOfLE h) ≫ (A.affineRestrictionIso V).hom ≫
+        (A.affineData.relProjHom ⁻¹ᵁ V.1).ι
+    rw [Scheme.homOfLE_ι, ← Category.assoc, A.affineRestrictionIso_hom_ι,
+      Category.assoc, A.affineRestrictionIso_hom_ι]
+    exact (A.affineData.relProjFunctor_map_relProjι (homOfLE h)).symm
 
 end AlgebraicGeometry.RelativeProjAlgebra

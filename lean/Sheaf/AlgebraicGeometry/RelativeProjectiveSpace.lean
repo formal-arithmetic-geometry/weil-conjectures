@@ -6,7 +6,7 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction
-public import Sheaf.AlgebraicGeometry.RelativeProjExists
+public import Sheaf.AlgebraicGeometry.RelativeProjAffineRestriction
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
@@ -790,7 +790,7 @@ def algebra : RelativeProjAlgebra X := (existsUnique_symmetricInput X r).exists.
 /-- Relative Proj with all its compatible affine restriction isomorphisms. The existence
 theorem determines this realization up to the unique chart-preserving isomorphism.
 Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/
-def construction : RelativeProjData (algebra X r) := (exists_relativeProjData (algebra X r)).choose
+def construction : RelativeProjData (algebra X r) := (algebra X r).realization
 
 /-- Relative projective `r`-space over `X`, using symmetric-algebra relative Proj.
 Source: blueprint, order 203 (blueprint: def-nagata-relative-projective-space). -/

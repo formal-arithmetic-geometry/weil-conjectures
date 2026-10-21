@@ -124,14 +124,29 @@
    "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjι",
    "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso",
    "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso_hom_naturality",
-   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjFunctor_map_relProjι"
+   "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjFunctor_map_relProjι",
+   "AlgebraicGeometry.RelativeProjAlgebra.sectionAlgebra",
+   "AlgebraicGeometry.RelativeProjAlgebra.grade",
+   "AlgebraicGeometry.RelativeProjAlgebra.gradeRing",
+   "AlgebraicGeometry.RelativeProjAlgebra.toGrade",
+   "AlgebraicGeometry.RelativeProjAlgebra.fromGrade",
+   "AlgebraicGeometry.RelativeProjAlgebra.toGrade_irrelevant",
+   "AlgebraicGeometry.RelativeProjAlgebra.fromGrade_irrelevant",
+   "AlgebraicGeometry.RelativeProjAlgebra.gradeIso",
+   "AlgebraicGeometry.RelativeProjAlgebra.gradeIso_hom_base",
+   "AlgebraicGeometry.RelativeProjAlgebra.gradeRestriction",
+   "AlgebraicGeometry.RelativeProjAlgebra.affineData"
   ],
   "statement": "def relProj : Scheme.{u}",
   "branch": "slopmaster2",
   "by": "NE",
   "date": "2026-10-15",
   "existing": true,
-  "note": "Section 1(B) repair: the prior RelativeProjData record duplicates the existing upstream relative Proj notion and accepts a separate gluing datum; it does not supply the canonical construction on the GradedAlgebraData input used by the existing functoriality and base-change declarations. Reuse the upstream canonical gluing construction instead. GradedAlgebraData gives the equivalent affine-basis presentation of a quasi-coherent graded algebra: actual degreewise base-change restriction, not arbitrary affine rings. relProj glues its local Proj schemes, relProjHom uses the unit into degree zero without assuming A_0 = O_X, relProjι gives the local embeddings, and relProjRestrictIso and its naturality specify the universal affine identifications. Basic and GradedAlgebraData were read from the current server with scompile.py --source. No mathematical statement of this dependency is changed."
+  "note": "Section 1(B) repair: the prior RelativeProjData record duplicates the existing upstream relative Proj notion and accepts a separate gluing datum; it does not supply the canonical construction on the GradedAlgebraData input used by the existing functoriality and base-change declarations. Reuse the upstream canonical gluing construction instead. GradedAlgebraData gives the equivalent affine-basis presentation of a quasi-coherent graded algebra: actual degreewise base-change restriction, not arbitrary affine rings. relProj glues its local Proj schemes, relProjHom uses the unit into degree zero without assuming A_0 = O_X, relProjι gives the local embeddings, and relProjRestrictIso and its naturality specify the universal affine identifications. Basic and GradedAlgebraData were read from the current server with scompile.py --source. No mathematical statement of this dependency is changed. U2, 2026-10-22: affineData is the explicit bridge from the retained RelativeProjAlgebra sheaf input to this canonical source construction. Its obj, grading, and res are the actual section rings, image submodules, and restrictions; no data are chosen from existence. The existing localProj interface is transported by gradeIso.",
+  "modules": [
+   "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
+   "Sheaf.AlgebraicGeometry.RelativeProjAffineRestriction"
+  ]
  },
  "reviewed_lean": {
   "date": "2026-10-15",
@@ -146,5 +161,15 @@
   "statement": "Let $X$ be a scheme and\n$\\mathcal A=\\bigoplus_{n\\geq0}\\mathcal A_n$ a quasi-coherent graded\n$\\mathcal O_X$-algebra. On every affine open $V\\subseteq X$, form\n\n$$\n\\operatorname{Proj}(\\Gamma(V,\\mathcal A)).\n$$\n\nQuasi-coherence identifies the graded algebra on a basic affine restriction\nwith coefficientwise localization. The intended relative Proj is the scheme\nobtained by gluing these affine Proj schemes along the induced standard-chart\nequivalences, with structural map to $X$ glued from the degree-zero maps.\nThe construction includes the chosen affine cover, all overlap\nisomorphisms, their cocycle equalities, and the resulting universal\nrestriction isomorphisms.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-bb960",
+  "group": "U2",
+  "result": "fix",
+  "landing": "20261021T233802-L-862758",
+  "kind": "interface",
+  "note": "independent cc review: item withdrawal + RelativeProjAffineRestriction bridge (affineData/realization over source relProjGluingData) + RelativeProjectiveSpace.construction migration against nodes lemma-nagata-relative-proj-exists, lem-nagata-proj-affine-restriction, def-nagata-relative-proj, change record and live clone; 2 delivered modules and all 7 direct importers of RelativeProjectiveSpace compiled clean in sandbox"
  }
 }

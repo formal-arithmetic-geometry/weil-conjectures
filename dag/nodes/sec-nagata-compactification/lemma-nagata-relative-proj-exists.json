@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Form the diagram of the specified localProj schemes and localTransition maps over all affine opens. Identity and composition come from lem-nagata-proj-affine-restriction. The pullback assertion of that lemma makes the localBase natural transformation equifibered. Apply relative gluing over directedAffineCover.",
+   "text": "Package the actual homogeneous section images as submodule-graded affine section rings (affineData). Degreewise quasi-coherent base change follows from the total section base-change theorem and the direct-sum decomposition, as in lem-nagata-proj-affine-restriction. The source-library relative Proj applies to exactly these data; there is no second gluing construction.",
    "uses": [
     "def-nagata-relative-proj",
     "lem-nagata-proj-affine-restriction",
@@ -27,14 +27,14 @@
    "elementary": false
   },
   {
-   "text": "The relative gluing preimage theorem identifies each colimit chart with the inverse image of its affine base open. The canonical open-immersion isomorphism gives restrictionIso; the structure-map equation is the colimit structure-map equation, and restriction compatibility is colimit.w. Thus these data define RelativeProjData with precisely the original local models.",
+   "text": "Use the source-library relProjGluingData, relProjHom_preimage and relProjι_relProjHom. The open-immersion isomorphism identifies each source chart with its inverse-image open, and the identity grading comparison identifies it with the specified sheaf localProj. The source functor law relProjFunctor_map_relProjι gives restriction compatibility. These fields explicitly construct realization : RelativeProjData A.",
    "uses": [
     "lem-weil-pbc-relative-glueing-affine-opens"
    ],
    "elementary": true
   },
   {
-   "text": "For a competing realization P, pull back the directed affine cover of X along its structural map. Its diagram has colimit P. The specified chart isomorphisms identify this diagram naturally with the localProj diagram: the transition hypothesis gives naturality after postcomposing with each open inclusion. Transport the colimit property across this natural isomorphism. Uniqueness of colimits supplies an isomorphism from the constructed relative Proj to P, with the required chart equations. The base-map equation follows by colimit.hom_ext from the local over-base equations. Any other chart-preserving isomorphism has the same composites with every colimit injection, so colimit.hom_ext proves it equal. The directed affine cover already handles arbitrary non-affine overlaps by affine refinements.",
+   "text": "Uniqueness and cover independence are the source-library existsUnique_relProjIso and isColimitRestrict, still attached to this node. The identity-on-sections grading comparisons intertwine localBase and localTransition, so they identify the sheaf charts with the source charts. The source uniqueness proof compares colimits of the pulled-back directed affine covers, using affine refinements for non-affine overlaps. No separate sheaf-input existence theorem is retained.",
    "uses": [
     "lem-weil-pbc-relative-glueing-affine-opens",
     "lem-weil-pbc-scheme-morphism-gluing",
@@ -52,10 +52,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "F3",
+  "group": "U2",
   "date": "2026-10-22",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tags 01LH and 01NQ: relative gluing and uniqueness, implemented through directed-cover colimits."
+  "place": "Tags 01LH and 01NQ; reuse of the existing source-library relative Proj through actual affine section data."
  },
  "mathlib_searches": [
   {
@@ -154,11 +154,8 @@
   "branch": "sheaf-dag",
   "by": "L",
   "date": "2026-10-17",
-  "note": "2026-10-17 (L): repointed from the sorried duplicate Sheaf.AlgebraicGeometry.RelativeProjExists.exists_relativeProjData to the source library's sorry-free declarations recorded by the slopmaster2 audit (state closed). 2026-10-22 (F3): the retained sheaf-input interface exists_relativeProjData is proved separately from affine restriction and directed-cover gluing; the source-library declarations remain unchanged.",
-  "superseded": {
-   "module": "Sheaf.AlgebraicGeometry.RelativeProjExists",
-   "declaration": "AlgebraicGeometry.exists_relativeProjData"
-  },
+  "note": "U2, 2026-10-22: completes the assigned duplicate repair. RelativeProjExists is withdrawn under steps 8b/8d; its sole consumer is migrated to the source-based affine-data bridge. The sheaf-input bridge affineData uses the actual graded section rings; realization equips the source relProjGluingData with the existing sheaf-input chart interface. RelativeProjectiveSpace constructs this datum explicitly. Existence, restriction, uniqueness and cover independence remain attached to the unchanged source-library declarations above.",
+  "superseded": null,
   "declarations": [
    "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjι_relProjHom",
    "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjHom_preimage",
@@ -168,12 +165,14 @@
    "AlgebraicGeometry.Scheme.GradedAlgebraData.relProjRestrictIso_hom_naturality",
    "AlgebraicGeometry.Scheme.GradedAlgebraData.isColimitRestrict",
    "AlgebraicGeometry.Scheme.GradedAlgebraData.existsUnique_relProjIso",
-   "AlgebraicGeometry.exists_relativeProjData"
+   "AlgebraicGeometry.RelativeProjAlgebra.affineRestrictionIso",
+   "AlgebraicGeometry.RelativeProjAlgebra.affineRestrictionIso_hom_ι",
+   "AlgebraicGeometry.RelativeProjAlgebra.realization"
   ],
   "modules": [
    "WeilConjectures.AlgebraicGeometry.RelativeProj.Basic",
    "WeilConjectures.AlgebraicGeometry.RelativeProj.Universal",
-   "Sheaf.AlgebraicGeometry.RelativeProjExists"
+   "Sheaf.AlgebraicGeometry.RelativeProjAffineRestriction"
   ]
  },
  "blueprint_update": {
@@ -198,11 +197,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
-  "result": "pass",
-  "landing": "20261021T214753-L-1850992",
+  "reviewer": "C-bb960",
+  "group": "U2",
+  "result": "fix",
+  "landing": "20261021T233802-L-862758",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item withdrawal + RelativeProjAffineRestriction bridge (affineData/realization over source relProjGluingData) + RelativeProjectiveSpace.construction migration against nodes lemma-nagata-relative-proj-exists, lem-nagata-proj-affine-restriction, def-nagata-relative-proj, change record and live clone; 2 delivered modules and all 7 direct importers of RelativeProjectiveSpace compiled clean in sandbox"
  }
 }
