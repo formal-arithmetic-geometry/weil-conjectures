@@ -20997,3 +20997,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:10 L: merged deliver/Q05/lem-sfb-finite-proper-classical-amplitude (reviewer FIX; first push; new nodes: 0)
 - 08:10 L: merged deliver/Q120/lem-pur-reduction-limit-shift-adjunction (reviewer FIX; after a return; new nodes: 2)
 - 08:10 L: merged deliver/Q52/lem-sf-cbc-extension-zero-completion (reviewer FIX; after a return; new nodes: 1)
+- 08:10 L: merged deliver/Q100/lem-sf-pf-open-factor-coherence (reviewer FIX; after a return; new nodes: 4)
