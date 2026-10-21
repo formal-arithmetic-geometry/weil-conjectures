@@ -16,11 +16,10 @@
  ],
  "proof": [
   {
-   "text": "Work in a common value universe containing the small site, so the local-section theorem applies. Module sheafification has underlying abelian sheaf the abelian-group sheafification, and abelian-group and commutative-ring sheafification commute with underlying sets. Apply the cited local-section theorem to these underlying presheaves. Consequently every section of $S=(U\\mapsto R(U)/I(U))^\\#$ is locally the image of a class $\\bar r$, hence locally of an $r\\in R$; equality of two such images means their representatives differ by a section of $I$ after a covering refinement. Likewise, sections of a sheafified module quotient are locally represented by module elements, and equality of their images is equality in the quotient presheaf after refinement. All local arguments below use covering sieves and their pullbacks along arrows; comparisons are on common restriction cones, so the site need not have fibre products.",
+   "text": "Use Mathlib locally surjective and locally injective sheafification maps. The cokernel projection is sectionwise surjective, so its composite with sheafification is locally surjective. For commutative rings, the quotient projection followed by ring sheafification is likewise locally surjective. The imageSieve and equalizerSieve APIs provide covering sieves of representatives and equalities; no precoverage or fibre products are required.",
    "uses": [
     "def-weil-presheaf-modules-sheafification",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "lem-pc-sites-sheafification-underlying-sets"
    ],
    "elementary": false,
    "source": {
@@ -29,9 +28,8 @@
    }
   },
   {
-   "text": "The locally finite-sum prescription for $IF$ is closed under restriction, addition, negatives and multiplication by $R$: refine the two covering sieves and combine their finite sums, or multiply each summand. If sections of $IF$ glue in $F$, their local finite-sum witnesses compose with the gluing cover, so the glued section again belongs to $IF$. Thus $IF$ is an $R$-submodule sheaf. Set $P(U)=F(U)/IF(U)$ and $Q=P^\\#$. The local equality criterion of step 1 gives $q(f)=0$ exactly when $f$ belongs to $IF$ locally, which is equivalent to $f\\in IF(U)$ by this subsheaf property. Hence $\\ker q=IF$. To check that $q$ is epic, let two morphisms out of $Q$ agree after $q$. Every section of $Q$ is locally $q(f)$ by step 1, so their values agree locally, and separatedness of the target gives equality. This proves right cancellation for $q$, without sectionwise surjectivity.",
+   "text": "Construct the sectionwise ideal-product submodule. Its local hull consists of sections whose membership sieve covers. Intersections of covers give addition, restrictions give scalar stability, and transitivity gives saturation. This hull equals the intersection defining localProduct. A saturated subfunctor of a sheaf is a sheaf. Submodule.smul_induction_on identifies the sectionwise ideal product with finite sums. Evaluate the cokernel as the quotient by the inclusion range; local injectivity of sheafification and saturation identify the kernel of q. Local representatives and separatedness prove q is epic.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
     "def-weil-presheaf-modules-sheafification",
     "def-weil-sheaf-of-modules-category"
    ],
@@ -42,7 +40,7 @@
    }
   },
   {
-   "text": "Put $S_0(U)=R(U)/I(U)$. The presheaf $P$ of step 2 is an $S_0$-module by $\\bar r[f]=[rf]$: replacing $r$ by $r+i$ changes $rf$ by $if\\in IF(U)$, and replacing $f$ by $f+x$, $x\\in IF(U)$, changes $rf$ by $rx\\in IF(U)$. Additivity, the unit, associativity and compatibility with restrictions are the corresponding identities in $F$. Apply the cited module-sheafification interface with coefficient presheaf $S_0$, its ring sheafification $S$, and module presheaf $P$. It equips the same underlying abelian sheaf $P^\\#=Q$ with the canonical $S$-action extending $\\bar r[f]=[rf]$. Its restricted $R$-action agrees with the original action by uniqueness of the compatible sheafification action. This is the asserted canonical $S$-module structure.",
+   "text": "The ideal annihilates the already sheafified quotient Q: locally lift a section to f and use q(if)=0; separatedness proves the assertion globally. Module.IsTorsionBySet.module consequently gives Q an action of the quotient ring presheaf S0. Apply PresheafOfModules.sheafify to S0→S and the identity of the underlying abelian sheaf Q. Its canonical map proves compatibility with the original R-action and supplies the identity-on-sections R-linear isomorphism e.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
     "def-weil-presheaf-modules-sheafification"
@@ -54,9 +52,8 @@
    }
   },
   {
-   "text": "Construct a pairing $B:F\\times S\\to Q$ as follows. For $f\\in F(U)$ and $s\\in S(U)$, choose local representatives $s|_V=\\bar r_V$ as in step 1 and put $B(f,s)|_V=q(r_V f|_V)$. On any common restriction cone, two representatives of $s$ differ locally by $i\\in I$, so the two proposed values differ by $q(if)=0$. Separatedness makes them agree on the cone, and the sheaf condition glues them uniquely. This also proves independence of the chosen cover and compatibility with restrictions. On a common refinement the identities for $B(f+g,s)$, $B(f,s+t)$, and $B(af,s)=B(f,as)$ reduce respectively to $(r(f+g)=rf+rg)$, $((r+r')f=rf+r'f)$, and $(raf=arf)$ in $F$; hence $B$ is $R$-bilinear. On each $U$ the defining relations of the module tensor therefore give a linear map $F(U)\\otimes_{R(U)}S(U)\\to Q(U)$ sending $f\\otimes s$ to $B(f,s)$. These maps commute with restrictions. The module-sheafification universal property extends them uniquely to $a:F\\otimes_R S\\to Q$. In particular $a(f\\otimes\\bar r)=q(rf)$.",
+   "text": "Define B(f,s)=s q(f) using the constructed S-action. The scalar compatibility gives R-bilinearity. TensorProduct.lift constructs a morphism on tensor presheaves, and the module sheafification adjunction extends it to a on the actual sheaf tensor. The adjunction unit and tensor/sheafification comparison give a(pure(f,s))=s q(f).",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
     "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification"
    ],
@@ -67,7 +64,7 @@
    }
   },
   {
-   "text": "Define $u:F\\to F\\otimes_R S$ by $u(f)=f\\otimes1$, using the pure-section map and its restriction compatibility. For $i\\in I(U)$, balancing gives $u(if)=if\\otimes1=f\\otimes\\bar i=0$. If $x\\in IF(U)$, locally $x=\\sum_a i_af_a$, so $u(x)$ is locally zero by additivity and this calculation; separatedness gives $u(x)=0$. Thus the section maps $[f]\\mapsto f\\otimes1$ are well-defined $R(U)$-linear maps $P(U)\\to(F\\otimes_R S)(U)$ compatible with restrictions. Sheafify them by the universal property to obtain $b:Q\\to F\\otimes_R S$ with $b(q(f))=u(f)$.",
+   "text": "Define u(f)=pure(f,1) using pureBilin and pure_restrict. Balancing and the vanishing of ideal elements under ringProjection show u(if)=0. The finite-sum description and separatedness show that u kills localProduct. The cokernel universal property and sheafification adjunction give b with qb=u.",
    "uses": [
     "def-weil-pbc-ringed-tensor-section-calculus",
     "def-pur-sheaf-tensor-product",
@@ -80,19 +77,18 @@
    }
   },
   {
-   "text": "On $f\\in F(U)$ the composite $ab$ satisfies $ab(q(f))=a(f\\otimes1)=q(f)$, so $ab=1_Q$ by the epimorphism $q$ proved in step 2. For the other composite, take a pure section $f\\otimes s$ and restrict to a cover where $s=\\bar r$. There $ba(f\\otimes\\bar r)=b(q(rf))=rf\\otimes1=f\\otimes\\bar r$. Separatedness proves this equality for every pure section, and the pure-section extensionality gives $ba=1_{F\\otimes_R S}$. For $S$-linearity of $a$, take $s,t\\in S(U)$ and refine until $s=\\bar r$, $t=\\bar c$. Then $a(t(f\\otimes s))=a(f\\otimes\\overline{cr})=q(crf)=tq(rf)=t\\,a(f\\otimes s)$. Local equality and tensor extensionality extend this to all sections. Thus $a$ is an $S$-linear isomorphism; its inverse $b$ is $S$-linear because applying the injective $a$ to $b(ty)$ and $t b(y)$ gives $ty$ in both cases. This proves both displayed formulas, including their meaning on images in sheafification.",
+   "text": "The pure-section formula gives ua=q. Cancel the epic q to prove ba=1 on Q. To prove ab=1 on the tensor, use pure_hom_ext and a covering imageSieve on which s lifts to r. There b(a(pure(f,s)))=b(q(rf))=pure(rf,1)=pure(f,s); separatedness concludes. Multiplicativity of the S-action proves the scalar-linearity clause directly from a(pure(f,s))=s q(f).",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
     "def-weil-pbc-ringed-tensor-section-calculus"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03EK (section-tensor-product), inverse and scalar-linearity calculations on pure sections"
    }
   },
   {
-   "text": "The formula $a(u(f))=q(f)$ proves $au=q$ on all local sections, hence as sheaf morphisms. Since $a$ is invertible, right cancellation for $q$ implies right cancellation for $u$: if $c u=d u$, then $(c b)q=(d b)q$, so $c b=d b$ and $c=d$. Also $u(f)=0$ if and only if $q(f)=0$, which by step 2 holds if and only if $f\\in IF(U)$. Consequently $u$ is epic and its kernel is precisely $IF$.",
+   "text": "The projection identity and the isomorphism give u=q b, hence epimorphy of u. Apply a and b to show u(f)=0 iff q(f)=0, and use the quotient kernel computed above.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -101,26 +97,24 @@
    }
   },
   {
-   "text": "For an $R$-linear sheaf map $h:F\\to G$, a local sum $\\sum i_af_a$ maps to $\\sum i_a h(f_a)$, so $h(IF)\\subseteq IG$. It induces the presheaf maps $[f]\\mapsto[h(f)]$, and sheafification gives $Q_I(h)$. The formula in step 3 shows it is $S$-linear on local representatives, hence everywhere. On a pure section with second factor locally $\\bar r$, the two proposed composites are $Q_I(h)a_{I,F}(f\\otimes\\bar r)=[h(rf)]=[r h(f)]$ and $a_{I,G}(h(f)\\otimes\\bar r)=[r h(f)]$. Restricting to such covers, using separatedness, and then pure-section extensionality proves $Q_I(h)a_{I,F}=a_{I,G}(h\\otimes1)$.",
+   "text": "For h:F→G, define qh by conjugating h tensor id with the comparison isomorphisms. Naturality of pure sections gives u_F followed by h tensor id = h followed by u_G, hence the quotient-projection square. The locally surjective coefficient projection makes restriction of scalars fully faithful on sheaves; lift the R-linear qh across e to its S-linear hS. The tensor square is the isomorphism identity.",
    "uses": [
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-pbc-ringed-tensor-section-calculus"
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-pc-sites-module-sheafification-interface"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03EK (section-tensor-product), agent-written naturality calculation for module morphisms"
    }
   },
   {
-   "text": "If $I'\\subseteq I$, then $I'F\\subseteq IF$ from the local finite-sum definition. The sectionwise quotient maps sheafify to $t:S'=R/I'\\to S=R/I$ and $v:Q_{I'}(F)\\to Q_I(F)$; they are $R$-linear. For a pure section in $F\\otimes_R S'$, refine until its second factor is the image of some $r\\in R$. The first composite gives $v a_{I',F}(f\\otimes\\bar r) = v([rf]_{I'})=[rf]_I$; the second gives $a_{I,F}(1\\otimes t)(f\\otimes\\bar r)=a_{I,F}(f\\otimes\\bar r)=[rf]_I$. Local equality and pure-section extensionality give the first ideal-inclusion identity. Finally $(1\\otimes t)u_{I',F}(f)=f\\otimes t(1)=f\\otimes1=u_{I,F}(f)$, proving the second. All these equations are taken after restriction to $R$-modules, as required.",
+   "text": "For I′ contained in I, naturality of ring sheafification proves ringProjection_I′ followed by ringTransition = ringProjection_I. Thus ringTransition defines the required R-linear coefficient map tM. Its value on 1 and pure_map prove the unit-transition identity. Define v by conjugating id tensor tM with a_I′ and a_I; the unit identity gives the quotient-projection square, and inverse cancellation gives the tensor square.",
    "uses": [
     "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-site-sheafification-sections-local",
     "def-weil-pbc-ringed-tensor-section-calculus"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03EK (section-tensor-product), agent-written ideal-inclusion and quotient-unit calculations"
@@ -130,7 +124,6 @@
  "proof_deps": [
   "def-weil-presheaf-modules-sheafification",
   "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local",
   "def-weil-sheaf-of-modules-category",
   "lem-pc-sites-module-sheafification-interface",
   "def-pur-sheaf-tensor-product",
@@ -139,7 +132,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EK (section-tensor-product), with Tag 03CY (lemma-sheafification-presheaf-modules) and Sites Tags 00YR and 00WK; explicit balanced-map and inverse construction, including both naturality squares."
+  "place": "Tags 03CY and 03EK; S9 Lean proof constructs the saturated local hull, annihilator quotient action, balanced pairing and inverse, then transports naturality. Mathlib imageSieve/equalizerSieve replace the precoverage-specific local-section theorem."
  },
  "mathlib_searches": [
   {
@@ -299,5 +292,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Item statement byte-identical to the side-live base; stmt_deps only gain the new def node def-weil-pbc-ideal-module-quotients (H12 fields ok). Clause-by-clause match: localProduct (sInf of saturated submodules) plus an explicit locally-finite-sum membership clause and sheaf clause; ring and module quotients built by sectionwise quotient then sheafification, with no surjectivity assumed; canonical S-structure via Q/e pinned by S-linearity on pure sections; a formula, a inverse formula, uMap pinned to pure(f,1), a u = q, Epi, kernel = IF; h-naturality with qh pinned by projections and S-linear through hS; ideal-inclusion squares with tM pinned to the sheafified quotient transition (ringTransition) and v pinned by projections. No extra hypotheses; edge cases I=0, I=R, F=0, empty site/covers, local-only lifts covered. Defs non-hollow; theorem proof is only sorry; docstrings carry source, blueprint id and 9 proof steps. No duplicates (private R/I helpers only; constant-sheaf quotients differ). nt_compile --json clean: 33.5 s and 25.5 s. Advisory: u/u universe restriction inherited from RingedSiteIdeal (citer needs a small model at stage 3); redundant imports (Presheaf.Colimits, recorded dep modules) are reached transitively or required by the brief."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T143951-L-30292",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
