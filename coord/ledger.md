@@ -23086,3 +23086,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:45 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 16:48 L: merged deliver/Q03/lem-sfb-root-tower-puncture-invariance (reviewer PASS; first push; new nodes: 0)
 - 16:49 L: merged deliver/NZ/lem-sfb-snc-tame-finite-fibre-classification (reviewer FIX; after a return; new nodes: 1)
+- 16:49 L: merged deliver/NR/lem-sfb-complete-group-torsor-monodromy (stage 2; reviewer PASS; parallel immutable checks)

@@ -1,0 +1,106 @@
+{
+ "id": "def-sfb-continuous-set-presheaf",
+ "kind": "definition",
+ "title": "Continuous-function set presheaf on the small pro-etale site",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with its small pro-etale site [def-weil-pbc-proetale-site]. For any topological space $D$, in compatible universes with $X$ in universe $u$ and $D$ in universe $u+1$, define the set presheaf $F_{D,X}$ by $F_{D,X}(U)=C(|U|,D)$, the continuous maps from the underlying Zariski space of $U$ to $D$. For a morphism $f:V\\to U$ over $X$, restriction is precomposition, $s\\mapsto s\\circ|f|$. Equivalently this is the restriction of the continuous-map presheaf on schemes along the forgetful functor from the small pro-etale site to schemes. No separation, disconnectedness, compactness or group hypothesis on $D$ is part of this definition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.2.12, the continuous-function presheaf preceding the descent assertion; restriction to the small pro-etale site."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "continuousMapPresheaf|continuousSetPresheaf",
+   "results": "{\"t\": \"2026-10-21T16:32:06Z\", \"tool\": \"grep\", \"query\": \"continuousMapPresheaf|continuousSetPresheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\"], \"digest\": \"c892d6c5f153daf3\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing restricted presheaf found in Sheaf.Paper.TotallyDisconnectedCoefficientRealization; bind its abbrev instead of defining a copy."
+  },
+  {
+   "tool": "leansearch",
+   "query": "presheaf of continuous maps from schemes on the pro etale site with values in a topological space",
+   "results": "{\"t\": \"2026-10-21T16:32:06Z\", \"tool\": \"leansearch\", \"query\": \"presheaf of continuous maps from schemes on the pro etale site with values in a topological space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousMap.yonedaPresheaf'\", \"TopCat.Presheaf\", \"TopCat.presheafToType\", \"TopCat.presheafToTopCommRing\", \"ContinuousMap.yonedaPresheaf'_obj\", \"CompHausLike.LocallyConstant.functorToPresheavesIso\", \"TopCat.presheafToTypes\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"f674d4e676d2437f\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing restricted presheaf found in Sheaf.Paper.TotallyDisconnectedCoefficientRealization; bind its abbrev instead of defining a copy."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous map presheaf of sets on schemes restricted to the pro etale site",
+   "results": "{\"t\": \"2026-10-21T16:32:08Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous map presheaf of sets on schemes restricted to the pro etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Hom.app\", \"AlgebraicGeometry.Scheme.restrict_presheaf_obj\", \"AlgebraicGeometry.Scheme.Hom.appLE\", \"CategoryTheory.Functor.mapPresheaf\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_map\", \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\"], \"digest\": \"0001d4cde7b75efd\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing restricted presheaf found in Sheaf.Paper.TotallyDisconnectedCoefficientRealization; bind its abbrev instead of defining a copy."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n continuousSetPresheaf|continuousSetSheaf lean/WeilConjectures lean/Sheaf; rg -n continuousSetPresheaf|continuousSetSheaf dag/nodes --glob *def*.json; blueprint_refs.py search continuous-function",
+   "results": "WeilConjectures: no hits. Sheaf: TotallyDisconnectedCoefficientRealization.lean:46 is the exact abbrev; :63 packages it as a sheaf. Definition nodes: no hits. Blueprint: 4 unrelated ring/twist/transport nodes, no set-presheaf definition. blueprint_refs.py ancestor lem-sfb-complete-group-torsor-monodromy returned None.",
+   "date": "2026-10-21",
+   "verdict": "Exact existing declaration, no definition node owns it; new existing:true node as required by return H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-complete-group-torsor-monodromy",
+  "date": "2026-10-21",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument; Complete topological group torsors on a normal scheme; the continuous-function set presheaf used in the torsor action and its naturality",
+   "via": [
+    "lem-sfb-complete-group-torsor-monodromy",
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.TotallyDisconnectedCoefficientRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousSetPresheaf",
+  "statement": "abbrev continuousSetPresheaf (X : Scheme.{u}) (D : Type (u + 1)) [TopologicalSpace D]",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Return H2 repair: the plain presheaf abbrev at line 46 has real functor data and is not chosen from the realization theorem. This definition node owns precisely that existing notion; the realization theorem remains a proof dependency of the torsor-monodromy item."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc218bed4",
+  "group": "NR",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc218bed4",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of the a4e30b3eebcf RETURN. R1 (H2) repaired: new def node def-sfb-continuous-set-presheaf (C(|U|,D) with precomposition restriction, BS 4.2.12) is existing:true on the unchanged TotallyDisconnectedCoefficientRealization, and its statement matches line 46 verbatim. It replaces the realization theorem in the stmt_deps of both the item and def-sfb-continuous-right-torsor; the theorem stays in proof_deps. continuousSetPresheaf is the only declaration of that module used (ContinuousRightTorsor.lean:80,187,193). A1 ExtensionPresentation docstring corrected, A2 def-weil-proetale-inverse-image added to stmt_deps, A3 8 proof-only imports dropped. Lean declarations byte-identical to the returned head. Item node differs from live only in lean and stmt_deps. The three lean.statement fields are verbatim. The earlier full substance check stands: hypotheses, fibre torsor, arrow bijection ρ_Q b=bρ_P, conjugation, pinned pullback, universal contracted product, field Čech c(σ)=ρ(jσ). No hollow defs, sole sorry is the item theorem, not dropped. Advisory: FieldSeparableCech plain defs come from a base-era theorem stmt_dep that the mechanical check did not flag. No file changed, no compile."
+ }
+}

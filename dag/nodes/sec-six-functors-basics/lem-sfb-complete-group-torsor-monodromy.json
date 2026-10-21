@@ -16,7 +16,10 @@
   "def-galois-fibre-functor",
   "def-weil-pbc-proetale-site",
   "def-pd-separable-closure",
-  "lem-sfb-field-separable-cech-coordinates"
+  "lem-sfb-field-separable-cech-coordinates",
+  "def-sfb-continuous-right-torsor",
+  "def-sfb-continuous-set-presheaf",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -388,5 +391,30 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-c4c01f12d (reviewer sub-agent of L); spot-checked: Read the item, its 16 steps, the 3 new nodes and every cited statement in full, against Bhatt–Scholze (arXiv 1309.1198): Def 7.1.1/7.1.3, Lemma 7.1.4, Prop 7.1.5, Ex 7.1.6, §7.4 (7.4.1, 7.4.3–7.4.7, 7.4.10) and Lemma 4.2.12. The hypotheses (Hausdorff, open-subgroup basis, compact or two-sided complete) are exactly those under which Prop 7.1.5 makes G Noohi, and Lemma 7.4.10 makes Π the étale π1 for normal X. The statement is unchanged and nothing is added or dropped. I checked the conventions by hand: the right-torsor cocycle c(gh)=c(g)c(h) and the left-monodromy normalization pr2*σ_e=pr1*σ_{g·e} together force c=ρ_P with no inversion; in the field case, k^s⊗k^s→C(G,k^s), a⊗b↦(g↦a·g(b)), gives pr_23 label h and pr2*σ_ψ=pr1*σ_{g∘ψ}, so the two Cech nodes agree. The step 8 recovery is sound: natural isomorphisms are pointwise-continuous maps |W|→Aut(ω_G)=G, using only the small orbit category. Steps 9–15 are correct. The new nodes are true and are not duplicates or restatements: forgetful-automorphisms is BS 7.1.5 on orbits; the limit-cover nerve gives T×Π^q with π0=Π^q; totally-disconnected-realization is BS 4.2.12 plus the realization and pullback clauses, and its overlap with the ring-only continuous-function nodes is noted. Small cases tested: G=1, discrete, profinite, Sym(N), Spec of an algebraically closed field, simply connected X. Batch 5: the closures of lem-a1-proetale-local-system-representability and lem-a1-normal-geometric-cover-components reach only def-trf-valuation-ring and generic trf algebraic-space and fppf-descent lemmas. These are general definitions and descent tools, not trace-formula or Poincaré-duality content, so they are accepted. Route: Steps 5, 7 and 16 cited lem-per-set-local-system-monodromy, which route-pivot-dropped.txt lists at line 1908 (2026-10-19 artin-gabber section), with no justification. The item and its citer are live, and only finite-fibre content was used, so this is one repairable citation fault and not a RETURN. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-complete-group-torsor-monodromy.json: Step 4 rewritten with the pro-étale Yoneda instead of the étale comparison; Step 5 rewritten (monodromy is the def-galois-fibre-functor action on ⊔|(C_j)_x|, the T-splitting with the clopen-coproduct lemma gives L|_T≅F_{E_L}, and the fibre comes from t^{-1}); Steps 7 and 16 cite def-galois-fibre-functor; proof_deps recomputed and three unused tool_uses removed. The fixed item's closure has no dropped id and no cycle. Also noted for the maintainer: def-weil-pbc-ideal-module-product-stalk, cited deep in the base closure, is missing from the snapshot (not this delivery's fault).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompleteGroupTorsorMonodromy",
+  "declaration": "AlgebraicGeometry.ProEtale.complete_group_torsor_monodromy",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PointedTorsorMap",
+   "AlgebraicGeometry.ProEtale.PointedTorsorMap.fibreMap",
+   "AlgebraicGeometry.ProEtale.IsFieldTorsorNormalization",
+   "AlgebraicGeometry.ProEtale.complete_group_torsor_monodromy"
+  ],
+  "file": "lean/Sheaf/Paper/CompleteGroupTorsorMonodromy.lean",
+  "statement": "theorem complete_group_torsor_monodromy : ∃ ρ : ∀ (B : NormalTorsorBase.{u}) (G : TorsorCoefficientGroup.{u}) (P : ContinuousRightTorsor B.X G), P.fibre B.x → (B.pi →ₜ* G.carrier), (∀ (B : NormalTorsorBase.{u}) (G : TorsorCoefficientGroup.{u}) (P : ContinuousRightTorsor B.X G), Nonempty (P.fibre B.x) ∧ (∀ p, P.fibreAct B.x p 1 = p) ∧ (∀ p g h, P.fibreAct B.x (P.fibreAct B.x p g) h = P.fibreAct B.x p (g * h)) ∧ (∀ p, Function.Bijective (P.fibreAct B.x p))) ∧ (∀ (B : NormalTorsorBase.{u}) (G : TorsorCoefficientGroup.{u}) (P Q : ContinuousRightTorsor B.X G) (p : P.fibre B.x) (q : Q.fibre B.x), ∃ E : {b : G.carrier // ∀ γ : B.pi, ρ B G Q q γ * b = b * ρ B G P p γ} ≃ P.Equiv Q, ∀ b, (E b).fibreMap B.x p = Q.fibreAct B.x q b.val) ∧ (∀ (B : NormalTorsorBase.{u}) (G : TorsorCoefficientGroup.{u}) (r : B.pi →ₜ* G.carrier), ∃ (P : ContinuousRightTorsor B.X G) (p : P.fibre B.x), ρ B G P p = r) ∧ (∀ (B : NormalTorsorBase.{u}) (G : TorsorCoefficientGroup.{u}) (P : ContinuousRightTorsor B.X G) (p : P.fibre B.x) (b : G.carrier) (γ : B.pi), ρ B G P (P.fibreAct B.x p b) γ = b⁻¹ * ρ B G P p γ * b) ∧ (∀ (A B : NormalTorsorBase.{u}) (f : PointedTorsorMap A B) (G : TorsorCoefficientGroup.{u}) (P : ContinuousRightTorsor B.X G), ∃ (Q : ContinuousRightTorsor A.X G) (a : Along f.f (ContinuousMonoidHom.id _) P Q), IsIso (((Scheme.proEtaleSheafAdjunction f.f (Type (u + 1))).homEquiv _ _).symm a.hom) ∧ ∀ p, ρ A G Q (f.fibreMap a p) = (ρ B G P p).comp f.piMap) ∧ (∀ (B : NormalTorsorBase.{u}) (G H : TorsorCoefficientGroup.{u}) (v : G.carrier →ₜ* H.carrier) (P : ContinuousRightTorsor B.X G), ∃ (Q : ContinuousRightTorsor B.X H) (E : ExtensionPresentation v P Q), ∀ p, ρ B H Q (E.fibreMap B.x p) = v.comp (ρ B G P p)) ∧ IsFieldTorsorNormalization ρ",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Full classification encoded by fibre-point representations, normalized arrow bijections and essential surjectivity; includes right fibre torsor, conjugation, canonical pointed pullback, universal change of group and separable-field Cech normalization. Uses a small profinite model of the existing finite-etale fibre functor, identified with flcFiber by the landed comparison. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc218bed4",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of the a4e30b3eebcf RETURN. R1 (H2) repaired: new def node def-sfb-continuous-set-presheaf (C(|U|,D) with precomposition restriction, BS 4.2.12) is existing:true on the unchanged TotallyDisconnectedCoefficientRealization, and its statement matches line 46 verbatim. It replaces the realization theorem in the stmt_deps of both the item and def-sfb-continuous-right-torsor; the theorem stays in proof_deps. continuousSetPresheaf is the only declaration of that module used (ContinuousRightTorsor.lean:80,187,193). A1 ExtensionPresentation docstring corrected, A2 def-weil-proetale-inverse-image added to stmt_deps, A3 8 proof-only imports dropped. Lean declarations byte-identical to the returned head. Item node differs from live only in lean and stmt_deps. The three lean.statement fields are verbatim. The earlier full substance check stands: hypotheses, fibre torsor, arrow bijection ρ_Q b=bρ_P, conjugation, pinned pullback, universal contracted product, field Čech c(σ)=ρ(jσ). No hollow defs, sole sorry is the item theorem, not dropped. Advisory: FieldSeparableCech plain defs come from a base-era theorem stmt_dep that the mechanical check did not flag. No file changed, no compile."
  }
 }
