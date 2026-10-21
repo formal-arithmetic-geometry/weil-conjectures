@@ -12,9 +12,144 @@
   "sk-def-sfb-module-objects",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal M_A$ for ordinary internal modules and $\\mathcal E_A$ for internal $G$-equivariant modules. Apply [lem-sfb-condensed-product-action-inflation] with the second group trivial: both categories are Grothendieck abelian, and trivial-action inflation is exact with right adjoint $\\Gamma_G$. Thus $\\Gamma_G$ is left exact. By [lem-sp-grothendieck-enough-injectives], $\\mathcal E_A$ has enough injectives. Construct a resolution $N\\to I^\\bullet$, zero in negative degrees, by embedding $N$ into an injective, then embedding each successive cokernel into an injective. This gives the exact augmented resolution in [def-sp-injective-resolutions]. All sites and parameter powers of $G$ lie in the coefficient universes fixed in the statement.",
+   "uses": [
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sp-grothendieck-enough-injectives",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation."
+   }
+  },
+  {
+   "text": "For every profinite $S$, the free internal module $A[S]$ is the sheafification of $V\\mapsto\\bigoplus_{V\\to S}A(V)$: a map out of that presheaf sends $e_f$ to the restriction along $f$ of the selected section at $S$, which is precisely the free-module universal property. It is therefore $j_{S!}A_S$, flat by [lem-pc-sites-modules-j-shriek-flat]. The same statement applies to $S=G^n$. Use the tensor-Hom adjunction of [lem-pc-sheaf-modules-tensor-closed]. If $U:\\mathcal E_A\\to\\mathcal M_A$ forgets the action, its left adjoint is $L(T)=A[\\underline G]\\otimes_A T$ with translation on the first factor: an equivariant map is uniquely $[g]\\otimes t\\mapsto g f(t)$ for a map $f:T\\to UJ$. The functor $L$ is exact by the flatness just proved, because kernels and cokernels of actions are computed on underlying modules. Consequently $UI$ is injective whenever $I$ is equivariantly injective: extend a map into $UI$ across a monomorphism by transposing it to a map into $I$ across its image under the exact $L$.",
+   "uses": [
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), Tag 03EV (lemma-j-shriek-flat); elementary free-adjunction argument."
+   }
+  },
+  {
+   "text": "Let $P_\\bullet\\to A$ be [lem-sfb-condensed-internal-bar-resolution]. For any equivariantly injective $I$, consider the augmented complex of internal equivariant Hom objects from $P_\\bullet$ into $I$. Its sections at $S$ are $\\operatorname{Hom}_{\\mathcal E_A}(A[S]\\otimes_A P_\\bullet,I)$; in degree $-1$ they are $\\operatorname{Hom}_{\\mathcal E_A}(A[S],I)$ with trivial action on $A[S]$. The cited resolution states that the augmented tensor complex is exact. Applying $\\operatorname{Hom}_{\\mathcal E_A}(-,I)$ is exact: restriction across any image subobject is surjective by the definition of injectivity, while the kernel condition is the universal property of the quotient. Thus these augmented section complexes are exact for every $S$, hence the augmented complex of sheaves is exact. Its augmentation object is $\\underline{\\operatorname{Hom}}_G(A,I)=I^G$.",
+   "uses": [
+    "lem-sfb-condensed-internal-bar-resolution",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation."
+   }
+  },
+  {
+   "text": "Identify the degree-$p$ internal equivariant Hom just used with $\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],UI)$. Indeed in the induced coordinates of [lem-sfb-condensed-internal-bar-resolution], a map is determined by its value on $[1]\\otimes[g_1,\\ldots,g_p]$; equivariance gives its value on every $[g_0]\\otimes[g_1,\\ldots,g_p]$ by multiplying that value by $g_0$. This formula is valid after every profinite base change, so identifies internal objects and their maps, using the closed structure of [lem-pc-sheaf-modules-tensor-closed]. Deleting the first homogeneous coordinate contributes $g_1c(g_2,\\ldots,g_{p+1})$; deleting an interior coordinate multiplies the adjacent $g_i,g_{i+1}$, and deleting the last drops $g_{p+1}$. Thus the cochain differential is exactly the alternating inhomogeneous nerve differential in the statement. For $p=0$ it is $m\\mapsto(g\\mapsto gm-m)$ and its kernel is precisely the invariant inclusion.",
+   "uses": [
+    "lem-sfb-condensed-internal-bar-resolution",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation."
+   }
+  },
+  {
+   "text": "Put $D^{p,q}=\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],UI^q)$ for $p,q\\geq0$ and zero otherwise, with the inhomogeneous horizontal differential of step 4 and the resolution differential vertically. Equivariance of $d_I$ makes these commute. By step 2, $UI^\\bullet$ is an injective resolution of $UN$, so the $p$-th column represents $R\\underline{\\operatorname{Hom}}_A(A[\\underline G^p],N)$ by [lem-sp-derived-injective-resolution-naturality]. The cosimplicial maps are realized simultaneously on this one resolution; thus this is a compatible model, rather than unrelated resolutions for the individual columns. Give it the total differential $d_h+(-1)^p d_v$ and finite-diagonal sums of [def-sp-double-complex-total]. Step 3 says that every horizontal augmented row $\\Gamma_G(I^q)\\to D^{\\bullet,q}$ is a quasi-isomorphism from the row concentrated at $p=0$.",
+   "uses": [
+    "lem-sp-derived-injective-resolution-naturality",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0156 (section-right-derived-functor), lemma-injective-acyclic; compatible resolution model and its augmentation."
+   }
+  },
+  {
+   "text": "Let $K^{p,q}$ be $\\Gamma_G(I^q)$ for $p=0$ and zero otherwise. The invariant inclusions give a double-complex morphism $K\\to D$. Apply [lem-sc-first-quadrant-total-column-comparison] with the two indices interchanged, so its quasi-isomorphism hypothesis is exactly the row assertion of step 5. This proves $\\Gamma_G(I^\\bullet)\\to\\operatorname{Tot}D$ is a quasi-isomorphism. The transposed total convention is related to the original convention by multiplication by $(-1)^{pq}$ on $D^{p,q}$; direct substitution in the two differentials verifies this identification. Both complexes are first-quadrant, so each diagonal has only $n+1$ potentially nonzero summands. By [lem-sp-derived-injective-resolution-naturality], the source represents $R\\Gamma_G(N[0])$. Inverting the displayed quasi-isomorphism in the derived category proves the required derived-object isomorphism, with the invariant inclusion in degree zero.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "lem-sp-derived-injective-resolution-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), index-exchanged variant; finite-diagonal comparison."
+   }
+  },
+  {
+   "text": "For a map $N\\to M$, lift it to chosen nonnegative equivariant injective resolutions by [lem-weil-pbc-injective-resolution-lift-exists]. Postcomposition gives a map of all $D^{p,q}$ commuting with faces and augmentation. The normalized comparisons of [lem-sp-derived-injective-resolution-naturality] identify this map with the appropriate derived-functor maps. Two lifts are chain-homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy]. Applying the internal Hom functors gives vertical homotopies compatible with all faces; on the total summand $D^{p,q}$ multiply that homotopy by $(-1)^p$. Then the horizontal cross terms cancel and $dH+Hd$ equals the difference of the total maps. Consequently they give the same derived map. Apply the same argument to identity maps between two resolutions: the maps in both directions compose up to homotopy to the identity. This proves resolution independence and functoriality of the total comparison, with the normalized $R\\Gamma_G$ map on the other side of the augmentation square.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0156 (section-right-derived-functor); lemma-morphisms-lift and normalized resolution comparisons."
+   }
+  },
+  {
+   "text": "Let $A\\to A'$ and let $N'$ be equivariant over $A'$. For every profinite $S$, $A[S]$ is flat by [lem-pc-sites-modules-j-shriek-flat]. Placed in degree $0$ it is K-flat [def-pc-kflat-complex]: for an acyclic complex $F^\\bullet$ the total tensor complex is $F^\\bullet\\otimes_AA[S]$ termwise, and the exact functor $-\\otimes_AA[S]$ preserves acyclicity. Hence [lem-pur-derived-change-of-rings] computes $A'\\otimes_A^{\\mathbf L}A[S]$ by the underived $A'\\otimes_AA[S]=A'[S]$: maps from the underived extension to an $A'$-module $M$ are $A$-maps $A[S]\\to\\operatorname{Res}M$, i.e. maps of condensed sets $S\\to M$. The same free properties give the underived identification $\\underline{\\operatorname{Hom}}_A(A[S],\\operatorname{Res}M)=\\operatorname{Res}\\underline{\\operatorname{Hom}}_{A'}(A'[S],M)$. Apply [lem-sfb-dc-hom-scalar-adjunction] with $K=A[S]$ to obtain\n$$R\\underline{\\operatorname{Hom}}_A(A[S],\\operatorname{Res}N')\\cong\\operatorname{Res}R\\underline{\\operatorname{Hom}}_{A'}(A'[S],N').$$\nThe cited comparison is normalized by evaluation and natural in both variables. Hence it commutes with precomposition in the parameter $S$ and with the action on $N'$, and therefore with every face and degeneracy for $S=G^p$. This gives the scalar-restriction identification of the derived bar diagrams.",
+   "uses": [
+    "lem-pc-sites-modules-j-shriek-flat",
+    "def-pc-kflat-complex",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation."
+   }
+  },
+  {
+   "text": "For scalar restriction take an equivariant $A'$-injective resolution $N'\\to J^\\bullet$ and an equivariant $A$-injective resolution $\\operatorname{Res}N'\\to K^\\bullet$, both nonnegative as in step 1. The monic quasi-isomorphism $\\alpha:(\\operatorname{Res}N')[0]\\to\\operatorname{Res}J^\\bullet$ admits a complex map $\\beta:\\operatorname{Res}J^\\bullet\\to K^\\bullet$ extending the second augmentation, by [lem-weil-pbc-lift-along-injective-quasi-iso]. It is a quasi-isomorphism since both augmentations are. Form the underived bar double complex on $\\operatorname{Res}J^\\bullet$. By the underived identification of step 8 it is the restriction of the $A'$-bar complex of $J^\\bullet$, so its augmented rows are exact by steps 3-4 over $A'$ and exactness of restriction. Columns: $UJ^\\bullet$ is an $A'$-injective resolution (step 2), so by [lem-sp-derived-injective-resolution-naturality] its $A'$-column represents $R\\underline{\\operatorname{Hom}}_{A'}(A'[G^p],N')$; composing the restriction of this comparison with the step-8 isomorphism gives a map with the same evaluation transpose as the canonical map from the $\\operatorname{Res}J$ column to $R\\underline{\\operatorname{Hom}}_A(A[G^p],\\operatorname{Res}N')$, so that canonical map is an isomorphism. By naturality of the comparison along $\\beta$, the bar map induced by $\\beta$ is a columnwise quasi-isomorphism. By [lem-sc-first-quadrant-total-column-comparison] it is a total quasi-isomorphism. The invariant-augmentation square commutes term by term and both horizontal augmentations are quasi-isomorphisms by the row argument of step 6. Therefore its map on derived invariants is exactly the scalar bar comparison in step 8. For $N\\to\\operatorname{Res}N'$, compose with step 7. The homotopy argument of step 7 makes the result independent of $\\beta$. No injectivity of $\\operatorname{Res}J^q$ over $A$ is assumed.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-sc-first-quadrant-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P (lemma-morphisms-lift), part (2); homology.tex Tag 0133 (lemma-double-complex-gives-resolution), for the two augmentation comparisons."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-product-action-inflation",
+  "lem-sp-grothendieck-enough-injectives",
+  "def-sp-injective-resolutions",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-condensed-internal-bar-resolution",
+  "lem-sp-derived-injective-resolution-naturality",
+  "def-sp-double-complex-total",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "def-pc-kflat-complex",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation. Explicit internal bar and first-quadrant argument, with Stacks 03DI/03EV/0133 as generic tools; an exact internal condensed reference remains WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +206,150 @@
    "results": "8 hits: ContinuousCohomology.invariants, ContinuousCohomology.homogeneousCochains, ContinuousCohomology.continuousCohomologyZeroIso, groupHomology.inhomogeneousChainsIso, ContinuousCohomology.kerHomogeneousCochainsZeroEquiv, Rep.barComplex.isoStandardComplex, groupCohomology.inhomogeneousCochainsIso, inhomogeneousCochains.d_eq",
    "date": "2026-10-21",
    "verdict": "no match: these hits do not state the internal condensed-module derived or geometric assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal bar construction for a profinite condensed group computes derived invariants of an equivariant internal module",
+   "results": "{\"t\": \"2026-10-21T14:43:57Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal bar construction for a profinite condensed group computes derived invariants of an equivariant internal module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.profiniteFree\", \"Rep.Tor_obj\", \"Rep.barResolution.extIso\", \"Rep.barResolution\", \"Rep.Tor_map\", \"Rep.barResolution_complex\", \"Rep.barComplex\"], \"digest\": \"191dfdc4e9c0894f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "loogle",
+   "query": "Condensed derived invariants bar",
+   "results": "{\"t\": \"2026-10-21T14:43:57Z\", \"tool\": \"loogle\", \"query\": \"Condensed derived invariants bar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `derived`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "grep",
+   "query": "(bar|coinduc|invariant).*(Condensed|condensed)|(Condensed|condensed).*(bar|coinduc|invariant)",
+   "results": "{\"t\": \"2026-10-21T14:43:57Z\", \"tool\": \"grep\", \"query\": \"(bar|coinduc|invariant).*(Condensed|condensed)|(Condensed|condensed).*(bar|coinduc|invariant)\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\", \"Mathlib/Condensed/TopCatAdjunction.lean\"], \"digest\": \"170ed91b4ffd1a81\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived invariants of an internal module with an action of a condensed profinite group are computed by the total derived internal Hom bar complex",
+   "results": "{\"t\": \"2026-10-21T14:43:58Z\", \"tool\": \"leansearch\", \"query\": \"Derived invariants of an internal module with an action of a condensed profinite group are computed by the total derived internal Hom bar complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barResolution.extIso\", \"groupHomology.inhomogeneousChainsIso\", \"groupCohomology.inhomogeneousCochainsIso\", \"Rep.barComplex.isoStandardComplex\", \"continuousCohomology\", \"LightCondensed.ihomPoints\", \"inhomogeneousCochains.d_eq\", \"ContinuousCohomology.invariants\"], \"digest\": \"07c7009bbae56cf8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "grep",
+   "query": "(free|profinite).*(flat|tensor)|(flat|tensor).*(free|profinite)",
+   "results": "{\"t\": \"2026-10-21T14:45:54Z\", \"tool\": \"grep\", \"query\": \"(free|profinite).*(flat|tensor)|(flat|tensor).*(free|profinite)\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/Sequence.lean\"], \"digest\": \"32b8ceaf2c24c16c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "grep",
+   "query": "(restrict|scalar).*(ihom|internalHom|derived)|(ihom|internalHom|derived).*(restrict|scalar)",
+   "results": "{\"t\": \"2026-10-21T14:45:54Z\", \"tool\": \"grep\", \"query\": \"(restrict|scalar).*(ihom|internalHom|derived)|(ihom|internalHom|derived).*(restrict|scalar)\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The free sheaf of modules on a representable object of a ringed site is flat and base extension takes A[S] to B[S]",
+   "results": "{\"t\": \"2026-10-21T14:45:54Z\", \"tool\": \"leansearch\", \"query\": \"The free sheaf of modules on a representable object of a ringed site is flat and base extension takes A[S] to B[S]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.free\", \"SheafOfModules.ιFree\", \"Module.Flat.of_free\", \"PresheafOfModules.freeObj\", \"PresheafOfModules.free\", \"PresheafOfModules.freeYoneda\", \"SheafOfModules.freeFunctor_obj\", \"Module.Flat.isBaseChange\"], \"digest\": \"96ba8a0e3e7cde3e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"flat\"",
+   "results": "{\"t\": \"2026-10-21T14:45:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"flat\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"restrict\"",
+   "results": "{\"t\": \"2026-10-21T14:45:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"restrict\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a ringed topos A to B derived internal Hom from the free A module A[S] to restriction of M equals restriction of derived internal Hom from B[S]",
+   "results": "{\"t\": \"2026-10-21T14:45:55Z\", \"tool\": \"leansearch\", \"query\": \"For a ringed topos A to B derived internal Hom from the free A module A[S] to restriction of M equals restriction of derived internal Hom from B[S]\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RestrictScalars\", \"ModuleCat.restrictScalars\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction\", \"LightCondensed.ihomPoints_symm_comp\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"LightCondensed.ihomPoints\", \"ModuleCat.RestrictScalars.obj'\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction_hom_apply_apply\"], \"digest\": \"f5f16668eb939c49\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"derived\"",
+   "results": "{\"t\": \"2026-10-21T14:45:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"derived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative condensed ring A and profinite set S the free internal A module A[S] is flat so tensoring with A[S] preserves short exact sequences",
+   "results": "{\"t\": \"2026-10-21T14:45:55Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative condensed ring A and profinite set S the free internal A module A[S] is flat so tensoring with A[S] preserves short exact sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"digest\": \"97909f55625614bc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars commutes with derived internal Hom from a free internal module on a profinite parameter set for condensed ring coefficients",
+   "results": "{\"t\": \"2026-10-21T14:45:56Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars commutes with derived internal Hom from a free internal module on a profinite parameter set for condensed ring coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.ihomPoints_symm_apply\", \"Condensed.profiniteFree\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"Condensed.freeForgetAdjunction\"], \"digest\": \"f6a98dda205f9e12\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar restriction internal Hom adjunction for a flat free sheaf on a representable object",
+   "results": "{\"t\": \"2026-10-21T14:45:57Z\", \"tool\": \"leanfinder\", \"query\": \"Derived scalar restriction internal Hom adjunction for a flat free sheaf on a representable object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_apply\", \"SheafOfModules.map_ιFree_mapFree_hom\", \"LightCondensed.ihomPoints_symm_apply\", \"Condensed.freeForgetAdjunction\", \"SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply\", \"PresheafOfModules.freeAdjunction\", \"LightCondensed.freeForgetAdjunction\"], \"digest\": \"b55c95d2a8431a46\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero of the unit module on the slice site is a flat sheaf of modules",
+   "results": "{\"t\": \"2026-10-21T14:45:58Z\", \"tool\": \"leanfinder\", \"query\": \"Extension by zero of the unit module on the slice site is a flat sheaf of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.unit\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.forgetToSheafModuleCat\", \"SheafOfModules.unit_val\", \"SheafOfModules.IsQuasicoherent\", \"Module.Flat.of_ulift\", \"LightCondensed.free\", \"Module.flat_of_isLocalized_span\"], \"digest\": \"1a39afd3279e80a3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "grep",
+   "query": "(simplicial|cosimplicial).*(bar|nerve)|(bar|nerve).*(simplicial|cosimplicial)",
+   "results": "{\"t\": \"2026-10-21T14:50:03Z\", \"tool\": \"grep\", \"query\": \"(simplicial|cosimplicial).*(bar|nerve)|(bar|nerve).*(simplicial|cosimplicial)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Category/Cat/Colimit.lean\", \"Mathlib/CategoryTheory/Category/Cat/Colimit.lean\", \"Mathlib/CategoryTheory/ComposableArrows/Four.lean\", \"Mathlib/CategoryTheory/ComposableArrows/Three.lean\", \"Mathlib/CategoryTheory/ComposableArrows/Two.lean\"], \"digest\": \"456e6fb247dfe50d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "grep",
+   "query": "(invariant|fixed).*(bar|nerve|cosimplicial)|(bar|nerve).*(invariant|fixed)",
+   "results": "{\"t\": \"2026-10-21T14:50:03Z\", \"tool\": \"grep\", \"query\": \"(invariant|fixed).*(bar|nerve|cosimplicial)|(bar|nerve).*(invariant|fixed)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A group object action invariants derived functor is computed by the totalization of the internal Hom bar cosimplicial object",
+   "results": "{\"t\": \"2026-10-21T14:50:04Z\", \"tool\": \"leansearch\", \"query\": \"A group object action invariants derived functor is computed by the totalization of the internal Hom bar cosimplicial object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.invariantsFunctor\", \"CategoryTheory.GrpObj.ofRepresentableBy\", \"CategoryTheory.Grp_Class.ofRepresentableBy\", \"ContinuousCohomology.invariants\", \"Rep.ihom\", \"ContinuousCohomology.instLinearActionTopModuleCatInvariants\", \"CategoryTheory.Functor.totalLeftDerived\", \"groupHomologyIsoTor\"], \"digest\": \"bf81c4184f4db2e0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariants\", \"bar\"",
+   "results": "{\"t\": \"2026-10-21T14:50:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"invariants\\\", \\\"bar\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived invariants of a group object action computed by bar construction in a Grothendieck category",
+   "results": "{\"t\": \"2026-10-21T14:50:06Z\", \"tool\": \"leanfinder\", \"query\": \"Derived invariants of a group object action computed by bar construction in a Grothendieck category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barComplex\", \"Rep.barResolution_complex\", \"Rep.barResolution\", \"Rep.Tor_obj\", \"groupCohomology\", \"groupCohomology.functor_obj\", \"Rep.barComplex.d\", \"groupCohomology.functor\"], \"digest\": \"4f060cf85abaa50e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected the ordinary Rep bar resolution, free condensed and light-condensed internal-Hom hits. None states the derived internal invariant bar theorem for arbitrary condensed-ring coefficients; no exact attachment in the project source."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-tame-stratum-kummer-descent",
@@ -86,7 +361,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), open direct image: agent expansion of the tame-boundary Kummer calculation; Derived internal-function bar model for condensed group invariants",
+   "place": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation. Augmented internal bar model for derived invariants; ancestor command returns None for the inherited created.item chain.",
    "via": [
     "lem-sfb-tame-stratum-kummer-descent",
     "lem-sfb-continuous-algcl-tame-boundary-comparison",
@@ -97,5 +372,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-condensed-derived-invariant-bar",
+  "worker": "stage1",
+  "summary": "Kept the statement. Added one strictly lower algebraic internal bar-resolution statement, reused existing Grothendieck/action, flat free sheaf, derived scalar-Hom and total-comparison nodes, and expanded the compatible equivariant injective-resolution computation, naturality and scalar restriction. No discrete/topological cohomology identification or projectivity of profinite free modules is used.",
+  "blueprint": "Paragraph (3), open direct image: formal internal bar input to the all-continuous tame-boundary calculation. This realizes the formal internal invariants input below the tame-boundary calculation, without replacing the unit's geometric route. The ancestor utility returns None for this inherited chain.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Generic ringed-site flatness of the free sheaf on a representable object; applies to every profinite parameter, no geometric argument replaces it."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic internal module tensor-Hom adjunction on the condensed ringed site."
+   },
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Generic derived-functor computation and normalization on specified injective resolutions."
+   },
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Generic finite-diagonal double-complex comparison used on rows and on columns."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "Generic lift of a coefficient morphism to equivariant injective resolutions."
+   },
+   {
+    "node": "lem-sfb-dc-hom-scalar-adjunction",
+    "why": "Generic derived scalar/internal-Hom comparison, including its evaluation normalization."
+   },
+   {
+    "node": "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "why": "Generic strict extension along a monic quasi-isomorphism into a bounded-below injective complex; gives the scalar comparison on actual double complexes."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic uniqueness of lifts into a bounded-below injective complex; supplies resolution independence of the bar total map."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NI-6c7ebc499",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-6c7ebc499 (reviewer sub-agent of L); spot-checked: Read the item's statement and all nine steps, the new node lem-sfb-condensed-internal-bar-resolution, all 14 cited statements, and paragraph (3) of the main-20261015 direct-images proof. That paragraph does not contain this formal internal argument, so proof_origin agent with a WANTED reference is honest. The item had no proof on the base, has no repair note and is still unsplit live, so it is not superseded. Neither the item nor any cited node is in the 2026-10-18 dropped list, and nothing cites SGA. The statement is unchanged. Small cases checked: G=1, G finite with A=Z, the degree-0 invariants, and that A[G^n]=j_{G^n!}A is representable. Steps 1-7 are correct: inflation gives Grothendieck abelian categories with left exact invariants; A[S] is flat by 03EV; induction A[G]⊗T is left adjoint to forgetting, so forgetting preserves injectives; rows are exact via Hom_E(A[S]⊗P,I); I recomputed the homogeneous-to-inhomogeneous faces; the (-1)^{pq} transpose sign and the (-1)^p total homotopy both check. The new node is true (contraction h[g]=[1,g], also after ⊗T; coordinate change gives the induced module), statement-only, self-contained and strictly smaller than the item. No duplicate: lem-sfb-bar-resolution-cochains is for abstract groups and lem-exc-* for discrete modules. FIX of two faults. Step 8 (C1/C4): flat in degree 0 implies K-flat was not written; it now cites def-pc-kflat-complex and lem-pur-derived-change-of-rings and adds the underived identification Hom_A(A[S],Res M)=Res Hom_{A'}(A'[S],M). Step 9 (E5): it claimed the columns 'compute the derived Homs by step 8', which is only an abstract isomorphism; it now proves the canonical Res J column map is an isomorphism via the evaluation normalization and lem-sp-derived-injective-resolution-naturality, then uses naturality along beta. The worker wrote its own tool_uses (C8); I accept them as generic homological and ringed-site tools.; 1 file(s) fixed by the reviewer"
  }
 }
