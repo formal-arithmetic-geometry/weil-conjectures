@@ -23,10 +23,32 @@
  ],
  "proof": [
   {
-   "text": "On K-flat representatives, identify the canonical leftAdjointUniq comparison with the ordinary scalar tensor composition sending t tensor (s tensor x) to t b(s) tensor x. The inverse inserts 1. The normalized ordinary and derived scalar transposes give its unit equation, uniquely identifying it with the specified left-adjoint comparison.",
+   "text": "Use the unit equation for leftAdjointUniq to identify the ordinary composition and identity comparisons. Map these comparisons termwise to complexes. Test the chain composition and identity squares after the ordinary scalar adjunction on every total pure generator. Naturality of the ordinary unit, the specified generators equations, and the unit equations for the ordinary comparisons give equality. Pure-tensor generation, followed by coproduct generation, proves equality of the chain maps.",
    "uses": [
-    "lem-sfb-scalar-tensor-cancellation-independent",
+    "lem-sfb-scalar-ordinary-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
+   }
+  },
+  {
+   "text": "The scalar-pair normalization first gives the unit square on K-flat complexes with flat terms. For any complex choose its K-flat resolution with flat terms. Naturality of the derived unit, the universal comparison and the exact restriction comparison transfers the unit square along this resolution; cancel its localized quasi-isomorphism. The unit square determines every normalized transpose. Apply these transpose equations and the canonical exact restriction composition and identity equations to identify the derived left-adjoint comparison on all complexes with the ordinary chain comparison.",
+   "uses": [
     "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
+   }
+  },
+  {
+   "text": "On K-flat pairs, paste the three tensor-normalization squares with the just-proved scalar-comparison square and chain tensor coherence. Cancel the source tensor model isomorphism and the invertible scalar-pair comparisons on each factor. Naturality of the tensor model comparisons supplies the final transport. The same argument for the identity gives its hom equation, and inversion gives the stated inverse equation. Every derived object is isomorphic to the localization of a complex, which has a K-flat resolution. The localized resolving quasi-isomorphism gives a K-flat representative of that object. Naturality transports equality of the two natural transformations from K-flat representative pairs to every pair of derived objects.",
+   "uses": [
     "lem-pc-kflat-resolution"
    ],
    "elementary": false,
@@ -34,44 +56,18 @@
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
    }
-  },
-  {
-   "text": "The proved private generator-extensionality, chain-comparison-uniqueness and derived-comparison-uniqueness lemmas identify the given chain comparisons with the canonical total maps. For the chain composition square one may apply the existing cochainPullbackTensorCoherence to identity geometric inverse images, then identify its normalized comparisons by complexIso_unique; alternatively test the tensor routes on every total pure generator. The given generators fields and tensor balancing give (t b(s) tensor x) tensor (1 tensor y) on both sides. Sheafification, tensor generation, and coproduct generation give equality of chain maps. The representative normalization squares and fully faithful restriction to K-flat pairs descend this equality to the derived tensor bifunctors.",
-   "uses": [
-    "lem-sfb-scalar-ordinary-tensor-comparison",
-    "lem-weil-pbc-resolving-representative-whiskering",
-    "lem-weil-pbc-tensor-comparison-descent-representatives",
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
-   }
-  },
-  {
-   "text": "For an identity coefficient map, scalar multiplication gives the ordinary unit-normalized identity comparison. Repeat the generator argument and full faithful descent to obtain the identity tensor equation.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
-   }
   }
  ],
  "proof_deps": [
-  "lem-sfb-scalar-tensor-cancellation-independent",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-pc-kflat-resolution",
-  "lem-sfb-scalar-ordinary-tensor-comparison",
-  "lem-weil-pbc-resolving-representative-whiskering",
-  "lem-weil-pbc-tensor-comparison-descent-representatives",
-  "lem-pur-cochain-pullback-tensor-coherence"
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 07A4, total tensor generators and normalization; Tag 0D6D, composition of derived extension; scalar internal-Hom node step 6."
+  "place": "Tags 07A4 and 0D6D; pure-generator coherence, normalized adjunctions, and naturality along isomorphisms from K-flat representatives."
  },
  "mathlib_searches": [
   {
@@ -129,13 +125,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-44c77",
-  "group": "S7",
+  "reviewer": "COMPILER",
+  "group": "H4",
   "result": "pass",
-  "landing": "20261020T221348-L-4178240",
+  "landing": "20261021T120414-L-3885937",
   "kind": "interface",
-  "note": "independent cc review: item proof and 12 new modules/nodes vs packet, live clone and published build: full pp.all #print diff of the 27 moved decls (only the declared normalization field + _proof_N aux names differ), #print axioms of all proved decls, scalarHomTensorCoherence against ScalarDerivedPair/ScalarHomTensorComparison pinnings, 11 direct importers compiled against the delivered modules (all rc 0)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
