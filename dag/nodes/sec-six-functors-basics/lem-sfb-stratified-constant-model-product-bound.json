@@ -17,7 +17,9 @@
   "def-weil-sheaf-of-modules-category",
   "sk-def-sfb-constructible",
   "def-constructible-stratification",
-  "sk-def-sfb-module-pushforward-pullback"
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-sfb-integral-model-condensed-coefficients",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
  ],
  "proof": [
   {
@@ -339,5 +341,37 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-dfb8e08d2 (reviewer sub-agent of L); spot-checked: Item lem-sfb-stratified-constant-model-product-bound (NC, dfb8e08d): the statement and stmt_deps are unchanged, there are no new nodes, and the base proof was empty. The item is still unsplit on live and side-live and is not in the dropped list. There is no repair note, so the re-split rules do not apply. There is no cycle. The only citer is det-lem-int-integral-heart-triangulated, step 4. Sources: blueprint main-20261015 sk-lem-int-integral-heart-triangulated.proof.md paragraph (2), last sentence, and unit step 4 (the data form a set). Stacks 098M (lemma-fibre-products-proetale) supports step 1. The route is the same as step 6 of the reviewed det-brown-hypotheses-small. I checked all 10 steps against the statements of the nodes they cite. Step 2: the finite-presentation definition gives P = A^n/im q, and P_q matches the scalar Lambda(*) = O_E model. Step 3: I checked every hypothesis of lem-sfb-locally-prescribed-modules-small: the slice site, R|_U = R_U, terminal object and finite limits. Step 6: locally Noetherian implies quasi-separated, so X is qcqs and has one global stratification. Step 7: exact a_s^*, identity covers in the Noetherian stratum detection, and every input of lem-sfb-joint-adjunction-model-embedding. Steps 8 and 9 restrict the image argument to monos and count it correctly. Step 10 handles the empty cases correctly. Small cases tested: Spec F_q with O_E/varpi; j_!O_E on A^1, where u is the mono j_! -> j_* into a product with a zero factor; empty X. One fault, C1, fixed. Constructibility and a^*, a_* are defined on internal module objects Mod_{Lambda_X}(Sh(Ab)), but steps 3, 5, 8 and 9 and the cited smallness and sectionwise-limit lemmas use sectionwise module sheaves. The bridge is the definition node def-weil-pbc-internal-abelian-sheaf-module-equivalence, which det-brown-hypotheses-small cites for the same purpose. I added it to step 5 with one sentence, made the module-pullback = slice-restriction identification explicit in step 3, and updated proof_deps. Duplicate check: lem-sfb-constructible-module-objects-essentially-small (locally finite presentations over an arbitrary R, essential smallness only) has a different conclusion, so it is not a duplicate. The 9 declared tool_uses are generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratifiedConstantModelProductBound",
+  "declaration": "AlgebraicGeometry.ProEtale.StratifiedConstantModels.exists_stratified_constant_model_product_bound",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.Stratum",
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.stratumAt",
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.Index",
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.Modules",
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.product",
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.sectionModule",
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.ImageIndex",
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.TotalImageIndex",
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.imageSheaf",
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.imageInclusion",
+   "AlgebraicGeometry.ProEtale.StratifiedConstantModels.exists_stratified_constant_model_product_bound"
+  ],
+  "file": "lean/Sheaf/Paper/StratifiedConstantModelProductBound.lean",
+  "statement": "theorem exists_stratified_constant_model_product_bound (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] : ∃ (I : Stratum X → Type (u + 1)) (F : ∀ T : Stratum X, I T → Modules (integralModelCondensedCoefficients l E).X T.val), (∀ (T : Stratum X) (t : I T), HasFiniteConstantLocalModel (integralModelCondensedCoefficients l E).X T.val (F T t)) ∧ (∀ (T : Stratum X) (M : Modules (integralModelCondensedCoefficients l E).X T.val), HasFiniteConstantLocalModel (integralModelCondensedCoefficients l E).X T.val M → ∃ t : I T, Nonempty (M ≅ F T t)) ∧ (∀ (C : Modules (integralModelCondensedCoefficients l E).X X), IsConstantModelConstructible (integralModelCondensedCoefficients l E).X X C → ∃ (j : Index X I) (φ : ∀ s : Fin j.1.n, (CondensedRing.upperStar (integralModelCondensedCoefficients l E).X (j.1.immersion s)).obj C ≅ F (stratumAt j.1 s) (j.2 s)) (v : C ⟶ product (integralModelCondensedCoefficients l E).X I F j), Mono v ∧ ∀ s : Fin j.1.n, v ≫ Pi.π (fun s : Fin j.1.n ↦ (CondensedRing.lowerStar (integralModelCondensedCoefficients l E).X (j.1.immersion s)).obj (F (stratumAt j.1 s) (j.2 s))) s = (CondensedRing.upperStarLowerStarAdjunction (integralModelCondensedCoefficients l E).X (j.1.immersion s)).unit.app C ≫ (CondensedRing.lowerStar (integralModelCondensedCoefficients l E).X (j.1.immersion s)).map (φ s).hom) ∧ (∀ (j : Index X I), (∀ N : ImageIndex (integralModelCondensedCoefficients l E).X (product (integralModelCondensedCoefficients l E).X I F j), Mono (imageInclusion (integralModelCondensedCoefficients l E).X _ N)) ∧ (∀ (M : SheafOfModules.{u + 1} ((sheafCompose (Scheme.ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology X) (condensedRingObj (integralModelCondensedCoefficients l E).X X)))) (m : M ⟶ sectionModule (integralModelCondensedCoefficients l E).X (product (integralModelCondensedCoefficients l E).X I F j)), Mono m → ∃ (N : ImageIndex (integralModelCondensedCoefficients l E).X (product (integralModelCondensedCoefficients l E).X I F j)) (e : M ≅ imageSheaf (integralModelCondensedCoefficients l E).X _ N), e.hom ≫ imageInclusion (integralModelCondensedCoefficients l E).X _ N = m)) ∧ (IsEmpty X → ∃ j : Index X I, j.1.n = 0) ∧ (∀ j : Index X I, j.1.n = 0 → IsZero (product (integralModelCondensedCoefficients l E).X I F j))",
+  "branch": "sheaf-dag",
+  "by": "Q02",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All representative, product, actual image-subsheaf and empty-stratification clauses. Helpers only construct the indexing types and the specified products/subsheaves using existing definitions. The two added statement dependencies already own the integral condensed coefficient ring and the sectionwise equivalence used in the statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3ab2807c5",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node: qc + locally Noetherian X only; R_T = condensedRingObj of integralModelCondensedCoefficients (landed def owner); HasFiniteConstantLocalModel / IsConstantModelConstructible are the sk-def-sfb-constructible decls; Index is a Sigma over all FiniteLocallyClosedStratification and label tuples in Type (u+1); Scheme.Stratification extends it, so C's stratification gives j; the unit-then-lowerStar.map φ components are pinned by Pi.π equations plus Mono; ImageIndex holds actual sheaf submodule families, with mono inclusions and every mono factoring through one up to iso (sectionwise passage per step 5); empty X gives n=0 and a zero product. stmt_deps gained only two landed def nodes used in the signature; lean.statement verbatim; all proof-dep imports exist; no hollow helpers, sorry only, docstrings with source and steps; item lean null on side-live. Not recompiled per the 2026-10-21 rule. Advisory: TotalImageIndex is unused in the theorem."
  }
 }

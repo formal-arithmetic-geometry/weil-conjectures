@@ -293,5 +293,41 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-60c49ba51 (reviewer sub-agent of L); spot-checked: I read the item in full: 8 steps, no new nodes. The statement and stmt_deps are byte-identical to the earlier delivery af21cba7363b. This is a repair of a landing refusal, not a re-split, and no repair note exists. S1: DVR datum checks out from lem-weil-l-adic-extension-integers-dvr(2,3) and valued-dvr-finite-quotients(2); [R→t^nR] is a perfect resolution. S2: completed-constant-sheaf-reduction identifies the constant sheaves with the Cont-sheaves, gives \\widehat R=A_T, and makes t regular with coker B_n. S3: the datum tower equals the R_W representative of the calculus node. S4: the comparison Rp_*≅L is the class of lim j on K-injective resolutions (pushforward-limit-projections, proof step 2). So u_P is h followed by the universal lim→R lim map, which completed-quotient-unit-normalization identifies with comp_P; the equality holds on the whole augmentation, not just the projections. S5: prop-weil-pbc-koszul-reconstruction gives c∘κ=comp. S6: the Roos triangle gives some φ:K≅C_t(K) (lem-pur-derived-complete-koszul-reconstruction); local completeness is iso-invariant, and the reflector (r=1, b=t, same total R lim) gives κ invertible without identifying φ with κ. S7: the strict-tower Roos triangle plus π_n u_P=c_n and the 'Equivalently' clause of def-weil-derived-complete give completeness. S8: lem-cbc-completed-extension-zero-comparison applied to the identity square (cartesian, j quasi-compact) gives j_!K intrinsically complete; this is the same extension functor as lem-sf-open-tensor-normalization. Sources: Stacks proetale.tex Tag 09BP (5185-5211) and lemma-closed-immersion (4945), and Bhatt-Scholze Lemma 6.1.13, confirm j_! commutes with limits for quasi-compact j. The upstream comment in CompletedExchange.lean claiming a counterexample is wrong: its test object lies over U, where j_!M=M. Maintainer notes: (1) the stale Lean comment; (2) unsplit lem-sf-open-roos-unit-adjunction (Q100) restates a special case of this item for finite-type k-schemes and could cite it when split. Edge cases checked: P=0, U empty, j=id, n=1, t-torsion P. No SGA citations; all tool_uses accepted as generic."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenQuotientKoszulCompleteness",
+  "declaration": "WeilConjectures.openQuotientKoszulCompleteness",
+  "declarations": [
+   "WeilConjectures.openDvrAbSheafify",
+   "WeilConjectures.openDvrAbLocallyBijective",
+   "WeilConjectures.openDvrEssentiallySmall",
+   "WeilConjectures.openDvrResolution",
+   "WeilConjectures.OpenDvrCoefficientModel",
+   "WeilConjectures.OpenDvrCoefficientModel.derived",
+   "WeilConjectures.OpenDvrCoefficientModel.towers",
+   "WeilConjectures.OpenDvrCoefficientModel.ordinaryTowers",
+   "WeilConjectures.OpenDvrCoefficientModel.complexes",
+   "WeilConjectures.OpenDvrCoefficientModel.towerComplexes",
+   "WeilConjectures.OpenDvrCompletionModel",
+   "WeilConjectures.OpenDvrOpenModel",
+   "WeilConjectures.OpenDvrOpenModel.jShriek",
+   "WeilConjectures.openDvrSystem",
+   "WeilConjectures.openQuotientKoszulCompleteness"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenQuotientKoszulCompleteness.lean",
+  "statement": "theorem openQuotientKoszulCompleteness : ∃ (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)) (hd : Ideal.span (Set.range (fun _ : Fin 1 ↦ Padic.coefficientExtensionUniformizer l E)) = d.ideal), (∀ n : ℕ, ∃ f : openDvrResolution l E n ⟶ (CochainComplex.singleFunctor (ModuleCat (Padic.coefficientExtensionIntegers l E)) 0).obj (ModuleCat.of (Padic.coefficientExtensionIntegers l E) (Padic.coefficientExtensionRing l E (n + 1))), QuasiIso f ∧ (openDvrResolution l E n).IsStrictlyGE (-1) ∧ (openDvrResolution l E n).IsStrictlyLE 0 ∧ (∀ i : ℤ, Module.Free (Padic.coefficientExtensionIntegers l E) ((openDvrResolution l E n).X i) ∧ Module.Projective (Padic.coefficientExtensionIntegers l E) ((openDvrResolution l E n).X i) ∧ Module.Finite (Padic.coefficientExtensionIntegers l E) ((openDvrResolution l E n).X i))) ∧ (∀ T : Scheme.{u}, IsUnit (l : Γ(T, ⊤)) → ∃ C : OpenDvrCoefficientModel l E d T, Nonempty (OpenDvrCompletionModel l E C (openDvrSystem l E T) hd)) ∧ (∀ (U X : Scheme.{u}) (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j], IsUnit (l : Γ(U, ⊤)) → IsUnit (l : Γ(X, ⊤)) → ∃ O : OpenDvrOpenModel l E j, ∀ K : DerivedCategory (scalarReductionSource.{u, u} l E U), IsDerivedCompleteUnrestricted.{u, u} l E U K → IsDerivedCompleteUnrestricted.{u, u} l E X (O.jShriek.obj K) ∧ IsIso ((openDvrSystem l E X).adjunction.unit.app (O.jShriek.obj K)) ∧ (∀ n : ℕ, (openDvrSystem l E X).adjunction.unit.app (O.jShriek.obj K) ≫ (coefficientSequenceProjection.{u, u} l E X n).app ((openDvrSystem l E X).reduction.obj (O.jShriek.obj K)) = (coefficientFiniteAdjunction.{u, u} l E X n).unit.app (O.jShriek.obj K) ≫ (coefficientFiniteDerivedRestriction.{u, u} l E X n).map (((openDvrSystem l E X).reductionEvaluation n).inv.app (O.jShriek.obj K))))",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical coefficient transport, strict K-flat tower augmentation, and universal derived-limit normalization are explicit fields of the asserted comparison models. Uses the existing completedAdic interfaces publicly provided by the recorded Koszul-reconstruction module; n denotes exponent n+1. The site remains Scheme.ProEt with object/Hom universes u+1/u and coefficient universe u+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfd9c5a40",
+  "group": "NG",
+  "result": "pass",
+  "note": "Clause-by-clause match. DVR datum: ∃ d with span{t}=d.ideal; resolution: mapping cone of t^(n+1) with quasi-iso, bounds, free/finite terms. Coefficient model pinned by constants, limit projections and module functor = restrictScalars. tower/rlim/unit pinned via the K-flat strict augmentation (HEq types defeq: both from the same derivedChangeOfRings witness) and limit_model on all complexes. koszul_unit/intrinsic_unit use the specified koszulReconstruction.choose (c∘κ=u). complete_iff uses IsDerivedCompleteUnrestricted = global branch of IntegralOnSlice.IsComplete. Open clause: qc open immersion, recorded OpenExtension (adjoint to actual restriction), iso-invariant conclusions. No extra hypotheses; E/T common universe u inherited from the recorded Koszul theorem; site universes kept. Statement verbatim, sorry only, docstrings OK, no node change beyond lean. Advisories: existential e in representative pinned only via the unit equation (could use CoefficientReductionPresentation); duplicate completed-coefficient families predate this delivery; parallel Q08 delivery of the same item will collide at landing; plain proof-dep imports. No file changed, no compile run."
  }
 }

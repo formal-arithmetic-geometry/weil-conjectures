@@ -22598,3 +22598,8 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:36 L: returned deliver/NE/def-per-support-condition (reviewer RETURN: I read the delivery in full: the item statement, the report, the five stmt_deps (def-weil-pbc-scheme-conventions, def-we)
 - 2026-10-21T13:36:41Z L: superseded stage-1 delivery NJ/lem-sfb-continuous-algcl-proper-scalar-comparison at e95bfe42033e183244c19acc008658907d7f8f61; current completion retained; packet archived at refs/superseded/NJ/lem-sfb-continuous-algcl-proper-scalar-comparison/e95bfe42033e183244c19acc008658907d7f8f61; stale return retired.
 - 13:37 L: merged deliver/NF/lem-asd-affine-roots-representability (reviewer PASS; after a return; new nodes: 2)
+- 13:37 L: merged deliver/O1/lem-sfb-localized-direct-image-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 13:37 L: merged deliver/Q02/lem-sfb-stratified-constant-model-product-bound (stage 2; reviewer PASS; parallel immutable checks)
+- 13:37 L: merged deliver/NM/lem-pur-support-comparison-section-model (stage 2; reviewer FIX; parallel immutable checks)
+- 13:37 L: merged deliver/NG/lem-sf-open-quotient-koszul-completeness (stage 2; reviewer PASS; parallel immutable checks)
+- 13:37 L: merged deliver/Q03/lem-sfb-stratified-tor-interval-devissage (stage 2; reviewer PASS; parallel immutable checks)
