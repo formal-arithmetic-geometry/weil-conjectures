@@ -5,6 +5,7 @@ Authors: SHEAF group Q24
 -/
 module
 
+public import Sheaf.Paper.FiniteComparisonCoefficients
 public import Sheaf.Paper.LocalizingClosure
 public import Sheaf.Paper.FiniteDiscreteCondensedRing
 public import Sheaf.Paper.FiniteDiscreteSchemeRing
@@ -20,13 +21,10 @@ import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
 import Sheaf.AlgebraicGeometry.UnboundedSiteComparison
 import Sheaf.Paper.LocalizingAdmissibleCoefficients
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Monad.Limits
 import Mathlib.CategoryTheory.Limits.FullSubcategory
+import Sheaf.Paper.FiniteComparisonPresentation
 import Sheaf.Paper.FiniteComparisonFaithful
-import Sheaf.Paper.ConstantInternalModuleSheafEquivalence
-import all Sheaf.Paper.InternalModuleAbEquivalence
 
 /-!
 # Finite coefficient comparison on localizing closures
@@ -172,217 +170,11 @@ end LocalizingArgument
 namespace AlgebraicGeometry.ProEtale
 
 
-/-- View fixed-scalar module presheaves as internal modules before sheafification.
-Source: blueprint finite comparison, coefficient identification in proof step 1
-(blueprint: det-ctf-finite-comparison-localizing). -/
-def finiteComparisonPresheaf (X : Scheme.{u}) (B : Type) [CommRing B] :
-    (X.ProEtᵒᵖ ⥤ ModuleCat.{u + 1} (ULift.{u + 1} B)) ⥤
-      Mod (X.ProEtᵒᵖ ⥤ Ab.{u + 1})
-        ((Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B))) where
-  obj F := by
-    let act :
-        (Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B)) ⊗
-            (F ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}) ⟶
-          (F ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}) :=
-      { app U := InternalAbelianSheafModule.ordinaryAction
-          (S := ULift.{u + 1} B) (N := F.obj U)
-        naturality U V f := by
-          apply AddCommGrpCat.hom_ext_toIntLinearMap
-          apply TensorProduct.ext'
-          intro r m
-          exact ((F.map f).hom.map_smul r m).symm }
-    letI : ModObj
-        ((Functor.const X.ProEtᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} B)))
-        (F ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}) :=
-      ModObj.mk' _ act (by
-        apply NatTrans.ext
-        funext U
-        apply AddCommGrpCat.hom_ext_toIntLinearMap
-        apply TensorProduct.ext'
-        intro z m
-        exact Int.cast_smul_eq_zsmul (M := F.obj U) (ULift.{u + 1} B) z.down m) (by
-        apply NatTrans.ext
-        funext U
-        apply AddCommGrpCat.hom_ext_toIntLinearMap
-        apply TensorProduct.ext_threefold
-        intro r s m
-        exact mul_smul (α := ULift.{u + 1} B) (β := F.obj U) r s m)
-    exact ⟨F ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1}⟩
-  map f := Mod.homMk (Functor.whiskerRight f (forget₂ _ Ab.{u + 1})) (by
-    apply NatTrans.ext
-    funext U
-    apply AddCommGrpCat.hom_ext_toIntLinearMap
-    apply TensorProduct.ext'
-    intro r m
-    exact (f.app U).hom.map_smul r m)
-  map_id F := by apply Mod.hom_ext; rfl
-  map_comp f g := by apply Mod.hom_ext; rfl
-
-
-/-- Sheafify the ordinary fixed-scalar action as an internal constant-ring action.
-Source: blueprint finite comparison, proof step 1
-(blueprint: det-ctf-finite-comparison-localizing). -/
-def finiteComparisonConstantRealization (X : Scheme.{u}) (B : Type) [CommRing B] :
-    Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B)) ⥤
-      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (Scheme.ProEt.topology X)
-          ((Functor.const X.ProEtᵒᵖ).obj (RingCat.of (ULift.{u + 1} B)))) :=
-  sheafToPresheaf _ _ ⋙ finiteComparisonPresheaf X B ⋙
-    (presheafToSheaf (Scheme.ProEt.topology X) Ab.{u + 1}).mapMod _
-
-private noncomputable def finiteComparisonPresheafEncodingIso
-    (X : Scheme.{u}) (B : Type) [CommRing B] :
-    finiteComparisonPresheaf X B ⋙
-        ConstantInternalModuleSheafEncoding.modulePresheafEncoding
-          (C := X.ProEt) (ULift.{u + 1} B) (internalToModule (ULift.{u + 1} B)) ≅
-      𝟭 (X.ProEtᵒᵖ ⥤ ModuleCat.{u + 1} (ULift.{u + 1} B)) := by
-  refine NatIso.ofComponents (fun F ↦ NatIso.ofComponents (fun U ↦ ?_) ?_) ?_
-  · exact ModuleCat.isoMk (Iso.refl _) (fun r ↦ by ext m; rfl)
-  · intro U V f
-    ext m
-    rfl
-  · intro F G f
-    ext U m
-    rfl
-
-private theorem finiteComparisonConstantRealization_isEquivalence
-    (X : Scheme.{u}) (B : Type) [CommRing B] :
-    (finiteComparisonConstantRealization X B).IsEquivalence := by
-  let J := Scheme.ProEt.topology X
-  let R := ULift.{u + 1} B
-  let A := ConstantInternalModuleSheafEncoding.A (C := X.ProEtᵒᵖ) R
-  let G := internalToModule R
-  let : HasLimitsOfSize.{u, u + 1} (ModuleCat.{u + 1} R) :=
-    ModuleCat.hasLimitsOfSize.{u, u + 1, u + 1, u + 1}
-  let H := ConstantInternalModuleSheafEncoding.sheafEncoding J R G rfl
-  let L := finiteComparisonConstantRealization X B
-  let E := sheafToPresheaf J (ModuleCat.{u + 1} R) ⋙ finiteComparisonPresheaf X B
-  let P := ConstantInternalModuleSheafEncoding.modulePresheafEncoding (C := X.ProEt) R G
-  let adj := (sheafificationAdjunction J Ab.{u + 1}).mapModAdjunction A
-  have hu (M : Sheaf J (ModuleCat.{u + 1} R)) : IsIso (adj.unit.app (E.obj M)) := by
-    rw [← isIso_iff_of_reflects_iso _ (Mod.forget A)]
-    change IsIso ((adj.unit.app (E.obj M)).hom)
-    rw [Adjunction.mapModAdjunction_unit_app_hom]
-    exact isIso_toSheafify J
-      ((sheafCompose J (forget₂ (ModuleCat.{u + 1} R) Ab.{u + 1})).obj M).property
-  let η := Functor.whiskerRight (Functor.whiskerLeft E adj.unit) P
-  have : IsIso η := by
-    rw [NatTrans.isIso_iff_isIso_app]
-    intro M
-    exact Functor.map_isIso P (adj.unit.app (E.obj M))
-  let e0 : E ⋙ P ≅ sheafToPresheaf J (ModuleCat.{u + 1} R) :=
-    Functor.isoWhiskerLeft _ (finiteComparisonPresheafEncodingIso X B)
-  let e : (L ⋙ H) ⋙ sheafToPresheaf J (ModuleCat.{u + 1} R) ≅
-      (𝟭 _) ⋙ sheafToPresheaf J (ModuleCat.{u + 1} R) :=
-    (asIso η).symm ≪≫ e0
-  let i := ((fullyFaithfulSheafToPresheaf J (ModuleCat.{u + 1} R)).whiskeringRight _)
-    |>.preimageIso e
-  have : (L ⋙ H).IsEquivalence := Functor.isEquivalence_of_iso i.symm
-  exact Functor.isEquivalence_of_comp_right L H
-
-
 variable (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
   [DiscreteTopology B] [Finite B]
-
-/-- Transport the sheafified scalar action along the specified coefficient ring isomorphism.
-The isomorphism is exactly the pullback of the finite-discrete point identification.
-Source: blueprint finite comparison, proof step 1
-(blueprint: det-ctf-finite-comparison-localizing). -/
-def finiteComparisonRealization (X : Scheme.{u})
-    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
-      ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
-        Profinite.continuousMapRingObj.{u} B) [IsMonHom eR.hom] :
-    Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B)) ⥤
-      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
-        (condensedRingObj (Profinite.continuousMapRingObj.{u} B) X) :=
-  finiteComparisonConstantRealization X B ⋙
-    Mod.comap (finiteDiscreteSchemeRingIso B X eR).inv
-
-/-- The specified coefficient transport is an exact equivalence.
-Source: blueprint finite comparison, coefficient paragraph and proof step 1
-(blueprint: det-ctf-finite-comparison-localizing).
-
-Proof: an internal presheaf action is precisely the sectionwise scalar action.
-Monoidal sheafification extends it uniquely to the associated constant ring sheaf.
-Restriction along constant sections is inverse: local scalar representatives and
-sheaf uniqueness recover both the action and every linear map. The unit and counit
-are the sheafification identifications on underlying abelian sheaves. Transport along
-`finiteDiscreteSchemeRingIso` has inverse transport along its inverse ring map.
-The two composite functors are inverse and retain the underlying additive sheaves,
-so preserve finite limits, finite colimits, and addition. This includes the zero ring
-and empty scheme. -/
-theorem finiteComparisonRealization_exact (X : Scheme.{u})
-    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
-      ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
-        Profinite.continuousMapRingObj.{u} B) [IsMonHom eR.hom] :
-    (finiteComparisonRealization B X eR).IsEquivalence ∧
-    (finiteComparisonRealization B X eR).Additive ∧
-    PreservesFiniteLimits (finiteComparisonRealization B X eR) ∧
-    PreservesFiniteColimits (finiteComparisonRealization B X eR) := by
-  let _ : DiscreteTopology B := inferInstance
-  let _ : Finite B := inferInstance
-  have : (finiteComparisonConstantRealization X B).IsEquivalence :=
-    finiteComparisonConstantRealization_isEquivalence X B
-  have : (Mod.comap (finiteDiscreteSchemeRingIso B X eR).inv).IsEquivalence :=
-    (Mod.comapEquivalenceOfIsIso (finiteDiscreteSchemeRingIso B X eR).inv)
-      |>.isEquivalence_functor
-  have : (finiteComparisonRealization B X eR).IsEquivalence := by
-    unfold finiteComparisonRealization
-    infer_instance
-  have : (finiteComparisonRealization B X eR).Additive :=
-    Functor.additive_of_preserves_binary_products _
-  exact ⟨inferInstance, inferInstance, inferInstance, inferInstance⟩
-
 variable (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})
   ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅
     Profinite.continuousMapRingObj.{u} B) [IsMonHom eR.hom]
-
-/-- Additivity of the specified coefficient transport, from the coefficient paragraph.
-Source: blueprint finite comparison (blueprint: det-ctf-finite-comparison-localizing). -/
-instance finiteComparisonRealization_additive (X : Scheme.{u}) :
-    (finiteComparisonRealization B X eR).Additive :=
-  (finiteComparisonRealization_exact B X eR).2.1
-
-/-- Left exactness of the coefficient transport, from the coefficient paragraph.
-Source: blueprint finite comparison (blueprint: det-ctf-finite-comparison-localizing). -/
-instance finiteComparisonRealization_limits (X : Scheme.{u}) :
-    PreservesFiniteLimits (finiteComparisonRealization B X eR) :=
-  (finiteComparisonRealization_exact B X eR).2.2.1
-
-/-- Right exactness of the coefficient transport, from the coefficient paragraph.
-Source: blueprint finite comparison (blueprint: det-ctf-finite-comparison-localizing). -/
-instance finiteComparisonRealization_colimits (X : Scheme.{u}) :
-    PreservesFiniteColimits (finiteComparisonRealization B X eR) :=
-  (finiteComparisonRealization_exact B X eR).2.2.2
-
-/-- The etale generators: the recorded bounded constructible property and finite Tor
-amplitude tested against every module sheaf in degree zero.
-Source: blueprint finite comparison, statement
-(blueprint: det-ctf-finite-comparison-localizing). -/
-def finiteComparisonEtaleGenerators (X : Scheme.{u}) :
-    ObjectProperty (Etale.DerivedCategoryModule (ULift.{u + 1} B) X) :=
-  Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1} B) X ⊓
-    _root_.DerivedCategory.finiteTorAmplitude _
-
-/-- The pro-etale generators transported from the recorded constant-model definition.
-Source: blueprint finite comparison, coefficient paragraph and definition of Dctf
-(blueprint: det-ctf-finite-comparison-localizing). -/
-def finiteComparisonProEtaleGenerators (X : Scheme.{u}) :
-    ObjectProperty (_root_.DerivedCategory
-      (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1} B)))) :=
-  fun K ↦ (constantModelBoundedConstructible (Profinite.continuousMapRingObj.{u} B) X ⊓
-    _root_.DerivedCategory.finiteTorAmplitude _)
-      ((finiteComparisonRealization B X eR).mapDerivedCategory.obj K)
-
-/-- The etale localizing closure uses the recorded intersection convention.
-Source: blueprint finite comparison (blueprint: det-ctf-finite-comparison-localizing). -/
-def finiteComparisonEtaleClosure (X : Scheme.{u}) :=
-  CategoryTheory.localizingClosure (finiteComparisonEtaleGenerators B X)
-
-/-- The ordinary pro-etale localizing closure, with the transported Dctf generators.
-Source: blueprint finite comparison (blueprint: det-ctf-finite-comparison-localizing). -/
-def finiteComparisonProEtaleClosure (X : Scheme.{u}) :=
-  CategoryTheory.localizingClosure (finiteComparisonProEtaleGenerators B eR X)
 
 /-- The canonical open-extension comparison, applied termwise and localized.
 Source: blueprint finite comparison, Operations; Stacks Tag 09AF
@@ -434,7 +226,38 @@ theorem finiteComparisonGenerators_identification (X : Scheme.{u})
         (finiteComparisonEtaleGenerators B X).map
           (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B))
             X).mapDerivedCategory K) := by
-  sorry
+  let A := ULift.{u + 1} B
+  let : IsNoetherianRing A := inferInstance
+  let : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :=
+    HasDerivedCategory.standard _
+  let : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant
+      (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :=
+    HasDerivedCategory.standard _
+  let E := (finiteComparisonEtaleModelRealization X A).mapDerivedCategory
+  let G := (finiteComparisonProEtaleModelRealization X A).mapDerivedCategory
+  let F := (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+  obtain ⟨D, hD, _, H, ⟨hH⟩⟩ := finiteTorComparisonNoetherian.{u, u + 1} X A
+  obtain ⟨hE, hG⟩ := finiteComparisonPresentation B X eR
+  obtain ⟨esquare⟩ := finiteComparisonModelDerivedSquare X A D hD
+  constructor
+  · intro K hK
+    rw [← hE] at hK
+    obtain ⟨L, hL, ⟨eL⟩⟩ := hK
+    rw [← hG]
+    let L' := H.functor.obj ⟨L, hL⟩
+    refine ⟨L'.obj, L'.property, ⟨?_⟩⟩
+    exact G.mapIso (hH.app ⟨L, hL⟩) ≪≫
+      (esquare.app L).symm ≪≫ F.mapIso eL
+  · intro K hK
+    rw [← hG] at hK
+    obtain ⟨M, hM, ⟨eM⟩⟩ := hK
+    let M' := H.inverse.obj ⟨M, hM⟩
+    refine ⟨E.obj M'.obj, ?_, ⟨?_⟩⟩
+    · rw [← hE]
+      exact ⟨M'.obj, M'.property, ⟨Iso.refl _⟩⟩
+    · exact esquare.app M'.obj ≪≫ G.mapIso (hH.app M').symm ≪≫
+        G.mapIso (ObjectProperty.ι _ |>.mapIso (H.counitIso.app ⟨M, hM⟩)) ≪≫ eM
 
 /-- Comparison identifies the two localizing closures, exactly and with ambient sums,
 and the canonical pullback, direct-image, open-extension and compact-support comparisons

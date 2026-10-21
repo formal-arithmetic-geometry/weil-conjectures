@@ -1,0 +1,179 @@
+{
+ "id": "lem-ctf-finite-comparison-presentation",
+ "kind": "statement",
+ "title": "Coefficient presentation identifies the bounded finite-Tor generator predicates",
+ "statement": "Let B be a finite discrete commutative topological ring, X a quasi-compact quasi-separated scheme [def-pc-scheme], and eR a monoidal isomorphism from the constant lifted B-ring on profinite sets to its continuous-function condensed ring [lem-weil-pbc-finite-discrete-condensed-ring-constant]. Put A=ULift B. Let P consist of bounded constructible etale coefficient-model complexes with a finite coefficient-model Tor interval [def-pe-etale-constructible-module, det-pe-finite-tor-comparison-noetherian], and Q the analogous pro-etale coefficient-model predicate. Use the explicit model realizations E and G [lem-ctf-finite-comparison-model-realization]. Then the replete image P.map D(E) is exactly the ordinary etale bounded constructible finite-Tor predicate, and Q.map D(G) is exactly the predicate that the specified internal realization has bounded constant-model constructible cohomology and finite Tor amplitude [lem-ctf-finite-comparison-coefficients, sk-def-sfb-constructible]. This concerns coefficient presentations separately on each site and does not assert any etale/pro-etale comparison.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+  "place": "opening paragraph: coefficient identification before invoking finite-Tor comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "def-pe-etale-constructible-module",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-ctf-finite-comparison-model-realization",
+  "lem-ctf-finite-comparison-coefficients",
+  "sk-def-sfb-constructible"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact coefficient-model equivalences and the specified internal realization. Under constant scalars, local finite module models agree with the sheafified constant-module construction. The same finite module and covering sieve give trivializations in both directions.",
+   "uses": [
+    "lem-ctf-finite-comparison-model-realization",
+    "lem-ctf-finite-comparison-coefficients",
+    "lem-weil-pbc-constant-coefficient-local-models-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply these identifications on each locally closed stratum. A finite affine cover of a qcqs scheme and the global refinement of its local finite stratifications identify the affine-local convention with the global convention; pull back local models along the actual factorization morphisms. Finite B-modules are finitely presented over the Noetherian finite ring. Finite matrix presentations of point coefficient modules identify their pullbacks with these same constant finite models.",
+   "uses": [
+    "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "lem-sfb-coefficient-finite-local-systems-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar identifications are strong monoidal: the tensor comparison sends a pure tensor of the original sections to that same pure tensor and commutes with sheafification. Exactness and these comparisons transport bounded flat representatives in both directions. The coefficient-model flat-complex criterion therefore identifies the Tor predicates.",
+   "uses": [
+    "lem-pe-coefficient-tor-flat-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness identifies homology and reflects its vanishing, hence preserves and reflects finite cohomological bounds. Essential surjectivity supplies representatives of every ordinary derived object; transport the predicates through the representative isomorphism to obtain the two replete-image equalities.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-ctf-finite-comparison-model-realization",
+  "lem-ctf-finite-comparison-coefficients",
+  "lem-weil-pbc-constant-coefficient-local-models-comparison",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-sfb-coefficient-finite-local-systems-pullback",
+  "lem-pe-coefficient-tor-flat-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+  "place": "opening paragraph, expanded coefficient-presentation argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence between modules over a constant sheaf of rings and sheaves of modules over the original fixed ring",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.Modules",
+     "SheafOfModules",
+     "SheafOfModules.noConfusionType",
+     "SheafOfModules.mk",
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "CategoryTheory.Sheaf.ΓHomEquiv",
+     "SheafOfModules.Hom",
+     "SheafOfModules.mk.inj"
+    ],
+    "n_hits": 8,
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for the specified coefficient realizations and predicates; use the project constant-ring equivalence and localization APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of module sheaf categories induced by restricting scalars from the sheafified constant ring to constant scalars",
+   "results": {
+    "hits": [
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "PresheafOfModules.sheafifyHomEquiv",
+     "PresheafOfModules.sheafificationHomEquiv",
+     "PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+     "SheafOfModules.mapFree",
+     "PresheafOfModules.sheafificationCompToSheaf",
+     "PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+     "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm"
+    ],
+    "n_hits": 8,
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for the specified coefficient realizations and predicates; use the project constant-ring equivalence and localization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.map, CategoryTheory.Equivalence",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for the specified coefficient realizations and predicates; use the project constant-ring equivalence and localization APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "constantRingModuleRestriction|coefficientModelFixedScalars",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for the specified coefficient realizations and predicates; use the project constant-ring equivalence and localization APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteComparisonLocalizing",
+  "date": "2026-10-21",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-ctf-finite-comparison-localizing",
+   "place": "opening paragraph: coefficient identification for the finite-Tor generators",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteComparisonPresentation",
+  "file": "lean/Sheaf/Paper/FiniteComparisonPresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteComparisonPresentation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteComparisonPresentation"
+  ],
+  "statement": "theorem finiteComparisonPresentation (X : Scheme.{u})\n    [CompactSpace X] [QuasiSeparatedSpace X]\n    (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1} (coherentTopology Profinite.{u})\n      ((Functor.const Profinite.{u}ᵒᵖ).obj (RingCat.of (ULift.{u + 1} B))) ≅\n        Profinite.continuousMapRingObj.{u} B) [IsMonHom eR.hom] :\n    let A := ULift.{u + 1} B\n    letI : IsNoetherianRing A := inferInstance\n    letI : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant\n        (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :=\n      HasDerivedCategory.standard _\n    letI : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant\n        (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :=\n      HasDerivedCategory.standard _\n    let P : ObjectProperty (ConstantCompletion.D (ConstantCompletion.constant\n        (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :=\n      fun K ↦ Scheme.IsCoefficientBoundedConstructibleEtale.{u, u + 1} X A K ∧\n        ∃ a b : ℤ, HasCoefficientModelTorAmplitude _ K a b\n    let Q : ObjectProperty (ConstantCompletion.D (ConstantCompletion.constant\n        (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :=\n      fun K ↦ coefficientBoundedConstructibleProEtale.{u, u + 1} X A K ∧\n        Scheme.HasFiniteCoefficientProEtaleTorAmplitude.{u, u + 1} X A K\n    P.map (finiteComparisonEtaleModelRealization X A).mapDerivedCategory =\n        finiteComparisonEtaleGenerators B X ∧\n    Q.map (finiteComparisonProEtaleModelRealization X A).mapDerivedCategory =\n        finiteComparisonProEtaleGenerators B eR X",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-e8c8a",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261021T024147-L-3039041",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-e8c8a",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261021T024147-L-3039041",
+  "kind": "interface",
+  "note": "independent cc review: e8c8ab950083 Lean+node files byte-identical to PASSed e6b6ce7b2f; change record now lists both users FiniteDiscreteCtfOrigin and FiniteDiscreteCtfRealization; --all compile of 4 modules plus both importers against live, exit 0"
+ }
+}

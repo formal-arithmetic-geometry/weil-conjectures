@@ -1,0 +1,178 @@
+{
+ "id": "lem-ctf-finite-comparison-model-realization",
+ "kind": "statement",
+ "title": "Exact coefficient-model realizations intertwine the derived comparisons",
+ "statement": "For a scheme X [def-pc-scheme] and a commutative ring A in the coefficient universe, constant-scalar restriction from modules over the sheafified constant ring to fixed-A module sheaves [def-pe-etale-constructible-module] is an equivalence. Compose it with evaluation on the original sites through AsSmall to define E and G on the etale and pro-etale coefficient models [lem-pe-coefficient-comparison-data]. These are additive equivalences. They intertwine the specified model comparison inverse image with the ordinary comparison inverse image [def-weil-pbc-site-comparison-morphism]. For every functor D equipped with the localization factorization Q_et followed by D isomorphic to the specified complex pullback followed by Q_pro, there is a natural isomorphism D(E) followed by the ordinary derived comparison to D followed by D(G). Both standard model derived categories are in the specified coefficient-derived universe.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+  "place": "opening paragraph: coefficient identification before invoking finite-Tor comparison"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pe-etale-constructible-module",
+  "lem-pe-coefficient-comparison-data",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Forgetting commutativity commutes with constant-ring sheafification. Restriction along that ring isomorphism followed by constant-ring restriction has the same scalar action as coefficientModelFixedScalars, because the two sheafification units agree. Its identity additive maps give the natural comparison. Apply the constant-ring module equivalence.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose constant-scalar restriction with the inverse AsSmall sheaf equivalences to construct E and G. The latter preserve the original sections and maps. Equivalences preserve finite limits, finite colimits, and addition.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The ring comparison extends the constant-section unit, by the sheafification adjunction equation. Thus model direct image followed by E equals G followed by ordinary direct image on sections and scalar actions. Compose adjunctions with E and G, conjugate the right-adjoint square, and use uniqueness of left adjoints to obtain the inverse-image square.",
+   "uses": [
+    "lem-pe-coefficient-comparison-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exactness of the model pullback permits termwise derived localization of the square. The supplied factorization of D identifies it with the derived exact functor using the fully faithful localization universal property. Whisker that identification with D(G).",
+   "uses": [
+    "lem-pe-constructible-comparison-module-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-pe-coefficient-comparison-data",
+  "lem-pe-constructible-comparison-module-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
+  "place": "opening paragraph, expanded coefficient-presentation argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact equivalence between modules over a constant sheaf of rings and sheaves of modules over the original fixed ring",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.Scheme.Modules",
+     "SheafOfModules",
+     "SheafOfModules.noConfusionType",
+     "SheafOfModules.mk",
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "CategoryTheory.Sheaf.ΓHomEquiv",
+     "SheafOfModules.Hom",
+     "SheafOfModules.mk.inj"
+    ],
+    "n_hits": 8,
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for the specified coefficient realizations and predicates; use the project constant-ring equivalence and localization APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact equivalence of module sheaf categories induced by restricting scalars from the sheafified constant ring to constant scalars",
+   "results": {
+    "hits": [
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "PresheafOfModules.sheafifyHomEquiv",
+     "PresheafOfModules.sheafificationHomEquiv",
+     "PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+     "SheafOfModules.mapFree",
+     "PresheafOfModules.sheafificationCompToSheaf",
+     "PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+     "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm"
+    ],
+    "n_hits": 8,
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for the specified coefficient realizations and predicates; use the project constant-ring equivalence and localization APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.map, CategoryTheory.Equivalence",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for the specified coefficient realizations and predicates; use the project constant-ring equivalence and localization APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "constantRingModuleRestriction|coefficientModelFixedScalars",
+   "results": {
+    "hits": [],
+    "n_hits": 0,
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement for the specified coefficient realizations and predicates; use the project constant-ring equivalence and localization APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteComparisonLocalizing",
+  "date": "2026-10-21",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-ctf-finite-comparison-localizing",
+   "place": "opening paragraph: coefficient identification for the finite-Tor generators",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-ctf-finite-comparison",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteComparisonModelRealization",
+  "file": "lean/Sheaf/Paper/FiniteComparisonModelRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteComparisonModelDerivedSquare",
+  "declarations": [
+   "CategoryTheory.coefficientModelFixedScalars_isEquivalence",
+   "AlgebraicGeometry.ProEtale.finiteComparisonEtaleModelRealization",
+   "AlgebraicGeometry.ProEtale.finiteComparisonProEtaleModelRealization",
+   "AlgebraicGeometry.ProEtale.finiteComparisonEtaleModelRealization_isEquivalence",
+   "AlgebraicGeometry.ProEtale.finiteComparisonProEtaleModelRealization_isEquivalence",
+   "AlgebraicGeometry.ProEtale.finiteComparisonEtaleModelRealization_additive",
+   "AlgebraicGeometry.ProEtale.finiteComparisonProEtaleModelRealization_additive",
+   "AlgebraicGeometry.ProEtale.finiteComparisonModelPullbackSquare",
+   "AlgebraicGeometry.ProEtale.finiteComparisonModelDerivedSquare"
+  ],
+  "statement": "theorem finiteComparisonModelDerivedSquare :\n    letI : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant\n        (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A)) :=\n      HasDerivedCategory.standard _\n    letI : HasDerivedCategory.{u + 2} (ConstantCompletion.Mod (ConstantCompletion.constant\n        (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A)) :=\n      HasDerivedCategory.standard _\n    ∀ D : ConstantCompletion.D (ConstantCompletion.constant\n        (Scheme.smallModelComparisonEtaleTopology.{u, u + 1} X) A) ⥤\n          ConstantCompletion.D (ConstantCompletion.constant\n            (Scheme.coefficientProEtaleModelTopology.{u, u + 1} X) A),\n      Nonempty (ConstantCompletion.Q _ ⋙ D ≅\n        constructibleComparisonComplexPullback.{u, u + 1} X A ⋙ ConstantCompletion.Q _) →\n      Nonempty ((finiteComparisonEtaleModelRealization X A).mapDerivedCategory ⋙\n          (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ≅\n        D ⋙ (finiteComparisonProEtaleModelRealization X A).mapDerivedCategory)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-e8c8a",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261021T024147-L-3039041",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-e8c8a",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261021T024147-L-3039041",
+  "kind": "interface",
+  "note": "independent cc review: e8c8ab950083 Lean+node files byte-identical to PASSed e6b6ce7b2f; change record now lists both users FiniteDiscreteCtfOrigin and FiniteDiscreteCtfRealization; --all compile of 4 modules plus both importers against live, exit 0"
+ }
+}

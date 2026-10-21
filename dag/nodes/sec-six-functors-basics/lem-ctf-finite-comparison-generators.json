@@ -24,33 +24,36 @@
  ],
  "proof": [
   {
-   "text": "Use the explicitly constructed exact model functors. The coefficient-presentation theorem identifies the replete images of the two bounded finite-Tor predicates and identifies the specified ordinary comparison with the coefficient model comparison.",
+   "text": "Use the two replete-image equalities in the coefficient-presentation lemma for the explicitly constructed realizations E and G.",
    "uses": [
     "lem-ctf-finite-comparison-presentation"
    ],
    "elementary": false
   },
   {
-   "text": "The finite ring and its universe lift are Noetherian. Apply finiteTorComparisonNoetherian to obtain D, its localization comparison, the restricted finite-Tor equivalence H and its ambient compatibility.",
+   "text": "The lifted finite ring A is Noetherian. Apply finiteTorComparisonNoetherian to obtain D, its localization factorization, the finite-Tor equivalence H and the ambient comparison hH. The proved derived square identifies D with the ordinary comparison through E and G.",
    "uses": [
-    "det-pe-finite-tor-comparison-noetherian"
+    "det-pe-finite-tor-comparison-noetherian",
+    "lem-ctf-finite-comparison-model-realization"
    ],
    "elementary": false
   },
   {
-   "text": "For an etale generator choose its model representative using the first replete image equality, apply H, then compose the ambient comparison isomorphism with the commuting square and the representative isomorphism. For a pro-etale generator choose its model representative using the second equality, apply the inverse of H, and compose its counit, ambient comparison and commuting square to produce the required etale generator antecedent. This is proved by transportGeneratorMaps in the module.",
+   "text": "For an etale generator choose a model representative L and apply H. Compose G(hH_L), the inverse square at L and the image of its representative isomorphism. For the converse choose a model representative M, apply H.inverse, and compose the square, inverse ambient comparison and H counit to obtain an isomorphism to the given ordinary pro-etale object.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-ctf-finite-comparison-presentation",
   "det-pe-finite-tor-comparison-noetherian",
-  "lem-ctf-finite-comparison-presentation"
+  "lem-ctf-finite-comparison-model-realization"
  ],
  "proof_origin": {
   "by": "agent",
+  "date": "2026-10-21",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-comparison/sk-prop-ctf-finite-comparison-localizing.proof.md",
-  "place": "opening paragraph: transport the existing finite-Tor equivalence through the explicit coefficient presentation bridge"
+  "place": "opening paragraph: explicit transport of the existing finite-Tor equivalence through E and G, with a proved derived square"
  },
  "mathlib_searches": [
   {
@@ -150,11 +153,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "C-e8c8a",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261021T012352-L-2180691",
+  "landing": "20261021T024147-L-3039041",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: e8c8ab950083 Lean+node files byte-identical to PASSed e6b6ce7b2f; change record now lists both users FiniteDiscreteCtfOrigin and FiniteDiscreteCtfRealization; --all compile of 4 modules plus both importers against live, exit 0"
  }
 }

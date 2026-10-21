@@ -39,7 +39,8 @@
    "uses": [
     "lem-sfb-unbounded-site-comparison",
     "lem-ctf-finite-comparison-ordinary-fully-faithful",
-    "lem-ctf-finite-comparison-generators"
+    "lem-ctf-finite-comparison-generators",
+    "lem-ctf-finite-comparison-coefficients"
    ],
    "elementary": false,
    "source": {
@@ -110,12 +111,13 @@
   "sk-def-localizing-closure",
   "sk-thm-pe-direct-image-comparison",
   "lem-ctf-finite-comparison-ordinary-fully-faithful",
-  "lem-ctf-finite-comparison-generators"
+  "lem-ctf-finite-comparison-generators",
+  "lem-ctf-finite-comparison-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
   "date": "2026-10-21",
-  "summary": "The coefficient transport exactness is proved by the internal module encoding. The localizing equivalence is obtained from the ordinary full-faithfulness and generator-identification helper statements, using closure inverse-image/image lemmas; operation clauses follow from the ambient comparison maps and exactness."
+  "summary": "The existing localizing and operation proofs remain unchanged. The generator identification is now proved by explicit representatives, the Noetherian finite-Tor equivalence and the proved model derived square; its sole remaining coefficient-presentation input is isolated separately."
  },
  "mathlib_searches": [
   {
@@ -312,17 +314,6 @@
   "module": "Sheaf.Paper.FiniteComparisonLocalizing",
   "declaration": "AlgebraicGeometry.ProEtale.finiteComparisonLocalizing",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteComparisonPresheaf",
-   "AlgebraicGeometry.ProEtale.finiteComparisonConstantRealization",
-   "AlgebraicGeometry.ProEtale.finiteComparisonRealization",
-   "AlgebraicGeometry.ProEtale.finiteComparisonRealization_exact",
-   "AlgebraicGeometry.ProEtale.finiteComparisonRealization_additive",
-   "AlgebraicGeometry.ProEtale.finiteComparisonRealization_limits",
-   "AlgebraicGeometry.ProEtale.finiteComparisonRealization_colimits",
-   "AlgebraicGeometry.ProEtale.finiteComparisonEtaleGenerators",
-   "AlgebraicGeometry.ProEtale.finiteComparisonProEtaleGenerators",
-   "AlgebraicGeometry.ProEtale.finiteComparisonEtaleClosure",
-   "AlgebraicGeometry.ProEtale.finiteComparisonProEtaleClosure",
    "AlgebraicGeometry.ProEtale.finiteComparisonOpenIso",
    "AlgebraicGeometry.ProEtale.finiteComparisonCompactSupportMap",
    "AlgebraicGeometry.ProEtale.finiteComparisonLocalizing"
@@ -332,7 +323,7 @@
   "by": "Q21",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Section 1(B) import-only repair of the existing owning module, not a second module: importing the recorded module together with the finite-coefficient projection interface fails because the old Derived.Comparison and FiniteCoefficient.Derived.Comparison both declare derivedComparisonAdjunctionPlus. Replace only the old Derived.LowerShriekComparison import by FiniteCoefficient.Derived.LowerShriekComparison. All existing declarations, definitions, theorem signatures and docstrings are retained; the item imports and reuses them from their original module. The duplicate FiniteComparisonLocalizingRepair module is removed.",
+  "note": "The coefficient constructions and their exactness theorem are moved verbatim to the publicly imported FiniteComparisonCoefficients module. Names, types, data, and all localizing theorem signatures remain unchanged.",
   "file": "lean/Sheaf/Paper/FiniteComparisonLocalizing.lean"
  },
  "reviewed_lean": {
@@ -346,11 +337,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C3",
+  "reviewer": "C-e8c8a",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261021T012352-L-2180691",
+  "landing": "20261021T024147-L-3039041",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: e8c8ab950083 Lean+node files byte-identical to PASSed e6b6ce7b2f; change record now lists both users FiniteDiscreteCtfOrigin and FiniteDiscreteCtfRealization; --all compile of 4 modules plus both importers against live, exit 0"
  }
 }
