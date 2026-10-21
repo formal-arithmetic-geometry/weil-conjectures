@@ -20,139 +20,56 @@
  ],
  "proof": [
   {
-   "text": "Assume first that $R$ is a discrete valuation ring. By the definition of finite presentation choose $R^a\\xrightarrow{u}R^n\\xrightarrow{v}P\\to0$ with $a,n$ finite. Put $L=\\ker v=\\operatorname{im}u$. The finitely many vectors $u(e_j)$ generate $L$. If $0\\ne t\\in R$ and $t x=0$ for $x\\in L\\subseteq R^n$, each coordinate of $x$ is zero because $R$ is a domain. Thus $L$ is finitely generated and torsion-free. Apply [lem-sc-dvr-fg-torsionfree-free] to obtain an isomorphism $R^m\\simeq L$, $m$ finite. Composing it with $L\\hookrightarrow R^n$ gives $0\\to R^m\\xrightarrow{A}R^n\\xrightarrow{v}P\\to0$.",
+   "text": "For $R$ a DVR, apply [lem-sfb-scalar-finite-free-resolutions] to a finite presentation of $P$. It gives finite $m,n$ and $0\\to R^m\\xrightarrow{A}R^n\\to P\\to0$.",
    "uses": [
-    "def-sc-finitely-presented-module",
-    "def-sc-discrete-valuation-ring",
-    "lem-sc-dvr-fg-torsionfree-free"
+    "lem-sfb-scalar-finite-free-resolutions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Local models"
+    "place": "Local models, scalar finite free resolution, exact scalar extension and tensor calculation"
    }
   },
   {
-   "text": "Form the constant presheaves of the scalar sequence. They are exact on every object, hence exact as presheaves by [lem-weil-pbc-site-r-module-presheaf-sheafification-exact](1). Apply its exact sheafification, clause (2), to get $0\\to(R_{\\mathcal C})^m\\xrightarrow{A_{\\mathcal C}}(R_{\\mathcal C})^n\\to P_{\\mathcal C}\\to0$. These are the constant module sheaves: by [def-weil-pbc-constant-sheaf] they are sheafifications of the constant presheaves. The identification of the two finite powers follows because sheafification preserves finite products, as asserted in clause (2) of the same exactness node.",
+   "text": "The given flatness of $B$ over $R_{\\mathcal C}$ permits [lem-sfb-constant-finite-free-presentation-extension] to turn this into $0\\to B^m\\xrightarrow{A_B}B^n\\to M\\to0$. Apply the exact-sequence augmentation clause of [lem-sfb-ringed-finite-free-resolution-tensor]. This very two-term complex represents $M$, is K-flat, and computes its derived tensor with each $N$ as $[N^m\\xrightarrow{A_N}N^n]$ in degrees $[-1,0]$.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EI, lemma-sheafification-exact; constant presheaf specialization"
-   }
-  },
-  {
-   "text": "By the assumed flatness of $B$, the functor $-\\otimes_{R_{\\mathcal C}}B$ is exact, precisely the definition [def-pc-flat-sheaf-modules]; applying it to the preceding sequence preserves all three exactness assertions. For each finite $s$, identify $B\\otimes_{R_{\\mathcal C}}(R_{\\mathcal C})^s$ with $B^s$ by $b\\otimes(x_i)\\mapsto(bx_i)_i$, with inverse $(b_i)\\mapsto\\sum_i b_i\\otimes e_i$. The identities are the balancing relations, checked before sheafification and then sheafified using [def-pur-sheaf-tensor-product]. They also hold for $s=0$. Commutativity identifies the order of the factors used in the flatness definition with the order in $M$. The sequence is therefore $0\\to B^m\\xrightarrow{A_B}B^n\\to M\\to0$, where $A_B$ has exactly the scalar entries of $A$ mapped into $B$.",
-   "uses": [
-    "def-pc-flat-sheaf-modules",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Local models"
-   }
-  },
-  {
-   "text": "Let $K^{-1}=B^m$, $K^0=B^n$, $d^{-1}=A_B$, and all other terms and differentials be zero. The epimorphism $B^n\\to M$ gives an augmentation $K\\to M[0]$. Injectivity of $A_B$ gives $H^{-1}(K)=0$, exactness in the middle and surjectivity give $H^0(K)=\\operatorname{coker}A_B\\simeq M$, and every other cohomology is zero. Thus this augmentation is a quasi-isomorphism by [def-weil-abstract-derived-category], so $K$ represents $M$ in the unbounded derived category.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Local models"
-   }
-  },
-  {
-   "text": "For any $B$-module sheaf $F$, the same coordinate maps give $F\\otimes_B B^s\\simeq F^s$. Finite powers preserve short exact sequences: kernels are computed in each coordinate, and a finite tuple of locally liftable sections has simultaneous lifts after successive common refinements of their finitely many covering families. Therefore tensoring with $B^s$ is exact, so $B^s$ is flat by [def-pc-flat-sheaf-modules], including $s=0$. In particular all terms of $K$ are flat. It is bounded above, with upper bound zero; [lem-pc-bounded-above-flat-kflat-site] now makes it K-flat. The augmentation of the preceding step is thus a K-flat resolution of $M[0]$.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat"
-   }
-  },
-  {
-   "text": "Choose a termwise-flat K-flat resolution $Q\\to N[0]$ by [lem-pc-kflat-resolution]. By [lem-weil-pbc-site-derived-tensor-descent], the total complex $\\operatorname{Tot}(Q\\otimes_B K)$ represents $N[0]\\otimes_B^{\\mathbf L}M[0]$. Apply [lem-pur-kflat-tensor-quasiiso-independent] to the quasi-isomorphism $Q\\to N[0]$ and the K-flat complex $K$: it gives a quasi-isomorphism $\\operatorname{Tot}(Q\\otimes_B K)\\to\\operatorname{Tot}(N[0]\\otimes_B K)$. This also computes the tensor with the factors in the stated order: on homogeneous factors of degrees $p,q$, the map $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$ interchanges the total tensor complexes. Substitution in the differential formula of [def-pc-tensor-complex-sheaves] verifies the chain-map equation, and applying the map twice is the identity. It descends through the two resolving complexes in the cited tensor-descent statement.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-kflat-tensor-quasiiso-independent",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 06YP and 06YU: K-flat resolutions, quasi-isomorphism invariance and derived tensor"
-   }
-  },
-  {
-   "text": "In $\\operatorname{Tot}(N[0]\\otimes_B K)$ the only terms are $N\\otimes_B B^m$ in degree $-1$ and $N\\otimes_B B^n$ in degree zero. Identify them with $N^m,N^n$ by $(z\\otimes(b_j))\\mapsto(b_jz)_j$, inverse $(z_j)\\mapsto\\sum_j z_j\\otimes e_j$. The differential sends $(z_j)_j$ to $(\\sum_j a_{ij}z_j)_i$, since $d_K(e_j)=\\sum_i a_{ij}e_i$. These maps thus identify the complex with $[N^m\\xrightarrow{A_N}N^n]$ in degrees $[-1,0]$, as asserted.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Local models"
-   }
-  },
-  {
-   "text": "Now suppose $R$ is a field. A finite presentation supplies a finite spanning list of $P$. Delete a vector whenever the list is dependent: a nontrivial linear relation has some nonzero coefficient, and division by that coefficient expresses the corresponding vector as a combination of the others, so deletion preserves the span. Induction on the list length terminates in an independent spanning list $(p_1,\\ldots,p_r)$. The map $R^r\\to P$, $(c_i)\\mapsto\\sum_i c_ip_i$, is surjective by spanning and injective by independence, hence an isomorphism. This includes the empty list when $P=0$. Constant sheafification preserves this isomorphism, and since sheafification preserves finite products by clause (2) of [lem-weil-pbc-site-r-module-presheaf-sheafification-exact], the constant sheaf of $R^r$ is $(R_{\\mathcal C})^r$. Tensoring it with $B$ and using the coordinate inverse of step 3 gives $M\\simeq B^r$. This uses no exactness or flatness assumption on $B$ over $R_{\\mathcal C}$.",
-   "uses": [
-    "def-sc-finitely-presented-module",
-    "def-weil-pbc-constant-sheaf",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+    "lem-sfb-constant-finite-free-presentation-extension",
+    "lem-sfb-ringed-finite-free-resolution-tensor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Local models"
+    "place": "Local models, scalar finite free resolution, exact scalar extension and tensor calculation"
    }
   },
   {
-   "text": "For the field case use $B^r[0]\\simeq M[0]$ as the resolution. The coordinate exactness argument of step 5 proves that $B^r$ is flat over $B$, and [lem-pc-bounded-above-flat-kflat-site] makes this single-term complex K-flat. Choose $Q\\to N[0]$ by [lem-pc-kflat-resolution]. Tensor descent identifies the derived tensor with $\\operatorname{Tot}(Q\\otimes_B B^r[0])$; [lem-pur-kflat-tensor-quasiiso-independent] identifies it in the derived category with $N[0]\\otimes_B B^r[0]$. The latter is $N^r[0]$ by the coordinate maps. The degree-sign interchange in step 6 gives the stated order $M\\otimes_B^{\\mathbf L}N$.",
+   "text": "For $R$ a field, [lem-sfb-scalar-finite-free-resolutions] supplies an isomorphism $R^r\\to P$ for finite $r$. The isomorphism clause of [lem-sfb-constant-finite-free-presentation-extension] gives $B^r\\cong M$; that clause imposes no flatness assumption on $B$.",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-kflat-tensor-quasiiso-independent",
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product"
+    "lem-sfb-scalar-finite-free-resolutions",
+    "lem-sfb-constant-finite-free-presentation-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YQ, 06YS, 06YP and 06YU, applied to a single finite free term"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Local models, scalar finite free resolution, exact scalar extension and tensor calculation"
+   }
+  },
+  {
+   "text": "Apply the degree-zero augmentation and tensor formula of [lem-sfb-ringed-finite-free-resolution-tensor] to $B^r[0]\\to M[0]$. This is a K-flat resolution and gives $M[0]\\otimes_B^{\\mathbf L}N[0]\\cong N^r[0]$ for every $N$.",
+   "uses": [
+    "lem-sfb-ringed-finite-free-resolution-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Local models, scalar finite free resolution, exact scalar extension and tensor calculation"
    }
   }
  ],
  "proof_deps": [
-  "def-sc-finitely-presented-module",
-  "def-sc-discrete-valuation-ring",
-  "lem-sc-dvr-fg-torsionfree-free",
-  "def-weil-pbc-constant-sheaf",
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "def-pc-flat-sheaf-modules",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-abstract-derived-category",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "def-pc-kflat-complex",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-kflat-tensor-quasiiso-independent",
-  "def-pc-tensor-complex-sheaves"
+  "lem-sfb-scalar-finite-free-resolutions",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-sfb-ringed-finite-free-resolution-tensor"
  ],
  "proof_origin": {
   "by": "agent",
@@ -261,30 +178,9 @@
   "date": "2026-10-21",
   "item": "lem-sfb-scalar-model-finite-flat-resolution",
   "worker": "stage1",
-  "summary": "Kept the statement. Constructed the scalar kernel from a finite presentation, reused DVR torsion-free freeness and exact constant sheafification, wrote the finite-power tensor maps, and computed both tensor cases using existing ringed-site K-flat tools. No new nodes.",
-  "blueprint": "Realizes the complete Local models paragraph of det-def-localizing-closure-ctf-equals-bc: scalar length-one/zero resolutions, exact extension, two-term model and tensor calculation. No unit or chapter route change.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-    "why": "Generic exact sheafification of constant scalar sequences; this unit does not supply sheafification infrastructure."
-   },
-   {
-    "node": "lem-pc-bounded-above-flat-kflat-site",
-    "why": "Generic K-flatness of bounded-above flat complexes on a ringed site, needed for the local model; no such infrastructure is proved in this unit."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic ringed-site resolving complex for N, needed to apply the two-variable derived tensor model."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Generic construction of the unbounded two-variable derived tensor from the resolving class, not a replacement of the local scalar route."
-   },
-   {
-    "node": "lem-pur-kflat-tensor-quasiiso-independent",
-    "why": "Generic preservation of quasi-isomorphisms by tensor with a K-flat complex, applied to Q to N; no Koszul/tower specialization is used."
-   }
-  ]
+  "summary": "Q41 human-requested re-split: statement and maintainer fields unchanged. Three independent statement-only nodes carry all old arguments: scalar DVR/field algebra, exact constant-module scalar extension with matrix identifications, and finite-free K-flat resolution/tensor coordinates including augmentation cohomology. The parent now only assembles their statements.",
+  "blueprint": "All of the same Local models paragraph: scalar length-one/zero resolution by lem-sfb-scalar-finite-free-resolutions; exact sheaf extension with the same matrix by lem-sfb-constant-finite-free-presentation-extension; augmented finite-free complex and tensor computation by lem-sfb-ringed-finite-free-resolution-tensor. All new nodes are independently unsplit, without edges between them; no unit/chapter route change.",
+  "tool_uses": []
  },
  "tool_uses": [
   "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
@@ -296,10 +192,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q23-3312bde2d",
-  "group": "Q23",
+  "reviewer": "NT-cc-Q41-401ed3006",
+  "group": "Q41",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-3312bde2d (reviewer sub-agent of L); spot-checked: FIX: I read the item and all 9 steps in full; the delivery adds no new nodes and leaves the statement byte-identical to base. The item is not on the 2026-10-19 drop list and has no re-split note. Source: main-20261015 ctf-equals-bc 'Local models' (lines 8-16), checked against Stacks 0AUW(3) (more-algebra l.4954) and sites-cohomology 06YQ (l.3120), 06YP, 06YS and 06YU. Step checks: step 1 kernel = im u, finitely generated and torsion-free in R^n, then free by lem-sc-dvr-fg-torsionfree-free. Steps 2-3 use exact sheafification clauses (1)/(2) and def-pc-flat-sheaf-modules with F=B over R_C. Step 4: H^-1=0, H^0=M. Step 5: B^s is flat, so the bounded-above flat complex is K-flat (06YQ). Step 6: Q and K are both in the descent class P_R; quasiiso-independent is applied as f⊗id_K, its own form; I checked the (-1)^{pq} swap against the Tot differential. Step 7: differential (z_j) maps to (Σ_j a_ij z_j). Small cases R/t, non-flat B=R_C/t, P=0 and B=0 all behave as stated. One fault (C1/C3), repaired in fixes/: step 8 identifies (R^r)_C with (R_C)^r, which needs sheafification to preserve finite products (lem-weil-pbc-site-r-module-presheaf-sheafification-exact clause 2), but the step did not cite that node. I added the citation and set elementary=false. I also added def-pc-tensor-complex-sheaves and def-pur-sheaf-tensor-product to step 9's uses; proof_deps is unchanged and still equals the union of uses. The 5 declared tool_uses are generic ringed-site infrastructure and are accepted. Maintainer notes: lem-pc-bounded-above-flat-kflat-site gives source 06YS, but its statement is 06YQ. lem-sfb-finite-constant-model-two-term-free-resolution (Q26) is the special O_E/E pro-étale case of this item's resolution clause; it is not a duplicate that this item could cite.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-401ed3006 (reviewer sub-agent of L); spot-checked: I read the whole re-split delivery: the item, the 3 new nodes, the cited statements, the main-20261015 ctf-equals-bc 'Local models' source (lines 8-16) and Stacks 0AUW(3) (more-algebra l.4954), 03EI (sites-modules l.874) and 06YQ (sites-cohomology l.3120). The 2026-10-21 human re-split note asks for at least 2 new statement-only nodes and an assembly of at most 3000 characters. The base is the live 9-step proof from Q23 (6008 characters). The report quotes all 9 old steps verbatim, and I mapped each one to a carrier. Old steps 1 and 8a go to scalar-finite-free-resolutions. Old steps 2, 3 and 8b go to constant-finite-free-presentation-extension: exact constant functor, β_s coordinates, the matrix A_B, the flat sequence clause and an isomorphism clause that needs no flatness. Old steps 4-7 and 9 go to ringed-finite-free-resolution-tensor: flat terms, K-flat by 06YQ, M⊗^L N ≅ Q(T_N(K)) with the transported differential, the signed interchange, the augmentation clauses and the degree-zero case. The parent is now a 4-step assembly of 1055 characters. The item statement, lean record and stmt_deps are byte-identical to live. Live does not supersede the delivery, and the item is not on the dropped list. All 4 steps meet C3/C4: the flatness hypothesis is used only in step 2, the field case needs none, and the M⊗N order matches. I tested the new statements on small cases: P=R/t, the non-flat B=R_C/t (injectivity is lost, so the flatness hypothesis is needed), and P=0, B=0, rank 0. All three statements are true, and none restates the parent. FIX (B8/C5): the recorded searches for lem-sfb-scalar-finite-free-resolutions missed Mathlib. Submodule.basisOfPid (FreeModule/PID.lean:300, any submodule of a free module of finite rank over a PID, with IsDiscreteValuationRing extending IsPrincipalIdealRing) gives ker v ≅ R^m. Module.finBasis (Dimension/Free.lean:334, with the FinitePresentation→Finite instance and Module.Free.of_divisionRing) gives the field basis. fixes/ therefore makes the node a mathlib leaf with a per-clause how and adds my grep record. 2 worker nodes of comparable size remain, which meets the note. Advisory: the extension node's exactness clause overlaps lem-weil-pbc-finite-type-constant-exact, which its proof should cite. lem-sf-ringed-derived-native-tensor may help the tensor node. The item's maintainer-owned tool_uses still lists 5 nodes that the item no longer cites.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.ScalarModelFiniteFlatResolution",
