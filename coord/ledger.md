@@ -23463,3 +23463,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:23 L: merged deliver/Q15/lem-trf-point-transport-strict-quotient (stage 2; reviewer PASS; parallel immutable checks)
 - 19:23 L: merged deliver/NZ/lem-sfb-profinite-algcl-derived-invariants-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 19:23 L: merged deliver/NR/lem-sfb-profinite-action-finite-quotients (stage 2; reviewer PASS; parallel immutable checks)
+- 19:23 L: returned deliver/Q25/lem-pur-dualizing-unit-composite (reviewer RETURN: L: independent stage-2 immutable head 6b1f7aecc278: S2 re-delivery after Q27's S2 landing (ledger 23406, 02:57; this run)
