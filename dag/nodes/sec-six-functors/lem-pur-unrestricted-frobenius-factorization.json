@@ -1,0 +1,91 @@
+{
+ "id": "lem-pur-unrestricted-frobenius-factorization",
+ "kind": "statement",
+ "title": "Projection identities and Frobenius factorization for arbitrary finite-field models",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ of [def-weil-finite-field-fiber], so $q=p^a$, $a\\geq1$, $k_0=\\mathbf F_q$, and $k$ is its fixed algebraic closure. Let $T_0$ be any $k_0$-scheme [def-weil-scheme-over-base], with no finite-type or separatedness hypothesis. Put $T=T_0\\times_{k_0}k$ [def-pc-base-change], with projections $\\pi:T\\to T_0$ and $\\rho:T\\to\\operatorname{Spec}k$ [def-pc-fibre-product]. Let $F_0=F_{T_0}^{(q)}$ and $F=F_T^{(q)}$ be the absolute $q$-power Frobenii [def-weil-absolute-frobenius-scheme]. The morphism $F_0$ is over $k_0$; hence its base change $\\Phi=F_0\\times\\operatorname{id}_k$ is defined. Put $\\sigma(z)=z^q$, $\\gamma=\\sigma^{-1}$ as in [def-weil-frobenius-detailed], and $g_\\epsilon=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\epsilon)$ for $\\epsilon=\\sigma,\\gamma$, using the spectrum functor [def-weil-affine-spectrum]. Then\n$$\n \\pi F=F_0\\pi,\\quad \\rho F=\\operatorname{Spec}(\\sigma)\\rho,\\quad\n \\pi\\Phi=F_0\\pi,\\quad \\rho\\Phi=\\rho,\\quad\n \\pi g_\\sigma=\\pi,\\quad \\rho g_\\sigma=\\operatorname{Spec}(\\sigma)\\rho,\n$$\nand the following equalities hold as scheme morphisms:\n$$\n F=g_\\sigma\\Phi=\\Phi g_\\sigma,\\qquad\n \\Phi=g_\\gamma F=Fg_\\gamma,\\qquad\n g_\\sigma g_\\gamma=g_\\gamma g_\\sigma=\\operatorname{id}_T.\n$$\nHere composition is written right to left. For any morphism $f_0:X_0\\to Y_0$ of arbitrary $k_0$-schemes and its base change $f:X\\to Y$, the corresponding endomorphisms satisfy $f\\Phi_X=\\Phi_Yf$ and $fF_X^{(q)}=F_Y^{(q)}f$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
+  "place": "absolute-Frobenius factorization paragraph; unrestricted-model projection proof extracted from the existing split, step 2",
+  "external": [
+   {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 03SM (definition-absolute-frobenius) and 0CC7 (lemma-frobenius-endomorphism-identity); combined with the fibre-product projection identities"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-over-base",
+  "def-pc-base-change",
+  "def-pc-fibre-product",
+  "def-weil-absolute-frobenius-scheme",
+  "def-weil-frobenius-detailed",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "frobenius|geometricFrobenius|iterateFrobenius",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The absolute Frobenius on a scalar extension of an arbitrary scheme over a finite field factors as model Frobenius times arithmetic Galois Frobenius",
+   "results": "LinearMap.frobenius, FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.Extension.frob_apply, AlgHom.IsArithFrobAt.localize, AlgHom.IsArithFrobAt, FiniteField.frobeniusAlgHom",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"comp\"",
+   "results": "coe_frobeniusEquiv_symm_comp_coe_frobenius, coe_frobenius_comp_coe_frobeniusEquiv_symm, frobeniusEquiv_symm_comp_frobenius, frobenius_comp_frobeniusEquiv_symm, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, Coalgebra.IsFrobenius.nondegenerate_compr₂_mul_counit, Coalgebra.IsFrobenius.left_eq_comul_comp_mul'",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any scheme T0 over a finite field, without finite type assumptions, absolute Frobenius on T0 base changed to an algebraic closure equals the commuting composite of model Frobenius and arithmetic coefficient Frobenius",
+   "results": "FiniteField.coe_frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.frobeniusAlgEquiv_apply, FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply, FiniteField.frobeniusAlgEquiv, WittVector.StandardOneDimIsocrystal.frobenius_apply, FiniteField.frobeniusAlgEquiv_symm_apply",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arithmetic and model Frobenius commute on a geometric fiber of a scheme over a finite field; prove their factorization by the universal property of a pullback",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, WittVector.StandardOneDimIsocrystal.frobenius_apply, AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, WittVector.IsocrystalHom.frob_equivariant, RingHom.map_frobeniusEquiv_symm",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobeniusAlgEquivOfAlgebraic|frobeniusAlgHom",
+   "results": "Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Trace.lean; directory Mathlib/FieldTheory/Finite",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "def-pur-scheme-geometric-frobenius",
+  "date": "2026-10-21",
+  "group": "Q93"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "blueprint": {
+  "from": {
+   "node": "def-pur-scheme-geometric-frobenius",
+   "place": "Absolute-Frobenius factorization paragraph; old split step 2, both projection equations, both arithmetic factorizations, and geometric cancellation",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
