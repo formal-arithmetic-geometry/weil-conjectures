@@ -185,45 +185,35 @@ set_option synthInstance.maxSize 2048 in
 set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 private theorem tensor_right_quasiIso
-    {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
-    {J : GrothendieckTopology C}
-    {R : Sheaf J CommRingCat.{r}}
-    {E E' K : CochainComplex (SheafOfModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ} (α : E ⟶ E')
-    (hα : QuasiIso α) (hK : K.IsKFlatIndependentCoefficients) :
-    let := monoidalCategory R
+    {A : Type*} [Category* A] [Abelian A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [Limits.HasColimitsOfSize.{0, 0} A]
+    {E E' K : CochainComplex A ℤ} (α : E ⟶ E') (hα : QuasiIso α)
+    (hK : ∀ F : CochainComplex A ℤ, F.Acyclic →
+      (CochainComplex.mapBifunctor F K (MonoidalCategory.curriedTensor A)).Acyclic) :
     QuasiIso (HomologicalComplex.mapBifunctorMap α (𝟙 K)
-      (MonoidalCategory.curriedTensor _) (.up ℤ)) := by
-  let := monoidalCategory R
-  let := tensorPreadditive R
+      (MonoidalCategory.curriedTensor A) (.up ℤ)) := by
   have hc := (CochainComplex.mappingCone.quasiIso_iff_acyclic α).1 hα
   have ht := hK (CochainComplex.mappingCone α) hc
   apply (CochainComplex.mappingCone.quasiIso_iff_acyclic _).2
   intro i
   exact (ht i).of_iso
-    (CochainComplex.mapBifunctorMappingCone₁Iso α K (MonoidalCategory.curriedTensor _))
+    (CochainComplex.mapBifunctorMappingCone₁Iso α K (MonoidalCategory.curriedTensor A))
 
 -- The module braiding and signed total-complex flip give the other tensor order.
 set_option synthInstance.maxSize 2048 in
 set_option maxRecDepth 2048 in
 set_option backward.isDefEq.respectTransparency false in
 private theorem tensor_left_quasiIso
-    {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
-    {J : GrothendieckTopology C}
-    {R : Sheaf J CommRingCat.{r}}
-    {K E E' : CochainComplex (SheafOfModules.{r}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ} (α : E ⟶ E')
-    (hα : QuasiIso α) (hK : K.IsKFlatIndependentCoefficients) :
-    let := monoidalCategory R
+    {A : Type*} [Category* A] [Abelian A] [MonoidalCategory A] [SymmetricCategory A]
+    [MonoidalPreadditive A] [Limits.HasColimitsOfSize.{0, 0} A]
+    {K E E' : CochainComplex A ℤ} (α : E ⟶ E') (hα : QuasiIso α)
+    (hK : ∀ F : CochainComplex A ℤ, F.Acyclic →
+      (CochainComplex.mapBifunctor F K (MonoidalCategory.curriedTensor A)).Acyclic) :
     QuasiIso (HomologicalComplex.mapBifunctorMap (𝟙 K) α
-      (MonoidalCategory.curriedTensor _) (.up ℤ)) := by
-  let := monoidalCategory R
-  let := symmetricCategory R
-  let := tensorPreadditive R
+      (MonoidalCategory.curriedTensor A) (.up ℤ)) := by
   have hc := (CochainComplex.mappingCone.quasiIso_iff_acyclic α).1 hα
   have ht := hK (CochainComplex.mappingCone α) hc
-  let F := MonoidalCategory.curriedTensor (SheafOfModules.{r}
-    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
+  let F := MonoidalCategory.curriedTensor A
   let e : (((F.mapBifunctorHomologicalComplex (.up ℤ) (.up ℤ)).obj
       (CochainComplex.mappingCone α)).obj K) ≅
       (((F.flip.mapBifunctorHomologicalComplex (.up ℤ) (.up ℤ)).obj
@@ -245,6 +235,82 @@ private theorem tensor_left_quasiIso
   apply (CochainComplex.mappingCone.quasiIso_iff_acyclic _).2
   intro i
   exact (ht' i).of_iso (CochainComplex.mapBifunctorMappingCone₂Iso K α F)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tensor_homotopy_map
+    {A : Type*} [Category* A] [Preadditive A] [MonoidalCategory A]
+    [MonoidalPreadditive A] [Limits.HasColimitsOfSize.{0, 0} A]
+    {P P' Q Q' : CochainComplex A ℤ} (f : P ⟶ P') (g : Q ⟶ Q') :
+    let H := HomotopyCategory.quotient A (.up ℤ)
+    let B := Functor.uncurry.obj
+      ((MonoidalCategory.curriedTensor A).bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ))
+    B.map (X := (H.obj P, H.obj Q)) (Y := (H.obj P', H.obj Q'))
+        (H.map f, H.map g) =
+      H.map (HomologicalComplex.mapBifunctorMap f (𝟙 Q)
+        (MonoidalCategory.curriedTensor A) (.up ℤ)) ≫
+        H.map (HomologicalComplex.mapBifunctorMap (𝟙 P') g
+          (MonoidalCategory.curriedTensor A) (.up ℤ)) := by
+  rfl
+
+section TensorDescentPredicates
+
+variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
+  (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
+  [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
+  [HasDerivedCategory.{w} (SheafOfModules.{r}
+    ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))]
+
+set_option hygiene false in
+local notation "𝓜" => SheafOfModules.{r}
+  ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
+
+/-- The derived-comparison predicate used in the recorded descent witness.
+Source: Stacks, Tag 06YU (blueprint: lem-weil-pbc-site-derived-tensor-descent). -/
+noncomputable def SiteDerivedTensorDescentDerivedSpec
+    (P : ObjectProperty (HomotopyCategory 𝓜 (.up ℤ)))
+    (B : HomotopyCategory 𝓜 (.up ℤ) × HomotopyCategory 𝓜 (.up ℤ) ⥤
+      HomotopyCategory 𝓜 (.up ℤ))
+    (T : DerivedCategory 𝓜 × DerivedCategory 𝓜 ⥤ DerivedCategory 𝓜) : Prop :=
+  Nonempty ((P.ι.prod P.ι) ⋙ B ⋙ DerivedCategory.Qh ≅
+    ((P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)) ⋙ T)
+
+/-- The homotopy-comparison predicate, with its derived witness named separately.
+Source: Stacks, Tag 06YU (blueprint: lem-weil-pbc-site-derived-tensor-descent). -/
+noncomputable def SiteDerivedTensorDescentHomotopySpec
+    (P : ObjectProperty (HomotopyCategory 𝓜 (.up ℤ)))
+    (B : HomotopyCategory 𝓜 (.up ℤ) × HomotopyCategory 𝓜 (.up ℤ) ⥤
+      HomotopyCategory 𝓜 (.up ℤ)) : Prop :=
+  letI := monoidalCategory R
+  Nonempty (((HomotopyCategory.quotient 𝓜 (.up ℤ)).prod
+    (HomotopyCategory.quotient 𝓜 (.up ℤ))) ⋙ B ≅
+    Functor.uncurry.obj ((MonoidalCategory.curriedTensor 𝓜).map₂HomologicalComplex
+      (.up ℤ) (.up ℤ) (.up ℤ)) ⋙ HomotopyCategory.quotient 𝓜 (.up ℤ)) ∧
+  ∃ T : DerivedCategory 𝓜 × DerivedCategory 𝓜 ⥤ DerivedCategory 𝓜,
+    SiteDerivedTensorDescentDerivedSpec J R P B T
+
+/-- The full descent predicate, transparently identical to the expanded statement.
+Naming its nested predicates keeps selected witnesses small during kernel checking.
+Source: Stacks, Tags 06YS, 06YU, 04VK
+(blueprint: lem-weil-pbc-site-derived-tensor-descent). -/
+noncomputable def SiteDerivedTensorDescentSpec
+    (P : ObjectProperty (HomotopyCategory 𝓜 (.up ℤ))) : Prop :=
+  (∀ X, P X ↔ CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) X.as ∧
+    ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (X.as.X n)) ∧
+  (∃ F : ((HomotopyCategory.quasiIso 𝓜 (.up ℤ)).inverseImage P.ι).Localization ⥤
+      DerivedCategory 𝓜,
+    F.IsEquivalence ∧ Nonempty (((HomotopyCategory.quasiIso 𝓜 (.up ℤ)).inverseImage P.ι).Q ⋙
+      F ≅ P.ι ⋙ DerivedCategory.Qh)) ∧
+  (∃ B : HomotopyCategory 𝓜 (.up ℤ) × HomotopyCategory 𝓜 (.up ℤ) ⥤
+      HomotopyCategory 𝓜 (.up ℤ), SiteDerivedTensorDescentHomotopySpec J R P B) ∧
+  (∀ (E : Type e) (_ : Category.{z} E)
+    (U V : DerivedCategory 𝓜 × DerivedCategory 𝓜 ⥤ E),
+    Function.Bijective (fun τ : U ⟶ V ↦
+      Functor.whiskerLeft ((P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)) τ))
+
+end TensorDescentPredicates
+
 
 set_option synthInstance.maxSize 4096
 set_option maxRecDepth 2048 in
@@ -292,58 +358,8 @@ theorem site_derived_tensor_descent_independentCoefficients
     [HasDerivedCategory.{w} (SheafOfModules.{r}
         ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] :
     ∃ P : ObjectProperty (HomotopyCategory (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
-          (ComplexShape.up ℤ)),
-      (∀ X, P X ↔ CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) X.as ∧
-        ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (X.as.X n)) ∧
-      (∃ F : ((HomotopyCategory.quasiIso (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up
-          ℤ)).inverseImage P.ι).Localization ⥤ (DerivedCategory (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))),
-        F.IsEquivalence ∧ Nonempty (((HomotopyCategory.quasiIso (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up
-          ℤ)).inverseImage P.ι).Q ⋙ F ≅ (P.ι ⋙ DerivedCategory.Qh))) ∧
-      (∃ B : (HomotopyCategory (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
-          (ComplexShape.up ℤ)) ×
-          (HomotopyCategory (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
-          (ComplexShape.up ℤ)) ⥤
-          (HomotopyCategory (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
-          (ComplexShape.up ℤ)),
-        Nonempty (((HomotopyCategory.quotient (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
-          (ComplexShape.up ℤ)).prod
-          (HomotopyCategory.quotient (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
-          (ComplexShape.up ℤ))) ⋙ B ≅
-          Functor.uncurry.obj
-            ((@CategoryTheory.MonoidalCategory.curriedTensor (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) _
-          (SheafOfModules.monoidalCategory.{v, u, r} R)).map₂HomologicalComplex
-              (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙
-                (HomotopyCategory.quotient (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
-          (ComplexShape.up ℤ))) ∧
-        ∃ T : (DerivedCategory (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ×
-          (DerivedCategory
-          (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ⥤
-          (DerivedCategory
-          (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))),
-          Nonempty ((P.ι.prod P.ι) ⋙ B ⋙ DerivedCategory.Qh ≅
-            ((P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)) ⋙ T)) ∧
-      (∀ (E : Type e) (_ : Category.{z} E)
-        (U V : (DerivedCategory (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ×
-          (DerivedCategory
-          (SheafOfModules.{r}
-        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ⥤ E),
-        Function.Bijective (fun τ : U ⟶ V ↦
-          Functor.whiskerLeft ((P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)) τ)) := by
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (.up ℤ)),
+      SiteDerivedTensorDescentSpec.{u, v, r, w, e, z} J R P := by
   let A := SheafOfModules.{r}
     ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
   let P : ObjectProperty (HomotopyCategory A (.up ℤ)) := fun X ↦
@@ -366,10 +382,13 @@ theorem site_derived_tensor_descent_independentCoefficients
   refine ⟨P, (fun _ ↦ Iff.rfl), ⟨F, inferInstance,
     ⟨Localization.qCompEquivalenceFromModelFunctorIso L V⟩⟩, ?_, ?_⟩
   · let := monoidalCategory R
+    let := symmetricCategory R
     let := tensorPreadditive R
     let B := Functor.uncurry.obj
       ((MonoidalCategory.curriedTensor A).bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ))
-    refine ⟨B, ⟨Iso.refl _⟩, ?_⟩
+    refine ⟨B, ⟨Functor.uncurry.mapIso
+      ((MonoidalCategory.curriedTensor A).whiskeringLeft₂BifunctorMapHomotopyCategoryIso
+        (.up ℤ) (.up ℤ) (.up ℤ))⟩, ?_⟩
     let H := (P.ι.prod P.ι) ⋙ B ⋙ DerivedCategory.Qh
     have hH : (V.prod V).IsInvertedBy H := by
       intro X Y f hf
@@ -385,11 +404,7 @@ theorem site_derived_tensor_descent_independentCoefficients
       change IsIso (DerivedCategory.Qh.map
         (B.map (X := (X.1.obj, X.2.obj)) (Y := (Y.1.obj, Y.2.obj)) (f.1.hom, f.2.hom)))
       apply Localization.inverts DerivedCategory.Qh W _
-      rw [← hf₁, ← hf₂]
-      change W (Q.map (HomologicalComplex.mapBifunctorMap f₁ (𝟙 _)
-        (MonoidalCategory.curriedTensor A) (.up ℤ)) ≫
-        Q.map (HomologicalComplex.mapBifunctorMap (𝟙 _) f₂
-          (MonoidalCategory.curriedTensor A) (.up ℤ)))
+      rw [← hf₁, ← hf₂, tensor_homotopy_map]
       rw [← Q.map_comp]
       apply (HomotopyCategory.quotient_map_mem_quasiIso_iff _).2
       change QuasiIso _
@@ -398,6 +413,44 @@ theorem site_derived_tensor_descent_independentCoefficients
     exact ⟨(Localization.fac H hH (L.prod L)).symm⟩
   · intro E hE U V'
     exact (Localization.fullyFaithfulWhiskeringLeft (L.prod L) (V.prod V) E).map_bijective U V'
+
+/-- The original homotopy-tensor existence proof, with its predicate kept named.
+The quotient comparison determines this bifunctor up to compatible natural isomorphism.
+Source: Stacks, Tag 06YU (blueprint: lem-weil-pbc-site-derived-tensor-descent). -/
+theorem siteHomotopyTensorExistsIndependentCoefficients
+    {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
+    [HasDerivedCategory.{w} (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] :
+    ∃ B : HomotopyCategory (SheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (.up ℤ) ×
+        HomotopyCategory (SheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (.up ℤ) ⥤
+        HomotopyCategory (SheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (.up ℤ),
+      SiteDerivedTensorDescentHomotopySpec J R
+        (site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0} J R).choose B :=
+  (site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0}
+    J R).choose_spec.2.2.1
+
+/-- The original derived-tensor existence proof, with its predicate kept named.
+This separates the proof from the selected data and retains the original witnesses.
+Source: Stacks, Tag 06YU (blueprint: lem-weil-pbc-site-derived-tensor-descent). -/
+theorem siteDerivedTensorExistsIndependentCoefficients
+    {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
+    (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
+    [HasDerivedCategory.{w} (SheafOfModules.{r}
+      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] :
+    ∃ T : DerivedCategory (SheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ×
+        DerivedCategory (SheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ⥤
+        DerivedCategory (SheafOfModules.{r}
+        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)),
+      SiteDerivedTensorDescentDerivedSpec J R
+        (site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0} J R).choose
+        (siteHomotopyTensorExistsIndependentCoefficients.{u, v, r, w} J R).choose T :=
+  (siteHomotopyTensorExistsIndependentCoefficients.{u, v, r, w} J R).choose_spec.2
 
 /-- The derived tensor supplied by the resolving-class localization, in independent universes.
 The natural representative comparison and unique-extension property of
@@ -416,7 +469,6 @@ noncomputable def siteDerivedTensorIndependentCoefficients
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ⥤
     DerivedCategory (SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :=
-  (site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0}
-    J R).choose_spec.2.2.1.choose_spec.2.choose
+  (siteDerivedTensorExistsIndependentCoefficients.{u, v, r, w} J R).choose
 
 end SheafOfModules

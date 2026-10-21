@@ -20,10 +20,10 @@
  ],
  "proof": [
   {
-   "text": "Restriction of scalars is exact and commutes with small direct sums. Indeed, by [def-pc-sheaf-restrict-scalars] it changes only the scalar action, and by [lem-weil-pbc-module-sheaves-colimits-forgetful] kernels and cokernels have the same underlying abelian sheaves before and after restriction; the same holds for direct sums. The forgetful functor is faithful, so an underlying zero cohomology sheaf is zero as a module sheaf. Thus termwise restriction preserves quasi-isomorphisms and induces $\\operatorname{Res}_\\varphi:D(\\mathcal S)\\to D(\\mathcal R)$ by [def-weil-abstract-derived-category].",
+   "text": "Restriction preserves the underlying abelian sheaf. The toSheaf colimit comparison and reflection of colimits imply that it preserves the countable sums used by totalization. Its exact derived factorization is Mathlib mapDerivedCategoryFactors; exactness is already an explicit hypothesis of this interface.",
    "uses": [
     "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-presheaf-modules-sheafification",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
@@ -33,10 +33,33 @@
    }
   },
   {
-   "text": "Choose a K-flat flat-term resolution $P\\to C$ of a complex representing $H$ by [lem-pc-kflat-resolution]. By [lem-pur-kflat-change-of-rings], $P_S=P\\otimes_R S$ is K-flat with flat $S$-terms, without flatness of $S/R$. By [lem-pur-derived-change-of-rings], $Q_SP_S$ canonically represents $H\\otimes_R^{\\mathbf L}S$, compatibly with maps of resolutions.",
+   "text": "Use the constructed natural tensor cancellation isomorphism of lem-pur-change-of-rings-tensor-cancellation-independent, now with its proved local generator computation. Transport extension through hobj and hmap. Conjugate cancellation by the two natural tensor switches, constructed through the monoidal sheafification presentation. Its inverse sends extension(x,s) tensor n to x tensor s*n. The forward formula at s=1 follows from the inverse identity.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-change-of-rings",
+    "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property; Tag 03CY (lemma-sheafification-presheaf-modules)"
+   }
+  },
+  {
+   "text": "Apply the ordinary comparison to every bidegree of two complexes. Naturality with the two differentials gives an isomorphism of bicomplexes. Totalize and compose with restriction's mapTotalIso. The total inclusion equations prove the inverse formula on all bidegrees; functoriality of totalization proves simultaneous naturality. Specialize the second complex to single N.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), total tensor construction; balanced formula from step 2"
+   }
+  },
+  {
+   "text": "Apply changeOfRings_isKFlat_of_flat_terms_independentCoefficients, transporting flatness between siteSheafTensorRight and monoidal tensorRight through their proved natural isomorphism. On the full subcategory of flat K-flat complexes, the given counit epsilon is componentwise an isomorphism by h-epsilon. Its naturality, mapHomotopyCategoryFactors and quotientCompQhIso assemble exactly the specified siteExtensionComparison.",
+   "uses": [
+    "lem-pur-kflat-change-of-rings-independent",
     "lem-pur-derived-change-of-rings"
    ],
    "elementary": false,
@@ -46,10 +69,23 @@
    }
   },
   {
-   "text": "Apply [lem-trf-site-balanced-tensor-chain] to $P,N$. Its sheaf chain isomorphism $a_{P,N}$ has exactly the two generator formulas required here and is natural in both variables, including homotopies in $P$. By [lem-trf-site-one-sided-tensor-normalization], applied over $R$ to $(P,UN[0])$ and over $S$ to $(P_S,N[0])$, these two total complexes compute the two desired derived tensors with their specified canonical comparisons. Apply the exact restriction from step 1 to the second comparison. Conjugating $Q_R(a_{P,N})$ by these comparisons and the scalar-extension comparison of step 2 gives the required isomorphism on K-flat flat-term representatives.",
+   "text": "If f is a quasi-isomorphism, its cone is acyclic. K-flatness makes the tensor of its cone acyclic. The degreewise braiding and signed total flip switch tensor order; the tensor/mapping-cone isomorphism then proves that tensoring in the unresolved factor preserves quasi-isomorphisms.",
    "uses": [
-    "lem-trf-site-balanced-tensor-chain",
-    "lem-trf-site-one-sided-tensor-normalization"
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism), its cone proof"
+   }
+  },
+  {
+   "text": "Work first on the product of the resolving homotopy subcategory and the whole homotopy category. The preceding inversion result makes the ordinary homotopy tensor invert quasi-isomorphisms in the second factor. Lift it along the product localization. Full faithfulness of precomposition along the two resolving localizations extends the recorded two-sided descent comparison uniquely. Transport this comparison to complexes with quotientCompQhIso. Naturality in both complex variables is inherited from that natural isomorphism, and its restriction to two resolving complexes is exactly tensorDescentPair.symm.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
@@ -58,7 +94,7 @@
    }
   },
   {
-   "text": "Let $\\mathcal P_R$ be the homotopy subcategory of K-flat flat-term complexes. By [lem-weil-pbc-site-derived-tensor-descent], $Q_R|_{\\mathcal P_R}$ is a localization at its quasi-isomorphisms. The isomorphisms in step 3 and their inverses are natural transformations with values in $\\operatorname{Fun}(\\operatorname{Mod}(S),D(R))$: naturality in $P$ uses the two new lemmas and the scalar-extension comparison, and naturality in $N$ uses their other variables. Clause (2) of [lem-weil-pbc-localization-universal-property] extends both transformations uniquely along this localization. Their composites extend the identities, so they remain inverse, simultaneously natural in $H,N$. For any specified resolution $p:P\\to C$, naturality along $Q_Rp$ identifies the component with $a_{P,N}$ under the comparisons in steps 2-3. Uniqueness gives the same component for every other resolution, without requiring a chain map between the resolutions. All complexes and coefficient maps were arbitrary; no boundedness, Tor-amplitude, or coefficient-flatness hypothesis entered.",
+   "text": "Compose six natural isomorphisms on flat K-flat complexes times S-module sheaves: restriction factorization in the second input, cR, localized balanced chain comparison, inverse restriction factorization, inverse cS, and inverse counit comparison in the first input. Precomposition from the resolving homotopy category is fully faithful by localization. Precomposition from flat complexes to that homotopy subcategory is explicitly fully faithful on functor categories: recover components at each complex representative and lift every homotopy morphism with out. Transport by quotientCompQhIso and compose these fully faithful structures. The preimage of the six-term natural isomorphism is the required e. Its naturality proves ProjectionFormulaFamily, and map_preimage gives the required representative equation with the same cR, cS and b. Present the counit isomorphism by NatIso.ofComponents with the specified siteExtensionComparison components; transfer naturality from the assembled counit. Consequently the representative normalization is definitional (rfl) after map_preimage.",
    "uses": [
     "lem-weil-pbc-site-derived-tensor-descent",
     "lem-weil-pbc-localization-universal-property"
@@ -72,13 +108,16 @@
  ],
  "proof_deps": [
   "def-pc-sheaf-restrict-scalars",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-presheaf-modules-sheafification",
   "def-weil-abstract-derived-category",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-change-of-rings",
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-kflat-change-of-rings-independent",
   "lem-pur-derived-change-of-rings",
-  "lem-trf-site-balanced-tensor-chain",
-  "lem-trf-site-one-sided-tensor-normalization",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-kflat-complex",
+  "lem-pc-tensor-mapping-cone-iso",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-localization-universal-property"
  ],
@@ -86,7 +125,7 @@
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 06YS, 06YP, 06YU and 0G7E, combined with sites-modules.tex Tags 03CY and 03EK",
-  "note": "Explicit balanced generator construction and localization of its naturality; the blueprint records the coefficient-reduction identity but does not supply this site-general unbounded argument."
+  "note": "Lean proof by D3: normalized ordinary cancellation, totalization, mixed resolving localization, and fully faithful descent of the six specified comparisons; no new sorry."
  },
  "mathlib_searches": [
   {
@@ -227,15 +266,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-sites-module-sheafification-bilinear-extension",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-change-of-rings",
   "lem-pur-derived-change-of-rings",
   "lem-pur-quasi-iso-cone-acyclic",
   "lem-pc-tensor-mapping-cone-iso",
-  "lem-pc-sheaf-modules-tensor-closed",
   "lem-weil-pbc-localization-universal-property",
   "lem-weil-pbc-site-derived-tensor-descent"
  ],
@@ -284,5 +317,15 @@
   "result": "pass",
   "note": "Read node, 9 stmt deps and their exact recorded decls (derivedChangeOfRingsIndependentCoefficients, site_derived_tensor_descent_independentCoefficients and siteDerivedTensorIndependentCoefficients with the same .{u,v,r,w,0,0} witness, siteSheafTensorTmul, ringedSiteModules, tensorObjIsoSheafification, Mathlib restrictScalars), module, report, node JSON (only lean changed; statement verbatim; 3-file commit). Clause match: any H in D(R), degree-0 N, ProjectionFormulaFamily naturality in H and N for the same e, both balanced generator formulas for b.hom/b.inv in every degree, final equation pins e on K-flat flat-term P; cR/cS uniquely determined by Q-naturality plus normalization to the descent comparison, and exist and are natural in P, so the statement is true and not weakened. E0/E/eps binders match the derived change-of-rings record exactly. No flatness/boundedness/Tor assumption; universes u,v,r,w independent; edge cases (empty site, id, S=0, N=0, nonflat, unbounded) covered. Assumed PreservesFiniteLimits/Colimits of restrictScalars: true, Prop-valued, not in Mathlib (probe), same convention as landed FiniteExactHomDerivedMate; not a fault. Descent comparison via Nonempty.some of the recorded interface, consistent with the recorded tensor; observation only. Docstrings with source/blueprint and 7-step proof; sole sorry; no hollow defs; lines at most 100; DerivedChangeOfRings import needed (tested). nt_compile clean 42.6 s and 43.0 s, no errors/warnings; also clean in a third run with a probe."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-38c5e",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261021T233637-L-842487",
+  "kind": "interface",
+  "note": "independent cc review: item proof, 3 change records and 3 node files against the live clone; delivered descent/cancellation/item modules compiled together, then all 35 modules using the changed names compiled against them; rfl probe shows siteDerivedTensorIndependentCoefficients equals the old nested choice; #print axioms clean"
+ }
 }

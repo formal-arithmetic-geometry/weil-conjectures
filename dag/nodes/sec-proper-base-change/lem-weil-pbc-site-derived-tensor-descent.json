@@ -57,7 +57,7 @@
    }
   },
   {
-   "text": "Total tensor defines a bifunctor on homotopy categories, not just complexes. Use the differential of [def-pc-tensor-complex-sheaves]. If $f-f'=dh+hd$ in the first variable, $h\\otimes1$ is a degree $-1$ homotopy on the total tensor: the two cross terms with the second differential cancel because $h$ lowers the first degree by one. If $g-g'=dk+kd$ in the second variable, the homotopy on the $(p,q)$ summand is $(-1)^p1\\otimes k$; its two terms with the first differential cancel. The remaining terms give respectively $(f-f')\\otimes1$ and $1\\otimes(g-g')$. Consequently the complex bifunctor descends to $K(R)\\times K(R)$ and then, after $Q_R$, gives $B(P,Q)=Q_R\\operatorname{Tot}(P\\otimes_RQ)$ on $\\mathcal P_R\\times\\mathcal P_R$. The proved source construction CategoryTheory.Functor.bifunctorMapHomotopyCategory implements these two tensor homotopies. Uncurrying it gives B, with the requested complex-level comparison definitionally the identity natural isomorphism.",
+   "text": "Total tensor defines a bifunctor on homotopy categories, not just complexes. Use the differential of [def-pc-tensor-complex-sheaves]. If $f-f'=dh+hd$ in the first variable, $h\\otimes1$ is a degree $-1$ homotopy on the total tensor: the two cross terms with the second differential cancel because $h$ lowers the first degree by one. If $g-g'=dk+kd$ in the second variable, the homotopy on the $(p,q)$ summand is $(-1)^p1\\otimes k$; its two terms with the first differential cancel. The remaining terms give respectively $(f-f')\\otimes1$ and $1\\otimes(g-g')$. Consequently the complex bifunctor descends to $K(R)\\times K(R)$ and then, after $Q_R$, gives $B(P,Q)=Q_R\\operatorname{Tot}(P\\otimes_RQ)$ on $\\mathcal P_R\\times\\mathcal P_R$. The proved source construction CategoryTheory.Functor.bifunctorMapHomotopyCategory implements these two tensor homotopies. Uncurrying it gives B; the requested complex-level comparison is the uncurried factorization isomorphism whiskeringLeft₂BifunctorMapHomotopyCategoryIso of that construction.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "def-weil-abstract-derived-category"
@@ -126,7 +126,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YS, 06YM, 06YP, 06YU; Categories 04VI/04VJ/04VK. B2 adapts the proved J3 descent argument to independent universes using the recorded independent-coefficient resolution and tensor additivity/presentation theorems. Restricted right fractions and common refinements give localization; tensor-cone comparisons and signed symmetry give inversion; product localization gives tensor and arbitrary transformation descent. No new unresolved statements."
+  "place": "Tags 06YS, 06YM, 06YP, 06YU; Categories 04VI/04VJ/04VK. B2 adapts the proved J3 descent argument to independent universes using the recorded independent-coefficient resolution and tensor additivity/presentation theorems. Restricted right fractions and common refinements give localization; tensor-cone comparisons and signed symmetry give inversion; product localization gives tensor and arbitrary transformation descent. No new unresolved statements. D3 retains every original clause using transparent named predicates and records the existing homotopy and derived tensor existence proofs as named theorems before taking their choices. The selected tensor is definitionally the original nested choice. Private cone proofs are generalized to avoid repeated site-specific construction; their mathematical argument is unchanged. The proved generic homotopy-bifunctor factorization and a generic map equation avoid unfolding the quotient construction in the site-specific proof."
  },
  "mathlib_searches": [
   {
@@ -217,10 +217,15 @@
   "declaration": "SheafOfModules.site_derived_tensor_descent_independentCoefficients",
   "declarations": [
    "SheafOfModules.site_derived_tensor_descent_independentCoefficients",
-   "SheafOfModules.siteDerivedTensorIndependentCoefficients"
+   "SheafOfModules.siteDerivedTensorIndependentCoefficients",
+   "SheafOfModules.SiteDerivedTensorDescentDerivedSpec",
+   "SheafOfModules.SiteDerivedTensorDescentHomotopySpec",
+   "SheafOfModules.SiteDerivedTensorDescentSpec",
+   "SheafOfModules.siteDerivedTensorExistsIndependentCoefficients",
+   "SheafOfModules.siteHomotopyTensorExistsIndependentCoefficients"
   ],
   "file": "lean/Sheaf/Algebra/Homology/SiteDerivedTensorDescentIndependentCoefficients.lean",
-  "statement": "theorem site_derived_tensor_descent_independentCoefficients {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r}) [HasDerivedCategory.{w} (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] : ∃ P : ObjectProperty (HomotopyCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up ℤ)), (∀ X, P X ↔ CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) X.as ∧ ∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (X.as.X n)) ∧ (∃ F : ((HomotopyCategory.quasiIso (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up ℤ)).inverseImage P.ι).Localization ⥤ (DerivedCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))), F.IsEquivalence ∧ Nonempty (((HomotopyCategory.quasiIso (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up ℤ)).inverseImage P.ι).Q ⋙ F ≅ (P.ι ⋙ DerivedCategory.Qh))) ∧ (∃ B : (HomotopyCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up ℤ)) × (HomotopyCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up ℤ)) ⥤ (HomotopyCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up ℤ)), Nonempty (((HomotopyCategory.quotient (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up ℤ)).prod (HomotopyCategory.quotient (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up ℤ))) ⋙ B ≅ Functor.uncurry.obj ((@CategoryTheory.MonoidalCategory.curriedTensor (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) _ (SheafOfModules.monoidalCategory.{v, u, r} R)).map₂HomologicalComplex (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ (HomotopyCategory.quotient (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (ComplexShape.up ℤ))) ∧ ∃ T : (DerivedCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) × (DerivedCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ⥤ (DerivedCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))), Nonempty ((P.ι.prod P.ι) ⋙ B ⋙ DerivedCategory.Qh ≅ ((P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)) ⋙ T)) ∧ (∀ (E : Type e) (_ : Category.{z} E) (U V : (DerivedCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) × (DerivedCategory (SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) ⥤ E), Function.Bijective (fun τ : U ⟶ V ↦ Functor.whiskerLeft ((P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)) τ))",
+  "statement": "theorem site_derived_tensor_descent_independentCoefficients\n    {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]\n    (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{r})\n    [HasDerivedCategory.{w} (SheafOfModules.{r}\n        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))] :\n    ∃ P : ObjectProperty (HomotopyCategory (SheafOfModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) (.up ℤ)),\n      SiteDerivedTensorDescentSpec.{u, v, r, w, e, z} J R P",
   "branch": "newtargets-dag",
   "by": "Q06",
   "date": "2026-10-17",
@@ -228,13 +233,13 @@
   "note": "§1(B): the recorded interface fixes coefficients to max u v, and cannot express a larger independent coefficient universe r (in particular max a (t+1) on a pro-etale site with object size t+1 and Hom size t). This module retains every localization, natural tensor comparison and transformation-extension clause with independent u,v,r, with EssentiallySmall.{r} C expressing exactly the source smallness assumption. It uses the recorded independent-coefficient K-flat and site-flatness predicates and exposes the derived tensor selected by the universal-property theorem, determined up to its unique compatible natural isomorphism."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
-  "result": "pass",
-  "landing": "20261019T002503-L-2140489",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-38c5e",
+  "group": "D3",
+  "result": "fix",
+  "landing": "20261021T233637-L-842487",
+  "kind": "interface",
+  "note": "independent cc review: item proof, 3 change records and 3 node files against the live clone; delivered descent/cancellation/item modules compiled together, then all 35 modules using the changed names compiled against them; rfl probe shows siteDerivedTensorIndependentCoefficients equals the old nested choice; #print axioms clean"
  }
 }
