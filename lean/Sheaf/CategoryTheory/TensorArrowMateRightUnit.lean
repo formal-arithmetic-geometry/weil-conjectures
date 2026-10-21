@@ -60,6 +60,26 @@ theorem tensorArrowMate_right_unit
         R.map (mu.hom.app (K, oneC) ≫ TD.map (Prod.mkHom c (𝟙 (L.obj oneC))))) ≫
         R.map (TD.map (Prod.mkHom (𝟙 E) u.hom) ≫ rhoD.hom.app E) =
       rhoC.hom.app K ≫ adj.unit.app K ≫ R.map c := by
-  sorry
+  have interchange :
+      TD.map (Prod.mkHom c (𝟙 (L.obj oneC))) ≫ TD.map (Prod.mkHom (𝟙 E) u.hom) =
+        TD.map (Prod.mkHom (𝟙 (L.obj K)) u.hom) ≫
+          TD.map (Prod.mkHom c (𝟙 oneD)) := by
+    simp only [← TD.map_comp, prod_comp, Category.id_comp, Category.comp_id]
+  have naturality :
+      TD.map (Prod.mkHom c (𝟙 oneD)) ≫ rhoD.hom.app E =
+        rhoD.hom.app (L.obj K) ≫ c := by
+    simpa using rhoD.hom.naturality c
+  have beta :
+      (mu.hom.app (K, oneC) ≫ TD.map (Prod.mkHom c (𝟙 (L.obj oneC)))) ≫
+          (TD.map (Prod.mkHom (𝟙 E) u.hom) ≫ rhoD.hom.app E) =
+        L.map (rhoC.hom.app K) ≫ c := by
+    rw [Category.assoc, ← Category.assoc (TD.map (Prod.mkHom c _)), interchange,
+      Category.assoc, naturality]
+    simpa only [Category.assoc] using congrArg (fun f ↦ f ≫ c) (right_action K)
+  refine ⟨beta, ?_⟩
+  rw [Category.assoc, ← R.map_comp, beta, R.map_comp]
+  simpa only [Category.assoc, Functor.comp_obj, Functor.prod'_obj, Functor.id_obj,
+    Functor.const_obj_obj] using
+    congrArg (fun f ↦ f ≫ R.map c) (adj.unit_naturality (rhoC.hom.app K))
 
 end CategoryTheory.Adjunction
