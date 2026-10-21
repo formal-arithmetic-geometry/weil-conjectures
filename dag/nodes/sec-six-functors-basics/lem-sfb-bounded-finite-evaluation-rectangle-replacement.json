@@ -11,9 +11,159 @@
   "def-weil-l-adic-numbers",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-sfb-topological-homogeneous-cochain-coordinates] for $E=\\mathbf Q_\\ell$, $J=G$ and the trivial action. The norm axioms give continuous addition and scalar multiplication on $V$, so its topological-vector-space hypotheses hold without completeness. Write $\\Psi c=f_c$ and $\\Phi F(g_1,\\ldots,g_q)=F(1,g_1,g_1g_2,\\ldots,g_1\\cdots g_q)$. The cited statement gives inverse linear cochain maps, including degree zero, and $\\delta\\Psi=\\Psi d$, $\\Phi\\delta=d\\Phi$. In particular $c$ is a cocycle exactly when $F=\\Psi c$ satisfies $\\delta F=0$. We will construct finite-evaluation operators on the diagonally $G$-invariant homogeneous functions and then conjugate them by these explicit maps.",
+   "uses": [
+    "lem-sfb-topological-homogeneous-cochain-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "Choose a transversal $D\\subset G$ for the finitely many right cosets $H\\backslash G$, including $1$. Write $x=\\rho(x)s(x)$ uniquely with $\\rho(x)\\in H$ and $s(x)\\in D$. Each coset $Hs$ is clopen: it is open by translation, and its complement is a union of other open cosets. On $Hs$, $\\rho(x)=xs^{-1}$ is continuous into $H$ with its subspace topology; these open pieces show that $\\rho:G\\to H$ is continuous. Uniqueness gives $\\rho(hx)=h\\rho(x)$ for $h\\in H$. The transversal is fixed once, independently of $V$. No normality of $H$ is assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "For a set $Y$ let $B_q(Y)$ be the free abelian group with specified basis $[y_0,\\ldots,y_q]$ (repetitions allowed), and put $B_{-1}(Y)=\\mathbf Z[\\varnothing]$. This is the basis convention of [def-weil-pbc-free-module]. Define $\\partial$ by alternating deletion, including $\\partial[y]=[\\varnothing]$ and $\\partial[\\varnothing]=0$. Deleting two distinct positions in opposite orders gives opposite signs, hence $\\partial^2=0$. A homogeneous function $F$ extends uniquely by finite sums to $\\widehat F:B_n(G)\\to V$; then $\\delta F=0$ means $\\widehat F\\partial=0$ on $B_{n+1}(G)$. Left translation acts coordinatewise on all these chains.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ordered-join-partial-contraction] with $r=n+1$ and the separately labelled sets $X_i=Ha_i$. Write $J_q$ for its ordered-color chains and $e_q:J_q\\to B_q(G)$ for erasing colors; $\\partial e=e\\partial$ follows from deletion. For $h\\in H$, choose anchors $v_i=ha_i$ and denote the cited operator by $S^h$. Its statement gives $\\partial S^h_q+S^h_{q-1}\\partial=1$ for $-1\\leq q\\leq n-1$, its naturality under simultaneous left translation, and a fixed finite integer expansion using only vertex insertions and replacements. In degree $n$, every basis of $J_n$ has exactly one vertex in each color, in order $0,\\ldots,n$; thus every tuple in $e_n(J_n)$ is an integer combination of tuples in the specified rectangle.",
+   "uses": [
+    "lem-sfb-ordered-join-partial-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "Construct $P_q:B_q(G)\\to J_q$ through degree $n$. Put $P_{-1}=1$ and $P_0[x]=[(0,\\rho(x)a_0)]$, so $\\partial P_0=P_{-1}\\partial$. For $1\\leq q\\leq n$, assuming the chain identities below degree $q$, define on each basis tuple $x=[x_0,\\ldots,x_q]$\n$$z=P_{q-1}(\\partial x),\\qquad P_q(x)=S^{\\rho(x_0)}_{q-1}(z),$$\nand extend linearly. The induction hypothesis gives $\\partial z=P_{q-2}\\partial^2x=0$, using the augmentation identity when $q=1$. Since $q-1\\leq n-1$, [lem-sfb-ordered-join-partial-contraction] gives $\\partial P_q(x)=z$. Hence $\\partial P_q=P_{q-1}\\partial$ in all required degrees. The input-dependent anchor is chosen on basis tuples before linear extension; it is not asserted to be a linear function of a general chain.",
+   "uses": [
+    "lem-sfb-ordered-join-partial-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "Naturality in [lem-sfb-ordered-join-partial-contraction], applied to left translation by $h\\in H$, gives $hS^{\\rho(x_0)}z=S^{h\\rho(x_0)}(hz)$. Together with $\\rho(hx_0)=h\\rho(x_0)$ this proves inductively $P_q(hx)=hP_q(x)$; the base case is the displayed $P_0$. The finite-expansion clause of that node also proves inductively that $P_q[x_0,\\ldots,x_q]$ is a fixed finite integer sum of colored tuples with vertices of the form $\\rho(x_j)a_i$. Boundary merely selects subtuples, and the next $S$ inserts or replaces by $\\rho(x_0)a_i$. Coefficient lists and coordinate selections depend on the degree and color lists alone. Keep repeated terms rather than combining them, so no equality test on input values enters this expansion.",
+   "uses": [
+    "lem-sfb-ordered-join-partial-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "Set $A_q=e_qP_q$ for $-1\\leq q\\leq n$. These are $H$-equivariant augmented chain maps and $A_{-1}=1$. For $b\\in G$, let $C_b$ prefix $b$ to a tuple, with $C_b[\\varnothing]=[b]$. Direct deletion gives\n$$\\partial[b,y_0,\\ldots,y_q]=[y_0,\\ldots,y_q]-C_b\\partial[y_0,\\ldots,y_q],$$\nso $\\partial C_b+C_b\\partial=1$, also in degree $-1$ since $\\partial[b]=[\\varnothing]$. Coordinatewise translation gives $hC_bz=C_{hb}(hz)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "Define $Q_{-1}=0$ and, on basis tuples $x=[x_0,\\ldots,x_q]$, recursively for $0\\leq q\\leq n$ put\n$$Z_q(x)=x-A_qx-Q_{q-1}\\partial x,\\qquad Q_q(x)=C_{x_0}Z_q(x),$$\nextending linearly. The augmentation of $Z_0$ is $1-1=0$. For $q\\geq1$, the previous-degree identity and the chain identity for $A$ give\n$$\\partial Z_q=(1-A_{q-1})\\partial x-(1-A_{q-1}-Q_{q-2}\\partial)\\partial x=0.$$\nThe prefix identity therefore gives $\\partial Q_q(x)=Z_q(x)$. This proves by induction\n$$1-A_q=\\partial Q_q+Q_{q-1}\\partial\\qquad(0\\leq q\\leq n).$$\nBoth the base and the step have been verified, rather than invoking an unspecified resolution-comparison theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "Induction in this same recursion proves $H$-equivariance of $Q$: $Z_q(hx)=hZ_q(x)$ and $C_{hx_0}(hZ_q(x))=hQ_q(x)$. Its base is $Q_{-1}=0$. Likewise the finite expansion for $A$, together with deletion, subtraction and prefixing, proves that each $Q_q[x_0,\\ldots,x_q]$ has a fixed finite integer expansion with every vertex either $x_j$ or $\\rho(x_j)a_i$. These vertex maps are continuous by step 2 and multiplication in $G$. Thus evaluation of any continuous $F$ on $Q_q$ or $A_q$ is continuous. All the recursions are integral and independent of coefficients.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "For any degree-$n$ homogeneous $G$-invariant function $F$, define $H$-invariant functions\n$$UF(x_0,\\ldots,x_{n-1})=\\widehat F(Q_{n-1}[x_0,\\ldots,x_{n-1}]),\\quad WF(y_0,\\ldots,y_n)=\\widehat F(A_n[y_0,\\ldots,y_n]).$$\nThey are linear in $F$ and continuous by step 9. If $\\delta F=0$, applying $\\widehat F$ to step 8 in degree $n$ gives $F=\\delta(UF)+WF$, because $\\widehat F\\partial Q_n=0$. Applying $\\delta$ gives $\\delta(WF)=0$, since $\\delta^2=0$ by the same deletion cancellation as for $\\partial^2$. If $F$ vanishes on $Ha_0\\times\\cdots\\times Ha_n$, then $WF=0$ by the degree-$n$ description of $eJ_n$ in step 4. These are identities on $G$-tuples, before passing to cohomology.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "For an $H$-invariant degree-$q$ homogeneous function $L$ on $G^{q+1}$ define\n$$(\\mathcal M_qL)(x)=m^{-1}\\sum_{s\\in D}L(sx_0,\\ldots,sx_q).$$\nFor $g\\in G$, write $sg=h u$ with $h\\in H$ and $u\\in D$. Right multiplication permutes $H\\backslash G$, so $s\\mapsto u$ is a permutation, and $L(sgx)=L(hux)=L(ux)$. Thus $\\mathcal M_qL$ is $G$-invariant, without normality of $H$. Deletion commutes with each simultaneous translation, so $\\delta\\mathcal M=\\mathcal M\\delta$. On $G$-invariant functions $\\mathcal M F=F$. Therefore for cocycles step 10 gives\n$$F=\\delta(\\mathcal M_{n-1}UF)+\\mathcal M_nWF,\\qquad\\delta(\\mathcal M_nWF)=0.$$\nThe residual is zero whenever $F$ vanishes on the rectangle. The finite sum also preserves continuity and linearity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "Define on all of $C^n(G,V)$\n$$T=\\Phi_{n-1}\\mathcal M_{n-1}U\\Psi_n,\\qquad R=\\Phi_n\\mathcal M_nW\\Psi_n.$$\nThe cochain identities of [lem-sfb-topological-homogeneous-cochain-coordinates] and step 11 give $c=d(Tc)+Rc$ and $d(Rc)=0$ for every cocycle. Its inverse formula is exactly $\\Psi_nc=f_c$ for the trivial action, so rectangle vanishing gives $Rc=0$. To obtain the finite evaluation formulas on the full cochain spaces, expand $Q_{n-1},A_n$ as in steps 6 and 9, translate each tuple by each $s\\in D$, insert the cumulative-product tuple from $\\Phi$, and replace each final homogeneous tuple $(b_0,\\ldots,b_n)$ by $(b_0^{-1}b_1,\\ldots,b_{n-1}^{-1}b_n)$ from $\\Psi$. These are continuous maps of exactly the domains and codomains in the item, also when $n-1=0$. All coefficients are integers divided by $m$, and every choice was independent of $V$.",
+   "uses": [
+    "lem-sfb-topological-homogeneous-cochain-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "Every integer $k$ has $|k|_\\ell\\leq1$, while $|m|_\\ell=1$ because $m$ is prime to $\\ell$, by [def-weil-l-adic-numbers]. Hence every coefficient $k/m$ in the expansions has absolute value at most one. The ultrametric inequality now gives pointwise $\\|(Tc)(x)\\|\\leq\\sup_z\\|c(z)\\|$ and $\\|(Rc)(y)\\|\\leq\\sup_z\\|c(z)\\|$. These suprema are finite: the continuous real function $\\|c(-)\\|$ has compact image on the compact domain $G^n$. Taking suprema proves both operator bounds. Each value of each operator is a finite $\\mathbf Q_\\ell$-linear combination of values of $c$, so every linear coefficient subspace is preserved, whether or not it is closed. In particular the formulas never require a limit in $V$.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  },
+  {
+   "text": "Let $S$ be any profinite parameter space and $c:S\\times G^n\\to V$ continuous. Apply the same fixed formulas to the group variables only: for example $(Tc)(s,x)=\\sum_j\\alpha_j c(s,\\psi_j(x))$. Each map $(s,x)\\mapsto(s,\\psi_j(x))$ is continuous, and finite addition and fixed scalar multiplication are continuous in $V$. This proves continuity of the resulting families, and the cochain and rectangle identities hold separately at every parameter. If $S$ is empty there is the unique family. For $n=1$, $Q_0[x]=[x,x]-[x,\\rho(x)a_0]$ and the degree-$1$ homotopy identity still applies; after averaging $UF$ is a $G$-invariant function of one variable and hence constant, so its inhomogeneous differential is the stipulated $d^0=0$. Thus the bottom degree and incomplete or zero coefficient spaces are included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-topological-homogeneous-cochain-coordinates",
+  "def-weil-pbc-free-module",
+  "lem-sfb-ordered-join-partial-contraction",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent arithmetic expansion of the scalar tame-kernel input: explicit ordered-join comparison on G, followed by finite-coset averaging. The blueprint does not contain this auxiliary argument; exact reference WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -126,10 +276,122 @@
    },
    "date": "2026-10-22",
    "verdict": "no match: HomComplex single-object and K-injective lemmas do not concern this torsor-join comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A homogeneous continuous group cocycle admits a norm one finite evaluation replacement supported on a product of open subgroup cosets",
+   "results": {
+    "t": "2026-10-21T19:53:40Z",
+    "tool": "leanfinder",
+    "query": "A homogeneous continuous group cocycle admits a norm one finite evaluation replacement supported on a product of open subgroup cosets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.cocycles₂_map_one_fst",
+     "groupCohomology.IsMulCoboundary₁",
+     "groupCohomology.cocycles₁_map_one",
+     "groupCohomology.IsMulCocycle₁",
+     "groupCohomology.map_one_of_isMulCocycle₁",
+     "groupCohomology.map_one_fst_of_isMulCocycle₂",
+     "groupCohomology.map_one_fst_of_isCocycle₂",
+     "groupCohomology.cocycles₂_map_one_snd"
+    ],
+    "digest": "e643295abb63fe59"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: low-degree cocycle and coboundary identities do not construct the requested operators in every degree."
+  },
+  {
+   "tool": "grep",
+   "query": "(rectangle|torsor|join).*(cochain|cocycle|resolution)|(cochain|cocycle|resolution).*(rectangle|torsor|join)",
+   "results": {
+    "t": "2026-10-21T19:53:54Z",
+    "tool": "grep",
+    "query": "(rectangle|torsor|join).*(cochain|cocycle|resolution)|(cochain|cocycle|resolution).*(rectangle|torsor|join)",
+    "sub": "RepresentationTheory",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no hits for the recorded pattern."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite sums of evaluations give a bounded cochain homotopy replacing a group cocycle by a cocycle detected on a rectangle of subgroup cosets",
+   "results": {
+    "t": "2026-10-21T19:53:54Z",
+    "tool": "leansearch",
+    "query": "Finite sums of evaluations give a bounded cochain homotopy replacing a group cocycle by a cocycle detected on a rectangle of subgroup cosets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "groupCohomology.cocycles",
+     "CochainComplex.HomComplex.Cocycle",
+     "groupHomology.isBoundary₂_iff",
+     "CochainComplex.HomComplex.cocycle",
+     "groupHomology.IsBoundary₂",
+     "inhomogeneousCochains.d",
+     "groupCohomology.toCocycles",
+     "inhomogeneousCochains.d_hom_apply"
+    ],
+    "digest": "22f5aef916690f6e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: cocycle, HomComplex and inhomogeneous differential declarations do not give the finite-evaluation rectangle replacement; inspected GroupCohomology/Basic.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homogeneousCochains\", \"homotopy\"",
+   "results": {
+    "t": "2026-10-21T19:53:54Z",
+    "tool": "loogle",
+    "query": "\"homogeneousCochains\", \"homotopy\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no hits for the recorded pattern."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ordered join of group torsors gives a partial bar resolution comparison with integral coefficients and a finite index averaged chain homotopy",
+   "results": {
+    "t": "2026-10-21T19:53:55Z",
+    "tool": "leanfinder",
+    "query": "An ordered join of group torsors gives a partial bar resolution comparison with integral coefficients and a finite index averaged chain homotopy",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule",
+     "Rep.barResolution_complex",
+     "Rep.standardComplex.compForgetAugmentedIso",
+     "AlgebraicTopology.DoldKan.homotopyPInftyToId",
+     "AlgebraicTopology.DoldKan.PInfty_f",
+     "AlgebraicTopology.DoldKan.Γ₀.Obj.obj₂",
+     "AlgebraicTopology.DoldKan.factors_normalizedMooreComplex_PInfty",
+     "AlgebraicTopology.DoldKan.Γ₀.Obj.summand"
+    ],
+    "digest": "35571cf0037bd917"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: standard/bar resolution and Dold-Kan declarations do not provide ordered-coset rectangle evaluation, continuity or the norm-one averaged operators; inspected RepresentationTheory/Homological/Resolution.lean."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
@@ -141,7 +403,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), scalar tame-kernel expansion: finite-chain join comparison and finite-index transfer, retaining finite tuple evaluation and norm bounds",
+   "place": "Paragraph (3), scalar tame-kernel expansion below the open-direct-image coefficient comparison: ordered-join chain filling, coefficient-independent finite evaluation, and prime-to-ell finite-coset averaging. This is an auxiliary argument, not text stated in the blueprint.",
    "via": [
     "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
     "lem-sfb-prime-to-ell-condensed-acyclicity",
@@ -155,5 +417,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-bounded-finite-evaluation-rectangle-replacement",
+  "worker": "stage1",
+  "summary": "Constructed the two operators explicitly on homogeneous cochains using the existing integral ordered-join contraction, an input-anchored chain comparison, and normalized finite-coset averaging. Verified fixed finite continuous evaluation formulas, the cocycle identity, ordered-rectangle vanishing, norm-one bounds, all coefficient subspaces and profinite parameter continuity. No new nodes; the rectangle-detection and transfer statements alone do not assert these stronger quantitative operators.",
+  "blueprint": "Realizes the scalar tame-kernel auxiliary obligation below paragraph (3) of det-thm-sf-ctf-stability-direct-images: steps 1-9 construct the finite chain comparison, 10-12 give rectangle residual and finite-index descent, 13-14 retain bounds and parameter families. The ancestor command returns None because the chain terminates at created.item Sheaf.SixFunctors.CtfStabilityDirectImages; existing from.node null is retained."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O2-971eeb3e3",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-971eeb3e3 (reviewer sub-agent of L); spot-checked: Read the item's 14 steps in full and each cited statement: ordered-join-partial-contraction (identity for q ≤ r−2, naturality and finite-expansion clauses), topological-homogeneous-cochain-coordinates (Φ and Ψ including degree 0, no completeness assumed), free-module and l-adic-numbers definitions. No new nodes. Statement and stmt_deps are identical to live, where the item is still unsplit. Blueprint main-20261015 direct-images paragraph (3) was read; the inherited via chain and from.node null are kept; no SGA. Not a duplicate: rectangle-detection gives only an existential primitive on H, and finite-index-transfer gives no norm bound or evaluation formulas. Checked the math step by step: degree ranges (S_{q-1} with q ≤ n = r−1), the per-tuple anchor ρ(x_0) and equivariance via naturality with ρ(hx) = hρ(x), the prefix homotopy Z/Q induction including q = 0, colors 0..n of J_n giving rectangle vanishing, averaging over right cosets for nonnormal H, coefficients k/m with |m|_ℓ = 1 giving bound 1, and the n = 1 bottom degree. My own finite-chain script (S3, nonnormal index-3 H, n = 1..3, cited S implemented literally) checked F = δ(MUF) + MWF exactly, that MWF is a cocycle, the color and coset structure, and H-equivariance; all passed. No cycle; all non-definition proof_deps are in the same unit; no tool_uses."
  }
 }
