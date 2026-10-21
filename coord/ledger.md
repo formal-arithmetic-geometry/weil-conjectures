@@ -22717,3 +22717,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:57 L: merged deliver/Q111/lem-pur-sequence-adjoint-resolution-shifts (stage 2; reviewer PASS; parallel immutable checks)
 - 13:57 L: merged deliver/O1/lem-sfb-qcqs-integral-finite-model-completeness (stage 2; reviewer PASS; parallel immutable checks)
 - 13:57 L: merged deliver/NJ/lem-a1-roos-intrinsic-unit-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 13:57 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
