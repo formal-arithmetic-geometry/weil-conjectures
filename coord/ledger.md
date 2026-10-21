@@ -23422,3 +23422,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:07 L: merged deliver/NR/lem-sfb-qcqs-zero-dimensional-affine (reviewer PASS; first push; new nodes: 0)
 - 19:08 L: merged deliver/Q01/lem-sfb-continuous-cochain-finite-index-transfer (reviewer PASS; first push; new nodes: 1)
 - 19:08 L: returned deliver/O3/def-per-support-condition (reviewer RETURN: I read the delivered definition in full: 0 new nodes, no proof steps, 5 stmt_deps, each statement read. Source main-2026)
+- 19:09 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
