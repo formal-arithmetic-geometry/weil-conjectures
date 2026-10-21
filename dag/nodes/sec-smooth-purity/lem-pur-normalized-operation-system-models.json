@@ -18,9 +18,129 @@
   "def-pc-flat-sheaf-modules",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose complexes of whole strict semilinear systems representing each input in $D(\\mathscr S(B_{W,\\bullet}))$. Apply [lem-pc-kflat-resolution] on the ringed sequence site to obtain a whole-system K-flat resolution with flat terms; [lem-pur-system-evaluation-kflat] ensures that it is a quasi-isomorphic system complex $P_\\bullet$ whose every $P_n$ is K-flat with flat terms. The replacement is a morphism of systems, so its chain transitions $\\tau^P_{m,n}$ represent the original transitions and satisfy the identity and quotient composition laws as chain maps. In particular we have not chosen unrelated level resolutions. By [lem-coef-semilinear-derived-sections], whole-system tensor and inverse image exist and evaluate to the stated level operations. We use these whole-system operations on the chosen models throughout.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-system-evaluation-kflat",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution), applied on the ringed sequence site; whole-system evaluation as in the cited DAG lemmas."
+   }
+  },
+  {
+   "text": "For any fixed finite well-typed expression, proceed by structural induction. The input models are supplied by step 1. For a tensor vertex take the ordinary direct-sum total tensor: [lem-pur-kflat-total-tensor-model] says that it is again K-flat with flat terms, even with two-sided unbounded inputs, and computes the derived tensor. For a geometric or coefficient-quotient pullback vertex apply the ordinary module pullback termwise. The hypotheses of [lem-weil-pbc-ringed-pullback-preserves-kflat] hold for both kinds of ringed-topos morphism and give a flat-term K-flat output; [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] identifies this computation with the derived pullback. Thus no further level replacements are needed at intermediate vertices. Use the actual induced chain transitions at each vertex. The construction takes place on the ringed sequence topos, and evaluating it gives these same component complexes and transitions.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A2 (lemma-tensor-product-K-flat), 0G7E (lemma-pullback-K-flat), 07A4 (lemma-pullback-tensor-product), and 0D6D (lemma-derived-pullback-composition)."
+   }
+  },
+  {
+   "text": "Let $P_\\bullet,Q_\\bullet$ represent $A,N$. The actual tensor transition sends $a\\otimes x$ to $\\tau^P_{m,n}(a)\\otimes\\tau^Q_{m,n}(x)$. By [lem-pur-sheaf-ring-derived-coefficient-adjunction], its derived adjoint is represented by $(a\\otimes x)\\otimes b\\mapsto\\tau^P_{m,n}(a)\\otimes b\\tau^Q_{m,n}(x)$. Factor this map through the monoidal scalar-extension comparison of [lem-pur-cochain-pullback-tensor-coherence]: first $(a\\otimes x)\\otimes b\\mapsto(a\\otimes1)\\otimes(x\\otimes b)$, then apply the two input transition adjoints. This is exactly the first displayed transition in the statement. The first map is invertible by the derived monoidal pullback comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the identity topos with ring map $q_{m,n}$. For normalized inputs, both input adjoints are isomorphisms by [def-coef-normalized-dvr-tower]; their derived tensor is an isomorphism, so the tensor output is normalized.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint); scalar unit and adjunct representative normalization in the cited coefficient-adjunction lemma."
+   }
+  },
+  {
+   "text": "For $f:X\\to Y$, let $c_j:f^{-1}B_{Y,j}\\to B_{X,j}$ be the constant-section structure map. It is invertible by [prop-weil-pbc-proetale-constant-ring-map]. The square with $q_Y,q_X$ commutes: both composites send a constant coefficient to its residue at level $n$, and the constant-sheaf universal property gives equality. Apply the coefficient-square comparison of [lem-pur-cochain-pullback-tensor-coherence]. For a flat-term K-flat $B_{Y,m}$-complex $P$, its map $\\kappa:f_n^*(P\\otimes_{B_{Y,m}}B_{Y,n})\\to(f_m^*P)\\otimes_{B_{X,m}}B_{X,n}$ is locally\n$$b\\otimes(p\\otimes a)\\longmapsto(1\\otimes p)\\otimes b c_n(a).$$\nIts inverse sends $(s\\otimes p)\\otimes b$ to $bq_X(s)\\otimes(p\\otimes1)$. The two composites are identities by balancing; these are degree-zero chain maps. Step 2 permits their use without deriving again, and they are the specified scalar-association comparison and its inverse.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); constant-section coefficient maps as in the cited pro-etale lemma."
+   }
+  },
+  {
+   "text": "For the chosen system model $P_\\bullet$ of $C$, the actual pullback transition is locally $s\\otimes p\\mapsto q_X(s)\\otimes\\tau^P_{m,n}(p)$. Its scalar adjoint is therefore $(s\\otimes p)\\otimes b\\mapsto bq_X(s)\\otimes\\tau^P_{m,n}(p)$ by [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Using step 4, this is the composite $\\kappa^{-1}$ followed by $f_n^*(\\alpha^P_{m,n})$, since the latter map sends $bq_X(s)\\otimes(p\\otimes1)$ to $bq_X(s)\\otimes\\tau^P_{m,n}(p)$. This proves the second displayed transition formula, including its orientation. The input transition itself factors through $p\\mapsto p\\otimes1$ followed by its adjunct, as the same adjunction lemma asserts. On localization, $\\kappa$ is invertible and $Lf_n^*$ carries the invertible input adjoint to an isomorphism; hence the output is normalized by [def-coef-normalized-dvr-tower]. The calculation uses the actual $\\tau^P$, not the scalar-insertion unit in its place.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), with the scalar-association calculation in step 4 and the normalized representative adjunct formula in the cited node."
+   }
+  },
+  {
+   "text": "For $r\\ge m\\ge n$, check the tensor cocycle on the chosen system complexes. A local tensor $(a\\otimes x)\\otimes b\\otimes c$, with $b\\in B_m,c\\in B_n$, goes under the successive adjoints to\n$$\\tau^P_{r,n}(a)\\otimes q_{m,n}(b)c\\,\\tau^Q_{r,n}(x).$$\nThe direct adjoint gives the same result after the scalar-association map sends $b\\otimes c$ to $q_{m,n}(b)c$. Here we used precisely the two strict input transition cocycles; their derived formulation is that of [def-coef-normalized-dvr-tower]. The reassociations are the canonical ones in [lem-pur-cochain-pullback-tensor-coherence]. The equality holds on each total-degree summand, commutes with restrictions and sheafification, and hence is an equality of whole-system chain constructions, which remains an equality after localization. At $r=m=n$ the same calculation is the identity.",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product) and 0D6D (lemma-derived-pullback-composition); explicit scalar multiplication and input cocycle calculation."
+   }
+  },
+  {
+   "text": "For pullback the same triple-index check is explicit. On $(s\\otimes p)\\otimes b\\otimes c$, $s\\in B_{X,r},b\\in B_{X,m},c\\in B_{X,n}$, the successive adjoints of step 5 give\n$$c q^X_{m,n}(b)q^X_{r,n}(s)\\otimes\\tau^P_{r,n}(p).$$\nThe direct adjoint applied after scalar association gives this identical expression, since $q^X_{r,n}=q^X_{m,n}q^X_{r,m}$ and the input transitions satisfy their cocycle [def-coef-normalized-dvr-tower]. This also checks the two possible composites of $\\kappa$ maps: step 4 moves scalar factors by multiplication, and both paths multiply these same factors. The canonical comparisons are those of [lem-pur-cochain-pullback-tensor-coherence]. Balancing and associativity prove equality before localization on the system complexes; the identity index inserts $1$ and gives the identity. No assertion that evaluations detect equality of arbitrary derived morphisms is used.",
+   "uses": [
+    "def-coef-normalized-dvr-tower",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 07A4 (lemma-pullback-tensor-product); explicit triple-scalar and transition calculation."
+   }
+  },
+  {
+   "text": "Finally take the whole-system unit to be $B_\\bullet[0]$ with its quotient transitions. Each component has flat terms and is K-flat: tensoring by $B_n[0]$ is the identity functor, so it is exact and preserves acyclic complexes [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. Its transition adjoint is $B_m\\otimes_{B_m}B_n\\to B_n$, $s\\otimes b\\mapsto q_{m,n}(s)b$, with inverse $b\\mapsto1\\otimes b$. Multiplication gives both the unit cocycle and identity. The unit comparison agrees with [lem-pur-cochain-pullback-tensor-coherence]. This supplies the unit base case in step 2. Every finite expression thus has simultaneous whole-system models retaining all the transitions just computed. All changes of rings used flat-term K-flat inputs, never flatness of the quotient homomorphism.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); elementary unit-complex calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-system-evaluation-kflat",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "def-coef-normalized-dvr-tower",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit whole-semilinear-system transition argument based on Tags 06YS, 07A2, 0G7E, 07A4, 0D6D, 07A6; not a verbatim Stacks theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +176,52 @@
    "results": "1 hits: Mathlib/Algebra/Ring/CompTypeclasses.lean",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module tensor identities and Tor infrastructure do not construct normalized whole semilinear system operations or their actual transition cocycles"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*(tensor|pullback)|semilinear.*system|KFlat",
+   "results": "1 hits: Mathlib/Algebra/Ring/CompTypeclasses.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary module tensor or ordinary presheaf/condensed monoidal structures, not unbounded normalized semilinear-system operations and their transition adjoints"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor and inverse image preserve normalized semilinear quotient coefficient systems with their actual transition cocycles",
+   "results": "8 hits: lTensor.inverse_comp_lTensor, QuotSMulTop.quotSMulTopTensorEquivQuotSMulTop, rTensor.inverse_comp_rTensor, lTensor.inverse, TensorProduct.tensorQuotEquivQuotSMul_symm_comp_mkQ, Module.Invertible.rTensorEquiv, lTensor.toFun, Module.Invertible.rTensorInv",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary module tensor or ordinary presheaf/condensed monoidal structures, not unbounded normalized semilinear-system operations and their transition adjoints"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary module tensor or ordinary presheaf/condensed monoidal structures, not unbounded normalized semilinear-system operations and their transition adjoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor and inverse image preserve normalized semilinear quotient coefficient systems with their actual transition cocycles",
+   "results": "8 hits: rTensor.inverse_of_rightInverse, lTensor.inverse_of_rightInverse, rTensor.inverse_apply, lTensor.inverse_apply, rTensor.inverse_comp_rTensor, Algebra.Extension.tensorCotangentInvFun, Algebra.Extension.tensorCotangentInvFun_smul_mk, lTensor.inverse_comp_lTensor",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary module tensor or ordinary presheaf/condensed monoidal structures, not unbounded normalized semilinear-system operations and their transition adjoints"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cartesian sections of varying ring derived categories are closed under tensor product and inverse image using scalar association",
+   "results": "8 hits: LightCondensed.instMonoidalClosedLightCondMod, PresheafOfModules.monoidalCategory, LightCondensed.instMonoidalCategoryLightCondMod, PresheafOfModules.monoidalCategoryStruct, LightCondensed.instMonoidalLightCondSetLightCondModFree, PresheafOfModules.Monoidal.tensorObj, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary module tensor or ordinary presheaf/condensed monoidal structures, not unbounded normalized semilinear-system operations and their transition adjoints"
+  },
+  {
+   "tool": "grep",
+   "query": "monoidalCategory|def tensorObj",
+   "results": "5 hits: 28, 45, 47, 63, 66",
+   "date": "2026-10-21",
+   "verdict": "no match: the results concern ordinary module tensor or ordinary presheaf/condensed monoidal structures, not unbounded normalized semilinear-system operations and their transition adjoints"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-completed-operation-tower-substitution",
@@ -79,5 +241,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-normalized-operation-system-models",
+  "worker": "stage1",
+  "summary": "Reused existing whole-system K-flat evaluation, tensor closure, ringed pullback, cochain coherence and scalar-adjunction nodes. Wrote actual transition adjoints, scalar-association inverse and triple-index cocycles explicitly on whole-system models. No new nodes, statement changes, boundedness or quotient-flatness hypotheses.",
+  "blueprint": "Serves the natural coefficient-twist Weil isomorphism and its compatibility with finite reduction and scalar extension in def-weil-frobenius-coefficient-twists; realizes the finite-system normalization/model part extracted through lem-pur-derived-pullback-tensor-iso and lem-pur-completed-operation-tower-substitution. The purity-convention unit has no proof steps to replace.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic tool used for the whole-system model calculation."
+   },
+   {
+    "node": "lem-pur-system-evaluation-kflat",
+    "why": "Resolution on the sequence topos gives one strict system model with K-flat flat-term evaluations; the purity unit does not supply this general resolution theorem."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic whole-system derived tensor and inverse image, with actual transitions and termwise evaluation; needed before the purity-specific normalization calculation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic K-flat and termwise flat preservation for ringed pullbacks, including nonflat quotient ring maps."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic unbounded derived monoidal pullback and representative computation, applied to coefficient quotients."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic scalar adjunction normalized on flat-term K-flat representatives, to identify the adjunct of each actual semilinear transition."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Canonical constant-section coefficient structure maps are invertible for arbitrary scheme morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-system-evaluation-kflat",
+  "lem-coef-semilinear-derived-sections",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-addb71639",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-addb71639 (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited statements in full. Single commit, no new nodes. The item is not dropped and has no repair note. It is still unsplit in live and side-live. The statement, stmt_deps, source and blueprint fields are unchanged. The 8 steps expand the parent's old Q96 steps 1-3 (from the N5 re-split, PASS) without dropping anything, and no cycle reaches the item. Steps 1-2: lem-pur-system-evaluation-kflat gives one strict system model whose levels are K-flat with flat terms. lem-pur-kflat-total-tensor-model and lem-weil-pbc-ringed-pullback-preserves-kflat keep this under tensor and pullback, also for unbounded complexes and non-flat quotient ring maps. lem-weil-pbc-ringed-topoi-derived-tensor-pullback computes the derived operations on these models. Step 3: the adjunct formula from lem-pur-sheaf-ring-derived-coefficient-adjunction (2), (a⊗x)⊗b↦τa⊗bτx, factors through the cochain coherence c followed by α^P⊗α^Q (checked). Steps 4-5: κ s'⊗(x⊗r)↦(1⊗x)⊗s'φ'(r) has the orientation of lem-pur-cochain-pullback-tensor-coherence. Its inverse (s⊗p)⊗b↦bq(s)⊗(p⊗1) checks both ways by balancing. κ⁻¹ followed by f_n^*(α) equals the actual adjunct bq(s)⊗τp. c_j is invertible by prop-weil-pbc-proetale-constant-ring-map. Steps 6-7: I checked the triple-index cocycles by hand (τa⊗q(b)cτx and c·q(b)·q(s)⊗τp). Step 8: the unit B[0] is flat and K-flat, with inverse b↦1⊗b. Source checked: Stacks 07A4 and 0D6D (sites-cohomology.tex lines 3658/3684) use the same K-flat mechanism (06YS/0G7E/07A2). Edge cases: equal indices give the identity, U=∅ gives zero rings, the ℤ/ℓ²→𝔽_ℓ quotient needs no flatness, and a (−1)^{m−n} input twist is kept. The three Mathlib search kinds are recorded. I accept the tool_uses as generic tools; the system-evaluation and coefficient-adjunction nodes are on the sk-def-sf-operations route. No SGA. No changes."
  }
 }

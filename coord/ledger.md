@@ -21397,3 +21397,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:52 L: merged deliver/Q127/lem-trf-section-rees-base-change-etale (reviewer FIX; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q142/lem-trf-completion-unit-strict-quotient-model (reviewer FIX; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q20/lem-pur-good-truncation-exact-normalization (reviewer PASS; first push; new nodes: 0)
+- 08:52 L: merged deliver/Q101/lem-pur-normalized-operation-system-models (reviewer PASS; first push; new nodes: 0)
