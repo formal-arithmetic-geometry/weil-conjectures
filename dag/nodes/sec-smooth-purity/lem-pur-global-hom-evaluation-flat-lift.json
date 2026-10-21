@@ -24,9 +24,166 @@
   "def-pc-quasi-iso-modules",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a complex representing $K$ and apply [prop-pur-kinjective-resolutions-exist] on the stipulated small etale site to obtain a quasi-isomorphism to a K-injective complex $I$. The same theorem applies to any complex, so the bounded-below hypothesis presents no restriction. Since $E$ is bounded and termwise flat, it is bounded above and hence K-flat by clause (1) of [lem-kun-kflat-criteria].",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-kun-kflat-criteria"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 07A5 (section-unbounded), using Injectives 079P; Tag 06YQ (lemma-bounded-flat-K-flat)."
+   }
+  },
+  {
+   "text": "For any K-injective representative $I$ of $K$, put $H=\\mathcal Hom_A^\\bullet(E,I)$. By [def-pur-derived-internal-hom], $Q_X(H)$ canonically represents $R\\mathcal Hom_A(E,K)$; this definition explicitly permits any K-injective target representative. Because $E$ is K-flat, [lem-pur-hom-kflat-into-kinjective] says that $H$ is K-injective. Thus [def-kun-rgamma-unbounded] computes $C$ by $\\Gamma(X,H)$, retaining its $A$-module structure in each degree: the identity of $H$ is a K-injective resolution of the representative $H$, and [lem-kun-rgamma-unbounded-well-defined] says that the object so obtained is canonically isomorphic to the one from any other representative, resolution and comparison. The degreewise equivalences and differential equation of [lem-pur-hom-complex-global-cochains] identify this complex with $C_E^n=\\prod_p\\operatorname{Hom}_X(E^p,I^{p+n})$, with $d(f)=d_If-(-1)^nfd_E$. All identifications here are $A$-linear: sections and the component projections are $A$-linear, and the degreewise maps send a section to its family of $A_X$-module maps. This proves the asserted representation in $D(A)$, rather than only an identification of its cohomology groups.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-hom-kflat-into-kinjective",
+    "def-kun-rgamma-unbounded",
+    "lem-kun-rgamma-unbounded-well-defined",
+    "lem-pur-hom-complex-global-cochains"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 (section-internal-hom), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 0A8X (section-hom-complexes), and Section 07A5 (section-unbounded)."
+   }
+  },
+  {
+   "text": "Regard $A$-modules as sheaves on the one-object site with only the identity arrow and its trivial topology. Applying [lem-pc-kflat-resolution] there to $C_E$ gives a quasi-isomorphism $\\alpha:U\\to C_E$ with $U$ K-flat and all $U^n$ flat. This is an ordinary $A$-complex: sheaves on this site are exactly $A$-modules, and its total tensor is the module total tensor. For every such choice, [lem-sfb-constant-module-kflat] gives K-flatness of $\\underline U_X$, and [lem-sfb-constant-module-flat] gives flatness of every term. The exact realization of [def-sfb-site-derived-constant-module-functor] identifies $Q_X(\\underline U_X)$ with $\\underline C_X$ through the isomorphism induced by $\\alpha$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-constant-module-kflat",
+    "lem-sfb-constant-module-flat",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution); Tag 0G7E (constant-realization specialization); paragraph before 09BD (lemma-map-out-of-locally-constant)."
+   }
+  },
+  {
+   "text": "Use the identification $C_E=\\Gamma(X,H)$ from step 2. The ordinary constant/sections adjunction underlying [def-kun-constant-projection-morphism], applied termwise by [lem-weil-pbc-termwise-adjunction-homotopy], sends $\\alpha:U\\to\\Gamma(X,H)$ to the chain map $\\beta:\\underline U_X\\to H$. Explicitly, $\\beta$ is the composite $\\underline U_X\\xrightarrow{\\underline\\alpha}\\underline{\\Gamma(X,H)}_X\\to H$, with the ordinary counit as last arrow. For $w\\in U^n$, its image is the section of $H^n$ corresponding to the family $\\alpha(w)^p:E^p\\to I^{p+n}$. This description uses the differential-compatible equivalences of [lem-pur-hom-complex-global-cochains].",
+   "uses": [
+    "def-kun-constant-projection-morphism",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-pur-hom-complex-global-cochains"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), ordinary termwise adjunction; Tag 0A8X (section-hom-complexes)."
+   }
+  },
+  {
+   "text": "Define $t$ on each tensor summand of bidegree $(n,p)$ by $w\\otimes e\\mapsto\\alpha(w)^p(e)$, using $\\beta$ from step 4. This is balanced and $A$-bilinear, hence gives a map from the sheaf tensor product; it commutes with restrictions since each component of $\\beta$ is a sheaf-Hom section. Locally a constant section $w$ is represented by an element of $U^n$, so this formula determines the sheaf map, and the total direct sum determines a graded map. Using [def-pur-hom-complex] and [def-pc-tensor-complex-sheaves], its chain equation is the following calculation for homogeneous $w,e$:\n$$d_I\\bigl(\\alpha(w)(e)\\bigr)=(d_{C_E}\\alpha(w))(e)+(-1)^n\\alpha(w)(d_Ee)=\\alpha(d_Uw)(e)+(-1)^n\\alpha(w)(d_Ee)=t\\bigl(d_Uw\\otimes e+(-1)^nw\\otimes d_Ee\\bigr).$$\nThe two mixed signs agree also for negative $n$; no factor is interchanged, so no additional Koszul sign occurs.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 0A8X (section-hom-complexes), signed differential and total tensor-Hom calculation 0A90 (lemma-compose)."
+   }
+  },
+  {
+   "text": "Both $\\underline U_X$ and $E$ are K-flat and have flat terms by steps 1 and 3. Apply [lem-pur-kflat-total-tensor-model] to them. It gives that $D=\\operatorname{Tot}(\\underline U_X\\otimes_A E)$ is K-flat, that each $D^r=\\bigoplus_{n+p=r}\\underline{U^n}_X\\otimes_A E^p$ is flat, and that $Q_X(D)$ canonically computes $\\underline C_X\\otimes_A^{\\mathbf L}E$ under step 3's identification. Thus the actual source of $t$ is a valid derived tensor representative.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A2 (lemma-tensor-product-K-flat) and Tag 07A4 (lemma-pullback-tensor-product); flat tensor terms in Modules on Sites 0G6Q (lemma-tensor-flats)."
+   }
+  },
+  {
+   "text": "The derived constant/sections adjunction is the induced adjunction specified by [def-kun-constant-projection-morphism]. Apply [lem-sfb-resolving-derived-adjunction-normalization] with $G$ the constant-module functor and $F=\\Gamma(X,-)$. Constants are additive and exact by [def-sfb-site-derived-constant-module-functor], so all homotopy complexes form a left resolving class on which $G$ inverts quasi-isomorphisms. The target module-sheaf category has unbounded K-injective resolutions by [prop-pur-kinjective-resolutions-exist]. Apply the normalized formula to $\\beta:\\underline U_X\\to H$, whose target is K-injective by step 2. Its ordinary transpose is $\\alpha$. The adjunction of [def-kun-constant-projection-morphism] is the one with this normalization: every object of $D(A)$ is $Q_A(M)$ for a complex $M$ and every object of $D(X_{\\mathrm{et}},A)$ is $Q_X$ of a K-injective complex, and morphisms $Q_X(\\underline M_X)\\to Q_X(J)$ with $J$ K-injective are homotopy classes of chain maps $\\underline M_X\\to J$, so the displayed formula fixes the adjunction bijection on all pairs of objects. Therefore, under $Q_A(C_E)\\cong R\\Gamma(X,Q_XH)$, the derived transpose of $Q_X(\\beta)$ is $Q_A(\\alpha)$. Equivalently,\n$$Q_X(\\beta)=\\varepsilon_{Q_XH}\\circ\\underline{Q_A(\\alpha)}_X.$$\nHere the derived-unit comparison at $H$ is the canonical sections identification from step 2. Since $Q_A(\\alpha)$ is the chosen isomorphism $Q_AU\\cong C$, this identifies $Q_X(\\beta)$ with the derived constant/sections counit at $R\\mathcal Hom_A(E,K)$.",
+   "uses": [
+    "def-kun-constant-projection-morphism",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "def-sfb-site-derived-constant-module-functor",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5 (lemma-derived-adjoint-functors), normalized ordinary transpose; Cohomology on Sites 07A6 (lemma-adjoint)."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-hom-kflat-chain-transpose] with its $P=E$, its K-injective target equal to $I$, its arbitrary first complex equal to $\\underline U_X$, and its chain map equal to $\\beta$. The hypotheses are step 1's K-flat flat-term assertion for $E$ and the stipulated K-injectivity of $I$. The lemma says that the derived tensor-Hom transpose of $Q_X(\\beta)$ is represented by $w\\otimes e\\mapsto\\beta(w)(e)$, exactly the map $t$ of step 5, with factor order $\\underline U_X,E$. Combining this with step 7 yields\n$$Q_X(t)=\\operatorname{ev}_{E,K}\\circ(\\varepsilon_{R\\mathcal Hom_A(E,K)}\\otimes 1_E)$$\nunder $Q_AU\\cong C$, the constant-realization identification, and $Q_XI\\cong K$. This is precisely the derived evaluation asserted in the item. The argument applies to every allowed $I,U,\\alpha$, since both cited representative formulas do.",
+   "uses": [
+    "lem-sfb-hom-kflat-chain-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), proof with arbitrary first complex, K-flat second complex and K-injective target."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-kflat-map-factorization] to the chain map $t:D\\to I$. Step 6 verifies both required conditions on $D$: K-flatness and flatness of all terms. We obtain $D\\xrightarrow{u}N\\xrightarrow{c}I$, with $N$ K-flat with flat terms, $c$ a quasi-isomorphism, and a chain homotopy $t\\simeq cu$. The localization in [def-weil-abstract-derived-category] factors through the homotopy category, so the homotopic maps have equal images. Functoriality gives $Q_X(c)Q_X(u)=Q_X(cu)=Q_X(t)$, with the same source and target identifications as in step 8.",
+   "uses": [
+    "lem-pur-kflat-map-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7D (lemma-factor-through-K-flat), including its final flat-terms clause; derived localization through the homotopy category (Derived Categories 05RR)."
+   }
+  },
+  {
+   "text": "Let $f:Z\\to X$ be any scheme morphism. By [lem-weil-pbc-etale-inverse-image-algebraic-structures](1), $f^{-1}$ on sheaves of sets is left adjoint to $f_*$ and commutes with finite limits, so $(f^{-1},f_*)$ is a morphism of topoi $\\operatorname{Sh}(Z_{\\mathrm{et}})\\to\\operatorname{Sh}(X_{\\mathrm{et}})$ in the sense of [lem-weil-pbc-ringed-topos-kflat-pullback]. By [prop-weil-pbc-inverse-image-modules-exact], $f^{-1}A_X\\cong A_Z$, the module inverse image is the ringed-topos pullback $f^{-1}(-)\\otimes_{f^{-1}A_X}A_Z$ for this ring identification, and it is exact. Apply [lem-weil-pbc-ringed-topos-kflat-pullback] separately to $\\underline U_X$, $E$, $D$ and $N$: all four are K-flat with flat terms by steps 1, 3, 6 and 9. Their ordinary pullbacks are consequently K-flat with flat terms. Exactness shows that termwise $f^{-1}$ preserves quasi-isomorphisms: it preserves kernels, images and cokernels, hence cohomology and its isomorphisms. It therefore descends directly to the localization. This descended functor computes its left derived functor, with the identity representative comparison, since every complex is adapted to an exact functor. In particular the four ordinary pullbacks compute the stated derived pullbacks, without any flatness or smoothness assumption on the scheme morphism.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E (lemma-pullback-K-flat); Modules on Sites 04JC (lemma-flat-pullback-exact), specialized to the constant-ring identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-kun-kflat-criteria",
+  "def-pur-derived-internal-hom",
+  "lem-pur-hom-kflat-into-kinjective",
+  "def-kun-rgamma-unbounded",
+  "lem-kun-rgamma-unbounded-well-defined",
+  "lem-pur-hom-complex-global-cochains",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-constant-module-kflat",
+  "lem-sfb-constant-module-flat",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-kun-constant-projection-morphism",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-pur-kflat-map-factorization",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Assembly of 06YQ, 06YS, 0A96, 08J9, 0G7D and 0G7E, with the ordinary chain calculation and the derived-adjunction normalization of derived.tex 09T5; follows the evaluation refinement of lem-pur-external-rhom-cone-pairing."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +226,45 @@
    "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CochainComplex.IsKInjective\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (L : CochainComplex C ℤ) : Prop\", \"doc\": \"A cochain complex `L` is K-injective if any morphism `K ⟶ L`\\nwith `K` acyclic is homotopic to zero.\"}\n  {\"name\": \"CochainComplex.isKInjective_of_injective\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (L : CochainComplex C ℤ) (d : ℤ) [L.IsStrictlyGE d] [∀ (n : ℤ), CategoryTheory.Injective (L.X n)] : L.IsKInjective\", \"doc\": \"\"}\n  {\"name\": \"HomotopyEquiv.isKInjective\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {L₁ L₂ : CochainComplex C ℤ} (e : HomotopyEquiv L₁ L₂) [L₁.IsKInjective] : L₂.IsKInjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.isKInjective_of_iso\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {L₁ L₂ : CochainComplex C ℤ} (e : L₁ ≅ L₂) [L₁.IsKInjective] : L₂.IsKInjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.isKInjective_iff_of_iso\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {L₁ L₂ : CochainComplex C ℤ} (e : L₁ ≅ L₂) : L₁.IsKInjective ↔ L₂.IsKInjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (K : CochainComplex C ℕ) [∀ (n : ℕ), CategoryTheory.Injective (K.X n)] : CochainComplex.IsKInjective (HomologicalComplex.extend K ComplexShape.embeddingUpNat)\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.instIsKInjectiveObjIntShiftFunctor\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (L : CochainComplex C ℤ) [hL : L.IsKInjective] (n : ℤ) : L⟦n⟧.IsKInjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.isKInjective_shift_iff\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] (L : CochainComplex C ℤ) (n : ℤ) : L⟦n⟧.IsKInjective ↔ L.IsKInjective\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.IsKInjective.eq_δ_of_cocycle\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} {n : ℤ} (z : CochainComplex.HomComplex.Cocycle K L n) [L.IsKInjective] (hK : HomologicalComplex.Acyclic K) (m : ℤ) (hm : m + 1 = n) : ∃ α, CochainComplex.HomComplex.δ m n α = ↑z\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.IsKInjective.eq_δ_of_cocycle'\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} {n : ℤ} (z : CochainComplex.HomComplex.Cocycle K L n) [L.IsKInjective] (hL : HomologicalComplex.Acyclic L) (m : ℤ) (hm : m + 1 = n) : ∃ α, CochainComplex.HomComplex.δ m n α = ↑z\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.IsKInjective.homotopyZero\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_2} [CategoryTheory.Category.{u_3, u_2} C] [CategoryTheory.Abelian C] {K L : CochainComplex C ℤ} (f : K ⟶ L) (hK : HomologicalComplex.Acyclic K) [L.IsKInjective] : Homotopy f 0\", \"doc\": \"A choice of homotopy to zero for a morphism from an acyclic\\ncochain complex to a K-injective cochain complex.\"}\n  {\"name\": \"CochainComplex.IsKInjective.mk\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.KInjective\", \"type\": \" {C : Type u_1} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Abelian C] {L : CochainComplex C ℤ} (nonempty_homotopy_zero : ∀ {K : CochainComplex C ℤ} (f : K ⟶ L), HomologicalComplex.Acyclic K → Nonempty (Homotopy f 0)) : L.IsKInjective\", \"doc\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "factor.*[Kk].?[Ff]lat|global.?[Hh]om.*eval|eval.*global.?[Hh]om",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern generic injective resolutions or derived fraction representations, not global evaluation with flat K-flat source and homotopy factorization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules a global Hom complex into a K-injective resolution has a flat K-flat replacement and its evaluation chain map factors homotopically through a flat K-flat target",
+   "results": "8 hits: CategoryTheory.injectiveResolutions, CategoryTheory.InjectiveResolution.descHomotopy, CategoryTheory.InjectiveResolution.homotopyEquiv, CochainComplex.IsKProjective.mk, CochainComplex.IsKInjective, CochainComplex.IsKInjective.homotopyZero, CochainComplex.cm5b.i, CochainComplex.cm5b.I_X",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern generic injective resolutions or derived fraction representations, not global evaluation with flat K-flat source and homotopy factorization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.IsKInjective, HomologicalComplex.Hom",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern generic injective resolutions or derived fraction representations, not global evaluation with flat K-flat source and homotopy factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived evaluation from the constant realization of derived global Hom is represented by evaluating cochain maps and factors through a K-flat resolution up to homotopy",
+   "results": "8 hits: DerivedCategory.right_fac, DerivedCategory.left_fac, CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq, CategoryTheory.Functor.rightDerived_map_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern generic injective resolutions or derived fraction representations, not global evaluation with flat K-flat source and homotopy factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of flat sheaves and a K-injective target admit a global Hom complex whose flat K-flat resolution yields derived evaluation and a homotopy factorization through a flat K-flat target",
+   "results": "8 hits: CochainComplex.cm5b, CategoryTheory.InjectiveResolution.extMk_hom, CategoryTheory.InjectiveResolution.Hom.ι'_comp_hom'_assoc, CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.InjectiveResolution.descHomotopyZeroZero, CategoryTheory.InjectiveResolution.rightDerived_app_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern generic injective resolutions or derived fraction representations, not global evaluation with flat K-flat source and homotopy factorization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-external-rhom-cone-pairing",
@@ -92,5 +284,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-global-hom-evaluation-flat-lift",
+  "worker": "stage1",
+  "summary": "Unchanged statement; ten explicit proof steps. Reused the existing flat resolution, constant realization, Hom-cochain, normalized adjunction, tensor, factorization and pullback nodes. Wrote out the signed evaluation differential and the two derived transpose identifications. No new nodes or Mathlib leaves.",
+  "blueprint": "lem-pur-kunneth-supported proof paragraphs 1 and 3, support-triangle tensor and exterior-product identification; via lem-pur-supported-product-localization and lem-pur-external-rhom-cone-pairing, whose proof steps 1 and 3 isolate this global evaluation model.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Unbounded K-injective existence on a small ringed site; no theorem about Kummer cohomology is used. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-kun-kflat-criteria",
+    "why": "Only bounded-above flat implies K-flat, applied to the supplied bounded E. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Only K-injectivity of the Hom complex from K-flat E into K-injective I. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-pur-hom-complex-global-cochains",
+    "why": "Only the degreewise and differential-compatible identification of Hom-complex global sections. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic resolution theorem applied on the one-object site to an A-module complex. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-sfb-constant-module-kflat",
+    "why": "Generic actual constant realization preserves flat-term K-flat complexes. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-sfb-constant-module-flat",
+    "why": "Generic flat-module preservation for actual constant realization. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic additive adjunction lifted termwise to complexes. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic direct-sum total tensor of flat-term K-flat complexes and its localization. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic normalization of derived adjunction transposes, used for exact constants and sections. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-sfb-hom-kflat-chain-transpose",
+    "why": "Generic one-sided tensor-Hom representative formula with factor order and signs fixed. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact constant-coefficient inverse image for arbitrary scheme morphisms. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic flat-term K-flat pullback preservation for ringed topoi. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-kun-rgamma-unbounded-well-defined",
+    "why": "Only independence of RGamma from the chosen representative and K-injective resolution, so that Gamma(X,H) canonically represents C. No node of sk-prop-a1-kummer supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "Only clause (1): f^{-1} on etale sheaves of sets is a finite-limit-preserving left adjoint, the morphism-of-topoi hypothesis of the ringed-topos K-flat pullback lemma. No node of sk-prop-a1-kummer supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-kun-kflat-criteria",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-hom-complex-global-cochains",
+  "lem-pc-kflat-resolution",
+  "lem-sfb-constant-module-kflat",
+  "lem-sfb-constant-module-flat",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-kun-rgamma-unbounded-well-defined",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-e4ed04651",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-e4ed04651 (reviewer sub-agent of L); spot-checked: Read the item in full: an unchanged statement (byte-identical to its Q87 re-split creation, not weakened), 10 steps, 0 new nodes. Also read the statement of every cited node, Stacks 0G7D (sites-cohomology lemma-factor-through-K-flat, including the flat-terms clause) and 07A6, and resolved all step-source tags in tags/tags. There is no SGA. The node is still unsplit in live and side-live. The closure check finds no cycle. Steps checked: 1 (unbounded K-injective; bounded-above flat is K-flat); 3 (lem-pc-kflat-resolution on the one-object trivial site, plus constant K-flat/flat preservation); 4 (termwise adjunction); 5 (recomputed: d_I(α(w)(e))=α(dw)(e)+(-1)^nα(w)(d_E e) matches the total-tensor sign, with no Koszul swap; checked for n=-1,0,1); 6 (total-tensor model); 8 (hom-kflat chain transpose with A=U̲, P=E, target I K-injective, so Q(t)=ev∘(ε⊗1)); 9 (0G7D, and Q factors through K). Edge cases E=0, X=∅, A=0, f=id are fine. Two missing citations repaired in fixes/dag/nodes/sec-smooth-purity/lem-pur-global-hom-evaluation-flat-lift.json. First, C4: step 2 claims Γ(X,H) canonically represents C, but def-kun-rgamma-unbounded leaves independence of the choice to lem-kun-rgamma-unbounded-well-defined, which is now cited. Second, C4: in step 10, lem-weil-pbc-ringed-topos-kflat-pullback needs a morphism of topoi (f^{-1} on sheaves of sets preserving finite limits), which prop-weil-pbc-inverse-image-modules-exact does not state; lem-weil-pbc-etale-inverse-image-algebraic-structures (1) is now cited. Step 7 also gained one sentence explaining why the normalization fixes the adjunction of def-kun-constant-projection-morphism uniquely. proof_deps is again the union of the uses lists, and two generic tool_uses were added. The 13 declared generic tool uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }
