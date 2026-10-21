@@ -22909,3 +22909,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:19 L: merged deliver/NF/det-lem-stratified-lattice-scheme (reviewer FIX; first push; new nodes: 0)
 - 15:19 L: returned deliver/NG/def-per-support-condition (reviewer RETURN: C4/C7 (route lock) and B (cites a dropped node). This is a definition-only split with no new nodes. I read the item, the)
 - 15:20 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 15:20 L: merged deliver/N6/lem-sfb-partial-kummer-boundary-unit-model (reviewer FIX; after a return; new nodes: 4)

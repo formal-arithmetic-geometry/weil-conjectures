@@ -23,9 +23,112 @@
   "lem-sfb-condensed-product-action-inflation",
   "sk-def-sfb-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $J$ as in the statement. Apply [lem-sfb-tame-root-tower-extension] with $I=J$. This supplies affine etale charts, affine pro-etale $U_\\alpha$, their covering $T_\\alpha=U_\\alpha\\times_Y S_J$ of the entire stratum, compatible roots of unity, and a deck-equivariant lisse extension $\\widetilde L$ on the full root tower $\\mathcal T$. Its boundary module is $p_{T_\\alpha}^*M_\\alpha$ with a continuous $E$-representation of $G_J$. Split the coordinates indexed by $J$ into $J_o,J_i$; reordering factors identifies $G_J=G_o\\times G_i$. For $F=\\Omega$ take $C_{\\Omega,\\mathcal T}\\otimes_{C_{E,\\mathcal T}}\\widetilde L$. This remains lisse: on each finite free trivializing cover tensor sends $C_E^d$ to $C_\\Omega^d$. Its restriction to the puncture is the actual pullback of $L_\\Omega$, and its boundary module is $p_{T_\\alpha}^*M_{\\alpha,\\Omega}$ by the same finite-basis computation. Thus the same covering and roots work for both $F$.",
+   "uses": [
+    "lem-sfb-tame-root-tower-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the partial Kummer unit calculation; choice of common charts and equivariant extensions"
+   }
+  },
+  {
+   "text": "All work on $U_\\alpha$ is restriction to a site slice: [lem-weil-proetale-weakly-etale-localization] identifies its small pro-etale site with the slice of that of $Y$. The final slice clause of [lem-sfb-cech-localization-unit-totalization] permits this restriction of the direct-image calculation and of its unit, with the pulled-back rings. Let $\\mathcal T^\\circ\\to W\\times_YU_\\alpha$ be the full root torsor. Its $n$th Cech term is $\\mathcal T^\\circ[(G_o\\times G_i)^n]$ by the torsor identity in [lem-sfb-tame-root-tower-extension]. Apply [lem-sfb-derived-cech-image-totalization] to this cover and the composite $W\\hookrightarrow Y$, followed by restriction to $T_\\alpha$. Retain its compatible first-quadrant resolution as the coherent Cech model throughout the termwise comparisons below; totalization is applied to that model. For $P=(G_o\\times G_i)^n$, [lem-sfb-root-tower-boundary-acyclicity] computes this term as $p_{T_\\alpha}^*R\\underline{\\operatorname{Hom}}_{C_F}(C_F[P],M_{\\alpha,F})$. Its compatibility with profinite families of deck transformations identifies the first face with the action and the other faces with multiplication or deletion of the same coordinates. We therefore obtain the product derived internal bar, not merely its degreewise cohomology. By [lem-sfb-condensed-derived-invariant-bar] its totalization is $p_{T_\\alpha}^*R\\Gamma_{G_o\\times G_i}(M_{\\alpha,F})$. Pullback from the point commutes with these nonnegative total complexes degreewise, since each total degree has only finitely many summands. This calculation is made separately for each $F$ and does not use coefficient naturality to assert an isomorphism of derived scalar-comparison maps.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-cech-localization-unit-totalization",
+    "lem-sfb-tame-root-tower-extension",
+    "lem-sfb-derived-cech-image-totalization",
+    "lem-sfb-root-tower-boundary-acyclicity",
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the partial Kummer unit calculation; source object and all parametrized face maps"
+   }
+  },
+  {
+   "text": "For the target use $H=h_*h^*$ on $V$. Both factors are exact and the map $\\mathrm{id}\\to H$ is their actual adjunction unit by [lem-weil-pbc-proetale-ringed-open-closed]. Apply [lem-sfb-cech-localization-unit-totalization] with $f=b$, $g=j$, $t=s_Jv_\\alpha$ and the full root cover of $W$. It identifies the restriction of $u_F=Rj_*(\\eta_{h,Rb_*L_F})$ with the totalization of the same closed unit on the Cech terms. This application uses only $L_F[0]$ and nonnegative resolutions: $Rb_*$ and $Rj_*$ are left t-exact, so all resolution degrees remain nonnegative. In particular no assertion that $h^*$ sends injectives to injectives, and no interchange with an arbitrary unbounded product, is used. Derived direct-image composition and its canonical identifications follow also from [lem-sfb-derived-composition-adjunction-normalization], since the inverse-image functors are exact.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-cech-localization-unit-totalization",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the partial Kummer unit calculation; transport of the actual closed unit through descent"
+   }
+  },
+  {
+   "text": "On the chart $U_\\alpha$, $V$ inverts exactly the outer parameters and its reduced inner closed complement is the union where at least one inner parameter vanishes. This is exactly $V,Z,h$ of [lem-sfb-root-tower-inner-support]; it is the union, not the intersection of the inner components. For each root-nerve term let $f_P:\\mathcal T^\\circ[P]\\to V\\times_YU_\\alpha$ be the structural map, so the $C_n$ in step 3 is $K_P=R(f_P)_*\\widetilde L_F|_{\\mathcal T^\\circ[P]}[0]$. The support functor is applied on this base $V$, after $R(f_P)_*$; it is not moved through a ramified root morphism. Apply that node to the lisse extension from step 1 and each $P=(G_o\\times G_i)^n$. Its equality $\\sigma_P\\circ s^*Ra_*(\\eta_{h,K_P})=\\alpha_P$ identifies each term of the map from step 3 with the identity on the derived internal Hom term of step 2. Naturality for all profinite families is essential here: the first Cech face varies over the deck group. It makes these equalities equalities of cosimplicial diagrams. The source comparison is precisely $\\alpha_P$ by [lem-sfb-root-tower-boundary-acyclicity], so the target is identified with the same product-bar totalization, with the specified augmentation, rather than with an independently chosen isomorphic object.",
+   "uses": [
+    "lem-sfb-root-tower-inner-support",
+    "lem-sfb-root-tower-boundary-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the partial Kummer unit calculation; one-term inner-support calculation and unit equality"
+   }
+  },
+  {
+   "text": "Resolve the product root torsor in two stages. On the puncture, roots for inner coordinates and roots for outer coordinates satisfy separate equations, so adjoining the two sets successively gives the same algebra as adjoining them together: both are the quotient on the combined generators with the same power relations. The two deck actions commute. The associated double nerve has parameters $G_o^a\\times G_i^b$; its diagonal reorders $(G_o\\times G_i)^n$ as $G_o^n\\times G_i^n$. Step 4 applies to these profinite parameters as well. Apply [lem-sfb-condensed-product-bar-comparison] with $A=C_F$, $G=G_o$, $H=G_i$, $N=M_{\\alpha,F}$. It identifies the target product-bar totalization with the iterated totalization (inner first, outer second), hence with $p_{T_\\alpha}^*R\\Gamma_{G_o}R\\Gamma_{G_i}^{G_o}(M_{\\alpha,F})$. Its augmentation normalization says that the map from step 4, after this target identification, is precisely $p_{T_\\alpha}^*\\theta_{M_{\\alpha,F}}$. This proves both object identifications and the arrow identification of the question.",
+   "uses": [
+    "lem-sfb-condensed-product-bar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the partial Kummer unit calculation; two partial root nerves and product-to-iterated comparison"
+   }
+  },
+  {
+   "text": "For clarity this $\\theta$ has exactly the definition in the statement. [lem-sfb-condensed-product-action-inflation] identifies the composite exact inflations and their conjugate with $M^{G_o\\times G_i}=(M^{G_i})^{G_o}$. [lem-sfb-derived-composition-adjunction-normalization] identifies its derived comparison on K-injective representatives with the class of this same identity, preserving the composite adjunctions. Thus the bar augmentation in step 5 has the prescribed ordinary K-injective normalization. To check a morphism $L\\to L'$, refine the two chart covers by their fiber products, choose their two lisse extensions, and use [lem-sfb-root-tower-lisse-morphism-extension] to extend the actual puncture morphism uniquely on the full root tower. It is equivariant: for each deck action the two possible composites restrict to the same puncture map, and uniqueness gives equality; after each profinite base change this is the same uniqueness argument, so it is equivariance as a condensed-group morphism. Restricting to the boundary gives the map of $E$-representations. Ordinary scalar extension gives the map for $\\Omega$. Now the naturality clauses for maps of supplied extensions in the support and acyclicity nodes, and naturality of Cech and bar descent, give commuting squares for every comparison. Their composite proves naturality in $L$. Refinements use the base-change clauses. Different extensions of a fixed puncture module are uniquely isomorphic by the same full-faithfulness statement, so these checks are independent of extension choices. The construction kept $F=E,\\Omega$ on the same charts and used no scalar/direct-image interchange.",
+   "uses": [
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-sfb-root-tower-lisse-morphism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the partial Kummer unit calculation; normalization and naturality"
+   }
+  },
+  {
+   "text": "If $S_J$ is empty, use the empty covering family and the assertion has no members to check. If $J_o=\\varnothing$, the outer group is trivial and its bar and invariants are the identity; the construction reduces to the inner nerve. The hypotheses require $J_i\\ne\\varnothing$, so there is no unsupported claim about an empty inner closed complement. Rank zero gives zero modules and zero complexes throughout. These checks also cover partitions with an empty outer part, and no strata of the stipulated type occur if the whole divisor or inner part is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the partial Kummer unit calculation; edge cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-tame-root-tower-extension",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-cech-localization-unit-totalization",
+  "lem-sfb-derived-cech-image-totalization",
+  "lem-sfb-root-tower-boundary-acyclicity",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-sfb-root-tower-inner-support",
+  "lem-sfb-condensed-product-bar-comparison",
+  "lem-sfb-condensed-product-action-inflation",
+  "lem-sfb-root-tower-lisse-morphism-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), explicit partial Kummer descent expansion using the existing full-root inputs; four smaller missing inputs exposed as statement-only nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +164,31 @@
    "results": "8 hits: groupCohomology.exists_mul_galRestrict_of_norm_eq_one, AlgebraicGeometry.liftCoborder_app, ModelWithCorners.boundary_open, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.Scheme.Hom.liftCoborder_preimage, Profinite.NobelingProof.CC_exact, IsDedekindDomain.selmerGroup.fromUnit_ker",
    "date": "2026-10-21",
    "verdict": "no match: ordinary representations, light condensed modules, invariant ring extensions or unrelated nerve constructions do not state this internal condensed-action/geometric boundary assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The boundary closed adjunction unit for a tame lisse module on a normal crossing pair is the product to iterated derived inertia invariant comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.kerAdjunction_unit_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, AlgebraicGeometry.Scheme.kerAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations do not state this ringed-topos or internal condensed-action assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Kummer\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations do not state this ringed-topos or internal condensed-action assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|tame).*(nerve|invariant)|(nerve|invariant).*(Kummer|tame)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations do not state this ringed-topos or internal condensed-action assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-transverse-tame-open-shriek-exchange",
@@ -87,5 +211,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-partial-kummer-boundary-unit-model",
+  "worker": "stage1",
+  "summary": "Reuses the full-root equivariant extension, parametrized one-term boundary calculation, Cech image totalization and internal invariant bar. Splits off only one-term inner-support restriction, formal localization-unit descent, product/iterated augmented-bar compatibility and lisse morphism extension. Keeps all-continuous E and incomplete Omega coefficients, whole-stratum descent, actual closed unit, and derived internal Hom. Exact all-continuous geometric source remains WANTED. Repair of returned head 296c13790e1: revalidated the current statement of lem-sfb-derived-cech-image-totalization, explicitly retained its coherent first-quadrant resolution in step 2, and distinguished coefficient-comparison naturality from invertibility; the item statement and all four new statements are unchanged.",
+  "blueprint": "Paragraph (3) of main-20261015 direct-images proof, the open-image preservation input below the inherited tame-boundary chain. Ancestor command returns None for the inherited chain; no imported blueprint node states the partial unit calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies a weakly etale chart with its site slice; a generic site tool, not a replacement of the open-image route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Supplies exact closed restriction/direct image and their actual unit for arbitrary coefficient ring sheaves; this unit has no separate ringed-site theorem."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic derived-functor normalization (unit sk-thm-sf-comp-composition): steps 3 and 6 take only its statement that the conjugate of composed exact left adjoints is computed on K-injectives by the underived conjugate; no node of sk-thm-sf-ctf-stability gives it, and the parent lem-sfb-transverse-tame-open-shriek-exchange already records it as a tool use."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-derived-composition-adjunction-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N6-924507437",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-924507437 (reviewer sub-agent of L); spot-checked: Read the item, all seven steps, the four new nodes in full, every cited statement, and main-20261015 direct-images.proof.md paragraph (3); that source is agent-formulated with the exact reference WANTED, which this item inherits. Compared with the returned head 296c13790e1: the four new nodes and the item statement and stmt_deps are byte-identical; only step 2 (two sentences: it keeps the coherent first-quadrant resolution, and coefficient naturality is not used as invertibility) and the split_report summary changed. The earlier FIX that declared a tool use was lost, so I re-apply it. There is no repair note, nothing in the item's closure is in route-pivot-dropped, there is no SGA citation and no cycle. Step 1: the hypotheses of tame-root-tower-extension (I=J) hold, and the scalar extension to Omega is a finite-basis computation. Step 2: the item's T_alpha is the node's S_alpha. Cech terms are T°[(G_o x G_i)^n]. The current derived-cech-image-totalization hypotheses hold (Cartesian p^*C_F, K=L_F[0]). Boundary-acyclicity's v_P is the composite of a and f_P, and its family clause gives the action face. Step 3: ringed-open-closed applies because the open complement is quasi-compact (Noetherian V, finitely many branches); cech-localization-unit-totalization is then used with f=b, g=j, t=s_J v_alpha. Step 4: Z is the union of the inner branches, and sigma_P composed with s^*Ra_*(eta) equals alpha_P, termwise and cosimplicially. Step 5: the augmentation clause of product-bar-comparison turns the arrow into theta. Step 6: theta's normalization comes from product-action-inflation and derived-composition; naturality in L comes from morphism extension. Step 7: the edge cases hold. New nodes: all four are true, strictly smaller than the item and not duplicates. root-tower-inner-support was tested with one inner branch, two inner branches, and inner t1 with outer t2 (Hochschild-Serre-consistent). condensed-product-bar-comparison is formal Eilenberg-Zilber plus Hochschild-Serre. cech-localization-unit-totalization follows from finite diagonals. root-tower-lisse-morphism-extension holds because the local rings are normal domains, T° is dense since U->B is flat, and pi_0(W°)=pi_0(W) for w-contractible W. Batch 5: lem-trf-topos-localization-site-presentation, reached through lem-sfb-derived-cech-image-totalization, is a general topos-presentation fact; its closure adds only def-trf-geometric-morphism. def-trf-strict-normal-crossings-boundary is a general definition already in the base stmt_deps. Neither belongs to the trace-formula or Poincare-duality statements or proofs, so both are accepted. Tool uses: the declared weakly-etale-localization and ringed-open-closed are accepted. FIX: steps 3 and 6 cite lem-sfb-derived-composition-adjunction-normalization (unit sk-thm-sf-comp-composition) without declaring it. I added it to split_report.tool_uses in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-partial-kummer-boundary-unit-model.json, the same repair as 296c; no other field changed.; 1 file(s) fixed by the reviewer"
  }
 }
