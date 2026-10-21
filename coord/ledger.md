@@ -20802,3 +20802,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:51 L: returned deliver/NE/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-finite-field-stratified-perfect-models: l)
 - 07:51 L: returned deliver/Q02/lem-wf-tate-twist-compatibility (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-wf-tate-twist-compatibility: cited node lem-wf-int)
 - 07:52 L: returned deliver/Q95/def-nagata-affine-proj (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED def-nagata-affine-proj: cited node def-nagata-homogene)
+- 07:52 L: returned deliver/Q136/def-nagata-strict-transform-chart-comparison (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED def-nagata-strict-transform-chart-comparison: cited no)
