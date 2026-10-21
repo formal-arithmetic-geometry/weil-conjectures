@@ -6,14 +6,8 @@ Authors: SHEAF group N3
 module
 
 public import Sheaf.Paper.AdicMiddleExtensionConstructible
-public import Sheaf.Paper.CurveWeilMiddleExtension
 public import Sheaf.Paper.CommonStageCompactWeilCohomology
-public import Mathlib.AlgebraicGeometry.Geometrically.Connected
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.Paper.ConstructibleDegreeZeroProperSupport
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.Paper.MiddleExtensionSectionRestriction
 
 /-! # Degree-zero compact-support vanishing for ordinary adic middle extensions

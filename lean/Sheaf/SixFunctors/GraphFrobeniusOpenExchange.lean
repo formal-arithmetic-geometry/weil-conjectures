@@ -5,17 +5,9 @@ Authors: SHEAF group Q16
 -/
 module
 
-public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.Paper.TraceFormulaCoefficientConventions
-public import Sheaf.SixFunctors.SchemeFrobenius
-public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
-public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.SixFunctors.SelectedSchemeGaloisComparison
-public import Sheaf.AlgebraicGeometry.FrobeniusFactorization
-public import Sheaf.AlgebraicGeometry.AbsoluteFrobeniusSite
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange
 public import Sheaf.AlgebraicGeometry.FrobeniusOpenSquare
-public import Sheaf.Paper.IntegralFinitePullbackComposition
 import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
 import Sheaf.SixFunctors.SchemeGaloisPullbackNaturality
 

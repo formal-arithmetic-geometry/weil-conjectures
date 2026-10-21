@@ -6,19 +6,10 @@ Authors: SHEAF group N6
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.Algebra.Algebra.Pi
-public import Mathlib.FieldTheory.Normal.Defs
-public import Mathlib.LinearAlgebra.TensorProduct.Defs
-public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.RingHom.PurelyInseparable
-public import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Sheaf.FieldTheory.NormalFiniteAutSeparableSubfield
 import Sheaf.RingTheory.IntegralFiniteResidueModel
 import WeilConjectures.Mathlib.RingTheory.Etale.FiniteSplitting
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Étale splitting for integral algebras with normal residue extensions

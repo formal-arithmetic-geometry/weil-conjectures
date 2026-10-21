@@ -6,19 +6,12 @@ Authors: SHEAF group Q02
 module
 
 public import Sheaf.Paper.RingedDerivedSliceLocalization
-public import Sheaf.Paper.DerivedAdjunctionShift
-public import Sheaf.CategoryTheory.SiteCoveringAxioms
-public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.CategoryTheory.DerivedCategory.DerivedSquareShiftOnKInjectives
 import Sheaf.CategoryTheory.AdjunctionSquareShiftMate
 import Sheaf.Algebra.Homology.SliceTensorIntegerShiftCompatibility
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
-import Mathlib.CategoryTheory.Adjunction.Whiskering
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 
 /-! # Integer shifts of canonical ringed-slice comparisons
 

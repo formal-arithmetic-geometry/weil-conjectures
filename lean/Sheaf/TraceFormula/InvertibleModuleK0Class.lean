@@ -6,8 +6,6 @@ Authors: SHEAF group Q13
 module
 
 public import Sheaf.RingTheory.FiniteProjectiveK0
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.LinearAlgebra.Pi
 import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import Mathlib.RingTheory.Finiteness.Prod
 

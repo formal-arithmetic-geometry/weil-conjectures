@@ -8,13 +8,11 @@ module
 public import Sheaf.Paper.PurityFiniteSetting
 public import Sheaf.AlgebraicGeometry.FrobeniusDetailed
 public import Sheaf.AlgebraicGeometry.FrobeniusTrivializationPullback
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.AlgebraicGeometry.FactorizedProEtalePullbackPasting
 import Sheaf.AlgebraicGeometry.AbsoluteFrobeniusUniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import Sheaf.SixFunctors.FrobeniusSquareCartesian
-import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-!
 # Scheme and geometric Frobenius of a purity datum

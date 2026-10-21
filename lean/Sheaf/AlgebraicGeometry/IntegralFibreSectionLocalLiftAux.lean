@@ -7,8 +7,6 @@ import Sheaf.Paper.StrictHenselizationPointedMap
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison
 import Sheaf.AlgebraicGeometry.StrictLocalFibreRestrictionCompatibility
 import WeilConjectures.AlgebraicGeometry.IntegralStrictHenselianGeometricFibreSections
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 
 /-! # Integral strict-local fibre comparison
 

@@ -8,7 +8,6 @@ module
 public import Sheaf.Paper.CompletedPrimitiveCounitComparison
 public import Sheaf.Paper.CompletedOperationExpressions
 public import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 
 /-! # Normalized tensor constraints through coherent realization
 

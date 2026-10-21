@@ -5,27 +5,7 @@ Authors: SHEAF group NI
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Sheaf.Paper.AdicCoefficientDatum
-public import Sheaf.Paper.IntegralUniformCoefficient
-public import Sheaf.Paper.ContinuousConstructibleModule
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
-public import Sheaf.Paper.PbcRationalCategory
-public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Paper.RationalModuleRealizationFunctor
-public import Sheaf.Paper.RationalStratumIntegralModels
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
-import Sheaf.Paper.PbcUniformCompleteTriangulated
-import Mathlib.CategoryTheory.Triangulated.Subcategory
-import Mathlib.RingTheory.Localization.BaseChange
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Mathlib.Data.Fin.Tuple.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 
 /-! # Finite integral cone models for rational realization
 

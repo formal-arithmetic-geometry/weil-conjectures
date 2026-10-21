@@ -6,11 +6,7 @@ Authors: SHEAF group K7
 module
 
 public import Sheaf.Paper.WeilCompactSupportCohomology
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.Paper.FiniteWeilIndPushExact
-import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
-import Mathlib.CategoryTheory.EssentialImage
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! Auxiliary finite compactification result.
 Source: blueprint main-20261015, sk-l-dl-general-quasifinite.
