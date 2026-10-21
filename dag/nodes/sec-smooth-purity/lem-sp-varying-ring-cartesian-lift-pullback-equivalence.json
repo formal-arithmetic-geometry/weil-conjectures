@@ -9,15 +9,69 @@
  },
  "stmt_deps": [
   "def-sp-varying-ring-operations",
-  "def-sp-varying-ring-proper-open-arrows",
   "def-pc-fibre-product",
   "def-weil-proper-morphism",
   "def-weil-open-immersion",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $t=s^{-1}:X\\to U$, $F=s^*:\\mathscr S_X\\to\\mathscr S_U$ and $H=t^*:\\mathscr S_U\\to\\mathscr S_X$. For composable $a:A\\to B$, $b:B\\to C$, denote the specified ordinary inverse-image compositor by $c_{a,b}:(b\\circ a)^*\\xrightarrow{\\sim}a^*\\circ b^*$ and the specified identity comparison by $e_A:(\\mathrm{id}_A)^*\\xrightarrow{\\sim}\\mathrm{id}_{\\mathscr S_A}$. Define the two natural isomorphisms by the actual composites $$u_X:HF\\xrightarrow{c_{t,s}^{-1}}(s\\circ t)^*\\xrightarrow{s\\circ t=\\mathrm{id}_X}(\\mathrm{id}_X)^*\\xrightarrow{e_X}\\mathrm{id}_{\\mathscr S_X},\\qquad u_U:FH\\xrightarrow{c_{s,t}^{-1}}(t\\circ s)^*\\xrightarrow{t\\circ s=\\mathrm{id}_U}(\\mathrm{id}_U)^*\\xrightarrow{e_U}\\mathrm{id}_{\\mathscr S_U}.$$ The middle arrows are equality transports. Each arrow is an isomorphism of functors on the ordinary system categories, so these composites are natural isomorphisms there; in particular their components are morphisms of semilinear systems, not merely families of levelwise morphisms.",
+   "uses": [
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001J (definition-equivalence-categories); agent specialization using the specified ordinary comparisons, as in pull_equivalence at lean/Sheaf/AlgebraicGeometry/VaryingRingProperOpenPasting.lean:1000-1009"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-quasi-inverse-hom-bijection] to $F,H,u_X,u_U$: for all objects $M,M\\prime$ of $\\mathscr S_X$, the map $\\operatorname{Hom}(M,M\\prime)\\to\\operatorname{Hom}(FM,FM\\prime)$ is bijective. Every $N\\in\\mathscr S_U$ is isomorphic to $F(HN)$, using the inverse of $(u_U)_N$. Thus all hypotheses of [lem-trf-fully-faithful-ess-surj-equivalence] hold, in a common sufficiently large universe, and $F$ is an equivalence. The already specified functor $H=t^*$ is a quasi-inverse witnessed by $u_X$ and $u_U$, so the inverse comparisons are precisely the composites in step 1. No triangle identity for arbitrary chosen inverse comparisons is assumed.",
+   "uses": [
+    "lem-sf-quasi-inverse-hom-bijection",
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 02C3 (lemma-equivalence-categories); Tag 001J (definition-equivalence-categories)"
+   }
+  },
+  {
+   "text": "Write $P=W\\times_T S$ with projections $b:P\\to W$ and $q:P\\to S$. By [def-pc-fibre-product], $s=(k,r):V\\to P$ has $b\\circ s=k$ and $q\\circ s=r$. Since the given square is cartesian, its vertex $V$ with maps $k,r$ also has this same universal property. It therefore gives a unique $v:P\\to V$ with $k\\circ v=b$ and $r\\circ v=q$. The maps $s\\circ v$ and $\\mathrm{id}_P$ have the same composites with $b,q$, hence are equal by uniqueness for $P$. Likewise $v\\circ s$ and $\\mathrm{id}_V$ have the same composites with $k,r$, hence are equal by uniqueness for $V$. Consequently $s$ is an isomorphism with inverse $v$. This calculation only uses the cartesian hypothesis; the stated properness and quasi-compact open hypotheses need no additional consequence here.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP (definition-fibre-product), and Categories Tag 08N0 (definition-cartesian); agent universal-property calculation as in lift_isIso at lean/Sheaf/AlgebraicGeometry/VaryingRingProperOpenPasting.lean:1019-1028"
+   }
+  },
+  {
+   "text": "Apply steps 1 and 2 to the scheme isomorphism $s:V\\to P$ from step 3 and its inverse $v$. This gives $s^*:\\mathscr S_P\\to\\mathscr S_V$ with quasi-inverse $v^*$ and exactly the same ordinary compositor--equality-transport--identity comparisons. The constructions and the cited equivalence criteria do not tensor along $R_{n+1}\\to R_n$, take derived functors, or restrict the systems. Thus arbitrary rings and arbitrary transition ring maps allowed by [def-sp-varying-ring-operations] suffice, with no coefficient flatness or finiteness assumption.",
+   "uses": [
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 001J (definition-equivalence-categories); agent specialization using the specified ordinary comparisons, as in pull_equivalence at lean/Sheaf/AlgebraicGeometry/VaryingRingProperOpenPasting.lean:1000-1009"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-operations",
+  "lem-sf-quasi-inverse-hom-bijection",
+  "lem-trf-fully-faithful-ess-surj-equivalence",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 001J and 02C3, together with Schemes Tag 01JP; explicit specializations of the ordinary comparisons supplied by def-sp-varying-ring-operations. The two constructions are also visible in the private pull_equivalence and lift_isIso helpers of lean/Sheaf/AlgebraicGeometry/VaryingRingProperOpenPasting.lean:1000-1028."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -210,10 +264,192 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: the hits give fixed-coefficient module pullback, composition and identity comparisons, not the equivalence of actual varying-ring semilinear systems and the identification of the cartesian square lift."
+  },
+  {
+   "tool": "grep",
+   "query": "isoPullback|def mk|ofIso",
+   "results": {
+    "t": "2026-10-21T03:45:35Z",
+    "tool": "grep",
+    "query": "isoPullback|def mk|ofIso",
+    "sub": "CategoryTheory/Equivalence",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Equivalence/Symmetry.lean",
+     "Mathlib/CategoryTheory/Equivalence/Symmetry.lean",
+     "Mathlib/CategoryTheory/Equivalence/Symmetry.lean"
+    ],
+    "digest": "de0a1fd808cb9e2f"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits concern generic categorical equivalence, ordinary single-ring sheaf pullback comparisons, or categorical pullbacks; assembling the specified varying-ring comparisons and proving the scheme lift invertible remain explicit steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A contravariant pseudofunctor sends an isomorphism to an equivalence using its composition and identity isomorphisms",
+   "results": {
+    "t": "2026-10-21T03:45:36Z",
+    "tool": "leansearch",
+    "query": "A contravariant pseudofunctor sends an isomorphism to an equivalence using its composition and identity isomorphisms",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Pseudofunctor.overMapCompPresheafHomIso",
+     "CategoryTheory.Pseudofunctor.mkOfLax'",
+     "CategoryTheory.Pseudofunctor.CoGrothendieck.compIso_inv_app",
+     "CategoryTheory.isoOpEquiv",
+     "CategoryTheory.Equivalence.symmEquivFunctor",
+     "CategoryTheory.Iso.unmop",
+     "CategoryTheory.Pseudofunctor.isoMapOfCommSq",
+     "CategoryTheory.Iso.unop2_op"
+    ],
+    "digest": "5b816a89dfce748c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits concern generic categorical equivalence, ordinary single-ring sheaf pullback comparisons, or categorical pullbacks; assembling the specified varying-ring comparisons and proving the scheme lift invertible remain explicit steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.mk, CategoryTheory.IsPullback.isoPullback",
+   "results": {
+    "t": "2026-10-21T03:45:36Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Equivalence.mk, CategoryTheory.IsPullback.isoPullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits concern generic categorical equivalence, ordinary single-ring sheaf pullback comparisons, or categorical pullbacks; assembling the specified varying-ring comparisons and proving the scheme lift invertible remain explicit steps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image on semilinear systems of sheaves over varying rings along a scheme isomorphism is an equivalence with inverse given by pullback along the inverse scheme map",
+   "results": {
+    "t": "2026-10-21T03:45:37Z",
+    "tool": "leanfinder",
+    "query": "Inverse image on semilinear systems of sheaves over varying rings along a scheme isomorphism is an equivalence with inverse given by pullback along the inverse scheme map",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.conjugateEquiv_pullbackComp_inv",
+     "AlgebraicGeometry.PresheafedSpace.sheafIsoOfIso_inv",
+     "AlgebraicGeometry.Scheme.inv_app",
+     "AlgebraicGeometry.Scheme.Hom.inv_app",
+     "AlgebraicGeometry.Scheme.Modules.inv_app",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app",
+     "SheafOfModules.pushforwardCongr_symm",
+     "AlgebraicGeometry.Scheme.Modules.pushforwardCongr"
+    ],
+    "digest": "2f08073751802409"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits concern generic categorical equivalence, ordinary single-ring sheaf pullback comparisons, or categorical pullbacks; assembling the specified varying-ring comparisons and proving the scheme lift invertible remain explicit steps."
+  },
+  {
+   "tool": "grep",
+   "query": "def mk|def isoPullback|isoPullback_hom_(fst|snd)",
+   "results": {
+    "t": "2026-10-21T03:45:54Z",
+    "tool": "grep",
+    "query": "def mk|def isoPullback|isoPullback_hom_(fst|snd)",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Adhesive/Basic.lean",
+     "Mathlib/CategoryTheory/FiberedCategory/HasFibers.lean",
+     "Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean",
+     "Mathlib/CategoryTheory/FiberedCategory/Fiber.lean",
+     "Mathlib/CategoryTheory/FintypeCat.lean",
+     "Mathlib/CategoryTheory/Localization/SmallHom.lean",
+     "Mathlib/CategoryTheory/Localization/SmallHom.lean",
+     "Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean"
+    ],
+    "digest": "13c047bde74d24aa"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits concern generic categorical equivalence, ordinary single-ring sheaf pullback comparisons, or categorical pullbacks; assembling the specified varying-ring comparisons and proving the scheme lift invertible remain explicit steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence.mk",
+   "results": {
+    "t": "2026-10-21T03:45:54Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.Equivalence.mk",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.Equivalence.mk"
+    ],
+    "digest": "9b33908019e59d97"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: this is the generic quasi-inverse constructor, not the specified varying-ring functors, comparisons, or geometric lift. Existing Mathlib leaves lem-sf-quasi-inverse-hom-bijection and lem-trf-fully-faithful-ess-surj-equivalence are reused."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor with a quasi-inverse and natural isomorphisms of both composites with identity functors is an equivalence; a cartesian square is isomorphic to the chosen pullback",
+   "results": {
+    "t": "2026-10-21T03:45:56Z",
+    "tool": "leanfinder",
+    "query": "A functor with a quasi-inverse and natural isomorphisms of both composites with identity functors is an equivalence; a cartesian square is isomorphic to the chosen pullback",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.CategoricalPullback.functorEquiv",
+     "CategoryTheory.ChosenPullbacksAlong.iso",
+     "CategoryTheory.Limits.CategoricalPullback.functorEquiv_inverse_obj_obj_iso_hom",
+     "CategoryTheory.Limits.CategoricalPullback.functorEquiv_functor_obj_iso_hom_app",
+     "CategoryTheory.Functor.IsEquivalence.mk'",
+     "CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.iso",
+     "CategoryTheory.Square.IsPullback.iff_of_equiv",
+     "CategoryTheory.Limits.CategoricalPullback.functorEquiv_counitIso_hom_app_fst_app"
+    ],
+    "digest": "7e9d3c0d1fcf54e4"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits concern generic categorical equivalence, ordinary single-ring sheaf pullback comparisons, or categorical pullbacks; assembling the specified varying-ring comparisons and proving the scheme lift invertible remain explicit steps."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp_inv|def pullbackComp|def pullbackId",
+   "results": {
+    "t": "2026-10-21T03:47:00Z",
+    "tool": "grep",
+    "query": "conjugateEquiv_pullbackComp_inv|def pullbackComp|def pullbackId",
+    "sub": "Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+    "ok": true,
+    "n_hits": 3,
+    "note": "",
+    "top": [
+     "139",
+     "167",
+     "177"
+    ],
+    "digest": "81afbb1e7f7b7bd5"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits concern generic categorical equivalence, ordinary single-ring sheaf pullback comparisons, or categorical pullbacks; assembling the specified varying-ring comparisons and proving the scheme lift invertible remain explicit steps."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-varying-ring-proper-open-pasting",
@@ -225,7 +461,7 @@
  "blueprint": {
   "from": {
    "node": "det-sp-tower-gluing",
-   "place": "Local pairs: identifying the canonical lift for a cartesian proper/open square, and the ordinary inverse-image equivalence used to make its clopen projection invertible.",
+   "place": "det-sp-tower-gluing, clause 2 (representing pairs and their unique isomorphisms), through the local proper/open compactification calculus: ordinary pullback along an isomorphism and identification of the lift for a cartesian proper/open square.",
    "via": [
     "lem-sp-varying-ring-proper-open-pasting",
     "lem-sp-coefficient-tower-shriek-calculus"
@@ -233,5 +469,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-varying-ring-cartesian-lift-pullback-equivalence",
+  "worker": "stage1",
+  "group": "Q30",
+  "summary": "Wrote the two specified ordinary inverse comparisons and checked their domains; reused the existing general Mathlib Hom-bijection and equivalence-criterion leaves. Constructed the inverse of the cartesian lift by the two universal properties, with both inverse identities written out. Removed the unused proper-open-arrows statement dependency. No statement change and no new nodes.",
+  "blueprint": "Realizes the local isomorphism comparison needed by det-sp-tower-gluing clause 2 through the proper/open calculus, following the existing from/via chain; the chapter and unit routes are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-b9df962de",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-b9df962de (reviewer sub-agent of L); spot-checked: I read the item and all four cited nodes in full; the delivery has no new nodes and the statement is byte-identical to base, where the item was unsplit with an empty proof. Step 1 checked: def-sp-varying-ring-operations gives inverse-image compositors that are isomorphisms (adjoint comparisons of the fibre-product direct-image compositor) plus the identity normalizations. u_X=e_X∘transport∘c_{t,s}^{-1}:HF→id and u_U:FH→id have the right sources and targets. Step 2: the cited Mathlib leaves lem-sf-quasi-inverse-hom-bijection and lem-trf-fully-faithful-ess-surj-equivalence apply correctly, but they are redundant because Stacks 001J (categories.tex:351) already gives the equivalence from step 1; advisory only. Step 3 is the correct two-uniqueness proof that the canonical lift (k,r):V→W×_T S of a cartesian square is an isomorphism (def-pc-fibre-product, Tag 08N0). Step 4 is substitution. Removing def-sp-varying-ring-proper-open-arrows from stmt_deps is correct: the statement uses no clopen projection or exchange arrow, the item has no lean record, and the citer proper-open-pasting uses only the unchanged statement. Source tags 0F7B, 001J, 02C3, 08N0 and 01JP match their labels; 0F7B is context only, and the Lean helpers pull_equivalence:1000 and lift_isIso:1019 exist. Edge cases checked: identity s, empty schemes, zero ring, non-flat transitions such as Z/4→Z/2. No duplicate: the pro-étale isomorphism inverse-image and finite-ring derived pullback-equivalence nodes cover different categories. Batch-5 flag: lem-trf-fully-faithful-ess-surj-equivalence is a generic category-theory Mathlib leaf (Functor.asEquivalence, Equivalence.lean:642) whose only stmt_dep is def-nagata-category and which has no proof deps, so it is not part of the trace-formula or Poincaré-duality proofs; accepted. No SGA citation, no tool_uses."
  }
 }
