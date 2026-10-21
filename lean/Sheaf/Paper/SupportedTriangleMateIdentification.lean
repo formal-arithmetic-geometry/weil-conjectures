@@ -10,15 +10,9 @@ public import Sheaf.Paper.PurEtaleScalarMateProjection
 public import Sheaf.Paper.EtaleUnboundedRestrictionComparison
 public import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
+import Mathlib.CategoryTheory.Triangulated.Adjunction
 import WeilConjectures.SixFunctors.OpenClosed.Derived
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.CategoryTheory.Sites.OrientedClosedBaseLocalization
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
@@ -115,6 +109,82 @@ def scalarSupportClosedMate
         ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K)) ≫
       (scalarExtension φ P).map
         ((Adjunction.ofIsLeftAdjoint (R(lowerStar (ModuleCat.{u + 1} A) i))).counit.app K))
+
+-- Abstract the chosen derived functors during diagram elaboration.
+attribute [local irreducible] Functor.leftAdjoint Functor.rightAdjoint
+  Functor.leftDerivedFunctor Functor.mapDerivedCategory
+  upperStar lowerStar
+
+private theorem scalarExtension_additive
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (P : Scheme.{u}) : (scalarExtension φ P).Additive :=
+  (Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ)).left_adjoint_additive
+
+private theorem scalarExtension_triangulated
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (P : Scheme.{u}) : (scalarExtension φ P).IsTriangulated := by
+  let adj : scalarExtension φ P ⊣
+      Sheaf.derivedRestrictScalars P.smallEtaleTopology φ :=
+    Adjunction.ofIsRightAdjoint _
+  have : adj.CommShift ℤ := adj.commShift_of_rightAdjoint ℤ
+  exact adj.isTriangulated_leftAdjoint
+
+private theorem restriction_reflects_iso
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (P : Scheme.{u})
+    {X Y : DerivedCategoryModule B P} (f : X ⟶ Y)
+    [IsIso ((Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).map f)] : IsIso f := by
+  rw [_root_.DerivedCategory.isIso_iff]
+  intro n
+  have : IsIso ((Sheaf.restrictScalars P.smallEtaleTopology φ).map
+      ((_root_.DerivedCategory.homologyFunctor _ n).map f)) :=
+    (NatIso.isIso_map_iff
+      ((Sheaf.restrictScalars P.smallEtaleTopology φ).mapDerivedCategoryHomologyFunctorIso n)
+      f).2 (by rw [Functor.comp_map]; infer_instance)
+  exact isIso_of_reflects_iso _ (Sheaf.restrictScalars P.smallEtaleTopology φ)
+
+private theorem scalar_open_zero
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {P U : Scheme.{u}} (j : U ⟶ P)
+    (X : DerivedCategoryModule A P)
+    (hX : IsZero (L(upperStar (ModuleCat.{u + 1} A) j).obj X)) :
+    IsZero (L(upperStar (ModuleCat.{u + 1} B) j).obj
+      ((scalarExtension φ P).obj X)) := by
+  have := scalarExtension_additive φ U
+  exact ((scalarExtension φ U).map_isZero hX).of_iso ((scalarPullbackIso φ j).app X)
+
+private theorem supported_open_orthogonal
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) {Z P U : Scheme.{u}} (i : Z ⟶ P) (j : U ⟶ P)
+    [IsOpenImmersion j] (hij : Disjoint (Set.range j.base) (Set.range i.base))
+    (M : DerivedCategoryModule A Z) (N : DerivedCategoryModule B U) :
+    Subsingleton
+      ((((Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).obj
+        ((scalarExtension φ P).obj (R(lowerStar (ModuleCat.{u + 1} A) i).obj M)))
+          ⟦(1 : ℤ)⟧) ⟶
+        (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).obj
+          (R(lowerStar (ModuleCat.{u + 1} B) j).obj N)) := by
+  let S := (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).obj
+    ((scalarExtension φ P).obj (R(lowerStar (ModuleCat.{u + 1} A) i).obj M))
+  have hz : IsZero (L(upperStar (ModuleCat.{u + 1} A) j).obj
+      (R(lowerStar (ModuleCat.{u + 1} A) i).obj M)) :=
+    (isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_range
+      (ModuleCat.{u + 1} A) j i hij M).of_iso
+        ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) j).app _)
+  have hzB := scalar_open_zero φ j _ hz
+  have hzS : IsZero (L(upperStar (ModuleCat.{u + 1} A) j).obj S) :=
+    ((Sheaf.derivedRestrictScalars U.smallEtaleTopology φ).map_isZero hzB).of_iso
+      ((scalarRestrictionPullbackIso φ j).app _)
+  have hzShift : IsZero (L(upperStar (ModuleCat.{u + 1} A) j).obj (S⟦(1 : ℤ)⟧)) :=
+    ((shiftFunctor _ (1 : ℤ)).map_isZero hzS).of_iso
+      ((L(upperStar (ModuleCat.{u + 1} A) j).commShiftIso (1 : ℤ)).app S)
+  have hzFinal := scalar_open_zero φ j _ hzShift
+  let adj := (Adjunction.ofIsRightAdjoint
+    (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ)).comp
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) j)
+  refine ⟨fun f g ↦ (adj.homEquiv (S⟦(1 : ℤ)⟧) N).symm.injective ?_⟩
+  exact hzFinal.eq_of_src _ _
 
 /-- Every indicated support-triangle comparison has the counit-defined first component.
 The first equality is before transport; the second expresses the same equality after
@@ -215,6 +285,55 @@ theorem scalarSupportTriangle_mate_identification
           ((Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ).map
             (scalarSupportClosedMate φ i K))) ∧
     (IsIso (scalarSupportOpenProjection φ j K) → IsIso (scalarSupportClosedMate φ i K)) := by
-  sorry
+  let TP := scalarExtension φ P
+  let RP := Sheaf.derivedRestrictScalars P.smallEtaleTopology φ
+  let IB := R(lowerStar (ModuleCat.{u + 1} B) i)
+  let M := (R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K
+  let q := (scalarMate φ i).app M
+  let b := scalarSupportClosedMate φ i K
+  let adj := Adjunction.ofIsLeftAdjoint IB
+  have hb : IB.map b ≫ adj.counit.app (TP.obj K) =
+      inv q ≫ TP.map
+        ((Adjunction.ofIsLeftAdjoint
+          (R(lowerStar (ModuleCat.{u + 1} A) i))).counit.app K) := by
+    exact (adj.homEquiv _ _).symm_apply_apply _
+  have hsub := supported_open_orthogonal φ i j
+    (by rw [_hij]; exact disjoint_compl_right)
+    M (D(upperStar (ModuleCat.{u + 1} B) j).obj (TP.obj K))
+  have ht := RP.map_distinguished _ _hδB
+  have : Subsingleton
+      ((((TP ⋙ RP).mapTriangle.obj (scalarSupportTriangle A i j K δA)).obj₁)⟦(1 : ℤ)⟧ ⟶
+        (RP.mapTriangle.obj (scalarSupportTriangle B i j (TP.obj K) δB)).obj₃) := hsub
+  have heq : τ.hom₁ = RP.map q ≫ RP.map (IB.map b) := by
+    apply Triangle.cancel_mor₁_of_subsingleton ht
+    change τ.hom₁ ≫ RP.map (adj.counit.app (TP.obj K)) =
+      (RP.map q ≫ RP.map (IB.map b)) ≫ RP.map (adj.counit.app (TP.obj K))
+    rw [Category.assoc, ← RP.map_comp, hb, RP.map_comp,
+      ← Category.assoc, ← RP.map_comp, IsIso.hom_inv_id, RP.map_id, Category.id_comp]
+    have hc := τ.comm₁
+    change RP.map (TP.map
+      ((Adjunction.ofIsLeftAdjoint
+        (R(lowerStar (ModuleCat.{u + 1} A) i))).counit.app K)) ≫ τ.hom₂ =
+      τ.hom₁ ≫ RP.map (adj.counit.app (TP.obj K)) at hc
+    rw [_hτ₂] at hc
+    change RP.map (TP.map
+      ((Adjunction.ofIsLeftAdjoint
+        (R(lowerStar (ModuleCat.{u + 1} A) i))).counit.app K)) ≫ 𝟙 _ =
+      τ.hom₁ ≫ RP.map (adj.counit.app (TP.obj K)) at hc
+    simpa only [Category.comp_id] using hc.symm
+  refine ⟨heq, ?_, ?_⟩
+  · rw [heq, Category.assoc]
+    exact congrArg (fun t ↦ RP.map q ≫ t)
+      ((scalarRestrictionDirectImageMap φ i).naturality b)
+  · intro hop
+    have : IsIso τ.hom₂ := by rw [_hτ₂]; infer_instance
+    have : IsIso τ.hom₃ := by rw [_hτ₃]; infer_instance
+    have := scalarExtension_triangulated φ P
+    have : IsIso τ.hom₁ := isIso₁_of_isIso₂₃ τ
+      ((TP ⋙ RP).map_distinguished _ _hδA) ht inferInstance inferInstance
+    have : IsIso (RP.map q ≫ RP.map (IB.map b)) := heq ▸ inferInstance
+    have : IsIso (RP.map (IB.map b)) := IsIso.of_isIso_comp_left (RP.map q) _
+    have : IsIso (IB.map b) := restriction_reflects_iso φ P _
+    exact isIso_of_reflects_iso b IB
 
 end AlgebraicGeometry.Etale

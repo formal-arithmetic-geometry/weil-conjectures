@@ -18,118 +18,82 @@
  ],
  "proof": [
   {
-   "text": "Work in $D(P_{\\mathrm{et}},A)$. Put $M=Ri_A^!L$, $N=Ri_B^!T_PL$, $S=\\operatorname{Res}_P(T_Pi_{*,A}M)$, $F=\\operatorname{Res}_P(i_{*,B}N)$, $K=\\operatorname{Res}_P(T_PL)$ and $O=\\operatorname{Res}_P(Rj_{*,B}j^*T_PL)$. The target triangle is $F\\xrightarrow{e}K\\to O\\to F[1]$, with $e=\\operatorname{Res}_P(\\epsilon_{i,B})$. Both rows of the assumed comparison are distinguished: scalar extension is exact by [lem-pur-derived-change-of-rings], restriction is exact by [lem-pur-sheaf-ring-derived-coefficient-adjunction], and exact restriction preserves triangles by [lem-weil-pbc-exact-functor-derived-factorization]. Their underlying support triangles and the counit and open-adjunction normalizations are supplied by [lem-exc-closed-support-triangle]. Write $a:S\\to F$ for the given first component and $s=\\operatorname{Res}_P(T_P\\epsilon_{i,A}):S\\to K$. The first square of the hypothesized triangle morphism is exactly $e a=s$.",
+   "text": "Use the actual coefficient adjunction scalarExtension adjoint derivedRestrictScalars. Additivity of its right adjoint gives additivity of scalar extension. Equip scalar extension with the published adjunction-compatible shift structure; the adjoint of exact restriction is triangulated. Thus scalar extension followed by restriction preserves the A-support triangle, and restriction preserves the B-support triangle.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
     "lem-pur-sheaf-ring-derived-coefficient-adjunction",
     "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-exc-closed-support-triangle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Counit-defined transpose and locality; explicit scalar support-triangle argument, setup"
-   }
+   "elementary": false
   },
   {
-   "text": "By the defining transpose under $i_{*,B}\\dashv Ri_B^!$ [lem-exc-closed-ambient], the map $b_i:T_ZM\\to N$ satisfies\n$$\\epsilon_{i,B}\\circ i_{*,B}(b_i)=T_P\\epsilon_{i,A}\\circ q_i^{-1}.$$\nDefine $h=\\operatorname{Res}_P(i_{*,B}b_i)\\circ\\operatorname{Res}_P(q_i):S\\to F$. Applying the functor $\\operatorname{Res}_P$ to the preceding equality and composing on the right with $\\operatorname{Res}_P(q_i)$ gives $e h=s$, since $q_i^{-1}q_i=1$. This only applies a functor to an equality; it requires no injectivity of its map on morphisms.",
+   "text": "Put M=Ri_A!K, q=(scalarMate phi i)_M, b=scalarSupportClosedMate phi i K, and RP=derived restriction on P. The inverse Hom equivalence for i_*B adjoint Ri_B! gives i_*B(b);epsilon_B=q^(-1);T(epsilon_A). Apply RP and precompose with RP(q). The result has the same composite with RP(epsilon_B) as tau.hom1, by the first square and tau.hom2=1.",
    "uses": [
     "lem-exc-closed-ambient"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Existence and uniqueness: defining counit equation for the transpose"
-   }
+   "elementary": true
   },
   {
-   "text": "The isomorphism $q_i$ identifies $S$ with $i_{*,A}\\operatorname{Res}_Z(T_ZM)$. Here the interchange of $i_*$ and restriction is the sectionwise identity on module sheaves, applied termwise: both functors are exact, restriction by [lem-pur-sheaf-ring-derived-coefficient-adjunction] and closed direct image by [lem-trf-oriented-closed-base-localization]. [lem-weil-pbc-exact-functor-derived-factorization] makes this identity valid on all derived objects, even if $T_ZM$ is not bounded below. Therefore $j^*S=0$ by [lem-exc-derived-open-closed-vanishing]. The target open term is canonically $O\\cong Rj_{*,A}\\operatorname{Res}_U(j^*T_PL)$ by [lem-sbc-canonical-restrict-scalars-functor-comparisons]; this use of the bounded-below comparison is permitted by the hypotheses on the $B$-triangle. The open adjunction $j^*\\dashv Rj_{*,A}$ in [lem-exc-closed-support-triangle] now gives\n$$\\operatorname{Hom}(S[1],O)\\cong\\operatorname{Hom}(j^*(S[1]),\\operatorname{Res}_U j^*T_PL)=0.$$\nIndeed $j^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact], so its derived functor commutes with shifts by [lem-weil-pbc-exact-functor-derived-factorization], and $j^*(S[1])=(j^*S)[1]=0$.",
+   "text": "Let E=i_*A M and S=Res_P(T_P E). Disjointness gives Lj_A* E=0. The canonical scalar/pullback isomorphism gives Lj_B*(T_P E)=0, and the exact restriction/pullback isomorphism gives Lj_A* S=0. Commutation with shifts gives Lj_A*(S[1])=0. Apply the scalar/pullback isomorphism again to obtain Lj_B*(T_P(S[1]))=0. Compose T_P adjoint Res_P with Lj_B* adjoint Rj_*B. It identifies Hom_A(S[1],Res_P Rj_*B N) with Hom_B(Lj_B*T_P(S[1]),N), a subsingleton for every N. This avoids any direct-image/restriction comparison or boundedness requirement.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-trf-oriented-closed-base-localization",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-exc-derived-open-closed-vanishing",
+    "def-pur-etale-scalar-pullback-iso",
     "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-    "lem-exc-closed-support-triangle",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-exc-derived-open-closed-vanishing",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), with etale-cohomology.tex Tag 04CA and the bounded-below coefficient comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Steps 1 and 2 give $e(a-h)=0$. Apply [lem-weil-pbc-hom-into-triangle-exact] to the backwards rotation $O[-1]\\to F\\xrightarrow{e}K\\to O$ of the target triangle. Exactness says that $a-h:S\\to F$ factors through $O[-1]$. The shift equivalence identifies $\\operatorname{Hom}(S,O[-1])$ with $\\operatorname{Hom}(S[1],O)$, which is zero by Step 3. Thus $a=h$. After identifying the source using $\\operatorname{Res}(q_i)$, this reads $\\operatorname{Res}_P(i_{*,B}b_i)$; naturality of the canonical restriction/direct-image comparison identifies it with $i_{*,A}\\operatorname{Res}_Z(b_i)$, exactly the asserted first map. The source-side interchange is the termwise identity already checked in Step 3; the target uses the bounded-below canonical comparison of [lem-sbc-canonical-restrict-scalars-functor-comparisons], since $N$ is bounded below.",
+   "text": "Apply Triangle.cancel_mor1_of_subsingleton to the restricted B-support triangle and Step 3, with N=j_B*T_PK. This is the Hom exactness cancellation lemma: the difference factors through the negative shift of the third vertex and vanishes. The equal counit composites from Step 2 imply tau.hom1=RP(q);RP(i_*B(b)). Naturality of scalarRestrictionDirectImageMap at b proves the transported equality without needing that comparison to be invertible.",
    "uses": [
     "lem-weil-pbc-hom-into-triangle-exact",
     "lem-sbc-canonical-restrict-scalars-functor-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0149 (lemma-representable-homological), applied to the backwards-rotated target triangle"
-   }
+   "elementary": false
   },
   {
-   "text": "Assume now the open coefficient projection is invertible. In the given morphism of distinguished triangles, the middle component is $1_K$ and the right component is this invertible projection after restriction. [lem-sf-triangle-morphism-iso] implies that $a$ is invertible. Step 4 and invertibility of $q_i$ therefore show that $i_{*,A}\\operatorname{Res}_Z(b_i)$ is invertible.",
+   "text": "If the open coefficient projection is invertible, tau.hom2 and tau.hom3 are invertible. Triangle two-of-three makes tau.hom1 invertible. The identification in Step 4 and invertibility of RP(q) make RP(i_*B(b)) invertible.",
    "uses": [
     "lem-sf-triangle-morphism-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014A (lemma-third-isomorphism-triangle)"
-   }
+   "elementary": false
   },
   {
-   "text": "For a constant coefficient ring, [lem-trf-oriented-closed-base-localization] gives the sheaf counit isomorphism $i^*i_*\\cong1$ and exactness of $i_*$. The functor $i^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact]. Apply these functors termwise and descend using [lem-weil-pbc-exact-functor-derived-factorization]. The same natural counit isomorphism gives $i^*i_*\\cong1$ on ordinary derived categories, since it is an isomorphism of complexes in every representative. Applying $i^*$ to the invertible morphism of Step 5 and using its naturality gives that $\\operatorname{Res}_Z(b_i)$ is invertible.",
+   "text": "Exact restriction commutes with all derived homology functors. Since sheaf restriction reflects isomorphisms, the unbounded derived homology criterion shows it reflects isomorphisms too. Hence i_*B(b) is invertible. Closed direct image is fully faithful on sheaves and preserves K-injectives; its total right derived functor is fully faithful and therefore reflects isomorphisms. Consequently b is invertible. This avoids descending the closed inverse/direct-image counit through restriction.",
    "uses": [
-    "lem-trf-oriented-closed-base-localization",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 08M3 (lemma-i-star-equivalence), constant-ring closed subtopos; termwise counit descent"
-   }
-  },
-  {
-   "text": "Exactness of restriction [lem-pur-sheaf-ring-derived-coefficient-adjunction] and [lem-weil-pbc-exact-functor-complex-cohomology] identify $H^r(\\operatorname{Res}_Z b_i)$ with $\\operatorname{Res}_Z H^r(b_i)$ for every integer $r$, by computing on representatives (and hence also on roofs). These are isomorphisms by Step 6. Restriction keeps the same underlying sheaves and module maps [def-pc-sheaf-restrict-scalars]. It reflects isomorphisms of module sheaves: the inverse of a bijective $B$-linear map is $B$-linear, since $f(bf^{-1}y)=by=f(f^{-1}(by))$. Thus every $H^r(b_i)$ is invertible. [lem-weil-pbc-unbounded-derived-iso-cohomology] makes $b_i$ invertible. This argument uses conservativity on objects and cohomology, not faithfulness on derived Hom sets, and imposes no flatness on $B/A$.",
-   "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
     "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-exc-kinjective-derived-fully-faithful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RT (lemma-acyclic), with homology.tex Tag 010N (lemma-exact-functor)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-sheaf-restrict-scalars",
+  "def-pur-etale-scalar-pullback-iso",
   "lem-exc-closed-ambient",
   "lem-exc-closed-support-triangle",
   "lem-exc-derived-open-closed-vanishing",
-  "lem-pur-derived-change-of-rings",
+  "lem-exc-kinjective-derived-fully-faithful",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons",
   "lem-sf-triangle-morphism-iso",
-  "lem-trf-oriented-closed-base-localization",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-hom-into-triangle-exact",
   "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "prop-openclosed-lowerstar-fully-faithful"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "B9",
+  "date": "2026-10-21",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-  "place": "Counit-defined coefficient transpose and locality; agent-written support-triangle comparison using Stacks Tags 07A6, 0149, 014A, 04CA, 08M3, 010N, 05RT."
+  "place": "Existence and Locality; coefficient adjunction and scalar/pullback transport give supported/open orthogonality directly. The existing cancellation lemma, triangle two-of-three, homology conservativity and fully faithful derived closed direct image complete the proof."
  },
  "mathlib_searches": [
   {
@@ -278,11 +242,8 @@
   "lem-exc-closed-ambient",
   "lem-exc-closed-support-triangle",
   "lem-exc-derived-open-closed-vanishing",
-  "lem-pur-derived-change-of-rings",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
-  "lem-trf-oriented-closed-base-localization",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -316,5 +277,15 @@
   "group": "NS",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN of 4cf6c250. Item module byte-identical (sha256 9755d6a1), prior review found it correct apart from H2. Item stmt_dep lem-pur-etale-scalar-mate-projection replaced by new existing:true def node def-pur-etale-scalar-mate owning AlgebraicGeometry.Etale.scalarMate; statement verbatim to live PurEtaleScalarMateProjection def (mateEquiv of scalarPullbackIso.hom, real data), TeX direction/mate formula matches, Stacks 07A7/0GL6 source, no extra hypotheses; 6 stmt_deps exist live, no cycle (DFS 407 nodes, item unreachable); no other def owner (same pattern as landed def-pur-etale-scalar-pullback-iso). Live item lean null; delivery adds lean + 2 used stmt_deps only. nt_compile --json clean 35.3 s. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B9",
+  "result": "pass",
+  "landing": "20261021T134314-L-813842",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
