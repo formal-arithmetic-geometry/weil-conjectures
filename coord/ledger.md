@@ -22833,3 +22833,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:39 L: merged deliver/P1/Sheaf.AlgebraicGeometry.NormalTopologicallyNoetherianComponents (stage 3; reviewer PASS; first push; landing 20261021T143937-L-26692 (proof); batch 20261021T143835; modules 1; new nodes 0)
 - 14:39 L: merged deliver/P6/Sheaf.Paper.EtaleWeilSheafEquivalence (stage 3; reviewer PASS; first push; landing 20261021T143941-L-27799 (interface); batch 20261021T143835; modules 8; new nodes 7; change records: coord/changes/P6-etale-weil-representation-interface.md)
 - 14:39 L: merged deliver/N0/lem-zl-weil-generic-lissity (stage 2; reviewer PASS; parallel immutable checks)
+- 14:39 L: merged deliver/R9/Sheaf.AlgebraicGeometry.AbelianArbitrarySchemeUntensoredBaseChange (stage 3; reviewer PASS; first push; landing 20261021T143946-L-29085 (proof); batch 20261021T143835; modules 1; new nodes 0)
