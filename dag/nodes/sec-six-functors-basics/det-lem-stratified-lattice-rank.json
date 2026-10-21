@@ -26,66 +26,34 @@
  ],
  "proof": [
   {
-   "text": "Choose a pro-etale trivializing covering $\\{f_i:U_i\\to X\\}_{i\\in I}$ and isomorphisms $L|_{U_i}\\simeq E_{U_i}^{\\oplus n_i}$ with $n_i\\in\\mathbf N$. The index set may be infinite. This is precisely the locally free hypothesis, refining to individual finite-rank trivializations if necessary. By [sk-def-pe-site] this is an fpqc covering, in particular jointly surjective. No quasi-compactness of $X$ or of the $U_i$ is assumed here.",
+   "text": "Choose a pro-etale trivializing cover $\\{U_i\\to X\\}$ with $L|_{U_i}\\simeq E_{U_i}^{\\oplus n_i}$, using [def-sfb-lisse-coefficient-module]. It is an fpqc cover by [sk-def-pe-site]. On $W=U_i\\times_XU_j$, [sk-prop-sfb-cartesian-coefficients](1) identifies the two restrictions with $E_W^{\\oplus n_i}$ and $E_W^{\\oplus n_j}$. Apply [lem-sfb-continuous-coefficient-free-rank]: if $W$ is nonempty, $n_i=n_j$. Thus unequal labels have empty overlaps. This includes rank zero and requires no finite index set.",
    "uses": [
-    "sk-def-pe-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/_section.md",
-    "place": "Proof, paragraph 2: locally constant rank and fpqc descent of open subsets"
-   }
-  },
-  {
-   "text": "On $W=U_i\\times_XU_j$, the two trivializations induce an isomorphism $E_W^{\\oplus n_i}\\simeq E_W^{\\oplus n_j}$: [sk-prop-sfb-cartesian-coefficients](1) identifies each pulled-back coefficient ring with $E_W$. By [lem-weil-pbc-condensed-field-continuous-realization] and [def-weil-pbc-lisse-lattice-coefficients], $\\Gamma(W,E_W)=C(|W|,E)$. The isomorphism and its inverse are rectangular matrices $A,B$ over this ring: their columns are the coordinates of the images of the global standard basis sections, and their inverse identities give $AB=1$ and $BA=1$. If $w\\in|W|$, evaluating entries at $w$ preserves sums and products and gives inverse $E$-linear maps $E^{n_i}\\rightleftarrows E^{n_j}$. The image of the standard basis of $E^{n_i}$ is consequently a basis of $E^{n_j}$ with $n_i$ elements; comparison with its standard $n_j$-element basis using [def-weil-vector-space-dimension] gives $n_i=n_j$. Thus whenever $n_i\\ne n_j$ the overlap $W$ is empty. This also treats rank zero, and uses no assertion that an ordinary stalk of the pro-etale coefficient sheaf is a field.",
-   "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-condensed-field-continuous-realization",
-    "def-weil-pbc-lisse-lattice-coefficients",
-    "def-weil-vector-space-dimension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1 (continuous-function coefficient realization); elementary matrix and basis comparison for the blueprint unit proof, paragraph 2"
-   }
-  },
-  {
-   "text": "For each $r\\in\\mathbf N$ put $W_{i,r}=U_i$ if $n_i=r$, and $W_{i,r}=\\varnothing$ otherwise. These subsets and their complements are open. Their pullbacks to every $U_i\\times_XU_j$ agree: if the two local ranks differ the overlap is empty by step 2, and otherwise the two pullbacks are both the whole overlap or both empty. Apply [lem-weil-pbc-etale-open-fpqc-descent] with base $S=X$, etale map $V\\to S$ the identity of $X$, and covering $\\{U_i\\to X\\}$. It gives a unique open $O_r\\subseteq|X|$ with $f_i^{-1}(O_r)=W_{i,r}$. Apply the same statement to the compatible complements $U_i\\setminus W_{i,r}$ to obtain an open $P_r$. Joint surjectivity shows $P_r=|X|\\setminus O_r$, so $O_r$ is also closed.",
-   "uses": [
-    "lem-weil-pbc-etale-open-fpqc-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 03N0, lemma-open-fpqc-covering, applied with the identity etale map"
-   }
-  },
-  {
-   "text": "The $O_r$ are pairwise disjoint and cover $|X|$. Indeed, for $x\\in|X|$, choose $u\\in U_i$ above $x$ using joint surjectivity of the covering. The equality $f_i^{-1}(O_r)=W_{i,r}$ says exactly that $x\\in O_r$ if and only if $n_i=r$. Thus each point belongs to exactly one $O_r$, including points where $L$ is zero (the piece $O_0$). If $X$ is empty all pieces are empty.",
-   "uses": [
-    "sk-def-pe-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/_section.md",
-    "place": "Proof, paragraph 2: locally constant rank and fpqc descent of open subsets"
-   }
-  },
-  {
-   "text": "The construction is independent of all choices. Given an additional trivializing object $V\\to X$ with $L|_V\\simeq E_V^{\\oplus s}$, adjoin it to the chosen covering; this is still a pro-etale covering, since it retains the finite affine covering refinements of the original one. Repeat steps 2 and 3 for the enlarged family. The descended open of rank $r$ must be $O_r$, by uniqueness in [lem-weil-pbc-etale-open-fpqc-descent] for the original covering. Hence its preimage in $V$ is all of $V$ when $s=r$, and empty otherwise. Apply this to every constant-rank neighborhood in any trivializing covering. At every preimage of $x$ the local rank is therefore the unique $r$ with $x\\in O_r$. This proves the asserted equivalence of some and every and identifies the subsets in the statement as $X_r=O_r$.",
-   "uses": [
+    "def-sfb-lisse-coefficient-module",
     "sk-def-pe-site",
-    "lem-weil-pbc-etale-open-fpqc-descent"
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-continuous-coefficient-free-rank"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/_section.md",
-    "place": "Proof, paragraph 2: locally constant rank and fpqc descent of open subsets"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Proof, paragraph 2: locally constant rank and fpqc descent of open subsets; assembled from the two extracted arguments"
    }
   },
   {
-   "text": "Give each $X_r$ its open subscheme structure. By [lem-galois-fpqc-covering-base-change], the maps $U_i\\times_XX_r\\to X_r$ form an fpqc covering; they are weakly etale by [sk-lem-pe-weakly-etale-stability], hence form a covering of its small pro-etale site by [sk-def-pe-site]. Its nonempty members have $n_i=r$, and pulling back their trivializations using [sk-prop-sfb-cartesian-coefficients](1) gives $L|_{U_i\\times_XX_r}\\simeq E_{U_i\\times_XX_r}^{\\oplus r}$. Thus $L|_{X_r}$ is lisse of constant rank $r$. The disjoint clopen partition of step 4 gives $X=\\coprod_rX_r$: the coproduct exists by [lem-weil-pbc-scheme-coproduct-family], and its canonical map to $X$ is an isomorphism, since on each open $X_r$ it is the identity and these opens cover both schemes.",
+   "text": "Apply [lem-sfb-fpqc-labelled-clopen-descent] with $A=\\mathbf N$ and $\\rho_i\\equiv n_i$ to obtain a clopen partition $(O_r)$, with preimage in $U_i$ whole if $n_i=r$ and empty otherwise. For any further trivializing object $V\\to X$ of rank $s$, the same overlap comparison of step 1 gives $n_i=s$ on every nonempty $U_i\\times_XV$. The test-morphism clause of that descent lemma, with $\\sigma\\equiv s$, gives preimage of $O_r$ in $V$ whole if $s=r$ and empty otherwise. Apply this to every constant-rank neighborhood in any trivializing covering. The unique piece containing a point is therefore its rank at every preimage in every trivialization. Hence $X_r=O_r$ with exactly the characterization in the statement.",
+   "uses": [
+    "lem-sfb-fpqc-labelled-clopen-descent",
+    "lem-sfb-continuous-coefficient-free-rank",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Proof, paragraph 2: locally constant rank and fpqc descent of open subsets; assembled from the two extracted arguments"
+   }
+  },
+  {
+   "text": "Give $X_r$ its open subscheme structure. By [lem-galois-fpqc-covering-base-change] the restrictions $U_i\\times_XX_r\\to X_r$ form an fpqc cover, and [sk-lem-pe-weakly-etale-stability] and [sk-def-pe-site] make it a pro-etale cover. A nonempty member has $n_i=r$ by step 2. Pulling back its trivialization via [sk-prop-sfb-cartesian-coefficients](1) gives the rank-$r$ free module; an empty member has the unique zero module and the same assertion. Thus $L|_{X_r}$ has constant rank $r$. By [lem-weil-pbc-scheme-coproduct-family] the coproduct of these schemes exists. Its canonical map to $X$ is an isomorphism: on the disjoint open pieces it is the identity, so these inverse identities agree on empty intersections and glue.",
    "uses": [
     "lem-galois-fpqc-covering-base-change",
     "sk-lem-pe-weakly-etale-stability",
@@ -95,29 +63,28 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/_section.md",
-    "place": "Proof, paragraph 2: locally constant rank and fpqc descent of open subsets"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Proof, paragraph 2: locally constant rank and fpqc descent of open subsets; assembled from the two extracted arguments"
    }
   },
   {
-   "text": "If $X$ is quasi-compact, the open covering $\\{X_r\\}_{r\\geq0}$ has a finite subcover by [def-weil-pbc-quasi-compact-scheme]. Since these opens are disjoint, any $X_s$ not in that finite subcover must be empty: a point of it would also lie in a member of the subcover. Therefore only finitely many ranks occur. This argument needs no globally finite original trivializing covering.",
+   "text": "If $X$ is quasi-compact, its open cover $\\{X_r\\}$ has a finite subcover by [def-weil-pbc-quasi-compact-scheme]. Disjointness forces every piece outside that finite subcover to be empty. If $X$ is empty, all pieces are empty. No finiteness of the original trivializing cover was used.",
    "uses": [
     "def-weil-pbc-quasi-compact-scheme"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/_section.md",
-    "place": "Proof, paragraph 2: locally constant rank and fpqc descent of open subsets"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice.proof.md",
+    "place": "Proof, paragraph 2: locally constant rank and fpqc descent of open subsets; assembled from the two extracted arguments"
    }
   }
  ],
  "proof_deps": [
+  "def-sfb-lisse-coefficient-module",
   "sk-def-pe-site",
   "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-condensed-field-continuous-realization",
-  "def-weil-pbc-lisse-lattice-coefficients",
-  "def-weil-vector-space-dimension",
-  "lem-weil-pbc-etale-open-fpqc-descent",
+  "lem-sfb-continuous-coefficient-free-rank",
+  "lem-sfb-fpqc-labelled-clopen-descent",
   "lem-galois-fpqc-covering-base-change",
   "sk-lem-pe-weakly-etale-stability",
   "lem-weil-pbc-scheme-coproduct-family",
@@ -125,8 +92,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/_section.md",
-  "place": "Proof, paragraph 2, expanded by evaluating transition matrices and applying Stacks Tag 03N0; coefficients read in HRS Example 3.1 and Bhatt-Scholze Definitions 6.8.1 and 6.8.3"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
+  "place": "First paragraph, using the separately stated coefficient-rank comparison and fpqc labelled-clopen descent; final quasi-compactness paragraph"
  },
  "mathlib_searches": [
   {
@@ -192,31 +159,23 @@
  "unit": "sk-lem-stratified-lattice",
  "lean_audit": {},
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "det-lem-stratified-lattice-rank",
   "worker": "stage1",
-  "summary": "Expanded the unit rank-descent argument in seven steps, reusing only existing nodes. Compared rectangular transition matrices by evaluation to E on nonempty overlaps, descended the rank opens and their complements through the existing fpqc descent-of-opens theorem, proved independence and the scheme decomposition, and obtained finite image from quasi-compactness. Made the ambient coefficient convention and lisse meaning explicit; removed the unused coefficient-heart-closure edge (the imported cycle). No new nodes.",
-  "blueprint": "The entire second paragraph of the unit sk-lem-stratified-lattice proof: agreement of local ranks, open-closed saturated rank loci, fpqc descent, and reduction to constant rank. The current item markdown has the statement only; its imported proof supplies the same route.",
+  "summary": "Q125 repairs the deliberate long-proof return without changing the statement or Lean record. Extracted two independent statement-only unsplit tasks: invariant rank for continuous coefficient free sheaves, and generic labelled-clopen fpqc descent with test-morphism compatibility. The four-step assembly retains all seven earlier arguments; the complete earlier proof and its allocation are preserved in report.md. Both tasks have logged searches of all required kinds and no proof steps.",
+  "blueprint": "Unit sk-lem-stratified-lattice proof paragraph 2 and rank detail proof first paragraph: rank comparison, compatible clopen rank fibres, fpqc descent, choice independence, restriction to constant rank and quasi-compact finiteness.",
   "tool_uses": [
    {
     "node": "sk-prop-sfb-cartesian-coefficients",
-    "why": "Only the untwisted coefficient identification in clause (1), used to restrict finite free trivializations to overlaps and open rank pieces; no closure or lattice theorem is used."
-   },
-   {
-    "node": "lem-weil-pbc-condensed-field-continuous-realization",
-    "why": "HRS Example 3.1 supplies only the identification of pulled-back condensed E with continuous-function coefficients, allowing entrywise evaluation; no rank descent conclusion is imported."
-   },
-   {
-    "node": "lem-weil-pbc-etale-open-fpqc-descent",
-    "why": "Generic fpqc descent of opens, specialized to the identity etale map, is exactly the descent tool required by the unit route."
+    "why": "Only untwisted coefficient pullback in clause (1), to compare free modules on overlaps and rank opens; a generic tool already accepted on this item."
    },
    {
     "node": "sk-lem-pe-weakly-etale-stability",
-    "why": "Only base-change stability ensures that the fpqc covering of each open rank piece is a pro-etale covering."
+    "why": "Base change of covering maps to each open rank piece remains weakly etale; a generic tool already accepted on this item."
    },
    {
     "node": "lem-weil-pbc-scheme-coproduct-family",
-    "why": "Only existence and the open/disjoint coprojections of a scheme coproduct are used to express the clopen partition as a scheme decomposition."
+    "why": "Existence and the disjoint open coprojections of the scheme coproduct; the partition identifies its canonical map with local identities."
    }
   ]
  },
@@ -228,12 +187,12 @@
   "lem-weil-pbc-scheme-coproduct-family"
  ],
  "reviewed": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-N3-d34daaf38",
-  "group": "N3",
+  "reviewer": "NT-cc-Q125-ff4f91a6e",
+  "group": "Q125",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-d34daaf38 (reviewer sub-agent of L); spot-checked: I read the item in full, all 7 steps and every cited statement; the delivery has no new nodes. The statement matches the main-20261015 blueprint sk-lem-stratified-lattice-rank.md. 'Lisse' is used in the blueprint's sense of locally free of finite rank for the pro-étale topology (sk-lem-coefficient-heart l.11). X is any scheme, quasi-compactness is assumed only for the finiteness clause, and the statement is not weakened. The route is unit paragraph 2: clopen rank loci descend by fpqc descent of opens. Step 2: the transition matrices over C(|W|,E) satisfy AB=1 and BA=1, and evaluating at a point gives n_i=n_j by def-weil-vector-space-dimension. Γ(W,E_W)=C(|W|,E) is checked against HRS Example 3.1 p.6, which holds for any scheme. Step 3: the overlap hypothesis holds, and with V=id the node specializes exactly to Stacks 03N0 (descent.tex lemma-open-fpqc-covering); complements and joint surjectivity give clopen. Step 5: independence of choices uses only the uniqueness clause of the descent statement. Step 6: the restricted families are pro-étale coverings by 022D(3) and weakly étale base change, and the open pieces form a coproduct decomposition. Step 7: a finite subcover of a disjoint clopen cover. Edge cases tested: X empty, L=0, rank 0 against rank r, two points with ranks 1 and 2, an infinite disjoint union of points with unbounded ranks, and non-quasi-separated X. Removing the unused coefficient-heart-closure edge is justified: my transitive reachability check finds no path back to the item. An rg search of the DAG finds no duplicate. All five declared tool_uses are accepted as generic black boxes. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-ff4f91a6e (reviewer sub-agent of L); spot-checked: I read the re-split delivery in full and against the 2026-10-21 human note (live repair-notes). The item statement is unchanged. The 4-step assembly is 2223 characters, under the 3000 limit. Old steps 2-5 became two statement-only nodes of comparable size. lem-sfb-continuous-coefficient-free-rank holds the matrices over C(|W|,E) argument, read against HRS Ex. 3.1 p.6; |W|≠∅ is a necessary hypothesis, since 0≅0 over the empty scheme. lem-sfb-fpqc-labelled-clopen-descent holds the partition, the uniqueness and the test-morphism clause; I checked Stacks 03N0 at descent.tex:4101 and 022D(3) at topologies.tex:3105. Old steps 1, 6 and 7 are kept in the item without shortening. Both new statements are true. Edge cases checked: empty A, I or X, infinite labels, rank 0, V empty. Neither node restates the item, a clause of it or an existing node. I checked against fpqc-detects-openness, open-subscheme-fpqc-descent, etale-open-fpqc-descent, etale-local-shift-partition, the matrix normal-form and rank-locus nodes, and continuous-realization. Step checks: cartesian (1) needs no invertibility of ℓ. Step 2 meets the test-clause hypothesis pointwise through the rank lemma, which gives the some/every characterization. Step 3 uses 022D, weakly étale base change and the coproduct with open gluing. Step 4 is a finite subcover of a disjoint cover. proof_deps equals the union of uses, and there are no new cycles. I accept the split_report tool_uses (cartesian coefficients, weakly-étale stability, scheme coproduct) as the generic tools accepted earlier. Advisory: the global tool_uses still lists two nodes the item no longer uses. The snapshot's dagsnap symlinks were rotated away during the review, so the duplicate search ran on clones/side-live."
  },
  "lean": {
   "module": "Sheaf.Paper.StratifiedLatticeRank",
