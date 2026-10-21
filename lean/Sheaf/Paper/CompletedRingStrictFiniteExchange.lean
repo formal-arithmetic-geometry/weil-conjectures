@@ -8,12 +8,6 @@ module
 public import Sheaf.Paper.CompletedFiniteExchangeCoordinates
 public import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
-import Sheaf.Algebra.Homology.DiagramKFlatReplacements
-import Sheaf.SixFunctors.OpenTensorNormalization
 
 /-!
 # Strict finite open exchange over completed rings
@@ -178,7 +172,12 @@ Source: Stacks 03DI (blueprint: lem-cbc-completed-ring-strict-finite-exchange).
 Proof: apply finite open base change to IsPullback.of_iso_pullback for the chosen
 square. Scalar restriction preserves the resulting isomorphism. -/
 @[instance] theorem cbcFiniteInverse_isIso (n : ℕ) : IsIso (cbcFiniteInverse d sq n) := by
-  sorry
+  let := sq.isOpenImmersion
+  let := sq.isOpenImmersion'
+  have := singleBetaInv_isIso (cbcFiniteRing d n) gU j' j g sq.w
+    (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)
+  unfold cbcFiniteInverse
+  infer_instance
 
 /-- The canonical finite exchange after restriction of its finite scalar action.
 Source: Stacks 03DI (blueprint: lem-cbc-completed-ring-strict-finite-exchange). -/
