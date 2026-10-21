@@ -5,21 +5,11 @@ Authors: NW
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.CategoryTheory.KInjectiveDerivedMapComputation
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.CategoryTheory.Localization.Predicate
-import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # The canonical étale derived adjunction on chain transposes
 
@@ -43,6 +33,116 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+-- The abstract counit factorization, transported from the homotopy localization to Q.
+private theorem chainCounit
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions D]
+    {L : C ⥤ D} {G : D ⥤ C} [L.Additive] [G.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L] (a : L ⊣ G)
+    (K : CochainComplex D ℤ) :
+    L.mapDerivedCategory.map (G.rightDerivedFunctorUnitQ K) ≫
+        a.mapDerivedCategoryRightDerivedAdjunction.counit.app (DerivedCategory.Q.obj K) =
+      L.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).counit.app K) := by
+  have h := (a.mapHomotopyCategory (.up ℤ)).derivedε_fac_app
+    (HomotopyCategory.quasiIso D (.up ℤ)) L.mapDerivedCategoryFactorsh.hom
+    G.rightDerivedFunctorUnit ((HomotopyCategory.quotient D _).obj K)
+  change L.mapDerivedCategory.map (G.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient D _).obj K)) ≫
+    a.mapDerivedCategoryRightDerivedAdjunction.counit.app
+      (DerivedCategory.Qh.obj ((HomotopyCategory.quotient D _).obj K)) = _ at h
+  rw [Adjunction.mapHomotopyCategory_counit_app_quotient] at h
+  erw [L.mapDerivedCategoryFactorsh_hom_app] at h
+  have hq (Y : CochainComplex C ℤ) :
+      (DerivedCategory.quotientCompQhIso C).hom.app Y = 𝟙 _ := rfl
+  have hqi (Y : CochainComplex D ℤ) :
+      (DerivedCategory.quotientCompQhIso D).inv.app Y = 𝟙 _ := rfl
+  simp only [hq, hqi, Functor.mapHomotopyCategoryFactors,
+    Quotient.lift.isLift_inv, Functor.comp_obj] at h
+  erw [CategoryTheory.Functor.map_id, DerivedCategory.Qh.map_id] at h
+  simp only [Category.id_comp, Category.comp_id] at h
+  have hunit : G.rightDerivedFunctorUnitQ K = G.rightDerivedFunctorUnit.app
+      ((HomotopyCategory.quotient D _).obj K) := by
+    simp only [Functor.rightDerivedFunctorUnitQ,
+      show (DerivedCategory.quotientCompQhIso C).inv.app
+        ((G.mapHomologicalComplex (.up ℤ)).obj K) = 𝟙 _ from rfl,
+      show (DerivedCategory.quotientCompQhIso D).hom.app K = 𝟙 _ from rfl,
+      Category.id_comp]
+    erw [G.rightDerivedFunctor.map_id, Category.comp_id]
+  rw [hunit]
+  exact h
+
+-- Naturality and chain transposes follow from any adjunction with this counit square.
+private theorem chainTranspose
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions D]
+    {L : C ⥤ D} {G : D ⥤ C} [L.Additive] [G.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L] (a : L ⊣ G)
+    (d : L.mapDerivedCategory ⊣ G.rightDerivedFunctor)
+    (hc : ∀ K : CochainComplex D ℤ,
+      L.mapDerivedCategory.map (G.rightDerivedFunctorUnitQ K) ≫
+          d.counit.app (DerivedCategory.Q.obj K) =
+        L.mapDerivedCategoryFactors.hom.app ((G.mapHomologicalComplex (.up ℤ)).obj K) ≫
+          DerivedCategory.Q.map ((a.mapHomologicalComplex (.up ℤ)).counit.app K)) :
+    (∀ (M : CochainComplex C ℤ)
+      (K : CochainComplex D ℤ)
+      (f : M ⟶ (G.mapHomologicalComplex (.up ℤ)).obj K),
+      (d.homEquiv
+        (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj K)).symm
+          (DerivedCategory.Q.map f ≫
+            G.rightDerivedFunctorUnitQ K) =
+        L.mapDerivedCategoryFactors.hom.app M ≫
+          DerivedCategory.Q.map
+            ((L.mapHomologicalComplex (.up ℤ)).map f ≫
+              (a.mapHomologicalComplex
+                (.up ℤ)).counit.app K)) ∧
+    (∀ (K K' : CochainComplex D ℤ)
+      (k : K ⟶ K'),
+      DerivedCategory.Q.map
+          ((G.mapHomologicalComplex (.up ℤ)).map k) ≫
+            G.rightDerivedFunctorUnitQ K' =
+        G.rightDerivedFunctorUnitQ K ≫
+          G.rightDerivedFunctor.map
+            (DerivedCategory.Q.map k)) ∧
+    (∀ (M M' : CochainComplex C ℤ)
+      (K K' : CochainComplex D ℤ)
+      (b : M' ⟶ M) (k : K ⟶ K')
+      (f : M ⟶ (G.mapHomologicalComplex (.up ℤ)).obj K),
+      (d.homEquiv
+        (DerivedCategory.Q.obj M') (DerivedCategory.Q.obj K')).symm
+          (DerivedCategory.Q.map (b ≫ f ≫
+            (G.mapHomologicalComplex (.up ℤ)).map k) ≫
+              G.rightDerivedFunctorUnitQ K') =
+        L.mapDerivedCategory.map
+          (DerivedCategory.Q.map b) ≫
+          (d.homEquiv
+            (DerivedCategory.Q.obj M) (DerivedCategory.Q.obj K)).symm
+              (DerivedCategory.Q.map f ≫
+                G.rightDerivedFunctorUnitQ K) ≫
+          DerivedCategory.Q.map k) ∧
+    (∀ K : CochainComplex D ℤ,
+      L.mapDerivedCategory.map
+          (G.rightDerivedFunctorUnitQ K) ≫
+          d.counit.app
+            (DerivedCategory.Q.obj K) =
+        L.mapDerivedCategoryFactors.hom.app
+          ((G.mapHomologicalComplex (.up ℤ)).obj K) ≫
+          DerivedCategory.Q.map
+            ((a.mapHomologicalComplex
+              (.up ℤ)).counit.app K)) := by
+  refine ⟨?_, ?_, ?_, hc⟩
+  · intro M K f
+    rw [d.homEquiv_counit, Functor.map_comp, Category.assoc, hc]
+    rw [← Category.assoc, L.mapDerivedCategoryFactors_hom_naturality]
+    rw [Category.assoc, ← DerivedCategory.Q.map_comp]
+  · intro K K' k
+    exact G.rightDerivedFunctorUnitQ_naturality k
+  · intro M M' K K' b k f
+    simp only [Functor.map_comp, Category.assoc]
+    rw [G.rightDerivedFunctorUnitQ_naturality]
+    rw [← Category.assoc (DerivedCategory.Q.map f),
+      d.homEquiv_naturality_left_symm, d.homEquiv_naturality_right_symm]
+
 /-- The canonical unbounded étale derived adjunction sends an ordinary chain transpose
 through localization, naturally in both complexes, and its counit has the ordinary
 counit normalization.
@@ -55,40 +155,15 @@ The existing `mapDerivedUpperStarLowerStarAdjunction` supplies the adjunction, w
 canonical K-injective comparison on complexes. `mapDerivedCategoryFactors` is the
 exact termwise identification, written explicitly in the first and fourth clauses.
 
-Proof plan:
-1. The exact constant-coefficient inverse image and its right adjoint give the
-termwise and homotopy adjunctions (prop-weil-pbc-inverse-image-modules-exact,
-lem-weil-pbc-termwise-adjunction-homotopy). Exactness descends the left adjoint
-termwise by lem-weil-pbc-exact-functor-derived-factorization.
-2. Small-site size conventions and K-injective resolutions give the canonical
-right-derived pair and comparison (def-weil-size-convention,
-prop-pur-kinjective-resolutions-exist, lem-weil-pbc-kinjective-total-derived).
-The additive pushforward preserves cone matrices and shifts, so its homotopy
-functor followed by localization is exact (def-weil-abstract-derived-category,
-lem-pur-homotopy-category-triangulated).
-3. Choose a quasi-isomorphism j : K → I to a K-injective complex. The right
-adjoint preserves K-injectives (lem-weil-pbc-right-adjoint-preserves-kinjective).
-The canonical computation c_j identifies the derived pushforward with Q(GI),
-and comparison naturality gives c_j α_K = Q(Gj), without asserting that Gj
-is a quasi-isomorphism (lem-sf-kinjective-derived-map-computation).
-4. Compute Hom into GI and I in the homotopy categories using the K-injective
-Hom bijections (lem-weil-pbc-kinjective-hom-derived), apply the homotopy
-adjunction, then cancel Qj. This constructs the derived Hom bijection.
-5. The unique homotopy-class lift between resolutions proves independence and
-naturality in the target. Naturality in source chain maps follows from the
-ordinary adjunction and extends through localization
-(lem-sf-kinjective-derived-map-computation,
-lem-weil-pbc-localization-universal-property).
-6. The natural Hom bijections define the canonical adjunction
-(lem-weil-pbc-adjunction-of-natural-bijection). The map Qf followed by α_K
-is represented on I by Gj composed with f. Its ordinary transpose is j
-composed with the transpose of f, by counit naturality. Cancelling Qj gives
-the first clause.
-7. Naturality of the comparison and both adjunction transposes gives the second
-and third clauses. Set M = GK and f = identity in the first clause and use
-the counit formula for the inverse Hom bijection to obtain the fourth clause.
-All complexes and resolutions are unbounded; no flatness or geometric
-hypothesis on r is used. -/
+Proof: apply the canonical derived counit factorization
+`Adjunction.derivedε_fac_app` to the homotopy adjunction. Transport it to complexes
+using `mapHomotopyCategory_counit_app_quotient` and the exact-pullback comparison.
+The quotient comparison has identity components, so this is the fourth clause.
+For the first clause, the inverse Hom equivalence is left-adjoint action followed
+by the counit; use the fourth clause and naturality of the exact-pullback comparison.
+The second clause is comparison naturality. For the third, use comparison naturality
+and the two naturality laws of the inverse Hom equivalence. All complexes are
+unbounded, and the right adjoint need not preserve quasi-isomorphisms. -/
 theorem etaleDerivedChainTranspose (R : Type (u + 1)) [CommRing R]
     {W V : Scheme.{u}} (r : W ⟶ V) :
     (∀ (M : CochainComplex (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ)
@@ -137,6 +212,13 @@ theorem etaleDerivedChainTranspose (R : Type (u + 1)) [CommRing R]
           DerivedCategory.Q.map
             (((upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) r).mapHomologicalComplex
               (.up ℤ)).counit.app K)) := by
-  sorry
+  have hd : mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) r =
+      Adjunction.mapDerivedCategoryRightDerivedAdjunction
+        (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) r) := rfl
+  rw [hd]
+  exact chainTranspose (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) r)
+    (Adjunction.mapDerivedCategoryRightDerivedAdjunction
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) r))
+    (chainCounit (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) r))
 
 end AlgebraicGeometry.Etale
