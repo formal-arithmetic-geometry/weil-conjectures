@@ -21348,3 +21348,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:50 L: merged deliver/Q93/lem-weil-point-transformation-coefficient-descent (reviewer FIX; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q71/lem-pur-expression-counit-substitution-coherence (reviewer FIX; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q146/lem-fd-common-stage-comparison-descent (reviewer FIX; first push; new nodes: 0); claim not held by Q146: not your claim
+- 08:51 L: merged deliver/Q140/lem-sf-open-projection-roos-completion (reviewer FIX; first push; new nodes: 0)
