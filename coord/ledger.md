@@ -21459,3 +21459,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:53 L: returned deliver/NE/lem-sfb-etale-stalk-constant-complex-exactness (reviewer RETURN: L: independent stage-2 immutable head 3da47abf31bc: H2/H12: stmt_deps add theorem node lem-cbc-constant-ring-module-shea)
 - 08:53 L: returned deliver/Q51/lem-sfb-section-ring-lax-pushforward-coherence (reviewer RETURN: L: independent stage-2 immutable head 5d056c4632b3: H13/H4: the delivered dep record of lem-sfb-sheaf-pushforward-genera)
 - 08:53 L: returned deliver/Q19/lem-amb-finite-root-site-comparison (reviewer RETURN: L: independent stage-2 immutable head 7fcd82765c8d: H2: the delivery added theorem node lem-cbc-constant-ring-module-she)
+- 08:54 L: returned deliver/Q98/lem-zl-bertini-finite-cover-irreducible-system (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-zl-bertini-finite-cover-irreducible-system: lem-zl)
