@@ -20761,3 +20761,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:40 L: returned deliver/NM/lem-weil-pbc-perfect-strata-uniform-reductions (reviewer RETURN: L: independent stage-2 immutable head e3263ad8c90b: Substance correct: every hypothesis and clause matches the node and )
 - 07:40 L: returned deliver/NN/lem-cbc-derived-finite-quotient-coherence (reviewer RETURN: L: independent stage-2 immutable head e76276c9418d: H2: delivery adds theorem node lemma-weil-pbc-completed-pullback-red)
 - 07:40 L: returned deliver/Q38/lem-sbc-unbounded-exact-adjunction-square (reviewer RETURN: L: independent stage-2 immutable head ecb7b1291dae: H2 (stmt_deps): the delivery added theorem node lem-weil-pbc-tower-d)
+- 07:40 L: returned deliver/NF/lem-weil-pbc-ringed-common-quotient-pullback-comparison (reviewer RETURN: L: independent stage-2 immutable head f953c76baa75: F1 (mandated theorem-stmt_dep finding): the item's Lean statement us)
