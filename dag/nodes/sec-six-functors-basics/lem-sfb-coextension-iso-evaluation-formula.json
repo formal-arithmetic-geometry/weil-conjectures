@@ -13,9 +13,84 @@
   "sk-def-sfb-change-of-scalars",
   "def-sfb-modobj-coextension-along-iso"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=\\operatorname{Res}_\\varphi$, $H=\\operatorname{Res}_{\\varphi^{-1}}$ and $G=\\operatorname{Coext}_\\varphi$. By [def-sfb-modobj-restriction], both restriction functors retain underlying objects and arrows. For an $R$-module $N$, the action on $FHN$ is\n$$\\gamma_N\\circ(\\varphi^{-1}\\otimes1)\\circ(\\varphi\\otimes1)=\\gamma_N.$$\nFor an $S$-module $M$, the action on $HFM$ similarly equals $\\gamma_M\\circ((\\varphi\\circ\\varphi^{-1})\\otimes1)=\\gamma_M$. Thus the identity underlying arrows give natural module isomorphisms $FH\\cong\\mathrm{id}$ and $\\mathrm{id}\\cong HF$: they are module morphisms by the action equation in [sk-def-sfb-module-objects], and their naturality squares are the identity square of each underlying arrow. In particular the component $b_N:FHN\\to N$ has underlying arrow $\\mathrm{id}_N$.",
+   "uses": [
+    "def-sfb-modobj-restriction",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restriction.md",
+    "place": "Restriction action formula, applied successively to phi and its inverse"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-quasi-inverse-adjoint] to $F,H$ with the two natural isomorphisms of step 1. It gives an adjunction $b:F\\dashv H$ whose counit is precisely the chosen $b_N:FHN\\to N$, hence is the identity on underlying objects. The lemma keeps this counit fixed when adjusting the unit, so no arbitrary choice of equivalence data enters the normalization. All its hypotheses are supplied by step 1: these are functors between the two module categories and both composites have specified natural isomorphisms with the appropriate identity functor. These two isomorphisms are exactly the quasi-inverse data of [def-sfb-modobj-restriction-equivalence] (its unit and counit are the underlying identity maps, with the same action computation as step 1), so $b$ is the adjunction that [def-sfb-modobj-coextension-along-iso] obtains from that definition through the same lemma.",
+   "uses": [
+    "lem-weil-pbc-quasi-inverse-adjoint",
+    "def-sfb-modobj-restriction-equivalence",
+    "def-sfb-modobj-coextension-along-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-coextension-along-iso.md",
+    "place": "Coextension comparison through the inverse restriction; make the counit normalization explicit"
+   }
+  },
+  {
+   "text": "The category is closed with equalizers and $\\varphi$ is a monoid morphism, so [def-sfb-modobj-restrict-coextend-adjunction] gives $a:F\\dashv G$ with counit $\\varepsilon_N:F E_N\\to N$ equal to evaluation at the unit. The equalizer and its evaluation are those of [def-sfb-modobj-coextension]. Explicitly, $v_N=\\mathrm{ev}_{S,N}\\circ(1_S\\otimes\\iota_N)$; inserting the unit into its first input gives the underlying counit\n$$\\varepsilon_N=v_N\\circ(\\eta_S\\otimes1_{E_N})\\circ\\lambda_{E_N}^{-1}.$$\nThis is an equality of arrows $E_N\\to N$ in $\\mathcal C$, with the counit's $R$-linearity supplied by the adjunction statement. Coequalizers and the tensor-colimit hypotheses of the item are stronger than needed for this application.",
+   "uses": [
+    "def-sfb-modobj-restrict-coextend-adjunction",
+    "def-sfb-modobj-coextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restrict-coextend-adjunction.md",
+    "place": "Evaluation-at-unit counit; the displayed equalizer evaluation in def-sfb-modobj-coextension"
+   }
+  },
+  {
+   "text": "Apply [det-sp-unique-right-adjoint] to the adjunctions $a:F\\dashv G$ and $b:F\\dashv H$. Its comparison $e_N:GN\\to HN$ is the unique $S$-module morphism satisfying\n$$b_N\\circ F(e_N)=\\varepsilon_N.$$\nBy step 2 the underlying $b_N$ is the identity, and by step 1 $F$ retains arrows. Therefore the underlying $e_N$ is exactly the arrow displayed in step 3, proving the requested evaluation formula for the adjoint-uniqueness comparison, rather than merely exhibiting some isomorphism. The same cited statement supplies its inverse $\\delta_N:HN\\to GN$ as the $a$-transpose of $b_N$, both inverse identities, and naturality of $e$ and $\\delta$ in $N$. This $e$ is the comparison specified by [def-sfb-modobj-coextension-along-iso]: that definition takes the adjunctions $a$ of step 3 and $b$ of step 2 and orients its isomorphism $\\operatorname{Coext}_\\varphi\\cong\\operatorname{Res}_{\\varphi^{-1}}$ by the same counit equation, so the statement's $e_N$ is the family computed here.",
+   "uses": [
+    "det-sp-unique-right-adjoint",
+    "def-sfb-modobj-coextension-along-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.md",
+    "place": "Counit-compatible right-adjoint comparison and its inverse, applied to restriction/coextension and inverse restriction"
+   }
+  },
+  {
+   "text": "It remains to identify $\\delta_N$ with the specified factored transpose. In the inverse Hom bijection of [def-sfb-modobj-restrict-coextend-adjunction], take $M=HN=T_N$ and $f=b_N:F T_N\\to N$. Its underlying arrow is $\\mathrm{id}_N$, so the cited formula $m\\mapsto(s\\mapsto f(sm))$ says, intrinsically, that\n$$v_N\\circ(1_S\\otimes\\delta_N)=\\beta_N:S\\otimes N\\to N.$$\nTransposing this equality under the closed-structure bijection of [def-sfb-modobj-coextension] gives $\\iota_N\\circ\\delta_N=\\widehat\\beta_N$. Thus $\\delta_N$ is a factorization of $\\widehat\\beta_N$ through the equalizer inclusion; uniqueness in that equalizer's universal property shows that it is the $d_N$ in the statement. It is $S$-linear because the inverse Hom bijection lands in $S$-module morphisms. Substituting $d_N=\\delta_N$ into step 4 gives $e_N\\circ d_N=\\mathrm{id}_{T_N}$ and $d_N\\circ e_N=\\mathrm{id}_{E_N}$ and naturality of both formulas. No use of elements detecting arrows in $\\mathcal C$ is involved: the displayed equation is the uncurry of the cited internal inverse Hom-map formula.",
+   "uses": [
+    "def-sfb-modobj-restrict-coextend-adjunction",
+    "def-sfb-modobj-coextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restrict-coextend-adjunction.md",
+    "place": "Inverse Hom-map formula, specialized to the identity F T_N to N; equalizer factorization via the tensor-Hom adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-modobj-restriction",
+  "sk-def-sfb-module-objects",
+  "lem-weil-pbc-quasi-inverse-adjoint",
+  "def-sfb-modobj-restriction-equivalence",
+  "def-sfb-modobj-coextension-along-iso",
+  "def-sfb-modobj-restrict-coextend-adjunction",
+  "def-sfb-modobj-coextension",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek-adjunction.proof.md",
+  "place": "Last sentence: invertible scalar comparison; explicit normalization using the existing coextension adjunction and uniqueness of right adjoints"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +126,52 @@
    "results": "8 hits: ModuleCat.monoidalClosedHomEquiv, Rep.MonoidalClosed.linearHomEquivComm_symm_hom, Rep.MonoidalClosed.linearHomEquiv_symm_hom, ModuleCat.ihom_ev_app, ModuleCat.ihom_coev_app, ModuleCat.hom_inv_leftUnitor, ModuleCat.hom_inv_rightUnitor, ModuleCat.instMonoidalClosed",
    "date": "2026-10-21",
    "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  },
+  {
+   "tool": "grep",
+   "query": "coextend|coextension",
+   "results": "0 hits: none; directory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat and representation closed-structure formulas are not the specified comparison for internal module objects in arbitrary C; generic adjoint uniqueness is used through the existing Mathlib leaf det-sp-unique-right-adjoint"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at the unit identifies internal coextension of scalars along an invertible monoid morphism with restriction along the inverse",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.unit",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat and representation closed-structure formulas are not the specified comparison for internal module objects in arbitrary C; generic adjoint uniqueness is used through the existing Mathlib leaf det-sp-unique-right-adjoint"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Mod, CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat and representation closed-structure formulas are not the specified comparison for internal module objects in arbitrary C; generic adjoint uniqueness is used through the existing Mathlib leaf det-sp-unique-right-adjoint"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For module objects in a closed symmetric monoidal category, coextension along an isomorphism of monoids is restriction along its inverse, with comparison given by evaluation at the unit and inverse the curried action",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, Rep.homEquiv_symm_apply_hom, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, ModuleCat.RestrictionCoextensionAdj.app', ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.restrictCoextendScalarsAdj, Rep.MonoidalClosed.linearHomEquivComm_symm_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat and representation closed-structure formulas are not the specified comparison for internal module objects in arbitrary C; generic adjoint uniqueness is used through the existing Mathlib leaf det-sp-unique-right-adjoint"
+  },
+  {
+   "tool": "grep",
+   "query": "toRestriction_hom_apply|counit._app|def coextendScalars|rightAdjointUniq_hom_app_counit",
+   "results": "6 hits: Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat and representation closed-structure formulas are not the specified comparison for internal module objects in arbitrary C; generic adjoint uniqueness is used through the existing Mathlib leaf det-sp-unique-right-adjoint"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monoidal closed category the right adjoint uniqueness isomorphism from internal Hom_R(S,N) to restriction of N along an inverse monoid isomorphism has component evaluation at one and inverse the transpose of the S action",
+   "results": "8 hits: Rep.instMonoidalClosed, Rep.MonoidalClosed.linearHomEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, Rep.MonoidalClosed.linearHomEquivComm, Rep.MonoidalClosed.linearHomEquiv_symm_hom, Rep.ihom_ev_app_hom, Rep.homEquiv_def, Rep.MonoidalClosed.linearHomEquivComm_symm_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat and representation closed-structure formulas are not the specified comparison for internal module objects in arbitrary C; generic adjoint uniqueness is used through the existing Mathlib leaf det-sp-unique-right-adjoint"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-def-sfb-module-lower-shriek",
@@ -71,5 +188,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-coextension-iso-evaluation-formula",
+  "worker": "stage1",
+  "summary": "NU: checked the live internal-module Lean sources and the current blueprint. Reused restriction, the explicit restriction/coextension Hom bijection, the quasi-inverse adjunction leaf and the unique-right-adjoint leaf. Proved cancellation of scalar actions, fixed the inverse-restriction counit to the identity, identified the comparison as evaluation and its inverse as the factored action transpose. No new nodes and no statement correction.",
+  "blueprint": "sk-def-sfb-module-lower-shriek, summary adjunction sentence, and def-sfb-module-open-lower-shriek-adjunction.proof.md last sentence: normalize the coextension comparison through restriction along the inverse; steps 1-4 give evaluation, step 5 gives its inverse.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-modobj-restrict-coextend-adjunction",
+    "why": "Generic internal-module restriction/coextension Hom bijection, including its counit and inverse formulas; the current unit invokes scalar-change comparisons but does not itself state this Hom bijection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-modobj-restrict-coextend-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-9179cc376",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-9179cc376 (reviewer sub-agent of L); spot-checked: Read the item in full: the statement, all 5 steps, the statements of every cited node, and the blueprint main-20261015 sources (open-lower-shriek-adjunction proof, last sentence; coextension-along-iso and its proof; restrict-coextend-adjunction and its proof). Hypotheses cover restriction-equivalence (braided closed, (co)equalizers, colimit-preserving tensor, R commutative) and coextension (closed, equalizers). Coefficient categories and the orientation Coext_φ→Res_{φ^{-1}} match along-iso. The steps are correct. Step 1: the action cancellations give FH≅id with identity underlying maps. Step 2: the quasi-inverse-adjoint leaf keeps that counit. Step 3: the counit is ev∘(1⊗ι)∘(η⊗1)∘λ^{-1}. Step 4: the counit equation of the unique-right-adjoint leaf forces e_N = ε_N underneath. Step 5: the inverse Hom map at f=b_N gives v∘(1⊗δ)=β, so ι∘δ=β̂ and equalizer uniqueness gives δ=d. Small cases check: φ=id, N=0, and the swap on Z×Z where d(n)(a,b)=bn. No new nodes, no duplicate found, no cycle, no SGA. The declared tool use of def-sfb-modobj-restrict-coextend-adjunction is accepted. One fault (C3/C4 missing citation): the proof never tied its normalized adjunction and comparison to the comparison of def-sfb-modobj-coextension-along-iso that the statement names. FIX: step 2 now cites def-sfb-modobj-restriction-equivalence and along-iso (step 1's isos are the quasi-inverse data along-iso uses), step 4 cites along-iso (same adjunctions and counit equation), and proof_deps is updated.; 1 file(s) fixed by the reviewer"
  }
 }

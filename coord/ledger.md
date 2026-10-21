@@ -20217,3 +20217,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: returned deliver/N6/lem-sfb-finite-field-stratified-generation (reviewer RETURN: L: independent stage-2 immutable head e0cdd9d12471: file-only compilation failed: overlay WeilConjectures.Mathlib.Catego)
 - 04:07 L: returned deliver/NE/lem-cbc-open-localized-counit-comparison (reviewer RETURN: L: independent stage-2 immutable head ebdeae754d6f: Sheaf.Paper.OpenLocalizedCounitComparison declares names that other )
 - 04:07 L: merged deliver/Q04/lem-sfb-section-ring-lax-pushforward-coherence (reviewer PASS; first push; new nodes: 0)
+- 04:07 L: merged deliver/NU/lem-sfb-coextension-iso-evaluation-formula (reviewer FIX; first push; new nodes: 0)
