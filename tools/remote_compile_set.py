@@ -59,7 +59,38 @@ _PRIO = _prio_call(data)
 _PSLOTS = int(os.environ.get("SHEAF_COMPILE_PRIO_SLOTS", "8"))
 _pd = REPO / "local" / "compile-slots-prio"; _pd.mkdir(parents=True, exist_ok=True)
 _t0 = time.time()
+# 2026-10-22 (the human: calls expired although 40 slots should serve them): the slot wait was a free-for-all poll, so a
+# waiter could starve past the caller's patience while newer calls got slots. Waiters now take a ticket and only the
+# oldest live tickets (as many as there are slots in their pool) may try the slots: first come, first served.
+_qd = REPO / "local" / "compile-queue"; _qd.mkdir(parents=True, exist_ok=True)
+_ticket = _qd / f"{time.time_ns():020d}-{os.getpid()}"
+_ticket.write_text("p" if _PRIO else "n")
+import atexit; atexit.register(lambda: _ticket.unlink(missing_ok=True))
+def _my_turn():
+    """True when at most (slots - 1) live tickets of my pool are older than mine; dead owners' tickets are removed."""
+    older = 0
+    for t in sorted(_qd.iterdir()):
+        if t.name >= _ticket.name:
+            break
+        try:
+            pid = int(t.name.rsplit("-", 1)[1])
+            os.kill(pid, 0)
+        except (ValueError, ProcessLookupError, PermissionError):
+            t.unlink(missing_ok=True); continue
+        try:
+            kind = t.read_text()
+        except OSError:
+            continue
+        if _PRIO and kind == "p":
+            older += 1
+        elif not _PRIO:
+            older += 1
+    return older < (_PSLOTS if _PRIO else _SLOTS)
 while _slot_fh is None:
+    if not _my_turn():
+        if time.time() - _t0 > 540:
+            sys.exit(75)
+        time.sleep(3); continue
     _pools = ([(_pd, _PSLOTS)] if _PRIO else []) + [(_sd, _SLOTS)]
     for _dir, _cnt in _pools:
         for _i in range(_cnt):
@@ -74,6 +105,7 @@ while _slot_fh is None:
         if time.time() - _t0 > 540:
             sys.exit(75)
         time.sleep(3)
+_ticket.unlink(missing_ok=True)
 def watch_caller():
     """2026-10-18 (waste): a Codex worker that gave up (ssh closed) left its call compiling for nobody. A call started by
     sshd whose result pipe has no reader any more (POLLERR on stdout) kills its Lean children, removes its scratch
