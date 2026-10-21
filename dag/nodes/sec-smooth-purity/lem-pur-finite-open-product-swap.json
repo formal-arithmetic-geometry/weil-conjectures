@@ -17,9 +17,138 @@
   "lem-pur-derived-pullback-tensor-iso",
   "lem-cbc-extension-zero-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $V=X\\times_B\\bar Z$, with projections $\\alpha:V\\to X$, $\\beta:V\\to\\bar Z$. Then $v=j\\times1:V\\to C$ and $w=1\\times k:P\\to V$ satisfy $u=vw$, $\\alpha w=p$, $\\beta w=kq$, $rv=j\\alpha$, $tv=\\beta$. These equations follow by composing the two projections in the fibre-product universal property [def-pc-fibre-product]. The squares $(j,v;r,\\alpha)$ and $(k,w;\\beta,q)$ are Cartesian by that same property. Thus $v,w$ are open by [lem-weil-pbc-open-immersion-base-change]. Likewise put $V'=\\bar X\\times_BZ$, with projections $\\alpha':V'\\to\\bar X$, $\\beta':V'\\to Z$, and opens $v'=1\\times k:V'\\to C$, $w'=j\\times1:P\\to V'$. Here $u=v'w'$, $\\alpha'w'=jp$, $\\beta'w'=q$, $rv'=\\alpha'$, $tv'=k\\beta'$. Their two analogous squares are Cartesian too. Composites of opens are open: an open subset of an open subset is open, and the structure sheaf restricted twice is restricted once [def-weil-open-immersion].",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JY, lemma-base-change-immersion; universal property of the two displayed fibre products"
+   }
+  },
+  {
+   "text": "Write $\\eta^i:1\\xrightarrow{\\sim}i^*i_!$ for the actual open units of [lem-sf-open-tensor-normalization]. The composite adjunction [def-weil-pbc-composite-adjunction] for $v_!w_!\\dashv w^*v^*$ has unit $w^*(\\eta^v_{w_!D})\\circ\\eta^w_D$. Identify $w^*v^*$ with $u^*$ by the canonical restriction composition. The unique mate of this identification [lem-weil-pbc-conjugate-iso-unit-equation] is the canonical open compositor $c_{v,w}:v_!w_!\\to u_!$ of [lem-cbc-extension-zero-composition]. Its unit equation is\n$$u^*(c_{v,w,D})\\circ w^*(\\eta^v_{w_!D})\\circ\\eta^w_D=\\eta^u_D.$$\nConsequently this compositor restricts to the identity after the specified units. This argument applies in the present unbounded pro-etale categories, since their open adjunctions and invertible units are supplied by the normalization lemma itself. It also gives the same assertion for $(v',w')$. In particular no etale-only construction of a compositor or unnormalized choice of an isomorphism is being substituted.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0DV0 (lemma-compose-counits), 0B65 (lemma-transformation-between-functors-and-adjoints); their unit equation on the given open adjunctions"
+   }
+  },
+  {
+   "text": "We will use the right-extension version of the open tensor map. For an open $i:W\\hookrightarrow Y$, $F\\in D(Y,A)$ and $Q\\in D(W,A)$ it is the explicit composite\n$$\\rho^i_{F,Q}:F\\otimes^Li_!Q\\xrightarrow{\\sigma}i_!Q\\otimes^LF\\xrightarrow{\\gamma}i_!(Q\\otimes^Li^*F)\\xrightarrow{i_!\\sigma}i_!(i^*F\\otimes^LQ).$$\nEvery arrow is invertible by [lem-sf-open-tensor-normalization] and signed symmetry. Under restriction it becomes $\\sigma_{Q,i^*F}\\circ\\sigma_{i^*F,Q}=1$: on homogeneous tensors of degrees $a,b$ the coefficient is $(-1)^{ab+ba}=1$. The sign formula is given by [lem-pur-cochain-pullback-tensor-coherence]; the K-flat tensor models and descent of [lem-weil-pbc-site-derived-tensor-descent] justify the same calculation in the unbounded derived category. Compatibility of restriction with these signed identifications is [lem-pur-derived-pullback-tensor-iso]. Thus $i^*\\rho^i$ is the identity, with the specified tensor and unit identifications.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Open-product part of the signed symmetry reduction; agent-written details"
+   }
+  },
+  {
+   "text": "Set $R=Lr^*j_!M$, $H=Lt^*k_!N$, $F=L\\alpha^*M$, $Q=Lq^*N$. The first Cartesian square of Step 1 gives the specified $\\beta_j:R\\xrightarrow{\\sim}v_!F$. Apply it and the tensor map for $v$ to obtain\n$$E=R\\otimes^LH\\longrightarrow v_!F\\otimes^LH\\xrightarrow{\\gamma_v}v_!(F\\otimes^LLv^*H).$$\nSince $tv=\\beta$, the inner second factor is $L\\beta^*k_!N$. The second Cartesian square gives its specified isomorphism $\\beta_k:L\\beta^*k_!N\\xrightarrow{\\sim}w_!Q$. Inside $v_!$ apply $1_F\\otimes\\beta_k$ and then $\\rho^w_{F,Q}$ of Step 3. Since $\\alpha w=p$, the result is $v_!w_!(Lp^*M\\otimes^LQ)=v_!w_!D$. Finally apply $c_{v,w,D}$. This composite is exactly the definition of $e_{j,k}$ in the item, including its two inner signed symmetries. Every arrow is an isomorphism. Here all $\\beta,\\gamma$ are supplied on arbitrary unbounded complexes by [lem-sf-open-tensor-normalization]; the pullback/tensor identifications are those of [lem-pur-derived-pullback-tensor-iso].",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Open-product part of the signed symmetry reduction; agent-written details"
+   }
+  },
+  {
+   "text": "Restrict the composite in Step 4 along $u=vw$. The first base-change map becomes $1_{Lp^*M}$: first restrict along $v$ and use its normalization, then along $w$. The map $\\gamma_v$ becomes the identity after restricting along $v$, hence also after $w$. The second base-change map becomes $1_Q$ after restriction along $w$. The map $\\rho^w$ becomes the identity by Step 3, and the compositor does so by Step 2. The intermediate pullback-composition and tensor identifications agree with the composite ones by the composition clause of [lem-pur-derived-pullback-tensor-iso]. Thus, identifying $u^*E$ and $u^*u_!D$ with $D$ using precisely the given units, one has $u^*e_{j,k}=1_D$.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Open-product part of the signed symmetry reduction; agent-written details"
+   }
+  },
+  {
+   "text": "For the opposite factorization set $G=L\\beta'^*N$ on $V'$ and $P_0=Lp^*M$ on $P$. Its first base-change map is $H\\xrightarrow{\\sim}v'_!G$, from the Cartesian square with $k,v'$ and $t,\\beta'$. The complete alternative chain is\n$$R\\otimes^LH\\longrightarrow R\\otimes^Lv'_!G\\xrightarrow{\\rho^{v'}_{R,G}}v'_!(Lv'^*R\\otimes^LG)\\longrightarrow v'_!(w'_!P_0\\otimes^LG)\\xrightarrow{v'_!\\gamma_{w'}}v'_!w'_!(P_0\\otimes^Lw'^*G)\\xrightarrow{c_{v',w'}}u_!D.$$\nThe third arrow uses $rv'=\\alpha'$ and open base change $L\\alpha'^*j_!M\\cong w'_!P_0$ in the square with $j,w'$ and $\\alpha',p$. The last inner identification is $\\beta'w'=q$. This is $e^{\\mathrm{op}}_{j,k}$ with the extension factor put first whenever $\\gamma$ is used. Each arrow is invertible by the same cited normalization lemma. On restriction, both base-change maps and $\\gamma_{w'}$ are identities, $\\rho^{v'}$ is the identity by Step 3, and the compositor is the identity by Step 2. Therefore $u^*e^{\\mathrm{op}}_{j,k}=1_D$.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Open-product part of the signed symmetry reduction; agent-written details"
+   }
+  },
+  {
+   "text": "Restriction detects equality between the two maps just constructed. More explicitly, for any $a,b:E\\to u_!D$ with equal restrictions, compose with $e_{j,k}^{-1}$ to get two maps $u_!D\\to u_!D$. Full faithfulness of $u_!$ in [lem-sf-open-tensor-normalization] expresses them uniquely as $u_!a_0,u_!b_0$ for endomorphisms of $D$. Naturality of $\\eta^u$ gives $(\\eta_D^u)^{-1}u^*(u_!a_0)\\eta_D^u=a_0$, and the same formula for $b_0$. Equal restrictions imply $a_0=b_0$, and hence $a=b$. Apply this to Steps 5 and 6 to conclude $e_{j,k}=e^{\\mathrm{op}}_{j,k}$. This uses faithfulness only on the image of extension by zero, not on all ambient derived objects.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Open-product part of the signed symmetry reduction; agent-written details"
+   }
+  },
+  {
+   "text": "On $C',P'$ apply Steps 1--5 with $(j,M)$ and $(k,N)$ interchanged. The reversed map $e_{k,j}$ is an isomorphism and restricts to $1_{D'}$, where $D'=Lp'^*N\\otimes^LLq'^*M$ on $P'$. The square with vertical opens $u,u'$ and horizontal isomorphisms $s,\\bar s$ is Cartesian by the fibre-product universal property. Its normalized open base change gives\n$$L\\bar s^*u'_!D'\\xrightarrow{\\beta}u_!Ls^*D'.$$\nThe projection equalities $p's=q$, $q's=p$, $r'\\bar s=t$, $t'\\bar s=r$ identify the pullback of the reversed source with $H\\otimes^LR$ and $Ls^*D'$ with $Q\\otimes^LP_0$. Tensor and pullback composition use [lem-pur-derived-pullback-tensor-iso]. This is exactly the specified transport $\\widetilde e_{k,j}$. After restriction along $u$, the square comparison identifies $u^*L\\bar s^*e_{k,j}$ with $Ls^*u'^*e_{k,j}=1_{Ls^*D'}$, and the displayed $\\beta$ is the identity by [lem-sf-open-tensor-normalization]. Thus $u^*\\widetilde e_{k,j}=1_{Q\\otimes^LP_0}$.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Open-product part of the signed symmetry reduction; agent-written details"
+   }
+  },
+  {
+   "text": "Consider $h=u_!(\\sigma_{Q,P_0})\\circ\\widetilde e_{k,j}\\circ\\sigma_{R,H}:E\\to u_!D$. Restriction preserves the signed symmetry by [lem-pur-derived-pullback-tensor-iso], and the unit is natural on the map $\\sigma_{Q,P_0}$. Step 8 therefore gives\n$$u^*h=\\sigma_{Q,P_0}\\circ1_{Q\\otimes^LP_0}\\circ\\sigma_{P_0,Q}=1_D.$$\nThe cancellation is precisely the signed calculation of Step 3, valid in all degrees. Comparing with Step 5, apply the injectivity argument of Step 7 to obtain $h=e_{j,k}$, the asserted equality of actual morphisms. All inputs to the open normalization and finite-level tensor comparison theorems were arbitrary unbounded objects of the constant-$A$ module derived categories. No compact-support pushforward for $a,b$, constructible preservation, finite Tor interval, or six-functor datum was used.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+    "place": "Open-product part of the signed symmetry reduction; agent-written details"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-open-immersion",
+  "def-weil-pbc-composite-adjunction",
+  "lem-cbc-extension-zero-composition",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md",
+  "place": "Symmetry paragraph, open-extension reduction; detailed restriction-and-unit argument supplied by NZ"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +184,45 @@
    "results": "Actual returned hits: TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.Monoidal.tensorObj_obj, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv, AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl, PresheafOfModules.Monoidal.tensorObj_map_tmul, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app. The returned external products are products of diagrams, the module tensors are underived, and the braided sheafification result concerns sheafification. None constructs the two extension-by-zero product comparisons or proves their unit-normalized signed swap equality in the ordinary unbounded derived pro-etale categories.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary unbounded derived module sheaves the open extension by zero external tensor comparison is independent of extension order and commutes with signed factor swap",
+   "results": "Returned: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.map_ιFree_mapFree_hom_assoc, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.free_internallyProjective_iff_tensor_condition. ExternalProductSwap concerns functors on product indexing categories, not scheme opens or derived extension by zero; condensed monoidal structures, ordinary graded tensor identities, structure-sheaf restriction and scheme open-immersion facts do not give the asserted normalized unbounded pro-etale product maps.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|jShriek|j_shriek",
+   "results": "No hits. ExternalProductSwap concerns functors on product indexing categories, not scheme opens or derived extension by zero; condensed monoidal structures, ordinary graded tensor identities, structure-sheaf restriction and scheme open-immersion facts do not give the asserted normalized unbounded pro-etale product maps.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along open immersions commutes with derived tensor external products and the signed symmetry independently of the order of the open factors",
+   "results": "Returned: TensorProduct.gradedComm_tmul_of_zero, TensorProduct.gradedComm_of_zero_tmul, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.IsLocalAtSource.respectsLeft_isOpenImmersion, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.hasPullback_of_right, AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackFstOfRight. ExternalProductSwap concerns functors on product indexing categories, not scheme opens or derived extension by zero; condensed monoidal structures, ordinary graded tensor identities, structure-sheaf restriction and scheme open-immersion facts do not give the asserted normalized unbounded pro-etale product maps.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.externalProductSwap",
+   "results": "Returned: CategoryTheory.MonoidalCategory.externalProductSwap, CategoryTheory.MonoidalCategory.externalProductSwap_hom_app_app, CategoryTheory.MonoidalCategory.externalProductSwap_inv_app_app. ExternalProductSwap concerns functors on product indexing categories, not scheme opens or derived extension by zero; condensed monoidal structures, ordinary graded tensor identities, structure-sheaf restriction and scheme open-immersion facts do not give the asserted normalized unbounded pro-etale product maps.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized open base change and projection formula maps for two open immersions induce the same external product isomorphism after interchanging the two factors",
+   "results": "Returned: AlgebraicGeometry.Scheme.Hom.comp_appIso, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Hom.appIso_inv_naturality, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_assoc. ExternalProductSwap concerns functors on product indexing categories, not scheme opens or derived extension by zero; condensed monoidal structures, ordinary graded tensor identities, structure-sheaf restriction and scheme open-immersion facts do not give the asserted normalized unbounded pro-etale product maps.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-forward-product-symmetry",
@@ -78,5 +242,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-finite-open-product-swap",
+  "worker": "stage1",
+  "summary": "NZ checked the actual normalized maps on the ordinary unbounded finite-coefficient pro-etale categories. Nine steps construct both extension orders explicitly, derive the compositor unit equation, show restriction is injective for their source using full faithfulness, and compute the transported signed swap. Existing DAG nodes suffice; no new nodes and no change to the statement.",
+  "blueprint": "prop-pur-affine-space-composition-law proof Steps 3--4: open-product interchange required before the signed symmetry of the product morphism; the unit sk-prop-an Step 6 symmetry clause. The general Kunneth coherence proof is used only as context, not as a six-functor hypothesis.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic ringed-site open base-change and tensor maps with invertible units and full faithfulness on arbitrary unbounded complexes; the affine-space unit provides no such normalized open-operation theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-ce4acaaaf",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-ce4acaaaf (reviewer sub-agent of L); spot-checked: I read the item and all nine steps in full, with no new nodes. The statement is byte-identical to the base (Q83 created the item today, unsplit, with no proof). There is no repair note and no route-pivot-dropped hit; live and side-live still have the item unsplit; there is no SGA reference and proof_deps equals the union of step uses. Source: Stacks sites-cohomology.tex l.4578, lemma-j-shriek-and-tensor (0GL1), correctly marked as background for an agent-formulated comparison. Blueprint from = prop-pur-affine-space-composition-law Steps 3-4, read in main-20261015: the sign is only given for even shifts, and this item supplies the arbitrary-degree open interchange. Cited statements checked: lem-sf-open-tensor-normalization gives invertible units, full faithfulness of j_!, and beta and gamma on arbitrary unbounded complexes, each restricting to the identity. lem-pur-derived-pullback-tensor-iso gives mu for arbitrary unbounded objects with signed-commutativity and composition compatibility. Conjugate-iso-unit-equation with the composite adjunction yields exactly the Step 2 unit equation, and this is the same mate construction as in the proof of lem-cbc-extension-zero-composition. Step 1: the squares (j,v;r,alpha), (k,w;beta,q), (k,v';t,beta') and (j,w';alpha',p) are Cartesian, and all projection identities are correct. Step 3: rho restricts to sigma sigma = 1. Steps 4 and 6: the gamma directions match the normalization node and the chains match the statement's recipe. Steps 5 and 6: restrictions are 1_D. Step 7: faithfulness is used only on u_!D, which is isomorphic to E, and this is correct. Steps 8 and 9: the swap square is Cartesian because s-bar is an isomorphism, and sigma_{Q,P0} sigma_{P0,Q} = 1. Edge cases: identity opens; empty X, Z or P (E is supported on P, so it is 0); the odd/odd sign cancellation; characteristic 2. lem-sf-open-external-tensor-normalization is the bounded ctf six-functor-datum analogue, so it is not a duplicate. I accept the split_report tool use of lem-sf-open-tensor-normalization (generic open normalization). Advisory: the item statement names its compositor through the étale node lem-cbc-extension-zero-composition; Step 2 uses the unit-compatible mate, which is the only reading under which the statement is true. A pro-étale derived compositor node may be worth adding. No fixes."
  }
 }
