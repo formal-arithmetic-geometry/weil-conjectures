@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
-import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Agreement of the coefficient and cocone transitivity comparisons
 
@@ -59,6 +58,13 @@ theorem finiteCoefficient_cocone_comparison_agreement
             (finiteCoefficientDerivedTensorCompIso X ℓ h).hom.app K.obj ∧
           ((constructibleToPadicAlgClCompIso X ℓ h).inv.app K).hom =
             (finiteCoefficientDerivedTensorCompIso X ℓ h).inv.app K.obj := by
-  sorry
+  refine ⟨rfl, fun K ↦ ?_⟩
+  constructor
+  · rw [constructibleToPadicAlgClCompIso, CategoryTheory.Functor.fullyFaithfulCancelRight_hom_app,
+      ← CategoryTheory.ObjectProperty.ι_map, CategoryTheory.Functor.map_preimage]
+    exact CategoryTheory.Category.id_comp _
+  · rw [constructibleToPadicAlgClCompIso, CategoryTheory.Functor.fullyFaithfulCancelRight_inv_app,
+      ← CategoryTheory.ObjectProperty.ι_map, CategoryTheory.Functor.map_preimage]
+    exact CategoryTheory.Category.comp_id _
 
 end AlgebraicGeometry.ProEtale
