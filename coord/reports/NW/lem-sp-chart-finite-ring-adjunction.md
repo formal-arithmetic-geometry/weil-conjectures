@@ -1,0 +1,45 @@
+# Worker report: lem-sp-chart-finite-ring-adjunction
+
+1. Files written: `dag/nodes/sec-smooth-purity/lem-sp-chart-finite-ring-adjunction.json`, split into seven proof steps, statement unchanged. No new DAG nodes; no Mathlib leaves. `citations.json` records each step's statement quotation; `searches.jsonl` contains the actual new search log. The scratch script is confined to this sandbox.
+2. Attachments: none. Searches for the exact blueprint tag, the item id, chart adjunctions and finite-Tor adjunctions in `lean/WeilConjectures/` and the declaration-name index found no project declaration giving the full item. Existing scalar, Tor and ambient-adjoint modules are not a proof of this whole statement.
+3. WANTED: none.
+4. The seeded node had no proof. Its statement correctly distinguishes arbitrary finite rings from the special valuation-ring quotients appearing in other purity lemmas. I retained that distinction, the actual counit, the chosen compactification, and the geometric definition of the finite Tate line. No statement correction or dispute was needed. The definition of the fixed comparison writes the inverse orientation to the item's `c`; Step 4 makes this inversion explicit. I did not treat that definition as a theorem of invertibility: the separately cited finite-compact-support domain lemma supplies invertibility for the actual proper-counit/open map.
+5. Unfinished work: none at this one-level split. Its unsplit dependencies remain their own items. No Lean source was written, and no compiler or build was run.
+
+## Sources and searches
+
+I read `GOAL.md`, the stage-1 brief, stage document, worker role, the three-level route rules in `SETUP.md`, delivery-errors B--E, the smooth-purity chapter record and the coefficient-comparison unit record. The item's source is the Charts paragraph of `main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md`. The seven steps realize the parent split's retained Steps 3--4 and adjunction part of Step 11, without addressing the separate scalar-counit square or changing the unit's route.
+
+I also read the explicit Hom chain and counit in the adjunction-transfer proof, and the inverse-transpose argument in the categorical uniqueness proof. For the generic operations I read Stacks `more-etale.tex`, Tag 0F7I (`lemma-shriek-well-defined`) and Tag 0F7J (`lemma-shriek-composition`), `categories.tex` Tag 0DV0 (`lemma-compose-counits`), and `sites-cohomology.tex` Tag 07A4 (`lemma-pullback-tensor-product`). These justify the route of the existing tools; the present proof cites the DAG statements, not uncited tags. The proof is marked agent-written because the blueprint is agent-written and this assembly makes its actual comparisons explicit.
+
+Whole-DAG and blueprint searches for adjunction transfer, finite Tor amplitude, unique right adjoints and the affine-space adjunction found existing nodes. In particular the domain node, chart-left normalization, fixed compact-support domains, transfer theorem and uniqueness theorem already cover the required inputs, so I created no duplicate or elementary helper. The item retains its existing blueprint ancestor `det-sp-reduction-exceptional`, precise `from.place` and empty `same_as`; the search found no blueprint node stating the whole arbitrary-finite-ring chart assertion.
+
+The fresh logged Mathlib searches used LeanFinder in two phrasings, Loogle for adjunctions and equivalences, source grep for finiteTor/proetale adjunctions, and LeanSearch. LeanFinder returned ordinary structure-sheaf pullback adjunctions, condensed constructions or unrelated etale algebra. Loogle returned general equivalence adjunctions and sheafification transport, not the geometric compact-support assertion. LeanSearch likewise returned underived pullback and sheafification adjunctions or etale ring algebra. The grep had no hits. These do not supply the chart functor, finite-Tor restriction and specified transported counit together. I retained all earlier search records and appended the actual fresh log records unchanged as results.
+
+## Not duplicates
+
+No new nodes were created, so there are no new/existing same-tag pairs.
+
+## Review by NW
+
+I checked each cited node's statement directly, rather than its proof or its title. Every citation is represented by a verbatim quotation in `citations.json`.
+
+Step 1 uses finite-type Noetherian permanence, the chart-domain lemma's explicit preservation of the ordinary compact-support and twisted pullback functors, and the finite-Tor comparison theorem's same-interval equivalence. The field has no nontrivial ideals, finite rings are Noetherian, and the standing finite-type schemes meet these hypotheses. The common annihilator is invertible in characteristic different from ell. No algebraically closed field hypothesis is introduced.
+
+Step 2 uses the ordinary derived sum-extension adjunction in `lem-amb-etale-adjoint-locality` and the actual ordered affine-space adjunction in `lem-amb-affine-space-top-trace`. The composite-adjunction node explicitly supplies the Hom bijection and counit order. Thus the step does not infer an adjunction merely from an isomorphic right functor or an isomorphic trace. It includes the identity affine-space adjunction in dimension zero.
+
+Step 3 uses the existing chart-left-normalization statement's explicit assertion that its lambda carries the composite adjunction to the chosen compact-support functor and retains the sum-then-affine counit. This is exactly the comparison the item specifies, including refinement. Restriction uses fullness and preservation established in Step 1: no assertion of closure of ambient unbounded categories is being substituted for finite-Tor preservation.
+
+Step 4 uses the finite-compact-support-domains statement's explicit isomorphism for the actual proper mate/open map on bounded-below inputs. I compared its orientation to the fixed-comparison definition: the definition has `Fpro C -> C Fet`, and its inverse is the item's `c`. All inputs needed here are bounded below by Step 1. Essential surjectivity then gives preservation by `Fpro` on all of the pro-etale finite-Tor category; this is a two-line argument written in the step.
+
+Step 5 applies the transfer theorem only after establishing its equivalences, preservation and specified comparison hypotheses. I wrote the complete Hom chain and explicitly followed the identity: its last arrow precomposes with `c(HK)^{-1}`, giving exactly `C(epsilon_K) c(HK)^{-1}`. Naturality uses fullness of the equivalences and naturality of the given maps, as the cited statement asserts. This verifies the actual counit, including the endpoint identifications.
+
+Step 6 is marked elementary relative to the cited chart-domain statement: it already states that canonical comparisons intertwine site inverse image, Tate powers and shifts. Substitution gives `C_U H_et K = H_pro C_Y K`; evaluation at `Q_Y L` and the equivalence counit give the identification on arbitrary objects. The pro-etale line in this item is defined as the inverse image of the etale line, so I did not use the finite-Tate descent lemma restricted to valuation-ring quotient coefficients.
+
+Step 7 uses the Brown restriction theorem on arbitrary standing fields and arbitrary finite ell-primary rings, not a special finite-field or coefficient-field version. The categorical uniqueness statement supplies mutually inverse natural transposes and uniqueness even among all counit-preserving families. Its counit equation has exactly the same left functor as Step 5.
+
+Small cases checked: dimension zero gives the etale sum adjunction and no twist or shift; the identity chart gives the identity comparison; an empty chart gives zero sum-extension and zero right functor; the zero ring gives zero module categories, so even the allowed annihilator N=1 causes no exception. Nonflat maps such as Z/ell^2 -> Z/ell are allowed: no step assumes finite projective dimension of B over A, and the argument is performed separately over A and B. Neither a scalar extension map nor an exceptional coefficient comparison is being proved implicitly. No new statement requires a separate small-case test.
+
+I checked B1--B10 (no new nodes, statement and blueprint metadata retained), C1--C8 (all non-elementary inputs cited, quote checked, tool uses declared), D1--D5 (the proof carries the adjunction composition and counit calculation, rather than hiding the item in a fresh node), and E1--E7 (domains, orientations, hypotheses and object identities as above). All steps are shorter than 2000 characters. Off-unit citations are recorded in `split_report.tool_uses` as the generic domain, adjunction, site-comparison and uniqueness tools required by this route.
+
+Dry-run repair: the first citation gate required longer quotations for Noetherian permanence, the finite-Tor equivalence and adjoint uniqueness. I replaced those fragments with the complete relevant statement sentences, and also quoted the Brown restricted-adjunction formula. No mathematical proof change was required by that diagnostic.
