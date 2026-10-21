@@ -14,11 +14,110 @@
   "det-pe-classical-sheaves-modules",
   "def-weil-pbc-proetale-operations",
   "sk-def-sfb-constructible",
-  "sk-def-localizing-closure"
+  "sk-def-localizing-closure",
+  "def-kun-truncations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal B_T$ be the full replete subcategory of classical constant-$A$ module sheaves. By [det-pe-classical-derived-weak-serre] it contains zero and is closed under kernels, cokernels and extensions. Apply [lem-sbc-cohomology-in-weak-serre-subcategory] to the abelian category of pro-étale constant-$A$ modules and $\\mathcal B_T$. Its $D_{\\mathcal B_T}$ is exactly $\\mathcal C_T$, so $\\mathcal C_T$ is full replete and triangulated. The formulas in [def-kun-truncations] show that canonical truncation retains a cohomology sheaf or replaces it by zero in every degree; thus both canonical truncations preserve $\\mathcal C_T$.",
+   "uses": [
+    "det-pe-classical-derived-weak-serre",
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory; canonical truncation formulas of def-kun-truncations"
+   }
+  },
+  {
+   "text": "Classical sheaves are closed under arbitrary small sums in the ambient heart. Indeed write $F_i\\simeq\\nu_T^*E_i$ by [det-pe-classical-sheaves-modules]. The two module categories have small coproducts by [lem-weil-pbc-module-sheaves-colimits-forgetful]. For any pro-étale module sheaf $G$, the adjunction of [def-weil-pbc-site-comparison-morphism] gives naturally\n$$\\operatorname{Hom}(\\nu_T^*(\\bigoplus_iE_i),G)\\simeq\\operatorname{Hom}(\\bigoplus_iE_i,\\nu_{T,*}G)\\simeq\\prod_i\\operatorname{Hom}(\\nu_T^*E_i,G).$$\nConsequently $\\nu_T^*(\\bigoplus_iE_i)$, with its canonical coprojections, is the ambient coproduct of the $F_i$ and is classical. The same calculation includes the empty family.",
+   "uses": [
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.md",
+    "place": "Module comparison adjunction and its elementary coproduct universal-property calculation"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-ring-sheaves-grothendieck], the module category on the fixed small pro-étale site has exact filtered colimits. A small sum is the filtered colimit of the sums over its finite subsets. Finite sums are exact in an abelian category, so taking this filtered colimit proves that all small sums are exact. For representing complexes $K_i^\\bullet$, [lem-kun-grothendieck-derived-coproducts] identifies the ambient derived coproduct with the termwise coproduct. Exactness gives\n$$\\ker(\\bigoplus_i d_i^q)\\simeq\\bigoplus_i\\ker d_i^q,\\qquad\\operatorname{im}(\\bigoplus_i d_i^{q-1})\\simeq\\bigoplus_i\\operatorname{im}d_i^{q-1},\\qquad \\mathcal H^q(\\bigoplus_iK_i)\\simeq\\bigoplus_i\\mathcal H^q(K_i).$$\nStep 2 now makes the coproduct classical in every degree whenever the $K_i$ lie in $\\mathcal C_T$. For each fixed integer $a$, the good truncation formulas of [def-kun-truncations] use just zero terms, retained terms, and one kernel or cokernel. Exact sums commute with each of these constructions, so $\\bigoplus_i\\tau_{\\le a}K_i\\simeq\\tau_{\\le a}(\\bigoplus_iK_i)$ and $\\bigoplus_i\\tau_{\\ge a}K_i\\simeq\\tau_{\\ge a}(\\bigoplus_iK_i)$, with their canonical maps. Empty sums give the zero complex throughout.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-kun-grothendieck-derived-coproducts",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D), 07D9 (lemma-derived-products); elementary exact-sum and truncation calculations"
+   }
+  },
+  {
+   "text": "For any scheme morphism $r:W\\to T$, [def-weil-pbc-proetale-operations] gives exact constant-coefficient inverse image, induced termwise on complexes. Thus the kernel/image/quotient formula for cohomology gives $\\mathcal H^q(r^*K)\\simeq r^*\\mathcal H^q(K)$. If $\\mathcal H^q(K)\\simeq\\nu_T^*E_q$, the inverse-image square of [sk-thm-pe-direct-image-comparison] gives $r^*\\nu_T^*E_q\\simeq\\nu_W^*r_{\\mathrm{ét}}^*E_q$, a classical sheaf. Hence $r^*K\\in\\mathcal C_W$. Exactness also preserves the kernel and cokernel in the good truncation formulas [def-kun-truncations], so the termwise identifications give $r^*\\tau_{\\le a}K\\simeq\\tau_{\\le a}r^*K$ and $r^*\\tau_{\\ge a}K\\simeq\\tau_{\\ge a}r^*K$. Only the unrestricted inverse-image clause of the comparison is used; no qcqs condition on $r$ is needed.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "sk-thm-pe-direct-image-comparison",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-direct-image-comparison/_section.md",
+    "place": "Commutative comparison square and exact inverse images; elementary truncation calculation"
+   }
+  },
+  {
+   "text": "Assume now that $T$ is qcqs. The finite discrete coefficient identifications [lem-weil-pbc-finite-discrete-condensed-ring-constant] and [lem-weil-pbc-finite-discrete-scheme-ring-constant] identify the pulled-back condensed $A$ ring with the ordinary constant $A$ ring. Transport along this ring isomorphism identifies their module sheaves, cohomology, and ambient sums, since its inverse is transport along the inverse ring isomorphism. The ring $A$ is Noetherian: its ideals are subsets of a finite set, so every ascending chain of ideals stabilizes. By [sk-def-sfb-constructible], an object of $\\Dctf(T,A)$ has constructible cohomology sheaves. Apply the heart clause of [sk-thm-pe-constructible-comparison], whose hypotheses are precisely qcqs $T$ and discrete Noetherian $A$, to conclude that all these sheaves are classical. Thus $\\Dctf(T,A)\\subseteq\\mathcal C_T$; the additional finite Tor amplitude condition is not needed for this inclusion.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "sk-def-sfb-constructible",
+    "sk-thm-pe-constructible-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/_section.md",
+    "place": "Constructible classicality for qcqs schemes and discrete Noetherian rings; finite-coefficient identifications"
+   }
+  },
+  {
+   "text": "By steps 1 and 3, $\\mathcal C_T$ is a full replete triangulated subcategory closed under all small ambient coproducts. By step 5 it contains $\\Dctf(T,A)$. The definition [sk-def-localizing-closure] is the intersection of all full replete triangulated subcategories with exactly these containment and coproduct properties. In particular that intersection is contained in $\\mathcal C_T$, giving $\\Loc(\\Dctf(T,A))\\subseteq\\mathcal C_T$.",
+   "uses": [
+    "sk-def-localizing-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/_section.md",
+    "place": "Intersection definition of the localizing closure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-derived-weak-serre",
+  "det-pe-classical-sheaves-modules",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "sk-def-localizing-closure",
+  "sk-def-sfb-constructible",
+  "sk-thm-pe-constructible-comparison",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
+  "place": "Transfer paragraph: classical-cohomology localizing-subcategory argument, expanded using the existing comparison and Grothendieck-category nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +160,52 @@
    "results": "; 0 hits: ; scope Mathlib/CategoryTheory/Sites",
    "date": "2026-10-21",
    "verdict": "no match: general definitions and infrastructure do not give the stated scheme/coefficient comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "classicalSheaf|etaleOrigin|proetale",
+   "results": "; 0 hits: ; scope Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the classical pro-étale closure theorem; generic derived and essential-image infrastructure supplies only parts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Complexes whose cohomology lies in the essential image of the etale to proetale inverse image form a localizing triangulated subcategory",
+   "results": "; 8 hits: DerivedCategory.instIsTriangulated, CategoryTheory.Triangulated.Localization.pretriangulated, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization', DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic, HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso, CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization', HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic, CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the classical pro-étale closure theorem; generic derived and essential-image infrastructure supplies only parts"
+  },
+  {
+   "tool": "loogle",
+   "query": "ObjectProperty.IsClosedUnderColimitsOfShape, Functor.essImage",
+   "results": "loogle: unknown identifier 'ObjectProperty.IsClosedUnderColimitsOfShape'; 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "inconclusive: Loogle rejected this identifier; the subsequent essImage query was run instead"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of unbounded derived proetale sheaves with classical cohomology is closed under coproducts triangles truncations and pullback",
+   "results": "; 8 hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Sheaf.isGrothendieckAbelian_of_essentiallySmall, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.TStructure.t, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the classical pro-étale closure theorem; generic derived and essential-image infrastructure supplies only parts"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"essImage\"",
+   "results": "; 12 hits: CategoryTheory.Functor.EssImageSubcategory, CategoryTheory.Functor.essImage, CategoryTheory.Functor.instIsClosedUnderIsomorphismsEssImage, CategoryTheory.Functor.essImage.witness, CategoryTheory.Functor.obj_mem_essImage, CategoryTheory.Functor.EssSurj.mem_essImage, CategoryTheory.Functor.toEssImage, CategoryTheory.Functor.essImage.ofIso",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the classical pro-étale closure theorem; generic derived and essential-image infrastructure supplies only parts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived category complexes with homology in a weak Serre subcategory closed under direct sums",
+   "results": "; 8 hits: DerivedCategory.IsGE, DerivedCategory, DerivedCategory.IsLE, DerivedCategory.TStructure.t, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isLE_iff, DerivedCategory.isGE_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the classical pro-étale closure theorem; generic derived and essential-image infrastructure supplies only parts"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-ctf-finite-proper-localizing",
@@ -76,10 +217,59 @@
  "blueprint": {
   "from": {
    "node": "det-ctf-finite-proper-localizing",
-   "place": "Transfer, classical cohomology subcategory; old split step 4",
+   "place": "Transfer paragraph: passage to the pro-étale localizing closure; classical cohomology of its generators and closure under ambient sums",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-classical-localizing",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six steps prove all closure, commutation, pullback and localizing-containment clauses using existing nodes only. The argument distinguishes weak Serre closure from full faithfulness, computes exact ambient sums termwise, and uses the heart constructible comparison only under qcqs and Noetherian hypotheses. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the Transfer paragraph of det-ctf-finite-proper-localizing, specifically the classical-cohomology closure argument isolated as old split step 4. It does not assume that all unbounded étale objects are generated by Dctf or that unbounded derived comparison is an equivalence.",
+  "tool_uses": [
+   {
+    "node": "det-pe-classical-derived-weak-serre",
+    "why": "Heart-level weak Serre closure of classical modules is the generic comparison tool needed for the classical-cohomology subcategory; it does not replace the unit proper-pushforward argument."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic derived-category criterion converts heart weak Serre closure to triangulated closure; no result of this proper-image unit supplies that criterion."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic existence of small coproducts in the two module-sheaf categories is needed for the explicit adjunction calculation."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic termwise computation of unbounded derived coproducts is needed; it does not use any geometric proper-image theorem."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Only the unrestricted exact inverse-image square is used to pull back a classical heart sheaf; no direct-image assertion is used."
+   },
+   {
+    "node": "sk-thm-pe-constructible-comparison",
+    "why": "Its heart clause supplies classicality of finite-coefficient constructible sheaves in the Transfer paragraph."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-pe-classical-derived-weak-serre",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-kun-grothendieck-derived-coproducts",
+  "sk-thm-pe-direct-image-comparison",
+  "sk-thm-pe-constructible-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-5a7ca0779",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-5a7ca0779 (reviewer sub-agent of L); spot-checked: Read in full: the item (6 steps, no new nodes, statement unchanged) and every cited statement. Source: blueprint main-20261015 sk-prop-ctf-finite-proper-localizing.proof.md l.14-17 (Transfer); the item proves the containment Loc(Dctf) ⊆ C_T, pullback stability and sum/truncation commutation, which are exactly what the parent's two citing steps use. BS 1309.1198 Lemma 5.1.2, Def 5.1.3 and Cor 5.1.9 (pp. 34-35) checked against det-pe-classical-sheaves-modules and det-pe-classical-derived-weak-serre. Step 1: the weak-Serre node meets the hypotheses of lem-sbc-cohomology-in-weak-serre-subcategory, so D_B = C_T is triangulated, and truncations keep it by def-kun-truncations. Step 2: sums of classical sheaves follow from the ν^* adjunction; the empty family is included. Step 3: Grothendieck exact filtered colimits give exact sums; derived coproducts are termwise for unbounded complexes, so H^q and τ commute with sums. Step 4: uses only the unrestricted inverse-image clause of sk-thm-pe-direct-image-comparison (its qcqs hypothesis is on the direct-image clause). Step 5: qcqs T and finite (hence Noetherian) A; sfb constructibility agrees with the comparison node's definition; the heart clause makes the cohomology classical; coefficients transported by the two finite-discrete ring lemmas. Step 6: minimality of the intersection. Edge cases T=∅, A=0, empty sums and complexes unbounded in both directions all hold. No duplicate found (lem-sfb-finite-proper-classical-coproducts is the complementary pushforward result). The six generic tool_uses are accepted. No SGA, no re-split note. Advisory: the identification of the constant A sheaf with Cont(π0,A)^# is inherited from the unchanged statement."
  }
 }

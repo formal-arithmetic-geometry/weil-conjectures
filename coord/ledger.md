@@ -20000,3 +20000,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:50:01Z L: superseded stage-1 delivery Q52/lem-sfb-dc-hom-filtered-colimit at 3199d7ddbe2c568efc44458fc85bbe3e800c39a9; current completion retained; packet archived at refs/superseded/Q52/lem-sfb-dc-hom-filtered-colimit/3199d7ddbe2c568efc44458fc85bbe3e800c39a9; stale return retired.
 - 03:50 L: merged deliver/NS/lem-weil-pbc-finite-intersection-limit-compatibility (reviewer PASS; first push; new nodes: 0)
 - 03:50 L: merged deliver/Q24/lem-pe-left-module-comparison-vanishing-criterion (reviewer PASS; first push; new nodes: 0)
+- 03:50 L: merged deliver/Q128/lem-sfb-finite-classical-localizing (reviewer PASS; first push; new nodes: 0)
