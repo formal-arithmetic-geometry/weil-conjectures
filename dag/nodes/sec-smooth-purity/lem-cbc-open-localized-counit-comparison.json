@@ -20,89 +20,62 @@
  ],
  "proof": [
   {
-   "text": "Use the slice identifications for $j,j'$ and the constant-ring identifications to regard restriction as evaluation on the slices over $U,U'$. The base-change functor defining $g$ sends $U$ to $U'=T'\\times_TU$; its functor on slices is the base-change functor for $g_U$. Apply the ringed localization theorem to obtain the natural isomorphism $\\lambda:g_{U,B}^*j^*\\xrightarrow{\\sim}j'^*g_B^*$. The theorem's localized ring map is the restriction of $c_g$ through the inverse-image comparison. This is the canonical map $c_{g_U}$: after adjunction, both send every constant $b\\in B$ on $(V\\to U)$ to the constant $b$ on $U'\\times_UV=T'\\times_TV$, and hence their maps from the constant presheaf, and then from its sheafification, coincide. Thus $\\lambda$ uses precisely the coefficient maps in the statement, rather than an independently chosen ringed structure.",
+   "text": "Work directly in the published AsSmall pro-etale models and their literal Over categories. The base-change functor preserves finite limits because its three factors do; its continuity is already published. Apply the canonical module inverse-mate isomorphism to the actual constant-section coefficient map, obtaining invertibility of lambda = cbcOpenSliceComparison. No change of coefficient maps or of slice coordinates is required.",
    "uses": [
     "def-weil-proetale-inverse-image",
-    "lem-weil-proetale-weakly-etale-localization",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-weil-pbc-localize-ringed-site-morphism"
+    "lem-weil-pbc-slice-module-pullback-isIso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, statement and displayed formula for the localized ring map."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $a_F:P_F\\to j_!F$ for the sheafification unit. The summand construction and module sheafification give the explicit Hom bijection underlying the stated adjunction: $t:F\\to j^*M$ sends $s\\in F(V\\xrightarrow{\\varphi}U)$ to $t_{(V,\\varphi)}(s)\\in M(V)$, extended additively over the direct sum and uniquely across $a_F$. Conversely $h:j_!F\\to M$ gives $s\\mapsto h_V(a_F(\\iota_\\varphi(s)))$. Both maps respect restrictions and scalars because the summand restriction sends $\\iota_\\varphi(s)$ to $\\iota_{\\varphi v}(s|_{V'})$. Starting with $t$ returns $t$ on every section. Starting with $h$ returns a map equal to $h$ on every summand after precomposing with $a_F$, hence equal to $h$ by the sheafification universal property. These rules also commute with precomposition in $F$ and postcomposition in $M$. This verifies the canonical summand adjunction, including the inverse verifications omitted in the source.",
+   "text": "The existsUnique specification of localizedSystemAdjunction gives the actual unit formula: include a section into its structure-arrow summand, then apply the module sheafification unit. Apply the right adjunction triangle on a slice object to obtain the counit formula on that same sheafified generator. This uses the given normalized adjunction and does not choose a replacement adjunction.",
    "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
     "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "def-weil-presheaf-modules-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, lemma-extension-by-zero, the two transposition constructions and final inverse verification."
-   }
+   "elementary": true
   },
   {
-   "text": "Taking $h=\\mathrm{id}_{j_!F}$ in Step 2 shows that the actual unit $\\eta_F:F\\to j^*j_!F$ is $s\\mapsto a_F(\\iota_\\varphi(s))$. Taking $t=\\mathrm{id}_{j^*M}$ shows that the actual counit $\\epsilon_M:j_!j^*M\\to M$ is the unique sheaf map whose composite with $a_{j^*M}$ sends $\\iota_\\varphi(s)$ to $s\\in M(V)$. In particular these are the unit and counit of the sheafified extension adjunction, with no alternative natural automorphism inserted.",
+   "text": "Since U.hom is an open immersion it is mono. Equality after composition with U.hom shows that every object of the pro-etale model has at most one arrow to U. On a slice object the direct-sum injection into the structure-arrow summand is therefore an isomorphism, whose inverse is the component projection. These give a natural isomorphism from F to the restriction of its extension presheaf, checked on each summand. The restricted presheaf is consequently a sheaf. The unit-compatible sheafification comparison along Over.forget identifies the restricted global sheafification unit with the local sheafification unit followed by an isomorphism. Both are invertible, and the formula of the preceding step identifies their composite with the underlying normalized extension unit. Forgetting module structure reflects isomorphisms, so this actual unit is invertible.",
    "uses": [
+    "def-weil-proetale-inverse-image",
     "def-weil-extension-by-zero-presheaf",
     "def-weil-presheaf-modules-sheafification",
-    "lem-pur-site-restriction-module-adjunction-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, lemma-extension-by-zero, transposition applied to identity maps."
-   }
-  },
-  {
-   "text": "Every object $V\\to T$ has at most one map to $U$. On the slice object $(V\\xrightarrow{\\varphi}U)$, the direct sum defining $P_F(V)$ therefore has exactly the single summand $F(V,\\varphi)$; its restrictions are those of $F$. Thus $P_F|_{T_{\\mathrm{proet}}/U}=F$ naturally. Apply the unit-compatible slice-sheafification isomorphism to the underlying abelian presheaf $P_F$. Since $F$ is already a sheaf, its sheafification unit is invertible (its inverse is the unique factorization of $\\mathrm{id}_F$). By Step 3 and unit compatibility this is precisely the underlying map of $\\eta_F:F\\to j^*j_!F$. It is a module isomorphism: $\\eta_F$ is linear, and the inverse of a bijective linear map is linear. Hence $\\eta$ is a natural isomorphism. This uses the abelian-valued case of the slice theorem, so no assumption that the varying ring sheaf $B_T$ is sectionwise the ring $B$ is made.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-site-restriction-module-adjunction-exact",
     "lem-cbc-sieve-slice-sheafification"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0F6Z, lemma-restrict-back, the subterminal restriction-back situation; unit formula from Tag 03DI. Slice sheafification is supplied by the cited Mathlib leaf."
-   }
+   "elementary": false
   },
   {
-   "text": "Define the canonical identification $\\alpha_F:H(F)\\xrightarrow{\\sim}g_{U,B}^*F$ by $\\alpha_F=g_{U,B}^*(\\eta_F^{-1})\\circ\\lambda_{j_!F}^{-1}$. It is natural, with inverse $\\lambda_{j_!F}\\circ g_{U,B}^*(\\eta_F)$. Naturality of $\\lambda$ at $\\epsilon_M$ gives\n$$\\beta_M\\circ\\lambda_{j_!j^*M}=\\lambda_M\\circ g_{U,B}^*(j^*\\epsilon_M).$$\nThe adjunction triangle is $j^*(\\epsilon_M)\\circ\\eta_{j^*M}=\\mathrm{id}_{j^*M}$; Step 4 therefore gives $j^*(\\epsilon_M)=\\eta_{j^*M}^{-1}$. Substitution yields $\\beta_M=\\lambda_M\\circ\\alpha_{j^*M}$. Thus $\\beta$ is invertible and, under the specified identification of $H$, is exactly $\\lambda$, as asserted. Its generator formula is the pullback of the evaluation in Step 3: $\\iota_\\varphi(s)\\mapsto s$ on the open slice. More explicitly, on a presheaf inverse-image generator indexed by $(V,\\psi:W\\to U'\\times_UV)$, followed by a tensor generator with coefficient $b\\in B_{U'}(W)$, it sends $[V,\\psi,\\iota_\\varphi(s)]\\otimes b$ to $[V,\\psi,s]\\otimes b$. The relation maps, balancing relations and subsequent sheafifications are respected because this is the functorial pullback of the linear map of Step 3. This also verifies the formula for sheaf sections without claiming that all sheaf sections are global presheaf generators.",
+   "text": "Define alpha by the inverse of lambda whiskered by extension, followed by localized pullback of the inverse extension unit (with associators and unitors). Its inverse has the prescribed formula by functoriality. To prove beta = alpha followed by lambda, precompose with alpha inverse, use naturality of lambda at the actual extension counit, combine the two pullback maps, and apply the right adjunction triangle. Hence beta is invertible componentwise.",
    "uses": [
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-proetale-inverse-image",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-pbc-slice-module-pullback-isIso",
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 04J0, lemma-localize-morphism-ringed-sites, naturality of the canonical pullback comparison; 03DI, lemma-extension-by-zero, adjunction triangles and summand evaluation."
-   }
+   "elementary": true
+  },
+  {
+   "text": "For any sheaf-module map f, linearity of pullback(f), naturality along psi, and naturality of the pullback-adjunction unit show that pullback(f) sends the generator indexed by (V,psi,s,b) to the generator indexed by (V,psi,f(s),b). Apply this to the actual extension counit and use its summand evaluation formula from the right triangle. This proves the requested inverse-image/tensor generator formula without any assertion that all global sheaf sections are generators.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-proetale-inverse-image",
-  "lem-weil-proetale-weakly-etale-localization",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-slice-module-pullback-isIso",
+  "lem-pur-site-restriction-module-adjunction-exact",
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-cbc-sieve-slice-sheafification",
-  "def-pur-sheaf-tensor-product"
+  "lem-cbc-sieve-slice-sheafification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI (lemma-extension-by-zero), 0F6Z (lemma-restrict-back), 04J0 (lemma-localize-morphism-ringed-sites). The displayed counit normalization is the explicit naturality/triangle calculation from these constructions."
+  "place": "Tags 03DI (normalized direct-sum adjunction), 0F6Z (restriction back), 04J0 (localized ringed-site comparison). Restriction-back calculation adapts the proved private extensionSectionIso, extensionRestrictionIso and extensionSheafAdjunction_unit_isIso in Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed to a small category with equal object and Hom universes. The cancellation and pullback-unit naturality calculations are written here."
  },
  "mathlib_searches": [
   {
@@ -233,8 +206,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-proetale-weakly-etale-localization",
-  "prop-weil-pbc-proetale-constant-ring-map",
   "lem-weil-pbc-localize-ringed-site-morphism"
  ],
  "reviewed": {
@@ -279,5 +250,15 @@
   "group": "NE",
   "result": "pass",
   "note": "Re-delivery after landing return for name collisions (cbcOpenRestriction/cbcOpenAdjunction vs CompletedExtensionZeroComparison). Diff vs PASSed ebdeae75 head: only the two abbrevs deleted and their uses replaced by their exact bodies (localizedSystemRestriction/Adjunction on the same args), so all clauses are unchanged (IsIso β of whiskered actual counit, IsIso λ=sliceModulePullbackMap, alpha pinned by alpha.inv=g_U^*(η)≫λ, β=alpha.hom≫λ, unit/counit/generator formulas). Item node differs from live only in lean; 9 dep nodes equal live; statement verbatim; 13 declarations exact; none of the 13 names declared in live lean; one sorry; no extra hypotheses; edge cases covered. nt_compile --json clean, 46.1 s (advisory: was 10.9 s; if landing times out, reintroduce non-colliding local abbrevs)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261021T120805-L-3947930",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
