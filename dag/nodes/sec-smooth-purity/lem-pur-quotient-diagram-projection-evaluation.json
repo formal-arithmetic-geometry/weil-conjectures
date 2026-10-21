@@ -19,9 +19,151 @@
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Realize the quotient ring system as a ring sheaf on the sequence site using [lem-pur-system-ringed-sequence-site]. The equivalence identifies module maps with the specified semilinear transitions. By [lem-pur-system-level-left-extension], its derived evaluations $e_n^T$ are exact and have derived left adjoints $L_n^T$, with $e_m^TL_n^TP=B_{T,m}\\otimes^L_{B_{T,n}}P$ for $m\\leq n$ and zero for $m>n$. These are adjunctions of strict-system derived categories. In particular $e_n^TL_n^T\\cong1$, with the multiplication identification. Evaluation is also a ringed inverse image with identity coefficient map [lem-pur-system-evaluation-topos]; hence its derived tensor comparison is the canonical one of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Apply [lem-weil-pbc-ringed-projection-mate-exact] to the ringed diagram topoi to obtain the specified $G_B\\dashv P_B$ and its counit $\\varepsilon^B$.",
+   "uses": [
+    "lem-pur-system-ringed-sequence-site",
+    "lem-pur-system-level-left-extension",
+    "lem-pur-system-evaluation-topos",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0B56 (equation-projection-formula-map); evaluation argument uses Zheng Construction 4.1, printed p. 21."
+   }
+  },
+  {
+   "text": "There is a canonical comparison $c_n:G_BL_n^{\\mathcal Y}\\xrightarrow{\\sim}L_n^{\\mathcal X}u_n^*$. Construct it on the actual singleton extensions, not merely on their evaluated objects. For a flat-term K-flat $B_{\\mathcal Y,n}$-complex $Q$, [lem-pur-system-single-derived-extension] computes $L_nQ$ by its ordinary singleton extension. At $m\\leq n$ the comparison is the tensor pullback map\n$$u_m^*(B_{\\mathcal Y,m}\\otimes_{B_{\\mathcal Y,n}}Q)\\cong B_{\\mathcal X,m}\\otimes_{B_{\\mathcal X,n}}u_n^*Q;$$\nat $m>n$ it is the identity of zero. These maps commute with transitions: on a local tensor $b\\otimes q$, either order applies the quotient map to $b$ and inverse image to $q$. This is the ordinary extension of [lem-pur-system-ordinary-single-extension]. It is a K-flat complex with flat terms over $B_{\\mathcal Y}$: each level $B_{\\mathcal Y,m}\\otimes_{B_{\\mathcal Y,n}}Q$ is K-flat with flat terms over $B_{\\mathcal Y,m}$ by [lem-weil-pbc-ringed-pullback-preserves-kflat] for the identity topos with ring map $B_{\\mathcal Y,n}\\to B_{\\mathcal Y,m}$; the covers of the sequence site are vertical, so its sheafified tensor with a system $N$ is levelwise, $(B_{\\mathcal Y,m}\\otimes_{B_{\\mathcal Y,n}}Q)\\otimes_{B_{\\mathcal Y,m}}N_m$ (zero for $m>n$), and acyclicity is levelwise [lem-pur-system-level-left-extension]. Hence $G_B$ of it is computed by termwise $u_m^*$. Inverse image preserves K-flat flat-term complexes [lem-weil-pbc-ringed-pullback-preserves-kflat], so $L_n^{\\mathcal X}$ of $u_n^*Q$ is also computed by its ordinary singleton extension, and both sides compute on the same $Q$. The canonical pullback/tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] therefore gives the comparison on the normalized universal derived functors. At level $n$, multiplication by $B_n$ makes $e_n^{\\mathcal X}c_n$ the identity of $u_n^*Q$.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-system-single-derived-extension",
+    "lem-pur-system-ordinary-single-extension",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0B56 (equation-projection-formula-map); evaluation argument uses Zheng Construction 4.1, printed p. 21."
+   }
+  },
+  {
+   "text": "For $V\\in D(B_{\\mathcal Y,n})$ and $Z\\in D(B_{\\mathcal X})$, compose the specified adjunctions and $c_n$:\n$$\\operatorname{Hom}(V,e_n^{\\mathcal Y}P_BZ)\\cong\\operatorname{Hom}(G_BL_n^{\\mathcal Y}V,Z)\\cong\\operatorname{Hom}(L_n^{\\mathcal X}u_n^*V,Z)\\cong\\operatorname{Hom}(V,Ru_{*,A_n}e_n^{\\mathcal X}Z).$$\nThe middle bijection uses $c_n^{-1}$. Thus these are the two right adjoints of canonically identified left adjoints; apply [det-sp-unique-right-adjoint] to their composite counits: the natural bijections give a natural isomorphism $\\beta_{n,Z}:e_n^{\\mathcal Y}P_BZ\\xrightarrow{\\sim}Ru_{*,A_n}e_n^{\\mathcal X}Z$. Track the image of $1_{e_nP_BZ}$. The first inverse transpose is $\\varepsilon^B_Z\\circ G_B(\\lambda_{P_BZ})$, where $\\lambda:L_ne_n\\to1$ is the singleton counit. Its level-$n$ component is $e_n\\varepsilon^B_Z$, since $e_n\\lambda=1$ and $e_nc_n=1$. Consequently\n$$e_n^{\\mathcal X}\\varepsilon^B_Z=\\varepsilon^{(n)}_{e_n^{\\mathcal X}Z}\\circ u_n^*(\\beta_{n,Z}).$$\nHere the Hom/counit formulas are [lem-weil-pbc-adjunction-of-natural-bijection] and the composite-adjunction formulas are [lem-weil-pbc-mate-pasting]. This identifies the actual finite adjunction, including its counit, without evaluating any K-injective replacement.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-weil-pbc-mate-pasting",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0B56 (equation-projection-formula-map); evaluation argument uses Zheng Construction 4.1, printed p. 21."
+   }
+  },
+  {
+   "text": "These are the derived restriction/direct-image comparisons stipulated in the statement. To check the normalization, let $r_{T,n}$ forget $B_{T,n}$ to $\\underline A_T$. The diagram comparison $U_{\\mathcal Y}P_B\\cong P^JU_{\\mathcal X}$ is [lem-pur-diagram-ring-restriction-pushforward]. The finite comparison $r_{\\mathcal Y,n}Ru_{*,A_n}\\cong P r_{\\mathcal X,n}$ is [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] applied to the two factorizations through the identity-topos coefficient maps. Combine these with [lem-weil-pbc-tower-derived-evaluation-normalization] on constant-$A$ towers. Their evaluation square has the same mate as $r_{\\mathcal Y,n}\\beta_n$: composing the singleton adjunction with scalar extension, its left side has components $u_m^*(B_m\\otimes_{B_n}Q)$, and the other side has $B_m\\otimes_{B_n}u_n^*Q$, exactly the maps of Step 2. The ordinary scalar transpose is $x\\otimes b\\mapsto b\\,g(x)$ by [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Thus the two pastings are equal by [lem-weil-pbc-mate-pasting], not by assuming that scalar restriction or evaluation preserves K-injectives. This fixes the restriction/direct-image normalization of $\\beta_n$.",
+   "uses": [
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-weil-pbc-tower-derived-evaluation-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0B56 (equation-projection-formula-map); evaluation argument uses Zheng Construction 4.1, printed p. 21."
+   }
+  },
+  {
+   "text": "Evaluation of scalar extension is normalized by the actual quotient maps. Under the equivalences of [lem-weil-pbc-diagram-site-realization], $\\Delta$ is the constant diagram: it is exact and levelwise the identity, and the constant ring diagram is $\\Delta\\underline A_T$. Let $Q$ be a flat-term K-flat representative of $V$. Then $\\Delta Q$ is K-flat with flat terms over $\\Delta\\underline A_T$, and $\\Delta Q\\otimes_{\\Delta\\underline A_T}B_T=(Q\\otimes_A\\underline{A_m}_T)_m$ has levels that are K-flat with flat terms over $\\underline{A_m}_T$ [lem-weil-pbc-ringed-pullback-preserves-kflat] (identity topos, ring map $A\\to A_m$). Both statements follow because the diagram topology has vertical covers, so tensor products and acyclicity are levelwise, as in Step 2. Hence $\\mathcal R_TV$ is represented by $(Q\\otimes_A\\underline{A_m}_T)_m$ and $e_n\\mathcal R_TV=V\\otimes_A^L\\underline{A_n}_T$. The coefficient unit is $q\\mapsto q\\otimes1$ [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Applying the tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to scalar extension and to evaluation gives\n$$e_n\\mathcal R_{\\mathcal Y}M\\cong(PH)_n\\otimes^L_{A_n}K_n,\\qquad e_n\\mathcal R_{\\mathcal X}N\\cong H_n\\otimes^L_{A_n}u_n^*K_n.$$\nThe balancing maps send $(x\\otimes a)\\otimes(y\\otimes b)$ to $(x\\otimes y)\\otimes ab$, with the canonical total-complex convention; no quotient flatness is used.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0B56 (equation-projection-formula-map); evaluation argument uses Zheng Construction 4.1, printed p. 21."
+   }
+  },
+  {
+   "text": "Set $h_{H,n}=\\beta_{n,\\mathcal R_{\\mathcal X}H}\\circ e_n(h_H)$. The defining transpose identity for $h_H$ is\n$$\\varepsilon^B_{\\mathcal R_{\\mathcal X}H}\\circ G_B(h_H)=S_{\\mathcal X}\\Delta(\\varepsilon_H),$$\nwith the specified scalar/pullback identifications. Evaluate it and substitute the counit identity of Step 3. The result is\n$$\\varepsilon^{(n)}_{H_n}\\circ u_n^*(h_{H,n})=(\\varepsilon_H)\\otimes_A^L1_{\\underline{A_n}}.$$\nThus $h_{H,n}$ is precisely the evaluated coefficient mate, under the source identification of Step 5. This is the inverse-transpose formula of [lem-weil-pbc-adjunction-of-natural-bijection]; it uses the canonical tensor comparison, rather than any separately chosen adjunction.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0B56 (equation-projection-formula-map); evaluation argument uses Zheng Construction 4.1, printed p. 21."
+   }
+  },
+  {
+   "text": "For arbitrary $Z\\in D(B_{\\mathcal X})$ and $W\\in D(B_{\\mathcal Y})$, evaluate the defining transpose of $\\pi^B_{Z,W}$. The tensor comparison commutes with the evaluation square: apply [lem-weil-pbc-ringed-exchange-tensor-coherence] with $f=u_B$, $f'=u_n$, and $g,g'$ the two evaluation morphisms. Their exchange is exactly $\\beta_n$ of Step 3, since its transpose is the evaluated counit. The result is\n$$\\beta_{n,Z\\otimes^LG_BW}\\circ e_n(\\pi^B_{Z,W})=\\pi^{(n)}_{e_nZ,e_nW}\\circ(\\beta_{n,Z}\\otimes^L1_{e_nW}).$$\nIn particular the finite projection here is the adjunct of $\\varepsilon^{(n)}\\otimes1$, as required. The cited coherence theorem requires a commutative ringed square, not a cartesian square or invertibility of the projection transformation.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0B56 (equation-projection-formula-map); evaluation argument uses Zheng Construction 4.1, printed p. 21."
+   }
+  },
+  {
+   "text": "Apply Step 7 with $Z=\\mathcal R_{\\mathcal X}H$ and $W=\\mathcal R_{\\mathcal Y}K$, and precompose with $e_n(h_H\\otimes1)$. Exact evaluation is a functor, so it preserves this composition. Its canonical tensor comparison sends that precomposition to $e_n(h_H)\\otimes1$. Step 6 replaces $\\beta_n e_n(h_H)$ by $h_{H,n}$, while Step 5 balances source and target. Therefore\n$$e_n(v)=\\pi^{(n)}_{H_n,K_n}(h_{H,n}\\otimes^L_{A_n}1_{K_n}),$$\nwith source $M_n\\cong(PH)_n\\otimes^L_{A_n}K_n$ and target $Ru_{*,A_n}(H_n\\otimes^L_{A_n}u_n^*K_n)$. Naturality follows from the naturality of each factor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0B56 (equation-projection-formula-map); evaluation argument uses Zheng Construction 4.1, printed p. 21."
+   }
+  },
+  {
+   "text": "Finally check the quotient transitions, rather than inferring an equality of system morphisms from unrelated evaluations. For $m\\geq n$, [lem-pur-system-single-derived-evaluation] identifies $e_nL_m$ with $B_n\\otimes^L_{B_m}(-)$ and identifies its Hom transpose with the actual $m$-to-$n$ system transition. Apply this identity to the Hom chain in Step 3. The comparison $c_m$ at level $n$ is the scalar pullback map of Step 2, so this chain intertwines the transition of $P_BZ$ with $Ru_{*,A_m}$ of the transition of $Z$, followed by the canonical coefficient-restriction/direct-image comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Thus $\\beta_m,\\beta_n$ commute with the restriction-form transitions. The scalar tensor maps in Step 5 commute with those transitions because both orders send $(x\\otimes a)\\otimes(y\\otimes b)$ to $(x\\otimes y)\\otimes\\bar a\\bar b$ after quotienting. Apply these facts to the single system maps $h_H$, $\\varepsilon^B$, and $\\pi_B$, so Steps 6--8 are compatible with every quotient transition. At $m=n$ all these maps are identities. The argument uses neither perfectness nor completion, and nowhere asserts preservation of K-injectives by varying-ring evaluation.",
+   "uses": [
+    "lem-pur-system-single-derived-evaluation",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0B56 (equation-projection-formula-map); evaluation argument uses Zheng Construction 4.1, printed p. 21."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-system-ringed-sequence-site",
+  "lem-pur-system-level-left-extension",
+  "lem-pur-system-evaluation-topos",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-system-single-derived-extension",
+  "lem-pur-system-ordinary-single-extension",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-tower-derived-evaluation-normalization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-pur-system-single-derived-evaluation",
+  "det-sp-unique-right-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A4 (lemma-pullback-tensor-product), 07A6 (lemma-adjoint), 0D6E (lemma-derived-pushforward-composition), and 0B56 (equation-projection-formula-map); evaluation argument uses Zheng Construction 4.1, printed p. 21."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +199,45 @@
    "results": "none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
    "date": "2026-10-21",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of derived direct image on varying coefficient ring diagrams preserves the counit defined projection transformation",
+   "results": "CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derived_counit; Condensed.profiniteSolidCounit; PresheafOfModules.Derivation.d_map; CategoryTheory.OverPresheafAux.counitForward_naturality₂; CompHausLike.LocallyConstant.counitApp; CategoryTheory.OverPresheafAux.counitForward_naturality₁; CompHausLike.LocallyConstant.counitAppApp",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected generic derived adjunction counits, ordinary evaluation adjunction, and underived module pushforward; none states varying-ring derived quotient-diagram evaluation, its counit normalization, and the balanced projection formula."
+  },
+  {
+   "tool": "grep",
+   "query": "derived_counit|evaluation.*[Cc]ounit|[Cc]ounit.*evaluation",
+   "results": "Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected generic derived adjunction counits, ordinary evaluation adjunction, and underived module pushforward; none states varying-ring derived quotient-diagram evaluation, its counit normalization, and the balanced projection formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_counit",
+   "results": "CategoryTheory.Adjunction.derived_counit",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected generic derived adjunction counits, ordinary evaluation adjunction, and underived module pushforward; none states varying-ring derived quotient-diagram evaluation, its counit normalization, and the balanced projection formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation on diagrams of modules over varying sheaves of rings commutes with derived pushforward",
+   "results": "SheafOfModules.pushforwardNatTrans_app_val_app; PresheafOfModules.pushforward₀; AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.pushforward; SheafOfModules.pushforwardNatTrans_app_val_app_apply; SheafOfModules.pushforwardSections; SheafOfModules.pushforward_map_val; PresheafOfModules.pushforward₀_obj",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected generic derived adjunction counits, ordinary evaluation adjunction, and underived module pushforward; none states varying-ring derived quotient-diagram evaluation, its counit normalization, and the balanced projection formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Left adjoint to evaluation of inverse systems of modules over varying rings commutes with inverse image and yields derived direct image evaluation",
+   "results": "CondensedMod.LocallyConstant.adjunction; LightCondMod.LocallyConstant.adjunction; LightCondMod.LocallyConstant.functorToPresheaves; Condensed.profiniteSolid; PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap; Condensed.profiniteFree; PresheafOfModules.instIsRightAdjointPushforward; Condensed.freeForgetAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected generic derived adjunction counits, ordinary evaluation adjunction, and underived module pushforward; none states varying-ring derived quotient-diagram evaluation, its counit normalization, and the balanced projection formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-compact-support-completed-projection-coherence",
@@ -81,5 +258,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-quotient-diagram-projection-evaluation",
+  "worker": "stage1",
+  "group": "Q79",
+  "summary": "Kept the statement; proved evaluation and its counit normalization using derived singleton left extensions and canonical composite adjunctions. Then evaluated the counit-defined projection and balanced tensor source and target. Checked actual quotient transitions via the lower-level singleton transpose. No new nodes or unsupported K-injective evaluation assumption.",
+  "blueprint": "Realizes the coefficient compatibility in sk-thm-sf-compatibility clause (7), and the finite-coefficient extension independence auxiliary of thm-pur-rational-and-qbar-purity, imported Proof Step 2, through parent completed-projection-coherence old proof step 8.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-f9f46cdd9",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-f9f46cdd9 (reviewer sub-agent of L); spot-checked: This delivery has zero new nodes and leaves the item statement unchanged; the live item is still unsplit; nothing is in the dropped list; no SGA is cited; proof_deps equals the union of the step uses. Sources read: Stacks 0B56 (equation-projection-formula-map), 07A4, 07A6 and 0D6E (labels checked in tags/tags), and Zheng Construction 4.1, printed p.21. I read every cited statement and re-derived Step 3's counit tracking, Step 6's transpose, Step 7's Ex=beta_n identification through ringed-exchange-tensor-coherence (Ex is the mate of theta, so it equals the Step 3 beta) and the Step 8 assembly. Small cases checked: u=id, I=0, I=A, and A=Z, I=(2) with torsion inputs. Two faults are repaired in fixes/dag/nodes/sec-smooth-purity/lem-pur-quotient-diagram-projection-evaluation.json. (1) E5/C1, Step 2: the step never justified that G_B is computed termwise on the ordinary singleton extension. I added that this extension is K-flat with flat terms on the sequence site: its levels are K-flat by ringed-pullback-preserves-kflat (identity topos, ring map B_n to B_m), the vertical covers make tensor levelwise, and acyclicity is levelwise by system-level-left-extension, which I added to Step 2's uses. (2) C4, Step 5: diagram-site-realization was cited for 'Delta is a ringed inverse image', which that node does not state. I replaced this with Delta being levelwise the identity under its equivalences, plus the same levelwise K-flat argument. proof_deps is unchanged as a set. Advisory: lem-coef-semilinear-derived-sections already states that e_n G is isomorphic to Ru_{*,n} e_n, compatibly with units, counits and transitions, for general topoi with C_n=u^{-1}B_n. The delivery's independent singleton-adjoint route is still correct. Steps 4 and 9 are terse but cite correct nodes. No tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
