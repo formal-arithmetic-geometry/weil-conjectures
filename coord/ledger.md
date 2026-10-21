@@ -20719,3 +20719,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:32 L: merged deliver/NX/lem-weil-pbc-realization-scalar-functor (stage 2; reviewer PASS; parallel immutable checks)
 - 07:32 L: merged deliver/Q35/lem-sp-etale-sum-coefficient-computation (stage 2; reviewer FIX; parallel immutable checks)
 - 07:32 L: merged deliver/Q40/lem-sfb-derived-exchange-exact-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: returned deliver/Q83/lem-pe-finite-scalar-restriction-constructible (reviewer RETURN: L: independent stage-2 immutable head 04abde48d108: H2(2): delivery added theorem stmt_dep lem-weil-pbc-ring-sheaf-chang)
