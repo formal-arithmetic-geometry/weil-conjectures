@@ -20442,3 +20442,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:34 L: returned deliver/N0/det-def-sfb-filtered-two-colimit-model (reviewer RETURN: Returned as superseded (A7/B10); the mathematics itself is sound. The delivery was committed at 05:54 UTC. At 06:10 UTC )
 - 06:35 L: merged deliver/O4/lem-sfb-qcqs-proper-open-boundary-vanishing (reviewer FIX; first push; new nodes: 2)
 - 06:35 L: merged deliver/Q59/lem-sfb-coefficient-cocone-comparison-agreement (reviewer PASS; after a return; new nodes: 3)
+- 06:35 L: merged deliver/NY/lem-pur-supported-triangle-mate-identification (reviewer PASS; first push; new nodes: 0)

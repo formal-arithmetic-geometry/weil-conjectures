@@ -2,7 +2,7 @@
  "id": "lem-pur-supported-triangle-mate-identification",
  "kind": "statement",
  "title": "Counit identification of a scalar support-triangle comparison",
- "statement": "Let $i:Z\\hookrightarrow P$ be a closed immersion with complementary open $j:U\\hookrightarrow P$, and let $A\\to B$ be a unital map of finite commutative rings [def-weil-pbc-scheme-conventions]. Use ordinary etale module derived categories, the support triangles $i_*Ri_R^!L\\to L\\to Rj_{*,R}j^*L$ for $R=A,B$, and their counit/unit maps [def-weil-pbc-derived-categories, lem-exc-closed-support-triangle]. Write $T_W=-\\otimes_A^LB_W$ and $\\operatorname{Res}$ for exact restriction of scalars [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Let $L$ and $TL$, their closed exceptional images and the open terms in these triangles all be bounded below. Suppose the canonical projection $q_{i,Ri_A^!L}:T_Pi_{*,A}Ri_A^!L\\to i_{*,B}T_ZRi_A^!L$ is an isomorphism. Suppose a morphism from the $T$-image of the $A$-support triangle to the restriction of the $B$-support triangle has middle map the identity of $\\operatorname{Res}(TL)$ and right map the canonical open coefficient projection. Identify its first source term using $\\operatorname{Res}(q_i)$ and the canonical restriction/direct-image isomorphisms [lem-sbc-canonical-restrict-scalars-functor-comparisons]. Then its first map is $i_*\\operatorname{Res}(b_i)$, where\n$$b_i:T_ZRi_A^!L\\to Ri_B^!T_PL$$\nis the $i_{*,B}\\dashv Ri_B^!$ transpose of $T_P\\epsilon_{i,A}\\circ q_i^{-1}$. If the open coefficient projection is an isomorphism, then $b_i$ is an isomorphism. No injectivity after restriction of scalars and no flatness of $B/A$ is assumed.",
+ "statement": "Let $i:Z\\hookrightarrow P$ be a closed immersion with complementary open $j:U\\hookrightarrow P$, and let $A\\to B$ be a unital map of finite commutative rings [def-weil-pbc-scheme-conventions]. Use ordinary etale module derived categories, the support triangles $i_*Ri_R^!L\\to L\\to Rj_{*,R}j^*L$ for $R=A,B$, and their counit/unit maps [def-weil-pbc-derived-categories, lem-exc-closed-support-triangle]. Write $T_W=-\\otimes_A^LB_W$ and $\\operatorname{Res}$ for exact restriction of scalars [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Let $L$ and $TL$, their closed exceptional images and the open terms in these triangles all be bounded below. Suppose the canonical projection $q_{i,Ri_A^!L}:T_Pi_{*,A}Ri_A^!L\\to i_{*,B}T_ZRi_A^!L$ is an isomorphism. Suppose a morphism from the restriction $\\operatorname{Res}(T_P(-))$ of the $A$-support triangle to the restriction of the $B$-support triangle has middle map the identity of $\\operatorname{Res}(TL)$ and right map the canonical open coefficient projection. Identify its first source term using $\\operatorname{Res}(q_i)$ and the canonical restriction/direct-image isomorphisms [lem-sbc-canonical-restrict-scalars-functor-comparisons]. Then its first map is $i_*\\operatorname{Res}(b_i)$, where\n$$b_i:T_ZRi_A^!L\\to Ri_B^!T_PL$$\nis the $i_{*,B}\\dashv Ri_B^!$ transpose of $T_P\\epsilon_{i,A}\\circ q_i^{-1}$. If the open coefficient projection is an isomorphism, then $b_i$ is an isomorphism. No injectivity after restriction of scalars and no flatness of $B/A$ is assumed.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
   "place": "Locality: identify the closed-factor comparison by supported/open orthogonality and the counit; extraction of old item Step 11 for thm-pur-rational-and-qbar-purity finite comparisons"
@@ -14,9 +14,121 @@
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in $D(P_{\\mathrm{et}},A)$. Put $M=Ri_A^!L$, $N=Ri_B^!T_PL$, $S=\\operatorname{Res}_P(T_Pi_{*,A}M)$, $F=\\operatorname{Res}_P(i_{*,B}N)$, $K=\\operatorname{Res}_P(T_PL)$ and $O=\\operatorname{Res}_P(Rj_{*,B}j^*T_PL)$. The target triangle is $F\\xrightarrow{e}K\\to O\\to F[1]$, with $e=\\operatorname{Res}_P(\\epsilon_{i,B})$. Both rows of the assumed comparison are distinguished: scalar extension is exact by [lem-pur-derived-change-of-rings], restriction is exact by [lem-pur-sheaf-ring-derived-coefficient-adjunction], and exact restriction preserves triangles by [lem-weil-pbc-exact-functor-derived-factorization]. Their underlying support triangles and the counit and open-adjunction normalizations are supplied by [lem-exc-closed-support-triangle]. Write $a:S\\to F$ for the given first component and $s=\\operatorname{Res}_P(T_P\\epsilon_{i,A}):S\\to K$. The first square of the hypothesized triangle morphism is exactly $e a=s$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-exc-closed-support-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Counit-defined transpose and locality; explicit scalar support-triangle argument, setup"
+   }
+  },
+  {
+   "text": "By the defining transpose under $i_{*,B}\\dashv Ri_B^!$ [lem-exc-closed-ambient], the map $b_i:T_ZM\\to N$ satisfies\n$$\\epsilon_{i,B}\\circ i_{*,B}(b_i)=T_P\\epsilon_{i,A}\\circ q_i^{-1}.$$\nDefine $h=\\operatorname{Res}_P(i_{*,B}b_i)\\circ\\operatorname{Res}_P(q_i):S\\to F$. Applying the functor $\\operatorname{Res}_P$ to the preceding equality and composing on the right with $\\operatorname{Res}_P(q_i)$ gives $e h=s$, since $q_i^{-1}q_i=1$. This only applies a functor to an equality; it requires no injectivity of its map on morphisms.",
+   "uses": [
+    "lem-exc-closed-ambient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Existence and uniqueness: defining counit equation for the transpose"
+   }
+  },
+  {
+   "text": "The isomorphism $q_i$ identifies $S$ with $i_{*,A}\\operatorname{Res}_Z(T_ZM)$. Here the interchange of $i_*$ and restriction is the sectionwise identity on module sheaves, applied termwise: both functors are exact, restriction by [lem-pur-sheaf-ring-derived-coefficient-adjunction] and closed direct image by [lem-trf-oriented-closed-base-localization]. [lem-weil-pbc-exact-functor-derived-factorization] makes this identity valid on all derived objects, even if $T_ZM$ is not bounded below. Therefore $j^*S=0$ by [lem-exc-derived-open-closed-vanishing]. The target open term is canonically $O\\cong Rj_{*,A}\\operatorname{Res}_U(j^*T_PL)$ by [lem-sbc-canonical-restrict-scalars-functor-comparisons]; this use of the bounded-below comparison is permitted by the hypotheses on the $B$-triangle. The open adjunction $j^*\\dashv Rj_{*,A}$ in [lem-exc-closed-support-triangle] now gives\n$$\\operatorname{Hom}(S[1],O)\\cong\\operatorname{Hom}(j^*(S[1]),\\operatorname{Res}_U j^*T_PL)=0.$$\nIndeed $j^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact], so its derived functor commutes with shifts by [lem-weil-pbc-exact-functor-derived-factorization], and $j^*(S[1])=(j^*S)[1]=0$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-trf-oriented-closed-base-localization",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-exc-derived-open-closed-vanishing",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-exc-closed-support-triangle",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), with etale-cohomology.tex Tag 04CA and the bounded-below coefficient comparison"
+   }
+  },
+  {
+   "text": "Steps 1 and 2 give $e(a-h)=0$. Apply [lem-weil-pbc-hom-into-triangle-exact] to the backwards rotation $O[-1]\\to F\\xrightarrow{e}K\\to O$ of the target triangle. Exactness says that $a-h:S\\to F$ factors through $O[-1]$. The shift equivalence identifies $\\operatorname{Hom}(S,O[-1])$ with $\\operatorname{Hom}(S[1],O)$, which is zero by Step 3. Thus $a=h$. After identifying the source using $\\operatorname{Res}(q_i)$, this reads $\\operatorname{Res}_P(i_{*,B}b_i)$; naturality of the canonical restriction/direct-image comparison identifies it with $i_{*,A}\\operatorname{Res}_Z(b_i)$, exactly the asserted first map. The source-side interchange is the termwise identity already checked in Step 3; the target uses the bounded-below canonical comparison of [lem-sbc-canonical-restrict-scalars-functor-comparisons], since $N$ is bounded below.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0149 (lemma-representable-homological), applied to the backwards-rotated target triangle"
+   }
+  },
+  {
+   "text": "Assume now the open coefficient projection is invertible. In the given morphism of distinguished triangles, the middle component is $1_K$ and the right component is this invertible projection after restriction. [lem-sf-triangle-morphism-iso] implies that $a$ is invertible. Step 4 and invertibility of $q_i$ therefore show that $i_{*,A}\\operatorname{Res}_Z(b_i)$ is invertible.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014A (lemma-third-isomorphism-triangle)"
+   }
+  },
+  {
+   "text": "For a constant coefficient ring, [lem-trf-oriented-closed-base-localization] gives the sheaf counit isomorphism $i^*i_*\\cong1$ and exactness of $i_*$. The functor $i^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact]. Apply these functors termwise and descend using [lem-weil-pbc-exact-functor-derived-factorization]. The same natural counit isomorphism gives $i^*i_*\\cong1$ on ordinary derived categories, since it is an isomorphism of complexes in every representative. Applying $i^*$ to the invertible morphism of Step 5 and using its naturality gives that $\\operatorname{Res}_Z(b_i)$ is invertible.",
+   "uses": [
+    "lem-trf-oriented-closed-base-localization",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 08M3 (lemma-i-star-equivalence), constant-ring closed subtopos; termwise counit descent"
+   }
+  },
+  {
+   "text": "Exactness of restriction [lem-pur-sheaf-ring-derived-coefficient-adjunction] and [lem-weil-pbc-exact-functor-complex-cohomology] identify $H^r(\\operatorname{Res}_Z b_i)$ with $\\operatorname{Res}_Z H^r(b_i)$ for every integer $r$, by computing on representatives (and hence also on roofs). These are isomorphisms by Step 6. Restriction keeps the same underlying sheaves and module maps [def-pc-sheaf-restrict-scalars]. It reflects isomorphisms of module sheaves: the inverse of a bijective $B$-linear map is $B$-linear, since $f(bf^{-1}y)=by=f(f^{-1}(by))$. Thus every $H^r(b_i)$ is invertible. [lem-weil-pbc-unbounded-derived-iso-cohomology] makes $b_i$ invertible. This argument uses conservativity on objects and cohomology, not faithfulness on derived Hom sets, and imposes no flatness on $B/A$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RT (lemma-acyclic), with homology.tex Tag 010N (lemma-exact-functor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-derived-open-closed-vanishing",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-sf-triangle-morphism-iso",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Counit-defined coefficient transpose and locality; agent-written support-triangle comparison using Stacks Tags 07A6, 0149, 014A, 04CA, 08M3, 010N, 05RT."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +171,45 @@
    "results": "[loogle] OK 10 hit(s); CategoryTheory.Adjunction.IsTriangulated; CategoryTheory.Adjunction.IsTriangulated.commShift; CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated; CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated; CategoryTheory.Adjunction.isTriangulated_leftAdjoint; CategoryTheory.Adjunction.isTriangulated_rightAdjoint; CategoryTheory.Adjunction.IsTriangulated.mk'; CategoryTheory.Adjunction.IsTriangulated.mk''; CategoryTheory.Adjunction.IsTriangulated.mk; CategoryTheory.Adjunction.IsTriangulated.comp",
    "date": "2026-10-21",
    "verdict": "no match: returned general algebra/category theory or unrelated geometry, not this etale/coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed support triangle coefficient extension comparison determined by exceptional counit and open closed orthogonality",
+   "results": "{\"t\": \"2026-10-21T06:09:54Z\", \"tool\": \"leanfinder\", \"query\": \"Closed support triangle coefficient extension comparison determined by exceptional counit and open closed orthogonality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.triangle_map_ext\", \"CategoryTheory.Triangulated.TStructure.triangle_map_exists\", \"CategoryTheory.Triangulated.TStructure.exists_triangle\", \"CategoryTheory.Triangulated.TStructure.ge_one_le\", \"CategoryTheory.Triangulated.TStructure.le_zero_le\", \"CategoryTheory.Triangulated.TStructure.IsLE\", \"CategoryTheory.Triangulated.TStructure.triangle_iso_exists\", \"CategoryTheory.Triangulated.TStructure.exists_triangle_zero_one\"], \"digest\": \"8532779b43d23873\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic triangulated/adjunction results or open-immersion O-module results, not this ordinary etale scalar support-triangle mate statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-21T06:10:00Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Pretriangulated, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.IsTriangulated\", \"CategoryTheory.Adjunction.IsTriangulated.commShift\", \"CategoryTheory.Adjunction.IsTriangulated.leftAdjoint_isTriangulated\", \"CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated\", \"CategoryTheory.Adjunction.isTriangulated_leftAdjoint\", \"CategoryTheory.Adjunction.isTriangulated_rightAdjoint\", \"CategoryTheory.Adjunction.IsTriangulated.mk'\", \"CategoryTheory.Adjunction.IsTriangulated.mk''\"], \"digest\": \"87f5bc8a546a9d59\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic triangulated/adjunction results or open-immersion O-module results, not this ordinary etale scalar support-triangle mate statement"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]ecollement|[Oo]rthogonal.*[Tt]riangle",
+   "results": "{\"t\": \"2026-10-21T06:10:14Z\", \"tool\": \"grep\", \"query\": \"[Rr]ecollement|[Oo]rthogonal.*[Tt]riangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Euclidean/SignedDist.lean\"], \"digest\": \"1d7532098d51d20e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic triangulated/adjunction results or open-immersion O-module results, not this ordinary etale scalar support-triangle mate statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension of sheaves identifies a morphism of closed support triangles with the exceptional adjunction mate",
+   "results": "{\"t\": \"2026-10-21T06:10:15Z\", \"tool\": \"leansearch\", \"query\": \"Derived scalar extension of sheaves identifies a morphism of closed support triangles with the exceptional adjunction mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.restrictCoextendScalarsAdj\"], \"digest\": \"66448de77dae5ca8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic triangulated/adjunction results or open-immersion O-module results, not this ordinary etale scalar support-triangle mate statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar extension mate for a closed immersion equals the unique counit compatible map of support localization triangles on derived etale module sheaves",
+   "results": "{\"t\": \"2026-10-21T06:10:32Z\", \"tool\": \"leanfinder\", \"query\": \"The scalar extension mate for a closed immersion equals the unique counit compatible map of support localization triangles on derived etale module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.Scheme.kerAdjunction_unit_app\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\"], \"digest\": \"f54197ee87c33934\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic triangulated/adjunction results or open-immersion O-module results, not this ordinary etale scalar support-triangle mate statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-coefficient-adjoint-comparisons",
@@ -83,5 +230,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-supported-triangle-mate-identification",
+  "worker": "stage1",
+  "summary": "Seven-step support-triangle proof: construct the counit-compatible candidate, use supported/open orthogonality and Hom exactness to identify the given first component, then use two-out-of-three and cohomology to detect the isomorphism. Clarified that the source triangle is also restricted to A coefficients. No new nodes, no flatness or faithfulness assumption, and no boundedness assumption on T_Z Ri_A^!L is used.",
+  "blueprint": "Unit sk-thm-purity-transport Step 1, exceptional adjunction compatibility with finite reduction; cited current blueprint proof, existence/uniqueness and locality paragraphs. The seed ancestor chain has no blueprint node, so the inherited blueprint.from.node=null and via chain are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Supplies the ordinary etale closed exceptional adjunction used to expand the defining transpose into its counit equation."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Supplies ordinary etale support triangles with the actual exceptional counit and open unit; this is the closed-support locality tool used to establish finite coefficient adjunction compatibility."
+   },
+   {
+    "node": "lem-exc-derived-open-closed-vanishing",
+    "why": "Supplies derived disjoint-support vanishing for the supported source; no purity or coefficient comparison is taken from it."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic derived extension of sheaf coefficients is triangulated, including for a nonflat ring map."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic exact restriction and ordinary derived scalar extension, used to form the restricted triangles and detect cohomology; no exceptional comparison is supplied."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Supplies the canonical bounded-below open direct-image comparison and target closed restriction comparison, with no exceptional scalar comparison."
+   },
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "Only its generic sheaf-theoretic clause is used: constant-ring closed direct image is exact and the ordinary inverse-image counit is invertible. No oriented nearby cycles, trace formula, or base-change theorem is used."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact constant-ring inverse image supplies shift compatibility and termwise closed pullback; no finite reduction theorem is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-derived-open-closed-vanishing",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-trf-oriented-closed-base-localization",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NY-2bc28867e",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-2bc28867e (reviewer sub-agent of L); spot-checked: PASS: I read the item's seven steps in full, plus every cited statement. No new nodes, no cycle, proof_deps = union of uses; not dropped, not re-split, not superseded live (side-live still unsplit). Statement change: the base said 'T-image of the A-support triangle', which is ill-typed (the source would be in D(P,B), the target and the middle map 1_{Res TL} in D(P,A)). The delivery restricts the source to Res(T_P(-)). This matches what the sibling lem-pur-etale-kflat-support-comparison produces and what the citer lem-pur-finite-coefficient-adjoint-comparisons uses. Nothing is weakened, and the report names the change. Step checks: (1) T is triangulated by derived-change-of-rings (2), Res is exact and termwise, and the unbounded support triangles over any finite ring give e∘a=s. (2) The closed-ambient transpose gives e∘h=s. (3) Res i_*=i_* Res termwise (exact i_* from the trf closed-subtopos node, plus the factorization lemma), so this holds even for unbounded T_Z M. That gives j^*S=0. The open term goes through the D+ sbc comparison, which is valid because j^*TL is bounded below. So Hom(S[1],O)=0 by j^*⊣Rj_*. (4) Hom-exactness on the rotated triangle gives a=h. The target identification is via sbc (N is bounded below by hypothesis). (5) Two-of-three on the full triangle morphism. (6) i^*i_*≅1 termwise, then descended. (7) Res commutes with H^r and reflects module isomorphisms, then the cohomological iso criterion applies. Tested i=id, Z empty, A=B, and non-flat Z/4→Z/2 (unbounded T_Z M is handled termwise). Source: main-20261015 sk-lem-sp-reduction-exceptional.proof.md, Existence and Locality paragraphs; the proof is agent-written and marked as such, with no SGA. Batch-5 check: lem-trf-oriented-closed-base-localization is a generic fact (Stacks 08LY/08M3/04CA closed-subtopos module facts), not a step of the trace formula or Poincaré duality. I found no étale non-trf node stating it. It and its trf ancestors are already in the batch-5 closure without this item; the closure difference is only the item itself. Accepted as a tool. No duplicates found (def-per-exceptional-coefficient-maps and lem-coef-finite-scalar-mate-realization are different statements)."
  }
 }
