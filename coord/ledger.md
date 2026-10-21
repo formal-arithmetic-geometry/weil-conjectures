@@ -22733,3 +22733,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:03 L: merged deliver/NX/lem-sfb-integral-general-lfp-hom-inversion (stage 2; reviewer PASS; parallel immutable checks)
 - 14:03 L: merged deliver/N5/lem-sfb-qcqs-proper-constructible-closed-base-change (stage 2; reviewer PASS; parallel immutable checks)
 - 14:03 L: merged deliver/NC/lem-sp-normalized-error-tower-vanishing (stage 2; reviewer PASS; parallel immutable checks)
+- 14:03 L: returned deliver/Q09/lem-sfb-common-field-lattice-generators (reviewer RETURN: L: independent stage-2 immutable head ccd92d734587: Sheaf.SixFunctors.ScalarSixCoefficientInterfaces declares names that)
