@@ -18,9 +18,113 @@
   "sk-def-sfb-derived-tensor-hom",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pe-completion-triangle-comparison] with $R=R_X$ and $\\pi=\\pi_E$. It gives an additive completion functor $F$ and its natural map $c:\\mathrm{id}\\Rightarrow F$, with completeness equivalent to invertibility of $c_K$. Since $F$ is additive, $F(0)$ is zero, so $c_0$ is an isomorphism. For an isomorphism $u:K\\to L$, naturality gives $c_L=F(u)c_Ku^{-1}$; hence completeness is invariant under isomorphisms. For every integer $n$, the identity $\\sigma_{K,n}c_{K[n]}=c_K[n]$ and invertibility of $\\sigma_{K,n}$ show that $K[n]$ is complete if and only if $K$ is complete. No boundedness of $K$ is used.",
+   "uses": [
+    "lem-pe-completion-triangle-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+    "place": "Cones and shifts paragraphs: the canonical completion map and its shift comparison; applied to the first sentence of paragraph (1) of the item source."
+   }
+  },
+  {
+   "text": "For an ambient distinguished triangle $T=(K\\to L\\to M\\to K[1])$, [lem-pe-completion-triangle-comparison] makes $(c_K,c_L,c_M)$ a morphism from $T$ to the distinguished triangle $F(T)$, including the last square involving $c_K[1]$. By [lem-sf-triangle-morphism-iso], invertibility of any two of these three maps implies invertibility of the third. The completeness criterion from step 1 therefore gives the required two-out-of-three assertion for completeness alone.",
+   "uses": [
+    "lem-pe-completion-triangle-comparison",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014A, lemma-third-isomorphism-triangle, applied to the completion triangle morphism of the preceding source."
+   }
+  },
+  {
+   "text": "The coefficient map $R_X\\to\\kappa_X$ is a map of commutative ring sheaves on the same fixed small site. Apply [lem-pur-derived-change-of-rings], clause (2), to obtain the exact derived scalar-extension functor $T_1:D(R_X)\\to D(\\kappa_X)$, $T_1(K)=K_1$, retaining its $\\kappa_X$-module structure. Thus $T_1$ carries the given ambient triangle to a distinguished triangle of $\\kappa_X$-modules, and its shift comparisons identify $T_1(K[n])$ with $K_1[n]$. Exact functors are additive, so $T_1(0)$ is zero, and every functor preserves isomorphisms. Next identify the residue coefficient ring. By [lem-sf-module-object-ordinary-coefficient-equivalence], applied to the finite commutative ring $\\kappa$ with its discrete condensed structure, the pulled-back ring $\\kappa_X=p_X^*\\underline\\kappa$ over which $K_1$ is formed is isomorphic as a ring object to the constant ring sheaf of $\\kappa$, and its module objects are exactly equivalent to ordinary module sheaves over that constant ring, by a termwise derived equivalence preserving shifts and distinguished triangles. The coefficient sheaf of [def-weil-pbc-proetale-modules] for $\\Lambda=\\kappa$ is the same ring: the map from the constant presheaf $\\kappa$ to $U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),\\kappa)$ is locally surjective, since a continuous function to the finite discrete set $\\kappa$ is constant on each member of the Zariski covering of $U$ by its clopen fibres, and locally injective, since distinct constants differ on every nonempty $U$ and an empty $U$ is covered by the empty family; so it becomes an isomorphism after sheafification [def-weil-pbc-sheafification]. Below, $\\kappa_X$ and $T_1$ are read through these identifications.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "def-weil-pbc-proetale-modules",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, for the identity underlying topos with the coefficient map; compare Tag 06YU and the K-flat change-of-rings construction. Residue ring identification: sites-modules.tex Tag 093I (constant sheaves) and the cited module-object comparison."
+   }
+  },
+  {
+   "text": "In the residue category use the ordinary constant finite ring sheaf $\\kappa_X$ and the termwise exact comparison $\\nu_X^*$ specified in [def-weil-pbc-proetale-modules]. When applying the fixed-module-valued comparison results below, use [lem-weil-pbc-proetale-constant-module-encoding]: restriction to constant scalars is an equivalence and leaves the underlying additive sheaf unchanged. The inverse extends constant scalar actions locally along the sheafification unit; hence on an étale pullback both descriptions have the same scalar action, determined by their constant sections. This identifies the two comparison functors. The equivalence preserves zero, kernels and cokernels by their universal properties; [lem-sf-exact-functor-derived-triangulated] and [lem-weil-pbc-exact-functor-complex-cohomology] therefore give its termwise derived equivalence and its cohomology identifications. Constant module sheaves, finite stalks and restrictions to each stratum are unchanged: all their scalar-linear maps are the same maps after restriction to constant scalars. In particular the global finite-stratification predicates in the fixed-module comparison nodes are precisely the ordinary constant-ring-sheaf predicates used here. This step changes no integral coefficient ring and uses no constructibility theorem for condensed integral modules.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 093I, constant scalar restriction and module sheafification; homology.tex Tag 010N and derived.tex Tag 015F for the exact equivalence on complexes."
+   }
+  },
+  {
+   "text": "For $N\\in D(\\kappa_X)$ let $Q(N)$ mean that its cohomology vanishes outside a finite integer interval and each cohomology sheaf is intrinsically globally constructible. If $N\\cong\\nu_X^*A$ with $A$ bounded constructible étale, exactness of the inverse image and [lem-weil-pbc-exact-functor-complex-cohomology] give $H^i(N)\\cong\\nu_X^*H^i(A)$, with the same vanishing interval. The forward construction in [lem-weil-pbc-fixed-module-constructible-origin] makes each of these sheaves constructible. Conversely, if $Q(N)$ holds, that same node supplies a globally constructible étale antecedent for each $H^i(N)$. Apply [lem-weil-pbc-fixed-module-bounded-constructible-origin] to the bounded complex $N$ and these antecedents. It supplies an étale derived object $A$ with bounded globally constructible cohomology and $N\\cong\\nu_X^*A$. Step 4 identifies its coefficient convention with ours. Consequently $Q(N)$ is equivalent to the condition of being isomorphic to the inverse image of a bounded étale complex with constructible cohomology. All these comparison statements allow arbitrary schemes and finite commutative coefficient rings; here $\\kappa$ is a finite field.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-fixed-module-constructible-origin",
+    "lem-weil-pbc-fixed-module-bounded-constructible-origin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AK (lemma-compare-constructible) and 09AL (lemma-compare-constructible-derived), with the global finite-stratification comparison and bounded reconstruction stated in the two cited fixed-module nodes."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-proetale-dbc-triangulated] with $Y=X$ and $\\Lambda=\\kappa$. It says exactly that $Q$ contains zero, is invariant under isomorphisms and integer shifts, and is closed under extensions in ambient distinguished triangles. To spell out the remaining positions, if $Q(N_1)$ and $Q(N_2)$ hold for a distinguished triangle $N_1\\to N_2\\to N_3\\to N_1[1]$, rotate it to $N_2\\to N_3\\to N_1[1]\\to N_2[1]$ and apply extension closure. If instead $Q(N_2)$ and $Q(N_3)$ hold, rotate twice, obtaining $N_3\\to N_1[1]\\to N_2[1]\\to N_3[1]$, apply extension closure and shift back. These rotations are distinguished by TR2 of [def-weil-triangulated-category]. Thus any two imply the third. Using the equivalence in step 5, the same statements hold for the bounded constructible étale-origin condition.",
+   "uses": [
+    "lem-weil-proetale-dbc-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived, proof: the constructible cohomology subcategories are triangulated; its bounded form is the cited node. Rotations: derived.tex Tag 0145, TR2."
+   }
+  },
+  {
+   "text": "The predicate $P(K)$ is the conjunction of completeness and $Q(T_1(K))$ by step 5. Steps 1, 3 and 6 give $P(0)$, isomorphism invariance, and $P(K[n])\\Longleftrightarrow P(K)$ for every integer $n$. Given a distinguished triangle and any two of its $P$ assertions, step 2 supplies completeness of the third vertex; step 3 reduces the triangle and step 6 supplies $Q$ at its third vertex. Step 5 converts this back to bounded constructible étale origin. This proves every two-out-of-three implication. In particular completeness and the required residue origin hold for $L$ when $P(K)$ and $P(M)$ hold. None of the steps imposes a Noetherian, dimension, finite-type, or invertibility hypothesis on $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (1): combine shift/cone stability of completeness and exact reduction, before the integral-model comparison and boundedness assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pe-completion-triangle-comparison",
+  "lem-sf-triangle-morphism-iso",
+  "lem-pur-derived-change-of-rings",
+  "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-weil-proetale-dbc-triangulated",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (1), complete proof of the two stability assertions via the existing completion-triangle comparison and the bounded finite-coefficient étale-origin comparison; no integral-model or scheme-finiteness argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +160,45 @@
    "results": "8 hits: AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.stableUnderComposition, RingHom.Etale.propertyIsLocal, Algebra.IsEtaleAt.comp, Algebra.FormallyEtale.comp, Algebra.Etale.comp",
    "date": "2026-10-21",
    "verdict": "no match: ambient triangulation, cohomological bounds and etale morphism composition do not prove closure of the complete finite-etale-residue predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|boundedConstructible.*[Tt]riang|proetale.*constructible",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic triangulation and inverse-image closure or ordinary ring completion only; no pro-étale residue-origin and derived-completeness conjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ObjectProperty\", \"IsTriangulated\", \"inverseImage\"",
+   "results": "2 hits: CategoryTheory.ObjectProperty.instIsTriangulatedInverseImage, CategoryTheory.ObjectProperty.instIsTriangulatedFullSubcategoryFunctorTrWInverseImageιTriangulatedLocalizerMorphism",
+   "date": "2026-10-21",
+   "verdict": "no match: generic triangulation and inverse-image closure or ordinary ring completion only; no pro-étale residue-origin and derived-completeness conjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived complete proetale complexes with bounded constructible etale residue reduction form a triangulated subcategory",
+   "results": "8 hits: DerivedCategory.TStructure.t, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, DerivedCategory.instIsTriangulated, HomotopyCategory.instIsTriangulatedIntUpSubcategoryAcyclic, DerivedCategory.IsGE, CategoryTheory.Functor.instIsTriangulatedHomologicalKernel, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Triangulated.TStructure.IsGE",
+   "date": "2026-10-21",
+   "verdict": "no match: generic triangulation and inverse-image closure or ordinary ring completion only; no pro-étale residue-origin and derived-completeness conjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The intersection of derived complete complexes and the inverse image of bounded constructible residue complexes is closed under distinguished triangles",
+   "results": "8 hits: DerivedCategory.TStructure.t, HomotopyCategory.Pretriangulated.distinguishedTriangles, HomotopyCategory.Pretriangulated.isomorphic_distinguished, DerivedCategory.mem_distTriang_iff, DerivedCategory.triangleOfSES_distinguished, CategoryTheory.ObjectProperty.IsTriangulatedClosed₂.mk, CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.instIsTriangulated",
+   "date": "2026-10-21",
+   "verdict": "no match: generic triangulation and inverse-image closure or ordinary ring completion only; no pro-étale residue-origin and derived-completeness conjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two out of three for complexes that are derived adically complete and have finite etale constructible cohomology modulo a uniformizer",
+   "results": "8 hits: BDeRhamPlus, BDeRham, IsAdicComplete.henselianRing, instCommRingBDeRhamPlus, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, AdicCompletion.map_exact, WittVector.isAdicCompleteIdealSpanP, Algebra.IsEtaleAt",
+   "date": "2026-10-21",
+   "verdict": "no match: generic triangulation and inverse-image closure or ordinary ring completion only; no pro-étale residue-origin and derived-completeness conjunction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-int-integral-heart-triangulated",
@@ -76,5 +215,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-integral-residue-class-triangle-closure",
+  "worker": "stage1",
+  "summary": "Q24 checked the ambient ordinary-module statement and retained it verbatim. Split completeness using its canonical completion triangle morphism, reduced triangles by exact derived change of rings, and proved the equivalence of finite étale residue origin with the existing intrinsic globally constructible bounded class. Reused all needed lemmas, created no new nodes, checked fixed-module encoding and arbitrary-scheme hypotheses, and expanded the two rotations giving all two-out-of-three positions.",
+  "blueprint": "Realizes paragraph (1), first two sentences on exact completion, exact reduction and constructible shift/cone closure, in det-lem-int-integral-heart-triangulated; stops before its boundedness and integral-model assertions. The unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-completion-triangle-comparison",
+    "why": "Exact canonical completion map for the same pulled-back integral ring and arbitrary scheme; the unit does not restate this construction."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic exact derived scalar extension retaining the residue module structure; used only for reduction, not a six-functor geometric theorem."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-constant-module-encoding",
+    "why": "Generic constant-scalar encoding equivalence identifies fixed-module and ordinary constant-ring-sheaf descriptions without geometry."
+   },
+   {
+    "node": "lem-weil-pbc-fixed-module-constructible-origin",
+    "why": "Generic finite-coefficient sheaf comparison with global finite stratifications for arbitrary schemes; supplies and detects cohomology antecedents."
+   },
+   {
+    "node": "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+    "why": "Generic bounded reconstruction of an étale antecedent from constructible cohomology antecedents; no unbounded comparison is used."
+   },
+   {
+    "node": "lem-weil-proetale-dbc-triangulated",
+    "why": "Generic triangulation of the intrinsic finite-coefficient bounded constructible class; this is the finite-residue input to the unit, not the integral conclusion."
+   },
+   {
+    "node": "lem-sf-module-object-ordinary-coefficient-equivalence",
+    "why": "Generic identification of the pulled-back finite discrete ring p_X^*kappa with the constant ring sheaf and of module objects with ordinary module sheaves on any scheme; added by the maintainer reader so that the residue category of K_1 is not silently identified with the constant-ring category of the étale-origin nodes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-completion-triangle-comparison",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-fixed-module-bounded-constructible-origin",
+  "lem-weil-proetale-dbc-triangulated",
+  "lem-sf-module-object-ordinary-coefficient-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-56964f8bb",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-56964f8bb (reviewer sub-agent of L); spot-checked: I read the whole item. Statement and stmt_deps are unchanged from base (Q72 created the item on 10-21 from det-lem-int-integral-heart-triangulated old steps 1–3). Live has it unsplit, so the delivery is not superseded. It is not in the dropped list, cites no SGA, and has no cycle (dependency closures checked). There are no new nodes and no duplicate (DAG statement search). Step checks: (1) lem-pe-completion-triangle-comparison, on an arbitrary scheme with the same R_X and the canonical-map completeness, gives zero, isomorphism and shift invariance through F additive, naturality and σc=c[r]. I compared it with the Cones/shifts paragraph of sk-lem-pe-derived-nakayama-first-reduction.proof.md. (2) Its triangle morphism plus lem-sf-triangle-morphism-iso (Stacks 014A) gives two-of-three for completeness. (3) Exact derived scalar extension, lem-pur-derived-change-of-rings(2). (4) The constant-module encoding is used correctly. (5) Q ⇔ étale origin through both directions of lem-weil-pbc-fixed-module-constructible-origin and the bounded reconstruction node: all hypotheses hold on any scheme, with G_i=0 off the interval. (6) lem-weil-proetale-dbc-triangulated plus the two TR2 rotations, which I checked. (7) The assembly is elementary. Source paragraph (1) of sk-lem-int-integral-heart-triangulated is realized, and the cone-closure route that avoids ν^*'s essential image is acceptable. I accept the six declared generic tool_uses. FIX (C4/E6): the proof silently identified three rings: the residue ring p_X^*κ of K_1 (module objects), the constant ring sheaf κ_X of the étale-origin/Dbc nodes, and the (Cont(π_0|U|,κ))^# ring of def-weil-pbc-proetale-modules. Step 3 now cites lem-sf-module-object-ordinary-coefficient-equivalence (ring-object iso p_X^*κ≅κ_X, exact module/derived equivalence preserving triangles). It also writes out the elementary local-isomorphism argument that the constant presheaf matches the Cont(π_0) presheaf (clopen fibres give a Zariski cover; empty objects are covered by the empty family) and cites def-weil-pbc-sheafification. I recomputed proof_deps and added the matching tool_use. The corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-integral-residue-class-triangle-closure.json; details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
