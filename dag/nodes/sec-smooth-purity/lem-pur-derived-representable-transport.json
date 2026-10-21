@@ -1,0 +1,94 @@
+{
+ "id": "lem-pur-derived-representable-transport",
+ "kind": "statement",
+ "title": "Derived transport of represented left exact functors through injective comparisons",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories with enough injectives [def-sp-abelian, def-sp-enough-injectives], using derived categories in fixed compatible Hom universes [def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories]. Let $L:\\mathcal A\\to\\mathcal B$ be an additive exact functor, $P\\in\\mathcal A$, $P'\\in\\mathcal B$, and $d:LP\\xrightarrow{\\sim}P'$ an isomorphism. Let $S:\\mathcal A\\to\\mathrm{Ab}$ and $S':\\mathcal B\\to\\mathrm{Ab}$ be additive left exact functors [def-sp-left-exact-additive]. Suppose given additive natural isomorphisms $\\theta:\\operatorname{Hom}_{\\mathcal A}(P,-)\\xrightarrow{\\sim}S$ and $\\theta':\\operatorname{Hom}_{\\mathcal B}(P',-)\\xrightarrow{\\sim}S'$, and a natural transformation $\\lambda:S\\to S'\\circ L$, satisfying, for every $M$ and $f:P\\to M$,\n$$\\theta'_{LM}(Lf\\circ d^{-1})=\\lambda_M\\theta_M(f).$$\nLet $DL$ be termwise exact derived inverse image (with its termwise shift comparison). Write $b:RS\\to RS'\\circ DL$ for the canonical bounded-below right-derived comparison, namely the unique factorization of the termwise $\\lambda$ followed by the target derived unit through the source derived unit [lem-weil-pbc-right-derived-plus-injective]. Let $\\chi,\\chi'$ be the isomorphisms from $H^a(RS(-))$, respectively $H^a(RS'(-))$, to morphisms from $P[0]$, respectively $P'[0]$, obtained by deriving $\\theta^{-1},(\\theta')^{-1}$ and using the roof-normalized comparison of [lem-sc-p1-rhom-hom-derived-roof].\n\nFor bounded-below complexes $F$, choose bounded-below degreewise injective resolutions $e:F\\to I$ and $e':LF\\to J$. There exists a chain map $t:LI\\to J$ with $t\\circ Le\\simeq e'$, unique up to homotopy. In the injective models the canonical $b_F$ is represented by\n$$S(I)\\xrightarrow{\\lambda_I}S'(LI)\\xrightarrow{S'(t)}S'(J).$$\nFor every cocycle $f:P\\to I^a$, its image under this map corresponds through $\\theta'$ to the cocycle $t^a\\circ Lf\\circ d^{-1}:P'\\to J^a$. Consequently for every $a\\in\\mathbf Z$ and $\\alpha\\in H^a(RS(F))$,\n$$\\chi'_{DLF}\\bigl(H^a(b_F)(\\alpha)\\bigr)=DL\\bigl(\\chi_F(\\alpha)\\bigr)\\circ d^{-1}.$$\nAll expressions are independent of $e,e',t$ and representatives; boundaries give zero derived morphisms and homotopic comparisons induce the same maps. No preservation of injective objects by $L$ is assumed.\n\nThese comparisons respect composition and coherent identifications of exact functors: for a second exact functor $L_2:\\mathcal B\\to\\mathcal C$ with analogous data $(P'',S'',d_2,\\lambda_2)$, where $\\mathcal C$ is abelian with enough injectives, the comparison for $L_2L$, $d_2\\circ L_2d$ and $(\\lambda_2L)\\circ\\lambda$ is the composite of the two derived comparisons. If two such composites are identified by a natural isomorphism of the exact functors and their underived $d$ and $\\lambda$ agree under it, their derived comparisons and the displayed Hom formulas agree under the induced derived isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TI, lemma-enough-injectives-right-derived, and Tag 05TH, lemma-injective-acyclic; agent-formulated representable comparison and composition refinement of original item steps 5 and 7–9. The generic RHom roof formula is the existing lem-sc-p1-rhom-hom-derived-roof, not a new assertion attributed verbatim to these tags."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-enough-injectives",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-sc-p1-rhom-hom-derived-roof"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "In abelian categories with enough injectives an exact functor L and P prime isomorphic to L P transport a representable left exact functor naturally and the right derived comparison equals applying L to a derived morphism and precomposing the inverse isomorphism",
+   "results": "8 hits: CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.instIsIsoFunctorToRightDerivedZero; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: Ext.mapExactFunctor only transports Ext; RightDerived.lean:114–175 treats object resolutions in one category, not arbitrary bounded-below represented functors across an exact L with the stated canonical comparison and composition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.mapExactFunctor",
+   "results": "12 hits: CategoryTheory.Abelian.Ext.mapExactFunctor; CategoryTheory.Abelian.Ext.id_mapExactFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor_mk₀; CategoryTheory.Abelian.Ext.mapExactFunctor_comp; CategoryTheory.Abelian.Ext.mapExactFunctor_extClass; CategoryTheory.Abelian.Ext.comp_mapExactFunctor; CategoryTheory.Abelian.Ext.mapExactFunctor_comp_mk₀_natTransApp; CategoryTheory.Abelian.Ext.mapExactFunctor_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: Ext.mapExactFunctor only transports Ext; RightDerived.lean:114–175 treats object resolutions in one category, not arbitrary bounded-below represented functors across an exact L with the stated canonical comparison and composition"
+  },
+  {
+   "tool": "grep",
+   "query": "mapExactFunctor|mapExtAddHom|rightDerived.*[Bb]ase[Cc]hange",
+   "results": "10 hits: Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: Ext.mapExactFunctor only transports Ext; RightDerived.lean:114–175 treats object resolutions in one category, not arbitrary bounded-below represented functors across an exact L with the stated canonical comparison and composition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived natural transformation from represented left exact functors under an exact functor computed by a comparison LI to J of injective resolutions without L preserving injectives",
+   "results": "8 hits: CategoryTheory.NatTrans.leftDerived; CategoryTheory.ProjectiveResolution.leftDerived_app_eq; CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_inverts; CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj; CategoryTheory.NatTrans.rightDerived; CategoryTheory.Functor.IsLeftDerivedFunctor; CategoryTheory.Functor.IsLeftDerivedFunctor.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: Ext.mapExactFunctor only transports Ext; RightDerived.lean:114–175 treats object resolutions in one category, not arbitrary bounded-below represented functors across an exact L with the stated canonical comparison and composition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived comparison for a natural transformation between left exact functors represented by objects is compatible with derived Hom under an exact functor via injective resolution cocycles",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.Functor.leftDerived_map_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: Ext.mapExactFunctor only transports Ext; RightDerived.lean:114–175 treats object resolutions in one category, not arbitrary bounded-below represented functors across an exact L with the stated canonical comparison and composition"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.isoRightDerivedObj",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.isoRightDerivedObj; CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: Ext.mapExactFunctor only transports Ext; RightDerived.lean:114–175 treats object resolutions in one category, not arbitrary bounded-below represented functors across an exact L with the stated canonical comparison and composition"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Nn]aturality|isoRightDerivedObj|extEquivCohomologyClass",
+   "results": "15 hits: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: Ext.mapExactFunctor only transports Ext; RightDerived.lean:114–175 treats object resolutions in one category, not arbitrary bounded-below represented functors across an exact L with the stated canonical comparison and composition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-supported-hom-pullback",
+  "date": "2026-10-21",
+  "group": "Q55"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-affine-line-orientation",
+   "place": "Proof, pullback of the supported coordinate boundary and final etale-origin transport: original supported-Hom pullback steps 5, 7–8 and derived part of step 9",
+   "via": [
+    "lem-pur-supported-hom-pullback"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

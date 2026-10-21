@@ -1,0 +1,100 @@
+{
+ "id": "lem-pur-supported-constant-exchange-normalization",
+ "kind": "statement",
+ "title": "Canonical closed constant exchange and its underived comparison square",
+ "statement": "Fix the finite coefficient datum $A=A_{E,n}$ of [def-pur-conventions]. Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes with complementary open immersion $j:U\\hookrightarrow X$, and let $h:X'\\to X$ be any scheme morphism. Put $Z'=X'\\times_XZ$, with immersions $i',j'$ and projection $g:Z'\\to Z$ [def-pc-scheme, def-weil-closed-immersion, def-weil-open-immersion, def-weil-pbc-cartesian-square]. Use small representatives of the small etale and pro-etale sites, constant ring sheaves $A_T$, and ordinary module sheaves [def-weil-size-convention, def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category]. Write $P_{T,W}=i_*A_W$ for the supported constant module of a closed pair $(T,W)$, $\\rho_{T,W}:A_T\\to P_{T,W}$ for constant restriction, and $\\epsilon_{T,W}:j_!A_{T\\setminus W}\\to A_T$ for the open adjunction counit [def-weil-pbc-direct-image, def-weil-proetale-module-direct-image, def-weil-pbc-extension-by-zero, def-weil-extension-by-zero].\n\nConsider any of the following inverse images $L$: $h_{\\mathrm{et}}^{-1}$, $h_{\\mathrm{proet}}^{-1}$, or $\\nu_X^{-1}$ for $\\nu_X:X_{\\mathrm{proet}}\\to X_{\\mathrm{et}}$ [def-weil-pbc-inverse-image, def-weil-proetale-inverse-image, def-weil-pbc-site-comparison-morphism]. Let $(P,\\rho,\\epsilon)$ and $(P',\\rho',\\epsilon')$ denote its source and target pair, and $q:LA_X\\xrightarrow{\\sim}A_{\\mathrm{target}}$ the constant-unit identification. Each $L$ is exact. On both sites $\\rho$ is a cokernel of $\\epsilon$. The canonical open extension-by-zero comparison carries $L\\epsilon$ to $\\epsilon'$, using $q$ and the corresponding identification on $U$. The canonical closed exchange $d:LP\\to P'$ (the adjunction-mate exchange of [def-weil-pbc-underived-exchange], respectively its pro-etale or site-comparison analogue) is an isomorphism, uniquely characterized by\n$$d\\circ L\\rho=\\rho'\\circ q.$$\nIn particular this characterization specifies the actual canonical exchange, not only the existence of some isomorphism between its endpoints.\n\nLet $\\lambda_M:\\Gamma_Z(X,M)\\to\\Gamma_{Z'}(X',LM)$ be the transformation obtained by restricting the inverse-image section map to the kernels of restriction to the complementary opens [def-pur-support-cohomology]; for $L=\\nu_X^{-1}$ use the same closed pair in both topologies. These transformations are defined for every module sheaf $M$. Under the coherent inverse-image comparison $k:\\nu_{X'}^{-1}h_{\\mathrm{et}}^{-1}\\xrightarrow{\\sim}h_{\\mathrm{proet}}^{-1}\\nu_X^{-1}$ of [lem-weil-pbc-comparison-pullback], put $c_e=h_{\\mathrm{et}}$'s closed exchange, $c_p=h_{\\mathrm{proet}}$'s exchange and $\\gamma_X,\\gamma_{X'}$ the site exchanges. Then\n$$\\gamma_{X'}\\circ\\nu_{X'}^{-1}(c_e)=c_p\\circ h_{\\mathrm{proet}}^{-1}(\\gamma_X)\\circ k_{P_{X,Z}}.$$\nThe two composites of the section transformations $\\lambda$ around this same square also agree after applying $k_M$ on the target supported sections. These assertions impose no quasi-compactness on $U$ and no finiteness on $h$ or $X'$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6, lemma-shriek-base-change (adjunction normalization), and Tag 095L, lemma-ses-associated-to-open (etale constant cokernel); Milne LEC Section 9, Theorem 9.4 functoriality. Pro-etale constant presentation and comparison-square normalization are the agent-formulated refinement of original item steps 1–3 and 9, using the existing pro-etale presentation node, not an arbitrary-sheaf localization theorem."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-size-convention",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-direct-image",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-extension-by-zero",
+  "def-weil-pbc-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-underived-exchange",
+  "def-pur-support-cohomology",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For etale and proetale sheaves the closed supported constant has canonical inverse image exchange normalized by constant restriction and evaluation at one intertwines Hom with sections supported on a closed subscheme",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.res_const; AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app; ModuleCat.Tilde.res_const; TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd; AlgebraicGeometry.Scheme.restrictFunctorΓ; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.StructureSheaf.res_const'; AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app",
+   "date": "2026-10-21",
+   "verdict": "no match: unitHomEquiv and sheaf adjunctions give neither the supported constant exchange normalization nor its etale/pro-etale square; read Sheaf/PullbackFree.lean:72–107 and Sites/GlobalSections.lean:101–120"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor.IsLeftAdjoint",
+   "results": "11 hits: CategoryTheory.instIsLeftAdjointFunctorOppositeSheafPresheafToSheaf; PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification; SheafOfModules.instIsLeftAdjointOverOverRingCatOverMapOfHasPullbacks; SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver; SheafOfModules.isLeftAdjoint_pushforward_of_isIso; SheafOfModules.isQuasicoherent_pushforward_of_isLeftAdjoint; SheafOfModules.instIsLeftAdjointPullback; CategoryTheory.GrothendieckTopology.Point.instIsLeftAdjointSheafSheafFiber",
+   "date": "2026-10-21",
+   "verdict": "no match: unitHomEquiv and sheaf adjunctions give neither the supported constant exchange normalization nor its etale/pro-etale square; read Sheaf/PullbackFree.lean:72–107 and Sites/GlobalSections.lean:101–120"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedSections|closedUpperShriek|supportCohomology",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: unitHomEquiv and sheaf adjunctions give neither the supported constant exchange normalization nor its etale/pro-etale square; read Sheaf/PullbackFree.lean:72–107 and Sites/GlobalSections.lean:101–120"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at one identifies Hom from the pushforward of the constant sheaf of a closed subscheme with sections supported there naturally under inverse image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Γevaluation_naturality_apply; SheafOfModules.unitHomEquiv_apply_coe; AlgebraicGeometry.LocallyRingedSpace.evaluation_naturality_apply; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app; AlgebraicGeometry.Scheme.evaluation; CategoryTheory.sheafSectionsNatIsoEvaluation_hom_app; AlgebraicGeometry.Scheme.Modules.pushforwardId_inv_app_app; smoothSheaf.evalHom",
+   "date": "2026-10-21",
+   "verdict": "no match: unitHomEquiv and sheaf adjunctions give neither the supported constant exchange normalization nor its etale/pro-etale square; read Sheaf/PullbackFree.lean:72–107 and Sites/GlobalSections.lean:101–120"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of Hom from a closed extension of the constant sheaf under exact inverse image of ringed topoi and compatibility with sections vanishing on the complementary open",
+   "results": "8 hits: CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right_symm; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; CategoryTheory.Sheaf.ΓObjEquivHom_naturality; CategoryTheory.Sheaf.ΓObjEquivHom_naturality_symm; CategoryTheory.Sheaf.ΓRes_naturality; CategoryTheory.Sheaf.ΓObjEquivSections_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: unitHomEquiv and sheaf adjunctions give neither the supported constant exchange normalization nor its etale/pro-etale square; read Sheaf/PullbackFree.lean:72–107 and Sites/GlobalSections.lean:101–120"
+  },
+  {
+   "tool": "grep",
+   "query": "unitHomEquiv|ΓHomEquiv|lowerShriek",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Free.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: unitHomEquiv and sheaf adjunctions give neither the supported constant exchange normalization nor its etale/pro-etale square; read Sheaf/PullbackFree.lean:72–107 and Sites/GlobalSections.lean:101–120"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-supported-hom-pullback",
+  "date": "2026-10-21",
+  "group": "Q55"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-affine-line-orientation",
+   "place": "Proof, geometric-fibre restriction and final etale-origin comparison: original supported-Hom pullback steps 1–3 and underived part of step 9",
+   "via": [
+    "lem-pur-supported-hom-pullback"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

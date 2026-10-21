@@ -23,155 +23,63 @@
  ],
  "proof": [
   {
-   "text": "Use three instances of the same notation: $L=h^{-1}$ on etale modules, $L=h^{-1}$ on pro-etale modules, and $L=\\nu_X^{-1}$ from etale to pro-etale modules. Their exactness and their canonical identifications $LA_X=A_{X'}$ (respectively $A_{X,\\mathrm{proet}}$) are supplied by [prop-weil-pbc-inverse-image-modules-exact], [prop-weil-pbc-proetale-constant-exact], and [lem-sf-comparison-pullback-exact]. They therefore induce derived functors by termwise application and commute with shifts, by [lem-sf-exact-functor-derived-triangulated]. Write $P=i_*A_Z$, $P'=i'_*A_{Z'}$ in the first two cases; in the third case $P$ and $P'$ mean the etale and pro-etale versions on the same scheme. We shall prove the compatibility for these three exact inverse images simultaneously.",
+   "text": "Apply [lem-pur-supported-constant-exchange-normalization] to the etale pullback, pro-etale pullback, and site comparison. It gives exact $L$, the actual canonical isomorphisms $d=c$ or $\\gamma$, and $dL\\rho=\\rho'q$. Thus none of the maps below is an arbitrarily chosen exchange.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "prop-weil-pbc-proetale-constant-exact",
-    "lem-sf-comparison-pullback-exact",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-pur-supported-constant-exchange-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Constant module inverse images; ringed-site inverse image and its termwise derived functor"
+    "place": "Tag 03S6, lemma-shriek-base-change (adjunction normalization), and Tag 095L, lemma-ses-associated-to-open (etale constant cokernel); Milne LEC Section 9, Theorem 9.4 functoriality. Pro-etale constant presentation and comparison-square normalization are the agent-formulated refinement of original item steps 1–3 and 9, using the existing pro-etale presentation node, not an arbitrary-sheaf localization theorem."
    }
   },
   {
-   "text": "Put $U=X\\setminus Z$ and $U'=X'\\setminus Z'$. On the etale site, [lem-weil-pbc-open-closed-short-exact] applied to $A_X$, with the canonical identifications $j^{-1}A_X=A_U$ and $i^{-1}A_X=A_Z$ of [prop-weil-pbc-inverse-image-modules-exact](1), gives $j_!A_U\\xrightarrow{\\epsilon}A_X\\xrightarrow{\\rho}P\\to0$, with $\\epsilon$ the open counit and $\\rho$ constant restriction. On the pro-etale site precisely this cokernel presentation, with these maps and without any quasi-compactness hypothesis on $j$, is [lem-pur-proetale-supported-constant-presentation]. Use the same presentations for the primed pairs. Only this constant-coefficient presentation is needed; no localization assertion for arbitrary pro-etale sheaves is invoked.",
+   "text": "By [lem-pur-supported-hom-cocycle-normalization], the module categories have enough injectives and $\\theta_M(f)=(f\\rho)(1)$ identifies supported sections with $\\operatorname{Hom}(P,M)$, with the prescribed derived normalization $\\chi$. The exchange identity of step 1 gives $d^{-1}\\rho'=L\\rho\\,q^{-1}$. Since $q$ carries the pulled-back constant $1$ to $1$, evaluation gives $\\theta'_{LM}(Lf\\,d^{-1})=\\lambda_M\\theta_M(f)$. Restrictions to the open are zero on both sides. This verifies the underived hypothesis of the next step.",
    "uses": [
-    "lem-weil-pbc-open-closed-short-exact",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-pur-proetale-supported-constant-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095L, lemma-ses-associated-to-open; pro-etale constant presentation separately cited"
-   }
-  },
-  {
-   "text": "For the first instance of $L$, [lem-weil-pbc-etale-shriek-base-change-modules] identifies $L(j_!A_U)$ with $j'_!A_{U'}$; for the second use [lem-cbc-proetale-extension-zero-base-change]; for the third use [lem-cbc-proetale-extension-zero-comparison]. These canonical open comparisons identify $L\\epsilon$ with $\\epsilon'$: transposing the two maps by the open adjunction gives in both cases the identity of the pulled-back coefficient unit. Exactness from step 1 and the cokernel presentations of step 2 now give a unique isomorphism $d:LP\\xrightarrow{\\sim}P'$ satisfying $d\\,L\\rho=\\rho'$ after the constant-unit identification. This is the canonical closed exchange $c$, or the site comparison $\\gamma$, respectively. Indeed the adjoint definition of exchange [def-weil-pbc-underived-exchange] and its pro-etale version from [def-weil-proetale-inverse-image] send the constant $1$ to $1$ after restriction to the closed pair; their composites with $L\\rho$ are therefore $\\rho'$. Since $L\\rho$ is epic, this identifies them with $d$. The site comparison is identified by the identical constant-restriction calculation.",
-   "uses": [
-    "lem-weil-pbc-etale-shriek-base-change-modules",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "def-weil-pbc-underived-exchange",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-cbc-proetale-extension-zero"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6, lemma-shriek-base-change, adjunction proof; cokernel uniqueness applied to the coefficient unit"
-   }
-  },
-  {
-   "text": "For a module sheaf $M$, precomposition with $\\rho$ identifies $\\operatorname{Hom}(P,M)$ with the kernel of $\\operatorname{Hom}(A_X,M)\\to\\operatorname{Hom}(j_!A_U,M)$. The etale open adjunction [lem-weil-pbc-extension-by-zero-adjunction] and its pro-etale counterpart [lem-cbc-proetale-extension-zero] identify the latter Hom with $M(U)$. A module map $A_X\\to M$ is determined by the image of the global section $1$; its inverse sends $s\\in M(X)$ to the sectionwise map $a\\mapsto as|_V$ on each object $V$. Under these identifications precomposition with $\\epsilon$ is restriction: $(\\varphi\\rho\\epsilon)_U(1)=0$, and for an arbitrary map $\\beta:A_X\\to M$ its restriction is $(\\beta\\epsilon)_U(1)=\\beta_X(1)|_U$. Thus\n$$\\theta_M:\\operatorname{Hom}(P,M)\\xrightarrow{\\sim}\\Gamma_Z(X,M),\\qquad\\varphi\\longmapsto(\\varphi\\rho)_X(1)$$\nis an additive natural isomorphism, where the kernel is exactly the definition in [def-pur-support-cohomology]. The same formula defines $\\theta'$ on the target site.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-cbc-proetale-extension-zero",
-    "def-pur-support-cohomology"
+    "lem-pur-supported-hom-cocycle-normalization",
+    "lem-pur-supported-constant-exchange-normalization"
    ],
    "elementary": true,
    "source": {
     "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Theorem 9.4, Ext proof p. 67, and Example 9.5 p. 66; module maps evaluated at 1"
+    "place": "Section 9, Example 9.5 and Ext proof of Theorem 9.4, pp. 66–67; module-valued, bounded-below and pro-etale normalization made explicit in original item steps 4 and 6."
    }
   },
   {
-   "text": "Let $\\lambda_M:\\Gamma_Z(X,M)\\to\\Gamma_{Z'}(X',LM)$ be the map on kernels induced by inverse image of sections and restriction to the open complement, using the same notation for site comparison. For $\\varphi:P\\to M$, the identity $d^{-1}\\rho'=L\\rho$ of step 3 gives\n$$\\theta'_{LM}(L\\varphi\\circ d^{-1})=(L\\varphi\\circ L\\rho)(1)=\\lambda_M((\\varphi\\rho)(1))=\\lambda_M\\theta_M(\\varphi).$$\nThe middle equality is simply the map of sections induced by the inverse-image unit; that unit carries $1$ to $1$. The sections lie in the stated kernels because their restrictions to $U'$ are pullbacks of zero. This establishes compatibility before deriving, for all module sheaves and all three choices of $L$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Theorem 9.4 proof p. 67; explicit evaluation of the maps on kernels"
-   }
-  },
-  {
-   "text": "All sites are taken with the small skeleta in the conventions of the statement. The categories of ordinary module sheaves are Grothendieck by [prop-pur-kinjective-resolutions-exist]. They have enough injectives: apply [lem-pur-kinjective-degreewise-existence] to $M[0]$; its degree-zero monomorphism embeds $M$ into an injective object. The bounded-below right-derived universal property [lem-weil-pbc-right-derived-plus-injective] derives $\\theta$ and $\\theta^{-1}$ to mutually inverse maps: the two composites have the identity factorization on complexes, so uniqueness forces them to be identities. Combining this derived identification with [lem-sc-p1-rhom-hom-derived-roof] identifies $H_Z^a(X,F)$ with $\\operatorname{Hom}(P,F[a])$. This is the canonical $\\chi$ in the statement. More explicitly, on an injective resolution $F\\to I$ a supported cocycle $s\\in\\Gamma_Z(X,I^a)$ is sent to the unique $f:P\\to I^a$ with $f\\rho(1)=s$, regarded as $P[0]\\to I[a]$ and followed by the inverse resolution isomorphism. On the etale site this is the supported-Hom identification [lem-amb-closed-support-hom]: applying Hom to the same open-closed presentation computes the kernel of restriction, hence its shifted cone. On the pro-etale site it is [lem-pur-supported-hom]. This fixes the normalization rather than choosing an arbitrary natural isomorphism.",
+   "text": "Apply [lem-pur-derived-representable-transport] with these $P,P',S=\\Gamma_Z,S'=\\Gamma_{Z'},\\theta,\\theta',L,d,\\lambda$. Its normalized injective comparison computes canonical derived pullback and gives $\\chi'(h^*\\alpha)=L(\\chi(\\alpha))d^{-1}$ in every integer degree, including $L=\\nu_X^{-1}$. The functorial localization pullback in [thm-pur-with-support-exactness] is this derived kernel map: the open and total-section maps inducing it are precisely the inverse-image section maps defining $\\lambda$. Hence the three instances give the required etale, pro-etale and site-comparison equalities for the stated $F$.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-kinjective-degreewise-existence",
-    "lem-weil-pbc-right-derived-plus-injective",
-    "lem-sc-p1-rhom-hom-derived-roof",
-    "lem-amb-closed-support-hom",
-    "lem-pur-supported-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Example 9.5 and proof of Theorem 9.4, pp. 66–67; derive the displayed kernel/Hom identity"
-   }
-  },
-  {
-   "text": "Choose bounded-below injective resolutions $e:F\\to I$ and $e':LF\\to J$ using [lem-sc-bounded-below-injective-resolution]. Exactness of $L$ makes $Le$ a quasi-isomorphism. The K-injective comparison principle [lem-sp-kinjective-comparison-principle] gives a chain map $t:LI\\to J$ with $t\\,Le$ homotopic to $e'$, unique up to homotopy. Apply step 5 degreewise and then postcompose with $t$: on supported sections the chain map is $s\\mapsto\\Gamma_{Z'}(t)(\\lambda_I(s))$, while on Hom complexes it is\n$$f\\longmapsto t\\circ Lf\\circ d^{-1}.$$\nThe two agree under $\\theta,\\theta'$. To identify the first with canonical derived supported pullback, apply the universal property of [lem-weil-pbc-right-derived-plus-injective] to the termwise map $\\lambda$ followed by the target derived unit. It gives a unique $R\\Gamma_Z\\to R\\Gamma_{Z'}\\circ DL$ with this factorization. Computing it on $I$ gives exactly the displayed map into $J$. This is the canonical map used in the functorial localization sequence [thm-pur-with-support-exactness], since both derive the same kernel-of-restriction transformation. This argument does not require $L$ to preserve injectives.",
-   "uses": [
-    "lem-sc-bounded-below-injective-resolution",
-    "lem-sp-kinjective-comparison-principle",
-    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-pur-derived-representable-transport",
     "thm-pur-with-support-exactness"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Theorem 9.4 functoriality, with the bounded-below comparison made explicit using the derived universal property"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TI, lemma-enough-injectives-right-derived, and Tag 05TH, lemma-injective-acyclic; agent-formulated representable comparison and composition refinement of original item steps 5 and 7–9. The generic RHom roof formula is the existing lem-sc-p1-rhom-hom-derived-roof, not a new assertion attributed verbatim to these tags."
    }
   },
   {
-   "text": "For a cocycle $f:P\\to I^a$ representing $\\alpha$, step 6 represents $\\chi(\\alpha)$ by $e[a]^{-1}\\circ f$, and step 7 represents the pulled-back supported class by $t[a]\\circ Lf\\circ d^{-1}$. Consequently its target $\\chi'$ is\n$$e'[a]^{-1}\\circ t[a]\\circ Lf\\circ d^{-1}=(Le)[a]^{-1}\\circ Lf\\circ d^{-1}=L(\\chi(\\alpha))\\circ d^{-1}.$$\nHere $tLe=e'$ in the homotopy category by step 7, and hence also in the derived category. The canonical shift comparison is the one obtained by applying the additive exact functor termwise. Homotopic choices of $t$ induce homotopic maps of both complexes, and boundaries in $f$ give null-homotopic maps out of $P[0]$, as in [lem-sc-p1-rhom-hom-derived-roof]. Thus the equality is independent of resolutions and holds in every integer degree. Specializing $L$ and $d$ gives the etale formula, the pro-etale formula (in particular for etale-origin $F$), and the formula for $\\nu^*$ and $\\gamma$.",
+   "text": "The underived constant-exchange square and supported-section square commute by [lem-pur-supported-constant-exchange-normalization]. Apply the composition and coherent-identification clause of [lem-pur-derived-representable-transport] to these squares. It identifies their derived pullbacks under $\\nu_{X'}^{-1}h_{\\mathrm{et}}^{-1}\\cong h_{\\mathrm{proet}}^{-1}\\nu_X^{-1}$ and makes the Hom formulas commute as well. Thus comparison carries the etale equality to the pro-etale one on both $X$ and $X'$. No finiteness or purity hypothesis has entered.",
    "uses": [
-    "lem-sc-p1-rhom-hom-derived-roof"
+    "lem-pur-supported-constant-exchange-normalization",
+    "lem-pur-derived-representable-transport"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-    "place": "Theorem 9.4 and Example 9.5; cancellation of the two resolution isomorphisms"
-   }
-  },
-  {
-   "text": "Finally use [lem-weil-pbc-comparison-pullback] to identify $\\nu_{X'}^{-1}h_{\\mathrm{et}}^{-1}$ with $h_{\\mathrm{proet}}^{-1}\\nu_X^{-1}$, and similarly on the open and closed subschemes. It is compatible with composites and the Cartesian identification by its statement. On the supported constant objects the two resulting maps to $i'_*A_{Z'}$ have the same composite with the twice-pulled-back epimorphism $\\rho$: both send the constant $1$ to $1$ and restrict the same constant sections. They are equal by epic cancellation. On supported sections, the two transformations agree because the inverse-image units compose and restriction of a section along the two identified composite morphisms agrees. Uniqueness in [lem-weil-pbc-right-derived-plus-injective] carries this equality to their derived transformations. Thus the $c$, $\\gamma$, and supported pullback squares commute, and the etale equality of step 8 is carried to the asserted pro-etale equality. Nothing in these constructions requires finiteness of $h$ or $X'$ or invokes purity.",
-   "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-right-derived-plus-injective"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/thm-pur-affine-line-orientation.proof.md",
-    "place": "Proof, final etale-origin transport; compatibility of constants and derived units written out"
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change (adjunction normalization), and Tag 095L, lemma-ses-associated-to-open (etale constant cokernel); Milne LEC Section 9, Theorem 9.4 functoriality. Pro-etale constant presentation and comparison-square normalization are the agent-formulated refinement of original item steps 1–3 and 9, using the existing pro-etale presentation node, not an arbitrary-sheaf localization theorem."
    }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "prop-weil-pbc-proetale-constant-exact",
-  "lem-sf-comparison-pullback-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lem-pur-proetale-supported-constant-presentation",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-cbc-proetale-extension-zero-base-change",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "def-weil-pbc-underived-exchange",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-cbc-proetale-extension-zero",
-  "def-pur-support-cohomology",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-kinjective-degreewise-existence",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "lem-sc-p1-rhom-hom-derived-roof",
-  "lem-amb-closed-support-hom",
-  "lem-pur-supported-hom",
-  "lem-sc-bounded-below-injective-resolution",
-  "lem-sp-kinjective-comparison-principle",
-  "thm-pur-with-support-exactness",
-  "lem-weil-pbc-comparison-pullback"
+  "lem-pur-supported-constant-exchange-normalization",
+  "lem-pur-supported-hom-cocycle-normalization",
+  "lem-pur-derived-representable-transport",
+  "thm-pur-with-support-exactness"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
-  "place": "Section 9, Theorem 9.4 and Example 9.5, pp. 66–67; pullback and site compatibility expanded by Q153"
+  "place": "Milne Section 9, Theorem 9.4 and Example 9.5; Q55 re-split of the existing argument into canonical exchange, geometric normalization and abstract derived transport"
  },
  "mathlib_searches": [
   {
@@ -258,77 +166,12 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-supported-hom-pullback",
   "worker": "stage1",
-  "summary": "Checked Milne Section 9 and the current orientation proof. Kept the statement unchanged; proved naturality by the constant-coefficient cokernel presentation, evaluation at 1, and the bounded-below derived universal property. Added only the pro-etale constant presentation without a quasi-compact-open hypothesis. All general pro-etale localization statements requiring quasi-compactness were excluded.",
-  "blueprint": "thm-pur-affine-line-orientation: restriction of the supported coordinate boundary to a geometric fibre, and the final etale-origin transport. This created item supplies exactly the supported-Hom pullback and comparison compatibility used there.",
-  "tool_uses": [
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Generic Exactness of the pro-etale inverse image for constant coefficients: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-sf-comparison-pullback-exact",
-    "why": "Generic The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-weil-pbc-open-closed-short-exact",
-    "why": "Generic The open-closed short exact sequence of an etale sheaf: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
-    "why": "Generic Etale extension by zero commutes with base change for module sheaves: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero-base-change",
-    "why": "Generic Pro-etale extension-by-zero base change: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero-comparison",
-    "why": "Generic Comparison of extension by zero with the site morphism: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-weil-pbc-extension-by-zero-adjunction",
-    "why": "Generic Extension by zero is left adjoint to restriction (étale site): used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero",
-    "why": "Generic Extension by zero on the pro-etale site: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Generic Existence of K-injective resolutions of sheaves of modules: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-sc-p1-rhom-hom-derived-roof",
-    "why": "Generic Natural RHom comparison with the cocycle roof formula: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-amb-closed-support-hom",
-    "why": "Generic Closed support as a relative section complex: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-sc-bounded-below-injective-resolution",
-    "why": "Generic Bounded-below complexes admit bounded-below K-injective resolutions: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-sp-kinjective-comparison-principle",
-    "why": "Generic Comparison principle for a K-injective target: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "Generic Comparison inverse image commutes with scheme pullback: used as a black box for exact inverse image, the coefficient open-closed presentation, or bounded-below homological algebra; no computation of the affine-line orientation or replacement of the unit route is made."
-   },
-   {
-    "node": "lem-pur-kinjective-degreewise-existence",
-    "why": "The termwise monic injective replacement embeds a degree-zero sheaf into an injective, proving enough injectives on both small ringed sites; this is a generic resolution tool, not a change to the orientation route."
-   }
-  ]
+  "summary": "Human-requested re-split, statement unchanged. Three independent statement-only tasks preserve the old argument: canonical constant exchange and underived coherence (old 1–3, 9), supported evaluation and normalized cocycles including enough injectives (old 4, 6), abstract right-derived transport and composition (old 5, 7–9). Parent is short assembly; all old text and its allocation are retained verbatim in report.md.",
+  "blueprint": "thm-pur-affine-line-orientation, geometric-fibre restriction of the supported coordinate boundary and final etale-origin transport; same unit route, no purity or SGA input.",
+  "tool_uses": []
  },
  "tool_uses": [
   "prop-weil-pbc-inverse-image-modules-exact",
@@ -349,12 +192,12 @@
   "lem-pur-kinjective-degreewise-existence"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q153-b6ebdb459",
-  "group": "Q153",
+  "reviewer": "NT-cc-Q55-b1ca002f7",
+  "group": "Q55",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-b6ebdb459 (reviewer sub-agent of L); spot-checked: Read the full item (statement unchanged; 9 steps), the new node lem-pur-proetale-supported-constant-presentation, the statements of all 36 cited nodes, and the citing steps 3–5 of thm-pur-affine-line-orientation. Sources checked: Milne LEC §9 pp.66–67 (Thm 9.4, functorial in pairs; Ex. 9.5; the Ext proof), Stacks 095L lemma-ses-associated-to-open and 03S6, and blueprint main-20261015 thm-pur-affine-line-orientation.proof.md. Base-change map: c is the adjoint-mate closed exchange. Step 3 proves it equals the unique d with d∘Lρ=ρ' by evaluation at 1 and epic cancellation. Coefficients are ordinary module sheaves over A_{E,n} on small sites throughout. Steps 6–8 check out: the derived universal property, the K-injective comparison t (exact inverse image is not assumed to preserve injectives), and the roof formula giving χ'(h*α)=L(χα)∘c^{-1} in every degree a. Step 9 (etale/pro-etale squares) checks out via lem-weil-pbc-comparison-pullback. The χ normalization matches the constructions in the proofs of lem-amb-closed-support-hom and lem-pur-supported-hom; I used them only to identify the canonical map. Pre-existing ambiguity, not a delivery fault: def-pur-support-cohomology derives Γ_Z in Ab for sheaves but in module derived categories for complexes; the item uses the complex reading. New node: true by hand check (local lifting of locally constant functions; the kernel is glued from a clopen support), with no quasi-compactness of j. Checked edge cases Z=∅, Z=X, nonreduced Z and non-qc U. Not a duplicate: the generic pro-etale sequences lem-sf-proetale-open-closed-sequence and lem-weil-pbc-proetale-ringed-open-closed assume j quasi-compact, and lem-pur-supported-hom proves this presentation only inside its proof (C3). Statement-only, four search kinds recorded, blueprint from/via correct, and not a restatement of the item. No cycle; no SGA. The 16 declared tool_uses are generic black boxes and are accepted. FIX (C1): step 2 used the identifications j^{-1}A_X=A_U and i^{-1}A_X=A_Z without citing prop-weil-pbc-inverse-image-modules-exact (1). The corrected item is in fixes/dag/nodes/sec-smooth-purity/lem-pur-supported-hom-pullback.json, with that node added to step 2's uses and one clause added; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-b1ca002f7 (reviewer sub-agent of L); spot-checked: Human re-split note (≥2 new nodes, ≤3000-char proof, nothing summarised) is fulfilled. The item's statement, stmt_deps (12) and S2 Lean record are byte-identical to live. The new proof has 4 steps (1970 chars, was 8779) and adds 3 statement-only nodes of comparable size. Every old step has a statement carrier: old 1–3 and the underived part of 9 → lem-pur-supported-constant-exchange-normalization; old 4 and 6 → lem-pur-supported-hom-cocycle-normalization; old 5, 7, 8 and the derived part of 9 → lem-pur-derived-representable-transport (old 5 is its hypothesis, verified elementarily in parent step 2). Checks: the exchange characterization dLρ=ρ′q holds by epi/cokernel (Stacks 095L l.11588 and the pro-etale presentation node) and agrees with the adjunction mate of def-weil-pbc-underived-exchange (03S6 l.11493). The ν/h coherence square is typed correctly and follows from lem-weil-pbc-comparison-pullback. θ(φ)=(φρ)(1) is Milne LEC Ex. 9.5 / Thm 9.4 proof, p.66–67 (read). The cocycle roof matches lem-sc-p1-rhom-hom-derived-roof. In the abstract transport: b is the unique Kan factorization (lem-weil-pbc-right-derived-plus-injective); t exists because Le is a quasi-isomorphism and J is K-injective; Q(e′)⁻¹Q(t)=Q(Le)⁻¹ gives χ′(bα)=DL(χα)d⁻¹; composite data satisfy the hypothesis. I tested edge cases Z=∅, Z=X, L=id, P=0 and negative a. Live DAG search found no duplicate (sbc derived base-change and trf mate-model nodes are tools, not the same statement). There is no cycle, no SGA, and blueprint from/via are correct. FIX (B3), 2 faults: the exchange node cited only the pro-etale def-weil-extension-by-zero for étale j_! → added def-weil-pbc-extension-by-zero; the cocycle node used j_! and the open counit with no definition cited → added both extension-by-zero defs (statement + stmt_deps). Maintainer: the inherited node-level tool_uses still lists 16 base proof deps that the item no longer cites; the inherited abelian-sheaf vs A-module Γ_Z derivation is advisory only.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.SupportedHomPullback",

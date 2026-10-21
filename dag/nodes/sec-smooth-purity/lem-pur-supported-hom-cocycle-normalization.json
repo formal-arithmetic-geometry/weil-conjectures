@@ -1,0 +1,93 @@
+{
+ "id": "lem-pur-supported-hom-cocycle-normalization",
+ "kind": "statement",
+ "title": "Evaluation and injective-cocycle normalization of supported Hom",
+ "statement": "Fix $A=A_{E,n}$ as in [def-pur-conventions]. Let $i:Z\\hookrightarrow X$ be a closed immersion of schemes with complementary open immersion $j:U\\hookrightarrow X$ [def-pc-scheme, def-weil-closed-immersion, def-weil-open-immersion]. Work either on the small etale site or on the small pro-etale site, using small representatives in the coefficient universe, ordinary $A_X$-module sheaves, and constant coefficient modules [def-weil-pbc-etale-site, def-weil-pbc-proetale-site, def-weil-size-convention, def-weil-sheaf-of-modules-category, def-weil-pbc-constant-sheaf]. Let $P=i_*A_Z$, with underived direct image and the actual constant restriction $\\rho:A_X\\to P$ [def-weil-pbc-direct-image, def-weil-proetale-module-direct-image]. Define $S(M)=\\Gamma_Z(X,M)=\\ker(M(X)\\to M(U))$, as in [def-pur-support-cohomology]. Regard its values and all Hom groups below as abelian groups. These module-sheaf categories have enough injectives [def-sp-enough-injectives].\n\nFor every module sheaf $M$, evaluation defines an additive natural isomorphism\n$$\\theta_M:\\operatorname{Hom}(P,M)\\xrightarrow{\\sim}S(M),\\qquad \\theta_M(f)=(f\\circ\\rho)_X(1).$$\nUnder $\\operatorname{Hom}(A_X,M)\\cong M(X)$ and the open adjunction $\\operatorname{Hom}(j_!A_U,M)\\cong M(U)$ for extension by zero $j_!$ [def-weil-pbc-extension-by-zero, def-weil-extension-by-zero], precomposition by the open counit is exactly restriction $M(X)\\to M(U)$. In particular the displayed $\\theta$ is the isomorphism of this actual kernel, with no choice of an automorphism of $S$.\n\nUse cochain complexes, the bounded-below derived category and integer shifts [def-weil-abstract-derived-category, def-weil-pbc-bounded-derived-subcategories], with $P$ in degree zero. The canonical etale supported-Hom identification induced by [lem-amb-closed-support-hom], and the canonical pro-etale identification of [lem-pur-supported-hom], have the following normalization. For every bounded-below $F$, every bounded-below degreewise injective resolution $e:F\\to I$, every $a\\in\\mathbf Z$, and every supported cocycle $s\\in S(I^a)$, let $f_s:P\\to I^a$ be the unique map with $(f_s\\rho)(1)=s$. Then\n$$\\chi_{i,F}^a([s])=(Qe)[a]^{-1}\\circ Q(f_s):P[0]\\longrightarrow QF[a],$$\nwhere $[s]$ is transported from $H^a(S(I))$ through the canonical derived-unit and resolution comparisons to $H_Z^a(X,F)$, and $Q(f_s)$ is the localized complex map $P[0]\\to QI[a]$. Equivalently $\\chi$ is obtained by deriving $\\theta^{-1}:S\\to\\operatorname{Hom}(P,-)$ and applying the roof-normalized RHom comparison [lem-sc-p1-rhom-hom-derived-roof]. This normalization is natural in $F$ and independent of the chosen resolution and cocycle representative. On the etale site it agrees with the shifted restriction-cone identification of [lem-amb-closed-support-hom]. No quasi-compactness of $U$, constructibility, finite-Tor condition, or purity assumption is required.",
+ "source": {
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 9, Example 9.5 and Ext proof of Theorem 9.4, pp. 66–67; module-valued, bounded-below and pro-etale normalization made explicit in original item steps 4 and 6."
+ },
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-proetale-module-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-extension-by-zero",
+  "def-pur-support-cohomology",
+  "def-sp-enough-injectives",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-amb-closed-support-hom",
+  "lem-pur-supported-hom",
+  "lem-sc-p1-rhom-hom-derived-roof"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion evaluation at one of Hom from the supported constant sheaf equals supported sections and its derived isomorphism sends an injective resolution cocycle to the same derived category morphism",
+   "results": "8 hits: DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective; CochainComplex.cm5b.I_X; CochainComplex.cm5b.instInjectiveXIntI; CochainComplex.cm5b; CochainComplex.cm5b.I; CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt; CochainComplex.isKInjective_of_injective_aux; CochainComplex.isKInjective_of_injective",
+   "date": "2026-10-21",
+   "verdict": "no match: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:40–60 gives ordinary Ext cocycles, not evaluation on the closed supported constant or agreement with the geometric restriction-cone isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extEquivCohomologyClass",
+   "results": "12 hits: CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_zero; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_zero; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_neg; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_smul; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_neg; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_sub",
+   "date": "2026-10-21",
+   "verdict": "no match: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:40–60 gives ordinary Ext cocycles, not evaluation on the closed supported constant or agreement with the geometric restriction-cone isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "extEquivCohomologyClass_symm_mk_hom|ΓHomEquiv|supportedHom",
+   "results": "13 hits: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean; Mathlib/CategoryTheory/Abelian/Projective/Ext.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:40–60 gives ordinary Ext cocycles, not evaluation on the closed supported constant or agreement with the geometric restriction-cone isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical supported cohomology Hom identification has the injective cocycle roof formula normalized by evaluation on the constant section one",
+   "results": "8 hits: CochainComplex.HomComplex.Cocycle.mk; CochainComplex.HomComplex.Cochain.ofHom_injective; CochainComplex.HomComplex.cocycle; CochainComplex.HomComplex.CohomologyClass.mk; CochainComplex.HomComplex.Cocycle.ofHom_homOf_eq_self; CochainComplex.HomComplex.CohomologyClass.descAddMonoidHom_cohomologyClass; CochainComplex.HomComplex.CohomologyClass; CochainComplex.HomComplex.Cocycle",
+   "date": "2026-10-21",
+   "verdict": "no match: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:40–60 gives ordinary Ext cocycles, not evaluation on the closed supported constant or agreement with the geometric restriction-cone isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization of cohomology with closed support as derived Hom by the constant restriction map and a cocycle in an injective resolution",
+   "results": "8 hits: CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom; CategoryTheory.InjectiveResolution.extEquivCohomologyClass; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk; CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheaf; CochainComplex.HomComplex.CohomologyClass; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk",
+   "date": "2026-10-21",
+   "verdict": "no match: Mathlib/CategoryTheory/Abelian/Injective/Ext.lean:40–60 gives ordinary Ext cocycles, not evaluation on the closed supported constant or agreement with the geometric restriction-cone isomorphism"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-supported-hom-pullback",
+  "date": "2026-10-21",
+  "group": "Q55"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-affine-line-orientation",
+   "place": "Proof, supported coordinate boundary restricted to a geometric fibre: original supported-Hom pullback steps 4 and 6, fixing evaluation and derived roof normalization",
+   "via": [
+    "lem-pur-supported-hom-pullback"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
