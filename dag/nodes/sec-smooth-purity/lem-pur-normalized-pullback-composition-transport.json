@@ -26,9 +26,95 @@
   "lem-pur-completed-primitive-counit-comparison",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=F_{f\\circ h}$ and write $f_n^*,h_n^*$ for the finite exact module inverse images. Apply [lem-pur-proetale-module-pullback-composition] to $\\Lambda=\\mathcal O_E/\\varpi^n$. Its comparison is precisely the left-adjoint comparison to the specified direct-image composition, with the canonical constant-section coefficient maps. Exactness from [prop-weil-pbc-proetale-constant-exact] means that applying these functors and this natural isomorphism termwise to any complex computes the unbounded derived functors and their comparison $a_n$. The scalar presentation of the canonical compositor in [lem-pur-cochain-pullback-tensor-coherence] identifies its inverse $b_n$ with $t\\otimes(s\\otimes x)\\mapsto t\\,h_n^\\sharp(s)\\otimes x$, after the canonical underlying inverse-image composition identification; $a_n$ sends $t\\otimes x$ to $t\\otimes(1\\otimes x)$. Balancing identifies $t h_n^\\sharp(s)\\otimes(1\\otimes x)$ with $t\\otimes(s\\otimes x)$, so these are inverse maps. The maps have degree zero and commute with the differential termwise. The unit of each scalar-extension adjunction inserts $1$; the displayed $a_n$ carries the composite insertion to the insertion for the composite pullback, which pins the required adjunction normalization.",
+   "uses": [
+    "lem-pur-proetale-module-pullback-composition",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; sites-cohomology.tex Tag 0D6D, lemma-derived-pullback-composition; scalar formulas spelled out here"
+   }
+  },
+  {
+   "text": "Fix $m\\ge n$. Write $\\delta_f:q_X^*f_m^*\\xrightarrow{\\sim}f_n^*q_Y^*$ for $\\kappa_f^{-1}$ and similarly $\\delta_h,\\delta_{fh}$; these are the coefficient-association maps in [lem-pur-normalized-operation-system-models], with the chain formulas of [lem-pur-cochain-pullback-tensor-coherence]. They satisfy the natural-transformation equation\n$$h_n^*(\\delta_f)\\,\\delta_h(f_m^*(-))\\,q_Z^*(a_m)=a_n(q_Y^*(-))\\,\\delta_{fh}.$$\nHere both sides start at $q_Z^*H_m$ and end at $h_n^*f_n^*q_Y^*$. To verify it, invert the compositors and collapse the nested scalar factors as in step 1. Starting with $(t\\otimes(s\\otimes x))\\otimes r$, both routes give $r\\bar t\\,\\overline{h_m^\\sharp(s)}\\otimes(x\\otimes1)$ in $H_n(q_Y^*(-))$, where bars denote the coefficient quotient. Equality follows from $\\overline{t h_m^\\sharp(s)}=\\bar t h_n^\\sharp(\\bar s)$, since the constant-section maps commute with the quotient ring homomorphism. Balancing and the inverse-image composition identifications are the ones already specified by these cited scalar-association constructions. The inverse square follows by composing with $a_m^{-1}$ and $a_n^{-1}$. Thus this is an equality of chain constructions on the flat-term K-flat models allowed by the system-model lemma, and hence of their derived transformations; no quotient map is assumed flat.",
+   "uses": [
+    "lem-pur-normalized-operation-system-models",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, with Tag 07A4 scalar-association construction; explicit coefficient-square calculation"
+   }
+  },
+  {
+   "text": "Now use the actual adjoint $\\alpha=\\alpha^C_{m,n}$, not a replacement transition. By [lem-pur-normalized-operation-system-models] the output adjoints are\n$$\\alpha^P_{m,n}=H_n(\\alpha)\\delta_{fh},\\qquad\n\\alpha^Q_{m,n}=h_n^*f_n^*(\\alpha)\\,h_n^*(\\delta_f)\\,\\delta_h(f_m^*C_m).$$\nThe equation of step 2 followed by naturality of $a_n$ at $\\alpha:q_Y^*C_m\\to C_n$ gives\n$$\\alpha^Q_{m,n}\\,q_Z^*(a_m)=a_n\\,\\alpha^P_{m,n}.$$\nUnder the extension/restriction adjunction of [def-coef-normalized-dvr-tower] this is exactly compatibility with $\\tau^C_{m,n}=\\operatorname{Res}(\\alpha)\\eta_{C_m}$, and thus with the induced actual transitions of $P,Q$. For the inverse, multiply this equation by $q_Z^*(a_m^{-1})$ and $a_n^{-1}$. Construct the transformation on whole systems by the inverse-image adjunction and module scalar-association transformations of [lem-coef-semilinear-derived-sections]; that node supplies the system transformations with precisely these finite evaluations. Equivalently the same formulas act termwise on a complex of strict semilinear systems, where the transition square is the preceding scalar calculation followed by naturality for its actual transition chain map. Exactness lets this construction descend to the ordinary derived system category. The two composites with its inverse are identities already in this construction. This constructs $a:P\\xrightarrow{\\sim}Q$ before evaluation, rather than inferring equality of system morphisms from evaluated equalities. The same calculation works for every $m\\ge n$; the input cocycle and associative scalar multiplication retain all quotient cocycles.",
+   "uses": [
+    "lem-pur-normalized-operation-system-models",
+    "def-coef-normalized-dvr-tower",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8 with the whole-system constructions of lem-coef-semilinear-derived-sections; arbitrary-transition calculation using the coefficient square of step 2"
+   }
+  },
+  {
+   "text": "Set $D=F_f(C)$. The recursive definitions in the statement specialize to $\\beta_P=\\beta_{f\\circ h}(C)$ and $\\beta_Q=\\beta_h(D)\\widehat F_h(\\beta_f(C))$. By [lem-pur-completed-primitive-counit-comparison], each primitive comparison is the specified quotient realization $r_F$ followed by $\\mathcal L F(e)$, and these are natural functor comparisons, including on the actual quotient transitions. Consequently, expressing the nested target in quotient models and applying the inner comparison gives the coherent system arrow $\\mathcal R_X(\\beta_f(C))$; the outer comparison then applies $F_h(e_D)$. Their composite on the reduced inner argument is $F_h(e_D\\mathcal R_X(\\beta_f(C)))=F_h(\\gamma_{F_f(C)})$. This is exactly the recursive counit identification, with no independently chosen finite identifications. After the source and target have been identified by $\\beta_P,\\beta_Q$, apply the whole-system compositor of step 3 and then $\\mathcal L_Z$. Undoing the target identification constructs the completed compositor as\n$$\\widehat a=\\beta_Q^{-1}\\mathcal L_Z(a)\\beta_P.$$\nAll three factors are isomorphisms by the stated hypotheses and step 3. Its inverse is $\\beta_P^{-1}\\mathcal L_Z(a^{-1})\\beta_Q$; direct cancellation verifies both inverse equations. This construction uses the defining quotient-model comparisons for the actual completed functors, so its finite representative maps are the specified scalar-association compositor, transported through the displayed counits.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, used through the primitive quotient/Roos realization comparison; explicit recursive conjugation"
+   }
+  },
+  {
+   "text": "The representative assertion in step 4 retains the actual limit model as well. On restricted strict towers representing $P,Q$, write $t^P_n,t^Q_n$ for their actual transitions. Step 3 gives $a_n t^P_n=t^Q_n a_{n+1}$. Thus the degreewise product map $A=\\prod_n a_n$ obeys $A(1-s_P)=(1-s_Q)A$, component by component. It induces the chain map on $\\operatorname{Cone}(1-s)[-1]$ by applying $A$ to both cone coordinates; $\\prod_n a_n^{-1}$ gives its inverse. On a system resolution the same equations hold after applying that resolution, so this map is carried to $\\mathcal L_Z(a)$ by the natural projection-compatible Roos comparison specified in [lem-pur-completed-primitive-counit-comparison]. The independence and localization compatibility of the actual quotient/Roos models are supplied by [lem-pur-integral-operations-well-defined]. Therefore the conjugation in step 4 identifies their representatives, inverses and all actual transitions, even when $C$ was not initially a chosen reduction tower. No commutation of a geometric inverse image with an arbitrary product or inverse limit is used.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; functorial cone calculation on actual strict-system maps and the existing quotient-model localization comparison"
+   }
+  },
+  {
+   "text": "Finally use counit naturality in the system category, as stated in [lem-pur-completed-primitive-counit-comparison], at the already constructed $a:P\\to Q$. Functoriality and $\\beta_Q\\widehat a=\\mathcal L_Z(a)\\beta_P$ give\n$$\\begin{aligned}\n\\gamma_Q\\mathcal R_Z(\\widehat a)\n &=e_Q\\mathcal R_Z(\\beta_Q\\widehat a)\n =e_Q\\mathcal R_Z\\mathcal L_Z(a)\\mathcal R_Z(\\beta_P)\\\\\n &=a e_P\\mathcal R_Z(\\beta_P)=a\\gamma_P.\n\\end{aligned}$$\nFor the inverse the same calculation gives $\\gamma_P\\mathcal R_Z(\\widehat a^{-1})=a^{-1}\\gamma_Q$. The finite compositor is natural in $C$ by step 1, its whole-system construction is natural by step 3, and the primitive comparisons and their inverses are natural by the cited node; composing them makes $\\widehat a$ and this reduction equation natural in $C$. All these equations are obtained in the whole-system category before taking finite evaluations, so include the actual quotient transitions.",
+   "uses": [
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 via the existing natural counit comparison; explicit functorial cancellation in the derived system category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-completed-primitive-counit-comparison",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-normalized-operation-system-models",
+  "lem-pur-proetale-module-pullback-composition",
+  "prop-weil-pbc-proetale-constant-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D8 and sites-cohomology.tex Tags 0D6D and 0941; explicit coefficient-transition and coherent-counit refinement using existing DAG tools, not a verbatim Stacks theorem"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -64,10 +150,45 @@
    "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/Topology/FiberBundle/Constructions.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ChosenPullbacksAlong.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/MorphismProperty/OverAdjunction.lean",
    "date": "2026-10-21",
    "verdict": "no match: SheafOfModules.pullbackComp supplies the ordinary adjoint comparison only, without arbitrary normalized coefficient-system transitions or completed Roos realization"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|completedPullback|normalized.*[Tt]ower",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean. Restricted grep directory: Mathlib/Algebra/Category/ModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullbackComp and its adjunction normalization are present (Sheaf/PullbackContinuous.lean:167-181), but no hit states whole normalized-system arbitrary-transition compatibility and its completed quotient/Roos realization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "5 hits: SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullbackComp and its adjunction normalization are present (Sheaf/PullbackContinuous.lean:167-181), but no hit states whole normalized-system arbitrary-transition compatibility and its completed quotient/Roos realization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completed pullback composition comparison on coherent inverse systems of finite coefficient modules",
+   "results": "8 hits: CategoryTheory.Limits.pullbackComparison_comp_fst_assoc, CategoryTheory.Over.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, CategoryTheory.Limits.pullback.map_comp, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst, CategoryTheory.Limits.pullbackComparison, CategoryTheory.ChosenPullbacksAlong.pullbackMap_comp, SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullbackComp and its adjunction normalization are present (Sheaf/PullbackContinuous.lean:167-181), but no hit states whole normalized-system arbitrary-transition compatibility and its completed quotient/Roos realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of derived inverse image on normalized coefficient towers commutes with quotient transitions and realizes completed pullback composition",
+   "results": "8 hits: galLift_comp, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, galRestrict'_comp, Ideal.quotient_mk_maps_eq, Algebra.Extension.Cotangent.map_comp, Algebra.Generators.CotangentSpace.compEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullbackComp and its adjunction normalization are present (Sheaf/PullbackContinuous.lean:167-181), but no hit states whole normalized-system arbitrary-transition compatibility and its completed quotient/Roos realization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical adjunction normalized module pullback compositor is compatible with coefficient change and with derived completion of whole semilinear systems",
+   "results": "8 hits: PresheafOfModules.pullbackComp, IsAdicComplete.of_comp_lift, AdicCompletion.transitionMap_comp_reduceModIdeal, IsAdicComplete.StrictMono.of_comp_lift, ModuleCat.homEquiv_extendScalarsComp, AdicCompletion.map_comp, AdicCompletion.map_comp_apply, AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module pullbackComp and its adjunction normalization are present (Sheaf/PullbackContinuous.lean:167-181), but no hit states whole normalized-system arbitrary-transition compatibility and its completed quotient/Roos realization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-completed-operation-tower-substitution",
@@ -87,5 +208,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-normalized-pullback-composition-transport",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported fields; supplied six proof steps using existing general module composition, whole-system operation, primitive quotient/Roos comparison and localization results. Wrote the coefficient square, its composition with arbitrary transition adjoints, the actual Roos map, inverse, and counit reduction equation explicitly. No new nodes. No finished declaration in WeilConjectures states the entire item.",
+  "blueprint": "Realizes the natural Weil isomorphism and compatible coefficient reductions of def-weil-frobenius-coefficient-twists (main-20261015 order 2232), through pullback-composition coherence in step 11 of lem-pur-completed-operation-tower-substitution, including its step-10 quotient transitions.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Uses the generic whole-system construction of pullback-composition transformations with their specified finite evaluations; the purity convention unit does not itself construct ordinary derived semilinear system categories."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Uses exactness of finite constant-coefficient module inverse image to compute unbounded derived composition termwise; it is a general pro-etale tool, not a replacement purity route."
+   },
+   {
+    "node": "lem-pur-proetale-module-pullback-composition",
+    "why": "Uses the canonical constant-coefficient module compositor normalized against direct image, a foundational operation already on the cited operations route."
+   },
+   {
+    "node": "lem-pur-integral-operations-well-defined",
+    "why": "Uses resolution-independent localization of the defining quotient/Roos completed functors, a general foundational operation on the cited operations route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-semilinear-derived-sections",
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-cf13011df",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-cf13011df (reviewer sub-agent of L); spot-checked: I read the full item, all 8 cited statements, and the Stacks places 03D8 (sites-modules l.1236), 0D6D and 0941 (sites-cohomology l.3658/5067). The statement is unchanged from live and side-live, and the item is still unsplit there. There is no repair note for this item: it is a statement-only node from the parent's re-split, so this is a normal one-level split with no new nodes. The DAG is acyclic (closure of 1264 nodes) and proof_deps equals the union of the steps' uses. Step checks: (1) the inverse formulas t⊗x↦t⊗(1⊗x) and t⊗(s⊗x)↦t h♯(s)⊗x hold by balancing; finite exact u^* (prop-weil-pbc-proetale-constant-exact) computes the unbounded derived comparison termwise. (2) I recomputed the coefficient square with δ=κ^{-1}: both routes take (t⊗x)⊗r to r t̄⊗(1⊗(x⊗1)), so 'elementary' is fair. (3) α^Q q^*(a_m)=a_n α^P follows from the step-2 square plus naturality of a_n at the actual α^C. The system map comes from lem-coef-semilinear-derived-sections and is not inferred from its evaluations. (4) The recursion unwinds to β_P=β_{fh}(C) and β_Q=β_h(F_fC)F̂_h(β_f C), and â=β_Q^{-1}L(a)β_P has the right types. (5) ∏a_n commutes with 1−s and gives a Roos cone map, which is L_Z(a) by ρ-naturality; no pullback is moved past a product. (6) γ_Q R(â)=aγ_P by the stated counit naturality. Edge cases checked: identity maps, m=n, zero/empty, r≥m≥n, noncanonical transitions. Duplicate candidates (trf inverse-image composition, fd whole-tower pullback comparison, a1 completed comparison) state different things. Accepted tool_uses: lem-coef-semilinear-derived-sections and prop-weil-pbc-proetale-constant-exact; the other two declared tool uses are on the unit's route via sk-def-sf-operations. No SGA."
  }
 }
