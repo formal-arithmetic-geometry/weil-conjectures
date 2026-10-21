@@ -11,9 +11,92 @@
   "lem-weil-pbc-adjunction-of-natural-bijection",
   "lem-weil-pbc-commshift-nattrans-comp-whisker"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write composition in functional order, with the rightmost map applied first. For $Q\\in\\mathcal D$ put $\\theta_Q=c\\otimes1_Q:LK\\otimes Q\\to E\\otimes Q$. Bifunctoriality gives $(1_E\\otimes q)\\theta_Q=\\theta_{Q'}(1_{LK}\\otimes q)$ for $q:Q\\to Q'$, since both sides equal $c\\otimes q$. The adjunction formula $\\Psi(u)=R(u)\\eta$ identifies $\\alpha^c_P$ with the adjunct of $\\beta^c_P=\\theta_{LP}\\mu_{K,P}$. Thus these formulas use the specified adjunction, rather than a separate choice of mate.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), agent-written arbitrary-arrow expansion; shift and naturality calculations below are not asserted by the tag."
+   }
+  },
+  {
+   "text": "For $a,b,p,c,c'$ as in the statement, bifunctoriality, $bc=c'L(a)$, and naturality of $\\mu$ give\n$$\\begin{aligned}(b\\otimes Lp)\\beta^c_P&=(bc\\otimes Lp)\\mu_{K,P}\\\\&=(c'\\otimes1_{LP'})(L(a)\\otimes Lp)\\mu_{K,P}\\\\&=(c'\\otimes1_{LP'})\\mu_{K',P'}L(a\\otimes p)=\\beta^{c'}_{P'}L(a\\otimes p).\\end{aligned}$$\nIn particular $a=1_K,b=1_E,c'=c$ proves naturality of $\\beta^c$ in $P$. This calculation uses only the naturality and bifunctor axioms specified in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), agent-written arbitrary-arrow expansion; shift and naturality calculations below are not asserted by the tag."
+   }
+  },
+  {
+   "text": "Put $u=a\\otimes p$ and $v=b\\otimes Lp$. Naturality of the adjunction unit is $RL(u)\\eta_{K\\otimes P}=\\eta_{K'\\otimes P'}u$. Applying $R$ to the preceding step therefore gives\n$$R(v)\\alpha^c_P=R(v\\beta^c_P)\\eta_{K\\otimes P}=R(\\beta^{c'}_{P'})RL(u)\\eta_{K\\otimes P}=\\alpha^{c'}_{P'}u.$$\nTaking $a,b$ to be identities gives naturality of $\\alpha^c$ in $P$ as well.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), agent-written arbitrary-arrow expansion; shift and naturality calculations below are not asserted by the tag."
+   }
+  },
+  {
+   "text": "Fix any integer $n$. Naturality in the fixed tensor input, which is an explicit hypothesis on $t$, gives\n$$t^E_{n,Q}\\theta_{Q[n]}=\\theta_Q[n]t^{LK}_{n,Q}.$$\nApply step 1 to $q=l_{n,P}:L(P[n])\\to(LP)[n]$, and then this identity to $Q=LP$. By the definitions of $h$ and $b_{n,P}$ the result is\n$$h_{n,P}\\theta_{L(P[n])}=t^E_{n,LP}T_E(l_{n,P})\\theta_{L(P[n])}=\\theta_{LP}[n]t^{LK}_{n,LP}T_{LK}(l_{n,P})=\\theta_{LP}[n]b_{n,P}.$$\nHere the composite comparisons are precisely those in the cited shift-compatibility convention, applied at the fixed shift $n$.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), agent-written arbitrary-arrow expansion; shift and naturality calculations below are not asserted by the tag."
+   }
+  },
+  {
+   "text": "Now compose the identity of step 4 with $\\mu_{K,P[n]}$ and use the assumed compatibility of $\\mu$:\n$$h_{n,P}\\beta^c_{P[n]}=\\theta_{LP}[n]b_{n,P}\\mu_{K,P[n]}=\\theta_{LP}[n]\\mu_{K,P}[n]a_{n,P}=\\beta^c_P[n]a_{n,P}.$$\nThe last equality is preservation of composition by $[n]$. This proves the first shift equation for every $n$, without making any assertion that the single arrow $c$ itself has a shift comparison.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), agent-written arbitrary-arrow expansion; shift and naturality calculations below are not asserted by the tag."
+   }
+  },
+  {
+   "text": "For the second shift equation set $X=K\\otimes P$, $X'=K\\otimes P[n]$, and $s=t^K_{n,P}:X'\\to X[n]$. Then $a_{n,P}=l_{n,X}L(s)$. Unit naturality at $s$, followed by the assumed shift equation for $\\eta$ at $X$, gives\n$$\\begin{aligned}r_{n,LX}R(a_{n,P})\\eta_{X'}&=r_{n,LX}R(l_{n,X})RL(s)\\eta_{X'}\\\\&=r_{n,LX}R(l_{n,X})\\eta_{X[n]}s=\\eta_X[n]s.\\end{aligned}$$\nAll maps in this equality go from $X'$ to $(RLX)[n]$. In particular no compatibility with a tensor shift in the first variable is used.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), agent-written arbitrary-arrow expansion; shift and naturality calculations below are not asserted by the tag."
+   }
+  },
+  {
+   "text": "Naturality of $r_n$ at $\\beta^c_P:LX\\to H_EP$ reads\n$$r_{n,H_EP}R(\\beta^c_P[n])=R(\\beta^c_P)[n]r_{n,LX}.$$\nUsing step 5, this equality, and step 6, expand the left-hand side of the desired equation:\n$$\\begin{aligned}g_{n,P}\\alpha^c_{P[n]}&=r_{n,H_EP}R(h_{n,P}\\beta^c_{P[n]})\\eta_{X'}\\\\&=r_{n,H_EP}R(\\beta^c_P[n])R(a_{n,P})\\eta_{X'}\\\\&=R(\\beta^c_P)[n]\\eta_X[n]s=\\alpha^c_P[n]t^K_{n,P}.\\end{aligned}$$\nThe last equality again uses functoriality of $[n]$. Together with steps 2, 3 and 5 this proves every displayed conclusion. Only functoriality, naturality and the stated compatibility equations were used.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), agent-written arbitrary-arrow expansion; shift and naturality calculations below are not asserted by the tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56 (equation-projection-formula-map) supplies the projection adjunct; the arbitrary-arrow naturality and all-shifts calculations are written here by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +132,45 @@
    "results": "8 hits: CategoryTheory.tensorLeftAdjunction, CategoryTheory.tensorRightAdjunction, CategoryTheory.frobeniusMorphism, CategoryTheory.tensorLeftHomEquiv, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.tensorRightHomEquiv, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.tensorLeftHomEquiv_tensor",
    "date": "2026-10-21",
    "verdict": "no match: the hits give generic shift-compatible transformations and adjunction shifts, or require closed/monoidal structures; none constructs the tensor comparison mate for arbitrary bifunctors and proves its commuting-square naturality and shift equations."
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Mm]ate|[Mm]ate.*tensor|homEquiv.*[Ss]hift|shift.*homEquiv",
+   "results": "17 hits: Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Basic.lean, Mathlib/CategoryTheory/Shift/ShiftedHomOpposite.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean, Mathlib/CategoryTheory/Triangulated/Orthogonal.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: shift-compatibility identities and mate-pasting tools do not state all the tensor-arrow equations for arbitrary bifunctors and arbitrary c; rigid tensor and localized monoidal results have extra hypotheses."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.NatTrans.CommShift",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: shift-compatibility identities and mate-pasting tools do not state all the tensor-arrow equations for arbitrary bifunctors and arbitrary c; rigid tensor and localized monoidal results have extra hypotheses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Adjunct of a tensor comparison followed by an arbitrary arrow is natural in commuting squares and compatible with integer shifts",
+   "results": "8 hits: CategoryTheory.Adjunction.IsTriangulated.commShift, CategoryTheory.NatTrans.CommShiftCore.shift_app_comm, CategoryTheory.NatTrans.CommShiftCore.app_shift, CategoryTheory.NatTrans.shift_app, CategoryTheory.NatTrans.CommShiftCore.shift_app, CategoryTheory.NatTrans.CommShiftCore.shift_comm, CategoryTheory.NatTrans.CommShift.mk, CategoryTheory.NatTrans.CommShift.shift_comm",
+   "date": "2026-10-21",
+   "verdict": "no match: shift-compatibility identities and mate-pasting tools do not state all the tensor-arrow equations for arbitrary bifunctors and arbitrary c; rigid tensor and localized monoidal results have extra hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary tensor bifunctors and a shift compatible adjunction L R, the adjunct R((c tensor identity) mu) eta of an arrow c from L K to E is natural in commuting squares and commutes with shifts",
+   "results": "8 hits: CategoryTheory.Adjunction.CommShift.CompatibilityUnit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit, CategoryTheory.Adjunction.CommShift.compatibilityUnit_right, CategoryTheory.Adjunction.CommShift.CompatibilityCounit, CategoryTheory.Adjunction.CommShift.compatibilityCounit_left, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift, CategoryTheory.Adjunction.unit_app_commShiftIso_hom_app, CategoryTheory.Adjunction.commShiftIso_hom_app_counit_app_shift_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: shift-compatibility identities and mate-pasting tools do not state all the tensor-arrow equations for arbitrary bifunctors and arbitrary c; rigid tensor and localized monoidal results have extra hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality in both inputs of a tensor comparison mate under a commuting square b c equals c prime L a, and compatibility of the mate with coherent shifts",
+   "results": "8 hits: CategoryTheory.mateEquiv_square, CategoryTheory.Localization.Monoidal.μ_natural_right, CategoryTheory.Localization.Monoidal.μ_natural_left, Mathlib.Tactic.Monoidal.naturality_tensorHom, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_hcomp, CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-21",
+   "verdict": "no match: shift-compatibility identities and mate-pasting tools do not state all the tensor-arrow equations for arbitrary bifunctors and arbitrary c; rigid tensor and localized monoidal results have extra hypotheses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-formal-exact-projection-mate",
@@ -72,5 +190,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-tensor-arrow-mate-naturality-shifts",
+  "worker": "stage1",
+  "summary": "Kept the statement and its two existing Mathlib dependencies. Expanded commuting-square naturality and both shift equations in seven short elementary steps, including the intermediate unit comparison needed for the shifted mate. No new nodes or statement corrections. Searched project declarations and Mathlib; the counit projection-map results do not cover arbitrary c.",
+  "blueprint": "lemma-weil-pbc-perfect-projection-formula, current main-20261015 proof first paragraph: naturality of projection maps and closure under shifts; this item supplies the arbitrary-arrow naturality and second-variable shift calculation used by formal-exact-projection-mate."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NG-46e0344e1",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-46e0344e1 (reviewer sub-agent of L); spot-checked: I read the item in full: 0 new nodes and 7 steps. The statement, stmt_deps, source and blueprint fields are byte-identical to clones/live, where the item is still unsplit with an empty proof. The item is not in route-pivot-dropped, has no repair note and no SGA source. I typed every object (l, t, r and the composites a, b, h, g, plus the μ and η hypotheses), and both conclusions are well-typed. I recomputed all steps. Step 2: (b⊗Lp)β^c = β^{c'}L(a⊗p), using bifunctoriality, bc = c'L(a) and naturality of μ. Step 3: R(v)α^c = α^{c'}u, using unit naturality from lem-weil-pbc-adjunction-of-natural-bijection (Ψ(u) = R(u)η). Step 4: h θ = θ[n] b, using naturality of t in the fixed input at c, a stated hypothesis. Step 5: from the μ shift hypothesis. Step 6: r R(a) η_{X'} = η_X[n] s, with a = l_X L(s), unit naturality and the η hypothesis. Step 7: from naturality of r at β_P. All are correct and genuinely elementary. lem-weil-pbc-commshift-nattrans-comp-whisker is cited only for the composite-comparison convention χ = γ_{FX}G(φ). Advisory: that node is stated for [1] only, but the item assumes comparisons for all n. Source check: Stacks 0B56 (sites-cohomology.tex l.13650-13672) is the counit case c = ε_E with K = RE. The parent formal-exact-projection-mate step 2 applies the item exactly this way, and its s_{F_E,n} matches t^{RE}. The blueprint perfect-projection-formula proof's first paragraph is the shift-closure place. Small tests: identity adjunction (the claims reduce to naturality of t at c), S⊗_R− with restriction, c = 0, n ≤ 0. The rg -L search found no duplicate; the sibling right-unit node is a different clause. No fixes."
  }
 }

@@ -20911,3 +20911,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/Q96/lem-trf-point-transport-composition (reviewer FIX; after a return; new nodes: 2)
 - 08:08 L: merged deliver/Q114/lem-fd-rational-coefficient-category-comparison (reviewer FIX; after a return; new nodes: 5)
 - 08:08 L: merged deliver/Q29/lem-sfb-hom-flat-scalar-evaluation-model (reviewer FIX; first push; new nodes: 0)
+- 08:08 L: merged deliver/NG/lem-weil-pbc-tensor-arrow-mate-naturality-shifts (reviewer PASS; first push; new nodes: 0)
