@@ -19,7 +19,8 @@
   "def-sfb-module-object-projection-map",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-weil-pbc-proetale-site",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-sfb-internal-scalar-tensor-comparison"
  ],
  "proof": [
   {
@@ -258,5 +259,35 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-6cd2b0334 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and every cited statement in full, plus blueprint main-20261015 sk-thm-sfb-proper-base-change-integral paragraph (3) and Stacks sites-cohomology Tag 0B56 at l.13660-13675; tags 07A4, 07A6, 0D6D, 0FPI and 03EL are checked in tags/tags. This is the first split of the node: no new nodes, statement and stmt_deps unchanged, no SGA, no cycle, every cited id exists and none is merged. I re-derived (*) as the monoidality of lambda = c1 c2^{-1}, with tensorators t_S L_S(b_Y) and b_X D_X(t_R), no sign; (**) from the adjunct of rho; and both transposes a_L^flat and a_R^flat, which agree as (***). The subscripts K/H and the orientation of lambda^{-1} are right. Small cases: f=id, K=0 or M=0, n=1, the non-flat Z_l->F_l, unbounded complexes. lem-sfb-coefficient-projection-square needs exact scalar extension, so it does not apply here and is not a duplicate; it is an advisory overlap, since this argument would remove its exactness hypothesis. Batch 5: lem-pd-section-derived-pushpull-normalization and lem-pd-section-derived-tensor-normalization are generic comparisons between the internal and sectionwise settings. Their closures, 631 and 689 nodes, contain no nt-assume leaf, no PD or trace-formula theorem and no sk-thm-trace-transport; the only trf node is the generic fact that localizations are essentially surjective. They are neither assumption nor proof step of either, so I accept them. I also accept the 4 declared tool_uses. One fault repaired (C3): step 2 claimed the two structural ring maps coincide without citing a node. I added sk-def-sfb-coefficient-morphisms, by which alpha_f is the component of the natural iso f^*p_Y^* = p_X^*, to the text, uses and proof_deps; the corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-integral-quotient-projection-comparison.json.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.IntegralQuotientProjectionComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralQuotient.integral_quotient_projection_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.scalarTensorTotal",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.ScalarTensorIso",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.ScalarTensorNormalized",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.scalarTensorIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.scalarTensorIso",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.actualTensorPull",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.actualProjection",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.ProjectionComparisonEquation",
+   "AlgebraicGeometry.ProEtale.IntegralQuotient.integral_quotient_projection_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralQuotientProjectionComparison.lean",
+  "statement": "theorem integral_quotient_projection_comparison {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (c : D (reduction l E n) Y ⋙ L (finite l E n) f ≅ L (integral l E) f ⋙ D (reduction l E n) X) (_hc : PullNormalized (reduction l E n) f c) (K : DerivedCategory (Modules (integral l E) X)) (M : DerivedCategory (Modules (integral l E) Y)) : ProjectionComparisonEquation (reduction l E n) f c (scalarTensorIso l E n X) (scalarTensorIso l E n Y) K M",
+  "branch": "sheaf-dag",
+  "by": "N5",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The scalar tensor comparison is uniquely determined by the ordinary scalar-unit balancing map and the universal cochain computation-counit equation. The helper theorem states the canonical b existence/uniqueness clause of this node; scalarTensorIso chooses only from that unique characterization. The final theorem quantifies over the dependency's normalized pullback comparison c, so it applies to precisely its canonical lambda and its existing rho mate. Positive quotient exponent is n+1. No exactness of scalar extension, projection invertibility, or geometric finiteness hypothesis is added. The added landed definition dependency supplies only the ordinary normalized scalar monoidal structure, before that module's exactness assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94e1015d6",
+  "group": "N5",
+  "result": "pass",
+  "note": "Item lem-sfb-integral-quotient-projection-comparison, N5 94e1015d. The delivery adds only the module and the item's lean record, plus the landed, used def stmt_dep def-sfb-internal-scalar-tensor-comparison (no cycle). All other nodes are byte-identical to side-live; no dependency records or modules are touched. Clause by clause: the n index (exponent n+1), R/S, D/L/F/adj and rho are the direct-image dependency's own. c is quantified with PullNormalized, which pins lambda uniquely (counits are isomorphisms on flat-term K-flat inputs), so it is the dependency's specified lambda, not an arbitrary map. actualProjection is rightAdjointProjectionMap of adj with leftDerivedUpperStarTensor, the same body as moduleObjectProjectionMap. The ProjectionComparisonEquation composites and endpoints match the node exactly, including lambda inverse on the right and the S_Y-linear category. b is scalarTensorIso, chosen from a true exists-unique: its normalization is the universal derived-functor property with the delta of internalScalarMonoidal, defined before that module's exactness variable, and on S-balanced tensors it equals the node's (u⊗1)⊗(v⊗s). The landed internalScalarTensorIso needs exact extension, which fails for the non-flat quotient, so a local helper is justified. No extra hypotheses or universe restriction. Docstrings carry source and blueprint tag, the main docstring carries the 8 proof steps, the statement is verbatim, and only the theorems use sorry. Edge cases checked: f=id, K=0 or M=0, empty schemes, first quotient, Z_l to F_l, l=2, unbounded. Compile not reproduced (worker reports 36.1 s and 33.2 s clean; no fix made). Advisories: decls owned by def-sfb-integral-quotient-coefficients and def-sfb-internal-derived-scalar-comparisons are not in stmt_deps (reached via the direct-image dependency); accessor duplicating moduleObjectProjectionMap; unused recorded Lean of def-weil-pbc-projection-formula-map and lem-weil-pbc-ringed-topoi-derived-tensor-pullback; second reading is a self-reread; linter.all false."
+ }
 }
