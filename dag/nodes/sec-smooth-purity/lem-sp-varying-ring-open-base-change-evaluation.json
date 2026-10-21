@@ -1,0 +1,148 @@
+{
+ "id": "lem-sp-varying-ring-open-base-change-evaluation",
+ "kind": "statement",
+ "title": "Normalized coefficient evaluation of cartesian open base change",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let R_n be any sequence of commutative rings with ring-homomorphism transitions. Let r:V->S, k:V->W, i:S->T, p:W->T be a cartesian square ri=kp with k and i open immersions. Use the normalized pullback and open evaluation isomorphisms of [def-sp-varying-ring-operations], and openBaseChange of [def-sp-varying-ring-clopen-arrow-factors]. Fix n. There exists a natural transformation a from D(i_!) D(p^*) to D(r^*) D(k_!) between the actual single-coefficient R_n module-derived categories such that the evaluated openBaseChange is a after these four comparisons. Explicitly for every N in D(system_S), ev_W(openBaseChange_N);evalJ_k(G_r N);J_k(evalG_r(N)) = evalG_p(J_i N);G_p(evalJ_i(N));a(ev_S N). The same a satisfies the identical equation for StrictTower.beta at every input of D(strict towers over R_n), using strict evaluation at zero and its specified evalG and evalJ. There is no finiteness, properness or quasi-compactness assumption.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, open-immersion case, with the blueprint clopen construction; coefficient-system compatibility is an agent-formulated consequence using Zheng Construction 4.1 and Lemma 4.10, not a verbatim statement of the tag."
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-sp-varying-ring-clopen-arrow-factors",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Use ordinaryModuleEvalG_comp of [lem-sp-varying-ring-ordinary-clopen-evaluation], which is proved independently of that node's ordinaryClopenEvaluation hole. Apply mapDerivedCategorySquareIso_comp of [lem-pod-derived-exact-square-composition] at the natural-isomorphism level to obtain the derived normalized pullback-composition equation. The two composition equations and the equality-transport equation give evaluation of the pullback-square isomorphism. Prove the cancellation abstractly in the functor category before taking components, to avoid unfolding concrete derived sheaf functors.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-clopen-evaluation",
+    "lem-pod-derived-exact-square-composition",
+    "def-sp-varying-ring-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, open-immersion case, with the blueprint clopen construction; coefficient-system compatibility is an agent-formulated consequence using Zheng Construction 4.1 and Lemma 4.10, not a verbatim statement of the tag."
+   }
+  },
+  {
+   "text": "Define the single-coefficient inverse beta to be the open-adjunction mate of the inverse exact-localized single-coefficient square. Exact localization preserves the specified ordinary unit equation defining moduleBetaInv, so the varying inverse beta has that same square as its mate. Open evaluation is the inverse mate of evalG by definition. Apply the horizontal/vertical mate interchange law and the pullback-square evaluation equation to obtain the inverse-beta comparison. For strict towers, evalD_square gives the pullback-square equation termwise, and exact_mate applied to the ordinary whiskered open adjunction proves that strict evalJ inverse is the corresponding open mate. The same mate interchange proves the strict inverse-beta comparison, with exactly the same single-coefficient inverse beta.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-sp-varying-ring-proper-open-arrows",
+    "def-cbc-strict-tower-proper-open-arrows"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, open-immersion case, with the blueprint clopen construction; coefficient-system compatibility is an agent-formulated consequence using Zheng Construction 4.1 and Lemma 4.10, not a verbatim statement of the tag."
+   }
+  },
+  {
+   "text": "For a cartesian open square StrictTower.betaInv is invertible for arbitrary coefficient rings. In its just-proved coefficient equation the other four comparison factors are invertible, so the single-coefficient inverse beta is invertible on every evaluated strict derived tower. Every single-coefficient derived object is isomorphic to the evaluation of its constant derived tower, by constantEval. Naturality along this isomorphism transfers invertibility to every object, without assuming faithfulness of evaluation. Thus the single-coefficient inverse beta is an invertible natural transformation. Take its actual inverse for a. Multiplying each inverse-beta equation by its six invertible comparison factors gives the two displayed forward equations. This is a complete Lean proof, with no new geometric or localization holes.",
+   "uses": [
+    "def-sp-varying-ring-operations",
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-cbc-strict-constant-tower-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, open-immersion case, with the blueprint clopen construction; coefficient-system compatibility is an agent-formulated consequence using Zheng Construction 4.1 and Lemma 4.10, not a verbatim statement of the tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-varying-ring-ordinary-clopen-evaluation",
+  "lem-pod-derived-exact-square-composition",
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-cbc-strict-tower-proper-open-arrows",
+  "def-cbc-strict-constant-tower-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "A5",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, open-immersion case, with the blueprint clopen construction; coefficient-system compatibility is an agent-formulated consequence using Zheng Construction 4.1 and Lemma 4.10, not a verbatim statement of the tag.",
+  "detail": "Complete formal proof via natural-isomorphism composition, exact open mate interchange, and invertibility transported from evaluated constant strict towers."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact coefficient evaluation preserves the open base change adjunction comparison and clopen component projector for sheaves of modules",
+   "results": "Eight general sheaf-of-modules adjunction and evaluation hits, including SheafOfModules.PullbackConstruction.adjunction and SheafOfModules.evaluation. None states the normalized varying-system or strict-tower arrow comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match; generic adjunction infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftNatTrans\"",
+   "results": "Localization.liftNatTrans, comp_liftNatTrans and comp_liftNatTrans_assoc provide the exact-localization composition infrastructure. They do not state either geometric coefficient comparison.",
+   "date": "2026-10-21",
+   "verdict": "no direct match; reuse comp_liftNatTrans_assoc in the proved factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*eval|eval.*clopen|comp_liftNatTrans in Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf and Mathlib/AlgebraicGeometry",
+   "results": "The localization composition theorem occurs in Predicate.lean; no sheaf coefficient/clopen comparison. Blueprint search for coefficient evaluation clopen returned zero imported blueprint nodes; the separately inspected ordinary-clopen node concerns only degree-zero realization and unspecified coherent witnesses.",
+   "date": "2026-10-21",
+   "verdict": "no match for the geometric statements"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting",
+  "date": "2026-10-21",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs paragraph: the constructed proper/open interchange is a map of coefficient systems; its lift and clopen projection must evaluate to the specified constant-coefficient maps.",
+   "via": [
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingOpenBaseChangeEvaluation",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingOpenBaseChangeEvaluation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.openBaseChangeEvaluation",
+  "statement": "theorem openBaseChangeEvaluation {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)\n    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]\n    (h : r ≫ i = k ≫ p) (hsq : IsPullback r k i p) (n : ℕ) :\n    ∃ a : (StrictTower.moduleJ (R n) i).mapDerivedCategory ⋙\n          (StrictTower.modulePullback (R n) p).mapDerivedCategory ⟶\n        (StrictTower.modulePullback (R n) r).mapDerivedCategory ⋙\n          (StrictTower.moduleJ (R n) k).mapDerivedCategory,\n      (∀ N : Derived R φ S,\n        (ev R φ W n).map ((openBaseChange R φ r k i p h hsq).app N) ≫\n            (evalJ R φ k n).hom.app ((G R φ r).obj N) ≫\n            (StrictTower.moduleJ (R n) k).mapDerivedCategory.map\n              ((evalG R φ r n).hom.app N) =\n          (evalG R φ p n).hom.app ((J R φ i).obj N) ≫\n            (StrictTower.modulePullback (R n) p).mapDerivedCategory.map\n              ((evalJ R φ i n).hom.app N) ≫ a.app ((ev R φ S n).obj N)) ∧\n      (∀ N : StrictTower.Derived (R n) S,\n        (StrictTower.ev (R n) W 0).map ((StrictTower.beta (R n) r k i p h hsq).hom.app N) ≫\n            (StrictTower.evalJ (R n) k 0).hom.app ((StrictTower.G (R n) r).obj N) ≫\n            (StrictTower.moduleJ (R n) k).mapDerivedCategory.map\n              ((StrictTower.evalG (R n) r 0).hom.app N) =\n          (StrictTower.evalG (R n) p 0).hom.app ((StrictTower.J (R n) i).obj N) ≫\n            (StrictTower.modulePullback (R n) p).mapDerivedCategory.map\n              ((StrictTower.evalJ (R n) i 0).hom.app N) ≫\n            a.app ((StrictTower.ev (R n) S 0).obj N))",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261021T060929-L-1669963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261021T060929-L-1669963",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -30,132 +30,166 @@
  ],
  "proof": [
   {
-   "text": "The geometric clause of [lem-cbc-strict-tower-proper-open-calculus], with coefficient ring $\\mathbf Z$, gives $W'=s(V)\\amalg C$, $bs=k$, $qs=r$. It applies to every square and outer rectangle here, without cartesianness.",
+   "text": "Apply the geometric assertion of [lem-cbc-strict-tower-proper-open-calculus] to the given square (its coefficient ring may be taken to be $\\mathbf Z$). Its hypotheses are exactly that $p,r$ are proper and $i,k$ are quasi-compact open; it assumes no cartesianness. It gives the canonical lift $s:V\\to W'=W\\times_TS$, the equations $bs=k$, $qs=r$, and the open decomposition $W'=s(V)\\amalg C$ with $C=W'\\setminus s(V)$. This is a statement about schemes independent of any coefficient ring. Apply it also to each square and outer rectangle used below.",
    "uses": [
     "lem-cbc-strict-tower-proper-open-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal), open-immersion cases. Agent-formulated extension of the clopen projection construction to varying rings, extracted from returned step 2; these tags prove finite etale coherence, not semilinear assembly."
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), open case; geometric lift as stated in the cited strict-tower calculus"
    }
   },
   {
-   "text": "Use the actual system operations and intrinsic arrow of [def-sp-varying-ring-proper-open-arrows]. By [lem-sp-varying-ring-cartesian-comparison-lift-relabelling] its $\\beta$ is the lift correspondence of the statement and commutes with the transitions. Thus $a_Q=\\beta;b_!\\pi_sq^*$ with its compositors is an actual system map.",
+   "text": "Fix $n$ and write $\\phi_n:R_{n+1}\\to R_n$. All the underived operations needed here act on the same underlying abelian sheaves after restriction along $\\phi_n$. For inverse image this follows from [def-weil-proetale-inverse-image]: its colimit and sheafification act on the underlying abelian sheaf and its action map, and for an arbitrary ring $R_n$ the canonical identification $u^{-1}(R_n)_T\\cong(R_n)_W$ and the natural isomorphism $Vu^*_{R_n}\\cong u^{-1}_{\\mathrm{Ab}}V$ of [lem-pe-constant-left-module-inverse-image] make the module pullback the abelian inverse image with the induced action. For $j_!$, use the direct-sum presheaf of [def-weil-extension-by-zero-presheaf] and its sheafification [def-weil-presheaf-modules-sheafification]: changing the scalar action does not change the abelian presheaf, its sheafification, or the restrictions. A semilinear map $t$ induces the summand map $[a,x]\\mapsto[a,t(x)]$; for $c\\in R_{n+1}$ it satisfies $t(cx)=\\phi_n(c)t(x)$. Thus these operations carry the given transitions to transitions and carry compatible module maps to compatible maps. The open functors are exact by [lem-pur-site-restriction-module-adjunction-exact]; inverse image is exact in the section model of [lem-coef-semilinear-derived-sections].",
    "uses": [
-    "def-sp-varying-ring-proper-open-arrows",
-    "lem-sp-varying-ring-cartesian-comparison-lift-relabelling"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal), open-immersion cases. Agent-formulated extension of the clopen projection construction to varying rings, extracted from returned step 2; these tags prove finite etale coherence, not semilinear assembly."
-   }
-  },
-  {
-   "text": "On $s(V)$ the open-unit inverse defining $s_!\\to s_*$ and the adjunction triangle give $s^*\\pi_s=\\eta^!_{s,s^*(-)}$. On $C$, [new-lem-sp-varying-ring-module-pi-complement-zero] gives zero. Hence this is precisely the identity/zero projection required in the statement.",
-   "uses": [
-    "def-sp-varying-ring-proper-open-arrows",
-    "new-lem-sp-varying-ring-module-pi-complement-zero"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal), open-immersion cases. Agent-formulated extension of the clopen projection construction to varying rings, extracted from returned step 2; these tags prove finite etale coherence, not semilinear assembly."
-   }
-  },
-  {
-   "text": "Apply [lem-sp-ordinary-vertical-pasting-transport] and [lem-sp-ordinary-horizontal-pasting-transport] to the normalized comparisons of [lem-sp-varying-ring-ordinary-clopen-evaluation] and the two strict-tower identities of [lem-cbc-strict-tower-proper-open-calculus]. This gives both equations after every ordinary realization. The constant embedding is faithful by evaluation at one index; the degree-zero embedding is faithful by [lem-weil-pbc-derived-single-fully-faithful]. System maps are componentwise, so both ordinary pasting equations follow.",
-   "uses": [
-    "lem-sp-ordinary-vertical-pasting-transport",
-    "lem-sp-ordinary-horizontal-pasting-transport",
-    "lem-sp-varying-ring-ordinary-clopen-evaluation",
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-weil-pbc-derived-single-fully-faithful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal), open-immersion cases. Agent-formulated extension of the clopen projection construction to varying rings, extracted from returned step 2; these tags prove finite etale coherence, not semilinear assembly."
-   }
-  },
-  {
-   "text": "Localize the two ordinary equations using [lem-sp-exact-derived-transformation-pasting]. With the simultaneous models of [lem-coef-semilinear-derived-sections] these are the intrinsic derived $a$ equations, before evaluation.",
-   "uses": [
-    "lem-sp-exact-derived-transformation-pasting",
+    "def-weil-proetale-inverse-image",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-site-restriction-module-adjunction-exact",
     "lem-coef-semilinear-derived-sections"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal), open-immersion cases. Agent-formulated extension of the clopen projection construction to varying rings, extracted from returned step 2; these tags prove finite etale coherence, not semilinear assembly."
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules), 03DJ (lemma-extension-by-zero-exact); semilinear compatibility is the displayed summand calculation"
    }
   },
   {
-   "text": "Take the mate of $a_Q$ under $r^*\\dashv Rr_*$ and $p^*\\dashv Rp_*$. Its definition gives the displayed unit--$a_Q$--counit word. Clauses (2) and (1) of [lem-weil-pbc-mate-pasting] give respectively the asserted vertical and horizontal $\\gamma$ formulas; clause (3) inserts the proper compositors conjugate to the pullback compositors.",
+   "text": "Use the cartesian open comparison in [lem-cbc-strict-tower-proper-open-calculus] with $B=R_n$ at every level. Its normalization is the inverse of the open-adjunction transpose of the pulled-back open unit. In the extension presheaf this is exactly the lift comparison: a local section labeled by a lift to $S$ is sent to the same section labeled by the corresponding lift to $W\\times_TS$. The two lift correspondences are inverse by the fibre-product universal property [def-pc-fibre-product]. The open adjunction used for the transpose is [lem-pur-site-restriction-module-adjunction-exact]. Step 2 shows that a transition changes the section by $t_n$ and leaves its lift label unchanged. Consequently, on every local generator both orders in the transition square give $[a',t_n(x)]$. They agree after sheafification by its universal property. Thus the comparisons assemble to an isomorphism $\\beta:p^*i_!\\simeq b_!q^*$ of semilinear systems, with precisely the normalization in the item. This also checks naturality in the input.",
    "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-mate"
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-pc-fibre-product",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal), open-immersion cases. Agent-formulated extension of the clopen projection construction to varying rings, extracted from returned step 2; these tags prove finite etale coherence, not semilinear assembly."
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), open case; cartesian open comparison and explicit lift normalization; sites-modules.tex Tag 03DI"
    }
   },
   {
-   "text": "For either identity square, [lem-sp-varying-ring-cartesian-lift-pullback-equivalence] makes its lift $s$ an isomorphism and $s^*$ an equivalence. Hence [lem-sp-adjunction-unit-fully-faithful-left] makes the unit of $s^*\\dashv s_*$ invertible. The clopen $s_!\\simeq s_*$ and defining composites in [def-sp-varying-ring-proper-open-arrows] make $\\pi_s$ and ordinary $a$ invertible; [lem-sp-exact-derived-transformation-pasting] does so for derived $a$. Normalize with [lem-sp-varying-ring-pullback-unit-coherence] and [lem-sp-varying-ring-open-unit-coherence]. Self-pasting gives $a=a^2$; cancel to get $a=1$. Clause 3 of [lem-weil-pbc-mate-pasting] along $g_X$ and $j_X$ reduces to identity adjunctions; clause 4 gives $\\gamma=1$.",
+   "text": "For the image component, use the invertible open unit, the adjunction triple extension ⊣ pull ⊣ push, and the right triangle equation: pull_s(modulePi_s M) is the open unit at pull_s M. For the complementary component first prove disjoint-open vanishing for ordinary systems. At every index n, moduleEvalG and moduleEvalP identify pull_s(push_c N) with the constant-ring pull_s(push_c(N_n)); the proved module_disjoint_direct in [lem-cbc-strict-tower-proper-open-calculus] makes this zero when the two images are disjoint. Componentwise exactness in [lem-coef-semilinear-derived-sections], applied to the zero-arrow short complex with middle object pull_s(push_c N), detects that the ordinary system is zero. Transpose twice, along pull_c ⊣ push_c and extension_s ⊣ pull_s, to deduce pull_c(extension_s N)=0. The target of pull_c(modulePi_s M) is consequently zero. This proves both clauses of modulePi_components without the separate complementary-projection lemma and without detecting equality of arbitrary derived morphisms by evaluation.",
    "uses": [
-    "lem-sp-varying-ring-cartesian-lift-pullback-equivalence",
-    "lem-sp-adjunction-unit-fully-faithful-left",
-    "def-sp-varying-ring-proper-open-arrows",
-    "lem-sp-exact-derived-transformation-pasting",
-    "lem-sp-varying-ring-pullback-unit-coherence",
-    "lem-sp-varying-ring-open-unit-coherence",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B (lemma-shriek-proper-and-open), open case; elementary gluing on the two clopen components; proetale.tex Tag 09AE (definition-extension-zero)"
+   }
+  },
+  {
+   "text": "Use [lem-sp-varying-ring-ordinary-clopen-evaluation] for each ordinary coefficient realization E_n. It supplies normalized comparisons for all pullbacks and open extensions, their compositors, and the single-square clopen arrow. These are constructed coefficient comparisons; no pasting law is a hypothesis. This replaces the direct lift-label compositor calculations of the earlier plan.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-clopen-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal), open specializations; explicit lift and section calculation"
+   }
+  },
+  {
+   "text": "Apply the normalized coefficient realization of [lem-sp-varying-ring-ordinary-clopen-evaluation] to the two vertically stacked squares and their outer rectangle. A finite categorical diagram calculation transports [lem-cbc-strict-tower-proper-open-calculus].alpha_vertical through the six pullback comparisons and three open comparisons. Naturality and the two pullback-composition equations cancel the inserted isomorphisms. This proves equality after E_n for every n. Constant embedding and the degree-zero embedding are faithful, so this is equality after each ordinary component evaluation. Extensionality of a system morphism on every (n,U) then gives moduleAlpha_vertical. No equality of arbitrary derived morphisms is detected by evaluation.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-clopen-evaluation",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose); nested clopen projections, with their full elementary calculation"
+   }
+  },
+  {
+   "text": "For horizontally adjacent squares apply the same normalized coefficient realization to the two squares and their outer rectangle. The finite horizontal transport calculation uses the three pullback comparisons, six open comparisons, and both open-composition equations. Naturality and inverse-pair cancellation turn the strict-tower alpha_horizontal identity of [lem-cbc-strict-tower-proper-open-calculus] into equality after E_n. Faithfulness of constant/single embedding and componentwise extensionality for ordinary systems give moduleAlpha_horizontal. The degreewise localization argument of the next step then supplies the intrinsic derived identities.",
+   "uses": [
+    "lem-sp-varying-ring-ordinary-clopen-evaluation",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7D (lemma-shriek-proper-and-open-compose-horizontal); nested clopen projections, with their full elementary calculation"
+   }
+  },
+  {
+   "text": "Apply [lem-coef-semilinear-derived-sections] to the strict constant ring-sheaf sequence $(R_n)_Z$ on each fixed small pro-etale site. All transitions are natural ring homomorphisms, as required there; no flatness is required. It supplies simultaneous section models for exact inverse image, exact open extension, maps of module sheaves, their pullback/open base-change comparisons, composition, and adjunction units and counits. Apply the sheaf maps of Steps 2-5 termwise to complexes and use these models to obtain the specified transformations on the ordinary unbounded $D(\\mathscr S_Z)$. The equations in Steps 5-7 are equations of those degreewise maps of semilinear complexes. Localization carries equal composites to equal composites, so the intrinsic $a$ of each pasted square equals the indicated pasted $a$ on $D(\\mathscr S_Z)$. This establishes the equations before evaluating, rather than using evaluations to detect equality of derived morphisms.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079P (theorem-K-injective-embedding-grothendieck), resolution foundation only; simultaneous enhanced localization is the additional assertion of the cited semilinear-sections node"
+   }
+  },
+  {
+   "text": "For the adjunctions $L_1=r^*\\dashv R_1=Rr_{*,\\bullet}$ and $L_2=p^*\\dashv R_2=Rp_{*,\\bullet}$, put $G=i_!$ and $H=k_!$. The map of Step 8 has type $a_Q:L_2G\\to HL_1$. The definition of the mate in [def-weil-pbc-adjunction-mate] is therefore exactly\n$$\\gamma_Q=(Rp_{*,\\bullet}k_!\\varepsilon_r)\\circ(Rp_{*,\\bullet}a_QRr_{*,\\bullet})\\circ(\\eta_pi_!Rr_{*,\\bullet}).$$\nAll units and counits are those supplied on the same section models by [lem-coef-semilinear-derived-sections]. Thus this formula constructs a natural transformation on the derived category of sections without making any claim about its invertibility.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7 (remark-base-change); unit-square-counit definition of the mate"
+   }
+  },
+  {
+   "text": "Apply clause 2 of [lem-weil-pbc-mate-pasting] to the vertical $a$ equation in Step 6, after the derived passage of Step 8. Composition of inverse images is in the reverse order to composition of the scheme maps, so the composite right adjoints are $Rp_{2*,\\bullet}Rp_{1*,\\bullet}$ and $Rr_{2*,\\bullet}Rr_{1*,\\bullet}$. That clause gives\n$$\\gamma_{Q_2Q_1}=(Rp_{2*,\\bullet}\\gamma_{Q_1})\\circ(\\gamma_{Q_2}Rr_{1*,\\bullet}).$$\nApply clause 1 of the same node to Step 7, taking $G=i_!$, $H=k_!$, $G_2=j_!$, $H_2=l_!$, with the left adjoints $r^*,p^*,q^*$. It gives\n$$\\gamma_{Q_2Q_1}=(\\gamma_{Q_2}k_!)\\circ(j_!\\gamma_{Q_1}).$$\nThe proper compositors here are the right-adjoint comparisons conjugate to the inverse-image compositors; clause 2 specifies the composite units and counits, and clause 3(a),(b) of the same node, applied to the compositors $p_1^*p_2^*\\cong(p_2p_1)^*$ and $r_1^*r_2^*\\cong(r_2r_1)^*$, transports the mate from the composite adjunctions to $(p_2p_1)^*\\dashv R(p_2p_1)_{*,\\bullet}$ and $(r_2r_1)^*\\dashv R(r_2r_1)_{*,\\bullet}$. The open compositors are those of Step 5. Hence these are the claimed normalized equalities, not equalities up to unspecified isomorphisms.",
+   "uses": [
     "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal), open-immersion cases. Agent-formulated extension of the clopen projection construction to varying rings, extracted from returned step 2; these tags prove finite etale coherence, not semilinear assembly."
+    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose), 0F7D (lemma-shriek-proper-and-open-compose-horizontal); abstract mate-pasting calculation"
    }
   },
   {
-   "text": "By [lem-coef-semilinear-derived-sections] evaluation preserves the operations, compositors, units, counits and transposes, and by [lem-sp-varying-ring-ordinary-clopen-evaluation] it sends $a_Q$ to $\\alpha_Q$. So it sends our mate word to the constant-$R_n$ clopen mate of [lem-cbc-strict-tower-proper-open-calculus] ($B=R_n$).",
+   "text": "For either identity square, its canonical lift into the chosen pullback is an isomorphism. Pullback along an isomorphism is an equivalence, using moduleGComp and modulePId, so its adjunction unit is invertible; moduleOpenToP is invertible for the clopen lift. Hence modulePi, moduleAlpha and its localized alpha are invertible in these cartesian cases. Normalize the pushforward identity compositor directly on the pro-etale base-change site, and transpose that equation to the pullback identity compositor. Localize this unit law. For extension by zero, transpose the pullback unit law, and compare the derived extension identity with jId by the right-derived adjunction unit factorization on Qh. Apply vertical pasting to the square with both proper maps identities, and horizontal pasting to the square with both opens identities. Transport the composites of scheme identities, insert the just-proved compositor unit laws, use naturality, and cancel the invertible alpha components and faithful identity-equivalent functors. This proves both alpha identity normalizations from the two pasting equations, with no additional lemma assumption. Taking mates and the triangle identities proves both gamma identity normalizations. Finally factor the intrinsic alpha into the cartesian open lift and the subsequent clopen section factor by [def-sp-varying-ring-clopen-arrow-factors]. Their separate normalized coefficient comparison results combine in [lem-sp-varying-ring-clopen-arrow-evaluation]. Construct AdjunctionEvaluation for each proper adjunction using evalG and its actual mate evalP: the unit and counit equations are unit_mateEquiv and mateEquiv_counit. Do this also for the strict-tower proper adjunctions. The categorical evaluation_mate theorem of [lem-coef-semilinear-derived-sections] sends both alpha comparisons to their common single-coefficient mate. For a single-coefficient object N apply the strict equation to constantDerived(N). Postcompose it with P_p J_k of constantEval.hom, use naturality of the common coefficient mate, and cancel the constantSource isomorphism. The definition of constantTarget identifies the left side with constantGamma. This proves gamma_evaluation with precisely the specified comparisons for arbitrary rings, without assuming faithfulness on derived morphisms.",
    "uses": [
+    "lem-weil-pbc-mate-pasting",
     "lem-coef-semilinear-derived-sections",
-    "lem-sp-varying-ring-ordinary-clopen-evaluation",
-    "lem-cbc-strict-tower-proper-open-calculus"
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "def-sp-varying-ring-clopen-arrow-factors",
+    "lem-sp-varying-ring-clopen-arrow-evaluation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C (lemma-shriek-proper-and-open-compose) and 0F7D (lemma-shriek-proper-and-open-compose-horizontal), open-immersion cases. Agent-formulated extension of the clopen projection construction to varying rings, extracted from returned step 2; these tags prove finite etale coherence, not semilinear assembly."
+    "place": "Tags 0F7C and 0F7D, identity cases; normalization by simultaneous section evaluation"
    }
   }
  ],
  "proof_deps": [
   "lem-cbc-strict-tower-proper-open-calculus",
-  "def-sp-varying-ring-proper-open-arrows",
-  "lem-sp-varying-ring-cartesian-comparison-lift-relabelling",
-  "new-lem-sp-varying-ring-module-pi-complement-zero",
-  "lem-sp-ordinary-vertical-pasting-transport",
-  "lem-sp-ordinary-horizontal-pasting-transport",
-  "lem-sp-varying-ring-ordinary-clopen-evaluation",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-sp-exact-derived-transformation-pasting",
+  "def-weil-proetale-inverse-image",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
   "lem-coef-semilinear-derived-sections",
-  "lem-weil-pbc-mate-pasting",
+  "def-pc-fibre-product",
+  "lem-sp-varying-ring-ordinary-clopen-evaluation",
+  "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-adjunction-mate",
-  "lem-sp-varying-ring-cartesian-lift-pullback-equivalence",
-  "lem-sp-adjunction-unit-fully-faithful-left",
-  "lem-sp-varying-ring-pullback-unit-coherence",
-  "lem-sp-varying-ring-open-unit-coherence"
+  "lem-weil-pbc-mate-pasting",
+  "def-sp-varying-ring-clopen-arrow-factors",
+  "lem-sp-varying-ring-clopen-arrow-evaluation"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B, 0F7C, 0F7D (lemma-shriek-proper-and-open and its two composition lemmas); finer split of the retained proof, reusing actual coefficient evaluation and complementary-component nodes; generic transport, exact derived descent and normalized unit calculations are separately stated as unsplit helpers below this node"
+  "place": "Original steps retained. Final evaluation clause: separate the cartesian open lift and clopen section factors; compose their normalized coefficient comparisons and apply evaluation_mate twice, then cancel constantSource using naturality of constantEval."
  },
  "mathlib_searches": [
   {
@@ -319,9 +353,9 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "C8",
+  "group": "A5",
   "result": "pass",
-  "landing": "20261021T022432-L-2846658",
+  "landing": "20261021T060929-L-1669963",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

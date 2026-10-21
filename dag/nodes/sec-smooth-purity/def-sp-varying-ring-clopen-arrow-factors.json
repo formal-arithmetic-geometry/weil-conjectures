@@ -1,0 +1,132 @@
+{
+ "id": "def-sp-varying-ring-clopen-arrow-factors",
+ "kind": "definition",
+ "title": "Separate the cartesian lift and clopen section factors before taking mates",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let R_n be arbitrary commutative rings with transitions, and use the module-system categories, exact pullback and open extension of [def-sp-varying-ring-operations]. For exact functors F,G,H,K define localizedArrow(t), for t:F G -> H K, by conjugating the exact localization of its degreewise chain transformation with the two mapDerivedCategoryCompIso comparisons. For a cartesian open square define openBaseChange as localizedArrow of the specified moduleBeta hom of [def-sp-varying-ring-proper-open-arrows]. For a proper/open square k:V->W, r:V->S, p:W->T, i:S->T with kp=ri and quasi-compact open k,i, let q:W times_T S->S, b:W times_T S->W and s=(k,r). Define moduleSectionArrow:q^* b_! -> r^* k_! to be q^* pi_s followed by the associators and the specified open and pullback composition/equality comparisons bs=k and qs=r. Define sectionArrow by exact localization of this ordinary map. Define strictSectionArrow by the identical expression in the strict-tower derived calculus [lem-cbc-strict-tower-proper-open-calculus]. Then alpha is openBaseChange followed by sectionArrow, and strict alpha is strict beta followed by strictSectionArrow. All these definitions are actual constructed maps, with no chosen existence witness.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, open-immersion case, with the blueprint clopen construction; coefficient-system compatibility is an agent-formulated consequence using Zheng Construction 4.1 and Lemma 4.10, not a verbatim statement of the tag."
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof": [
+  {
+   "text": "Localization.liftNatTrans preserves composition. Expanding localizedArrow(t) followed by localizedArrow(s) cancels the intermediate exact-composition isomorphism; comp_liftNatTrans_assoc identifies the two remaining lifts with the lift of t followed by s. Whiskering and mapHomologicalComplex also preserve composition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, open-immersion case, with the blueprint clopen construction; coefficient-system compatibility is an agent-formulated consequence using Zheng Construction 4.1 and Lemma 4.10, not a verbatim statement of the tag."
+   }
+  },
+  {
+   "text": "The original moduleAlpha definition is precisely moduleBeta.hom followed by moduleSectionArrow, with the same parenthesization of its tail. The preceding localized-composition equality gives alpha_factorization. The strict-tower factorization is the defining expression of StrictTower.alpha, so holds by reflexivity.",
+   "uses": [
+    "def-sp-varying-ring-proper-open-arrows",
+    "lem-cbc-strict-tower-proper-open-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, open-immersion case, with the blueprint clopen construction; coefficient-system compatibility is an agent-formulated consequence using Zheng Construction 4.1 and Lemma 4.10, not a verbatim statement of the tag."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-varying-ring-proper-open-arrows",
+  "lem-cbc-strict-tower-proper-open-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B, open-immersion case, with the blueprint clopen construction; coefficient-system compatibility is an agent-formulated consequence using Zheng Construction 4.1 and Lemma 4.10, not a verbatim statement of the tag."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exact coefficient evaluation preserves the open base change adjunction comparison and clopen component projector for sheaves of modules",
+   "results": "Eight general sheaf-of-modules adjunction and evaluation hits, including SheafOfModules.PullbackConstruction.adjunction and SheafOfModules.evaluation. None states the normalized varying-system or strict-tower arrow comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match; generic adjunction infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"liftNatTrans\"",
+   "results": "Localization.liftNatTrans, comp_liftNatTrans and comp_liftNatTrans_assoc provide the exact-localization composition infrastructure. They do not state either geometric coefficient comparison.",
+   "date": "2026-10-21",
+   "verdict": "no direct match; reuse comp_liftNatTrans_assoc in the proved factorization"
+  },
+  {
+   "tool": "grep",
+   "query": "clopen.*eval|eval.*clopen|comp_liftNatTrans in Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf and Mathlib/AlgebraicGeometry",
+   "results": "The localization composition theorem occurs in Predicate.lean; no sheaf coefficient/clopen comparison. Blueprint search for coefficient evaluation clopen returned zero imported blueprint nodes; the separately inspected ordinary-clopen node concerns only degree-zero realization and unspecified coherent witnesses.",
+   "date": "2026-10-21",
+   "verdict": "no match for the geometric statements"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting",
+  "date": "2026-10-21",
+  "group": "A5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs paragraph: the constructed proper/open interchange is a map of coefficient systems; its lift and clopen projection must evaluate to the specified constant-coefficient maps.",
+   "via": [
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.VaryingRingClopenArrowFactors",
+  "file": "lean/Sheaf/AlgebraicGeometry/VaryingRingClopenArrowFactors.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.VaryingRing.moduleSectionArrow",
+  "statement": "def moduleSectionArrow {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)\n    (p : W ⟶ T) (i : S ⟶ T) [IsOpenImmersion k] [IsOpenImmersion i]\n    [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p]\n    (h : k ≫ p = r ≫ i) :\n    pull R φ (pullback.snd p i) ⋙ extension R φ (pullback.fst p i) ⟶\n      pull R φ r ⋙ extension R φ k",
+  "branch": "sheaf-dag",
+  "by": "A5",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.VaryingRing.localizedArrow",
+   "AlgebraicGeometry.ProEtale.VaryingRing.openBaseChange",
+   "AlgebraicGeometry.ProEtale.VaryingRing.moduleSectionArrow",
+   "AlgebraicGeometry.ProEtale.VaryingRing.sectionArrow",
+   "AlgebraicGeometry.ProEtale.VaryingRing.strictSectionArrow",
+   "AlgebraicGeometry.ProEtale.VaryingRing.alpha_factorization",
+   "AlgebraicGeometry.ProEtale.VaryingRing.strictAlpha_factorization"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261021T060929-L-1669963",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261021T060929-L-1669963",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.VaryingRingProperOpenArrows
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 import Sheaf.AlgebraicGeometry.VaryingRingOrdinaryClopenEvaluation
+import Sheaf.AlgebraicGeometry.VaryingRingClopenArrowEvaluation
 
 /-!
 # Proper/open projection and pasting for varying coefficient rings
@@ -36,7 +37,7 @@ set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency.types false
 
-universe u
+universe u k
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtale.VaryingRing
 variable (R : ℕ → CommRingCat.{u + 1}) (φ : ∀ n : ℕ, R (n + 1) ⟶ R n)
@@ -1399,6 +1400,44 @@ theorem gamma_identities :
       Category.id_comp, Category.comp_id] using hh'
 
 
+section Evaluation
+open WeilConjectures.SemilinearSections
+
+private def evaluationOfMate
+    {X Y x y : Type k} [Category.{k} X] [Category.{k} Y]
+    [Category.{k} x] [Category.{k} y]
+    (E : X ⥤ x) (F : Y ⥤ y)
+    {L : X ⥤ Y} {P : Y ⥤ X} {l : x ⥤ y} {p : y ⥤ x}
+    (a : L ⊣ P) (b : l ⊣ p) (e : L ⋙ F ≅ E ⋙ l)
+    (v : P ⋙ E ≅ F ⋙ p)
+    (hv : v.hom = (mateEquiv a b e.inv).natTrans) :
+    AdjunctionEvaluation E F a b where
+  left := e
+  right := v
+  unit A := by
+    rw [hv]
+    have hh := congrArg (fun z ↦ z ≫ p.map (e.hom.app A))
+      (unit_mateEquiv a b e.inv A)
+    simp only [Functor.id_obj, Category.assoc] at hh
+    rw [← p.map_comp, Iso.inv_hom_id_app] at hh
+    erw [p.map_id, Category.comp_id] at hh
+    exact hh
+  counit B := by
+    rw [hv]
+    exact mateEquiv_counit a b e.inv B
+
+private def properEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    AdjunctionEvaluation (ev R φ Y n) (ev R φ X n) (adj R φ f) (levelAdj R f n) :=
+  evaluationOfMate _ _ (adj R φ f) (levelAdj R f n)
+    (evalG R φ f n) (evalP R φ f n) rfl
+
+private def strictEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
+    AdjunctionEvaluation (StrictTower.ev (R n) Y 0) (StrictTower.ev (R n) X 0)
+      (StrictTower.adj (R n) f) (levelAdj R f n) :=
+  evaluationOfMate _ _ (StrictTower.adj (R n) f) (levelAdj R f n)
+    (StrictTower.evalG (R n) f 0)
+    (@asIso _ _ _ _ (StrictTower.evalR (R n) f 0) (StrictTower.evalR_isIso (R n) f 0)) rfl
+
 /-- Evaluation gives exactly the arbitrary constant-R_n clopen-projection mate.
 Source: node proof Step 11, Stacks 0F7B
 (blueprint: lem-sp-varying-ring-proper-open-pasting).
@@ -1421,6 +1460,43 @@ theorem gamma_evaluation {V W S T : Scheme.{u}} (k : V ⟶ W) (r : V ⟶ S)
         (StrictTower.moduleJ (R n) i).mapDerivedCategory.map
           ((evalP R φ r n).hom.app M) ≫
         constantGamma (R n) k r p i h ((ev R φ V n).obj M) := by
-  sorry
+  obtain ⟨a, ha, hs⟩ := clopenArrowEvaluation R φ k r p i h n
+  let b := (mateEquiv (levelAdj R r n) (levelAdj R p n)
+    (TwoSquare.mk _ _ _ _ a)).natTrans
+  have he := evaluation_mate (adj R φ r) (adj R φ p)
+    (levelAdj R r n) (levelAdj R p n)
+    (properEvaluation R φ r n) (properEvaluation R φ p n)
+    (evalJ R φ i n) (evalJ R φ k n)
+    (TwoSquare.mk _ _ _ _ (alpha R φ k r p i h)) (TwoSquare.mk _ _ _ _ a) ha M
+  have hc (N : DerivedCategory (StrictTower.Modules (R n) V)) :
+      constantGamma (R n) k r p i h N = b.app N := by
+    have ht := evaluation_mate (StrictTower.adj (R n) r) (StrictTower.adj (R n) p)
+      (levelAdj R r n) (levelAdj R p n)
+      (strictEvaluation R r n) (strictEvaluation R p n)
+      (StrictTower.evalJ (R n) i 0) (StrictTower.evalJ (R n) k 0)
+      (TwoSquare.mk _ _ _ _ (StrictTower.alpha (R n) k r p i h))
+      (TwoSquare.mk _ _ _ _ a) hs ((constantDerived (R n) V).obj N)
+    change (StrictTower.ev (R n) T 0).map
+        ((StrictTower.gamma (R n) k r p i h).app ((constantDerived (R n) V).obj N)) ≫
+        (StrictTower.evalR (R n) p 0).app _ ≫
+        (StrictTower.moduleDirectImage (R n) p).rightDerivedFunctor.map
+          ((StrictTower.evalJ (R n) k 0).hom.app _) =
+      (StrictTower.evalJ (R n) i 0).hom.app _ ≫
+        (StrictTower.moduleJ (R n) i).mapDerivedCategory.map
+          ((StrictTower.evalR (R n) r 0).app _) ≫ b.app _ at ht
+    have hn := b.naturality ((constantEval (R n) V).hom.app N)
+    dsimp only [Functor.comp_map] at hn
+    apply (cancel_epi (constantSource (R n) r i N).hom).1
+    simp only [constantGamma, ← Category.assoc, Iso.hom_inv_id, Category.id_comp]
+    dsimp only [constantSource, constantTarget, Iso.trans_hom,
+      Functor.mapIso_hom, asIso_hom]
+    simp only [Functor.map_comp, Category.assoc]
+    erw [reassoc_of% ht, ← hn]
+    rfl
+  rw [hc]
+  exact he
+
+end Evaluation
+
 
 end AlgebraicGeometry.ProEtale.VaryingRing
