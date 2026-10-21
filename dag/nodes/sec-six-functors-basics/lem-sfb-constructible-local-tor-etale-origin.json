@@ -30,73 +30,46 @@
  ],
  "proof": [
   {
-   "text": "Assume (1). Since $X$ is quasi-compact, the local-to-global Tor lemma [lem-sfb-proetale-tor-local-global] applies to $M$ with the constant ring $A_X$: its condition (2) is word for word the local finite Tor dimension condition in (1), with the same slice restriction [def-weil-pbc-ringed-derived-restriction] and the same derived tensor [def-weil-proetale-tor-amplitude]. Hence there are integers $a\\leq b$ with $H^q(M\\otimes^L_{A_X}N)=0$ for every degree-zero $A_X$-module sheaf $N$ on $X_{\\mathrm{proét}}$ and every $q\\notin[a,b]$. This is the uniform interval of the proof of Tag 09C2 ('By definition of locally having finite tor dimension, we can find $a,b$'); it covers also the empty scheme.",
+   "text": "Apply lem-sfb-proetale-tor-local-global to turn the local finite Tor condition into one ordered global Tor interval [a,b], including on the empty scheme.",
    "uses": [
     "lem-sfb-proetale-tor-local-global"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C2, lemma-describe-constructible-complexes, proof, second sentence (uniform Tor interval on quasi-compact X)"
-   }
+   "elementary": false
   },
   {
-   "text": "Take the degree-zero test module $N=A_X$. If $P\\to M$ is a K-flat resolution, then $M\\otimes^L_{A_X}A_X=P\\otimes_{A_X}A_X\\simeq P\\simeq M$ by the definition of the derived tensor [def-weil-derived-tensor]. Hence $H^q(M)=0$ for $q\\notin[a,b]$. Together with the constructibility of every $H^q(M)$ assumed in (1), $M$ lies in the bounded constructible pro-étale category; boundedness has been deduced, not assumed.",
+   "text": "Apply lem-pe-coefficient-tor-flat-model to the global interval. It gives a cochain representative P with flat terms that is zero below a and above b. Its cohomology vanishes outside [a,b]; the homology localization factorization and the representative isomorphism identify this with the cohomology of M. Together with the assumed constructibility, M is bounded constructible. This reuses the existing flat-model criterion, whose proof already includes the unit tensor test, rather than introducing a new boundedness lemma.",
    "uses": [
-    "def-weil-derived-tensor"
+    "lem-pe-coefficient-tor-flat-model"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C2, lemma-describe-constructible-complexes, part (1) (boundedness $H^i(K)=0$ for $i\\notin[a,b]$), here from the unit test instead of derived completeness"
-   }
+   "elementary": false
   },
   {
-   "text": "The bounded constructible comparison [sk-thm-pe-constructible-comparison] applies: $X$ is quasi-compact and quasi-separated, $A$ is discrete Noetherian, and the constructibility of its first paragraph (finite constructible locally closed stratifications locally on $X$, locally constant of finite type on each stratum) is the affine-local predicate of the item. Its equivalence $D^b_c(X_{\\mathrm{ét}},A)\\to D^b_c(X_{\\mathrm{proét}},A)$ given by $\\nu_X^*$ is essentially surjective, so there are $C\\in D^b_c(X_{\\mathrm{ét}},A)$ and an isomorphism $\\nu_X^*C\\simeq M$. No completeness or torsion hypothesis on the coefficients is used.",
-   "uses": [
-    "sk-thm-pe-constructible-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C2, lemma-describe-constructible-complexes, proof of part (4): 'follows from Lemma lemma-compare-constructible-derived' (Tag 09AL)"
-   }
-  },
-  {
-   "text": "Apply the fixed-interval Noetherian Tor comparison [det-pe-finite-tor-comparison-noetherian] to $C$ and the integers $a\\leq b$ of step 1. Tor amplitude in $[a,b]$ is invariant under isomorphism in the derived category, so $\\nu_X^*C\\simeq M$ has Tor amplitude in $[a,b]$; the 'if' direction gives $H^q(C\\otimes^L_{A_X}N)=0$ for every degree-zero étale $A_X$-module sheaf $N$ and every $q\\notin[a,b]$. This proves (2), and is the 'small argument omitted' of Tag 09C2 (4).",
+   "text": "Use the restricted finite-Tor equivalence in det-pe-finite-tor-comparison-noetherian, which is the restriction of sk-thm-pe-constructible-comparison. Apply its inverse to the bounded constructible finite-Tor object M. The resulting etale object C is bounded constructible and has a finite Tor interval by its full-subcategory property. The natural isomorphism identifying the forward functor with derived comparison, followed by the equivalence counit, gives D(C) isomorphic to M. Choose a representative P using essential surjectivity of the standard localization Q. The localization factorization Q followed by D is naturally isomorphic to termwise comparison followed by Q; composing its component at P, D applied to Q(P) isomorphic to C, and D(C) isomorphic to M gives precisely the required termwise representative isomorphism.",
    "uses": [
     "det-pe-finite-tor-comparison-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C2, lemma-describe-constructible-complexes, proof of part (4): 'L_n has finite tor dimension because K_n does (small argument omitted)'"
-   }
+   "elementary": false
   },
   {
-   "text": "Conversely assume (2), with $C$ and its interval $[a,b]$. Since $\\nu_X^*$ maps $D^b_c(X_{\\mathrm{ét}},A)$ into $D^b_c(X_{\\mathrm{proét}},A)$ [sk-thm-pe-constructible-comparison], every $H^q(\\nu_X^*C)$, hence every $H^q(M)$, is constructible. The 'only if' direction of [det-pe-finite-tor-comparison-noetherian] gives Tor amplitude in $[a,b]$ for $\\nu_X^*C$, hence for $M$. This is condition (1) of [lem-sfb-proetale-tor-local-global], whose implication (1)⇒(2) gives, for every site object $U$, a covering of $U$ and intervals as required by the local finite Tor dimension condition in (1).",
+   "text": "Conversely, factor the given representative isomorphism through D using the localization factorization and the isomorphism Q(P) to C. Regard C as an object of the finite-Tor bounded constructible etale subcategory. The forward finite-Tor equivalence gives a bounded constructible finite-Tor pro-etale object, and its prescribed comparison identifies it with M. Transport constructibility degreewise using lem-pe-coefficient-constructible-iso; transport the same cohomological vanishing interval using functoriality of cohomology. Transport its Tor interval by composing every K-flat representative isomorphism with the derived isomorphism. Finally apply the global-to-local direction of lem-sfb-proetale-tor-local-global.",
    "uses": [
-    "sk-thm-pe-constructible-comparison",
     "det-pe-finite-tor-comparison-noetherian",
+    "lem-pe-coefficient-constructible-iso",
     "lem-sfb-proetale-tor-local-global"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL, lemma-compare-constructible-derived, and the converse of the uniformity sentence of the proof of Tag 09C2"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sfb-proetale-tor-local-global",
-  "def-weil-derived-tensor",
-  "sk-thm-pe-constructible-comparison",
-  "det-pe-finite-tor-comparison-noetherian"
+  "lem-pe-coefficient-tor-flat-model",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-pe-coefficient-constructible-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09C2, lemma-describe-constructible-complexes, proof: uniform Tor interval and part (4); Tag 09AL, lemma-compare-constructible-derived. The finite refinement and unit-test details are written out; existing Noetherian interval comparison discharges the small argument omitted."
+  "place": "Tags 09C2 and 09AL, lemma-describe-constructible-complexes and lemma-compare-constructible-derived. Boundedness reuses the coefficient flat-model criterion (Tags 08G0 and 08G1); descent and Tor reflection use the already restricted finite-Tor comparison equivalence. Lean proof by T8, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -215,7 +188,6 @@
   ]
  },
  "tool_uses": [
-  "sk-thm-pe-constructible-comparison",
   "det-pe-finite-tor-comparison-noetherian"
  ],
  "reviewed": {
@@ -244,5 +216,15 @@
   "group": "Q11",
   "result": "pass",
   "note": "Re-delivery of 637a5d5f (RETURN H13): def-weil-derived-cohomology-sheaves.json now byte-identical to live N5 record (sfModelCohomology), so the overwrite is gone; item module byte-identical (sha 207b7bb8) and item node identical to the prior head; snapshot vs side-live differs only in the item lean field plus the new module. Independently re-checked: local Tor clause identical to hasFiniteCoefficientProEtaleTorAmplitude_iff_locally; C uses IsCoefficientBoundedConstructibleEtale plus HasCoefficientModelTorAmplitude as in finiteTorComparisonNoetherian; nu^*C≅M via representative P and the canonical termwise constructibleComparisonComplexPullback, independent of P by the Q-factorization in constructibleComparison; qcqs X, coefficient-sized Noetherian A with free v; edge cases ok; sorry only; docstrings with source, blueprint and 5 steps; statement verbatim; max line 92. nt_compile --json clean in 25.5 s at load 206. Advisory: Etale.derivedTensor not used (not coefficient-sized); proof-only plain imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261021T130203-L-2605697",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
