@@ -10,9 +10,122 @@
  "stmt_deps": [
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $S=\\varnothing$, take $S_0=\\varnothing$ with its unique topology and empty metric, $G_0=\\{1\\}$ with its discrete group topology, and the unique maps $p,q,f_0$. These are continuous and $p,q$ are surjective, $q$ is a homomorphism, and the required identity has empty domain. Thus assume $S\\ne\\varnothing$ for the remaining steps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the metrizable reduction: empty parameter space"
+   }
+  },
+  {
+   "text": "Write $D=S\\times G^r$. It is compact by [lem-weil-pbc-tychonoff-product-quasi-compact], applied to its finitely many compact factors. Fix $\\epsilon>0$. For each $x=(s,g_1,\\ldots,g_r)\\in D$, continuity gives a product neighbourhood mapping into $B_Y(f(x),\\epsilon/3)$. Using the clopen basis of $S$ and the open-normal-subgroup basis of $G$, shrink it to a rectangle $U_x\\times g_1H_x\\times\\cdots\\times g_rH_x$, where $U_x$ is clopen and $H_x$ is open normal (intersect the finitely many subgroups chosen for the coordinates). Cosets are open; they are closed because their complements are unions of other open cosets. Any two values on this rectangle have distance less than $2\\epsilon/3$, by the triangle inequality.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the metrizable reduction: small-oscillation product neighbourhoods"
+   }
+  },
+  {
+   "text": "Choose finitely many such rectangles $R_j=U_j\\times a_{j,1}H_j\\times\\cdots\\times a_{j,r}H_j$ covering $D$, by compactness. Let $\\mathcal P$ consist of the nonempty Boolean atoms of the finitely many clopens $U_j$: intersections choosing $U_j$ or its complement for every $j$. It is a finite clopen partition. Put $N=\\bigcap_jH_j$, an open normal subgroup. If $s,s^\\prime$ belong to the same atom and $g_iN=g_i^\\prime N$ for every $i$, choose $R_j$ containing $(s,g_1,\\ldots,g_r)$. The same atom lies in $U_j$, and $g_i^\\prime=g_in_i$ for some $n_i\\in N\\subseteq H_j$. Thus $(s^\\prime,g_1^\\prime,\\ldots,g_r^\\prime)$ also lies in $R_j$, and the two $f$-values have distance less than $\\epsilon$. This is the required uniform oscillation bound, directly from the finite cover.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the metrizable reduction: finite Boolean refinement and one normal subgroup for all coordinates"
+   }
+  },
+  {
+   "text": "For every integer $n\\geq0$, perform the preceding construction with $\\epsilon_n=2^{-n}$, obtaining $\\mathcal P_n,N_n$. Let $A_n$ be the finite discrete set of atoms of $\\mathcal P_n$, and let $B_n=G/N_n$ with its discrete topology and quotient group law. The set $B_n$ is finite: its open cosets cover compact $G$, so a finite subcover includes every coset. The maps $p_n:S\\to A_n$ and $q_n:G\\to B_n$ are continuous surjections, since each point fibre is a clopen atom or open coset; $q_n$ is a homomorphism by normality. Their common product fibres satisfy the distance bound $d_Y(f(s,g),f(s^\\prime,g^\\prime))<2^{-n}$. Neither nesting the partitions nor completing $Y$ is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the metrizable reduction: a sequence of finite space and group quotients"
+   }
+  },
+  {
+   "text": "Define $P:S\\to\\prod_{n\\geq0}A_n$ by $P(s)=(p_n(s))_n$, and $Q:G\\to\\prod_{n\\geq0}B_n$ by $Q(g)=(q_n(g))_n$. Set $S_0=P(S)$ and $G_0=Q(G)$ with their subspace topologies [def-kun-subspace-topology], and corestrict $P,Q$ to surjections $p,q$. Preimages of basic cylinders are finite intersections of coordinate preimages, so $P,Q,p,q$ are continuous. By [lem-weil-pbc-continuous-image-quasi-compact], both images are compact. Each product, and each image, is Hausdorff: unequal tuples differ in a coordinate, whose disjoint singleton cylinders separate them. Basic cylinders specify finitely many coordinates and are clopen; their intersections with $S_0$ form a clopen basis. Consequently $S_0$ is profinite in exactly the sense of the statement.",
+   "uses": [
+    "def-kun-subspace-topology",
+    "lem-weil-pbc-continuous-image-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the metrizable reduction: compact images of the diagonal coordinate maps"
+   }
+  },
+  {
+   "text": "The image $G_0$ is a subgroup of $\\prod_nB_n$: $Q(gh)=Q(g)Q(h)$, $Q(g^{-1})=Q(g)^{-1}$, and $Q(1)=1$. Thus $q$ is a homomorphism. Componentwise multiplication and inversion on the product are continuous, since preimages of finite-coordinate cylinders are open, and their restrictions give continuous operations on $G_0$. For a finite set $F\\subseteq\\mathbf N$, put $K_F=\\{b\\in G_0:b_n=1\\text{ for all }n\\in F\\}$. These are open normal subgroups, being finite intersections of coordinate kernels, and they form a neighbourhood basis of $1$: every basic cylinder neighbourhood of $1$ contains one of them. With compactness and Hausdorffness from the preceding step, this proves that $G_0$ is a profinite group under the definition in the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the metrizable reduction: the group image and its open normal neighbourhood basis"
+   }
+  },
+  {
+   "text": "Give each finite set $A_n,B_n$ its discrete metric, with distance $0$ on equal points and $1$ otherwise. The coordinate maps on $S_0$ and on $G_0$ are continuous and separate distinct tuples, and these two image spaces are compact. Apply [lem-sfb-compact-countable-separating-metrizable] to each of these two sequences of coordinate maps. It follows that both $S_0$ and $G_0$ are metrizable. No metric on the original $S$ or $G$ is assumed.",
+   "uses": [
+    "lem-sfb-compact-countable-separating-metrizable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the metrizable reduction: metrizable compact images from countably many separating coordinates"
+   }
+  },
+  {
+   "text": "Let $R=p\\times q^r:D\\to S_0\\times G_0^r$. If $R(s,g_1,\\ldots,g_r)=R(s^\\prime,g_1^\\prime,\\ldots,g_r^\\prime)$, equality of every $n$th coordinate implies $p_n(s)=p_n(s^\\prime)$ and $q_n(g_i)=q_n(g_i^\\prime)$ for all $i$. Step 4 gives $d_Y(f(s,g),f(s^\\prime,g^\\prime))<2^{-n}$ for every $n$. Since $2^{-n}\\to0$ and distances are nonnegative, this distance is zero, and the metric separation axiom gives equality of the two values. Hence $f$ is constant on each fibre of $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the metrizable reduction: vanishing of the distance on a common quotient fibre"
+   }
+  },
+  {
+   "text": "The map $R$ is continuous by its coordinate formula. It is surjective: for a point $(s_0,b_1,\\ldots,b_r)$ choose a preimage of $s_0$ under $p$ and, independently, a preimage of each $b_i$ under $q$. Its domain $D$ is compact by step 2, and its codomain is Hausdorff by coordinate separation. Apply [lem-sfb-compact-hausdorff-surjection-quotient] (with the whole spaces as the two subsets): $R$ is a quotient map, so a subset $W$ of its codomain is open precisely when $R^{-1}(W)$ is open.",
+   "uses": [
+    "lem-sfb-compact-hausdorff-surjection-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the metrizable reduction: quotient topology for the product surjection"
+   }
+  },
+  {
+   "text": "Define $f_0(t)$ to be the common value of $f$ on the nonempty fibre $R^{-1}(t)$. Steps 8 and 9 make this well-defined and give $f=f_0\\circ R$. For any open $V\\subseteq Y$, one has $R^{-1}(f_0^{-1}(V))=f^{-1}(V)$, which is open. The quotient criterion in step 9 therefore makes $f_0^{-1}(V)$ open, proving continuity. The values are actual values of $f$ in $Y$, so this argument does not require completeness. Under [def-weil-size-convention], finite partitions, finite quotients, countable products and their image subsets remain in the chosen universe, as do the constructed maps. This supplies every required object and identity.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of the metrizable reduction: continuous descent with values in the original metric space and the size convention"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-subspace-topology",
+  "def-weil-size-convention",
+  "lem-sfb-compact-countable-separating-metrizable",
+  "lem-sfb-compact-hausdorff-surjection-quotient",
+  "lem-weil-pbc-continuous-image-quasi-compact",
+  "lem-weil-pbc-tychonoff-product-quasi-compact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3) motivates the application only and supplies no topological argument. Agent proof by finite small-oscillation rectangles, countably many finite quotients, compact image metrizability and quotient-topology descent. Exact external literature reference remains WANTED as in the inherited source."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -127,10 +240,133 @@
    },
    "date": "2026-10-22",
    "verdict": "no match: Nobeling finite-coordinate factorizations concern locally constant functions and do not state this metric-valued product factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A metric valued continuous function on a profinite space times a finite power of a profinite group factors through metrizable profinite quotient spaces and quotient groups",
+   "results": {
+    "t": "2026-10-21T19:53:45Z",
+    "tool": "leanfinder",
+    "query": "A metric valued continuous function on a profinite space times a finite power of a profinite group factors through metrizable profinite quotient spaces and quotient groups",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.toLimit_fun",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "ProfiniteGrp.toLimit",
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.NobelingProof.iso_map",
+     "ProfiniteGrp.pi"
+    ],
+    "digest": "2d2c1abfbb2f005a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the inverse-limit and approximation hits do not give simultaneous metrizable quotient factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "(metrizable|countable).*(factor|quotient)|(factor|quotient).*(metrizable|countable)",
+   "results": {
+    "t": "2026-10-21T19:54:11Z",
+    "tool": "grep",
+    "query": "(metrizable|countable).*(factor|quotient)|(factor|quotient).*(metrizable|countable)",
+    "sub": "Topology",
+    "ok": true,
+    "n_hits": 19,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean",
+     "Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean",
+     "Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean",
+     "Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean",
+     "Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean",
+     "Mathlib/Topology/Algebra/ConstMulAction.lean",
+     "Mathlib/Topology/Algebra/ConstMulAction.lean",
+     "Mathlib/Topology/Algebra/ConstMulAction.lean"
+    ],
+    "digest": "a2881e70219380bc"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the hits concern first-countable group quotients, second countability of open quotients, and countability of discrete quotients of an already metrizable space."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions on compact zero dimensional spaces and profinite groups factor through countable products of finite discrete quotients",
+   "results": {
+    "t": "2026-10-21T19:54:12Z",
+    "tool": "leansearch",
+    "query": "Continuous functions on compact zero dimensional spaces and profinite groups factor through countable products of finite discrete quotients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.of",
+     "ProfiniteGrp.of",
+     "ProfiniteGrp.toLimit_fun",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "ProfiniteGrp.isIso_toLimit",
+     "Profinite.asLimitConeIso",
+     "ProfiniteGrp.toLimit",
+     "ProfiniteGrp.pi"
+    ],
+    "digest": "bc9a34417c97086e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: profinite constructors and full inverse-limit presentations do not select countably many quotient coordinates."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"MetrizableSpace\"",
+   "results": {
+    "t": "2026-10-21T19:54:12Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"MetrizableSpace\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "LightProfinite.instMetrizableSpaceOnePointNat"
+    ],
+    "digest": "af4ef41eaafd2f11"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the one-point compactification of the naturals is metrizable, but this is not a factorization theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every continuous map from a compact totally disconnected Hausdorff space to a metric space depends on countably many finite discrete quotient coordinates",
+   "results": {
+    "t": "2026-10-21T19:54:24Z",
+    "tool": "leanfinder",
+    "query": "Every continuous map from a compact totally disconnected Hausdorff space to a metric space depends on countably many finite discrete quotient coordinates",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousMap.exists_finite_approximation_of_mem_nhds_diagonal",
+     "CompactT2.ExtremallyDisconnected.projective",
+     "ContinuousMap.exists_disjoint_nonempty_clopen_cover_of_mem_nhds_diagonal",
+     "DiscreteQuotient.exists_of_compat",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "StoneCech.projective",
+     "CompactT2.Projective",
+     "LightCondSet.LocallyConstant.instHasPropAndTotallyDisconnectedSpaceCarrierSecondCountableTopologySubtypeToTop"
+    ],
+    "digest": "c36900346c830ff0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite clopen approximation, projectivity and locally constant finite-coordinate factorization do not state the metric-valued space/group product assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-prime-to-ell-cochain-finite-quotient-descent",
@@ -156,5 +392,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-profinite-metric-function-quotients",
+  "worker": "stage1",
+  "group": "N6",
+  "summary": "Statement unchanged, including empty S and incomplete Y. Wrote the finite rectangle/Boolean partition argument and the image factorization explicitly; reused existing compactness and quotient-topology nodes. Added one exact Mathlib leaf for compact spaces with countably many separating metric-valued maps. Project-source and whole-DAG/blueprint searches found no attachment or duplicate. All steps are under 2000 characters.",
+  "blueprint": "Realizes the metrizable reduction below paragraph (3) of the main-20261015 direct-images proof, via the inherited scalar cochain descent chain. The blueprint paragraph itself contains no scalar tame-kernel calculation; the topological proof is agent-written. Nearest blueprint ancestor is null, as returned by blueprint_refs.py ancestor; inherited via chain retained.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N6-6da3cb80a",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-6da3cb80a (reviewer sub-agent of L); spot-checked: I read the item, the new leaf, every cited statement, the parent's step 4 and the Mathlib source in full. The item statement is unchanged; this is a first split, not a re-split. Steps 2–4: Tychonoff (an arbitrary family) gives compactness. Clopen-by-coset rectangles of oscillation <2ε/3, one normal subgroup per rectangle, Boolean atoms and N=∩H_j give a bound inside a single rectangle. The 2^{-n} sequence needs no nesting. Steps 5–6: the diagonal images are compact (isCompact_range) and Hausdorff, with cylinder clopen bases. In G_0 the subgroups K_F are open normal and form a neighbourhood basis of 1. Step 7: discrete 0/1 metrics; the leaf's hypotheses hold. Steps 8–10: fibre constancy in Y itself, with no completion. lem-sfb-compact-hausdorff-surjection-quotient applies with U=X, V=Y. Continuity of f_0 follows from the open-set criterion. Edge cases checked: empty S; empty Y (then no f exists); finite S and G; noncommutative G; r=1. New leaf: Metric.PiNatEmbed.TopologicalSpace.MetrizableSpace.of_countable_separating in PiNat.lean, read at lines 967, 984, 1012, 1063, 1072 and 1093–1097. It takes ι=ℕ (Encodable) and assumes no T2 or nonemptiness. It is not a duplicate (rg -L metrizab over the DAG finds only search logs) and does not restate an item clause. Paragraph (3) of the main-20261015 direct-images proof has no metrizable argument. The inherited source and agent proof_origin are recorded correctly, with the literature WANTED. All cited nodes are Mathlib leaves or definitions, so there is no route issue and no tool_uses. No SGA source is used. No fixes."
  }
 }

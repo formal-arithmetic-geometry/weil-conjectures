@@ -1,0 +1,60 @@
+# Stage-1 report: lem-sfb-profinite-metric-function-quotients
+
+## Files written
+
+- `dag/nodes/sec-six-functors-basics/lem-sfb-profinite-metric-function-quotients.json`: statement unchanged; split into ten steps proving simultaneous space/group quotient factorization, including continuity of the descended map.
+- `dag/nodes/sec-six-functors-basics/lem-sfb-compact-countable-separating-metrizable.json`: statement; Mathlib leaf, exactly `Metric.PiNatEmbed.TopologicalSpace.MetrizableSpace.of_countable_separating`, specialized to the natural-number index type, at `Mathlib/Topology/MetricSpace/PiNat.lean:1093`.
+- `citations.json`: one entry for each step/node pair, quoting the cited statement verbatim.
+- `searches.jsonl`: actual search-command records. `write_split.py` is sandbox-only preparation code and is not a DAG delivery file.
+
+## Attachments
+
+None. I searched `lean/WeilConjectures/` for the item id, metrizable terminology, countable quotients and profinite factorization, and for the candidate countable-separation theorem. No declaration of the project states the item. Mathlib constructors and inverse-limit presentations are not project attachments.
+
+## Wanted literature
+
+WANTED: a published reference for simultaneous metrizable profinite space/group quotient factorization of a metric-valued continuous function on a finite profinite product, for lem-sfb-profinite-metric-function-quotients. This is the inherited request in the item's source. The proof is explicitly agent-written; the available blueprint is motivation, not evidence that the topological argument is in that document. No external reference is needed to identify the new leaf, whose formal Mathlib source is present and was read.
+
+## Errors and corrections
+
+The imported statement is correct and has not been changed. Its source place mentions a scalar tame-kernel expansion, but the actual main-20261015 direct-images proof, paragraph (3), only discusses proper direct image, quasi-compact opens and compactification. It contains no analytic reduction. I record this limit explicitly in proof_origin and split_report instead of attributing the constructed argument to the blueprint. The inherited null blueprint ancestor and via chain were checked with `blueprint_refs.py ancestor` and retained.
+
+No existing sandbox split or report was present. The item had no proof and was unsplit. The original item's Mathlib searches were retained; the fresh command searches were read and appended, with separate verdicts on the general inverse-limit/finite-approximation candidates. Exploratory countable-product searches were also preserved in the leaf. Importantly, `TopologicalSpace.metrizableSpace_pi` has a **finite** index hypothesis despite its abbreviated semantic-search description; it is not the theorem used. The successful exact theorem is the compact countable-separation criterion. A single-file grep result was formatted incorrectly by the wrapper; the subsequent directory grep confirms `Mathlib/Topology/MetricSpace/PiNat.lean:1093` without changing the tool.
+
+## Unfinished work
+
+No split obligation remains. The only new node is already a Mathlib leaf and has no proof steps or subordinate dependencies. A published reference for the whole factorization remains wanted; the completed argument is marked agent-written as required.
+
+## Not duplicates
+
+The new leaf has no Stacks tag to share. Whole-DAG and project-source searches for `of_countable_separating`, countable separating families, and metric/countable product descriptions found no existing node stating the criterion. Whole-blueprint searches for `metrizable`, `metrizable spaces`, `countable separating`, `countable product`, `clopen partition` and `profinite quotient` found no duplicate. The countable-product hits in the blueprint concern categorical/derived products. The clopen-partition hits concern schemes, not metrizability of arbitrary compact spaces.
+
+lem-sfb-compact-countable-separating-metrizable vs lem-sfb-profinite-metric-function-quotients: the leaf is a general metrizability criterion for an already compact space with supplied separating maps; it constructs neither finite quotients nor the space/group images nor a factorization or descended map.
+
+lem-sfb-compact-countable-separating-metrizable vs lem-sfb-profinite-action-finite-quotients: the existing action node presents a profinite action by all its finite quotients; it neither assumes a countable separating family nor concludes metrizability.
+
+lem-sfb-compact-countable-separating-metrizable vs lem-sfb-finite-quotient-fiber-product: the existing node identifies a span's pullback with a full inverse limit; it does not give the countable-separation criterion. Its proof was not used as a source of an unasserted countability theorem.
+
+## Review by N6
+
+I read AGENTS.md, GOAL.md, the worker brief, stage 1, the three levels in SETUP.md, the chapter and unit records, and both copies of delivery-errors.md sections B–E. I read the current blueprint direct-images proof in full, including paragraph (3), and the parent's actual step invoking this item: the parent needs simultaneous metrizable parameter and group quotients and continuity into the original incomplete scalar field. The ten steps establish exactly those clauses without changing the coefficient category or adding completeness. There is no route change at chapter or unit level and no SGA source is used.
+
+For the new node I read the actual Mathlib namespace and index hypothesis (`Metric.PiNatEmbed`, `Encodable`, line 1012), the metric and compact hypotheses around lines 1063–1073, and the complete declaration and proof at lines 1091–1097. The natural numbers satisfy the index hypothesis; the statement requires every map to be continuous and to separate every unequal pair. The source assumes neither nonempty domain, nonempty targets, Hausdorffness independently, nor completeness. Thus this is an exact one-line specialization, not a new unproved topological lemma. Its statement uses the project size convention and introduces X, every target and map, and the precise meaning of the metrizability conclusion. It contains no proof sketch.
+
+I opened and read the statement of every cited node. Step 1 has no citation: empty S gives empty S0, the one-point quotient group and the unique empty-domain descended map. This covers even empty Y and avoids choosing a value in it. Step 2 cites `lem-weil-pbc-tychonoff-product-quasi-compact`, whose statement is arbitrary product compactness with the product topology, applicable to the finite family S,G,...,G. The remainder of that step is the direct neighbourhood definition of continuity and the two bases assumed in the item. Each group neighbourhood is translated to the identity before choosing a normal subgroup; finite intersection handles all r coordinates. The triangle inequality supplies the oscillation estimate.
+
+Step 3 uses no new theorem. I checked the finite-subcover argument, the Boolean atoms of the S-clopens, and N's containment in every H_j. Equal N-cosets keep **every** group coordinate inside a chosen rectangle, while equal partition atoms keep the parameter inside its S-factor. The bound follows from the same rectangle, not from a different uncontrolled choice of centres. The proof is short and explicit, so a separate small-oscillation node would be elementary duplication. Step 4 repeats this at 2^{-n}. Compactness of G gives finitely many cosets; coset fibres give continuity to the discrete quotient, and normality gives the group law. Nested partitions are unnecessary for diagonal images, and no nesting hypothesis is asserted.
+
+Step 5 cites `def-kun-subspace-topology` for exactly the induced topology on the two image subsets, and `lem-weil-pbc-continuous-image-quasi-compact` for exactly compactness of each image of a continuous map from a compact space. The diagonal maps are continuous by the finite-coordinate-cylinder description; compactness is not inferred from metrizability. Cylinder separation gives Hausdorffness, and cylinder intersections give a clopen basis on S0. Step 6 checks the group structure on G0 directly: componentwise products and inverses remain in the image, operations are continuous on finite-coordinate cylinders, and intersections of coordinate kernels are open normal subgroups forming the identity neighbourhood basis. Consequently G0 has exactly the profinite group structure requested; no unproved quotient-group topology or assertion that an arbitrary quotient is zero-dimensional is used.
+
+Step 7 cites only the new countable-separation Mathlib leaf. Its compactness hypotheses are provided by step 5; finite discrete target sets carry the explicit 0/1 metric; coordinate maps are continuous and separate tuples. Applying it twice proves both metrizability clauses. Step 8 checks constancy on product fibres using **all** n, the small-oscillation bound and metric separation. This determines values in Y itself, rather than constructing a limit in its completion. Step 9 cites `lem-sfb-compact-hausdorff-surjection-quotient`, whose statement includes the whole-space case and the exact open-set preimage criterion. Its hypotheses are verified: R is a continuous product map, its finitely many preimages can be chosen independently, its source is compact by step 2 and its target is Hausdorff by coordinate separation.
+
+Step 10 uses that criterion by writing the inverse-image equality for every open V in Y. Defining f0 by the single value on a nonempty fibre proves the factorization and then continuity. It cites `def-weil-size-convention` only for the inherited universes, not for a topological existence assertion. Finite quotients and images are sets within the same universe, as are countable products. The quotations in citations.json are verbatim statements and substantiate precisely these uses. All off-unit statements used are existing Mathlib leaves; no tool-use exception is needed.
+
+I tested empty S, empty Y (when f exists), singleton S or G, constant f, finite S and G, noncommutative G and r=1. Normality is needed and supplied for the quotient groups. On finite inputs, small enough oscillation forces the needed equalities, and redundant coordinates do not matter. For infinite nonmetrizable inputs there is no countability assumption on S or G: only the chosen sequence of quotient coordinates is countable. A Cantor-valued/metric continuous f can need infinitely many coordinates; the proof keeps them all and makes no claim of factorization through one finite quotient. The separation leaf is true for empty X (even empty targets), one-point X and a compact space with nonseparating maps (the latter fails its explicit hypothesis and is not misapplied).
+
+Against B–E: the new node is statement-only, self-contained and searched by all four commands; the Mathlib file, full name and lines are recorded. No source tag or citation is used as the meaning of a statement. Every non-elementary input is an actual cited statement, and the new leaf does not relocate the factorization clause. The proof is acyclic, with no dependence on its parent. The elementary steps write the finite-cover and cylinder arguments in full. All ten steps are shorter than 2000 characters, and none hides a separately invoked standard lemma. The item's statement and its inherited metadata have been preserved.
+
+## Dry-run repair
+
+The first dry run rejected the new leaf because its statement cited no definition node. I searched the existing definition nodes for topology/metric/compactness terminology; there is no general metric-space or compact-space definition node. The compactness and metrizability meanings were already written inline. I made the inherited universe convention explicit in the leaf, citing `def-weil-size-convention` and adding that statement dependency, as in the item. The metric targets and countable separating family are now explicitly formed in the project universes. This does not change the mathematical criterion or its exact Mathlib specialization. I refreshed its verbatim quotation in citations.json. No tool was changed.
