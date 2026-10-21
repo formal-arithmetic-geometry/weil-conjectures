@@ -20357,3 +20357,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:11 L: merged deliver/G4/Sheaf.AlgebraicGeometry.Sites.ProperGeometricFibreTorsionBound (stage 3; reviewer PASS; first push; landing 20261021T061130-L-1714589 (proof); batch 20261021T060921; modules 1; new nodes 0)
 - 06:11 L: merged deliver/G4/Sheaf.CategoryTheory.MonoidalFiniteFreeTransport (stage 3; reviewer PASS; first push; landing 20261021T061140-L-1722057 (proof); batch 20261021T060921; modules 1; new nodes 0)
 - 06:12 L: merged deliver/H1/Sheaf.AlgebraicGeometry.ClassicalProEtaleProperBaseChange (stage 3; reviewer PASS; after a return; landing 20261021T061154-L-1730286 (interface); batch 20261021T060921; modules 4; new nodes 3)
+- 06:12 L: merged deliver/H2/Sheaf.CategoryTheory.DerivedCategory.BoundedBifunctorDevissage (stage 3; reviewer PASS; first push; landing 20261021T061203-L-1736688 (proof); batch 20261021T060921; modules 1; new nodes 0)

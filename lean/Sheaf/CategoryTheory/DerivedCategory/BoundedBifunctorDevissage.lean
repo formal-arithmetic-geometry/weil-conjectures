@@ -7,8 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-import Sheaf.CategoryTheory.TruncationDescends
-import WeilConjectures.CategoryTheory.TruncationTriangle
+import WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall
 
 /-!
 # Bounded dévissage for a bifunctor exact in each variable
@@ -24,6 +23,26 @@ universe uA vA wA uB vB wB uT vT
 open CategoryTheory CategoryTheory.Limits
 
 namespace DerivedCategory
+
+/-- One-variable glue for the proved bounded Postnikov dévissage in
+`WeilConjectures.CategoryTheory.DerivedCategory.BoundedEssentiallySmall`. -/
+private theorem bounded_functor_devissage
+    (C : Type uA) [Category.{vA} C] [Abelian C] [HasDerivedCategory.{wA} C]
+    (T : Type uT) [Category.{vT} T] [Preadditive T] [HasZeroObject T] [HasShift T ℤ]
+    [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T] [IsTriangulated T]
+    (S : ObjectProperty T) [S.IsTriangulated] [S.IsClosedUnderIsomorphisms]
+    (G : DerivedCategory C ⥤ T) [G.CommShift ℤ] [G.IsTriangulated]
+    (K : DerivedCategory C) (hK : (TStructure.t (C := C)).bounded K)
+    (h : ∀ q : ℤ, S (G.obj ((singleFunctor C 0).obj ((homologyFunctor C q).obj K)))) :
+    S (G.obj K) := by
+  let P : ObjectProperty C := S.inverseImage (singleFunctor C 0 ⋙ G)
+  let Q : ObjectProperty (DerivedCategory C) := S.inverseImage G
+  obtain ⟨d, hd⟩ := exists_iteratedExtensions_of_bounded P K hK h
+  apply iteratedExtensions_le P (Q := Q) ?_ d K hd
+  rintro L ⟨n, X, hX, ⟨e⟩⟩
+  have hshift : Q (((singleFunctor C 0).obj X)⟦-n⟧) := Q.le_shift (-n) _ hX
+  exact Q.prop_of_iso
+    (e ≪≫ (((singleFunctors C).shiftIso (-n) n 0 (by omega)).app X).symm).symm hshift
 
 /-- An exact bifunctor takes bounded pairs into a strictly full triangulated subcategory
 when it takes pairs of degree-zero objects from the specified cohomology classes there.
@@ -76,6 +95,17 @@ theorem bounded_bifunctor_devissage
     (hMB : ∀ q : ℤ, ¬ IsZero ((homologyFunctor B q).obj M) →
       B₀ ((homologyFunctor B q).obj M)) :
     S ((F.obj K).obj M) := by
-  sorry
+  apply bounded_functor_devissage A T S (F.flip.obj M) K hK
+  intro q
+  by_cases hq : IsZero ((homologyFunctor A q).obj K)
+  · exact S.prop_of_isZero (((singleFunctor A 0) ⋙ F.flip.obj M).map_isZero hq)
+  · apply bounded_functor_devissage B T S
+      (F.obj ((singleFunctor A 0).obj ((homologyFunctor A q).obj K))) M hM
+    intro r
+    by_cases hr : IsZero ((homologyFunctor B r).obj M)
+    · exact S.prop_of_isZero
+        (((singleFunctor B 0) ⋙ F.obj
+          ((singleFunctor A 0).obj ((homologyFunctor A q).obj K))).map_isZero hr)
+    · exact h₀ _ _ (hKA q hq) (hMB r hr)
 
 end DerivedCategory
