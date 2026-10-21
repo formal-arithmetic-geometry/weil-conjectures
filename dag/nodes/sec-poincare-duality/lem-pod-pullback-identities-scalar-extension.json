@@ -246,5 +246,33 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-ba354b21a (reviewer sub-agent of L); spot-checked: I read in full the item, its base text (the statement-only node from the N5 18aaf87f FIX), all 5 steps, every cited statement, the iso-comparison scalar node's proof, the blueprint source (main-20261015 lem-fix-weil-operations.proof.md first paragraph; prop-weil-operations sentence 1) and citer Steps 2-4. No SGA. The worker's STATEMENT-DISPUTED is correct: if λ and α are only existential, choosing λ^g_E=-1 and λ^{ḡ}_E=+1 makes clause (2) say +1=-1. Fixing λ=κ^{-1} (def-weil-inverse-image-pullback-comparison(b), invertible on complete objects by the normalization node) and taking c, α from lem-trf picks out the canonical maps; no hypothesis was changed and nothing is weakened. Step 1: clause (1) is literally the composition/scalar equation of lem-trf-integral-pullback-comparison-realization, with the same hypotheses. Steps 2, 4 and 5: I recomputed the χ-cancellation, the b-counit identity on K-flat G_EP, and the pasting through naturality of λ^{ḡ} and β^{ḡ}; all are correct and every intermediate object is in D^b_c. One fault, C4/E5, in Step 3: the square ακ=κβ of lem-weil-isomorphism-comparison-scalar-extension holds for that node's α, the δ_P map of lem-weil-specified-pullback-comparison-alpha. The item's α is lem-trf's a=μ^{-1}λ. Both nodes claim to specify lem-pur's existential α, and no node in the DAG says they are equal. FIX: I added the statement-only node lem-pod-isomorphism-scalar-comparison-agreement (a_{g,K}=α_K for scheme isomorphisms g; unsplit, sk-lem-finite, created.item = this item, 2 grep searches recorded, blueprint.from = prop-weil-operations via [item, semilinear-lifts]). Step 3 now cites it and is marked non-elementary; proof_deps are updated. There is no cycle and no duplicate. I accept the 6 declared generic tool_uses (lem-trf, iso-inverse-image, iso-derived-pullback, κ normalization, iso-comparison-scalar, finite-free χ). Advisory: Step 2 of the citer lem-pod-semilinear-field-operation-lifts should fix λ=κ^{-1} to match clause (2).; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PullbackIdentitiesScalarExtension",
+  "declaration": "WeilConjectures.pullbackIdentities_scalarExtension",
+  "declarations": [
+   "WeilConjectures.pullbackIdentitySiteUnit",
+   "WeilConjectures.pullbackIdentityModuleCounit_existsUnique",
+   "WeilConjectures.pullbackIdentityModuleCounit",
+   "WeilConjectures.pullbackIdentityInverseImageCounit",
+   "WeilConjectures.pullbackIdentityKappa_isIso",
+   "WeilConjectures.pullbackIdentityLambda",
+   "WeilConjectures.pullbackIdentityEpsilon",
+   "WeilConjectures.pullbackIdentities_scalarExtension"
+  ],
+  "file": "lean/Sheaf/Paper/PullbackIdentitiesScalarExtension.lean",
+  "statement": "theorem pullbackIdentities_scalarExtension (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E →ₐ[ℚ_[l]] L) (D : IntegralComparisonSystem.{u} l) : (∀ {V W Z : Scheme.{u}} [∀ v : V, Invertible (l : V.residueField v)] [∀ w : W, Invertible (l : W.residueField w)] [∀ z : Z, Invertible (l : Z.residueField z)] (h : Z ⟶ W) (k : W ⟶ V) (K : sfIntegralConstructibleCategory l E V), (integralScalarExtensionOfUniverses l E L ι Z).map (integralComparisonComposition l E D h k K).hom ≫ (integralComparisonScalar l E L ι D h ((constructibleIntegralPullback l E k).obj K)).hom ≫ (integralDerivedPullback l L h).map (integralComparisonScalar l E L ι D k K).hom = (integralComparisonScalar l E L ι D (h ≫ k) K).hom ≫ (integralComparisonComposition l L D h k ((integralComparisonConstructibleScalar l E L ι V).obj K)).hom) ∧ (∀ {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] [∀ x : X, Invertible (l : X.residueField x)] [∀ y : Y, Invertible (l : Y.residueField y)] (K : sfIntegralConstructibleCategory l E Y), (integralComparisonScalar l E L ι D (inv g) ((constructibleIntegralPullback l E g).obj K)).hom ≫ (integralDerivedPullback l L (inv g)).map (integralComparisonScalar l E L ι D g K).hom ≫ (pullbackIdentityEpsilon l L g ((integralComparisonConstructibleScalar l E L ι Y).obj K)).hom = (integralScalarExtensionOfUniverses l E L ι Y).map (pullbackIdentityEpsilon l E g K).hom)",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74d53921c",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Node unchanged except lean; lean.statement verbatim; 8 declarations match; 3 sorries, all in named theorems with docstrings. Clause 1 = the realization dependency's scalarComposition equation with its D-built composition and scalar maps; the ∀ D form is the landed pattern because D's models are pinned by normalization. Clause 2: λ=(asIso κ).symm with κ=inverseImagePullbackComparisonDerived; κ invertibility follows from the Lean of the stmt_dep isomorphismDerivedPullbackComparisonNormalization; counit u = ∃!.choose pinned sectionwise by M.val.map of the Over.mapId/mapComp site unit (no existing counit, so no H4 duplicate); ε order and equation directions match the node. Common universe u as in the dependencies; no added hypotheses; edge cases E=L, g=𝟙, empty schemes covered. Advisory: two unused proof-only plain imports. No compile (no file changed)."
  }
 }
