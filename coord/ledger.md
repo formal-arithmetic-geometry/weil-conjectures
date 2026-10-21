@@ -20327,3 +20327,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:09 L: returned deliver/P3/Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeIsIso (reviewer RETURN: (the landing tools, head 405ac4e03) the delivery did not land: every module of the delivery is in the library already, w)
 - 06:09 L: returned deliver/P3/WeilConjectures.WeilSheaf.PoincareDualityLisse (reviewer RETURN: (the landing tools, head f1d66d6cb) the delivery did not land: lean/WeilConjectures/WeilSheaf/PoincareDualityLisse.lean )
 - 06:09 L: returned deliver/Q4/Sheaf.Paper.InternalHomDualTorAmplitude (reviewer RETURN: (the landing tools, head 8c79cd743) the delivery did not land: lean/Sheaf/AlgebraicGeometry/CondensedLisseProEtaleLocali)
+- 06:09 L: returned deliver/S2/Sheaf.Paper.CondensedQbarExchangeRightAdjunct (reviewer RETURN: (the landing tools, head 816af00ec) the delivery did not land: lean/Sheaf/Paper/CondensedQbarExchangeRightAdjunct.lean w)
