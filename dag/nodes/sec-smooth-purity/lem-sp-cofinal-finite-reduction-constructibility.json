@@ -13,7 +13,10 @@
   "lem-pur-derived-change-of-rings",
   "def-pc-kflat-complex",
   "def-weil-proetale-constructible-sheaf",
-  "def-weil-proetale-tor-amplitude"
+  "def-weil-proetale-tor-amplitude",
+  "def-sp-commutative-coefficient-ring-tower",
+  "sk-def-sp-normalized-towers",
+  "def-weil-pbc-successive-derived-quotient-data"
  ],
  "proof": [
   {
@@ -327,5 +330,33 @@
   "group": "Q95",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-b872e6797 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the base, the cited statements and the blueprint. The statement is byte-identical to the base (live/side-live unsplit), stmt_deps are unchanged, no new nodes, no repair note, first delivery, not dropped, no SGA, no cycle (the only citer is sk-lem-sp-tower and no proof_dep reaches it). Source: main-20261015 sk-lem-sp-tower.proof final integral-constructibility sentence, and sk-def-sp-scalar-extension-functor.proof (2),(4). sk-lem-sp-tower step 4 cites the item for exactly its conclusion. Step 1: ell^N = pi^j u^N pi^{eN-j} gives (ell^N) ⊆ (pi^j); the quotient squares commute on representatives. Elementary and correct. Step 2: exact restriction (lem-pur-sheaf-ring-derived-coefficient-adjunction), the cancellation U(M⊗_S(S⊗_R N)) ≅ UM⊗_R N natural in both variables (lem-sfb-scalar-tensor-cancellation-independent) and K-flatness of P over R give K-flatness of P⊗B_N. Restriction detects acyclicity, so this is a valid few-line argument. Step 3: lem-sfb-successive-derived-quotient-normalization holds for arbitrary ring sheaves. It gives the D(T)-isomorphism, the representative maps, and naturality in K and in the composable ring maps. Together with step 1 this gives compatibility in both indices. lem-pur-derived-change-of-rings (2) with the K-flat P⊗B_N computes the iterated extension. Step 4: testing Tor amplitude on B_N gives bounded cohomology, so H_N ∈ Dctf(O/ell^N). With N=j (e≥1), det-sp-scalar-extension-functor (2) holds for any scheme T and finite rings killed by ell^j, with no flatness or ell-invertibility needed. Its (−)_B is def-weil-pbc-constant-coefficient-scalar-extension, which is defined through lem-pur-derived-change-of-rings, so it is the same functor. Small cases checked: e=1; e=2 with N=j=1 (non-flat O/pi^2 → O/pi, fine because base change preserves Tor amplitude); e=2, N=1, j=2 (D_2=B_1); K=0. lem-coef-integral-residue-tor is not a duplicate. Accepted tool_uses: the six general coefficient-change nodes in split_report. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CofinalFiniteReductionConstructibility",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_cofinal_finite_reduction_constructibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sp_cofinal_finite_ideal_le",
+   "AlgebraicGeometry.ProEtale.spCofinalFiniteQuotient",
+   "AlgebraicGeometry.ProEtale.spCofinalFiniteCoefficientMap",
+   "AlgebraicGeometry.ProEtale.sp_cofinal_finite_quotient_compatibility",
+   "AlgebraicGeometry.ProEtale.spCofinalScalarPresentation",
+   "AlgebraicGeometry.ProEtale.spCofinalUniformizerQuotientFinite",
+   "AlgebraicGeometry.ProEtale.sp_cofinal_finite_reduction_constructibility"
+  ],
+  "file": "lean/Sheaf/Paper/CofinalFiniteReductionConstructibility.lean",
+  "statement": "theorem sp_cofinal_finite_reduction_constructibility (e : ℕ) (he : 1 ≤ e) (v : (Padic.coefficientExtensionIntegers l E)ˣ) (hfactor : (l : Padic.coefficientExtensionIntegers l E) = v * Padic.coefficientExtensionUniformizer l E ^ e) (β : ∀ N : ℕ, WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T ⟶ (spCoefficientCommRings.{u, u} l E T).obj (op N)) (hβ : ∀ N : ℕ, (sheafCompose (Scheme.ProEt.topology T) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map (β N) = (sp_completed_coefficient_limit l E T).exists.choose.hom ≫ limit.π (spCoefficientRings l E T) (op N)) (p : ∀ {R S : Sheaf (Scheme.ProEt.topology T) CommRingCat.{u + 1}} (a : R ⟶ S), spCofinalScalarPresentation T a) (n : Normalization.{u + 1, u, u + 1, u + 2} (C := T.ProEt) (J := Scheme.ProEt.topology T) (hD := fun R ↦ HasDerivedCategory.standard (SheafOfModules.SuccessiveDerivedQuotient.Modules.{u + 1, u, u + 1} R)) p) : (∀ (N j : ℕ) (h : j + 1 ≤ e * (N + 1)), ∃ hcomp : β N ≫ spCofinalFiniteCoefficientMap l E T e v hfactor N j h = WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E T j, ∃ α : (p (β N)).derived ⋙ (p (spCofinalFiniteCoefficientMap l E T e v hfactor N j h)).derived ≅ (p (WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E T j)).derived, α = n.derived (β N) (spCofinalFiniteCoefficientMap l E T e v hfactor N j h) ≪≫ eqToIso (congrArg (fun f ↦ (p f).derived) hcomp)) ∧ (∀ (N : ℕ) (P : CochainComplex (SheafOfModules.SuccessiveDerivedQuotient.Modules.{u + 1, u, u + 1} (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)) ℤ), CochainComplex.IsKFlatIndependentCoefficients P → (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := Scheme.ProEt.topology T) (R := WeilConjectures.completedIntegralCommRingSheafUnrestricted.{u, u} l E T) (P.X i)) → CochainComplex.IsKFlatIndependentCoefficients (((p (β N)).ordinary.mapHomologicalComplex (ComplexShape.up ℤ)).obj P)) ∧ ∀ (K : @DerivedCategory (SheafOfModules.SuccessiveDerivedQuotient.Modules.{u + 1, u, u + 1} (WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T)) _ _ (HasDerivedCategory.standard _)) (a b : ℤ), a ≤ b → (∀ N : ℕ, (∀ i : ℤ, Scheme.IsConstructibleProEtaleModuleSheaf T (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (N + 1)) ((DerivedCategory.homologyFunctor _ i).obj ((p (β N)).derived.obj K))) ∧ Scheme.HasProEtaleTorAmplitude T (Padic.coefficientExtensionIntegers l E ⧸ spEllIdeal l E ^ (N + 1)) ((p (β N)).derived.obj K) a b) → ∀ j : ℕ, (∀ i : ℤ, Scheme.IsConstructibleProEtaleModuleSheaf T (Padic.coefficientExtensionRing l E (j + 1)) ((DerivedCategory.homologyFunctor _ i).obj ((p (WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E T j)).derived.obj K))) ∧ Scheme.HasProEtaleTorAmplitude T (Padic.coefficientExtensionRing l E (j + 1)) ((p (WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E T j)).derived.obj K) a b ∧ ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj ((p (WeilConjectures.completedIntegralCommRingProjectionUnrestricted l E T j)).derived.obj K))",
+  "branch": "sheaf-dag",
+  "by": "Q22",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The same canonical scalar extensions are universally quantified via their published Presentation/Normalization interface, with standard derived localizations. The ell projections are fixed by the unique coefficient-tower limit comparison. Positive indices N,j are encoded as N+1,j+1. The original ringed-site constructibility and Tor predicates remain publicly available from the recorded dependency modules and accept these quotient categories directly."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a905da48",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Re-delivery of the d3c5c5c77552 H2 RETURN. The Lean module is byte-identical to the one that review accepted on substance. The node differs from side-live only in lean and stmt_deps; statement, proof and proof_deps are identical to the live record. H2 is repaired: det-sp-coefficient-towers-abelian is replaced in stmt_deps by the reviewed definition node def-sp-commutative-coefficient-ring-tower, whose existing:true record owns exactly spCoefficientCommRings, and the theorem is now only in proof_deps. The other added stmt_deps (sk-def-sp-normalized-towers for spEllQuotientFinite; def-weil-pbc-successive-derived-quotient-data for Presentation/Normalization) are reviewed definition nodes. lean.statement is verbatim, no line exceeds 100 characters, and the report has Worker report and Second reading sections. Re-read the mathematics: R completed; B_N/D_j correct; beta pinned by hβ; tensors pinned by the Presentation/Normalization interface; all three clauses use the same [a,b] with no added hypotheses; edge cases e=1, j+1=e(N+1), N=j=0, K=0, a=b, empty T. Advisories only: E and T universes tied; the clause-1 iso is n.derived; completed-coefficient owners reached transitively. No compile run (no file changed)."
  }
 }
