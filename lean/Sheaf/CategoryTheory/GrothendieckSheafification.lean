@@ -10,10 +10,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
-import
-  WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
-import Mathlib.CategoryTheory.Presentable.LocallyPresentable
-import Mathlib.SetTheory.Cardinal.HasCardinalLT
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 
 /-!+# Left exact sheafification for Grothendieck abelian coefficients
 
@@ -59,6 +56,7 @@ theorem hasSheafify_and_nonempty_abelian_of_isGrothendieckAbelian
     {C : Type v} [SmallCategory C] (J : GrothendieckTopology C)
     (A : Type u) [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] :
     HasSheafify J A ∧ Nonempty (Abelian (Sheaf J A)) := by
-  sorry
+  let : HasSheafify J A := hasSheafify_of_isGrothendieckAbelian J A
+  exact ⟨inferInstance, ⟨sheafIsAbelian⟩⟩
 
 end CategoryTheory.GrothendieckTopology
