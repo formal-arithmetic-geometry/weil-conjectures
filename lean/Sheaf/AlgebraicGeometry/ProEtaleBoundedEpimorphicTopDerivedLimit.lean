@@ -13,8 +13,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
 
-import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
 
 /-!
@@ -40,6 +40,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme.ProEt
 
+attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- A strict tower with cohomology in `[a,b]` and epimorphic top-cohomology
 transitions has every derived limit cohomologically in the same interval.
 
@@ -47,12 +48,13 @@ Source: Stacks Project, Tag 0947, `proposition-enough-weakly-contractibles`, (5)
 and its proof (blueprint: lem-sf-bounded-epimorphic-top-derived-limit).
 
 Proof plan:
-1. By det-pe-products-derived, the termwise product represents the product of the
-   localized complexes and its cohomology is the product of their cohomologies.
-   The universal property in def-weil-category-product identifies any supplied
-   product with that model, compatibly with all projections. Hence the Roos map
-   on degree-j cohomology is the actual `1 - T_j` on the product of H^j(P_n).
-   This uses the localization and cohomology of def-weil-abstract-derived-category.
+1. By det-pe-products-exact and lem-weil-derived-limit-products-core, derived
+   homology preserves countable products. The canonical comparison identifies
+   homology of the supplied product with the product of the homologies, with
+   components given by homology of its projections. Additivity and the projection
+   equations identify the Roos map on homology with the actual `1 - T_j`.
+   Naturality of homologyFunctorFactors identifies the localized transitions with
+   the transitions on complex homology.
 2. Apply lem-sf-derived-homology-long-exact to the supplied distinguished triangle
    of def-weil-derived-limit. Writing V_j for the product of H^j(P_n), obtain
    V_(j-1) -> V_(j-1) -> H^j(L) -> V_j -> V_j, with arrows `1 - T` on the V's.
@@ -83,6 +85,66 @@ theorem bounded_epimorphic_top_derivedLimit
     ∀ j : ℤ, j < a ∨ b < j →
       IsZero ((DerivedCategory.homologyFunctor
         (ringedSiteModules.{max u (t + 1)} R) j).obj L) := by
-  sorry
+  let A := ringedSiteModules.{max u (t + 1)} R
+  let Q := DerivedCategory.Q.{w} (C := A)
+  let K := fun n : ℕ ↦ Q.obj (P n)
+  let f := fun n : ℕ ↦ Q.map (τ n)
+  have : CountableAB4Star A := ⟨fun I _ ↦ products_exact X R I⟩
+  have hH (j : ℤ) : PreservesLimitsOfShape (Discrete ℕ)
+      (DerivedCategory.homologyFunctor A j) :=
+    (derivedCategory_countableProducts_core A).choose_spec.2 ℕ j
+  let H := DerivedCategory.homologyFunctor A
+  have hzero (j : ℤ) (hj : j < a ∨ b < j) : IsZero ((H j).obj (∏ᶜ K)) := by
+    have := hH j
+    let hc := isLimitOfHasProductOfPreservesLimit (H j) K
+    apply hc.isZero_pt
+    apply (Functor.isZero_iff _).mpr
+    intro ⟨n⟩
+    exact (_hP n j hj).of_iso ((DerivedCategory.homologyFunctorFactors A j).app (P n))
+  have htop (n : ℕ) : Epi ((H b).map (f n)) := by
+    have := _htop n
+    have he : Epi ((H b).map (f n) ≫
+        (DerivedCategory.homologyFunctorFactors A b).hom.app (P n)) := by
+      rw [DerivedCategory.homologyFunctorFactors_hom_naturality]
+      infer_instance
+    exact (epi_comp_iff_of_isIso _ _).mp he
+  have htrans : Epi ((H b).map (towerTransitionEndomorphism (K := K) f)) := by
+    have := hH b
+    let M := Functor.ofOpSequence (X := fun n ↦ (H b).obj (K n))
+      (fun n ↦ (H b).map (f n))
+    have ht (n : ℕ) : Epi (M.map (homOfLE (Nat.le_succ n)).op) := by
+      simpa [M] using htop n
+    have he : Epi (towerTransitionEndomorphism (K := fun n ↦ (H b).obj (K n))
+        (fun n ↦ (H b).map (f n))) := by
+      simpa [M] using (AlgebraicGeometry.ProEtale.milnor_epimorphic X R M ht).1
+    have hm : (H b).map (towerTransitionEndomorphism (K := K) f) ≫ piComparison (H b) K =
+        piComparison (H b) K ≫
+          towerTransitionEndomorphism (K := fun n ↦ (H b).obj (K n))
+            (fun n ↦ (H b).map (f n)) := by
+      apply Pi.hom_ext
+      intro n
+      rw [Category.assoc, piComparison_comp_π, ← Functor.map_comp]
+      simp only [towerTransitionEndomorphism, towerProductShift, Preadditive.sub_comp,
+        Category.id_comp, Pi.lift_π,
+        Preadditive.comp_sub, Category.assoc, piComparison_comp_π,
+        piComparison_comp_π_assoc]
+      rw [Functor.map_sub, Functor.map_comp]
+    have : Epi ((H b).map (towerTransitionEndomorphism (K := K) f) ≫ piComparison (H b) K) := by
+      rw [hm]
+      exact inferInstance
+    exact (epi_comp_iff_of_isIso _ (piComparison (H b) K)).mp inferInstance
+  obtain ⟨p, δ, hT⟩ := _hL
+  let T := Pretriangulated.Triangle.mk p (towerTransitionEndomorphism (K := K) f) δ
+  have hT' : T ∈ distTriang _ := hT
+  intro j hj
+  by_cases h : j = b + 1
+  · subst j
+    have hδ := DerivedCategory.HomologySequence.comp_δ T hT' b (b + 1) rfl
+    have : Epi ((H b).map T.mor₂) := htrans
+    apply (DerivedCategory.HomologySequence.exact₁ T hT' b (b + 1) rfl).isZero_of_both_zeros
+    · exact (cancel_epi ((H b).map T.mor₂)).mp (by simpa using hδ)
+    · exact (hzero (b + 1) hj).eq_zero_of_tgt _
+  · exact (DerivedCategory.HomologySequence.exact₁ T hT' (j - 1) j
+      (by omega)).isZero_of_both_isZero (hzero (j - 1) (by omega)) (hzero j hj)
 
 end AlgebraicGeometry.Scheme.ProEt

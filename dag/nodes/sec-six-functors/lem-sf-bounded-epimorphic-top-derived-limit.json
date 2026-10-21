@@ -18,16 +18,17 @@
  ],
  "proof": [
   {
-   "text": "Put $A_n=Q(P_n)$ and let $B$ be the product used in the given Roos triangle. By [det-pe-products-derived], the termwise product complex $C=\\prod_nP_n$ represents a product of the $A_n$, and its cohomology comparison is $H^j(C)\\cong V_j:=\\prod_nH^j(P_n)$. By [def-weil-category-product], the maps from $B$ to $Q(C)$ and back induced by the two sets of projections are inverse: each composite has the original projections, hence is the identity. The resulting comparison $c_j:H^j(B)\\xrightarrow{\\sim}V_j$ therefore has components $H^j(\\operatorname{pr}_n)$. Let $S:C\\to C$ be the chain map with $n$th coordinate $t_n\\operatorname{pr}_{n+1}$. Comparing projections shows that $s$ corresponds to $Q(S)$, and $1-s$ corresponds to $Q(1-S)$. On cohomology, [def-weil-abstract-derived-category] computes $H^j(1-S)$ on cycles modulo boundaries: it sends $[x]$ to $[x]-[Sx]$. Thus $c_jH^j(1-s)c_j^{-1}=d_j:=1-T_j$, where the $n$th coordinate of $T_j$ is $H^j(t_n)$ after the $(n+1)$st projection. This identifies both the objects and the actual endomorphism for the supplied product.",
+   "text": "Apply det-pe-products-exact to the module-sheaf category for every countable discrete index. This supplies CountableAB4Star. The general exact-countable-products theorem lem-weil-derived-limit-products-core then says that each derived homology functor preserves countable products, including the particular supplied product B of Q(P_n). Its comparison map c_j from H^j(B) to the product of H^j(Q(P_n)) is therefore an isomorphism and has components H^j(pr_n). The natural isomorphism Q followed by derived homology with complex homology identifies each factor with H^j(P_n), and conjugates each transition H^j(Q(t_n)) to H^j(t_n). Compare projections and use additivity to get H^j(1-s) c_j = c_j (1-T_j). This proves the required actual-map identification directly, without constructing an extra termwise product model.",
    "uses": [
-    "det-pe-products-derived",
+    "det-pe-products-exact",
+    "lem-weil-derived-limit-products-core",
     "def-weil-category-product",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0947, proposition-enough-weakly-contractibles, (5)-(7), proof of (6) and (7)"
+    "place": "Tag 0947, proposition-enough-weakly-contractibles, (4)-(7); Tag 07KC for exact countable products and derived homology"
    }
   },
   {
@@ -52,7 +53,7 @@
    }
   },
   {
-   "text": "Apply the first assertion of [det-pe-milnor-epimorphic] to the tower $M_n=H^b(P_n)$ of $\\mathcal R$-module sheaves, with transitions $H^b(t_n)$. Its site and ring sheaf are exactly the ones fixed in the statement, and its epimorphy hypothesis is precisely the top-transition assumption. The change from indices $n\\geq1$ here to $n\\geq0$ there is the order isomorphism $n\\mapsto n+1$, which leaves the product coordinates and consecutive transitions unchanged. The conclusion is that $d_b=1-T_b:V_b\\to V_b$ is an epimorphism. This uses no epimorphy on the terms of the complexes or in other cohomological degrees.",
+   "text": "Transport the given epimorphy of H^b(t_n) along the natural isomorphisms from H^b(Q(P_n)) to H^b(P_n). Apply the first assertion of det-pe-milnor-epimorphic to the functor ofOpSequence formed from the tower H^b(Q(P_n)). Its successor arrows are precisely the transported top transitions. Thus 1-T_b on their product is epic. The comparison from Step 1 is an isomorphism and commutes with the actual transition endomorphisms; hence H^b(1-s) is epic on the supplied derived product. This uses no epimorphy of the terms of the complexes or in other degrees.",
    "uses": [
     "det-pe-milnor-epimorphic"
    ],
@@ -73,7 +74,8 @@
   }
  ],
  "proof_deps": [
-  "det-pe-products-derived",
+  "det-pe-products-exact",
+  "lem-weil-derived-limit-products-core",
   "def-weil-category-product",
   "def-weil-abstract-derived-category",
   "lem-sf-derived-homology-long-exact",
@@ -81,9 +83,10 @@
   "det-pe-milnor-epimorphic"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0947, proposition-enough-weakly-contractibles, (5)-(7), proof of (6) and (7)"
+  "place": "Tag 0947, proposition-enough-weakly-contractibles, (4)-(7), proof of (6) and (7)",
+  "note": "H5: apply the proved general countable-product preservation theorem directly to exact pro-etale products; retain the Roos long exact sequence and epimorphic-top boundary argument."
  },
  "mathlib_searches": [
   {
@@ -227,7 +230,6 @@
   ]
  },
  "tool_uses": [
-  "det-pe-products-derived",
   "det-pe-milnor-epimorphic"
  ],
  "reviewed": {
@@ -255,5 +257,15 @@
   "group": "N5",
   "result": "pass",
   "note": "Only change is the new module ProEtaleBoundedEpimorphicTopDerivedLimit plus the item's lean record; lean.statement is verbatim in the file; the proof is sorry only. Clause-by-clause match: X : Scheme.{t} on topology X; R as a RingCat.{max u (t+1)} sheaf plus sectionwise commutativity _hcomm, the same universe convention as products_derived and milnor_epimorphic; P : ℕ → CochainComplex with τ n : P(n+1) ⟶ P n (n ↦ n+1 indexing); IsDerivedLimit gives any Roos triangle with towerTransitionEndomorphism, so no cone model is chosen; the HasProduct instance is the product the node presupposes; _hP vanishing outside [a,b]; _htop Epi of homologyMap on H^b only, no Epi (τ n); conclusion is vanishing outside [a,b] including b+1. True by Stacks 0947 (5)-(7): Milnor sequence plus R^1lim of the epimorphic H^b tower = 0. Edge cases a=b, negative degrees, empty scheme, zero ring and zero tower are covered. Docstrings carry the source place, the blueprint id and all 5 proof steps; no hollow definition; no duplicate declaration found. The only citer, complete-residue-cohomology-bounds, can apply the theorem. Advisory: the sheafify instances come by public import of ProEtaleSurjectiveTowerDerivedLimit (a non-stmt_dep node), the same as det-pe-products-derived's module. Compile not reproduced per the 2026-10-21 instruction; the worker reports clean compiles."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261021T111151-L-30437",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
