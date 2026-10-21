@@ -7,13 +7,13 @@ module
 
 public import Sheaf.Paper.ContinuousIntegralCoefficients
 import Sheaf.Paper.IntegralConstructibleSheafHom
-import all WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import all Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 import all Sheaf.CategoryTheory.HomColimitExtension
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Category.Grp.Zero
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.CategoryTheory.Category.ULift
-import all Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+public import Sheaf.UpstreamExtra.WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! # Bounded-below sequential Hom continuity for integral constructible complexes -/
 
