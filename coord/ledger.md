@@ -20005,3 +20005,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:50 L: merged deliver/Q136/lem-sfb-ringed-complete-triangulated (reviewer FIX; first push; new nodes: 0)
 - 03:50 L: merged deliver/Q18/lem-sfb-subobject-inclusion-cokernel (reviewer PASS; first push; new nodes: 0)
 - 03:50 L: merged deliver/Q119/lem-sfb-finite-field-stratified-generation (reviewer FIX; first push; new nodes: 0)
+- 03:50 L: merged deliver/NN/lem-sbc-completed-operations-linear-natural-exchange (reviewer FIX; after a return; new nodes: 6)

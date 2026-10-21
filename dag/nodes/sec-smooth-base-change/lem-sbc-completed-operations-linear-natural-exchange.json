@@ -32,113 +32,122 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-l-adic-extension-integers-dvr] and [lem-weil-valued-dvr-finite-quotients], $A$ is Noetherian with finite quotients. The free resolution $[A\\xrightarrow{\\varpi^n}A]$ makes $P_n$ perfect; its finite additive group is torsion. Thus the adic datum applies. The coefficient isomorphisms of [lem-weil-pbc-profinite-coefficient-inverse-image] preserve scalars, quotients and composition.",
+   "text": "By [lem-weil-l-adic-extension-integers-dvr] and [lem-weil-valued-dvr-finite-quotients], $A$ is Noetherian and $P_n$ is finite torsion and perfect, using $[A\\xrightarrow{\\varpi^n}A]$. The coefficient isomorphisms preserve projections and composites [lem-weil-pbc-profinite-coefficient-inverse-image]. Products are exact [lem-weil-proetale-countable-products-exact]. Apply [lem-sbc-koszul-fibre-linear-descent] to the intrinsic model; complete objects are additive and completion is linear. Ordinary operations are linear by [lem-sbc-ambient-operations-scalar-linearity].",
    "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-valued-dvr-finite-quotients",
-    "def-pc-perfect-ring-complex",
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-profinite-coefficient-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N, lemma-pushforward-Noetherian-case, hypotheses"
-   }
-  },
-  {
-   "text": "Ordinary operations are linear by [lem-sbc-ambient-operations-scalar-linearity]. In the explicit Koszul completion $C_W$ [def-weil-pbc-intrinsic-completion], maps are products of $s\\otimes1$ followed by a two-summand fibre, so $C_W(as)=aC_W(s)$ and $C_W(s+t)=C_W(s)+C_W(t)$; these identities descend through linear localization [lem-weil-linear-abelian-derived-category]. The same model commutes with finite direct sums, so complete objects form an additive full subcategory.",
-   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-sbc-koszul-fibre-linear-descent",
     "lem-sbc-ambient-operations-scalar-linearity",
     "def-weil-pbc-intrinsic-completion",
-    "lem-weil-linear-abelian-derived-category"
+    "lem-weil-proetale-countable-products-exact"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/dga.tex",
-    "place": "Tag 09MK, definition-functor-linear-categories; explicit scalar calculation"
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, Koszul model"
    }
   },
   {
-   "text": "Direct image preserves completeness by [prop-weil-pbc-direct-image-limits]. Completed pullback is $P_u=C_UL_u$ with its completion unit [def-weil-pbc-completed-pullback]. The local completeness condition equals the intrinsic one [lem-weil-pbc-constant-completion-equivalence]. The reflector bijection [lem-weil-pbc-ringed-koszul-completion-reflector] composed with ordinary adjunction [def-weil-pbc-proetale-operations] gives $\\operatorname{Hom}(P_uM,N)=\\operatorname{Hom}(L_uM,N)=\\operatorname{Hom}(M,D_uN)$. Hence $P_u\\dashv D_u$, and both are linear by step 2.",
+   "text": "Direct image preserves completeness [prop-weil-pbc-direct-image-limits]. Completed pullback is ordinary pullback followed by Koszul completion, with its completion unit [def-weil-pbc-completed-pullback]. The Koszul reflector [lem-weil-pbc-ringed-koszul-completion-reflector], identified with intrinsic completion by [lem-weil-pbc-constant-completion-equivalence], and ordinary adjunction [def-weil-pbc-proetale-operations] satisfy [lem-sbc-reflector-adjunction-unit-formulas]. Thus $P_u=C_UL_u\\dashv D_u$ is linear, with its specified unit and counit.",
    "uses": [
     "prop-weil-pbc-direct-image-limits",
     "def-weil-pbc-completed-pullback",
     "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence",
     "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-sbc-reflector-adjunction-unit-formulas"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099K, lemma-pushforward-derived-complete-adjoint, Hom bijections"
+    "place": "Tag 099K, completed adjunction"
    }
   },
   {
-   "text": "The natural direct-image compositor [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] restricts to complete objects. The composite adjunction [def-weil-pbc-composite-adjunction] and uniqueness [lem-weil-pbc-conjugate-iso-unit-equation] give $P_vP_u\\cong P_{uv}$ with its unit normalization, hence the square comparison $\\theta$.",
+   "text": "Use direct-image composition [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and ordinary pullback composition [lem-weil-pbc-proetale-derived-pullback-composition]. Derived conjugacy is [lem-sfb-derived-composition-adjunction-normalization]. Their conjugates give $P_vP_u\\cong P_{uv}$; [lem-sbc-reflected-compositor-unit-normalization] identifies their completion-unit normalization. The two paths of the square therefore give the normalized $\\theta$.",
    "uses": [
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-sbc-reflected-compositor-unit-normalization",
+    "lem-sfb-derived-composition-adjunction-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N, lemma-pushforward-Noetherian-case (2); conjugate composition"
+    "place": "Tag 099N (2), composition"
    }
   },
   {
-   "text": "The mate [def-weil-pbc-adjunction-mate] is exactly the displayed $\\alpha$. Naturality of its counit, $\\theta$, and unit, successively, gives $D_hP_e(a)\\alpha_K=\\alpha_{K'}P_fD_g(a)$.",
+   "text": "The mate [def-weil-pbc-adjunction-mate] is the displayed $\\alpha$. Naturality of its three factors proves the stated equation. By [lem-sbc-reflector-square-mate-factorization] it is uniquely characterized by $\\alpha_K\\kappa_{L_fR_gK}=R_h(\\kappa_{L_eK})b_K$, where $b$ is the ambient mate.",
    "uses": [
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7, remark-base-change, unit-square-counit formula"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-ordered-exchange-coefficient-comparison] with its $(f,f',g,g')=(g,h,f,e)$, so its input corner is our $T$, its $x^a_K=(c^a)^{-1}\\mathcal L^a(v^a)s^a:P_fD_gK\\to D_hP_eK$, and $v^a=H'^a\\mathcal R^a(b)(H^a)^{-1}$ is the strict projection-formula realization of the ambient exchange $b$. Its completeness hypothesis (quotient reconstruction invertible) is our intrinsic one by [prop-weil-pbc-koszul-reconstruction], since $\\mathrm{comp}_K=c_K\\kappa_K$ with $c_K$ invertible. Put $\\bar K=\\operatorname{Res}_TK$, complete by [lem-weil-pbc-constant-completion-equivalence]. (a) Clause (1) gives $\\chi_u,\\phi_u$ carrying our units, counits and conjugate compositors (step 4) to the constant ones; inserting them in the three factors of $\\alpha_K$ gives $\\iota_T\\operatorname{Res}(\\alpha_K)=E^c_{\\bar K}\\iota_S$, where $\\iota_S,\\iota_T$ are the source and target composites of clause (3) and $E^c$ is the completed mate of [lem-sp-completion-mate-comparison]. (b) Clause (3) gives $\\iota_T\\operatorname{Res}(x^a_K)=(t^0)^{-1}\\mathcal L(E^{\\mathcal T}_{\\mathcal R\\bar K})s^0\\iota_S$, and [lem-sp-completion-mate-comparison] gives $t^0E^c_{\\bar K}=\\mathcal L(E^{\\mathcal T}_{\\mathcal R\\bar K})s^0$. Hence $\\operatorname{Res}(\\alpha_K)=\\operatorname{Res}(x^a_K)$. (c) Source and target are complete by step 3, and restriction is an equivalence on complete categories [lem-weil-pbc-constant-completion-equivalence], so $\\alpha_K=x^a_K$. By clause (2) and the last sentence of [lem-sp-completion-mate-comparison], the $n$-th evaluation of $v^a$ is the ordinary $P_n$-coefficient exchange, so $x^a_K$ is the completed exchange obtained from the finite-level exchanges. Equalities are of strict-tower morphisms; no geometric hypothesis or inverse exchange is used.",
-   "uses": [
-    "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-    "lem-sp-completion-mate-comparison",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "prop-weil-pbc-koszul-reconstruction"
+    "def-weil-pbc-adjunction-mate",
+    "lem-sbc-reflector-square-mate-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E48, remark-compatible-with-diagram; reuse of existing strict coefficient and completion mate theorems, same projection-formula route"
+    "place": "Tag 07A7, ordinary transpose"
+   }
+  },
+  {
+   "text": "Every edge $u$ has invertible coefficient map [lem-weil-pbc-profinite-coefficient-inverse-image], so [lem-sbc-unbounded-exact-adjunction-square] applies on the small diagram sites [lem-weil-pbc-diagram-site-realization]: constants and evaluations identify the ordinary derived units, counits and square mates with the termwise ones.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-sbc-unbounded-exact-adjunction-square",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0DVC and 08BJ, constants and evaluation"
+   }
+  },
+  {
+   "text": "$A_W$ is flat with $A_W/\\varpi^n=(P_n)_W$ [lem-weil-pbc-constant-completion-equivalence], so $[A_W\\xrightarrow{\\varpi^n}A_W]$ makes $Q_{W,n}=(P_n)_W$ perfect. Apply [lem-sbc-strict-quotient-exchange-unit-equation] with step 5: $\\gamma=c^{-1}R\\lim(v)s$ has finite evaluations the $P_n$ mates and $\\gamma\\,\\mathrm{comp}_M=R_h(\\mathrm{comp}_E)b$. By [prop-weil-pbc-koszul-reconstruction], $\\mathrm{comp}=\\rho\\kappa$ with $\\rho$ the natural Koszul/quotient isomorphism, so $\\tilde\\gamma=R_h(\\rho_E^{-1})\\gamma\\rho_M$ satisfies the equation of step 4; its source and target are $P_fD_gK$, $D_hP_eK$ with the specified identifications [def-weil-pbc-completed-pullback], [prop-weil-pbc-direct-image-limits]. Reflector uniqueness gives $\\alpha=\\tilde\\gamma$, without faithfulness of evaluations.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-sbc-strict-quotient-exchange-unit-equation",
+    "prop-weil-pbc-koszul-reconstruction",
+    "def-weil-pbc-completed-pullback",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, strict projection-formula and unit equation"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-valued-dvr-finite-quotients",
-  "def-pc-perfect-ring-complex",
-  "def-weil-pbc-adic-coefficient-datum",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-sbc-koszul-fibre-linear-descent",
   "lem-sbc-ambient-operations-scalar-linearity",
   "def-weil-pbc-intrinsic-completion",
-  "lem-weil-linear-abelian-derived-category",
+  "lem-weil-proetale-countable-products-exact",
   "prop-weil-pbc-direct-image-limits",
   "def-weil-pbc-completed-pullback",
   "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "def-weil-pbc-proetale-operations",
   "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-proetale-operations",
+  "lem-sbc-reflector-adjunction-unit-formulas",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-sbc-reflected-compositor-unit-normalization",
+  "lem-sfb-derived-composition-adjunction-normalization",
   "def-weil-pbc-adjunction-mate",
-  "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-  "lem-sp-completion-mate-comparison",
+  "lem-sbc-reflector-square-mate-factorization",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-sbc-unbounded-exact-adjunction-square",
+  "lem-sbc-strict-quotient-exchange-unit-equation",
   "prop-weil-pbc-koszul-reconstruction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099N, lemma-pushforward-Noetherian-case (1)-(5), and Tag 099K in algebraization.tex. October 21 finer repair: scalar computations and Hom-bijection assembly; existing ordered coefficient comparison and completion-mate comparison carry the original strict-tower projection-formula route."
+  "place": "Tag 099N (1)-(5), with Tags 099K, 0A0E, 0DVC, 07A7 and 0E48: six independent model/normalization lemmas extracted from the inherited argument; assembly only."
  },
  "mathlib_searches": [
   {
@@ -322,56 +331,60 @@
   "date": "2026-10-21",
   "item": "lem-sbc-completed-operations-linear-natural-exchange",
   "worker": "stage1",
-  "summary": "Dedicated repair of coord/returns/NM.md (head 100b8fa832869045abf34c00f31fca7b56574dfe): statement and Lean record unchanged. Replaced 19686 characters of inline proof by a short assembly, extracted the ordinary unbounded scalar-linearity prerequisite, and reused existing strict coefficient and completion-mate comparison nodes instead of duplicating them. New prerequisite is statement-only; its complete inherited argument is retained in report.md.",
-  "blueprint": "sbc-thm-e-coefficient-smooth-base-change: the central-localization sentence and independence of admissible lattice, steps 4-6 of its current split; this item supplies the integral linear functors and specified natural exchange before localization.",
+  "summary": "Human October 21 six-child re-split: statement and Lean metadata unchanged. Extracted six statement-only model and normalization arguments; retained the ordinary scalar-linearity child already live. The item is a short assembly, with all strict comparisons fixed before derived inverse limit. The report preserves the inherited arguments and maps old steps 1-16 to their new owners.",
+  "blueprint": "sbc-thm-e-coefficient-smooth-base-change, central localization sentence: integral functors and their natural exchange; old steps 1-16 distributed over six prerequisites before localization.",
   "tool_uses": [
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
    },
    {
     "node": "lem-weil-valued-dvr-finite-quotients",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
    },
    {
     "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
    },
    {
-    "node": "lem-weil-linear-abelian-derived-category",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
+    "node": "lem-sbc-ambient-operations-scalar-linearity",
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
    },
    {
     "node": "prop-weil-pbc-direct-image-limits",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
    },
    {
     "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
-   },
-   {
-    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
-   },
-   {
-    "node": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
-   },
-   {
-    "node": "lem-sp-completion-mate-comparison",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
    },
    {
     "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Generic coefficient, completion, adjunction or strict-diagram comparison tool on the unchanged projection-formula route; sk-rem-rest has no replacement for this statement."
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic coefficient, completion, unbounded adjunction or diagram-site tool on the unchanged integral projection-formula route; sk-rem-rest has no replacement statement."
    },
    {
     "node": "prop-weil-pbc-koszul-reconstruction",
-    "why": "Generic identification of Koszul (intrinsic) completeness with quotient-tower reconstruction, needed to apply the ordered coefficient comparison to the item's complete objects; sk-rem-rest has no replacement for this statement."
+    "why": "Generic Koszul/quotient reconstruction identification (comp = rho kappa) on the integral route; sk-rem-rest has no replacement statement."
    }
   ]
  },
@@ -404,15 +417,18 @@
   "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-ordered-exchange-coefficient-comparison",
   "lem-sp-completion-mate-comparison",
-  "prop-weil-pbc-koszul-reconstruction"
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-sbc-ambient-operations-scalar-linearity",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-sfb-derived-composition-adjunction-normalization"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NM-c66daa660",
-  "group": "NM",
+  "reviewer": "NT-cc-NN-d0a85934f",
+  "group": "NN",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-c66daa660 (reviewer sub-agent of L); spot-checked: Read in full: the human re-split note of 2026-10-21 (live coord/repair-notes and returns/NM.md §82), all 6 item steps, the new node, every cited statement, and Stacks 099N, 099K (algebraization), 09MK, 070I and 07A7/0E48. No SGA. The statement, stmt_deps and Lean record match the live node field by field. The proof is now 2645 characters (longest step 694 before my fix), with one new statement-only node, so the note is answered. Old steps 7-16 now cite the existing reviewed nodes lem-weil-pbc-ordered-exchange-coefficient-comparison and lem-sp-completion-mate-comparison. Their x^a_K = (c^a)^{-1} L^a(v^a) s^a is exactly the old strict projection-formula γ_K. The relabelling (f,f',g,g')=(g,h,f,e) is correct (fg'=gf' becomes ge=fh). Closure computation: neither these nodes nor any other cited node reaches the item. Step checks: 1 DVR/finite/perfect via [A -ϖ^n-> A]; 2 explicit Koszul product/fibre model plus Q linear; 3 completeness preservation, reflector bijection and local=Koszul completeness; 4 conjugate-iso-unit-equation with δ=κ gives the conjugate normalization the comparison nodes use; 5 the mate formula is literally α_K. New node lem-sbc-ambient-operations-scalar-linearity is true: exact pullback via lem-cbc-exact-linear-derived-functor; Ru_* via K-injective homotopy classes, also via the right-adjoint Yoneda argument; tested on the zero ring, a=0,1, u=id and non-injective A→Γ(R). It is strictly smaller than the item and B1-B9 are fine. No DAG or Mathlib duplicate: I checked lem-pur-ordinary-adjunction-scalar-compatibility, lem-per-arbitrary-field-adjunction-scalars, def-weil-proetale-module-direct-image and lem-weil-pbc-inverse-image-module-linear-criterion, and grepped Mathlib CategoryTheory/Adjunction and CategoryTheory/Linear. One fault (E5/C3), repaired in fixes/: step 6 concluded with 'substituting these comparisons' and never bridged the ordered node's completeness notion (quotient reconstruction invertible) to the item's Koszul completeness. It is rewritten with the explicit chain: Res(α_K)=ι_T^{-1}E^c ι_S by clause (1); Res(x^a_K)=ι_T^{-1}E^c ι_S by clause (3) and t^0 E^c = L(E^T)s^0; Res is fully faithful on complete objects, so α_K = x^a_K. It also identifies the finite evaluations of v^a as P_n mates (clause (2) and the last sentence of lem-sp). It cites prop-weil-pbc-koszul-reconstruction (comp_K = c_K κ_K), which is acyclic and added to proof_deps and split_report.tool_uses. Accepted tool_uses: the 11 declared generic coefficient/completion/adjunction tools plus prop-weil-pbc-koszul-reconstruction.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-d0a85934f (reviewer sub-agent of L); spot-checked: Read the whole item and all six new nodes, every cited statement, Stacks 099K/099N/0A0E/0DVC/0FND/070I/08BJ/0E48/0944/07A7 and the main-20261015 ancestor. No SGA is cited. NN is built on the landed NM split (c66daa660, 6 steps, only 1 new node against the human note's ≥6). Statement, stmt_deps and the Lean record are byte-identical to side-live. The note is answered after the fix: 6 new statement-only nodes and a 2990-character assembly. I re-derived the main identities: the two-path θ^c unit equation from the compositor node, the transpose of the factorization equation (κ naturality and ε^c κ = ε), the compositor transposes (both sides equal d η^c_02), the Koszul fibre homotopy (x,y) ↦ (Hx,−Hy), and the strict coaugmentation equation. Small cases tested: r=0, identity reflector, Q=ΔO, Q=0, n=1. All new statements are true. Three faults, all repaired in fixes/. (1) C5: lem-sbc-unbounded-exact-adjunction-square duplicated the existing lem-kun-derived-adjoint-square-comparison: same adjunct hypothesis and conclusion under E=W, F=V; the only extras, invertibility and representation by ρ_J, take two lines. The Q25 reviewer had already dropped the same duplicate. Dropping it would leave 5 of the 6 nodes the note demands, so I restated it under the same id as the non-duplicate application of old steps 8–10: ev_1 ⊣ Δ (1 is terminal in N≥1^op); Δ and ev_n are exact and keep K-injectives; b^Δ and b^n are represented by identities; derived adjuncts and mates are preserved. Its proof will be kun applied twice. Stmt_deps, source and blueprint place are updated, and item step 5 is rewritten. (2) C1/E5: step 6 silently identified the strict node's quotient coaugmentation with the Koszul reflector unit, and perfectness of (P_n)_W over A_W was uncited. I restored NM's earlier bridge, prop-weil-pbc-koszul-reconstruction (comp=ρκ, γ̃=R_h(ρ_E^{-1})γρ_M), and cited constant-completion-equivalence (A_W flat, A_W/ϖ^n=(P_n)_W). (3) C1: step 2 stated P_u=C_UL_u without def-weil-pbc-completed-pullback; added. proof_deps is now the union of the step uses. split_report.tool_uses drops four ids the item no longer cites and adds koszul-reconstruction. The graph is acyclic. Accepted tool_uses: 13 generic coefficient, completion, adjunction and diagram-site tools, all listed in review.md. Advisory: the strict node overlaps the proof content of lem-sp-completion-mate-comparison.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
