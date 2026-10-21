@@ -23023,3 +23023,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:19 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 16:19 L: merged deliver/NJ/lem-sfb-supported-finite-stage-topology-defect (reviewer FIX; first push; new nodes: 2)
 - 16:19 L: merged deliver/Q21/lem-sf-open-exchange-roos-restriction (stage 2; reviewer PASS; parallel immutable checks)
+- 16:21 L: returned deliver/K9/Sheaf.Paper.OrderedExchangeCoefficientComparison (reviewer RETURN: (the landing tools, head 9734b5470) the delivery did not land: (d) user Sheaf.Paper.IntegralPullbackStrictRoosNormalizat)
