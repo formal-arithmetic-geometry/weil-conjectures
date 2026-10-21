@@ -20878,3 +20878,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/Q58/lem-trf-finite-ring-section-deformation (reviewer PASS; after a return; new nodes: 8)
 - 08:07 L: merged deliver/Q38/lem-sfb-internal-tensor-composition-unit-normalization (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q122/def-wf-constant-weil-twist (reviewer FIX; first push; new nodes: 0)
+- 08:07 L: merged deliver/N7/lem-pur-etale-open-scalar-exchange (reviewer PASS; first push; new nodes: 0)

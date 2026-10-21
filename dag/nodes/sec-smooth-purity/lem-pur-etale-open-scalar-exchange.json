@@ -21,9 +21,92 @@
   "def-pc-fibre-product",
   "lem-cbc-extension-zero-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L_R=j_{!,R}$, $J_R=j_R^*$, $L'_R=j'_{!,R}$, $J'_R=j_R'^*$, $G_R=g_R^*$ and $H_R=h_R^*$. Put $Q=Q_T$, $Q'=Q_{T'}$, $S=Q_U$, $S'=Q_{U'}$, $i=\\beta_j^{-1}$, $i'=\\beta_{j'}^{-1}$ and $d_R=e_R^{-1}$. Let $c_R:H_RJ_R\\xrightarrow{\\sim}J'_RG_R$ be the canonical square comparison. More explicitly, if $a_{v,u}:(vu)_R^*\\cong u_R^*v_R^*$, then $c_R=a_{g,j'}a_{j,h}^{-1}$, using $jh=gj'$. The open tensor lemma supplies the adjunctions on the whole derived categories and the balancing isomorphisms. The prescribed transpose normalizations give\n$$J_B(i_M)\\eta_{B,SM}=\\lambda_{j,L_AM}^{-1}S(\\eta_{A,M}),\\qquad\nJ'_B(i'_V)\\eta'_{B,S'V}=\\lambda_{j',L'_AV}^{-1}S'(\\eta'_{A,V}),$$\n$$J'_R(d_{R,M})\\eta'_{R,H_RM}=c_{R,L_RM}H_R(\\eta_{R,M}).$$\nHere $V\\in D_A(U')$, and juxtaposition composes right to left. The last identity is precisely the unit formula for the inverse base-change mate; its degreewise version descends with the normalized exact open adjunction. These identities specify the actual maps, without claiming that pullback alone detects equality.",
+   "uses": [
+    "lem-coef-etale-open-tensor",
+    "def-pur-open-coefficient-normalizations",
+    "lem-cbc-extension-zero-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change; explicit coefficient/unit calculation for the specified inverse open mate, written by N7."
+   }
+  },
+  {
+   "text": "Apply scalar/pullback composition coherence to $(j,h)$ and to $(g,j')$, for an arbitrary $N\\in D_A(T)$. Both composite scheme maps equal $k=jh=gj'$. For either pair $(v,u)$, that coherence says\n$$\\lambda_{u,v_A^*N}\\,u_B^*(\\lambda_{v,N})\\,a_{v,u,B,QN}=Q_{\\mathrm{source}(u)}(a_{v,u,A,N})\\lambda_{k,N}.$$\nSubstitute the two pairs and eliminate the common $\\lambda_{k,N}$. With $c_R=a_{g,j'}a_{j,h}^{-1}$, this gives\n$$\\lambda_{j',G_AN}J'_B(\\lambda_{g,N})c_{B,QN}=S'(c_{A,N})\\lambda_{h,J_AN}H_B(\\lambda_{j,N}).$$\nMultiply by the inverse scalar comparisons, to obtain the form needed below:\n$$J'_B(\\lambda_{g,N}^{-1})\\lambda_{j',G_AN}^{-1}S'(c_{A,N})=c_{B,QN}H_B(\\lambda_{j,N}^{-1})\\lambda_{h,J_AN}^{-1}.\\tag{*}$$\nAll the cited comparisons are the canonical exact-pullback transports of the K-flat comparisons used in the statement. The composition theorem explicitly allows arbitrary unbounded objects and arbitrary coefficient ring maps.",
+   "uses": [
+    "lem-sf-scalar-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change; explicit coefficient/unit calculation for the specified inverse open mate, written by N7."
+   }
+  },
+  {
+   "text": "Fix $M\\in D_A(U)$. The inverses of the two isomorphisms in the asserted equation are the following maps from $L'_BS'H_AM$ to $G_BQL_AM$:\n$$x=G_B(i_M)d_{B,SM}L'_B(\\lambda_{h,M}^{-1}),\\qquad\ny=\\lambda_{g,L_AM}^{-1}Q'(d_{A,M})i'_{H_AM}.$$\nThese formulas follow just by reversing the order of each composite and replacing its factors by their inverses. Under $L'_B\\dashv J'_B$, the transpose of a map $z:L'_BS'H_AM\\to G_BQL_AM$ is $z^\\flat=J'_B(z)\\eta'_{B,S'H_AM}$. It therefore suffices to show $x^\\flat=y^\\flat$.",
+   "uses": [
+    "lem-coef-etale-open-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change; explicit coefficient/unit calculation for the specified inverse open mate, written by N7."
+   }
+  },
+  {
+   "text": "Compute $x^\\flat$. Naturality of $\\eta'_B$ moves $L'_B(\\lambda_h^{-1})$ across the unit, and the unit formula for $d_B$ from step 1 then gives\n$$x^\\flat=J'_BG_B(i_M)c_{B,L_BSM}H_B(\\eta_{B,SM})\\lambda_{h,M}^{-1}.$$\nNaturality of $c_B$ at $i_M$ and then the first identity of step 1 give\n$$x^\\flat=c_{B,QL_AM}H_B(\\lambda_{j,L_AM}^{-1})H_BS(\\eta_{A,M})\\lambda_{h,M}^{-1}.$$\nFinally, naturality of $\\lambda_h^{-1}:S'H_A\\to H_BS$ at $\\eta_{A,M}:M\\to J_AL_AM$ yields\n$$x^\\flat=c_{B,QL_AM}H_B(\\lambda_{j,L_AM}^{-1})\\lambda_{h,J_AL_AM}^{-1}S'H_A(\\eta_{A,M}).\\tag{1}$$\nEach equality is substitution of a specified transpose formula or naturality of a specified natural transformation.",
+   "uses": [
+    "lem-coef-etale-open-tensor",
+    "def-pur-open-coefficient-normalizations",
+    "lem-cbc-extension-zero-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change; explicit coefficient/unit calculation for the specified inverse open mate, written by N7."
+   }
+  },
+  {
+   "text": "For $y$, insert the transpose formula for $i'$:\n$$y^\\flat=J'_B(\\lambda_{g,L_AM}^{-1})J'_BQ'(d_{A,M})\\lambda_{j',L'_AH_AM}^{-1}S'(\\eta'_{A,H_AM}).$$\nNaturality of $\\lambda_{j'}^{-1}:S'J'_A\\to J'_BQ'$ at $d_{A,M}:L'_AH_AM\\to G_AL_AM$ rewrites the last three factors as $\\lambda_{j',G_AL_AM}^{-1}S'(J'_A(d_{A,M})\\eta'_{A,H_AM})$. The unit formula for $d_A$ from step 1 thus gives\n$$y^\\flat=J'_B(\\lambda_{g,L_AM}^{-1})\\lambda_{j',G_AL_AM}^{-1}S'(c_{A,L_AM})S'H_A(\\eta_{A,M}).\\tag{2}$$\nThis uses only the two unit normalizations and naturality, and never assumes that $Q'$ is exact on sheaves.",
+   "uses": [
+    "lem-coef-etale-open-tensor",
+    "def-pur-open-coefficient-normalizations",
+    "lem-cbc-extension-zero-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change; explicit coefficient/unit calculation for the specified inverse open mate, written by N7."
+   }
+  },
+  {
+   "text": "Use $(*)$ at $N=L_AM$ and precompose it with $S'H_A(\\eta_{A,M})$. Equations (1) and (2) are then identical, so $x^\\flat=y^\\flat$. Injectivity of the adjunction Hom bijection gives $x=y$; taking inverses proves the required equation. Every factor and every equality used is natural in $M$, hence the equality is one of natural transformations. The calculation takes place entirely in the ordinary unbounded derived categories furnished by the cited open tensor lemma and scalar-composition theorem. Thus no restriction on cohomological degrees, no flatness of $B$ over $A$, and no quasi-compactness of $j$ or $g$ is introduced.",
+   "uses": [
+    "lem-coef-etale-open-tensor",
+    "lem-sf-scalar-pullback-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6, lemma-shriek-base-change; explicit coefficient/unit calculation for the specified inverse open mate, written by N7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-open-coefficient-normalizations",
+  "lem-cbc-extension-zero-base-change",
+  "lem-coef-etale-open-tensor",
+  "lem-sf-scalar-pullback-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S6, lemma-shriek-base-change; explicit coefficient/unit calculation for the specified inverse open mate, written by N7."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +142,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.baseChange_smul\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": (r • f).baseChange A = r • f.baseChange A\", \"doc\": \"For any scalar $ r $ and $ R $-linear map $ f : M \\\\to N $, the base change of the scalar multiple $ r \\\\bullet f $ with respect to an $ R $-algebra $ A $ satisfies $ \\\\text{baseChange}_A(r \\\\bullet f) = \"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] : Etale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"Algebra.Extension.baseChange\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"{T} [CommRing T] [Algebra R T] (P : Extension R S) : Extension T (T ⊗[R] S)\", \"doc\": \"Let $R, S, T$ be commutative rings, such that $S$ and $T$ are $R$-algebras. Given an algebra extension $P$ of $S$ over $R$, which is represented by a surjective $R$-algebra homomorphism $\\\\pi : P_0 \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"KaehlerDifferential.map_liftBaseChange_smul\", \"module\": \"Mathlib.RingTheory.Kaehler.TensorProduct\", \"type\": \"[h : Algebra.IsPushout R S A B] (b : B) (x) :\\n  ((map R S A B).restrictScalars R).liftBaseChange S (b • x) = b • ((map R S A B).restrictScalars R).liftBaseChange S x\", \"doc\": \"Given commutative semirings $ R, S, A, B $ with compatible algebra structures and a pushout algebra $ B $, the liftBaseChange operation on the $ S $-module of Kähler differentials $ \\\\Omega_{A/R} $ com\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": IsStableUnderBaseChange Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"LinearMap.baseChange_zero\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Tower\", \"type\": \": baseChange A (0 : M →ₗ[R] N) = 0\", \"doc\": \"The base change of the zero linear map $ 0 : M \\\\to N $ induces the zero linear map $ 0 : A \\\\otimes_R M \\\\to A \\\\otimes_R N $, where $ A $ is an $ R $-algebra and $ M, N $ are $ R $-modules.\"}\n  {\"name\": \"KaehlerDifferential.mapBaseChange.congr_simp\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (A : Type u_2) (B : Type u_3) [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra A B] [inst_5 : Algebra R B] [inst_6 : IsScalarTower R A B],\\n  KaehlerDifferential.mapBaseChange R A B = KaehlerDifferential.mapBaseChange R A B\", \"doc\": \"Given commutative rings $R$, $A$, and $B$ with $A$ an $R$-algebra, $B$ an $A$-algebra, and $B$ an $R$-algebra via the scalar tower $R \\\\to A \\\\to B$, there exists a $B$-linear isomorphism $\\\\Omega_{A/R} \"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary modules, scheme structure-sheaf modules, or generic mates; none states this normalized unbounded small-etale coefficient identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the open immersion extension by zero base change comparison under derived change of coefficient rings",
+   "results": "msearch: 8 hits; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ordinary adjunction, sheaf/presheaf pullback, structure-sheaf open immersion, or algebraic etale base-change results; none states the specified derived coefficient/open base-change equation."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "msearch: 12 hits; CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit; read Mathlib/CategoryTheory/Adjunction/Basic.lean:160--172, ordinary adjunction Hom equivalence only.",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ordinary adjunction, sheaf/presheaf pullback, structure-sheaf open immersion, or algebraic etale base-change results; none states the specified derived coefficient/open base-change equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero open base change commutes with derived extension of scalars on etale sheaves",
+   "results": "msearch: 8 hits; KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, Algebra.FormallyEtale.of_restrictScalars, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ordinary adjunction, sheaf/presheaf pullback, structure-sheaf open immersion, or algebraic etale base-change results; none states the specified derived coefficient/open base-change equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pasting natural transformations through adjunctions using units and coherent pullback scalar extension",
+   "results": "msearch: 8 hits; PresheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.ExponentiableMorphism.unit_pushforwardComp_hom, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CategoryTheory.ExponentiableMorphism.coev_ev, PresheafOfModules.pullbackPushforwardAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ordinary adjunction, sheaf/presheaf pullback, structure-sheaf open immersion, or algebraic etale base-change results; none states the specified derived coefficient/open base-change equation."
+  },
+  {
+   "tool": "grep",
+   "query": "def homEquiv|theorem homEquiv_apply|lemma homEquiv_apply",
+   "results": "msearch: 3 hits; Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: these are ordinary adjunction, sheaf/presheaf pullback, structure-sheaf open immersion, or algebraic etale base-change results; none states the specified derived coefficient/open base-change equation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-etale-compact-scalar-coherence",
@@ -74,12 +192,41 @@
  "blueprint": {
   "from": {
    "node": "cor-pur-vector-bundle-purity",
-   "place": "proof, paragraph 2: the explicit projective-line trace commutes with coefficient reduction, and composition of its adjunctions gives the corresponding compatibilities for affine space; the scalar/projection and scalar/composition identifications needed before transposing; extracted old scalar coherence step 12, open restriction exchange",
+   "place": "proof, paragraph 2: \"The explicit projective-line trace ... commute[s] with coefficient reduction and base change, and composition of their adjunctions gives the corresponding compatibilities for affine space\"; the open base-change factor of coefficient compatibility in the extracted compact-support scalar coherence.",
    "via": [
     "lem-pur-etale-compact-scalar-coherence"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-etale-open-scalar-exchange",
+  "worker": "stage1",
+  "summary": "N7 writes both inverse composites and computes their open-adjunction transposes explicitly. The scalar pullback square is derived from the existing unbounded composition coherence theorem for the two equal composites jh and gj′. No new node, statement change, or Lean attachment.",
+  "blueprint": "Realizes cor-pur-vector-bundle-purity.proof.md, paragraph 2, coefficient reduction and base-change compatibility for the open factor. Steps 1 and 3 fix the specified inverse maps; step 2 derives scalar square coherence; steps 4--6 compare their actual unit transposes.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-etale-open-tensor",
+    "why": "Generic unbounded ordinary etale open tensor and normalized derived adjunction tool, already required by the item; no replacement of the vector-bundle purity route."
+   },
+   {
+    "node": "lem-sf-scalar-pullback-composition",
+    "why": "Generic scalar/pullback composition coherence on the entire ordinary etale derived category; apply it twice to the equal composites jh=gj′. The model-purity unit has no such general inverse-image coherence theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-etale-open-tensor",
+  "lem-sf-scalar-pullback-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N7-25a9296d1",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-25a9296d1 (reviewer sub-agent of L); spot-checked: Read the item, all 6 steps and every cited statement (lem-coef-etale-open-tensor, def-pur-open-coefficient-normalizations, lem-cbc-extension-zero-base-change, lem-sf-scalar-pullback-composition, plus the λ sources ringed-topoi tensor-pullback and pur-etale-scalar-mate-projection), Stacks 03S6 (etale-cohomology.tex l.11493, lemma-shriek-base-change) and blueprint main-20261015 cor-pur-vector-bundle-purity proof paragraph 2. The delivery has no new nodes, and statement and stmt_deps are unchanged against live. Step-by-step: I re-derived step 2 by hand (eliminate λ_k, right-multiply by a_{j,h,B}^{-1}, invert) with c=a_{g,j'}a_{j,h}^{-1}; (*) is correct and both sides go S'H_AJ_AN→J'_BG_BQN. Steps 4 and 5 use the unit formulas of step 1 and naturality of η'_B, c_B, λ_h^{-1} at η_{A,M} and λ_{j'}^{-1} at d_{A,M}; every composite is typed and correct. Step 6: (*) at N=L_AM, precomposed with S'H_A(η_{A,M}), equates (1) and (2), and the adjunction bijection gives x=y. The cbc unit formula is degreewise for finite rings and descends because the derived adjunction is degreewise-normalized (stated in the open tensor node). Route: cbc is on the sk-prop-an route; I accept the two tool_uses (open tensor, scalar composition) as generic coherence tools. No cycle: none of the four proof_deps reaches the item. Edge cases: U empty, g=id, non-flat Z/4→Z/2, unbounded and non-quasi-compact. Not duplicates: lem-fix-open-scalar-exchange (pro-étale), coef-etale-open-scalar-coherence, sp-open-scalar-site-coherence, cbc-finite-open-exchange-scalars and sfb-open-scalar-conjugate-normalization each state something else. The item is unsplit in live and side-live, so it is not superseded, and there is no re-split note. No fixes."
  }
 }
