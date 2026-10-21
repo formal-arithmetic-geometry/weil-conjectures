@@ -3,34 +3,157 @@
  "blueprint": {
   "is": "sk-d-real-weil",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Weil sheaves and their representations",
- "statement": "Choose a geometric base point on the curve $C$.\nLet $P=\\pi_1(C)$ be its profinite etale fundamental group, defined by\nthe fiber functor on finite etale covers. The Weil group $W(C_0)$ is the\ninverse image of the integer powers of geometric Frobenius in\n$\\pi_1(C_0)\\to\\Gal(k/\\Fq)$. It has an exact degree sequence\n\n$$\n1\\longrightarrow P\\longrightarrow W(C_0)\n\\xrightarrow{\\deg}\\mathbf Z\\longrightarrow0.\n$$\n\nA representation $\\rho:W(C_0)\\to\\GL(V)$ on a $\\Qlb$-vector space $V$ is\nlisse if its restriction to $P$ is continuous, i.e. in every basis of\n$V$ the matrix coefficients of $\\rho|_P$ are continuous functions on $P$\nfor the $\\ell$-adic topology of $\\Qlb$. A lisse Weil $\\Qlb$-sheaf is\nequivalently a finite-dimensional lisse representation of $W(C_0)$; for\nfinite-dimensional $V$ this amounts to a finite coefficient field\n$E/\\Ql$ and an $E$-model whose restriction to $P$ is continuous and\npreserves an $\\mathcal O_E$-lattice. The quotient $\\mathbf Z$ is\ndiscrete. Choose a degree-one lift $\\gamma$ and write $F=\\rho(\\gamma)$.\nFor a closed point $x$, the local Frobenius $F_x$ is the geometric\nFrobenius at $x$: the image in $W(C_0)$ of the geometric Frobenius\nelement of a decomposition group $D_x\\subset\\pi_1(C_0)$ at $x$, i.e. of\nthe image of the geometric Frobenius of $\\Gal(\\overline{k(x)}/k(x))$\nunder $\\pi_1(x)\\to\\pi_1(C_0)$ for a chosen path from a geometric point\nover $x$ to the base point. It has degree $e_x$, and it is well defined\nup to conjugacy in $W(C_0)$.\nA constructible Weil sheaf is lisse of finite rank on each stratum of a\nfinite stratification into locally closed subschemes.",
+ "statement": "Use the curve $C_0$ and geometric fibre $C$ of [sk-d-real-setup]. Choose a geometric base point on $C$, and use the fibre functor of [def-galois-fibre-functor].\nLet $P=\\pi_1(C)$ be its profinite etale fundamental group, defined by\nthe fiber functor on finite etale covers. The Weil group $W(C_0)$ is the\ninverse image, as in [def-wf-weil-group], of the integer powers of geometric Frobenius in\n$\\pi_1(C_0)\\to\\Gal(k/\\Fq)$. It has an exact degree sequence\n\n$$\n1\\longrightarrow P\\longrightarrow W(C_0)\n\\xrightarrow{\\deg}\\mathbf Z\\longrightarrow0.\n$$\n\nGive $W(C_0)=\\pi_1(C_0)\\times_{\\operatorname{Gal}(k/k_0)}\\mathbf Z$ the topology induced from $\\pi_1(C_0)\\times\\mathbf Z$, with $\\mathbf Z$ discrete; thus $P$ is open and has its profinite topology, as in [def-wf-fundamental-representation]. Here $\\operatorname{GL}(V)$ is the group of invertible linear maps of $V$.\n\nA representation $\\rho:W(C_0)\\to\\GL(V)$ on a $\\Qlb$-vector space $V$ is\nlisse if its restriction to $P$ is continuous, i.e. in every basis of\n$V$ the matrix coefficients of $\\rho|_P$ are continuous functions on $P$\nfor the $\\ell$-adic topology of $\\Qlb$. A lisse Weil $\\Qlb$-sheaf means a lisse adic sheaf $\\mathcal F$ on $C$ in [def-pod-lisse-l-adic-sheaves], together with an isomorphism $\\Phi_C^*\\mathcal F\\xrightarrow{\\sim}\\mathcal F$, where $\\Phi_C=\\operatorname{id}_{C_0}\\times\\operatorname{Spec}(z\\mapsto z^{1/q})$ and the lisse adic pullback is that of [def-wf-fundamental-representation]. Its Weil fundamental representation is the stalk representation constructed there. It is\nequivalently a finite-dimensional lisse representation of $W(C_0)$; for\nfinite-dimensional $V$ this amounts to a finite coefficient field\n$E/\\Ql$ and an $E$-model whose restriction to $P$ is continuous and\npreserves an $\\mathcal O_E$-lattice. Here $E/\\mathbf Q_\\ell$ and $\\mathcal O_E$ have the meaning of [def-weil-l-adic-coefficient-extension], and a lattice is a free $\\mathcal O_E$-submodule of rank $\\dim_E V_E$ spanning $V_E$. The lattice is required to be invariant under $P$; the degree-one operator need not preserve it. The quotient $\\mathbf Z$ is\ndiscrete. Choose a degree-one lift $\\gamma$ and write $F=\\rho(\\gamma)$.\nFor a closed point $x$, the local Frobenius $F_x$ is the geometric\nFrobenius at $x$: the image in $W(C_0)$ of the geometric Frobenius\nelement of a decomposition group $D_x\\subset\\pi_1(C_0)$ at $x$, i.e. of\nthe image of the geometric Frobenius of $\\Gal(\\overline{k(x)}/k(x))$\nunder $\\pi_1(x)\\to\\pi_1(C_0)$ for a chosen path from a geometric point\nover $x$ to the base point. It has degree $e_x$, and it is well defined\nup to conjugacy in $W(C_0)$.\nA constructible Weil sheaf is a globally defined adic sheaf on $C$ with an isomorphism $\\Phi_C^*\\mathcal F\\xrightarrow{\\sim}\\mathcal F$, whose restriction is lisse of finite rank on the geometric fibres of the strata of a finite stratification of $C_0$ into locally closed subschemes [def-constructible-stratification]. The coefficient convention is the constructible version of the adic construction: compatible systems of constructible $\\mathcal O_E/\\varpi_E^n$-module sheaves [def-weil-pbc-etale-constructible-sheaf] with reduction isomorphisms, rationalized by killing uniformizer-torsion and inverting $\\varpi_E$, and then the common finite-field-of-coefficients construction of [def-pod-lisse-l-adic-sheaves]. The sheaf and its Weil isomorphism are global data, not independent sheaves on the strata.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-weil/_section.md",
   "place": "node sk-d-real-weil, order 2921"
  },
  "stmt_deps": [
-  "sk-d-real-setup"
+  "sk-d-real-setup",
+  "def-galois-fibre-functor",
+  "def-wf-weil-group",
+  "def-wf-fundamental-representation",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-l-adic-coefficient-extension",
+  "def-constructible-stratification",
+  "def-weil-pbc-etale-constructible-sheaf"
  ],
  "proof": [
   {
-   "text": "The local Frobenius $F_x$ is well defined up to conjugacy in $W(C_0)$.\nChanging the path conjugates it by some $g\\in\\pi_1(C_0)$, and this is\nalready a conjugation inside $W(C_0)$: identify $\\Gal(k/\\Fq)$ with\n$\\widehat{\\mathbf Z}$ by sending geometric Frobenius to $1$, so that\n$\\deg$ extends to $\\pi_1(C_0)\\to\\widehat{\\mathbf Z}$ with\n$W(C_0)=\\deg^{-1}(\\mathbf Z)$. Since\n$\\widehat{\\mathbf Z}=\\mathbf Z+e_x\\widehat{\\mathbf Z}$, write\n$\\deg g=n+e_xt$ with $n\\in\\mathbf Z$ and $t\\in\\widehat{\\mathbf Z}$, and\nlet $F_x^t$ be the image of the $t$-th power of geometric Frobenius in\nthe procyclic group $\\Gal(\\overline{k(x)}/k(x))\\simeq\\widehat{\\mathbf Z}$;\nit has degree $e_xt$ and commutes with $F_x$. Then $w=gF_x^{-t}$ has\ndegree $n$, so $w\\in W(C_0)$, and\n$gF_xg^{-1}=wF_x^{t}F_xF_x^{-t}w^{-1}=wF_xw^{-1}$. Hence conjugacy in\n$\\pi_1(C_0)$ and in $W(C_0)$ agree on $F_x$, and $F_x$ is well defined\nup to conjugacy in $W(C_0)$.",
-   "uses": [],
-   "elementary": null
+   "text": "Apply [lem-wf-arithmetic-lift-fibre-path] to the geometrically connected curve $C_0/k_0$ and its geometric fibre, obtaining the exact profinite sequence $1\\to P\\to G:=\\pi_1(C_0)\\xrightarrow r\\operatorname{Gal}(k/k_0)\\to1$. Finite fields are perfect: Frobenius is injective and therefore surjective on each finite extension. The curve is separated and of finite type and $C$ is connected by [sk-d-real-setup], so the hypotheses of the cited sequence hold. Its fibre product with $n\\mapsto\\gamma_k^n$, where $\\gamma_k:z\\mapsto z^{1/q}$, is precisely the Weil group. The second projection is surjective by surjectivity of $r$, its zero fibre is $P$, and an element mapping to $\\gamma_k$ has degree one. The product topology with discrete $\\mathbf Z$ makes every degree fibre open and identifies the zero fibre topologically with $P$, exactly as recorded in [def-wf-fundamental-representation]. This proves the degree-sequence assertion and permits choosing $\\gamma$.",
+   "uses": [
+    "lem-wf-arithmetic-lift-fibre-path",
+    "sk-d-real-setup",
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10)(ii), p. 151, topology p. 152, and (1.1.13.1), p. 153"
+   }
+  },
+  {
+   "text": "Fix a basis $b$ of finite-dimensional $V$. Apply [lem-galois-aut-profinite] to the finite-etale fibre functor (a small skeleton suffices): $P$ is compact. The matrix homomorphism $g\\mapsto[\\rho(g)]_b$ on $P$ has continuous entries by lissity. Apply [lem-real-compact-matrix-coefficient-descent] to obtain a finite coefficient field $E_0$ containing all these entries. Enlarge $E_0$ by the finitely many entries of $F=\\rho(\\gamma)$ and $F^{-1}$; the resulting $E$ is still finite over $\\mathbf Q_\\ell$, since each entry is algebraic. The $E$-span $V_E$ of $b$ is stable under $P$, $F$, and $F^{-1}$. Since every $w\\in W$ equals $(w\\gamma^{-\\deg w})\\gamma^{\\deg w}$ with the first factor in $P$, $V_E$ is stable under all of $W$. The restricted action is jointly continuous: its coordinates are finite sums of products of the continuous matrix entries and the coordinates of the vector, and $E$ has its subspace $\\ell$-adic topology.",
+   "uses": [
+    "lem-galois-aut-profinite",
+    "lem-real-compact-matrix-coefficient-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3; proof of Proposition 1.1.12, pp. 4-5 (adjoin the degree-one matrix entries)"
+   }
+  },
+  {
+   "text": "Apply [lem-pod-profinite-stable-lattice] to the compact group $P$ and its continuous action on $V_E$. It gives a full free $\\mathcal O_E$-lattice stable under $P$, with the stated rank and adic continuity. Conversely, if such a continuous $E$-model exists, its matrix entries are continuous as $\\Qlb$-valued functions in an $E$-basis. For any other $\\Qlb$-basis, the new matrix is $B^{-1}A(g)B$, whose entries are finite sums of fixed scalars times entries of $A(g)$, so continuity holds in every basis. This proves the finite-model criterion without requiring $F$ to preserve the lattice.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second bullet, p. 3; Proposition 1.1.11 and the adjoining-matrix argument pp. 4-5"
+   }
+  },
+  {
+   "text": "The definition of the lisse Weil pair is the one used in [def-wf-fundamental-representation]: a lisse adic sheaf with an isomorphism $\\Phi_C^*\\mathcal F\\xrightarrow{\\sim}\\mathcal F$, whose stalk representation extends geometric monodromy by the degree-one operator. The operator denoted $F$ is, by definition, $\\rho(\\gamma)$. The sentence that this stalk functor identifies lisse Weil sheaves with finite-dimensional lisse representations of $W(C_0)$ is a claim inside this definition, and it is not proved here: it is the statement of the theorem node prop-wf-weil-sheaf-representation-equivalence, whose statement and proof use the present definition (its degree normalization), so that node is a pointer of this definition and not a dependency (a definition does not cite a lemma about itself; citing it would close a cycle). By steps 2 and 3, the representations named there (finite-dimensional, with a finite-coefficient model continuous on $P$) are exactly the lisse representations of this statement, so the two descriptions of the representation side agree. The constructible clause is a definition: impose the same lisse finite-rank condition on a finite locally closed stratification, retaining a single global adic sheaf and a single global Weil isomorphism. It makes no assertion that a choice of sheaves on the strata alone glues.",
+   "uses": [
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.1), pp. 146-147; (1.1.10)(i), p. 151; (1.1.12), p. 152; also L19 Definition 1.1.7 and Proposition 1.1.11"
+   }
+  },
+  {
+   "text": "For a closed point $x$, choose a $k_0$-embedding $\\kappa(x)\\hookrightarrow k$ and a geometric point over $x$. The inclusion $x\\to C_0$ induces a homomorphism on fundamental groups with the fibre-evaluation rule of [lem-galois-pi1-functoriality]. Concretely, an element of $\\operatorname{Gal}(k/\\kappa(x))$ acts on the fibre at $x$ of each finite etale cover by its action on the geometric points, naturally in that cover. Transport by a path to the fixed base point, using [lem-wf-fibre-functor-basepoint-transport], to obtain $d_x:\\operatorname{Gal}(k/\\kappa(x))\\to G$. We check $r(d_x(\\sigma))=\\sigma$ in $\\operatorname{Gal}(k/k_0)$ on the constant covers $C_0\\times_{k_0}\\operatorname{Spec}E$, $E\\subseteq k$ finite over $k_0$, which is how [lem-wf-arithmetic-lift-fibre-path] characterizes $r$. At the geometric point over $x$ the fibre of such a cover is $\\operatorname{Hom}_{k_0}(E,k)$ (maps of constants, through the chosen embedding), and $\\sigma$ acts by $\\tau\\mapsto\\sigma\\circ\\tau$, since its action on geometric points is precomposition with $\\operatorname{Spec}(\\sigma)$. The path restricted to constant covers is a natural isomorphism between two fibre functors of the finite etale covers of $\\operatorname{Spec}k_0$, both identified with $E\\mapsto\\operatorname{Hom}_{k_0}(E,k)$. Apply [lem-wf-arithmetic-lift-fibre-path] to $Y_0=\\operatorname{Spec}k_0$ (separated, finite type, $Y=\\operatorname{Spec}k$ connected): its geometric group $\\operatorname{Aut}$ of the fibre functor of $\\operatorname{Spec}k$ is trivial, because finite etale $k$-schemes are finite disjoint unions of copies of $\\operatorname{Spec}k$ and a natural automorphism of the fibre functor on these is the identity; hence every automorphism of that fibre functor is $\\tau\\mapsto u\\circ\\tau$ for a unique $u\\in\\operatorname{Gal}(k/k_0)$. So transport along the path conjugates the action $\\tau\\mapsto\\sigma\\circ\\tau$ by such a $u$. Since $\\operatorname{Gal}(k/k_0)\\cong\\widehat{\\mathbf Z}$ is abelian [det-base-field-cd-galois-group], $u\\sigma u^{-1}=\\sigma$, and the characterization of $r$ gives $r(d_x(\\sigma))=\\sigma$. Define $F_x=d_x(\\gamma_x)$, with $\\gamma_x:z\\mapsto z^{1/q^{e_x}}$. Since $\\gamma_x=\\gamma_k^{e_x}$, it lies in $W$ and has degree $e_x$.",
+   "uses": [
+    "lem-galois-pi1-functoriality",
+    "lem-wf-fibre-functor-basepoint-transport",
+    "lem-wf-arithmetic-lift-fibre-path",
+    "det-base-field-cd-galois-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.8), p. 151, and (1.1.13), p. 152 (residue Galois map and its projection on constants)"
+   }
+  },
+  {
+   "text": "If the path is changed, [lem-wf-fibre-functor-basepoint-transport] says that $F_x$ changes to $gF_xg^{-1}$ for some $g\\in G$. This includes changing the residue embedding: choose an isomorphism of the two algebraic closures over $\\kappa(x)$ and compose the paths; geometric Frobenius is unchanged under that isomorphism, since it is the inverse of the $q^{e_x}$-power map. By [lem-sfb-finite-field-galois-frobenius], the restriction of $r(g)$ to $\\kappa(x)$ is $\\gamma_k^n|_{\\kappa(x)}$ for an integer $n$, because inverse Frobenius generates the same finite cyclic Galois group. Put $\\sigma=\\gamma_k^{-n}r(g)$; it fixes $\\kappa(x)$ and thus belongs to $\\operatorname{Gal}(k/\\kappa(x))$. This group is abelian by [det-base-field-cd-galois-group]. Therefore $a=d_x(\\sigma)$ commutes with $F_x=d_x(\\gamma_x)$. As $r(a)=\\sigma$, the element $w=ga^{-1}$ satisfies $r(w)=r(g)\\sigma^{-1}=\\gamma_k^n$, so $w\\in W$. Finally $wF_xw^{-1}=ga^{-1}F_xag^{-1}=gF_xg^{-1}$. Hence every change is already conjugation inside $W$, as claimed.",
+   "uses": [
+    "lem-wf-fibre-functor-basepoint-transport",
+    "lem-sfb-finite-field-galois-frobenius",
+    "det-base-field-cd-galois-group"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.13), pp. 152-153: the residue Galois image centralizes F_x and projects onto the open constant-field subgroup"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "lem-wf-arithmetic-lift-fibre-path",
+  "sk-d-real-setup",
+  "def-wf-fundamental-representation",
+  "lem-galois-aut-profinite",
+  "lem-real-compact-matrix-coefficient-descent",
+  "lem-pod-profinite-stable-lattice",
+  "lem-galois-pi1-functoriality",
+  "lem-wf-fibre-functor-basepoint-transport",
+  "det-base-field-cd-galois-group",
+  "lem-sfb-finite-field-galois-frobenius"
+ ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-weil/_section.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.6), (1.1.10)-(1.1.13.1), pp. 150-153, with the finite-coefficient/lattice details of Stanford Weil II L19, Proposition 1.1.9, pp. 3-5"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilGroup|WeilSheaf|WeilRepresentation",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration found"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lisse Weil sheaves continuous representations Weil group Frobenius",
+   "results": "8 hits: cyclotomicCharacter.continuous, CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction, InfiniteGalois.continuousMulEquivToLimit, CategoryTheory.Functor.sheafPushforwardContinuous, Condensed.lanSheafProfinite, WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, Isocrystal.term_≃ᶠˡ[_,_]_",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned finite Galois, arithmetic Frobenius, isocrystal and finite Galois-category results do not state this Weil-sheaf definition and all its clauses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"WeilGroup\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no declaration found"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weil group of a finite field curve, lisse Weil sheaves as representations continuous on the geometric fundamental group, and conjugacy of local Frobenius",
+   "results": "8 hits: isConj_arithFrobAt, IsArithFrobAt.exists_primesOver_isConj, arithFrobAt, IsArithFrobAt.arithFrobAt, Field.absoluteGaloisGroup, FiniteField.Extension.frob, FiniteField.Extension.exists_frob_pow_eq, FiniteField.frobeniusAlgEquivOfAlgebraic",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned finite Galois, arithmetic Frobenius, isocrystal and finite Galois-category results do not state this Weil-sheaf definition and all its clauses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite dimensional continuous representation of a Weil group is a lisse sheaf with Frobenius descent",
+   "results": "8 hits: LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, WittVector.isocrystal_classification, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, LightCondMod.ofSheafLightProfinite, WittVector.instModuleFractionRingStandardOneDimIsocrystal, WittVector.Isocrystal.toModule, LightCondAb.ofSheafLightProfinite",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned finite Galois, arithmetic Frobenius, isocrystal and finite Galois-category results do not state this Weil-sheaf definition and all its clauses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -59,5 +182,74 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-purity-real-sheaves",
  "unit": "sk-d-real-weil",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-d-real-weil",
+  "worker": "stage1",
+  "summary": "Made the Weil topology and actual etale adic sheaf convention explicit; verified the exact degree sequence, finite-coefficient criterion, geometric stable lattice, sheaf/representation equivalence, residue Frobenius degree, and conjugacy inside W. Reused existing nodes. One general compact-matrix coefficient lemma has an exact finished project theorem, reported for attachment rather than reproved. The global constructible sheaf data are retained. No Lean or compilation.",
+  "blueprint": [
+   "Statement: fundamental group, Weil group, exact degree sequence, and discrete quotient: step 1.",
+   "Statement: continuous geometric matrix coefficients and finite coefficient/lattice criterion: steps 2-3.",
+   "Statement: lisse Weil pair convention and constructible sheaves: step 4 (the sheaf/representation equivalence itself is the theorem prop-wf-weil-sheaf-representation-equivalence, a pointer of this definition).",
+   "Statement and imported proof: residue Frobenius, degree and path independence up to W-conjugacy: steps 5-6."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-wf-arithmetic-lift-fibre-path",
+    "why": "The coefficient-free arithmetic exact sequence and its specified constant-cover quotient define the Weil inverse image and compute its residue projection. This is a reusable tool already in the DAG; the unit has no separate node for it."
+   },
+   {
+    "node": "sk-d-real-setup",
+    "why": "The standing curve hypotheses give connected geometric fibre, finite-type separated curve and the finite-field conventions. This is a reusable tool already in the DAG; the unit has no separate node for it."
+   },
+   {
+    "node": "def-wf-fundamental-representation",
+    "why": "The existing definition supplies the same product Weil topology and the actual etale adic Weil pair/stalk convention. This is a reusable tool already in the DAG; the unit has no separate node for it."
+   },
+   {
+    "node": "lem-galois-aut-profinite",
+    "why": "The general finite-fibre automorphism theorem supplies compactness of P for coefficient descent. This is a reusable tool already in the DAG; the unit has no separate node for it."
+   },
+   {
+    "node": "lem-pod-profinite-stable-lattice",
+    "why": "The general compact-group stable-lattice theorem is used on geometric monodromy only. This is a reusable tool already in the DAG; the unit has no separate node for it."
+   },
+   {
+    "node": "lem-galois-pi1-functoriality",
+    "why": "The general fibre-evaluation homomorphism for x to C_0 constructs the residue Galois map. This is a reusable tool already in the DAG; the unit has no separate node for it."
+   },
+   {
+    "node": "lem-wf-fibre-functor-basepoint-transport",
+    "why": "The general path theorem gives the inner-conjugation change under a new basepoint path. This is a reusable tool already in the DAG; the unit has no separate node for it."
+   },
+   {
+    "node": "lem-sfb-finite-field-galois-frobenius",
+    "why": "The finite Galois group is generated by Frobenius, permitting correction of the conjugating element on the degree-e residue field. This is a reusable tool already in the DAG; the unit has no separate node for it."
+   },
+   {
+    "node": "det-base-field-cd-galois-group",
+    "why": "The general finite-field absolute Galois group is procyclic and therefore abelian, so the residue Galois image centralizes F_x. This is a reusable tool already in the DAG; the unit has no separate node for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-arithmetic-lift-fibre-path",
+  "sk-d-real-setup",
+  "def-wf-fundamental-representation",
+  "lem-galois-aut-profinite",
+  "lem-pod-profinite-stable-lattice",
+  "lem-galois-pi1-functoriality",
+  "lem-wf-fibre-functor-basepoint-transport",
+  "lem-sfb-finite-field-galois-frobenius",
+  "det-base-field-cd-galois-group"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-0f9aefb22",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-0f9aefb22 (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement, Weil II (1.1.10)-(1.1.14) pp.151-153, L19 Def 1.1.7/1.1.10 and Props 1.1.9/1.1.11/1.1.12, and the main-20261015 unit. The statement is kept, with clarifications only: the product topology with discrete Z, the etale adic lisse Weil pair of def-wf-fundamental-representation, and a lattice invariant under P only. Steps 1-3 and 6 are correct. In step 6 I recomputed: sigma=gamma^-n r(g) lies in Gal(k/kappa(x)), which is abelian; w=g a^-1 lies in W; wF_xw^-1=gF_xg^-1 (Deligne 1.1.13). Edge cases checked: rank 0, a rank-1 non-unit Frobenius, e_x=1. The new node lem-real-compact-matrix-coefficient-descent is true (Baire over countably many closed E_i, reducing to the Hausdorff quotient; empty I gives E=Q_l). It matches L19 1.1.9 first bullet and is not a duplicate. It is stated exactly by the sorry-free project theorem PadicAlgCl.exists_finiteDimensional_forall_mem (IntegralModel.lean:58), reported for attachment. Batch 5: all six flagged citations (def-wf-weil-group, def-wf-fundamental-representation, def-pod-lisse-l-adic-sheaves, lem-pod-profinite-stable-lattice, prop-wf-weil-sheaf-representation-equivalence, lem-wf-fibre-functor-basepoint-transport) are general definitions or the Galois/lisse dictionary and are already in the batch-5 closure computed without the item's new proof. The closure grows only by the new generic node, so they are accepted. Repairs: (1) C6: Q16 landed prop-wf-weil-sheaf-representation-equivalence on 2026-10-21 citing sk-d-real-weil, so the item's step-4 citation would make a 2-cycle at merge. The cite is dropped and the prop is named as the theorem carrying the definition's equivalence clause (maintainer: record it in pointers). The prop's tool_uses entry and blueprint line are removed or adjusted. A cycle re-check on live plus the fix found none. (2) E5, step 5: r(d_x(sigma))=sigma needed the path's constant-cover conjugation by some u in Gal(k/k0) to drop out. This is now written out via lem-wf-arithmetic-lift-fibre-path for Spec k0, with det-base-field-cd-galois-group cited for abelianness. Advisory: the constructible-Weil-sheaf convention (Weil II 1.1.1 adic) differs from def-weil-weil-sheaf-complex(3) used by d-real-cohom; no comparison node exists. The snapshot dagsnap vanished mid-review, so the closure and cycle checks were redone on clones/live.; 1 file(s) fixed by the reviewer"
+ }
 }
