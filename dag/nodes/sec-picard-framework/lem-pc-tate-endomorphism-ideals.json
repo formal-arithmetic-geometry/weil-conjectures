@@ -8,11 +8,123 @@
   "place": "§1, p. 151, Propositions 1 and 2, with the finite-rank-product observation underlying T4"
  },
  "stmt_deps": [
+  "lem-pc-finite-potent-trace-calculus",
+  "def-weil-finite-dimensional-subspace"
+ ],
+ "proof": [
+  {
+   "text": "Finite-error witnesses. By [def-weil-finite-dimensional-subspace], images and finite sums of finite-dimensional spaces are finite-dimensional: apply a linear map to a finite spanning list, or concatenate the lists. A subspace $L$ of a finite-dimensional space $W$ is also finite-dimensional: [lem-trf-vector-subspace-complement] supplies $W=L\\oplus Q$, and the linear projection $W\\to L$, defined by the unique decomposition, maps a finite spanning list onto a spanning list of $L$. Now $X\\prec Y$ is equivalent to $X\\subseteq Y+W$ for some finite-dimensional $W$: in the forward direction lift a finite spanning list of $(X+Y)/Y$ to $X+Y$ and let $W$ be its span; conversely the images of a spanning list of $W$ span $(Y+W)/Y$, whose subspace $(X+Y)/Y$ is finite-dimensional. We use these explicit witnesses below.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "lem-trf-vector-subspace-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, pp. 150–151, almost-containment and Propositions 1–2"
+   }
+  },
+  {
+   "text": "The algebra $E$. Zero, the identity and all scalar multiples of the identity preserve $A$. If $R(A)\\subseteq A+W_R$ and $T(A)\\subseteq A+W_T$, then $(R+T)(A)\\subseteq A+W_R+W_T$, $(cR)(A)\\subseteq A+W_R$ for $c\\in k$, and $(RT)(A)\\subseteq R(A)+R(W_T)\\subseteq A+W_R+R(W_T)$. The displayed error spaces are finite-dimensional by their finite spanning lists [def-weil-finite-dimensional-subspace], as in step 1. These inclusions prove closure under addition, scalar multiplication, multiplication and hence subtraction; thus $E$ is a unital $k$-subalgebra.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, pp. 150–151, almost-containment and Propositions 1–2"
+   }
+  },
+  {
+   "text": "The ideal $E_1$. If $T(V)\\subseteq A+W_T$, the same containment holds for $T(A)$, so $E_1\\subseteq E$. Sums and scalar multiples remain in $E_1$ using sums of the finite error spaces, with zero error for the zero map. For $R\\in E$, choose $R(A)\\subseteq A+W_R$. Then $(RT)(V)\\subseteq R(A)+R(W_T)\\subseteq A+W_R+R(W_T)$ and $(TR)(V)\\subseteq T(V)\\subseteq A+W_T$. The error spaces have finite spanning lists [def-weil-finite-dimensional-subspace]. Therefore $E_1$ is a $k$-linear two-sided ideal of $E$; the right-multiplication argument even permits arbitrary $R\\in\\operatorname{End}_k(V)$.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, pp. 150–151, almost-containment and Propositions 1–2"
+   }
+  },
+  {
+   "text": "The ideal $E_2$. If $T(A)$ is finite-dimensional then $T(A)\\subseteq A+T(A)$, so $E_2\\subseteq E$. Sums, negatives and scalar multiples have image on $A$ contained in the corresponding finite sums of images, so $E_2$ is a $k$-linear subspace. If $R\\in E$ and $R(A)\\subseteq A+W_R$, then $(RT)(A)=R(T(A))$ is finite-dimensional and $(TR)(A)\\subseteq T(A)+T(W_R)$ is finite-dimensional. Here images and sums have the explicit finite spanning lists of step 1, and subspaces of such spaces are finite-dimensional by the complement argument there. Thus $E_2$ is a two-sided ideal of $E$; left multiplication permits arbitrary $R$.",
+   "uses": [
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, pp. 150–151, almost-containment and Propositions 1–2"
+   }
+  },
+  {
+   "text": "The sum of the ideals. Apply [lem-trf-vector-subspace-complement] to $A\\subseteq V$, without a finite-dimensionality assumption, and write $V=A\\oplus B$. Define $P(a+b)=a$; uniqueness of the decomposition proves that $P$ is $k$-linear, $P(V)=A$ and $(1-P)(A)=0$. For $T\\in E$ choose $T(A)\\subseteq A+W$. Then $PT\\in E_1$ because its image lies in $A$, and $((1-P)T)(A)\\subseteq(1-P)(W)$ is finite-dimensional by [def-weil-finite-dimensional-subspace] and step 1. Consequently $T=PT+(1-P)T\\in E_1+E_2$. The reverse inclusion follows from steps 2–4, proving $E_1+E_2=E$.",
+   "uses": [
+    "lem-trf-vector-subspace-complement",
+    "def-weil-finite-dimensional-subspace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 151, Proposition 1, projection argument"
+   }
+  },
+  {
+   "text": "Finite-rank products. For $S\\in E_2$ and $T\\in E_1$, choose $T(V)\\subseteq A+W$. Then $(ST)(V)\\subseteq S(A)+S(W)$, a sum of two finite-dimensional spaces. Its subspace $(ST)(V)$ is finite-dimensional by step 1. This proves the product assertion, with the order $S\\in E_2$ on the left and $T\\in E_1$ on the right. In particular $U\\in E_0$ satisfies $U^2(V)$ finite-dimensional, so is finite-potent in the sense of [lem-pc-finite-potent-trace-calculus].",
+   "uses": [
+    "def-weil-finite-dimensional-subspace",
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, pp. 150–151, almost-containment and Propositions 1–2"
+   }
+  },
+  {
+   "text": "Linearity on $E_0$. Steps 3–4 show $E_0=E_1\\cap E_2$ is a $k$-linear subspace. For $U,V\\in E_0$, each of $U^2,UV,VU,V^2$ has finite-dimensional image by step 6. Apply the final assertion of [lem-pc-finite-potent-trace-calculus] to the two operators $U,V$ to obtain $\\operatorname{Tr}_{\\mathrm{fp}}(U+V)=\\operatorname{Tr}_{\\mathrm{fp}}(U)+\\operatorname{Tr}_{\\mathrm{fp}}(V)$. Its homogeneity clause gives $\\operatorname{Tr}_{\\mathrm{fp}}(cU)=c\\operatorname{Tr}_{\\mathrm{fp}}(U)$, including $c=0$. Thus the trace restricts to a $k$-linear function on $E_0$.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, pp. 150–151, T4 and Proposition 1"
+   }
+  },
+  {
+   "text": "Commutators with $E_0$. Let $S\\in E_0$ and $T\\in E$. Both $ST$ and $TS$ belong to both ideals by steps 3–4, so $[S,T]\\in E_0$. In particular $ST$ is finite-potent by step 6. The cyclicity clause of [lem-pc-finite-potent-trace-calculus], with $a=T:V\\to V$ and $b=S:V\\to V$, gives $\\operatorname{Tr}_{\\mathrm{fp}}(ST)=\\operatorname{Tr}_{\\mathrm{fp}}(TS)$. The linearity proved in step 7 now yields $\\operatorname{Tr}_{\\mathrm{fp}}(ST-TS)=0$.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 151, Proposition 2, first case; T5 on p. 150"
+   }
+  },
+  {
+   "text": "Mixed commutators. Let $S\\in E_1$ and $T\\in E_2$. We have $ST\\in E_1$ by right stability of $E_1$, and $ST\\in E_2$ by left stability of $E_2$. Also $TS\\in E_1$ by left stability of $E_1$ (since $T\\in E$), and $TS\\in E_2$ by right stability of $E_2$ (since $S\\in E$). Thus both products and their difference belong to $E_0$. Step 6 shows $TS$ has finite-dimensional image; hence it is finite-potent, taking exponent one. Apply the cyclicity clause of [lem-pc-finite-potent-trace-calculus] with $a=S$ and $b=T$ to get equal traces of $TS$ and $ST$. Step 7 gives zero trace for $ST-TS$. This proves the second case without assuming that $ST$ itself has finite-dimensional image.",
+   "uses": [
+    "lem-pc-finite-potent-trace-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1, p. 151, Proposition 2, second case; T5 on p. 150"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-dimensional-subspace",
+  "lem-trf-vector-subspace-complement",
   "lem-pc-finite-potent-trace-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§1, pp. 150–151, almost-containment and Propositions 1–2"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +160,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero\", \"module\": \"Mathlib/Algebra/DirectSum/LinearMap\", \"type\": \"∀ {R : Type u_2} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsDomain R]\\n  [IsPrincipalIdealRing R] [Module.Free R M] [Module.Finite R M] {f g : Module.End R M} (h_comm : Commute f g),\\n  ⨆ μ, f.maxGenEigenspace μ = ⊤ →\\n    (∀ (μ : R), (LinearMap.trace R ↥(f.ma\", \"doc\": \"Let $ R $ be an integral domain that is also a principal ideal ring, and let $ M $ be a finite free $ R $-module. Suppose $ f $ and $ g $ are commuting endomorphisms of $ M $, and the union of the max\"}\n  {\"name\": \"LinearMap.trace_lie\", \"module\": \"Mathlib/LinearAlgebra/Trace\", \"type\": \"∀ {R : Type u_2} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (f g : Module.End R M), (LinearMap.trace R M) ⁅f, g⁆ = 0\", \"doc\": \"For any commutative ring $ R $ and finite-dimensional $ R $-module $ M $, the trace of the Lie bracket $[f, g]$ of endomorphisms $ f $ and $ g $ is zero, i.e., $\\\\operatorname{tr}([f, g]) = 0$.\"}\n  {\"name\": \"LieSubmodule.trace_eq_trace_restrict_of_le_idealizer\", \"module\": \"Mathlib/Algebra/Lie/TraceForm\", \"type\": \"∀ {R : Type u_1} {L : Type u_3} {M : Type u_4} [inst : CommRing R] [inst_1 : LieRing L] [inst_2 : LieAlgebra R L]\\n  [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : LieRingModule L M] [inst_6 : LieModule R L M]\\n  [Module.Free R M] [Module.Finite R M] [IsDomain R] [IsPrincipalIdealRing R] (N\", \"doc\": \"For a commutative domain $ R $ that is a principal ideal ring, a Lie algebra $ \\\\mathfrak{g} $ over $ R $, a free finite $ R $-module $ M $, and a Lie submodule $ N \\\\subseteq M $, if $ I \\\\subseteq \\\\mat\"}\n  {\"name\": \"LinearMap.trace_restrict_eq_of_forall_mem\", \"module\": \"Mathlib/LinearAlgebra/PID\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Finite R M]\\n  [Module.Free R M] [IsDomain R] [IsPrincipalIdealRing R] (p : Submodule R M) (f : M →ₗ[R] M) (hf : ∀ (x : M), f x ∈ p)\\n  (hf' : optParam (∀ x ∈ p, f x ∈ p) ⋯), (LinearMap.trace R \", \"doc\": \"For a commutative principal ideal domain $ R $, a finite free $ R $-module $ M $, and a submodule $ p $ of $ M $, if a linear map $ f: M \\\\to M $ satisfies $ f(M) \\\\subseteq p $ and $ f(p) \\\\subseteq p $\"}\n  {\"name\": \"LinearMap.trace_eq_zero_of_mapsTo_ne\", \"module\": \"Mathlib/Algebra/DirectSum/LinearMap\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : ι → Submodule R M} [inst_3 : DecidableEq ι] [∀ (i : ι), Module.Finite R ↥(N i)]\\n  [∀ (i : ι), Module.Free R ↥(N i)],\\n  DirectSum.IsInternal N →\\n    ∀ [IsNoetherian R M] (σ : ι → \", \"doc\": \"For a Noetherian module $M$ over a commutative semiring $R$ that is an internal direct sum of submodules $N_i$ indexed by $\\\\iota$, if an endomorphism $f$ maps each $N_i$ into $N_{\\\\sigma(i)}$ for a per\"}\n  {\"name\": \"RootPairing.GeckConstruction.trace_toEnd_eq_zero\", \"module\": \"Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Semisimple\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} {M : Type u_3} {N : Type u_4} [inst : CommRing R] [inst_1 : IsDomain R]\\n  [inst_2 : CharZero R] [inst_3 : AddCommGroup M] [inst_4 : Module R M] [inst_5 : AddCommGroup N] [inst_6 : Module R N]\\n  {P : RootPairing ι R M N} [inst_7 : P.IsCrystallographic] [P.IsReduced] {b\", \"doc\": \"For any element $ x $ in the Lie algebra $ \\\\mathfrak{b} $, the trace of the endomorphism obtained by applying the canonical map $ \\\\text{toEnd} $ to $ x $ (viewed as a linear operator on the direct sum\"}\n  {\"name\": \"LieAlgebra.matrix_trace_commutator_zero\", \"module\": \"Mathlib/Algebra/Lie/Classical\", \"type\": \"∀ (n : Type u_1) (R : Type u₂) [inst : DecidableEq n] [inst_1 : CommRing R] [inst_2 : Fintype n] (X Y : Matrix n n R),\\n  ⁅X, Y⁆.trace = 0\", \"doc\": \"For any finite-dimensional square matrices $X$ and $Y$ over a ring $R$, the trace of their commutator $[X, Y] = XY - YX$ is zero, i.e., $\\\\operatorname{tr}([X, Y]) = 0$.\"}\n  {\"name\": \"LinearMap.IsProj.trace\", \"module\": \"Mathlib/LinearAlgebra/Trace\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M] {p : Submodule R M}\\n  {f : M →ₗ[R] M},\\n  LinearMap.IsProj p f →\\n    ∀ [Module.Free R ↥p] [Module.Finite R ↥p] [Module.Free R ↥f.ker] [Module.Finite R ↥f.ker],\\n      (LinearMap.trace R M) f = ↑(Module.\", \"doc\": \"For a projection operator $ f $ on a module $ M $ over a commutative semiring $ R $, if $ f $ projects onto a submodule $ p $ and both $ p $ and the kernel of $ f $ are finitely generated free modules\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern ordinary finite-dimensional trace, residue fields or valuations, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.?potent|tateTrace|TateIdeals|AlmostLE",
+   "results": "{\"t\": \"2026-10-21T09:02:43Z\", \"tool\": \"grep\", \"query\": \"finite.?potent|tateTrace|TateIdeals|AlmostLE\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary trace, eigenvector, matrix and trace-dual results do not state Tate ideals or finite-potent trace on arbitrary-dimensional spaces"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tate endomorphism ideals relative to a subspace of an arbitrary vector space with finite potent trace",
+   "results": "{\"t\": \"2026-10-21T09:02:44Z\", \"tool\": \"leansearch\", \"query\": \"Tate endomorphism ideals relative to a subspace of an arbitrary vector space with finite potent trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_restrict_eq_of_forall_mem\", \"LieSubmodule.trace_eq_trace_restrict_of_le_idealizer\", \"Ideal.torsionOf\", \"Module.End.genEigenspace_restrict_eq_top\", \"Submodule.traceDual\", \"differentIdeal\", \"Submodule.mem_traceDual_iff_isIntegral\", \"Submodule.mem_traceDual\"], \"digest\": \"25f1bbae73fe428a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary trace, eigenvector, matrix and trace-dual results do not state Tate ideals or finite-potent trace on arbitrary-dimensional spaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tateTrace\"",
+   "results": "{\"t\": \"2026-10-21T09:02:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"tateTrace\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary trace, eigenvector, matrix and trace-dual results do not state Tate ideals or finite-potent trace on arbitrary-dimensional spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tate ideals of endomorphisms associated with a subspace, finite potent trace linear on the intersection and zero on mixed commutators",
+   "results": "{\"t\": \"2026-10-21T09:02:46Z\", \"tool\": \"leanfinder\", \"query\": \"Tate ideals of endomorphisms associated with a subspace, finite potent trace linear on the intersection and zero on mixed commutators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Submodule.traceDual\", \"LinearMap.trace_comp_eq_zero_of_commute_of_trace_restrict_eq_zero\", \"LieSubmodule.trace_eq_trace_restrict_of_le_idealizer\", \"Matrix.isRepresentation.toEnd_exists_mem_ideal\", \"LinearMap.trace_restrict_eq_of_forall_mem\", \"LinearMap.trace_eq_zero_of_mapsTo_ne\", \"Submodule.le_traceDual_iff_map_le_one\", \"LieSubmodule.traceForm_eq_of_le_idealizer\"], \"digest\": \"f1b5c8391a901eeb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary trace, eigenvector, matrix and trace-dual results do not state Tate ideals or finite-potent trace on arbitrary-dimensional spaces"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Operators with image contained in a subspace up to finite rank form an ideal in its stabilizer modulo finite rank; decomposition by a projection onto a vector subspace",
+   "results": "{\"t\": \"2026-10-21T09:03:26Z\", \"tool\": \"leanfinder\", \"query\": \"Operators with image contained in a subspace up to finite rank form an ideal in its stabilizer modulo finite rank; decomposition by a projection onto a vector subspace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Matrix.isRepresentation.toEnd_exists_mem_ideal\", \"Module.End.genEigenspace_restrict_eq_top\", \"Ideal.inertia_le_stabilizer\", \"Submodule.inf_genEigenspace\", \"LinearEquiv.mem_dilatransvections_iff_finrank\", \"LinearMap.IsProj.mem_invtSubmodule_iff\", \"Submodule.inf_iSup_genEigenspace\", \"Submodule.inf_iInf_maxGenEigenspace_of_forall_mapsTo\"], \"digest\": \"17fc39483cba434e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary trace, eigenvector, matrix and trace-dual results do not state Tate ideals or finite-potent trace on arbitrary-dimensional spaces"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pc-tate-dvr-residue-calculus",
@@ -70,5 +217,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-tate-endomorphism-ideals",
+  "worker": "stage1",
+  "summary": "Expanded Tate §1 Propositions 1–2 into finite-error inclusions, two-sided ideal closure, a projection decomposition, finite-rank products, and trace linearity/cyclicity using the existing finite-potent trace-calculus node. Reused the existing Mathlib complement node. No new nodes; statement unchanged. Checked both product orders and all trace hypotheses.",
+  "blueprint": "Realizes the Tate-residue input in the statement of sk-thm-picard-duality, through lem-pc-tate-dvr-residue-calculus: local residue construction requires E=E1+E2 and zero traces of mixed commutators.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-vector-subspace-complement",
+    "why": "Generic vector-space complement gives the projection used in Tate Proposition 1 and in finite-dimensional subspace bookkeeping; the existing Mathlib leaf is independent of the Picard route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-vector-subspace-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-5c1569e8d",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-5c1569e8d (reviewer sub-agent of L); spot-checked: Read the whole item; no new nodes. The statement is unchanged from side-live and matches Tate ASENS 1968 §1 pp.150-151: Prop. 1 without the commensurability clause, plus Prop. 2. One stmt_dep was added, def-weil-finite-dimensional-subspace, which is correct. Nine steps checked. The finite-error equivalence and subspace finiteness come via the complement leaf. Closure computations: (RT)(A) ⊆ A+W_R+R(W_T); for E1, (TR)(V) ⊆ T(V); for E2, (TR)(A) ⊆ T(A)+T(W_R). E1+E2=E via PT∈E1 and (1-P)T∈E2, because ((1-P)T)(A) ⊆ (1-P)(W). E2·E1 products have finite image in the right order (S(A)+S(W)). Linearity on E0 uses the pairwise-product additivity clause of lem-pc-finite-potent-trace-calculus (Tate T4, n=2) together with homogeneity. Cyclicity is applied with a=T, b=S for [E0,E] and with a=S, b=T for [E1,E2]; in each case the ba hypothesis is checked as finite-potent. Edge cases checked: A=0, A=V, V finite-dimensional, and the even/odd basis example. No duplicate found by rg -L. The only citer, lem-pc-tate-dvr-residue-calculus (steps 2-4), uses exactly these clauses. Live and side-live still have the item unsplit. Batch-5: lem-trf-vector-subspace-complement is a Mathlib leaf (Submodule.exists_isCompl) with no proof deps; it is generic linear algebra and no part of the proof of the trace formula or Poincaré duality, so it is accepted, and the declared tool_use is accepted with it. Cosmetic only: step 7 reuses the letter V for an operator. No fixes."
  }
 }
