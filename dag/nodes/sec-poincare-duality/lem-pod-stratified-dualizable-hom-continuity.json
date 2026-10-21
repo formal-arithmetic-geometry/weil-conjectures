@@ -23,9 +23,181 @@
   "def-weil-pbc-category-colimit",
   "def-pc-cochain-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H_T(A,N)=R\\mathcal Hom_{B_T}(A,N)$ and use its functorial complex models. All colimits of such models in this proof are termwise sheaf colimits, not assertions of a colimit universal property in the ordinary derived category. By [lem-sfb-rhom-colimit-cohomology-ladder], their cohomology is the filtered colimit of cohomology; hence they preserve quasi-isomorphisms and common cohomological lower bounds. In particular, a diagram with cohomology zero below $c$ can be replaced functorially by its good truncations in degrees at least $c$ without changing its derived objects or the derived object of its termwise colimit. The truncation projection and the colimit cocone give these identifications, so they retain the original comparison maps. We shall prove internal-Hom continuity for every uniformly cohomologically bounded-below diagram, which includes the strict diagrams in the question.",
+   "uses": [
+    "lem-sfb-rhom-colimit-cohomology-ladder",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, proof: t-exactness of filtered colimits and reduction to bounded-below models"
+   }
+  },
+  {
+   "text": "Apply [lem-fix-constructible-open-closed-refinement] to the given finite constructible partition. It gives a finite binary tree with root $Y$, qcqs vertices, complementary quasi-compact open and closed children, and actual morphisms from its nonempty leaves to original strata over $Y$. By [lem-zl-condensed-lisse-proetale-locality], $K$ restricts to a dualizable object on each leaf. More generally its restriction $K_T$ to any vertex $T$ remains stratified dualizable: intersect the original immersed strata scheme-theoretically with $T$; these form a finite locally closed partition, and their images are constructible by [lem-pur-scheme-constructible-preimage]. Apply the same pullback theorem to their dual pairs. Consequently [lem-pod-stratified-dualizable-bounded] gives an upper cohomological bound $b_T$ for every $K_T$. We prove the stronger internal-Hom assertion by induction up this finite tree; the empty scheme contributes the zero category.",
+   "uses": [
+    "lem-fix-constructible-open-closed-refinement",
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-pur-scheme-constructible-preimage",
+    "lem-pod-stratified-dualizable-bounded"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Definition 3.3; Lemma 5.3(2), finite-strata reduction"
+   }
+  },
+  {
+   "text": "For a dualizable source $A$ on a leaf $T$, let $D$ be its dual. The closed structure of [lem-sf-ringed-derived-closed-symmetric-monoidal] identifies $H_T(A,N)$ with $D\\otimes^L N$. Explicitly a map $g:V\\otimes A\\to N$ is sent to $V\\to V\\otimes A\\otimes D\\xrightarrow{g\\otimes1}N\\otimes D\\cong D\\otimes N$, with the first arrow induced by coevaluation. The inverse tensors a map $V\\to D\\otimes N$ with $A$, reorders the factors, and applies evaluation $D\\otimes A\\to B_T$. The two composites cancel by the two triangle identities. These formulas are natural in $V,N$, so the tensor--Hom adjunction identifies the representing objects and their maps in $N$.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), lisse case: internal Hom is tensor with the dual"
+   }
+  },
+  {
+   "text": "Choose a K-flat complex $P$ representing $D$ by [lem-pc-kflat-resolution]; then $D\\otimes^L N$ is $\\operatorname{Tot}(P\\otimes N)$ for every complex $N$. Fix $q$. Under the identification of [lem-sfb-rhom-colimit-cohomology-ladder], $H^q$ of the comparison for $A$ is the colimit of the maps $H^qH_T(A,\\iota_s)$ given by the cocone legs, so it depends only on these derived maps. By naturality in $N$ of Step 3 it becomes $\\varinjlim_sH^q\\operatorname{Tot}(P\\otimes N_s)\\to H^q\\operatorname{Tot}(P\\otimes N_\\infty)$, induced by $1_P\\otimes\\iota_s$. This is bijective: [lem-pc-module-filtered-colimits-tensor] (after the signed swap of factors) gives $\\operatorname{Tot}(P\\otimes N_\\infty)\\cong\\varinjlim_s\\operatorname{Tot}(P\\otimes N_s)$ through these legs, and Step 1 moves $H^q$ past the colimit. By [lem-weil-pbc-unbounded-derived-iso-cohomology] the comparison is invertible: this is internal-Hom continuity on every leaf. For every vertex source $K_T$, [lem-weil-pbc-proetale-internal-hom-lower-bound] and Step 2 give $H_T(K_T,N)\\in D^{\\ge c-b_T}$ for $N\\in D^{\\ge c}$, uniformly.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-sfb-rhom-colimit-cohomology-ladder",
+    "lem-pc-module-filtered-colimits-tensor",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-weil-pbc-proetale-internal-hom-lower-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), dualizable case; proof of the final global-Hom assertion"
+   }
+  },
+  {
+   "text": "At an internal vertex write $j:U\\hookrightarrow T$, $i:Z\\hookrightarrow T$. We first establish continuity of $Ri^!$ on diagrams $(N_s)$ with common bound $c$. Use the natural triangle $i_*Ri^!N_s\\to N_s\\to Rj_*j^*N_s$ of [lem-weil-pbc-condensed-open-closed-recollement]. In its long exact cohomology sequence, take filtered colimits. The rows stay exact by [lem-pc-module-filtered-colimits-tensor], and Step 1 identifies their terms with the cohomology of the termwise colimits. Compare with the sequence for $N_\\infty$. The squares including connecting maps commute by [lem-weil-pbc-derived-cohomology-ladder]. The middle comparisons are identities; the $Rj_*j^*$ comparisons are isomorphisms by [lem-weil-pbc-condensed-qcqs-pushforward-continuity], since $j$ is qcqs and $j^*$ is exact and preserves colimits. The five lemma [lem-weil-pbc-five-lemma], on the segment $H^{q-1}(N)\\to H^{q-1}(Rj_*j^*N)\\to H^q(i_*Ri^!N)\\to H^q(N)\\to H^q(Rj_*j^*N)$, gives an isomorphism on the remaining term for every $q$.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-pc-module-filtered-colimits-tensor",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-weil-pbc-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), final sentences: the support triangle and part (1) for the open immersion"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-proetale-ringed-open-closed], $i_*$ is exact and preserves filtered colimits on the qcqs vertex $T$. Thus the remaining comparisons in Step 5 are $i_*$ of the cohomology comparisons for $Ri^!$. By [lem-weil-pbc-condensed-open-closed-recollement], $i^*i_*\\cong1$ and $i^*$ is exact, so they are isomorphisms already on $Z$. This proves the desired costalk comparison, with precisely the maps induced by $Ri^!$ on the cocone. The same recollement statement gives $Ri^!N_s\\in D^{\\ge c}$, uniformly in $s$. Good truncations as in Step 1 therefore give a strict lower-bounded complex diagram representing these costalks, with termwise colimit representing $Ri^!N_\\infty$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), continuity and left t-exactness of closed exceptional restriction"
+   }
+  },
+  {
+   "text": "Assume internal-Hom continuity is known for $K_U$ and $K_Z$ for all uniformly cohomologically bounded-below diagrams. The first formula of [lem-sfb-open-closed-internal-hom-formulas] gives $H_T(j_!K_U,N)=Rj_*H_U(K_U,j^*N)$. Since $j^*$ is exact and preserves colimits by [lem-weil-pbc-condensed-open-closed-recollement], the induction hypothesis identifies the colimit of the inner Hom diagram with $H_U(K_U,j^*N_\\infty)$. Its terms have common lower bound $c-b_U$ by Step 4. Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to $j$ and that diagram (using good truncations from Step 1) to move $Rj_*$ past this colimit. Hence the canonical internal-Hom comparison is invertible for the source $j_!K_U$. All identifications are natural in $N$ and are the evaluation/adjunction comparisons specified by the formula, so the comparison obtained is the original cocone comparison.",
+   "uses": [
+    "lem-sfb-open-closed-internal-hom-formulas",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), adjunction calculation for extension from an open stratum"
+   }
+  },
+  {
+   "text": "The second formula of [lem-sfb-open-closed-internal-hom-formulas] gives $H_T(i_*K_Z,N)=i_*H_Z(K_Z,Ri^!N)$. By Steps 5--6 the costalk diagram has common lower bound $c$ and its termwise derived colimit is $Ri^!N_\\infty$. Apply the induction hypothesis on $Z$ to its good-truncated representatives. This identifies the colimit of $H_Z(K_Z,Ri^!N_s)$ with $H_Z(K_Z,Ri^!N_\\infty)$. Exactness and filtered-colimit preservation of $i_*$ in [lem-weil-pbc-proetale-ringed-open-closed] carry this isomorphism to $T$. Thus internal-Hom continuity holds for $i_*K_Z$, again for the canonical comparison, by naturality of the formula.",
+   "uses": [
+    "lem-sfb-open-closed-internal-hom-formulas",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), adjunction calculation for extension from a closed stratum"
+   }
+  },
+  {
+   "text": "The other localization triangle in [lem-weil-pbc-condensed-open-closed-recollement] is $j_!K_U\\to K_T\\to i_*K_Z\\to j_!K_U[1]$. For any target diagram as above, [lem-sfb-rhom-colimit-cohomology-ladder] supplies the commuting exact ladder for its three source comparisons, including the connecting squares. Steps 7--8 give the outer isomorphisms in every degree. Apply [lem-weil-pbc-five-lemma] to the segment with terms $H^{q-1}H_T(j_!K_U,-)$, $H^qH_T(i_*K_Z,-)$, $H^qH_T(K_T,-)$, $H^qH_T(j_!K_U,-)$, $H^{q+1}H_T(i_*K_Z,-)$. Then the middle comparison is an isomorphism in every degree, hence in the derived category by [lem-weil-pbc-unbounded-derived-iso-cohomology]. This completes the finite tree induction and proves internal-Hom continuity for $K$ on $Y$.",
+   "uses": [
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-sfb-rhom-colimit-cohomology-ladder",
+    "lem-weil-pbc-five-lemma",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(2), induction using the localization triangle"
+   }
+  },
+  {
+   "text": "Choose an upper cohomological bound $b$ for $K$ by [lem-pod-stratified-dualizable-bounded]. Then $H_Y(K,QC_i)$ has common lower bound $a-b$ by [lem-weil-pbc-proetale-internal-hom-lower-bound]. Apply the global-sections assertion of [lem-weil-pbc-condensed-qcqs-pushforward-continuity] on the qcqs scheme $Y$ to good-truncated functorial representatives of this diagram. Step 9 identifies their termwise derived colimit with $H_Y(K,QC_\\infty)$, so for every $r$ it gives\n$$\\varinjlim_i H^rR\\Gamma(Y,H_Y(K,QC_i))\\xrightarrow{\\sim}H^rR\\Gamma(Y,H_Y(K,QC_\\infty)).$$\nBy [lem-pur-rhom-global-sections] applied to $QC_i[r]$ and [lem-pur-derived-internal-hom-shift-right], these groups are $\\operatorname{Hom}_{D(B)}(K,QC_i[r])$ and the corresponding group at infinity. The identifications are natural in the target and shift; the resulting leg is therefore exactly $u_i\\mapsto Q(\\iota_i)[r]\\circ u_i$.",
+   "uses": [
+    "lem-pod-stratified-dualizable-bounded",
+    "lem-weil-pbc-proetale-internal-hom-lower-bound",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-pur-rhom-global-sections",
+    "lem-pur-derived-internal-hom-shift-right"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, final global-Hom assertion and its proof using the boundedness of constructibles"
+   }
+  },
+  {
+   "text": "Each comparison just used is induced by the target cocone and evaluation, so is contravariantly natural in $K$ and covariantly natural in diagram morphisms. Explicitly, precomposing $u_i$ with $v:K'\\to K$ gives $Q(\\iota_i)[r]u_iv=(Q(\\iota_i)[r]u_i)v$; for a diagram map $f:C\\to C'$ its colimit map satisfies $f_\\infty\\iota_i=\\iota'_if_i$, which is the required target square after applying $Q$ and shift. Scalar multiplication by $s\\in\\Gamma(*,\\Lambda)$ is the central action of its pulled-back coefficient section on module maps. Composition with $Q(\\iota_i)[r]$ commutes with that action, so the bijection of abelian groups is linear over $\\Gamma(*,\\Lambda)$ and hence an isomorphism of modules. This also covers zero objects, empty $Y$, and arbitrary integer shifts.",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3, canonical global-Hom comparison: scalar linearity and naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-rhom-colimit-cohomology-ladder",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-zl-condensed-lisse-proetale-locality",
+  "lem-pur-scheme-constructible-preimage",
+  "lem-pod-stratified-dualizable-bounded",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-weil-pbc-proetale-internal-hom-lower-bound",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-open-closed-internal-hom-formulas",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-derived-internal-hom-shift-right",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Lemma 5.3(2), its proof on page 14 and the final global-Hom assertion; finite open--closed refinement makes the finite-strata induction explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -122,10 +294,106 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: hits concern underived condensed modules, existence/exactness of colimits, abstract finite presentability, or definitions of derived cohomological bounds; none asserts this geometric stratified-dualizability theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived Hom from a constructible condensed complex on a qcqs scheme preserves filtered colimits bounded below",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "HomologicalComplex.preservesColimitsOfShape_of_eval",
+     "HomologicalComplex.instHasFilteredColimitsOfSize",
+     "CategoryTheory.Limits.PreservesColimits.preservesFilteredColimits",
+     "instPreservesHomologyFunctorAddCommGrpCatColim",
+     "Condensed.hasExactColimitsOfShape",
+     "CategoryTheory.Limits.PreservesFilteredColimits",
+     "HomologicalComplex.ab5OfSize",
+     "HomologicalComplex.instPreservesColimitsOfShapeSingle"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern underived condensed objects, existence of colimits, ordinary scheme limits, or abstract derived-category bounds; none states stratified-dualizable Hom continuity on arbitrary qcqs schemes. Loogle reports the unrecognized identifier IsFiltered."
+  },
+  {
+   "tool": "grep",
+   "query": "dualiz.*[Cc]olimit|[Cc]olimit.*dualiz|[Cc]ondensed.*[Hh]om",
+   "results": {
+    "ok": true,
+    "n_hits": 10,
+    "top": [
+     "Mathlib/Condensed/Basic.lean",
+     "Mathlib/Condensed/Basic.lean",
+     "Mathlib/Condensed/Basic.lean",
+     "Mathlib/Condensed/Light/Module.lean",
+     "Mathlib/Condensed/Light/Module.lean",
+     "Mathlib/Condensed/Light/Basic.lean",
+     "Mathlib/Condensed/Light/Basic.lean",
+     "Mathlib/Condensed/Light/Epi.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern underived condensed objects, existence of colimits, ordinary scheme limits, or abstract derived-category bounds; none states stratified-dualizable Hom continuity on arbitrary qcqs schemes. Loogle reports the unrecognized identifier IsFiltered."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a qcqs scheme and stratified dualizable complex K, derived Hom from K commutes with uniformly bounded below filtered colimits",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone",
+     "DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE",
+     "DerivedCategory.left_fac_of_isStrictlyGE",
+     "DerivedCategory.right_fac_of_isStrictlyLE",
+     "CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern underived condensed objects, existence of colimits, ordinary scheme limits, or abstract derived-category bounds; none states stratified-dualizable Hom continuity on arbitrary qcqs schemes. Loogle reports the unrecognized identifier IsFiltered."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, IsFiltered",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "loogle: unknown identifier 'IsFiltered'"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern underived condensed objects, existence of colimits, ordinary scheme limits, or abstract derived-category bounds; none states stratified-dualizable Hom continuity on arbitrary qcqs schemes. Loogle reports the unrecognized identifier IsFiltered."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a stratified perfect sheaf on a quasi compact scheme, morphisms into filtered colimits of uniformly bounded below complexes commute with the colimit",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Modules.instHasColimits",
+     "localCohomology.hasColimitDiagram",
+     "Condensed.isColimitLocallyConstantPresheaf_desc_apply",
+     "AlgebraicGeometry.nonempty_isColimit_Γ_mapCocone",
+     "AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+     "AlgebraicGeometry.exists_appTop_π_eq_of_isLimit",
+     "AlgebraicGeometry.exists_app_map_eq_map_of_isLimit",
+     "SheafOfModules.Presentation.isColimit"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: the returned declarations concern underived condensed objects, existence of colimits, ordinary scheme limits, or abstract derived-category bounds; none states stratified-dualizable Hom continuity on arbitrary qcqs schemes. Loogle reports the unrecognized identifier IsFiltered."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pod-condensed-localization-hom",
@@ -144,5 +412,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pod-stratified-dualizable-hom-continuity",
+  "worker": "stage1",
+  "summary": "Read HRS Definitions 3.3, Lemma 5.3 and its page-14 proof. Proved the internal-Hom comparison by finite qcqs open--closed tree induction, exposing the dualizable tensor computation, closed-costalk comparison, cohomological lower bounds and the final global-sections comparison. Kept the statement and all inherited metadata/searches. Reused existing general tools; created no nodes.",
+  "blueprint": "sk-def-perfect: rational site-perfect local models via lem-pod-condensed-localization-hom, whose Proposition 5.5 proof needs precisely the bounded-target continuity supplied here. The unit is a definition with no unit proof steps; this item realizes its recorded from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-rhom-colimit-cohomology-ladder",
+    "why": "Exact cohomology ladder for the internal-Hom filtered-colimit comparison; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-fix-constructible-open-closed-refinement",
+    "why": "Finite open–closed refinement through constructible strata; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-zl-condensed-lisse-proetale-locality",
+    "why": "Pro-etale locality and pullback of dualizable condensed sheaves; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The derived category of a ringed site is closed symmetric monoidal; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of K-flat resolutions on a ringed site; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Filtered colimits and tensor complexes of sheaves of modules; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-internal-hom-lower-bound",
+    "why": "Cohomological lower bound for pro-etale internal Hom; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-open-closed-recollement",
+    "why": "Open/closed recollement for condensed coefficient modules; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "why": "Bounded-below filtered continuity of pro-etale pushforward; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Ringed pro-etale open-closed localization; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-sfb-open-closed-internal-hom-formulas",
+    "why": "Derived internal Hom for open extension and closed support; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Global sections of the derived internal Hom; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   },
+   {
+    "node": "lem-pur-derived-internal-hom-shift-right",
+    "why": "Right-argument shift comparison for internal derived Hom; generic ringed-derived, qcqs-geometric, or finite-refinement tool for the HRS Lemma 5.3 argument. sk-def-perfect supplies no such theorem; its dualizable category is retained unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-rhom-colimit-cohomology-ladder",
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-zl-condensed-lisse-proetale-locality",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-weil-pbc-proetale-internal-hom-lower-bound",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-open-closed-internal-hom-formulas",
+  "lem-pur-rhom-global-sections",
+  "lem-pur-derived-internal-hom-shift-right"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NP-119b54f44",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-119b54f44 (reviewer sub-agent of L); spot-checked: Read the item in full: 11 steps, no new nodes. Statement, stmt_deps and metadata are unchanged from live. The item is unsplit and not landed live, so it is not superseded; there is no repair note; the closure of 1117 nodes is clear of dropped nodes; no cycle; no SGA. Source: HRS 2305.18131 Def. 3.3 (p. 6), Lemma 5.3(2) with its final RΓ assertion, proof and Remark 5.4 (pp. 14-15). The route matches HRS: lisse case (Steps 3-4), i^! via the fibre sequence i_*i^! -> id -> j_*j^* (5-6), the j_! and i_* formulas (7-8), the triangle (9), global sections with the Cor. 4.11 bound (10). Checked each cited statement against its use. The qcqs refinement tree has actual leaf->stratum morphisms (E3 avoided). Pulled-back strata are constructible by 054I; dualizables pull back by the zl locality node. The recollement and formula nodes need j quasi-compact (true at each split). The pushforward node is applied to qcqs j and Y, with uniform bounds c-b_U and a-b; i_* is exact and commutes with filtered colimits on qcqs T. The five-lemma windows in Steps 5 and 9 match the ladder sequences, and the induction has its base (leaves) and step. Edge cases (empty Y, K=0, one stratum, K=B[m], negative r) and Remark 5.4 checked. The 13 generic tool_uses are accepted. FIX (C3/E5): Step 4 said Step 1 replaces Tot(P⊗N) by the internal-Hom models through natural quasi-isomorphisms, but no cited statement supplies these, and Step 3's identification is natural only in D. Rewrote Step 4: under the ladder identification H^q(alpha_A) = colim H^q H(A,iota_s), Step 3's naturality makes it colim H^q Tot(P⊗N_s) -> H^q Tot(P⊗N_inf), which is bijective by the filtered-colimit tensor node and Step 1, and the cohomology criterion finishes. Added uses: lem-sfb-rhom-colimit-cohomology-ladder and lem-weil-pbc-unbounded-derived-iso-cohomology, both already in proof_deps. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
