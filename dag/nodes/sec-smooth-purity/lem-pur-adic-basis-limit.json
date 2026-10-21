@@ -2,7 +2,7 @@
  "id": "lem-pur-adic-basis-limit",
  "kind": "statement",
  "title": "Finite bases pass to completed constant quotient sheaves",
- "statement": "Let $\\mathcal C$ be a small site, $A\\to B$ a homomorphism of commutative rings, and $b_1,\\ldots,b_d$ an $A$-basis of $B$, with $d\\geq0$. Let $t\\in A$, $v\\in B$, $u\\in B^\\times$ and $e\\geq1$ satisfy $t=u v^e$ in $B$. Write $\\underline{M}$ for the constant sheaf associated to an abelian group or ring $M$ [def-weil-pbc-constant-sheaf]. Put $R=\\lim_{n\\geq1}\\underline{A/t^nA}$ and $S=\\lim_{m\\geq1}\\underline{B/v^mB}$. There is a unique ring map $R\\to S$ whose $m$-th projection is $R\\to\\underline{A/t^mA}\\to\\underline{B/v^mB}$. Inverse limits are sectionwise [def-pur-sheaf-inverse-limit]. The basis maps on the quotients induce an $R$-linear isomorphism $R^{\\oplus d}\\xrightarrow{\\sim}S$, with $i$-th column the compatible residues of $b_i$. Its projection at $m=en$ is the basis isomorphism $\\underline{A/t^nA}^{\\oplus d}\\cong\\underline{B/t^nB}=\\underline{B/v^{en}B}$.",
+ "statement": "Let $\\mathcal C$ be a small site, $A\\to B$ a homomorphism of commutative rings, and $b_1,\\ldots,b_d$ an $A$-basis of $B$, with $d\\geq0$. Let $t\\in A$, $v\\in B$, $u\\in B^\\times$ and $e\\geq1$ satisfy $t=u v^e$ in $B$. Write $\\underline{M}$ for the constant sheaf associated to an abelian group or ring $M$ [def-weil-pbc-constant-sheaf]. Put $R=\\lim_{n\\geq1}\\underline{A/t^nA}$ and $S=\\lim_{m\\geq1}\\underline{B/v^mB}$. There is a unique ring map $R\\to S$ whose $m$-th projection is $R\\to\\underline{A/t^mA}\\to\\underline{B/v^mB}$. Inverse limits are sectionwise [def-pur-sheaf-inverse-limit]. The basis maps on the quotients induce an $R$-linear isomorphism $R^{\\oplus d}\\xrightarrow{\\sim}S$, with $i$-th column the compatible residues of $b_i$. For every $n\\geq1$, its projection at $m=en$ is the composite $R^{\\oplus d}\\to\\underline{A/t^nA}^{\\oplus d}\\xrightarrow{\\sim}\\underline{B/t^nB}=\\underline{B/v^{en}B}$, where the first map is coordinatewise projection and the second is the quotient basis isomorphism.",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.8.2(1), pp. 58-59: inverse limits of constant quotient sheaves. The basis and cofinal-filtration refinement below is an agent argument, not a numbered assertion of the source."
@@ -12,9 +12,90 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-inverse-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $b:A^d\\to B$, $(a_i)\\mapsto\\sum_i a_i b_i$, and let $c_i:B\\to A$ be its coordinate maps. For each $n\\geq1$, $b((t^nA)^d)=t^nB$: one inclusion is $\\sum_i t^na_ib_i=t^n\\sum_i a_ib_i$, and conversely the coordinates of $t^nx$ are $t^nc_i(x)$. Consequently $q_n:(A/t^nA)^d\\to B/t^nB$, $([a_i])\\mapsto[\\sum_i a_ib_i]$, is well defined with inverse $[x]\\mapsto([c_i(x)])$. These maps are $A/t^nA$-linear. Reducing from level $n+1$ to $n$ commutes with both formulas, since reduction leaves the representatives and the coordinate maps unchanged. The argument includes $d=0$: then the assumed basis isomorphism identifies the underlying module of $B$ with zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59, inverse-limit coefficient construction; elementary basis/cofinal-filtration refinement written by NS."
+   }
+  },
+  {
+   "text": "Apply constant presheaves and sheafification to $q_n$ and its inverse; by [def-weil-pbc-constant-sheaf] the resulting objects are the constant sheaves. By [lem-weil-pbc-sheafification-exact], sheafification commutes with finite products, giving the canonical identification $\\underline{(A/t^nA)^d}=\\underline{A/t^nA}^{\\oplus d}$ (finite products and sums of modules have the same coordinatewise operations). Apply [lem-pc-sites-module-sheafification-interface] with the constant ring presheaf $\\mathcal O=A/t^nA$: it supplies the module actions and makes the sheafified maps $\\underline{A/t^nA}$-linear. Its target is the abelian sheafification $P^\\#$ of the constant presheaf $P=B/t^nB$; regard the ring sheaf $\\underline{B/t^nB}$ as an $\\underline{A/t^nA}$-module through the sheafified ring map. The ring-sheafification unit $P\\to\\underline{B/t^nB}$ is $\\mathcal O$-linear, so by the same lemma it factors as $P\\to P^\\#\\xrightarrow{\\varphi}\\underline{B/t^nB}$ with $\\varphi$ linear. By [lem-pc-sites-sheafification-underlying-sets], in both its abelian-group and its commutative-ring case, both units exhibit the set sheafification of $P$, so $\\varphi$ is bijective. Composing with $\\varphi$, $\\beta_n:\\underline{A/t^nA}^{\\oplus d}\\xrightarrow{\\sim}\\underline{B/t^nB}$ is an isomorphism onto the ring sheaf, linear for the action through the ring map, whose columns are the residues of the $b_i$. Functoriality preserves the commuting reduction squares of step 1, so the $\\beta_n$ and their inverses commute with all transition maps.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY (lemma-sheafification-presheaf-modules), 03CO (lemma-limits-colimits-abelian-sheaves); sites.tex Tag 00WJ (lemma-sheafification-exact); sites.tex Section section-sheaves-algebraic-structures (forgetful functor to sets and sheafification)."
+   }
+  },
+  {
+   "text": "In $B$ one has $t^n=u^n v^{en}$, and multiplication by the unit $u^n$ gives $t^nB=v^{en}B$. Also $t^mB\\subseteq v^mB$, since $em\\geq m$. Hence $A\\to B$ induces compatible ring maps $f_m:A/t^mA\\to B/v^mB$: both composites from level $m+1$ send the class of $a$ to its image in $B/v^mB$. Use [def-weil-pbc-constant-sheaf] to sheafify these maps. For $r=(r_n)\\in R(U)$ set $f(r)_m=\\underline f_m(U)(r_m)$. The transition equality makes this a compatible family; [def-pur-sheaf-inverse-limit] identifies it with a section of $S(U)$. Componentwise it preserves the ring operations and restrictions. This constructs the required ring-sheaf map $f:R\\to S$, and every map with the prescribed projections has exactly these coordinates, proving uniqueness.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59, inverse-limit coefficient construction; elementary basis/cofinal-filtration refinement written by NS."
+   }
+  },
+  {
+   "text": "Put $T=\\varprojlim_{n\\geq1}\\underline{B/t^nB}=\\varprojlim_{n\\geq1}\\underline{B/v^{en}B}$. The equality of ideals in step 3 identifies the transition maps as well as the quotients. The sectionwise limit description [def-pur-sheaf-inverse-limit] gives $h:S\\to T$, $h(s)_n=s_{en}$. Its inverse sends a compatible family $z=(z_n)$ to the family whose $m$-th component is the reduction of $z_m$ from $B/v^{em}B$ to $B/v^mB$. For $m+1\\to m$ these components agree by reducing the transition equality for $z_{m+1}\\to z_m$ further to $v^m$. For $s\\in S$, the reconstructed component is $s_{em}\\bmod v^m=s_m$. For $z\\in T$, the $n$-th component of $h(h^{-1}(z))$ is $z_{en}\\bmod v^{en}=z_n$, by the transition from index $en$ to index $n$. Thus both composites are identities. All formulas preserve addition, multiplication and restrictions.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59, inverse-limit coefficient construction; elementary basis/cofinal-filtration refinement written by NS."
+   }
+  },
+  {
+   "text": "Use [def-pur-sheaf-inverse-limit] and step 2 to define $\\Phi:R^{\\oplus d}\\to T$: for $r_i=(r_{i,n})_n$, put $\\Phi((r_i)_i)_n=\\beta_n((r_{i,n})_i)$. Compatibility of the $\\beta_n$ makes this a compatible family. Conversely, for $z\\in T(U)$ apply $\\beta_n^{-1}$ to $z_n$; their compatibility says that for each $i$ the $i$-th coordinates form a section $r_i\\in R(U)$. These operations are inverse, commute with restrictions, and preserve addition. The finite direct sum here is the sheaf with section module $R(U)^d$: the coordinate inclusions and projections give its coproduct universal property, since a map out of it is the finite sum of its composites with those inclusions. This also treats the empty sum $d=0$. Hence $\\Psi=h^{-1}\\Phi$ is an additive sheaf isomorphism $R^{\\oplus d}\\cong S$.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59, inverse-limit coefficient construction; elementary basis/cofinal-filtration refinement written by NS."
+   }
+  },
+  {
+   "text": "For $a\\in R(U)$ the $n$-th coordinate of $h(f(a))$ is $\\underline f_{en}(a_{en})$, and it equals the image of $a_n$ in $\\underline{B/t^nB}(U)$: the map $A/t^{en}A\\to B/v^{en}B=B/t^nB$ factors through $A/t^nA$, and $a_{en}$ reduces to $a_n$. Thus the $R(U)$-action on $T(U)$ transported through $h$ acts at index $n$ through $a_n$. The $\\underline{A/t^nA}$-linearity of $\\beta_n$ gives $\\Phi(a(r_i))_n=a_n\\Phi((r_i))_n$. Equality in the sectionwise limit now proves $\\Psi(a(r_i))=f(a)\\Psi((r_i))$; by [def-weil-sheaf-of-modules-category] this is $R$-linearity. Applied to the $i$-th coordinate unit vector, $\\Phi$ has coordinate $b_i\\bmod t^n$; the formula for $h^{-1}$ then gives $b_i\\bmod v^m$ in every component $m$. Finally $h\\Psi=\\Phi$ says precisely $\\pi_{en}\\Psi=\\beta_n\\circ(\\pi_n)^{\\oplus d}$. This proves the specified columns and the corrected projection factorization, without asserting that the completion projection itself is an isomorphism.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1), pp. 58-59, inverse-limit coefficient construction; elementary basis/cofinal-filtration refinement written by NS."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), pp. 58-59, inverse-limit coefficient construction; elementary basis/cofinal-filtration refinement written by NS."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +131,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (ι : Type u_4) [Finite ι],\\n  Function.Bijective ⇑(AdicCompletion.ofTensorProduct I (ι → R))\", \"doc\": \"Given a finite index type $\\\\iota$ and a commutative ring $R$ with ideal $I$, the canonical linear map from the tensor product of the $I$-adic completion of $R$ with the product module $\\\\iota \\\\to R$ to\"}\n  {\"name\": \"AdicCompletion.instAlgebra\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (I : Ideal R) → [Algebra S R] → Algebra S (AdicCompletion I R)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n  {\"name\": \"AdicCompletion.instAlgebraAdicCauchySequence\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Algebra R (AdicCompletion.AdicCauchySequence I R)\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $, the type of $ I $-adic Cauchy sequences in $ R $ is equipped with an algebra structure over $ R $, where the canonical algebra map sends each element o\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (ι : Type u_4) →\\n        [Fintype ι] →\\n          [DecidableEq ι] → TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R)\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $, and a finite index type $ \\\\iota $ with decidable equality, this constructs a linear equivalence between the $ I $-adic completion of the product module $ \"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsNoetherianRing R] [Module.Finite R M], Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If $ R $ is a Noetherian ring, $ I $ is an ideal of $ R $, and $ M $ is a finitely generated $ R $-module, then the natural linear map from the tensor product of the $ I $-adic completion of $ R $ wit\"}\n  {\"name\": \"AdicCompletion.ofAlgEquiv\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{S : Type u_5} → [inst : CommRing S] → (I : Ideal S) → [IsAdicComplete I S] → S ≃ₐ[S] AdicCompletion I S\", \"doc\": \"Given a commutative ring $ S $, an ideal $ I $, and the condition that $ S $ is $ I $-adically complete, this constructs an $ S $-algebra equivalence between $ S $ and its $ I $-adic completion $ \\\\var\"}\n  {\"name\": \"IsDedekindDomain.HeightOneSpectrum.instAlgebraAdicCompletion\", \"module\": \"Mathlib/RingTheory/DedekindDomain/AdicValuation\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      (K : Type u_2) →\\n        {S : Type u_3} →\\n          [inst_2 : Field K] →\\n            [inst_3 : CommSemiring S] →\\n              [inst_4 : Algebra R K] →\\n                [inst_5 : IsFractionRing R K] →\\n                 \", \"doc\": \"For a Dedekind domain $ R $, its fraction field $ K $, and a height one prime ideal $ v $, the adic completion of $ K $ with respect to the valuation induced by $ v $ carries an algebra structure over\"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (M : Type u) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsNoetherianRing R] [inst_4 : Module.Finite R M],\\n  ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ I $, and a finitely generated $ R $-module $ M $, the tensor product of the $ I $-adic completion of $ R $ with $ M $ is linearly equivalent to the \"}",
    "date": "2026-10-21",
    "verdict": "no match: returned ordinary module completion, localization, tensor or category infrastructure; none states this ring-sheaf tower assertion with its specified augmentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite basis of an algebra induces a linear isomorphism of inverse limits of constant quotient sheaves with cofinal adic filtrations",
+   "results": "AdicCompletion.piEquivOfFintype, piEquivFin and their apply lemmas; ofTensorProduct_bijective_of_pi_of_fintype; sumEquivOfFintype and its apply lemma; mk_smul_top_ofAlgEquiv_symm. These concern ordinary module completion, not constant sheaf towers.",
+   "date": "2026-10-21",
+   "verdict": "no match: no exact or one-line specialization to the stated arbitrary-site constant-sheaf towers with their prescribed ring map and columns"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.ofTensorProductEquivOfPiFintype",
+   "results": "One hit: AdicCompletion.ofTensorProductEquivOfPiFintype (Mathlib.RingTheory.AdicCompletion.AsTensorProduct). This is ordinary module completion, not a sheaf tower.",
+   "date": "2026-10-21",
+   "verdict": "no match: no exact or one-line specialization to the stated arbitrary-site constant-sheaf towers with their prescribed ring map and columns"
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*complet|complet.*sheaf|ofTensorProductEquivOfPiFintype",
+   "results": "11 hits: CategoryTheory/Limits/Preserves/Presheaf.lean:56,177,186; CategoryTheory/Limits/Presheaf.lean:40,47; AlgebraicGeometry/IdealSheaf/Basic.lean:93,168,173; RingTheory/AdicCompletion/AsTensorProduct.lean:180,195. No constant-sheaf completion comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match: no exact or one-line specialization to the stated arbitrary-site constant-sheaf towers with their prescribed ring map and columns"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free algebra basis gives a basis for inverse limits of constant sheaves modulo powers of an ideal",
+   "results": "Module.finBasis; Algebra.FiniteType.instFreeAlgebraOfFinite; Module.finBasisOfFinrankEq; FreeAlgebra.instFree; IsLocalRing.basisQuotient; FreeAlgebra.basisFreeMonoid; SheafOfModules.free; SheafOfModules.ιFree. None states the inverse-limit sheaf assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match: no exact or one-line specialization to the stated arbitrary-site constant-sheaf towers with their prescribed ring map and columns"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free extension of rings induces the same finite basis on inverse limits of constant sheaves modulo powers t and v when t equals a unit times a positive power of v",
+   "results": "PreTilt.exists_smodEq_untiltAux; Ideal.adic_basis; IsLocalRing.basisQuotient_apply, basisQuotient, basisQuotient_repr; BDeRham; Ideal.quotientRangePowQuotSuccInclusionEquiv; BDeRhamPlus. No assertion about constant-sheaf inverse limits; the quotient-basis hits assume a local ring.",
+   "date": "2026-10-21",
+   "verdict": "no match: no exact or one-line specialization to the stated arbitrary-site constant-sheaf towers with their prescribed ring map and columns"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-finite-free-completed-scalar-comparison",
@@ -73,5 +189,20 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-adic-basis-limit",
+  "worker": "stage1",
+  "summary": "NS checked the quotient coordinate maps, sheafification, explicit cofinal reindexing and scalar/column normalization. Reuses existing sheafification and inverse-limit nodes; no new nodes. STATEMENT-DISPUTED: the last sentence confused the completion projection with its finite-quotient factor, so it now explicitly states their composite.",
+  "blueprint": "Realizes the first paragraph of lem-weil-scalar-extension-composition (main-20261015 proof): finite free coefficient extensions on integral representatives, via lem-weil-finite-free-completed-scalar-comparison. It proves only the finite-basis inverse-limit ingredient, with no derived or purity route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NS-d99df3d49",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-d99df3d49 (reviewer sub-agent of L); spot-checked: Read the item in full, all 5 cited statements, the parent (its only citer, which uses only the ring map and S≅R^{⊕d}) and Bhatt–Scholze Lemma 6.8.2(1) on pp. 58–59. The source gives only the inverse-limit model, so the basis/cofinal part is agent-written and labelled as such. Status: not in the dropped list, no repair note, still unsplit on live, no SGA cited, 0 new nodes, proof_deps equal the union of uses. The changed last sentence is correct and is named in the report: the old wording is false on the point site (A=B=Z, t=v=2, so Z_2→F_2), and the new one, pi_{en}Psi=beta_n∘(pi_n)^d, is what was meant. Tested Z→Z[i] with t=2, v=1+i, e=2; d=0; t a unit; t=0. Steps 1, 3, 4 and 5 are correct; I checked the index arithmetic s_{em} mod v^m and z_{en}→z_n. One fault, C1/C4 in step 2: the module-sheafified target is the abelian sheafification of B/t^nB with the interface-lemma action. Steps 4–6 use it as the ring sheaf B/t^nB (the component of T) with the action through the ring map, and no cited statement identifies the two. FIX: step 2 now factors the ring unit through P^# by the interface lemma's universal property, and that map is bijective by lem-pc-sites-sheafification-underlying-sets (Mathlib leaf, same unit; abelian and ring cases both give the set sheafification). Added it to uses and proof_deps. The statement is unchanged. No duplicates found in the DAG.; 1 file(s) fixed by the reviewer"
+ }
 }
