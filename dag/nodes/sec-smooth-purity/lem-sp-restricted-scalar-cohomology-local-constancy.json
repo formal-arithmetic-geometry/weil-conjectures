@@ -19,9 +19,107 @@
   "def-weil-proetale-geometric-stalk",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a cochain representative $C^\\bullet$ of $K$ and a K-flat resolution $P^\\bullet\\to C^\\bullet$ by [lem-pc-kflat-resolution]. Put $L^\\bullet=\\operatorname{Res}_{A_T\\to B_T}(B_T)[0]$. By [lem-pur-derived-change-of-rings], the complex $D^\\bullet=P^\\bullet\\otimes_{A_T}B_T$, with right-factor $B_T$-action, represents $K_B$ in $D(B_T)$. After restricting scalars, this is exactly the tensor complex computing $K\\otimes_{A_T}^{\\mathbf L}L^\\bullet$ by [def-weil-derived-tensor]: forgetting the right-factor action does not change any term or differential [def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-derived-tensor",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution) and 06YY (lemma-derived-base-change); K-flat computation with the right-factor action"
+   }
+  },
+  {
+   "text": "Let $b$ be an upper cohomological bound for $K$. By [lem-pur-proetale-constant-module-pullback-homology], the termwise pullback of $C^\\bullet$ has cohomology $a_A^*\\mathcal H^j(K)$ and vanishes for $j>b$. The same lemma applies to $L^\\bullet$, whose only possibly nonzero cohomology is the constant $A$-module sheaf with value $B$ in degree zero. Its pullback is the constant $A_X$-module with value $B$ by [lem-sfb-geometric-inverse-image-constant-module]; the canonical coefficient identification for the actual pullback is [lem-pur-proetale-constant-coefficient-comparison]. This is locally constant and its geometric stalks are $B$, hence finite, by [lem-weil-proetale-constant-sheaf-stalk]. The zero cohomology sheaves have zero constant models and finite zero stalks. Thus both inputs meet every bounded-above and local-constancy hypothesis of the restricted tensor lemma.",
+   "uses": [
+    "lem-pur-proetale-constant-module-pullback-homology",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "lem-weil-proetale-constant-sheaf-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 094H (lemma-locally-constant-tensor-product), input hypotheses; sites.tex Tags 0H7J and 00YV for constant-module inverse image"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-proetale-restricted-tensor-finite-local-constancy] with the scheme morphism $a$, the finite ring $A$, the complexes $C^\\bullet,L^\\bullet$, and the chosen acyclic-tensor K-flat resolution $P^\\bullet\\to C^\\bullet$. Step 2 checks its upper bounds and the hypotheses for each nonzero input cohomology; for $C^\\bullet$ these are precisely the hypotheses on $K$. For every $q$, its conclusion and the computation in step 1 give local constancy as an $A_X$-module and finite geometric stalks for $F_q=a_A^*\\mathcal H^q(\\operatorname{Res}D^\\bullet)$.",
+   "uses": [
+    "lem-pur-proetale-restricted-tensor-finite-local-constancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 094H (lemma-locally-constant-tensor-product) and 07A4 (lemma-pullback-tensor-product), specialized to the second factor B_T[0]"
+   }
+  },
+  {
+   "text": "Write $E_q=a_B^*\\mathcal H^q(K_B)$. We identify the underlying abelian sheaves of $E_q$ and $F_q$. Exact scalar restriction [lem-weil-pbc-restriction-derived-products] gives $\\mathcal H^q(\\operatorname{Res}D^\\bullet)=\\operatorname{Res}\\mathcal H^q(D^\\bullet)$: both are the kernel of the same differential modulo the image of the same preceding differential, with the action restricted. By [lem-pe-constant-left-module-inverse-image], forgetting scalars from either the $A$- or the $B$-module inverse image gives $a^{-1}_{\\operatorname{Ab}}$ of that same underlying abelian sheaf. These are the actual pullbacks used here because [lem-pur-proetale-constant-coefficient-comparison] makes both canonical maps $c_A^a,c_B^a$ invertible; tensoring along such an isomorphism merely identifies the coefficient ring. Together with step 1, this gives $|E_q|\\simeq|F_q|$ as sheaves of sets. This comparison requires no flatness of $B$ over $A$.",
+   "uses": [
+    "lem-weil-pbc-restriction-derived-products",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-pur-proetale-constant-coefficient-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV (proposition-functoriality-algebraic-structures-topoi), underlying abelian inverse image; exact scalar restriction on kernels and images"
+   }
+  },
+  {
+   "text": "Choose a covering $\\{U_t\\to X\\}$ and constant $A$-module models $N_t$ for $F_q$ by [def-weil-proetale-locally-constant-sheaf]. If $U_t$ is nonempty, choose a geometric point $\\bar u$ of it. By [lem-weil-proetale-weakly-etale-localization] the localized site $X_{\\mathrm{proet}}/U_t$ with ring $A_X|_{U_t}$ is identified with $(U_t)_{\\mathrm{proet}}$ with ring $A_{U_t}$, so the constant module sheaf of $N_t$ on the localized site is the constant module sheaf of $N_t$ on $(U_t)_{\\mathrm{proet}}$ (the same sheafification, transported along the identification of sites), and pointed neighbourhoods of $\\bar u$ in the two sites correspond. The constant-module germ isomorphism [lem-weil-proetale-constant-sheaf-stalk] on $(U_t)_{\\mathrm{proet}}$ then identifies $N_t$ with the stalk there of $F_q|_{U_t}$, which is the stalk of $F_q$ at the composite point of $X$ and is finite by step 3. The restriction-stalk identification follows directly from [def-weil-proetale-geometric-stalk]: pointed neighbourhoods admitting a map to $U_t$ are cofinal, since any pointed neighbourhood can be refined by its fibre product with $U_t$. On an empty $U_t$ replace the model by the zero module. Thus every $N_t$ can be taken finite. Pulling this cover back to any object of the site gives the objectwise finite locally constant set condition. Step 4 gives that condition for $|E_q|$ as well.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Definition 093Q (definition-locally-constant); finite local values from constant germs, with the empty covering member treated separately"
+   }
+  },
+  {
+   "text": "Apply [lem-sp-finite-ring-action-local-constancy] on the chosen small pro-étale site of $X$, to the finite commutative ring $\\Lambda=B$ and the $B_X$-module sheaf $E_q$. Step 5 supplies its hypothesis on the underlying set sheaf. Its conclusion, applied to the final object $X$, is a covering $\\{V_{q,t}\\to X\\}_t$ and finite $B$-modules $M_{q,t}$ with $E_q|_{V_{q,t}}\\simeq\\underline{M_{q,t}}$ as module sheaves on the localized sites. This is the stated conclusion. The argument is for a fixed arbitrary $q$, so it imposes no common cover over all degrees and no lower cohomological bound.",
+   "uses": [
+    "lem-sp-finite-ring-action-local-constancy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093S (lemma-morphism-locally-constant), finite-action refinement giving target-ring module models"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-derived-tensor",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-proetale-constant-module-pullback-homology",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-pur-proetale-constant-coefficient-comparison",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-pur-proetale-restricted-tensor-finite-local-constancy",
+  "lem-weil-pbc-restriction-derived-products",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk",
+  "lem-sp-finite-ring-action-local-constancy",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 094H and 07A4 via the existing restricted-tensor lemma; sites.tex Tag 00YV for underlying inverse image and sites-modules.tex Tag 093S for the finite B-action refinement"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +155,45 @@
    "results": "8 hits: Algebra.Extension.tensorH1Cotangent, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Extension.tensorCotangentSpace, Algebra.FormallyEtale.instTensorProduct, Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars",
    "date": "2026-10-21",
    "verdict": "no match: ordinary condensed local constants and algebraic cotangent modules do not give target-ring-valued derived local cohomology"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|derived.*[Tt]ensor|[Tt]ensor.*derived|[Ll]ocally[Cc]onstant",
+   "results": "0 hits: ; directory Algebra/Category/ModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern constant condensed modules, underived tensor functors, or finite morphisms of schemes; none proves this derived pro-étale coefficient-change statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor over a finite constant ring preserves locally constant finite cohomology sheaves and the finite target coefficient action",
+   "results": "8 hits: CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier, CommRingCat.Under.instPreservesLimitUnderDiscreteFunctorTensorProdOfFinite, CommRingCat.Under.instPreservesFiniteProductsUnderTensorProd, CondensedSet.LocallyConstant.functorFullyFaithful, PresheafOfModules.Finite.toPresheaf_preservesFiniteColimits, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, CompHausLike.LocallyConstantModule.functor_map_val, CompHausLike.LocallyConstantModule.functor_obj_val",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern constant condensed modules, underived tensor functors, or finite morphisms of schemes; none proves this derived pro-étale coefficient-change statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern constant condensed modules, underived tensor functors, or finite morphisms of schemes; none proves this derived pro-étale coefficient-change statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite rings A to B derived scalar extension of a bounded above complex whose pullback cohomology is finite locally constant has finite locally constant B module cohomology",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, CondensedMod.LocallyConstant.functor, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor_obj_val",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern constant condensed modules, underived tensor functors, or finite morphisms of schemes; none proves this derived pro-étale coefficient-change statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars of derived extension of finite constant coefficient rings has locally constant finite homology on an arbitrary scheme pullback",
+   "results": "8 hits: AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, CompHausLike.LocallyConstantModule.functor, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme, AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme, LightCondMod.LocallyConstant.functor",
+   "date": "2026-10-21",
+   "verdict": "no match: results concern constant condensed modules, underived tensor functors, or finite morphisms of schemes; none proves this derived pro-étale coefficient-change statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-scalar-extension-functor",
@@ -78,5 +211,74 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-restricted-scalar-cohomology-local-constancy",
+  "worker": "stage1",
+  "summary": "Q70 assembles existing restricted-tensor, constant-module inverse-image and finite-action lemmas. The K-flat computation, exact scalar restriction and the underlying inverse-image comparison are explicit; finite geometric stalks give finite local values with empty members handled separately. No statement change and no new nodes.",
+  "blueprint": "Realizes scalar-extension proof (2), restricted tensor and target coefficient action refinement, through ancestor det-sp-scalar-extension-functor; steps 1--3 supply restricted cohomology, steps 4--6 retain the actual B-module action and finite local models.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "K-flat resolution existence on a general ringed site, used to supply the resolution required by the restricted-tensor lemma. This unit gives no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General derived change-of-rings computation retaining the right-factor B-action. This unit gives no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pur-proetale-constant-module-pullback-homology",
+    "why": "Exact canonical pro-étale inverse image commutes with cohomology and retains upper bounds. This unit gives no replacement for this generic tool."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "General constant-module pullback tool identifies the second tensor factor after pullback. This unit gives no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pur-proetale-constant-coefficient-comparison",
+    "why": "Canonical constant coefficient isomorphism identifies actual tensor pullback with the fixed-ring inverse image. This unit gives no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "Constant-module germs identify local model values with geometric stalks. This unit gives no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pur-proetale-restricted-tensor-finite-local-constancy",
+    "why": "Generic restricted-tensor theorem for two bounded-above finite locally constant inputs; specialize the second input to the constant A-module B. This unit gives no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-restriction-derived-products",
+    "why": "Exact restriction commutes with cohomology; no product or derived-adjunction assertion is needed. This unit gives no replacement for this generic tool."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "General algebraic inverse image commutes with forgetting scalars, for comparison of the A and B computations. This unit gives no replacement for this generic tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identification of the localized pro-étale site X_proet/U with U_proet and of the restricted constant ring, needed to apply the constant-sheaf stalk lemma on a covering member. This unit gives no replacement for this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-proetale-constant-module-pullback-homology",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-pur-proetale-constant-coefficient-comparison",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-pur-proetale-restricted-tensor-finite-local-constancy",
+  "lem-weil-pbc-restriction-derived-products",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q70-3ae88a605",
+  "group": "Q70",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-3ae88a605 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. The delivery has no new nodes and leaves the statement unchanged. The statement is true. Pullback commutes with derived tensor. Stacks 094H (sites-cohomology l.14356) gives local constancy over A, and the finite B-action refinement (Stacks 093S, sites-modules l.8448, via lem-sp-finite-ring-action-local-constancy) gives finite B-module models. The cover may depend on q and no lower bound is claimed; non-flat Z/4->F_2 is consistent with this. Checked cases: empty X, K=0, B=0, A=B. Step 1 is correct: K-flat P (lem-pc-kflat-resolution) and change of rings (lem-pur-derived-change-of-rings) give the same complex as def-weil-derived-tensor with B restricted to A. Step 2 is correct: pullback-homology bounds plus lem-sfb-geometric-inverse-image-constant-module (no flatness needed) and the constant-stalk lemma. Step 3 meets every hypothesis of lem-pur-proetale-restricted-tensor-finite-local-constancy and claims only the A-module output. Step 4 is correct: exact restriction, V f^* = f^{-1}_Ab V, and invertible c_A, c_B give |E_q| = |F_q|. Step 6 matches the item's conclusion exactly. Fault fixed: step 5 applied lem-weil-proetale-constant-sheaf-stalk, which is stated for Y_proet of a scheme, on the localized site X_proet/U_t without citing the identification of that site with (U_t)_proet. I added lem-weil-proetale-weakly-etale-localization (existing, split, no cycle) to step 5's text and uses (step now non-elementary), to proof_deps and to split_report.tool_uses. Other checks: no duplicate in the DAG, no cycle (DFS), no SGA, and every Stacks tag checked against tags/tags. The route fits parent det-sp-scalar-extension-functor step 3 / blueprint paragraph (2); the unit has no steps. I accept the nine declared generic tool uses.; 1 file(s) fixed by the reviewer"
+ }
 }
