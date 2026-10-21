@@ -7,19 +7,8 @@ module
 
 public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
-import Sheaf.RingTheory.WeaklyEtaleField
-import WeilConjectures.ConstructibleSheaf.Refinement
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImageStalk
-import Sheaf.AlgebraicGeometry.ProEtaleModulePullbackComposition
-import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
-import Sheaf.AlgebraicGeometry.ProEtalePullbackLocallyConstant
-import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
+import Sheaf.Paper.ProEtaleConstantModuleConstructibility
+import all Sheaf.Paper.ConstructibleCoefficientSerre
 
 /-!
 # Exactness closure of globally constructible pro-etale sheaves
@@ -90,6 +79,17 @@ theorem constructibleProEtale_exactClosure
       S.ShortExact → IsConstructibleProEtaleModuleSheaf Y A S.X₁ →
       IsConstructibleProEtaleModuleSheaf Y A S.X₃ →
       IsConstructibleProEtaleModuleSheaf Y A S.X₂) := by
-  sorry
+  have h (F : proEtaleRingModules Y (proEtaleConstantRing Y A)) :
+      IsConstructibleProEtaleModuleSheaf Y A F ↔
+        IsConstructibleProEtaleCoefficientModuleSheaf Y (ULift.{u + 1, u} A) F :=
+    (proEtaleModuleRestriction_constructible_iff Y A F).trans
+      (CoefficientSerre.coefficient_constructible_iff Y (ULift.{u + 1, u} A) F).symm
+  obtain ⟨hkc, hext⟩ := constructibleCoefficient_exactClosure Y (ULift.{u + 1, u} A)
+  constructor
+  · intro F G f hF hG
+    obtain ⟨hk, hc⟩ := hkc F G f ((h F).mp hF) ((h G).mp hG)
+    exact ⟨(h _).mpr hk, (h _).mpr hc⟩
+  · intro S hS h₁ h₃
+    exact (h _).mpr (hext S hS ((h _).mp h₁) ((h _).mp h₃))
 
 end AlgebraicGeometry.Scheme
