@@ -21,9 +21,102 @@
   "def-pur-completed-operation-expressions",
   "lem-pur-completed-primitive-counit-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the four constructors of [def-pur-completed-operation-expressions]. Induct simultaneously over all output locations on expression size: an input has size zero, a unit size one, a tensor has size one plus both child sizes, and a pullback has size one plus its child size. The induction claim is that $S_P$ is normalized and the specified recursive $\\beta_P:K_P\\to\\mathcal L S_P$ is invertible. Every child has strictly smaller size. Induction on this natural number therefore permits both tensor hypotheses at once, even when the two children coincide.",
+   "uses": [
+    "def-pur-completed-operation-expressions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Agent expansion of extracted original step 7: well-founded induction on finite expression syntax."
+   }
+  },
+  {
+   "text": "For an input $i$, $S_i=A_i$ is normalized by the input hypothesis, $K_i=\\mathcal L A_i$, and $\\beta_i=1_{\\mathcal L A_i}$. For a unit at $W$, $S_{1_W}=U_W$ is normalized by the assumed closure for $U$, $K_{1_W}=\\mathcal L U_W$, and $\\beta_{1_W}=1_{\\mathcal L U_W}$. Thus both leaf cases satisfy the claim, with their prescribed identity comparisons.",
+   "uses": [
+    "def-pur-completed-operation-expressions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Agent expansion of extracted original step 7: input and coefficient-unit base cases."
+   }
+  },
+  {
+   "text": "Let $P=T_W(P_1,P_2)$, with both children of output $W$. By induction both $S_{P_j}$ are normalized and $b_j=\\beta_{P_j}$ are isomorphisms. The assumed tensor closure makes $S_P=T_W(S_{P_1},S_{P_2})$ normalized. The completed tensor is a bifunctor by [def-pur-integral-derived-operations], so $v=\\widehat T_W(b_1,b_2)$ has inverse $\\widehat T_W(b_1^{-1},b_2^{-1})$: either composite is the image of the pair of identity maps. Its target is $\\widehat T_W(\\mathcal L_WS_{P_1},\\mathcal L_WS_{P_2})$. Put $c=\\beta_T(S_{P_1},S_{P_2})$, the specified quotient realization followed by $\\mathcal L_WT_W(e,e)$ in [lem-pur-completed-primitive-counit-comparison]. The primitive-isomorphism hypothesis applies to these normalized children. The prescribed comparison is $\\beta_P=c\\circ v$, with inverse $v^{-1}\\circ c^{-1}$. This proves the tensor induction step without reassociation.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Agent expansion of extracted original step 7: binary tensor constructor and explicit inverse."
+   }
+  },
+  {
+   "text": "Let $P=F_f(Q)$ for $f:X\\to Y$, with $Q$ of output $Y$. Induction gives normalized $S_Q$ and an isomorphism $b=\\beta_Q:K_Q\\to\\mathcal L_YS_Q$. The assumed pullback closure makes $S_P=F_f(S_Q)$ normalized. The completed pullback is a functor by [def-pur-integral-derived-operations], so $v=\\widehat F_f(b)$ has inverse $\\widehat F_f(b^{-1})$, by preservation of composition and identities. Its target is $\\widehat F_f(\\mathcal L_YS_Q)$. The specified primitive $c=\\beta_F(S_Q)$ of [lem-pur-completed-primitive-counit-comparison] is invertible by the hypothesis at this normalized child. Thus the required recursion gives $\\beta_P=c\\circ v$, with inverse $v^{-1}\\circ c^{-1}$. Together with the two leaf cases and the tensor case this proves both induction claims for every finite typed $P$.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-pur-completed-primitive-counit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Agent expansion of extracted original step 7: pullback constructor and completion of induction."
+   }
+  },
+  {
+   "text": "Fix such a $P$ of output $W$. By [lem-coef-derived-system-evaluation-calculus], $\\mathcal R_W$ is a functor on the derived category and $e_{S_P}:\\mathcal R_W\\mathcal L_WS_P\\to S_P$ is its actual adjunction counit in the whole derived system category. The preceding induction gives normalized $S_P$, so [lem-coef-normalized-dvr-effectivity] makes this coherent counit invertible. Functoriality makes $\\mathcal R_W(\\beta_P)$ invertible, with inverse $\\mathcal R_W(\\beta_P^{-1})$. Consequently the specified $\\gamma_P=e_{S_P}\\circ\\mathcal R_W(\\beta_P)$ is an isomorphism of whole systems, with inverse $\\mathcal R_W(\\beta_P^{-1})\\circ e_{S_P}^{-1}$. No boundedness or constructibility hypothesis is needed for the cited effectivity assertion.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-normalized-dvr-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Agent expansion of extracted original step 8: apply the coherent reduction functor and normalized-system counit."
+   }
+  },
+  {
+   "text": "For $m\\ge n\\ge1$, transition maps give natural transformations from evaluation at $m$ to restriction of evaluation at $n$. Indeed, the compatible componentwise morphisms in [lem-coef-semilinear-derived-sections] commute with the strict transitions; this equation holds degreewise on system complexes, and remains natural after passing to homotopy and then inverting quasi-isomorphisms. Hence it holds for every whole derived-system morphism. Put $b=\\mathcal R_W(\\beta_P)$ and $e=e_{S_P}$, both such morphisms by [lem-coef-derived-system-evaluation-calculus]. Their two transition equations are\n$$\\tau^{\\mathcal R\\mathcal L S_P}_{m,n}b_m=\\operatorname{Res}_{m,n}(b_n)\\tau^{\\mathcal R K_P}_{m,n},\\qquad \\tau^{S_P}_{m,n}e_m=\\operatorname{Res}_{m,n}(e_n)\\tau^{\\mathcal R\\mathcal L S_P}_{m,n}.$$\nCompose these equations and use functoriality of restriction to obtain\n$$\\tau^{S_P}_{m,n}(e_mb_m)=\\operatorname{Res}_{m,n}(e_nb_n)\\tau^{\\mathcal R K_P}_{m,n}.$$\nSince $(\\gamma_P)_r=e_rb_r$, this is precisely the required actual transition square. At $m=n$ both transitions are identities, so the same argument includes that case.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Agent expansion of extracted original step 8: natural transitions for the constructed whole-system composite, with the two factor squares displayed."
+   }
+  },
+  {
+   "text": "The constructor cases preserve the given parentheses and only inspect the finitely many vertices of $P$. They never enumerate the available scheme or input sets. With no inputs the unit, tensor and pullback cases alone still apply; if there are no scheme indices there are no output-typed expressions and the assertion is vacuous. Repeated inputs are handled by separate occurrences in the same induction, with no distinctness assumption. Thus arbitrary independent universes for scheme and input indices impose no additional restriction. The proof used the given whole-system maps and functorial inverses throughout, so neither faithfulness of finite reduction nor a tensor/inverse-limit interchange enters the conclusion.",
+   "uses": [
+    "def-pur-completed-operation-expressions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "Agent expansion of extracted original steps 7-8: empty contexts, repeated inputs, universes and the stated recursion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-completed-operation-expressions",
+  "def-pur-integral-derived-operations",
+  "lem-pur-completed-primitive-counit-comparison",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Order 2232, the sentence that the natural Weil actions commute with finite reduction; formal finite-expression/counit argument extracted as original steps 7-8 of lem-pur-completed-operation-tower-substitution, preserved in coord/reports/N5/lem-pur-completed-operation-tower-substitution.md. This induction is agent-written, not a theorem quoted from the blueprint."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -59,10 +152,52 @@
    "results": "21 hits: Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Algebra/Basic.lean, Mathlib/Tactic/Polynomial/Basic.lean, Mathlib/Tactic/Linarith/Parsing.lean, Mathlib/Tactic/Ring/Common.lean",
    "date": "2026-10-21",
    "verdict": "no match: free monoidal normalization, ordinary inverse systems and general derived adjunction formulas do not prove this typed completed-operation recursion and coherent reduction square"
+  },
+  {
+   "tool": "grep",
+   "query": "reductionComparison|completedValue|systemValue|Functor.map_isIso",
+   "results": "8 hits: Mathlib/CategoryTheory/Category/RelCat.lean, Mathlib/CategoryTheory/Limits/VanKampen.lean, Mathlib/CategoryTheory/ConcreteCategory/ReflectsIso.lean, Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/Topology/Sheaves/Stalks.lean, Mathlib/AlgebraicTopology/DoldKan/NReflectsIso.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned generic functor, free monoidal coherence or ordinary inverse-system statements do not state this typed sheaf-system recursion with its specified primitive maps and coherent reduction counit"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Structural induction on finite typed derived tensor and pullback expressions yields isomorphisms from primitive natural isomorphisms",
+   "results": "8 hits: CategoryTheory.Limits.CategoricalPullback.mkNatIso, Mathlib.Tactic.BicategoryLike.MkEqOfNaturality.rec, CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.e, CategoryTheory.Functor.Monoidal.tensorObjComp, CategoryTheory.NatIso.isIso_app_of_isIso, CategoryTheory.MonoidalCategory.tensorIso, CategoryTheory.Limits.WidePullbackShape.functorExt.congr_simp, CategoryTheory.MonoidalCategory.tensor_isIso",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned generic functor, free monoidal coherence or ordinary inverse-system statements do not state this typed sheaf-system recursion with its specified primitive maps and coherent reduction counit"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isIso",
+   "results": "12 hits: CategoryTheory.Functor.map_isIso, CategoryTheory.Functor.map_inv, CategoryTheory.NatIso.inv_map_hom_app, CategoryTheory.NatIso.inv_map_inv_app, CategoryTheory.Adjunction.inv_counit_map, CategoryTheory.Adjunction.inv_map_unit, AlgebraicGeometry.coprodOpenCover, AlgebraicGeometry.sigmaOpenCover",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned generic functor, free monoidal coherence or ordinary inverse-system statements do not state this typed sheaf-system recursion with its specified primitive maps and coherent reduction counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite typed tensor pullback expressions preserve normalized systems and recursively defined counit comparisons are isomorphisms",
+   "results": "8 hits: CategoryTheory.FreeMonoidalCategory.normalizeIsoApp, CategoryTheory.FreeMonoidalCategory.normalizeIsoAux, CategoryTheory.FreeMonoidalCategory.normalizeIso, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp', CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_eq, CategoryTheory.FreeMonoidalCategory.normalizeObj_tensor, CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_tensor, CategoryTheory.FreeMonoidalCategory.normalizeIsoAux_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned generic functor, free monoidal coherence or ordinary inverse-system statements do not state this typed sheaf-system recursion with its specified primitive maps and coherent reduction counit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An induction on expression syntax composes invertible functor comparisons and a derived reduction adjunction counit into compatible maps of inverse systems",
+   "results": "8 hits: InverseSystem.globalEquiv_compatibility, InverseSystem.globalEquiv, InverseSystem.globalEquiv_naturality, InverseSystem.pEquivOnLim, InverseSystem.IsNatEquiv, InverseSystem.pEquivOnGlue, InverseSystem.pEquivOnSucc, InverseSystem.isNatEquiv_piEquivLim",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned generic functor, free monoidal coherence or ordinary inverse-system statements do not state this typed sheaf-system recursion with its specified primitive maps and coherent reduction counit"
+  },
+  {
+   "tool": "grep",
+   "query": "instance map_isIso|theorem map_inv|def normalizeIsoApp|def normalizeIsoAux|def normalizeIso",
+   "results": "9 hits: Mathlib/CategoryTheory/Functor/Category.lean, Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Monoidal/Free/Coherence.lean, Mathlib/CategoryTheory/Iso.lean, Mathlib/CategoryTheory/Iso.lean, Mathlib/CategoryTheory/Iso.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned generic functor, free monoidal coherence or ordinary inverse-system statements do not state this typed sheaf-system recursion with its specified primitive maps and coherent reduction counit"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-completed-operation-tower-substitution",
@@ -82,5 +217,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-finite-expression-reduction-comparison",
+  "worker": "stage1",
+  "summary": "Q84 expands the conditional finite-expression lemma into seven steps: size induction, identity leaf cases, the two constructor cases with explicit inverses, coherent-counit reduction, composition of the two actual transition squares, and empty/repeated-context checks. Reuses all existing notions and generic system tools; no new nodes and no change to the statement. All non-elementary input is in the cited statements; the constructor arguments use precisely the closure and primitive-isomorphism assumptions already stated.",
+  "blueprint": "Nearest ancestor def-weil-frobenius-coefficient-twists, main-20261015 order 2232, sentence that natural Weil actions commute with finite reduction and scalar extension. This item realizes the finite-expression induction and coherent counit reduction of original parent proof steps 7-8; present parent assembly step 3 applies this lemma. Steps 1-4 implement the recursion, steps 5-6 its reduction, and step 7 its edge cases.",
+  "tool_uses": [
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "The generic reduction/total-limit adjunction supplies the actual counit and reduction functor on whole systems; the purity unit has no separate theorem constructing this adjunction."
+   },
+   {
+    "node": "lem-coef-normalized-dvr-effectivity",
+    "why": "The generic normalized-DVR reconstruction theorem makes the coherent counit invertible without boundedness; this is a coefficient-system tool already required in the item setup."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "The generic ordinary derived category of semilinear systems supplies compatible componentwise morphisms and natural transitions; it is used to specialize transition naturality to the constructed composite, not to replace a purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-normalized-dvr-effectivity",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-62b91cb47",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-62b91cb47 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full and accept the split. The diff against side-live is limited to proof, proof_deps, proof_origin, searches, status and split_report; the statement, stmt_deps, source and blueprint are unchanged, and the item is still unsplit live. There are no new nodes, no SGA citation and no repair note. Source: blueprint main-20261015 def-weil-frobenius-coefficient-twists l.16-17, correctly marked as an agent-written proof. Steps 1-4: a size induction over the four constructors of def-pur-completed-operation-expressions with the claim stated; the leaves are normalized by the input and closure hypotheses. The tensor and pullback steps are well typed: \\hat T and \\hat F are functors by def-pur-integral-derived-operations, β_T(S_{P1},S_{P2}) has source \\hat T(𝓛S_{P1},𝓛S_{P2}) and β_F(S_Q) has source \\hat F_f(𝓛S_Q), as in lem-pur-completed-primitive-counit-comparison. They are invertible by the item's own hypotheses, and the inverses are taken in the right order. Step 5: functoriality of 𝓡 and the counit come from evaluation-calculus, and effectivity gives levelwise isomorphisms for M=R lim Res, which is 𝓛. The step to a whole-system isomorphism uses the detection clause of evaluation-calculus, which this step cites but does not name; maintainer note: name it. Step 6: the strict transitions give a natural transformation that descends to D (as in the natural t_{m,n} of semilinear-derived-sections); composing the squares for 𝓡β and e gives exactly the item's equation, including m=n, without any detection of equality. Step 7: S empty means the claim is vacuous, I empty still has units, and repeated inputs are allowed. Small cases checked: a single input, a single unit, T(i,i) and F_g F_f i. No cycle: only the parent cites the item. No duplicate: lem-pur-integral-realization-recursion and lem-pur-integral-coherence-tower are different statements. The parent's step 3 uses exactly this conditional statement. Accepted tool_uses: lem-coef-derived-system-evaluation-calculus, lem-coef-normalized-dvr-effectivity and lem-coef-semilinear-derived-sections, which are generic coefficient-system tools already listed in the parent's tool_uses. The review_split 'no such node' messages are a false positive: the tool does not follow the chapter symlinks."
  }
 }
