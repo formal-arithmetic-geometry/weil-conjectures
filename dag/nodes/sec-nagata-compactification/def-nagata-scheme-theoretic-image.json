@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-nagata-scheme-theoretic-image",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Scheme-theoretic image",
- "statement": "For a morphism $u:W\\to X$ of schemes, the *scheme-theoretic image* of $u$ is\nthe largest closed subscheme $X'$ of $X$ through which $u$ factors, i.e. the\nclosed subscheme defined by $\\ker(\\mathcal O_X\\to u_*\\mathcal O_W)$. A\nsubscheme $W\\subseteq X$ is *scheme-theoretically dense* if its\nscheme-theoretic image in $X$ is $X$ itself. The scheme-theoretic closure of a\nlocally closed subscheme is the scheme-theoretic image of its immersion.",
+ "statement": "Let $g\\colon T\\to Y$ be a morphism of schemes. Its *kernel ideal*\n$\\ker(g)\\subseteq\\mathcal O_Y$ is the largest quasi-coherent ideal\ncontained in the kernel of $\\mathcal O_Y\\to g_*\\mathcal O_T$ (this kernel\nitself when $g$ is quasi-compact). The *scheme-theoretic image*\n$\\operatorname{SIm}(g)$ of $g$ is the closed subscheme of $Y$ defined by\n$\\ker(g)$, with inclusion\n$g_{\\mathrm{im}}\\colon\\operatorname{SIm}(g)\\hookrightarrow Y$ and factor map\n$g^{\\mathrm{im}}\\colon T\\to\\operatorname{SIm}(g)$ as in\n[lemma-nagata-scheme-image-ideal-qc]. A morphism $g\\colon T\\to Y$ is\n*scheme-theoretically dense* if its scheme-theoretic image is $Y$ itself,\ni.e. $\\ker(g)=0$. The scheme-theoretic closure of a locally closed\nsubscheme is the scheme-theoretic image of its immersion.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/def-nagata-scheme-theoretic-image.md",
   "place": "node def-nagata-scheme-theoretic-image, order 65"
@@ -21,16 +21,55 @@
  "proof_origin": null,
  "mathlib_searches": [
   {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
-   "query": "AlgebraicGeometry.Scheme.Hom.image",
-   "results": [
-    "Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme:662 (abbrev)"
-   ],
-   "date": "2026-10-08"
+   "tool": "grep",
+   "query": "abbrev.*image|def.*ker|imageι|toImage|SchemeTheoreticallyDominant",
+   "results": "13 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Functorial.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+   "date": "2026-10-21",
+   "verdict": "match: source inspection confirms the relevant kernel, image and density declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "scheme theoretic image of a morphism of schemes defined by its kernel ideal sheaf",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.image, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.IdealSheafData.ker_subschemeι, AlgebraicGeometry.Scheme.Hom.imageι, AlgebraicGeometry.Scheme.IdealSheafData.range_subschemeι, AlgebraicGeometry.Scheme.Hom.toImage, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.specTargetImageIdeal",
+   "date": "2026-10-21",
+   "verdict": "match: source inspection confirms the relevant kernel, image and density declarations"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.image, AlgebraicGeometry.Scheme.Hom.ker",
+   "results": "1 hits: AlgebraicGeometry.Scheme.Hom.toImage_app",
+   "date": "2026-10-21",
+   "verdict": "candidate: Hom.toImage_app; exact definitions confirmed by the other searches and source inspection"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of schemes the scheme theoretic image is the closed subscheme cut out by the largest quasi coherent ideal contained in the kernel of the structure sheaf map",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.image, AlgebraicGeometry.Scheme.Hom.toImage, AlgebraicGeometry.Scheme.Hom.imageι, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.Hom.toImage_app, AlgebraicGeometry.specTargetImageIdeal, AlgebraicGeometry.Scheme.IdealSheafData.map, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support",
+   "date": "2026-10-21",
+   "verdict": "match: source inspection confirms the relevant kernel, image and density declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsSchemeTheoreticallyDominant|ker_eq_bot|isSchemeTheoreticallyDominant_iff",
+   "results": "5 hits: 20, 38, 39, 41, 49",
+   "date": "2026-10-21",
+   "verdict": "match: source inspection confirms the relevant kernel, image and density declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "Hom.ker_apply|Hom.toImage_imageι|isIso_subschemeι_iff_eq_bot|def ofIdeals|le_ofIdeals_iff",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+   "date": "2026-10-21",
+   "verdict": "match: source inspection confirms the relevant kernel, image and density declarations"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.Hom.image",
+  "file": "Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme.lean",
+  "line": 662,
+  "how": "One declaration per clause, all read in the pinned checkout. Kernel ideal: AlgebraicGeometry.Scheme.Hom.ker, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean:692, is IdealSheafData.ofIdeals of the affine section kernels; IdealSheafData.ofIdeals:104 and le_ofIdeals_iff:125 give exactly the largest quasi-coherent ideal contained in those kernels. Under QuasiCompact g, Scheme.Hom.ker_apply, Basic.lean:702, identifies it with the ordinary sheaf kernel on the affine basis. Image and inclusion: Scheme.Hom.image and Scheme.Hom.imageι, Subscheme.lean:662 and :665, are g.ker.subscheme and its closed immersion. Factor map and equality: Scheme.Hom.toImage and Scheme.Hom.toImage_imageι, Subscheme.lean:710 and :715, require no quasi-compactness. Density: AlgebraicGeometry.IsSchemeTheoreticallyDominant, Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean:38, is by definition g.ker = bottom; Scheme.isIso_subschemeι_iff_eq_bot, Subscheme.lean:735, is exactly the equivalence with the image inclusion being an isomorphism. Closure of a locally closed subscheme is the one-line specialization Scheme.Hom.image i to its immersion i, with inclusion i.imageι. Thus every clause is an existing definition or direct single-lemma identification, with quasi-compactness used only for the ordinary-kernel parenthesis."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "detailed_form",
@@ -82,5 +121,20 @@
   "statement": "Let $g\\colon T\\to Y$ be a morphism of schemes. Its *kernel ideal*\n$\\ker(g)\\subseteq\\mathcal O_Y$ is the largest quasi-coherent ideal\ncontained in the kernel of $\\mathcal O_Y\\to g_*\\mathcal O_T$ (this kernel\nitself when $g$ is quasi-compact). The *scheme-theoretic image*\n$\\operatorname{SIm}(g)$ of $g$ is the closed subscheme of $Y$ defined by\n$\\ker(g)$, with inclusion\n$g_{\\mathrm{im}}\\colon\\operatorname{SIm}(g)\\hookrightarrow Y$ and factor map\n$g^{\\mathrm{im}}\\colon T\\to\\operatorname{SIm}(g)$ as in\n[lemma-nagata-scheme-image-ideal-qc]. A morphism $g\\colon T\\to Y$ is\n*scheme-theoretically dense* if its scheme-theoretic image is $Y$ itself,\ni.e. $\\ker(g)=0$. The scheme-theoretic closure of a locally closed\nsubscheme is the scheme-theoretic image of its immersion.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-scheme-theoretic-image",
+  "worker": "stage1",
+  "summary": "Updated the erroneous imported statement verbatim to blueprint_update main-20261015, then matched every clause to existing Mathlib definitions and lemmas with read source lines and six logged searches. No project declaration supplies the whole definition as an attachment; Mathlib supplies the leaf. No new nodes, proof steps or route changes. The report records counterexamples to the old largest-closed-subscheme and unrestricted-raw-kernel wording, and distinguishes the density convention from Stacks in the non-quasi-compact case.",
+  "blueprint": "Realizes the entire definition at main-20261015/sk-lem-nagata-sketch-closure/def-nagata-scheme-theoretic-image.md, order 73: kernel ideal, image with inclusion and factor map, density, and closure. This definition has no proof steps; the unit kernel/image construction is supplied by Mathlib."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q92-58d025df9",
+  "group": "Q92",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-58d025df9 (reviewer sub-agent of L); spot-checked: I read the mathematics in full. One-commit Mathlib-leaf delivery, no new nodes; not superseded (still imported on live and side-live), not in the dropped list. The new statement is word for word the main-20261015 blueprint_update (order 73). It fixes two errors in the old wording, checked against Stacks: the image is the smallest closed factorization, not the largest (01R7; closed origin in A¹ shows it), and the raw kernel is not quasi-coherent without quasi-compactness (0GIK: K(Y)=0 but K(D(t))=k[t,1/t]; 01R6 takes the largest quasi-coherent subideal, 01R8 gives the raw kernel under qc alone). Mathlib match checked clause by clause at the cited lines: Hom.ker Basic.lean:692 = ofIdeals:104 with le_ofIdeals_iff:125; Hom.ker_apply:702 needs only [QuasiCompact]; Hom.image/imageι Subscheme.lean:662/665; toImage:710 and toImage_imageι:715 hold for every morphism; IsSchemeTheoreticallyDominant SchemeTheoreticallyDominant.lean:38 is ker=⊥; isIso_subschemeι_iff_eq_bot:735; closure = Hom.image of the immersion. All of this is within B8. stmt_deps are the blueprint uses (conventions and lemma-nagata-scheme-image-ideal-qc, no cycle). No node states the whole bundle (closure, qc-open density and factor nodes cover single clauses), so same_as=[] is correct. All split citers use the image construction or the kernel description for qc maps, so they still hold. Maintainer notes: the imported lem-chow-graph step 3 and lem-chow-closed-model step 0 still cite this item for the universal property ('largest'); they should cite lemma-nagata-scheme-image-universal when split. The report wrongly says the source path was moved to main-20261015; it still names master order 65, as on 60 other nodes that adopted blueprint_update, so no change. Edge cases checked: identity, empty source, closed origin, Spec k→Spec k[ε]/(ε²), 0GIK."
  }
 }
