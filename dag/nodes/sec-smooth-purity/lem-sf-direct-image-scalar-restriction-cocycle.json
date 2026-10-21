@@ -14,9 +14,88 @@
   "def-weil-pbc-proetale-operations",
   "lem-weil-proetale-direct-image-restriction-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $R=A,B,C$, take $\\mathcal A_R=\\operatorname{Mod}(R_Z)$ and $\\mathcal B_R=\\operatorname{Mod}(R_Y)$ on the small sites of [def-weil-pbc-proetale-site], and $F_R=p_*^R$ from [def-weil-pbc-proetale-operations]. These are abelian categories, and $F_R$ is additive: its maps and addition are computed on sections. The small-site hypothesis of [prop-pur-kinjective-resolutions-exist] holds by the chosen small skeleton, so every complex of $\\mathcal A_R$ has a K-injective resolution. Scalar restriction on both sites is exact and has the stated termwise derived functor by [lem-weil-proetale-direct-image-restriction-of-scalars]. Its definition [def-pc-sheaf-restrict-scalars] and the formula $(p_*M)(U)=M(Z\\times_YU)$ give $F_Rr_{\\theta,Z}=r_{\\theta,Y}F_S$ on sections and on maps: both give $M(Z\\times_YU)$ with $a\\cdot m=\\theta(a)m$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-proetale-operations",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
+   }
+  },
+  {
+   "text": "First prove uniqueness for any one map $\\theta:R\\to S$. Suppose $\\gamma$ is another natural isomorphism satisfying the prescribed normalization. For each K-injective $S_Z$-complex $H$, choose a resolution of $r_{\\theta,Z}H$ by [prop-pur-kinjective-resolutions-exist]. The normalization in [lem-weil-proetale-direct-image-restriction-of-scalars] makes both $\\gamma_{QH}$ and $\\beta_{\\theta,QH}$ the inverse of the same localized direct-image map, under the same canonical evaluations. Thus they agree. For arbitrary $L$, choose a representing complex $N$ in [def-weil-abstract-derived-category] and a K-injective resolution $N\\to H$. It gives an isomorphism $q:L\\xrightarrow{\\sim}QH$. Put $U=P_Rr_{\\theta,Z}$ and $V=r_{\\theta,Y}P_S$. Naturality gives $V(q)\\gamma_L=\\gamma_{QH}U(q)=\\beta_{\\theta,QH}U(q)=V(q)\\beta_{\\theta,L}$. Cancel the isomorphism $V(q)$ to obtain $\\gamma_L=\\beta_{\\theta,L}$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
+   }
+  },
+  {
+   "text": "To apply the generic composition theorem with strict composite restriction functors, put $r_{01}=r_{\\varphi,Z}$, $r_{12}=r_{\\psi,Z}$, $r_{02}=r_{01}r_{12}$, and similarly $s_{01},s_{12},s_{02}$ on $Y$. Define\n$$\\widetilde\\beta_{02}=\\rho_Y^{-1}P_C\\circ\\beta_\\chi\\circ P_A(\\rho_Z).$$\nThe associators $\\rho_T$ are the sectionwise identity: the action of $a\\in A$ is $\\psi(\\varphi(a))$. Hence they commute with $p_*$ and with every complex map, including resolution maps. Their localization is the canonical exact-functor identification of [lem-weil-pbc-exact-functor-derived-factorization]. For a K-injective $C_Z$-complex $H$ and any K-injective resolution $a:r_{02}H\\to I$, set $d=a\\rho_{Z,H}^{-1}:r_{\\chi,Z}H\\to I$. This is a K-injective resolution. The normalization of $\\beta_\\chi$ says its component in the evaluation using $d$ is $[p_*d]^{-1}$. Changing to $a$ in the source and $s_{02}$ in the target conjugates this map by the sectionwise-identity associators; since $d\\rho_{Z,H}=a$, the resulting component is exactly $[p_*a]^{-1}$. Explicitly, write $c_a,c_d$ for the canonical resolution identifications. In [lem-sf-kinjective-derived-map-computation] take $h=Q(\\rho_{Z,H})$, source resolution $a$ and target resolution $d$. Its transported map is $(Qd)h(Qa)^{-1}=1_{QI}$, so its unique homotopy representative is $1_I$ and\n$$c_d\\circ P_A(Q\\rho_{Z,H})\\circ c_a^{-1}=[p_*1_I]=1_{Q(p_*I)}.$$\nOn the target the identity $p_*\\rho_{Z,H}=\\rho_{Y,p_*H}$ identifies the two coefficient presentations. Thus $\\widetilde\\beta_{02}$ has precisely the generic normalization, not just the correct endpoints.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-normalized-derived-comparison-composition] with indices $0,1,2$ corresponding to $A,B,C$, the six abelian categories and the three additive direct-image functors of step 1, and the exact restriction functors of step 3. Its equalities $r_{02}=r_{01}r_{12}$ and $s_{02}=s_{01}s_{12}$ hold by their definitions. All three underived direct-image squares are the sectionwise equalities checked in step 1. The total right derived functors are exactly the K-injective-defined $P_R$; their canonical resolution identifications are those of [lem-sf-kinjective-derived-map-computation]. The supplied $\\beta_{01}=\\beta_\\varphi$, $\\beta_{12}=\\beta_\\psi$ have the required inverse-resolution-map normalization by [lem-weil-proetale-direct-image-restriction-of-scalars], and $\\beta_{02}=\\widetilde\\beta_{02}$ has it by step 3. Existence of all required resolutions was checked in step 1. The theorem therefore gives, for every $L$,\n$$\\widetilde\\beta_{02,L}=r_{\\varphi,Y}(\\beta_{\\psi,L})\\circ\\beta_{\\varphi,r_{\\psi,Z}L}.$$\nIn particular the generic theorem does not require any restriction functor to preserve K-injectives.",
+   "uses": [
+    "lem-sf-normalized-derived-comparison-composition",
+    "lem-sf-kinjective-derived-map-computation",
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
+   }
+  },
+  {
+   "text": "Substitute the definition of $\\widetilde\\beta_{02,L}$ into the last equation and compose on the left with $\\rho_{Y,P_CL}$. Cancellation of $\\rho_Y\\rho_Y^{-1}$ yields\n$$\\beta_{\\chi,L}\\circ P_A(\\rho_{Z,L})=\\rho_{Y,P_CL}\\circ r_{\\varphi,Y}(\\beta_{\\psi,L})\\circ\\beta_{\\varphi,r_{\\psi,Z}L},$$\nwhich is the asserted cocycle with its specified associators. All categories used were the unbounded categories of all module sheaves; the only coefficient hypotheses used to invoke the supplied comparisons were that the rings are finite and commutative.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-proetale-operations",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-sf-normalized-derived-comparison-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 070Y (lemma-K-injective-defined), K-injective evaluation; the scalar-associator and uniqueness calculations are agent-written using the cited generic normalized-comparison theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -52,10 +131,52 @@
    "results": "CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKInjective; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.mapDerivedCategorySingleFunctor; DerivedCategory.singleFunctorIsoCompQ",
    "date": "2026-10-21",
    "verdict": "no match: ordinary scalar composition and a single localizer-derived comparison do not give this geometric K-injective-normalized cocycle with restriction associators"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived pushforward restriction of scalars comparison is coherent for composition of coefficient homomorphisms",
+   "results": "ModuleCat.restrictScalarsComp'App_hom_naturality; PresheafOfModules.pushforwardComp; ModuleCat.restrictScalarsComp'App_inv_naturality; ModuleCat.restrictScalarsComp'App_hom_naturality_assoc; ModuleCat.restrictScalarsComp'App_inv_naturality_assoc; PresheafOfModules.pushforward_assoc; ModuleCat.restrictScalarsComp'_hom_app; ModuleCat.restrictScalarsComp'",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ordinary scalar/pushforward composition and generic derived-transformation declarations; none states the pro-etale normalized comparison cocycle and uniqueness in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(comp|[dD]erived)|rightDerivedFunctorComparison",
+   "results": "Mathlib/FieldTheory/IsAlgClosed/Basic.lean; Mathlib/FieldTheory/Isaacs.lean; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean; Mathlib/Algebra/Algebra/RestrictScalars.lean; Mathlib/FieldTheory/PurelyInseparable/Basic.lean; Mathlib/FieldTheory/RatFunc/IntermediateField.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean; Mathlib/AlgebraicGeometry/Modules/Sheaf.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ordinary scalar/pushforward composition and generic derived-transformation declarations; none states the pro-etale normalized comparison cocycle and uniqueness in one specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pushforward coefficient restriction comparisons satisfy the composition cocycle when scalar restriction need not preserve K injectives",
+   "results": "SheafOfModules.pushforwardNatTrans_comp; PresheafOfModules.pushforward_obj_map_apply'; SheafOfModules.pushforwardComp; CochainComplex.HomComplex.Cocycle.postcomp; CochainComplex.HomComplex.Cocycle.postcomp_coe; PresheafOfModules.map_comp; CochainComplex.HomComplex.Cocycle.precomp_coe; groupCohomology.cocyclesMkOfCompEqD",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ordinary scalar/pushforward composition and generic derived-transformation declarations; none states the pro-etale normalized comparison cocycle and uniqueness in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"comp\"",
+   "results": "CategoryTheory.Functor.instIsRightDerivedFunctorCompCompWhiskerRightHomAssociatorOfIsLeftAdjoint; CategoryTheory.Functor.rightDerivedNatTrans_comp; CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc; CategoryTheory.LocalizerMorphism.isRightDerivedFunctor_iff_precomp; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ordinary scalar/pushforward composition and generic derived-transformation declarations; none states the pro-etale normalized comparison cocycle and uniqueness in one specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms between right derived functors determined on injective resolutions compose by their normalization",
+   "results": "CategoryTheory.InjectiveResolution.rightDerived_app_eq; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.Functor.rightDerived_map_eq; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc; CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ordinary scalar/pushforward composition and generic derived-transformation declarations; none states the pro-etale normalized comparison cocycle and uniqueness in one specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComparison|rightDerived_comp",
+   "results": "Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean [Mathlib/CategoryTheory]",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ordinary scalar/pushforward composition and generic derived-transformation declarations; none states the pro-etale normalized comparison cocycle and uniqueness in one specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-compact-support-restriction-of-scalars",
@@ -75,5 +196,34 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-direct-image-scalar-restriction-cocycle",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the existing general normalized-derived-comparison composition theorem; verified small-site K-injective existence, additive underived scalar squares, strict composite normalization, and the canonical rho transports. Proved uniqueness by naturality along K-injective representatives. No new nodes, Mathlib leaves, or Lean attachments.",
+  "blueprint": "Realizes the coefficient-restriction coherence needed for the finite-level transition maps in the ancestor def-weil-integral-rational-qbar-compact-support formula Rf_!K=R lim_n Res_n Rf_{!,n}K_n; current main-20261015 ancestor is under sec-six-functors-basics/sk-prop-int-brown. No unit or chapter route change.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "Supplies the specified comparison, exact restriction, and inverse-resolution-map normalization; no operation-definition node supplies this coefficient comparison."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic exact-functor localization identifies termwise scalar associators with their canonical derived comparisons."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-0c3c29689",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-0c3c29689 (reviewer sub-agent of L); spot-checked: PASS. The statement is unchanged and matches the value clause of lem-weil-proetale-direct-image-restriction-of-scalars and the normalization formula of lem-sf-normalized-derived-comparison-composition. The endpoints of the cocycle agree, and the coefficient category is the unbounded D(Mod(R_T)) on the small pro-étale site. Step 1: the V-small skeleton gives K-injective resolutions by prop-pur-kinjective-resolutions-exist; p_* is additive and p_*r = rp_* holds on sections over Z×_Y U. Step 2: uniqueness follows from K-injective representatives and naturality, and I checked the cancellation of V(q). Step 3: I re-derived it. With d = aρ^{-1}, map-computation gives Qg = 1, so c_d P_A(Qρ)c_a^{-1} = 1; naturality of ρ_Y and p_*ρ_Z = ρ_Y p_* then give the normalization [p_*a]^{-1} and the invertibility the generic theorem requires. The target-side step is terse but correct. Step 4: every hypothesis of the generic composition theorem is checked, including strict composites, the three squares, the normalizations and that no restriction is assumed to preserve K-injectives. Step 5 is elementary. Small cases checked: identity maps, p = id, the zero ring and the non-flat Z/4→Z/2. proof_deps equals the union of the uses, and there is no cycle (closure of 350 nodes). Source derived.tex 070Y (lemma-K-injective-defined, line 9747) was read; the remaining argument is correctly marked as agent-written. Tool uses accepted: the direct-image restriction node (sk-thm-sf-compatibility) supplies the comparison itself, and exact-functor factorization is a Mathlib leaf. Duplicate candidates read and found different: lem-pur-ringed-derived-composition-cocycle, lem-pur-completed-coefficient-pushforward-comparison, lem-pur-diagram-ring-restriction-pushforward, lem-coef-finite-direct-image, lem-finite-compact-support-scalar-transport and the j_! sibling lem-sf-open-extension-scalar-restriction-coherence. same_as [] is right. No SGA citation. No new nodes and no fixes. Remark: the report mentions a citations.json that is not in the commit, which is harmless."
+ }
 }
