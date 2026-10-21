@@ -19985,3 +19985,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/N8/lem-weil-pbc-realization-completed-mate (reviewer PASS; first push; new nodes: 0); claim not held by N8: not your claim
 - 03:49 L: merged deliver/Q20/lem-sfb-continuous-lattice-sum (reviewer FIX; first push; new nodes: 0)
 - 03:49 L: merged deliver/Q77/lem-sfb-internal-module-operations-transport (reviewer FIX; after a return; new nodes: 2)
+- 03:49 L: merged deliver/NH/lem-sfb-flat-dvr-scalar-tensor (reviewer PASS; first push; new nodes: 0)
