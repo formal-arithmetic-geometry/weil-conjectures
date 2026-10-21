@@ -20,9 +20,142 @@
   "def-sfb-module-open-lower-shriek",
   "def-sfb-continuous-map-condensed-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work for one $F\\in\\{E,\\Omega\\}$. By [def-weil-pbc-internal-abelian-sheaf-module-equivalence], internal modules may be treated as modules over the section-ring sheaf, leaving underlying sections and maps unchanged. Coefficient identifications for any map $f:T\\to T'$ here follow from $p_{T'}f=p_T$ and the definition $C_{F,T}=p_T^*C_F$ in [sk-def-sfb-pulled-back-coefficients, sk-def-sfb-pullback-from-point]. The inverse-image theorem [lem-weil-pbc-left-exact-site-inverse-image-tensor] gives exactness and the monoidal composition comparisons for these site inverse images; after the displayed ring identifications, module inverse image is the same exact sheaf inverse image with its transported action. These identifications use the whole ring $S\\mapsto C(S,F)$; in particular they make no identification of $C_\\Omega$ with a finite-subextension-valued coefficient ring.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+   }
+  },
+  {
+   "text": "Let $Z=\\bigcup_{a\\in A_i}D_a$ with reduced structure, $i:Z\\hookrightarrow Y$, $Z_V=Z\\cap V$, and $h:Z_V\\hookrightarrow V$. Its complementary open in $V$ is $b:W\\hookrightarrow V$. Put $K=Rb_*L_F[0]$. The open-slice calculus [lem-sp-subterminal-derived-image-calculus] gives $b^*K\\cong L_F[0]$, using the actual counit. Apply the first localization triangle of [lem-weil-pbc-condensed-open-closed-recollement] on $V$ to obtain\n$$b_!L_F[0]\\longrightarrow K\\xrightarrow{\\eta_h}h_*h^*K\\longrightarrow b_!L_F[0][1].$$\nThe hypotheses hold: the schemes are Noetherian finite type over a field, so the displayed opens are quasi-compact; $L_F[0]$ and $K$ are bounded below, as a nonnegative injective resolution computes the latter. The ring in the recollement statement is any commutative condensed ring, so includes both $C_E$ and $C_\\Omega$.",
+   "uses": [
+    "lem-sp-subterminal-derived-image-calculus",
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+   }
+  },
+  {
+   "text": "Apply $Rj_*$ and then exact $i^*$ to this triangle. Exactness of the ambient derived functors follows from [lem-sfb-derived-exchange-exact-normalization] (take the identity base-change square for $j$); exact inverse image is also part of the recollement statement [lem-weil-pbc-condensed-open-closed-recollement]. Set $B=Rj_*b_!L_F[0]$. The resulting distinguished triangle is\n$$i^*B\\longrightarrow i^*Rj_*K\\xrightarrow{i^*u_F}i^*Rj_*h_*h^*K\\longrightarrow i^*B[1],$$\nwhere $u_F=Rj_*(\\eta_h)$ is precisely the map in [lem-sfb-partial-kummer-boundary-unit-model]. It will suffice to prove $i^*u_F$ invertible.",
+   "uses": [
+    "lem-sfb-derived-exchange-exact-normalization",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-sfb-partial-kummer-boundary-unit-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+   }
+  },
+  {
+   "text": "For any pair of profinite groups $G_o,G_i$, [lem-sfb-condensed-product-action-inflation] supplies three Grothendieck abelian categories $\\mathcal A_1(C_F),\\mathcal A_{G_o}(C_F),\\mathcal A_{G_o\\times G_i}(C_F)$ and their specified exact inflation left adjoints. Apply [lem-sfb-derived-composition-adjunction-normalization] to these functors, with the identity identification between their composite and inflation of a trivial $G_o\\times G_i$-action. Its conjugate is the natural isomorphism\n$$\\theta:R\\Gamma_{G_o\\times G_i}\\xrightarrow{\\sim}R\\Gamma_{G_o}R\\Gamma_{G_i}^{G_o}.$$\nThe theorem's normalization identifies this map on K-injective representatives with the class of the identity $M^{G_o\\times G_i}=(M^{G_i})^{G_o}$, so it is exactly the comparison named $\\theta$ in the new geometric model. In particular no analytic cochain acyclicity, Koszul calculation, completeness, or commuting of scalar extension with invariants is required here.",
+   "uses": [
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sfb-derived-composition-adjunction-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+   }
+  },
+  {
+   "text": "Fix a boundary stratum $S_J$ with $J\\cap A_i\\ne\\varnothing$. Apply [lem-sfb-partial-kummer-boundary-unit-model] to $Y,D,L$ and the given partition. Its hypotheses are exactly the assumed regularity of $Y$, strict normal crossings of $D$, and specified Kummer-triviality of $L$, with the same all-continuous rings. It gives an actual pro-etale cover of the entire $S_J$, on which $u_F|_{S_J}$ is $p_T^*\\theta_{M_F}$. Step 4 makes $\\theta_{M_F}$ invertible, and a functor preserves inverses, so the covered restrictions are isomorphisms. By [lem-zl-condensed-cover-restriction-conservative], $u_F|_{S_J}$ is an isomorphism in the derived module category of $S_J$. This checks sheaves on whole strata rather than only their ordinary geometric stalks.",
+   "uses": [
+    "lem-sfb-partial-kummer-boundary-unit-model",
+    "lem-zl-condensed-cover-restriction-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+   }
+  },
+  {
+   "text": "The finitely many strata with $J\\cap A_i\\ne\\varnothing$ partition $Z$. To pass from step 5 to $i^*u_F$, use finite closed/open induction, not a geometric-point conservativity assertion. A finite stratification by these normal-crossing strata admits a filtration by closed unions: order the nonempty strata so that every stratum in the closure of a chosen stratum comes earlier (the closure of $S_J$ can only meet $S_{J'}$ with $J\\subseteq J'$). Successively remove an open stratum from the remaining closed union. On each such closed union the open complement is quasi-compact, so [lem-weil-pbc-proetale-ringed-open-closed] and [lem-sfb-exact-open-closed-unbounded-calculus] apply. Their two restriction functors jointly reflect isomorphisms. The restriction to the removed stratum is an isomorphism by step 5, and the restriction to the remaining closed union is an isomorphism by induction, starting with the empty union. Hence $i^*u_F$ is invertible. The triangle in step 3 now has zero first object (equivalently, apply its long exact cohomology sequence), giving $i^*B=0$.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-exact-open-closed-unbounded-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+   }
+  },
+  {
+   "text": "Apply the open-slice calculus [lem-sp-subterminal-derived-image-calculus] to the two open subobjects $V,Y^\\circ$ of $Y$. It identifies $c^*B$ with $Ra_*b^*b_!L_F[0]=Ra_*L_F[0]$; the last identification is the invertible open unit from [lem-weil-pbc-proetale-ringed-open-closed]. Let $\\rho:c^*B\\xrightarrow{\\sim}Ra_*L_F[0]$ be this natural isomorphism. By the adjunction $c_!\\dashv c^*$ in [lem-weil-pbc-condensed-open-closed-recollement], the map in the statement is exactly\n$$e_F=\\varepsilon_{c,B}\\circ c_!(\\rho^{-1}).$$\nThe same recollement lemma gives the triangle $c_!c^*B\\xrightarrow{\\varepsilon_c}B\\to i_*i^*B\\to$. Since step 6 gives $i^*B=0$, the counit $\\varepsilon_{c,B}$ is invertible. Thus $e_F$ is an isomorphism, with precisely the requested normalization.",
+   "uses": [
+    "lem-sp-subterminal-derived-image-calculus",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-condensed-open-closed-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+   }
+  },
+  {
+   "text": "The slice identification $\\rho$ is natural in its input, and the counit is natural, so the displayed formula for $e_F$ is natural. For the coefficient map $C_E\\to C_\\Omega$, [lem-weil-pbc-ring-sheaf-change-adjunction] gives the ordinary derived direct-image and inverse-image scalar-restriction identifications, with their adjunction compatibility. Extension by zero commutes with restriction of scalars: on the extension presheaf it keeps the same groups, restrictions and scalar action, and sheafification gives the same module; this is the sheafified presheaf description in [lem-weil-pbc-proetale-ringed-open-closed]. Its adjunction bijection sends a map to its same restriction, so the resulting identification also preserves the open unit and counit. The slice comparison is the sectionwise fibre-product identity of [lem-sfb-proetale-open-restriction-counit]; restricting scalars leaves it unchanged. On K-injectives this remains the same derived comparison by [lem-sfb-kinjective-direct-image-open-word-model]. Hence, writing $\\mu:L_E\\to\\operatorname{Res}L_\\Omega$ for $x\\mapsto1\\otimes x$ and inserting these identifications, naturality gives the equality\n$$\\operatorname{Res}(e_\\Omega)\\circ c_!Ra_*(\\mu)=Rj_*b_!(\\mu)\\circ e_E.$$\nNo scalar extension has been moved past a direct image.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-sfb-proetale-open-restriction-counit",
+    "lem-sfb-kinjective-direct-image-open-word-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+   }
+  },
+  {
+   "text": "Step 6 is the stated zero restriction on the union of inner components, including its intersections with outer components. If $A_i=\\varnothing$, then $c,b$ are identities and $e_F$ is the identity under the canonical comparisons; if $A_o=\\varnothing$, $j,a$ are identities and the map is again the identity on extension by zero. For $D=\\varnothing$ both checks coincide. For rank zero all objects and maps are zero. These cases also follow from the same proof (there are no boundary strata when $Z=\\varnothing$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), all-continuous tame-boundary input; agent proof below the open-image obligation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-sp-subterminal-derived-image-calculus",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-sfb-derived-exchange-exact-normalization",
+  "lem-sfb-partial-kummer-boundary-unit-model",
+  "lem-sfb-condensed-product-action-inflation",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-sfb-kinjective-direct-image-open-word-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), the explicitly added all-continuous tame-boundary obligation; proof via closed localization and the partial Kummer boundary unit, not a proof printed in the blueprint"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +191,45 @@
    "results": "8 hits: IsStarNormal.star_comm_self; isStarNormal_iff; Set.iInter_star; IsStarNormal.of_inr; ContinuousLinearMap.isStarNormal_iff_norm_eq_adjoint; Set.inter_star; Diffeomorph.prodComm; star_comm_self'",
    "date": "2026-10-21",
    "verdict": "no match: the returned constructions do not state this coefficient-specific condensed tame cohomology or geometric exchange assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For transverse normal crossing divisors derived direct image across the outer divisor commutes with extension by zero across the inner divisor for tame lisse condensed modules",
+   "results": "8 hits: ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.IsLocallyDirected.homOfLE_tAux, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Hom.appLE_map",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern scheme restriction identities, star algebras or manifolds, not tame condensed-module shriek/star exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "(tame|transverse).*(pushforward|lowerShriek|extensionByZero)|(pushforward|lowerShriek|extensionByZero).*(tame|transverse)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern scheme restriction identities, star algebras or manifolds, not tame condensed-module shriek/star exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tame transverse normal crossing boundary shriek star exchange",
+   "results": "8 hits: IsStarNormal.star_comm_self, isStarNormal_iff, Set.iInter_star, IsStarNormal.of_inr, ContinuousLinearMap.isStarNormal_iff_norm_eq_adjoint, Set.inter_star, Diffeomorph.prodComm, star_comm_self'",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern scheme restriction identities, star algebras or manifolds, not tame condensed-module shriek/star exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"extend\", \"pushforward\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern scheme restriction identities, star algebras or manifolds, not tame condensed-module shriek/star exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tame local systems on complementary sets of normal crossing components satisfy open shriek star exchange with continuous ell adic coefficients",
+   "results": "8 hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Presheaf.generateEquivalenceOpensLe_inverse, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_map, TopCat.Presheaf.generateEquivalenceOpensLe_inverse'_obj_obj_hom, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern scheme restriction identities, star algebras or manifolds, not tame condensed-module shriek/star exchange"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-continuous-algcl-tame-boundary-comparison",
@@ -83,5 +251,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-transverse-tame-open-shriek-exchange",
+  "worker": "stage1",
+  "summary": "Expanded the geometric exchange into a localization triangle, a partial Kummer model of the closed-unit arrow, normalized composition of derived invariants, finite-stratum detection, the actual open counit, and the scalar-restriction naturality square. Two statement-only new inputs, no Mathlib leaves or statement changes. No SGA route or finite-subextension substitution.",
+  "blueprint": "Realizes the additional all-continuous tame-boundary input below paragraph (3) of det-thm-sf-ctf-stability-direct-images. The cited blueprint paragraph itself only invokes open-image finiteness; it contains no tame calculation. The inherited nearest blueprint ancestor is null, as blueprint_refs.py ancestor reports.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "sk-def-sfb-pulled-back-coefficients",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "sk-def-sfb-pullback-from-point",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-sp-subterminal-derived-image-calculus",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-open-closed-recollement",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-sfb-derived-exchange-exact-normalization",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-zl-condensed-cover-restriction-conservative",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-sfb-proetale-open-restriction-counit",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-sfb-kinjective-direct-image-open-word-model",
+    "why": "Generic coefficient, derived adjunction, support localization or cover-detection infrastructure for the explicit proof; no replacement of the unit open-image route."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Generic exact monoidal inverse-image theorem, used with the site functors defining the coefficient system, including the all-continuous coefficient ring."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-pullback-from-point",
+  "lem-sp-subterminal-derived-image-calculus",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-sfb-derived-exchange-exact-normalization",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-proetale-open-restriction-counit",
+  "lem-sfb-kinjective-direct-image-open-word-model",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-bed2112ec",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-bed2112ec (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and blueprint paragraph (3) of sk-thm-sf-ctf-stability-direct-images. Paragraph (3) has no tame calculation, and the item's agent route is inherited from the NF split. The statement and stmt_deps are byte-identical to the NF 26a608e0 copy, so no target was weakened. There is no repair note and no SGA citation. Steps 2-3: the recollement triangle on V (any commutative condensed ring; b quasi-compact; D^+) is pushed forward by Rj_* and i^*, using the exactness clause of derived-exchange with the identity square. Step 4: derived-composition-adjunction-normalization applies to the inflation chain 1→G_o→G_o×G_i with λ=id, which gives θ on K-injectives. Step 5: the condensed cover-restriction conservativity applies with X=S_J and Λ=C_F. Step 6: I checked the stratification order (the closure of S_J lies in the union of S_J' with J'⊇J) and the joint reflection from exact-open-closed-unbounded-calculus, which gives i^*B=0. Step 7: e_F=ε_c∘c_!(ρ^{-1}) is exactly the adjunct in the statement, and ε is iso by the triangle. Step 8: the scalar square is an explicit equation from ring-sheaf-change, the sheafified j_! presheaf and the open-restriction counit. Step 9: the edge cases are elementary. New nodes: condensed-product-action-inflation is true (modules over R[P] in a sheaf topos; invariants adjoint; (M^H)^G) and is not a duplicate of the abstract-group inflation nodes. partial-kummer-boundary-unit-model carries the geometric core but is not a restatement of the item: it has no j_! and no invertibility, and the item still needs the triangle, the stratum induction, the counit and the scalar arguments. I tested it on the J_o=∅ case and by Mayer-Vietoris on two-branch and three-branch cases. Its source side overlaps tame-stratum-kummer-descent, but its target side is new. The inherited all-continuous Ω risk sits in this node, as recorded for the parent splits. Batch-5 flags: def-trf-SNC is a definition already in the base stmt_deps; trf-slice-subtopos-site-presentation (via subterminal calculus) is general slice-site theory; pd-section-derived-pushpull-normalization (via derived-exchange) is generic derived-functor normalization. All three are outside the assumed statements, so I accepted them. The 14 tool_uses are already-split generic infrastructure, and I accepted them for the maintainer to record. No changes."
  }
 }
