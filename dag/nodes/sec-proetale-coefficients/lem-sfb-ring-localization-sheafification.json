@@ -1,0 +1,83 @@
+{
+ "id": "lem-sfb-ring-localization-sheafification",
+ "kind": "statement",
+ "title": "Sectionwise presheaf model for localization of a ring object",
+ "statement": "Let $C$ be a small site, with presheaf values in a universe containing its objects and arrows. Give abelian sheaves the sheafified tensor product [sk-def-sfb-sheaf-tensor]. Let $R$ be a commutative ring object [sk-def-sfb-ring-object] and $t$ a global section of $R$, with restriction $t_U\\in R(U)$ on each object $U$.\n\nDefine a presheaf of commutative rings $P$ by $P(U)=R(U)[1/t_U]$. Explicitly its elements are fractions $r/t_U^n$, for $r\\in R(U)$ and $n\\geq0$, with relation\n$$r/t_U^n=r'/t_U^m\\quad\\Longleftrightarrow\\quad\\exists k\\geq0:\\ t_U^k(t_U^m r-t_U^n r')=0.$$\nAddition and multiplication are $(r/t_U^n)+(r'/t_U^m)=(t_U^m r+t_U^n r')/t_U^{n+m}$ and $(r/t_U^n)(r'/t_U^m)=rr'/t_U^{n+m}$; restriction sends $r/t_U^n$ to $(r|_V)/t_V^n$ along $V\\to U$.\n\nThe ring sheafification $aP$ [def-weil-pbc-sheafification], viewed as a commutative ring object with the sheafified tensor product, has a canonical ring map $\\eta:R\\to aP$, $r\\mapsto r/1$. The section $\\eta(t)$ is invertible. For every commutative ring object $D$ and ring map $f:R\\to D$ such that $f(t)$ is invertible, there is a unique ring map $\\widetilde f:aP\\to D$ with $\\widetilde f\\eta=f$.\n\nConsequently, if $j:R\\to L$ is any ring map with this same universal property and with $j(t)$ invertible, there is a unique ring-object isomorphism $\\gamma:aP\\xrightarrow{\\sim}L$ satisfying $\\gamma\\eta=j$. No nonzero-divisor assumption on $t$ and no enough-points assumption on $C$ is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0EMC, lemma-simple-invert, applied to the subpresheaf of powers of a global section; ring-object formulation via the sheafified tensor product."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-ring-object",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A localization of a sheaf of commutative rings at a global section is the sheafification of the presheaf of sectionwise localizations, with local fractions and power torsion equality",
+   "results": "{\"t\": \"2026-10-21T04:08:47Z\", \"tool\": \"leanfinder\", \"query\": \"A localization of a sheaf of commutative rings at a global section is the sheafification of the presheaf of sectionwise localizations, with local fractions and power torsion equality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\", \"AlgebraicGeometry.StructureSheaf.IsLocalization.to_basicOpen\", \"TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf\", \"AlgebraicGeometry.StructureSheaf.const_apply'\", \"TopCat.Presheaf.toTotalQuotientPresheaf\", \"AlgebraicGeometry.IsAffineOpen.instAwayCarrierObjOppositeOpensCarrierCarrierCommRingCatSpecPresheafOpOpensBasicOpen\", \"TopCat.Presheaf.totalQuotientPresheaf\"], \"digest\": \"a8a18d54608b1bc4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) constructs an objectwise localization presheaf on a topological space, but does not prove the sheafified ring universal property on an arbitrary small site. IsLocalization.Away and StructureSheaf.isLocallyFraction concern ordinary rings or scheme structure sheaves. Read the presheaf construction and its sectionwise instances; no one-line specialization gives this node."
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*[Ll]ocaliz|[Ll]ocaliz.*sheaf",
+   "results": "{\"t\": \"2026-10-21T04:08:55Z\", \"tool\": \"grep\", \"query\": \"sheaf.*[Ll]ocaliz|[Ll]ocaliz.*sheaf\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Monoidal.lean\", \"Mathlib/CategoryTheory/Sites/Point/Basic.lean\", \"Mathlib/CategoryTheory/Sites/PreservesSheafification.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\", \"Mathlib/CategoryTheory/Sites/Localization.lean\"], \"digest\": \"6d9c1a1b85bdc20b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) constructs an objectwise localization presheaf on a topological space, but does not prove the sheafified ring universal property on an arbitrary small site. IsLocalization.Away and StructureSheaf.isLocallyFraction concern ordinary rings or scheme structure sheaves. Read the presheaf construction and its sectionwise instances; no one-line specialization gives this node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A localization of a sheaf of commutative rings at a global section is the sheafification of sectionwise localizations",
+   "results": "{\"t\": \"2026-10-21T04:08:56Z\", \"tool\": \"leansearch\", \"query\": \"A localization of a sheaf of commutative rings at a global section is the sheafification of sectionwise localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Γ_restrict_isLocalization\", \"AlgebraicGeometry.LocallyRingedSpace.𝒪\", \"AlgebraicGeometry.structureSheafInType\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\", \"AlgebraicGeometry.StructureSheaf.localization_toBasicOpen\", \"TopCat.Presheaf.instIsLocalizationCarrierObjOppositeOpensCarrierCommRingCatObjLocalizationPresheaf\", \"AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp\", \"AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen\"], \"digest\": \"3a688af27f684dde\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) constructs an objectwise localization presheaf on a topological space, but does not prove the sheafified ring universal property on an arbitrary small site. IsLocalization.Away and StructureSheaf.isLocallyFraction concern ordinary rings or scheme structure sheaves. Read the presheaf construction and its sectionwise instances; no one-line specialization gives this node."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away",
+   "results": "{\"t\": \"2026-10-21T04:08:57Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.Away\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsLocalization.Away\", \"IsLocalization.Away.invSelf\", \"selfZPow\", \"IsLocalization.Away.sec\", \"IsLocalization.Away.of_associated\", \"IsLocalization.Away.iff_of_associated\", \"IsLocalization.atUnit\", \"IsLocalization.Away.isDomain\"], \"digest\": \"75476228f6ecce43\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) constructs an objectwise localization presheaf on a topological space, but does not prove the sheafified ring universal property on an arbitrary small site. IsLocalization.Away and StructureSheaf.isLocallyFraction concern ordinary rings or scheme structure sheaves. Read the presheaf construction and its sectionwise instances; no one-line specialization gives this node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The universal ring sheaf obtained by inverting a section has sections locally expressible as fractions, and equal fractions locally satisfy a power torsion equation",
+   "results": "{\"t\": \"2026-10-21T04:08:58Z\", \"tool\": \"leanfinder\", \"query\": \"The universal ring sheaf obtained by inverting a section has sections locally expressible as fractions, and equal fractions locally satisfy a power torsion equation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.isLocallyFraction\", \"AlgebraicGeometry.StructureSheaf.isLocallyFraction_pred\", \"AlgebraicGeometry.StructureSheaf.isFractionPrelocal\", \"AlgebraicGeometry.StructureSheaf.IsFraction\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_mk'\", \"ModuleCat.Tilde.isLocallyFraction\", \"ModuleCat.Tilde.isLocallyFraction_pred\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.isLocallyFraction\"], \"digest\": \"00d201e11f990135\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) constructs an objectwise localization presheaf on a topological space, but does not prove the sheafified ring universal property on an arbitrary small site. IsLocalization.Away and StructureSheaf.isLocallyFraction concern ordinary rings or scheme structure sheaves. Read the presheaf construction and its sectionwise instances; no one-line specialization gives this node."
+  },
+  {
+   "tool": "grep",
+   "query": "localizationPresheaf|toLocalizationPresheaf|[Ll]ocal.*[Ff]raction",
+   "results": "{\"t\": \"2026-10-21T04:09:58Z\", \"tool\": \"grep\", \"query\": \"localizationPresheaf|toLocalizationPresheaf|[Ll]ocal.*[Ff]raction\", \"sub\": \"Topology/Sheaves\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\", \"Mathlib/Topology/Sheaves/CommRingCat.lean\"], \"digest\": \"41dc8f99d0aab870\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf (Mathlib/Topology/Sheaves/CommRingCat.lean:82-107) constructs an objectwise localization presheaf on a topological space, but does not prove the sheafified ring universal property on an arbitrary small site. IsLocalization.Away and StructureSheaf.isLocallyFraction concern ordinary rings or scheme structure sheaves. Read the presheaf construction and its sectionwise instances; no one-line specialization gives this node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-localized-basis-coefficients",
+  "date": "2026-10-21",
+  "group": "Q37"
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-finite-free",
+   "place": "The rational finite-basis comparison and its compatibility with the integral-to-rational maps in the statement; the unit proof says: Pull it back along p_X, and invert ell for the fields.",
+   "via": [
+    "lem-sfb-localized-basis-coefficients"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

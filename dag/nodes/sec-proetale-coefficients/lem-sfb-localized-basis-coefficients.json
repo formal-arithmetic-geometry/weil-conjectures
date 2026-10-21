@@ -13,9 +13,114 @@
   "sk-def-sfb-module-objects",
   "sk-def-sfb-change-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on sections, retaining the internal scalar action. A morphism out of a sheafified tensor product into a sheaf is exactly a morphism from the objectwise tensor presheaf; hence multiplication and module actions are compatible bilinear operations on sections, and their axioms and linearity are tested on these operations. For finite $I$, the tuple sheaf $U\\mapsto R(U)^I$ is a sheaf by componentwise gluing; its injections and projections satisfy the biproduct identities, so it realizes $R^{\\oplus I}$. Thus $q$ gives, on every object, an $R(U)$-linear bijection $R(U)^I\\to T(U)$. Denote its inverse coordinates by $c_i:T(U)\\to R(U)$. They commute with restriction and satisfy $u=\\sum_i\\varphi(c_i(u))b_i$ and $c_i(\\sum_j\\varphi(r_j)b_j)=r_i$.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-ring-object",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+   }
+  },
+  {
+   "text": "The composite $j_T\\varphi:R\\to B$ sends $t$ to the invertible section $j_T(\\varphi(t))$. The assumed universal property of $j_R$ therefore gives a unique ring map $\\varphi_t:A\\to B$ with $\\varphi_tj_R=j_T\\varphi$. Put $s=j_R(t)$ and $v=j_T(\\varphi(t))$; then $\\varphi_t(s)=v$, including the corresponding identity for their inverses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-ring-localization-sheafification] to $(R,t,j_R)$ and $(T,\\varphi(t),j_T)$. The resulting ring sheafifications are also underlying-set sheafifications by [lem-pc-sites-sheafification-underlying-sets]. Therefore [lem-weil-pbc-site-sheafification-sections-local] shows that every section of $A$ is locally $j_R(r)s^{-n}$, and every section of $B$ is locally $j_T(u)v^{-n}$. Moreover, equality of two such fractions implies, after a further covering, equality of their presheaf fractions; the relation in the localization-model statement then gives $t^k(t^m r-t^n r')=0$ in $R$, respectively $\\varphi(t)^k(\\varphi(t)^m u-\\varphi(t)^n u')=0$ in $T$. Exponents and numerators may vary with the member of the cover. These are local statements only; section rings of $A$ and $B$ are not asserted to be sectionwise localizations.",
+   "uses": [
+    "lem-sfb-ring-localization-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+   }
+  },
+  {
+   "text": "On every object define $Q((a_i))=\\sum_i\\varphi_t(a_i)j_T(b_i)$. Ring distributivity makes this additive, and $Q((aa_i))=\\varphi_t(a)Q((a_i))$ makes it $A$-linear for precisely the restriction-of-scalars action in the conclusion. The formula commutes with all restrictions and so defines an internal $A$-linear map. The identity $\\varphi_tj_R=j_T\\varphi$ and preservation of finite sums give $Qj_R^{\\oplus I}=j_Tq$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+   }
+  },
+  {
+   "text": "For local surjectivity, write an arbitrary section $x$ of $B$ locally as $j_T(u)v^{-n}$, using step 3. Set $a_i=j_R(c_i(u))s^{-n}$ on that member of the cover. Then\n$$Q((a_i))=v^{-n}j_T\\!\\left(\\sum_i\\varphi(c_i(u))b_i\\right)=v^{-n}j_T(u)=x.$$\nThus every section has preimages locally; no global lifting through a sheafification map has been assumed.",
+   "uses": [
+    "lem-sfb-ring-localization-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+   }
+  },
+  {
+   "text": "For injectivity, suppose $Q((a_i))=0$ over $U$. Applying step 3 to the finitely many $a_i$ and successively refining the covers, write them simultaneously as $a_i=j_R(r_i)s^{-N}$ on each member of a covering: replace each exponent $n_i$ by $N=\\max_i n_i$ and its numerator by $t^{N-n_i}r_i$. If $I$ is empty take $N=0$. Put $u=\\sum_i\\varphi(r_i)b_i$. Then $j_T(u)v^{-N}=0$. By the equality assertion of step 3, after a further covering there is $k\\geq0$ with $\\varphi(t)^ku=0$. Apply $c_i$, which is $R$-linear, to obtain $t^kr_i=0$. Consequently $j_R(r_i)=s^{-k}j_R(t^kr_i)=0$, so every $a_i$ vanishes on that covering. The separatedness axiom for $A$ gives $a_i=0$ over $U$. Hence $Q$ is injective on sections over every object. Notice that the argument uses a killing power, not cancellation in $R$ or $T$.",
+   "uses": [
+    "lem-sfb-ring-localization-sheafification",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "lem-weil-pbc-site-sheafification-sections-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+   }
+  },
+  {
+   "text": "Given $x\\in B(U)$, choose the local preimages supplied by step 5. On any object with two arrows into covering members over $U$, their restrictions have the same $Q$-image, so step 6 makes them equal. The sheaf axiom for the tuple sheaf glues them uniquely to a preimage over $U$. The unique preimage commutes with restriction; it respects addition and $A$-scalars because $Q$ does and is injective. Thus $Q$ is an isomorphism of internal $A$-modules; set $q_t=Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+   }
+  },
+  {
+   "text": "If $H:A^{\\oplus I}\\to\\operatorname{Res}_{\\varphi_t}B$ is another $A$-linear map with $Hj_R^{\\oplus I}=j_Tq$, evaluate this equation on the standard vector $e_i$ with entry $1$ in position $i$. It gives $H(e_i)=j_T(b_i)=Q(e_i)$. Every local tuple is $\\sum_i a_i e_i$, so $A$-linearity forces $H=Q$. For $I=\\varnothing$ the domain is the zero module and this assertion is immediate. This proves the stipulated uniqueness as well as the canonical square.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-ring-localization-sheafification",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-site-sheafification-sections-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Finite-coordinate argument written by Q37 following the localization construction in Tag 0EMC (lemma-simple-invert), and local sheafification properties in sites.tex Tags 00WB and 00WK; blueprint unit step 3."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +163,38 @@
    "results": "{\"t\": \"2026-10-21T03:15:43Z\", \"tool\": \"leanfinder\", \"query\": \"Localization of commutative ring sheaves takes a specified finite free basis to a basis with the same summand maps and commutes with the canonical localization maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.localizationLocalization\", \"Module.Basis.localizationLocalization_apply\", \"Module.Basis.localizationLocalization_span\", \"Module.Basis.localizationLocalization_repr_algebraMap\", \"Module.Basis.ofIsLocalizedModule\", \"Module.Basis.ofIsLocalizedModule_apply\", \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"Module.Basis.ofIsLocalizedModule_repr_apply\"], \"digest\": \"2053bd6f4e8f02a0\"}",
    "date": "2026-10-21",
    "verdict": "no match: Module.Basis.ofIsLocalizedModule and localizationLocalization apply to ordinary rings and modules. They do not state localization of internal modules over varying ring sheaves, the identification of the localized ring action, and the canonical square. Candidate source read at Mathlib/RingTheory/Localization/Module.lean:112-127."
+  },
+  {
+   "tool": "grep",
+   "query": "ofIsLocalizedModule|localizationLocalization",
+   "results": "{\"t\": \"2026-10-21T04:08:55Z\", \"tool\": \"grep\", \"query\": \"ofIsLocalizedModule|localizationLocalization\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/Module.lean\", \"Mathlib/RingTheory/Localization/LocalizationLocalization.lean\", \"Mathlib/RingTheory/Localization/LocalizationLocalization.lean\", \"Mathlib/RingTheory/Localization/LocalizationLocalization.lean\"], \"digest\": \"ce2a5a474575d3b0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Module.Basis.ofIsLocalizedModule and localizationLocalization concern ordinary rings and modules, not internal ring sheaves with sheafified localizations. Read Mathlib/RingTheory/Localization/Module.lean:105-127 and 143-185."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a ring sheaf with a finite free module basis preserves the basis and scalar map",
+   "results": "{\"t\": \"2026-10-21T04:08:56Z\", \"tool\": \"leansearch\", \"query\": \"Localizing a ring sheaf with a finite free module basis preserves the basis and scalar map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.ofIsLocalizedModule\", \"Module.Basis.localizationLocalization_apply\", \"Module.Basis.localizationLocalization\", \"Module.free_of_isLocalizedModule\", \"Module.FinitePresentation.isLocalizedModule_mapExtendScalars\", \"Module.Finite.instLocalizationLocalizedModule\", \"Module.Basis.localizationLocalization_span\", \"Module.Basis.ofIsLocalizedModule_apply\"], \"digest\": \"9e0f13e76249744a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Module.Basis.ofIsLocalizedModule and localizationLocalization concern ordinary rings and modules, not internal ring sheaves with sheafified localizations. Read Mathlib/RingTheory/Localization/Module.lean:105-127 and 143-185."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalizedModule, Module.Basis",
+   "results": "{\"t\": \"2026-10-21T04:08:56Z\", \"tool\": \"loogle\", \"query\": \"IsLocalizedModule, Module.Basis\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Module.Basis.ofIsLocalizedModule\", \"Module.Basis.ofIsLocalizedModule_span\", \"Module.Basis.ofIsLocalizedModule_apply\", \"Module.Basis.ofIsLocalizedModule_repr_apply\", \"Module.FinitePresentation.exists_basis_localizedModule_powers\"], \"digest\": \"3c0e6260a09373cd\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Module.Basis.ofIsLocalizedModule and localizationLocalization concern ordinary rings and modules, not internal ring sheaves with sheafified localizations. Read Mathlib/RingTheory/Localization/Module.lean:105-127 and 143-185."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free basis of an internal algebra in abelian sheaves remains a basis after localization at a global scalar",
+   "results": "{\"t\": \"2026-10-21T04:08:57Z\", \"tool\": \"leanfinder\", \"query\": \"A finite free basis of an internal algebra in abelian sheaves remains a basis after localization at a global scalar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Basis.localizationLocalization\", \"Module.Basis.localizationLocalization_apply\", \"Module.Basis.localizationLocalization_span\", \"Module.Basis.localizationLocalization_repr_algebraMap\", \"Module.Basis.ofIsLocalizedModule\", \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\"], \"digest\": \"cd28826ad502c474\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Module.Basis.ofIsLocalizedModule and localizationLocalization concern ordinary rings and modules, not internal ring sheaves with sheafified localizations. Read Mathlib/RingTheory/Localization/Module.lean:105-127 and 143-185."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-sfb-cartesian-coefficients-finite-free",
@@ -73,11 +206,27 @@
  "blueprint": {
   "from": {
    "node": "det-prop-sfb-cartesian-coefficients-finite-free",
-   "place": "Proof, sentence beginning Inverting ell: localize the prescribed integral basis and retain its scalar action and compatibility with O to E",
+   "place": "The rational finite-basis comparison and the compatible integral-to-rational square in the ancestor statement; unit proof step 3: Pull it back along p_X, and invert ell for the fields.",
    "via": []
   },
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-localized-basis-coefficients",
+  "worker": "stage1",
+  "summary": "Retained the full statement and specified scalar map. Reduced the localization geometry to one statement-only ring-localization model, reusing the existing underlying-set sheafification and local-section nodes. Proved the finite-basis comparison by explicit local surjectivity and power-torsion injectivity, then gluing and standard-generator uniqueness. No regularity, injectivity, enough-points, or global-denominator hypotheses added.",
+  "blueprint": "Realizes the rational basis and integral-to-rational compatibility in det-prop-sfb-cartesian-coefficients-finite-free, under the unit step 3 sentence Pull it back along p_X, and invert ell for the fields.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-a2180b3bc",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-a2180b3bc (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. The item's statement and stmt_deps are byte-identical to the base (Q21-created, unsplit). Sources checked: Stacks sites-modules 0EMC (lemma-simple-invert, proof omitted, so proof_origin=agent is right), and the main-20261015 finite-free proof sentence 'Inverting ell ... compatible with O to E by construction', which matches blueprint.from. I recomputed all 8 steps. Step 2 gets phi_t from the item's own universal-property hypothesis. Step 3 gets local fractions and the k-power relation from the statements of the new node, lem-pc-sites-sheafification-underlying-sets and lem-weil-pbc-site-sheafification-sections-local. Steps 4-5 verify the formula Q(j_R(c_i u)s^-n)=v^-n j_T(u). Step 6 proves injectivity: c_i(phi(t)^k u)=t^k r_i through Res_phi linearity, with no cancellation. Steps 7-8 give gluing and uniqueness from H(e_i)=j_T(b_i). The off-unit nodes are a Mathlib leaf and the Lean-closed sheafification_sections_local, so they are tools. The new node is the t-power case of 0EMC; I tested it at t=1, t=0, nilpotent t (Z/4, t=2) and on an empty site. It is statement-only, self-contained and acyclic, and it does not restate the item or a clause of the parent. Duplicate search: def-weil-pbc-ringed-section-localization builds the same object (Lean ringedLocalizationRingOfUniverses) without the ring universal property, which exists only as a private lift in LocalizationInverseImageCoherence.lean. Advisory: stage 2 should formalize the new node on that def and promote the lift. Minor: the new node lacks the merged_into and lean_audit keys, which the tools accepted. No fixes written."
+ }
 }
