@@ -38,6 +38,3 @@ L: independent stage-2 immutable head 04978822afb4: --apply-fixes: coord/reports
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-elementary-semistable-chart-globalization: lem-trf-elementary-semistable-chart-globalization: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## lem-weil-pbc-ringed-projection-mate-exact (2026-10-21 03:21 UTC, branch head fd956438f3)
-
-re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; new node(s) not cited by any step: lem-weil-pbc-total-tensor-integer-shifts. Every argument of the old proof becomes a new statement-only node the step cites; do not shorten or blur the argument.

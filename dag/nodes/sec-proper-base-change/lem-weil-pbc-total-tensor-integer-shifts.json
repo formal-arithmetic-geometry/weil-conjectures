@@ -1,0 +1,94 @@
+{
+ "id": "lem-weil-pbc-total-tensor-integer-shifts",
+ "kind": "statement",
+ "title": "Coherent signed integer shifts of totalized additive bifunctors",
+ "statement": "Let $\\mathcal A,\\mathcal B,\\mathcal D$ be abelian categories [def-sp-abelian], and suppose $\\mathcal D$ has countable coproducts. Let $T:\\mathcal A\\times\\mathcal B\\to\\mathcal D$ be additive in each variable. For integer-indexed cochain complexes $P,Q$, with the shift convention of [def-weil-abstract-derived-category], let $T^\\bullet(P,Q)^r=\\bigoplus_{p+q=r}T(P^p,Q^q)$ with differential $T(d_P,1)+(-1)^pT(1,d_Q)$. There are natural chain isomorphisms $s^1_n:T^\\bullet(P[n],Q)\\cong T^\\bullet(P,Q)[n]$ and $s^2_n:T^\\bullet(P,Q[n])\\cong T^\\bullet(P,Q)[n]$, for every $n\\in\\mathbf Z$. The first is unsigned on each summand; the second multiplies the summand whose first-factor degree is $p$ by $(-1)^{np}$. For each fixed argument these comparisons satisfy the zero-shift and addition-of-shifts laws. Chain maps in the fixed argument induce natural transformations commuting with the comparisons in the varying argument. The two orders of extracting shifts $a,b$ in the two arguments differ by $(-1)^{ab}$, after the canonical identification of the two total shifts. These data constitute the canonical integer bifunctor shift structure.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FNH (item-shift-tensor), in Tag 0FNG (section-sign-rules); the general additive-bifunctor version and coherence are Mathlib/Algebra/Homology/BifunctorShift.lean, lines 95-110, 156-174, 199-205, 234-336."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The total tensor product of cochain complexes over an additive monoidal category commutes with integer shifts and preserves mapping cone triangles",
+   "results": "8 hits: CochainComplex.mappingCone.shiftTriangleIso, CochainComplex.mappingCone.shiftTrianglehIso, CochainComplex.mappingCone.inl_v_triangle_mor₃_f, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc, CochainComplex.mappingCone.shiftIso, CochainComplex.mappingCone.mapTriangleIso, CochainComplex.mappingConeCompTriangle, CochainComplex.mappingCone.triangle; ",
+   "date": "2026-10-21",
+   "verdict": "no match in these hits: generic homotopy triangulated functors and localization results do not state coherent total-bifunctor shifts. The exact match was found separately by the recorded Loogle and grep searches."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a cochain complex is a triangulated functor on the homotopy category with the Koszul signed shift in the second variable",
+   "results": "8 hits: HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, HomotopyCategory.instIsTriangulatedIntUp, DerivedCategory.instIsTriangulated, DerivedCategory.instPretriangulated, HomotopyCategory.instPretriangulatedIntUp, CochainComplex.mappingCone.mapTrianglehIso, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory; ",
+   "date": "2026-10-21",
+   "verdict": "no match in these hits: generic homotopy triangulated functors and localization results do not state coherent total-bifunctor shifts. The exact match was found separately by the recorded Loogle and grep searches."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorShift\"",
+   "results": "11 hits: CochainComplex.mapBifunctorShift₁Iso, CochainComplex.mapBifunctorShift₂Iso, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂, CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁_assoc, CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂_assoc; ",
+   "date": "2026-10-21",
+   "verdict": "matching components: mapBifunctorShift₁Iso, mapBifunctorShift₂Iso, their summand and naturality formulas, and mixed-sign identity. The coherent structure is supplied by the instances found in the separate map₂CochainComplex search."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map₂CochainComplex\"",
+   "results": "10 hits: CategoryTheory.Functor.map₂CochainComplex, CategoryTheory.Functor.instCommShift₂IntCochainComplexIntMap₂CochainComplex, CategoryTheory.Functor.instCommShiftCochainComplexIntObjMap₂CochainComplex, CategoryTheory.Functor.instCommShiftCochainComplexIntObjFlipMap₂CochainComplex, CategoryTheory.Functor.instCommShiftCochainComplexIntMapMap₂CochainComplex, CategoryTheory.Functor.instCommShiftCochainComplexIntMapFlipMap₂CochainComplex, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_inv_app; ",
+   "date": "2026-10-21",
+   "verdict": "match for the signed shift clauses: BifunctorShift gives the two chain isomorphisms, their summand formulas, coherent CommShift structures and CommShift natural transformations. No cone or derived-category assertion is included in this leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "map₂CochainComplex.*CommShift|instCommShift.*Map₂CochainComplex|ι_mapBifunctorShift[₁₂]Iso_hom_f|commShiftIso_map₂CochainComplex",
+   "results": "5 hits: Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean; ",
+   "date": "2026-10-21",
+   "verdict": "match for the signed shift clauses: BifunctorShift gives the two chain isomorphisms, their summand formulas, coherent CommShift structures and CommShift natural transformations. No cone or derived-category assertion is included in this leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "F.map₂CochainComplex.CommShift₂Int",
+   "results": "1 hits: Mathlib/Algebra/Homology/BifunctorShift.lean; ",
+   "date": "2026-10-21",
+   "verdict": "match for the signed shift clauses: BifunctorShift gives the two chain isomorphisms, their summand formulas, coherent CommShift structures and CommShift natural transformations. No cone or derived-category assertion is included in this leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total tensor of cochain complexes preserves cone triangles and commutes with integer shifts",
+   "results": "8 hits: CochainComplex.mappingCone.map_δ, HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.commShiftMapCochainComplex, CochainComplex.mappingCone.shiftTriangleIso, CochainComplex.mappingCone.shiftIso, CochainComplex.mappingCone.mapTrianglehIso, CochainComplex.mappingCone.mapTriangleIso, CochainComplex.mappingCone.shiftTrianglehIso; ",
+   "date": "2026-10-21",
+   "verdict": "no match in these hits: generic homotopy triangulated functors and localization results do not state coherent total-bifunctor shifts. The exact match was found separately by the recorded Loogle and grep searches."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Functor.instCommShift₂IntCochainComplexIntMap₂CochainComplex",
+  "file": "Mathlib/Algebra/Homology/BifunctorShift.lean",
+  "how": "Exact general additive-bifunctor statement. CochainComplex.mapBifunctorShift₁Iso:95 and ι_mapBifunctorShift₁Iso_hom_f:103 give the unsigned first map; mapBifunctorShift₂Iso:156 and ι_mapBifunctorShift₂Iso_hom_f:165 give the sign (-1)^(pn). The named instCommShift₂IntCochainComplexIntMap₂CochainComplex is the anonymous instance at line 326 (type at 327); its four fields use the coherent fixed-argument instances at 234 and 281 and the NatTrans.CommShift instances at 269 and 315. The mixed sign is mapBifunctorShift₁Iso_trans_mapBifunctorShift₂Iso:199. Countable coproducts ensure all totalizations used by these declarations exist.",
+  "line": 326
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-ringed-projection-mate-exact",
+  "date": "2026-10-21",
+  "group": "NG"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed proof, first paragraph: 'closed under shifts' and 'under cones' for exact tensor and compatible shift comparisons; extracted from the signed tensor calculation of lem-weil-pbc-ringed-projection-mate-exact.",
+   "via": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
