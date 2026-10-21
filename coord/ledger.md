@@ -21110,3 +21110,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:17 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 08:17 L: returned deliver/Q04/lemma-nagata-strict-transform-chart-localization (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-strict-transform-chart-localization: lemm)
 - 08:17 L: returned deliver/Q27/lem-sfb-internal-extension-finite-presentation (reviewer RETURN: Superseded (A7/B10/C5). The delivery was committed on 2026-10-21 at 05:52 UTC on base 7ffa57a. At 06:14 UTC the live led)
+- 08:17 L: returned deliver/Q01/lem-pe-completion-triangle-comparison (reviewer RETURN: L: independent stage-2 immutable head 2f89f3c9436b: H13/H4: the delivery rebinds NH's landed lean record of lem-pe-princ)
