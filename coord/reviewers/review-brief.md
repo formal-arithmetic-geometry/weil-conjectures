@@ -35,3 +35,13 @@ Do not use any SGA source except SGA 5 for the Lefschetz–Verdier pairing. In p
 ## The current blueprint (2026-10-16)
 
 The current blueprint is `literature/blueprint/main-20261015/`, the weil-conjectures-blueprint main of 2026-10-15, which was aligned with the six-functors lecture notes. `literature/blueprint/master/` is the older snapshot of 2026-10-08. Nodes imported from the new snapshot carry `blueprint_snapshot: main-20261015`. A node whose blueprint text changed carries `blueprint_update` with the new statement and proof: follow it when you touch that node.
+
+## Re-splits of 2026-10-21 (the human)
+
+A delivery answering a repair note "re-split (decision of the human, 2026-10-21)" exists to SPREAD THE WORK: the long
+proof of the item is cut into new nodes that other workers can take at the same time. Compare the item's proof on the
+base with the delivered one, step by step. RETURN the delivery when any argument of the old proof was shortened,
+summarised, merged into a vaguer sentence or dropped instead of becoming a new node with its own self-contained
+statement that the step cites; when a new node only restates the item or one big chunk of it (the work must be spread
+over several nodes of comparable size); or when the item's proof is more than the short assembly of the cited nodes.
+A shorter text that carries the same work in fewer words is the worst answer to this note.

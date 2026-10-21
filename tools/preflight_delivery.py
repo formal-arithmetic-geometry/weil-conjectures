@@ -358,6 +358,24 @@ def main() -> int:
               "is at most 3000 characters (each non-elementary argument a new statement-only node the step cites)")
         if not new_paths:
             f("re-split (the human, 2026-10-21): the delivery adds no new node; the finer split needs new nodes")
+        # the purpose is to spread the work: the arguments leave this node as new nodes others can take at once; a
+        # shorter text without new nodes only hides the same work in vaguer words
+        _b = load_at(base, item_path) if exists_at(base, item_path) else {}
+        _bp = _b.get("proof")
+        _L0 = sum(len(x.get("text", "")) if isinstance(x, dict) else len(str(x)) for x in _bp) if isinstance(_bp, list) else len(_bp or "")
+        _need = max(1, -(-_L0 // 3000) - 1)
+        if len(new_paths) < _need:
+            f(f"re-split (the human, 2026-10-21): the proof was {_L0} characters; carry its work into at least {_need} new "
+              f"nodes (this delivery adds {len(new_paths)}). Shortening the text is not a split: every non-elementary "
+              "argument must become a node of its own that another worker can take")
+        _new_ids = {pathlib.PurePosixPath(x).stem for x in new_paths}
+        _uses = set()
+        for _st in (_p if isinstance(_p, list) else []):
+            if isinstance(_st, dict):
+                _uses |= set(_st.get("uses") or [])
+        _uncited = sorted(_new_ids - _uses)
+        if _uncited:
+            f("re-split (the human, 2026-10-21): new node(s) not cited by any step of the item's proof: " + ", ".join(_uncited))
 
     # 3. the report
     if not exists_at("HEAD", report):
