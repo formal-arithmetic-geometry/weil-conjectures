@@ -23970,3 +23970,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:04 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 23:11 L: merged deliver/NH/lem-sfb-norm-algcl-internal-hom-base-change (reviewer PASS; after a return; new nodes: 0)
 - 2026-10-21T23:11:40Z L: superseded stage-1 delivery NC/lem-sfb-constructible-normed-geometric-fibres at 00f67c1ad14e0c36647cb6a25218ced2422ed93f; current completion retained; packet archived at refs/superseded/NC/lem-sfb-constructible-normed-geometric-fibres/00f67c1ad14e0c36647cb6a25218ced2422ed93f; stale return retired.
+- 23:11 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
