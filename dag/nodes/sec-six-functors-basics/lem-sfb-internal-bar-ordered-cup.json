@@ -16,9 +16,90 @@
   "lem-sfb-condensed-derived-invariant-bar",
   "lem-sfb-condensed-derived-restriction-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-sfb-condensed-internal-bar-resolution] to take the exact homogeneous resolution $P^{-n}=P_n$, with deletion differential and augmentation $e:P\\to A$. Its coordinate change identifies an equivariant $P_n\\to A$ with an internal inhomogeneous function on $G^n$. Use [lem-sfb-internal-inflation-graded-cup] for the canonical derived inflation adjunction and its cup/shift normalization. All parameter powers and coefficients remain in the specified universes.",
+   "uses": [
+    "lem-sfb-condensed-internal-bar-resolution",
+    "lem-sfb-internal-inflation-graded-cup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal bar normalization, detailed below the blueprint unit."
+   }
+  },
+  {
+   "text": "For a character $a$ put $b_a(g,h)=a(g^{-1}h)$. Additivity gives $b_a(g,k)=b_a(g,h)+b_a(h,k)$ and $b_a(ug,uh)=b_a(g,h)$. Define $L_{a,n}:P_n\\to P_{n-1}$, $n\\geq1$, by $[g_0,\\ldots,g_n]\\mapsto b_a(g_0,g_1)[g_1,\\ldots,g_n]$, and put its degree-zero component equal to zero. The free internal-module property in [lem-sfb-condensed-internal-bar-resolution] extends this natural formula linearly after every profinite base change, and invariance of $b_a$ proves equivariance. For $n\\geq2$, the terms deleting $g_i$ with $i\\geq2$ cancel in $\\partial L_a+L_a\\partial$; the remaining coefficient of $[g_2,\\ldots,g_n]$ is $b_a(g_0,g_1)+b_a(g_1,g_2)-b_a(g_0,g_2)=0$. For $n=1$ both components into $P_{-1}=0$ vanish. Thus $L_a:P\\to P[1]$ is a chain map with the differential $d_{P[1]}=-d_P$.",
+   "uses": [
+    "lem-sfb-condensed-internal-bar-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal bar normalization, detailed below the blueprint unit."
+   }
+  },
+  {
+   "text": "For $q\\geq1$ compose the shifted maps $L_{a_q}[q-1]\\circ\\cdots\\circ L_{a_2}[1]\\circ L_{a_1}:P\\to P[q]$; call the composite $F_q$, and put $F_0=1_P$. Induction on the number of maps applied gives, in degree $-n$ for $n\\geq q$, $F_q[g_0,\\ldots,g_n]=(\\prod_{k=1}^q a_k(g_{k-1}^{-1}g_k))[g_q,\\ldots,g_n]$; for $n<q$ it is zero. Composing with $e[q]$ gives the cocycle $f_q:P_q\\to A$ with the displayed coefficient, and the chain-map identity says $f_q\\partial_{q+1}=0$. For $q=0$ this is $e\\partial_1=0$. The coordinate change in [lem-sfb-condensed-internal-bar-resolution] sends $f_q$ to precisely $z$; its naturality supplies the internal $A$-linear chain map $A[-q]\\to U^\\bullet$, including $z=1$ at $q=0$.",
+   "uses": [
+    "lem-sfb-condensed-internal-bar-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal bar normalization, detailed below the blueprint unit."
+   }
+  },
+  {
+   "text": "For the character extension $E_a=A\\oplus A$ with $g(x,y)=(x+a(g)y,y)$, define $\\ell:P_0\\to E_a$ by $[g]\\mapsto(a(g),1)$. It is equivariant since $a(ug)=a(u)+a(g)$, and its quotient is $e$. On $[g_0,g_1]$, $\\ell\\partial_1=(a(g_1)-a(g_0),0)=(b_a(g_0,g_1),0)$. The boundary clause of [lem-sfb-internal-bar-roof-adjunction] therefore identifies the roof $e[1]L_a e^{-1}:A\\to A[1]$ with the connecting arrow of this extension. By [lem-sfb-condensed-derived-restriction-calculus] its shifted adjunct is exactly $[a]$: the degree-one inhomogeneous cocycle is $a$, with its prescribed positive normalization.",
+   "uses": [
+    "lem-sfb-internal-bar-roof-adjunction",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal bar normalization, detailed below the blueprint unit."
+   }
+  },
+  {
+   "text": "Write $x_k=e[1]L_{a_k}e^{-1}$ in the equivariant derived category. Their ordered shifted composite is $e[q]F_q e^{-1}$: between adjacent factors the shifted $e^{-1}$ and $e$ cancel. By [lem-sfb-internal-inflation-graded-cup], repeated cup multiplication and the shifted-composition formula give $[a_1]\\smile\\cdots\\smile[a_q]=T_q\\Phi_q(e[q]F_qe^{-1})$, where $T_0=T_1=1$ and $T_{q+1}=T_qt_{q,1}$. This is an induction, starting with the unit and with the single arrow of step 4, applying the formula with $p=q$ and the next character of degree one at each step. Hence $T_q$ depends only on the degree and fixed shift conventions.",
+   "uses": [
+    "lem-sfb-internal-inflation-graded-cup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal bar normalization, detailed below the blueprint unit."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-internal-bar-roof-adjunction] to $f_q=e[q]F_q$ from step 3, including the augmentation $f_0=e$. It gives $jz=s_q\\epsilon\\Phi_q(e[q]F_qe^{-1})$. Substitute step 5 and use $T_q^{-1}=T_q$ to obtain $jz=\\varepsilon_q\\epsilon([a_1]\\smile\\cdots\\smile[a_q])$ with $\\varepsilon_q=s_qT_q$. Both factors are universal signs and both equal one at $q=0,1$. For $q=0$ the roof is the identity and its adjunct is the unit by [lem-sfb-internal-inflation-graded-cup]. The comparison of [lem-sfb-condensed-derived-invariant-bar] is the specified invariant augmentation, so this proves equality of the requested derived arrows. At no point have we inverted $j$ or used acyclicity of the terms of $U^\\bullet$.",
+   "uses": [
+    "lem-sfb-internal-bar-roof-adjunction",
+    "lem-sfb-internal-inflation-graded-cup",
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent-written internal bar normalization, detailed below the blueprint unit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-internal-bar-resolution",
+  "lem-sfb-internal-inflation-graded-cup",
+  "lem-sfb-internal-bar-roof-adjunction",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-condensed-derived-invariant-bar"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal bar input: explicit character chain lifts and derived adjunction proof written by NW; not present in the blueprint paragraph."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +138,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-trivial-ladic-derived-exterior",
@@ -82,5 +163,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-internal-bar-ordered-cup",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved cocyclicity and ordered composition by explicit equivariant homogeneous bar chain lifts. Isolated the arbitrary-cocycle roof/adjunction normalization and the internal derived monoidal inflation/graded-cup infrastructure as two statement-only obligations. Preserved the specified derived arrow and universal shift signs; no underived acyclicity or projectivity is used.",
+  "blueprint": "Realizes paragraph (3) open direct image, the internal bar ordered-character normalization below the tame-boundary calculation. The ancestor tool prints None; preserved this null ancestor and explicit via chain.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NW-7aee17f08",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-7aee17f08 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement (including the proofs of the invariant-bar and restriction-calculus nodes, to see how ε, the cup and [a] are built), the parent's citing step and the main-20261015 direct-images paragraph (3). The item's statement is unchanged. z is a cocycle: checked by hand for q=1,2 and by script for q=3 on Z/5. Step 2: ∂L_a+L_a∂=0 (the terms with i≥2 cancel, leftover b(g0,g1)+b(g1,g2)-b(g0,g2)=0; script on Z/5 for n≤4) and L_a is equivariant. Step 3: the formula for F_q (script, q=3) and f_q∂_{q+1}=0 from the chain-map identity; the coordinate change takes f_q to z. Step 4: E_a matches the calculus node; ℓ∂_1=i(b_a), and the splitting defect ℓ[h]-ℓ[1]=(a(h),0) matches the calculus normalization of [a], so ε_1=1 is consistent. Steps 5 and 6: the middle e^{-1}e factors cancel, the induction via t_{q,1} is set up properly, and ε_q=s_qT_q with ε_0=ε_1=1. Both new nodes are true, statement-only, and not restatements of the item. Related nodes: lem-sfb-equivariant-resolution-bar-normalization is a coresolution-side cousin of the roof node, not a duplicate. The strong-monoidal part of graded-cup overlaps lem-sfb-ringed-derived-monoidal-comparisons (advisory); its graded composition law is in no existing node. FIX (B3/C4): the roof node used the canonical derived inflation/invariants adjunction without citing a node; it now cites lem-sfb-condensed-derived-restriction-calculus in its text and stmt_deps. The graded-cup text now names the calculus and product-action-inflation nodes it already listed in stmt_deps. Batch-5 flag (graded-cup → calculus → lem-trf-bounded-below-derived-mate-model): that node is a generic abelian-category mate lemma, not part of the trace formula or of Poincaré duality, and the item already cited calculus on base, so the closure is unchanged. Accepted. All cites are on-unit; no tool_uses; no SGA.; 2 file(s) fixed by the reviewer"
  }
 }
