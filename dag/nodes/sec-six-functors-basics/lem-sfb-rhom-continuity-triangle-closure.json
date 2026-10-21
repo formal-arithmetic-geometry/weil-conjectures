@@ -17,9 +17,122 @@
   "def-sbc-standard-tstructure-derived-category",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal M=\\operatorname{Mod}(\\mathcal O)$. Its small filtered colimits are exact by [lem-pur-ringed-site-grothendieck-abelian]. For a filtered complex diagram $K_i$, apply this exactness to $0\\to Z_i^q\\to K_i^q\\to B_i^{q+1}\\to0$ and $0\\to B_i^q\\to Z_i^q\\to H^q(K_i)\\to0$. The induced differential on $\\varinjlim K_i$ has kernel $\\varinjlim Z_i^q$ and image $\\varinjlim B_i^{q+1}$, so $H^q(\\varinjlim K_i)\\cong\\varinjlim H^q(K_i)$, naturally in the diagram. Thus termwise filtered colimits preserve quasi-isomorphisms and any common cohomological lower bound. In particular the prescribed complex models give well-defined comparisons in the derived category [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB (lemma-limits-colimits) in sites-modules.tex, applied to cycles and boundaries; agent calculation"
+   }
+  },
+  {
+   "text": "Use the fixed functorial K-injective target models of [def-pur-derived-internal-hom]. The formula for the Hom complex gives $H(0,N)=0$: every component is a product of zero module sheaves. Hence its comparison is $0\\to0$ and $d_0=0$ works. An isomorphism $A\\cong A'$ induces natural isomorphisms $H(A',N)\\cong H(A,N)$, compatible with each target cocone; taking their colimits identifies the two comparison maps by the colimit universal property [def-weil-pbc-category-colimit]. The same bound works for both sources.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 08J7 (internal Hom), zero-source formula and bifunctoriality; agent extraction"
+   }
+  },
+  {
+   "text": "The source shift isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction] gives $H(A[n],N)\\cong H(A,N)[-n]$, naturally in $N$. Termwise colimits commute with shifts: in degree $q$ both shifted-colimit complexes have $\\varinjlim_i K_i^{q-n}$ and differential $(-1)^n\\varinjlim_i d_i$. Naturality of the shift isomorphism identifies the comparison for $A[n]$ with the shift by $[-n]$ of that for $A$. Consequently continuity holds for $A[n]$ whenever it holds for $A$. Since $H^q(K[-n])=H^{q-n}(K)$ by the cochain convention [def-weil-abstract-derived-category], the lower bound $c+d_A$ becomes $c+d_A+n$ [def-sbc-standard-tstructure-derived-category]. This proves $P(A[n])$ with $d_{A[n]}=d_A+n$, for every integer $n$.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-abstract-derived-category",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated), source shifts; agent colimit and degree calculation"
+   }
+  },
+  {
+   "text": "Let $A\\xrightarrow{u}B\\xrightarrow{v}C\\xrightarrow{w}A[1]$ be distinguished and assume $P(A),P(C)$. Fix a small filtered target diagram $N_i$ with common lower bound $c$ and put $N_\\infty=\\varinjlim_iN_i$. By [lem-weil-pbc-ringed-internal-hom-exact-restriction], each target $N$ gives the distinguished triangle $H(C,N)\\to H(B,N)\\to H(A,N)\\to H(C,N)[1]$. The last arrow is induced by precomposition with $w$, using the signed source shift identification; all these arrows are natural in $N$. Apply [lem-sf-derived-homology-long-exact] at $N_i$ and at $N_\\infty$. The cocone arrows $N_i\\to N_\\infty$ give commuting squares for precomposition with $u$ and $v$ by bifunctoriality. They also give a commuting square for precomposition with $w$; the shift identifications and their fixed signs are natural in $N$, so this is exactly the square for the last triangle arrow. Applying cohomology and then the colimit universal property gives a commuting comparison of the two long exact rows, including every connecting map. The vertical maps are $H^q(\\alpha_X):\\varinjlim_iH^q(H(X,N_i))\\to H^q(H(X,N_\\infty))$ under step 1, where $\\alpha_X$ is the canonical comparison of the statement [def-pur-derived-internal-hom, def-weil-pbc-category-colimit].",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-derived-homology-long-exact",
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC; Derived Categories Tag 05RS (lemma-cohomology-homological); agent verification of comparison squares"
+   }
+  },
+  {
+   "text": "For every integer $q$, use the consecutive five terms $H^{q-1}(H(A,N))\\to H^q(H(C,N))\\to H^q(H(B,N))\\to H^q(H(A,N))\\to H^{q+1}(H(C,N))$ of those rows. Filtered colimits of the first row are exact by [lem-pur-ringed-site-grothendieck-abelian], and the second row is exact by [lem-sf-derived-homology-long-exact]. Its four outer vertical arrows are isomorphisms by $P(A),P(C)$ and step 1. The five lemma [lem-weil-pbc-five-lemma] makes the middle vertical arrow an isomorphism. This holds for every $q$, so the actual comparison chain map on the prescribed functorial complex models is a quasi-isomorphism, and therefore its image $\\alpha_B$ in $D(\\mathcal O)$ is an isomorphism [def-weil-abstract-derived-category]. This proves the continuity clause for $B$.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-five-lemma",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Homology Tag 05QB (lemma-five-lemma), applied to the five consecutive cohomology terms; agent application"
+   }
+  },
+  {
+   "text": "For any $N\\in D^{\\ge c}$, exactness at the middle term of $H^q(H(C,N))\\to H^q(H(B,N))\\to H^q(H(A,N))$ [lem-sf-derived-homology-long-exact, lem-weil-pbc-ringed-internal-hom-exact-restriction] shows that $H^q(H(B,N))=0$ whenever both outer terms vanish. They vanish for every $q<c+\\min(d_A,d_C)$. Thus $d_B=\\min(d_A,d_C)$ gives the required bound, independent of $c,N$ and of any diagram [def-sbc-standard-tstructure-derived-category]. Together with step 5 this proves middle-vertex closure of the full property $P$, not just its continuity clause.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC followed by Derived Categories Tag 05RS; agent vanishing calculation"
+   }
+  },
+  {
+   "text": "Rotate the original triangle using [def-weil-triangulated-category]. If $P(B),P(C)$ hold, its inverse rotation is $C[-1]\\to A\\to B\\to C$, and steps 3, 5 and 6 give $P(A)$, with $d_A=\\min(d_C-1,d_B)$. If $P(A),P(B)$ hold, its rotation is $B\\to C\\to A[1]\\to B[1]$, giving $P(C)$ with $d_C=\\min(d_B,d_A+1)$. The rotation signs do not affect either the isomorphism or vanishing assertions. This proves two-out-of-three in every position.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Derived Categories Tag 0145 (definition-triangulated), rotation axiom; agent application"
+   }
+  },
+  {
+   "text": "Induct on the length of a finite construction. Its initial sources have $P$ by assumption (and the zero source does by step 2). At the next operation use step 2 for an isomorphism, step 3 for an integer shift, or steps 5--7 for obtaining a vertex from two vertices of a distinguished triangle. Every operation preserves $P$, which proves the final assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent finite induction on the operations stated in the item"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-five-lemma",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JC (lemma-RHom-triangulated), with Modules on Sites Tag 03DB and Homology Tag 05QB; formal closure argument and lower-bound calculations supplied by Q17."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +168,45 @@
    "results": "Hits read: CategoryTheory.ObjectProperty.IsTriangulatedClosed₂.mk, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₂', CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₃, CategoryTheory.ObjectProperty.IsTriangulatedClosed₁.mk, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃.mk, DerivedCategory.mem_distTriang_iff, CategoryTheory.Functor.IsHomological.mk, CategoryTheory.Functor.IsHomological.mk'",
    "date": "2026-10-21",
    "verdict": "no match: the returned statements provide general category, sheaf, truncation or colimit infrastructure, not formal internal-Hom triangle closure including lower bounds (returned step 6)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom commutes with filtered colimits of uniformly bounded below complexes and has a lower cohomology bound: sources are closed under shifts and distinguished triangles",
+   "results": "8 hits read: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsLEObjSingleFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: these are t-structure, sheaf, colimit or exact-functor infrastructure; none states the combined internal-Hom continuity and uniform-lower-bound source closure."
+  },
+  {
+   "tool": "grep",
+   "query": "(internalHom|sheafHom|RHom|derivedHom).*(triangle|shift|colimit|continu)|(colimit|continu).*(internalHom|sheafHom|RHom|derivedHom)",
+   "results": "11 hits read: Mathlib/CategoryTheory/Triangulated/Basic.lean, Mathlib/CategoryTheory/Monoidal/Category.lean, Mathlib/CategoryTheory/Monoidal/Types/Coyoneda.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean (grep restricted to Mathlib/CategoryTheory)",
+   "date": "2026-10-21",
+   "verdict": "no match: these are t-structure, sheaf, colimit or exact-functor infrastructure; none states the combined internal-Hom continuity and uniform-lower-bound source closure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Triangulated\", \"colimit\"",
+   "results": "2 hits read: CategoryTheory.Triangulated.AbelianSubcategory.isColimitCokernelCoforkOfDistTriang, CategoryTheory.Triangulated.AbelianSubcategory.isColimitCokernelCofork",
+   "date": "2026-10-21",
+   "verdict": "no match: these are t-structure, sheaf, colimit or exact-functor infrastructure; none states the combined internal-Hom continuity and uniform-lower-bound source closure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sources for which derived internal sheaf Hom preserves bounded below filtered colimits form a triangulated subcategory",
+   "results": "8 hits read: HomologicalComplex.instHasFilteredColimitsOfSize, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.sheafHom, CategoryTheory.Sheaf.hasFilteredColimitsOfSize, CategoryTheory.Presheaf.IsSheaf.hom, CategoryTheory.Pseudofunctor.sheafHom, SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, CategoryTheory.Sheaf.ab5ofSize",
+   "date": "2026-10-21",
+   "verdict": "no match: these are t-structure, sheaf, colimit or exact-functor infrastructure; none states the combined internal-Hom continuity and uniform-lower-bound source closure."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a derived category of module sheaves sources preserving uniformly bounded below filtered colimits under internal Hom are stable under extensions and suspension",
+   "results": "8 hits read: DerivedCategory.IsGE, DerivedCategory.IsLE, DerivedCategory.TStructure.t, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjSingleFunctor, CategoryTheory.hasExt_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: these are t-structure, sheaf, colimit or exact-functor infrastructure; none states the combined internal-Hom continuity and uniform-lower-bound source closure."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-constructible-internal-hom-continuity",
@@ -77,5 +225,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-rhom-continuity-triangle-closure",
+  "worker": "stage1",
+  "summary": "No new nodes: reused arbitrary-ringed-site exactness of RHom and exact filtered colimits, cohomology long exact sequences and the existing Mathlib five lemma. Wrote the canonical comparison squares including the boundary, the lower-bound formulas and rotations explicitly. Statement unchanged; no Lean attachment found.",
+  "blueprint": "lem-sfb-dc-hom-preserves.proof.md final coefficient-passage sentence: formal triangle/shift closure required by the bounded-target internal-Hom continuity devissage in parent lem-sfb-constructible-internal-hom-continuity (step 6). This auxiliary supplies only the formal closure, not any coefficient comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Exact small filtered colimits in arbitrary module sheaves; generic abelian-category infrastructure for the stated ordinary ringed-site models."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Arbitrary-ringed-site contravariant RHom exactness and signed shifts; the restricted-functor unit needs this formal infrastructure, not a different geometric route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Cohomology exactness for an arbitrary distinguished triangle in an abelian derived category, used as a generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q17-7ee6f6951",
+  "group": "Q17",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-7ee6f6951 (reviewer sub-agent of L); spot-checked: I read the 8-step split in full against every cited statement; it has no new nodes. 08JC (sites-cohomology.tex l.8948) and 03DB were read at the cited places, and lem-weil-pbc-ringed-internal-hom-exact-restriction states triangle exactness in the first variable plus signed shifts on an arbitrary small ringed site. Step 1: cohomology commutes with exact filtered colimits through the cycle and boundary sequences. Step 3: H(A[n],N)=H(A,N)[-n] with d_{A[n]}=d_A+n, checked on a point with A=k. Step 4: comparison of long exact sequences, with the connecting maps handled through naturality in N of H(w,N) and the signed shift isomorphism, taken at the level of H^q in D, so no E5 fault. Step 5: five lemma on H^{q-1}(A')→H^q(C')→H^q(B')→H^q(A')→H^{q+1}(C'), the right consecutive terms for the contravariant triangle. Step 6: d_B=min(d_A,d_C). Step 7: rotation bounds d_A=min(d_C-1,d_B) and d_C=min(d_B,d_A+1) are correct. Step 8: induction with base and each operation stated. The statement is byte-identical to live and correct in edge cases (zero, constant diagram, split triangle, infinite sums excluded). The item is unsplit in live and side-live. The human re-split note belongs to the parent lem-sfb-constructible-internal-hom-continuity; this item had no base proof. No SGA citation and no cycle (closure of 246 nodes). Duplicate search found nothing: dc-hom-filtered-colimit and per-constructible-ext-filtered-colimit differ. Accepted tool_uses: lem-pur-ringed-site-grothendieck-abelian and lem-weil-pbc-ringed-internal-hom-exact-restriction as generic infrastructure; lem-sf-derived-homology-long-exact is a Mathlib leaf. Mathlib searches cover all three kinds."
  }
 }
