@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-weil-pbc-closed-immersion-from-composite",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Closed immersion detected after separated composition",
@@ -12,10 +12,18 @@
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-cor-nagata-sketch-proper-extension/lem-weil-pbc-closed-immersion-from-composite.md",
   "place": "node lem-weil-pbc-closed-immersion-from-composite, order 224"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-proper-morphism"
+ ],
  "proof": [],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 07RK, lemma-immersion-permanence, part (3); discharged by the exact Mathlib declaration recorded in mathlib_match."
+ },
  "mathlib_searches": [
   {
    "tool": "text search of the local Mathlib checkout (0df444a360)",
@@ -24,10 +32,43 @@
     "Mathlib.AlgebraicGeometry.Morphisms.Separated:242 (lemma)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For scheme morphisms r : T to V and p : V to S, if p is separated and p composed with r is a closed immersion, then r is a closed immersion",
+   "results": "AlgebraicGeometry.IsClosedImmersion.of_comp; Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:242-243. Hypotheses IsClosedImmersion (f ≫ g) and IsSeparated g; conclusion IsClosedImmersion f. Source read, with scheme variables at line 40.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion.of_comp",
+   "results": "AlgebraicGeometry.IsClosedImmersion.of_comp; Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:242-243. Hypotheses IsClosedImmersion (f ≫ g) and IsSeparated g; conclusion IsClosedImmersion f. Source read, with scheme variables at line 40.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma IsClosedImmersion.of_comp",
+   "results": "AlgebraicGeometry.IsClosedImmersion.of_comp; Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:242-243. Hypotheses IsClosedImmersion (f ≫ g) and IsSeparated g; conclusion IsClosedImmersion f. Source read, with scheme variables at line 40.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism is a closed immersion if its composite with a separated morphism is a closed immersion",
+   "results": "AlgebraicGeometry.IsClosedImmersion.of_comp; Mathlib/AlgebraicGeometry/Morphisms/Separated.lean:242-243. Hypotheses IsClosedImmersion (f ≫ g) and IsSeparated g; conclusion IsClosedImmersion f. Source read, with scheme variables at line 40.",
+   "date": "2026-10-21",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/Separated.lean",
+  "line": 242,
+  "how": "exact: lines 242-243, with scheme variables at line 40; take X = T, Y = V, Z = S, f = r and g = p. The categorical composite f ≫ g is p ∘ r. Both hypotheses and the conclusion agree exactly; no additional hypothesis is required."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "citation_only",
@@ -66,5 +107,21 @@
   ],
   "sorry_free": true,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state closed)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-closed-immersion-from-composite",
+  "worker": "stage1",
+  "summary": "Verified an exact Mathlib match by four logged searches and reading Separated.lean:40,242-243; confirmed the unchanged statement against the current and older blueprint and Stacks Tag 07RK(3). Added existing definition dependencies; no proof or new node is needed. The existing non-blueprint node lem-weil-pbc-closed-immersion-cancellation already records the same Mathlib fact.",
+  "blueprint": "The full statement of lem-weil-pbc-closed-immersion-from-composite, used in the proper-extension unit; the old blueprint proof is omitted and the current blueprint supplies no proof. The exact Mathlib declaration discharges the full statement.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NB-c068dd72d",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-c068dd72d (reviewer sub-agent of L); spot-checked: The item becomes a Mathlib leaf; the statement is unchanged and there are no new nodes. The main-20261015 blueprint .md (order 231) matches the statement word for word, and its proof is 'Omitted.', so there is no old proof to compare and no repair note. Stacks morphisms.tex:220-229, lemma-immersion-permanence (3), is Tag 07RK per tags/tags:9870; it states the item with no extra hypotheses. Mathlib Separated.lean:40 (variables) and 242-243 give IsClosedImmersion.of_comp [IsClosedImmersion (f ≫ g)] [IsSeparated g] : IsClosedImmersion f; with f=r and g=p this is an exact match, and the file, lines and how are correct. The stmt_deps (def-pc-scheme, def-weil-closed-immersion, def-weil-proper-morphism) are existing leaves; Mathlib's IsSeparated (diagonal is a closed immersion) agrees with the node's definition of separated. Separatedness is needed: a branch of the line with doubled origin is a counterexample without it, and the item keeps the hypothesis. Maintainer note: lem-weil-pbc-closed-immersion-cancellation (worker node, 2026-10-10, sk-thm-p1) is the same leaf with the same declaration. It is not a blueprint node, so same_as=[] is correct; the duplication is harmless and recorded in both lead notes. No SGA is cited, no cycle is introduced, and tool_uses is empty."
  }
 }

@@ -21882,3 +21882,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:24 L: returned deliver/Q11/lem-pur-injective-tower-roos-shifts (reviewer RETURN: L: independent stage-2 immutable head 4919a5f9d8e2: Theorem stmt_dep lem-weil-product-comm-shift: the Lean statement use)
 - 09:25 L: returned deliver/Q39/lem-pur-signed-line-derived-base-change (reviewer RETURN: L: independent stage-2 immutable head c74b7b1358d4: H2: stmt_deps gained theorem node lem-weil-pbc-independent-sheaf-ten)
 - 09:25 L: returned deliver/Q91/lem-pur-coordinate-chart-finite-dimension-witness (reviewer RETURN: L: independent stage-2 immutable head cfbce1bdee09: H2: the delivery adds the theorem node lem-pur-smooth-pair-local-coo)
+- 09:25 L: merged deliver/NB/lem-weil-pbc-closed-immersion-from-composite (reviewer PASS; first push; new nodes: 0)
