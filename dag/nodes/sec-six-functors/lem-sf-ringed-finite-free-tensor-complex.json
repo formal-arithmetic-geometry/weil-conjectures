@@ -21,20 +21,55 @@
  ],
  "proof": [
   {
-   "text": "Apply the existing normalized scalar internal-Hom adjunction existence theorem with standard derived-category choices at all coefficient rings; only its underived extension, ordinary unit, chain tensor isomorphisms and K-flat preservation are used, so the choices disappear from the conclusion. Identify its extension functor with the supplied one by the prescribed object and map equations. Its ordinaryUnit equation identifies scalarHomUnitSection with ringedFiniteFreeScalarSection at scalar 1. Prove naturality of the supplied chain comparison by transposing along the ordinary scalar adjunction, then checking on all total tensor generators. Sheafification adjunction and tensor extensionality reduce this to the pure tensor formula and naturality of ordinary scalar extension. Assemble the components into a natural isomorphism and retain the supplied K-flat preservation clause.",
+   "text": "Choose standard derived-category instances at all coefficient rings and apply scalarInternalHomAdjunction_exists to obtain a normalized scalar pair s. The standard choices disappear from the conclusion. Functor.ext and the object/map equations identify the supplied D.E with s.extension; equality proofs for its object formula agree by proof irrelevance.",
    "uses": [
     "lem-sfb-dc-hom-scalar-adjunction"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain the normalized ordinary tensor isomorphisms e(M,N), their simultaneous naturality and their pure scalar-unit formula. Tensor colimit preservation supplies additive left/right tensor functors and hence the monoidal preadditive structures used by the signed total tensor.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
    "elementary": false
+  },
+  {
+   "text": "Use the existing proved tensorPullbackTotal and tensorPullbackTotal_isIso infrastructure: the inverses of e in all bidegrees give a chain map from the tensor of the two extended complexes to the extension of their total tensor; the ordinary adjunction makes it invertible because extension preserves the total coproducts. Prove simultaneous naturality directly: test on each total summand, move the inverse e past the two component maps using ordinary naturality, then use naturality of the total summand inclusion. Assemble these components into a natural isomorphism and take its inverse.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each pure total generator, the summand formula for tensorPullbackTotal gives the inverse comparison equation. Naturality of the ordinary scalar unit moves that unit through the total summand inclusion. The normalized ordinary pure-tensor formula then identifies its image with the pure tensor of the two scalar-unit images. Finally ordinaryUnit identifies these unit sections with ringedFiniteFreeScalarSection at scalar 1: transport back along the specified object equality and cancel the equality isomorphism.",
+   "uses": [
+    "lem-sfb-scalar-ordinary-tensor-comparison",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply scalarExtension_preservesKFlat to s. The equality D.E=s.extension and proof irrelevance identify its termwise additive functor with the one in the conclusion. No flat-term assumption is added.",
+   "uses": [
+    "lem-sfb-scalar-extension-kflat"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sfb-dc-hom-scalar-adjunction"
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-sfb-scalar-ordinary-tensor-comparison",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-scalar-extension-kflat"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4, 06YT and 08J9; scalar extension on signed total tensor and K-flat preservation."
+  "place": "Tags 07A4 and 0G7E, labels lemma-pullback-tensor-product and lemma-pullback-K-flat; normalized ordinary coefficient tensor comparison from sites-modules.tex, Tags 03EL and 0GMW. X2: explicit simultaneous naturality, summand/unit calculation and identification of the supplied extension functor."
  },
  "mathlib_searches": [
   {
@@ -147,14 +182,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-b080a",
-  "group": "E8",
+  "reviewer": "COMPILER",
+  "group": "X2",
   "result": "pass",
-  "landing": "20261020T051227-L-1601075",
-  "kind": "interface",
-  "note": "independent cc review: Coordinates sorry vs item node step 4 (a/aQ pinned by RingedFiniteFreeBasisCoordinates on all K-flat reps, β by restricted-evaluation transpose, adj/δ by unit and scalarChainTranspose); Data sorry vs tensor-complex node; Hom/Tensor/main proofs vs proof_deps; 5 delivered modules + 3 importers compiled (SpecifiedHomScalarEvaluation fails identically on published = pre-existing)"
+  "landing": "20261021T120923-L-4001526",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
 }
