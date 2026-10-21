@@ -23,16 +23,11 @@
  ],
  "proof": [
   {
-   "text": "First transport the retained upstream regular-divisor quotient theorem from the full affine-neighbourhood colimit to H through smallStrictHenselizationColimitIso. The theorem smallStrictHenselizationColimitIso_toBase identifies the structural maps. Pull the nonunit condition back through the inverse ring equivalence. Transfer Noetherianity by isNoetherianRing_of_ringEquiv and the quotient properties by Ideal.quotientEquiv, IsRegularRing.of_ringEquiv and MulEquiv.isDomain_iff. The strict henselization regular-divisor quotient gives Noetherianness and a regular domain quotient. Apply the existing affine-chart ind-etaleness theorem with the identity chart of Spec R and the identity isomorphism of the small strict-henselization scheme. The hypothesis on b is exactly its structure-map compatibility. Forget the resulting filtered etale algebra presentation to modules; etale stages are flat, and the same-universe flat-colimit-presentation theorem gives flatness of b. Flat base change preserves regularity of f. The root-algebra theorem then gives regular local rings at primes containing the root coordinate.",
+   "text": "Apply the retained upstream regular-divisor quotient theorem to the full affine-neighbourhood strict henselization H. It gives Noetherianness of H and regularity and integrality of H/(g). The upstream structural-flatness theorem makes b flat, so f remains regular. Transfer the unit group order along b. Apply the root-algebra regularity theorem to every prime containing the root coordinate.",
    "uses": [
     "lem-sbc-strict-hensel-regular-divisor-quotient",
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-etale-algebra-flat",
-    "lem-sbc-root-algebra-regular-at-root",
-    "lem-weil-pbc-small-strict-henselization-ind-etale",
-    "lem-weil-pbc-flat-colimit-presentation-same-universe",
-    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+    "lem-sbc-affine-strict-henselization-structural-flat",
+    "lem-sbc-root-algebra-regular-at-root"
    ],
    "elementary": false
   },
@@ -58,23 +53,18 @@
   "def-sbc-normal-dominant-galois",
   "def-weil-etale-morphism",
   "def-weil-finite-integral-morphism",
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-sbc-affine-strict-henselization-structural-flat",
   "lem-sbc-root-algebra-regular-at-root",
   "lem-sbc-root-normalization-generic-source-etale",
   "lem-sbc-strict-hensel-regular-divisor-quotient",
-  "lem-weil-pbc-etale-algebra-flat",
-  "lem-weil-pbc-flat-colimit-presentation-same-universe",
-  "lem-weil-pbc-relative-normalization",
-  "lem-weil-pbc-small-strict-henselization-ind-etale",
-  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+  "lem-weil-pbc-relative-normalization"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A3",
-  "document": "Stacks Project",
-  "place": "Tags 0EYG, 04HX, 05WS and 06LN",
-  "note": "Only the small/full colimit transport required by retirement of the duplicate regular-divisor quotient module changes. The original remaining proof and all public signatures are preserved."
+  "group": "G8",
+  "document": "Stacks Project and retained upstream Lean",
+  "place": "Tags 09EB (more-algebra-lemma-galois-conclusion), 0BRM (lemma-abhyankar), and 0EYG (pione-lemma-abhyankar-one-divisor), group-order root computation; finite-presentation openness of etaleness.",
+  "note": "Retire the duplicate Sheaf module and attach the node to the complete upstream proof. The root-extension, Abhyankar, finite normalization, and open-shrinking route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -128,14 +118,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationGenericEtale.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationGenericEtale.lean",
   "declaration": "AlgebraicGeometry.Scheme.GaloisCover.strict_hensel_root_normalization_generic_etale",
-  "statement": "theorem GaloisCover.strict_hensel_root_normalization_generic_etale\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (hG : IsUnit (Nat.card G : R))\n    [IsRegularRing R] (hf : IsSMulRegular R f)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY) :\n    let H := strictHenselizationRing barY\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ¬ IsUnit g → ∀ (hN : IsLocallyNoetherian N),\n    letI := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)\n    ∀ (hp : IsFinite p),\n    letI := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsRegular D → IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∃ (O : N.Opens), j η ∈ O ∧ Etale (a.fromNormalization ∣_ O)",
+  "statement": "theorem GaloisCover.strict_hensel_root_normalization_generic_etale\n    {L U : Scheme.{u}} (i : U ⟶ L)\n    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)\n    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)\n    (hG : IsUnit (Nat.card G : R))\n    [IsRegularRing R] (hf : IsSMulRegular R f)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))\n    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselization barY)\n    (hb : Spec.map b = strictLocalizationToBase barY) :\n    let H := strictHenselization barY\n    let g := b.hom f\n    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)\n    let N := Spec (CommRingCat.of A)\n    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))\n    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)\n    ¬ IsUnit g → ∀ (hN : IsLocallyNoetherian N),\n    letI := hN\n    let p := pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ)\n    ∀ (hp : IsFinite p),\n    letI := hp\n    let a := p ≫ V.ι\n    Etale p → IsFinite a.fromNormalization →\n    ∀ (D : Scheme.{u}) (j : D ⟶ N),\n      IsRegular D → IsIntegral D → IsEffectiveCartierCenter j →\n      (∀ z : N, z ∈ V ↔ z ∉ Set.range j) →\n      ∀ (η : D), IsGenericPoint η Set.univ →\n      ∃ (O : N.Opens), j η ∈ O ∧ Etale (a.fromNormalization ∣_ O)",
   "branch": "sheaf-dag",
-  "by": "B4",
-  "date": "2026-10-13"
+  "by": "G8",
+  "date": "2026-10-21",
+  "note": "Retirement of the duplicate small-colimit module: use the retained upstream theorem in the full affine-neighbourhood colimit. The purity-data consumer explicitly transports its finite model across the canonical strict-henselization and root-algebra isomorphisms; all mathematical hypotheses and conclusions are preserved."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -150,12 +141,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-b3bec",
-  "group": "A3",
+  "reviewer": "C-67bcf",
+  "group": "G8",
   "result": "pass",
-  "landing": "20261021T140748-L-2740975",
+  "landing": "20261021T173335-L-3588311",
   "kind": "interface",
-  "note": "independent cc review: retired item module vs retire-items.tsv row 1975 and hand-off retire-sheaf-twins-20261020; node lean record vs upstream WeilConjectures theorem (verbatim, same convention as landed -noetherian/-regular siblings); 4 adapted consumers + 3 import-only swaps vs live importer graph (closed); lcompile --all of all 7 modules exit 0; axioms clean"
+  "note": "independent cc review: both reattached node lean records vs the upstream WeilConjectures twins (verbatim, no sorry, single owner); retired item and tame modules vs the live importer graph; adapted PurityData vs the live one (signature and public imports identical, one forced import swap plus a proved private transport); sandbox compile of the stubs, PurityData and its 2 downstream importers exit 0; axioms clean"
  },
  "lean_audit": {}
 }

@@ -36,14 +36,23 @@
    "elementary": false
   },
   {
-   "text": "Install integrality of the constructed D and take eta=genericPoint D with its generic-point proof. Apply the tame-normalization theorem to D and j and their proved properties. Reassemble its model and comparison with the divisor and Noetherianness.",
+   "text": "Install integrality of the constructed D and take eta=genericPoint D. To use the retained upstream tame-normalization theorem, compose b with the canonical small-to-full colimit isomorphism and verify its structural-map identity. AdjoinRoot.mapRingEquiv gives an isomorphism of the two group-order root algebras. Its spectrum identifies the two punctured opens and their maps to L. Transport the supplied Cartier centre along the inverse spectrum isomorphism: its kernel is the flat pullback of the old invertible kernel. The support equation and generic point are preserved. Apply the upstream tame-normalization theorem with this transported divisor. Compose its finite model with the spectrum isomorphism and pull back its target open. Restrictions remain etale under composition with isomorphisms. The restricted root-algebra isomorphism induces an isomorphism of the original cover pullbacks; compose it with the upstream comparison and the equality-of-opens isomorphism. Its projection equation follows from pullback.lift_snd and the restriction inclusion identities. Reassemble the resulting finite model with the unchanged constructed divisor and Noetherianness.",
    "uses": [
-    "lem-sbc-strict-hensel-root-tame-normalization"
+    "lem-sbc-strict-hensel-root-tame-normalization",
+    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-fibre-product",
+    "def-weil-etale-morphism",
+    "def-weil-finite-integral-morphism"
    ],
-   "elementary": true
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-nagata-effective-cartier-ideal",
+  "def-pc-fibre-product",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-strict-henselization-structural-map",
   "def-weil-regular-scheme",
@@ -56,10 +65,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A3",
-  "document": "Stacks Project",
-  "place": "Tags 0EYG, 04HX, 05WS and 06LN",
-  "note": "Only the small/full colimit transport required by retirement of the duplicate regular-divisor quotient module changes. The original remaining proof and all public signatures are preserved."
+  "group": "G8",
+  "document": "Stacks Project and Mathlib",
+  "place": "Tags 0EYG, 0EYH and 04HX; canonical strict-henselization comparison, AdjoinRoot.mapRingEquiv, and restriction and pullback isomorphisms.",
+  "note": "The explicit divisor construction and the public statement are unchanged. A proved private helper transports the retained upstream tame model to the small-colimit root algebra; no arbitrary data are chosen from an unproved theorem."
  },
  "mathlib_searches": [
   {
@@ -136,12 +145,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-b3bec",
-  "group": "A3",
+  "reviewer": "C-67bcf",
+  "group": "G8",
   "result": "pass",
-  "landing": "20261021T140748-L-2740975",
+  "landing": "20261021T173335-L-3588311",
   "kind": "interface",
-  "note": "independent cc review: retired item module vs retire-items.tsv row 1975 and hand-off retire-sheaf-twins-20261020; node lean record vs upstream WeilConjectures theorem (verbatim, same convention as landed -noetherian/-regular siblings); 4 adapted consumers + 3 import-only swaps vs live importer graph (closed); lcompile --all of all 7 modules exit 0; axioms clean"
+  "note": "independent cc review: both reattached node lean records vs the upstream WeilConjectures twins (verbatim, no sorry, single owner); retired item and tame modules vs the live importer graph; adapted PurityData vs the live one (signature and public imports identical, one forced import swap plus a proved private transport); sandbox compile of the stubs, PurityData and its 2 downstream importers exit 0; axioms clean"
  },
  "lean_audit": {}
 }

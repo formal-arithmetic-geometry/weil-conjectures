@@ -23197,3 +23197,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:32 L: merged deliver/NU/lem-sfb-wstrict-lisse-component-cohomology (reviewer FIX; first push; new nodes: 1)
 - 17:32 L: merged deliver/NJ/lem-sfb-integral-lattice-cubical-contraction (reviewer PASS; first push; new nodes: 0)
 - 17:33 L: merged deliver/A6/Sheaf.Paper.SfIntegralCompactSupportConstructible (stage 3; reviewer PASS; first push; landing 20261021T173332-L-3587733 (proof); batch 20261021T173331; modules 1; new nodes 0)
+- 17:33 L: merged deliver/G8/Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale (stage 3; reviewer PASS; first push; landing 20261021T173335-L-3588311 (interface); batch 20261021T173331; modules 3; new nodes 0; change records: coord/changes/G8-retire-strict-hensel-root-normalization-generic-etale.md)
