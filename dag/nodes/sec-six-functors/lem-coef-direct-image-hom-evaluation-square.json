@@ -24,83 +24,55 @@
  ],
  "proof": [
   {
-   "text": "Write $P_R=f_R^*$, $G_R=Rf_{*,R}$, $F=F_Y$, $a_Z:P_BF_XZ\\xrightarrow{\\sim}FP_AZ$ for the inverse of the statement's pullback identification, and $\\mu_{U,V}:F(U\\otimes_A^LV)\\xrightarrow{\\sim}FU\\otimes_B^LFV$. The natural tensor comparison is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], applied to the identity geometric morphism with structural ring map $A\\to B$. The composition/2-isomorphism comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] give the specified $a$: the two ringed-topos factorizations have the same composite structural map. Put $D=P_AT$, $d=\\alpha_{A,Q}:D\\to Q$, and $H'=H_B(FL,N')$. The canonical comparison in the question is precisely $\\iota=(a_T^{-1}\\otimes1_{FL})\\circ\\mu_{D,L}$. All these are comparisons for ordinary derived pullback; neither a direct-image isomorphism nor a completed coefficient comparison is used.",
+   "text": "Keep the published ordinary etale definitions of evaluation, homComparison, scalarMate and sourceComparison. Their explicit definitions already specify the scalar tensor and scalar/pullback comparisons; no general ringed-site comparison theorem is needed again.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-coef-etale-tensor-model-comparison",
+    "def-pur-etale-scalar-pullback-iso",
+    "def-pur-etale-scalar-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product; Tag 0D6D, lemma-derived-pullback-composition; canonical comparison for the two scalar/geometric factorizations"
-   }
+   "elementary": true
   },
   {
-   "text": "The ordinary derived adjunction with counit $\\alpha_B$ is the one specified in [def-kun-projection-formula-map]. The definition of $c=c_{f,Q}$ as adjunct means, by applying the inverse Hom-bijection to that defining equality,\n$$t:=\\alpha_{B,FQ}\\circ P_B(c)=F(d)\\circ a_T:P_BF_XT\\longrightarrow FQ.$$\nThis uses only that an adjunction bijection and its inverse cancel. In particular $c$ need not be invertible.",
+   "text": "Apply Mathlib mateEquiv_counit to the two ordinary geometric adjunctions and scalarPullbackIso. Naturality of the B-geometric counit at homMap then identifies the inverse adjunct of directImageMap with scalarPullbackIso.hom followed by scalar extension of the A-geometric counit and homMap.",
    "uses": [
+    "def-pur-etale-scalar-mate",
     "def-kun-projection-formula-map"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, comparisons defined by the same adjunction counits; expansion of the ordinary direct-image adjunct"
-   }
+   "elementary": true
   },
   {
-   "text": "Expand $h=G_B(w)\\circ c$ and use functoriality of $P_B$. Naturality of the counit of the adjunction in [def-kun-projection-formula-map], at $w:FQ\\to H'$, says\n$$\\alpha_{B,H'}\\circ P_BG_B(w)=w\\circ\\alpha_{B,FQ}.$$\nConsequently\n$$\\alpha_{B,H'}\\circ P_B(h)=w\\circ\\alpha_{B,FQ}\\circ P_B(c)=w\\circ t.$$\nEvery term here is a morphism from $P_BF_XT$ to $H'$ after the displayed precomposition; this is a naturality equation, not a base-change isomorphism assertion.",
+   "text": "For any curried tensor bifunctor with a natural swap, move the tensor of the Hom comparison past that swap by naturality. Tensor-Hom homEquiv_naturality_right and homEquiv_counit cancel the defining transpose, including arbitrary postcomposition b. The two remaining opposite swaps cancel by the canonical signed-symmetry involutivity theorem. Specialize this proved private categorical calculation to obtain homMap_evaluation.",
    "uses": [
-    "def-kun-projection-formula-map"
+    "lem-amb-derived-tensor-symmetry-involutive",
+    "def-pur-derived-internal-hom"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, ordinary adjunction counit part of transposing the comparisons"
-   }
+   "elementary": true
   },
   {
-   "text": "By [lem-sf-ringed-derived-tensor-hom-adjunction], the recorded derived internal Hom $H_B(FL,-)$ is right adjoint to right tensoring by $FL$ for the native derived tensor, which agrees with the K-flat derived tensor through its simultaneous K-flat comparison; this is a closed tensor-Hom structure in the sense of [def-coef-ringed-tensor-hom-model], with evaluation as its counit, natural in the second variable. The tensor-Hom transposes and the evaluations $\\mathrm{ev}_A,\\mathrm{ev}_B$ of the statement are those of these adjunctions. The defining transpose of $u$ gives\n$$\\mathrm{ev}_{B,FL,FN}\\circ(u\\otimes1_{FL})=F(\\mathrm{ev}_A)\\circ\\mu_{Q,L}^{-1}.$$\nNaturality of this counit at $b:FN\\to N'$ gives\n$$\\mathrm{ev}_{B,FL,N'}\\circ(H_B(1,b)\\otimes1_{FL})=b\\circ\\mathrm{ev}_{B,FL,FN}.$$\nSubstitution of $w=H_B(1,b)u$, followed by the tensor bifunctor composition law, therefore gives\n$$\\mathrm{ev}_{B,FL,N'}\\circ(w\\otimes1_{FL})=b\\circ F(\\mathrm{ev}_A)\\circ\\mu_{Q,L}^{-1}.$$\nThese are the inverse-bijection identity for the specified transpose and naturality of evaluation, so arbitrary $b$ is allowed.",
+   "text": "Use the first naturality clause of IsEtaleHomTensorCanonical, supplied by etaleHomTensorComparison_existsUnique, at the A-geometric counit and L. This moves scalar extension of the counit through the tensor comparison.",
    "uses": [
-    "lem-sf-ringed-derived-tensor-hom-adjunction",
-    "def-coef-ringed-tensor-hom-model"
+    "lem-coef-etale-tensor-model-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 1, definition by tensoring evaluation and transposing; paragraph 4, transposing the comparisons"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply simultaneous naturality of the tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to $(d,1_L):(D,L)\\to(Q,L)$. It says\n$$\\mu_{Q,L}\\circ F(d\\otimes1_L)=(F(d)\\otimes1_{FL})\\circ\\mu_{D,L}.$$\nMultiplying by the inverse comparisons gives the needed equality\n$$\\mu_{Q,L}^{-1}\\circ(F(d)\\otimes1_{FL})=F(d\\otimes1_L)\\circ\\mu_{D,L}^{-1}.$$\nOnly the canonical tensor comparisons are inverted; $d$ is not inverted.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A4, lemma-pullback-tensor-product, canonical bifunctorial isomorphism"
-   }
-  },
-  {
-   "text": "Insert Steps 2 and 3 into the definition of $p_h$ and then use Steps 4 and 5. The entire calculation, with composition written right to left, is\n$$\\begin{aligned}p_h\n&=\\mathrm{ev}_{B,FL,N'}\\circ(w\\otimes1)\\circ(t\\otimes1)\\\\\n&=b\\circ F(\\mathrm{ev}_A)\\circ\\mu_{Q,L}^{-1}\\circ(F(d)\\otimes1)\\circ(a_T\\otimes1)\\\\\n&=b\\circ F(\\mathrm{ev}_A)\\circ F(d\\otimes1)\\circ\\mu_{D,L}^{-1}\\circ(a_T\\otimes1)\\\\\n&=b\\circ F(e_A)\\circ\\iota^{-1}.\n\\end{aligned}$$\nThe final line uses $e_A=\\mathrm{ev}_A(d\\otimes1)$, functoriality of $F$, and the inverse of the explicit factorization of $\\iota$ in Step 1. Its source is $P_BF_XT\\otimes_B^LFL$ and target is $N'$, exactly as required.",
+   "text": "Expand transposedPairing, apply the two transpose equations and tensor-comparison naturality, then expand sourceComparison and ordinaryPairing. Functoriality, the explicit inverse of the composite comparison and associativity give the required equality.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 4, transposing identifies the composite with the evaluation-defined comparison"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-coef-etale-tensor-model-comparison",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-pur-etale-scalar-mate",
   "def-kun-projection-formula-map",
-  "lem-sf-ringed-derived-tensor-hom-adjunction",
-  "def-coef-ringed-tensor-hom-model"
+  "lem-amb-derived-tensor-symmetry-involutive",
+  "def-pur-derived-internal-hom"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-  "place": "Proof paragraphs 1 and 4; explicit formal counit/evaluation computation, using Stacks Tags 07A4 and 0D6D for the canonical comparisons"
+  "place": "Proof paragraphs 1 and 4, implemented using the published ordinary etale interfaces, counit naturality, and the existing signed-symmetry involutivity theorem."
  },
  "mathlib_searches": [
   {
@@ -220,10 +192,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -260,5 +229,15 @@
   "group": "NZ",
   "result": "pass",
   "note": "Read item, 13 stmt_deps, master thm-coef-finite-hom paras 1/4, module and dep declarations in side-live. Lean matches node clause by clause; theorem proof is sorry only. ev_A = signed symmetry then counit of L⊗– ⊣ RHom(L,–), the canonical right-tensor evaluation; u = homEquiv(β ≫ etaleHomTensorComparison.hom ≫ F ev), which is the node's transpose since the symmetry squares to the identity. c = scalarMate, the mate of scalarPullbackIso.hom (F_X⋙f_B^* ≅ f_A^*⋙F_Y), i.e. the adjunct of F(α_A)∘a. ι = μ⁻¹ then (a⁻¹⊗1) as in Step 1; p_h and the equality ι.inv ≫ F(e_A) ≫ b are correct; b arbitrary, no extra hypotheses; universes A,B : Type(u+1) over Scheme.{u} as in the size convention. Mechanical finding: etaleHomTensorComparison is .choose of etaleHomTensorComparison_existsUnique and derivedTensorSymmetry is lem-kun-tensor-sym's own def record, so both theorem stmt_deps are genuine → PASS on that point. lean.statement verbatim, 8 declarations recorded with source/blueprint docstrings, six-step proof docstring, helpers not hollow, no pro-étale substitute; edge cases f=id, φ=id, ℤ→ℤ/2, zeros, empty scheme all admitted. No recompile (no file changed); worker reports clean scompile and preflight."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261021T130236-L-2650499",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
