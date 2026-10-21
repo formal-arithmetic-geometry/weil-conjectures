@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-sf-datum",
   "def-exchange-projection",
-  "def-sf-pf"
+  "def-sf-pf",
+  "def-sf-finite-open-tensor-operations"
  ],
  "proof": [
   {
@@ -222,5 +223,49 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-e3cc14df0 (reviewer sub-agent of L); spot-checked: I read the whole item: its statement and all 8 steps, the full statement of every cited node, the source lem-sf-kunneth-coherence.proof.md (main-20261015, clause (i)), the unit sk-thm-sf-kunneth-relative and the chapter. Coefficients and maps match the source. def-exchange-projection uses lem-cbc-proetale-extension-zero-base-change for open base change and lem-cbc-extension-zero-projection-formula for the open projection map, at finite A in D(T_proet,A). lem-sf-open-tensor-normalization says its beta and gamma are exactly these maps for constant finite coefficients, and adds identity restriction and full faithfulness. The statement is unchanged and not weakened. I checked the geometry: S = Tbar x_Xbar X and T = S x_Ybar Y are Cartesian, u = j1 k1, r k1 = p, s k1 = k q, qbar j1 = s. Each step's arrows are typed correctly, and the sign check (-1)^{ij}(-1)^{ji} = 1 holds. The restriction-faithfulness argument (full faithfulness plus the conjugate-iso unit equation) correctly proves independence of the factorization, the signed symmetry and the three-factor associativity. Edge cases tested: X empty, j = id, j = k = id. There are no new nodes and no cycle, uses equals proof_deps, and the only nearby node, lem-sf-integral-open-product-diagram-normalization, is the integral analogue, not a duplicate. Batch-5 check: the closure of lem-sf-open-tensor-normalization reaches sec-poincare-duality only at lem-pod-adic-limit-finite-modules, lem-pod-adic-tower-reconstruction and def-pod-ring-scalar-extension (unit sk-lem-finite). All three are general algebra and definitions, reached only through coefficient-category definitions (def-weil-derived-pullback-tensor-hom and the rationalization, scalar-extension and algebraically-closed definitions). Neither assumption states them and they are not steps of the trace-formula or Poincare-duality proofs, so the citation is outside the assumed statements. Accepted tool uses: lem-sf-open-tensor-normalization (the on-route cbc lemmas lack the normalization and full faithfulness), and the derived tensor-pullback and tensor-descent lemmas. FIX (E4, wording): step 6 said the opposite factorization reuses the same two Cartesian squares in reversed order. It actually uses (k,k2; qbar,s') and (j,j2; r',p) through S' = Xbar x_B Y. I checked both squares are Cartesian, and the conclusion does not depend on which squares are used. The corrected whole item is in fixes/dag/nodes/sec-six-functors/; only the text of step 6 changed.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenExternalTensorNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenExternalTensor.finite_open_external_tensor_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.proetAssociator",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.shriekCongr",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.Diagram",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.Diagram.swap",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.ambient",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.inside",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.comparison",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.restriction",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.oppositeComparison",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.ambientMap",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.insideMap",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.BinaryAssertion",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.Triple",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.tripleAmbient",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.tripleInside",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.tripleLeft",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.outerAssociator",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.innerAssociator",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.tripleRight",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.tripleRestriction",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.TripleAssertion",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.FiniteAssertion",
+   "AlgebraicGeometry.ProEtale.OpenExternalTensor.finite_open_external_tensor_normalization"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenExternalTensorNormalization.lean",
+  "statement": "theorem finite_open_external_tensor_normalization {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n} (S : SixFunctorDatum D C E n hn) {B X₀ Y₀ Xb₀ Yb₀ : SixFunctorSpace D} [IsSeparated B.obj.hom] [IsSeparated X₀.obj.hom] [IsSeparated Y₀.obj.hom] [IsSeparated Xb₀.obj.hom] [IsSeparated Yb₀.obj.hom] (j₀ : X₀ ⟶ Xb₀) (k₀ : Y₀ ⟶ Yb₀) [IsOpenImmersion j₀.hom.left] [IsOpenImmersion k₀.hom.left] (f : Xb₀ ⟶ B) (g : Yb₀ ⟶ B) [IsSeparated f.hom.left] [LocallyOfFiniteType f.hom.left] [QuasiCompact f.hom.left] [IsSeparated g.hom.left] [LocallyOfFiniteType g.hom.left] [QuasiCompact g.hom.left] {T₀ Tb₀ : Scheme.{u}} (d : Diagram j₀.hom.left k₀.hom.left T₀ Tb₀) (_barProduct : IsPullback d.pb d.qb f.hom.left g.hom.left) (_product : IsPullback d.p d.q (j₀.hom.left ≫ f.hom.left) (k₀.hom.left ≫ g.hom.left)) (K : finiteTorConstructibleCategory C.l E n hn X₀.obj.left) (L : finiteTorConstructibleCategory C.l E n hn Y₀.obj.left) : FiniteAssertion S j₀ k₀ f g d K L",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the existing finite open-product operation helpers and the recorded canonical intrinsic realization. Diagram and Triple retain chosen product cones and their equations; swaps and reassociation are expressed after canonical cone transport. All comparison arrows are explicit composites, and the assertion includes invertibility, naturality, identity restriction, opposite-factorization equality, signed symmetry, triple equality and both triple restriction equations. The sole postponed theorem has the node proof in its docstring. H2 repair: the plain FiniteOpenProduct operations are owned by def-sf-finite-open-tensor-operations, recorded existing:true on their unchanged published module; the theorem finiteOpenProductSwap is not a statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3cab2f32",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Re-delivery of the d79810 H2 RETURN. Item Lean is byte-identical (sha 41fb9cd3) and was mathematically checked in d79810. The item's stmt_deps now replace theorem lem-pur-finite-open-product-swap with the new def-sf-finite-open-tensor-operations; against the base only that node is added. New node: existing:true on the unchanged FiniteOpenProductSwap; its 17 decls include every FiniteOpenProduct.* the item uses; all are plain defs (no choose, theorem not listed); statement verbatim (l.108); statement matches the bodies (pullComp/comp/square/gamma/rho/sigma directions); check_existing clean. FIX: whole-node fixes/def-sf-finite-open-tensor-operations.json adds the 7 owners of the declarations its bodies use (def-sf-open-normalization-data, def-weil-derived-tensor, def-sfb-finite-upper-star, def-sfb-finite-derived-pullback-iso, def-sfb-finite-upper-star-comp, def-sfb-finite-derived-extension-by-zero-adjunction, lem-cbc-proetale-extension-zero-base-change) to stmt_deps, each cited in the statement; no cycle (closure checked); check_new_node []; no Lean changed, no compile. Advisories: ProEtale.leftDerivedUpperStarTensorIso has no pro-etale owner; the item reaches def-sf-open-normalization-data only through the new node; common-cone swap clause faithful, as accepted earlier."
+ }
 }

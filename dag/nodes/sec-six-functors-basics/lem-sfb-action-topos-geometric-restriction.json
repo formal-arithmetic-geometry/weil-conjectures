@@ -417,5 +417,48 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-fa2835485 (reviewer sub-agent of L); spot-checked: Read all 11 steps, every cited statement, blueprint main-20261015 sk-thm-sf-ctf-stability direct-images proof paragraph (3) (it has no internal-action content, so the agent-written origin is correct) and Stacks sites.tex 04TQ lemma-glue-maps and 00W0. The statement is unchanged and the item is still unsplit live. There are no new nodes, no cycle and no SGA citation. The only citer (condensed-derived-restriction-calculus) gets q_u, p_J, p_H and the ringed φ-square. Checked by hand: composition order and left-action law (steps 1-2); coinduction B(Y) as a sheaf via the morphism clause of lem-pe-set-sheaf-cover-descent, whose hypotheses hold (step 4); right-translation action and both adjunction composites (steps 5-6); p_K=q_{K→1}; module pullback = f^{-1}M with identity structure map; kernel/cokernel creation and diagonal tensor from the site node; φ-square with structure maps φ_U. Small cases checked: point site (classical coinduction), θ=id, L=1, K=1, empty covers. No duplicate: the condensed profinite action nodes are module-level special cases. Accepted tool uses: lem-pe-set-sheaf-cover-descent and lem-weil-pbc-ringed-topoi-module-adjunction. One fault (E5/C4), FIXed: step 2 glued base sheaves on arbitrary sieves of the generated topology while the base sheaves are only family-sheaves of def-weil-pbc-sites-and-cohomology. I added the identification, which follows from site axioms (i)-(iii), plus gluing on supersieves of a covering by separatedness, and added def-weil-pbc-sites-and-cohomology to the step's uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ActionToposGeometricRestriction",
+  "declaration": "CategoryTheory.InternalActionSite.geometricRestriction",
+  "declarations": [
+   "CategoryTheory.InternalActionSite.groupSheaf",
+   "CategoryTheory.InternalActionSite.groupOperations_naturality",
+   "CategoryTheory.InternalActionSite.groupOne",
+   "CategoryTheory.InternalActionSite.groupMul",
+   "CategoryTheory.InternalActionSite.groupMonoid_laws",
+   "CategoryTheory.InternalActionSite.groupMonoid",
+   "CategoryTheory.InternalActionSite.SetActions",
+   "CategoryTheory.InternalActionSite.setAction",
+   "CategoryTheory.InternalActionSite.restrictionSite_laws",
+   "CategoryTheory.InternalActionSite.restrictionSite",
+   "CategoryTheory.InternalActionSite.actionPrecomposition_isSheaf",
+   "CategoryTheory.InternalActionSite.precomposition",
+   "CategoryTheory.InternalActionSite.restriction",
+   "CategoryTheory.InternalActionSite.inflation",
+   "CategoryTheory.InternalActionSite.moduleSets",
+   "CategoryTheory.InternalActionSite.ModulePullback",
+   "CategoryTheory.InternalActionSite.pulledCoefficient",
+   "CategoryTheory.InternalActionSite.PrecompositionPullback",
+   "CategoryTheory.InternalActionSite.CoefficientChange",
+   "CategoryTheory.InternalActionSite.GeometricRestriction",
+   "CategoryTheory.InternalActionSite.geometricRestriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ActionToposGeometricRestriction.lean",
+  "statement": "theorem geometricRestriction [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) : Nonempty (GeometricRestriction J hJ)",
+  "branch": "sheaf-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The NR ledger entry was the stage-1 split only, with no Lean module. This stage-2 module uses Mathlib Mod for internal set actions and the recorded twisted action site and coefficient sheaf. Its existence statement packages the section-characterized equivalence, literal precomposition inverse images, adjunctions, exact module pullbacks normalized by the set adjunction, pure-tensor and regular-unit comparisons, and structural coefficient squares. All data definitions are explicit; no object is selected from the existence theorem.",
+  "fixed_by": "NT-stage2-cc-dbd268553"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dbd268553",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Read node, all 7 stmt_dep records, the dependency Lean (InternalActionSitePresentation, RingedToposMorphism, siteSheafTensorRight/Tmul, IsGrothendieckTopos), the source place and the delivered module (21 decls). Every clause matches: E^K is Mathlib Mod of real group-sheaf monoids; the equivalence is section-pinned with restriction a·f*x over all opArrow; topos via IsGrothendieckTopos.{u}; q_θ and p_K are literal precomposition with IsLeftAdjoint and finite limits; the over_base, identity and composition functor equalities are true; ringed packages have literal inverse image and identity structural map; module pullbacks are exact with sections, restrictions and morphisms pinned; tensor pure tensors and unit sections pinned; CoefficientChange structural = φ; coefficient_square is definitional, as the node says. Helper sorry theorems are true with correct proof docstrings; statement verbatim; declarations complete; docstrings OK; edge cases (point site, θ=id, trivial groups, zero rings, empty covers) included. Finding F1 (H3): PrecompositionPullback.sections was not tied to pullback.underlying, so a global unit c of R rescales sections, making tensor c⁻¹·canonical and unitComparison multiplication by c with the adjunction fixed, contradicting 'unit comparison is the identity'. FIX adds field sections_underlying (sections = underlying ≫ eqToHom inverse_eq on underlying sets); main statement and records unchanged; nt_compile --json clean, 33.5 s, exit 0."
  }
 }
