@@ -98,14 +98,15 @@
  "chapter": "sec-curve-estimates",
  "unit": "sk-thm-br",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGlobalSectionsGaloisInvariants.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/EtaleGlobalSectionsGaloisInvariants.lean",
   "declaration": "AlgebraicGeometry.Scheme.etaleGlobalSections_galoisInvariants",
-  "statement": "theorem etaleGlobalSections_galoisInvariants\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (T : (Spec (.of K)).Etale) (hT : Limits.IsTerminal T)\n    (E : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1} ≌\n      Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K)))\n    (i : E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.RepToAction ℤ (Gal(Ks/K)) ⋙\n      Action.forget (ModuleCat.{u + 1} ℤ) (Gal(Ks/K)) ⋙\n      forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat ≅\n      (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber)\n    (hi : ∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n      (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n      (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω))\n      (X : (Spec (.of K)).Etale)\n      (x x' : (pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X)\n      (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n      (z : F.obj.obj (op X)),\n      (i.hom.app F) ((E.functor.obj F).obj.ρ g\n        ((i.inv.app F) ((pointSmallEtale\n          (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x F.obj z))) =\n      (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber\n        X x' F.obj z)\n    : ∃ t : ∀ F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1},\n        F.obj.obj (op T) ≃+ (@Representation.invariants ℤ _ (E.functor.obj F).obj.V _ _\n          (E.functor.obj F).obj.hV1 (E.functor.obj F).obj.hV2 (E.functor.obj F).obj.ρ),\n      ∀ (F F' : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n        (φ : F ⟶ F') (z : F.obj.obj (op T)),\n        (t F' (φ.hom.app (op T) z)).val = (E.functor.map φ).hom.hom (t F z).val",
+  "statement": "theorem etaleGlobalSections_galoisInvariants\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω]\n    (T : (Spec (.of K)).Etale) (hT : Limits.IsTerminal T)\n    (E : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1} ≌\n      Rep.DiscreteContinuousRep.{0, u, u + 1} ℤ (Gal(Ks/K)))\n    (i : E.functor ⋙ ObjectProperty.ι _ ⋙ Rep.RepToAction ℤ (Gal(Ks/K)) ⋙\n      Action.forget (ModuleCat.{u + 1} ℤ) (Gal(Ks/K)) ⋙\n      forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat ≅\n      (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber)\n    (hi : ∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n      (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω),\n      (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω) →\n      ∀ (X : (Spec (.of K)).Etale)\n      (x x' : (pointSmallEtale\n        (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj X),\n      x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left →\n      ∀ (z : F.obj.obj (op X)),\n      (i.hom.app F) ((E.functor.obj F).obj.ρ g\n        ((i.inv.app F) ((pointSmallEtale\n          (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber X x F.obj z))) =\n      (pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).toPresheafFiber\n        X x' F.obj z)\n    : ∃ t : ∀ F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1},\n        F.obj.obj (op T) ≃+ (@Representation.invariants ℤ _ (E.functor.obj F).obj.V _ _\n          (E.functor.obj F).obj.hV1 (E.functor.obj F).obj.hV2 (E.functor.obj F).obj.ρ),\n      ∀ (F F' : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1})\n        (φ : F ⟶ F') (z : F.obj.obj (op T)),\n        (t F' (φ.hom.app (op T) z)).val = (E.functor.map φ).hom.hom (t F z).val",
   "branch": "sheaf-dag",
-  "by": "C3",
-  "date": "2026-10-13"
+  "by": "N1",
+  "date": "2026-10-21",
+  "note": "Retire the duplicate Sheaf module in favor of the adopted upstream theorem. The upstream theorem has the same proposition, with anonymous implication binders in its action-compatibility hypothesis."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -118,14 +119,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "C-d901b",
+  "group": "N1",
   "result": "pass",
-  "landing": "20261012T210407-L-969302",
+  "landing": "20261021T012412-L-2185859",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf duplicate vs upstream WeilConjectures.AlgebraicGeometry.EtaleGlobalSectionsGaloisInvariants.etaleGlobalSections_galoisInvariants (statement verbatim in node lean record; old signature closed by direct application; axioms clean; retire-items.tsv line 1021; 0 importers)"
  },
  "lean_audit": {
   "master": {
