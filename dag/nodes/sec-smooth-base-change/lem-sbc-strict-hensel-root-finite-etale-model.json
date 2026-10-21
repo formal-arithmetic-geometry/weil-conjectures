@@ -30,12 +30,13 @@
    "elementary": true
   },
   {
-   "text": "If g is nonunit, use the finite normalization model and root divisor supplied by strict_hensel_root_purity_data. Apply exists_finite_etale_extension_of_regular_integral_divisor. Compose pullbackRestrictIsoRestrict p V with the inverse purity isomorphism and the finite-model identification. The projection equation follows from the inverse identities and pullbackRestrictIsoRestrict_hom_morphismRestrict.",
+   "text": "If g is nonunit, compose b with the canonical small-to-full strict-henselization isomorphism, and use its toBase equation to verify the upstream structural-map hypothesis. AdjoinRoot.mapRingEquiv identifies the group-order root algebras and their punctured opens. Apply the retained upstream strict_hensel_root_purity_data. Transport its locally Noetherian base, Cartier immersion, support equation, finite model, and etale target opens along the spectrum isomorphism. The Cartier kernel is a flat pullback; the generic point belongs to the same D. The restriction isomorphism and pullback.map transport the cover comparison, and the restriction-inclusion equations prove its projection identity. This is the proved private small_root_purity_data helper. Apply exists_finite_etale_extension_of_regular_integral_divisor to the transported data. Compose pullbackRestrictIsoRestrict p V with the inverse purity isomorphism and the finite-model identification. The projection equation follows from the inverse identities and pullbackRestrictIsoRestrict_hom_morphismRestrict.",
    "uses": [
     "lem-sbc-strict-hensel-root-purity-data",
-    "lem-sbc-regular-integral-divisor-etale-purity"
+    "lem-sbc-regular-integral-divisor-etale-purity",
+    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
    ],
-   "elementary": true
+   "elementary": false
   },
   {
    "text": "Equip the small strict-henselization ring H with the R-algebra structure induced by b. Apply smallStrictHenselization_indEtale_of_affine_chart to the identity chart Spec R, the identity spectrum isomorphism, and hb. Take its filtered etale algebra colimit presentation and map it to R-modules. Every stage is flat because it is etale, and ModuleCat.flat_of_colimitPresentation makes H flat over R. Flatness preserves injectivity of multiplication by f in H. The positive-degree monic root algebra is free over H, so multiplication by g stays injective there. Localization away from g is injective; denseRange_comap_iff_ker_le_nilRadical and the localization-away range formula show V is dense. Torsor surjectivity, delta, and pullback.condition show V is contained in the image of p. Since p is finite its image is closed. A closed set containing a dense set is the whole spectrum, proving p surjective.",
@@ -53,13 +54,15 @@
   "lem-sbc-strict-hensel-root-purity-data",
   "lem-weil-pbc-etale-algebra-flat",
   "lem-weil-pbc-flat-colimit-presentation-same-universe",
-  "lem-weil-pbc-small-strict-henselization-ind-etale"
+  "lem-weil-pbc-small-strict-henselization-ind-etale",
+  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "A9",
-  "document": "Stacks Project",
-  "place": "Tags 09EB, 0BRM, 0EYG, 0EYH and 0EYE; structural flatness from the existing identity-affine-chart ind-etale theorem (04HX) and filtered module-colimit flatness (05UT). Preserve the finite-etale assembly; replace the duplicated private small-colimit construction with this shorter proof. G3 repair, 2026-10-21: use the proved small-model transport corollary after retirement of the duplicate affine-chart module; the existing finite-etale argument is unchanged."
+  "group": "U3",
+  "document": "Stacks Project and retained upstream Lean",
+  "place": "Tags 09EB, 0BRM, 0EYG, 0EYH and 0EYE, with the canonical colimit comparison (04HX).",
+  "note": "Retirement of the duplicate purity-data module. A fully proved private helper transports the complete upstream result to the unchanged small-model public statement. The existing unit case, purity assembly, flatness proof, and density/surjectivity proof remain unchanged."
  },
  "mathlib_searches": [
   {
@@ -135,12 +138,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-13fea",
-  "group": "G3",
+  "reviewer": "C-195fe",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261021T061122-L-1709106",
+  "landing": "20261021T225220-L-3798519",
   "kind": "interface",
-  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
+  "note": "independent cc review: delivered StrictHenselRootPurityData retirement + adapted StrictHenselRootFiniteEtaleModel and both nodes vs live clone (base = live), upstream WeilConjectures twin (verbatim lean.statement, proof steps vs upstream proof), change record users vs rg importer graph; consumer+importer RegularDivisorStrictHenselRootSection compiled (exit 0), axioms propext/Classical.choice/Quot.sound"
  },
  "lean_audit": {}
 }

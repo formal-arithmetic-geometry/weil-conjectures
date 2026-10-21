@@ -7,7 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
-import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootPurityData
+import WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRootPurityData
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison
 import Sheaf.AlgebraicGeometry.SmallStrictHenselizationIndEtale
 import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
 import WeilConjectures.AlgebraicGeometry.Morphisms.RegularIntegralDivisorEtalePurity
@@ -26,6 +27,187 @@ Source: Stacks Project, Tags 09EB, 0BRM, 0EYE and 0EYG.
 universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+-- The upstream purity model transports along the canonical comparison of root algebras.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem small_root_purity_data
+    {L U : Scheme.{u}} (i : U ⟶ L)
+    (G : Type (u + 1)) [Group G] [Finite G] (W : GaloisCover G U)
+    (R : CommRingCat.{u}) (φ : Spec R ⟶ L) (f : R)
+    (hG : IsUnit (Nat.card G : R))
+    [IsRegularRing R] (hf : IsSMulRegular R f)
+    [IsRegularRing (R ⧸ Ideal.span {f})]
+    (β : pullback i φ ≅ Scheme.Opens.toScheme (X := Spec R) (PrimeSpectrum.basicOpen f))
+    (hβ : β.hom ≫ Scheme.Opens.ι (X := Spec R) (PrimeSpectrum.basicOpen f) = pullback.snd i φ)
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barY : Spec (.of Ω) ⟶ Spec R)
+    (b : R ⟶ strictHenselizationRing barY)
+    (hb : Spec.map b = strictHenselizationStructuralMap barY) :
+    let H := strictHenselizationRing barY
+    let g := b.hom f
+    let A := AdjoinRoot ((Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g)
+    let N := Spec (CommRingCat.of A)
+    let q := Spec.map (CommRingCat.ofHom (algebraMap H A))
+    let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)
+    ¬ IsUnit g →
+    IsLocallyNoetherian N ∧
+      ∃ (D : Scheme.{u}) (j : D ⟶ N),
+        IsRegular D ∧ IsIntegral D ∧ IsEffectiveCartierCenter j ∧
+        (∀ z : N, z ∈ V ↔ z ∉ Set.range j) ∧
+        ∃ (C : Scheme.{u}) (n : C ⟶ N),
+          IsFinite n ∧ Etale (n ∣_ V) ∧
+          ∃ (O : N.Opens) (η : D), IsGenericPoint η Set.univ ∧
+            j η ∈ O ∧ Etale (n ∣_ O) ∧
+          ∃ ζ : (n ⁻¹ᵁ V).toScheme ≅
+              pullback (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ),
+            ζ.hom ≫ pullback.snd (W.π ≫ i) (V.ι ≫ q ≫ Spec.map b ≫ φ) =
+              n ∣_ V := by
+  classical
+  dsimp only
+  intro hg
+  let H := strictHenselizationRing barY
+  let g := b.hom f
+  let P := (Polynomial.X : Polynomial H) ^ Nat.card G - Polynomial.C g
+  let A := AdjoinRoot P
+  let N := Spec (CommRingCat.of A)
+  let q := Spec.map (CommRingCat.ofHom (algebraMap H A))
+  let V : N.Opens := PrimeSpectrum.basicOpen (algebraMap H A g)
+  let e : strictHenselizationRing barY ≅ strictHenselization barY :=
+    smallStrictHenselizationColimitIso barY
+  let b' := b ≫ e.hom
+  have hb' : Spec.map b' = strictLocalizationToBase barY := by
+    rw [Spec.map_comp, hb, ← smallStrictHenselizationColimitIso_toBase barY]
+    simp only [e, ← Category.assoc, ← Spec.map_comp, Iso.inv_hom_id, Spec.map_id,
+      Category.id_comp]
+  let H' := strictHenselization barY
+  let g' := b'.hom f
+  let P' := (Polynomial.X : Polynomial H') ^ Nat.card G - Polynomial.C g'
+  let A' := AdjoinRoot P'
+  let N' := Spec (CommRingCat.of A')
+  let q' := Spec.map (CommRingCat.ofHom (algebraMap H' A'))
+  let V' : N'.Opens := PrimeSpectrum.basicOpen (algebraMap H' A' g')
+  let eR : H ≃+* H' := e.commRingCatIsoToRingEquiv
+  have hP : P.map eR = P' := by
+    simp only [P, P', Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X]
+    rw [Polynomial.map_C (f := (eR : H →+* H'))]
+    rfl
+  let eA : A ≃+* A' := AdjoinRoot.mapRingEquiv eR P P' (Associated.of_eq hP)
+  have heA (x : H) : eA (AdjoinRoot.of P x) = AdjoinRoot.of P' (e.hom x) := by
+    exact AdjoinRoot.map_of eR P P' (Associated.of_eq hP).symm.dvd x
+  let t : N' ⟶ N := Spec.map eA.toCommRingCatIso.hom
+  have : IsIso t := inferInstance
+  have hv : t ⁻¹ᵁ V = V' := by
+    change PrimeSpectrum.basicOpen (eA (AdjoinRoot.of P g)) =
+      PrimeSpectrum.basicOpen (AdjoinRoot.of P' g')
+    exact congrArg PrimeSpectrum.basicOpen (heA g)
+  let v : V'.toScheme ≅ V.toScheme := N'.isoOfEq hv.symm ≪≫ t.preimageIso V
+  have hvι : v.hom ≫ V.ι = V'.ι ≫ t := by
+    simp only [v, Iso.trans_hom, Category.assoc, Scheme.Hom.preimageIso_hom_ι,
+      Scheme.isoOfEq_hom_ι_assoc]
+  have hq : t ≫ q ≫ Spec.map b = q' ≫ Spec.map b' := by
+    simp only [t, q, q', ← Spec.map_comp]
+    congr 1
+    ext x
+    exact heA (b.hom x)
+  have hg' : ¬ IsUnit g' := by
+    intro h
+    apply hg
+    have h' := h.map e.inv.hom
+    change IsUnit (e.commRingCatIsoToRingEquiv.symm
+      (e.commRingCatIsoToRingEquiv g)) at h'
+    simpa only [RingEquiv.symm_apply_apply] using h'
+  obtain ⟨hN', D, j, hD, hDI, hj, hV', C, n, hn, hnV, O, η, hη, hO,
+      hnO, ζ, hζ⟩ :=
+    W.strict_hensel_root_purity_data i G R φ f hG hf β hβ barY b' hb' hg'
+  have : IsLocallyNoetherian N' := hN'
+  have hN : IsLocallyNoetherian N := isLocallyNoetherian_of_isOpenImmersion (inv t)
+  let j₀ := j ≫ t
+  have hj₀ : IsEffectiveCartierCenter j₀ := by
+    have : IsClosedImmersion j := hj.isClosedImmersion
+    have : IsClosedImmersion j₀ := inferInstance
+    let d : D ⟶ pullback (inv t) j := pullback.lift j₀ (𝟙 D) (by simp [j₀])
+    have hd : d ≫ pullback.snd (inv t) j = 𝟙 D := pullback.lift_snd _ _ _
+    have : IsIso d := by
+      have : IsIso (d ≫ pullback.snd (inv t) j) := hd ▸ inferInstance
+      exact IsIso.of_isIso_comp_right d (pullback.snd (inv t) j)
+    apply isEffectiveCartierCenter_iff_isInvertible_ker.mpr
+    have hd' : d ≫ pullback.fst (inv t) j = j₀ := pullback.lift_fst _ _ _
+    rw [← hd', Hom.ker_comp_of_isIso,
+      IdealSheafData.ker_fst_of_isClosedImmersion]
+    exact (isEffectiveCartierCenter_iff_isInvertible_ker.mp hj).comap_of_flat (inv t)
+  have hV₀ (z : N) : z ∈ V ↔ z ∉ Set.range j₀ := by
+    have hh : inv t z ∈ V' ↔ inv t z ∉ Set.range j := hV' (inv t z)
+    rw [← hv] at hh
+    change t (inv t z) ∈ V ↔ _ at hh
+    rw [show t (inv t z) = z from t.homeomorph.apply_symm_apply z] at hh
+    rw [hh]
+    apply not_congr
+    constructor
+    · rintro ⟨d, hd⟩
+      refine ⟨d, ?_⟩
+      change t (j d) = z
+      rw [hd]
+      exact t.homeomorph.apply_symm_apply z
+    · rintro ⟨d, rfl⟩
+      refine ⟨d, ?_⟩
+      change j d = inv t (t (j d))
+      exact (t.homeomorph.symm_apply_apply (j d)).symm
+  have : IsFinite n := hn
+  let n₀ := n ≫ t
+  let O₀ := inv t ⁻¹ᵁ O
+  have htO : t ⁻¹ᵁ O₀ = O := by
+    simp only [O₀, ← Scheme.Hom.comp_preimage, IsIso.hom_inv_id, Scheme.Hom.id_preimage]
+  have hn₀V : Etale (n₀ ∣_ V) := by
+    dsimp only [n₀]
+    rw [morphismRestrict_comp]
+    have hnV' : Etale (n ∣_ t ⁻¹ᵁ V) :=
+      (MorphismProperty.arrow_mk_iso_iff (P := @Etale) (morphismRestrictEq n hv)).mpr hnV
+    have := hnV'
+    infer_instance
+  have hn₀O : Etale (n₀ ∣_ O₀) := by
+    dsimp only [n₀]
+    rw [morphismRestrict_comp]
+    have hnO' : Etale (n ∣_ t ⁻¹ᵁ O₀) :=
+      (MorphismProperty.arrow_mk_iso_iff (P := @Etale) (morphismRestrictEq n htO)).mpr hnO
+    have := hnO'
+    infer_instance
+  have hO₀ : j₀ η ∈ O₀ := by
+    change inv t (t (j η)) ∈ O
+    simpa only [show inv t (t (j η)) = j η from
+      t.homeomorph.symm_apply_apply (j η)] using hO
+  let ψ := V.ι ≫ q ≫ Spec.map b ≫ φ
+  let ψ' := V'.ι ≫ q' ≫ Spec.map b' ≫ φ
+  have hvψ : v.hom ≫ ψ = ψ' := by
+    calc
+      v.hom ≫ ψ = (v.hom ≫ V.ι) ≫ q ≫ Spec.map b ≫ φ := by
+        simp only [ψ, Category.assoc]
+      _ = (V'.ι ≫ t) ≫ q ≫ Spec.map b ≫ φ := by rw [hvι]
+      _ = ψ' := by
+        simpa only [ψ', Category.assoc] using
+          congrArg (fun a ↦ V'.ι ≫ a ≫ φ) hq
+  let k := pullback.map (W.π ≫ i) ψ' (W.π ≫ i) ψ
+    (𝟙 _) v.hom (𝟙 _) (by simp) (by simpa using hvψ.symm)
+  have : IsIso k := inferInstance
+  have hs : n₀ ⁻¹ᵁ V = n ⁻¹ᵁ V' := by
+    simp only [n₀, Scheme.Hom.comp_preimage, hv]
+  let ζ₀ := C.isoOfEq hs ≪≫ ζ ≪≫ asIso k
+  have hζ₀ : ζ₀.hom ≫ pullback.snd (W.π ≫ i) ψ = n₀ ∣_ V := by
+    apply (cancel_mono V.ι).mp
+    have hk : k ≫ pullback.snd (W.π ≫ i) ψ =
+        pullback.snd (W.π ≫ i) ψ' ≫ v.hom := pullback.lift_snd _ _ _
+    calc
+      ζ₀.hom ≫ pullback.snd (W.π ≫ i) ψ ≫ V.ι =
+          (C.isoOfEq hs).hom ≫ ζ.hom ≫
+            pullback.snd (W.π ≫ i) ψ' ≫ v.hom ≫ V.ι := by
+        simp only [ζ₀, Iso.trans_hom, asIso_hom, Category.assoc]
+        rw [reassoc_of% hk]
+      _ = (C.isoOfEq hs).hom ≫ (n ∣_ V') ≫ V'.ι ≫ t := by
+        rw [hvι, reassoc_of% hζ]
+      _ = (n₀ ⁻¹ᵁ V).ι ≫ n₀ := by
+        simp only [morphismRestrict_ι_assoc, Scheme.isoOfEq_hom_ι_assoc, n₀]
+      _ = (n₀ ∣_ V) ≫ V.ι := (morphismRestrict_ι n₀ V).symm
+  exact ⟨hN, D, j₀, hD, hDI, hj₀, hV₀, C, n₀, inferInstance, hn₀V,
+    O₀, η, hη, hO₀, hn₀O, ζ₀, hζ₀⟩
 
 -- Use the prescribed algebra structure in the identity affine chart. The existing
 -- ind-etale presentation then supplies a filtered colimit of flat modules.
@@ -173,7 +355,7 @@ theorem GaloisCover.strict_hensel_root_finite_etale_model
       apply (cancel_mono V.ι).mp
       simpa only [Category.assoc] using (pullback.condition (f := p) (g := V.ι))
   · obtain ⟨hN, D, j, hD, hDI, hj, hV, C, n, hn, hnV, O, η, hη, hO, hnO, ζ, hζ⟩ :=
-      W.strict_hensel_root_purity_data i G R φ f hG hf β hβ barY b hb hg
+      small_root_purity_data i G W R φ f hG hf β hβ barY b hb hg
     have : IsLocallyNoetherian N := hN
     have : IsRegular D := hD
     have : IsIntegral D := hDI
