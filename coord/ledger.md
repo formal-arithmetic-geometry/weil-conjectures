@@ -23777,3 +23777,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:20 L: returned deliver/NH/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: This is the 12th push of lem-sfb-gabber-global-snc-alteration; the 11 earlier pushes (NV, NF×3, NL×2, NB, NH, NC, NI×2) )
 - 21:21 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 21:23 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 21:23 L: returned deliver/NS/lem-sfb-equivariant-resolution-bar-normalization (reviewer RETURN: L: independent stage-2 immutable head ef6f2b1faee8: Sheaf.CategoryTheory.CondensedHomogeneousFunctions declares names th)
