@@ -13,9 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.Paper.PurityComparisonUnitInjectiveModel
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
@@ -155,6 +152,102 @@ theorem supportComparisonCommonInjectives
               (ModuleCat.{u + 1} A) T).mapCochainComplexPlus.obj J).obj.X n).obj.map
                (Etale.supportRestrictionArrow i).op) =
           kernel.ι ((J.obj.X n).obj.map (supportRestrictionArrow i).op)) := by
-  sorry
+  let E := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)
+  let P := Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)
+  let L := comparisonUpperStar (ModuleCat.{u + 1} A) T
+  let R := comparisonLowerStar (ModuleCat.{u + 1} A) T
+  let M := supportComparisonSource T A F
+  refine ⟨?_, ?_⟩
+  · let K := L.mapCochainComplexPlus.obj M
+    obtain ⟨n, hn⟩ := K.property
+    have : K.obj.IsStrictlyGE n := hn
+    obtain ⟨J, _, h, hh⟩ := CochainComplex.Plus.exists_quasiIso_injective K n
+    refine ⟨(InjectiveObject.ι P).mapCochainComplexPlus.obj J, h, hh, ?_⟩
+    intro n
+    exact (J.obj.X n).property
+  · intro J h hh hJ
+    have : QuasiIso h.hom := hh
+    let : ∀ n : ℤ, Injective (J.obj.X n) := hJ
+    have : R.PreservesInjectiveObjects :=
+      Adjunction.preservesInjectiveObjects_of_preservesFiniteLimits
+        (comparisonAdjunction (ModuleCat.{u + 1} A) T)
+    have hinj : ∀ n : ℤ, Injective
+        ((R.mapCochainComplexPlus.obj J).obj.X n) := fun n ↦ R.injective_obj_of_injective (hJ n)
+    let K := (HomotopyCategory.Plus.quotient E).obj M
+    let qh := (HomotopyCategory.Plus.quotient P).map h
+    have hqh : IsIso (DerivedCategory.Plus.Qh.map qh) := by
+      apply Localization.inverts DerivedCategory.Plus.Qh (HomotopyCategory.Plus.quasiIso P)
+      exact (HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 hh
+    let b := supportComparisonDerivedResolutionMap T A F J h
+    have hb : IsIso b := by
+      dsimp [b, supportComparisonDerivedResolutionMap]
+      infer_instance
+    let α := R.rightDerivedFunctorPlusUnit.app ((HomotopyCategory.Plus.quotient P).obj J)
+    have hα : IsIso α := by
+      dsimp [α]
+      infer_instance
+    let θ := asIso α ≪≫ (asIso b).symm
+    have hθ : θ.hom ≫ b = α := by simp [θ]
+    set_option backward.isDefEq.respectTransparency false in
+    have hfac :
+        DerivedCategory.Plus.Q.map
+            (ObjectProperty.homMk (supportComparisonAugmentation T A F J h)) ≫ α =
+          (derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} A) T).unit.app
+            (DerivedCategory.Plus.Q.obj M) ≫ b := by
+      have hunit := (comparisonAdjunction (ModuleCat.{u + 1} A) T).derivedPlus_unit_app_fac K
+      have hnat := R.rightDerivedFunctorPlusUnit.naturality qh
+      change DerivedCategory.Plus.Qh.map (R.mapHomotopyCategoryPlus.map qh) ≫ α =
+        R.rightDerivedFunctorPlusUnit.app (L.mapHomotopyCategoryPlus.obj K) ≫
+          R.rightDerivedFunctorPlus.map (DerivedCategory.Plus.Qh.map qh) at hnat
+      change _ = (comparisonAdjunction (ModuleCat.{u + 1} A) T).derivedAdjunctionPlus.unit.app _ ≫ b
+      rw [(comparisonAdjunction (ModuleCat.{u + 1} A) T).derivedAdjunctionPlus_eq_derivedPlus]
+      dsimp only [b, supportComparisonDerivedResolutionMap]
+      rw [Functor.map_comp, ← Category.assoc, hunit, Category.assoc, ← hnat,
+        ← Category.assoc, ← Functor.map_comp]
+      change DerivedCategory.Plus.Qh.map
+          ((HomotopyCategory.Plus.quotient E).map
+            (ObjectProperty.homMk (supportComparisonAugmentation T A F J h))) ≫ α = _
+      apply congrArg (fun f ↦ DerivedCategory.Plus.Qh.map f ≫ α)
+      apply (HomotopyCategory.Plus.ι E).map_injective
+      rw [Functor.map_comp, Adjunction.ι_map_mapHomotopyCategoryPlus_unit_app]
+      change (HomotopyCategory.quotient E (.up ℤ)).map
+          (supportComparisonAugmentation T A F J h) =
+        ((comparisonAdjunction (ModuleCat.{u + 1} A) T).mapHomotopyCategory (.up ℤ)).unit.app
+          ((HomotopyCategory.quotient E (.up ℤ)).obj M.obj) ≫
+        (R.mapHomotopyCategory (.up ℤ)).map
+          ((HomotopyCategory.quotient P (.up ℤ)).map h.hom)
+      rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+      dsimp [supportComparisonAugmentation]
+      rw [Functor.map_comp]
+      rfl
+    have hnorm :
+        DerivedCategory.Plus.Q.map
+            (ObjectProperty.homMk (supportComparisonAugmentation T A F J h)) ≫ θ.hom =
+          (derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} A) T).unit.app
+            (DerivedCategory.Plus.Q.obj M) := by
+      apply (cancel_mono b).1
+      simpa only [Category.assoc, hθ] using hfac
+    have hqa : IsIso (DerivedCategory.Plus.Q.map
+        (ObjectProperty.homMk (supportComparisonAugmentation T A F J h))) := by
+      have := isIso_compactSupportComparisonUnit T A
+      have hcomp : IsIso (DerivedCategory.Plus.Q.map
+          (ObjectProperty.homMk (supportComparisonAugmentation T A F J h)) ≫ θ.hom) := by
+        rw [hnorm]
+        infer_instance
+      exact IsIso.of_isIso_comp_right _ θ.hom
+    have ha : QuasiIso (supportComparisonAugmentation T A F J h) := by
+      apply (DerivedCategory.isIso_Q_map_iff_quasiIso E _).1
+      exact (DerivedCategory.Plus.ι (C := E)).map_isIso
+        (DerivedCategory.Plus.Q.map
+          (ObjectProperty.homMk (supportComparisonAugmentation T A F J h)))
+    refine ⟨hinj, ha, ⟨θ, hθ, hnorm⟩, ?_, ?_, ?_, ?_⟩
+    · intro W
+      rfl
+    · intro W₁ W₂ f n
+      rfl
+    · intro C i hi
+      rfl
+    · intro C i hi n
+      rfl
 
 end AlgebraicGeometry.ProEtale

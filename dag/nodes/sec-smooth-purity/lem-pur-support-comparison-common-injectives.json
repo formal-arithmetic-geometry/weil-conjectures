@@ -22,10 +22,10 @@
  ],
  "proof": [
   {
-   "text": "Work in the common larger universe specified in the statement. Apply the ringed-site Grothendieck theorem to each of the two small sites with its constant sheaf of rings $A$. Both ordinary module-sheaf categories are abelian and Grothendieck, hence have enough injectives. The degree-zero complex $F_p[0]$ is bounded below. The bounded-below resolution-existence theorem therefore supplies a quasi-isomorphism $h:F_p[0]\\to J^\\bullet$ with $J^\\bullet$ bounded below and each $J^n$ injective. This proves the existence clause; fix any such $h$ for the remaining steps.",
+   "text": "Apply the existing Grothendieck-abelian instance for fixed-ring module sheaves on the pro-etale site (the arbitrary Grothendieck-coefficient sheaf theorem specialized to ModuleCat A), hence enough injectives. Extract any strict lower bound n of the termwise inverse-image complex K. CochainComplex.Plus.exists_quasiIso_injective K n supplies a quasi-isomorphism to a bounded-below complex of InjectiveObject terms; forget the injectivity subtype to obtain J and its injective terms.",
    "uses": [
     "def-weil-size-convention",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-proetale-sheaves-grothendieck",
     "lem-sp-grothendieck-enough-injectives",
     "lem-sc-bounded-below-injective-resolution-existence"
    ],
@@ -36,11 +36,9 @@
    }
   },
   {
-   "text": "The comparison inverse image on the stated fixed-$A$ module categories is left adjoint to $\\nu_{T,*}$, and by the comparison-pullback exactness lemma (clause 2) it is additive and exact. Thus the right-adjoint preservation theorem applies to every injective $J^n$: $I^n=\\nu_{T,*}J^n$ is injective. Direct image is additive and sends zero objects to zero objects, so its termwise application gives a complex $I^\\bullet$ with the same lower bound as $J^\\bullet$. The composite $a=\\nu_{T,*}(h)\\circ\\eta_F^0$ is a chain map from $F[0]$. No assertion that direct image is exact is used.",
+   "text": "The existing comparisonUpperStar preserves finite limits, so the adjunction preservation theorem shows comparisonLowerStar preserves injective objects. Apply it to each term of the arbitrary resolution J. Termwise direct image already preserves the strict lower bound. The augmentation is the ordinary unit followed by direct image of h, exactly as defined in supportComparisonAugmentation.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-proetale-modules",
-    "lem-sf-comparison-pullback-exact",
     "lem-sp-right-adjoint-preserves-injectives"
    ],
    "elementary": false,
@@ -50,19 +48,20 @@
    }
   },
   {
-   "text": "Write $R=R\\nu_{T,*}$ and let $\\alpha_K:Q(\\nu_{T,*}K)\\to R(QK)$ be the natural comparison of the cited injective computation theorem. Since $J^\\bullet$ is bounded below with injective terms, $\\alpha_J$ is invertible; since $h$ is a quasi-isomorphism, $R(Qh)$ is invertible. The canonical injective computation for this resolution is $\\theta=R(Qh)^{-1}\\circ\\alpha_J:QI^\\bullet\\xrightarrow{\\sim}R(F_p[0])$. Apply the comparison-unit injective-model lemma with $\\Lambda=A$, the bounded-below complex $M=F[0]$ and $j=h:\\nu_T^*M=F_p[0]\\to J^\\bullet$; its hypotheses are exactly steps 1 and 2. Its displayed equation reads $R(Qh)\\circ\\eta^D_F=\\alpha_J\\circ Q(\\nu_{T,*}(h)\\circ\\eta_F^0)=\\alpha_J\\circ Qa$, where $\\eta^D$ is the derived adjunction unit of the site-comparison theorem. Hence $\\theta\\circ Qa=\\eta^D_F$. This pins down the augmentation, rather than choosing an arbitrary isomorphism to the derived image.",
+   "text": "Let alpha be the canonical right-derived comparison on the bounded-below termwise injective complex J; it is invertible. Localization inverts the quasi-isomorphism h, so the derived image b of the canonical exact-factorization isomorphism followed by Qh is also invertible. Define theta = alpha followed by b inverse, giving theta followed by b = alpha. For the fixed-ring comparison adjunction directly, apply Adjunction.derivedPlus_unit_app_fac and the equality derivedAdjunctionPlus_eq_derivedPlus. Naturality of the right-derived comparison along the homotopy class of h gives Qa followed by alpha = derived-unit followed by b. Cancel b to obtain Qa followed by theta = derived-unit. This is the same normalization argument as the ringed-module comparisonUnitInjectiveModel, without transporting to its coefficient realization.",
    "uses": [
     "lem-weil-pbc-right-derived-plus-injective",
-    "lem-pur-comparison-unit-injective-model"
+    "lem-trf-bounded-below-derived-adjunction",
+    "def-weil-pbc-site-comparison-morphism"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TI, lemma-enough-injectives-right-derived, (2); the unit representative is the statement of lem-pur-comparison-unit-injective-model."
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunction.lean",
+    "place": "Adjunction.derivedPlus_unit_app_fac; compatibility with derivedAdjunctionPlus in CategoryTheory/DerivedCategory/Adjunction.lean, Adjunction.derivedAdjunctionPlus_eq_derivedPlus. Natural right-derived comparison as in Stacks derived.tex Tag 05TI."
    }
   },
   {
-   "text": "The site-comparison theorem says that this derived unit is an isomorphism for every bounded-below etale module complex; apply it to $F[0]$. By step 3, $\\theta\\circ Qa$ is this unit; as $\\theta$ is an isomorphism, $Qa$ is an isomorphism. The cohomology-sheaf functors on the derived category compute the cohomology of any representing complex, so $H^n(a)$ is an isomorphism for every $n$. Thus $a$ is a quasi-isomorphism, and together with step 2 this makes $a:F[0]\\to I^\\bullet$ a bounded-below injective resolution. The comparison theorem explicitly imposes no constructibility or finiteness on the individual sheaves.",
+   "text": "The fixed-ring site-comparison theorem makes the derived-unit component invertible on M. The normalization identity and invertibility of theta therefore make Qa invertible. Apply the inclusion of the bounded-below derived category into the ambient derived category, then DerivedCategory.isIso_Q_map_iff_quasiIso, to deduce that a is a quasi-isomorphism. Combine this with injectivity of the direct-image terms and the normalization isomorphism.",
    "uses": [
     "thm-weil-pbc-site-comparison",
     "def-weil-pbc-derived-categories",
@@ -89,15 +88,13 @@
  ],
  "proof_deps": [
   "def-weil-size-convention",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sfb-proetale-sheaves-grothendieck",
   "lem-sp-grothendieck-enough-injectives",
   "lem-sc-bounded-below-injective-resolution-existence",
   "def-weil-pbc-site-comparison-morphism",
-  "def-weil-pbc-proetale-modules",
-  "lem-sf-comparison-pullback-exact",
   "lem-sp-right-adjoint-preserves-injectives",
   "lem-weil-pbc-right-derived-plus-injective",
-  "lem-pur-comparison-unit-injective-model",
+  "lem-trf-bounded-below-derived-adjunction",
   "thm-weil-pbc-site-comparison",
   "def-weil-pbc-derived-categories",
   "def-sp-injective-resolutions",
@@ -106,7 +103,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Agent-formulated common-resolution refinement of Tags 099V (lemma-relative-comparison), (2), and 09B1 (lemma-compare-derived), (2), using the generic injective and normalized derived-unit statements cited step by step."
+  "place": "Tags 099V (2), 09B1 (2), same common-resolution argument. S1 Lean proof uses the existing generic derived-adjunction unit normalization directly for fixed-ring sheaves; no coefficient-realization transport is needed."
  },
  "mathlib_searches": [
   {
@@ -221,9 +218,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sf-comparison-pullback-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -256,5 +251,15 @@
   "group": "Q19",
   "result": "pass",
   "note": "Only the lean field changed; statement verbatim with a single sorry. Hypotheses match the node and the dep records: T : Scheme.{u}, A : Type (u+1) finite comm ring, fixed-ring ModuleCat.{u+1} sheaves as in proEtaleSiteComparisonModules and the isIso_compactSupportComparisonUnit record. Existence and for-all clauses cover all bounded-below ℤ-indexed injective resolutions (matches def-sp-injective-resolutions). Conclusions: injective ν_*J terms; QuasiIso of a = unit then ν_*(h); θ forced to α_J ≫ R(Qh)⁻¹ by its first equation, with Qa ≫ θ = unit of derivedComparisonAdjunctionPlus = comparisonAdjunction.derivedAdjunctionPlus; literal evaluation, restriction, supportedSections and kernel.ι equalities via the def-pur-support-cohomology record. Helpers are real canonical constructions; docstrings carry source, blueprint and the 5 proof steps; plain imports = proof-dep modules. Edge cases F=0, T=∅, A=0, ℤ/4, C=∅/T, negative-degree resolutions all covered. Not recompiled per instruction; worker reports clean scompile and dry run OK. Advisory: public imports Injective.Resolution and ProEtaleFiniteModules are redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T111601-L-352144",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
