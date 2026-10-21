@@ -22587,3 +22587,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:35 L: returned deliver/NQ/lem-sfb-continuous-algcl-tame-boundary-comparison (reviewer RETURN: L: independent stage-2 immutable head 0e5c7e1cc703: H1: there is no Lean module and no item lean record, and the report )
 - 13:35 L: returned deliver/NH/lem-sfb-continuous-algcl-tame-boundary-comparison (reviewer RETURN: L: independent stage-2 immutable head 39dbfc86c5c1: H1/H2/H11 + superseded. The S2-lane delivery 39dbfc86 is NH's stage-)
 - 13:35 L: returned deliver/NL/lem-sfb-continuous-algcl-tame-boundary-comparison (reviewer RETURN: L: independent stage-2 immutable head 6a13afbab114: Superseded, and not a stage-2 delivery. NF 26a608e08's 8-step split )
+- 13:35 L: returned deliver/Q23/lem-weil-isomorphism-scalar-augmentation-cone (reviewer RETURN: L: independent stage-2 immutable head 8d92b975fba3: H13: the delivery replaces the landed lean record of theorem node le)
