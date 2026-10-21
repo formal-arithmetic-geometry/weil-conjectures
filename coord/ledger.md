@@ -23874,3 +23874,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:09 L: returned deliver/NC/lem-sfb-relative-cyclic-restriction-model (reviewer RETURN: L: independent stage-2 immutable head 461dcd41912c: A7/A6: credit-only re-delivery after NB's stage-2 merge (ledger 21:4)
 - 22:09 L: returned deliver/NH/lem-sfb-qcqs-proper-serre-heart-bound (reviewer RETURN: E2/E3: new node lem-sfb-proper-heart-condensed-fibre-test is false, and step 6 of the item rests on it. Counterexample: )
 - 22:10 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 22:11 L: returned deliver/NH/def-per-support-condition (reviewer RETURN: C1/F + G4. I read the whole of the definition (no new nodes, proof=[]). (1) Coefficients: the support part is sound. Wit)
