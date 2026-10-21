@@ -19715,3 +19715,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:19 L: merged deliver/Q03/sk-thm-properbasechange (reviewer FIX; after a return; new nodes: 2)
 - 03:19 L: merged deliver/O2/det-pe-derived-nakayama-first-reduction (reviewer FIX; after a return; new nodes: 3)
 - 03:19 L: merged deliver/Q32/det-def-localizing-closure-ctf-equals-bc (reviewer PASS; after a return; new nodes: 5)
+- 03:19 L: merged deliver/Q59/thm-sfb-extend-scalars-localization (reviewer FIX; after a return; new nodes: 5)
