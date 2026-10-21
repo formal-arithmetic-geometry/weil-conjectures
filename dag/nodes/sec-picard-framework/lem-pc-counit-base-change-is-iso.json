@@ -19,35 +19,12 @@
   "def-pc-module-pullback",
   "lem-pc-module-pullback-adjunction"
  ],
- "proof": [
-  {
-   "text": "Choose the standard derived-category localization for every scheme. Properness gives quasi-compactness and separatedness. Apply canonical derived base change at M[0], using flatness of f and invertibility of M.",
-   "uses": [
-    "lem-pc-flat-invertible-canonical-derived-base-change"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Use the degree-zero comparison to obtain isomorphisms a and b and an equality expressing the ordinary counit mate as a.hom followed by H^0 of the derived base-change map followed by b.hom. This step uses h0 and hq and does not assert invertibility of a base-change map.",
-   "uses": [
-    "lem-pc-counit-base-change-degree-zero-comparison"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "A functor preserves isomorphisms, so H^0 of the derived base-change map is invertible by Step 1. The homomorphisms of a and b are invertible. Rewrite by the equality of Step 2 and infer invertibility of the composite.",
-   "uses": [],
-   "elementary": true
-  }
- ],
- "proof_deps": [
-  "lem-pc-flat-invertible-canonical-derived-base-change",
-  "lem-pc-counit-base-change-degree-zero-comparison"
- ],
+ "proof": [],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
-  "place": "nonempty_arrowIso_pullback_directImageCounit docstring; canonical derived comparison followed by degree-zero transport, X2"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
+  "place": "P3 repair, 2026-10-21: redundant intermediate withdrawn. The only actual DAG parent, lem-pc-arrow-iso-pullback-counit, is updated in this delivery to the complete adopted fibrewise proof at nonempty_arrowIso_pullback_directImageCounit. No unit realization or live/quarantined Lean consumer uses this intermediate."
  },
  "mathlib_searches": [
   {
@@ -100,16 +77,6 @@
  },
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-f-representable",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeIsIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/Picard/CounitBaseChangeIsIso.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.isIso_counitBaseChange_of_invertibleDirectImage",
-  "statement": "theorem isIso_counitBaseChange_of_invertibleDirectImage {X S X' S' : Scheme.{u}} (f : X ⟶ S) [IsProper f] [LocallyOfFinitePresentation f] [Flat f] (g : S' ⟶ S) (g' : X' ⟶ X) (f' : X' ⟶ S') (sq : IsPullback g' f' f g) [HasInjectiveResolutions X.Modules] [HasInjectiveResolutions X'.Modules] (M : X.Modules) [SheafOfModules.IsInvertible.{u, u, u} M] (h0 : SheafOfModules.IsInvertible.{u, u, u} (((pushforward f).rightDerived 0).obj M)) (hq : ∀ q : ℕ, 0 < q → IsZero (((pushforward f).rightDerived q).obj M)) : let c := (pullbackComp g' f).app ((pushforward f).obj M) ≪≫ (pullbackCongr sq.w).app ((pushforward f).obj M) ≪≫ ((pullbackComp f' g).app ((pushforward f).obj M)).symm IsIso ((pullbackPushforwardAdjunction f').homEquiv _ _ (c.inv ≫ (pullback g').map ((pullbackPushforwardAdjunction f).counit.app M)))",
-  "branch": "sheaf-dag",
-  "by": "N2",
-  "date": "2026-10-12"
- },
  "reviewed": {
   "date": "2026-10-12",
   "by": "L",
@@ -121,14 +88,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "X2",
-  "result": "pass",
-  "landing": "20261012T085402-L-48701",
+  "reviewer": "C-39be9",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261021T111404-L-100725",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn item lem-pc-counit-base-change-is-iso vs its only DAG parent lem-pc-arrow-iso-pullback-counit and the live ZeroScheme.lean proof (fibrewise route via isIso_of_forall_pullback_ne_zero + pullback_baseChangeMap_map_counit_ne_zero); new existing:true nodes vs InvertibleFibre.lean:54 and CounitBaseChange.lean:288; no Lean importers"
  },
  "lean_audit": {}
 }

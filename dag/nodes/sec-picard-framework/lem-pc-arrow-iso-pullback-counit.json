@@ -30,27 +30,37 @@
  ],
  "proof": [
   {
-   "text": "Instantiate [lem-pc-counit-base-change-is-iso] with f = pullback.snd for T, f\\prime = pullback.snd for T\\prime, g = i.left and g\\prime = baseChangeMap. Smoothness makes f flat and locally of finite presentation [lem-pc-smooth-flat], while properness is preserved by base change. The underlying Picard representative is invertible; the two components of membership in F(T) are exactly h0 and hq of the comparison lemma. This gives IsIso beta for the canonical adjoint map.",
+   "text": "Use the complete adopted proof in ZeroScheme.lean. Put sT and sTprime equal to the base-changed structure maps, iPrime = baseChangeMap, d equal to the skeleton representative of the given Picard class, and alpha equal to the canonical square of ordinary pullback functors. Its mate beta is the ordinary direct-image base-change map. IsInvertibleDirectImage.map_of_isProper, the subfunctor assertion of [lem-pc-f-open-subfunctor], shows that the pulled-back class is still in F. Together with rightDerivedZeroIsoSelf and the skeleton representative isomorphism this makes both source and target of beta invertible.",
    "uses": [
-    "lem-pc-counit-base-change-is-iso",
+    "lem-pc-f-open-subfunctor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-pc-invertible-morphism-iso-on-residue-fibres] to beta. For a point tprime, let p: Spec kappa(tprime) -> Tprime be its residue-field map. Choose a free generator of fT_*d on an affine neighbourhood of i(tprime). The composite p followed by i lands in this neighbourhood. If p^*beta were zero, pullback composition and the mate counit identity would imply that the counit of d pulled back along the composite baseChangeMap were zero. This contradicts [lem-pc-counit-nonzero-after-affine-base-change]. The affine source Spec kappa(tprime) has nontrivial global functions, so all hypotheses of that theorem hold; the flatness and local finite presentation of the structure morphism that it needs come from smoothness [lem-pc-smooth-flat]. Thus beta is invertible.",
+   "uses": [
+    "lem-pc-invertible-morphism-iso-on-residue-fibres",
+    "lem-pc-counit-nonzero-after-affine-base-change",
     "lem-pc-smooth-flat"
    ],
    "elementary": false
   },
   {
-   "text": "Define c using Mathlib Scheme.Modules.pullbackComp and pullbackCongr for the square. The inverse-adjoint identity homEquiv_counit followed by symm_apply_apply gives f\\prime^* beta followed by the counit equal to c.inv followed by the pulled-back counit. Let e be the inverse of fromSkeletonToSkeletonIso on g\\prime^*M, identifying this module with the representative of Pic.map g\\prime L. The domain edge is c followed by pullback f\\prime of asIso beta followed by pullback f\\prime of pushforward f\\prime of e. The codomain edge is e. Naturality of the counit, the inverse-adjoint identity, associativity and c.hom_inv_id verify the square. Arrow.isoMk constructs the asserted isomorphism. This uses the canonical Mathlib adjunction directly, without any tensorPullback bridge.",
+   "text": "The canonical square alpha is an isomorphism on every object, since it is built from pullbackComp and pullbackCongr. Apply the proved categorical Adjunction.arrowIsoMapCounit (MatesArrow.lean), whose square is exactly Mathlib mateEquiv_counit followed by cancellation of alpha, to get an arrow isomorphism to the counit at iPrime^*d. Finally compose with Arrow.isoMk using the inverse fromSkeletonToSkeletonIso on iPrime^*d; counit naturality gives its commuting square. This is the full existing Lean argument at ZeroScheme.lean lines 197-281 and uses no derived-base-change comparison.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-counit-base-change-is-iso",
+  "lem-pc-f-open-subfunctor",
+  "lem-pc-invertible-morphism-iso-on-residue-fibres",
+  "lem-pc-counit-nonzero-after-affine-base-change",
   "lem-pc-smooth-flat"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "lean/WeilConjectures/AlgebraicGeometry/Picard/ZeroScheme.lean",
-  "place": "N2 stage-3 proof of nonempty_arrowIso_pullback_directImageCounit: canonical comparison and counit naturality"
+  "place": "nonempty_arrowIso_pullback_directImageCounit, existing complete fibrewise proof, reconciled by P3 on 2026-10-21; mathematical argument also explained in the theorem docstring"
  },
  "mathlib_searches": [
   {
@@ -104,10 +114,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-rf-base-change-flat-module",
-  "lem-pc-rf-base-change-flat-module"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
@@ -136,13 +143,13 @@
  },
  "lean_audit": {},
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N2",
-  "result": "pass",
-  "landing": "20261012T042414-L-1818601",
+  "reviewer": "C-39be9",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261021T111404-L-100725",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: withdrawn item lem-pc-counit-base-change-is-iso vs its only DAG parent lem-pc-arrow-iso-pullback-counit and the live ZeroScheme.lean proof (fibrewise route via isIso_of_forall_pullback_ne_zero + pullback_baseChangeMap_map_counit_ne_zero); new existing:true nodes vs InvertibleFibre.lean:54 and CounitBaseChange.lean:288; no Lean importers"
  }
 }

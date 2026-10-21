@@ -1,0 +1,123 @@
+{
+ "id": "lem-pc-invertible-morphism-iso-on-residue-fibres",
+ "kind": "statement",
+ "title": "A morphism of invertible modules nonzero on every residue fibre is invertible",
+ "statement": "Let X be a scheme [def-pc-scheme], let P,Q be invertible O_X-modules [def-sc-invertible-module] and beta:P -> Q a module morphism. If pullback [def-pc-module-pullback] of beta along Spec kappa(x) -> X is nonzero for every point x of X, then beta is an isomorphism.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/InvertibleFibre.lean",
+  "place": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_of_forall_pullback_ne_zero and its complete existing proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-invertible-module",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "The existing Lean proof chooses a common affine neighbourhood on which P and Q have free generators. Write beta as multiplication by b. If b vanishes at x, its image in kappa(x) is zero, so the residue-field pullback of beta is zero, contradicting the hypothesis. Hence x lies in D(b). On every open inside D(b), restriction of b is a unit, so multiplication by it, and therefore beta on sections, is bijective. The local sectionwise bijectivity criterion proves IsIso beta. For an empty scheme the local criterion is vacuous; no nonemptiness hypothesis is needed.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/InvertibleFibre.lean",
+  "place": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_of_forall_pullback_ne_zero; attachment of an already proved source-library declaration, not a new unfinished statement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIso_of_forall_pullback_ne_zero|pullback_baseChangeMap_map_counit_ne_zero|arrowIsoMapCounit",
+   "results": "",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between invertible modules on a scheme is an isomorphism if its pullback to every residue field is nonzero",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app; AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf; AlgebraicGeometry.isomorphisms_eq_stalkwise; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; AlgebraicGeometry.isIso_iff_isIso_stalkMap; AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion; AlgebraicGeometry.isIso_iff_stalk_iso; AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction counit for an invertible direct image in degree zero is nonzero after affine base change",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.Adjunction.CoreUnitCounit.counit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit; CategoryTheory.ObjectProperty.isColocal_adj_counit_app; ModuleCat.RestrictionCoextensionAdj.counit'; AlgebraicGeometry.ΓSpec.adjunction_counit_app",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map between line bundles on a scheme is invertible if it is nonzero on every residue field fibre",
+   "results": "AlgebraicGeometry.Scheme.Modules.inv_app; Bundle.Trivial.linearMapAt_trivialization; Trivialization.symmₗ.congr_simp; LinearMap.isUnit_iff_isUnit_det; Bundle.Trivial.symmₗ_trivialization; ContinuousLinearMap.IsInvertible; Pretrivialization.symmₗ; ContinuousLinearMap.isInvertible_zero_iff",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat proper finitely presented morphism the counit of an invertible module with invertible direct image concentrated in degree zero remains nonzero after affine base change with nonzero functions",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.Hom.flat_appLE; AlgebraicGeometry.Flat.flat_of_affine_subset; AlgebraicGeometry.flat_iff",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeIsIso",
+  "date": "2026-10-21",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pc-f-representable",
+   "place": "Naturality of the zero-scheme dictionary: existing fibrewise proof of the direct-image counit compatibility",
+   "via": [
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.InvertibleFibre",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_of_forall_pullback_ne_zero",
+  "statement": "theorem Hom.isIso_of_forall_pullback_ne_zero {X : Scheme.{u}} {P Q : X.Modules}\n    [SheafOfModules.IsInvertible.{u, u, u} P]\n    [SheafOfModules.IsInvertible.{u, u, u} Q] (β : P ⟶ Q)\n    (h : ∀ x : X, (pullback (X.fromSpecResidueField x)).map β ≠ 0) : IsIso β",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-21",
+  "note": "Existing complete source proof; no new Lean declaration or sorry. Proof in words is recorded above; no further split of an already written proof is needed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-39be9",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261021T111404-L-100725",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-39be9",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261021T111404-L-100725",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn item lem-pc-counit-base-change-is-iso vs its only DAG parent lem-pc-arrow-iso-pullback-counit and the live ZeroScheme.lean proof (fibrewise route via isIso_of_forall_pullback_ne_zero + pullback_baseChangeMap_map_counit_ne_zero); new existing:true nodes vs InvertibleFibre.lean:54 and CounitBaseChange.lean:288; no Lean importers"
+ }
+}

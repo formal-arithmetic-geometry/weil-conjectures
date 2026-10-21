@@ -1,0 +1,129 @@
+{
+ "id": "lem-pc-counit-nonzero-after-affine-base-change",
+ "kind": "statement",
+ "title": "The direct-image counit remains nonzero after affine base change",
+ "statement": "Let k be a field and f:X -> Spec k a flat proper morphism locally of finite presentation, and assume the module categories of X_T admit injective resolutions for all k-schemes T [def-pc-scheme, def-weil-flat-morphism, def-weil-proper-morphism, def-sbc-locally-finite-presentation, def-sp-injective-resolutions]. Let L be a Picard class [def-pc-picard-functor] on X_T with IsInvertibleDirectImage f T L, the condition defining F [def-pc-f-subfunctor]. Suppose V is an affine open of T and s is a free generator of fT_*L on V. For a morphism q:T0 -> T over k with T0 affine, nontrivial ring of global functions and image contained in V, the pullback along baseChangeMap f q [def-pc-base-change] of the ordinary pullback/pushforward adjunction counit [lem-pc-module-pullback-adjunction] at the skeleton representative of L is nonzero.",
+ "source": {
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Picard/CounitBaseChange.lean",
+  "place": "AlgebraicGeometry.pullback_baseChangeMap_map_counit_ne_zero and its complete existing proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-flat-morphism",
+  "def-weil-proper-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-sp-injective-resolutions",
+  "def-pc-picard-functor",
+  "def-pc-f-subfunctor",
+  "def-pc-base-change",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "The existing proof first shows pullbackSection_baseChangeMap_ne_zero: choose a finite trivializing affine cover above V. Its Cech terms are flat over A = Gamma(T,V), affine intersections being affine by separatedness. Base change gives the termwise tensor complex; stability of IsInvertibleDirectImage gives exactness in degree one after any base change. Apply this also to square-zero extensions A plus N. The flat equalizer criterion then makes tensor of the degree-zero kernel inject into the tensor of the degree-zero Cech term. A free generator tensored with 1 is nonzero over the nontrivial target ring, hence its pulled-back section is nonzero. The right triangle identity says that applying the original counit to the unit image of s gives s. Pullback of sections commutes with applying module morphisms. Consequently a zero pulled-back counit would annihilate the nonzero pulled-back section, a contradiction. The nontriviality hypothesis correctly excludes an empty affine source. This is a description of the already complete source proof, not a new elementary Cech theorem to be proved.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Picard/CounitBaseChange.lean",
+  "place": "AlgebraicGeometry.pullback_baseChangeMap_map_counit_ne_zero; attachment of an already proved source-library declaration, not a new unfinished statement"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIso_of_forall_pullback_ne_zero|pullback_baseChangeMap_map_counit_ne_zero|arrowIsoMapCounit",
+   "results": "",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "CategoryTheory.mateEquiv_counit",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism between invertible modules on a scheme is an isomorphism if its pullback to every residue field is nonzero",
+   "results": "AlgebraicGeometry.Scheme.Modules.Hom.isIso_iff_isIso_app; AlgebraicGeometry.Scheme.Modules.instReflectsIsomorphismsPresheafAbCarrierCommRingCatToPresheaf; AlgebraicGeometry.isomorphisms_eq_stalkwise; AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp; AlgebraicGeometry.isIso_iff_isIso_stalkMap; AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion; AlgebraicGeometry.isIso_iff_stalk_iso; AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The adjunction counit for an invertible direct image in degree zero is nonzero after affine base change",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; CategoryTheory.Adjunction.counit; CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.Adjunction.CoreUnitCounit.counit; CategoryTheory.Adjunction.CoreHomEquivUnitCounit.counit; CategoryTheory.ObjectProperty.isColocal_adj_counit_app; ModuleCat.RestrictionCoextensionAdj.counit'; AlgebraicGeometry.ΓSpec.adjunction_counit_app",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map between line bundles on a scheme is invertible if it is nonzero on every residue field fibre",
+   "results": "AlgebraicGeometry.Scheme.Modules.inv_app; Bundle.Trivial.linearMapAt_trivialization; Trivialization.symmₗ.congr_simp; LinearMap.isUnit_iff_isUnit_det; Bundle.Trivial.symmₗ_trivialization; ContinuousLinearMap.IsInvertible; Pretrivialization.symmₗ; ContinuousLinearMap.isInvertible_zero_iff",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat proper finitely presented morphism the counit of an invertible module with invertible direct image concentrated in degree zero remains nonzero after affine base change with nonzero functions",
+   "results": "AlgebraicGeometry.Flat.isStableUnderBaseChange; AlgebraicGeometry.Flat; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.Flat.flat_appLE; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.Hom.flat_appLE; AlgebraicGeometry.Flat.flat_of_affine_subset; AlgebraicGeometry.flat_iff",
+   "date": "2026-10-21",
+   "verdict": "No exact match in Mathlib; the required scheme-module lemmas already have complete adopted source proofs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Picard.CounitBaseChangeIsIso",
+  "date": "2026-10-21",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pc-f-representable",
+   "place": "Naturality of the zero-scheme dictionary: existing fibrewise proof of the direct-image counit compatibility",
+   "via": [
+    "lem-pc-arrow-iso-pullback-counit"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-f-representable",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Picard.CounitBaseChange",
+  "declaration": "AlgebraicGeometry.pullback_baseChangeMap_map_counit_ne_zero",
+  "statement": "theorem pullback_baseChangeMap_map_counit_ne_zero\n    {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k))\n    [Flat f] [IsProper f] [LocallyOfFinitePresentation f]\n    [∀ T : Over (Spec (.of k)), HasInjectiveResolutions (Limits.pullback f T.hom).Modules] {T : Over (Spec (.of k))}\n    {L : (Limits.pullback f T.hom).Pic} (hL : IsInvertibleDirectImage f T L)\n    {V : T.left.Opens} (hV : IsAffineOpen V)\n    {s : Γ((pushforward (Limits.pullback.snd f T.hom)).obj ((fromSkeleton _).obj L.val), V)}\n    (hs : IsFreeGenerator s) {T₀ : Over (Spec (.of k))} (q : T₀ ⟶ T) [IsAffine T₀.left]\n    [Nontrivial Γ(T₀.left, ⊤)] (hq : ⊤ ≤ q.left ⁻¹ᵁ V) :\n    (Modules.pullback (baseChangeMap f q)).map\n      ((pullbackPushforwardAdjunction (Limits.pullback.snd f T.hom)).counit.app\n        ((fromSkeleton _).obj L.val)) ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-21",
+  "note": "Existing complete source proof; no new Lean declaration or sorry. Proof in words is recorded above; no further split of an already written proof is needed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-39be9",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261021T111404-L-100725",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-39be9",
+  "group": "P3",
+  "result": "fix",
+  "landing": "20261021T111404-L-100725",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn item lem-pc-counit-base-change-is-iso vs its only DAG parent lem-pc-arrow-iso-pullback-counit and the live ZeroScheme.lean proof (fibrewise route via isIso_of_forall_pullback_ne_zero + pullback_baseChangeMap_map_counit_ne_zero); new existing:true nodes vs InvertibleFibre.lean:54 and CounitBaseChange.lean:288; no Lean importers"
+ }
+}
