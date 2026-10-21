@@ -19,9 +19,161 @@
   "def-sc-ring-strict-henselization",
   "def-sfb-profinite-test-objects"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the residual-chart lemma to $(Y,D,I)$ and retain one member $V,U,S_U,T,T^\\circ$. It supplies affine charts, the pro-etale cover of the entire stratum, compatible primitive roots, and the actual power-transition tower. These choices depend on the pair, not on a pointwise trivialization of $L$. For $S_I=\\varnothing$ take the empty family. Below work on a nonempty member; $U^\\circ$ and $T^\\circ$ are connected and qcqs.",
+   "uses": [
+    "lem-sfb-snc-universal-residual-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input."
+   }
+  },
+  {
+   "text": "Let $A=\\mathcal O_E$ and choose a uniformizer $\\varpi$. The finite-type Noetherian lemma applies to $Y\\to\\operatorname{Spec}k$ (a field is Noetherian since its only ideals are zero and the unit ideal); its open-subscheme version applies to $W$. Regularity makes $W$ normal; separation is inherited from $Y$. Identify internal modules with section-ring module sheaves and pulled-back $C(-,E)$ with continuous-function coefficients. The integral reduction equivalence identifies the coefficient rings with $B_W=\\varprojlim_n(A/\\varpi^n)_W$ and $B_W[1/\\varpi]$. The normal completed integral-model theorem gives a lisse integral model $N$ with $N[1/\\varpi]\\cong L$. Thus $F_n=N/\\varpi^nN$ is a normalized tower of finite locally free discrete-coefficient sheaves. Restrict $N,F_n$ to the open part of any chart.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "rem-pc-regular-normal",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-condensed-field-continuous-realization",
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "lem-a1-normal-completed-integral-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.8.2 and 7.4.10; Proposition 6.8.4(1),(4); integral lattice on a normal scheme"
+   }
+  },
+  {
+   "text": "At a geometric boundary point pull $N$ to its punctured strict-local full root tower $Z$. This $Z$ is connected and qcqs by the chart lemma's strict-local assertion. Tameness makes its rationalization constant, say $E_Z^d$. The lattice-class sheaf lemma identifies the class of $(N|_Z,E_Z\\otimes N|_Z\\cong E_Z^d)$ with a section of the constant discrete sheaf $\\operatorname{GL}_d(E)/\\operatorname{GL}_d(A)$. The continuous-function realization for a discrete space identifies that section with a continuous map from $|Z|$ into this discrete set. Connectedness makes it constant, with value the coset of a matrix $h$. By the lemma's embedded-image normalization the integral module is $hA_Z^d$, isomorphic to $A_Z^d$. Exact pullback and the integral coefficient reduction formula identify the pulled-back $F_n$ with $(A/\\varpi^n)_Z^d$. Every $F_n$ therefore satisfies the finite tame hypothesis, also where fewer boundary branches vanish. Integral tameness has been deduced from rational tameness.",
+   "uses": [
+    "lem-sfb-snc-universal-residual-charts",
+    "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), lattice-class sheaf, and Lemma 4.2.12; finite-E coefficients only"
+   }
+  },
+  {
+   "text": "Apply finite tame-fibre classification to the restrictions of all $F_n$ on this chart. The same $U$ works for every $n$: it was formed from all finite residual covers. This gives finite free $A/\\varpi^n$-modules $Q_n$ with continuous $G_I$-action, compatible quotient transitions, and natural identifications $F_n|_{T^\\circ}\\cong\\underline{Q_n}$. Its product and coefficient compatibilities give the linear operations and reduction isomorphisms. The descent action is exactly the action on $Q_n$, not an action selected independently at the boundary. The finite-local-system assertion here is on the pro-etale site, as stated in that lemma.",
+   "uses": [
+    "lem-sfb-snc-tame-finite-fibre-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input."
+   }
+  },
+  {
+   "text": "Set $Q=\\varprojlim_nQ_n$ and $M=E\\otimes_AQ$. Adic finite-module reconstruction gives $Q/\\varpi^nQ\\cong Q_n$, finite generation, completeness and the inverse-limit topology. It is finite free: choose a basis of $Q_1$ and lift it successively through $Q_{n+1}\\to Q_n$. Each lifted basis is a basis over $A/\\varpi^{n+1}$, since its change-of-basis determinant is a unit modulo $\\varpi$. These choices give compatible $Q_n\\cong(A/\\varpi^n)^d$, hence $Q\\cong A^d$. Define $g(q_n)_n=(gq_n)_n$. This action is jointly continuous because each composite $G_I\\times Q\\to Q_n$ is continuous. In a basis its matrix entries are inverse limits of continuous finite-valued entries; inverse matrices come from $g^{-1}$. Extension of scalars gives a continuous homomorphism $\\rho:G_I\\to\\operatorname{GL}_E(M)$. No finite-image claim is needed.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 09B8 (lemma-limit-complete), 031D (lemma-finite-over-complete-ring), 00MA (lemma-completion-tensor); compatible-basis construction written out"
+   }
+  },
+  {
+   "text": "Identify the actual torsor. At order $n$, root rotations send $x_i$ to $\\zeta_n^{a_i}x_i$. On the punctured locus every $x_i$ is a unit. For two root tuples over the same base the ratios $y_i/x_i$ have $n$th power one. The factorization $z^n-1=\\prod_{a\\bmod n}(z-\\zeta_n^a)$ has pairwise comaximal factors, since distinct-root differences are units. Its Chinese-remainder idempotents decompose the base uniquely into pieces on which each ratio is one $\\zeta_n^{a_i}$. This gives the scheme isomorphism $T_n^\\circ[(\\mathbf Z/n)^I]\\cong T_n^\\circ\\times_{U^\\circ}T_n^\\circ$, $(x,a)\\mapsto(x,\\zeta_n^ax)$. Power transitions send $a$ to its residue and preserve this formula. Taking affine inverse limits gives $T^\\circ[G_I]\\cong T^\\circ\\times_{U^\\circ}T^\\circ$. Here $\\varprojlim_{(n,p)=1}(\\mathbf Z/n)^I=(\\prod_{q\\ne p}\\mathbf Z_q)^I$ by compatible Chinese-remainder decomposition into prime powers. The covering assertion was supplied by the chart lemma.",
+   "uses": [
+    "lem-sfb-snc-universal-residual-charts",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input."
+   }
+  },
+  {
+   "text": "The composite $T^\\circ\\to W$ is a pro-etale object. The coefficient-section localization lemma identifies its actual inverse image with slice restriction. Restriction to a slice preserves all limits, since limits of sheaves are computed objectwise. Apply it to $N\\cong\\varprojlim_nF_n$. The natural finite-level identifications in step 4 and compatible bases in step 5 identify this restricted limit with $\\varprojlim_n(A/\\varpi^n)_{T^\\circ}^d\\cong A_{T^\\circ}^d$, by the coefficient reduction equivalence and its actual projection maps. Inverting $\\varpi$ gives $L|_{T^\\circ}\\cong p_{T^\\circ}^*C(-,M)$, since $C(P,M)=C(P,E)^d$ in the chosen basis. Every projection identifies deck descent with $\\rho_n$, so their limit identifies it with $\\rho$ on $M$. Equality of actions is tested by the limit projections before localization.",
+   "uses": [
+    "lem-sfb-coefficient-sections-localization",
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2(1),(2), Proposition 6.8.4(1); inverse limits after slice restriction"
+   }
+  },
+  {
+   "text": "Define on all of $T$ the module $\\widetilde L=p_T^*C(-,M)$. In the chosen basis it is $C_{E,T}^d$, hence finite-rank lisse. Give it the continuous equivariant structure induced by $G_I\\times M\\to M$ and root rotations on $T$. The cocycle identity is $\\rho(gh)=\\rho(g)\\rho(h)$. Step 7 identifies its restriction, with this action, with the actual deck-equivariant pullback of $L$. Define $i:S_U\\to T$ by $H_\\infty\\to H/JH$ taking every root variable to zero: all defining and transition equations map to zero. Root rotations fix $i$. Composition of pullback from the point gives $i^*\\widetilde L\\cong p_{S_U}^*C(-,M)$ with exactly the same representation $\\rho$. This constructs the extension and its specified boundary action.",
+   "uses": [
+    "sk-def-sfb-pulled-back-coefficients",
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input."
+   }
+  },
+  {
+   "text": "Pointed refinement maps of the charts and finite-fibre classification give maps of rings, finite fibres and actions commuting with every quotient projection. The inverse-limit universal property makes the representation and step 7's identification commute with these maps. Pullback of the finite basis and the matrix formula $v\\mapsto\\rho(g)v$ identify step 8's constant extension and its boundary restriction under refinement. Changing compatible bases conjugates every $\\rho_n$ by the corresponding compatible matrices, hence gives the conjugate representation and an isomorphic extension. Restriction compatibility thus holds for these choices.",
+   "uses": [
+    "lem-sfb-snc-universal-residual-charts",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input."
+   }
+  },
+  {
+   "text": "For $I=\\varnothing$ all root rings equal $H$ and $G_I=1$. Finite classification gives constant $F_n$ on $U$, and steps 5 and 7 reconstruct a constant $L|_U$. Set $T=U$, $i=\\mathrm{id}_U$ and use this trivialization. Rank zero gives $Q_n=Q=M=\\widetilde L=0$. Ranks may vary between the connected charts because $M$ is chosen per chart. Empty boundary and empty whole scheme are included.",
+   "uses": [
+    "lem-sfb-snc-universal-residual-charts",
+    "lem-sfb-snc-tame-finite-fibre-classification",
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-snc-universal-residual-charts",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "rem-pc-regular-normal",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "lem-a1-normal-completed-integral-model",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-sfb-totally-disconnected-coefficient-realization",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-snc-tame-finite-fibre-classification",
+  "lem-pod-adic-limit-finite-modules",
+  "def-sfb-profinite-test-objects",
+  "lem-sfb-coefficient-sections-localization",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-sfb-lisse-coefficient-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input. Finite-cover classification, lattice rigidity, compatible module limits and explicit constant equivariant extension; geometric inputs isolated."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +202,38 @@
    "results": "8 hits: RootPairing.ext_iff, IsUnramifiedAtInfinitePlaces.isUnramified, RootSystem.ext, IsUnramifiedAtInfinitePlaces.bot, RootPairing.IsRootSystem.span_root_eq_top, RootPairing.IsRootSystem.span_coroot_eq_top, RootPairing.IsRootSystem.ext, IsUnramifiedAtInfinitePlaces.top",
    "date": "2026-10-21",
    "verdict": "no match: these hits do not state the internal condensed-module derived or geometric assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "(Kummer|tame).*(extend|lisse|Condensed)|(lisse|Condensed).*(Kummer|tame)",
+   "results": "{\"t\": \"2026-10-21T14:48:38Z\", \"tool\": \"grep\", \"query\": \"(Kummer|tame).*(extend|lisse|Condensed)|(lisse|Condensed).*(Kummer|tame)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no simultaneous tame-root equivariant lisse extension theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous representation of tame inertia extends as a constant local system on the infinite parameter root tower",
+   "results": "{\"t\": \"2026-10-21T14:48:38Z\", \"tool\": \"leansearch\", \"query\": \"A continuous representation of tame inertia extends as a constant local system on the infinite parameter root tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InfiniteGalois.mulEquivToLimit_symm_continuous\", \"InfiniteGalois.algEquivToLimit_continuous\", \"cyclotomicCharacter.continuous\", \"Ideal.inertiaDegIn_mul_inertiaDegIn\", \"InfiniteGalois.profiniteGalGrp\", \"InfiniteGalois.continuousMulEquivToLimit\", \"ValuationSubring.inertiaSubgroup\", \"InfiniteGalois.restrictNormalHom_continuous\"], \"digest\": \"8d9306e4689e72fc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no simultaneous tame-root equivariant lisse extension theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Kummer\"",
+   "results": "{\"t\": \"2026-10-21T14:48:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no simultaneous tame-root equivariant lisse extension theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant extension of a tame continuous l adic local system over the full Kummer root tower of a normal crossings divisor",
+   "results": "{\"t\": \"2026-10-21T14:48:39Z\", \"tool\": \"leanfinder\", \"query\": \"Equivariant extension of a tame continuous l adic local system over the full Kummer root tower of a normal crossings divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"IsAdicComplete.StrictMono.extend\", \"IsAdicComplete.StrictMono.factorPow_comp_extend\", \"IsAdicComplete.StrictMono.extend_eq\", \"IsAdicComplete.StrictMono.of_lift\", \"IsAdicComplete.StrictMono.lift\", \"IsAdicComplete.StrictMono.of_comp_lift\"], \"digest\": \"798886a2dffd981a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no simultaneous tame-root equivariant lisse extension theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-tame-stratum-kummer-descent",
@@ -76,5 +256,76 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-tame-root-tower-extension",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Separate residual-neighborhood geometry and normalized finite tame-cover classification. Reuse normal integral models and lattice-class rigidity. Construct the inverse-limit inertia representation, actual torsor, constant equivariant extension, boundary restriction and refinements explicitly. Two statement-only nodes, no Mathlib leaves.",
+  "blueprint": [
+   "Paragraph (3), open direct image: the tame-boundary Kummer calculation, specifically the equivariant lisse extension input. Steps 1–4 expose geometric and coefficient inputs; steps 5–10 construct the equivariant extension rather than citing an infinite-coefficient restatement."
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step 2 applies finite-type permanence to Y over the Noetherian field k. This is a scheme-theoretic prerequisite for integral lattices, not a replacement of the open-direct-image route; the unit contains no such permanence statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Step 2 passes Noetherianity from Y to its open W, to check the integral-model hypotheses. This general topological permanence input is not supplied by the unit."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Step 2 uses clause (1), regular implies normal, on W. The direct-image unit does not prove normality of regular schemes."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-field-continuous-realization",
+    "why": "Step 2 identifies the finite-E pulled-back condensed coefficients with the section-ring continuous-function coefficients required by the integral-model theorem. The identification is coefficient infrastructure, not an alternate finiteness argument."
+   },
+   {
+    "node": "lem-sfb-integral-lisse-reduction-equivalence",
+    "why": "Steps 2, 3 and 7 use the explicit coefficient ring identifications and the natural inverse-limit/reduction equivalence. The unit does not construct normalized integral coefficient towers."
+   },
+   {
+    "node": "lem-a1-normal-completed-integral-model",
+    "why": "Step 2 takes an abstract integral model on normal Noetherian separated W, with ell invertible. No embedding is inferred from this theorem. The unit does not prove the existence of integral models."
+   },
+   {
+    "node": "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "why": "Step 3 uses the actual lattice-class sheaf GL_d(E)/GL_d(A), including its embedded-image normalization. This generic lattice rigidity input converts the assumed rational tameness to finite-reduction tameness; it does not assert the desired extension."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Step 3 uses exact coefficient pullback to identify reductions after restriction to a strict-local root tower. This is inverse-image infrastructure, not the direct-image finiteness theorem being studied."
+   },
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Step 5 uses clause (1) to reconstruct finite modules from normalized finite quotients, with their adic topology. The unit does not contain this algebraic reconstruction theorem."
+   },
+   {
+    "node": "lem-sfb-coefficient-sections-localization",
+    "why": "Step 7 uses the actual identification of pro-etale inverse image with slice restriction so that limits can be restricted objectwise. The unit does not supply that site-localization identification."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-condensed-field-continuous-realization",
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "lem-a1-normal-completed-integral-model",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-sfb-coefficient-sections-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-ad2555d6e",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-ad2555d6e (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, delivery-errors A–F and blueprint main-20261015 sk-thm-sf-ctf-stability-direct-images paragraph (3). The statement and stmt_deps are byte-identical to the NU 81f850b7 creation, so nothing is weakened, and the parent tame-stratum-kummer-descent steps 1/3/8 are still served. There is no re-split note and no SGA citation. NEW NODES: (1) lem-sfb-snc-universal-residual-charts is true. B^h is Noetherian (0AGV) and an ind-étale colimit over regular B, so it is regular, and connected because (B^h,JB^h) is henselian with B/J connected. The finite étale lifts with connected special fibre are normal domains, so H is a domain and U° is connected. H_n is regular at the boundary because t_i are regular parameters, and Spec H_n is connected because the pair is henselian with special fibre (H/JH)[x]/x^n. Primitive ζ_n come from μ_n covers of S_V and Hensel, and their differences are units since ∏(1−ζ^c)=n. (2) lem-sfb-snc-tame-finite-fibre-classification is the Grothendieck–Murre tame π1 over a henselian SNC neighbourhood with simply connected residual stratum. It holds by Abhyankar at strict-local points, then purity on regular H_n, then 09ZS splitting over S_U. I tested both on one branch of A^1 at 0 (strictly henselian DVR, tame π1=Ẑ'(1)), on two branches at the origin of A^2, and on r=0, rank 0 and an empty stratum. The finite node excludes infinite coefficients and limits, so it does not restate the item (D1/D2). None of the 8 candidate duplicates I checked (per-snc-root-punctured-torsor-splitting, per-snc-parameter-root-quotient, sbc-strict-hensel-root-finite-etale-model, root-tower-lisse-morphism-extension, root-tower-boundary-acyclicity, pointed-finite-etale-limit-cover, dl-a1-henselian-global-inertia-comparison, pbc henselization family) states either node. STEPS: Step 2: the a1 integral-model hypotheses hold on W (Noetherian, separated, normal, ℓ invertible since char p≠ℓ). Step 3: the punctured strict-local tower Z is a connected qcqs pro-étale object of W, the lattice sheaf is the constant GL_d(E)/GL_d(A), and the totally-disconnected realization gives C(π0 Z,S)=S, so N|_Z≅A^d and integral tameness follows from rational tameness. Step 4: one U serves all n, and the reduction clause gives Q_{n+1}/ϖ^n≅Q_n. Step 5: the hypotheses of pod-adic-limit (1) are met, basis lifting works, and ρ is continuous. Step 6: the comaximal CRT argument is a correct elementary step. Step 7: slice restriction preserves limits, so N≅lim F_n gives L|_{T°}≅E^d with descent ρ. Steps 8–10: the root-to-zero map preserves the equations since t_i∈J, and the I=∅, rank-0 and empty cases are handled. BATCH 5: def-trf-strict-normal-crossings-boundary is a general definition. lem-a1-normal-completed-integral-model reaches lem-pod-profinite-stable-lattice, which is generic stable-lattice theory. lem-pod-adic-limit-finite-modules is pure O_E commutative algebra. None is a step of Poincaré duality or the trace formula, so all three are accepted. I accept the 10 generic tool_uses (listed in review.md). Advisory B3: connected, qcqs, finite étale and continuous G-sets are uncited in the new nodes' stmt_deps. I changed no files."
  }
 }

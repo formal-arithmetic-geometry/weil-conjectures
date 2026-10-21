@@ -22963,3 +22963,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:41 L: merged deliver/NK/lem-per-adic-stratified-pullback-texact (stage 2; reviewer PASS; parallel immutable checks)
 - 15:41 L: merged deliver/Q08/lem-sp-supported-etale-tensor-origin (stage 2; reviewer PASS; parallel immutable checks)
 - 15:42 L: merged deliver/ND/lem-sfb-condensed-product-action-inflation (stage 2; reviewer PASS; parallel immutable checks)
+- 15:43 L: merged deliver/Q04/lem-sfb-tame-root-tower-extension (reviewer PASS; first push; new nodes: 2)
