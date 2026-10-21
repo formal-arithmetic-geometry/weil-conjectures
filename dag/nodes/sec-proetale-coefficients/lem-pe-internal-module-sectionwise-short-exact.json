@@ -16,9 +16,91 @@
   "def-weil-pbc-exact-sequence",
   "lem-sfb-modobj-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P_i=\\iota U(M_i)$, $f=\\iota U(F)$ and $g=\\iota U(G)$, where $\\iota$ is the sheaf inclusion. By [lem-weil-pbc-abelian-presheaves-evaluation-exact], abelian presheaves form an abelian category, and their kernels and cokernels are computed sectionwise. Thus $\\ker f(V)=0$ and $\\operatorname{coker}g(V)=0$ by the hypothesis. Moreover the image presheaf of $f$, computed as the kernel of its sectionwise cokernel, has value $\\operatorname{im}f_V=\\ker g_V$. These are equal subpresheaves, since both carry the restrictions inherited from $P_1$. Consequently $0\\to P_0\\xrightarrow fP_1\\xrightarrow gP_2\\to0$ is short exact by [def-weil-pbc-exact-sequence].",
+   "uses": [
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+    "def-weil-pbc-exact-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CL (lemma-limits-colimits-abelian-presheaves), 03CN (lemma-abelian-abelian), and 03CO (lemma-limits-colimits-abelian-sheaves)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-sheafification-exact], abelian sheafification $a$ preserves finite limits and colimits. Hence it preserves kernels and cokernels, and images expressed as kernels of cokernels; applying it to step 1 gives a short exact sequence with arrows $a(f),a(g)$. The sheaf category is abelian by [lem-sfb-abelian-sheaves-left-exact-reflector], applied with coefficient category $\\mathrm{Ab}$ and this left exact reflector. The essentially small site is replaced, if needed, by its small model in the coefficient universe, with the transported topology; restriction along the equivalence bijects matching families and preserves all the stated diagrams. By [lem-weil-pbc-presheaf-finite-limits-objectwise], the counits $\\epsilon_i:a\\iota U(M_i)\\xrightarrow{\\sim}U(M_i)$ are isomorphisms. Their naturality says $\\epsilon_1a(f)=U(F)\\epsilon_0$ and $\\epsilon_2a(g)=U(G)\\epsilon_1$. These identify the sheafified sequence with the sequence of underlying sheaves with precisely the prescribed arrows, proving the second conclusion.",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "lem-sfb-abelian-sheaves-left-exact-reflector",
+    "lem-weil-pbc-presheaf-finite-limits-objectwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CL (lemma-limits-colimits-abelian-presheaves), 03CN (lemma-abelian-abelian), and 03CO (lemma-limits-colimits-abelian-sheaves)."
+   }
+  },
+  {
+   "text": "The tensor functors in $\\mathcal B$ preserve colimits by closedness in [sk-def-sfb-sheaf-tensor]. They are additive by [lem-sfb-preserving-colimits-additive], since $\\mathcal B$ is abelian by step 2. In particular $\\mathcal R\\otimes-$ preserves finite colimits. Thus all hypotheses of [lem-sfb-modobj-abelian] hold and $\\operatorname{Mod}_{\\mathcal R}(\\mathcal B)$ is abelian. Under exactly these hypotheses [lem-sfb-modobj-forget-left-exact] and [lem-sfb-modobj-forget-right-exact] say that $U$ preserves finite limits and finite colimits.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-preserving-colimits-additive",
+    "lem-sfb-modobj-abelian",
+    "lem-sfb-modobj-forget-left-exact",
+    "lem-sfb-modobj-forget-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: \"So the sequence of condensed ... modules is exact\"; the passage from sectionwise short exactness to internal-module short exactness, using the forgetful functor and exact abelian sheafification as in the landed proof, not the internal/sectionwise equivalence."
+   }
+  },
+  {
+   "text": "The functor $U$ preserves zero morphisms: it preserves the terminal object by step 3, and a terminal object in either abelian category is a zero object; a zero morphism factors through that object. It is faithful by [lem-sfb-modobj-forget-faithful]. It also reflects isomorphisms directly from [sk-def-sfb-module-objects]: if a module map $h:M\\to N$ has underlying inverse $k$, its action equation is $h\\gamma_M=\\gamma_N(\\mathcal R\\otimes h)$. Composing on the left with $k$ and on the right with $\\mathcal R\\otimes k$ gives $\\gamma_M(\\mathcal R\\otimes k)=k\\gamma_N$. Thus $k$ is a module map and its two inverse equations are those of the underlying maps. This proves reflection without any identification with sectionwise ring-module sheaves.",
+   "uses": [
+    "lem-sfb-modobj-forget-faithful",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: \"So the sequence of condensed ... modules is exact\"; the passage from sectionwise short exactness to internal-module short exactness, using the forgetful functor and exact abelian sheafification as in the landed proof, not the internal/sectionwise equivalence."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-jointly-reflect-short-exact] to the one-element family consisting of $U$. Both categories are abelian by steps 2--3; $U$ preserves finite limits and finite colimits by step 3 and zero morphisms by step 4; and this singleton family reflects isomorphisms by step 4. The short complex is $(M_0\\xrightarrow F M_1\\xrightarrow G M_2)$ with the given zero composite. Step 2 supplies short exactness of its image under $U$. The reverse implication of the cited node therefore proves short exactness of this very internal-module sequence. Together with steps 1 and 2 this proves every clause.",
+   "uses": [
+    "lem-weil-pbc-jointly-reflect-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: \"So the sequence of condensed ... modules is exact\"; the passage from sectionwise short exactness to internal-module short exactness, using the forgetful functor and exact abelian sheafification as in the landed proof, not the internal/sectionwise equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "def-weil-pbc-exact-sequence",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-sfb-abelian-sheaves-left-exact-reflector",
+  "lem-weil-pbc-presheaf-finite-limits-objectwise",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-preserving-colimits-additive",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-modobj-forget-left-exact",
+  "lem-sfb-modobj-forget-right-exact",
+  "lem-sfb-modobj-forget-faithful",
+  "sk-def-sfb-module-objects",
+  "lem-weil-pbc-jointly-reflect-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+  "place": "On the point, final sentence: expand the inference from sectionwise exactness to exactness of condensed modules, using Stacks Tags 03CL, 03CN, 03CO and the existing internal-module category lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -68,10 +150,45 @@
    "results": "{\"t\": \"2026-10-21T14:09:32Z\", \"tool\": \"grep\", \"query\": \"shortExact_of|shortExact_iff|exact_iff_evaluation|exact_iff.*app\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: Mathlib reflection under a faithful functor covers only the final reflection; Mayer-Vietoris covers a particular sheaf complex; SheafOfModules uses sectionwise modules. No hit combines presheaf evaluation, exact abelian sheafification and the internal-module forgetful functor. The required internal-module abelian instance is in project WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian, not Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact_of_shortExact_sections|shortExact.*Mod|Mod.*shortExact",
+   "results": "{\"t\": \"2026-10-21T15:46:49Z\", \"tool\": \"grep\", \"query\": \"shortExact_of_shortExact_sections|shortExact.*Mod|Mod.*shortExact\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for full item: hits give sectionwise module categories, individual complexes, or generic exactness tools; they do not supply the internal-module abelian and forgetful-functor instances."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A short complex of internal modules in sheaves of abelian groups is short exact if it is short exact on all sections",
+   "results": "{\"t\": \"2026-10-21T15:46:49Z\", \"tool\": \"leansearch\", \"query\": \"A short complex of internal modules in sheaves of abelian groups is short exact if it is short exact on all sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.shortExact_of_degreewise_shortExact\", \"CategoryTheory.ShortComplex.exact_iff_of_hasForget\", \"HomologicalComplex.shortExact_iff_degreewise_shortExact\", \"CategoryTheory.ShortComplex.Exact.recOn\", \"CategoryTheory.ShortComplex.exact_iff_exact_toComposableArrows\", \"CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact\", \"CategoryTheory.ShortComplex.ab_exact_iff_function_exact\", \"CategoryTheory.ShortComplex.exact_iff_exact_map_forget₂\"], \"digest\": \"b914a1e7d582783d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for full item: hits give sectionwise module categories, individual complexes, or generic exactness tools; they do not supply the internal-module abelian and forgetful-functor instances."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex, CategoryTheory.Mod",
+   "results": "{\"t\": \"2026-10-21T15:46:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ShortComplex, CategoryTheory.Mod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for full item: hits give sectionwise module categories, individual complexes, or generic exactness tools; they do not supply the internal-module abelian and forgetful-functor instances."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pointwise exact underlying presheaves yield exact sheaves and exact internal ring modules by sheafification and faithful forgetful functor",
+   "results": "{\"t\": \"2026-10-21T15:46:51Z\", \"tool\": \"leanfinder\", \"query\": \"Pointwise exact underlying presheaves yield exact sheaves and exact internal ring modules by sheafification and faithful forgetful functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"Condensed.instAB4StarCondensedMod\", \"instAbelianCondensedMod\", \"Condensed.instAB4CondensedMod\", \"CategoryTheory.sheafIsAbelian\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification\"], \"digest\": \"eb0dea2fce8d65cf\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for full item: hits give sectionwise module categories, individual complexes, or generic exactness tools; they do not supply the internal-module abelian and forgetful-functor instances."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sectionwise short exactness of internal modules over a ring object in abelian sheaves implies short exactness in the internal module category",
+   "results": "{\"t\": \"2026-10-21T15:46:52Z\", \"tool\": \"leanfinder\", \"query\": \"Sectionwise short exactness of internal modules over a ring object in abelian sheaves implies short exactness in the internal module category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.instAbelian\", \"instAbelianCondensedMod\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact\", \"Condensed.instAB4StarCondensedMod\", \"instAbelianLightCondMod\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\"], \"digest\": \"a99d39bfa142d1af\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for full item: hits give sectionwise module categories, individual complexes, or generic exactness tools; they do not supply the internal-module abelian and forgetful-functor instances."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pe-profinite-sections-finite-quotient",
@@ -88,5 +205,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-pe-internal-module-sectionwise-short-exact",
+  "worker": "stage1",
+  "summary": "Proved all three clauses with unchanged statement and arrows: sectionwise kernels/cokernels, exact sheafification with natural counit, and reflection through the internal-module forgetful functor. Reused every auxiliary fact from the live DAG; no new nodes. Checked essentially-small universe hypothesis, tensor additivity, zero preservation and the explicit inverse module-action equation.",
+  "blueprint": "det-pe-derived-nakayama-resolution, On the point final sentence: So the sequence of condensed modules is exact. This split supplies precisely that categorical passage, retaining the presheaf/sheafification/forgetful route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-abelian-sheaves-left-exact-reflector",
+    "why": "Generic abelianness of a left exact reflective sheaf category; the Nakayama unit has no such category-construction result."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Generic abelianness of internal modules, used only to instantiate exact-sequence detection."
+   },
+   {
+    "node": "lem-sfb-modobj-forget-left-exact",
+    "why": "Generic finite-limit preservation of the internal-module forgetful functor, needed for the existing categorical reflection leaf."
+   },
+   {
+    "node": "lem-sfb-modobj-forget-right-exact",
+    "why": "Generic finite-colimit preservation of the internal-module forgetful functor, needed for the existing categorical reflection leaf."
+   },
+   {
+    "node": "lem-sfb-modobj-forget-faithful",
+    "why": "Generic faithfulness of forgetting an action; the Nakayama route does not replace this categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-abelian-sheaves-left-exact-reflector",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-modobj-forget-left-exact",
+  "lem-sfb-modobj-forget-right-exact",
+  "lem-sfb-modobj-forget-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NG-1bfd5ff25",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-1bfd5ff25 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are unchanged from the import, there are no new nodes and no SGA citation, proof_deps equals the union of the step uses, and every cited id exists. Source: blueprint main-20261015 sk-lem-pe-derived-nakayama-resolution.proof.md 'On the point' l.5-13; the final sentence ('So the sequence of condensed modules is exact') is the inference this item expands, so the route stays inside unit sk-lem-pe-derived-nakayama. Stacks 03CL/03CN/03CO labels checked in sites-modules.tex. Step 1: sectionwise kernels, cokernels and image (abelian-presheaves-evaluation-exact) give the presheaf short exact sequence. Step 2: exact sheafification, abelian sheaf category (reflector lemma, after replacing the site by a small equivalent one) and the counit isomorphism with its naturality give the sheaf sequence with the given arrows U(F), U(G). Step 3: sheaf-tensor clause 2 gives colimit preservation in both variables, hence additivity (preserving-colimits-additive); this satisfies the hypotheses of modobj-abelian and of the forget-left/right-exact lemmas. Step 4: zero is preserved via the terminal object; I recomputed the inverse action equation kγ_N=γ_M(R⊗k), so U reflects isomorphisms. Step 5: hypotheses of Mathlib JointlyReflectIsomorphisms.shortExact_iff (ReflectsIso/Exact.lean:74-81) checked for the singleton family {U}; its reverse direction gives the claim. Duplicate search: no existing node states the item; forget-creates is an optional alternative, not needed. Edge cases (empty site, zero ring, identity-only covers, split sequences) pass. The declared tool uses (reflector lemma, modobj-abelian, forget-left/right-exact, forget-faithful) are generic Mathlib or Lean-closed facts; accepted. No changes."
  }
 }
