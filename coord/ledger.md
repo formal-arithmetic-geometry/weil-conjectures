@@ -23673,3 +23673,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:33 L: returned deliver/H3/Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso (reviewer RETURN: (the landing tools, head 27625c9ae) the delivery did not land: lean/Sheaf/AlgebraicGeometry/StrictHenselizationCohomolog)
 - 20:33 L: returned deliver/NS/lem-sfb-equivariant-resolution-bar-normalization (reviewer RETURN: L: independent stage-2 immutable head a6b34083e70e: H2: stmt_deps adds theorem node lem-sfb-internal-homogeneous-functio)
 - 20:33 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 20:33 L: returned deliver/M7/Sheaf.Paper.ConstructibleCompactness (reviewer RETURN: (the landing tools, head 956005c8d) the delivery did not land: every module of the delivery is in the library already, w)
