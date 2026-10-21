@@ -239,5 +239,23 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-b8532cbf6 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps and every cited node; the split is correct and needs no changes. Statement: unchanged; it is Tate §1 (T1) plus the finite-dimensional case of (T2) on p. 150. Every hypothesis is needed: without the intertwining conditions it fails (k→k with i=1, C=0, f_B=1, f_A=0). Step 1: the lifting clause of def-weil-pbc-projective-module, together with lem-weil-pbc-vector-space-projective (a Mathlib leaf), gives s with qs=1. Step 2: r with ri=1 and ir+sq=1 is written out in full; I checked it, including the linearity of r from injectivity of i. Step 3: additivity of trace follows directly from the basis definition in def-weil-endomorphism-trace, applied to f_B=(f_B i)r+(f_B s)q. Step 4: lem-pc-finite-dimensional-trace-cyclic applied to the pairs (f_B i, r) and (f_B s, q); the direction is right. Step 5: substitution using ri=1 and qs=1 gives the result. Edge cases checked: A=0, C=0, and the nilpotent Jordan block with no invariant complement. No new nodes, no cycle, no SGA, and all cited nodes are Mathlib leaves or definitions, so they are notions rather than route and no tool_uses entry is needed. A DAG-wide rg -L search found no duplicate at the vector-space level. On live and side-live the item is still unsplit, and there is no repair note for it. Note for the maintainer: the item carries lean_candidates LinearMap.trace_eq_add_of_exact (FinitePotent.lean:39), which the maintainer may still attach after checking it for sorry and its axioms."
+ },
+ "lean": {
+  "module": "WeilConjectures.RingTheory.TateResidue.FinitePotent",
+  "declaration": "LinearMap.trace_eq_add_of_exact",
+  "statement": "theorem LinearMap.trace_eq_add_of_exact {k M₁ M₂ M₃ : Type*} [Field k]\n    [AddCommGroup M₁] [Module k M₁] [AddCommGroup M₂] [Module k M₂] [AddCommGroup M₃]\n    [Module k M₃] [FiniteDimensional k M₁] [FiniteDimensional k M₂] [FiniteDimensional k M₃]\n    (i : M₁ →ₗ[k] M₂) (q : M₂ →ₗ[k] M₃) (hi : Function.Injective i)\n    (hq : Function.Surjective q) (hex : Function.Exact i q) (g₁ : Module.End k M₁)\n    (g₂ : Module.End k M₂) (g₃ : Module.End k M₃) (h₁ : g₂ ∘ₗ i = i ∘ₗ g₁)\n    (h₃ : q ∘ₗ g₂ = g₃ ∘ₗ q) :\n    trace k M₂ g₂ = trace k M₁ g₁ + trace k M₃ g₃ :=",
+  "branch": "slopmaster2",
+  "by": "NN",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing declaration, read locally and through scompile.py --source from the live server. All three finite-dimensional spaces, injectivity, surjectivity, exactness, both intertwining identities, and the ordinary-trace conclusion agree verbatim up to renaming. No new module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c82055f6e",
+  "group": "NN",
+  "result": "pass",
+  "note": "existing:true record for LinearMap.trace_eq_add_of_exact (FinitePotent.lean:38-66, live = side-live, olean present); recorded statement verbatim; field, three FiniteDimensional instances, injectivity, surjectivity, Function.Exact (im=ker), both intertwining identities and the LinearMap.trace conclusion match the node exactly, with no extra assumptions and four independent universes; proof complete with no sorry and follows the node's split/cyclic-trace route; only the lean field differs from side-live; not dropped, no repair note; edge cases A=0, C=0, any characteristic, non-split nilpotent covered; no findings"
  }
 }
