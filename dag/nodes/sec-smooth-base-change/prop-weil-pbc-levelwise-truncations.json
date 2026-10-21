@@ -200,6 +200,19 @@
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 07A4 (lemma-pullback-tensor-product); proetale.tex comparison unit (finite-level comparison); blueprint Proof Step 3, normalized witness compatibility made explicit"
    }
+  },
+  {
+   "text": "R4: The canonical completed-object reduction tower satisfies its full strict-transition equation and quotient cocycle. First identify each semilinear transition with the adjunct pbcReductionTransition. For the strict-transition equation, normalize the derived Hom adjunction through the universal scalar counit on a K-flat representative. Its ordinary adjunct sends s tensor x to q(s) tensor x: evaluate the adjunct identity on 1 tensor x and use scalar linearity. Local tensor generation identifies it with completedReductionTransition. Induction on the quotient interval identifies the transitions of Functor.ofOpSequence with these all-pair maps, including identity intervals. The published evaluation formula, naturality of exact evaluation and the tower counit then prove the transition equation on the representative. Naturality and existence of K-flat resolutions extend it to every completed object. For the quotient cocycle, the associativity of ordinary restriction comparisons follows from their identity-on-sections formula. The exactComp_assoc lemma transports this identity to derived restriction comparisons. Apply the scalar-adjunction Hom equivalence, use unit naturality and this derived associativity identity, then cancel inverse comparisons. No truncation, Tor hypothesis or new unproved statement is used for these laws.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-bounded-constructible-tower",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, K-flat computation and normalization of derived scalar extension; blueprint order 1429, opening paragraph, canonical reduction tower"
+   }
   }
  ],
  "proof_deps": [
@@ -220,6 +233,7 @@
   "lem-sf-derived-homology-long-exact",
   "lem-sf-derived-truncation-triangle",
   "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-successive-derived-quotient-normalization",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
   "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
   "lem-weil-pbc-normalized-constructible-local-effectivity",
@@ -235,7 +249,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/prop-weil-pbc-levelwise-truncations.md",
-  "place": "Proof, Steps 1-3; repairs to Tor hypothesis, counterexample, common local models and normalized witnesses documented in report.md; S9 stage-3 proof implementation: direct canonical truncation/cohomology APIs, exact evaluation, adjunct naturality and t-structure triangle-map uniqueness for the five closed clauses; K2: completed the unconditional retained-origin clause using explicit truncation witnesses, fully faithful preimages, the unit law for the canonical mate, and truncation universal properties"
+  "place": "Proof, Steps 1-3; repairs to Tor hypothesis, counterexample, common local models and normalized witnesses documented in report.md; S9 stage-3 proof implementation: direct canonical truncation/cohomology APIs, exact evaluation, adjunct naturality and t-structure triangle-map uniqueness for the five closed clauses; K2: completed the unconditional retained-origin clause using explicit truncation witnesses, fully faithful preimages, the unit law for the canonical mate, and truncation universal properties; R4: proved both canonical reduction-tower laws by K-flat adjoint computation, tensor-generator uniqueness, exact-evaluation naturality, and associativity of derived restriction comparisons"
  },
  "mathlib_searches": [
   {
@@ -495,11 +509,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-baecd",
-  "group": "K2",
+  "reviewer": "COMPILER",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261021T020130-L-2589201",
-  "kind": "interface",
-  "note": "independent cc review: delivered LevelwiseAdicTruncations.lean/node/change record (identical to PASSed f151ceeb) vs live clone; unit sk-rem-rest realized empty vs removed ProEtaleSiteComparisonFiniteLevel import; module + 6 direct importers compiled in sandbox; #print axioms clean"
+  "landing": "20261021T024158-L-3041539",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
