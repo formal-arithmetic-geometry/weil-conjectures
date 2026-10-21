@@ -23,74 +23,108 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=\\Sh(U_{\\mathrm{proét}},\\Ab)$, $\\mathcal D=\\Sh(X_{\\mathrm{proét}},\\Ab)$, and $\\mathcal B=\\Lambda_X$. The pulled-back-coefficient construction gives the monoid object $\\mathcal B$ (commutative since $\\Lambda$ is). For the sheaf tensor products, $S=j^*_{\\Ab}\\colon\\mathcal D\\to\\mathcal C$ is strong monoidal by [def-sfb-finite-upper-star-monoidal]. For the open immersion $j$, [sk-def-sfb-finite-lower-shriek] supplies the exact functor $P=j^{\\Ab}_!\\colon\\mathcal C\\to\\mathcal D$ and its adjunction $P\\dashv S$. Thus $S\\mathcal B=j^*\\Lambda_X$ has its transported monoid structure, and these are exactly the coefficient objects in the displayed source and target.",
+   "text": "Put $\\mathcal C=\\Sh(U_{\\mathrm{proét}},\\Ab)$, $\\mathcal D=\\Sh(X_{\\mathrm{proét}},\\Ab)$, $B=\\Lambda_X$, $P=j^{\\Ab}_!$ and $S=j^*_{\\Ab}$. By [sk-def-sfb-pulled-back-coefficients], $B$ is a monoid object. By [sk-def-sfb-finite-lower-shriek], $P$ is exact and $P\\dashv S$; [def-sfb-finite-upper-star-monoidal] makes $S$ strong monoidal.",
    "uses": [
     "sk-def-sfb-pulled-back-coefficients",
-    "def-sfb-finite-upper-star-monoidal",
-    "sk-def-sfb-finite-lower-shriek"
+    "sk-def-sfb-finite-lower-shriek",
+    "def-sfb-finite-upper-star-monoidal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
-    "place": "Proof, linearization and lifted adjunction; final exactness argument"
+    "place": "Proof, linearization and lifted adjunction"
    }
   },
   {
-   "text": "The isomorphisms of [lem-sfb-open-projection-formula] are the canonical projection-formula maps for this adjunction. Clause 4 of [sk-def-sfb-transport] says that invertibility of these canonical maps makes them a coherent projection formula; hence clause 3 applies with $\\mathcal B=\\Lambda_X$. Define $j^{\\mathrm{lin}}_!=P_{\\mathcal B}$. On an object $(M,\\gamma_M)$ its underlying object is $PM$ and its action is $\\mathcal B\\otimes PM\\xrightarrow{\\pi_{\\mathcal B,M}^{-1}}P(S\\mathcal B\\otimes M)\\xrightarrow{P\\gamma_M}PM$, precisely the action in the statement. Unitality and associativity are part of that linearization assertion. On a module morphism $a\\colon M\\to N$, use $Pa$. Naturality of $\\pi^{-1}$ and the identity $a\\gamma_M=\\gamma_N(S\\mathcal B\\otimes a)$ give $Pa\\,P\\gamma_M\\,\\pi^{-1}_{\\mathcal B,M}=P\\gamma_N\\,\\pi^{-1}_{\\mathcal B,N}(\\mathcal B\\otimes Pa)$, so this is a module morphism. The identity and composition equations are those of $P$. Consequently forgetting modules identifies the constructed functor with $j^{\\Ab}_!$ on both objects and morphisms.",
+   "text": "The canonical maps for this adjunction are invertible by [lem-sfb-open-projection-formula]. Thus [def-sfb-adjunction-projection-formula] supplies their coherent projection formula $\\pi$.",
    "uses": [
     "lem-sfb-open-projection-formula",
-    "sk-def-sfb-transport",
-    "sk-def-sfb-module-objects"
+    "def-sfb-adjunction-projection-formula"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
-    "place": "Proof, linearization and lifted adjunction; final exactness argument"
+    "place": "Proof, linearization and lifted adjunction"
    }
   },
   {
-   "text": "Apply clause 4 of [sk-def-sfb-transport] to the same adjunction $P\\dashv S$ and the canonical invertible projection-formula maps from step 2. It identifies the linearized right adjoint with $\\operatorname{mapMod}(S)$ and gives $P_{\\mathcal B}\\dashv\\operatorname{mapMod}(S)$. Here the right-hand functor sends a $\\mathcal B$-module $N$ to the $S\\mathcal B$-module $SN$, with action induced by the strong monoidal structure of $S$. With the substitutions in step 1, this is exactly the asserted adjunction to $\\operatorname{mapMod}(j^*_{\\Ab})$, without changing scalars to $\\Lambda_U$.",
+   "text": "Apply [def-sfb-modobj-linearization] to $\\pi$ and $B$. Define $j^{\\mathrm{lin}}_!=P_B$. Its action is $P(\\gamma_M)\\circ\\pi^{-1}_{B,M}$ and its morphism map is $a\\mapsto Pa$. This is precisely the displayed construction, with source $\\Mod_{SB}$; the same node gives $U_B\\circ P_B=P\\circ U_{SB}$.",
    "uses": [
-    "sk-def-sfb-transport"
+    "def-sfb-modobj-linearization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
-    "place": "Proof, linearization and lifted adjunction; final exactness argument"
+    "place": "Proof, linearization and lifted adjunction"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-site-sheaves-enough-injectives] to the small pro-étale sites of $U$ and $X$ (using their small skeletons as in [def-weil-pbc-proetale-site]); it gives that $\\mathcal C$ and $\\mathcal D$ are abelian. For the sheaf tensor products, [det-def-sfb-sheaf-tensor-closed] gives additivity in each variable and preservation of colimits by tensoring with any sheaf. In particular $S\\mathcal B\\otimes-$ and $\\mathcal B\\otimes-$ are right exact. The underlying functor $P$ is exact by [sk-def-sfb-finite-lower-shriek]; it is additive: as a left adjoint it preserves the initial (zero) object and binary coproducts, which in abelian categories are biproducts; now use the formula $a+b=\\nabla\\circ(a\\oplus b)\\circ\\Delta$. Step 2 gives $U_{\\mathcal B}\\circ P_{\\mathcal B}=P\\circ U_{S\\mathcal B}$, including the equality on morphisms. All hypotheses of [det-prop-sfb-module-pullback-exact-lifted] now hold with $\\mathcal R=S\\mathcal B$, $\\mathcal S=\\mathcal B$, $F=P$, and $G=P_{\\mathcal B}$. Its conclusion gives that $j^{\\mathrm{lin}}_!$ is additive and exact, preserving finite limits and finite colimits.",
+   "text": "With these same $P,S,B,\\pi$, [def-sfb-modobj-linearization-transport-adjunction] gives $P_B\\dashv\\operatorname{mapMod}(S)$, the required adjunction.",
    "uses": [
-    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "def-sfb-modobj-linearization-transport-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
+    "place": "Proof, linearization and lifted adjunction"
+   }
+  },
+  {
+   "text": "The sites are small under [def-weil-pbc-proetale-site]; [lem-weil-pbc-site-sheaves-enough-injectives] makes $\\mathcal C,\\mathcal D$ abelian. By [det-def-sfb-sheaf-tensor-closed], their tensor products are additive and $SB\\otimes-$ and $B\\otimes-$ are right exact.",
+   "uses": [
     "def-weil-pbc-proetale-site",
-    "det-def-sfb-sheaf-tensor-closed",
-    "sk-def-sfb-finite-lower-shriek",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "det-def-sfb-sheaf-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
+    "place": "Proof, final exactness argument"
+   }
+  },
+  {
+   "text": "Since $P\\dashv S$, [lem-weil-pbc-left-adjoint-preserves-colimits] gives preservation of finite colimits. The abelian-category hypotheses from step 5 allow [lem-sfb-preserving-colimits-additive] to give additivity of $P$.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-preserving-colimits-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
+    "place": "Proof, final exactness argument"
+   }
+  },
+  {
+   "text": "Apply [det-prop-sfb-module-pullback-exact-lifted] with $\\mathcal R=SB$, $\\mathcal S=B$, $F=P$ and $G=P_B$. Steps 1, 5 and 6 verify exactness, abelianity, tensor hypotheses and additivity; step 3 gives its required forgetful equality. Hence $P_B$ is additive and exact, preserving finite limits and finite colimits.",
+   "uses": [
     "det-prop-sfb-module-pullback-exact-lifted"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
-    "place": "Proof, linearization and lifted adjunction; final exactness argument"
+    "place": "Proof, final exactness argument"
    }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-pulled-back-coefficients",
-  "def-sfb-finite-upper-star-monoidal",
   "sk-def-sfb-finite-lower-shriek",
+  "def-sfb-finite-upper-star-monoidal",
   "lem-sfb-open-projection-formula",
-  "sk-def-sfb-transport",
-  "sk-def-sfb-module-objects",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "def-sfb-adjunction-projection-formula",
+  "def-sfb-modobj-linearization",
+  "def-sfb-modobj-linearization-transport-adjunction",
   "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
   "det-def-sfb-sheaf-tensor-closed",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-preserving-colimits-additive",
   "det-prop-sfb-module-pullback-exact-lifted"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-linear-open-lower-shriek.proof.md",
-  "place": "Proof, expanded using the existing general exact-lift lemma det-prop-sfb-module-pullback-exact-lifted"
+  "place": "Proof, assembled from the existing fine-grained projection-formula, linearization, adjunction, additivity and exact-lift nodes"
  },
  "mathlib_searches": [
   {
@@ -182,38 +216,53 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "def-sfb-module-linear-open-lower-shriek",
   "worker": "stage1",
-  "summary": "Checked current blueprint construction and master reference, found no completed slopmaster2 attachment. Retained the statement, exposed monoidal pullback and coherent linearization, supplied the morphism formula and lifted adjunction, and repaired the missing module-category citation by citing existing general exact-lift, sheaf tensor and abelian-sheaf results. No new nodes.",
-  "blueprint": "Steps 1–3 realize the linear extension-by-zero clause of sk-def-sfb-module-lower-shriek and the first sentence of this node's proof; step 4 realizes its final exactness sentence.",
+  "summary": "Repair of the human-requested finer split: replaced the umbrella transport citation and inline functoriality/additivity arguments by the existing dedicated coherence, linearization, lifted-adjunction and Mathlib additivity nodes. Seven short assembly steps; statement unchanged. No new nodes: each proposed helper already exists, so reuse avoids duplicates. Retained all prior statement bindings, source data and search records.",
+  "blueprint": "Steps 1–4 realize the strong-monoidal pullback, coherent projection-formula linearization and lifted adjunction in the first sentence of the blueprint proof. Steps 5–7 realize its final exactness sentence, through the existing general exact-lift theorem.",
   "tool_uses": [
    {
+    "node": "def-sfb-adjunction-projection-formula",
+    "why": "General canonical projection-formula coherence theorem supplies the coherence required by the unit linearization route."
+   },
+   {
+    "node": "def-sfb-modobj-linearization",
+    "why": "General module construction supplies the action laws, morphism linearity and forgetful equality; specializes to the unit extension-by-zero argument."
+   },
+   {
+    "node": "def-sfb-modobj-linearization-transport-adjunction",
+    "why": "General lifted-adjunction theorem specializes to the unit adjunction P left adjoint to S."
+   },
+   {
     "node": "det-prop-sfb-module-pullback-exact-lifted",
-    "why": "General lift-of-exact-functor theorem supplies exactly the module exactness argument of the unit, with F the abelian extension by zero."
+    "why": "General exact-lift theorem gives precisely the unit exactness argument on underlying sheaves."
    },
    {
     "node": "lem-weil-pbc-site-sheaves-enough-injectives",
-    "why": "General site theorem supplies abelianity of abelian sheaves; only that clause is used."
+    "why": "Only its abelianity clause is used for the small pro-etale sites."
    },
    {
     "node": "det-def-sfb-sheaf-tensor-closed",
-    "why": "The existing sheaf tensor theorem supplies additivity and right exactness needed for module exactness."
+    "why": "Supplies additive tensor products and right exact tensoring, hypotheses of the exact-lift theorem."
    }
   ]
  },
  "tool_uses": [
   "det-prop-sfb-module-pullback-exact-lifted",
   "lem-weil-pbc-site-sheaves-enough-injectives",
-  "det-def-sfb-sheaf-tensor-closed"
+  "det-def-sfb-sheaf-tensor-closed",
+  "def-sfb-adjunction-projection-formula",
+  "def-sfb-modobj-linearization",
+  "def-sfb-modobj-linearization-transport-adjunction"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q12-286c8c028",
-  "group": "Q12",
+  "reviewer": "NT-cc-Q16-51f31ec8e",
+  "group": "Q16",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-286c8c028 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements and sources, and current chapter/unit route in full. All four steps are valid; canonical projection-map direction and coefficients Mod_{j^*Lambda_X} agree with master. Exact-lift hypotheses, edge cases, duplicates and dependency cycles checked. Three declared generic tool uses accepted. No repairs needed; details in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-51f31ec8e (reviewer sub-agent of L); spot-checked: I read the full proof of the item, its unit, the main-20261015 blueprint statement and proof (node 1695), and every cited statement. The statement and stmt_deps are unchanged; only the proof, proof_deps, proof_origin and split_report changed. The human re-split note of 2026-10-21 (coord/repair-notes, 3442 chars) asks for new nodes. The delivery instead reduces the proof to 7 steps and 1757 characters (longest step 332), with no new nodes. Every old inline argument now cites an existing dedicated node. (1) Coherence of the canonical projection maps is def-sfb-adjunction-projection-formula. Its map P(SL⊗M)→L⊗PM, adjoint of μ^S∘(id⊗u), has the same direction as lem-sfb-open-projection-formula. (2) The action P(γ)∘π⁻¹, linearity of Pf and commutation with the forgetful functors are def-sfb-modobj-linearization. (3) P_B ⊣ mapMod(S) is def-sfb-modobj-linearization-transport-adjunction. (4) The old inline biproduct additivity argument is the Mathlib leaves lem-weil-pbc-left-adjoint-preserves-colimits (Stacks 0038) and lem-sfb-preserving-colimits-additive (rightExactFunctor_le_additiveFunctor). (5) Exactness comes from det-prop-sfb-module-pullback-exact-lifted. Its hypotheses all hold: abelian categories (sites small), additive and right-exact tensors from det-def-sfb-sheaf-tensor-closed, P exact (sk-def-sfb-finite-lower-shriek) and additive (step 6), and U∘P_B = P∘U from step 3. A new node for any of these would duplicate an existing node (B9/C5), so reuse is the correct answer to the note. The source coefficients stay Mod_{j^*Λ_X}, not Λ_U. j^* is strong monoidal by def-sfb-finite-upper-star-monoidal (Ab is closed symmetric Grothendieck). The cases U=∅, j=id and Λ=0 are consistent. The item is not in its own dependency closure (311 nodes), all cited ids exist and none is merged, proof_deps equals the union of uses, and there is no SGA. All six tool_uses are accepted: three are transport-unit definition nodes, which are notions, and three were already accepted on the base. Maintainer note: mark the repair note resolved by reuse of existing nodes; a check that requires ≥1 new node should not block this delivery. No fixes."
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-module-lower-shriek",
