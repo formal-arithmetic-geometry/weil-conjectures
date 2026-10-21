@@ -14,48 +14,130 @@
   "def-pc-kflat-complex",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The compatibility of the sections $t_U$ with restriction makes $\\mu_t$ a morphism of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. Its square is zero: on every section $a$ it sends $a$ to $t_U^2a=0$. Consequently all consecutive differentials of $P$ compose to zero, including at the transition to the zero term in degree $1$; thus $P$ is a cochain complex [def-pc-cochain-complex-modules]. Since $\\pi\\mu_t=0$ by the cokernel definition, the degree-zero map $\\pi$ and the zero components satisfy the chain-map equation, giving $\\varepsilon:P\\to E[0]$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples, infinite periodic multiplication resolution"
+   }
+  },
+  {
+   "text": "For every $i<0$, both maps entering and leaving degree $i$ are $\\mu_t$. The assumed equality $\\ker\\mu_t=\\operatorname{im}\\mu_t$ is exactly exactness at that term of the augmented sequence. Equivalently the cohomology formula of [def-weil-abstract-derived-category] gives $H^i(P)=\\ker\\mu_t/\\operatorname{im}\\mu_t=0$. These are equalities of subobjects in the abelian category of module sheaves [def-weil-sheaf-of-modules-category]; no sectionwise surjectivity or enough-points hypothesis is being assumed.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples, infinite periodic multiplication resolution"
+   }
+  },
+  {
+   "text": "At the last copy of $\\mathcal O$, the cokernel quotient $\\pi$ is an epimorphism with kernel $\\operatorname{im}\\mu_t$, giving exactness of $\\mathcal O\\xrightarrow{\\mu_t}\\mathcal O\\xrightarrow{\\pi}E\\to0$ in the abelian category [def-weil-sheaf-of-modules-category]. Because $d_P^0=0$, the formula of [def-weil-abstract-derived-category] identifies $H^0(P)=\\mathcal O/\\operatorname{im}\\mu_t=E$; the induced map $H^0(\\varepsilon)$ is precisely this quotient identification. All terms in degrees $i>0$ vanish, so $H^i(P)=0$ there. Since $E[0]$ has $E$ in degree zero and zero cohomology elsewhere, these computations show that $H^i(\\varepsilon)$ is an isomorphism for every $i$, hence $\\varepsilon$ is a quasi-isomorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples, infinite periodic multiplication resolution"
+   }
+  },
+  {
+   "text": "For any module sheaf $\\mathcal F$, the sectionwise maps $\\mathcal F(U)\\otimes_{\\mathcal O(U)}\\mathcal O(U)\\to\\mathcal F(U)$, $x\\otimes a\\mapsto ax$, have inverse $x\\mapsto x\\otimes1$. Their composites are identities by the tensor balancing relation, and both commute with restrictions. Sheafifying the presheaf tensor as in [def-pur-sheaf-tensor-product] therefore gives a natural isomorphism $\\mathcal F\\otimes_{\\mathcal O}\\mathcal O\\cong\\mathcal F$. Also $\\mathcal F\\otimes_{\\mathcal O}0=0$ since its sectionwise tensor is zero. Thus tensoring with $\\mathcal O$ or $0$ is, respectively, the identity or zero functor and preserves exact sequences. Both are flat by [def-pc-flat-sheaf-modules], so every term of $P$ is flat.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), displayed sheafified tensor definition; Tag 03ER (definition-flat), item (3)"
+   }
+  },
+  {
+   "text": "The complex $P$ is bounded above with bound $0$ and its terms are flat by Step 4. Apply [lem-pc-bounded-above-flat-kflat-site], whose statement is for arbitrary ringed sites, to conclude that $P$ is K-flat. Together with the quasi-isomorphism $\\varepsilon$ from Step 3 this is exactly a K-flat resolution of $E[0]$ as defined in [def-pc-kflat-complex].",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); Tag 06YN (definition-K-flat)"
+   }
+  },
+  {
+   "text": "On the one-point site with ring $R$, module sheaves are ordinary $R$-modules. The image of multiplication by $t$ is the ideal $tR$, so $E=R/tR$. Each nonzero-position term $P^i=R$ for $i\\le0$ is free on the singleton basis $1$: the coefficient map $R\\to R$, $r\\mapsto r\\cdot1$, is the identity. The augmentation is the ordinary quotient map and exactness was proved in Steps 2--3. This gives the stated augmented free resolution, with every differential before the augmentation multiplication by $t$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "The examples, infinite periodic multiplication resolution"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "The examples; explicit ringed-site generalization, using Stacks Tags 03EK, 03ER, 06YN, 06YQ"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
    "query": "alternatingConst|periodic.*resolution|bounded.*[Ff]lat.*[Kk]",
-   "results": "; Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/AlternatingConst.lean, Mathlib/Algebra/Homology/AlternatingConst.lean; inspected the returned source and nearby declarations",
+   "results": "Mathlib/Algebra/Homology/AlternatingConst.lean; Mathlib/Algebra/Homology/AlternatingConst.lean; Mathlib/Algebra/Homology/AlternatingConst.lean; Mathlib/Algebra/Homology/AlternatingConst.lean; Mathlib/Algebra/Homology/AlternatingConst.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean; Mathlib/AlgebraicTopology/SingularHomology/Basic.lean; ",
    "date": "2026-10-21",
-   "verdict": "no match: generic alternating complexes, projective resolution infrastructure, or smoothness results do not give this specified augmented rank-one K-flat resolution on a ringed site"
+   "verdict": "no match: alternating complexes and generic projective resolutions do not supply the specified augmented periodic K-flat resolution on a ringed site"
   },
   {
    "tool": "leansearch",
    "query": "A square zero exact zero divisor has a periodic free resolution by multiplication",
-   "results": "; DividedPowers.OfSquareZero.dividedPowers, mul_self_eq_zero, CategoryTheory.ProjectiveResolution.exact₀, DividedPowers.OfSquareZero.dpow_of_two_le, CategoryTheory.HasProjectiveResolutions.out, FreeAlgebra.Rel.zero_mul, CategoryTheory.HasProjectiveResolution.out, sq_eq_zero_iff",
+   "results": "DividedPowers.OfSquareZero.dividedPowers; mul_self_eq_zero; CategoryTheory.ProjectiveResolution.exact₀; DividedPowers.OfSquareZero.dpow_of_two_le; CategoryTheory.HasProjectiveResolutions.out; FreeAlgebra.Rel.zero_mul; CategoryTheory.HasProjectiveResolution.out; sq_eq_zero_iff; ",
    "date": "2026-10-21",
-   "verdict": "no match: generic alternating complexes, projective resolution infrastructure, or smoothness results do not give this specified augmented rank-one K-flat resolution on a ringed site"
+   "verdict": "no match: alternating complexes and generic projective resolutions do not supply the specified augmented periodic K-flat resolution on a ringed site"
   },
   {
    "tool": "loogle",
    "query": "\"HomologicalComplex\", \"alternatingConst\"",
-   "results": "; HomologicalComplex.alternatingConst, HomologicalComplex.alternatingConst_X, HomologicalComplex.alternatingConstScIsoEven, HomologicalComplex.alternatingConstScIsoOdd, HomologicalComplex.alternatingConst_d, HomologicalComplex.alternatingConstHomologyIsoEven, HomologicalComplex.alternatingConstHomologyIsoOdd, HomologicalComplex.alternatingConst_iCycles_even_comp",
+   "results": "HomologicalComplex.alternatingConst; HomologicalComplex.alternatingConst_X; HomologicalComplex.alternatingConstScIsoEven; HomologicalComplex.alternatingConstScIsoOdd; HomologicalComplex.alternatingConst_d; HomologicalComplex.alternatingConstHomologyIsoEven; HomologicalComplex.alternatingConstHomologyIsoOdd; HomologicalComplex.alternatingConst_iCycles_even_comp; ",
    "date": "2026-10-21",
-   "verdict": "no match: generic alternating complexes, projective resolution infrastructure, or smoothness results do not give this specified augmented rank-one K-flat resolution on a ringed site"
+   "verdict": "no match: alternating complexes and generic projective resolutions do not supply the specified augmented periodic K-flat resolution on a ringed site"
   },
   {
    "tool": "leanfinder",
    "query": "On a ringed site, a square zero global section t with kernel of multiplication equal to its image gives a bounded above K-flat rank one periodic resolution of O/tO",
-   "results": "; Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.FormallySmooth.projective_kaehlerDifferential, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField, Algebra.formallySmooth_iff, Algebra.FormallySmooth.iff_subsingleton_and_projective, Algebra.Extension.formallySmooth_iff_split_injection, Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange, Algebra.FormallySmooth.iff_split_injection",
+   "results": "localCohomology.diagram; Algebra.FormallySmooth.of_split; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange; Algebra.FormallySmooth.iff_injective_lTensor_residueField; Algebra.FormallySmooth.projective_kaehlerDifferential; Algebra.formallySmooth_iff; Algebra.FormallyEtale.iff_comp_bijective; ",
    "date": "2026-10-21",
-   "verdict": "no match: generic alternating complexes, projective resolution infrastructure, or smoothness results do not give this specified augmented rank-one K-flat resolution on a ringed site"
+   "verdict": "no match: alternating complexes and generic projective resolutions do not supply the specified augmented periodic K-flat resolution on a ringed site"
   },
   {
    "tool": "leanfinder",
    "query": "An endomorphism d of a flat module with d squared zero and kernel equal to image defines an augmented K-flat periodic complex resolving its cokernel",
-   "results": "; CategoryTheory.Abelian.LeftResolution.chainComplex, CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.Abelian.LeftResolution.chainComplexFunctor, CategoryTheory.Abelian.LeftResolution.chainComplexXIso, CategoryTheory.ProjectiveResolution.complex, CategoryTheory.Abelian.LeftResolution.exactAt_map_chainComplex_succ, CategoryTheory.Abelian.LeftResolution.map_chainComplex_d_1_0_assoc, CategoryTheory.ProjectiveResolution.ofComplex_d_1_0",
+   "results": "CategoryTheory.Abelian.LeftResolution.chainComplex; CategoryTheory.ProjectiveResolution.ofComplex; CategoryTheory.Abelian.LeftResolution.chainComplexXIso; CategoryTheory.ProjectiveResolution; CategoryTheory.ProjectiveResolution.complex; CategoryTheory.ProjectiveResolution.ofComplex_d_1_0; CategoryTheory.Abelian.LeftResolution.chainComplexMap; CategoryTheory.InjectiveResolution.ofCocomplex; ",
    "date": "2026-10-21",
-   "verdict": "no match: generic alternating complexes, projective resolution infrastructure, or smoothness results do not give this specified augmented rank-one K-flat resolution on a ringed site"
+   "verdict": "no match: alternating complexes and generic projective resolutions do not supply the specified augmented periodic K-flat resolution on a ringed site"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-square-zero-periodic-tensor",
@@ -74,5 +156,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-exact-scalar-periodic-resolution",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded square-zero and chain-map equations, sheaf-subobject exactness in every negative degree, cokernel exactness and the induced cohomology map in degree zero, unit/zero flatness by explicit tensor maps, and the one-point free basis. Reused the existing ringed-site bounded-above flat K-flat lemma; no new nodes. Searched live project and Mathlib; no exact attachment or leaf.",
+  "blueprint": "Realizes the infinite periodic multiplication resolution in the paragraph The examples of det-def-localizing-closure-ctf-equals-bc, preserving its route and generalizing the scalar to the exact square-zero hypothesis already in this item.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic bounded-above flat-complex criterion on any ringed site, used only after the periodic resolution and term flatness have been proved; the localizing-closure unit has no replacement for this K-flatness tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-e46aef486",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-e46aef486 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement and stmt_deps are unchanged from base, and live and side-live are still unsplit, so it is not superseded. There is no re-split note for this item: the parent's note created it as a statement-only node, so an ordinary one-level split applies. Step 1: mu_t is O-linear by restriction compatibility and commutativity; mu_t^2=mu_{t^2}=0; the chain-map square in degree -1 is pi mu_t=0. Steps 2-3: ker=im in the abelian Mod(O) gives H^i=0 for i<0, and H^0=O/im mu_t=coker=E with H^0(eps) the canonical iso, so eps is a quasi-iso. This matches def-pc-quasi-iso-modules (same ker/im formula). Step 4: F otimes_p O is isomorphic to F naturally as presheaves, F is already a sheaf so sheafification changes nothing; tensoring with 0 gives 0; so O and 0 are flat per def-pc-flat-sheaf-modules. Elementary is acceptable. Step 5: lem-pc-bounded-above-flat-kflat-site holds for any ringed site (Stacks sites-cohomology.tex:3120, tag 06YQ); I accept the declared tool use. Step 6: one-point site, image tR, free basis 1. Small cases: Z/4 with t=2, k[e]/e^2, and t=0 (which forces O=0) all work; Z/8 with t=4 shows the ker=im hypothesis is needed. Blueprint source: main-20261015 ctf-equals-bc proof, 'The examples' line 37, the Z/l^2 periodic resolution. No SGA. Duplicate search over periodic/square-zero nodes found only the parent, sibling and unrelated cyclic-group nodes; none restates this item. Maintainer note: existing node lem-pc-bounded-above-flat-kflat-site carries the stale Stacks tag 06YS; the correct tag is 06YQ."
  }
 }
