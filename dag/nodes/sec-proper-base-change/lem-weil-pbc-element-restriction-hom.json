@@ -12,43 +12,63 @@
  ],
  "proof": [
   {
-   "text": "Use the already proved presentationElementRestriction_additive, _exact and _kInjective API theorems for actual element restriction. Its sectionwise formula sends the regular module to itself with identity unit comparison. Continuity and relocalization are also already proved in the same data module; the unfinished content begins with the derived-Hom comparison.",
-   "uses": [
-    "def-weil-pbc-ringed-presentation-comparison-data"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "At (U,a) the further slice of the element site is C/U: the section on V→U is forced by restriction of a. Therefore sectionwise sheaf Hom commutes with restriction. Products commute as well, so the Hom complex and its signed differential commute with restriction. Compute derived Hom using a K-injective target and its restricted K-injective target. The representing comparisons are natural in both arguments.",
+   "text": "Construct sectionwise internal Hom restriction by precomposition with the projection on slices. Its inverse lifts an arrow V to U to the element obtained by restricting the chosen section. The inverse laws follow from naturality along identity-underlying arrows, and the maps are linear and natural in both modules. Use the product limit characterization of each Hom-complex degree to construct a degreewise isomorphism. The projection formula for the differential and for pre/postcomposition proves compatibility and naturality.",
    "uses": [
     "def-pur-sheaf-hom",
     "def-pur-hom-complex",
-    "def-pur-derived-internal-hom"
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": false
   },
   {
-   "text": "For B→A, repeat the closed restriction calculation on the element site of A, obtaining the further-restriction core and its identity regular-unit comparison. Relocalization and element-map continuity are supplied by the proved data API. Over h_U#, the fibre/extension equivalence identifies localized sheaves with element-site sheaves. Transport module operations through its fibres; the restricted ring is R|U and ordinary restriction is the same functor under this equivalence. The preceding Hom calculation gives its forward closed comparison; the parent derives the reverse formally.",
+   "text": "Use the proved exactness and K-injective-preservation API for element restriction. Compute derived Hom after the canonical K-injective replacement in the second argument. Hom into a K-injective target inverts the replacement comparison. Restriction of the Hom complex thus compares both derived functors after precomposition with the product localization. Fully faithful whiskering by that localization descends the natural isomorphism.",
+   "uses": [
+    "def-weil-pbc-ringed-presentation-comparison-data",
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined-universes",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For b:B to A take the fibre sheaf of b on the element site of A. Flattening its element site to the element site of B is fully faithful and essentially surjective. The lifted-cover topology formulas identify their covering sieves. Apply the ringed-equivalence module-Hom theorem to this site equivalence and its identity restricted ring map. The fibre condition gives a natural identity-underlying isomorphism between the two base projections. Transporting module pushforward along this isomorphism identifies composition with the module equivalence with actual further restriction. Transport exactness, sequential colimits, K-injectivity and derived Hom through this isomorphism, choosing the actual further restriction unit to be the identity.",
+   "uses": [
+    "lem-weil-pbc-element-site-descent",
+    "lem-weil-pbc-ringed-equivalence-module-hom",
+    "def-weil-pbc-ringed-presentation-comparison-data",
+    "lem-weil-pbc-continuous-ringed-topos-module-direct-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For U use the functor from C/U to the element site of the sheafified representable that sends an arrow to its sheafification section. The existing equivalence with the slice over this sheaf and the element-site fibre equivalence identify its restriction on sheaves with an equivalence. Apply the ringed-equivalence module-Hom theorem to its identity restricted ring map. Its module inverse is the sectionwise restriction, so the equivalence counit identifies overFunctor followed by its module equivalence with actual element restriction.",
    "uses": [
     "lem-weil-pbc-localized-sheaves-over-representable",
-    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
-    "def-weil-pbc-ringed-presentation-comparison-data"
+    "lem-weil-pbc-element-site-descent",
+    "lem-weil-pbc-ringed-equivalence-module-hom"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-ringed-presentation-comparison-data",
   "def-pur-sheaf-hom",
   "def-pur-hom-complex",
+  "lem-sc-hom-complex-projections",
+  "def-weil-pbc-ringed-presentation-comparison-data",
   "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined-universes",
+  "lem-weil-pbc-element-site-descent",
+  "lem-weil-pbc-ringed-equivalence-module-hom",
   "lem-weil-pbc-localized-sheaves-over-representable",
-  "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-continuous-ringed-topos-module-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "E2",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08FI and 08JB; sites-modules.tex Tags 04IE and 04J4; sites.tex Tag 00Y1; explicit comparison argument of the original nine-step presentation-transport proof"
+  "place": "Tags 08FI and 08JB; sites-modules.tex Tags 04IE and 04J4; sites.tex Tags 0791 and 00Y1; sectionwise slice and canonical K-injective comparison"
  },
  "mathlib_searches": [
   {
@@ -123,14 +143,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-1ea02",
-  "group": "Z5",
+  "reviewer": "COMPILER",
+  "group": "E2",
   "result": "pass",
-  "landing": "20261020T221408-L-4183112",
+  "landing": "20261021T120342-L-3819623",
   "kind": "interface",
-  "note": "independent cc review: the 16 moved declarations in RingedPresentationData against the published item module (byte-identical, re-exported); the 4 new sorry statements against their nodes and the published structure fields; the item assembly against node lem-weil-pbc-ringed-presentation-transport; importer RingedPushforwardCompletion compiled against the delivery"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
 }
