@@ -21475,3 +21475,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q91/lem-weil-point-automorphism-restriction-natural (reviewer PASS; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q09/lem-sf-completed-coefficient-free-resolution (reviewer PASS; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q65/lem-a1-principal-koszul-strict-replacement (reviewer FIX; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q03/lem-weil-pbc-strict-quotient-scalar-balancing (reviewer FIX; first push; new nodes: 0)
