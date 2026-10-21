@@ -17,16 +17,6 @@ public import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 public import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
 public import Sheaf.Paper.ExactProductFunctorStrictLimit
 public import Sheaf.Paper.PbcQbarCompletedPullback
-import Sheaf.SixFunctors.OpenTensorNormalization
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenExtensionProducts
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Mathlib.CategoryTheory.Localization.Predicate
-import Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.Paper.CompletedRlimFunctor
 
 /-!
 # The actual completed open exchange and its strict constant-coefficient mate
@@ -38,8 +28,9 @@ lem-cbc-completed-extension-zero-comparison.proof.md, finite exchange and final 
 
 The endpoint comparisons reuse the published scalar, strict quotient, and normalized
 inverse-limit comparisons. The actual strict exchange is constructed before evaluation.
-Only definitions from CompleteProetaleStrictTowerRealization are used; its compact-support
-realization theorem is not used in this module.
+The endpoint constructions and their naturality properties from
+CompleteProetaleStrictTowerRealization are used; its compact-support realization theorem
+is not used in this module.
 -/
 
 @[expose] public noncomputable section
@@ -234,6 +225,76 @@ theorem completedOpenStrictMateIdentification [QuasiCompact j]
           (cbcFiniteExchange d sq n).hom.app ((cbcFiniteReduction d U n).obj K.obj)) := by
   sorry
 
+private def reductionOpenNatIso :
+    completedReductionTower U d ⋙ cbcRealizationJ d j ≅
+      cbcDerivedOpenShriek d j inferInstance ⋙ completedReductionTower T d :=
+  NatIso.ofComponents (fun K ↦ (cbcRealizationReduction d j K).symm)
+    (fun f ↦ (cbcRealizationReductionInv_properties d j).2 _ _ f)
+
+private def quotientOpenNatIso :
+    cbcDerivedOpenShriek d j inferInstance ⋙ completedReductionTower T d ⋙
+        exchangeTowerRes d T ≅
+      cbcOpenMateM d (U := U) ⋙ ProEtale.StrictTower.J A j :=
+  Functor.isoWhiskerRight (reductionOpenNatIso d (j := j)).symm (exchangeTowerRes d T) ≪≫
+    Functor.isoWhiskerLeft (completedReductionTower U d) (cbcRealizationTowerScalarOpen d j)
+
+private def pullLimitNatIso {S V : Scheme.{u}} (f : S ⟶ V) :
+    d.completedPull f ⋙ (cbcRealizationRes d S).mapDerivedCategory ≅
+      completedReductionTower V d ⋙ exchangeTowerRes d V ⋙
+        ProEtale.StrictTower.G A f ⋙ completedRlim S (exchangeConstantRing S A) :=
+  Functor.isoWhiskerLeft (completedReductionTower V d ⋙ d.towerPull f)
+      (cbcRealizationResLimit d S) ≪≫
+    Functor.isoWhiskerLeft (completedReductionTower V d)
+      (Functor.isoWhiskerRight (exchangeResPull d f)
+        (completedRlim S (exchangeConstantRing S A)))
+
+private def omegaNatIso :
+    cbcOpenMateSource d (j := j) (g := g) ≅
+      cbcOpenMateTarget d (j' := j') (v := v) :=
+  Functor.isoWhiskerRight (reductionOpenNatIso d (j := j)).symm
+      (completedTowerPullback g d) ≪≫ cbcReductionStrictExchange d sq
+
+private def sourceNatIso :
+    cbcOpenMateSource d (j := j) (g := g) ⋙ exchangeTowerRes d T' ≅
+      cbcOpenMateN d (j := j) (g := g) :=
+  Functor.isoWhiskerLeft (cbcDerivedOpenShriek d j inferInstance ⋙ completedReductionTower T d)
+      (Functor.isoWhiskerRight (cbcDatumTowerTransport d g) (exchangeTowerRes d T')) ≪≫
+    Functor.isoWhiskerLeft
+      (cbcDerivedOpenShriek d j inferInstance ⋙ completedReductionTower T d)
+      (exchangeResPull d g) ≪≫
+    Functor.isoWhiskerRight (quotientOpenNatIso d (j := j)) (ProEtale.StrictTower.G A g)
+
+private def targetNatIso :
+    cbcOpenMateTarget d (j' := j') (v := v) ⋙ exchangeTowerRes d T' ≅
+      cbcOpenMateN' d (j' := j') (v := v) :=
+  Functor.isoWhiskerLeft (completedReductionTower U d)
+      (Functor.isoWhiskerRight
+        (Functor.isoWhiskerRight (cbcDatumTowerTransport d v)
+        (cbcStrictOpen d j' inferInstance)) (exchangeTowerRes d T')) ≪≫
+    Functor.isoWhiskerLeft (completedReductionTower U d ⋙ d.towerPull v)
+      (cbcRealizationTowerScalarOpen d j') ≪≫
+    Functor.isoWhiskerLeft (completedReductionTower U d)
+      (Functor.isoWhiskerRight (exchangeResPull d v) (ProEtale.StrictTower.J A j'))
+
+private def completedSourceNatIso :
+    cbcDerivedOpenShriek d j inferInstance ⋙ d.completedPull g ⋙
+        (cbcRealizationRes d T').mapDerivedCategory ≅
+      cbcOpenMateN d (j := j) (g := g) ⋙
+        completedRlim T' (exchangeConstantRing T' A) :=
+  Functor.isoWhiskerLeft (cbcDerivedOpenShriek d j inferInstance) (pullLimitNatIso d g) ≪≫
+    Functor.isoWhiskerRight (quotientOpenNatIso d (j := j))
+      (ProEtale.StrictTower.G A g ⋙ completedRlim T' (exchangeConstantRing T' A))
+
+private def completedTargetNatIso :
+    d.completedPull v ⋙ cbcDerivedOpenShriek d j' inferInstance ⋙
+        (cbcRealizationRes d T').mapDerivedCategory ≅
+      cbcOpenMateM d (U := U) ⋙ ProEtale.StrictTower.G A v ⋙
+        completedRlim U' (exchangeConstantRing U' A) ⋙
+          (ProEtale.StrictTower.moduleJ A j').mapDerivedCategory :=
+  Functor.isoWhiskerLeft (d.completedPull v) (cbcRealizationDerivedScalarOpen d j') ≪≫
+    Functor.isoWhiskerRight (pullLimitNatIso d v)
+      (ProEtale.StrictTower.moduleJ A j').mapDerivedCategory
+
 /-- Naturality of the specified actual strict exchange and its strict and completed
 endpoint comparisons, on the full category of the complete inputs in the statement.
 Source: Stacks 03DI, natural Hom adjunction, and blueprint ordered limit
@@ -278,6 +339,11 @@ theorem completedOpenStrictMateIdentification_naturality [QuasiCompact j]
         (ProEtale.StrictTower.moduleJ A j').mapDerivedCategory.map
           ((completedRlim U' (exchangeConstantRing U' A)).map
             ((ProEtale.StrictTower.G A v).map ((cbcOpenMateM d (U := U)).map f.hom))) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · exact (omegaNatIso d sq).hom.naturality f.hom
+  · exact (sourceNatIso d (j := j) (g := g)).hom.naturality f.hom
+  · exact (targetNatIso d (j' := j') (v := v)).hom.naturality f.hom
+  · exact (completedSourceNatIso d (j := j) (g := g)).hom.naturality f.hom
+  · exact (completedTargetNatIso d (j' := j') (v := v)).hom.naturality f.hom
 
 end AlgebraicGeometry.Scheme
