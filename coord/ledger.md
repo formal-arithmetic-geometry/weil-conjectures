@@ -23516,3 +23516,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T19:35:16Z L: superseded stage-1 delivery NJ/lem-trf-point-transport-strict-quotient at ba13deeec69b1ed2321625121af9e4613b0a9cb1; current completion retained; packet archived at refs/superseded/NJ/lem-trf-point-transport-strict-quotient/ba13deeec69b1ed2321625121af9e4613b0a9cb1; stale return retired.
 - 19:36 L: merged deliver/NU/lem-sfb-free-representable-derived-functions-model (reviewer PASS; first push; new nodes: 0)
 - 19:36 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 19:36 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
