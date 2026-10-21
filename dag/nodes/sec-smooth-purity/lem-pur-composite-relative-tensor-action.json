@@ -11,9 +11,100 @@
   "def-sfb-monoidal-category",
   "def-sfb-strong-monoidal-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write composition right to left as in [def-sfb-monoidal-category]. For $a:M\\to M'$ and $b:N\\to N'$, the two given naturality equations and functoriality give\n$$\\begin{aligned}\nH(a\\otimes QP(b))\\tau_{M,N}\n&=R(\\delta_{M',PN'})R(J(a)\\otimes P(b))\\pi_{JM,N}\\\\\n&=R(\\delta_{M',PN'})\\pi_{JM',N'}(H(a)\\otimes b)\n=\\tau_{M',N'}(H(a)\\otimes b).\n\\end{aligned}$$\nThe first equality uses naturality of $\\delta$ at $(a,P(b))$ inside $R$; the second uses naturality of $\\pi$ at $(J(a),b)$. This proves naturality of $\\tau$ without an invertibility assumption.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category) and 0FFL (definition-functor-monoidal-categories); agent-written calculation from the displayed hypotheses; calculation Step 1"
+   }
+  },
+  {
+   "text": "Fix $M,N,T$ and put $A=JM$, $X=PN$, $Y=PT$, $V=P(N\\otimes T)$, $u=\\mu^P_{N,T}:V\\to X\\otimes Y$, $q=\\mu^Q_{X,Y}$ and $M_1=M\\otimes QX$. These inverse comparisons have the directions specified in [def-sfb-strong-monoidal-functor]. Introduce the actual morphisms\n$$b_A=(\\alpha^{\\mathcal D}_{A,X,Y})^{-1}(1_A\\otimes u):A\\otimes V\\to(A\\otimes X)\\otimes Y,$$\n$$c=(\\alpha^{\\mathcal C}_{M,QX,QY})^{-1}(1_M\\otimes q):M\\otimes Q(X\\otimes Y)\\to M_1\\otimes QY,$$\n$$b_M=c(1_M\\otimes Q(u)):M\\otimes QV\\to M_1\\otimes QY.$$\nBifunctoriality of tensor shows that $b_M=(\\alpha^{\\mathcal C}_{M,SN,ST})^{-1}(1_M\\otimes\\mu^S_{N,T})$, since the prescribed $\\mu^S$ is $qQ(u)$. No implicit identification of parenthesizations is used here.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category) and 0FFL (definition-functor-monoidal-categories); agent-written calculation from the displayed hypotheses; calculation Step 2"
+   }
+  },
+  {
+   "text": "Set $W=\\tau_{M_1,T}(\\tau_{M,N}\\otimes1_T)$. Expand both occurrences of $\\tau$. Naturality of $\\pi$ in its first argument, applied to the arrow $\\delta_{M,X}:A\\otimes X\\to JM_1$, gives\n$$\\pi_{JM_1,T}(R(\\delta_{M,X})\\otimes1_T)=R(\\delta_{M,X}\\otimes1_Y)\\pi_{A\\otimes X,T}.$$\nUsing the tensor bifunctor law of [def-sfb-monoidal-category] and the composition law of $R$, obtain\n$$W=R\\bigl(\\delta_{M_1,Y}(\\delta_{M,X}\\otimes1_Y)\\bigr)\\pi_{A\\otimes X,T}(\\pi_{A,N}\\otimes1_T).$$\nThis is precisely the additional explicit equality in the statement, with $N_1=N$, $N_2=T$; both sides land in $H(M_1\\otimes QY)$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category) and 0FFL (definition-functor-monoidal-categories); agent-written calculation from the displayed hypotheses; calculation Step 3"
+   }
+  },
+  {
+   "text": "The assumed action identity for $(R,P,\\pi)$, evaluated at $(A,N,T)$, reads exactly\n$$\\pi_{A\\otimes X,T}(\\pi_{A,N}\\otimes1_T)=R(b_A)\\pi_{A,N\\otimes T}\\alpha^{\\mathcal E}_{RA,N,T}.$$\nSubstituting this equality into Step 3 and using functoriality gives\n$$W=R\\bigl(\\delta_{M_1,Y}(\\delta_{M,X}\\otimes1_Y)b_A\\bigr)\\pi_{A,N\\otimes T}\\alpha^{\\mathcal E}_{HM,N,T}.$$\nHere $RA=HM$ by the definitions of $A,H$; the source remains $(HM\\otimes N)\\otimes T$.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category) and 0FFL (definition-functor-monoidal-categories); agent-written calculation from the displayed hypotheses; calculation Step 4"
+   }
+  },
+  {
+   "text": "The assumed action identity for $(J,Q,\\delta)$, evaluated at $(M,X,Y)$, is\n$$\\delta_{M_1,Y}(\\delta_{M,X}\\otimes1_Y)=J(c)\\delta_{M,X\\otimes Y}\\alpha^{\\mathcal D}_{A,X,Y}.$$\nCompose on the right with $b_A$ of Step 2. The adjacent associator and its inverse cancel, giving the completely typed equality of maps $A\\otimes V\\to J(M_1\\otimes QY)$:\n$$\\delta_{M_1,Y}(\\delta_{M,X}\\otimes1_Y)b_A=J(c)\\delta_{M,X\\otimes Y}(1_A\\otimes u).$$\nThis uses just the two-sided inverse law for the associator in [def-sfb-monoidal-category].",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category) and 0FFL (definition-functor-monoidal-categories); agent-written calculation from the displayed hypotheses; calculation Step 5"
+   }
+  },
+  {
+   "text": "Naturality of $\\delta$ in its second variable, applied to the arrow $u:V\\to X\\otimes Y$ in $\\mathcal D$, gives\n$$\\delta_{M,X\\otimes Y}(1_A\\otimes u)=J(1_M\\otimes Q(u))\\delta_{M,V}.$$\nSubstitution into Step 5 and the composition law of $J$ give\n$$\\delta_{M_1,Y}(\\delta_{M,X}\\otimes1_Y)b_A=J\\bigl(c(1_M\\otimes Q(u))\\bigr)\\delta_{M,V}=J(b_M)\\delta_{M,V}.$$\nThus the comparison with $P(N\\otimes T)$ is accounted for by naturality along the specified $u$, rather than by an unmentioned coherence or an inverse of an action map.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category) and 0FFL (definition-functor-monoidal-categories); agent-written calculation from the displayed hypotheses; calculation Step 6"
+   }
+  },
+  {
+   "text": "Insert Step 6 into Step 4. Functoriality and the definitions of $H,\\tau$ yield\n$$\\begin{aligned}\nW&=H(b_M)R(\\delta_{M,V})\\pi_{A,N\\otimes T}\\alpha^{\\mathcal E}_{HM,N,T}\\\\\n&=H\\bigl((\\alpha^{\\mathcal C}_{M,SN,ST})^{-1}(1_M\\otimes\\mu^S_{N,T})\\bigr)\\tau_{M,N\\otimes T}\\alpha^{\\mathcal E}_{HM,N,T}.\n\\end{aligned}$$\nTogether with the definition of $W$, this is the required tensor-action identity. Naturality was proved in Step 1 and the explicit factorization in Step 3. Each substitution used only a given naturality or action equation, a functor law, or a specified associator inverse; no adjunction, symmetry or unit law for $\\pi,\\delta$ was used.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0FFK (definition-monoidal-category) and 0FFL (definition-functor-monoidal-categories); agent-written calculation from the displayed hypotheses; calculation Step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 0FFK and 0FFL: tensor bifunctor, natural associators and inverse comparisons; explicit elementary pasting calculation of the hypotheses, motivated by sites-cohomology Tags 0B56 and 0GL1. These tags do not state the abstract composite lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +140,52 @@
    "results": "OK 8 hits: CategoryTheory.Functor.Monoidal.map_tensor_assoc, CategoryTheory.NatTrans.IsMonoidal.tensor_assoc, CategoryTheory.NatTrans.tensor_naturality_assoc, CategoryTheory.MonoidalCategory.MonoidalRightAction.actionHom_comp_assoc, CategoryTheory.BasedFunctor.comp_assoc, CategoryTheory.NatTrans.IsMonoidal.comp, CategoryTheory.Functor.Monoidal.μ_comp_assoc, CategoryTheory.NatTrans.whiskerRight_app_tensor_app_assoc",
    "date": "2026-10-21",
    "verdict": "no match: Action/LinearFunctor.lean defines lax lineators and assumes their associativity (lines 210-231), but does not construct this mixed-base composite. Monoidal functor composition and scalar tensor associators do not state it; the maps here are arbitrary relative actions without unit equations."
+  },
+  {
+   "tool": "grep",
+   "query": "LaxRightLinear|OplaxRightLinear|def.*comp|instance.*comp",
+   "results": "{\"t\": \"2026-10-21T08:32:05Z\", \"tool\": \"grep\", \"query\": \"LaxRightLinear|OplaxRightLinear|def.*comp|instance.*comp\", \"sub\": \"CategoryTheory/Action\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Action/Continuous.lean\", \"Mathlib/CategoryTheory/Action/Continuous.lean\", \"Mathlib/CategoryTheory/Action/Basic.lean\", \"Mathlib/CategoryTheory/Action/Basic.lean\", \"Mathlib/CategoryTheory/Action/Basic.lean\", \"Mathlib/CategoryTheory/Action/Basic.lean\", \"Mathlib/CategoryTheory/Action/Basic.lean\"], \"digest\": \"3a018649c84a9806\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: LinearFunctor.lean:210-231 assumes the right-lineator associativity and unit equations; no mixed-base composite is constructed there. The item assumes no unit equation. The monoidal-functor composition instance is an ingredient, not the asserted action transformation or its explicit factorization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LaxRightLinear\"",
+   "results": "{\"t\": \"2026-10-21T08:32:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"LaxRightLinear\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.LaxRightLinear\", \"CategoryTheory.Functor.OplaxRightLinear\", \"CategoryTheory.Functor.RightLinear.toLaxRightLinear\", \"CategoryTheory.Functor.RightLinear.toOplaxRightLinear\", \"CategoryTheory.Functor.LaxRightLinear.μᵣ\", \"CategoryTheory.Functor.OplaxRightLinear.δᵣ\", \"CategoryTheory.Functor.LaxRightLinear.μᵣ_unitality\", \"CategoryTheory.Functor.LaxRightLinear.μᵣ_unitality_inv\"], \"digest\": \"545c431349c6a0e2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: LinearFunctor.lean:210-231 assumes the right-lineator associativity and unit equations; no mixed-base composite is constructed there. The item assumes no unit equation. The monoidal-functor composition instance is an ingredient, not the asserted action transformation or its explicit factorization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Composition of two functors with associative relative tensor action maps is associative over the composite monoidal functor",
+   "results": "{\"t\": \"2026-10-21T08:32:06Z\", \"tool\": \"leansearch\", \"query\": \"Composition of two functors with associative relative tensor action maps is associative over the composite monoidal functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.Monoidal.map_tensor_assoc\", \"CategoryTheory.MonoidalCategory.MonoidalRightAction.actionHom_comp_assoc\", \"CategoryTheory.NatTrans.IsMonoidal.instHomFunctorAssociator\", \"CategoryTheory.associativity_app_assoc\", \"CategoryTheory.Functor.Monoidal.μ_comp_assoc\", \"CategoryTheory.Functor.Monoidal.instComp\", \"CategoryTheory.MonoidalCategory.leftAssocTensor\", \"CategoryTheory.Monad.algebraFunctorOfMonadHomComp\"], \"digest\": \"be02ee50185250ea\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: LinearFunctor.lean:210-231 assumes the right-lineator associativity and unit equations; no mixed-base composite is constructed there. The item assumes no unit equation. The monoidal-functor composition instance is an ingredient, not the asserted action transformation or its explicit factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of relative lax right tensor actions with two strong monoidal base functors preserves the associativity equation without a unit axiom",
+   "results": "{\"t\": \"2026-10-21T08:32:08Z\", \"tool\": \"leanfinder\", \"query\": \"Composition of relative lax right tensor actions with two strong monoidal base functors preserves the associativity equation without a unit axiom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.LaxRightLinear.μᵣ_associativity\", \"CategoryTheory.Functor.LaxRightLinear.μᵣ_associativity_assoc\", \"CategoryTheory.Functor.LaxRightLinear.μᵣ\", \"CategoryTheory.Functor.LaxRightLinear.μᵣ_associativity_inv_assoc\", \"CategoryTheory.Functor.LaxRightLinear.μᵣ_associativity_inv\", \"CategoryTheory.Functor.RightLinear.toLaxRightLinear\", \"CategoryTheory.Functor.RightLinear.δᵣ_comp_μᵣ_assoc\", \"CategoryTheory.Functor.RightLinear.μᵣ_comp_δᵣ_assoc\"], \"digest\": \"fe82ea154d9fe8b9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: LinearFunctor.lean:210-231 assumes the right-lineator associativity and unit equations; no mixed-base composite is constructed there. The item assumes no unit equation. The monoidal-functor composition instance is an ingredient, not the asserted action transformation or its explicit factorization."
+  },
+  {
+   "tool": "grep",
+   "query": "LaxRightLinear|OplaxRightLinear|def.*comp|instance.*comp",
+   "results": "{\"t\": \"2026-10-21T08:32:30Z\", \"tool\": \"grep\", \"query\": \"LaxRightLinear|OplaxRightLinear|def.*comp|instance.*comp\", \"sub\": \"CategoryTheory/Monoidal/Action\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/LinearFunctor.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Action/Basic.lean\"], \"digest\": \"8667d1a63cad2c3f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: LinearFunctor.lean:210-231 assumes the right-lineator associativity and unit equations; no mixed-base composite is constructed there. The item assumes no unit equation. The monoidal-functor composition instance is an ingredient, not the asserted action transformation or its explicit factorization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite projection transformation R J M tensor N to R J of M tensor Q P N satisfies tensor associativity by naturality of the projection maps",
+   "results": "{\"t\": \"2026-10-21T08:32:33Z\", \"tool\": \"leanfinder\", \"query\": \"The composite projection transformation R J M tensor N to R J of M tensor Q P N satisfies tensor associativity by naturality of the projection maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.tensorTensorTensorAssoc\", \"TensorProduct.AlgebraTensorModule.assoc\", \"TensorProduct.tensorTensorTensorComm_comp_map\", \"LinearMap.rTensor_tensor\", \"TensorProduct.map_map_comp_assoc_symm_eq\", \"LinearMap.lTensor_tensor\", \"TensorProduct.map_map_assoc\", \"LinearMap.lTensor_rTensor_comp_assoc\"], \"digest\": \"f9251ab479ef80d9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: LinearFunctor.lean:210-231 assumes the right-lineator associativity and unit equations; no mixed-base composite is constructed there. The item assumes no unit equation. The monoidal-functor composition instance is an ingredient, not the asserted action transformation or its explicit factorization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-projection-action-laws",
@@ -64,12 +197,27 @@
  "blueprint": {
   "from": {
    "node": "lem-pur-projection-purity-agreement",
-   "place": "Model-agreement proof: canonical reassociations of the package; fixed proper/open compactification tensor-action calculation in the expanded argument attributed to Step 6. Returned finite-projection-action-laws proof Step 8.",
+   "place": "Final paragraph of lem-pur-projection-purity-agreement.proof.md: “the two assemblies differ only by the canonical reassociations of the package”; abstract proper/open composite action calculation extracted through lem-pur-finite-projection-action-laws, whose historical expanded Step 8 supplied this item.",
    "via": [
     "lem-pur-finite-projection-action-laws"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-composite-relative-tensor-action",
+  "worker": "stage1",
+  "summary": "Wrote seven elementary, explicit naturality and action-equation calculations with all parenthesizations and comparison arrows displayed. Preserved the statement and metadata, searched the project and whole DAG/blueprint, and rechecked Mathlib through six logged searches. No exact project attachment or Mathlib match; no new nodes needed. Read each cited definition and tested identity, noninvertible and nontrivially associated examples.",
+  "blueprint": "Expands the canonical-reassociation sentence at the end of the current projection-purity-agreement blueprint proof into the abstract composite-action calculation used by finite-projection-action-laws Step 4. The historical expanded Step 8 is not a numbered step in the current snapshot. This is a below-unit formal calculation and does not change the diagonal/DNC route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-dcce8e67b",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-dcce8e67b (reviewer sub-agent of L); spot-checked: I read and re-derived all 7 steps, with the domains checked at each one. Step 1: naturality of τ follows from δ at (a,Pb) and π at (Ja,b). Step 2: b_M = α⁻¹(1⊗μ^S) because μ^S = qQ(u). Step 3: the explicit clause follows from naturality of π in its first variable along δ_{M,X}. Steps 4–5: these are direct instances of the two action hypotheses, and α^D cancels against the α⁻¹ inside b_A. Step 6: naturality of δ in its second variable along u gives J(b_M)δ_{M,V}. Step 7: substitution gives H(b_M)τ_{M,N⊗T}α^E, the required identity. Every step is a few substitutions, so elementary is justified (C2). The statement is correctly typed and assumes no invertibility, unit law or adjunction. It matches the only citer, lem-pur-finite-projection-action-laws Step 4 (R=Rp_*, P=Lp^*, J=j_!, Q=Lj^*, PF^c=R(δ)π, μ in the inverse direction). Cited nodes: def-sfb-monoidal-category and def-sfb-strong-monoidal-functor, both read; they give bifunctoriality, inverses and functor laws, which is all the steps use (C3/C4). Sources: tags/tags confirms 0FFK, 0FFL, 0B56 and 0GL1 against their labels (categories.tex:9170 and 9238; sites-cohomology.tex:13666 and 4578). The blueprint sentence about canonical reassociations is in main-20261015 lem-pur-projection-purity-agreement.proof.md around line 23. Small cases: identity functors, π=0, and a non-strict associator; all consistent. Not a duplicate: lem-pur-composite-left-projection-action is left-handed and needs unit equations that this item does not assume; lem-sfb-ringed-projection-tensor-composition is geometric. No repair note and not in the dropped lists. No new nodes, no SGA, no off-unit citations and no tool_uses. proof_deps equals the union of uses. No fixes."
  }
 }
