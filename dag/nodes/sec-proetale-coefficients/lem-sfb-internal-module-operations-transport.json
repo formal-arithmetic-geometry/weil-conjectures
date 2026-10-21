@@ -29,134 +29,125 @@
  ],
  "proof": [
   {
-   "text": "Fix $f:T'\\to T$ and abbreviate the two internal module categories by $\\mathcal I_T,\\mathcal I_{T'}$ and the sectionwise categories by $\\mathcal S_T,\\mathcal S_{T'}$. The equivalence $E_T$ leaves underlying abelian sheaves, section groups and restriction maps unchanged by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. In particular it sends an action $a:\\Lambda_T\\otimes M\\to M$ to $r\\cdot m=a(r\\otimes m)$ on each object of the site. Its action on morphisms is the same underlying sheaf map, so it preserves sums of morphisms and zero morphisms. The same holds for a quasi-inverse: internal action maps are reconstructed uniquely from these sectionwise bilinear maps using the sheafified tensor product [det-def-sfb-sheaf-tensor-structure]. Thus the equivalences and their quasi-inverses are additive.",
+   "text": "The equivalences $E_T$ leave sheaves and maps unchanged, hence preserve sums of morphisms. Their quasi-inverses are additive too: apply the faithful additive $E_T$ to an asserted sum identity and use the natural counit to identify its two sides.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "det-def-sfb-sheaf-tensor-structure"
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D6 (definition-pushforward), 03D7 (lemma-adjoint-pullback-pushforward-modules); the internal comparison is the agent argument here."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/def-sfb-finite-lower-star-lax-monoidal.md",
+    "place": "Canonical lax tensor maps of continuous pro-étale direct image; component evaluation made explicit in WeilConjectures/CategoryTheory/Sites/PushforwardMonoidal.lean, lines 94–123."
    }
   },
   {
-   "text": "Write $V'=V\\times_TT'$ for a pro-étale object $V\\to T$. By [def-sfb-finite-lower-star] both direct images have underlying sections $N(V')$. For the canonical lax tensor structure of [def-sfb-finite-lower-star-lax-monoidal], its map on pure section tensors is $x\\otimes y\\mapsto x\\otimes y$ evaluated on $V'$: indeed this bilinear presheaf map followed by the tensor-sheafification unit induces the structure map, uniquely by [det-def-sfb-sheaf-tensor-structure]. Consequently the action formula of [def-sfb-module-lower-star] sends $(r,n)$ to $\\eta_f(r)\\cdot n$ in $N(V')$. By [sk-def-sfb-coefficient-morphisms], $\\eta_f=f_*\\alpha_f\\circ\\eta^{\\rm Ab}_f$, exactly the adjunct used for the sectionwise scalar restriction. Hence the identity of the underlying direct-image sheaf is a linear isomorphism\n$$r_f:E_T f_{*,\\rm int}\\xrightarrow{\\sim}f_{*,\\rm sec}E_{T'}.$$\nIt commutes with restrictions and with morphisms of $N$ because all three maps in the action formula do. This proves naturality, not just an objectwise identification.",
+   "text": "By [lem-sfb-pushforward-comp-monoidal] (for the symmetric coefficients $\\mathrm{Ab}$ its maps are the lax structure $\\mu$ used in [def-sfb-module-lower-star]), $\\mu_{F,G}(V)\\circ q_{f_*F,f_*G,V}=q_{F,G,V'}$, where $q$ is the tensor-sheafification unit on sections and $V'=V\\times_TT'$. With naturality of $q$ in its first argument, the action composite of [def-sfb-module-lower-star] sends $q(r\\otimes n)$, $r\\in\\Lambda_T(V)$, $n\\in N(V')$, to $a_{V'}q(\\eta_f(r)\\otimes n)$. The section action reconstructed by $E_T$ is therefore $(r,n)\\mapsto\\eta_f(r)n$. Since $\\eta_f=f_*\\alpha_f\\circ\\eta_f^{\\rm Ab}$ is the prescribed coefficient adjunct, the identity sheaf map is the natural linear comparison $r_f:E_Tf_{*,\\rm int}\\cong f_{*,\\rm sec}E_{T'}$.",
    "uses": [
-    "def-sfb-finite-lower-star",
-    "def-sfb-finite-lower-star-lax-monoidal",
-    "det-def-sfb-sheaf-tensor-structure",
+    "lem-sfb-pushforward-comp-monoidal",
     "def-sfb-module-lower-star",
-    "sk-def-sfb-coefficient-morphisms"
+    "sk-def-sfb-coefficient-morphisms",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D6 (definition-pushforward), 03D7 (lemma-adjoint-pullback-pushforward-modules); the internal comparison is the agent argument here."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/lem-sfb-pushforward-comp-monoidal.md",
+    "place": "Characterization of the canonical lax tensor map of a pro-étale pushforward by its composite with the sheafification maps; the pure-tensor action evaluation is agent-written."
    }
   },
   {
-   "text": "Conjugate the specified internal adjunction by $E_T,E_{T'}$, writing $A=E_{T'} f^*_{\\rm int}E_T^{-1}$ and $B=E_T f_{*,\\rm int}E_{T'}^{-1}$. Its Hom bijection is obtained from [def-sfb-module-upper-lower-adjunction] by the fully faithful Hom identifications of the equivalences. Put $L=f^*_{\\rm sec}$ and $R=f_{*,\\rm sec}$; the sectionwise adjunction $L\\dashv R$ is [lem-weil-pbc-ringed-topoi-module-adjunction], with the same coefficient map as in Step 2. Step 2 gives $r:B\\cong R$. Apply [lem-weil-pbc-conjugate-iso-unit-equation] to $A\\dashv B$, $L\\dashv R$, and $\\delta=r^{-1}$. It gives the unique natural isomorphism $c:A\\cong L$ satisfying\n$$B(c_M)\\eta^A_M=r^{-1}_{LM}\\eta^L_M.$$\nUndoing the conjugation gives $c_f:E_{T'}f^*_{\\rm int}\\cong f^*_{\\rm sec}E_T$. All Hom sets lie in the common containing universe from the stated site convention; no large-index colimit is used.",
+   "text": "For the specified internal and ringed-topos adjunctions take $c_f^{-1}$ to be the inverse mate of $r_f$. The inverse-mate lemma makes it invertible. The transpose lemma identifies their full Hom bijections; evaluating these bijections on identities identifies their units and counits. Mate bijectivity fixes this comparison uniquely.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
     "def-sfb-module-upper-lower-adjunction",
     "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "def-weil-pbc-adjunction-mate",
+    "lem-stage3-inverse-mate-equivalences",
+    "lem-pur-adjunction-mate-transpose",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints), adjunction Hom characterization and its unit/counit equations."
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; the cited general inverse-mate, transpose and composition lemmas supply the categorical arguments."
    }
   },
   {
-   "text": "The comparison in Step 3 is canonical relative to the specified adjunctions: it is the unique isomorphism with the displayed unit normalization. Here $A$ uses precisely the extension-of-scalars pullback of [def-sfb-module-upper-star] and the specified composite adjunction of [def-sfb-module-upper-lower-adjunction]; $L$ uses precisely the sheafified tensor-formula pullback and canonical Hom bijection stated in [lem-weil-pbc-ringed-topoi-module-adjunction]. Write these two natural Hom bijections as $\\Phi_A,\\Phi_L$. Naturality in the target and the unit equation of Step 3 give, for every $h:LM\\to N$,\n$$\\Phi_L(h)=r_N\\,\\Phi_A(hc_M).$$\nIndeed the right side is $r_N B(h)B(c_M)\\eta^A_M=R(h)r_{LM}r^{-1}_{LM}\\eta^L_M=R(h)\\eta^L_M$. Taking $h=\\mathrm{id}_{LM}$ recovers the unit equation. Taking $h=\\varepsilon^L_N\\circ L(r_N)$ and $M=BN$ gives\n$$\\varepsilon^A_N=\\varepsilon^L_N\\circ L(r_N)\\circ c_{BN},$$\nsince both sides transpose to $\\mathrm{id}_{BN}$. The formulas for transposition, units and counits are exactly [lem-weil-pbc-adjunction-of-natural-bijection]. Thus the actual Hom bijections, units and counits agree under $c,r$, rather than merely the isomorphism classes of the functors.",
-   "uses": [
-    "def-sfb-module-upper-star",
-    "def-sfb-module-upper-lower-adjunction",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D6 (definition-pushforward), 03D7 (lemma-adjoint-pullback-pushforward-modules); the internal comparison is the agent argument here."
-   }
-  },
-  {
-   "text": "For an open immersion $j:U\\hookrightarrow T$, [sk-def-sfb-module-lower-shriek] supplies the internal adjunction $j_{!,\\rm int}\\dashv j^*_{\\rm int}$; its underlying left functor is abelian extension by zero with the displayed linearized action. Conjugate this adjunction by $E_U,E_T$. Its right adjoint is identified with $j^*_{\\rm sec}$ by $c_j$ from Steps 3–4. The sectionwise $j_{!,\\rm sec}$ in the statement is equipped with its extension-by-zero adjunction to that same right adjoint. Apply [lem-weil-pbc-conjugate-iso-unit-equation] again, now to these two left adjoints of the identified restriction functor. This gives\n$$o_j:E_Tj_{!,\\rm int}\\xrightarrow{\\sim}j_{!,\\rm sec}E_U,$$\nuniquely normalized by the units. Its Hom characterization is exactly the one in Step 4 with $j_!$ in place of $f^*$ and $j^*$ in place of $f_*$. Evaluating on identity maps, using [lem-weil-pbc-adjunction-of-natural-bijection], identifies the counits as well. This argument uses the variable ring-sheaf adjunction in the statement; it does not apply a constant-finite-coefficient extension-by-zero lemma to $B_T$.",
+   "text": "Apply the same inverse-mate and transpose lemmas to $j_{!,\\rm int}\\dashv j^*_{\\rm int}$, the specified sectionwise open adjunction, and right comparison $c_j$. This gives $o_j:E_Tj_{!,\\rm int}\\cong j_{!,\\rm sec}E_U$, identifying the Hom bijections and therefore both units and counits.",
    "uses": [
     "sk-def-sfb-module-lower-shriek",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-stage3-inverse-mate-equivalences",
+    "lem-pur-adjunction-mate-transpose",
     "lem-weil-pbc-adjunction-of-natural-bijection"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/_section.md",
-    "place": "Linear extension by zero and Extension by zero clauses; comparison by the unit-normalized adjoint uniqueness argument of Step 3."
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; the cited general inverse-mate, transpose and composition lemmas supply the categorical arguments."
    }
   },
   {
-   "text": "For composable $T''\\xrightarrow fT'\\xrightarrow gT$, the isomorphism of direct images in [def-sfb-module-lower-star-comp] is the underlying sheaf composition isomorphism. Evaluating it on $V$ merely rebrackets $(V\\times_TT')\\times_{T'}T''\\cong V\\times_TT''$. Since $r_f,r_g,r_{gf}$ are identities on these section groups with the same scalar restrictions, their square with this composition isomorphism commutes. The specified pullback-composition isomorphism [def-sfb-module-upper-star-comp] is its conjugate under the composite adjunction. By [def-weil-pbc-adjunction-conjugate], this conjugation is a bijection characterized by the unit/counit formula. Steps 3–4 identify those units and counits. Thus both routes through the square comparing internal and sectionwise pullback compositions have the same conjugate, namely the just-compared direct-image composition, and are equal by injectivity of that bijection. The same reasoning compares the two composites attached to the equal scheme morphisms in a commutative square.",
+   "text": "The direct-image compositor and $r_f,r_g,r_{gf}$ are identity maps on the same rebracketed sections, so their composition square commutes. Apply the adjunction-evaluation composition lemma with evaluation functors $E_T$, right squares $r$, and left comparisons $c$ of Step 3. It identifies the pullback compositors, which are the specified conjugates of these direct-image compositors.",
    "uses": [
     "def-sfb-module-lower-star-comp",
     "def-sfb-module-upper-star-comp",
-    "def-weil-pbc-adjunction-conjugate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-module-pushforward-pullback/def-sfb-module-upper-star-comp.md",
-    "place": "Definition of the composition comparison as conjugate to direct-image composition."
-   }
-  },
-  {
-   "text": "Write the cartesian open square as $j':U'\\hookrightarrow T'$, $j:U\\hookrightarrow T$, $g:T'\\to T$, $g':U'\\to U$, with $gj'=jg'$. Let\n$$b:g'^*j^*\\xrightarrow{\\sim}j'^*g^*$$\nbe the comparison through pullback along that equal composite. In the convention of [def-weil-pbc-adjunction-mate], its inverse-transpose (left mate) is the following completely specified open-extension transformation:\n$$\\beta:j'_!g'^*\\xrightarrow{j'_!g'^*\\eta_j}j'_!g'^*j^*j_!\\xrightarrow{j'_!b j_!}j'_!j'^*g^*j_!\\xrightarrow{\\varepsilon_{j'}g^*j_!}g^*j_!.$$\nStep 6 identifies $b$; Step 5 identifies $\\eta_j,\\varepsilon_{j'}$; and Steps 3 and 5 identify all intervening functors. Applying the equivalences to this displayed composite therefore gives exactly the sectionwise composite with these same three factors. This proves equality of the canonical mate transformations. In the convention that writes the invertible open-extension comparison in the reverse direction, the comparison of inverses follows by composing the obtained equality with the two inverses. No pro-étale stalk-conservativity claim or independent base-change theorem is being used.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A7 (remark-base-change), adjunction definition of the exchange map; the left-mate formula is the inverse formula in def-weil-pbc-adjunction-mate."
-   }
-  },
-  {
-   "text": "The sectionwise category is abelian by [def-weil-sheaf-of-modules-category], since the sites have the stated size convention. For each $T$, apply [lem-galois-equivalence-preserves-limits] to $E_T$ and its quasi-inverse. Both preserve zero objects, kernels and cokernels. Their additivity was proved in Step 1, so both are exact: a sequence is exact at $M$ precisely when the canonical map from the image of the incoming arrow (the kernel of its cokernel) to the kernel of the outgoing arrow is an isomorphism. The equivalences preserve these objects and this map, and reflect its invertibility. Hence the functor comparisons of Steps 2–5 transport exact sequences and exactness of the operations. Finally Step 7 expresses the internal base-change map, after applying an equivalence, as the sectionwise map conjugated by natural isomorphisms. If the latter is invertible, that composite is invertible, and applying the quasi-inverse shows the internal map invertible. This includes empty opens, the identity open, zero modules, and the zero coefficient ring without any extra hypothesis.",
-   "uses": [
-    "lem-galois-equivalence-preserves-limits",
-    "def-weil-sheaf-of-modules-category"
+    "lem-pur-adjunction-evaluation-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0038 (lemma-adjoint-exact), equivalences preserve limits and colimits; kernel/cokernel exactness and the inverse-conjugation calculation are written out here."
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; the cited general inverse-mate, transpose and composition lemmas supply the categorical arguments."
+   }
+  },
+  {
+   "text": "In the open square write $b:g'^*j^*\\cong j'^*g^*$. Its left mate is\n$$\\beta=\\varepsilon_{j'}g^*j_!\\circ j'_!(b j_!)\\circ j'_!g'^*(\\eta_j).$$\nStep 5 identifies $b$ and Step 4 identifies the two adjunction factors. Mate pasting therefore identifies this composite with the sectionwise mate. Conjugation by the comparison isomorphisms and reflection by $E_{T'}$ transfer its invertibility.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; the cited general inverse-mate, transpose and composition lemmas supply the categorical arguments."
+   }
+  },
+  {
+   "text": "Closed sheaf tensor preserves colimits, so internal modules are abelian; sectionwise modules are abelian by the site-size convention. Apply the additive-equivalence lemma to $E_T$ and its additive inverse: both preserve exact sequences. Their unit/counit isomorphisms then reflect exactness. Substituting the functor comparisons above transports exactness of every operation.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-modobj-abelian",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-equivalence-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; the cited general inverse-mate, transpose and composition lemmas supply the categorical arguments."
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "det-def-sfb-sheaf-tensor-structure",
-  "def-sfb-finite-lower-star",
-  "def-sfb-finite-lower-star-lax-monoidal",
+  "lem-sfb-pushforward-comp-monoidal",
   "def-sfb-module-lower-star",
   "sk-def-sfb-coefficient-morphisms",
   "def-sfb-module-upper-lower-adjunction",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "def-sfb-module-upper-star",
+  "def-weil-pbc-adjunction-mate",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-pur-adjunction-mate-transpose",
   "lem-weil-pbc-adjunction-of-natural-bijection",
   "sk-def-sfb-module-lower-shriek",
   "def-sfb-module-lower-star-comp",
   "def-sfb-module-upper-star-comp",
-  "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-adjunction-mate",
-  "lem-galois-equivalence-preserves-limits",
-  "def-weil-sheaf-of-modules-category"
+  "lem-pur-adjunction-evaluation-composition",
+  "lem-weil-pbc-mate-pasting",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-modobj-abelian",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-equivalence-injective-resolutions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-nagata-density-normalization/det-nagata-density-normalization-sheaves.proof.md",
-  "place": "Steps 1–2: extracted internal/sectionwise identification, proved using the explicit ringed-topos adjunction and unit-normalized uniqueness; Stacks sites-modules.tex Tags 03D6, 03D7 and categories.tex Tag 0B65."
+  "place": "Short assembly of the lax-tensor section characterization, existing inverse-mate/transpose and evaluation-composition lemmas, mate pasting and exact additive equivalences. This refines the retained eight-step proof without changing its statement."
  },
  "mathlib_searches": [
   {
@@ -264,28 +255,58 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-internal-module-operations-transport",
   "worker": "stage1",
-  "summary": "Kept the full statement and coefficient category. Constructed the direct-image comparison by its scalar action, the pullback and open-extension comparisons by unit-normalized adjoint uniqueness, checked counits and pullback composition, and expanded the open-extension mate. All dependencies already exist; no new clause-restatement nodes. Exactness follows from additivity and the existing equivalence-preserves-limits leaf.",
-  "blueprint": "Realizes det-nagata-density-normalization-sheaves proof Step 1 (internal/sectionwise exact operations) and Step 2 (the same canonical open-extension base-change map), without replacing either unit step.",
+  "summary": "Repair of the 8258-character coarse proof as a seven-step assembly. Reuses the existing general inverse-mate, transpose, compositor, pasting and exact-equivalence statements; the section-action evaluation is a two-line step from the existing lem-sfb-pushforward-comp-monoidal characterization of the lax tensor map (reviewer FIX: the delivered new nodes lem-sfb-pushforward-tensor-section-evaluation (duplicate clause of that node), lem-sfb-pushforward-action-section-formula (few-line fact) and the uncited leftover lem-sfb-ringed-site-pushforward-compositor are dropped). Full statement unchanged.",
+  "blueprint": "Realizes det-nagata-density-normalization-sheaves proof Steps 1–2: identification of the exact internal operations and of the canonical open-extension base-change map. No unit route changes.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Generic ringed-topos Hom bijection identifying the sectionwise adjunction in Steps 3–4; the Nagata unit gives no such coefficient-category comparison."
+    "why": "The generic ringed-topos module adjunction identifies the specified sectionwise tensor-formula pullback. This is a categorical tool and does not replace a geometric step of the Nagata unit."
+   },
+   {
+    "node": "lem-stage3-inverse-mate-equivalences",
+    "why": "Generic invertibility of an inverse mate with equivalences on the two sides; applies to both the pullback and open-extension comparisons. This is a categorical tool and does not replace a geometric step of the Nagata unit."
+   },
+   {
+    "node": "lem-pur-adjunction-mate-transpose",
+    "why": "Generic formula identifies actual Hom transposes and hence the specified units/counits, not only functor isomorphism classes. This is a categorical tool and does not replace a geometric step of the Nagata unit."
+   },
+   {
+    "node": "lem-pur-adjunction-evaluation-composition",
+    "why": "Generic coherence of unit-normalized adjunction comparisons identifies pullback compositors once their right-adjoint square commutes. This is a categorical tool and does not replace a geometric step of the Nagata unit."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Generic abelianness of module objects when tensoring by the ring preserves finite colimits. This is a categorical tool and does not replace a geometric step of the Nagata unit."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "The closed sheaf tensor preserves colimits, as required for the module-object abelianness lemma. This is a categorical tool and does not replace a geometric step of the Nagata unit."
+   },
+   {
+    "node": "lem-sfb-pushforward-comp-monoidal",
+    "why": "Its statement characterizes the canonical lax tensor map of a pro-etale pushforward on sections via the sheafification maps, which Step 2 needs; no node of the Nagata unit states it. Categorical/sheaf-tensor tool, not a geometric step of the unit."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-stage3-inverse-mate-equivalences",
+  "lem-pur-adjunction-mate-transpose",
+  "lem-pur-adjunction-evaluation-composition",
+  "lem-sfb-modobj-abelian",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-pushforward-comp-monoidal"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q08-d7c293600",
-  "group": "Q08",
+  "reviewer": "NT-cc-Q27-57231e6e6",
+  "group": "Q27",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-d7c293600 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement (kept word for word except that the mate definition and the module pullback-composition definition are added to stmt_deps, both used by the last clause), all 8 steps, and every cited node's statement. The parent det-nagata-density-normalization-sheaves (blueprint main-20261015, proof Steps 1–2) and the other citer lem-sp-tower-compact-support-projection-formula use only what the item states. Coefficient categories: the statement keeps internal Mod_{Λ_T}(Sh(T_proét,Ab)) and sectionwise Mod(B_T) separate, joined by E_T; it never identifies the coefficient with a constant finite ring. The sectionwise functors match Stacks 03D6 (sites-modules.tex l.1146) and 03D7 (l.1197): pushforward restricts scalars along the adjunct of α_f, which Step 2 checks equals f_*α_f∘unit from sk-def-sfb-coefficient-morphisms. The base-change transformation j'_!g'^*→g^*j_! is the inverse-mate formula of def-weil-pbc-adjunction-mate; I checked it with L1=j_!, L2=j'_!, G=g'^*, H=g^*, and it matches parent Step 2 (open vertical maps j_Z, j; bottom arrow i). I verified the adjunction algebra by hand. Step 3 is the conjugate-iso-unit-equation with δ=r^{-1}. Step 4 gives Φ_L(h)=r_NΦ_A(hc_M) and ε^A_N=ε^L_N L(r_N) c_{BN}. Step 5 applies the same uniqueness with δ=c_j^{-1}. In Step 6, conjugation is bijective, so the two pullback-composition maps are equal. Step 7 identifies all three factors. Step 8 gets exactness from additivity plus preservation of limits and colimits (Mathlib leaf; Stacks 0038), and transfers invertibility through the quasi-inverse. Edge cases (empty U, U=T, zero ring) need no extra hypothesis, and no step uses finiteness or stalk conservativity. No new nodes. The DAG candidates (lem-pe-internal-section-tensor-comparison, lem-sf-module-object-ordinary-coefficient-equivalence, lem-sbc-canonical-restrict-scalars-functor-comparisons, lem-sfb-site-inverse-image-bilinear-adjunction) are different results, not duplicates. There is no cycle and the searches are recorded. Tool use accepted: lem-weil-pbc-ringed-topoi-module-adjunction, a generic Stacks 03D7 Hom bijection that is already a statement dependency. Two remarks, neither a fault. (a) The statement assumes base change gives a morphism of topoi; this holds by Stacks 00X6 (u continuous, preserves the final object and fibre products), and it is part of the statement's data. (b) Step 2 reads the lax structure map's formula from the defining construction of def-sfb-finite-lower-star-lax-monoidal; def-sfb-finite-upper-star-monoidal confirms that structure is the primary datum. No fixes written. Full notes are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-57231e6e6 (reviewer sub-agent of L); spot-checked: I read the item in full (statement unchanged against the Q08-PASSed head; only proof, proof_deps, proof_origin and split_report changed), all 7 steps, every cited statement, and main-20261015 det-nagata-density-normalization-sheaves proof Steps 1–2. The coefficient categories stay internal Mod_{Λ_T} against sectionwise Mod(B_T), joined by E_T; the varying condensed ring is kept and no finite or constant coefficient is used. The base-change map is the inverse-mate formula of def-weil-pbc-adjunction-mate with L1=j_!, L2=j'_!, G=g'^*, H=g^*. Step 3: lem-stage3-inverse-mate-equivalences with beta=r_f is correct, and the transpose lemma gives exactly the hν hypotheses. Step 5: I matched lem-pur-adjunction-evaluation-composition's signature (δe = the module lower-star compositor, γ=r, ν=c); hr holds as an identity on rebracketed sections. Step 7: closed tensor gives the hypotheses of lem-sfb-modobj-abelian, and clause (2) of the equivalence lemma applies. There is no cycle and no SGA source. Edge cases checked: empty U, U=T, zero ring, identity f. Three faults in the new nodes, all repaired. (1) C5/D1: lem-sfb-pushforward-tensor-section-evaluation repeats a clause of the landed lem-sfb-pushforward-comp-monoidal, whose statement characterizes the lax map h_*F⊗h_*G→h_*(F⊗G) by its composite with the sheafification maps at V×_T S. The report's claim that no such node exists is wrong. (2) C1: lem-sfb-pushforward-action-section-formula is true but is two lines from that characterization; I folded it into Step 2. (3) lem-sfb-ringed-site-pushforward-compositor is a leftover from superseded head 6fc7b62c that nothing cites. Fix file: fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-internal-module-operations-transport.json. Step 2 now cites lem-sfb-pushforward-comp-monoidal and writes out the pure-tensor evaluation; the proof is 2755 characters. proof_deps and split_report are updated, and comp-monoidal is added as a sheaf-tensor tool use. Statement and stmt_deps are untouched.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
