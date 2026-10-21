@@ -2,7 +2,7 @@
  "id": "lem-pur-line-zero-class-etale-realization",
  "kind": "statement",
  "title": "Zero-section divisor class, its etale realization, and compact source",
- "statement": "Fix the finite-coefficient datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, a finite extension $F/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_F$ and uniformizer $\\varpi_F$, $n\\geq1$, and $A=\\mathcal O_F/\\varpi_F^n$. Let $B$ be a separated finite-type $k$-scheme and $\\pi:E\\to B$ a vector bundle of rank one with zero section $z:B\\to E$ [def-pur-vector-bundle-zero-section]. Use the prescribed pro-etale twist $A_T(1)$ [def-coefficient-twists-detailed]. Then $\\pi$ is separated of finite type and smooth of relative dimension one, and $D=z(B)$ is an effective Cartier divisor, smooth over $B$ of relative codimension one, which remains Cartier after every base change.\n\nLet $c^{p}_{D,A}:z_*A_B\\to A_E(1)[2]$ be the supported Cartier Kummer morphism of [lem-amb-cartier-kummer-map]. Under the supported-class realization of [lem-asd-ordinary-supported-kummer], the relative Kummer class $\\operatorname{cl}(D)$ of [lem-pur-divisor-class] is exactly $c^{p}_{D,A}$. Its local supported class in a bundle coordinate $t$ is $-\\partial\\kappa(t)$, with $\\kappa$ and the support boundary in the conventions of [def-pur-frame-class] and [def-asd-ordinary-supported-kummer-boundary].\n\nPut $N=\\ell^n$, which kills $A$, and $L_T=\\mu^{\\mathrm{et}}_{N,T}\\otimes^L_{\\mathbf Z/N}A_T$, where $\\mu^{\\mathrm{et}}_{N,T}$ is the sheaf of $N$th roots of unity. Let $c^e_{D,A}:z_*A_B\\to L_E[2]$ be the ordinary etale supported Kummer morphism of [lem-asd-ordinary-supported-kummer]. With $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ and comparison pullback [def-sf-comparison-derived-pullback], the projection-induced twist comparison $\\nu_T^*L_T\\cong A_T(1)$ carries $\\nu_E^*c^e_{D,A}$ to $c^p_{D,A}$.\n\nUnder the canonical identity-normalized composition identification $R\\pi_!z_*A_B\\cong A_B$, the map $\\tau_E=R\\pi_!c^p_{D,A}$ is the realization of $R\\pi_!^{\\mathrm{et}}c^e_{D,A}$, with source $A_B$ and target $R\\pi_!^{\\mathrm{et}}L_E[2]$, through the comparison of [lem-sf-class-compact-support-comparison]. In particular the map itself, with these specified source and target identifications, has a bounded-below etale-origin witness [def-weil-pbc-etale-origin-witness]. No invertibility of $\\tau_E$ is asserted.",
+ "statement": "Fix the finite-coefficient datum of [def-pur-conventions]: $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}k$, a finite extension $F/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_F$ and uniformizer $\\varpi_F$, $n\\geq1$, and $A=\\mathcal O_F/\\varpi_F^n$. Let $B$ be a separated finite-type $k$-scheme and $\\pi:E\\to B$ a vector bundle of rank one with zero section $z:B\\to E$ [def-pur-vector-bundle-zero-section]. Use the prescribed pro-etale twist $A_T(1)$ [def-coefficient-twists-detailed]. Then $\\pi$ is separated of finite type and smooth of relative dimension one, and $D=z(B)$ is an effective Cartier divisor, smooth over $B$ of relative codimension one, which remains Cartier after every base change $B'\\to B$ of the bundle and its zero section.\n\nLet $c^{p}_{D,A}:z_*A_B\\to A_E(1)[2]$ be the supported Cartier Kummer morphism of [lem-amb-cartier-kummer-map]. Under the supported-class realization of [lem-asd-ordinary-supported-kummer], the relative Kummer class $\\operatorname{cl}(D)$ of [lem-pur-divisor-class] is exactly $c^{p}_{D,A}$. Its local supported class in a bundle coordinate $t$ is $-\\partial\\kappa(t)$, with $\\kappa$ and the support boundary in the conventions of [def-pur-frame-class] and [def-asd-ordinary-supported-kummer-boundary].\n\nPut $N=\\ell^n$, which kills $A$, and $L_T=\\mu^{\\mathrm{et}}_{N,T}\\otimes^L_{\\mathbf Z/N}A_T$, where $\\mu^{\\mathrm{et}}_{N,T}$ is the sheaf of $N$th roots of unity. Let $c^e_{D,A}:z_*A_B\\to L_E[2]$ be the ordinary etale supported Kummer morphism of [lem-asd-ordinary-supported-kummer]. With $\\nu_T:T_{\\mathrm{proet}}\\to T_{\\mathrm{et}}$ and comparison pullback [def-sf-comparison-derived-pullback], the projection-induced twist comparison $\\nu_T^*L_T\\cong A_T(1)$ carries $\\nu_E^*c^e_{D,A}$ to $c^p_{D,A}$.\n\nUnder the canonical identity-normalized composition identification $R\\pi_!z_*A_B\\cong A_B$, the map $\\tau_E=R\\pi_!c^p_{D,A}$ is the realization of $R\\pi_!^{\\mathrm{et}}c^e_{D,A}$, with source $A_B$ and target $R\\pi_!^{\\mathrm{et}}L_E[2]$, through the comparison of [lem-sf-class-compact-support-comparison]. In particular the map itself, with these specified source and target identifications, has a bounded-below etale-origin witness [def-weil-pbc-etale-origin-witness]. No invertibility of $\\tau_E$ is asserted.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
   "place": "Step 1: global Cartier zero divisor, relative Kummer class and induced global morphism; previous expanded proof steps 1--2"
@@ -24,9 +24,140 @@
   "thm-sf-comp-composition",
   "lem-sf-class-compact-support-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the bundle as the relative spectrum of the symmetric algebra using [def-pur-vector-bundle-zero-section]. The locally free rank-one module admits a Zariski affine trivializing cover; [def-asd-vector-bundle-zero-section] identifies the projection and zero section on each member $U=\\operatorname{Spec}R$ with $\\operatorname{Spec}R[t]\\to\\operatorname{Spec}R$ and the quotient $R[t]\\to R$, $t\\mapsto0$. A field is Noetherian (its ideals are zero and the unit ideal), so [lem-weil-pbc-finite-type-over-noetherian] makes $B$ Noetherian. Apply [lem-amb-vector-projective-completion] to this rank-one locally free module, transporting its construction through the chosen total-space isomorphism: it gives a projective completion of $E$, and asserts that $\\pi$ is separated and finite type and $E$ Noetherian. These are the compactification and finiteness hypotheses needed below. To check the absolute hypotheses, choose a finite affine trivializing cover of $B$ with coordinate rings finitely generated over $k$. Then $E$ has the corresponding finite affine cover with rings $R[t]$, also finitely generated over $k$, so it is finite type by [def-weil-finite-type-morphism]. Its absolute diagonal factors through $E\\times_BE$: the first arrow is the closed relative diagonal of $\\pi$, and the second is the pullback of the closed diagonal of $B/k$. On affine charts these are quotients of rings; tensoring a surjection and composing surjections preserve surjectivity. Thus $E/k$ is separated by [def-weil-proper-morphism].",
+   "uses": [
+    "def-pur-vector-bundle-zero-section",
+    "def-asd-vector-bundle-zero-section",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-amb-vector-projective-completion",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: global Cartier zero divisor and global morphism"
+   }
+  },
+  {
+   "text": "On the charts in step 1, [sbc-lem-affine-space-smooth] with rank one proves smoothness of relative dimension one. Smoothness and that fibre dimension are affine-local in the equivalent affine-local definition of [def-sbc-smooth-morphisms], so this proves the assertion for $\\pi$. Since $\\pi z=1$, $D\\to B$ is the identity and is smooth of relative dimension zero. Its ideal on a chart is $(t)$; if $tg=0$ in $R[t]$, comparison of coefficients gives $g=0$. Thus it is an effective Cartier divisor by [def-pc-divisor-line-bundle]. At a point of $D$, $t$ stays a nonzerodivisor in the Noetherian local ring of $E$, and quotient by $t$ is the local ring of $D$. Apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] to obtain pure codimension one. For every $B'\\to B$, restrict to affine charts over the cover just used: the pullback equation is again $t$ in $R'[t]$, with quotient $R'$. The same coefficient argument proves the Cartier property without flatness or Noetherianity of $B'$. This is base change of the bundle over $B$, not arbitrary pullback into $E$.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-smooth-morphisms",
+    "def-pc-divisor-line-bundle",
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: global Cartier zero divisor and global morphism"
+   }
+  },
+  {
+   "text": "Put $N=\\ell^n$. Since $\\ell\\in(\\varpi_F)$, $\\ell^n\\in(\\varpi_F^n)$ and $NA=0$; $N$ is invertible on every $k$-scheme under consideration. Apply [lem-asd-finite-etale-twist-line] first with coefficient ring $\\mathbf Z/N$ to see that $\\mu^{\\mathrm{et}}_{N,T}$ is flat over $(\\mathbf Z/N)_T$. Hence its derived tensor with $A_T$ is the ordinary tensor in degree zero, so the $L_T$ in the statement is a bounded-below ordinary etale complex, also when $A$ is not flat over $\\mathbf Z/N$. Apply [lem-amb-finite-tate-site-descent] with annihilating exponent $n$ to obtain the projection-induced isomorphism $\\theta_T:\\nu_T^*L_T\\xrightarrow{\\sim}A_T(1)$. The projection convention is precisely the one specified in [def-pur-frame-class]; this keeps the prescribed pro-etale twist rather than redefining it.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "lem-amb-finite-tate-site-descent",
+    "def-pur-frame-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: global Cartier zero divisor and global morphism"
+   }
+  },
+  {
+   "text": "Apply [lem-asd-ordinary-supported-kummer] to $D\\hookrightarrow E$, $N$, and $A$; all its hypotheses were checked in steps 1--3. It gives $c^e_{D,A}:z_*A_B\\to L_E[2]$ by the relative line bundle $\\mathcal O_E(D)$ with its canonical section off $D$, followed by derived scalar extension. Apply [lem-amb-cartier-kummer-map] to the same divisor and coefficient ring. Its stated etale witness uses the same roots-of-unity sheaf and the same supported morphism; its definition is etale Kummer followed by comparison pullback and the projection-induced twist identification. Consequently, under its canonical supported-constant source comparison, $c^p_{D,A}=\\theta_E[2]\\circ\\nu_E^*c^e_{D,A}$. This equality compares the actual supported relative construction, not just its image after forgetting support.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-amb-cartier-kummer-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: global Cartier zero divisor and global morphism"
+   }
+  },
+  {
+   "text": "By [lem-pur-divisor-class], whose hypotheses hold by steps 1--2 ($E\\to B$ smooth of relative dimension one, $D$ smooth over $B$ of pure codimension one, $E$ separated of finite type over $k$), the class $\\operatorname{cl}(D)$ is the relative Kummer boundary of $\\mathcal O_E(D)$ with its canonical trivialization off $D$, in the Yoneda convention of [def-asd-ordinary-supported-kummer-boundary]. Apply [lem-pur-cartier-class-agreement] to the separated finite-type $k$-scheme $T=E$ and the effective Cartier divisor $D$ of step 2: under the natural supported-Hom isomorphism $H^2_D(E,A(1))\\cong\\operatorname{Hom}(z_*A_B,A_E(1)[2])$ of [lem-pur-supported-hom] (at $F=A_E(1)$, in degree zero by step 3, and degree two), $\\operatorname{cl}(D)$ is the morphism $c^p_{D,A}$ of [lem-amb-cartier-kummer-map], with the relative-torsor normalization through derived scalar extension and the roots projection of [def-pur-frame-class] that step 4 uses. For smooth $D$ the general Cartier construction of [lem-pur-divisor-class] used there is the same relative construction as its first paragraph. The local equation on a bundle chart is $t$; the displayed local formula of [lem-pur-divisor-class] gives $-\\partial\\kappa(t)$. The Kummer class here is the prescribed one of [def-pur-frame-class]. In particular the sign is inherited from the already corrected divisor-class statement, not from the older blueprint's positive frame-class formula.",
+   "uses": [
+    "lem-pur-divisor-class",
+    "lem-pur-cartier-class-agreement",
+    "def-asd-ordinary-supported-kummer-boundary",
+    "lem-pur-supported-hom",
+    "def-pur-frame-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: global Cartier zero divisor and global morphism"
+   }
+  },
+  {
+   "text": "For the closed immersion $z$, use the compactification $(\\mathrm{id}_B,z)$. It is proper by [lem-weil-pbc-closed-immersion-proper](a). The ordinary etale identification $Rz_!\\cong z_*$ is provided by [lem-pur-closed-finite-adjoint-counit-transport]. On the pro-etale site [lem-exc-proetale-closed-exact] gives $Rz_*=z_*$; its quasi-compact-complement hypothesis holds since $E$ is Noetherian. Thus the same identity/proper compactification gives $Rz_!=z_*$. Apply the composition isomorphisms [lem-amb-etale-compact-comparisons] and [thm-sf-comp-composition] to $B\\xrightarrow z E\\xrightarrow\\pi B$. Since $\\pi z=\\mathrm{id}_B$, they identify $R\\pi_!z_*A_B$ with $R(\\pi z)_!A_B=A_B$ in the two topologies, using the canonical identity normalization. The ordinary etale supported source $z_*A_B$ is in degree zero, so these uses lie in $D^+$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-pur-closed-finite-adjoint-counit-transport",
+    "lem-exc-proetale-closed-exact",
+    "lem-amb-etale-compact-comparisons",
+    "thm-sf-comp-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: global Cartier zero divisor and global morphism"
+   }
+  },
+  {
+   "text": "Let $\\beta_M:\\nu_B^*R\\pi_!^{\\mathrm{et}}M\\xrightarrow{\\sim}R\\pi_!\\nu_E^*M$ denote the inverse-direction form of [lem-sf-class-compact-support-comparison], for the projective completion of step 1. Both $M=z_*A_B$ and $M=L_E[2]$ are bounded below. Its naturality applied to $c^e=c^e_{D,A}$ gives\n$$\\beta_{L_E[2]}\\circ\\nu_B^*(R\\pi_!^{\\mathrm{et}}c^e)=R\\pi_!(\\nu_E^*c^e)\\circ\\beta_{z_*A_B}.$$\nBy [lem-pur-compact-support-site-coherence], the source component of this equation respects the composition for $\\pi z$ and the identity, so step 6 identifies it with the canonical constant-sheaf comparison $\\nu_B^*A_B\\cong A_B$. Substitute the equality of step 4 and then the target comparison $R\\pi_!\\theta_E[2]$. The right side is exactly $\\tau_E=R\\pi_!c^p_{D,A}$, with the prescribed source $A_B$. The left side exhibits its etale representative $R\\pi_!^{\\mathrm{et}}c^e:A_B\\to R\\pi_!^{\\mathrm{et}}L_E[2]$. The target is bounded below by the compact-support comparison's $D^+$ assertion. Retaining that representative and these two comparison isomorphisms is the witness of [def-weil-pbc-etale-origin-witness] for the actual map. Nothing in this argument asserts that $\\tau_E$ is invertible.",
+   "uses": [
+    "lem-sf-class-compact-support-comparison",
+    "lem-pur-compact-support-site-coherence",
+    "def-weil-pbc-etale-origin-witness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 1: global Cartier zero divisor and global morphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-vector-bundle-zero-section",
+  "def-asd-vector-bundle-zero-section",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-amb-vector-projective-completion",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "sbc-lem-affine-space-smooth",
+  "def-sbc-smooth-morphisms",
+  "def-pc-divisor-line-bundle",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-asd-finite-etale-twist-line",
+  "lem-amb-finite-tate-site-descent",
+  "def-pur-frame-class",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-divisor-class",
+  "lem-pur-cartier-class-agreement",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "lem-pur-supported-hom",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-pur-closed-finite-adjoint-counit-transport",
+  "lem-exc-proetale-closed-exact",
+  "lem-amb-etale-compact-comparisons",
+  "thm-sf-comp-composition",
+  "lem-sf-class-compact-support-comparison",
+  "lem-pur-compact-support-site-coherence",
+  "def-weil-pbc-etale-origin-witness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 1; expanded using the existing supported Kummer and normalized compact-support site-coherence interfaces"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -97,10 +228,76 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: read returned signatures; none states this supported-divisor, compact-support or localization comparison on ordinary etale/pro-etale coefficient complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|supported.*[Cc]lass|[Cc]artier.*[Rr]ealiz",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures do not state supported relative Kummer realization or compact-support site comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A relative effective Cartier divisor of a line bundle zero section has an etale Kummer morphism which realizes its proetale divisor class",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "RingHom.Etale",
+     "AlgebraicGeometry.Scheme.Etale",
+     "AlgebraicGeometry.IsEtale",
+     "Algebra.Etale.formallyEtale",
+     "AlgebraicGeometry.Scheme.etalePretopology",
+     "AlgebraicGeometry.IsEtale.instIsSmooth",
+     "Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero",
+     "AlgebraicGeometry.IsEtale.of_comp"
+    ],
+    "note": "",
+    "digest": "5aac7b4cb8694802"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures do not state supported relative Kummer realization or compact-support site comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Sheaf\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures do not state supported relative Kummer realization or compact-support site comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The supported Kummer divisor class of the zero section of a scheme line bundle agrees with its etale realization under proetale comparison and compact direct image",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen",
+     "AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero",
+     "AlgebraicGeometry.Scheme.zero_of_zero_cover",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs",
+     "AlgebraicGeometry.StructureSheaf.const_zero"
+    ],
+    "note": "",
+    "digest": "6a786a3574fb6c6d"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures do not state supported relative Kummer realization or compact-support site comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-rank-one-thom",
@@ -117,5 +314,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-line-zero-class-etale-realization",
+  "worker": "stage1",
+  "summary": "Expanded the global divisor, signed relative Kummer realization, ordinary-etale twist witness, and identity-normalized compact source in seven steps. Reused existing geometry and comparison lemmas; no new nodes. Clarified that universal Cartier base change is over the bundle base B. Preserved all inherited search records and added fresh logged searches.",
+  "blueprint": "thm-pur-rank-one-thom, proof Step 1: global Cartier zero divisor, relative Kummer class and induced global morphism; the etale witnesses are made explicit without using Step 2 invertibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic Affine space is smooth interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "why": "Generic Dimension drops by one modulo a nonzerodivisor of the maximal ideal interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic Finite torsion Tate twists are etale locally free lines interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Generic Supported Cartier Kummer map for ordinary etale arbitrary finite coefficients interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-amb-cartier-kummer-map",
+    "why": "Generic A Cartier divisor gives a supported Kummer map interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-pur-divisor-class",
+    "why": "Generic Kummer class of a divisor and its $c_1$ interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-pur-supported-hom",
+    "why": "Generic Supported cohomology as morphisms interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-pur-closed-finite-adjoint-counit-transport",
+    "why": "Generic Closed finite exceptional adjoint and counit on classical inputs interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic Exactness of closed direct image interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic The etale compact-support comparisons interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "thm-sf-comp-composition",
+    "why": "Generic The composition law for $Rf_!$ interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic On the coefficient class the compact-support functor is computed on the étale site interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-pur-compact-support-site-coherence",
+    "why": "Generic Compact-support site comparison respects compactification calculus interface used as a black box in the indicated proof step; the bundle unit has no substitute for this structural input. This does not replace the global-divisor route."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Properness of a closed immersion permits the identity/proper compactification of z. This is a generic scheme-theoretic input, not another purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-divisor-class",
+  "lem-pur-supported-hom",
+  "lem-pur-closed-finite-adjoint-counit-transport",
+  "lem-exc-proetale-closed-exact",
+  "lem-amb-etale-compact-comparisons",
+  "thm-sf-comp-composition",
+  "lem-sf-class-compact-support-comparison",
+  "lem-pur-compact-support-site-coherence",
+  "lem-weil-pbc-closed-immersion-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-1584ee080",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-1584ee080 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 7 steps, its split_report, tool_uses and searches, and all 30 cited statements. I also read base Steps 1-2 of the old 9569-character thm-pur-rank-one-thom proof, which this item carries, and the main-20261015 sk-prop-an thm-pur-rank-one-thom.proof.md Step 1. The item matches Step 1 and stays on route through lem-pur-divisor-class. Live still has the item unsplit, so the delivery is not superseded. The only re-split note is the parent's, and it is resolved. Statement: the Cartier-after-base-change clause is now limited to base changes B'->B. That is a correct clarification, because pulling back along z sends (t) to 0, so the other reading is false. Its only citer, the parent step 1, uses only the Cartier property. The report says the item carries a statement_change record, but the JSON has none; this is advisory only. Small cases checked: empty B, B=Spec k, nonreduced R[t], non-flat and non-Noetherian B', ramified F with n=1. Steps 1-4, 6 and 7 are correct with hypotheses checked: B Noetherian by 01T6; E separated of finite type over k with a quasi-compact complement to D; mu_N flat, so the derived and ordinary tensor agree; site descent at exponent n; c^p = theta o nu^*c^e from the witness clause of lem-amb-cartier-kummer-map; Rz_! = z_* on both sites; composition, compact comparison natural in the witness, and site coherence for pi z = id. Fault (C4/C5), fixed: step 5 equated cl(D) with c^p only as 'the same supported construction'. lem-pur-divisor-class and lem-pur-supported-hom do not give that equality. The existing reviewed same-unit node lem-pur-cartier-class-agreement states exactly that cl(D) is c_D of lem-amb-cartier-kummer-map under lem-pur-supported-hom, for T separated of finite type and D Cartier. Step 5 now cites it with its hypotheses checked, and proof_deps is updated. There is no cycle, and the citation adds no trace-formula or Poincare-duality node. Batch-5 flag on lem-amb-vector-projective-completion: the trf nodes it alone brings in (projective-bundle quotient geometry, Proj separatedness, symmetric graded algebra, algebraic-space def) are generic EGA II scheme theory. They are not part of the trace formula or Poincare duality, and the citation is needed for the compactification in step 7, so I accept it. I accept the declared tool_uses as generic. No SGA is cited. There are no new nodes.; 1 file(s) fixed by the reviewer"
  }
 }

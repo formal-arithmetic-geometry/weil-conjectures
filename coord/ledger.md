@@ -21469,3 +21469,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q69/lem-sfb-lattice-supported-hom-reduction-tower (reviewer PASS; first push; new nodes: 0); claim not held by Q69: not your claim
 - 08:58 L: merged deliver/Q04/lem-sf-complete-top-residue-cell-cone (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q77/lem-pur-finite-type-coordinate-support-orientation (reviewer FIX; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q123/lem-pur-line-zero-class-etale-realization (reviewer FIX; first push; new nodes: 0); claim not held by Q123: not your claim
