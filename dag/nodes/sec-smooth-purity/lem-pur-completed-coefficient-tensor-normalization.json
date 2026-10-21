@@ -16,9 +16,147 @@
   "lem-pe-constant-left-module-inverse-image",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-local-field-integral-basis] to $\\mathbf Q_\\ell\\subseteq H$: choose a $\\mathbf Z_\\ell$-basis $b_1,\\ldots,b_d$ of $\\mathcal O_H$. By [def-weil-l-adic-numbers] the base valuation ring has uniformizer $\\ell$ and $\\mathbf Z_\\ell/\\ell^r=\\mathbf Z/\\ell^r$. By [lem-pur-local-field-coefficient-stages] there are $e\\geq1$ and a unit $u$ with $\\ell=u\\varpi_H^e$, hence $\\ell^r\\mathcal O_H=\\varpi_H^{er}\\mathcal O_H$. These statements apply to arbitrary finite local-field extensions; no assumption on the characteristic or dimension of $T$ is involved.",
+   "uses": [
+    "lem-sfb-local-field-integral-basis",
+    "def-weil-l-adic-numbers",
+    "lem-pur-local-field-coefficient-stages"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
+    "place": "Opening finite integral basis sentence; uniformizer arithmetic as in lem-pur-local-field-coefficient-stages"
+   }
+  },
+  {
+   "text": "Sheafify the mutually inverse additive coordinate maps $\\mathbf Z_\\ell^d\\rightleftarrows\\mathcal O_H$ and, for each $r$, their reductions $(\\mathbf Z/\\ell^r)^d\\rightleftarrows\\mathcal O_H/\\ell^r\\mathcal O_H$. Constant sheaves are sheafifications [def-weil-pbc-constant-sheaf], and sheafification preserves finite products via their projections [lem-weil-pbc-sheafification-sets-exact]. Thus these give $D_T$-linear isomorphisms $D_T^d\\cong B_{H,T}$ and $((\\mathbf Z/\\ell^r)_T)^d\\cong(\\mathcal O_H/\\ell^r\\mathcal O_H)_T$, both with formula $(a_i)\\mapsto\\sum_i a_i b_i$. Linearity and the inverse identities are the sheafifications of the corresponding coordinate identities. The reduced isomorphisms commute with transition maps because reduction of $\\sum_i a_i b_i$ is $\\sum_i\\bar a_i b_i$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-sheafification-sets-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 0H7J (example-constant-sheaf), 00WJ (lemma-sheafification-exact); finite-coordinate specialization"
+   }
+  },
+  {
+   "text": "Use the compatible-tuple description of limits [def-pur-sheaf-inverse-limit]. Restricting a tuple in $R_{H,T}$ to indices $er$ identifies it with $\\lim_r(\\mathcal O_H/\\ell^r\\mathcal O_H)_T$: the inverse sends $(z_r)_r$ to the tuple whose $n$-th entry is the reduction of $z_r$ for any $er\\geq n$. Two choices agree after reduction from a common larger index; this also proves the two maps inverse. At every site object $U$, the coordinate maps of step 2 identify a compatible tuple $(z_r)_r$ with the $d$ compatible scalar tuples $(a_{i,r})_r$. The inverse takes these scalar tuples to $(\\sum_i a_{i,r}b_i)_r$. These formulas commute with restriction in $U$ and prove an isomorphism $A_T^d\\cong R_{H,T}$ of $D_T$-module sheaves.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB (lemma-limits-colimits), 03CO (lemma-limits-colimits-abelian-sheaves); explicit compatible tuples"
+   }
+  },
+  {
+   "text": "The sheaf tensor definition [def-pur-sheaf-tensor-product] gives $A_T\\otimes_{D_T}B_{H,T}\\cong A_T^d$ using the basis of step 2. Explicitly, if $q_i:B_{H,T}\\to D_T$ are its coordinates, the maps are $x\\otimes b\\mapsto(x\\epsilon_T(q_i(b)))_i$ and $(x_i)_i\\mapsto\\sum_i x_i\\otimes b_i$. They are balanced maps on presheaf tensors and extend uniquely to sheafified tensors; the inverse identities follow from $b=\\sum_i q_i(b)b_i$ and $q_i(b_j)=\\delta_{ij}$. Composing with step 3 defines an additive sheaf isomorphism $\\beta_{H,T}$. Its $er$-th projection is $(x\\otimes b)\\mapsto\\operatorname{pr}_r(x)\\bar b$. Reducing from a larger $er$ gives the formula at any $n$ and any $k$ with $ek\\geq n$; a common larger $k$ proves independence. The ideal condition in the statement is exactly $ek\\geq n$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), tensor universal property and explicit basis maps"
+   }
+  },
+  {
+   "text": "Each projection of $\\beta_{H,T}$ preserves multiplication and unit: for a common admissible $k$, the images of $(x\\otimes b)(y\\otimes c)=xy\\otimes bc$ and of $(x\\otimes b)(y\\otimes c)$ computed after projection are both $\\operatorname{pr}_k(x)\\operatorname{pr}_k(y)\\bar b\\bar c$, and $1\\otimes1$ maps to $1$. Bilinearity extends this equality to sums of pure tensors and the sheafification universal property extends it to the sheaf tensor. Projections jointly detect equality by [def-pur-sheaf-inverse-limit]. Hence $\\beta_{H,T}$ is a ring-sheaf map and its additive inverse is also multiplicative and unital (apply $\\beta$ to the desired identities). Its normalized projections determine it uniquely, so the isomorphism is independent of the chosen integral basis.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-sheafification",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, completed coefficient action; explicit projection calculation"
+   }
+  },
+  {
+   "text": "For every homomorphism of discrete coefficient rings $v:C\\to C'$, prove $\\delta_{C'}h^{-1}v_S=v_{S'}\\delta_C$ as follows. The comparison $\\delta_C$ is the constant-preserving isomorphism of [lem-pe-constant-left-module-inverse-image]. Its adjoint is the map $\\rho^h_C:C_S\\to h_*C_{S'}$ of [def-weil-proetale-inverse-image], because that map extends the constant-presheaf map taking $c$ to the same constant $c$. The two adjoints in the desired equality both take $c$ to $v(c)$, and are therefore equal by the uniqueness in sheafification [def-weil-pbc-sheafification]. Apply this to $\\mathbf Z_\\ell\\to\\mathcal O_H$, to all residue maps, and to $q_{EF}$. This proves the required scalar compatibility and the displayed $\\delta$-equation for $q_{EF}$.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YV (proposition-functoriality-algebraic-structures-topoi), 00WH (proposition-sheafification-adjoint); constant-presheaf adjoints"
+   }
+  },
+  {
+   "text": "Write $p_{H,n}$ and $p_{0,r}$ for the limit projections. By definition, $p'_{H,n}\\alpha_H=\\delta_{\\mathcal O_H/\\varpi_H^n}h^{-1}p_{H,n}$ and $p'_{0,r}\\alpha_0=\\delta_{\\mathbf Z/\\ell^r}h^{-1}p_{0,r}$; these cones define ring maps by [def-pur-sheaf-inverse-limit]. Project the proposed $\\epsilon$ equality to $r$. The left side is $\\delta_{\\mathbf Z/\\ell^r}h^{-1}(p_{0,r}\\epsilon_S)$, whereas the right side is $(p'_{0,r}\\epsilon_{S'})\\delta_{\\mathbf Z_\\ell}$. These are equal by step 6 for the residue homomorphism $\\mathbf Z_\\ell\\to\\mathbf Z/\\ell^r$. Joint detection by projections gives $\\alpha_0h^{-1}\\epsilon_S=\\epsilon_{S'}\\delta_{\\mathbf Z_\\ell}$.",
+   "uses": [
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, completed coefficient action; explicit projection calculation"
+   }
+  },
+  {
+   "text": "Let $\\mu:A_S\\times B_{H,S}\\to A_S\\otimes_{D_S}B_{H,S}$ be the universal $D_S$-balanced pairing [def-pur-sheaf-tensor-product]. Inverse image preserves finite products and carries the abelian, ring and module operations, with their identities, to those of $h^{-1}A_S,h^{-1}B_{H,S},h^{-1}D_S$ [def-weil-proetale-inverse-image, lem-pe-constant-left-module-inverse-image]. So $h^{-1}\\mu$, read on $h^{-1}A_S\\times h^{-1}B_{H,S}\\cong h^{-1}(A_S\\times B_{H,S})$, is $h^{-1}D_S$-balanced and induces $\\tau:h^{-1}A_S\\otimes_{h^{-1}D_S}h^{-1}B_{H,S}\\to h^{-1}(A_S\\otimes_{D_S}B_{H,S})$ with $\\tau(y\\otimes c)=h^{-1}\\mu(y,c)$, in particular $\\tau(h^{-1}x\\otimes h^{-1}b)=h^{-1}(x\\otimes b)$. It is invertible: by steps 2 and 4, $(x_i)\\mapsto\\sum_ix_i\\otimes b_i$ is an isomorphism $\\gamma:A_S^d\\cong A_S\\otimes_{D_S}B_{H,S}$ and $D_S^d\\cong B_{H,S}$ via the global sections $b_i$. Applying $h^{-1}$ gives $(h^{-1}D_S)^d\\cong h^{-1}B_{H,S}$ with basis $h^{-1}b_i$, hence, by the computation of step 4 over $h^{-1}D_S$, an isomorphism $\\gamma':(h^{-1}A_S)^d\\cong h^{-1}A_S\\otimes h^{-1}B_{H,S}$, $(y_i)\\mapsto\\sum_iy_i\\otimes h^{-1}b_i$. On the $i$-th summand $h^{-1}\\gamma$ is $h^{-1}$ of $x\\mapsto\\mu(x,b_i)$, that is $y\\mapsto h^{-1}\\mu(y,h^{-1}b_i)=\\tau(y\\otimes h^{-1}b_i)$; thus $\\tau\\gamma'=h^{-1}\\gamma$ is invertible, so $\\tau$ is. Put $\\sigma_h=\\tau^{-1}$; it is normalized as in the statement. It preserves multiplication and unit: $\\mu(x,b)\\mu(x',b')=\\mu(xx',bb')$ and $\\mu(1,1)=1$ are identities of sheaf maps, which $h^{-1}$ preserves. Step 7 makes $\\alpha_0$ linear over $\\delta_{\\mathbf Z_\\ell}$, and step 6 does the same for $\\delta_{\\mathcal O_H}$, so $\\alpha_0\\otimes\\delta_{\\mathcal O_H}$ is defined.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-proetale-inverse-image",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), proof: the comparison corresponds to inverse-image balanced pairings; invertibility here from the finite basis of steps 2 and 4"
+   }
+  },
+  {
+   "text": "To prove the $\\beta$ inverse-image square, fix $n$ and choose $k$ with $\\ell^k\\mathcal O_H\\subseteq\\varpi_H^n\\mathcal O_H$. Denote the constant map $(\\mathbf Z/\\ell^k)_T\\to(\\mathcal O_H/\\varpi_H^n)_T$ by $j_T$ and $B_{H,T}\\to(\\mathcal O_H/\\varpi_H^n)_T$ by $v_T$. The $n$-th projection of $\\beta$ is the balanced pairing $(x,b)\\mapsto j_T(p_{0,k}(x))v_T(b)$. Apply $h^{-1}$ to this equality of pairings, and then the residue comparison $\\delta_{\\mathcal O_H/\\varpi_H^n}$. Step 6 replaces $h^{-1}j_S,h^{-1}v_S$ by $j_{S'},v_{S'}$ composed with the respective constant comparisons; step 7 replaces $\\delta_{\\mathbf Z/\\ell^k}h^{-1}p_{0,k}$ by $p'_{0,k}\\alpha_0$. Thus the resulting pairing is exactly the $n$-th projection of $\\beta_{H,S'}(\\alpha_0\\otimes\\delta_{\\mathcal O_H})\\sigma_h$. Equality of balanced pairings gives equality on tensor sheaves; joint detection by all $n$ gives the required ring-sheaf equation. This argument applies inverse image to morphisms and finite pairings, never to a limit comparison assumed invertible.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, completed coefficient action; explicit projection calculation"
+   }
+  },
+  {
+   "text": "For $E\\subset F$, the uniformizer relation in [lem-pur-local-field-coefficient-stages] supplies admissible indices $a$ for every $n$. Let $j_{a,n}:(\\mathcal O_E/\\varpi_E^a)_T\\to(\\mathcal O_F/\\varpi_F^n)_T$ be the constant quotient map. The cone $j_{a,n}p_{E,a}$ is independent of $a$: compare two choices after increasing to a common larger index. Reduction in $n$ gives the cone defining $i_{EF}$ by [def-pur-sheaf-inverse-limit]. Fix $n,a$ and choose $k$ with $\\ell^k\\mathcal O_E\\subseteq\\varpi_E^a\\mathcal O_E$. Both $n$-th projections of $i_{EF}\\beta_{E,T}$ and $\\beta_{F,T}(1\\otimes q_{EF})$ send $x\\otimes b$ to $\\operatorname{pr}_k(x)$ times the image of $b$ in $\\mathcal O_F/\\varpi_F^n$. Hence they agree. Finally project the inverse-image $i$ equation to $n$: its left side becomes $\\delta_{F,n}h^{-1}(j_{a,n}p_{E,a})$ and its right side becomes $j'_{a,n}\\delta_{E,a}h^{-1}p_{E,a}$. Step 6 applied to $j_{a,n}$ identifies these maps. Tensor universal properties and joint detection by projections prove both displayed equalities. All maps involved preserve multiplication and unit, so these are equalities of ring-sheaf maps with exactly the stated scalar identifications.",
+   "uses": [
+    "lem-pur-local-field-coefficient-stages",
+    "def-pur-sheaf-inverse-limit",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, completed coefficient action; explicit projection calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-local-field-integral-basis",
+  "def-weil-l-adic-numbers",
+  "lem-pur-local-field-coefficient-stages",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph, completed coefficient action; detailed finite-basis and projection proof, using Stacks 00WJ, 00WH, 03CO, 03DB, 03EK and 03EL"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +199,31 @@
    "results": "5 hits; source read at Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; lines 328-340: ordinary Noetherian module completion equivalence",
    "date": "2026-10-21",
    "verdict": "no match: no completed-coefficient sheaf tensor normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of the inverse limit of constant Z mod l power sheaves with a constant finite free Z_l algebra is its completed coefficient ring sheaf",
+   "results": "8 hits: AdicCompletion.ofTensorProductEquivOfPiFintype, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, BDeRhamPlus, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic completions or general free sheaf pullbacks do not state the normalized completed coefficient sheaf comparison and its compatibility equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Completed constant coefficient ring sheaves are tensor products with finite free rings of integers, naturally under pullback",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.free, SheafOfModules.ιFree",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic completions or general free sheaf pullbacks do not state the normalized completed coefficient sheaf comparison and its compatibility equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves commutes with balanced tensor products and identifies finite free constant coefficient completions by projection maps",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.ihomPoints_symm_comp, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary algebraic completions or general free sheaf pullbacks do not state the normalized completed coefficient sheaf comparison and its compatibility equations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-integral-twist-line-inverse-image",
@@ -84,5 +243,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-completed-coefficient-tensor-normalization",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Ten explicit steps: integral basis; finite-coordinate sheafification; cofinal compatible tuples; normalized ring tensor isomorphism; naturality of discrete constants; projection checks for epsilon, beta, and coefficient inclusions. Reuses all non-elementary facts and creates no nodes. No inverse-image preservation of infinite limits is used.",
+  "blueprint": "Realizes prop-weil-twist-preserves final sentence on levelwise integral scalar extension, through the integral twist paragraph and final coefficient-action sentence of det-prop-sfb-cartesian-coefficients-twists.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-local-field-integral-basis",
+    "why": "Integral basis for Q_l inside H; no node of this unit supplies local-field algebra."
+   },
+   {
+    "node": "def-weil-l-adic-numbers",
+    "why": "Identifies the base valuation ring, uniformizer, and residue rings."
+   },
+   {
+    "node": "lem-pur-local-field-coefficient-stages",
+    "why": "Uniformizer exponents and cofinal coefficient ideals; generic local-field tool, not a replacement for the unit route."
+   },
+   {
+    "node": "def-weil-pbc-constant-sheaf",
+    "why": "Constant rings mean sheafified discrete rings throughout this proof."
+   },
+   {
+    "node": "lem-weil-pbc-sheafification-sets-exact",
+    "why": "Finite-product preservation needed to sheafify the finite coordinate isomorphisms."
+   },
+   {
+    "node": "def-pur-sheaf-inverse-limit",
+    "why": "Sectionwise compatible-tuple construction and detection by projections."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Sheafified balanced tensor universal property; no assertion of sectionwise tensors."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Uniqueness of extension from presheaves into a sheaf."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Canonical constant-preserving ring comparison for geometric inverse image."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Defines the adjoint constant coefficient structure maps and the geometric inverse image."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-local-field-integral-basis",
+  "def-weil-l-adic-numbers",
+  "lem-pur-local-field-coefficient-stages",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-sheafification",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-proetale-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-6215e1e3f",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-6215e1e3f (reviewer sub-agent of L); spot-checked: Read the statement and all ten steps in full. Opened all 13 cited statements and the integral-twist paragraph of det-prop-sfb-cartesian-coefficients-twists.proof.md. Statement unchanged and true: B=D^d by an integral basis, so A⊗_D B=A^d=lim_r(O_H/ℓ^r)=R_H by cofinality (ℓ^r O_H=ϖ^{er} O_H). The admissibility condition is equivalent to ek≥n. Small cases checked: H=Q_ℓ, h=id, E=F, ramified e>1, empty scheme. Steps 1-7, 9 and 10 are correct as cited. Step 6's adjoint argument via ρ^h_C and sheafification uniqueness gives δ-naturality and the α cone compatibility. One repaired fault (C3/C4), step 8: it took the pure-tensor normalization of σ_h from lem-weil-pbc-ringed-topoi-module-pullback-tensor, whose statement gives only an unspecified canonical isomorphism; the normalization exists only in the Yoneda proof of Stacks 03EL. Fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-completed-coefficient-tensor-normalization.json: τ is built from h⁻¹ of the universal balanced pairing (def-weil-proetale-inverse-image, lem-pe-constant-left-module-inverse-image) and proved invertible with the finite basis of steps 2/4 (τγ′=h⁻¹γ), σ_h=τ⁻¹ is multiplicative, and the ringed-topoi lemma is removed from uses, proof_deps and tool_uses. No new nodes. Duplicate candidates read and rejected: det-prop-sfb-cartesian-coefficients-finite-free, det-prop-sfb-qlbar-colimit-x-integral-limit, lem-sfb-constant-finite-free-presentation-extension, lem-sfb-finite-free-scalar-coordinates. Declared generic tool uses accepted. No SGA. Dependency closure (251 nodes) has no cycle.; 1 file(s) fixed by the reviewer"
  }
 }

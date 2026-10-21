@@ -21162,3 +21162,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:34 L: merged deliver/Q90/lem-pur-proetale-support-global-boundary (reviewer PASS; first push; new nodes: 0)
 - 08:34 L: merged deliver/Q140/lem-weil-point-derived-tensor-tower-coherence (reviewer PASS; first push; new nodes: 0)
 - 08:34 L: merged deliver/Q88/lem-coef-direct-image-hom-evaluation-square (reviewer FIX; first push; new nodes: 0)
+- 08:34 L: merged deliver/Q96/lem-pur-completed-coefficient-tensor-normalization (reviewer FIX; first push; new nodes: 0)
