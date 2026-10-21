@@ -23265,3 +23265,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:01 L: merged deliver/N5/lem-trf-bounded-below-derived-mate-model (stage 2; reviewer PASS; parallel immutable checks)
 - 18:01 L: merged deliver/NS/lem-sfb-integral-ambient-tower-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 18:02 L: merged deliver/NR/lem-sfb-action-topos-geometric-restriction (reviewer FIX; first push; new nodes: 0)
+- 2026-10-21T18:03:12Z L: superseded stage-1 delivery Q12/lem-fd-whole-tower-integral-pullback-comparison at d9737ec07e9cd14f80bc539f04cc4fc80d088f74; current completion retained; packet archived at refs/superseded/Q12/lem-fd-whole-tower-integral-pullback-comparison/d9737ec07e9cd14f80bc539f04cc4fc80d088f74; stale return retired.
