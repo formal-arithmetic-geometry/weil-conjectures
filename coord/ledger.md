@@ -23799,3 +23799,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:36 L: returned deliver/NE/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: I read the item, all four new nodes and ILO X 1.1, X 2.1-2.3 and (2.a)-(2.e) on pp.135-136 and 148-152. The mathematics )
 - 21:36 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 2026-10-21T21:37:00Z L: superseded stage-1 delivery NI/sk-def-sf-orientation at fa983d794c070da37ee4f4a8ee93af5e0e804ec8; current completion retained; packet archived at refs/superseded/NI/sk-def-sf-orientation/fa983d794c070da37ee4f4a8ee93af5e0e804ec8; stale return retired.
+- 21:37 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
