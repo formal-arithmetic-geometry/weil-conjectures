@@ -19,134 +19,42 @@
  ],
  "proof": [
   {
-   "text": "Put $d=[F:E]$. Choose an $\\mathcal O_E$-basis $b_1,\\ldots,b_d$ of $\\mathcal O_F$ by [lem-sfb-local-field-integral-basis]. By [det-prop-sfb-cartesian-coefficients-finite-free], the same basis gives $E_W^{\\oplus d}\\cong F_W$ for $W=X,Y$, compatible with inverse image along $f$. Write $q_i^W:F_W\\to E_W$ for the inverse coordinates. In particular the basis section $b_i^Y$ maps to $b_i^X$ under the coefficient pullback. The scalar maps here are precisely those of [def-sfb-subfield-coefficient-map].",
+   "text": "Use the same finite E-basis of F and its continuous coordinates as in the flatness proof. The generic scheme_basis_from_point helper produces coherent scalar sections on every scheme and the ordinary scalar-unit copower isomorphism, indexed by ULift (Fin [F:E]). Extension is exact by lem-sfb-subfield-flat.",
    "uses": [
-    "lem-sfb-local-field-integral-basis",
-    "det-prop-sfb-cartesian-coefficients-finite-free",
-    "def-sfb-subfield-coefficient-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-push-iso.proof.md",
-    "place": "Finite-basis proof, expanded"
-   }
-  },
-  {
-   "text": "Write $U_W=D(\\operatorname{Res}_{E_W\\to F_W})$ and $T_W=T^W_{E,F}$. Restriction is exact and extension is right exact by [sk-def-sfb-change-of-scalars]; extension is also left exact by [lem-sfb-subfield-flat], hence exact. Thus $T_W\\cong D(\\operatorname{Ext})$, termwise extension on the unbounded derived category, by the exact-functor clause of [sk-def-sfb-derived-categories]; from step 5 on this identification is the isomorphism $\\psi$ fixed there, which changes nothing below since only some natural isomorphism is used here. Apply [lem-sfb-finite-free-scalar-coordinates] to step 1: its maps are $s\\otimes m\\mapsto(q_i^W(s)m)_i$ and $(m_i)\\mapsto\\sum_i b_i^W\\otimes m_i$. Derive this natural isomorphism using [lem-sfb-exact-derived-natural-iso], identifying the derived composite with $U_WT_W$ using [lem-sfb-exact-derived-composition]. This gives $U_WT_WL\\cong L^{\\oplus d}$ naturally in $L$. These formulas hold termwise on complexes and commute with differentials. Under this identification the $i$th injection is $j_i^W(L):m\\mapsto b_i^W\\otimes m$; no assertion about tensor sheaf sections being sectionwise tensor products is needed.",
-   "uses": [
-    "sk-def-sfb-change-of-scalars",
     "lem-sfb-subfield-flat",
-    "sk-def-sfb-derived-categories",
-    "lem-sfb-finite-free-scalar-coordinates",
-    "lem-sfb-exact-derived-natural-iso",
-    "lem-sfb-exact-derived-composition"
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-push-iso.proof.md",
-    "place": "Finite-basis proof, expanded"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $G=Rf_*^E$ and $H=Rf_*^F$. The adjunction $Lf_E^*\\dashv G$ is part of [sk-def-sfb-module-derived-pushpull]. Apply [lem-weil-pbc-right-adjoint-preserves-limits] to the finite discrete diagram of $d$ copies of $K$: $G(K^{\\oplus d})\\to(GK)^{\\oplus d}$, with components $G(\\pi_i)$, is an isomorphism. Here products are biproducts because the derived categories are additive [def-weil-abstract-derived-category]. The inverse is the canonical finite-sum map $a_K:(GK)^{\\oplus d}\\to G(K^{\\oplus d})$ with components $G(\\iota_i)$: composing with $G(\\pi_j)$ gives the identity for $i=j$ and zero otherwise. Indeed $G$ preserves zero objects, hence zero morphisms, since it preserves the empty product. Only finite products, not arbitrary coproducts or properness of $f$, enter.",
+   "text": "Apply the generic qbar_isIso_unit lemma in CondensedQbarScalarBasisUnitOfSections to descend the ordinary unit decomposition to arbitrary unbounded derived objects. The scalar-action pushforward identity identifies the derived basis scalars on X and Y. Restriction reflects isomorphisms of modules, and its exact derived functor reflects isomorphisms by the homology criterion.",
    "uses": [
-    "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-pbc-right-adjoint-preserves-limits",
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit-of-sections",
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-push-iso.proof.md",
-    "place": "Finite-basis proof, expanded"
-   }
+   "elementary": false
   },
   {
-   "text": "The functor $U_Y$ reflects isomorphisms. To see this, restriction in [sk-def-sfb-change-of-scalars] is exact and unchanged on underlying objects and maps. It reflects module isomorphisms: if $u$ has underlying inverse $v$, the equation $u(r v(y))=r y=u(v(r y))$ gives linearity of $v$. Exactness identifies $H^n(U_YL)$ with $\\operatorname{Res}(H^nL)$, since kernels, images and their quotient defining cohomology are preserved. If $U_Y(u)$ is invertible, every restricted $H^n(u)$ is invertible, so every $H^n(u)$ is invertible by the preceding inverse calculation. The criterion [lem-weil-pbc-unbounded-derived-iso-cohomology], applied in the category of $F_Y$-modules, then makes $u$ invertible.",
+   "text": "The mate of derivedPushHom is the inverse restriction/direct-image isomorphism. Apply isIso_iff_unitCoproductComparison with the coherent central basis actions. The remaining comparison is sigmaComparison for the finite index ULift (Fin [F:E]); it is invertible because the derived direct image is additive and therefore preserves finite coproducts. Apply this componentwise and use NatIso.isIso_of_isIso_app.",
    "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+    "lem-weil-pbc-coefficient-push-copower-criterion",
+    "lem-grothendieck-derived-has-coproducts"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-push-iso.proof.md",
-    "place": "Finite-basis proof, expanded"
-   }
-  },
-  {
-   "text": "Let $e:U_YH\\xrightarrow{\\sim}GU_X$ be [def-sfb-derived-comap-lower-star-iso], and let $c_K:T_YGK\\to HT_XK$ be (Push) [def-sfb-derived-push-hom]. Write $\\eta^W$ for the unit of $T_W\\dashv U_W$ [sk-def-sfb-derived-extension-of-scalars]. Substituting the unit--comparison--counit composite of [def-sfb-mate-push-hom] and cancelling the unit and counit by the adjunction triangle identity gives\n$$e_{T_XK}\\,U_Y(c_K)\\,\\eta^Y_{GK}=G(\\eta^X_K).$$\nThis determines the image of the tensor with $1$, not yet those with the other basis elements. It remains to identify $\\eta^W$ with the termwise unit $u_M:M\\to\\operatorname{Res}(F_W\\otimes_{E_W}M)$, $m\\mapsto1\\otimes m$. Let $\\lambda:\\mathrm{id}\\to U_WD(\\operatorname{Ext})$ be the localization of $u$ (natural on $D(\\Mod_{E_W})$, since it is natural for maps of complexes), and $\\psi:T_W\\to D(\\operatorname{Ext})$ its transpose under $T_W\\dashv U_W$, so $U_W(\\psi)\\,\\eta^W=\\lambda$. Apply [lem-sfb-exact-right-adjoint-kflat-representative] with $\\mathcal C=\\Mod_{E_W}$, $\\mathcal D=\\Mod_{F_W}$, $E=\\operatorname{Ext}\\dashv U=\\operatorname{Res}$ and the chosen adjunction $T_W\\dashv U_W$: $\\Mod_{E_W}$ is Grothendieck, closed symmetric monoidal with additive tensor and functorial flat resolutions by [lem-sfb-modobj-grothendieck], [def-sfb-modobj-internal-hom], [lem-sfb-modobj-flat-resolutions], under the ambient hypotheses with which [sk-def-sfb-derived-extension-of-scalars] defines $T_W$; Res is exact and Ext is exact (step 2), so Ext preserves quasi-isomorphisms between K-flat complexes. Hence $\\psi_{QP}$ is invertible for K-flat $P$. Every complex has a K-flat resolution [lem-sfb-abstract-kflat-resolution], so $\\psi$ is a natural isomorphism; with it, $\\eta^W$ is the localized termwise unit $m\\mapsto1\\otimes m$.",
-   "uses": [
-    "def-sfb-derived-comap-lower-star-iso",
-    "def-sfb-derived-push-hom",
-    "sk-def-sfb-derived-extension-of-scalars",
-    "def-sfb-mate-push-hom",
-    "lem-sfb-exact-right-adjoint-kflat-representative",
-    "lem-sfb-modobj-grothendieck",
-    "def-sfb-modobj-internal-hom",
-    "lem-sfb-modobj-flat-resolutions",
-    "lem-sfb-abstract-kflat-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-push-iso.proof.md",
-    "place": "Finite-basis proof, expanded"
-   }
-  },
-  {
-   "text": "The underived comparison [def-sfb-comap-lower-star-iso] identifies the same underlying pushforward, and [sk-def-sfb-module-pushforward-pullback] specifies its scalar action through $\\eta_f$. Thus multiplication by $b_i^Y$ on $f_*^F N$ is $f_*^F$ of multiplication by $b_i^X$ on $N$, because these basis sections correspond under inverse image by step 1. For a complex representing $N$, choose an $F_X$-module K-injective resolution $N\\to I$. By [lem-sfb-comap-preserves-k-injectives], applicable by the flatness in step 2 at every scheme, $\\operatorname{Res}I$ is K-injective over $E_X$. Thus the two sides of the derived comparison [def-sfb-derived-comap-lower-star-iso] are computed on $I$ and $\\operatorname{Res}I$ by [sk-def-sfb-module-derived-pushpull]. On these models $e$ is the localization of the underived identity comparison in each degree. Multiplication by $b_i$ is a chain map, so the same scalar-action equality holds through $e$. Naturality of $e$ for this multiplication and $F_Y$-linearity of $c_K$ let us multiply the equality of step 5 by $b_i$. Since $j_i^W=b_i^W\\eta^W$, we obtain\n$$e_{T_XK}\\,U_Y(c_K)\\,j_i^Y(GK)=G(j_i^X(K))\\qquad(1\\leq i\\leq d).$$\nUnder the coordinates of step 2 these are exactly the $d$ injections defining $a_K$ in step 3. Equality on the injections determines a morphism out of a finite biproduct, so the restricted (Push), followed by $e$, is that canonical finite-sum map.",
-   "uses": [
-    "def-sfb-comap-lower-star-iso",
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-def-sfb-module-derived-pushpull",
-    "def-sfb-derived-comap-lower-star-iso",
-    "lem-sfb-comap-preserves-k-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-push-iso.proof.md",
-    "place": "Finite-basis proof, expanded"
-   }
-  },
-  {
-   "text": "The coordinate identifications and $e$ are isomorphisms, and $a_K$ is an isomorphism by step 3. Step 6 therefore makes $U_Y(c_K)$ invertible. Step 4 makes $c_K$ invertible. This applies to every unbounded $K$. The inverses form a natural transformation: the naturality equation for $c$ can be multiplied on either side by its component inverses. Hence (Push) is an isomorphism of functors as asserted.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-push-iso.proof.md",
-    "place": "Finite-basis proof, expanded"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-local-field-integral-basis",
-  "det-prop-sfb-cartesian-coefficients-finite-free",
-  "def-sfb-subfield-coefficient-map",
-  "sk-def-sfb-change-of-scalars",
   "lem-sfb-subfield-flat",
-  "sk-def-sfb-derived-categories",
-  "lem-sfb-finite-free-scalar-coordinates",
-  "lem-sfb-exact-derived-natural-iso",
-  "lem-sfb-exact-derived-composition",
-  "sk-def-sfb-module-derived-pushpull",
-  "lem-weil-pbc-right-adjoint-preserves-limits",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "def-sfb-derived-comap-lower-star-iso",
-  "def-sfb-derived-push-hom",
-  "sk-def-sfb-derived-extension-of-scalars",
-  "def-sfb-mate-push-hom",
-  "def-sfb-comap-lower-star-iso",
-  "sk-def-sfb-module-pushforward-pullback",
-  "lem-sfb-comap-preserves-k-injectives",
-  "lem-sfb-exact-right-adjoint-kflat-representative",
-  "lem-sfb-modobj-grothendieck",
-  "def-sfb-modobj-internal-hom",
-  "lem-sfb-modobj-flat-resolutions",
-  "lem-sfb-abstract-kflat-resolution"
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-sections",
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-unit-of-sections",
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-pushforward",
+  "lem-weil-pbc-coefficient-push-copower-criterion",
+  "lem-grothendieck-derived-has-coproducts"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-subfield-push-iso.proof.md",
-  "place": "Finite-basis proof, with the mate and conservativity arguments expanded"
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "place": "M4 proof: finite continuous basis and existing generic scalar-unit/coproduct API; 2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -307,5 +215,15 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-73abb3951 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 20 cited statements, the main-20261015 item, proof and unit texts, the route closure and the tool uses. The statement matches the blueprint verbatim and is not weakened. The seven steps follow the blueprint's finite-basis route: basis, coordinates, finite products via the right adjoint Rf_*, conservativity of exact restriction, the mate unit equation, the action of the basis elements b_i, and assembly. The mate calculation and the b_i equations check out. There are no new nodes and no cycles. The declared tool uses (integral basis, cartesian finite-free, subfield-flat, finite-free scalar coordinates, exact-derived composition) are accepted. One fault, C1/C4: step 5 asserted without citation that the unit of the specified derived adjunction T_W ⊣ D(Res) is the localized termwise unit m ↦ 1⊗m. No cited node states this; the exact-functor identification of step 2 is arbitrary, and step 6's j_i = b_i·η depends on it. Fixed in step 5: ψ, the transpose of the localized unit, is invertible by lem-sfb-exact-right-adjoint-kflat-representative (Stacks 06YY), whose hypotheses for Mod_{E_W} come from lem-sfb-modobj-grothendieck, def-sfb-modobj-internal-hom and lem-sfb-modobj-flat-resolutions. It extends to every object by lem-sfb-abstract-kflat-resolution. Step 2 now uses ψ as its identification, and the lemma is added to split_report.tool_uses. Edge cases checked: E=F, f=id, K=0, X empty, unbounded K; no coproducts or properness are used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261021T061527-L-1786233",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

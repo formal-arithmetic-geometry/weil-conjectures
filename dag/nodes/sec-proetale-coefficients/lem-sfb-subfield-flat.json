@@ -18,91 +18,36 @@
  ],
  "proof": [
   {
-   "text": "Choose a finite $E$-basis of $F$: a finite $\\mathbf Q_\\ell$-spanning list also spans over $E$, and a maximal independent sublist is a basis. By [lem-sfb-condensed-subfield-basis] it gives $\\underline E^{\\,n}\\cong\\underline F$ as internal $\\underline E$-modules, with coordinate morphisms.",
+   "text": "Choose the finite E-basis of F. Restrict each coordinate to Q_l and apply finite-dimensional continuity over the complete field Q_l; this does not assume completeness of the algebraic closure. The private point_finiteFree helper constructs the corresponding inverse module morphisms on continuous-map presheaves, proves the two basis identities sectionwise, and transports them through monoidal sheafification.",
    "uses": [
-    "lem-sfb-condensed-subfield-basis"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "Assembly of the finite-basis proof"
-   }
-  },
-  {
-   "text": "Put $P=p_X^*$. It is a strong monoidal left adjoint by [sk-def-sfb-pullback-from-point]. The left-adjoint colimit theorem [lem-weil-pbc-left-adjoint-preserves-colimits] and [lem-sfb-preserving-colimits-additive] make $P$ additive. Both sheaf categories are abelian, so they have finite biproducts, and by [sk-def-sfb-sheaf-tensor] each functor $A\\otimes-$, $-\\otimes A$ preserves colimits, hence is additive by [lem-sfb-preserving-colimits-additive]; these are the hypotheses of [lem-sfb-monoidal-finite-free-transport], which we apply to the preceding basis. The transported rings and scalar map are precisely $E_X\\to F_X$ by [sk-def-sfb-pulled-back-coefficients] and [def-sfb-subfield-coefficient-map]. Thus $F_X\\cong E_X^{\\,n}$ as $E_X$-modules.",
-   "uses": [
-    "sk-def-sfb-pullback-from-point",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-sfb-preserving-colimits-additive",
-    "sk-def-sfb-sheaf-tensor",
-    "lem-sfb-monoidal-finite-free-transport",
-    "sk-def-sfb-pulled-back-coefficients",
+    "def-weil-l-adic-numbers",
+    "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+    "sk-def-sfb-condensed-ring",
     "def-sfb-subfield-coefficient-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "Assembly of the finite-basis proof"
-   }
+   "elementary": false
   },
   {
-   "text": "The equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] applies to the sheafified tensor of [sk-def-sfb-sheaf-tensor] on the chosen small pro-etale site. It preserves the underlying sheaf and section groups identically. Hence [lem-weil-pbc-module-sheaves-limits-sectionwise] supplies limits of internal $E_X$- and $F_X$-modules with sectionwise underlying groups. Restriction of scalars preserves these limits by [sk-def-sfb-change-of-scalars].",
+   "text": "View the finite free object as the coproduct indexed by ULift (Fin n). Apply the generic scheme_basis_from_point construction in CondensedQbarScalarBasisSections to this point isomorphism. It transports the regular-module copower by the colimit-preserving monoidal point inverse image and proves exactness of extension by flatness of the resulting copower and reflection by the forgetful functor. Evaluate its exactness clause at X.",
    "uses": [
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-def-sfb-sheaf-tensor",
-    "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "sk-def-sfb-change-of-scalars"
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-sections",
+    "sk-def-sfb-pulled-back-coefficients"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "Assembly of the finite-basis proof"
-   }
-  },
-  {
-   "text": "Write $R=E_X$, $B=F_X$. Apply [lem-sfb-finite-free-scalar-coordinates] to the basis of step 2. It gives $\\operatorname{Res}(B\\otimes_R M)\\cong M^n$, naturally in $M$, with the stated inverse tensor coordinate maps.",
-   "uses": [
-    "lem-sfb-finite-free-scalar-coordinates"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "Assembly of the finite-basis proof"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-scalar-coordinate-limit-criterion] on the small pro-etale site of $X$, with the sheafified tensor of [sk-def-sfb-sheaf-tensor], the scalar map $\\varphi:E_X\\to F_X$, and $T=F_X\\otimes_{E_X}-$ of [sk-def-sfb-change-of-scalars]. Step 4 supplies its required natural isomorphism $\\operatorname{Res}_\\varphi T\\cong(-)^n$. The criterion therefore makes $T$ preserve every finite limit, including the empty one. This is the asserted flatness.",
-   "uses": [
-    "lem-sfb-scalar-coordinate-limit-criterion",
-    "sk-def-sfb-sheaf-tensor",
-    "sk-def-sfb-change-of-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "Final sentence: finite direct sums are exact; internal-module limit comparison following the natural tensor-coordinate isomorphism"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-sfb-condensed-subfield-basis",
-  "sk-def-sfb-pullback-from-point",
-  "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-sfb-preserving-colimits-additive",
-  "sk-def-sfb-sheaf-tensor",
-  "lem-sfb-monoidal-finite-free-transport",
-  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-l-adic-numbers",
+  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "sk-def-sfb-condensed-ring",
   "def-sfb-subfield-coefficient-map",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
-  "sk-def-sfb-change-of-scalars",
-  "lem-sfb-finite-free-scalar-coordinates",
-  "lem-sfb-scalar-coordinate-limit-criterion"
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-sections",
+  "sk-def-sfb-pulled-back-coefficients"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-  "place": "Finite-basis route, retaining the existing condensed-basis, additive monoidal transport and tensor-coordinate nodes; the last limit inference is factored into the scalar-coordinate limit criterion"
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "place": "M4 proof: finite continuous basis and existing generic scalar-unit/coproduct API; 2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -212,5 +157,15 @@
  },
  "tool_uses": [
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
- ]
+ ],
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261021T061527-L-1786233",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

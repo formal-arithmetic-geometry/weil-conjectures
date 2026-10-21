@@ -18,58 +18,20 @@
  ],
  "proof": [
   {
-   "text": "Put $R=E_X$ and $B=\\overline{\\mathbf Q}_{\\ell,X}$. Choose the small site and coefficient universe of [def-weil-size-convention]. The closed tensor and monoidal local-equivalence hypotheses of [lem-sfb-internal-scalar-extension-section-test] hold by [sk-def-sfb-sheaf-tensor, det-def-sfb-sheaf-tensor-local-iso]. This test identifies internal scalar-extension flatness with flatness of the corresponding section-ring module sheaf, using its specified natural tensor comparison.",
+   "text": "Apply exists_condensedQbar_scalar_basis_sections and take its exactness clause at X. Its proof constructs the restricted regular closure module as a copower of the regular E-module, pulls it back by the monoidal point inverse image, and uses flatness of copowers of the tensor unit and reflection by the exact forgetful functor.",
    "uses": [
-    "def-weil-size-convention",
-    "sk-def-sfb-sheaf-tensor",
-    "det-def-sfb-sheaf-tensor-local-iso",
-    "lem-sfb-internal-scalar-extension-section-test"
+    "lem-weil-pbc-condensed-qbar-derived-scalar-basis-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "Tensor sentence and exactness conclusion: internal/sectionwise bridge, formerly steps 1 and 6."
-   }
-  },
-  {
-   "text": "By [lem-sfb-qlbar-tail-module-colimit], $B$ with the coefficient-inclusion legs $q_F$ is the colimit of $F_X$ in the fixed category $\\operatorname{Mod}(R)$ over the small nonempty directed poset $I_E$ of finite $F\\supseteq E$. For each $F$, [lem-sfb-subfield-flat] says its internal extension preserves finite limits. Applying [lem-sfb-internal-scalar-extension-section-test] to $E_X\\to F_X$ proves that its underlying section-ring module sheaf is flat over $R$.",
-   "uses": [
-    "lem-sfb-qlbar-tail-module-colimit",
-    "lem-sfb-subfield-flat",
-    "lem-sfb-internal-scalar-extension-section-test"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "First sentence and finite-stage exactness sentence; retains the existing cofinal module-colimit extraction."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-filtered-colimit-flat-module-sheaves] to this $R$-module colimit: $B$ is a flat $R$-module sheaf. Applying [lem-sfb-internal-scalar-extension-section-test] to $R\\to B$ now gives finite-limit preservation of the internal extension in the statement. The tensor-colimit and kernel comparisons and the reflection of the resulting comparison in $B$-modules are precisely those provided by the two extracted lemmas.",
-   "uses": [
-    "lem-sfb-filtered-colimit-flat-module-sheaves",
-    "lem-sfb-internal-scalar-extension-section-test"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "Tensor-colimit and final exactness sentences: assembles the two independent extracted arguments."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-size-convention",
-  "sk-def-sfb-sheaf-tensor",
-  "det-def-sfb-sheaf-tensor-local-iso",
-  "lem-sfb-internal-scalar-extension-section-test",
-  "lem-sfb-qlbar-tail-module-colimit",
-  "lem-sfb-subfield-flat",
-  "lem-sfb-filtered-colimit-flat-module-sheaves"
+  "lem-weil-pbc-condensed-qbar-derived-scalar-basis-sections"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-  "place": "Assembly of the existing cofinal coefficient module colimit, the internal/sectionwise scalar-extension test, and Stacks Tag 03EU for flat module sheaves. The blueprint route is unchanged."
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+  "place": "M4 proof: finite continuous basis and existing generic scalar-unit/coproduct API; 2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -209,5 +171,15 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjToPadicAlgCl"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:07 UTC (L, propagation 2026-10-18), live declaration proved in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility: the blueprint item lem-sfb-qlbar-flat's upstream Lean declarations, proved in live (sweep of the propagation)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261021T061527-L-1786233",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
