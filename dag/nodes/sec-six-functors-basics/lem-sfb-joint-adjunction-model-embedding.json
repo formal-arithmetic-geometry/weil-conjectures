@@ -2,18 +2,95 @@
  "id": "lem-sfb-joint-adjunction-model-embedding",
  "kind": "statement",
  "title": "Adjoint local model maps embed into a product under joint zero detection",
- "statement": "Let $\\mathcal A$ and $(\\mathcal B_i)_{i\\in I}$ be abelian categories [def-sp-abelian], with $I$ a set. For each $i$ let $F_i:\\mathcal A\\to\\mathcal B_i$ be an additive functor preserving kernels, and let $G_i:\\mathcal B_i\\to\\mathcal A$ be a right adjoint, with adjunction unit $\\eta_i:\\mathrm{id}_{\\mathcal A}\\to G_iF_i$. Here $F_i\\dashv G_i$ means specified natural bijections $\\operatorname{Hom}_{\\mathcal B_i}(F_iM,B)\\cong\\operatorname{Hom}_{\\mathcal A}(M,G_iB)$, with their unit and counit. Suppose the $F_i$ jointly detect zero objects: if $F_iN$ is zero for every $i$, then $N$ is zero. Fix $M\\in\\mathcal A$, objects $B_i\\in\\mathcal B_i$, and isomorphisms $e_i:F_iM\\xrightarrow{\\sim}B_i$. If the product $P=\\prod_{i\\in I}G_iB_i$ exists [def-weil-category-product], the map $u:M\\to P$ whose $i$-th component is $G_i(e_i)\\circ\\eta_{i,M}$ is a monomorphism. In particular this applies to $B_i=F_iM$ and $e_i=\\mathrm{id}$.",
+ "statement": "Let $\\mathcal A$ and $(\\mathcal B_i)_{i\\in I}$ be abelian categories [def-sp-abelian], with $I$ a set. For each $i$ let $F_i:\\mathcal A\\to\\mathcal B_i$ be an additive functor [def-weil-pbc-additive-functor] preserving kernels, and let $G_i:\\mathcal B_i\\to\\mathcal A$ be a right adjoint, with adjunction unit $\\eta_i:\\mathrm{id}_{\\mathcal A}\\to G_iF_i$. Here $F_i\\dashv G_i$ means specified natural bijections $\\operatorname{Hom}_{\\mathcal B_i}(F_iM,B)\\cong\\operatorname{Hom}_{\\mathcal A}(M,G_iB)$, with their unit and counit. Suppose the $F_i$ jointly detect zero objects: if $F_iN$ is zero for every $i$, then $N$ is zero. Fix $M\\in\\mathcal A$, objects $B_i\\in\\mathcal B_i$, and isomorphisms $e_i:F_iM\\xrightarrow{\\sim}B_i$. If the product $P=\\prod_{i\\in I}G_iB_i$ exists [def-weil-category-product], the map $u:M\\to P$ whose $i$-th component is $G_i(e_i)\\circ\\eta_{i,M}$ is a monomorphism. In particular this applies to $B_i=F_iM$ and $e_i=\\mathrm{id}$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
   "place": "Essentially small paragraph, global gluing from stratum restrictions; categorical kernel-and-adjunction argument isolated from retained original step 6"
  },
  "stmt_deps": [
   "def-sp-abelian",
+  "def-weil-pbc-additive-functor",
   "def-weil-category-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $u_i=G_i(e_i)\\circ\\eta_{i,M}$ and let $p_i:P\\to G_iB_i$ be the product projections, so $p_i\\circ u=u_i$ by [def-weil-category-product]. Since $\\mathcal A$ is abelian [def-sp-abelian], choose a kernel $k:K\\to M$ of $u$: $u\\circ k=0$, and every $h:T\\to M$ with $u\\circ h=0$ factors uniquely as $k\\circ t$. Then $u_i\\circ k=p_i\\circ u\\circ k=0$ for every $i$. These are only the product and kernel defining equations; no product preservation is asserted.",
+   "uses": [
+    "def-weil-category-product",
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0106 (definition-kernel); product definition Tag 002I in categories.tex; blueprint Essentially small paragraph, global gluing"
+   }
+  },
+  {
+   "text": "Fix $i$. Additivity [def-weil-pbc-additive-functor] gives $F_i(0_{K,M})=0$. Let $\\Phi_{N,B}:\\operatorname{Hom}(F_iN,B)\\to\\operatorname{Hom}(N,G_iB)$ be the specified adjunction bijection; its naturality and definition of the unit give $\\Phi_{M,B_i}(e_i)=u_i$. Naturality in $N$ at $k$ and at $0_{K,M}$ gives respectively $\\Phi_{K,B_i}(e_i\\circ F_i(k))=u_i\\circ k=0$ and $\\Phi_{K,B_i}(e_i\\circ F_i(0_{K,M}))=u_i\\circ0=0$. Injectivity of $\\Phi_{K,B_i}$ therefore gives $e_i\\circ F_i(k)=e_i\\circ F_i(0_{K,M})=0$. Compose with $e_i^{-1}$ to obtain $F_i(k)=0$. Zero composites here follow from bilinearity [def-weil-preadditive-category].",
+   "uses": [
+    "def-weil-pbc-additive-functor",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), naturality and paragraph defining unit; Tag 00ZY (definition-preadditive) in homology.tex"
+   }
+  },
+  {
+   "text": "By the assumed preservation of kernels, $F_i(k):F_iK\\to F_iM$ is a kernel of $F_i(u)$. Its defining uniqueness, applied to the zero arrow $F_iK\\to F_iM$, identifies the two factorizations $\\mathrm{id}_{F_iK}$ and $0_{F_iK,F_iK}$, because $F_i(k)=0$. Thus $\\mathrm{id}_{F_iK}=0$. Every arrow into $F_iK$ is zero by composing with this identity, and every arrow out of $F_iK$ is zero for the same reason; zero arrows exist and composition is bilinear [def-weil-preadditive-category]. Hence $F_iK$ is both initial and terminal, that is, a zero object. This proves the required assertion for each $i$ directly from the kernel universal property.",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0106 (definition-kernel) and 00ZY (definition-preadditive): uniqueness of kernel factorization and bilinearity"
+   }
+  },
+  {
+   "text": "The joint zero-detection hypothesis now applies to the single object $K$, since the preceding step proved that $F_iK$ is zero for every $i$. Thus $K$ is a zero object. Its endomorphisms $\\mathrm{id}_K$ and $0_{K,K}$ coincide by uniqueness, and consequently $k=k\\circ\\mathrm{id}_K=k\\circ0=0$, using bilinearity [def-weil-preadditive-category].",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
+    "place": "Essentially small paragraph, adjunction-unit embedding: apply the joint zero-detection assumption to its kernel"
+   }
+  },
+  {
+   "text": "For any object $T$ and arrows $a,b:T\\to M$ satisfying $u\\circ a=u\\circ b$, bilinearity [def-weil-preadditive-category] gives $u\\circ(a-b)=0$. The kernel property from step 1 supplies $t:T\\to K$ with $a-b=k\\circ t$. Since $k=0$, this says $a-b=0$ and hence $a=b$. This is precisely the cancellation definition of $u$ being a monomorphism. Thus no separate zero-kernel criterion or exactness theorem is being invoked.",
+   "uses": [
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0106 (definition-kernel) and 00ZY (definition-preadditive): kernel factorization of a difference"
+   }
+  },
+  {
+   "text": "For the final assertion take $B_i=F_iM$ and $e_i=\\mathrm{id}_{F_iM}$. These are isomorphisms, and functoriality gives $G_i(e_i)\\circ\\eta_{i,M}=\\eta_{i,M}$. The result just proved therefore states that the map with the adjunction units as its components is monic whenever its product exists.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
+    "place": "Essentially small paragraph, special case of the adjunction-unit embedding"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-category-product",
+  "def-sp-abelian",
+  "def-weil-pbc-additive-functor",
+  "def-weil-preadditive-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
+  "place": "Essentially small paragraph: categorical kernel-and-adjunction argument for the global local-model embedding; details supplied from Stacks Tags 0037, 0106 and 00ZY"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +133,45 @@
    "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean, Mathlib/CategoryTheory/Simple.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Subobject/Classifier/Defs.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions/Preadditive.lean, Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean, Mathlib/CategoryTheory/Triangulated/LocalizingSubcategory.lean. Grep subdirectory: CategoryTheory. The coseparating-product theorem requires a coseparating object class and counts all arrows. The unit-monic theorem requires one faithful left adjoint. Neither is a one-line specialization to a jointly zero-detecting family; the family/kernel argument is missing.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unit_mono_of_L_faithful|mono_productTo|joint.*zero",
+   "results": "5 hits: Mathlib/CategoryTheory/Generator/Basic.lean, Mathlib/CategoryTheory/Generator/Basic.lean, Mathlib/CategoryTheory/Generator/Basic.lean, Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.lean; Read relevant source: FullyFaithful.lean:57 needs a faithful single functor; Functor/EpiMono.lean:244 needs individual reflection of monomorphisms; Generator/Basic.lean:410 uses all maps to a coseparating class. None states the jointly zero-detecting family result. The remaining hits concern adjoint triples, reflective categories, zero preservation or exact functors.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jointly zero detecting left exact functors embed each object into the product of the right adjoints of its images",
+   "results": "8 hits: CategoryTheory.Functor.preservesZeroMorphisms_of_isLeftAdjoint, CategoryTheory.leftExactFunctor_le_additiveFunctor, CategoryTheory.Functor.preservesZeroMorphisms_of_isRightAdjoint, CategoryTheory.Limits.prodZeroIso, CategoryTheory.Limits.IsZero.obj, CategoryTheory.LeftExactFunctor.ofExact, CategoryTheory.Limits.preservesKernel_zero, CategoryTheory.AdditiveFunctor.ofLeftExact_obj_fst; Read relevant source: FullyFaithful.lean:57 needs a faithful single functor; Functor/EpiMono.lean:244 needs individual reflection of monomorphisms; Generator/Basic.lean:410 uses all maps to a coseparating class. None states the jointly zero-detecting family result. The remaining hits concern adjoint triples, reflective categories, zero preservation or exact functors.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Mono",
+   "results": "6 hits: CategoryTheory.Adjunction.instMonoCoeEquivHomObjHomEquivOfReflectsMonomorphisms, CategoryTheory.Adjunction.faithful_L_of_mono_unit_app, CategoryTheory.Adjunction.unit_mono_of_L_faithful, CategoryTheory.MonoOver.mapPullbackAdj, CategoryTheory.Subobject.mapPullbackAdj, CategoryTheory.adhesive_of_reflective; Read relevant source: FullyFaithful.lean:57 needs a faithful single functor; Functor/EpiMono.lean:244 needs individual reflection of monomorphisms; Generator/Basic.lean:410 uses all maps to a coseparating class. None states the jointly zero-detecting family result. The remaining hits concern adjoint triples, reflective categories, zero preservation or exact functors.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel preserving additive left adjoints jointly detecting zero objects give a monomorphism into the product of right adjoints via adjunction units",
+   "results": "8 hits: CategoryTheory.Adjunction.Triple.mono_leftToRight_app_iff_mono_adj₂_unit_app, CategoryTheory.Adjunction.Triple.mono_leftToRight_app_iff, CategoryTheory.Adjunction.unit_mono_of_L_faithful, CategoryTheory.Adjunction.Triple.mono_leftToRight_app_iff_mono_adj₁_counit_app, CategoryTheory.NonPreadditiveAbelian.mono_r, CategoryTheory.Adjunction.Quadruple.epi_leftTriple_leftToRight_app_iff_mono_rightTriple_rightToLeft_app, CategoryTheory.AbelianOfAdjunction.hasKernels, CategoryTheory.Functor.preservesMonomorphisms_of_isRightAdjoint; Read relevant source: FullyFaithful.lean:57 needs a faithful single functor; Functor/EpiMono.lean:244 needs individual reflection of monomorphisms; Generator/Basic.lean:410 uses all maps to a coseparating class. None states the jointly zero-detecting family result. The remaining hits concern adjoint triples, reflective categories, zero preservation or exact functors.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of left adjoints jointly reflecting zero objects and preserving kernels has a monic diagonal adjunction unit to the product of right adjoints",
+   "results": "8 hits: CategoryTheory.adhesive_of_reflective, CategoryTheory.Adjunction.unit_mono_of_L_faithful, CategoryTheory.Adjunction.Triple.mono_leftToRight_app_iff_mono_adj₂_unit_app, CategoryTheory.Adjunction.instMonoCoeEquivHomObjHomEquivOfReflectsMonomorphisms, CategoryTheory.Adjunction.Triple.mono_leftToRight_app_iff, CategoryTheory.reflective_products, CategoryTheory.isLeftAdjoint_triangle_lift, CategoryTheory.Adjunction.faithful_L_of_mono_unit_app; Read relevant source: FullyFaithful.lean:57 needs a faithful single functor; Functor/EpiMono.lean:244 needs individual reflection of monomorphisms; Generator/Basic.lean:410 uses all maps to a coseparating class. None states the jointly zero-detecting family result. The remaining hits concern adjoint triples, reflective categories, zero preservation or exact functors.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-brown-hypotheses-small",
@@ -77,5 +189,21 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-joint-adjunction-model-embedding",
+  "worker": "stage1",
+  "summary": "Wrote the kernel-and-adjunction computation in six elementary steps without new nodes. Naturality compares the adjuncts of e_i F_i(k) and e_i F_i(0); kernel uniqueness forces id on F_i K to vanish. Joint zero detection and kernel factorization of a difference then prove cancellation. Added the existing additive-functor definition dependency. The mathematical statement is unchanged. The upstream constructible embedding proves a geometric finite-family special case only, not this general categorical statement.",
+  "blueprint": "Realizes det-brown-hypotheses-small, Essentially small paragraph: finite stratification, local models and global gluing; the categorical adjunction-unit embedding isolated from retained original step 6, exactly the place recorded in blueprint.from. No unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-862e09e74",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-862e09e74 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full. The delivery is one commit with the item and report only, and no new nodes. The live (side-live) item is still unsplit, it is not in route-pivot-dropped, and there is no repair note. The statement is unchanged apart from the added [def-weil-pbc-additive-functor] citation, so no target is weakened. Citer det-brown-hypotheses-small step 6 (exact stratum pullbacks a_s^*, right adjoints a_{s*}, finite I) matches the item's hypotheses. Blueprint main-20261015 sk-lem-brown-hypotheses-small.proof.md l.11-14 'Essentially small' is the recorded place, and proof_origin=agent is correct. Steps checked: 1 is the product equations and the kernel (Stacks 0106, homology.tex l.210); 2 uses unit = Phi(id) and naturality (Stacks 0037, categories.tex l.3344) to get Phi(e∘F(k)) = Phi(e∘F(0)) = 0, then injectivity and e^{-1} give F(k)=0; 3 uses kernel preservation and kernel uniqueness to get id_{F_iK}=0, so F_iK is zero; 4 uses joint detection to get K=0, so k=0; 5 shows u∘(a-b)=0, so a=b (mono); 6 takes e=id. All four cited nodes are Mathlib-leaf definitions and say what is used; no off-route statement and no tool_uses. Edge cases: I empty (category trivial), Ab×Ab projections (jointly but not individually faithful), and kernel preservation is genuinely needed. DAG grep found no generic duplicate; lem-sbc-closed-open-coefficient-embedding is a concrete instance. The Mathlib searches are recorded and the no-match verdict is sound. Advisory only: 'monomorphism' could cite def-galois-initial-mono, but both mono and kernel are spelled out inline."
+ }
 }

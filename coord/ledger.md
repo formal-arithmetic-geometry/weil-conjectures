@@ -20587,3 +20587,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:13 L: merged deliver/Q17/lem-pur-unit-power-completeness (reviewer PASS; first push; new nodes: 0)
 - 07:14 L: merged deliver/NE/lem-weil-pbc-affine-cohomology-etale-module-realization (reviewer FIX; first push; new nodes: 1)
 - 07:14 L: merged deliver/Q96/def-nagata-homogeneous-localization-degree-zero (reviewer PASS; first push; new nodes: 0)
+- 07:14 L: merged deliver/Q59/lem-sfb-joint-adjunction-model-embedding (reviewer PASS; first push; new nodes: 0)
