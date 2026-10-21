@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "Write $S_{W,n}=(A_n)_W$, $\\pi_{W,n}:R_W\\to S_{W,n}$, and $\\rho_{W,n}:S_{W,n+1}\\to S_{W,n}$. Let $c_n:f^{-1}S_{Y,n}\\to S_{X,n}$ be the constant-coefficient structure maps. They commute with $\\rho_n$: both composites send a constant section $a$ to its image modulo $t^n$, and sheafification determines the maps. The maps $c_nf^{-1}(\\pi_{Y,n})$ therefore form a cone. The limit universal property of $R_X$ defines $c:f^{-1}R_Y\\to R_X$ with $\\pi_{X,n}c=c_nf^{-1}(\\pi_{Y,n})$. Thus the coefficient square at each $n$ commutes. This construction uses inverse image on the projections and then the universal property on $X$; it never interchanges inverse image with an inverse limit.",
+   "text": "Construct the direct-image constant-coefficient maps at each finite quotient by the sheafification adjunction. Naturality of its unit makes these maps commute with the quotient homomorphisms. Forget commutativity to obtain a natural transformation of RingCat-valued quotient towers. Continuous sheaf direct image preserves the tower limit, so its limiting cone gives a unique map R_Y → f_* R_X with the required projections. Restore the already constructed commutative structures sectionwise. Jointly monic limit projections prove uniqueness. No inverse-image/limit interchange is used.",
    "uses": [
     "def-weil-completed-integral-coefficients",
     "def-weil-proetale-inverse-image",
@@ -32,6 +32,17 @@
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03EK, section-tensor-product; constant-section structure maps and limit cone"
+   }
+  },
+  {
+   "text": "The module pushforward for this coefficient map has a left adjoint by module_pushforward_isRightAdjoint_of_universes, whose free-representable presentation and module sheafification work in max u (t+1). Its right-adjoint structure implies additivity by preservation of binary products. Define the ambient pullback by this adjunction.",
+   "uses": [
+    "lem-pur-ringed-site-module-pullback-exists-universes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7; module pullback adjunction in a universe containing the site"
    }
   },
   {
@@ -113,9 +124,11 @@
    }
   },
   {
-   "text": "Check the augmentations before taking limits. For pullback, the quotient map is $f^*P\\to(f^*P)\\otimes S_{X,n}$, $r\\otimes x\\mapsto(r\\otimes x)\\otimes1$; under $b_n$ it becomes $\\pi_{X,n}(r)\\otimes(x\\otimes1)$, exactly scalar insertion into $f_n^*P_n$. For tensor, $x\\otimes y\\mapsto(x\\otimes y)\\otimes1$ becomes $(x\\otimes1)\\otimes(y\\otimes1)$ under $d_n$, the defining finite tensor augmentation. These are compatible families by Step 5. In the strict Roos coordinates consisting of the shifted-product coordinate followed by the unshifted-product coordinate, the associated chain augmentation is $z\\mapsto(0,(\\gamma_nz)_n)$. A strict tower map acts by the same product map diagonally on both coordinates, hence carries this augmentation to $(0,(b_n\\gamma_nz)_n)$, or the expression with $d_n$. In particular the shifted-product component remains zero.",
+   "text": "Check the augmentations before taking limits. For pullback, the quotient map is $f^*P\\to(f^*P)\\otimes S_{X,n}$, $r\\otimes x\\mapsto(r\\otimes x)\\otimes1$; under $b_n$ it becomes $\\pi_{X,n}(r)\\otimes(x\\otimes1)$, exactly scalar insertion into $f_n^*P_n$. For tensor, $x\\otimes y\\mapsto(x\\otimes y)\\otimes1$ becomes $(x\\otimes1)\\otimes(y\\otimes1)$ under $d_n$, the defining finite tensor augmentation. These are compatible families by Step 5. In the strict Roos coordinates consisting of the shifted-product coordinate followed by the unshifted-product coordinate, the associated chain augmentation is $z\\mapsto(0,(\\gamma_nz)_n)$. A strict tower map acts by the same product map diagonally on both coordinates, hence carries this augmentation to $(0,(b_n\\gamma_nz)_n)$, or the expression with $d_n$. In particular the shifted-product component remains zero. In Lean compare the recorded homotopy-cofiber map with mappingCone.map. Cone projection identities and the explicit shift formulas show that the strict Roos map commutes with both product coordinates. The lift_fst and lift_f_snd_v identities for the (augmentation,0) cocone lift give the asserted first projection and the zero second projection.",
    "uses": [
-    "def-weil-strict-roos-model"
+    "def-weil-strict-roos-model",
+    "lem-pur-integral-operations-well-defined",
+    "def-pur-integral-derived-operations"
    ],
    "elementary": true,
    "source": {
@@ -176,13 +189,14 @@
   "lem-weil-proetale-countable-products-exact",
   "lem-weil-restriction-of-scalars-exact",
   "lem-weil-strict-roos-derivation",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pur-ringed-site-module-pullback-exists-universes"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 06YY, 0G7E, 07A4 and 0941, combined with explicit coefficient-square, quotient-transition and zero-component calculations in sites-modules.tex Section 03EK",
-  "note": "An assembly of the existing K-flat, coefficient-association, strict-tower and Roos results; the complete simultaneous normalization argument is written here."
+  "note": "The completed-ring map, module adjunction and additivity, Roos augmentation coordinates, and tensor goodness use the explicit Lean constructions recorded in the corresponding steps. The remaining original pullback and tensor tower, pullback goodness and final derived assembly statements retain their original proof plans; no new hole is introduced."
  },
  "mathlib_searches": [
   {
@@ -443,5 +457,15 @@
   "group": "O3",
   "result": "pass",
   "note": "Statement matches the node clause by clause. ℓ-invertibility on X and Y, independent universes t/u, no extra hypotheses. coefficientMap is the unique map compatible with every finite projection; no identification f⁻¹R_Y=R_X. F is pinned by IsLeftDerivedFunctor plus counit invertible on flat-term K-flat complexes. α and β (W=X∨W=Y, recorded duality tensor) are pinned on good representatives as completion comparison ≫ Q(Roos(whole strict-tower iso)), so neither is hollow. pullTowerModel/tensorTowerModel are ∃! natural isos of whole towers, normalized on generators by the node's Step 3–4 formulas. Augmentation clauses plus the *_coordinates theorems give the product of finite insertions and the zero shifted-product coordinate. Right-hand sides are the recorded integralDerivedPullback/integralCompletedTensor. Statement verbatim; declarations complete; node differs from side-live only in lean; sorry-only proofs; source and blueprint docstrings present. Advisories: pull ≡ Mathlib SheafOfModules.pullback; existing completedModulePullback forces equal universes, so it is unusable here; augmentation clause 4 is derivable from clause 3. Compile: the 248-line prefix was clean in 45.1 s earlier; the full file hit the 60 s limit at load 172 after 24 s CPU (starvation). The pushed head implies deliver2's server compile passed. Land at lower load; if it times out, set linter.all false or split out the coordinate theorems."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261021T134519-L-1278540",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

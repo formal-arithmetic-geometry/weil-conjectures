@@ -11,24 +11,9 @@ public import Sheaf.Paper.RingedTopoiDerivedPullback
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.Algebra.Homology.DerivedCategory.Fractions
-import Sheaf.SecSmoothPurity.CochainCoefficientArrows
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.CategoryTheory.StrictRoosModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.Paper.IntegralTensorReductionTowerComparison
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackExistsOfUniverses
+import all Sheaf.Paper.IntegralOperationsWellDefined
 import Sheaf.Algebra.Homology.KFlatTotalTensorModel
-import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
-import Sheaf.Paper.ResolvingRepresentativeWhiskering
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.CategoryTheory.StrictRoosDerivation
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 
 /-! # Ambient completion presentations of integral operations
 
@@ -42,6 +27,7 @@ coefficient map is specified by its projections, not by an identification of rin
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.all false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -49,8 +35,48 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 universe t u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures.IntegralAmbient
+open AlgebraicGeometry.Scheme
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+
+private theorem sequenceConstantUnit {X Y : Scheme.{t}} (f : X ⟶ Y)
+    (A : CommRingCat.{max u (t + 1)}) (U : Y.ProEtᵒᵖ) :
+    (toSheafify (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).obj A)).app U ≫
+      (coefficientProEtaleDirectRingMap.{t, u} f A).hom.app U =
+    (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)).app
+      ((proEtaleBaseChange f).op.obj U) := by
+  have h := (sheafificationAdjunction (ProEt.topology Y)
+      CommRingCat.{max u (t + 1)}).homEquiv ((Functor.const Y.ProEtᵒᵖ).obj A)
+        (((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
+          (ProEt.topology Y) (ProEt.topology X)).obj
+            ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).obj A))
+      |>.apply_symm_apply (Functor.whiskerLeft (proEtaleBaseChange f).op
+        (toSheafify (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).obj A)))
+  exact congrArg (fun α ↦ α.app U) h
+
+private theorem sequenceConstantMap_naturality {X Y : Scheme.{t}} (f : X ⟶ Y)
+    {A B : CommRingCat.{max u (t + 1)}} (a : A ⟶ B) :
+    (constantSheaf (ProEt.topology Y) CommRingCat.{max u (t + 1)}).map a ≫
+      coefficientProEtaleDirectRingMap.{t, u} f B =
+    coefficientProEtaleDirectRingMap.{t, u} f A ≫
+      ((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
+        (ProEt.topology Y) (ProEt.topology X)).map
+          ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).map a) := by
+  apply (sheafificationAdjunction (ProEt.topology Y)
+      CommRingCat.{max u (t + 1)}).homEquiv ((Functor.const Y.ProEtᵒᵖ).obj A)
+        (((proEtaleBaseChange f).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
+          (ProEt.topology Y) (ProEt.topology X)).obj
+            ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).obj B)) |>.injective
+  apply NatTrans.ext
+  funext U
+  change _ ≫ (_ ≫ _) = _ ≫ (_ ≫ _)
+  have hY := congrArg (fun α ↦ α.app U)
+    (toSheafify_naturality (ProEt.topology Y) ((Functor.const Y.ProEtᵒᵖ).map a))
+  change a ≫ _ = _ ≫ _ at hY
+  erw [← Category.assoc, ← hY, Category.assoc, sequenceConstantUnit,
+    ← Category.assoc, sequenceConstantUnit]
+  exact congrArg (fun α ↦ α.app ((proEtaleBaseChange f).op.obj U))
+    (toSheafify_naturality (ProEt.topology X) ((Functor.const X.ProEtᵒᵖ).map a))
 
 /-- The completed-ring structure map is determined by all finite projections.
 Source: Stacks 03EL, 06YY (blueprint: lem-pur-integral-ambient-operation-models).
@@ -71,7 +97,81 @@ theorem coefficientMap_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) :
         completedIntegralCommRingProjectionUnrestricted l E Y n ≫
           Scheme.coefficientProEtaleDirectRingMap.{t, u} f
             (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1)))) := by
-  sorry
+  let G := (Scheme.proEtaleBaseChange f).sheafPushforwardContinuous
+    RingCat.{max u (t + 1)} (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
+  let d (n : ℕ) : integralCoefficientSheaf l E Y n ⟶
+      G.obj (integralCoefficientSheaf l E X n) :=
+    ⟨Functor.whiskerRight (Scheme.coefficientProEtaleDirectRingMap.{t, u} f
+      (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})⟩
+  have hd (n : ℕ) : (integralCoefficientSheafSystem l E Y).map
+      (homOfLE (Nat.le_succ n)).op ≫ d n =
+        d (n + 1) ≫ (integralCoefficientSheafSystem l E X ⋙ G).map
+          (homOfLE (Nat.le_succ n)).op := by
+    let a : CommRingCat.of
+        (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 2))) ⟶
+        CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))) :=
+      CommRingCat.ofHom ((ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).symm.toRingHom.comp
+        ((Padic.coefficientExtensionTransition l E (n + 1)).comp
+          (ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).toRingHom))
+    have h := sequenceConstantMap_naturality.{t, u} f a
+    simp only [Functor.comp_map, integralCoefficientSheafSystem,
+      Functor.ofOpSequence_map_homOfLE_succ]
+    exact congrArg (fun a ↦ (sheafCompose (Scheme.ProEt.topology Y)
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map a) h
+  let τ : integralCoefficientSheafSystem l E Y ⟶ integralCoefficientSheafSystem l E X ⋙ G :=
+    NatTrans.ofOpSequence d hd
+  have : PreservesLimitsOfShape ℕᵒᵖ G := by
+    let H := sheafToPresheaf (Scheme.ProEt.topology Y) RingCat.{max u (t + 1)}
+    have : PreservesLimitsOfShape ℕᵒᵖ (G ⋙ H) :=
+      inferInstanceAs (PreservesLimitsOfShape ℕᵒᵖ
+        (sheafToPresheaf (Scheme.ProEt.topology X) RingCat.{max u (t + 1)} ⋙
+          (Functor.whiskeringLeft _ _ _).obj (Scheme.proEtaleBaseChange f).op))
+    exact preservesLimitsOfShape_of_reflects_of_preserves G H
+  let c : Cone (integralCoefficientSheafSystem l E X ⋙ G) :=
+    ⟨completedIntegralCoefficientSheafUnrestricted l E Y,
+      (limit.cone (integralCoefficientSheafSystem l E Y)).π ≫ τ⟩
+  let h := isLimitOfPreserves G (limit.isLimit (integralCoefficientSheafSystem l E X))
+  let ρ := h.lift c
+  have hρ (n : ℕ) : ρ ≫ G.map
+      (limit.π (integralCoefficientSheafSystem l E X) (op n)) =
+        limit.π (integralCoefficientSheafSystem l E Y) (op n) ≫ d n := h.fac c (op n)
+  let b : completedIntegralCommRingSheafUnrestricted l E Y ⟶
+      ((Scheme.proEtaleBaseChange f).sheafPushforwardContinuous
+        CommRingCat.{max u (t + 1)} (Scheme.ProEt.topology Y)
+          (Scheme.ProEt.topology X)).obj (completedIntegralCommRingSheafUnrestricted l E X) :=
+    ⟨{ app := fun U ↦
+         letI := completedIntegralCoefficientCommRingUnrestricted l E Y U
+         letI := completedIntegralCoefficientCommRingUnrestricted l E X
+           ((Scheme.proEtaleBaseChange f).op.obj U)
+         CommRingCat.ofHom (ρ.hom.app U).hom
+       naturality := fun U V a ↦ (forget₂ CommRingCat RingCat).map_injective
+         (ρ.hom.naturality a) }⟩
+  refine ⟨b, ?_, ?_⟩
+  · intro n
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    apply (forget₂ CommRingCat RingCat).map_injective
+    exact congrArg (fun a ↦ a.hom.app U) (hρ n)
+  · intro b' hb'
+    let ρ' : completedIntegralCoefficientSheafUnrestricted l E Y ⟶
+        G.obj (completedIntegralCoefficientSheafUnrestricted l E X) :=
+      ⟨Functor.whiskerRight b'.hom (forget₂ CommRingCat RingCat)⟩
+    have he : ρ' = ρ := by
+      apply h.hom_ext
+      intro n
+      change ρ' ≫ G.map (limit.π (integralCoefficientSheafSystem l E X) n) =
+        ρ ≫ G.map (limit.π (integralCoefficientSheafSystem l E X) n)
+      rw [hρ n.unop]
+      exact congrArg (fun a ↦ (sheafCompose (Scheme.ProEt.topology Y)
+        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map a)
+          (hb' n.unop)
+    apply Sheaf.hom_ext
+    apply NatTrans.ext
+    funext U
+    apply (forget₂ CommRingCat RingCat).map_injective
+    exact congrArg (fun a ↦ a.hom.app U) he
 
 /-- The unique projection-induced ring map, in its adjoint presentation.
 Source: Stacks 03EL, 06YY (blueprint: lem-pur-integral-ambient-operation-models). -/
@@ -96,7 +196,8 @@ Transport back. Its tensor presentation is R_X ⊗_(f⁻¹R_Y) f⁻¹(-). -/
 @[instance]
 theorem push_isRightAdjoint {X Y : Scheme.{t}} (f : X ⟶ Y) :
     (push l E f).IsRightAdjoint := by
-  sorry
+  exact SheafOfModules.module_pushforward_isRightAdjoint_of_universes
+    ⟨Functor.whiskerRight (coefficientMap l E f).hom (forget₂ CommRingCat RingCat)⟩
 
 /-- Ordinary ambient module pullback along the specified coefficient map.
 Source: Stacks 03D2 (blueprint: lem-pur-integral-ambient-operation-models). -/
@@ -112,7 +213,7 @@ Source: Stacks 03D2 (blueprint: lem-pur-integral-ambient-operation-models).
 Proof: addition of maps is sectionwise; coefficient restriction changes only the action. -/
 @[instance]
 theorem push_additive {X Y : Scheme.{t}} (f : X ⟶ Y) : (push l E f).Additive := by
-  sorry
+  exact Functor.additive_of_preserves_binary_products (push l E f)
 
 /-- The module pullback is additive.
 Source: Stacks 03D2 (blueprint: lem-pur-integral-ambient-operation-models). -/
@@ -237,10 +338,138 @@ def tensorOperationUnit (W : Scheme.{t})
   IntegralOnSlice.roosUnit l E W none _ ≫
     integralOperationsRoosFunctor.map ((tensorTowerIso l E W).hom.app (P, Q))
 
-attribute [local irreducible] coefficientMap push pull pullTowerIso tensorTowerIso
+attribute [local irreducible] coefficientTotalTensor
+  coefficientMap push pull pullTowerIso tensorTowerIso
   IntegralOnSlice.duality IntegralOnSlice.completion IntegralOnSlice.completionComparison
-  IntegralOnSlice.completionUnit HasDerivedCategory.standard
+  IntegralOnSlice.completionUnit IntegralOnSlice.roosUnit HasDerivedCategory.standard
   completedIntegralCoefficientSheafUnrestricted unrestrictedIntegralReductionExistence
+
+open CochainComplex CochainComplex.HomComplex in
+private theorem roosMap_coordinates
+    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
+    {C C' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (a : C ⟶ C') :
+    integralOperationsRoosMap a ≫ mappingCocone.fst
+        (towerTransitionEndomorphism (K := fun n ↦ C'.obj (op n))
+        (integralOperationsTowerStep C')) =
+      mappingCocone.fst (towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
+        (integralOperationsTowerStep C)) ≫
+        Limits.Pi.map (fun n : ℕ ↦ a.app (op n)) ∧
+    ∀ (p q : ℤ) (h : p + -1 = q),
+      (integralOperationsRoosMap a).f p ≫
+          (mappingCocone.snd
+            (towerTransitionEndomorphism (K := fun n ↦ C'.obj (op n))
+        (integralOperationsTowerStep C'))).v p q h =
+        (mappingCocone.snd
+          (towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
+        (integralOperationsTowerStep C))).v p q h ≫
+            (Limits.Pi.map (fun n : ℕ ↦ a.app (op n))).f q := by
+  unfold integralOperationsRoosMap
+  rw [cofiberMap_eq_coneMap _ _ _ _ (integralOperationsRoos_square a)]
+  let φ := towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
+        (integralOperationsTowerStep C)
+  let ψ := towerTransitionEndomorphism (K := fun n ↦ C'.obj (op n))
+        (integralOperationsTowerStep C')
+  let b := Limits.Pi.map (fun n : ℕ ↦ a.app (op n))
+  let c := mappingCone.map φ ψ b b (integralOperationsRoos_square a)
+  have hc₁ (p : ℤ) : c.f (p + -1) ≫
+      (mappingCone.fst ψ).1.v (p + -1) p (by omega) =
+      (mappingCone.fst φ).1.v (p + -1) p (by omega) ≫ b.f p := by
+    simp [c, mappingCone.ext_from_iff φ p (p + -1) (by omega), mappingCone.map]
+  have hc₂ (p : ℤ) : c.f (p + -1) ≫
+      (mappingCone.snd ψ).v (p + -1) (p + -1) (add_zero _) =
+      (mappingCone.snd φ).v (p + -1) (p + -1) (add_zero _) ≫ b.f (p + -1) := by
+    simp [c, mappingCone.ext_from_iff φ p (p + -1) (by omega), mappingCone.map]
+  constructor
+  · apply HomologicalComplex.hom_ext
+    intro p
+    change ((CategoryTheory.shiftFunctor _ (-1 : ℤ)).map c).f p ≫ (mappingCocone.fst ψ).f p =
+      (mappingCocone.fst φ).f p ≫ b.f p
+    simp [mappingCocone.fst,
+      Cochain.leftShift_v (mappingCone.fst ψ).1 (-1) 0 (by omega) p p
+        (add_zero p) (p + -1) (by omega),
+      Cochain.leftShift_v (mappingCone.fst φ).1 (-1) 0 (by omega) p p
+        (add_zero p) (p + -1) (by omega)]
+    erw [Category.id_comp, Category.id_comp]
+    exact hc₁ p
+  · intro p q h
+    obtain rfl : q = p + -1 := h.symm
+    change ((CategoryTheory.shiftFunctor _ (-1 : ℤ)).map c).f p ≫
+      (mappingCocone.snd ψ).v p (p + -1) h =
+        (mappingCocone.snd φ).v p (p + -1) h ≫ b.f (p + -1)
+    simp [mappingCocone.snd,
+      Cochain.leftShift_v (mappingCone.snd ψ) (-1) (-1) (by omega)
+        p (p + -1) rfl (p + -1) (by omega),
+      Cochain.leftShift_v (mappingCone.snd φ) (-1) (-1) (by omega)
+        p (p + -1) rfl (p + -1) (by omega),
+      Int.negOnePow_even 2 ⟨1, rfl⟩]
+    erw [Category.id_comp, Category.id_comp]
+    exact hc₂ p
+
+private theorem roosUnit_fst (W : Scheme.{t})
+    (P : IntegralOnSlice.Cx l E W none) :
+    IntegralOnSlice.roosUnit l E W none P ≫ CochainComplex.mappingCocone.fst
+      (towerTransitionEndomorphism
+        (K := fun n ↦ ((IntegralOnSlice.tower l E W none).obj P).obj (op n))
+        (integralOperationsTowerStep ((IntegralOnSlice.tower l E W none).obj P))) =
+      IntegralOnSlice.productAugmentation l E W none P := by
+  unfold IntegralOnSlice.roosUnit integralOperationsRoos
+  exact CochainComplex.mappingCocone.lift_fst _ _ _ _
+
+private theorem roosUnit_snd (W : Scheme.{t})
+    (P : IntegralOnSlice.Cx l E W none)
+    (p q : ℤ) (h : p + -1 = q) :
+    (IntegralOnSlice.roosUnit l E W none P).f p ≫
+      (CochainComplex.mappingCocone.snd (towerTransitionEndomorphism
+        (K := fun n ↦ ((IntegralOnSlice.tower l E W none).obj P).obj (op n))
+        (integralOperationsTowerStep ((IntegralOnSlice.tower l E W none).obj P)))).v p q h =
+      0 := by
+  unfold IntegralOnSlice.roosUnit integralOperationsRoos
+  exact CochainComplex.mappingCocone.lift_f_snd_v _ _ _ _ p q h
+
+private theorem roosMap_zero_snd
+    {A : Type*} [Category* A] [Abelian A] [HasCountableProducts A]
+    {C C' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (a : C ⟶ C')
+    {P : CochainComplex A ℤ} (c : P ⟶ integralOperationsRoos C)
+    (p q : ℤ) (h : p + -1 = q)
+    (hc : c.f p ≫ (CochainComplex.mappingCocone.snd
+      (towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
+        (integralOperationsTowerStep C))).v p q h = 0) :
+    (c ≫ integralOperationsRoosMap a).f p ≫ (CochainComplex.mappingCocone.snd
+      (towerTransitionEndomorphism (K := fun n ↦ C'.obj (op n))
+        (integralOperationsTowerStep C'))).v p q h = 0 := by
+  rw [HomologicalComplex.comp_f, Category.assoc, (roosMap_coordinates a).2 p q h,
+    ← Category.assoc, hc, zero_comp]
+
+private theorem roosUnit_map_snd (W : Scheme.{t})
+    (P : IntegralOnSlice.Cx l E W none)
+    {C : ℕᵒᵖ ⥤ IntegralOnSlice.Cx l E W none}
+    (a : (IntegralOnSlice.tower l E W none).obj P ⟶ C)
+    (p q : ℤ) (h : p + -1 = q) :
+    (IntegralOnSlice.roosUnit l E W none P ≫ integralOperationsRoosMap a).f p ≫
+      (CochainComplex.mappingCocone.snd
+        (towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
+          (integralOperationsTowerStep C))).v p q h = 0 := by
+  exact roosMap_zero_snd a (IntegralOnSlice.roosUnit l E W none P) p q h
+    (roosUnit_snd l E W P p q h)
+
+private theorem ambientRoosUnit_coordinates (W : Scheme.{t})
+    (P : CochainComplex (integralTowerModules l E W) ℤ)
+    {C : ℕᵒᵖ ⥤ CochainComplex (integralTowerModules l E W) ℤ}
+    (a : (IntegralOnSlice.tower l E W none).obj P ⟶ C) :
+    (IntegralOnSlice.roosUnit l E W none P ≫ integralOperationsRoosMap a) ≫
+      CochainComplex.mappingCocone.fst
+        (towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
+          (integralOperationsTowerStep C)) =
+      IntegralOnSlice.productAugmentation l E W none P ≫
+        Limits.Pi.map (fun n : ℕ ↦ a.app (op n)) ∧
+    ∀ (p q : ℤ) (h : p + -1 = q),
+      (IntegralOnSlice.roosUnit l E W none P ≫ integralOperationsRoosMap a).f p ≫
+        (CochainComplex.mappingCocone.snd
+          (towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
+            (integralOperationsTowerStep C))).v p q h = 0 := by
+  constructor
+  · rw [Category.assoc, (roosMap_coordinates a).1, ← Category.assoc, roosUnit_fst]
+  · exact roosUnit_map_snd l E W P a
 
 /-- The pullback tower comparison carries the quotient augmentation to the operation
 augmentation, including its zero shifted-product coordinate.
@@ -265,7 +494,17 @@ theorem pullOperationUnit_coordinates {X Y : Scheme.{t}} (f : X ⟶ Y)
           (K := fun n : ℕ ↦ ((integralOperationsPullbackTowerFunctor l E f).obj P).obj (op n))
           (integralOperationsTowerStep
             ((integralOperationsPullbackTowerFunctor l E f).obj P)))).v p q h = 0 := by
-  sorry
+  have hc := roosMap_coordinates ((pullTowerIso l E f).hom.app P)
+  dsimp only [pullTower, Functor.comp_obj] at hc
+  constructor
+  · dsimp only [pullOperationUnit, integralOperationsRoosFunctor]
+    rw [Category.assoc, hc.1, ← Category.assoc]
+    rw [roosUnit_fst]
+  · intro p q h
+    dsimp only [pullOperationUnit, integralOperationsRoosFunctor]
+    exact roosMap_zero_snd ((pullTowerIso l E f).hom.app P)
+      (IntegralOnSlice.roosUnit l E X none ((pullComplex l E f).obj P)) p q h
+      (roosUnit_snd l E X ((pullComplex l E f).obj P) p q h)
 
 /-- The analogous tensor augmentation equation retains the zero shifted-product part.
 Source: Stacks 03EL, 07A4, 0941 (blueprint: lem-pur-integral-ambient-operation-models).
@@ -290,7 +529,11 @@ theorem tensorOperationUnit_coordinates (W : Scheme.{t})
           (K := fun n : ℕ ↦ ((integralOperationsTensorTowerFunctor l E W).obj (P, Q)).obj (op n))
           (integralOperationsTowerStep
             ((integralOperationsTensorTowerFunctor l E W).obj (P, Q))))).v p q h = 0 := by
-  sorry
+  simpa only [tensorOperationUnit, integralOperationsRoosFunctor] using
+    ambientRoosUnit_coordinates l E W
+      ((coefficientTotalTensor.{u, t + 1, t} (ProEt.topology W)
+        (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q))
+      ((tensorTowerIso l E W).hom.app (P, Q))
 
 /-- Ordinary pullback carries flat-term K-flat representatives to such representatives.
 Source: Stacks 0G7E (blueprint: lem-pur-integral-ambient-operation-models).
@@ -302,6 +545,8 @@ theorem pull_good {X Y : Scheme.{t}} (f : X ⟶ Y)
     (hP : integralOperationsGoodComplex l E Y P) :
     IntegralOnSlice.Good l E X none ((pullComplex l E f).obj P) := by
   sorry
+
+attribute [local semireducible] coefficientTotalTensor
 
 /-- The direct-sum total tensor of two good representatives is good.
 Source: Stacks 07A2, 07A4 (blueprint: lem-pur-integral-ambient-operation-models).
@@ -315,7 +560,10 @@ theorem tensor_good (W : Scheme.{t})
     IntegralOnSlice.Good l E W none
       ((coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W)).obj (P, Q)) := by
-  sorry
+  let : EssentiallySmall.{max u (t + 1)} W.ProEt := essentiallySmallSelf _
+  have h := SheafOfModules.KFlatTotalTensorModel.kFlat_total_tensor_model
+    (completedIntegralCommRingSheafUnrestricted l E W) P Q hP.1 hQ.1 hP.2 hQ.2
+  exact ⟨h.1, h.2.1⟩
 
 /-- The recorded ordinary derived tensor comparison on good representatives.
 Source: Stacks 07A4 (blueprint: lem-pur-integral-ambient-operation-models). -/
@@ -325,6 +573,11 @@ def tensorRepresentative (W : Scheme.{t})
     (completedIntegralCommRingSheafUnrestricted l E W)
     (IntegralOnSlice.duality l E W none).closed
     (IntegralOnSlice.duality l E W none).models P.obj Q.obj P.property.1 Q.property.1
+
+attribute [local irreducible] integralDerivedPullback integralCompletedTensor
+  integralDerivedPullbackComparison integralCompletedTensorComparison
+  integralOperationsPullbackTowerFunctor integralOperationsTensorTowerFunctor
+  integralOperationsGoodComplex tensorRepresentative
 
 /-- Completion of ordinary ambient pullback and tensor is precisely the recorded
 finite-quotient integral pullback and completed tensor, naturally on all derived objects.
