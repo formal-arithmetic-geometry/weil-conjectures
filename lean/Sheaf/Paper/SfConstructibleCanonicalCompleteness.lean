@@ -5,13 +5,8 @@ Authors: SHEAF group Q38
 -/
 module
 
-public import Sheaf.Paper.AdicCoefficientDatum
-public import Sheaf.Paper.CompletedConstantCoefficientEquivalence
 public import Sheaf.Paper.IntegralUniformCoefficient
-public import Sheaf.Paper.IntrinsicCompletionCompleted
-public import Sheaf.Paper.IntrinsicCompletion
 public import Sheaf.Paper.WeilCompletedTensorReflector
-public import Sheaf.Paper.PbcQbarCompletedPullback
 public import Sheaf.Paper.CompletedPullback
 import Sheaf.Paper.PbcIntrinsicTowerComplete
 import Sheaf.Paper.CompletedKoszulQuotientComparison
@@ -57,7 +52,14 @@ theorem sfConstructibleCanonicalCompleteness
       (i : DerivedCategory.Q.obj D ≅ M),
       IsIso (intrinsicCompletionUnit X d r a ha M D i)) ∧
     d.TowerComplete X M := by
-  sorry
+  have hTower := pbcIntrinsicComplete_towerComplete d X M hM
+  refine ⟨?_, hTower⟩
+  intro r a ha D i
+  obtain ⟨c, hc⟩ := completedKoszulQuotientComparison X d r a ha M D i
+  change intrinsicCompletionUnit X d r a ha M D i ≫ c.hom = d.completionUnit X M at hc
+  apply (isIso_comp_right_iff _ c.hom).mp
+  rw [hc]
+  exact hTower
 
 /-- In particular, the reflector's canonical actual representative has invertible unit.
 Source: blueprint `def-wf-tensor-product`, first sentence, base proof Step 10;
@@ -73,7 +75,8 @@ theorem sfConstructibleCanonicalReflectorComplete
     (M : PbcCompletedDerived X d) (hM : PbcIsIntrinsicallyComplete X d M)
     (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) :
     WfIsComplete X d r a ha M := by
-  sorry
+  exact (sfConstructibleCanonicalCompleteness X d M hM).1 r a ha
+    (wfCompletionRepresentative X d M) (DerivedCategory.Q.objObjPreimageIso M)
 
 /-- Every integral bounded constructible complete object satisfies canonical actual
 completeness, both for the reflector and for the strict quotient-tower unit.
@@ -96,6 +99,9 @@ theorem sfIntegralConstructibleCanonicalCompleteness
     ∀ (r : ℕ) (a : Fin r → Padic.coefficientExtensionIntegers l E)
       (ha : Ideal.span (Set.range a) = (pbcPadicCoefficientDatum l E).ideal),
       WfIsComplete X (pbcPadicCoefficientDatum l E) r a ha M.obj := by
-  sorry
+  have hM : PbcIsIntrinsicallyComplete X (pbcPadicCoefficientDatum l E) M.obj := M.property.1
+  refine ⟨(sfConstructibleCanonicalCompleteness X _ M.obj hM).2, ?_⟩
+  intro r a ha
+  exact sfConstructibleCanonicalReflectorComplete X _ M.obj hM r a ha
 
 end AlgebraicGeometry.Scheme
