@@ -17,74 +17,66 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-l-adic-extension-absolute-value] the topology on $E$ comes from a nonarchimedean absolute value. Its balls are clopen: if $y\\notin B(a,r)$, the ball $B(y,|y-a|_E)$ misses $B(a,r)$ by the ultrametric inequality. For distinct $a,b$, a ball of radius $0<r\\leq|a-b|_E$ separates them, so every connected subset of $E$ is a singleton. Apply [lem-sfb-continuous-ring-universe-realization] with $T=E$, $X=W$. It gives a ring-sheaf isomorphism $E_W\\simeq R$, where $R(U)=C(|U|,E)$, including multiplication and unit. Transport the given module isomorphism and its inverse along this ring-sheaf isomorphism; their composite identities are retained by conjugation. It suffices to consider $f:R^{\\oplus m}\\to R^{\\oplus n}$ and $g:R^{\\oplus n}\\to R^{\\oplus m}$ with $gf=1$, $fg=1$.",
+   "text": "Give E the ultrametric instance IsUltrametricDist.of_normedAlgebra ℚ_[ℓ]; Mathlib then infers that E is totally disconnected. Apply [lem-sfb-continuous-ring-universe-realization] to obtain a monoid isomorphism φ from the pulled-back condensed coefficient ring to R(U)=C(|U|,E). These constructions retain the given norm and all universes.",
    "uses": [
-    "lem-weil-l-adic-extension-absolute-value",
     "lem-sfb-continuous-ring-universe-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Example 3.1, p. 6: pulled-back condensed coefficients are continuous-function sheaves; specialization using nonarchimedean clopen balls"
+    "place": "Example 3.1, p. 6 (continuous-function realization on any scheme); elementary matrix evaluation and dimension comparison in the blueprint det-lem-stratified-lattice-rank proof, first paragraph"
    }
   },
   {
-   "text": "For $F_r=R^{\\oplus r}$ denote the coproduct inclusions by $i_j:R\\to F_r$. Define $p_j:F_r\\to R$ by $p_ji_k=\\delta_{jk}1_R$ using the coproduct universal property. Module morphisms, as defined in [sk-def-sfb-module-objects], add pointwise; the map $\\sum_j i_jp_j$ becomes $i_k$ after precomposition with every $i_k$, hence equals $1_{F_r}$. Thus these are biproduct coordinates, as in [def-weil-additive-category]. When $r=0$, the empty sum is the zero object and its identity is zero. All sums here are finite; no preservation of infinite coproducts by sections is used.",
+   "text": "For a regular R-module endomorphism h, apply the module action equation [sk-def-sfb-module-objects] after the lax monoidal inclusion of sheaves into presheaves. The ring-sheaf multiplication comparison [sk-def-sfb-ring-object], Sheaf.μ_comp_map_mul, identifies this with multiplication on sections. Evaluating on a⊗b gives h_U(ab)=a h_U(b), hence h_U(a)=a h_U(1). Therefore for any f,g, (fg)_U(a)=a g_U(1)f_U(1)=a f_U(1)g_U(1)=(gf)_U(a). Sectionwise extensionality proves that End(R) is commutative. Choose w in W. If its identity endomorphism were zero, evaluating it on the constant unit over the terminal site object and then at w would give 1=0 in E. Thus End(R) is a nontrivial commutative ring.",
    "uses": [
     "sk-def-sfb-module-objects",
+    "sk-def-sfb-ring-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p. 6 (continuous-function realization on any scheme); elementary matrix evaluation and dimension comparison in the blueprint det-lem-stratified-lattice-rank proof, first paragraph"
+   }
+  },
+  {
+   "text": "Restriction of scalars [sk-def-sfb-change-of-scalars] along φ⁻¹ is additive. It takes the regular module to the regular module by Mod.regularIsoComapRegular and therefore takes each finite biproduct of r regular modules to the same biproduct of rank r by Mod.finiteFreeIsoComap. Conjugate the image of the given isomorphism by these comparisons to obtain R^m≅R^n. These comparisons include the empty biproduct.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
     "def-weil-additive-category"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
-    "place": "First paragraph: transition isomorphisms preserve the finite free rank; explicit matrix-evaluation argument"
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p. 6 (continuous-function realization on any scheme); elementary matrix evaluation and dimension comparison in the blueprint det-lem-stratified-lattice-rank proof, first paragraph"
    }
   },
   {
-   "text": "For a regular-module endomorphism $h:R\\to R$, its map on sections over $W$ is $R(W)$-linear: evaluating the module-morphism action equation of [sk-def-sfb-module-objects] on $a\\otimes b$ gives $h_W(ab)=a h_W(b)$. Hence $h_W(a)=a h_W(1)$. Put $A_{ij}=(p_i f i_j)_W(1)\\in C(|W|,E)$ for $i<n,j<m$, and $B_{ji}=(p_j g i_i)_W(1)$ for $j<m,i<n$. Insert the finite identity resolutions from step 2 into $gf=1$ and $fg=1$. For example, the $(j,k)$ component of $gf$ evaluated at $1$ is $\\sum_{i<n}h_{ji,W}(a_{ik,W}(1))=\\sum_{i<n}A_{ik}B_{ji}$, where $h_{ji}=p_j g i_i$ and $a_{ik}=p_i f i_k$. Since $E$ is commutative, this says $BA=I_m$. The same calculation with $f,g$ interchanged gives $AB=I_n$.",
+   "text": "A nontrivial commutative ring has invariant basis number, by Mathlib invariantBasisNumber_of_nontrivial_of_commRing. The singleton family consisting of the regular R-module is hom-orthogonal, since there are no distinct indices. Apply [lem-sfb-orthogonal-biproduct-multiplicity] to this family and the isomorphism R^m≅R^n. It gives an equivalence Fin m≃Fin n. Equality of their finite cardinalities gives m=n. In particular the proof covers m=0 or n=0.",
    "uses": [
-    "sk-def-sfb-module-objects"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
-    "place": "First paragraph: transition isomorphisms preserve the finite free rank; explicit matrix-evaluation argument"
-   }
-  },
-  {
-   "text": "Choose $w\\in|W|$, using the nonemptiness hypothesis. The map $C(|W|,E)\\to E$, $a\\mapsto a(w)$, preserves $0,1,+,\\cdot$ because these operations are pointwise. Evaluating every entry of $BA=I_m$ and $AB=I_n$ therefore gives $B(w)A(w)=I_m$ and $A(w)B(w)=I_n$. The formulas $v\\mapsto A(w)v$ and $u\\mapsto B(w)u$ consequently define mutually inverse $E$-linear maps $E^m\\rightleftarrows E^n$. Empty-index matrices and empty sums obey the same formulas when $m$ or $n$ is zero.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
-    "place": "First paragraph: transition isomorphisms preserve the finite free rank; explicit matrix-evaluation argument"
-   }
-  },
-  {
-   "text": "The standard coordinate vectors form a basis of $E^n$: $v=\\sum_{i<n}v_i e_i$, and $\\sum_i c_i e_i=0$ implies $c_i=0$ by taking the $i$th coordinate. Therefore $\\dim_E E^n=n$ by [def-weil-vector-space-dimension]. The $m$ images under $A(w)$ of the coordinate vectors of $E^m$ are linearly independent: applying $B(w)$ to a zero linear combination recovers the original coordinate coefficients. Apply [lem-weil-independent-family-card-le-dimension] to get $m\\leq n$. Interchanging $A(w)$ and $B(w)$ gives $n\\leq m$, and antisymmetry gives $m=n$. Both inequalities remain valid for zero-dimensional spaces.",
-   "uses": [
-    "def-weil-vector-space-dimension",
-    "lem-weil-independent-family-card-le-dimension"
+    "lem-sfb-orthogonal-biproduct-multiplicity",
+    "lem-sfb-commutative-ring-invariant-basis-number"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
-    "place": "First paragraph: transition isomorphisms preserve the finite free rank; explicit matrix-evaluation argument"
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Example 3.1, p. 6 (continuous-function realization on any scheme); elementary matrix evaluation and dimension comparison in the blueprint det-lem-stratified-lattice-rank proof, first paragraph"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-absolute-value",
   "lem-sfb-continuous-ring-universe-realization",
   "sk-def-sfb-module-objects",
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-change-of-scalars",
   "def-weil-additive-category",
-  "def-weil-vector-space-dimension",
-  "lem-weil-independent-family-card-le-dimension"
+  "lem-sfb-orthogonal-biproduct-multiplicity",
+  "lem-sfb-commutative-ring-invariant-basis-number"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-rank.proof.md",
-  "place": "First paragraph, assertion that transition isomorphisms preserve rank; explicit finite-matrix argument using Hemo–Richarz–Scholbach Example 3.1 for the coefficient realization."
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Example 3.1 supplies the continuous-ring realization. The blueprint stratified-lattice rank proof, first paragraph, is implemented using Mathlib invariant basis number and HomOrthogonal.equiv_of_iso, rather than field-valued matrices and separate dimension inequalities."
  },
  "mathlib_searches": [
   {
@@ -239,5 +231,15 @@
   "group": "Q14",
   "result": "pass",
   "note": "Read the node, all 6 stmt_dep records and the exact declarations (continuousCoefficientRingObj, condensedRingObj with the Obj-scoped MonObj, Mod.finiteFree as the Fin-n biproduct of regular, Mathlib Mod, Scheme.ProEt), HRS Ex. 3.1 p.6 and the blueprint rank proof paragraph 1. The Lean matches clause by clause: prime ℓ, finite E/ℚ_ℓ, arbitrary W : Scheme.{u} with [Nonempty W], iso in Mod over condensedRingObj ⇒ m = n, rank 0 included, no extra hypotheses or universe collapse. The NormedField/NormedAlgebra encoding of E equals the spectral (ℓ-adic) topology by NormedAlgebra.norm_eq_spectralNorm and is always available via spectralNorm.normedField/normedAlgebra, so the parent can instantiate it; the earlier Codex H3 return on the same encoding (Q85 62e4e13a) was overturned in arbitration. Own rg duplicate search found none. lean.statement is verbatim; non-lean fields equal live; one sorry, no definitions, docstrings carry source, blueprint tag and 5 proof steps; report sections present. No compile (human 2026-10-21); worker reports a clean scompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261021T163754-L-1080882",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
