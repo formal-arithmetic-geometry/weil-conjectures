@@ -13,6 +13,8 @@ public import Sheaf.Paper.SfDerivedComplete
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectCategoricalTrace
 
+import Mathlib.Algebra.CharP.CharAndCard
+
 /-! # Derived tensor and the geometric-point fibre
 
 Source: Stacks Project, Tag 07A4, `lemma-pullback-tensor-product`;
@@ -48,10 +50,22 @@ and its residue fields; a distinct prime is nonzero and thus invertible. -/
 theorem finiteFieldSpecCoefficientPrimeInvertible
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) :
     Nonempty (∀ w : Spec (.of D.k), Invertible (l : (Spec (.of D.k)).residueField w)) := by
-  sorry
+  classical
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  have : Fact D.p.Prime := ⟨D.prime⟩
+  have : CharP D.k₀ D.p := charP_of_card_eq_prime_pow
+    (by simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq)
+  have hunit : IsUnit (l : D.k₀) :=
+    (CharP.cast_ne_zero_of_ne_of_prime D.k₀ (Fact.out : l.Prime) hl.symm).isUnit
+  refine ⟨fun w ↦ ?_⟩
+  have hres : IsUnit (l : (Spec (.of D.k)).residueField w) := by
+    simpa only [map_natCast] using (hunit.map (algebraMap D.k₀ D.k)).map
+      ((Scheme.ΓSpecIso (CommRingCat.of D.k)).inv ≫
+        (Spec (.of D.k)).Γevaluation w).hom
+  exact hres.invertible
 
-/-! The following named functors keep the four displayed stage constructions
-opaque while retaining their definitions. This avoids repeatedly unfolding
+/-! The following named functors encapsulate the four displayed stage constructions
+while retaining their definitions. This avoids repeatedly unfolding
 the large coefficient-category terms while elaborating the theorem below. -/
 
 /-- Finite-stage fibre functor, exactly the finite clause. Source: Stacks Tag 07A4
