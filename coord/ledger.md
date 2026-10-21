@@ -21606,3 +21606,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:02 L: returned deliver/NW/lem-pur-sequence-site-completion-projection (reviewer RETURN: L: independent stage-2 immutable head 1bcaab63b8ea: H13/H2: the delivery rebinds the stmt_dep def-weil-pbc-ringed-topos-)
 - 09:02 L: returned deliver/Q11/lem-sfb-continuous-frame-sheaf-comparison (reviewer RETURN: L: independent stage-2 immutable head 2b0e94310729: H13: the delivery replaces Q20's landed lean record of def-weil-pbc-)
 - 09:02 L: returned deliver/NY/lem-sfb-constant-finite-free-presentation-extension (reviewer RETURN: L: independent stage-2 immutable head 4d1bb414611b: Theorem-stmt_dep fault (stage-2 rule: a statement rests on definitio)
+- 09:02 L: returned deliver/O1/lem-sfb-constant-periodic-resolution-nonzero (reviewer RETURN: L: independent stage-2 immutable head bff0fb0f19a0: H13: the delivery rewrites ND's landed lean record of stmt_dep def-s)
