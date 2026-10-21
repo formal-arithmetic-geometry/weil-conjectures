@@ -3,37 +3,129 @@
  "blueprint": {
   "is": "prop-nagata-strict-transform-chart-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Affine strict-transform chart formula",
- "statement": "The constructed comparison $\\overline\\sigma_a$ is a ring equivalence.",
+ "statement": "Let $f:A\\to B$ be a homomorphism of commutative rings, let $I\\subseteq A$ be an ideal, and let $a\\in I$. Put $b=f(a)$ and $J=IB$. With the map $\\sigma_a:C_a(A,B,I)\\to B[J/b]$ of [def-nagata-strict-chart-to-extended-blowup-chart] and the quotient ring $C_a^{\\mathrm{st}}(A,B,I)$ of [def-nagata-strict-transform-chart-ring], the constructed comparison\n$$\\overline\\sigma_a:C_a^{\\mathrm{st}}(A,B,I)\\longrightarrow B[J/b]$$\nof [def-nagata-strict-transform-chart-comparison] is a ring equivalence (with this specified forward homomorphism).",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/prop-nagata-strict-transform-chart-iso.md",
   "place": "node prop-nagata-strict-transform-chart-iso, order 151"
  },
  "stmt_deps": [
+  "def-nagata-strict-chart-to-extended-blowup-chart",
+  "def-nagata-strict-transform-chart-ring",
   "def-nagata-strict-transform-chart-comparison"
  ],
  "proof": [
   {
-   "text": "The map $\\sigma_a$ is surjective and its kernel is precisely the ideal by\nwhich the source was quotiented. The first isomorphism theorem therefore\nmakes $\\overline\\sigma_a$ bijective and identifies its inverse ring\nstructure, so it is a ring equivalence.",
-   "uses": [],
-   "elementary": null
+   "text": "Write $C=C_a(A,B,I)$, $T=\\Gamma_{(a)}(C)$, $D=B[J/b]$, and $q:C\\to C/T$ for the quotient map. By [def-nagata-strict-transform-chart-ring], the source is precisely $C/T$. By [def-weil-pbc-algebra-hom-quotient], $q$ is surjective with kernel $T$. The definition [def-nagata-strict-transform-chart-comparison] gives the ring homomorphism $g=\\overline\\sigma_a:C/T\\to D$ with $g(q(c))=\\sigma_a(c)$ for every $c\\in C$. These are the actual quotient and induced map, so it suffices to show that $g$ has a ring-homomorphism inverse.",
+   "uses": [
+    "def-nagata-strict-transform-chart-ring",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-nagata-strict-transform-chart-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/prop-nagata-strict-transform-chart-iso.proof.md",
+    "place": "Proof: surjectivity, kernel, and first isomorphism theorem, expanded on quotient representatives; quotient rings as in Stacks Tag 00AR, algebra.tex, section-rings-basic, item-quotient-ring"
+   }
+  },
+  {
+   "text": "For injectivity, take $u,v\\in C/T$ with $g(u)=g(v)$. Lift them through the surjective $q$ to $c,d\\in C$. Then $\\sigma_a(c-d)=g(u)-g(v)=0$. The kernel equality of [lemma-nagata-strict-chart-map-kernel] says exactly that $c-d\\in T$. Since $\\ker q=T$ by [def-weil-pbc-algebra-hom-quotient], we have $u-v=q(c-d)=0$, hence $u=v$. The identity $gq=\\sigma_a$ used here is the defining identity in [def-nagata-strict-transform-chart-comparison].",
+   "uses": [
+    "lemma-nagata-strict-chart-map-kernel",
+    "def-weil-pbc-algebra-hom-quotient",
+    "def-nagata-strict-transform-chart-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/prop-nagata-strict-transform-chart-iso.proof.md",
+    "place": "Proof: surjectivity, kernel, and first isomorphism theorem, expanded on quotient representatives; quotient rings as in Stacks Tag 00AR, algebra.tex, section-rings-basic, item-quotient-ring"
+   }
+  },
+  {
+   "text": "For any $y\\in D$, [lemma-nagata-strict-chart-map-surjective] supplies $c\\in C$ with $\\sigma_a(c)=y$. By the defining identity in [def-nagata-strict-transform-chart-comparison], $g(q(c))=y$. Thus $g$ is surjective as well as injective.",
+   "uses": [
+    "lemma-nagata-strict-chart-map-surjective",
+    "def-nagata-strict-transform-chart-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/prop-nagata-strict-transform-chart-iso.proof.md",
+    "place": "Proof: surjectivity, kernel, and first isomorphism theorem, expanded on quotient representatives; quotient rings as in Stacks Tag 00AR, algebra.tex, section-rings-basic, item-quotient-ring"
+   }
+  },
+  {
+   "text": "For $y\\in D$, let $h(y)$ be its unique preimage under $g$, whose existence and uniqueness were proved in steps 2 and 3. Then $gh=\\mathrm{id}_D$ and $hg=\\mathrm{id}_{C/T}$. To check the ring structure, use that the induced map $g$ in [def-nagata-strict-transform-chart-comparison] is a ring homomorphism: $g(h(y)+h(z))=y+z=g(h(y+z))$ and $g(h(y)h(z))=yz=g(h(yz))$. Injectivity gives the additive and multiplicative laws for $h$; likewise $g(0)=0=g(h(0))$ and $g(1)=1=g(h(1))$ give $h(0)=0$ and $h(1)=1$. Therefore $h$ is the inverse ring homomorphism and the specified $g=\\overline\\sigma_a$ is a ring equivalence.",
+   "uses": [
+    "def-nagata-strict-transform-chart-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/prop-nagata-strict-transform-chart-iso.proof.md",
+    "place": "Proof: surjectivity, kernel, and first isomorphism theorem, expanded on quotient representatives; quotient rings as in Stacks Tag 00AR, algebra.tex, section-rings-basic, item-quotient-ring"
+   }
   }
  ],
  "proof_deps": [
+  "def-nagata-strict-transform-chart-ring",
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-nagata-strict-transform-chart-comparison",
   "lemma-nagata-strict-chart-map-kernel",
   "lemma-nagata-strict-chart-map-surjective"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/prop-nagata-strict-transform-chart-iso.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/prop-nagata-strict-transform-chart-iso.proof.md",
+  "place": "Proof, expanding its first-isomorphism-theorem sentence into the quotient representative and inverse ring-law arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A surjective homomorphism of commutative rings induces an isomorphism from the quotient by its kernel to its codomain",
+   "results": "8 hits: RingHom.quotientKerEquivOfSurjective, RingCon.quotientKerEquivOfSurjective, RingHom.quotientKerEquivOfSurjective_apply_mk, RingCon.quotientKerEquivOfSurjective_mk, Ideal.quotientKerAlgEquivOfSurjective, RingHom.quotientKerEquivRange, RingHom.quotientKerEquivRangeS, Ideal.quotientKerAlgEquivOfSurjective_apply; read Mathlib/RingTheory/Ideal/Quotient/Operations.lean:89-96 (RingHom.quotientKerEquivOfSurjective and its representative formula), and Defs.lean:111-125 (quotient zero criterion and surjectivity).",
+   "date": "2026-10-21",
+   "verdict": "generic first isomorphism theorem found; not a match for the item without the separately cited project kernel and surjectivity theorems; elementary quotient proof written out instead of creating a node"
+  },
+  {
+   "tool": "grep",
+   "query": "quotientKerEquivOfSurjective|quotientKerEquivOfRightInverse|lift_mk|mk_surjective|eq_zero_iff_mem",
+   "results": "24 hits: Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Operations.lean, Mathlib/RingTheory/Ideal/Quotient/Nilpotent.lean, Mathlib/RingTheory/Ideal/Quotient/Nilpotent.lean, Mathlib/RingTheory/Ideal/Quotient/Nilpotent.lean; read Mathlib/RingTheory/Ideal/Quotient/Operations.lean:89-96 (RingHom.quotientKerEquivOfSurjective and its representative formula), and Defs.lean:111-125 (quotient zero criterion and surjectivity).",
+   "date": "2026-10-21",
+   "verdict": "generic first isomorphism theorem found; not a match for the item without the separately cited project kernel and surjectivity theorems; elementary quotient proof written out instead of creating a node"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.quotientKerEquivOfSurjective",
+   "results": "4 hits: RingHom.quotientKerEquivOfSurjective, RingHom.quotientKerEquivOfSurjective_symm_comp, RingHom.quotientKerEquivOfSurjective_apply_mk, RingHom.quotientKerEquivOfSurjective_symm_apply; read Mathlib/RingTheory/Ideal/Quotient/Operations.lean:89-96 (RingHom.quotientKerEquivOfSurjective and its representative formula), and Defs.lean:111-125 (quotient zero criterion and surjectivity).",
+   "date": "2026-10-21",
+   "verdict": "generic first isomorphism theorem found; not a match for the item without the separately cited project kernel and surjectivity theorems; elementary quotient proof written out instead of creating a node"
+  },
+  {
+   "tool": "grep",
+   "query": "strictChart|strict.transform|blowup|Blowup",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the strict-transform chart comparison theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict transform chart is the blowup chart of the extended ideal, obtained by quotienting the base change by power torsion",
+   "results": "8 hits: extChartAt, writtenInExtChartAt, Algebra.Extension.infinitesimal, Algebra.SubmersivePresentation.baseChange, extChartAt_coe, Ideal.quotientToQuotientRangePowQuotSuccAux, FractionalIdeal.extended, Algebra.Unramified.baseChange",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the strict-transform chart comparison theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The comparison from a strict transform affine chart quotient by power torsion to the blowup chart of the extended ideal is a ring isomorphism",
+   "results": "8 hits: AlgebraicGeometry.projIsoSpecTopComponent, AlgebraicGeometry.projIsoSpec, AlgebraicGeometry.Proj.basicOpenIsoAway, AlgebraicGeometry.ProjIsoSpecTopComponent.fromSpec_toSpec, AlgebraicGeometry.AffineSpace.SpecIso_hom_appTop, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_isIso, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.ProjectiveSpectrum.Proj.isIso_toSpec",
+   "date": "2026-10-21",
+   "verdict": "no match: hits do not state the strict-transform chart comparison theorem"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -75,5 +167,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "prop-nagata-strict-transform-chart-iso",
+  "worker": "stage1",
+  "summary": "Q05 expanded the blueprint first-isomorphism-theorem argument on quotient representatives, citing the existing precise kernel and surjectivity statements and the quotient-algebra definition. All four steps are elementary deductions from those cited statements; the inverse ring laws are explicit. Made the inherited parameter context explicit without changing the claim. No new nodes. No renewed ATTACH claim, as instructed after the prior rejected attachment.",
+  "blueprint": "Realizes the complete main-20261015 proof (order 159): the quotient is the source (step 1), its kernel gives injectivity (step 2), surjectivity descends (step 3), and the inverse preserves the ring structure (step 4). It realizes the unit sentence that quotienting the pulled-back chart by its a_i-power torsion gives the strict transform, within the existing chart route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-54aecfc01",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-54aecfc01 (reviewer sub-agent of L); spot-checked: PASS: I read the item and every cited statement. This is a first split, not superseded: the live and side item is still imported, there is no repair note, it is not dropped and there is no SGA. Statement: the main-20261015 order-159 claim (comparison σ̄_a is a ring equivalence) with the inherited context written out; it matches the σ_a, chart-ring and comparison definitions and is not weakened. Step 1 uses the quotient definition (C/T, q surjective with kernel T, g∘q=σ_a). Step 2 gets injectivity from lemma-nagata-strict-chart-map-kernel (ker σ_a = Γ_(a)). Step 3 gets surjectivity from lemma-nagata-strict-chart-map-surjective. Step 4 checks the inverse's ring laws by injectivity. All steps are correctly elementary, the uses lists match, nothing is cycled or dropped, and the only cross-unit node is the Mathlib-status def-weil-pbc-algebra-hom-quotient. Edge cases checked: a a unit; A=k[x,y], I=(x,y), a=x, B=k[x] gives C=k[x,t]/(xt) and C/T=k[x]=B[J/b]; b nilpotent gives 0=0. No new nodes and no changes. Maintainer note: the project Lean already proves this item sorry-free in WeilConjectures/Blowup/Affine/StrictTransformChart.lean:264-285 (strictChartComparison_bijective/strictChartEquiv, docstring names the node). The node's lean_audit is still empty; record the declaration via lean_status so the item is not re-dispatched. Not a B10 fault: it is absent from slopmaster2 and the worker was told not to re-ATTACH. Inherited source.place is still master order 151."
  }
 }
