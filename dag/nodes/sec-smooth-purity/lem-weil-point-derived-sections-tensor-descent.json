@@ -252,5 +252,32 @@
   "group": "Q137",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-e00d0506b (reviewer sub-agent of L); spot-checked: Read the item and all 8 cited nodes. The item is unsplit on live and side-live, with statement and stmt_deps byte-identical; it is not in route-pivot-dropped. The parent's re-split note is resolved and applies to the parent, not to this item. 0 new nodes; proof_deps = union of uses; no cycle across the 341-node closure; no SGA. Step 1: k is algebraically closed (global datum). point-proetale-sections-exact holds for any ring sheaf, so it applies to the completed R_E and R_L. The finite-free node states exactness of T and V and that the coefficient sections are O_F. The exact-functor factorization leaf gives T_D, V_D, Γ_D. Step 2: both hypotheses of left-derived-from-kflat-class hold, via kflat-resolution (flat terms) and derived-change-of-rings (1). Exactness of Q_L T follows from T_D Q_E. LT is identified as the Kan extension. Step 3: I re-derived the counit naturality equation ε_C LT(Qq)=Q_L(Tq)ε_P, so ε is invertible everywhere. Step 4: the lift c is unique and invertible by localization UP (2)/(3). Step 5: checked the direction of θ^D=Γ(c^{-1})τ. Step 6: ρ_q and the formula Γ(ρ_q^{-1})[θ_P][A(q)]^{-1} recomputed. Step 7: roof equation recomputed, order and types correct. Edge cases E=L, zero complex, q=id all fine. Sources 06YY/015F/04VG/06XN checked in tags/tags. I accept the 4 tool_uses: the pur nodes and point exactness are in units the unit cites; kflat-resolution is a generic tool. Advisory: lem-sfb-ind-finite-free-scalar-model with a one-object diagram already states steps 2–3 (counit invertible on all unbounded complexes, K-flat model); the re-derivation is correct, so no repair is needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointDerivedSectionsTensorDescent",
+  "declaration": "WeilConjectures.point_derived_sections_tensor_descent",
+  "declarations": [
+   "WeilConjectures.PointDerivedSectionsTensor.sectionsE",
+   "WeilConjectures.PointDerivedSectionsTensor.sectionsL",
+   "WeilConjectures.PointDerivedSectionsTensor.A",
+   "WeilConjectures.PointDerivedSectionsTensor.B",
+   "WeilConjectures.PointDerivedSectionsTensorData",
+   "WeilConjectures.point_derived_sections_tensor_descent"
+  ],
+  "file": "lean/Sheaf/Paper/PointDerivedSectionsTensorDescent.lean",
+  "statement": "theorem point_derived_sections_tensor_descent (D : FiniteFieldDatum.{t}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (E L : IntermediateField ℚ_[l] Ω) [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] L] (h : E ≤ L) [HasDerivedCategory.{wE} (ModuleCat.{max u (t + 1)} (Padic.coefficientExtensionIntegers l E))] [HasDerivedCategory.{wL} (ModuleCat.{max u (t + 1)} (Padic.coefficientExtensionIntegers l L))] (d : PointFiniteFreeSectionsTensorData D.k l E L (IntermediateField.inclusion h)) : Nonempty (PointDerivedSectionsTensorData d)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical derived descent of the recorded finite-free comparison. Exactness is asserted in result fields, not assumed; source and target module localizations have independent universes. The published ordinary extension, derived extension and counit are reused verbatim; equations specify the comparison uniquely, its localized balanced map, every flat-term K-flat resolution, and arbitrary roofs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc59420fe",
+  "group": "NG",
+  "result": "pass",
+  "note": "Read the item node, all 10 stmt_deps, report, module, the PointFiniteFreeSectionsTensorData Lean and FiniteFreeCompletedScalarComparison. Node diff is lean-only; statement verbatim; not dropped; no prior delivery. Clause by clause: qiso preservation for all four functors; comparison with comparison_counit (= completedScalarCounit on every complex) and uniqueness; localized pinned by Q(theta_C) and unique; theta = compIso^-1 ≫ localized ≫ compIso ≫ whisker(comparison), the node's Gamma(c^-1)∘tau; resolution clause typed and re-derived for every flat-term K-flat q; roof equation matches B(f)B(q)^-1θ = θA(f)A(q)^-1. Quantified d is fully pinned (constantE/L, comparison_unique, complexes_hom), so no free arrow. No extra hypotheses; universes t/u/wE/wL independent; E=L and identity cases covered. Docstrings and the 6-step proof are present; sorry only. Advisories: derived extension and counit come via the def-weil-completed-integral-scalar-data re-export (.choose of lem-pur-derived-change-of-rings), cited transitively; unused private proof imports. No recompile (no file changed)."
  }
 }
