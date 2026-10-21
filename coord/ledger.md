@@ -19260,3 +19260,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:06 L: batch 20261020T235524 dependency take-out
 - 00:07 L: returned deliver/F5/Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget (reviewer RETURN: (reviewer C-73e81, head 73e817eac) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fi)
 - 00:08 L: returned deliver/U7/Sheaf.Paper.AdicCoefficientDatum (reviewer RETURN: (reviewer C-77542, head 775422335) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.AdicCoefficien)
+- 00:09 L: returned deliver/B6/Sheaf.Algebra.Homology.LocalizedTensorComparisonDerivedArrow (reviewer RETURN: (reviewer C-997a7, head 997a7a91e) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Loc)
