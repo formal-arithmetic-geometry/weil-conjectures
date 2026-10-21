@@ -23959,3 +23959,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:59 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 22:59 L: returned deliver/NA/lem-sfb-norm-completion-positive-cohomology-mono (reviewer RETURN: E2: the new node lem-sfb-punctured-norm-class-finite-etale-descent is false. Counterexample with q=1: k algebraically cl)
 - 22:59 L: merged deliver/NJ/lem-sfb-constructible-normed-geometric-fibres (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T23:00:17Z L: superseded stage-1 delivery NI/lem-sfb-uncountable-almost-disjoint-family at 4c59adc933742bc8daf4b8b11c354503192024be; current completion retained; packet archived at refs/superseded/NI/lem-sfb-uncountable-almost-disjoint-family/4c59adc933742bc8daf4b8b11c354503192024be; stale return retired.
