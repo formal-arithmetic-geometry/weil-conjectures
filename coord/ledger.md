@@ -23118,3 +23118,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T17:00:51Z L: superseded stage-1 delivery NM/lem-sfb-integral-quotient-exchange-comparison at dba43f4a1f816c3ccfaefa74f237da167ebf96c6; current completion retained; packet archived at refs/superseded/NM/lem-sfb-integral-quotient-exchange-comparison/dba43f4a1f816c3ccfaefa74f237da167ebf96c6; stale return retired.
 - 17:02 L: merged deliver/Q04/lem-sfb-snc-root-limit-normal-charts (stage 2; reviewer PASS; parallel immutable checks)
 - 17:02 L: merged deliver/NP/lem-sfb-dense-lattice-derived-invariants-comparison (reviewer PASS; first push; new nodes: 3)
+- 17:03 L: returned deliver/O2/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D4 circular split, also D1/D2: the only new node restates an ancestor in another form. Steps 3-9 are a sound formal redu)
