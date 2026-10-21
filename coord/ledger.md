@@ -22854,3 +22854,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:46 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
 - 14:46 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 14:47 L: merged deliver/NF/lem-sfb-qcqs-rational-integral-localizing-generators (reviewer PASS; first push; new nodes: 0)
+- 14:47 L: merged deliver/NO/lem-sfb-nested-open-regular-alteration (stage 2; reviewer PASS; parallel immutable checks)
