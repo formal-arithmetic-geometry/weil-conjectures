@@ -19916,3 +19916,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:41 L: merged deliver/Q61/lem-sp-supported-etale-tensor-origin (reviewer PASS; first push; new nodes: 0); claim not held by Q61: not your claim
 - 03:41 L: merged deliver/Q66/lem-sp-etale-sum-counit-scalar (reviewer FIX; first push; new nodes: 0); claim not held by Q66: not your claim
 - 03:41 L: merged deliver/Q60/lem-sp-proetale-open-scalar-cocycle (reviewer PASS; first push; new nodes: 0); claim not held by Q60: not your claim
+- 03:41 L: merged deliver/Q125/lem-sp-finite-compact-support-domains (reviewer PASS; first push; new nodes: 0); claim not held by Q125: not your claim
