@@ -20,9 +20,115 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-strict-perfect-coefficient-package"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the finite affine cover lemma to the quasi-compact open $S\\subset S$, obtaining a finite affine open cover $\\{A_k\\}_{k\\in K}$. For each $k$, apply the covering condition to the original family over $A_k$. Its affine-target refinement clause supplies a finite affine covering $\\{V_{kt}\\to A_k\\}_{t\\in J_k}$, with each $V_{kt}$ an affine open of some $U_{\\alpha(k,t)}\\times_S A_k$. This fibre product is the inverse image of the open $A_k$, so $V_{kt}$ is also an affine open in $U_{\\alpha(k,t)}$. Use the finite affine refinement asserted in the site node, not merely joint surjectivity of an arbitrary family.",
+   "uses": [
+    "lem-pqf-finite-affine-cover-qc-open",
+    "def-weil-pbc-proetale-site",
+    "sk-def-pe-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Definition 0989 (definition-fpqc-covering), applied on the finite affine open cover; the finite affine refinement clause recorded in sk-def-pe-site."
+   }
+  },
+  {
+   "text": "The family $\\{A_k\\to S\\}$ is a Zariski cover and hence a pro-étale cover by the site node. Both this family and each $\\{V_{kt}\\to A_k\\}$ are fpqc. Composition of fpqc covering families makes $\\{V_{kt}\\to S\\}_{(k,t)}$ fpqc. Each composite is weakly étale by stability under composition, hence this is a pro-étale cover by its definition. Set $J=\\coprod_{k\\in K}J_k$ and retain the indicated function $\\alpha:J\\to I$. A finite union of finite sets is finite. The images of these charts cover $S$; since $S$ is nonempty, $J$ is nonempty. This argument uses neither quasi-separatedness of $S$ nor quasi-compactness of the original $U_i$.",
+   "uses": [
+    "sk-def-pe-site",
+    "lem-weil-pbc-fpqc-covering-axioms",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Lemma 098C (lemma-proetale), composition; its fpqc and weakly-etale components are the cited covering-axiom and stability nodes."
+   }
+  },
+  {
+   "text": "For each $j$, boundedness of the given complex $F_{\\alpha(j)}^\\bullet$ supplies an ordered interval $[a_j,b_j]$ outside which its terms vanish. If that complex is zero, choose $a_j=b_j=0$. Since $J$ is finite and nonempty, define $a=\\min_j a_j$ and $b=\\max_j b_j$. For every $j$ one has $a\\le a_j\\le b_j\\le b$; choosing any $j\\in J$ also gives $a\\le b$. Thus $[a_j,b_j]\\subseteq[a,b]$. These choices use only the fixed complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Finite minimum and maximum applied to the bounded models in the hypothesis (elementary extraction after the covering refinement)."
+   }
+  },
+  {
+   "text": "Use slice sites for restriction. For $V_j\\to U_{\\alpha(j)}$, successive restriction is sectionwise the identity on a test object over $V_j$. The slice forgetful functor preserves covers, and a cover of its underlying test object lifts uniquely to a cover over the slice object, so it is continuous and cocontinuous. Apply the restriction/sheafification comparison to the constant module presheaves, whose restrictions are the same constant presheaves. It identifies $(\\underline{F_{\\alpha(j)}^r})|_{V_j}$ with $\\underline{F_{\\alpha(j)}^r}$ on the smaller slice, naturally in all linear maps and differentials. Apply the natural tensor restriction comparison over the constant ring sheaf $\\underline R$, with $B$ regarded as an $\\underline R$-module, to identify\n$$(B|_{U_{\\alpha(j)}}\\otimes_{\\underline R}\\underline{F_{\\alpha(j)}^\\bullet})|_{V_j}\\cong B_j\\otimes_{\\underline R}\\underline{F_{\\alpha(j)}^\\bullet}=E_j^\\bullet.$$\nThe maps commute with differentials by the naturality in the cited comparisons.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-slice-module-sheafification",
+    "lem-weil-pbc-slice-tensor-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03DH (section-localize), Definition 04IX (definition-localize-ringed-site); restriction/sheafification and tensor comparisons."
+   }
+  },
+  {
+   "text": "Module restriction to a slice is exact by the module restriction/extension-by-zero lemma. Therefore its derived functor is represented by termwise restriction, as specified in the derived-restriction definition. Restrict the given representing isomorphism for $P|_{U_{\\alpha(j)}}$, and use relocalization and the comparison of step 4. This gives $P|_{V_j}\\simeq E_j^\\bullet$. If $r\\notin[a_j,b_j]$, the term is $B_j\\otimes_{\\underline R}\\underline 0=0$: every generator $b\\otimes0$ is zero. Thus $E_j^r=0$ outside the same interval; no preservation of a nonsplit exact sequence is involved.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-ringed-site-derived-restriction",
+    "def-pur-localized-ringed-site",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03DH (section-localize), Definition 04IX (definition-localize-ringed-site), and ordinary sheaf tensor definition."
+   }
+  },
+  {
+   "text": "For $N\\ge0$, identify $B_j\\otimes_{\\underline R}\\underline{R^{\\oplus N}}$ with $B_j^{\\oplus N}$ as follows. The tensor/sheafification lemma, applied to the constant ring presheaf $R$, identifies its left side with the sheafification of $W\\mapsto B_j(W)\\otimes_R R^{\\oplus N}$. Sectionwise the map $b\\otimes(r_t)_t\\mapsto(br_t)_t$ has inverse $(b_t)_t\\mapsto\\sum_t b_t\\otimes e_t$. These formulas respect restrictions, so they identify this presheaf with the already-sheaf $B_j^{\\oplus N}$. They also apply for $N=0$, with the empty sum. No flatness hypothesis occurs in these inverse formulas.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW (lemma-sheafification-tensor), final sheaf-factor specialization and elementary finite-basis tensor calculation."
+   }
+  },
+  {
+   "text": "Choose the degreewise splitting $F_{\\alpha(j)}^r\\xrightarrow{i_{jr}}R^{\\oplus N_{jr}}\\xrightarrow{p_{jr}}F_{\\alpha(j)}^r$ in the finite-projective hypothesis. Apply constant sheafification and then $B_j\\otimes_{\\underline R}-$, and use step 6 on the middle term. The resulting maps $I_{jr},P_{jr}$ satisfy $P_{jr}I_{jr}(b\\otimes v)=b\\otimes p_{jr}i_{jr}(v)=b\\otimes v$. This is an equality of presheaf tensor maps and hence of their sheafifications. They therefore give exactly the strict-perfect coefficient package of the definition. Only finitely many nonzero degrees of finitely many selected complexes require choices; outside their intervals take $N_{jr}=0$ and the zero splitting. All intervals, ranks and maps have now been chosen from the cover, the models and their splittings, before introducing any test module sheaf. The entire construction uses functoriality and split identities, so requires no flatness or exactness of scalar extension.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW (lemma-sheafification-tensor) and the degreewise splitting convention of def-weil-pbc-strict-perfect-coefficient-package; elementary application of the two functors to a split identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pqf-finite-affine-cover-qc-open",
+  "def-weil-pbc-proetale-site",
+  "sk-def-pe-site",
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-pbc-proetale-covering",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-slice-module-sheafification",
+  "lem-weil-pbc-slice-tensor-natural",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-module-sheafification-tensor",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Paragraph 2 final sentence and paragraph 3 parenthetical perfect-factor assertion; explicit uniform-model argument using Stacks proetale.tex and sites-modules.tex as recorded stepwise."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -107,10 +213,107 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: QuasiCompactCover supplies geometric finite refinement ingredients, not the uniform derived scalar models and scalar-extended splitting packages; the other hits concern finite presentation or light condensed internal projectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "proetale.*(finite|refin)|scalar.*(retract|splitting)|exists_isAffineOpen_of_isCompact",
+   "results": {
+    "hits": [
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean",
+     "Mathlib/AlgebraicGeometry/Cover/QuasiCompact.lean"
+    ],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: geometry hits supply cover ingredients and algebra hits ordinary projectivity or K-projectivity; none states the combined pro-etale scalar-model refinement and its specified splitting packages."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite projective modules give finite free retract sheaves after arbitrary scalar extension and bounded complexes have uniform bounds on a finite cover",
+   "results": {
+    "hits": [
+     "Algebra.FormallyUnramified.projective_of_restrictScalars",
+     "Module.Finite.exists_comp_eq_id_of_projective",
+     "instFinitePresentationTensorProduct",
+     "Module.Flat.of_projective",
+     "Module.finitePresentation_of_projective",
+     "ModuleCat.projective_of_free",
+     "Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+     "Module.Flat.projective_of_finitePresentation"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: geometry hits supply cover ingredients and algebra hits ordinary projectivity or K-projectivity; none states the combined pro-etale scalar-model refinement and its specified splitting packages."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.QuasiCompactCover",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.QuasiCompactCover",
+     "AlgebraicGeometry.QuasiCompactCover.inst",
+     "AlgebraicGeometry.QuasiCompactCover.ulift",
+     "AlgebraicGeometry.Scheme.quasiCompactCover_iff",
+     "AlgebraicGeometry.QuasiCompactCover.instUlift",
+     "AlgebraicGeometry.QuasiCompactCover.uliftHom",
+     "AlgebraicGeometry.QuasiCompactCover.instOfIsEmptyCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.QuasiCompactCover.instSumScheme"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: geometry hits supply cover ingredients and algebra hits ordinary projectivity or K-projectivity; none states the combined pro-etale scalar-model refinement and its specified splitting packages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pro etale cover of a quasi compact scheme with bounded finite projective scalar complexes admits finite affine charts with common degree bounds and scalar extended splittings",
+   "results": {
+    "hits": [
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S",
+     "AlgebraicGeometry.Scheme.AffineCover",
+     "AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X",
+     "AlgebraicGeometry.Scheme.AffineCover.I₀",
+     "AlgebraicGeometry.Scheme.smallEtalePretopology",
+     "AlgebraicGeometry.Scheme.etalePretopology"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: geometry hits supply cover ingredients and algebra hits ordinary projectivity or K-projectivity; none states the combined pro-etale scalar-model refinement and its specified splitting packages."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite family of bounded cochain complexes of projective modules has a common interval of vanishing and tensoring preserves their split retractions",
+   "results": {
+    "hits": [
+     "CochainComplex.isKProjective_of_projective",
+     "CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective",
+     "CochainComplex.IsKProjective",
+     "DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective",
+     "CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex",
+     "CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt",
+     "CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex",
+     "CategoryTheory.ProjectiveResolution.instIsStrictlyLECochainComplexOfNatInt"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: geometry hits supply cover ingredients and algebra hits ordinary projectivity or K-projectivity; none states the combined pro-etale scalar-model refinement and its specified splitting packages."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-internal-hom-dual-tor-amplitude",
@@ -129,5 +332,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-scalar-perfect-refinement",
+  "worker": "stage1",
+  "summary": "Checked the nonempty quasi-compact refinement against the covering definition, reused the finite affine cover and fpqc composition nodes, and wrote out restriction, finite extrema, scalar finite-free identifications and preservation of the split identities. No new nodes and no statement correction; no flatness hypothesis added.",
+  "blueprint": "Realizes the finite uniform model extraction needed by paragraph 2 final sentence (perfect coefficient dual) and paragraph 3 parenthetical membership of perfect factors in Dctf in det-thm-sf-ctf-stability-internal-hom, via lem-sfb-internal-hom-dual-tor-amplitude.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-covering-axioms",
+    "why": "Transitivity of fpqc covering families composes the finite affine refinements with the affine open cover; a generic geometric tool, not a change to the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-etale-composition-base-change",
+    "why": "Composition of weakly etale maps verifies the geometry of the refined cover; a generic geometric tool absent from the coefficient unit."
+   },
+   {
+    "node": "lem-weil-pbc-slice-module-sheafification",
+    "why": "The natural restriction/sheafification isomorphism restricts constant scalar models to a slice; a generic ringed-site tool."
+   },
+   {
+    "node": "lem-weil-pbc-slice-tensor-natural",
+    "why": "Naturality of ordinary tensor restriction identifies the restricted termwise model; a generic ringed-site tool."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact module restriction permits restricting the derived representing isomorphism; a generic localized-site tool."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "The sheaf-factor specialization computes scalar extension of a constant finite free module; a generic tensor/sheafification tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-covering-axioms",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "lem-weil-pbc-slice-module-sheafification",
+  "lem-weil-pbc-slice-tensor-natural",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pc-sites-module-sheafification-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-18bf421c6",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-18bf421c6 (reviewer sub-agent of L); spot-checked: I read the item and its 7 new proof steps in full, along with every cited statement. The statement is unchanged, adds no hypothesis and is not weakened. It gives exactly what the parent lem-sfb-internal-hom-dual-tor-amplitude takes in its step 2. There are no new nodes. Step 1 uses the finite affine cover (lem-pqf) of the quasi-compact S and the covering condition of Stacks 0989 over each affine A_k, so V_kt is affine open in U_alpha. Over the affine A_k a finite affine refinement is a cover, which is true because A_k is separated. Step 2 composes covers with lem-weil-pbc-fpqc-covering-axioms (2), which is Stacks 022D/098C(2), and gets weak etaleness from open immersion, base change and composition. It never assumes S is quasi-separated, so there is no E1 fault, and J is nonempty because S is. Step 3 is elementary; I checked the zero-complex and disjoint-interval cases. Steps 4-5 restrict to slices via the slice sheafification and tensor comparisons; the slice forgetful functor is continuous and cocontinuous by def-pur-localized-ringed-site. They also use relocalization and exact module restriction (unit sk-def-sf-operations, which is in route), and B tensor 0 = 0. Step 6 is the final clause of Stacks 0GMW, B_j(W) tensor R^N = B_j(W)^N, including N=0. Step 7 applies a functor to p i = id, which matches the degreewise package definition. No flatness is needed (checked R=Z, B=Z/2). I searched the DAG for duplicates; the nearest are the scalar-perfect dual realization, coefficient finite-descent sections and lisse finite models nodes, and none states this. The tool_uses are generic site tools and are accepted. There are no SGA citations. No fixes were made."
  }
 }
