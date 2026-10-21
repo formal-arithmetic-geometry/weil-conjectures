@@ -17,7 +17,10 @@
   "def-trf-strict-normal-crossings-boundary",
   "def-sfb-lisse-coefficient-module",
   "def-sfb-profinite-test-objects",
-  "def-sfb-continuous-map-condensed-ring-map"
+  "def-sfb-continuous-map-condensed-ring-map",
+  "def-sfb-derived-profinite-evaluation",
+  "def-sfb-root-boundary-comparison",
+  "def-sfb-root-boundary-scalar-comparison"
  ],
  "proof": [
   {
@@ -275,5 +278,27 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-bd07fe9b8 (reviewer sub-agent of L); spot-checked: Read the item, all 3 new nodes, every cited statement and the source (main-20261015 ctf-stability direct-images proof, paragraph (3)). The source states only open-image preservation via sk-prop-open-coefficients, so the agent proof and WANTED lines are correct. This is a first split; the statement is byte-identical to NU's snapshot. Step 1: U[P] is affine pro-étale over V, T[P] is the root tower over U[P], N_P is lisse, the complements are principal opens (so the closed-support triangle's qc hypothesis holds), and the d=1..r induction with derived composition gives the unit of j_P. Step 2 is elementary: monic-free plus finite⇒integral, LC(P,R) is integral, and on the fibre t_a=0 so the roots are nilpotent; a_P:S[P]→B_P is a surjective closed immersion with nil kernel, with no uniform exponent claimed. Step 3: integral exchange plus topological invariance (the equivalence makes a_* exact and its unit an iso), and h_P a_P = i_P. Steps 4–6 are correct: point-pullback composition, the function node with X=S affine, normalization at P=*, the family case over U[Q], E→Ω by cancellation, and the P=∅, finite P, rank 0, empty stratum and r=0 cases. New nodes: supported vanishing is self-contained and plausible (purity on regular Kummer levels; transition multiplies by m/n, colimit kills ℓ-torsion; then R lim and ⊗Q). Integral lisse exchange is the pro-étale analogue of 0EYP for non-finite-type integral morphisms, tested on the identity and closed immersions. The profinite functions node generalizes the r=0 clause and matches p^*Z[P] = Z[X[P]]; tested at P=*, ∅ and finite P. None is a relabelling. Batch 5: def-trf-strict-normal-crossings-boundary is a general SNC definition; its 12-node closure contains no trace-formula or Poincaré-duality step, and the item cited it on base, so I accept it. I accept all four tool uses (generic support triangle, topological invariance, derived composition, point pullback). No SGA, no cycle, no weakening. Maintainer note (C5 advisory): the base NV nodes lem-sfb-root-tower-puncture-invariance (A=all) and lem-sfb-root-tower-coordinate-face (J=all) state the conclusions of step 1 and steps 2–3. They are unsplit, and the report does not discuss them. I did not repoint: NI's new nodes are their natural sub-lemmas, not duplicates, and coordinate-face lacks the E→Ω clause the item needs. Future splits of the NV nodes should cite lem-sfb-root-coordinate-supported-vanishing and lem-sfb-integral-lisse-closed-base-change. No files changed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RootTowerBoundaryAcyclicity",
+  "declaration": "AlgebraicGeometry.ProEtale.RootBoundary.rootTower_boundary_acyclicity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RootBoundary.rootTower_boundary_acyclicity"
+  ],
+  "file": "lean/Sheaf/Paper/RootTowerBoundaryAcyclicity.lean",
+  "statement": "theorem rootTower_boundary_acyclicity (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (Ω : Type u) [NormedField Ω] [NormedAlgebra E Ω] [IsAlgClosure E Ω] (Y : Scheme.{u}) (y : Y ⟶ Spec (.of k)) [LocallyOfFiniteType y] [QuasiCompact y] [IsSeparated y] (hY : IsRegularScheme Y) (A : Type u) [CommRing A] (b : Spec (.of A) ⟶ Y) [Etale b] (r : ℕ) (s : Fin r → A) (H : (Spec (.of A)).IdealSheafData) (hH : IsStrictNormalCrossingsBoundary H) (hproduct : H = Scheme.IdealSheafData.ofIdealTop (Ideal.span {(Scheme.ΓSpecIso (CommRingCat.of A)).inv (∏ i, s i)})) (hbranches : Set.range (fun i : Fin r ↦ PrimeSpectrum.zeroLocus ({s i} : Set A)) = Set.image (Set.image Subtype.val) (irreducibleComponents (H.support : Set (Spec (.of A))))) (R : Type u) [CommRing R] (a : A →+* R) [WeaklyEtale (Spec.map (CommRingCat.ofHom a))] : Assertion E p (fun i ↦ a (s i)) E ∧ Assertion Ω p (fun i ↦ a (s i)) E ∧ ScalarCompatibility p (fun i ↦ a (s i)) E Ω",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The unchanged node is rendered by explicit normalized derived isomorphisms, entire-test-scheme naturality diagrams and canonical directional scalar-restriction diagrams. Three new definition nodes supply only the missing comparison interfaces. Existing root algebras, free internal modules, tests and exchange mates are reused. No independent proof theorem is added and no source statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21165fb4e",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery after the fc3955fe RETURN (H3/H12/H11), diffed against that snapshot; item statement, source, proof and stmt_deps unchanged. F1 fixed: ScalarCompatibility uses B'=model Ω E M; eΩ is pinned by IsScalarExtendedBoundary (the actual tensor unit equation, existence and uniqueness stated in scalarBoundaryIdentification_existsUnique); u_M = scalarConstantMap transported by the sectionwise modelIso (x↦1⊗x); target maps are RHom(u_M[0]) and the canonical restrictPointPullD⁻¹ ≫ restrictHomD; one biproduct equation with α_E and α_Ω lands in D. Unfolded: the E leg is IsScalarExtendedBoundary pulled to S[P] via exchange naturality; the Ω leg is comparison_scalarRestriction plus the restriction/exchange mate. Both are true and non-vacuous, and nothing is inverted. F2: node statement rewritten consistently; fields OK; records verbatim with all declarations listed (script). F3: real second reading. Re-checked hypotheses, NormalizedComparison, the naturality clauses, derivedEvaluation = recorded ProfiniteFunctions.comparison, modelIso pinned by ∃!, edge cases r=0, P=∅, P=*, finite P, rank 0, empty stratum, incomplete Ω, universes, docstrings, sorry only in theorems, lines ≤100. Advisory: the new def nodes cite theorem nodes (integral-lisse-closed-base-change, profinite-constant-derived-functions, root-tower-coordinate-face, root-tower-lisse-morphism-extension) for plain defs; the rule is item-scoped and the tool raised no finding, so this is a maintainer note suggesting existing:true def nodes. No files changed, no compile run (worker reports clean compiles: 28.4 s scalar module, 3.9 s item)."
  }
 }

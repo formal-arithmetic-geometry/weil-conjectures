@@ -23735,3 +23735,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:51 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 20:52 L: returned deliver/NI/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F + C5/B9 + G4. Live item. It is not on the drop list, its citer lem-sfb-nested-open-regular-alteration is live, and )
 - 20:52 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 20:52 L: merged deliver/NO/lem-sfb-root-tower-boundary-acyclicity (stage 2; reviewer PASS; parallel immutable checks)
