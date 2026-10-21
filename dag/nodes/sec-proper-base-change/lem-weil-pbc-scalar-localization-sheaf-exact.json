@@ -15,94 +15,96 @@
  ],
  "proof": [
   {
-   "text": "Let $P$ be the presheaf of $R$-algebras $P(V)=R(V)[1/s|_V]$, with the localization restriction maps of [def-weil-pbc-ringed-section-localization]. For every $V$, apply [lem-weil-pbc-localization-flat] to the multiplicative subset $\\{1,s|_V,(s|_V)^2,\\ldots\\}$ of the commutative ring $R(V)$. Thus $P(V)$ is flat over $R(V)$. This argument also permits $0$ in the multiplicative subset: if $s|_V$ is nilpotent then $P(V)=0$, which is flat.",
+   "text": "For P = ringedSectionLocalizationPresheafOfUniverses R s, IsLocalization.flat proves Module.Flat for P(U) over R(U) for every U, with no nonzero assumption on s.",
    "uses": [
     "def-weil-pbc-ringed-section-localization",
     "lem-weil-pbc-localization-flat"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00HT (algebra-lemma-flat-localization), assertion (1); section-localization construction."
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03ES, 03ET and 03DB; Section 03EK; Algebra Tag 00HT for localization flatness."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-sectionwise-flat-presheaf-tensor] to $P$ from step 1. It gives precisely the finite-limit hypothesis on $-\\otimes_{p,R}P$, including kernels and the empty product.",
+   "text": "Use Mathlib Module.Flat.iff_preservesFiniteLimits_tensorRight, the categorical form of flat-tensor-exact, at every U. PresheafOfModules.evaluationJointlyReflectsLimits assembles these sectionwise limit cones into finite-limit preservation of tensorRight P. This also handles empty finite diagrams.",
    "uses": [
-    "lem-weil-pbc-sectionwise-flat-presheaf-tensor"
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-pur-presheaf-tensor-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ES (lemma-flatness-presheaves), with the finite-limit formulation of presheaf flatness in Tag 03ER (definition-flat), (1); explicit kernel and finite-product comparisons extracted from the sectionwise proof."
+    "place": "Tags 03ES, 03ET and 03DB; Section 03EK; Algebra Tag 00HT for localization flatness."
    }
   },
   {
-   "text": "Apply [lem-pc-sites-modules-sheafification-flat] with $\\mathcal O=R$ and $\\mathcal F=P$, using step 2. As $R$ is already a sheaf, $R^\\#=R$, and by construction $P^\\#=R_s$ as an $R$-module. Thus $R_s$ is a flat $R$-module sheaf. By [def-pc-flat-sheaf-modules], $M\\mapsto M\\otimes_R R_s$ is exact as an endofunctor of $\\operatorname{Mod}(R)$. The symmetry and additivity in [lem-pc-sheaf-modules-tensor-closed] give that $T(M)=R_s\\otimes_R M$, with $T(f)=1\\otimes f$, is an additive exact endofunctor of $\\operatorname{Mod}(R)$.",
+   "text": "Let A be module sheafification over R and I its fully faithful right adjoint. Both preserve finite limits. The monoidal sheafification comparison A followed by tensorRight (A P) is isomorphic to tensorRight P followed by A. Precompose with I and use the invertible counit I A ≅ id to prove that tensorRight (A P) preserves finite limits. This is the private independent-universe proof of the needed special case of 03ET, without the fixed-universe upstream interface. The existing ringedLocalizationRing_moduleComparisonOfUniverses identifies restriction of scalars of the localized ring unit with A P; symmetry gives finite-limit preservation of left tensoring with that restricted unit B.",
    "uses": [
-    "lem-pc-sites-modules-sheafification-flat",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-sheaf-modules-tensor-closed"
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-ringed-section-localization",
+    "def-pc-sheaf-restrict-scalars"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ET (lemma-flatness-sheafification); Tag 03ER (definition-flat), (3); Section 03EK and Tag 03EO (lemma-internal-hom-adjoint-tensor)."
+    "place": "Tags 03ES, 03ET and 03DB; Section 03EK; Algebra Tag 00HT for localization flatness."
    }
   },
   {
-   "text": "Put $V=\\operatorname{Res}_{\\varphi}$ [def-pc-sheaf-restrict-scalars]; it keeps the underlying abelian sheaf, so $U_{R_s}=U_RV$ for the forgetful functors of step 5. By [lem-weil-pbc-extension-tensor-comparison], $VE(M)\\cong T(M)$ by the identity on local pure tensors. This is natural in $M$: both arrow maps send $b\\otimes m$ to $b\\otimes f(m)$, so agree before sheafification and hence after it. Thus $VE\\cong T$.",
+   "text": "Construct the scalar-extension presheaf functor from changeOfRingsPresheafOfUniverses, mapping arrows by sectionwise ModuleCat.extendScalars, and compose with target module sheafification to obtain E. On underlying abelian presheaves this is naturally isomorphic to left tensoring with B.val: the component is the identity, and compatibility with restriction is the changeOfRingsMap_tmulOfUniverses formula. The monoidal sheafification comparison and invertible counit then give a natural isomorphism E followed by the target forgetful functor ≅ tensorLeft B followed by the source forgetful functor. The object and map formulas in the statement hold definitionally.",
    "uses": [
-    "lem-weil-pbc-extension-tensor-comparison",
+    "def-pur-sheaf-tensor-product",
     "def-pc-sheaf-restrict-scalars",
     "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Section 03CV (section-sheaves-modules), change-of-rings paragraphs and lemma-adjointness-tensor-restrict; Section 03EK (tensor product); Tag 03CY (lemma-sheafification-presheaf-modules)."
-   }
-  },
-  {
-   "text": "For $A=R,R_s$, [lem-weil-pbc-module-sheaves-colimits-forgetful] gives faithful exact $U_A:\\operatorname{Mod}(A)\\to\\operatorname{Ab}(\\mathcal C)$, with the same underlying kernels and cokernels. Exactness is detected there: an underlying zero sheaf has only zero sections, hence is the zero module sheaf. Since $U_{R_s}E\\cong U_RT$, $E$ preserves short exact sequences. Faithfulness and preservation of sums by $U_{R_s}$ and $T$ give $E(f+g)=E(f)+E(g)$ and $E(0)=0$.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA (lemma-abelian) and 03DB (lemma-limits-colimits)."
+    "place": "Tags 03ES, 03ET and 03DB; Section 03EK; Algebra Tag 00HT for localization flatness."
    }
   },
   {
-   "text": "In the abelian module categories [def-weil-sheaf-of-modules-category], factor an arrow $a:M\\to N$ into the short exact sequences $0\\to\\ker a\\to M\\to\\operatorname{im}a\\to0$ and $0\\to\\operatorname{im}a\\to N\\to\\operatorname{coker}a\\to0$. Step 5 identifies $E(\\ker a)$ and $E(\\operatorname{coker}a)$ as its kernel and cokernel. Additivity preserves the finite biproduct equations, including zero. Finite limits and colimits are kernels and cokernels of the differences of incidence maps between those biproducts; hence $E$ preserves both. If $\\alpha:F\\cong E$, then $F(f)=\\alpha_N^{-1}E(f)\\alpha_M$, giving additivity; its components identify the image short exact sequences, giving exactness and the same finite preservation.",
+   "text": "Left tensoring with B is additive and preserves finite colimits by the existing independent-universe tensor API. Both forgetful functors to abelian sheaves are faithful, additive and preserve finite limits and colimits. They reflect finite limits and colimits. Transfer all three properties along the isomorphism in step 4 and reflect them to E. No assertion that a sheaf epimorphism is surjective on sections is used.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03ES, 03ET and 03DB; Section 03EK; Algebra Tag 00HT for localization flatness."
+   }
+  },
+  {
+   "text": "For F naturally isomorphic to E, apply Mathlib Functor.additive_of_iso, preservesFiniteLimits_of_natIso and preservesFiniteColimits_of_natIso to the inverse isomorphism. Together with the explicit construction and formulas for E this supplies every conjunct of the unchanged statement.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA (lemma-abelian); paragraph following Tag 03DB, referring to homology-lemma-exact-functor; elementary biproduct/kernel formulas and natural-isomorphism conjugation."
+    "place": "Tags 03ES, 03ET and 03DB; Section 03EK; Algebra Tag 00HT for localization flatness."
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-ringed-section-localization",
   "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-sectionwise-flat-presheaf-tensor",
-  "lem-pc-sites-modules-sheafification-flat",
-  "def-pc-flat-sheaf-modules",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-pbc-extension-tensor-comparison",
-  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-pur-presheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "def-weil-sheaf-of-modules-category"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03ET (lemma-flatness-sheafification), preceded by Tag 03ES (lemma-flatness-presheaves), and Definition 03ER; combine with Algebra Tag 00HT (1) and Modules on Sites Tags 03DA and 03DB to retain the target scalar structure."
+  "place": "Tags 03ES and 03ET, using exact monoidal sheafification and its invertible counit; Tags 03DA and 03DB for the forgetful functor, and Algebra Tag 00HT. Lean proof by J2, 2026-10-21; private independent-universe special case avoids fixed-universe upstream APIs."
  },
  "mathlib_searches": [
   {
@@ -237,10 +239,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-sites-modules-sheafification-flat",
-  "lem-pc-sheaf-modules-tensor-closed"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -267,5 +266,15 @@
   "result": "pass",
   "note": "Only the lean record added; the 4 stmt_dep nodes are identical to live. Clause-by-clause match: small site encoded as EssentiallySmall.{u} C with independent uC/vC; R : Sheaf J CommRingCat; s a global section; R_s and φ are the recorded ringedLocalizationRingOfUniverses/UnitOfUniverses. E is pinned on objects and maps to changeOfRingsOfUniverses/HomOfUniverses (sheafified sectionwise extendScalars, R_s acting on the first factor; 1⊗f), so it is unique, not arbitrary. Conclusion: Additive, PreservesFiniteLimits and PreservesFiniteColimits, plus the same for every F with Nonempty (F ≅ E). No extra hypotheses: [HasSheafify J CommRingCat] is required by the dependency interface and true by Mathlib hasSheafifyEssentiallySmallSite (a lemma, so the binder is needed; probe confirmed). Edge cases checked: empty site, s nilpotent or 0, zero ring, s = 1, empty diagrams, universes. H4: the pre-split ScalarLocalizationDerivedHom.scalarLocalization_exact is a SmallCategory special case in the parent node's module without the natural-iso clause; maintainer note, not a fault. Source 03ET at sites-modules.tex:4293 matches. Docstrings carry the source place, blueprint id and all 6 proof steps; body is sorry only. nt_compile --json clean in 4.0 s; the control copy with errors failed as expected."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261021T111213-L-57032",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
