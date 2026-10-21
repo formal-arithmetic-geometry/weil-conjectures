@@ -23727,3 +23727,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:45 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 20:45 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 20:48 L: merged deliver/O4/lem-sfb-parameter-cochain-completion-boundary-descent (reviewer FIX; after a return; new nodes: 3)
+- 20:48 L: returned deliver/H1/Sheaf.Algebra.Homology.AffineTildeDerivedTensorMate (reviewer RETURN: (reviewer C-86ddd, head 86dddfcac) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.Aff)
