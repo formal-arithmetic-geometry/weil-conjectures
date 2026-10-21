@@ -21,162 +21,67 @@
  ],
  "proof": [
   {
-   "text": "Fix $i$ and abbreviate $e=e_i$. For any sectionwise coefficient tower $T_m$, restriction sends $(x_m)_m$ to $(x_{en})_n$. Conversely, given a compatible subsequence $(y_n)_n$, define $x_m$ by applying the transition $T_{en}\\to T_m$ to $y_n$ for any $en\\ge m$. Such $n$ exists since $e\\ge1$. Two choices give the same answer by comparison at a larger subsequence index. For $m'\\ge m$ reduction sends $x_{m'}$ to $x_m$; the two constructions are inverse. They commute with restriction of sections, ring operations, tower maps and every subsequence projection. Thus $R_i\\cong\\varprojlim_nB_{i,n}$ and $S_i\\cong\\varprojlim_nB'_{i,n}$ as ring sheaves, with precisely the stated projections.",
+   "text": "For each positive stride, view $n\\mapsto e_i(n+1)-1$ as a final monotone functor on $\\mathbb N$; $n\\le e_i(n+1)-1$ gives cofinality and thinness gives the parallel-arrow condition. Its opposite is initial. Whisker the given full ring limit cone and use uniqueness of limit points to obtain the prescribed cofinal isomorphism. Its forward equation is the limit factorization equation; cancel its isomorphism to derive the inverse-coordinate formula from cone naturality.",
    "uses": [
+    "def-pur-adic-line-system-data",
     "def-pur-sheaf-inverse-limit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00W2, lemma-limit-sheaf; explicit cofinal-subsequence calculation for the integral twist paragraph"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $B_n=B_{i,n}$. The maps $a_{i,en}$ identify the tower $LB_n$ with $B'_{i,n}$. They induce an isomorphism $A:\\varprojlim_nLB_n\\to\\varprojlim_nB'_{i,n}$: apply $a_{i,en}$ coordinatewise, with inverse given by their inverses. Let $\\kappa:L(\\varprojlim_nB_n)\\to\\varprojlim_nLB_n$ be the projection-induced comparison. Using step 1 to identify its source with $LR_i$ and the target of $A$ with $S_i$, the $n$-th projection of $A\\kappa$ is $a_{i,en}L(\\mathrm{pr}_{en})$, which is the $en$-th projection of $a_i$ by hypothesis. Coordinate projections determine a map into a limit, so $A\\kappa=a_i$. Hence $\\kappa$ is an isomorphism. This uses the assumed comparison $a_i$, without claiming that $L$ preserves arbitrary inverse limits.",
+   "text": "Apply the pointwise integral comparison lemma and choose its normalized linear isomorphism for every $i$. Set the coefficient lifts exactly equal to the supplied integral coefficient lifts. This already gives their required underlying-ring equality.",
    "uses": [
+    "lem-pur-adic-integral-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the integral pair comparison. For $i\\le j$, project its desired naturality square to any level $n$. The two limit-cone naturality equations and the supplied level-comparison square identify the projected maps. The additive limit, evaluated on every object and forgotten to sets, is a limit, so its projections are jointly monic. This proves naturality. The same sectionwise limit-extensionality argument shows that every set-sheaf map satisfying the displayed projections is the constructed comparison; it uses no linearity hypothesis on this competing map.",
+   "uses": [
+    "def-pur-adic-line-system-data",
     "def-pur-sheaf-inverse-limit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
-    "place": "The integral twist paragraph: the coefficient-limit hypothesis and its subsequence projections"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-pur-inverse-image-compatible-free-tower] to $B_n$, $M_{i,n}$ and $L$. Its coefficient-limit hypothesis is $\\kappa$ from step 2. The sites, universes and finite-limit/cover preservation are those of the item. Its single common cover and transition-compatible bases are exactly the given $V_{ij}$ and $b_{ij,n}$; no separate choice of a cover for each $n$ is used. It gives the canonical isomorphism $\\delta_i:LM_i\\to\\varprojlim_nLM_{i,n}$, linear over $\\kappa$. Coordinatewise application of $c_{i,n}$ gives an isomorphism $C_i:\\varprojlim_nLM_{i,n}\\to N_i$; compatibility with transitions makes both this map and its coordinatewise inverse well-defined. Put $\\theta_i=C_i\\delta_i$. Its $n$-th projection is $c_{i,n}L(\\mathrm{pr}_n)$.",
+   "text": "Apply the localization comparison to the constructed integral comparison, with the compatible sections and the given inverse-image section equations. This produces both localization pair diagrams, their natural normalized comparison, and the required uniqueness.",
    "uses": [
-    "lem-pur-inverse-image-compatible-free-tower",
-    "def-pur-sheaf-inverse-limit"
+    "lem-pur-adic-localization-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
-    "place": "The integral twist paragraph: compatible-generator limit comparison; existing free-tower lemma supplies the localized-site argument (Stacks 03CF, lemma-localize-morphism)"
-   }
+   "elementary": false
   },
   {
-   "text": "The semilinearity equations for the $c_{i,n}$ show in coordinate $n$ that $\\theta_i(rm)$ equals the product of the $en$-th projection of $a_i(r)$ with the $n$-th projection of $\\theta_i(m)$. Thus $\\theta_i$ is semilinear over $a_i$. For a specified tower map $v:M_{i,\\bullet}\\to M_{j,\\bullet}$ with target map $v'$, project $\\theta_jL(v)$ and $v'\\theta_i$ to level $n$. The two resulting maps are $c_{j,n}L(v_n\\mathrm{pr}_n)$ and $v'_nc_{i,n}L(\\mathrm{pr}_n)$; these agree by the assumed square for $c$. Hence the two limit maps agree. The same projection argument treats any compatible semilinear tower map and shows uniqueness of $\\theta_i$. Since its defining projections mention no bases, it is independent of the cover and bases.",
+   "text": "Apply the proved filtered-colimit existence theorem on both sites. This constructs the common-stage scalar actions and colimit pairs. Apply the filtered-colimit comparison to these supplied pairs and the localization comparison, obtaining the normalized algebraic inverse-image comparison.",
    "uses": [
-    "def-pur-sheaf-inverse-limit"
+    "lem-pur-adic-filtered-colimit-exists",
+    "lem-pur-adic-filtered-colimit-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
-    "place": "The integral twist and Rational and algebraic closure paragraphs: normalization and naturality on every projection"
-   }
+   "elementary": false
   },
   {
-   "text": "For any ring sheaf $R$, global section $s$, and $R$-module sheaf $M$, form the presheaf $P(U)=\\varinjlim_{q\\ge0}(M(U)\\xrightarrow{s}M(U)\\to\\cdots)$. Presheaf module colimits are sectionwise and their underlying abelian presheaves are the abelian colimits [lem-weil-pbc-presheaf-modules-colimits-sectionwise]. The module-localization colimit lemma therefore identifies it with $M(U)[1/s]$, taking stage $q$ to $m/s^q$. The maps commute with restriction, so this is a presheaf identification. The sheafification of $P$ is the colimit in abelian sheaves: maps from it to a sheaf are, by the two universal properties, exactly compatible families of maps from the sequential diagram. The presheaf $T(U)=R(U)[1/s]$ acts by $(r/s^p)(m/s^q)=rm/s^{p+q}$; module sheafification over a presheaf ring gives the action of $T^\\#$ on $P^\\#$. By definition $T^\\#$ is the sheafified localization $R[1/s]$ [def-weil-pbc-ringed-section-localization], with its canonical map from $R$. Thus the sequential definition in the item has the actual localized-ring action. Multiplication by $s$ in the sequential diagram is only a module map; the ring $T$ is the fraction ring, not a colimit of ring maps $R\\xrightarrow{s}R$.",
+   "text": "The forgetful functors from additive and commutative-ring sheaves to set sheaves preserve filtered colimits. To see this with independent site universes, pass to a small model and transport the sheafification comparison back; present any sheaf diagram as the sheafification of its underlying presheaf diagram. Forgetful functors preserve filtered presheaf colimits, so the sheafification adjunction gives the desired preservation. The supplied adjunction makes $L$ preserve these colimits as well. Apply colimit hom-extensionality to the two source colimit cocones after forgetting and applying $L$. The coprojection equations of any two comparisons agree, so both their underlying ring and module maps, and hence their isomorphisms, agree.",
    "uses": [
-    "lem-sc-module-localization-filtered-colimit",
-    "lem-weil-pbc-presheaf-colimits-sectionwise",
-    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
-    "def-weil-pbc-sheafification",
     "def-weil-pbc-category-colimit",
-    "lem-pc-sites-module-sheafification-interface",
-    "def-weil-pbc-ringed-section-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CL (lemma-limits-colimits-abelian-presheaves), 03CO (lemma-limits-colimits-abelian-sheaves), 03CY (lemma-sheafification-presheaf-modules); fractions in algebra.tex Section 00CM"
-   }
-  },
-  {
-   "text": "For completeness the tensor description agrees with this sequential model. At $U$, [lem-weil-pbc-localization-tensor] gives $M(U)\\otimes_{R(U)}T(U)\\cong P(U)$, with $m\\otimes r/s^q\\mapsto rm/s^q$ (using the symmetry of tensor). These identifications commute with restriction by that formula. Sheafification of presheaf tensor products is the tensor product of the module sheafifications, by [lem-pc-sites-module-sheafification-tensor]. Since $M$ and $R$ are already sheaves, this identifies $P^\\#$ with $M\\otimes_RR[1/s]$ and identifies $m/1$ with $m\\otimes1$. In particular it is the localization specified in the statement, with the same cocone maps.",
-   "uses": [
-    "lem-weil-pbc-localization-tensor",
-    "lem-pc-sites-module-sheafification-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00DK, lemma-tensor-localization; sites-modules.tex Tag 0GMW, lemma-sheafification-tensor"
-   }
-  },
-  {
-   "text": "The geometric inverse image $L$ preserves finite limits and all colimits [lem-weil-pbc-left-exact-site-inverse-image-tensor], so [lem-weil-pbc-localization-inverse-image-coherence] applies to $R_i$, $s_i$ and $M_i$; by step 6, $M_i[1/s_i]=R_i[1/s_i]\\otimes_{R_i}M_i$ is its localization. It gives ring and module isomorphisms $L(R_i[1/s_i])\\cong(LR_i)[1/Ls_i]$ and $L(M_i[1/s_i])\\cong(LM_i)[1/Ls_i]$, preserving the localization units and compatible with the specified ring isomorphism $a_i:LR_i\\cong S_i$, which sends $Ls_i$ to $s'_i$; so $a_i$ yields $L(R_i[1/s_i])\\cong S_i[1/s'_i]$. By step 4, $\\theta_i$ is $a_i$-semilinear, so it carries multiplication by $Ls_i$ to multiplication by $s'_i$ and is an isomorphism of the sequential diagrams $LM_i\\xrightarrow{Ls_i}LM_i\\to\\cdots$ and $N_i\\xrightarrow{s'_i}N_i\\to\\cdots$. By step 5 (on $\\mathcal D$) it induces $(LM_i)[1/Ls_i]\\cong N_i[1/s'_i]$, with inverse induced by $\\theta_i^{-1}$. It is semilinear: filtered colimits of sets commute with finite products, set sheafification preserves them, and algebraic sheafification has the underlying set sheafification, so it suffices to test pairs of representatives at stages $p,q$, where the equation is $\\theta_i(rm)=a_i(r)\\theta_i(m)$. All maps are fixed on each localization coprojection, which gives uniqueness. For a specified map over $R_i\\to R_j$, compatibility of the $s_i$ makes it a map of these sequential diagrams, and both composites agree on every coprojection by step 4; so naturality persists after localization.",
-   "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "lem-weil-pbc-localization-inverse-image-coherence",
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "lem-weil-pbc-sheafification-sets-exact",
     "lem-pc-sites-sheafification-underlying-sets"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
-    "place": "Rational and algebraic closure paragraph: inverse image commutes with colimits and scalar multiplication"
-   }
-  },
-  {
-   "text": "Write $T_i(U)=R_i(U)[1/s_i]$ and $P_i(U)=M_i(U)[1/s_i]$. First take both $T(U)=\\varinjlim_iT_i(U)$ and $P(U)=\\varinjlim_iP_i(U)$ as abelian groups. On $T(U)$ define $[r_i][t_j]=[r_kt_k]$ at a common upper bound $k$, with unit $[1]$. The representative criterion makes this well-defined; the ring identities hold at a common stage. A compatible family of ring maps extends uniquely to an additive map from $T(U)$ and respects this multiplication on representatives, so $T(U)$ is the ring colimit as well. Every group element has a stage representative, and equality of two representatives holds at a common later stage, by [lem-weil-pbc-filtered-colimit-modules-elementwise] with base ring $\\mathbf Z$; ring equalities have the same criterion by [lem-weil-pbc-filtered-colimit-rings-zero]. Define $[r_i][m_j]=[r_km_k]$ at $k\\ge i,j$. Two choices of $k$ agree after passage to a common upper bound, by semilinearity of the transitions. Changing representatives also gives equality after an upper bound of the stages witnessing both equalities. All module identities are checked at a common stage for the finitely many entries, where they are the module identities of $P_k(U)$ over $T_k(U)$. Restrictions preserve this formula. Thus $P$ is a presheaf of modules over the commutative ring presheaf $T$. The same construction applies to $S_i,N_i$.",
-   "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-filtered-colimit-rings-zero",
-    "lem-weil-pbc-presheaf-modules-colimits-sectionwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00D6 (lemma-directed-colimit) and 00D7 (lemma-zero-directed-limit), with the displayed common-upper-bound scalar formula"
-   }
-  },
-  {
-   "text": "Sheafifying the presheaves in step 8 gives the asserted filtered colimits. Indeed presheaf colimits are sectionwise and sheafification is left adjoint, so maps from $P^\\#$ to an abelian sheaf are compatible families of maps from $P_i$ to it. Each such map extends uniquely across $P_i\\to P_i^\\#$, giving precisely the filtered-colimit universal property for the localized module sheaves of step 5; the same argument in rings treats $T^\\#$. The presheaf-ring module-sheafification interface extends the action to $T^\\#\\times P^\\#\\to P^\\#$ and fixes its normalization. To test equality of action maps it suffices to test pairs of stage representatives: filtered colimits of sets commute with finite products, sheafification preserves finite products, and the underlying set of abelian/ring sheafification is set sheafification. Consequently the sheaf product of these colimits is the sheafified colimit of the products at a common stage. This also explains why the formula in the statement is a sheafification formula, rather than an assertion that every global section has a single global representative.",
-   "uses": [
-    "lem-weil-pbc-presheaf-colimits-sectionwise",
-    "def-weil-pbc-sheafification",
-    "lem-pc-sites-module-sheafification-interface",
-    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-    "lem-weil-pbc-sheafification-sets-exact",
-    "lem-pc-sites-sheafification-underlying-sets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CO (lemma-limits-colimits-abelian-sheaves), 03CY (lemma-sheafification-presheaf-modules); sites.tex 00WJ (lemma-sheafification-exact); categories.tex 002W (lemma-directed-commutes)"
-   }
-  },
-  {
-   "text": "Finally apply colimit preservation of $L$ to the $i$-diagram of localized modules and then take the colimit of the compatible isomorphisms of step 7. This gives $L(\\varinjlim_iM_i[1/s_i])\\cong\\varinjlim_iN_i[1/s'_i]$. Taking the same construction for the ring diagrams gives $L(\\varinjlim_iR_i[1/s_i])\\cong\\varinjlim_iS_i[1/s'_i]$. The ring and module comparisons commute with every coprojection. To check multiplicativity or semilinearity, use the stage-product test proved in step 9 and finite-product preservation of $L$. On a common stage the requisite equation is respectively the ring equation or the action equation of step 7; hence it holds on the full colimits. Their inverses are the colimits of the inverse comparisons, so the resulting maps are isomorphisms with the stated scalar action. Projection uniqueness (steps 2–4), localization-cocone uniqueness (step 7), and the colimit universal property fix all the comparisons and their compatibility.",
-   "uses": [
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
-    "place": "Rational and algebraic closure paragraph: the filtered coefficient colimit with its scalar-normalized comparison"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-pur-adic-line-system-data",
   "def-pur-sheaf-inverse-limit",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-ringed-section-localization",
-  "def-weil-pbc-sheafification",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-sites-module-sheafification-tensor",
   "lem-pc-sites-sheafification-underlying-sets",
-  "lem-pur-inverse-image-compatible-free-tower",
-  "lem-sc-module-localization-filtered-colimit",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-weil-pbc-filtered-colimit-rings-zero",
-  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-localization-inverse-image-coherence",
-  "lem-weil-pbc-localization-tensor",
-  "lem-weil-pbc-presheaf-colimits-sectionwise",
-  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
-  "lem-weil-pbc-sheafification-sets-exact"
+  "lem-pur-adic-filtered-colimit-comparison",
+  "lem-pur-adic-filtered-colimit-exists",
+  "lem-pur-adic-integral-comparison",
+  "lem-pur-adic-localization-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
-  "place": "Integral twist and Rational and algebraic closure paragraphs, expanded to the stated semilinear systems using the existing free-tower comparison and Stacks colimit/sheafification interfaces",
-  "group": "NN",
+  "place": "Integral twist and Rational and algebraic closure paragraphs, with cofinality, naturality and both limit/colimit uniqueness arguments proved in Lean the common-stage filtered colimit constructed and three independent comparison results isolated.",
+  "group": "V6",
   "date": "2026-10-21"
  },
  "mathlib_searches": [
@@ -311,39 +216,18 @@
  },
  "lean_audit": {},
  "lean": {
+  "existing": false,
   "module": "Sheaf.Paper.PurAdicLineSystemBaseChange",
+  "file": "lean/Sheaf/Paper/PurAdicLineSystemBaseChange.lean",
   "declaration": "CategoryTheory.purAdicLineSystem_baseChange",
+  "statement": "theorem purAdicLineSystem_baseChange\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]\n    [HasFiniteLimits C] [HasFiniteLimits D]\n    (J : Precoverage C) (K : Precoverage D)\n    (_hJ : J.IsSiteForCoverings) (_hK : K.IsSiteForCoverings)\n    (U : C ⥤ D) [PreservesFiniteLimits U]\n    (_hUcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map U ∈ K (U.obj X))\n    [U.IsContinuous J.toGrothendieck K.toGrothendieck]\n    (L : Sheaf J.toGrothendieck (Type w) ⥤ Sheaf K.toGrothendieck (Type w))\n    (_adj : L ⊣ U.sheafPushforwardContinuous (Type w) J.toGrothendieck K.toGrothendieck)\n    [PreservesFiniteLimits L]\n    [HasSheafify J.toGrothendieck AddCommGrpCat.{w}]\n    [J.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{w}]\n    [HasSheafify J.toGrothendieck CommRingCat.{w}]\n    [HasSheafify K.toGrothendieck AddCommGrpCat.{w}]\n    [K.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{w}]\n    [HasSheafify K.toGrothendieck CommRingCat.{w}]\n    (I : Type w) [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (e : I → ℕ) (_he : ∀ i : I, 1 ≤ e i)\n    (A : PurAdicLineLimits.{w} J.toGrothendieck I e)\n    (B : PurAdicLineLimits.{w} K.toGrothendieck I e)\n    (c : PurAdicPairComparison L A.levels B.levels)\n    (a : PurAdicCoefficientComparison L A B c)\n    (_bases : PurAdicLineLocallyBased J A)\n    (s : ∀ i : I, ((A.integral.R.obj i).obj ⋙ forget CommRingCat.{w}).sections)\n    (s' : ∀ i : I, ((B.integral.R.obj i).obj ⋙ forget CommRingCat.{w}).sections)\n    (_hs : ∀ {i j : I} (h : i ≤ j) (V : Cᵒᵖ),\n      (A.integral.R.map (homOfLE h)).hom.app V ((s i).val V) = (s j).val V)\n    (_hsection : ∀ i : I, IsInverseImageSection.{w, uC, vC, uD, vD} (a.integral i) (s i) (s' i)) :\n    PurAdicCofinalRestriction A ∧ PurAdicCofinalRestriction B ∧\n    ∃ t : PurAdicPairComparison L A.integral B.integral,\n      (∀ i : I, (t.a i).ringUnderlying = (a.integral i).ringUnderlying) ∧\n      PurAdicIntegralNormalized L A B c t ∧\n      (∀ (i : I) (f : L.obj (A.integral.modules.obj i) ⟶ B.integral.modules.obj i),\n        (∀ n : ℕ, f ≫ (sheafCompose K.toGrothendieck (forget AddCommGrpCat.{w})).map\n            ((B.pπ i).app (op n)) =\n          L.map ((sheafCompose J.toGrothendieck (forget AddCommGrpCat.{w})).map\n              ((A.pπ i).app (op n))) ≫\n            (purAdicModuleIso L A.levels B.levels (i, op n) (c.a _) (c.c _)).hom) →\n        f = (purAdicModuleIso L A.integral B.integral i (t.a i) (t.c i)).hom) ∧\n      ∃ (Q : PurAdicLocalization A.integral s) (Q' : PurAdicLocalization B.integral s')\n        (d : PurAdicPairComparison L Q.pairs Q'.pairs),\n        PurAdicLocalizationNormalized L t Q Q' d ∧\n        (∀ d' : PurAdicPairComparison L Q.pairs Q'.pairs,\n          PurAdicLocalizationNormalized L t Q Q' d' →\n          ∀ i : I, (d'.a i).ringUnderlying = (d.a i).ringUnderlying ∧\n            purAdicModuleIso L Q.pairs Q'.pairs i (d'.a i) (d'.c i) =\n              purAdicModuleIso L Q.pairs Q'.pairs i (d.a i) (d.c i)) ∧\n        ∃ (F : PurAdicFilteredColimit Q.pairs) (G : PurAdicFilteredColimit Q'.pairs)\n          (z : PurAdicColimitComparison L d F G),\n          ∀ z' : PurAdicColimitComparison L d F G,\n            z'.a.ringUnderlying = z.a.ringUnderlying ∧\n            purAdicPresentedModuleIso F.M G.M F.identify G.identify z'.a z'.c =\n              purAdicPresentedModuleIso F.M G.M F.identify G.identify z.a z.c",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-21",
   "declarations": [
-   "CategoryTheory.purAdicStride",
-   "CategoryTheory.PurAdicPairDiagram",
-   "CategoryTheory.PurAdicPairDiagram.rings",
-   "CategoryTheory.PurAdicPairDiagram.modules",
-   "CategoryTheory.PurAdicPairDiagram.act",
-   "CategoryTheory.purAdicModuleIso",
-   "CategoryTheory.PurAdicPairComparison",
-   "CategoryTheory.PurAdicLineLimits",
-   "CategoryTheory.PurAdicLineLocallyBased",
-   "CategoryTheory.purAdicPresentedModuleIso",
-   "CategoryTheory.PurAdicLocalization",
-   "CategoryTheory.PurAdicLocalization.ringsUnit",
-   "CategoryTheory.PurAdicLocalization.modulesUnit",
-   "CategoryTheory.PurAdicFilteredColimit",
-   "CategoryTheory.PurAdicFilteredColimit.ringsι",
-   "CategoryTheory.PurAdicFilteredColimit.modulesι",
-   "CategoryTheory.PurAdicCofinalRestriction",
-   "CategoryTheory.PurAdicIntegralNormalized",
-   "CategoryTheory.PurAdicLocalizationNormalized",
-   "CategoryTheory.PurAdicColimitComparison",
-   "CategoryTheory.PurAdicCoefficientComparison",
    "CategoryTheory.purAdicLineSystem_baseChange"
   ],
-  "file": "lean/Sheaf/Paper/PurAdicLineSystemBaseChange.lean",
-  "statement": "theorem purAdicLineSystem_baseChange {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D] [EssentiallySmall.{w} C] [EssentiallySmall.{w} D] [HasFiniteLimits C] [HasFiniteLimits D] (J : Precoverage C) (K : Precoverage D) (_hJ : J.IsSiteForCoverings) (_hK : K.IsSiteForCoverings) (U : C ⥤ D) [PreservesFiniteLimits U] (_hUcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map U ∈ K (U.obj X)) [U.IsContinuous J.toGrothendieck K.toGrothendieck] (L : Sheaf J.toGrothendieck (Type w) ⥤ Sheaf K.toGrothendieck (Type w)) (_adj : L ⊣ U.sheafPushforwardContinuous (Type w) J.toGrothendieck K.toGrothendieck) [PreservesFiniteLimits L] [HasSheafify J.toGrothendieck AddCommGrpCat.{w}] [J.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J.toGrothendieck CommRingCat.{w}] [HasSheafify K.toGrothendieck AddCommGrpCat.{w}] [K.toGrothendieck.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify K.toGrothendieck CommRingCat.{w}] (I : Type w) [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (e : I → ℕ) (_he : ∀ i : I, 1 ≤ e i) (A : PurAdicLineLimits.{w} J.toGrothendieck I e) (B : PurAdicLineLimits.{w} K.toGrothendieck I e) (c : PurAdicPairComparison L A.levels B.levels) (a : PurAdicCoefficientComparison L A B c) (_bases : PurAdicLineLocallyBased J A) (s : ∀ i : I, ((A.integral.R.obj i).obj ⋙ forget CommRingCat.{w}).sections) (s' : ∀ i : I, ((B.integral.R.obj i).obj ⋙ forget CommRingCat.{w}).sections) (_hs : ∀ {i j : I} (h : i ≤ j) (V : Cᵒᵖ), (A.integral.R.map (homOfLE h)).hom.app V ((s i).val V) = (s j).val V) (_hsection : ∀ i : I, IsInverseImageSection.{w, uC, vC, uD, vD} (a.integral i) (s i) (s' i)) : PurAdicCofinalRestriction A ∧ PurAdicCofinalRestriction B ∧ ∃ t : PurAdicPairComparison L A.integral B.integral, (∀ i : I, (t.a i).ringUnderlying = (a.integral i).ringUnderlying) ∧ PurAdicIntegralNormalized L A B c t ∧ (∀ (i : I) (f : L.obj (A.integral.modules.obj i) ⟶ B.integral.modules.obj i), (∀ n : ℕ, f ≫ (sheafCompose K.toGrothendieck (forget AddCommGrpCat.{w})).map ((B.pπ i).app (op n)) = L.map ((sheafCompose J.toGrothendieck (forget AddCommGrpCat.{w})).map ((A.pπ i).app (op n))) ≫ (purAdicModuleIso L A.levels B.levels (i, op n) (c.a _) (c.c _)).hom) → f = (purAdicModuleIso L A.integral B.integral i (t.a i) (t.c i)).hom) ∧ ∃ (Q : PurAdicLocalization A.integral s) (Q' : PurAdicLocalization B.integral s') (d : PurAdicPairComparison L Q.pairs Q'.pairs), PurAdicLocalizationNormalized L t Q Q' d ∧ (∀ d' : PurAdicPairComparison L Q.pairs Q'.pairs, PurAdicLocalizationNormalized L t Q Q' d' → ∀ i : I, (d'.a i).ringUnderlying = (d.a i).ringUnderlying ∧ purAdicModuleIso L Q.pairs Q'.pairs i (d'.a i) (d'.c i) = purAdicModuleIso L Q.pairs Q'.pairs i (d.a i) (d.c i)) ∧ ∃ (F : PurAdicFilteredColimit Q.pairs) (G : PurAdicFilteredColimit Q'.pairs) (z : PurAdicColimitComparison L d F G), ∀ z' : PurAdicColimitComparison L d F G, z'.a.ringUnderlying = z.a.ringUnderlying ∧ purAdicPresentedModuleIso F.M G.M F.identify G.identify z'.a z'.c = purAdicPresentedModuleIso F.M G.M F.identify G.identify z.a z.c",
-  "branch": "newtargets-dag",
-  "by": "Q19",
-  "date": "2026-10-21",
-  "existing": false,
-  "note": "Ring/module pair diagrams, chosen universal cones and cocones, and normalized comparisons package exactly the item. Positive level n+1 is represented by n : ℕ; site object, morphism and coefficient universes remain independent. AlgebraicInverseImage fixes the transported operations. Localizations and filtered colimits are existential conclusions, not extra hypotheses; no datum is sorry."
+  "note": "Original theorem statement unchanged. All original data definitions are publicly reexported from PurAdicLineSystemData. Proof closes the original body using three strictly smaller construction statements, with cofinality, integral naturality, limit uniqueness and filtered-colimit uniqueness proved here."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -352,5 +236,15 @@
   "group": "Q19",
   "result": "pass",
   "note": "Node unchanged except lean; lean.statement verbatim; all 22 declarations present; single sorry in the item theorem. Checked every hypothesis and conclusion against the node and source: sites/IsSiteForCoverings, L via adjunction to the continuous pushforward, I nonempty directed in Type w, strides e≥1 with n=level n+1, full ring towers with limits, a_{i,m}/a_i projection equations, levels pair diagram on I×ℕᵒᵖ tied to stride by subsequence, c pair comparison via graph-normalized AlgebraicInverseImage, one cover per i with compatible slice bases (t_n b_{n+1}=b_n ρ_n), M_i limits with projection_smul, compatible s_i and s'=a_i(Ls_i). Conclusions: cofinal restriction with inverse formula; θ normalized on projections and unique (basis independence), natural; localizations pinned to ringedLocalizationRingOfUniverses/scalarLocalization with units, d normalized and unique; filtered colimits with IsColimit and the [r_i][m_j]=[r_k m_k] formula; z normalized on coprojections and unique. No hollow defs, no free arrows; redundant but derivable hypotheses (PreservesFiniteLimits L, IsContinuous, integral_natural) are advisory; public import Functor.OfSequence is unused (advisory). Compile: the unchanged module timed out at 60 s four times at load ~210-243; a copy with genInjectivity/genSizeOfSpec/linters off compiled clean in 57.3 s; the gen-only copy also timed out, so no speed-up was shown and no FIX is given; worker recorded 29 s clean compiles and a passing dry run. Land at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clones/live (identical); live item data block vs new PurAdicLineSystemData (verbatim; only imports, options and 3 local-instance helpers added); 3 sorry statements vs their nodes, the existing free-tower and localization-coherence lemmas, and their edge cases; node lean.statements vs files"
  }
 }

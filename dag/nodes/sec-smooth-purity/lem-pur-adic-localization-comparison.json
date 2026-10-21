@@ -1,0 +1,171 @@
+{
+ "id": "lem-pur-adic-localization-comparison",
+ "kind": "statement",
+ "title": "Localization of a natural semilinear diagram comparison",
+ "statement": "Let $L:\\operatorname{Sh}(J,\\mathrm{Set})\\to\\operatorname{Sh}(K,\\mathrm{Set})$ be a left exact left adjoint between essentially small sites, with additive and ring sheafification and the additive locally-bijective criterion. Let $I$ be any poset, $A,B$ diagrams of commutative-ring/module pairs, and $t$ a natural semilinear inverse-image comparison [def-pur-adic-line-system-data]. Let $s_i,s_i^{\\prime}$ be global sections with $s_i$ natural in $i$, and with $s_i^{\\prime}$ the graph-normalized inverse-image sections under $t$. There exist localization pair diagrams $Q,Q^{\\prime}$ using the actual fraction-ring and tensor-localization constructions, and a natural semilinear inverse-image comparison $d$ between them. Its ring and module maps commute with the localization units. Any other comparison with these unit equations has the same underlying ring and module isomorphisms. No tower or filtered-colimit assumptions are required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Rational and algebraic closure paragraph, inversion of the scalar and extension of the integral comparison before taking coefficient colimits."
+ },
+ "stmt_deps": [
+  "def-pur-adic-line-system-data"
+ ],
+ "proof": [
+  {
+   "text": "For any ring sheaf $R$, global section $s$, and $R$-module sheaf $M$, form the presheaf $P(U)=\\varinjlim_{q\\ge0}(M(U)\\xrightarrow{s}M(U)\\to\\cdots)$. Presheaf module colimits are sectionwise and their underlying abelian presheaves are the abelian colimits [lem-weil-pbc-presheaf-modules-colimits-sectionwise]. The module-localization colimit lemma therefore identifies it with $M(U)[1/s]$, taking stage $q$ to $m/s^q$. The maps commute with restriction, so this is a presheaf identification. The sheafification of $P$ is the colimit in abelian sheaves: maps from it to a sheaf are, by the two universal properties, exactly compatible families of maps from the sequential diagram. The presheaf $T(U)=R(U)[1/s]$ acts by $(r/s^p)(m/s^q)=rm/s^{p+q}$; module sheafification over a presheaf ring gives the action of $T^\\#$ on $P^\\#$. By definition $T^\\#$ is the sheafified localization $R[1/s]$ [def-weil-pbc-ringed-section-localization], with its canonical map from $R$. Thus the sequential definition in the item has the actual localized-ring action. Multiplication by $s$ in the sequential diagram is only a module map; the ring $T$ is the fraction ring, not a colimit of ring maps $R\\xrightarrow{s}R$.",
+   "uses": [
+    "lem-sc-module-localization-filtered-colimit",
+    "lem-weil-pbc-presheaf-colimits-sectionwise",
+    "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-category-colimit",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-ringed-section-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph, inversion of the scalar and extension of the integral comparison before taking coefficient colimits."
+   }
+  },
+  {
+   "text": "For completeness the tensor description agrees with this sequential model. At $U$, [lem-weil-pbc-localization-tensor] gives $M(U)\\otimes_{R(U)}T(U)\\cong P(U)$, with $m\\otimes r/s^q\\mapsto rm/s^q$ (using the symmetry of tensor). These identifications commute with restriction by that formula. Sheafification of presheaf tensor products is the tensor product of the module sheafifications, by [lem-pc-sites-module-sheafification-tensor]. Since $M$ and $R$ are already sheaves, this identifies $P^\\#$ with $M\\otimes_RR[1/s]$ and identifies $m/1$ with $m\\otimes1$. In particular it is the localization specified in the statement, with the same cocone maps.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor",
+    "lem-pc-sites-module-sheafification-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph, inversion of the scalar and extension of the integral comparison before taking coefficient colimits."
+   }
+  },
+  {
+   "text": "The geometric inverse image $L$ preserves finite limits and all colimits [lem-weil-pbc-left-exact-site-inverse-image-tensor], so [lem-weil-pbc-localization-inverse-image-coherence] applies to $R_i$, $s_i$ and $M_i$; by the tensor identification, $M_i[1/s_i]=R_i[1/s_i]\\otimes_{R_i}M_i$ is its localization. It gives ring and module isomorphisms $L(R_i[1/s_i])\\cong(LR_i)[1/Ls_i]$ and $L(M_i[1/s_i])\\cong(LM_i)[1/Ls_i]$, preserving the localization units and compatible with the specified ring isomorphism $a_i:LR_i\\cong S_i$, which sends $Ls_i$ to $s'_i$; so $a_i$ yields $L(R_i[1/s_i])\\cong S_i[1/s'_i]$. By the given comparison, $\\theta_i$ is $a_i$-semilinear, so it carries multiplication by $Ls_i$ to multiplication by $s'_i$ and is an isomorphism of the sequential diagrams $LM_i\\xrightarrow{Ls_i}LM_i\\to\\cdots$ and $N_i\\xrightarrow{s'_i}N_i\\to\\cdots$. By the sequential-colimit construction (on $\\mathcal D$) it induces $(LM_i)[1/Ls_i]\\cong N_i[1/s'_i]$, with inverse induced by $\\theta_i^{-1}$. It is semilinear: filtered colimits of sets commute with finite products, set sheafification preserves them, and algebraic sheafification has the underlying set sheafification, so it suffices to test pairs of representatives at stages $p,q$, where the equation is $\\theta_i(rm)=a_i(r)\\theta_i(m)$. All maps are fixed on each localization coprojection, which gives uniqueness. For a specified map over $R_i\\to R_j$, compatibility of the $s_i$ makes it a map of these sequential diagrams, and both composites agree on every coprojection by the given comparison; so naturality persists after localization.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-sheafification-sets-exact",
+    "lem-pc-sites-sheafification-underlying-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph, inversion of the scalar and extension of the integral comparison before taking coefficient colimits."
+   }
+  },
+  {
+   "text": "Extend the given semilinear comparison and every coefficient transition on fractions. A fraction $m/s^q$ maps to the fraction of the image of $m$ with the image denominator to the same power; changing the representative is respected because its equality is witnessed after multiplication by a further denominator. This formula commutes with restrictions and composition. The source sections are preserved by the transitions and their inverse-image sections satisfy the same property by the ring comparison. Sheafification gives the two pair diagrams and their natural ring/module units. The inverse-image ring and module comparisons preserve these units and their graph operations, hence give the required algebraic inverse-image lift and module isomorphism. After restriction of scalars, a map to a localized module is determined by its value on $m/1$: invertibility of the denominator forces the value on $m/s^q$. This proves naturality and both uniqueness conclusions. If the denominator is nilpotent, the corresponding ring and module are zero and the same argument applies.",
+   "uses": [
+    "def-pur-adic-line-system-data",
+    "lem-weil-pbc-localization-inverse-image-coherence",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph, inversion of the scalar and extension of the integral comparison before taking coefficient colimits."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-adic-line-system-data",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-sheafification",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-sc-module-localization-filtered-colimit",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "lem-weil-pbc-localization-inverse-image-coherence",
+  "lem-weil-pbc-localization-tensor",
+  "lem-weil-pbc-presheaf-colimits-sectionwise",
+  "lem-weil-pbc-presheaf-modules-colimits-sectionwise",
+  "lem-weil-pbc-sheafification-sets-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Rational and algebraic closure paragraph, inversion of the scalar and extension of the integral comparison before taking coefficient colimits.",
+  "group": "V6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Geometric inverse image commutes with scalar localization of sheaves of modules over varying rings and with filtered coefficient colimits",
+   "results": "8 hits, including SheafOfModules.restrictScalars, PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.SMulCandidate.h, SheafOfModules.pushforwardNatIso_inv and ModuleCat.Tilde.stalkIso_inv. These provide components, not the normalized varying-ring diagram construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Limits.IsColimit.hom_ext\"",
+   "results": "1 hit: CategoryTheory.Limits.IsColimit.hom_ext. Used for uniqueness; it does not construct the scalar actions or the comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|PurAdic|limitCompWhisker",
+   "results": "14 hits: limitCompWhiskeringRightIsoLimitComp and its projection formulas, limitCompWhiskeringLeftIsoCompLimit and its formulas, and colimitCompWhiskeringLeftIsoCompColimit. No adic-pair or algebraic inverse-image interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurAdicLineSystemBaseChange",
+  "date": "2026-10-21",
+  "group": "V6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Rational and algebraic closure paragraph, inversion of the scalar and extension of the integral comparison before taking coefficient colimits.",
+   "via": [
+    "lem-pur-adic-line-system-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurAdicLocalizationComparison",
+  "file": "lean/Sheaf/Paper/PurAdicLocalizationComparison.lean",
+  "declaration": "CategoryTheory.purAdicLocalizationComparison_exists",
+  "statement": "theorem purAdicLocalizationComparison_exists\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}]\n    [HasSheafify J CommRingCat.{w}]\n    [HasSheafify K AddCommGrpCat.{w}] [K.WEqualsLocallyBijective AddCommGrpCat.{w}]\n    [HasSheafify K CommRingCat.{w}]\n    (L : Sheaf J (Type w) ⥤ Sheaf K (Type w))\n    (V : Sheaf K (Type w) ⥤ Sheaf J (Type w)) (adj : L ⊣ V)\n    [PreservesFiniteLimits L]\n    {I : Type w} [PartialOrder I]\n    (A : PurAdicPairDiagram.{w} J I) (B : PurAdicPairDiagram.{w} K I)\n    (t : PurAdicPairComparison L A B)\n    (s : ∀ i : I, ((A.R.obj i).obj ⋙ forget CommRingCat.{w}).sections)\n    (s' : ∀ i : I, ((B.R.obj i).obj ⋙ forget CommRingCat.{w}).sections)\n    (hs : ∀ {i j : I} (h : i ≤ j) (W : Cᵒᵖ),\n      (A.R.map (homOfLE h)).hom.app W ((s i).val W) = (s j).val W)\n    (hsection : ∀ i : I, IsInverseImageSection.{w, uC, vC, uD, vD} (t.a i) (s i) (s' i)) :\n    ∃ (Q : PurAdicLocalization A s) (Q' : PurAdicLocalization B s')\n      (d : PurAdicPairComparison L Q.pairs Q'.pairs),\n      PurAdicLocalizationNormalized L t Q Q' d ∧\n      (∀ d' : PurAdicPairComparison L Q.pairs Q'.pairs,\n        PurAdicLocalizationNormalized L t Q Q' d' →\n        ∀ i : I, (d'.a i).ringUnderlying = (d.a i).ringUnderlying ∧\n          purAdicModuleIso L Q.pairs Q'.pairs i (d'.a i) (d'.c i) =\n            purAdicModuleIso L Q.pairs Q'.pairs i (d.a i) (d.c i))",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clones/live (identical); live item data block vs new PurAdicLineSystemData (verbatim; only imports, options and 3 local-instance helpers added); 3 sorry statements vs their nodes, the existing free-tower and localization-coherence lemmas, and their edge cases; node lean.statements vs files"
+ }
+}

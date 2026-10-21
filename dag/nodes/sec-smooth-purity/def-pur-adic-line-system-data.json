@@ -1,0 +1,132 @@
+{
+ "id": "def-pur-adic-line-system-data",
+ "kind": "definition",
+ "title": "Data and normalization interfaces for adic ring/module systems",
+ "statement": "Let $(C,J)$ be an essentially small site relative to a coefficient universe and let $I$ be an index category. A diagram of ring/module pairs consists of a diagram $R_i$ of commutative-ring sheaves, a diagram $P_i$ of additive sheaves, an $R_i$-module sheaf $M_i$, and additive identifications $U(M_i)\\cong P_i$, with semilinear transition maps [def-weil-sheaf-of-modules-category]. Its underlying ring and module diagrams and its presented action are obtained by forgetting operations and conjugating through these identifications. A comparison over a left exact set-sheaf inverse image consists of algebraic inverse-image lifts and module isomorphisms whose ring and module squares commute [lem-weil-pbc-left-exact-site-inverse-image-tensor]. For a positive-index coefficient tower, record the full ring limit, a strided subsequence identified with the level ring diagram, the additive limit of the module tower, projection compatibility with scalar action, and naturality in $I$ [def-pur-sheaf-inverse-limit]. Local bases mean one cover per $i$ with compatible rank-one bases on the localized sites [def-pur-localized-ringed-site]. A localization is a pair diagram identified with the actual fraction-ring sheaves and scalar localizations, with normalized natural units [def-weil-pbc-ringed-section-localization]. A filtered colimit is a ring and additive colimit carrying a module action whose formula on two stage sections is the common-upper-bound formula [def-weil-pbc-category-colimit, def-weil-pbc-sheafification]. Cofinal restriction, integral normalization, localization normalization and colimit comparison name the corresponding projection, unit and coprojection equations. All these records contain actual data and properties, and none asserts the existence of a base-change comparison.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist and Rational and algebraic closure paragraphs: the diagrams, limits, localizations, colimits and their normalization interfaces."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist and Rational and algebraic closure paragraphs: the diagrams, limits, localizations, colimits and their normalization interfaces.",
+  "group": "V6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Geometric inverse image commutes with scalar localization of sheaves of modules over varying rings and with filtered coefficient colimits",
+   "results": "8 hits, including SheafOfModules.restrictScalars, PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.SMulCandidate.h, SheafOfModules.pushforwardNatIso_inv and ModuleCat.Tilde.stalkIso_inv. These provide components, not the normalized varying-ring diagram construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Limits.IsColimit.hom_ext\"",
+   "results": "1 hit: CategoryTheory.Limits.IsColimit.hom_ext. Used for uniqueness; it does not construct the scalar actions or the comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|PurAdic|limitCompWhisker",
+   "results": "14 hits: limitCompWhiskeringRightIsoLimitComp and its projection formulas, limitCompWhiskeringLeftIsoCompLimit and its formulas, and colimitCompWhiskeringLeftIsoCompColimit. No adic-pair or algebraic inverse-image interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurAdicLineSystemBaseChange",
+  "date": "2026-10-21",
+  "group": "V6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Integral twist and Rational and algebraic closure paragraphs: the diagrams, limits, localizations, colimits and their normalization interfaces.",
+   "via": [
+    "lem-pur-adic-line-system-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurAdicLineSystemData",
+  "file": "lean/Sheaf/Paper/PurAdicLineSystemData.lean",
+  "declaration": "CategoryTheory.PurAdicPairDiagram",
+  "statement": "structure PurAdicPairDiagram {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]\n    (J : GrothendieckTopology C) (I : Type uI) [Category.{vI} I]",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.purAdicStride",
+   "CategoryTheory.PurAdicPairDiagram",
+   "CategoryTheory.PurAdicPairDiagram.rings",
+   "CategoryTheory.PurAdicPairDiagram.modules",
+   "CategoryTheory.PurAdicPairDiagram.act",
+   "CategoryTheory.purAdicModuleIso",
+   "CategoryTheory.PurAdicPairComparison",
+   "CategoryTheory.PurAdicLineLimits",
+   "CategoryTheory.PurAdicLineLocallyBased",
+   "CategoryTheory.purAdicPresentedModuleIso",
+   "CategoryTheory.PurAdicLocalization",
+   "CategoryTheory.PurAdicLocalization.ringsUnit",
+   "CategoryTheory.PurAdicLocalization.modulesUnit",
+   "CategoryTheory.PurAdicFilteredColimit",
+   "CategoryTheory.PurAdicFilteredColimit.ringsι",
+   "CategoryTheory.PurAdicFilteredColimit.modulesι",
+   "CategoryTheory.PurAdicCofinalRestriction",
+   "CategoryTheory.PurAdicIntegralNormalized",
+   "CategoryTheory.PurAdicLocalizationNormalized",
+   "CategoryTheory.PurAdicColimitComparison",
+   "CategoryTheory.PurAdicCoefficientComparison",
+   "CategoryTheory.purAdicHasSheafComposeRingSets",
+   "CategoryTheory.purAdicHasSheafComposeModuleSets",
+   "CategoryTheory.purAdicHasSheafComposeCoefficients"
+  ],
+  "note": "Unchanged public data definitions moved out of the theorem module so independent construction lemmas do not create an import cycle. Three proved sheaf-composition helpers supply a finite small-model instance search; they are local instances only inside this module."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clones/live (identical); live item data block vs new PurAdicLineSystemData (verbatim; only imports, options and 3 local-instance helpers added); 3 sorry statements vs their nodes, the existing free-tower and localization-coherence lemmas, and their edge cases; node lean.statements vs files"
+ }
+}

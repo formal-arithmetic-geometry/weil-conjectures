@@ -1,0 +1,138 @@
+{
+ "id": "lem-pur-adic-filtered-colimit-exists",
+ "kind": "statement",
+ "title": "Existence of filtered colimits of varying ring/module pairs",
+ "statement": "Let $(C,J)$ be an essentially small site relative to the coefficient universe, with additive and commutative-ring sheafification and the additive locally-bijective criterion. Let $I$ be a nonempty directed poset small in that universe and $A$ a diagram of commutative-ring/module pairs with semilinear transitions [def-pur-adic-line-system-data]. There is a filtered-colimit pair $F$: its ring and additive sheaves have colimit cocones, its module sheaf has the specified additive presentation, and its action on stage sections is $[r_i][m_j]=[r_km_k]$ at every common upper bound $k$. This statement involves no inverse image or localization.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Rational and algebraic closure paragraph, sectionwise filtered coefficient colimits and their sheafification."
+ },
+ "stmt_deps": [
+  "def-pur-adic-line-system-data"
+ ],
+ "proof": [
+  {
+   "text": "Transport the module structures to the presented additive sheaves through their specified additive identifications. The semilinear transition equation and naturality of these identifications make the transitions and restrictions semilinear.",
+   "uses": [
+    "def-pur-adic-line-system-data",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph, sectionwise filtered coefficient colimits and their sheafification."
+   }
+  },
+  {
+   "text": "Form the sectionwise ring and additive filtered colimits. Apply the varying-ring filtered-colimit module construction. Its same-stage scalar equation and the coprojection equations give the formula at any common upper bound. Every section of a presheaf colimit has a stage representative; moving two representatives to a common upper bound proves restriction compatibility. This is the presheaf module colimit construction of the source.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph, sectionwise filtered coefficient colimits and their sheafification."
+   }
+  },
+  {
+   "text": "Sheafify the ring presheaf and additive presheaf, and use module sheafification along their locally bijective units to define the module action. The sheafification adjunction supplies the ring and additive colimit universal properties. The linear sheafification unit carries the common-stage scalar equation to the sheaf colimit.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph, sectionwise filtered coefficient colimits and their sheafification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-adic-line-system-data",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Rational and algebraic closure paragraph, sectionwise filtered coefficient colimits and their sheafification.",
+  "group": "V6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Geometric inverse image commutes with scalar localization of sheaves of modules over varying rings and with filtered coefficient colimits",
+   "results": "8 hits, including SheafOfModules.restrictScalars, PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.SMulCandidate.h, SheafOfModules.pushforwardNatIso_inv and ModuleCat.Tilde.stalkIso_inv. These provide components, not the normalized varying-ring diagram construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Limits.IsColimit.hom_ext\"",
+   "results": "1 hit: CategoryTheory.Limits.IsColimit.hom_ext. Used for uniqueness; it does not construct the scalar actions or the comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|PurAdic|limitCompWhisker",
+   "results": "14 hits: limitCompWhiskeringRightIsoLimitComp and its projection formulas, limitCompWhiskeringLeftIsoCompLimit and its formulas, and colimitCompWhiskeringLeftIsoCompColimit. No adic-pair or algebraic inverse-image interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurAdicLineSystemBaseChange",
+  "date": "2026-10-21",
+  "group": "V6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Rational and algebraic closure paragraph, sectionwise filtered coefficient colimits and their sheafification.",
+   "via": [
+    "lem-pur-adic-line-system-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurAdicFilteredColimitExists",
+  "file": "lean/Sheaf/Paper/PurAdicFilteredColimitExists.lean",
+  "declaration": "CategoryTheory.purAdicFilteredColimit_exists",
+  "statement": "theorem purAdicFilteredColimit_exists\n    {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]\n    {J : GrothendieckTopology C}\n    [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}]\n    [HasSheafify J CommRingCat.{w}]\n    {I : Type w} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (A : PurAdicPairDiagram.{w} J I) : Nonempty (PurAdicFilteredColimit A)",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clones/live (identical); live item data block vs new PurAdicLineSystemData (verbatim; only imports, options and 3 local-instance helpers added); 3 sorry statements vs their nodes, the existing free-tower and localization-coherence lemmas, and their edge cases; node lean.statements vs files"
+ }
+}

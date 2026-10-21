@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-adic-filtered-colimit-comparison",
+ "kind": "statement",
+ "title": "Inverse image of supplied varying ring/module filtered colimits",
+ "statement": "Let $L:\\operatorname{Sh}(J,\\mathrm{Set})\\to\\operatorname{Sh}(K,\\mathrm{Set})$ be a left exact left adjoint between essentially small sites, with additive and commutative-ring sheafification and the additive locally-bijective criterion. Let $I$ be a nonempty directed poset small in the coefficient universe. Let $A,B$ be diagrams of commutative-ring/module pairs, $t$ a natural semilinear inverse-image comparison, and $F,G$ supplied filtered-colimit pairs with their common-stage scalar formulas [def-pur-adic-line-system-data]. There is an algebraic inverse-image comparison of their colimit rings, together with an isomorphism of the inverse-image colimit module to the target colimit module, normalized on every ring and module coprojection. No tower, localization, local-basis or uniqueness assertion is assumed or concluded; the colimit pairs are given, not constructed by this statement.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Rational and algebraic closure paragraph, inverse image of the filtered coefficient colimits."
+ },
+ "stmt_deps": [
+  "def-pur-adic-line-system-data"
+ ],
+ "proof": [
+  {
+   "text": "Forget the supplied ring and additive colimit cocones to set sheaves. These forgetful functors preserve filtered colimits: filtered colimits commute with finite products, and sheafification is left exact. Applying the left adjoint $L$ still gives colimit cocones. The component ring and module comparisons give a cocone isomorphism with the target diagram, so the colimit universal property gives their normalized underlying isomorphisms.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-pc-sites-sheafification-underlying-sets",
+    "def-pur-adic-line-system-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph, inverse image of the filtered coefficient colimits."
+   }
+  },
+  {
+   "text": "A finite tuple of local representatives can be moved to one common stage. On those representatives the ring operations, module addition and scalar action are precisely the stage operations, by the given colimit-pair scalar formula. The graph equations for the stage comparisons then show that the colimit-induced isomorphisms transport these operations. The equations are local and hence descend after sheafification. Transporting the operations gives an algebraic inverse-image lift on all module sheaves; the same scalar equation lifts the specified module isomorphism. The underlying colimit factorization equations give both asserted coprojection normalizations.",
+   "uses": [
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-adic-line-system-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Rational and algebraic closure paragraph, inverse image of the filtered coefficient colimits."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-adic-line-system-data",
+  "def-weil-pbc-category-colimit",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-sheafification-underlying-sets",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Rational and algebraic closure paragraph, inverse image of the filtered coefficient colimits.",
+  "group": "V6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Geometric inverse image commutes with scalar localization of sheaves of modules over varying rings and with filtered coefficient colimits",
+   "results": "8 hits, including SheafOfModules.restrictScalars, PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.SMulCandidate.h, SheafOfModules.pushforwardNatIso_inv and ModuleCat.Tilde.stalkIso_inv. These provide components, not the normalized varying-ring diagram construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Limits.IsColimit.hom_ext\"",
+   "results": "1 hit: CategoryTheory.Limits.IsColimit.hom_ext. Used for uniqueness; it does not construct the scalar actions or the comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|PurAdic|limitCompWhisker",
+   "results": "14 hits: limitCompWhiskeringRightIsoLimitComp and its projection formulas, limitCompWhiskeringLeftIsoCompLimit and its formulas, and colimitCompWhiskeringLeftIsoCompColimit. No adic-pair or algebraic inverse-image interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurAdicLineSystemBaseChange",
+  "date": "2026-10-21",
+  "group": "V6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Rational and algebraic closure paragraph, inverse image of the filtered coefficient colimits.",
+   "via": [
+    "lem-pur-adic-line-system-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurAdicFilteredColimitComparison",
+  "file": "lean/Sheaf/Paper/PurAdicFilteredColimitComparison.lean",
+  "declaration": "CategoryTheory.purAdicFilteredColimitComparison_exists",
+  "statement": "theorem purAdicFilteredColimitComparison_exists\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]\n    {J : GrothendieckTopology C} {K : GrothendieckTopology D}\n    [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}]\n    [HasSheafify J CommRingCat.{w}]\n    [HasSheafify K AddCommGrpCat.{w}] [K.WEqualsLocallyBijective AddCommGrpCat.{w}]\n    [HasSheafify K CommRingCat.{w}]\n    (L : Sheaf J (Type w) ⥤ Sheaf K (Type w))\n    (V : Sheaf K (Type w) ⥤ Sheaf J (Type w)) (adj : L ⊣ V)\n    [PreservesFiniteLimits L]\n    {I : Type w} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (A : PurAdicPairDiagram.{w} J I) (B : PurAdicPairDiagram.{w} K I)\n    (t : PurAdicPairComparison L A B)\n    (F : PurAdicFilteredColimit A) (G : PurAdicFilteredColimit B) :\n    Nonempty (PurAdicColimitComparison L t F G)",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clones/live (identical); live item data block vs new PurAdicLineSystemData (verbatim; only imports, options and 3 local-instance helpers added); 3 sorry statements vs their nodes, the existing free-tower and localization-coherence lemmas, and their edge cases; node lean.statements vs files"
+ }
+}

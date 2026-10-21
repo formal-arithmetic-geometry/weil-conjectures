@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-adic-integral-comparison",
+ "kind": "statement",
+ "title": "Pointwise projection-normalized comparison of locally based adic towers",
+ "statement": "Let $(C,J)$ and $(D,K)$ be essentially small sites with independent object, morphism and coefficient universes, finite limits and site precoverages. Let $U:C\\to D$ preserve finite limits and coverings, and let $L$ be a left exact inverse image left adjoint to its continuous pushforward. For a poset $I$, let $A,B$ be adic ring/module limit systems and $c$ a natural semilinear level comparison, with coefficient comparison $a$ and compatible bases for $A$ on a single cover for each $i$ [def-pur-adic-line-system-data]. Suppose the full and strided coefficient limits are cofinally identified on both sites. For every $i$ there is an isomorphism from the specified algebraic inverse image of $A_i$ to $B_i$, linear over $a_i$, whose $n$-th projection is $c_{i,n}L(\\mathrm{pr}_n)$. No naturality in $i$, localization or filtered-colimit assertion is part of this conclusion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph, coefficient-limit identification and the locally based module-limit comparison, before its naturality assertion."
+ },
+ "stmt_deps": [
+  "def-pur-adic-line-system-data"
+ ],
+ "proof": [
+  {
+   "text": "Fix $i$. Cofinal restriction identifies the full coefficient limit with the strided one. The level coefficient comparisons identify the target strided limit with the limit of the inverse-image source coefficients. Their projection equations show that the canonical coefficient-limit comparison is the specified invertible integral ring comparison.",
+   "uses": [
+    "def-pur-adic-line-system-data",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, coefficient-limit identification and the locally based module-limit comparison, before its naturality assertion."
+   }
+  },
+  {
+   "text": "Use the single covering on which all module levels have compatible bases. On each slice, these bases identify the whole module tower, its limit and every projection with their ring counterparts. The inverse image carries this local description to the target cover. More explicitly, let $E$ be the coproduct of the sheafified representables of the covering objects, so $E\\to1$ is epi. Finite-product preservation gives $L(X\\times E)\\cong LX\\times LE$, and colimit preservation carries this cover to a cover. In the slice over $E$, the compatible bases identify the module comparison with the coefficient comparison. The latter is invertible by the preceding step, so the module comparison is invertible over $LE$ and hence globally. Slice restriction is sectionwise, so its limit identifications preserve the projections. This uses a single cover for all levels, not a separate cover for each level.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "lem-galois-set-sheaf-local-bijection-isomorphism",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, coefficient-limit identification and the locally based module-limit comparison, before its naturality assertion."
+   }
+  },
+  {
+   "text": "Compose the canonical inverse-image module-limit comparison with the limit of the given level isomorphisms. Projection to level $n$ gives exactly the claimed equation. Addition and the scalar action are determined by all target projections. The level comparisons are additive and semilinear, and the given projection_smul formulas identify both actions with the projected products. Thus the resulting bijection preserves precisely the graph-transported operations of the supplied algebraic inverse image. It is an isomorphism of its module sheaves; its inverse is linear since the forward map is bijective and linear.",
+   "uses": [
+    "def-pur-adic-line-system-data",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+    "place": "Integral twist paragraph, coefficient-limit identification and the locally based module-limit comparison, before its naturality assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-adic-line-system-data",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-sheaf-of-modules-category",
+  "lem-galois-set-sheaf-local-bijection-isomorphism",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-prop-sfb-cartesian-coefficients-twists.proof.md",
+  "place": "Integral twist paragraph, coefficient-limit identification and the locally based module-limit comparison, before its naturality assertion.",
+  "group": "V6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Geometric inverse image commutes with scalar localization of sheaves of modules over varying rings and with filtered coefficient colimits",
+   "results": "8 hits, including SheafOfModules.restrictScalars, PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.SMulCandidate.h, SheafOfModules.pushforwardNatIso_inv and ModuleCat.Tilde.stalkIso_inv. These provide components, not the normalized varying-ring diagram construction.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Limits.IsColimit.hom_ext\"",
+   "results": "1 hit: CategoryTheory.Limits.IsColimit.hom_ext. Used for uniqueness; it does not construct the scalar actions or the comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicInverseImage|PurAdic|limitCompWhisker",
+   "results": "14 hits: limitCompWhiskeringRightIsoLimitComp and its projection formulas, limitCompWhiskeringLeftIsoCompLimit and its formulas, and colimitCompWhiskeringLeftIsoCompColimit. No adic-pair or algebraic inverse-image interface.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurAdicLineSystemBaseChange",
+  "date": "2026-10-21",
+  "group": "V6"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Integral twist paragraph, coefficient-limit identification and the locally based module-limit comparison, before its naturality assertion.",
+   "via": [
+    "lem-pur-adic-line-system-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurAdicIntegralComparison",
+  "file": "lean/Sheaf/Paper/PurAdicIntegralComparison.lean",
+  "declaration": "CategoryTheory.purAdicIntegralComparison_exists",
+  "statement": "theorem purAdicIntegralComparison_exists\n    {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]\n    [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]\n    [HasFiniteLimits C] [HasFiniteLimits D]\n    (J : Precoverage C) (K : Precoverage D)\n    (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings)\n    (U : C ⥤ D) [PreservesFiniteLimits U]\n    (hUcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map U ∈ K (U.obj X))\n    [U.IsContinuous J.toGrothendieck K.toGrothendieck]\n    (L : Sheaf J.toGrothendieck (Type w) ⥤ Sheaf K.toGrothendieck (Type w))\n    (adj : L ⊣ U.sheafPushforwardContinuous (Type w) J.toGrothendieck K.toGrothendieck)\n    [PreservesFiniteLimits L]\n    {I : Type w} [PartialOrder I] {e : I → ℕ}\n    (A : PurAdicLineLimits.{w} J.toGrothendieck I e)\n    (B : PurAdicLineLimits.{w} K.toGrothendieck I e)\n    (c : PurAdicPairComparison L A.levels B.levels)\n    (a : PurAdicCoefficientComparison L A B c)\n    (bases : PurAdicLineLocallyBased J A)\n    (hA : PurAdicCofinalRestriction A) (hB : PurAdicCofinalRestriction B) :\n    ∀ i : I, ∃ ci : (a.integral i).modules.obj (A.integral.M i) ≅ B.integral.M i,\n      ∀ n : ℕ,\n        (purAdicModuleIso L A.integral B.integral i (a.integral i) ci).hom ≫\n            (sheafCompose K.toGrothendieck (forget AddCommGrpCat.{w})).map\n              ((B.pπ i).app (op n)) =\n          L.map ((sheafCompose J.toGrothendieck (forget AddCommGrpCat.{w})).map\n            ((A.pπ i).app (op n))) ≫\n              (purAdicModuleIso L A.levels B.levels (i, op n) (c.a _) (c.c _)).hom",
+  "branch": "sheaf-dag",
+  "by": "V6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-2df79",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261021T134603-L-1380680",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs clones/live (identical); live item data block vs new PurAdicLineSystemData (verbatim; only imports, options and 3 local-instance helpers added); 3 sorry statements vs their nodes, the existing free-tower and localization-coherence lemmas, and their edge cases; node lean.statements vs files"
+ }
+}
