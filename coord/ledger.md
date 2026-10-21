@@ -23189,3 +23189,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:28 L: returned deliver/NY/lem-sfb-root-tower-puncture-invariance (reviewer RETURN: L: independent stage-2 immutable head 47122defe385: H2 / mechanical theorem-stmt_dep finding: the delivery adds theorem )
 - 17:29 L: merged deliver/NW/lem-sfb-integral-general-lfp-hom-finiteness (stage 2; reviewer FIX; parallel immutable checks)
 - 17:30 L: merged deliver/Q08/lem-sfb-discrete-lattice-cup-exterior (reviewer FIX; first push; new nodes: 1)
+- 2026-10-21T17:30:52Z L: superseded stage-1 delivery O2/lem-sfb-faithfully-flat-normal-ring-descent at fbabec2a56044cba41d456ad3d65b59e53570f98; current completion retained; packet archived at refs/superseded/O2/lem-sfb-faithfully-flat-normal-ring-descent/fbabec2a56044cba41d456ad3d65b59e53570f98; stale return retired.
