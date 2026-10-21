@@ -36,16 +36,19 @@
    }
   },
   {
-   "text": "For each degree $r$, choose a finite set of generators of $P^r$, giving a surjection $s_r:R^{m_r}\\to P^r$. Projectivity lifts $1_{P^r}$ through $s_r$ to $i_r$, so $s_ri_r=1$. Applying constants and scalar extension exhibits $C_T(P)^r$ as a split summand of $B_T^{m_r}$. Tensoring with it is exact: on a short exact sequence it takes the image of the same idempotent on a finite direct sum; a local lift of an element in the target image can be projected by that idempotent to a lift in the source image. Thus its terms are flat over $B_T$, and the bounded-above-flat theorem makes $C_T(P)$ K-flat. Derived reduction is consequently its ordinary tensor complex. In every degree the isomorphism is\n$$(b\\otimes p)\\otimes a\\longmapsto a\\,\\operatorname{pr}_n(b)\\otimes p,$$\nwith inverse $a\\otimes p\\mapsto(1\\otimes p)\\otimes a$. The balancing equations show these are inverse, and applying $d^r$ in either order sends this element to $a\\operatorname{pr}_n(b)\\otimes d^rp$. Replacing $a$ by its image modulo $\\pi^n$ also commutes with the formula. This proves the first displayed comparison with its specified differential and consecutive quotient maps.",
+   "text": "For each degree, projectivity makes P^r flat over R. The local equational criterion proves that its constant module sheaf is flat: lift a finite relation, its coefficients and its sections locally through the sheafification units, refine until the relation holds in P^r, factor it using algebraic flatness, and sheafify this factorization. The bounded-above-flat theorem at independent coefficient universes makes the constant complex K-flat. The identity-topos change-of-rings theorem transports K-flatness and termwise flatness through the recorded completed scalar extension. This proves model_good without using finite generation or flatness of the completed coefficient map. Derived reduction is consequently ordinary tensor on this complex. For the remaining normalized reduction comparison, the planned map in every degree is (b tensor p) tensor a mapped to a pr_n(b) tensor p; its inverse inserts 1. Balancing proves the inverse equations and compatibility with the original differentials and consecutive quotients. That last normalized comparison is still part of the unproved main theorem.",
    "uses": [
     "def-weil-pbc-projective-module",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pur-derived-change-of-rings"
+    "lem-pur-derived-change-of-rings",
+    "lem-exc-site-local-relations-imply-flat",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pur-kflat-change-of-rings-independent",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); finite-summand tensor calculation and K-flat computation of derived change of rings"
+    "place": "Tags 06YQ and 0G7E; local finite-relation flatness of constant module sheaves, bounded-above K-flatness, and change of rings at independent coefficient universes; remaining normalized finite reduction uses the elementary balanced-tensor calculation."
    }
   },
   {
@@ -61,7 +64,7 @@
    }
   },
   {
-   "text": "Set $D_{T,n}=(A_n)_T\\otimes_{\\underline R_T}\\underline{P^\\bullet}_T$, restricted along $\\operatorname{pr}_n$. Its quotient cone is $b\\otimes p\\mapsto\\operatorname{pr}_n(b)\\otimes p$ from $C_T(P)$. The $R$-linear splitting $i_r,s_r$ of step 2, tensored with $B_T$ and each $(A_n)_T$, makes the degree-$r$ cone a compatible split retract of the $m_r$-fold coefficient cone, degreewise only. By the finite-perfect coefficient-limit theorem, $C_T(P)$ with the quotient maps is the ordinary limit of the complex tower. In each degree $r$ the transition $\\operatorname{Res}_{n+1}D^r_{T,n+1}\\to\\operatorname{Res}_nD^r_{T,n}$ is $q_{n+1,n}\\otimes1$, epi by right exactness of tensor. Hence the epimorphic-tower theorem makes $1-s:\\prod_nD^r_{T,n}\\to\\prod_nD^r_{T,n}$ surjective with kernel the limit, which the coefficient-limit theorem identifies with $C_T(P)^r$ and its quotient maps. Let $\\mathsf C(D)=\\operatorname{Cone}(1-s)[-1]$, with degree-$k$ part $\\prod_nD^k\\oplus\\prod_nD^{k-1}$, and let $b:C_T(P)\\to\\mathsf C(D)$ have product component the quotient maps and zero shifted component. It is a chain map, since $1-s$ kills the quotient family, and degreewise injective. Its cokernel is identified, through $1-s$ on the first summand, with $\\prod_nD^k\\oplus\\prod_nD^{k-1}$ and differential $(z,y)\\mapsto(dz,\\pm z-dy)$: the shifted cone of an identity, which is contractible. By the long exact cohomology sequence $b$ is a quasi-isomorphism. Pro-etale countable products are exact, so the strict Roos comparison theorem applies; it says that $b$ corresponds under its natural isomorphism $\\rho_D:\\mathsf C(D)\\cong R\\lim_n\\operatorname{Res}_nD_{T,n}$ to the canonical derived map induced by the strict augmentation, and that $\\rho_D$ commutes with every projection. Thus the canonical map $C_T(P)\\to R\\varprojlim_n\\operatorname{Res}_nD_{T,n}$ (cone model and K-injective strict model alike) is an isomorphism whose projections are the original quotient maps. Both $b$ and $\\rho$ are natural in strict maps of towers.",
+   "text": "Set $D_{T,n}=(A_n)_T\\otimes_{\\underline R_T}\\underline{P^\\bullet}_T$, restricted along $\\operatorname{pr}_n$. Its quotient cone is $b\\otimes p\\mapsto\\operatorname{pr}_n(b)\\otimes p$ from $C_T(P)$. The $R$-linear splitting $i_r,s_r$ of step 2, tensored with $B_T$ and each $(A_n)_T$, makes the degree-$r$ cone a compatible split retract of the $m_r$-fold coefficient cone, degreewise only. By the finite-perfect coefficient-limit theorem, $C_T(P)$ with the quotient maps is the ordinary limit of the complex tower. In each degree $r$ the transition $\\operatorname{Res}_{n+1}D^r_{T,n+1}\\to\\operatorname{Res}_nD^r_{T,n}$ is $q_{n+1,n}\\otimes1$, epi by right exactness of tensor. Hence the epimorphic-tower theorem makes $1-s:\\prod_nD^r_{T,n}\\to\\prod_nD^r_{T,n}$ surjective with kernel the limit, which the coefficient-limit theorem identifies with $C_T(P)^r$ and its quotient maps. Let $\\mathsf C(D)=\\operatorname{Cone}(1-s)[-1]$, with degree-$k$ part $\\prod_nD^k\\oplus\\prod_nD^{k-1}$, and let $b:C_T(P)\\to\\mathsf C(D)$ have product component the quotient maps and zero shifted component. It is a chain map, since $1-s$ kills the quotient family, and degreewise injective. Its cokernel is identified, through $1-s$ on the first summand, with $\\prod_nD^k\\oplus\\prod_nD^{k-1}$ and differential $(z,y)\\mapsto(dz,\\pm z-dy)$: the shifted cone of an identity, which is contractible. By the long exact cohomology sequence $b$ is a quasi-isomorphism. Pro-etale countable products are exact, so the strict Roos comparison theorem applies; it says that $b$ corresponds under its natural isomorphism $\\rho_D:\\mathsf C(D)\\cong R\\lim_n\\operatorname{Res}_nD_{T,n}$ to the canonical derived map induced by the strict augmentation, and that $\\rho_D$ commutes with every projection. Thus the canonical map $C_T(P)\\to R\\varprojlim_n\\operatorname{Res}_nD_{T,n}$ (cone model and K-injective strict model alike) is an isomorphism whose projections are the original quotient maps. Both $b$ and $\\rho$ are natural in strict maps of towers. The helper proofs are formalized: quotientTowerIso_naturality follows by constructing the natural transformation from consecutive arrows; reductionTowerMap_condition is naturality of unrestrictedIntegralTransition with its orientation reversed. The normalized quotient units commute with consecutive transitions because the transition preserves the coefficient 1. Conjugating by the finite reduction isomorphisms and canceling their inverse pairs makes the quotient family a cone. Joint monicity of product projections then proves limitUnit_condition. Invertibility of this chain map remains part of the unproved main theorem.",
    "uses": [
     "lem-weil-pbc-finite-perfect-adic-coefficient-limit",
     "lem-weil-proetale-surjective-tower-derived-limit",
@@ -116,11 +119,12 @@
    }
   },
   {
-   "text": "For any $R$-module $N$, use the constant-module inverse-image isomorphism and the inverse-image tensor isomorphism to write the ordinary ringed pullback as\n$$B_{V'}\\otimes_{g^{-1}B_V}\\bigl(g^{-1}B_V\\otimes_{\\underline R_{V'}}\\underline N_{V'}\\bigr).$$\nThe projection-induced map $g^\\sharp:g^{-1}B_V\\to B_{V'}$ agrees on $\\underline R_{V'}$ with the target constant-scalar map: composing with every finite projection sends $r$ to its class modulo $\\pi^n$ on both sides. The limit universal property proves the equality. Hence the balanced map $b'\\otimes(b\\otimes n)\\mapsto b'g^\\sharp(b)\\otimes n$ is well defined. Its inverse is $b'\\otimes n\\mapsto b'\\otimes(1\\otimes n)$. One composite is the identity by the unit equation, and the other by the balancing equation $b'g^\\sharp(b)\\otimes(1\\otimes n)=b'\\otimes(b\\otimes n)$. These maps commute with restrictions and are natural in $N$, so they define the asserted canonical isomorphism of module sheaves. Take $N=H^j(P^\\bullet)$ and use step 7.",
+   "text": "Constant-section direct-image ring maps are natural in the coefficient ring, by naturality of the sheafification adjunction unit. Hence they define a natural transformation of the finite coefficient towers. Continuous direct image preserves limits, so the limit universal property gives directMap_existsUnique, with exactly the specified projections. Module direct image along this actual ring map is a right adjoint by the independent-universe ringed-site module pullback existence theorem; this proves ordinaryPush_isRightAdjoint. For the remaining ordinary comparison, use the constant-module inverse-image isomorphism and inverse-image tensor isomorphism to identify the pullback of B_Y tensor_R constant N with B_X tensor_R constant N. The coefficient maps agree on constant R after all finite projections, hence by the limit universal property. The balanced map b′ tensor (b tensor n) mapped to b′ g-sharp(b) tensor n and its inverse b′ tensor n mapped to b′ tensor (1 tensor n) are mutually inverse and natural in N. The comparison and its formulas remain part of the unproved main theorem.",
    "uses": [
     "lem-sfb-geometric-inverse-image-constant-module",
     "lem-pur-proetale-inverse-image-tensor-comparison",
-    "def-weil-pbc-completed-pullback"
+    "def-weil-pbc-completed-pullback",
+    "lem-pur-ringed-site-module-pullback-exists-universes"
    ],
    "elementary": true,
    "source": {
@@ -145,7 +149,6 @@
   "def-weil-pbc-adic-coefficient-datum",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
   "def-weil-pbc-projective-module",
-  "lem-pc-bounded-above-flat-kflat-site",
   "lem-pur-derived-change-of-rings",
   "lem-sfb-adic-perfect-model-complete-reduction",
   "lem-pur-roos-intrinsic-completeness-equivalence",
@@ -162,12 +165,17 @@
   "prop-weil-pbc-rlim-functoriality",
   "lem-a1-integral-pullback-completed-comparison",
   "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-exact-functor-complex-cohomology"
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-exc-site-local-relations-imply-flat",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-ringed-site-module-pullback-exists-universes"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.5.9(4)-(5) and Proposition 6.6.11 explain the completed perfect model; explicit finite-projective retract, strict-tower and balanced-tensor argument using Stacks 093J, 093M, 06YQ, 0941 and 03EL."
+  "place": "Lemma 6.5.9(4)-(5) and Proposition 6.6.11 explain the completed perfect model; explicit finite-projective retract, strict-tower and balanced-tensor argument using Stacks 093J, 093M, 06YQ, 0941 and 03EL. B4 proves the local constant-unit/additivity, independent-universe K-flat scalar model, projection-induced coefficient map, pullback-existence and strict-tower unit helpers; exactness and the main normalized comparison package retain their stated proof plans."
  },
  "mathlib_searches": [
   {
@@ -450,5 +458,15 @@
   "group": "Q101",
   "result": "pass",
   "note": "First S2 delivery; only the lean field changed, statement verbatim, all 68 decls recorded, 10 sorry proofs, docstrings with source/blueprint plus 9-step proof. Every iso in Nonempty(Comparisons) is pinned: reductions by a⊗(b⊗x)↦a·pr_n(b)⊗x, finite pullbacks by constant-section generators, tower by tower_evaluation, limitIso by its inverse (quotient family, 0) into Cone(1-s)[-1], ordinary pullback by balanced-tensor forward/inverse formulas through the adjunction unit. Lg* is the recorded integralDerivedPullback via its good-representative comparison; directMap is ∃!.choose (true, determined); cohomologyIso canonical; Amplitude correct (source cohomology → target, no flatness). Universes t/u independent, site t+1/t. Advisories: integralOperations*/unrestricted* plain defs from theorem-owned modules outside stmt_deps; local constant-module construction duplicates theorem-owned ScalarModelFiniteFlatResolution (no def node); IsModel spells out the IsPerfectRingComplex representative clause (justified); 'equivalently completed pullback' rendered only via the completeness clause; second reading is the worker's self-pass. No compile (no change)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261021T170713-L-2751451",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

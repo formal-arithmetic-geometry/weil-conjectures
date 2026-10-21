@@ -15,25 +15,13 @@ public import Sheaf.Paper.IntegralPullbackCompletedComparison
 public import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Mathlib.Algebra.Module.Projective
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Paper.AdicPerfectModelCompleteReduction
-import Sheaf.Paper.RoosIntrinsicCompletenessEquivalence
-import Sheaf.Paper.FinitePerfectAdicCoefficientLimit
-import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.StrictRoosComparison
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.SixFunctors.GeometricInverseImageConstantModule
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.Paper.CompletedRlimFunctor
-import Sheaf.Paper.ConstantModuleSectionProperties
-import Mathlib.RingTheory.PrincipalIdealDomain
-import Mathlib.Topology.Algebra.Valued.LocallyCompact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionOfUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.PullbackExistsOfUniverses
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
+import Mathlib.RingTheory.Flat.Basic
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Mathlib.RingTheory.Flat.EquationalCriterion
 
 /-! # Completed perfect scalar models under arbitrary pullback
 
@@ -58,7 +46,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 attribute [local irreducible] HasDerivedCategory.standard
-universe t u
+universe t u v w
 open CategoryTheory CategoryTheory.Limits Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 open scoped ChangeOfRings
@@ -106,7 +94,20 @@ sheafification to those same sieves. -/
 theorem constantUnit_local (T : Scheme.{t}) (R : Type (max u (t + 1))) [CommRing R] :
     Presheaf.IsLocallyInjective (ProEt.topology T) (constantUnit T R) ∧
       Presheaf.IsLocallySurjective (ProEt.topology T) (constantUnit T R) := by
-  sorry
+  let : EssentiallySmall.{max u (t + 1)} T.ProEt := essentiallySmallSelf.{u} _
+  let : (ProEt.topology T).WEqualsLocallyBijective CommRingCat.{max u (t + 1)} :=
+    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{t, max u (t + 1),
+      t + 1, max u (t + 1) + 1, max u (t + 1)} _
+  constructor
+  · constructor
+    intro U x y h
+    exact Presheaf.equalizerSieve_mem (ProEt.topology T)
+      (toSheafify (ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of R)))
+      x y h
+  · constructor
+    intro U s
+    exact Presheaf.imageSieve_mem (ProEt.topology T)
+      (toSheafify (ProEt.topology T) ((Functor.const T.ProEtᵒᵖ).obj (CommRingCat.of R))) s
 
 /-- Constant module sheafification; coefficients may be larger than the site.
 Source: Stacks 093J (blueprint: lem-a1-completed-perfect-scalar-pullback). -/
@@ -124,7 +125,20 @@ Proof: the constant presheaf functor preserves pointwise addition, and module
 sheafification is additive. Their composite therefore preserves addition. -/
 @[instance] theorem constant_additive (T : Scheme.{t}) (R : Type (max u (t + 1))) [CommRing R] :
     (constant T R).Additive := by
-  sorry
+  have : (constantPresheaf T R).Additive := by
+    constructor
+    intro M N f g
+    rfl
+  let := (constantUnit_local T R).1
+  let := (constantUnit_local T R).2
+  let := integralCoefficientAbLocallyBijective.{t, u} T
+  have h : (PresheafOfModules.sheafification.{max u (t + 1)}
+      (constantUnit T R)).Additive := by
+    apply leftExactFunctor_le_additiveFunctor _ _
+    rw [leftExactFunctor_iff]
+    infer_instance
+  unfold constant
+  infer_instance
 
 /-- The recorded constant-to-completion morphism in commutative rings.
 Source: Stacks 093M (blueprint: lem-a1-completed-perfect-scalar-pullback). -/
@@ -314,6 +328,29 @@ def finiteDirectMap (n : ℕ) :=
     (coefficientProEtaleDirectRingMap.{t, u} g
       (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1)))))
 
+/- Naturality before forgetting commutativity; compare the sheafification units. -/
+private theorem coefficient_direct_naturality
+    {A B : CommRingCat.{max u (t + 1)}} (a : A ⟶ B) :
+    (constantSheaf (ProEt.topology Y) CommRingCat.{max u (t + 1)}).map a ≫
+        coefficientProEtaleDirectRingMap g B =
+      coefficientProEtaleDirectRingMap g A ≫
+        ((proEtaleBaseChange g).sheafPushforwardContinuous
+          CommRingCat.{max u (t + 1)} (ProEt.topology Y) (ProEt.topology X)).map
+            ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).map a) := by
+  apply (sheafificationAdjunction (ProEt.topology Y)
+    CommRingCat.{max u (t + 1)}).homEquiv _ _ |>.injective
+  dsimp only [constantSheaf, Functor.comp_map]
+  rw [Adjunction.homEquiv_naturality_left, Adjunction.homEquiv_naturality_right]
+  simp only [coefficientProEtaleDirectRingMap, constantSheaf,
+    Functor.comp_obj, Equiv.apply_symm_apply]
+  apply NatTrans.ext
+  funext U
+  exact congr_app ((sheafificationAdjunction (ProEt.topology X)
+    CommRingCat.{max u (t + 1)}).unit.naturality
+      ((Functor.const X.ProEtᵒᵖ).map a)) ((proEtaleBaseChange g).op.obj U)
+
+attribute [local irreducible] coefficientProEtaleDirectRingMap
+
 /-- The completed coefficient map is uniquely fixed by all finite projections.
 Source: Stacks 03EL, 0941 (blueprint: lem-a1-completed-perfect-scalar-pullback).
 Proof: constant-section maps commute with consecutive quotients. Direct image
@@ -328,7 +365,34 @@ theorem directMap_existsUnique :
           (ProEt.topology Y) (ProEt.topology X)).map
           (limit.π (integralCoefficientSheafSystem l E X) (op n)) =
         limit.π (integralCoefficientSheafSystem l E Y) (op n) ≫ finiteDirectMap l E g n := by
-  sorry
+  let F := (proEtaleBaseChange g).sheafPushforwardContinuous RingCat.{max u (t + 1)}
+    (ProEt.topology Y) (ProEt.topology X)
+  let τ : integralCoefficientSheafSystem l E Y ⟶ integralCoefficientSheafSystem l E X ⋙ F :=
+    NatTrans.ofOpSequence (finiteDirectMap l E g) (by
+      intro n
+      simp only [integralCoefficientSheafSystem, Functor.comp_map,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      have h := congrArg
+        ((sheafCompose (ProEt.topology Y)
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map)
+        (coefficient_direct_naturality g
+          (CommRingCat.ofHom
+            ((ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).symm.toRingHom.comp
+              ((Padic.coefficientExtensionTransition l E (n + 1)).comp
+                (ULift.ringEquiv : ULift.{t + 1} _ ≃+* _).toRingHom))))
+      rw [Functor.map_comp, Functor.map_comp] at h
+      exact h)
+  let c : Cone (integralCoefficientSheafSystem l E X ⋙ F) :=
+    { pt := completedIntegralCoefficientSheafUnrestricted l E Y
+      π := (limit.cone (integralCoefficientSheafSystem l E Y)).π ≫ τ }
+  let hc := isLimitOfPreserves F (limit.isLimit (integralCoefficientSheafSystem l E X))
+  refine ⟨hc.lift c, ?_, ?_⟩
+  · intro n
+    exact hc.fac c (op n)
+  · intro ρ hρ
+    apply hc.hom_ext
+    intro n
+    exact (hρ n.unop).trans (hc.fac c n).symm
 
 /-- The unique projection-induced coefficient map.
 Source: Stacks 03EL (blueprint: lem-a1-completed-perfect-scalar-pullback). -/
@@ -346,7 +410,7 @@ Proof: use coefficient-sized small models of both sites, form the module preshea
 Kan extension along the displayed coefficient morphism, and sheafify. Transport
 back. Its right adjoint is exactly the displayed sectionwise module direct image. -/
 @[instance] theorem ordinaryPush_isRightAdjoint : (ordinaryPush l E g).IsRightAdjoint := by
-  sorry
+  exact SheafOfModules.module_pushforward_isRightAdjoint_of_universes (directMap l E g)
 
 /-- Ordinary ringed tensor pullback, determined together with its adjunction unit.
 Source: Stacks 03EL (blueprint: lem-a1-completed-perfect-scalar-pullback). -/
@@ -391,14 +455,140 @@ structure OrdinaryComparison where
       b' • ordinaryGenerator l E g ((modelModules l E Y).obj N) V
         (modelSection l E Y N (op V) 1 (constantSection l E Y N (op V) n))
 
+/- The local-relation proof of ConstantModuleFlat, at independent coefficient sizes. -/
+private theorem constant_flat (T : Scheme.{t})
+    (R : Type (max u (t + 1))) [CommRing R] (M : ModuleCat.{max u (t + 1)} R)
+    (hM : Module.Flat R M) :
+    SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)}
+      (J := ProEt.topology T) (R := constantRing T R) ((constant T R).obj M) := by
+  let J := ProEt.topology T
+  let := integralCoefficientAbLocallyBijective.{t, u} T
+  classical
+  let := (constantUnit_local T R).1
+  let := (constantUnit_local T R).2
+  let N := (constant T R).obj M
+  let P := (constantPresheaf T R).obj M
+  let η := toSheafify J P.presheaf
+  let α := constantUnit T R
+  let τ := PresheafOfModules.toSheafify α η
+  have ηsurj : Presheaf.IsLocallySurjective J η := inferInstance
+  have ηinj : Presheaf.IsLocallyInjective J η := inferInstance
+  have αsurj : Presheaf.IsLocallySurjective J α := inferInstance
+  have hn (V W : T.ProEtᵒᵖ) (f : V ⟶ W) (x : M) :
+      N.val.map f (η.app V x) = η.app W x :=
+    (PresheafOfModules.naturality_apply τ f x).symm
+  have hr (V W : T.ProEtᵒᵖ) (f : V ⟶ W) (a : R) :
+      (constantRing T R).obj.map f (α.app V a) = α.app W a :=
+    (NatTrans.naturality_apply α f a).symm
+  apply SheafOfModules.isFlatOnSite_of_local_equationalCriterion (constantRing T R) N
+  intro U n a s hs
+  let cover : Sieve U :=
+    { arrows V f := ∃ (c : Fin n → R) (x : Fin n → M),
+        (∀ i, α.app (op V) (c i) = (constantRing T R).obj.map f.op (a i)) ∧
+        (∀ i, η.app (op V) (x i) = N.val.map f.op (s i)) ∧
+        (∑ i, c i • x i) = 0
+      downward_closed := by
+        intro V W f hf g
+        obtain ⟨c, x, hc, hx, hcx⟩ := hf
+        refine ⟨c, x, ?_, ?_, hcx⟩
+        · intro i
+          rw [← hr _ _ g.op, hc]
+          exact ((constantRing T R).obj.map_comp_apply f.op g.op (a i)).symm
+        · intro i
+          rw [← hn _ _ g.op, hx]
+          exact (N.val.map_comp_apply f.op g.op (s i)).symm }
+  have hT : cover ∈ J U := by
+    let A : J.Cover U := Finset.univ.inf fun i : Fin n ↦
+      ⟨Presheaf.imageSieve α (a i), Presheaf.imageSieve_mem J α (a i)⟩
+    let B : J.Cover U := Finset.univ.inf fun i : Fin n ↦
+      ⟨Presheaf.imageSieve η (s i), Presheaf.imageSieve_mem J η (s i)⟩
+    apply J.transitive (J.intersection_covering A.property B.property) cover
+    intro V f hf
+    have hliftc (i : Fin n) : ∃ c : R,
+        α.app (op V) c = (constantRing T R).obj.map f.op (a i) := by
+      exact (Finset.inf_le (Finset.mem_univ i) : A ≤ _) f hf.1
+    have hliftx (i : Fin n) : ∃ x : M, η.app (op V) x = N.val.map f.op (s i) := by
+      exact (Finset.inf_le (Finset.mem_univ i) : B ≤ _) f hf.2
+    choose c hc using hliftc
+    choose x hx using hliftx
+    have heq : η.app (op V) (∑ i, c i • x i) = η.app (op V) 0 := by
+      change (τ.app (op V)) (∑ i, c i • x i) = (τ.app (op V)) 0
+      rw [map_sum, map_zero]
+      simp_rw [map_smul]
+      change (∑ i, (α.app (op V) (c i)) •
+        (show N.val.obj (op V) from η.app (op V) (x i))) = 0
+      calc
+        _ = ∑ i, (show N.val.obj (op V) from N.val.map f.op (a i • s i)) := by
+          apply Finset.sum_congr rfl
+          intro i _
+          rw [hc, hx]
+          exact (N.val.map_smul f.op (a i) (s i)).symm
+        _ = 0 := by
+          have h := (map_sum (N.val.map f.op).hom.toAddMonoidHom
+            (fun i ↦ a i • s i) Finset.univ).symm
+          rw [hs, map_zero] at h
+          convert h using 1 <;> rfl
+    apply J.superset_covering _ (Presheaf.equalizerSieve_mem J η _ _ heq)
+    intro W g hg
+    refine ⟨c, x, ?_, ?_, ?_⟩
+    · intro i
+      rw [← hr _ _ g.op, hc]
+      exact ((constantRing T R).obj.map_comp_apply f.op g.op (a i)).symm
+    · intro i
+      rw [← hn _ _ g.op, hx]
+      exact (N.val.map_comp_apply f.op g.op (s i)).symm
+    · exact hg
+  refine ⟨cover, hT, ?_⟩
+  intro V f hf
+  obtain ⟨c, x, hc, hx, hcx⟩ := hf
+  let := hM
+  obtain ⟨l, b, t, hb, hbt⟩ := Module.Flat.isTrivialRelation_of_sum_smul_eq_zero hcx
+  refine ⟨l, fun i j ↦ α.app (op V) (b i j), fun j ↦ η.app (op V) (t j), ?_, ?_⟩
+  · intro i
+    rw [← hx, hb]
+    change (τ.app (op V)) (∑ j, b i j • t j) = _
+    rw [map_sum]
+    apply Finset.sum_congr rfl
+    intro j _
+    exact (τ.app (op V)).hom.map_smul (b i j) (t j)
+  · intro j
+    simp_rw [← hc]
+    simpa only [map_sum, map_mul, map_zero] using
+      congrArg (fun z : R ↦ α.app (op V) z) (hbt j)
+
 /-- The bounded scalar model is K-flat with flat terms.
 Source: Stacks 06YQ (blueprint: lem-a1-completed-perfect-scalar-pullback).
-Proof: split each finite projective term off a finite free R-module. Constants and
-scalar extension preserve the splittings; thus model terms are finite free retracts
-over B_T and are flat. Boundedness and 06YQ then give K-flatness. -/
+Proof: projective terms are flat. Lift finite relations locally through the constant
+sheafification units to show that their constant module sheaves are flat. Boundedness
+gives K-flatness at independent coefficient universes. Change of rings preserves
+K-flatness and termwise flatness, giving the result for the completed scalar model. -/
 theorem model_good (T : Scheme.{t}) (P : Complex.{t, u} l E) (hP : IsModel l E P) :
     integralOperationsGoodComplex l E T ((model l E T).obj P) := by
-  sorry
+  let R := constantRing T (Scalars.{t, u} l E)
+  let C := (constant T (Scalars.{t, u} l E)).mapHomologicalComplex (.up ℤ)
+  let K := C.obj P
+  have hf (i : ℤ) : SheafOfModules.IsFlatOnSite.{t + 1, t, max u (t + 1), max u (t + 1)}
+      (J := ProEt.topology T) (R := R) (K.X i) := by
+    have : Module.Projective (Scalars.{t, u} l E) (P.X i) := (hP.2 i).2
+    exact constant_flat T (Scalars.{t, u} l E) (P.X i) inferInstance
+  obtain ⟨c, d, hcd⟩ := hP.1
+  have : CochainComplex.IsStrictlyLE K d := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro i hi
+    exact (constant T (Scalars.{t, u} l E)).map_isZero (hcd i (Or.inr hi))
+  have hk := SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
+    R K d hf
+  let S := completedIntegralCommRingSheafUnrestricted l E T
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  have hf' (i : ℤ) : exactFunctor _ _
+      (@MonoidalCategory.tensorRight _ _ (SheafOfModules.monoidalCategory R) (K.X i)) :=
+    (exactFunctor _ _).prop_of_iso (SheafOfModules.siteSheafTensorRightIso R (K.X i)) (hf i)
+  have h := SheafOfModules.changeOfRings_isKFlat_of_flat_terms_independentCoefficients
+    (scalarMap l E T) K (scalarChange l E T).E
+    (scalarChange l E T).obj_eq (scalarChange l E T).map_eq hk hf'
+  refine ⟨h.1, fun i ↦ ?_⟩
+  exact (exactFunctor _ _).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso S (((model l E T).obj P).X i)).symm (h.2 i)
 
 /-- Derived reduction through the universal counit, followed by ordinary reduction.
 Source: Stacks 06YY, 06YQ (blueprint: lem-a1-completed-perfect-scalar-pullback). -/
@@ -420,7 +610,15 @@ theorem quotientTowerIso_naturality (T : Scheme.{t}) (P : Complex.{t, u} l E)
         (restrictComplex l E T j.unop).map (r j.unop).hom =
       (restrictComplex l E T i.unop).map (r i.unop).hom ≫
         (quotientTower l E T P r).map f := by
-  sorry
+  let α : unrestrictedIntegralComplexTower l E T ((model l E T).obj P) ⟶
+      quotientTower l E T P r :=
+    NatTrans.ofOpSequence (fun n ↦ (restrictComplex l E T n).map (r n).hom) (by
+      intro n
+      simp only [unrestrictedIntegralComplexTower, quotientTower,
+        Functor.ofOpSequence_map_homOfLE_succ]
+      simp only [← Functor.map_comp_assoc, Iso.hom_inv_id]
+      rw [(restrictComplex l E T (n + 1)).map_id, Category.id_comp])
+  exact α.naturality f
 
 /-- The strict tower comparison, retaining every quotient transition.
 Source: Stacks 0941 (blueprint: lem-a1-completed-perfect-scalar-pullback). -/
@@ -443,7 +641,9 @@ theorem reductionTowerMap_condition (T : Scheme.{t}) {P Q : Complex.{t, u} l E}
     (unrestrictedIntegralComplexFunctor l E T (n + 1)).map ((model l E T).map f) ≫
       (unrestrictedIntegralComplexTower l E T ((model l E T).obj Q)).map
         (homOfLE (Nat.le_succ n)).op := by
-  sorry
+  simpa only [unrestrictedIntegralComplexTower,
+    Functor.ofOpSequence_map_homOfLE_succ] using
+      ((unrestrictedIntegralTransition l E T n).naturality ((model l E T).map f)).symm
 
 /-- Strict reduction-tower maps induced by the original scalar chain maps.
 Source: Stacks 0941 (blueprint: lem-a1-completed-perfect-scalar-pullback). -/
@@ -466,6 +666,40 @@ Source: Stacks 0941 (blueprint: lem-a1-completed-perfect-scalar-pullback). -/
 def quotientProduct (T : Scheme.{t}) (P : Complex.{t, u} l E) (r : Reductions l E T P) :=
   Pi.lift (fun n ↦ quotientMap l E T P r n)
 
+attribute [local irreducible] scalarChange finiteChange constant
+  completedIntegralCoefficientSheafUnrestricted unrestrictedIntegralReductionExistence
+
+/- Quotient maps preserve 1, so the normalized adjunction units form a cone. -/
+private theorem quotient_unit_transition (T : Scheme.{t})
+    (P : CochainComplex (integralTowerModules l E T) ℤ) (n : ℕ) :
+    unrestrictedTowerUnit l E T P (n + 1) ≫
+      (unrestrictedIntegralTransition l E T n).app P = unrestrictedTowerUnit l E T P n := by
+  ext j U x
+  change (((unrestrictedIntegralTransition l E T n).app P).f j).val.app U
+    (((unrestrictedTowerUnit l E T P (n + 1)).f j).val.app U x) = _
+  rw [unrestrictedTowerUnit_condition]
+  change (((unrestrictedIntegralTransition l E T n).app P).f j).val.app U
+    (unrestrictedIntegralTensorSection l E T (n + 1) (P.X j) U 1 x) = _
+  have h := (unrestrictedIntegralTransition_existsUnique l E T n).exists.choose_spec
+    P j U 1 x
+  change (((unrestrictedIntegralTransition l E T n).app P).f j).val.app U
+    (unrestrictedIntegralTensorSection l E T (n + 1) (P.X j) U 1 x) = _ at h
+  have hu := unrestrictedTowerUnit_condition l E T P n j U x
+  change (((unrestrictedTowerUnit l E T P n).f j).val.app U x) =
+    unrestrictedIntegralTensorSection l E T n (P.X j) U 1 x at hu
+  rw [map_one] at h
+  exact h.trans hu.symm
+
+/- The product equation depends only on the cone equations, not on scalar models. -/
+private theorem product_unit_condition {A : Type v} [Category.{w} A] [Preadditive A]
+    {K : ℕ → A} [HasProduct K] {M : A} (q : ∀ n, M ⟶ K n)
+    (f : ∀ n, K (n + 1) ⟶ K n) (hq : ∀ n, q (n + 1) ≫ f n = q n) :
+    Pi.lift q ≫ towerTransitionEndomorphism f = 0 := by
+  apply Pi.hom_ext
+  intro n
+  simpa [towerTransitionEndomorphism, towerProductShift, Category.assoc] using
+    sub_eq_zero.mpr (hq n).symm
+
 /-- The quotient family with zero second coordinate defines a Roos chain map.
 Source: Stacks 0941 (blueprint: lem-a1-completed-perfect-scalar-pullback).
 Proof: after each product projection the consecutive quotient units agree, since
@@ -481,7 +715,22 @@ theorem limitUnit_condition (T : Scheme.{t}) (P : Complex.{t, u} l E)
         (quotientProduct l E T P r ≫ towerTransitionEndomorphism
           (K := fun n ↦ (quotientTower l E T P r).obj (op n))
           (integralOperationsTowerStep (quotientTower l E T P r))) = 0 := by
-  sorry
+  have hu (n : ℕ) : quotientMap l E T P r (n + 1) ≫
+      integralOperationsTowerStep (quotientTower l E T P r) n = quotientMap l E T P r n := by
+    simp only [quotientMap, integralOperationsTowerStep, quotientTower,
+      Functor.ofOpSequence_map_homOfLE_succ, Category.assoc,
+      ← Functor.map_comp_assoc, Iso.hom_inv_id]
+    rw [(restrictComplex l E T (n + 1)).map_id]
+    erw [Category.id_comp]
+    rw [← Category.assoc, quotient_unit_transition]
+  have hz : quotientProduct l E T P r ≫ towerTransitionEndomorphism
+      (K := fun n ↦ (quotientTower l E T P r).obj (op n))
+      (integralOperationsTowerStep (quotientTower l E T P r)) = 0 := by
+    exact product_unit_condition (fun n ↦ quotientMap l E T P r n)
+      (integralOperationsTowerStep (quotientTower l E T P r)) hu
+  simp only [CochainComplex.HomComplex.δ_zero, zero_add]
+  exact (congrArg CochainComplex.HomComplex.Cochain.ofHom hz).trans
+    (CochainComplex.HomComplex.Cochain.ofHom_zero _ _)
 
 /-- Canonical map to the Roos model: quotient family and zero cone coordinate.
 Source: Stacks 0941 (blueprint: lem-a1-completed-perfect-scalar-pullback). -/
