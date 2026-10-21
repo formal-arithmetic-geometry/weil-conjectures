@@ -43,33 +43,33 @@
    }
   },
   {
-   "text": "Assume (Hom-inj) of [det-def-sfb-filtered-two-colimit-conditions]. For fixed $(i,x),(j,y)$, take arrows with equal $\\Phi$-images. By [lem-weil-pbc-filtered-colimit-sets-elementwise](1) write them as $[k,g]$ and $[l,h]$. Choose $m\\ge k,l$ and put $u=t_{km}(g)$, $v=t_{lm}(h)$ using [det-def-sfb-filtered-two-colimit-model]. They have the same classes as $g,h$. Since the comparison is a well-defined functor, equality of their images gives\n$$\\theta_{jm,y}\\Phi_m(u)\\theta_{im,x}^{-1}=\\theta_{jm,y}\\Phi_m(v)\\theta_{im,x}^{-1}.$$\nCancel the outer isomorphisms to get $\\Phi_m(u)=\\Phi_m(v)$. Apply (Hom-inj) to the two arrows $u,v:T_{im}x\\to T_{jm}y$ in $\\mathcal C_m$: there is $n\\ge m$ with $T_{mn}(u)=T_{mn}(v)$. Conjugating both sides by the same source and target associators gives\n$$t_{mn}(u)=\\tau_{jmn,y}T_{mn}(u)\\tau_{imn,x}^{-1}=\\tau_{jmn,y}T_{mn}(v)\\tau_{imn,x}^{-1}=t_{mn}(v).$$\nThe equality criterion (3) of the set-colimit node now gives $[m,u]=[m,v]$, hence $[k,g]=[l,h]$. This proves faithfulness on each Hom set. The small filtered index needed here is the $J_{ij}$ checked in step 2.",
+   "text": "Assume (Hom-inj) in [det-def-sfb-filtered-two-colimit-conditions]. Given $f,h:(i,x)\\to(j,y)$ with $\\Phi(f)=\\Phi(h)$, [lem-sfb-filtered-two-colimit-common-stage-images] gives $f=[m,u]$, $h=[m,v]$ and $\\Phi_m(u)=\\Phi_m(v)$. Apply (Hom-inj) in $\\mathcal C_m$ to obtain $n\\ge m$ with $T_{mn}(u)=T_{mn}(v)$. The model's formula gives\n$$t_{mn}(u)=\\tau_{jmn,y}T_{mn}(u)\\tau_{imn,x}^{-1}=\\tau_{jmn,y}T_{mn}(v)\\tau_{imn,x}^{-1}=t_{mn}(v).$$\nBy [lem-weil-pbc-filtered-colimit-sets-elementwise](3), $[m,u]=[m,v]$, so $f=h$. The small filtered index is the $J_{ij}$ checked in step 2. Thus $\\Phi$ is faithful.",
    "uses": [
+    "det-def-sfb-filtered-two-colimit-conditions",
+    "lem-sfb-filtered-two-colimit-common-stage-images",
     "det-def-sfb-filtered-two-colimit-model",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
-    "det-def-sfb-filtered-two-colimit-conditions"
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
-    "place": "Blueprint step 3, forward direction: common-stage equality; Stacks Tag 04AX (section-directed-colimits)"
+    "place": "Proof point 3, forward direction; Stacks Tag 04AX"
    }
   },
   {
-   "text": "Conversely suppose the comparison is faithful. For g,g' : x → y in C_k with equal Phi_k-images, use representatives [k,T_kk(g)] and [k,T_kk(g')]. Naturality of theta_kk identifies their comparison images with Phi_k(g) and Phi_k(g'). Faithfulness gives equality of these classes. The model's homClass_eq_iff supplies a common later stage n where their homTransition images agree (both stage inequalities are propositionally equal). Naturality of tau_kkn identifies each transition of T_kk(g) with T_kn(g), and likewise for g'. Thus T_kn(g)=T_kn(g'), the Hom-inj condition. This uses the same diagonal-representative argument as the blueprint, with naturality replacing explicit transports through the normalization equalities.",
+   "text": "Conversely assume $\\Phi$ faithful and $\\Phi_k(g)=\\Phi_k(g')$ for $g,g':x\\to y$ in $\\mathcal C_k$. By [lem-sfb-filtered-two-colimit-diagonal-equality], $\\Phi(\\delta_k(g))=\\Phi_k(g)=\\Phi_k(g')=\\Phi(\\delta_k(g'))$. Faithfulness gives $\\delta_k(g)=\\delta_k(g')$; that node's equality criterion supplies $n\\ge k$ with $T_{kn}(g)=T_{kn}(g')$. This is (Hom-inj) of [det-def-sfb-filtered-two-colimit-conditions].",
    "uses": [
-    "det-def-sfb-filtered-two-colimit-model",
-    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "lem-sfb-filtered-two-colimit-diagonal-equality",
     "det-def-sfb-filtered-two-colimit-conditions"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
-    "place": "Blueprint step 3, reverse direction: normalized representatives; Stacks Tag 04AX (section-directed-colimits)"
+    "place": "Proof point 3, reverse direction; diagonal representatives"
    }
   },
   {
-   "text": "Combine the first three equivalences. Mathlib Functor.IsEquivalence is the Prop structure with Faithful, Full and EssSurj fields, so supply these fields from the three cocone conditions. Conversely, project these fields from an IsEquivalence proof and use the three equivalences to form CategoryCocone.IsFilteredTwoColimit. Functor.asEquivalence realizes this categorical criterion by an actual quasi-inverse if desired; no separate quasi-inverse Hom-bijection lemma is needed.",
+   "text": "Combine the three equivalences. Functor.IsEquivalence has Faithful, Full and EssSurj fields: the three cocone conditions supply these fields, and projecting them recovers the conditions. This is the categorical equivalence criterion of [lem-trf-fully-faithful-ess-surj-equivalence]; Functor.asEquivalence supplies an actual quasi-inverse. Hence the conjunction defining a filtered 2-colimit is equivalent to the comparison being an equivalence.",
    "uses": [
     "det-def-sfb-filtered-two-colimit-conditions",
     "lem-trf-fully-faithful-ess-surj-equivalence"
@@ -77,7 +77,7 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
-    "place": "Blueprint final sentence; Stacks Tag 02C3 (lemma-equivalence-categories) and definition-equivalence-categories"
+    "place": "Final sentence; Stacks Tag 02C3 (lemma-equivalence-categories)"
    }
   }
  ],
@@ -85,12 +85,14 @@
   "det-def-sfb-filtered-two-colimit-model",
   "det-def-sfb-filtered-two-colimit-conditions",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "lem-sfb-filtered-two-colimit-common-stage-images",
+  "lem-sfb-filtered-two-colimit-diagonal-equality",
   "lem-trf-fully-faithful-ess-surj-equivalence"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.md",
-  "place": "Blueprint proof steps 1–3 and final sentence, implemented by the model Hom-class API, Mathlib ColimitType representatives, NatIso.naturality_1, and Functor.IsEquivalence fields; diagonal representatives are T_kk(g)."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-characterization.proof.md",
+  "place": "Proof points 1–3 and final sentence; common-stage and diagonal arguments isolated as new statement-only nodes, following Stacks Tags 04AX and 02C3"
  },
  "mathlib_searches": [
   {
@@ -157,17 +159,17 @@
   "date": "2026-10-21",
   "item": "det-def-sfb-filtered-two-colimit-characterization",
   "worker": "stage1",
-  "summary": "Kept the statement and unit route unchanged. Made object descent and fullness explicit, proved both faithfulness directions by common-stage representatives and normalized transitions, and cited existing Mathlib leaves for both directions of the equivalence criterion. No new nodes; all searches were run through msearch and read.",
-  "blueprint": "Steps 1 and 2 realize blueprint proof points 1 and 2; steps 3–4 realize both directions of point 3; step 5 realizes the final equivalence sentence. This is the characterization portion of unit proof step 2.",
+  "summary": "Human-requested re-split: preserve the statement and all arguments while extracting simultaneous common-stage representatives with comparison cancellation and the diagonal transition/equality calculation as two independent unsplit nodes. The item retains the short assembly of object descent, fullness, both Hom-injectivity directions and equivalence. All new-node Mathlib queries were run and read.",
+  "blueprint": "Point 1 is step 1; point 2 is step 2; point 3 forward uses the common-stage-images node in step 3 and point 3 reverse uses the diagonal-equality node in step 4; the final sentence is step 5. Both new nodes serve unit proof step 2.",
   "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NA-6359e11e8",
-  "group": "NA",
+  "reviewer": "NT-cc-NC-0c18d31e6",
+  "group": "NC",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-6359e11e8 (reviewer sub-agent of L); spot-checked: I read the whole split; it is correct and needs no fixes. The delivery has no new nodes. The item statement matches main-20261015 det-def-sfb-filtered-two-colimit-characterization.md exactly, its stmt_deps (model, conditions) are unchanged, and nothing is weakened. Steps 1-4 follow the four blueprint proof points and are correct against the model and conditions statements. The index set {k ≥ i,j} is directed and nonempty, so the existing filtered set-colimit node (Stacks 04AX) applies through its clauses (1) and (3). Step 3 conjugates by the associators to pass from T_mn to the transition map t_mn. Step 4 uses that τ_kkn is the identity, which is the model's own normalization. Step 5 uses the two existing equivalence nodes (Stacks 02C3, at categories.tex l.403 with l.362) only for what they state: one direction each, with no triangle identities assumed. Small cases (a single index, empty stage categories, arrows that become equal only at a later stage) behave correctly. No existing node or blueprint statement duplicates the item, and the live FilteredTwoColimit.lean only defines the three conditions without proving this characterization. Batch-5 finding: lem-trf-fully-faithful-ess-surj-equivalence is the general Stacks 02C3 fact (fully faithful and essentially surjective implies equivalence). Its only dependency is def-nagata-category, it has no proof dependencies, and it is not a step of the trace-formula or Poincaré-duality proofs, so I accept the citation. No item or cited node is on the route-pivot drop list."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-0c18d31e6 (reviewer sub-agent of L); spot-checked: This is judged on the merits. The human re-split note is still 'released' in live and side-live, and side-live coord/returns/NC.md:60 hands this item to a dedicated repair (243a4db5baf). No other group has landed a re-split: live still has the NA 5-step split and no lem-sfb-filtered-two-colimit-* node. The item differs from side-live only in proof, proof_deps, proof_origin and split_report. Its statement, stmt_deps, lean and reviewed fields are unchanged, so nothing is weakened. I compared the old and new proofs step by step. Steps 1, 2 and 5 are verbatim. The first half of old step 3 moved to lem-sfb-filtered-two-colimit-common-stage-images: common m ≥ k,l, u = t_km g, v = t_lm h, and the θ-cancellation iff. The Hom-inj application at stage m, the τ-conjugation to t_mn and sets-elementwise (3) on J_ij stay written out in step 3. All of old step 4 moved to lem-sfb-filtered-two-colimit-diagonal-equality. The proof is 2633 characters, and the two nodes are of comparable size; neither mentions Full, Faithful, EssSurj or the three conditions. I checked both statements against the model node and the main-20261015 proof points 2–3. Φ(δ_k g) = Φ_k g holds by naturality of θ_kk, and t_kn(T_kk g) = T_kn g by naturality of τ_kkn, so both hold even without strict normalization. The eventual-equality iff follows from Stacks 04AX via sets-elementwise (3) on J_kk. Common-stage: the cocone identity ι_m t_km = ι_k gives the representatives, and θ is invertible, so the iff holds both ways. Small cases: |I| = 1; {0<1} with End ℤ → 0, where equality appears only at n = 1; empty stages. Both nodes are statement-only and self-contained. Their blueprint.from is the item with the exact place, same_as is [], and leansearch, leanfinder, loogle and grep searches are recorded. I checked for duplicates among every node citing the model (coherent-cocone-normalization, coherent-pair-functor-descent, qbar-condensed-two-colimit), the strict-Cat filtered-colimit-category nodes and sets-elementwise: none. There is no SGA, the off-unit citations are only Mathlib leaves, and tool_uses is correctly empty. lean_audit is missing from the new nodes, but it is a maintainer field, so this is not a fault."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.FilteredTwoColimitCharacterization",
