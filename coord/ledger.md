@@ -20470,3 +20470,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:04 L: merged deliver/Q11/lem-coef-sequence-global-sections-evaluation (reviewer FIX; first push; new nodes: 0)
 - 07:04 L: merged deliver/Q23/lem-sf-nilpotent-coefficient-direct-image-bound (reviewer PASS; first push; new nodes: 0)
 - 07:04 L: merged deliver/Q13/lem-coef-sequence-pushforward-limit-projections (reviewer PASS; first push; new nodes: 0)
+- 07:04 L: merged deliver/Q30/lem-sfb-coherent-right-adjoint-comparisons (reviewer PASS; first push; new nodes: 0)

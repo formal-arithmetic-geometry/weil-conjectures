@@ -11,9 +11,73 @@
   "def-nagata-category",
   "def-weil-pbc-adjunction-conjugate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-adjunction-of-natural-bijection] to each specified $\\Phi^i$. This supplies the adjunction with precisely that Hom bijection and unit $\\eta^i_M=\\Phi^i_{M,F_iM}(1_{F_iM})$; its counit is precisely the specified $\\varepsilon^i$. In particular, for $a:F_iM\\to N$ and $b:M\\to G_iN$ we have $\\Phi^i(a)=G_i(a)\\circ\\eta^i_M$ and $(\\Phi^i)^{-1}(b)=\\varepsilon^i_N\\circ F_i(b)$. Thus all subsequent transpositions refer to the chosen bijections, rather than merely to some adjunction between the same functors.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), following discussion of adjunction maps; Tag 0B65 (lemma-transformation-between-functors-and-adjoints), with the indexed coherence calculation written out."
+   }
+  },
+  {
+   "text": "For every $i,j$ set $\\gamma_{ji}=(\\phi_{ji}^{-1})^c$, applying [def-weil-pbc-adjunction-conjugate] with $(L_1,R_1)=(F_i,G_i)$ and $(L_2,R_2)=(F_j,G_j)$. That node gives a natural isomorphism $G_i\\to G_j$, since $\\phi_{ji}^{-1}$ is a natural isomorphism. Its displayed component formula and the forward Hom formula of [lem-weil-pbc-adjunction-of-natural-bijection] give\n$$\\gamma_{ji,N}=G_j(\\varepsilon^i_N\\circ\\phi_{ji,G_iN}^{-1})\\circ\\eta^j_{G_iN}=\\Phi^j_{G_iN,N}(\\varepsilon^i_N\\circ\\phi_{ji,G_iN}^{-1}).$$",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), following discussion of adjunction maps; Tag 0B65 (lemma-transformation-between-functors-and-adjoints), with the indexed coherence calculation written out."
+   }
+  },
+  {
+   "text": "Apply the inverse bijection $(\\Phi^j_{G_iN,N})^{-1}$ to the equality in step 2. Its counit formula [lem-weil-pbc-adjunction-of-natural-bijection] gives exactly\n$$\\varepsilon^j_N\\circ F_j(\\gamma_{ji,N})=\\varepsilon^i_N\\circ\\phi_{ji,G_iN}^{-1}.$$\nIf any morphism $u:G_iN\\to G_jN$ satisfies this equation, the same formula says $(\\Phi^j)^{-1}(u)=(\\Phi^j)^{-1}(\\gamma_{ji,N})$; injectivity gives $u=\\gamma_{ji,N}$. Hence any family satisfying the normalization has all its components equal to this one, which proves uniqueness of the family as well as the stronger componentwise assertion.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), following discussion of adjunction maps; Tag 0B65 (lemma-transformation-between-functors-and-adjoints), with the indexed coherence calculation written out."
+   }
+  },
+  {
+   "text": "The identity and composition clauses of [def-weil-pbc-adjunction-conjugate] give\n$$\\gamma_{ii}=(1_{F_i})^c=1_{G_i},\\qquad\n\\gamma_{kj}\\circ\\gamma_{ji}=(\\phi_{ji}^{-1}\\circ\\phi_{kj}^{-1})^c=((\\phi_{kj}\\circ\\phi_{ji})^{-1})^c=\\gamma_{ki}.$$\nHere the middle equality uses the assumed cocycle law. Taking $k=i$ gives $\\gamma_{ij}\\circ\\gamma_{ji}=1_{G_i}$, and interchanging $i,j$ gives the other inverse identity. Thus $\\gamma_{ij}=\\gamma_{ji}^{-1}$, with all laws for the specified adjunctions.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), following discussion of adjunction maps; Tag 0B65 (lemma-transformation-between-functors-and-adjoints), with the indexed coherence calculation written out."
+   }
+  },
+  {
+   "text": "Fix $h:F_iM\\to N$ and put $b=\\Phi^i_{M,N}(h)$. Using the inverse Hom formula of [lem-weil-pbc-adjunction-of-natural-bijection], the counit equality of step 3, and naturality of $\\phi_{ji}^{-1}$ at $b:M\\to G_iN$, we compute\n$$(\\Phi^j_{M,N})^{-1}(\\gamma_{ji,N}\\circ b)\n=\\varepsilon^j_N\\circ F_j(\\gamma_{ji,N})\\circ F_j(b)\n=\\varepsilon^i_N\\circ\\phi_{ji,G_iN}^{-1}\\circ F_j(b)\n=\\varepsilon^i_N\\circ F_i(b)\\circ\\phi_{ji,M}^{-1}\n=h\\circ\\phi_{ji,M}^{-1}.$$\nApplying $\\Phi^j_{M,N}$ proves the claimed compatibility of the specified bijections. The construction uses only the given adjunctions and natural isomorphisms in the fixed universes.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037 (definition-adjoint), following discussion of adjunction maps; Tag 0B65 (lemma-transformation-between-functors-and-adjoints), with the indexed coherence calculation written out."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/det-sf-existence-brown.proof.md",
+  "place": "Part (3), last sentence, expanded using Stacks Tag 0037 and the conjugation formulas of Mathlib/CategoryTheory/Adjunction/Mates.lean."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +118,50 @@
    "results": "10 hits; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean",
    "date": "2026-10-21",
    "verdict": "no match: Mates.lean:275,285,319,350,425 supplies conjugation, its counit equation and composition. Unique.lean:143 assumes one fixed left adjoint. None states the indexed family theorem with componentwise counit uniqueness and the normalized Hom-bijection identity; assembling these requires the adjunction calculation, not a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coherent indexed family of natural isomorphisms of chosen left adjoints induces unique counit normalized natural isomorphisms of right adjoints satisfying the cocycle and intertwining the adjunction Hom bijections",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Adjunction.rightAdjointUniq_trans_app_assoc; CategoryTheory.Adjunction.rightAdjointUniq; CategoryTheory.Adjunction.rightAdjointUniq_trans; CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc; CategoryTheory.Adjunction.rightAdjointUniq_trans_app; CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit_assoc; CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete indexed theorem: conjugateEquiv and conjugateIsoEquiv give the comparison and coherence; the counit characterization, uniqueness among arbitrary component morphisms, and the specified Hom-bijection equation require the explicit adjunction calculations written in the proof. rightAdjointUniq_trans assumes a common left adjoint. Read Basic.lean:156-182,351-453, Mates.lean:275-350,425-435, Unique.lean:126-155."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Conjugating natural transformations of left adjoints is contravariantly functorial and identifies the adjunction hom equivalences by the counit formula",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.conjugateEquiv_apply_app; CategoryTheory.conjugateEquiv; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₁₃_eq_conjugateEquiv_symm; CategoryTheory.Adjunction.leftAdjointCompNatTrans₀₂₃_eq_conjugateEquiv_symm; CategoryTheory.Adjunction.leftAdjointCompNatTrans; CategoryTheory.conjugateEquiv_adjunction_id; CategoryTheory.conjugateEquiv_counit; CategoryTheory.conjugateEquiv_symm_apply_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete indexed theorem: conjugateEquiv and conjugateIsoEquiv give the comparison and coherence; the counit characterization, uniqueness among arbitrary component morphisms, and the specified Hom-bijection equation require the explicit adjunction calculations written in the proof. rightAdjointUniq_trans assumes a common left adjoint. Read Basic.lean:156-182,351-453, Mates.lean:275-350,425-435, Unique.lean:126-155."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateEquiv, CategoryTheory.Adjunction.counit",
+   "subdirectory": "",
+   "results": "5 hits; CategoryTheory.conjugateEquiv_adjunction_id; CategoryTheory.conjugateEquiv_counit; CategoryTheory.conjugateEquiv_apply_app; CategoryTheory.conjugateEquiv_counit_symm; CategoryTheory.conjugateEquiv_symm_apply_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete indexed theorem: conjugateEquiv and conjugateIsoEquiv give the comparison and coherence; the counit characterization, uniqueness among arbitrary component morphisms, and the specified Hom-bijection equation require the explicit adjunction calculations written in the proof. rightAdjointUniq_trans assumes a common left adjoint. Read Basic.lean:156-182,351-453, Mates.lean:275-350,425-435, Unique.lean:126-155."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_comp|conjugateEquiv_counit|rightAdjointUniq_trans|homEquiv_counit",
+   "subdirectory": "CategoryTheory/Adjunction",
+   "results": "25 hits; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete indexed theorem: conjugateEquiv and conjugateIsoEquiv give the comparison and coherence; the counit characterization, uniqueness among arbitrary component morphisms, and the specified Hom-bijection equation require the explicit adjunction calculations written in the proof. rightAdjointUniq_trans assumes a common left adjoint. Read Basic.lean:156-182,351-453, Mates.lean:275-350,425-435, Unique.lean:126-155."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A coherent family of isomorphisms between left adjoints induces unique counit normalized isomorphisms of chosen right adjoints compatible with composition and the adjunction Hom bijections",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Adjunction.counitAsIsoOfIso; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit; CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit_assoc; CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc; CategoryTheory.Adjunction.leftAdjointUniq_hom_counit; CategoryTheory.Adjunction.leftAdjointUniq_trans_app_assoc; CategoryTheory.Bicategory.adjointifyCounit; CategoryTheory.Bicategory.Adj.rIso",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete indexed theorem: conjugateEquiv and conjugateIsoEquiv give the comparison and coherence; the counit characterization, uniqueness among arbitrary component morphisms, and the specified Hom-bijection equation require the explicit adjunction calculations written in the proof. rightAdjointUniq_trans assumes a common left adjoint. Read Basic.lean:156-182,351-453, Mates.lean:275-350,425-435, Unique.lean:126-155."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sf-existence-brown",
@@ -75,5 +179,21 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-coherent-right-adjoint-comparisons",
+  "worker": "stage1",
+  "summary": "Expanded the counit-normalized comparison argument into five steps. Reused the existing conjugation Mathlib leaf and the existing Hom-bijection adjunction Mathlib leaf; proved the componentwise counit uniqueness and the Hom-bijection normalization by explicit transposition calculations. No statement changes or new nodes.",
+  "blueprint": "Realizes det-sf-existence-brown.proof.md part (3), last sentence: comparison along the compactification isomorphism and compatibility with its cocycle, for arbitrary specified adjunctions.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-e0591ed23",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-e0591ed23 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full. The statement is unchanged from live, the item is still unsplit on live and side-live, and there is no repair note or dropped-list entry. The source is det-sf-existence-brown.proof.md (main-20261015), part (3), whose last sentence is about uniqueness of right adjoints compatible with the cocycle. Stacks Tag 0037 and Tag 0B65 (categories.tex l.3542) were read: 0B65 characterizes the conjugate as the unique map with eps_2∘u_2(beta^vee)=eps_1∘beta, which with beta=phi_ji^{-1} is exactly the item's normalization. Both cited nodes are Mathlib leaves and their statements give what the steps use. lem-weil-pbc-adjunction-of-natural-bijection gives the formulas Psi(a)=G(a)∘eta and Psi^{-1}(b)=eps∘F(b), with eps=Psi^{-1}(id), the item's counit. def-weil-pbc-adjunction-conjugate gives the component formula, (tau∘tau')^c=tau'^c∘tau^c, id^c=id and preservation of isomorphisms. I checked every step by hand. In step 2, with tau=phi_ji^{-1}: F_j→F_i, the component G_j(eps^i∘phi^{-1})∘eta^j equals Phi^j(eps^i∘phi^{-1}). In step 3, applying (Phi^j)^{-1} gives the normalization, and injectivity gives uniqueness among all morphisms, not only natural ones. In step 4, the composition order checks out and gives the cocycle, gamma_ii=1 and the inverses. In step 5, naturality of phi^{-1} at b gives the Hom-bijection identity. The elementary flags are justified. Edge cases checked: I empty or a singleton, repeated indices, identical functors with different chosen bijections, empty categories. There is no cycle and no use of another node's proof. The cited leaves are notions or tools, not route, so no tool_uses are needed. No SGA is cited. On duplicates: det-sp-unique-right-adjoint and lem-weil-common-left-adjunctions-iso are the special case of one left adjoint, and lem-pur-adjoint-equivalence-conjugation-calculus is a different statement. The Mathlib searches cover all three kinds. Minor and not a fault: the report names worker-local artifacts (citations.json, searches.jsonl) that are not on the branch, and coord/dag-sync.md is missing from the snapshot. No fixes."
+ }
 }
