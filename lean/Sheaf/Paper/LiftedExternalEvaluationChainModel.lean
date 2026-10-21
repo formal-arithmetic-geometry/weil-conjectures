@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Homology.QuasiIso
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Sheaf.Paper.ExternalRHomConePairing
+public import Sheaf.Paper.ExternalRHomConePairingDefs
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses

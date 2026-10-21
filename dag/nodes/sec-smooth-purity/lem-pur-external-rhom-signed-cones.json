@@ -1,0 +1,151 @@
+{
+ "id": "lem-pur-external-rhom-signed-cones",
+ "kind": "statement",
+ "title": "Transport normalized external evaluations to both native coefficient cones",
+ "statement": "Use [def-pur-external-rhom-pairing-interface]. Fix a coherent integer-shift structure S on every native contravariant homFirst(X,K), and assume HasSignedHomShift for this S, including target-map naturality and the evaluation-normalized leftUnshift representative identity. Then PreservesCoefficientCones holds for this same S: for bounded-below K,L and their bounded-below external tensor F, and bounded-flat-representable coefficient triangles, both native image triangles are distinguished and the prescribed three pairing components form a triangle morphism in either coefficient. This asserts transport to the native image triangles and their connecting squares, not construction of S or any of the extracted cochain identities.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08J9, 08JA, 08JB, 08JC, 0A90 and 0G7D; the indicated part of the external global-Hom evaluation argument."
+ },
+ "stmt_deps": [
+  "def-pur-external-rhom-pairing-interface"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing global Hom evaluation flat lifts on both sites. The existing lifted external chain-model lemma identifies every chosen normalized chain pairing with the native pairing, and its shifted-lift clause keeps the two target lifts and their external K-injective target unchanged.",
+   "uses": [
+    "lem-pur-global-hom-evaluation-flat-lift",
+    "lem-pur-lifted-external-evaluation-chain-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing two-shift-squares theorem on the constant-ring realization of P. Transport its E identity (sign sq+s) and H identity (sign sq+q+r) through the canonical scalar-realization tensor and Hom comparisons. Cancel the localized source and target model isomorphisms. The prescribed normalization of S and its naturality in target maps identify the resulting equations with the native pairing shift squares, including the canonical opposite shift comparison.",
+   "uses": [
+    "lem-pur-external-evaluation-two-shift-squares",
+    "lem-pur-lifted-external-evaluation-chain-model",
+    "def-pur-external-rhom-pairing-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Internal Hom into a K-injective takes a reversed split cone sequence to its Hom cone, with the signed normalization fixed by S. Derived sections, exact inverse image and derived tensor preserve distinguished triangles. Transport the ringed-site exactness through the same constant-ring realization and normalized Hom comparisons to the two native composites leftSource/leftTarget and rightSource/rightTarget. This gives distinguishedness for the fixed S, not an unrelated existential shift structure.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-exact-functor-derived-triangulated",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pur-lifted-external-evaluation-chain-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality from the existing transpose theorem gives the first two squares. At the connecting arrow d it gives B(d) lambda_at_shift = lambda A(d). Shift by one and substitute the shift equation of the second step: this is exactly the third triangle square, with the same opposite rotation sign on each side. Set all three components to the specified native pairings, and repeat in the second coefficient.",
+   "uses": [
+    "lem-pur-external-evaluation-transpose-natural",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-global-hom-evaluation-flat-lift",
+  "lem-pur-lifted-external-evaluation-chain-model",
+  "lem-pur-external-evaluation-two-shift-squares",
+  "def-pur-external-rhom-pairing-interface",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-exact-functor-derived-triangulated",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-pur-external-evaluation-transpose-natural",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JC; remaining native transport in assembly steps 3--5 after reusing all four human-extracted source results."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The external tensor product pairing on derived Hom is natural and commutes with shifts",
+   "results": "{\"t\": \"2026-10-20T17:05:19Z\", \"tool\": \"leanfinder\", \"query\": \"The external tensor product pairing on derived Hom is natural and commutes with shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.tensorRightHomEquiv_symm_naturality\"], \"digest\": \"d8933440b41f33be\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete external Hom comparison. Reuse native adjunction and braiding APIs for the formal categorical steps."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality|homEquiv_naturality",
+   "results": "{\"t\": \"2026-10-20T17:05:20Z\", \"tool\": \"grep\", \"query\": \"braiding_naturality|homEquiv_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\"], \"digest\": \"d286bceabc117d7c\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete external Hom comparison. Reuse native adjunction and braiding APIs for the formal categorical steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalClosed.internalHomAdjunction₂",
+   "results": "{\"t\": \"2026-10-20T17:05:20Z\", \"tool\": \"loogle\", \"query\": \"MonoidalClosed.internalHomAdjunction₂\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MonoidalClosed.internalHomAdjunction₂'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete external Hom comparison. Reuse native adjunction and braiding APIs for the formal categorical steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived tensor Hom evaluation pairing is natural, computed by Hom cochains into K-injectives, compatible with shifts and braidings",
+   "results": "{\"t\": \"2026-10-20T18:06:29Z\", \"tool\": \"leansearch\", \"query\": \"A derived tensor Hom evaluation pairing is natural, computed by Hom cochains into K-injectives, compatible with shifts and braidings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.ev_naturality_assoc\", \"CategoryTheory.ihom.ev_naturality\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.ihom.coev_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality\", \"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality\"], \"digest\": \"ef75cc8a1cf4f69e\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete external Hom comparison. Reuse native adjunction and braiding APIs for the formal categorical steps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExternalRHomConePairing",
+  "date": "2026-10-21",
+  "group": "J7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-external-rhom-cone-pairing",
+   "place": "Steps 6 through 10: normalized source shifts and the two prescribed coefficient cones.",
+   "via": [
+    "lem-pur-supported-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExternalRHomSignedCones",
+  "file": "lean/Sheaf/Paper/ExternalRHomSignedCones.lean",
+  "declaration": "AlgebraicGeometry.Etale.ExternalRHom.external_rhom_coefficient_cones",
+  "statement": "theorem external_rhom_coefficient_cones\n    (S : ∀ (X : Scheme.{u}) (K : DerivedCategoryModule A X),\n      (homFirst A X K).CommShift ℤ)\n    (hs : HasSignedHomShift (homShift := S) A) :\n    PreservesCoefficientCones (homShift := S) A",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5e28",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T214812-L-1858322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5e28",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T214812-L-1858322",
+  "kind": "interface",
+  "note": "independent cc review: Delivered 13 modules (fresh sandbox, all compile in dependency order) and 7 nodes against the published item: pulledChainEvaluation old=new by rfl; HasKoszulBraiding/IsNatural/chainPairEvaluation bodies matched by explicit-instance #print and reading; signed-cones sorry checked as the item's last conjunct for the witness S; axioms only via named holes"
+ }
+}

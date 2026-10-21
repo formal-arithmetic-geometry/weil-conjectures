@@ -5,7 +5,7 @@ Authors: SHEAF group O1
 -/
 module
 
-public import Sheaf.Paper.ExternalRHomConePairing
+public import Sheaf.Paper.ExternalRHomConePairingDefs
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
@@ -209,7 +209,7 @@ theorem globalHom_evaluation_flat_lift
               ((upperStar (ModuleCat A) f).kFlat_map_of_flat_terms T hkT hfT)
               (fun n ↦ Functor.PreservesFlat.flat_obj
                 (F := upperStar (ModuleCat A) f) (hfT n))
-          · dsimp only [pullModel]
+          · dsimp only [pullModel, leftDerivedModelOf]
             infer_instance
         simp only [List.mem_cons, List.not_mem_nil, or_false] at hP
         rcases hP with rfl | rfl | rfl | rfl

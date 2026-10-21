@@ -5,7 +5,7 @@ Authors: SHEAF group NN
 -/
 module
 
-public import Sheaf.Paper.ExternalRHomConePairing
+public import Sheaf.Paper.ExternalRHomConePairingDefs
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.Algebra.Homology.Additive
@@ -37,7 +37,7 @@ This statement applies to arbitrary unbounded objects.
 @[expose] public section
 
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 set_option synthInstance.maxSize 2048
 
 universe u
@@ -45,6 +45,28 @@ universe u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
 
 namespace AlgebraicGeometry.Etale.ExternalRHom
+
+attribute [local instance] derivedBraiding siteDerivedMonoidal
+  siteDerivedClosed siteLocalizationMonoidal constantComplexOplax pullComplexMonoidal
+  complexesBraiding coefficientComplexMonoidal
+
+/-- Four-variable naturality, specialized from the generic evaluation calculation.
+Source: Stacks 08J9 and 0A90
+(blueprint: lem-pur-external-evaluation-transpose-natural).
+
+Proof: specialize GenericExternal.naturality at the three native derived categories,
+using the canonical inverse-image tensor constraints and constant comparisons. -/
+theorem external_evaluation_pairing_natural (A : Type (u + 1)) [CommRing A] :
+    IsNatural A := by
+  intro X Y P a b E E' K K' H H' L L' _ _ _ _ _ _ _ _ _ _ f g k l
+  let _ := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} A) a
+  let _ := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} A) b
+  exact GenericExternal.naturality
+    (constantSectionsAdjunction A X) (constantSectionsAdjunction A Y)
+    (constantSectionsAdjunction A P) (pull A a) (pull A b)
+    (constantPullbackIso A a) (constantPullbackIso A b)
+    (constantSheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)).leftDerivedTensorComparison
+    f g k l
 
 /-- The global tensor--Hom bijection, its evaluation normalization, four-variable
 naturality of the external evaluation transpose, and both open-restriction squares.

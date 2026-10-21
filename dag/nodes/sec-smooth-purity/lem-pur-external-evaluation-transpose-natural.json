@@ -21,6 +21,13 @@
  ],
  "proof": [
   {
+   "text": "The bounded-domain four-variable naturality specialization is already proved by GenericExternal.naturality, with exactly the canonical constant/sections adjunctions, pullback tensor constraints and constant comparisons. The unrestricted combined theorem retains all of its original clauses and its source argument below.",
+   "uses": [
+    "lem-pur-external-rhom-evaluation-naturality"
+   ],
+   "elementary": false
+  },
+  {
    "text": "Put $L_TQ=\\underline Q_T$, $R_T=R\\Gamma(T,-)$ and $I_T(G,M)=R\\mathcal Hom_A(G,M)$. The constant/sections adjunction of [def-kun-constant-projection-morphism] and the closed adjunction of [lem-sf-ringed-derived-closed-symmetric-monoidal], applied on the small ringed site $(T_{\\mathrm{et}},A_T)$, give natural bijections\n$$\\operatorname{Hom}(Q,R_TI_T(G,M))\\cong\\operatorname{Hom}(L_TQ,I_T(G,M))\\cong\\operatorname{Hom}(L_TQ\\otimes_A^LG,M).$$\nAll three objects are arbitrary unbounded objects, as allowed in both cited statements. If $\\varepsilon$ is the constant/sections counit and $e$ the internal tensor-Hom counit, define $\\mathrm{ev}_{G,M}=e_{G,M}\\circ(\\varepsilon_{I_T(G,M)}\\otimes1_G)$. The explicit counit formula in the closed-adjunction statement shows that the displayed bijection sends $f:Q\\to\\mathsf H_T(G,M)$ to $\\mathrm{ev}_{G,M}\\circ(L_Tf\\otimes1_G)$. In particular the identity has the required image. Denote the inverse bijection by $\\operatorname{tr}_T$.",
    "uses": [
     "def-kun-constant-projection-morphism",
@@ -135,17 +142,18 @@
   }
  ],
  "proof_deps": [
+  "lem-pur-external-rhom-evaluation-naturality",
   "def-kun-constant-projection-morphism",
   "lem-sf-ringed-derived-closed-symmetric-monoidal",
   "def-pur-derived-constant-pullback-comparison",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lem-pur-exact-pullback-signed-comparison",
+  "lem-weil-pbc-etale-inverse-image-restriction",
   "lem-weil-pbc-ringed-slice-evaluation-transpose",
   "lem-weil-pbc-constant-pullback-composition-coherence",
   "lem-kun-derived-pullback-composition-monoidal",
   "lem-pur-cochain-pullback-tensor-coherence",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-etale-inverse-image-restriction"
+  "lem-weil-pbc-open-immersion-base-change"
  ],
  "proof_origin": {
   "by": "agent",
@@ -311,7 +319,11 @@
   "by": "NN",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Unrestricted naturality and both open-restriction squares for the existing ExternalRHom canonical constructions. The existing parent theorem has bounded-flat/bounded-below hypotheses and is not an exact match; this statement has none. Only the parent module's definitions are used, never its theorem; see the report for the import-cycle exception."
+  "note": "Unrestricted naturality and both open-restriction squares for the existing ExternalRHom canonical constructions. The existing parent theorem has bounded-flat/bounded-below hypotheses and is not an exact match; this statement has none. Only the parent module's definitions are used, never its theorem; see the report for the import-cycle exception. The definitions now come from ExternalRHomConePairingDefs, breaking the assembly import cycle. external_evaluation_pairing_natural is the proved specialization of the generic four-variable calculation to the original bounded-domain predicate; the existing unrestricted theorem is retained unchanged.",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ExternalRHom.external_evaluation_transpose_natural",
+   "AlgebraicGeometry.Etale.ExternalRHom.external_evaluation_pairing_natural"
+  ]
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -320,5 +332,15 @@
   "group": "NN",
   "result": "pass",
   "note": "Read the node, the 10 stmt_dep records, the module, report.md and the ExternalRHomConePairing definitions. Only the item's lean record changes; the statement is verbatim and the proof is sorry-only. Clauses: the bijection map equals the inverse of transpose (checked via homEquiv.symm and braiding naturality); transpose(evaluation)=identity; pairing is a real transpose of the derived-constant-pullback comparison, pullback tensor comparison and Koszul tensorμ; four-variable joint naturality has correct variances; both open-restriction squares use squarePullIso/restrictionTensorIso and the transpose-defined restriction maps. Hypotheses: A:Type(u+1), Scheme.{u}, none beyond the node; the parent's bounded-flat and plus hypotheses are removed. Edge cases (empty schemes, identity or empty opens, zero ring) are covered. derivedHom = MonoidalClosed.internalHom, the same closed structure. Maintainer note: the statement uses plain definitions of the theorem node lem-pur-external-rhom-cone-pairing, whose proof_deps cite this item, so there is a stage-3 import cycle; move globalHom through RestrictionSquare into a def-node interface module (as in the Q76/N9/NB precedents). Advisories: naturality of the bijection in G and M is not a separate conjunct; the unchanged factor goes through restriction along the identity. No compile, since no file was changed; the worker reports clean compiles in 6.2 s and 8.8 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5e28",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T214812-L-1858322",
+  "kind": "interface",
+  "note": "independent cc review: Delivered 13 modules (fresh sandbox, all compile in dependency order) and 7 nodes against the published item: pulledChainEvaluation old=new by rfl; HasKoszulBraiding/IsNatural/chainPairEvaluation bodies matched by explicit-instance #print and reading; signed-cones sorry checked as the item's last conjunct for the witness S; axioms only via named holes"
  }
 }

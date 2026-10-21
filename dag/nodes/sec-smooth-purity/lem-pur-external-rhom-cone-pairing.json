@@ -31,83 +31,44 @@
  ],
  "proof": [
   {
-   "text": "Apply the global-evaluation flat-lift lemma separately to $(E,K)$ and $(H,L)$. It supplies the K-injective Hom models, flat-term K-flat resolutions $U,V$, evaluation maps and their required homotopy factorizations through $N_K,N_L$. Its pullback assertion applies to $a,b$.",
+   "text": "Obtain the coherent signed shift S and normalized Hom models for every source from lifted_external_evaluation_derived_hom_shift. Obtain HasChainNormalization from the third conjunct of lifted_external_evaluation_chain_model, for the stated bounded flat inputs and bounded-below targets. These are the existing human-extracted declarations, not new model obligations.",
    "uses": [
-    "lem-pur-global-hom-evaluation-flat-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Assembly of the four extracted lemmas with lemma-RHom-triangulated; preserves original proof steps 1--10."
-   }
-  },
-  {
-   "text": "Define $\\lambda$ by the natural external-evaluation transpose lemma. Its adjunction and interchange are precisely those in the statement; that lemma also gives all four naturalities and both open-restriction squares. The lifted-chain-model lemma identifies its value for every choice in Step 1 with the displayed $(-1)^{sq}$ chain formula into a K-injective resolution of $T$. Thus the specified normalization is independent of choices.",
-   "uses": [
-    "lem-pur-external-evaluation-transpose-natural",
     "lem-pur-lifted-external-evaluation-chain-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Assembly of the four extracted lemmas with lemma-RHom-triangulated; preserves original proof steps 1--10."
-   }
+   "elementary": false
   },
   {
-   "text": "For fixed $H$, put $A(E)=\\mathsf H_X(E,K)\\otimes_A^L\\mathsf H_Y(H,L)$ and $B(E)=\\mathsf H_P(a^{-1}E\\otimes_A^Lb^{-1}H,F)$. Internal Hom is contravariantly exact, right-derived sections is triangulated, exact inverse image induces a triangulated functor, and derived tensor is exact in each variable. Hence $A,B$ are exact contravariant functors with their canonical shifts; likewise in $H$.",
+   "text": "Specialize the fully proved localization/Koszul braiding identity at ordinary module sheaves. This retains the original K-flat hypotheses, although the identity does not need them.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-sf-exact-functor-derived-triangulated",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "lem-pur-external-rhom-derived-braiding"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Assembly of the four extracted lemmas with lemma-RHom-triangulated; preserves original proof steps 1--10."
-   }
+   "elementary": false
   },
   {
-   "text": "Use the common shifted lifts and Hom shift of the chain-model lemma. On $P$, apply the two-shift-squares lemma to the pulled-back lifts and $i:T\\to J$. Its two chain identities give $s_B\\lambda_{E[1]}=\\lambda_E[-1]s_A$ and its $H$ analogue after localization. The comparisons have no sign for the right tensor shift and $(-1)^{\\deg(x)}$ for the left tensor shift, as required.",
+   "text": "Use the proved generic four-variable naturality specialized in ExternalEvaluationTransposeNatural. Project the unrestricted X and Y restriction squares from external_evaluation_transpose_natural and discharge their extra bounded-domain premises by ignoring them.",
    "uses": [
-    "lem-pur-lifted-external-evaluation-chain-model",
-    "lem-pur-external-evaluation-two-shift-squares"
+    "lem-pur-external-evaluation-transpose-natural"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Assembly of the four extracted lemmas with lemma-RHom-triangulated; preserves original proof steps 1--10."
-   }
+   "elementary": false
   },
   {
-   "text": "For $E_2\\to E_1\\to E_0\\xrightarrow dE_2[1]$, Step 2 gives the first two naturality squares and $B(d)\\lambda_{E_2[1]}=\\lambda_{E_0}A(d)$. Shift the latter equality by $[1]$ and substitute Step 4. Since the connecting maps are the shifted maps on $d$ composed with inverse shift comparisons, this gives $\\delta_B\\lambda_{E_2}=\\lambda_{E_0}[1]\\delta_A$; the common contravariant rotation sign cancels. The same deduction in $H$ gives its connecting square. Thus the specified maps, including the cone components, form both triangle morphisms.",
+   "text": "Apply the remaining native coefficient-cone transport lemma to this very S and its signed normalization. This lemma retains only the native triangle transport and connecting-square obligation: it does not reassert Hom-model existence, the derived Hom shift, lifted evaluation normalization, or the two chain shift identities. Assemble the same S with all seven conjuncts.",
    "uses": [
-    "def-weil-triangulated-category"
+    "lem-pur-external-rhom-signed-cones"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Assembly of the four extracted lemmas with lemma-RHom-triangulated; preserves original proof steps 1--10."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-triangulated-category",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-pur-external-evaluation-transpose-natural",
-  "lem-pur-external-evaluation-two-shift-squares",
-  "lem-pur-global-hom-evaluation-flat-lift",
   "lem-pur-lifted-external-evaluation-chain-model",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-pur-external-rhom-derived-braiding",
+  "lem-pur-external-evaluation-transpose-natural",
+  "lem-pur-external-rhom-signed-cones"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-  "place": "Proof paragraphs 1 and 3: support-triangle tensor comparison and Hom-evaluation identification; the external RHom cone pairing is expanded from the cited Hom-complex constructions."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "J7 repair of C-72ecd: current human four-node split; complete assembly from existing model/transpose declarations, proved braiding and the remaining native cone transport."
  },
  "mathlib_searches": [
   {
@@ -225,82 +186,6 @@
   "module": "Sheaf.Paper.ExternalRHomConePairing",
   "declaration": "AlgebraicGeometry.Etale.ExternalRHom.external_rhom_cone_pairing",
   "declarations": [
-   "AlgebraicGeometry.Etale.ExternalRHom.pullEvaluationOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.externalEvaluationOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.pairingOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.IsBraidedAt",
-   "AlgebraicGeometry.Etale.ExternalRHom.modelTransposeOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.tensorModelOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.tensorThenOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.tensorInclusionOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.chainModelTransposeOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.pullComplexEvaluationOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.externalComplexEvaluationOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.Modules",
-   "AlgebraicGeometry.Etale.ExternalRHom.Complexes",
-   "AlgebraicGeometry.Etale.ExternalRHom.modulesMonoidal",
-   "AlgebraicGeometry.Etale.ExternalRHom.complexesMonoidal",
-   "AlgebraicGeometry.Etale.ExternalRHom.derivedBraiding",
-   "AlgebraicGeometry.Etale.ExternalRHom.constant",
-   "AlgebraicGeometry.Etale.ExternalRHom.pull",
-   "AlgebraicGeometry.Etale.ExternalRHom.sections",
-   "AlgebraicGeometry.Etale.ExternalRHom.internalHom",
-   "AlgebraicGeometry.Etale.ExternalRHom.closedAdjunction",
-   "AlgebraicGeometry.Etale.ExternalRHom.constantSectionsAdjunction",
-   "AlgebraicGeometry.Etale.ExternalRHom.globalHom",
-   "AlgebraicGeometry.Etale.ExternalRHom.globalAdjunction",
-   "AlgebraicGeometry.Etale.ExternalRHom.transpose",
-   "AlgebraicGeometry.Etale.ExternalRHom.evaluation",
-   "AlgebraicGeometry.Etale.ExternalRHom.pullTensorIso",
-   "AlgebraicGeometry.Etale.ExternalRHom.pulledEvaluation",
-   "AlgebraicGeometry.Etale.ExternalRHom.pairing",
-   "AlgebraicGeometry.Etale.ExternalRHom.siteQ",
-   "AlgebraicGeometry.Etale.ExternalRHom.moduleQ",
-   "AlgebraicGeometry.Etale.ExternalRHom.homComplex",
-   "AlgebraicGeometry.Etale.ExternalRHom.constantComplex",
-   "AlgebraicGeometry.Etale.ExternalRHom.chainEvaluationSource",
-   "AlgebraicGeometry.Etale.ExternalRHom.constantSection",
-   "AlgebraicGeometry.Etale.ExternalRHom.tensorSection",
-   "AlgebraicGeometry.Etale.ExternalRHom.tensorComplexSection",
-   "AlgebraicGeometry.Etale.ExternalRHom.IsChainEvaluation",
-   "AlgebraicGeometry.Etale.ExternalRHom.ringedRealization",
-   "AlgebraicGeometry.Etale.ExternalRHom.ringedRealizationAdditive",
-   "AlgebraicGeometry.Etale.ExternalRHom.ringedComplex",
-   "AlgebraicGeometry.Etale.ExternalRHom.pointRealization",
-   "AlgebraicGeometry.Etale.ExternalRHom.pointComplex",
-   "AlgebraicGeometry.Etale.ExternalRHom.IsBoundedFlat",
-   "AlgebraicGeometry.Etale.ExternalRHom.constantModel",
-   "AlgebraicGeometry.Etale.ExternalRHom.pullModel",
-   "AlgebraicGeometry.Etale.ExternalRHom.IsHomModel",
-   "AlgebraicGeometry.Etale.ExternalRHom.HomModel",
-   "AlgebraicGeometry.Etale.ExternalRHom.HomModel.iso",
-   "AlgebraicGeometry.Etale.ExternalRHom.restriction",
-   "AlgebraicGeometry.Etale.ExternalRHom.pullComplex",
-   "AlgebraicGeometry.Etale.ExternalRHom.externalComplex",
-   "AlgebraicGeometry.Etale.ExternalRHom.externalModel",
-   "AlgebraicGeometry.Etale.ExternalRHom.pulledChainEvaluation",
-   "AlgebraicGeometry.Etale.ExternalRHom.chainPairEvaluation",
-   "AlgebraicGeometry.Etale.ExternalRHom.targetModel",
-   "AlgebraicGeometry.Etale.ExternalRHom.HasChainNormalization",
-   "AlgebraicGeometry.Etale.ExternalRHom.homMap",
-   "AlgebraicGeometry.Etale.ExternalRHom.external",
-   "AlgebraicGeometry.Etale.ExternalRHom.IsPlus",
-   "AlgebraicGeometry.Etale.ExternalRHom.HasBoundedFlatModel",
-   "AlgebraicGeometry.Etale.ExternalRHom.IsNatural",
-   "AlgebraicGeometry.Etale.ExternalRHom.squarePullIso",
-   "AlgebraicGeometry.Etale.ExternalRHom.restrictionTensorIso",
-   "AlgebraicGeometry.Etale.ExternalRHom.RestrictionSquare",
-   "AlgebraicGeometry.Etale.ExternalRHom.CommutesWithOpenRestriction",
-   "AlgebraicGeometry.Etale.ExternalRHom.homFirst",
-   "AlgebraicGeometry.Etale.ExternalRHom.pullCommShift",
-   "AlgebraicGeometry.Etale.ExternalRHom.negativeHomShiftIsoOf",
-   "AlgebraicGeometry.Etale.ExternalRHom.HasSignedHomShift",
-   "AlgebraicGeometry.Etale.ExternalRHom.leftSource",
-   "AlgebraicGeometry.Etale.ExternalRHom.leftTarget",
-   "AlgebraicGeometry.Etale.ExternalRHom.rightSource",
-   "AlgebraicGeometry.Etale.ExternalRHom.rightTarget",
-   "AlgebraicGeometry.Etale.ExternalRHom.HasKoszulBraiding",
-   "AlgebraicGeometry.Etale.ExternalRHom.PreservesCoefficientCones",
    "AlgebraicGeometry.Etale.ExternalRHom.external_rhom_cone_pairing"
   ],
   "file": "lean/Sheaf/Paper/ExternalRHomConePairing.lean",
@@ -309,7 +194,7 @@
   "by": "N5",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Encoding note (maintainer review, 2026-10-18): the module works in the six-functor encoding of def-weil-pbc-derived-categories, D(X_et,A) = AlgebraicGeometry.Etale.DerivedCategoryModule A X with A : Type (u+1). In that encoding the derived internal Hom of def-pur-derived-internal-hom is the existing upstream closed structure MonoidalClosed.internalHom on DerivedCategoryModule A X (the same internal Hom as AlgebraicGeometry.Etale.derivedHom of WeilConjectures.SixFunctors.Etale.Derived.Hom), the right adjoint of the recorded derived tensor, built as R H_P from the Hom complex into K-injectives; the recorded CategoryTheory.derivedInternalHomOfUniverses is the same construction in the SheafOfModules encoding and is imported, not duplicated. The global Hom complex homComplex is Mathlib's HomComplex.Cochain with its Hom differential, i.e. global sections of the recorded def-pur-hom-complex. Constant-ring flatness and K-flatness are the recorded SheafOfModules.IsFlatOnSite / CochainComplex.IsKFlatIndependentCoefficients through the existing scalar realization (def-pur-etale-constant-scalar-realization) and, for A-complexes, the one-point site.",
+  "note": "The ordinary ModuleCat-valued sheaf encoding and canonical native closed tensor remain. The 76 original construction/predicate declarations retain their fully qualified names: the three generic evaluation factories are in ExternalRHomEvaluationNaturality and the remaining interface is in ExternalRHomConePairingDefs, all publicly re-exported. NativeBraidingAt and GenericExternal.NaturalityAt name the identical canonical braiding and four-variance equations with coefficient categories abstract, avoiding repeated expansion of chosen colimit data. The normalized scalar-realization bridge remains explicitly in the cochain-model obligation; no ringed encoding is substituted silently.",
   "fixed_by": "NT-stage2-cc-b0bc6905b"
  },
  "reviewed_lean": {
@@ -320,5 +205,15 @@
   "result": "fix",
   "note": "Read brief, packet, the full module (77 declarations), report, item node, all 20 statement deps and the 2 new nodes, plus the upstream closed structure (real data), derived braiding, tensor shift conventions, constant-sheaf comparisons and Mathlib leftUnshift/opposite triangulation. Every node clause has its Lean counterpart: D^+ hypotheses, bounded flat E,H, evaluation-normalized Hom models, chain normalization over all choices with the (-1)^{sq} sign and K-flat target T=a^{-1}N_K⊗b^{-1}N_L, four naturalities, open restriction, and both cone clauses with all three components fixed. The existential Hom shift is pinned by leftUnshift; I checked by hand that contravariant Hom with it is triangulated for Mathlib's opposite convention. Gates pass: one sorry (final theorem), no hollow defs, docstrings with source and blueprint, statement verbatim, declaration list exact, no pro-etale substitute. nt_compile reproduced clean twice (46.2 s, 50.7 s). Second reading is an honest self-check (dispatcher prohibition), accepted. FIX: (1) new node def-pur-derived-constant-pullback-comparison has the undefined TeX macro \\congLp; whole corrected JSON in fixes/. (2) fixes/<item>.lean-record.json adds a lean.note: RHom is the upstream MonoidalClosed internal Hom on DerivedCategoryModule (= Etale.derivedHom), and flatness goes through the recorded predicates via scalar realization and the one-point site. No substance faults."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5e28",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T214812-L-1858322",
+  "kind": "interface",
+  "note": "independent cc review: Delivered 13 modules (fresh sandbox, all compile in dependency order) and 7 nodes against the published item: pulledChainEvaluation old=new by rfl; HasKoszulBraiding/IsNatural/chainPairEvaluation bodies matched by explicit-instance #print and reading; signed-cones sorry checked as the item's last conjunct for the witness S; axioms only via named holes"
+ }
 }

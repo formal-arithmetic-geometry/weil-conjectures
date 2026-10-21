@@ -1,0 +1,118 @@
+{
+ "id": "lem-pur-external-rhom-adjunction-naturality",
+ "kind": "statement",
+ "title": "Naturality of the composite global tensor-Hom adjunction",
+ "statement": "Let C be a braided closed monoidal category, B a category, and c:B→C left adjoint to s:C→B. For an arrow c(Q)⊗E→K, define tr using the composite c followed by tensor-left-E adjunction and the braiding; define ev by the counit with the inverse braiding. The transpose is natural in Q and K and contravariantly natural in E. Evaluation is natural in both E and K: for f:E′→E and k:K→K′, pulling ev(E′,K′) through the induced global Hom morphism gives ev(E,K) after whiskering f and postcomposing k. These are the precise typed source, target, parameter and ev_naturality equations of the Lean module.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks Tags 08J9 and 0A90: adjunction, evaluation and tensor naturality; the categorical formal calculation is written out in Lean."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Expand the composite adjunction Hom equivalence. Adjunction naturality in the source and target proves parameter and target naturality. Curry naturality and braiding naturality prove coefficient naturality.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The transpose of evaluation is the identity by the counit identity. The transpose is injective since it is an adjunction bijection after an invertible braiding. Transpose both sides of evaluation naturality, apply the three preceding identities, and cancel the bijection.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+  "place": "Categorical naturality calculation in the external Hom argument of lem-pur-external-rhom-cone-pairing."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The external tensor product pairing on derived Hom is natural and commutes with shifts",
+   "results": "{\"t\": \"2026-10-20T17:05:19Z\", \"tool\": \"leanfinder\", \"query\": \"The external tensor product pairing on derived Hom is natural and commutes with shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift\", \"CategoryTheory.tensorRightHomEquiv_tensor\", \"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"CategoryTheory.tensorLeftHomEquiv_tensor\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.tensorRightHomEquiv_symm_naturality\"], \"digest\": \"d8933440b41f33be\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete external Hom comparison. Reuse native adjunction and braiding APIs for the formal categorical steps."
+  },
+  {
+   "tool": "grep",
+   "query": "braiding_naturality|homEquiv_naturality",
+   "results": "{\"t\": \"2026-10-20T17:05:20Z\", \"tool\": \"grep\", \"query\": \"braiding_naturality|homEquiv_naturality\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Epi.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/AlgebraicTopology/CechNerve.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/Algebra/Category/Grp/Adjunctions.lean\", \"Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean\"], \"digest\": \"d286bceabc117d7c\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete external Hom comparison. Reuse native adjunction and braiding APIs for the formal categorical steps."
+  },
+  {
+   "tool": "loogle",
+   "query": "MonoidalClosed.internalHomAdjunction₂",
+   "results": "{\"t\": \"2026-10-20T17:05:20Z\", \"tool\": \"loogle\", \"query\": \"MonoidalClosed.internalHomAdjunction₂\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'MonoidalClosed.internalHomAdjunction₂'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete external Hom comparison. Reuse native adjunction and braiding APIs for the formal categorical steps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived tensor Hom evaluation pairing is natural, computed by Hom cochains into K-injectives, compatible with shifts and braidings",
+   "results": "{\"t\": \"2026-10-20T18:06:29Z\", \"tool\": \"leansearch\", \"query\": \"A derived tensor Hom evaluation pairing is natural, computed by Hom cochains into K-injectives, compatible with shifts and braidings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ihom.ev_naturality_assoc\", \"CategoryTheory.ihom.ev_naturality\", \"CategoryTheory.tensorLeftHomEquiv_naturality\", \"CategoryTheory.ihom.coev_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality\", \"CategoryTheory.tensorRightHomEquiv_naturality\", \"CategoryTheory.ihom.ev\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality\"], \"digest\": \"ef75cc8a1cf4f69e\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete external Hom comparison. Reuse native adjunction and braiding APIs for the formal categorical steps."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExternalRHomConePairing",
+  "date": "2026-10-21",
+  "group": "J7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-external-rhom-cone-pairing",
+   "place": "Step 5: naturality of the composite adjunction transpose and its evaluation.",
+   "via": [
+    "lem-pur-supported-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExternalRHomAdjunctionNaturality",
+  "file": "lean/Sheaf/Paper/ExternalRHomAdjunctionNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.ExternalRHom.GenericTranspose.ev_naturality",
+  "statement": "theorem ev_naturality {E E' K K' : C} (f : E' ⟶ E) (k : K ⟶ K') :\n    (c.map (s.map ((MonoidalClosed.pre f).app K) ≫\n      s.map ((ihom E').map k)) ▷ E') ≫ ev a E' K' =\n    (c.obj (s.obj ((ihom E).obj K)) ◁ f) ≫ ev a E K ≫ k",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ExternalRHom.GenericTranspose.tr",
+   "AlgebraicGeometry.Etale.ExternalRHom.GenericTranspose.source",
+   "AlgebraicGeometry.Etale.ExternalRHom.GenericTranspose.target",
+   "AlgebraicGeometry.Etale.ExternalRHom.GenericTranspose.parameter",
+   "AlgebraicGeometry.Etale.ExternalRHom.GenericTranspose.ev",
+   "AlgebraicGeometry.Etale.ExternalRHom.GenericTranspose.ev_naturality"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5e28",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T214812-L-1858322",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5e28",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T214812-L-1858322",
+  "kind": "interface",
+  "note": "independent cc review: Delivered 13 modules (fresh sandbox, all compile in dependency order) and 7 nodes against the published item: pulledChainEvaluation old=new by rfl; HasKoszulBraiding/IsNatural/chainPairEvaluation bodies matched by explicit-instance #print and reading; signed-cones sorry checked as the item's last conjunct for the witness S; axioms only via named holes"
+ }
+}

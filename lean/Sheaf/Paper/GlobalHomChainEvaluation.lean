@@ -5,7 +5,7 @@ Authors: SHEAF group V5
 -/
 module
 
-public import Sheaf.Paper.ExternalRHomConePairing
+public import Sheaf.Paper.ExternalRHomConePairingDefs
 import WeilConjectures.Algebra.Homology.InternalHom
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 

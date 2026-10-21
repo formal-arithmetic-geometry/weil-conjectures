@@ -5,7 +5,7 @@ Authors: SHEAF group V5
 -/
 module
 
-public import Sheaf.Paper.ExternalRHomConePairing
+public import Sheaf.Paper.ExternalRHomConePairingDefs
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import all Sheaf.Algebra.Homology.NilpotentDerivedUpperBound
 import Sheaf.Algebra.Homology.RingIsomorphismTensorTransport

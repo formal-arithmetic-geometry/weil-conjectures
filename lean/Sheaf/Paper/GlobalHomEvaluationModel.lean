@@ -5,7 +5,7 @@ Authors: SHEAF group V5
 -/
 module
 
-public import Sheaf.Paper.ExternalRHomConePairing
+public import Sheaf.Paper.ExternalRHomConePairingDefs
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel
 import Sheaf.SixFunctors.ResolvingDerivedAdjunction

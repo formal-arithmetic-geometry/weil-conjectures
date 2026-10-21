@@ -5,7 +5,7 @@ Authors: SHEAF group V5
 -/
 module
 
-public import Sheaf.Paper.ExternalRHomConePairing
+public import Sheaf.Paper.ExternalRHomConePairingDefs
 import Sheaf.AlgebraicGeometry.EtaleConstantModuleFlat
 import Sheaf.AlgebraicGeometry.EtaleConstantModuleTensor
 import Sheaf.Algebra.Homology.FlatTermKFlatFunctor
