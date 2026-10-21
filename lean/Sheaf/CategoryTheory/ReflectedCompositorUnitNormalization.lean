@@ -59,6 +59,26 @@ def unitComparison (P : ObjectProperty A₀) (Q : ObjectProperty A₁) (L : A₀
     P.ι ⋙ L ⟶ (P.ι ⋙ L ⋙ C) ⋙ Q.ι :=
   whiskerLeft (P.ι ⋙ L) r.unit
 
+private theorem map_unit (P : ObjectProperty A₀) (Q : ObjectProperty A₁)
+    {L : A₀ ⥤ A₁} {R : A₁ ⥤ A₀} (adj : L ⊣ R)
+    {C : A₁ ⥤ Q.FullSubcategory} (r : C ⊣ Q.ι)
+    (hR : ∀ N : Q.FullSubcategory, P (R.obj N.obj)) (M : P.FullSubcategory) :
+    P.ι.map ((adjunction P Q adj r hR).unit.app M) =
+      adj.unit.app M.obj ≫ R.map (r.unit.app (L.obj M.obj)) := by
+  rw [adjunction, Adjunction.map_restrictFullyFaithful_unit_app]
+  simp [Adjunction.comp_unit_app]
+
+private theorem map_homEquiv (P : ObjectProperty A₀) (Q : ObjectProperty A₁)
+    {L : A₀ ⥤ A₁} {R : A₁ ⥤ A₀} (adj : L ⊣ R)
+    {C : A₁ ⥤ Q.FullSubcategory} (r : C ⊣ Q.ι)
+    (hR : ∀ N : Q.FullSubcategory, P (R.obj N.obj))
+    (M : P.FullSubcategory) (N : Q.FullSubcategory)
+    (f : (P.ι ⋙ L ⋙ C).obj M ⟶ N) :
+    P.ι.map ((adjunction P Q adj r hR).homEquiv M N f) =
+      adj.homEquiv M.obj N.obj (r.unit.app (L.obj M.obj) ≫ Q.ι.map f) := by
+  rw [Adjunction.homEquiv_unit, Functor.map_comp, map_unit]
+  simp [Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
+
 section Triple
 
 variable (P₀ : ObjectProperty A₀) (P₁ : ObjectProperty A₁) (P₂ : ObjectProperty A₂)
@@ -134,7 +154,66 @@ theorem unit_normalization
           (P₂.ι.obj ((P₀.ι ⋙ L₀₂ ⋙ C₂).obj M))).symm
           (P₀.ι.map ((adjunction P₀ P₂ adj₀₂ r₂ h₂₀).unit.app M) ≫
             d.hom.app (P₂.ι.obj ((P₀.ι ⋙ L₀₂ ⋙ C₂).obj M))) := by
-  sorry
+  let a := (conjugateIsoEquiv adj₀₂ (adj₀₁.comp adj₁₂)).symm d
+  let b := compositor P₀ P₁ P₂ adj₀₁ adj₁₂ adj₀₂ r₁ r₂ h₁₀ h₂₁ h₂₀ d
+  let e₀₁ := adjunction P₀ P₁ adj₀₁ r₁ h₁₀
+  let e₁₂ := adjunction P₁ P₂ adj₁₂ r₂ h₂₁
+  let e₀₂ := adjunction P₀ P₂ adj₀₂ r₂ h₂₀
+  -- Precomposing with the two reflector units gives the reflected double transpose.
+  have ht (M : P₀.FullSubcategory) (N : P₂.FullSubcategory)
+      (t : ((P₀.ι ⋙ L₀₁ ⋙ C₁) ⋙ (P₁.ι ⋙ L₁₂ ⋙ C₂)).obj M ⟶ N) :
+      (adj₀₁.comp adj₁₂).homEquiv M.obj N.obj
+        (L₁₂.map (r₁.unit.app (L₀₁.obj M.obj)) ≫
+          r₂.unit.app (L₁₂.obj (P₁.ι.obj (C₁.obj (L₀₁.obj M.obj)))) ≫ P₂.ι.map t) =
+        P₀.ι.map ((e₀₁.comp e₁₂).homEquiv M N t) := by
+    rw [Adjunction.comp_homEquiv, Adjunction.comp_homEquiv]
+    change adj₀₁.homEquiv M.obj (R₂₁.obj N.obj)
+        (adj₁₂.homEquiv (L₀₁.obj M.obj) N.obj
+          (L₁₂.map (r₁.unit.app (L₀₁.obj M.obj)) ≫
+            (r₂.unit.app (L₁₂.obj (P₁.ι.obj (C₁.obj (L₀₁.obj M.obj)))) ≫
+              P₂.ι.map t))) =
+      P₀.ι.map (e₀₁.homEquiv M _ (e₁₂.homEquiv _ N t))
+    rw [adj₁₂.homEquiv_naturality_left]
+    erw [← map_homEquiv P₁ P₂ adj₁₂ r₂ h₂₁ ((P₀.ι ⋙ L₀₁ ⋙ C₁).obj M) N t]
+    exact (map_homEquiv P₀ P₁ adj₀₁ r₁ h₁₀ M _ (e₁₂.homEquiv _ N t)).symm
+  -- Ambient conjugacy and naturality of d give the transpose of the right side.
+  have ha (M : P₀.FullSubcategory) :
+      (adj₀₁.comp adj₁₂).homEquiv M.obj (P₂.ι.obj ((P₀.ι ⋙ L₀₂ ⋙ C₂).obj M))
+        (a.hom.app M.obj ≫ r₂.unit.app (L₀₂.obj M.obj)) =
+        P₀.ι.map (e₀₂.unit.app M) ≫
+          d.hom.app (P₂.ι.obj ((P₀.ι ⋙ L₀₂ ⋙ C₂).obj M)) := by
+    rw [Adjunction.homEquiv_naturality_right, Adjunction.homEquiv_unit]
+    change ((adj₀₁.comp adj₁₂).unit.app M.obj ≫
+        (R₂₁ ⋙ R₁₀).map (((conjugateEquiv adj₀₂ (adj₀₁.comp adj₁₂)).symm
+          d.hom).app M.obj)) ≫ _ = _
+    rw [← unit_conjugateEquiv_symm]
+    rw [Category.assoc, ← d.hom.naturality]
+    rw [map_unit]
+    simp only [Category.assoc]
+  -- Reflected conjugacy gives the same transpose for the reflected compositor.
+  have hb (M : P₀.FullSubcategory) :
+      (e₀₁.comp e₁₂).homEquiv M ((P₀.ι ⋙ L₀₂ ⋙ C₂).obj M) (b.hom.app M) =
+        e₀₂.unit.app M ≫ (rightIso P₀ P₁ P₂ h₁₀ h₂₁ h₂₀ d).hom.app
+          ((P₀.ι ⋙ L₀₂ ⋙ C₂).obj M) := by
+    rw [Adjunction.homEquiv_unit]
+    exact (unit_conjugateEquiv_symm e₀₂ (e₀₁.comp e₁₂)
+      (rightIso P₀ P₁ P₂ h₁₀ h₂₁ h₂₀ d).hom M).symm
+  constructor
+  · ext M
+    apply ((adj₀₁.comp adj₁₂).homEquiv M.obj _).injective
+    change (adj₀₁.comp adj₁₂).homEquiv M.obj _
+        ((L₁₂.map (r₁.unit.app (L₀₁.obj M.obj)) ≫
+          r₂.unit.app (L₁₂.obj (P₁.ι.obj (C₁.obj (L₀₁.obj M.obj))))) ≫
+          P₂.ι.map (b.hom.app M)) =
+      (adj₀₁.comp adj₁₂).homEquiv M.obj _
+        (a.hom.app M.obj ≫ r₂.unit.app (L₀₂.obj M.obj))
+    erw [Category.assoc, ht M _ (b.hom.app M), hb, ha, Functor.map_comp]
+    congr 1
+    change P₀.ι.map ((rightIso P₀ P₁ P₂ h₁₀ h₂₁ h₂₀ d).hom.app _) = _
+    rw [rightIso, Functor.fullyFaithfulCancelRight_hom_app, Functor.map_preimage]
+    rfl
+  · intro M
+    exact ((adj₀₁.comp adj₁₂).homEquiv M.obj _).eq_symm_apply.mpr (ha M)
 
 end Triple
 
