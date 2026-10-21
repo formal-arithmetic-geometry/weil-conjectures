@@ -1,0 +1,262 @@
+{
+ "id": "lem-pur-supported-exterior-product-boundary",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kunneth-supported",
+   "place": "Proof paragraphs 1 and 3: coefficient-Hom identification, the evaluation cone pairing, and the normalized boundary calculation (old steps 3–10 of the localization refinement).",
+   "via": [
+    "lem-pur-supported-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Supported exterior products commute with connecting maps in both variables",
+ "statement": "Let k be an algebraically closed field, A a finite commutative ring, X,Y separated finite type k-schemes, K∈D⁺(X_et,A), L∈D⁺(Y_et,A), and assume their derived external product on P=X×_kY is bounded below. For every closed B,C⊆X,D⊆Y, the normalized support boundary of (X,B,C,K), tensored on the right with RΓ_D(Y,L), commutes with the specified supported exterior products after the product-intersection and product-open identifications [def-pur-supported-localization-comparisons]. For every closed B⊆X,C,D⊆Y the analogous boundary of (Y,D,C,L), tensored on the left with RΓ_B(X,K), commutes with those products. Both equations use the shift comparisons of the native exact tensor functors, hence no extra first-variable sign and the (-1)^degree(first factor) second-variable sign. These are only the two connecting-map equations, not an assertion of the support-inclusion square, open-restriction square or of a triangle morphism.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XP, 095L and 0F1E; supported sections and the evaluation-normalized supported pairing."
+ },
+ "stmt_deps": [
+  "def-pur-support-cohomology",
+  "def-pur-supported-exterior-product",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-derived-categories",
+  "def-weil-triangulated-category",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-weil-abstract-derived-category",
+  "def-pur-supported-localization-comparisons",
+  "lem-pur-support-restriction-triangle"
+ ],
+ "proof": [
+  {
+   "text": "Use coefficient sheaves to specify the resolution diagram. For a closed immersion $i:Z\\hookrightarrow T$ put $S_Z=i_*A_Z$, with $A_Z$ the constant coefficient sheaf. For a bounded-below injective representative $I$ of $H$ supplied by [lem-weil-pbc-dplus-injective-representative], the complex $\\operatorname{Hom}^{\\bullet}_T(S_Z,I)$ computes $R\\Gamma_Z(T,H)$. Indeed [lem-weil-pbc-open-closed-short-exact] for $A_T$ gives $0\\to j_!A_{T\\setminus Z}\\to A_T\\to S_Z\\to0$. Applying $\\operatorname{Hom}_T(-,I^n)$ is exact because $I^n$ is injective. By [lem-weil-pbc-extension-by-zero-adjunction], its first kernel is exactly $\\ker(I^n(T)\\to I^n(T\\setminus Z))=\\Gamma_Z(T,I^n)$. These identifications commute with differentials. Thus [lem-weil-pbc-right-derived-plus-injective] gives the asserted complex-level supported-Hom identification. Here and below global Hom complexes mean sections of the Hom complex of [def-pur-hom-complex]; a K-injective second argument is the derived Hom convention of [def-pur-derived-internal-hom]. More explicitly the ordinary comparison sends f:C_Z(A)→F to (adj.homEquiv f)(1). Canceling the monic inclusion into global sections proves A-linearity of Γ_Z; the unit formula makes this comparison A-linear and natural in F. Cochain.fromSingleEquiv at p=0 identifies the Hom differential with postcomposition by d_I, producing the required complex comparison.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP (section-cohomology-support); Tag 095L (lemma-ses-associated-to-open); supported-Hom model of the kernel of restriction"
+   }
+  },
+  {
+   "text": "For $j:U\\hookrightarrow X$, set $E_0=S_{B\\cap C}$, $E_1=S_B$, $E_2=j_!S_{B\\cap U}$, where $S_Z=i_*A_Z$ for its closed immersion into its ambient scheme. Apply [lem-weil-pbc-open-closed-short-exact] to $S_B$ and $(C,U)$. This identifies its open and closed terms with $E_2$ and $E_0$. Here is the check of the identifications: a closed immersion is finite [lem-weil-pbc-closed-immersion-finite], so [lemma-weil-pbc-finite-stalk-formula] and [lem-weil-pbc-constant-sheaf-geometric-stalk] give stalk $A$ on the closed support and zero off it. Inverse-image stalks are [lem-weil-pbc-global-sections-stalk-comparison]. The restriction maps on nonzero constant stalks are the identity. The induced comparison maps are therefore isomorphisms by [lemma-weil-pbc-geometric-stalk-conservative]; for the open term use the presheaf construction [def-weil-pbc-extension-by-zero] and the counit specified by [lem-weil-pbc-extension-by-zero-adjunction]. Thus we have the specified short exact coefficient sequence $0\\to E_2\\to E_1\\to E_0\\to0$.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-global-sections-stalk-comparison",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095L (lemma-ses-associated-to-open); Tag 04FX (lemma-stalk-pushforward-closed-immersion); coefficient support sequence and its external tensor product"
+   }
+  },
+  {
+   "text": "Every constant rank-one coefficient sheaf is flat, because tensoring with it is the identity. The closed-direct-image and open-extension clauses of [lem-sfb-open-closed-flatness], applied with the finite ring $A$ on the small etale sites, make $S_D,E_0,E_1,E_2$ flat. Their bounded complexes and cones are K-flat by [lem-kun-kflat-criteria]. On $P=X\\times_kY$ its terms identify with $j_{P!}S_{(B\\cap U)\\times_kD}$, $S_{B\\times_kD}$, and $S_{(B\\cap C)\\times_kD}$. To verify the maps as well as the objects, take the inverse of the coefficient comparison $\\theta$ specified in [def-pur-supported-exterior-product] with both module inputs $A$; for the open term extend its restriction by the open counit. By [lem-pod-etale-stalk-tensor-scalar] these comparisons on each geometric stalk are the multiplication $A\\otimes_A A\\to A$ when both support conditions hold and the map between zero modules otherwise. They are isomorphisms by [lemma-weil-pbc-geometric-stalk-conservative]. The coefficient sequence arrows restrict constants identically where nonzero, so the same comparisons identify the arrows with the product coefficient sequence arrows. Taking $B=X$ in this coefficient comparison identifies $p_Y^{-1}S_D$ with $S_{X\\times_kD}$, hence it too is flat by [lem-sfb-open-closed-flatness]. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact], followed by tensoring with this flat sheaf, therefore preserves the short exact sequence of step 4.",
+   "uses": [
+    "lem-sfb-open-closed-flatness",
+    "lem-kun-kflat-criteria",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pur-supported-exterior-product",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095L (lemma-ses-associated-to-open); Tag 04FX (lemma-stalk-pushforward-closed-immersion); coefficient support sequence and its external tensor product"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-external-rhom-cone-pairing] with $a=p_X$, $b=p_Y$, the bounded flat coefficient complexes $E_i$ of steps 4–5, and $H=S_D$. Its hypotheses hold: $K,L$ are bounded below by assumption, $F$ is bounded below by the explicit hypothesis of the item, and all coefficient complexes and their cones are bounded flat. Writing $\\mathsf H_T(E,H)=R\\operatorname{Hom}_T(E,H)$, its specified maps are\n$$\\lambda_{E_i,S_D}:\\mathsf H_X(E_i,K)\\otimes_A^L\\mathsf H_Y(S_D,L)\\to\\mathsf H_P(p_X^{-1}E_i\\otimes_A^Lp_Y^{-1}S_D,F).$$\nThe cited lemma states that all three evaluation maps form a morphism of the contravariant coefficient-Hom triangles, with their connecting maps; it supplies the resolution-independent cone comparison rather than merely a completion of two squares. The degreewise convention is $(f\\otimes g)(e\\otimes d)=(-1)^{\\deg(g)\\deg(e)}f(e)\\otimes g(d)$.",
+   "uses": [
+    "lem-pur-external-rhom-cone-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated); external evaluation cone refinement"
+   }
+  },
+  {
+   "text": "For $E_0,E_1$, step 3 identifies the Hom objects with supported sections, and step 5 identifies the product coefficient objects. These comparisons identify $\\lambda_{E_i,S_D}$ with the specified supported exterior product [def-pur-supported-exterior-product]. Indeed $S_Z\\otimes_A\\underline M=C_i(M)$: multiplication of constant sections is an isomorphism on the stalks computed in step 4 and commutes with the quotient maps $e_i$. The Hom adjunction of step 3 is normalized by precomposition with $e_i$, exactly as in the cited definition. Thus its evaluation counit is the definition's $\\epsilon_i$. Under these comparisons, the transpose defining $\\lambda$ is the composite $\\theta^L$ followed by the pulled-back $\\epsilon_i\\otimes\\epsilon_d$ defining $\\kappa$, since their precompositions with the coefficient quotient send $s\\otimes t$ to $p_X^*s\\otimes p_Y^*t$. Uniqueness of the quotient factorization and of the adjoint proves equality of these morphisms, and K-flat descent in the cited definition preserves that equality. For $E_2=j_!S_{B\\cap U}$ the same identification is made on $U$ and then transported by [lem-weil-pbc-extension-by-zero-adjunction]. Its product ambient is $U\\times_kY$, with precisely the comparison of [def-pur-supported-localization-comparisons]. This identifies the third specified map as well.",
+   "uses": [
+    "def-pur-supported-exterior-product",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-pur-supported-localization-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1E (remark-define-kunneth-map); comparison of the two evaluation normalizations"
+   }
+  },
+  {
+   "text": "Applying $\\operatorname{Hom}^{\\bullet}_X(-,I)$ to the coefficient sequence in steps 4–5 gives the degreewise short exact sequence $0\\to\\Gamma_{B\\cap C}(X,I)\\to\\Gamma_B(X,I)\\to\\Gamma_{B\\cap U}(U,I|_U)\\to0$: step 3 identifies its first two complexes, and [lem-weil-pbc-extension-by-zero-adjunction] identifies the third. Restriction of $I$ to $U$ is injective by [lem-weil-pbc-etale-restriction-injectives], with $j$ etale by [lem-weil-pbc-open-immersion-etale]. Therefore [lem-weil-pbc-right-derived-plus-injective] identifies its third complex with the required derived sections. The product coefficient sequence gives exactly the corresponding product sequence by the same Hom-kernel identification of step 3, applied on $P$; its terms are those listed in step 5, with open ambient scheme $U\\times_kY$. By [lem-weil-pbc-complex-ses-triangle], these coefficient-Hom triangles have the actual connecting maps of [lem-pur-support-restriction-triangle]. Step 6 gives a morphism between these triangles after exact derived tensoring, so it proves the boundary square for the specified three exterior products. No claim that tensoring an arbitrary injective section complex is exact is needed: on complexes of ordinary $A$-modules one may resolve the fixed tensor factor by a K-flat complex with flat terms [lem-pc-kflat-resolution], and the direct-sum total tensor then preserves the degreewise short exact sequence, because every summand is tensor with a flat module.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pur-support-restriction-triangle",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor); identify the coefficient-Hom sequence with the support-restriction sequence and its boundary"
+   }
+  },
+  {
+   "text": "On a total tensor complex the differential on a (p,q)-summand is d_E⊗1+(-1)^p1⊗d_F, by [def-kun-derived-tensor]. The canonical identification N[1]⊗ᴸ_A M≅(N⊗ᴸ_A M)[1] therefore sends x⊗y to x⊗y, whereas M⊗ᴸ_A N[1]≅(M⊗ᴸ_A N)[1] sends x⊗y to (-1)^{deg(x)}x⊗y. These are the shift identifications used in the boundary square; the displayed formulas follow by checking the two differentials on homogeneous tensors. This also shows that no sign is hidden in the first-variable formulation. Explicitly, for $x\\in M^{p+1}$ regarded as degree $p$ in $M[1]$, the source differential on $x\\otimes y$ is $-d_Mx\\otimes y+(-1)^p x\\otimes d_Ny$, which is the differential of $(M\\otimes N)[1]$. For $x\\in M^p$ and $y\\in N^{q+1}$ regarded as degree $q$ in $N[1]$, the source differential is $d_Mx\\otimes y-(-1)^p x\\otimes d_Ny$; multiplying by $(-1)^p$ in the target, and by $(-1)^{p+1}$ on the $d_Mx$ term, yields exactly the negative total differential in the shifted target.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), with its preceding construction and following sign-symmetry paragraph; direct computation with the total tensor differential and cochain shift"
+   }
+  },
+  {
+   "text": "For the second-variable clause put $V=Y\\setminus C'$, $N=R\\Gamma_{D'}(X,K)$ and $E'_0=S_{B'\\cap C'}$, $E'_1=S_{B'}$, $E'_2=j_{V!}S_{B'\\cap V}$ on $Y$. The sequence $0\\to E'_2\\to E'_1\\to E'_0\\to0$ is [lem-weil-pbc-open-closed-short-exact] for $S_{B'}$ and $(C',V)$; its stalk maps are the identity on $B'\\cap C'$ and zero off that support, as verified in steps 4–5. Tensoring its pullback to $P$ with $p_X^*S_{D'}$ gives the product coefficient sequence with terms $j_{X\\times V,!}S_{D'\\times(B'\\cap V)}$, $S_{D'\\times B'}$, and $S_{D'\\times(B'\\cap C')}$. Apply the evaluation construction of steps 6–7 with the fixed first coefficient sheaf $S_{D'}$ and the varying second coefficient $E'$. Evaluation at constant sections gives respectively $\\kappa^{D',B'\\cap C'}_{K,L}$, $\\kappa^{D',B'}_{K,L}$ and $\\kappa^{D',B'\\cap V}_{K,L|_V}$ [def-pur-supported-exterior-product]; the off-diagonal entry of a cone is now in the second tensor factor, so the total differential contributes $(-1)^{\\deg(x)}$, exactly the second shift identification calculated in step 9. Applying Hom to the two coefficient sequences identifies the rows with [lem-pur-support-restriction-triangle] on $Y$ and on $P$ by step 8 and [lem-weil-pbc-complex-ses-triangle]. The left tensor functor is exact: the degreewise symmetry $x\\otimes y\\mapsto(-1)^{\\deg(x)\\deg(y)}y\\otimes x$ from [def-kun-derived-tensor] identifies it with the right tensor functor of [lem-pc-derived-tensor-second-factor-functor] (the sign commutes with the total differential and carries K-flat quasi-isomorphisms to quasi-isomorphisms). This is the entire second-variable morphism, including its boundary square and its third ambient scheme $X\\times_kV$.",
+   "uses": [
+    "lem-pur-external-rhom-cone-pairing",
+    "lem-weil-pbc-open-closed-short-exact",
+    "def-pur-supported-exterior-product",
+    "lem-pur-support-restriction-triangle",
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-kun-derived-tensor",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP (section-cohomology-support), Tag 095L (lemma-ses-associated-to-open), Tag 0F1E (remark-define-kunneth-map); explicit second-variable coefficient sequence and evaluation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-pur-hom-complex",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-global-sections-stalk-comparison",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-extension-by-zero",
+  "lem-sfb-open-closed-flatness",
+  "lem-kun-kflat-criteria",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pur-supported-exterior-product",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pur-external-rhom-cone-pairing",
+  "def-pur-supported-localization-comparisons",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pur-support-restriction-triangle",
+  "lem-pc-kflat-resolution",
+  "def-kun-derived-tensor",
+  "def-weil-abstract-derived-category",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proof paragraphs 1 and 3: coefficient-Hom identification, the evaluation cone pairing, and the normalized boundary calculation (old steps 3–10 of the localization refinement)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The external cup product of sections with closed support commutes with the connecting homomorphism in a localization triangle",
+   "results": "{\"t\": \"2026-10-21T02:24:41Z\", \"tool\": \"leanfinder\", \"query\": \"The external cup product of sections with closed support commutes with the connecting homomorphism in a localization triangle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequence\\u03b4_singleTriangle_apply\", \"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequence\\u03b4_singleTriangle_apply\", \"CochainComplex.homologySequence\\u03b4_quotient_mapTriangle_obj_assoc\", \"CochainComplex.homologySequence\\u03b4_quotient_mapTriangle_obj\", \"DerivedCategory.triangleOfSES\\u03b4\", \"CochainComplex.cm5b.i_f_comp_assoc\", \"CochainComplex.mappingCone.homologySequence\\u03b4_triangleh\", \"DerivedCategory.HomologySequence.comp_\\u03b4_assoc\"], \"digest\": \"379604d91b26f581\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match; generic totalization, adjunction and localization APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorComparison\"",
+   "results": "{\"t\": \"2026-10-21T02:32:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapBifunctorComparison\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match; generic totalization, adjunction and localization APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived₂_ext|mapBifunctorComparisonNatTrans",
+   "results": "{\"t\": \"2026-10-21T02:30:57Z\", \"tool\": \"grep\", \"query\": \"leftDerived\\u2082_ext|mapBifunctorComparisonNatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match; generic totalization, adjunction and localization APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The supported exterior product commutes with the boundary map of the localization triangle, including the tensor shift sign in the second variable",
+   "results": "{\"t\": \"2026-10-21T02:52:50Z\", \"tool\": \"leansearch\", \"query\": \"The supported exterior product commutes with the boundary map of the localization triangle, including the tensor shift sign in the second variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.instIsLocalizedModuleTensorProductMap\", \"ExteriorAlgebra.ι_add_mul_swap\", \"CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt\", \"ExteriorAlgebra.ιMulti\", \"exteriorPower.map_comp\", \"ExteriorAlgebra.map_comp_ι\", \"ExteriorAlgebra.map_comp_ιMulti\", \"CategoryTheory.Functor.instCommShiftTriangleMapTriangleInt\"], \"digest\": \"20e863c8a60b1b04\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Generic tensor naturality, derived-functor naturality and triangle mapping APIs do not identify the normalized supported pairing and its connecting maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.AlgebraicGeometry.SupportedProductLocalization",
+  "by": "worker",
+  "date": "2026-10-21",
+  "group": "H3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedExteriorProductBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedExteriorProductBoundary.lean",
+  "declaration": "AlgebraicGeometry.Etale.supportedExteriorProduct_boundary",
+  "statement": "theorem supportedExteriorProduct_boundary (k : Type u) [Field k] [IsAlgClosed k]\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))\n    [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]\n    [LocallyOfFiniteType g] [QuasiCompact g] [IsSeparated g]\n    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (_hF : ∃ n : ℤ,\n      (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj).IsGE n) :\n    (∀ {B C D : Scheme.{u}} (b : B ⟶ X) (c : C ⟶ X) (d : D ⟶ Y)\n      [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d],\n      ((tensorRight ((supportedSectionsDerived A d).obj L.obj)).mapTriangle.obj\n          (normalizedSupportTriangle A b c K.obj)).mor₃ ≫\n        (supportedExteriorProduct A f g (supportIntersection b c) d K.obj L.obj ≫\n          (derivedSupportCongruence A\n            (supportedProductImmersion f g (supportIntersection b c) d)\n            (supportIntersection (supportedProductImmersion f g b d)\n              (supportedProductImmersion f g c (𝟙 Y)))\n            (supportedFirstIntersection_complement f g b c d)).hom.app\n              (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj))⟦(1 : ℤ)⟧' =\n      (supportedExteriorProduct A (c.openComplement.ι ≫ f) g\n          (supportOnOpen b c.openComplement) d\n          ((upperStar (ModuleCat.{u + 1} A) c.openComplement.ι).mapDerivedCategory.obj K.obj)\n          L.obj ≫ (supportedFirstLocalizationThirdIso A f g b c d K.obj L.obj).inv) ≫\n        (normalizedSupportTriangle A (supportedProductImmersion f g b d)\n          (supportedProductImmersion f g c (𝟙 Y))\n          (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj)).mor₃) ∧\n    (∀ {B C D : Scheme.{u}} (b : B ⟶ X) (c : C ⟶ Y) (d : D ⟶ Y)\n      [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d],\n      ((tensorLeft ((supportedSectionsDerived A b).obj K.obj)).mapTriangle.obj\n          (normalizedSupportTriangle A d c L.obj)).mor₃ ≫\n        (supportedExteriorProduct A f g b (supportIntersection d c) K.obj L.obj ≫\n          (derivedSupportCongruence A\n            (supportedProductImmersion f g b (supportIntersection d c))\n            (supportIntersection (supportedProductImmersion f g b d)\n              (supportedProductImmersion f g (𝟙 X) c))\n            (supportedSecondIntersection_complement f g b c d)).hom.app\n              (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj))⟦(1 : ℤ)⟧' =\n      (supportedExteriorProduct A f (c.openComplement.ι ≫ g) b\n          (supportOnOpen d c.openComplement) K.obj\n          ((upperStar (ModuleCat.{u + 1} A) c.openComplement.ι).mapDerivedCategory.obj L.obj) ≫\n        (supportedSecondLocalizationThirdIso A f g b c d K.obj L.obj).inv) ≫\n        (normalizedSupportTriangle A (supportedProductImmersion f g b d)\n          (supportedProductImmersion f g (𝟙 X) c)\n          (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj)).mor₃)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261021T120411-L-3883305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261021T120411-L-3883305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

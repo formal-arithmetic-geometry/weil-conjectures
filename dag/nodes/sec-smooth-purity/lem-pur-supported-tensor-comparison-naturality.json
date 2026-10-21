@@ -1,0 +1,130 @@
+{
+ "id": "lem-pur-supported-tensor-comparison-naturality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kunneth-supported",
+   "place": "Proof paragraphs 1 and 3: naturality of the normalized coefficient tensor comparison used in the support-inclusion square.",
+   "via": [
+    "lem-pur-supported-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived coefficient tensor comparisons are natural in coefficient maps",
+ "statement": "Let C and D be monoidal closed Grothendieck abelian categories with braided tensor, functorial flat resolutions and unbounded derived categories [def-weil-abstract-derived-category]. Let G,F1,F2,Gprime,F1prime,F2prime:C→D be additive exact functors, with G,Gprime,F2 left adjoints and F2 preserving flat objects. Let τ:G(M⊗N)→F1(M)⊗F2(N) and τprime be natural pairings with derived comparisons t,tprime normalized on signed total complexes as in [def-pur-supported-exterior-product]. For natural maps a0:Gprime→G, a1:F1prime→F1 and a2:F2prime→F2, assume a0(M⊗N) τ(M,N)=τprime(M,N)(a1(M)⊗a2(N)) for all ordinary M,N. Then D(a0)(M⊗N)t(M,N)=tprime(M,N)(D(a1)(M)⊗D(a2)(N)) for all derived M,N. Exact derived maps have the normalization of [lem-pur-exact-derived-mate].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XP, 095L and 0F1E; supported sections and the evaluation-normalized supported pairing."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pur-supported-exterior-product",
+  "lem-pur-exact-derived-mate"
+ ],
+ "proof": [
+  {
+   "text": "Lift the ordinary square to cochain complexes. Precompose with each total-tensor bidegree summand; naturality of a0 and the ordinary square give equality. The coproduct universal property proves equality on the total complex.",
+   "uses": [
+    "def-pur-supported-exterior-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package t and tprime as natural transformations. The mixed derived tensor bifunctor is left derived because F2 preserves flat objects. Its universal property reduces equality of the two derived composites to equality after the localization comparison.",
+   "uses": [
+    "def-pur-supported-exterior-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the exact-map factorization on Q of a complex to move each coefficient map through the normalization. The remaining equation is the complex square just proved.",
+   "uses": [
+    "lem-pur-exact-derived-mate",
+    "lem-pur-supported-coefficient-derived-open-mate"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-supported-exterior-product",
+  "lem-pur-exact-derived-mate",
+  "lem-pur-supported-coefficient-derived-open-mate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proof paragraphs 1 and 3: naturality of the normalized coefficient tensor comparison used in the support-inclusion square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A tensor comparison between three exact functors descends uniquely to derived categories and is natural in transformations of the coefficient functors",
+   "results": "{\"t\": \"2026-10-21T02:29:21Z\", \"tool\": \"leanfinder\", \"query\": \"A tensor comparison between three exact functors descends uniquely to derived categories and is natural in transformations of the coefficient functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\"], \"digest\": \"245f5ed2120cb4e7\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match; generic totalization, adjunction and localization APIs are used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorComparison\"",
+   "results": "{\"t\": \"2026-10-21T02:32:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapBifunctorComparison\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match; generic totalization, adjunction and localization APIs are used."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived₂_ext|mapBifunctorComparisonNatTrans",
+   "results": "{\"t\": \"2026-10-21T02:30:57Z\", \"tool\": \"grep\", \"query\": \"leftDerived\\u2082_ext|mapBifunctorComparisonNatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match; generic totalization, adjunction and localization APIs are used."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor comparison of exact functors is natural with respect to natural transformations of all three functors",
+   "results": "{\"t\": \"2026-10-21T02:52:51Z\", \"tool\": \"leansearch\", \"query\": \"The derived tensor comparison of exact functors is natural with respect to natural transformations of all three functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.tensor_naturality\", \"CategoryTheory.Functor.leftDerivedNatIso\", \"CategoryTheory.Functor.leftDerivedNatTrans_comp\", \"CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatTrans\", \"CategoryTheory.ExactFunctor.whiskeringRight_map_app\", \"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.Functor.rightDerivedNatIso\", \"CategoryTheory.Functor.leftDerivedNatTrans.congr_simp\"], \"digest\": \"9419da1e3d5adf66\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact match. Generic tensor naturality, derived-functor naturality and triangle mapping APIs do not identify the normalized supported pairing and its connecting maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "item": "Sheaf.AlgebraicGeometry.SupportedProductLocalization",
+  "by": "worker",
+  "date": "2026-10-21",
+  "group": "H3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedTensorComparisonNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedTensorComparisonNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.supportedDerivedComparison_naturality",
+  "statement": "theorem supportedDerivedComparison_naturality\n    [G.IsLeftAdjoint] [G'.IsLeftAdjoint] [F₂.PreservesFlat] [F₂.IsLeftAdjoint]\n    (τ : (Functor.postcompose₂.obj G).obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ D).obj F₁).obj F₂).obj (curriedTensor D))\n    (τ' : (Functor.postcompose₂.obj G').obj (curriedTensor C) ⟶\n      (((Functor.whiskeringLeft₂ D).obj F₁').obj F₂').obj (curriedTensor D))\n    (t : supportedDerivedComparisonHom G F₁ F₂)\n    (t' : supportedDerivedComparisonHom G' F₁' F₂')\n    (ht : supportedDerivedComparisonCondition G F₁ F₂\n      (HomologicalComplex.mapBifunctorComparisonNatTrans τ (.up ℤ)) t)\n    (ht' : supportedDerivedComparisonCondition G' F₁' F₂'\n      (HomologicalComplex.mapBifunctorComparisonNatTrans τ' (.up ℤ)) t')\n    (a₀ : G' ⟶ G) (a₁ : F₁' ⟶ F₁) (a₂ : F₂' ⟶ F₂)\n    (ha : ∀ M N, a₀.app (M ⊗ N) ≫ (τ.app M).app N =\n      (τ'.app M).app N ≫ (a₁.app M ⊗ₘ a₂.app N))\n    (M N : DerivedCategory C) :\n    (Functor.exactDerivedMap a₀).app (M ⊗ N) ≫ t M N =\n      t' M N ≫ ((Functor.exactDerivedMap a₁).app M ⊗ₘ\n        (Functor.exactDerivedMap a₂).app N)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261021T120411-L-3883305",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261021T120411-L-3883305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

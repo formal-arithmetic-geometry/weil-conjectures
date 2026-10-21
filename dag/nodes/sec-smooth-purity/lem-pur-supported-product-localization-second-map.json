@@ -10,27 +10,65 @@
  },
  "kind": "statement",
  "title": "Component maps extend to a triangle morphism (second variable)",
- "statement": "For the corresponding supported localization triangles, the three specified supported exterior-product components extend to a morphism of triangles. This is the component-extension conjunct of [lem-pur-supported-product-localization].",
+ "statement": "Let k be an algebraically closed field, A a finite commutative ring, X,Y separated finite type k-schemes, K∈D⁺(X_et,A), L∈D⁺(Y_et,A), and assume F=K external tensor L is bounded below. For closed immersions B⊆X and C,D⊆Y, the three specified supported exterior products [def-pur-supported-exterior-product], on intersection support, original support and open support respectively, form a morphism from the normalized support triangle [lem-pur-support-restriction-triangle] in the second variable tensored on the left with RΓ_B(X,K) to the product support triangle. The intersection and open components are transported by the canonical comparisons [def-pur-supported-localization-comparisons]. All three components are exactly those in the unchanged attached Lean statement.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 09XP and Tag 0F1E; compatibility of the supported pairing with localization boundaries."
  },
  "stmt_deps": [
-  "lem-pur-supported-product-localization"
+  "def-pur-support-cohomology",
+  "def-pur-supported-exterior-product",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-derived-categories",
+  "def-weil-triangulated-category",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-closed-immersion",
+  "def-pc-base-change",
+  "def-weil-abstract-derived-category",
+  "lem-pur-support-restriction-triangle",
+  "def-pur-supported-localization-comparisons"
  ],
  "proof": [
   {
-   "text": "Construct the triangle morphism from the canonical supported exterior-product maps and verify the three commutation equations, including the normalized connecting-map square and tensor shift sign.",
+   "text": "Apply naturality under normalized inclusions of supports. Compose the product-intersection equality comparison with the target inclusion; the kernel-inclusion normalization identifies this composite with the product of the source inclusion and the identity in the fixed variable. Derived functoriality proves the first triangle square.",
    "uses": [
-    "lem-pur-supported-product-localization"
+    "lem-pur-supported-exterior-product-support-maps",
+    "def-pur-supported-localization-comparisons",
+    "lem-pur-support-restriction-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the target restriction with its prescribed third isomorphism. Functoriality of support transport under successive open pullbacks identifies it with restriction to the actual product open. The already proved open naturality square, after canceling that isomorphism, is the second triangle square.",
+   "uses": [
+    "lem-pur-supported-coefficient-second-open-tensor",
+    "def-pur-supported-localization-comparisons",
+    "lem-pur-support-restriction-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the corresponding connecting-map equation. Assemble the three prescribed components and three verified commutation equations into TriangleMorphism; the component equalities are reflexive.",
+   "uses": [
+    "lem-pur-supported-exterior-product-boundary"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pur-supported-product-localization"
+  "lem-pur-supported-exterior-product-support-maps",
+  "def-pur-supported-localization-comparisons",
+  "lem-pur-support-restriction-triangle",
+  "lem-pur-supported-coefficient-second-open-tensor",
+  "lem-pur-supported-exterior-product-boundary"
  ],
- "proof_origin": "The component-extension conjunct is isolated from the complete proof plan of the parent supported localization theorem.",
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XP and 0F1E; kernel normalization for inclusions, composition of open transport, and the separate coefficient-cone connecting equation."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -87,21 +125,43 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B6",
+  "group": "H3",
   "result": "pass",
-  "landing": "20261021T013338-L-2287984",
+  "landing": "20261021T120411-L-3883305",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.supportedProductLocalizationFirst_map",
-   "AlgebraicGeometry.Etale.supportedProductLocalizationSecond_map",
-   "AlgebraicGeometry.Etale.supportedProductLocalization_openFirst",
-   "AlgebraicGeometry.Etale.supportedProductLocalization_openSecond"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.supportedProductLocalizationFirst_map",
-   "AlgebraicGeometry.Etale.supportedProductLocalizationSecond_map"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "H3 stage 2",
+  "old_statement": "For the corresponding supported localization triangles, the three specified supported exterior-product components extend to a morphism of triangles. This is the component-extension conjunct of [lem-pur-supported-product-localization].",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 09XP and Tag 0F1E; compatibility of the supported pairing with localization boundaries."
+  },
+  "what": "Replace the circular reference to the parent theorem with its unchanged hypotheses and definition dependencies. The mathematical assertion and Lean signature are unchanged.",
+  "citers": [
+   {
+    "id": "lem-pur-supported-product-localization",
+    "holds": true,
+    "note": "The two wrappers use exactly the original Lean statements, with no signature changes."
+   }
+  ],
+  "old_stmt_deps": [
+   "lem-pur-supported-product-localization"
+  ],
+  "old_proof": [
+   {
+    "text": "Construct the triangle morphism from the canonical supported exterior-product maps and verify the three commutation equations, including the normalized connecting-map square and tensor shift sign.",
+    "uses": [
+     "lem-pur-supported-product-localization"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pur-supported-product-localization"
+  ]
+ }
 }
