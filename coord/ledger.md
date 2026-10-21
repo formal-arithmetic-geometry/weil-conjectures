@@ -20165,3 +20165,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:03 L: merged deliver/Q33/lem-weil-pbc-ringed-common-quotient-pullback-comparison (reviewer FIX; after a return; new nodes: 0)
 - 04:03 L: merged deliver/Q05/lem-weil-pbc-smooth-curve-etale-structure-direct-images (reviewer PASS; after a return; new nodes: 2)
 - 04:03 L: merged deliver/NZ/lem-coef-derived-system-evaluation-calculus (reviewer FIX; after a return; new nodes: 7)
+- 04:03 L: merged deliver/Q29/lem-sfb-integral-quotient-projection-comparison (reviewer FIX; first push; new nodes: 0)
