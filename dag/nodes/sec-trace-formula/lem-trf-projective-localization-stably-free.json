@@ -1,0 +1,118 @@
+{
+ "id": "lem-trf-projective-localization-stably-free",
+ "kind": "statement",
+ "title": "A projective localization of a finite module of finite projective dimension is stably free",
+ "statement": "Let $R$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], $T\\subset R$ a multiplicative submonoid, and $M$ a finite $R$-module [def-weil-finitely-generated-module] of projective dimension at most $n$ [def-weil-pbc-finite-global-dimension]. Let $N$ be a localization of $M$ at $T$ [def-weil-pbc-module-localization], with compatible $T^{-1}R$-module structure, and suppose $N$ is projective [def-weil-pbc-projective-module]. Suppose the ring and the module types lie in the same universe, as in the attached source declaration. Then $N$ is stably free: there is a finite free $T^{-1}R$-module $Q$ for which $N\\oplus Q$ is free [def-weil-pbc-free-module].",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean",
+  "place": "Module.isStablyFree_of_isLocalizedModule_of_hasProjectiveDimensionLE, lines 39-89, the existing proved localization-and-splitting argument."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Induct on n, following the existing proved source theorem. For n=0, M is finite projective over the local ring, hence free, and its localization is free. For the successor case, take a finite free presentation F -> M, with kernel K. Noetherianity makes K finite, and dimension shifting lowers its projective-dimension bound to n. Localization preserves injectivity, surjectivity and exactness. Because N is projective, the localized sequence splits, its localized kernel is projective, and the induction hypothesis makes that kernel stably free. Adding its stabilizing finite free summand to the split sequence shows N is stably free. This is exactly the source theorem, which is already fully proved.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean",
+  "place": "Module.isStablyFree_of_isLocalizedModule_of_hasProjectiveDimensionLE, lines 39-89, the existing proved localization-and-splitting argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a projective localization of a finite module with finite projective dimension over a Noetherian local ring is stably free",
+   "results": "Returned projectivity, localization and Picard-group criteria, but no exact match for the source specialization.",
+   "date": "2026-10-21",
+   "verdict": "source-library match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective localization of a finite module of finite projective dimension over a Noetherian local ring is stably free",
+   "results": "No exact match among the returned hits; the adopted source library contains the attached proved theorem.",
+   "date": "2026-10-21",
+   "verdict": "source-library match"
+  },
+  {
+   "tool": "grep",
+   "query": "isStablyFree_of_isLocalizedModule|IsStablyFree|free_of_isStablyFree",
+   "results": "Read the installed Mathlib APIs and the adopted source files; the Lean declaration attached below is already proved.",
+   "date": "2026-10-21",
+   "verdict": "source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularLocalPicardZero",
+  "date": "2026-10-21",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0AFZ finite-resolution and determinant argument within the regular-local Picard-triviality input to the ancestor proof: A projective localization of a finite module of finite projective dimension is stably free",
+   "via": [
+    "lem-trf-regular-local-pic-zero",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": true,
+  "by": "M7",
+  "date": "2026-10-21",
+  "module": "WeilConjectures.Mathlib.RingTheory.LocalProperties.ProjectiveDimension",
+  "declaration": "Module.isStablyFree_of_isLocalizedModule_of_hasProjectiveDimensionLE",
+  "statement": "theorem isStablyFree_of_isLocalizedModule_of_hasProjectiveDimensionLE (n : ℕ) :\n    ∀ (M : Type u) [AddCommGroup M] [Module R M] [Module.Finite R M],\n      HasProjectiveDimensionLE (ModuleCat.of R M) n →\n      ∀ (N : Type u) [AddCommGroup N] [Module R N] [Module (Localization S) N]\n        [IsScalarTower R (Localization S) N] (f : M →ₗ[R] N) [IsLocalizedModule S f]\n        [Projective (Localization S) N], IsStablyFree (Localization S) N",
+  "branch": "slopmaster2"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261021T165826-L-2257738",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261021T165826-L-2257738",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

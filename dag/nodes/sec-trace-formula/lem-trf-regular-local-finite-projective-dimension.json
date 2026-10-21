@@ -1,0 +1,113 @@
+{
+ "id": "lem-trf-regular-local-finite-projective-dimension",
+ "kind": "statement",
+ "title": "Finite modules over a regular local ring have finite projective dimension",
+ "statement": "Let $R$ be a commutative regular local ring [def-weil-regular-scheme], and let $M$ be a finite $R$-module [def-weil-finitely-generated-module]. Assume the module universe contains a small copy of $R$. Then there is $n\\in\\mathbf N$ such that $M$ has projective dimension at most $n$ [def-weil-pbc-finite-global-dimension]. This records the existing Ext-based source-library theorem; no dimension bound is needed.",
+ "source": {
+  "document": "lean/WeilConjectures/Mathlib/RingTheory/Regular/ProjectiveDimension.lean",
+  "place": "IsRegularLocalRing.exists_hasProjectiveDimensionLE, lines 198-203; its proof uses exists_hasProjectiveDimensionLE_of_linearEquiv_quotient and a prime filtration. Stacks Tag 00O7 supplies the corresponding finite-projective-dimension conclusion."
+ },
+ "stmt_deps": [
+  "def-weil-regular-scheme",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-finite-global-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing proved source theorem IsRegularLocalRing.exists_hasProjectiveDimensionLE. Its preceding theorem proves finite projective dimension for R/p by noetherian induction on prime ideals: at the maximal ideal a regular sequence computes the residue-field projective dimension; otherwise choose y in m outside p, pass to the regular-element quotient, and use a prime filtration with strictly larger primes. The source theorem then applies prime-filtration induction to M, with annihilator lower bound zero. The zero module has projective dimension at most zero. The universe condition is exactly the source Small instance.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-weil-pbc-finite-global-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-regular-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/Mathlib/RingTheory/Regular/ProjectiveDimension.lean",
+  "place": "IsRegularLocalRing.exists_hasProjectiveDimensionLE, lines 198-203; its proof uses exists_hasProjectiveDimensionLE_of_linearEquiv_quotient and a prime filtration. Stacks Tag 00O7 supplies the corresponding finite-projective-dimension conclusion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite module over regular local ring has finite projective dimension",
+   "results": "Returned projectivity, localization and Picard-group criteria, but no exact match for the source specialization.",
+   "date": "2026-10-21",
+   "verdict": "source-library match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finite module over a regular local ring has finite projective dimension",
+   "results": "No exact match among the returned hits; the adopted source library contains the attached proved theorem.",
+   "date": "2026-10-21",
+   "verdict": "source-library match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegularLocalRing|HasProjectiveDimensionLE",
+   "results": "Read the installed Mathlib APIs and the adopted source files; the Lean declaration attached below is already proved.",
+   "date": "2026-10-21",
+   "verdict": "source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.RegularLocalPicardZero",
+  "date": "2026-10-21",
+  "group": "M7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Tag 0AFZ finite-resolution and determinant argument within the regular-local Picard-triviality input to the ancestor proof: Finite modules over a regular local ring have finite projective dimension",
+   "via": [
+    "lem-trf-regular-local-pic-zero",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": true,
+  "by": "M7",
+  "date": "2026-10-21",
+  "module": "WeilConjectures.Mathlib.RingTheory.Regular.ProjectiveDimension",
+  "declaration": "IsRegularLocalRing.exists_hasProjectiveDimensionLE",
+  "statement": "theorem exists_hasProjectiveDimensionLE (M : ModuleCat.{v} R) [Module.Finite R M] :\n    ∃ n : ℕ, HasProjectiveDimensionLE M n",
+  "branch": "slopmaster2"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261021T165826-L-2257738",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261021T165826-L-2257738",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

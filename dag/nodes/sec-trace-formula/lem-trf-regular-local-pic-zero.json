@@ -15,73 +15,43 @@
  ],
  "proof": [
   {
-   "text": "By hypothesis $P$ is a finitely generated projective $A_f$-module whose localization at every prime ideal of $A_f$ is free of rank one. These are exactly the hypotheses imposed on the module in the lemma used in Step 5 (with $S=A_f$), and $P$ is in particular a finitely generated $A_f$-module. (In the language of the source, Tags 0B8I and 00NX, such a $P$ is an invertible $A_f$-module; this identification is not used below.)",
+   "text": "Prove the private helper invertible_of_prime_localizations: finite projectivity gives finite presentation. For each maximal ideal q, localization of the dual evaluation map identifies with evaluation of the localized module, via IsLocalizedModule.mapExtendScalars and IsLocalization.moduleTensorEquiv. The supplied rank-one linear equivalence makes that evaluation bijective. Mathlib bijective_of_isLocalized_maximal then shows evaluation is globally bijective, which is the definition of Module.Invertible. The explicit compatibility is checked on pure tensors in Lean.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0AFZ proof opening, read with Tags 0B8I and 00NX"
-   }
+   "elementary": false
   },
   {
-   "text": "Since $P$ is a finitely generated $A_f$-module, apply [lem-trf-localized-finite-module-spread] with $R=A$, the element $f$ and $L=P$ to obtain a finitely generated $A$-module $M$ and an isomorphism of $A_f$-modules $M_f\\cong P$.",
+   "text": "Apply [lem-trf-localized-finite-module-spread] to P, obtaining a finite A-module M in the ring universe and an equivalence e : M_f ≃ P. Apply the existing source finite-projective-dimension theorem [lem-trf-regular-local-finite-projective-dimension] to M to obtain d with pd(M) ≤ d.",
    "uses": [
-    "lem-trf-localized-finite-module-spread"
+    "lem-trf-localized-finite-module-spread",
+    "lem-trf-regular-local-finite-projective-dimension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0AFZ proof, line 36789, invoking Algebra Tag 05N5"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $d=\\dim A$. By [lem-weil-pbc-regular-local-finite-module-resolution] the finite $A$-module $M$ has a projective resolution of length at most $d$. Since a regular local ring is a Noetherian local ring [def-weil-regular-scheme], [stage3-b4-bounded-finite-free-resolution] applies to $A$, $M$ and $d$ and gives an exact sequence $0\\to F_d\\to\\cdots\\to F_0\\to M\\to 0$ with each $F_i$ finite free over $A$, say $F_i\\cong A^{r_i}$. Localization at the powers of $f$ is exact (Stacks Tag 00CS) and sends $A^{r_i}$ to $A_f^{r_i}$, so composing with $M_f\\cong P$ gives an exact sequence of $A_f$-modules $0\\to A_f^{r_d}\\to\\cdots\\to A_f^{r_0}\\to P\\to 0$.",
+   "text": "Transport projectivity from P to N=M_f along e. Apply [lem-trf-projective-localization-stably-free] to the canonical localization map M -> N. All universe requirements hold since M and its canonical localization have the ring universe. This makes N stably free. Transport invertibility from Step 1 along e as well.",
    "uses": [
-    "def-weil-regular-scheme",
-    "lem-weil-pbc-regular-local-finite-module-resolution",
-    "stage3-b4-bounded-finite-free-resolution"
+    "lem-trf-projective-localization-stably-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0AFZ proof, line 36790, invoking Proposition Tag 00O7"
-   }
+   "elementary": false
   },
   {
-   "text": "$P$ is a finitely generated projective $A_f$-module with the finite free resolution of Step 3. Therefore [lem-trf-invertible-module-k0-class] with $S=A_f$ and $L=P$ gives $[P]=n[A_f]$ in $K_0(A_f)$ for $n=\\sum_i(-1)^ir_i$.",
+   "text": "Apply [lem-trf-stably-free-invertible-free] to N. Mathlib Module.Invertible.free_iff_linearEquiv turns its freeness into N ≃ A_f. Composing with e inverse gives P ≃ A_f. No assumption that f is nonzero or a nonunit is made.",
    "uses": [
-    "lem-trf-invertible-module-k0-class"
+    "lem-trf-stably-free-invertible-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0AFZ proof, lines 36793–36795, invoking Tag 0AFY"
-   }
-  },
-  {
-   "text": "By Step 1, $P$ satisfies the hypotheses of [lem-trf-k0-class-trivial-invertible] with $S=A_f$, and by Step 4 $[P]=n[A_f]$. That lemma gives $P\\cong A_f$ as $A_f$-modules.",
-   "uses": [
-    "lem-trf-k0-class-trivial-invertible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0AFZ proof, lines 36796–36797, invoking Tag 0AFX and Tag 0B8I"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-trf-localized-finite-module-spread",
-  "def-weil-regular-scheme",
-  "lem-weil-pbc-regular-local-finite-module-resolution",
-  "stage3-b4-bounded-finite-free-resolution",
-  "lem-trf-invertible-module-k0-class",
-  "lem-trf-k0-class-trivial-invertible"
+  "lem-trf-regular-local-finite-projective-dimension",
+  "lem-trf-projective-localization-stably-free",
+  "lem-trf-stably-free-invertible-free"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0AFZ (lemma-regular-local-Pic-zero), lines 36780–36797, with Tags 0B8I, 00NX, 05N5, 00O7, 0AFY and 0AFX"
+  "place": "Tag 0AFZ, lines 36787-36797. Finite-resolution and determinant steps use the already-proved source-library stable-freeness API and Mathlib stable rank-one cancellation; local rank-one invertibility is proved directly by localized evaluation."
  },
  "mathlib_searches": [
   {
@@ -167,5 +137,15 @@
   "result": "fix",
   "note": "Statement matches node and Stacks 0AFZ (with 0B8I/00NX) clause by clause: IsRegularLocalRing A, arbitrary f, Localization.Away f, P Module.Finite+Module.Projective, every prime localization LocalizedModule q.primeCompl P ≃ₗ Localization.AtPrime q (free rank one), conclusion Nonempty (P ≃ₗ A_f). No extra hypotheses; universes u,v independent; lean.statement verbatim; edge cases f=0 (A_f=0), f unit, dim 0 covered. Node diff vs base: only the lean record. No Mathlib/project duplicate (PicardGroup.lean only has local rings). Docstrings, sorry-only proof and report sections all OK. One fault fixed: the stated proof dependency lem-trf-localized-finite-module-spread (Sheaf.RingTheory.LocalizedFiniteModuleSpread, on the base 68044a170c) was not imported (H9/rule 7); fixes/RegularLocalPicardZero.lean adds that import. nt_compile: delivered and fixed files compile with no errors; a broken control copy errors, confirming the tool reports failures."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261021T165826-L-2257738",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
