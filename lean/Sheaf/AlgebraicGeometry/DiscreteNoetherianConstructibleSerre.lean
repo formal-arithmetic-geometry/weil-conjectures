@@ -556,6 +556,43 @@ private theorem proAffine_extension {X : Scheme.{u}} {R : Type u}
   exact (proEtale_fp_localModels_serre (T.domain a) R).2
     (S.map L) (hS.map_of_exact L) (hT a).1 (hT a).2
 
+/-- Global constructible fixed-scalar module sheaves over a Noetherian ring are
+closed under extensions, without a finite-underlying-ring assumption.
+Source: Stacks Project, Modules on Sites, Tag 093U (3)
+(blueprint: lem-sfb-discrete-noetherian-constructible-serre).
+Proof: take the fibre-product common refinement of the two finite stratifications.
+Exact immersion pullback gives extensions of finite locally constant sheaves on each
+stratum. The finite-presentation lifting argument noetherian_flc_of_shortExact above
+makes the middle sheaf locally constant, and stalkwise exactness makes its values
+finitely generated. The common refinement witnesses global constructibility. -/
+theorem IsConstructibleSheaf.of_shortExact_of_isNoetherianRing
+    {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ] [IsNoetherianRing Λ]
+    {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
+    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₁]
+    [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₃] :
+    IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) S.X₂ := by
+  obtain ⟨T₁, hT₁⟩ := IsConstructibleSheaf.exists_stratification
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    (F := S.X₁)
+  obtain ⟨T₃, hT₃⟩ := IsConstructibleSheaf.exists_stratification
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    (F := S.X₃)
+  refine ⟨T₁.inter T₃, fun k ↦ ?_⟩
+  have h₁ := (T₁.inter_refines_left T₃).isFiniteLocallyConstantSheaf_upperStar S.X₁ hT₁ k
+  have h₃ := (T₁.inter_refines_right T₃).isFiniteLocallyConstantSheaf_upperStar S.X₃ hT₃ k
+  let F := Etale.upperStar (ModuleCat.{u + 1} Λ) ((T₁.inter T₃).immersion k)
+  have : PreservesFiniteLimits F := inferInstance
+  have : PreservesFiniteColimits F := inferInstance
+  have hS' : (S.map F).ShortExact := hS.map_of_exact F
+  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (S.map F).X₁ := h₁
+  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (S.map F).X₃ := h₃
+  exact noetherian_flc_of_shortExact hS'
+
 end Scheme
 
 /-- Constructible etale module sheaves contain zero and are closed under kernels, cokernels

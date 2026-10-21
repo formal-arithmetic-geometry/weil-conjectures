@@ -1,66 +1,23 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q62
+Authors: SHEAF groups Q62 and U2
 -/
 module
 
-public import Sheaf.Paper.AdicLisseModule
-public import Sheaf.Paper.CompletedConstantSheafReduction
-public import Sheaf.Paper.CompletedAdicCoefficientDatum
-public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-public import Sheaf.Paper.ConstantCompletionEquivalence
-public import Sheaf.AlgebraicGeometry.ProEtaleOperations
-public import WeilConjectures.AlgebraicGeometry.LocallyClosedStratification
-public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
-public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
-public import WeilConjectures.ConstructibleSheaf.Defs
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+public import Sheaf.Paper.AdicStratifiedPerfectData
+import Sheaf.Paper.AdicConstructibleLocalModels
+import Sheaf.Paper.AdicPerfectModelsResidueOrigin
+import Sheaf.Paper.AdicResidueFieldTensor
+import Sheaf.Paper.AdicConstructibleTriangulated
+import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
+import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.Paper.ConstantModuleSectionProperties
-import WeilConjectures.ConstructibleSheaf.Refinement
-import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
-import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
-import Sheaf.Paper.PbcActualScalarPullback
-import Sheaf.Paper.TorsionLimitSheafCompleteness
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import Sheaf.AlgebraicGeometry.DiscreteNoetherianConstructibleSerre
-import Sheaf.AlgebraicGeometry.NoetherianGlobalConstructibility
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.AdicResidueLissePerfectLift
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-
-/-!
-# Adic constructibility and stratified perfect models
+/-! # Adic constructibility and stratified perfect models
 
 Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11
 (blueprint: lem-sfb-adic-stratified-perfect).
-
-The coefficients are arbitrary complete Noetherian local rings. No finiteness of their
-residue fields or perfectness of their quotient modules over the original ring is assumed.
-
-## Main definitions
-
-* `IsSfbAdicConstructible`: completeness and bounded constructible etale residue origin.
-* `IsSfbStratifiedPerfect`: finite strata with pro-etale locally perfect coefficient models.
-* `SfbAdicConstructibleCategory`: the full ambient subcategory of these objects.
-
-## Main statements
-
-* `adic_stratified_perfect`: equivalence, boundedness and triangulated closure.
 -/
 
 @[expose] public noncomputable section
@@ -72,208 +29,126 @@ set_option backward.isDefEq.respectTransparency false
 universe u
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
-open scoped ZeroObject
+open scoped ZeroObject MonoidalClosed.FunctorCategory
+
+private theorem sfbCompleteModel_triangulated
+    {C : Type (u + 1)} [SmallCategory C] {J : GrothendieckTopology C}
+    {O S : Sheaf J CommRingCat.{u + 1}} (q : O ⟶ S) :
+    ObjectProperty.IsClosedUnderIsomorphisms (ConstantCompletion.IsComplete q) ∧
+      ObjectProperty.IsTriangulated (ConstantCompletion.IsComplete q) := by
+  classical
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod O)
+  let := fun U : C ↦ HasDerivedCategory.standard (ConstantCompletion.Mod (O.over U))
+  let P : ObjectProperty (ConstantCompletion.D O) := ConstantCompletion.IsComplete q
+  let hRshift (U : C) : (ringedDerivedRestriction O U).CommShift ℤ := by
+    unfold ringedDerivedRestriction
+    infer_instance
+  let hRtri (U : C) : (ringedDerivedRestriction O U).IsTriangulated := by
+    unfold ringedDerivedRestriction
+    infer_instance
+  let H (U : C) (f : O.obj.obj (op U)) :=
+    (Functor.curry.obj (derivedInternalHom (J.over U) (O.over U))).obj
+      (op ((DerivedCategory.singleFunctor _ 0).obj
+        (ringedSectionLocalization (O.over U) (ringedSliceSection O U f))))
+  have hPiso : P.IsClosedUnderIsomorphisms := by
+    constructor
+    intro K L e hK U f hf
+    exact (((ringedDerivedRestriction O U ⋙ H U f).mapIso e).isZero_iff).mp (hK U f hf)
+  have hPzero : P (0 : ConstantCompletion.D O) := by
+    intro U f _
+    obtain ⟨s, ht⟩ := (ringedInternalHom_exact (J.over U) (O.over U)).1
+      ((DerivedCategory.singleFunctor _ 0).obj
+        (ringedSectionLocalization (O.over U) (ringedSliceSection O U f)))
+    let G := ringedDerivedRestriction O U ⋙ H U f
+    exact G.map_isZero (isZero_zero _)
+  have hPshift : P.IsStableUnderShift ℤ := by
+    constructor
+    intro n
+    constructor
+    intro K hK U f hf
+    obtain ⟨s, ht⟩ := (ringedInternalHom_exact (J.over U) (O.over U)).1
+      ((DerivedCategory.singleFunctor _ 0).obj
+        (ringedSectionLocalization (O.over U) (ringedSliceSection O U f)))
+    let G := ringedDerivedRestriction O U ⋙ H U f
+    exact (((G.commShiftIso n).app K).isZero_iff).mpr
+      ((shiftFunctor _ n).map_isZero (hK U f hf))
+  have hPtri : P.IsTriangulated := by
+    refine {
+      exists_zero := ⟨0, isZero_zero _, hPzero⟩
+      toIsTriangulatedClosed₂ := .mk' ?_ }
+    intro T hT h₁ h₃ U f hf
+    obtain ⟨s, ht⟩ := (ringedInternalHom_exact (J.over U) (O.over U)).1
+      ((DerivedCategory.singleFunctor _ 0).obj
+        (ringedSectionLocalization (O.over U) (ringedSliceSection O U f)))
+    let G := ringedDerivedRestriction O U ⋙ H U f
+    exact Pretriangulated.Triangle.isZero₂_of_isZero₁₃ _ (G.map_distinguished T hT)
+      (h₁ U f hf) (h₃ U f hf)
+  exact ⟨hPiso, hPtri⟩
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Read modules over the constant ring sheaf as fixed-scalar module-valued sheaves,
-by restricting along the constant section map, retaining the underlying additive sheaf.
-Source: Stacks Tag 093I; Bhatt--Scholze, Definition 6.3.1
-(blueprint: lem-sfb-adic-stratified-perfect). -/
-def sfbFixedScalarRestriction (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k] :
-    proEtaleRingModules X (adicLisseConstantRing X k) ⥤
-      Sheaf (ProEt.topology X) (ModuleCat.{u + 1} k) where
-  obj M :=
-    { obj :=
-        { obj := fun U ↦
-            ((PresheafOfModules.restrictScalars (adicLisseConstantUnit X k)).obj M.val).obj U
-          map := fun f ↦
-            ((PresheafOfModules.restrictScalars (adicLisseConstantUnit X k)).obj M.val).map f
-          map_id := fun _ ↦ by ext x; simp; rfl
-          map_comp := fun _ _ ↦ by ext x; simp; rfl }
-      property := Presheaf.isSheaf_of_isSheaf_comp _ _
-        (forget₂ (ModuleCat.{u + 1} k) AddCommGrpCat.{u + 1}) M.isSheaf }
-  map f := ObjectProperty.homMk
-    { app := fun U ↦ (ModuleCat.restrictScalars ((adicLisseConstantUnit X k).app U).hom).map
-        (f.val.app U)
-      naturality := fun {_ _} g ↦ by ext x; exact PresheafOfModules.naturality_apply f.val g x }
+private def sfbToModelEquivalence (X : Scheme.{u})
+    (R : Sheaf (ProEt.topology X) RingCat.{u + 1}) :=
+  CategoryTheory.Equivalence.mk (proEtaleModuleToModel R) (proEtaleModuleFromModel R)
+    (NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget R).preimageIso
+      (PresheafOfModules.isoMk (fun U ↦ Iso.refl _))))
+    (NatIso.ofComponents (fun M ↦ (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk (fun U ↦ Iso.refl _))))
 
-/-- This scalar restriction is additive, since it keeps the underlying additive maps.
-Source: Stacks Tag 093I (blueprint: lem-sfb-adic-stratified-perfect). -/
-instance sfbFixedScalarRestriction_additive (X : Scheme.{u}) (k : Type (u + 1))
-    [CommRing k] : (sfbFixedScalarRestriction X k).Additive where
-  map_add := by intros; ext U x; rfl
+private instance sfbToModel_isEquivalence (X : Scheme.{u})
+    (R : Sheaf (ProEt.topology X) RingCat.{u + 1}) :
+    (proEtaleModuleToModel R).IsEquivalence :=
+  (sfbToModelEquivalence X R).isEquivalence_functor
 
-/-- Tensor a complex of etale module sheaves termwise with a degree-zero module sheaf.
-In the application the coefficient ring is a residue field. Every module sheaf is flat,
-by the exact conservative geometric stalk functors, so this computes the derived tensor
-for every representative complex, including unbounded representatives.
-Source: Bhatt--Scholze, Remark 6.3.2 (blueprint: lem-sfb-adic-stratified-perfect). -/
-def sfbEtaleTensorDegreeZero (X : Scheme.{u}) (k : Type (u + 1)) [CommRing k]
-    (C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) ℤ)
-    (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) :
-    CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) ℤ :=
-  letI := Sheaf.monoidalCategory X.smallEtaleTopology (ModuleCat.{u + 1} k)
-  ((MonoidalCategory.tensorRight N).mapHomologicalComplex (.up ℤ)).obj C
-
-/-- The residue reduction, read in fixed-scalar sheaves using the canonical constant
-sections. The projection is to exponent one, written `0+1`, so the coefficient is A/I.
-Source: Bhatt--Scholze, Definition 6.5.1
-(blueprint: lem-sfb-adic-stratified-perfect). -/
-def sfbResidueComplex (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
-    (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :
-    CochainComplex
-      (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1)))) ℤ :=
-  ((sfbFixedScalarRestriction X (A ⧸ I ^ (0 + 1))).mapHomologicalComplex (.up ℤ)).obj
-    (DerivedCategory.Q.objPreimage
-      ((completedAdicDerivedChange X (limit.π (adicLisseRingSystem X I) (op 0))).obj K))
-
-/-- Transport a commutative coefficient sheaf to the equivalent small model of the same
-site; only the morphism universe is enlarged.
-Source: Stacks Tags 00YY and 099F (blueprint: lem-sfb-adic-stratified-perfect). -/
-abbrev sfbModelRings (X : Scheme.{u}) :=
-  (AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).sheafPushforwardContinuous
-    CommRingCat.{u + 1} (proEtaleModelTopology X) (ProEt.topology X)
-
-/-- Local derived completeness, using the recorded predicate on the equivalent small
-site and the kernel of the actual residue projection. In the Noetherian case this kernel
-is exactly the ideal generated by the constant sections in I. Transport a localization
-representative termwise, so no choice of a new derived functor is involved.
-Source: Stacks Tags 093M and 099F (blueprint: lem-sfb-adic-stratified-perfect). -/
-def IsSfbAdicComplete (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
-    (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) : Prop :=
-  let F := proEtaleModuleToModel ((adicLisseForget X).obj (adicLisseCompletedRing X I))
-  letI : F.Additive := ⟨by intros; ext U x; rfl⟩
-  ConstantCompletion.IsComplete
-    ((sfbModelRings X).map (limit.π (adicLisseRingSystem X I) (op 0)))
-    (ConstantCompletion.Q _ |>.obj
-      ((F.mapHomologicalComplex (.up ℤ)).obj (DerivedCategory.Q.objPreimage K)))
-
-/-- Condition (a), using the recorded global constructibility predicate. On a Noetherian
-scheme this is exactly the affine-local notion as well. Module finiteness means finite
- generation, hence finite presentation over the residue field, never finite underlying sets.
-The last clause explicitly tests every degree-zero module sheaf for finite Tor amplitude.
-Source: Bhatt--Scholze, Definitions 6.3.1 and 6.5.1, Remark 6.3.2
-(blueprint: lem-sfb-adic-stratified-perfect). -/
-def IsSfbAdicConstructible (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
-    (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) : Prop :=
-  IsSfbAdicComplete X I K ∧
-    ∃ C : CochainComplex
-        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1)))) ℤ,
-      (∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, (q < a ∨ b < q) → IsZero (C.homology q)) ∧
-      (∀ q : ℤ, IsConstructibleSheaf (C.homology q)) ∧
-      Nonempty (DerivedCategory.Q.obj (sfbResidueComplex X I K) ≅
-        DerivedCategory.Q.obj
-          (((ProEtale.comparisonUpperStar
-            (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1))) X).mapHomologicalComplex (.up ℤ)).obj C)) ∧
-      ∃ a b : ℤ, a ≤ b ∧
-        ∀ (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1))))
-          (q : ℤ), (q < a ∨ b < q) →
-            IsZero ((sfbEtaleTensorDegreeZero X (A ⧸ I ^ (0 + 1)) C N).homology q)
-
-/-- The termwise completed realization of an actual coefficient complex. The constant
-module functor and scalar extension are the existing sheafification/tensor constructions.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-sfb-adic-stratified-perfect). -/
-def sfbCompletedModel (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
-    (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) :
-    DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)) :=
-  DerivedCategory.Q.obj
-    (((completedAdicChange X (CompletedConstantReduction.base X I)).mapHomologicalComplex
-      (.up ℤ)).obj ((CompletedConstantReduction.constantComplex X A).obj P))
-
-/-- Restrict to a stratum, retaining the true inverse-image coefficient ring, and then to
-one object of its pro-etale site. For immersions the coefficient identification with the
-completion on the stratum is the canonical limit comparison, as in the recorded immersion
-limit-preservation lemma.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-sfb-adic-stratified-perfect). -/
-def sfbLocalRestriction {X S : Scheme.{u}} (i : S ⟶ X)
-    (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (U : S.ProEt)
-    (K : DerivedCategory (proEtaleRingModules X R)) :=
-  let R' := (adicLisseForget S).obj
-    ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R)
-  letI := HasDerivedCategory.standard (SheafOfModules.{u + 1} (R'.over U))
-  ringedSiteDerivedRestrictionOfUniverses
-    ((adicLisseForget S).obj ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R)) U
-    ((proEtaleRingDerivedPullback i R
-      ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R) (Iso.refl _)).obj K)
-
-/-- Condition (b): finite constructible locally closed strata, pro-etale covering sieves,
-and bounded finite-projective coefficient complexes realizing K there.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-sfb-adic-stratified-perfect). -/
-def IsSfbStratifiedPerfect (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A)
-    (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) : Prop :=
-  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
-  ∃ s : Stratification X,
-    (∀ α : Fin s.n, Topology.IsConstructible (s.stratum α)) ∧
-    ∀ α : Fin s.n, ∃ V : Sieve (⊤_ (s.domain α).ProEt),
-      V ∈ ProEt.topology (s.domain α) (⊤_ (s.domain α).ProEt) ∧
-        ∀ (U : (s.domain α).ProEt) (f : U ⟶ ⊤_ (s.domain α).ProEt), V f →
-          ∃ (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) (a b : ℤ),
-            DerivedCategory.IsPerfectRingComplex (DerivedCategory.Q.obj P) ∧
-            P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
-            (∀ q : ℤ, Module.Projective A (P.X q) ∧ Module.Finite A (P.X q)) ∧
-            Nonempty (sfbLocalRestriction (s.immersion α) (adicLisseCompletedRing X I) U K ≅
-              sfbLocalRestriction (s.immersion α) (adicLisseCompletedRing X I) U
-                (sfbCompletedModel X I P))
-
-/-- The specified complexes form the full ambient subcategory, with every ambient morphism.
-Source: Bhatt--Scholze, Definition 6.5.1
-(blueprint: lem-sfb-adic-stratified-perfect). -/
-abbrev SfbAdicConstructibleCategory (X : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (I : Ideal A) := ObjectProperty.FullSubcategory (IsSfbAdicConstructible X I)
+private theorem sfbComplete_triangulated (X : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (I : Ideal A) :
+    ObjectProperty.IsClosedUnderIsomorphisms (IsSfbAdicComplete X I) ∧
+      ObjectProperty.IsTriangulated (IsSfbAdicComplete X I) := by
+  let F : proEtaleRingModules X (adicLisseCompletedRing X I) ⥤
+      ConstantCompletion.Mod ((sfbModelRings X).obj (adicLisseCompletedRing X I)) :=
+    proEtaleModuleToModel ((adicLisseForget X).obj (adicLisseCompletedRing X I))
+  let : F.Additive := ⟨by intros; ext U x; rfl⟩
+  have : F.IsEquivalence := (sfbToModelEquivalence X
+    ((adicLisseForget X).obj (adicLisseCompletedRing X I))).isEquivalence_functor
+  let := HasDerivedCategory.standard
+    (ConstantCompletion.Mod ((sfbModelRings X).obj (adicLisseCompletedRing X I)))
+  let G := F.mapDerivedCategory
+  let q := (sfbModelRings X).map (limit.π (adicLisseRingSystem X I) (op 0))
+  obtain ⟨hi, ht⟩ := sfbCompleteModel_triangulated q
+  let P : ObjectProperty _ := ConstantCompletion.IsComplete q
+  have : P.IsClosedUnderIsomorphisms := hi
+  have : P.IsTriangulated := ht
+  let c (N : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :=
+    (F.mapDerivedCategoryFactors.app (DerivedCategory.Q.objPreimage N)).symm ≪≫
+      G.mapIso (DerivedCategory.Q.objObjPreimageIso N)
+  have hp : IsSfbAdicComplete X I = P.inverseImage G := by
+    funext N
+    exact propext (P.prop_iff_of_iso (c N))
+  rw [hp]
+  exact ⟨inferInstance, inferInstance⟩
 
 /-- Adic constructibility is equivalent to stratified perfect local models; these objects
 are bounded and form a full triangulated subcategory.
 Source: Bhatt--Scholze, Definition 6.5.1, Lemma 6.5.3 and Proposition 6.6.11
 (blueprint: lem-sfb-adic-stratified-perfect).
 
-Proof, following the six steps of the node:
-1. Restrict completed coefficients and the Koszul completion unit to immersions and slice
-sites. Immersion inverse image and slice restriction preserve limits. Exact countable
-products and the strict-tower Roos triangle compute the unit. Finite-stratum detection
-therefore detects its zero cone, so completeness restricts and is detected on these covers.
-2. For bounded etale residue complexes, geometric stalks commute with derived tensor.
-Tensor of vector spaces over the residue field is exact; exact conservative stalks give
-finite Tor amplitude in the same interval, without finite-coefficient assumptions.
-3. Refine the finitely many cohomology stratifications by fibre-product immersions. Each
-stratum is Noetherian. Comparison-pullback identifies its residue reduction, and the local
-perfect-lifting lemma gives the required pro-etale perfect coefficient models.
-4. Conversely finite projective terms are idempotent summands of finite completed free
-modules, hence limits of power-torsion quotient sheaves. Torsion-limit completeness and the
-constant/completed equivalence give local completeness; step 1 detects it globally.
-Quasi-compact strata admit finitely many quasi-compact pieces of trivializing covers;
-the finitely many perfect models give global cohomological bounds, also for empty X.
-5. Completed reduction identifies each model with the constant complex P tensor_A A/I.
-Its cohomology is locally constant finite dimensional. The constructible comparison theorem
-for arbitrary discrete Noetherian coefficients descends it to a bounded etale complex.
-Affine-local and global constructibility agree on Noetherian X: refine affine strata by
-successive differences of a finite affine cover. Step 2 gives its finite Tor amplitude.
-6. Completion units are natural maps of exact functors, so complete objects form a full
-triangulated subcategory. Residue reduction is triangulated. Constructible cohomology is
-closed under kernels, cokernels and extensions by the weak Serre lemma; the long exact
-sequence of an ambient triangle gives two-out-of-three and boundedness. Zero, isomorphisms
-and shifts preserve both conditions. No dimension or residue-invertibility bound is used.
+Proof: The geometric forward lemma gives the finite-projective local representatives;
+each represents a perfect object by using itself as witness. The geometric reverse
+lemma gives completeness, global cohomological bounds, and a bounded constructible etale
+residue representative. Exact tensor over the residue field gives its finite Tor
+amplitude in the same interval. These two implications prove the equivalence, and the
+reverse lemma gives boundedness.
 
-Proof dependencies by step:
-1. lem-weil-pbc-proetale-immersion-limit-preservation, lem-weil-proetale-weakly-etale-
-localization, lem-weil-pbc-constant-completion-equivalence, lem-weil-proetale-countable-products-
-exact, lem-weil-derived-countable-products-core, lem-weil-pbc-ringed-strict-tower-homotopy-limit,
-lem-weil-pbc-noetherian-stratum-detection.
-2. prop-weil-pbc-geometric-stalks-exact, lemma-weil-pbc-geometric-stalk-conservative, lem-weil-
-pbc-ringed-topoi-derived-tensor-pullback.
-3. lem-weil-pbc-constructible-stratification-intersection, lem-weil-pbc-comparison-pullback, lem-
-sfb-adic-residue-lisse-perfect-lift.
-4. lem-weil-pbc-torsion-limit-sheaf-completeness, lem-weil-pbc-constant-completion-equivalence,
-def-weil-pbc-proetale-site, lem-weil-pbc-noetherian-stratum-detection.
-5. lem-weil-pbc-completed-constant-sheaf-reduction, lem-weil-pbc-noetherian-stratum-detection, sk-
-thm-pe-constructible-comparison, lem-weil-pbc-constant-module-section-properties, def-pe-etale-
-constructible-module, lem-sc-affine-noetherian-underlying-space, def-weil-constructible-subset.
-6. lem-weil-pbc-constant-completion-equivalence, lem-weil-pbc-ringed-strict-tower-homotopy-limit,
-lem-pur-derived-change-of-rings, sk-thm-pe-constructible-comparison, lem-sf-derived-homology-long-
-exact, lem-sfb-discrete-noetherian-constructible-serre. -/
+For the remaining assertions, use an independent categorical argument. Local derived
+completeness is the intersection of vanishing conditions for exact slice restriction
+followed by derived internal Hom from a section localization. It is therefore closed
+under isomorphisms, shifts and triangles. The proved residue-closure theorem expresses
+bounded constructible etale residue origin as the inverse image of a triangulated
+essential image under exact reduction and fixed-scalar restriction. The intersection of
+these two triangulated properties is exactly IsSfbAdicConstructible. Its standard
+ObjectProperty API gives zero, isomorphism and shift invariance, and all three ambient
+triangle implications. This closure argument does not depend on the geometric lemmas.
+All definitions, coefficients, universes and the statement are unchanged. -/
 theorem adic_stratified_perfect (X : Scheme.{u}) [IsNoetherian X]
     (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (_hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)
@@ -296,6 +171,58 @@ theorem adic_stratified_perfect (X : Scheme.{u}) [IsNoetherian X]
           IsSfbAdicConstructible X I T.obj₁) ∧
         (IsSfbAdicConstructible X I T.obj₃ ∧ IsSfbAdicConstructible X I T.obj₁ →
           IsSfbAdicConstructible X I T.obj₂) := by
-  sorry
+  classical
+  have hmax : (I ^ (0 + 1)).IsMaximal := by simpa using _hI.1
+  let := hmax
+  let k := A ⧸ I ^ (0 + 1)
+  let : Field k := Ideal.Quotient.field _
+  let P : ObjectProperty
+      (DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I))) :=
+    IsSfbAdicConstructible X I
+  have models (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)))
+      (hK : IsSfbAdicConstructible X I K) : IsSfbStratifiedPerfect X I K := by
+    obtain ⟨s, hs, hm⟩ := adicConstructible_localModels X A I _hI K hK
+    refine ⟨s, hs, ?_⟩
+    intro α
+    obtain ⟨V, hV, hmodels⟩ := hm α
+    refine ⟨V, hV, ?_⟩
+    intro U f hf
+    obtain ⟨P, a, b, ha, hb, hP, e⟩ := hmodels U f hf
+    exact ⟨P, a, b, ⟨P, a, b, ha, hb, hP, ⟨Iso.refl _⟩⟩, ha, hb, hP, e⟩
+  have rev (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)))
+      (hK : IsSfbStratifiedPerfect X I K) : IsSfbAdicConstructible X I K := by
+    obtain ⟨hc, _, C, hb, hC, e⟩ := adicPerfectModels_residueOrigin X A I _hI K hK
+    refine ⟨hc, C, hb, hC, e, ?_⟩
+    obtain ⟨a, b, hab, h⟩ := hb
+    exact ⟨a, b, hab, sfbFieldTensor_bounds X k C a b h⟩
+  obtain ⟨hciso, hctri⟩ := sfbComplete_triangulated X I
+  obtain ⟨hriso, hrtri⟩ := adicConstructible_residueTriangulated X A I _hI.1
+  have : ObjectProperty.IsClosedUnderIsomorphisms (IsSfbAdicComplete X I) := hciso
+  have : ObjectProperty.IsTriangulated (IsSfbAdicComplete X I) := hctri
+  have : ObjectProperty.IsClosedUnderIsomorphisms (SfbConstructibleResidue X I) := hriso
+  have : ObjectProperty.IsTriangulated (SfbConstructibleResidue X I) := hrtri
+  have : P.IsClosedUnderIsomorphisms :=
+    inferInstanceAs (ObjectProperty.IsClosedUnderIsomorphisms
+      ((IsSfbAdicComplete X I : ObjectProperty _) ⊓ SfbConstructibleResidue X I))
+  have : P.IsTriangulated :=
+    inferInstanceAs (ObjectProperty.IsTriangulated
+      ((IsSfbAdicComplete X I : ObjectProperty _) ⊓ SfbConstructibleResidue X I))
+  refine ⟨?_, ?_, P.prop_zero, ?_, ?_, ?_⟩
+  · intro K
+    exact ⟨models K, rev K⟩
+  · intro K hK
+    obtain ⟨_, ⟨a, b, hab, h⟩, _⟩ := adicPerfectModels_residueOrigin X A I _hI K
+      (models K hK)
+    exact ⟨a, b, hab, (DerivedCategory.isGE_iff K a).mpr
+      (fun q hq ↦ h q (Or.inl hq)), (DerivedCategory.isLE_iff K b).mpr
+        (fun q hq ↦ h q (Or.inr hq))⟩
+  · rintro K L ⟨e⟩ hK
+    exact P.prop_of_iso e hK
+  · intro K n hK
+    exact P.le_shift n K hK
+  · intro T hT
+    exact ⟨fun h ↦ P.ext_of_isTriangulatedClosed₃ T hT h.1 h.2,
+      fun h ↦ P.ext_of_isTriangulatedClosed₁ T hT h.1 h.2,
+      fun h ↦ P.ext_of_isTriangulatedClosed₂ T hT h.2 h.1⟩
 
 end AlgebraicGeometry.Scheme

@@ -1,0 +1,144 @@
+{
+ "id": "lem-sfb-adic-perfect-models-residue-origin",
+ "kind": "statement",
+ "title": "Completeness, global bounds and etale residue origin from perfect models",
+ "statement": "Let X be a Noetherian scheme [def-pc-scheme], A a commutative complete Noetherian local ring [def-weil-pbc-noetherian-ring], [def-weil-pbc-adically-complete-ring], and I its unique maximal ideal. A completed-coefficient derived object K satisfying IsSfbStratifiedPerfect [def-sfb-adic-stratified-perfect-data] is locally derived complete, has globally bounded cohomology with an ordered integral interval, and has a bounded etale residue complex C with constructible cohomology whose comparison is isomorphic to the canonical residue of K. The construction uses the actual immersion and slice restrictions, the first quotient projection, and fixed-scalar residue of [def-sfb-adic-stratified-perfect-data]. This assertion does not include finite Tor amplitude or any triangle closure.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11, reverse implication, and Lemma 6.5.3"
+ },
+ "stmt_deps": [
+  "def-sfb-adic-stratified-perfect-data",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-constructible-stratification",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [
+  {
+   "text": "On every given stratum cover transport the completed finite-projective model to the equivalent small site. Apply its complete-residue calculation. It gives local completeness, finite-dimensional constant residue cohomology and bounds for the object and its residue, computed by the canonical quotient map. Restriction along immersions and slices identifies these calculations with those of K.",
+   "uses": [
+    "lem-sfb-adic-perfect-model-complete-reduction",
+    "lem-sfb-adic-stratum-completion-unit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Detect completeness on the finite stratum cover. For both K and its residue choose finitely many quasi-compact pieces of the covering schemes over the finitely many Noetherian strata. Take the minimum lower and maximum upper bound and detect vanishing. Empty families use [0,0].",
+   "uses": [
+    "lem-sfb-adic-stratum-completion-unit",
+    "lem-sfb-stratified-local-cohomological-bounds"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The residue homology sheaves have finite-dimensional constant values on those strata. Fixed-scalar transport preserves them. Global constructibility on a Noetherian scheme and bounded constructible comparison provide an etale derived representative; choose its cochain preimage under Q and transport its homology and bounds along Q.objObjPreimageIso. The quotient-functor and comparison factors give the displayed residue isomorphism. No Tor conclusion is needed here.",
+   "uses": [
+    "lem-sfb-noetherian-global-constructibility",
+    "sk-thm-pe-constructible-comparison",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sfb-adic-perfect-model-complete-reduction",
+  "lem-sfb-adic-stratum-completion-unit",
+  "lem-sfb-noetherian-global-constructibility",
+  "lem-sfb-stratified-local-cohomological-bounds",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-proetale-weakly-etale-localization",
+  "sk-thm-pe-constructible-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11, reverse implication, and Lemma 6.5.3; the proof records the exact coefficient and quotient-functor transports used in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stratified perfect adic complexes are derived complete and have bounded constructible etale residue",
+   "results": "IsAdicComplete and ordinary AdicCompletion lemmas; no sheaf-valued local-to-global residue result.",
+   "date": "2026-10-21",
+   "verdict": "No exact match for this project-specific sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Stratified perfect models imply derived completeness bounded cohomology and constructible etale residue origin",
+   "results": "Eight returned results were checked; generic algebra or categorical results only.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing project declarations and categorical APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Perfect\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*(triangulated|perfect)|stratif.*perfect",
+   "results": "No Mathlib declaration states this adic geometric assertion.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicStratifiedPerfect",
+  "date": "2026-10-21",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence invoking sk-prop-integral-criterion: Proposition 6.6.11, reverse implication, and Lemma 6.5.3",
+   "via": [
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicPerfectModelsResidueOrigin",
+  "file": "lean/Sheaf/Paper/AdicPerfectModelsResidueOrigin.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicPerfectModels_residueOrigin",
+  "statement": "theorem adicPerfectModels_residueOrigin (X : Scheme.{u}) [IsNoetherian X]\n    (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)\n    [IsAdicComplete I A]\n    (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)))\n    (hK : IsSfbStratifiedPerfect X I K) :\n    IsSfbAdicComplete X I K ∧\n      (∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, (q < a ∨ b < q) →\n        IsZero ((DerivedCategory.homologyFunctor _ q).obj K)) ∧\n      ∃ C : CochainComplex\n          (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1)))) ℤ,\n        (∃ a b : ℤ, a ≤ b ∧ ∀ q : ℤ, (q < a ∨ b < q) → IsZero (C.homology q)) ∧\n        (∀ q : ℤ, IsConstructibleSheaf (C.homology q)) ∧\n        Nonempty (DerivedCategory.Q.obj (sfbResidueComplex X I K) ≅\n          DerivedCategory.Q.obj\n            (((ProEtale.comparisonUpperStar\n              (ModuleCat.{u + 1} (A ⧸ I ^ (0 + 1))) X).mapHomologicalComplex\n                (.up ℤ)).obj C))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5163",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T144006-L-34028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5163",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T144006-L-34028",
+  "kind": "interface",
+  "note": "independent cc review: item stmt byte-identical to live; relocated 11 defs + 15 public imports byte-identical in AdicStratifiedPerfectData (public re-export); 2 new sorry lemmas = BS 6.6.11 forward/reverse under item hypotheses; importers IntegralCohomologicalAdicCriterion and IntegralHeartLocalModel compiled against the delivered modules; axioms checked"
+ }
+}

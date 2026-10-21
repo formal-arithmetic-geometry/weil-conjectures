@@ -236,7 +236,8 @@
   "declaration": "AlgebraicGeometry.etale_discreteNoetherian_constructible_serre",
   "declarations": [
    "AlgebraicGeometry.etale_discreteNoetherian_constructible_serre",
-   "AlgebraicGeometry.proEtale_discreteNoetherian_constructible_serre"
+   "AlgebraicGeometry.proEtale_discreteNoetherian_constructible_serre",
+   "AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_shortExact_of_isNoetherianRing"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/DiscreteNoetherianConstructibleSerre.lean",
   "statement": "theorem etale_discreteNoetherian_constructible_serre (X : Scheme.{u}) (R : Type (u + 1)) [CommRing R] [IsNoetherianRing R] : Etale.constructibleNoetherianModules X R (0 : ringedSiteModules.{u + 1} ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of R))) ∧ (∀ (F G : ringedSiteModules.{u + 1} ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of R))) (f : F ⟶ G), Etale.constructibleNoetherianModules X R F → Etale.constructibleNoetherianModules X R G → Etale.constructibleNoetherianModules X R (kernel f) ∧ Etale.constructibleNoetherianModules X R (cokernel f)) ∧ (∀ S : ShortComplex (ringedSiteModules.{u + 1} ((constantSheaf X.smallEtaleTopology RingCat.{u + 1}).obj (RingCat.of R))), S.ShortExact → Etale.constructibleNoetherianModules X R S.X₁ → Etale.constructibleNoetherianModules X R S.X₃ → Etale.constructibleNoetherianModules X R S.X₂)",
@@ -255,13 +256,13 @@
   "note": "Read item, 14 stmt_deps, new def node, both modules, report, upstream decls (LocallyClosedStratification/Stratification, proEtaleConstantRing, proEtaleConstantModulePullback, proEtaleConstantModuleSheafOver, landed Etale.constructibleNoetherianModules) and Stacks 03RZ(3), 09B5, 03RW(3), 09AJ, 00IK. All hypotheses/clauses match: arbitrary Scheme, CommRing+IsNoetherianRing without finiteness, constant-ring module sheaves on Mathlib small etale and ProEt sites, affine-local finite constructible locally closed stratification with immersions, inverse image along S.immersion a ≫ U.ι, local constant f.p. models (etale reuse of landed Module.Finite predicate equivalent over Noetherian R), zero/kernel+cokernel/ShortExact extension clauses. Universes: etale R in u+1, pro-etale R in u per recorded interfaces, documented, no site universe equality. Edge cases empty X/U, n=0, zero ring, Z, non-qc X ok. Item node changed only in lean and stmt_deps (+new def node, +landed def-pe-etale-constructible-module); lean.statement verbatim; new node fields per §5, not a duplicate, real Prop. Only sorry bodies; source/blueprint docstrings with six proof steps; report has Worker report and Second reading by Q129. nt_compile.py --json on both files: rc 0, no errors, no warnings beyond sorry. No findings."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P1",
+  "reviewer": "C-b5163",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261019T154019-L-3027632",
+  "landing": "20261021T144006-L-34028",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item stmt byte-identical to live; relocated 11 defs + 15 public imports byte-identical in AdicStratifiedPerfectData (public re-export); 2 new sorry lemmas = BS 6.6.11 forward/reverse under item hypotheses; importers IntegralCohomologicalAdicCriterion and IntegralHeartLocalModel compiled against the delivered modules; axioms checked"
  }
 }

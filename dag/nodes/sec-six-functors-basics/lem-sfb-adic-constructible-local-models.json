@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-adic-constructible-local-models",
+ "kind": "statement",
+ "title": "Finite-projective local representatives from an adic constructible residue",
+ "statement": "Let X be a Noetherian scheme [def-pc-scheme], A a commutative complete Noetherian local ring [def-weil-pbc-noetherian-ring], [def-weil-pbc-adically-complete-ring], and I its unique maximal ideal. For a derived completed-coefficient object K satisfying IsSfbAdicConstructible [def-sfb-adic-stratified-perfect-data], there is a finite constructible locally closed stratification [def-constructible-stratification] such that, on a pro-etale covering sieve of each stratum, its immersion-and-slice restriction is isomorphic to that of sfbCompletedModel(P), for a strictly bounded finite-projective A-complex P. The bounds may vary with the covering member. The conclusion records actual representative complexes, without a redundant separate perfectness witness [def-pc-perfect-ring-complex].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11, forward implication, using Lemma 6.6.8"
+ },
+ "stmt_deps": [
+  "def-sfb-adic-stratified-perfect-data",
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adically-complete-ring",
+  "def-constructible-stratification",
+  "def-pc-perfect-ring-complex"
+ ],
+ "proof": [
+  {
+   "text": "For the finitely many nonzero residue cohomology sheaves intersect their constructible stratifications using actual scheme fibre products. Pull back the finite locally constant presentations to each common stratum. Every stratum is Noetherian by the immersion affine calculation and quasi-compactness of subspaces of Noetherian spaces.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-sfb-adic-finite-stratification-pullback",
+    "lem-sc-affine-noetherian-underlying-space",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport to the equivalent small sites. Restriction of completion units gives completeness on each stratum. Comparison pullback identifies its residue with the restricted etale complex; field-valued tensor gives finite Tor amplitude on that stratum.",
+   "uses": [
+    "lem-sfb-adic-stratum-completion-unit",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sfb-etale-field-tensor-bounds"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing lisse-residue perfect-lifting theorem on each Noetherian stratum, obtaining covering sieves and bounded finite-projective coefficient complexes. Transfer the sieve along the site equivalence. Compose the constant-coefficient and inverse-image comparisons to identify its isomorphism with sfbLocalRestriction of sfbCompletedModel. This gives exactly the asserted witnesses; empty schemes use the empty covering sieve.",
+   "uses": [
+    "lem-sfb-adic-residue-lisse-perfect-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-affine-noetherian-underlying-space",
+  "lem-sfb-adic-finite-stratification-pullback",
+  "lem-sfb-adic-residue-lisse-perfect-lift",
+  "lem-sfb-adic-stratum-completion-unit",
+  "lem-sfb-etale-field-tensor-bounds",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-constructible-stratification-intersection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11, forward implication, using Lemma 6.6.8; the proof records the exact coefficient and quotient-functor transports used in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived complete complexes with bounded constructible residue admit finite stratified perfect local models",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE and localization-of-fractions lemmas; no stratified adic lifting theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact match for this project-specific sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete complex with bounded constructible etale residue has stratified finite projective local models",
+   "results": "Eight returned results were checked; generic algebra or categorical results only.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing project declarations and categorical APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Perfect\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*(triangulated|perfect)|stratif.*perfect",
+   "results": "No Mathlib declaration states this adic geometric assertion.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicStratifiedPerfect",
+  "date": "2026-10-21",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence invoking sk-prop-integral-criterion: Proposition 6.6.11, forward implication, using Lemma 6.6.8",
+   "via": [
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicConstructibleLocalModels",
+  "file": "lean/Sheaf/Paper/AdicConstructibleLocalModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicConstructible_localModels",
+  "statement": "theorem adicConstructible_localModels (X : Scheme.{u}) [IsNoetherian X]\n    (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]\n    (I : Ideal A) (hI : I.IsMaximal ∧ ∀ J : Ideal A, J.IsMaximal → J = I)\n    [IsAdicComplete I A]\n    (K : DerivedCategory (proEtaleRingModules X (adicLisseCompletedRing X I)))\n    (hK : IsSfbAdicConstructible X I K) :\n    ∃ s : Stratification X,\n      (∀ α : Fin s.n, Topology.IsConstructible (s.stratum α)) ∧\n      ∀ α : Fin s.n, ∃ V : Sieve (⊤_ (s.domain α).ProEt),\n        V ∈ ProEt.topology (s.domain α) (⊤_ (s.domain α).ProEt) ∧\n          ∀ (U : (s.domain α).ProEt) (f : U ⟶ ⊤_ (s.domain α).ProEt), V f →\n            ∃ (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) (a b : ℤ),\n              P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧\n              (∀ q : ℤ, Module.Projective A (P.X q) ∧ Module.Finite A (P.X q)) ∧\n              Nonempty\n                (sfbLocalRestriction (s.immersion α) (adicLisseCompletedRing X I) U K ≅\n                  sfbLocalRestriction (s.immersion α) (adicLisseCompletedRing X I) U\n                    (sfbCompletedModel X I P))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5163",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T144006-L-34028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5163",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T144006-L-34028",
+  "kind": "interface",
+  "note": "independent cc review: item stmt byte-identical to live; relocated 11 defs + 15 public imports byte-identical in AdicStratifiedPerfectData (public re-export); 2 new sorry lemmas = BS 6.6.11 forward/reverse under item hypotheses; importers IntegralCohomologicalAdicCriterion and IntegralHeartLocalModel compiled against the delivered modules; axioms checked"
+ }
+}

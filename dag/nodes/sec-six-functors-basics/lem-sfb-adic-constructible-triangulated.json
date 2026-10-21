@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-adic-constructible-triangulated",
+ "kind": "statement",
+ "title": "Triangulated closure of bounded constructible etale residue origin",
+ "statement": "Let X be a Noetherian scheme [def-pc-scheme], A a commutative ring and I a maximal ideal. The property SfbConstructibleResidue of objects of D(Mod(completed A_X)) is closed under isomorphisms and triangulated. Here SfbConstructibleResidue is exactly the etale residue witness, bounded constructible cohomology, comparison isomorphism and finite Tor clause of IsSfbAdicConstructible [def-sfb-adic-stratified-perfect-data], with completeness omitted. The maximal ideal need not be unique, A need not be Noetherian or adically complete, and the residue field need not be finite.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.5.1, observation immediately following the definition"
+ },
+ "stmt_deps": [
+  "def-sfb-adic-stratified-perfect-data",
+  "def-pc-scheme",
+  "def-weil-triangulated-subcategory",
+  "def-sf-categorical-proetale-constructibility"
+ ],
+ "proof": [
+  {
+   "text": "The scalar-forgetting functor from fixed-scalar sheaves to additive sheaves preserves finite limits and colimits and reflects both. Fixed-scalar restriction composed with it is the intrinsic module underlying-sheaf functor, which is exact. Hence fixed-scalar restriction is exact, and its derived composite with completed quotient reduction is triangulated.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Constructible etale module sheaves over a Noetherian residue field are closed under kernels, cokernels and extensions. The global extension consequence uses the same finite-presentation lifting proof on common strata; it does not require a finite underlying field. Consequently bounded constructible etale complexes form a triangulated full subcategory.",
+   "uses": [
+    "lem-sfb-discrete-noetherian-constructible-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Derived comparison is fully faithful on bounded-below complexes. Its restriction to bounded constructible etale objects is therefore full and triangulated. The essential image of this restricted functor is triangulated and isomorphism-closed.",
+   "uses": [
+    "lem-weil-pbc-fixed-module-derived-hom-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the residue predicate with the inverse image of this essential image. In the forward direction Q(C) has the required bounds and constructible homology by the homology factor isomorphism. In the reverse direction take a cochain preimage of the etale object and use Q.objObjPreimageIso. Replace possibly unordered endpoints by min and max; transport vanishing and constructibility. The field-tensor theorem gives the Tor condition. Inverse image of a triangulated property along a triangulated functor is triangulated, giving both assertions.",
+   "uses": [
+    "lem-sfb-etale-field-tensor-bounds"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-sfb-etale-field-tensor-bounds",
+  "lem-weil-pbc-fixed-module-derived-hom-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.5.1, observation immediately following the definition; the proof records the exact coefficient and quotient-functor transports used in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible etale residue complexes form a triangulated subcategory",
+   "results": "ObjectProperty.IsTriangulated, homologicalKernel and triangulated subcategory APIs; no residue property equivalence.",
+   "date": "2026-10-21",
+   "verdict": "No exact match for this project-specific sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic constructible complexes form a triangulated subcategory of the derived category",
+   "results": "Eight returned results were checked; generic algebra or categorical results only.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing project declarations and categorical APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Perfect\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*(triangulated|perfect)|stratif.*perfect",
+   "results": "No Mathlib declaration states this adic geometric assertion.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicStratifiedPerfect",
+  "date": "2026-10-21",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence invoking sk-prop-integral-criterion: Definition 6.5.1, observation immediately following the definition",
+   "via": [
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicConstructibleTriangulated",
+  "file": "lean/Sheaf/Paper/AdicConstructibleTriangulated.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicConstructible_residueTriangulated",
+  "statement": "theorem adicConstructible_residueTriangulated (X : Scheme.{u}) [IsNoetherian X]\n    (A : Type (u + 1)) [CommRing A]\n    (I : Ideal A) (hI : I.IsMaximal) :\n    ObjectProperty.IsClosedUnderIsomorphisms (SfbConstructibleResidue X I) ∧\n      ObjectProperty.IsTriangulated (SfbConstructibleResidue X I)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.SfbConstructibleResidue",
+   "AlgebraicGeometry.Scheme.adicConstructible_residueTriangulated"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5163",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T144006-L-34028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5163",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T144006-L-34028",
+  "kind": "interface",
+  "note": "independent cc review: item stmt byte-identical to live; relocated 11 defs + 15 public imports byte-identical in AdicStratifiedPerfectData (public re-export); 2 new sorry lemmas = BS 6.6.11 forward/reverse under item hypotheses; importers IntegralCohomologicalAdicCriterion and IntegralHeartLocalModel compiled against the delivered modules; axioms checked"
+ }
+}

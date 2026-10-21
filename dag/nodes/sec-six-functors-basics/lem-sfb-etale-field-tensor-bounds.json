@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-etale-field-tensor-bounds",
+ "kind": "statement",
+ "title": "Field-valued etale sheaf tensor preserves cohomological bounds",
+ "statement": "Let X be a scheme [def-pc-scheme], k a field, and C an etale complex of k-module sheaves [def-weil-pbc-etale-site], [def-weil-sheaf-of-modules-category]. If H^q(C)=0 outside an integral interval [a,b], then the same interval bounds the homology of sfbEtaleTensorDegreeZero(X,k,C,N) [def-sfb-adic-stratified-perfect-data] for every degree-zero etale k-module sheaf N. No constructibility, Noetherianity or strict termwise bounds are assumed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.3.2 and the field-coefficient observation in the proof of the integral criterion"
+ },
+ "stmt_deps": [
+  "def-sfb-adic-stratified-perfect-data",
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Presheaf tensor is computed sectionwise. Every vector space is flat, so evaluation after tensor preserves finite limits. The sheaf tensor comparison identifies tensor with presheaf tensor followed by exact sheafification. Thus sheaf tensor preserves finite limits. The reflected closed monoidal structure also makes tensor a left adjoint, so it preserves finite colimits.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The exact-functor homology isomorphism identifies homology of the tensor complex with tensor of the homology sheaf. Apply the functor to each zero homology sheaf and transport zero along this isomorphism, for every N and every outside degree.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.3.2 and the field-coefficient observation in the proof of the integral criterion; the proof records the exact coefficient and quotient-functor transports used in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Tensor with a sheaf of vector spaces is exact and preserves cohomological amplitude",
+   "results": "Module.Flat.lTensor_exact, Module.Flat.rTensor_exact and the short-complex exactness criteria: algebraic ingredients, no direct sheaf assertion.",
+   "date": "2026-10-21",
+   "verdict": "No exact match for this project-specific sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor a complex of sheaves of vector spaces with a degree zero sheaf preserves cohomological bounds",
+   "results": "Eight homological-complex tensor results, none states the exact sheaf tensor assertion.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; use the existing project declarations and categorical APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensorRight\", \"PreservesFiniteLimits\"",
+   "results": "Module.Flat.iff_preservesFiniteLimits_tensorRight and Module.Flat.preservesFiniteLimits_tensorRight.",
+   "date": "2026-10-21",
+   "verdict": "Used for the pointwise exactness step; passage to sheaf tensor still needs proof."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexHomologyIso|iff_preservesFiniteLimits_tensorRight",
+   "results": "Mathlib/RingTheory/Flat/CategoryTheory.lean: preservesFiniteLimits_tensorRight; exact-functor homology comparison in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean.",
+   "date": "2026-10-21",
+   "verdict": "Generic ingredients used in the proof; no one-line specialization gives the sheaf result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicStratifiedPerfect",
+  "date": "2026-10-21",
+  "group": "U2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Proof, first sentence invoking sk-prop-integral-criterion: Remark 6.3.2 and the field-coefficient observation in the proof of the integral criterion",
+   "via": [
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicResidueFieldTensor",
+  "file": "lean/Sheaf/Paper/AdicResidueFieldTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.sfbFieldTensor_bounds",
+  "statement": "theorem sfbFieldTensor_bounds (X : Scheme.{u}) (k : Type (u + 1)) [Field k]\n    (C : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) ℤ)\n    (a b : ℤ) (h : ∀ q : ℤ, (q < a ∨ b < q) → IsZero (C.homology q)) :\n    ∀ (N : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} k)) (q : ℤ),\n      (q < a ∨ b < q) → IsZero ((sfbEtaleTensorDegreeZero X k C N).homology q)",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5163",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T144006-L-34028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b5163",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T144006-L-34028",
+  "kind": "interface",
+  "note": "independent cc review: item stmt byte-identical to live; relocated 11 defs + 15 public imports byte-identical in AdicStratifiedPerfectData (public re-export); 2 new sorry lemmas = BS 6.6.11 forward/reverse under item hypotheses; importers IntegralCohomologicalAdicCriterion and IntegralHeartLocalModel compiled against the delivered modules; axioms checked"
+ }
+}
