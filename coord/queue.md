@@ -1,8 +1,8 @@
 # Work queue
 
-133 items; claim with `tools/claim.py next <group> [--stage N]`.
+153 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (11 clusters, 791 modules)
+## Rework: quarantined by the upstream sync (12 clusters, 711 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -11,6 +11,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.FiniteCoefficientDirectImage` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ClosedSupportConstructible` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -20,9 +21,9 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 83, stage 3 2 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 63, stage 3 2 items.
 
-## Stage 1: nodes to split (22)
+## Stage 1: nodes to split (21)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -31,7 +32,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-condensed-derived-restriction-calculus` | 4012 | none |
 | `lem-sfb-derived-invariants-normal-subgroup-comparison` | 4012 | none |
-| `lem-sfb-integral-lattice-cubical-contraction` | 4012 | none |
 | `lem-sfb-integral-lisse-closed-base-change` | 4012 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
 | `lem-sfb-prime-to-ell-condensed-acyclicity` | 4012 | none |
@@ -49,24 +49,38 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-filtered-colimit-strictly-henselian-local` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (30)
+## Stage 2: nodes to state (51)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
+| `sk-def-sf-orientation` | 2 | state | 17 |
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
+| `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
+| `lem-sf-open-external-tensor-normalization` | 1 | state | 2 |
+| `lem-wf-internal-hom-weil` | 1 | state | 2 |
 | `lem-sf-open-tensor-quotient-augmentation` | 1 | state | 1 |
 | `lem-sfb-discrete-lattice-koszul-resolution` | 1 | state | 1 |
 | `lem-sfb-root-tower-boundary-acyclicity` | 1 | state | 1 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
+| `lem-coef-closed-identity-open-hom-normalization` | 1 | state | 0 |
+| `lem-coef-compact-support-normalized-realization` | 1 | state | 0 |
+| `lem-coef-residue-controlled-finite-homs` | 1 | state | 0 |
 | `lem-fd-whole-tower-integral-pullback-comparison` | 1 | state | 0 |
+| `lem-fix-compactification-completed-realization` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
+| `lem-pur-affine-chart-exceptional-identification` | 1 | state | 0 |
+| `lem-pur-closed-finite-adjoint-counit-transport` | 1 | state | 0 |
+| `lem-pur-dualizing-unit-composite` | 1 | state | 0 |
+| `lem-pur-finite-site-counit-projection-transport` | 1 | state | 0 |
+| `lem-sf-locally-closed-relative-transpose-normalization` | 1 | state | 0 |
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-dense-lattice-derived-invariants-comparison` | 1 | state | 0 |
 | `lem-sfb-finite-closed-cover-resolution` | 1 | state | 0 |
 | `lem-sfb-indfinite-contractible-base-wstrict` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
+| `lem-sfb-integral-lattice-cubical-contraction` | 1 | state | 0 |
 | `lem-sfb-lattice-supported-hom-finite-comparison` | 1 | state | 0 |
 | `lem-sfb-lattice-supported-hom-reduction-tower` | 1 | state | 0 |
 | `lem-sfb-norm-algcl-cohomology-topology-comparison` | 1 | state | 0 |
@@ -78,13 +92,20 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sfb-wstrict-lisse-component-cohomology` | 1 | state | 0 |
 | `lem-sp-finite-coefficient-input-models` | 1 | state | 0 |
+| `lem-weil-boundary-comparison-composition-transport` | 1 | state | 0 |
+| `lem-zl-adic-hom-tensor-lisse-criterion` | 1 | state | 0 |
+| `lem-zl-constant-geometric-stalk-unit` | 1 | state | 0 |
+| `lem-zl-lisse-cohomology-derived-dual` | 1 | state | 0 |
 | `lem-zl-raw-heart-adic-lisse-stratification` | 1 | state | 0 |
+| `lem-pod-semilinear-field-operation-lifts` | 2 | state | 0 |
+| `lem-pur-closed-etale-transport-bounds` | 2 | state | 0 |
+| `lem-pur-compact-support-arrow-scalar-transport` | 2 | state | 0 |
 | `lem-sfb-profinite-constant-derived-functions` | 2 | state | 0 |
 | `lem-sfb-tame-inertia-continuous-koszul` | 2 | state | 0 |
 | `lem-wf-tate-twist-compatibility` | 2 | state | 0 |
 | `lem-wf-tate-twist-frobenius` | 2 | state | 0 |
 
-Not open yet: 374 nodes that below a finished node, not needed, 104 nodes that wait for a statement dependency (bottom-up), 21 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 374 nodes that below a finished node, not needed, 104 nodes that wait for a statement dependency (bottom-up), 20 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (62)
 
