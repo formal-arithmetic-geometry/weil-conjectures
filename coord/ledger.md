@@ -21193,3 +21193,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:37 L: returned deliver/NQ/lem-sfb-ordinary-proetale-direct-image-plus-comparison (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-ordinary-proetale-direct-image-plus-comparison)
 - 08:37 L: returned deliver/O2/lem-pe-two-term-reduction-cohomology (reviewer RETURN: L: independent stage-2 immutable head f2a79c6fbcc8: H2: stmt_deps add theorem lem-sfb-successive-derived-quotient-normal)
 - 08:37 L: returned deliver/NO/lem-sfb-derived-scalar-localization-reflection (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-derived-scalar-localization-reflection: lem-sf)
+- 08:37 L: returned deliver/Q41/lem-weil-roos-transition-homotopy (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-roos-transition-homotopy: lem-weil-roos-trans)
