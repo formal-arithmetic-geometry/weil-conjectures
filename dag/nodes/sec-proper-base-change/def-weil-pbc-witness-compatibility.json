@@ -1,247 +1,247 @@
 {
-  "id": "def-weil-pbc-witness-compatibility",
-  "blueprint": {
-    "is": "def-weil-pbc-witness-compatibility",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "definition",
-  "title": "Witness compatibility condition",
-  "statement": "Fix a cartesian square $\\square=(f,f',g,g',\\alpha)$ of schemes, with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$ and $g':X'\\to X$, [def-weil-pbc-cartesian-square] and an adic coefficient datum $(A,I)$ [def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$ for $n\\geq1$. Use the four ambient finite-level functors $Rf_{*,n}$, $Rf'_{*,n}$, $Lg_n^*$ and $Lg_n'^*$ of [def-weil-pbc-proetale-operations], with source-target pairs $(X,Y)$, $(X',Y')$, $(Y,Y')$ and $(X,X')$, respectively. Test them on the bounded constructible input categories of [def-weil-pbc-finite-level-amplification], defined in [def-weil-pbc-proetale-modules]. No restriction of a functor to a bounded constructible output category is assumed unless separately supplied by AMP.\n\nFor a scheme $T$, write $r^T_n(M)=M\\otimes^L_{(P_{n+1})_T}(P_n)_T$ for coefficient reduction, using the quotient-coefficient sheaves and normalization maps of [def-weil-pbc-adic-coefficient-datum]. A normalized tower has isomorphisms $\\theta_n:r^T_nK_{n+1}\\xrightarrow{\\sim}K_n$, with the quotient cocycle for successive reductions. A compatible etale-origin witness consists of the retained pairs $(L_n,\\alpha_n)$ of [def-weil-pbc-etale-origin-witness] and isomorphisms $\\beta_n:L_{n+1}\\otimes^L_{P_{n+1}}P_n\\xrightarrow{\\sim}L_n$, with the quotient cocycle, such that\n$$\\alpha_n\\circ\\nu_T^*(\\beta_n)=\\theta_n\\circ r^T_n(\\alpha_{n+1}).$$\nHere $L_n\\in D^+(T_{\\Et},P_n)$, and the tensors on the etale side use its constant coefficient sheaves. Derived change of coefficient sheaves is [lem-pur-derived-change-of-rings]. The source of the displayed equality is identified by the tensor comparison for the ringed comparison morphism $\\nu_T$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], using the inverse-image coefficient identification of [def-weil-pbc-proetale-modules]. Thus both sides are maps from $\\nu_T^*(L_{n+1}\\otimes^L_{P_{n+1}}P_n)$ to $K_n$.\n\nDefine $\\mathrm{WIT}(\\square)$, relative to the fixed coefficient datum, to mean the following condition for each of the four functor families $F_n:D(T_{\\Proet},P_n)\\to D(S_{\\Proet},P_n)$ above, on the full input subcategory of $D^b_c(T_{\\Proet},P_{n+1})$ consisting of objects whose reduction also belongs to $D^b_c(T_{\\Proet},P_n)$. The output is taken in the ambient derived category; the output witnesses required below are bounded below. Coefficient reduction commutes with $F_n$ through natural isomorphisms\n$$\\rho_n:r^S_nF_{n+1}\\xrightarrow{\\sim}F_nr^T_n,$$\ncompatible with identity reductions and composition of quotient maps. Thus the output normalization is required to be\n$$\\theta'_n=F_n(\\theta_n)\\circ\\rho_n(K_{n+1}).$$\nFor every normalized input tower with bounded constructible levels equipped with compatible etale-origin witnesses, the functor carries the retained witness data to output pairs $(L'_n,\\alpha'_n)$ for $F_nK_n$, equipped with isomorphisms $\\beta'_n:L'_{n+1}\\otimes^L_{P_{n+1}}P_n\\xrightarrow{\\sim}L'_n$ satisfying the quotient cocycle and\n$$\\alpha'_n\\circ\\nu_S^*(\\beta'_n)=\\theta'_n\\circ r^S_n(\\alpha'_{n+1}).$$\nCarrying witness data means a functor on witnessed towers over the levelwise functor $F_\\bullet$: a morphism of witnessed towers is a pair of compatible levelwise maps $u_n:K_n\\to\\widetilde K_n$ and $v_n:L_n\\to\\widetilde L_n$ with $u_n\\alpha_n=\\widetilde\\alpha_n\\nu_T^*(v_n)$, and the underlying output maps are $F_n(u_n)$. This is a compatibility predicate, not an assertion that these comparisons or transported witnesses exist for every square.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-witness-compatibility.md",
-    "place": "node def-weil-pbc-witness-compatibility, order 1352",
-    "external": [
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09C9"
-      },
-      {
-        "document": "Stacks Project",
-        "place": "Tag 09C2"
-      }
-    ],
-    "note": [
-      "*Source note:* no Stacks Project entry states this predicate: the\netale-origin witnesses are the blueprint's device for Stacks' hypothesis in\nTheorem 61.30.1 ([Tag 09C9](https://stacks.math.columbia.edu/tag/09C9)) that\n$K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n}$ be bounded below with cohomology\nsheaves coming from the etale site. The per-level existence of such an\norigin is Stacks' Lemma 61.29.2 ([Tag\n09C2](https://stacks.math.columbia.edu/tag/09C2)) (4): for a constructible\n$K$ on a quasi-compact $X$ there are $a,b$ with $K=\\Rlim K_n$, each $K_n$ of\ntor amplitude in $[a,b]$ with constructible cohomology sheaves, and\n$K_n=\\epsilon^{-1}L_n$ for some $L_n\\in D_{ctf}(X_{\\Et},\\Lambda/I^n)$.\nDifference: Stacks states this for a single object, and neither asserts that\nthe $L_n$ are compatible over $n$ nor tracks maps $\\alpha_n$ as in\n[def-weil-pbc-etale-origin-witness]; the blueprint adds the compatibility\npredicate $\\mathrm{WIT}(\\square)$."
-    ]
-  },
-  "stmt_deps": [
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-finite-level-amplification",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-etale-origin-witness",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ "id": "def-weil-pbc-witness-compatibility",
+ "blueprint": {
+  "is": "def-weil-pbc-witness-compatibility",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Witness compatibility condition",
+ "statement": "Fix a cartesian square $\\square=(f,f',g,g',\\alpha)$ of schemes, with $f:X\\to Y$, $f':X'\\to Y'$, $g:Y'\\to Y$ and $g':X'\\to X$, [def-weil-pbc-cartesian-square] and an adic coefficient datum $(A,I)$ [def-weil-pbc-adic-coefficient-datum], with $P_n=A/I^n$ for $n\\geq1$. Use the four ambient finite-level functors $Rf_{*,n}$, $Rf'_{*,n}$, $Lg_n^*$ and $Lg_n'^*$ of [def-weil-pbc-proetale-operations], with source-target pairs $(X,Y)$, $(X',Y')$, $(Y,Y')$ and $(X,X')$, respectively. Test them on the bounded constructible input categories of [def-weil-pbc-finite-level-amplification], defined in [def-weil-pbc-proetale-modules]. No restriction of a functor to a bounded constructible output category is assumed unless separately supplied by AMP.\n\nFor a scheme $T$, write $r^T_n(M)=M\\otimes^L_{(P_{n+1})_T}(P_n)_T$ for coefficient reduction, using the quotient-coefficient sheaves and normalization maps of [def-weil-pbc-adic-coefficient-datum]. A normalized tower has isomorphisms $\\theta_n:r^T_nK_{n+1}\\xrightarrow{\\sim}K_n$, with the quotient cocycle for successive reductions. A compatible etale-origin witness consists of the retained pairs $(L_n,\\alpha_n)$ of [def-weil-pbc-etale-origin-witness] and isomorphisms $\\beta_n:L_{n+1}\\otimes^L_{P_{n+1}}P_n\\xrightarrow{\\sim}L_n$, with the quotient cocycle, such that\n$$\\alpha_n\\circ\\nu_T^*(\\beta_n)=\\theta_n\\circ r^T_n(\\alpha_{n+1}).$$\nHere $L_n\\in D^+(T_{\\Et},P_n)$, and the tensors on the etale side use its constant coefficient sheaves. Derived change of coefficient sheaves is [lem-pur-derived-change-of-rings]. The source of the displayed equality is identified by the tensor comparison for the ringed comparison morphism $\\nu_T$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], using the inverse-image coefficient identification of [def-weil-pbc-proetale-modules]. Thus both sides are maps from $\\nu_T^*(L_{n+1}\\otimes^L_{P_{n+1}}P_n)$ to $K_n$.\n\nDefine $\\mathrm{WIT}(\\square)$, relative to the fixed coefficient datum, to mean the following condition for each of the four functor families $F_n:D(T_{\\Proet},P_n)\\to D(S_{\\Proet},P_n)$ above, on the full input subcategory of $D^b_c(T_{\\Proet},P_{n+1})$ consisting of objects whose reduction also belongs to $D^b_c(T_{\\Proet},P_n)$. The output is taken in the ambient derived category; the output witnesses required below are bounded below. Coefficient reduction commutes with $F_n$ through natural isomorphisms\n$$\\rho_n:r^S_nF_{n+1}\\xrightarrow{\\sim}F_nr^T_n,$$\ncompatible with identity reductions and composition of quotient maps. Thus the output normalization is required to be\n$$\\theta'_n=F_n(\\theta_n)\\circ\\rho_n(K_{n+1}).$$\nFor every normalized input tower with bounded constructible levels equipped with compatible etale-origin witnesses, the functor carries the retained witness data to output pairs $(L'_n,\\alpha'_n)$ for $F_nK_n$, equipped with isomorphisms $\\beta'_n:L'_{n+1}\\otimes^L_{P_{n+1}}P_n\\xrightarrow{\\sim}L'_n$ satisfying the quotient cocycle and\n$$\\alpha'_n\\circ\\nu_S^*(\\beta'_n)=\\theta'_n\\circ r^S_n(\\alpha'_{n+1}).$$\nCarrying witness data means a functor on witnessed towers over the levelwise functor $F_\\bullet$: a morphism of witnessed towers is a pair of compatible levelwise maps $u_n:K_n\\to\\widetilde K_n$ and $v_n:L_n\\to\\widetilde L_n$ with $u_n\\alpha_n=\\widetilde\\alpha_n\\nu_T^*(v_n)$, and the underlying output maps are $F_n(u_n)$. This is a compatibility predicate, not an assertion that these comparisons or transported witnesses exist for every square.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-witness-compatibility.md",
+  "place": "node def-weil-pbc-witness-compatibility, order 1352",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09C9"
+   },
+   {
+    "document": "Stacks Project",
+    "place": "Tag 09C2"
+   }
   ],
-  "proof": [
-    {
-      "text": "For the supporting theorem pbcRestriction_isRightAdjoint, form ordinary scalar extension by composing sectionwise ModuleCat.extendScalars with sheafification. Its adjunction to restriction is Sheaf.adjunction. Commuting restriction past sheafification, use ModuleCat.extendScalarsCompRestrictScalarsIso and the sheafification tensor comparison to identify extension followed by restriction with tensoring by the constant coefficient module sheaf. CochainComplex.acyclic_tensorRight_of_kFlat sends acyclic K-flat complexes to acyclic complexes under this tensor functor. Faithful exact restriction reflects acyclicity. Functor.PreservesKFlatQuasiIso.mk' and Adjunction.derivedAdjunction then give the derived adjunction; exactness identifies the right derived restriction with mapDerivedCategory. These are existing proved source-library declarations, used directly in the fixed-ring presentation.",
-      "uses": [],
-      "elementary": false
-    },
-    {
-      "text": "For identity and composition of witnessed tower maps, apply functoriality and associativity to the theta, beta and origin squares. Extensionality on the two levelwise components proves the category laws; proof fields agree by proof irrelevance.",
-      "uses": [],
-      "elementary": true
-    },
-    {
-      "text": "For pbcWitnessedInput_memReductionDomain, the next level is bounded constructible by the input property. At the current level choose the existing constructible realization witness and compose its realization isomorphism with the realization of theta inverse. This gives the required essential-image witness for the reduction.",
-      "uses": [
-        "def-weil-pbc-proetale-modules"
-      ],
-      "elementary": true
-    },
-    {
-      "text": "The supporting theorem pbcComparisonReductionMap_isIso remains open. Its required argument is the K-flat comparison computation described in its Lean docstring: ordinary balancing on comparison pullbacks must be identified with the displayed derived adjunction mate.",
-      "uses": [],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
+  "note": [
+   "*Source note:* no Stacks Project entry states this predicate: the\netale-origin witnesses are the blueprint's device for Stacks' hypothesis in\nTheorem 61.30.1 ([Tag 09C9](https://stacks.math.columbia.edu/tag/09C9)) that\n$K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n}$ be bounded below with cohomology\nsheaves coming from the etale site. The per-level existence of such an\norigin is Stacks' Lemma 61.29.2 ([Tag\n09C2](https://stacks.math.columbia.edu/tag/09C2)) (4): for a constructible\n$K$ on a quasi-compact $X$ there are $a,b$ with $K=\\Rlim K_n$, each $K_n$ of\ntor amplitude in $[a,b]$ with constructible cohomology sheaves, and\n$K_n=\\epsilon^{-1}L_n$ for some $L_n\\in D_{ctf}(X_{\\Et},\\Lambda/I^n)$.\nDifference: Stacks states this for a single object, and neither asserts that\nthe $L_n$ are compatible over $n$ nor tracks maps $\\alpha_n$ as in\n[def-weil-pbc-etale-origin-witness]; the blueprint adds the compatibility\npredicate $\\mathrm{WIT}(\\square)$."
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-finite-level-amplification",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-etale-origin-witness",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof": [
+  {
+   "text": "For the supporting theorem pbcRestriction_isRightAdjoint, form ordinary scalar extension by composing sectionwise ModuleCat.extendScalars with sheafification. Its adjunction to restriction is Sheaf.adjunction. Commuting restriction past sheafification, use ModuleCat.extendScalarsCompRestrictScalarsIso and the sheafification tensor comparison to identify extension followed by restriction with tensoring by the constant coefficient module sheaf. CochainComplex.acyclic_tensorRight_of_kFlat sends acyclic K-flat complexes to acyclic complexes under this tensor functor. Faithful exact restriction reflects acyclicity. Functor.PreservesKFlatQuasiIso.mk' and Adjunction.derivedAdjunction then give the derived adjunction; exactness identifies the right derived restriction with mapDerivedCategory. These are existing proved source-library declarations, used directly in the fixed-ring presentation.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For identity and composition of witnessed tower maps, apply functoriality and associativity to the theta, beta and origin squares. Extensionality on the two levelwise components proves the category laws; proof fields agree by proof irrelevance.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For pbcWitnessedInput_memReductionDomain, the next level is bounded constructible by the input property. At the current level choose the existing constructible realization witness and compose its realization isomorphism with the realization of theta inverse. This gives the required essential-image witness for the reduction.",
+   "uses": [
     "def-weil-pbc-proetale-modules"
-  ],
-  "proof_origin": {
-    "by": "document",
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY, 06XN, 07A4 and 0G7E; fixed-ring scalar extension and proved source-library derived adjunction; elementary witnessed-tower laws"
+   ],
+   "elementary": true
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "a predicate that four finite-level functors commute with normalization isomorphisms and preserve compatible etale-origin witnesses",
-      "results": "8 hits; AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, StandardEtalePair.HasMap.map, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra, StandardEtalePair.homEquiv",
-      "date": "2026-10-14",
-      "verdict": "no match: none states the four-family derived quotient-normalization and retained-origin predicate"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Functor, natural transformation, compatibility, normalization isomorphism",
-      "results": "0 hits; ; loogle: Unknown identifier `natural`",
-      "date": "2026-10-14",
-      "verdict": "invalid pattern: unknown identifier; superseded by the normalization name search"
-    },
-    {
-      "tool": "grep",
-      "query": "normalization isomorphism|etale-origin|compatible witnesses",
-      "results": "0 hits; ",
-      "date": "2026-10-14",
-      "verdict": "invalid source directory: doubled Mathlib path; rerun whole-tree grep without subdirectory"
-    },
-    {
-      "tool": "leansearch",
-      "query": "finite-level functors commute with normalization isomorphisms compatible etale-origin witnesses",
-      "results": "0 hits; ; service unavailable: Internal Server Error",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Compatibility of chosen lifts of a normalized inverse system along a functor with derived extension of scalars between quotient coefficient rings",
-      "results": "8 hits; IsAdicComplete.StrictMono.factorPow_comp_extend, AdicCompletion.eval_lift, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.transitionMap_comp_eval_apply, IsAdicComplete.StrictMono.mkQ_comp_lift, AdicCompletion.eval_lift_apply, AdicCompletion.transitionMap_comp_eval, IsAdicComplete.StrictMono.of_lift",
-      "date": "2026-10-14",
-      "verdict": "no match: none states the four-family derived quotient-normalization and retained-origin predicate"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"normalization\"",
-      "results": "12 hits; Aesop.LocalRuleSet.applicableNormalizationRules, Aesop.LocalRuleSet.applicableNormalizationRulesWith, Aesop.NormalizationState, Aesop.GoalState.provenByNormalization, Aesop.NormalizationState.notNormal, Aesop.instInhabitedNormalizationState, Aesop.Goal.normalizationState, Aesop.GoalState.isProvenByNormalization",
-      "date": "2026-10-14",
-      "verdict": "no match: none states the four-family derived quotient-normalization and retained-origin predicate"
-    },
-    {
-      "tool": "grep",
-      "query": "essImage|changeOfRings|change_of_rings|normalized.*system",
-      "results": "25 hits; Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean, Mathlib/CategoryTheory/Localization/Resolution.lean, Mathlib/CategoryTheory/Localization/Resolution.lean, Mathlib/CategoryTheory/Localization/Resolution.lean, Mathlib/CategoryTheory/Localization/Resolution.lean, Mathlib/CategoryTheory/Localization/Resolution.lean",
-      "date": "2026-10-14",
-      "verdict": "no match: none states the four-family derived quotient-normalization and retained-origin predicate"
-    },
-    {
-      "tool": "grep",
-      "query": "normalization isomorphism|etale-origin|compatible witnesses",
-      "results": "0 hits; ",
-      "date": "2026-10-14",
-      "verdict": "no match: none states the four-family derived quotient-normalization and retained-origin predicate"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 1352,
-  "blueprint_uses": [
-    "def-weil-pbc-cartesian-square",
-    "def-weil-pbc-etale-origin-witness",
-    "def-weil-pbc-finite-level-amplification"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-cartesian-square"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "source_note",
-      "text": "*Source note:* no Stacks Project entry states this predicate: the\netale-origin witnesses are the blueprint's device for Stacks' hypothesis in\nTheorem 61.30.1 ([Tag 09C9](https://stacks.math.columbia.edu/tag/09C9)) that\n$K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n}$ be bounded below with cohomology\nsheaves coming from the etale site. The per-level existence of such an\norigin is Stacks' Lemma 61.29.2 ([Tag\n09C2](https://stacks.math.columbia.edu/tag/09C2)) (4): for a constructible\n$K$ on a quasi-compact $X$ there are $a,b$ with $K=\\Rlim K_n$, each $K_n$ of\ntor amplitude in $[a,b]$ with constructible cohomology sheaves, and\n$K_n=\\epsilon^{-1}L_n$ for some $L_n\\in D_{ctf}(X_{\\Et},\\Lambda/I^n)$.\nDifference: Stacks states this for a single object, and neither asserts that\nthe $L_n$ are compatible over $n$ nor tracks maps $\\alpha_n$ as in\n[def-weil-pbc-etale-origin-witness]; the blueprint adds the compatibility\npredicate $\\mathrm{WIT}(\\square)$.",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "def-weil-pbc-witness-compatibility",
-    "worker": "stage1",
-    "summary": "Made the coefficient datum, four source-target pairs, normalized input systems, coherent reduction comparisons and retained witness compatibility equations explicit. Corrected an ill-specified imported predicate without asserting its existence. Reused existing coefficient categories and derived scalar/tensor comparisons; no new nodes. Ambient output categories avoid assuming AMP when merely defining WIT.",
-    "blueprint": "Entire defining sentence of def-weil-pbc-witness-compatibility, order 1352: commuting with normalization and carrying compatible retained origins; source note distinguished from 09C9 and 09C2."
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NA-e503a60dc",
-    "group": "NA",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-e503a60dc (reviewer sub-agent of L); spot-checked: Read the item, all eight dependency statements, master blueprint, cited Stacks sources, and unit/chapter route in full. Checked normalization and witness equations, nonflat reductions, identity/zero/empty cases, duplicates, and exact master condensed coefficients and base-change morphism. No repairs needed; no comparison theorem inferred from the seeded route. Detailed checks are in review.md."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.WitnessCompatibility",
-    "declaration": "AlgebraicGeometry.ProEtale.WitnessCompatibility",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.PbcQuotient",
-      "AlgebraicGeometry.ProEtale.pbcWitnessQuotientMap",
-      "AlgebraicGeometry.ProEtale.pbcRestriction_isRightAdjoint",
-      "AlgebraicGeometry.ProEtale.pbcFixedScalarExtension",
-      "AlgebraicGeometry.ProEtale.pbcFixedScalarExtensionComp",
-      "AlgebraicGeometry.ProEtale.pbcComparisonRestrict",
-      "AlgebraicGeometry.ProEtale.pbcDerivedComparisonRestrict",
-      "AlgebraicGeometry.ProEtale.pbcComparisonReductionMap",
-      "AlgebraicGeometry.ProEtale.pbcComparisonReductionMap_isIso",
-      "AlgebraicGeometry.ProEtale.pbcComparisonReduction",
-      "AlgebraicGeometry.ProEtale.PbcWitnessAmbient",
-      "AlgebraicGeometry.ProEtale.PbcWitnessEtale",
-      "AlgebraicGeometry.ProEtale.pbcWitnessReduction",
-      "AlgebraicGeometry.ProEtale.pbcWitnessEtaleReduction",
-      "AlgebraicGeometry.ProEtale.pbcWitnessBoundedConstructible",
-      "AlgebraicGeometry.ProEtale.pbcFixedOriginAlpha",
-      "AlgebraicGeometry.ProEtale.PbcWitnessedTower",
-      "AlgebraicGeometry.ProEtale.PbcWitnessedTower.alpha",
-      "AlgebraicGeometry.ProEtale.pbcIteratedWitnessReduction",
-      "AlgebraicGeometry.ProEtale.pbcIteratedWitnessTheta",
-      "AlgebraicGeometry.ProEtale.PbcWitnessedTowerHom",
-      "AlgebraicGeometry.ProEtale.PbcWitnessedInputTowers",
-      "AlgebraicGeometry.ProEtale.pbcWitnessReductionDomain",
-      "AlgebraicGeometry.ProEtale.pbcWitnessedInput_memReductionDomain",
-      "AlgebraicGeometry.ProEtale.PbcFamilyWitnessCompatibility",
-      "AlgebraicGeometry.ProEtale.pbcWitnessDirectImage",
-      "AlgebraicGeometry.ProEtale.pbcWitnessPullback",
-      "AlgebraicGeometry.ProEtale.WitnessCompatibility",
-      "AlgebraicGeometry.ProEtale.pbcWitnessedTower_id_laws",
-      "AlgebraicGeometry.ProEtale.pbcWitnessedTowerId",
-      "AlgebraicGeometry.ProEtale.pbcWitnessedTower_comp_laws",
-      "AlgebraicGeometry.ProEtale.pbcWitnessedTowerComp",
-      "AlgebraicGeometry.ProEtale.pbcWitnessedTower_category_laws"
-    ],
-    "statement": "def WitnessCompatibility {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (_sq : ChosenCartesianSquare g' f' f g) (d : Scheme.AdicCoefficientDatum A) : Prop",
-    "branch": "newtargets-dag",
-    "by": "NA",
-    "date": "2026-10-16",
-    "existing": true,
-    "note": "Exact existing implementation in Sheaf.Paper.WitnessCompatibility.lean, declaration AlgebraicGeometry.ProEtale.WitnessCompatibility, with the listed supporting definitions. Its signature is verbatim the node interface; the four-family predicate encodes adjacent normalizations and canonical composites, retained etale origins, and functorial transport. No module is restated."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-697bd3349",
-    "group": "NA",
-    "result": "pass",
-    "note": "Wrote review.md. Immutable definition, eight dependencies, sources, hypotheses, universes, edge cases, docstrings and verbatim signature checked. Existing module compiled cleanly through scompile.py in both modes. No delivery defects found; reviewer’s accidental dry-run invocations are disclosed."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For such a cartesian square $\\square$, write $\\mathrm{WIT}(\\square)$ if the\nfour finite-level functors of [def-weil-pbc-finite-level-amplification]\ncommute with the normalization isomorphisms for $P_{n+1}\\to P_n$ and carry\ncompatible etale-origin witnesses [def-weil-pbc-etale-origin-witness] to\ncompatible etale-origin witnesses.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
-  },
-  "reviewed_proof": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "S3",
-    "result": "pass",
-    "landing": "20261019T005420-L-2766512",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "For pbcComparisonReductionMap_isIso, first prove ordinary scalar-extension compatibility by iterated mates: comparison direct image commutes strictly with restriction and coextension, and the sectionwise restriction/coextension triangle identifies the second mate with the identity. Conjugation then makes the ordinary extension mate invertible. Extend the existing comparison-flatness argument to arbitrary coefficient rings: use the full relation kernel and express each local tensor lift as a finite sum; finite generation of the full kernel is unnecessary. Comparison inverse image thus preserves flat terms of functorial K-flat resolutions. Compute scalar left derived functors on these resolutions. The unit identities for the derived scalar adjunction and the localization comparison identities show that the derived mate is the image of the ordinary mate, up to the invertible resolution comparison maps. Every derived object is isomorphic to such a resolution, so naturality proves invertibility everywhere. Finally, uniqueness of left adjoints transports this conclusion to the fixed chosen scalar-extension adjunctions used by pbcComparisonReductionMap. All intermediate helpers are proved privately in the same module; no new holed statements are introduced.",
+   "uses": [],
+   "elementary": false
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 06XN, 07A4 and 0G7E; fixed-ring scalar extension, iterated adjunction mates, local flat relations and functorial K-flat resolutions using proved source-library declarations; elementary witnessed-tower laws"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "a predicate that four finite-level functors commute with normalization isomorphisms and preserve compatible etale-origin witnesses",
+   "results": "8 hits; AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.IsStandardSmooth.exists_etale_mvPolynomial, StandardEtalePair.HasMap.map, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, RingHom.Etale.toAlgebra, StandardEtalePair.homEquiv",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the four-family derived quotient-normalization and retained-origin predicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, natural transformation, compatibility, normalization isomorphism",
+   "results": "0 hits; ; loogle: Unknown identifier `natural`",
+   "date": "2026-10-14",
+   "verdict": "invalid pattern: unknown identifier; superseded by the normalization name search"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization isomorphism|etale-origin|compatible witnesses",
+   "results": "0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "invalid source directory: doubled Mathlib path; rerun whole-tree grep without subdirectory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite-level functors commute with normalization isomorphisms compatible etale-origin witnesses",
+   "results": "0 hits; ; service unavailable: Internal Server Error",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of chosen lifts of a normalized inverse system along a functor with derived extension of scalars between quotient coefficient rings",
+   "results": "8 hits; IsAdicComplete.StrictMono.factorPow_comp_extend, AdicCompletion.eval_lift, IsAdicComplete.StrictMono.of_comp_lift, AdicCompletion.transitionMap_comp_eval_apply, IsAdicComplete.StrictMono.mkQ_comp_lift, AdicCompletion.eval_lift_apply, AdicCompletion.transitionMap_comp_eval, IsAdicComplete.StrictMono.of_lift",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the four-family derived quotient-normalization and retained-origin predicate"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\"",
+   "results": "12 hits; Aesop.LocalRuleSet.applicableNormalizationRules, Aesop.LocalRuleSet.applicableNormalizationRulesWith, Aesop.NormalizationState, Aesop.GoalState.provenByNormalization, Aesop.NormalizationState.notNormal, Aesop.instInhabitedNormalizationState, Aesop.Goal.normalizationState, Aesop.GoalState.isProvenByNormalization",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the four-family derived quotient-normalization and retained-origin predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "essImage|changeOfRings|change_of_rings|normalized.*system",
+   "results": "25 hits; Mathlib/CategoryTheory/Localization/Construction.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean, Mathlib/CategoryTheory/Localization/Resolution.lean, Mathlib/CategoryTheory/Localization/Resolution.lean, Mathlib/CategoryTheory/Localization/Resolution.lean, Mathlib/CategoryTheory/Localization/Resolution.lean, Mathlib/CategoryTheory/Localization/Resolution.lean",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the four-family derived quotient-normalization and retained-origin predicate"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization isomorphism|etale-origin|compatible witnesses",
+   "results": "0 hits; ",
+   "date": "2026-10-14",
+   "verdict": "no match: none states the four-family derived quotient-normalization and retained-origin predicate"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 1352,
+ "blueprint_uses": [
+  "def-weil-pbc-cartesian-square",
+  "def-weil-pbc-etale-origin-witness",
+  "def-weil-pbc-finite-level-amplification"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-cartesian-square"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "source_note",
+   "text": "*Source note:* no Stacks Project entry states this predicate: the\netale-origin witnesses are the blueprint's device for Stacks' hypothesis in\nTheorem 61.30.1 ([Tag 09C9](https://stacks.math.columbia.edu/tag/09C9)) that\n$K\\otimes^L_\\Lambda\\underline{\\Lambda/I^n}$ be bounded below with cohomology\nsheaves coming from the etale site. The per-level existence of such an\norigin is Stacks' Lemma 61.29.2 ([Tag\n09C2](https://stacks.math.columbia.edu/tag/09C2)) (4): for a constructible\n$K$ on a quasi-compact $X$ there are $a,b$ with $K=\\Rlim K_n$, each $K_n$ of\ntor amplitude in $[a,b]$ with constructible cohomology sheaves, and\n$K_n=\\epsilon^{-1}L_n$ for some $L_n\\in D_{ctf}(X_{\\Et},\\Lambda/I^n)$.\nDifference: Stacks states this for a single object, and neither asserts that\nthe $L_n$ are compatible over $n$ nor tracks maps $\\alpha_n$ as in\n[def-weil-pbc-etale-origin-witness]; the blueprint adds the compatibility\npredicate $\\mathrm{WIT}(\\square)$.",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "def-weil-pbc-witness-compatibility",
+  "worker": "stage1",
+  "summary": "Made the coefficient datum, four source-target pairs, normalized input systems, coherent reduction comparisons and retained witness compatibility equations explicit. Corrected an ill-specified imported predicate without asserting its existence. Reused existing coefficient categories and derived scalar/tensor comparisons; no new nodes. Ambient output categories avoid assuming AMP when merely defining WIT.",
+  "blueprint": "Entire defining sentence of def-weil-pbc-witness-compatibility, order 1352: commuting with normalization and carrying compatible retained origins; source note distinguished from 09C9 and 09C2."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NA-e503a60dc",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NA-e503a60dc (reviewer sub-agent of L); spot-checked: Read the item, all eight dependency statements, master blueprint, cited Stacks sources, and unit/chapter route in full. Checked normalization and witness equations, nonflat reductions, identity/zero/empty cases, duplicates, and exact master condensed coefficients and base-change morphism. No repairs needed; no comparison theorem inferred from the seeded route. Detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WitnessCompatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.WitnessCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PbcQuotient",
+   "AlgebraicGeometry.ProEtale.pbcWitnessQuotientMap",
+   "AlgebraicGeometry.ProEtale.pbcRestriction_isRightAdjoint",
+   "AlgebraicGeometry.ProEtale.pbcFixedScalarExtension",
+   "AlgebraicGeometry.ProEtale.pbcFixedScalarExtensionComp",
+   "AlgebraicGeometry.ProEtale.pbcComparisonRestrict",
+   "AlgebraicGeometry.ProEtale.pbcDerivedComparisonRestrict",
+   "AlgebraicGeometry.ProEtale.pbcComparisonReductionMap",
+   "AlgebraicGeometry.ProEtale.pbcComparisonReductionMap_isIso",
+   "AlgebraicGeometry.ProEtale.pbcComparisonReduction",
+   "AlgebraicGeometry.ProEtale.PbcWitnessAmbient",
+   "AlgebraicGeometry.ProEtale.PbcWitnessEtale",
+   "AlgebraicGeometry.ProEtale.pbcWitnessReduction",
+   "AlgebraicGeometry.ProEtale.pbcWitnessEtaleReduction",
+   "AlgebraicGeometry.ProEtale.pbcWitnessBoundedConstructible",
+   "AlgebraicGeometry.ProEtale.pbcFixedOriginAlpha",
+   "AlgebraicGeometry.ProEtale.PbcWitnessedTower",
+   "AlgebraicGeometry.ProEtale.PbcWitnessedTower.alpha",
+   "AlgebraicGeometry.ProEtale.pbcIteratedWitnessReduction",
+   "AlgebraicGeometry.ProEtale.pbcIteratedWitnessTheta",
+   "AlgebraicGeometry.ProEtale.PbcWitnessedTowerHom",
+   "AlgebraicGeometry.ProEtale.PbcWitnessedInputTowers",
+   "AlgebraicGeometry.ProEtale.pbcWitnessReductionDomain",
+   "AlgebraicGeometry.ProEtale.pbcWitnessedInput_memReductionDomain",
+   "AlgebraicGeometry.ProEtale.PbcFamilyWitnessCompatibility",
+   "AlgebraicGeometry.ProEtale.pbcWitnessDirectImage",
+   "AlgebraicGeometry.ProEtale.pbcWitnessPullback",
+   "AlgebraicGeometry.ProEtale.WitnessCompatibility",
+   "AlgebraicGeometry.ProEtale.pbcWitnessedTower_id_laws",
+   "AlgebraicGeometry.ProEtale.pbcWitnessedTowerId",
+   "AlgebraicGeometry.ProEtale.pbcWitnessedTower_comp_laws",
+   "AlgebraicGeometry.ProEtale.pbcWitnessedTowerComp",
+   "AlgebraicGeometry.ProEtale.pbcWitnessedTower_category_laws"
+  ],
+  "statement": "def WitnessCompatibility {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (_sq : ChosenCartesianSquare g' f' f g) (d : Scheme.AdicCoefficientDatum A) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-16",
+  "existing": true,
+  "note": "Exact existing implementation in Sheaf.Paper.WitnessCompatibility.lean, declaration AlgebraicGeometry.ProEtale.WitnessCompatibility, with the listed supporting definitions. Its signature is verbatim the node interface; the four-family predicate encodes adjacent normalizations and canonical composites, retained etale origins, and functorial transport. No module is restated."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-697bd3349",
+  "group": "NA",
+  "result": "pass",
+  "note": "Wrote review.md. Immutable definition, eight dependencies, sources, hypotheses, universes, edge cases, docstrings and verbatim signature checked. Existing module compiled cleanly through scompile.py in both modes. No delivery defects found; reviewer’s accidental dry-run invocations are disclosed."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For such a cartesian square $\\square$, write $\\mathrm{WIT}(\\square)$ if the\nfour finite-level functors of [def-weil-pbc-finite-level-amplification]\ncommute with the normalization isomorphisms for $P_{n+1}\\to P_n$ and carry\ncompatible etale-origin witnesses [def-weil-pbc-etale-origin-witness] to\ncompatible etale-origin witnesses.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3c9ba",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261021T003502-L-1642808",
+  "kind": "interface",
+  "note": "independent cc review: byte-identical Lean/node of 3d5d68 (PASSed) against today's live clone: module rc 0 in 27.9 s, axioms propext/Classical.choice/Quot.sound, 10 direct importers rc 0; change-record ## Users against a live grep of every module mentioning the 4 changed names (all covered, landing (d) cured)"
+ }
 }
