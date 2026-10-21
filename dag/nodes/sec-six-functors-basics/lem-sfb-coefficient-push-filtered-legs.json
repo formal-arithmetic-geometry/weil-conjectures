@@ -18,11 +18,126 @@
   "def-sfb-derived-comap-lower-star-iso",
   "def-weil-pbc-category-colimit",
   "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-pd-module-ringed-topos-derived-comparison"
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "sk-def-sfb-coefficient-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the exact tensor and adjunction equivalences of [lem-pd-module-ringed-topos-derived-comparison] to work with ring-sheaf modules. Put $C=U_YS_Y$, $B=U_XS_X$, $L_R=f_R^*$, $L_S=f_S^*$, $G_R=Rf_{R*}$ and $G_S=Rf_{S*}$. The coefficient morphisms of [sk-def-sfb-coefficient-morphisms] identify $f^{-1}R_Y=R_X$ and $f^{-1}S_Y=S_X$, compatibly with $a$, so $L_RC=B$. Pullback is exact for these arbitrary condensed coefficients by [det-prop-sfb-module-pullback-exact-main]. By [lem-pur-sheaf-ring-derived-coefficient-adjunction], scalar restriction is exact and termwise on derived categories, and the scalar unit is $x\\mapsto x\\otimes1$. Thus $U_ZT_ZM=M\\otimes^L_{R_Z}U_ZS_Z$, with scalar unit the tensor of $M$ with $R_Z\\to U_ZS_Z$. This is the same scalar adjunction as for module objects: the relative tensor coequalizer and its adjunction of [def-sfb-modobj-extend-restrict-adjunction] send an $S$-linear map to its composite with $x\\mapsto1\\otimes x$; the monoidal equivalence preserves that coequalizer. Our flatness hypothesis makes $C$ and $B$ flat.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "sk-def-sfb-coefficient-morphisms",
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-sfb-modobj-extend-restrict-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 06YY (lemma-derived-base-change); identity-topos scalar extension and identified coefficient pullback"
+   }
+  },
+  {
+   "text": "The adjunction of [def-sfb-module-upper-lower-adjunction] implies that the exact functor $L_R$ preserves the given colimit: maps from $L_RC$ to any module are, by adjunction, compatible families of maps from $P_i$ into its direct image. Hence $B=\\varinjlim_i L_RP_i$, with legs $L_Rv_i$. Choose a complex $K^\\bullet$ representing $K$ with $K^n=0$ for $n<a$. Flatness of each $L_RP_i$ and of $B$ means that tensoring is exact, so ordinary tensor with them preserves acyclic complexes (apply exactness to cycles and boundaries in every degree). These degree-zero modules are therefore K-flat. It follows that $K^\\bullet\\otimes L_RP_i$ and $K^\\bullet\\otimes B$ represent the corresponding derived tensors and vanish below $a$. By [lem-pc-module-filtered-colimits-tensor], their termwise colimit is $K^\\bullet\\otimes B$, with the specified tensor legs. On $Y$, the same result applied to a K-flat representative $A^\\bullet$ of $G_RK$, available by [lem-pc-kflat-resolution], gives $A^\\bullet\\otimes C=\\varinjlim_i(A^\\bullet\\otimes P_i)$, representing $G_RK\\otimes^L C$ and $G_RK\\otimes^L P_i$. Exact filtered colimits commute with cohomology: cycles and boundaries are preserved since their defining kernel, image and cokernel sequences are exact.",
+   "uses": [
+    "def-sfb-module-upper-lower-adjunction",
+    "lem-pc-module-filtered-colimits-tensor",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DB (lemma-limits-colimits), 03EP (lemma-tensor-commute-colimits); sites-cohomology Tag 06YS (lemma-K-flat-resolution)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to the strict diagram $K^\\bullet\\otimes L_RP_i$. Its index is small and filtered, its terms have the single lower bound $a$, its coefficients are precisely $R_X=p_X^*R$, and $f$ is qcqs. Step 2 identifies its termwise colimit with $K\\otimes^L B$. Consequently, for every $q$ the maps induced by $G_R(1\\otimes L_Rv_i)$ identify $H^qG_R(K\\otimes^L B)$ with $\\varinjlim_iH^qG_R(K\\otimes^L L_RP_i)$. Step 2 likewise identifies $H^q(G_RK\\otimes^L C)$ with $\\varinjlim_iH^q(G_RK\\otimes^L P_i)$. These are comparisons with the actual cocone maps, rather than choices of isomorphisms between the endpoints.",
+   "uses": [
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "lem-pc-module-filtered-colimits-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 5.3(1), and proof of the cohomology comparison (5.4)"
+   }
+  },
+  {
+   "text": "Let $d:U_YG_S\\xrightarrow{\\sim}G_RU_X$ and $b:U_XL_S\\xrightarrow{\\sim}L_RU_Y$ be the comparisons of [lem-weil-pbc-ring-sheaf-change-adjunction]. The map $d$ is the restriction comparison used in [def-sfb-derived-comap-lower-star-iso]: both derive the identical underived restriction/pushforward composite of [def-sfb-comap-lower-star-iso], and restriction preserves K-injectives by [lem-sfb-comap-preserves-k-injectives]. On a K-injective $S_X$-complex both are the identity under that underived identification. Consider the two factorizations from $(X,S_X)$ to $(Y,R_Y)$, through $(Y,S_Y)$ and through $(X,R_X)$. Apply [lem-sfb-ringed-comparison-tensor-adjunction] to this commutative ringed square, with the identity-topos ring changes on its scalar edges. It identifies the conjugate of $d$ with the canonical composition comparison $\\theta:L_ST_Y\\xrightarrow{\\sim}T_XL_R$. Under restriction and $b$, this comparison is the tensor/pullback comparison $\\mu_{M,C}:L_R(M\\otimes^L C)\\to L_RM\\otimes^L B$. Indeed, on flat-term K-flat representatives both are the sheafified tensor associator: the inverse-image section of $m\\otimes s$ maps to the inverse-image section of $m$ tensored with the coefficient image of $s$. The scalar units of Step 1 insert $1$, so the unit normalizations agree; the tensor compatibility asserted in the cited square lemma gives the same comparison after localization.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-sfb-derived-comap-lower-star-iso",
+    "lem-sfb-comap-preserves-k-injectives",
+    "lem-sfb-ringed-comparison-tensor-adjunction",
+    "def-sfb-comap-lower-star-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition), 07A4 (lemma-pullback-tensor-product)"
+   }
+  },
+  {
+   "text": "By [def-sfb-derived-push-hom], $\\gamma$ is the coefficient mate formed from this $d$. Apply the general categorical assertion [lem-weil-pbc-qbar-condensed-push-counit], with all four object predicates identically true, the two geometric adjunctions $L_R\\dashv G_R$, $L_S\\dashv G_S$, and the scalar adjunctions $T_Z\\dashv U_Z$. It says that the geometric adjoint of $\\gamma_K$ is $T_X(\\varepsilon^R_K)\\circ\\theta_{G_RK}$. The adjoint compatibility in [lem-weil-pbc-ring-sheaf-change-adjunction] therefore says that the $R$-geometric adjoint of $h=d_{T_XK}\\circ U_Y(\\gamma_K)$ is $U_XT_X(\\varepsilon^R_K)\\circ U_X(\\theta_{G_RK})\\circ b_{T_YG_RK}^{-1}$. By Step 4 and the tensor identification of Step 1 this is exactly $(\\varepsilon^R_K\\otimes1_B)\\circ\\mu_{G_RK,C}$. Thus $h$ is the projection map $\\delta_C$ of [lem-weil-pbc-ringed-projection-mate-exact]. This proves equality of the specified morphisms, with the tensor symmetry used to place the coefficient on the right.",
+   "uses": [
+    "def-sfb-derived-push-hom",
+    "lem-weil-pbc-qbar-condensed-push-counit",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); coefficient mate and its geometric transpose"
+   }
+  },
+  {
+   "text": "The projection map in [lem-weil-pbc-ringed-projection-mate-exact] is natural in its coefficient argument. Apply it to the $R_Y$-linear map $v_i:P_i\\to C$. This gives $\\delta_C\\circ(1\\otimes v_i)=G_R(1\\otimes L_Rv_i)\\circ\\delta_i$. Explicitly, taking $L_R\\dashv G_R$ adjoints gives on both sides $\\varepsilon^R_K\\otimes L_Rv_i$ after the pullback tensor comparison; its naturality makes these adjoints equal. Step 5 replaces $\\delta_C$ with $d\\circ U_Y\\gamma_K$. This is the asserted cocone-leg formula. Applying the same naturality to each diagram arrow shows that the $\\delta_i$ form a morphism of the two stage diagrams.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56 (equation-projection-formula-map), naturality of its counit definition"
+   }
+  },
+  {
+   "text": "For every $q$, use the two cohomology-colimit identifications of Step 3. The identity in Step 6 identifies $H^q(h)$ with the map induced by the compatible family $H^q(\\delta_i)$: the cohomology cocone legs are jointly epimorphic by the universal property of the sheaf colimit. Each stage map is invertible by hypothesis, and the stage inverses form a compatible family by multiplying the naturality squares by the inverses. Taking colimits gives an inverse to $H^q(h)$. Hence $h$ is an isomorphism in the derived category, whose inverted morphisms are the quasi-isomorphisms. Since $d$ is an isomorphism and $U_Y$ reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction], $\\gamma_{f,K}$ is an isomorphism. Only cohomology-colimit detection is used here; no claim that arbitrary filtered diagrams have their colimits in the ordinary triangulated category is required.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "Paragraph (1), filtered localization and finite-extension colimits; concluding cohomology argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-comap-lower-star-iso",
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-derived-push-hom",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-sfb-module-upper-lower-adjunction",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-comap-preserves-k-injectives",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-qbar-condensed-push-counit",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "sk-def-sfb-coefficient-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "Paragraph (1), canonical filtered scalar-change map, expanded using Stacks 03DB, 03EP, 07A4, 07A6, 0D6D, 0D6E, 0B56 and Hemo–Richarz–Scholbach Lemma 5.3(1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +180,52 @@
    "results": "8 hits: CategoryTheory.lan_flat_of_flat, CategoryTheory.compatiblePreservingOfFlat, Module.flat_of_isLocalized_span, Module.Flat.tfae_equational_criterion, Algebra.Smooth.flat, Module.Flat.of_forall_exists_factorization, Module.Flat.iff_forall_exists_factorization, Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing",
    "date": "2026-10-21",
    "verdict": "no match: hits concern flat modules and flat site functors, not the canonical coefficient push mate or bounded continuity criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat scalar extension pushforward mate is an isomorphism on bounded below complexes when a filtered presentation by flat modules has invertible projection formula maps",
+   "results": "8 hits: CategoryTheory.lan_flat_of_flat, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary flat modules, sheaf presentations or underived functors; none states the derived coefficient mate and its bounded filtered projection criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPushHom|pushHomOfComapIso|projection.*[Ff]iltered",
+   "results": "0 hits: ; searched Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary flat modules, sheaf presentations or underived functors; none states the derived coefficient mate and its bounded filtered projection criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived scalar extension direct image comparison along a flat sheaf of rings is invertible from a filtered presentation and bounded below continuity",
+   "results": "8 hits: ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, IsSMulRegular.of_flat_of_isBaseChange, Algebra.FormallyUnramified.flat_of_restrictScalars, RingHom.Flat.isStableUnderBaseChange, PresheafOfModules.pullback, Module.Flat.isBaseChange, ModuleCat.preservesFiniteLimits_extendScalars_of_flat",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary flat modules, sheaf presentations or underived functors; none states the derived coefficient mate and its bounded filtered projection criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.IsIso",
+   "results": "12 hits: PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction, SheafOfModules.isLeftAdjoint_pushforward_of_isIso, SheafOfModules.instIsIsoπMap, SheafOfModules.Presentation.ofIsIso, SheafOfModules.instIsFiniteOfIsIso, SheafOfModules.QuasicoherentData.ofIsIso, SheafOfModules.Presentation.ofIsIso_generators, SheafOfModules.QuasicoherentData.ofIsIso_I",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary flat modules, sheaf presentations or underived functors; none states the derived coefficient mate and its bounded filtered projection criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projectionMap|tensor.*[Cc]olimit|[Cc]olimit.*tensor",
+   "results": "0 hits: ; searched Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary flat modules, sheaf presentations or underived functors; none states the derived coefficient mate and its bounded filtered projection criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical coefficient change comparison for a sheaf derived direct image is the projection formula map after forgetting scalars and is determined by its filtered colimit cocone legs",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.Presentation.map, SheafOfModules.mapFree, SheafOfModules.Presentation.mapGenerators, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.pushforwardSections_coe",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary flat modules, sheaf presentations or underived functors; none states the derived coefficient mate and its bounded filtered projection criterion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-thm-sfb-proper-base-change-rational",
@@ -85,5 +242,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-coefficient-push-filtered-legs",
+  "worker": "stage1",
+  "summary": "Seven-step split using existing DAG tools only. Verified arbitrary condensed coefficients, common lower bounds, module colimit cocone legs, normalized scalar/pullback and geometric adjunctions, and the actual coefficient mate. Identifies it with the projection map for the coefficient module, obtains every leg by naturality, then uses bounded filtered continuity on cohomology and conservative scalar restriction. No statement change and no new nodes.",
+  "blueprint": "det-thm-sfb-proper-base-change-rational paragraph (1), the canonical localization and filtered Qlbar comparisons; supplies the canonical-cocone-leg justification below unit sk-thm-sfb-proper-base-change step 4.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-derived-comap-lower-star-iso",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "def-sfb-derived-push-hom",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "def-sfb-modobj-extend-restrict-adjunction",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "def-sfb-module-upper-lower-adjunction",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "lem-pc-module-filtered-colimits-tensor",
+    "why": "Generic exact sheaf filtered colimits and tensor-totalization continuity; the present unit has no separate statement of this tool."
+   },
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "lem-sfb-comap-preserves-k-injectives",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "lem-sfb-ringed-comparison-tensor-adjunction",
+    "why": "Generic commutative ringed-square tensor and composite-adjunction coherence normalizes the actual scalar mate."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "why": "Bounded-below qcqs continuity is exactly the generic continuity input prescribed by paragraph (1) of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-qbar-condensed-push-counit",
+    "why": "Its statement is a generic four-category mate identity; take every predicate true, without a Qbar or constructibility assumption."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic ring-sheaf scalar restriction comparisons, their geometric adjoint normalization, and conservativity."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "sk-def-sfb-coefficient-morphisms",
+    "why": "Generic tensor, scalar or geometric adjunction construction used to implement the unit's filtered-continuity argument; no step of the unit is replaced."
+   },
+   {
+    "node": "def-sfb-comap-lower-star-iso",
+    "why": "Specifies that the ordinary restriction/pushforward comparison is the identification of the same composite; fixes the normalization used before deriving the scalar mate."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-derived-comap-lower-star-iso",
+  "def-sfb-derived-push-hom",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "def-sfb-module-upper-lower-adjunction",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-pc-kflat-resolution",
+  "lem-pc-module-filtered-colimits-tensor",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-comap-preserves-k-injectives",
+  "lem-sfb-ringed-comparison-tensor-adjunction",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-qbar-condensed-push-counit",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "sk-def-sfb-coefficient-morphisms",
+  "def-sfb-comap-lower-star-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-2e4f845b6",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-2e4f845b6 (reviewer sub-agent of L); spot-checked: I read the full 7-step split and every cited statement. Statement unchanged from the base; the only stmt_deps addition is sk-def-sfb-coefficient-morphisms, which the statement uses implicitly. No new nodes. Step 1: the exact monoidal comparison and the scalar adjunction units agree; C and B are flat because scalar extension is exact. Step 2: L_R is a left adjoint, so it preserves the module colimit; a flat degree-0 module is K-flat; the termwise Tot colimit comes from lem-pc-module-filtered-colimits-tensor. Step 3: lem-weil-pbc-condensed-qcqs-pushforward-continuity fits (condensed Λ_X, common lower bound, canonical maps) and matches HRS Lemma 5.3(1) and (5.4); Remark 5.4 shows why the statement needs K in D+. Step 4: the ringed-square lemma's c is d of lem-weil-pbc-ring-sheaf-change-adjunction, which matches def-sfb-derived-comap-lower-star-iso on K-injectives; θ restricts to μ, checked on flat K-flat representatives where everything is underived. Step 5: the push-counit lemma with all predicates true and e=d (orientation checked against def-sfb-mate-push-hom), plus the adjoint compatibility, gives d∘Uγ = α_C as specified maps. Steps 6–7: naturality in P gives the leg formula; on cohomology the map is a colimit of isomorphisms; restriction reflects isomorphisms. Small cases checked: R=S (identity), the citer's O_E→E and Qbar presentations, zero coefficients. Route: the continuity node's unit sk-thm-properbasechange is in the unit's uses. Advisory only: det-pe-bounded-continuity-direct-image (sk-cor-pe-bounded-continuity) is the blueprint's literal citation. No SGA; no duplicate (lem-sfb-coefficient-projection-square is a different statement); no cycle; tool_uses accepted."
  }
 }
