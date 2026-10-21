@@ -84,6 +84,42 @@ noncomputable def classicalSupportTranspose
     L ⟶ (finiteClosedUpperShriek A i j).rightDerivedFunctorPlus.obj K :=
   (classicalSupportAdjunction A i j hPair).homEquiv L K a
 
+private noncomputable def classicalSupportFullyFaithful :
+    (supportClosedDerivedPlus A i j hPair).FullyFaithful := by
+  have := preservesFiniteColimits_lowerStar_of_isCompl (R := A) i j hPair
+  let adj := upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) i
+  let F := upperStar (ModuleCat.{u + 1} A) i
+  let G := lowerStar (ModuleCat.{u + 1} A) i
+  let da := SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction adj
+  let ff := da.fullyFaithfulROfCompIsoId
+      ((Functor.mapDerivedCategoryCompIso G F).symm ≪≫
+        Functor.mapDerivedCategoryNatIso (asIso adj.counit) ≪≫
+          Functor.mapDerivedCategoryIdIso _)
+  let ff' : (DerivedCategory.Plus.ι ⋙ G.mapDerivedCategory).FullyFaithful :=
+    (ObjectProperty.fullyFaithfulι _).comp ff
+  exact (ff'.ofIso
+    (lowerStar (ModuleCat.{u + 1} A) i).mapDerivedCategoryPlusCompatibility.symm).ofCompFaithful
+
+private theorem classicalSupportTriangle_distinguished
+    (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) :
+    classicalSupportTriangle A i j hPair K ∈
+      distTriang (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A))) := by
+  let models := (supportLocalizationTriangle A i j hPair).choose_spec.2.1 K
+  let I := models.choose
+  let hI := models.choose_spec.choose
+  let hq := models.choose_spec.choose_spec.choose
+  let eB := models.choose_spec.choose_spec.choose_spec.choose
+  have hs := models.choose_spec.choose_spec.choose_spec.choose_spec
+  let eA := supportFirstModelComparison A i j hPair I hI K eB
+  let eC := supportThirdModelComparison A j I hI K eB
+  let e : supportModelTriangle A i j hPair I hq ≅
+      classicalSupportTriangle A i j hPair K :=
+    Triangle.isoMk _ _ eA eB eC hs.2.1 hs.2.2 (by
+      change _ ≫ eA.hom⟦(1 : ℤ)⟧' = eC.hom ≫ (eC.inv ≫ _ ≫ eA.hom⟦(1 : ℤ)⟧')
+      simp only [Iso.hom_inv_id_assoc]
+      rfl)
+  exact isomorphic_distinguished _ hs.1 _ e.symm
+
 /-- A distinguished triangle whose second arrow is the open unit is canonically the
 support-localization triangle, including the boundary; its first component is the
 transpose of its given first arrow. This component is independent of every completion
@@ -159,6 +195,61 @@ theorem classicalSupportCounitIdentification
         classicalSupportTranspose A i j hPair K L a ≫
           (finiteClosedUpperShriek A i j).rightDerivedFunctorPlus.map v =
         u ≫ classicalSupportTranspose A i j hPair K' L' a') := by
-  sorry
+  let F := supportClosedDerivedPlus A i j hPair
+  let adj := classicalSupportAdjunction A i j hPair
+  let θ := classicalSupportTranspose A i j hPair K L a
+  let ff := classicalSupportFullyFaithful A i j hPair
+  have : F.Full := ff.full
+  have : F.Faithful := ff.faithful
+  have hθ : F.map θ ≫ adj.counit.app K = a := by
+    exact ((adj.homEquiv L K).symm_apply_apply a)
+  have unique (c : (F.obj L).obj ⟶
+      (F.obj ((finiteClosedUpperShriek A i j).rightDerivedFunctorPlus.obj K)).obj)
+      (hc : c ≫ DerivedCategory.Plus.ι.map (adj.counit.app K) =
+        DerivedCategory.Plus.ι.map a) :
+      c = DerivedCategory.Plus.ι.map (F.map θ) := by
+    let d := DerivedCategory.Plus.ι.preimage (X := F.obj L)
+      (Y := F.obj ((finiteClosedUpperShriek A i j).rightDerivedFunctorPlus.obj K)) c
+    let t := F.preimage d
+    have ht : F.map t = d := F.map_preimage d
+    have hd : d ≫ adj.counit.app K = a := by
+      apply DerivedCategory.Plus.ι.map_injective
+      simpa only [Functor.map_comp, Functor.map_preimage, d] using hc
+    have htθ : t = θ := by
+      apply (adj.homEquiv L K).symm.injective
+      change F.map t ≫ adj.counit.app K = (adj.homEquiv L K).symm (adj.homEquiv L K a)
+      rw [ht, hd, Equiv.symm_apply_apply]
+    rw [← htθ, ht, Functor.map_preimage]
+  let T := Triangle.mk (DerivedCategory.Plus.ι.map a)
+    (DerivedCategory.Plus.ι.map
+      ((derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} A) j).unit.app K)) b
+  let T' := classicalSupportTriangle A i j hPair K
+  have hT' := classicalSupportTriangle_distinguished A i j hPair K
+  obtain ⟨c, hc₁, hc₃⟩ := complete_distinguished_triangle_morphism₁ T T'
+    htriangle hT' (𝟙 _) (𝟙 _) (by simp [T, T', classicalSupportTriangle])
+  have hc : c = DerivedCategory.Plus.ι.map (F.map θ) := unique c (by
+    simpa only [T, T', classicalSupportTriangle, Triangle.mk_mor₁, Category.comp_id]
+      using hc₁.symm)
+  let φ : T ⟶ T' := Triangle.homMk T T' c (𝟙 _) (𝟙 _) hc₁
+    (by simp [T, T', classicalSupportTriangle]) hc₃
+  have hi : IsIso c := isIso₁_of_isIso₂₃ φ htriangle hT'
+    (inferInstanceAs (IsIso (𝟙 K.obj))) (inferInstanceAs (IsIso (𝟙 T.obj₃)))
+  have : IsIso (DerivedCategory.Plus.ι.map (F.map θ)) := hc ▸ hi
+  have : IsIso (F.map θ) := isIso_of_reflects_iso _ DerivedCategory.Plus.ι
+  have : IsIso θ := isIso_of_reflects_iso _ F
+  refine ⟨hθ, ‹IsIso θ›, ?_, ?_, ?_⟩
+  · have : IsIso φ := Triangle.isIso_of_isIsos φ hi
+      (inferInstanceAs (IsIso (𝟙 K.obj))) (inferInstanceAs (IsIso (𝟙 T.obj₃)))
+    exact ⟨asIso φ, hc, rfl, rfl⟩
+  · intro ψ hψ₂ hψ₃
+    apply unique ψ.hom₁
+    have h := ψ.comm₁
+    rw [hψ₂] at h
+    change DerivedCategory.Plus.ι.map a ≫ 𝟙 K.obj =
+      ψ.hom₁ ≫ DerivedCategory.Plus.ι.map (adj.counit.app K) at h
+    exact h.symm.trans (Category.comp_id _)
+  · intro K' L' a' b' htriangle' u v huv
+    change adj.homEquiv L K a ≫ _ = u ≫ adj.homEquiv L' K' a'
+    rw [← adj.homEquiv_naturality_right, huv, adj.homEquiv_naturality_left]
 
 end AlgebraicGeometry.ProEtale
