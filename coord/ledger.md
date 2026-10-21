@@ -21950,3 +21950,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:34 L: merged deliver/Q23/lem-weil-roos-transition-homotopy (stage 2; reviewer PASS; parallel immutable checks)
 - 09:34 L: merged deliver/Q57/lem-weil-point-automorphism-restriction-natural (stage 2; reviewer PASS; parallel immutable checks)
 - 09:34 L: merged deliver/NP/sk-def-sf-admissible (stage 2; reviewer PASS; parallel immutable checks)
+- 09:34 L: returned deliver/Q12/lem-sfb-periodic-tensor-normal-form (reviewer RETURN: L: independent stage-2 immutable head d6c1817873d6: H2: the delivery adds theorem node lem-sfb-exact-scalar-periodic-res)
