@@ -15,9 +15,102 @@
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "def-pur-kinjective-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P_X=\\prod_nX_n$, $h_X=1-s_X$ and $a=(-1)^r$. Termwise products identify $P_{X[r]}=P_X[r]$ and $h_{X[r]}=h_X[r]$. By the cochain convention and the explicit strict Roos coordinates, the differential on $\\mathsf C(X[r])$ is $(y,x)\\mapsto(-a d y-h_Xx,a d x)$, whereas on $\\mathsf C(X)[r]$ it is $(y,x)\\mapsto(-a d y-a h_Xx,a d x)$. Applying $(y,x)\\mapsto(a y,x)$ before or after these differentials gives $(-d y-a h_Xx,a d x)$ in either order, since $a^2=1$. Thus the displayed map is a chain map and its inverse is the same coordinate map.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain; signed calculation using derived.tex Tag 014E, definition-cone"
+   }
+  },
+  {
+   "text": "For a strict tower map $f:X\\to Y$, the map $\\mathsf C(f)$ is diagonal with the product of the $f_n$ on both coordinates. It commutes with $\\operatorname{diag}((-1)^r,1)$ because each $f_n$ is additive. This proves naturality before localization. Under the usual termwise identifications of iterated shifts, the composite $\\sigma^C_{X,r}[s]\\circ\\sigma^C_{X[r],s}$ multiplies the first coordinate by $(-1)^s(-1)^r=(-1)^{r+s}$ and fixes the second. Hence it is $\\sigma^C_{X,r+s}$, and $\\sigma^C_{X,0}=1$.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain and the immediately following shift-addition identities; derived.tex Tag 014E"
+   }
+  },
+  {
+   "text": "Use the K-injective tower representative of [lem-pur-injective-tower-roos-shifts]: choose $q:X\\to I$ with $I$ K-injective and with injective tower objects in each degree; its termwise inverse limit represents $R\\lim X$. Apply [lem-weil-pbc-kinjective-shift] in the abelian category $\\operatorname{Tow}(\\mathcal A)$ to see that $q[r]:X[r]\\to I[r]$ is again a K-injective resolution. Its terms are the terms of $I$ reindexed, so they are still injective tower objects. The same representative theorem identifies $\\lambda_{I,r}:\\lim I[r]\\to(\\lim I)[r]$ as the termwise total-limit shift. Its components are identities on compatible limit tuples.",
+   "uses": [
+    "lem-pur-injective-tower-roos-shifts",
+    "lem-weil-pbc-kinjective-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, first paragraph; derived.tex Tag 070H, definition-K-injective and the following shift observation"
+   }
+  },
+  {
+   "text": "Let $j_I:\\lim I\\to\\mathsf C(I)$ and $j_{I[r]}:\\lim I[r]\\to\\mathsf C(I[r])$ be the normalized inclusions. By [lem-weil-strict-roos-comparison] both are quasi-isomorphisms, and in these representatives $\\rho_X=j_I^{-1}\\circ\\mathsf C(q)$ and $\\rho_{X[r]}=j_{I[r]}^{-1}\\circ\\mathsf C(q[r])$, with all maps now read in the derived category. The inclusion has coordinates $(0,z)$, so the calculation $\\sigma^C_{I,r}(0,z)=(0,z)$ gives the actual chain-map identity $\\sigma^C_{I,r}\\circ j_{I[r]}=j_I[r]\\circ\\lambda_{I,r}$. Thus the normalization, including its sign, is retained.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, kernel inclusion in the short exact sequence; coordinate refinement using derived.tex Tag 014E"
+   }
+  },
+  {
+   "text": "Invert the localized inclusions in the preceding identity to get $\\lambda_{I,r}\\circ j_{I[r]}^{-1}=j_I[r]^{-1}\\circ\\sigma^C_{I,r}$. Naturality from step 2 applied to $q$ gives $\\sigma^C_{I,r}\\circ\\mathsf C(q[r])=\\mathsf C(q)[r]\\circ\\sigma^C_{X,r}$. Substitution into the normalized resolution formulas now gives\n$$\\begin{aligned}\\sigma^{\\lim}_{X,r}\\circ\\rho_{X[r]}&=\\lambda_{I,r}\\circ j_{I[r]}^{-1}\\circ\\mathsf C(q[r])\\\\&=j_I[r]^{-1}\\circ\\mathsf C(q)[r]\\circ\\sigma^C_{X,r}\\\\&=\\rho_X[r]\\circ\\sigma^C_{X,r}.\\end{aligned}$$\nThis compares the specified maps, rather than choosing an isomorphism of the two cones.",
+   "uses": [
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, normalized kernel-cone comparison; agent shift refinement"
+   }
+  },
+  {
+   "text": "The comparison theorem makes $\\mathsf C$ and $\\rho$ functorial on the derived tower category. The strict-map naturality identity in step 2 therefore holds also for inverses of quasi-isomorphisms, by multiplying that identity by their images on both sides, and hence for every localized morphism. Resolution choices do not change the total-limit shift: given another K-injective resolution $q':X\\to J$, [lem-weil-pbc-kinjective-hom-derived] represents $(Qq')(Qq)^{-1}$ by a tower chain map $v:I\\to J$ with $vq$ homotopic to $q'$. It is a quasi-isomorphism, hence a homotopy equivalence by the same cited statement. Termwise limit preserves its homotopies: the limit of a tower homotopy $H$ satisfies $d(\\lim H)+(\\lim H)d=\\lim(dH+Hd)$ after every limit projection. Moreover $\\lambda_{J,r}\\circ\\lim(v[r])=(\\lim v)[r]\\circ\\lambda_{I,r}$ after every projection, because both components are $v_n^{i+r}$. These equalities identify the shift from $J$ with the one from $I$, even when $J$ has no injective terms. Finally step 5 gives $\\sigma^{\\lim}_{X,r}=\\rho_X[r]\\circ\\sigma^C_{X,r}\\circ\\rho_{X[r]}^{-1}$. The right side is resolution independent and natural for all derived tower morphisms; so is the stated equality.",
+   "uses": [
+    "lem-weil-strict-roos-comparison",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, (1) implies (3); sites-cohomology.tex Tag 0941 and agent signed naturality refinement"
+   }
+  },
+  {
+   "text": "For $r=0$ the last conjugation formula gives the identity. For $r,s\\in\\mathbf Z$, substitute it twice into $\\sigma^{\\lim}_{X,r}[s]\\circ\\sigma^{\\lim}_{X[r],s}$. The adjacent $\\rho_{X[r]}^{-1}[s]$ and $\\rho_{X[r]}[s]$ cancel, leaving $\\rho_X[r+s]\\circ(\\sigma^C_{X,r}[s]\\circ\\sigma^C_{X[r],s})\\circ\\rho_{X[r+s]}^{-1}=\\sigma^{\\lim}_{X,r+s}$ by step 2. Thus the equality respects shift coherence. For a natural strict-tower comparison $b:X\\to Y$ commuting with the termwise shifts, its two product maps give the diagonal $\\mathsf C(b)$ from step 2. Combining its naturality square with that of $\\rho$ composes the proved square with $b$ on either side. This proves the last assertion with the same normalized maps.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain and shift-addition identities; final cancellation in the normalized comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model",
+  "lem-pur-injective-tower-roos-shifts",
+  "lem-weil-pbc-kinjective-shift",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, lemma-derived-limit-is-ok, normalized K-injective computation, refined by the explicit signed shift calculation from Tags 011G and 014E; the shift-compatibility argument is written here, not asserted verbatim by Tag 0941."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +153,59 @@
    "results": "Hits: CochainComplex.mappingCone.shiftIso",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone.shiftIso",
+   "results": "Hits: CochainComplex.mappingCone.shiftIso",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone shifts, K-injective shifts or ordinary inverse systems do not state the normalized strict-tower Roos comparison square"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]oos|derivedLimit|derivedInverseLimit",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone shifts, K-injective shifts or ordinary inverse systems do not state the normalized strict-tower Roos comparison square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized cone comparison with total derived inverse limit commutes with shift of K-injective tower resolutions",
+   "results": "Hits: CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CochainComplex.isKInjective_shift_iff, CategoryTheory.Limits.limit.isoLimitCone_inv_π, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.mappingCone.shiftTriangleIso, CochainComplex.mappingCone.shiftTrianglehIso, CochainComplex.mappingCone.shiftIso",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone shifts, K-injective shifts or ordinary inverse systems do not state the normalized strict-tower Roos comparison square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized mapping fiber of one minus transition on tower products compares with derived inverse limit compatibly with signed integer shifts",
+   "results": "Hits: InverseSystem.pEquivOnLim, LightProfinite.transitionMapLE, InverseSystem.globalEquiv_compatibility, InverseSystem.invLimEquiv_apply_coe, InverseSystem.pEquivOnSucc, InverseSystem.globalEquiv_naturality, LightProfinite.proj_comp_transitionMap, InverseSystem.piLTLim",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone shifts, K-injective shifts or ordinary inverse systems do not state the normalized strict-tower Roos comparison square"
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone.shiftIso|isKInjective_shift_iff",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean Subdirectory: Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone shifts, K-injective shifts or ordinary inverse systems do not state the normalized strict-tower Roos comparison square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Shift compatibility of a natural isomorphism from sequential homotopy limit mapping cone to unbounded right derived inverse limit",
+   "results": "Hits: CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh, CochainComplex.mappingCone.shiftTrianglehIso, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv_assoc, DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso, CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mapCochainComplexShiftIso",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone shifts, K-injective shifts or ordinary inverse systems do not state the normalized strict-tower Roos comparison square"
+  },
+  {
+   "tool": "grep",
+   "query": "noncomputable def shiftIso|lemma isKInjective_shift_iff",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean Subdirectory: Algebra/Homology/HomotopyCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: generic cone shifts, K-injective shifts or ordinary inverse systems do not state the normalized strict-tower Roos comparison square"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-integral-pullback-completed-comparison",
@@ -84,5 +226,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-normalized-roos-shift-comparison",
+  "worker": "stage1",
+  "summary": "Kept the entire statement and its hypotheses. Seven steps explicitly check the signed differential, strict naturality and addition, shifted K-injective models, preservation of the normalized inclusion, the comparison square, arbitrary-resolution independence and derived naturality, and coherence. Reused the existing injective-tower shift and normalized strict-Roos comparison nodes; no new nodes.",
+  "blueprint": "Realizes the inherited blueprint.from.place: the normalized Roos shift check extracted from old step 11 of lem-a1-integral-pullback-completed-comparison, in the existing dependency chain from lem-a1-finite-map-purity. This is foundational comparison work below the unit route, not a replacement for the finite-etale purity or affine-line weight argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-injective-tower-roos-shifts",
+    "why": "Generic K-injective strict-tower representative theorem and termwise limit-shift computation; no affine-line unit node supplies these homological algebra inputs."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "The normalized cone/total-derived-limit comparison explicitly named in the item; a generic tool whose actual inclusion normalization is needed, not a replacement for the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-injective-tower-roos-shifts",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-3dee8a33c",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-3dee8a33c (reviewer sub-agent of L); spot-checked: Read the item and all 7 steps in full against every cited statement. Sources read: Stacks Tag 0941 (sites-cohomology lemma-derived-limit-is-ok, l.5067ff) and the 014E/011G cone and shift conventions. The delivery is one commit with the item and report only and no new nodes. Statement and stmt_deps are unchanged, proof_deps equals the union of the step uses, all four search kinds are recorded, and there is no SGA. Step 1: I recomputed the differentials. C(X[r]) has (-a dy - hx, a dx) and C(X)[r] has (-a dy - a hx, a dx) with a=(-1)^r; both composites with (y,x)->(ay,x) give (-dy - a hx, a dx). Step 2: the map is diagonal, and composing shifts gives sign (-1)^{r+s}. Step 3: lem-pur-injective-tower-roos-shifts gives the injective-term representative, and lem-weil-pbc-kinjective-shift holds in Tow(A). Step 4: lem-weil-strict-roos-comparison gives rho = j^{-1}C(q) with j=(0,z), and sigma(0,z)=(0,z); its hypotheses (small site, Mod(R), exact countable products) match the item. Step 5 is algebra. Step 6: kinjective-hom-derived gives a homotopy equivalence v, and lim preserves homotopies, so the result does not depend on the resolution and holds for all derived morphisms. Step 7: coherence by cancellation. Small cases checked: r=0, r=+-1, r+s=0, characteristic 2, zero tower. Not a duplicate: lem-pur-injective-tower-roos-shifts covers only injective representatives, and lem-weil-roos-comm-shift is strict-level with no derived rho. No cycle: the parallel Q106 split of lem-pur-injective-tower-roos-shifts does not cite this item. The only citer, lem-a1-integral-pullback-completed-comparison step 5, uses exactly the delivered equation. Both declared tool uses (lem-pur-injective-tower-roos-shifts, lem-weil-strict-roos-comparison) are accepted as generic homological algebra off the A1 unit route."
  }
 }
