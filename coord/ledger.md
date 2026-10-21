@@ -20860,3 +20860,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/O2/lem-sfb-etale-stalk-total-tensor-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q101/lem-weil-specified-pullback-comparison-alpha (reviewer FIX; after a return; new nodes: 3)
 - 08:07 L: merged deliver/O3/lem-coef-closed-identity-open-hom-normalization (reviewer FIX; first push; new nodes: 0); claim not held by O3: not your claim
+- 08:07 L: merged deliver/NO/lem-sf-open-reduction-adjunction-transport (reviewer PASS; first push; new nodes: 0)
