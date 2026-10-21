@@ -19634,3 +19634,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:41 L: returned deliver/A6/Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition (reviewer RETURN: (the landing tools, head cd03cf561) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.ProEtaleProjectiveLineTr)
 - 02:41 L: returned deliver/C2/Sheaf.Paper.IntegralTensorShriek (reviewer RETURN: (the landing tools, head 882a4b169) the delivery did not land: every module of the delivery is in the library already, w)
 - 02:41 L: returned deliver/G3/Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale (reviewer RETURN: (the landing tools, head f755a769e) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRo)
+- 02:41 L: returned deliver/M4/Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap (reviewer RETURN: (the landing tools, head c9a578aba) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.StrictLocalSectionCone ()
