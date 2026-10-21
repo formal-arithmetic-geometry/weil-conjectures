@@ -13,13 +13,6 @@ public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
 public import WeilConjectures.CategoryTheory.StageSystem.Functor
 public import Sheaf.CategoryTheory.StageSystemFunctorDescent
-import Sheaf.CategoryTheory.SemilinearScalarLocalization
-import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
-import Sheaf.Paper.CondensedAmbientExchange
-import Sheaf.Paper.RingedPushforwardCompletion
-import Sheaf.Paper.PbcQbarCompletedPullback
-import Sheaf.CategoryTheory.ReflectedCompositorUnitNormalization
-import Sheaf.CategoryTheory.ReflectorSquareMateFactorization
 
 /-! # Finite-stage rational exchange and its coefficient coherence
 
@@ -420,7 +413,10 @@ theorem between_karoubi_spec :
           (c ⊗ₜ[R] f : ScalarLocalization.mk (R := R) (p := t) K ⟶
             ScalarLocalization.mk (R := R) (p := t) L) =
         c ⊗ₜ[R] H.map f) := by
-  sorry
+  constructor
+  · exact ⟨fun {K L} f g ↦ (betweenHom R t H K.obj L.obj).map_add f g⟩
+  · intro K L f c
+    exact LinearMap.baseChange_tmul _ _ _
 
 end CategoryTheory.ScalarLocalization
 
@@ -431,6 +427,7 @@ variable {A : Type a} [Category.{x} A] [Preadditive A]
   {B : Type b} [Category.{y} B] [Preadditive B]
   (F G : A ⥤ B) [F.Additive] [G.Additive]
 
+set_option linter.unusedSectionVars false in
 /-- Supported formulas for additive Karoubi extensions of arbitrary raw functors.
 In particular these apply to the semilinear scalar comparisons, whose source and
 target raw categories can have different coefficient fields.
@@ -465,7 +462,44 @@ theorem additive_karoubi_extension_spec (α : F ⟶ G) :
           F.map P.p ≫ b.hom.app P.X ≫ G.map P.p ∧
         (((functorExtension₂ _ _).mapIso b).inv.app P).f =
           G.map P.p ≫ b.inv.app P.X ≫ F.map P.p) := by
-  sorry
+  have supported {H J : A ⥤ B} (η : H ⟶ J) (P : Karoubi A) :
+      (((functorExtension₂ _ _).map η).app P).f =
+        H.map P.p ≫ η.app P.X ≫ J.map P.p := by
+    change H.map P.p ≫ η.app P.X = H.map P.p ≫ η.app P.X ≫ J.map P.p
+    rw [← η.naturality P.p, ← Category.assoc, ← H.map_comp, P.idem]
+  refine ⟨?_, ?_, ?_, supported α, ?_, ?_⟩
+  · constructor
+    intro P Q f g
+    ext
+    exact F.map_add
+  · intro P
+    exact ⟨rfl, rfl⟩
+  · intro P Q f
+    rfl
+  · intro K
+    have hom_heq {P Q P' Q' : Karoubi B} (hP : P = P') (hQ : Q = Q')
+        (a : P ⟶ Q) (b : P' ⟶ Q') (hab : HEq a.f b.f) : HEq a b := by
+      subst P'
+      subst Q'
+      exact heq_of_eq (Karoubi.hom_ext a b (eq_of_heq hab))
+    have hF : ((functorExtension₂ A B).obj F).obj ((toKaroubi A).obj K) =
+        (toKaroubi B).obj (F.obj K) := by
+      refine Karoubi.ext ?_ ?_
+      · rfl
+      · change F.map (𝟙 K) ≫ 𝟙 _ = 𝟙 _ ≫ 𝟙 _
+        rw [F.map_id]
+    have hG : ((functorExtension₂ A B).obj G).obj ((toKaroubi A).obj K) =
+        (toKaroubi B).obj (G.obj K) := by
+      refine Karoubi.ext ?_ ?_
+      · rfl
+      · change G.map (𝟙 K) ≫ 𝟙 _ = 𝟙 _ ≫ 𝟙 _
+        rw [G.map_id]
+    apply hom_heq hF hG
+    apply heq_of_eq
+    change F.map (𝟙 K) ≫ α.app K = α.app K
+    rw [F.map_id, Category.id_comp]
+  · intro b P
+    exact ⟨supported b.hom P, supported b.inv P⟩
 
 end CategoryTheory.Idempotents
 
