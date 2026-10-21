@@ -129,7 +129,8 @@ set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem closedProjection_naturality_right {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] (P : DerivedCategory (supportModules Λ Z))
+    [IsClosedImmersion i] [PreservesFiniteColimits (lowerStar Λ i)]
+    (P : DerivedCategory (supportModules Λ Z))
     {T T' : DerivedCategory (supportModules Λ X)} (f : T ⟶ T') :
     ((derivedTensor Λ X).obj ((lowerStar Λ i).mapDerivedCategory.obj P)).map f ≫
       closedSupportProjection Λ i P T' =
@@ -171,7 +172,8 @@ set_option maxHeartbeats 800000 in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem closedProjection_naturality_left {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] {P P' : DerivedCategory (supportModules Λ Z)} (a : P' ⟶ P)
+    [IsClosedImmersion i] [PreservesFiniteColimits (lowerStar Λ i)]
+    {P P' : DerivedCategory (supportModules Λ Z)} (a : P' ⟶ P)
     (T : DerivedCategory (supportModules Λ X)) :
     ((derivedTensor Λ X).map ((lowerStar Λ i).mapDerivedCategory.map a)).app T ≫
       closedSupportProjection Λ i P T =
@@ -253,6 +255,7 @@ Proof plan (the eleven steps of the node):
 theorem openClosedInternalHomFormulas {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
+    let := closedSupport_lowerStarExact Λ i j hij
     ∃ (p : ∀ (P : DerivedCategory (supportModules Λ Z))
         (T : DerivedCategory (supportModules Λ X)),
         ((derivedTensor Λ X).obj ((lowerStar Λ i).mapDerivedCategory.obj P)).obj T ≅
@@ -298,11 +301,12 @@ theorem openClosedInternalHomFormulas {Z U X : Scheme.{u}}
           (((derivedHom Λ Z).map a.op).app ((closedSupport Λ i j).rightDerivedFunctor.obj N) ≫
             ((derivedHom Λ Z).obj (op P')).map
               ((closedSupport Λ i j).rightDerivedFunctor.map b))) := by
+  let := closedSupport_lowerStarExact Λ i j hij
   obtain ⟨hc, ho⟩ := openClosedSupportProjectionFormula Λ i j hij
   have hon := openProjection_naturality_right Λ j
   have hol := @openProjection_naturality_left.{u} Λ _ _ U X j _
   have hcn := closedProjection_naturality_right Λ i
-  have hcl := @closedProjection_naturality_left.{u} Λ _ _ Z X i _
+  have hcl := @closedProjection_naturality_left.{u} Λ _ _ Z X i _ _
   let _ := hc
   let _ := ho
   let φc := fun P T ↦ inv (closedSupportProjection Λ i P T)

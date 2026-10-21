@@ -177,7 +177,8 @@ private theorem derivedOpenUnit {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersio
 
 omit [IsCommMonObj Λ] in
 private theorem derivedClosedCounit {Z X : Scheme.{u}} (i : Z ⟶ X)
-    [IsClosedImmersion i] : IsIso (closedPullbackDerivedAdjunction Λ i).counit := by
+    [IsClosedImmersion i] [PreservesFiniteColimits (lowerStar Λ i)] :
+    IsIso (closedPullbackDerivedAdjunction Λ i).counit := by
   have := closedCounit Λ i
   let e := lowerStar Λ i
   let r := supportPullback Λ i
@@ -210,7 +211,7 @@ private theorem derivedJointIso {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
 
 omit [IsCommMonObj Λ] in
 private theorem derivedMixedClosed {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
-    [IsClosedImmersion i] [IsOpenImmersion j]
+    [IsClosedImmersion i] [PreservesFiniteColimits (lowerStar Λ i)] [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (P : DerivedCategory (supportModules Λ Z)) :
     IsZero ((supportPullback Λ j).mapDerivedCategory.obj
@@ -248,6 +249,7 @@ coefficients are permitted throughout. No tensor, flat resolution or internal Ho
 theorem condensedSupportDerivedLocalization {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
+    let := closedSupport_lowerStarExact Λ i j hij
     (∀ L, IsIso ((openSupportDerivedAdjunction Λ j).unit.app L)) ∧
     (∀ P, IsIso ((closedPullbackDerivedAdjunction Λ i).counit.app P)) ∧
     (∀ M : DerivedCategory (supportModules Λ X),
@@ -260,6 +262,7 @@ theorem condensedSupportDerivedLocalization {Z U X : Scheme.{u}}
     (∀ {M N : DerivedCategory (supportModules Λ X)} (f : M ⟶ N),
       IsIso ((supportPullback Λ i).mapDerivedCategory.map f) →
       IsIso ((supportPullback Λ j).mapDerivedCategory.map f) → IsIso f) := by
+  let := closedSupport_lowerStarExact Λ i j hij
   have hu := derivedOpenUnit Λ j
   have hc := derivedClosedCounit Λ i
   have hz := derivedMixedClosed Λ i j hij

@@ -48,8 +48,10 @@ not constructed again here. Empty strata and zero coefficients are permitted -/
 theorem openClosedSupportProjectionFormula {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
+    let := closedSupport_lowerStarExact Λ i j hij
     (∀ P T, IsIso (closedSupportProjection Λ i P T)) ∧
     (∀ L T, IsIso (openSupportProjection Λ j L T)) := by
+  let := closedSupport_lowerStarExact Λ i j hij
   obtain ⟨hu, hc, hs, hio, hjc, hd⟩ := condensedSupportDerivedLocalization Λ i j hij
   let _ := hu
   let _ := hc
