@@ -1,0 +1,103 @@
+{
+ "id": "def-weil-pbc-completed-constant-complex-base",
+ "kind": "definition",
+ "title": "Canonical completed constant base map and constant complex functor",
+ "statement": "Let $X$ be a scheme and $X_{\\mathrm{proet}}$ its small pro-etale site [def-weil-pbc-proetale-site]. Let $A$ be a commutative ring and $I\\subset A$ an ideal. Write $A_X$ for the constant ring sheaf and $B_X=\\varprojlim_{n\\geq1}(A/I^n)_X$, with the quotient transition maps, using the constant and completed coefficient constructions of [def-weil-pbc-adic-lisse-module]. Define $c_{X,I}:A_X\\to B_X$ to be the canonical ring-sheaf homomorphism whose composite with the projection to $(A/I^n)_X$ is the constant sheaf map induced by $A\\to A/I^n$, for every $n\\geq1$. For an $A$-module cochain complex $P^\\bullet$, define its termwise constant $A_X$-module complex $\\underline{P^\\bullet}_X$ [def-pc-cochain-complex-modules] by $(\\underline{P^\\bullet}_X)^q=\\underline{P^q}_X$ and $d^q=\\underline{d_P^q}_X$. A chain map is sent to its termwise constant sheaf map; this defines the constant-complex functor from cochain complexes of $A$-modules to cochain complexes of $A_X$-modules. No Noetherian, finiteness, completeness or boundedness hypothesis is part of either construction.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-adic-lisse-module",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section Constant sheaves, Tag 093J (lemma-constant-exact), and Tag 093M (lemma-completion-flat), its canonical constant-ring algebra structure; degreewise constant complexes in the local perfect model of Bhatt--Scholze Proposition 6.6.11, reverse implication"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The canonical map from a constant ring sheaf to its adic completed constant sheaf and the degreewise constant sheaf functor on cochain complexes",
+   "results": "8 hits: CategoryTheory.constantSheaf, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.constantSheafAdj_counit_app, AdicCompletion.of, IsAdicComplete.of_lift, AdicCompletion.mkₐ, CategoryTheory.constantCommuteCompose, CategoryTheory.constantSheafΓAdj",
+   "date": "2026-10-21",
+   "verdict": "No exact combined interface in Mathlib. Direct project grep finds the exact existing base and constantComplex declarations in Sheaf.Paper.CompletedConstantSheafReduction; reuse them with existing: true. DAG grep finds their attachment only to the parent theorem node; no definition node carries this pair."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"mapHomologicalComplex\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact combined interface in Mathlib. Direct project grep finds the exact existing base and constantComplex declarations in Sheaf.Paper.CompletedConstantSheafReduction; reuse them with existing: true. DAG grep finds their attachment only to the parent theorem node; no definition node carries this pair."
+  },
+  {
+   "tool": "grep",
+   "query": "constantComplex|adicLisseCompletedRing|CompletedConstantReduction",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact combined interface in Mathlib. Direct project grep finds the exact existing base and constantComplex declarations in Sheaf.Paper.CompletedConstantSheafReduction; reuse them with existing: true. DAG grep finds their attachment only to the parent theorem node; no definition node carries this pair."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-perfect-strata-uniform-reductions",
+  "date": "2026-10-21",
+  "group": "NM"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof opening: \"Choose an integral lattice for K\"; local completed constant perfect model in Bhatt--Scholze Proposition 6.6.11, reverse implication, as used in the hypothesis of lem-weil-pbc-perfect-strata-uniform-reductions",
+   "via": [
+    "lem-weil-pbc-perfect-strata-uniform-reductions",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedConstantSheafReduction",
+  "declaration": "AlgebraicGeometry.Scheme.CompletedConstantReduction.base",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.base",
+   "AlgebraicGeometry.Scheme.CompletedConstantReduction.constantComplex"
+  ],
+  "statement": "def base (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal A) :\n    adicLisseConstantRing T A ⟶ adicLisseCompletedRing T I",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "R3 of the return on e3263ad8c90b: attach the two existing plain definitions used by the perfect-model hypothesis to a definition node. No new Lean declaration or arbitrary scalar map is introduced. base is selected by its uniquely determining quotient projections, and constantComplex is the actual degreewise constant-module functor. The parent theorem node and all its existing declarations are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b04666a3a",
+  "group": "NM",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b04666a3a",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed e3263ad8: Lean byte-identical (sha af96df88), substance re-read vs node and BS 6.6.10(1)/6.6.11 (hypotheses, uniform a<=b before forall n, constructibility, finite constant models on original covers, edge cases X empty / I=A / n index shift, universes) OK. R1/R2 fixed: def-weil-derived-cohomology-sheaves and def-weil-proetale-constructible-sheaf records equal live, all dep nodes equal live. R3 fixed: new existing:true def-weil-pbc-completed-constant-complex-base on unchanged CompletedConstantSheafReduction (base = choose of proved exists-unique base_exists, constantComplex = mapHomologicalComplex of constant modules), statement verbatim, Stacks 093J/093M labels verified, check_existing and check_new_node clean. stmt_deps adds only def nodes. nt_compile --json clean 17.6 s. Report has Worker report and Second reading by NM. Advisory: overFunctor owner def-pur-localized-ringed-site not cited; proof-only plain imports."
+ }
+}

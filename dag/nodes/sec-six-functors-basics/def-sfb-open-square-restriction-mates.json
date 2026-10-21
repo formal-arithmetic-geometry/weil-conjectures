@@ -1,0 +1,121 @@
+{
+ "id": "def-sfb-open-square-restriction-mates",
+ "kind": "definition",
+ "title": "Canonical module open-square restriction mates and section coprojection",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. For every scheme $T$, use the pulled-back ring $\\Lambda_T$ [sk-def-sfb-pulled-back-coefficients], its internal module category $\\operatorname{Mod}_{\\Lambda_T}$ [sk-def-sfb-module-objects], and its ordinary unbounded derived category $D_T$ [sk-def-sfb-derived-categories], with the size convention [def-weil-size-convention]. Use the module functors, adjunctions, and canonical pullback composition comparisons of [sk-def-sfb-module-pushforward-pullback]. For arbitrary schemes $X,Y,X',Y'$ and maps $f:X\\to Y$, $j:Y'\\to Y$, $f':X'\\to Y'$, $i:X'\\to X$ with $f i=j f'$, define the canonical comparison $\\chi:f'^*j^*\\xrightarrow{\\sim} i^*f^*$ by the pullback compositor for $jf'$, the equality $jf'=fi$, and the pullback compositor for $fi$. Define the underived restriction mate $\\beta:j^*f_*\\to f'_*i^*$ as the mate of $\\chi$ under $f^*\\dashv f_*$ and $f'^*\\dashv f'_*$. Define $D\\chi:D(f'^*)D(j^*)\\xrightarrow{\\sim}D(i^*)D(f^*)$ by applying the exact termwise derived functor to $\\chi$ and inserting the canonical comparisons for derived composites. Define $\\rho:D(j^*)Rf_*\\to Rf'_*D(i^*)$ to be its mate under the exact-left derived adjunctions $D(f^*)\\dashv Rf_*$ and $D(f'^*)\\dashv Rf'_*$. These four constructions need only the commutative square, with no Cartesian, open, finite-type, or coefficient-admissibility assumption. In addition, for an open immersion $j:X\\hookrightarrow Y$ [def-weil-open-immersion], $M\\in\\operatorname{Mod}_{\\Lambda_Y}$ and $V\\to X$ in $X_{\\mathrm{pro\\acute et}}$, define the section coprojection $c_{j,M,V}:M(V\\xrightarrow{}X\\xrightarrow jY)\\to(j^*M)(V)$ as follows: first apply the component at the composite $jV$ of the module adjunction unit $M\\to j_*j^*M$, then restrict $(j^*M)(V\\times_YX)$ along the canonical site arrow $V\\to V\\times_YX$, $v\\mapsto(v,v\\to X)$. All maps use the canonical pulled-back coefficient actions. This node defines the specified maps and comparisons; it asserts no invertibility theorem for $\\beta$, $\\rho$, or $c$.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "def-weil-size-convention",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-open-immersion"
+ ],
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 09A5, section-morphism (Functoriality of the pro-etale site); Tag 0D6G, lemma-restrict-direct-image-open: canonical restriction comparisons and their underived section construction"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "openCoherence|directImageOpenRestriction|derivedDirectImageOpenRestriction",
+   "results": "0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib construction for these pro-etale module objects; reuse the five existing Sheaf.Paper.DerivedDirectImageOpenCoherence definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical base change mate for module sheaves in a commutative square and open restriction section coprojection",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctor, ModuleCat.Tilde.toOpen, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrict_obj, IsBaseChange, AlgebraicGeometry.Scheme.Modules.restrict",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib construction for these pro-etale module objects; reuse the five existing Sheaf.Paper.DerivedDirectImageOpenCoherence definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "underived and derived base change restriction mates for module objects on small pro etale sites",
+   "results": "8 hit(s): AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, PresheafOfModules.restrictHomEquivOfIsLocallySurjective, CommRingCat.moduleCatRestrictScalarsPseudofunctor_mapComp, PresheafOfModules.restrictScalarsCompToPresheaf, ModuleCat.RestrictionCoextensionAdj.unit'_app, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.RestrictionCoextensionAdj.unit'",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib construction for these pro-etale module objects; reuse the five existing Sheaf.Paper.DerivedDirectImageOpenCoherence definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"openCoherencePullbackSquare|derivedOpenCoherencePullbackSquare|directImageOpenRestriction|derivedDirectImageOpenRestriction|openCoherenceSectionCoprojection\" lean/WeilConjectures lean/Sheaf",
+   "results": "No upstream WeilConjectures hits. All five constructions exist in lean/Sheaf/Paper/DerivedDirectImageOpenCoherence.lean:69-131, along with uses in the same module. Their full signatures and data were read; scompile.py --source confirms the live source.",
+   "date": "2026-10-21",
+   "verdict": "Exact existing definitions; existing:true with all five declarations, no copied definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l \"openCoherencePullbackSquare|derivedOpenCoherencePullbackSquare|directImageOpenRestriction|derivedDirectImageOpenRestriction|openCoherenceSectionCoprojection\" dag/nodes; python3 tools/blueprint_refs.py search \"open restriction\"",
+   "results": "Only lem-sfb-derived-direct-image-open-coherence records these declaration names. Blueprint search returns det-sf-mate-open-restriction, det-sfb-coefficient-comparisons-exceptional, lem-coef-finite-closed-shriek, lem-exc-closed-support-triangle, lemma-nagata-scheme-image-restrict-open, lemma-weil-pbc-normalization-exact-sequence.",
+   "date": "2026-10-21",
+   "verdict": "No existing definition node carries the five unrestricted constructions; the theorem node restricts its conclusion to finite-type schemes and rational coefficients and cannot serve as their definition dependency."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-identity-open-derived-restriction",
+  "date": "2026-10-21",
+  "group": "N9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-comp-coherence-cocycle",
+   "place": "Refinement isomorphisms and Independence: the canonical restriction mate used to define the common-open identity comparison",
+   "via": [
+    "lem-sfb-identity-open-derived-restriction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-comp-coherence",
+ "lean": {
+  "module": "Sheaf.Paper.DerivedDirectImageOpenCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.directImageOpenRestriction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoherencePullbackSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.directImageOpenRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenCoherencePullbackSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedDirectImageOpenRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoherenceSectionCoprojection"
+  ],
+  "statement": "noncomputable def directImageOpenRestriction\n    {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}\n    {f' : X' ⟶ Y'} {i : X' ⟶ X} (sq : CommSq i f' f j) :\n    lowerStar Λ f ⋙ upperStar Λ j ⟶ upperStar Λ i ⋙ lowerStar Λ f'",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing plain definitions at lines 69-131 of the unchanged Q13 module, confirmed using scompile.py --source. openCoherencePullbackSquare and derivedOpenCoherencePullbackSquare are the ordinary and exact-derived pullback comparisons; directImageOpenRestriction and derivedDirectImageOpenRestriction are their adjunction mates; openCoherenceSectionCoprojection is the explicit unit followed by site restriction. All five are real constructions, not chosen objects from a theorem. No assertion from the restricted derivedDirectImageOpenCoherence theorem is used, and no copy or modification of its module is delivered. The namespace section binds the arbitrary commutative condensed coefficient ring and the scheme universe explicitly."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b465a920",
+  "group": "N9",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b465a920",
+  "group": "N9",
+  "result": "fix",
+  "note": "Re-delivery after the 4fee98f5 H2 RETURN. The item Lean is byte-identical; clauses re-checked (Λ admissible predicate; qc open immersions; w: j'≫h=j; hw preimage equality; r_h = open-square mate + moduleDerivedIdentity with IsIso, section identity via (1_V,j'v), K-injective representative formula; composition j^*κ, then r_h Rk_*, then r_k; identity normalization; no extra hypotheses; sorry-only proofs; docstrings OK). H2 repaired: theorem lem-sfb-derived-direct-image-open-coherence replaced in stmt_deps by new def node def-sfb-open-square-restriction-mates, existing:true on the unchanged Q13 DerivedDirectImageOpenCoherence. Its 5 listed decls are all plain defs (mateEquiv/unit), not .choose; the statement matches the live signature verbatim; no other owner, no cycle, no added theorem stmt_dep. nt_compile --json clean in 33.7 s (60 s limit). FIX: whole-node fixes/def-sfb-open-square-restriction-mates.json corrects the TeX χ/Dχ, written diagrammatically (j^*f'^*≅f^*i^*), to applicative f'^*j^*≅i^*f^* and D(f'^*)D(j^*)≅D(i^*)D(f^*), consistent with β/ρ and the Lean. All other fields are unchanged. Advisory: moduleDerivedCompositor/Identity are plain defs of the base theorem stmt_dep."
+ }
+}

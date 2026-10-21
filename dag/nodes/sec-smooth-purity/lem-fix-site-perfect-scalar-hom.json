@@ -16,7 +16,10 @@
   "def-weil-pbc-strict-perfect-coefficient-package",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-tensor-hom-model",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "def-fix-ringed-scalar-extension-section"
  ],
  "proof": [
   {
@@ -244,5 +247,32 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-701c3eb9f (reviewer sub-agent of L); spot-checked: Verdict FIX: the split is correct, with one fault (C3/C4) in step 2, now repaired. I read the item, both new nodes, every cited statement, the unit and chapter route, and these sources: Stacks 08JJ, 0FPU (the omitted triangle checks), 0GM7(1), and paragraph 1 of the main-20261015 lem-fix-operation-reduction proof. Checks: the item statement is byte-identical to the live base; the item is still unsplit live; there is no repair note; it is not on the dropped list; no SGA source is cited; no cited node's closure leads back to the item or its parent. Step 1: the identity topos with ring map R to S is a ringed-topos morphism, and ringed derived monoidality makes F symmetric strong monoidal with mu = t^-1, without flatness. Steps 3-5 are correct: the criterion's data match ExactPairing D P, the comparison node's gamma is the same transpose that defines c_{P,Q}, and the naturality calculation in step 5 is truly elementary. lem-fix-closed-evaluation-dual-criterion is true. Triangle 1 is the transpose of phi_P c = u_P. Triangle 2 follows from e(1 tensor g) = e by interchange, then phi_1 invertible. It is the generic form of lem-pc-dualizable-evaluation-criterion, which covers schemes only. lem-fix-monoidal-dual-hom-comparison is true and matches the sorry-free project lemma isIso_ihomComparison_app_of_exactPairing (GenericFibre/Comparison.lean:72-81, Mathlib convention). It is not a duplicate of the etale or constructible variants. Neither new node restates part of the item, and both carry three search kinds. The fault: step 2 said the perfect-duality theorem's comparison is the transpose of (e tensor 1_N), but that theorem does not state it. The map is defined in lem-sfb-ringed-site-duality-maps as internal composition N tensor D to H(P,N), in the other tensor order, and that node was not cited. Repaired in fixes/dag/nodes/sec-smooth-purity/lem-fix-site-perfect-scalar-hom.json. Step 2 now fixes the symmetry-converted tensor-Hom bijection and defines phi_N. It cites duality-maps and def-coef-ringed-tensor-hom-model, and derives phi_N = e_{P,N} o sigma_{D,N}, so every phi_N is invertible by the perfect-duality theorem. proof_deps were recomputed and lem-sfb-ringed-site-duality-maps is declared as a generic tool use.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SitePerfectScalarHomComparison",
+  "declaration": "CategoryTheory.sitePerfectScalarHomComparison",
+  "declarations": [
+   "CategoryTheory.SiteScalarHomGeneratorFormula",
+   "CategoryTheory.SiteScalarHomTensorNormalization",
+   "CategoryTheory.SitePerfectScalarHomData",
+   "CategoryTheory.siteScalarHomSourceEvaluation",
+   "CategoryTheory.siteScalarHomComparison",
+   "CategoryTheory.sitePerfectScalarHomComparison"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SitePerfectScalarHomComparison.lean",
+  "statement": "theorem sitePerfectScalarHomComparison (X : AlgebraicGeometry.Scheme.{u}) [HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology X) AddCommGrpCat.{max (u + 1) r}] [(AlgebraicGeometry.Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{max (u + 1) r}] [∀ U : X.ProEt, HasSheafify ((AlgebraicGeometry.Scheme.ProEt.topology X).over U) AddCommGrpCat.{max (u + 1) r}] [∀ U : X.ProEt, ((AlgebraicGeometry.Scheme.ProEt.topology X).over U).WEqualsLocallyBijective AddCommGrpCat.{max (u + 1) r}] (R S : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{max (u + 1) r}) (φ : R ⟶ S) [HasDerivedCategory.{w} (RingedTensorModules.{u + 1, u, r} (AlgebraicGeometry.Scheme.ProEt.topology X) R)] [HasDerivedCategory.{w} (RingedTensorModules.{u + 1, u, r} (AlgebraicGeometry.Scheme.ProEt.topology X) S)] : ∃ M : SitePerfectScalarHomData.{u + 1, u, r, w} (AlgebraicGeometry.Scheme.ProEt.topology X) φ, (∀ P : DerivedCategory (RingedTensorModules.{u + 1, u, r} (AlgebraicGeometry.Scheme.ProEt.topology X) R), SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u + 1, u, r, w} R P → ∀ Q : DerivedCategory (RingedTensorModules.{u + 1, u, r} (AlgebraicGeometry.Scheme.ProEt.topology X) R), IsIso (siteScalarHomComparison _ φ M P Q)) ∧ (∀ (P P' Q Q' : DerivedCategory (RingedTensorModules.{u + 1, u, r} (AlgebraicGeometry.Scheme.ProEt.topology X) R)) (a : P' ⟶ P) (b : Q ⟶ Q'), SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u + 1, u, r, w} R P → SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u + 1, u, r, w} R P' → siteScalarHomComparison _ φ M P Q ≫ (derivedInternalHomOfUniverses.{u + 1, u, r, w} _ S).map (Prod.mkHom (M.scalar.T.map a).op (M.scalar.T.map b)) = M.scalar.T.map ((derivedInternalHomOfUniverses.{u + 1, u, r, w} _ R).map (Prod.mkHom a.op b)) ≫ siteScalarHomComparison _ φ M P' Q') ∧ (∀ P Q : DerivedCategory (RingedTensorModules.{u + 1, u, r} (AlgebraicGeometry.Scheme.ProEt.topology X) R), SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{u + 1, u, r, w} R P → M.targetClosed.tensor.map (Prod.mkHom (𝟙 (M.scalar.T.obj P)) (siteScalarHomComparison _ φ M P Q)) ≫ (M.targetSymmetry.braiding (M.scalar.T.obj P) ((derivedInternalHomOfUniverses.{u + 1, u, r, w} _ S).obj (op (M.scalar.T.obj P), M.scalar.T.obj Q))).hom ≫ M.targetClosed.evaluation (M.scalar.T.obj P) (M.scalar.T.obj Q) = M.tensorIso.inv.app (P, (derivedInternalHomOfUniverses.{u + 1, u, r, w} _ R).obj (op P, Q)) ≫ M.scalar.T.map (siteScalarHomSourceEvaluation _ φ M P Q))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair of returned head 56770ebd5b19: the unchanged mathematical statement uses the existing representative-coherence definition node and the newly recorded existing scalar-section definition, not theorem nodes as owners of plain definitions. Original statement dependencies are preserved."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-267cb0a7c",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 56770ebd (H2/H12 theorem stmt_deps owning plain defs). Both corrections made: lem-sf-ringed-derived-closed-symmetric-monoidal -> def-zl-ringed-derived-closed-symmetric-monoidal-data (owns RingedTensorModules/RingedDerivedTensorCoherence, reviewed pass); lem-sf-ringed-finite-free-tensor-data -> new existing:true def node def-fix-ringed-scalar-extension-section recording ringedFiniteFreeScalarSection (statement verbatim vs live RingedFiniteFreeHomBaseChangeData.lean:55, faithful sheafified s⊗x formula, def deps, searches, source). Lean module byte-identical except a dropped unused import; substance re-checked (F, H_R/H_S, pinned tensorIso/symmetry, c transpose, IsIso/naturality/evaluation on perfect P, any Q, edge cases); statement/proof/original deps unchanged; live item unlanded; nothing on dropped lists. nt_compile --json: one 60 s timeout at load 157, then clean 56.1 s at load ~148 (genInjectivity-off variant 56.5 s, no speed-up target); thin margin, retry landing at lower load if needed."
  }
 }

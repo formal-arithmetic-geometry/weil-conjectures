@@ -12,7 +12,9 @@
   "def-weil-pbc-derived-categories",
   "lem-exc-closed-support-triangle",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-pur-etale-scalar-mate",
+  "def-pur-etale-scalar-pullback-iso"
  ],
  "proof": [
   {
@@ -289,5 +291,30 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-2bc28867e (reviewer sub-agent of L); spot-checked: PASS: I read the item's seven steps in full, plus every cited statement. No new nodes, no cycle, proof_deps = union of uses; not dropped, not re-split, not superseded live (side-live still unsplit). Statement change: the base said 'T-image of the A-support triangle', which is ill-typed (the source would be in D(P,B), the target and the middle map 1_{Res TL} in D(P,A)). The delivery restricts the source to Res(T_P(-)). This matches what the sibling lem-pur-etale-kflat-support-comparison produces and what the citer lem-pur-finite-coefficient-adjoint-comparisons uses. Nothing is weakened, and the report names the change. Step checks: (1) T is triangulated by derived-change-of-rings (2), Res is exact and termwise, and the unbounded support triangles over any finite ring give e∘a=s. (2) The closed-ambient transpose gives e∘h=s. (3) Res i_*=i_* Res termwise (exact i_* from the trf closed-subtopos node, plus the factorization lemma), so this holds even for unbounded T_Z M. That gives j^*S=0. The open term goes through the D+ sbc comparison, which is valid because j^*TL is bounded below. So Hom(S[1],O)=0 by j^*⊣Rj_*. (4) Hom-exactness on the rotated triangle gives a=h. The target identification is via sbc (N is bounded below by hypothesis). (5) Two-of-three on the full triangle morphism. (6) i^*i_*≅1 termwise, then descended. (7) Res commutes with H^r and reflects module isomorphisms, then the cohomological iso criterion applies. Tested i=id, Z empty, A=B, and non-flat Z/4→Z/2 (unbounded T_Z M is handled termwise). Source: main-20261015 sk-lem-sp-reduction-exceptional.proof.md, Existence and Locality paragraphs; the proof is agent-written and marked as such, with no SGA. Batch-5 check: lem-trf-oriented-closed-base-localization is a generic fact (Stacks 08LY/08M3/04CA closed-subtopos module facts), not a step of the trace formula or Poincaré duality. I found no étale non-trf node stating it. It and its trf ancestors are already in the batch-5 closure without this item; the closure difference is only the item itself. Accepted as a tool. No duplicates found (def-per-exceptional-coefficient-maps and lem-coef-finite-scalar-mate-realization are different statements)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedTriangleMateIdentification",
+  "declaration": "AlgebraicGeometry.Etale.scalarSupportTriangle_mate_identification",
+  "declarations": [
+   "AlgebraicGeometry.Etale.scalarSupportExtensionCommShift",
+   "AlgebraicGeometry.Etale.scalarSupportTriangle",
+   "AlgebraicGeometry.Etale.scalarSupportOpenProjection",
+   "AlgebraicGeometry.Etale.scalarSupportClosedMate",
+   "AlgebraicGeometry.Etale.scalarSupportTriangle_mate_identification"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedTriangleMateIdentification.lean",
+  "statement": "theorem scalarSupportTriangle_mate_identification {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {Z P U : Scheme.{u}} (i : Z ⟶ P) [IsClosedImmersion i] (j : U ⟶ P) [IsOpenImmersion j] (_hij : Set.range i.base = (Set.range j.base)ᶜ) (K : DerivedCategoryModule A P) (_hK : ∃ n : ℤ, K.IsGE n) (_hTK : ∃ n : ℤ, ((scalarExtension φ P).obj K).IsGE n) (_hM : ∃ n : ℤ, ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K).IsGE n) (_hN : ∃ n : ℤ, ((R(lowerStar (ModuleCat.{u + 1} B) i)).rightAdjoint.obj ((scalarExtension φ P).obj K)).IsGE n) (_hOA : ∃ n : ℤ, (R(lowerStar (ModuleCat.{u + 1} A) j).obj (D(upperStar (ModuleCat.{u + 1} A) j).obj K)).IsGE n) (_hOB : ∃ n : ℤ, (R(lowerStar (ModuleCat.{u + 1} B) j).obj (D(upperStar (ModuleCat.{u + 1} B) j).obj ((scalarExtension φ P).obj K))).IsGE n) [IsIso ((scalarMate φ i).app ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K))] (δA : (R(lowerStar (ModuleCat.{u + 1} A) j)).obj (D(upperStar (ModuleCat.{u + 1} A) j).obj K) ⟶ ((R(lowerStar (ModuleCat.{u + 1} A) i)).obj ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K))⟦(1 : ℤ)⟧) (δB : (R(lowerStar (ModuleCat.{u + 1} B) j)).obj (D(upperStar (ModuleCat.{u + 1} B) j).obj ((scalarExtension φ P).obj K)) ⟶ ((R(lowerStar (ModuleCat.{u + 1} B) i)).obj ((R(lowerStar (ModuleCat.{u + 1} B) i)).rightAdjoint.obj ((scalarExtension φ P).obj K)))⟦(1 : ℤ)⟧) (_hδA : scalarSupportTriangle A i j K δA ∈ distTriang _) (_hδB : scalarSupportTriangle B i j ((scalarExtension φ P).obj K) δB ∈ distTriang _) (τ : (scalarExtension φ P ⋙ Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).mapTriangle.obj (scalarSupportTriangle A i j K δA) ⟶ (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).mapTriangle.obj (scalarSupportTriangle B i j ((scalarExtension φ P).obj K) δB)) (_hτ₂ : τ.hom₂ = 𝟙 _) (_hτ₃ : τ.hom₃ = (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).map (scalarSupportOpenProjection φ j K)) : τ.hom₁ = (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).map ((scalarMate φ i).app ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K)) ≫ (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).map (R(lowerStar (ModuleCat.{u + 1} B) i).map (scalarSupportClosedMate φ i K)) ∧ (τ.hom₁ ≫ (scalarRestrictionDirectImageMap φ i).app ((R(lowerStar (ModuleCat.{u + 1} B) i)).rightAdjoint.obj ((scalarExtension φ P).obj K)) = (Sheaf.derivedRestrictScalars P.smallEtaleTopology φ).map ((scalarMate φ i).app ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K)) ≫ (scalarRestrictionDirectImageMap φ i).app ((scalarExtension φ Z).obj ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K)) ≫ R(lowerStar (ModuleCat.{u + 1} A) i).map ((Sheaf.derivedRestrictScalars Z.smallEtaleTopology φ).map (scalarSupportClosedMate φ i K))) ∧ (IsIso (scalarSupportOpenProjection φ j K) → IsIso (scalarSupportClosedMate φ i K))",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f0c23a71",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 4cf6c250. Item module byte-identical (sha256 9755d6a1), prior review found it correct apart from H2. Item stmt_dep lem-pur-etale-scalar-mate-projection replaced by new existing:true def node def-pur-etale-scalar-mate owning AlgebraicGeometry.Etale.scalarMate; statement verbatim to live PurEtaleScalarMateProjection def (mateEquiv of scalarPullbackIso.hom, real data), TeX direction/mate formula matches, Stacks 07A7/0GL6 source, no extra hypotheses; 6 stmt_deps exist live, no cycle (DFS 407 nodes, item unreachable); no other def owner (same pattern as landed def-pur-etale-scalar-pullback-iso). Live item lean null; delivery adds lean + 2 used stmt_deps only. nt_compile --json clean 35.3 s. No fixes."
  }
 }

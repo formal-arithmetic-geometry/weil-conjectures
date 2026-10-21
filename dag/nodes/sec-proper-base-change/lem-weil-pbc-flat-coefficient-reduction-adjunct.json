@@ -13,7 +13,10 @@
   "def-pc-sheaf-restrict-scalars",
   "lem-pur-derived-change-of-rings",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-pc-derived-adjoint-functors"
+  "lem-pc-derived-adjoint-functors",
+  "def-pbc-successive-derived-scalar-normalization-data",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof": [
   {
@@ -316,5 +319,31 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-ef5dad566 (reviewer sub-agent of L); spot-checked: I read all 8 steps and the 12 cited statements in full. The delivery has no new nodes, and the item's statement and stmt_deps are byte-equal to live. The item is unsplit on live and side-live, nothing it touches is in the dropped lists, and there is no SGA source. The statement holds: (Res M)⊗^L_R S ≅ M⊗^L_B (B⊗_R S) ≅ M⊗^L_B S. Small cases checked: R=B gives κ=id; Z→Z[1/2]→F_3 gives the obvious identification; Z→F_p (B not flat) and k→k[t]→k (μ not an isomorphism) both give an extra Tor_1, so each hypothesis is needed. The S′ hypothesis is in fact automatic, since B⊗_R S′ ≅ (B⊗_R S)⊗_S S′ ≅ S′. Step 2 uses the cancellation with M=P^i over B and N=A^j over R, the colimit/forget node for sums and acyclicity, and the exact-functor node for acyclicity of B⊗A; this gives K-flatness and flat terms. Step 3 writes balanced inverse formulas whose S-linearity can be checked directly. Step 4 uses derived change of rings (1),(2) on UP and P, plus descent through W^{-1}P_B≃D(B) and the localization universal property. Steps 5-6 use the unit normalization (1) for ψ and ψφ, then Hom-equivalence injectivity; this proves the adjunct equation for arbitrary derived p. Step 7 is the sectionwise square x⊗τ(s). Step 8 uses kflat-change-of-rings and the stated associator formula of lem-sfb-successive-derived-quotient-normalization, which holds for arbitrary ring maps; the iterated case and the unit were checked. Sources checked: Stacks 06YS, 0G7E (l.3508), 05V4 (l.4610) and the other tags, plus the main-20261015 proof of the parent, whose steps use exactly the three clauses. No duplicate found among roughly 10 candidate scalar-comparison nodes. The tool uses are generic K-flat, tensor and adjunction lemmas and are accepted. Advisories, not faults: (1) the item's 'canonical' adjunctions are read as the normalized lem-pur-sheaf-ring-derived-coefficient-adjunction; the two agree because both units are x↦x⊗1 on K-flat models. (2) def-pc-flat-sheaf-modules is not cited in step 2, but the step writes out what flat means."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatCoefficientReductionAdjunct",
+  "declaration": "SheafOfModules.flat_coefficient_reduction_adjunct",
+  "declarations": [
+   "SheafOfModules.flatCoefficientMultiplication",
+   "SheafOfModules.flatCoefficientChange",
+   "SheafOfModules.flatCoefficientUnit",
+   "SheafOfModules.FlatCoefficientReductionComparison",
+   "SheafOfModules.flat_coefficient_reduction_adjunct"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatCoefficientReductionAdjunct.lean",
+  "statement": "theorem flat_coefficient_reduction_adjunct (hflat : exactFunctor (Modules R) (Modules B) (p φ).ordinary) : Nonempty (FlatCoefficientReductionComparison p N φ)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the existing normalized presentation data registered by def-pbc-successive-derived-scalar-normalization-data. The existence theorem lem-sfb-successive-derived-quotient-normalization stays in proof_deps only: p and N are parameters, and the statement never chooses data from that theorem. The interface and Lean source are unchanged from the returned head; all balanced, representative, adjunct, coefficient, successive and unit clauses are retained."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-146090b6b",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery of the 25cfb571 RETURN, which was H2 only: theorem lem-sfb-successive-derived-quotient-normalization in stmt_deps. The Lean file is byte-identical (sha d53a8638) and I reread it against the node. hflat = exactness of B⊗_R−; hμ = IsIso of the normalized counit b⊗s↦ψ(b)s. κ is pinned by ordinary_pure and representative. adjunct holds for arbitrary derived f. coefficient_naturality, successive and equal_index use normalized maps. No extra assumptions; universes independent; only sorry. The repair: the item's stmt_deps now cite the new def node def-pbc-successive-derived-scalar-normalization-data (existing:true on the unchanged SuccessiveDerivedQuotientNormalization module). Its lean.statement is verbatim lines 123-124. Its text matches every Presentation/Normalization field, and all 7 cited def nodes are in its stmt_deps. The theorem stays in proof_deps. Every owner declaration the item uses (Modules, restriction, Presentation, Normalization, sectionTensor) is in declarations, with no .choose. Item fields differ from live only in lean and stmt_deps, and all 3 added stmt_deps are def nodes. No cycle (the closure of 125 nodes excludes the item); nothing is in the dropped lists. nt_compile --json on the snapshot: clean, 16.9 s. Advisories: derivedChangeRingIndependentCoefficients's owner def-sfb-derived-change-of-rings-cochain-model is not in stmt_deps (as at the earlier head); the existing module docstrings name the theorem node as blueprint."
  }
 }

@@ -335,5 +335,30 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-01d75847e (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full, with every cited statement and Stacks 05TC lemma-negative-vanishing (derived.tex 5497ff; the item is its dual for the right-exact Lg^*). Shape: one commit, no new nodes, statement verbatim against live (live is unsplit), no repair note, not dropped, no cycle, no SGA citation. Steps 1–6 and 8 are correct. Step 1: the same-bound flat replacement plus the bounded-above flat K-flat criterion gives Lg^*=g^*P. Steps 2–3: the left adjoint preserves cokernels, so H^n(g^*P)=coker(g^*d^{n-1}), which also gives vanishing above n. Step 4: counit naturality at the resolution q shows H^0 of the normalized c is an iso. Step 5: counit naturality at the projection p with the counit-shift node gives κ=θ. Step 6: functorial truncation gives naturality. Step 8: I traced all factors and directions; no derived inverse of c is used. Edge cases checked: H^n(C)=0, shifted singles, nonflat Spec Z/2→Spec Z, unbounded below. Fault (C3/C4) in step 7: it used the square node with f′=id and claimed c_id=id 'by adjoint transpose' with no cited statement, and identified canonicalSinglePullbackMap with c without citing the node that defines it. FIX: step 7 now cites lem-pc-canonical-single-pullback-composition (the exact single-module composition equation, f=h, g=g, N=M), lem-pc-canonical-single-pullback-comparison, and lem-pc-canonical-single-adjunction-transpose (with a=id, the transpose of p is unit[0]≫u, which is exactly the normalization of c). The square node is removed from uses, proof_deps and tool_uses, and the 3 new citations are declared as tool_uses (same unit sk-thm-picard-f-representable as the square). Stage-2 advisory: c^{ord} is cited from an existence-only node and should be pinned to pullbackComp(h,g).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DerivedPullbackTopCohomology",
+  "declaration": "AlgebraicGeometry.derivedPullback_topCohomology",
+  "declarations": [
+   "AlgebraicGeometry.derivedTopTruncationProjection",
+   "AlgebraicGeometry.derivedSingleComparisonOfCounit",
+   "AlgebraicGeometry.pinnedModulePullbackComparisonAt",
+   "AlgebraicGeometry.derivedPullbackTopCohomology",
+   "AlgebraicGeometry.derivedPullback_topCohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedPullbackTopCohomology.lean",
+  "statement": "theorem derivedPullback_topCohomology {T S : Scheme.{u}} (g : T ⟶ S) (n : ℤ) (C : schemeDerivedCategory S) (hC : C.IsLE n) : ∃ hbound : ((derivedPullback g).obj C).IsLE n, (∀ M : S.Modules, IsIso ((DerivedCategory.homologyFunctor.{w, u, u + 1} (SheafOfModules.{u} (moduleRings T.toRingedSpace)) 0).map (pinnedModulePullbackComparisonAt g 0 M))) ∧ IsIso (derivedPullbackTopCohomology g n C hC) ∧ (∀ (D : schemeDerivedCategory S) (hD : D.IsLE n) (a : C ⟶ D), (DerivedCategory.homologyFunctor.{w, u, u + 1} (SheafOfModules.{u} (moduleRings T.toRingedSpace)) n).map ((derivedPullback g).map a) ≫ derivedPullbackTopCohomology g n D hD = derivedPullbackTopCohomology g n C hC ≫ (Scheme.Modules.tensorPullback g).map ((DerivedCategory.homologyFunctor.{w, u, u + 1} (SheafOfModules.{u} (moduleRings S.toRingedSpace)) n).map a)) ∧ (∀ (T' : Scheme.{u}) (h : T' ⟶ T), (DerivedCategory.homologyFunctor.{w, u, u + 1} (SheafOfModules.{u} (moduleRings T'.toRingedSpace)) n).map ((@pinnedPullbackComposition.{u, w} _ (fun {_ _} f ↦ Scheme.Modules.canonicalTensorPullbackAdditive.{u, w} f) _ _ _ h g).hom.app C) ≫ derivedPullbackTopCohomology (h ≫ g) n C hC = derivedPullbackTopCohomology h n ((derivedPullback g).obj C) hbound ≫ (Scheme.Modules.tensorPullback h).map (derivedPullbackTopCohomology g n C hC) ≫ (Scheme.Modules.tensorPullbackSectionComp h g).inv.app ((DerivedCategory.homologyFunctor.{w, u, u + 1} (SheafOfModules.{u} (moduleRings S.toRingedSpace)) n).obj C))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7130f7abf",
+  "group": "N9",
+  "result": "pass",
+  "note": "Item node gains only its lean record (statement and 8 dep records identical to live); one new module, compiles clean via nt_compile --json in 33.2 s. tau = unique map with identity H^n via proved homologyFunctor_map_bijective_of_isLE_of_isGE (not arbitrary); c_{g,M} = selected ε of exists_derivedPullbackComposition at single_0 M composed with the single iso = IsDerivedModulePullbackComparison composite, transpose-normalized via the same ε; degree-n evaluation of the same ε = c[-n] by pinned counit shifts; kappa composite in node order; all 5 clauses match (bound as conclusion, only H^0(c) iso, naturality over all D/hD/a, composition with pinnedPullbackComposition h g and tensorPullbackSectionComp.inv, which is the unique mate of pushforwardComp under the 1⊗m-normalized adjunctions, consistent with the derived composition and honouring the S1 pinning advisory); no extra hypotheses or universe restrictions; edge cases C=0, M[-n], non-flat g, unbounded below, n<0 checked; no duplicate helpers. Advisory only: pinned* and canonicalTensorPullbackAdditive are .choose abbrevs of the stmt_dep theorem exists_derivedPullbackComposition."
  }
 }

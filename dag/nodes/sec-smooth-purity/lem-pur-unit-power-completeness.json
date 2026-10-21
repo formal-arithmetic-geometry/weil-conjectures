@@ -13,7 +13,9 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-ringed-section-localization",
   "def-weil-pbc-ringed-extended-cech",
-  "def-weil-pbc-ringed-completion-unit"
+  "def-weil-pbc-ringed-completion-unit",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-ringed-koszul-system"
  ],
  "proof": [
   {
@@ -216,5 +218,24 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-6d6d158e6 (reviewer sub-agent of L); spot-checked: Read the item and all 5 steps against Stacks algebraization.tex 0997/0998/0999/099B/0A0E and the full statements of the 7 cited nodes. The statement is unchanged. The added stmt_deps (section-localization, extended-cech, completion-unit) are the notions the statement names in words. Step 1: in R[1/a], b has inverse u b^{e-1}/a, which needs e>=1; the formulas lambda(x/a^n)=x u^{-n}/b^{en} and mu(x/b^n)=x u^n b^{(e-1)n}/a^n are correct and commute with restriction, so sheafification gives the isomorphism. Step 2: contravariant RHom plus the sheaf-of-ideals lemma give the passage from c to every f in (c)O(V) and to sections that are only locally multiples. This also makes the item's sectionwise notion equal to the J(U) notion that step 5 uses. Step 3: phi=(1,lambda) and eps_b phi=eps_a hold on the nose. Step 4: alpha=phi^*, alpha eta_b=(eps_b phi)^* iota=eta_a, with the direction correct. Step 5: the singleton cases of the dual-limit and Koszul-reflector nodes; the Q_m conventions (degrees [-1,0], transition (c,1)) agree in both, and neither needs regularity. Small cases tested: b nilpotent gives identity completion; b invertible gives F=0; the zero ring is consistent; e=0 fails (a=1, b=0). No cycle: the item is not in its own 655-node closure. No duplicate among the ringed localization/completeness nodes I searched. The live node is still unsplit and there is no repair or re-split note. Accepted tool_uses: lem-weil-pbc-ringed-derived-complete-elements-ideal, lem-weil-pbc-ringed-cech-koszul-dual-limit, lem-weil-pbc-ringed-koszul-completion-reflector. They are general ringed-site tools that replace no step of the unit sk-def-sf-operations. Advisory: the report lists a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.UnitPowerCompleteness",
+  "declaration": "CategoryTheory.unit_power_localDerivedComplete",
+  "file": "lean/Sheaf/CategoryTheory/UnitPowerCompleteness.lean",
+  "statement": "theorem unit_power_localDerivedComplete {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (O : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))] (a b unit : (O.obj ⋙ forget CommRingCat).sections) (e : ℕ) (hu : ∀ U : Cᵒᵖ, IsUnit (unit.val U)) (he : 1 ≤ e) (hab : ∀ U : Cᵒᵖ, a.val U = unit.val U * b.val U ^ e) : (∀ N : ringedSiteDerived O, IsLocallyDerivedRingedIdealComplete O (image (ringedKoszulScalar O a)) (image.ι (ringedKoszulScalar O a)) N ↔ IsLocallyDerivedRingedIdealComplete O (image (ringedKoszulScalar O b)) (image.ι (ringedKoszulScalar O b)) N) ∧ (∃ alpha : ringedCechCompletionFunctor O (ringedLocalizationTwoTerm O a) ≅ ringedCechCompletionFunctor O (ringedLocalizationTwoTerm O b), ∀ N : ringedSiteDerived O, ringedCechCompletionUnit O (ringedLocalizationTwoTerm O a) (ringedLocalizationTwoTermAugmentation O a) N ≫ alpha.hom.app N = ringedCechCompletionUnit O (ringedLocalizationTwoTerm O b) (ringedLocalizationTwoTermAugmentation O b) N) ∧ ∀ c : (O.obj ⋙ forget CommRingCat).sections, c = a ∨ c = b → (∀ N : ringedSiteDerived O, IsLocallyDerivedRingedIdealComplete O (image (ringedKoszulScalar O c)) (image.ι (ringedKoszulScalar O c)) ((ringedCechCompletionFunctor O (ringedLocalizationTwoTerm O c)).obj N)) ∧ ∀ (N L : ringedSiteDerived O), IsLocallyDerivedRingedIdealComplete O (image (ringedKoszulScalar O c)) (image.ι (ringedKoszulScalar O c)) L → Function.Bijective (fun f : (ringedCechCompletionFunctor O (ringedLocalizationTwoTerm O c)).obj N ⟶ L ↦ ringedCechCompletionUnit O (ringedLocalizationTwoTerm O c) (ringedLocalizationTwoTermAugmentation O c) N ≫ f)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the recorded local-completeness predicate on the categorical image of the recorded multiplication-by-section map. This is the actual generated principal ideal subsheaf, including locally supplied coefficients, with no additional ideal-presentation hypotheses. The retained small-site derivedInternalHom interface underlying the recorded completion unit is used through that unit and the local-completeness predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8dab4a333",
+  "group": "NG",
+  "result": "pass",
+  "note": "Read the node, its 5 steps, the source places (Stacks 099B/0998/0999/0A0E), the module, the report and all statement dependencies' Lean (IsLocallyDerivedRingedIdealComplete, ringedKoszulScalar, ringedLocalizationTwoTerm/Augmentation, ringedCechCompletionFunctor/Unit). Only lean and stmt_deps change; the 2 added stmt_deps are landed def nodes actually used, with no cycle; statement verbatim. Hypotheses: small site, comm ring sheaf, sections a,b,unit, pointwise IsUnit (= global unit), 1<=e, a=u b^e; nothing stronger. Conclusions: completeness iff for all unbounded N; a natural iso F_a≅F_b with eta_a ≫ alpha = eta_b on the actual augmentation units; for c=a or c=b, output completeness and unit-precomposition bijectivity. The ideal is the image of multiplication by c (local multiples), the dep predicate's convention; equivalent to the node's sectionwise wording by step 2, and it satisfies IsRingedIdealGeneratingList for the step-5 reflector. Edge cases e=0 (excluded), b=0, b a unit, b nilpotent, zero ring, empty site and universes all covered. H5/H6/H8/H9 OK; the report has a real worker report and second reading. nt_compile --json clean in 37.4 s. Advisory: proof-only and probably redundant OfUniverses imports."
  }
 }

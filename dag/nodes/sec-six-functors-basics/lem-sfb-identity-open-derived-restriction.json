@@ -16,7 +16,8 @@
   "def-weil-size-convention",
   "def-weil-open-immersion",
   "def-weil-finite-type-morphism",
-  "lem-sfb-module-derived-compositor-coherence"
+  "lem-sfb-module-derived-compositor-coherence",
+  "def-sfb-open-square-restriction-mates"
  ],
  "proof": [
   {
@@ -263,5 +264,32 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-784156575 (reviewer sub-agent of L); spot-checked: I read the item, its six steps, the statement of every cited node, Stacks 0D6G/03CE and the blueprint main-20261015 det-sf-comp-coherence-cocycle.proof.md ('Refinement isomorphisms', 'Independence'). The item is not in the dropped list. It is unsplit on live and side-live, and it has no repair note: the 2026-10-21 re-split note is for lem-sfb-base-change-identity-open-restriction. There are no new nodes, no cycle and no SGA citation.\n\nThe statement is correct. The composite r_{hk}=r_k∘(r_h Rk_*)∘(j^*κ) type-checks. The preimage condition is necessary (the fold map U⊔U→U fails without it), and it is preserved by hk.\n\nWhat checks out:\n- Step 2: V×_Z Z'≅V via (1_V,j'v), because h restricted to j'(U) is j∘j'^{-1}.\n- Step 3: the K-injective resolution, uniqueness and naturality arguments are right.\n- Step 4: the right-adjoint-preserves-K-injective lemma is applied with both hypotheses checked.\n- Step 5: the fibre-product universal property and the compositor statement as cited are used correctly.\n- Step 6: uses the stated identity normalization.\n\nTwo faults, repaired in the fix:\n- E1/C4: steps 1 and 4 take the invertibility of α and the exactness of module pullback from sk-prop-sfb-cartesian-coefficients. That node's Q̄_ℓ is the finite-subextension condensed ring, but the Q̄_ℓ of sk-def-localizing-closure is C(−,Q̄_ℓ) with the ℓ-adic topology, so one coefficient case is not covered.\n- C4: no cited statement says that the abelian inverse image along the open j is restriction to the slice.\n\nThe fix rewrites step 1 and step 4:\n- They now cite lem-sfb-coefficient-sections-localization: u^*_Ab is restriction and α_u is invertible, for every commutative condensed ring.\n- They also cite det-prop-sfb-module-pullback-exact-main: f^* is exact for every f and every commutative condensed ring.\n- Step 1 now says that Ext along the invertible α is the identity on underlying sheaves.\n- The cartesian-coefficients citation is removed; proof_deps and split_report.tool_uses are updated, and the two added nodes are declared as tool uses with reasons.\n- The statement and stmt_deps are unchanged.\n\nAccepted tool uses: weakly-etale-localization, internal-module-operations-transport, kinjective-resolutions-exist, module-derived-pushpull, right-adjoint-preserves-kinjective, coefficient-sections-localization, module-pullback-exact-main.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IdentityOpenDerivedRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.identity_open_derived_restriction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.identityOpenRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.identityOpenDerivedRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.identityOpenSectionArrow",
+   "AlgebraicGeometry.ProEtale.CondensedRing.identity_open_derived_restriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.identity_open_derived_restriction_comp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.identity_open_derived_restriction_id"
+  ],
+  "file": "lean/Sheaf/Paper/IdentityOpenDerivedRestriction.lean",
+  "statement": "theorem identity_open_derived_restriction (ℓ : ℕ) [Fact ℓ.Prime] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {U Z Z' : Scheme.{u}} (j : U ⟶ Z) (j' : U ⟶ Z') [IsOpenImmersion j] [QuasiCompact j] [IsOpenImmersion j'] [QuasiCompact j'] (h : Z' ⟶ Z) (w : j' ≫ h = j) (hw : h ⁻¹' Set.range j = Set.range j') : IsIso (identityOpenDerivedRestriction Λ j j' h w) ∧ IsIso (identityOpenRestriction Λ j j' h w) ∧ (∀ V : U.ProEt, IsIso (identityOpenSectionArrow j j' h w V)) ∧ (∀ (M : Mod (Sheaf (Scheme.ProEt.topology Z') AddCommGrpCat.{u + 1}) (condensedRingObj Λ Z')) (V : U.ProEt) (s : M.X.obj.obj (op ((Scheme.proEtaleBaseChange h).obj ((MorphismProperty.Over.map (f := j) ⊤ (inferInstance : WeaklyEtale j)).obj V)))), ((identityOpenRestriction Λ j j' h w).app M).hom.hom.app (op V) (openCoherenceSectionCoprojection Λ j ((lowerStar Λ h).obj M) V s) = openCoherenceSectionCoprojection Λ j' M V (M.X.obj.map (identityOpenSectionArrow j j' h w V).op s)) ∧ (∀ (I : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Z') AddCommGrpCat.{u + 1}) (condensedRingObj Λ Z')) ℤ) [I.IsKInjective], (identityOpenDerivedRestriction Λ j j' h w).app (DerivedCategory.Q.obj I) ≫ (upperStar Λ j').mapDerivedCategoryFactors.hom.app I = (upperStar Λ j).mapDerivedCategory.map ((lowerStar Λ h).rightDerivedFunctorObjQIso I).hom ≫ (upperStar Λ j).mapDerivedCategoryFactors.hom.app (((lowerStar Λ h).mapHomologicalComplex (.up ℤ)).obj I) ≫ DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex (identityOpenRestriction Λ j j' h w) (.up ℤ)).app I))",
+  "branch": "sheaf-dag",
+  "by": "N9",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical maps specialize the existing open-square mates, followed by the existing identity direct-image comparisons. The main theorem states invertibility, the fibre-product identification, the sectionwise identity and its K-injective localization. Companion theorems state the composition formula with moduleDerivedCompositor and the identity normalization with moduleDerivedIdentity. The new definition node def-sfb-open-square-restriction-mates records the five unrestricted existing helper constructions in Sheaf.Paper.DerivedDirectImageOpenCoherence; the restricted theorem lem-sfb-derived-direct-image-open-coherence is not a statement dependency. No definitions are copied and no existing dependency module is modified. The moduleDerivedCompositor and moduleDerivedIdentity interfaces remain supplied by the original statement dependency lem-sfb-module-derived-compositor-coherence. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b465a920",
+  "group": "N9",
+  "result": "fix",
+  "note": "Re-delivery after the 4fee98f5 H2 RETURN. The item Lean is byte-identical; clauses re-checked (Λ admissible predicate; qc open immersions; w: j'≫h=j; hw preimage equality; r_h = open-square mate + moduleDerivedIdentity with IsIso, section identity via (1_V,j'v), K-injective representative formula; composition j^*κ, then r_h Rk_*, then r_k; identity normalization; no extra hypotheses; sorry-only proofs; docstrings OK). H2 repaired: theorem lem-sfb-derived-direct-image-open-coherence replaced in stmt_deps by new def node def-sfb-open-square-restriction-mates, existing:true on the unchanged Q13 DerivedDirectImageOpenCoherence. Its 5 listed decls are all plain defs (mateEquiv/unit), not .choose; the statement matches the live signature verbatim; no other owner, no cycle, no added theorem stmt_dep. nt_compile --json clean in 33.7 s (60 s limit). FIX: whole-node fixes/def-sfb-open-square-restriction-mates.json corrects the TeX χ/Dχ, written diagrammatically (j^*f'^*≅f^*i^*), to applicative f'^*j^*≅i^*f^* and D(f'^*)D(j^*)≅D(i^*)D(f^*), consistent with β/ρ and the Lean. All other fields are unchanged. Advisory: moduleDerivedCompositor/Identity are plain defs of the base theorem stmt_dep."
  }
 }

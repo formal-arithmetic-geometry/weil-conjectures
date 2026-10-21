@@ -1,0 +1,116 @@
+{
+ "id": "def-pbc-successive-derived-scalar-normalization-data",
+ "kind": "definition",
+ "title": "Normalized presentation data for successive derived scalar extensions",
+ "statement": "Let $\\mathcal C$ be a small site [def-weil-pbc-sites-and-cohomology]. For each sheaf $R$ of commutative rings write $\\operatorname{Mod}(R)$ for its module sheaves [def-weil-sheaf-of-modules-category] and $D(R)$ for their unbounded derived category [def-weil-abstract-derived-category]. For $a:R\\to S$, let $U_a:\\operatorname{Mod}(S)\\to\\operatorname{Mod}(R)$ be ordinary restriction [def-pc-sheaf-restrict-scalars], let $E_a(M)=S\\otimes_R M$ be sheafified scalar extension [def-pur-sheaf-tensor-product], and write $K(R)$ for the homotopy category with localization $Q_R:K(R)\\to D(R)$.\n\nA presentation $p_a$ consists of an additive ordinary functor with its object and morphism identifications with $E_a$, a functor $L_a:D(R)\\to D(S)$, and a counit $\\epsilon_a:L_aQ_R\\to Q_SK(E_a)$ having the universal left-derived property. A section tensor $s\\otimes x$ in the presented ordinary extension is the sheafification image of the ordinary pure tensor, transported by the object identification.\n\nFor a family $p=(p_a)_a$, a normalization is the following data and equations. It has ordinary and derived natural isomorphisms $E_bE_a\\cong E_{ba}$ and $L_bL_a\\cong L_{ba}$ for all composable ring maps $a:R\\to S$, $b:S\\to T$. The ordinary comparison sends $t\\otimes(s\\otimes x)$ to $b(s)t\\otimes x$, and its inverse sends $t\\otimes x$ to $t\\otimes(1\\otimes x)$. The derived comparison is represented by this ordinary comparison through the universal counits on every flat-term K-flat complex [def-pc-kflat-complex] [def-pc-flat-sheaf-modules]. The counits for $a$ and for the extension by $b$ of such a complex are invertible. It has ordinary adjunctions $E_a\\dashv U_a$ with units $x\\mapsto1\\otimes x$, derived restrictions $V_a$ with factorizations $V_aQ_S\\cong Q_RK(U_a)$, and adjunctions $L_a\\dashv V_a$ whose units on those representatives agree, through the counits and factorization, with the localized ordinary units. It has ordinary restriction-composition isomorphisms $U_aU_b\\cong U_{ba}$ equal to the identity on sections and derived restriction-composition isomorphisms $V_aV_b\\cong V_{ba}$ equal to their localizations through the factorization isomorphisms. The composite derived extension unit equals the direct unit under these comparisons. For three successive extensions the two composites of the derived comparison agree, with the equality transport for associativity of ring-map composition. Finally, for a commuting diagram of two composable ring maps, coefficient-square comparison is the first derived composition comparison, transport by the commuting-square equality, and the inverse of the second derived composition comparison; pasting two such squares agrees with the outer square under the composition comparisons.\n\nThese are data types, not assertions that such data exist. They are the existing $\\mathrm{Modules}$, restriction, pure section, Presentation, sectionTensor, squareComparison and Normalization declarations. No presentation, normalization, tensor functor or adjunction is selected by this definition.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (K-flat derived pullback), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), and 07A6 (lemma-adjoint), specialized to identity topoi and maps of commutative ring sheaves; ordinary tensors and restrictions from sites-modules.tex, Sections 03D7 and 03EK."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Normalized data of universal unbounded derived scalar extension for sheaves of rings with coherent tensor associators and extension restriction adjunctions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.extendRestrictScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → (f : R →+* S) → ModuleCat.extendScalars f ⊣ ModuleCat.restrictScalars f\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, the extension of scalars functor from $ R $-modules to $ S $-modules is left adjoint to the restriction of scalars functor\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (X ⟶ (ModuleCat.restrictScalars f).obj Y) → ((ModuleCat.extendScalars f).obj X ⟶ Y)\", \"doc\": \"Given commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function establishes a natural bijection between $ R $-linear maps f\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S \"}\n  {\"name\": \"ModuleCat.restrictCoextendScalarsAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] → [inst_1 : Ring S] → (f : R →+* S) → ModuleCat.restrictScalars f ⊣ ModuleCat.coextendScalars f\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ S $-linear maps from the extension of scalars of an $ R $-module $ X $ to an $ S $-\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] →\\n      [inst_1 : Ring S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (Y ⟶ (ModuleCat.coextendScalars f).obj X) → ((ModuleCat.restrictScalars f).obj Y ⟶ X)\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) → {X : ModuleCat R} → X ⟶ ((ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)).obj X\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; reuse the existing project structures in Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A structure bundling universal derived scalar extensions of ring sheaves with normalized units K flat computation and coherent composition comparisons",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.Derivation.Universal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ F $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n  {\"name\": \"PresheafOfModules.Derivation'.Universal.mk\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      {M : PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat))} →\\n        {φ' : S' ⟶ R} →\\n          {d : M.Derivation' φ'} →\\n            (desc :\\n                {\", \"doc\": \"Given a presheaf of commutative rings $ S $ on category $ \\\\mathcal{C} $, a presheaf of modules $ M $ over a presheaf of rings $ R $ on category $ \\\\mathcal{D} $, and a natural transformation $ \\\\phi: S \"}\n  {\"name\": \"SheafOfModules.QuasicoherentData\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{O}$ of rings on $\\\\mathcal{C}$, this constructs the data required to define a quasicoherent sheaf over $\\\\mathcal{O}\"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal.desc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} →\\n          {F : CategoryTheory.Functor C D} →\\n            {R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n   \", \"doc\": \"Given a universal derivation $ d $ for a presheaf of modules and another derivation $ d' $ with the same source, there exists a unique morphism of presheaves of modules from the universal derivation t\"}\n  {\"name\": \"PresheafOfModules.Derivation'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      PresheafOfModules (R.comp (CategoryTheory.forget₂ CommRingCat RingCat)) → (S' ⟶ R) → Type (max (max u₂ u) v)\", \"doc\": \"Given a presheaf of commutative rings $ S $ on a category $ \\\\mathcal{C} $, a derivation is a natural transformation from $ S $ to the composition of the identity functor on $ \\\\mathcal{D} $ with the pr\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.instHasDifferentials\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {D : Type u₂} [inst : CategoryTheory.Category.{v₂, u₂} D] {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  (φ' : S' ⟶ R), PresheafOfModules.HasDifferentials φ'\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a presheaf of commutative rings $S:\\\\mathcal{C}^{\\\\text{op}}\\\\to\\\\text{CommRing}$, a functor $F:\\\\mathcal{C}\\\\to\\\\mathcal{D}$, and a presheaf of commutative \"}\n  {\"name\": \"PresheafOfModules.Derivation.Universal.fac\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {S : CategoryTheory.Functor Cᵒᵖ CommRingCat} {F : CategoryTheory.Functor C D}\\n  {R : CategoryTheory.Functor Dᵒᵖ CommRingCat}\\n  {M : PresheafOfModules (R.comp (CategoryTheory.forg\", \"doc\": \"Given a universal derivation $ d $ for a presheaf of modules and another derivation $ d' $ with the same source, the postcomposition of $ d $ with the unique morphism $ \\text{desc}(d') $ from the unive\"}\n  {\"name\": \"PresheafOfModules.DifferentialsConstruction.isUniversal'\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Presheaf\", \"type\": \"{D : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} D] →\\n    {S' R : CategoryTheory.Functor Dᵒᵖ CommRingCat} →\\n      (φ' : S' ⟶ R) →\\n        PresheafOfModules.Derivation.Universal (PresheafOfModules.DifferentialsConstruction.derivation' φ')\", \"doc\": \"The relative Kähler differentials presheaf $\\\\Omega_{\\\\phi'}$ satisfies the universal property: for any derivation $d': S' \\\\to M'$ (where $M'$ is an $R$-module presheaf), there exists a unique $R$-linea\"}",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; reuse the existing project structures in Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization"
+  },
+  {
+   "tool": "grep",
+   "query": "SuccessiveDerivedQuotient|structure Normalization|structure Presentation",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; reuse the existing project structures in Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n SuccessiveDerivedQuotient|structure Normalization in lean/WeilConjectures, lean/Sheaf/Algebra/Homology, and dag/nodes; blueprint_refs.py search successive derived scalar",
+   "results": "Project match: lean/Sheaf/Algebra/Homology/SuccessiveDerivedQuotientNormalization.lean:43 namespace, :123 structure Normalization; its Modules, restriction, pure, Presentation, sectionTensor, squareComparison and Normalization are currently listed only under theorem node lem-sfb-successive-derived-quotient-normalization. No separate definition node carries this general-site notion. def-sp-finite-free-direct-image-data is specialized to schemes with their small pro-etale sites and also bundles geometric direct-image data. No matching WeilConjectures declaration. blueprint_refs search returned only thm-coef-finite-hom, a different finite-field theorem.",
+   "date": "2026-10-21",
+   "verdict": "existing project definitions, but no separate definition node; attach existing:true without duplicating any declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-flat-coefficient-reduction-adjunct",
+  "date": "2026-10-21",
+  "group": "NO"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-pullback-reduction",
+   "place": "The finite scalar reduction comparison in the first reduction paragraph, with its canonical units, coefficient transitions and successive-extension identifications.",
+   "via": [
+    "lem-weil-pbc-flat-coefficient-reduction-adjunct"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization",
+  "declaration": "SheafOfModules.SuccessiveDerivedQuotient.Normalization",
+  "declarations": [
+   "SheafOfModules.SuccessiveDerivedQuotient.Modules",
+   "SheafOfModules.SuccessiveDerivedQuotient.restriction",
+   "SheafOfModules.SuccessiveDerivedQuotient.pure",
+   "SheafOfModules.SuccessiveDerivedQuotient.Presentation",
+   "SheafOfModules.SuccessiveDerivedQuotient.sectionTensor",
+   "SheafOfModules.SuccessiveDerivedQuotient.squareComparison",
+   "SheafOfModules.SuccessiveDerivedQuotient.Normalization"
+  ],
+  "statement": "structure Normalization\n    (p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Returned-delivery repair requested by L at immutable head 25cfb5719a85. Registers the existing plain definitions and structures, unchanged, separately from the theorem asserting their existence. No new Lean file, no chosen normalization, and no change to the published module. The existing existence theorem remains only in the consumer proof_deps."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-146090b6b",
+  "group": "NO",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-146090b6b",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery of the 25cfb571 RETURN, which was H2 only: theorem lem-sfb-successive-derived-quotient-normalization in stmt_deps. The Lean file is byte-identical (sha d53a8638) and I reread it against the node. hflat = exactness of B⊗_R−; hμ = IsIso of the normalized counit b⊗s↦ψ(b)s. κ is pinned by ordinary_pure and representative. adjunct holds for arbitrary derived f. coefficient_naturality, successive and equal_index use normalized maps. No extra assumptions; universes independent; only sorry. The repair: the item's stmt_deps now cite the new def node def-pbc-successive-derived-scalar-normalization-data (existing:true on the unchanged SuccessiveDerivedQuotientNormalization module). Its lean.statement is verbatim lines 123-124. Its text matches every Presentation/Normalization field, and all 7 cited def nodes are in its stmt_deps. The theorem stays in proof_deps. Every owner declaration the item uses (Modules, restriction, Presentation, Normalization, sectionTensor) is in declarations, with no .choose. Item fields differ from live only in lean and stmt_deps, and all 3 added stmt_deps are def nodes. No cycle (the closure of 125 nodes excludes the item); nothing is in the dropped lists. nt_compile --json on the snapshot: clean, 16.9 s. Advisories: derivedChangeRingIndependentCoefficients's owner def-sfb-derived-change-of-rings-cochain-model is not in stmt_deps (as at the earlier head); the existing module docstrings name the theorem node as blueprint."
+ }
+}

@@ -27,19 +27,3 @@ The previous worker ended with: re-split (decision of the human, 2026-10-17): st
 Compiler messages and attribution:
 re-split (decision of the human, 2026-10-17): step 2 (2342 characters); step 3 (2512 characters); step 4 (2169 characters) are not elementary and hide lemmas; make each hidden argument a node of its own that the step cites; keep the statement unchanged. Start from the existing proof text of this node (it stays in the node file): keep its route and its other steps, and replace each long step by short steps that cite new nodes (or existing nodes/Mathlib leaves) for the arguments it now carries inline. The node's statement and its Lean record stay as they are; the new nodes go through stage 2 as usual. The stage-1 review rejects a non-elementary step longer than 2000 characters.
 
-## lem-pur-finite-free-completion-exchange (2026-10-21 07:39 UTC, branch head 55cd6f9a897)
-
-L: independent stage-2 immutable head 55cd6f9a897b: file-only compilation failed: private overlay Sheaf.Algebra.Homology.PrincipalQuotientCompletionModel
-
-[46.4 s]
-preliminary Sheaf.Algebra.Homology.PrincipalQuotientCompletionModel
-
-[46.4 s]
-sandbox Sheaf.Stage2.Sandbox0
-
-[49.7 s]
-library Sheaf.Algebra.Homology.PrincipalQuotientCompletionModel
-
-[46.4 s]
-sandbox Sheaf.Stage2.Sandbox1
-timeout after 60 s: the fault is usually a definition that is expensive to unfold, not the limit

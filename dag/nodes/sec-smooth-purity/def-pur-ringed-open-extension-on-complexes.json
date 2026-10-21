@@ -1,0 +1,106 @@
+{
+ "id": "def-pur-ringed-open-extension-on-complexes",
+ "kind": "definition",
+ "title": "Termwise sheafified ringed slice extension on cochain complexes",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a site small relative to the fixed module universe, let $R$ be a sheaf of commutative rings on $\\mathcal C$, and let $U$ be an object. Write $(\\mathcal C/U,R|_U)$ for the localized ringed site [def-pur-localized-ringed-site] and $\\operatorname{Mod}(R)$, $\\operatorname{Mod}(R|_U)$ for the categories of sheaves of modules [def-weil-sheaf-of-modules-category]. Let $e_!:\\operatorname{Mod}(R|_U)\\to\\operatorname{Mod}(R)$ be the extension-by-zero presheaf functor [def-weil-extension-by-zero-presheaf] followed by module sheafification [def-weil-presheaf-modules-sheafification]. Its additive structure is the one supplied by the exact localized-site adjunction [lem-pur-site-restriction-module-adjunction-exact]. The termwise extension functor on integer-indexed, possibly unbounded cochain complexes [def-pc-cochain-complex-modules] sends $P^\\bullet$ to the complex with degree $i$ term $e_!(P^i)$ and differential $e_!(d_P^i)$, and sends a chain map $f$ to the chain map with components $e_!(f^i)$. It is the functor obtained by applying $e_!$ to homological complexes of shape $\\operatorname{up}(\\mathbf Z)$.",
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03DJ (lemma-extension-by-zero and lemma-extension-by-zero-exact), termwise cochain extension used in the opening exactness/reduction-tower sentence of the current blueprint lem-cbc-completed-extension-zero-comparison proof."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ringedOpenExtensionOnComplexes|localizedSystemExtension",
+   "results": "{\"t\": \"2026-10-21T07:51:05Z\", \"tool\": \"grep\", \"query\": \"ringedOpenExtensionOnComplexes|localizedSystemExtension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing project specialization found: SheafOfModules.ringedOpenExtensionOnComplexes. Mathlib supplies the general mapHomologicalComplex construction; reuse the project specialization with existing:true."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Termwise extension by zero of cochain complexes of sheaves of modules on a localized ringed site",
+   "results": "{\"t\": \"2026-10-21T07:51:05Z\", \"tool\": \"leansearch\", \"query\": \"Termwise extension by zero of cochain complexes of sheaves of modules on a localized ringed site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.extendMap_zero\", \"CochainComplex.HomComplex.Cochain.ofHom_zero\", \"CochainComplex.HomComplex.Cochain.ofHoms_zero\", \"HomologicalComplex.extend_single_d\", \"CochainComplex.HomComplex.Cochain.shift_zero\", \"HomologicalComplex.extend.d\", \"HomologicalComplex.extend\", \"HomologicalComplex.instHasZeroMorphisms\"], \"digest\": \"700b3badc2362930\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing project specialization found: SheafOfModules.ringedOpenExtensionOnComplexes. Mathlib supplies the general mapHomologicalComplex construction; reuse the project specialization with existing:true."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapHomologicalComplex\"",
+   "results": "{\"t\": \"2026-10-21T07:51:06Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapHomologicalComplex\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapHomologicalComplex\", \"CategoryTheory.Equivalence.mapHomologicalComplex\", \"CategoryTheory.Functor.mapHomologicalComplex_reflects_iso\", \"CategoryTheory.instPreservesZeroMorphismsHomologicalComplexMapHomologicalComplex\", \"CategoryTheory.Functor.mapHomologicalComplex_obj_X\", \"CategoryTheory.instFaithfulHomologicalComplexMapHomologicalComplex\", \"CategoryTheory.Functor.mapHomologicalComplexIdIso\", \"CategoryTheory.instAdditiveHomologicalComplexMapHomologicalComplex\"], \"digest\": \"b07c6179cfd73843\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing project specialization found: SheafOfModules.ringedOpenExtensionOnComplexes. Mathlib supplies the general mapHomologicalComplex construction; reuse the project specialization with existing:true."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ringedOpenExtensionOnComplexes|localizedSystemExtension lean/WeilConjectures lean/Sheaf; rg -l ringedOpenExtensionOnComplexes dag/nodes; python3 tools/blueprint_refs.py search ringedOpenExtensionOnComplexes",
+   "results": "No WeilConjectures occurrence. Sheaf/Algebra/Homology/RingedOpenTotalTensorKFlat.lean:105 defines ringedOpenExtensionOnComplexes using localizedSystemExtensionAdditive and localizedSystemExtension. The only DAG hit is lem-sf-ringed-open-total-tensor-kflat (a theorem node). blueprint_refs: 0 blueprint nodes match.",
+   "date": "2026-10-21",
+   "verdict": "An existing declaration gives the definition, but no definition node owns it; add an existing:true definition-node attachment, as required by the H2 return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-ringed-open-flat-resolution",
+  "date": "2026-10-21",
+  "group": "NF"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Opening sentence: \"The functor j_! is exact ... so the reduction tower of j_!K is j_!K_bullet\"; extracted simultaneous flat-term K-flat representative argument needed for this inference.",
+   "via": [
+    "lem-cbc-ringed-open-flat-resolution"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedOpenTotalTensorKFlat",
+  "declaration": "SheafOfModules.ringedOpenExtensionOnComplexes",
+  "statement": "abbrev ringedOpenExtensionOnComplexes :\n    CochainComplex (SheafOfModules.{max c v r}\n      (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj\n        R).over U)) ℤ ⥤\n    CochainComplex (SheafOfModules.{max c v r}\n      ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Existing transparent termwise extension, recorded as a definition independently of the total-tensor/K-flat theorem. Its localizedSystemExtensionAdditive typing instance is (localizedSystemExact R U).1 from lem-pur-site-restriction-module-adjunction-exact. It does not choose or use ringedOpen_totalTensor_kFlat; no Lean file changes are required."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-deb165f7b",
+  "group": "NF",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-deb165f7b",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery of the 7b9a7c7b H2 RETURN. Lean file byte-identical to the returned head; nt_compile --json clean (RingedOpenFlatResolution 23.1 s, dep RingedOpenTotalTensorKFlat 49.6 s, load ~140). The item's stmt_deps now cite the new def-pur-ringed-open-extension-on-complexes (existing:true on the unchanged RingedOpenTotalTensorKFlat, SheafOfModules.ringedOpenExtensionOnComplexes, verbatim abbrev signature; check_existing/check_new_node/check_lean_text clean) instead of theorem lem-sf-ringed-open-total-tensor-kflat, which stays in proof_deps. Body owners localizedSystemExtension/Additive are covered by the cited lem-pur-site-restriction-module-adjunction-exact; hasSheafify_coefficientUniverse is a generic Prop instance with no recording node (advisory). Item statement/source/proof unchanged vs side-live; all clauses (K-flat, IsFlatOnSite terms, Epi+QuasiIso, objectwise strict towers via P ⋙ e_! and whiskerRight q) match the node, no extra hypotheses, independent universes, edge cases covered; report sections present; neither id on the dropped list."
+ }
+}

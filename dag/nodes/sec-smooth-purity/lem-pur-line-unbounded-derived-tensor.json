@@ -296,5 +296,39 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-3b9353abd (reviewer sub-agent of L); spot-checked: I read the item and all eight steps in full. There are no new nodes, and the statement and stmt_deps are unchanged. The item was created by Q03 on 2026-10-21 and is unsplit in clones/live and clones/side-live, so it is neither superseded nor a re-split. Source: the blueprint main-20261015 Tate-twist proof (3), last two sentences, and Stacks 0B8Q/0B8N/06YN/06YU/015F/010N; I checked each label, and no SGA is cited. Step 1: the local dual is Rp^∨, and a change of basis p'=up gives (p')^∨=u^{-1}p^∨, so the inverse of evaluation glues. Step 2: I checked both triangle identities on pure tensors, with unit a^{-1} and counit b. Step 3: an equivalence is exact, which gives flatness; Mod(R) is abelian by the size convention of the pro-étale site. Step 4: Tot(C⊗L[0]) is the termwise complex with no sign, the exact-functor cohomology lemma makes L[0] K-flat, and its terms are flat. Step 5: the fixed-factor theorem (K-flat with flat terms, all complexes) plus the exact-functor factorization and localization (2) give F_L≅D(T_L). Its shift comparison is unsigned on the first factor, matching the identity τ. Steps 6-8: the evaluations, the cohomology isomorphism and B-linearity descend by localization (2)/(3) and conjugation. Edge cases checked: R=0, P=R, nontrivial basis change, unbounded K. All statement dependencies lie on the unit closure of sk-prop-an. The declared tool_use lem-weil-pbc-kflat-fixed-tensor-triangulated is already on-route, and I accept it. The graph stays acyclic. The duplicate candidates (signed-line-tensor-equivalence, integral-line-tensor-comparison-representative, integral-line-reduction-restriction, twist-preserves) are narrower or different statements."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LineUnboundedDerivedTensor",
+  "declaration": "SheafOfModules.LineUnbounded.line_unbounded_derived_tensor",
+  "declarations": [
+   "SheafOfModules.LineUnbounded.comparisonData",
+   "SheafOfModules.LineUnbounded.Modules",
+   "SheafOfModules.LineUnbounded.scalars",
+   "SheafOfModules.LineUnbounded.coefficientLinear",
+   "SheafOfModules.LineUnbounded.dual",
+   "SheafOfModules.LineUnbounded.tensor",
+   "SheafOfModules.LineUnbounded.tensorAdditive",
+   "SheafOfModules.LineUnbounded.single",
+   "SheafOfModules.LineUnbounded.pureTensor",
+   "SheafOfModules.LineUnbounded.cancellation",
+   "SheafOfModules.LineUnbounded.collapse",
+   "SheafOfModules.LineUnbounded.derived",
+   "SheafOfModules.LineUnbounded.normalization",
+   "SheafOfModules.LineUnbounded.line_unbounded_derived_tensor"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/LineUnboundedDerivedTensor.lean",
+  "statement": "theorem line_unbounded_derived_tensor (P : Modules.{t, a} X R) [P.IsFiniteLocallyFreeOfRank 1] : IsFlatOnSite.{t + 1, t, max a (t + 1), max a (t + 1)} (J := Scheme.ProEt.topology X) (R := R) P ∧ IsFlatOnSite.{t + 1, t, max a (t + 1), max a (t + 1)} (J := Scheme.ProEt.topology X) (R := R) (dual.{t, a} X R P) ∧ ∃ hP : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max a (t + 1)} (J := Scheme.ProEt.topology X) (R := R) (single.{t, a} X R P), ∃ hD : CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, max a (t + 1)} (J := Scheme.ProEt.topology X) (R := R) (single.{t, a} X R (dual.{t, a} X R P)), ∃ hPf : ∀ n : ℤ, IsFlatOnSite.{t + 1, t, max a (t + 1), max a (t + 1)} (J := Scheme.ProEt.topology X) (R := R) ((single.{t, a} X R P).X n), ∃ hDf : ∀ n : ℤ, IsFlatOnSite.{t + 1, t, max a (t + 1), max a (t + 1)} (J := Scheme.ProEt.topology X) (R := R) ((single.{t, a} X R (dual.{t, a} X R P)).X n), PreservesFiniteLimits (tensor.{t, a} X R P) ∧ PreservesFiniteColimits (tensor.{t, a} X R P) ∧ PreservesFiniteLimits (tensor.{t, a} X R (dual.{t, a} X R P)) ∧ PreservesFiniteColimits (tensor.{t, a} X R (dual.{t, a} X R P)) ∧ ∃ e : P ⊗ dual.{t, a} X R P ≅ 𝟙_ (Modules.{t, a} X R), (∀ (U : X.ProEtᵒᵖ) (p : P.val.obj U) (φ : (dual.{t, a} X R P).val.obj U), e.hom.val.app U (pureTensor.{t, a} X R P (dual.{t, a} X R P) U p φ) = φ.app (op (Over.mk (𝟙 U.unop))) p) ∧ (∀ (U : X.ProEtᵒᵖ) (p : P.val.obj U) (φ : (dual.{t, a} X R P).val.obj U), φ.app (op (Over.mk (𝟙 U.unop))) p = (1 : R.obj.obj U) → ∀ b : R.obj.obj U, e.inv.val.app U b = pureTensor.{t, a} X R P (dual.{t, a} X R P) U (b • p) φ) ∧ ∃ F G : DerivedCategory (Modules.{t, a} X R) ⥤ DerivedCategory (Modules.{t, a} X R), ∃ hF : F = derived.{t, a} X R P, ∃ hG : G = derived.{t, a} X R (dual.{t, a} X R P), comparisonData (scalars.{t, a} X R) (tensor.{t, a} X R P) (tensor.{t, a} X R (dual.{t, a} X R P)) (cancellation.{t, a} X R P (dual.{t, a} X R P) e) (cancellation.{t, a} X R (dual.{t, a} X R P) P ((β_ (dual.{t, a} X R P) P) ≪≫ e)) F G (normalization.{t, a} X R P hP hPf F hF) (normalization.{t, a} X R (dual.{t, a} X R P) hD hDf G hG)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec253fa53",
+  "group": "NS",
+  "result": "pass",
+  "note": "First delivery; the node differs from live only in lean, statement verbatim, 14 declarations match. Every clause matches the node: pro-étale site; homObj dual; published K-flat derived tensor with P[0]; IsFlatOnSite for P and dual; K-flat singles; termwise comparison cP/cD on all complexes, fixed on resolving complexes and so everywhere; shift structures determined by cP, both functors triangulated; evaluation e fixed on pure tensors with the stated inverse; α/β fixed on every object, both triangle identities checked locally; Γ(R)-linearity gives every B-linear case; no bounds; no stray universes (params [t,a,w]). Edge cases: R=0, empty scheme, P=R, change of basis. Duplicate candidates (SignedLineTensorEquivalence, IntegralLineTensorComparisonRepresentative) are narrower. nt_compile --json clean, 29.1 s. Advisories: cohomology clause is existential only (node does not ask for a specific map; citers use only vanishing); KFlatFixedTensor declarations owned by a non-stmt_dep theorem node, which are abbreviations or extractions of the stmt_dep site-derived-tensor-descent; harmless TensorClosed import."
  }
 }

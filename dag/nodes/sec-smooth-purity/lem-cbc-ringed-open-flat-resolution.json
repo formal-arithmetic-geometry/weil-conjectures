@@ -14,7 +14,9 @@
   "def-pc-kflat-complex",
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification",
-  "lem-weil-tower-category-levelwise-abelian"
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-pur-ringed-open-extension-on-complexes",
+  "def-pc-flat-sheaf-modules"
  ],
  "proof": [
   {
@@ -238,5 +240,29 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-29c9f6557 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It changes only the item's proof fields: the statement, stmt_deps, source, created record and unit are byte-identical to side-live. It adds no new nodes. Neither the item nor its parent nor any cited node is on the route-pivot dropped list. There is no repair note for this item, it was unsplit on side-live, and nothing cites SGA. I read all 8 cited statements. Step 1: an exact functor applied to the two cycle/boundary short exact sequences gives H^i(FX)≅F(H^iX); the argument is degreewise and needs no boundedness. Step 2: the chain iso of lem-sf-ringed-open-total-tensor-kflat plus the signed swap (-1)^{pq}, which I checked against the total differential, together with step 1, give K-flatness. Step 3: restriction is exact, the term is flat, extension is exact, and the natural iso of lem-weil-pbc-ringed-slice-extension-tensor (Stacks 0E8I, sites-modules.tex l.4051) identifies the maps, so each extended term is flat. Step 4: the kernel short exact sequence is preserved and the cohomology identification makes the extended map a termwise-surjective quasi-isomorphism. Step 5: by the levelwise tower lemma the clauses hold at every level, with transitions e_!(t_n); no product claim is made. I checked Stacks tags 03DI, 03DJ, 0E8I and 03ER in tags/tags, and the blueprint opening sentence of lem-cbc-completed-extension-zero-comparison. Edge cases checked: zero complexes, one-term complexes, unbounded complexes, zero transition maps, and several morphisms V→U. Maintainer note: the item's K-flat clause is already stated in lem-sf-ringed-open-total-tensor-kflat. The item predates this delivery (created by NW) and adds the flat-term, surjectivity and tower clauses, so the overlap is not a fault of this split. I accept the generic tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedOpenFlatResolution",
+  "declaration": "SheafOfModules.ringedOpen_preserves_flat_resolution",
+  "declarations": [
+   "SheafOfModules.ringedOpenQuasiIso",
+   "SheafOfModules.ringedOpen_preserves_flat_resolution",
+   "SheafOfModules.ringedOpen_tower_preserves_flat_resolution"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedOpenFlatResolution.lean",
+  "statement": "theorem ringedOpen_preserves_flat_resolution : (∀ P : CochainComplex (SheafOfModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ, CochainComplex.IsKFlatIndependentCoefficients.{max c v, v, max c v r} (J := J.over U) (R := R.over U) P → CochainComplex.IsKFlatIndependentCoefficients.{c, v, max c v r} (J := J) (R := R) ((ringedOpenExtensionOnComplexes.{c, v, r} R U).obj P)) ∧ (∀ P : CochainComplex (SheafOfModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ, (∀ i : ℤ, @IsFlatOnSite.{max c v, v, max c v r, max c v r} (Over U) _ (J.over U) _ (wEqualsLocallyBijective_coefficientUniverse.{max c v, v, max c v r} (J := J.over U)) (hasSheafify_coefficientUniverse.{max c v, v, max c v r} (J := J.over U)).isRightAdjoint (R.over U) (P.X i)) → ∀ i : ℤ, @IsFlatOnSite.{c, v, max c v r, max c v r} S _ J _ (wEqualsLocallyBijective_coefficientUniverse.{c, v, max c v r} (J := J)) (hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)).isRightAdjoint R (((ringedOpenExtensionOnComplexes.{c, v, r} R U).obj P).X i)) ∧ (∀ (P C : CochainComplex (SheafOfModules.{max c v r} (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R).over U)) ℤ) (q : P ⟶ C), (∀ i : ℤ, Epi (q.f i)) → ringedOpenQuasiIso.{max c v, v, r} (R.over U) q → (∀ i : ℤ, Epi (((ringedOpenExtensionOnComplexes.{c, v, r} R U).map q).f i)) ∧ ringedOpenQuasiIso.{c, v, r} R ((ringedOpenExtensionOnComplexes.{c, v, r} R U).map q))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The ordinary and strict-tower declarations together state every clause. ringedOpenQuasiIso transparently abbreviates Mathlib QuasiIso with existing canonical sheafification witnesses supplied explicitly; it introduces no new notion. Added statement dependencies own the termwise complex extension (def-pur-ringed-open-extension-on-complexes) and flat-term predicate (def-pc-flat-sheaf-modules). The total-tensor/K-flat theorem remains a proof dependency only; the extension abbreviation uses no witness from that theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-deb165f7b",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery of the 7b9a7c7b H2 RETURN. Lean file byte-identical to the returned head; nt_compile --json clean (RingedOpenFlatResolution 23.1 s, dep RingedOpenTotalTensorKFlat 49.6 s, load ~140). The item's stmt_deps now cite the new def-pur-ringed-open-extension-on-complexes (existing:true on the unchanged RingedOpenTotalTensorKFlat, SheafOfModules.ringedOpenExtensionOnComplexes, verbatim abbrev signature; check_existing/check_new_node/check_lean_text clean) instead of theorem lem-sf-ringed-open-total-tensor-kflat, which stays in proof_deps. Body owners localizedSystemExtension/Additive are covered by the cited lem-pur-site-restriction-module-adjunction-exact; hasSheafify_coefficientUniverse is a generic Prop instance with no recording node (advisory). Item statement/source/proof unchanged vs side-live; all clauses (K-flat, IsFlatOnSite terms, Epi+QuasiIso, objectwise strict towers via P ⋙ e_! and whiskerRight q) match the node, no extra hypotheses, independent universes, edge cases covered; report sections present; neither id on the dropped list."
  }
 }

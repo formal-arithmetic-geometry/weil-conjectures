@@ -241,5 +241,47 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-transport",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+  "declaration": "CategoryTheory.Functor.ProjectionFormula",
+  "declarations": [
+   "CategoryTheory.Functor.mapMod",
+   "CategoryTheory.Functor.monObjObj",
+   "CategoryTheory.Functor.modObjObj",
+   "CategoryTheory.Functor.act_mapMod_obj",
+   "CategoryTheory.Functor.mapMod_comp_forget",
+   "CategoryTheory.Adjunction.unitAlgHom",
+   "CategoryTheory.Adjunction.isMonHom_unitAlgHom",
+   "CategoryTheory.Adjunction.mapModAdjunction",
+   "CategoryTheory.Functor.ProjectionFormula",
+   "CategoryTheory.Functor.ProjectionFormula.smul",
+   "CategoryTheory.Functor.ProjectionFormula.mapModLeft",
+   "CategoryTheory.Functor.ProjectionFormula.mapModLeft_comp_forget",
+   "CategoryTheory.Functor.ProjectionFormula.theta",
+   "CategoryTheory.Functor.ProjectionFormula.rightSMul",
+   "CategoryTheory.Functor.ProjectionFormula.mapModRight",
+   "CategoryTheory.Functor.ProjectionFormula.mapModRight_comp_forget",
+   "CategoryTheory.Functor.ProjectionFormula.mapModAdjunction",
+   "CategoryTheory.Adjunction.projectionFormulaMap",
+   "CategoryTheory.Adjunction.HasProjectionFormula",
+   "CategoryTheory.Adjunction.projectionFormula",
+   "CategoryTheory.Adjunction.projectionFormula_theta",
+   "CategoryTheory.Adjunction.mapModLeftAdjunction"
+  ],
+  "statement": "structure Functor.ProjectionFormula (S : D ⥤ C) [S.Monoidal] (P : C ⥤ D)",
+  "branch": "slopmaster2",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact mixed existing binding for all four clauses and all nine blueprint constructions. ProjectionFormula publicly imports MapMod, which publicly imports WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod and the scalar-restriction API. Independent object and morphism universes are retained. Part 1 is Functor.mapMod with the specified action and equality of forgetful composites; part 2 is Adjunction.mapModAdjunction and the monoid unit morphism; part 3 is Functor.ProjectionFormula and its left/right linearizations and lifted adjunction; part 4 is Adjunction.projectionFormulaMap, HasProjectionFormula, projectionFormula, projectionFormula_theta and mapModLeftAdjunction. The theta identity identifies the right action with transport, and both functors map morphisms through S. Current live server sources of ProjectionFormula and MapMod were read with scompile.py --source. No duplicate module, new node, dependency repair or statement change. The slopmaster2 label follows the convention for existing WeilConjectures declarations in the live project."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f1c949e76",
+  "group": "NH",
+  "result": "pass",
+  "note": "existing:true binding of sk-def-sfb-transport to WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula (22 decls); only the item lean field changes vs live. Clause 1 Functor.mapMod (monObjObj transported monoid, action μ≫F.map act, mapMod_comp_forget); clause 2 Adjunction.mapModAdjunction : F.mapMod R ⊣ G.mapMod ⋙ Mod.comap unitAlgHom with F.Monoidal/G.LaxMonoidal/adj.IsMonoidal; clause 3 ProjectionFormula (iso, naturality, unit via η, assoc via δ), smul/mapModLeft, theta/rightSMul/mapModRight for arbitrary P ⊣ G, mapModAdjunction; clause 4 projectionFormulaMap = adjoint of S L ◁ unit ≫ μ, HasProjectionFormula = IsIso, projectionFormula = asIso, projectionFormula_theta θ=μ S, mapModLeftAdjunction ⊣ S.mapMod B. No sorry/axiom, no extra hypotheses, independent universes, statement verbatim (line 82, same as def-sfb-projection-formula record). nt_compile --json probe importing the module and #check'ing all 22 decls + universe-mixed instantiation: EXIT 0, 17.6 s. No findings."
+ }
 }

@@ -13,7 +13,8 @@
   "def-weil-abstract-derived-category",
   "lem-sf-exact-functor-derived-triangulated",
   "def-weil-pbc-additive-functor",
-  "def-weil-category-product"
+  "def-weil-category-product",
+  "def-cbc-signed-koszul-completion-model"
  ],
  "proof": [
   {
@@ -261,5 +262,28 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-003433662 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, every cited statement and the base text in side-live, which was unsplit. There is no re-split note for this item, and the delivery adds no new nodes. Statement change: it adds 'commutative structure sheaves R,S'. The tensor nodes it cites (def-pc-tensor-complex-sheaves, def-pur-sheaf-tensor-product) are defined only for commutative rings, so this is a typing clarification and not a new hypothesis. It also adds citations for additive and product. The only citer, lem-cbc-completed-extension-zero-comparison (F=e_! on commutative A_T), is unaffected. Steps 1-6 are elementary and I checked each one. Step 1: the Koszul signs (-1)^p·epsilon(J,i), the transitions a_J and the explicit unit isomorphism. Step 2: the biproduct comparison through its two biproduct identities, with A-linearity of the entries. Step 3: the entrywise chain, transition and inclusion compatibility. Step 4: pr_m s = t_m pr_{m+1}, and beta is invertible through the assumed comparison phi. Step 5: I multiplied out the fibre block matrices. Step 6: (1-s)e=0 and the strict unit equality. Step 7: the statement of lem-sbc-koszul-fibre-linear-descent has the same Q_m, transitions, fibre (dx,(1-s)x-dy), coaugmentation, r=0 case and exact-products hypothesis, applied separately to R and S. lem-sf-exact-functor-derived-triangulated gives F_D. Step 8: localization universal property clauses (2) and (3) descend h and the unit. Edge cases tested: F=0, r=0 (constant tower), r=1 with a=0, and unbounded C. Stacks 0A0E (algebraization.tex:1091) is cited only for the model, and the proof is agent-written. No SGA. No cycle: the closure has 204 nodes and does not contain the item. proof_deps equals the union of the step uses. I accept the tool use of lem-sbc-koszul-fibre-linear-descent (unit sk-rem-rest, generic descent of the exact model). Advisory: steps 4-5 could instead cite lem-cbc-exact-product-functor-roos-chain-maps from the same unit, but the direct argument is correct and short."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactLinearKoszulFibre",
+  "declaration": "CategoryTheory.exists_exactLinear_signedKoszulFibre",
+  "file": "lean/Sheaf/CategoryTheory/ExactLinearKoszulFibre.lean",
+  "statement": "theorem exists_exactLinear_signedKoszulFibre {C : Type u} [SmallCategory C] {D : Type v} [SmallCategory D] {J : GrothendieckTopology C} {L : GrothendieckTopology D} (R : Sheaf J CommRingCat.{u}) (S : Sheaf L CommRingCat.{v}) {A : Type z} [CommRing A] (ρR : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (ρS : A →+* RingCat.sectionsSubring (S.obj ⋙ forget₂ CommRingCat RingCat)) [HasDerivedCategory.{wR} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [HasDerivedCategory.{wS} (ringedSiteModules.{v} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj S))] [HasCountableProducts (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [HasCountableProducts (ringedSiteModules.{v} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj S))] [CountableAB4Star (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))] [CountableAB4Star (ringedSiteModules.{v} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj S))] (F : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⥤ ringedSiteModules.{v} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj S)) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] (hlinear : ∀ {M N : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)} (b : A) (f : M ⟶ N), F.map (ringedKoszulCoefficientSMul R ρR b f) = ringedKoszulCoefficientSMul S ρS b (F.map f)) (hproduct : ∀ M : ℕ → ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R), IsIso (piComparison F M)) (r : ℕ) (a : Fin r → A) : Nonempty (RingedSignedKoszulCompletionModel R ρR a) ∧ Nonempty (RingedSignedKoszulCompletionModel S ρS a) ∧ ∀ (MR : RingedSignedKoszulCompletionModel R ρR a) (MS : RingedSignedKoszulCompletionModel S ρS a), Nonempty (ExactLinearSignedKoszulFibreComparison R S ρR ρS F MR MS)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.SignedKoszulFibreComparison",
+   "CategoryTheory.ExactLinearSignedKoszulFibreComparison",
+   "CategoryTheory.exists_exactLinear_signedKoszulFibre"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-caf55adc6",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read item, new def node def-cbc-signed-koszul-completion-model, both modules, all stmt_dep records (ringedSiteModules, mapBifunctor/curriedTensor = ringedKoszulTensor, DerivedCategory, Mathlib mapDerivedCategory/Additive/piComparison, homModule, ringed-koszul-system) and Mathlib CountableAB4Star. All hypotheses (two ringed sites with independent universes, ρ into global sections, additive+exact F, A-linearity via the homModule action, IsIso piComparison, HasCountableProducts+CountableAB4Star on both sides, any r including 0) and all clauses (h natural chain iso with unit equation, descent HR/HS/eR/eS/hd, derived unit equation, unit invertibility transfer) are present. Every comparison is pinned: alpha by finite coordinates, beta by product projections, h by fst/snd, hd and etas by localization; model coordinates are normalized to the actual tensor inclusions. Sign check: Mathlib up-ℤ ε₂=(-1)^p plus recursive factor order gives (-1)^(q+|I|)(-1)^#{j<i} a_i^(m+1), as in the model, so the models are inhabited. Edge cases r=0, r=1, zero scalars, empty site and unbounded complexes are fine. No name clash with live or other runs; delivery scope is 1 new node + 2 new modules + item lean/stmt_dep. lean.statement records verbatim; only sorry is the theorem proof. nt_compile --json: SignedKoszulCompletionModel 58.3 s, ExactLinearKoszulFibre 51.9 s, both clean at load ~150. Advisories: the model module is close to the 60 s limit; other Roos constructions in the project use different conventions and owners, so this is not a duplicate."
  }
 }

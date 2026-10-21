@@ -18,7 +18,12 @@
   "def-constructible-stratification",
   "def-pc-perfect-ring-complex",
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-proetale-constructible-sheaf"
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-completed-constant-complex-base",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-adic-lisse-module",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -284,5 +289,26 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-0e04eea42 (reviewer sub-agent of L); spot-checked: Read in full: the item and its 6 steps, every cited statement, Bhatt–Scholze Lemma 6.6.10(1) and Prop. 6.6.11 (reverse implication), and the Stacks references. No new nodes, no repair note, no SGA. The statement is true: I tested I=A (zero coefficients), I=0 with A finite, Z_l with I=(l), and X empty. The finite-projective retract, K-flat and balancing computation (steps 1–3), exact constants with finite values (step 4), and Noetherian constructibility of the strata (step 6) are correct. Two gaps are repaired in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-perfect-strata-uniform-reductions.json. (1) E1/C3, step 5: noetherian-stratum-detection needs pro-étale coverings, but the step only had a jointly surjective selection of quasi-compact opens. Added the fpqc argument: |X| is Noetherian, so the stratum is quasi-separated and W→S is quasi-compact by lem-weil-pbc-qcqs-morphism-permanence; open immersions are weakly étale and compose by lem-weil-pbc-ind-etale-stability. (2) C2/E5, step 6: it called the result 'precisely' def-weil-proetale-constructible-sheaf, but never proved the finite-geometric-stalk clause. A new step 7 lifts the geometric point to a covering member (lem-fix-weakly-etale-algclosed-section, base change via ind-etale-stability), uses cofinality of neighbourhoods, and computes the stalk with lem-weil-proetale-constant-sheaf-stalk. Tool uses accepted: kflat-site, derived-change-of-rings and sfb-stratified-local-cohomological-bounds from the delivery; the fix adds fix-weakly-etale-algclosed-section and weil-proetale-constant-sheaf-stalk. No cycle; proof_deps equals the union of uses. Not a duplicate: lem-sfb-adic-stratified-perfect assumes a complete local ring and covers only the residue level. Note: coord/dag-sync.md is absent from the snapshot.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.PerfectStrataUniformReductions",
+  "declaration": "AlgebraicGeometry.Scheme.perfect_strata_uniform_reductions",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.perfect_strata_uniform_reductions"
+  ],
+  "file": "lean/Sheaf/Paper/PerfectStrataUniformReductions.lean",
+  "statement": "theorem perfect_strata_uniform_reductions (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (K : d.derived X) (S : FiniteLocallyClosedStratification X) (J : Fin S.n → Type (u + 1)) (U : ∀ i : Fin S.n, J i → (S.domain i).ProEt) (f : ∀ (i : Fin S.n) (j : J i), U i j ⟶ ProEt.mk (𝟙 (S.domain i))) (_hcover : ∀ i : Fin S.n, Presieve.ofArrows (U i) (f i) ∈ (ProEt.precoverage (S.domain i)).coverings _) (_hmodel : ∀ (i : Fin S.n) (j : J i), ∃ P : @DerivedCategory (ModuleCat.{u + 1} A) _ _ (HasDerivedCategory.standard _), @DerivedCategory.IsPerfectRingComplex A _ (HasDerivedCategory.standard _) P ∧ Nonempty (@ringedSiteDerivedRestrictionOfUniverses (S.domain i).ProEt _ (ProEt.topology (S.domain i)) ((adicLisseForget (S.domain i)).obj ((adicTowerInverseImage (S.immersion i)).obj (d.completedRing X))) (U i j) _ _ _ _ _ (HasDerivedCategory.standard _) ((adicTowerPullback (S.immersion i) (d.completedRing X)).obj K) ≅ @ringedSiteDerivedRestrictionOfUniverses (S.domain i).ProEt _ (ProEt.topology (S.domain i)) ((adicLisseForget (S.domain i)).obj ((adicTowerInverseImage (S.immersion i)).obj (d.completedRing X))) (U i j) _ _ _ _ _ (HasDerivedCategory.standard _) ((adicTowerPullback (S.immersion i) (d.completedRing X)).obj ((pbcDerivedExtend (CompletedConstantReduction.base X d.ideal ≫ (pbcCompletedComparison X d).hom)).obj (DerivedCategory.Q.obj ((CompletedConstantReduction.constantComplex X A).obj ((@DerivedCategory.Q (ModuleCat.{u + 1} A) _ _ (HasDerivedCategory.standard _)).objPreimage P))))))) : (∃ a b : ℤ, a ≤ b ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor (reductionModules X (d.completedRing X)) q).obj K)) ∧ ∀ (n : ℕ) (q : ℤ), q < a ∨ b < q → IsZero ((DerivedCategory.homologyFunctor (reductionModules X (d.finiteRing X n)) q).obj ((d.reduction X n).obj K))) ∧ (∀ (n : ℕ) (q : ℤ), IsConstructibleProEtaleCoefficientModuleSheaf X (A ⧸ d.ideal ^ (n + 1)) ((pbcRestrict (pbcLevelConstantComparison X d n).hom).obj ((DerivedCategory.homologyFunctor (reductionModules X (d.finiteRing X n)) q).obj ((d.reduction X n).obj K)))) ∧ ∀ (n : ℕ) (q : ℤ) (i : Fin S.n) (j : J i), ∃ M : ModuleCat.{u + 1} (A ⧸ d.ideal ^ (n + 1)), Finite M ∧ Nonempty ((SheafOfModules.overFunctor _ (U i j)).obj ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing X (A ⧸ d.ideal ^ (n + 1)))).obj ((pbcRestrict (pbcLevelConstantComparison X d n).hom).obj ((DerivedCategory.homologyFunctor (reductionModules X (d.finiteRing X n)) q).obj ((d.reduction X n).obj K)))) ≅ (SheafOfModules.overFunctor _ (U i j)).obj ((proEtaleModuleInverseImage (S.immersion i) (adicLisseConstantRing X (A ⧸ d.ideal ^ (n + 1)))).obj ((adicLisseConstantModules X (A ⧸ d.ideal ^ (n + 1))).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b04666a3a",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed e3263ad8: Lean byte-identical (sha af96df88), substance re-read vs node and BS 6.6.10(1)/6.6.11 (hypotheses, uniform a<=b before forall n, constructibility, finite constant models on original covers, edge cases X empty / I=A / n index shift, universes) OK. R1/R2 fixed: def-weil-derived-cohomology-sheaves and def-weil-proetale-constructible-sheaf records equal live, all dep nodes equal live. R3 fixed: new existing:true def-weil-pbc-completed-constant-complex-base on unchanged CompletedConstantSheafReduction (base = choose of proved exists-unique base_exists, constantComplex = mapHomologicalComplex of constant modules), statement verbatim, Stacks 093J/093M labels verified, check_existing and check_new_node clean. stmt_deps adds only def nodes. nt_compile --json clean 17.6 s. Report has Worker report and Second reading by NM. Advisory: overFunctor owner def-pur-localized-ringed-site not cited; proof-only plain imports."
+ }
 }

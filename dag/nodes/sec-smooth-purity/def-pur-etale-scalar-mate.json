@@ -1,0 +1,102 @@
+{
+ "id": "def-pur-etale-scalar-mate",
+ "kind": "definition",
+ "title": "Canonical derived etale scalar-change mate",
+ "status": "split",
+ "statement": "Let $A,B$ be commutative rings in the coefficient universe, $\\varphi:A\\to B$ a unital ring homomorphism, and $f:Z\\to W$ an arbitrary morphism of schemes. Work in ordinary unbounded small-etale derived module categories [def-weil-pbc-derived-categories]. Write $T_V=-\\otimes_A^LB_V$ for canonical derived scalar extension [lem-pur-derived-change-of-rings], and $Lf_R^*\\dashv Rf_{*,R}$ for the canonical derived geometric adjunction, with counit $\\varepsilon_{f,R}$ [lem-pc-derived-adjoint-functors], [def-kun-projection-formula-map]. Let $c_f:Lf_B^*T_W\\xrightarrow{\\sim}T_ZLf_A^*$ be the normalized scalar/pullback isomorphism [def-pur-etale-scalar-pullback-iso]. Define the $B$-linear scalar-change natural transformation\n$$q_f=\\operatorname{scalarMate}(\\varphi,f):T_WRf_{*,A}\\longrightarrow Rf_{*,B}T_Z$$\nas the mate of $c_f$ under these two derived adjunctions [def-weil-pbc-adjunction-mate]. Thus for $K\\in D(Z_{\\mathrm{et}},A)$ its component is the $Lf_B^*\\dashv Rf_{*,B}$ transpose of\n$$Lf_B^*T_WRf_{*,A}K\\xrightarrow{c_{f,Rf_{*,A}K}}T_ZLf_A^*Rf_{*,A}K\\xrightarrow{T_Z(\\varepsilon_{f,A,K})}T_ZK.$$\nThis defines the canonical map and does not assert its invertibility. No flatness, boundedness, finiteness or properness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-derived-adjoint-functors",
+  "def-kun-projection-formula-map",
+  "def-pur-etale-scalar-pullback-iso",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A7, Remark remark-base-change: mate construction for the coefficient square; with more-etale.tex Tag 0GL6, Remark remark-Rf-lower-shriek-change-of-rings, for coefficient change"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension direct image mate of derived scalar pullback isomorphism on etale sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"PresheafOfModules.pullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": PresheafOfModules.{v} S ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n  {\"name\": \"ModuleCat.ExtendScalars.map'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {M1 M2 : ModuleCat R} → (M1 ⟶ M2) → (ModuleCat.ExtendScalars.obj' f M1 ⟶ ModuleCat.ExtendScalars.obj' f M2)\", \"doc\": \"Given a ring homomorphism $ f : R → S $ and an $ R $-linear map $ φ : M_1 → M_2 $, this constructs the induced $ S $-linear map $ M_1 ⊗_R S → M_2 ⊗_R S $ by tensoring $ φ $ with the identity map on $ \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          CategoryTheory.Functor.id (ModuleCat R) ⟶ (ModuleCat.extendScalars f).comp (ModuleCat.restrictScalars f)\", \"doc\": \"Given commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R \\to S $, this natural transformation provides for each $ R $-module $ X $ a canonical $ R $-linear map from $ X $ to the module \"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : Ring R] →\\n      [inst_1 : Ring S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → (Y ⟶ (ModuleCat.coextendScalars f).obj X) → ((ModuleCat.restrictScalars f).obj Y ⟶ X)\", \"doc\": \"Given a ring homomorphism $ f : R → S $, the restriction of scalars functor (mapping $ S $-modules to $ R $-modules) is left adjoint to the coextension of scalars functor (mapping $ R $-modules to $ S\"}\n  {\"name\": \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) (T : Type u_3) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T]\\n  [inst_7 : Algebra.FormallyEtale S T] (a : TensorProduct S T Ω[S⁄R]),\\n  (KaehlerDiffer\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ S $ an $ R $-algebra, $ T $ an $ S $-algebra, and $ T $ an $ R $-algebra via the scalar tower $ R \\\\to S \\\\to T $, if the algebra $ S \\\\to T $ is fo\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S \"}\n  {\"name\": \"PresheafOfModules.pushforward\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pushforward\", \"type\": \": PresheafOfModules.{v} R ⥤ PresheafOfModules.{v} S\", \"doc\": \"Given a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, a presheaf of rings $ R : \\\\mathcal{D}^{\\\\text{op}} \\\\to \\\\mathbf{Ring} $, and a natural transformation $ \\\\phi: R \\\\to S $ between presheaves of rings, \"}\n  {\"name\": \"PresheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback\", \"type\": \": pullback.{v} φ ⊣ pushforward.{v} φ\", \"doc\": \"Given a natural transformation $\\\\phi: R \\\\to S$ between presheaves of rings on a category $\\\\mathcal{C}$, this functor is the left adjoint to the pushforward operation. For a presheaf of modules $\\\\mathc\"}\n",
+   "verdict": "No exact Mathlib match: generic module and presheaf scalar adjunctions. The exact project definition is reused.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"Suppose we have a square of functors (where the top and bottom are adjunctions `L₁ ⊣ R₁`\\nand `L₂ ⊣ R₂` respectively).\\n\\n```\\n      C ↔ D\\n    G ↓   ↓ H\\n      E ↔ F\\n```\\n\\nThen we have a bijection between n\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the mates correspondence.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_counit_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the inverse mates correspondence.\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the mates correspondence.\"}\n  {\"name\": \"CategoryTheory.unit_mateEquiv_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"A component of a transposed version of the inverse mates correspondence.\"}\n  {\"name\": \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor \", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {G : CategoryTheory.Functor A C} {H : CategoryTheory.Functor B D} {L₁ : CategoryTheory.Functor \", \"doc\": \"The mates equivalence commutes with this composition, essentially by `mateEquiv_vcomp`.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_vcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, \", \"doc\": \"The mates equivalence commutes with vertical composition.\"}\n  {\"name\": \"CategoryTheory.mateEquiv_hcomp\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} {E : Type u₅} {F : Type u₆} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] [CategoryTheory.Category.{v₅, u₅} E] [CategoryTheory.Category.{v₆, \", \"doc\": \"The mates equivalence commutes with horizontal composition of squares.\"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo\", \"doc\": \"When all four functors in a square are left adjoints, the mates operation can be iterated:\\n\\n```\\n         L₁                  R₁                  R₁\\n      C --→ D             C ←-- D             C ←-- \"}\n  {\"name\": \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Category.{v₃, u₃} C] [CategoryTheory.Category.{v₄, u₄} D] {F₁ : CategoryTheory.Functor A C} {U₁ : CategoryTheory.Functor C A} {F₂ : CategoryTheory.Functo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.mateEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Mates\", \"type\": \" {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄} [CategoryTheory.Category.{v₁, u₁} C] [CategoryTheory.Category.{v₂, u₂} D] [CategoryTheory.Category.{v₃, u₃} E] [CategoryTheory.Category.{v₄, u₄} F] {G : CategoryTheory.Functor C E} {H : CategoryTheory.Functor D F} {L₁ : CategoryTheory.Functor \", \"doc\": \"\"}\n",
+   "verdict": "Generic mates equivalence reused by the existing scalarMate definition; no etale-specific Mathlib definition.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarMate|scalarPullbackIso",
+   "results": "[grep] OK 0 hit(s)\n\nLocal rg in lean/WeilConjectures and lean/Sheaf found AlgebraicGeometry.Etale.scalarMate in lean/Sheaf/Paper/PurEtaleScalarMateProjection.lean:165, scalarPullbackIso at line 155, and consumers. No definition-node lean.declaration or lean.declarations names AlgebraicGeometry.Etale.scalarMate. blueprint_refs.py search 'scalar mate' returned only lem-finite-compact-support-scalar-transport.",
+   "verdict": "Exact existing project definition reused with existing:true; no DAG definition node owns it.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-supported-triangle-mate-identification",
+  "date": "2026-10-21",
+  "group": "NS"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Locality and counit-defined coefficient comparison in sk-lem-sp-reduction-exceptional.proof.md; the canonical closed and open coefficient projections used by the support-triangle comparison.",
+   "via": [
+    "lem-pur-supported-triangle-mate-identification",
+    "lem-pur-finite-coefficient-adjoint-comparisons",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.PurEtaleScalarMateProjection",
+  "declaration": "AlgebraicGeometry.Etale.scalarMate",
+  "statement": "def scalarMate\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (φ : A →+* B) {Z W : Scheme.{u}} (f : Z ⟶ W) :\n    R(lowerStar (ModuleCat.{u + 1} A) f) ⋙ scalarExtension φ W ⟶\n      scalarExtension φ Z ⋙ R(lowerStar (ModuleCat.{u + 1} B) f)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership for the existing plain def scalarMate: the mateEquiv of the normalized scalarPullbackIso under the A and B derived geometric adjunctions. No conclusion of scalarMate_restrict_eq_projection is used, and the existing module is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f0c23a71",
+  "group": "NS",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f0c23a71",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN of 4cf6c250. Item module byte-identical (sha256 9755d6a1), prior review found it correct apart from H2. Item stmt_dep lem-pur-etale-scalar-mate-projection replaced by new existing:true def node def-pur-etale-scalar-mate owning AlgebraicGeometry.Etale.scalarMate; statement verbatim to live PurEtaleScalarMateProjection def (mateEquiv of scalarPullbackIso.hom, real data), TeX direction/mate formula matches, Stacks 07A7/0GL6 source, no extra hypotheses; 6 stmt_deps exist live, no cycle (DFS 407 nodes, item unreachable); no other def owner (same pattern as landed def-pur-etale-scalar-pullback-iso). Live item lean null; delivery adds lean + 2 used stmt_deps only. nt_compile --json clean 35.3 s. No fixes."
+ }
+}
