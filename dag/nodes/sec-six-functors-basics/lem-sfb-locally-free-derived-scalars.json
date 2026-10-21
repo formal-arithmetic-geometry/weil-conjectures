@@ -21,79 +21,81 @@
  ],
  "proof": [
   {
-   "text": "To prove flatness, take a finite relation $\\sum_{p=1}^n a_p s_p=0$ over an object $V$. Choose a covering $\\{U_i\\to V\\}$ trivializing $M$ and let $e_{i1},\\ldots,e_{ir_i}$ be the basis sections on $U_i$. The slice restriction formula gives $s_p|_{U_i}=\\sum_q b_{ipq}e_{iq}$ with $b_{ipq}\\in R(U_i)$. Applying each coordinate of the trivialization to the restricted relation gives $\\sum_p a_p|_{U_i}b_{ipq}=0$ for every $q$. These are precisely the finite factorizations required by [lem-weil-pbc-site-flat-equational-criterion], with $l_i=r_i$ and $t_{iq}=e_{iq}$; hence $M$ is flat. The empty basis gives the same argument when $r_i=0$.",
+   "text": "On each covering slice chart, evaluate the given isomorphism at its terminal object. Evaluation preserves the finite product, so M(U) is linearly equivalent to a finite power of R(U), hence is an algebraically flat module, including rank zero. Restrict a finite section relation to U and apply Mathlib Module.Flat.isTrivialRelation_of_sum_smul_eq_zero. These factorizations satisfy the independent-universe covering-sieve local relation criterion, proving site flatness.",
    "uses": [
     "def-pur-localized-ringed-site",
-    "lem-weil-pbc-site-flat-equational-criterion"
+    "lem-exc-site-local-relations-imply-flat"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 08FC, lemma-flat-eq, condition (2) implies (1), with the factorization given by the local basis; compare Tag 0GN1, lemma-flatness-sheafification-refined"
+    "place": "Tag 08FC, lemma-flat-eq, local basis specialization"
    }
   },
   {
-   "text": "The complex $M[0]$ vanishes in degrees greater than zero and its only possibly nonzero term is flat by Step 1. Every zero term is flat because tensoring with zero is the zero exact functor, by [def-pc-flat-sheaf-modules]. Thus [lem-pc-bounded-above-flat-kflat-site] applies with upper bound zero and shows that $M[0]$ is K-flat.",
+   "text": "The single complex M[0] is strictly bounded above by zero. Its degree zero term is flat by Step 1. Every other term is zero; evaluation makes all its section modules subsingleton, so the local relation criterion with zero auxiliary generators proves these terms flat. Apply the existing independent-coefficient bounded-above flat criterion to obtain the exact K-flat predicate in the statement.",
    "uses": [
     "def-pc-flat-sheaf-modules",
-    "lem-pc-bounded-above-flat-kflat-site"
+    "lem-exc-site-local-relations-imply-flat",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat, applied to a complex concentrated in degree zero"
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat, for the degree-zero complex"
    }
   },
   {
-   "text": "For $\\varphi:R\\to B$, use the identity resolution $M[0]\\to M[0]$, now K-flat. Clause (2) of [lem-pur-derived-change-of-rings] computes derived scalar extension by termwise scalar extension on this resolution, giving the canonical isomorphism to $(M\\otimes_R B)[0]$. The balancing relations defining the sheaf tensor identify $m\\otimes b$ with $b\\otimes m$ in the left-factor convention of the statement, compatibly with the $B$-action. This gives the displayed comparison in $D(\\operatorname{Mod}(B))$. For a morphism $u:M\\to N$ of locally finite free modules, $u[0]$ is a map between their identity K-flat resolutions; both induced maps on the ordinary tensors send $b\\otimes m$ to $b\\otimes u(m)$. The natural comparison transformation of the left derived functor therefore gives a commuting square. This proves naturality without any flatness assumption on $B$.",
+   "text": "The supplied DerivedChangeOfRingsCochainModel fixes ordinary extension on objects and maps and carries the universal left-derived counit. Its computes clause makes that very counit invertible on the K-flat complex of Step 2. Composing with localization of the standard single-complex isomorphism gives the specified locallyFreeScalarComparison, with no assumption on flatness of the new ring.",
    "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, identity K-flat resolution"
+   }
+  },
+  {
+   "text": "Ordinary scalar extension commutes with slice restriction: the presheaves identify by identity on pure tensors, and the proved slice-sheafification comparison used in the localized tensor restriction module is invertible. Extension of the structure module is the new structure module, by the sectionwise B tensor_R R = B isomorphism and the module-sheafification counit. Abelian sheafification exists on the essentially small slice by coefficientSheafification. Choose the ordinary additive functor supplied by the existing cochain model on this slice. Additivity preserves finite products; applying this functor to any given rank-n chart and the unit isomorphism proves the same rank-n chart after extension. This uses neither a new universal pair nor a choice of arbitrary comparison map.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pur-ringed-site-module-pullback-exists-universes",
     "lem-pur-derived-change-of-rings",
     "def-pur-sheaf-tensor-product"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY, lemma-derived-base-change, for the identity underlying topos and ring map R to B; Tag 06YT, lemma-derived-tor-quasi-isomorphism-other-side, and construction before Definition 06YU"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-flat-single-scalar-conventions] to the flat sheaf $M$ of Step 1. Its $e_M$ identifies the ordinary module-object extension with $B\\otimes_R M$, its two-sided K-flatness permits the identity resolution in the blueprint convention, and its counit equality identifies that comparison and its naturality with Step 3. Thus Step 3 proves the displayed assertion for exactly the operations in the statement.",
-   "uses": [
-    "lem-sfb-flat-single-scalar-conventions"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03ER (definition-flat), item (3); agent-extracted convention-comparison argument from the returned parent proof Step 4, using section-tensor-product and sites-cohomology.tex lemma-derived-base-change. The module-object convention is blueprint sk-def-sfb-change-of-scalars, clause (2), and its derived convention is sk-def-sfb-derived-categories."
+    "place": "Section 03EK, tensor unit and finite sums; Tag 03EL, compatibility with slice restriction"
    }
   },
   {
-   "text": "On each trivializing member $U_i$, [lem-sfb-localized-site-tensor-restriction] identifies $(B\\otimes_R M)|_{U_i}$ with $B|_{U_i}\\otimes_{R|_{U_i}}M|_{U_i}$. Its pure-tensor formula respects multiplication on the $B$ factor, so this is also $B|_{U_i}$-linear. Under $M|_{U_i}\\cong R|_{U_i}^{\\oplus r_i}$, the map $b\\otimes(a_q)_q\\mapsto(b\\varphi(a_q))_q$ has inverse $(b_q)_q\\mapsto\\sum_q b_q\\otimes e_{iq}$, by the balancing relations. These formulas commute with restriction and give inverse maps on the sheafified tensors of [def-pur-sheaf-tensor-product]. Hence $(B\\otimes_R M)|_{U_i}\\cong B|_{U_i}^{\\oplus r_i}$. The same coverings and finite integers $r_i$ prove the required local freeness, including rank zero and the zero ring.",
+   "text": "For an arbitrary module map M to N, apply naturality of the cochain counit to its single-complex map, followed by naturality of the isomorphism commuting an additive functor with a single complex. Functoriality of localization gives exactly the displayed square. No flatness of N is required.",
    "uses": [
-    "lem-sfb-localized-site-tensor-restriction",
-    "def-pur-sheaf-tensor-product"
+    "lem-pur-derived-change-of-rings"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, for slice restriction; Section 03EK, section-tensor-product, explicit finite-basis tensor maps"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, natural K-flat computation comparison"
    }
   }
  ],
  "proof_deps": [
   "def-pur-localized-ringed-site",
-  "lem-weil-pbc-site-flat-equational-criterion",
+  "lem-exc-site-local-relations-imply-flat",
   "def-pc-flat-sheaf-modules",
-  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
   "lem-pur-derived-change-of-rings",
-  "def-pur-sheaf-tensor-product",
-  "lem-sfb-flat-single-scalar-conventions",
-  "lem-sfb-localized-site-tensor-restriction"
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Local-basis specialization of Tag 08FC; K-flat and derived scalar-extension applications in sites-cohomology.tex Tags 06YQ and 06YY"
+  "place": "Tags 08FC and 03EL; independent-universe K-flat criterion from sites-cohomology.tex Tag 06YQ and canonical counit computation from Tag 06YY. Formal route by U2."
  },
  "mathlib_searches": [
   {
@@ -233,8 +235,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-site-flat-equational-criterion",
-  "lem-pc-bounded-above-flat-kflat-site",
   "lem-pur-derived-change-of-rings",
   "lem-sfb-localized-site-tensor-restriction"
  ],
@@ -268,5 +268,15 @@
   "result": "pass",
   "note": "Re-delivery after the H2 RETURN of b79577c2: the Lean module is byte-identical (sha256 9d081230). Item stmt_deps now cite the new def-sfb-derived-change-of-rings-cochain-model instead of the theorem lem-pur-derived-change-of-rings and def-pur-sheaf-tensor-product; the theorem stays in proof_deps; the only stmt_deps change against live is this new def node. The new node is existing:true on the unchanged DerivedChangeOfRingsCochainModel module, declaring the structure plus the abbrev derivedChangeRingIndependentCoefficients (from the public import; advisory). Its clauses (i)-(vii) match fields E/obj_eq/map_eq/additive, preserves, T, pointwise, ε/universal, triangulated and computes; no inhabitance is asserted; universes are independent; its stmt_deps cover the declaration owners. No live owner or parallel duplicate exists; check_existing and check_new_node report no failures. Clause table re-confirmed: hM covering sieve with per-arrow n including 0; IsFlatOnSite; K-flatness of the single integer complex; canonical D.ε ≫ Q.map singleMapHomologicalComplex comparison; rank preservation; naturality; no B-flatness. nt_compile --json: item 5.4 s and #check probe of both declarations 3.5 s, EXIT 0, clean."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261021T120721-L-3937160",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
