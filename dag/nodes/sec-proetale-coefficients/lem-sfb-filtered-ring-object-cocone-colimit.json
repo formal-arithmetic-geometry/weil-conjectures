@@ -226,5 +226,28 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-cedf9018b (reviewer sub-agent of L); spot-checked: I read the whole item. It has 7 elementary steps, no new nodes, and the statement is unchanged; the base proof was statement-only and no re-split note applies. I checked the three cited statements: def-weil-pbc-category-colimit gives the unique mediator and filteredness per Stacks 002V, sk-def-sfb-ring-object gives the monoid-object μ/η equations and commutativity, and def-sfb-monoidal-category gives tensor bifunctoriality. Step 1: the underlying mediator b is correct. Step 2: unit preservation needs nonemptiness, which filteredness supplies (with I empty, A would be initial). Step 3: f and g agree on c_k⊗c_k; I checked each equality. Step 4: the mixed pairs follow from c_i⊗c_j=(c_k⊗c_k)(D(u)⊗D(v)), using only the common-successor clause. Steps 5 and 6: the two colimit-uniqueness arguments use D(i)⊗− and −⊗A, both preserved by hypothesis. Step 7: uniqueness in Mon(C), and fullness gives the commutative case. Test cases: singleton I and directed limits of rings in Ab both hold. The only citer, sk-prop-sfb-qlbar-colimit-x step 4, checks every hypothesis (filtered poset, tensor preserves colimits via adjoints, commutative). Grepping the DAG found no duplicate. The source is the blueprint main-20261015 sk-prop-sfb-qlbar-colimit-x proof, Third isomorphism paragraph, plus Stacks 002F/002V/0FFK. No SGA is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FilteredRingObjectCoconeColimit",
+  "declaration": "CategoryTheory.Mon.filtered_cocone_isColimit",
+  "declarations": [
+   "CategoryTheory.Mon.filtered_cocone_isColimit",
+   "CategoryTheory.CommMon.filtered_cocone_isColimit"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FilteredRingObjectCoconeColimit.lean",
+  "statement": "theorem Mon.filtered_cocone_isColimit {C : Type u} [Category.{v} C] [MonoidalCategory C] {I : Type w} [SmallCategory I] [IsFiltered I] [∀ Y : C, PreservesColimitsOfShape I (tensorLeft Y)] [∀ Y : C, PreservesColimitsOfShape I (tensorRight Y)] {D : I ⥤ Mon C} (c : Cocone D) (hc : IsColimit ((Mon.forget C).mapCocone c)) : Nonempty (IsColimit c) ∧ ∀ s : Cocone D, IsMonHom (M := c.pt.X) (N := s.pt.X) (hc.desc ((Mon.forget C).mapCocone s))",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The first theorem states the ring-object colimit and explicitly that every underlying canonical mediator is a ring-object morphism. The second theorem states the final commutative-ring-object clause, using Mathlib CommMon, whose forgetful functor to Mon is fully faithful."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-656545851",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: Mathlib MonoidalCategory; SmallCategory+IsFiltered (includes nonempty); separate PreservesColimitsOfShape I for tensorLeft/tensorRight; D : I ⥤ Mon C, cocone c, hc : IsColimit of the underlying cocone; conclusion Nonempty (IsColimit c) ∧ IsMonHom of the canonical hc.desc; commutative clause via CommMon (fully faithful forget₂Mon) with BraidedCategory. No extra assumptions; universes u,v,w independent and bound; citer sk-prop-sfb-qlbar-colimit-x (filtered poset) covered. No duplicate in Mathlib or project (only the private sifted helper siftedRingCoconeIsColimit). Node differs from live only in lean; statement verbatim; docstrings have source, blueprint tag and the 7-step proof; sorry only. nt_compile --json clean in 3.0 s, exit 0. Advisory: RingPresheaf import is used only as the dependency's recorded module."
  }
 }
