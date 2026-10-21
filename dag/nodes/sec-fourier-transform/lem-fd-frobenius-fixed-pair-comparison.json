@@ -18,9 +18,147 @@
   "def-weil-weil-sheaf-complex",
   "lem-weil-pbc-integral-stratified-perfect-characterization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply separated finite-type base change to $X_0\\to\\operatorname{Spec}k_0$ and the field extension $k/k_0$. This gives $X$ separated and of finite type over $k$. Concretely, its finite affine cover has coordinate rings $A_i\\otimes_{k_0}k$; the images $a_{ij}\\otimes1$ of generators of $A_i/k_0$ still generate over $k$. Thus the finite-type hypothesis needed below is for $X\\to\\operatorname{Spec}k$, without requiring $k/k_0$ finite.",
+   "uses": [
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence; old parent step 10: finite-type geometric fibre"
+   }
+  },
+  {
+   "text": "The only ideals of the field $k$ are $0$ and $k$, so every ideal is finitely generated; its one affine chart makes $\\operatorname{Spec}k$ Noetherian. Apply finite-type-over-Noetherian to the structure morphism from step 1: $X$ is Noetherian. Apply the finite-type-over-a-field dimension lemma with $K=k$ to the same morphism: $\\dim X<\\infty$. The empty scheme is allowed, with dimension $-\\infty$; hence this also supplies a finite nonnegative dimension bound in that case.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence; old parent step 10: Noetherian and finite-dimensional hypotheses"
+   }
+  },
+  {
+   "text": "Since $\\operatorname{char}k=p$ and $\\ell\\ne p$, the image of $\\ell$ in $k$ has inverse $\\ell^{-1}$. Their images under $k\\to\\mathcal O_{X,x}$ still multiply to $1$, for every $x$. Thus $\\ell$ is invertible on $X$. The Frobenius definition gives $g_X$ and its inverse $\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\varphi_q)$. Their composites are identities because $\\gamma\\varphi_q=\\varphi_q\\gamma=1$. Consequently $g_X$ is an allowed scheme isomorphism for $S$; no $k$-linearity is used.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence; old parent step 10: invertibility and semilinear scheme automorphism"
+   }
+  },
+  {
+   "text": "At either a finite stage or the common stage, take from the given datum its equivalence $J:\\mathcal C_s\\simeq\\mathcal C_p$ and comparison $b:JF_s\\simeq F_pJ$ for $g_X$. Use the inverse comparison if necessary. Write $\\psi_K=J(\\theta_K)b_K^{-1}$. This is an isomorphism $F_pJK\\to JK$, since both factors are isomorphisms. The framework pairs are exactly the fixed pairs of $F_s$ in the Weil-complex definition; the target pairs are the fixed pairs of $F_p$.",
+   "uses": [
+    "def-fd-pullback-comparison-datum",
+    "def-fd-coefficient-comparison-datum",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence; old parent step 11: define the transported objects"
+   }
+  },
+  {
+   "text": "For $u:K\\to K'$, naturality gives $F_p(Ju)b_K=b_{K'}J(F_su)$. Therefore\n$$Ju\\,\\psi_K=\\psi_{K'}F_p(Ju)\\quad\\Longleftrightarrow\\quad J(u\\theta_K)=J(\\theta_{K'}F_su)\\quad\\Longleftrightarrow\\quad u\\theta_K=\\theta_{K'}F_su.$$\nThe first equivalence substitutes $\\psi$ and cancels $b_K$; the second uses injectivity of the Hom map of the supplied equivalence $J$. Thus $u\\mapsto Ju$ defines a functor on pairs, preserves identities and composition, and its map on each Hom is exactly the restriction of the given bijection for $J$. The reverse implication shows that its inverse Hom bijection also lands in intertwining arrows, so the pair functor is fully faithful.",
+   "uses": [
+    "def-fd-coefficient-comparison-datum",
+    "def-fd-pullback-comparison-datum",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence; old parent step 11: naturality and the restricted Hom bijection"
+   }
+  },
+  {
+   "text": "Given a target pair $(H,\\psi)$, choose $K$ and an isomorphism $v:JK\\simeq H$ using the essential surjectivity of the equivalence in the datum. Put $\\psi_0=v^{-1}\\psi F_p(v):F_pJK\\simeq JK$. Lift $\\psi_0b_K:JF_sK\\simeq JK$ by the Hom bijection of $J$ to $\\theta:F_sK\\to K$, and lift its inverse to $t:K\\to F_sK$. Applying $J$ to the two composites and using injectivity gives $t\\theta=1$ and $\\theta t=1$. Thus $\\theta$ is a Weil isomorphism, its transported structure is $\\psi_0$, and $v\\psi_0=\\psi F_p(v)$ makes $v$ an isomorphism of pairs. This proves essential surjectivity without assuming $H$ is literally $JK$.",
+   "uses": [
+    "def-fd-coefficient-comparison-datum",
+    "def-fd-pullback-comparison-datum",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence; old parent step 11: lift a structure and its inverse on an arbitrary target object"
+   }
+  },
+  {
+   "text": "Apply the fully-faithful/essentially-surjective criterion to the pair functor from steps 4–6. Its hypotheses are precisely the restricted Hom bijections of step 5 and the isomorphisms $v$ of step 6. All categories and functors involved may be placed in a common larger universe, so the criterion applies. It produces an equivalence with this very functor, and therefore with the required arrow map and Hom bijection.",
+   "uses": [
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence; old parent step 11: conclude equivalence"
+   }
+  },
+  {
+   "text": "For a finite extension $E\\subset L$, denote the two scalar functors by $T_s,T_p$, their supplied Frobenius comparisons by $r_s:T_sF_{s,E}\\simeq F_{s,L}T_s$ and $r_p:T_pF_{p,E}\\simeq F_{p,L}T_p$, and the coefficient comparison by $j:J_LT_s\\simeq T_pJ_E$. These are the actual scalar functors and comparisons in $S$. Its mixed square, with $b$ oriented as in the statement, reads\n$$r_{p,J_EK}\\,T_p(b_{E,K})\\,j_{F_{s,E}K}=F_{p,L}(j_K)\\,b_{L,T_sK}\\,J_L(r_{s,K}).$$\nThis is an assumption of the given compatible transformation, not an additional coherence assertion about scheme composition.",
+   "uses": [
+    "def-fd-pullback-comparison-datum",
+    "def-fd-coefficient-comparison-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence; old parent step 11: spell out the supplied mixed scalar square"
+   }
+  },
+  {
+   "text": "The structure on the scalar extension of $(K,\\theta)$ is $T_s(\\theta)r_{s,K}^{-1}$. Naturality of $j$ at $\\theta$, followed by rearrangement of the equation in step 8, gives\n$$\\begin{aligned}\nj_KJ_L(T_s(\\theta)r_{s,K}^{-1})b_{L,T_sK}^{-1}\n&=T_p(J_E\\theta)j_{F_{s,E}K}J_L(r_{s,K}^{-1})b_{L,T_sK}^{-1}\\\\\n&=T_p(J_E\\theta b_{E,K}^{-1})r_{p,J_EK}^{-1}F_{p,L}(j_K).\n\\end{aligned}$$\nThis is exactly the intertwining condition for $j_K$ between the two scalar-extended transported pairs. On arrows its naturality is that of $j$. Hence $j$ lifts to the required natural isomorphism of pair functors; its inverse also intertwines by cancelling this equation.",
+   "uses": [
+    "def-fd-pullback-comparison-datum",
+    "def-fd-coefficient-comparison-datum",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence; old parent step 11: explicit scalar-compatibility calculation"
+   }
+  },
+  {
+   "text": "The same displayed calculation applies to a finite-stage inclusion $I_s:\\mathcal C_{s,E}\\to\\mathcal C_s$ and $I_p:\\mathcal C_{p,E}\\to\\mathcal C_p$: replace $T_s,T_p,J_L$ by $I_s,I_p,J_X$. Here $r_s,r_p$ are their specified pullback comparisons. The datum says the common-stage coefficient functor preserves the field label and that the component of its pullback comparison at a literal pair is the inclusion of the finite component. Thus the equation in step 8 for these substitutions is the specified finite-to-common comparison equation. Step 9 proves that the coefficient inclusion comparison is an isomorphism of Weil pairs, natural in arrows. This proves commutation with every finite-stage inclusion. The scalar cocycle and identity equations remain true after lifting: their underlying maps are the supplied ones, and arrows of pairs are equal exactly when their underlying arrows are equal.",
+   "uses": [
+    "def-fd-pullback-comparison-datum",
+    "def-fd-coefficient-comparison-datum",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final sentence; old parent step 11: finite/common-stage inclusions and scalar coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-fd-pullback-comparison-datum",
+  "def-fd-coefficient-comparison-datum",
+  "def-weil-weil-sheaf-complex",
+  "lem-trf-fully-faithful-ess-surj-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final sentence; full argument for the geometric-fibre/fixed-pair auxiliary of the coefficient comparison, expanding old parent steps 10–11 preserved in coord/reports/Q114/lem-fd-rational-coefficient-category-comparison.md"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +194,45 @@
    "results": "[leanfinder] OK 8 hit(s); coe_frobeniusEquiv; frobeniusEquiv_apply; isConj_arithFrobAt; Perfection.coeff_frobeniusEquiv_symm; PerfectClosure.mk_eq_iff; WittVector.IsocrystalEquiv.frob_equivariant; WittVector.IsocrystalEquiv.mk.inj; PerfectClosure.r_iff",
    "date": "2026-10-21",
    "verdict": "no match: isocrystals, field Frobenius and geometric etale points do not compare these Weil-pair categories or verify all geometric-fibre hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|mapOfNatIso|frobenius.*[Ee]quiv",
+   "results": "25 hits; Mathlib/Algebra/Category/AlgCat/Basic.lean; Mathlib/FieldTheory/PerfectClosure.lean; Mathlib/FieldTheory/PerfectClosure.lean; Mathlib/FieldTheory/PerfectClosure.lean; Mathlib/FieldTheory/PerfectClosure.lean; Mathlib/FieldTheory/Perfect.lean; Mathlib/FieldTheory/Perfect.lean; Mathlib/FieldTheory/Perfect.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic equivalences, conjugation, field Frobenius and isocrystals do not state the whole geometric-fibre/fixed-pair comparison; the project IsoAlgebra construction is not in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence of fixed object categories under a natural isomorphism between conjugate endofunctors",
+   "results": "8 hits; CategoryTheory.Iso.conj; CategoryTheory.Iso.symm_self_conj; CategoryTheory.Iso.conj_id; CategoryTheory.Iso.refl_conj; CategoryTheory.Iso.conj_apply; CategoryTheory.Functor.isEquivalence_iff_of_iso; CategoryTheory.conjugateIsoEquiv; CategoryTheory.Iso.isoCongr",
+   "date": "2026-10-21",
+   "verdict": "no match: generic equivalences, conjugation, field Frobenius and isocrystals do not state the whole geometric-fibre/fixed-pair comparison; the project IsoAlgebra construction is not in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Endofunctor.IsoAlgebra",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.Endofunctor.IsoAlgebra'",
+   "date": "2026-10-21",
+   "verdict": "no match: generic equivalences, conjugation, field Frobenius and isocrystals do not state the whole geometric-fibre/fixed-pair comparison; the project IsoAlgebra construction is not in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of categories commuting with endofunctors by a natural isomorphism induces an equivalence of categories of objects with invertible endofunctor structure maps",
+   "results": "8 hits; CategoryTheory.Equivalence.changeFunctor; CategoryTheory.Equivalence.induced; CategoryTheory.Equivalence.congrLeft; CategoryTheory.Equivalence.inducedFunctorOfEquiv; CategoryTheory.Functor.isEquivalence_of_iso; CategoryTheory.Equivalence.induced_unitIso; CategoryTheory.Equivalence.congrRight; CategoryTheory.Equivalence.mkIso",
+   "date": "2026-10-21",
+   "verdict": "no match: generic equivalences, conjugation, field Frobenius and isocrystals do not state the whole geometric-fibre/fixed-pair comparison; the project IsoAlgebra construction is not in Mathlib"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme over a field is Noetherian and finite dimensional and Frobenius fixed pairs transport along coefficient equivalences",
+   "results": "8 hits; FiniteField.frobeniusAlgEquiv; FiniteField.frobeniusAlgEquiv_apply; WittVector.exists_frobenius_solution_fractionRing_aux; FiniteField.frobeniusAlgEquiv_symm_apply; IsArithFrobAt.arithFrobAt; WittVector.isocrystal_classification; FiniteField.bijective_frobeniusAlgEquivOfAlgebraic_pow; WittVector.exists_frobenius_solution_fractionRing",
+   "date": "2026-10-21",
+   "verdict": "no match: generic equivalences, conjugation, field Frobenius and isocrystals do not state the whole geometric-fibre/fixed-pair comparison; the project IsoAlgebra construction is not in Mathlib"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fd-rational-coefficient-category-comparison",
@@ -78,5 +251,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fd-frobenius-fixed-pair-comparison",
+  "worker": "stage1",
+  "summary": "Expanded old parent steps 10–11 into ten explicit steps: finite-type cover, geometric hypotheses, fixed-pair functor, restricted Hom bijection, lifting an arbitrary target structure and its inverse, equivalence criterion, and the mixed-square calculation for scalar extension and finite-stage inclusions. Reused existing nodes throughout; no statement change or new nodes.",
+  "blueprint": "def-fd-trace-function final sentence: comparison of framework Weil-pair Frobenius operators with the PBC coefficient category; precisely old parent steps 10–11.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic finiteness of dimension for a finite-type scheme over the field k; the trace unit has no scheme-dimension theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-dimension-finite-type"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q150-7b8a32029",
+  "group": "Q150",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-7b8a32029 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement and the source in full. The delivery is one commit containing only the item and its report: no new nodes, and the statement and stmt_deps are unchanged. The source is main-20261015 def-fd-trace-function, whose final sentence only motivates the comparison, so proof_origin=agent is correct. The cycle check is clean: neither the item nor its parent lem-fd-rational-coefficient-category-comparison is in the closure, and the parent's step 5 cites the item. Step-by-step checks: (1) the base-change leaf lem-pod-separated-finite-type-base-change covers an arbitrary field extension k/k0. (2) Spec k is Noetherian, so X is Noetherian by lem-weil-pbc-finite-type-over-noetherian. lem-kun-dimension-finite-type gives finite global Krull dimension, which matches the noetherian/finite-dimensional hypothesis of S; I accept its declared tool use (a generic fact outside trf/pod). (3) ell is invertible because char k = p differs from ell, and def-weil-frobenius-detailed gives g_X its inverse. (4-5) I verified the naturality identity for b: J F_s ≅ F_p J by hand; J's Hom bijection then gives a fully faithful functor with the restricted Hom bijection. The datum records the reverse orientation Lh^{*,pbc} I_T ≃ I_U Lh^{*,sf}, and the statement correctly says to invert it. (6) Essential surjectivity holds for a target H only isomorphic to JK, by conjugating psi by v. (7) Mathlib Functor.asEquivalence at Equivalence.lean:604-649 is checked. (8-9) I type-checked the mixed square, J_L T_s F_{s,E} K -> F_{p,L} T_p J_E K. I re-derived the intertwining equation for j from the naturality of j and the rearranged square; it is correct. (10) Finite-stage inclusions are the same equation with I in place of T, using the datum's pin at literal pairs. Coefficient categories match: raw rationalization and literal pairs map to the PBC raw rational and Qbar categories, with no Karoubi completion. Small cases checked: X empty, X0 = Spec k0 (no k-linearity needed), E = L, H only isomorphic to JK. Batch 5: the flagged citation lem-trf-fully-faithful-ess-surj-equivalence is accepted. It is a Mathlib leaf for the general category-theory equivalence criterion, filed in sec-trace-formula; it is neither part of the trace-formula or Poincare statements nor their proofs, and its closure is only def-nagata-category. No SGA citation. Advisory only: lem-sf-fixed-pair-adjunction-lift and def-weil-endofunctor-fixed-pair-category could also be cited, but this is not a fault."
  }
 }
