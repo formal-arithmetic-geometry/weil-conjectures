@@ -30,11 +30,12 @@
    }
   },
   {
-   "text": "Write $\\theta_K:L_BT_YK\\simeq T_{\\bar X}L_AK$ for the comparison defining $\\gamma$. It is the comparison $\\lambda_p$ of [def-sp-constant-scalar-pullback-comparison] for the constant rings and the constant-ring maps induced by $A\\to B$: that node defines $\\lambda_p$ as the ringed reduction/pullback isomorphism, i.e. the tensor-pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied with the coefficient module and the constant-section identifications $c_A,c_B$, which is the identification named in the statement. Apply [lem-sp-proetale-scalar-tensor-normalization] with $f=p$ and this $\\theta$. It gives $r_{\\bar X}(\\theta_K)\\circ b^{-1}_{T_YK}=\\tau_K$, including the canonical pure-tensor formula and scalar-counit localization square on every flat-term K-flat representative. Its hypotheses require neither properness nor boundedness.",
+   "text": "Write $\\theta_K:L_BT_YK\\simeq T_{\\bar X}L_AK$ for the comparison defining $\\gamma$. It is the comparison $\\lambda_p$ of [def-sp-constant-scalar-pullback-comparison] for the constant rings and the constant-ring maps induced by $A\\to B$: that node defines $\\lambda_p$ as the ringed reduction/pullback isomorphism, i.e. the tensor-pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] applied with the coefficient module and the constant-section identifications $c_A,c_B$, which is the identification named in the statement. Apply [lem-sp-proetale-scalar-tensor-normalization] with $f=p$ and this $\\theta$. It gives $r_{\\bar X}(\\theta_K)\\circ b^{-1}_{T_YK}=\\tau_K$, including the canonical pure-tensor formula and scalar-counit localization square on every flat-term K-flat representative. Its hypotheses require neither properness nor boundedness. In Lean, supply the two tensor-model parameters by the native derived monoidal tensor and its one-K-flat representative comparison from [lem-sf-ringed-derived-native-tensor]. This is a concrete construction on all complexes; the normalization theorem supplies the chain isomorphism, whose hom gives the requested representative map.",
    "uses": [
     "def-sp-constant-scalar-pullback-comparison",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sp-proetale-scalar-tensor-normalization"
+    "lem-sp-proetale-scalar-tensor-normalization",
+    "lem-sf-ringed-derived-native-tensor"
    ],
    "elementary": false,
    "source": {
@@ -74,12 +75,13 @@
   "lem-sp-proetale-scalar-tensor-normalization",
   "det-sp-scalar-extension-functor",
   "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-derived-native-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
-  "place": "Step 1 (counit-tensor definition), expanded using Stacks Tags 0D6D, 0D6E, 07A6 and 07A4"
+  "place": "Step 1 (counit-tensor definition), expanded using Stacks Tags 0D6D, 0D6E, 07A6 and 07A4; Lean assembly by K8 uses the existing normalization theorem, a native tensor presentation, the coefficient-adjunction identity and naturality of its Hom equivalence."
  },
  "mathlib_searches": [
   {
@@ -270,5 +272,15 @@
   "existing": false,
   "note": "Repair of returned immutable head 50b93579b361 (H3/H6): retain the concrete b inverse followed by r(theta), and add the Step-2 conjunct IsDirectImageChangeRingTensorPullbackNormalized. It asserts on every flat-term K-flat representative the actual sheafified pure-tensor formula, using the constant coefficient comparison via its adjoint ring-section map, and the localization square relating that chain map to this concrete tau through the published scalar-derived counits and exact quotient factorizations. The remaining conjuncts assert the restricted A-transpose and naturality. Thus the projection map is canonically normalized independently of the mate definition. All original hypotheses and categories are retained; no dependency repair or source-statement change."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261021T161409-L-4163546",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

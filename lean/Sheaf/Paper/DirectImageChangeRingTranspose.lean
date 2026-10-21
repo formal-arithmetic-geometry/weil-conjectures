@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.SecSmoothPurity.ProEtaleScalarTensorNormalization
+import Sheaf.Algebra.Homology.RingedDerivedTensorNative
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
@@ -202,6 +204,18 @@ def directImageChangeRingRestrictedGamma
     (directImageChangeRingRestrictionDirectImage φ f).hom.app
       ((scalarExtensionFunctor φ X).obj N)
 
+private def transposeTensorModel (T : Scheme.{u})
+    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) : ProEtaleTensorModel T R where
+  tensor := @MonoidalCategory.tensor _ _
+    (RingedDerivedNative.monoidal.{u + 1, u, 0, u + 2} (ProEt.topology T) R)
+  representative := NatIso.ofComponents
+    (fun P ↦ RingedDerivedNative.tensorIso.{u + 1, u, 0, u + 2}
+      (ProEt.topology T) R P.1.obj P.2.obj (Or.inl P.1.property.1))
+    (fun v ↦ RingedDerivedNative.tensorIso_naturality.{u + 1, u, 0, u + 2}
+      (ProEt.topology T) R _ _ _ _ _ _ v.1.hom v.2.hom)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Restricting the proper B-linear coefficient mate gives exactly the pro-etale
 projection map for B as an A-module, naturally in every unbounded N.
 Source: blueprint main-20261015, direct-image proof, Step 1; Stacks 0D6D, 0D6E, 07A6, 07A4
@@ -265,6 +279,85 @@ theorem directImageChangeRingTranspose
         (proEtaleRingDerivedDirectImage f.left (proEtaleConstantRing Y.left A)
           (proEtaleConstantRing X.left A) (proEtaleConstantRingComparison f.left A)).map
             ((scalarExtensionFunctor φ X.left ⋙ scalarRestriction φ X.left).map v) := by
-  sorry
+  have hn := (proEtaleScalarTensorNormalization ℓ _hA _hB φ f.left
+    (transposeTensorModel Y.left (proEtaleConstantRing Y.left A))
+    (transposeTensorModel X.left (proEtaleConstantRing X.left A))).2
+  refine ⟨?_, ?_, ?_⟩
+  · intro P hP hflat
+    obtain ⟨t, hpure, hloc⟩ := hn P hP hflat
+    refine ⟨t.hom, ?_, ?_⟩
+    · intro i U s x
+      exact hpure i U x s
+    · simpa only [directImageChangeRingTensorPullback, directImageChangeRingRestrictionPullback,
+        tensorPullbackIso, directImageScalarPullbackIso, Iso.trans_hom, Iso.symm_hom,
+        Iso.app_inv, Iso.app_hom, Functor.mapIso_hom, Functor.map_comp, Category.assoc,
+        scalarMateRestriction, scalarRestriction, scalarExtensionFunctor, scalarExtension,
+        directImageScalarExtension, constantPullback,
+        proEtaleConstantRingDerivedPullback] using hloc
+  · clear hn
+    let adjA := proEtaleRingDerivedAdjunction f.left (proEtaleConstantRing Y.left A)
+      (proEtaleConstantRing X.left A) (proEtaleConstantRingComparison f.left A)
+    let adjB := proEtaleRingDerivedAdjunction f.left (proEtaleConstantRing Y.left B)
+      (proEtaleConstantRing X.left B) (proEtaleConstantRingComparison f.left B)
+    have h := (proEtaleRingSheafChangeAdjunction f.left
+      (proEtaleConstantRing Y.left A) (proEtaleConstantRing Y.left B)
+      (proEtaleConstantRing X.left A) (proEtaleConstantRing X.left B)
+      (proEtaleConstantRingMap (T := Y.left) φ)
+      (proEtaleConstantRingMap (T := X.left) φ)
+      (proEtaleConstantRingComparison f.left A) (proEtaleConstantRingComparison f.left B)
+      (proEtaleConstantInverseImageMap_naturality f.left
+        (CommRingCat.ofHom (RingHom.ulift φ))).symm).2.2
+      ((scalarExtensionFunctor φ Y.left).obj
+        ((proEtaleRingDerivedDirectImage f.left (proEtaleConstantRing Y.left A)
+          (proEtaleConstantRing X.left A) (proEtaleConstantRingComparison f.left A)).obj N))
+      ((scalarExtensionFunctor φ X.left).obj N)
+      ((tensorPullbackIso φ f.left).hom.app
+        ((proEtaleRingDerivedDirectImage f.left (proEtaleConstantRing Y.left A)
+          (proEtaleConstantRing X.left A) (proEtaleConstantRingComparison f.left A)).obj N) ≫
+        (scalarExtensionFunctor φ X.left).map (adjA.counit.app N))
+    apply (adjA.homEquiv _ _).injective
+    simpa only [Equiv.apply_symm_apply, directImageChangeRingRestrictedGamma,
+      directImageChangeRingGamma, directImageChangeRingTensorPullback,
+      directImageChangeRingRestrictionPullback, directImageChangeRingRestrictionDirectImage,
+      Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom, Functor.mapIso_hom,
+      Functor.comp_map, Functor.comp_obj, scalarRestriction, Functor.map_comp,
+      Category.assoc, adjA, adjB] using h.symm
+  · clear hn
+    intro N' v
+    let adjA := proEtaleRingDerivedAdjunction f.left (proEtaleConstantRing Y.left A)
+      (proEtaleConstantRing X.left A) (proEtaleConstantRingComparison f.left A)
+    let adjB := proEtaleRingDerivedAdjunction f.left (proEtaleConstantRing Y.left B)
+      (proEtaleConstantRing X.left B) (proEtaleConstantRingComparison f.left B)
+    have hg : (scalarExtensionFunctor φ Y.left).map
+        ((proEtaleRingDerivedDirectImage f.left (proEtaleConstantRing Y.left A)
+          (proEtaleConstantRing X.left A) (proEtaleConstantRingComparison f.left A)).map v) ≫
+        directImageChangeRingGamma φ f.left N' =
+      directImageChangeRingGamma φ f.left N ≫
+        (proEtaleRingDerivedDirectImage f.left (proEtaleConstantRing Y.left B)
+          (proEtaleConstantRing X.left B) (proEtaleConstantRingComparison f.left B)).map
+            ((scalarExtensionFunctor φ X.left).map v) := by
+      apply (adjB.homEquiv _ _).symm.injective
+      rw [adjB.homEquiv_naturality_right_symm,
+        adjB.homEquiv_naturality_left_symm]
+      dsimp only [directImageChangeRingGamma, adjB]
+      rw [Equiv.symm_apply_apply, Equiv.symm_apply_apply]
+      dsimp only [scalarExtensionFunctor]
+      have ht := (tensorPullbackIso φ f.left).hom.naturality
+        ((proEtaleRingDerivedDirectImage f.left (proEtaleConstantRing Y.left A)
+          (proEtaleConstantRing X.left A) (proEtaleConstantRingComparison f.left A)).map v)
+      dsimp only [Functor.comp_map] at ht
+      rw [← Category.assoc, ht]
+      have hc := adjA.counit.naturality v
+      dsimp only [Functor.comp_map, Functor.id_map] at hc
+      simp only [Category.assoc]
+      rw [← (scalarExtension φ X.left).map_comp, hc,
+        (scalarExtension φ X.left).map_comp]
+    dsimp only [directImageChangeRingRestrictedGamma, Functor.comp_map]
+    rw [← Category.assoc, ← Functor.map_comp, hg, Functor.map_comp, Category.assoc]
+    simpa only [Functor.comp_map, Category.assoc] using
+      congrArg ((scalarRestriction φ Y.left).map
+          (directImageChangeRingGamma φ f.left N) ≫ ·)
+        ((directImageChangeRingRestrictionDirectImage φ f.left).hom.naturality
+          ((scalarExtensionFunctor φ X.left).map v))
 
 end AlgebraicGeometry.ProEtale
