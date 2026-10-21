@@ -22589,3 +22589,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:35 L: returned deliver/NL/lem-sfb-continuous-algcl-tame-boundary-comparison (reviewer RETURN: L: independent stage-2 immutable head 6a13afbab114: Superseded, and not a stage-2 delivery. NF 26a608e08's 8-step split )
 - 13:35 L: returned deliver/Q23/lem-weil-isomorphism-scalar-augmentation-cone (reviewer RETURN: L: independent stage-2 immutable head 8d92b975fba3: H13: the delivery replaces the landed lean record of theorem node le)
 - 13:35 L: returned deliver/NC/lem-sp-normalized-error-tower-vanishing (reviewer RETURN: L: independent stage-2 immutable head 9b8687c4160d: H2: the delivery added theorem stmt_deps det-sp-coefficient-towers-a)
+- 13:35 L: returned deliver/NK/lem-coef-enriched-sequence-projection-formula (reviewer RETURN: L: independent stage-2 immutable head a8dd21e96468: H13: the delivered §1(B) record of lem-coef-sequence-pushforward-lim)
