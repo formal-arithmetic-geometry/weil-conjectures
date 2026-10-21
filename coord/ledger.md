@@ -21210,3 +21210,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:42 L: merged deliver/Q13/lem-weil-pbc-derived-tensor-shift-descent (reviewer FIX; first push; new nodes: 0)
 - 08:42 L: merged deliver/Q17/lem-pur-etale-sum-right-adjoint-coherence (reviewer FIX; first push; new nodes: 0)
 - 08:42 L: merged deliver/O4/lem-pod-rational-purity-pairing (reviewer FIX; first push; new nodes: 0); claim not held by O4: not your claim
+- 08:42 L: merged deliver/Q32/lem-sf-automorphism-completion-unit-comparison (reviewer FIX; first push; new nodes: 0)

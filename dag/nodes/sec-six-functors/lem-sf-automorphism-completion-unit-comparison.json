@@ -15,48 +15,179 @@
   "def-weil-pbc-completed-pullback",
   "lem-weil-pbc-ringed-topoi-module-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=A_X$ and $P_n=A/I^n$. For each $n$, the isomorphism-of-sites lemma gives the constant-ring isomorphism $c_n:e^{-1}(P_n)_X\\to(P_n)_X$ and its naturality for quotient maps. Its inverse-image limit comparison therefore gives\n$$c_e:e^{-1}R\\xrightarrow{\\sim}\\varprojlim_n e^{-1}(P_n)_X\\xrightarrow{\\varprojlim c_n}R.$$\nThis is precisely the map specified by the components in the completed-pullback definition, since both have components $c_n e^{-1}(\\pi_n)$. For every $b\\in A$, the definition of the constant structure map sends the constant residue of $b$ to itself. Projecting to every $P_n$ thus shows that $c_e$ takes the pulled-back global scalar $b$ to the scalar $b$ in $R$. In particular it fixes every $a_j$ and every $a_j^m$. The construction for $e^{-1}$ is inverse to this construction: on each finite quotient both composites send every constant residue to itself, and equality on all projections is equality of maps into the limit.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Functoriality of the pro-etale site, Tag 09A5; explicit completed coefficient comparison in the blueprint tensor-Frobenius sentence"
+   }
+  },
+  {
+   "text": "Let $T$ denote module pullback along $e$ with $c_e$. Use the site-relabeling model of the isomorphism lemma: its underlying abelian sheaf at $(U\\xrightarrow{u}X)$ is $M(U\\xrightarrow{eu}X)$. The scalar-extension-along-a-ring-isomorphism lemma identifies $e^{-1}M\\otimes_{e^{-1}R}R$ with that abelian sheaf, endowed with the action $s\\cdot m=c_e^{-1}(s)m$; explicitly $m\\otimes s\\mapsto c_e^{-1}(s)m$, with inverse $m\\mapsto m\\otimes1$. Relabeling by $e^{-1}$, with the inverse coefficient comparison of Step 1, gives an inverse module functor $S$. The two composite identifications are the site-equivalence identifications on underlying abelian sheaves, and are linear because the coefficient comparisons compose to the identity. They are therefore natural module isomorphisms $ST\\cong1$ and $TS\\cong1$. Both functors are additive and exact: the underlying inverse-image equivalences are exact, and changing the action by an invertible ring map changes no kernel or cokernel. The module-adjunction lemma identifies the right adjoint of this actual tensor-formula $T$ with the actual module direct image $e_*$. As $S$ is also a right adjoint (the displayed inverse equivalence supplies its Hom bijection), these adjunctions identify $e_*\\cong S$.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ (lemma-adjointness-tensor-restrict) and 03D7 (lemma-adjoint-pullback-pushforward-modules), invertible ring-map case"
+   }
+  },
+  {
+   "text": "Apply the exact-functor derived-category lemma to $T,S$. Their termwise functors preserve quasi-isomorphisms and induce inverse functors on the unbounded derived category; the units, counits and triangle identities descend because they already hold on complexes. Since both ordinary functors are exact, these are the ordinary derived functors $H=Le^*$ and $G=Re_*$. In particular the descended adjunction is the one induced from the specified module adjunction, not an independently chosen equivalence. No boundedness or resolution-compatibility hypothesis is needed for applying an exact functor termwise.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; applied to the exact module equivalence of Step 2"
+   }
+  },
+  {
+   "text": "Fix the generating tuple and any cochain representative $C$ of $M$. Use $Q_m$, $q_{m+1,m}$ and $M_m(C)=C\\otimes_RQ_m$ exactly as in the intrinsic-completion definition. In the exterior-basis description, $Q_m^{-k}$ is the finite free module with basis the $k$-element subsets of $\\{1,\\ldots,r\\}$; its differential entries are $0$ or $\\pm a_j^m$. Its transition on the subset $J$ is multiplication by $\\prod_{j\\in J}a_j$, and the degree-zero inclusion has coefficient $1$. Applying $T$ and identifying $T(R)$ with $R$ by $c_e$ fixes all these matrices by Step 1. Hence it identifies $TQ_m$ with $Q_m$, including transitions and inclusions. Since tensoring $C$ with this finite free complex is degreewise a finite direct sum of copies of terms of $C$, the same identifications and additivity give chain isomorphisms\n$$\\alpha_m:T(M_m(C))\\xrightarrow{\\sim}M_m(TC).$$\nThey commute with differentials $d_C\\otimes1+(-1)^i1\\otimes d_{Q_m}$ and satisfy $\\alpha_mT(t_m)=t'_m\\alpha_{m+1}$: every summand has the identical sign and scalar on both sides. This computation uses ordinary tensor complexes on the actual representatives.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "second sentence, completed pullback in tensor Frobenius; explicit Koszul factors, transitions and total-complex differential"
+   }
+  },
+  {
+   "text": "Write $B=B(C)$, $B'=B(TC)$ and $f=1-t$, $f'=1-t'$ as in the completion definition. The equivalence $T$ preserves products: for each module $N$, the inverse equivalence gives $\\operatorname{Hom}(N,T\\prod M_m)\\cong\\operatorname{Hom}(SN,\\prod M_m)\\cong\\prod\\operatorname{Hom}(N,TM_m)$, with the indicated projections. Thus the maps whose components are $\\alpha_mT(\\operatorname{pr}_m)$ give a chain isomorphism $\\beta:T B\\to B'$. After projection to the $m$-th term, the identity $\\beta T(f)=f'\\beta$ is exactly the transition identity of Step 4. On the two summands of the specified mapping fiber put\n$$\\gamma_C^i=\\beta^i\\oplus\\beta^{i-1}:T(F(C)^i)\\longrightarrow F(TC)^i.$$\nUsing $d_F(x,y)=(d_Bx,fx-d_By)$, the second component of the chain-map equation is $\\beta fx-\\beta d_By=f'\\beta x-d_{B'}\\beta y$; the first is the chain-map equation for $\\beta$. These prove that $\\gamma_C$ is a chain isomorphism; its inverse uses the inverse of $\\beta$ on both summands. These are maps between the specified product and mapping-fiber complexes, rather than unspecified maps obtained from distinguished triangles.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "second sentence, completed pullback in tensor Frobenius; product comparison and mapping-fiber comparison in the parent definition"
+   }
+  },
+  {
+   "text": "Let $u_C:C\\to B(C)$ have components $1\\otimes\\iota_m$. Step 4 preserves $\\iota_m$, so projection to each factor gives $\\beta T(u_C)=u_{TC}$. Consequently\n$$\\gamma_C\\,T\\bigl(c\\mapsto(u_C(c),0)\\bigr)=\\bigl(x\\mapsto(u_{TC}(x),0)\\bigr).$$\nThis is the desired unit square as an equality of chain maps. Every $\\alpha_m$, $\\beta$ and $\\gamma_C$ commutes with a chain map $C\\to C'$: on each finite summand the operation is that chain map, and on each product it is its projected component. The intrinsic-completion definition interprets $F$ and its unit on the derived category, and Step 3 interprets $T$ there. Naturality therefore descends through quasi-isomorphisms, giving an isomorphism $c_M:H(LM)\\to L(HM)$ with $c_M\\circ H(\\eta_M)=\\eta_{HM}$. This works for any chosen representative of $M$; it does not choose a strict representative for an arbitrary derived morphism.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "second sentence, completed pullback in tensor Frobenius; intrinsic augmentation and base Step 8 unit normalization"
+   }
+  },
+  {
+   "text": "If $M$ is in $\\mathcal C$, then $H(\\eta_M)$ and $c_M$ are invertible, so the unit square makes $\\eta_{HM}$ invertible. Thus $H$ preserves $\\mathcal C$. Repeat Steps 1--6 for the inverse scheme automorphism: it fixes the same scalars and has the same small-site equivalence and inverse completed-ring comparison. Its derived module transport $S$ therefore preserves $\\mathcal C$ as well. Step 3 identifies $S$ with $G$; being in $\\mathcal C$ is invariant under isomorphism: by the strict-limit comparison [lem-weil-pbc-completed-fiber-strict-limit-comparison], after the explicit module equivalence $F$ to the transported site with ring $\\mathcal O$ and the images $b$ of the generators, $F(\\eta_K)$ followed by an isomorphism $e_K$ is the reflector unit of $FK$ [lem-weil-pbc-ringed-koszul-completion-reflector], so $\\eta_K$ is invertible exactly when that natural reflector unit is, and the latter property is invariant under isomorphism. Hence $G$ preserves $\\mathcal C$. As this is a full subcategory, the adjunction Hom bijections, unit and counit of Step 3 restrict to it. The latter maps remain invertible and retain their triangle identities. They give the asserted restricted adjoint equivalence.",
+   "uses": [
+    "def-weil-pbc-intrinsic-completion",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "second sentence, completed pullback in tensor Frobenius; base Step 8 completeness predicates and adjoint equivalence"
+   }
+  },
+  {
+   "text": "It remains to show that the unit square determines the comparison. Transport through the strict-limit comparison [lem-weil-pbc-completed-fiber-strict-limit-comparison]: for every $K$ there is $e_K:F(LK)\\xrightarrow{\\sim}\\mathrm{compl}(FK)$ with $F(\\eta_K);e_K$ the reflector unit of $FK$ on the transported site, $F$ an equivalence. Hence, by the reflector lemma, $K$ is in $\\mathcal C$ exactly when $FK$ is locally derived complete, $LK$ is in $\\mathcal C$, and for $K'$ in $\\mathcal C$ composition with $\\eta_K$ is a bijection $\\operatorname{Hom}(LK,K')\\to\\operatorname{Hom}(K,K')$ (conjugate the reflector bijection by $e_K$ and full faithfulness of $F$). Put $N=L(HM)$, which is complete. By Step 7, $GN$ is complete. For any $v,w:H(LM)\\to N$ such that $vH(\\eta_M)=wH(\\eta_M)$, take adjuncts under $H\\dashv G$. Naturality of the adjunction bijection gives $\\widetilde v\\eta_M=\\widetilde w\\eta_M$, with $\\widetilde v,\\widetilde w:LM\\to GN$. By the transported reflector bijection above, composition with $\\eta_M$ is a bijection $\\operatorname{Hom}(LM,GN)\\to\\operatorname{Hom}(M,GN)$. Its injectivity gives $\\widetilde v=\\widetilde w$, and the adjunction bijection gives $v=w$. Applied to any proposed comparison and the isomorphism constructed in Step 6, this proves uniqueness, even among all maps satisfying the square. The construction was performed for an arbitrary finite generating tuple, including the empty tuple when it generates $I$, and on an arbitrary complex, so the assertion holds for every such tuple and representative.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); unit Hom bijection applied after the module adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-pbc-intrinsic-completion",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-completed-fiber-strict-limit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+  "place": "second sentence, completed pullback in tensor Frobenius; explicit representative argument realizing parent base Step 8; ringed Koszul reflector and module adjunction from Stacks as cited in the steps"
+ },
  "mathlib_searches": [
   {
-   "tool": "leanfinder",
-   "query": "For a scheme automorphism the ordinary derived pullback preserves intrinsic adic completeness and commutes with Koszul completion by a unique isomorphism compatible with the completion unit",
-   "results": "8 hits; AlgebraicGeometry.pullbackSpecIso_inv_fst'_assoc, AlgebraicGeometry.pullbackSpecIso_inv_fst_assoc, AlgebraicGeometry.pullbackSpecIso_inv_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_base_assoc, AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd, AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.pullbackSpecIso_hom_snd_assoc, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc",
+   "tool": "grep",
+   "query": "Koszul|koszul|completion.*[Uu]nit|[Uu]nit.*completion",
+   "results": "0 hits; ",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary scheme pullback and reflective-unit results do not identify the actual completed-ring intrinsic unit or prove completeness preservation for this automorphism"
+   "verdict": "no match: the hits do not identify transport for the actual completed sheaf with the specified Koszul unit; ordinary adic modules and abstract reflector Hom bijections do not state the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence preserving a reflective subcategory commutes with its reflector uniquely compatibly with the reflection unit",
+   "results": "8 hits; CategoryTheory.unit_obj_eq_map_unit, CategoryTheory.Reflective.instIsIsoAppUnitReflectorAdjunctionA, CategoryTheory.reflectorAdjunction, CategoryTheory.Limits.reflectsLimit_subsingleton, CategoryTheory.instIsIsoAppUnitReflectorAdjunctionObjEssImage, CategoryTheory.unitCompPartialBijective, CategoryTheory.unitCompPartialBijective.congr_simp, CategoryTheory.Equivalence.unit",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not identify transport for the actual completed sheaf with the specified Koszul unit; ordinary adic modules and abstract reflector Hom bijections do not state the item"
   },
   {
    "tool": "loogle",
    "query": "\"Reflective\", \"Equivalence\"",
    "results": "0 hits; ",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary scheme pullback and reflective-unit results do not identify the actual completed-ring intrinsic unit or prove completeness preservation for this automorphism"
-  },
-  {
-   "tool": "grep",
-   "query": "pullback.*[Cc]omplet|[Cc]omplet.*pullback|reflect.*[Cc]omplet",
-   "results": "10 hits; Mathlib/Topology/Algebra/UniformField.lean, Mathlib/Geometry/Manifold/VectorField/LieBracket.lean, Mathlib/Order/CompleteLattice/Basic.lean, Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean, Mathlib/Order/CompleteBooleanAlgebra.lean",
-   "date": "2026-10-21",
-   "verdict": "no match: ordinary scheme pullback and reflective-unit results do not identify the actual completed-ring intrinsic unit or prove completeness preservation for this automorphism"
-  },
-  {
-   "tool": "leansearch",
-   "query": "An automorphism of a proetale ringed topos preserves derived complete objects and its pullback commutes with the completion reflector with a unique unit square",
-   "results": "8 hits; CategoryTheory.instIsIsoAppUnitReflectorAdjunctionObjEssImage, CategoryTheory.Reflective.instIsIsoAppUnitReflectorAdjunctionA, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, UniformSpace.Completion.mapRingHom_coe, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackObjUnitToUnit, PreTilt.untilt.congr_simp",
-   "date": "2026-10-21",
-   "verdict": "no match: ordinary scheme pullback and reflective-unit results do not identify the actual completed-ring intrinsic unit or prove completeness preservation for this automorphism"
+   "verdict": "no match: the hits do not identify transport for the actual completed sheaf with the specified Koszul unit; ordinary adic modules and abstract reflector Hom bijections do not state the item"
   },
   {
    "tool": "leanfinder",
-   "query": "Transport the universal Hom bijection for derived completion through an adjoint equivalence to construct a unique unit compatible isomorphism between pullback completion and completion pullback",
-   "results": "8 hits; PresheafOfModules.pullbackComp, CategoryTheory.PullbackShift.adjunction, PresheafOfModules.pullback_comp_id, PresheafOfModules.pullback_id_comp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackIso, CategoryTheory.ChosenPullbacksAlong.unit_pullbackComp_hom, CategoryTheory.MorphismProperty.Over.mapPullbackAdj",
+   "query": "A scheme automorphism preserves intrinsic derived adic completeness of completed coefficient sheaves and commutes with Koszul completion with its explicit unit",
+   "results": "8 hits; AdicCompletion.ofAlgEquiv_apply, AdicCompletion.ofAlgEquiv, AdicCompletion.of_ofAlgEquiv_symm, AdicCompletion.mk_ofAlgEquiv_symm, AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ, IsAdicComplete.ofAlgEquiv_comp_liftRingHom, AdicCompletion.mk_smul_top_ofAlgEquiv_symm, AdicCompletion.congr_apply",
    "date": "2026-10-21",
-   "verdict": "no match: ordinary scheme pullback and reflective-unit results do not identify the actual completed-ring intrinsic unit or prove completeness preservation for this automorphism"
+   "verdict": "no match: the hits do not identify transport for the actual completed sheaf with the specified Koszul unit; ordinary adic modules and abstract reflector Hom bijections do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed topos automorphism preserving chosen global scalars construct a natural cochain isomorphism with the mapping fiber of one minus shift on products of Koszul tensor towers and preserve the augmentation unit",
+   "results": "8 hits; Rep.standardComplex.compForgetAugmentedIso, CochainComplex.augmentTruncate, CategoryTheory.ProjectiveResolution.cochainComplexXIso, groupCohomology.inhomogeneousCochainsIso, CochainComplex.truncateAugment, CochainComplex.shiftShortComplexFunctorIso_hom_app_τ₁, HomologicalComplex.dgoEquivHomologicalComplex_unitIso, HomologicalComplex.tensorUnitIso",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not identify transport for the actual completed sheaf with the specified Koszul unit; ordinary adic modules and abstract reflector Hom bijections do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "def ofAlgEquiv|theorem ofAlgEquiv_apply|def congr|def unitCompPartialBijective",
+   "results": "25 hits; Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Module.lean, Mathlib/Algebra/Colimit/Ring.lean, Mathlib/Algebra/Star/StarAlgHom.lean, Mathlib/Algebra/Star/StarAlgHom.lean, Mathlib/Logic/Embedding/Basic.lean, Mathlib/Algebra/Module/CharacterModule.lean, Mathlib/CategoryTheory/ObjectProperty/Equivalence.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not identify transport for the actual completed sheaf with the specified Koszul unit; ordinary adic modules and abstract reflector Hom bijections do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "ofAlgEquiv|def congr",
+   "results": "11 hits; Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/Algebra.lean, Mathlib/RingTheory/AdicCompletion/RingHom.lean, Mathlib/RingTheory/AdicCompletion/RingHom.lean, Mathlib/RingTheory/AdicCompletion/RingHom.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not identify transport for the actual completed sheaf with the specified Koszul unit; ordinary adic modules and abstract reflector Hom bijections do not state the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-wf-tensor-product",
@@ -73,5 +204,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-automorphism-completion-unit-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Gave the completed coefficient comparison and its scalar normalization, the actual exact module adjoint equivalence, the finite-matrix Koszul tower comparison, the product/mapping-fiber chain isomorphism and its explicit unit square, preservation and restriction, and uniqueness by the reflector Hom bijection. No new nodes: all non-elementary tools already exist. No Lean written or compiled.",
+  "blueprint": "def-wf-tensor-product, second sentence: completed pullback in the tensor Frobenius; realizes the parent base Step 8 completeness, restricted adjoint equivalence and wfPullbackCompletion_exists unit normalization, with the representative formula from its statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic scheme-isomorphism site equivalence and constant quotient comparisons; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-sheaf-scalar-extension-ring-iso",
+    "why": "Generic tensor-normalized change of module action along a ring isomorphism; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic adjunction for the actual tensor-formula module pullback and direct image; this unit has no replacement."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic termwise descent of exact functors to unbounded derived categories; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic ringed Koszul reflector and Hom bijection for its unit; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-completed-fiber-strict-limit-comparison",
+    "why": "Generic identification of the explicit intrinsic Koszul fiber unit with the ringed reflector's derived-limit unit after the explicit module equivalence; needed to apply the reflector's completeness criterion and Hom bijection to the intrinsic unit; this unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-completed-fiber-strict-limit-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-22fec7d42",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-22fec7d42 (reviewer sub-agent of L); spot-checked: Live node still unsplit; first review, not superseded, not dropped, no SGA. This is a first split of a statement-only node created by Q20's re-split of def-wf-tensor-product; the item has no repair note of its own. There are no new nodes, and the statement is unchanged and correct. I checked it on the identity automorphism, the empty tuple (I=0, A finite: the unit is the diagonal into the 1−t fibre, invertible) and the zero object; no boundedness or constructibility is needed. Steps 1–6 check out. Step 1 matches c_e with the components c_n∘e⁻¹π_n of def-weil-pbc-completed-pullback, and scalars are fixed on every quotient (clauses 2 and 3 of the isomorphism lemma). Step 2 gets the module equivalence from the relabelling model, θ of the scalar-extension lemma and the tensor-formula adjunction, so e_*≅S. Step 3 descends the exact functors termwise (Mathlib leaf), agreeing with Le^* and Re_*. Step 4 is the finite Koszul matrix computation, with signs and transitions verified. Step 5's β/γ chain equation was checked on both summands. Step 6 gives the exact chain-level unit square, natural in C. Fault (C4/E6): Steps 7–8 applied the reflector lemma, whose unit is the K-injective Rlim unit with local derived completeness, to the intrinsic product mapping-fibre unit without a bridge. I fixed this by citing lem-weil-pbc-completed-fiber-strict-limit-comparison (e: F(QΓC)≅D.completion(FQC) with F(Qγ_C);e = D.unit; general adic datum, r=0 allowed, no cycle). Step 7 now gets isomorphism-invariance of 𝒞 from it. Step 8 now derives K∈𝒞 ⇔ FK locally complete, LK∈𝒞, and the Hom bijection for η with targets in 𝒞 before the unchanged adjunct uniqueness argument. proof_deps and tool_uses are updated. Accepted tool_uses: isomorphism-inverse-image, scalar-extension-ring-iso, ringed-topoi-module-adjunction, exact-functor-derived (Mathlib), Koszul reflector, and the bridge. Advisory: the proof is 7718 characters, so a later length-based re-split note is possible. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-automorphism-completion-unit-comparison.json.; 1 file(s) fixed by the reviewer"
  }
 }
