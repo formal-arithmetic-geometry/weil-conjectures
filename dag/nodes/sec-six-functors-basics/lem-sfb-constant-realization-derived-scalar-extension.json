@@ -41,36 +41,18 @@
    "uses": [
     "lem-pur-sheaf-ring-derived-coefficient-adjunction",
     "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-derived-module-scalar-adjunction"
+    "lem-weil-pbc-derived-module-scalar-adjunction",
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false
   },
   {
-   "text": "Construct the geometric morphism $p:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sets}$ without assuming a terminal object of $\\mathcal C$. Its inverse image sends a set $E$ to its constant sheaf; its direct image sends $F$ to the set of compatible families $(s_U\\in F(U))_U$. A map from the constant presheaf $E$ to $F$ is exactly a function from $E$ to this set of families. The sheafification universal property [def-weil-pbc-sheafification] therefore gives $p^{-1}\\dashv p_*$. The constant-presheaf functor preserves finite limits objectwise, and sheafification preserves them by [lem-weil-pbc-sheafification-sets-exact]; thus $p^{-1}$ preserves finite limits. Applied to ring and module operations this inverse image is precisely the constant ring and module sheaf construction [def-sf-site-constant-module-functor]. In particular the ringed morphism $p_R:(\\operatorname{Sh}(\\mathcal C),\\underline R)\\to(\\operatorname{Sets},R)$ has identity coefficient map, and its module pullback is $c_R$ on modules: the extra tensor factor is removed by $m\\otimes r\\mapsto rm$, with inverse $m\\mapsto m\\otimes1$ [def-pur-sheaf-tensor-product].",
+   "text": "Constant realization preserves flat modules by the local equational criterion, and flat-term K-flat complexes by its flat-preserving colimit construction. This works directly for an arbitrary site, without constructing a geometric morphism to a point site.",
    "uses": [
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-sheafification-sets-exact",
-    "def-sf-site-constant-module-functor",
-    "def-pur-sheaf-tensor-product"
+    "lem-sfb-constant-module-flat",
+    "lem-sfb-constant-module-kflat"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J, example-constant-sheaf; Tag 00WJ, lemma-sheafification-exact; ringed module pullback as in sites-cohomology Tag 0G7E"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-ringed-pullback-preserves-kflat] to $p_R$. For every K-flat complex $K$ of $R$-modules with flat terms, $c_R(K)$ is K-flat over $\\underline R$ with flat terms. The point is presented by the one-object identity-covering site, whose module sheaves are ordinary modules, so the lemma applies to precisely the unbounded complexes in the statement. For arbitrary $M$, choose such a representative $K\\to M$ using [lem-pc-kflat-resolution] on that point site. Exact termwise realization [def-sfb-site-derived-constant-module-functor] identifies $c_R(M)$ with the class of $c_R(K)$. This proves the K-flat preservation assertion of (1), without requiring flatness of $q$.",
-   "uses": [
-    "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "lem-pc-kflat-resolution",
-    "def-sfb-site-derived-constant-module-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E, lemma-pullback-K-flat; Tag 06YS, lemma-K-flat-resolution"
-   }
+   "elementary": false
   },
   {
    "text": "For an $R$-module $A$, apply [lem-pc-sites-module-sheafification-tensor] to the constant ring presheaf $R$ and the constant module presheaves $A,S$. Their presheaf tensor has value $A\\otimes_RS$ and identity restrictions. Hence obtain $\\theta_A:c_R(A)\\otimes_{\\underline R}\\underline S\\cong c_S(A\\otimes_RS)$. The map is $\\underline S$-linear: multiplication by a local constant $s\\in S$ acts on the second tensor factor on each side, and these local equations uniquely extend by module sheafification [lem-pc-sites-module-sheafification-interface]. Thus this is an isomorphism in the category of $\\underline S$-modules, not merely after restriction. On constant generators it sends $a\\otimes s$ to $a\\otimes s$, and is natural in $A$. Its naturality for $d_K^p$ makes $(\\theta_{K^p})_p$ a chain isomorphism $c_R(K)\\otimes_{\\underline R}\\underline S\\cong c_S(K\\otimes_RS)$; there is no totalization or interchange of infinite products here.",
@@ -86,69 +68,66 @@
    }
   },
   {
-   "text": "By [lem-pur-derived-change-of-rings] the left side of the chain comparison in Step 3 computes $c_R(M)\\otimes^{\\mathbf L}_{\\underline R}\\underline S$, because Step 2 gives a K-flat representative. The same lemma on the point site says $K\\otimes_RS$ computes $M\\otimes_R^{\\mathbf L}S$ in $D(S)$; exactness of $c_S$ [def-sfb-site-derived-constant-module-functor] then identifies the right side with $c_S(M\\otimes_R^{\\mathbf L}S)$. To descend the comparison, use [lem-weil-pbc-site-derived-tensor-descent] on the point site: the localization of its full homotopy subcategory of flat-term K-flat complexes is equivalent to $D(R)$. Both complex constructions above invert its quasi-isomorphisms by change-of-rings invariance and exact constant realization. Step 3 is natural on this subcategory, including homotopies since its comparison is additive. Full faithfulness of precomposition with the localization [lem-weil-pbc-localization-universal-property] gives a unique natural isomorphism $\\kappa$ with these components. This also proves independence of the representative and the representative formula in (1).",
+   "text": "The normalized constant-restriction isomorphism is obtained by the module sheafification universal property; its underlying local isomorphism is checked on constant generators. The ordinary tensor comparison uses the actual sheaf tensor product and sheafification. These existing constructions remain unchanged.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "def-sfb-site-derived-constant-module-functor",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT, lemma-derived-tor-quasi-isomorphism-other-side; Tag 06YY, lemma-derived-base-change; Tag 0D6D, lemma-derived-pullback-composition, K-flat computation"
-   }
-  },
-  {
-   "text": "Restriction of scalars and constant realization have a canonical comparison: sheafifying the constant presheaf of an $S$-module with its restricted $R$-action yields the same abelian sheaf as first sheafifying it as an $S$-module and then restricting along $\\underline q$. The two actions agree on constant presheaf sections and their extensions are unique by [lem-pc-sites-module-sheafification-interface]. This identifies the functors termwise and, by exact realization [def-sfb-site-derived-constant-module-functor] and restriction [lem-pur-sheaf-ring-derived-coefficient-adjunction], also on derived categories. The latter lemma says the scalar-extension unit at a flat-term K-flat representative is the class of $x\\mapsto x\\otimes1$, both for $q$ on the point site and for $\\underline q$ on $\\mathcal C$. The comparison of Step 3 sends $x\\otimes1$ to that same element, so the unit square commutes degree by degree before sheafification. Its sheafification and localization commute as well. Naturality and the localization uniqueness of Step 4 extend this equality to every $M$, proving (2).",
-   "uses": [
-    "lem-pc-sites-module-sheafification-interface",
-    "def-sfb-site-derived-constant-module-functor",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; sites-cohomology Tag 07A6, lemma-adjoint"
-   }
-  },
-  {
-   "text": "Let $b:S\\to T$. By [lem-pur-kflat-change-of-rings], $K\\otimes_RS$ is K-flat with flat terms over $S$; this applies equally to $c_R(K)\\otimes_{\\underline R}\\underline S$ on $\\mathcal C$. Consequently all comparisons for the three ring maps can be computed using these representatives and the same $K$. Use the normalized transitivity maps of [lem-sfb-successive-derived-quotient-normalization], both on the point site and on $\\mathcal C$. Starting in $(c_R(K)\\otimes_{\\underline R}\\underline S)\\otimes_{\\underline S}\\underline T$, the route through $\\kappa_{R,S}$ and $\\kappa_{S,T}$ followed by the constant realization of transitivity sends each constant local generator $(x\\otimes s)\\otimes t$ to $x\\otimes b(s)t$ in $c_T(K\\otimes_RT)$. The other route, sheaf transitivity followed by $\\kappa_{R,T}$, has exactly the same value. The balanced tensor universal property and uniqueness of module sheafification [lem-pc-sites-module-sheafification-interface] make the chain maps equal. Their localizations are therefore equal, and the localization uniqueness in Step 4 proves the equality naturally on $D(R)$. This is (3). All constructions used unbounded K-flat complexes and small sites only, so no finiteness, boundedness or Noetherian assumption has entered.",
-   "uses": [
-    "lem-pur-kflat-change-of-rings",
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-sheafification-sets-exact",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6D, lemma-derived-pullback-composition; Tag 0G7E, lemma-pullback-K-flat; explicit balanced tensor computation"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For ordinary scalar extension use extension preservation of K-flat quasi-isomorphisms. For sheaf scalar extension transfer change-of-rings invariance from the actual tensor functor along the unique ordinary left-adjoint comparison. The exact-right-adjoint representative theorem identifies both canonical representative maps as isomorphisms on K-flat complexes, with independent localization sizes.",
+   "uses": [
+    "lem-sfb-exact-right-adjoint-kflat-representative",
+    "lem-pc-extension-kflat-quasi-iso",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the representative square. Ordinary mate/unit compatibility, exact-square factorization and naturality of exact derived functor comparisons prove its equality. Every derived module is represented by a flat-term K-flat resolution, so this square makes its comparison invertible. Naturality transfers this to every object. The mate definition proves the unit identity directly.",
+   "uses": [
+    "lem-pc-source-module-kflat-resolution",
+    "lem-pod-derived-exact-square-composition",
+    "def-sfb-site-derived-constant-module-functor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Prove ordinary restriction-comparison coherence on constant generators by sheafification extensionality. Exact-square composition transports it to the derived categories. Transpose the tower identity under the composite derived adjunction. Naturality, restriction coherence and the unit equation for left-adjoint uniqueness identify both sides with the same composite unit. No successive tensor-normalization theorem or additional K-flat representative is needed.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pod-derived-exact-square-composition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-sheafification-sets-exact",
-  "def-sf-site-constant-module-functor",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
-  "lem-pc-kflat-resolution",
-  "def-sfb-site-derived-constant-module-functor",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-derived-module-scalar-adjunction",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-constant-module-flat",
+  "lem-sfb-constant-module-kflat",
   "lem-pc-sites-module-sheafification-tensor",
   "lem-pc-sites-module-sheafification-interface",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-pur-kflat-change-of-rings",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-pbc-derived-module-scalar-adjunction"
+  "def-sf-site-constant-module-functor",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-sheafification-sets-exact",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-exact-right-adjoint-kflat-representative",
+  "lem-pc-extension-kflat-quasi-iso",
+  "lem-pc-kflat-resolution",
+  "lem-pc-source-module-kflat-resolution",
+  "lem-pod-derived-exact-square-composition",
+  "def-sfb-site-derived-constant-module-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YY, 07A6, 0G7E and 0D6D; Z9 proved the ordinary and derived adjunction interfaces, mate naturality and ordinary restriction composition. Remaining constant-tensor and K-flat comparison steps retain the existing plan."
+  "place": "S3, 2026-10-21: Tags 0G7E, 06YY and 0D6D via flat-preserving colimit functors, normalized representative transposes and formal mate coherence. Existing ordinary sheafification/tensor and independently sized derived adjunction constructions preserved."
  },
  "mathlib_searches": [
   {
@@ -299,15 +278,12 @@
  },
  "tool_uses": [
   "lem-weil-pbc-sheafification-sets-exact",
-  "lem-weil-pbc-ringed-pullback-preserves-kflat",
   "lem-pc-kflat-resolution",
   "lem-pc-sites-module-sheafification-tensor",
   "lem-pc-sites-module-sheafification-interface",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-localization-universal-property",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-pur-kflat-change-of-rings"
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -381,23 +357,13 @@
   "note": "Item Lean matches node clause by clause: κ = adjunction mate is an iso in D(C,S̲), natural; (1) flat-term K-flat P (IsKFlatForTotalTensor, equivalent to Stacks K-flat on ModuleCat) gives c_R(P) IsKFlatIndependentCoefficients plus IsFlatOnSite termwise, representative isos and the square identifying κ with Q(complexComparison), with the termwise formula in moduleComparison_tensor; (2) unit compatibility via derivedRestrictionIso; (3) transitivity theorem for arbitrary T,b. No extra hypotheses; universes independent (coefficient max u v is the recorded convention). §1(B) repair of def-sfb-site-derived-constant-module-functor justified (RingCat vs forgotten CommRingCat constant sheaf), lean-only with note, transport theorem to the old functor. Derived/ordinary extension as left adjoint of restriction is canonical: the recorded adjunction interface has no functor declaration and quantifies over presentations. No hollow defs, all theorems sorry, docstrings with source and blueprint, statements verbatim, stmt_deps gained only landed nodes. nt_compile --json on both files: rc 0, no errors or warnings. Minor non-blocking: Nonempty transport theorem, possibly unused SiteCoveringAxioms import, possibly redundant PreservesSheafification theorem."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "J4",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261020T230754-L-611141",
+  "landing": "20261021T004843-L-1795499",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.ConstantScalarRealization.constantRealizationDerivedScalarExtension",
-   "CategoryTheory.ConstantScalarRealization.constantRealizationDerivedScalarExtension_transitivity",
-   "CategoryTheory.ConstantScalarRealization.moduleComparison_tensor",
-   "CategoryTheory.ConstantScalarRealization.restrictionIso_existsUnique"
-  ],
-  "sorry_after": [
-   "CategoryTheory.ConstantScalarRealization.constantRealizationDerivedScalarExtension",
-   "CategoryTheory.ConstantScalarRealization.constantRealizationDerivedScalarExtension_transitivity"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,136 @@
+{
+ "id": "lem-sfb-exact-right-adjoint-kflat-representative",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-integral-models-stacks",
+   "place": "Constant realization and successive derived reduction, via lem-sfb-constant-realization-derived-scalar-extension",
+   "via": [
+    "lem-sfb-wcontractible-constant-reductions-ml",
+    "lem-sfb-adic-residue-lisse-perfect-lift",
+    "lem-sfb-adic-stratified-perfect",
+    "lem-sfb-integral-cohomological-adic-criterion",
+    "lem-sfb-constant-realization-derived-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "K-flat representative transpose for exact-right derived adjunctions",
+ "statement": "Let C be a Grothendieck abelian closed braided monoidal category with additive tensor, functorial flat resolutions and exact integer-indexed colimits [def-sp-grothendieck-abelian, def-sfb-monoidal-category, lem-pc-source-module-kflat-resolution]. Let D be abelian, and choose derived localizations of C and D independently [def-weil-abstract-derived-category]. Let E:C→D and U:D→C be additive with E⊣U, U exact and E preserving quasi-isomorphisms between K-flat complexes [def-sfb-preserves-kflat-quasi-iso]. For any chosen adjunction L⊣D(U) and K-flat complex X, the transpose under this chosen adjunction of the localized ordinary unit Q(X)→Q(U(E(X)))≅D(U)(Q(E(X))) is an isomorphism L(Q(X))→Q(E(X)).",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY; cochain calculation using Mathlib derived adjunctions and absolute K-flat left derivability. Unlike the existing cochain-counit interface, localization and category universes remain independent."
+ },
+ "stmt_deps": [
+  "def-sp-grothendieck-abelian",
+  "def-sfb-monoidal-category",
+  "lem-pc-source-module-kflat-resolution",
+  "def-weil-abstract-derived-category",
+  "def-sfb-preserves-kflat-quasi-iso"
+ ],
+ "proof": [
+  {
+   "text": "The K-flat derivability structure gives the total left derived functor of E and makes its counit invertible on K-flat complexes. This derivation is absolute. Exactness of U gives an invertible factorization of its homotopy functor, hence a right derived functor, also after postcomposition.",
+   "uses": [
+    "lem-sfb-kflat-derivability"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib Adjunction.derived to the termwise homotopy adjunction. Its unit equation, together with the quotient-comparison isomorphisms, expresses the transpose as the left-derived counit conjugated by quotient isomorphisms and the unique unit-preserving comparison with the chosen left adjoint. All four factors are invertible on a K-flat X.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-kflat-derivability",
+  "lem-weil-pbc-termwise-adjunction-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY; cochain calculation using Mathlib derived adjunctions and absolute K-flat left derivability. Unlike the existing cochain-counit interface, localization and category universes remain independent."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a derived adjunction with exact right adjoint, the transpose of the localized ordinary unit on a K-flat cochain complex is an isomorphism",
+   "results": "Adjunction.derived_unit, derivedη_fac_app, derivedε_fac_app and LocalizerMorphism.Derives.isIso among eight hits.",
+   "date": "2026-10-21",
+   "verdict": "Useful derived-adjunction ingredients, but no normalized cochain transpose result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.IsIso",
+   "results": "Twelve results on adjunction equivalences, full/faithful functors and invertible units.",
+   "date": "2026-10-21",
+   "verdict": "No derived K-flat representative result."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|IsFlatOnSite|cochainTranspose|constant.*[Ff]lat",
+   "results": "Only unrelated constant-flat localization/rank hits in Mathlib; no K-flat or module-sheaf theorem.",
+   "date": "2026-10-21",
+   "verdict": "No result proves the required statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an adjunction with exact right adjoint, the canonical derived unit transpose on a K-flat cochain complex is an isomorphism",
+   "results": "Adjunction.derived_unit, derivedη, derivedη.congr_simp, counitAsIsoOfIso, unit_isIso_of_L_fully_faithful, unitAsIsoOfIso and unit isomorphism instances; eight hits.",
+   "date": "2026-10-21",
+   "verdict": "Provides ingredients but not the normalized cochain transpose theorem."
+  }
+ ],
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ConstantRealizationDerivedScalarExtension",
+  "date": "2026-10-21",
+  "group": "S3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactRightDerivedAdjointKFlatRepresentative",
+  "file": "lean/Sheaf/CategoryTheory/ExactRightDerivedAdjointKFlatRepresentative.lean",
+  "declaration": "CategoryTheory.Adjunction.isIso_cochainTranspose_of_kFlat",
+  "statement": "theorem Adjunction.isIso_cochainTranspose_of_kFlat\n    {L : DerivedCategory C ⥤ DerivedCategory D}\n    (adj : E ⊣ U) (ad : L ⊣ U.mapDerivedCategory) (X : CochainComplex C ℤ)\n    (hX : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat X) :\n    IsIso ((ad.homEquiv _ _).symm\n      (DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app X) ≫\n        U.mapDerivedCategoryFactors.inv.app ((E.mapHomologicalComplex (.up ℤ)).obj X)))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-21"
+ },
+ "mathlib_match": null,
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T004843-L-1795499",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T004843-L-1795499",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
