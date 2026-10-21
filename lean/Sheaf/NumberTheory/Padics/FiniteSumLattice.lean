@@ -8,10 +8,7 @@ module
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.Topology.Homeomorph.Defs
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.Topology.Algebra.Module.FiniteDimension
+import Mathlib.Algebra.Module.Lattice
 
 /-!
 # Finite sums of valuation-ring lattices
@@ -82,6 +79,68 @@ theorem finite_sum_lattice
               (fun _ ↦ @UniformSpace.toTopologicalSpace E
                 (coefficientExtensionAbsoluteValue l E).toNormedField.toUniformSpace)))
           b.equivFun.symm := by
-  sorry
+  classical
+  let A := coefficientExtensionIntegers l E
+  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have : IsFractionRing A E := h.2.2.2.2.2.2.1
+  have : IsPrincipalIdealRing A := h.2.2.2.2.2.2.2.2.1
+  have hfg (j : J) : (Λ j).FG := by
+    obtain ⟨b, _, _⟩ := hΛ j
+    let := Module.Finite.of_basis b
+    exact Module.Finite.iff_fg.mp inferInstance
+  have hspan (j : J) : Submodule.span E (Λ j : Set (Fin r → E)) = ⊤ := by
+    obtain ⟨b, c, hc⟩ := hΛ j
+    apply top_unique
+    rw [← c.span_eq]
+    apply Submodule.span_mono
+    rintro _ ⟨i, rfl⟩
+    rw [← hc i]
+    exact (b i).property
+  let : Submodule.IsLattice E (⨆ j : J, Λ j) := {
+    fg := Submodule.fg_iSup Λ hfg
+    span_eq_top := by
+      obtain ⟨j⟩ := ‹Nonempty J›
+      apply top_unique
+      rw [← hspan j]
+      exact Submodule.span_mono (le_iSup Λ j) }
+  constructor
+  · let b := Module.finBasisOfFinrankEq A ↥(⨆ j : J, Λ j)
+      (by simpa using Submodule.IsLattice.finrank_of_pi E (⨆ j : J, Λ j))
+    exact ⟨b, b.extendOfIsLattice E, fun i ↦
+      (Module.Basis.extendOfIsLattice_apply E b i).symm⟩
+  · intro N _ b hb
+    obtain ⟨c, hc⟩ := hb
+    let : NormedField E := (coefficientExtensionAbsoluteValue l E).toNormedField
+    let : TopologicalSpace A := TopologicalSpace.induced (fun a : A ↦ (a : E))
+      inferInstance
+    let : TopologicalSpace N := TopologicalSpace.induced
+      (fun x : N ↦ (x : Fin r → E)) inferInstance
+    have hcomm (a : Fin r → A) :
+        (b.equivFun.symm a : Fin r → E) =
+          c.equivFun.symm (fun i ↦ (a i : E)) := by
+      simp only [Module.Basis.equivFun_symm_apply]
+      simp [hc, Subring.smul_def]
+    have hcoords (x : N) :
+        (fun i ↦ (b.equivFun x i : E)) = c.equivFun (x : Fin r → E) := by
+      apply c.equivFun.symm.injective
+      rw [← hcomm, b.equivFun.symm_apply_apply, c.equivFun.symm_apply_apply]
+    have hf : Continuous b.equivFun.symm := by
+      apply continuous_induced_rng.mpr
+      change Continuous (fun a : Fin r → A ↦ (b.equivFun.symm a : Fin r → E))
+      simp_rw [hcomm]
+      exact c.equivFun.symm.toLinearMap.continuous_on_pi.comp
+        (continuous_pi fun i ↦ continuous_induced_dom.comp (continuous_apply i))
+    have hg : Continuous b.equivFun := by
+      apply continuous_pi
+      intro i
+      apply continuous_induced_rng.mpr
+      change Continuous (fun x : N ↦ (b.equivFun x i : E))
+      simp_rw [fun x ↦ congrFun (hcoords x) i]
+      exact (continuous_apply i).comp
+        (c.equivFun.toLinearMap.continuous_on_pi.comp continuous_induced_dom)
+    let e : (Fin r → A) ≃ₜ N :=
+      { b.equivFun.symm.toEquiv with continuous_toFun := hf, continuous_invFun := hg }
+    exact e.isHomeomorph
 
 end Padic

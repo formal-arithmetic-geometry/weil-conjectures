@@ -48,12 +48,11 @@
    }
   },
   {
-   "text": "Let $N$ be either $\\Lambda$ or one of the $\\Lambda_j$, and let $b_1,\\ldots,b_r$ be any $A$-basis of $N$ that is also an $E$-basis of $E^r$. Consider the $E$-linear equivalence $B:E^r\\to E^r$, $B(x)=\\sum_i x_i b_i$. The field $E$ is complete for the absolute value in [def-weil-l-adic-coefficient-extension], and that norm is nontrivial because $|\\ell|_E=|\\ell|_\\ell=\\ell^{-1}<1$. The product topology on $E^r$ is Hausdorff and makes it a finite-dimensional topological $E$-vector space: operations are continuous coordinatewise. Thus [lem-weil-pbc-finite-dimensional-linear-homeomorphism] makes $B$ and $B^{-1}$ continuous.",
+   "text": "Let N be the sum or any summand, with integral basis b whose vectors agree with a field basis c of E^r. Write B=c.equivFun.symm. The finite product topology on E^r and the normed field structure associated to the recorded absolute value make addition and scalar multiplication continuous. Mathlib LinearMap.continuous_on_pi proves that both B and its inverse c.equivFun are continuous, directly as linear maps on finite powers of E. This calculation does not need completeness or a nontrivial norm. Explicitly, each coordinate of B(x) is a finite sum of x_i times the corresponding basis-vector coordinate. Any linear map on E^r, including the inverse, has this same expression using its values on the standard basis. Coordinate projections, multiplication by a constant, and finite sums are continuous, giving continuity of both maps.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+    "def-weil-l-adic-coefficient-extension"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
     "place": "Local computation, second paragraph: basis identification with the valuation-ring power; topology made explicit"
@@ -73,13 +72,12 @@
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-sc-dvr-fg-torsionfree-free",
   "def-weil-vector-space-dimension",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-trace.proof.md",
-  "place": "Local computation, second paragraph; algebraic argument follows the blueprint and Stacks Tag 0AUW, with denominator and subspace-topology details supplied by Q22"
+  "place": "Local computation, second paragraph; algebra follows the blueprint and Stacks Tag 0AUW through Mathlib Submodule.IsLattice, its PID freeness, rank equality and basis-extension API. T4 replaces the general finite-dimensional homeomorphism theorem by coordinatewise continuity on finite powers and restrictions to induced topologies."
  },
  "mathlib_searches": [
   {
@@ -212,5 +210,15 @@
   "result": "pass",
   "note": "Lean matches the node clause by clause: ℓ prime, E finite over ℚ_ℓ with the recorded spectral absolute-value topology, valuation ring with the induced topology, finite nonempty J, lattices given by an A-basis that is also an E-basis, sum = ⨆, and IsHomeomorph of b.equivFun.symm from the product topology to the topology induced from E^r for every such basis of the sum and of each Λ_j. No extra hypotheses; universes u and v bound. Edge cases r=0, |J|=1 and excluded empty J checked. lean.statement verbatim; the only node change is the lean record; imports = stmt_dep module + recorded proof_dep modules. Similar project topology helpers are theorem-module helpers, not def nodes, and the same Mathlib composition is used. No duplicate declaration; target path free. Docstrings carry the source, blueprint id and all 5 proof steps; sorry only. nt_compile --json clean in 2.3 s; the control copy with an error fails as expected. No findings."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T4",
+  "result": "pass",
+  "landing": "20261021T120548-L-3911766",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
