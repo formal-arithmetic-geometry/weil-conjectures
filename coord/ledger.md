@@ -22930,3 +22930,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:29 L: merged deliver/Q135/lem-weil-pbc-finite-free-strict-tower-transport (stage 2; reviewer PASS; parallel immutable checks)
 - 15:30 L: returned deliver/N8/lem-sfb-qlbar-internal-hom-coefficient-comparison (reviewer RETURN: L: independent stage-2 immutable head e3ce9f8f7f60: H2: 5 of the 6 flagged theorem stmt_deps supply only plain defs; non)
 - 15:31 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 15:31 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
