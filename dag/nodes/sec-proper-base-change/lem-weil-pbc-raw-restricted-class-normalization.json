@@ -29,7 +29,7 @@
  ],
  "proof": [
   {
-   "text": "Choose a bounded-below injective resolution $F[0]\\simeq QI$. For each etale $V\\to S$, the projection $j_V:X_V\\to X$ is etale by clause (1) of the etale base-change finite-limits lemma. Its exact inverse image carries $I$ to a resolution of $j_V^{-1}F$ and preserves injectives. Both $I$ and $j_V^{-1}I$ are therefore K-injective by the bounded-below injective criterion. Consequently use the same $I$ to compute $P(V)=H^q(\\Gamma(X_V,j_V^{-1}I))$ for every $V$, and $R^qf_*F=\\mathcal H^q(f_*I)$. These are genuine abelian injectives; no assertion about forgotten module injectives is used. Moreover clause (1) of the etale inverse-image restriction lemma gives $\\rho_{I^r}:j_V^{-1}I^r\\cong I^r|_{X_V}$, natural in $I^r$, so $\\Gamma(X_V,j_V^{-1}I)\\cong I(X_V)=(f_*I)(V)$ as complexes; this is how a section cocycle $s\\in\\Gamma(X_V,j_V^{-1}I^q)$ is regarded below as an element of $I^q(X_V)=(f_*I^q)(V)$.",
+   "text": "Choose a bounded-below injective resolution $F[0]\\simeq QI$. For each etale $V\\to S$, the projection $j_V:X_V\\to X$ is etale by clause (1) of the etale base-change finite-limits lemma. Its exact inverse image carries $I$ to a resolution of $j_V^{-1}F$ and preserves injectives. Both $I$ and $j_V^{-1}I$ are therefore K-injective by the bounded-below injective criterion. Consequently use the same $I$ to compute $P(V)=H^q(\\Gamma(X_V,j_V^{-1}I))$ for every $V$, and $R^qf_*F=\\mathcal H^q(f_*I)$. These are genuine abelian injectives; no assertion about forgotten module injectives is used. Moreover clause (1) of the etale inverse-image restriction lemma gives $\\rho_{I^r}:j_V^{-1}I^r\\cong I^r|_{X_V}$, natural in $I^r$, so $\\Gamma(X_V,j_V^{-1}I)\\cong I(X_V)=(f_*I)(V)$ as complexes; this is how a section cocycle $s\\in\\Gamma(X_V,j_V^{-1}I^q)$ is regarded below as an element of $I^q(X_V)=(f_*I^q)(V)$. Lean implementation: construct the augmentation generically for an additive functor, and apply preservation of homology to its quasi-isomorphism. For K-injectivity, use injective_upperStar_obj_of_etale_addCommGrp termwise and CochainComplex.isKInjective_of_injective with lower bound zero.",
    "uses": [
     "lem-weil-pbc-dplus-injective-representative",
     "lem-sbc-etale-abelian-restriction-injectives",
@@ -100,11 +100,12 @@
    }
   },
   {
-   "text": "Compute the specified $\\kappa_V$ on $a$. By the derived-adjunction theorem, on a K-injective target $I[q]$ the inverse adjunct is represented by the termwise ordinary counit. Thus the adjunct of $a$ is represented by the ordinary chain adjunct $b:\\mathbf Z[V][0]\\to f_*(I[q])$, with $b^0=f_*a^0\\circ\\eta_{f,\\mathbf Z[V]}$. Indeed its inverse adjunct is $\\varepsilon_{I[q]}\\circ f^{-1}b=a$, by counit naturality and the triangle identity; the Hom adjunction is bijective. Direct image and its canonical shift comparison compute this as a map to $(f_*I)[q]$. Taking zeroth homology, undoing the shift, and evaluating $e_V$ gives the cohomology-sheaf class of $b^0_V(e_V)=\\overline a_V(e_V)=s_V$. This is exactly the explicitly specified derived-adjunction class map (the class construction in lem-sbc-abelian-higher-direct-image-class-compatibility), and uses no choice of a sheafification isomorphism.",
+   "text": "Compute the specified $\\kappa_V$ on $a$. By the derived-adjunction theorem, on a K-injective target $I[q]$ the inverse adjunct is represented by the termwise ordinary counit. Thus the adjunct of $a$ is represented by the ordinary chain adjunct $b:\\mathbf Z[V][0]\\to f_*(I[q])$, with $b^0=f_*a^0\\circ\\eta_{f,\\mathbf Z[V]}$. Indeed its inverse adjunct is $\\varepsilon_{I[q]}\\circ f^{-1}b=a$, by counit naturality and the triangle identity; the Hom adjunction is bijective. Direct image and its canonical shift comparison compute this as a map to $(f_*I)[q]$. Taking zeroth homology, undoing the shift, and evaluating $e_V$ gives the cohomology-sheaf class of $b^0_V(e_V)=\\overline a_V(e_V)=s_V$. This is exactly the explicitly specified derived-adjunction class map (the class construction in lem-sbc-abelian-higher-direct-image-class-compatibility), and uses no choice of a sheafification isomorphism. The two supporting raw-class lemmas are now proved: additivity follows from additivity of the constructed comparison morphism and its canonicalComparison_class formula. For naturality in the etale object, use the already constructed canonicalComparison and its proved canonicalComparison_class formula from AbelianHigherDirectImageNaturalComparison; this identifies the specified component map with a natural transformation without choosing an existential witness. The main resolution-cocycle compatibility in this step remains to be formalized.",
    "uses": [
     "prop-weil-pbc-derived-inverse-image-adjunction",
     "def-weil-pbc-direct-image",
-    "lem-sbc-abelian-higher-direct-image-class-compatibility"
+    "lem-sbc-abelian-higher-direct-image-class-compatibility",
+    "lem-sbc-abelian-higher-direct-image-natural-comparison"
    ],
    "elementary": false,
    "source": {
@@ -162,13 +163,14 @@
   "lem-sbc-raw-restricted-cohomology-comparison-is-iso",
   "prop-weil-pbc-derived-inverse-image-adjunction",
   "lem-sbc-abelian-higher-direct-image-class-compatibility",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
   "lem-weil-pbc-site-higher-direct-image-sheafified-presheaf",
   "lem-weil-pbc-etale-base-change-continuous"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 03Q8 and sites-cohomology.tex Tag 072W, explicit normalization of the already constructed raw derived evaluation; derived.tex Tags 0DVC, 09T5"
+  "place": "Tag 03Q8 and sites-cohomology.tex Tag 072W, explicit normalization of the already constructed raw derived evaluation; derived.tex Tags 0DVC, 09T5; V2: four helper proofs, generic exact-functor augmentation, bounded-below injective criterion, additive adjunction, and the constructed upstream canonicalComparison_class formula. Main normalization theorem remains unproved."
  },
  "mathlib_searches": [
   {
@@ -328,6 +330,7 @@
   "declaration": "AlgebraicGeometry.Etale.rawRestrictedClassNormalization",
   "declarations": [
    "AlgebraicGeometry.Etale.normalizationRestrictionComplex",
+   "AlgebraicGeometry.Etale.normalizationMappedAugmentation",
    "AlgebraicGeometry.Etale.normalizationRestrictionAugmentation",
    "AlgebraicGeometry.Etale.normalizationRestrictionAugmentation_quasiIso",
    "AlgebraicGeometry.Etale.normalizationRestrictionComplex_isKInjective",
@@ -364,5 +367,15 @@
   "group": "Q158",
   "result": "pass",
   "note": "Re-delivery after H2 RETURN (bc0785c3579e). The diff against that head shows the requested route-1 repair exactly: theorem stmt_dep sbc-lem-higher-direct-image-presheaf removed, no decl from AbelianHigherDirectImagePresheaf used (grep), import switched to AbelianHigherDirectImageNaturalComparison (owner of abelianHigherDirectImageRawPresheaf). kappa is now built from abelianHigherDirectImageClass (def-weil-pbc-abelian-higher-image-class, the explicit adjunct/H0/shift/generator class, l.119-135) via AddMonoidHom.mk', with additivity and naturality as separately named sorry theorems with source/blueprint/proof docstrings; both true. Landed definition stmt_deps added: def-weil-pbc-abelian-higher-image-class, def-sbc-raw-affine-restricted-cohomology. Node differs from base only in lean + these two defs. lean.statement verbatim; 25 decls = lean.declarations; lines <=98 chars; only helper/main theorems sorry. Mathematics as previously accepted: c components pinned, P restriction pinned to cohomology pullback, explicit 072W iota, E = sheafification lift, IsIso E, iota(c z)=kappa z, coefficient naturality; no extra hypotheses, u/u+1, q=0/empty chart covered. Not compiled (no file changed); worker reports clean scompile and a passing deliver2 --no-push dry run."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T194502-L-1721562",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
