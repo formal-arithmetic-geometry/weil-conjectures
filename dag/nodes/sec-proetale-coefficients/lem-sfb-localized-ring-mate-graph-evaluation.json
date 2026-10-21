@@ -16,9 +16,83 @@
   "def-pur-localized-ringed-site",
   "def-weil-proetale-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L_p=u_{u,p}$ and let $j_{T,\\phi}:R(T)\\to L_pR(W)$ denote the Kan coprojection for $(T,\\phi:W\\to T\\times_BV)$. The presheaf adjunction sends $t:L_pR\\to H$ to $\\alpha_T=t_{T\\times_BV}j_{T,\\mathrm{id}}$. Its inverse sends $\\alpha:R\\to u_*H$ to the map $j_{T,\\phi}(a)\\mapsto H(\\phi)(\\alpha_T(a))$. The latter respects the cocone relations by naturality of $\\alpha$, and the two formulas are inverse by naturality of $t$. Taking $t$ to be the identity, then composing with the sheafification unit, shows that the specified sheaf adjunction unit $e_{u,T}$ is $j_{T,\\mathrm{id}}$ followed by sheafification. This computes the composite adjunction in the cited statement, rather than choosing a different adjunction on an isomorphic functor. The inverse image $u^{-1}$ of [def-sfb-finite-upper-star] used for the domain of $\\beta$ is the same functor: it is the left Kan extension along the opposite of the same base-change functor $T\\mapsto T\\times_BV$, followed by sheafification, and we take that Kan extension by the pointwise colimit formula of [def-weil-proetale-inverse-image] (the two chosen product orders differ by the canonical swap, which induces an isomorphism of the indexing categories $\\mathcal I_W$). Hence $u_*\\beta\\circ e_u$ is defined, and its ring-object version is the one obtained by applying this functor to the ring structure maps.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "def-sfb-finite-upper-star"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00VE (lemma-adjoints-u, explicit forward and inverse maps) and 00WX (lemma-adjoint-sheaves)."
+   }
+  },
+  {
+   "text": "Fix $T$ and put $W=T\\times_BV$, $p=\\operatorname{pr}_T$ and $v=\\operatorname{pr}_V$. The distinguished initial index for $W/V$ in clause (1) of the restriction lemma is $q=(W,\\gamma)$, where $\\gamma=(\\mathrm{id}_W,v):W\\to W\\times_BV$; use the canonical swap if the chosen base-change product has the opposite order. The arrow $p:W\\to T$ is a morphism $q\\to (T,\\mathrm{id}_W)$ of $\\mathcal I_W$, since $(p\\times_B\\mathrm{id}_V)\\gamma=\\mathrm{id}_W$. The colimit cocone relation is therefore $j_{T,\\mathrm{id}}(a)=j_{W,\\gamma}(R(p)(a))$. By clause (1), $j_{W,\\gamma}$ followed by sheafification is exactly the inverse of the stated restriction identification at $W/V$. Thus that identification sends $e_{u,T}(a)$ to $R(p)(a)$. It also respects ring operations by the ring clause of the same statement.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CE (lemma-localize-given-products), product adjunction; the distinguished coprojections in clause (1) of lem-sfb-proetale-object-inverse-image-restriction."
+   }
+  },
+  {
+   "text": "Direct image evaluates a sheaf map at $T\\times_BV$, by its definition. Hence the definition $\\eta^\\beta=u_*\\beta\\circ e_u$ and Step 2 give $\\eta^\\beta_T(a)=\\bar\\beta_{T\\times_BV}(R(\\operatorname{pr}_T)(a))$. For $U/V$ and the stated $B$-map $b:U\\to T$, the pair $\\gamma_b=(b,U\\to V)$ is a morphism over $V$. Naturality of the sheaf map $\\bar\\beta:R|_V\\to S$ and functoriality of restriction give\n$$S(\\gamma_b)\\eta^\\beta_T(a)=\\bar\\beta_U\\bigl(R(\\gamma_b)R(\\operatorname{pr}_T)(a)\\bigr)=\\bar\\beta_U(R(b)(a)),$$\nsince $\\operatorname{pr}_T\\gamma_b=b$. The restrictions of $R|_V$ are precisely those of $R$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y0 (definition-localize), restriction formula following the definition; naturality applied to the graph."
+   }
+  },
+  {
+   "text": "Set $T=V$, $U=V/V$ and $b=\\mathrm{id}_V$ in Step 3. Then $\\gamma_b=\\delta$ and $R(b)=\\mathrm{id}$, so $S(\\delta)\\eta^\\beta_V=\\bar\\beta_{V/V}$. The object $V/V$ is terminal in $V_{\\mathrm{pro\\acute et}}$: the only arrow to it from $U/V$ is the structure arrow. Thus evaluation there is $\\Gamma(V,S)$. A sheaf isomorphism of rings has inverse components given by its inverse sheaf map, so $\\bar\\beta_{V/V}$ is the asserted ring isomorphism. No claim that $S(\\delta)$ itself is invertible is needed.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y0 (definition-localize), category over V and sectionwise restriction."
+   }
+  },
+  {
+   "text": "Let $z_r:\\underline{\\mathbf Z}_B\\to R$ be the additive sheaf map with $z_r(1)=r$ at $B/B$. Naturality along $u$ gives $(z_r)_V(1)=R(u)(r)$. Clause (1) of the restriction lemma identifies $u^{-1}z_r$ with the restriction of $z_r$, so its value on the restricted constant section $1$ at $V/V$ is $R(u)(r)$. For the source of this map use clause (2) of that lemma with $A=\\mathbf Z$: the coefficient isomorphism $c^u_{\\mathbf Z}:u^{-1}\\underline{\\mathbf Z}_B\\to\\underline{\\mathbf Z}_V$ identifies the restricted constant section $1$ with $1$. The canonical monoidal-unit map $\\underline{\\mathbf Z}_V\\to u^{-1}\\underline{\\mathbf Z}_B$ is its inverse: in the canonical inverse-image tensor structure it is the unital map from the integer ring object, hence it sends $1$ to the pulled-back $1$. Under restriction these two maps are inverse since both preserve every integer section, and constant sheaf sections locally are integer sections. Therefore $\\beta\\circ u^{-1}z_r$, with this unit comparison, has global value $\\bar\\beta_{V/V}(R(u)(r))$, as required.",
+   "uses": [
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), canonical tensor and unit comparison specialized to integer sheaves; restriction and constant-section normalization in clauses (1) and (2) of lem-sfb-proetale-object-inverse-image-restriction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site",
+  "def-sfb-finite-upper-star",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-proetale-inverse-image",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00VE (lemma-adjoints-u), 00WX (lemma-adjoint-sheaves), 03CE (lemma-localize-given-products) and restriction after 00Y0 (definition-localize); ring-isomorphism and graph specialization written out here. Tensor-unit normalization: sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +135,45 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, SheafOfModules.pushforwardSections_unitHomEquiv",
    "date": "2026-10-21",
    "verdict": "no match: Over.lean gives the projection restriction map but not its agreement with the scheme Kan adjunction, arbitrary ring-isomorphism mate, graph evaluation and monoidal section map; the open-immersion Scheme.Modules and concrete SheafOfModules hits do not state this internal ring-sheaf comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.toPushforwardOverPullback",
+   "results": "2 hits: CategoryTheory.Sheaf.toPushforwardOverPullback, CategoryTheory.Sheaf.toPushforwardOverPullback_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the projection-induced map in Sites/Over.lean lines 525-535 is a candidate for part of the calculation; the hits do not state agreement with the specified scheme Kan unit together with arbitrary ring-sheaf mate, graph and integer-unit section normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "toPushforwardOverPullback|overMapPushforwardAdj",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/Over.lean; Mathlib subdirectory CategoryTheory/Sites",
+   "date": "2026-10-21",
+   "verdict": "no match: the projection-induced map in Sites/Over.lean lines 525-535 is a candidate for part of the calculation; the hits do not state agreement with the specified scheme Kan unit together with arbitrary ring-sheaf mate, graph and integer-unit section normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of a site inverse image unit evaluated on a graph is restriction of sections followed by a ring sheaf isomorphism",
+   "results": "8 hits: AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_eq, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.ofRestrict_invApp_apply, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: the projection-induced map in Sites/Over.lean lines 525-535 is a candidate for part of the calculation; the hits do not state agreement with the specified scheme Kan unit together with arbitrary ring-sheaf mate, graph and integer-unit section normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image restriction to slice site unit sends a section to its restriction along product projection and graph evaluation computes the adjoint mate",
+   "results": "8 hits: CategoryTheory.evaluationAdjunctionLeft_unit_app_app, CategoryTheory.Over.toOverSectionsAdj_unit_app, CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_unit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, TopCat.Presheaf.restrict, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, CompHausLike.LocallyConstant.adjunction, CategoryTheory.sheafSectionsNatIsoEvaluation",
+   "date": "2026-10-21",
+   "verdict": "no match: the projection-induced map in Sites/Over.lean lines 525-535 is a candidate for part of the calculation; the hits do not state agreement with the specified scheme Kan unit together with arbitrary ring-sheaf mate, graph and integer-unit section normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaf pullback to an object of a site is restriction with adjunction unit the first product projection and the counit evaluation on the diagonal",
+   "results": "8 hits: TopCat.Sheaf.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullbackIso, CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.pullback_id_comp, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-21",
+   "verdict": "no match: the projection-induced map in Sites/Over.lean lines 525-535 is a candidate for part of the calculation; the hits do not state agreement with the specified scheme Kan unit together with arbitrary ring-sheaf mate, graph and integer-unit section normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-coefficient-sections-localization",
@@ -81,5 +190,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-localized-ring-mate-graph-evaluation",
+  "worker": "stage1",
+  "summary": "Q01: retained the statement and all inherited searches. Computed the specified Kan/sheaf adjunction unit using its identity-index coprojection and the distinguished initial-index comparison. Then proved mate, arbitrary graph, diagonal and global-section formulas explicitly; no new nodes. Checked the canonical integer monoidal-unit normalization.",
+  "blueprint": "det-def-sfb-constructible-local-model: final sentence on nonconstant presentation entries, via lem-sfb-coefficient-sections-localization. These steps supply the localized coefficient-section calculation used by the supplementary counterexample, without changing the finite constant local model route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "why": "General sheafified Kan adjunction for the exact unit specified in the item; the constructible unit has no separate general site adjunction statement."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Distinguished Kan-coprojection normalization and constant-ring comparison for a pro-etale site object; used as a generic localization tool."
+   },
+   {
+    "node": "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+    "why": "Canonical strong monoidal structure and integer-unit comparison on abelian inverse image, used only to normalize the global-section map."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Explicit index category, restriction maps, direct image and specified sheafified Kan adjunction; a generic construction used without altering the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-weil-proetale-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-1713fd889",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-1713fd889 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 5 steps, every cited statement (def-weil-proetale-inverse-image, continuous-functor adjunction 00WX/00VE, lem-sfb-proetale-object-inverse-image-restriction clauses (1)-(2), def-pur-localized-ringed-site, left-exact inverse-image tensor, constant sheaf, def-sfb-finite-upper-star/lower-star) and Stacks 03CE (sites.tex l.6094), 00VE (l.567), 00Y0 and sites-modules 03EL. The statement and stmt_deps are identical to side-live and live, where the item is unsplit. It is not dropped and has no repair note. As node A of the Q121 re-split it carries old Steps 2-4 of the Q47 parent, and I found no argument shortened. Checks: unit = j_{T,id} followed by sheafification; the initial index (W,(id,v)), and p is an I_W arrow since (p x id)gamma = id; on I^op the cocone relation is j_{T,id} = j_{W,gamma} R(p), and I checked the direction; graph naturality via pr_T gamma_b = b; delta case at the terminal V/V; z_r unit normalization with clause (2), A=Z. Edge cases: u=id, V empty, r=0, V=B disjoint-union B. No duplicates: the open-unit-evaluation and finite-coefficient open-restriction nodes are open-immersion special cases. No SGA. Tool uses accepted: the restriction lemma and the tensor lemma; the other two are a Mathlib leaf and a definition. One C3/C4 fault, repaired: beta is typed on u^{-1} of def-sfb-finite-upper-star but e_u lands in def-weil-proetale-inverse-image's u^{-1}, and the proof never identified them. Step 1 now states that both are the sheafified pointwise Lan along the same base-change functor, up to the product swap, and cites def-sfb-finite-upper-star; it is added to proof_deps. Fix: fixes/dag/nodes/sec-proetale-coefficients/lem-sfb-localized-ring-mate-graph-evaluation.json.; 1 file(s) fixed by the reviewer"
  }
 }
