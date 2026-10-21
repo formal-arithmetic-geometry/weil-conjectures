@@ -23083,3 +23083,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T16:43:31Z L: superseded stage-1 delivery NY/lem-sfb-condensed-internal-bar-resolution at bd27afd0c24d5f44be8ab088f4eab1b0f69630b4; current completion retained; packet archived at refs/superseded/NY/lem-sfb-condensed-internal-bar-resolution/bd27afd0c24d5f44be8ab088f4eab1b0f69630b4; stale return retired.
 - 16:45 L: merged deliver/Q08/lem-sfb-snc-finite-root-regular-ring (reviewer PASS; first push; new nodes: 0)
 - 16:45 L: returned deliver/S3/Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution (reviewer RETURN: (reviewer C-32078, head 320780216) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.To)
+- 16:45 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
