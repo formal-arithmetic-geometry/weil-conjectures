@@ -1,0 +1,129 @@
+{
+ "id": "lem-kun-kflat-lower-truncation",
+ "kind": "lemma",
+ "title": "Lower good truncation of a flat K-flat complex",
+ "statement": "Let (C,J) be a site essentially small in a coefficient universe w, with the stated sheafification and sheaf-composition structures. Let R be a sheaf of commutative rings in universe w, K an unbounded cochain complex of sheaves of R-modules, and a an integer. Suppose K is K-flat [def-pc-kflat-complex], every term K^i is flat [def-pc-flat-sheaf-modules], and the opcycles coker(d^(a-1)) at a are flat. Then the complex with zero terms below a, opcycles at a and original terms above a, with induced differentials (Mathlib K.truncGE a) is K-flat. The site object and morphism universes are independent of w.",
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), lower-truncation argument, and Tag 0G7B (lemma-K-flat-two-out-of-three-ses)"
+ },
+ "proof": [
+  {
+   "text": "In an abelian symmetric monoidal category with functorial flat resolutions and right-exact tensor, a short exact sequence with flat quotient remains short exact after tensoring with any object; if its middle term is flat, its kernel is flat. Prove this by resolving the tensor argument by a flat object and chasing the resulting three rows after epic refinements. The site-module flat resolutions and tensor colimits supply these hypotheses.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let P be the lower good truncation of K and L the kernel of its degreewise epic quotient K to P. The terms of P are zero below a, the given flat opcycles at a, and K^i above a; they are all flat. Apply the preceding tensor exactness statement degreewise: L has flat terms. Above a the quotient is an isomorphism, so L vanishes there. Hence L is K-flat by the bounded-above flat criterion.",
+   "uses": [
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an acyclic complex A, tensor the short exact sequence L to K to P with A in each bidegree. Exact coproducts of sheaves of abelian groups, reflected by the forgetful functor on module sheaves, make the direct-sum total tensor sequence short exact. Its first two complexes are acyclic by K-flatness of L and K. The long exact homology sequence makes the third acyclic. Symmetry gives the tensor order in the independent-coefficient K-flat predicate.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0F1M and 0G7B; categorical expansion of their flat-kernel and total-tensor short exact sequence arguments"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "kFlat.*truncGE|truncGE.*kFlat|constant.*tensor.*comparison",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "no complete match; reuse good truncation and exact coproduct APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, \"truncGE\"",
+   "results": "CochainComplex.truncGE; CochainComplex.acyclic_truncGE_iff; CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE; CochainComplex.isIso_πTruncGE_iff; CochainComplex.truncGEXIsoOpcycles; CochainComplex.truncGEXIso; CochainComplex.instQuasiIsoAtIntπTruncGE; CochainComplex.πTruncGE",
+   "date": "2026-10-19",
+   "verdict": "no complete match; reuse good truncation and exact coproduct APIs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lower good truncation of a K-flat complex with flat terms is K-flat when the boundary cokernel is flat",
+   "results": "HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside; HomologicalComplex.truncGE'.X; HomologicalComplex.truncLE; HomologicalComplex.truncLE'; HomologicalComplex.instIsStrictlySupportedTruncLE_1; HomologicalComplex.truncGE'; HomologicalComplex.instIsStrictlySupportedTruncGE_1; HomologicalComplex.instIsStrictlySupportedStupidTrunc_1",
+   "date": "2026-10-19",
+   "verdict": "no complete match; reuse good truncation and exact coproduct APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Good lower truncation of a flat term K flat complex with flat boundary cokernel is K flat",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CochainComplex.quasiIso_ιTruncLE_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \": QuasiIso (K.ιTruncLE n) ↔ K.IsLE n\", \"doc\": \"The canonical morphism from the truncation of the cochain complex $ K $ at integer $ n $ to $ K $ is a quasi-isomorphism if and only if the complex $ K $ is supported under the embedding from the down\"}\n  {\"name\": \"CochainComplex.quasiIso_πTruncGE_iff\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \": QuasiIso (K.πTruncGE n) ↔ K.IsGE n\", \"doc\": \"The canonical morphism $\\\\pi_{\\\\text{truncGE}}: K \\\\to K.\\\\text{truncGE}(n)$ is a quasi-isomorphism if and only if the cochain complex $K$ is supported by the embedding translating indices by $n$ (i.e., $\"}\n  {\"name\": \"Module.Flat.shrink\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Small.{v'} M] [Flat R M] : Flat R (Shrink.{v'} M)\", \"doc\": \"If $ M $ is a small flat module over a commutative semiring $ R $, then the shrink of $ M $, denoted $ \\\\mathrm{Shrink}\\\\, M $, is also a flat module over $ R $. The flatness is preserved through the ca\"}\n  {\"name\": \"CochainComplex.truncLE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"(n : ℤ) : CochainComplex C ℤ\", \"doc\": \"The cochain complex obtained by truncating the original complex using the embedding from natural numbers to integers defined by $n \\\\mapsto p - n$ for a fixed integer $p$, ensuring structural relations\"}\n  {\"name\": \"CochainComplex.instQuasiIsoIntιTruncLEOfIsLE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.CochainComplex\", \"type\": \"[K.IsLE n] : QuasiIso (K.ιTruncLE n)\", \"doc\": \"If a cochain complex $ K $ is supported under the embedding from the downward natural number complex shape to the upward integer complex shape at position $ n $, then the canonical morphism from the t\"}\n  {\"name\": \"Module.Flat.of_shrink\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"[Small.{v'} M] [Flat R (Shrink.{v'} M)] : Flat R M\", \"doc\": \"Given a commutative semiring $ R $ and a small $ R $-module $ M $, if the shrink of $ M $ (a type in bijection with $ M $) is flat over $ R $, then $ M $ itself is flat over $ R $. This follows from t\"}\n  {\"name\": \"ComplexShape.Embedding.truncLEFunctor\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncLE\", \"type\": \": HomologicalComplex C c' ⥤ HomologicalComplex C c'\", \"doc\": \"The functor on homological complexes defined by truncating each complex $ K $ using the embedding $ e $ (replacing specified objects with homology objects while preserving differentials via zero morph\"}\n  {\"name\": \"HomologicalComplex.stupidTrunc\", \"module\": \"Mathlib.Algebra.Homology.Embedding.StupidTrunc\", \"type\": \": HomologicalComplex C c'\", \"doc\": \"The homological complex obtained by first restricting the complex $ K $ via the embedding $ e $ and then extending it back using the same embedding, resulting in a complex where the original structure\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete match for this sheaf-module statement; the elementary restriction, truncation and tensor APIs found are used in the proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution",
+  "date": "2026-10-19",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f1m",
+   "place": "proof steps 4-6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KFlatLowerTruncation",
+  "file": "lean/Sheaf/Algebra/Homology/KFlatLowerTruncation.lean",
+  "declaration": "CochainComplex.isKFlatIndependentCoefficients_truncGE",
+  "statement": "theorem isKFlatIndependentCoefficients_truncGE\n    {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]\n    {J : GrothendieckTopology C}\n    [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]\n    [HasSheafify J AddCommGrpCat.{w}]\n    (R : Sheaf J CommRingCat.{w})\n    (K : CochainComplex (SheafOfModules.{w}\n      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ)\n    (a : ℤ) (hK : IsKFlatIndependentCoefficients (R := R) K)\n    (hflat : ∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (K.X i))\n    (hop : SheafOfModules.IsFlatOnSite (J := J) (R := R) (K.opcycles a)) :\n    IsKFlatIndependentCoefficients (R := R) (K.truncGE a)",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-19"
+ },
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-complex-ses-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-49607",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T214853-L-1874809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-49607",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T214853-L-1874809",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, three new modules and four node files against clones/live, the earlier PASSed head 3207802 and the live re-split nodes; item theorem signature byte-identical; direct importer PunctualTensorBaseChange compiled against the delivered modules; axioms clean"
+ }
+}

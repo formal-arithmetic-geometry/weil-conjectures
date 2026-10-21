@@ -29,90 +29,69 @@
  ],
  "proof": [
   {
-   "text": "Suppose $E$ is represented by the asserted K-flat complex $\\mathcal E^\\bullet$. For every module sheaf $\\mathcal M$ in degree zero, [def-kun-derived-tensor] computes $E\\otimes^L_\\Lambda\\mathcal M$ by $\\mathcal E^\\bullet\\otimes_\\Lambda\\mathcal M$. Its degree $i$ term is $\\mathcal E^i\\otimes_\\Lambda\\mathcal M=0$ for $i<a$, so its cohomology vanishes there. This is exactly the lower tor-amplitude condition of [def-kun-tor-amplitude].",
+   "text": "Use the canonical constant-scalar restriction equivalence and its induced equivalence on complexes to choose a ring-sheaf complex representing the given module-valued derived object E. Take the existing degreewise epic flat-term K-flat resolution K of that complex in the stated coefficient universe. Apply exact restriction and derived localization to its quasi-isomorphism to obtain an isomorphism Q(rho K) to E.",
    "uses": [
-    "def-kun-derived-tensor",
-    "def-kun-tor-amplitude"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0F1M, implication (2) implies (1)"
-   }
-  },
-  {
-   "text": "Use the small presentations of [def-weil-size-convention]. If $E$ has lower tor bound $a$, choose a representative $G^\\bullet$ and a K-flat flat-term resolution $K^\\bullet\\to G^\\bullet$ by [lem-kun-flat-resolution-existence]. By [def-kun-derived-tensor] and [def-kun-tor-amplitude], $H^n(K^\\bullet\\otimes_\\Lambda M)=0$ for every module sheaf $M$ and $n<a$. Taking $M=\\Lambda_T$ also gives $H^n(K^\\bullet)=0$ for $n<a$.",
-   "uses": [
-    "def-weil-size-convention",
+    "lem-kun-tor-model-restriction",
     "lem-kun-flat-resolution-existence",
+    "def-weil-size-convention"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a K-flat ring-sheaf complex K, the tensor-single comparison identifies Q(rho(Tot(K tensor single M))) with the fixed derived tensor of Q(rho K) and single(rho M). Restriction and localization identify and reflect vanishing homology; every module-valued sheaf is in the essential image of restriction. Thus Tor amplitude at least a is equivalent to vanishing of H^i(Tot(K tensor single M)) for every ring-sheaf module M and every i<a.",
+   "uses": [
+    "lem-kun-tor-model-restriction",
+    "lem-kun-tor-model-tensor-comparison",
     "def-kun-derived-tensor",
     "def-kun-tor-amplitude"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), resolution and tensor tests"
-   }
+   "elementary": false
   },
   {
-   "text": "All hypotheses of [lem-kun-tor-cokernel-flat] now hold for $\\mathcal K^\\bullet$: its terms are flat and the required tensor cohomology vanishes for every module sheaf in every degree below $a$. Consequently $\\mathcal N=\\operatorname{coker}(\\mathcal K^{a-1}\\to\\mathcal K^a)$ is flat.",
+   "text": "Assume the amplitude condition. The preceding vanishing condition, applied to the tensor unit, shows K has no homology below a, by the single-tensor and right-unit isomorphisms. Apply the existing tensor-cokernel flatness theorem to conclude that the opcycles N at a are flat.",
    "uses": [
     "lem-kun-tor-cokernel-flat"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0F1M, cokernel construction using the argument of lemma-last-one-flat"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-kun-lower-truncation-flat-model] to $K^\\bullet$: its terms are flat, its cohomology vanishes below $a$, and step 3 gives the flat boundary cokernel. It supplies $P^\\bullet=\\tau_{\\ge a}K^\\bullet$ with flat terms and zero terms below $a$, a quasi-isomorphism $q:K^\\bullet\\to P^\\bullet$, and a degreewise short exact sequence $0\\to L^\\bullet\\to K^\\bullet\\to P^\\bullet\\to0$ with $L^\\bullet$ K-flat. Thus $P^\\bullet$ represents $E$.",
+   "text": "Let P be the lower good truncation K.truncGE a. Its terms are zero below a, N at a and the original flat terms above a. Hence all terms are flat and P is supported in degrees at least a. The quotient map K to P is a quasi-isomorphism because K has no homology below a. Its restriction and localization give Q(rho P) isomorphic to E. The lower-truncation theorem proves P K-flat using its bounded-above flat kernel, pure tensor exactness and exact coproduct totalization.",
    "uses": [
-    "lem-kun-lower-truncation-flat-model"
+    "lem-kun-kflat-lower-truncation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), lower truncation and kernel paragraphs"
-   }
+   "elementary": false
   },
   {
-   "text": "In this short exact sequence $L^\\bullet$ and $K^\\bullet$ are K-flat and the quotient $P^\\bullet$ has flat terms. The two-out-of-three conclusion of [lem-kun-kflat-short-exact-quotient] therefore proves that $P^\\bullet$ is K-flat.",
-   "uses": [
-    "lem-kun-kflat-short-exact-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7B (lemma-K-flat-two-out-of-three-ses), statement and proof invoked in the K-flatness paragraph of Tag 0F1M"
-   }
-  },
-  {
-   "text": "For this fixed $P^\\bullet$, [lem-weil-pbc-ringed-topos-kflat-pullback] applies to every ringed-site or ringed-topos morphism $u$, since $P^\\bullet$ is K-flat with flat terms. Hence every termwise $u^*P^\\bullet$ is K-flat with flat terms. This gives the same representative for all pullbacks. Together with step 1 this proves the equivalence and the moreover assertion.",
+   "text": "Apply the existing general ringed-topos pullback theorem to this fixed P, using its K-flatness and its flat terms. This proves the universal pullback assertion simultaneously for all of the ringed-topos data in the statement, without exactness of module pullback or a flatness assumption on the coefficient map.",
    "uses": [
     "lem-weil-pbc-ringed-topos-kflat-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E (lemma-pullback-K-flat), applied in Tag 0F1M"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Conversely suppose such a representative P is given. By the comparison in step 2 it suffices to show vanishing of each total tensor with a sheaf in degree zero below a. The single-tensor comparison identifies its degree-i term with P^i tensor M. This is zero for i<a, since tensor preserves zero objects; hence its degree-i homology is zero. The amplitude follows.",
+   "uses": [
+    "lem-kun-tor-model-tensor-comparison",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-kun-tor-model-restriction",
+  "lem-kun-flat-resolution-existence",
+  "def-weil-size-convention",
+  "lem-kun-tor-model-tensor-comparison",
   "def-kun-derived-tensor",
   "def-kun-tor-amplitude",
-  "def-weil-size-convention",
-  "lem-kun-flat-resolution-existence",
   "lem-kun-tor-cokernel-flat",
-  "lem-kun-lower-truncation-flat-model",
-  "lem-kun-kflat-short-exact-quotient",
+  "lem-kun-kflat-lower-truncation",
   "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0F1M (lemma-bounded-below-tor-amplitude), with the tensor short-exact-sequence proof of Tag 0G7B and the general pullback theorem Tag 0G7E"
+  "place": "Tag 0F1M, with Tags 0G7B and 0G7E; explicit Lean constant-scalar comparison and exact-coproduct totalization of the flat-kernel argument"
  },
  "mathlib_searches": [
   {
@@ -205,8 +184,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-site-flat-quotient-tensor-ses",
-  "lem-pc-module-filtered-colimits-tensor",
   "lem-weil-pbc-ringed-topos-kflat-pullback"
  ],
  "reviewed": {
@@ -229,11 +206,6 @@
   "module": "Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution",
   "declaration": "AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model",
   "declarations": [
-   "AlgebraicGeometry.Etale.torModelCoefficientRing",
-   "AlgebraicGeometry.Etale.torModelRing",
-   "AlgebraicGeometry.Etale.torModelScalarUnit",
-   "AlgebraicGeometry.Etale.torModelRestriction",
-   "AlgebraicGeometry.Etale.torModelRestriction_additive",
    "AlgebraicGeometry.Etale.DerivedCategory.hasTorAmplitudeGE_iff_exists_kFlat_flat_model"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/TorAmplitudeKFlatResolution.lean",
@@ -242,7 +214,7 @@
   "by": "Q06",
   "date": "2026-10-16",
   "existing": false,
-  "note": "The representative is a complex over the sheafified constant commutative ring. Its canonical restriction along the constant-presheaf sheafification unit is the module-valued representative of E. No arbitrary equivalence or map is chosen. The independent-coefficient K-flat predicate and IsFlatOnSite are the recorded pullback and flatness interfaces. The existential representative precedes all ringed-topos pullback data; the same P is used in every pullback conclusion. Small etale objects have universe u+1 and morphisms u, with coefficients u+1; target site universes are independent."
+  "note": "The representative is a complex over the sheafified constant commutative ring. Its canonical restriction along the constant-presheaf sheafification unit is the module-valued representative of E. No arbitrary equivalence or map is chosen. The independent-coefficient K-flat predicate and IsFlatOnSite are the recorded pullback and flatness interfaces. The existential representative precedes all ringed-topos pullback data; the same P is used in every pullback conclusion. Small etale objects have universe u+1 and morphisms u, with coefficients u+1; target site universes are independent. Scalar-restriction declarations have moved without value or type changes to the publicly imported TorModelRestriction module (the coefficient-ring abbreviation becomes a semireducible definition); their attachment is lem-kun-tor-model-restriction."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -262,5 +234,15 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-49607",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T214853-L-1874809",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, three new modules and four node files against clones/live, the earlier PASSed head 3207802 and the live re-split nodes; item theorem signature byte-identical; direct importer PunctualTensorBaseChange compiled against the delivered modules; axioms clean"
  }
 }

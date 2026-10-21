@@ -1,0 +1,129 @@
+{
+ "id": "lem-kun-tor-model-tensor-comparison",
+ "kind": "lemma",
+ "title": "Derived tensor computation through canonical constant-scalar restriction",
+ "statement": "Let T be a scheme in universe u, Lambda a commutative ring in universe u+1, R its constant commutative ring sheaf, K a K-flat complex of sheaves of R-modules [def-pc-kflat-complex], and M a sheaf of R-modules. Let rho be the canonical constant-scalar restriction [lem-kun-tor-model-restriction]. Then Q(rho(Tot(K tensor single(M)))) is isomorphic to the fixed etale derived tensor [def-kun-derived-tensor] of Q(rho K) with single(rho M). The comparison uses the given ring-sheaf tensor and the existing module-valued derived tensor, with no new choice of tensor structure or derived functor.",
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "lem-kun-tor-model-restriction",
+  "def-kun-derived-tensor"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YH and 0F1M, K-flat computation of derived tensor; constant scalar encoding as in Modules on Sites Sections 03CV and 093I"
+ },
+ "proof": [
+  {
+   "text": "The existing constant-scalar realization E has a natural tensor comparison E(M) tensor E(N) isomorphic to E(M tensor N). Curry its inverse and apply the existing total-bifunctor comparison. E is an equivalence and therefore preserves the coproducts forming total complexes, so this comparison is an isomorphism of total tensor complexes. Cancel E with canonical restriction using the explicit realization-restriction identity isomorphism and its fully-faithful cancellation counterpart. This gives rho(Tot(K tensor L)) isomorphic to Tot(rho K tensor rho L).",
+   "uses": [
+    "lem-pur-etale-constant-module-tensor",
+    "lem-kun-tor-model-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "An additive equivalence reflects acyclicity: its homology comparison and faithfulness reflect the equality of the identity with zero. Lift any acyclic module-valued complex through the complex equivalence induced by rho and use the preceding total tensor comparison. The defining K-flatness of K proves acyclicity after tensoring with rho K. Symmetry gives the two tensor orders required by categorical K-flatness in the homotopy category. Thus rho K is categorically K-flat.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-kun-tor-model-restriction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the library K-flat derived-localization computation to rho K and rho M in degree zero. The single-complex functor commutes with termwise restriction, and total tensor with a single complex agrees with the termwise right-tensor complex. These isomorphisms, followed by the K-flat derived-localization comparison, give the required isomorphism for the fixed derived tensor.",
+   "uses": [
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YH and 0F1M; compatibility of their K-flat computation with the library constant-coefficient realizations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from module sheaves over a sheafified constant ring to module valued sheaves identifies total tensor and derived tensor computed using a K flat complex",
+   "results": "ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; PresheafOfModules.Monoidal.tensorObjMap; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; PresheafOfModules.Monoidal.tensorObj; Module.Flat.rTensor_shortComplex_exact; LinearMap.tensorKerEquiv; Module.Flat.lTensor_shortComplex_exact; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-19",
+   "verdict": "no match for the coefficient-encoding comparison; reuse total-bifunctor and localization APIs"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*(module|Module).*([Ee]quivalence|tensor)|restrictScalars.*(tensor|[Ee]quivalence)",
+   "results": "Mathlib/Algebra/Algebra/RestrictScalars.lean; Mathlib/Algebra/Algebra/RestrictScalars.lean; Mathlib/Algebra/Algebra/RestrictScalars.lean; Mathlib/Algebra/Algebra/RestrictScalars.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean",
+   "date": "2026-10-19",
+   "verdict": "no match for the coefficient-encoding comparison; reuse total-bifunctor and localization APIs"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-19",
+   "verdict": "no match for the coefficient-encoding comparison; reuse total-bifunctor and localization APIs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive tensor equivalence identifies derived tensor computed by a K flat complex with tensor of complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TensorProduct.Eqv.of_add_left\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {M : Type u_7} {N : Type u_8} [inst_1 : AddCommMonoid M]\\n  [inst_2 : AddCommMonoid N] [inst_3 : Module R M] [inst_4 : Module R N] (m₁ m₂ : M) (n : N),\\n  TensorProduct.Eqv R M N (FreeAddMonoid.of (m₁, n) + FreeAddMonoid.of (m₂, n)) (FreeAddMonoid.of (m₁ + m₂, \", \"doc\": \"For modules $M,N$ over a commutative semiring $R$, the equivalence relation on the free additive monoid generated by $M \\\\times N$ identifies $(m_1 + m_2, n)$ with $(m_1, n) + (m_2, n)$ for all $m_1, m\"}\n  {\"name\": \"LinearMap.tensorKerEquiv_apply\", \"module\": \"Mathlib.RingTheory.Flat.Equalizer\", \"type\": \"[Module.Flat R M] (x : M ⊗[R] ker f) : tensorKerEquiv S M f x = tensorKer S M f x\", \"doc\": \"Given commutative rings $ R $ and $ S $ with $ S $ an $ R $-algebra, an $ S $-module $ M $ satisfying scalar tower compatibility $ \\\\mathrm{IsScalarTower}(R, S, M) $, $ R $-modules $ N, P $, and an $ R\"}\n  {\"name\": \"LinearMap.tensorKerEquiv\", \"module\": \"Mathlib.RingTheory.Flat.Equalizer\", \"type\": \"[Module.Flat R M] : M ⊗[R] LinearMap.ker f ≃ₗ[S] LinearMap.ker (AlgebraTensorModule.lTensor S M f)\", \"doc\": \"Given a flat $ R $-module $ M $ with an $ S $-module structure compatible with the scalar tower $ R \\\\to S \\\\to M $, and an $ R $-linear map $ f: N \\\\to P $, the tensor product $ M \\\\otimes_R \\\\ker(f) $ is\"}\n  {\"name\": \"TensorProduct.Eqv\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \": FreeAddMonoid (M × N) → FreeAddMonoid (M × N) → Prop\", \"doc\": \"The equivalence relation on the free additive monoid generated by $M \\\\times N$, used to define the tensor product by enforcing bilinearity relations such as $(m_1 + m_2, n) \\\\sim (m_1, n) + (m_2, n)$, \"}\n  {\"name\": \"TensorProduct.Eqv.add_comm\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {M : Type u_7} {N : Type u_8} [inst_1 : AddCommMonoid M]\\n  [inst_2 : AddCommMonoid N] [inst_3 : Module R M] [inst_4 : Module R N] (x y : FreeAddMonoid (M × N)),\\n  TensorProduct.Eqv R M N (x + y) (y + x)\", \"doc\": \"For any $x, y$ in the free additive monoid generated by $M \\\\times N$, the equivalence relation identifies $x + y$ with $y + x$.\"}\n  {\"name\": \"LinearEquiv.lTensor\", \"module\": \"Mathlib.LinearAlgebra.TensorProduct.Basic\", \"type\": \"(f : N ≃ₗ[R] P) : M ⊗[R] N ≃ₗ[R] M ⊗[R] P\", \"doc\": \"Let $R$ be a commutative semiring and $M, N, P$ be modules over $R$. Given a linear equivalence $f: N \\\\simeq_R P$, this defines a linear equivalence from the tensor product $M \\\\otimes_R N$ to $M \\\\otim\"}\n  {\"name\": \"CategoryTheory.Adjunction.homAddEquiv\", \"module\": \"Mathlib.CategoryTheory.Adjunction.Additive\", \"type\": \"(X : C) (Y : D) : AddEquiv (F.obj X ⟶ Y) (X ⟶ G.obj Y)\", \"doc\": \"Given preadditive categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an adjunction $F ⊣ G$ between them with $F$ additive, and objects $X ∈ \\\\mathcal{C}$, $Y ∈ \\\\mathcal{D}$, the natural bijection $\\\\text{Hom}_\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homAddEquiv\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"{n : ℕ} : Ext.{w} X Y n ≃+ ShiftedHom ((singleFunctor C 0).obj X) ((singleFunctor C 0).obj Y) (n : ℤ)\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ and natural number $n$, the equivalence between the Ext group $\\\\operatorname{Ext}^n(X, Y)$ and the hom-set $\\\\operatorname{Hom}_{D(\\\\mathcal{\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete match for this sheaf-module statement; the elementary restriction, truncation and tensor APIs found are used in the proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution",
+  "date": "2026-10-19",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f1m",
+   "place": "proof steps 1-2, identification of the two derived tensor computations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TorModelTensorComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorModelTensorComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.torModel_tensor_single_comparison",
+  "statement": "theorem torModel_tensor_single_comparison\n    (Λ : Type (u + 1)) [CommRing Λ] (T : Scheme.{u})\n    (K : CochainComplex (SheafOfModules.{u + 1} (torModelRing Λ T)) ℤ)\n    (hK : CochainComplex.IsKFlatIndependentCoefficients (R := torModelCoefficientRing Λ T) K)\n    (M : SheafOfModules.{u + 1} (torModelRing Λ T)) :\n    let R : SheafOfModules.{u + 1} (torModelRing Λ T) ⥤\n      Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ) := torModelRestriction Λ T\n    let RC := R.mapHomologicalComplex (.up ℤ)\n    Nonempty (_root_.DerivedCategory.Q.obj\n      (RC.obj (CochainComplex.mapBifunctor K\n        ((CochainComplex.singleFunctor _ 0).obj M) (curriedTensor _))) ≅\n      (((derivedTensor (ModuleCat.{u + 1} Λ) T).obj\n        (_root_.DerivedCategory.Q.obj (RC.obj K))).obj\n        ((_root_.DerivedCategory.singleFunctor _ 0).obj (R.obj M))))",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-19"
+ },
+ "proof_deps": [
+  "lem-pur-etale-constant-module-tensor",
+  "lem-kun-tor-model-restriction",
+  "def-pc-kflat-complex",
+  "def-kun-derived-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-49607",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T214853-L-1874809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-49607",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T214853-L-1874809",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, three new modules and four node files against clones/live, the earlier PASSed head 3207802 and the live re-split nodes; item theorem signature byte-identical; direct importer PunctualTensorBaseChange compiled against the delivered modules; axioms clean"
+ }
+}

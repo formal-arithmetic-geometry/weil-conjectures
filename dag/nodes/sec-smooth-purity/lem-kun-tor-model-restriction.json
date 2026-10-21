@@ -1,0 +1,141 @@
+{
+ "id": "lem-kun-tor-model-restriction",
+ "kind": "lemma",
+ "title": "Canonical constant-scalar restriction for Tor-amplitude models",
+ "statement": "For a scheme T in universe u and a commutative coefficient ring Lambda in universe u+1, form its constant commutative ring sheaf, forget commutativity, and restrict module actions along the sheafification unit of the constant ring presheaf. This functor from ring-sheaf modules to Lambda-module-valued sheaves [def-weil-sheaf-of-modules-category] is additive and is an equivalence. Its composite after the existing constant-scalar realization [def-pur-etale-constant-scalar-realization] is naturally isomorphic to the identity by the identity maps on sections. The two constant-ring sheafification units agree under the canonical forgetful ring-sheaf comparison. No nonzero or nonempty hypothesis is required.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-etale-constant-scalar-realization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sections 03CV and 093I, constant ring sheaves and modules; the comparison needed in sites-cohomology.tex Tag 0F1M"
+ },
+ "proof": [
+  {
+   "text": "Use the explicit scalar restriction from the original Tor-amplitude statement: it keeps underlying additive sheaves and maps. Pointwise addition proves additivity. Functoriality of sheafification under forgetting commutativity identifies its unit with the RingCat sheafification unit followed by the canonical ring-sheaf isomorphism. Compose with the inverse isomorphism to obtain the unit transport identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The existing constant-scalar realization extends the scalar action along the RingCat unit, then transports through the canonical ring-sheaf isomorphism. Its underlying additive sheaf and maps are unchanged. The unit transport identity makes the identity on every section Lambda-linear after restriction. Use these explicit identity linear equivalences to construct the natural isomorphism from realization followed by restriction to the identity.",
+   "uses": [
+    "def-pur-etale-constant-scalar-realization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Realization is an equivalence by the existing constant-ring module equivalence and transport along the coefficient ring isomorphism. Since realization followed by restriction is isomorphic to the identity, cancellation of equivalences proves that the canonical restriction functor is an equivalence.",
+   "uses": [
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "lem-pur-etale-sum-tensor-test"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sections 03CV and 093I; explicit compatibility with the existing constant-ring module realization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A derived category object has Tor amplitude bounded below if and only if it admits a K-flat complex of flat module sheaves vanishing below the bound",
+   "results": "DerivedCategory.IsGE; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.IsLE; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.isLE_iff; DerivedCategory.isGE_iff",
+   "date": "2026-10-19",
+   "verdict": "no complete match for these encodings; reuse existing realization equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.Additive",
+   "results": "No hits",
+   "date": "2026-10-19",
+   "verdict": "no complete match for these encodings; reuse existing realization equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*tensor|tensor.*constant|KFlat.*equivalence",
+   "results": "Mathlib/LinearAlgebra/PiTensorProduct/Dual.lean; Mathlib/LinearAlgebra/PiTensorProduct/Basic.lean; Mathlib/RingTheory/TensorProduct/Pi.lean; Mathlib/RingTheory/PiTensorProduct.lean",
+   "date": "2026-10-19",
+   "verdict": "no complete match for these encodings; reuse existing realization equivalence"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-19",
+   "verdict": "no complete match for these encodings; reuse existing realization equivalence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant scalar restriction from modules over a constant ring sheaf is an equivalence with module valued sheaves",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.restrictScalars_isEquivalence_of_ringEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : Ring R] [inst_1 : Ring S] (e : R ≃+* S),\\n  (ModuleCat.restrictScalars e.toRingHom).IsEquivalence\", \"doc\": \"Given a ring equivalence $ e : R \\to S $, the restriction of scalars functor induced by $ e $ is an equivalence of categories between the category of left $ S $-modules and the category of left $ R $-m\"}\n  {\"name\": \"PresheafOfModules.restrictScalarsObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \"(M' : PresheafOfModules.{v} R') (α : R ⟶ R') : PresheafOfModules R\", \"doc\": \"Given a presheaf of modules $\\\\mathcal{M}'$ over a presheaf of rings $R'$ on a category $\\\\mathcal{C}$, and a natural transformation $\\\\alpha: R \\\\to R'$ between ring presheaves, this constructs a new pre\"}\n  {\"name\": \"SheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings\", \"type\": \": SheafOfModules.{v} R' ⥤ SheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between sheaves of rings on a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, this defines a functor from the category of sheaves of modules \"}\n  {\"name\": \"PresheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \"(α : R ⟶ R') : PresheafOfModules.{v} R' ⥤ PresheafOfModules.{v} R\", \"doc\": \"Given a natural transformation $\\\\alpha: R \\\\to R'$ between presheaves of rings on a category $\\\\mathcal{C}$, this defines a functor from the category of presheaves of modules over $R'$ to the category o\"}\n  {\"name\": \"RestrictScalars.addEquiv\", \"module\": \"Mathlib.Algebra.Algebra.RestrictScalars\", \"type\": \": RestrictScalars R S M ≃+ M\", \"doc\": \"The restriction of scalars construction that views an $ S $-module $ M $ as an $ R $-module (given a ring homomorphism $ R \\\\to S $) is additively equivalent to $ M $ itself via the identity map.\"}\n  {\"name\": \"LinearEquiv.restrictScalars\", \"module\": \"Mathlib.Algebra.Module.Equiv.Basic\", \"type\": \"(f : M ≃ₗ[S] M₂) : M ≃ₗ[R] M₂\", \"doc\": \"Given semirings $ R $ and $ S $ with inverse ring homomorphisms $ \\\\sigma: R \\\\to S $ and $ \\\\sigma': S \\\\to R $, and modules $ M $ over $ R $ and $ M_2 $ over $ S $, this constructs an $ R $-linear equiv\"}\n  {\"name\": \"Submodule.restrictScalarsEquiv\", \"module\": \"Mathlib.Algebra.Module.Submodule.RestrictScalars\", \"type\": \"(p : Submodule R M) : p.restrictScalars S ≃ₗ[R] p\", \"doc\": \"Given a scalar tower $ S \\\\to R \\\\to M $, the restriction of scalars from $ R $ to $ S $ on a submodule $ p $ of an $ R $-module $ M $ induces a linear equivalence between the $ S $-submodule $ p.restri\"}\n  {\"name\": \"ModuleCat.restrictScalarsEquivalenceOfRingEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u_1} → {S : Type u_2} → [inst : Ring R] → [inst_1 : Ring S] → R ≃+* S → (ModuleCat S ≌ ModuleCat R)\", \"doc\": \"Given rings $ R $ and $ S $ with a ring equivalence $ e : R ≃+* S $, the restriction of scalars functors $ \\\\text{ModuleCat}.restrictScalars(e) : \\\\text{ModuleCat}(S) \\\\to \\\\text{ModuleCat}(R) $ and $ \\\\te\"}",
+   "date": "2026-10-20",
+   "verdict": "No complete match for this sheaf-module statement; the elementary restriction, truncation and tensor APIs found are used in the proof."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution",
+  "date": "2026-10-19",
+  "group": "S3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f1m",
+   "place": "scalar-restriction definitions and proof step 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.TorModelRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorModelRestriction.lean",
+  "declaration": "AlgebraicGeometry.Etale.torModelRestriction_isEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.Etale.torModelCoefficientRing",
+   "AlgebraicGeometry.Etale.torModelRing",
+   "AlgebraicGeometry.Etale.torModelScalarUnit",
+   "AlgebraicGeometry.Etale.torModelRestriction",
+   "AlgebraicGeometry.Etale.torModelRestriction_additive",
+   "AlgebraicGeometry.Etale.torModelScalarUnit_transport",
+   "AlgebraicGeometry.Etale.torModelRealizationRestrictionIso",
+   "AlgebraicGeometry.Etale.torModelRestriction_isEquivalence"
+  ],
+  "statement": "theorem torModelRestriction_isEquivalence\n    (T : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :\n    (torModelRestriction Λ T).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "S3",
+  "date": "2026-10-19"
+ },
+ "proof_deps": [
+  "def-pur-etale-constant-scalar-realization",
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "lem-pur-etale-sum-tensor-test"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-49607",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T214853-L-1874809",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-49607",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T214853-L-1874809",
+  "kind": "interface",
+  "note": "independent cc review: delivered item, three new modules and four node files against clones/live, the earlier PASSed head 3207802 and the live re-split nodes; item theorem signature byte-identical; direct importer PunctualTensorBaseChange compiled against the delivered modules; axioms clean"
+ }
+}
