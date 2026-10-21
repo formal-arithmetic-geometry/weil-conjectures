@@ -1,0 +1,112 @@
+{
+ "id": "lem-trf-integral-comparison-counit-characterization",
+ "kind": "statement",
+ "title": "Whole-tower adjunct characterization of the specified integral comparison",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and $A_{E,m}=\\mathcal O_E/\\varpi_E^m$ for $m\\geq1$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be an isomorphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties], with small pro-etale sites [def-weil-pbc-proetale-site]. Write $R_T=\\widehat{\\mathcal O}_{E,T}=\\lim_m(A_{E,m})_T$ for $T=X,Y$ [def-weil-completed-integral-coefficients], and use module sheaves and unbounded derived categories [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Let $\\operatorname{Tow}_X=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(R_X))$ and let $\\Delta$ be the termwise constant-tower functor [def-weil-inverse-system, lem-weil-tower-category-levelwise-abelian]. For a strict tower complex $T_\\bullet$, choose a K-injective tower resolution $j_T:T_\\bullet\\to J_\\bullet$ with injective terms [def-pur-kinjective-complex, def-sp-injective-resolutions], compute $R\\lim T_\\bullet=\\lim J_\\bullet$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit], and put $\\epsilon_T=[j_T]^{-1}\\circ[\\Delta\\lim J_\\bullet\\to J_\\bullet]$. Then for every $H\\in D(\\operatorname{Mod}(R_X))$ the map\n$$\\Phi_{H,T}:\\operatorname{Hom}(H,R\\lim T_\\bullet)\\longrightarrow\\operatorname{Hom}(\\Delta H,T_\\bullet),\\qquad f\\longmapsto\\epsilon_T\\circ\\Delta(f)$$\nis a bijection, natural in both derived variables and independent of the resolution.\nFor $K\\in D^b_c(Y,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], let $q:P\\to K$ be the chosen flat-term K-flat resolution [def-pc-kflat-complex, lem-pc-kflat-resolution]. Set $P_m=P\\otimes_{R_Y}(A_{E,m})_Y$, $C_{g,m}=\\operatorname{Res}_m g_m^*P_m$, with the actual quotient transitions, and $\\theta_{g,m}:g^{-1}P\\to C_{g,m}$, $x\\mapsto\\bar x\\otimes1$; these are the objects, coefficient actions and units of [def-weil-inverse-image-pullback-comparison](b). Let $\\theta_g^\\Delta:\\Delta g^{-1}P\\to C_{g,\\bullet}$ be this strict family and identify the specified cone model of $Lg^*K$ with $R\\lim C_{g,\\bullet}$ by the normalized Roos comparison [lem-weil-strict-roos-comparison]. The specified comparison $\\kappa^g_K$ of that definition is characterized uniquely by\n$$\\epsilon_{C_g}\\circ\\Delta(\\kappa^g_K)=\\theta_g^\\Delta\\circ\\Delta[g^{-1}(q)]^{-1}.$$\nIn particular the zero shifted-product cone lift $z\\mapsto(0,(\\theta_{g,m}(z))_m)$, conjugated by $[g^{-1}(q)]^{-1}$ and by the normalized Roos identification, is the morphism with this entire-tower adjunct.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, with its abelian specialization Tag 0DVC, lemma-pre-derived-adjoint-functors; applied to constant towers and inverse limit. The K-flat/Roos comparison characterization is an agent extraction of the returned item Steps 3 and 4, following blueprint Global powers."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-pur-kinjective-complex",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-derived-complete-integral-detailed",
+  "def-pc-kflat-complex",
+  "lem-pc-kflat-resolution",
+  "def-weil-inverse-image-pullback-comparison",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derivedLimit|derived.limit|constant.*[Aa]djoint|[Aa]djoint.*constant",
+   "results": "{\"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/GlobalSections.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\", \"Mathlib/CategoryTheory/Sites/LocalSite.lean\"], \"digest\": \"d018cba21207c49a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: constLimAdj is ordinary (HasLimits.lean:593); Adjunction.derived (Functor/Derived/Adjunction.lean) requires constructed absolute derived functors and does not identify the specified K-flat/Roos integral comparison with its whole-tower adjunct. Other hits are ordinary limits or unrelated pullback comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Limits.lim",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.constLimAdj\"], \"digest\": \"efa5ec87f4e962a9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: constLimAdj is ordinary (HasLimits.lean:593); Adjunction.derived (Functor/Derived/Adjunction.lean) requires constructed absolute derived functors and does not identify the specified K-flat/Roos integral comparison with its whole-tower adjunct. Other hits are ordinary limits or unrelated pullback comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived constant tower functor is left adjoint to derived inverse limit, with normalized counit computed by a K-injective resolution.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.constLimAdj\", \"CategoryTheory.Localization.HasProductsOfShapeAux.adj\", \"CategoryTheory.Limits.colimConstAdj\", \"CategoryTheory.Functor.leftDerived\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε.congr_simp\"], \"digest\": \"093a206d2bda6d55\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: constLimAdj is ordinary (HasLimits.lean:593); Adjunction.derived (Functor/Derived/Adjunction.lean) requires constructed absolute derived functors and does not identify the specified K-flat/Roos integral comparison with its whole-tower adjunct. Other hits are ordinary limits or unrelated pullback comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For modules on a small ringed site the exact constant inverse tower functor is left adjoint on unbounded derived categories to total derived inverse limit; the Hom bijection is composition with the K-injective tower counit.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.LocallyConstant.adjunction\", \"LightCondMod.LocallyConstant.adjunction\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived'\"], \"digest\": \"04cf82ae377cdafc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: constLimAdj is ordinary (HasLimits.lean:593); Adjunction.derived (Functor/Derived/Adjunction.lean) requires constructed absolute derived functors and does not identify the specified K-flat/Roos integral comparison with its whole-tower adjunct. Other hits are ordinary limits or unrelated pullback comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "Rlim|RLim|Roos|KInjective.*[Aa]dj|[Aa]dj.*KInjective",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/CochainComplexPlus.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/Algebra/Category/Ring/Under/Property.lean\", \"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/LimitsOfShape.lean\"], \"digest\": \"77e5eaba350ee7ba\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: constLimAdj is ordinary (HasLimits.lean:593); Adjunction.derived (Functor/Derived/Adjunction.lean) requires constructed absolute derived functors and does not identify the specified K-flat/Roos integral comparison with its whole-tower adjunct. Other hits are ordinary limits or unrelated pullback comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A Roos cone augmentation represents the unique derived-limit map with a prescribed entire tower counit image, for modules over a completed coefficient sheaf.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.isLimitLimitCone\", \"ModuleCat.directLimitIsColimit\", \"ModuleCat.productConeIsLimit\", \"ModuleCat.HasLimits.limitCone\", \"Condensed.profiniteSolidCounit\", \"ModuleCat.directLimitIsColimit_desc\", \"ModuleCat.directLimitCocone\", \"PresheafOfModules.limitCone\"], \"digest\": \"e6bc833592de7ad8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: constLimAdj is ordinary (HasLimits.lean:593); Adjunction.derived (Functor/Derived/Adjunction.lean) requires constructed absolute derived functors and does not identify the specified K-flat/Roos integral comparison with its whole-tower adjunct. Other hits are ordinary limits or unrelated pullback comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"ecb89a2541633757\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: constLimAdj is ordinary (HasLimits.lean:593); Adjunction.derived (Functor/Derived/Adjunction.lean) requires constructed absolute derived functors and does not identify the specified K-flat/Roos integral comparison with its whole-tower adjunct. Other hits are ordinary limits or unrelated pullback comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Characterize the specified integral inverse-image to completed pullback comparison as the unique morphism whose image under the derived constant-tower limit adjunction is the strict compatible quotient-unit family.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.map_lift_pullbackComparison\", \"factorsThrough_of_pullbackCondition\", \"PresheafOfModules.pullbackComp\", \"CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility\", \"CategoryTheory.GrothendieckTopology.Plus.res_mk_eq_mk_pullback\", \"CategoryTheory.Limits.map_lift_pullbackComparison_assoc\", \"TopCat.Presheaf.pullback_obj_obj_ext\", \"TopCat.Presheaf.pullback_obj_obj_ext_iff\"], \"digest\": \"5e2e2facf3ad960e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: constLimAdj is ordinary (HasLimits.lean:593); Adjunction.derived (Functor/Derived/Adjunction.lean) requires constructed absolute derived functors and does not identify the specified K-flat/Roos integral comparison with its whole-tower adjunct. Other hits are ordinary limits or unrelated pullback comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-integral-inverse-image-comparison-composition",
+  "date": "2026-10-21",
+  "group": "Q90"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1, Global powers: 'compatible with composition' of the integral base-change identifications; Whole-tower adjunct characterization of the specified integral comparison",
+   "via": [
+    "lem-trf-integral-inverse-image-comparison-composition",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
