@@ -3,19 +3,100 @@
  "blueprint": {
   "is": "def-nagata-relative-affine-space",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-sbc-affine-space"
+  ]
  },
  "kind": "definition",
  "title": "Relative affine space",
- "statement": "For a scheme $S$ and $n\\in\\mathbb N$, define\n\n$$\n\\mathbb A^n_S=\\operatorname{Spec}_S\n\\bigl(\\operatorname{Sym}_{\\mathcal O_S}(\\mathcal O_S^{\\oplus n})\\bigr).\n$$\n\nConcretely, on an affine open $V=\\operatorname{Spec}(R)$ of $S$ this is\n$\\operatorname{Spec}(R[T_1,\\ldots,T_n])$; for a principal restriction\n$D(a)\\subseteq V$ the transition map is induced by\n$R[T_1,\\ldots,T_n]\\to R_a[T_1,\\ldots,T_n]$.",
+ "statement": "For a scheme $S$ [def-pc-scheme] and an index set $I$, define the relative affine space, with its first projection to $S$, by\n$$\n\\mathbb A^I_S=S\\times_{\\operatorname{Spec}\\mathbb Z}\\operatorname{Spec}\\bigl(\\mathbb Z[T_i:i\\in I]\\bigr)\n$$\nusing the fibre product [def-pc-fibre-product] and affine spectrum [def-weil-affine-spectrum]. Here $R[T_i:i\\in I]$ is the commutative polynomial algebra: its polynomials are finite sums of monomials, each monomial involving finitely many variables, even when $I$ is infinite. On an affine open $V=\\operatorname{Spec}R$ of $S$, the inverse image of $V$ is canonically $\\operatorname{Spec}(R[T_i:i\\in I])$ over $V$; on a principal restriction $D(a)\\subseteq V$ the restriction morphism is induced contravariantly by the coefficient map $R[T_i:i\\in I]\\to R_a[T_i:i\\in I]$, fixing every $T_i$, where $R_a=R[1/a]$.\n\nFor an integer $n\\geq0$, take $I=\\{1,\\ldots,n\\}$ and write $\\mathbb A^n_S$. Equivalently, there is a canonical isomorphism over $S$\n$$\n\\mathbb A^n_S\\cong\\underline{\\operatorname{Spec}}_S\\bigl(\\operatorname{Sym}_{\\mathcal O_S}(\\mathcal O_S^{\\oplus n})\\bigr).\n$$\nHere $\\mathcal O_S^{\\oplus n}$ is the finite direct sum of $n$ copies of the structure module, with its ordered standard basis [def-weil-sheaf-of-modules-category]. The symmetric algebra sheaf is the sheafification construction of [lem-weil-pbc-symmetric-algebra-sheaf-construction]; its quasi-coherence and affine sections are supplied by [lem-weil-pbc-quasi-coherent-symmetric-algebra-affine]. Relative spectrum has the meaning and compatible affine restrictions of [lem-weil-pbc-affine-morphism-relative-spec]. The displayed isomorphism is the one whose affine ring identifications send each standard-basis generator to the corresponding $T_i$ [lem-weil-pbc-symmetric-algebra-free-module-polynomial]. In finite rank the fibre-product definition is also the definition of [def-sbc-affine-space].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-zmt/def-nagata-relative-affine-space.md",
   "place": "node def-nagata-relative-affine-space, order 181"
  },
- "stmt_deps": [],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "def-sbc-affine-space"
+ ],
+ "proof": [
+  {
+   "text": "For the finite-rank comparison put $F=\\mathcal O_S^{\\oplus n}$. On $U=\\operatorname{Spec}R$, its inclusions and projections identify its sections with $R^n$, with the standard basis; the corresponding sheaf on $U$ is $\\widetilde{R^n}$. Thus $F$ is quasi-coherent by [pqf-def-coherent], including $n=0$. Let $B$ be its explicitly sheafified symmetric algebra [lem-weil-pbc-symmetric-algebra-sheaf-construction]. Apply [lem-weil-pbc-quasi-coherent-symmetric-algebra-affine]: $B$ is quasi-coherent and its canonical map $\\operatorname{Sym}_R(R^n)\\to B(U)$ is an algebra isomorphism. It is an algebra map by construction and is bijective by the cited statement.",
+   "uses": [
+    "pqf-def-coherent",
+    "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/modules.tex",
+    "place": "Tags 01CF (section-symmetric-exterior), 01CG (lemma-local-tensor-algebra), 01CL (lemma-whole-tensor-algebra-permanence)"
+   }
+  },
+  {
+   "text": "On each affine $U=\\operatorname{Spec}R$, compose the inverse of the symmetric-algebra polynomial isomorphism [lem-weil-pbc-symmetric-algebra-free-module-polynomial] with the isomorphism of step 1. This identifies $R[T_1,\\ldots,T_n]$ with $B(U)$, sending $T_i$ to the image of the standard section $e_i$. For an inclusion of affine opens the two resulting maps agree on coefficients and on every $T_i$: restrictions of $F$ fix its standard basis, and the restrictions and sheafification unit defining $B$ commute [lem-weil-pbc-symmetric-algebra-sheaf-construction]. Since coefficients and variables generate the polynomial ring, the maps agree on every polynomial. The affine opens form a basis [lem-weil-pbc-affine-opens-basis]. On any open $W$, map a section by these maps on affine opens contained in $W$ and glue: on overlaps refine by affine opens, where compatibility was just checked. Uniqueness of sheaf gluing proves independence, compatibility with restriction, and the inverse identity. Thus these maps give an isomorphism of algebra sheaves $\\mathcal O_S[T_1,\\ldots,T_n]\\cong B$.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01LZ/01M0 (section-affine-n-space, definition-affine-n-space and following base-change formula); Tag 01M1 (section-vector-bundle), paragraph identifying O_S[T_1,...,T_n] with Sym(O_S^{oplus n}); Tags 01LW/01LX for relative spectrum"
+   }
+  },
+  {
+   "text": "The finite-rank polynomial relative spectrum is the fibre-product affine space by [def-sbc-affine-space]. Apply the anti-equivalence in [lem-weil-pbc-affine-morphism-relative-spec] to the algebra-sheaf isomorphism of step 2. An equivalence and its inverse send mutually inverse maps to mutually inverse maps, so this gives the displayed isomorphism of schemes over $S$. Parts (2)--(4) of that node identify its affine restrictions with the spectra of the coefficient-preserving polynomial isomorphisms of step 2. Hence it is the canonical isomorphism specified by the standard generators. This establishes the symmetric-algebra description without identifying it by definition with the fibre-product construction.",
+   "uses": [
+    "def-sbc-affine-space",
+    "lem-weil-pbc-affine-morphism-relative-spec"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01LZ/01M0 (section-affine-n-space, definition-affine-n-space and following base-change formula); Tag 01M1 (section-vector-bundle), paragraph identifying O_S[T_1,...,T_n] with Sym(O_S^{oplus n}); Tags 01LW/01LX for relative spectrum"
+   }
+  },
+  {
+   "text": "For the chart clauses, with $I$ arbitrary, let $\\pi:\\mathbb A^I_S\\to S$ and $q:\\mathbb A^I_S\\to\\operatorname{Spec}\\mathbb Z[T_i:i\\in I]$ be the two projections. For an affine open $V=\\operatorname{Spec}R$ of $S$, [lem-weil-pbc-open-fibre-product] (with $U=\\operatorname{Spec}\\mathbb Z$ and $W$ the whole second factor) identifies the open subscheme $\\pi^{-1}(V)$ with $V\\times_{\\operatorname{Spec}\\mathbb Z}\\operatorname{Spec}\\mathbb Z[T_i:i\\in I]$, compatibly with the projections, and [lem-weil-pbc-fibre-product-affine-spectra] identifies this with $\\operatorname{Spec}(R\\otimes_{\\mathbb Z}\\mathbb Z[T_i:i\\in I])$, the projections becoming $\\operatorname{Spec}$ of $r\\mapsto r\\otimes1$ and $p\\mapsto1\\otimes p$. The ring map $R\\otimes_{\\mathbb Z}\\mathbb Z[T_i:i\\in I]\\to R[T_i:i\\in I]$, $r\\otimes p\\mapsto rp$, is an isomorphism of $R$-algebras: its inverse is the $R$-algebra map sending $T_i\\mapsto1\\otimes T_i$ (universal property of the polynomial ring), and both composites fix the generators $r\\otimes1$, $1\\otimes T_i$, resp. $r$, $T_i$. This gives $\\pi^{-1}(V)\\cong\\operatorname{Spec}(R[T_i:i\\in I])$ over $V$, with $\\pi$ induced by the inclusion of constants. For $a\\in R$, $D(a)\\subseteq V$ is the open subscheme $\\operatorname{Spec}R_a$, embedded by $\\operatorname{Spec}(R\\to R_a)$ [lem-weil-pbc-principal-localization-open-immersion]. The inclusion $\\pi^{-1}(D(a))\\subseteq\\pi^{-1}(V)$ is a morphism of affine schemes, hence $\\operatorname{Spec}$ of exactly one ring map $\\psi:R[T_i]\\to R_a[T_i]$ [def-weil-affine-spectrum]. It commutes with $\\pi$ and with $q$, so $\\psi$ restricted to $R$ is $R\\to R_a$ and $\\psi(T_i)=T_i$; these generate, so $\\psi$ is the coefficient map fixing every $T_i$.",
+   "uses": [
+    "lem-weil-pbc-open-fibre-product",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01JR (lemma-open-fibre-product), 01I4 (lemma-fibre-product-affine-schemes); constructions.tex 01M0 note A^n_R = Spec R[T_1,...,T_n]"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-def-coherent",
+  "lem-weil-pbc-symmetric-algebra-sheaf-construction",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-affine-opens-basis",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-open-fibre-product",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01LZ/01M0 (section-affine-n-space, definition-affine-n-space and following base-change formula); Tag 01M1 (section-vector-bundle), paragraph identifying O_S[T_1,...,T_n] with Sym(O_S^{oplus n}); Tags 01LW/01LX for relative spectrum"
+ },
  "mathlib_searches": [
   {
    "tool": "text search of the local Mathlib checkout (0df444a360)",
@@ -24,10 +105,59 @@
     "Mathlib.AlgebraicGeometry.AffineSpace:44 (def)"
    ],
    "date": "2026-10-08"
+  },
+  {
+   "tool": "grep",
+   "query": "def AffineSpace|def SpecIso|lemma map_SpecMap|def map|def isPullback_map",
+   "results": "5 hits; names/files: 44, 228, 269, 301, 319; ",
+   "date": "2026-10-21",
+   "verdict": "partial match: declarations read at AffineSpace.lean lines 44, 228, 269, 301; single-file rg output encoded line numbers as file fields; corrected directory grep recorded separately"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative affine space over a scheme as a pullback of the spectrum of a polynomial ring",
+   "results": "8 hits; names/files: AlgebraicGeometry.AffineSpace, AlgebraicGeometry.instIsAffinePullbackSchemeOfIsAffineHom_1, AlgebraicGeometry.AffineSpace.over_over, AlgebraicGeometry.AffineSpace.SpecIso, AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom, AlgebraicGeometry.AffineScheme, AlgebraicGeometry.AffineSpace.isPullback_map, AlgebraicGeometry.Scheme.Pullback.isAffine_of_isAffine_isAffine_isAffine; ",
+   "date": "2026-10-21",
+   "verdict": "partial match: AffineSpace, SpecIso, isPullback_map; actual local source read"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace",
+   "results": "12 hits; names/files: AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.instIsAffine, AlgebraicGeometry.AffineSpace.instIsIntegral, AlgebraicGeometry.AffineSpace.instIsReduced, AlgebraicGeometry.AffineSpace.reindex, AlgebraicGeometry.AffineSpace.map, AlgebraicGeometry.AffineSpace.reindex_id; ",
+   "date": "2026-10-21",
+   "verdict": "partial match: exact fibre-product definition, map, over; not the sheaf-level symmetric-algebra comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative affine space over a scheme is the pullback of Spec of the integer multivariate polynomial ring",
+   "results": "8 hits; names/files: AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.over, AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.AffineSpace.over_over, AlgebraicGeometry.AffineSpace.homOfVector, AlgebraicGeometry.AffineSpace.instIsAffineHomOverSchemeInferInstanceOverClass, AlgebraicGeometry.AffineSpace.map, AlgebraicGeometry.AffineSpace.isPullback_map; ",
+   "date": "2026-10-21",
+   "verdict": "partial match: AffineSpace defines the fibre product, over gives its projection, isPullback_map gives arbitrary base change; no symmetric-algebra sheaf comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "SymmetricAlgebra|relativeSpec|relative[Ss]pec",
+   "results": "0 hits; names/files: ; ",
+   "date": "2026-10-21",
+   "verdict": "no match for the sheaf-level comparison in AlgebraicGeometry; 0 hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The symmetric algebra sheaf of a finite free structure module has relative spectrum equal to affine space over a scheme",
+   "results": "8 hits; names/files: AlgebraicGeometry.AffineSpace, AlgebraicGeometry.AffineSpace.SpecIso, AlgebraicGeometry.AffineSpace.toSpecMvPoly, AlgebraicGeometry.AffineSpace.isoOfIsAffine, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply, AlgebraicGeometry.AffineSpace.SpecIso_inv_over, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv, AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply; ",
+   "date": "2026-10-21",
+   "verdict": "no full match: AffineSpace, SpecIso, isoOfIsAffine and coordinate formulae; no symmetric-algebra sheaf or relative-spectrum comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "def AffineSpace|def SpecIso|lemma map_SpecMap|lemma isPullback_map|instance over",
+   "results": "5 hits; names/files: Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean, Mathlib/AlgebraicGeometry/AffineSpace.lean; ",
+   "date": "2026-10-21",
+   "verdict": "partial match: Mathlib/AlgebraicGeometry/AffineSpace.lean lines 44, 66, 228, 301, 325 read; all fibre-product/chart clauses, not the final sheaf comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -61,5 +191,45 @@
   "statement": "For a scheme $S$ and an index set $n$, define\n\n$$\n\\mathbb A^n_S=S\\times_{\\operatorname{Spec}\\mathbb Z}\n\\operatorname{Spec}\\bigl(\\mathbb Z[T_i : i\\in n]\\bigr),\n$$\n\nthe fibre product of $S$ with the spectrum of the polynomial ring over\n$\\mathbb Z$ in the variables $T_i$, $i\\in n$. Concretely, on an affine open\n$V=\\operatorname{Spec}(R)$ of $S$ this is\n$\\operatorname{Spec}(R[T_i : i\\in n])$; for a principal restriction\n$D(a)\\subseteq V$ the transition map is induced by\n$R[T_i : i\\in n]\\to R_a[T_i : i\\in n]$. For $n\\in\\mathbb N$ one takes\nthe index set $\\{1,\\ldots,n\\}$.\n\nEquivalently, for $n\\in\\mathbb N$,\n$\\mathbb A^n_S=\\underline{\\operatorname{Spec}}_S\n\\bigl(\\operatorname{Sym}_{\\mathcal O_S}(\\mathcal O_S^{\\oplus n})\\bigr)$.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-relative-affine-space",
+  "worker": "stage1",
+  "summary": "Followed the main-20261015 blueprint_update: arbitrary index set, fibre-product construction and polynomial restriction maps, with finite-rank symmetric-algebra comparison. Added the existing notion dependencies, searched project and Mathlib, and verified the actual Mathlib definition and charts. Kept the item split rather than mathlib because the final sheaf-level comparison needs existing symmetric-algebra and relative-spectrum theorems; supplied its argument in three supplementary steps. No new nodes or Lean edits.",
+  "blueprint": "The complete defining display and affine/principal restriction sentences of main-20261015 def-nagata-relative-affine-space; supplementary steps 1--3 justify its final finite-rank symmetric-algebra equivalence. same_as records the finite-rank affine-space definition def-sbc-affine-space. Step 4 (added by the maintainer reader) proves the affine-chart and principal-restriction sentences for arbitrary index set.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+    "why": "Generic quasi-coherence and affine-section comparison for the explicit symmetric-algebra sheaf, used on the finite free structure module; the unit has no such algebra-sheaf theorem."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine-basis property, used only to glue compatible algebra-sheaf maps; it does not replace either step of the ZMT/immersion unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic relative-spectrum anti-equivalence with compatible affine restrictions, used on an algebra isomorphism; the unit supplies no relative-spectrum interface."
+   }
+  ]
+ },
+ "mathlib_candidate": {
+  "declaration": "AlgebraicGeometry.AffineSpace",
+  "file": "Mathlib/AlgebraicGeometry/AffineSpace.lean",
+  "line": 44,
+  "how": "Exact fibre-product data at line 44 and first projection over at line 66, for arbitrary index type. SpecIso at line 228 and isPullback_map at line 325 give the affine-open chart by applying base change along the affine-open inclusion. map_SpecMap at line 301 gives the coefficient map, including R to R_a. These cover the fibre-product construction and its charts, but not the sheaf-level symmetric-algebra comparison; the latter is proved in the supplementary steps using existing DAG nodes. This is therefore not a Mathlib leaf for the entire item."
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-morphism-relative-spec"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-e1c92437d",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-e1c92437d (reviewer sub-agent of L); spot-checked: Read the item in full (no new nodes) against main-20261015 def-nagata-relative-affine-space.md and Stacks constructions 01LZ/01M0/01M1 and schemes 01JR/01I4. The statement follows blueprint_update faithfully: fibre product over an arbitrary index set, affine charts, D(a) transition, and for finite n a canonical isomorphism with Spec_S Sym(O_S^n) sending each basis element to T_i. Nothing is weakened. The 35 citers use finite n and the charts, which are unchanged up to the canonical isomorphism. The item is still unsplit in live and side-live and is not in any dropped list. Steps 1-3 are correct and cite statement clauses. Step 1: the qcoh-affine lemma on O^n gives θ_U bijective. Step 2: the maps agree on R and on the T_i, and are glued over the affine basis without assuming affine overlaps. Step 3: def-sbc-affine-space's 'Equivalently Spec_S(O_S[x])' clause plus relative-spec (2)-(4), with both algebras quasi-coherent. Fault C1/D5: the item asserts π^{-1}(V)≅Spec R[T_i:i∈I] for arbitrary I and the D(a) coefficient-map transition, but no step proved them. Fixed by appending step 4, which cites the Mathlib leaves lem-weil-pbc-open-fibre-product, lem-weil-pbc-fibre-product-affine-spectra and lem-weil-pbc-principal-localization-open-immersion plus def-weil-affine-spectrum. It writes out R⊗_Z Z[T_I]≅R[T_I] and pins ψ through both projections. proof_deps updated; cycle check clean. Accepted tool_uses: qcoh-symmetric-algebra-affine and affine-morphism-relative-spec, which are generic algebra-sheaf and relative-Spec interfaces the ZMT unit lacks; affine-opens-basis is a Mathlib leaf. Edge cases checked: I=∅, S=∅, R=0, a nilpotent or a unit, I infinite. Maintainer note: def-sbc-affine-space is a Mathlib leaf whose `how` does not cover its own relative-spectrum 'Equivalently' clause (B8); worth re-checking.; 1 file(s) fixed by the reviewer"
  }
 }
