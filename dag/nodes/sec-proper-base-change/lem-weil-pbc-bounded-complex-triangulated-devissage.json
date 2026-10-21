@@ -14,9 +14,10 @@
  ],
  "proof": [
   {
-   "text": "Write $Q$ for the localization functor of [def-weil-abstract-derived-category]. If $a>b$, every integer $q$ satisfies $q<a$ or $q>b$, so every $C^q$ is zero. Thus $C^\\bullet$ is isomorphic to the zero complex and its image is zero in $D(\\mathcal A)$, hence belongs to $\\mathcal S$ by hypothesis. Now assume $a\\le b$. For $n\\in\\mathbf Z$ define $T_n=\\sigma_{\\ge n}C$ by $T_n^q=C^q$ for $q\\ge n$ and $T_n^q=0$ for $q<n$, with differential $d_C^q$ when $q\\ge n$ and zero otherwise. The complex identities follow from $d_C^{q+1}d_C^q=0$; at a cut they are zero identities. The support bounds give $T_a\\cong C^\\bullet$ and $T_{b+1}\\cong0$ by the termwise identity maps on nonzero terms and the unique maps on zero terms.",
+   "text": "Fix the upper bound b. Induct on a natural number n, proving the claim for every complex L supported in [c,b] with b+1-c <= n, with its degree-zero single terms in S on that interval. Taking n=(b+1-a).toNat proves the desired case. If n=0, or if c>b at any induction step, every term of L is zero by the support condition, so the identity of L is zero degreewise. Thus L is a zero object, Q(L) is a zero object, and S contains it.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
    ],
    "elementary": true,
    "source": {
@@ -25,7 +26,7 @@
    }
   },
   {
-   "text": "For $a\\le n\\le b$, let $E_n$ be the complex with $C^n$ in degree $n$ and zero elsewhere. Define $i_n:T_{n+1}\\to T_n$ to be the identity in degrees $q\\ge n+1$ and zero below, and $p_n:T_n\\to E_n$ to be the identity in degree $n$ and zero elsewhere. Both commute with differentials: away from the cut this is identity commutation or a zero identity, while at degree $n$ the inclusion has zero source and the projection has zero target in degree $n+1$. The sequence $0\\to T_{n+1}\\xrightarrow{i_n}T_n\\xrightarrow{p_n}E_n\\to0$ is degreewise short exact in the abelian category [def-sp-abelian]. In degree $n$ it is $0\\to0\\to C^n\\xrightarrow{1}C^n\\to0$; in degrees $q\\ge n+1$ it is $0\\to C^q\\xrightarrow{1}C^q\\to0\\to0$; below $n$ every object is zero. Thus no assertion about truncations is being invoked without a proof.",
+   "text": "When c<=b, construct p:L -> single_c(L^c) with identity component in degree c and zero components elsewhere, using HomologicalComplex.mkHomToSingle. The only condition for this to be a chain map is that the differential entering degree c is zero; its source L^(c-1) is zero by the lower support bound. The component p^c is an isomorphism, and every other component has zero target, so p is degreewise epi and hence epi as a morphism of complexes.",
    "uses": [
     "def-sp-abelian",
     "def-weil-abstract-derived-category"
@@ -37,19 +38,9 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the degreewise short exact sequence just constructed. Its hypotheses are exactly that $\\mathcal A$ is abelian and $D(\\mathcal A)$ exists, both assumed here. For every $a\\le n\\le b$ this gives a distinguished triangle $Q(T_{n+1})\\to Q(T_n)\\to Q(E_n)\\to Q(T_{n+1})[1]$. Only existence and distinguishedness are needed; the boundary map's naturality and its sign play no role.",
+   "text": "Let T be the categorical kernel of p, a concrete limit determined up to unique compatible isomorphism. The sequence 0 -> T -> L -> single_c(L^c) -> 0 is short exact. Evaluation in each degree preserves its short exactness. In degree c the last arrow is an isomorphism, so T^c is zero. In every degree q different from c, its last object is zero, so T^q -> L^q is an isomorphism. Therefore T is supported in [c+1,b], and its degree-zero single terms on that interval belong to S by transport from those of L. This kernel realizes the next stupid tail, without any arbitrary choice of data from an existence theorem.",
    "uses": [
-    "lem-weil-pbc-complex-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FCP, lemma-K-bounded-derived, proof: displayed stupid-truncation triangles and finite induction (lines 9112–9128)."
-   }
-  },
-  {
-   "text": "The shift convention of [def-weil-abstract-derived-category] gives $E_n\\cong C^n[0][-n]$: the unique nonzero term has degree $n$, and the shifted differential is zero regardless of its sign. Since $Q$ commutes with shifts, $Q(E_n)\\cong Q(C^n[0])[-n]$. The hypothesis puts $Q(C^n[0])$ in $\\mathcal S$ for $a\\le n\\le b$; closure under all integer shifts and isomorphisms, assumed in the statement, puts $Q(E_n)$ in $\\mathcal S$ as well.",
-   "uses": [
+    "def-sp-abelian",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
@@ -59,11 +50,24 @@
    }
   },
   {
-   "text": "Set $N=b-a+1\\in\\mathbf Z_{>0}$. Induct on integers $k=0,\\ldots,N$ to prove $Q(T_{b+1-k})\\in\\mathcal S$. At $k=0$ this is the zero object identified in Step 1. For $k<N$, put $n=b-k$, so $a\\le n\\le b$ and $n+1=b+1-k$. The induction hypothesis gives the first vertex $Q(T_{n+1})$ of the distinguished triangle of Step 3, and Step 4 gives its third vertex $Q(E_n)$. For completeness, rotate this triangle twice using (TR2) of [def-weil-triangulated-category]. Its vertices are $Q(E_n),Q(T_{n+1})[1],Q(T_n)[1]$. The first two lie in $\\mathcal S$ by Step 4 and shift closure, so third-vertex closure gives $Q(T_n)[1]\\in\\mathcal S$, and shifting by $[-1]$ gives $Q(T_n)\\in\\mathcal S$. This is the claim for $k+1$. At $k=N$ this is $Q(T_a)\\in\\mathcal S$. The isomorphism $T_a\\cong C^\\bullet$ from Step 1 and closure under isomorphisms finish the proof.",
+   "text": "The integer-shift isomorphism of DerivedCategory.singleFunctors identifies single_c(L^c) with the shift by -c of single_0(L^c). The term hypothesis at c, integer-shift closure and isomorphism closure therefore put Q(single_c(L^c)) in S.",
    "uses": [
+    "def-weil-abstract-derived-category",
     "def-weil-triangulated-category"
    ],
    "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FCP, lemma-K-bounded-derived, proof: displayed stupid-truncation triangles and finite induction (lines 9112–9128)."
+   }
+  },
+  {
+   "text": "In the successor case n+1, the bound b+1-c <= n+1 implies b+1-(c+1) <= n. The induction hypothesis applies to T using Step 3. Apply lem-weil-pbc-complex-ses-triangle to the short exact sequence of Step 3 to obtain a distinguished triangle Q(T) -> Q(L) -> Q(single_c(L^c)) -> Q(T)[1]. Its first vertex belongs to S by induction and its third by Step 4. The middle-vertex closure of a strictly full triangulated subcategory, supplied by ObjectProperty.ext_of_isTriangulatedClosed₂ (equivalently the rotation argument of the source), gives S(Q(L)).",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Tag 0FCP, lemma-K-bounded-derived, proof: displayed stupid-truncation triangles and finite induction (lines 9112–9128)."
@@ -79,7 +83,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 0FCP, lemma-K-bounded-derived, proof: displayed stupid-truncation triangles and finite induction (lines 9112–9128)."
+  "place": "Tag 0FCP, lemma-K-bounded-derived, displayed stupid-truncation triangles and finite induction (lines 9112–9128). Lean realizes each next stupid tail as the kernel of the projection onto the current lowest term, using degreewise exactness and the shift isomorphisms of singleFunctors."
  },
  "mathlib_searches": [
   {
@@ -184,5 +188,15 @@
   "group": "NH",
   "result": "pass",
   "note": "The item node only adds its lean record; one new module, CategoryTheory.bounded_complex_mem_triangulated, whose statement matches the file verbatim. H3: Abelian C / HasDerivedCategory.{w} with u, v, w independent; S has IsTriangulated (ContainsZero, ℤ-shift stability, middle-vertex closure up to isoClosure) plus IsClosedUnderIsomorphisms, equivalent to the node's third-vertex closure by rotation; hK is termwise IsZero outside [a,b] with no a≤b binder, so the empty interval is kept; hS uses singleFunctor C 0 = Q∘single 0; the conclusion is S (Q.obj K). No retract, flatness or cohomology assumptions. Source: Stacks 0FCP derived.tex:9077, stupid-truncation triangles plus induction, without the K0 claim; the docstring carries the node's 5 steps. H4: no public duplicate; a private bounded_mem in PerfectRingClassicalGenerator is ring-specific and assumes retracts (advisory). H9: the plain ShortExact import is the lean.module of proof dependency lem-weil-pbc-complex-ses-triangle, required by brief §104; longest line 89; a single sorry. nt_compile --json clean (3.8 s, exit 0)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261021T111316-L-72449",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
