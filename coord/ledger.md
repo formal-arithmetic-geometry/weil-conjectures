@@ -22920,3 +22920,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:23 L: merged deliver/K4/Sheaf.Paper.PbcActualScalarPullback (stage 3; reviewer PASS; first push; landing 20261021T152325-L-1876825 (proof); batch 20261021T152302; modules 1; new nodes 0)
 - 15:23 L: returned deliver/ND/def-per-support-condition (reviewer RETURN: I read the definition in full. The support inequality dim Supp H^{-i}(K) ≤ i, with dim ∅ = −∞, matches BBD (4.0.1') afte)
 - 15:23 L: merged deliver/N2/Sheaf.NumberTheory.Padics.FiniteIntegralCondensedResolution (stage 3; reviewer PASS; first push; landing 20261021T152354-L-1913501 (proof); batch 20261021T152302; modules 1; new nodes 0)
+- 15:24 L: merged deliver/S8/Sheaf.AlgebraicGeometry.ScalarMatrixInverseImage (stage 3; reviewer PASS; first push; landing 20261021T152358-L-1918548 (interface); batch 20261021T152302; modules 1; new nodes 0; change records: coord/changes/S8-scalar-matrix-proof-elaboration.md)
