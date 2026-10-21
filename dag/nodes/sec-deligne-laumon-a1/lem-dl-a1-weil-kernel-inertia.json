@@ -12,9 +12,102 @@
   "def-wf-weil-group",
   "lem-wf-dense-open-pi1-surjective"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The curves $C_0$ and $U_0$ are normal by lem-sc-smooth-normal. They are Noetherian by lem-weil-pbc-finite-type-over-noetherian (the base is the spectrum of a field). A connected nonempty normal Noetherian scheme is integral: the disjoint open integral components in rem-pc-regular-normal (2) leave only one component. Apply this to $C_0$; its nonempty open $U_0$ is then integral and has the same generic point and function field $K$. Fix a separable closure $\\Omega/K$, choose an algebraic closure $\\widetilde\\Omega$ containing $\\Omega$ and use $\\operatorname{Spec}\\widetilde\\Omega$ as geometric generic base point (automorphisms extend uniquely over the purely inseparable extension), and write $G=\\operatorname{Aut}_K(\\Omega)$, $P=\\pi_1(U_0)$ and $Q=\\pi_1(C_0)$.",
+   "uses": [
+    "lem-sc-smooth-normal",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, hypothesis normal integral; preparation from the cited curve and Noetherian lemmas."
+   }
+  },
+  {
+   "text": "Apply lem-dl-a1-normal-scheme-galois-inertia-presentation to $U_0$ and $C_0$ using the same $\\Omega$. Obtain continuous surjections $a:G\\to P$, $b:G\\to Q$ with kernels $N_U,N_C$. Functoriality gives $b=f\\circ a$ for restriction $f:P\\to Q$: on every finite etale cover both sides act on its generic geometric fibre by the same field automorphism. Choose identical local strict henselizations and embeddings at points of $U_0$, whose local rings in the two schemes agree. The cited presentation says that $N_U$ and $N_C$ are respectively the closed normal closures of $J_x=\\operatorname{Aut}_{K_x^{\\mathrm{sh}}}(\\Omega)$ for $x\\in U_0$ and $x\\in C_0$.",
+   "uses": [
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+    "lem-galois-pi1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, clauses (1) and (3)."
+   }
+  },
+  {
+   "text": "For each boundary point $x$, apply lem-dl-a1-henselian-global-inertia-comparison with the normal local ring $A=\\mathcal O_{C_0,x}$. Its comparison identifies $J_x$ with the inertia kernel in $\\operatorname{Gal}(\\overline K_x/K_x)$ of d-real-boundary, where $K_x=\\operatorname{Frac}(A^{\\mathrm h})$. The map of this local group into $P$ is the composite through $G$: on a finite cover of $U_0$ its fibre is evaluated by precisely the same field automorphism of $\\Omega$, by lem-galois-pi1-functoriality. Thus $a(J_x)$ is the prescribed inertia image for a compatible path. An arbitrary path in d-real-boundary conjugates that image in $P$; closed normal generation in $P$ is unchanged by replacing each generator subgroup by a conjugate. Write $L_x$ for the prescribed image in $P$.",
+   "uses": [
+    "lem-dl-a1-henselian-global-inertia-comparison",
+    "d-real-boundary",
+    "lem-galois-pi1-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, identification of the top row and the residue kernel; Tag 0BTD, clause (3)."
+   }
+  },
+  {
+   "text": "Let $N=\\ker f$. Surjectivity of $a$ and $b=fa$ give $N=a(N_C)$: lift $p\\in N$ to $g\\in G$, then $b(g)=f(p)=1$. Since $N_C$ is compact, its image is closed; it is normal because $a$ is surjective. Its generators from $U_0$ vanish under $a$, so $N$ is the closed normal closure in $P$ of the $L_x$ for $x\\in S_0$. Explicitly, if $T\\subseteq P$ is closed normal and contains every $L_x$, then $a^{-1}(T)$ contains every $J_x$ for $x\\in C_0$ (the ones in $U_0$ lie in $N_U$). The presentation forces $N_C\\subseteq a^{-1}(T)$, hence $N\\subseteq T$. Conversely each $L_x$ lies in $N$.",
+   "uses": [
+    "lem-dl-a1-normal-scheme-galois-inertia-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, quotient by the generators supported on the removed points."
+   }
+  },
+  {
+   "text": "The map of Weil groups is the restriction of $f$, with the same degree coordinate, by lem-wf-dense-open-pi1-surjective (2). The pullback description in def-wf-fundamental-representation shows that its kernel is exactly $N$: if $f(p)=1$, its arithmetic degree is zero, so $(p,0)$ belongs to $W(U_0)$ and maps to the identity. Conversely a Weil element in the kernel has degree zero and arithmetic component in $N$. Each $L_x$ lies in the geometric subgroup by lem-real-boundary-decomposition-landing. Let $H$ be its closed normal closure in $W(U_0)$. The kernel just identified is closed normal, hence $H\\subseteq N$. The degree-zero subgroup has its compact profinite topology, so $H$, closed therein, is compact and its image is closed in the Hausdorff group $P$.",
+   "uses": [
+    "lem-wf-dense-open-pi1-surjective",
+    "def-wf-fundamental-representation",
+    "lem-real-boundary-decomposition-landing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, passage to the Weil pullback; the cited Weil definitions specify the topology."
+   }
+  },
+  {
+   "text": "Fix $x\\in S_0$ and let $D_x\\subseteq P$ be the image of its local absolute Galois group for the prescribed path. Write $r:P\\to\\operatorname{Gal}(k/k_0)$ for the arithmetic projection. By lem-real-boundary-local-constants, $\\kappa(x)/k_0$ is finite and $r(D_x)=\\operatorname{Gal}(k/\\kappa(x))$. For any $g\\in P$, lem-sfb-finite-field-galois-frobenius gives an integer $n$ such that $r(g)|_{\\kappa(x)}=\\Phi^n|_{\\kappa(x)}$, where $\\Phi$ is geometric Frobenius (the inverse of the cyclic generator in that lemma). Thus $r(g)\\Phi^{-n}$ fixes $\\kappa(x)$; choose $d\\in D_x$ with $r(d)=r(g)\\Phi^{-n}$. Then $w=gd^{-1}$ has arithmetic projection $\\Phi^n$ and belongs to $W(U_0)$. Since local inertia is a kernel, $D_x$ normalizes $L_x$, so $gL_xg^{-1}=wL_xw^{-1}\\subseteq H$. The closed subgroup $H$ of $P$ therefore contains every $P$-conjugate of every $L_x$, hence contains their closed generated subgroup $N$ from step 4. With $H\\subseteq N$ this proves equality. If $S_0$ is empty, step 4 gives $N=1$ directly and both normal closures are trivial.",
+   "uses": [
+    "lem-real-boundary-local-constants",
+    "def-wf-fundamental-representation",
+    "lem-sfb-finite-field-galois-frobenius"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, local inertia normal in decomposition; the finite-field arithmetic projection is given by lem-real-boundary-local-constants."
+   }
+  }
+ ],
+ "proof_deps": [
+  "d-real-boundary",
+  "def-wf-fundamental-representation",
+  "lem-dl-a1-henselian-global-inertia-comparison",
+  "lem-dl-a1-normal-scheme-galois-inertia-presentation",
+  "lem-galois-pi1-functoriality",
+  "lem-real-boundary-decomposition-landing",
+  "lem-real-boundary-local-constants",
+  "lem-sc-smooth-normal",
+  "lem-sfb-finite-field-galois-frobenius",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-wf-dense-open-pi1-surjective",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BTD and 0BSW; quotient argument and Weil-topology argument written out by Q123."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -43,10 +136,38 @@
    "results": "8 hits, including valuation and ideal inertia lemmas, Scheme.Hom.ker_toNormalization, and CategoryTheory.Subgroupoid.ker_isNormal; none states the required curve Weil-group result.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The kernel of restriction of Weil groups of an open smooth curve is the closed normal subgroup generated by henselian local inertia",
+   "results": "8 hits: IsDedekindDomain.selmerGroup.valuation_ker_eq, ValuationSubring.inertiaSubgroup, IsArithFrobAt.mul_inv_mem_inertia, Field.absoluteGaloisGroup.commutator_closure_isNormal, IntermediateField.restrictNormalHom_ker, Ideal.Quotient.map_ker_stabilizer_subtype, Ideal.Quotient.ker_stabilizerHom, IsDedekindDomain.selmerGroup.fromUnit_ker. Read the relevant hits: definitions of inertia, finite field-extension Galois theory, and abstract Galois categories do not give the henselization or normal-scheme comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.EtaleFundamentalGroup",
+   "results": "0 hits: ; loogle: unknown identifier 'AlgebraicGeometry.EtaleFundamentalGroup'. Read the relevant hits: definitions of inertia, finite field-extension Galois theory, and abstract Galois categories do not give the henselization or normal-scheme comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilGroup|normalClosure.*inertia|inertia.*normalClosure",
+   "results": "0 hits: . Read the relevant hits: definitions of inertia, finite field-extension Galois theory, and abstract Galois categories do not give the henselization or normal-scheme comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The kernel of the etale fundamental group map from an open curve is normally generated by inertia",
+   "results": "8 hits: Ideal.Quotient.map_ker_stabilizer_subtype, Ideal.Quotient.ker_stabilizerHom, AlgebraicGeometry.Scheme.Hom.ker, MonoidHom.ker, ValuationSubring.inertiaSubgroup, MonoidHom.normal_ker, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective. Read the relevant hits: definitions of inertia, finite field-extension Galois theory, and abstract Galois categories do not give the henselization or normal-scheme comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-dl-a1-lisse-extension-inertia",
@@ -71,5 +192,74 @@
   ],
   "note": "attached by the lead's tool attach.py 2026-10-18 02:20 UTC for group N6, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: it gives the kernel as the topological closure of the normal closure of all boundary inertia images, exactly the stated smallest closed normal subgroup."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-dl-a1-weil-kernel-inertia",
+  "worker": "stage1",
+  "summary": "Separated the general normal-scheme absolute Galois presentation (0BTD) and the henselian/global inertia comparison (0BSW). Derived the relative kernel by quotienting, and proved the Weil normal-closure equality using compactness in degree zero and arithmetic conjugates g=wd. The prior Lean attachment uses integral-closure inertia and supplies no comparison to the specified henselian inertia; it is not used.",
+  "blueprint": "rem-dl-a1-conventions, second paragraph: equivalence of extension across infinity with trivial inertia, via lem-dl-a1-lisse-extension-inertia; this item provides its kernel-of-restriction step.",
+  "tool_uses": [
+   {
+    "node": "d-real-boundary",
+    "why": "Generic definition of the prescribed henselian inertia and its paths; the affine-line conventions unit contains no replacement for this tool."
+   },
+   {
+    "node": "def-wf-fundamental-representation",
+    "why": "Generic Weil pullback topology and compact degree-zero subgroup; the affine-line conventions unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-galois-pi1-functoriality",
+    "why": "Generic compatibility of maps on generic fibres; the affine-line conventions unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-real-boundary-decomposition-landing",
+    "why": "Generic local inertia has degree zero; the affine-line conventions unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-real-boundary-local-constants",
+    "why": "Generic image of local decomposition in the constant Galois group; the affine-line conventions unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Generic normality of smooth curves; the affine-line conventions unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherianity over the field; the affine-line conventions unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-wf-dense-open-pi1-surjective",
+    "why": "Generic degree-compatible restriction on Weil groups; the affine-line conventions unit contains no replacement for this tool."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic disjoint integral components of a normal Noetherian scheme; the affine-line conventions unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-sfb-finite-field-galois-frobenius",
+    "why": "Cyclicity for the finite constant-field extension kappa(x)/k0 supplies the exponent n in g=wd; no assertion of the affine-line conventions unit gives this finite-field tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "d-real-boundary",
+  "def-wf-fundamental-representation",
+  "lem-galois-pi1-functoriality",
+  "lem-real-boundary-decomposition-landing",
+  "lem-real-boundary-local-constants",
+  "lem-sc-smooth-normal",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-wf-dense-open-pi1-surjective",
+  "rem-pc-regular-normal",
+  "lem-sfb-finite-field-galois-frobenius"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q123-f46589780",
+  "group": "Q123",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-f46589780 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement (from clones/live, because the snapshot's dagsnap symlinks are gone) and Stacks pione 0BSD/0BSW/0BTD with their proofs. New node normal-scheme-galois-inertia-presentation is 0BTD (1)=(3) plus surjectivity. Its hypotheses are the source's (normal integral, all points), and it holds on the small cases Spec K and a strictly henselian local ring. New node henselian-global-inertia-comparison is the 0BSD setup plus 0BSW (D=Aut_{K^h}(Ω), I=Aut_{K^sh}(Ω), residue surjection with kernel I). Its henselian-inertia clause holds because the integral closure of A^h is local, and it holds for a field and for a strictly henselian ring. It is not a duplicate of lem-wf-strict-henselian-fraction-inertia: that node is the DVR case of I=Gal(Ω/K^sh) only and lacks the global D comparison (advisory). Item steps 1-6 are correct. In step 2, b=f∘a follows from the explicit fibre compatibility in lem-galois-pi1-functoriality. In step 3, θ_s is a restricted to D with the trivial path, using Ω̃ as the local geometric point. Step 4's quotient argument and the step-5 conclusion H⊆N with H compact in the open profinite degree-0 subgroup both hold. Step 6's g=wd construction with n from lem-sfb-finite-field-galois-frobenius gives H⊇N. Edge cases: empty S_0 and residue degree >1 both work. The statement is unchanged and this is a real split, not relabelling. I accept the tool_uses as generic black boxes; the unit has no steps. Batch-5 findings: all four reach the trace-formula or Poincaré chapters only through general definitions (def-weil-pbc-henselization-at-prime, def-pod-lisse-l-adic-sheaves), so all are accepted. B10: the live lean attachment ker_restrictionHom_eq_boundaryInertia (slopmaster2 BoundaryInertia.lean:281,456,559) uses integral-closure inertia Q.inertia, not the henselian kernel of d-real-boundary. The two agree only via 0BSW, so the declaration is not an exact statement and the split is legitimate. Maintainer note: the stale lean field remains on the node."
+ }
 }
