@@ -43,163 +43,47 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\mathcal O_E$, $t=\\pi_E$, and $P_n=A/t^nA$. Apply [sk-lem-integral-models] (2) on $U$: since $K\\in\\Dbc(U,A)$, $K$ is derived complete and $\\bar K=K\\otimes^{\\mathbf L}_{A_U}(P_1)_U$ is bounded constructible and pulled back from $U_{\\mathrm{ét}}$. The coefficient and scheme hypotheses are exactly its separated finite-type setting. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a principal ideal domain, hence Noetherian (every ideal has one generator), and $P_1$ is a finite field. Its characteristic is $\\ell$: the extending absolute value gives $|\\ell|_E<1$, so $\\ell$ lies in the maximal ideal; the residue field is nonzero and $\\ell$ is prime. Thus $\\ell P_1=0$, and $\\ell$ is invertible in $k$.",
+   "text": "Apply the internal integral residue criterion to K on U and on X. The finite-type hypotheses give Noetherian schemes by Mathlib. Obtain completeness of K, bounded constructibility and finite Tor amplitude of its actual first reduction, and the integral finite-Tor equality on X.",
    "uses": [
-    "sk-lem-integral-models",
-    "lem-weil-l-adic-extension-integers-dvr"
+    "lem-sfb-internal-integral-residue-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Constructibility of the reduction, first sentence; integral criterion applied to the input"
-   }
+   "elementary": false
   },
   {
-   "text": "The coefficient resolution of [det-pe-derived-nakayama-resolution], applied on $U$ and $X$, identifies reduction modulo $t^n$ with the cone of multiplication by $t^n$. The unbounded right derived functor $Rj_*$ is triangulated by [lem-pc-right-derived-functor-triangulated]; its K-injective module construction [sk-def-sfb-module-derived-pushpull] is $A$-linear, since termwise direct image sends $t^n\\operatorname{id}$ to $t^n\\operatorname{id}$. It therefore sends the reduction cone of $K$ to the reduction cone of $Rj_*K$. To fix the canonical comparison, rather than an arbitrary isomorphism of cones, apply the finite-reduction clause of [prop-weil-pbc-direct-image-limits] with $(A,I)=(\\mathcal O_E,(t))$ and $f=j$. The tower datum [def-weil-pbc-adic-coefficient-datum] requires every $P_n$ to be finite and perfect over $A$; these exact hypotheses are supplied, for all $n\\ge1$, by [lem-weil-pbc-standard-quotients-perfect]. Its two-term finite free resolution is the ring-module counterpart of the sheaf resolution above. The residue is torsion by step 1, and $I$ has the single generator $t$. It identifies the projection-formula comparison\n$$(Rj_*K)\\otimes^{\\mathbf L}_{A_X}(P_n)_X\\xrightarrow{\\sim}Rj_*(K\\otimes^{\\mathbf L}_{A_U}(P_n)_U)$$\nand states that it commutes with $P_{n+1}\\to P_n$. The case $n=1$ is the comparison asserted in the item. All categories here use completed coefficient sheaves, as in that node's tower datum; no identification with discrete constant $A$-module categories is made.",
+   "text": "The internal direct-image-limits theorem makes the specified scalar mate chi invertible, preserves completeness, and makes the displayed geometric adjunct invertible. For any map c satisfying the displayed counit equation, cancel chi; injectivity of the inverse adjunction Hom equivalence forces c to equal that adjunct. Thus the invertible comparison exists uniquely.",
    "uses": [
-    "det-pe-derived-nakayama-resolution",
-    "lem-pc-right-derived-functor-triangulated",
-    "sk-def-sfb-module-derived-pushpull",
-    "prop-weil-pbc-direct-image-limits",
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-standard-quotients-perfect"
+    "lem-sfb-internal-integral-direct-image-limits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Reduction paragraph; use all powers t^n and the canonical compatible comparisons"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $K_\\bullet$ be the reduction tower of $K$. The canonical completion unit $K\\to R\\varprojlim K_\\bullet$ is an isomorphism by step 1 and [sk-def-pe-derived-completion]. Apply the derived-limit comparison of [prop-weil-pbc-direct-image-limits]: it gives\n$$Rj_*K\\simeq Rj_*R\\varprojlim K_\\bullet\\simeq R\\varprojlim Rj_*^{\\operatorname{Tow}}K_\\bullet.$$\nIts evaluation identifications identify the level $n$ of the last tower with $Rj_*K_n$. By the compatible canonical reduction isomorphisms of step 2, these are exactly the reductions of $Rj_*K$, including their transition maps. The completion-map clause of the cited node identifies this composite with the canonical completion unit of $Rj_*K$, not just an abstract isomorphism with some inverse limit. Hence $Rj_*K$ is derived complete.",
+   "text": "The uniformizer generates the maximal ideal of the integer DVR. Since the spectral absolute value extends the p-adic norm, l has norm less than one and is zero in the residue quotient. The maximal ideal is open (the norm is continuous), so the residue quotient topology is discrete; it is finite by the finite quotient theorem. Apply finiteOpenDirectImage_constantModel_torAmplitude to the first reduction, enlarging its Tor interval to ordered bounds.",
    "uses": [
-    "sk-def-pe-derived-completion",
-    "prop-weil-pbc-direct-image-limits"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-finite-open-direct-image-ctf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Completeness paragraph; include identification of the tower and its completion map"
-   }
+   "elementary": false
   },
   {
-   "text": "The constructible comparison [sk-thm-pe-constructible-comparison] applies to the finite discrete field $P_1$ and the qcqs scheme $U$. It supplies $L\\in D^b_c(U_{\\mathrm{ét}},P_1)$ with $\\nu_U^*L\\simeq\\bar K$. Apply [cor-fin-deligne-open-finite-coefficients] with $A=P_1$ and annihilating integer $\\ell$: $U,X$ are finite-type over $k$, $j$ is open, $P_1$ is finite, and $\\ell$ is invertible in $k$ by step 1. Consequently $Rj_{\\mathrm{ét},*}L\\in D^b_c(X_{\\mathrm{ét}},P_1)$. This is the finite-coefficient open-finiteness input of the blueprint; no properness of $j$ is required.",
+   "text": "Use the unique comparison isomorphism to transfer residue bounded constructibility and finite Tor amplitude to the actual reduction of Rj_*K. Isomorphism invariance is the well-definedness theorem. Together with completeness, the residue criterion gives integral bounded constructibility. Its equality clause supplies the last conclusion.",
    "uses": [
-    "sk-thm-pe-constructible-comparison",
-    "cor-fin-deligne-open-finite-coefficients"
+    "det-def-sfb-constructible-tor-amplitude",
+    "lem-sfb-internal-integral-residue-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Constructibility of the reduction; descend the complex and apply finite-coefficient open finiteness"
-   }
-  },
-  {
-   "text": "The open immersion $j$ is quasi-separated: $U\\times_XU\\cong U$ and its diagonal is the identity, whose inverse image of an affine open is that affine open and hence quasi-compact. Together with the assumed quasi-compactness, this makes $j$ qcqs. This uses only the open-immersion and quasi-compactness definitions [def-weil-open-immersion, def-weil-finite-type-morphism].",
-   "uses": [
-    "def-weil-open-immersion",
-    "def-weil-finite-type-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Constructibility paragraph: check the qcqs hypothesis"
-   }
-  },
-  {
-   "text": "Apply [prop-weil-pbc-comparison-direct-image] to $j$ and the bounded-below complex $L$ of step 4. Its natural comparison and $\\nu_U^*L\\simeq\\bar K$ give\n$$Rj_{B,*}\\bar K\\simeq\\nu_X^*Rj_{\\mathrm{ét},*}L,\\qquad B_T=(P_1)_T.$$\nBy step 4 and the bounded constructible equivalence [sk-thm-pe-constructible-comparison] on $X$, this is a bounded constructible $B_X$-complex of étale origin. Here $Rj_{B,*}$ denotes direct image with the residue coefficient rings, before restriction to $A_X$-modules.",
-   "uses": [
-    "prop-weil-pbc-comparison-direct-image",
-    "sk-thm-pe-constructible-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Constructibility paragraph: apply qcqs comparison at residue coefficients"
-   }
-  },
-  {
-   "text": "For $T=U,X$ let $a_T:A_T\\to B_T$ be reduction, the pullback from the point of $\\underline{\\mathcal O_E}\\to\\underline{P_1}$. Apply [sk-prop-sfb-cartesian-coefficients] to these two coefficient rings: it supplies the ring isomorphisms $c_A:j^{-1}A_X\\simeq A_U$ and $c_B:j^{-1}B_X\\simeq B_U$. The coefficient-change square of [sk-def-sfb-coefficient-change] states exactly $a_Uc_A=c_Bj^{-1}a_X$. Thus [lem-weil-pbc-ring-sheaf-change-adjunction] applies with $u=j$, $R_T=A_T$, $S_T=B_T$. Its direct-image comparison, inverted, gives\n$$Rj_{A,*}\\operatorname{Res}_U\\bar K\\simeq\\operatorname{Res}_X Rj_{B,*}\\bar K.$$\nThis cited lemma treats arbitrary compatible ring sheaves; it requires neither finite $A$ nor flatness of $B_T$ over $A_T$.",
-   "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "sk-def-sfb-coefficient-change",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Constructibility paragraph: coefficient square and derived scalar-restriction comparison"
-   }
-  },
-  {
-   "text": "Put $M=(Rj_{A,*}K)\\otimes^L_{A_X}B_X$ and $N=Rj_{B,*}\\bar K$. The case $n=1$ of step 2, followed by step 7, gives $\\operatorname{Res}_X M\\simeq\\operatorname{Res}_X N$ in $D(A_X)$. Restriction along $A_X\\to B_X$ is exact by [lem-weil-restriction-of-scalars-exact], so its cohomology is the restriction of the $B_X$-cohomology. Consequently these isomorphisms induce $A_X$-linear isomorphisms $H^q(M)\\simeq H^q(N)$ for every $q$.",
-   "uses": [
-    "lem-weil-restriction-of-scalars-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Constructibility paragraph: compare cohomology after exact restriction"
-   }
-  },
-  {
-   "text": "The quotient $A_X\\to B_X$ is an epimorphism by the exact coefficient resolution of [det-pe-derived-nakayama-resolution] with $n=1$, already used in step 2. Each section $b$ of $B_X$ therefore lifts locally to a section $a$ of $A_X$. For an $A_X$-linear map $h:H^q(M)\\to H^q(N)$ from step 8 and a local section $m$, one has $h(bm)=h(am)=a h(m)=b h(m)$ on such a cover; the sheaf condition gives the equality globally. The same computation applies to the inverse. Thus $H^q(M)\\simeq H^q(N)$ as $B_X$-modules. Step 6 now implies that $M$ is bounded with constructible residue-coefficient cohomology.",
-   "uses": [
-    "det-pe-derived-nakayama-resolution"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Constructibility paragraph: elementary descent of linearity along the coefficient epimorphism"
-   }
-  },
-  {
-   "text": "The discrete field $P_1$ is Noetherian, and $X$ is qcqs in the standing setting. Hence the derived equivalence of [sk-thm-pe-constructible-comparison] applies to the bounded constructible $B_X$-complex $M$ of step 9. In particular $M$ is pulled back from a bounded constructible complex on $X_{\\mathrm{ét}}$. This verifies the étale-origin condition for the actual residue reduction of $Rj_{A,*}K$, without lifting the ambient $A_X$-derived isomorphism of step 8 to a morphism of $B_X$-complexes.",
-   "uses": [
-    "sk-thm-pe-constructible-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Constructibility paragraph: deduce étale origin for the actual residue reduction"
-   }
-  },
-  {
-   "text": "Steps 3 and 10 establish the two conditions in [sk-lem-integral-models] (2) on $X$: derived completeness and bounded constructible étale-origin residue reduction. It follows that $Rj_*K\\in\\Dbc(X,\\mathcal O_E)$. The same node explicitly asserts $\\Dbc(X,\\mathcal O_E)=\\Dctf(X,\\mathcal O_E)$ in this setting, so the finite Tor amplitude conclusion also follows. This uses the existing residue criterion, which realizes the blueprint's reference to the integral constructibility criterion, and proves every clause of the item.",
-   "uses": [
-    "sk-lem-integral-models"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-    "place": "Conclusion paragraph, including the finite Tor amplitude equality"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "sk-lem-integral-models",
+  "lem-sfb-internal-integral-residue-criterion",
+  "lem-sfb-internal-integral-direct-image-limits",
   "lem-weil-l-adic-extension-integers-dvr",
-  "det-pe-derived-nakayama-resolution",
-  "lem-pc-right-derived-functor-triangulated",
-  "sk-def-sfb-module-derived-pushpull",
-  "prop-weil-pbc-direct-image-limits",
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "sk-def-pe-derived-completion",
-  "sk-thm-pe-constructible-comparison",
-  "cor-fin-deligne-open-finite-coefficients",
-  "def-weil-open-immersion",
-  "def-weil-finite-type-morphism",
-  "prop-weil-pbc-comparison-direct-image",
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-def-sfb-coefficient-change",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-restriction-of-scalars-exact"
+  "lem-sfb-finite-open-direct-image-ctf",
+  "det-def-sfb-constructible-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
-  "place": "All four paragraphs, expanded in eleven steps; general coefficient-change and exact restriction lemmas replace the hidden argument in former step 5"
+  "place": "The same four source paragraphs; isolate internal presentation normalization and use the existing finite open direct image Ctf theorem."
  },
  "mathlib_searches": [
   {
@@ -378,18 +262,7 @@
  },
  "lean_audit": {},
  "tool_uses": [
-  "sk-lem-integral-models",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "det-pe-derived-nakayama-resolution",
-  "lem-pc-right-derived-functor-triangulated",
-  "prop-weil-pbc-direct-image-limits",
-  "lem-weil-pbc-standard-quotients-perfect",
-  "sk-thm-pe-constructible-comparison",
-  "cor-fin-deligne-open-finite-coefficients",
-  "prop-weil-pbc-comparison-direct-image",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-restriction-of-scalars-exact"
+  "lem-weil-l-adic-extension-integers-dvr"
  ],
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -413,5 +286,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "The canonical residue comparison is specified by its adjunction equation (unique invertible arrow), using the actual nonflat quotient and the canonical exact scalar-restriction pullback square. Completed integral coefficients, finite constant scalar models, and generic finite Tor amplitude are the existing recorded notions. No mathematical statement is corrected; the already landed coefficient-change definition is added to stmt_deps to expose the canonical comparison construction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261021T172409-L-3367494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

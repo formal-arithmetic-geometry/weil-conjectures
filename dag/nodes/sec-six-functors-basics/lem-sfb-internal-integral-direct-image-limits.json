@@ -1,0 +1,147 @@
+{
+ "id": "lem-sfb-internal-integral-direct-image-limits",
+ "kind": "statement",
+ "title": "Internal integral direct image preserves completeness and canonical reduction",
+ "statement": "theorem internal_integral_direct_image_limits\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {U X : Scheme.{u}} (j : U ⟶ X) :\n    let χ :\n        (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory ⋙\n            AdicCompletion.derivedReduction l E U 0 ⟶\n          AdicCompletion.derivedReduction l E X 0 ⋙\n            (CondensedRing.upperStar (DerivedNakayama.quotientRing l E 1) j).mapDerivedCategory :=\n      ((mateEquiv\n          (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E X 0))\n          (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E U 0))).symm\n            (TwoSquare.mk _ _ _ _\n              (CondensedRing.derivedComapUpperStarIso (DerivedNakayama.reductionRing l E 1) j).inv)\n          ).natTrans\n    ∃ hχ : IsIso χ, letI := hχ; ∀ K : DerivedCategory (AdicCompletion.Modules l E U),\n      (IsDerivedComplete l E U K → IsDerivedComplete l E X\n        ((CondensedRing.moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) j).obj\n          K)) ∧\n      IsIso (((CondensedRing.derivedUpperStarLowerStarAdjunction\n        (DerivedNakayama.quotientRing l E 1) j).ofNatIsoLeft\n          (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory\n            (DerivedNakayama.quotientRing l E 1) j)).homEquiv _ _\n        (inv (χ.app ((CondensedRing.moduleObjectDerivedPushforward\n            (DerivedNakayama.integerRing l E) j).obj K)) ≫\n          (AdicCompletion.derivedReduction l E U 0).map\n            (((CondensedRing.derivedUpperStarLowerStarAdjunction\n              (DerivedNakayama.integerRing l E) j).ofNatIsoLeft\n                (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory\n                  (DerivedNakayama.integerRing l E) j)).counit.app K)))\nAll objects and maps use the actual continuous internal coefficient objects; quotient index zero is exponent one.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "Completeness and Reduction paragraphs; compatibility of internal modules with the direct-image-limits presentation",
+  "external": [
+   {
+    "document": "Stacks Project",
+    "place": "Tags 099L, 099N, 09C1"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude",
+  "sk-def-pe-derived-completion",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "proof": [
+  {
+   "text": "Construct the lifted adic datum from the actual ring of integers and its specified uniformizer. ULift.down gives the unique scalar-normalized quotient isomorphisms. The DVR and the two-term quotient resolutions make every positive quotient finite and perfect. The integral coefficient limit identifies the completed ring with the given continuous coefficient object.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "det-pe-derived-nakayama-resolution",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport geometric and scalar adjunctions by the exact section-action equivalence. Normalize restriction squares by the identity on sections and extension squares by pure tensors. Uniqueness under the adjunction Hom bijections identifies the inverse scalar mate chi in the statement with the finite reduction pullback isomorphism. Its geometric mate is the finiteProjection map, hence is invertible for arbitrary K by the perfect projection formula.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "prop-weil-pbc-direct-image-limits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Repeat the normalized comparisons at every positive level. Their pure tensor formulas give every quotient transition square and fix the quotient units. Equivalences preserve products and the two signed Roos arrows. The towerProjection completion-unit equation and push_complete therefore identify and invert exactly the canonical completion unit of the internal direct image. No properness, boundedness, or constructibility is used.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "det-pe-derived-nakayama-resolution",
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "prop-weil-pbc-direct-image-limits",
+  "sk-def-pe-derived-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/sk-thm-sf-pf-adic-open.proof.md",
+  "place": "Completeness and Reduction paragraphs; compatibility of internal modules with the direct-image-limits presentation; explicit presentation normalization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Integral adic constructibility is equivalent to derived completeness and constructibility of residue reduction",
+   "results": "Eight Mathlib results about scalar IsAdicComplete and ordinary ideal-adic completeness; none concerns pro-etale internal derived modules.",
+   "date": "2026-10-21",
+   "verdict": "no matching theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "Twelve general Hom adjunction identities. They prove uniqueness of the comparison, but neither its invertibility nor integral residue detection.",
+   "date": "2026-10-21",
+   "verdict": "generic categorical tools only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDerivedComplete|integral_residue_criterion|finiteProjection_isIso",
+   "results": "No Mathlib hits. Repository searches found IntegralModelsStacks and CompletedDirectImageLimits in different coefficient presentations.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib specialization; presentation compatibility remains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image commutes with finite perfect coefficient reduction and preserves derived adic completeness",
+   "results": "Eight hits: AdicCompletion.map_mk, map_of, map_exact, map_comp and IsAdicComplete.of_comp_lift, recOn, mk, of_lift. None states a derived direct-image or coefficient mate comparison.",
+   "date": "2026-10-22",
+   "verdict": "no matching theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ProEtale.IntegralOpenDirectImage",
+  "date": "2026-10-21",
+  "group": "W8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-open",
+   "place": "Completeness and Reduction paragraphs; compatibility of internal modules with the direct-image-limits presentation",
+   "via": []
+  },
+  "same_as": [
+   "prop-weil-pbc-direct-image-limits"
+  ]
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtale.IntegralDirectImageLimits",
+  "file": "lean/Sheaf/SixFunctors/ProEtale/IntegralDirectImageLimits.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.internal_integral_direct_image_limits",
+  "statement": "theorem internal_integral_direct_image_limits\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]\n    {U X : Scheme.{u}} (j : U ⟶ X) :\n    let χ :\n        (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory ⋙\n            AdicCompletion.derivedReduction l E U 0 ⟶\n          AdicCompletion.derivedReduction l E X 0 ⋙\n            (CondensedRing.upperStar (DerivedNakayama.quotientRing l E 1) j).mapDerivedCategory :=\n      ((mateEquiv\n          (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E X 0))\n          (Mod.derivedExtendMapDerivedCategoryAdjunction (AdicCompletion.quotient l E U 0))).symm\n            (TwoSquare.mk _ _ _ _\n              (CondensedRing.derivedComapUpperStarIso (DerivedNakayama.reductionRing l E 1) j).inv)\n          ).natTrans\n    ∃ hχ : IsIso χ, letI := hχ; ∀ K : DerivedCategory (AdicCompletion.Modules l E U),\n      (IsDerivedComplete l E U K → IsDerivedComplete l E X\n        ((CondensedRing.moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) j).obj\n          K)) ∧\n      IsIso (((CondensedRing.derivedUpperStarLowerStarAdjunction\n        (DerivedNakayama.quotientRing l E 1) j).ofNatIsoLeft\n          (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory\n            (DerivedNakayama.quotientRing l E 1) j)).homEquiv _ _\n        (inv (χ.app ((CondensedRing.moduleObjectDerivedPushforward\n            (DerivedNakayama.integerRing l E) j).obj K)) ≫\n          (AdicCompletion.derivedReduction l E U 0).map\n            (((CondensedRing.derivedUpperStarLowerStarAdjunction\n              (DerivedNakayama.integerRing l E) j).ofNatIsoLeft\n                (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory\n                  (DerivedNakayama.integerRing l E) j)).counit.app K)))",
+  "branch": "sheaf-dag",
+  "by": "W8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261021T172409-L-3367494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261021T172409-L-3367494",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

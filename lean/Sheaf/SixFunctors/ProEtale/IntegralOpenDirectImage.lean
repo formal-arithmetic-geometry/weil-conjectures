@@ -18,18 +18,11 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Sheaf.Paper.CompletedDirectImageLimits
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
-import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
-import Sheaf.AlgebraicGeometry.OpenDirectImageFiniteCoefficients
-import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.Paper.CartesianCoefficients
-import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.DerivedNakayamaResolution
 import Sheaf.Paper.IntegralModels
+import Sheaf.SixFunctors.ProEtale.IntegralResidueCriterion
+import Sheaf.SixFunctors.ProEtale.IntegralDirectImageLimits
+import Sheaf.SixFunctors.FiniteOpenDirectImageCtf
 
 /-!
 # Integral open direct image preserves constructibility
@@ -47,6 +40,8 @@ ordinary derived categories of internal modules over the continuous condensed co
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option synthInstance.maxSize 4096
 
 universe u
 
@@ -76,6 +71,107 @@ def reductionPullbackMap :
         (CondensedRing.derivedComapUpperStarIso (DerivedNakayama.reductionRing l E 1) j).inv)
     ).natTrans
 
+private theorem unique_mate
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {F : C ⥤ D} {G : D ⥤ C} {F' : C' ⥤ D'} {G' : D' ⥤ C'}
+    (adj : F ⊣ G) (adj' : F' ⊣ G') (R : C ⥤ C') (S : D ⥤ D')
+    (χ : F ⋙ S ⟶ R ⋙ F') [IsIso χ] (K : D)
+    (hc : IsIso ((adj'.homEquiv _ _)
+      (inv (χ.app (G.obj K)) ≫ S.map (adj.counit.app K)))) :
+    ∃! c : R.obj (G.obj K) ⟶ G'.obj (S.obj K),
+      IsIso c ∧ χ.app (G.obj K) ≫ F'.map c ≫ adj'.counit.app (S.obj K) =
+        S.map (adj.counit.app K) := by
+  let a := inv (χ.app (G.obj K)) ≫ S.map (adj.counit.app K)
+  let c := (adj'.homEquiv _ _) a
+  have he : F'.map c ≫ adj'.counit.app (S.obj K) = a := by
+    exact (adj'.homEquiv _ _).symm_apply_apply a
+  refine ⟨c, ⟨hc, ?_⟩, ?_⟩
+  · rw [he]
+    simp only [a, IsIso.hom_inv_id_assoc]
+  · intro b hb
+    apply (adj'.homEquiv _ _).symm.injective
+    change F'.map b ≫ adj'.counit.app (S.obj K) =
+      F'.map c ≫ adj'.counit.app (S.obj K)
+    apply (cancel_epi (χ.app (G.obj K))).1
+    rw [hb.2, he]
+    simp only [a, IsIso.hom_inv_id_assoc]
+
+private theorem residue_killed : (l : Padic.coefficientExtensionRing l E 1) = 0 := by
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  change Ideal.Quotient.mk _ (l : Padic.coefficientExtensionIntegers l E) = 0
+  rw [Ideal.Quotient.eq_zero_iff_mem]
+  change (l : Padic.coefficientExtensionIntegers l E) ∈
+    Ideal.span {Padic.coefficientExtensionUniformizer l E} ^ 1
+  rw [pow_one, hgen]
+  apply (h.2.1 _).2
+  have he := spectralNorm_extends (K := Padic l) (L := E) (l : Padic l)
+  change Padic.coefficientExtensionAbsoluteValue l E (l : E) < 1
+  rw [show (l : E) = algebraMap (Padic l) E (l : Padic l) by simp]
+  change spectralNorm (Padic l) E (algebraMap (Padic l) E (l : Padic l)) < 1
+  rw [he]
+  exact Padic.norm_p_lt_one
+
+private theorem residue_discrete :
+    let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+    DiscreteTopology (Padic.coefficientExtensionRing l E 1) := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let I := Padic.coefficientExtensionIdeal l E 1
+  apply QuotientAddGroup.discreteTopology (N := I.toAddSubgroup)
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hgen : Ideal.span {Padic.coefficientExtensionUniformizer l E} =
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hi : I = Padic.coefficientExtensionMaximalIdeal l E := by
+    change Ideal.span {Padic.coefficientExtensionUniformizer l E} ^ 1 = _
+    rw [pow_one, hgen]
+  have hs : (I.toAddSubgroup : Set (Padic.coefficientExtensionIntegers l E)) =
+      {x : Padic.coefficientExtensionIntegers l E | ‖(x : E)‖ < 1} := by
+    ext x
+    change x ∈ I ↔ ‖(x : E)‖ < 1
+    rw [hi]
+    exact h.2.1 x
+  rw [hs]
+  exact isOpen_lt (continuous_norm.comp continuous_subtype_val) continuous_const
+
+private theorem residue_open_image
+    (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
+    [U.Over (Spec (.of k))] [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
+    [IsSeparated (U ↘ Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] [j.IsOver (Spec (.of k))]
+    [IsOpenImmersion j] [QuasiCompact j]
+    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
+      (condensedRingObj (DerivedNakayama.quotientRing l E 1) U)))
+    (hK : constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) U K)
+    (hTor : DerivedCategory.finiteTorAmplitude _ K) :
+    constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X
+      ((CondensedRing.moduleObjectDerivedPushforward
+        (DerivedNakayama.quotientRing l E 1) j).obj K) ∧
+    DerivedCategory.finiteTorAmplitude _
+      ((CondensedRing.moduleObjectDerivedPushforward
+        (DerivedNakayama.quotientRing l E 1) j).obj K) := by
+  let := (Padic.coefficientExtensionAbsoluteValue l E).toNormedField
+  let : Finite (Padic.coefficientExtensionRing l E 1) :=
+    Padic.finite_coefficientExtensionRing l E 1 le_rfl
+  have := residue_discrete l E
+  obtain ⟨a, b, ht⟩ := hTor
+  have ht' := ht.mono (min_le_left a b) (le_max_left b a)
+  have hp : 0 < ringChar k := (Fact.out : (ringChar k).Prime).pos
+  have hne : ringChar k ≠ l := Fact.out
+  obtain ⟨d, _, hd⟩ := CondensedRing.finiteOpenDirectImage_constantModel_torAmplitude
+    l (ringChar k) k hp hne (Padic.coefficientExtensionRing l E 1)
+    ⟨1, le_rfl, by simpa only [pow_one] using residue_killed l E⟩ j
+  obtain ⟨hbc, hta⟩ := hd (min a b) (max b a) (by omega) K hK ht'
+  exact ⟨hbc, min a b, max b a + d, hta⟩
+
+set_option maxHeartbeats 800000 in
+-- Normalize the two scalar adjunctions and the internal coefficient module categories.
 /-- Integral open direct image is derived complete, commutes canonically with residue
 reduction, and is bounded constructible; integral Dbc equals its finite-Tor subcategory.
 The unique comparison is characterized by the usual pullback/reduction square and the
@@ -155,6 +251,46 @@ theorem integral_open_direct_image
       constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X =
         (constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X ⊓
           DerivedCategory.finiteTorAmplitude (AdicCompletion.Modules l E X)) := by
-  sorry
+  let : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian
+    (U ↘ Spec (.of k))
+  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian
+    (X ↘ Spec (.of k))
+  let : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace
+    (U ↘ Spec (.of k))
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of k))
+  let : IsNoetherian U := ⟨⟩
+  let : IsNoetherian X := ⟨⟩
+  obtain ⟨hχ, hpush⟩ := internal_integral_direct_image_limits l E j
+  change IsIso (reductionPullbackMap l E j) at hχ
+  let := hχ
+  let adj := (CondensedRing.derivedUpperStarLowerStarAdjunction
+    (DerivedNakayama.integerRing l E) j).ofNatIsoLeft
+      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
+        (DerivedNakayama.integerRing l E) j)
+  let adj' := (CondensedRing.derivedUpperStarLowerStarAdjunction
+    (DerivedNakayama.quotientRing l E 1) j).ofNatIsoLeft
+      (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory
+        (DerivedNakayama.quotientRing l E 1) j)
+  obtain ⟨hcomplete, hmate⟩ := hpush K
+  obtain ⟨hinput, _⟩ := internal_integral_residue_criterion l E U
+  obtain ⟨houtput, htor'⟩ := internal_integral_residue_criterion l E X
+  obtain ⟨hcK, hrK, htK⟩ := (hinput K).mp hK
+  have hcomplete' := hcomplete hcK
+  obtain ⟨c, hc, hunique⟩ := unique_mate adj adj'
+    (AdicCompletion.derivedReduction l E X 0)
+    (AdicCompletion.derivedReduction l E U 0) (reductionPullbackMap l E j) K hmate
+  refine ⟨hcomplete', ⟨c, hc, hunique⟩, ?_, htor'⟩
+  have hfinite := residue_open_image l E j k
+    ((AdicCompletion.derivedReduction l E U 0).obj K) hrK htK
+  have := hc.1
+  have e := asIso c
+  have hclosed := (constantModelConstructibleFiniteTor_wellDefined
+    (DerivedNakayama.quotientRing l E 1) X).2.1
+  let := hclosed
+  exact (houtput _).mpr ⟨hcomplete',
+    (constantModelBoundedConstructible (DerivedNakayama.quotientRing l E 1) X).prop_of_iso
+      e.symm hfinite.1,
+    (DerivedCategory.finiteTorAmplitude _).prop_of_iso e.symm hfinite.2⟩
 
 end AlgebraicGeometry.ProEtale.IntegralOpenDirectImage
