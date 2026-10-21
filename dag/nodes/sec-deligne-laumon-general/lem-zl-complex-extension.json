@@ -3,59 +3,137 @@
  "blueprint": {
   "is": "lem-zl-complex-extension",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Extension stability of complex weights",
- "statement": "Let $K'\\to K\\to K''\\to K'[1]$ be a distinguished triangle in the\nconstructible $\\Qlb$-Weil categories of\n[def-weil-pbc-qbar-category]. If $K'$ and $K''$ belong to\n\n$$\nD_{\\le w}(X_0):=\\{K:\\Wt_{\\iota,\\leq w}(K)\\}\n$$\n\nin the sense of [def-weil-complex-weights], then so does $K$.",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$, a prime $\\ell\\ne p$, an algebraic closure $\\Qlb$ of $\\mathbf Q_\\ell$, and an isomorphism $\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$. Let $X_0$ be a separated finite-type $k_0$-scheme, put $X=X_0\\times_{k_0}k$, and use the common-stage coefficient category $D^b_c(X,\\Qlb)$ of [def-weil-pbc-qbar-category]. Let\n$$\n K'\\xrightarrow{u}K\\xrightarrow{v}K''\n$$\nbe morphisms of constructible $\\Qlb$-Weil complexes, meaning fixed pairs and commuting morphisms as in [def-weil-weil-sheaf-complex]. Suppose that the underlying arrows are the first two arrows of a distinguished triangle\n$$\n \\operatorname{For}K'\\xrightarrow{\\operatorname{For}u}\\operatorname{For}K\n \\xrightarrow{\\operatorname{For}v}\\operatorname{For}K''\n \\longrightarrow(\\operatorname{For}K')[1]\n$$\nin $D^b_c(X,\\Qlb)$. No triangulated structure on the category of fixed pairs is assumed. For every $w\\in\\mathbf R$, if $K'$ and $K''$ belong to\n$$\n D_{\\le w}(X_0):=\\{L:\\Wt_{\\iota,\\leq w}(L)\\}\n$$\nin the sense of [def-weil-complex-weights], then so does $K$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-d-dl-general-weights/lem-zl-complex-extension.md",
   "place": "node lem-zl-complex-extension, order 2812"
  },
  "stmt_deps": [
   "def-weil-pbc-qbar-category",
+  "def-weil-weil-sheaf-complex",
   "def-weil-complex-weights"
  ],
  "proof": [
   {
-   "text": "The long exact sequence of [lem-sp-long-exact-of-triangle] for the\ndistinguished triangle, read in the cohomology sheaves of\n[def-weil-derived-cohomology-sheaves], contains, for every $j$,\nthe exact sequence\n\n$$\n\\mathcal H^j(K')\\to\\mathcal H^j(K)\\to\\mathcal H^j(K'')\\to\n\\mathcal H^{j+1}(K')\\to\\cdots .\n$$",
+   "text": "Fix $j\\in\\mathbf Z$. By [prop-constructible-truncations], the underlying common-stage category has its bounded standard t-structure and cohomology functors $\\mathcal H^j$. Apply clause (5) of [lem-weil-heart-short-exact-triangles] to the assumed underlying distinguished triangle. With\n$$\n A=\\mathcal H^j(K'),\\qquad B=\\mathcal H^j(K),\\qquad C=\\mathcal H^j(K''),\n$$\nthis gives underlying arrows $f:A\\to B$ and $g:B\\to C$ with $\\operatorname{im}f=\\ker g$ in the constructible heart. These are the cohomology sheaves and induced Weil structures prescribed in [def-weil-complex-weights]. Only the underlying triangle is used; no triangle axiom for fixed pairs is needed.",
    "uses": [
-    "lem-sp-long-exact-of-triangle",
-    "def-weil-derived-cohomology-sheaves"
+    "prop-constructible-truncations",
+    "lem-weil-heart-short-exact-triangles",
+    "def-weil-complex-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-d-dl-general-weights/lem-zl-complex-extension.proof.md",
+    "place": "First paragraph: the cohomology exact sequence, interpreted in the underlying coefficient category."
+   }
   },
   {
-   "text": "By [def-weil-complex-weights]-plus-[def-weil-punctual-weights],\n$\\mathcal H^j(K')$ and $\\mathcal H^j(K'')$ are $\\iota$-mixed of weights\nat most $w+j$. The exact sequence exhibits $\\mathcal H^j(K)$ as an\nextension of a subobject of $\\mathcal H^j(K'')$ by a quotient of\n$\\mathcal H^j(K')$: the image of $\\mathcal H^j(K')\\to\\mathcal H^j(K)$\nis a Weil quotient sheaf of $\\mathcal H^j(K')$, and the image of\n$\\mathcal H^j(K)\\to\\mathcal H^j(K'')$ is a Weil subsheaf of\n$\\mathcal H^j(K'')$ (all maps in the long exact sequence are morphisms\nof Weil sheaves). By the sheaf-level stability of mixedness under\nsubsheaves, quotients and extensions,\n[lem-a1-mixed-direct-summand] (1) and (2), both are $\\iota$-mixed of\nweights at most $w+j$, and hence so is $\\mathcal H^j(K)$. (The\nFrobenius-module bounds [lem-a1-subquotient-extension-bounds],\n[lem-a1-extension-bounds] of [def-weil-frobenius-module-weights] are the\nstalkwise shadow of this.) Since $j$ was arbitrary, $K\\in D_{\\le w}(X_0)$,\nwhich is [def-weil-complex-weights].",
+   "text": "The arrows $f,g$ commute with the induced Weil structures. Indeed put $G=Lg_X^*$ and let $c_L:G\\mathcal H^j(L)\\xrightarrow{\\sim}\\mathcal H^j(GL)$ be the natural comparison of [prop-constructible-truncations]. For the underlying arrow $u:K'\\to K$, naturality and $u\\theta_{K'}=\\theta_KG(u)$, the morphism condition of [def-weil-weil-sheaf-complex], give\n$$\n \\mathcal H^j(u)\\mathcal H^j(\\theta_{K'})c_{K'}\n =\\mathcal H^j(\\theta_K)\\mathcal H^j(G(u))c_{K'}\n =\\mathcal H^j(\\theta_K)c_KG(\\mathcal H^j(u)).\n$$\nBy [def-weil-complex-weights] these composites use precisely the Weil structures on $A,B$. The identical substitution of $v$ for $u$ proves the assertion for $g$.",
+   "uses": [
+    "prop-constructible-truncations",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-complex-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-d-dl-general-weights/lem-zl-complex-extension.proof.md",
+    "place": "Second paragraph: all cohomology arrows are morphisms of Weil sheaves."
+   }
+  },
+  {
+   "text": "Take $I=\\operatorname{im}f$ and $Q=B/I$ in the constructible heart. Frobenius pullback $G$ is exact on this heart by [lem-a1-constructible-pullback-t-exact], so [lem-sp-exact-functor-preserves-homology] (a),(b) identifies $GI$ with $\\operatorname{im}(Gf)$ and $GQ$ with $GB/GI$, compatibly with the inclusion and quotient maps. The intertwining isomorphisms of step 2 therefore induce an isomorphism $GI\\to I$ and its quotient isomorphism $GQ\\to Q$. Their inverses are induced by the inverse intertwining isomorphisms; hence these really are Weil structures, with $A\\twoheadrightarrow I\\hookrightarrow B$ and $B\\twoheadrightarrow Q$ Weil morphisms. Exactness $I=\\ker g$ says that the induced arrow $Q=B/\\ker g\\to C$ is monic: its kernel is $(\\ker g)/I=0$. It commutes with Frobenius after precomposition with the epimorphism $GB\\twoheadrightarrow GQ$, by the intertwining equation for $g$. Thus $I$ is a Weil quotient of $A$, $Q$ is a Weil subobject of $C$, and $0\\to I\\to B\\to Q\\to0$ is exact in the abelian Weil-sheaf category of [lem-a1-mixed-direct-summand]. The kernel and cokernel universal properties hold there because their unique underlying factorization commutes with Frobenius after composing with the kernel inclusion or the cokernel projection. This is the elementary image/quotient construction, using the cited exact-functor comparisons, not an additional weight lemma.",
+   "uses": [
+    "lem-a1-constructible-pullback-t-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-a1-mixed-direct-summand"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-d-dl-general-weights/lem-zl-complex-extension.proof.md",
+    "place": "Second paragraph: image quotient, image subobject, and their extension, with the Frobenius actions made explicit."
+   }
+  },
+  {
+   "text": "The hypotheses and [def-weil-complex-weights] give that $A$ and $C$ are $\\iota$-mixed of weights at most $w+j$. Clause (1) of [lem-a1-mixed-direct-summand], applied to $A\\twoheadrightarrow I$ and $Q\\hookrightarrow C$, gives the same bound for $I$ and $Q$. Clause (2), applied to the short exact sequence $0\\to I\\to B\\to Q\\to0$ from step 3, gives that $B=\\mathcal H^j(K)$ is $\\iota$-mixed of weights at most $w+j$. All these objects and arrows lie in the constructible Weil heart, and the bound is the same real number in the two applications.",
    "uses": [
     "def-weil-complex-weights",
-    "def-weil-punctual-weights",
-    "lem-a1-mixed-direct-summand",
-    "lem-a1-subquotient-extension-bounds",
-    "lem-a1-extension-bounds",
-    "def-weil-frobenius-module-weights"
+    "lem-a1-mixed-direct-summand"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-d-dl-general-weights/lem-zl-complex-extension.proof.md",
+    "place": "Second paragraph: sheaf-level subquotient stability and extension stability."
+   }
+  },
+  {
+   "text": "The argument applies to every integer $j$. Therefore $\\mathcal H^j(K)$ is mixed of weights at most $w+j$ for all $j$, which is exactly $\\Wt_{\\iota,\\leq w}(K)$, hence $K\\in D_{\\le w}(X_0)$, by [def-weil-complex-weights].",
+   "uses": [
+    "def-weil-complex-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-d-dl-general-weights/lem-zl-complex-extension.proof.md",
+    "place": "Last sentence: the degreewise bounds are the complex-weight predicate."
+   }
   }
  ],
  "proof_deps": [
-  "lem-sp-long-exact-of-triangle",
-  "def-weil-derived-cohomology-sheaves",
+  "prop-constructible-truncations",
+  "lem-weil-heart-short-exact-triangles",
   "def-weil-complex-weights",
-  "def-weil-punctual-weights",
-  "lem-a1-mixed-direct-summand",
-  "lem-a1-subquotient-extension-bounds",
-  "lem-a1-extension-bounds",
-  "def-weil-frobenius-module-weights"
+  "def-weil-weil-sheaf-complex",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-a1-mixed-direct-summand"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-d-dl-general-weights/lem-zl-complex-extension.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-d-dl-general-weights/lem-zl-complex-extension.proof.md",
+  "place": "Both proof paragraphs; corrected interpretation of triangles of fixed pairs and explicit Frobenius image/quotient argument."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A distinguished triangle of constructible Weil complexes whose first and third terms have mixed weights at most w has middle term of mixed weights at most w",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.instIsGEObj₃ObjTriangleTriangleLTGE, CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.instIsLEObj₁ObjTriangleTriangleLTGEHSubIntOfNat, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le, CategoryTheory.Triangulated.TStructure.isLE_of_shift",
+   "date": "2026-10-21",
+   "verdict": "no match: generic t-structure or Serre-class infrastructure only; none states the common-stage Weil-pair weight assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|WeilComplex|IsClosedUnderExtensions",
+   "results": "6 hits: Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/ObjectProperty/Extensions.lean, Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic t-structure or Serre-class infrastructure only; none states the common-stage Weil-pair weight assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsHomological, CategoryTheory.ObjectProperty.IsClosedUnderExtensions",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic t-structure or Serre-class infrastructure only; none states the common-stage Weil-pair weight assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Mixed upper weight bounds for Weil complexes are stable under distinguished triangle extensions",
+   "results": "8 hits: HomotopyCategory.Pretriangulated.distinguishedTriangles, CategoryTheory.MorphismProperty.IsCompatibleWithTriangulation.compatible_with_triangulation, HomotopyCategory.Pretriangulated.isomorphic_distinguished, CategoryTheory.Triangulated.TStructure.triangleLTGE_distinguished, CategoryTheory.Pretriangulated.shortComplexOfDistTriangle, CategoryTheory.ObjectProperty.instIsCompatibleWithTriangulationTrWOfIsTriangulatedOfIsTriangulated, HomotopyCategory.instPretriangulatedIntUp, CategoryTheory.ObjectProperty.instIsMultiplicativeTrWOfIsTriangulatedOfIsTriangulated",
+   "date": "2026-10-21",
+   "verdict": "no match: generic t-structure or Serre-class infrastructure only; none states the common-stage Weil-pair weight assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An object property closed under subobjects quotients and extensions is preserved by the middle term of an exact sequence",
+   "results": "8 hits: CategoryTheory.ObjectProperty.prop_X₂_of_exact, CategoryTheory.ObjectProperty.IsClosedUnderExtensions.prop_X₂_of_shortExact, CategoryTheory.ObjectProperty.prop_X₂_of_shortExact, CategoryTheory.ObjectProperty.prop_X₁_of_shortExact, CategoryTheory.ObjectProperty.prop_iff_of_shortExact, CategoryTheory.ObjectProperty.prop_X₃_of_shortExact, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions, CategoryTheory.ObjectProperty.instHasTwoOutOfThreePropertyIsoModSerre",
+   "date": "2026-10-21",
+   "verdict": "no match: generic t-structure or Serre-class infrastructure only; none states the common-stage Weil-pair weight assertion."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -74,5 +152,44 @@
  "proof_split_by": "paragraphs",
  "lean_audit": {},
  "chapter": "sec-deligne-laumon-general",
- "unit": "sk-d-dl-general-weights"
+ "unit": "sk-d-dl-general-weights",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-zl-complex-extension",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the imported distinguished triangle in the Weil category is ill-typed for the current fixed-pair definition, which supplies no triangulation. Replaced it by commuting Weil arrows whose underlying arrows extend to a distinguished triangle. Retained the degreewise image/subquotient route, added the actual t-structure cohomology theorem and exact pullback/image comparisons, and removed the unused Frobenius-module shadow citations. The source-tagged upstream theorem has a different derived-Weil-sheaf ambient category and is not an exact attachment. No new nodes.",
+  "blueprint": "The first paragraph is realized by step 1 using the underlying distinguished triangle. The second paragraph is realized by steps 2-4 (explicit cohomology equivariance and image/quotient construction, then the existing sheaf closure lemma); step 5 is its final sentence. The unit mixed-filtration route is unchanged, and this is not its defining/key node.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Provides the actual common-stage standard t-structure and its natural Frobenius cohomology comparison, already used in the weight definition; the unit has no separate coefficient-category theorem."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic t-structure theorem supplies cohomological exactness for the underlying distinguished triangle; a long-exact-sequence theorem for an unspecified homological functor alone would not verify that hypothesis."
+   },
+   {
+    "node": "lem-a1-constructible-pullback-t-exact",
+    "why": "Generic coefficient infrastructure supplies exact Frobenius inverse image on the actual common-stage constructible heart for induced image and quotient actions."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "General abelian exact-functor kernel/image/quotient comparisons give the induced Frobenius actions compatibly with the maps; no weight argument or unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-truncations",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-201585698",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-201585698 (reviewer sub-agent of L); spot-checked: Read the full maths. 5 steps, 0 new nodes, no fixes. Not superseded: the live node is still imported. Twins: NH was 'LAND superseded', Q12 was refused at landing because def-weil-complex-weights changed after its base, and NS bdd34ac5 got PASS WIN at 16:07 but has not landed (land only one). Every node this delivery cites has a statement byte-equal to live. Sources: master order 2812 and main-20261015 .md/.proof.md are identical, with a two-paragraph proof (long exact sequence, then image quotient/subobject and lem-a1-mixed-direct-summand (1),(2)). Unit sk-d-dl-general-weights route is kept, and the item is not its key node. Statement retyped (STATEMENT-DISPUTED): def-weil-weil-sheaf-complex gives the pair category no triangulation, so the old 'distinguished triangle of Weil complexes' becomes Weil arrows u,v whose underlying arrows extend to a distinguished triangle in D^b_c(X,Qbar). This asks for less (no Weil connecting map), so it is not weakened. The extra hypotheses are def-weil-complex-weights' standing ones. The only citer, lem-zl-open-closed-weight step 1, supplies exactly these data. Tested on zero objects, an empty X_0 and the Jordan block on Spec k_0. Step 1: prop-constructible-truncations t-structure plus lem-weil-heart-short-exact-triangles (5) give exactness; the H^i conventions agree. Step 2: I checked the equivariance equation with naturality of the Lg^*/H^j comparison. Step 3: lem-a1-constructible-pullback-t-exact applies to the semilinear g_X (its Lean takes an arbitrary h : W ⟶ X, and def-weil-punctual-weights cites it for the same use). lem-sp-exact-functor-preserves-homology (a),(b) gives the Weil structures on I and Q, and Q→C is a Weil mono. Step 4: mixed-direct-summand (1),(2) with bound w+j. Accepted tool_uses: prop-constructible-truncations, lem-weil-heart-short-exact-triangles, lem-a1-constructible-pullback-t-exact, and the Mathlib leaf lem-sp-exact-functor-preserves-homology, all generic. Batch-5 flag: lem-pod-texact-truncation-comparison is a generic truncation comparison for t-exact functors, not part of Poincaré duality, and it was already in the closure via def-weil-complex-weights, so it adds nothing → accepted. No SGA, no cycle, no duplicate. Not attaching the pro-étale of_distTriang Lean is correct. Advisory: the report names the change under 'What was wrong' rather than '## Source error'; the maintainer should record the retyping in HUMAN.md."
+ }
 }
