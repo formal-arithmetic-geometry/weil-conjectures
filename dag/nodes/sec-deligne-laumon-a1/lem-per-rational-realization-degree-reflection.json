@@ -23,9 +23,114 @@
   "prop-weil-localized-tstructure",
   "prop-weil-pbc-integral-tstructure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $J=J_X$ and $F=F_X$. By [lem-per-rational-module-realization-functor], $J$ is triangulated and $\\mathcal H^r(FL)=E_X\\otimes_{B_X}\\mathcal H^r(L)$ naturally. By [prop-weil-pbc-integral-tstructure], an integral $L\\in\\mathcal C_X^{\\le m}$ has $\\mathcal H^r(L)=0$ for $r>m$, so $FL$ has the same upper bound; the corresponding assertion holds for $\\ge m$. Every object of $\\mathcal R_X^{\\le m}$ (respectively $\\mathcal R_X^{\\ge m}$) is isomorphic to $QL$ with the indicated integral bound, by the essential-image description in [prop-weil-localized-tstructure], shifted by $m$. The standard ambient bounds are the cohomology-vanishing conditions of [def-sbc-standard-tstructure-derived-category]. Applying $J$ to those isomorphisms proves preservation of both bounds, for every $m$.",
+   "uses": [
+    "lem-per-rational-module-realization-functor",
+    "prop-weil-pbc-integral-tstructure",
+    "prop-weil-localized-tstructure",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), pp. 60-61, and Proposition 6.8.14(2), p. 62: scalar localization and ordinary cohomology; agent deduction of t-exactness"
+   }
+  },
+  {
+   "text": "For $Z=QK$, take the canonical rational triangle $\\tau_{\\mathcal R}^{\\le m}Z\\xrightarrow{\\epsilon_Z}Z\\xrightarrow{\\eta_Z}\\tau_{\\mathcal R}^{\\ge m+1}Z\\to(\\tau_{\\mathcal R}^{\\le m}Z)[1]$ of [lem-weil-heart-short-exact-triangles](1), applied to [prop-weil-localized-tstructure]. Apply the triangulated $J$ of [lem-per-rational-module-realization-functor]. Its end terms have ambient bounds $\\le m$ and $\\ge m+1$ by step 1. Uniqueness of truncation triangles in [lem-weil-heart-short-exact-triangles](1), now applied to the ambient standard t-structure [def-sbc-standard-tstructure-derived-category], gives isomorphisms $\\alpha_Z:J\\tau_{\\mathcal R}^{\\le m}Z\\cong\\tau_D^{\\le m}JZ$ and $\\beta_Z:J\\tau_{\\mathcal R}^{\\ge m+1}Z\\cong\\tau_D^{\\ge m+1}JZ$. They give an isomorphism of the entire triangles with identity on $JZ$, including the connecting arrow and the shift comparison of $J$. In particular $\\epsilon^D_{JZ}\\alpha_Z=J\\epsilon_Z$ and $\\beta_ZJ\\eta_Z=\\eta^D_{JZ}$. Replacing $m$ by $m-1$ gives the requested upper comparison at $m$.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "prop-weil-localized-tstructure",
+    "lem-per-rational-module-realization-functor",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i)-(ii), pp. 29-30: adjunction and unique canonical truncation triangle"
+   }
+  },
+  {
+   "text": "These comparisons are natural for every rational morphism $h:Z\\to W$. Indeed, the two maps $J\\tau_{\\mathcal R}^{\\le m}Z\\to\\tau_D^{\\le m}JW$ given by $\\alpha_W J(\\tau_{\\mathcal R}^{\\le m}h)$ and $(\\tau_D^{\\le m}Jh)\\alpha_Z$ have the same composite $Jh\\,J\\epsilon_Z$ with $\\epsilon^D_{JW}$. The source has bound $\\le m$, so injectivity of the right-adjunction bijection in [lem-weil-heart-short-exact-triangles](1) makes them equal. Dually, the two upper comparison maps have equal precomposition with $J\\eta_Z$, and the left-adjunction bijection makes them equal. This argument applies directly to $h$ in $\\mathcal R_X$, hence also to every fraction $f/\\varpi^n$; no presentation of $h$ is chosen. The characterizing equations in step 2 establish preservation of units and counits, and uniqueness of the full truncation triangle establishes compatibility with its connecting map.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i)-(ii), pp. 29-30: functoriality from the two truncation adjunctions"
+   }
+  },
+  {
+   "text": "Suppose $\\mathcal H^r(JZ)=0$ for $r>m$. By [def-sbc-standard-tstructure-derived-category], $JZ\\in D^{\\le m}$. The identity of $JZ$ is then a universal map from $D^{\\le m}$ to $JZ$, so the right-adjunction uniqueness in [lem-weil-heart-short-exact-triangles](1) says that $\\epsilon^D_{JZ}$ is an isomorphism. Step 2 implies that $J\\epsilon_Z$ is an isomorphism. Fullness of the assumed fully faithful $J$ lifts its inverse to a morphism $v:Z\\to\\tau_{\\mathcal R}^{\\le m}Z$. Applying $J$ to $\\epsilon_Zv$ and $v\\epsilon_Z$ gives the respective identities; faithfulness makes those composites the identities already in $\\mathcal R_X$. Thus $\\epsilon_Z$ is invertible. Its source belongs to $\\mathcal R_X^{\\le m}$, and this class is strictly full [prop-weil-localized-tstructure]; hence $Z\\in\\mathcal R_X^{\\le m}$. Combined with step 1, this proves the first equivalence.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-heart-short-exact-triangles",
+    "prop-weil-localized-tstructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i), pp. 29-30; agent inverse-lifting calculation using the assumed full faithfulness"
+   }
+  },
+  {
+   "text": "Suppose $\\mathcal H^r(JZ)=0$ for $r<m$. Then $JZ\\in D^{\\ge m}$ [def-sbc-standard-tstructure-derived-category], and the identity is a universal map from $JZ$ to $D^{\\ge m}$. The left-adjunction uniqueness of [lem-weil-heart-short-exact-triangles](1) makes the ambient unit $\\eta^D_{JZ}:JZ\\to\\tau_D^{\\ge m}JZ$ invertible. The upper comparison of step 2 therefore makes $J\\eta_Z$ invertible. Lift its inverse by fullness of $J$; faithfulness applied to the two inverse equations shows that this lift is inverse to $\\eta_Z$ in $\\mathcal R_X$. Consequently $Z\\cong\\tau_{\\mathcal R}^{\\ge m}Z\\in\\mathcal R_X^{\\ge m}$, using the isomorphism closure in [prop-weil-localized-tstructure]. Together with step 1 this proves the second equivalence.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-heart-short-exact-triangles",
+    "prop-weil-localized-tstructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Proposition 1.3.3(i), pp. 29-30, dual adjunction; agent inverse-lifting calculation"
+   }
+  },
+  {
+   "text": "Use the convention $H^r_{\\mathcal R}(Z)=\\tau_{\\mathcal R}^{\\ge0}\\tau_{\\mathcal R}^{\\le0}(Z[r])$ of [lem-weil-heart-short-exact-triangles](1), viewed as a heart object in degree zero. The natural comparisons of [prop-weil-localized-tstructure], with the shift-compatible $Q$, give $H^r_{\\mathcal R}(QK)\\cong QH^r_{\\mathcal C}(K)$. The integral truncations restrict the ambient ones by [prop-weil-pbc-integral-tstructure]. For a complex representing $K[r]$, the good truncation formulas of [def-kun-truncations] show that $\\tau^{\\ge0}\\tau^{\\le0}$ is the single sheaf $\\ker d^0/\\operatorname{im}d^{-1}$ in degree zero, namely $\\mathcal H^r(K)$ by [def-weil-derived-cohomology-sheaves]. Thus $H^r_{\\mathcal C}(K)$ is that ordinary sheaf, and belongs to $\\mathcal C_X$. Apply $JQ=F$ and the exact scalar extension on sheaves of [lem-per-rational-module-realization-functor]: $JH^r_{\\mathcal R}(QK)\\cong(E_X\\otimes_{B_X}\\mathcal H^r(K))[0]$. The kernel, image and quotient calculation, and all comparison functors, are natural, so this is the asserted natural sheaf identification.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "prop-weil-localized-tstructure",
+    "prop-weil-pbc-integral-tstructure",
+    "def-kun-truncations",
+    "def-weil-derived-cohomology-sheaves",
+    "lem-per-rational-module-realization-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), pp. 60-61, and Proposition 6.8.14(2), p. 62; BBD 1.3.6, p. 31; explicit good-truncation calculation"
+   }
+  },
+  {
+   "text": "An object is in the localized heart exactly when it lies in both bounds at zero [prop-weil-localized-tstructure]. Steps 1, 4 and 5 identify this condition with $\\mathcal H^r(JZ)=0$ for every $r\\ne0$. Every object of the essential image is isomorphic to some $JZ$; the same equivalence shows that one concentrated in degree zero comes from a heart object. Full faithfulness of $J$ restricts to the full subcategories on both sides. Hence $J$ identifies the localized heart with the degree-zero objects of its essential image. All steps used the ambient canonical integral and localized truncations, never a formula involving truncation of finite-level reductions. In particular the reflection argument imposes no torsion-freeness on $\\mathcal H^r(K)$.",
+   "uses": [
+    "prop-weil-localized-tstructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 6.8.11(3) and 6.8.14(2); agent consequence for the essential image, without invoking essential surjectivity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-rational-module-realization-functor",
+  "prop-weil-pbc-integral-tstructure",
+  "prop-weil-localized-tstructure",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-weil-heart-short-exact-triangles",
+  "def-kun-truncations",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Propositions 6.8.11(3), pp. 60-61, and 6.8.14(2), p. 62, together with BBD Proposition 1.3.3, pp. 29-30, and Theorem 1.3.6, p. 31. Formal deduction from the existing scalar-realization and localized-t-structure statements; full faithfulness is assumed, not re-proved."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +159,53 @@
    "results": "25 hits: Mathlib/Lean/Expr/Basic.lean:551; Mathlib/Lean/Expr/Basic.lean:555; Mathlib/RingTheory/QuotSMulTop.lean:10; Mathlib/Algebra/Module/PID.lean:202; Mathlib/Algebra/Module/PID.lean:268; Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean:9; Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean:49; Mathlib/CategoryTheory/ObjectProperty/EpiMono.lean:75; Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean:49; Mathlib/CategoryTheory/ObjectProperty/Extensions.lean:8; Mathlib/CategoryTheory/ObjectProperty/Extensions.lean:42; Mathlib/CategoryTheory/ObjectProperty/Extensions.lean:45; Mathlib/CategoryTheory/ObjectProperty/Extensions.lean:46; Mathlib/CategoryTheory/ObjectProperty/Extensions.lean:48; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:60; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:62; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:66; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:118; Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean:120; Mathlib/Algebra/Module/FinitePresentation.lean:8; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:56; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:58; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:108; Mathlib/RingTheory/LocalProperties/ProjectiveDimension.lean:111; Mathlib/Algebra/Homology/HomotopyCategory/HomologicalFunctor.lean:38; no hit states the completed integral/rational continuous-module assertion.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*localiz|localiz.*constructible|realization.*trunc",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic t-structure, exact-functor or full-faithfulness infrastructure only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A t exact fully faithful functor reflects t structure degree bounds and commutes with truncations",
+   "results": "8 hits: CategoryTheory.IsTriangulated.of_fully_faithful_triangulated_functor, CategoryTheory.Functor.FullyFaithful.reflectsIsomorphisms, CategoryTheory.SimplicialObject.Truncated.cosk.fullyFaithful, CategoryTheory.reflectsIsomorphisms_of_full_and_faithful, CategoryTheory.Functor.fullyFaithfulOfCoreflective, CategoryTheory.Limits.fullyFaithful_reflectsColimits, SSet.Truncated.sk.fullyFaithful, SSet.Truncated.cosk.fullyFaithful",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic t-structure, exact-functor or full-faithfulness infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fully faithful exact realization of a rationalized constructible derived category reflects cohomological degree bounds and commutes with canonical truncations",
+   "results": "8 hits: DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.exists_iso_Q_obj_of_isLE, DerivedCategory.exists_iso_Q_obj_of_isGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic t-structure, exact-functor or full-faithfulness infrastructure only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.TStructure",
+   "results": "12 hits: CategoryTheory.Triangulated.TStructure, CategoryTheory.Triangulated.TStructure.IsGE, CategoryTheory.Triangulated.TStructure.IsLE, CategoryTheory.Triangulated.TStructure.bounded, CategoryTheory.Triangulated.TStructure.minus, CategoryTheory.Triangulated.TStructure.plus, CategoryTheory.Triangulated.TStructure.ge, CategoryTheory.Triangulated.TStructure.le",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic t-structure, exact-functor or full-faithfulness infrastructure only"
+  },
+  {
+   "tool": "grep",
+   "query": "IsTExact|truncLE|truncGE",
+   "results": "22 hits: Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic t-structure, exact-functor or full-faithfulness infrastructure only",
+   "subdirectory": "CategoryTheory/Triangulated/TStructure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact scalar extension on sheaves of modules induces a functor on the localization of the bounded constructible derived category which identifies its heart and reflects both cohomological bounds",
+   "results": "8 hits: CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, ModuleCat.localizedModule_functor_map_exact, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategoryFactorsh, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic t-structure, exact-functor or full-faithfulness infrastructure only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-continuous-rational-derived-realization",
@@ -78,5 +226,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-rational-realization-degree-reflection",
+  "worker": "stage1",
+  "summary": "Seven-step proof with no new nodes and unchanged statement. Exact scalar localization supplies preservation of bounds; canonical truncation-triangle uniqueness supplies normalized natural comparisons; full faithfulness reflects invertibility of each truncation counit/unit, giving both converse bounds. Explicit good-truncation kernels and quotients identify heart cohomology. No essential surjectivity, torsion-free assumption or finite-level reduction-truncation formula is used. Existing searches retained and six fresh logged searches read.",
+  "blueprint": "Fills the ordinary-cohomology realization prerequisite in the first paragraph of the current lem-per-smooth-pullback-t-exact proof, via the parent continuous-rational-derived-realization factorization (retained parent steps 10 and 11); proves the comparison of localized and ambient ordinary bounds and truncations before the smooth support calculation.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-integral-tstructure",
+    "why": "Uses ambient integral degree bounds and the restriction of canonical truncations for the same completed category with etale origins; these are generic coefficient-category prerequisites, not a replacement of the perverse proof route."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Uses the localized essential-image t-structure, rational truncation comparisons and its strictly full bounds; no node in this unit constructs that general coefficient t-structure."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Uses only the general uniqueness, adjunction and cohomology convention in clause (1) for source and ambient t-structures; it supplies the normalization and naturality required by this item."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-integral-tstructure",
+  "prop-weil-localized-tstructure",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-070e2f52c",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-070e2f52c (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it with no fixes. Shape: one commit; the statement, stmt_deps, blueprint and created fields are unchanged from side-live and live, where the item is still unsplit with no repair note, so this is not a re-split. There are no new nodes, no cycle (closure computed) and no SGA citation. Sources checked: BS 6.8.8, 6.8.11(3) and 6.8.14(2) at pp. 60-62, and BBD 1.3.3(i)(ii) at pp. 29-30 (adjoints and a unique truncation triangle including the degree-1 arrow). Step checks: step 1 gets preservation of bounds from the localized essential image and the realization node's formula H^r(FL)=E⊗H^r(L). Step 2 gets α and β with the connecting arrow from triangle uniqueness in heart-triangles(1), and the m to m-1 indexing is right. Step 3 gets naturality from the adjunction bijections, for any morphism including fractions. Steps 4 and 5 reflect the counit and unit isomorphisms through full faithfulness, with the inverse lift written out. Step 6 gets H^r_R(QK)≅QH^r_C(K) from the localized comparisons and identifies the good truncation as H^r(K)[0] via def-kun-truncations, which is stated for general abelian categories; no conditional finite-level formula is used. Step 7 restricts to the heart without essential surjectivity. Small cases tested: K=0, B_X[-r], and (A/ϖ)[0], where QK=0 and no torsion-free hypothesis is needed. Tool uses accepted: prop-weil-pbc-integral-tstructure, prop-weil-localized-tstructure and lem-weil-heart-short-exact-triangles, all generic t-structure facts that the perverse unit does not construct."
  }
 }
