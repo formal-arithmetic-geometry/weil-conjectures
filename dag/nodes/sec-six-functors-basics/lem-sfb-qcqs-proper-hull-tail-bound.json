@@ -18,9 +18,95 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-kun-truncations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $T=X,Y$, apply the sheaf tensor theorem to $\\mathcal A=\\Ab$ on the chosen small pro-étale site. It gives a closed symmetric monoidal Grothendieck abelian sheaf category, with additive tensor. The module-object theorem therefore makes $\\mathcal A_T=\\operatorname{Mod}_{\\Lambda_T}$ Grothendieck abelian. In particular its filtered colimits are exact. Coproducts are filtered colimits of finite direct sums, so are exact. The termwise-coproduct theorem identifies coproducts in $D(\\mathcal A_T)$ with termwise sums of representing complexes. Exactness then gives $H^i(\\bigoplus_t K_t)\\simeq\\bigoplus_tH^i(K_t)$: apply the sum to the kernel, image and cokernel sequences defining cohomology.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-sfb-modobj-grothendieck",
+    "def-sp-grothendieck-abelian",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), first paragraph: ambient module-derived coproducts and their cohomology"
+   }
+  },
+  {
+   "text": "Let $\\mathcal P_X$ be the weak Serre coproduct class defined in the cited heart estimate and put $\\mathcal C_X=\\{K\\mid H^i(K)\\in\\mathcal P_X\\text{ for every }i\\}$. This class is replete and shift-stable. For a triangle $B\\to C\\to D\\to B[1]$ with $B,D\\in\\mathcal C_X$, its long exact sequence expresses $H^i(C)$ as an extension of $\\operatorname{coker}(H^{i-1}(D)\\to H^i(B))$ by $\\ker(H^i(D)\\to H^{i+1}(B))$. Both belong to $\\mathcal P_X$ by its defining closure properties, so $C\\in\\mathcal C_X$; rotation gives the other two-out-of-three cases. Step 1 and coproduct closure of $\\mathcal P_X$ make $\\mathcal C_X$ closed under all ambient small sums. Every $\\mathrm D_{\\mathrm{ctf}}$ object has constructible cohomology, hence belongs to $\\mathcal C_X$. The intersection definition of $\\mathcal L_X$ now gives $\\mathcal L_X\\subseteq\\mathcal C_X$. Finally any good truncation of such a $K$ still has cohomology in $\\mathcal P_X$, since it retains the original cohomology in the retained range and is zero elsewhere.",
+   "uses": [
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "lem-sf-derived-homology-long-exact",
+    "sk-def-sfb-constructible",
+    "sk-def-localizing-closure",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), first paragraph: pass from generators to cohomology of every object in the localizing hull"
+   }
+  },
+  {
+   "text": "Choose $d\\geq0$ from the heart estimate. Thus $Rf_*(M[0])$ has no cohomology above $d$ for every $M\\in\\mathcal P_X$. The underived module-object pushforward is additive and left exact. Grothendieck abelianness from Step 1 gives K-injective resolutions, and the triangulated derived-functor theorem applies to its actual total right derived functor. Fix $a\\in\\mathbf Z$, $K\\in\\mathcal L_X$ and set $L=\\tau_{<a}K$. For every $n\\geq0$, the complex $L_n=\\tau_{\\geq-n}L$ is bounded, has cohomology in $\\mathcal P_X$ by Step 2, and has no cohomology above $a-1$. Bounded heart-amplitude dévissage, with upper endpoint $a-1$, gives $H^r(Rf_*L_n)=0$ for every $r>a-1+d$, uniformly in $n$. If $-n>a-1$, $L_n=0$ and the same bound holds.",
+   "uses": [
+    "lem-sfb-qcqs-proper-serre-heart-bound",
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-grothendieck-k-injective",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sfb-bounded-heart-amplitude-devissage",
+    "def-kun-truncations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), first paragraph: use the uniform heart estimate on every bounded lower truncation of the tail"
+   }
+  },
+  {
+   "text": "Apply the module-object Postnikov–Roos theorem to the morphism $f$ and the ordinary ambient object $L$. With $B_n=Rf_*L_n$ it gives a distinguished triangle\n$$Rf_*L\\longrightarrow P\\xrightarrow{1-s}P\\longrightarrow(Rf_*L)[1],\\qquad P=\\prod_{n\\geq0}B_n,$$\nand $H^j(P)\\simeq\\prod_{n\\geq0}H^j(B_n)$ for every $j$. Step 3 therefore gives $H^j(P)=0$ for $j>a-1+d$. If $r>a+d$, both $r-1$ and $r$ satisfy this inequality. The exact segment $H^{r-1}(P)\\to H^r(Rf_*L)\\to H^r(P)$ has zero end terms, so $H^r(Rf_*L)=0$. This is an application to all unbounded module-object complexes: it does not require $L$ to be in the hull or to be derived complete.",
+   "uses": [
+    "lem-module-object-postnikov-roos",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit), the Roos triangle; Tag 07KC (lemma-products), product cohomology; actual pro-étale module-object Postnikov cone supplied by the cited node"
+   }
+  },
+  {
+   "text": "Take $c=d+1\\in\\mathbf N$. If $r\\geq a+c$, then $r>a+d$, and Step 4 gives the required vanishing. The chosen $d$ and hence $c$ depend only on the fixed morphisms and coefficients, not on $a$ or $K$. Zero objects, empty schemes and empty fibres cause no exception: the same closure and truncation arguments give zero complexes. The argument takes every sum, truncation and derived image in the ordinary ambient category, exactly as required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(2), first paragraph: the uniform tail cutoff needed for unbounded direct-sum continuity"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-grothendieck",
+  "def-sp-grothendieck-abelian",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-sfb-qcqs-proper-serre-heart-bound",
+  "lem-sf-derived-homology-long-exact",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-kun-truncations",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-bounded-heart-amplitude-devissage",
+  "lem-module-object-postnikov-roos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "Refinement proof (2), first paragraph, direct-sum preservation on the ordinary ambient localizing hull: heart upper bound used before the Postnikov passage to unbounded lower tails. Formal heart-to-tail reduction using the ordinary module Postnikov–Roos triangle; the qcqs geometric heart estimate is left as a new statement-only node."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +149,38 @@
    "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside; DerivedCategory.isGE_Q_obj_iff; HomologicalComplex.instIsStrictlySupportedStupidTrunc_1; DerivedCategory.isGE_iff; DerivedCategory.isLE_iff",
    "date": "2026-10-21",
    "verdict": "no match: support and truncation lemmas, proper-morphism definitions and affine limit results do not bound the total direct image on this coefficient/localizing class"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProper|rightDerivedFunctor|IsLE",
+   "results": "0 hits: ; directory Mathlib/AlgebraicGeometry/Sites",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give properness definitions, general condensed-category axioms, or truncation support; none states this relative proper cohomological estimate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper map over a qcqs base sends every lower truncation tail of a complex in the localizing hull of constructible finite Tor complexes to cohomology bounded above by the cutoff plus a fixed constant",
+   "results": "8 hits: HomologicalComplex.truncLE'Map; CochainComplex.quasiIso_ιTruncLE_iff; CochainComplex.truncate; HomologicalComplex.ιTruncLE; HomologicalComplex.stupidTruncMap; CochainComplex.ιTruncLE; ComplexShape.Embedding.truncLEFunctor; CochainComplex.quasiIso_truncLEMap_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give properness definitions, general condensed-category axioms, or truncation support; none states this relative proper cohomological estimate"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, DerivedCategory.IsLE",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give properness definitions, general condensed-category axioms, or truncation support; none states this relative proper cohomological estimate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform upper amplitude for proper pushforward of unbounded lower truncation tails in the constructible finite Tor localizing hull",
+   "results": "8 hits: HahnEmbedding.Partial.truncLT_mem_range_sSupFun; HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside; IsLocalizedModule.exist_integer_multiples_of_finite; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give properness definitions, general condensed-category axioms, or truncation support; none states this relative proper cohomological estimate"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-qcqs-proper-localizing-coproducts",
@@ -86,5 +200,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-qcqs-proper-hull-tail-bound",
+  "worker": "stage1",
+  "summary": "Separated the genuine qcqs proper heart estimate from the formal localizing-hull, bounded dévissage and unbounded Postnikov–Roos arguments. The statement and all coefficient/ambient-category hypotheses are unchanged; one new statement-only node remains. A harmless additional Milnor degree is absorbed in c=d+1.",
+  "blueprint": "Refinement proof (2), first paragraph, direct-sum preservation on the ordinary ambient localizing hull: heart upper bound used before the Postnikov passage to unbounded lower tails.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic sheaf/module or derived-category tool used for the formal heart-to-tail reduction; it does not replace the compactification-coherence route."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic sheaf/module or derived-category tool used for the formal heart-to-tail reduction; it does not replace the compactification-coherence route."
+   },
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic sheaf/module or derived-category tool used for the formal heart-to-tail reduction; it does not replace the compactification-coherence route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic sheaf/module or derived-category tool used for the formal heart-to-tail reduction; it does not replace the compactification-coherence route."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Generic sheaf/module or derived-category tool used for the formal heart-to-tail reduction; it does not replace the compactification-coherence route."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic sheaf/module or derived-category tool used for the formal heart-to-tail reduction; it does not replace the compactification-coherence route."
+   },
+   {
+    "node": "lem-sfb-bounded-heart-amplitude-devissage",
+    "why": "Generic sheaf/module or derived-category tool used for the formal heart-to-tail reduction; it does not replace the compactification-coherence route."
+   },
+   {
+    "node": "lem-module-object-postnikov-roos",
+    "why": "Generic sheaf/module or derived-category tool used for the formal heart-to-tail reduction; it does not replace the compactification-coherence route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-grothendieck",
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sfb-bounded-heart-amplitude-devissage",
+  "lem-module-object-postnikov-roos"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NY-0996b821e",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-0996b821e (reviewer sub-agent of L); spot-checked: I read the item in full: all 5 steps, every cited statement, the new node, the parent lem-sfb-qcqs-proper-localizing-coproducts (its Step 4 uses this item) and blueprint det-sf-comp-coherence-refinement proof (2). There is no repair note, the item is not dropped and there is no SGA citation. Step 1 holds: module objects in Sh(proét,Ab) are Grothendieck, sums are exact, and H^i commutes with sums. Step 2: the cohomology class C_X meets def-weil-triangulated-subcategory (extension, shift, zero), is closed under sums by Step 1, and contains Dctf, so L_X is inside C_X. Truncations keep their cohomology in P_X. Step 3: f_* is additive and left exact, and K-injectives give a triangulated Rf_*. Bounded-heart dévissage applies to tau_{>=-n}tau_{<=a-1}K with upper endpoint a-1. Step 4: module Postnikov–Roos gives the Roos triangle and H^j preserving N-products, so r>a+d gives vanishing. Step 5: c=d+1. The new node lem-sfb-qcqs-proper-serre-heart-bound is statement-only and self-contained. Its P_X is the weak Serre coproduct closure that Step 2 needs. It is a degree-0 bound, strictly smaller than the item, not a restatement. Small cases: id gives d=0; for finite Lambda, P_X lies in nu^*(torsion étale), so proper base change and fibre cd give d=2·(fibre dim), including l=p; P^1 with Q_l gives d=2. I found no counterexample, and the general proof is honest downstream work. No duplicate: the existing heart nodes (sk-lem-proper-heart-bound, det-proper-heart-bound-*, lem-sfb-noetherian-proper-heart-uniform-bound, lem-sfb-proper-serre-heart-continuous, thm-sf-fullcd-etale-origin) all assume a field, a Noetherian base, l≠p, finite coefficients or étale origin. I accept the declared generic tool_uses. No fixes."
  }
 }

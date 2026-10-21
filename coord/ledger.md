@@ -21339,3 +21339,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:50 L: merged deliver/Q147/lem-per-rational-realization-degree-reflection (reviewer PASS; first push; new nodes: 0)
 - 08:50 L: merged deliver/NU/lem-zl-finite-stage-categorical-trace (reviewer PASS; first push; new nodes: 1); claim not held by NU: not your claim
 - 08:50 L: merged deliver/Q38/lem-pur-completed-primitive-counit-comparison (reviewer PASS; first push; new nodes: 0)
+- 08:50 L: merged deliver/NY/lem-sfb-qcqs-proper-hull-tail-bound (reviewer PASS; first push; new nodes: 1)
