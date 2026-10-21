@@ -12,11 +12,129 @@
   "lem-sfb-derived-monoidal",
   "def-sfb-preserves-kflat-quasi-iso",
   "def-sfb-strong-monoidal-functor",
-  "lem-pur-derived-tensor-comparison"
+  "lem-pur-derived-tensor-comparison",
+  "def-sp-grothendieck-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Both $\\mathcal C$ and $\\mathcal D$ are Grothendieck abelian [def-sp-grothendieck-abelian], so all small colimits exist in them. Use [lem-weil-pbc-left-adjoint-preserves-colimits] for $F$ and for tensoring with a fixed object: closedness gives the right adjoint to left tensor, and symmetry conjugates right tensor to left tensor. Thus $F$ preserves the countable coproducts, and the tensor functors preserve the colimits, required by [lem-sfb-termwise-strong-monoidal]. Apply that statement to the specified ordinary structure of $F$. It gives exactly the comparison $\\tau$ of the item (its summand formula specifies it uniquely), the map $j=e_F^{-1}[0]$, and their associativity and both unit equations on unbounded complexes. We will use these three equations, without a braiding equation.",
+   "uses": [
+    "def-sp-grothendieck-abelian",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-termwise-strong-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); explicit agent proof of the abstract cross-functor normalization"
+   }
+  },
+  {
+   "text": "By [lem-sfb-abstract-kflat-resolution], every complex $A$ admits a K-flat quasi-isomorphism $P\\to A$; all its hypotheses are the stated Grothendieck, closed symmetric monoidal and functorial-flat-resolution hypotheses. Hence every derived object is isomorphic to $Q_{\\mathcal C}P$ with $P$ K-flat. The unit complex $I=\\mathbf1[0]$ is K-flat: its two tensor functors are naturally the identity by the complex unitors. K-flat objects are closed under tensor: for a quasi-isomorphism $s$, reassociation identifies $(P\\otimes Q)\\otimes s$ with $P\\otimes(Q\\otimes s)$, a composite application of two quasi-isomorphism-preserving functors; on the other side use $s\\otimes(P\\otimes Q)\\cong(s\\otimes P)\\otimes Q$. These use exactly the two-sided definition in [def-sfb-preserves-kflat-quasi-iso] and the complex associator of [lem-sfb-total-tensor-homotopy]. By the hypothesis on $F$, all $FP,FQ,F(P\\otimes Q),FI$ appearing below are K-flat too.",
+   "uses": [
+    "lem-sfb-abstract-kflat-resolution",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-sfb-total-tensor-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); explicit agent proof of the abstract cross-functor normalization"
+   }
+  },
+  {
+   "text": "For a K-flat pair the stated normalization solves for the comparison:\n$$t_{Q_{\\mathcal C}P,Q_{\\mathcal C}Q}=(\\kappa_P\\otimes\\kappa_Q)^{-1}\\circ m_{\\mathcal D;FP,FQ}\\circ Q_{\\mathcal D}(\\tau_{P,Q})\\circ\\kappa_{P\\otimes Q}\\circ E(m_{\\mathcal C;P,Q})^{-1}.$$\nEvery factor is an isomorphism: the $m$'s are the native K-flat model comparisons, the $\\kappa$'s are the given factorization isomorphisms, and Step 1 gives $\\tau$. Thus $t$ is invertible on K-flat model pairs. Likewise the formula defining $e$ is a composite of isomorphisms, so $e$ is invertible. No resolution of the unit is needed since Step 2 shows $I$ is K-flat.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); explicit agent proof of the abstract cross-functor normalization"
+   }
+  },
+  {
+   "text": "Here are the native constraint equations used in the remaining calculations. For either coefficient category $\\mathcal A$, abbreviate its localization to $q$, and define, for K-flat $P,Q,R$,\n$$A_{\\mathcal A}^l=(m_{P,Q}\\otimes1)\\circ m_{P\\otimes Q,R},\\qquad A_{\\mathcal A}^r=(1\\otimes m_{Q,R})\\circ m_{P,Q\\otimes R}.$$\nThe assertion in [lem-sfb-derived-monoidal] that the constraints are induced from complexes and localization is lax monoidal gives\n$$\\alpha^{D(\\mathcal A)}\\circ A_{\\mathcal A}^l=A_{\\mathcal A}^r\\circ q(\\alpha^{\\rm Ch}),$$\n$$\\lambda^{D(\\mathcal A)}_{qP}\\circ(u_{\\mathcal A}\\otimes1)\\circ m_{I,P}=q(\\lambda^{\\rm Ch}_P),\\qquad\\rho^{D(\\mathcal A)}_{qP}\\circ(1\\otimes u_{\\mathcal A})\\circ m_{P,I}=q(\\rho^{\\rm Ch}_P).$$\nExplicitly these are the associativity and unit coherence equations of its lax tensorator $m^{-1}$, multiplied by the indicated invertible $m$'s and by the unit comparison. The complex constraints here are the actual ones of [lem-sfb-total-tensor-homotopy], not constraints transported along $F$.",
+   "uses": [
+    "lem-sfb-derived-monoidal",
+    "lem-sfb-total-tensor-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); explicit agent proof of the abstract cross-functor normalization"
+   }
+  },
+  {
+   "text": "Check associativity at $K=Q_{\\mathcal C}P,L=Q_{\\mathcal C}Q,M=Q_{\\mathcal C}R$. Let $T=(P\\otimes Q)\\otimes R$. Precompose each proposed side with $E(A_{\\mathcal C}^l)$ and postcompose with $\\kappa_P\\otimes(\\kappa_Q\\otimes\\kappa_R)$. Substitute the normalization twice in each side. Naturality of $t$ moves $m_{P,Q}$ or $m_{Q,R}$ across its outer occurrence, and naturality of $\\kappa$ replaces $E(Q_{\\mathcal C}a)$ by $Q_{\\mathcal D}(Fa)$ conjugated by $\\kappa$. Step 4 moves the native associators. The resulting left and right composites are, respectively,\n$$A_{\\mathcal D}^r\\circ Q_{\\mathcal D}((1\\otimes\\tau_{Q,R})\\circ\\tau_{P,Q\\otimes R}\\circ F_{\\rm Ch}(\\alpha^{\\rm Ch}))\\circ\\kappa_T,$$\n$$A_{\\mathcal D}^r\\circ Q_{\\mathcal D}(\\alpha^{\\rm Ch}\\circ(\\tau_{P,Q}\\otimes1)\\circ\\tau_{P\\otimes Q,R})\\circ\\kappa_T,$$\nwhere $A_{\\mathcal D}^r$ is evaluated at $FP,FQ,FR$. Their inner maps agree by [lem-sfb-termwise-strong-monoidal]. Step 2 makes every model comparison used here invertible, including those for the intermediate tensor complexes. Cancel the common pre- and postcomposition isomorphisms to obtain exactly the asserted derived associativity equation on this triple.",
+   "uses": [
+    "lem-sfb-termwise-strong-monoidal",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); explicit agent proof of the abstract cross-functor normalization"
+   }
+  },
+  {
+   "text": "For the left unit at $K=Q_{\\mathcal C}P$, put $B_l=(u_{\\mathcal C}\\otimes1)\\circ m_{\\mathcal C;I,P}$. By Step 4, $\\lambda_K\\circ B_l=Q_{\\mathcal C}(\\lambda_P^{\\rm Ch})$. Thus precomposing $E(\\lambda_K)$ with $E(B_l)$ and postcomposing with $\\kappa_P$ gives\n$$Q_{\\mathcal D}(F_{\\rm Ch}(\\lambda_P^{\\rm Ch}))\\circ\\kappa_{I\\otimes P}.$$\nFor the other side, naturality of $t$ moves $E(u_{\\mathcal C}\\otimes1)$ to $E(u_{\\mathcal C})\\otimes1$; its product with $e$ is explicitly\n$$e\\circ E(u_{\\mathcal C})=u_{\\mathcal D}\\circ Q_{\\mathcal D}(j)\\circ\\kappa_I.$$\nThe normalization at $(I,P)$ now replaces $(\\kappa_I\\otimes\\kappa_P)tE(m_{I,P})$ by $m_{FI,FP}Q_{\\mathcal D}(\\tau_{I,P})\\kappa_{I\\otimes P}$. Naturality of $m$ with respect to $j:FI\\cong I_{\\mathcal D}$ and Step 4's left-unitor equation give for the second composite\n$$Q_{\\mathcal D}(\\lambda_{FP}^{\\rm Ch}\\circ(j\\otimes1)\\circ\\tau_{I,P})\\circ\\kappa_{I\\otimes P}.$$\nThis equals the first composite by the left-unit identity of [lem-sfb-termwise-strong-monoidal]. Cancel $E(B_l)$ and $\\kappa_P$, both isomorphisms. This proves the stated left-unit equation with precisely the defined $e$.",
+   "uses": [
+    "lem-sfb-termwise-strong-monoidal",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); explicit agent proof of the abstract cross-functor normalization"
+   }
+  },
+  {
+   "text": "For the right unit put $B_r=(1\\otimes u_{\\mathcal C})\\circ m_{\\mathcal C;P,I}$. Step 4 gives $\\rho_KB_r=Q_{\\mathcal C}(\\rho_P^{\\rm Ch})$. Precompose both sides of the proposed right-unit identity by $E(B_r)$ and postcompose by $\\kappa_P$. The first becomes\n$$Q_{\\mathcal D}(F_{\\rm Ch}(\\rho_P^{\\rm Ch}))\\circ\\kappa_{P\\otimes I}.$$\nFor the second, naturality of $t$ in its second variable introduces $E(u_{\\mathcal C})$ next to $e$. Insert the displayed formula for $eE(u_{\\mathcal C})$ from Step 6, then the normalization at $(P,I)$. Naturality of $m$ for $1\\otimes j$ and Step 4's right-unitor equation reduce it to\n$$Q_{\\mathcal D}(\\rho_{FP}^{\\rm Ch}\\circ(1\\otimes j)\\circ\\tau_{P,I})\\circ\\kappa_{P\\otimes I}.$$\nThese are equal by the right-unit identity of [lem-sfb-termwise-strong-monoidal]. Cancellation of $E(B_r)$ and $\\kappa_P$ proves the right-unit assertion on $K=Q_{\\mathcal C}P$.",
+   "uses": [
+    "lem-sfb-termwise-strong-monoidal",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); explicit agent proof of the abstract cross-functor normalization"
+   }
+  },
+  {
+   "text": "Choose model isomorphisms $a:Q_{\\mathcal C}P\\cong K$, $b:Q_{\\mathcal C}Q\\cong L$, $c:Q_{\\mathcal C}R\\cong M$ as in Step 2. Naturality gives\n$$t_{K,L}= (Ea\\otimes Eb)\\circ t_{QP,QQ}\\circ E(a\\otimes b)^{-1},$$\nso every $t_{K,L}$ is invertible by Step 3. For associativity, precompose the two sides by $E((a\\otimes b)\\otimes c)$ and postcompose by $(Ea\\otimes(Eb\\otimes Ec))^{-1}$. Naturality of $t$ and $\\alpha$ makes them the two model composites of Step 5; cancel these isomorphisms. For the left and right unit equations precompose by $E(1\\otimes a)$ and $E(a\\otimes1)$ respectively and postcompose by $(Ea)^{-1}$: naturality of $t,\\lambda,\\rho$ gives exactly Steps 6 and 7. Hence all three identities hold at arbitrary unbounded objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); explicit agent proof of the abstract cross-functor normalization"
+   }
+  },
+  {
+   "text": "Set $\\mu_{K,L}=t_{K,L}^{-1}$ and $\\varepsilon=e^{-1}$. Inverting the isomorphisms in the three proved equations, or multiplying each equation by its two tensor-comparison inverses and by $e^{-1}$ in the unit cases, gives\n$$E(\\alpha)\\mu_{K\\otimes L,M}(\\mu_{K,L}\\otimes1)=\\mu_{K,L\\otimes M}(1\\otimes\\mu_{L,M})\\alpha,$$\n$$E(\\lambda_K)\\mu_{\\mathbf1,K}(\\varepsilon\\otimes1)=\\lambda_{EK},\\qquad E(\\rho_K)\\mu_{K,\\mathbf1}(1\\otimes\\varepsilon)=\\rho_{EK}.$$\nTogether with the inverse of the naturality equation for $t$, these are precisely the definition [def-sfb-strong-monoidal-functor]. This gives the requested structure with the prescribed maps.",
+   "uses": [
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes), 0FPT (lemma-symmetric-monoidal-derived); explicit agent proof of the abstract cross-functor normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-grothendieck-abelian",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-termwise-strong-monoidal",
+  "lem-sfb-abstract-kflat-resolution",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-sfb-total-tensor-homotopy",
+  "lem-sfb-derived-monoidal",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPQ and 0FPT omit the diagram checks; the abstract cross-functor cancellation argument is written explicitly here, using the existing native derived monoidal structure."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -115,10 +233,45 @@
    "results": "{\"t\": \"2026-10-21T03:24:06Z\", \"tool\": \"leanfinder\", \"query\": \"Localizing the tensor comparison of an exact tensor functor on flat resolutions preserves its monoidal coherence equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.Monoidal.tensor_comp\", \"Module.Flat.lTensor_shortComplex_exact\", \"CategoryTheory.Localization.Monoidal.lifting_isMonoidal\", \"Module.Flat.rTensor_shortComplex_exact\", \"CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"CategoryTheory.Localization.Monoidal.instLiftingLocalizedMonoidalToMonoidalCategoryCompTensorRightObjFunctorFlipTensorBifunctor\"], \"digest\": \"04b312f8a3f67ca0\"}",
    "date": "2026-10-21",
    "verdict": "no match: ordinary monoidal localization and strong monoidal functor coherence do not supply the normalized K-flat derived comparison and its native unit/associator equations without further localization arguments"
+  },
+  {
+   "tool": "grep",
+   "query": "(mapDerivedCategory.*[Mm]onoidal|[Mm]onoidal.*mapDerivedCategory|leftDerived.*[Mm]onoidal)",
+   "results": "{\"t\": \"2026-10-21T06:09:00Z\", \"tool\": \"grep\", \"query\": \"(mapDerivedCategory.*[Mm]onoidal|[Mm]onoidal.*mapDerivedCategory|leftDerived.*[Mm]onoidal)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: exact derived-functor and ordinary monoidal-localization infrastructure do not identify the prescribed comparison for the fixed K-flat derived tensor structures"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"Monoidal\"",
+   "results": "{\"t\": \"2026-10-21T06:09:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapDerivedCategory\\\", \\\"Monoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: exact derived-functor and ordinary monoidal-localization infrastructure do not identify the prescribed comparison for the fixed K-flat derived tensor structures"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity and unit equations for the derived tensor comparison of an exact monoidal functor",
+   "results": "{\"t\": \"2026-10-21T06:09:01Z\", \"tool\": \"leansearch\", \"query\": \"Associativity and unit equations for the derived tensor comparison of an exact monoidal functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.LaxMonoidal.tensorHom_ε_comp_μ_assoc\", \"CategoryTheory.Functor.Monoidal.whiskerLeft_η_ε_assoc\", \"CategoryTheory.Equivalence.counitIso_inv_app_comp_functor_map_η_inverse_assoc\", \"CategoryTheory.Functor.Monoidal.whiskerRight_η_ε_assoc\", \"CategoryTheory.NatTrans.IsMonoidal.instHomFunctorAssociator\", \"CategoryTheory.Equivalence.functor_map_ε_inverse_comp_counit_app_assoc\", \"CategoryTheory.unitOfTensorIsoUnit\", \"CategoryTheory.Localization.Monoidal.functorMonoidalOfComp_μ_assoc\"], \"digest\": \"f9e4fb933af348ab\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: exact derived-functor and ordinary monoidal-localization infrastructure do not identify the prescribed comparison for the fixed K-flat derived tensor structures"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact strong monoidal additive left adjoint induces a strong monoidal functor on unbounded derived categories with the tensor map fixed on K-flat complexes",
+   "results": "{\"t\": \"2026-10-21T06:09:06Z\", \"tool\": \"leanfinder\", \"query\": \"An exact strong monoidal additive left adjoint induces a strong monoidal functor on unbounded derived categories with the tensor map fixed on K-flat complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategory\"], \"digest\": \"01670f7e85a6b7a6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: exact derived-functor and ordinary monoidal-localization infrastructure do not identify the prescribed comparison for the fixed K-flat derived tensor structures"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total complex functor of a coproduct preserving additive strong monoidal functor is strong monoidal and its associativity and unit equations descend along K-flat resolutions",
+   "results": "{\"t\": \"2026-10-21T06:09:07Z\", \"tool\": \"leanfinder\", \"query\": \"The total complex functor of a coproduct preserving additive strong monoidal functor is strong monoidal and its associativity and unit equations descend along K-flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Monoidal.inducingFunctorData\", \"HomologicalComplex.monoidalCategory\", \"HomologicalComplex.monoidalCategoryStruct\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\"], \"digest\": \"fa29f7589b4183b5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: exact derived-functor and ordinary monoidal-localization infrastructure do not identify the prescribed comparison for the fixed K-flat derived tensor structures"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-module-object-ringed-site-derived-comparison",
@@ -138,5 +291,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-exact-tensor-functor-derived-normalization",
+  "worker": "stage1",
+  "summary": "Statement retained. The comparison is invertible by solving its given K-flat normalization. One smaller statement records termwise monoidal functor coherence, already supported by a project theorem and reported for attachment. Explicit associator and both unit cancellation calculations use the native K-flat model maps, then naturality extends them to arbitrary unbounded objects. No ordinary braiding compatibility is imposed. All search records are actual msearch outputs; no Lean changes or compiles.",
+  "blueprint": "Coefficient-model identification in the first paragraph of lem-sfb-dc-hom-preserves, via lem-sfb-constructible-internal-hom-continuity and lem-sfb-module-object-ringed-site-derived-comparison: supplies associator/unit normalization of the derived tensor comparison used by the exact coefficient equivalence. The unit's preservation/restriction route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic colimit preservation of the given left adjoints, supplying the total-complex functor hypotheses."
+   },
+   {
+    "node": "lem-sfb-abstract-kflat-resolution",
+    "why": "Generic existence of K-flat representatives for arbitrary unbounded objects in the precise ambient categories."
+   },
+   {
+    "node": "lem-sfb-total-tensor-homotopy",
+    "why": "Generic actual total-complex associators and unitors, needed to interpret tensor closure and native localization constraints."
+   },
+   {
+    "node": "lem-sfb-derived-monoidal",
+    "why": "Generic fixed K-flat derived tensor and its induced constraints; the restricted-functor unit does not reconstruct that ambient structure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-abstract-kflat-resolution",
+  "lem-sfb-total-tensor-homotopy",
+  "lem-sfb-derived-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N8-3a008c2ce",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-3a008c2ce (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and the new node lem-sfb-termwise-strong-monoidal in full. I also read every cited statement and Stacks sites-cohomology.tex at 0FPQ (l.12936) and 0FPT (l.13136); both omit their proofs, so proof_origin=agent is correct. No SGA is cited. Mathematics: I recomputed the associativity and unit cancellations of Steps 4-7 as lax-monoidal localization equations with tensorator m^-1 and unit u^-1, using the normalization, naturality of t, kappa and m, and e∘E(u_C)=u_D Q(j) kappa_I; both displayed composites come out correct. Step 9's inversion matches def-sfb-strong-monoidal-functor, including the unit direction (epsilon=e^-1 : 1 -> E1). Step 2's K-flat closure under tensor uses both sides as the definition requires, and the unit 1[0] is K-flat by the unitors. The new node is true: F preserves countable coproducts, so tau is an iso per bidegree; signs survive because F is additive; the inverted strong-monoidal equations give the displayed associativity and unit identities with j=e_F^-1; I tested zero, degree-0 and shifted single-term complexes. It is strictly smaller than the item (no localization or K-flatness). It is not a duplicate: lem-pur-cochain-comparison-monoidal-equations is ringed-pullback only; lem-pur-derived-tensor-comparison gives only the extension of tau; lem-sfb-total-tensor-homotopy covers one category. The project candidate mapCochainComplexMonoidal (MapHomologicalComplex.lean:227) exists with no sorry and is correctly placed in lean_candidates. Route: every cited statement is in units the item's unit reaches (sk-def-sfb-derived-tensor-hom, sk-def-sfb-derived-extension-of-scalars) or is a Mathlib leaf, so the declared tool_uses are harmless. The item is still unsplit in clones/live and side-live, and no re-split note applies because the base proof was empty. FIX: Step 1 never checked the new node's hypothesis that all small colimits exist. I added a citation to def-sp-grothendieck-abelian (Grothendieck categories have small colimits) in step 1's text and uses, in proof_deps, and in stmt_deps, where the statement says Grothendieck without citing it. There are no other changes; the corrected file is fixes/dag/nodes/sec-six-functors-basics/lem-sfb-exact-tensor-functor-derived-normalization.json.; 1 file(s) fixed by the reviewer"
  }
 }
