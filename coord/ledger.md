@@ -20027,3 +20027,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:52 L: merged deliver/Q22/lem-sfb-finite-sum-lattice (reviewer PASS; first push; new nodes: 0)
 - 03:52 L: merged deliver/Q19/lem-cbc-derived-tower-evaluation-normalization (reviewer PASS; first push; new nodes: 0)
 - 03:52 L: merged deliver/Q31/lem-sfb-common-field-lattice-generators (reviewer FIX; first push; new nodes: 0); claim not held by Q31: not your claim
+- 2026-10-21T03:52:24Z L: superseded stage-1 delivery Q26/lem-cbc-strict-quotient-pullback-computation at 6ccfd3feaba9f080648e76e843cff2f422acc016; current completion retained; packet archived at refs/superseded/Q26/lem-cbc-strict-quotient-pullback-computation/6ccfd3feaba9f080648e76e843cff2f422acc016; stale return retired.
