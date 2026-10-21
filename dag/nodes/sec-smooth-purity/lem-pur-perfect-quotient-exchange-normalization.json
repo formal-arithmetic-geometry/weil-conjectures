@@ -24,9 +24,129 @@
   "lem-weil-pbc-augmented-diagram-projection-mate",
   "lem-pur-strict-quotient-diagonal-normalization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On the diagram sites use [lem-pur-diagram-ring-restriction-pushforward] to obtain the specified comparison $d:U_{\\mathcal Y}P_B\\cong P^JU_{\\mathcal X}$. Here $u^{-1}B_{\\mathcal Y}=B_{\\mathcal X}$: [lem-sfb-geometric-inverse-image-constant-module] identifies inverse images of the constant quotient modules naturally in their quotient transitions, and the quotient maps defining the two diagrams are the same ring maps. The scalar-unit comparison $b:G U_{\\mathcal Y}\\to U_{\\mathcal X}G_B$ is therefore an isomorphism. On flat-term K-flat representatives its map is $x\\mapsto1\\otimes x$, with inverse $r\\otimes x\\mapsto rx$; these are the canonical comparisons of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Apply [lem-pur-ringed-coefficient-restriction-counit] on these small diagram sites, with constant ring $A$ and algebra sheaves $B_T$. Its comparison is precisely $d$, since both use the same derived-composition normalization. It gives\n$$U_{\\mathcal X}(\\varepsilon^B_N)b_{P_BN}=\\varepsilon^J_{U_{\\mathcal X}N}G(d_N).$$\nConsequently, for any $t:M\\to P_BN$ with transpose $t^\\flat$, the transpose of $d_NU_{\\mathcal Y}(t)$ is $U_{\\mathcal X}(t^\\flat)b_M$: substitute $G U(t)$ in this displayed equation, move it past $b$ by naturality, and use $\\varepsilon^B_NG_B(t)=t^\\flat$. This is an equality of the specified adjunction maps.",
+   "uses": [
+    "lem-pur-diagram-ring-restriction-pushforward",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-ringed-coefficient-restriction-counit",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0D6E (lemma-derived-pushforward-composition), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product); coefficient-restriction counit calculation"
+   }
+  },
+  {
+   "text": "Apply Step 1 to $M=\\mathcal R_{\\mathcal Y}PF$, $N=\\mathcal R_{\\mathcal X}F$ and $t=h_F$. Its transpose is the scalar extension of $\\Delta\\varepsilon_F$, preceded by the pullback/scalar-extension comparison. After forgetting coefficients and using $b$, this becomes\n$$G U_{\\mathcal Y}\\mathcal R_{\\mathcal Y}PF\\cong\\Delta u^*PF\\otimes^L B_{\\mathcal X}\\xrightarrow{\\Delta\\varepsilon_F\\otimes1}\\Delta F\\otimes^LB_{\\mathcal X}.$$\nThe tensor comparisons are those of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The constant-tower comparison of [lem-weil-pbc-constant-tower-pushforward-normalization] satisfies $\\varepsilon^J_{\\Delta F}G(\\chi_F)=\\Delta\\varepsilon_F$. Thus the transpose of the strict-tower projection mate $h^A_F$, with its source identified by $\\chi_F$, is exactly the same displayed arrow, as specified in the equivalent-transpose clause of [lem-weil-pbc-augmented-diagram-projection-mate]. The adjunction bijection is injective, so $d\\,U_{\\mathcal Y}(h_F)=h^A_F$ before evaluation or inverse limit. No conservativity or faithfulness of evaluation is used to prove this equality.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-constant-tower-pushforward-normalization",
+    "lem-weil-pbc-augmented-diagram-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Equation 0B56 (equation-projection-formula-map), Tags 07A4 and 07A6; compare the two counit transposes on the diagram site"
+   }
+  },
+  {
+   "text": "The evaluation-adjunction normalization in [lem-pur-quotient-diagram-projection-evaluation] carries the quotient-diagram adjunction, including its counit, to the specified $A_n$-coefficient adjunction. It therefore sends $h_F$ to the $A_n$-linear mate $h_{F,n}$ of the scalar extension of $\\varepsilon_F$. Its source and target are $(PF)\\otimes_A^L\\underline{A_n}_{\\mathcal Y}$ and $Ru_{*,A_n}(F\\otimes_A^L\\underline{A_n}_{\\mathcal X})$. For example the cited evaluation statement can be applied with $H=F$, $K=\\underline A_{\\mathcal Y}$: both quotient projection maps with tensor-unit argument are identities by [lem-weil-pbc-ringed-projection-mate-exact], so its arrow $v$ is $h_F$. Apply the counit identity of [lem-pur-ringed-coefficient-restriction-counit] also on the original sites with algebra sheaves $\\underline{A_n}_T$, whose structural map $u^{-1}\\underline{A_n}_{\\mathcal Y}\\cong\\underline{A_n}_{\\mathcal X}$ is the constant-module identification of [lem-sfb-geometric-inverse-image-constant-module]. The calculation in Step 1 then says that restriction to $A$ of $h_{F,n}$ is the adjunct of $u^*PF\\otimes_A^L\\underline{A_n}_{\\mathcal X}\\xrightarrow{\\varepsilon_F\\otimes1}F\\otimes_A^L\\underline{A_n}_{\\mathcal X}$. This is the ordinary counit-defined projection. The evaluation clause of [lem-weil-pbc-augmented-diagram-projection-mate] identifies evaluation of $h^A_F$ with this same map. The quotient-diagram evaluation comparisons are natural and compatible with the actual quotient transitions by the cited evaluation lemma.",
+   "uses": [
+    "lem-pur-quotient-diagram-projection-evaluation",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-pur-ringed-coefficient-restriction-counit",
+    "lem-weil-pbc-augmented-diagram-projection-mate",
+    "lem-sfb-geometric-inverse-image-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Equation 0B56 and Tag 07A6; quotient-diagram evaluation and coefficient-restriction normalization"
+   }
+  },
+  {
+   "text": "For each $n$ choose the bounded finite-projective $A$-complex $E_n^\\bullet$ representing $A_n$, as in the hypothesis. A term $E_n^q$ is generated by finitely many elements, giving a surjection $A^r\\to E_n^q$ by [def-weil-finitely-generated-module]; lift its identity along that surjection using [def-weil-pbc-projective-module] to obtain maps $E_n^q\\to A^r\\to E_n^q$ with composite identity. Apply the exact constant realization of [def-sfb-site-derived-constant-module-functor] termwise to the representative isomorphism $E_n^\\bullet\\simeq A_n$ and to these splittings. The construction in [def-weil-pbc-strict-perfect-coefficient-package] identifies the resulting finite free sheaves with $\\underline A_{\\mathcal Y}^{\\oplus r}$ and retains the splitting equations. Thus $\\underline{A_n}_{\\mathcal Y}$ is represented by a bounded complex of direct summands of finite free coefficient sheaves, hence is perfect in exactly the sense required for the ringed-site projection formula. This argument is performed separately for each $n$; it does not require a uniform bound on their representatives or flatness of $A_n$ over $A$.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module",
+    "def-sfb-site-derived-constant-module-functor",
+    "def-weil-pbc-strict-perfect-coefficient-package"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944 (lemma-projection-formula), perfectness hypothesis; exact constant realization and finite-projective coefficient packages"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-ringed-site-perfect-projection-formula] to $u$, the arbitrary unbounded object $F$, and the perfect coefficient $\\underline{A_n}_{\\mathcal Y}$ from Step 4. Its canonical pullback is $\\underline{A_n}_{\\mathcal X}$ by [lem-sfb-geometric-inverse-image-constant-module]. By Step 3, every evaluation of $h^A_F$ is therefore an isomorphism. To conclude for the strict tower, use [lem-weil-tower-category-levelwise-abelian]: evaluations are exact and a tower morphism is invertible when every component is. By [lem-weil-pbc-exact-functor-complex-cohomology], evaluation of each cohomology morphism $H^q(h^A_F)$ is $H^q$ of the corresponding evaluated arrow, hence invertible. Each $H^q(h^A_F)$ is thus invertible, and [lem-weil-pbc-unbounded-derived-iso-cohomology] gives that $h^A_F$ is invertible in the derived category of strict towers. Step 2 and the isomorphism $d$ show that $U_{\\mathcal Y}(h_F)$ is invertible. The exact conservative restriction of [lem-pur-strict-quotient-diagonal-normalization] (1) now gives that $h_F$ is invertible. Exact quotient evaluation is a functor on derived categories, so it sends its inverse to an inverse of every $h_{F,n}$. Naturality follows from the functorial adjunction transposes and the cited natural comparisons.",
+   "uses": [
+    "lem-sbc-ringed-site-perfect-projection-formula",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-pur-strict-quotient-diagonal-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944 (lemma-projection-formula); levelwise exactness of strict towers and the cohomological criterion for isomorphisms in the unbounded derived category"
+   }
+  },
+  {
+   "text": "For the algebra tower $Q_{T,\\bullet}=(\\underline{A_n}_T)_n$, apply [lem-weil-pbc-augmented-diagram-projection-mate]. Its reduction functor $B_T$ is $U_T\\mathcal R_T$, and its unit is the quotient augmentation $i$. Its strict derived-tower equality gives\n$$h^A_F i_{\\mathcal Y,PF}=P^J(i_{\\mathcal X,F})\\chi_F.$$\nThe identity is on the single strict coefficient diagram, and consequently uses its actual quotient restriction maps. It holds for arbitrary $F$, prior to taking limits.",
+   "uses": [
+    "lem-weil-pbc-augmented-diagram-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Equation 0B56 (equation-projection-formula-map); strict augmentation identity"
+   }
+  },
+  {
+   "text": "Put $Q=U_{\\mathcal X}\\mathcal R_{\\mathcal X}F$ and write $\\ell_{T,V}:\\mathcal L_T\\Delta V\\cong V$. By [lem-pur-strict-quotient-diagonal-normalization], $\\eta_{T,V}=\\mathcal L_T(i_V)\\ell_{T,V}^{-1}$ and $\\mathcal L_TU_T\\mathcal R_T=C_T$, naturally. Apply $\\mathcal L_{\\mathcal Y}$ to Step 6 and use naturality of $a$ in [lem-weil-ringed-tower-pushforward-limit-comparison]. The definition of $\\rho_F$ gives\n$$\\begin{aligned}\n\\rho_F\\eta_{\\mathcal Y,PF}\n&=a_Q^{-1}\\mathcal L_{\\mathcal Y}(h^A_Fi_{\\mathcal Y,PF})\\ell_{\\mathcal Y,PF}^{-1}\\\\\n&=P(\\mathcal L_{\\mathcal X}i_{\\mathcal X,F})\\,a_{\\Delta F}^{-1}\\mathcal L_{\\mathcal Y}(\\chi_F)\\ell_{\\mathcal Y,PF}^{-1}\\\\\n&=P(\\mathcal L_{\\mathcal X}i_{\\mathcal X,F})P(\\ell_{\\mathcal X,F}^{-1})=P(\\eta_{\\mathcal X,F}).\n\\end{aligned}$$\nThe penultimate equality is exactly the constant-tower limit normalization of [lem-weil-pbc-constant-tower-pushforward-normalization], rearranged as $a_{\\Delta F}^{-1}\\mathcal L_{\\mathcal Y}(\\chi_F)\\ell_{\\mathcal Y,PF}^{-1}=P(\\ell_{\\mathcal X,F}^{-1})$. Thus the required completion-unit equation concerns the specified $a$, $d$ and augmentations. All comparisons used above are natural. Only the perfectness assumption was used for invertibility; none of the steps imposes finite cardinality, flat quotient maps, a scheme presentation, or completeness of $F$.",
+   "uses": [
+    "lem-pur-strict-quotient-diagonal-normalization",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-constant-tower-pushforward-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A07 (lemma-Rf-commutes-with-Rlim), 0941 (lemma-derived-limit-is-ok); naturality and constant-tower normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-pur-diagram-ring-restriction-pushforward",
+  "lem-pur-quotient-diagram-projection-evaluation",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-pur-strict-quotient-diagonal-normalization",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-tower-category-levelwise-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Assembly of Tag 0B56, Tags 0944, 07A6, 0D6E, 0941 and 0A07 through the cited existing strict-diagram normalization lemmas; the combined auxiliary is not a numbered source theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +182,38 @@
    "results": "none; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
    "date": "2026-10-21",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived projection formula for perfect quotient ring coefficients in a tower of sheaves normalized by the adjunction counit",
+   "results": "SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; Perfection.map_apply_coe; PreTilt.mk_comp_untilt_eq_coeff_zero; Perfection.coeff_map; liftOfDerivationToSquareZero_mk_apply'; ModuleCat.projectiveResolution; Condensed.profiniteSolidCounit; AdicCompletion.kerProj",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the derived strict quotient exchange and its normalized augmentation/limit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect quotient coefficient exchange for strict towers of module sheaves is an isomorphism compatible with the completion unit",
+   "results": "IsAdicComplete.StrictMono.of_comp_lift; IsAdicComplete.StrictMono.mkQ_comp_lift; IsAdicComplete.StrictMono.of_lift; AdicCompletion.eval_comp_of; IsAdicComplete.of_comp_lift; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; AdicCompletion.ofLinearEquiv_apply; IsAdicComplete.of_lift",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the derived strict quotient exchange and its normalized augmentation/limit identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with direct image for perfect constant coefficients and preserves augmentation",
+   "results": "KaehlerDifferential.moduleBaseChange'; Algebra.Extension.CotangentSpace.map; KaehlerDifferential.map; Algebra.Generators.H1Cotangent.δAux_ofComp; KaehlerDifferential.cotangentComplexBaseChange; Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange; Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange; Derivation.compAlgebraMap",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the derived strict quotient exchange and its normalized augmentation/limit identity."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforwardPushforwardAdj_counit_app_val_app",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: these hits do not state the derived strict quotient exchange and its normalized augmentation/limit identity."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-compact-support-completed-projection-coherence",
@@ -86,5 +234,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-perfect-quotient-exchange-normalization",
+  "worker": "stage1",
+  "group": "Q78",
+  "summary": "Kept the imported statement unchanged. Identified quotient exchange with the strict constant-A projection by the normalized restriction counit, identified quotient evaluations, established perfectness from exact constant realization, proved strict-tower invertibility by cohomology, and calculated the completion-unit equation from the strict augmentation square and the normalized direct-image/limit comparison. Reused existing nodes throughout; no new node or Mathlib leaf.",
+  "blueprint": "Imported Proof Step 2 (Qbar-stage), independence of finite coefficient extension; unit sk-thm-purity-transport Step 3, transitivity in coefficient extensions; auxiliary for integral coefficient comparison proof step 9 (completion unit and tower counits); (old proof steps 6-7 and 10). Steps 1-5 realize perfect coefficient exchange, and Steps 6-7 realize completion-unit normalization for the coefficient-compatibility clause (7) of sk-thm-sf-compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-ringed-site-perfect-projection-formula",
+    "why": "Generic Perfect projection formula on arbitrary small ringed sites used as a black-box tool for strict coefficient diagrams and their canonical adjunction maps; it does not replace the unit coefficient-compatibility route, and no node of this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic Geometric inverse image preserves constant module sheaves used as a black-box tool for strict coefficient diagrams and their canonical adjunction maps; it does not replace the unit coefficient-compatibility route, and no node of this unit supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-sfb-geometric-inverse-image-constant-module"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-60a9121a3",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-60a9121a3 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement in full. There are no new nodes. The statement, stmt_deps and source are unchanged from base, and the item is unsplit in the live side DAG, not dropped and has no repair note. There is no cycle (closure of 1117 nodes), and proof_deps equals the union of uses. I accept both declared tool uses: lem-sbc-ringed-site-perfect-projection-formula (generic Stacks 0944, which I read at sites-cohomology.tex:13683) and lem-sfb-geometric-inverse-image-constant-module. Neither replaces a step of clause (7) of sk-thm-sf-compatibility. No SGA source is used. Step 1: I re-derived the transpose identity (d U t)^flat = U(t^flat) b by naturality from the counit equation of lem-pur-ringed-coefficient-restriction-counit; its κ has the same normalization as d. Step 2: U(c) b on K-flat representatives is the τ of the reduction-pullback lemma, so the adjoint clause of the augmented mate gives d U(h_F) = h^A_F. Step 3: at the tensor unit, α=1 gives v = h_F, and the level-n counit calculation gives the projection map. Step 4: the finite-projective splitting plus the exact constant realization makes underline(A_n) perfect, separately for each n. Step 5: levelwise isomorphism, then cohomology, then derived isomorphism; conservativity of U then makes h_F invertible. Step 7: I recomputed ρη = P(η) from naturality of a, the limit normalization of the constant-tower node and clause (4) of strict-quotient-diagonal. Edge cases checked: I=0, I=A, Z with (p), and k[t] with (t) (infinite perfect quotients). FIX: in Step 3 I added a citation of lem-sfb-geometric-inverse-image-constant-module for the structural map u^{-1}A_n,Y ≅ A_n,X, which the counit lemma needs on the original sites. In Step 5 I corrected the source place, which named Tag 05RT 'lemma-acyclic' (in derived.tex, and not the cohomology criterion). Advisory for the maintainer: lem-sbc-strict-quotient-exchange-unit-equation (sk-rem-rest), taken at the square f=e=id, g=h=u, already yields the invertibility of the constant-A projection map and the unit equation γκ = R_u(κ). The item proves this itself rather than citing it, which is not a fault, but the overlap is worth a merge consideration.; 1 file(s) fixed by the reviewer"
  }
 }
