@@ -1,41 +1,43 @@
 # Work queue
 
-123 items; claim with `tools/claim.py next <group> [--stage N]`.
+129 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (11 clusters, 941 modules)
+## Rework: quarantined by the upstream sync (12 clusters, 796 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
-| `Sheaf.Paper.IntegralCompactSupportCoefficientComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FiniteCoefficientDirectImage` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Paper.ConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Paper.ClosedSupportConstructible` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCoreFinal` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 89, stage 3 2 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 84, stage 3 2 items.
 
-## Stage 1: nodes to split (17)
+## Stage 1: nodes to split (18)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
 | `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
-| `lem-sfb-discrete-lattice-koszul-resolution` | 4011 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
-| `lem-sfb-prime-to-ell-derived-invariants-reduction` | 4011 | none |
 | `lem-sfb-condensed-derived-restriction-calculus` | 4012 | none |
+| `lem-sfb-derived-invariants-normal-subgroup-comparison` | 4012 | none |
 | `lem-sfb-discrete-lattice-cup-exterior` | 4012 | none |
+| `lem-sfb-integral-lattice-cubical-contraction` | 4012 | none |
 | `lem-sfb-integral-lisse-closed-base-change` | 4012 | none |
 | `lem-sfb-norm-algcl-cohomology-topology-comparison` | 4012 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
+| `lem-sfb-prime-to-ell-condensed-acyclicity` | 4012 | none |
 | `lem-sfb-profinite-constant-derived-functions` | 4012 | none |
 | `lem-sfb-root-coordinate-supported-vanishing` | 4012 | none |
 | `lem-sfb-trivial-ladic-derived-exterior` | 4012 | none |
@@ -44,11 +46,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-wstrict-lisse-component-cohomology` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (24)
+## Stage 2: nodes to state (28)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
+| `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
 | `lem-sfb-root-tower-boundary-acyclicity` | 1 | state | 1 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-fd-whole-tower-integral-pullback-comparison` | 1 | state | 0 |
@@ -56,24 +59,27 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-dense-lattice-derived-invariants-comparison` | 1 | state | 0 |
+| `lem-sfb-discrete-lattice-koszul-resolution` | 1 | state | 0 |
 | `lem-sfb-finite-closed-cover-resolution` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
 | `lem-sfb-lattice-supported-hom-finite-comparison` | 1 | state | 0 |
-| `lem-sfb-nonnegative-derived-totalization` | 1 | state | 0 |
+| `lem-sfb-lattice-supported-hom-reduction-tower` | 1 | state | 0 |
+| `lem-sfb-prime-to-ell-derived-invariants-reduction` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
 | `lem-sfb-root-tower-coordinate-face` | 1 | state | 0 |
 | `lem-sfb-root-tower-puncture-invariance` | 1 | state | 0 |
-| `lem-sfb-simplex-lattice-shuffle-boundary` | 1 | state | 0 |
-| `lem-sfb-snc-finite-root-regular-ring` | 1 | state | 0 |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 1 | state | 0 |
 | `lem-sfb-tame-root-tower-extension` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
+| `lem-sp-finite-coefficient-input-models` | 1 | state | 0 |
 | `lem-zl-raw-heart-adic-lisse-stratification` | 1 | state | 0 |
 | `lem-sfb-integral-quotient-projection-comparison` | 2 | state | 0 |
 | `lem-sfb-tame-inertia-continuous-koszul` | 2 | state | 0 |
+| `lem-wf-tate-twist-compatibility` | 2 | state | 0 |
+| `lem-wf-tate-twist-frobenius` | 2 | state | 0 |
 
-Not open yet: 374 nodes that below a finished node, not needed, 102 nodes that wait for a statement dependency (bottom-up), 16 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 374 nodes that below a finished node, not needed, 102 nodes that wait for a statement dependency (bottom-up), 17 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (63)
 
