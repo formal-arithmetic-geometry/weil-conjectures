@@ -21392,3 +21392,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:52 L: merged deliver/Q91/lem-a1-completed-perfect-scalar-pullback (reviewer FIX; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q29/lem-sfb-integral-general-lfp-hom-finiteness (reviewer FIX; first push; new nodes: 0)
 - 08:52 L: merged deliver/NL/lem-sfb-integral-bounded-stratum-base-change (reviewer FIX; first push; new nodes: 0)
+- 08:52 L: merged deliver/Q90/lem-weil-isomorphism-comparison-natural (reviewer PASS; first push; new nodes: 0)
