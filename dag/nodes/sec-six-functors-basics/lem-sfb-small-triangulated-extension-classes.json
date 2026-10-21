@@ -11,9 +11,60 @@
   "def-weil-size-convention",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose representative families $(B_i)_{i\\in I}$ for $\\mathcal P$ and $(C_j)_{j\\in J}$ for $\\mathcal Q$, with $I,J$ $\\mathcal V$-small and $B_i\\in\\mathcal P$, $C_j\\in\\mathcal Q$. Representatives may repeat. For each $(i,j)$ the set $\\operatorname{Hom}_{\\mathcal T}(C_j,B_i[1])$ is $\\mathcal V$-small by the local-smallness hypothesis. Thus the dependent sum $S=\\coprod_{(i,j)\\in I\\times J}\\operatorname{Hom}_{\\mathcal T}(C_j,B_i[1])$ is $\\mathcal V$-small: a small union of small sets belongs to the fixed Grothendieck universe. If either class is empty, its representative family and $S$ are empty and the extension class is empty as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
+    "place": "Essentially small paragraph: extensions classified by ambient Hom sets; explicit fixed-universe counting"
+   }
+  },
+  {
+   "text": "For $s=(i,j,\\delta)\\in S$, apply TR1 of [def-weil-triangulated-category] to $\\delta:C_j\\to B_i[1]$. Twice inverse-rotate its distinguished completion using TR2, and identify $(B_i[1])[-1]$ with $B_i$ using the inverse shift. This gives a distinguished triangle $B_i\\to M_s\\to C_j\\xrightarrow{\\delta}B_i[1]$. The two inverse rotations retain $\\delta$ as the third arrow, with the rotation signs in the other arrows. Choose one such triangle for each $s$; its middle term belongs to $\\mathcal P*\\mathcal Q$. This is a choice indexed by $S$ and imposes no naturality requirement.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145 (definition-triangulated-category), TR1 and TR2; Tag 014B (lemma-cone-triangle-unique-isomorphism), existence by TR1, applied after rotation"
+   }
+  },
+  {
+   "text": "Given a distinguished triangle $B\\to M\\to C\\xrightarrow{\\gamma}B[1]$ with $B\\in\\mathcal P$, $C\\in\\mathcal Q$, choose $i,j$ and isomorphisms $a:B\\xrightarrow{\\sim}B_i$, $c:C\\xrightarrow{\\sim}C_j$. Set $\\delta=a[1]\\circ\\gamma\\circ c^{-1}$ and $s=(i,j,\\delta)$. Then $a[1]\\circ\\gamma=\\delta\\circ c$. Twice rotate this triangle and the triangle chosen for $s$. Their first arrows are $\\gamma:C\\to B[1]$ and $\\delta:C_j\\to B_i[1]$, so this equality is exactly the square required by TR3 of [def-weil-triangulated-category]. TR3 supplies a morphism between these distinguished triangles whose first two components are $c$ and $a[1]$ and whose third component is some $d:M[1]\\to M_s[1]$.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0145 (definition-triangulated-category), TR2 and TR3; Tag 014B (lemma-cone-triangle-unique-isomorphism), comparison by TR3"
+   }
+  },
+  {
+   "text": "In the morphism of twice-rotated distinguished triangles just constructed, $c$ and $a[1]$ are isomorphisms. By [lem-sf-triangle-morphism-iso], $d$ is an isomorphism. Applying the inverse shift from [def-weil-triangulated-category] gives $M\\cong M_s$. Every object of $\\mathcal P*\\mathcal Q$ is isomorphic to such an $M$ by its defining condition, hence to some $M_s$ by composition of isomorphisms. Conversely each $M_s$ belongs to that class by step 2. Therefore the family $(M_s)_{s\\in S}$ is the required $\\mathcal V$-small family of representatives.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014A (lemma-third-isomorphism-triangle), applied to the twice-rotated triangles; Tag 014B (lemma-cone-triangle-unique-isomorphism)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
+  "place": "Essentially small paragraph, expanding the connecting-morphism count with Stacks Tags 0145, 014A and 014B"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +107,52 @@
    "date": "2026-10-21",
    "results": "10 hits: Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Subcategory.lean; Mathlib/CategoryTheory/Triangulated/Generators.lean; Mathlib/CategoryTheory/Triangulated/Generators.lean; Mathlib/CategoryTheory/Triangulated/Generators.lean. The hits give extensionProduct and triangulated closure, but not its essential smallness. Greps used CategoryTheory and CategoryTheory/Triangulated respectively. A project-only theorem is reported as a Lean candidate, not a Mathlib match.",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extensions of two essentially small families in a locally small triangulated category form an essentially small family",
+   "results": "{\"t\": \"2026-10-21T04:16:42Z\", \"tool\": \"leanfinder\", \"query\": \"Extensions of two essentially small families in a locally small triangulated category form an essentially small family\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.hasExt_iff_small_ext\", \"CategoryTheory.instSmallHomDerivedCategoryObjSingleFunctorOfHasExt\", \"CategoryTheory.hasExt_iff\", \"CategoryTheory.ObjectProperty.instHasRightCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated\", \"CategoryTheory.Triangulated.Subcategory.W.mk'\", \"CategoryTheory.Triangulated.Subcategory.W_iff'\", \"CategoryTheory.Functor.essImageDistTriang\", \"CategoryTheory.ObjectProperty.instHasLeftCalculusOfFractionsTrWOfIsTriangulatedOfIsTriangulated\"], \"digest\": \"79fa91f135c0c18e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.EssentiallySmall, CategoryTheory.ObjectProperty.extensionProduct",
+   "results": "{\"t\": \"2026-10-21T04:16:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ObjectProperty.EssentiallySmall, CategoryTheory.ObjectProperty.extensionProduct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "essentiallySmall.*[Ee]xtension|[Ee]xtension.*[Ee]ssentiallySmall",
+   "results": "{\"t\": \"2026-10-21T04:16:43Z\", \"tool\": \"grep\", \"query\": \"essentiallySmall.*[Ee]xtension|[Ee]xtension.*[Ee]ssentiallySmall\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The extension product of essentially small object properties is essentially small",
+   "results": "{\"t\": \"2026-10-21T04:17:18Z\", \"tool\": \"leanfinder\", \"query\": \"The extension product of essentially small object properties is essentially small\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ObjectProperty.instEssentiallySmallMax\", \"CategoryTheory.ObjectProperty.instEssentiallySmallISupOfSmall\", \"CategoryTheory.ObjectProperty.instEssentiallySmallTopOfEssentiallySmall\", \"CategoryTheory.ObjectProperty.instEssentiallySmallOfSmall\", \"CategoryTheory.ObjectProperty.EssentiallySmall.of_le\", \"CategoryTheory.ObjectProperty.instSmallOfObjOfSmall\", \"CategoryTheory.ObjectProperty.IsCardinalFilteredGenerator.essentiallyLarge_top\", \"CategoryTheory.ObjectProperty.EssentiallySmall\"], \"digest\": \"97fac69e189e82c0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The middle objects of distinguished triangles with endpoints in small families form an essentially small class",
+   "results": "{\"t\": \"2026-10-21T04:17:19Z\", \"tool\": \"leansearch\", \"query\": \"The middle objects of distinguished triangles with endpoints in small families form an essentially small class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.essentiallySmall_fullSubcategory_mem\", \"CategoryTheory.locallySmall_self\", \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₃.mk\", \"CategoryTheory.ObjectProperty.instEssentiallySmallOfSmall\", \"CategoryTheory.Pretriangulated.distinguishedTriangles\", \"CategoryTheory.ObjectProperty.IsTriangulatedClosed₂.mk\", \"CategoryTheory.essentiallySmallSelf\", \"CategoryTheory.essentiallySmall_monoOver\"], \"digest\": \"211eb40e177b8552\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "essentiallySmall|extensionProduct",
+   "results": "{\"t\": \"2026-10-21T04:17:19Z\", \"tool\": \"grep\", \"query\": \"essentiallySmall|extensionProduct\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\", \"Mathlib/CategoryTheory/Triangulated/Generators.lean\"], \"digest\": \"40e9c0c90d144639\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-brown-hypotheses-small",
@@ -86,5 +179,20 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-small-triangulated-extension-classes",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Expanded the small connecting-morphism argument into four steps: count the small dependent sum, complete each arrow using TR1/TR2, compare arbitrary extensions using explicit conjugation and TR3, and apply the existing Mathlib triangle-isomorphism node. Reused all supporting notions and results; no new nodes. Per direct instruction, did not repeat the rejected attachment claim or invoke any compiler.",
+  "blueprint": "Realizes det-brown-hypotheses-small, Essentially small paragraph: at each step the extension is classified by an element of an ambient Hom set. This split supplies the general pre-triangulated smallness argument behind that sentence."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-f08dea102",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-f08dea102 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit holding the item and its report, with no new nodes and the statement unchanged. This is a first split: Q67 created the item on 2026-10-21 with no proof, so the re-split rule does not apply, and the item is not on any dropped list. The statement is true. I tested it on the empty classes, the zero category, P={k},Q={k[-1]} in D(k) (Ext^2=0 gives only k⊕k[-1]) and P=Q={k}. It is exactly what det-brown-hypotheses-small step 6 needs, and it matches unit sk-lem-brown-hypotheses step 1 and the blueprint sk-lem-brown-hypotheses-small.proof.md, Essentially small paragraph (lines 11-18). Step 1: the dependent sum over I×J of the Hom sets is V-small, and the empty case is handled. Step 2: TR1 then two inverse rotations by TR2, which is an iff in def-weil-triangulated-category; TR1 iso-invariance justifies identifying B_i[1][-1] with B_i, and the third arrow stays δ. Step 3: I checked the twice-rotated triangles C→B[1]→M[1]→C[1]; with δ=a[1]γc⁻¹ the square a[1]γ=δc is exactly TR3's hypothesis for (c,a[1]), so TR3 gives d:M[1]→M_s[1]. Step 4: the Mathlib leaf lem-sf-triangle-morphism-iso (isIso₂_of_isIso₁₃ and siblings, any two of three) makes d an isomorphism; shifting back and iso-closure finish the proof. proof_deps equals the union of the uses. Both cited nodes are Mathlib leaves, so no tool_uses are needed. Sources checked: Stacks derived.tex 0145, 014A (lines 414-452) and 014B (lines 541-556), with labels confirmed in the tags table. No SGA is used. mathlib_searches has all of leansearch, loogle, leanfinder and grep. Advisory for the maintainer: the last clause of lem-sfb-alpha-compact-object-api (same chapter, unit sk-cor-existence-ii) states the same smallness of extension classes in one sentence. The item existed before this delivery and is cited by det-brown-hypotheses-small, and citing that bundled off-unit node would be worse than this self-contained proof, so this is not a fault; the API clause could cite this item later. No fixes."
+ }
 }

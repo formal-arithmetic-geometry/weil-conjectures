@@ -20614,3 +20614,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:14 L: merged deliver/Q60/lem-sfb-locally-prescribed-modules-small (reviewer PASS; first push; new nodes: 0)
 - 07:15 L: merged deliver/NK/lem-weil-pbc-flat-coefficient-reduction-adjunct (reviewer PASS; first push; new nodes: 0)
 - 07:15 L: merged deliver/Q55/lem-sfb-qlbar-point-abelian-colimit (reviewer PASS; first push; new nodes: 0)
+- 07:15 L: merged deliver/Q61/lem-sfb-small-triangulated-extension-classes (reviewer PASS; first push; new nodes: 0)
