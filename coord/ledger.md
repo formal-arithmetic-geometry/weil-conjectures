@@ -22503,3 +22503,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:02 L: merged deliver/U3/Sheaf.CategoryTheory.DerivedTowerCounitProjections (stage 3; reviewer PASS; first push; landing 20261021T130214-L-2624013 (proof); batch 20261021T125931; modules 1; new nodes 0)
 - 13:02 L: merged deliver/U3/Sheaf.Topology.ProfiniteSectionsFiniteQuotient (stage 3; reviewer PASS; after a return; landing 20261021T130218-L-2627494 (proof); batch 20261021T125931; modules 1; new nodes 0)
 - 13:02 L: merged deliver/V1/Sheaf.Paper.KFlatScalarComparisonNormalization (stage 3; reviewer PASS; first push; landing 20261021T130222-L-2631201 (proof); batch 20261021T125931; modules 1; new nodes 0)
+- 13:02 L: merged deliver/V7/Sheaf.AlgebraicGeometry.SmoothSectionCentredCoordinates (stage 3; reviewer PASS; first push; landing 20261021T130225-L-2635741 (interface); batch 20261021T125931; modules 3; new nodes 3)

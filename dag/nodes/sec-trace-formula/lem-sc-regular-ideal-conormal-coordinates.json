@@ -1,0 +1,142 @@
+{
+ "id": "lem-sc-regular-ideal-conormal-coordinates",
+ "kind": "statement",
+ "title": "Conormal coordinate basis and canonical polynomial comparison for a regular affine ideal",
+ "statement": "Let $s:S\\hookrightarrow V$ be a closed immersion [def-weil-closed-immersion], $U$ an affine open of $V$, and $x_1,\\ldots,x_d\\in B=\\Gamma(U)$ a regular sequence [def-weil-pbc-regular-sequence] generating its section ideal $I$ [def-sbc-closed-immersion-ideal-sheaf]. For the fixed conormal presentation [lem-pur-conormal-graded-algebra], there are lifts of the $x_j$ to sections of the first power sheaf whose representatives form a basis of the first graded piece over $\\Gamma(s^{-1}U)$. This conormal module is free of rank $d$ on that inverse image, and the canonical symmetric comparison is bijective on sections there. Each basis monomial maps to the homogeneous class represented by the actual corresponding coordinate product in the appropriate ideal power.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction, centred coordinates and regular-coordinate algebra; old item Steps 1–2. Stacks 054L/lemma-smooth-etale-over-affine-space, 024T/proposition-properties-sections, 067U/lemma-immersion-smooth-into-smooth-regular-immersion."
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "stmt_deps": [
+  "def-weil-closed-immersion",
+  "def-weil-pbc-regular-sequence",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "lem-pur-conormal-graded-algebra"
+ ],
+ "proof": [
+  {
+   "text": "For I=(x), the generator classes span I/I squared. To prove independence, lift a linear relation over B/I to coefficients in B. Its degree-one polynomial evaluates into I squared. The homogeneous-relation coefficient theorem [lem-pur-regular-sequence-higher-homogeneous-relations] implies that each coefficient belongs to I, so every quotient coefficient vanishes. This constructs the actual basis consisting of generator classes.",
+   "uses": [
+    "lem-pur-regular-sequence-higher-homogeneous-relations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify B/I with sections of the closed subscheme by the section ring map. The affine conormal sections equivalence in the adopted source, together with the degree-one presentation [lem-pur-conormal-graded-algebra], transports the basis to sections of the conormal piece and identifies each basis vector with the representative of an actual lift of x_j. The affine frame theorem [lem-sc-affine-conormal-frame] gives the free sheaf frame.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-sc-affine-conormal-frame"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Quasi-coherent symmetric-algebra comparison [lem-weil-pbc-quasi-coherent-symmetric-algebra-affine] and the basis polynomial equivalence [lem-weil-pbc-symmetric-algebra-free-module-polynomial] identify the source sections with (B/I)[T_j]. The conormal affine presentation identifies the target with gr_I B. The canonical symmetric comparison agrees on scalars and variables with the regular-sequence polynomial map [lem-pur-regular-sequence-graded-polynomial], hence on all polynomials. That map is bijective, as are both presentation isomorphisms, so the canonical comparison is bijective on sections.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "lem-pur-regular-sequence-graded-polynomial",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct additively on the exponent vector to identify the image of each polynomial monomial with its homogeneous associated-graded class. Lift the actual coordinate product from the ideal power to the fixed power sheaf, using the presentation power identification. The affine conormal comparison and the polynomial map equality give precisely the requested monomial formula, including degree zero and the empty index set.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-regular-sequence-higher-homogeneous-relations",
+  "lem-pur-conormal-graded-algebra",
+  "lem-sc-affine-conormal-frame",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-pur-regular-sequence-graded-polynomial"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction; V7 proof reuses the proved adopted-source ring-coordinate theorem and explicit affine/conormal comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A regular ideal has a conormal basis and symmetric associated graded algebra",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"reesAlgebra\", \"module\": \"Mathlib.RingTheory.ReesAlgebra\", \"type\": \": Subalgebra R R[X]\", \"doc\": \"The Rees algebra of an ideal $ I $ in a commutative ring $ R $ is the subalgebra of the polynomial ring $ R[X] $ consisting of all polynomials $ f $ such that the coefficient of $ X^i $ in $ f $ belon\"}\n  {\"name\": \"Module.Basis.symmetricAlgebra\", \"module\": \"Mathlib.LinearAlgebra.SymmetricAlgebra.Basis\", \"type\": \"(b : Basis κ R M) : Basis (κ →₀ ℕ) R (SymmetricAlgebra R M)\", \"doc\": \"Given a basis $\\\\kappa$ for an $R$-module $M$ over a commutative semiring $R$, the symmetric algebra $\\\\mathrm{Sym}_R(M)$ has a canonical basis indexed by $\\\\kappa \\\\to_0 \\\\mathbb{N}$ (finite support funct\"}\n  {\"name\": \"instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra\", \"module\": \"Mathlib.RingTheory.ReesAlgebra\", \"type\": \"[IsNoetherianRing R] : IsNoetherianRing (reesAlgebra I)\", \"doc\": \"If $ R $ is a Noetherian commutative ring and $ I $ is an ideal of $ R $, then the Rees algebra of $ I $, which is the subalgebra of the polynomial ring $ R[X] $ consisting of polynomials whose coeffi\"}\n  {\"name\": \"instFiniteTypeSubtypePolynomialMemSubalgebraReesAlgebraOfIsNoetherianRing\", \"module\": \"Mathlib.RingTheory.ReesAlgebra\", \"type\": \"[IsNoetherianRing R] : Algebra.FiniteType R (reesAlgebra I)\", \"doc\": \"If $ R $ is a Noetherian ring and $ I $ is an ideal of $ R $, then the Rees algebra of $ I $ is a finitely generated $ R $-algebra. This follows from the fact that each graded component $ I^i $ of the\"}\n  {\"name\": \"Module.instFiniteSubtypeMemIdealOfIsNoetherian\", \"module\": \"Mathlib.RingTheory.Noetherian.Basic\", \"type\": \"{R₁ S : Type*} [CommSemiring R₁] [Semiring S] [Algebra R₁ S] [IsNoetherian R₁ S] (I : Ideal S) : Module.Finite R₁ I\", \"doc\": \"If $ S $ is a Noetherian algebra over a commutative semiring $ R_1 $, then every ideal $ I $ of $ S $ is finitely generated as an $ R_1 $-module.\"}\n  {\"name\": \"HomogeneousIdeal\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal\", \"type\": \"{ι : Type u_1} →\\n  {σ : Type u_2} →\\n    {A : Type u_3} →\\n      [inst : Semiring A] →\\n        [inst_1 : SetLike σ A] →\\n          [inst_2 : AddSubmonoidClass σ A] →\\n            (𝒜 : ι → σ) → [inst_3 : DecidableEq ι] → [inst_4 : AddMonoid ι] → [GradedRing 𝒜] → Type u_3\", \"doc\": \"A homogeneous ideal in a graded ring $ A $ is an ideal that decomposes as a direct sum of its intersections with the graded components $ \\\\sigma_i $ of $ A $, such that the product of a homogeneous ele\"}\n  {\"name\": \"Ideal.IsHomogeneous.iff_eq\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal\", \"type\": \": I.IsHomogeneous 𝒜 ↔ (I.homogeneousCore 𝒜).toIdeal = I\", \"doc\": \"An ideal $ I $ in a graded ring $ A $ with grading $ \\\\mathcal{A} $ is homogeneous with respect to $ \\\\mathcal{A} $ if and only if the homogeneous core of $ I $ (with respect to $ \\\\mathcal{A} $) is equa\"}\n  {\"name\": \"FGAlgCatSkeleton.I\", \"module\": \"Mathlib.Algebra.Category.CommAlgCat.FiniteType\", \"type\": \"{R : Type u} → [inst : CommRing R] → (self : FGAlgCatSkeleton R) → Ideal (MvPolynomial (Fin self.n) R)\", \"doc\": \"For a commutative ring $ R $ and an object in the skeleton category of finitely generated commutative $ R $-algebras with invariant $ n $, this is an ideal in the multivariate polynomial ring $ R[x_1,\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the indicated APIs and adopted-source theorems supply components."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular ideal has a conormal basis and symmetric associated graded algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.SubmersivePresentation.basisCotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                (P : Algebra.SubmersivePresentation R S ι σ) → Module.Basis σ S P.t\", \"doc\": \"For a submersive presentation of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, this constructs a basis for the cotangent module $ \\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 $ by applying the inverse of t\"}\n  {\"name\": \"Ideal.selfBasis\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/PID\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    [inst : CommRing R] →\\n      [IsDomain R] →\\n        [IsPrincipalIdealRing R] →\\n          {S : Type u_4} →\\n            [inst_3 : CommRing S] →\\n              [IsDomain S] →\\n                [inst_5 : Algebra R S] → [Finite ι] → Module.Basis ι R S → (I : Ideal S) →\", \"doc\": \"Given a free module $ S $ over a principal ideal domain (PID) $ R $ with basis $ \\\\{b_i\\\\} $, and a nonzero ideal $ I \\\\subseteq S $, this constructs a basis for $ I $ as an $ R $-module. The basis $ \\\\{a\"}\n  {\"name\": \"Ideal.ringBasis\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/PID\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    [inst : CommRing R] →\\n      [IsDomain R] →\\n        [IsPrincipalIdealRing R] →\\n          {S : Type u_4} →\\n            [inst_3 : CommRing S] →\\n              [IsDomain S] →\\n                [inst_5 : Algebra R S] → [Finite ι] → Module.Basis ι R S → (I : Ideal S) →\", \"doc\": \"Given a free module $ S $ of finite rank over a principal ideal domain $ R $ with basis $ \\\\{b_i\\\\} $, and a nonzero ideal $ I \\\\subseteq S $, this constructs a new basis $ \\\\{b'_i\\\\} $ of $ S $ such that \"}\n  {\"name\": \"Algebra.SubmersivePresentation.basisKaehler\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                (P : Algebra.SubmersivePresentation R S ι σ) → Module.Basis (↑(Set.\", \"doc\": \"Given a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, if the images of the canonical injection $ \\\\text{Subtype.val} $ and the presentation map $ P.\\\\tex\"}\n  {\"name\": \"Ideal.selfBasis_def\", \"module\": \"Mathlib/LinearAlgebra/FreeModule/PID\", \"type\": \"∀ {ι : Type u_1} {R : Type u_2} [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsPrincipalIdealRing R]\\n  {S : Type u_4} [inst_3 : CommRing S] [inst_4 : IsDomain S] [inst_5 : Algebra R S] [inst_6 : Finite ι]\\n  (b : Module.Basis ι R S) (I : Ideal S) (hI : I ≠ ⊥) (i : ι),\\n  ↑((Ideal.selfBasis b I \", \"doc\": \"Given a free module $ S $ over a principal ideal domain $ R $ with basis $ \\\\{b_i\\\\} $, and a nonzero ideal $ I \\\\subseteq S $, the basis for $ I $ as an $ R $-module is given by $ a_i b'_i $, where $ a_\"}\n  {\"name\": \"Algebra.SubmersivePresentation.basisKaehlerOfIsCompl\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : Finite σ] →\\n                (P : Algebra.SubmersivePresentation R S ι σ) →\\n                  {κ\", \"doc\": \"Given a submersive presentation $ P $ of an $ R $-algebra $ S $ with finite generating set $ \\\\sigma $, if the images of injective functions $ f : \\\\kappa \\\\to \\\\iota $ and $ P.\\\\text{map} : \\\\sigma \\\\to \\\\io\"}\n  {\"name\": \"RingTheory.Sequence.IsRegular\", \"module\": \"Mathlib/RingTheory/Regular/RegularSequence\", \"type\": \"{R : Type u_1} → (M : Type u_3) → [inst : CommRing R] → [inst_1 : AddCommGroup M] → [Module R M] → List R → Prop\", \"doc\": \"A predicate indicating that a sequence of elements in a commutative ring $ R $ is regular on an $ R $-module $ M $, meaning each element in the sequence is a non-zerodivisor on the quotient of $ M $ b\"}\n  {\"name\": \"Ideal.basisSpanSingleton\", \"module\": \"Mathlib/RingTheory/Ideal/Basis\", \"type\": \"{ι : Type u_1} →\\n  {R : Type u_2} →\\n    {S : Type u_3} →\\n      [inst : CommSemiring R] →\\n        [inst_1 : CommRing S] →\\n          [IsDomain S] →\\n            [inst_3 : Algebra R S] → Module.Basis ι R S → {x : S} → x ≠ 0 → Module.Basis ι R ↥(Ideal.span {x})\", \"doc\": \"Given a basis $ b $ of a module over a commutative semiring $ R $, and a non-zero element $ x $ in a commutative ring $ S $ equipped with an $ R $-algebra structure, this constructs a basis for the $ \"}\n",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the indicated APIs and adopted-source theorems supply components."
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentFamily|equivMvPolynomial|homOfVector|isStandardSmooth.*exists",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean\", \"line\": \"17\", \"text\": \"* `SymmetricAlgebra.equivMvPolynomial b : SymmetricAlgebra R M ≃ₐ[R] MvPolynomial I R`:\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean\", \"line\": \"46\", \"text\": \"/-- `SymmetricAlgebra.equivMvPolynomial` gives an algebra isomorphism between the symmetric algebra\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean\", \"line\": \"49\", \"text\": \"noncomputable def equivMvPolynomial (b : Basis κ R M) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean\", \"line\": \"58\", \"text\": \"lemma equivMvPolynomial_ι_apply (b : Basis κ R M) (i : κ) :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SymmetricAlgebra/Basis.lean\", \"line\": \"59\", \"text\": \"    equivMvPolynomial b (ι R M (b i)) = .X (R := R) i :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"20\", \"text\": \"- `AlgebraicGeometry.AffineSpace.homOfVector`:\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"102\", \"text\": \"section homOfVector\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"107\", \"text\": \"def homOfVector {X : Scheme.{u}} (f : X ⟶ S) (v : n → Γ(X, ⊤)) : X ⟶ 𝔸(n; S) :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"113\", \"text\": \"lemma homOfVector_over : homOfVector f v ≫ 𝔸(n; S) ↘ S = f :=\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/AffineSpace.lean\", \"line\": \"117\", \"text\": \"lemma homOfVector_toSpecMvPoly :\"}\n  {\"file\": \"Mathlib/RingTheory/FreeCommRing.lean\", \"line\": \"36\", \"text\": \"* `freeCommRingEquivMvPolynomialInt : FreeCommRing α ≃+* MvPolynomial α ℤ` :\"}\n  {\"file\": \"Mathlib/RingTheory/FreeCommRing.lean\", \"line\": \"399\", \"text\": \"def freeCommRingEquivMvPolynomialInt : FreeCommRing α ≃+* MvPolynomial α ℤ :=\"}\n  {\"file\": \"Mathlib/RingTheory/FreeCommRing.lean\", \"line\": \"406\", \"text\": \"  RingEquiv.trans (freeCommRingEquivMvPolynomialInt _) (MvPolynomial.isEmptyRingEquiv _ PEmpty)\"}\n  {\"file\": \"Mathlib/RingTheory/FreeCommRing.lean\", \"line\": \"413\", \"text\": \"  (freeCommRingEquivMvPolynomialInt _).trans (MvPolynomial.uniqueAlgEquiv ℤ PUnit).toRingEquiv\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/MvPolynomial.lean\", \"line\": \"40\", \"text\": \"      (supportedEquivMvPolynomial _).symm).toAlgHom |>.comp\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/MvPolynomial.lean\", \"line\": \"45\", \"text\": \"      (Polynomial.mapAlgEquiv (supportedEquivMvPolynomial s).symm).toAlgHom\"}\n  {\"file\": \"Mathlib/RingTheory/Algebraic/MvPolynomial.lean\", \"line\": \"54\", \"text\": \"      (supportedEquivMvPolynomial _).symm.toAlgHom |>.comp\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Equiv.lean\", \"line\": \"304\", \"text\": \"def mvPolynomialEquivMvPolynomial [CommSemiring S₃] (f : MvPolynomial S₁ R →+* MvPolynomial S₂ S₃)\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Supported.lean\", \"line\": \"52\", \"text\": \"noncomputable def supportedEquivMvPolynomial (s : Set σ) : supported R s ≃ₐ[R] MvPolynomial s R :=\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Supported.lean\", \"line\": \"57\", \"text\": \"theorem supportedEquivMvPolynomial_symm_C (s : Set σ) (x : R) :\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Supported.lean\", \"line\": \"58\", \"text\": \"    (supportedEquivMvPolynomial s).symm (C x) = algebraMap R (supported R s) x := by\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Supported.lean\", \"line\": \"60\", \"text\": \"  simp [supportedEquivMvPolynomial, MvPolynomial.algebraMap_eq]\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Supported.lean\", \"line\": \"63\", \"text\": \"theorem supportedEquivMvPolynomial_symm_X (s : Set σ) (i : s) :\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Bivariate.lean\", \"line\": \"317\", \"text\": \"def equivMvPolynomial : R[X][Y] ≃ₐ[R] MvPolynomial (Fin 2) R :=\"}\n  {\"file\": \"Mathlib/Algebra/Polynomial/Bivariate.lean\", \"line\": \"322\", \"text\": \"lemma equivMvPolynomial_C_C {a} : equivMvPolynomial R (C (C a)) = .C a := by\"}\n",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib statement; the indicated APIs and adopted-source theorems supply components."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothSectionCentredCoordinates",
+  "date": "2026-10-21",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Local construction, centred coordinates and regular-coordinate algebra; old item Steps 1–2. Stacks 054L/lemma-smooth-etale-over-affine-space, 024T/proposition-properties-sections, 067U/lemma-immersion-smooth-into-smooth-regular-immersion.",
+   "via": [
+    "lem-trf-smooth-section-centred-coordinates",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-trf-nearby-duality-operation-squares",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularIdealConormalCoordinates",
+  "declaration": "AlgebraicGeometry.ConormalGradedAlgebra.regular_ideal_conormal_coordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularIdealConormalCoordinates.lean",
+  "statement": "theorem regular_ideal_conormal_coordinates {V S : Scheme.{u}}\n    (s : S ⟶ V) [IsClosedImmersion s] (U : V.affineOpens) (d : ℕ)\n    (x : Fin d → Γ(V, U.1))\n    (hI : Ideal.span (Set.range x) = s.ker.ideal U)\n    (hreg : RingTheory.Sequence.IsRegular Γ(V, U.1) (List.ofFn x)) :\n    ∃ (coordinateLift : Fin d → (ConormalGradedAlgebra.power s 1).val.obj (op U.1))\n      (conormalBasis : Module.Basis (Fin d) Γ(S, s ⁻¹ᵁ U.1)\n    ((ConormalGradedAlgebra.piece s 1).val.obj (op (s ⁻¹ᵁ U.1)))),\n      (∀ j : Fin d,\n    (ConormalGradedAlgebra.powerInclusion s 1).val.app (op U.1) (coordinateLift j) = x j) ∧\n      (∀ j : Fin d,\n    conormalBasis j = ConormalGradedAlgebra.representative s 1 U.1 (coordinateLift j)) ∧\n      (∀ α : Fin d →₀ ℕ,\n    ∃ a : (ConormalGradedAlgebra.power s α.degree).val.obj (op U.1),\n      (ConormalGradedAlgebra.powerInclusion s α.degree).val.app (op U.1) a =\n          α.prod (fun j k ↦ x j ^ k) ∧\n      (ConormalGradedAlgebra.symmetricComparison s).right.hom.app (op (s ⁻¹ᵁ U.1))\n          (α.prod (fun j k ↦\n            (@id ((SymmetricAlgebraSheaf.algebra (ConormalGradedAlgebra.piece s 1)).right.obj.obj\n              (op (s ⁻¹ᵁ U.1)))\n              ((SymmetricAlgebraSheaf.inclusion (ConormalGradedAlgebra.piece s 1)).val.app\n                (op (s ⁻¹ᵁ U.1)) (conormalBasis j))) ^ k)) =\n        ConormalGradedAlgebra.homogeneousClass s\n          (ConormalGradedAlgebra.presentation s).algebra\n          (ConormalGradedAlgebra.presentation s).inclusion α.degree U.1 a) ∧\n      Nonempty ((piece s 1).over (s ⁻¹ᵁ U.1) ≅\n        SheafOfModules.free (ULift.{u} (Fin d))) ∧\n      Function.Bijective ((symmetricComparison s).right.hom.app (op (s ⁻¹ᵁ U.1)))",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261021T130225-L-2635741",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261021T130225-L-2635741",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
