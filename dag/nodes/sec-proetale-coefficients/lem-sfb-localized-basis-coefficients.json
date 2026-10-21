@@ -15,111 +15,63 @@
  ],
  "proof": [
   {
-   "text": "Work on sections, retaining the internal scalar action. A morphism out of a sheafified tensor product into a sheaf is exactly a morphism from the objectwise tensor presheaf; hence multiplication and module actions are compatible bilinear operations on sections, and their axioms and linearity are tested on these operations. For finite $I$, the tuple sheaf $U\\mapsto R(U)^I$ is a sheaf by componentwise gluing; its injections and projections satisfy the biproduct identities, so it realizes $R^{\\oplus I}$. Thus $q$ gives, on every object, an $R(U)$-linear bijection $R(U)^I\\to T(U)$. Denote its inverse coordinates by $c_i:T(U)\\to R(U)$. They commute with restriction and satisfy $u=\\sum_i\\varphi(c_i(u))b_i$ and $c_i(\\sum_j\\varphi(r_j)b_j)=r_i$.",
+   "text": "The universal property of jR gives the unique psi:A→B. Define Q:A^I→Res_psi B by taking on summand i the regular-module lift of jT(b_i). The summand formula is the regular-lift formula; naturality of multiplication and the scalar square imply Q jR^I = jT q. The finite sum of projection, jR, inclusion equals the underlying map of the biproduct-desc morphism p:R^I→Res_jR A^I.",
    "uses": [
     "sk-def-sfb-sheaf-tensor",
-    "sk-def-sfb-ring-object",
     "sk-def-sfb-module-objects",
     "sk-def-sfb-change-of-scalars"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+    "place": "Tag 0EMD (lemma-simple-invert-module), module localization universal property, with Tag 0EMC (lemma-simple-invert) to identify arbitrary ring localizations."
    }
   },
   {
-   "text": "The composite $j_T\\varphi:R\\to B$ sends $t$ to the invertible section $j_T(\\varphi(t))$. The assumed universal property of $j_R$ therefore gives a unique ring map $\\varphi_t:A\\to B$ with $\\varphi_tj_R=j_T\\varphi$. Put $s=j_R(t)$ and $v=j_T(\\varphi(t))$; then $\\varphi_t(s)=v$, including the corresponding identity for their inverses.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-ring-localization-sheafification] to $(R,t,j_R)$ and $(T,\\varphi(t),j_T)$. The resulting ring sheafifications are also underlying-set sheafifications by [lem-pc-sites-sheafification-underlying-sets]. Therefore [lem-weil-pbc-site-sheafification-sections-local] shows that every section of $A$ is locally $j_R(r)s^{-n}$, and every section of $B$ is locally $j_T(u)v^{-n}$. Moreover, equality of two such fractions implies, after a further covering, equality of their presheaf fractions; the relation in the localization-model statement then gives $t^k(t^m r-t^n r')=0$ in $R$, respectively $\\varphi(t)^k(\\varphi(t)^m u-\\varphi(t)^n u')=0$ in $T$. Exponents and numerators may vary with the member of the cover. These are local statements only; section rings of $A$ and $B$ are not asserted to be sectionwise localizations.",
+   "text": "Apply [lem-sfb-localization-linear-descent] to N=A^I and f=q^(-1) followed by p. It gives an A-linear g:Res_psi B→A^I with g jT = p q^(-1).",
    "uses": [
-    "lem-sfb-ring-localization-sheafification",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "lem-sfb-localization-linear-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+    "place": "Tag 0EMD (lemma-simple-invert-module), module localization universal property, with Tag 0EMC (lemma-simple-invert) to identify arbitrary ring localizations."
    }
   },
   {
-   "text": "On every object define $Q((a_i))=\\sum_i\\varphi_t(a_i)j_T(b_i)$. Ring distributivity makes this additive, and $Q((aa_i))=\\varphi_t(a)Q((a_i))$ makes it $A$-linear for precisely the restriction-of-scalars action in the conclusion. The formula commutes with all restrictions and so defines an internal $A$-linear map. The identity $\\varphi_tj_R=j_T\\varphi$ and preservation of finite sums give $Qj_R^{\\oplus I}=j_Tq$.",
+   "text": "The square and q q^(-1)=1 show that g Q agrees with the identity after p. An A-linear map from A^I is determined by the images of the standard generators. Each standard A-generator is the image under p of its R-generator, because jR preserves the unit. Thus g Q=1. Apply uniqueness in [lem-sfb-localization-linear-descent] with N=Res_psi B to Q g and the identity: both restrict along jT to jT. Hence Q g=1, and Q is the required module isomorphism.",
    "uses": [
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-change-of-scalars"
+    "lem-sfb-localization-linear-descent",
+    "sk-def-sfb-module-objects"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+    "place": "Tag 0EMD (lemma-simple-invert-module), module localization universal property, with Tag 0EMC (lemma-simple-invert) to identify arbitrary ring localizations."
    }
   },
   {
-   "text": "For local surjectivity, write an arbitrary section $x$ of $B$ locally as $j_T(u)v^{-n}$, using step 3. Set $a_i=j_R(c_i(u))s^{-n}$ on that member of the cover. Then\n$$Q((a_i))=v^{-n}j_T\\!\\left(\\sum_i\\varphi(c_i(u))b_i\\right)=v^{-n}j_T(u)=x.$$\nThus every section has preimages locally; no global lifting through a sheafification map has been assumed.",
+   "text": "The standard-generator extensionality argument also proves uniqueness of any A-linear map satisfying the square. The explicit summand formula and scalar-map uniqueness were established in the first step. Biproduct extensionality uses finite sums in the independent index universe and also covers the empty index type.",
    "uses": [
-    "lem-sfb-ring-localization-sheafification",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "sk-def-sfb-module-objects"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
-   }
-  },
-  {
-   "text": "For injectivity, suppose $Q((a_i))=0$ over $U$. Applying step 3 to the finitely many $a_i$ and successively refining the covers, write them simultaneously as $a_i=j_R(r_i)s^{-N}$ on each member of a covering: replace each exponent $n_i$ by $N=\\max_i n_i$ and its numerator by $t^{N-n_i}r_i$. If $I$ is empty take $N=0$. Put $u=\\sum_i\\varphi(r_i)b_i$. Then $j_T(u)v^{-N}=0$. By the equality assertion of step 3, after a further covering there is $k\\geq0$ with $\\varphi(t)^ku=0$. Apply $c_i$, which is $R$-linear, to obtain $t^kr_i=0$. Consequently $j_R(r_i)=s^{-k}j_R(t^kr_i)=0$, so every $a_i$ vanishes on that covering. The separatedness axiom for $A$ gives $a_i=0$ over $U$. Hence $Q$ is injective on sections over every object. Notice that the argument uses a killing power, not cancellation in $R$ or $T$.",
-   "uses": [
-    "lem-sfb-ring-localization-sheafification",
-    "lem-pc-sites-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
-   }
-  },
-  {
-   "text": "Given $x\\in B(U)$, choose the local preimages supplied by step 5. On any object with two arrows into covering members over $U$, their restrictions have the same $Q$-image, so step 6 makes them equal. The sheaf axiom for the tuple sheaf glues them uniquely to a preimage over $U$. The unique preimage commutes with restriction; it respects addition and $A$-scalars because $Q$ does and is injective. Thus $Q$ is an isomorphism of internal $A$-modules; set $q_t=Q$.",
-   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
-   }
-  },
-  {
-   "text": "If $H:A^{\\oplus I}\\to\\operatorname{Res}_{\\varphi_t}B$ is another $A$-linear map with $Hj_R^{\\oplus I}=j_Tq$, evaluate this equation on the standard vector $e_i$ with entry $1$ in position $i$. It gives $H(e_i)=j_T(b_i)=Q(e_i)$. Every local tuple is $\\sum_i a_i e_i$, so $A$-linearity forces $H=Q$. For $I=\\varnothing$ the domain is the zero module and this assertion is immediate. This proves the stipulated uniqueness as well as the canonical square.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0EMC, lemma-simple-invert; agent-written finite-coordinate argument using the localization model and Sites Tags 00WB/00WK."
+    "place": "Tag 0EMD (lemma-simple-invert-module), module localization universal property, with Tag 0EMC (lemma-simple-invert) to identify arbitrary ring localizations."
    }
   }
  ],
  "proof_deps": [
   "sk-def-sfb-sheaf-tensor",
-  "sk-def-sfb-ring-object",
   "sk-def-sfb-module-objects",
   "sk-def-sfb-change-of-scalars",
-  "lem-sfb-ring-localization-sheafification",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-sfb-localization-linear-descent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Finite-coordinate argument written by Q37 following the localization construction in Tag 0EMC (lemma-simple-invert), and local sheafification properties in sites.tex Tags 00WB and 00WK; blueprint unit step 3."
+  "place": "D4: Tag 0EMD module localization universal property constructs the inverse; finite-biproduct and regular-generator identities prove the two inverse equations and uniqueness."
  },
  "mathlib_searches": [
   {
@@ -251,5 +203,15 @@
   "group": "N0",
   "result": "pass",
   "note": "Only change vs live: new lean record + module Sheaf.CategoryTheory.LocalizedBasisCoefficients; statement/stmt_deps/proof_deps and all 4 dep nodes unchanged. Clause-by-clause match: Sheaf J Ab.{w} with sfbSheafTensorStructure and EssentiallySmall.{w} (same convention as the sheaf-tensor dep); comm MonObj ring objects with Mon homs; t : 𝟙 ⟶ R global section; Fintype I in independent universe uI; q fixed by its summands φ(r)b_i; invertibility as IsIso of multiplication; universal properties ∃! over all comm D; ∃! ψ; qt over comap ψ with summand ψ(a)jT(b_i); square via Σ π_i≫jR≫ι_i; A-linear uniqueness. No injectivity, nonzero-divisor or sectionwise assumptions. Edge cases (empty I, t nilpotent, empty site) covered. Extra conjunct Nonempty(MonoidalPreadditive) is true; probe shows sfbSheafTensor_monoidalPreadditive elaborates with the same instances. Prop helper is not hollow; docstrings carry the source place, blueprint tag and 8 proof steps; statement field is verbatim. nt_compile --json clean in 38.0 s. No duplicate found in side-live Sheaf/WeilConjectures or Mathlib. Advisory: unused proof-dep imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261021T120334-L-3801976",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
