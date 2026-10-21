@@ -21986,3 +21986,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:44 L: returned deliver/Q08/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: A6/A7/B10/G4: superseded by the live Lean closure; this is the 5th push. Earlier heads: 34c7d1f PASS refused at landing;)
 - 09:44 L: returned deliver/Q13/lem-asd-affine-roots-representability (reviewer RETURN: A6/A7/B10/G4, superseded (fifth push). Earlier pushes: 47ba9ce8 PASSed, then the landing refused it (ledger l.20800); 57)
 - 09:44 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
+- 09:44 L: merged deliver/NH/lem-dl-a1-henselian-global-inertia-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 09:44 L: merged deliver/Q35/lem-weil-pbc-slice-tensor-integer-shift-compatibility (stage 2; reviewer PASS; parallel immutable checks)
