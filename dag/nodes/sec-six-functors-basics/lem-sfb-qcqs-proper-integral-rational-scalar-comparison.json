@@ -295,5 +295,30 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-01bd45493 (reviewer sub-agent of L); spot-checked: Not superseded: in live, clones/live and side-live the item is unsplit and unreviewed, there is no LAND line and no repair note; NC/ND/NE/NI/NJ deliveries of the same item are still in flight. The delivery drops the base clause Λ=Q̄_ℓ (all continuous functions, norm topology, per sk-def-localizing-closure) and keeps the finite-E case with the same ρ and counit normalization. This is a proper E7 correction, reported under '## Source error'. I checked the counterexample step by step and it holds. V=Spec C(N∪{∞},F̄_5); U⊂C_V has fibres D_n (n points) and C over ∞; h is proper, qcqs and not of finite presentation; J is the sign local system of an order-2 isogeny, so J∈Dctf. RΓ(C,L/3^r)=0, and proper base change plus repleteness give Rh_*J=M[0] with M(V) the null sequences. Γ(U,J_Ω) is the null sequences in Ω^n. Sections of the sheaf tensor Ω_V⊗M are locally finite sums, so at points over n their coordinates span at most N dimensions over F. The section w_n=3^n(α_{n,j}), with the α F-independent and integral, has span n, so H^0(ρ) is not surjective. This is unlike Q21 cdc69125, where the counterexample did not refute the statement. Steps: (1) the section-module transport nodes give the derived adjunctions with counits; pqf-lem-proper-basic gives qcqs; Dctf⊂Dbc gives bounded below. (2) lem-sfb-localized-direct-image-comparison applies to A=O_F→F: its only hypotheses are qcqs and bounded below, and its map is the counit adjunct. (3) The integral-basis, finite-free and coordinate nodes give E⊗_F−≅(−)^d, exact and computed termwise. (4) ring-sheaf-change-adjunction's comparisons b and d, with the adjunct compatibility, reduce the mate to the finite biproduct isomorphism; marking this elementary is fair. (5) The pasted-mates normalization, χ preserving 1⊗p, and K-flat pullback identify the composite with ρ. Edge cases F=E, J=0 and ramified E/F are fine. No new nodes, no duplicates; same_as=[] is consistent with my search (lem-sfb-continuous-algcl-proper-scalar-comparison is the finite-type-over-k Q̄ node). The off-unit nodes are generic coefficient and derived-category tools declared in split_report.tool_uses; I accept them. Batch-5: lem-pd-section-derived-pushpull-normalization is general internal↔section derived normalization, not a step of Poincaré duality or of the trace formula; lem-sfb-localized-direct-image-comparison is a generic A→E localization that reaches sec-poincare-duality only through that node. Both are accepted. MAINTAINER: the landed parent lem-sfb-qcqs-proper-constructible-closed-base-change steps 4 and 6 cite this item for C(−,Q̄_ℓ). That branch is now unsupported; the grandparent open-boundary-vanishing needs it. Reopen the parent, for example with a finite-type scope via lem-sfb-continuous-algcl-proper-scalar-comparison, and record this in HUMAN.md. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperIntegralRationalScalarComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.properIntegralRationalScalarComparison_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralRationalCoefficientMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralRationalScalarExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralRationalScalarPullIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properIntegralRationalScalarComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properIntegralRationalScalarComparison_isIso"
+  ],
+  "file": "lean/Sheaf/Paper/ProperIntegralRationalScalarComparison.lean",
+  "statement": "theorem properIntegralRationalScalarComparison_isIso (ℓ : ℕ) [Fact ℓ.Prime] {F E : PadicAlgCl.FiniteIntermediateField ℓ} (i : F ≤ E) {U V : Scheme.{u}} (h : U ⟶ V) [IsProper h] [CompactSpace U] [QuasiSeparatedSpace U] [CompactSpace V] [QuasiSeparatedSpace V] (J : ConstantModelConstructibleFiniteTor (Profinite.padicIntegersRingObj ℓ F.1) U) : IsIso (properIntegralRationalScalarComparison ℓ i h J.obj)",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a0312985f",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Item changed only in lean; statement verbatim. A=O_F padicIntegersRingObj, Λ=E continuousMapRingObj (same objects as localizing-closure branches), map = published O_F→F→E inclusions pulled back; IsProper + qcqs U,V, no extra hypotheses; J = recorded ConstantModelConstructibleFiniteTor; ρ = homEquiv of derivedPullIso.inv then T_U(counit), orientation checked; exactness instance from padicIntegers_invertEll + cartesianCoefficients_finiteFree as Prop proof fields (same pattern as landed localizedDirectImageComparison); docstrings carry 5 proof steps; imports per rule 7. Advisory: stage 3 to prove ρ = derivedPushHom.app J; brief second reading. No fixes."
  }
 }
