@@ -19679,3 +19679,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:10 L: merged deliver/Q02/lem-weil-pbc-scalar-localization-derived-hom (reviewer PASS; after a return; new nodes: 1)
 - 03:10 L: merged deliver/Q07/det-def-sp-tate-twist-locally-free (reviewer PASS; after a return; new nodes: 0)
 - 03:11 L: merged deliver/Q04/sk-prop-sfb-qlbar-colimit-x (reviewer FIX+NODE(1); after a return; new nodes: 1)
+- 03:11 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
