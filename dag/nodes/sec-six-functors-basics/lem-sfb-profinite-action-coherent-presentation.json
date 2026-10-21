@@ -17,9 +17,196 @@
   "sk-def-sfb-module-objects",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct products with diagonal action and equalizers with restricted action. The one-point space with trivial action is terminal. Finite products of compact spaces are compact by [lem-weil-pbc-tychonoff-product-quasi-compact]. Their coordinatewise separating neighbourhoods give the Hausdorff property. By [lem-weil-pbc-profinite-clopen-basis], products have a basis of clopen rectangles. Equalizers of two maps to a Hausdorff space are closed: if their values differ, disjoint neighbourhoods pull back to a neighbourhood disjoint from the equalizer. Hence equalizers are compact by [lem-weil-pbc-closed-in-quasi-compact], Hausdorff by restriction of separating neighbourhoods, and have a clopen basis by intersecting the product basis. A space with a clopen basis separating points is totally disconnected: a subset containing two distinct points is separated by such a clopen and its complement. All restricted actions are continuous, since their composites with the subspace embeddings are the original continuous actions. The universal product and equalizer maps are equivariant, as checked in each coordinate. These constructions give all finite limits, with the underlying-space formulas. Choose the bounded skeleton of [def-weil-size-convention]; its morphisms are subsets of sets of continuous maps, so this is a small category.",
+   "uses": [
+    "lem-weil-pbc-tychonoff-product-quasi-compact",
+    "lem-weil-pbc-profinite-clopen-basis",
+    "lem-weil-pbc-closed-in-quasi-compact",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "The covering axioms of [def-weil-pbc-sites-and-cohomology] hold pointwise. An isomorphism is surjective. If $v\\in V$ maps into $T$ and $\\{T_i\\to T\\}$ is jointly surjective, choose $t_i$ over its image; then $(t_i,v)\\in T_i\\times_TV$ lies over $v$. Thus the pulled-back family covers. Given a covering of $T$ and coverings of its members, lift a point first to one member and then to one of that member's covering objects. This proves joint surjectivity of the composite family. A finite union of finite index sets is finite. The empty family covers only the empty object; its pullbacks are again empty. Thus these families are a finite-cover pretopology.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "For a finite cover $\\{T_i\\to T\\}$, the map $q:\\coprod_iT_i\\to T$ is a continuous surjection from a compact space to a Hausdorff space: compactness of the finite disjoint union follows by taking a finite subcover on each summand. It is a quotient map by [lem-sfb-compact-hausdorff-surjection-quotient]. Equivariant continuous maps $u_i:T_i\\to U$ agreeing on every $T_i\\times_TT_j$ therefore define a unique set map $u:T\\to U$. For an open $V\\subseteq U$, $q^{-1}(u^{-1}V)$ is open on each summand, hence open; the quotient property makes $u^{-1}V$ open. If $t$ lifts to $t_i$, then $jt$ lifts to $jt_i$, so $u(jt)=u_i(jt_i)=j u_i(t_i)=j u(t)$. Thus the glued map is equivariant. This is the sheaf condition for every representable on $P_J$, proving subcanonicity. With $J$ trivial the same argument proves that $h_T$ is a sheaf on $P$.",
+   "uses": [
+    "lem-sfb-compact-hausdorff-surjection-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08YD (lemma-closed-map), 0AAU (lemma-closed-morphism-quotient-topology), applied to finite disjoint unions"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finitary-site-coherent-generators] to the small site just constructed. Step 1 verifies finite limits and step 2 gives a finite-cover pretopology generating its topology. The cited theorem gives coherent sheafified representables and a generating family. Step 3 makes sheafification of each representable the representable itself. This proves the coherence and generation assertion, including the empty representable.",
+   "uses": [
+    "lem-trf-finitary-site-coherent-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "For an internal $\\underline J$-object $X$ as in [lem-sfb-action-topos-geometric-restriction], Yoneda [lem-galois-yoneda-hom-bijection] identifies a map $h_T\\to X$ with $x\\in X(T)$. Since $h_J\\times h_T=h_{J\\times T}$ sectionwise, its equivariance is precisely the equation\n$$X(\\alpha_T)(x)=\\gamma\\cdot X(\\operatorname{pr}_T)(x)\\quad\\text{in }X(J\\times T),$$\nwhere $\\alpha_T(j,t)=jt$ and $\\gamma=\\operatorname{pr}_J:J\\times T\\to J$. This tests the equality of the two sheaf maps on the representing object, so tests all profinite base changes, not just ordinary points. For a cover in $P_J$, compatible such $x_i\\in X(T_i)$ glue uniquely to $x\\in X(T)$ by the $P$-sheaf condition. Their equivariance equations imply the equation for $x$, since $\\{J\\times T_i\\to J\\times T\\}$ covers $P$ and $X$ is separated. Thus $\\Phi(X)$ is a sheaf. Its restrictions and maps are those on these subsets of $X(T)$, by the naturality in the cited Yoneda statement.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "Write $H(S)=J\\times S$ with translation on $J$. The free-action formula is\n$$\\operatorname{Hom}_{\\mathscr E^{\\underline J}}(h_{H(S)},X)\\simeq X(S).$$\nForward evaluation restricts along $s\\mapsto(1,s)$. In the reverse direction, $x\\in X(S)$ defines the map on a profinite test $V$ by $(a:V\\to J,b:V\\to S)\\mapsto a\\cdot b^*x$. Naturality follows from naturality of the action, and equivariance from $c\\cdot(a\\cdot b^*x)=(ca)\\cdot b^*x$. The identity action recovers $x$. Conversely, equivariance says that every $(a,b)$ is obtained by acting by $a$ on $(1,b)$, so recovers the original map. Both constructions commute with maps of $X$ and $S$. This proves the free evaluation formula directly from the definition of internal action.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "Construct a quasi-inverse on a sheaf $F$ on $P_J$ by $G(F)(S)=F(H(S))$ and $G(F)(f)=F(\\mathrm{id}_J\\times f)$. This is a $P$-sheaf: a finite jointly surjective family $\\{S_i\\to S\\}$ gives a cover $\\{H(S_i)\\to H(S)\\}$, and\n$$H(S_i)\\times_{H(S)}H(S_j)\\cong H(S_i\\times_SS_j).$$\nThe isomorphism sends $((j,s_i),(j,s_j))$ to $(j,s_i,s_j)$; the $J$-coordinates must be equal. Therefore the matching families and unique gluings are exactly those for $F$ on this cover, using the sheaf condition of [def-weil-pbc-sites-and-cohomology]. A transformation $F\\to F'$ gives $G(F)\\to G(F')$ on these sections.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "For $g:S\\to J$, let $r_g:H(S)\\to H(S)$ send $(j,s)$ to $(jg(s),s)$ and define $g\\cdot x=F(r_g)(x)$. These are continuous equivariant maps. The identities $r_1=1$ and $r_h\\circ r_g=r_{gh}$ give $F(r_g)F(r_h)=F(r_{gh})$, the left-action law. For $f:V\\to S$ the equality $H(f)r_{g\\circ f}=r_gH(f)$ gives naturality. Thus the sectionwise operations define an internal $\\underline J$-action on $G(F)$: on each $S$ the action of $\\underline J(S)$ is the displayed map, and the equalities just checked are the sheaf action equations. Transformations commute with $F(r_g)$ and hence are equivariant.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "For every $T\\in P_J$, the action map $a_T:H(T)\\to T$, $(j,t)\\mapsto jt$, is a singleton cover. Its fibre square is identified with $H(J\\times T)$ by\n$$(j,k,t)\\longmapsto\\big((j,kt),(jk,t)\\big).$$\nThe inverse takes $((j,u),(j',v))$ with $ju=j'v$ to $(j,j^{-1}j',v)$. The maps and inverse are continuous and equivariant, with $J$ acting on the first coordinate. Under this identification the projections are $H(\\alpha_T)$ and $H(\\operatorname{pr}_T)\\circ r_\\gamma$, where $\\gamma(k,t)=k$. The sheaf condition of [def-weil-pbc-sites-and-cohomology] consequently says that $F(a_T)$ is a bijection from $F(T)$ onto\n$$\\{x\\in G(F)(T):G(F)(\\alpha_T)(x)=\\gamma\\cdot G(F)(\\operatorname{pr}_T)(x)\\}.$$\nIndeed the two pullbacks of $x$ are respectively $F(H(\\alpha_T))x$ and $F(r_\\gamma)F(H(\\operatorname{pr}_T))x$, exactly the displayed equation by step 8. This is the equivariant Yoneda subset of step 5. No comparison lemma for a new site is being assumed.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "Step 9 gives $F\\simeq\\Phi G(F)$. It is natural in $F$ by functoriality and in an equivariant $u:T\\to T'$ because $u a_T=a_{T'}H(u)$. Step 6 gives $G\\Phi(X)\\simeq X$ on underlying sheaves. It respects actions: precomposing the free map of a section $x$ with $r_g$ changes its value at $(1,s)$ to its value at $(g(s),s)$, namely $g\\cdot x$. It is natural in all equivariant maps by the same evaluation formula. Hence $G$ and $\\Phi$ with these natural isomorphisms are quasi-inverse functors, proving the claimed equivalence of topoi.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "On the small profinite site, [sk-def-sfb-sheaf-tensor] with coefficient category $\\Ab$ supplies abelian sheafification and its strong symmetric monoidal structure, verifying the sheafification hypotheses of [def-weil-pbc-internal-abelian-sheaf-module-equivalence]. Pass from internal modules to their section modules using that equivalence; it preserves section groups and restriction maps identically. By [def-sfb-condensed-action-module], the action on each $N(T)$ is $R(T)$-linear and compatible with every base restriction. The subset defining $\\Phi(N)(T)$ is closed under addition and negatives. For $r\\in\\mathcal R_J(T)=\\Phi(R)(T)$ and $x\\in\\Phi(N)(T)$ put $rx$ equal to their ordinary product in $N(T)$. On $J\\times T$, $\\alpha_T^*r=\\operatorname{pr}_T^*r$, since $R$ has trivial action and $r$ is equivariant. Thus\n$$\\alpha_T^*(rx)=(\\operatorname{pr}_T^*r)(\\gamma\\cdot\\operatorname{pr}_T^*x)=\\gamma\\cdot\\operatorname{pr}_T^*(rx).$$\nThis proves closure under scalars. The module laws and semilinear restrictions hold in $N(T)$, so also in these subsets. Therefore $\\Phi(N)$ is a sheaf of $\\mathcal R_J$-modules in the sense of [def-weil-sheaf-of-modules-category], and an equivariant linear map induces its sectionwise restriction.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-sfb-condensed-action-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "Conversely, if $M$ is a sheaf of $\\mathcal R_J$-modules, give $G(M)(S)=M(H(S))$ its section module structure through the free evaluation isomorphism $\\mathcal R_J(H(S))\\simeq R(S)$ of step 6. The right translation $r_g$ induces the identity on this ring: an equivariant map from $J\\times S$ to trivially acted-on $R$ takes $(j,s)$ to the pullback of a section on $S$, independent of $j$. Consequently $M(r_g)$ is $R(S)$-linear. Restrictions along $H(f)$ are semilinear for $R(f)$ by the naturality of free evaluation. These section modules reconstruct an internal $R$-module by [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and step 8 supplies its linear action. The isomorphism $G\\Phi(N)\\simeq N$ evaluates the same section operations at the identity, so is linear. For $M\\simeq\\Phi G(M)$, the map $M(a_T)$ is semilinear over $\\mathcal R_J(a_T)$. Evaluating that ring map at $(1,t)$ recovers the original section $r\\in\\mathcal R_J(T)\\subseteq R(T)$, so the isomorphism is linear over precisely $\\mathcal R_J(T)$. Thus the quasi-inverses restrict to the asserted module equivalence.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "Both module functors preserve addition of maps: $\\Phi$ restricts the componentwise sums and $G$ evaluates them on $H(S)$. They are therefore additive for the structure in [def-sfb-condensed-action-module]. An equivalence preserves kernels and cokernels: transport a proposed factorization along a quasi-inverse, apply the original unique factorization, and transport back; faithfulness preserves its uniqueness. Hence this additive equivalence preserves the kernel and cokernel diagrams defining exact sequences of module sheaves [def-weil-sheaf-of-modules-category], and so is exact. This assertion does not claim that evaluation on $T$ is an exact functor.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "Equipping spaces with trivial action leaves terminal objects, products and equalizers as in step 1 and leaves the underlying covering maps unchanged, so $t$ preserves finite limits and coverings. The direct image $p_{J,*}$ of [lem-sfb-action-topos-geometric-restriction] is right adjoint to trivial inflation. For an action $X$, sections $(p_{J,*}X)(S)$ are, by Yoneda and this adjunction, the equivariant maps from trivially inflated $h_S$ to $X$. This is $\\Phi(X)(tS)$. Equivalently, an ordinary section $x\\in X(S)$ lies in this set precisely when every pullback $f^*x$ is fixed by every $g:V\\to J$, which is exactly the condition that the corresponding $h_S\\to X$ is equivariant. Thus restriction $F\\mapsto(S\\mapsto F(tS))$ is the direct image of $p_J$ under $\\Phi$, so $t$ presents the indicated geometric morphism, with its inverse image identified by the unique adjunction.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  },
+  {
+   "text": "For trivial $R$, every map $h_{tS}\\to R$ is equivariant, giving $\\mathcal R_J(tS)=R(S)$. For a module $N$, the last description of step 14 identifies $\\Phi(N)(tS)$ with the fully fixed sections of [def-sfb-condensed-action-module], hence with the normalized invariants object via its specified inclusion and image. The free formula of step 6 gives $\\Phi(N)(H(S))=N(S)$. These are module identifications: fixed sections use the ordinary scalar action, and free evaluation uses $\\mathcal R_J(H(S))\\simeq R(S)$. For an equivariant linear map $v:N\\to N'$, fixed evaluation sends $x$ to $v_S(x)$ in the fixed subset; free evaluation sends an equivariant map $b$ to $b_S(1,\\mathrm{id}_S)$, and $v\\circ b$ evaluates to $v_S(b_S(1,\\mathrm{id}_S))$. Under $f:S'\\to S$ both operations pull back the same sections by $f$. This proves every stated naturality and the two on-morphism formulas.",
+   "uses": [
+    "def-sfb-condensed-action-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3); agent-written finite-cover action-space infrastructure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-tychonoff-product-quasi-compact",
+  "lem-weil-pbc-profinite-clopen-basis",
+  "lem-weil-pbc-closed-in-quasi-compact",
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-compact-hausdorff-surjection-quotient",
+  "lem-trf-finitary-site-coherent-generators",
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-galois-yoneda-hom-bijection",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-sfb-condensed-action-module",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3); original explicit free-action and Cech-descent proof, since the blueprint contains no proof of this auxiliary assertion"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +249,148 @@
    "results": "{\"t\": \"2026-10-21T20:01:38Z\", \"tool\": \"grep\", \"query\": \"(Profinite.*[Aa]ction|[Aa]ction.*Profinite|classifying.*topos|topos.*classifying)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits construct ordinary condensed objects, prove AB axioms, or concern finite discrete Galois actions; none presents internal actions by the finite-cover site of profinite action spaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves on profinite spaces with continuous group action are equivalent to internal group actions on condensed sets",
+   "results": {
+    "t": "2026-10-21T20:18:57Z",
+    "tool": "leanfinder",
+    "query": "Sheaves on profinite spaces with continuous group action are equivalent to internal group actions on condensed sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.ofSheafForgetProfinite",
+     "CondensedSet.ofSheafProfinite",
+     "Condensed.ofSheafProfinite",
+     "Condensed.isSheafProfinite",
+     "LightCondSet.ofSheafLightProfinite",
+     "CondensedMod.ofSheafProfinite",
+     "lightProfiniteToLightCondSetIsoTopCatToLightCondSet",
+     "profiniteToCondensed"
+    ],
+    "digest": "a5b2ca4b452c4ddf"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary condensed-object construction, finite Galois actions and coherent-topology sheaf criteria do not state the equivariant profinite-space presentation or its module and invariants formulas."
+  },
+  {
+   "tool": "loogle",
+   "query": "Profinite, Action",
+   "results": {
+    "t": "2026-10-21T20:18:58Z",
+    "tool": "loogle",
+    "query": "Profinite, Action",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary condensed-object construction, finite Galois actions and coherent-topology sheaf criteria do not state the equivariant profinite-space presentation or its module and invariants formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "Profinite.*[Aa]ction|[Aa]ction.*Profinite|coherentTopology",
+   "results": {
+    "t": "2026-10-21T20:18:58Z",
+    "tool": "grep",
+    "query": "Profinite.*[Aa]ction|[Aa]ction.*Profinite|coherentTopology",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/SequentialLimit.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/ReflectsPrecoherent.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean",
+     "Mathlib/CategoryTheory/Sites/Coherent/Equivalence.lean"
+    ],
+    "digest": "62470132f27c1cb1"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary condensed-object construction, finite Galois actions and coherent-topology sheaf criteria do not state the equivariant profinite-space presentation or its module and invariants formulas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal actions of a profinite group on condensed sets presented by a site of equivariant profinite spaces",
+   "results": {
+    "t": "2026-10-21T20:18:58Z",
+    "tool": "leansearch",
+    "query": "Internal actions of a profinite group on condensed sets presented by a site of equivariant profinite spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.toCondensed",
+     "profiniteToCondensed",
+     "Profinite.lim",
+     "ProfiniteGrp",
+     "Profinite.asLimit",
+     "Profinite.isoAsLimitConeLift",
+     "ProfiniteGrp.mk",
+     "Profinite.asLimitConeIso"
+    ],
+    "digest": "df1997b3e35a302d"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary condensed-object construction, finite Galois actions and coherent-topology sheaf criteria do not state the equivariant profinite-space presentation or its module and invariants formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classifying topos of an internal group represented by compact spaces and recovery of an equivariant sheaf from free group objects",
+   "results": {
+    "t": "2026-10-21T20:19:51Z",
+    "tool": "leanfinder",
+    "query": "Classifying topos of an internal group represented by compact spaces and recovery of an equivariant sheaf from free group objects",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul",
+     "CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply",
+     "CategoryTheory.yonedaGrpObjRepresentableBy",
+     "CategoryTheory.PreGaloisCategory.toAutHomeo_apply",
+     "Condensed.freeAb",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'",
+     "CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial"
+    ],
+    "digest": "24459b96a80d3127"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary condensed-object construction, finite Galois actions and coherent-topology sheaf criteria do not state the equivariant profinite-space presentation or its module and invariants formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "classifying.*topos|topos.*classifying|Condensed.*[Aa]ction|[Aa]ction.*Condensed",
+   "results": {
+    "t": "2026-10-21T20:19:51Z",
+    "tool": "grep",
+    "query": "classifying.*topos|topos.*classifying|Condensed.*[Aa]ction|[Aa]ction.*Condensed",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary condensed-object construction, finite Galois actions and coherent-topology sheaf criteria do not state the equivariant profinite-space presentation or its module and invariants formulas."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-profinite-invariants-filtered-continuity",
@@ -94,5 +419,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-profinite-action-coherent-presentation",
+  "worker": "stage1",
+  "summary": "Constructed finite limits and the finite-cover site; proved subcanonicity by compact quotient descent; reused the existing coherence theorem. Constructed the equivalence explicitly by evaluation on free action spaces J times S, right translations and the action-map Cech equalizer. Lifted both quasi-inverses to the stated internal module categories, proved additive exactness and checked the trivial/free parameter and map formulas. No statement change and no new nodes.",
+  "blueprint": "Inherited blueprint.from.node is null (blueprint_refs.py ancestor reports None). This expands the agent-formulated coherent action-space infrastructure below paragraph (3) of the main-20261015 direct-images proof, along the inherited creation chain; it does not alter the chapter or unit route. Whole-blueprint searches for coherent presentation and profinite action found no equal statement.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finitary-site-coherent-generators",
+    "why": "The generic finite-limit finite-cover-site coherence criterion supplies coherent representables and generation; the item unit contains no substitute, and no geometric direct-image step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finitary-site-coherent-generators"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-3c031b3d4",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-3c031b3d4 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is one commit with no new nodes; the item statement and stmt_deps are unchanged, and the base proof was empty with a WANTED source. There is no repair note for this item, so the re-split rule does not apply. No SGA is cited: the source text 'non-SGA ... WANTED' does not match the review_split SGA 4 regex. I checked all 15 steps by hand: (1) finite limits via the Tychonoff, closed-in-quasi-compact and clopen-basis leaves; (2) pretopology axioms pointwise; (3) subcanonicity via lem-sfb-compact-hausdorff-surjection-quotient, with Stacks 08YD and 0AAU present in topology.tex; (4) coherence, since the hypotheses of lem-trf-finitary-site-coherent-generators are exactly what steps 1-2 give; (5) by Yoneda, equivariance of x is the universal equation alpha_T^*x = gamma.pr_T^*x, and gluing works on the cover {J x T_i -> J x T}; (6) the free/forget adjunction; (7) G(F)(S) = F(J x S) is a P-sheaf, using H(S_i) x_{H(S)} H(S_j) = H(S_i x_S S_j); (8) r_h o r_g = r_{gh}, which gives a left action by contravariance; (9) the fibre square of a_T is identified with J x J x T via (j,k,t) -> ((j,kt),(jk,t)), the inverse (j, j^{-1}j', v) is continuous, and the projections are H(alpha_T) and H(pr_T) o r_gamma, so the equalizer is exactly the equation of step 5; (10) the two functors are quasi-inverse, with naturality from u a_T = a_T' H(u); (11-12) scalar closure holds because alpha^*r = pr^*r for trivially acted R, R_J(H(S)) = R(S) via pr_S^*, r_g acts as the identity on that ring, and M(a_T) is semilinear over the inclusion R_J(T) into R(T); (13) exactness holds because the equivalence is additive onto the abelian category Mod(R_J); (14) (p_* X)(S) = Phi(X)(tS) by the adjunction of lem-sfb-action-topos-geometric-restriction; (15) the fixed sections are exactly the 'fully fixed' clause of def-sfb-condensed-action-module. Small cases checked: J = 1, empty objects, trivial action, R = 0. Duplicates: none. lem-sfb-internal-action-site-presentation concerns a different site (C_K), lem-sfb-field-profinite-galois-site concerns the pro-etale site of a field, and lem-sfb-profinite-action-finite-quotients concerns finite quotients only. The item's statement matches what the parent lem-sfb-profinite-invariants-filtered-continuity uses. Batch-5 check: I accept the new citation of lem-trf-finitary-site-coherent-generators. It is generic topos theory (coherent representables in a finitary finite-limit site), not given by either assumption and not part of the proof of the trace formula or of Poincare duality. Its 133-node closure contains only generic trf topos nodes and no trace formula or duality theorem, and def-trf-coherent-topos was already a stmt_dep on the base. The declared tool_use is accepted for the same reason. No fixes."
  }
 }
