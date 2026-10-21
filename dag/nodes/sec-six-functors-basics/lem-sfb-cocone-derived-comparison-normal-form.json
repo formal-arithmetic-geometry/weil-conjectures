@@ -220,5 +220,27 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-678b1fd5d (reviewer sub-agent of L); spot-checked: Read the item and all 5 steps in full; the delivery has no new nodes. Statement, stmt_deps, blueprint and source are byte-equal to the live unsplit node. The item is not superseded, not on the dropped list and has no repair note; there is no cycle and proof_deps equals the union of the step uses. Checked the steps against the cited statements and the fixed Lean construction derivedExtendScalarsCompIso (TwoColimit.lean:135-146, identical to Sheaf finiteCoefficientDerivedTensorCompIso), which is consistent with the DAG def node's steps 3-4. Step 1: exactness of A, B, C from change-of-scalars(2), subfield-flat and qlbar-flat (for H and for E), plus map-comp; D by transport through e. Step 2: Mod.extendScalarsComp is leftAdjointUniq, so by unit_leftAdjointUniq_hom_app R(s)∘η_D = η_BA; the conjugate-iso uniqueness (L1=BA, L2=D, δ=id) gives s⁻¹ = u, orientation correct, and θ = e∘u. Step 3: leftDerivedFunctorCompIso is ι∘mapDerivedCategoryCompIso∘ι⁻¹ and its _fac is the composition node's equation; applying the node to (LJ, a_J∘ι_J) is legitimate because the factorization node only asserts existence of some pair. Step 4: mapDerivedCategoryNatIso_fac matches the natural-iso node, and localization-universal-property(3) gives global equality. Step 5: δ = n0∘c0⁻¹, matching the Lean order. Edge cases E=H, zero complex and unbounded complexes are fine. No duplicate: flat-scalar-tower-coherence and internal-tensor-composition-unit-normalization state different comparisons, and the latter is the parent's companion input. Accepted tool use: lem-sfb-subfield-flat (cartesian-coefficients unit; this unit's finite-extension-compatibility route has no subfield-flat node). No SGA cited; three search kinds recorded. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoconeDerivedComparisonNormalForm",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedExtendScalarsCompIso_normalForm",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoconeDerivedComparisonNormalForm.lean",
+  "statement": "theorem derivedExtendScalarsCompIso_normalForm (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] {E H : FiniteIntermediateField ℓ} (h : E ≤ H) : derivedExtendScalarsCompIso X ℓ h = Mod.unitNormalizedDerivedScalarCompIso (padicSubfieldRingObjMap X ℓ h) (padicSubfieldRingObjToPadicAlgCl X ℓ H) (padicSubfieldRingObjToPadicAlgCl X ℓ E) (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ h)",
+  "branch": "sheaf-dag",
+  "by": "Q46",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.Mod.unitNormalizedDerivedScalarCompIso",
+   "AlgebraicGeometry.ProEtale.derivedExtendScalarsCompIso_normalForm"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a3adb28d8",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Only the lean field changed vs live; no new nodes or dep records; lean.statement is verbatim. derivedExtendScalarsCompIso_normalForm states fixed δ = (leftDerivedFunctorCompIso).symm ≪≫ leftDerivedFunctorNatIso(leftAdjointUniq(adj_BA via comapComp.symm, adj_D) ≪≫ extendScalarsIsoOfEq). Directions are correct (BA→D unit-compatible u, e: D≅C, c⁻¹ first). Against the TwoColimit def this reduces to extendScalarsComp.symm = leftAdjointUniq adj_BA adj_D, which is true and not tautological. c and L(θ) are the canonical liftNatIso constructions matching the exact-derived-composition and natural-iso deps. Helper def has real data and is not a duplicate. No extra theorem hypotheses or universe restriction; E=H, empty scheme and unbounded complexes covered. Docstrings carry the source and proof steps; only proof is sorry. nt_compile --json clean in 36.1 s. Advisory: two unused non-public imports."
  }
 }

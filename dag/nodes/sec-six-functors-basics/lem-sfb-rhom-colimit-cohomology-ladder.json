@@ -284,5 +284,39 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-ef9828c28 (reviewer sub-agent of L); spot-checked: The item statement is unchanged from the base (diffed against the live clone, where the item is still unsplit; created by Q56 in the re-split of lem-sfb-rhom-continuity-triangle-closure). The repair note in coord/repair-notes is for that parent, not this item, so this is an ordinary first split of an empty proof. The item is not on the route-pivot-dropped list. No new nodes; 8 steps, each under 2000 characters. Sources are Stacks only: 08JC (sites-cohomology l.8948), 03DB (sites-modules l.1358), 05RS (derived l.3618); all checked, no SGA. Steps 1–3: exactness of filtered colimits from lem-pur-ringed-site-grothendieck-abelian (same hypotheses) gives the colimit complex, ker d_∞ = colim Z and im d_∞ = colim B, so H^q(colim) = colim H^q, naturally, with θ∘ι_i = H^q(leg). Quasi-isomorphisms and common lower bounds are preserved. Step 4: source quasi-isomorphism invariance of the internal Hom complexes into K-injective targets comes from lem-pur-rhom-well-defined-universes with s = id, then step 3 for the colimit, so F, G and a descend through the localisation; no colimit of K-injectives is used. Step 5: I rechecked by hand the sign of s, (s^n f)^p = (−1)^n f^{p−1}, against the def-pur-hom-complex differential and d_{K[−1]} = −d_K; both sides give (−1)^{n+1} d_J f^{p−1} − f^p d_P^p, and s commutes with postcomposition and with termwise colimits. Step 6: rows exact by lem-weil-pbc-ringed-internal-hom-exact-restriction plus the long exact sequence. The triangle lemma does not specify its shift isomorphism, but changing the connecting arrow by any isomorphism of its source leaves kernel and image unchanged, so exactness holds with the s-normalised boundary (advisory: the worker only argued the ±1 case). Steps 7–8: stagewise squares are checked directly, the filtered colimit of exact rows is exact, c_X∘ι_i = H^q(r_{X,i}), and testing each square on the legs gives commutativity, including the connecting square. Edge cases checked: one-object site, constant diagram, terminal-object index, split triangle with w = 0, and K_i = (R→R, ·i) over divisibility. Duplicate search (rg -L) found only étale or forgetful colimit nodes, nothing for the ringed-site complex statement. All five tool_uses are generic and accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RHomColimitCohomologyLadder",
+  "declaration": "WeilConjectures.SfbHomFilteredColimit.rhom_colimit_cohomology_ladder",
+  "declarations": [
+   "WeilConjectures.SfbHomFilteredColimit.ladderModel",
+   "WeilConjectures.SfbHomFilteredColimit.ladderTarget",
+   "WeilConjectures.SfbHomFilteredColimit.ladderPrecomp",
+   "WeilConjectures.SfbHomFilteredColimit.ladderBoundary",
+   "WeilConjectures.SfbHomFilteredColimit.ladderDiagram",
+   "WeilConjectures.SfbHomFilteredColimit.ladderColimPrecomp",
+   "WeilConjectures.SfbHomFilteredColimit.ladderColimBoundary",
+   "WeilConjectures.SfbHomFilteredColimit.ladderVertical",
+   "WeilConjectures.SfbHomFilteredColimit.ladderStrictAlpha",
+   "WeilConjectures.SfbHomFilteredColimit.ladder_filtered_cohomology",
+   "WeilConjectures.SfbHomFilteredColimit.ladder_filtered_consequences",
+   "WeilConjectures.SfbHomFilteredColimit.ladder_comparison",
+   "WeilConjectures.SfbHomFilteredColimit.rhom_colimit_cohomology_ladder"
+  ],
+  "file": "lean/Sheaf/Paper/RHomColimitCohomologyLadder.lean",
+  "statement": "theorem rhom_colimit_cohomology_ladder [IsFiltered I] (T : Triangle (DerivedCategory (Modules.{u, v, r} J R))) (hT : T ∈ distTriang (DerivedCategory (Modules.{u, v, r} J R))) (q : ℤ) : (∃ h : ladderColimBoundary.{u, v, r, w} J R N T q ≫ ladderColimPrecomp.{u, v, r, w} J R N T.mor₂ q = 0, (ShortComplex.mk _ _ h).Exact) ∧ (∃ h : ladderColimPrecomp.{u, v, r, w} J R N T.mor₂ q ≫ ladderColimPrecomp.{u, v, r, w} J R N T.mor₁ q = 0, (ShortComplex.mk _ _ h).Exact) ∧ (∃ h : ladderColimPrecomp.{u, v, r, w} J R N T.mor₁ (q - 1) ≫ ladderColimBoundary.{u, v, r, w} J R N T q = 0, (ShortComplex.mk _ _ h).Exact) ∧ (∃ h : (ladderBoundary.{u, v, r, w} J R T q).app (DerivedCategory.Q.obj (colimit N)) ≫ (ladderPrecomp.{u, v, r, w} J R T.mor₂ q).app (DerivedCategory.Q.obj (colimit N)) = 0, (ShortComplex.mk _ _ h).Exact) ∧ (∃ h : (ladderPrecomp.{u, v, r, w} J R T.mor₂ q).app (DerivedCategory.Q.obj (colimit N)) ≫ (ladderPrecomp.{u, v, r, w} J R T.mor₁ q).app (DerivedCategory.Q.obj (colimit N)) = 0, (ShortComplex.mk _ _ h).Exact) ∧ (∃ h : (ladderPrecomp.{u, v, r, w} J R T.mor₁ (q - 1)).app (DerivedCategory.Q.obj (colimit N)) ≫ (ladderBoundary.{u, v, r, w} J R T q).app (DerivedCategory.Q.obj (colimit N)) = 0, (ShortComplex.mk _ _ h).Exact) ∧ (ladderColimPrecomp.{u, v, r, w} J R N T.mor₂ q ≫ ladderVertical.{u, v, r, w} J R N T.obj₂ q = ladderVertical.{u, v, r, w} J R N T.obj₃ q ≫ (ladderPrecomp.{u, v, r, w} J R T.mor₂ q).app (DerivedCategory.Q.obj (colimit N))) ∧ (ladderColimPrecomp.{u, v, r, w} J R N T.mor₁ q ≫ ladderVertical.{u, v, r, w} J R N T.obj₁ q = ladderVertical.{u, v, r, w} J R N T.obj₂ q ≫ (ladderPrecomp.{u, v, r, w} J R T.mor₁ q).app (DerivedCategory.Q.obj (colimit N))) ∧ (ladderColimBoundary.{u, v, r, w} J R N T q ≫ ladderVertical.{u, v, r, w} J R N T.obj₃ q = ladderVertical.{u, v, r, w} J R N T.obj₁ (q - 1) ≫ (ladderBoundary.{u, v, r, w} J R T q).app (DerivedCategory.Q.obj (colimit N)))",
+  "branch": "sheaf-dag",
+  "by": "N8",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The four named theorems jointly give the full node: natural filtered cohomology comparison, its two consequences, the normalized localization/cocone comparison, and exact commuting ladders. Helper definitions use the existing strict models and signed source shift; no alternative internal Hom is constructed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3afd29aa",
+  "group": "N8",
+  "result": "pass",
+  "note": "Snapshot module compiles cleanly via nt_compile --json (32.4 s, only sorry warnings); lean.statement verbatim; node unchanged apart from the lean record. All clauses match the node: termwise colimit of complexes; PreservesColimitsOfShape for H^q; quasi-iso and common-lower-bound consequences; alpha is Q.map of the actual model cocone desc, and in ladder_comparison e cancels and beta is pinned on Modules colimit legs, so not hollow; both rows exact at every spot for all q:ℤ; u/v/w squares commute; ladderBoundary = homology shiftIso⁻¹ ≫ sourceShift A 1 (LeftFormula sign (-1)^k, matches the node) ≫ precomposition by w. No extra hypotheses or universe equalities. Advisory: RingedHomUniverses.hom and sourceShift are owned by theorem lem-weil-pbc-ringed-internal-hom-exact-restriction (proof_dep, not stmt_dep; sourceShift is .choose of its ∃!)."
  }
 }

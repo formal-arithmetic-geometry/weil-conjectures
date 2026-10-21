@@ -251,5 +251,29 @@
   "group": "Q46",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-e89dff4b8 (reviewer sub-agent of L); spot-checked: Read in full: the item and all four steps (no new nodes), the statements of every cited node, and Bhatt–Scholze Lemma 6.5.5 on pdf p.49. The statement and stmt_deps are unchanged from base. The item is unsplit live, has no repair note, is not dropped and cites no SGA. The statement is true (Bhatt–Scholze 6.5.5); I tested it on M=0, empty T, shifted free objects, and A/ϖ at a geometric point, which needs the Tor term in degree −1. Steps 1–3 are correct. Step 1 uses the local-perfect criterion forward, whose hypotheses match exactly; its common refinement S_α×_T S'_β and the fibre-product covers are valid, and the stratum-restriction node gives u^{-1}B≅B_U. Step 2 shows that a tensor of bounded finite projective complexes is K-flat (one-point site) and computes P⊗^L Q. Step 3 applies tensor-pullback to restriction and to realization over Sh(pt), giving local perfect models. Fault C4, step 4: it took the unit of def-weil-pbc-intrinsic-completion, which lands in its product mapping-fibre model, to be the unit of the item's H. H is instead the total right derived limit of the reflector, and the two derived limits are only non-canonically isomorphic. FIXED: step 4 now uses lem-weil-pbc-completed-koszul-quotient-comparison (generator ϖ, r=1) and prop-weil-pbc-koszul-reconstruction (c_Vκ_V=comp_V; same Q_m, R lim and unit, over the actual A_T) to show η_V is invertible. The same two nodes, read backwards from η_H, give the intrinsic completeness of H. The witness and local-model transfer is kept. proof_deps and split_report.tool_uses are updated with the three added nodes. I accept the 5 declared tool uses as generic coefficient-category tools. Batch-5 flag (criterion → lem-trf-additive-homotopy-category-triangulated): the closure adds only generic category theory (K(B) triangulated, cofiltered finite sets, localization ess. surj., right fractions, ff+ess. surj. ⇒ equivalence, pod exact-square composition). None is part of the trace formula or Poincaré duality, and all are already in the parent's closure, so I accept the flag. Advisory: lem-pur-integral-operations-preserve-constructible clause 2, together with the stratified-perfect characterization, is a near-alternative route; lem-fix-constructible-tensor-completion is not a duplicate.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UniformCompleteTensor",
+  "declaration": "AlgebraicGeometry.Scheme.uniformCompleteTensor_mem",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.uniformCompleteTensorKoszulTower",
+   "AlgebraicGeometry.Scheme.uniformCompleteTensorCompletion",
+   "AlgebraicGeometry.Scheme.uniformCompleteTensor_mem"
+  ],
+  "file": "lean/Sheaf/Paper/UniformCompleteTensor.lean",
+  "statement": "theorem uniformCompleteTensor_mem (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [IsNoetherian T] (hdim : ∃ n : ℕ, topologicalKrullDim T ≤ n) (hl : IsUnit (l : Γ(T, ⊤))) (M N : pbcBoundedConstructibleComplete T l E hdim hl) : IsPbcBoundedConstructibleComplete T l E (uniformCompleteTensorCompletion T (pbcPadicCoefficientDatum l E) 1 (fun _ : Fin 1 ↦ Padic.coefficientExtensionUniformizer l E) ((SheafOfModules.siteDerivedTensorIndependentCoefficients (ProEt.topology T) (pbcAdicCompletion T (pbcPadicCoefficientDatum l E))).obj (M.obj, N.obj)))",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper completion applies the existing total right derived strict inverse limit to the published Koszul tensor tower, transported through the canonical completed-coefficient presentation isomorphism. It does not replace the specified strict derived limit by the product mapping-fiber reflector object. The conclusion reuses the exact published three-clause uniform constructible predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-955b103b7",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Every hypothesis and clause matches the node: l prime, E/Q_l finite with E : Type (u+1), noetherian finite-dimensional T with l invertible, the actual completed ring B, M and N in the recorded full subcategory, and the recorded derived tensor (siteDerivedTensorIndependentCoefficients). The conclusion is the published three-clause IsPbcBoundedConstructibleComplete, which covers the 'in particular' clause. The helpers are real: the Koszul tower uses exponent m+1, transition ϖ in degree -1 and identity in degree 0, and the limit is completedRlim, the total derived strict limit. They are not duplicates: wfCompletionObj and reconstructionKoszulDerivedFunctor are fibre models, RingedKoszulLimitPresentation has no canonical instance, and the category is closed under isomorphism. The node file changes only in lean; the dependency records equal live; the statement is verbatim; docstrings and proof steps are present; the only proof is sorry; non-public imports are exactly the proof_deps modules; no line exceeds 100 characters. nt_compile --json rc=0, no errors or warnings, item 19.4 s and StratumCompletionUnitRestriction 44.2 s. Advisory: no reflector stmt_dep declaration is used in the statement, because the helper realizes that construction."
  }
 }

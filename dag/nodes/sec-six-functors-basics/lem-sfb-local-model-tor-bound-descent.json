@@ -25,7 +25,8 @@
   "sk-def-pe-site",
   "def-pc-cochain-complex-modules",
   "def-pc-flat-sheaf-modules",
-  "det-def-sfb-constructible-tor-amplitude"
+  "det-def-sfb-constructible-tor-amplitude",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
  ],
  "proof": [
   {
@@ -274,5 +275,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q119-7c04e99ad (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and unit/chapter route. All six steps are valid for arbitrary condensed coefficients; checked nonflat test modules, interval endpoints, and empty covers. No new nodes, duplicates, cycles, forbidden trace/duality dependencies, or long steps. Accepted seven generic tool uses. Delivery correctly uses 06YQ despite an inherited citation typo. Full findings are in review.md."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.LocalModelTorBoundDescent",
+  "declaration": "AlgebraicGeometry.ProEtale.localModel_torBound_descent",
+  "file": "lean/Sheaf/Paper/LocalModelTorBoundDescent.lean",
+  "statement": "theorem localModel_torBound_descent (Γ : Profinite.CondensedRing.{u}) [IsCommMonObj Γ.X] (S : Scheme.{u}) (Q : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Γ.X S))) (n : ℕ) (V : Fin n → S.ProEt) (hcover : Presieve.ofArrows (fun i ↦ (V i).left) (fun i ↦ (V i).hom) ∈ Scheme.proetalePrecoverage S) (r s : ℤ) (hrs : r ≤ s) (L : ∀ i : Fin n, CochainComplex (Mod (Sheaf (Scheme.ProEt.topology (V i).left) Ab.{u + 1}) (condensedRingObj Γ.X (V i).left)) ℤ) (hbound : ∀ (i : Fin n) (q : ℤ), q < r ∨ s < q → IsZero ((L i).X q)) (hflat : ∀ (i : Fin n) (q : ℤ), SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (J := Scheme.ProEt.topology (V i).left) (R := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (Scheme.ProEt.topology (V i).left) (condensedRingObj Γ.X (V i).left)) ((InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} (Scheme.ProEt.topology (V i).left) (condensedRingObj Γ.X (V i).left)).functor.obj ((L i).X q))) (model : ∀ i : Fin n, (CondensedRing.upperStar Γ.X (V i).hom).mapDerivedCategory.obj Q ≅ DerivedCategory.Q.obj (L i)) : (∀ (N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Γ.X S)) (i : Fin n), Nonempty ((CondensedRing.upperStar Γ.X (V i).hom).mapDerivedCategory.obj (Q ⊗ (DerivedCategory.singleFunctor _ 0).obj N) ≅ DerivedCategory.Q.obj (CochainComplex.mapBifunctor (L i) ((CochainComplex.singleFunctor _ 0).obj ((CondensedRing.upperStar Γ.X (V i).hom).obj N)) (curriedTensor _)))) ∧ (∀ (N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Γ.X S)) (q : ℤ), q < r ∨ s < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj (Q ⊗ (DerivedCategory.singleFunctor _ 0).obj N))) ∧ DerivedCategory.torAmplitudeIn (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Γ.X S)) r s Q",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec544a786",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Only lean changed, plus one added stmt_dep: the landed def-weil-pbc-internal-abelian-sheaf-module-equivalence (no cycle, allowed by brief-stage2 l.140). Statement unchanged. Clauses match: condensedRingObj coefficients; internal-module D(Mod) as in the recorded torAmplitudeIn; Fin n family in Scheme.proetalePrecoverage S (n=0 allowed); IsZero bounds; IsFlatOnSite on the sectionModuleEquivalence image over sectionRingSheaf (universes u+1,u,u+1,u+1); model isos through the exact upperStar.mapDerivedCategory; local iso as Nonempty with total mapBifunctor curriedTensor; homology vanishing; torAmplitudeIn r s Q. No extra hypotheses or universe restriction. Docstrings and six proof steps present; imports match proof_dep modules; no defs; sorry only; no duplicate. Advisory: upperStar is owned by def-sfb-module-upper-star, not a stmt_dep. No compile (no FIX)."
+ }
 }

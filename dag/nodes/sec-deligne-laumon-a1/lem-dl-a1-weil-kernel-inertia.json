@@ -186,11 +186,15 @@
   "is": null
  },
  "lean": {
-  "branch": "slopmaster2",
-  "declarations": [
-   "AlgebraicGeometry.WeilGroup.ker_restrictionHom_eq_boundaryInertia"
-  ],
-  "note": "attached by the lead's tool attach.py 2026-10-18 02:20 UTC for group N6, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: it gives the kernel as the topological closure of the normal closure of all boundary inertia images, exactly the stated smallest closed normal subgroup."
+  "module": "Sheaf.Paper.WeilKernelHenselianInertia",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.weilRestriction_ker_eq_henselianBoundaryInertia",
+  "file": "lean/Sheaf/Paper/WeilKernelHenselianInertia.lean",
+  "statement": "theorem weilRestriction_ker_eq_henselianBoundaryInertia {k₀ : Type u} [Field k₀] [Finite k₀] {C U : Scheme.{u}} (p : C ⟶ Spec (.of k₀)) [Smooth p] [GeometricallyConnected p] [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p] (hC : C.IsPureDimension 1) (j : U ⟶ C) [IsOpenImmersion j] (hj : DenseRange j.base) {Ωb : Type u} [Field Ωb] [IsSepClosed Ωb] (b : Spec (.of Ωb) ⟶ U) (ρ : (constantCoverAction (j ≫ p) b (Aut (fiber b))).weilGroup (geometricFrobenius (j ≫ p) b) →* (constantCoverAction p (b ≫ j) (Aut (fiber (b ≫ j)))).weilGroup (geometricFrobenius p (b ≫ j))) (hρ : ∀ w, (ρ w).val = (fiberAutBaseChange j b w.val.1, w.val.2)) (L : (x : ↥((Set.range j.base)ᶜ)) → HenselianBoundaryLocalData j b x.val) : ρ.ker = (Subgroup.normalClosure (⋃ x, {w | w.val.2 = 1 ∧ ∃ σ : (L x).Ω ≃ₐ[(L x).K] (L x).Ω, (L x).residueAction σ = 1 ∧ (L x).decomposition σ = w.val.1})).topologicalClosure",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Replaces the stale integral-closure-inertia attachment with the specified henselian residue kernels and arbitrary geometric paths. The restriction is fixed by its pair formula; the Weil topology is the subgroup topology in the arithmetic automorphism group times discrete integers."
  },
  "lean_audit": {},
  "split_report": {
@@ -261,5 +265,13 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q123-f46589780 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement (from clones/live, because the snapshot's dagsnap symlinks are gone) and Stacks pione 0BSD/0BSW/0BTD with their proofs. New node normal-scheme-galois-inertia-presentation is 0BTD (1)=(3) plus surjectivity. Its hypotheses are the source's (normal integral, all points), and it holds on the small cases Spec K and a strictly henselian local ring. New node henselian-global-inertia-comparison is the 0BSD setup plus 0BSW (D=Aut_{K^h}(Ω), I=Aut_{K^sh}(Ω), residue surjection with kernel I). Its henselian-inertia clause holds because the integral closure of A^h is local, and it holds for a field and for a strictly henselian ring. It is not a duplicate of lem-wf-strict-henselian-fraction-inertia: that node is the DVR case of I=Gal(Ω/K^sh) only and lacks the global D comparison (advisory). Item steps 1-6 are correct. In step 2, b=f∘a follows from the explicit fibre compatibility in lem-galois-pi1-functoriality. In step 3, θ_s is a restricted to D with the trivial path, using Ω̃ as the local geometric point. Step 4's quotient argument and the step-5 conclusion H⊆N with H compact in the open profinite degree-0 subgroup both hold. Step 6's g=wd construction with n from lem-sfb-finite-field-galois-frobenius gives H⊇N. Edge cases: empty S_0 and residue degree >1 both work. The statement is unchanged and this is a real split, not relabelling. I accept the tool_uses as generic black boxes; the unit has no steps. Batch-5 findings: all four reach the trace-formula or Poincaré chapters only through general definitions (def-weil-pbc-henselization-at-prime, def-pod-lisse-l-adic-sheaves), so all are accepted. B10: the live lean attachment ker_restrictionHom_eq_boundaryInertia (slopmaster2 BoundaryInertia.lean:281,456,559) uses integral-closure inertia Q.inertia, not the henselian kernel of d-real-boundary. The two agree only via 0BSW, so the declaration is not an exact statement and the split is legitimate. Maintainer note: the stale lean field remains on the node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7193653b3",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Clauses all match lem-dl-a1-weil-kernel-inertia: smooth geometrically connected separated finite-type curve with pure dimension 1, dense open immersion, Weil groups as the bodies of the weilGroup abbrevs, ρ pinned by its pair formula (fiberAutBaseChange, degree), degree-0 images of the henselian residue kernel through the pinned decomposition map, conclusion = topologicalClosure of normalClosure. Probe: Aut(fiber b) topology rfl-equal to Mathlib PreGaloisCategory instance; IsTopologicalGroup found on the Weil subgroup. §1(B): upstream BoundaryDatum carries ker_restrict_eq (this item's conclusion), so it is unusable; HenselianBoundaryLocalData mirrors the landed landing theorem's binders, has spec equations only, and publicly re-exports Boundary. The dropped record declarations are used only inside Boundary.lean. Edge cases: empty S0, residue degree >1, arbitrary paths, all characteristics. nt_compile --json: rc 0, clean (28.9 s / 45.3 s). Notes: d-real-boundary record replaced; landed lem-dl-a1-lisse-extension-inertia still takes a BoundaryDatum; second-reading section brief; item compile time near the 60 s limit."
  }
 }

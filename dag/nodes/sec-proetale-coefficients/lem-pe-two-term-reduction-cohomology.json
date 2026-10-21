@@ -21,7 +21,10 @@
   "def-weil-abstract-derived-category",
   "def-pc-kflat-complex",
   "lem-pur-derived-change-of-rings",
-  "lem-pe-condensed-point-discrete-constant-comparisons"
+  "lem-pe-condensed-point-discrete-constant-comparisons",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-pbc-successive-derived-scalar-normalization-data",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
  ],
  "proof": [
   {
@@ -305,5 +308,51 @@
   "group": "Q109",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-15e9e3b07 (reviewer sub-agent of L); spot-checked: I read the item in full: its statement is unchanged and identical to live, which still has it unsplit, and the delivery adds 8 steps and no new nodes. The statement is a true witness for the final paragraph of main-20261015 sk-def-pe-derived-completion. I tested it on small cases (ℓ=2 with n=1,2; the Z/8→Z/4 transition kills the generator of H^{-1}; k_X⊗B_n≅k_X≠0). Nothing is on the drop list, there is no dependency cycle (477-node closure), and every Stacks tag cited exists (06YQ, 06YY, 0D6D, 093J, 03CY, 00WJ, 00WB, 00WK, 03EK). Step-by-step checks: Step 1: flat terms meet the hypotheses of the bounded-flat K-flat lemma. Step 2: the sibling node lem-pe-kflat-scalar-tower-realization says that the canonical transition is reduction in both terms, as the step uses it. Steps 4-6: the arithmetic and the cohomology through presheaf exactness, the constant-ring module equivalence and H∘Q are correct. Step 7: nonvanishing follows from the detects-zero lemma on X=Spec Ω, in any characteristic. Step 8: the explicit tensor inverse via local constant representatives is correct. I found no duplicates (cone-calculus and adic Tor nodes checked). I accept all seven declared tool uses. One repair (C3/E5): step 3 claimed the comparison isomorphisms are compatible with the quotient maps, but no cited statement says they are natural in the ring. I rewrote step 3 with the actual argument: unit-preserving ring maps out of the constant sheaf of Z/ℓ^n are unique, and additive maps out of k_X are fixed by where they send 1, by the universal property of sheafification. I added def-weil-pbc-sheafification to that step's uses and to proof_deps. The corrected item is in fixes/dag/nodes/sec-proetale-coefficients/lem-pe-two-term-reduction-cohomology.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TwoTermReductionCohomology",
+  "declaration": "AlgebraicGeometry.ProEtale.TwoTermReduction.two_term_reduction_cohomology",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.ring",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.map",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.complex",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.unit",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.termMinus",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.termZero",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.finiteRing",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.projection",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.step",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.residue",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.k",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.additiveMap",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.restrictHomology",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.localized",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.localizedHomology",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.sectionSMul",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.transition",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.Realization",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.IsRealization",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.Cohomology",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.IsCohomology",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.TensorCalculation",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.IsTensorCalculation",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.Calculation",
+   "AlgebraicGeometry.ProEtale.TwoTermReduction.two_term_reduction_cohomology"
+  ],
+  "file": "lean/Sheaf/Paper/TwoTermReductionCohomology.lean",
+  "statement": "theorem two_term_reduction_cohomology (ℓ : ℕ) [Fact ℓ.Prime] (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [hD : ∀ R : Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) CommRingCat.{u + 1}, HasDerivedCategory.{w} (Modules.{u + 1, u, u + 1} R)] (p : ∀ {R S : Sheaf (Scheme.ProEt.topology (Spec (.of Ω))) CommRingCat.{u + 1}} (a : R ⟶ S), Presentation.{u + 1, u, u + 1, w} a) (N : Normalization.{u + 1, u, u + 1, w} p) : Nonempty (Calculation ℓ (Spec (.of Ω)) p N)",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical continuous-function coefficients, literal two-term complexes, and specified cohomology/tensor maps. Uses the existing section-ring transport and the recorded universal derived scalar-extension presentations and normalization; their quantification expresses independence of the chosen canonical presentation. Natural index n denotes the paper exponent n+1. The statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf597fdba",
+  "group": "O2",
+  "result": "pass",
+  "note": "Re-delivery of the f2a79c6f H2 RETURN: Lean file byte-identical (sha c7da68fc); the only node change swaps stmt_dep lem-sfb-successive-derived-quotient-normalization for the landed existing:true def-pbc-successive-derived-scalar-normalization-data (owns Presentation/Normalization/sectionTensor/pure/restriction/Modules; p and N stay binders). Mechanical finding on lem-pur-sheaf-ring-coefficient-ordinary-adjunction: genuine, because restrictHomology uses .choose/.choose_spec.choose of its PreservesFiniteLimits/Colimits witnesses and appears in minus_transition/zero_transition/induced_eq, so PASS on that point. Reread all clauses: K-flat, model_eq counit pin, chain = step termwise + transition_eq, H^-1 via kernelCoefficient ℓ^n with inclusion_eq/minus_eq, H^0 via reduction, vanishing in all other q, zero/identity transitions, k≠0, tensor action and induced_zero; universes free; statement verbatim; single sorry; docstrings and both report sections present; not dropped; live item still unstated. Nothing compiled (no change; worker scompile clean; prior lcompile clean)."
  }
 }

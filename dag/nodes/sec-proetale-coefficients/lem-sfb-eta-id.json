@@ -184,5 +184,23 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-cartesian-coefficients",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedPushforwardHom_id",
+  "statement": "lemma condensedPushforwardHom_id (X : Scheme.{u}) :\n    condensedPushforwardHom Λ (𝟙 X) =\n      (ProEtale.lowerStarId Ab.{u + 1} X).inv.app (condensedRingObj Λ X)",
+  "branch": "slopmaster2",
+  "by": "Q51",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing theorem in the published live upstream module, confirmed by scompile.py --source. Section parameter Λ is a sheaf on coherentTopology Profinite.{u} with values in Ab.{u + 1}; a condensed ring Profinite.CondensedRing is precisely Mon of this sheaf category, so its underlying Λ.X is the parameter here. The theorem omits the unused MonObj instance and hence applies in particular to every condensed ring, without requiring commutativity or a topological-ring presentation. For every X : Scheme.{u}, it identifies the recorded condensedPushforwardHom Λ (𝟙 X) with (ProEtale.lowerStarId Ab.{u + 1} X).inv.app (condensedRingObj Λ X). lowerStarId is induced by MorphismProperty.Over.pullbackId, whose hom is explicitly pullback.fst: exactly the canonical projection specified by the node. No new module or statement correction is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3cde966ce",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Only change: item lean record existing:true -> AlgebraicGeometry.ProEtale.condensedPushforwardHom_id (side ModuleObject/Basic.lean:641-648); node otherwise identical to live and live has no lean record. The statement is verbatim, and the blueprint source names this exact declaration. Clauses: Λ is any Mon(Sheaf(coherentTopology Profinite.{u}) Ab.{u+1}) (MonObj omitted, so more general; no commutativity); X : Scheme.{u} with no hypotheses; η_id = condensedPushforwardHom (the def-sfb-eta record); the pushforward is lowerStar; lowerStarId is built from Over.pullbackId, whose hom is pullback.fst, i.e. the projection V×_X X→V; direction is inv.app at condensedRingObj. Probe applying it to bundled condensed rings compiled clean in 33.1 s (load ~175); control with a false line errored. Second-reading section is the standard direct-delivery text, accepted for existing bindings. No findings."
+ }
 }

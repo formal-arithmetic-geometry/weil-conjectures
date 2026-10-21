@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-size-convention",
   "def-pur-hom-complex",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "lem-sc-hom-complex-projections"
  ],
  "proof": [
   {
@@ -202,5 +203,33 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-7e0dee3b5 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full. The delivery is one commit with the item and the report and no new nodes. The statement and stmt_deps are byte-identical to the live base. Live is still unsplit, so no parallel group has superseded it. The item has no repair note: the 2026-10-21 re-split note is on the parent strict-perfect-hom, so the ≥N-node rule does not apply. The item is not in route-pivot-dropped.txt, and no SGA source is used. I checked Stacks sites-cohomology section-hom-complexes (8571ff): its product and differential d_M f − (−1)^n f d_L match def-pur-hom-complex. Stacks 08JJ proof lines 13094–13104 put the dual terms (E^n)^∨ in degree −n and give the bidual as evaluation up to sign. I recomputed every sign independently. Step 3: (df)^{−q−1} = (−1)^{q+1} φ d^{−q−1}. Step 4: (dΨ)(χ) = (−1)^{i+1}(−1)^{−i} Ψ(χ d^i) = −(d^i)^{∨∨}. Step 5: parity (−1)^{−i²} = (−1)^i. Step 6: the chain-map equation holds on every slice V→U and every χ. The support bounds [−b,−a] include the case a>b. Each step is elementary from def-pur-hom-complex and def-pur-sheaf-hom and states only what those definitions say. Small cases I tested: the identity complex over Z in degrees 0,1 gives β = (id, −id), which is a chain map. Characteristic 2 is consistent. E^0 = Z/2 gives β = 0, which is still valid because the statement claims no invertibility. No duplicates: lem-sfb-ringed-site-duality-maps and the pod biduality nodes are derived or perfect statements. The parent's steps 2 and 4 use exactly these clauses, and there is no cycle. The blueprint fields are unchanged in substance. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteBoundedDualComponents",
+  "declaration": "CategoryTheory.RingedSiteBoundedDual.boundedDualComponents",
+  "declarations": [
+   "CategoryTheory.RingedSiteBoundedDual.Modules",
+   "CategoryTheory.RingedSiteBoundedDual.modulesHasZeroObject",
+   "CategoryTheory.RingedSiteBoundedDual.coefficient",
+   "CategoryTheory.RingedSiteBoundedDual.zeroComplex",
+   "CategoryTheory.RingedSiteBoundedDual.dual",
+   "CategoryTheory.RingedSiteBoundedDual.complexDual",
+   "CategoryTheory.RingedSiteBoundedDual.component",
+   "CategoryTheory.RingedSiteBoundedDual.boundedDualComponents"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteBoundedDualComponents.lean",
+  "statement": "theorem boundedDualComponents (E : CochainComplex (Modules.{c, v, r} R) ℤ) (a b : ℤ) (hE : ∀ i : ℤ, i < a ∨ b < i → IsZero (E.X i)) : ∃ (α : ∀ (p q : ℤ), p + q = 0 → ((complexDual.{c, v, r} R E).X q ≅ dual.{c, v, r} R (E.X p))) (γ : ∀ i : ℤ, (complexDual.{c, v, r} R (complexDual.{c, v, r} R E)).X i ≅ dual.{c, v, r} R (dual.{c, v, r} R (E.X i))) (δ : ∀ i : ℤ, E.X i ⟶ dual.{c, v, r} R (dual.{c, v, r} R (E.X i))) (β : E ⟶ complexDual.{c, v, r} R (complexDual.{c, v, r} R E)), (∀ (p q : ℤ) (h : p + q = 0), (α p q h).hom = component.{c, v, r} R E p q h) ∧ (∀ i : ℤ, (γ i).hom ≫ SheafOfModules.homObjMap (α i (-i) (add_neg_cancel i)).hom (𝟙 (coefficient.{c, v, r} R)) = component.{c, v, r} R (complexDual.{c, v, r} R E) (-i) i (neg_add_cancel i)) ∧ (∀ q : ℤ, (complexDual.{c, v, r} R E).d q (q + 1) ≫ (α (-(q + 1)) (q + 1) (neg_add_cancel (q + 1))).hom = (q + 1).negOnePow • ((α (-q) q (neg_add_cancel q)).hom ≫ SheafOfModules.homObjMap (E.d (-(q + 1)) (-q)) (𝟙 (coefficient.{c, v, r} R)))) ∧ (∀ i : ℤ, (complexDual.{c, v, r} R (complexDual.{c, v, r} R E)).d i (i + 1) ≫ (γ (i + 1)).hom = -((γ i).hom ≫ SheafOfModules.homObjMap (SheafOfModules.homObjMap (E.d i (i + 1)) (𝟙 (coefficient.{c, v, r} R))) (𝟙 (coefficient.{c, v, r} R)))) ∧ (∀ q : ℤ, q < -b ∨ -a < q → IsZero ((complexDual.{c, v, r} R E).X q)) ∧ (∀ (i : ℤ) (U : Cᵒᵖ) (x : (E.X i).val.obj U) (W : (Over U.unop)ᵒᵖ) (φ : (dual.{c, v, r} R (E.X i)).val.obj (op W.unop.left)), ((((δ i).val.app U).hom x).app W).hom φ = (φ.app (op (Over.mk (𝟙 W.unop.left)))).hom ((E.X i).val.map W.unop.hom.op x)) ∧ (∀ (i q t : ℤ) (h : i + q = t) (h' : q + i = t) (U : Cᵒᵖ) (x : (E.X i).val.obj U) (W : (Over U.unop)ᵒᵖ) (φ : ((complexDual.{c, v, r} R E).X q).val.obj (op W.unop.left)), ((((homComplexπ (complexDual.{c, v, r} R E) (zeroComplex.{c, v, r} R) i q t h').val.app U).hom (((β.f i).val.app U).hom x)).app W).hom φ = (i * q).negOnePow • ((((homComplexπ E (zeroComplex.{c, v, r} R) q i t h).val.app (op W.unop.left)).hom φ).app (op (Over.mk (𝟙 W.unop.left)))).hom ((E.X i).val.map W.unop.hom.op x)) ∧ (∀ i : ℤ, β.f i ≫ (γ i).hom = i.negOnePow • δ i)",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7521ab5e6",
+  "group": "NH",
+  "result": "pass",
+  "note": "Delivery changes only the item's lean record and adds landed theorem lem-sc-hom-complex-projections to stmt_deps (allowed), plus one new module. On the mechanical finding: homComplexπ is Classical.choose of homComplex_projections_exists (HomComplexComponents.lean:38-43); α, γ and β's formula are pinned to these projections, so the theorem dependency is genuine, PASS on that point. All clauses checked against the node and Stacks 0A8X/08JJ: α = actual projection; γ fixed uniquely by the projection square; differential signs recomputed from homComplex_d_π ((-1)^{q+1} for D, -1 for D'); support bound; δ fixed by sectionwise evaluation; β chain map fixed on every component, including nonzero target degree; clause 8 consistent with clause 7. Edge cases a>b, char 2, non-reflexive terms and c≠v are covered; module universe max c v r is needed, not a silent restriction. No duplicate definition (HomComplexToSingle and Sheaf.Bidual are single-universe). No hollow definitions, docstrings present, statement verbatim. nt_compile --json on the snapshot: 19.2 s, exit 0, no errors or warnings. Notes: the second reading is a self-review (dispatcher forbids agents), for the coordinator; stage-3 advisory to bridge β to ringedSiteBidual."
  }
 }

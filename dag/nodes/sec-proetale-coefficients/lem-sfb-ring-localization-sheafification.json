@@ -236,5 +236,38 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-97bf6af07 (reviewer sub-agent of L); spot-checked: I read the whole item. The delivery has no new nodes. The statement is the base text verbatim plus two added definition citations, and stmt_deps matches. Source checked: Stacks sites-modules.tex 0EMC (lemma-simple-invert, proof 'Omitted'). Taking S = powers of t, 'local sections become invertible' is equivalent to a global inverse of f(t), so the item is that lemma restated for ring objects; tags 00CO and 00CP confirmed in tags/tags. Steps: (1) The section-ring reconstruction comes from the statement of def-weil-pbc-internal-abelian-sheaf-module-equivalence. Its 'monoidal local equivalences' hypothesis follows from the strong monoidality in sk-def-sfb-sheaf-tensor. Uniqueness of extension in det-def-sfb-ring-object-sheaf, through a(R⊗pR) and a(Z), recovers the original mu and eta. (2) Restrictions of P and both presheaf laws follow from the localization-away universal-property leaf; its uniqueness is checked on r/1. (3) sigma(1/t) inverts eta(t). I read aP as sheafification in commutative rings (allowed by def-weil-pbc-sheafification, and step 5 says so). (4) Naturality of the g_U is proved by uniqueness, not assumed. (5) Existence and uniqueness through sheafification are proved in the same morphism category. (6) Uniqueness of universal objects, genuinely elementary. Small cases: t=1; t=0 or nilpotent (Z/4, t=2) give the zero sheaf; the empty site works. Duplicate search over the side-live DAG: def-weil-pbc-ringed-section-localization and its citers are module-sheafification and derived-category statements, not this ring universal property, so same_as [] is right. The declared tool uses (det-def-sfb-ring-object-sheaf, the internal-abelian reconstruction) are accepted. No SGA citation. No cycle. proof_deps equals the union of uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingLocalizationSheafification",
+  "declaration": "CategoryTheory.sfbRingLocalizationSheafification",
+  "declarations": [
+   "CategoryTheory.sfbLocalizationFraction",
+   "CategoryTheory.sfbLocalizationPresheaf",
+   "CategoryTheory.sfbLocalizationPresheafUnit",
+   "CategoryTheory.sfbLocalizationPresheaf_spec",
+   "CategoryTheory.sfbLocalization_hasSheafify",
+   "CategoryTheory.sfbLocalization_monoidalLocalEquivalences",
+   "CategoryTheory.sfbLocalizationRingObject",
+   "CategoryTheory.sfbRingSectionMap",
+   "CategoryTheory.sfbLocalizationUnderlyingUnit",
+   "CategoryTheory.sfbLocalizationUnderlyingUnit_isMonHom",
+   "CategoryTheory.sfbLocalizationUnit",
+   "CategoryTheory.sfbRingLocalizationSheafification"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingLocalizationSheafification.lean",
+  "statement": "theorem sfbRingLocalizationSheafification (R : CommMon (Sheaf J AddCommGrpCat.{max u v w})) (t : (InternalAbelianSheafModule.sectionRings J R.X ⋙ forget CommRingCat).sections) : (∀ (U : Cᵒᵖ) (r : (InternalAbelianSheafModule.sectionRings J R.X).obj U), (sfbRingSectionMap.{u, v, w} J (sfbLocalizationUnit.{u, v, w} J R t)).app U r = (toSheafify J ((sfbLocalizationPresheaf (InternalAbelianSheafModule.sectionRings J R.X) t) ⋙ forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat.{max u v w})).app U ((sfbLocalizationPresheafUnit (InternalAbelianSheafModule.sectionRings J R.X) t).app U r)) ∧ (∀ U : Cᵒᵖ, IsUnit ((sfbRingSectionMap.{u, v, w} J (sfbLocalizationUnit.{u, v, w} J R t)).app U (t.val U))) ∧ (∀ (D : CommMon (Sheaf J AddCommGrpCat.{max u v w})) (f : R ⟶ D), (∀ U : Cᵒᵖ, IsUnit ((sfbRingSectionMap.{u, v, w} J f).app U (t.val U))) → ∃! g : (sfbLocalizationRingObject.{u, v, w} J R t) ⟶ D, (sfbLocalizationUnit.{u, v, w} J R t) ≫ g = f) ∧ (∀ (L : CommMon (Sheaf J AddCommGrpCat.{max u v w})) (j : R ⟶ L), (∀ U : Cᵒᵖ, IsUnit ((sfbRingSectionMap.{u, v, w} J j).app U (t.val U))) → (∀ (D : CommMon (Sheaf J AddCommGrpCat.{max u v w})) (f : R ⟶ D), (∀ U : Cᵒᵖ, IsUnit ((sfbRingSectionMap.{u, v, w} J f).app U (t.val U))) → ∃! g : L ⟶ D, j ≫ g = f) → ∃! γ : (sfbLocalizationRingObject.{u, v, w} J R t) ≅ L, (sfbLocalizationUnit.{u, v, w} J R t) ≫ γ.hom = j) ∧ (∀ (D : CommMon (Sheaf J AddCommGrpCat.{max u v w})) (h : (sfbLocalizationPresheaf (InternalAbelianSheafModule.sectionRings J R.X) t) ⟶ InternalAbelianSheafModule.sectionRings J D.X), ∃! g : (sfbLocalizationRingObject.{u, v, w} J R t) ⟶ D, ∀ (U : Cᵒᵖ) (x : (sfbLocalizationPresheaf (InternalAbelianSheafModule.sectionRings J R.X) t).obj U), (sfbRingSectionMap.{u, v, w} J g).app U ((toSheafify J ((sfbLocalizationPresheaf (InternalAbelianSheafModule.sectionRings J R.X) t) ⋙ forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat.{max u v w})).app U x) = h.app U x)",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The declarations collectively state all clauses: actual localization fractions and restrictions, canonical strong-monoidal sheafification and unit, preservation of the ring-object structure, invertibility, unique factorization, and the unique compatible internal ring isomorphism. The final conjunct gives the ring-sheafification universal property normalized by the actual abelian sheafification unit. Site objects and morphisms have independent universes u,v; coefficients use max u v w. Two named Prop-valued infrastructure statements supply sheafification and monoidal local equivalences from the stated size convention, so neither is an extra hypothesis. Every construction has real data; only theorem proofs are postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b12c80b41",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Dep records identical to live; stmt_deps unchanged, no theorem stmt_dep; statement verbatim; all 12 decls recorded. Clauses match node and Stacks 0EMC: Localization.Away presheaf with spec (power-torsion relation, +, ×, restriction); aP = presheafToSheaf.mapCommMon pinned by the ring-sheafification universal property via toSheafify; η = counit⁻¹ ≫ a(r↦r/1) with section formula pinned; IsUnit η(t); ∃! factorization; ∃! normalized iso to any L. Universes u,v independent, coefficients max u v w. Sorry'd HasSheafify/IsMonoidal instance theorems are true and needed (existing instance is u+1 only); no extra hypotheses. Real data, docstrings and 6-step proof present. No H4 duplicate. Advisories: sectionRings owned by a proof_dep-only node; global priority-20000 sorry instances; Sheaf.monoidalCategory used directly (same data as sfbSheafTensorStructure). Not compiled, per instruction."
  }
 }

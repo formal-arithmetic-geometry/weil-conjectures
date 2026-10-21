@@ -162,5 +162,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-66c0891eb (reviewer sub-agent of L); spot-checked: Read the full item, report, four cited statements, current blueprint sources and unit/chapter route. All three action and component calculations agree with master ChangeOfScalarsSquare.lean:73–98; hypotheses, comparison directions and lax-monoidal generality are correct. Edge cases, duplicate searches and dependency checks found no fault. No fixes or tool_uses needed. Detailed checks are in review.md."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare",
+  "declaration": "CategoryTheory.Mod.comapMapModComapIso_hom_app_hom",
+  "statement": "lemma comapMapModComapIso_hom_app_hom (M : Mod C S_X) :\n    ((comapMapModComapIso F φ_X φ_Y η_R η_S sq).hom.app M).hom = 𝟙 (F.obj M.X)",
+  "branch": "slopmaster2",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing lemma in the live published library, confirmed by scompile.py --source. The enclosing Comap section binds two monoidal categories with four independent universes, a lax monoidal F, the four monoid objects, the four monoid morphisms and only the commuting-square equation. For every S_X-module M it identifies the underlying hom of precisely the recorded comapMapModComapIso component with the identity of F.obj M.X. No extra hypotheses and no new module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02d750a70",
+  "group": "NB",
+  "result": "pass",
+  "note": "Existing-declaration delivery: only the item lean record differs from live. CategoryTheory.Mod.comapMapModComapIso_hom_app_hom (ChangeOfScalarsSquare.lean:94-97, live) matches the node clause by clause: M : Mod C S_X, the stmt_dep's recorded comapMapModComapIso F φ_X φ_Y η_R η_S sq (dep reviewed_lean pass), .hom.app M, .hom = 𝟙 (F.obj M.X). Section Comap has lax monoidal F, 4 independent universes, 4 IsMonHom morphisms and only sq; no extra hypotheses. Statement verbatim; source front matter names this lemma; stmt_deps = source uses; not in route-pivot-dropped; no other node binds the declaration; report sections present. No findings; no compile needed (no file changed)."
+ }
 }

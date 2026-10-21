@@ -180,5 +180,40 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-e46aef486 (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery has no new nodes. The statement and stmt_deps are unchanged from base, and live and side-live are still unsplit, so it is not superseded. There is no re-split note for this item: the parent's note created it as a statement-only node, so an ordinary one-level split applies. Step 1: mu_t is O-linear by restriction compatibility and commutativity; mu_t^2=mu_{t^2}=0; the chain-map square in degree -1 is pi mu_t=0. Steps 2-3: ker=im in the abelian Mod(O) gives H^i=0 for i<0, and H^0=O/im mu_t=coker=E with H^0(eps) the canonical iso, so eps is a quasi-iso. This matches def-pc-quasi-iso-modules (same ker/im formula). Step 4: F otimes_p O is isomorphic to F naturally as presheaves, F is already a sheaf so sheafification changes nothing; tensoring with 0 gives 0; so O and 0 are flat per def-pc-flat-sheaf-modules. Elementary is acceptable. Step 5: lem-pc-bounded-above-flat-kflat-site holds for any ringed site (Stacks sites-cohomology.tex:3120, tag 06YQ); I accept the declared tool use. Step 6: one-point site, image tR, free basis 1. Small cases: Z/4 with t=2, k[e]/e^2, and t=0 (which forces O=0) all work; Z/8 with t=4 shows the ker=im hypothesis is needed. Blueprint source: main-20261015 ctf-equals-bc proof, 'The examples' line 37, the Z/l^2 periodic resolution. No SGA. Duplicate search over periodic/square-zero nodes found only the parent, sibling and unrelated cyclic-group nodes; none restates this item. Maintainer note: existing node lem-pc-bounded-above-flat-kflat-site carries the stale Stacks tag 06YS; the correct tag is 06YQ."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExactScalarPeriodicResolution",
+  "declaration": "SheafOfModules.exact_scalar_periodic_resolution",
+  "declarations": [
+   "CochainComplex.scalarPeriodicX",
+   "CochainComplex.scalarPeriodicD",
+   "CochainComplex.scalarPeriodicD_comp",
+   "CochainComplex.scalarPeriodic",
+   "CochainComplex.scalarPeriodicXIso",
+   "CochainComplex.scalarPeriodicAugmentation_condition",
+   "CochainComplex.scalarPeriodicAugmentation",
+   "SheafOfModules.exactScalarMultiplication",
+   "SheafOfModules.exactScalarMultiplication_sq",
+   "SheafOfModules.exactScalarPeriodicComplex",
+   "SheafOfModules.exactScalarPeriodicAugmentation",
+   "SheafOfModules.exact_scalar_periodic_resolution",
+   "ModuleCat.scalarPeriodic_mul_sq",
+   "ModuleCat.scalar_periodic_free_resolution"
+  ],
+  "file": "lean/Sheaf/Paper/ExactScalarPeriodicResolution.lean",
+  "statement": "theorem exact_scalar_periodic_resolution (t : (unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)).sections) (ht : ∀ U : Cᵒᵖ, (@id (R.obj.obj U) (t.val U)) * (@id (R.obj.obj U) (t.val U)) = 0) (hexact : kernelSubobject (exactScalarMultiplication R t) = imageSubobject (exactScalarMultiplication R t)) : (ShortComplex.mk (exactScalarMultiplication R t) (exactScalarMultiplication R t) (exactScalarMultiplication_sq R t ht)).Exact ∧ (ShortComplex.mk (exactScalarMultiplication R t) (cokernel.π (exactScalarMultiplication R t)) (cokernel.condition _)).Exact ∧ Epi (cokernel.π (exactScalarMultiplication R t)) ∧ Nonempty ((exactScalarPeriodicComplex R t ht).homology 0 ≅ cokernel (exactScalarMultiplication R t)) ∧ (∀ i : ℤ, i ≠ 0 → IsZero ((exactScalarPeriodicComplex R t ht).homology i)) ∧ (∀ i : ℤ, IsFlatOnSite.{u, v, r, r} (C := C) (J := J) (R := R) ((exactScalarPeriodicComplex R t ht).X i)) ∧ CochainComplex.IsKFlatResolutionIndependentCoefficients (exactScalarPeriodicAugmentation R t ht)",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The generic component constructions and their named compatibility theorems belong to this node’s prescribed complex and augmentation. ModuleCat.scalar_periodic_free_resolution states its one-point clause, including the canonical cokernel/quotient comparison and the singleton basis vector 1. No independent notion or additional hypothesis is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16ca574c2",
+  "group": "O3",
+  "result": "pass",
+  "note": "Every node clause matches the Lean (μ_t = unitHomEquiv.symm t, kernelSubobject=imageSubobject, three exactness conjuncts, H^0≅coker, H^i=0 for i≠0, IsFlatOnSite on each term, IsKFlatResolutionIndependentCoefficients of the mkHomToSingle augmentation; ModuleCat clause with QuasiIso, quotient comparison and PUnit basis vector 1). Real-data defs with named sorry'd compatibility theorems; no extra hypotheses; independent universes with EssentiallySmall.{r}; t=0, zero ring and Z/8 edge cases checked. Node differs from live only in lean; statement verbatim; 14 declarations present; 6 sorry, all in theorems; docstrings and line width fine; plain imports are the proof_deps modules, as the brief requires; no duplicate live or in Mathlib. Advisory: proof tool isKFlat_of_boundedAbove_flat is single-universe (stage-3 generalization needed); dependency docstring cites 06YS instead of 06YQ."
  }
 }

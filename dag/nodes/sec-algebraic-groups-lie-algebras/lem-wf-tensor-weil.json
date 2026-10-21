@@ -227,5 +227,29 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-c64d52714 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-ag-uniform-complete-tensor and the statements of all 13 cited nodes, plus the master and main-20261015 blueprint (identical), unit sk-p-cyclotomic and Bhatt-Scholze 6.5.1-6.5.5 (pp. 49-50). Status: first delivery; live and side still show the item as imported; no repair note; nothing dropped; no cycle; new id is unique; no SGA cited. Statement: 'exact bifunctor' is now spelled out as exactness of the underlying C_E functors in each variable. I accept this: def-wf-weil-category says explicitly that the pair category has no triangulated structure, and nothing is dropped. The Frobenius (phi_K⊗phi_L)∘mu matches def-wf-tensor-product, and the citers internal-hom-weil and tate-twist use only the bifunctor. Step 1: X is noetherian and finite-dimensional with ell invertible, and rational objects are the integral ones, so the new node gives closure. Step 2: naturality of mu in the direction PT→T(P,P) follows from the ringed-topoi pullback lemma's simultaneous naturality, naturality of the reflector and descent uniqueness. Steps 3-4: I checked the inverse and the commuting-morphism chain line by line. Step 5: K-flat fixed tensor exact, Koszul Lambda exact (r=1), restriction to the uniform triangulated subcategory, then scalar localization, which gives F_E∘Q=Q∘F. New node: statement-only, self-contained, three kinds of search. I tested it on the geometric point (perfect complexes), A/varpi⊗A/varpi = A/varpi ⊕ A/varpi[1], and the empty scheme; uniform bounds hold through finite free models over the DVR. It is not a duplicate: det-lem-int-tensor-product, det-lem-integral-models-operations and lem-pur-integral-operations-preserve-constructible use other categories with no comparison node, and none of the ~55 nodes on def-weil-pbc-bounded-constructible-complete states tensor closure. I accept all 8 generic tool_uses. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilTensorWeil",
+  "declaration": "WeilConjectures.wf_tensor_weil",
+  "declarations": [
+   "WeilConjectures.wfTensorCoefficientCategory",
+   "WeilConjectures.wfTensorCoefficientInclusion",
+   "WeilConjectures.wf_tensor_weil"
+  ],
+  "file": "lean/Sheaf/Paper/WeilTensorWeil.lean",
+  "statement": "theorem wf_tensor_weil : ∃ (T : wfTensorCoefficientCategory D c X₀ E × wfTensorCoefficientCategory D c X₀ E ⥤ wfTensorCoefficientCategory D c X₀ E) (W : WeilD D c X₀ E × WeilD D c X₀ E ⥤ WeilD D c X₀ E), ((wfTensorCoefficientInclusion D c X₀ E).prod (wfTensorCoefficientInclusion D c X₀ E)) ⋙ wfTensor D c X₀ E = T ⋙ wfTensorCoefficientInclusion D c X₀ E ∧ (∀ K L : WeilD D c X₀ E, (W.obj (K, L)).carrier = T.obj (K.carrier, L.carrier) ∧ HEq (wfWeilStructure D c X₀ E (W.obj (K, L))) (wfTensorFrobenius D c X₀ E K L)) ∧ (∀ (K K' L L' : WeilD D c X₀ E) (f : K ⟶ K') (g : L ⟶ L'), HEq (W.map (Prod.mkHom f g)).hom.f (T.map (Prod.mkHom f.hom.f g.hom.f))) ∧ (fun [hDim : Fact (∃ n : ℕ, topologicalKrullDim (D.geometricFiber X₀).left ≤ n)] [hInv : Fact (∀ t : (D.geometricFiber X₀).left, IsUnit (c.l : (D.geometricFiber X₀).left.presheaf.stalk t))] ↦ ∀ L : wfTensorCoefficientCategory D c X₀ E, (∃ s : ((Functor.curry.obj T).obj L).CommShift ℤ, (fun [sInst : ((Functor.curry.obj T).obj L).CommShift ℤ] ↦ ((Functor.curry.obj T).obj L).IsTriangulated) (sInst := s)) ∧ (∃ s : ((Functor.curry.obj T).flip.obj L).CommShift ℤ, (fun [sInst : ((Functor.curry.obj T).flip.obj L).CommShift ℤ] ↦ ((Functor.curry.obj T).flip.obj L).IsTriangulated) (sInst := s))) (hDim := ⟨(weilGeometricFiber_coefficientHypotheses D c X₀).2.1⟩) (hInv := ⟨(weilGeometricFiber_coefficientHypotheses D c X₀).2.2⟩)",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The theorem asserts an actual restriction of the recorded completed ambient tensor to the raw rational constructible category and its Weil fixed pairs. The coefficient category and inclusion abbreviations merely name the dependency constructions. Exactness uses the existing induced scalar-localization shift and image triangles, with both geometric Fact hypotheses supplied by weilGeometricFiber_coefficientHypotheses; no triangulated structure is asserted on WeilD."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12e77ba03",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Read item, 4 stmt_deps, source place (master order 2569; the main-20261017 lean pointer WeilComplex.tensor uses the finite-Λ Dctf model, so not existing), module and report (Worker report + Second reading by Q160 present). T is pinned by (I.prod I)⋙wfTensor = T⋙I; I = scalar localization of a full-subcategory lift, injective on objects and Hom-bijective. Weil Frobenius pinned by HEq to wfTensorFrobenius = μ≪≫T.mapIso(φK×φL) via faithful wfWeilStructure; maps pinned to T.map; both HEqs are same-category with provably equal endpoints. Exactness = ∃ CommShift ℤ with IsTriangulated in both variables of the pinned T, under the localized triangulation (choices from exists_triangulated_scalarLocalization / the same induced data); Facts supplied from weilGeometricFiber_coefficientHypotheses, no extra hypotheses, no triangulation of WeilD. Hypotheses match WeilD; universes u; edge cases ok; lean.statement verbatim; only the item lean field changed, dep records identical to live; docstrings and 5-step plan present; sorry only. Advisory: localized triangulation instances owned by non-stmt_dep nodes but .choose of the cited stmt_dep. No compile run (no file changed); worker reports a clean scompile (30.4 s sandbox / 33.3 s library name)."
  }
 }

@@ -238,5 +238,43 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-9f7318bc9 (reviewer sub-agent of L); spot-checked: Read the item, its five steps and every cited statement in full; the delivery has no new nodes. The statement and stmt_deps are byte-identical to the side-live base; the base already attributed both identifications to lem-weil-pbc-ring-sheaf-change-adjunction, which is advisory only: that node does not state U_W S_W N ≅ N⊗^L B_W, and the proof supplies it in step 1. Source checked: Stacks sites-cohomology.tex Tag 0B56 equation-projection-formula-map, lines 13657-13680, defined with no hypotheses as the adjoint of (ε⊗1)∘pullback-tensor via 07A4/07A6. Tags file checked. No SGA. The blueprint ancestor main-20261015 lem-fix-compact-support-coefficient-change, first proof paragraph, is the realized place. Steps: (1) h comes from lem-pur-derived-change-of-rings, lem-pur-change-of-rings-tensor-comparison and the one-K-flat-factor clause of the projection-mate node; the unit and transpose normalization come from the coefficient adjunction; OK. (2) b and d come from ring-sheaf-change-adjunction, but the step used the constant-coefficient inverse-image isomorphisms c_A, c_B (hypotheses of that node) and the square a_T c_A = c_B u^{-1}a_V with no node. C1, FIXED by citing prop-weil-pbc-proetale-constant-ring-map and writing the square out; a tool_use was added. (3) The representative square was checked: flat-term K-flat P and Q, L_A exact and preserving K-flatness, cones P⊗acyclic, bidegree maps commute with the (-1)^p differential, extended by descent. The map v now also cites the prop. (4) Types checked: χ = λ^♭; the adjunct compatibility at M'=S_V N, N'=S_T M; the transposed map is (ε⊗1)(1⊗v)μ, which is the defining map of α_{B_V} in lem-weil-pbc-ringed-projection-mate-exact. (5) Elementary transpose formula. Edge cases: u=id, B=0, U=∅, nonflat Z/4→Z/2 with unbounded Tor; no boundedness or flatness is used. Duplicate search: étale scalar-mate-projection (bounded-below étale), the sfb étale/pro-étale scalar mates, the sp scalar cocycle, the compact-support and integral-quotient versions; none states this. The item is still unsplit in live. The 9 declared tool uses are generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleScalarMateNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtaleScalarMateNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarMateRestriction",
+   "AlgebraicGeometry.ProEtale.scalarMateCoefficient",
+   "AlgebraicGeometry.ProEtale.scalarMateCoefficientComplex",
+   "AlgebraicGeometry.ProEtale.scalarMateOrdinaryTensor",
+   "AlgebraicGeometry.ProEtale.scalarMateTensorSection",
+   "AlgebraicGeometry.ProEtale.IsScalarMateOrdinaryTensor",
+   "AlgebraicGeometry.ProEtale.scalarMateOrdinaryTensorIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.scalarMateOrdinaryTensorIso",
+   "AlgebraicGeometry.ProEtale.scalarMateRestrictionPush",
+   "AlgebraicGeometry.ProEtale.scalarMateOrdinaryComplexIso",
+   "AlgebraicGeometry.ProEtale.IsScalarMateDerivedTensor",
+   "AlgebraicGeometry.ProEtale.scalarMateDerivedTensorIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.scalarMateDerivedTensorIso",
+   "AlgebraicGeometry.ProEtale.scalarMateUnit",
+   "AlgebraicGeometry.ProEtale.scalarMateUnitPullback",
+   "AlgebraicGeometry.ProEtale.scalarMateCoefficientPullback",
+   "AlgebraicGeometry.ProEtale.scalarMateDerivedCoefficientPullback",
+   "AlgebraicGeometry.ProEtale.proEtaleScalarMateNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/ProEtaleScalarMateNormalization.lean",
+  "statement": "theorem proEtaleScalarMateNormalization {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {T V : Scheme.{u}} (f : T ⟶ V) (aV : Scheme.ProEtaleTensorModel V (Scheme.proEtaleConstantRing V A)) (aT : Scheme.ProEtaleTensorModel T (Scheme.proEtaleConstantRing T A)) (M : Scheme.proEtaleDerivedCategory T A) : ((scalarMateDerivedTensorIso φ V aV).inv.app ((directImageConstantPush A f).obj M) ≫ (scalarMateRestriction φ V).mapDerivedCategory.map ((directImageScalarComparison φ f).app M) ≫ (scalarMateRestrictionPush φ f).hom.app ((directImageScalarExtension φ T).obj M) ≫ (directImageConstantPush A f).map ((scalarMateDerivedTensorIso φ T aT).hom.app M) = CategoryTheory.derivedProjectionFormulaMate (Scheme.proEtaleConstantRingDerivedPullback A f) (directImageConstantPush A f) (directImageConstantAdjunction A f) aV.tensor aT.tensor (Scheme.proEtaleCanonicalTensorComparison f (Scheme.proEtaleConstantRing V A) (Scheme.proEtaleConstantRing T A) (Scheme.proEtaleConstantRingComparison f A) aV aT) M (DerivedCategory.Q.obj (scalarMateCoefficientComplex φ V)) ≫ (directImageConstantPush A f).map (aT.tensor.map (Prod.mkHom (𝟙 M) (scalarMateDerivedCoefficientPullback φ f).hom))) ∧ ((Scheme.proEtaleConstantRingDerivedPullback B f).map ((directImageScalarComparison φ f).app M) ≫ (directImageConstantAdjunction B f).counit.app ((directImageScalarExtension φ T).obj M) = (directImageScalarPullbackIso φ f).hom.app ((directImageConstantPush A f).obj M) ≫ (directImageScalarExtension φ T).map ((directImageConstantAdjunction A f).counit.app M))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de27d15b5",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Identical re-push of the PASSed c9154b16 (module sha256 da1b7f3b, same dag/nodes and lean trees; only base files and a report self-check section differ); returned at landing only for a Sandbox0 60 s timeout. All 9 stmt_dep records equal side-live; only the item's lean field differs. Re-checked: χ = mateEquiv of directImageScalarPullbackIso (λ) for the A/B geometric adjunctions; conjunct 1 types match derivedProjectionFormulaMate (E=M, F=B_V[0]) ≫ Ru_*(1⊗v) against h_V⁻¹, U_V(χ), d, Ru_*(h_T); conjunct 2 is the node's counit equation; h and d are ∃!-pinned, nonflat B kept, no extra hypotheses; theorems sorry only, docstrings and both report sections present. Compile: clean 44.0 s at load ~176 but 5 timeouts at load 170-237. Kernel hot spots are in dependency interfaces: a.representative.hom of ProEtaleTensorModel (8-10 s alone) and the choose from proEtaleProjectionUnit_existsUnique (8-12 s _proof re-check). Linter-off, .1 projection, direct choose and import drops gave no reliable gain back to back. Maintainer: land at low load (≲120) or raise the limit for this module; a future dependency-side speed-up is a named predicate and chosen iso for proEtaleProjectionUnit_existsUnique. Advisories A1-A3 as in the c9154b16 review."
  }
 }

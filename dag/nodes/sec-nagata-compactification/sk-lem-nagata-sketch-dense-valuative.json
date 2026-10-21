@@ -366,5 +366,28 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-99d63b86e (reviewer sub-agent of L); spot-checked: This head repairs returned head f7b2971e, whose landing was refused because lemma-nagata-scheme-image-ideal-qc changed. I diffed it against run f7b2971e. The item statement, steps 1-2 and 4-16, both new Mathlib leaves (lem-nagata-polynomial-projection-flat: Flat.SpecMap_iff Flat.lean:67, flat_algebraMap_iff, MvPolynomial free instance, Module.Flat.of_free; lem-nagata-universally-specializing-closed: universallyClosed_eq_universallySpecializing UniversallyClosed.lean:171, Stacks 01KC) and the unit file are identical. Only steps 3 and 5 changed. Of the 26 dependencies present in both snapshots, only the scheme-image interface changed its statement; the other reused root statements were re-read and still fit. Step 3: T->V is affine, hence qc, so the current interface gives Z=SIm=Spec(B/J) (kernel node (1)) with support V(ker)=closure(h(T)) containing x. Injectivity of O_Z->t_*O_T makes ker(t)=0, so SIm(t)=Z. This is the root statement used exactly. Step 5: the root of dense-flat-pullback (t qcqs, SIm(t)=Z, q flat) gives SIm(H->Spec P)=Spec P. H->Spec P is affine, hence qc, and the support clause gives a dense range. I re-checked steps 1-16 against Stacks 0894: affine reduction, choice of one affine piece T (avoids requiring h quasi-separated), polynomial surjection, probe centred at ker(pi), tau, the dominating A'' with K∩A''=A, the composite ring C, uniqueness before descent, affine descent via Q, base change, specialization lifting, and the diagonal argument, which is not circular. Edge cases checked: W or D empty, h=id, A=K, non-reduced V, line with doubled origin. The item is not dropped, has no repair note and is still imported live. FIX re-applies my two repairs from f7b2971e, which the refused landing dropped. (1) B9/C5: blueprint.same_as=[lemma-nagata-dense-source-valuative]. That same-unit unsplit node's blueprint_update is verbatim the item's first two clauses, and its root statement is a special case. (2) Step 16: the older unit form now needs a dense open whose inclusion is a quasi-compact morphism. Maintainer note: when dense-source-valuative is split, it should cite this item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "WeilConjectures.Compactification.ValuativeCriterion",
+  "declaration": "AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant",
+  "declarations": [
+   "AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant",
+   "AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant",
+   "AlgebraicGeometry.IsProper.of_valuativeCriterion_of_isDominant"
+  ],
+  "statement": "theorem UniversallyClosed.of_valuativeCriterion_of_isDominant {U X S : Scheme.{u}} (f : X ⟶ S)\n    [QuasiCompact f] (h : U ⟶ X) [QuasiCompact h] [IsDominant h]\n    (H : ValuativeCriterion.RelativeTo f h) : UniversallyClosed f",
+  "branch": "slopmaster2",
+  "by": "NQ",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream statements, read locally and confirmed by scompile.py --source on the live server. The three recorded declarations respectively give universal closedness under QuasiCompact f, separatedness under QuasiSeparated f (without QuasiCompact f), and properness under finite type and quasi-separatedness. IsDominant h means dense topological image; ValuativeCriterion.RelativeTo f h is exactly the unique-lift hypothesis for valuation squares whose generic map factors through h. No new module or statement correction is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fc877343b",
+  "group": "NQ",
+  "result": "pass",
+  "note": "existing:true record to 3 proved live theorems (UniversallyClosed/IsSeparated/IsProper.of_valuativeCriterion_of_isDominant); statement verbatim in live file; only lean field differs from side-live node; QuasiCompact h + IsDominant h + RelativeTo (ValuativeCommSq, Unique LiftStruct) = node hypotheses; separated clause without qc f; proper via qc+LOFT+qs; Type-u probes is a weaker hypothesis; 5 dep records match; same_as covers lemma-nagata-dense-source-valuative; IsProper decl present in published olean.server; cosmetic: branch label slopmaster2 though IsProper only in live tree"
  }
 }

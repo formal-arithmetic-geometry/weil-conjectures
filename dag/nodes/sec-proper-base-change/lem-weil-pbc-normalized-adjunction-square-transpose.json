@@ -193,5 +193,23 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-44c6af2ff (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged, 5 steps, 0 new nodes) in full against the cited lem-weil-pbc-adjunction-of-natural-bijection (Mathlib mkOfHomEquiv/homEquiv_unit; Psi(a)=G(a)∘eta) and Stacks categories.tex 0037 (definition-adjoint l.3344, description (1) l.3378). Typing checked for all three hypotheses and the conclusion. Step 1: T_0(1)=eta^0 and T_D(alpha_A)=eta;R(alpha_A), and the normalization at h=1_FA gives (1). Step 2: the unit square at X=q_A A. Step 3: naturality of beta at alpha_A. Step 4: (1) plus the augmentation square at I=FA, with the correct component rho_{GFA}. Step 5: naturality of rho at eta^0_A. Steps 3-5 are genuinely elementary, and no inverse or faithfulness is used. Small cases: all identities give transpose(id)=unit; scalar comparisons give ab=ba with a=0 allowed; empty A is vacuous. The hypotheses match exactly what parent ringed-slice-pullback-mate-normalization Steps 2 and 4 supply and use. No duplicate in the DAG (closest: kun-derived-adjoint-square-comparison, pur-supported-hom-adjunction-transpose, sfb-equivalence-square-inverse-mate-coherence, all different results). The item and its citer are not in route-pivot-dropped, and the live node is still unsplit. No SGA cited. Accepted tool_use: the sk-def-exchange Mathlib leaf for the generic unit formula."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NormalizedAdjunctionSquareTranspose",
+  "declaration": "CategoryTheory.Adjunction.normalizedAdjunctionSquare_transpose",
+  "file": "lean/Sheaf/CategoryTheory/NormalizedAdjunctionSquareTranspose.lean",
+  "statement": "theorem normalizedAdjunctionSquare_transpose {A : Type uA} {B : Type uB} {Av : Type uAv} {Bv : Type uBv} {E : Type uE} {F : Type uF} {Ev : Type uEv} {Fv : Type uFv} [Category.{vA} A] [Category.{vB} B] [Category.{vAv} Av] [Category.{vBv} Bv] [Category.{vE} E] [Category.{vF} F] [Category.{vEv} Ev] [Category.{vFv} Fv] (qA : A ⥤ E) (qB : B ⥤ F) (qAv : Av ⥤ Ev) (qBv : Bv ⥤ Fv) (r0 : A ⥤ Av) (s0 : B ⥤ Bv) (r : E ⥤ Ev) (s : F ⥤ Fv) (Gv : Bv ⥤ Av) {F0 : A ⥤ B} {G0 : B ⥤ A} {L : E ⥤ F} {R : F ⥤ E} {Lv : Ev ⥤ Fv} {Rv : Fv ⥤ Ev} (adj0 : F0 ⊣ G0) (adjD : L ⊣ R) (adjV : Lv ⊣ Rv) (alpha : qA ⋙ L ⟶ F0 ⋙ qB) (iota : G0 ⋙ qA ⟶ qB ⋙ R) (iotaV : Gv ⋙ qAv ⟶ qBv ⋙ Rv) (tau : G0 ⋙ r0 ⟶ s0 ⋙ Gv) (theta : r ⋙ Lv ⟶ L ⋙ s) (beta : R ⋙ r ⟶ s ⋙ Rv) (rho : qA ⋙ r ≅ r0 ⋙ qAv) (zeta : qB ⋙ s ≅ s0 ⋙ qBv) (hHom : ∀ (a : A) (i : B) (h : F0.obj a ⟶ i), adjD.homEquiv (qA.obj a) (qB.obj i) (alpha.app a ≫ qB.map h) = qA.map (adj0.homEquiv a i h) ≫ iota.app i) (hUnit : ∀ x : E, adjV.unit.app (r.obj x) ≫ Rv.map (theta.app x) = r.map (adjD.unit.app x) ≫ beta.app (L.obj x)) (hAugmentation : ∀ i : B, r.map (iota.app i) ≫ beta.app (qB.obj i) ≫ Rv.map (zeta.hom.app i) = rho.hom.app (G0.obj i) ≫ qAv.map (tau.app i) ≫ iotaV.app (s0.obj i)) (a : A) : adjV.homEquiv (r.obj (qA.obj a)) (qBv.obj (s0.obj (F0.obj a))) (theta.app (qA.obj a) ≫ s.map (alpha.app a) ≫ zeta.hom.app (F0.obj a)) = rho.hom.app a ≫ qAv.map (r0.map (adj0.unit.app a) ≫ tau.app (F0.obj a)) ≫ iotaV.app (s0.obj (F0.obj a))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-38208a5e8",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: functor-composition directions of alpha/iota/iotaV/tau/theta/beta/rho/zeta, full ∀ in hHom/hUnit/hAugmentation, rho at G0 i, conclusion endpoints; Mathlib homEquiv = unit ≫ G.map matches node convention; five-step calculation verified mentally, no inverses needed. Node unchanged vs live except lean; lean.statement verbatim; not dropped, not live-stated. No duplicate in Mathlib/project. No hollow defs, sorry only, source and blueprint docstrings plus five proof steps, 16 independent universes, single stmt_dep import. No changes, no compile; worker reports clean scompile."
  }
 }

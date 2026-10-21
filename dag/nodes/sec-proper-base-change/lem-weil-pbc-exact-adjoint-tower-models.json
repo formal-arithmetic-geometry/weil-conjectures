@@ -354,5 +354,31 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-344bad7bb (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps, every cited node's statement, the parent lem-weil-pbc-direct-image-roos-normalization, and the sources: Stacks 0A07, 0941, 0BK6, 08BJ and the main-20261015 proof of prop-weil-pbc-direct-image-limits. Live and side-live still have the item unsplit with no proof, and there is no repair note. The statement is byte-identical to live, there are no new nodes, and the only new stmt_dep is def-weil-category-product, which the products in the statement use. Hypotheses check out step by step. Arbitrary-ring Grothendieck nodes cover Mod and Tow. 079P resolutions have injective terms. 08BJ is applied to the levelwise exact F^Tow and to Δ⊣lim. Tower evaluation gives the evaluated K-injectives. 0BK6 holds for any abelian category with degreewise products and needs no exact products. Total-derived units are invertible on K-injectives, so all four unit identifications follow. I recomputed the shift square: π_n c G(s_I) = G(t_n)G(π_{n+1}) = π_n s_J c. The Roos-complex node gives (y,x)↦(-dy-(1-s)x,dx) and (0,ι), which matches the abstract cone convention. Step 11's fibre of −(1−s) has d^-(y,x) = (-dy+ux, dx), which I checked against Mathlib's mappingCone order. The map a(y,x)=(-y,x) intertwines the differentials and fixes (0,λ), so κ_T Q(j_T) = η^lim exactly. TR2 inverse rotation gives (p[-1],u,i) = (r,u,b). The declared tool uses lem-pur-kinjective-degreewise-existence and lem-pc-ringed-space-product-kinjective are generic black boxes and are accepted. The other cited nodes are on the route through sk-def-exchange or are Mathlib leaves. There is no cycle, the edge cases (zero, identity adjunction, constant and zero-transition towers) are fine, and no fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ExactAdjointTowerModels",
+  "declaration": "CategoryTheory.ExactAdjointTowerModels.exists_models",
+  "declarations": [
+   "CategoryTheory.ExactAdjointTowerModels.tower",
+   "CategoryTheory.ExactAdjointTowerModels.DerivedModel",
+   "CategoryTheory.ExactAdjointTowerModels.negativeCoordinates",
+   "CategoryTheory.ExactAdjointTowerModels.NormalizedRoos",
+   "CategoryTheory.ExactAdjointTowerModels.Models",
+   "CategoryTheory.ExactAdjointTowerModels.exists_models"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ExactAdjointTowerModels.lean",
+  "statement": "theorem exists_models {C D : Type u} [SmallCategory C] [SmallCategory D] (τ : GrothendieckTopology C) (σ : GrothendieckTopology D) (R : Sheaf τ RingCat.{u}) (S : Sheaf σ RingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} R)] [HasDerivedCategory.{w} (ringedSiteModules.{u} S)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u} R)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ ringedSiteModules.{u} S)] (F : ringedSiteModules.{u} S ⥤ ringedSiteModules.{u} R) (G : ringedSiteModules.{u} R ⥤ ringedSiteModules.{u} S) [F.Additive] [G.Additive] (adj : F ⊣ G) (hF : ∀ E : ShortComplex (ringedSiteModules.{u} S), E.ShortExact → (E.map F).ShortExact) : Nonempty (Models G)",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bbbcafa91",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records, module, report, StrictRoosModel/ExactProductsRoosComparison sources, Mathlib MappingCocone. Records: only item lean changed, deps identical to side-live, statement verbatim, report sections present, item not landed live. Every hypothesis and clause matches the node: small sites in one universe, noncommutative RingCat, additive F ⊣ G with F exact, resolution, all K-injectivity claims incl. J injective terms, four unit identifications pinned by e.hom ≫ R(Qq) = unit, derived products via Q.mapCone limit, c/beta NatIsos on all tower complexes pinned by components, shift and 1−s squares, localized naturality via representative independence; exact products only in exact_products. NormalizedRoos: sign pinned as biprod.map(−1,1) in roosχ coordinates (hand-checked cone/fibre differentials), negative pinned by the comparisonIso normalization, ordinary by degreewise π, inclusion_sign consistent, κQ(j)=η, triangles use mappingCocone.triangle (fst = roosProj) with commShift. Edge cases ok; one universe w is not a restriction. Docstrings/H8/H9 ok; only sorry is the theorem proof. No recompile per 2026-10-21 rule; no FIX. Advisories: ExactProductsRoos plain defs from a theorem node that was already a stage-1 stmt_dep (not added, so not H2); product duplicates roosP as a functor; proof-only imports."
  }
 }

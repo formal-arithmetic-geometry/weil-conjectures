@@ -330,5 +330,40 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-a84ac8145 (reviewer sub-agent of L); spot-checked: Read the item and all nine steps in full; the statement is unchanged and there are 0 new nodes. The item is not superseded (live and side-live have it unsplit), has no repair note and cites no SGA source. The statement is true: theta_r follows from p_r being an epimorphism with kernel ell^r L and from ell^r A=0, without flatness. I tested it on Spec of a separably closed field, on a ramified E with n=3 (ell^2 A=0 but ell A not 0), on the nonflat case A=F_l over Z/l^2, and on the empty scheme. It uses the constant (Z_l)_T exactly as def-coefficient-twists-detailed does, not the completed sheaf. Step checks: 2 has the correct hypotheses for lem-pur-twist-root-transitions, the general-site epi criteria and weak contractibility on the full site (Stacks 0990 proetale.tex:2913, 090K sites.tex:9480), and its recursive lift is correct. 3: the shift-division kernel calculation is correct. 4: the local-lift inverse uses lem-pur-torsion-sheaf-constant-module (2) on a slice and is correct. 5-7: the transitions, the c^v_s composition via adjuncts, and the limit cone without commuting v^-1 with the limit are correct. 8-9: the pure-tensor squares and coherence are correct. Two faults, both fixed. (1) C1: steps 8 and 9 use that the inverse image of a constant ring sheaf is the target constant ring, and its compatibility with composition, but no cited node proves it (def-weil-proetale-inverse-image only defines c^f_A). I cited lem-pe-constant-left-module-inverse-image (closure checked, no cycle), added it to proof_deps and to split_report.tool_uses, and set step 9 to elementary=false. (2) B5: the item-level source was still Stacks 093M completion-flat applied to lem-pur-twist-sheaf-locally-free (2), which the proof no longer uses, although the report claims it was changed. I replaced it with 0990/090K and 03EK/03EL. Overlap with lem-pur-twist-sheaf-locally-free and lem-pur-twist-root-local-models is not a duplicate: neither states the normalized theta_r, the transition equation or the b_v square. I accept the declared tool_uses as generic sheaf tools that replace no step of unit sk-prop-an.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AmbTateRootProjectionReduction",
+  "declaration": "AlgebraicGeometry.Scheme.ambTateRootProjectionReduction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.AmbTateBase",
+   "AlgebraicGeometry.Scheme.AmbTateLevel",
+   "AlgebraicGeometry.Scheme.ambTateConstantRootModule",
+   "AlgebraicGeometry.Scheme.ambTateScalar",
+   "AlgebraicGeometry.Scheme.ambTateReduced",
+   "AlgebraicGeometry.Scheme.ambTateReducedPure",
+   "AlgebraicGeometry.Scheme.ambTateFiniteScalar",
+   "AlgebraicGeometry.Scheme.ambTateFiniteRoots",
+   "AlgebraicGeometry.Scheme.ambTateFinitePure",
+   "AlgebraicGeometry.Scheme.ambTateSourcePure",
+   "AlgebraicGeometry.Scheme.ambTateDirectImage",
+   "AlgebraicGeometry.Scheme.ambTateDirectSection",
+   "AlgebraicGeometry.Scheme.AmbTateRootProjectionData",
+   "AlgebraicGeometry.Scheme.ambTateRootProjectionReduction"
+  ],
+  "file": "lean/Sheaf/Paper/AmbTateRootProjectionReduction.lean",
+  "statement": "theorem ambTateRootProjectionReduction : Nonempty (AmbTateRootProjectionData l E n)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The specified isomorphisms and canonical maps are packaged in AmbTateRootProjectionData, with their pure-tensor normalizations and all transition, inverse-image and coherence equations. Pullback equations are stated equivalently on their direct-image adjuncts; identity and composition use the canonical actual fibre-product identifications. All positive coefficient and root exponents are indexed by n+1 and r+1. Only the existence theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae9262cbb",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Single new module AmbTateRootProjectionReduction plus the item lean record; dep nodes byte-identical to live. All clauses match: j/j_pure (a⊗(b⊗x)↦(a·q b)⊗x); theta/theta_pure via limit.π of the recorded root tower (index r↦μ_{l^{r+1}}); AmbTateLevel requires only (l^{r+1}:A)=0 (no flatness, no e|n); D_r via the unique ZMod.castHom scalar map; transition (power map P) with _pure/_theta/_isIso/_id/_comp; c_L as direct-image adjunct pinned by c_projection+c_unique, using the recorded proEtaleRootsOfUnityDirectImageMap; b_v and delta adjuncts pinned on pure tensors; square = exact adjunct of the node's square; c/b id/comp via Over.pullbackId/pullbackComp (directions checked). P_T = purTwistFiniteOne = finiteCoefficientTwist at m=1. AmbTateBase = l unit in stalks, empty scheme allowed; single universe u. No hollow data; docstrings carry the source places and all 9 steps; sorry only; lean.statement verbatim; plain imports are the proof_deps modules. No compile run (no file changed); worker reports a clean scompile. Notes: the item source still says Tag 093M (the Q19 stage-1 source fix is missing from live; re-apply); purScalarSection/purTwist* owners outside stmt_deps and helpers parallel to the PurityFiniteKummerLevel kummer* helpers are advisory."
  }
 }

@@ -16,7 +16,8 @@
   "def-weil-abstract-derived-category",
   "sk-def-sfb-derived-extension-of-scalars",
   "def-pc-kflat-complex",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-sfb-scalar-hom-comparison-data"
  ],
  "proof": [
   {
@@ -263,5 +264,31 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-367305dab (reviewer sub-agent of L); spot-checked: First split; statement byte-identical to live (live unsplit), no repair note, not dropped, no new nodes. Read 03EK/0GMW in sites-modules.tex and blueprint det-prop-scalar-six-pullback proof (1). Step 1 (Res identity on underlying sheaves, r·n=a_U(r)n): elementary, correct. Step 2: lem-pe-internal-section-tensor-comparison is applied to Res_a S and M; the coequalizers agree because S is commutative; S-linearity and naturality are checked on pure tensors via lem-pc-sites-sheaf-tensor-bilinear-universal. Step 3: explicit Hom transposes, balancing and unit/counit; elementary. Step 4: exact equivalences localize to equivalences; Res is exact. Step 5: flat-term K-flat resolutions on (C,R_sec) via lem-pc-kflat-resolution, pulled back via preservation/reflection of K-flatness; universal derived functor via lem-pur-derived-change-of-rings, conjugated to the internal side; no functorial-flat-resolution hypothesis assumed. Step 6: lem-pur-sheaf-ring-derived-hom-comparison inputs supplied; the unit and counit roofs were checked. Edge cases a=id, S=0 and Z/4→F_2 (no flatness) checked. Duplicate search over section-ring/sectionwise scalar nodes (internal-module-operations-transport, internal-section-derived-tensor-comparison, module-object-ringed-site-derived-comparison, extend-scalars-kflat, det-sp-scalar-extension-functor): none duplicates. Five generic tool_uses accepted (pe tensor comparison, pc bilinear universal, pc kflat resolution, pur derived change of rings, pur derived hom comparison). Advisory: commutativity of S is implicit (E_S requires it) rather than stated."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.InternalSectionScalarAdjunction",
+  "declaration": "CategoryTheory.InternalAbelianSheafModule.internal_section_scalar_adjunction",
+  "declarations": [
+   "CategoryTheory.InternalAbelianSheafModule.sectionScalarMap",
+   "CategoryTheory.InternalAbelianSheafModule.internalScalarGenerator",
+   "CategoryTheory.InternalAbelianSheafModule.scalarInternalModules",
+   "CategoryTheory.InternalAbelianSheafModule.InternalSectionScalarAdjunction",
+   "CategoryTheory.InternalAbelianSheafModule.internal_section_scalar_adjunction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/InternalSectionScalarAdjunction.lean",
+  "statement": "theorem internal_section_scalar_adjunction : InternalSectionScalarAdjunction J a",
+  "branch": "sheaf-dag",
+  "by": "Q26",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The existence proposition packages exactly the ordinary and derived scalar comparison clauses, including identity restriction components, balanced generators, Hom transposes and the flat-term K-flat representative square. The internal universal derived pair uses the existing IsLeftDerivedFunctor predicate, without new resolution hypotheses. The internal derived adjunction is independently pinned by the ordinary-unit compatibility through internalCounit and the canonical comap factorization. The eight data witnesses and all normalization properties are stated directly as existentials and conjunctions to avoid expensive generated record auxiliaries; no original clause is dropped or weakened. ScalarDerivedPair is reused through the previously approved landed statement dependency def-sfb-scalar-hom-comparison-data. Returned-review repair of 8c16bc95777c."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a6ffc519",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 8c16bc95 (H3: free internalAdjunction constrained only by derived_transpose). Snapshot diff: only module, item lean record and report changed; node statement and stmt_deps unchanged. New clause internalAdjunction.unit.app (Q P) ≫ D(comap a).map (internalCounit.app P) ≫ mapDerivedCategoryFactors.hom.app _ = Q.map (ordinary chain unit) is exactly Mathlib Adjunction.derivedη_fac_app (β = factors.inv), i.e. the specified derivedExtendRestrictAdjunction normalization. It pins the adjunction uniquely given the IsLeftDerivedFunctor pair (an automorphism θ of the left adjoint with θ≫c=c must be 1) and uses no sectionwise data, so derived_transpose is now non-tautological. Structure→∃/∧ Prop repackaging keeps every field verbatim and in order; lean.statement verbatim. One sorry (the proof), lines ≤100, docstrings OK, no added hypotheses or flatness. No compile run (no change); worker reports 50.2 s library compile, close to the 60 s limit (advisory)."
+ }
 }
