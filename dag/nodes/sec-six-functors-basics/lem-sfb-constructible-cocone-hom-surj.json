@@ -18,72 +18,66 @@
  ],
  "proof": [
   {
-   "text": "Put $\\Omega=\\Qlb$ and let $I$ be the poset of finite subfields containing $E,F$. It is small, nonempty and directed by [det-def-sfb-qlbar-condensed-subextensions]. Its inclusion in all finite subfields is final: for any $G$, the fields containing $E,F,G$ form a nonempty directed upper poset. Since $L_F$ is bounded [def-sfb-dcons-subfield], apply [lem-weil-pbc-condensed-coefficient-complex-presentation]. Obtain $N,c$ with a common termwise lower bound and isomorphisms $e_H:QN_H\\cong U_{H,E}T_{F,H}L_F$ and $e_\\Omega:Q(c.\\mathrm{pt})\\cong U_{\\Omega,E}T_{F,\\Omega}L_F$, satisfying its compatibility equation.",
+   "text": "Take the small final tail of the finite field index above a common upper bound of E and F. Since L is bounded below, the coefficient complex presentation supplies a uniformly bounded-below complex diagram N, its colimit c, stage and vertex isomorphisms, and the canonical adjunction compatibility equation.",
    "uses": [
-    "det-def-sfb-qlbar-condensed-subextensions",
-    "def-sfb-dcons-subfield",
+    "def-weil-finite-subextension-directed-set",
     "lem-weil-pbc-condensed-coefficient-complex-presentation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
-    "place": "Paragraph 2: uniformly bounded-below Hom continuity and finite cone devissage"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.md",
+    "place": "node lem-sfb-constructible-cocone-hom-surj, order 1770"
    }
   },
   {
-   "text": "By [lem-sfb-condensed-bounded-hom-continuity], applied to $K_E,N,c$, the canonical map $\\varinjlim_H\\operatorname{Hom}(K_E,QN_H)\\to\\operatorname{Hom}(K_E,Q(c.\\mathrm{pt}))$ is bijective. All hypotheses hold by step 1 and the given bounded constructibility of $K_E$.",
+   "text": "For the localized canonical cocone, shifted additive Hom continuity is invariant under isomorphisms and shifts. Hom from zero is zero, and homColimitProperty_extensions supplies closure under distinguished extensions. Constructible single sheaves satisfy the property by sheaf Hom continuity. Bounded cohomological devissage gives continuity for K. Representatives in the filtered abelian-group colimit then factor the required morphism through a stage; transport from the canonical colimit cocone to the supplied one by its unique isomorphism.",
    "uses": [
-    "lem-sfb-condensed-bounded-hom-continuity"
+    "lem-weil-pbc-condensed-sheaf-ext-continuity",
+    "lem-weil-pbc-condensed-finite-model-proof-api",
+    "lem-sfb-dc-module-devissage",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-pbc-hom-colimit-property",
+    "lem-weil-pbc-hom-colimit-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
-    "place": "Paragraph 2: uniformly bounded-below Hom continuity and finite cone devissage"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.md",
+    "place": "node lem-sfb-constructible-cocone-hom-surj, order 1770"
    }
   },
   {
-   "text": "Use the adjunction bijections $a_H,a_\\Omega$ of [def-weil-pbc-finite-derived-tensor-comparison]. Let $v=e_\\Omega^{-1}\\circ a_\\Omega(\\varphi)$. Step 2 and [lem-weil-pbc-filtered-colimit-modules-elementwise](1), for $\\mathbf Z$-modules, give $H\\in I$ and $u:K_E\\to QN_H$ with $v=Q(c.\\iota_H)\\circ u$. Set $g=a_H^{-1}(e_H\\circ u):T_{E,H}K_E\\to T_{F,H}L_F$.",
+   "text": "Transpose the given ambient arrow under the E-to-closure adjunction, factor it as above, and transpose the finite-stage arrow back under the E-to-H adjunction. Cancel the closure adjunction using the presentation compatibility equation. Prove directly that the constructible comparison components map under the full inclusion to the fixed ambient tensor comparisons: unfold fullyFaithfulCancelRight and use map_preimage. Lift the finite-stage arrow to the full constructible subcategory to obtain exactly HomSurj.",
    "uses": [
     "def-weil-pbc-finite-derived-tensor-comparison",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
-    "place": "Paragraph 2: uniformly bounded-below Hom continuity and finite cone devissage"
-   }
-  },
-  {
-   "text": "The compatibility equation of [lem-weil-pbc-condensed-coefficient-complex-presentation] gives $a_\\Omega(\\theta_{F,H}\\circ T_{H,\\Omega}(g)\\circ\\theta_{E,H}^{-1})=e_\\Omega\\circ Q(c.\\iota_H)\\circ u=a_\\Omega(\\varphi)$. Cancel the bijection $a_\\Omega$. By [lem-sfb-coefficient-cocone-comparison-agreement], these are exactly the cocone comparisons. By [lem-sfb-extend-subfield-constructible] both endpoints of $g$ are bounded constructible; fullness [def-sfb-dcons-subfield] makes $g$ an arrow there. Since $H\\supseteq E,F$, this proves (Hom-surj) for [def-sfb-constructible-cocone].",
-   "uses": [
     "lem-weil-pbc-condensed-coefficient-complex-presentation",
-    "lem-sfb-coefficient-cocone-comparison-agreement",
-    "lem-sfb-extend-subfield-constructible",
-    "def-sfb-dcons-subfield",
-    "def-sfb-constructible-cocone"
+    "def-sfb-constructible-cocone",
+    "def-sfb-constructible-extend-comp-iso"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
-    "place": "Paragraph 2: uniformly bounded-below Hom continuity and finite cone devissage"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.md",
+    "place": "node lem-sfb-constructible-cocone-hom-surj, order 1770"
    }
   }
  ],
  "proof_deps": [
-  "det-def-sfb-qlbar-condensed-subextensions",
-  "def-sfb-dcons-subfield",
+  "def-weil-finite-subextension-directed-set",
   "lem-weil-pbc-condensed-coefficient-complex-presentation",
-  "lem-sfb-condensed-bounded-hom-continuity",
-  "def-weil-pbc-finite-derived-tensor-comparison",
+  "lem-weil-pbc-condensed-sheaf-ext-continuity",
+  "lem-weil-pbc-condensed-finite-model-proof-api",
+  "lem-sfb-dc-module-devissage",
   "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "lem-sfb-coefficient-cocone-comparison-agreement",
-  "lem-sfb-extend-subfield-constructible",
-  "def-sfb-constructible-cocone"
+  "def-weil-pbc-hom-colimit-property",
+  "lem-weil-pbc-hom-colimit-extension",
+  "def-weil-pbc-finite-derived-tensor-comparison",
+  "def-sfb-constructible-cocone",
+  "def-sfb-constructible-extend-comp-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.proof.md",
-  "place": "Short assembly of coefficient presentation, bounded-constructible continuity, stage representatives, and comparison agreement"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-hom-surj.md",
+  "place": "Hom paragraph; canonical Hom continuity, extension closure and bounded devissage, from existing declared inputs.",
+  "group": "F5"
  },
  "mathlib_searches": [
   {
@@ -270,5 +264,15 @@
   "group": "NM",
   "result": "pass",
   "note": "existing:true binding of AlgebraicGeometry.ProEtale.constructibleCocone_homSurj (TwoColimit.lean l.475, section vars Scheme.{u}, Fact ℓ.Prime, NoetherianSpace X). Clause-by-clause match with node/source: E,F in FiniteIntermediateField ℓ, K,L in BoundedConstructible via constructibleCocone, ∃ k ≥ i,j and g at stage k, f = iso.inv ≫ Φ_k.map g ≫ iso.hom (transitivity-conjugated). No stronger hypotheses, no universe restriction, statement verbatim, stmt_dep records correct. Delivery changes only the item's lean record. Edge cases (empty X, zero objects, E=F=H, non-locally-Noetherian X) covered. Probe import of TwoColimit fails on both side nt_compile and live lcompile with the pre-existing duplicate etaleModuleCohomology_isColimit_of_isFiltered (Sheaf/ vs WeilConjectures/ EtaleCohomologyFilteredColimit.lean:154), a project environment fault the delivery cannot fix. Maintainer note: dedupe or re-export that module."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261021T225118-L-3772049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

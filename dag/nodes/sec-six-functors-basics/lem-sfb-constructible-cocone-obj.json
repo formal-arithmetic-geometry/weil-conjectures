@@ -18,88 +18,73 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-sfb-constructible-cocone-ambient-realization] to identify the coefficient and constructibility conventions and to realize the specified cocone by triangulated functors $\\Phi_E:\\mathcal C_E\\to\\mathcal D=D(\\operatorname{Mod}_{\\Omega_X})$, with its given transition comparisons.",
+   "text": "Use the specific finite-field Serre theorem through the finite-model proof API to equip each finite bounded-constructible category with inherited triangles. The closure extensions are exact, so their derived functors are triangulated after transporting the termwise shift structure. Compose their constructible restrictions with the full ambient inclusion to form an ambient cocone.",
    "uses": [
-    "lem-sfb-constructible-cocone-ambient-realization"
+    "lem-weil-pbc-condensed-finite-model-proof-api",
+    "lem-sfb-qlbar-flat",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-sfb-constructible-cocone"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph: scalar extension, inherited triangles, and the connecting morphism; Modules paragraph: the coefficient and local-presentation conventions"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.md",
+    "place": "node lem-sfb-constructible-cocone-obj, order 1772"
    }
   },
   {
-   "text": "Put $P(Y)\\iff\\exists E,\\exists K_E\\in\\mathcal C_E,\\ Y\\cong\\Phi_E(K_E)$. The field index is nonempty. Since the vertex is full in $\\mathcal D$, Hom-surjectivity lifts every ambient arrow between two images to a common finite stage, with precisely the comparisons from step 1. Apply the directed-triangulated-image lemma: $P$ is triangulated. Composing its witnessing isomorphisms makes $P$ isomorphism-closed.",
+   "text": "Fullness turns constructible HomSurj into ambient HomSurj. By the directed-triangulated-image theorem the union P of the ambient essential images is triangulated. Composing its witness isomorphisms shows that P is isomorphism closed.",
    "uses": [
-    "def-weil-finite-subextension-directed-set",
-    "def-sfb-dcons-qlbar",
     "lem-sfb-constructible-cocone-hom-surj",
     "lem-weil-pbc-directed-triangulated-image"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph: scalar extension, inherited triangles, and the connecting morphism; Modules paragraph: the coefficient and local-presentation conventions"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.md",
+    "place": "node lem-sfb-constructible-cocone-obj, order 1772"
    }
   },
   {
-   "text": "For a constructible $\\Omega_X$-module $M$, finite-presentation descent gives a constructible $E_X$-module $M_E$ and $\\Omega_X\\otimes_{E_X}M_E\\cong M$, using the identification in step 1. The single complex $M_E[0]$ is bounded constructible: only $H^0=M_E$ is nonzero, and zero has presentation $0\\to0\\to0$. By the termwise exact scalar-extension realization in step 1 and exact-derived-functor compatibility with single complexes, $\\Phi_E(M_E[0])\\cong M[0]$. Thus $P(M[0])$.",
+   "text": "For every constructible closure-coefficient sheaf M, finite-presentation descent supplies a constructible finite-coefficient sheaf model. Its single complex is bounded constructible by the finite-model proof API. Exact-derived compatibility with single complexes identifies its scalar extension with M[0], so P contains every such single complex.",
    "uses": [
-    "lem-sfb-constructible-cocone-ambient-realization",
     "lem-weil-pbc-condensed-finite-presentation-descent",
-    "sk-def-sfb-bounded-constructible",
-    "def-sfb-finitely-presented-module",
+    "lem-weil-pbc-condensed-finite-model-proof-api",
     "lem-sf-exact-functor-derived-triangulated"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph: scalar extension, inherited triangles, and the connecting morphism; Modules paragraph: the coefficient and local-presentation conventions"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.md",
+    "place": "node lem-sfb-constructible-cocone-obj, order 1772"
    }
   },
   {
-   "text": "Apply finite truncation devissage to $\\Omega_X$ and $P$. Step 2 supplies a triangulated, isomorphism-closed property; step 3 supplies all constructible degree-zero objects. Therefore $P(K)$ for every bounded constructible $K$.",
+   "text": "Apply the proved finite bounded-cohomology devissage to P and the iso-closure of constructible sheaves. It gives an ambient finite model for K. The fully faithful constructible inclusion lifts its ambient isomorphism, proving EssSurjObj for the specified cocone.",
    "uses": [
-    "lem-sfb-dc-module-devissage"
+    "lem-sfb-dc-module-devissage",
+    "def-sfb-dcons-qlbar"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph: scalar extension, inherited triangles, and the connecting morphism; Modules paragraph: the coefficient and local-presentation conventions"
-   }
-  },
-  {
-   "text": "Unpack $P(K)$. Both $K$ and $\\Phi_E(K_E)$ belong to the full cocone vertex, so the ambient isomorphism and its inverse are vertex morphisms. They give exactly (Obj) for the specified cocone.",
-   "uses": [
-    "def-sfb-constructible-cocone",
-    "def-sfb-dcons-qlbar",
-    "sk-def-sfb-filtered-two-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-    "place": "Complexes paragraph: scalar extension, inherited triangles, and the connecting morphism; Modules paragraph: the coefficient and local-presentation conventions"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.md",
+    "place": "node lem-sfb-constructible-cocone-obj, order 1772"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-constructible-cocone-ambient-realization",
-  "def-weil-finite-subextension-directed-set",
-  "def-sfb-dcons-qlbar",
+  "lem-weil-pbc-condensed-finite-model-proof-api",
+  "lem-sfb-qlbar-flat",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-sfb-constructible-cocone",
   "lem-sfb-constructible-cocone-hom-surj",
   "lem-weil-pbc-directed-triangulated-image",
   "lem-weil-pbc-condensed-finite-presentation-descent",
-  "sk-def-sfb-bounded-constructible",
-  "def-sfb-finitely-presented-module",
-  "lem-sf-exact-functor-derived-triangulated",
   "lem-sfb-dc-module-devissage",
-  "def-sfb-constructible-cocone",
-  "sk-def-sfb-filtered-two-colimit"
+  "def-sfb-dcons-qlbar"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.proof.md",
-  "place": "Modules and Complexes paragraphs; unit proof (3), finite sheaf descent followed by Postnikov induction"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-constructible-cocone-obj.md",
+  "place": "Modules and Complexes paragraphs; finite sheaf descent and bounded Postnikov devissage.",
+  "group": "F5"
  },
  "mathlib_searches": [
   {
@@ -222,5 +207,15 @@
   "group": "NQ",
   "result": "pass",
   "note": "Only the item's lean field changes: an existing:true binding to AlgebraicGeometry.ProEtale.constructibleCocone_essSurjObj (TwoColimit.lean:622). It matches the node and main-20261015 source order 1772 clause by clause: Fact ℓ.Prime, X : Scheme.{u}, NoetherianSpace X, EssSurjObj = ∀ K ∃ E (finite intermediate field) ∃ K_E bounded-constructible, Nonempty(Φ_E K_E ≅ K), with the cocone recorded for def-sfb-constructible-cocone. No stronger hypotheses, the statement field is verbatim, the blueprint lean frontmatter names this declaration, the item is not dropped, and edge cases (empty X, ℓ=2, universes) are covered. Compile: a probe importing TwoColimit fails at import on both nt_compile --json (side) and lcompile (live) because etaleModuleCohomology_isColimit_of_isFiltered is declared in both Sheaf.AlgebraicGeometry.EtaleCohomologyFilteredColimit and WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit (line 154), both in TwoColimit's own import closure. This is a project environment fault the delivery cannot repair (it has no Lean file). Maintainer note: make the Sheaf copy a re-export of the WeilConjectures copy; land this binding as is or once the collision is cleared."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261021T225118-L-3772049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

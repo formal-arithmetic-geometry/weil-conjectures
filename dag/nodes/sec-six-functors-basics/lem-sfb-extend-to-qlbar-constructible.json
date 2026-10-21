@@ -18,66 +18,27 @@
  ],
  "proof": [
   {
-   "text": "Put $R=E_X$, $B=\\overline{\\mathbf Q}_{\\ell,X}$ and $A=\\operatorname{Ext}_{R\\to B}$. By [lem-sfb-qlbar-flat] and [sk-def-sfb-change-of-scalars], $A$ preserves finite limits and finite colimits, hence is exact. By [def-sfb-left-derived-exact], the functor $T_{E,\\Qlb}$ of [def-sfb-derived-extend-to-qlbar] is its termwise derived functor. Apply [lem-sfb-extend-scalars-preserves-homology] (flatness holds on every scheme) to obtain $H^n(T_{E,\\Qlb}K)\\cong A(H^n(K))$ for every $n$.",
+   "text": "Apply the already proved generic exact scalar-extension preservation theorem to the actual coefficient inclusion. Its sole extra hypothesis, preservation of finite limits, is the coefficient flatness instance. The generic theorem tensors finite presentations after raw inverse image, retains their covers and stratification, and uses the exact-derived homology comparison to retain the original cohomological bounds.",
    "uses": [
-    "lem-sfb-qlbar-flat",
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-left-derived-exact",
-    "def-sfb-derived-extend-to-qlbar",
-    "lem-sfb-extend-scalars-preserves-homology"
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+    "lem-sfb-qlbar-flat"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-    "place": "First clause: exact extension, termwise computation and homology"
-   }
-  },
-  {
-   "text": "Fix $n$ and set $M=H^n(K)$. The definitions [sk-def-sfb-bounded-constructible], [def-sfb-constructible-module] and [def-sfb-locally-finitely-presented] supply a finite stratification $g_a\\colon X_a\\to X$ and, on each stratum, a pro-étale presentation cover $u\\colon V\\to X_a$. Apply [lem-sfb-internal-extension-inverse-image] first to $g_a$ and then to $u$. The restriction of $A(M)$ on this cover is thereby the scalar extension of the finitely presented restriction of $M$, along the actual ring map $u^{-1}g_a^{-1}(R\\to B)$. By [lem-sfb-internal-extension-finite-presentation] it is finitely presented. Thus the same covers and strata witness constructibility of $A(M)$. Isomorphism invariance here follows by composing the isomorphism in each cokernel presentation with the restricted comparison isomorphism.",
-   "uses": [
-    "sk-def-sfb-bounded-constructible",
-    "def-sfb-constructible-module",
-    "def-sfb-locally-finitely-presented",
-    "lem-sfb-internal-extension-inverse-image",
-    "lem-sfb-internal-extension-finite-presentation",
-    "def-sfb-finitely-presented-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-    "place": "Last clause: presentations on the same strata and covers, using actual inverse-image coefficient rings"
-   }
-  },
-  {
-   "text": "Choose the finite cohomology interval $[a,b]$ of $K$ from [sk-def-sfb-bounded-constructible]. Outside it, step 1 identifies the new cohomology with $A(0)=0$; $A$ preserves zero since it preserves finite colimits by [sk-def-sfb-change-of-scalars]. Inside it, steps 1 and 2 give constructible cohomology, with presentation witnesses transported through their isomorphisms. The criterion [sk-def-sfb-bounded-constructible] proves the conclusion.",
-   "uses": [
-    "sk-def-sfb-bounded-constructible",
-    "sk-def-sfb-change-of-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-    "place": "Boundedness and final assembly"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.md",
+    "place": "node lem-sfb-extend-to-qlbar-constructible, order 1765"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-qlbar-flat",
-  "sk-def-sfb-change-of-scalars",
-  "def-sfb-left-derived-exact",
-  "def-sfb-derived-extend-to-qlbar",
-  "lem-sfb-extend-scalars-preserves-homology",
-  "sk-def-sfb-bounded-constructible",
-  "def-sfb-constructible-module",
-  "def-sfb-locally-finitely-presented",
-  "lem-sfb-internal-extension-inverse-image",
-  "lem-sfb-internal-extension-finite-presentation",
-  "def-sfb-finitely-presented-module"
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "lem-sfb-qlbar-flat"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-  "place": "Original exactness and local-presentation route, with the two internal-module calculations extracted"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.md",
+  "place": "Exactness, local presentations and boundedness, specialized through the existing proved generic theorem.",
+  "group": "F5"
  },
  "mathlib_searches": [
   {
@@ -278,5 +239,15 @@
   "group": "Q40",
   "result": "pass",
   "note": "Exact existing declaration, dependencies, universes, edge cases, ordinary derived route, source confirmation, and required report sections verified."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261021T225118-L-3772049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

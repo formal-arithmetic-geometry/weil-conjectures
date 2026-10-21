@@ -18,61 +18,27 @@
  ],
  "proof": [
   {
-   "text": "Write $G_Z=F_Z\\otimes_{E_Z}-$ for the coefficient inclusion [def-sfb-subfield-coefficient-map]. It preserves finite limits by [lem-sfb-subfield-flat] and finite colimits by [sk-def-sfb-change-of-scalars], hence is exact. By [def-sfb-left-derived-exact], [def-sfb-derived-extend-subfield] and [lem-sfb-extend-scalars-preserves-homology],\n$$H^q(T_{E,F}K)\\cong G_X(H^qK).$$\nThe homology lemma's hypothesis holds on every scheme by the same flatness node; this does not require a bounded representative.",
+   "text": "Apply the already proved generic exact scalar-extension preservation theorem to the actual coefficient inclusion. Its sole extra hypothesis, preservation of finite limits, is the coefficient flatness instance. The generic theorem tensors finite presentations after raw inverse image, retains their covers and stratification, and uses the exact-derived homology comparison to retain the original cohomological bounds.",
    "uses": [
-    "def-sfb-subfield-coefficient-map",
-    "lem-sfb-subfield-flat",
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-left-derived-exact",
-    "def-sfb-derived-extend-subfield",
-    "lem-sfb-extend-scalars-preserves-homology"
+    "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+    "lem-sfb-subfield-flat"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
-    "place": "first sentence: exactness and the cohomology formula"
-   }
-  },
-  {
-   "text": "Let $M$ be a constructible $E_X$-module. By [def-sfb-constructible-module], choose a finite stratification with immersions $g_a:X_a\\to X$ and presentation covers for the raw pullbacks $g_a^\\natural M$. Apply [lem-sfb-subfield-extension-local-presentation] to each $g_a$. It gives local finite presentations of $g_a^\\natural(G_XM)$ on precisely those covers. Thus the same finite stratification witnesses constructibility of $G_XM$, by [def-sfb-constructible-module].",
-   "uses": [
-    "def-sfb-constructible-module",
-    "lem-sfb-subfield-extension-local-presentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
-    "place": "Second sentence: apply preservation of pulled-back local presentations to every stratum."
-   }
-  },
-  {
-   "text": "By [sk-def-sfb-bounded-constructible], $H^qK$ is constructible for each $q$ and zero outside one finite interval. Step 2 and the isomorphism of step 1 give constructibility of $H^q(T_{E,F}K)$: compose its local-presentation isomorphisms with that isomorphism. Since $G_X$ preserves the initial object by [sk-def-sfb-change-of-scalars], it sends zero to zero, so step 1 retains the same interval. These are exactly the two conditions in [sk-def-sfb-bounded-constructible].",
-   "uses": [
-    "sk-def-sfb-bounded-constructible",
-    "sk-def-sfb-change-of-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
-    "place": "boundedness and final constructibility conclusion"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.md",
+    "place": "node lem-sfb-extend-subfield-constructible, order 1764"
    }
   }
  ],
  "proof_deps": [
-  "def-sfb-subfield-coefficient-map",
-  "lem-sfb-subfield-flat",
-  "sk-def-sfb-change-of-scalars",
-  "def-sfb-left-derived-exact",
-  "def-sfb-derived-extend-subfield",
-  "lem-sfb-extend-scalars-preserves-homology",
-  "def-sfb-constructible-module",
-  "lem-sfb-subfield-extension-local-presentation",
-  "sk-def-sfb-bounded-constructible"
+  "lem-weil-pbc-bounded-constructible-exact-scalar-extension",
+  "lem-sfb-subfield-flat"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
-  "place": "First sentence (exactness and homology), local-presentation sentence (new pullback-local-presentation lemma), and final bounded-constructible assembly."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.md",
+  "place": "Exactness, local presentations and boundedness, specialized through the existing proved generic theorem.",
+  "group": "F5"
  },
  "mathlib_searches": [
   {
@@ -203,5 +169,15 @@
    "AlgebraicGeometry.ProEtale.boundedConstructible_derivedExtendScalarsSubfield_obj"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit: the blueprint item lem-sfb-extend-subfield-constructible's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261021T225118-L-3772049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
