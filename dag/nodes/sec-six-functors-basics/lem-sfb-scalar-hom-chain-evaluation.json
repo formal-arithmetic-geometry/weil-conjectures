@@ -1,0 +1,81 @@
+{
+ "id": "lem-sfb-scalar-hom-chain-evaluation",
+ "kind": "statement",
+ "title": "Sheaf scalar-Hom evaluation chain map and input naturality",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe, $\\varphi:R\\to S$ a morphism of sheaves of commutative rings, $E=S\\otimes_R-$ the sheafification of sectionwise scalar extension and $U$ restriction of scalars, both applied termwise to unbounded cochain complexes [def-weil-sheaf-of-modules-category] [def-pur-sheaf-tensor-product] [def-pc-sheaf-restrict-scalars]. Write $T(A)=S\\otimes_R A$ for the underlying $R$-linear sheaf tensor, termwise. Write $H_R(P,J)=\\mathcal Hom_R^\\bullet(P,J)$ and $H_S(K,N)=\\mathcal Hom_S^\\bullet(K,N)$ for the actual product Hom complexes [def-pur-hom-complex]; their local degree-$n$ sections have coordinates $f^i:P^i|_W\\to J^{i+n}|_W$ on $\\mathcal C/W$ [def-pur-localized-ringed-site] [def-pur-sheaf-hom]. All pure tensors below mean their images under the tensor sheafification units [def-weil-presheaf-modules-sheafification], and evaluation means the actual product projection followed by evaluation at the identity object of the slice.\nFor arbitrary $R$-complexes $P,J$, $S$-complex $N$, and $S$-linear chain map $q:EJ\\to N$, there are an $R$-linear chain map\n$$\\alpha_{P,J}:T H_R(P,J)\\longrightarrow H_R(P,TJ)$$\nand a unique $S$-linear chain map\n$$\\sigma_{P,J,q}:E H_R(P,J)\\longrightarrow H_S(EP,N)$$\nwith the following formulas over every slice, in every degree $n$ and coordinate $i$:\n$$\\alpha(s\\otimes f)^i(p)=s\\otimes f^i(p),\\qquad \\sigma_q(s\\otimes f)^i(t\\otimes p)=st\\,q^{i+n}(1\\otimes f^i(p)).$$\nBoth commute with slice restriction and the signed Hom differentials. For chain maps $u:P'\\to P$, $v:J\\to J'$, $w:N\\to N'$ and $q':EJ'\\to N'$ with $q'\\circ Ev=w\\circ q$, their input naturality equations are\n$$H_R(u,Tv)\\circ\\alpha_{P,J}=\\alpha_{P',J'}\\circ T H_R(u,v),$$\n$$H_S(Eu,w)\\circ\\sigma_{P,J,q}=\\sigma_{P',J',q'}\\circ E H_R(u,v).$$\nThe notation $H(u,v)$ means precomposition with $u$ and postcomposition with $v$ in each coordinate. No flatness, boundedness, projectivity or K-injectivity is assumed; neither comparison is asserted to be invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CZ (lemma-adjointness-tensor-restrict); Tag 03CY (lemma-sheafification-presheaf-modules); sites-cohomology.tex Tag 0A8X (section-hom-complexes). Agent extraction of old steps 6–8 and the alpha/sigma clauses of step 10 of lem-sfb-hom-scalar-chain-identification; the detailed retained argument is in the delivery report."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-hom-complex",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-hom",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tensorHom|extendScalars|restrictScalars|eval",
+   "results": "Returned Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomologicalComplex.lean, Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean, Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean. Search directory: Mathlib/Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module tensor extension, cochains in a preadditive category, and tensor maps do not construct the sheaf internal product-Hom scalar evaluation map with uniqueness and input naturality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension map of internal Hom cochain complexes of sheaves commutes with the differential and is unique from its bilinear evaluation formula",
+   "results": "Returned CochainComplex.HomComplex.δ_hom, CochainComplex.HomComplex.δ_map, CochainComplex.HomComplex.δ_units_smul, CochainComplex.HomComplex.δ_smul, CochainComplex.HomComplex.δ_hom_apply, CochainComplex.HomComplex.δ_comp_ofHom, CochainComplex.HomComplex.Cochain.smul_comp, CochainComplex.HomComplex.Cochain.smul_v",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module tensor extension, cochains in a preadditive category, and tensor maps do not construct the sheaf internal product-Hom scalar evaluation map with uniqueness and input naturality."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HomComplex\", \"tensor\"",
+   "results": "Returned ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module tensor extension, cochains in a preadditive category, and tensor maps do not construct the sheaf internal product-Hom scalar evaluation map with uniqueness and input naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary unbounded complexes of sheaves of modules scalar extension has a unique evaluation chain map E Hom(P,J) to Hom(EP,N) for q:EJ to N with formula (s tensor f)(t tensor p)=st q(1 tensor f(p)) and naturality",
+   "results": "Returned ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendScalars.hom_ext, ModuleCat.ExtendScalars.hom_ext_iff, PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, PresheafOfModules.Sheafify.SMulCandidate.mk', ModuleCat.ExtendScalars.map'",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module tensor extension, cochains in a preadditive category, and tensor maps do not construct the sheaf internal product-Hom scalar evaluation map with uniqueness and input naturality."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf tensor Hom scalar evaluation comparison on unbounded complexes constructed by balanced multilinear local maps and sheafification, natural in both complexes",
+   "results": "Returned SheafOfModules.Presentation.map_π_eq, HomologicalComplex.ιTensorObj, SheafOfModules.map_ιFree_mapFree_hom, PresheafOfModules.Sheafify.mul_smul, PresheafOfModules.Sheafify.map_smul_eq, CategoryTheory.Sheaf.monoidalCategory, SheafOfModules.map_ιFree_mapFree_hom_assoc, PresheafOfModules.Monoidal.tensorHom",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module tensor extension, cochains in a preadditive category, and tensor maps do not construct the sheaf internal product-Hom scalar evaluation map with uniqueness and input naturality."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-hom-scalar-chain-identification",
+  "date": "2026-10-21",
+  "group": "Q54"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "Final paragraph, 'inverting ell and by descending to a finite extension E': strict scalar comparison needed for coefficient passage; old steps 6–8 and the alpha/sigma clauses of step 10.",
+   "via": [
+    "lem-sfb-hom-scalar-chain-identification",
+    "lem-sfb-dc-hom-filtered-colimit"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
