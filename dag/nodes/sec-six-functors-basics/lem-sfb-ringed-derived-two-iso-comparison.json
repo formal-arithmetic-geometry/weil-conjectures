@@ -12,32 +12,58 @@
  ],
  "proof": [
   {
-   "text": "1. Transport the algebraic inverse image across the specified geometric theta.\nOn generalized scalar-extension generators the ordinary map sends s tensor x to\ns tensor theta(x). The structural-map equality is precisely the balancing\ncondition, so the map is well-defined, linear, natural and invertible. This gives\nordinary and its insertion equation.\n2. The two underlying geometric Hom bijections and the scalar-insertion formula\nidentify the ordinary direct-image comparison with the adjunction mate of\nordinary. Use this mate as ordinary_right.\n3. Both ordinary pullbacks preserve the K-flat resolving class. Localizing the\nordinary map gives pullback and pullback_model. The universal right-derived\nproperty applied to ordinary_right gives pushforward and its eta normalization\non every complex.\n4. The two routes in the tensor square have the same values on generalized pure\ntensors: theta acts on each module factor and preserves their tensor pairing.\nThe two routes on the unit are the same scalar action by ring compatibility.\nLocalize these equations, use the lift's canonical tensor and unit equations,\nand extend from resolving representatives by naturality.\n5. The ordinary mate equation gives equality of the ordinary transposes. Apply\nthe canonical derived Hom formulas on K-flat/K-injective representatives; the eta\nnormalization and pullback_model identify their two sides. Fraction\nrepresentations and resolutions extend the equality to every derived morphism,\nwhich identifies the right-derived comparison with the specified adjunction mate\nand proves pushforward_model. The specified theta, rather than an\nunspecified equivalence of inverse images, is used throughout.",
+   "text": "Construct the identity geometric ringed-topos morphism i on X explicitly. Its ring map, set inverse image and module direct image are identities. Obtain a normalized lift li using the adjoint-lift and tensor-lift existence declarations and the site's recorded tensor model. Apply identity normalization to li. Apply composition normalization to li, lk, lh with geometric path theta followed by the inverse identity unitor and the inverse identity comparison. Naturality of the identity comparison and the given structural-map equality verify the composition ring-map hypothesis.",
    "uses": [
-    "lem-weil-pbc-geometric-module-transport",
-    "def-weil-pbc-ringed-tensor-section-calculus",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pc-kflat-resolution",
-    "lem-pc-right-fraction-representation",
+    "lem-sfb-ringed-derived-adjoint-lift",
+    "lem-sfb-ringed-derived-tensor-lift",
+    "lem-sfb-ringed-derived-identity-comparison",
+    "lem-sfb-ringed-derived-composition-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose the ordinary and derived composition isomorphisms with the identity-normalization isomorphisms, whiskered on the left by k's pullback, and the right unitor. The composition insertion equation followed by the identity insertion equation simplifies by naturality to exactly the specified theta insertion equation. Pullback preserves the flat-term K-flat class. At such a complex use the identity comparison on k's pulled-back complex, then the composition representative formula; termwise equality of the ordinary maps identifies their localized composite with the required ordinary comparison. The explicit-site versus monoidal tensor comparison transports termwise flatness between the two conventions.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-sfb-ringed-derived-composition-comparison",
+    "lem-sfb-ringed-derived-identity-comparison",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use adjunction conjugation for the ordinary right comparison. Conjugation respects composition, whiskering and the identity unitor, so the inverse derived right mate factors as the composition right mate followed by k's right functor applied to the identity right mate. Apply the composition eta equation and the identity eta equation at the given complex. Naturality of k's eta moves the identity chain map through the derived right functor. The same conjugation factorization degreewise identifies the resulting ordinary chain map with the inverse ordinary right comparison. Cancel the invertible mates to obtain the required pushforward formula on every complex.",
+   "uses": [
     "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-sfb-ringed-derived-composition-comparison",
+    "lem-sfb-ringed-derived-identity-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For tensor compatibility move the identity comparison through k's tensorator by naturality, substitute the identity tensor equation, and apply the composition tensor equation. Functoriality of the tensor combines the two pairs of comparison components. For the unit move the identity comparison through k's unit map, then substitute the identity and composition unit equations. Assemble these maps and equations into TwoIsoCore.",
+   "uses": [
+    "lem-sfb-ringed-derived-composition-comparison",
+    "lem-sfb-ringed-derived-identity-comparison"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-geometric-module-transport",
-  "def-weil-pbc-ringed-tensor-section-calculus",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-pc-kflat-resolution",
-  "lem-pc-right-fraction-representation",
+  "lem-sfb-ringed-derived-adjoint-lift",
+  "lem-sfb-ringed-derived-tensor-lift",
+  "lem-sfb-ringed-derived-identity-comparison",
+  "lem-sfb-ringed-derived-composition-comparison",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
   "def-weil-pbc-adjunction-conjugate",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-pc-kflat-complex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Modules on Sites, Tags 03D7, 03D8 and 03EL; Cohomology on Sites, Tags 07A4 and 07A6; original comparison proof steps 12–13; representative normalization extracted from lem-sfb-ringed-derived-monoidal-comparisons"
+  "place": "Tags 0D6D, 0D6E and 07A6: composition and identity comparison; formal reduction of specified geometric 2-isomorphism normalization to composition with an identity morphism (M6)."
  },
  "mathlib_searches": [
   {
@@ -164,14 +190,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-45343",
-  "group": "K4",
+  "reviewer": "COMPILER",
+  "group": "M6",
   "result": "pass",
-  "landing": "20261020T233155-L-902653",
-  "kind": "interface",
-  "note": "independent cc review: files of 453430169b35 against the PASSed 545ebfab8248 (only change record + report differ); moved records vs clone item (all 133 constant type hashes identical, published vs delivered); change-record Users vs every live/side-live/published-olean module referring to RingedDerivedComparisons; 9 direct importers compiled against the delivery"
+  "landing": "20261021T134508-L-1231567",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {}
 }
