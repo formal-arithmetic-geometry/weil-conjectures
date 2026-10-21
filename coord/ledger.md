@@ -22455,3 +22455,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:55 L: batch 20261021T120309 dependency take-out
 - 12:59 L: returned deliver/J7/Sheaf.Paper.ExternalRHomConePairing (reviewer RETURN: (the landing tools, head 12fb362d3) the delivery did not land: (d) Sheaf.Paper.GlobalHomEvaluationFlatLift: report needs)
 - 12:59 L: returned deliver/P2/Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison (reviewer RETURN: (the landing tools, head aee84b65b) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.SupportedBottomGluing (m)
+- 12:59 L: merged deliver/A2/Sheaf.AlgebraicGeometry.SingleComplexQcqsHomologyMono (stage 3; reviewer PASS; after a return; landing 20261021T125932-L-2459334 (proof); batch 20261021T125931; modules 1; new nodes 0; change records: coord/changes/A2-single-complex-qcqs-stalk-condition-import.md)
