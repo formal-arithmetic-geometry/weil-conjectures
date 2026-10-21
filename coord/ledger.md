@@ -20115,3 +20115,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: merged deliver/O1/lem-pur-scalar-hom-comparison-tower (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: merged deliver/Q66/lem-sfb-kflat-scalar-comparison-normalization (reviewer FIX; first push; new nodes: 0)
 - 04:00 L: merged deliver/Q38/lem-sf-semilinear-alpha-pullback (reviewer PASS; first push; new nodes: 0)
+- 04:00 L: merged deliver/Q01/lem-sfb-hom-flat-evaluation-roof (stage 2; reviewer FIX; parallel immutable checks)
+- 04:00 L: merged deliver/Q34/lem-sfb-bounded-bifunctor-devissage (stage 2; reviewer PASS; parallel immutable checks)
+- 04:00 L: merged deliver/N6/lem-sfb-internal-hom-localization-comparison (stage 2; reviewer PASS; parallel immutable checks)

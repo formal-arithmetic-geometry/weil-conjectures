@@ -275,5 +275,36 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-ee6d7b51c (reviewer sub-agent of L); spot-checked: Read the item's 6 steps in full, every cited statement, and the Stacks tags 08J9/0A95/06YY/07A4/03CZ/010N/015F. The delivery has no new nodes, and the statement and stmt_deps are unchanged. The item is not superseded (live and side-live both unsplit) and is not in route-pivot-dropped. There is no repair note for the item, so the re-split rules do not apply. Statement against def-sfb-internal-hom-strict-models/-roof: a_S is the normalized comparison at T=S, L=C, and v_S is roofDenominator(S); the domains and targets match ΘU(c) under the identification E^L QM ≅ Q(EM). Step 1: Eη_C is a quasi-isomorphism by exact cohomology; I_R(e) is a quasi-isomorphism between K-injectives by naturality of η; Hom-invariance with t=1_P then gives v_S. Steps 2-3: the chain transpose (P flat-term K-flat, target K-injective) gives the evaluation as [η_C]^{-1}[ev_J], and Normalized gives the transpose of [a_S] as [h]. Step 4: B is resolved by a K-flat T before using the scalar tensor square; I recomputed the pure-tensor composite (s⊗f)⊗p ↦ s⊗f(p). Step 5: the transpose of [v_S]ΘU(c) is [e][e]^{-1}[h] = [h]; injectivity of the transpose and invertibility of v_S finish the proof. Step 6: naturality is essentially formal. Edge cases R=S and P=R give the identity roof; P=0 and C=0 are trivial. The 5 tool_uses (exact-functor cohomology, K-flat resolution, derived change of rings, K-injective resolutions, RHom well-defined) are generic tools and accepted. No SGA source is cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatInternalHomEvaluationRoof",
+  "declaration": "CategoryTheory.SfbFlatHom.evaluationRoof",
+  "declarations": [
+   "CategoryTheory.SfbFlatHom.scalarTensor",
+   "CategoryTheory.SfbFlatHom.comparison",
+   "CategoryTheory.SfbFlatHom.restrictedComparison",
+   "CategoryTheory.SfbFlatHom.representative",
+   "CategoryTheory.SfbFlatHom.sourceMap",
+   "CategoryTheory.SfbFlatHom.targetMap",
+   "CategoryTheory.SfbFlatHom.denominator",
+   "CategoryTheory.SfbFlatHom.numerator",
+   "CategoryTheory.SfbFlatHom.denominatorInverse",
+   "CategoryTheory.SfbFlatHom.EvaluationRoof",
+   "CategoryTheory.SfbFlatHom.evaluationRoof"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatInternalHomEvaluationRoof.lean",
+  "statement": "theorem evaluationRoof : Nonempty (EvaluationRoof M μ α)",
+  "branch": "sheaf-dag",
+  "by": "Q01",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-19c3abf00",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Clause-by-clause check against node and deps (ScalarInternalHomData, DerivedInternalHomFilteredColimitData, CoefficientHomRepresentativeEvaluation): exactness = PreservesFiniteLimits of the left-adjoint extension; P flat-term K-flat, C arbitrary; a_S/v_S = recorded comparison/roofDenominator at U S; c = transpose of mu.inv then E^L(ev); Theta = evaluation-normalized alpha.iso; source/target transports canonical; nu pinned by generator formula (not hollow); equation, roof, naturality, coefficient clauses true; no finiteness/boundedness. Docstrings and verbatim statement OK; node unchanged except lean. H9 FIX: unused non-closure import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel dropped in fixes/FlatInternalHomEvaluationRoof.lean (only change). nt_compile: delivered clean 48.8 s, fixed clean 40.7 s. Advisory: ScalarHomModels etc. (def-sfb-scalar-hom-comparison-data) and IsFlatOnSite (def-pc-flat-sheaf-modules) owners not in stmt_deps; S2 cannot change stmt_deps."
  }
 }

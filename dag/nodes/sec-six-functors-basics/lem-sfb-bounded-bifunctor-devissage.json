@@ -229,5 +229,23 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-58701bbdc (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps, every cited statement and the parent. The statement is true and unchanged, and it is exactly what step 5 of det-lem-integral-models-operations needs (derived tensor, integral scalar-model classes, D^b_c). Step 1 (zero object, shift and extension closure) follows from def-weil-triangulated-category and def-weil-triangulated-subcategory; strict fullness absorbs H^q being defined only up to isomorphism, so the classes need not be closed under isomorphism. Step 2's endpoints follow from the H^r formula in lem-weil-pbc-truncation-descends (a) and the localization; it is correctly marked elementary. Step 3's triangle is lem-weil-pbc-truncation-triangle; I checked it against Stacks 08J5 (derived.tex:4099-4103, a=q-1), and the tag-label mapping is correct. Step 4 (j=0..d-c+1) and step 5 (j=0..b-a+1) are both set up correctly. H^q[-q]=(H^q[0])[-q] holds, and gaps and empty classes go through the zero cases. Edge cases tested: one-degree inputs, acyclic inputs, empty classes, gaps, negative intervals. No duplicate found: lem-sbc-cohomology-in-weak-serre-subcategory and the trf thick-closure and devissage nodes state different things. There are no new nodes, no SGA citations and no repair note for this item. I accept the two declared tool uses (generic truncation-triangle and truncation-descends nodes of sk-thm-properbasechange). Mathlib searches are recorded with unavailable services marked as such. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.BoundedBifunctorDevissage",
+  "declaration": "DerivedCategory.bounded_bifunctor_devissage",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/BoundedBifunctorDevissage.lean",
+  "statement": "theorem bounded_bifunctor_devissage (A : Type uA) [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] (B : Type uB) [Category.{vB} B] [Abelian B] [HasDerivedCategory.{wB} B] (T : Type uT) [Category.{vT} T] [Preadditive T] [HasZeroObject T] [HasShift T ℤ] [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T] [IsTriangulated T] (S : ObjectProperty T) [S.IsTriangulated] [S.IsClosedUnderIsomorphisms] (F : DerivedCategory A ⥤ DerivedCategory B ⥤ T) [∀ K : DerivedCategory A, (F.obj K).CommShift ℤ] [∀ K : DerivedCategory A, (F.obj K).IsTriangulated] [∀ M : DerivedCategory B, (F.flip.obj M).CommShift ℤ] [∀ M : DerivedCategory B, (F.flip.obj M).IsTriangulated] (A₀ : ObjectProperty A) (B₀ : ObjectProperty B) (h₀ : ∀ (X : A) (Y : B), A₀ X → B₀ Y → S ((F.obj ((singleFunctor A 0).obj X)).obj ((singleFunctor B 0).obj Y))) (K : DerivedCategory A) (M : DerivedCategory B) (hK : (TStructure.t (C := A)).bounded K) (hM : (TStructure.t (C := B)).bounded M) (hKA : ∀ q : ℤ, ¬ IsZero ((homologyFunctor A q).obj K) → A₀ ((homologyFunctor A q).obj K)) (hMB : ∀ q : ℤ, ¬ IsZero ((homologyFunctor B q).obj M) → B₀ ((homologyFunctor B q).obj M)) : S ((F.obj K).obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q34",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-600dd3a84",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Every clause of lem-sfb-bounded-bifunctor-devissage matches the Lean: abelian A,B with HasDerivedCategory in independent universes; standard TStructure.t bounded = plus⊓minus; T pretriangulated+IsTriangulated; S IsTriangulated+IsClosedUnderIsomorphisms (strictly full); curried F exact in each variable via CommShift+IsTriangulated on F.obj K and F.flip.obj M; arbitrary A₀,B₀; h₀ on singleFunctor 0; hKA/hMB guarded by ¬IsZero; conclusion S((F.obj K).obj M). Zero/acyclic inputs, empty classes, gaps, any interval and non-iso-closed classes are covered. Node copy changes only lean, statement verbatim. No duplicate (exists_iteratedExtensions_of_bounded is a different one-variable helper). Docstrings carry 08J5/014V/05QM, the blueprint id and the 5 steps; plain imports are the recorded proof-dep modules (truncation descends/triangle); only proof is sorry; lines ≤100. nt_compile --json clean in 1.5 s, exit 0. No findings."
  }
 }
