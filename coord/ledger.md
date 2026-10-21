@@ -21775,3 +21775,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:15 L: merged deliver/Q142/lem-dl-a1-henselian-global-inertia-comparison (reviewer FIX; first push; new nodes: 0)
 - 09:15 L: merged deliver/Q01/sk-def-perfect (reviewer PASS; after a return; new nodes: 1)
 - 2026-10-21T09:15:48Z L: superseded stage-1 delivery Q12/lem-sf-package-localization-projection-realization at 4367d6d113e93f13e07b51cc76430387ced85647; current completion retained; packet archived at refs/superseded/Q12/lem-sf-package-localization-projection-realization/4367d6d113e93f13e07b51cc76430387ced85647; stale return retired.
+- 2026-10-21T09:15:49Z L: superseded stage-1 delivery Q93/lem-zl-reduced-frontier-mixed-gluing at 49c229f66ec2e25c886b39396493d2735540a144; current completion retained; packet archived at refs/superseded/Q93/lem-zl-reduced-frontier-mixed-gluing/49c229f66ec2e25c886b39396493d2735540a144; stale return retired.
