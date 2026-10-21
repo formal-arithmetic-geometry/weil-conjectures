@@ -12,9 +12,81 @@
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-exact-functor-derived-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=r_DRF$ and $B=RGt_D$. For an exact functor $h$, write $\\varphi^h_L:h_DQ(L)\\xrightarrow{\\sim}QC(h)L$ for its factorization. Fix a K-injective $I$ and set $a_I=r_D(\\eta^F_I)\\circ(\\varphi^r_{C(F)I})^{-1}:QC(r)C(F)I\\to A(QI)$ and $b_I=RG((\\varphi^t_I)^{-1})\\circ\\eta^G_{C(t)I}:QC(G)C(t)I\\to B(QI)$. The cited factorization theorem supplies both $\\varphi$ isomorphisms. The hypothesis on $C(t)$ makes $C(t)I$ K-injective, so both comparison maps $\\eta$ here are isomorphisms by the assumptions of the item; hence $a_I,b_I$ are isomorphisms. These are precisely the computation isomorphisms, with their directions fixed.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; abstract notation for the computation in sites-cohomology.tex, Tag 0D6G, lemma-restrict-direct-image-open"
+   }
+  },
+  {
+   "text": "Apply the assumed normalization at $K=I$, inserting the factorization maps with the directions in Step 1. It says exactly $\\gamma_{QI}\\circ a_I=b_I\\circ Q(C(\\delta)_I)$. Multiplication by $a_I^{-1}$ gives $\\gamma_{QI}=b_I\\circ Q(C(\\delta)_I)\\circ a_I^{-1}$. If $e:QI\\xrightarrow{\\sim}E$ is any specified representative isomorphism, set $a_{I,e}=A(e)\\circ a_I$ and $b_{I,e}=B(e)\\circ b_I$. Naturality gives $\\gamma_E\\circ A(e)=B(e)\\circ\\gamma_{QI}$, hence $\\gamma_E\\circ a_{I,e}=b_{I,e}\\circ Q(C(\\delta)_I)$. This proves the first assertion for every representative, without a new choice of derived isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent refinement of sites-cohomology.tex, Tag 0D6G: apply the specified normalization and naturality"
+   }
+  },
+  {
+   "text": "Fix $n\\in\\mathbf Z$. The cited shift lemma makes $I[n]$ K-injective, and makes the shift of a K-injective resolution a resolution of the shifted complex. Since $C(t)$ preserves K-injectives, $C(t)(I[n])$ is also K-injective. For any additive $H$, the identity in degree $a$ identifies $C(H)(I[n])$ with $(C(H)I)[n]$: both have $H(I^{a+n})$ and differential $H((-1)^nd)=(-1)^nH(d)$. Thus the stipulated computation of all four functors at $E[n]$ uses the same shifted model, including when $n$ is negative.",
+   "uses": [
+    "lem-weil-pbc-kinjective-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070H, definition-K-injective and its following remark; signed shift convention and termwise additivity"
+   }
+  },
+  {
+   "text": "Put $u_I=C(\\delta)_I$ and use the identity termwise shift identifications of Step 3. In degree $a$, both $u_{I[n]}$ and $u_I[n]$ are $\\delta_{I^{a+n}}$. They are chain maps: naturality of $\\delta$ for $d:I^{a+n}\\to I^{a+n+1}$ says $Gt(d)\\circ\\delta_{I^{a+n}}=\\delta_{I^{a+n+1}}\\circ rF(d)$; multiplying this equality by $(-1)^n$ gives the chain-map equation for the shifted differentials. Hence $u_{I[n]}=u_I[n]$, with no extra sign on the component of $\\delta$. This is a direct calculation from additivity and naturality, not an additional comparison theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent integer-shift refinement of Tag 0D6G; cochain shift convention in derived.tex"
+   }
+  },
+  {
+   "text": "First take $E=QI$ and insert the localization shift isomorphisms $Q(L[n])\\cong Q(L)[n]$. By the stipulated shifts of $RF,RG$ computed on shifted K-injectives, their computation isomorphisms intertwine these shifts. Clause (2) of the cited exact factorization theorem says the same for $\\varphi^r,\\varphi^t$. Composing these equalities in the definitions of $a_I,b_I$ in Step 1 yields $s_{A,n,QI}\\circ a_{I[n]}=a_I[n]$ and $s_{B,n,QI}\\circ b_{I[n]}=b_I[n]$, where $Q(I[n])$ is identified with $(QI)[n]$. Consequently\n$$s_{B,n,QI}\\circ\\gamma_{(QI)[n]}\\circ a_{I[n]}=b_I[n]\\circ Q(u_{I[n]})=b_I[n]\\circ Q(u_I)[n]=\\gamma_{QI}[n]\\circ a_I[n]=\\gamma_{QI}[n]\\circ s_{A,n,QI}\\circ a_{I[n]}.$$\nThe first and third equalities are Step 2 at $I[n]$ and $I$, respectively; the middle equality is Step 4 and shift compatibility of $Q$. Cancel the isomorphism $a_{I[n]}$. This proves the required shift equation at $QI$ and shows both routes have the component and signed differential computed in Step 4.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor and the termwise shift compatibility; agent normalization calculation refining Tag 0D6G"
+   }
+  },
+  {
+   "text": "Every $E\\in D(\\mathcal A)$ has such a representative: $Q$ is a localization of $\\mathrm{CoCh}(\\mathcal A)$ [def-weil-abstract-derived-category], so $E\\cong QK$ for a complex $K$; by hypothesis there is a quasi-isomorphism $K\\to I$ with $I$ K-injective, and $Q$ inverts it, giving $e:QI\\xrightarrow{\\sim}E$. For a general $e:QI\\xrightarrow{\\sim}E$, naturality of $\\gamma$ and of both composite shift comparisons gives $s_{B,n,E}\\circ\\gamma_{E[n]}\\circ A(e[n])=B(e)[n]\\circ s_{B,n,QI}\\circ\\gamma_{(QI)[n]}$ and $\\gamma_E[n]\\circ s_{A,n,E}\\circ A(e[n])=B(e)[n]\\circ\\gamma_{QI}[n]\\circ s_{A,n,QI}$. The right sides agree by Step 5, and $A(e[n])$ is an isomorphism, so cancellation gives the desired equation at $E$. Step 2 fixes $\\gamma_E$ under every computation isomorphism; no claim about an independently chosen natural isomorphism is needed.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Agent refinement of Tag 0D6G: naturality with respect to the representative isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-kinjective-shift",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6G, lemma-restrict-direct-image-open, K-injective computation; abstract normalized-square and signed integer-shift argument written by NM, using derived.tex Tag 070H and exact-functor factorization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +122,52 @@
    "results": "{\"t\": \"2026-10-21T05:49:24Z\", \"tool\": \"leanfinder\", \"query\": \"Termwise natural isomorphisms r composed F equals G composed t on complexes give right derived base change commuting with shifts using shifted K injective representatives\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\"], \"digest\": \"7ec43d6d9efca840\"}",
    "date": "2026-10-21",
    "verdict": "no match: ExactFunctor provides shifts for exact functors and their factorization; Abelian.RightDerived concerns degreewise derived functors on objects. Neither states the normalized unbounded square with a K-injective-preserving vertical functor."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]ommShift|[Cc]ommShift.*rightDerived",
+   "results": "{\"t\": \"2026-10-21T08:46:44Z\", \"tool\": \"grep\", \"query\": \"rightDerived.*[Cc]ommShift|[Cc]ommShift.*rightDerived\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern exact functors or classical objectwise derived functors, not this normalized unbounded square and its model formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural comparison of unbounded right derived functors computed on K injective resolutions commutes with shifts",
+   "results": "{\"t\": \"2026-10-21T08:46:45Z\", \"tool\": \"leansearch\", \"query\": \"A natural comparison of unbounded right derived functors computed on K injective resolutions commutes with shifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\"], \"digest\": \"454e73e365eb49ad\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern exact functors or classical objectwise derived functors, not this normalized unbounded square and its model formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CommShift\", \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-21T08:46:45Z\", \"tool\": \"loogle\", \"query\": \"\\\"CommShift\\\", \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsRightDerivedFunctor.instCommShiftTotalRightDerived\", \"CategoryTheory.Functor.IsRightDerivedFunctor.commShift\", \"CategoryTheory.Functor.IsRightDerivedFunctor.natTrans_commShift\", \"CategoryTheory.NatTrans.CommShift.rightDerivedNatTrans\", \"CategoryTheory.NatTrans.CommShift.of_isRightDerivedFunctor\", \"CategoryTheory.Functor.IsRightDerivedFunctor.comp_map_commShiftIso_hom_app\", \"CategoryTheory.Functor.IsRightDerivedFunctor.comp_map_commShiftIso_hom_app_assoc\", \"CategoryTheory.Functor.instCommShiftPlusRightDerivedFunctorPlusInt\"], \"digest\": \"dddea470a3807c5e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match in the pinned library: online RightDerivedCommShift and RightDerivedCompositionCommShift modules do not exist in this checkout; their names are not pinned-library declarations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized natural isomorphism of right derived additive functor squares computed on K injective complexes commutes with every integer shift",
+   "results": "{\"t\": \"2026-10-21T08:46:46Z\", \"tool\": \"leanfinder\", \"query\": \"A normalized natural isomorphism of right derived additive functor squares computed on K injective complexes commutes with every integer shift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\", \"DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\"], \"digest\": \"50a09079370aafca\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern exact functors or classical objectwise derived functors, not this normalized unbounded square and its model formula."
+  },
+  {
+   "tool": "grep",
+   "query": "of_isRightDerivedFunctor|rightDerivedNatTrans|natTrans_commShift",
+   "results": "{\"t\": \"2026-10-21T08:47:28Z\", \"tool\": \"grep\", \"query\": \"of_isRightDerivedFunctor|rightDerivedNatTrans|natTrans_commShift\", \"sub\": \"CategoryTheory/Functor/Derived\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"], \"digest\": \"7a7e01a13efde8dc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern exact functors or classical objectwise derived functors, not this normalized unbounded square and its model formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Termwise natural isomorphism r F to G t induces the specified unbounded derived square isomorphism represented by its component on a K injective and on shifted resolutions",
+   "results": "{\"t\": \"2026-10-21T08:47:34Z\", \"tool\": \"leanfinder\", \"query\": \"Termwise natural isomorphism r F to G t induces the specified unbounded derived square isomorphism represented by its component on a K injective and on shifted resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh\", \"CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app\"], \"digest\": \"f42f706061e46e34\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern exact functors or classical objectwise derived functors, not this normalized unbounded square and its model formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ringed-slice-comparisons-shift",
@@ -73,5 +187,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-derived-square-shift-on-kinjectives",
+  "worker": "stage1",
+  "summary": "Six-step proof: fix the computation isomorphisms, solve the assumed normalization, shift the K-injective model, check the component and sign, compute the shift square, and transport by naturality. Reuses existing Mathlib leaves; no new nodes or statement changes.",
+  "blueprint": "Realizes the first paragraph of lemma-weil-pbc-perfect-projection-formula.proof.md (closed under shifts and the specified shift comparisons), through the ringed-slice comparison ancestor.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NM-f0e06fbd2",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-f0e06fbd2 (reviewer sub-agent of L); spot-checked: FIX for one small gap. I read the item and its six steps in full, the cited statements (exact-functor-derived-factorization clause (2), kinjective-shift for all n, the abstract-derived-category definition with Q compatible with shifts, the abelian-category definition), Stacks 0D6G, 08FI and 015F (tags and labels checked), the main-20261015 blueprint parent proof, and the citer's Step 2 (ringed-slice-comparisons-shift), which meets every hypothesis. The normalization type-checks and is consistent with a_I and b_I. Step 5's chain of equalities is correct: the stipulated RF/RG shifts on K-injectives, naturality of sigma, clause (2), and cancelling a_{I[n]}. Step 4's sign check is correct. Small cases n=0, n=±1, even n, the zero complex and identity functors all work. No new nodes and no SGA. The DAG search found no duplicate. Gap: Step 6 never shows that every E has a K-injective representative QI≅E. I added one sentence to Step 6: E≅QK because Q is a localization, then the hypothesised quasi-isomorphism K→I, which Q inverts. Its uses is now def-weil-abstract-derived-category, already a proof_dep. Only Step 6 of the proof changes, in fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-derived-square-shift-on-kinjectives.json.; 1 file(s) fixed by the reviewer"
  }
 }
