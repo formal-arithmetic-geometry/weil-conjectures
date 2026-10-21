@@ -20161,3 +20161,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:02 L: merged deliver/Q24/lem-sfb-flat-scalar-cyclic-resolution (stage 2; reviewer PASS; parallel immutable checks)
 - 04:03 L: returned deliver/Q05/lem-sfb-ringed-complete-triangulated (reviewer RETURN: L: independent stage-2 immutable head 16342a5845dd: H13: the delivery overwrites NJ's landed record of lem-weil-pbc-ring)
 - 04:03 L: returned deliver/Q41/lem-sp-finite-compact-site-coherence (reviewer RETURN: L: independent stage-2 immutable head 67a0b64dece2: H2/H12: stmt_deps add theorem nodes lem-sf-class-compact-support-com)
+- 04:03 L: merged deliver/Q44/lem-sp-etale-derived-chain-transpose (reviewer FIX; first push; new nodes: 0)

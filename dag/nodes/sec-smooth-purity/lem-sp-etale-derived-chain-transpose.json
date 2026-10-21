@@ -2,7 +2,7 @@
  "id": "lem-sp-etale-derived-chain-transpose",
  "kind": "statement",
  "title": "Canonical etale derived adjunction on ordinary chain transposes",
- "statement": "Let $r:W\\to V$ be any morphism of schemes [def-pc-scheme] and $R$ any commutative ring. Work with sheaves of modules over the constant ring sheaves on small etale sites and the ordinary unbounded derived categories [def-weil-pbc-derived-categories]. Write $r_R^*\\dashv r_{*,R}$ for the exact module inverse-image adjunction [prop-weil-pbc-inverse-image-modules-exact]. Let $Q$ be localization and let $\\alpha_K:Q(r_{*,R}K)\\to Rr_{*,R}(QK)$ be the canonical right-derived comparison, defined using K-injective resolutions [lem-weil-pbc-kinjective-total-derived].\n\nThere is a canonical derived adjunction $r_R^*\\dashv Rr_{*,R}$, with $r_R^*$ represented termwise. For any cochain complexes $M$ on $V$ and $K$ on $W$, and any chain map $f:M\\to r_{*,R}K$, its Hom bijection satisfies\n$$e_R(\\alpha_K\\circ Qf)=Q(f^\\flat),\\qquad f^\\flat=\\varepsilon^0_K\\circ r_R^*f:r_R^*M\\to K,$$\nwhere the right side uses the canonical exact-pullback identification $r_R^*(QM)\\cong Q(r_R^*M)$. The maps $\\alpha_K$ and this formula are natural in chain maps in both variables. In particular, setting $M=r_{*,R}K$ and $f=1$ gives\n$$\\varepsilon_{QK}\\circ r_R^*(\\alpha_K)=Q(\\varepsilon^0_K).$$\nNo boundedness, acyclicity, flatness or properness assumption is required.",
+ "statement": "Let $r:W\\to V$ be any morphism of schemes [def-pc-scheme] and $R$ any commutative ring. Work with sheaves of modules over the constant ring sheaves on small etale sites and the ordinary unbounded derived categories [def-weil-pbc-derived-categories]. Write $r_R^*\\dashv r_{*,R}$ for the exact module inverse-image adjunction [prop-weil-pbc-inverse-image-modules-exact]. Let $Q$ be localization and let $\\alpha_K:Q(r_{*,R}K)\\to Rr_{*,R}(QK)$ be the canonical right-derived comparison, defined using K-injective resolutions [lem-weil-pbc-kinjective-total-derived].\n\nThere is a canonical derived adjunction $r_R^*\\dashv Rr_{*,R}$, with $r_R^*$ represented termwise [lem-weil-pbc-exact-functor-derived-factorization]. For any cochain complexes $M$ on $V$ and $K$ on $W$, and any chain map $f:M\\to r_{*,R}K$, its Hom bijection satisfies\n$$e_R(\\alpha_K\\circ Qf)=Q(f^\\flat),\\qquad f^\\flat=\\varepsilon^0_K\\circ r_R^*f:r_R^*M\\to K,$$\nwhere the right side uses the canonical exact-pullback identification $r_R^*(QM)\\cong Q(r_R^*M)$. The maps $\\alpha_K$ and this formula are natural in chain maps in both variables. In particular, setting $M=r_{*,R}K$ and $f=1$ gives\n$$\\varepsilon_{QK}\\circ r_R^*(\\alpha_K)=Q(\\varepsilon^0_K).$$\nNo boundedness, acyclicity, flatness or properness assumption is required.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0FPI (lemma-adjoints-push-pull-compatibility), with Tag 07A6 (lemma-adjoint): canonical counit square specialized to exact constant-coefficient inverse image; agent-stated etale chain-transpose formulation. See also derived.tex, Tags 0FND/0DVC (lemma-pre-derived-adjoint-functors-general/lemma-pre-derived-adjoint-functors)."
@@ -11,11 +11,120 @@
   "def-pc-scheme",
   "def-weil-pbc-derived-categories",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-kinjective-total-derived"
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal A=\\Mod(V_{\\Et},R)$, $\\mathcal B=\\Mod(W_{\\Et},R)$, $L=r_R^*$ and $G=r_{*,R}$. By [prop-weil-pbc-inverse-image-modules-exact](3), we have $L\\dashv G$ with $L$ additive and exact; $G$ is additive because its stated sectionwise formula preserves sums of module maps. By [lem-weil-pbc-termwise-adjunction-homotopy](a),(b), they give adjunctions on complexes and on homotopy categories, with transpose $f\\mapsto\\varepsilon^0_K\\circ Lf$. By [lem-weil-pbc-exact-functor-derived-factorization], $L$ preserves quasi-isomorphisms and descends termwise to $D(L)$, with the natural identification $D(L)(QM)\\cong Q(LM)$. In all subsequent equations this identification is understood.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives, termwise adjunction) and 015F (lemma-right-derived-exact-functor); sites-modules.tex Tag 04JC"
+   }
+  },
+  {
+   "text": "Use small representatives of the sites in a containing universe [def-weil-size-convention]. By [prop-pur-kinjective-resolutions-exist], every complex of $\\mathcal B$ admits a K-injective resolution. The functor $QG:K(\\mathcal B)\\to D(\\mathcal A)$ is exact: $G$ is additive, so it preserves the finite biproduct and differential matrix defining each cone, including its minus sign, and it commutes termwise with shifts; the cone triangulation of the homotopy category and exactness of its localization are stated by [lem-pur-homotopy-category-triangulated], with cone matrices as in [def-weil-abstract-derived-category]. Thus [lem-weil-pbc-kinjective-total-derived] applies and gives the canonical pair $(RG,\\alpha)$, with $\\alpha_I:Q(GI)\\xrightarrow{\\sim}RG(QI)$ for every K-injective $I$. This is the pair called $Rr_{*,R}$ and $\\alpha$ in the statement.",
+   "uses": [
+    "def-weil-size-convention",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014X (lemma-additive-exact-homotopy-category) and 070K (lemma-enough-K-injectives-implies); sites-cohomology.tex Section 07A5; injectives.tex Tag 079P"
+   }
+  },
+  {
+   "text": "Choose a resolution $j:K\\to I$ as above. Since $L$ is exact, [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $GI$ K-injective in $\\mathcal A$. Set $c_j=\\alpha_I^{-1}\\circ RG(Qj):RG(QK)\\xrightarrow{\\sim}Q(GI)$. The comparison calculation of [lem-sf-kinjective-derived-map-computation] identifies this isomorphism with the canonical computation on $I$. Naturality of $\\alpha$ gives the particular equality $c_j\\circ\\alpha_K=Q(Gj)$. No claim that $G$ preserves the quasi-isomorphism $j$ is used: $RG(Qj)$ is invertible because $Qj$ is.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "For every complex $M$ compose the bijections\n$$\\begin{aligned}\n\\Hom_{D(\\mathcal A)}(QM,RG(QK))\n&\\xrightarrow{c_j\\circ-}\\Hom_{D(\\mathcal A)}(QM,Q(GI))\\\\\n&\\xrightarrow{Q^{-1}}\\Hom_{K(\\mathcal A)}(M,GI)\n\\xrightarrow{\\mathrm{adj}}\\Hom_{K(\\mathcal B)}(LM,I)\\\\\n&\\xrightarrow{Q}\\Hom_{D(\\mathcal B)}(Q(LM),QI)\n\\xrightarrow{(Qj)^{-1}\\circ-}\\Hom_{D(\\mathcal B)}(Q(LM),QK).\n\\end{aligned}$$\nBoth uses of $Q$ on Hom sets are bijections by [lem-weil-pbc-kinjective-hom-derived], since $GI$ and $I$ are K-injective; the middle bijection is [lem-weil-pbc-termwise-adjunction-homotopy](b). Denote the resulting bijection by $e_{M,K}$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective) and 0FND (lemma-pre-derived-adjoint-functors-general), Hom-bijection computation"
+   }
+  },
+  {
+   "text": "For a derived arrow $h:QK\\to QK'$, choose resolutions $j:K\\to I$, $j':K'\\to I'$. By [lem-sf-kinjective-derived-map-computation], it is represented by a unique homotopy class $g:I\\to I'$ and satisfies\n$$Qg\\circ Qj=Qj'\\circ h,\\qquad c_{j'}RG(h)=Q(Gg)c_j.$$\nFor $a:QM\\to RG(QK)$, let $t:M\\to GI$ represent $c_ja$. Then $Gg\\circ t$ represents $c_{j'}RG(h)a$. By naturality of the homotopy adjunction [lem-weil-pbc-termwise-adjunction-homotopy], its transpose is $g\\circ t^\\flat$. Hence\n$$e_{M,K'}(RG(h)a)=(Qj')^{-1}Qg\\,Q(t^\\flat)=h\\,e_{M,K}(a).$$\nTaking $h=1$ and two resolutions of the same $K$ proves independence of the resolution. Precomposing by a chain map $b:M'\\to M$ gives $e_{M',K}(a\\,Qb)=e_{M,K}(a)Q(Lb)$ by the same homotopy-adjunction naturality. These equalities descend uniquely to all derived source arrows by [lem-weil-pbc-localization-universal-property](2), applied to the two Hom functors on the opposite source category: both invert quasi-isomorphisms, since $L$ does. Thus $e$ is bifunctorial on the derived categories.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined), 070I (lemma-K-injective) and 0FND (lemma-pre-derived-adjoint-functors-general), functoriality in both variables"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-adjunction-of-natural-bijection] to $e^{-1}$. It gives $D(L)\\dashv RG$, whose inverse Hom bijection is $e$. Its construction is precisely the canonical K-injective derived adjunction: the Hom calculation of Step 4 uses the given comparison isomorphisms $c_j$, and Step 5 proves independence of their resolution choices. For a chain map $f:M\\to GK$, Step 3 gives\n$$c_j(\\alpha_K\\circ Qf)=Q(Gj\\circ f).$$\nThus Step 4 represents this morphism by $Gj\\circ f$, whose ordinary transpose is\n$$\\varepsilon^0_I\\circ L(Gj\\circ f)=j\\circ\\varepsilon^0_K\\circ Lf=j\\circ f^\\flat$$\nby the natural counit in [lem-weil-pbc-termwise-adjunction-homotopy](a). The last arrow of Step 4 cancels $Qj$ and yields $e_{M,K}(\\alpha_K\\circ Qf)=Q(f^\\flat)$. This proves the required formula for arbitrary complexes, without resolving $M$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPI (lemma-adjoints-push-pull-compatibility), counit square; Tag 07A6 (lemma-adjoint), with derived.tex Tags 0FND/070I"
+   }
+  },
+  {
+   "text": "For chain maps $b:M'\\to M$ and $k:K\\to K'$, the ordinary transpose satisfies\n$$(Gk\\circ f\\circ b)^\\flat=k\\circ f^\\flat\\circ Lb.$$\nThis is the naturality assertion of [lem-weil-pbc-termwise-adjunction-homotopy]. Together with $\\alpha_{K'}Q(Gk)=RG(Qk)\\alpha_K$ and the bifunctoriality of Step 5, it proves naturality of the displayed formula in both variables. Finally put $M=GK$, $f=1_{GK}$. By [lem-weil-pbc-adjunction-of-natural-bijection], $e(a)=\\varepsilon_{QK}\\circ D(L)(a)$. The formula is therefore exactly $\\varepsilon_{QK}\\circ D(L)(\\alpha_K)=Q(\\varepsilon^0_K)$. All resolutions above were unbounded resolutions of arbitrary module-sheaf complexes, and the sole exactness hypothesis used was that of constant-coefficient $L$.",
+   "uses": [
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0FPI (lemma-adjoints-push-pull-compatibility), exact-pullback specialization and naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-size-convention",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6 and 0FPI, exact constant-coefficient specialization expanded by the K-injective Hom calculation of derived.tex Tags 070I, 070K, 070Y, 08BJ and 0FND."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +169,17 @@
    "date": "2026-10-21",
    "verdict": "no match: Mathlib has the abstract derived counit square (Adjunction.derivedε_fac_app, CategoryTheory/Functor/Derived/Adjunction.lean:125), but does not supply the etale module-sheaf setup, existence and canonical cochain normalization together. The existing generic DAG nodes are reused in the proof.",
    "subdirectory": "CategoryTheory/Functor/Derived"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact left adjoint on sheaves of modules induces an unbounded derived adjunction whose counit composed with the right derived comparison is the localized ordinary counit",
+   "results": "{\"t\": \"2026-10-21T03:45:59Z\", \"tool\": \"leansearch\", \"query\": \"An exact left adjoint on sheaves of modules induces an unbounded derived adjunction whose counit composed with the right derived comparison is the localized ordinary counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derived_counit\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived'_unit\", \"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedε.congr_simp\", \"CategoryTheory.Adjunction.derived_unit\"], \"digest\": \"4ae6fff2cb3490b2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits give the abstract derived adjunction/counit factorization, not the etale module-sheaf realization and its hypotheses. Read Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean:118-151; the split supplies the geometric setup and K-injective construction using existing nodes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-acyclic-flat-proper-coefficient-model",
@@ -83,5 +199,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-etale-derived-chain-transpose",
+  "worker": "stage1",
+  "summary": "Unchanged statement. Constructed the canonical unbounded derived Hom bijection using existing K-injective nodes, checked resolution independence and both naturality variables, and calculated the ordinary-chain transpose and the counit square explicitly. No new nodes.",
+  "blueprint": "det-sp-reduction-exceptional, Charts paragraph: compatibility of coefficient comparisons with normalized counits, via lem-sp-et-proet-coefficient-compatibility and lem-sp-acyclic-flat-proper-coefficient-model. Steps 1-5 construct the underlying canonical adjunction and Steps 6-7 supply the chain-level counit normalization needed by that paragraph.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic constant-coefficient exact inverse-image adjunction, used to type the canonical normalization on ordinary etale module sheaves. The unit requires this canonical adjunction calculation and supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic passage of an additive adjunction to complexes and homotopy classes, used for the explicit transpose formula. The unit requires this canonical adjunction calculation and supplies no substitute."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic unbounded resolution existence for small ringed sites, needed for arbitrary etale module complexes. The unit requires this canonical adjunction calculation and supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic existence and K-injective computation of a total right derived functor. The unit requires this canonical adjunction calculation and supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-left-adjoint criterion makes the direct image of the target resolution K-injective. The unit requires this canonical adjunction calculation and supplies no substitute."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic arbitrary-resolution comparison on morphisms, used to prove target naturality and resolution independence. The unit requires this canonical adjunction calculation and supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic localization descent of natural transformations, used for source naturality on all derived arrows. The unit requires this canonical adjunction calculation and supplies no substitute."
+   },
+   {
+    "node": "lem-pur-homotopy-category-triangulated",
+    "why": "Generic cone triangulation of the homotopy category and exactness of localization, used to check the total-derived existence theorem applies to QG; the compatibility unit supplies no replacement for this generic construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pur-homotopy-category-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-140a3a0d7",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-140a3a0d7 (reviewer sub-agent of L); spot-checked: Read the whole delivery against Stacks 0FPI (sites-cohomology.tex l.4129) and 07A6 (l.3990), using the exact constant-coefficient pullback, so no K-flat replacement is needed. One commit; 0 new nodes; statement unchanged. review_split passes. Item still unsplit live and not on the drop list; no SGA citation. Each of the 7 steps is checked against the statements of the nodes it cites: Step 1 pullback is exact and additive by prop-weil-pbc-inverse-image-modules-exact(3), and the termwise adjunction and derived factorization apply. Step 2: the derived functor is defined because QG on homotopy categories is exact (shift and cone matrices, then lem-pur-homotopy-category-triangulated), and the small-site K-injective resolutions use the same K-injective notion. Step 3: GI is K-injective because the left adjoint is exact; c_j equals c_a of lem-sf-kinjective-derived-map-computation; c_j∘α_K = Q(Gj) by naturality of α; Q(Gj) is never inverted. Step 4: the composite of five bijections typechecks. Step 5: target naturality recomputed, (Qj')^{-1}Qg = h(Qj)^{-1}; source naturality descends via localization (2). Steps 6–7: e(α_K∘Qf) = Q(f^♭) through counit naturality; the counit square follows from Ψ^{-1}(b) = ε∘F(b). The formula plus naturality fixes the adjunction uniquely, so it is not a free choice, and it agrees with lem-asd-derived-counit-k-injective-termwise. No duplicate: exact-pullback-derived-adjunction (K-flat only), the pbc D^+ adjunction, cochain-adjunction-compatibility (exact right adjoint) and kun single counit are all narrower. Declared tool_uses are generic derived-category tools and are accepted. FIX (B3): the statement uses the termwise derived pullback D(L) and the identification r^*(QM) ≅ Q(r^*M), which only lem-weil-pbc-exact-functor-derived-factorization defines. Added that citation to the statement and to stmt_deps; the meaning is unchanged and there is no cycle.; 1 file(s) fixed by the reviewer"
  }
 }
