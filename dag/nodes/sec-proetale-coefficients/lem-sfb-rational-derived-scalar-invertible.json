@@ -13,9 +13,58 @@
   "sk-def-sfb-module-objects",
   "sk-def-sfb-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $a=\\ell^n$ and $b=(\\ell^n)^{-1}\\in E$. Since $E$ contains $\\mathbf Q_\\ell$, $a\\ne0$ and $ab=ba=1$. In the condensed ring [sk-def-sfb-condensed-ring], the constant functions with values $a,b$ give sections $c_a,c_b:\\mathbf Z\\to\\underline E$ of its underlying abelian ring object, with $c_ac_b=c_bc_a=1$. Here $c_t$ sends a locally constant integer-valued section $m$ to $m t$; these maps commute with restriction and satisfy the stated products pointwise. Pull them back to $E_X$ using the strong monoidal functor of [sk-def-sfb-pulled-back-coefficients], obtaining sections $a_X,b_X$ with $a_Xb_X=b_Xa_X=1$. Also $a_X=\\ell^n\\cdot1$: the inverse image in [sk-def-sfb-pullback-from-point] is a left adjoint between abelian sheaf categories, The adjunction identifies maps from $p_X^*(M\\oplus N)$ to $G$ with pairs of maps from $p_X^*M,p_X^*N$ to $G$, and maps from $p_X^*0$ with the singleton; thus it preserves finite coproducts, zero objects and zero maps. In an abelian category these coproducts are biproducts, and addition is the composite of their diagonal, the two maps and the codiagonal; hence it preserves sums. Apply this to the finite sum $c_a=\\ell^n c_1$.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-pulled-back-coefficients",
+    "sk-def-sfb-pullback-from-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; expanded elementary inverse construction"
+   }
+  },
+  {
+   "text": "For any internal $E_X$-module $M$ with action $\\gamma_M$, define $m_t(M)=\\gamma_M\\circ(t\\otimes1_M)\\circ\\lambda_M^{-1}$ for $t=a_X,b_X$. The action axioms of [sk-def-sfb-module-objects] give $m_s(M)m_t(M)=m_{st}(M)$ and $m_1(M)=1_M$. These are module morphisms: for a local ring section $r$ and module section $x$, $t(rx)=(tr)x=(rt)x=r(tx)$, since $E_X$ is commutative. Every module morphism $f:M\\to N$ satisfies $f m_t(M)=m_t(N)f$ by its action-compatibility axiom. Thus, on any cochain complex $C$, the degreewise maps $A^q=m_{a_X}(C^q)$ and $B^q=m_{b_X}(C^q)$ commute with the differentials. They are chain maps with $AB=BA=1_C$. Additivity and unitality of the action give $A^q=\\ell^n1_{C^q}$, hence $A=\\ell^n1_C$.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; expanded elementary inverse construction"
+   }
+  },
+  {
+   "text": "Use exactly the ordinary unbounded derived category $D(\\Mod_{E_X})$ of [sk-def-sfb-derived-categories]. By [lem-sfb-derived-localization-additive], choose a cochain complex $C$ and an isomorphism $u:Q(C)\\xrightarrow{\\sim}K$, and $Q$ is additive. Functoriality sends the two identities from step 2 to $Q(A)Q(B)=Q(B)Q(A)=1_{Q(C)}$. Additivity implies $Q(A)=Q(\\ell^n1_C)=\\ell^n1_{Q(C)}$, by induction on the finite sum of identities. Therefore $uQ(B)u^{-1}$ is a two-sided inverse of $uQ(A)u^{-1}=\\ell^n1_K$. This is the claimed inverse induced by the constant coefficient $\\ell^{-n}$. The formulas apply in every integer degree and require no boundedness condition.",
+   "uses": [
+    "sk-def-sfb-derived-categories",
+    "lem-sfb-derived-localization-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; expanded elementary inverse construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-derived-categories",
+  "lem-sfb-derived-localization-additive"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+  "place": "F inverts W, sentence: ell acts invertibly on E_X-modules; expanded elementary inverse construction; coefficient convention checked against Bhatt-Scholze Definition 6.8.1 and Lemma 6.8.2(2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +100,38 @@
    "results": "0 hits: ",
    "date": "2026-10-21",
    "verdict": "no match: the hits supply only individual ingredients, not the stated comparison or criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Multiplication by a unit of a commutative coefficient ring is invertible on every object of the derived category of internal module objects",
+   "results": "8 hits: instInvertibleCarrierOutModuleCatValSkeleton, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinear, Module.Invertible.left, DerivedCategory.instLinearSingleFunctor, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, Module.Invertible.right",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete continuous-coefficient derived statement: generic linear derived functors, unit linear equivalences and ordinary module sheaves provide ingredients only; the coefficient action is constructed explicitly in this split"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isIso_smul\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete continuous-coefficient derived statement: generic linear derived functors, unit linear equivalences and ordinary module sheaves provide ingredients only; the coefficient action is constructed explicitly in this split"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso_smul|smul_iso|instLinearCochainComplexIntQ|instAdditive.*Q",
+   "results": "10 hits: Mathlib/CategoryTheory/Shift/Twist.lean, Mathlib/CategoryTheory/Shift/Twist.lean, Mathlib/CategoryTheory/Shift/Twist.lean, Mathlib/CategoryTheory/Shift/Twist.lean, Mathlib/CategoryTheory/Center/Basic.lean, Mathlib/CategoryTheory/Center/Basic.lean, Mathlib/CategoryTheory/Center/Basic.lean, Mathlib/CategoryTheory/Center/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete continuous-coefficient derived statement: generic linear derived functors, unit linear equivalences and ordinary module sheaves provide ingredients only; the coefficient action is constructed explicitly in this split"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A unit scalar gives an automorphism on an unbounded complex of modules over a sheaf of commutative rings",
+   "results": "8 hits: PresheafOfModules.Sheafify.one_smul, LinearEquiv.smulOfUnit, AddAut.mulRight, HomologicalComplex.units_smul_f_apply, CochainComplex.HomComplex.Cocycle.coe_units_smul, CochainComplex.HomComplex.Cochain.shift_units_smul, CochainComplex.HomComplex.δ_units_smul, SheafOfModules.unit",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete continuous-coefficient derived statement: generic linear derived functors, unit linear equivalences and ordinary module sheaves provide ingredients only; the coefficient action is constructed explicitly in this split"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-sfb-extend-scalars-localization",
@@ -71,5 +148,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-rational-derived-scalar-invertible",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Wrote the inverse via constant coefficient sections, the internal module action, and explicit inverse chain maps. One generic Mathlib leaf supplies additivity and essential surjectivity of the ordinary derived localization; no geometric comparison, finite rank, completion or boundedness result is used.",
+  "blueprint": "thm-sfb-extend-scalars-localization proof, F inverts W, sentence ell acts invertibly on E_X-modules. Steps 1-2 construct this action and its inverse; step 3 passes it to every ordinary derived object."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-21bc09563",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-21bc09563 (reviewer sub-agent of L); spot-checked: Item statement and stmt_deps are unchanged, and the item matches the blueprint thm-sfb-extend-scalars-localization proof l.12-13 ('ell acts invertibly on E_X-modules'). It has no repair note, it is not in route-pivot-dropped, live/side-live still show it unsplit, and no SGA source is cited. Step 1: the constant sections c_a, c_b: Z -> \\underline E with pointwise products are transported along the strong monoidal p_X^*. p_X^* is a left adjoint between abelian categories, so it is additive and a_X = ell^n * unit (pullback-from-point (4)); this is elementary. Step 2: m_t = gamma(t (x) 1) lambda^{-1}. The action axioms give m_s m_t = m_st, the maps are module morphisms because E_X is commutative, and they commute with all module maps, so A and B are inverse chain maps with A = ell^n * 1. I checked this degreewise; it holds for unbounded complexes. Step 3: the new leaf gives a representative u: Q(C) = K and additivity of Q, so conjugating Q(B) gives the inverse on K. New leaf lem-sfb-derived-localization-additive: Mathlib DerivedCategory/Basic.lean l.146-147 (Q.Additive via additive_of_iso) and l.195-196 (Q.EssSurj) are exact, one declaration per clause. The node is statement-only, generic, strictly smaller than the item and creates no cycle. Stacks 05QE (homology.tex l.1866) applies to K(A) rather than CoCh(A); the wording is loose but acceptable. Advisory: lem-weil-linear-abelian-derived-category with R=Z implies the additivity clause and lem-sfb-additive-localization-linear gives essential surjectivity for additive localizations. No node states the conjunction, so I kept the leaf rather than drop it. Edge cases n=0, K=0, empty X and unbounded complexes are fine. Cosmetic typo ', The adjunction' in step 1 is not repaired. No fixes."
  }
 }

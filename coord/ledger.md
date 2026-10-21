@@ -20258,3 +20258,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:09 L: merged deliver/Q73/lem-sfb-scalar-presentation-cokernel (reviewer FIX; first push; new nodes: 0)
 - 2026-10-21T04:09:35Z L: superseded stage-1 delivery Q13/sk-prop-sf-rf-shriek-preservation at f330f1ba35a3600803dbdfa41f3cf3aae6e7f7ce; current completion retained; packet archived at refs/superseded/Q13/sk-prop-sf-rf-shriek-preservation/f330f1ba35a3600803dbdfa41f3cf3aae6e7f7ce; stale return retired.
 - 04:09 L: returned deliver/Q16/lem-weil-pbc-constant-tower-pushforward-normalization (reviewer RETURN: L: independent stage-2 immutable head ec2bbeab8be6: H13 (+H4/H9): the delivery rebinds the landed record of lem-weil-rin)
+- 04:09 L: merged deliver/Q31/lem-sfb-rational-derived-scalar-invertible (reviewer PASS; first push; new nodes: 1)
