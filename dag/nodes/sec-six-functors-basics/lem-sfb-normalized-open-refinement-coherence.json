@@ -20,9 +20,98 @@
   "lem-sfb-module-derived-compositor-coherence",
   "lem-sfb-identity-open-derived-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the actual ordinary unbounded open derived adjunction $j_!\\dashv j^*$ specified in [def-sfb-open-closed-internal-hom-comparisons]. The open unit is invertible by [lem-sfb-condensed-support-derived-localization], applied to $j$ and a closed immersion defining its complementary closed subset. Its hypotheses are a commutative condensed ring and a quasi-compact open immersion, both present here; it imposes no boundedness or constructibility. The same applies to $j'$ and $j''$. These are the coefficient-linear adjunctions and units of the statement, including their canonical alpha transport.",
+   "uses": [
+    "def-sfb-open-closed-internal-hom-comparisons",
+    "lem-sfb-condensed-support-derived-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "The restriction to X: exact open adjunction and invertible open unit"
+   }
+  },
+  {
+   "text": "For $K,L\\in D_U$ define\n$$B_h(K,L):\\operatorname{Hom}_{D_Z}(j_!K,Rh_*j'_!L)\\longrightarrow\\operatorname{Hom}_{D_U}(K,L),\\quad a\\longmapsto\\eta_{j',L}^{-1}\\circ(r_h)_{j'_!L}\\circ j^*(a)\\circ\\eta_{j,K}.$$\nThis is a bijection: the specified open adjunction sends $a$ to $j^*(a)\\circ\\eta_{j,K}$, and postcomposition with the isomorphism $\\eta_{j',L}^{-1}(r_h)_{j'_!L}$ is a bijection by [lem-sfb-identity-open-derived-restriction]. Explicitly its inverse sends $v:K\\to L$ to $\\varepsilon_{j,Rh_*j'_!L}\\circ j_!((r_h)_{j'_!L}^{-1}\\circ\\eta_{j',L}\\circ v)$; the two inverse identities are the two adjunction triangle identities followed by cancellation of these isomorphisms.",
+   "uses": [
+    "def-sfb-open-closed-internal-hom-comparisons",
+    "lem-sfb-identity-open-derived-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(1) Uniqueness: the open-adjunction Hom bijection"
+   }
+  },
+  {
+   "text": "Set $e_{h,K}=B_h(K,K)^{-1}(1_K)$. Unwinding the preceding formula, its adjoint is precisely $(r_h)_{j'_!K}^{-1}\\circ\\eta_{j',K}$. Thus it is the arrow defined in the statement. The equality $B_h(K,K)(e_{h,K})=1_K$ is exactly the displayed normalization, and injectivity of $B_h(K,K)$ proves uniqueness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(1) Uniqueness: existence and uniqueness of the normalized arrow"
+   }
+  },
+  {
+   "text": "For any $u:K\\to L$ apply $B_h(K,L)$ to the two arrows $Rh_*(j'_!u)\\circ e_{h,K}$ and $e_{h,L}\\circ j_!u$. Naturality of $r_h$ from [lem-sfb-identity-open-derived-restriction] and of $\\eta_{j'}$ gives for the first image\n$$\\eta_{j',L}^{-1}\\circ j'^*(j'_!u)\\circ(r_h)_{j'_!K}\\circ j^*(e_{h,K})\\circ\\eta_{j,K}=u.$$\nNaturality of $\\eta_j$ gives for the second image $B_h(L,L)(e_{h,L})\\circ u=u$. Injectivity of $B_h(K,L)$ therefore gives $Rh_*(j'_!u)\\circ e_{h,K}=e_{h,L}\\circ j_!u$, the required naturality.",
+   "uses": [
+    "lem-sfb-identity-open-derived-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(1) Uniqueness, applied to a morphism K to L; (2), natural transformation assertion"
+   }
+  },
+  {
+   "text": "For $h=1_Z$ and $j'=j$, [lem-sfb-module-derived-compositor-coherence] identifies $R(1_Z)_*$ with the identity, and [lem-sfb-identity-open-derived-restriction] says that $r_{1_Z}$ is the identity under that comparison. Consequently $B_{1_Z}(K,K)(1_{j_!K})=\\eta_{j,K}^{-1}\\circ\\eta_{j,K}=1_K$. Uniqueness from step 3 proves $e_{1,K}=1_{j_!K}$ under precisely these canonical identity constraints.",
+   "uses": [
+    "lem-sfb-module-derived-compositor-coherence",
+    "lem-sfb-identity-open-derived-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(3) Identity and transitivity: identity refinement"
+   }
+  },
+  {
+   "text": "Put $A=j''_!K$ and $\\beta=Rh_*(e_{k,K})\\circ e_{h,K}$. On arrows $a:j_!K\\to Rh_*Rk_*A$ the map\n$$T(a)=\\eta_{j'',K}^{-1}\\circ(r_k)_A\\circ(r_h)_{Rk_*A}\\circ j^*(a)\\circ\\eta_{j,K}$$\nis injective: it is the open-adjunction bijection followed by postcomposition with three isomorphisms supplied by the open units and [lem-sfb-identity-open-derived-restriction]. Naturality of $r_h$ at the arrow $e_{k,K}:j'_!K\\to Rk_*A$ yields\n$$(r_h)_{Rk_*A}\\circ j^*Rh_*(e_{k,K})=j'^*(e_{k,K})\\circ(r_h)_{j'_!K}.$$\nSubstitution and the two normalization equations from step 3 give\n$$T(\\beta)=\\eta_{j'',K}^{-1}\\circ(r_k)_A\\circ j'^*(e_{k,K})\\circ\\eta_{j',K}=1_K.$$\nThis computes the actual composite, without assuming either refinement arrow invertible.",
+   "uses": [
+    "lem-sfb-identity-open-derived-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(3) Identity and transitivity: restriction of the composite arrow"
+   }
+  },
+  {
+   "text": "The composite satisfies $(hk)j''=j$ and $(hk)^{-1}(j(U))=k^{-1}(j'(U))=j''(U)$, so step 3 applies to $hk$. The composition law in [lem-sfb-identity-open-derived-restriction], with the compositor of [lem-sfb-module-derived-compositor-coherence], reads\n$$(r_{hk})_A=(r_k)_A\\circ(r_h)_{Rk_*A}\\circ j^*(\\kappa_{h,k,A}).$$\nIt follows that $T(\\kappa_{h,k,A}\\circ e_{hk,K})=\\eta_{j'',K}^{-1}\\circ(r_{hk})_A\\circ j^*(e_{hk,K})\\circ\\eta_{j,K}=1_K$. Comparing with step 6 and using injectivity of $T$ proves $\\kappa_{h,k,A}\\circ e_{hk,K}=Rh_*(e_{k,K})\\circ e_{h,K}$. All calculations took place on the ordinary unbounded categories; no properness, density or field hypothesis was used.",
+   "uses": [
+    "lem-sfb-identity-open-derived-restriction",
+    "lem-sfb-module-derived-compositor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+    "place": "(3) Identity and transitivity: comparison with the arrow for hk"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-open-closed-internal-hom-comparisons",
+  "lem-sfb-condensed-support-derived-localization",
+  "lem-sfb-identity-open-derived-restriction",
+  "lem-sfb-module-derived-compositor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.proof.md",
+  "place": "(1) Uniqueness and (3) Identity and transitivity, with the normalized restriction equations expanded; det-sf-comp-coherence-cocycle.proof.md, Refinement isomorphisms"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +147,52 @@
    "results": "SheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp, CategoryTheory.Functor.sheafPushforwardContinuousComp', PresheafOfModules.pushforwardComp, PresheafOfModules.pushforward_assoc, CategoryTheory.Functor.sheafPushforwardContinuousComp, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, SheafOfModules.pushforwardComp_inv_app_val_app",
    "date": "2026-10-21",
    "verdict": "no match: the underived module/sheaf comparisons and Zariski restriction formulas do not give the specified unbounded pro-etale module-object coherence equations in one specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.NatTrans",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction transpose and naturality primitives do not state the normalized pro-etale module-object open-refinement arrow or its compatibility with the specified restriction/compositor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction hom equivalence defines natural extension by zero comparison maps whose normalized restriction is identity and composition is transitive",
+   "results": "8 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.restrictFullyFaithful_homEquiv_apply, CategoryTheory.Adjunction.homEquiv_naturality_left_square, CategoryTheory.Adjunction.CoreHomEquiv.homEquiv_naturality_left, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one, CategoryTheory.Adjunction.homEquiv_naturality_right_square, CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction transpose and naturality primitives do not state the normalized pro-etale module-object open-refinement arrow or its compatibility with the specified restriction/compositor"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|openImmersionLowerShriek|refinement.*[Cc]oher",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction transpose and naturality primitives do not state the normalized pro-etale module-object open-refinement arrow or its compatibility with the specified restriction/compositor"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation from extension by zero to derived pushforward uniquely determined by restriction to the open and compatible with composition",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.diagramNatTrans_zero, CategoryTheory.Functor.toRightDerivedZero, SheafOfModules.pushforwardNatTrans_comp, CategoryTheory.NatTrans.app_zero, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Functor.rightDerivedNatTrans, CategoryTheory.Limits.zero_app",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction transpose and naturality primitives do not state the normalized pro-etale module-object open-refinement arrow or its compatibility with the specified restriction/compositor"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an adjunction L left adjoint R the transpose of a natural family of maps is natural and equality of transposes implies equality of maps",
+   "results": "8 hits: CategoryTheory.Adjunction.homEquiv_naturality_left_square_iff, CategoryTheory.Adjunction.homEquiv_naturality_left_square, CategoryTheory.Adjunction.homEquiv_naturality_left_square_assoc, CategoryTheory.Adjunction.homEquiv_naturality_right_square_iff, CategoryTheory.Adjunction.homEquiv_naturality_right_square, CategoryTheory.Adjunction.homEquiv_naturality_left, CategoryTheory.Adjunction.homEquiv_naturality_right_square_assoc, CategoryTheory.ParametrizedAdjunction.homEquiv_naturality_one",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction transpose and naturality primitives do not state the normalized pro-etale module-object open-refinement arrow or its compatibility with the specified restriction/compositor"
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality|def homEquiv|homEquiv_apply",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean; subdirectory CategoryTheory/Adjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction transpose and naturality primitives do not state the normalized pro-etale module-object open-refinement arrow or its compatibility with the specified restriction/compositor"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sf-comp-coherence-cocycle",
@@ -78,5 +209,30 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-normalized-open-refinement-coherence",
+  "worker": "stage1",
+  "group": "O2",
+  "summary": "Statement unchanged. Seven steps give the actual unbounded adjunction setup, a normalized Hom bijection with inverse, existence and uniqueness, naturality, identity, and the explicit two-stage restriction calculation proving transitivity. All facts are existing DAG statements or displayed elementary adjunction calculations; no new nodes. Read the current main blueprint and all cited statements and checked the hypotheses and edge cases.",
+  "blueprint": "det-sf-comp-coherence-cocycle.proof.md, Refinement isomorphisms (identity and transitivity), realized via det-sf-comp-coherence-refinement.proof.md (1) and (3); this item supplies the naturality used in (2).",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-condensed-support-derived-localization",
+    "why": "Generic exact open support calculus supplies invertibility of the actual open adjunction unit on ordinary unbounded condensed-module derived categories, with no finiteness or Noetherian hypotheses; the unit has no such standalone statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-condensed-support-derived-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O2-5b7ec3853",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-5b7ec3853 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full and checked their types by hand. Step 1 cites the open derived adjunction of def-sfb-open-closed-internal-hom-comparisons, and the unit is invertible by lem-sfb-condensed-support-derived-localization: every admissible Λ is a commutative condensed ring, and the reduced complement of each quasi-compact j supplies the closed immersion. Steps 2-3: B_h(a)=η'^{-1}(r_h)j^*(a)η_j is the adjunction bijection followed by isomorphisms, so e_h=B^{-1}(1) gives the normalization and uniqueness. Step 4 proves naturality from the naturality of r_h and of η. Step 5 gives the identity case from R1_*≅1 and r_1=id. Steps 6-7: T is injective; naturality of r_h at e_k plus the two normalizations give T(Rh_*e_k∘e_h)=1, and the composition law r_hk=r_k∘(r_h Rk_*)∘j^*κ gives T(κ e_hk)=1. I verified (hk)^{-1}(jU)=j''U and the κ orientation. This matches blueprint main-20261015 det-sf-comp-coherence-refinement (1) and (3); properness is used only in (2), which the item does not assert. Edge cases checked: U empty, Λ=0, j=id (forces j' to be an isomorphism), h or k identity. There is no repair note, the item is not on the drop list, there are no new nodes and no SGA. Maintainer note: the existing det-sf-comp-coherence-refinement restates (1) and (3) in the proper/dense setting; this item is the generalization that det-sf-comp-coherence-cocycle cites, so the overlap was already there and is not a duplicate from this delivery. The worker wrote tool_uses for the generic open-unit invertibility lemma themselves (C8); I accept the use. No fixes."
  }
 }
