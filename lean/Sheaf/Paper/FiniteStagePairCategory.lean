@@ -9,6 +9,12 @@ public import Sheaf.Paper.PbcRationalCategory
 public import Sheaf.Paper.PbcFiniteCompletedCoefficientMap
 public import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 public import WeilConjectures.CategoryTheory.StageSystem.Basic
+import Sheaf.CategoryTheory.SystemScalarCoherence
+import Sheaf.CategoryTheory.DerivedCategory.NormalizedAdjunctionComposition
+import all Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import all Sheaf.Paper.CompletedAdicCoefficientDatum
+import all Sheaf.Paper.PbcScalarExtension
+import all Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization
 
 /-!
 # Scalar extension of completed integral coefficients and its raw rationalization
@@ -39,6 +45,7 @@ of `PbcFiniteStagePairCategory`.
 set_option autoImplicit false
 universe u c
 open CategoryTheory CategoryTheory.Limits Opposite
+open scoped TensorProduct
 namespace CategoryTheory.StageSystem
 
 universe w v z
@@ -281,6 +288,45 @@ Source: blueprint order 1308 (blueprint: def-weil-pbc-finite-stage-pair-category
 abbrev pbcStageLocalization (E : Padic.FiniteCoefficientFields l Ω) :=
   pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcStageCoefficientMap_eq (h : E ≤ F) :
+    pbcCompletedScalarMap l Ω T h =
+      pbcScalarCoefficientMap l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
+        (pbcFiniteFieldInclusion l Ω h) T := by
+  have hc (E : Padic.FiniteCoefficientFields l Ω) (n : ℕ) :
+      (pbcLevelConstantComparison T (pbcStageDatum.{u} l Ω E) n).hom =
+        AdicCoefficients.constantComparison T
+          ((PbcIntegralRing l (pbcFiniteField.{u} l Ω E)) ⧸
+            (pbcStageDatum.{u} l Ω E).ideal ^ (n + 1)) := by
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext _ _ _ ((pbcAdicRings T (pbcStageDatum.{u} l Ω E)).obj
+      (op n)).property
+    change toSheafify _ _ ≫ (pbcLevelConstantComparison T _ n).hom.hom =
+      toSheafify _ _ ≫ sheafifyMap _ _
+    rw [← toSheafify_naturality]
+    ext U b
+    exact (pbcLevelConstantComparison_exists T (pbcStageDatum.{u} l Ω E) n).exists.choose_spec U b
+  have hf (n : ℕ) : pbcFiniteScalarMap l Ω T h n =
+      AdicCoefficients.coefficientMap T
+        (pbcScalarQuotientMap l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
+          (pbcFiniteFieldInclusion l Ω h) n) := by
+    dsimp only [pbcFiniteScalarMap]
+    rw [← cancel_epi (pbcLevelConstantComparison T (pbcStageDatum.{u} l Ω E) n).hom,
+      Iso.hom_inv_id_assoc]
+    rw [hc E n, hc F n]
+    change (presheafToSheaf _ CommRingCat).map _ ≫
+        (presheafToSheaf _ CommRingCat).map _ =
+      (presheafToSheaf _ CommRingCat).map _ ≫ (presheafToSheaf _ CommRingCat).map _
+    rw [← CategoryTheory.Functor.map_comp, ← CategoryTheory.Functor.map_comp]
+    congr 1
+  apply (pbcCompletedScalarMap_exists l Ω T h).unique
+  · exact (pbcCompletedScalarMap_exists l Ω T h).exists.choose_spec
+  · intro n
+    rw [hf n]
+    exact (pbcScalarCoefficientMap_exists l (pbcFiniteField.{u} l Ω E)
+      (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T).exists.choose_spec n
+
 /-- Finite coefficient extension preserves the three defining integral conditions.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
 Proof: the target integer ring is finite free over the source integer ring.
@@ -295,7 +341,11 @@ theorem pbcAmbientScalarExtension_preserves (h : E ≤ F)
     (K : pbcIntegralStage l Ω T E) :
     PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω F)
       ((pbcAmbientScalarExtension l Ω T h).obj K.obj) := by
-  sorry
+  change PbcIsBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω F)
+    ((pbcDerivedExtend (pbcCompletedScalarMap l Ω T h)).obj K.obj)
+  rw [pbcStageCoefficientMap_eq l Ω T h]
+  exact pbcEmbeddingAmbientTensor_preserves l (pbcFiniteField.{u} l Ω E)
+    (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T _hdim _hl K
 
 variable [IsNoetherian T] (hdim : ∃ m : ℕ, topologicalKrullDim T ≤ m)
   (hl : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
@@ -310,6 +360,56 @@ def pbcIntegralScalarExtension (h : E ≤ F) :
       pbcAmbientScalarExtension l Ω T h)
     (pbcAmbientScalarExtension_preserves l Ω T h hdim hl)
 
+private abbrev pbcStageDenominators (E : Padic.FiniteCoefficientFields l Ω) :
+    MorphismProperty (pbcIntegralStage l Ω T E) :=
+  letI := pbcIntegralTriangulated l (pbcFiniteField.{u} l Ω E) T hdim hl
+  Rationalization.W (Submonoid.powers (pbcStageUniformizer.{u} l Ω E))
+    (pbcIntegralStage l Ω T E)
+
+omit [IsAlgClosure (Padic l) Ω] in
+private theorem pbcStageLocalization_isLocalization (E : Padic.FiniteCoefficientFields l Ω) :
+    (pbcStageLocalization l Ω T E).IsLocalization
+      (pbcStageDenominators l Ω T hdim hl E) := by
+  let := pbcIntegralTriangulated l (pbcFiniteField.{u} l Ω E) T hdim hl
+  exact ScalarLocalization.pbcScalarLocalization_isLocalization
+    (PbcIntegralRing l (pbcFiniteField.{u} l Ω E)) (pbcIntegralStage l Ω T E)
+    (pbcStageUniformizer.{u} l Ω E)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcIntegralScalarExtension_eq (h : E ≤ F) :
+    pbcIntegralScalarExtension l Ω T hdim hl h =
+      pbcEmbeddingIntegralTensor l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
+        (pbcFiniteFieldInclusion l Ω h) T hdim hl := by
+  unfold pbcIntegralScalarExtension pbcEmbeddingIntegralTensor
+  unfold pbcAmbientScalarExtension pbcEmbeddingAmbientTensor
+  simp only [pbcStageCoefficientMap_eq l Ω T h]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+omit [IsAlgClosure (Padic l) Ω] in
+include hdim hl in
+private theorem pbcStageFunctor_ext
+    {D : Type*} [Category* D] (B B' : pbcStageCategory l Ω T E ⥤ D)
+    (h : pbcStageLocalization l Ω T E ⋙ B = pbcStageLocalization l Ω T E ⋙ B') : B = B' := by
+  let Q := pbcStageLocalization l Ω T E
+  let W := pbcStageDenominators l Ω T hdim hl E
+  have : Q.IsLocalization W := pbcStageLocalization_isLocalization l Ω T hdim hl E
+  let : Localization.Lifting Q W (Q ⋙ B) B := ⟨Iso.refl _⟩
+  let : Localization.Lifting Q W (Q ⋙ B) B' := ⟨eqToIso h.symm⟩
+  let e := Localization.liftNatIso Q W (Q ⋙ B) (Q ⋙ B) B B' (Iso.refl _)
+  refine CategoryTheory.Functor.ext_of_iso e
+    (fun K ↦ congrArg (fun J ↦ J.obj K.obj) h) ?_
+  intro K
+  obtain ⟨K⟩ := K
+  change (Localization.liftNatTrans Q W (Q ⋙ B) (Q ⋙ B) B B' (𝟙 _)).app (Q.obj K) = _
+  rw [Localization.liftNatTrans_app]
+  change 𝟙 _ ≫ 𝟙 _ ≫ (eqToIso h.symm).inv.app K = _
+  simp only [Category.id_comp, eqToIso.inv, eqToHom_app]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+attribute [-instance] ULift.module in
 /-- Integral tensor extension has a unique factorization through raw localization.
 The equality fixes objects as well as integral morphisms; inverses of uniformizer
 multiples then fix every fraction. No arbitrary functor is chosen.
@@ -325,7 +425,26 @@ theorem pbcRationalScalarExtension_exists (h : E ≤ F) :
       pbcStageLocalization l Ω T E ⋙ B =
         pbcIntegralScalarExtension l Ω T hdim hl h ⋙
           pbcStageLocalization l Ω T F := by
-  sorry
+  let B := pbcRationalScalarExtension l (pbcFiniteField.{u} l Ω E)
+    (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T hdim hl
+  have hb : pbcStageLocalization l Ω T E ⋙ B =
+      pbcIntegralScalarExtension l Ω T hdim hl h ⋙ pbcStageLocalization l Ω T F := by
+    rw [pbcIntegralScalarExtension_eq l Ω T hdim hl h]
+    refine CategoryTheory.Functor.ext
+      (F := pbcStageLocalization l Ω T E ⋙ B)
+      (G := pbcEmbeddingIntegralTensor l (pbcFiniteField.{u} l Ω E)
+        (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T hdim hl ⋙
+          pbcStageLocalization l Ω T F) (fun _ ↦ rfl) ?_
+    intro K L f
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    change pbcRationalScalarHom l (pbcFiniteField.{u} l Ω E) (pbcFiniteField.{u} l Ω F)
+      (pbcFiniteFieldInclusion l Ω h) T hdim hl K L (1 ⊗ₜ[_] f) = _
+    rw [pbcRationalScalarHom_tmul]
+    simp only [map_one]
+    rfl
+  refine ⟨B, hb, ?_⟩
+  intro B' hB'
+  exact pbcStageFunctor_ext l Ω T hdim hl B' B (hB'.trans hb.symm)
 
 /-- Raw rationalized tensor extension. Equal coefficient fields use identity literally.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
@@ -392,6 +511,50 @@ theorem pbcCompletedScalarMap_comp (h : E ≤ F) (k : F ≤ G) :
       Category.assoc, hf n]
   · exact (pbcCompletedScalarMap_exists l Ω T (h.trans k)).exists.choose_spec
 
+set_option backward.isDefEq.respectTransparency false in
+omit [IsNoetherian T] in
+private theorem pbcCompletedScalarMap_id (E : Padic.FiniteCoefficientFields l Ω) :
+    pbcCompletedScalarMap l Ω T (le_refl E) = 𝟙 _ := by
+  have hi : pbcIntegerInclusion.{u} l Ω (le_refl E) = RingHom.id _ := by
+    apply RingHom.ext
+    intro x
+    apply ULift.ext
+    apply Subtype.ext
+    simp [pbcIntegerInclusion, WeilConjectures.integralScalarIntegerInclusion,
+      pbcFiniteFieldInclusion]
+  have hq (n : ℕ) : pbcQuotientInclusion.{u} l Ω (le_refl E) n = RingHom.id _ := by
+    apply RingHom.ext
+    intro x
+    refine Quotient.inductionOn' x ?_
+    intro x
+    change Ideal.Quotient.mk _ (pbcIntegerInclusion l Ω (le_refl E) x) = _
+    rw [hi]
+    rfl
+  have hf (n : ℕ) : pbcFiniteScalarMap l Ω T (le_refl E) n = 𝟙 _ := by
+    dsimp only [pbcFiniteScalarMap]
+    rw [hq]
+    have hm : CommRingCat.ofHom
+        (RingHom.id ((PbcIntegralRing l (pbcFiniteField.{u} l Ω E)) ⧸
+          (pbcStageDatum.{u} l Ω E).ideal ^ (n + 1))) = 𝟙 _ := rfl
+    rw [hm, CategoryTheory.Functor.map_id, Category.id_comp, Iso.inv_hom_id]
+  apply (pbcCompletedScalarMap_exists l Ω T (le_refl E)).unique
+  · exact (pbcCompletedScalarMap_exists l Ω T (le_refl E)).exists.choose_spec
+  · intro n
+    rw [hf, Category.id_comp, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+omit [IsNoetherian T] in
+private theorem pbcTensorSection_smul
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (M : pbcModules T R) (U : T.ProEtᵒᵖ) (r : S.obj.obj U) (x : M.val.obj U) :
+    pbcTensorSection φ M U r x = r • pbcTensorSection φ M U 1 x := by
+  change completedAdicChangeTensor T φ M U r x =
+    r • completedAdicChangeTensor T φ M U 1 x
+  simpa only [mul_one] using completedTensor_smul T φ M U r 1 x
+
+set_option backward.isDefEq.respectTransparency false in
+set_option linter.unusedSectionVars false in
 /-- The tensor unit comparison is fixed on sheafified pure tensors.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
 Proof: inclusion E→E is identity, also on completions. The balanced map
@@ -406,7 +569,31 @@ theorem pbcOrdinaryScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
         (x : M.val.obj U),
         (e.hom.app M).val.app U
           (pbcTensorSection (pbcCompletedScalarMap l Ω T (le_refl E)) M U r x) = r • x := by
-  sorry
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let φ := pbcCompletedScalarMap l Ω T (le_refl E)
+  let ρ := SheafOfModules.systemScalarRestrictionUnit φ (pbcCompletedScalarMap_id l Ω T E)
+  let a := (pbcScalarAdjunction φ).ofNatIsoRight ρ
+  let e := a.leftAdjointUniq Adjunction.id
+  have he (M : pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E)))
+      (U : T.ProEtᵒᵖ) (r : (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E)).obj.obj U)
+      (x : M.val.obj U) :
+      (e.hom.app M).val.app U (pbcTensorSection φ M U r x) = r • x := by
+    have h := Adjunction.unit_leftAdjointUniq_hom_app a Adjunction.id M
+    have hx := congrArg (fun f ↦ f.val.app U x) h
+    change (e.hom.app M).val.app U ((pbcScalarAdjunction φ).unit.app M |>.val.app U x) = x
+      at hx
+    erw [(pbcScalarAdjunction_exists φ).exists.choose_spec M U x] at hx
+    rw [pbcTensorSection_smul, _root_.map_smul, hx]
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply (pbcScalarAdjunction φ).homEquiv _ _ |>.injective
+  ext U x
+  change (e'.hom.app M).val.app U ((pbcScalarAdjunction φ).unit.app M |>.val.app U x) =
+    (e.hom.app M).val.app U ((pbcScalarAdjunction φ).unit.app M |>.val.app U x)
+  erw [(pbcScalarAdjunction_exists φ).exists.choose_spec M U x, he', he]
 
 /-- The section-normalized ordinary tensor unit.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
@@ -414,6 +601,65 @@ def pbcOrdinaryScalarUnit (E : Padic.FiniteCoefficientFields l Ω) :
     pbcExtend (pbcCompletedScalarMap l Ω T (le_refl E)) ≅
         𝟭 (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) :=
   (pbcOrdinaryScalarUnit_exists l Ω T E).exists.choose
+
+private def pbcHomotopyScalarUnit (E : Padic.FiniteCoefficientFields l Ω) :
+    (pbcExtend (pbcCompletedScalarMap l Ω T (le_refl E))).mapHomotopyCategory (.up ℤ) ≅
+      𝟭 (HomotopyCategory
+        (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) (.up ℤ)) :=
+  { hom := NatTrans.mapHomotopyCategory (pbcOrdinaryScalarUnit l Ω T E).hom (.up ℤ)
+    inv := NatTrans.mapHomotopyCategory (pbcOrdinaryScalarUnit l Ω T E).inv (.up ℤ)
+    hom_inv_id := by
+      rw [← NatTrans.mapHomotopyCategory_comp, Iso.hom_inv_id,
+        NatTrans.mapHomotopyCategory_id]
+    inv_hom_id := by
+      rw [← NatTrans.mapHomotopyCategory_comp, Iso.inv_hom_id,
+        NatTrans.mapHomotopyCategory_id] } ≪≫
+    Functor.mapHomotopyCategoryIdIso _ (.up ℤ)
+
+private def pbcHomotopyScalarUnitQ (E : Padic.FiniteCoefficientFields l Ω) :
+    (pbcExtend (pbcCompletedScalarMap l Ω T (le_refl E))).mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh ≅ DerivedCategory.Qh :=
+  Functor.isoWhiskerRight (pbcHomotopyScalarUnit l Ω T E) DerivedCategory.Qh ≪≫
+    Functor.leftUnitor DerivedCategory.Qh
+
+private def pbcDerivedScalarUnit (E : Padic.FiniteCoefficientFields l Ω) :
+    pbcAmbientScalarExtension l Ω T (le_refl E) ≅ 𝟭 (pbcAmbientStage l Ω T E) := by
+  let φ := pbcCompletedScalarMap l Ω T (le_refl E)
+  let a : DerivedCategory.Qh ⋙ 𝟭 (pbcAmbientStage l Ω T E) ≅ DerivedCategory.Qh :=
+    Functor.rightUnitor DerivedCategory.Qh
+  let := pbcDerivedExtension_universal φ
+  let := Functor.isLeftDerivedFunctor_of_inverts
+    (HomotopyCategory.quasiIso
+      (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) (.up ℤ))
+    (𝟭 (pbcAmbientStage l Ω T E)) a
+  exact Functor.leftDerivedNatIso _ _ (pbcExtensionCounit φ) a.hom
+    (HomotopyCategory.quasiIso
+      (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) (.up ℤ))
+    (pbcHomotopyScalarUnitQ l Ω T E)
+
+private theorem pbcDerivedScalarUnit_homotopy (E : Padic.FiniteCoefficientFields l Ω)
+    (H : HomotopyCategory
+      (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) (.up ℤ)) :
+    (pbcDerivedScalarUnit l Ω T E).hom.app (DerivedCategory.Qh.obj H) =
+      (pbcExtensionCounit (pbcCompletedScalarMap l Ω T (le_refl E))).app H ≫
+        DerivedCategory.Qh.map ((pbcHomotopyScalarUnit l Ω T E).hom.app H) := by
+  let φ := pbcCompletedScalarMap l Ω T (le_refl E)
+  let a : DerivedCategory.Qh ⋙ 𝟭 (pbcAmbientStage l Ω T E) ≅ DerivedCategory.Qh :=
+    Functor.rightUnitor DerivedCategory.Qh
+  let := pbcDerivedExtension_universal φ
+  let := Functor.isLeftDerivedFunctor_of_inverts
+    (HomotopyCategory.quasiIso
+      (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) (.up ℤ))
+    (𝟭 (pbcAmbientStage l Ω T E)) a
+  have h := Functor.leftDerivedNatTrans_app (pbcDerivedExtend φ) (𝟭 _)
+    (pbcExtensionCounit φ) a.hom
+    (HomotopyCategory.quasiIso
+      (pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))) (.up ℤ))
+    (pbcHomotopyScalarUnitQ l Ω T E).hom H
+  change (pbcDerivedScalarUnit l Ω T E).hom.app (DerivedCategory.Qh.obj H) ≫ 𝟙 _ =
+    (pbcExtensionCounit φ).app H ≫
+      (DerivedCategory.Qh.map ((pbcHomotopyScalarUnit l Ω T E).hom.app H) ≫ 𝟙 _) at h
+  simpa only [Category.comp_id] using h
 
 /-- The derived tensor unit is uniquely fixed by its universal counit on complexes.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
@@ -430,7 +676,117 @@ theorem pbcAmbientScalarUnit_exists (E : Padic.FiniteCoefficientFields l Ω) :
             DerivedCategory.Q.map
               ((NatTrans.mapHomologicalComplex
                 (pbcOrdinaryScalarUnit l Ω T E).hom (.up ℤ)).app P) := by
-  sorry
+  let φ := pbcCompletedScalarMap l Ω T (le_refl E)
+  let M := pbcModules T (pbcAdicCompletion T (pbcStageDatum.{u} l Ω E))
+  have he (P : CochainComplex M ℤ) :
+      (pbcDerivedScalarUnit l Ω T E).hom.app (DerivedCategory.Q.obj P) =
+        pbcComplexCounit φ P ≫ DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex (pbcOrdinaryScalarUnit l Ω T E).hom
+            (.up ℤ)).app P) := by
+    have hn := (pbcDerivedScalarUnit l Ω T E).hom.naturality
+      ((DerivedCategory.quotientCompQhIso M).inv.app P)
+    dsimp only [Functor.comp_obj, Functor.id_obj, Functor.id_map] at hn
+    have hf : ((pbcExtend φ).mapHomotopyCategoryFactors (.up ℤ)).hom.app P = 𝟙 _ := rfl
+    have hu : (pbcHomotopyScalarUnit l Ω T E).hom.app
+        ((HomotopyCategory.quotient M (.up ℤ)).obj P) =
+        (HomotopyCategory.quotient M (.up ℤ)).map
+          ((NatTrans.mapHomologicalComplex (pbcOrdinaryScalarUnit l Ω T E).hom
+            (.up ℤ)).app P) := by
+      simp only [pbcHomotopyScalarUnit, Iso.trans_hom, NatTrans.comp_app,
+        Functor.mapHomotopyCategoryIdIso_hom_app_eq_id]
+      rfl
+    calc
+      _ = (pbcAmbientScalarExtension l Ω T (le_refl E)).map
+            ((DerivedCategory.quotientCompQhIso M).inv.app P) ≫
+          (pbcDerivedScalarUnit l Ω T E).hom.app
+            ((HomotopyCategory.quotient M (.up ℤ) ⋙ DerivedCategory.Qh).obj P) ≫
+          (DerivedCategory.quotientCompQhIso M).hom.app P := by
+        dsimp only [Functor.comp_obj]
+        rw [reassoc_of% hn]
+        simp only [Iso.inv_hom_id_app, Category.comp_id]
+      _ = _ := by
+        dsimp only [Functor.comp_obj]
+        erw [pbcDerivedScalarUnit_homotopy l Ω T E
+          ((HomotopyCategory.quotient M (.up ℤ)).obj P), hu]
+        dsimp only [pbcComplexCounit]
+        erw [hf, DerivedCategory.Qh.map_id]
+        simp only [Category.assoc]
+        erw [DerivedCategory.quotientCompQhIso_hom_naturality]
+  refine ⟨pbcDerivedScalarUnit l Ω T E, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply Localization.natTrans_ext DerivedCategory.Q (HomologicalComplex.quasiIso M (.up ℤ))
+  intro P
+  exact (he' P).trans (he P).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+omit [IsNoetherian T] in
+private theorem pbcAdjunction_complexUnit
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (P : CochainComplex (pbcModules T R) ℤ) :
+    (pbcDerivedScalarAdjunction φ).unit.app (DerivedCategory.Q.obj P) ≫
+        (pbcDerivedRestrict φ).map (pbcComplexCounit φ P) ≫
+        (pbcRestrict φ).mapDerivedCategoryFactors.hom.app
+          (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P) =
+      DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex (pbcScalarAdjunction φ).unit (.up ℤ)).app P) := by
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  have hr (X : HomotopyCategory (pbcModules T R) (.up ℤ)) :
+      ∃ (K : HomotopyCategory (pbcModules T R) (.up ℤ)) (s : K ⟶ X),
+        IsIso ((pbcExtensionCounit φ).app K) ∧
+          HomotopyCategory.quasiIso (pbcModules T R) (.up ℤ) s := by
+    obtain ⟨G, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨K, s, hK, hs⟩ :=
+      ScalarReductionDerivedProof.kFlatResolutions.{u + 1, u, u + 1}
+        (J := ProEt.topology T) (O := R) G
+    exact ⟨_, (HomotopyCategory.quotient _ _).map s, pbcExtensionCounit_isIso φ K hK,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  obtain ⟨d, hd⟩ := ScalarReductionDerivedProof.derivedAdjunction_of_resolutions
+    (pbcExtend φ) (pbcRestrict φ) (pbcScalarAdjunction φ)
+    (pbcDerivedExtend φ) (pbcExtensionCounit φ) (pbcDerivedExtension_universal φ) hr
+  have hn (K : CochainComplex (pbcModules T R) ℤ) :
+        d.unit.app (DerivedCategory.Q.obj K) ≫
+          (pbcRestrict φ).mapDerivedCategory.map
+            ((pbcDerivedExtend φ).map ((DerivedCategory.quotientCompQhIso _).inv.app K) ≫
+              (pbcExtensionCounit φ).app ((HomotopyCategory.quotient _ _).obj K) ≫
+              DerivedCategory.Qh.map
+                (((pbcExtend φ).mapHomotopyCategoryFactors (.up ℤ)).hom.app K) ≫
+              (DerivedCategory.quotientCompQhIso _).hom.app
+                (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj K)) ≫
+          (pbcRestrict φ).mapDerivedCategoryFactors.hom.app
+            (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj K) =
+        DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex (pbcScalarAdjunction φ).unit (.up ℤ)).app K) := by
+    have hp := hd ((HomotopyCategory.quotient _ _).obj K)
+    change d.unit.app (DerivedCategory.Qh.obj
+        ((HomotopyCategory.quotient _ _).obj K)) ≫
+      (pbcRestrict φ).mapDerivedCategory.map
+        ((pbcExtensionCounit φ).app ((HomotopyCategory.quotient _ _).obj K)) ≫
+      (pbcRestrict φ).mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient _ _).obj
+        (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj K)) = _ at hp
+    simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
+      Adjunction.mapHomotopyCategory_unit_app_quotient] at hp
+    dsimp only [DerivedCategory.quotientCompQhIso,
+      HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+      Quotient.lift.isLift_hom, Quotient.lift.isLift_inv,
+      Functor.mapHomotopyCategoryFactors, CategoryTheory.Functor.map_id,
+      Category.id_comp, Category.comp_id] at hp ⊢
+    erw [(pbcDerivedExtend φ).map_id, DerivedCategory.Qh.map_id,
+      Category.comp_id, Category.id_comp]
+    erw [(pbcRestrict φ).mapDerivedCategory.map_id, DerivedCategory.Qh.map_id,
+      Category.id_comp] at hp
+    repeat' first | erw [Category.comp_id] at hp | erw [Category.id_comp] at hp
+    exact hp
+  have he : d = pbcDerivedScalarAdjunction φ :=
+    (pbcDerivedScalarAdjunction_exists φ).unique (fun K _ ↦ hn K)
+      (pbcDerivedScalarAdjunction_exists φ).exists.choose_spec
+  rw [← he]
+  exact hn P
 
 /-- The canonical derived tensor unit, rather than an arbitrary unit isomorphism.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
@@ -438,6 +794,101 @@ def pbcAmbientScalarUnit (E : Padic.FiniteCoefficientFields l Ω) :
     pbcAmbientScalarExtension l Ω T (le_refl E) ≅
         𝟭 (pbcAmbientStage l Ω T E) :=
   (pbcAmbientScalarUnit_exists l Ω T E).exists.choose
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+omit [IsNoetherian T] in
+private theorem pbcAdjunction_complexTranspose
+    {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (φ : R ⟶ S)
+    (P : CochainComplex (pbcModules T R) ℤ) (K : CochainComplex (pbcModules T S) ℤ)
+    (f : ((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P ⟶ K) :
+    (pbcDerivedScalarAdjunction φ).homEquiv _ _
+        (pbcComplexCounit φ P ≫ DerivedCategory.Q.map f) =
+      DerivedCategory.Q.map
+          (((pbcScalarAdjunction φ).mapHomologicalComplex (.up ℤ)).homEquiv P K f) ≫
+        (pbcRestrict φ).mapDerivedCategoryFactors.inv.app K := by
+  have hu : (pbcDerivedScalarAdjunction φ).unit.app (DerivedCategory.Q.obj P) ≫
+      (pbcDerivedRestrict φ).map (pbcComplexCounit φ P) =
+    DerivedCategory.Q.map
+        ((NatTrans.mapHomologicalComplex (pbcScalarAdjunction φ).unit (.up ℤ)).app P) ≫
+      (pbcRestrict φ).mapDerivedCategoryFactors.inv.app
+        (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P) := by
+    apply (cancel_mono ((pbcRestrict φ).mapDerivedCategoryFactors.hom.app _)).1
+    simp only [Category.assoc, Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+    exact pbcAdjunction_complexUnit T φ P
+  rw [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_comp, ← Category.assoc, hu,
+    Category.assoc]
+  erw [← (pbcRestrict φ).mapDerivedCategoryFactors.inv.naturality f]
+  simp only [Functor.comp_map]
+  erw [← Category.assoc, ← CategoryTheory.Functor.map_comp, Adjunction.homEquiv_unit]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcAmbientScalarUnit_mate (E : Padic.FiniteCoefficientFields l Ω) :
+    pbcAmbientScalarUnit l Ω T E =
+      Adjunction.leftAdjointIdIso
+        (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T (le_refl E)))
+        (Functor.exactDerivedRestrictionUnit _
+          (SheafOfModules.systemScalarRestrictionUnit
+            (pbcCompletedScalarMap l Ω T (le_refl E)) (pbcCompletedScalarMap_id l Ω T E))) := by
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let φ := pbcCompletedScalarMap l Ω T (le_refl E)
+  let Rφ := pbcRestrict φ
+  let ρ := SheafOfModules.systemScalarRestrictionUnit φ (pbcCompletedScalarMap_id l Ω T E)
+  let δ := Functor.exactDerivedRestrictionUnit Rφ ρ
+  let ν := pbcOrdinaryScalarUnit l Ω T E
+  let ac := (pbcScalarAdjunction φ).mapHomologicalComplex (.up ℤ)
+  let ρc := NatIso.mapHomologicalComplex ρ (.up ℤ) ≪≫
+    Functor.mapHomologicalComplexIdIso _ (.up ℤ)
+  let νc := NatIso.mapHomologicalComplex ν (.up ℤ) ≪≫
+    Functor.mapHomologicalComplexIdIso _ (.up ℤ)
+  have hn (P : CochainComplex (pbcModules T (pbcAdicCompletion T
+      (pbcStageDatum.{u} l Ω E))) ℤ) :
+      ac.homEquiv _ _ (νc.hom.app P) ≫ ρc.hom.app P = 𝟙 P := by
+    apply HomologicalComplex.hom_ext
+    intro i
+    change (pbcScalarAdjunction φ).homEquiv _ _ (ν.hom.app (P.X i)) ≫
+      ρ.hom.app (P.X i) = 𝟙 _
+    ext U x
+    change (ν.hom.app (P.X i)).val.app U
+      ((pbcScalarAdjunction φ).unit.app (P.X i) |>.val.app U x) = x
+    erw [(pbcScalarAdjunction_exists φ).exists.choose_spec,
+      (pbcOrdinaryScalarUnit_exists l Ω T E).exists.choose_spec]
+    exact one_smul _ _
+  have he := normalizedAdjunction_uniqueness
+    (QA := DerivedCategory.Q) (QB := DerivedCategory.Q)
+    ac Adjunction.id (pbcDerivedScalarAdjunction φ) Adjunction.id
+    (pbcComplexCounit φ) (fun _ ↦ 𝟙 _) Rφ.mapDerivedCategoryFactors.inv.app
+    (fun _ ↦ 𝟙 _) (pbcAdjunction_complexTranspose T φ)
+    (by intros; simp only [Category.id_comp, Category.comp_id]; rfl)
+    ρc δ νc.hom.app hn
+    (by intro K; simpa only [Category.comp_id] using
+      Functor.exactDerivedRestrictionUnit_inv_factors Rφ ρ K)
+  have hcanon :
+      ((pbcDerivedScalarAdjunction φ).ofNatIsoRight δ).leftAdjointUniq Adjunction.id =
+        Adjunction.leftAdjointIdIso (pbcDerivedScalarAdjunction φ) δ := by
+    apply Iso.ext
+    ext K
+    simp [Adjunction.leftAdjointUniq, Adjunction.leftAdjointIdIso,
+      conjugateEquiv_symm_apply_app]
+  symm
+  apply (pbcAmbientScalarUnit_exists l Ω T E).unique _
+    (pbcAmbientScalarUnit_exists l Ω T E).exists.choose_spec
+  intro P
+  have h := he P
+  rw [hcanon] at h
+  have hv : νc.hom.app P =
+      (NatTrans.mapHomologicalComplex ν.hom (.up ℤ)).app P := by
+    apply HomologicalComplex.hom_ext
+    intro i
+    simp only [νc, Iso.trans_hom, NatTrans.comp_app, HomologicalComplex.comp_f,
+      NatIso.mapHomologicalComplex_hom_app_f,
+      Functor.mapHomologicalComplexIdIso_hom_app_f]
+    exact Category.comp_id _
+  rw [hv, Category.comp_id] at h
+  exact h
 
 /-- The integral tensor unit is the restriction of the canonical ambient one.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
@@ -580,6 +1031,235 @@ def pbcIntegralScalarAssociator (h : E ≤ F) (k : F ≤ G) :
         pbcIntegralScalarExtension l Ω T hdim hl (h.trans k) :=
   (pbcIntegralScalarAssociator_exists l Ω T hdim hl h k).exists.choose
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcDerivedRestriction_leftUnit (h : E ≤ F) :
+    pbcDerivedRestrictComp (pbcCompletedScalarMap l Ω T (le_refl E))
+        (pbcCompletedScalarMap l Ω T h) (pbcCompletedScalarMap l Ω T h)
+        (pbcCompletedScalarMap_comp l Ω T (le_refl E) h) =
+      Functor.isoWhiskerLeft (pbcDerivedRestrict (pbcCompletedScalarMap l Ω T h))
+          (Functor.exactDerivedRestrictionUnit _
+            (SheafOfModules.systemScalarRestrictionUnit
+              (pbcCompletedScalarMap l Ω T (le_refl E)) (pbcCompletedScalarMap_id l Ω T E))) ≪≫
+        Functor.rightUnitor (pbcDerivedRestrict (pbcCompletedScalarMap l Ω T h)) := by
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let φ := pbcCompletedScalarMap l Ω T (le_refl E)
+  let ψ := pbcCompletedScalarMap l Ω T h
+  let ρ := SheafOfModules.systemScalarRestrictionUnit φ (pbcCompletedScalarMap_id l Ω T E)
+  have he : pbcRestrictComp φ ψ ψ
+      (pbcCompletedScalarMap_comp l Ω T (le_refl E) h) =
+      Functor.isoWhiskerLeft (pbcRestrict ψ) ρ := by
+    apply Iso.ext
+    ext M U x
+    change ((pbcRestrictComp φ ψ ψ
+      (pbcCompletedScalarMap_comp l Ω T (le_refl E) h)).hom.app M).val.app U x = x
+    exact (pbcRestrictComp_exists φ ψ ψ
+      (pbcCompletedScalarMap_comp l Ω T (le_refl E) h)).exists.choose_spec M U x
+  unfold pbcDerivedRestrictComp
+  dsimp only [pbcDerivedRestrict]
+  rw [he]
+  apply Iso.ext
+  ext X
+  have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft
+    (pbcRestrict ψ) ρ) X
+  have hu := congr_app (Functor.mapDerivedCategoryCompIso_comp_id (pbcRestrict ψ)) X
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hn hu
+  simp only [Functor.exactDerivedRestrictionUnit, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.rightUnitor_hom_app]
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (pbcRestrict ψ)
+    (pbcRestrict φ)).hom.app X)).1
+  erw [Iso.hom_inv_id_app_assoc]
+  simp only [← Category.assoc]
+  rw [← hn]
+  simp only [Category.assoc]
+  simp only [NatTrans.id_app] at hu
+  erw [reassoc_of% hu]
+  erw [Category.id_comp, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcDerivedRestriction_rightUnit (h : E ≤ F) :
+    pbcDerivedRestrictComp (pbcCompletedScalarMap l Ω T h)
+        (pbcCompletedScalarMap l Ω T (le_refl F)) (pbcCompletedScalarMap l Ω T h)
+        (pbcCompletedScalarMap_comp l Ω T h (le_refl F)) =
+      Functor.isoWhiskerRight
+          (Functor.exactDerivedRestrictionUnit _
+            (SheafOfModules.systemScalarRestrictionUnit
+              (pbcCompletedScalarMap l Ω T (le_refl F)) (pbcCompletedScalarMap_id l Ω T F)))
+          (pbcDerivedRestrict (pbcCompletedScalarMap l Ω T h)) ≪≫
+        Functor.leftUnitor (pbcDerivedRestrict (pbcCompletedScalarMap l Ω T h)) := by
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let φ := pbcCompletedScalarMap l Ω T h
+  let ψ := pbcCompletedScalarMap l Ω T (le_refl F)
+  let ρ := SheafOfModules.systemScalarRestrictionUnit ψ (pbcCompletedScalarMap_id l Ω T F)
+  have he : pbcRestrictComp φ ψ φ
+      (pbcCompletedScalarMap_comp l Ω T h (le_refl F)) =
+      Functor.isoWhiskerRight ρ (pbcRestrict φ) := by
+    apply Iso.ext
+    ext M U x
+    change ((pbcRestrictComp φ ψ φ
+      (pbcCompletedScalarMap_comp l Ω T h (le_refl F))).hom.app M).val.app U x = x
+    exact (pbcRestrictComp_exists φ ψ φ
+      (pbcCompletedScalarMap_comp l Ω T h (le_refl F))).exists.choose_spec M U x
+  unfold pbcDerivedRestrictComp
+  dsimp only [pbcDerivedRestrict]
+  rw [he]
+  apply Iso.ext
+  ext X
+  have hn := congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight
+    ρ (pbcRestrict φ)) X
+  have hu := congr_app (Functor.mapDerivedCategoryCompIso_id_comp (pbcRestrict φ)) X
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hn hu
+  simp only [Functor.exactDerivedRestrictionUnit, Iso.trans_hom, Iso.symm_hom,
+    NatTrans.comp_app, Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.leftUnitor_hom_app, CategoryTheory.Functor.map_comp]
+  apply (cancel_epi ((Functor.mapDerivedCategoryCompIso (pbcRestrict ψ)
+    (pbcRestrict φ)).hom.app X)).1
+  erw [Iso.hom_inv_id_app_assoc]
+  simp only [← Category.assoc]
+  rw [← hn]
+  simp only [Category.assoc]
+  simp only [NatTrans.id_app] at hu
+  erw [reassoc_of% hu]
+  erw [Category.id_comp, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcAmbientAssociator_leftUnit (h : E ≤ F) (K : pbcAmbientStage l Ω T E) :
+    (pbcAmbientScalarAssociator l Ω T (le_refl E) h).hom.app K =
+      (pbcAmbientScalarExtension l Ω T h).map ((pbcAmbientScalarUnit l Ω T E).hom.app K) := by
+  have hx := congrArg (fun e ↦ e.hom.app K)
+    (Adjunction.leftAdjointCompIso_id_comp
+      (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T (le_refl E)))
+      (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T h))
+      _ _ (pbcDerivedRestriction_leftUnit l Ω T h))
+  rw [← pbcAmbientScalarUnit_mate l Ω T E] at hx
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app] at hx
+  erw [Category.comp_id] at hx
+  exact hx
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcAmbientAssociator_rightUnit (h : E ≤ F) (K : pbcAmbientStage l Ω T E) :
+    (pbcAmbientScalarAssociator l Ω T h (le_refl F)).hom.app K =
+      (pbcAmbientScalarUnit l Ω T F).hom.app ((pbcAmbientScalarExtension l Ω T h).obj K) := by
+  have hx := congrArg (fun e ↦ e.hom.app K)
+    (Adjunction.leftAdjointCompIso_comp_id
+      (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T h))
+      (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T (le_refl F)))
+      _ _ (pbcDerivedRestriction_rightUnit l Ω T h))
+  rw [← pbcAmbientScalarUnit_mate l Ω T F] at hx
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerLeft_app, Functor.rightUnitor_hom_app] at hx
+  erw [Category.comp_id] at hx
+  exact hx
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcAmbientScalarAssociator_cocycle
+    {H : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) (k : F ≤ G) (j : G ≤ H)
+    (K : pbcAmbientStage l Ω T E) :
+    (pbcAmbientScalarExtension l Ω T j).map
+        ((pbcAmbientScalarAssociator l Ω T h k).hom.app K) ≫
+      (pbcAmbientScalarAssociator l Ω T (h.trans k) j).hom.app K =
+    (pbcAmbientScalarAssociator l Ω T k j).hom.app
+        ((pbcAmbientScalarExtension l Ω T h).obj K) ≫
+      (pbcAmbientScalarAssociator l Ω T h (k.trans j)).hom.app K := by
+  let a := pbcCompletedScalarMap l Ω T h
+  let b := pbcCompletedScalarMap l Ω T k
+  let c := pbcCompletedScalarMap l Ω T j
+  let ab := pbcCompletedScalarMap l Ω T (h.trans k)
+  let bc := pbcCompletedScalarMap l Ω T (k.trans j)
+  let abc := pbcCompletedScalarMap l Ω T (h.trans (k.trans j))
+  let eab := pbcRestrictComp a b ab (pbcCompletedScalarMap_comp l Ω T h k)
+  let ebc := pbcRestrictComp b c bc (pbcCompletedScalarMap_comp l Ω T k j)
+  let eabc := pbcRestrictComp a bc abc (pbcCompletedScalarMap_comp l Ω T h (k.trans j))
+  let eab_c := pbcRestrictComp ab c abc (pbcCompletedScalarMap_comp l Ω T (h.trans k) j)
+  have he : Functor.isoWhiskerLeft (pbcRestrict c) eab ≪≫ eab_c =
+      (Functor.associator _ _ _).symm ≪≫
+        Functor.isoWhiskerRight ebc (pbcRestrict a) ≪≫ eabc := by
+    apply Iso.ext
+    ext M U x
+    change (eab_c.hom.app M).val.app U ((eab.hom.app ((pbcRestrict c).obj M)).val.app U x) =
+      (eabc.hom.app M).val.app U ((ebc.hom.app M).val.app U x)
+    erw [(pbcRestrictComp_exists a b ab
+        (pbcCompletedScalarMap_comp l Ω T h k)).exists.choose_spec,
+      (pbcRestrictComp_exists ab c abc
+        (pbcCompletedScalarMap_comp l Ω T (h.trans k) j)).exists.choose_spec,
+      (pbcRestrictComp_exists b c bc
+        (pbcCompletedScalarMap_comp l Ω T k j)).exists.choose_spec,
+      (pbcRestrictComp_exists a bc abc
+        (pbcCompletedScalarMap_comp l Ω T h (k.trans j))).exists.choose_spec]
+  have hd := SheafOfModules.SuccessiveDerivedQuotient.exactComp_assoc
+    (pbcRestrict a) (pbcRestrict b) (pbcRestrict c)
+    (pbcRestrict ab) (pbcRestrict bc) (pbcRestrict abc) eab ebc eabc eab_c he
+  have hh := Adjunction.leftAdjointCompIso_assoc
+    (pbcDerivedScalarAdjunction a) (pbcDerivedScalarAdjunction b)
+    (pbcDerivedScalarAdjunction c) (pbcDerivedScalarAdjunction ab)
+    (pbcDerivedScalarAdjunction bc) (pbcDerivedScalarAdjunction abc)
+    (pbcDerivedRestrictComp a b ab _) (pbcDerivedRestrictComp b c bc _)
+    (pbcDerivedRestrictComp a bc abc _) (pbcDerivedRestrictComp ab c abc _) hd
+  have hx := congrArg (fun e ↦ e.hom.app K) hh
+  simpa only [pbcAmbientScalarAssociator, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+    Functor.associator_inv_app, Category.id_comp] using hx.symm
+
+private theorem pbcIntegralScalarAssociator_hom (h : E ≤ F) (k : F ≤ G)
+    (K : pbcIntegralStage l Ω T E) :
+    ((pbcIntegralScalarAssociator l Ω T hdim hl h k).hom.app K).hom =
+      (pbcAmbientScalarAssociator l Ω T h k).hom.app K.obj := by
+  exact congrArg (fun η ↦ η.app K)
+    (pbcIntegralScalarAssociator_exists l Ω T hdim hl h k).exists.choose_spec
+
+private theorem pbcIntegralScalarUnit_hom (E : Padic.FiniteCoefficientFields l Ω)
+    (K : pbcIntegralStage l Ω T E) :
+    ((pbcIntegralScalarUnit l Ω T hdim hl E).hom.app K).hom =
+      (pbcAmbientScalarUnit l Ω T E).hom.app K.obj := by
+  exact congrArg (fun η ↦ η.app K)
+    (pbcIntegralScalarUnit_exists l Ω T hdim hl E).exists.choose_spec
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcIntegralAssociator_leftUnit (h : E ≤ F)
+    (K : pbcIntegralStage l Ω T E) :
+    (pbcIntegralScalarAssociator l Ω T hdim hl (le_refl E) h).hom.app K =
+      (pbcIntegralScalarExtension l Ω T hdim hl h).map
+        ((pbcIntegralScalarUnit l Ω T hdim hl E).hom.app K) := by
+  apply ObjectProperty.hom_ext
+  change _ = (pbcAmbientScalarExtension l Ω T h).map
+    (((pbcIntegralScalarUnit l Ω T hdim hl E).hom.app K).hom)
+  erw [pbcIntegralScalarAssociator_hom, pbcIntegralScalarUnit_hom]
+  exact pbcAmbientAssociator_leftUnit l Ω T h K.obj
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcIntegralAssociator_rightUnit (h : E ≤ F)
+    (K : pbcIntegralStage l Ω T E) :
+    (pbcIntegralScalarAssociator l Ω T hdim hl h (le_refl F)).hom.app K =
+      (pbcIntegralScalarUnit l Ω T hdim hl F).hom.app
+        ((pbcIntegralScalarExtension l Ω T hdim hl h).obj K) := by
+  apply ObjectProperty.hom_ext
+  erw [pbcIntegralScalarAssociator_hom, pbcIntegralScalarUnit_hom]
+  exact pbcAmbientAssociator_rightUnit l Ω T h K.obj
+
+private theorem pbcIntegralScalarAssociator_cocycle
+    {H : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) (k : F ≤ G) (j : G ≤ H)
+    (K : pbcIntegralStage l Ω T E) :
+    (pbcIntegralScalarExtension l Ω T hdim hl j).map
+        ((pbcIntegralScalarAssociator l Ω T hdim hl h k).hom.app K) ≫
+      (pbcIntegralScalarAssociator l Ω T hdim hl (h.trans k) j).hom.app K =
+    (pbcIntegralScalarAssociator l Ω T hdim hl k j).hom.app
+        ((pbcIntegralScalarExtension l Ω T hdim hl h).obj K) ≫
+      (pbcIntegralScalarAssociator l Ω T hdim hl h (k.trans j)).hom.app K := by
+  apply ObjectProperty.hom_ext
+  change (pbcAmbientScalarExtension l Ω T j).map
+      (((pbcIntegralScalarAssociator l Ω T hdim hl h k).hom.app K).hom) ≫ _ = _
+  simp only [ObjectProperty.FullSubcategory.comp_hom, pbcIntegralScalarAssociator_hom]
+  exact pbcAmbientScalarAssociator_cocycle l Ω T h k j K.obj
+
 /-- The rational associator is uniquely determined on the unchanged integral objects.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
 Proof: apply target rationalization to the integral associator, conjugating by
@@ -599,7 +1279,47 @@ theorem pbcScalarAssociator_exists (h : E ≤ F) (k : F ≤ G) :
             (pbcStageLocalization l Ω T G).map
               ((pbcIntegralScalarAssociator l Ω T hdim hl h k).hom.app K) ≫
             (pbcScalarIntegralComparison l Ω T hdim hl (h.trans k)).inv.app K := by
-  sorry
+  let Q := pbcStageLocalization l Ω T E
+  let W := pbcStageDenominators l Ω T hdim hl E
+  have : Q.IsLocalization W := pbcStageLocalization_isLocalization l Ω T hdim hl E
+  let Bh := pbcScalarExtension l Ω T hdim hl h
+  let Bk := pbcScalarExtension l Ω T hdim hl k
+  let Bhk := pbcScalarExtension l Ω T hdim hl (h.trans k)
+  let Ih := pbcIntegralScalarExtension l Ω T hdim hl h
+  let Ik := pbcIntegralScalarExtension l Ω T hdim hl k
+  let QF := pbcStageLocalization l Ω T F
+  let QG := pbcStageLocalization l Ω T G
+  let c : Q ⋙ (Bh ⋙ Bk) ≅ Q ⋙ Bhk :=
+    (Functor.associator Q Bh Bk).symm ≪≫
+      Functor.isoWhiskerRight (pbcScalarIntegralComparison l Ω T hdim hl h) Bk ≪≫
+      Functor.associator Ih QF Bk ≪≫
+      Functor.isoWhiskerLeft Ih (pbcScalarIntegralComparison l Ω T hdim hl k) ≪≫
+      (Functor.associator Ih Ik QG).symm ≪≫
+      Functor.isoWhiskerRight (pbcIntegralScalarAssociator l Ω T hdim hl h k) QG ≪≫
+      (pbcScalarIntegralComparison l Ω T hdim hl (h.trans k)).symm
+  let e := Localization.liftNatIso Q W (Q ⋙ (Bh ⋙ Bk)) (Q ⋙ Bhk) (Bh ⋙ Bk) Bhk c
+  have he (K : pbcIntegralStage l Ω T E) :
+      e.hom.app (Q.obj K) =
+        Bk.map ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K) ≫
+        (pbcScalarIntegralComparison l Ω T hdim hl k).hom.app (Ih.obj K) ≫
+        QG.map ((pbcIntegralScalarAssociator l Ω T hdim hl h k).hom.app K) ≫
+        (pbcScalarIntegralComparison l Ω T hdim hl (h.trans k)).inv.app K := by
+    change (Localization.liftNatTrans Q W _ _ _ _ c.hom).app (Q.obj K) = _
+    rw [Localization.liftNatTrans_app]
+    simp only [Localization.Lifting.iso, Iso.refl_hom, Iso.refl_inv,
+      NatTrans.id_app, Category.id_comp, Category.comp_id]
+    simp only [c, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.associator_inv_app, Functor.associator_hom_app,
+      Functor.isoWhiskerRight_hom, Functor.whiskerRight_app,
+      Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
+      Category.id_comp]
+    erw [Category.id_comp, Category.id_comp]
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext K
+  exact (he' K.obj).trans (he K.obj).symm
 
 /-- The scalar associator induced by tensor balancing, including the normalized units.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
@@ -608,6 +1328,28 @@ def pbcScalarAssociator (h : E ≤ F) (k : F ≤ G) :
         pbcScalarExtension l Ω T hdim hl k ≅
         pbcScalarExtension l Ω T hdim hl (h.trans k) :=
   (pbcScalarAssociator_exists l Ω T hdim hl h k).exists.choose
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcScalarAssociator_normalization (h : E ≤ F) (k : F ≤ G)
+    (K : pbcIntegralStage l Ω T E) :
+    (pbcScalarAssociator l Ω T hdim hl h k).hom.app
+        ((pbcStageLocalization l Ω T E).obj K) ≫
+      (pbcScalarIntegralComparison l Ω T hdim hl (h.trans k)).hom.app K =
+    (pbcScalarExtension l Ω T hdim hl k).map
+        ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K) ≫
+      (pbcScalarIntegralComparison l Ω T hdim hl k).hom.app
+        ((pbcIntegralScalarExtension l Ω T hdim hl h).obj K) ≫
+      (pbcStageLocalization l Ω T G).map
+        ((pbcIntegralScalarAssociator l Ω T hdim hl h k).hom.app K) := by
+  unfold pbcScalarAssociator
+  rw [(pbcScalarAssociator_exists l Ω T hdim hl h k).exists.choose_spec K]
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+
+-- Keep chosen comparisons folded while rewriting their normalization equations.
+attribute [local irreducible] pbcScalarIntegralComparison pbcScalarAssociator
+  pbcIntegralScalarAssociator
 
 /-- The tensor associators satisfy the pentagon in component form.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
@@ -624,7 +1366,116 @@ theorem pbcScalarAssociator_cocycle {H : Padic.FiniteCoefficientFields l Ω}
       (pbcScalarAssociator l Ω T hdim hl k j).hom.app
           ((pbcScalarExtension l Ω T hdim hl h).obj K) ≫
         (pbcScalarAssociator l Ω T hdim hl h (k.trans j)).hom.app K := by
-  sorry
+  obtain ⟨KE⟩ := K
+  let Ih := pbcIntegralScalarExtension l Ω T hdim hl h
+  let Ik := pbcIntegralScalarExtension l Ω T hdim hl k
+  let Bj := pbcScalarExtension l Ω T hdim hl j
+  let Bk := pbcScalarExtension l Ω T hdim hl k
+  let QH := pbcStageLocalization l Ω T H
+  have hn := (pbcScalarAssociator l Ω T hdim hl k j).hom.naturality
+    ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app KE)
+  have hc := (pbcScalarIntegralComparison l Ω T hdim hl j).hom.naturality
+    ((pbcIntegralScalarAssociator l Ω T hdim hl h k).hom.app KE)
+  apply (cancel_mono
+    ((pbcScalarIntegralComparison l Ω T hdim hl (h.trans (k.trans j))).hom.app KE)).1
+  simp only [Category.assoc]
+  erw [pbcScalarAssociator_normalization l Ω T hdim hl (h.trans k) j KE,
+    pbcScalarAssociator_normalization l Ω T hdim hl h (k.trans j) KE]
+  rw [← CategoryTheory.Functor.map_comp_assoc]
+  erw [pbcScalarAssociator_normalization l Ω T hdim hl h k KE]
+  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+  simp only [Functor.comp_map] at hn hc
+  erw [← reassoc_of% hn]
+  erw [reassoc_of% hc]
+  erw [reassoc_of% (pbcScalarAssociator_normalization l Ω T hdim hl k j (Ih.obj KE))]
+  have hh := congrArg (fun f ↦ QH.map f)
+    (pbcIntegralScalarAssociator_cocycle l Ω T hdim hl h k j KE)
+  simp only [CategoryTheory.Functor.map_comp] at hh
+  exact congrArg (fun f ↦
+    Bj.map (Bk.map ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app KE)) ≫
+      Bj.map ((pbcScalarIntegralComparison l Ω T hdim hl k).hom.app (Ih.obj KE)) ≫
+      (pbcScalarIntegralComparison l Ω T hdim hl j).hom.app (Ik.obj (Ih.obj KE)) ≫ f) hh
+
+private theorem pbcTransportIso_heq {C D : Type*} [Category* C] [Category* D]
+    {A B C' : C ⥤ D} (h : A = B) (e : B ≅ C') : HEq (eqToIso h ≪≫ e) e := by
+  subst B
+  simp
+
+private theorem pbcScalarIntegralComparison_refl
+    (E : Padic.FiniteCoefficientFields l Ω)
+    (hs : pbcScalarExtension l Ω T hdim hl (le_refl E) = 𝟭 _) :
+    pbcScalarIntegralComparison l Ω T hdim hl (le_refl E) =
+      eqToIso (congrArg (fun B ↦ pbcStageLocalization l Ω T E ⋙ B) hs) ≪≫
+        (Functor.rightUnitor (pbcStageLocalization l Ω T E) ≪≫
+          (Functor.leftUnitor (pbcStageLocalization l Ω T E)).symm ≪≫
+          Functor.isoWhiskerRight (pbcIntegralScalarUnit l Ω T hdim hl E).symm
+            (pbcStageLocalization l Ω T E)) := by
+  unfold pbcScalarIntegralComparison
+  apply eq_of_heq
+  exact ((pbcScalarIntegralComparison_exists l Ω T hdim hl (le_refl E)).exists.choose_spec.1
+    rfl).trans (pbcTransportIso_heq
+      (congrArg (fun B ↦ pbcStageLocalization l Ω T E ⋙ B) hs) _).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcScalarAssociator_leftUnit (h : E ≤ F)
+    (hs : pbcScalarExtension l Ω T hdim hl (le_refl E) = 𝟭 _) :
+    pbcScalarAssociator l Ω T hdim hl (le_refl E) h =
+      eqToIso (congrArg (fun B ↦ B ⋙ pbcScalarExtension l Ω T hdim hl h) hs) ≪≫
+        Functor.leftUnitor (pbcScalarExtension l Ω T hdim hl h) := by
+  unfold pbcScalarAssociator
+  symm
+  apply (pbcScalarAssociator_exists l Ω T hdim hl (le_refl E) h).unique _
+    (pbcScalarAssociator_exists l Ω T hdim hl (le_refl E) h).exists.choose_spec
+  intro K
+  apply (cancel_mono ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K)).1
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  rw [pbcIntegralAssociator_leftUnit,
+    pbcScalarIntegralComparison_refl l Ω T hdim hl E hs]
+  simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, NatTrans.comp_app,
+    eqToHom_app, Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.id_comp,
+    Functor.leftUnitor_hom_app]
+  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+  have hn := (pbcScalarIntegralComparison l Ω T hdim hl h).hom.naturality
+    ((pbcIntegralScalarUnit l Ω T hdim hl E).inv.app K)
+  simp only [Functor.comp_map] at hn
+  rw [reassoc_of% hn]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp, Category.id_comp, Category.comp_id]
+  have hu := congrArg (fun f ↦ (pbcStageLocalization l Ω T F).map
+    ((pbcIntegralScalarExtension l Ω T hdim hl h).map f))
+    (Iso.inv_hom_id_app (pbcIntegralScalarUnit l Ω T hdim hl E) K)
+  simp only [CategoryTheory.Functor.map_comp, CategoryTheory.Functor.map_id] at hu
+  erw [hu]
+  erw [Category.comp_id]
+  simp only [eqToHom_map]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pbcScalarAssociator_rightUnit (h : E ≤ F)
+    (hs : pbcScalarExtension l Ω T hdim hl (le_refl F) = 𝟭 _) :
+    pbcScalarAssociator l Ω T hdim hl h (le_refl F) =
+      eqToIso (congrArg (fun B ↦ pbcScalarExtension l Ω T hdim hl h ⋙ B) hs) ≪≫
+        Functor.rightUnitor (pbcScalarExtension l Ω T hdim hl h) := by
+  unfold pbcScalarAssociator
+  symm
+  apply (pbcScalarAssociator_exists l Ω T hdim hl h (le_refl F)).unique _
+    (pbcScalarAssociator_exists l Ω T hdim hl h (le_refl F)).exists.choose_spec
+  intro K
+  apply (cancel_mono ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K)).1
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  rw [pbcIntegralAssociator_rightUnit,
+    pbcScalarIntegralComparison_refl l Ω T hdim hl F hs]
+  simp only [Iso.trans_hom, Iso.symm_hom, eqToIso.hom, NatTrans.comp_app,
+    eqToHom_app, Functor.rightUnitor_hom_app, Functor.leftUnitor_inv_app,
+    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Category.id_comp,
+    Category.assoc]
+  erw [Category.id_comp, Category.id_comp, Category.comp_id]
+  erw [← CategoryTheory.Functor.map_comp, Iso.inv_hom_id_app,
+    CategoryTheory.Functor.map_id, Category.comp_id]
+  have hn := (eqToIso hs).hom.naturality
+    ((pbcScalarIntegralComparison l Ω T hdim hl h).hom.app K)
+  simpa only [eqToIso.hom, eqToHom_app, Functor.id_map] using hn.symm
 
 /-- Normalized tensor identities give the literal identity transitions and unit associators.
 Source: blueprint order 1308 (blueprint: def-weil-pbc-finite-stage-pair-category).
@@ -639,7 +1490,18 @@ theorem pbcScalarSystem_units (h : E ≤ F) :
         (Functor.leftUnitor (pbcScalarExtension l Ω T hdim hl h)) ∧
       HEq (pbcScalarAssociator l Ω T hdim hl h (le_refl F))
         (Functor.rightUnitor (pbcScalarExtension l Ω T hdim hl h)) := by
-  sorry
+  classical
+  have hsE : pbcScalarExtension l Ω T hdim hl (le_refl E) = 𝟭 _ := by
+    simp [pbcScalarExtension]
+  have hsF : pbcScalarExtension l Ω T hdim hl (le_refl F) = 𝟭 _ := by
+    simp [pbcScalarExtension]
+  refine ⟨hsE, ?_, ?_⟩
+  · exact (heq_of_eq (pbcScalarAssociator_leftUnit l Ω T hdim hl h hsE)).trans
+      (pbcTransportIso_heq
+        (congrArg (fun B ↦ B ⋙ pbcScalarExtension l Ω T hdim hl h) hsE) _)
+  · exact (heq_of_eq (pbcScalarAssociator_rightUnit l Ω T hdim hl h hsF)).trans
+      (pbcTransportIso_heq
+        (congrArg (fun B ↦ pbcScalarExtension l Ω T hdim hl h ⋙ B) hsF) _)
 
 /-- Rationalized tensor extension is additive.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category).
@@ -648,7 +1510,38 @@ localization formula sends sums of fractions to sums; identity fields are
 literal identity functors, which are additive as well. -/
 @[instance] theorem pbcScalarExtension_additive (h : E ≤ F) :
     (pbcScalarExtension l Ω T hdim hl h).Additive := by
-  sorry
+  classical
+  by_cases hEF : E = F
+  · subst F
+    have hs : pbcScalarExtension l Ω T hdim hl h = 𝟭 _ := by
+      simp [pbcScalarExtension]
+    rw [hs]
+    infer_instance
+  · have hs : pbcScalarExtension l Ω T hdim hl h =
+        (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose := by
+      simp only [pbcScalarExtension, dif_neg hEF]
+    rw [hs]
+    have hB := (pbcRationalScalarExtension_exists l Ω T hdim hl h).exists.choose_spec
+    have : (pbcIntegralScalarExtension l Ω T hdim hl h).Additive := by
+      rw [pbcIntegralScalarExtension_eq l Ω T hdim hl h]
+      let φ := pbcScalarCoefficientMap l (pbcFiniteField.{u} l Ω E)
+        (pbcFiniteField.{u} l Ω F) (pbcFiniteFieldInclusion l Ω h) T
+      have : (pbcDerivedRestrict φ).Additive := by
+        dsimp only [pbcDerivedRestrict]
+        infer_instance
+      have : (pbcDerivedExtend φ).Additive :=
+        (pbcDerivedScalarAdjunction φ).left_adjoint_additive
+      constructor
+      intros X Y f g
+      apply ObjectProperty.hom_ext
+      exact (pbcDerivedExtend φ).map_add
+    have : (pbcStageLocalization l Ω T E).IsLocalization
+        (pbcStageDenominators l Ω T hdim hl E) :=
+      pbcStageLocalization_isLocalization l Ω T hdim hl E
+    apply (Localization.functor_additive_iff (pbcStageLocalization l Ω T E)
+      (pbcStageDenominators l Ω T hdim hl E) _).2
+    rw [hB]
+    infer_instance
 
 /-- The concrete finite-stage scalar system on the PBC raw rational categories.
 Source: blueprint order 1307 (blueprint: def-weil-pbc-finite-stage-pair-category). -/
