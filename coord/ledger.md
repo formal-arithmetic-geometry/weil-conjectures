@@ -19690,3 +19690,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:13 L: merged deliver/Q42/lem-sfb-pushforward-comp-monoidal (reviewer PASS; after a return; new nodes: 1)
 - 03:14 L: merged deliver/Q33/det-lem-coefficient-heart-filtration (reviewer PASS; after a return; new nodes: 0)
 - 03:14 L: merged deliver/Q53/lem-sfb-extend-subfield-constructible (reviewer PASS; after a return; new nodes: 1)
+- 03:14 L: merged deliver/Q47/def-sfb-derived-extend-comp-iso (reviewer PASS; after a return; new nodes: 2)
