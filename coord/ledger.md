@@ -20773,3 +20773,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:43 L: returned deliver/Q25/lem-sfb-cohomology-tor-interval (reviewer RETURN: Superseded by live (B10, A7; brief-stage1 'live finished nodes win; never split one'). The item is finished on live. E2')
 - 07:43 L: returned deliver/Q49/lem-weil-pbc-integral-model-open-closed-pieces (reviewer RETURN: D1/G2: the only new node, lem-weil-pbc-integral-model-immersion-operations, is item clause (a) with only the wording cha)
 - 07:44 L: returned deliver/NK/lem-weil-pbc-ringed-slice-comparisons-shift (reviewer RETURN: Fails the human's re-split note of 2026-10-21 (coord/repair-notes/lem-weil-pbc-ringed-slice-comparisons-shift.json: 'eve)
+- 07:44 L: returned deliver/O2/lem-sfb-finite-free-scalar-coordinates (reviewer RETURN: I return this as superseded (A7/B10/C5). The delivery was committed at 05:53 UTC on base ecf196f. At 06:14 UTC L merged )
