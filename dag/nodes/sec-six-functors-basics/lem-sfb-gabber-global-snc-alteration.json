@@ -2,7 +2,7 @@
  "id": "lem-sfb-gabber-global-snc-alteration",
  "kind": "statement",
  "title": "Gabber global projective alteration with a relative strict normal crossings boundary",
- "statement": "Let $k$ be a field [def-weil-field], let $\\ell$ be a prime different from $\\operatorname{char}(k)$, let $X$ be a separated finite-type $k$-scheme [def-weil-finite-type-morphism, def-weil-proper-morphism], and let $Z\\subseteq X$ be a nowhere dense closed subset. There exist a finite field extension $k'/k$ of degree prime to $\\ell$ [def-pc-field-extension], a smooth quasi-projective $k'$-scheme $P$ [def-sbc-smooth-morphisms], and a proper projective surjective morphism $a:P\\to X$ [def-weil-proper-morphism, def-trf-projective-bundle-morphism, def-weil-surjective-morphism] compatible with $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$, such that $a$ sends every generic point of an irreducible component of $P$ to a generic point of an irreducible component of $X$, and induces there finite residue-field extensions of degree prime to $\\ell$ [def-weil-irreducible-components, def-sc-generic-point, def-weil-residue-field]. The reduced inverse image of $Z$ is a relative strict normal crossings divisor on $P/k'$: it has finitely many distinct irreducible components $D_i$, each smooth over $k'$ and of codimension one, with every intersection $\\bigcap_{i\\in J}D_i$ smooth over $k'$ and of codimension $|J|$ wherever nonempty. Locally at a point of $P$, the components through that point have equations given by distinct members of a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. In particular this reduced inverse image is a strict normal crossings boundary in the regular-scheme sense [def-trf-strict-normal-crossings-boundary, def-weil-regular-scheme]. Here quasi-projective means admitting a locally closed immersion into some finite-dimensional projective space over $k\\prime$. Empty schemes, empty boundaries and empty intersections are allowed.",
+ "statement": "Let $k$ be a field [def-weil-field], let $\\ell$ be a prime different from $\\operatorname{char}(k)$, let $X$ be a separated finite-type $k$-scheme [def-weil-finite-type-morphism, def-weil-proper-morphism], and let $Z\\subseteq X$ be a nowhere dense closed subset. There exist a finite field extension $k'/k$ of degree prime to $\\ell$ [def-pc-field-extension], a smooth quasi-projective $k'$-scheme $P$ [def-sbc-smooth-morphisms], and a proper projective surjective morphism $a:P\\to X$ [def-weil-proper-morphism, def-trf-projective-bundle-morphism, def-weil-surjective-morphism] compatible with $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$, such that $a$ sends every generic point of an irreducible component of $P$ to a generic point of an irreducible component of $X$, and induces there finite residue-field extensions of degree prime to $\\ell$ [def-weil-irreducible-components, def-sc-generic-point, def-weil-residue-field]. The reduced inverse image of $Z$ is a relative strict normal crossings divisor on $P/k'$: it has finitely many distinct irreducible components $D_i$, each smooth over $k'$ and of codimension one, with every intersection $\\bigcap_{i\\in J}D_i$ smooth over $k'$ and of codimension $|J|$ wherever nonempty. Locally at a point of $P$, the components through that point have equations given by distinct members of a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. In particular this reduced inverse image is a strict normal crossings boundary in the regular-scheme sense [def-trf-strict-normal-crossings-boundary, def-weil-regular-scheme]. Here quasi-projective means admitting a locally closed immersion into some finite-dimensional projective space over $k'$. Empty schemes, empty boundaries and empty intersections are allowed.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose X, Theorem 2.1 and definition of an ell-prime alteration immediately before it; printed pp. 148--149. Relative strict normal crossings is explained immediately after the theorem; VIII 4.1.2 and Remark 4.2.2(i)."
@@ -22,9 +22,138 @@
   "def-trf-strict-normal-crossings-boundary",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $X=\\varnothing$, then $Z=\\varnothing$. Take $k'=k$, $P=\\varnothing$ and the identity of the empty scheme. Its field degree is $1$, and every boundary, generic-point and intersection condition is vacuous. Hence assume $X$ nonempty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.1, empty-case convention."
+   }
+  },
+  {
+   "text": "Apply proper-pair radicial preparation to $(X,Z)$. It gives the dense open $X\\subseteq\\overline X$, the closed extension $C$ of $Z$, a common finite radicial extension $e/k$, and $r:B\\to\\overline X$. In particular $B$ is proper, normal and geometrically reduced over $e$, with finitely many disjoint integral components, and $C_B=r^{-1}C$ is the support of an effective Cartier divisor. At every generic point the residue extension for $r$ is finite purely inseparable. Its degree and $[e:k]$ are powers of the characteristic, or $1$ in characteristic zero, so they are prime to $\\ell$. Every component of $\\overline X$ meets $X$, since $X$ is dense.",
+   "uses": [
+    "lem-sfb-proper-pair-radicial-preparation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 1, p.150; use a common radicial extension before any prime-degree choices."
+   }
+  },
+  {
+   "text": "Apply the equivariant smooth Galois-model node to $(B,C_B)$ over $e$. Obtain the finite extension $K/e$, finite group $G$, smooth projective $K$-scheme $Y$ and invariant projective surjection $h:Y\\to B$. The reduced divisor $D=(h^{-1}C_B)_{\\rm red}$ is relative strict normal crossings over $K$. The fixed field $K^G/e$ is radicial and the full scheme quotient $Y/G\\to B$ is a finite universal homeomorphism over a dense open meeting each component. These two full-quotient properties, not just a generically finite cover, are the hypotheses needed for the subsequent Sylow argument. The model is chosen simultaneously for all components of $B$, so there is only one field $K$ and one group $G$.",
+   "uses": [
+    "lem-sfb-equivariant-smooth-galois-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X Lemma 2.2 and 2.3 Step 2, diagram (2.b), pp.149--151."
+   }
+  },
+  {
+   "text": "Choose an $\\ell$-Sylow subgroup $L\\leq G$ by the Sylow prime-index node. Apply the semilinear Sylow good-components node to $h$. Set $F=K^L$ and write $Q^\\circ\\subseteq Y/L$ for the selected open and closed union. It gives $[F:e]$ prime to $\\ell$, a finite separable extension $K/F$, a projective surjection $d:Q^\\circ\\to B$, and finite prime-to-$\\ell$ residue extensions at every generic point of $Q^\\circ$. Use exactly these selected components: a total prime-to-$\\ell$ degree does not assert that every component has prime-to-$\\ell$ degree. Let $Y^\\circ$ be their open-and-closed inverse image. The $L$-quotient is $q:Y^\\circ\\to Q^\\circ$; the restriction $D^\\circ=D\\cap Y^\\circ$ is an invariant relative strict normal crossings divisor over $K$, since the same components and their intersections restrict to this union of connected components.",
+   "uses": [
+    "lem-weil-pbc-sylow-subgroup-prime-index",
+    "lem-sfb-semilinear-sylow-good-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 2, diagram (2.c), p.151; explicit good-component selection for the maximal-point residue-degree convention."
+   }
+  },
+  {
+   "text": "The group $L$ has $\\ell$-power order, hence its order is invertible in $F$ because $\\ell\\ne\\operatorname{char}(k)$. The hypotheses of the tame semilinear SNC-quotient resolution node now hold for $(Y^\\circ,D^\\circ,K/F,L)$. Apply it to obtain $v:R\\to Q^\\circ$, with $R$ smooth projective over $F$ and $v$ projective surjective, an isomorphism on a dense open meeting every component, and inducing equality of the generic residue fields. It also gives a reduced relative strict normal crossings divisor $E$ with support $v^{-1}q(|D^\\circ|)$, together with the local regular-parameter and regular-scheme boundary assertions. Because $h$ factors as $d q$ on $Y^\\circ$ and $q$ is surjective, $q(|D^\\circ|)=d^{-1}(C_B)$: a point of $Q^\\circ$ lies over $C_B$ exactly when every point above it in $Y^\\circ$ lies in $h^{-1}C_B$. Thus $|E|=(r d v)^{-1}(C)$.",
+   "uses": [
+    "lem-sfb-tame-snc-quotient-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 3, pp.151--152; the preimage/image equality uses the finite quotient and invariant morphism from the preceding step."
+   }
+  },
+  {
+   "text": "Set $c=r d v:R\\to\\overline X$; it is surjective by composing the three surjections. Each generic point of $R$ maps to a generic point of $\\overline X$. For the corresponding tower of residue fields, $v$ has degree $1$, $d$ has degree prime to $\\ell$, and $r$ has purely inseparable degree prime to $\\ell$. The degree of the composite is their product (multiply field bases), hence prime to $\\ell$. Likewise $F/k$ has degree $[F:e][e:k]$ prime to $\\ell$. This checks every generic point, including all components retained by the Sylow step. Projectivity of $c$ is obtained through its graph, without composing projective-bundle maps over the non-projective bases $B$ and $\\overline X$. The finite morphism $\\operatorname{Spec}F\\to\\operatorname{Spec}k$ is projective in the projective-bundle sense by the finite-morphism node; $\\operatorname{Spec}k$ is affine, so $\\mathcal O$ is ample (take the section $1$), and the projective-bundle-to-H-projective node makes it H-projective. $R$ is H-projective over $F$ by Step 5, so the H-projective composition node gives a closed immersion $\\iota:R\\hookrightarrow\\mathbf P^M_k$ over $k$. Since $\\overline X$ is proper, hence separated, over $k$, the graph $(\\mathrm{id},c):R\\to R\\times_k\\overline X$ is the base change of the closed diagonal of $\\overline X$ along $c\\times\\mathrm{id}$, so it is a closed immersion; $\\iota\\times\\mathrm{id}:R\\times_k\\overline X\\to\\mathbf P^M_k\\times_k\\overline X$ is a closed immersion by base change, and $\\mathbf P^M_k\\times_k\\overline X=\\mathbf P^M_{\\overline X}$ by associativity of the fibre product $\\overline X\\times_{\\mathbf Z}\\mathbf P^M_{\\mathbf Z}$. The composite closed immersion $R\\hookrightarrow\\mathbf P^M_{\\overline X}$ lies over $c$, so $c$ is H-projective.",
+   "uses": [
+    "lem-trf-finite-projective-bundle",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-nagata-projective-space-base-change",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3, last composite in Step 3, p.152; projectivity of the composite by the graph of a morphism to a separated scheme (Stacks Tag 01W8 convention, graph argument of Tag 0C4Q)."
+   }
+  },
+  {
+   "text": "Take $k'=F$ and $P=c^{-1}(X)=R\\times_{\\overline X}X$, with $a:P\\to X$. Base change of the closed immersion $R\\hookrightarrow\\mathbf P^M_{\\overline X}$ of Step 6 along the open immersion $X\\subseteq\\overline X$ gives a closed immersion $P\\hookrightarrow\\mathbf P^M_{\\overline X}\\times_{\\overline X}X=\\mathbf P^M_X$ over $X$, so $a$ is H-projective. By the projective-space definition, $\\mathbf P^M_X$ is the same scheme over $X$ as the relative projective space $\\operatorname{Proj}_X\\operatorname{Sym}(\\mathcal O_X^{\\oplus(M+1)})$, the projective bundle of the finite-type quasi-coherent module $\\mathcal O_X^{\\oplus(M+1)}$; hence $a$ is projective in the projective-bundle sense. Surjective base change makes $a$ surjective, and H-projective morphisms are proper. Every generic point of $R$ belongs to $P$, since its image is generic in $\\overline X$ and hence lies in the dense open $X$; the generic residue extensions for $a$ are therefore exactly those checked in Step 6.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-nagata-projective-space-base-change",
+    "def-nagata-relative-projective-space",
+    "def-trf-projective-bundle-morphism",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-kun-projective-implies-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3 Step 1, p.150, return to the original open; P^M_S = P_S(O^{M+1}) as in Stacks Tag 01W8 / Constructions 01NS; surjective base change Stacks Tag 01S1."
+   }
+  },
+  {
+   "text": "The open subscheme $P\\subseteq R$ is smooth over $F$: locally on $R$, choose a constant relative dimension $n$ for its smooth structure morphism, as in the smooth-morphism definition. The open inclusion is etale by etale composition/cancellation clause (1), hence smooth of relative dimension $0$; relative-dimension composition makes its composite smooth of relative dimension $n$. The same argument applies to each open intersection of components of $E$. Their codimensions persist because the local rings of an open subscheme agree with the original local rings. If $R\\hookrightarrow\\mathbf P^n_F$ is its projective embedding, $P$ is closed in the complement of the closed subset $R\\setminus P$ of that projective space, hence locally closed in $\\mathbf P^n_F$. This proves quasi-projectivity. Finally $C\\cap X=Z$ gives $|E|\\cap P=a^{-1}Z$. Restrict the finitely many integral components of $E$ to $P$ and omit empty ones; each remaining one is still integral because a nonempty open of an integral scheme is integral. Their local parameter equations and local rings are unchanged. Thus they give the claimed reduced divisor, all the relative smooth-intersection and codimension assertions, and the regular-scheme strict normal crossings boundary. Empty intersections and the empty boundary obey the same conventions.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-trf-strict-normal-crossings-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.3, return to the original open and end of Step 3, pp.150,152; VIII 4.2.2(i), p.118; smooth local constant relative dimension and open etaleness as in the cited node statements."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-nagata-projective-space-base-change",
+  "def-nagata-relative-projective-space",
+  "def-sbc-smooth-morphisms",
+  "def-trf-projective-bundle-morphism",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-proper-morphism",
+  "lem-kun-projective-implies-proper",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sfb-equivariant-smooth-galois-model",
+  "lem-sfb-proper-pair-radicial-preparation",
+  "lem-sfb-semilinear-sylow-good-components",
+  "lem-sfb-tame-snc-quotient-resolution",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-h-projective-composition",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-sylow-subgroup-prime-index"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3, Steps 1--3, printed pp.150--152, following Lemma 2.2; good-component selection makes the maximal-point degree condition explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +189,45 @@
    "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
    "date": "2026-10-21",
    "verdict": "no match: none states the global regular SNC alteration theorem or the prescribed-cover nested-open consequence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSmooth\", \"IsProper\"",
+   "results": "[loogle] OK 0 hit(s); no declarations returned",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this combined geometric assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "grep",
+   "query": "Gabber|alteration|normalCrossing|normal_crossing",
+   "results": "[grep] OK 3 hit(s); Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean:27: * [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]; Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean:25: * [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*, 1.2][bbd-1982]; Mathlib/CategoryTheory/Triangulated/TStructure/Basic.lean:35: * [Beilinson, Bernstein, Deligne, Gabber, *Faisceaux pervers*][bbd-1982]",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this combined geometric assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime to ell alterations with a smooth source and a strict normal crossings boundary",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.IsSmooth.casesOn; Algebra.smoothLocus; AlgebraicGeometry.IsSmooth.recOn; Algebra.IsSmoothAt.exists_notMem_smooth; Algebra.IsSmoothAt.exists_notMem_isStandardSmooth; AlgebraicGeometry.Scheme.Etale; Algebra.smoothLocus_eq_univ; AlgebraicGeometry.IsEtale",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this combined geometric assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective alteration resolving a pair of a scheme and a closed subset with degree coprime to a prime",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Proj; AlgebraicGeometry.Proj.valuativeCriterion_existence; AlgebraicGeometry.Proj.fromOfGlobalSections; AlgebraicGeometry.Proj.instUniversallyClosedToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Proj.isSeparated; AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat; AlgebraicGeometry.Proj.openCoverOfMapIrreleventEqTop; AlgebraicGeometry.Proj.instIsSeparated",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this combined geometric assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber prime to ell projective alteration of a variety with smooth source and relative strict normal crossings divisor",
+   "results": "8 hits: AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, Algebra.IsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension",
+   "date": "2026-10-22",
+   "verdict": "no match: smoothness and standard-smooth charts, not alterations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-nested-open-regular-alteration",
@@ -86,5 +250,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-gabber-global-snc-alteration",
+  "worker": "stage1",
+  "summary": "Read ILO X 2.1--2.3 against the every-generic-point statement. Split by proper radicial preparation, the prime-free equivariant Gabber--Vidal model, semilinear Sylow quotient with good-component selection, and tame relative quotient resolution; check projective-bundle composition and open restriction to the original open. Four statement-only new nodes. No statement weakened and no Lean written. Corrected only the malformed TeX k\\prime to k prime.",
+  "blueprint": "This created input has no imported blueprint ancestor (blueprint_refs ancestor returns None). Its chain records det-thm-sf-ctf-stability-direct-images proof (3), alteration/tame-boundary reduction. Steps realize ILO X 2.3 Steps 1--3 supplying the single-boundary input used by lem-sfb-nested-open-regular-alteration.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic geometric permanence or Sylow theorem used as a black box in the alteration construction; this unit has no substitute for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic geometric permanence or Sylow theorem used as a black box in the alteration construction; this unit has no substitute for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic geometric permanence or Sylow theorem used as a black box in the alteration construction; this unit has no substitute for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic geometric permanence or Sylow theorem used as a black box in the alteration construction; this unit has no substitute for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-sylow-subgroup-prime-index",
+    "why": "Generic geometric permanence or Sylow theorem used as a black box in the alteration construction; this unit has no substitute for this fact."
+   },
+   {
+    "node": "lem-trf-finite-projective-bundle",
+    "why": "Generic projectivity/properness fact (projective-bundle and H-projective conventions) used as a black box to restrict and compose the alteration; not part of the trace formula or Poincare duality."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Generic projectivity/properness fact (projective-bundle and H-projective conventions) used as a black box to restrict and compose the alteration; not part of the trace formula or Poincare duality."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic projectivity/properness fact (projective-bundle and H-projective conventions) used as a black box to restrict and compose the alteration; not part of the trace formula or Poincare duality."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic projectivity/properness fact (projective-bundle and H-projective conventions) used as a black box to restrict and compose the alteration; not part of the trace formula or Poincare duality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "lem-kun-projective-implies-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NB-74c9f1c9b",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-74c9f1c9b (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and ILO X 1.1, 2.1, 2.2 and 2.3 Steps 1-3 (pp.135-136 and 148-152). The item itself is not dropped. It is still reached from nt-target-smooth-purity-qbar through lem-sfb-nested-open-regular-alteration and ctf-stability. In live and side it is still unsplit, there is no repair note and nothing cites SGA. The split follows ILO 2.3 step by step, and each new node checked out true. (1) Preparation (X 2.3 Step 1): one common radicial extension e/k, the blowup and the normalization keep the function field separable over e. Normal plus separable function field gives geometrically reduced (R0 and S1). The Cartier divisor survives because the map is dominant. (2) Equivariant model (X 2.2 with (2.a)-(2.b)): I proved it with one finite normal K/e, groups Gamma_j of pairs from Aut_e K and H_{1,j} that agree on k_{1,j}, and induction to Aut_e K x prod_j H_{1,j}. Then K^G is radicial over e and Y/G is generically radicial over each Y_{2,j}/H_{1,j}. This also explains why ILO's S1 needs one common field. (3) Sylow good components: [F:e]=[Gbar:Lbar] times a power of p. The degree at a chosen component is [D':(D'cap L)I'], which divides [D':D'cap L] and is prime to ell. The S3 example in the report correctly shows that the total degree is not enough. (4) Tame resolution (X 1.1 hypotheses (i)-(iii) per orbit, VIII 3.4.9, X 1.2 with Q={1}): R is smooth and projective over F even when K^H is not F. The preimage of q(|D|) is the support of a Cartier divisor (the norm of a local equation) inside the SNC divisor E~, so it is a sub-divisor. That matches ILO. No live duplicates: the close lem-per-gabber-*, envelope and admissible-quotient nodes are all in the dropped 10-19 section. Item Steps 1-5 and 8 are correct, including q(|D|)=d^{-1}C_B by surjectivity, the product of degrees, and quasi-projectivity of the open P. One fault: Step 6 cites lem-per-projective-bundle-composition, which is in the dropped 2026-10-19 list (line 1811), and so are its relative-ample children. No live node composes projective-bundle maps over the bases B and Xbar, which need not have an ample sheaf. FIX: Step 6 now makes c H-projective through its graph, all with live nodes. Spec F to Spec k is finite, hence projective-bundle (lem-trf-finite-projective-bundle). Spec k has O ample, so it is H-projective (lem-trf-projective-bundle-to-h-projective). R to Spec k is H-projective by lem-trf-h-projective-composition. The graph into R x_k Xbar is closed because the diagonal of Xbar is closed, plus closed-immersion base change. Finally P^M_k x_k Xbar = P^M_Xbar by def-nagata-projective-space-base-change. Step 7 base-changes this embedding to X. P^M_X is the projective bundle of O^{M+1}, since def-nagata-projective-space-base-change says it is the same scheme as def-nagata-relative-projective-space. Properness now comes from lem-kun-projective-implies-proper. The proof_deps and tool_uses were updated to match. A script check found no dropped id in the closure of the fixed item. This is not one of the routes forbidden for lem-per-artin-gabber-affine-curve, which is a different branch. Batch 5: the def-trf projective-bundle and SNC definitions are general definitions, so I accept them. The trf lemmas, both the original lem-trf-projective-bundle-proper (no longer cited) and the three added in the fix, are generic scheme facts. Their closures contain no trace-formula or Poincare-duality theorem nodes. Statements and the four new nodes are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,94 @@
+{
+ "id": "lem-sfb-semilinear-sylow-good-components",
+ "kind": "statement",
+ "title": "Good components of a semilinear Sylow quotient",
+ "statement": "Let $e$ be a field, $\\ell$ a prime different from $\\operatorname{char}(e)$, and $K/e$ a finite field extension [def-weil-field] [def-pc-field-extension]. Let a finite group $G$ act on $K$ by $e$-automorphisms with $K^G/e$ purely inseparable. Let $B$ be a nonempty normal proper finite-type $e$-scheme, a finite disjoint union of integral schemes, and let $Y$ be a smooth projective $K$-scheme [def-pc-integral-scheme] [def-weil-proper-morphism] [def-weil-finite-type-morphism] [def-sbc-smooth-morphisms] [def-kun-projective]. Let $G$ act on $Y$ by $e$-automorphisms, equivariantly for $Y\\to\\operatorname{Spec}K$. Suppose an invariant projective surjection $h:Y\\to B$ sends generic points to generic points with finite residue extensions, all subgroup quotients exist as finite geometric categorical scheme quotients with invariant structure sheaves, and over a dense open meeting every component of $B$ the induced map $Y/G\\to B$ is a finite universal homeomorphism [def-trf-projective-bundle-morphism] [def-weil-surjective-morphism] [def-weil-finite-integral-morphism] [def-weil-universal-homeomorphism]. Fix an $\\ell$-Sylow subgroup $L\\leq G$, namely a subgroup of $\\ell$-power order and index prime to $\\ell$. Set $F=K^L$ and $Q=Y/L$. Then $[F:e]$ is prime to $\\ell$, and $K/F$ is finite Galois with Galois group the image of $L$ in $\\operatorname{Aut}_e(K)$. There is an open and closed union $Q^\\circ$ of irreducible components of $Q$, meeting the fibre over every generic point of $B$, such that $Q^\\circ$ is normal projective over $F$, the induced $d:Q^\\circ\\to B$ is projective surjective and sends all its generic points to generic points of $B$, and all their residue-field extensions are finite of degree prime to $\\ell$ [def-weil-irreducible-components] [def-sc-generic-point] [def-weil-residue-field]. Its inverse image $Y^\\circ\\subseteq Y$ is open and closed and $Y^\\circ\\to Q^\\circ$ is the finite quotient by $L$. Normal means that every local ring is an integrally closed domain. Purely inseparable means that every element has a power of the characteristic in the smaller field (and the extension is trivial in characteristic zero); finite Galois means finite, normal and separable. The assertion does not require the omitted components of $Q$ to have prime-to-$\\ell$ residue degree. Field-extension terminology and degrees are as in [def-pc-field-tower].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-field-extension",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-surjective-morphism",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "def-weil-residue-field",
+  "def-pc-integral-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-kun-projective",
+  "def-weil-finite-integral-morphism",
+  "def-weil-universal-homeomorphism",
+  "def-weil-open-immersion",
+  "def-pc-field-tower"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sylow subgroup quotient of a semilinear finite group action on a disconnected normal variety has a component of degree prime to ell over each target component",
+   "results": "[leanfinder] OK 8 hit(s); Sylow.isPretransitive_of_finite; IsArithFrobAt.arithFrobAt; CategoryTheory.PreGaloisCategory.has_decomp_quotients; arithFrobAt; IsArithFrobAt.exists_of_isInvariant; IsArithFrobAt.exists_primesOver_isConj; Subgroup.exists_smul_eq; Ideal.isPretransitive_of_isGalois",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this combined geometric assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sylow, FixedPoints",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'FixedPoints'; no declarations returned",
+   "date": "2026-10-22",
+   "verdict": "unavailable: Loogle did not resolve the supplied identifier; the two semantic phrasings and source grep were also run"
+  },
+  {
+   "tool": "grep",
+   "query": "Sylow|fixedField|fixed.*[Qq]uotient|[Qq]uotient.*[Gg]eneric",
+   "results": "[grep] OK 25 hit(s); Mathlib/Algebra/Homology/Localization.lean:255: def ComplexShape.strictUniversalPropertyFixedTargetQuotient (E : Type*) [Category* E] :; Mathlib/Algebra/Homology/Localization.lean:256:     Localization.StrictUniversalPropertyFixedTarget (HomotopyCategory.quotient C c); Mathlib/Algebra/Homology/Localization.lean:270:   all_goals apply c.strictUniversalPropertyFixedTargetQuotient hc; Mathlib/GroupTheory/Nilpotent.lean:9: public import Mathlib.GroupTheory.Sylow; Mathlib/GroupTheory/Nilpotent.lean:1222: /-- If a finite group is the direct product of its Sylow groups, it is nilpotent -/; Mathlib/GroupTheory/Nilpotent.lean:1223: theorem Group.isNilpotent_of_product_of_sylow_group; Mathlib/GroupTheory/Nilpotent.lean:1224:     (e : (∀ p : (Nat.card G).primeFactors, ∀ P : Sylow p G, (↑P : Subgroup G)) ≃* G) :; Mathlib/GroupTheory/Nilpotent.lean:1227:   have : ∀ (p : ps) (P : Sylow p G), IsNilpotent (↑P : Subgroup G) := by; Mathlib/NumberTheory/NumberField/CMField.lean:201:   convert! (IntermediateField.mem_fixedField_iff (⊤ : Subgroup (K ≃ₐ[K⁺] K)) x).symm using 1; Mathlib/NumberTheory/NumberField/CMField.lean:204:   · rw [IsGalois.fixedField_top, IntermediateField.mem_bot]; Mathlib/GroupTheory/Frattini.lean:59:   -- We use the characterisation of nilpotency in terms of all Sylow subgroups being normal.; Mathlib/GroupTheory/Frattini.lean:62:   -- Consider each prime `p` and Sylow `p`-subgroup `P` of `frattini G`.; Mathlib/GroupTheory/Frattini.lean:66:   have frattini_argument := Sylow.normalizer_sup_eq_top P; Mathlib/GroupTheory/Transfer.lean:9: public import Mathlib.GroupTheory.Sylow; Mathlib/GroupTheory/Transfer.lean:26: - `ker_transferSylow_isComplement'`: Burnside's transfer (or normal `p`-complement) theorem:; Mathlib/GroupTheory/Transfer.lean:243: variable {p : ℕ} (P : Sylow p G) (hP : normalizer P ≤ centralizer (P : Set G)); Mathlib/GroupTheory/Transfer.lean:248: def transferSylow [P.FiniteIndex] : G →* P :=; Mathlib/GroupTheory/Transfer.lean:252: variable [Fact p.Prime] [Finite (Sylow p G)]; Mathlib/GroupTheory/RegularWreathProduct.lean:11: public import Mathlib.GroupTheory.Sylow; Mathlib/GroupTheory/RegularWreathProduct.lean:27: * `Sylow.mulEquivIteratedWreathProduct` : The isomorphism between the Sylow `p`-subgroup of `Perm; Mathlib/GroupTheory/RegularWreathProduct.lean:35: group, regular wreath product, sylow p-subgroup; Mathlib/GroupTheory/RegularWreathProduct.lean:241: /-- The encoding of the Sylow `p`-subgroups of `Perm α` as an iterated wreath product. -/; Mathlib/GroupTheory/RegularWreathProduct.lean:242: noncomputable def Sylow.mulEquivIteratedWreathProduct (p : ℕ) [hp : Fact (Nat.Prime p)] (n : ℕ); Mathlib/GroupTheory/Sylow.lean:14: # Sylow theorems; Mathlib/GroupTheory/Sylow.lean:16: The Sylow theorems are the following results for every finite group `G` and every prime number `p`.",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this combined geometric assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Choose components of a Sylow quotient of a Galois alteration with generic residue field degrees coprime to the prime",
+   "results": "[leansearch] OK 8 hit(s); Sylow.ctorIdx; IsPGroup.toSylow; not_dvd_card_sylow; Sylow.toSubgroup; Sylow.not_dvd_index; Sylow.mapSurjective; Sylow.ext; Sylow.coe_ofCard",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this combined geometric assertion or a one-line specialization of it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant fields and double cosets choose conjugates of a Sylow subgroup containing a Sylow subgroup of each decomposition group",
+   "results": "[leanfinder] OK 8 hit(s); Sylow.isPretransitive_of_finite; Sylow.mulAction; Sylow.coe_smul; Sylow.smul_subtype; Sylow.coe_subgroup_smul; Sylow.smul_def; Sylow.orbit_eq_top; MonoidHom.transferSylow",
+   "date": "2026-10-22",
+   "verdict": "no match: the returned declarations do not state this combined geometric assertion or a one-line specialization of it"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-gabber-global-snc-alteration",
+  "date": "2026-10-22",
+  "group": "NB"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images, proof (3), alteration/tame-boundary reduction, through the global alteration input; ILO X 2.3: Expose X 2.3 Step 2, diagram (2.c), printed p.151, with explicit selection of components for the every-generic-point degree convention. The selection uses Sylow conjugacy in each decomposition group and invariant-field degrees, rather than interpreting a total degree as each residue degree.",
+   "via": [
+    "lem-sfb-gabber-global-snc-alteration",
+    "lem-sfb-nested-open-regular-alteration",
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
