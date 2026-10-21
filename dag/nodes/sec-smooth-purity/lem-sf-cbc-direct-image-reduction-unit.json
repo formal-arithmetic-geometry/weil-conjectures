@@ -23,9 +23,85 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-ringed-tower-pushforward-limit-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B_T=(\\underline{P_n}_T)_n$. On the diagram sites the projection morphism is natural in both the source object and the coefficient object by [lem-weil-pbc-ringed-projection-mate-exact]. Its value at $\\Delta_UF$, followed on the source by the natural constant-tower comparison $\\chi_{u,F}\\otimes1$, is exactly the specified $h_{u,F}$; consequently $h$ is natural in $F$. Clause (4) of [lem-sf-cbc-constant-tower-direct-image-normalization], with $f=u$ and $M=F$, applies to precisely these constant coefficient sheaves, quotient augmentation and counit-defined diagram projection. It gives, in $D(\\mathcal T_V)$,\n$$h_{u,F}i_{V,PF}=Q(i_{U,F})\\chi_{u,F}.$$\nThis is an equality of strict derived-tower morphisms, valid for arbitrary $F$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-cbc-constant-tower-direct-image-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 (equation-projection-formula-map), 0944 (lemma-projection-formula), and 0A07 (lemma-Rf-commutes-with-Rlim), diagram-site proof; agent expansion of fix-lem-exchanges Proof Step 5."
+   }
+  },
+  {
+   "text": "Write $b_N=b_{u,N}$ and $\\chi_F=\\chi_{u,F}$. Naturality of the canonical comparison in [lem-weil-ringed-tower-pushforward-limit-comparison], applied to the actual tower morphism $i_{U,F}:\\Delta_UF\\to\\mathcal R_UF$, gives\n$$\\mathcal L_VQ(i_{U,F})\\,b_{\\Delta_UF}=b_{\\mathcal R_UF}\\,P\\mathcal L_U(i_{U,F}).$$\nClause (3) of [lem-sf-cbc-constant-tower-direct-image-normalization] gives $\\mathcal L_V(\\chi_F)^{-1}b_{\\Delta_UF}=1$, under the stipulated constant-tower limit identifications, hence $b_{\\Delta_UF}=\\mathcal L_V(\\chi_F)$. Apply $\\mathcal L_V$ to the equality of Step 1, substitute this naturality square, and use the specified $\\mathcal L_T(i_{T,H})=\\eta_H$. The resulting equality is\n$$\\mathcal L_V(h_{u,F})\\eta_{PF}=b_{\\mathcal R_UF}P(\\eta_F).$$\nLeft composition with $b_{\\mathcal R_UF}^{-1}$ proves $\\rho_{u,F}\\eta_{PF}=P(\\eta_F)$. Every substitution took place before evaluating any tower morphism.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-sf-cbc-constant-tower-direct-image-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 (equation-projection-formula-map), 0944 (lemma-projection-formula), and 0A07 (lemma-Rf-commutes-with-Rlim), diagram-site proof; agent expansion of fix-lem-exchanges Proof Step 5."
+   }
+  },
+  {
+   "text": "The comparisons $b$ are natural isomorphisms by [lem-weil-ringed-tower-pushforward-limit-comparison]. Together with naturality of $h$ from Step 1 and functoriality of $\\mathcal L_V$, this proves naturality of $\\rho=b^{-1}\\mathcal L_Vh$. Explicitly, for $t:F\\to F'$ the naturality squares for $h$ and $b$ give\n$$P(C_Ut)\\rho_{u,F}=\\rho_{u,F'}C_V(Pt).$$\nIndeed insert $b_{\\mathcal R_UF'}b_{\\mathcal R_UF'}^{-1}$ on the left, move $P(C_Ut)$ across $b^{-1}$ using its naturality square, and then move $\\mathcal L_V(Q\\mathcal R_Ut)$ across $\\mathcal L_V(h_{u,F})$ using the square for $h$.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 (equation-projection-formula-map), 0944 (lemma-projection-formula), and 0A07 (lemma-Rf-commutes-with-Rlim), diagram-site proof; agent expansion of fix-lem-exchanges Proof Step 5."
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$. The perfectness hypothesis [def-weil-pbc-complete-coefficient-datum] supplies a bounded finite-projective $A$-complex representing $P_n$. In each degree choose a finite generating surjection from $A^{r}$ and split it by projectivity. The exact constant-module functor and its finite-power identifications [lem-sfb-constant-finite-free-presentation-extension] carry the representing complex and these splitting identities to sheaves. Thus $\\underline{P_n}_V$ is represented by a bounded complex of direct summands of finite free $\\underline A_V$-modules, so it satisfies precisely the perfectness hypothesis of [lem-sbc-ringed-site-perfect-projection-formula]. That theorem, for $u$, $E=F$ and $P=\\underline{P_n}_V$, makes the canonical counit-tensor projection an isomorphism for every $F\\in D(U,A)$. In the general augmented-diagram theorem [lem-weil-pbc-augmented-diagram-projection-mate], specialize the coefficient algebra tower to $B_V$ with its unital quotient transitions. Its projection mate, source comparison and augmentation are the ones used here. Its evaluation conclusion identifies $\\operatorname{ev}_n(h_{u,F})$ with this very projection morphism, using the canonical constant-coefficient pullback identification. Therefore every evaluation of $h_{u,F}$ is the required perfect-$P_n$ projection-formula isomorphism. The bounded representative was chosen separately for each $n$; no common interval is used.",
+   "uses": [
+    "def-weil-pbc-complete-coefficient-datum",
+    "lem-sfb-constant-finite-free-presentation-extension",
+    "lem-sbc-ringed-site-perfect-projection-formula",
+    "lem-weil-pbc-augmented-diagram-projection-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 (equation-projection-formula-map), 0944 (lemma-projection-formula), and 0A07 (lemma-Rf-commutes-with-Rlim), diagram-site proof; agent expansion of fix-lem-exchanges Proof Step 5."
+   }
+  },
+  {
+   "text": "By [lem-weil-tower-category-levelwise-abelian], kernels and cokernels in $\\mathcal T_V$ are computed levelwise. Hence for every degree $r$, evaluation identifies $\\operatorname{ev}_n H^r(h_{u,F})$ with $H^r(\\operatorname{ev}_n h_{u,F})$, which is invertible by Step 4. The kernel and cokernel of $H^r(h_{u,F})$ therefore have every component zero and are zero tower objects. Thus every $H^r(h_{u,F})$ is invertible. The cohomology criterion [lem-weil-pbc-unbounded-derived-iso-cohomology] now implies that $h_{u,F}$ is invertible in $D(\\mathcal T_V)$. This proves the required assertion for complete $K$ (and actually for all $F$). Specializing the equality of Step 2 to $F=K$ gives exactly the final displayed equation of the statement. Naturality on complete objects is the restriction of Step 1.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0B56 (equation-projection-formula-map), 0944 (lemma-projection-formula), and 0A07 (lemma-Rf-commutes-with-Rlim), diagram-site proof; agent expansion of fix-lem-exchanges Proof Step 5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sf-cbc-constant-tower-direct-image-normalization",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "def-weil-pbc-complete-coefficient-datum",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Step 5, direct-image ingredient of the proper-composition law; explicit strict-tower normalization using Stacks Tags 0B56, 0944 and 0A07."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -68,10 +144,45 @@
    "results": "8 hits: AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.ofTensorProduct; AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.eval_comp_of; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern ordinary adic module completion, not the specified derived strict-tower projection morphism and its completion-unit equation for constant module sheaves."
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*[Pp]ush|[Pp]ush.*completion|[Pp]rojection[Ff]ormula",
+   "results": "0 hits: ; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic-completion and perfectoid arithmetic results do not state the derived strict-tower projection morphism or its completion-unit equation for sheaves."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for a perfect constant coefficient complex is compatible with the unit of derived adic completion on strict inverse sequences",
+   "results": "8 hits: AdicCompletion.sumInv_comp_sum, AdicCompletion.instOne, IsAdicComplete.mk_liftAlgHom, IsAdicComplete.of_comp_lift, AdicCompletion, IsAdicComplete.of_lift, AdicCompletion.ofLinearEquiv_symm_of, AdicCompletion.ofAlgEquiv_symm_of",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic-completion and perfectoid arithmetic results do not state the derived strict-tower projection morphism or its completion-unit equation for sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.Adjunction",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic-completion and perfectoid arithmetic results do not state the derived strict-tower projection morphism or its completion-unit equation for sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image commutes with strict adic reduction towers and the counit tensor projection morphism intertwines the derived completion unit",
+   "results": "8 hits: AdicCompletion.ofTensorProduct_naturality, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.eval_comp_of, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.ofTensorProduct_tmul, AdicCompletion.transitionMap_comp_reduceModIdeal, IsAdicComplete.of_comp_lift, AdicCompletion.transitionMap_comp_eval",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic-completion and perfectoid arithmetic results do not state the derived strict-tower projection morphism or its completion-unit equation for sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduction of a derived pushforward modulo a perfect quotient is naturally isomorphic to pushforward of reduction; taking the total inverse limit preserves the completion augmentation",
+   "results": "8 hits: AdicCompletion.transitionMap_comp_reduceModIdeal, PreTilt.untiltAux_smodEq_untiltFun, BDeRhamPlus, AdicCompletion.map_val_apply, AdicCompletion.factor_evalₐ_eq_eval, PreTilt.mk_comp_untilt_eq_coeff_zero, IsAdicComplete.ofAlgEquiv_comp_liftRingHom, AdicCompletion.factor_eval_eq_evalₐ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module adic-completion and perfectoid arithmetic results do not state the derived strict-tower projection morphism or its completion-unit equation for sheaves."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-cbc-compact-support-composition-limit",
@@ -88,5 +199,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-cbc-direct-image-reduction-unit",
+  "worker": "stage1",
+  "summary": "Preserved the statement and all inherited searches. Gave the strict augmentation square, computed its total limit with the normalized constant comparison and naturality of b, proved naturality of rho, and obtained strict invertibility by perfect-coefficient evaluation plus levelwise cohomology. Reused existing general lemmas; no new nodes.",
+  "blueprint": "Realizes fix-lem-exchanges Proof Step 5, direct-image part of the proper-composition comparison (the ingredient extracted from parent lem-sf-cbc-compact-support-composition-limit old Steps 3 and 6).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "The generic ringed-topos derived-limit comparison supplies naturality and the specified underived-composite normalization; it is a tool for the direct-image generator, not a replacement of the compactification route."
+   },
+   {
+    "node": "lem-sfb-constant-finite-free-presentation-extension",
+    "why": "Its exact constant-module functor and finite-power identifications turn a bounded finite-projective A-model into a perfect constant coefficient sheaf. This is a site-independent coefficient tool."
+   },
+   {
+    "node": "lem-sbc-ringed-site-perfect-projection-formula",
+    "why": "The general ringed-site perfect projection formula applies to constant A-sheaves without boundedness or geometric finiteness assumptions. The similarly named adic node uses completed coefficient sheaves and cannot supply this specialization."
+   },
+   {
+    "node": "lem-weil-pbc-augmented-diagram-projection-mate",
+    "why": "The general augmented diagram projection theorem identifies evaluation of the already constructed strict mate with the canonical counit-tensor map; no same-unit statement supplies this evaluation normalization."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Levelwise kernels and cokernels detect invertibility of tower cohomology; this generic abelian-category tool does not change the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "The general cohomology criterion converts invertibility of all tower cohomology maps to invertibility in the unbounded derived category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-sfb-constant-finite-free-presentation-extension",
+  "lem-sbc-ringed-site-perfect-projection-formula",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-57fadeda3",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-57fadeda3 (reviewer sub-agent of L); spot-checked: Read all five steps against every cited statement and against Stacks 099N(3)(4)/0A07 and blueprint fix-lem-exchanges Step 5. The delivery has no new nodes; the item statement and stmt_deps are byte-identical to live and side-live, and the item is still unsplit live. The parent's re-split note concerns the parent, not this item. Step 1: clause (4) of lem-sf-cbc-constant-tower-direct-image-normalization defines h_{f,M} in exactly the item's way and gives h·i = Q(i)·χ in D(T_V); naturality of h comes from the mate-exact node plus clause (1). Step 2: naturality of a=b along i, clause (3) giving b_{ΔF} = L(χ), and the item's own normalization L_T(i) = η combine to L_V(h)·η_{PF} = b·P(η_F); I recomputed this. Step 3: I recomputed the naturality of ρ; it uses only the two naturality squares. Step 4: P_n perfect over A plus the exact constant-module functor give a bounded complex of direct summands of finite free \\underline A_V-modules, which is the hypothesis of lem-sbc-ringed-site-perfect-projection-formula (unbounded F allowed). The augmented-diagram node's h is the same map (same χ, constant \\underline A has f^{-1}R_Y ≅ R_X) and its ev_n is the same counit-tensor projection map. Step 5: levelwise exactness and the unbounded cohomology criterion make h invertible for all F, stronger than the stated complete-K case. Edge cases checked: I = A, I = 0 with A torsion, Z_ℓ with (ℓ), u = id. No cycle; no SGA; no dropped nodes. Advisory for the maintainer: off-unit tool lem-weil-pbc-ringed-projection-mate-exact is not in tool_uses (to record at merge, C8). review_split.py reports 'no such node' only because it does not follow the symlinked chapter directories."
  }
 }

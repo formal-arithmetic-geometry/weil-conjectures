@@ -21480,3 +21480,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q156/lem-per-adic-normalized-fibre-exactness (reviewer FIX; first push; new nodes: 0); claim not held by Q156: not your claim
 - 08:58 L: merged deliver/NU/lem-pc-tate-dvr-residue-calculus (reviewer FIX; first push; new nodes: 2)
 - 08:58 L: merged deliver/Q111/lem-zl-point-weil-heart-flag (reviewer PASS; first push; new nodes: 0); claim not held by Q111: not your claim
+- 08:58 L: merged deliver/Q12/lem-sf-cbc-direct-image-reduction-unit (reviewer PASS; first push; new nodes: 0)
