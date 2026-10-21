@@ -23020,3 +23020,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:17 L: merged deliver/NV/lem-sfb-root-tower-inner-support (reviewer FIX; first push; new nodes: 3)
 - 16:18 L: merged deliver/NP/lem-sfb-snc-root-limit-normal-charts (reviewer FIX+NODE(1); first push; new nodes: 2)
 - 16:18 L: returned deliver/NF/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F (route pivot, working around the drop check) and B5. The item is live: it is not in the 2026-10-19 drop section, an)
+- 16:19 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
