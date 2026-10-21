@@ -31,3 +31,14 @@ Validation (sequential tools/lean_file.sh; the project's unchanged 60 s limit):
 - `lean/Sheaf/AlgebraicGeometry/VaryingRingOperations.lean`: Compiled in 33.0 s.
 
 Backups: each edited source has the suffix `.maint-Q25-unit-coherence-1792562946.bak`.
+
+
+Downstream validation found one consumer relying on the removed public re-export:
+VaryingRingProperOpenArrows uses StrictTower.beta, gamma, squareLift and their
+instances. Its compile against the original published Operations succeeded in
+6.9 s; against the narrower Operations alone it timed out at 60 s. Add an explicit
+public import of StrictTowerProperOpenCalculus to that consumer, preserving its
+previous proper/open API without making the unrelated unit-coherence statement
+import that closure. This is one added import; all non-import lines are unchanged.
+
+Validation with repaired prerequisites: Compiled in 15.5 s
