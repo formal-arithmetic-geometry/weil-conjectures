@@ -17,7 +17,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtConormalComparisonSurjection
-import Sheaf.AlgebraicGeometry.KoszulSelfExtStalkBases
+import WeilConjectures.AlgebraicGeometry.KoszulSelfExtStalkBases
 import WeilConjectures.AlgebraicGeometry.DeterminantDualPairing
 import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingLocal
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
@@ -129,8 +129,10 @@ theorem koszulRegularImmersion_self_ext_dual_exterior_conormal
     apply Scheme.Modules.isIso_of_bijective_stalkLinearMap
     intro z
     obtain ⟨U, hzU, m, f, hf, hreg⟩ := hregular z.1 z.2
-    obtain ⟨⟨bT⟩, ⟨bE⟩⟩ :=
-      koszulRegularImmersion_self_ext_stalk_bases i V n z U hzU m f hf hreg
+    have hb := koszulRegularImmersion_self_ext_stalk_bases i V n z U hzU m f hf hreg
+    dsimp only at hb
+    rw [← Scheme.Modules.exteriorSheaf_eq_exteriorPower] at hb
+    obtain ⟨⟨bT⟩, ⟨bE⟩⟩ := hb
     let C := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
     obtain ⟨p₀, hp₀⟩ := exterior_dual_pairing_exists Z C n
     let eSource := Scheme.Modules.exteriorSheafPowerIso (Scheme.Modules.dual C) n

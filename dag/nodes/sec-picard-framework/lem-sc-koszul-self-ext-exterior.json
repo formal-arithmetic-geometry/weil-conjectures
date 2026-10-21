@@ -27,9 +27,10 @@
    "elementary": false
   },
   {
-   "text": "At z∈V choose a regular affine chart of length m. The local stalk-bases theorem supplies bases of T_z and E_z indexed by the same finite set. Module.Finite.of_basis proves that T_z is finite, and Module.Basis.equiv gives an injective O_{V,z}-linear map E_z→T_z. Apply Mathlib OrzechProperty.bijective_of_surjective_of_injective to this map and φ_z; CommRing.orzechProperty supplies the ring hypothesis. Hence φ_z is bijective. No comparison or compatibility of the chosen bases is needed.",
+   "text": "Use the source-library stalk-bases theorem and rewrite its exteriorPower term to exteriorSheaf using exteriorSheaf_eq_exteriorPower. At z∈V choose a regular affine chart of length m. The local stalk-bases theorem supplies bases of T_z and E_z indexed by the same finite set. Module.Finite.of_basis proves that T_z is finite, and Module.Basis.equiv gives an injective O_{V,z}-linear map E_z→T_z. Apply Mathlib OrzechProperty.bijective_of_surjective_of_injective to this map and φ_z; CommRing.orzechProperty supplies the ring hypothesis. Hence φ_z is bijective. No comparison or compatibility of the chosen bases is needed.",
    "uses": [
-    "lem-sc-koszul-self-ext-stalk-bases"
+    "lem-sc-koszul-self-ext-stalk-bases",
+    "lem-sc-exterior-sheaf-upstream-comparison"
    ],
    "elementary": true
   },
@@ -44,7 +45,8 @@
  "proof_deps": [
   "lem-sc-koszul-self-ext-yoneda-surjection",
   "lem-sc-koszul-self-ext-stalk-bases",
-  "lem-weil-pbc-module-iso-on-stalks"
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-sc-exterior-sheaf-upstream-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -54,7 +56,7 @@
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "Lemma 48.15.4, contraction products and zero-differential Hom calculation; Tag 0BQW, degree-one boundary"
   },
-  "note": "Compiling reduction separates global Yoneda generation from the local finite-basis calculation; Mathlib OrzechProperty supplies injectivity and the source-library stalk criterion supplies the global isomorphism. The unit route is unchanged."
+  "note": "Compiling reduction separates global Yoneda generation from the local finite-basis calculation; Mathlib OrzechProperty supplies injectivity and the source-library stalk criterion supplies the global isomorphism. The unit route is unchanged. Q8 retirement repair, 2026-10-21: use the official stalk-bases theorem after rewriting by the proved exteriorSheaf_eq_exteriorPower equality; all public hypotheses and conclusions stay unchanged. Preserve the current determinant-pairing and restriction transports."
  },
  "mathlib_searches": [
   {
@@ -127,14 +129,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "J3",
+  "reviewer": "C-ba7ef",
+  "group": "Q8",
   "result": "pass",
-  "landing": "20261013T111857-L-3054171",
+  "landing": "20261021T004840-L-1794601",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Sheaf stalk-bases stub + 2 adapted consumers vs live clone and upstream WeilConjectures.AlgebraicGeometry.KoszulSelfExtStalkBases; node lean.statement vs upstream file (verbatim); originals vs delivered stub (fail, forced)"
  },
  "lean_audit": {
   "master": {

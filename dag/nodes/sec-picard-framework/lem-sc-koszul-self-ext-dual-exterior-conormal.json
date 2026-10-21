@@ -40,10 +40,11 @@
    "elementary": false
   },
   {
-   "text": "The independent self-Ext stalk-bases theorem gives finite bases for the source of q and the self-Ext target on the same n-element-subset index set. Their basis equivalence is injective. The composite of q with the comparison is surjective, so OrzechProperty.bijective_of_surjective_of_injective over the commutative scheme stalk ring makes that composite bijective. Since q is surjective, injectivity of the composite implies injectivity of the comparison itself. Its surjectivity was already given. Detect a sheaf-module isomorphism by bijectivity on all stalks and package it with asIso. This also handles empty V, degree zero and degrees above the chart length without extra hypotheses.",
+   "text": "Use the source-library stalk-bases theorem and rewrite its exteriorPower term to exteriorSheaf using exteriorSheaf_eq_exteriorPower. The independent self-Ext stalk-bases theorem gives finite bases for the source of q and the self-Ext target on the same n-element-subset index set. Their basis equivalence is injective. The composite of q with the comparison is surjective, so OrzechProperty.bijective_of_surjective_of_injective over the commutative scheme stalk ring makes that composite bijective. Since q is surjective, injectivity of the composite implies injectivity of the comparison itself. Its surjectivity was already given. Detect a sheaf-module isomorphism by bijectivity on all stalks and package it with asIso. This also handles empty V, degree zero and degrees above the chart length without extra hypotheses.",
    "uses": [
     "lem-sc-koszul-self-ext-stalk-bases",
-    "lem-weil-pbc-module-iso-on-stalks"
+    "lem-weil-pbc-module-iso-on-stalks",
+    "lem-sc-exterior-sheaf-upstream-comparison"
    ],
    "elementary": true
   }
@@ -68,7 +69,7 @@
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
   },
-  "note": "Decomposition: construction and spanning are split off; injectivity is proved using the existing independent stalk bases, the determinant pairing and Mathlib OrzechProperty. No target, existing signature, chapter or unit route is changed. K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved.",
+  "note": "Decomposition: construction and spanning are split off; injectivity is proved using the existing independent stalk bases, the determinant pairing and Mathlib OrzechProperty. No target, existing signature, chapter or unit route is changed. K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved. Q8 retirement repair, 2026-10-21: use the official stalk-bases theorem after rewriting by exteriorSheaf_eq_exteriorPower; preserve the current D6 upstream determinant pairing and its comparison transports. All public signatures stay unchanged.",
   "retirement": "D6 repair (2026-10-21): reapply pairing retirement to the current consumer, preserving B8 upstream local-bijectivity imports and K4 restriction comparisons where present. Apply upstream construction and local perfection before comparison transport; existing statements are unchanged."
  },
  "mathlib_searches": [
@@ -145,14 +146,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-fe289",
-  "group": "D6",
+  "reviewer": "C-ba7ef",
+  "group": "Q8",
   "result": "pass",
-  "landing": "20261020T233118-L-895066",
+  "landing": "20261021T004840-L-1794601",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf exterior_dual_pairing_exists vs upstream WeilConjectures twin (node lean.statement byte-identical); 3 adapted direct importers vs live clone (private import + proof lines only), all compile clean against the delivered stub; axioms propext/choice/Quot.sound"
+  "note": "independent cc review: Sheaf stalk-bases stub + 2 adapted consumers vs live clone and upstream WeilConjectures.AlgebraicGeometry.KoszulSelfExtStalkBases; node lean.statement vs upstream file (verbatim); originals vs delivered stub (fail, forced)"
  },
  "lean_audit": {
   "master": {

@@ -15,7 +15,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtYonedaSurjection
-import Sheaf.AlgebraicGeometry.KoszulSelfExtStalkBases
+import WeilConjectures.AlgebraicGeometry.KoszulSelfExtStalkBases
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafComparison
 import Mathlib.RingTheory.FiniteType
 
 /-! # Self-coefficient Koszul Ext and exterior powers
@@ -88,8 +89,10 @@ theorem koszulRegularImmersion_self_ext_exterior
     apply Scheme.Modules.isIso_of_bijective_stalkLinearMap
     intro z
     obtain ⟨U, hzU, m, f, hf, hreg⟩ := hregular z.1 z.2
-    obtain ⟨⟨bT⟩, ⟨bE⟩⟩ :=
-      koszulRegularImmersion_self_ext_stalk_bases i V n z U hzU m f hf hreg
+    have hb := koszulRegularImmersion_self_ext_stalk_bases i V n z U hzU m f hf hreg
+    dsimp only at hb
+    rw [← Scheme.Modules.exteriorSheaf_eq_exteriorPower] at hb
+    obtain ⟨⟨bT⟩, ⟨bE⟩⟩ := hb
     let := Module.Finite.of_basis bT
     let e := bE.equiv bT (Equiv.refl _)
     exact OrzechProperty.bijective_of_surjective_of_injective
