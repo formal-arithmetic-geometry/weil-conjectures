@@ -30,9 +30,10 @@
    }
   },
   {
-   "text": "The function $x\\mapsto|i(x)|$ is an absolute value on $E$: injectivity gives its zero condition, and multiplication and the triangle inequality follow by applying those in the algebraic closure. Since $i$ fixes $\\mathbf Q_\\ell$, it extends the normalized $\\ell$-adic absolute value. By [lem-weil-l-adic-extension-absolute-value] it equals the supplied norm on $E$. Hence $|\\sigma(x)-\\sigma(y)|=|x-y|$ and both $\\sigma$ and its inverse are continuous. The equation $|\\sigma(x)|=|x|$ gives $\\sigma(A)=\\{z\\in E':|z|\\le1\\}=A'$; restricting the isometry gives the required topological ring isomorphism $A\\cong A'$.",
+   "text": "The function $x\\mapsto|i(x)|$ is an absolute value on $E$: injectivity gives its zero condition, and multiplication and the triangle inequality follow by applying those in the algebraic closure. Since $i$ fixes $\\mathbf Q_\\ell$, it extends the normalized $\\ell$-adic absolute value. By [lem-weil-l-adic-extension-absolute-value] it equals the supplied norm on $E$. Hence $|\\sigma(x)-\\sigma(y)|=|x-y|$ and both $\\sigma$ and its inverse are continuous. The equation $|\\sigma(x)|=|x|$ gives $\\sigma(A)=\\{z\\in E':|z|\\le1\\}=A'$; restricting the isometry gives the required topological ring isomorphism $A\\cong A'$. For the actual chosen Lean integer subring, use the membership clause of [lem-weil-l-adic-extension-integers-dvr] and identify its spectral absolute value with the supplied norm. Restrict the algebra equivalence using this membership equivalence; its forward and inverse maps are restrictions of the isometries.",
    "uses": [
-    "lem-weil-l-adic-extension-absolute-value"
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
    "elementary": false,
    "source": {
@@ -53,7 +54,7 @@
    }
   },
   {
-   "text": "Fix $B$ and omit its superscript. Put $R_Z=B_Z$, $S_Z=B'_Z$ and $P_Z=\\operatorname{Res}_{c_Z^{-1}}$. Thus $P_ZM$ has the same underlying abelian sheaf, and $s\\in S_Z$ acts as $c_Z^{-1}(s)$ on $M$. By clauses 4--5 of [sk-def-sfb-change-of-scalars], $P_Z$ and $\\operatorname{Res}_{c_Z}$ are additive exact inverse equivalences, and $\\operatorname{Ext}_{c_Z}\\cong P_Z$. The latter isomorphism is $s\\otimes m\\mapsto c_Z^{-1}(s)m$, with inverse $m\\mapsto1\\otimes m$. The exact-functor result [lem-weil-pbc-exact-functor-derived-functor] identifies its left derived functor with termwise $P_Z$, so the stated derived extension $J_Z^B$ is $D(P_Z)$. By [lem-sf-exact-functor-derived-triangulated] it is exact as a triangulated functor; termwise inverse scalar restriction gives its inverse on the localized categories.",
+   "text": "For each scheme Z, the pulled-back coefficient map c is invertible. By [sk-def-sfb-change-of-scalars], Mod.comap c is the functor of comapEquivalenceOfIsIso c, and extension along c is isomorphic to restriction along its inverse. This also proves that extension preserves finite limits. The canonical exact-functor comparison L(Ext_c) ≅ D(Ext_c), followed by the localized ordinary scalar isomorphism, identifies it with the specified transport D(Res_(c^-1)) [lem-weil-pbc-exact-functor-derived-functor]. The localized scalar equivalence is an equivalence and triangulated [lem-sf-exact-functor-derived-triangulated], as is the reverse transport.",
    "uses": [
     "sk-def-sfb-change-of-scalars",
     "lem-weil-pbc-exact-functor-derived-functor",
@@ -66,7 +67,7 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-exact-functor-complex-cohomology], $H^n(J_ZK)\\cong P_ZH^n(K)$ for every integer $n$. The inverse equivalence has the same property. Since both functors carry zero to zero, every upper or lower cohomological bound is preserved in both directions. This proves the assertion about bounds without choosing a common bound in advance.",
+   "text": "Exact scalar restriction commutes with homology by [lem-weil-pbc-exact-functor-complex-cohomology]. It is faithful (underlying morphisms are unchanged), so it also reflects zero homology objects. The vanishing characterizations of each IsLE and IsGE therefore give both bound equivalences, for the forward and inverse coefficient maps separately.",
    "uses": [
     "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
@@ -77,13 +78,12 @@
    }
   },
   {
-   "text": "For any stratum or covering morphism $g:W\\to Z$, pulling back the action $R_Z\\otimes M\\to M$ precomposed with $c_Z^{-1}\\otimes M$ gives the pulled-back action precomposed with $(g^*c_Z)^{-1}\\otimes g^*M$. Thus inverse scalar restriction commutes with the $\\operatorname{mapMod}(g^*)$ used in [def-sfb-constructible-module]. On $W$, clause 5 of [sk-def-sfb-change-of-scalars] identifies the regular $g^*R_Z$-module with the regular $g^*S_Z$-module by $g^*c_Z$. The exact additive equivalence therefore carries a presentation $(g^*R_Z)^m\\to(g^*R_Z)^n\\to M\\to0$ to a presentation $(g^*S_Z)^m\\to(g^*S_Z)^n\\to P(M)\\to0$, and its inverse does the reverse. This is precisely finite presentation in [def-sfb-finitely-presented-module]. Consequently the same local covers in [def-sfb-locally-finitely-presented] and the same finite stratification work for $M$ and its scalar transport. Applying this to each cohomology module from step 5 proves bounded constructibility in both directions by [sk-def-sfb-bounded-constructible].",
+   "text": "Use the proved constructible_comap and constructible_of_iso helpers of [lem-weil-pbc-module-constructible-pullback]: scalar restriction along a coefficient isomorphism transports the same finite presentations, local covers and stratification. Apply restriction along the inverse and the scalar-equivalence unit to obtain the reverse implication. Via the homology comparison [lem-weil-pbc-exact-functor-complex-cohomology], every homology module is constructible on one side exactly when it is on the other. Exact faithful scalar restriction preserves and reflects zero objects, so the same finite cohomological interval works in both directions. This gives [sk-def-sfb-bounded-constructible] for both transports.",
    "uses": [
-    "def-sfb-constructible-module",
+    "lem-weil-pbc-module-constructible-pullback",
     "sk-def-sfb-change-of-scalars",
-    "def-sfb-finitely-presented-module",
-    "def-sfb-locally-finitely-presented",
-    "sk-def-sfb-bounded-constructible"
+    "sk-def-sfb-bounded-constructible",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": true,
    "source": {
@@ -92,86 +92,39 @@
    }
   },
   {
-   "text": "Let $f:X\\to Y$. Naturality in the coefficient ring of the point-pullback comparison defining $\\alpha_f$ in [sk-def-sfb-coefficient-morphisms] gives $c_X\\alpha_{f,R}=\\alpha_{f,S}f^*(c_Y)$. Taking adjoints gives $f_*(c_X)\\eta_{f,R}=\\eta_{f,S}c_Y$, since $\\eta_f$ is the stated mate of $\\alpha_f$. Using the inverse of this equality, the two actions of $S_Y$ on $f_*^{\\mathrm{Ab}}M$ in $P_Y f_{*,R}M$ and $f_{*,S}P_XM$ coincide: both first send $s$ to $\\eta_{f,R}(c_Y^{-1}s)$, then use the original action. By the explicit definition of module direct image in [sk-def-sfb-module-pushforward-pullback], the identity of the underlying abelian sheaf is therefore a natural module isomorphism $\\gamma_M:P_Y f_{*,R}M\\cong f_{*,S}P_XM$.",
-   "uses": [
-    "sk-def-sfb-coefficient-morphisms",
-    "sk-def-sfb-module-pushforward-pullback"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-coefficient-morphisms/_section.md",
-    "place": "naturality of alpha from point pullback and its mate eta; explicit module pushforward definition in sk-def-sfb-module-pushforward-pullback"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-comap-preserves-k-injectives] to the condensed ring isomorphism $s_B^{-1}$. Its hypothesis holds for every scheme: extension along its pullback is inverse scalar restriction by [sk-def-sfb-change-of-scalars], hence an exact equivalence and in particular finite-limit preserving. Thus $P_X$ sends K-injectives to K-injectives. For a K-injective resolution $K\\to I$, exactness makes $P_XK\\to P_XI$ a quasi-isomorphism. The definition [sk-def-sfb-module-derived-pushpull] consequently computes both sides of the required comparison on this one resolution: they are represented by $P_Y f_{*,R}I$ and $f_{*,S}P_XI$. Termwise $\\gamma_I$ from step 7 is an isomorphism between them. It is natural in maps of K-injective complexes, hence in their homotopy category. The localization map from homotopy morphisms into a K-injective to derived morphisms is bijective by [lem-sc-kinjective-quasi-iso-comparison]; together with resolution existence in [sk-def-sfb-derived-categories], this makes the K-injective homotopy category equivalent to the derived source category. This defines the natural isomorphism $J_Y Rf_{*,R}\\cong Rf_{*,S}J_X$ on the ordinary unbounded categories.",
-   "uses": [
-    "lem-sfb-comap-preserves-k-injectives",
-    "sk-def-sfb-change-of-scalars",
-    "sk-def-sfb-module-derived-pushpull",
-    "sk-def-sfb-derived-categories",
-    "lem-sc-kinjective-quasi-iso-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-coefficient-comparisons/lem-sfb-comap-preserves-k-injectives.md",
-    "place": "flat restriction preserves K-injectives; ambient total-derived computation in sk-def-sfb-module-derived-pushpull"
-   }
-  },
-  {
-   "text": "For the corresponding ordinary inverse-image comparison, the tensor description in [sk-def-sfb-module-pushforward-pullback] gives $\\beta:P_X f_R^*\\cong f_S^*P_Y$ by $a\\otimes m\\mapsto c_X(a)\\otimes m$, with inverse $b\\otimes m\\mapsto c_X^{-1}(b)\\otimes m$. The coefficient identity in step 7 is exactly the balancing relation needed for these maps. The adjunction unit $m\\mapsto1\\otimes m$ is fixed by this formula. The counit on a tensor $a\\otimes n$ is the underlying inverse-image counit followed by scalar multiplication by $a$; on the changed side multiplication by $c_X(a)$ on $P_XM$ is, by definition, multiplication by $a$. Hence $\\beta$ and $\\gamma$ satisfy the actual unit and counit squares of the module adjunction; in particular $\\gamma$ is its counit mate, with no choice of an unrelated adjunction.",
+   "text": "For any f:X→Y, use the specified point-induced pullComparison, formed from derivedComapUpperStarIso and the exact derived-pullback identifications [sk-def-sfb-module-pushforward-pullback, sk-def-sfb-module-derived-pushpull]. Let θ be its inverse, and β its right mate under the actual published derived pullback/pushforward adjunctions. Both vertical scalar transport functors are equivalences by step 4, so [lem-weil-mate-iso-along-equivalences] makes β invertible. Choose γ=asIso β. The mate counit identity says Lf'*(β_K) followed by the changed counit equals θ_Rf*K followed by transport of the original counit. Precompose with Lf'*(β_K^-1) and cancel β_K^-1 β_K. This is exactly the requested equation with γ.inv and pullComparison.inv, naturally for every unbounded derived object. No K-injective calculation or separate resolving-adjunction normalization is required.",
    "uses": [
     "sk-def-sfb-module-pushforward-pullback",
-    "sk-def-sfb-change-of-scalars"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CZ, lemma-adjointness-tensor-restrict, and the explicit module pullback/pushforward adjunction in sk-def-sfb-module-pushforward-pullback; balanced tensor and counit calculation"
-   }
-  },
-  {
-   "text": "The $S$ coefficients are the admissible embedded finite-field or integer-ring coefficients, so [sk-prop-sfb-cartesian-coefficients] gives exactness of $f_S^*$. Since $P_X,P_Y$ are exact equivalences and $\\beta$ is invertible, $f_R^*$ is exact too. By [lem-weil-pbc-exact-functor-derived-functor], their total left derived functors are the termwise functors, so all complexes can be used as the left resolving class. Apply [lem-sfb-resolving-derived-adjunction-normalization] to the two module adjunctions: with any source complex and a K-injective target $I$, the derived Hom transpose is the localized ordinary Hom transpose. The same target $P_XI$ computes the changed adjunction by step 8. Step 9 makes these ordinary transposes agree, so their localized transposes agree as well. Therefore the derived $\\gamma$ constructed in step 8 is the mate of the localized $\\beta$ and identifies the derived counits. Equality holds on all derived morphisms by the localization universal property [lem-weil-pbc-localization-universal-property]. This proves the final normalization clause for both $B=A$ and $B=E$.",
-   "uses": [
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-sfb-resolving-derived-adjunction-normalization",
-    "lem-weil-pbc-localization-universal-property"
+    "sk-def-sfb-module-derived-pushpull",
+    "lem-weil-mate-iso-along-equivalences"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5, lemma-derived-adjoint-functors, and Tag 015F; normalization of transposes on K-injective targets as stated in lem-sfb-resolving-derived-adjunction-normalization"
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "mateEquiv_counit, with the proved project lemma isIso_mateEquiv_of_isEquivalence_of_fullyFaithful; agent-written specialization to the prescribed coefficient comparison"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
   "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-pulled-back-coefficients",
   "sk-def-sfb-change-of-scalars",
   "lem-weil-pbc-exact-functor-derived-functor",
   "lem-sf-exact-functor-derived-triangulated",
   "lem-weil-pbc-exact-functor-complex-cohomology",
-  "def-sfb-constructible-module",
-  "def-sfb-finitely-presented-module",
-  "def-sfb-locally-finitely-presented",
+  "lem-weil-pbc-module-constructible-pullback",
   "sk-def-sfb-bounded-constructible",
-  "sk-def-sfb-coefficient-morphisms",
   "sk-def-sfb-module-pushforward-pullback",
-  "lem-sfb-comap-preserves-k-injectives",
   "sk-def-sfb-module-derived-pushpull",
-  "sk-def-sfb-derived-categories",
-  "lem-sc-kinjective-quasi-iso-comparison",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-sfb-resolving-derived-adjunction-normalization",
-  "lem-weil-pbc-localization-universal-property"
+  "lem-weil-mate-iso-along-equivalences"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 6.8.1 and Remark 6.8.15 supply coefficient conventions; agent-written coordinate and derived-adjunction argument using Stacks 09GU, 03CZ, 010N, 015F, 09T5 and the cited existing DAG results. The general ring-object constructibility convention is the blueprint definition, not an identification with a different coefficient model."
+  "place": "Definition 6.8.1 and Remark 6.8.15 give conventions. V3 uses the algebraic image and spectral-norm uniqueness, existing constructible scalar restriction, and the formal right-mate counit identity under the actual derived adjunctions. This replaces the separate K-injective and resolving-transpose calculation; the open-coefficients unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -282,10 +235,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-comap-preserves-k-injectives",
-  "lem-sfb-resolving-derived-adjunction-normalization"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -320,5 +270,15 @@
   "group": "O4",
   "result": "pass",
   "note": "Read item, report, module, and all 8 stmt_dep records plus the exact side-live decls. All clauses match: Fact prime ℓ; NormedField E, finite over Q_ℓ, with hE; Ω IsAlgClosure with hΩ (more general than PadicAlgCl). ∃ finite E' with isometric σ; τ the restriction; norm ≤ 1 membership iffs tie the spectral integer ring to the given norm. sE/sA pinned to condenseMap postcomposition; inclusion square. transport = canonical D(Res_{c⁻¹}): equivalence and triangulated; IsLE/IsGE and boundedConstructible (general ring-object predicate) iffs both ways. ∀ f, ∃ γ uniquely pinned by the counit equation vs the actual derived adjunction and the point-induced pullComparison; directions checked. Edge cases (E=Q_ℓ, ℓ=2, empty scheme, f=id, zero complex) ok. Shared Type u is the dep convention. One sorry; docstrings with source, blueprint and 10 steps; statement verbatim; node otherwise identical to side-live. Advisory: A1 coefficientMap/derivedComapUpperStarIso owners not in stmt_deps; A2 Nonempty L(Ext)≅transport (all clauses on the canonical functor; acceptable); A3 proof-only imports. No compile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-95091",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261021T154102-L-2790694",
+  "kind": "proof",
+  "note": "independent cc review: delivered NormedCoefficientRealization.lean vs clones/live (statement and public defs byte-identical, only plain imports and the sorry removed); node lem-sfb-normed-coefficient-realization 7 steps/proof_deps vs the Lean proof; unit sk-prop-open-coefficients realized = empty; #print axioms of every helper"
  }
 }
