@@ -22593,3 +22593,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:35 L: returned deliver/NJ/lem-a1-roos-intrinsic-unit-comparison (reviewer RETURN: L: independent stage-2 immutable head adc4a78e022e: H2: stmt_deps add theorem nodes lem-a1-principal-koszul-strict-repla)
 - 13:35 L: returned deliver/NF/lem-sf-derived-completed-tensor-bilinearity (reviewer RETURN: L: independent stage-2 immutable head b92b3ac11a59: Item clauses are correct: essentially-small site with independent un)
 - 13:35 L: returned deliver/NR/lem-pur-finite-type-coordinate-support-orientation (reviewer RETURN: L: independent stage-2 immutable head c8a0677a3490: H2: the delivery added theorem node lem-pur-supported-cup-functorial)
+- 13:35 L: returned deliver/NO/lem-pur-perfect-quotient-exchange-normalization (reviewer RETURN: L: independent stage-2 immutable head e69a32791471: H2/H12: stmt_dep lem-sp-completion-mate-comparison (theorem) is adde)
