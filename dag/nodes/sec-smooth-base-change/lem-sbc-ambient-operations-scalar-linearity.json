@@ -177,5 +177,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-b4bdb665b (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full. The delivery has no new nodes. The statement is byte-identical to the base (sha1 prefix bcc09fd9de), so it is not weakened. The item is neither dropped nor under a re-split note. Stacks 09MK/070I/03D3/04JC are checked in tags/tags and 09MK at dga.tex l.2887; no SGA is used. Step 1: u_* is linear sectionwise, (u_*M)(W)=M(W_U), and the A-action goes through R_V(W)->R_U(W_U), which equals a_U because c respects the A-structures; that hypothesis is genuinely used. Step 2: u^* is linear because Phi(h)=G(h)eta_M is linear by step 1, naturality gives Phi(Ps)=eta_N s, and Phi is injective; there is no circularity. Step 3: def-weil-pbc-proetale-operations explicitly states that u^* is exact and that Lu^* is the termwise derived functor. lem-cbc-exact-linear-derived-functor applies with A-linear Mod(R_W) and the derived structures of lem-weil-linear-abelian-derived-category. The two termwise constructions are the same factorization through Q_A, and linearity would transfer through a natural iso in any case. Step 4: Ru_* is linear because Psi(h)=eps_Y L_u(h) is linear, Psi(D_u s)=s eps_X, and Psi is injective; no linear choice of K-injective resolutions is assumed, and the argument holds for unbounded complexes. Edge cases u=id, A=0, a=0/1 and non-injective A->Gamma(R) all hold. Every cited node states what its step uses, and I found no duplicate. Minor: the source place still mentions 070I although the proof does not use it, which is harmless. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAmbientOperationsScalarLinearity",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleRingDerivedOperations_scalarLinearity",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAmbientOperationsScalarLinearity.lean",
+  "statement": "theorem proEtaleRingDerivedOperations_scalarLinearity (A : Type v) [CommRing A] {U V : Scheme.{u}} (f : U ⟶ V) (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1}) (RU : Sheaf (ProEt.topology U) CommRingCat.{u + 1}) (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj RV ≅ RU) (aV : A →+* RingCat.sectionsSubring (RV.obj ⋙ forget₂ CommRingCat RingCat)) (aU : A →+* RingCat.sectionsSubring (RU.obj ⋙ forget₂ CommRingCat RingCat)) (hc : ∀ (a : A) (W : V.ProEt), (proEtaleRingDirectImageMap f RV RU c).hom.app (op W) ((aV a).val (op W)) = (aU a).val (op ((proEtaleBaseChange f).obj W))) : ∃ (lU : Linear A (proEtaleRingModules U RU)) (lV : Linear A (proEtaleRingModules V RV)), (fun [_iU : Linear A (proEtaleRingModules U RU)] [_iV : Linear A (proEtaleRingModules V RV)] ↦ (∀ (M N : proEtaleRingModules U RU) (h : M ⟶ N) (a : A) (W : U.ProEtᵒᵖ) (x : M.val.obj W), (a • h).val.app W x = (aU a).val W • h.val.app W x) ∧ (∀ (M N : proEtaleRingModules V RV) (h : M ⟶ N) (a : A) (W : V.ProEtᵒᵖ) (x : M.val.obj W), (a • h).val.app W x = (aV a).val W • h.val.app W x) ∧ (proEtaleRingDerivedPullback f RV RU c).Additive ∧ Functor.Linear A (proEtaleRingDerivedPullback f RV RU c) ∧ (proEtaleRingDerivedDirectImage f RV RU c).Additive ∧ Functor.Linear A (proEtaleRingDerivedDirectImage f RV RU c)) (_iU := lU) (_iV := lV)",
+  "branch": "sheaf-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b5c25412",
+  "group": "NO",
+  "result": "pass",
+  "note": "Read the item, all 4 stmt_deps and the side declarations (proEtaleRingModules, proEtaleRingDirectImageMap = unit ≫ u_*(c.hom), the derived pullback via mapDerivedCategory, the derived direct image via rightDerivedFunctor). Clause match: A : Type v with no universe tie; arbitrary RV/RU; c is the dependency binder; aV/aU map into sectionsSubring (global sections); hc is equivalent to A-compatibility of c (check at the terminal object). The existential Linear structures are fixed uniquely by sectionwise smul conjuncts. The derived structures are DerivedCategory.instLinear from them: a probe shows there is no global Linear A instance on DerivedCategory(proEtaleRingModules), so they cannot come from elsewhere. Conclusion Additive ∧ Functor.Linear A for both derived operations; no extra hypotheses. Statement verbatim, the only proof is sorry, docstrings carry 09MK (dga.tex l.2887) and blueprint tag plus the 4 proof steps, no duplicate found, not dropped. nt_compile --json exit 0 (3.1 s), no warnings. Advisory: the HomModule public import is unused by the statement (it is the proof ingredient); the source place mentions the unused 070I."
  }
 }

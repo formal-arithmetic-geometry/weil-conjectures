@@ -203,5 +203,28 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-45c58536b (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no fixes. It is one commit that changes only the item and the report, with 0 new nodes. Statement, stmt_deps and blueprint are byte-identical to the Q28-fixed version, and the 5 earlier mathlib_searches are kept with 5 new ones appended. There is no cycle: none of the 8 proof_deps reaches the item. The item is not a re-split answer, and it cannot be on the 10-19 dropped list because it was created 10-21. Source: main-20261015 lem-sfb-qlbar-flat.proof.md, first sentence. The item states this colimit in Mod(E_X) with the legs q_F, which is what the parent lem-sfb-qlbar-flat step 2 needs. Step 1: I_E is nonempty and directed, and every H lies in EH, by clause 1 of det-def-sfb-qlbar-condensed-subextensions. Step 2: the maps a_{H,K} are functorial by def-sfb-subfield-coefficient-map and the functor in sk-def-sfb-pulled-back-coefficients; q_K a_{H,K}=q_H is exactly lem-sfb-subfield-coefficient-map-comp; R-linearity is elementary. Step 3: the extension t~_H=t_{EH}a_{H,EH} is a cocone because EH is contained in EK. Existence holds because EF=F, and uniqueness follows from the full colimit; I checked all three. It reads the last clause of sk-prop-sfb-qlbar-colimit-x as a ring colimit with legs q_E, which matches its 'canonical' wording and live isColimitPadicAlgClRingObjCocone. Step 4: lem-sfb-directed-ring-sheaf-module-colimit (same unit, reviewed PASS by Q149) gets every hypothesis it needs: a small site, I_E small, nonempty and directed, the compatible scalar maps s_F and q_E, and the ring colimit. Its conclusion with the same q_F is the item. Edge cases checked: E=Q_l, F=E, H incomparable with E, l=2, X empty, and I_E never empty. I accept both declared tool_uses (sk-prop-sfb-qlbar-colimit-x, which the blueprint sentence itself cites, and det-def-sfb-qlbar-condensed-subextensions, which is generic). The live Compatibility.lean:128 colimit is over all subfields in abelian sheaves, so it cannot be attached. Stacks 03DB is sites-modules.tex lemma-limits-colimits, l.1358. There is no SGA citation."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QlbarTailModuleColimit",
+  "declaration": "AlgebraicGeometry.ProEtale.qlbar_tail_module_colimit",
+  "file": "lean/Sheaf/Paper/QlbarTailModuleColimit.lean",
+  "statement": "theorem qlbar_tail_module_colimit (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : FiniteIntermediateField ℓ) : Nonempty {F : FiniteIntermediateField ℓ // E ≤ F} ∧ (∀ F G : {F : FiniteIntermediateField ℓ // E ≤ F}, ∃ H : {F : FiniteIntermediateField ℓ // E ≤ F}, F ≤ H ∧ G ≤ H) ∧ (∀ (M : ringedSiteModules.{u + 1} ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (ProEt.topology X) (padicSubfieldRingObj X ℓ E)))) (f : ∀ F : {F : FiniteIntermediateField ℓ // E ≤ F}, qlbarTailStage X ℓ F.2 ⟶ M), (∀ (F G : {F : FiniteIntermediateField ℓ // E ≤ F}) (h : F ≤ G) (U : X.ProEtᵒᵖ) (x : (padicSubfieldRingObj X ℓ F.1).obj.obj U), (f G).val.app U ((padicSubfieldRingObjMap X ℓ h).hom.app U x) = (f F).val.app U x) → ∃! g : qlbarTailVertex X ℓ E ⟶ M, ∀ (F : {F : FiniteIntermediateField ℓ // E ≤ F}) (U : X.ProEtᵒᵖ) (x : (padicSubfieldRingObj X ℓ F.1).obj.obj U), g.val.app U ((padicSubfieldRingObjToPadicAlgCl X ℓ F.1).hom.app U x) = (f F).val.app U x)",
+  "branch": "sheaf-dag",
+  "by": "Q42",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.qlbarTailStage",
+   "AlgebraicGeometry.ProEtale.qlbarTailVertex",
+   "AlgebraicGeometry.ProEtale.qlbar_tail_module_colimit"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9f65a9929",
+  "group": "Q42",
+  "result": "pass",
+  "note": "Item qlbar_tail_module_colimit matches the node clause by clause: ℓ prime, PadicAlgCl closure, E in FiniteIntermediateField, arbitrary X : Scheme.{u}, ProEt site, u+1 coefficients with no universe equality, R=padicSubfieldRingObj and B=padicAlgClRingObj as section rings, I_E as an inclusion-ordered subtype, transitions padicSubfieldRingObjMap, legs padicSubfieldRingObjToPadicAlgCl used literally, module structures through Mod.comap of Mod.regular and sectionModuleEquivalence (real data). Nonempty, directed and the full ∃! universal property in SheafOfModules are on sections, with no unspecified iso. Edge cases E=⊥, F=E, incomparable fields, ℓ=2, empty X and zero M are covered. Not a duplicate of the Compatibility colimit, which is over all fields in Ab sheaves. Docstrings, source, blueprint tags, sorry-only proof and verbatim records are fine. nt_compile --json on both files: clean (3.4 s, 11.2 s). Maintainer note: the §1(B) restoration of Sheaf.Paper.FiniteSubextensionsDirected, pruned as dead by U on 10-20, has the recorded statement but with sorry. V8's landed proof (1cbd6bfe) is lost, so re-queue it for stage 3 or restore the proof. The item's public import of it is unused (advisory)."
  }
 }
