@@ -16,7 +16,7 @@
  },
  "proof": [
   {
-   "text": "Use the canonical small-to-full affine-colimit comparison. Its coprojection formula identifies the structural maps; composing b with its forward map preserves the nonunit condition, as witnessed by its inverse. Apply the upstream Noetherianity and prime-local regularity theorem to this composite, then assemble IsRegularRing on the full-colimit quotient. Ideal.quotientEquiv for the inverse comparison identifies its principal quotient with the original small-colimit quotient. Transport regularity by Mathlib IsRegularRing.of_ringEquiv.",
+   "text": "Apply the upstream Noetherianity and prime-local regularity theorem to the full affine-neighbourhood strict henselization and the supplied structural ring map. Its regular-local conclusion at every prime is exactly the field defining IsRegularRing. The equivalent small-colimit formulation is recovered explicitly in both live consumers using the canonical colimit comparison, its structural-map equation, and Ideal.quotientEquiv followed by IsRegularRing.of_ringEquiv.",
    "uses": [
     "lem-sbc-strict-hensel-regular-divisor-quotient-regular-part-aux"
    ],
@@ -28,10 +28,10 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "M4",
+  "group": "U4",
   "document": "Stacks Project",
-  "place": "Tags 04HX, 05WS and 06LN; canonical colimit and quotient-isomorphism transport of the retained upstream auxiliary theorem",
-  "note": "The proof uses the original auxiliary mathematical node through its upstream owner, so no unit step or mathematical dependency is bypassed."
+  "place": "Tags 04HX, 05WS and 06LN; retirement to the retained upstream proof, with canonical transport in both small-colimit consumers",
+  "note": "The auxiliary dependency and unit route remain intact. No upstream source changes."
  },
  "mathlib_searches": [
   {
@@ -83,14 +83,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-prop-input-spreading",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularPart",
-  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRegularDivisorQuotientRegularPart.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotientRegularPart",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/StrictHenselRegularDivisorQuotientRegularPart.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselizationRing_regular_divisor_quotient_part",
-  "statement": "theorem strictHenselizationRing_regular_divisor_quotient_part\n    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselizationRing barY)\n    (hb : Spec.map b = strictHenselizationStructuralMap barY)\n    (hg : ¬ IsUnit (b.hom f)) :\n    IsRegularRing (strictHenselizationRing barY ⧸ Ideal.span {b.hom f})",
+  "statement": "theorem strictHenselizationRing_regular_divisor_quotient_part\n    (R : CommRingCat.{u}) [IsRegularRing R] (f : R)\n    [IsRegularRing (R ⧸ Ideal.span {f})]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (barY : Spec (.of Ω) ⟶ Spec R)\n    (b : R ⟶ strictHenselization barY)\n    (hb : Spec.map b = strictLocalizationToBase barY)\n    (hg : ¬ IsUnit (b.hom f)) :\n    IsRegularRing (strictHenselization barY ⧸ Ideal.span {b.hom f})",
   "branch": "sheaf-dag",
-  "by": "V3",
-  "date": "2026-10-13"
+  "by": "U4",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf duplicate. The upstream theorem uses the canonically isomorphic full affine-neighbourhood colimit. Both live small-colimit consumers explicitly transport along smallStrictHenselizationColimitIso and the induced principal-quotient ring equivalence; their signatures are unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -105,12 +106,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-005e3",
-  "group": "M4",
+  "reviewer": "C-f12a8",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261021T013348-L-2290566",
+  "landing": "20261021T021028-L-2694045",
   "kind": "interface",
-  "note": "independent cc review: emptied Sheaf RegularAux + aux node existing:true record vs upstream WeilConjectures theorem (verbatim); adapted unclaimed RegularPart vs live (signature identical, import swap forced by strictHenselizationStructuralMap_eq clash); importers DomainPart, Regular, Noetherian, Quotient compiled; axioms clean"
+  "note": "independent cc review: retired item stub + existing:true record vs upstream WeilConjectures RegularPart (verbatim); adapted unclaimed DomainPart/Regular vs live (signatures identical, transport via smallStrictHenselizationColimitIso + quotientEquiv); direct importers Noetherian, Quotient and next-layer 4 modules compiled; axioms clean"
  },
  "lean_audit": {
   "master": {
