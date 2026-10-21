@@ -12116,3 +12116,4 @@ public import WeilConjectures.WeilObject.BoundedConstructible.Defs
 public import WeilConjectures.WeilObject.BoundedConstructible.Homology
 public import WeilConjectures.WeilObject.BoundedConstructible.TensorHom
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
+public import WeilConjectures.PoincareDuality.ProjectionFormula
