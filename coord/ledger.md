@@ -22969,3 +22969,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:46 L: returned deliver/N9/lem-pur-concentrated-support-etale-transfer (reviewer RETURN: L: independent stage-2 immutable head d9c95854dc46: H2/H12: the item and both new def nodes (def-pur-coordinate-germ-con)
 - 15:46 L: returned deliver/P2/Sheaf.AlgebraicGeometry.RawModuleScalarPullbackComparison (reviewer RETURN: (reviewer C-7973c, head 7973c84dc) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Ra)
 - 15:47 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 15:47 L: merged deliver/J2/Sheaf.NumberTheory.Padics.BaseCoefficientCondensedIdentification (stage 3; reviewer PASS; first push; landing 20261021T154744-L-3169493 (proof); batch 20261021T154743; modules 1; new nodes 0)
