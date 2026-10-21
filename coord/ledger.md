@@ -22073,3 +22073,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:08 L: merged deliver/NW/lem-trf-completion-unit-strict-quotient-model (stage 2; reviewer FIX; parallel immutable checks)
 - 10:08 L: merged deliver/Q17/lem-sf-exact-pullback-counit-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 10:08 L: merged deliver/NN/lem-weil-pbc-affine-cohomology-etale-module-realization (stage 2; reviewer PASS; parallel immutable checks)
+- 10:08 L: returned deliver/Q28/lem-sf-clopen-lisse-complete-localization (reviewer RETURN: L: independent stage-2 immutable head d79b432d21c4: Substance is correct: every clause matches the node; the coefficient)
