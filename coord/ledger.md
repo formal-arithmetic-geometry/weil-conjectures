@@ -23813,3 +23813,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:44 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 21:45 L: returned deliver/ND/lem-sfb-supported-lattice-norm-projection (reviewer RETURN: I read the item, the new node lem-sfb-tame-generator-norm-projection, the cited statements (lem-sfb-tame-pair-proper-gen)
 - 21:45 L: merged deliver/NS/lem-sfb-equivariant-resolution-bar-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 21:45 L: returned deliver/NF/lem-sfb-norm-algcl-profinite-cech-exact (reviewer RETURN: L: independent stage-2 immutable head 1704e7647b20: H2 + mechanical theorem-stmt_dep finding upheld: the delivery adds t)
