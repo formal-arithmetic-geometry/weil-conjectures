@@ -34,6 +34,12 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
+import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.FlatScalarRestrictionKFlat
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import Mathlib.RingTheory.Ideal.Span
 import Mathlib.RingTheory.Finiteness.Defs
 import Sheaf.Paper.RingedTopoiTensorSections
@@ -995,6 +1001,434 @@ def resFactors {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
   letI := (siteRestrictScalars_exact φ).2
   (res φ).mapDerivedCategoryFactors.symm
 
+attribute [local irreducible] SheafOfModules.monoidalCategory
+  SheafOfModules.symmetricCategory CochainComplex.IsAcyclicTensorKFlat
+  CochainComplex.IsKFlatIndependentCoefficients
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Extend a natural comparison from a cochain resolving class. -/
+private theorem resolving_nat
+    {M H : Type*} [Category M] [Abelian M] [HasDerivedCategory M] [Category H]
+    (F G : DerivedCategory M ⥤ H) (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (s : K ⟶ X), P K ∧ QuasiIso s)
+    (α : ∀ X : CochainComplex M ℤ, P X →
+      (F.obj (DerivedCategory.Q.obj X) ⟶ G.obj (DerivedCategory.Q.obj X)))
+    (hα : ∀ (X Y : CochainComplex M ℤ) (hX : P X) (hY : P Y) (f : X ⟶ Y),
+      F.map (DerivedCategory.Q.map f) ≫ α Y hY =
+        α X hX ≫ G.map (DerivedCategory.Q.map f)) :
+    ∃ e : F ⟶ G, ∀ (X : CochainComplex M ℤ) (hX : P X),
+      e.app (DerivedCategory.Q.obj X) = α X hX := by
+  let q := HomotopyCategory.quotient M (.up ℤ)
+  let Q := DerivedCategory.Qh (C := M)
+  let W := HomotopyCategory.quasiIso M (.up ℤ)
+  let S (X : HomotopyCategory M (.up ℤ)) := P X.as
+  have : W.HasRightCalculusOfFractions :=
+    (HomotopyCategory.quasiIso_saturated_triangulated M).2.1
+  have hres' (X : HomotopyCategory M (.up ℤ)) :
+      ∃ (K : HomotopyCategory M (.up ℤ)) (s : K ⟶ X), S K ∧ W s := by
+    obtain ⟨X, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨K, s, hK, hs⟩ := hres X
+    exact ⟨q.obj K, q.map s, hK,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  let i := DerivedCategory.quotientCompQhIso M
+  let α' (X : HomotopyCategory M (.up ℤ)) (hX : S X) :
+      (Q ⋙ F).obj X ⟶ (Q ⋙ G).obj X :=
+    F.map (i.hom.app X.as) ≫ α X.as hX ≫ G.map (i.inv.app X.as)
+  have hα' (X Y : HomotopyCategory M (.up ℤ)) (hX : S X) (hY : S Y)
+      (f : X ⟶ Y) :
+      (Q ⋙ F).map f ≫ α' Y hY = α' X hX ≫ (Q ⋙ G).map f := by
+    obtain ⟨X, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨Y, rfl⟩ := HomotopyCategory.quotient_obj_surjective Y
+    obtain ⟨f, rfl⟩ := q.map_surjective f
+    change P X at hX
+    change P Y at hY
+    have hi : Q.map (q.map f) ≫ i.hom.app Y =
+        i.hom.app X ≫ DerivedCategory.Q.map f := i.hom.naturality f
+    have hi' : DerivedCategory.Q.map f ≫ i.inv.app Y =
+        i.inv.app X ≫ Q.map (q.map f) := i.inv.naturality f
+    change F.map (Q.map (q.map f)) ≫
+        (F.map (i.hom.app Y) ≫ α Y hY ≫ G.map (i.inv.app Y)) =
+      (F.map (i.hom.app X) ≫ α X hX ≫ G.map (i.inv.app X)) ≫ G.map (Q.map (q.map f))
+    rw [← F.map_comp_assoc, hi, F.map_comp_assoc,
+      reassoc_of% hα X Y hX hY f]
+    simp only [Category.assoc]
+    rw [← G.map_comp, hi', G.map_comp]
+  obtain ⟨β, hβ⟩ := exists_natTrans_from_resolvingClass W S hres' (Q ⋙ F) (Q ⋙ G)
+    (fun X Y s hs ↦ by
+      have : IsIso (Q.map s) := Localization.inverts Q W s hs
+      exact inferInstanceAs (IsIso (F.map (Q.map s))))
+    (fun X hX ↦ α' X hX) hα'
+  let K := (Functor.whiskeringLeft _ _ H).obj Q
+  have : K.Full := Localization.full_whiskeringLeft Q W H
+  have : K.Faithful := Localization.faithful_whiskeringLeft Q W H
+  let e : F ⟶ G := K.preimage β
+  have he (X : HomotopyCategory M (.up ℤ)) : e.app (Q.obj X) = β.app X :=
+    congrArg (fun t ↦ t.app X) (K.map_preimage β)
+  refine ⟨e, ?_⟩
+  intro X hX
+  have hn := e.naturality (i.hom.app X)
+  change F.map (i.hom.app X) ≫ e.app (DerivedCategory.Q.obj X) =
+    e.app (Q.obj (q.obj X)) ≫ G.map (i.hom.app X) at hn
+  rw [he, hβ (q.obj X) hX] at hn
+  change F.map (i.hom.app X) ≫ e.app (DerivedCategory.Q.obj X) =
+    (F.map (i.hom.app X) ≫ α X hX ≫ G.map (i.inv.app X)) ≫ G.map (i.hom.app X) at hn
+  apply (cancel_epi (F.map (i.hom.app X))).1
+  rw [hn]
+  simp only [Category.assoc, ← G.map_comp, i.inv_hom_id_app, G.map_id, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Equality of derived natural maps can be checked on a cochain resolving class. -/
+private theorem resolving_nat_ext
+    {M H : Type*} [Category M] [Abelian M] [HasDerivedCategory M] [Category H]
+    {F G : DerivedCategory M ⥤ H} (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (s : K ⟶ X), P K ∧ QuasiIso s)
+    (α β : F ⟶ G)
+    (h : ∀ X, P X → α.app (DerivedCategory.Q.obj X) =
+      β.app (DerivedCategory.Q.obj X)) : α = β := by
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso M (.up ℤ))
+  intro X
+  obtain ⟨K, f, hK, hf⟩ := hres X
+  have : QuasiIso f := hf
+  have : IsIso (F.map (DerivedCategory.Q.map f)) := inferInstance
+  apply (cancel_epi (F.map (DerivedCategory.Q.map f))).1
+  rw [α.naturality, β.naturality, h K hK]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- A resolving computation map determines a comparison, including its uniqueness. -/
+private theorem resolving_comparison
+    {M H : Type*} [Category M] [Abelian M] [HasDerivedCategory M] [Category H]
+    (F G : DerivedCategory M ⥤ H) (T : CochainComplex M ℤ ⥤ H)
+    (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (s : K ⟶ X), P K ∧ QuasiIso s)
+    (α : DerivedCategory.Q ⋙ F ⟶ T) (β : DerivedCategory.Q ⋙ G ⟶ T)
+    (hβ : ∀ X, P X → IsIso (β.app X)) :
+    ∃! e : F ⟶ G, ∀ X, P X → e.app (DerivedCategory.Q.obj X) ≫ β.app X =
+      α.app X := by
+  let a (X : CochainComplex M ℤ) (hX : P X) :=
+    let := hβ X hX
+    α.app X ≫ inv (β.app X)
+  obtain ⟨e, he⟩ := resolving_nat F G P hres a (by
+    intro X Y hX hY f
+    let := hβ X hX
+    let := hβ Y hY
+    apply (cancel_mono (β.app Y)).1
+    dsimp only [a]
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    have ha : F.map (DerivedCategory.Q.map f) ≫ α.app Y = α.app X ≫ T.map f :=
+      α.naturality f
+    have hb : G.map (DerivedCategory.Q.map f) ≫ β.app Y = β.app X ≫ T.map f :=
+      β.naturality f
+    rw [ha, hb]
+    simp only [IsIso.inv_hom_id_assoc])
+  have he' : ∀ X, P X → e.app (DerivedCategory.Q.obj X) ≫ β.app X = α.app X := by
+    intro X hX
+    let := hβ X hX
+    rw [he X hX]
+    simp only [a, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+  refine ⟨e, he', ?_⟩
+  intro e' he''
+  apply resolving_nat_ext P hres
+  intro X hX
+  let := hβ X hX
+  apply (cancel_mono (β.app X)).1
+  rw [he'' X hX, he' X hX]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Extend an invertible comparison from a cochain resolving class. -/
+private theorem resolving_iso
+    {M H : Type*} [Category M] [Abelian M] [HasDerivedCategory M] [Category H]
+    (F G : DerivedCategory M ⥤ H) (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (s : K ⟶ X), P K ∧ QuasiIso s)
+    (α : ∀ X : CochainComplex M ℤ, P X →
+      (F.obj (DerivedCategory.Q.obj X) ≅ G.obj (DerivedCategory.Q.obj X)))
+    (hα : ∀ (X Y : CochainComplex M ℤ) (hX : P X) (hY : P Y) (f : X ⟶ Y),
+      F.map (DerivedCategory.Q.map f) ≫ (α Y hY).hom =
+        (α X hX).hom ≫ G.map (DerivedCategory.Q.map f)) :
+    ∃ e : F ≅ G, ∀ (X : CochainComplex M ℤ) (hX : P X),
+      e.hom.app (DerivedCategory.Q.obj X) = (α X hX).hom := by
+  obtain ⟨β, hβ⟩ := resolving_nat F G P hres (fun X hX ↦ (α X hX).hom) hα
+  have hβiso (X : CochainComplex M ℤ) : IsIso (β.app (DerivedCategory.Q.obj X)) := by
+    obtain ⟨K, f, hK, hf⟩ := hres X
+    have : QuasiIso f := hf
+    have : IsIso (F.map (DerivedCategory.Q.map f)) := inferInstance
+    have : IsIso (G.map (DerivedCategory.Q.map f)) := inferInstance
+    have : IsIso (β.app (DerivedCategory.Q.obj K)) := by rw [hβ K hK]; infer_instance
+    have hn := β.naturality (DerivedCategory.Q.map f)
+    have : IsIso (F.map (DerivedCategory.Q.map f) ≫ β.app (DerivedCategory.Q.obj X)) := by
+      rw [hn]
+      infer_instance
+    exact IsIso.of_isIso_comp_left (F.map (DerivedCategory.Q.map f)) _
+  let L := (Functor.whiskeringLeft _ _ H).obj (DerivedCategory.Q (C := M))
+  let W := HomologicalComplex.quasiIso M (.up ℤ)
+  have : L.Full := Localization.full_whiskeringLeft DerivedCategory.Q W H
+  have : L.Faithful := Localization.faithful_whiskeringLeft DerivedCategory.Q W H
+  have : ∀ X, IsIso ((L.map β).app X) := fun X ↦ hβiso X
+  have : IsIso (L.map β) := NatIso.isIso_of_isIso_app _
+  have : IsIso β := isIso_of_reflects_iso β L
+  exact ⟨asIso β, hβ⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem resolving_comparison_iso
+    {M H : Type*} [Category M] [Abelian M] [HasDerivedCategory M] [Category H]
+    (F G : DerivedCategory M ⥤ H) (T : CochainComplex M ℤ ⥤ H)
+    (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (s : K ⟶ X), P K ∧ QuasiIso s)
+    (α : DerivedCategory.Q ⋙ F ⟶ T) (β : DerivedCategory.Q ⋙ G ⟶ T)
+    (hα : ∀ X, P X → IsIso (α.app X)) (hβ : ∀ X, P X → IsIso (β.app X)) :
+    ∃ e : F ≅ G, ∀ X, P X → e.hom.app (DerivedCategory.Q.obj X) ≫ β.app X =
+      α.app X := by
+  let a (X : CochainComplex M ℤ) (hX : P X) :=
+    let := hα X hX
+    let := hβ X hX
+    asIso (α.app X) ≪≫ (asIso (β.app X)).symm
+  obtain ⟨e, he⟩ := resolving_iso F G P hres a (by
+    intro X Y hX hY f
+    let := hα X hX
+    let := hα Y hY
+    let := hβ X hX
+    let := hβ Y hY
+    apply (cancel_mono (β.app Y)).1
+    dsimp only [a, Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv]
+    simp only [Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    have ha : F.map (DerivedCategory.Q.map f) ≫ α.app Y = α.app X ≫ T.map f :=
+      α.naturality f
+    have hb : G.map (DerivedCategory.Q.map f) ≫ β.app Y = β.app X ≫ T.map f :=
+      β.naturality f
+    rw [ha, hb]
+    simp only [IsIso.inv_hom_id_assoc])
+  refine ⟨e, ?_⟩
+  intro X hX
+  let := hα X hX
+  let := hβ X hX
+  rw [he X hX]
+  simp only [a, Iso.trans_hom, Iso.symm_hom, asIso_hom, asIso_inv,
+    Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Descend a square whose second computation is invertible on a resolving class. -/
+private theorem resolving_square
+    {M H₁ H₂ H₃ D₁ D₂ D₃ : Type*}
+    [Category M] [Abelian M] [HasDerivedCategory M]
+    [Category H₁] [Category H₂] [Category H₃]
+    [Category D₁] [Category D₂] [Category D₃]
+    (q₁ : H₁ ⥤ D₁) (q₂ : H₂ ⥤ D₂) (q₃ : H₃ ⥤ D₃)
+    (r : CochainComplex M ℤ ⥤ H₁) (b : CochainComplex M ℤ ⥤ H₂)
+    (p : H₁ ⥤ H₃) (s : H₂ ⥤ H₃)
+    (dr : DerivedCategory M ⥤ D₁) (db : DerivedCategory M ⥤ D₂)
+    (dp : D₁ ⥤ D₃) (ds : D₂ ⥤ D₃)
+    (α : r ⋙ q₁ ≅ DerivedCategory.Q ⋙ dr)
+    (β : q₁ ⋙ dp ⟶ p ⋙ q₃) (γ : r ⋙ p ⟶ b ⋙ s)
+    (δ : DerivedCategory.Q ⋙ db ⟶ b ⋙ q₂) (ε : s ⋙ q₃ ≅ q₂ ⋙ ds)
+    (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (f : K ⟶ X), P K ∧ QuasiIso f)
+    (hδ : ∀ X, P X → IsIso (δ.app X)) :
+    ∃! e : dr ⋙ dp ⟶ db ⋙ ds, ∀ X, P X →
+      dp.map (α.inv.app X) ≫ β.app (r.obj X) ≫ q₃.map (γ.app X) =
+        e.app (DerivedCategory.Q.obj X) ≫ ds.map (δ.app X) ≫ ε.inv.app (b.obj X) := by
+  let T := b ⋙ s ⋙ q₃
+  let a : DerivedCategory.Q ⋙ (dr ⋙ dp) ⟶ T :=
+    (Functor.associator _ _ _).inv ≫ Functor.whiskerRight α.inv _ ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft r β ≫
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight γ _ ≫
+      (Functor.associator _ _ _).hom
+  let z : DerivedCategory.Q ⋙ (db ⋙ ds) ⟶ T :=
+    (Functor.associator _ _ _).inv ≫ Functor.whiskerRight δ _ ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft b ε.inv
+  have hz X (hX : P X) : IsIso (z.app X) := by
+    have := hδ X hX
+    dsimp only [z, NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  obtain ⟨e, he, hu⟩ := resolving_comparison (dr ⋙ dp) (db ⋙ ds) T P hres a z hz
+  have hf (t : dr ⋙ dp ⟶ db ⋙ ds) :
+      (∀ X, P X → t.app (DerivedCategory.Q.obj X) ≫ z.app X = a.app X) ↔
+      (∀ X, P X → dp.map (α.inv.app X) ≫ β.app (r.obj X) ≫ q₃.map (γ.app X) =
+        t.app (DerivedCategory.Q.obj X) ≫ ds.map (δ.app X) ≫ ε.inv.app (b.obj X)) := by
+    dsimp only [a, z, NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    simp only [Category.id_comp, Category.comp_id]
+    exact ⟨fun h X hX ↦ (h X hX).symm, fun h X hX ↦ (h X hX).symm⟩
+  exact ⟨e, (hf e).1 he, fun t ht ↦ hu t ((hf t).2 ht)⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Descend a square whose two iterated computations are invertible. -/
+private theorem resolving_square_iso
+    {M H₁ H₂ H₃ D₁ D₂ D₃ : Type*}
+    [Category M] [Abelian M] [HasDerivedCategory M]
+    [Category H₁] [Category H₂] [Category H₃]
+    [Category D₁] [Category D₂] [Category D₃]
+    (q₁ : H₁ ⥤ D₁) (q₂ : H₂ ⥤ D₂) (q₃ : H₃ ⥤ D₃)
+    (r : CochainComplex M ℤ ⥤ H₁) (b : CochainComplex M ℤ ⥤ H₂)
+    (p : H₁ ⥤ H₃) (s : H₂ ⥤ H₃)
+    (dr : DerivedCategory M ⥤ D₁) (db : DerivedCategory M ⥤ D₂)
+    (dp : D₁ ⥤ D₃) (ds : D₂ ⥤ D₃)
+    (α : DerivedCategory.Q ⋙ dr ⟶ r ⋙ q₁)
+    (β : q₁ ⋙ dp ⟶ p ⋙ q₃) (γ : r ⋙ p ≅ b ⋙ s)
+    (δ : DerivedCategory.Q ⋙ db ⟶ b ⋙ q₂) (ε : q₂ ⋙ ds ⟶ s ⋙ q₃)
+    (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (f : K ⟶ X), P K ∧ QuasiIso f)
+    (hα : ∀ X, P X → IsIso (α.app X))
+    (hβ : ∀ X, P X → IsIso (β.app (r.obj X)))
+    (hδ : ∀ X, P X → IsIso (δ.app X))
+    (hε : ∀ X, P X → IsIso (ε.app (b.obj X))) :
+    ∃! e : dr ⋙ dp ≅ db ⋙ ds, ∀ X, P X →
+      dp.map (α.app X) ≫ β.app (r.obj X) ≫ q₃.map (γ.hom.app X) =
+        e.hom.app (DerivedCategory.Q.obj X) ≫ ds.map (δ.app X) ≫ ε.app (b.obj X) := by
+  let T := b ⋙ s ⋙ q₃
+  let a : DerivedCategory.Q ⋙ (dr ⋙ dp) ⟶ T :=
+    (Functor.associator _ _ _).inv ≫ Functor.whiskerRight α _ ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft r β ≫
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight γ.hom _ ≫
+      (Functor.associator _ _ _).hom
+  let z : DerivedCategory.Q ⋙ (db ⋙ ds) ⟶ T :=
+    (Functor.associator _ _ _).inv ≫ Functor.whiskerRight δ _ ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft b ε
+  have ha X (hX : P X) : IsIso (a.app X) := by
+    have := hα X hX
+    have := hβ X hX
+    dsimp only [a, NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  have hz X (hX : P X) : IsIso (z.app X) := by
+    have := hδ X hX
+    have := hε X hX
+    dsimp only [z, NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  obtain ⟨e, he⟩ := resolving_comparison_iso (dr ⋙ dp) (db ⋙ ds) T P hres a z ha hz
+  have hf (t : dr ⋙ dp ≅ db ⋙ ds) :
+      (∀ X, P X → t.hom.app (DerivedCategory.Q.obj X) ≫ z.app X = a.app X) ↔
+      (∀ X, P X → dp.map (α.app X) ≫ β.app (r.obj X) ≫ q₃.map (γ.hom.app X) =
+        t.hom.app (DerivedCategory.Q.obj X) ≫ ds.map (δ.app X) ≫ ε.app (b.obj X)) := by
+    dsimp only [a, z, NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    simp only [Category.id_comp, Category.comp_id]
+    exact ⟨fun h X hX ↦ (h X hX).symm, fun h X hX ↦ (h X hX).symm⟩
+  refine ⟨e, (hf e).1 he, ?_⟩
+  intro t ht
+  apply Iso.ext
+  apply resolving_nat_ext P hres
+  intro X hX
+  have := hz X hX
+  apply (cancel_mono (z.app X)).1
+  rw [(hf t).2 ht X hX, he X hX]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Derive an ordinary finite scalar comparison before specializing module functors. -/
+private theorem resolving_finite_comparison
+    {M N H DN DH : Type*}
+    [Category M] [Abelian M] [HasDerivedCategory M]
+    [Category N] [Preadditive N] [Category H] [Preadditive H] [Category DN] [Category DH]
+    (qN : CochainComplex N ℤ ⥤ DN) (qH : CochainComplex H ℤ ⥤ DH)
+    (r : M ⥤ N) (f : N ⥤ H) (g : M ⥤ H)
+    [r.PreservesZeroMorphisms] [f.PreservesZeroMorphisms] [g.PreservesZeroMorphisms]
+    (dr : DerivedCategory M ⥤ DN) (df : DN ⥤ DH) (dg : DerivedCategory M ⥤ DH)
+    (α : r.mapHomologicalComplex (.up ℤ) ⋙ qN ≅ DerivedCategory.Q ⋙ dr)
+    (β : qN ⋙ df ⟶ f.mapHomologicalComplex (.up ℤ) ⋙ qH)
+    (γ : r ⋙ f ≅ g)
+    (δ : DerivedCategory.Q ⋙ dg ⟶ g.mapHomologicalComplex (.up ℤ) ⋙ qH)
+    (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (s : K ⟶ X), P K ∧ QuasiIso s)
+    (hβ : ∀ X, P X → IsIso (β.app ((r.mapHomologicalComplex (.up ℤ)).obj X)))
+    (hδ : ∀ X, P X → IsIso (δ.app X)) :
+    ∃ e : dr ⋙ df ≅ dg, ∀ X, P X →
+      df.map (α.inv.app X) ≫ β.app ((r.mapHomologicalComplex (.up ℤ)).obj X) ≫
+        qH.map ((NatIso.mapHomologicalComplex γ (.up ℤ)).hom.app X) =
+        e.hom.app (DerivedCategory.Q.obj X) ≫ δ.app X := by
+  let rc := r.mapHomologicalComplex (.up ℤ)
+  let gc := g.mapHomologicalComplex (.up ℤ)
+  let γc : rc ⋙ f.mapHomologicalComplex (.up ℤ) ≅ gc :=
+    NatIso.mapHomologicalComplex γ (.up ℤ)
+  let a : DerivedCategory.Q ⋙ (dr ⋙ df) ⟶ gc ⋙ qH :=
+    (Functor.associator _ _ _).inv ≫ Functor.whiskerRight α.inv _ ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft rc β ≫
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight γc.hom _
+  have ha X (hX : P X) : IsIso (a.app X) := by
+    have := hβ X hX
+    dsimp only [a, NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  obtain ⟨e, he⟩ := resolving_comparison_iso (dr ⋙ df) dg (gc ⋙ qH) P hres a δ ha hδ
+  refine ⟨e, ?_⟩
+  intro X hX
+  have h := he X hX
+  dsimp only [a, NatTrans.comp_app, Functor.associator_inv_app,
+    Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at h
+  simpa only [Category.id_comp, Category.comp_id, Category.assoc] using h.symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem restricted_kFlat {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
+    (hB : SheafOfModules.IsFlat ((res φ).obj (SheafOfModules.unit (siteModuleRings B))))
+    (P : Cx B) (hP : P.IsAcyclicTensorKFlat) :
+    CochainComplex.IsAcyclicTensorKFlat
+      (((res φ).mapHomologicalComplex (.up ℤ)).obj P) := by
+  let := SheafOfModules.monoidalCategory R
+  have hflat :=
+    (exactFunctor (Mod R) (Mod R)).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso R
+        ((res φ).obj (SheafOfModules.unit (siteModuleRings B)))).symm hB
+  have h := SheafOfModules.isKFlat_restrictScalars_of_flat φ hflat P
+    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hP)
+  exact (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).1 h.1
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem module_flat_kFlat_resolution {R : Sheaf J CommRingCat.{u}} (P : Cx R) :
+    ∃ (K : Cx R) (f : K ⟶ P),
+      (K.IsAcyclicTensorKFlat ∧ ∀ q : ℤ, SheafOfModules.IsFlat (K.X q)) ∧ QuasiIso f := by
+  obtain ⟨K, f, hK, hf, hq, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients P
+  let := SheafOfModules.monoidalCategory R
+  refine ⟨K, f, ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat K).1 hK, ?_⟩,
+    hq⟩
+  intro q
+  exact hf q
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem restricted_flat {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
+    (hB : SheafOfModules.IsFlat ((res φ).obj (SheafOfModules.unit (siteModuleRings B))))
+    (P : Cx B) (hP : P.IsAcyclicTensorKFlat)
+    (hf : ∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) :
+    ∀ q : ℤ, SheafOfModules.IsFlat (((res φ).obj (P.X q))) := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory B
+  have hflat :=
+    (exactFunctor (Mod R) (Mod R)).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso R
+        ((res φ).obj (SheafOfModules.unit (siteModuleRings B)))).symm hB
+  have h := SheafOfModules.isKFlat_restrictScalars_of_flat φ hflat P
+    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hP)
+  have hf' (q : ℤ) :=
+    (exactFunctor (Mod B) (Mod B)).prop_of_iso
+      (SheafOfModules.siteSheafTensorRightIso B (P.X q)).symm (hf q)
+  intro q
+  exact (exactFunctor (Mod R) (Mod R)).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso R ((res φ).obj (P.X q))) (h.2 hf' q)
+
+section
+attribute [local irreducible] dres change
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Finite scalar comparison in D(S_n), normalized on every flat-term K-flat complex.
 Source: Stacks 099L, 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: a flat-term K-flat B-complex remains K-flat over R because B is R-flat.
@@ -1016,7 +1450,28 @@ theorem finiteDerivedComparison (J : GrothendieckTopology C) (A : Type u) [CommR
               (ComplexShape.up ℤ)).hom.app P) =
         (e.hom.app ((Q (completed J A I)).obj P)) ≫
           (extendComparison (projection J A I n)).app P := by
-  sorry
+  let := HasDerivedCategory.standard (Mod (constant J A))
+  let := HasDerivedCategory.standard (Mod (completed J A I))
+  let := HasDerivedCategory.standard (Mod (finite J A I n))
+  let φ := coefficientMap J A I
+  let P (X : Cx (completed J A I)) := X.IsAcyclicTensorKFlat
+  have hres (X : Cx (completed J A I)) :
+      ∃ (K : Cx (completed J A I)) (s : K ⟶ X), P K ∧ QuasiIso s := by
+    obtain ⟨K, f, hK, _, hf, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients X
+    exact ⟨K, f, (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat K).1 hK, hf⟩
+  obtain ⟨e, he⟩ := resolving_finite_comparison
+    (Q (constant J A)) (Q (finite J A I n))
+    (res φ) (change (quotient J A I n)) (change (projection J A I n))
+    (dres φ) (extend (quotient J A I n)) (extend (projection J A I n))
+    (resFactors φ) (extendComparison (quotient J A I n)) (finiteComparison J A I n)
+    (extendComparison (projection J A I n)) P hres
+    (fun X hX ↦ (derivedExtension (quotient J A I n)).computation _
+      (restricted_kFlat φ (flat_and_quotients J A I).1 X hX))
+    (fun X hX ↦ (derivedExtension (projection J A I n)).computation X hX)
+  exact ⟨e, fun X hX _ ↦ he X hX⟩
+
+end
 
 variable (J A I)
 
@@ -1605,13 +2060,17 @@ private theorem reductionTower_preserves_kFlat_quasiIso (b : Bool)
     (((res (finiteMap J A I b n.unop)).mapHomologicalComplex (.up ℤ)).map
       (((change (finiteMap J A I b n.unop)).mapHomologicalComplex (.up ℤ)).map f)))
 
-/-- The canonical complex-limit unit, chosen by its unique projection formula. -/
-private def towerOrdinaryUnit {M : Type*} [Category M] [Preadditive M]
-    [HasLimitsOfShape ℕᵒᵖ M] (T : M ⥤ ℕᵒᵖ ⥤ M) [T.PreservesZeroMorphisms]
-    [(lim : (ℕᵒᵖ ⥤ M) ⥤ M).PreservesZeroMorphisms]
-    (η : Functor.const ℕᵒᵖ ⟶ T) (P : CochainComplex M ℤ) :
-    P ⟶ (complexLimitFunctor M).obj ((T.mapHomologicalComplex (.up ℤ)).obj P) :=
-  (complexLimitUnit T η P).exists.choose
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem ordinaryUnit_spec (J : GrothendieckTopology C)
+    (A : Type u) [CommRing A] (I : Ideal A) (b : Bool)
+    (P : Cx (coefficients J A I b)) (q : ℤ) (n : ℕ) :
+    (ordinaryUnit J A I b P).f q ≫
+      limit.π ((reductionComplex J A I b P).X q) (op n) =
+        ((reductionUnit J A I b).app (P.X q)).app (op n) :=
+  (ordinaryUnit_existsUnique J A I b P).exists.choose_spec q n
+
+attribute [local irreducible] ordinaryUnit
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -1627,7 +2086,11 @@ private theorem derived_tower_presentation
     (hT : ∀ {P P' : CochainComplex M ℤ} (f : P ⟶ P'), S₀ P → S₀ P' →
       QuasiIso f → QuasiIso ((T.mapHomologicalComplex (.up ℤ)).map f))
     (RF : DerivedCategory (ℕᵒᵖ ⥤ M) ⥤ DerivedCategory M)
-    (γ : complexLimitFunctor M ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF) :
+    (γ : complexLimitFunctor M ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF)
+    (u : ∀ P : CochainComplex M ℤ,
+      P ⟶ (complexLimitFunctor M).obj ((T.mapHomologicalComplex (.up ℤ)).obj P))
+    (hucoord : ∀ (P : CochainComplex M ℤ) (q : ℤ) (n : ℕ),
+      (u P).f q ≫ limit.π (T.obj (P.X q)) (op n) = (η.app (P.X q)).app (op n)) :
     ∃ (LT : DerivedCategory M ⥤ DerivedCategory (ℕᵒᵖ ⥤ M))
       (β : DerivedCategory.Q ⋙ LT ⟶ T.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
       (unit : 𝟭 (DerivedCategory M) ⟶ LT ⋙ RF),
@@ -1635,7 +2098,7 @@ private theorem derived_tower_presentation
       (∀ P : CochainComplex M ℤ, S₀ P → IsIso (β.app P)) ∧
       (∀ P : CochainComplex M ℤ,
         unit.app (DerivedCategory.Q.obj P) ≫ RF.map (β.app P) =
-          DerivedCategory.Q.map (towerOrdinaryUnit T η P) ≫
+          DerivedCategory.Q.map (u P) ≫
             γ.app ((T.mapHomologicalComplex (.up ℤ)).obj P)) := by
   obtain ⟨LT, β, hu, hc⟩ := resolving_derived_cochain T S₀ hres hT
   have : LT.IsLeftDerivedFunctor β (HomologicalComplex.quasiIso M (.up ℤ)) := hu
@@ -1656,7 +2119,7 @@ private theorem derived_tower_presentation
   refine ⟨LT, β, unit, hu, hc, ?_⟩
   intro P
   have hord : ν.app P ≫
-      (complexLimitFunctor M).map (ηC.app P) = towerOrdinaryUnit T η P := by
+      (complexLimitFunctor M).map (ηC.app P) = u P := by
     apply (complexLimitUnit T η P).unique
     · intro q n
       change (limit.lift _ { pt := P.X q, π := 𝟙 _ } ≫
@@ -1664,7 +2127,7 @@ private theorem derived_tower_presentation
       rw [Category.assoc, limMap_π, limit.lift_π_assoc]
       change 𝟙 _ ≫ _ = _
       rw [Category.id_comp]
-    · exact (complexLimitUnit T η P).exists.choose_spec
+    · exact hucoord P
   have h := hunit P
   change unit.app (DerivedCategory.Q.obj P) ≫ RF.map (β.app P) =
     DerivedCategory.Q.map
@@ -1673,6 +2136,36 @@ private theorem derived_tower_presentation
       γ.app ((T.mapHomologicalComplex (.up ℤ)).obj P) at h
   rw [hord] at h
   exact h
+
+private theorem derived_tower_presentation_cps
+    {M : Type*} [Category M] [Abelian M] [HasDerivedCategory M]
+    [HasDerivedCategory (ℕᵒᵖ ⥤ M)] [HasLimitsOfShape ℕᵒᵖ M]
+    [(lim : (ℕᵒᵖ ⥤ M) ⥤ M).Additive]
+    (T : M ⥤ ℕᵒᵖ ⥤ M) [T.Additive]
+    (η : (Functor.const ℕᵒᵖ : M ⥤ ℕᵒᵖ ⥤ M) ⟶ T)
+    (S₀ : CochainComplex M ℤ → Prop)
+    (hres : ∀ P : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (f : K ⟶ P), S₀ K ∧ QuasiIso f)
+    (hT : ∀ {P P' : CochainComplex M ℤ} (f : P ⟶ P'), S₀ P → S₀ P' →
+      QuasiIso f → QuasiIso ((T.mapHomologicalComplex (.up ℤ)).map f))
+    (RF : DerivedCategory (ℕᵒᵖ ⥤ M) ⥤ DerivedCategory M)
+    (γ : complexLimitFunctor M ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF)
+    (u : ∀ P : CochainComplex M ℤ,
+      P ⟶ (complexLimitFunctor M).obj ((T.mapHomologicalComplex (.up ℤ)).obj P))
+    (hucoord : ∀ (P : CochainComplex M ℤ) (q : ℤ) (n : ℕ),
+      (u P).f q ≫ limit.π (T.obj (P.X q)) (op n) = (η.app (P.X q)).app (op n)) (X : Type*)
+    (mk : ∀ (LT : DerivedCategory M ⥤ DerivedCategory (ℕᵒᵖ ⥤ M))
+      (β : DerivedCategory.Q ⋙ LT ⟶ T.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+      (unit : 𝟭 (DerivedCategory M) ⟶ LT ⋙ RF),
+      LT.IsLeftDerivedFunctor β (HomologicalComplex.quasiIso M (.up ℤ)) →
+      (∀ P : CochainComplex M ℤ, S₀ P → IsIso (β.app P)) →
+      (∀ P : CochainComplex M ℤ,
+        unit.app (DerivedCategory.Q.obj P) ≫ RF.map (β.app P) =
+          DerivedCategory.Q.map (u P) ≫
+            γ.app ((T.mapHomologicalComplex (.up ℤ)).obj P)) → X) : Nonempty X := by
+  obtain ⟨LT, β, unit, hu, hc, he⟩ :=
+    derived_tower_presentation T η S₀ hres hT RF γ u hucoord
+  exact ⟨mk LT β unit hu hc he⟩
 
 /-- The universal derived-tower laws and the actual quotient-unit computation.
 Naming this predicate keeps the dependent record small; its normalization is unchanged.
@@ -1713,6 +2206,36 @@ section
 
 attribute [local irreducible] HasDerivedCategory.standard
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem module_tower_presentation {O : Sheaf J CommRingCat.{u}}
+    (T : Mod O ⥤ ℕᵒᵖ ⥤ Mod O) [T.Additive]
+    (η : Functor.const ℕᵒᵖ ⟶ T) (S : Cx O → Prop)
+    (hres : ∀ P : Cx O, ∃ (K : Cx O) (f : K ⟶ P), S K ∧ QuasiIso f)
+    (hT : ∀ {P P' : Cx O} (f : P ⟶ P'), S P → S P' →
+      QuasiIso f → QuasiIso ((T.mapHomologicalComplex (.up ℤ)).map f))
+    (u : ∀ P : Cx O,
+      P ⟶ (ordinaryLimit O).obj ((T.mapHomologicalComplex (.up ℤ)).obj P))
+    (hu : ∀ (P : Cx O) (q : ℤ) (n : ℕ),
+      (u P).f q ≫ limit.π (T.obj (P.X q)) (op n) = (η.app (P.X q)).app (op n))
+    (X : Type*)
+    (mk : ∀ (LT : D O ⥤ TD O)
+      (β : Q O ⋙ LT ⟶ T.mapHomologicalComplex (.up ℤ) ⋙ TQ O)
+      (unit : 𝟭 (D O) ⟶ LT ⋙ rlim O),
+      LT.IsLeftDerivedFunctor β (HomologicalComplex.quasiIso (Mod O) (.up ℤ)) →
+      (∀ P : Cx O, S P → IsIso (β.app P)) →
+      (∀ P : Cx O, unit.app ((Q O).obj P) ≫ (rlim O).map (β.app P) =
+        (Q O).map (u P) ≫ (limitComparison O).app
+          ((T.mapHomologicalComplex (.up ℤ)).obj P)) → X) : Nonempty X := by
+  let : Abelian (Mod O) :=
+    { (inferInstance : Abelian (Mod O)) with
+      toPreadditive := (inferInstance : Preadditive (Mod O)) }
+  let := HasDerivedCategory.standard (Mod O)
+  let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod O)
+  have : (lim : (ℕᵒᵖ ⥤ Mod O) ⥤ Mod O).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  exact derived_tower_presentation_cps T η S hres hT (rlim O) (limitComparison O) u hu X mk
+
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Strict diagram K-flat replacements and the universal derived limit supply this pair.
 Source: Stacks 06YY, 0940, 099M
@@ -1724,24 +2247,19 @@ Apply total right derived limit to its strict quotient units. Their naturality a
 invariance under quasi-isomorphisms descend the unit to D(O). The comparison square is
 its construction, and determines it because every object has such a representative. -/
 theorem quotientPresentation_exists (b : Bool) : Nonempty (QuotientPresentation J A I b) := by
-  let O := coefficients J A I b
-  let := HasDerivedCategory.standard (Mod O)
-  let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod O)
-  have : (lim : (ℕᵒᵖ ⥤ Mod O) ⥤ Mod O).Additive :=
-    Functor.additive_of_preserves_binary_products _
-  let hp :=
-    derived_tower_presentation (M := Mod O) (reductionTower J A I b) (reductionUnit J A I b)
-      (fun P ↦ P.IsAcyclicTensorKFlat) (module_kFlat_resolution J)
-      (reductionTower_preserves_kFlat_quasiIso J A I b) (rlim O) (limitComparison O)
-  let LT := hp.choose
-  let β := hp.choose_spec.choose
-  let unit := hp.choose_spec.choose_spec.choose
-  have hlaws := hp.choose_spec.choose_spec.choose_spec
-  refine ⟨{ tower := LT, comparison := β, unit := unit, laws := ⟨hlaws.1, ?_, ?_⟩ }⟩
-  · intro P hP _
-    exact hlaws.2.1 P hP
-  · intro P _ _
-    exact hlaws.2.2 P
+  let : Abelian (Mod (coefficients J A I b)) :=
+    { (inferInstance : Abelian (Mod (coefficients J A I b))) with
+      toPreadditive := (inferInstance : Preadditive (Mod (coefficients J A I b))) }
+  let : Abelian (ℕᵒᵖ ⥤ Mod (coefficients J A I b)) :=
+    { (inferInstance : Abelian (ℕᵒᵖ ⥤ Mod (coefficients J A I b))) with
+      toPreadditive :=
+        (inferInstance : Preadditive (ℕᵒᵖ ⥤ Mod (coefficients J A I b))) }
+  exact module_tower_presentation (J := J) (reductionTower J A I b)
+    (reductionUnit J A I b) (fun P ↦ P.IsAcyclicTensorKFlat) (module_kFlat_resolution J)
+    (reductionTower_preserves_kFlat_quasiIso J A I b)
+    (ordinaryUnit J A I b) (ordinaryUnit_spec J A I b) (QuotientPresentation J A I b)
+    (fun LT β unit hu hc he ↦
+      ⟨LT, β, unit, hu, fun P hk _ ↦ hc P hk, fun P _ _ ↦ he P⟩)
 
 end
 
@@ -2128,6 +2646,66 @@ def DerivedTowerComparisonFormula
   tr.map (α.inv.app P) ≫ βR.app (rc.obj P) ≫ tqR.map (γ.hom.app P) ≫
       δ.hom.app (redB.obj P) = e.hom.app (qB.obj P) ≫ dt.map (βB.app P)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem resolving_tower_square
+    {M H₁ H₂ H₃ D₁ D₂ D₃ : Type*}
+    [Category M] [Abelian M] [HasDerivedCategory M]
+    [Category H₁] [Category H₂] [Category H₃]
+    [Category D₁] [Category D₂] [Category D₃]
+    (q₁ : H₁ ⥤ D₁) (q₂ : H₂ ⥤ D₂) (q₃ : H₃ ⥤ D₃)
+    (r : CochainComplex M ℤ ⥤ H₁) (b : CochainComplex M ℤ ⥤ H₂)
+    (p : H₁ ⥤ H₃) (s : H₂ ⥤ H₃)
+    (dr : DerivedCategory M ⥤ D₁) (db : DerivedCategory M ⥤ D₂)
+    (dp : D₁ ⥤ D₃) (ds : D₂ ⥤ D₃)
+    (α : r ⋙ q₁ ≅ DerivedCategory.Q ⋙ dr)
+    (β : q₁ ⋙ dp ⟶ p ⋙ q₃) (γ : r ⋙ p ≅ b ⋙ s)
+    (δ : DerivedCategory.Q ⋙ db ⟶ b ⋙ q₂) (ε : s ⋙ q₃ ≅ q₂ ⋙ ds)
+    (P : CochainComplex M ℤ → Prop)
+    (hres : ∀ X : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (f : K ⟶ X), P K ∧ QuasiIso f)
+    (hβ : ∀ X, P X → IsIso (β.app (r.obj X)))
+    (hδ : ∀ X, P X → IsIso (δ.app X)) :
+    ∃ e : dr ⋙ dp ≅ db ⋙ ds, ∀ X, P X →
+      DerivedTowerComparisonFormula α β γ ε δ e X := by
+  let T := b ⋙ s ⋙ q₃
+  let a : DerivedCategory.Q ⋙ (dr ⋙ dp) ⟶ T :=
+    (Functor.associator _ _ _).inv ≫ Functor.whiskerRight α.inv _ ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft r β ≫
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight γ.hom _ ≫
+      (Functor.associator _ _ _).hom
+  let z : DerivedCategory.Q ⋙ (db ⋙ ds) ⟶ T :=
+    (Functor.associator _ _ _).inv ≫ Functor.whiskerRight δ _ ≫
+      (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft b ε.inv
+  have ha X (hX : P X) : IsIso (a.app X) := by
+    have := hβ X hX
+    dsimp only [a, NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  have hz X (hX : P X) : IsIso (z.app X) := by
+    have := hδ X hX
+    dsimp only [z, NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+    infer_instance
+  obtain ⟨e, he⟩ := resolving_comparison_iso (dr ⋙ dp) (db ⋙ ds) T P hres a z ha hz
+  refine ⟨e, ?_⟩
+  intro X hX
+  have h := he X hX
+  dsimp only [a, z, NatTrans.comp_app, Functor.associator_inv_app,
+    Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at h
+  simp only [Category.id_comp, Category.comp_id] at h
+  have h' : (e.hom.app (DerivedCategory.Q.obj X) ≫ ds.map (δ.app X)) ≫
+      ε.inv.app (b.obj X) =
+      dp.map (α.inv.app X) ≫ β.app (r.obj X) ≫ q₃.map (γ.hom.app X) := by
+    simpa only [Category.assoc] using h
+  simpa only [DerivedTowerComparisonFormula, Category.assoc, Iso.app_hom] using
+    ((ε.app (b.obj X)).comp_inv_eq.mp h').symm
+
+section
+attribute [local irreducible] dres change
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The strict comparison descends through the universal derived-tower construction.
 Source: Stacks 099L, 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: restrict one flat-term K-flat B-representative, which remains K-flat by flatness
@@ -2144,7 +2722,31 @@ theorem derivedReductionTowerComparison (J : GrothendieckTopology C) (A : Type u
           (quotientPresentation J A I false).comparison (reductionTowerComparisonComplex J A I)
           (tresFactors (coefficientMap J A I))
           (quotientPresentation J A I true).comparison e P := by
-  sorry
+  let := HasDerivedCategory.standard (Mod (constant J A))
+  let := HasDerivedCategory.standard (Mod (completed J A I))
+  let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod (constant J A))
+  let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod (completed J A I))
+  let φ := coefficientMap J A I
+  let r := (res φ).mapHomologicalComplex (.up ℤ)
+  let pR := quotientPresentation J A I false
+  let pB := quotientPresentation J A I true
+  let P (X : Cx (completed J A I)) :=
+    X.IsAcyclicTensorKFlat ∧ ∀ q : ℤ, SheafOfModules.IsFlat (X.X q)
+  obtain ⟨e, he⟩ := resolving_tower_square
+    (Q (constant J A)) (TQ (completed J A I)) (TQ (constant J A))
+    r ((reductionTower J A I true).mapHomologicalComplex (.up ℤ))
+    ((reductionTower J A I false).mapHomologicalComplex (.up ℤ))
+    ((tres φ).mapHomologicalComplex (.up ℤ))
+    (dres φ) pB.tower pR.tower (tdres φ)
+    (resFactors φ) pR.comparison (reductionTowerComparisonComplex J A I)
+    pB.comparison (tresFactors φ) P (module_flat_kFlat_resolution (J := J))
+    (fun X hX ↦ pR.laws.2.1 _
+      (restricted_kFlat φ (flat_and_quotients J A I).1 X hX.1)
+      (restricted_flat φ (flat_and_quotients J A I).1 X hX.1 hX.2))
+    (fun X hX ↦ pB.laws.2.1 X hX.1 hX.2)
+  exact ⟨e, fun X hk hf ↦ he X ⟨hk, hf⟩⟩
+
+end
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
@@ -2315,6 +2917,18 @@ private theorem derivedLimitRestriction_of_flat {R B : Sheaf J CommRingCat.{u}}
           (limitComparison R).app
             (((tres φ).mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ≫
           (rlim R).map ((tresFactors φ).hom.app P) := by
+  let : Abelian (Mod R) :=
+    { (inferInstance : Abelian (Mod R)) with
+      toPreadditive := (inferInstance : Preadditive (Mod R)) }
+  let : Abelian (Mod B) :=
+    { (inferInstance : Abelian (Mod B)) with
+      toPreadditive := (inferInstance : Preadditive (Mod B)) }
+  let : Abelian (ℕᵒᵖ ⥤ Mod R) :=
+    { (inferInstance : Abelian (ℕᵒᵖ ⥤ Mod R)) with
+      toPreadditive := (inferInstance : Preadditive (ℕᵒᵖ ⥤ Mod R)) }
+  let : Abelian (ℕᵒᵖ ⥤ Mod B) :=
+    { (inferInstance : Abelian (ℕᵒᵖ ⥤ Mod B)) with
+      toPreadditive := (inferInstance : Preadditive (ℕᵒᵖ ⥤ Mod B)) }
   let := HasDerivedCategory.standard (Mod R)
   let := HasDerivedCategory.standard (Mod B)
   let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod R)
@@ -2653,13 +3267,83 @@ theorem derivedPull_exists (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L
 variable (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
 variable [hL : PreservesFiniteLimits L]
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The live K-flat and monoidal-flat interface for a prescribed ringed pullback. -/
+private theorem basechange_flat_kFlat
+    {R : Sheaf J CommRingCat.{u}} {RI S : Sheaf J' CommRingCat.{u}}
+    (L : Sheaf J (Type u) ⥤ Sheaf J' (Type u))
+    (V : Sheaf J' (Type u) ⥤ Sheaf J (Type u)) (adj : L ⊣ V)
+    [PreservesFiniteLimits L] (AI : SheafOfModules.AlgebraicInverseImage L R RI)
+    (c : RI ⟶ S) (T : Mod R ⥤ Mod S) [T.Additive]
+    (ho : ∀ M : Mod R, T.obj M = SheafOfModules.changeOfRings c (AI.modules.obj M))
+    (hm : ∀ {M N : Mod R} (f : M ⟶ N), T.map f = eqToHom (ho M) ≫
+      SheafOfModules.changeOfRingsHom c (AI.modules.obj M) (AI.modules.map f) ≫
+        eqToHom (ho N).symm)
+    (P : Cx R) (hP : P.IsAcyclicTensorKFlat)
+    (hf : ∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) :
+    CochainComplex.IsAcyclicTensorKFlat
+      ((T.mapHomologicalComplex (.up ℤ)).obj P) ∧
+      ∀ q : ℤ, SheafOfModules.IsFlat (T.obj (P.X q)) := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory S
+  have hf' (q : ℤ) := (exactFunctor (Mod R) (Mod R)).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso R (P.X q)).symm (hf q)
+  obtain ⟨hk, hflat⟩ := SheafOfModules.isKFlat_ringedToposPullback L V adj
+    AI c T ho hm P
+    ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hP) hf'
+  refine ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).1 hk, ?_⟩
+  intro q
+  exact (exactFunctor (Mod S) (Mod S)).prop_of_iso
+    (SheafOfModules.siteSheafTensorRightIso S (T.obj (P.X q))) (hflat q)
+
+include V adj hL in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pull_flat_kFlat {R : Sheaf J CommRingCat.{u}}
+    {S : Sheaf J' CommRingCat.{u}} (c : F.rings.obj R ⟶ S) (P : Cx R)
+    (hP : P.IsAcyclicTensorKFlat) (hf : ∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) :
+    CochainComplex.IsAcyclicTensorKFlat
+      (((pull F c).mapHomologicalComplex (.up ℤ)).obj P) ∧
+      ∀ q : ℤ, SheafOfModules.IsFlat ((pull F c).obj (P.X q)) := by
+  have ho (M : Mod R) : (pull F c).obj M =
+      SheafOfModules.changeOfRings c ((F.algebra R).modules.obj M) := rfl
+  have hm {M N : Mod R} (f : M ⟶ N) : (pull F c).map f =
+      eqToHom (ho M) ≫ SheafOfModules.changeOfRingsHom c
+        ((F.algebra R).modules.obj M) ((F.algebra R).modules.map f) ≫
+          eqToHom (ho N).symm := by
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  exact basechange_flat_kFlat L V adj (F.algebra R) c (pull F c) ho hm P hP hf
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem change_flat_kFlat {R S : Sheaf J CommRingCat.{u}}
+    (c : R ⟶ S) (P : Cx R) (hP : P.IsAcyclicTensorKFlat)
+    (hf : ∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) :
+    CochainComplex.IsAcyclicTensorKFlat
+      (((change c).mapHomologicalComplex (.up ℤ)).obj P) ∧
+      ∀ q : ℤ, SheafOfModules.IsFlat ((change c).obj (P.X q)) := by
+  have ho (M : Mod R) : (change c).obj M = SheafOfModules.changeOfRings c M := rfl
+  have hm {M N : Mod R} (f : M ⟶ N) : (change c).map f =
+      eqToHom (ho M) ≫ SheafOfModules.changeOfRingsHom c M f ≫
+        eqToHom (ho N).symm := by
+    simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+    rfl
+  obtain ⟨hk, hflat⟩ :=
+    SheafOfModules.changeOfRings_isKFlat_of_flat_terms_independentCoefficients
+      c P (change c) ho hm
+      ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).2 hP) hf
+  exact ⟨(CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).1 hk, hflat⟩
+
+
 /-- Choose the derived pullback with its universal comparison, not an arbitrary lift.
 Source: Stacks 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
 def derivedPull {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
     (c : F.rings.obj R ⟶ S) : DerivedPull F c :=
   Classical.choice (derivedPull_exists F V adj c)
 
-attribute [local irreducible] derivedPull
+attribute [local irreducible] derivedPull pull change
 
 /-- The canonical constant-coefficient structural isomorphism.
 Source: Stacks 099L (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -2715,6 +3399,42 @@ def DerivedPullComparisonFormula
     e.app (q₀.obj P) ≫ ds.map (βb.app P) ≫
       δ.inv.app ((b.mapHomologicalComplex (.up ℤ)).obj P)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem resolving_module_square
+    {M₀ M₁ M₂ M₃ D₁ D₂ D₃ : Type*}
+    [Category M₀] [Category M₁] [Category M₂] [Category M₃]
+    [Abelian M₀] [HasDerivedCategory M₀] [Preadditive M₁] [Preadditive M₂] [Preadditive M₃]
+    [Category D₁] [Category D₂] [Category D₃]
+    (q₁ : CochainComplex M₁ ℤ ⥤ D₁)
+    (q₂ : CochainComplex M₂ ℤ ⥤ D₂) (q₃ : CochainComplex M₃ ℤ ⥤ D₃)
+    (r : M₀ ⥤ M₁) (s : M₂ ⥤ M₃) (p : M₁ ⥤ M₃) (b : M₀ ⥤ M₂)
+    [r.PreservesZeroMorphisms] [s.PreservesZeroMorphisms]
+    [p.PreservesZeroMorphisms] [b.PreservesZeroMorphisms]
+    {dr : DerivedCategory M₀ ⥤ D₁} {ds : D₂ ⥤ D₃} {dp : D₁ ⥤ D₃}
+    {db : DerivedCategory M₀ ⥤ D₂}
+    (α : r.mapHomologicalComplex (.up ℤ) ⋙ q₁ ≅ DerivedCategory.Q ⋙ dr)
+    (βp : q₁ ⋙ dp ⟶ p.mapHomologicalComplex (.up ℤ) ⋙ q₃)
+    (γ : r ⋙ p ⟶ b ⋙ s)
+    (βb : DerivedCategory.Q ⋙ db ⟶ b.mapHomologicalComplex (.up ℤ) ⋙ q₂)
+    (δ : s.mapHomologicalComplex (.up ℤ) ⋙ q₃ ≅ q₂ ⋙ ds)
+    (P : CochainComplex M₀ ℤ → Prop)
+    (hres : ∀ X : CochainComplex M₀ ℤ,
+      ∃ (K : CochainComplex M₀ ℤ) (f : K ⟶ X), P K ∧ QuasiIso f)
+    (hβb : ∀ X, P X → IsIso (βb.app X)) :
+    ∃! e : dr ⋙ dp ⟶ db ⋙ ds, ∀ X, P X →
+      DerivedPullComparisonFormula DerivedCategory.Q q₁ q₂ q₃ r s p b
+        α βp γ βb δ e X := by
+  exact resolving_square q₁ q₂ q₃
+    (r.mapHomologicalComplex (.up ℤ)) (b.mapHomologicalComplex (.up ℤ))
+    (p.mapHomologicalComplex (.up ℤ)) (s.mapHomologicalComplex (.up ℤ))
+    dr db dp ds α βp (NatTrans.mapHomologicalComplex γ (.up ℤ)) βb δ P hres hβb
+
+section
+attribute [local irreducible] dres
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical derived scalar comparison, characterized on every flat-term K-flat
 representative. Uniqueness makes it independent of resolving choices and gives its
 coherence for identity and composite inverse images with the same insertion formula.
@@ -2742,7 +3462,33 @@ theorem derivedPullComparison_existsUnique (A : Type u) [CommRing A]
           (derivedPull F V adj (completedMap F A I)).comparison
           (resFactors (coefficientMap J' A I)) δ P
         := by
-  sorry
+  let := HasDerivedCategory.standard (Mod (completed J A I))
+  let := HasDerivedCategory.standard (Mod (constant J A))
+  let := HasDerivedCategory.standard (Mod (completed J' A I))
+  let := HasDerivedCategory.standard (Mod (constant J' A))
+  let φ := coefficientMap J A I
+  let ψ := coefficientMap J' A I
+  let p := derivedPull F V adj (constantMap F A)
+  let b := derivedPull F V adj (completedMap F A I)
+  let P (X : Cx (completed J A I)) :=
+    X.IsAcyclicTensorKFlat ∧ ∀ q : ℤ, SheafOfModules.IsFlat (X.X q)
+  obtain ⟨e, he, hu⟩ := resolving_module_square
+    (Q (constant J A)) (Q (completed J' A I)) (Q (constant J' A))
+    (res φ) (res ψ) (pull F (constantMap F A)) (pull F (completedMap F A I))
+    (resFactors φ) p.comparison
+    (ordinaryPullComparison F A I)
+    b.comparison (resFactors ψ) P (module_flat_kFlat_resolution (J := J))
+    (fun X hX ↦ b.computation X hX.1 hX.2)
+  refine ⟨e, ?_, ?_⟩
+  · intro X hk hf
+    exact he X ⟨hk, hf⟩
+  · intro t ht
+    apply hu t
+    intro X hX
+    exact ht X hX.1 hX.2
+
+
+end
 
 /-- The actual derived comparison with the specified K-flat scalar-insertion formula.
 Source: Stacks 06YY, 099L (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -2805,6 +3551,45 @@ def FinitePullComparisonFormula
     e.hom.app (q₀.obj P) ≫ ds.map (δ.app P) ≫
       ε.app ((b.mapHomologicalComplex (.up ℤ)).obj P)
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem resolving_module_square_iso
+    {M₀ M₁ M₂ M₃ D₁ D₂ D₃ : Type*}
+    [Category M₀] [Category M₁] [Category M₂] [Category M₃]
+    [Abelian M₀] [HasDerivedCategory M₀] [Preadditive M₁] [Preadditive M₂] [Preadditive M₃]
+    [Category D₁] [Category D₂] [Category D₃]
+    (q₁ : CochainComplex M₁ ℤ ⥤ D₁)
+    (q₂ : CochainComplex M₂ ℤ ⥤ D₂) (q₃ : CochainComplex M₃ ℤ ⥤ D₃)
+    (r : M₀ ⥤ M₁) (s : M₂ ⥤ M₃) (p : M₁ ⥤ M₃) (b : M₀ ⥤ M₂)
+    [r.PreservesZeroMorphisms] [s.PreservesZeroMorphisms]
+    [p.PreservesZeroMorphisms] [b.PreservesZeroMorphisms]
+    {dr : DerivedCategory M₀ ⥤ D₁} {ds : D₂ ⥤ D₃} {dp : D₁ ⥤ D₃}
+    {db : DerivedCategory M₀ ⥤ D₂}
+    (α : DerivedCategory.Q ⋙ dr ⟶ r.mapHomologicalComplex (.up ℤ) ⋙ q₁)
+    (β : q₁ ⋙ dp ⟶ p.mapHomologicalComplex (.up ℤ) ⋙ q₃)
+    (γ : r ⋙ p ≅ b ⋙ s)
+    (δ : DerivedCategory.Q ⋙ db ⟶ b.mapHomologicalComplex (.up ℤ) ⋙ q₂)
+    (ε : q₂ ⋙ ds ⟶ s.mapHomologicalComplex (.up ℤ) ⋙ q₃)
+    (P : CochainComplex M₀ ℤ → Prop)
+    (hres : ∀ X : CochainComplex M₀ ℤ,
+      ∃ (K : CochainComplex M₀ ℤ) (f : K ⟶ X), P K ∧ QuasiIso f)
+    (hα : ∀ X, P X → IsIso (α.app X))
+    (hβ : ∀ X, P X → IsIso (β.app ((r.mapHomologicalComplex (.up ℤ)).obj X)))
+    (hδ : ∀ X, P X → IsIso (δ.app X))
+    (hε : ∀ X, P X → IsIso (ε.app ((b.mapHomologicalComplex (.up ℤ)).obj X))) :
+    ∃! e : dr ⋙ dp ≅ db ⋙ ds, ∀ X, P X →
+      FinitePullComparisonFormula DerivedCategory.Q q₁ q₂ q₃ r s p b α β γ δ ε e X := by
+  exact resolving_square_iso q₁ q₂ q₃
+    (r.mapHomologicalComplex (.up ℤ)) (b.mapHomologicalComplex (.up ℤ))
+    (p.mapHomologicalComplex (.up ℤ)) (s.mapHomologicalComplex (.up ℤ))
+    dr db dp ds α β (NatIso.mapHomologicalComplex γ (.up ℤ)) δ ε
+    P hres hα hβ hδ hε
+
+section
+attribute [local irreducible] dres
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived constant pullback and finite reduction commute by the prescribed ordinary
 comparison on every flat-term K-flat representative. Source: Stacks 06YY, 099L
 (blueprint: lem-weil-pbc-constant-completion-equivalence).
@@ -2827,7 +3612,40 @@ theorem finitePull_existsUnique (A : Type u) [CommRing A] (I : Ideal A) (n : ℕ
           (extendComparison (quotient J A I n))
           (derivedPull F V adj (constantMap F (A ⧸ I ^ (n + 1)))).comparison e P
         := by
-  sorry
+  let := HasDerivedCategory.standard (Mod (constant J A))
+  let := HasDerivedCategory.standard (Mod (constant J' A))
+  let := HasDerivedCategory.standard (Mod (finite J A I n))
+  let := HasDerivedCategory.standard (Mod (finite J' A I n))
+  let p := derivedPull F V adj (constantMap F A)
+  let f := derivedPull F V adj (constantMap F (A ⧸ I ^ (n + 1)))
+  let q := quotient J A I n
+  let q' := quotient J' A I n
+  let P (X : Cx (constant J A)) :=
+    X.IsAcyclicTensorKFlat ∧ ∀ q : ℤ, SheafOfModules.IsFlat (X.X q)
+  obtain ⟨e, he, hu⟩ := resolving_module_square_iso
+    (Q (constant J' A)) (Q (finite J A I n)) (Q (finite J' A I n))
+    (pull F (constantMap F A)) (pull F (constantMap F (A ⧸ I ^ (n + 1))))
+    (change q') (change q)
+    p.comparison (extendComparison q')
+    (ordinaryFinitePull F V adj A I n)
+    (extendComparison q) f.comparison P (module_flat_kFlat_resolution (J := J))
+    (fun X hX ↦ p.computation X hX.1 hX.2)
+    (fun X hX ↦ (derivedExtension q').computation _
+      (pull_flat_kFlat F V adj (constantMap F A) X hX.1 hX.2).1)
+    (fun X hX ↦ (derivedExtension q).computation X hX.1)
+    (fun X hX ↦ by
+      have h := change_flat_kFlat q X hX.1 hX.2
+      exact f.computation _ h.1 h.2)
+  refine ⟨e, ?_, ?_⟩
+  · intro X hk hf
+    exact he X ⟨hk, hf⟩
+  · intro t ht
+    apply hu t
+    intro X hX
+    exact ht X hX.1 hX.2
+
+
+end
 
 /-- The specified derived finite constant pullback comparison.
 Source: Stacks 06YY, 099L (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
