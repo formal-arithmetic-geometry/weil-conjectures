@@ -8213,6 +8213,7 @@ public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.ConstructibleSheaf.DenseOpenUnit
 public import WeilConjectures.ConstructibleSheaf.DenseOpenUnitNormal
 public import WeilConjectures.ConstructibleSheaf.DerivedMorphismDescent
+public import WeilConjectures.ConstructibleSheaf.DerivedMorphismDescentShift
 public import WeilConjectures.ConstructibleSheaf.Devissage
 public import WeilConjectures.ConstructibleSheaf.DualLocallyConstant
 public import WeilConjectures.ConstructibleSheaf.DualStalk
