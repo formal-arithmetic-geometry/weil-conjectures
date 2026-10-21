@@ -21675,3 +21675,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:12 L: merged deliver/Q136/lem-sf-package-localization-projection-realization (reviewer PASS; first push; new nodes: 0); claim not held by Q136: not your claim
 - 09:12 L: merged deliver/Q40/lem-weil-ramified-pullback-tower-identification (reviewer PASS; after a return; new nodes: 0)
 - 09:12 L: merged deliver/Q151/lem-dl-a1-normal-scheme-galois-inertia-presentation (reviewer FIX; first push; new nodes: 2)
+- 09:12 L: merged deliver/N0/lem-weil-pbc-slice-tensor-integer-shift-compatibility (reviewer PASS; first push; new nodes: 0)

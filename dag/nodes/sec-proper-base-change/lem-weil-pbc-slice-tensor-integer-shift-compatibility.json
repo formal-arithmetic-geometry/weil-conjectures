@@ -20,9 +20,106 @@
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-total-tensor-integer-shifts"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The resolving class is closed under all the shifts in the statement, without a boundedness assumption. Indeed, if $A$ is K-flat and $E$ is acyclic, the second-variable chain isomorphism gives $T(E,A[n])\\cong T(E,A)[n]$. The right side is acyclic by K-flatness of $A$: shifting just reindexes kernels and images, and multiplying a differential by $(-1)^n$ changes neither. Thus $A[n]$ is K-flat by definition. Its terms are flat because they are the terms $A^{p+n}$ of $A$. The identical argument applies to $B$ and over $\\mathcal O_W$.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH, item-shift-tensor in section-sign-rules; agent-written calculation for the normalized slice map."
+   }
+  },
+  {
+   "text": "Choose flat-term K-flat resolutions $A,B$ of complexes representing $M,N$, using the resolution theorem. Use the canonical tensor-model isomorphisms of the descent theorem. The normalization of $\\rho$ in the cited slice-comparison statement identifies it with the chain isomorphism $m_{A,B}$ and says that $rA,rB$ are flat-term K-flat. By Step 1 the same normalization applies to $(A[n],B)$ and $(A,B[n])$. Restriction is sectionwise restriction of module maps, so $r(A[n])=(rA)[n]$: both differentials are $(-1)^nr(d_A)$. The tensor restriction isomorphisms $\\mu$ are natural in both sheaves. Explicitly, for maps $f:A\\to A'$ and $g:B\\to B'$ their summand identity is\n$$\\mu_{A'^p,B'^q}\\,r(f^p\\otimes g^q)=(rf^p\\otimes rg^q)\\,\\mu_{A^p,B^q}.$$\nConsequently the model comparisons are natural in both complex variables.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "def-pur-localized-ringed-site",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor and preceding construction), and 07A4 (lemma-pullback-tensor-product); normalized models as stated in lem-weil-pbc-ringed-slice-evaluation-transpose."
+   }
+  },
+  {
+   "text": "For the first-variable square, fix total source degree $k$ and its summand indexed by $p+q=k$. The first-factor sheaf is $A^{p+n}$. The map $m_{A[n],B}$ has summand $\\mu_{A^{p+n},B^q}$, and the following slice shift is unsigned. On the other route the restricted first-variable shift is unsigned, reindexes the first degree to $p+n$, and $m_{A,B}[n]$ again has summand $\\mu_{A^{p+n},B^q}$. Both land in the summand indexed by $(p+n,q)$ of target degree $k+n$. Hence the two maps agree on every direct-sum constituent, so agree in degree $k$, and therefore as chain maps. Here the direct-sum identifications on the restricted side are exactly those in the specified model isomorphism $m$; no assertion about arbitrary infinite products is used.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH, item-shift-tensor in section-sign-rules; agent-written calculation for the normalized slice map."
+   }
+  },
+  {
+   "text": "For the second-variable square, a source summand in degree $k=p+q$ has sheaves $A^p,B^{q+n}$. Applying $m_{A,B[n]}$ and then $s^2_{W,n}$ gives $(-1)^{np}\\mu_{A^p,B^{q+n}}$, landing in the target summand indexed by $(p,q+n)$. On the other route restriction of $s^2_n$ contributes the same $(-1)^{np}$, since restriction of module maps preserves their additive inverses; $m_{A,B}[n]$ then applies $\\mu_{A^p,B^{q+n}}$. This is the same map because $\\mu$ is a module morphism. Agreement on all direct-sum constituents proves equality in every degree and hence of chain maps. No additional sign comes from shifting a chain map: it is just reindexed. The argument uses parity of the integer $np$, so includes negative $n,p$.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "def-pur-localized-ringed-site",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH, item-shift-tensor in section-sign-rules; agent-written calculation for the normalized slice map."
+   }
+  },
+  {
+   "text": "Fix $n$. For $i=1,2$ let $F_1(M,N)=(M[n],N)$, $F_2(M,N)=(M,N[n])$, and let $S_n$ be shift on the target derived category. The derived tensor shift-descent theorem gives the natural shifts of the specified tensor bifunctors, with components computed by the localized $s^1_n,s^2_n$ on every resolving pair. Apply it over both $\\mathcal O$ and $\\mathcal O_W$; Step 1 supplies its shift-stability hypothesis in both places. Exact restriction is the functor of the derived-restriction definition. The exact-functor factorization theorem says its comparison between derived restriction and termwise restriction commutes with shifts. Thus, under the canonical tensor-model identifications of Step 2, the components on $(Q A,Q B)$ of the two natural transformations\n$$L_i=s^i_{\\Psi,n}\\circ(\\rho F_i),\\qquad R_i=(S_n\\rho)\\circ s^i_{\\Phi,n}:\\Phi F_i\\Longrightarrow S_n\\Psi$$\nare precisely the localizations of the two chain composites in Steps 3 and 4. All intervening factorization and tensor-model isomorphisms are the specified ones, and the intermediate inverse pairs cancel. Applying localization to those chain equalities therefore proves $L_i=R_i$ on every flat-term K-flat pair.",
+   "uses": [
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "def-weil-pbc-ringed-derived-restriction",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor and preceding construction), and 07A4 (lemma-pullback-tensor-product); normalized models as stated in lem-weil-pbc-ringed-slice-evaluation-transpose."
+   }
+  },
+  {
+   "text": "Apply the natural-transformation uniqueness clause of the tensor-descent theorem over $\\mathcal O$, taking its target category $E=D(\\mathcal O_W)$, its source bifunctor $U=\\Phi F_i$ and its target bifunctor $V=S_n\\Psi$. Its small-site hypothesis is exactly the hypothesis here. The restrictions of $L_i,R_i$ along $Q|_{\\mathcal P}\\times Q|_{\\mathcal P}$ agree by Step 5; the uniqueness clause gives $L_i=R_i$ on $D(\\mathcal O)\\times D(\\mathcal O)$. This proves the required identity naturally in both inputs. The tensor-model identifications are natural in homotopy-category maps and compatible with inversion of quasi-isomorphisms by that same cited statement. Consequently changing resolving representatives, or passing along any word of morphisms and inverted quasi-isomorphisms between them, leaves both transformations unchanged. Any other tensor presentation with the stipulated normalization has these same restricted components and hence these same transformations by uniqueness. Thus the equality holds independently of representatives and presentations for arbitrary unbounded objects.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor and preceding construction), and 07A4 (lemma-pullback-tensor-product); normalized models as stated in lem-weil-pbc-ringed-slice-evaluation-transpose."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "def-pur-localized-ringed-site",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FNH, item-shift-tensor, combined with the K-flat representative construction of sites-cohomology.tex Tags 06YS, 06YU and 07A4. The normalized slice squares and descent argument are written by the worker."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +162,38 @@
    "results": "{\"t\": \"2026-10-21T07:46:39Z\", \"tool\": \"leanfinder\", \"query\": \"An exact monoidal restriction functor on sheaves induces a total tensor comparison with coefficient one in first shifted variable and minus one to n p in second shifted variable, and this equality descends through K flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Tor\", \"CategoryTheory.GrothendieckTopology.W.transport_isMonoidal\", \"CategoryTheory.Tor'\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"fcca2fef5c6dec4c\"}",
    "date": "2026-10-21",
    "verdict": "no match: total-complex shifts and exact-derived factorization infrastructure do not give the normalized slice restriction tensor chain squares and their representative-independent derived descent."
+  },
+  {
+   "tool": "grep",
+   "query": "([Rr]estrict|[Ss]lice).*[Tt]ensor.*[Ss]hift|[Tt]ensor.*[Ss]hift.*([Rr]estrict|[Ss]lice)",
+   "results": "{\"t\": \"2026-10-21T08:46:21Z\", \"tool\": \"grep\", \"query\": \"([Rr]estrict|[Ss]lice).*[Tt]ensor.*[Ss]hift|[Tt]ensor.*[Ss]hift.*([Rr]estrict|[Ss]lice)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern exact-functor shifts, total bifunctor shifts, ordinary restriction or Tor; none states the normalized slice tensor chain squares and their derived representative-independent identity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The normalized derived tensor comparison for restriction to a localized ringed site commutes with integer shifts in both inputs",
+   "results": "{\"t\": \"2026-10-21T08:46:21Z\", \"tool\": \"leansearch\", \"query\": \"The normalized derived tensor comparison for restriction to a localized ringed site commutes with integer shifts in both inputs\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Triangulated.Localization.instAdditiveLocalization'ShiftFunctorInt\", \"DerivedCategory.instAdditiveShiftFunctorInt\", \"CategoryTheory.Functor.commShiftOfLocalization.iso\", \"CategoryTheory.Shift.instLinearLocalizationShiftFunctorOfCommShiftOfQ\", \"CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism\", \"CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh\"], \"digest\": \"e493228d96babc4b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern exact-functor shifts, total bifunctor shifts, ordinary restriction or Tor; none states the normalized slice tensor chain squares and their derived representative-independent identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction to a slice of a ringed site commutes with derived tensor shifts in each variable with Koszul signs on K-flat models",
+   "results": "{\"t\": \"2026-10-21T08:46:22Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction to a slice of a ringed site commutes with derived tensor shifts in each variable with Koszul signs on K-flat models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor\", \"CategoryTheory.Sheaf.tensorProd_isSheaf\"], \"digest\": \"c3472c534e56ac00\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern exact-functor shifts, total bifunctor shifts, ordinary restriction or Tor; none states the normalized slice tensor chain squares and their derived representative-independent identity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact monoidal restriction functor on module sheaves has a total tensor comparison whose first shifted square is unsigned and second shifted square has sign minus one to n p, descending through K-flat resolutions",
+   "results": "{\"t\": \"2026-10-21T08:47:03Z\", \"tool\": \"leanfinder\", \"query\": \"An exact monoidal restriction functor on module sheaves has a total tensor comparison whose first shifted square is unsigned and second shifted square has sign minus one to n p, descending through K-flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"CategoryTheory.Tor'_obj_obj\"], \"digest\": \"536ca9620ad50a15\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected results concern exact-functor shifts, total bifunctor shifts, ordinary restriction or Tor; none states the normalized slice tensor chain squares and their derived representative-independent identity."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ringed-slice-comparisons-shift",
@@ -88,5 +213,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-slice-tensor-integer-shift-compatibility",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved shifted K-flat admissibility directly, computed both normalized chain squares on summands with the required signs, and applied the existing shift and tensor-descent statements to obtain the natural representative-independent derived identities. No new nodes were needed. Read the existing Mathlib searches and repeated all required search kinds through the logged command with a second phrasing; no exact item match.",
+  "blueprint": "Realizes the tensor part of the first paragraph of lemma-weil-pbc-perfect-projection-formula.proof.md in main-20261015, 'closed under shifts' and 'commute with the shift comparisons', through the existing comparison-shift and projection-restriction ancestors.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Uses only its arbitrary ringed-site slice tensor-model normalization and preservation of flat-term K-flat representatives; the proper-base-change unit does not supply this normalized slice model."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Uses naturality of the ordinary tensor restriction isomorphism on a slice, a generic sheaf tool; this is not a replacement for a step of the proper-base-change route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-sfb-localized-site-tensor-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N0-8beb8ce39",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-8beb8ce39 (reviewer sub-agent of L); spot-checked: I read the whole delivery and passed it with no fixes; review.md has the full checks. The delivery splits the existing item into 6 steps, creates no new nodes and keeps the statement unchanged. proof_deps is exactly the union of the step uses, all cited ids exist and none is merged, and no cited node depends on the item, so there is no cycle. No SGA is used and there is no repair note for this item. Source: Stacks 0FNH (more-algebra.tex item-shift-tensor) puts the sign (-1)^{pb} on M^p⊗N^q, where p is the unshifted first degree. I recomputed the signs with the item's conventions: the first-variable shift needs no sign and the second needs (-1)^{np}, as the item says. Step 1 proves that flat-term K-flat complexes stay K-flat after a shift, using the second-variable shift isomorphism. That is the correct variable, because def-pc-kflat-complex puts the acyclic complex first. Steps 2-4 check the two chain squares summand by summand from the stated tensor-model normalization of ρ in the transpose node, using the naturality and sectionwise restriction stated in the cited nodes. Step 5 combines lem-weil-pbc-derived-tensor-shift-descent, which uses the same descent isomorphisms as ρ and gets its shift-stability hypothesis from Step 1, with clause (2) of the exact-functor factorization node. Step 6 applies the uniqueness clause for arbitrary transformations in lem-weil-pbc-site-derived-tensor-descent. Edge cases n=0, odd n and p, negative n, and unbounded complexes all check out. The blueprint place is the first paragraph of lemma-weil-pbc-perfect-projection-formula in main-20261015. Both declared tool_uses are accepted: the transpose node for its tensor-model normalization only, and the slice tensor-restriction node for naturality only. Advisory for the maintainer: lem-weil-pbc-pullback-tensor-canonical-shift-unit, created by NG the same day, gives the derived clause of this item after transport along the unit isomorphism. The parent's review already judged this not a duplicate, and I agree. Also, the statement cites the unsplit two-sided node lem-sfb-kflat-homotopy-triangulated for shift stability, but the proof does not rely on it."
  }
 }
