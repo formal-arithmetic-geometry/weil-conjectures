@@ -72,79 +72,75 @@
    }
   },
   {
-   "text": "Use precisely the cone triangle convention of [def-weil-abstract-derived-category]: $P\\xrightarrow{h}P\\xrightarrow{\\iota}\\operatorname{Cone}(h)\\xrightarrow{-\\operatorname{pr}_2}P[1]$. Its inverse rotation is $C(I)\\xrightarrow{\\alpha}P\\xrightarrow{h}P\\xrightarrow{\\beta}C(I)[1]$, where $\\alpha(y,x)=x$ and $\\beta(b)=(b,0)$ after the canonical shift reindexing. Indeed inverse rotation negates the shifted third arrow, cancelling the minus in $-\\operatorname{pr}_2$. Localize and replace $QC(I)$ by $Q(\\lim I_n)$ using $Q\\eta_I$. The first arrow becomes $Qj$, since $\\alpha\\eta_I=j$, and the second is $Qh=1-s$ on the actual derived product of step 2. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], $Q(\\lim I_n)$ computes the stated total derived limit on this chosen representative. The resulting distinguished triangle is a Roos triangle in the exact sense of [def-weil-derived-limit]. Its boundary is explicitly $\\delta_I=(Q\\eta_I[1])^{-1}Q\\beta$.",
+   "text": "The standard mapping-cocone triangle has first map roosProj and third map exactly the boundary obtained by inverse rotation. Mathlib already proves that its image under Q is distinguished. When roosι is a quasi-isomorphism, define δ by this actual boundary followed by the inverse of Q(roosι)[1]. The identity roosι ≫ roosProj = inclusion gives a triangle isomorphism, and hence the required distinguished triangle with the actual product of limit projections.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-triangulated-category",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "def-weil-derived-limit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E (definition-cone), rotation convention as fixed in def-weil-abstract-derived-category; sites-cohomology.tex Tag 0941"
+    "place": "Tag 014E; Mathlib DerivedCategory.mappingCocone_triangle_distinguished"
    }
   },
   {
-   "text": "Identify $\\Pi(I[r])$ with $P[r]$ by the identity on each product projection. It identifies $h_{I[r]}$ with $h_I[r]$. Apply [lem-pe-endomorphism-fibre-coordinate-calculus] to $(V,s)=(P,h_I)$ and reorder its coordinates $(v,u)$ as $(y,x)=(u,v)$. The resulting comparison is exactly $\\chi_{I,r}(y,x)=((-1)^ry,x)$, its inverse has the same formula, and its zero-shift, additive-coherence and naturality assertions apply. Taking its augmentation $J$ to be the inclusion $j:\\lim I_n\\to P$ gives $\\chi_{I,r}\\eta_{I[r]}=\\eta_I[r]$ under the termwise limit comparison. This comparison is legitimate on the chosen resolutions: $I[r]$ still has injective terms, and is K-injective because a map from an acyclic tower complex into $I[r]$ shifts back to a map from an acyclic tower complex into $I$; shifting a null-homotopy back gives the required null-homotopy. Here acyclicity is preserved by a shift since its cycles and boundaries are merely reindexed, with differentials multiplied by a unit.",
+   "text": "Use the canonical CommShift structures of the evaluation functors and apply ProductShift.productCommShift. Identify the ordinary limit-complex functor with the complex obtained by applying the additive limit functor in each degree, using the two limit universal properties. Transport its standard CommShift along this natural isomorphism. Its projection equations identify the chosen limit shifts. The one-minus-transition natural endomorphism commutes with the product shifts. Apply SignedCoconeShift.coconeCommShift and the identity-on-objects natural isomorphism to roosF. Its inclusion formulas give the signed y-coordinate and unsigned x-coordinate; both coordinates determine the forward formula. Inverting the resulting biproduct isomorphism gives the inverse formula with the same sign, since a unit of the integers is its own inverse. The augmentation has zero y-coordinate and its x-coordinate is inclusion; the product and limit projection formulas therefore prove its compatibility with these same shifts.",
    "uses": [
-    "lem-pe-endomorphism-fibre-coordinate-calculus",
-    "def-sp-kinjective-bridge",
-    "def-weil-abstract-derived-category"
+    "lem-weil-product-comm-shift",
+    "lem-weil-signed-mapping-cocone-shift",
+    "def-weil-abstract-derived-category",
+    "def-weil-category-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 011G (definition-shift-cochain); derived.tex Tag 014E (definition-cone); existing endomorphism-fibre coordinate calculation"
+    "place": "Tag 011G; generic signed cocone and product shift constructions, as also used by the proved private shift helpers of Sheaf.Algebra.Homology.RoosConeCalculus"
    }
   },
   {
-   "text": "Write $\\alpha_I:C(I)\\to P$ and $\\beta_I:P\\to C(I)[1]$ for step 5's maps. Projection onto $x$ gives $\\pi_r\\alpha_{I[r]}=\\alpha_I[r]\\chi_{I,r}$. Insertion into the $y$ coordinate gives $\\chi_{I,r}[1]\\beta_{I[r]}=(-1)^r\\beta_I[r]\\pi_r$, since both sides send $b$ to $((-1)^rb,0)$. Put $e_I=Q\\eta_I$ and use step 6's identity $Q\\chi_{I,r}\\,e_{I[r]}=e_I[r]\\sigma_r$. Substitution into $p_I=Q\\alpha_I e_I$ proves $\\pi_rp_{I[r]}=p_I[r]\\sigma_r$. Substitution into $\\delta_I=e_I[1]^{-1}Q\\beta_I$ proves $\\sigma_r[1]\\delta_{I[r]}=(-1)^r\\delta_I[r]\\pi_r$, by cancelling the isomorphism $e_I[r][1]$. The reindexings identify $[1][r]$ with $[r][1]$ as stipulated. Thus the boundary sign is computed on its actual insertion map, not inferred from an arbitrary isomorphism of triangles.",
+   "text": "The boundary is the actual mapping-cocone insertion cochain in degree one. The signed cocone inr formula shows that its shift acquires (-1)^m, with the reindexing given by shiftFunctorComm. Apply Q; naturality of its commShiftIso and its compatibility with shiftFunctorComm give the corresponding localized boundary formula. Localize augmentation compatibility and cancel the isomorphism Q(roosι)[m][1] to obtain the displayed formula for δ. Localizing inclusion compatibility gives the projection formula. The injective-term assumption survives a shift by reindexing, so the shifted augmentation is again a quasi-isomorphism.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pe-endomorphism-fibre-coordinate-calculus"
+    "lem-weil-signed-mapping-cocone-shift",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 011G (definition-shift-cochain), with derived.tex Tag 014E (definition-cone); explicit projection and insertion calculation"
+    "place": "Tag 011G, signed insertion calculation and commutation of shifts"
    }
   },
   {
-   "text": "A strict map $f:I\\to I'$ induces the product map $a$, with $ah_I=h_{I'}a$, and the induced limit map $\\ell$ satisfies $aj=j'\\ell$. The diagonal cone map therefore obeys $C(f)\\eta_I=\\eta_{I'}\\ell$ by [lem-pe-endomorphism-fibre-coordinate-calculus]. To pass to localization use [lem-weil-pbc-kinjective-hom-derived] in the abelian tower category: every derived map between the chosen K-injectives has a chain representative unique up to tower homotopy, and a quasi-isomorphism between them is a homotopy equivalence. The cone maps respect these homotopies by [lem-pur-strict-roos-homotopy-functor]. Termwise limit also respects a tower homotopy: its compatible component homotopies restrict from the product to the limit, and $f-g=dH+Hd$ restricts to the same identity there. Consequently the comparisons and the two arrow identities above are natural after localization. A change of K-injective representative is transported through its homotopy equivalence, and the chain identities survive that transport. The termwise limit shift here is exactly the normalized shift comparison used to compute $L$, while step 6 gives coherence for all successive shifts. This proves all claimed naturality and shift-coherence clauses.",
+   "text": "The standard mapping-cone map is a triangle map; inverse rotation gives naturality of the actual boundary. Combine this with roosι_natural and cancel Q(roosι) on K-injective representatives to prove the stated strict-map naturality of δ. For the final arbitrary derived-limit functor RF and unit η, its assumed invertibility on the chosen K-injective I gives an isomorphism from Q(limit I) to RF(QI). Compose with the inverse of RF(Qq) to obtain d. The equation d.hom ≫ RF(Qq) = η_I follows by cancellation; transporting the already distinguished triangle along d proves the final assertion. These clauses need neither a new resolution nor a general homotopy descent theorem.",
    "uses": [
-    "lem-pe-endomorphism-fibre-coordinate-calculus",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-pur-strict-roos-homotopy-functor"
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I (lemma-K-injective); strict cone homotopies and shift comparisons of Tag 014E (definition-cone)"
+    "place": "Tags 070I and 014E; normalization by the supplied derived-unit isomorphism"
    }
   }
  ],
  "proof_deps": [
   "def-sp-injective-resolutions",
-  "def-sp-kinjective-bridge",
   "def-weil-abstract-derived-category",
   "def-weil-category-product",
   "def-weil-derived-limit",
   "def-weil-sheaf-of-modules-category",
   "def-weil-triangulated-category",
   "lem-pc-ringed-space-product-kinjective",
-  "lem-pe-endomorphism-fibre-coordinate-calculus",
-  "lem-pur-strict-roos-homotopy-functor",
   "lem-weil-degreewise-epi-kernel-cocone-qis",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-product-comm-shift",
+  "lem-weil-signed-mapping-cocone-shift",
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-tower-evaluation-kinjective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0941 (lemma-derived-limit-is-ok), module-sheaf variant on the small constant-ring tower site, refined by explicit prefix splittings, the fixed project cone convention, and the signed integer-shift calculation; derived.tex Tags 070I, 08BJ, 0BK6, 014E and homology.tex Tag 011G."
+  "place": "G9 stage-3 proof: Tag 0941 prefix splitting and product-kernel argument; generic shift proofs reused from the proved private helpers in RoosConeCalculus, and prefix/kernel/split-epi arguments from RingedStrictTowerHomotopyLimitIndependentCoefficients; Mathlib mapping-cocone triangle and Functor.CommShift coherence; direct normalization by the given η on K-injectives."
  },
  "mathlib_searches": [
   {
@@ -288,11 +284,7 @@
  "tool_uses": [
   "lem-weil-tower-evaluation-kinjective",
   "lem-pc-ringed-space-product-kinjective",
-  "lem-weil-degreewise-epi-kernel-cocone-qis",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-pe-endomorphism-fibre-coordinate-calculus",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pur-strict-roos-homotopy-functor"
+  "lem-weil-degreewise-epi-kernel-cocone-qis"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -327,5 +319,15 @@
   "group": "Q11",
   "result": "pass",
   "note": "Re-delivery after return L. The only fault there was the theorem stmt_dep lem-weil-product-comm-shift, used only for its plain productFunctor abbrev. It is repaired exactly by route (a). The new def node def-pur-tower-product-functor has its own module TowerProductFunctor: noncomputable def productFunctor with obj roosP, map roosPmap and laws roosPmap_id/roosPmap_comp from StrictRoosModel (same Abelian+HasCountableProducts binders); real data, no sorry, not a duplicate (ProductShift.productFunctor is owned by a theorem node, RoosCommShift.productFunctor has another source). §5(A) fields complete: stmt_deps equal the cited ids, three search kinds, lean.statement verbatim. blueprint.from.via recomputed with blueprint_refs.chain on live nodes and matches. The item swaps the stmt_dep, drops the ProductCommShift import and moves the helper. The theorem signature is byte-identical to the 4919a5f9 head, whose clause-by-clause reading I re-checked and agree with (roosχ coordinates, signed χ both directions, pinned csP/csL/csC, distinguished Roos triangle with pinned δ, boundary sign with shiftFunctorComm, naturality, total-derived-limit normalization; edge cases m=0,±1,2, char 2, zero ring). The live node matches the snapshot except the allowed stmt_deps additions (landed def-weil-strict-roos-model plus the new def node). No compile reproduced (human 2026-10-21); worker reports clean scompile of both modules and a passing dry run; no file changed. Advisories: proof-only imports unused by the statement; extra roosP K-injectivity conclusion; IsDerivedLimit not used (justified)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261021T160330-L-3589250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
