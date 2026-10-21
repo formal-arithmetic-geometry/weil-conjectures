@@ -27,7 +27,13 @@
   "def-weil-pbc-adic-coefficient-datum",
   "def-weil-pbc-intrinsic-completion",
   "def-weil-derived-complete",
-  "def-weil-pbc-completed-pullback"
+  "def-weil-pbc-completed-pullback",
+  "def-sf-strict-roos-functor",
+  "def-sf-additive-roos-map",
+  "def-sf-integral-koszul-intrinsic-unit",
+  "def-sf-integral-open-operations",
+  "def-pur-integral-derived-operations",
+  "def-coef-ringed-sequence-site"
  ],
  "proof": [
   {
@@ -396,5 +402,34 @@
   "group": "Q141",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-d97dc0e76 (reviewer sub-agent of L); spot-checked: I read the item in full: an 8-step split, no new nodes, statement and stmt_deps byte-identical to live. It is still unsplit live and in side-live, it is not in route-pivot-dropped, and it has no repair note. The dependency closure has no cycle, and the parent lem-sf-pf-open-factor-coherence is not in it. Source checks: Stacks proetale 099M (l.4305), 099N (2),(5) (l.4336) and 09BN (l.5117), and the blueprint main-20261015 prop-sf-pf-coherence proof l.23-25 (the j_! factor lies in the essential image and restricts to the identity). The split correctly does not apply the constant-coefficient 099M/099N to completed-ring modules. Step checks: S1 DVR/finite-quotient nodes plus elementary steps (PID ⇒ Noetherian; t≠0 ⇒ free resolution) give every adic-datum hypothesis. S2: finite type over k ⇒ Noetherian and quasi-separated, and e is quasi-compact via open subschemes of a Noetherian scheme. S3: weakly-étale localization (2) plus immersion limit preservation give e⁻¹B_W = B_V; this is c_g of the completed-pullback definition. S4: Koszul reflector, strict Roos comparison ((γ,0) ↔ augmentation), Roos/intrinsic equivalence (needs ℓ≠p and the adic datum, both checked) and the Koszul/quotient comparison with units give the reflector for the actual η_H. S5: tensor-pullback with an isomorphic c makes e*P flat-term K-flat, and τ_H respects transitions and augmentations. S6: the strict-limit lemma's augmentation clause gives ρ e*η = η_{e*H}; since e* is exact, the completed-pullback comparison is η_{e*H}. S7: e_! is exact and preserves products (e quasi-compact by S2); the open semilinear tensor model applies since ℓ is invertible over F̄_q, giving σ e_!η = η_{e_!M}. S8: the localized adjunction restricts to the full complete subcategories, and open-tensor-normalization gives unit = identity and full faithfulness. Edge cases checked: V empty, V=W, ramified E, unbounded complexes. Duplicate search: the nearby cbc nodes assume j_!K complete, so none restates this item. I accept the 19 tool_uses as generic black boxes. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenRoosUnitAdjunction",
+  "declaration": "WeilConjectures.OpenRoos.openRoosUnitAdjunction",
+  "declarations": [
+   "WeilConjectures.OpenRoos.Intrinsic",
+   "WeilConjectures.OpenRoos.ReflectorAssertions",
+   "WeilConjectures.OpenRoos.Complete",
+   "WeilConjectures.OpenRoos.completeExtension",
+   "WeilConjectures.OpenRoos.completeRestriction",
+   "WeilConjectures.OpenRoos.pulledRoos",
+   "WeilConjectures.OpenRoos.pulledUnit",
+   "WeilConjectures.OpenRoos.openRoosUnitAdjunction"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenRoosUnitAdjunction.lean",
+  "statement": "theorem openRoosUnitAdjunction (D : FiniteFieldDatum.{t}) (_hl : l ≠ D.p) [V.Over (Spec (CommRingCat.of D.k))] [W.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (V ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (W ↘ Spec (CommRingCat.of D.k))] [e.IsOver (Spec (CommRingCat.of D.k))] : IsNoetherian V ∧ IsNoetherian W ∧ CompactSpace V ∧ CompactSpace W ∧ QuasiSeparatedSpace V ∧ QuasiSeparatedSpace W ∧ QuasiCompact e ∧ IsNoetherianRing (Padic.coefficientExtensionIntegers l E) ∧ IsAddTorsion (Padic.coefficientExtensionRing l E 1) ∧ (∃ d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E), d.ideal = Ideal.span {Padic.coefficientExtensionUniformizer l E}) ∧ (∀ n : ℕ, Finite (Padic.coefficientExtensionRing l E (n + 1)) ∧ Function.Injective (fun x : Padic.coefficientExtensionIntegers l E ↦ Padic.coefficientExtensionUniformizer l E ^ (n + 1) * x) ∧ Function.Exact (fun x : Padic.coefficientExtensionIntegers l E ↦ Padic.coefficientExtensionUniformizer l E ^ (n + 1) * x) (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1))) ∧ Function.Surjective (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)))) ∧ ReflectorAssertions l E W ∧ ReflectorAssertions l E V ∧ ∃ o : IntegralOpenReduction.Operations l E e, (∀ n : ℕ, IsIso (o.finiteMap n)) ∧ IsIso o.completedMap ∧ (∀ n : ℕ, o.finiteMap (n + 1) ≫ ((IntegralOpenReduction.sliceSite e).sheafPushforwardContinuous CommRingCat.{max u (t + 1)} ((ProEt.topology W).over (IntegralOpenReduction.openObject e)) (ProEt.topology V)).map (coefficientSequenceCommRingTransition l E V n) = ((ProEt.topology W).overPullback CommRingCat.{max u (t + 1)} (IntegralOpenReduction.openObject e)).map (coefficientSequenceCommRingTransition l E W n) ≫ o.finiteMap n) ∧ (∃! rho : IntegralOnSlice.completion l E W none ⋙ IntegralOpenReduction.star l E e o ≅ IntegralOpenReduction.star l E e o ⋙ IntegralOnSlice.completion l E V none, ∀ H : IntegralOnSlice.D l E W none, (IntegralOpenReduction.star l E e o).map ((IntegralOnSlice.completionUnit l E W none).app H) ≫ rho.hom.app H = (IntegralOnSlice.completionUnit l E V none).app ((IntegralOpenReduction.star l E e o).obj H)) ∧ (∃ (C : IntegralOnSlice.D l E W none ⥤ IntegralOnSlice.D l E V none) (c : IntegralOnSlice.qGood l E W none ⋙ C ≅ pulledRoos l E e o) (chi : IntegralOpenReduction.star l E e o ⟶ C) (b : C ≅ IntegralOpenReduction.star l E e o ⋙ IntegralOnSlice.completion l E V none), (∀ P : (IntegralOnSlice.Good l E W none).FullSubcategory, chi.app (DerivedCategory.Q.obj P.obj) ≫ c.hom.app P = (IntegralOpenReduction.restriction l E e o).mapDerivedCategoryFactors.hom.app P.obj ≫ DerivedCategory.Q.map (pulledUnit l E e o P.obj)) ∧ (∀ H : IntegralOnSlice.D l E W none, chi.app H ≫ b.hom.app H = (IntegralOnSlice.completionUnit l E V none).app ((IntegralOpenReduction.star l E e o).obj H))) ∧ ∃ (hExtension : ∀ M, IntegralOnSlice.IsComplete l E V none M → IntegralOnSlice.IsComplete l E W none ((IntegralOpenReduction.shriek l E e o).obj M)) (hRestriction : ∀ H, IntegralOnSlice.IsComplete l E W none H → IntegralOnSlice.IsComplete l E V none ((IntegralOpenReduction.star l E e o).obj H)), (∀ H : IntegralOnSlice.D l E W none, IntegralOnSlice.IsComplete l E W none H → IsIso ((IntegralOnSlice.completionUnit l E V none).app ((IntegralOpenReduction.star l E e o).obj H))) ∧ (∀ M : IntegralOnSlice.D l E V none, IntegralOnSlice.IsComplete l E V none M → IsIso ((IntegralOpenReduction.openAdjunction l E e o).unit.app M)) ∧ (∀ P : IntegralOnSlice.Cx l E V none, (IntegralOpenReduction.openAdjunction l E e o).unit.app (DerivedCategory.Q.obj P) = DerivedCategory.Q.map (((IntegralOpenReduction.ordinaryAdjunction l E e o).mapHomologicalComplex (.up ℤ)).unit.app P) ≫ (IntegralOpenReduction.restriction l E e o).mapDerivedCategoryFactors.inv.app _ ≫ (IntegralOpenReduction.star l E e o).map ((IntegralOpenReduction.extension l E e o).mapDerivedCategoryFactors.inv.app P)) ∧ Nonempty ((completeExtension l E e o hExtension).FullyFaithful) ∧ ∃ a : completeExtension l E e o hExtension ⊣ completeRestriction l E e o hRestriction, (∀ M : Complete l E V, (a.unit.app M).hom = (IntegralOpenReduction.openAdjunction l E e o).unit.app M.obj) ∧ (∀ H : Complete l E W, (a.counit.app H).hom = (IntegralOpenReduction.openAdjunction l E e o).counit.app H.obj)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Returned H2 repair: plain constructions in theorem owner modules are cited through four existing-definition nodes, not through the unrelated scalar-extension theorem. The strict pulled quotient tower, augmentation and both canonical Roos coordinates are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dab7d5a2e",
+  "group": "NI",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 45a9246c0910. The Lean module is byte-identical (sha dda6b521…), so the earlier clause-by-clause check of the mathematics stands, and a reread found nothing new. The item changes only stmt_deps and lean: the theorem stmt_dep lem-pur-integral-operations-scalar-extension is dropped, all 18 base deps are kept, and six are added: def-sf-strict-roos-functor, def-sf-additive-roos-map, def-sf-integral-koszul-intrinsic-unit, def-sf-integral-open-operations, def-pur-integral-derived-operations and def-coef-ringed-sequence-site. lean.statement is verbatim. Script check: every project identifier used is owned by a cited node. The four new existing:true def nodes were read against their owner sources. integralOperationsRoosFunctor is cocone(1-s) with diagonal Pi.map and proved functor laws. scalarRoosMap is .choose of the proved local scalarRoosMap_existsUnique, not of the node theorem. integralKoszulIntrinsicUnit is e.inv ≫ Q(u,0) into mappingCocone(-(1-s)) of the Koszul tower. IntegralOpenReduction.* are pinned structures and abbrevs. None is hollow, statement fields are verbatim, and the H12 fields are correct. The new ids are absent live, all their stmt_deps exist live, and there is no cycle (1184-node closure). No compile, since no file was changed. Advisory: def-weil-strict-roos-model (roosF) overlaps def-sf-strict-roos-functor with transposed indices, but IntegralOnSlice.roos uses integralOperationsRoosFunctor, so the ownership record is correct. H11: the second reading is a self-reread."
  }
 }

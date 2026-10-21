@@ -1,0 +1,110 @@
+{
+ "id": "def-sf-strict-roos-functor",
+ "kind": "definition",
+ "title": "Strict-complex Roos functor",
+ "status": "split",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] with countable products [def-weil-category-product]. For a strict tower $C:\\mathbf N^{op}\\to\\operatorname{CochainComplex}(\\mathcal A,\\mathbf Z)$ [def-weil-inverse-system], set $s_C$ to be its product shift and $b_C=1-s_C$ [def-weil-tower-transition-endomorphism]. Define $\\operatorname{Roos}(C)=\\operatorname{Cone}(b_C)[-1]$, using the signed cochain mapping cocone [def-weil-signed-mapping-cocone-functor]. Define the functor on strict towers by sending a natural transformation $a:C\\to C'$ to the mapping-cocone map whose two coordinates are $\\prod_n a_n$. This is the strict-complex model of [def-weil-derived-limit], with actual chosen product projections and cone coordinates.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-category-product",
+  "def-weil-inverse-system",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-signed-mapping-cocone-functor",
+  "def-weil-derived-limit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 08TC, definition-derived-limit; strict cochain mapping-cocone model with termwise products."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical Roos cocone comparison for additive functors, strict tower Roos functor, integral Koszul intrinsic completion unit, localized open extension restriction adjunction",
+   "results": "CategoryTheory.Adjunction.functorialityUnit, CategoryTheory.Adjunction.functorialityUnit', CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.coconesIso, CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_unit_app, CategoryTheory.Adjunction.functorialityRightAdjoint, CategoryTheory.Localization.HasProductsOfShapeAux.adj, CategoryTheory.Adjunction.functorialityAdjunction",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. Reuse the already-published project definitions; no new Lean construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "scalarRoosMap, integralOperationsRoosFunctor, integralKoszulIntrinsicUnit, IntegralOpenReduction.Operations",
+   "results": "0 hits; loogle: unknown identifier 'scalarRoosMap'",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. Reuse the already-published project definitions; no new Lean construction."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarRoosMap|scalarRoosBoundary|integralOperationsRoosFunctor|integralKoszulIntrinsicUnit|IntegralOpenReduction",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. Reuse the already-published project definitions; no new Lean construction."
+  },
+  {
+   "tool": "rg",
+   "query": "scalarRoosMap|scalarRoosBoundary|integralOperationsRoosFunctor|integralKoszulIntrinsicUnit|IntegralOpenReduction in dag/nodes/*/def-*.json, lean/WeilConjectures and lean/Sheaf",
+   "results": "No definition node owns these theorem-module declarations. Three definition-node references use them as part of other notions: def-a1-adic-section-canonical-models, def-trf-compact-support-system-evaluation-diagram, def-sf-operation-stages. Exact declarations are in the four owner modules named below, with no upstream WeilConjectures match. blueprint_refs search scalarRoosMap and integralKoszulIntrinsicUnit: 0 nodes; Roos: 21 broader nodes; open ringed slice: 0.",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions lack standalone definition-node ownership; record existing:true, as explicitly requested by H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-open-roos-unit-adjunction",
+  "date": "2026-10-21",
+  "group": "NI"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-sf-pf-coherence",
+   "place": "Open-factor completion and adjunction: Strict-complex Roos functor",
+   "via": [
+    "lem-sf-open-roos-unit-adjunction",
+    "lem-sf-pf-open-factor-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-pf-coherence",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralOperationsWellDefined",
+  "declaration": "WeilConjectures.integralOperationsRoosFunctor",
+  "declarations": [
+   "WeilConjectures.integralOperationsRoosFunctor"
+  ],
+  "statement": "def integralOperationsRoosFunctor :\n    (ℕᵒᵖ ⥤ CochainComplex A ℤ) ⥤ CochainComplex A ℤ",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition-only ownership of the existing plain declarations used by the item; no theorem conclusion from this owner module is required."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dab7d5a2e",
+  "group": "NI",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dab7d5a2e",
+  "group": "NI",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of 45a9246c0910. The Lean module is byte-identical (sha dda6b521…), so the earlier clause-by-clause check of the mathematics stands, and a reread found nothing new. The item changes only stmt_deps and lean: the theorem stmt_dep lem-pur-integral-operations-scalar-extension is dropped, all 18 base deps are kept, and six are added: def-sf-strict-roos-functor, def-sf-additive-roos-map, def-sf-integral-koszul-intrinsic-unit, def-sf-integral-open-operations, def-pur-integral-derived-operations and def-coef-ringed-sequence-site. lean.statement is verbatim. Script check: every project identifier used is owned by a cited node. The four new existing:true def nodes were read against their owner sources. integralOperationsRoosFunctor is cocone(1-s) with diagonal Pi.map and proved functor laws. scalarRoosMap is .choose of the proved local scalarRoosMap_existsUnique, not of the node theorem. integralKoszulIntrinsicUnit is e.inv ≫ Q(u,0) into mappingCocone(-(1-s)) of the Koszul tower. IntegralOpenReduction.* are pinned structures and abbrevs. None is hollow, statement fields are verbatim, and the H12 fields are correct. The new ids are absent live, all their stmt_deps exist live, and there is no cycle (1184-node closure). No compile, since no file was changed. Advisory: def-weil-strict-roos-model (roosF) overlaps def-sf-strict-roos-functor with transposed indices, but IntegralOnSlice.roos uses integralOperationsRoosFunctor, so the ownership record is correct. H11: the second reading is a self-reread."
+ }
+}

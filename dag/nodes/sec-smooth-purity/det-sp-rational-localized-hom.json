@@ -234,5 +234,51 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-89d510cd6 (reviewer sub-agent of L); spot-checked: Read all seven steps, dependency statements, cited sources, and unit/chapter route. Localization, cone descent, and coefficient comparisons check out. Corrected two off-route preservation citations using existing on-route statements and repaired stale unit-metadata reporting. Statement unchanged; no new nodes. Review and corrected JSON written under the review directory.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.RationalLocalizedHom",
+  "declaration": "AlgebraicGeometry.ProEtale.RationalLocalizedHom.rationalLocalizedHom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.locallyBijective",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.scalarSections",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.commutativePresheaf",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.continuousLinear",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.continuousDerived",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.encodingAdditive",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.encodingInverseAdditive",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.encoding",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.derivedEncodingAdditive",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.homModule",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.exactExtension",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.extensionShift",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.integral",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.rational",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.extend",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.integralConstructible",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.rationalConstructible",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.coefficientNorm",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.coefficientUltra",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.integralHomModule",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.rationalHomModule",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.shriek",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.shriekComparison",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.Comparisons",
+   "AlgebraicGeometry.ProEtale.RationalLocalizedHom.rationalLocalizedHom"
+  ],
+  "file": "lean/Sheaf/Paper/RationalLocalizedHom.lean",
+  "statement": "theorem rationalLocalizedHom (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (T : Scheme.{u}) [T.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] [IsSeparated (T ↘ Spec (.of k))] [IsNoetherian T] (E : PadicAlgCl.FiniteIntermediateField ℓ) : (∀ K : rational T ℓ E, rationalConstructible T ℓ E K → ∃ K₀ : integral T ℓ E, integralConstructible T ℓ E K₀ ∧ Nonempty ((extend T ℓ E).obj K₀ ≅ K)) ∧ (∀ K₀ L₀ : integral T ℓ E, integralConstructible T ℓ E K₀ → integralConstructible T ℓ E L₀ → ∀ q : ℤ, ∃ c : (E.1 ⊗[PadicAlgCl.integers ℓ E.1] (K₀ ⟶ L₀⟦q⟧)) ≃ₗ[E.1] ((extend T ℓ E).obj K₀ ⟶ ((extend T ℓ E).obj L₀)⟦q⟧), ∀ (e : E.1) (h : K₀ ⟶ L₀⟦q⟧), c (e ⊗ₜ h) = @SMul.smul E.1 ((extend T ℓ E).obj K₀ ⟶ ((extend T ℓ E).obj L₀)⟦q⟧) (rationalHomModule T ℓ E _ _).toSMul e ((extend T ℓ E).map h ≫ ((extend T ℓ E).commShiftIso q).hom.app L₀)) ∧ Comparisons ℓ k E",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical continuous scalar actions are transported along the published coefficient encoding. The Hom equivalence is uniquely characterized on pure tensors; Comparisons states invertibility of the published canonical natural transformations after restriction to the full bounded constructible subcategories."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3c76edda",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read the item node (only the lean field changed vs side-live; statement verbatim; lines ≤100), all 9 stmt_dep records, the module and the declarations used: boundedConstructible/IsConstructibleModuleObject, padicIntegersToPadicSubfield, continuousRingModuleEquivalence, derivedPullIso/derivedLowerShriekHom, compactificationOverField, FiniteIntermediateField/integers. Every clause matches: char p>0, p≠ℓ; Noetherian separated finite-type T; continuous O_E and E condensed coefficients; bounded constructible full subcategories; extend = L(extendScalars). Essential surjectivity is stated. The Hom equivalence is E-linear and fixed on pure tensors by e•(F h ≫ commShiftIso), with the standard constant-section scalar actions carried along the published encoding. Pullback and compact-support comparisons are pinned to the published canonical maps, with the same chosen compactification on both sides, plus membership conjuncts. Edge cases covered (empty T, zero objects, all q, ℓ=2, torsion); no universe restriction. Every proof-dependency module is imported; docstrings carry source, blueprint id and proof steps 1-7; one sorry; no hollow defs. The EllAdicRationalization localization instance is not the same statement (H4 ok). No compile run, per the 2026-10-21 rule. Advisories: the pull IsIso conjunct is automatic (inverse of an existing iso; the node's content there is membership); comparison maps, encoding and flatness instance come from nodes outside stmt_deps; global NormedField E.1 and Linear instances are exported; the item's boundedConstructible differs from integral_models' constantModelBoundedConstructible, so stage 3 needs their agreement."
+ }
 }

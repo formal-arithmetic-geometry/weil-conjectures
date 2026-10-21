@@ -357,21 +357,26 @@
    "DerivedCategory.PerfectScalar.modelMap",
    "DerivedCategory.PerfectScalar.symmetry",
    "DerivedCategory.PerfectScalar.Coherence",
-   "DerivedCategory.PerfectScalar.perfect_scalar_tensor_coherence"
+   "DerivedCategory.PerfectScalar.perfect_scalar_tensor_coherence",
+   "DerivedCategory.PerfectScalar.CoherenceData",
+   "DerivedCategory.PerfectScalar.CoherenceData.Normalized",
+   "DerivedCategory.PerfectScalar.perfect_scalar_tensor_coherence_data",
+   "DerivedCategory.PerfectScalar.coherenceData"
   ],
   "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectScalarTensorCoherence.lean",
   "statement": "theorem perfect_scalar_tensor_coherence : Coherence.{u, w}",
   "branch": "sheaf-dag",
-  "by": "NG",
+  "by": "NN",
   "date": "2026-10-21",
-  "existing": false
+  "existing": false,
+  "note": "NN repair: retain NG’s module, primary declaration, statement and all eight original declarations unchanged. Append CoherenceData, CoherenceData.Normalized, perfect_scalar_tensor_coherence_data (unique existence) and coherenceData in that same module. The nested existential interface lacks named data projections; the appended record exposes all original model, naturality and monoidal/tower equations. Model normalizations and naturality determine its data uniquely, so coherenceData chooses determined data. No original declaration or theorem is orphaned. The required lean.by field identifies NN as the delivery author of this superset record; the original module author remains NG."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-0cef38744",
-  "group": "NG",
+  "reviewer": "NT-stage2-cc-7b10be299",
+  "group": "NN",
   "result": "pass",
-  "note": "Snapshot item node differs from live only in lean; statement verbatim; no new nodes or dependency modules. Each node clause has a matching Coherence clause: perfect preservation, additivity, R-linearity (f.hom r scalar), IsIso of modelMap on bounded finite-projective models. tensor/unit/comp/identity Isos are pinned to mapCochainComplexμIso.inv (s⊗(x⊗y)↦(s⊗x)⊗(1⊗y)), εIso.inv (f(r)s), extendScalarsComp.symm (g(s)t) and extendScalarsId, with naturality for arbitrary derived arrows, so nothing is a free map. Associator, Koszul braiding' symmetry, both unitors, the two tower unit equations, the four-ring equation and the tensor/coefficient-unit squares for c and identity are present. B and modelMap are .choose of the recorded stmt_dep theorem and its actual derived counit. Edge cases (zero ring, a>b, negative degrees, identity maps, non-flat maps) are covered; u and w are independent; no extra hypotheses. H4: IsDerivedBaseChange is only a predicate; moduleDerivedExtension (def-zl) is a different construction and not a stmt_dep. Docstrings carry source, blueprint and all 13 steps; both report sections are present. Advisory only: three proof-only imports; a possible later comparison between B and moduleDerivedExtension. No files changed, so no compile run."
+  "note": "Read item, 4 new def nodes and modules, extended PerfectScalarTensorCoherence, PointFdQbar, StageSystem. Every node hypothesis matches an IntegralData clause (CoreMonoidal tau, Koszul symmetry, semilinear additive StageSystem with cocycle, identity/tower monoidality, phi identity/tower/tensor/unit squares with the canonical coherenceData tensorator). The existential rational and common-stage structures are all pinned: literal objects, the pure-tensor formula, 1⊗constraints, kappa/omega pinned by modelMap, phi by the integral square, G by phi-conjugation, sourceAt by mkHom classes, target tensor via the fully faithful realization. Formulas hold at every L and every base field; transport equation is explicit. HEq pins rest on provable ring-map equalities. Mechanical theorem stmt_dep: the statement uses coherenceData = .choose of the recorded ∃! theorem, so it genuinely depends on the constructed object → PASS on that point. Note: symmetry is a plain def in the theorem module (NG base). H13 dep repair: live file is a byte prefix; record superset (8+4 decls, by/note). Statements verbatim. No compile (no changes). Advisories: transitive owners of fieldDerivedScalarExtension/pointFiniteDimensional; Rat/D abbrev names."
  }
 }

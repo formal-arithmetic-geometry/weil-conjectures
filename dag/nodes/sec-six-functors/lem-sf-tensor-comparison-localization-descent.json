@@ -12,7 +12,12 @@
   "def-weil-rationalization-karoubi",
   "def-weil-algebraically-closed-coefficients",
   "def-weil-point-fd-qlbar-category",
-  "lem-pc-derived-tensor-second-factor-functor"
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-sf-integral-tensor-comparison-system",
+  "def-sf-rational-tensor-comparison-system",
+  "def-sf-common-tensor-comparison-representatives",
+  "def-sf-common-tensor-comparison-descent",
+  "lem-sf-perfect-scalar-tensor-coherence"
  ],
  "proof": [
   {
@@ -283,5 +288,26 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-82aea6e72 (reviewer sub-agent of L); spot-checked: Read the whole item, all 11 steps, the new node lem-sf-perfect-scalar-tensor-coherence, and every cited statement. Sources checked: blueprint main-20261015 def-weil-derived-pullback-tensor-hom (final paragraph), def-weil-rationalization-karoubi and def-weil-algebraically-closed-coefficients (raw, no Karoubi completion), def-weil-point-fd-qlbar-category transitions, Stacks 06Y6 (lemma-derived-base-change) and 0GWN (section-symmetric-monoidal). The item is unsplit live, is not on the dropped list, cites no SGA, and has no re-split note. The E7 statement correction is accepted. It (a) makes the transition tensor and unit comparisons coherent symmetric isomorphisms, which a common-stage tensor of morphisms and the d-cocycle need, and which the base conclusion already presupposed; (b) adds the explicit transport phi^{-1} then F_L(d_{L,K}) between the stage-K tensor object and U_L. Nothing is weakened. I recomputed the step 6 transition v_M=c^D B(v_L)(c^D)^{-1}, the step 7 cocycle d_{M,L}T(d_{L,K})=d_{M,K}c, and the step 8 equation gamma_L F_L(d)phi^{-1}=e B(gamma_K); all hold. The new node is true for arbitrary ring maps, including non-flat quotients, Koszul signs and identity maps. It is not a restatement of a clause of the item. Overlaps are partial only, so it is not a duplicate: lem-sfb-successive-derived-quotient-normalization (tower clause), the sfb ScalarHom tensor comparison nodes, and det-prop-scalar-six. Two faults, both repaired in fixes/: B3, derived tensor and derived scalar extension had no definition node, now cited from lem-pc-derived-tensor-second-factor-functor in the helper and the item; C4/E4, step 6 silently identified the derived B_{M/L} and the helper's c^D with the termwise T and the c, iota of def-weil-point-fd-qlbar-category, so I added the identification via K-flatness over a field and lem-weil-derived-field-scalar-extension-tower (1)-(2). Both new citations are accepted as generic tool uses and declared in split_report.tool_uses; there is no cycle. Maintainer note (inherited): the citer lem-sf-point-fibre-derived-tensor step 4 needs the integral scalar extension to be coherent symmetric monoidal, but lem-pur-integral-operations-scalar-extension states the natural tower-compatible isomorphisms without associator, symmetry or unitor compatibility.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TensorComparisonLocalizationDescent",
+  "declaration": "WeilConjectures.TensorComparisonDescent.tensor_comparison_localization_descent",
+  "declarations": [
+   "WeilConjectures.TensorComparisonDescent.tensor_comparison_localization_descent"
+  ],
+  "file": "lean/Sheaf/Paper/TensorComparisonLocalizationDescent.lean",
+  "statement": "theorem tensor_comparison_localization_descent (A : IntegralData C) (hA : A.Valid) : ∃ rs : RationalStructures C, letI := rs ∃ R : RationalData C A, RationalData.Valid C A R ∧ ∃ cs : CommonStructures R, letI := cs ∃ M : CommonData R, M.Valid",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b10be299",
+  "group": "NN",
+  "result": "pass",
+  "note": "Read item, 4 new def nodes and modules, extended PerfectScalarTensorCoherence, PointFdQbar, StageSystem. Every node hypothesis matches an IntegralData clause (CoreMonoidal tau, Koszul symmetry, semilinear additive StageSystem with cocycle, identity/tower monoidality, phi identity/tower/tensor/unit squares with the canonical coherenceData tensorator). The existential rational and common-stage structures are all pinned: literal objects, the pure-tensor formula, 1⊗constraints, kappa/omega pinned by modelMap, phi by the integral square, G by phi-conjugation, sourceAt by mkHom classes, target tensor via the fully faithful realization. Formulas hold at every L and every base field; transport equation is explicit. HEq pins rest on provable ring-map equalities. Mechanical theorem stmt_dep: the statement uses coherenceData = .choose of the recorded ∃! theorem, so it genuinely depends on the constructed object → PASS on that point. Note: symmetry is a plain def in the theorem module (NG base). H13 dep repair: live file is a byte prefix; record superset (8+4 decls, by/note). Statements verbatim. No compile (no changes). Advisories: transitive owners of fieldDerivedScalarExtension/pointFiniteDimensional; Rat/D abbrev names."
  }
 }

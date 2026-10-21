@@ -249,3 +249,179 @@ theorem perfect_scalar_tensor_coherence : Coherence.{u, w} := by
 
 end PerfectScalar
 end DerivedCategory
+
+noncomputable section
+
+namespace DerivedCategory.PerfectScalar
+
+variable [∀ R : CommRingCat.{u}, HasDerivedCategory.{w} (ModuleCat.{u} R)]
+
+/-- The complete normalized scalar-coherence interface, with named projections.
+Source: Stacks 06Y6 and 0GWN (blueprint: lem-sf-perfect-scalar-tensor-coherence). -/
+structure CoherenceData where
+  preserves : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : D.{u, w} R),
+    IsPerfectRingComplex.{u, w} P → IsPerfectRingComplex.{u, w} ((B.{u, w} f).obj P)
+  tensorPerfect : ∀ (R : CommRingCat.{u}) (P Q : D.{u, w} R),
+    IsPerfectRingComplex.{u, w} P → IsPerfectRingComplex.{u, w} Q → IsPerfectRingComplex.{u, w} (P
+      ⊗ Q)
+  unitPerfect : ∀ (R : CommRingCat.{u}), IsPerfectRingComplex.{u, w} (𝟙_ (D.{u, w} R))
+  additive : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P Q : D.{u, w} R)
+      (_hP : IsPerfectRingComplex.{u, w} P) (_hQ : IsPerfectRingComplex.{u, w} Q) (a b : P ⟶ Q),
+    (B.{u, w} f).map (a + b) = (B.{u, w} f).map a + (B.{u, w} f).map b
+  linear : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P Q : D.{u, w} R)
+      (_hP : IsPerfectRingComplex.{u, w} P) (_hQ : IsPerfectRingComplex.{u, w} Q) (r : R) (a : P ⟶
+      Q),
+    (B.{u, w} f).map (r • a) = f.hom r • (B.{u, w} f).map a
+  model : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S)
+      (P : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ)
+      (_hlo : P.IsStrictlyGE a) (_hhi : P.IsStrictlyLE b)
+      (_hterms : ∀ n : ℤ, Module.Projective R (P.X n) ∧ Module.Finite R (P.X n)),
+    IsIso (modelMap.{u, w} f P)
+  tensor : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P Q : D.{u, w} R)
+      (_hP : IsPerfectRingComplex.{u, w} P) (_hQ : IsPerfectRingComplex.{u, w} Q),
+    (B.{u, w} f).obj (P ⊗ Q) ≅ (B.{u, w} f).obj P ⊗ (B.{u, w} f).obj Q
+  unit : ∀ {R S : CommRingCat.{u}} (f : R ⟶ S), (B.{u, w} f).obj (𝟙_ (D.{u, w} R)) ≅ 𝟙_ (D.{u, w} S)
+  comp : ∀ {R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T)
+      (P : D.{u, w} R) (_hP : IsPerfectRingComplex.{u, w} P),
+    (B.{u, w} g).obj ((B.{u, w} f).obj P) ≅ (B.{u, w} (f ≫ g)).obj P
+  identity : ∀ (R : CommRingCat.{u}) (P : D.{u, w} R) (_hP : IsPerfectRingComplex.{u, w} P),
+    (B.{u, w} (𝟙 R)).obj P ≅ P
+/-- Every naturality, finite-projective model and monoidal coherence equation of the
+existing interface, on the named comparisons. Source: Stacks 06Y6 and 0GWN
+(blueprint: lem-sf-perfect-scalar-tensor-coherence). -/
+def CoherenceData.Normalized (coh : CoherenceData.{u, w}) : Prop :=
+  (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P Q P' Q' : D.{u, w} R)
+      (hP : IsPerfectRingComplex.{u, w} P) (hQ : IsPerfectRingComplex.{u, w} Q)
+      (hP' : IsPerfectRingComplex.{u, w} P') (hQ' : IsPerfectRingComplex.{u, w} Q')
+      (a : P ⟶ P') (b : Q ⟶ Q'),
+    (B.{u, w} f).map (a ⊗ₘ b) ≫ (coh.tensor f P' Q' hP' hQ').hom =
+      (coh.tensor f P Q hP hQ).hom ≫ ((B.{u, w} f).map a ⊗ₘ (B.{u, w} f).map b)) ∧
+  (∀ {R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T)
+      (P Q : D.{u, w} R) (hP : IsPerfectRingComplex.{u, w} P) (hQ : IsPerfectRingComplex.{u, w} Q)
+      (a : P ⟶ Q),
+    (B.{u, w} g).map ((B.{u, w} f).map a) ≫ (coh.comp f g Q hQ).hom =
+      (coh.comp f g P hP).hom ≫ (B.{u, w} (f ≫ g)).map a) ∧
+  (∀ (R : CommRingCat.{u}) (P Q : D.{u, w} R)
+      (hP : IsPerfectRingComplex.{u, w} P) (hQ : IsPerfectRingComplex.{u, w} Q) (a : P ⟶ Q),
+    (B.{u, w} (𝟙 R)).map a ≫ (coh.identity R Q hQ).hom = (coh.identity R P hP).hom ≫ a) ∧
+  (∀ {R S : CommRingCat.{u}} (f : R ⟶ S)
+      (P Q : CochainComplex (ModuleCat.{u} R) ℤ) (a b c d : ℤ)
+      (_hPa : P.IsStrictlyGE a) (_hPb : P.IsStrictlyLE b)
+      (_hQc : Q.IsStrictlyGE c) (_hQd : Q.IsStrictlyLE d)
+      (_hPterms : ∀ n : ℤ, Module.Projective R (P.X n) ∧ Module.Finite R (P.X n))
+      (_hQterms : ∀ n : ℤ, Module.Projective R (Q.X n) ∧ Module.Finite R (Q.X n))
+      (hP : IsPerfectRingComplex.{u, w} (DerivedCategory.Q.obj P))
+      (hQ : IsPerfectRingComplex.{u, w} (DerivedCategory.Q.obj Q)),
+    (B.{u, w} f).map (Functor.LaxMonoidal.μ DerivedCategory.Q P Q) ≫
+        modelMap.{u, w} f (P ⊗ Q) ≫ DerivedCategory.Q.map
+          ((ModuleCat.extendScalars f.hom).mapCochainComplexμIso P Q).inv =
+      (coh.tensor f _ _ hP hQ).hom ≫ (modelMap.{u, w} f P ⊗ₘ modelMap.{u, w} f Q) ≫
+        Functor.LaxMonoidal.μ DerivedCategory.Q ((E.{u} f).obj P) ((E.{u} f).obj Q)) ∧
+  (∀ {R S : CommRingCat.{u}} (f : R ⟶ S),
+    (B.{u, w} f).map (Functor.LaxMonoidal.ε (DerivedCategory.Q (C := ModuleCat R))) ≫
+        modelMap.{u, w} f (𝟙_ _) ≫ DerivedCategory.Q.map
+          (ModuleCat.extendScalars f.hom).mapCochainComplexεIso.inv =
+      (coh.unit f).hom ≫ Functor.LaxMonoidal.ε (DerivedCategory.Q (C := ModuleCat S))) ∧
+  (∀ {R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T)
+      (P : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ)
+      (_hlo : P.IsStrictlyGE a) (_hhi : P.IsStrictlyLE b)
+      (_hterms : ∀ n : ℤ, Module.Projective R (P.X n) ∧ Module.Finite R (P.X n))
+      (hP : IsPerfectRingComplex.{u, w} (Q.obj P)),
+    (B.{u, w} g).map (modelMap.{u, w} f P) ≫ modelMap.{u, w} g ((E.{u} f).obj P) ≫
+        Q.map ((NatIso.mapHomologicalComplex
+          (ModuleCat.extendScalarsComp f.hom g.hom).symm (.up ℤ)).app P).hom =
+      (coh.comp f g _ hP).hom ≫ modelMap.{u, w} (f ≫ g) P) ∧
+  (∀ (R : CommRingCat.{u}) (P : CochainComplex (ModuleCat.{u} R) ℤ)
+      (a b : ℤ) (_hlo : P.IsStrictlyGE a) (_hhi : P.IsStrictlyLE b)
+      (_hterms : ∀ n : ℤ, Module.Projective R (P.X n) ∧ Module.Finite R (P.X n))
+      (hP : IsPerfectRingComplex.{u, w} (Q.obj P)),
+    modelMap.{u, w} (𝟙 R) P ≫
+        Q.map ((NatIso.mapHomologicalComplex (ModuleCat.extendScalarsId R) (.up ℤ)).app P).hom =
+      (coh.identity R _ hP).hom) ∧
+  (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P Q Z : D.{u, w} R)
+      (hP : IsPerfectRingComplex.{u, w} P) (hQ : IsPerfectRingComplex.{u, w} Q)
+      (hZ : IsPerfectRingComplex.{u, w} Z),
+    (coh.tensor f (P ⊗ Q) Z (coh.tensorPerfect R P Q hP hQ) hZ).hom ≫
+        (coh.tensor f P Q hP hQ).hom ▷ (B.{u, w} f).obj Z ≫
+        (α_ ((B.{u, w} f).obj P) ((B.{u, w} f).obj Q) ((B.{u, w} f).obj Z)).hom =
+      (B.{u, w} f).map (α_ P Q Z).hom ≫
+        (coh.tensor f P (Q ⊗ Z) hP (coh.tensorPerfect R Q Z hQ hZ)).hom ≫
+        (B.{u, w} f).obj P ◁ (coh.tensor f Q Z hQ hZ).hom) ∧
+  (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P Q : D.{u, w} R)
+      (hP : IsPerfectRingComplex.{u, w} P) (hQ : IsPerfectRingComplex.{u, w} Q),
+    (B.{u, w} f).map (symmetry.{u, w} R P Q).hom ≫ (coh.tensor f Q P hQ hP).hom =
+      (coh.tensor f P Q hP hQ).hom ≫ (symmetry.{u, w} S ((B.{u, w} f).obj P) ((B.{u, w} f).obj
+      Q)).hom) ∧
+  (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : D.{u, w} R)
+      (hP : IsPerfectRingComplex.{u, w} P),
+    (coh.tensor f (𝟙_ (D.{u, w} R)) P (coh.unitPerfect R) hP).hom ≫
+        (coh.unit f).hom ▷ (B.{u, w} f).obj P ≫ (λ_ ((B.{u, w} f).obj P)).hom = (B.{u, w} f).map (λ_
+      P).hom) ∧
+  (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : D.{u, w} R)
+      (hP : IsPerfectRingComplex.{u, w} P),
+    (coh.tensor f P (𝟙_ (D.{u, w} R)) hP (coh.unitPerfect R)).hom ≫
+        (B.{u, w} f).obj P ◁ (coh.unit f).hom ≫ (ρ_ ((B.{u, w} f).obj P)).hom = (B.{u, w} f).map (ρ_
+      P).hom) ∧
+  (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : D.{u, w} R)
+      (hP : IsPerfectRingComplex.{u, w} P),
+    (coh.comp (𝟙 R) f P hP).hom = (B.{u, w} f).map (coh.identity R P hP).hom) ∧
+  (∀ {R S : CommRingCat.{u}} (f : R ⟶ S) (P : D.{u, w} R)
+      (hP : IsPerfectRingComplex.{u, w} P),
+    (coh.comp f (𝟙 S) P hP).hom = (coh.identity S ((B.{u, w} f).obj P) (coh.preserves f P
+      hP)).hom) ∧
+  (∀ {R S T U : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T) (h : T ⟶ U)
+      (P : D.{u, w} R) (hP : IsPerfectRingComplex.{u, w} P),
+    (B.{u, w} h).map (coh.comp f g P hP).hom ≫ (coh.comp (f ≫ g) h P hP).hom =
+      (coh.comp g h ((B.{u, w} f).obj P) (coh.preserves f P hP)).hom ≫ (coh.comp f (g ≫ h) P
+      hP).hom) ∧
+  (∀ {R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T)
+      (P Q : D.{u, w} R) (hP : IsPerfectRingComplex.{u, w} P) (hQ : IsPerfectRingComplex.{u, w} Q),
+    (coh.comp f g (P ⊗ Q) (coh.tensorPerfect R P Q hP hQ)).hom ≫
+        (coh.tensor (f ≫ g) P Q hP hQ).hom =
+      (B.{u, w} g).map (coh.tensor f P Q hP hQ).hom ≫
+        (coh.tensor g ((B.{u, w} f).obj P) ((B.{u, w} f).obj Q) (coh.preserves f P hP)
+      (coh.preserves f
+      Q hQ)).hom ≫
+        ((coh.comp f g P hP).hom ⊗ₘ (coh.comp f g Q hQ).hom)) ∧
+  (∀ {R S T : CommRingCat.{u}} (f : R ⟶ S) (g : S ⟶ T),
+    (coh.comp f g (𝟙_ (D.{u, w} R)) (coh.unitPerfect R)).hom ≫ (coh.unit (f ≫ g)).hom =
+      (B.{u, w} g).map (coh.unit f).hom ≫ (coh.unit g).hom) ∧
+  (∀ (R : CommRingCat.{u}) (P Q : D.{u, w} R)
+      (hP : IsPerfectRingComplex.{u, w} P) (hQ : IsPerfectRingComplex.{u, w} Q),
+    (coh.tensor (𝟙 R) P Q hP hQ).hom ≫
+        ((coh.identity R P hP).hom ⊗ₘ (coh.identity R Q hQ).hom) =
+      (coh.identity R (P ⊗ Q) (coh.tensorPerfect R P Q hP hQ)).hom) ∧
+  (∀ (R : CommRingCat.{u}),
+    (coh.unit (𝟙 R)).hom = (coh.identity R (𝟙_ (D.{u, w} R)) (coh.unitPerfect R)).hom)
+
+/-- The balanced scalar comparisons with every equation and model normalization.
+Source: Stacks 06Y6 and 0GWN (blueprint: lem-sf-perfect-scalar-tensor-coherence).
+Proof: follow the thirteen steps of perfect_scalar_tensor_coherence: finite projective
+splittings give perfectness, tensor closure and the unit; bounded projectives are K-flat
+and K-projective. Descend ordinary balanced scalar maps on those models. On pure tensors
+the tensorator inserts one, its inverse multiplies scalars, the unit is multiplication,
+and the tower multiplies the two scalar factors. Check naturality, associativity,
+Koszul symmetry, both unitors, both tower units, four-ring associativity and the tensor
+and unit squares on homogeneous generators. Lift arbitrary derived arrows to homotopy
+classes of finite-projective models; full faithfulness preserves every equation.
+The unique normalized components are exactly the witnesses of the existing Coherence
+statement; collect these witnesses and their equations in the record, in the same order.
+For uniqueness, two normalized data agree on each bounded finite-projective model by their
+model equations. Every perfect object is isomorphic to such a model. Naturality transports
+this agreement to its tensor, tower and identity components, and to the coefficient unit.
+Faithfulness of localization on the models identifies the resulting derived maps. All
+remaining fields are propositions, so proof irrelevance identifies them. -/
+theorem perfect_scalar_tensor_coherence_data :
+    ∃! d : CoherenceData.{u, w}, d.Normalized := by
+  sorry
+
+/-- The scalar comparisons determined by their normalized finite-projective models.
+These model equations determine the data on perfect objects and arbitrary derived
+arrows between them; the record does not choose unspecified isomorphisms.
+Source: Stacks 06Y6 and 0GWN (blueprint: lem-sf-perfect-scalar-tensor-coherence). -/
+@[irreducible] def coherenceData : CoherenceData.{u, w} :=
+  perfect_scalar_tensor_coherence_data.exists.choose
+
+end DerivedCategory.PerfectScalar
+
+end
