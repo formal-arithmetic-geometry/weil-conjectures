@@ -17,9 +17,91 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [prop-weil-pbc-proetale-constant-ring-map] to regard every arrow in the two squares as a morphism of ringed pro-etale topoi with its specified constant-section coefficient map. By [lem-trf-constant-coefficient-composition], the coefficient map for any composite is exactly the successive coefficient map. Consequently [lem-trf-derived-pullback-coherence] applies with the very comparisons $c$ in the item, rather than with newly chosen composition isomorphisms. We will apply its displayed equation to the three composable triples $(u,r_Y,s_Y)$, $(r_X,u,s_Y)$, and $(r_X,s_X,u)$. Each triple consists of morphisms of schemes with the same finite commutative ring $A$; no geometric property of those morphisms is required.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-trf-constant-coefficient-composition",
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; agent pasting deduction from the normalized associativity statement lem-trf-derived-pullback-coherence"
+   }
+  },
+  {
+   "text": "Here is the convention for every equality transport in the calculation. For an equality $e:a=b$ of parallel scheme arrows write $E(e):P_a\\to P_b$ for its induced natural isomorphism. For $e:b=b'$ and $q:a=a'$ the composition comparisons of [lem-weil-pbc-proetale-derived-pullback-composition] satisfy\n$$(P_aE(e))c_{a,b}=c_{a,b'}E(e\\circ a),\\qquad (E(q)P_b)c_{a,b}=c_{a',b}E(b\\circ q).$$\nThese are substitution in the two indices of the specified family $c$: eliminating the equality makes both sides identical. Likewise $E(e'e)=E(e')E(e)$, inverse equalities give inverse transports, and whiskering gives the corresponding transport of composed functors. The equality defining the outer square can be taken to be\n$$(s_Yr_Y)u=s_Y(r_Yu)=s_Y(ur_X)=(s_Yu)r_X=(us_X)r_X=u(s_Xr_X).$$\nAny other given proof of this same equality induces the same transport, since equality proofs are propositions. In steps 3--5 we write the formulas after these substitutions, suppressing $E$ and retaining the canonical functor associators. The two displayed substitution identities specify how to insert every suppressed transport. This is an elementary equality calculation, not an extra pseudofunctor coherence hypothesis.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; agent pasting deduction from the normalized associativity statement lem-trf-derived-pullback-coherence"
+   }
+  },
+  {
+   "text": "Let $H=(P_{r_X}C_s)(C_rP_{s_Y})(P_ud_Y)$. Apply [lem-trf-derived-pullback-coherence] to $(j,h,k)=(u,r_Y,s_Y)$:\n$$(P_ud_Y)c_{u,t_Y}=(c_{u,r_Y}P_{s_Y})c_{r_Yu,s_Y}.$$\nRight-compose with $c_{u,t_Y}^{-1}$ and substitute into $H$. Expand $C_r=c_{r_X,u}c_{u,r_Y}^{-1}$ with the transport of step 2. The adjacent factors $c_{u,r_Y}^{-1}P_{s_Y}$ and $c_{u,r_Y}P_{s_Y}$ cancel. Substitution along $r_Yu=ur_X$ therefore gives\n$$H=(P_{r_X}C_s)(c_{r_X,u}P_{s_Y})c_{ur_X,s_Y}c_{u,t_Y}^{-1}.$$\nAll equations are equations of natural transformations; the use of the coherence statement componentwise at every input object gives that equation of transformations by extensionality.",
+   "uses": [
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; agent pasting deduction from the normalized associativity statement lem-trf-derived-pullback-coherence"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-pullback-coherence] to $(j,h,k)=(r_X,u,s_Y)$:\n$$(c_{r_X,u}P_{s_Y})c_{ur_X,s_Y}=(P_{r_X}c_{u,s_Y})c_{r_X,s_Yu}.$$\nInsert this equality into step 3. Expanding $C_s=c_{s_X,u}c_{u,s_Y}^{-1}$ cancels $P_{r_X}c_{u,s_Y}^{-1}$ against $P_{r_X}c_{u,s_Y}$, by functoriality of $P_{r_X}$. Substitute $s_Yu=us_X$ with the transport convention of step 2. We obtain\n$$H=(P_{r_X}c_{s_X,u})c_{r_X,us_X}c_{u,t_Y}^{-1}.$$\nThis uses the second square only to identify its two composite scheme arrows.",
+   "uses": [
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; agent pasting deduction from the normalized associativity statement lem-trf-derived-pullback-coherence"
+   }
+  },
+  {
+   "text": "Finally apply [lem-trf-derived-pullback-coherence] to $(j,h,k)=(r_X,s_X,u)$:\n$$(P_{r_X}c_{s_X,u})c_{r_X,us_X}=(c_{r_X,s_X}P_u)c_{s_Xr_X,u}=(d_XP_u)c_{t_X,u}.$$\nThus step 4 becomes $H=(d_XP_u)c_{t_X,u}c_{u,t_Y}^{-1}=(d_XP_u)C_t$. By step 2 the transport between the last two factors is exactly that along $t_Yu=ut_X$ in the definition of $C_t$. This proves the required natural-transformation equality on all of $D_Y$. The functor associators here only reassociate evaluation of three functors, as in the cited coherence equation; no square is assumed Cartesian.",
+   "uses": [
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; agent pasting deduction from the normalized associativity statement lem-trf-derived-pullback-coherence"
+   }
+  },
+  {
+   "text": "For the representative clause, take any K-flat complex $K$ of $A_Y$-modules with flat terms. By [lem-weil-pbc-ringed-pullback-preserves-kflat], each successive ordinary module pullback in the displayed formulas is again K-flat with flat terms, applying that statement repeatedly to the ringed pro-etale topoi with their canonical coefficient maps. By [lem-weil-pbc-proetale-derived-pullback-composition], every component $c_{a,b}$ occurring here is the class of its canonical termwise module-pullback map on these complexes. Its inverse is represented by the inverse termwise isomorphism, since localization preserves inverse identities. The ordinary termwise pullback computes the derived pullback by [def-weil-pbc-proetale-operations], so whiskering corresponds to applying that ordinary pullback to the termwise map. Equality transports also agree with termwise transports, by substitution (the reflexive equality gives identities in both constructions). Composing these maps gives precisely the two termwise pasting maps whose classes are the components of the two sides. This proves the claimed normalization without restricting $K$ to bounded complexes and without any flatness hypothesis on the scheme morphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; agent pasting deduction from the normalized associativity statement lem-trf-derived-pullback-coherence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-trf-constant-coefficient-composition",
+  "lem-trf-derived-pullback-coherence",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; agent pasting deduction from the normalized associativity statement lem-trf-derived-pullback-coherence"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,10 +151,52 @@
    "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For pro etale derived module pullbacks with constant finite coefficients, canonical composition comparisons satisfy pasting for two commuting endomorphism squares",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackComp, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc, PresheafOfModules.pullback_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, SheafOfModules.pullback_assoc, PresheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; inspected the relevant ordinary pullback candidates: these do not state the specified derived pro-etale pasting comparison",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback_assoc|pullbackComp|pseudofunctor_associativity",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; directory Mathlib/Algebra/Category/ModuleCat/Sheaf; inspected the relevant ordinary pullback candidates: these do not state the specified derived pro-etale pasting comparison",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback_assoc",
+   "results": "SheafOfModules.pullback_assoc; inspected the relevant ordinary pullback candidates: these do not state the specified derived pro-etale pasting comparison",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived pullback composition isomorphisms on pro etale constant module sheaves respect pasting two commuting squares",
+   "results": "CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_fst_assoc, CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_snd_assoc, CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_fst, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pullbackComp, CategoryTheory.Limits.pullbackRightPullbackFstIso_hom_snd, SheafOfModules.pullbackComp, CategoryTheory.Limits.leftSquareIsPullback; inspected the relevant ordinary pullback candidates: these do not state the specified derived pro-etale pasting comparison",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPullback|DerivedPullback|pullback.*pasting|pasting.*pullback",
+   "results": "Mathlib/CategoryTheory/Comma/Over/Pullback.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Categorical/Basic.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Pasting.lean; directory Mathlib/CategoryTheory; inspected the relevant ordinary pullback candidates: these do not state the specified derived pro-etale pasting comparison",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Horizontal composition of commutative squares under a contravariant pseudofunctor gives the composite square comparison, including equality transports",
+   "results": "CategoryTheory.CatCommSq.hComp, CategoryTheory.CatCommSq.hComp', CategoryTheory.CatCommSq.vComp, CategoryTheory.TwoSquare.vComp', CategoryTheory.CatCommSq.vComp', CategoryTheory.CatCommSq.hComp_iso_hom_app, CategoryTheory.Pseudofunctor.isoMapOfCommSq, CategoryTheory.TwoSquare.hComp_app; inspected the relevant ordinary pullback candidates: these do not state the specified derived pro-etale pasting comparison",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-pur-scheme-geometric-frobenius",
@@ -89,5 +213,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-factorized-pullback-square-pasting",
+  "worker": "stage1",
+  "summary": "Q60: retained the statement and canonical comparisons; proved pasting by three applications of the existing general associativity node, with explicit cancellation and equality-transport formulas. Checked every cited statement and the unbounded K-flat representative clause. No new nodes or Lean changes.",
+  "blueprint": "def-pur-scheme-geometric-frobenius, final displayed compatibility with f: realizes the pullback-composition pasting used in its current proof step 5, for the factorization of scheme Frobenius into absolute Frobenius and the geometric-Galois automorphism.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic constant-coefficient ringed-site input: its canonical coefficient map is invertible for every scheme morphism, including empty source."
+   },
+   {
+    "node": "lem-trf-constant-coefficient-composition",
+    "why": "Generic coefficient-map equality identifies the constant coefficient map of a composite with its successive coefficient maps; it is independent of Frobenius or trace data."
+   },
+   {
+    "node": "lem-trf-derived-pullback-coherence",
+    "why": "Generic associativity equation for exactly the same K-flat-normalized finite constant-coefficient derived pro-etale comparisons; three applications give the actual pasting argument here."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic canonical composition isomorphism and its K-flat termwise normalization; already named in the statement, and no node of this unit replaces this ringed-topos construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-topos K-flat preservation for the representative clause; no node of the unit supplies this homological tool."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "The existing ordinary, uncompleted derived pullback construction supplies termwise computation under the coefficient isomorphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-trf-constant-coefficient-composition",
+  "lem-trf-derived-pullback-coherence",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-f00210f2e",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-f00210f2e (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 6-step proof, no new nodes, statement and stmt_deps unchanged, no repair note, no cycle (the closures of the item and of lem-trf-derived-pullback-coherence contain neither the item nor def-pur-scheme-geometric-frobenius). I recomputed the three applications of lem-trf-derived-pullback-coherence, whose convention c_{f,g}:L(gf)*→Lf*Lg* is the item's. (u,r_Y,s_Y) gives (P_u d_Y)c_{u,t_Y}=(c_{u,r_Y}P_{s_Y})c_{r_Y u,s_Y}, and c_{u,r_Y}^{±1} cancels. (r_X,u,s_Y) cancels P_{r_X}c_{u,s_Y}^{±1}. (r_X,s_X,u) gives (d_X P_u)c_{t_X,u}. The equality transports compose to t_Y u=u t_X, so the result is (d_X P_u)C_t. The substitution identities of step 2 hold by eliminating the equality. Step 6 (K-flat representatives) follows from lem-weil-pbc-ringed-pullback-preserves-kflat, the termwise normalization of the binary composition comparison, and the definition of Lv* as the exact functor applied termwise. The coefficient identifications agree through lem-trf-constant-coefficient-composition and prop-weil-pbc-proetale-constant-ring-map (empty source included). The citer's use is consistent: def-pur-scheme-geometric-frobenius step 5 takes u=f, r=F^{(q)}, s=g_γ, Φ=g_γF, with A=O_E/ϖ^n finite commutative. This matches the blueprint main-20261015 display Lf*κ_Y=κ_X Lf* at lines 62-66. Stacks 0D6D (sites-cohomology.tex 3658-3681) checked; the pasting is correctly marked as an agent deduction, and no SGA source is used. No duplicate: the iterate-coherence and Frobenius-power-coherence nodes only cover iterates or powers of a single map. I accept the declared tool uses (the generic pseudofunctor associativity and the pbc coefficient/K-flat nodes). Small cases checked: identities, empty schemes, zero ring. Minor: the report mentions a citations.json that the commit does not carry."
  }
 }
