@@ -20103,3 +20103,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:59 L: merged deliver/NU/lem-sfb-base-coefficient-condensed-identification (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: merged deliver/NF/lem-weil-pbc-strict-perfect-ringed-pullback-model (reviewer PASS; first push; new nodes: 0)
 - 03:59 L: merged deliver/Q26/lem-sp-varying-ring-cartesian-comparison-lift-relabelling (reviewer PASS; first push; new nodes: 0)
+- 03:59 L: merged deliver/Q72/lem-sfb-qlbar-direct-image-comparison (reviewer FIX; first push; new nodes: 0)
