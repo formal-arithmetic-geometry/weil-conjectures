@@ -40,142 +40,116 @@
  ],
  "proof": [
   {
-   "text": "For each scheme $W$ put $C_{W,n}=(A_n)_W$ and let $\\mathscr S_W$ be the category of semilinear coefficient systems in [lem-coef-semilinear-derived-sections]: its objects have $C_{W,n}$-modules $M_n$ and $C_{W,n+1}$-linear maps $M_{n+1}\\to\\operatorname{Res}_{n+1,n}M_n$. Here is a simultaneous ringed-site realization. Take $\\mathcal V_W=W_{\\mathrm{proet}}\\times\\mathbf N_{\\ge1}$ with arrows $(V,k)\\to(U,n)$ given by $V\\to U$ and $k\\le n$, and coverings at fixed index. The underlying topos is the inverse-sequence topos of [lem-weil-pbc-diagram-site-realization]. The ring sheaf $C_W$ has value $C_W(U,n)=C_{W,n}(U)$, with restrictions the quotient homomorphisms followed by site restriction. Unpacking the module-sheaf definition [def-weil-sheaf-of-modules-category] identifies $\\operatorname{Mod}_{\\mathcal V_W}(C_W)$ with $\\mathscr S_W$; the sheaf condition at $(U,n)$ is exactly the sheaf condition at level $n$. Kernels and cokernels are componentwise, and [prop-pur-kinjective-resolutions-exist] applies to this small ringed site. Thus its unbounded derived category is available with simultaneous K-injective resolutions. The constant-sequence functor from sheaves on $W_{\\mathrm{proet}}$ is exact and left adjoint to limit: a map from a constant sequence is exactly a compatible family of maps. It therefore gives a morphism of topoi $\\pi_W:\\operatorname{Sh}(\\mathcal V_W)\\to\\operatorname{Sh}(W_{\\mathrm{proet}})$, with ring map $\\pi_W^{-1}B_W\\to C_W$ furnished by all the limit projections $B_W\\to C_{W,n}$.",
+   "text": "Apply the sequence-projection lemma on each site with $B_n=(A_n)_W$ and $B=B_W$. Write $\\mathcal R_X=L\\pi_X^*$. Its single K-flat system has evaluations $K\\otimes^L_{B_X}(A_n)_X=K_n$ [def-weil-integral-derived-reduction] and quotient maps $d_{m,n}=1\\otimes q_{m,n}$, with $\\operatorname{Res}_{m,n}d_{n,k}\\circ d_{m,n}=d_{m,k}$ before localization.",
    "uses": [
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-diagram-site-realization",
-    "def-weil-sheaf-of-modules-category",
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940 (section-derived-limits), product-site construction; Tag 079P (injectives.tex, theorem-K-injective-embedding-grothendieck) for the ringed-site resolution theorem. The varying ring is specified here."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-pullback] to the ringed morphism $\\pi_X$ from step 1. This gives an exact functor $\\mathcal R_X=L\\pi_X^*:D(B_X)\\to D(\\mathscr S_X)$. Choose a flat-term K-flat resolution $P\\to K$, which exists by [lem-pc-kflat-resolution]. The same pullback theorem computes $\\mathcal R_XK$ by the single strict system of complexes $P\\otimes_{B_X}C_{X,n}$: its transition for $m\\ge n$ is $\\mathrm{id}_P\\otimes q_{m,n}$, where $q_{m,n}:C_{X,m}\\to C_{X,n}$ is the coefficient quotient. This evaluates to the derived reduction $K_n$ of [def-weil-integral-derived-reduction]. For $m\\ge n\\ge k$, the chain-map identity $(\\mathrm{id}_P\\otimes q_{n,k})(\\mathrm{id}_P\\otimes q_{m,n})=\\mathrm{id}_P\\otimes q_{m,k}$ holds before localization. The pullback theorem gives natural comparisons for maps of resolutions, so this constructs a functor on derived morphisms and retains the strict quotient composition identities, rather than choosing a lift of a diagram in the ordinary derived category.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-pc-kflat-resolution",
+    "lem-pur-sequence-site-completion-projection",
     "def-weil-integral-derived-reduction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY (lemma-derived-base-change), with Tag 06YS (lemma-K-flat-resolution); explicit quotient maps on that K-flat model."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+    "place": "First proof sentence: coherent integral compact support before derived inverse limit; the cited generic lemmas give the extracted arguments."
    }
   },
   {
-   "text": "Let $\\overline X$ denote the middle scheme of the chosen compactification. The pro-etale morphisms induced by $j$ and $p$ are those of [def-weil-proetale-inverse-image]. For each $n$, [prop-weil-pbc-proetale-constant-ring-map] identifies $u^{-1}C_{W,n}$ with $C_{V,n}$ for $u:V\\to W$ equal to $j$ or $p$. These identifications preserve all quotient maps: both composites on a constant section $a\\in A_m$ give its image in $A_n$, and the maps of constant sheaves are uniquely determined by these sections. Thus the coefficient systems satisfy the inverse-image hypothesis of [lem-coef-semilinear-derived-sections]. For $j$, [lem-weil-proetale-weakly-etale-localization] identifies its site with the slice site. The extension theorem [lem-pur-site-restriction-module-adjunction-exact] gives exact $j_!$ at each coefficient; for each quotient $A_m\\to A_n$, the identification $j_!\\operatorname{Res}_{m,n}=\\operatorname{Res}_{m,n}j_!$ is explicitly part of [lem-sf-compact-support-restriction-of-scalars], applied to the chosen compactification. It leaves the underlying additive sheaf and maps unchanged, with the scalar action restricted. These compatible levelwise extensions form an exact functor $J:\\mathscr S_X\\to\\mathscr S_{\\overline X}$. Write $J_D$ for its exact derived descent. On the same system categories define $P^{-1,\\mathscr S}$ by levelwise $p^{-1}$ and $P_*^{\\mathscr S}$ by levelwise $p_*$. The compatible coefficient identifications just checked make these functors on semilinear systems. Their componentwise adjunction bijections restrict to compatible families: naturality of the unit and counit identifies the transition-commutativity condition on either side. Thus $P^{-1,\\mathscr S}\\dashv P_*^{\\mathscr S}$, with exact left adjoint because inverse image and system exactness are componentwise. Let $RP_*^{\\mathscr S}$ be the total right derived functor computed using a K-injective resolution of the entire system. The adjunction $P^{-1,\\mathscr S}\\dashv P_*^{\\mathscr S}$, the derived adjunction $P^{-1,\\mathscr S}\\dashv RP_*^{\\mathscr S}$ and natural isomorphisms $e_nRP_*^{\\mathscr S}\\cong Rp_*e_n$, compatible with the evaluated units, counits and quotient maps, are stated in this unit by [lem-pur-coefficient-system-derived-comparison], applied with $O=R$, $\\lambda=\\varpi$, $u$ the pro-etale morphism of $p$ and the constant rings $(A_n)$. The simultaneous-section theorem [lem-coef-semilinear-derived-sections] supplies its natural evaluation identifications with the separately derived $Rp_{*,n}$, on objects and morphisms, together with the coefficient comparisons and their composition homotopies. We apply the geometric inverse-image/right-adjoint and open-extension clauses of that theorem, which hold for every semilinear section, including the possibly noncartesian output of $J_D$. The added cartesian-first-input hypothesis in its fiberwise internal-Hom clause has no role in this composite of derived reduction, open extension and proper direct image. This is an application to the separately derived proper functor after $J_D$.",
+   "text": "The constant-ring isomorphisms for $j,p$ preserve quotients: both maps agree on constant sections. Apply the open-system lemma to obtain $J$. Set $G=Rp_{*,\\bullet}$. The DVR lemma gives $\\varpi\\ne0$ in the subring $R\\subset E$, hence a non-zero-divisor; the profinite-tower lemma gives $R\\cong\\lim A_n$. Thus the system comparison applies and gives $e_nG\\cong Rp_{*,n}e_n$.",
    "uses": [
-    "def-weil-proetale-inverse-image",
+    "lem-pur-sequence-site-open-extension",
     "prop-weil-pbc-proetale-constant-ring-map",
-    "lem-coef-semilinear-derived-sections",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-integers-profinite-tower",
     "lem-pur-coefficient-system-derived-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), in Section 03DH; proetale.tex Tag 09AE. Coherent derived operations are the additional agent-formulated assertion of lem-coef-semilinear-derived-sections."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+    "place": "First proof sentence: coherent integral compact support before derived inverse limit; the cited generic lemmas give the extracted arguments."
    }
   },
   {
-   "text": "Define $U_Y:\\mathscr S_Y\\to\\operatorname{Tow}(\\mathcal A_Y)$ by restricting the scalar action at level $n$ along $B_Y\\to C_{Y,n}$. The transition is $B_Y$-linear because $q_{m,n}\\pi_m=\\pi_n$. The underlying additive sheaves, kernels and cokernels are unchanged, so $U_Y$ is exact, as in [lem-weil-restriction-of-scalars-exact]. By [lem-weil-pbc-exact-functor-derived-factorization] it descends to an exact functor $(U_Y)_D$ on unbounded derived categories. Set $\\mathcal T_f^c=(U_Y)_D\\circ RP_*^{\\mathscr S}\\circ J_D\\circ\\mathcal R_X$. Step 2 and the evaluation identifications of [lem-coef-semilinear-derived-sections] now give natural isomorphisms $\\operatorname{ev}_n\\mathcal T_f^c K\\cong\\operatorname{Res}_n Rp_{*,n}j_!K_n=\\operatorname{Res}_n Rf^c_{!,n}K_n$, where the last equality is the composite definition in [def-compact-support-direct-image-detailed]. Every displayed identification is between functors, so it also identifies their maps on arbitrary derived morphisms.",
+   "text": "Set $\\mathcal T_f^c=D(U_Y)G D(J)\\mathcal R_X$. Evaluating its four factors gives $e_n\\mathcal T_f^c\\cong\\operatorname{Res}_nRp_{*,n}j_!K_n=\\operatorname{Res}_nRf^c_{!,n}K_n$, naturally on morphisms. Exact descent and K-injective right derivation are triangulated, as is $L\\pi_X^*$. The composite theorem equips $\\mathcal T_f^c$ with the composite shift isomorphism.",
    "uses": [
-    "lem-weil-restriction-of-scalars-exact",
+    "lem-pur-sequence-site-completion-projection",
+    "lem-pur-sequence-site-open-extension",
+    "def-compact-support-direct-image-detailed",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-coef-semilinear-derived-sections",
-    "def-compact-support-direct-image-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 015F (derived.tex, lemma-right-derived-exact-functor), with Bhatt-Scholze Definition 6.7.6 for the separately derived compact-support composite; the coherent section model is as cited."
-   }
-  },
-  {
-   "text": "The four factors defining $\\mathcal T_f^c$ are triangulated. This holds for $\\mathcal R_X$ by the exact derived pullback theorem in step 2 and for $J_D$ and $(U_Y)_D$ by exact descent in steps 3-4. For $RP_*^{\\mathscr S}$, the source and target are module categories on the small ringed system sites of step 1, so [prop-pur-kinjective-resolutions-exist] supplies K-injectives in the required unbounded categories. The additive functor $P_*^{\\mathscr S}$ therefore has a triangulated right derived functor by [lem-pc-right-derived-functor-triangulated]. Applying [lem-weil-pbc-triangulated-functor-composite] successively proves exactness of the displayed composite with its composite shift isomorphism. This proves exactness in the actual derived system/tower category.",
-   "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "lem-pc-right-derived-functor-triangulated",
     "lem-weil-pbc-triangulated-functor-composite"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 014Y (lemma-composition-exact) and 070K (lemma-enough-K-injectives-implies); also the closed project instances for right-derived triangulatedness cited by lem-pc-right-derived-functor-triangulated."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+    "place": "First proof sentence: coherent integral compact support before derived inverse limit; the cited generic lemmas give the extracted arguments."
    }
   },
   {
-   "text": "Write $F_n=Rf^c_{!,n}$, and write $d_{m,n}:K_m\\to\\operatorname{Res}_{m,n}K_n$ for the map in step 2. Let $\\chi_{m,n}:F_m\\operatorname{Res}_{m,n}\\xrightarrow{\\sim}\\operatorname{Res}_{m,n}F_n$ be the specified comparison of [lem-sf-compact-support-restriction-of-scalars], applied to $A_m\\twoheadrightarrow A_n$. Under the simultaneous-section model of [lem-coef-semilinear-derived-sections], $J_D$ carries $d_{m,n}$ to $j_!d_{m,n}$ and its right derived direct image carries this to $Rp_{*,m}(j_!d_{m,n})$ followed by the direct-image coefficient comparison. The latter is the canonical derived adjunction comparison: the cited section theorem specifies it by the derived counit transpose and preserves adjunction transposes on evaluation. The normalization can also be checked against [lem-weil-proetale-direct-image-restriction-of-scalars]: for a K-injective $C_{\\overline X,n}$-complex $I$ and a K-injective replacement $\\operatorname{Res}_{m,n}I\\to H$ over $C_{\\overline X,m}$, its direct-image comparison is the inverse of $p_*\\operatorname{Res}_{m,n}I=\\operatorname{Res}_{m,n}p_*I\\to p_*H$. The adjunction comparison has this normalization: its composite with that replacement map is the identity after localization, by naturality of the derived counit and the adjunction triangle identity. Hence it is that same inverse, with no assumption that $\\operatorname{Res}_{m,n}I$ is K-injective. Here the simultaneous-section theorem supplies the coefficient-projection comparison as a coherent map on arbitrary sections; its invertibility is supplied separately by [lem-weil-proetale-direct-image-restriction-of-scalars]. Thus this use stays within the current theorem's geometric-comparison clause and its stated scope. The compact-support comparison $\\chi_{m,n}$ is precisely the composite of that direct-image comparison and the underlying identity $j_!\\operatorname{Res}_{m,n}=\\operatorname{Res}_{m,n}j_!$, as stated in [lem-sf-compact-support-restriction-of-scalars]. Hence the resulting tower transition is\n$$t_{m,n}=\\operatorname{Res}_m\\bigl(\\chi_{m,n,K_n}\\circ F_m(d_{m,n})\\bigr),$$\nwith $\\operatorname{Res}_m\\operatorname{Res}_{m,n}=\\operatorname{Res}_n$. At $m=n+1$ this is exactly the transition required by the statement; it is natural in $K$ because all its constituents are natural maps in the cited system construction.",
+   "text": "Put $F_n=Rf^c_{!,n}$. Apply the new restriction-transition lemma to $p$ and $D(J)\\mathcal R_XK$. Its K-injective normalization is the value clause of [lem-weil-proetale-direct-image-restriction-of-scalars] for the proper map $p$ and $A_m\\to A_n$, i.e. the proper comparison used in $\\chi$, since both natural isomorphisms agree on K-injective representatives; the open-system lemma identifies its input transition. Hence the evaluated tower transition is $t_{m,n}=\\operatorname{Res}_m(\\chi_{m,n,K_n}\\circ F_m(d_{m,n}))$, exactly the specified map.",
    "uses": [
-    "lem-coef-semilinear-derived-sections",
+    "lem-pur-system-pushforward-restriction-transition",
+    "lem-pur-sequence-site-open-extension",
     "lem-sf-compact-support-restriction-of-scalars",
     "lem-weil-proetale-direct-image-restriction-of-scalars"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-    "place": "Proof, first sentence, made precise using the canonical finite-coefficient comparison; sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition) underlies the cited comparison."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+    "place": "First proof sentence: coherent integral compact support before derived inverse limit; the cited generic lemmas give the extracted arguments."
    }
   },
   {
-   "text": "For $m\\ge n\\ge k$, write $\\chi_{a,b,L}:F_a(\\operatorname{Res}_{a,b}L)\\to\\operatorname{Res}_{a,b}F_b(L)$, so its input $L$ is a complex over $A_b$. Before final restriction to $B_Y$, the composite transition has source $F_mK_m$, target $\\operatorname{Res}_{m,k}F_kK_k$, and is\n$$\\operatorname{Res}_{m,n}(\\chi_{n,k,K_k})\\circ\\operatorname{Res}_{m,n}F_n(d_{n,k})\\circ\\chi_{m,n,K_n}\\circ F_m(d_{m,n}).$$\nNaturality at the $A_n$-linear map $d_{n,k}:K_n\\to\\operatorname{Res}_{n,k}K_k$ gives\n$$\\operatorname{Res}_{m,n}F_n(d_{n,k})\\circ\\chi_{m,n,K_n}=\\chi_{m,n,\\operatorname{Res}_{n,k}K_k}\\circ F_m(\\operatorname{Res}_{m,n}d_{n,k}).$$\nThe transitivity clause of [lem-sf-compact-support-restriction-of-scalars] gives\n$$\\operatorname{Res}_{m,n}(\\chi_{n,k,K_k})\\circ\\chi_{m,n,\\operatorname{Res}_{n,k}K_k}=\\chi_{m,k,K_k}.$$\nSubstitution therefore identifies the composite with\n$$\\chi_{m,k,K_k}\\circ F_m\\bigl(\\operatorname{Res}_{m,n}(d_{n,k})\\circ d_{m,n}\\bigr)=\\chi_{m,k,K_k}\\circ F_m(d_{m,k}),$$\nwhere the last equality is the quotient chain-map identity in step 2. Applying $\\operatorname{Res}_m$ gives $t_{n,k}t_{m,n}=t_{m,k}$. Identity quotients give identity transitions. Induction on $m-n$ identifies every composite of successive transitions with the single quotient-induced map in step 6. The section model in [lem-coef-semilinear-derived-sections] retains these composition identities and their homotopies throughout; this calculation identifies their evaluated maps and never infers equality of derived system maps from equality of their evaluations.",
+   "text": "Before restriction to $B_Y$, write $r_{m,n}=\\operatorname{Res}_{m,n}$. For $m\\ge n\\ge k$, naturality at $d_{n,k}$ and the coefficient-composition law give\n$$r_{m,n}(\\chi_{n,k,K_k})\\,r_{m,n}F_n(d_{n,k})\\,\\chi_{m,n,K_n}\\,F_m(d_{m,n})\n=r_{m,n}(\\chi_{n,k,K_k})\\,\\chi_{m,n,r_{n,k}K_k}\\,F_m(r_{m,n}d_{n,k})\\,F_m(d_{m,n})\n=\\chi_{m,k,K_k}\\,F_m(r_{m,n}d_{n,k}\\circ d_{m,n})\n=\\chi_{m,k,K_k}\\,F_m(d_{m,k}).$$\nApply $\\operatorname{Res}_m$ to obtain $t_{n,k}\\circ t_{m,n}=t_{m,k}$. Identity quotients give identities; induction identifies successive composites with the direct quotient. These identify the evaluated transitions of the already constructed system, with no inference that evaluations detect equality of arbitrary system morphisms. All constituent comparisons are natural in $K$.",
    "uses": [
-    "lem-sf-compact-support-restriction-of-scalars",
-    "lem-coef-semilinear-derived-sections"
+    "lem-sf-compact-support-restriction-of-scalars"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-    "place": "Proof, first sentence: all quotient transition compatibilities of the coherent input tower, spelled out from the transitive comparison and quotient identities."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+    "place": "First proof sentence: coherent integral compact support before derived inverse limit; the cited generic lemmas give the extracted arguments."
    }
   },
   {
-   "text": "Finally the scalar $r\\in R$ acts on the entire coefficient system by the compatible constant sections $r\\bmod\\varpi^n$, and on $B_W$ by their inverse-limit section. At the complex level, tensor pullback sends multiplication by $r$ to multiplication by its image, since $(rx)\\otimes a=x\\otimes(ra)$; extension by zero and coefficient restriction keep that multiplication on their underlying additive sheaves; direct image sends the same sheaf map to itself on sections. The derived constructions retain these identities: on K-flat representatives the first identity is the same tensor formula, and on K-injective representatives multiplication by $r$ is the actual chain map $r\\,\\mathrm{id}$. The bijection of [lem-weil-pbc-kinjective-hom-derived] identifies it with its derived morphism, so computing the right derived functor sends it to $r\\,\\mathrm{id}$. Resolution comparison maps are module maps, hence commute with these scalar endomorphisms, as do their inverses after localization. These are identities on the system complexes, not only at individual levels. Each factor is additive (exact/triangulated by the earlier steps), and therefore for a morphism $a:K\\to L$ one has $\\mathcal T_f^c(ra)=\\mathcal T_f^c((r\\,\\mathrm{id}_L)a)=r\\mathcal T_f^c(a)$. Together with additivity this is precisely $R$-linearity [def-weil-linear-functor].",
+   "text": "Compatible constant sections of $R$ act on all ringed sites. Apply the two new scalar lemmas to $L\\pi_X^*$ and $G$. The open lemma gives scalar preservation for $J$; $U_Y$ keeps the same additive maps and scalar actions. Exact linear descent gives linearity of $D(J),D(U_Y)$. Thus all four factors, and their composite, are $R$-linear for the induced scalar structures.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-linear-functor"
+    "lem-pur-ringed-derived-pullback-linear",
+    "lem-pur-ringed-derived-pushforward-linear",
+    "lem-pur-sequence-site-open-extension",
+    "lem-pur-sequence-site-completion-projection",
+    "lem-cbc-exact-linear-derived-functor",
+    "lem-weil-linear-abelian-derived-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-    "place": "Proof, first sentence: scalar linearity of the coherent composite, proved here on simultaneous complex and resolution models."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+    "place": "First proof sentence: coherent integral compact support before derived inverse limit; the cited generic lemmas give the extracted arguments."
    }
   }
  ],
  "proof_deps": [
-  "lem-coef-semilinear-derived-sections",
-  "lem-weil-pbc-diagram-site-realization",
-  "def-weil-sheaf-of-modules-category",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-pc-kflat-resolution",
+  "lem-pur-sequence-site-completion-projection",
   "def-weil-integral-derived-reduction",
-  "def-weil-proetale-inverse-image",
+  "lem-pur-sequence-site-open-extension",
   "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-restriction-of-scalars-exact",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integers-profinite-tower",
+  "lem-pur-coefficient-system-derived-comparison",
   "def-compact-support-direct-image-detailed",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "prop-pur-kinjective-resolutions-exist",
   "lem-pc-right-derived-functor-triangulated",
   "lem-weil-pbc-triangulated-functor-composite",
+  "lem-pur-system-pushforward-restriction-transition",
   "lem-sf-compact-support-restriction-of-scalars",
-  "lem-pur-coefficient-system-derived-comparison",
   "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-linear-functor"
+  "lem-pur-ringed-derived-pullback-linear",
+  "lem-pur-ringed-derived-pushforward-linear",
+  "lem-cbc-exact-linear-derived-functor",
+  "lem-weil-linear-abelian-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-compact-support-representative-independence.md",
-  "place": "Proof, first sentence; coherent construction using the ringed system site, exact open extension, and separately derived proper direct image. General section-model coherence is supplied by the existing lem-coef-semilinear-derived-sections."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md",
+  "place": "First proof sentence: short assembly from the extracted sequence-projection, open-extension, restriction-transition and scalar-linearity lemmas."
  },
  "mathlib_searches": [
   {
@@ -353,6 +327,54 @@
    "results": "8 hits; SheafOfModules.Presentation.map, localCohomology.diagram, Ext, Profinite.NobelingProof.succ_exact, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Sheaf.H, CategoryTheory.Abelian.Ext.covariantSequence_exact, CategoryTheory.Sheaf.cohomologyPresheafFunctor",
    "date": "2026-10-16",
    "verdict": "No match: grep returned no declarations; LeanFinder returned module presentations, local cohomology diagrams and Ext/sheaf-cohomology constructions, not the coherent derived compact-support reduction tower."
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*(tower|system)|compactSupport.*[Tt]ower|reduction.*tower",
+   "subdirectory": "",
+   "results": "1 hits; Mathlib/Algebra/Ring/CompTypeclasses.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic exact-derived functors, underived sheaf pushforwards, condensed sheaves or unrelated semilinear typeclasses; none constructs this varying-coefficient compact-support functor into the derived category of strict towers."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support of sheaves as a functor to strict inverse systems of coefficient reductions",
+   "subdirectory": "",
+   "results": "8 hits; CondensedSet.LocallyConstant.functorFullyFaithful, LightCondSet.LocallyConstant.functor, Condensed.discrete, CompHausLike.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstant.counit_app_val, CondensedSet.LocallyConstant.iso, LightProfinite.hasSheafify_type",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic exact-derived functors, underived sheaf pushforwards, condensed sheaves or unrelated semilinear typeclasses; none constructs this varying-coefficient compact-support functor into the derived category of strict towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent derived compact support functor with quotient coefficient rings taking values in the derived category of strict inverse systems of sheaves of modules",
+   "subdirectory": "",
+   "results": "8 hits; CondensedMod.ofSheafCompHaus, CondensedMod.ofSheafProfinite, DerivedCategory.Q, localCohomology.diagram, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic exact-derived functors, underived sheaf pushforwards, condensed sheaves or unrelated semilinear typeclasses; none constructs this varying-coefficient compact-support functor into the derived category of strict towers."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "subdirectory": "",
+   "results": "12 hits; SheafOfModules.pushforwardId, SheafOfModules.pushforward, SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver, SheafOfModules.overPushforwardOverAdj, SheafOfModules.isLeftAdjoint_pushforward_of_isIso, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic exact-derived functors, underived sheaf pushforwards, condensed sheaves or unrelated semilinear typeclasses; none constructs this varying-coefficient compact-support functor into the derived category of strict towers."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|def pushforward",
+   "subdirectory": "Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "results": "5 hits; 16, 36, 39, 41, 42",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic exact-derived functors, underived sheaf pushforwards, condensed sheaves or unrelated semilinear typeclasses; none constructs this varying-coefficient compact-support functor into the derived category of strict towers."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact linear functor on unbounded derived categories of ringed topoi obtained by simultaneous scalar extension open extension by zero and right derived pushforward",
+   "subdirectory": "",
+   "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapExactFunctor_smul, DerivedCategory.instLinear, DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are generic exact-derived functors, underived sheaf pushforwards, condensed sheaves or unrelated semilinear typeclasses; none constructs this varying-coefficient compact-support functor into the derived category of strict towers."
   }
  ],
  "mathlib_match": null,
@@ -378,35 +400,79 @@
   }
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-weil-compact-support-reduction-tower-functor",
   "worker": "stage1",
-  "summary": "Audited the imported eight-step construction against the current DAG and the semilinear-section statement. Every proof step cites existing nodes for its ringed-system realization, K-flat reduction, open extension, derived proper pushforward, restriction-of-scalars comparison, transition transitivity, exactness, and scalar linearity; no additional lemma node is needed. No project declaration with this item statement exists in the read-only source checkout. The previous tool-use declarations are retained because these are generic framework results absent from this unit.",
-  "blueprint": "Realizes the first proof sentence of lem-weil-compact-support-representative-independence in the current six-functors blueprint: the coherent strict reduction tower underlying the integral compact-support operation, before derived limit and rational transport.",
+  "summary": "Repair of all three return points: five new statement-only lemmas isolate the ringed sequence constant/limit projection, geometric-versus-levelwise open extension, normalized restriction-transition identification, and derived pullback/pushforward scalar linearity. Both Lean-signature statement dependencies are restored. The non-zero-divisor and completion discharge is retained. The item is a short assembly with unchanged mathematical and Lean statements. Continuation audit checked the retained five-helper repair against the current read-only head and the eight returned proof steps. The elementary transition-composition calculation is now displayed explicitly in the short assembly; no argument is removed and all helper statements remain unsplit.",
+  "blueprint": "First proof sentence of main-20261015 lem-weil-compact-support-representative-independence, the coherent exact linear finite-coefficient compact-support construction before derived inverse limit.",
   "tool_uses": [
    {
-    "node": "lem-coef-semilinear-derived-sections",
-    "why": "Generic coherent varying-ring section realization and geometric operations, including evaluation and coefficient-comparison normalization; the unit has no such enhanced section theorem."
+    "node": "def-weil-scheme-morphism-properties",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
    },
    {
-    "node": "lem-weil-pbc-diagram-site-realization",
-    "why": "Generic product-site realization of strict diagrams; used only to construct the sequence site, not to replace any compact-support argument."
+    "node": "def-weil-l-adic-coefficient-extension",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
    },
    {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Generic exact unbounded derived pullback and K-flat computation for the projection of ringed sequence sites; the unit has no general projection theorem."
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
    },
    {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic flat-term K-flat resolution existence for arbitrary small ringed sites; used to compute the one coherent reduction functor."
+    "node": "def-weil-inverse-system",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
    },
    {
-    "node": "def-weil-proetale-inverse-image",
-    "why": "Generic foundational construction needed by the ringed-system proof; no step of the compact-support unit is replaced."
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "def-weil-compactifications-refinements",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "def-pc-sheaf-restrict-scalars",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "def-weil-pbc-bounded-constructible-tower",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
    },
    {
     "node": "prop-weil-pbc-proetale-constant-ring-map",
-    "why": "Generic inverse-image identification for finite constant coefficient rings, preserving their specified constant sections."
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "lem-weil-pbc-triangulated-functor-composite",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
+   },
+   {
+    "node": "lem-cbc-exact-linear-derived-functor",
+    "why": "Generic ringed-site, coefficient, resolution or categorical descent tool; this applies the unit route reduction, open extension and separately derived proper image."
    }
   ]
  },
@@ -417,15 +483,31 @@
   "lem-pc-kflat-resolution",
   "def-weil-proetale-inverse-image",
   "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-weil-proetale-direct-image-restriction-of-scalars"
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integers-profinite-tower",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-triangulated-functor-composite",
+  "lem-cbc-exact-linear-derived-functor"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q35-85847f4c3",
-  "group": "Q35",
+  "reviewer": "NT-cc-Q05-cfbdf84c4",
+  "group": "Q05",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-85847f4c3 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, every cited statement and stmt_dep, the unit sk-def-sf-operations and the blueprint source. The source is lem-weil-compact-support-representative-independence; its master and main-20261015 texts are identical, and its first proof sentence silently assumes a coherent tower lift. The item states that lift without weakening anything: completed B_Y-modules (not the discrete O_E), levels Res_n Rp_{*,n} j_! K_n, transitions given by the quotient map and the specified chi of lem-sf-compact-support-restriction-of-scalars, whose hypotheses (separated finite type, a compactification, ell invertible on Y) all hold. Small cases f=id, X empty and an open immersion check out. The key non-elementary claim, e_n RP_* = Rp_{*,n} e_n, I verified independently: evaluation has a non-exact left adjoint L_n, so it does not preserve K-injectives, but P^{-1} L_n = L_n p^{-1} forces the right adjoints to agree, and the step never assumes K-injective evaluations. The chi normalization in step 6 against the K-injective value clause of lem-weil-proetale-direct-image-restriction-of-scalars is correct, and the step-7 substitution re-derives. Repair: step 3 re-proved inline, and otherwise took from the off-unit lem-coef-semilinear-derived-sections, what the in-unit node lem-pur-coefficient-system-derived-comparison already states: the system adjunction, Ru_{A,*} via system K-injectives, and e_n Ru_* = Ru_* e_n compatible with units, counits and quotient maps (hypotheses O=R, lambda=varpi, u=p_proet). I added that citation to the text, uses and proof_deps; there is no cycle. Long steps: step 3 is a chain of cited constructions whose only hidden lemma is now cited; step 6 is one argument; both stay. Duplicate search: lem-sf-integral-compactification-system-realization, lem-coef-integral-compact-support and lem-coef-derived-system-evaluation-calculus are not duplicates. I accept the six declared tool uses. Two unused stmt_deps (def-weil-pbc-bounded-constructible-tower, lem-weil-derived-scalar-extension-restriction-adjunction) are noted but left in place because of the existing stage-2 Lean record. No SGA source is used.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-cfbdf84c4 (reviewer sub-agent of L); spot-checked: I read the 2026-10-21 human re-split note (12565-char proof, ≥4 new statement-only nodes, assembly ≤3000 chars), the live 8-step proof, the 6-step item, all 5 new nodes and every cited statement. The statement is byte-identical to live, both Lean-signature stmt_deps are present, the item is not in route-pivot-dropped.txt, and nothing cites SGA. The re-split is fulfilled and no old argument was cut. Old 1-2 and old 4's U went to lem-pur-sequence-site-completion-projection, checked against Stacks 0940 (sites-cohomology l.5016: constant ⊣ lim, fixed-index covers) and 06YY (π^{-1}P K-flat, levelwise P⊗B_n). Old 3's open extension went to lem-pur-sequence-site-open-extension (03DI/03DJ; the slice at constant h_V is levelwise; tested V=∅). Its system adjunction and evaluation go through lem-pur-coefficient-system-derived-comparison. Its hypotheses hold: ϖ is a non-zero-divisor in the DVR and R≅lim A_n. Old 6 went to lem-pur-system-pushforward-restriction-transition: δ=d^{-1} from lem-weil-pbc-ring-sheaf-change-adjunction has the right direction, m=n gives id, and the scalar-transpose identity is the conjugate-mate relation with the specified b. Old 7 is item step 5, a full 3-equality calculation I checked (χ naturality at d_{n,k}, transitivity, strict quotient identity). Old 8 went to the two R-linearity nodes (K-flat and K-injective computations with compatible constant sections; 070K). They are true, and the DAG has no existing linearity node. Delivery 55a1d9cc had the same five nodes; svc.log shows it was superseded by this push before its FIX landed, so that FIX was lost. FIX (C1/C4), re-applied on the current head: step 4 now cites lem-weil-proetale-direct-image-restriction-of-scalars, whose K-injective value clause is δ's normalization, and states that two natural isomorphisms agreeing on K-injective representatives are equal. Old step 6 carried this check. Step 1 now cites def-weil-integral-derived-reduction for K_n. proof_deps are updated, and the proof is 2780 chars (max step 779). Advisory: the module equivalence in completion-projection is the content of existing lem-pur-system-ringed-sequence-site, and its DVR case is R_W of lem-coef-derived-system-evaluation-calculus. The open node overlaps the j_! clause of lem-coef-semilinear-derived-sections. Both nodes generalize those statements, so neither is a duplicate. Tool_uses are inherited and accepted.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",

@@ -20260,3 +20260,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:09 L: returned deliver/Q16/lem-weil-pbc-constant-tower-pushforward-normalization (reviewer RETURN: L: independent stage-2 immutable head ec2bbeab8be6: H13 (+H4/H9): the delivery rebinds the landed record of lem-weil-rin)
 - 04:09 L: merged deliver/Q31/lem-sfb-rational-derived-scalar-invertible (reviewer PASS; first push; new nodes: 1)
 - 04:09 L: merged deliver/N7/lem-sfb-ring-isomorphism-tensor-transport (reviewer FIX; first push; new nodes: 0)
+- 04:09 L: merged deliver/Q05/lem-weil-compact-support-reduction-tower-functor (reviewer FIX; after a return; new nodes: 5)
