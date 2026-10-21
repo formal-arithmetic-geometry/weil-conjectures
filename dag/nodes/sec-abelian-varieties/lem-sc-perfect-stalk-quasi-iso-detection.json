@@ -43,7 +43,7 @@
  ],
  "proof": [
   {
-   "text": "The open stalk functor preserves zero objects and carries each finite-free retraction to a retraction of a projective module, by openModuleStalk_free_projective. Thus its image of each strictly perfect complex is bounded above with projective terms. Mathlib CochainComplex.isKProjective_of_projective and CochainComplex.IsKProjective.quasiIso_iff give a homotopy equivalence whose forward map is the given stalk map of f.",
+   "text": "Taking stalks carries each finite-free retraction to a projective stalk module, so the stalk complexes are K-projective by CochainComplex.isKProjective_of_projective. Mathlib's quasi-isomorphism criterion supplies a homotopy equivalence whose forward map is the given stalk map of f.",
    "uses": [
     "def-pc-perfect-complex",
     "def-sc-open-module-stalk-functor",
@@ -52,14 +52,15 @@
    "elementary": true
   },
   {
-   "text": "Apply the existing source stalk chain-map lifting theorem to the inverse of that homotopy equivalence, with Q as source and P as target. This supplies an affine V and a chain map g on V in the canonical comparison coordinates. Define c to be that canonical termwise openModuleStalkRestrictionComparison. Naturality of c identifies the stalk of the restriction of f composed with g with c(P).hom composed with the stalk forward-inverse composite composed with c(P).inv. Similarly for the inverse-forward composite at Q. Compose each given homotopy with these comparison maps and simplify inverse isomorphism identities. The original hU binder stays unchanged but is unused.",
+   "text": "Lift the inverse homotopy equivalence by the existing affine perfect open stalk chain-map lifting theorem. Use the canonical openModuleStalkRestrictionComparison and its naturality to transport both inverse homotopies to the restriction of f composed with the lift and the reverse composite.",
    "uses": [
-    "lem-sc-perfect-open-stalk-chain-map-lift"
+    "lem-sc-perfect-open-stalk-chain-map-lift",
+    "lem-sc-open-module-stalk-restriction-comparison"
    ],
    "elementary": true
   },
   {
-   "text": "Apply the inverse-homotopies spreading theorem to f, V and the lifted g with the two transported homotopies. It gives an affine W inside U and a chain map gW with the two inverse homotopies for the exact restriction of f. Assemble HomotopyEquiv with this forward map and gW; Mathlib HomotopyEquiv.quasiIso_hom supplies the requested quasi-isomorphism.",
+   "text": "Apply the inverse-homotopies spreading theorem to obtain an affine W and a chain map giving both inverse homotopies for the exact restriction of f. Assemble HomotopyEquiv and apply HomotopyEquiv.quasiIso_hom. The source proof ignores the old hU binder, so the original node statement is recovered by specialization.",
    "uses": [
     "lem-sc-perfect-open-stalk-inverse-homotopies-spread"
    ],
@@ -71,14 +72,15 @@
   "def-sc-open-module-stalk-functor",
   "lem-sc-open-module-stalk-free-projective",
   "lem-sc-perfect-open-stalk-chain-map-lift",
+  "lem-sc-open-module-stalk-restriction-comparison",
   "lem-sc-perfect-open-stalk-inverse-homotopies-spread"
  ],
  "proof_origin": {
   "by": "worker",
-  "document": "Stacks Project, Tags 09RE and 0BC7 (2)",
-  "place": "M3 direct finite-component chain-map and homotopy descent, using Mathlib K-projective quasi-isomorphism criterion instead of the cone/derived-colimit argument; retire the duplicate chain-map lift and use its proved source implementation, naming the canonical comparison explicitly without changing this consumer statement.",
-  "group": "F6",
-  "date": "2026-10-21"
+  "group": "B8",
+  "date": "2026-10-21",
+  "document": "adopted source library and Stacks Project, Tags 09RE and 0BC7 (2)",
+  "place": "Retirement of the duplicate Sheaf implementation. The upstream theorem is the complete finite-component K-projective and homotopy-spreading proof; its stronger interface drops the unused IsAffineOpen U hypothesis and uses the canonical restriction/stalk comparison."
  },
  "mathlib_searches": [
   {
@@ -111,14 +113,15 @@
   }
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PerfectStalkQuasiIsoDetection",
-  "file": "lean/Sheaf/AlgebraicGeometry/PerfectStalkQuasiIsoDetection.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PerfectStalkQuasiIsoDetection",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PerfectStalkQuasiIsoDetection.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso",
-  "statement": "theorem exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U) (hU : IsAffineOpen U) (P Q : CochainComplex (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ) (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q) (f : P ⟶ Q) (hf : QuasiIso (((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex (.up ℤ)).map f)) : ∃ (W : X.Opens) (_hxW : x ∈ W) (_hW : IsAffineOpen W) (hWU : W ≤ U), QuasiIso (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace) (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).map f)",
+  "statement": "theorem exists_affine_restriction_quasiIso_of_perfect_stalk_quasiIso\n    (X : Scheme.{u}) (U : X.Opens) (x : X) (hxU : x ∈ U)\n    (P Q : CochainComplex\n      (SheafOfModules.{u} ((moduleRings X.toRingedSpace).over U)) ℤ)\n    (hP : IsStrictlyPerfect X U P) (hQ : IsStrictlyPerfect X U Q) (f : P ⟶ Q)\n    (hf : QuasiIso (((openModuleStalkFunctor X U ⟨x, hxU⟩).mapHomologicalComplex\n      (.up ℤ)).map f)) :\n    ∃ (W : X.Opens) (_hxW : x ∈ W) (_hW : IsAffineOpen W) (hWU : W ≤ U),\n      QuasiIso (((SheafOfModules.overMap.{u} (moduleRings X.toRingedSpace)\n        (homOfLE hWU : W ⟶ U)).mapHomologicalComplex (.up ℤ)).map f)",
   "branch": "sheaf-dag",
-  "by": "P2",
-  "date": "2026-10-13"
+  "by": "B8",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf theorem. The existing proved source theorem supplies the same conclusion with the unused affineness hypothesis hU omitted. No live Sheaf importer remains; the node is reattached to the adopted upstream declaration and its source proof dependencies."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -131,14 +134,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-a275a",
-  "group": "F6",
+  "reviewer": "C-d372b",
+  "group": "B8",
   "result": "pass",
-  "landing": "20261020T233140-L-899237",
+  "landing": "20261021T002121-L-1488051",
   "kind": "interface",
-  "note": "independent cc review: Retired Sheaf ChainMapLift stub + node lean record (existing:true) vs the live WeilConjectures twin (signature verbatim, stronger than the node: no hU/hQ, canonical e) and the retire-items.tsv row; both adapted consumers diffed against live (only forced lines changed) and compiled, plus the indirect importer PerfectStalkDerivedHomLift; twin's axioms clean"
+  "note": "independent cc review: withdrawn Sheaf stub + node lean record (existing:true) vs live WeilConjectures twin signature (verbatim, no hU) and its axioms; zero importers of the Sheaf module in the live tree; node diff vs live (proof fields + lean only)"
  },
  "lean_audit": {
   "master": {
