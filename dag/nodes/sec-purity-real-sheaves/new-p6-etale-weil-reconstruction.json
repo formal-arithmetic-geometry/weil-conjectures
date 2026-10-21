@@ -1,0 +1,123 @@
+{
+ "id": "new-p6-etale-weil-reconstruction",
+ "kind": "statement",
+ "title": "Reconstruct etale Weil descent from an l-adic Weil representation",
+ "statement": "Fix a prime $l$, an algebraic closure $Q$ of $\\mathbf Q_l$, a connected Noetherian separated scheme $Y$ on which $l$ is invertible, a geometric point $t$, and an automorphism $h:Y\\simeq Y$. Use the actual etale lisse algebraic coefficient category and $h^*$ of [def-pod-lisse-l-adic-sheaves, def-wf-lisse-adic-automorphism-pullback]. Let $G$ be a group with degree datum $d$, and let $D$ identify the geometric fundamental group at $t$ with $\\ker d$ and supply the normalized path to $h(t)$ as in [def-wf-fundamental-representation, sk-d-real-weil]. For every object $V$ of the l-adic Weil representation category of [new-p6-etale-weil-representation-data], there exists an etale lisse Weil sheaf $F$ and an isomorphism from its image under the functor of [new-p6-etale-weil-realization] to $V$. This asserts only essential surjectivity, with no abelian or monoidal structure required.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.1), (1.1.6), (1.1.10)-(1.1.12); part of prop-wf-weil-sheaf-representation-equivalence"
+ },
+ "stmt_deps": [
+  "new-p6-etale-weil-realization",
+  "cor-galois-lisse-representations",
+  "def-wf-fundamental-representation",
+  "lem-wf-fibre-functor-basepoint-transport",
+  "def-pod-l-adic-representations",
+  "sk-d-real-weil",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-wf-lisse-adic-automorphism-pullback",
+  "new-p6-etale-weil-representation-data"
+ ],
+ "proof": [
+  {
+   "text": "restrict V to the geometric group using D.geom and use the algebraic\ncoefficient clause of cor-galois-lisse-representations to choose its underlying\nlisse sheaf F and a geometric equivariant identification of its fibre with V.\nThe finite evaluation normalization identifies this action with the actual\netaleGeometricRep: compare on germs, then limit projections and scalar tensors.\nPut T = rho(s). The finite path conjugation rule in D, extended through the\nsame three coefficient stages, says L rho_pull(g) = rho(s^-1 g s) L, with\nL the inverse of the path used by etaleWeilFrobenius. Thus T L intertwines\nthe geometric action on h^*F with that on F. Fullness of the underlying lisse\ndictionary lifts T L to a sheaf map h^*F to F, and lifts its inverse as well.\nFaithfulness gives the two inverse identities, providing the descent isomorphism.\nBy construction its degree-one operator is T. Uniqueness in\netaleFundamentalRep_exists identifies its action with rho on the whole group:\nthe actions agree on geometric elements and on s, and every w is a s^n.\nThe chosen fibre identification therefore yields the asserted representation\nisomorphism. Zero representations reconstruct the zero sheaf by the same argument;\nno stable integral lattice for T, nor a preferred finite coefficient model of T,\nis imposed. This result is only essential surjectivity, independently of the\nHom dictionary or the exact and tensor structures.",
+   "uses": [
+    "new-p6-etale-weil-realization",
+    "cor-galois-lisse-representations",
+    "def-wf-fundamental-representation",
+    "lem-wf-fibre-functor-basepoint-transport",
+    "def-pod-l-adic-representations",
+    "sk-d-real-weil"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-p6-etale-weil-realization",
+  "cor-galois-lisse-representations",
+  "def-wf-fundamental-representation",
+  "lem-wf-fibre-functor-basepoint-transport",
+  "def-pod-l-adic-representations",
+  "sk-d-real-weil"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1), (1.1.6), (1.1.10)-(1.1.12); expanded descent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact tensor equivalence between lisse Weil sheaves with Frobenius descent and continuous Weil group representations",
+   "results": "8 hits: LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.free_internallyProjective_iff_tensor_condition. No actual etale adic Weil descent theorem or coefficient-localized inverse reindexing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence between lisse etale sheaves with Frobenius descent and continuous Weil group representations respects tensor products and exact sequences",
+   "results": "8 hits: WittVector.IsocrystalEquiv.frob_equivariant, Isocrystal.term_≃ᶠˡ[_,_]_, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction, WittVector.IsocrystalEquiv, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Equivalence.sheafCongr.functor, Algebra.FormallyEtale.instTensorProduct. No actual etale adic Weil descent theorem or coefficient-localized inverse reindexing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|WeilSheaf|IsLAdic",
+   "results": "1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean. No actual etale adic Weil descent theorem or coefficient-localized inverse reindexing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleWeilSheafEquivalence",
+  "date": "2026-10-21",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-wf-weil-sheaf-representation-equivalence",
+   "place": "Expanded proof: Reconstruct etale Weil descent from an l-adic Weil representation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-sheaves",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleWeilReconstruction",
+  "file": "lean/Sheaf/Paper/EtaleWeilReconstruction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleWeilReconstruction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleWeilReconstruction"
+  ],
+  "statement": "theorem etaleWeilReconstruction [ConnectedSpace Y] (V : etaleLisseWeilRepresentations l Q h t d D) : ∃ F : EtaleLisseWeilSheaf l Q h, Nonempty ((etaleWeilRealization l Q h t d D).obj F ≅ V)",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b81de",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T143941-L-27799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b81de",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T143941-L-27799",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clones/live (body-only change); relocated defs verbatim vs old item text; 4 new sorry statements vs their nodes and the item clauses; changed node fields vs live; sandbox compile of 8 delivered modules + importers RealSheafSections, DenseOpenPiOneSurjective (LisseExtensionInertia blocked by pre-existing published-build gap)"
+ }
+}

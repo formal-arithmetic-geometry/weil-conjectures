@@ -1,0 +1,125 @@
+{
+ "id": "new-p6-etale-weil-tensor",
+ "kind": "statement",
+ "title": "Normalized etale Weil realization respects the actual tensor and unit",
+ "statement": "Fix a prime $l$, an algebraic closure $Q$ of $\\mathbf Q_l$, a connected Noetherian separated scheme $Y$ on which $l$ is invertible, a geometric point $t$, and an automorphism $h:Y\\simeq Y$. Use the actual etale lisse algebraic coefficient category and $h^*$ of [def-pod-lisse-l-adic-sheaves, def-wf-lisse-adic-automorphism-pullback]. Let $G$ be a group with degree datum $d$, and let $D$ identify the geometric fundamental group at $t$ with $\\ker d$ and supply the normalized path to $h(t)$ as in [def-wf-fundamental-representation, sk-d-real-weil]. Let $e$ be an equivalence whose forward functor is the explicit normalized realization of [new-p6-etale-weil-realization]. Then $e$ satisfies the actual-tensor compatibility predicate of [new-p6-etale-weil-representation-data]: there exist monoidal structures with the recorded underlying etale tensor objects and unit, making the Weil forgetful functor, the representation inclusion, and the realization all strong monoidal.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.1), (1.1.6), (1.1.10)-(1.1.12); part of prop-wf-weil-sheaf-representation-equivalence"
+ },
+ "stmt_deps": [
+  "new-p6-etale-weil-realization",
+  "new-p6-etale-weil-representation-data",
+  "cor-galois-lisse-representations",
+  "def-wf-lisse-adic-automorphism-pullback",
+  "lem-wf-fibre-functor-basepoint-transport",
+  "def-pod-l-adic-representations",
+  "def-wf-fundamental-representation",
+  "def-pod-lisse-l-adic-sheaves",
+  "sk-d-real-weil"
+ ],
+ "proof": [
+  {
+   "text": "use the monoidal structures and tensor and unit identifications of the\nalgebraic clause of cor-galois-lisse-representations for the underlying lisse\ncategory, retaining lisseAlgebraicTensor and lisseAlgebraicUnit as its objects.\nReindexing by h commutes with the sectionwise finite tensor presheaf and its\nsheafification; take this comparison levelwise on integral systems, then extend\nit through rationalization and common coefficient extension. These comparisons\nare fixed on sections and pure tensors, so their associativity and unit diagrams\ncommute. They make h^* strong monoidal. Its invertible algebras inherit tensor\nwith descent phi_F tensor phi_H, and the forgetful functor is strong monoidal.\nAt finite coefficients a path respects products by naturality with both projections.\nNaturality with the map (x,y) to x tensor y then shows it sends a pure tensor to\nthe tensor of its images. Naturality with constant sections fixes the unit.\nLimit projections and both coefficient extensions give these same statements\nfor etaleAlgebraicPathIso. Thus the degree-one operator on a Weil tensor is\nT_F tensor T_H, and the unit has trivial operator. The geometric actions already\nrespect the tensor by the underlying dictionary. Since every Weil element is\na geometric element times a power of s, the tensor comparison intertwines all\nof G. The l-adic full subcategory is closed under tensor and contains the unit,\nby tensoring the finite coefficient models over a common finite extension.\nIt therefore inherits the representation tensor, with strong monoidal inclusion.\nThe normalized fibre tensor and unit comparisons give the strong monoidal\nrealization. Naturality and all coherence identities can be checked after the\nfaithful underlying vector-space functor, where they are the same pure-tensor\nidentities as at finite levels. This includes zero tensors and the unit without\nany nonzero-rank assumptions.",
+   "uses": [
+    "new-p6-etale-weil-realization",
+    "new-p6-etale-weil-representation-data",
+    "cor-galois-lisse-representations",
+    "def-wf-lisse-adic-automorphism-pullback",
+    "lem-wf-fibre-functor-basepoint-transport",
+    "def-pod-l-adic-representations",
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-p6-etale-weil-realization",
+  "new-p6-etale-weil-representation-data",
+  "cor-galois-lisse-representations",
+  "def-wf-lisse-adic-automorphism-pullback",
+  "lem-wf-fibre-functor-basepoint-transport",
+  "def-pod-l-adic-representations",
+  "def-wf-fundamental-representation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1), (1.1.6), (1.1.10)-(1.1.12); expanded descent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact tensor equivalence between lisse Weil sheaves with Frobenius descent and continuous Weil group representations",
+   "results": "8 hits: LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.free_internallyProjective_iff_tensor_condition. No actual etale adic Weil descent theorem or coefficient-localized inverse reindexing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence between lisse etale sheaves with Frobenius descent and continuous Weil group representations respects tensor products and exact sequences",
+   "results": "8 hits: WittVector.IsocrystalEquiv.frob_equivariant, Isocrystal.term_≃ᶠˡ[_,_]_, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction, WittVector.IsocrystalEquiv, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Equivalence.sheafCongr.functor, Algebra.FormallyEtale.instTensorProduct. No actual etale adic Weil descent theorem or coefficient-localized inverse reindexing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|WeilSheaf|IsLAdic",
+   "results": "1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean. No actual etale adic Weil descent theorem or coefficient-localized inverse reindexing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleWeilSheafEquivalence",
+  "date": "2026-10-21",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-wf-weil-sheaf-representation-equivalence",
+   "place": "Expanded proof: Normalized etale Weil realization respects the actual tensor and unit",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-sheaves",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleWeilTensor",
+  "file": "lean/Sheaf/Paper/EtaleWeilTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleWeilTensor",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleWeilTensor"
+  ],
+  "statement": "theorem etaleWeilTensor [ConnectedSpace Y] (e : EtaleLisseWeilSheaf l Q h ≌ etaleLisseWeilRepresentations l Q h t d D) (he : e.functor = etaleWeilRealization l Q h t d D) : etaleWeilTensorCompatibility l Q h t d D e",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b81de",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T143941-L-27799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b81de",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T143941-L-27799",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clones/live (body-only change); relocated defs verbatim vs old item text; 4 new sorry statements vs their nodes and the item clauses; changed node fields vs live; sandbox compile of 8 delivered modules + importers RealSheafSections, DenseOpenPiOneSurjective (LisseExtensionInertia blocked by pre-existing published-build gap)"
+ }
+}

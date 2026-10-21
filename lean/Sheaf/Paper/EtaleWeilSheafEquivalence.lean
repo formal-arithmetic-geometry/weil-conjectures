@@ -5,6 +5,7 @@ Authors: SHEAF group Q60
 -/
 module
 
+public import Sheaf.Paper.EtaleWeilRepresentationData
 public import Sheaf.Paper.EtaleWeilFundamentalRepresentation
 public import Sheaf.Paper.GaloisLisseRepresentations
 public import Mathlib.CategoryTheory.Abelian.Basic
@@ -15,9 +16,11 @@ public import Sheaf.Paper.LisseModuleSheaves
 public import Sheaf.Paper.LisseTensorScalarExtension
 public import Sheaf.RepresentationTheory.LAdic
 public import Mathlib.RepresentationTheory.Rep.Basic
-import WeilConjectures.RepresentationTheory.FiniteDimensionalRealization
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
-import WeilConjectures.WeilSheaf.Tensor
+import Sheaf.Paper.EtaleWeilReconstruction
+import Sheaf.Paper.EtaleWeilAbelian
+import Sheaf.Paper.EtaleWeilTensor
+import Mathlib.CategoryTheory.Abelian.Transfer
+import Mathlib.CategoryTheory.Preadditive.Transfer
 
 /-!
 # The exact tensor equivalence for actual etale adic Weil sheaves
@@ -44,38 +47,6 @@ variable (l : ℕ) [Fact l.Prime] (Q : Type (u + 1)) [Field Q]
   (h : Y ≅ Y) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
   (t : Spec (.of Ω) ⟶ Y) {G : Type v} [Group G]
   (d : Monodromy.DegreeDatum G) (D : EtaleWeilDegreeData h t G d)
-
-/-- Continuous finite-dimensional Weil representations, with the actual profinite
-geometric group and the finite coefficient-field convention of Weil II (1.1.6).
-Source: prop-wf-weil-sheaf-representation-equivalence
-(blueprint: prop-wf-weil-sheaf-representation-equivalence). -/
-@[reducible] def etaleLisseWeilRepresentations (h : Y ≅ Y) (t : Spec (.of Ω) ⟶ Y)
-    (d : Monodromy.DegreeDatum G) (D : EtaleWeilDegreeData h t G d) :=
-  ObjectProperty.FullSubcategory (fun V : Rep.{u + 1} Q G ↦
-    Representation.IsLAdic l Q (ProfiniteGrp.of (Aut (fiber t))) V.V
-      ((LinearMap.GeneralLinearGroup.generalLinearEquiv Q V.V).toMonoidHom.comp
-        (Representation.asGroupHom
-          (V.ρ.comp (d.deg.ker.subtype.comp D.geom.toMonoidHom)))))
-
-/-- Tensor compatibility refers to the recorded levelwise etale tensor and unit.
-The two forgetful functors are monoidal, so the Weil and representation tensor
-structures use those actual underlying operations.
-Source: Weil II (1.1.1), (1.1.10)
-(blueprint: prop-wf-weil-sheaf-representation-equivalence). -/
-def etaleWeilTensorCompatibility
-    (e : EtaleLisseWeilSheaf l Q h ≌ etaleLisseWeilRepresentations l Q h t d D) : Prop :=
-  ∃ m₀ : MonoidalCategory (LisseAlgebraicSheaf l Y Q),
-    m₀.toMonoidalCategoryStruct.tensorObj = lisseAlgebraicTensor l Y Q ∧
-    m₀.toMonoidalCategoryStruct.tensorUnit = lisseAlgebraicUnit l Y Q ∧
-    ∃ (mW : MonoidalCategory (EtaleLisseWeilSheaf l Q h))
-      (mR : MonoidalCategory (etaleLisseWeilRepresentations l Q h t d D)),
-      Nonempty (@Functor.Monoidal (EtaleLisseWeilSheaf l Q h) _ mW
-        (LisseAlgebraicSheaf l Y Q) _ m₀
-        (Endofunctor.IsoAlgebra.forget (lisseAlgebraicAutomorphismPullback h l Q))) ∧
-      Nonempty (@Functor.Monoidal (etaleLisseWeilRepresentations l Q h t d D) _ mR
-        (Rep.{u + 1} Q G) _ _ (ObjectProperty.ι _)) ∧
-      Nonempty (@Functor.Monoidal (EtaleLisseWeilSheaf l Q h) _ mW
-        (etaleLisseWeilRepresentations l Q h t d D) _ mR e.functor)
 
 /-- The stalk realization is an exact tensor equivalence, including its actual
 fundamental action. The supplied abelian structures and finite-limit and finite-colimit preservation
@@ -114,6 +85,27 @@ theorem etaleWeilSheafRepresentationEquivalence [ConnectedSpace Y] :
       PreservesFiniteLimits e.functor ∧ PreservesFiniteColimits e.functor ∧
       PreservesFiniteLimits e.inverse ∧ PreservesFiniteColimits e.inverse ∧
       etaleWeilTensorCompatibility l Q h t d D e := by
-  sorry
+  let R := etaleWeilRealization l Q h t d D
+  let ff : R.FullyFaithful := etaleWeilRealization_fullyFaithful l Q h t d D
+  let : R.Full := ff.full
+  let : R.Faithful := ff.faithful
+  let : R.EssSurj := ⟨etaleWeilReconstruction l Q h t d D⟩
+  let : R.IsEquivalence := {}
+  let e := R.asEquivalence
+  obtain ⟨aW⟩ := etaleWeilAbelian l Q h t
+  let : Abelian (EtaleLisseWeilSheaf l Q h) := aW
+  let : Preadditive (etaleLisseWeilRepresentations l Q h t d D) :=
+    Preadditive.ofFullyFaithful e.fullyFaithfulInverse
+  let : HasFiniteLimits (etaleLisseWeilRepresentations l Q h t d D) :=
+    ⟨fun _ _ _ ↦ Adjunction.hasLimitsOfShape_of_equivalence e.inverse⟩
+  let aR : Abelian (etaleLisseWeilRepresentations l Q h t d D) :=
+    abelianOfEquivalence e.inverse
+  refine ⟨e, ⟨fun F ↦ LinearEquiv.refl Q _, ?_, ?_⟩, ⟨aW⟩, ⟨aR⟩,
+    inferInstance, inferInstance, inferInstance, inferInstance,
+    etaleWeilTensor l Q h t d D e rfl⟩
+  · intro F g x
+    rfl
+  · intro F H a x
+    exact LinearMap.congr_fun (etaleWeilRealization_map l Q h t d D a) x
 
 end AlgebraicGeometry.Scheme

@@ -24,162 +24,49 @@
  ],
  "proof": [
   {
-   "text": "Geometric hypotheses. By [d-real-setup], $C$ is connected and $\\ell$ differs from its field characteristic, hence is invertible on $C$. By [lem-pod-separated-finite-type-base-change], $C$ is separated and of finite type over $k$. The scheme $\\operatorname{Spec}k$ is Noetherian: its only affine coordinate ring is a field, with only the ideals $0,k$, and its underlying space is a singleton. Thus [lem-weil-pbc-finite-type-over-noetherian] makes $C$ Noetherian. All the hypotheses of the adic clause of [cor-galois-lisse-representations] therefore hold for $C$ and $\\bar\\eta$.",
+   "text": "Finite, integral, rational and algebraic stages: the underlying etale dictionary is used in the Hom and reconstruction lemmas and in the abelian and tensor lemmas. The present theorem already assumes the geometric prerequisites. No extra curve restriction or lattice stable under the degree-one operator is introduced.",
    "uses": [
-    "d-real-setup",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "cor-galois-lisse-representations"
+    "new-p6-etale-weil-fiber-hom",
+    "new-p6-etale-weil-reconstruction",
+    "new-p6-etale-weil-abelian",
+    "new-p6-etale-weil-tensor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.6); geometric prerequisites: Stacks 01KU, 01T4, 01T6"
-   }
+   "elementary": false
   },
   {
-   "text": "Finite, integral and rational stages. For a finite coefficient field $E$, the rings $A_{E,n}=\\mathcal O_E/\\mathfrak m_E^n$ are finite by [def-weil-l-adic-coefficient-extension]. Apply [cor-galois-lisse-representations](1) at each level; its scalar compatibility identifies reduction on sheaves with reduction of representations. Clause (2), in the precise inverse-system, rationalized-Hom and common-field categories of [def-pod-lisse-l-adic-sheaves], supplies the resulting equivalence $H:\\operatorname{Lisse}(C,\\Qlb)\\simeq\\operatorname{Rep}_{\\ell}(P)$, including full faithfulness, essential surjectivity, abelianness, exactness and tensor compatibility. Its action is evaluation of fibre automorphisms at every finite level. This uses the stated integral/rational dictionary, not surjectivity of transition maps between equivariant Hom groups. No derived inverse-limit assertion is needed.",
+   "text": "Frobenius descent: construct the actual etale fibre realization with its normalized fundamental action. The Hom dictionary proves full faithfulness, while reconstruction proves essential surjectivity. Form its asEquivalence. Its fibre identifications are identity linear equivalences; the action identity is reflexive and its arrow identity is etaleWeilRealization_map.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension",
-    "cor-galois-lisse-representations",
-    "def-pod-lisse-l-adic-sheaves"
+    "new-p6-etale-weil-realization",
+    "new-p6-etale-weil-reconstruction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.1) b)-d), (1.1.6); blueprint unit finite-level and integral/rational stages"
-   }
+   "elementary": false
   },
   {
-   "text": "The Frobenius twist and its direction. Set $h=\\Phi_C$. Reindexing by $h$ in [def-wf-lisse-adic-automorphism-pullback] has inverse reindexing by $h^{-1}$, hence is an autoequivalence. Its fibre at $\\bar\\eta$ is the fibre at $h\\bar\\eta$. Apply [lem-wf-arithmetic-lift-fibre-path] to $k_0\\subset k$ (the finite field is perfect). The chosen lift $s$ supplies the specific finite path $\\lambda_s$ with action rule $s^{-1}$. Extend it by [lem-wf-fibre-functor-basepoint-transport]. For every underlying lisse sheaf $\\mathcal F$, this gives the natural linear isomorphism $L_{s,\\mathcal F}:H(h^*\\mathcal F)\\to H(\\mathcal F)$ and, for $g\\in P$, the identity\n$$L_{s,\\mathcal F}\\rho_{h^*\\mathcal F}(g)=\\rho_{\\mathcal F}(s^{-1}gs)L_{s,\\mathcal F}.$$\nThis specifies the twist without changing the choice of geometric Frobenius.",
+   "text": "Exactness: use etaleWeilAbelian for the source. Transfer its preadditive structure through the fully faithful inverse, its finite limits through the equivalence, and its abelian structure by abelianOfEquivalence. Both functors of an equivalence preserve finite limits and colimits. This supplies all four preservation clauses; the equivalence consequently also preserves and reflects subobjects and quotients.",
    "uses": [
-    "def-wf-lisse-adic-automorphism-pullback",
-    "lem-wf-arithmetic-lift-fibre-path",
-    "lem-wf-fibre-functor-basepoint-transport"
+    "new-p6-etale-weil-abelian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.10), (1.1.12); finite path convention as in the cited arithmetic-lift statement"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the degree normalization of [sk-d-real-weil]: geometric Frobenius has degree one and the quotient is discrete. Construct the forward functor. For a Weil structure $\\varphi:h^*\\mathcal F\\to\\mathcal F$, put $T=H(\\varphi)L_{s,\\mathcal F}^{-1}$. Since $H(\\varphi)$ is $P$-equivariant, the identity in step 3 gives\n$$T\\rho_{\\mathcal F}(g)T^{-1}=\\rho_{\\mathcal F}(sgs^{-1}).$$\nBy [def-wf-fundamental-representation], every $w\\in W$ is uniquely $gs^n$ and the prescribed extension is $\\rho(gs^n)=\\rho_{\\mathcal F}(g)T^n$. Its homomorphism property and continuity are exactly [lem-wf-weil-fundamental-representation]. Thus the object map is the specified fundamental representation, with $\\rho(s)=T$. In particular a general degree-one element $gs$ acts by $\\rho_{\\mathcal F}(g)T$, not always by $T$.",
+   "text": "Tensor stage: apply etaleWeilTensor to this asEquivalence, whose functor is definitionally the constructed realization. It retains the actual tensor objects and unit and all three required strong monoidal functors.",
    "uses": [
-    "def-wf-fundamental-representation",
-    "lem-wf-weil-fundamental-representation",
-    "sk-d-real-weil"
+    "new-p6-etale-weil-tensor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.10), (1.1.12); blueprint Frobenius-descent stage"
-   }
-  },
-  {
-   "text": "Morphisms and full faithfulness. For underlying lisse sheaves $\\mathcal F,\\mathcal G$, [cor-galois-lisse-representations](2) identifies sheaf maps $u$ bijectively with $P$-equivariant linear maps $a=H(u)$. Naturality of the path from [lem-wf-fibre-functor-basepoint-transport] says $H(h^*u)L_{s,\\mathcal F}^{-1}=L_{s,\\mathcal G}^{-1}a$. Therefore\n$$u\\varphi_{\\mathcal F}=\\varphi_{\\mathcal G}h^*u\\quad\\Longleftrightarrow\\quad aT_{\\mathcal F}=T_{\\mathcal G}a,$$\nwhere the reverse implication uses faithfulness of $H$. Together with $P$-equivariance, this is exactly equivariance for every $gs^n$, including negative $n$, by the extension formula in [def-wf-fundamental-representation]. Identities and composition are those of the underlying fibre functor. Hence the forward functor is fully faithful.",
-   "uses": [
-    "cor-galois-lisse-representations",
-    "lem-wf-fibre-functor-basepoint-transport",
-    "def-wf-fundamental-representation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.12), explicit intertwiner argument"
-   }
-  },
-  {
-   "text": "Essential surjectivity. Start with a representation $(V,\\rho)$ in the stated category and set $T=\\rho(s)$. By [cor-galois-lisse-representations](2), choose $\\mathcal F$ and a $P$-equivariant identification $H(\\mathcal F)=V$. Use step 3 for this $\\mathcal F$. The map $t=T L_{s,\\mathcal F}:H(h^*\\mathcal F)\\to V$ is $P$-equivariant, since\n$$t\\rho_{h^*\\mathcal F}(g)=T\\rho(s^{-1}gs)L_{s,\\mathcal F}=\\rho(g)t.$$\nFullness lifts $t$ to $\\varphi:h^*\\mathcal F\\to\\mathcal F$. Lift $t^{-1}$ as well; faithfulness makes their composites identities, so $\\varphi$ is an isomorphism. Its degree-one operator is $tL_{s,\\mathcal F}^{-1}=T$. The reconstructed action agrees with $\\rho$ on $P$ and $s$, hence on $W$ by [def-wf-fundamental-representation]. This proves essential surjectivity. For the equivalent common-field formulation in the statement, start with a finite $E$-model of $V|_P$ and enlarge $E$ by the finitely many matrix entries of $T,T^{-1}$. They are algebraic over $\\mathbf Q_\\ell$, so the enlargement is finite. The extended geometric model is still continuous and now stable under $T$, so the whole $W$-action is defined there; on each open coset $Ps^n$ it is the continuous geometric action followed by the fixed operator $T^n$.",
-   "uses": [
-    "cor-galois-lisse-representations",
-    "def-wf-fundamental-representation",
-    "def-pod-l-adic-representations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.6), (1.1.12), explicit inverse construction"
-   }
-  },
-  {
-   "text": "Abelian operations on Weil sheaves. The underlying lisse rational category is abelian by [cor-galois-lisse-representations](2). The reindexing autoequivalence $h^*$ of [def-wf-lisse-adic-automorphism-pullback] preserves kernel and cokernel universal properties (apply its inverse to a candidate factorization). For a Weil morphism $u$, its commuting square with the two invertible Weil structures therefore induces isomorphisms $h^*\\ker(u)\\simeq\\ker(u)$ and $h^*\\operatorname{coker}(u)\\simeq\\operatorname{coker}(u)$. The inverse squares induce their inverses. These objects satisfy the kernel and cokernel universal properties among Weil morphisms: uniqueness of underlying factorizations forces the Weil-commuting square. Zero objects and biproducts receive the componentwise structures, and the underlying coimage-to-image isomorphism is a Weil morphism by the same uniqueness. This proves abelianness; forgetting the structure computes the kernels and cokernels.",
-   "uses": [
-    "cor-galois-lisse-representations",
-    "def-wf-lisse-adic-automorphism-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.12), abelian operations expanded from the blueprint exactness stage"
-   }
-  },
-  {
-   "text": "Exactness and reflection. By step 7 a short Weil complex is exact precisely when its underlying lisse complex is exact. Apply the exact equivalence of [cor-galois-lisse-representations](2): this is equivalent to exactness of the corresponding geometric representations on vector spaces. The additional operator $T$ commutes with the maps by step 5, so the vector-space kernels and cokernels carry its induced invertible action. Conversely those kernels and cokernels come from step 7 via the proved equivalence. Thus the Weil representation category is abelian with these underlying vector-space kernels and cokernels, and our equivalence preserves and reflects short exact sequences.",
-   "uses": [
-    "cor-galois-lisse-representations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.12), blueprint exactness stage"
-   }
-  },
-  {
-   "text": "Paths respect tensor and unit. At finite coefficients a natural path respects products of finite locally constant sheaves of sets: naturality with the two projections forces its value on a pair to be the pair of its values. Apply naturality also to the underlying finite-set sheaf map $(x,y)\\mapsto x\\otimes y$. Under the tensor comparison of [cor-galois-lisse-representations](1), the path on a tensor product consequently sends $x\\otimes y$ to $\\lambda(x)\\otimes\\lambda(y)$; these tensors generate. The path on the constant coefficient sheaf is the identity by naturality with its constant sections. The extension of paths in [lem-wf-fibre-functor-basepoint-transport] is by finite-level inverse limits, then rationalization and common-field extension; the tensor and scalar comparisons of [cor-galois-lisse-representations](2) therefore give $L_{s,\\mathcal F\\otimes\\mathcal G}=L_{s,\\mathcal F}\\otimes L_{s,\\mathcal G}$ and the identity on the unit. In the integral comparison equality is checked after every finite projection; rational and algebraic comparisons extend these equalities linearly.",
-   "uses": [
-    "cor-galois-lisse-representations",
-    "lem-wf-fibre-functor-basepoint-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.1), (1.1.12), tensor compatibility of the explicit path construction"
-   }
-  },
-  {
-   "text": "The tensor structure is the actual one. The tensor product of Weil pairs has descent isomorphism $\\varphi_{\\mathcal F}\\otimes\\varphi_{\\mathcal G}$ under the reindexing comparison $h^*(\\mathcal F\\otimes\\mathcal G)=h^*\\mathcal F\\otimes h^*\\mathcal G$: the reindexing of [def-wf-lisse-adic-automorphism-pullback] is sectionwise along an automorphism of the etale site, so at each finite level it commutes with the sectionwise tensor presheaf and with its sheafification, and it is applied levelwise to the tensor systems of [def-pod-lisse-l-adic-sheaves]. Step 9 and the formula in [def-wf-fundamental-representation] give\n$$T_{\\mathcal F\\otimes\\mathcal G}=(H\\varphi_{\\mathcal F}\\otimes H\\varphi_{\\mathcal G})(L_{s,\\mathcal F}^{-1}\\otimes L_{s,\\mathcal G}^{-1})=T_{\\mathcal F}\\otimes T_{\\mathcal G}.$$\nOn $P$ the comparison is equivariant by the tensor clause of [cor-galois-lisse-representations](2); the displayed equality makes it equivariant on $s$, hence on $W$. The unit goes to the trivial representation. Naturality, associativity, symmetry and unit diagrams are the underlying diagrams of that same tensor equivalence, so they commute also as Weil representation maps. This proves tensor compatibility for the specified stalk functor.",
-   "uses": [
-    "def-wf-lisse-adic-automorphism-pullback",
-    "def-pod-lisse-l-adic-sheaves",
-    "def-wf-fundamental-representation",
-    "cor-galois-lisse-representations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.1), (1.1.12), blueprint tensor clause"
-   }
-  },
-  {
-   "text": "Subquotients. Full faithfulness and essential surjectivity identify monomorphisms into each object in both directions: the defining left-cancellation property is preserved and reflected by the equivalence. Isomorphic monomorphisms correspond, giving a bijection on subobjects. Cokernels from steps 7-8 identify their quotients; applying the subobject correspondence again to a quotient identifies subquotients. All short exact sequences are already matched in step 8.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "(1.1.12), last sentence of the item"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "d-real-setup",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "cor-galois-lisse-representations",
-  "def-weil-l-adic-coefficient-extension",
-  "def-pod-lisse-l-adic-sheaves",
-  "def-wf-lisse-adic-automorphism-pullback",
-  "lem-wf-arithmetic-lift-fibre-path",
-  "lem-wf-fibre-functor-basepoint-transport",
-  "def-wf-fundamental-representation",
-  "lem-wf-weil-fundamental-representation",
-  "sk-d-real-weil",
-  "def-pod-l-adic-representations"
+  "new-p6-etale-weil-fiber-hom",
+  "new-p6-etale-weil-reconstruction",
+  "new-p6-etale-weil-abelian",
+  "new-p6-etale-weil-tensor",
+  "new-p6-etale-weil-realization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-  "place": "Weil II (1.1.1), (1.1.6), (1.1.10)-(1.1.12), pp.146-152; explicit proof of the standard descent argument in (1.1.12), following the four blueprint unit stages"
+  "place": "Weil II (1.1.1), (1.1.6), (1.1.10)-(1.1.12); expanded descent proof"
  },
  "mathlib_searches": [
   {
@@ -253,8 +140,6 @@
   "module": "Sheaf.Paper.EtaleWeilSheafEquivalence",
   "declaration": "AlgebraicGeometry.Scheme.etaleWeilSheafRepresentationEquivalence",
   "declarations": [
-   "AlgebraicGeometry.Scheme.etaleLisseWeilRepresentations",
-   "AlgebraicGeometry.Scheme.etaleWeilTensorCompatibility",
    "AlgebraicGeometry.Scheme.etaleWeilSheafRepresentationEquivalence"
   ],
   "file": "lean/Sheaf/Paper/EtaleWeilSheafEquivalence.lean",
@@ -263,7 +148,7 @@
   "by": "Q60",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Section 1(B), H3 repair: the closed upstream audit concerns a pro-etale source category. This module states the exact tensor equivalence on the actual etale adic coefficient-pair category with Weil descent, normalized to the repaired etale fundamental representation, including finite-limit/colimit preservation in both directions and the recorded underlying tensor and unit."
+  "note": "Section 1(B), H3 repair: the closed upstream audit concerns a pro-etale source category. This module states the exact tensor equivalence on the actual etale adic coefficient-pair category with Weil descent, normalized to the repaired etale fundamental representation, including finite-limit/colimit preservation in both directions and the recorded underlying tensor and unit. P6 extracts the two definitions verbatim to Sheaf.Paper.EtaleWeilRepresentationData, publicly reexported here; theorem statement unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -311,5 +196,15 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-aebd876b8 (reviewer sub-agent of L); spot-checked: FIX with 2 repairs; corrected item at fixes/dag/nodes/sec-purity-real-sheaves/prop-wf-weil-sheaf-representation-equivalence.json, full checks in review.md. The delivery creates no new nodes. Preconditions: the item is not in the drop list, has no re-split note and is still imported in live, so it is not superseded. The unit sk-i-real-sheaves binds its statement and all 4 steps to the item; the sk-i-real-galois binding was added by the maintainer. Statement correction (finite-dimensional W-representations with ℓ-adic restriction to P, def-pod-l-adic-representations(3)) is right and not a weakening: it matches the main-20261015 unit, Weil II (1.1.12) with (1.1.6) and (1.1.10)-(1.1.11) on pp.150-152, and the Lean category etaleLisseWeilRepresentations. The coefficient category is the étale adic one and the Frobenius is φ:Φ_C^*F≅F as in def-wf-fundamental-representation. I recomputed steps 3-6: Tρ(h)T⁻¹=ρ(shs⁻¹), aT_F=T_G a ⇔ uφ=φh^*u, t=TL is P-equivariant, and adjoining the entries of T and T⁻¹ gives a finite E with no lattice imposed. The ρ(gs)=ρ(g)T correction is right. Steps 7-11 are sound. Edge cases checked: rank 0, a Frobenius scalar ℓ that is not a unit, nontrivial monodromy. Repairs: (1) citer notation. p-real-sections (F=ρ(γ), V), p-real-operations ((V,ρ)) and p-real-integral (E, O_E, m_E) 'keep the notation' of the item, but the rewritten statement no longer named them. Restored (V,ρ)=(F_η̄,ρ_F), E/O_E/m_E (def-weil-l-adic-coefficient-extension added to stmt_deps) and γ:=s, F=ρ(s). (2) C4, step 10: def-wf-lisse-adic-automorphism-pullback does not state the comparison h^*(F⊗G)=h^*F⊗h^*G; the step now writes out that reindexing commutes with the tensor presheaf and sheafification at each level. Batch-5: def-pod-lisse-l-adic-sheaves, def-pod-l-adic-representations and def-wf-lisse-adic-automorphism-pullback are general definitions. cor-galois-lisse-representations, reached through lem-wf-fibre-functor-basepoint-transport, is the Galois/lisse dictionary, not part of the trace formula or Poincaré duality, and the base already cited it directly. The closure diff adds 4 nodes, none in the Poincaré-duality or trace-formula chapters, and there is no cycle. The 4 declared tool_uses are accepted: the 01T6 leaf and the wf path/representation conventions named by the statement. Advisory: source.place still names master order 2584 (main-20261015 has order 2928, same text).; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b81de",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T143941-L-27799",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clones/live (body-only change); relocated defs verbatim vs old item text; 4 new sorry statements vs their nodes and the item clauses; changed node fields vs live; sandbox compile of 8 delivered modules + importers RealSheafSections, DenseOpenPiOneSurjective (LisseExtensionInertia blocked by pre-existing published-build gap)"
  }
 }

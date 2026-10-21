@@ -1,0 +1,111 @@
+{
+ "id": "new-p6-etale-weil-abelian",
+ "kind": "statement",
+ "title": "The actual etale lisse Weil category is abelian",
+ "statement": "Fix a prime $l$, an algebraic closure $Q$ of $\\mathbf Q_l$, a connected Noetherian separated scheme $Y$ on which $l$ is invertible, an automorphism $h:Y\\simeq Y$, and a geometric point $t$. The category of actual etale lisse Weil sheaves, the invertible algebras for the pullback in [def-wf-fundamental-representation], admits an abelian-category structure. Its underlying lisse category is the one in [cor-galois-lisse-representations]; the inverse pullback is provided by [new-p6-lisse-automorphism-equivalence].",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.1), (1.1.6), (1.1.10)-(1.1.12); part of prop-wf-weil-sheaf-representation-equivalence"
+ },
+ "stmt_deps": [
+  "new-p6-lisse-automorphism-equivalence",
+  "cor-galois-lisse-representations",
+  "def-wf-fundamental-representation"
+ ],
+ "proof": [
+  {
+   "text": "the algebraic coefficient clause of cor-galois-lisse-representations\nmakes the underlying lisse category abelian. Reindexing by h has inverse\nreindexing by h^-1 at finite levels, and both commute with scalar extension\nand the coefficient localization. Consequently h^* is an additive equivalence\nand preserves kernels and cokernels. For a Weil morphism u, its descent square\ninduces h^*ker(u) to ker(u); applying the inverse descent squares gives the\ninverse map by uniqueness in the kernel universal property. The same construction\non cokernels gives inverse descent there. Their universal maps and factorizations\nsatisfy the descent squares by the uniqueness of underlying factorizations.\nThe zero object and binary biproducts have componentwise descent. The underlying\ncoimage-to-image comparison is a Weil morphism by uniqueness and is invertible\nbecause it is so in the lisse category. This gives the abelian structure by the\nstandard coimage-to-image criterion, including all zero-object cases. Equivalently,\napply IsoAlgebra.abelian to the exact additive reindexing endofunctor.",
+   "uses": [
+    "new-p6-lisse-automorphism-equivalence",
+    "cor-galois-lisse-representations",
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-p6-lisse-automorphism-equivalence",
+  "cor-galois-lisse-representations",
+  "def-wf-fundamental-representation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1), (1.1.6), (1.1.10)-(1.1.12); expanded descent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact tensor equivalence between lisse Weil sheaves with Frobenius descent and continuous Weil group representations",
+   "results": "8 hits: LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.free_internallyProjective_iff_tensor_condition. No actual etale adic Weil descent theorem or coefficient-localized inverse reindexing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence between lisse etale sheaves with Frobenius descent and continuous Weil group representations respects tensor products and exact sequences",
+   "results": "8 hits: WittVector.IsocrystalEquiv.frob_equivariant, Isocrystal.term_≃ᶠˡ[_,_]_, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction, WittVector.IsocrystalEquiv, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Equivalence.sheafCongr.functor, Algebra.FormallyEtale.instTensorProduct. No actual etale adic Weil descent theorem or coefficient-localized inverse reindexing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsoAlgebra|WeilSheaf|IsLAdic",
+   "results": "1 hits: Mathlib/Algebra/Category/AlgCat/Basic.lean. No actual etale adic Weil descent theorem or coefficient-localized inverse reindexing.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.EtaleWeilSheafEquivalence",
+  "date": "2026-10-21",
+  "group": "P6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-wf-weil-sheaf-representation-equivalence",
+   "place": "Expanded proof: The actual etale lisse Weil category is abelian",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-sheaves",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleWeilAbelian",
+  "file": "lean/Sheaf/Paper/EtaleWeilAbelian.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleWeilAbelian",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleWeilAbelian"
+  ],
+  "statement": "theorem etaleWeilAbelian [ConnectedSpace Y] : Nonempty (Abelian (EtaleLisseWeilSheaf l Q h))",
+  "branch": "sheaf-dag",
+  "by": "P6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b81de",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T143941-L-27799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b81de",
+  "group": "P6",
+  "result": "pass",
+  "landing": "20261021T143941-L-27799",
+  "kind": "interface",
+  "note": "independent cc review: item theorem signature vs clones/live (body-only change); relocated defs verbatim vs old item text; 4 new sorry statements vs their nodes and the item clauses; changed node fields vs live; sandbox compile of 8 delivered modules + importers RealSheafSections, DenseOpenPiOneSurjective (LisseExtensionInertia blocked by pre-existing published-build gap)"
+ }
+}
