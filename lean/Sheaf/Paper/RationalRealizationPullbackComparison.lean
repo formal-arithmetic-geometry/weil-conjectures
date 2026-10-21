@@ -9,14 +9,7 @@ public import Sheaf.Paper.RationalModuleRealizationFunctor
 public import Sheaf.Paper.PbcQbarCompletedPullback
 public import Sheaf.CategoryTheory.LocalizationInverseImageCoherence
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.RingedDerivedPullbackLinear
-import Sheaf.Paper.OrdinaryPullbackStratifiedModels
-import Sheaf.Paper.PbcIntrinsicTowerComplete
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-import Sheaf.Paper.ReductionPullbackDerivedTower
-import Sheaf.Paper.RingedTopoiDerivedPullbackIndependent
-import Sheaf.Paper.KFlatRingedToposPullback
+import all Sheaf.Paper.ExtensionZeroPerfectModelTransport
 
 /-!
 # Rational realization of the specified completed-pullback unit
@@ -237,7 +230,9 @@ theorem rationalRealizationPullbackModel {S T : Scheme.{u}} (h : S ⟶ T)
     Nonempty ((pbcActualDerivedPull h (pbcIntegralDatum l E)).obj
         ((integralConstantDerived T (pbcIntegralDatum l E)).obj P) ≅
       (integralConstantDerived S (pbcIntegralDatum l E)).obj P) := by
-  sorry
+  exact ⟨((cbcDatumOrdinaryTransport (pbcIntegralDatum l E) h).app
+    ((integralConstantDerived T (pbcIntegralDatum l E)).obj P)) ≪≫
+      (integralConstantDerivedPullIso (pbcIntegralDatum l E) h).app P⟩
 
 /-- Rational realization commutes with the specified completed pullback for any morphism.
 Source: Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.9 and Remark 6.8.15,

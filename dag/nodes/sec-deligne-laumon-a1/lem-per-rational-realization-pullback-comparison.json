@@ -28,6 +28,18 @@
  ],
  "proof": [
   {
+   "text": "The separate perfect-constant-model clause rationalRealizationPullbackModel follows from the already proved integralConstantDerivedPullIso helper in [lem-cbc-extension-zero-perfect-model-transport]. This natural isomorphism identifies integralConstantDerived T d followed by d.pull h with integralConstantDerived S d for every complex, without a perfectness hypothesis. First apply cbcDatumOrdinaryTransport from [lem-cbc-completed-extension-zero-comparison] at the realized complex to identify pbcActualDerivedPull h d with d.pull h, then compose with that helper at P. Both are actual natural isomorphisms; their composition gives the stated Nonempty. This step is proved in Lean. The subsequent seven steps remain the plan for the still-unproved main comparison theorem.",
+   "uses": [
+    "lem-cbc-extension-zero-perfect-model-transport",
+    "lem-cbc-completed-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11 and Remark 6.8.15; completed constant models and ordinary inverse image"
+   }
+  },
+  {
    "text": "Apply [lem-weil-pbc-integral-stratified-perfect-characterization] to $K$: it has finite stratified perfect local $A$-models, and this characterization includes the compatible etale-origin witnesses. Apply [lem-tw-ordinary-pullback-stratified-models] to $g$ and those models. The inverse-image strata, omitting empty ones, form a finite constructible stratification of $X\\prime$; the pulled covers are pro-etale covers, and the ordinary pullback of each model is $B_{S\\prime}\\otimes_A^L P$, computed termwise on its finite-projective representative. Apply the reverse characterization on $X\\prime$. Thus $P_gK\\in\\mathcal C_{X\\prime}$, including completeness, the uniform reduction bound and compatible etale witnesses. Both schemes are noetherian and finite-dimensional and have $\\ell$ invertible, as required by that characterization; no geometric assumption on $g$ beyond being a morphism is needed.",
    "uses": [
     "lem-weil-pbc-integral-stratified-perfect-characterization",
@@ -125,6 +137,8 @@
   "def-weil-pbc-bounded-constructible-complete",
   "def-weil-pbc-completed-pullback",
   "def-weil-pbc-rational-category",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-cbc-extension-zero-perfect-model-transport",
   "lem-pc-kflat-resolution",
   "lem-per-rational-module-realization-functor",
   "lem-pur-ringed-derived-pullback-linear",
@@ -141,7 +155,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.6.11, Lemma 6.5.9, Remark 6.8.15; specified-unit comparison from existing DAG lemmas and explicit K-flat balanced-tensor/fraction argument following Stacks Tags 06YS, 0G7E, 06YY, 0D6D"
+  "place": "Proposition 6.6.11, Lemma 6.5.9, Remark 6.8.15; specified-unit comparison from existing DAG lemmas and explicit K-flat balanced-tensor/fraction argument following Stacks Tags 06YS, 0G7E, 06YY, 0D6D; C4 proves the separate constant-model clause by existing constant-realization pullback and ordinary-presentation transport isomorphisms; the seven-step main comparison proof remains open"
  },
  "mathlib_searches": [
   {
@@ -323,5 +337,15 @@
   "group": "Q06",
   "result": "pass",
   "note": "Checked every clause against node and BS Rem 6.8.15/Prop 6.6.11/Lem 6.5.9. Only the item lean record and one module change; the other snapshot record diffs are live moving ahead. ordinary_mem uses the full complete predicate; unit_isIso is on the exact pbcActualStrictCompletedPullUnit. rationalPullDerived = exact inverse image then pbcDerivedExtend along the actual map, with no coefficient iso. All record data is pinned: rationalCoefficient (continuous adjunct + square with c_g), moduleComparison (generators 1⊗1⊗m), ordinaryComparison (derived_normalization; counits iso on K-flat), alpha (alpha_normalization; γ iso, objects all Q K), rawPull (every fraction). Model theorem holds for any h. Edge cases, universes, verbatim statement, declarations list, docstrings and sorry-only all ok. Advisories: rationalPullDerived duplicates parent derivedPull (downstream, cycle prevents reuse); theorem-owned plain decls with stmt_deps unchanged; RationalModuleRealizationFunctor still in rework-hold, item released 09:46Z. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261021T140802-L-2747245",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
