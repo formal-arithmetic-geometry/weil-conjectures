@@ -20118,3 +20118,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:00 L: merged deliver/Q01/lem-sfb-hom-flat-evaluation-roof (stage 2; reviewer FIX; parallel immutable checks)
 - 04:00 L: merged deliver/Q34/lem-sfb-bounded-bifunctor-devissage (stage 2; reviewer PASS; parallel immutable checks)
 - 04:00 L: merged deliver/N6/lem-sfb-internal-hom-localization-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 04:00 L: returned deliver/NF/lem-pe-comparison-etale-slice-abelian-pullback (reviewer RETURN: L: independent stage-2 immutable head 5f16e096d875: H3: third conjunct quantifies existentially over rhoE : Etale.upperS)
