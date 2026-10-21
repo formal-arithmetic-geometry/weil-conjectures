@@ -12,12 +12,179 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-inverse-system",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-tower-category-levelwise-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal A_T=\\operatorname{Mod}(R_T)$, $\\mathcal T_T=\\operatorname{Tow}(\\mathcal A_T)$, and $q_T,q_T^{\\rm Tow}$ for their homotopy-to-derived localizations. Define $a_T(P)=(P\\otimes_{R_T}Q_{T,n})_n$, with transitions $1_P\\otimes t_n$, where $t_n:Q_{T,n+1}\\to Q_{T,n}$. This is an additive functor on complexes and homotopies. Kernels and cokernels in $\\mathcal T_T$ are levelwise, so its cohomology is levelwise; hence a tower-complex map is a quasi-isomorphism exactly when every level is. The diagonal and termwise $F$ are exact since their evaluations are respectively the identity and the assumed exact $F$. Apply exact derived factorization to both. We use their canonical localization comparisons throughout, including $F^{\\rm Tow}\\Delta_Y\\cong\\Delta_XF$.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-inverse-system",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; tower argument using levelwise kernels and cokernels"
+   }
+  },
+  {
+   "text": "Let $\\mathcal P_T$ be the flat-term K-flat complexes. Every complex receives a quasi-isomorphism from one by K-flat resolution. If $s:P\\to P'$ is a quasi-isomorphism between members of $\\mathcal P_T$, apply the change-of-rings quasi-isomorphism theorem to $R_T\\to Q_{T,n}$ at each $n$. Restricting scalars preserves its cohomology: restriction changes only the ring action, and kernels and sheafified cokernels retain the same underlying abelian sheaves. Thus every $s\\otimes1_{Q_{T,n}}$ is a quasi-isomorphism of $R_T$-complexes. Step 1 now shows $a_T(s)$ is a quasi-isomorphism of whole strict tower complexes. No flatness of any $Q_{T,n}$ has been used.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, lemma-K-flat-resolution, and 06YT, lemma-derived-tor-quasi-isomorphism-other-side; change of rings as in 06YY"
+   }
+  },
+  {
+   "text": "The homotopy functor $P\\mapsto q_T^{\\rm Tow}a_T(P)$ preserves shifts and cone triangles: tensor is additive, and at each level the cone differential is the same block matrix before and after tensoring. The resolving-class derived-functor criterion therefore applies using step 2. It gives the universal reduction counit $c_{T,P}:B_T(q_TP)\\to q_T^{\\rm Tow}a_T(P)$, invertible for every $P\\in\\mathcal P_T$. For a resolution $p:P\\to K$, the normalized comparison at $K$ is $c_{T,P}\\circ B_T(q_Tp)^{-1}$. This uses the definition of $B_T$ as the total left derived functor in the statement and fixes the counit, rather than selecting arbitrary model isomorphisms.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class",
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, using Tag 06XN, derived.tex, lemma-find-existence-computes"
+   }
+  },
+  {
+   "text": "To check the alternative tensor description, realize strict towers on the small diagram site with $J=\\mathbf N_{\\geq1}^{\\rm op}$. Its coefficient sheaf is $\\Delta R_T$, and $Q_{T,\\bullet}$ is a commutative algebra sheaf on it. Level-$n$ evaluation is the module inverse image of the topos morphism $e_n$, with $e_n^{-1}\\Delta R_T=R_T$. The canonical ringed tensor comparison for $e_n$, with identity coefficient map, therefore gives isomorphisms $\\operatorname{ev}_n(M\\otimes_{\\Delta R_T}N)\\cong M_n\\otimes_{R_T}N_n$, natural in both modules and fixed by the generalized pure-tensor equation. Pure tensors commute with restrictions and determine maps out of the tensor. Both ways around the transition square therefore send $x\\otimes y$ to $t(x)\\otimes t(y)$, so these isomorphisms commute with the tower transitions. Thus diagram-site tensors are computed levelwise. For a flat-term K-flat $P$ and any acyclic tower complex $H$, evaluation of $\\operatorname{Tot}(H\\otimes\\Delta P)$ is $\\operatorname{Tot}(H_n\\otimes P)$, which is acyclic; tower cohomology is levelwise, so $\\Delta P$ is K-flat. Its terms are flat by the same levelwise exactness test. Since $\\Delta$ is exact, $\\Delta P\\to\\Delta K$ is a K-flat resolution. Apply derived change of rings on this ringed diagram site to $\\Delta R_T\\to Q_{T,\\bullet}$ and then restrict scalars. By the levelwise computation, its value on $\\Delta P$ is precisely $a_T(P)$ with transitions $1\\otimes t_n$. Thus $\\Delta K\\otimes^L_{\\Delta R_T}Q_{T,\\bullet}$ has the model and normalization in step 3. This comparison takes place in the derived category of strict towers.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, applied on the diagram site; K-flat computation"
+   }
+  },
+  {
+   "text": "Use the normalized ordinary ringed tensor comparison to define, for every module $M$ and every $n$, $\\mu_{M,n}:F(M\\otimes_{R_Y}Q_{Y,n})\\xrightarrow{\\sim}FM\\otimes_{R_X}Q_{X,n}$. Its defining generalized pure-tensor equation is $F(m\\otimes q)\\mapsto Fm\\otimes Fq$. The comparison exists naturally in both module variables by the cited construction; its pure tensors determine maps by the cited tensor section calculus. Here the structural ring map is the specified isomorphism $f^{-1}R_Y\\cong R_X$, so all coefficient identifications are the specified ones, including $FQ_{Y,n}=Q_{X,n}$.",
+   "uses": [
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback"
+   }
+  },
+  {
+   "text": "Check the mate normalization explicitly. Let $E_{T,n}$ be extension along $R_T\\to Q_{T,n}$ and $\\mathrm{Res}_{T,n}$ its right adjoint. Its unit is $m\\mapsto m\\otimes1$, using symmetry for the insertion convention of the tensor section calculus. Pullback on $R$-modules and on $Q_n$-modules is the same geometric inverse image with the indicated coefficient action, so the restriction/pullback comparison identifies their underlying inverse-image sections. The scalar-extension mate $E_{X,n}F\\to F_{Q_n}E_{Y,n}$ is adjoint to this comparison composed with $F$ of the extension unit. On generators it is $Fm\\otimes Fq\\mapsto F(m\\otimes1)\\,Fq=F(m\\otimes q)$. Its composite with $\\mu_{M,n}$ in either order is the identity on pure tensors. Thus $\\mu_{M,n}$ is its inverse after restriction, with exactly the direction asserted. This also gives $\\mu_{M,n}F(m\\mapsto m\\otimes1)=(Fm\\mapsto Fm\\otimes1)$.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CZ, lemma-adjointness-tensor-restrict, and 03EL, lemma-tensor-product-pullback"
+   }
+  },
+  {
+   "text": "Naturality of $\\mu$ in its second argument, applied to $t_n$, says $(1\\otimes Ft_n)\\mu_{M,n+1}=\\mu_{M,n}F(1\\otimes t_n)$. Thus the $\\mu_{M,n}$ form an isomorphism of strict towers, with inverse also commuting with transitions. Apply it degree by degree to a complex $P$. Naturality in its first argument, applied to $d_P^r$, gives the cochain-map equation, and applied to any complex map or homotopy gives naturality on the homotopy category. Denote the resulting ordinary isomorphism by $\\mu_P:F^{\\rm Tow}a_Y(P)\\xrightarrow{\\sim}a_X(FP)$. This is a single map of tower complexes before localization, with all transitions retained.",
+   "uses": [
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, functoriality in both factors"
+   }
+  },
+  {
+   "text": "If $P\\in\\mathcal P_Y$, then $FP\\in\\mathcal P_X$ by preservation of flat-term K-flat complexes under ringed pullback. Combine steps 3 and 7 to obtain on such representatives\n$$\\theta_P=c_{X,FP}^{-1}\\circ q_X^{\\rm Tow}(\\mu_P)\\circ F^{\\rm Tow}(c_{Y,P}):F^{\\rm Tow}B_Y(q_YP)\\xrightarrow{\\sim}B_X(F(q_YP)).$$\nExact-localization comparisons from step 1 are implicit in this typed formula. The equivalence $W_Y^{-1}\\mathcal P_Y\\simeq D(R_Y)$ in site-derived-tensor descent makes $q_Y|_{\\mathcal P_Y}$ a localization. All arrows in the displayed formula are natural on $\\mathcal P_Y$. The localization universal property extends $\\theta$ and its inverse uniquely, giving a natural isomorphism $\\tau$. Their composites descend the identity, so remain identities. Any natural transformation satisfying the prescribed representative equation restricts to $\\theta$ and equals $\\tau$ by the same fully faithful restriction. This proves existence, invertibility, naturality and the claimed uniqueness.",
+   "uses": [
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, lemma-pullback-K-flat, and 06YY, lemma-derived-base-change; descent through the resolving localization"
+   }
+  },
+  {
+   "text": "Write $u_{T,P}:\\Delta_TP\\to a_T(P)$ for $p\\mapsto(p\\otimes1)_n$. Unitality of every $t_n$ makes this a map of strict tower complexes. The augmentation on representatives is $i_{T,q_TP}=c_{T,P}^{-1}q_T^{\\rm Tow}(u_{T,P})$. This natural map on $\\mathcal P_T$ extends uniquely through its localization, which is exactly the augmentation induced by $R_T\\to Q_{T,n}$. Substituting step 8 and canceling $F^{\\rm Tow}(c_{Y,P})$ gives\n$$\\theta_PF^{\\rm Tow}(i_{Y,q_YP})=c_{X,FP}^{-1}q_X^{\\rm Tow}(\\mu_PF^{\\rm Tow}(u_{Y,P}))=c_{X,FP}^{-1}q_X^{\\rm Tow}(u_{X,FP})=i_{X,F(q_YP)}.$$\nThe middle equality is the unit calculation of step 6, already an equality of strict tower cochain maps. Localization uniqueness now proves the augmentation equation for every derived $K$.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03CZ and 03EL in sites-modules.tex, with Tag 06YY counit normalization"
+   }
+  },
+  {
+   "text": "Finally, exact evaluation sends $a_T(P)$ to $P\\otimes Q_{T,n}$ and $\\mu_P$ to $\\mu_{P,n}$. The resolving-class criterion applied to the single-level functor gives its universal counit invertible on $\\mathcal P_T$ by step 2. Consequently evaluation of $c_{T,P}$ identifies the tower reduction with this single-level derived reduction by their common localized representative model; the identification is unique by localization. Evaluating the formula of step 8 is therefore precisely the ordinary comparison $\\mu_{P,n}$ conjugated by these single-level counits. The representative-normalized derived tensor/pullback comparison has this same formula; localization uniqueness identifies them for every $K$. Evaluation is used here to identify the stated evaluations, while the strict-tower map and its augmentation equality have already been constructed before evaluation. None of the arguments imposes perfection, boundedness, adic structure or completeness.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY, lemma-derived-base-change, and 07A4, lemma-pullback-tensor-product; evaluation of the representative formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-inverse-system",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-left-derived-from-kflat-class",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-diagram-site-realization",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Adaptation of Tags 06YS, 06YY, 07A4 to strict towers; ordinary normalization from sites-modules.tex, Tags 03CZ and 03EL"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +234,52 @@
    "results": "{\"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"n_hits\": 3, \"note\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits provide only ordinary pullback, abstract derivation or cone APIs; none states this normalized strict-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "reductionTower|KFlat.*pullback|pullback.*KFlat",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback composition, module flatness, projective Tor and abstract derived-functor APIs do not state the normalized unbounded strict-tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor with a strict inverse system of algebra sheaves commutes with exact module pullback",
+   "results": "{\"top\": [\"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullback\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.sheafificationCompPullback\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback composition, module flatness, projective Tor and abstract derived-functor APIs do not state the normalized unbounded strict-tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "{\"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"n_hits\": 5, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback composition, module flatness, projective Tor and abstract derived-functor APIs do not state the normalized unbounded strict-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived tensor reduction tower commutes with exact inverse image of ringed topoi on flat term K flat complexes",
+   "results": "{\"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.lTensor_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback composition, module flatness, projective Tor and abstract derived-functor APIs do not state the normalized unbounded strict-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural tensor comparison on K flat resolutions descends uniquely to derived categories and commutes with coefficient transition maps",
+   "results": "{\"top\": [\"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor_map\", \"CategoryTheory.Tor_obj\", \"Module.Flat.rTensor_shortComplex_exact\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback composition, module flatness, projective Tor and abstract derived-functor APIs do not state the normalized unbounded strict-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "IsLeftDerivedFunctor|leftDerived.*[Tt]ensor|[Tt]ensor.*leftDerived",
+   "results": "{\"top\": [\"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean\"], \"n_hits\": 18, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary pullback composition, module flatness, projective Tor and abstract derived-functor APIs do not state the normalized unbounded strict-tower comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-pbc-direct-image-limits",
@@ -87,5 +296,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-reduction-pullback-derived-tower",
+  "worker": "stage1 N5",
+  "summary": "Constructed the comparison on strict tower complexes, descended from flat-term K-flat representatives with universal counits, and checked the scalar-extension mate, transitions, augmentation and evaluation. Reused existing DAG results; no new nodes. The statement is unchanged.",
+  "blueprint": "prop-weil-pbc-direct-image-limits, final proof sentence: projection-formula isomorphisms commute with quotient transitions and identify the completion map; this item supplies the normalized strict reduction/pullback comparison behind that mate.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site resolution, scalar-extension, tensor, or localization tool, applied to the fixed strict coefficient tower; it replaces no geometric step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "Generic ringed-site resolution, scalar-extension, tensor, or localization tool, applied to the fixed strict coefficient tower; it replaces no geometric step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic ringed-site resolution, scalar-extension, tensor, or localization tool, applied to the fixed strict coefficient tower; it replaces no geometric step of the proper-base-change unit."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Generic ringed-site resolution, scalar-extension, tensor, or localization tool, applied to the fixed strict coefficient tower; it replaces no geometric step of the proper-base-change unit."
+   },
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "Generic ringed-site resolution, scalar-extension, tensor, or localization tool, applied to the fixed strict coefficient tower; it replaces no geometric step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic ringed-site resolution, scalar-extension, tensor, or localization tool, applied to the fixed strict coefficient tower; it replaces no geometric step of the proper-base-change unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-pur-left-derived-from-kflat-class",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-ddcd83c1b",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-ddcd83c1b (reviewer sub-agent of L); spot-checked: Read in full: the unchanged statement, all 10 steps, every cited node statement, and Stacks 03EL/03CZ/06YS/06YT/06YY/0G7E/07A4/06XN (labels checked against tags/tags). On side-live the item is still unsplit; this is a first split with no re-split note, no new nodes and no cycle. No existing node duplicates it: strict-tower-projection-morphism is about finite free towers and pur-cochain-pullback-tensor-coherence is chain-level only. Tool uses accepted (kflat-resolution, change-of-rings-kflat-quasi-iso, left-derived-from-kflat-class, derived-change-of-rings): generic black boxes off the unit. Checked: step 2 needs no flatness of Q_n; the step 3 resolving-class hypotheses; the step 6 mate direction, recomputed as Fm⊗Fq↦F(m⊗q), inverse to μ; step 7 strictness via naturality in N for t_n; step 8 localization through the descent equivalence W^{-1}P≃D(R) with uniqueness from (3); the step 9 augmentation cancellation; step 10 evaluation via single-level counits. Edge cases: identity f, constant tower Q_n=R, zero tower, Z→Z/p, unbounded K. Fault C1/C2 in step 4: it was marked elementary but used, with no node, that tensor products on the diagram site are levelwise and compatible with transitions. This is needed for K-flatness and flatness of ΔP and for identifying the change of rings at ΔP with a_T(P). FIX: the step now cites canonical-ringed-tensor-comparison-construction and its definition, applied to e_n, plus ringed-tensor-section-calculus (pure tensors commute with restrictions and determine maps); it adds that ΔP→ΔK is a K-flat resolution; elementary is set to false. Also restored stmt_dep lem-weil-tower-category-levelwise-abelian, which the statement's derived category of strict towers needs. proof_deps unchanged. 'F exact' is accepted as set-up data, the same wording the parent and sibling use.; 1 file(s) fixed by the reviewer"
  }
 }
