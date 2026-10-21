@@ -34,7 +34,7 @@
  ],
  "proof": [
   {
-   "text": "Write $A_T=\\nu_T^*$. The comparison unit and classical equivalence give $L=R\\nu_{X,*}K\\in D^+(X_{\\Et},\\Lambda)$ and $\\alpha:A_XL\\cong K$. Exactness gives $A_XH^q(L)\\cong H^q(K)$. Apply the torsion-reflection lemma to the exact fully faithful left adjoint $A_X$: every $H^q(L)$ has torsion underlying abelian sheaf.",
+   "text": "Write $A_T=\\nu_T^*$. The bounded-below comparison unit is invertible, so the classical derived equivalence applies: $L=R\\nu_{X,*}K\\in D^+(X_{\\Et},\\Lambda)$ and its counit $\\alpha:A_XL\\cong K$ is invertible because $K$ is classical. Exactness of the module comparison gives $A_XH^q(L)\\cong H^q(K)$ for every $q$. Apply the torsion-reflection lemma to the exact fully faithful left adjoint $A_X$ (right adjoint $\\nu_{X,*}$): every $H^q(L)$ has torsion underlying abelian sheaf, with no uniform annihilator.",
    "uses": [
     "sk-prop-sf-comparison",
     "det-pe-classical-derived-equivalence",
@@ -45,82 +45,66 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Opening paragraph: classical descent and torsion reflection"
+    "place": "Opening paragraph"
    }
   },
   {
-   "text": "For a torsion abelian etale complex $E\\in D^+$, choose a lower bound $a$ and put $\\Phi=g^{-1}Rf_*$, $\\Psi=Rf'_*g'^{-1}$. These are triangulated and their exchange commutes with shifts. Torsion assembly makes the exchange invertible at each $H^q(E)[0]$. Finite Postnikov propagation therefore makes it invertible at every $E_m=\\tau_{\\le m}E$ for $m\\ge a-1$; for smaller $m$, $E_m=0$ by truncation cohomology and cohomology detection.",
+   "text": "On abelian etale complexes put $\\Phi=g^{-1}Rf_*$ and $\\Psi=Rf'_*g'^{-1}$, with the abelian derived exchange $\\Ex:\\Phi\\to\\Psi$. Abelian etale sheaves form Grothendieck categories and $f_*,f'_*$ are left exact additive, so the K-injective right derived direct images preserve every lower bound by negative vanishing; exact inverse images preserve cohomology. Both functors are triangulated and the exchange respects shifts. Torsion assembly makes it invertible on every $H^q(E)[0]$ when $E$ has torsion cohomology. The heart test therefore makes $\\Ex_E$ invertible for every such $E\\in D^+$.",
    "uses": [
+    "lem-weil-pbc-heart-test-bounded-below",
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+    "lem-weil-pbc-direct-image-left-exact",
+    "def-weil-pbc-direct-image",
     "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-exact-functor-bounded-below",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
     "lem-weil-pbc-derived-direct-image-triangulated",
     "lem-weil-pbc-derived-exchange-triangulated",
-    "lemma-weil-pbc-torsion-assembly",
-    "lem-weil-pbc-finite-postnikov-isomorphism",
-    "lem-weil-pbc-truncation-cohomology",
-    "lem-weil-pbc-derived-plus-iso-on-cohomology"
+    "lemma-weil-pbc-torsion-assembly"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Bounded below complexes paragraph: finite induction"
+    "place": "Bounded below complexes paragraph"
    }
   },
   {
-   "text": "Take $\\mathcal P$ to be all primes; the torsion characterization puts $E$ in $D^+_{\\mathcal P\\text{-tor}}$. The truncation criterion gives isomorphisms $H^m\\Phi(E_m)\\cong H^m\\Phi(E)$ and $H^m\\Psi(E_m)\\cong H^m\\Psi(E)$. Naturality of the abelian exchange [def-weil-pbc-derived-exchange] identifies its bottom arrow with its invertible top arrow through these isomorphisms. Thus $H^m(\\Ex_E)$ is invertible for every $m$, and cohomology detection makes $\\Ex_E$ invertible.",
-   "uses": [
-    "lem-weil-pbc-torsion-sheaf-characterizations",
-    "sbc-def-derived-categories-with-allowable-torsion",
-    "sbc-lem-bounded-below-truncation-criterion",
-    "def-weil-pbc-derived-exchange",
-    "lem-weil-pbc-derived-plus-iso-on-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Bounded below complexes paragraph: degreewise comparison, Stacks 05TC"
-   }
-  },
-  {
-   "text": "Forgetting coefficients sends $L$ to an abelian complex with the same underlying cohomology, so step 3 applies. The coefficient-forgetting comparison identifies the forgotten module exchange with that abelian exchange and reflects invertibility. Hence the specified etale module exchange $e_L$ is invertible.",
+   "text": "Forgetting coefficients sends $L$ to an abelian complex with its underlying cohomology. The coefficient-forgetting comparison identifies the forgotten specified module exchange $e_L$ with the abelian exchange of step 2 and reflects invertibility. Hence $e_L$ is invertible.",
    "uses": [
     "lem-weil-pbc-exchange-forget-coefficients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Lambda-modules paragraph, Stacks 03FD and 0D6J"
+    "place": "Lambda-modules paragraph"
    }
   },
   {
-   "text": "The base change $f'$ is proper. Properness gives finite type and separatedness, hence $f,f'$ are qcqs. Apply the site comparisons to these direct-image edges and all inverse-image edges. Their unit/counit and composition coherence meets the hypotheses of the three-step adjunction-comparison lemma for the two unit--square--counit exchange formulas. It gives vertex isomorphisms $V_i$ with $V_iA_{Y'}(e_i)=p_iV_{i-1}$ for the three factors. Composing gives $V_3A_{Y'}(e_L)=\\Ex^p_{A_XL}V_0$; thus $\\Ex^p_{A_XL}$ is invertible.",
+   "text": "The base change $f'$ is proper. Properness gives finite type and separatedness; finite type gives quasi-compactness, and separatedness gives quasi-separatedness. Apply discrete exchange site comparison: its canonical vertex isomorphisms satisfy $T_L A_{Y'}(e_L)=e^p_{A_XL}S_L$. Thus $e^p_{A_XL}=T_L A_{Y'}(e_L)S_L^{-1}$ is invertible, and both endpoints are bounded below and classical.",
    "uses": [
+    "lem-weil-pbc-discrete-exchange-site-comparison",
     "lem-weil-pbc-proper-base-change",
     "def-weil-proper-morphism",
     "def-weil-finite-type-morphism",
-    "lem-pc-separated-quasi-separated",
-    "sk-thm-pe-direct-image-comparison",
-    "lem-weil-pbc-three-step-adjunction-comparison",
-    "sk-def-exchange",
-    "def-weil-pbc-ambient-ringed-exchange"
+    "lem-pc-separated-quasi-separated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Pro-etale paragraph: qcqs comparison and composition of the three mate squares"
+    "place": "Pro-etale site paragraph: qcqs hypotheses and canonical mate"
    }
   },
   {
-   "text": "Naturality along $\\alpha:A_XL\\cong K$ conjugates the preceding exchange to the one at $K$. Both endpoints are bounded below and classical: the site comparisons identify them with $A_{Y'}(g^{-1}Rf_*L)$ and $A_{Y'}(Rf'_*g'^{-1}L)$, which lie in the classical essential image by the derived equivalence. This full subcategory contains the inverse, proving the asserted isomorphism.",
+   "text": "Naturality of the ambient exchange along the counit isomorphism $\\alpha:A_XL\\cong K$ conjugates the preceding map to the exchange at $K$, and its two endpoint maps are isomorphisms. Hence its endpoints remain bounded below and classical. Their full derived subcategory contains the inverse, giving the claimed isomorphism.",
    "uses": [
     "def-weil-pbc-ambient-ringed-exchange",
-    "sk-thm-pe-direct-image-comparison",
-    "det-pe-classical-derived-equivalence",
-    "sk-prop-sf-comparison"
+    "sk-def-pe-classical-definition"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-    "place": "Pro-etale paragraph: naturality and bounded-below classical endpoints"
+    "place": "Pro-etale site paragraph: naturality and classical endpoints"
    }
   }
  ],
@@ -130,31 +114,29 @@
   "det-pe-classical-sheaves-modules",
   "lem-weil-pbc-exact-functor-bounded-below",
   "lem-weil-pbc-exact-faithful-torsion",
+  "lem-weil-pbc-heart-test-bounded-below",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-abelian-etale-sheaves-grothendieck",
+  "lem-weil-pbc-direct-image-left-exact",
+  "def-weil-pbc-direct-image",
   "def-weil-pbc-derived-inverse-image",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
   "lem-weil-pbc-derived-direct-image-triangulated",
   "lem-weil-pbc-derived-exchange-triangulated",
   "lemma-weil-pbc-torsion-assembly",
-  "lem-weil-pbc-finite-postnikov-isomorphism",
-  "lem-weil-pbc-truncation-cohomology",
-  "lem-weil-pbc-derived-plus-iso-on-cohomology",
-  "lem-weil-pbc-torsion-sheaf-characterizations",
-  "sbc-def-derived-categories-with-allowable-torsion",
-  "sbc-lem-bounded-below-truncation-criterion",
-  "def-weil-pbc-derived-exchange",
   "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-discrete-exchange-site-comparison",
   "lem-weil-pbc-proper-base-change",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
   "lem-pc-separated-quasi-separated",
-  "sk-thm-pe-direct-image-comparison",
-  "lem-weil-pbc-three-step-adjunction-comparison",
-  "sk-def-exchange",
-  "def-weil-pbc-ambient-ringed-exchange"
+  "def-weil-pbc-ambient-ringed-exchange",
+  "sk-def-pe-classical-definition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
-  "place": "Same four paragraphs as the retained proof; smaller torsion and finite-Postnikov lemmas, and reuse of the existing degreewise truncation criterion"
+  "place": "The four retained blueprint paragraphs, assembled through the existing classical derived equivalence and Q03 helpers and two independent statement-only helpers (heart test, discrete exchange site comparison); argument allocation in the Q70 report and review."
  },
  "mathlib_searches": [
   {
@@ -255,16 +237,12 @@
   "date": "2026-10-21",
   "item": "sk-thm-properbasechange",
   "worker": "stage1",
-  "summary": "Repair of the human re-split return: statement unchanged; reduced the 10048-character proof to short assembly, extracted generic integer-torsion reflection and finite Postnikov propagation, and reused the existing bounded-below truncation criterion rather than duplicating it. Complete short proofs for the two new statement-only nodes are in the delivery report, as the stage-1 new-node format requires.",
-  "blueprint": "Step 1 realizes the opening classical descent paragraph; steps 2-3 the finite Postnikov/degreewise bounded-below paragraph; step 4 the coefficient-forgetting paragraph; steps 5-6 the canonical pro-etale mate comparison and classical endpoints. The projective-line/reduction route remains below torsion assembly.",
+  "summary": "Retained the live Q03 repair and its two reusable lemmas, and the blueprint-cited classical derived equivalence for the opening descent. Added two statement-only work units: the bounded-below heart test and canonical site-exchange comparison for arbitrary discrete rings. Parent statement unchanged; five assembly steps. (Reviewer fix: the delivered derived-torsion-descent node duplicated det-pe-classical-derived-equivalence plus lem-weil-pbc-exact-faithful-torsion and was dropped.)",
+  "blueprint": "Opening classical descent paragraph -> det-pe-classical-derived-equivalence (sk-cor-pe-classical-derived) and exact-faithful-torsion; bounded below paragraph -> heart-test-bounded-below (retaining existing finite Postnikov helper); Lambda-modules paragraph -> existing exchange-forget-coefficients; pro-etale paragraph -> discrete-exchange-site-comparison and final naturality step. Existing projective-line/reduction route remains below torsion assembly.",
   "tool_uses": [
    {
     "node": "sk-prop-sf-comparison",
     "why": "The current blueprint explicitly invokes the etale/pro-etale comparison; this bounded-below unit is the hypothesis of the classical equivalence, not a replacement for the proper-base-change route."
-   },
-   {
-    "node": "det-pe-classical-derived-equivalence",
-    "why": "Realizes the current blueprint opening use of sk-cor-pe-classical-derived (whose unit id is absent as a DAG node); its actual statement gives the required counit for arbitrary discrete commutative rings."
    },
    {
     "node": "det-pe-classical-sheaves-modules",
@@ -275,32 +253,16 @@
     "why": "Generic exact-functor cohomology identity used for comparison and inverse images; no proper-base-change content."
    },
    {
-    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "why": "Generic module-to-abelian colimit and kernel comparison used to reflect torsion; no geometric reduction is replaced."
-   },
-   {
     "node": "lem-weil-pbc-derived-exchange-triangulated",
     "why": "Shift and triangle compatibility of the specified etale exchange, needed for the blueprint Postnikov induction."
    },
    {
-    "node": "lem-sf-triangle-two-out-of-three",
-    "why": "Generic triangulated-functor isomorphism induction for the finite Postnikov filtration; no purity theorem is used."
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic lower-cohomology-bound preservation for right derived functors; used only to verify the heart-test hypothesis, not to replace the geometric route."
    },
    {
-    "node": "sk-thm-pe-direct-image-comparison",
-    "why": "The current blueprint explicitly invokes this site-comparison theorem, for qcqs f and f-prime and arbitrary inverse-image edges. Its unit/counit/composition coherence identifies the canonical exchange."
-   },
-   {
-    "node": "sbc-lem-bounded-below-truncation-criterion",
-    "why": "Generic degreewise upper-truncation comparison, with the allowed set all primes and no smoothness hypothesis; replaces exactly the former step 5 truncation argument, not the geometric route."
-   },
-   {
-    "node": "sbc-def-derived-categories-with-allowable-torsion",
-    "why": "Names the all-prime torsion subcategory needed to apply the existing truncation criterion."
-   },
-   {
-    "node": "lem-weil-pbc-torsion-sheaf-characterizations",
-    "why": "Its equivalence between filtered-kernel torsion and stalkwise torsion verifies the all-primes hypothesis of the existing truncation tool."
+    "node": "det-pe-classical-derived-equivalence",
+    "why": "The blueprint's opening paragraph cites sk-cor-pe-classical-derived for K = nu^* K_et; this is that node."
    }
   ]
  },
@@ -315,15 +277,16 @@
   "sk-thm-pe-direct-image-comparison",
   "sbc-lem-bounded-below-truncation-criterion",
   "sbc-def-derived-categories-with-allowable-torsion",
-  "lem-weil-pbc-torsion-sheaf-characterizations"
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lem-weil-pbc-derived-functor-negative-vanishing"
  ],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q03-901787da7",
-  "group": "Q03",
+  "reviewer": "NT-cc-Q70-a029dd136",
+  "group": "Q70",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-901787da7 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, the report, the main-20261015 section and proof, the unit record and every cited statement. The statement is unchanged against live: only proof, proof_deps, proof_origin and split_report differ. The re-split meets the size limits: 6 steps, 2382 characters in total, longest step 525. There is no SGA citation and no cycle (closure of 9793 ids, item not in it). Stacks labels checked: 03DA/03DB in sites-modules.tex, 0038 in categories.tex, 08J5 and 05TC in derived.tex. New node lem-weil-pbc-exact-faithful-torsion is true. Additivity and kernel preservation give A(F[n]) ≅ (AF)[n] with its transitions; the left adjoint preserves the divisibility colimit; full faithfulness reflects isomorphisms; forget is conservative and preserves these colimits. I tested it on A = id, F = 0 and constant Q/Z (no uniform bound). It is generic, not a parent clause, and has no duplicate. New node lem-weil-pbc-finite-postnikov-isomorphism is true: the base case b = a−1 gives the zero object, and the induction uses the truncation triangle, shift compatibility (needed for the third square and for negative shifts) and lem-sf-triangle-two-out-of-three. I tested the empty interval, a single degree, negative a and E = 0. DAG searches found no duplicate (lem-sp-finite-filtration-induction and lem-sf-generating-class-determination differ). The step-3 renaming of sbc-lem-bounded-below-truncation-criterion is correct (g→f, f→g, e→g', h→f'). It holds with P = all primes, through torsion characterization (1)⇒(3). Steps 4–6 keep the Q67-accepted forget, three-step and classical-endpoint argument, using only the existence of the vertex isomorphisms. One C4 fault, which I fixed: step 3 cited sk-def-exchange (the Λ-module exchange) for naturality of the abelian exchange, which is def-weil-pbc-derived-exchange (on route via unit sk-def-exchange). The step now cites it, and proof_deps was recomputed. I accept the declared tool uses, including the generic sbc truncation criterion, which replaces only the former generic step 5. Fix: fixes/dag/nodes/sec-proper-base-change/sk-thm-properbasechange.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-a029dd136 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the human's reopened re-split note (2026-10-21, at least 3 new nodes) and against the 10048-character, 9-step reference proof that the note names (Q67 fixes/). The item statement is byte-identical to the base and to main-20261015 _section.md: arbitrary commutative Λ, proper f, arbitrary g, local torsion of K with no uniform bound. Nothing is weakened. I confirmed the Stacks labels in the tags file: 08J5, 05TC, 07A7, 03DA, 03DB, 0038. There is no SGA citation and no cycle (closure of 9802 ids). New node lem-weil-pbc-heart-test-bounded-below is true: for m<a-1 the truncation is 0; otherwise the finite-Postnikov node gives η at the truncation, the tail triangle has vanishing H^{m-1} and H^m because the lower bounds are preserved, and cohomology detection finishes. I tested E=0, a negative a, a single degree and an E unbounded above. It carries old steps 4-5 and has no duplicate (the sbc truncation criterion is site-specific; generating-class covers only thick envelopes). New node lem-weil-pbc-discrete-exchange-site-comparison is true. b_u is the explicit transpose, invertible for qcqs maps by sk-thm-pe-direct-image-comparison. The mate squares follow from lem-pe-direct-image-mate-compatibility, which holds for any discrete Λ, and from three-step-adjunction-comparison. The endpoints are classical, and Lu^*=u^{-1} for constant rings. It carries old steps 7-9 and generalizes lem-weil-pbc-transport-identifies-exchange, which needs finite Λ; the item needs arbitrary Λ, so this is justified. FIX 1 (C5, also against the blueprint route): the new node lem-weil-pbc-derived-torsion-descent is true but re-proves existing results in abstract form. Its counit clause is det-pe-classical-derived-equivalence (2), the node the blueprint opening cites as sk-cor-pe-classical-derived, and its torsion clause is lem-weil-pbc-exact-faithful-torsion applied to each H^q. Old steps 1-2 only cited these. I dropped the node and restored parent step 1 to cite sk-prop-sf-comparison, det-pe-classical-derived-equivalence, det-pe-classical-sheaves-modules, exact-functor-bounded-below and exact-faithful-torsion. FIX 2 (C4): step 2 applied negative-vanishing without citing its hypotheses: abelian-etale-sheaves-grothendieck, direct-image-left-exact and def-weil-pbc-direct-image. It also did not cite def-weil-pbc-derived-exchange for the tested transformation. I added all four. With the drop, every old argument still sits in a dedicated node: Q03's exact-faithful-torsion and finite-postnikov, plus the two new nodes kept here. The delivery now adds 2 new nodes rather than 3; I accept this, following earlier decisions where re-splits rest on existing nodes. Maintainer note: the descent node should not be recreated. The parent now has 5 steps and 2074 characters (longest step 589); step 5 (naturality and fullness) is elementary. Fixed file: fixes/dag/nodes/sec-proper-base-change/sk-thm-properbasechange.json.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {

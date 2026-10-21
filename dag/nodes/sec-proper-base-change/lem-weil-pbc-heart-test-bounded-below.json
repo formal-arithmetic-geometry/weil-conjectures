@@ -1,0 +1,83 @@
+{
+ "id": "lem-weil-pbc-heart-test-bounded-below",
+ "kind": "statement",
+ "title": "A heart test for bounded-below left t-exact transformations",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian] with derived categories [def-weil-abstract-derived-category]. Let $\\Phi,\\Psi:D^+(\\mathcal A)\\to D^+(\\mathcal B)$ be triangulated functors [def-weil-triangulated-category, def-weil-pbc-bounded-derived-subcategories], with specified natural shift isomorphisms $\\xi_E:\\Phi(E[1])\\cong\\Phi(E)[1]$ and $\\zeta_E:\\Psi(E[1])\\cong\\Psi(E)[1]$. Let $\\eta:\\Phi\\to\\Psi$ be a natural transformation satisfying $\\zeta_E\\circ\\eta_{E[1]}=\\eta_E[1]\\circ\\xi_E$ for every $E$. Assume both functors preserve every lower cohomology bound: if $H^q(M)=0$ for $q<n$, then $H^q(\\Phi M)=H^q(\\Psi M)=0$ for $q<n$, for every integer $n$ and every $M\\in D^+(\\mathcal A)$.\n\nLet $E\\in D^+(\\mathcal A)$ and suppose $\\eta_{H^q(E)[0]}$ is invertible for every $q\\in\\mathbf Z$, where $H^q(E)[0]$ means the cohomology object placed in degree zero. Then $\\eta_E$ is invertible. More precisely, for every $m\\in\\mathbf Z$, the upper truncation inclusion $c_m:\\tau_{\\le m}E\\to E$ [def-sbc-standard-tstructure-derived-category] makes both $H^m(\\Phi c_m)$ and $H^m(\\Psi c_m)$ invertible, $\\eta_{\\tau_{\\le m}E}$ is invertible, and naturality gives\n$$H^m(\\eta_E)=H^m(\\Psi c_m)\\circ H^m(\\eta_{\\tau_{\\le m}E})\\circ H^m(\\Phi c_m)^{-1}.$$\nThe statement allows negative lower bounds and does not assume an upper bound on $E$ or preservation of any infinite limit by either functor.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/sk-thm-properbasechange.proof.md",
+  "place": "Bounded below complexes paragraph: finite Postnikov filtration and degreewise upper-truncation comparison; Stacks derived.tex Tag 08J5 (remark-truncation-distinguished-triangle) and Tag 05TC (lemma-negative-vanishing), truncation triangle argument generalized from derived functors to lower-bound-preserving triangulated functors."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "isIso.*(heart|trunc|bounded)|(?i:postnikov|generating.*heart)",
+   "results": "25 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean. Hits give truncation maps, triangle isomorphisms, or individual t-structure bounds; none proves the bounded-below isomorphism test for a shift-compatible transformation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformation of left t exact functors isomorphism on the heart implies isomorphism on bounded below complexes",
+   "results": "8 hits: CategoryTheory.Functor.leftDerivedNatIso, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.NatTrans.leftDerivedToHomotopyCategory, CategoryTheory.ShortComplex.mapLeftHomologyIso_hom_naturality, CategoryTheory.instIsIsoFunctorFromLeftDerivedZero, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.AdditiveFunctor.ofLeftExact_map, CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology. Hits give truncation maps, triangle isomorphisms, or individual t-structure bounds; none proves the bounded-below isomorphism test for a shift-compatible transformation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, \"isIso\", \"trunc\"",
+   "results": "0 hits: . Hits give truncation maps, triangle isomorphisms, or individual t-structure bounds; none proves the bounded-below isomorphism test for a shift-compatible transformation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A shift compatible natural transformation between left t exact triangulated functors is an isomorphism on bounded below complexes if it is an isomorphism on their cohomology objects in degree zero",
+   "results": "8 hits: CategoryTheory.Functor.IsHomological.of_iso, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso, DerivedCategory.triangleOfSESIso, CategoryTheory.Functor.mem_homologicalKernel_W_iff, CategoryTheory.ShortComplex.ShortExact.singleTriangleIso_hom_hom₁, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.instCommShiftHomologicalComplexIntUpFunctorQuasiIsoMapHomologicalComplexUpToQuasiIsoLocalizerMorphism, CategoryTheory.Functor.mem_homologicalKernel_trW_iff. Hits give truncation maps, triangle isomorphisms, or individual t-structure bounds; none proves the bounded-below isomorphism test for a shift-compatible transformation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded below derived categories are generated degree by degree by their cohomology objects for a natural transformation of triangulated functors preserving lower cohomology bounds",
+   "results": "8 hits: DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.instIsLEObjSingleFunctor, DerivedCategory.TStructure.t, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE. Hits give truncation maps, triangle isomorphisms, or individual t-structure bounds; none proves the bounded-below isomorphism test for a shift-compatible transformation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans|isIso.*(homology|cohomology)|IsLeftTExact",
+   "results": "20 hits: Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLEGT.lean. Hits give truncation maps, triangle isomorphisms, or individual t-structure bounds; none proves the bounded-below isomorphism test for a shift-compatible transformation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-thm-properbasechange",
+  "date": "2026-10-21",
+  "group": "Q70"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-properbasechange",
+   "place": "Bounded below complexes paragraph: finite Postnikov filtration and degreewise upper-truncation comparison",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

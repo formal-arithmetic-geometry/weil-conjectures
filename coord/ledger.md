@@ -19949,3 +19949,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:45 L: merged deliver/Q01/lem-sfb-grothendieck-sheafification (reviewer FIX; first push; new nodes: 4)
 - 03:45 L: merged deliver/Q20/lem-pe-comparison-etale-slice-abelian-pullback (reviewer PASS; first push; new nodes: 0)
 - 03:45 L: merged deliver/Q64/lem-sp-finite-coefficient-input-models (reviewer FIX; first push; new nodes: 0); claim not held by Q64: not your claim
+- 03:45 L: merged deliver/Q70/sk-thm-properbasechange (reviewer FIX; after a return; new nodes: 2)
