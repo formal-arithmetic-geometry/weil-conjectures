@@ -16,9 +16,172 @@
   "def-amb-etale-compact-support",
   "det-pe-finite-tor-comparison-noetherian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every standing scheme is Noetherian: a field is Noetherian (its only ideals are zero and the unit ideal), and finite type over a Noetherian base implies Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. In particular it is quasi-compact and quasi-separated. Every finite coefficient ring is Noetherian, since ascending chains of its ideals stabilize in its finite underlying set. For $R=A,B$ and $K\\in D^b_{ctf}(T_{et},R)$, choose a Tor interval $[\\alpha,\\beta]$ with $\\alpha\\le\\beta$. By [lem-sf-etale-flat-constructible] choose a representing complex $P$ of flat constructible $R_T$-modules, zero outside $[\\alpha,\\beta]$. It is K-flat by [lem-pc-bounded-above-flat-kflat-site]. We use this construction separately for each input; there is no assertion that one interval works for all inputs.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sf-etale-flat-constructible",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, lemma-when-ctf; morphisms.tex Tag 01T6, lemma-finite-type-noetherian; sites-cohomology.tex Tag 06YQ, lemma-bounded-flat-K-flat"
+   }
+  },
+  {
+   "text": "Write the chosen compactification as $U\\xrightarrow j\\overline U\\xrightarrow r V$. Apply the model of Step 1 on $U$. Extension by zero is exact and preserves quasi-isomorphisms by [lem-weil-pbc-extension-by-zero-exact], so $j_!P$ represents $Dj_!K$. Its terms are constructible by [lem-fin-extension-by-zero]. They are flat: for a module sheaf $M$ on $\\overline U$, [lem-weil-pbc-ringed-slice-extension-tensor] gives $(j_!P^q)\\otimes M\\simeq j_!(P^q\\otimes j^*M)$. Here restriction $j^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact]; tensoring with $P^q$ and applying $j_!$ are exact too. Thus the displayed functor of $M$ is exact. The complex $j_!P$ is still zero outside $[\\alpha,\\beta]$, and is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Its tensor with any degree-zero module sheaf is therefore zero outside this interval. Its cohomology is constructible because kernels and cokernels of maps of constructible sheaves are constructible by [thm-constructible-serre]. Hence $Dj_!K$ lies in $D^b_{ctf}(\\overline U_{et},R)$, with Tor interval $[\\alpha,\\beta]$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-fin-extension-by-zero",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DJ, lemma-extension-by-zero-exact, and 0E8I, lemma-j-shriek-and-tensor; etale-cohomology.tex Tags 03S5 and 03RZ"
+   }
+  },
+  {
+   "text": "The map $r$ is proper and $V$ is quasi-compact. By [lem-sfb-finite-proper-geometric-cd-bound] there is $e\\ge0$ such that all torsion abelian sheaves on all geometric fibres have cohomology zero above $2e$. This includes every $\\ell$-power torsion sheaf, so it supplies precisely the fibre hypothesis of [det-ctf-finite-proper-tor], with $d=2e$. Both $\\overline U,V$ and $r$ are in the standing setting by the hypothesis on the compactification. Applying that node to $Dj_!K$ from Step 2 gives $Rr_*Dj_!K\\in D^b_{ctf}(V_{et},R)$, with Tor interval $[\\alpha,\\beta+2e]$. This is $F^{et}_{h,R}K$ by [def-amb-etale-compact-support]. Apply the same argument for $R=A$ and for $R=B$.",
+   "uses": [
+    "lem-sfb-finite-proper-geometric-cd-bound",
+    "det-ctf-finite-proper-tor",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F12, lemma-pull-out-constant-mod-n; proper finite-Tor application in det-ctf-finite-proper-tor; uniform fibre bound in lem-sfb-finite-proper-geometric-cd-bound"
+   }
+  },
+  {
+   "text": "For $K\\in D^b_{ctf}(T_{et},A)$ choose $P$ as in Step 1. The change-of-rings functor of [lem-pur-derived-change-of-rings] is represented by $P\\otimes_{A_T}B_T$. Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity topos with ring map $A_T\\to B_T$: this complex is K-flat with flat $B_T$-terms. Each term is constructible. Indeed, on a stratum and an etale cover trivializing the constructible term $P^q$ as a finite $A$-module $M$, the extended term is the constant $B$-module $M\\otimes_A B$. It is finite, being a quotient of a finite free $B$-module. The same strata therefore satisfy [def-weil-pbc-etale-constructible-sheaf] over $B$. This complex is still zero outside $[\\alpha,\\beta]$; kernels and cokernels are constructible by [thm-constructible-serre], and tensoring this flat model with any $B_T$-module stays in $[\\alpha,\\beta]$. Thus $T_TK\\in D^b_{ctf}(T_{et},B)$, even when $B$ has infinite projective dimension over $A$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, lemma-when-ctf, and lemma-tensor-constructible (Tag 0GKB); sites-cohomology.tex Tags 06YY, 0G7E and 07A4"
+   }
+  },
+  {
+   "text": "For a standing map $u:T'\\to T$, the constant-coefficient module inverse image is exact by [prop-weil-pbc-inverse-image-modules-exact]. Hence applying it termwise to $P$ represents $u^*K$. Its terms are flat and K-flat as a complex by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Constructibility of inverse images is [prop-constructible-pullback]; in the module formulation, pull back the local constant finite-module trivializations of [def-weil-pbc-etale-constructible-sheaf], with their scalar actions. Cohomology of the bounded resulting complex is constructible by [thm-constructible-serre]. It is zero outside $[\\alpha,\\beta]$, and its tensor with any degree-zero module sheaf is zero outside the same interval. Thus $u^*$ preserves $D^b_{ctf}$ and the chosen Tor bound.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "prop-constructible-pullback",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, lemma-when-ctf, and lemma-pullback-ctf; sites-modules.tex Tag 04JC; sites-cohomology.tex Tag 0G7E"
+   }
+  },
+  {
+   "text": "The integer $N=\\ell^n$ is a unit on every standing scheme: its image in the characteristic-$p$ field is nonzero, so its inverse in $k$ maps to an inverse in every local ring. By [lem-asd-finite-etale-twist-line], $R_T(a)$ is a flat finite locally constant line for each $a\\ge0$, including $R_T(0)=R_T$. It is constructible by the one-stratum case of [def-weil-pbc-etale-constructible-sheaf]. Tensor with this flat constructible sheaf preserves bounded constructibility by [lem-fd-flat-constructible-tensor]. It also preserves the Tor interval of $K$: tensor the model $P$ with the line. Each term is flat because tensoring with it is the composite of two exact tensor functors, and the complex has the same finite support and is K-flat by [lem-pc-bounded-above-flat-kflat-site]. For any integer $b$, shifting a model replaces its degree $q$ term by its degree $q+b$ term and changes the differential by $(-1)^b$; thus it changes $[\\alpha,\\beta]$ to $[\\alpha-b,\\beta-b]$ and retains constructibility and flatness. Combining this with Step 5 proves the assertion for $u^*(-)(a)[b]$.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-fd-flat-constructible-tensor",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PK, section-kummer, 095I, lemma-tensor-product-constructible, and 0961, lemma-tensor-c; sites-cohomology.tex Tag 06YQ, lemma-bounded-flat-K-flat"
+   }
+  },
+  {
+   "text": "For each standing $T$ and $R=A,B$, $T$ is quasi-compact and quasi-separated and $R$ is a discrete Noetherian ring by Step 1. Apply [det-pe-finite-tor-comparison-noetherian] with $X=T$ and $\\Lambda=R$. It gives the required equivalence on $D^b_{ctf}$ and both implications for every Tor interval $[\\alpha,\\beta]$. No adjunction-transfer theorem is used to assert this equivalence or the preservation already proved in Steps 2--6.",
+   "uses": [
+    "det-pe-finite-tor-comparison-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AL, lemma-compare-constructible-derived; the tensor-test preservation/reflection argument of det-pe-finite-tor-comparison-noetherian.proof.md"
+   }
+  },
+  {
+   "text": "For coefficient change the comparison is the canonical isomorphism $\\nu_{T,B}^*(K\\otimes^L_{A_T}B_T)\\simeq(\\nu_{T,A}^*K)\\otimes^L_{A_{T,proet}}B_{T,proet}$. To see this in the $B$-module category, use $P$ from Step 1: its extension is the flat model of Step 4, and both sides are represented by the termwise comparison $\\nu_T^{-1}(P^q\\otimes_{A_T}B_T)\\simeq\\nu_T^{-1}P^q\\otimes_{\\nu_T^{-1}A_T}\\nu_T^{-1}B_T$. Constant ring identifications and exactness are [lem-sf-comparison-pullback-exact], and the canonical tensor comparison and preservation of K-flat flat-term representatives are [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The map is $B$-linear since the scalar $b$ acts through the second tensor factor on both sides. Naturality of the cited tensor comparison gives naturality in $K$; this is the canonical comparison rather than an isomorphism chosen from the equivalence. Both objects are in the indicated subcategories by Steps 4 and 7.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product, and Tag 0G7E, lemma-pullback-K-flat; sites-modules.tex Tag 04JC"
+   }
+  },
+  {
+   "text": "For scheme inverse image use the canonical natural comparison $\\nu_{T'}^*u_{et}^{-1}\\simeq u_{proet}^{-1}\\nu_T^*$ of [lem-weil-pbc-comparison-pullback]. It applies to module sheaves with the same finite constant scalar ring. Exactness of the etale inverse image is [prop-weil-pbc-inverse-image-modules-exact], of the pro-etale coefficient pullback is [lem-pur-coefficient-pullback-exact], and of $\\nu^*$ is [lem-sf-comparison-pullback-exact]. Therefore the same comparison, applied termwise, is the derived comparison on $K$. Its isomorphism identifies the pro-etale pullback of $\\nu_T^*K$ with $\\nu_{T'}^*(u^*K)$, which lies in $D^b_{ctf}$ by Steps 5 and 7. The identity and composition compatibilities are already part of the statement of [lem-weil-pbc-comparison-pullback].",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pur-coefficient-pullback-exact",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, lemma-describe-pullback-from-etale; sites-modules.tex Tag 04JC"
+   }
+  },
+  {
+   "text": "For $m=N$ and $R=A,B$, [lem-amb-finite-root-site-comparison] identifies the etale root sheaf pulled to the pro-etale site with the same root functor there, sending a root to that same unit, and gives $\\nu_T^*R_T(1)\\simeq R_{T,proet}(1)$. Apply the canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] repeatedly to its $a$ tensor factors and to $K$; for $a=0$ use the constant unit identification of [lem-sf-comparison-pullback-exact]. This gives $\\nu_T^*(K(a))\\simeq(\\nu_T^*K)(a)$ for every $a\\ge0$. The root comparison is compatible with scheme pullback, as its cited statement explicitly asserts. Finally $\\nu^*$ is termwise exact by [lem-sf-comparison-pullback-exact], so it commutes with reindexing a cochain complex and its signed differential: $\\nu_T^*(K[b])\\simeq(\\nu_T^*K)[b]$. Steps 6 and 7 put all these objects in $D^b_{ctf}$. Together with Steps 8--9 these are the asserted canonical intertwinings.",
+   "uses": [
+    "lem-amb-finite-root-site-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, lemma-describe-pullback-from-etale; sites-cohomology.tex Tag 07A4; finite root-tensor comparison of lem-amb-finite-root-site-comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sf-etale-flat-constructible",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-fin-extension-by-zero",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-constructible-serre",
+  "lem-sfb-finite-proper-geometric-cd-bound",
+  "det-ctf-finite-proper-tor",
+  "def-amb-etale-compact-support",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "prop-constructible-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-fd-flat-constructible-tensor",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-pur-coefficient-pullback-exact",
+  "lem-amb-finite-root-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts paragraph, domain checks expanded using Stacks flat constructible models, ordinary etale compactification, and existing comparison nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +217,45 @@
    "results": "{\"t\": \"2026-10-21T03:02:54Z\", \"tool\": \"leansearch\", \"query\": \"Etale compactly supported direct image preserves constructible complexes with finite Tor dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.instTensorProduct\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.finitePresentation\"], \"digest\": \"095f05b2e938b869\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits do not state this geometric finite-coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|finiteTor|constructible.*compactSupport",
+   "results": "{\"t\": \"2026-10-21T06:55:19Z\", \"tool\": \"grep\", \"query\": \"proetale|finiteTor|constructible.*compactSupport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern site definitions, etale ring maps, or generic functors, not the complete geometric finite-Tor assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "{\"t\": \"2026-10-21T06:55:20Z\", \"tool\": \"loogle\", \"query\": \"\\\"TorAmplitude\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern site definitions, etale ring maps, or generic functors, not the complete geometric finite-Tor assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale proetale comparison preserves Tor intervals and commutes with coefficient change and Tate twists",
+   "results": "{\"t\": \"2026-10-21T06:55:20Z\", \"tool\": \"leansearch\", \"query\": \"Derived etale proetale comparison preserves Tor intervals and commutes with coefficient change and Tate twists\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.FormallyEtale.of_equiv\", \"Algebra.Etale.comp\", \"RingHom.Etale\"], \"digest\": \"5b04b11449165cf9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern site definitions, etale ring maps, or generic functors, not the complete geometric finite-Tor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale compactly supported pushforward preserves bounded constructible complexes of finite Tor amplitude over a finite coefficient ring",
+   "results": "{\"t\": \"2026-10-21T06:55:20Z\", \"tool\": \"leanfinder\", \"query\": \"Etale compactly supported pushforward preserves bounded constructible complexes of finite Tor amplitude over a finite coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"HomologicalComplex.map_isStrictlySupported\", \"DerivedCategory.isGE_Q_obj_iff\", \"SheafOfModules.pushforward_obj_val\"], \"digest\": \"3d447b91dbbea4b1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern site definitions, etale ring maps, or generic functors, not the complete geometric finite-Tor assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat morphism of topoi preserves constructible perfect coefficient complexes and extension by zero followed by proper pushforward has finite Tor dimension",
+   "results": "{\"t\": \"2026-10-21T06:55:41Z\", \"tool\": \"leanfinder\", \"query\": \"A flat morphism of topoi preserves constructible perfect coefficient complexes and extension by zero followed by proper pushforward has finite Tor dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"CategoryTheory.lan_flat_of_flat\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"CondensedMod.IsSolid\", \"Condensed.instAB5CondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\"], \"digest\": \"b0407f2f931fac80\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern site definitions, etale ring maps, or generic functors, not the complete geometric finite-Tor assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-reduction-exceptional",
@@ -75,5 +273,114 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-etale-ctf-chart-domain",
+  "worker": "stage1",
+  "summary": "Expanded the ordinary etale finite-Tor domain checks into ten steps. Reused existing bounded flat constructible models, open tensor/exactness, proper finite-Tor bounds, coefficient and inverse-image calculus, and the root-normalized site comparison. No new nodes and no change to the statement. Checked arbitrary finite rings and arbitrary standing fields; no flatness of A to B is assumed.",
+  "blueprint": "det-sp-reduction-exceptional, Charts: the canonical isomorphism (e^*p_d^*K(d)[2d])_B ≃ e^*p_d^*(K_B)(d)[2d], and the finite-Tor domains needed to transfer that chart adjunction. Retains the ordinary etale route of the parent split.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic finite-type Noetherian permanence supplies the flat-model hypotheses."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic K-flat criterion computes tensors with the bounded models, on either small site."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Ordinary etale exact extension by zero computes the compactification functor."
+   },
+   {
+    "node": "lem-fin-extension-by-zero",
+    "why": "Ordinary etale constructibility for terms extended from the open."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic ringed-site tensor identity proves flatness of extension by zero."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Ordinary constant-coefficient inverse image is exact, including restriction in the open-flatness calculation."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Kernels and cokernels of maps between the model terms retain constructibility."
+   },
+   {
+    "node": "lem-sfb-finite-proper-geometric-cd-bound",
+    "why": "Uniform all-torsion geometric fibre bound supplies the precise hypothesis of the proper finite-Tor theorem."
+   },
+   {
+    "node": "det-ctf-finite-proper-tor",
+    "why": "Proper finite-Tor theorem applies to the middle compactification map, after extension by zero."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "General ringed-topos K-flat and canonical tensor calculus applies to scalar extension and both site inverse images."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic constructibility of pullback applies to the terms of the ordinary etale flat model."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Arbitrary finite-ring Tate lines, with N invertible, supply flat constructible twisting sheaves."
+   },
+   {
+    "node": "lem-fd-flat-constructible-tensor",
+    "why": "Flat constructible line tensor preserves bounded constructibility."
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Existing site equivalence preserving and reflecting each Tor interval is used as a comparison tool."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Identifies constant scalar rings and the exact termwise site inverse image."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Canonical scheme inverse-image comparison, including its naturality and composition."
+   },
+   {
+    "node": "lem-pur-coefficient-pullback-exact",
+    "why": "Exactness of the actual constant-ring pro-etale module inverse image."
+   },
+   {
+    "node": "lem-amb-finite-root-site-comparison",
+    "why": "Root-normalized ordinary etale/pro-etale Tate-line comparison for arbitrary finite rings."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-fin-extension-by-zero",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-constructible-serre",
+  "lem-sfb-finite-proper-geometric-cd-bound",
+  "det-ctf-finite-proper-tor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-constructible-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-fd-flat-constructible-tensor",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-pur-coefficient-pullback-exact",
+  "lem-amb-finite-root-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-ND-81db4703f",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-81db4703f (reviewer sub-agent of L); spot-checked: I read the item's 10 steps and every cited statement; the delivery has 0 new nodes. The live item is still unsplit: Q13's FIX was refused at landing and Q63 was RETURNed, so this delivery is not superseded. There is no repair note, the statement is unchanged and nothing cites SGA. The off-chapter snapshot symlinks dangle, so I read those cited statements from the live tree. Step checks: (1) finite-type-over-Noetherian, then the flat constructible model of lem-sf-etale-flat-constructible (finite Λ, Noetherian X), made K-flat by the bounded-above-flat lemma. (2) j_! is exact, keeps terms constructible (lem-fin-extension-by-zero) and keeps them flat via the ringed-slice tensor identity; Serre gives constructible cohomology. (3) The geometric-fibre bound for every torsion sheaf gives d=2e for det-ctf-finite-proper-tor; Ū is standing by hypothesis; the interval is [α,β+2e]. (4) Change of rings on the K-flat model: flat terms by ringed-topoi pullback, constructible by local M⊗_A B, valid for Z/ℓ²→F_ℓ. (5) u* via exact inverse image, ringed-topoi flatness and constructible pullback. (6) N is invertible; the twist line is flat, locally free and constructible; lem-fd-flat-constructible-tensor applies; shift sign is right. (7) det-pe-finite-tor-comparison-noetherian with qcqs and Noetherian Λ. (8)-(10) Canonical comparisons: constant-ring identification, tensor comparison, comparison-pullback with identities and composites, and the root comparison σ_{N,T} with pullback compatibility (actual roots, not chosen trivializations). Edge cases checked: U empty, N=1, a=0, negative b, identity compactification. Advisory: Steps 1-4 re-prove inline the clauses of the existing node lem-sp-finite-compact-support-domains (split and reviewed, no cycle); there is no duplicate node, so this is not C5. Batch-5: the flagged det-ctf-finite-proper-tor reaches lem-trf-proper-finite-fibre-finite-near (finite fibre implies finite near a point) through the proper-constructibility chain. That is generic finiteness, which the trace formula assumes rather than proves, and it is not part of the proof of Poincaré duality; accepted. Maintainer: twin NI a6ae099a covers the same item; land only one."
+ }
 }

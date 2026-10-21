@@ -20959,3 +20959,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/NC/lem-sfb-ringed-site-bounded-dual-components (reviewer PASS; first push; new nodes: 0)
 - 08:09 L: merged deliver/NM/lem-weil-pbc-kinjective-fiber-triangle-comparison (reviewer FIX; first push; new nodes: 0)
 - 08:09 L: merged deliver/NH/lem-weil-pbc-tensor-arrow-mate-right-unit (reviewer PASS; first push; new nodes: 0)
+- 08:09 L: merged deliver/ND/lem-sp-etale-ctf-chart-domain (reviewer PASS; first push; new nodes: 0); claim not held by ND: not your claim
