@@ -1,0 +1,99 @@
+{
+ "id": "lem-sfb-pasted-mates-counit-normalization",
+ "kind": "statement",
+ "title": "Counit normal form for two pasted mates with input and output arrows",
+ "statement": "Let $\\mathcal C_i,\\mathcal D_i$ for $i=0,1,2$ be categories [def-nagata-category]. Let $L_i:\\mathcal C_i\\to\\mathcal D_i$ and $R_i:\\mathcal D_i\\to\\mathcal C_i$ be functors with specified adjunctions $L_i\\dashv R_i$, units $\\eta_i$ and counits $\\varepsilon_i$. For $i=1,2$ let $G_i:\\mathcal C_{i-1}\\to\\mathcal C_i$ and $H_i:\\mathcal D_{i-1}\\to\\mathcal D_i$ be functors and let $\\alpha_i:L_iG_i\\to H_iL_{i-1}$ be natural transformations. Write $\\beta_i:G_iR_{i-1}\\to R_iH_i$ for their mates [def-weil-pbc-adjunction-mate]; explicitly,\n$$\\beta_{i,J}=R_i(H_i(\\varepsilon_{i-1,J}))\\circ R_i(\\alpha_{i,R_{i-1}J})\\circ\\eta_{i,G_iR_{i-1}J}.$$\nComposition below is right to left. For any $J\\in\\mathcal D_0$, $Q\\in\\mathcal C_2$, $K\\in\\mathcal D_2$, and morphisms\n$$b:Q\\to G_2G_1R_0J,\\qquad t:H_2H_1J\\to K,$$\nput\n$$q=R_2(t)\\circ\\beta_{2,H_1J}\\circ G_2(\\beta_{1,J})\\circ b:Q\\to R_2K.$$\nThen its counit transpose has the specified normal form\n$$\\varepsilon_{2,K}\\circ L_2(q)=t\\circ H_2H_1(\\varepsilon_{0,J})\\circ H_2(\\alpha_{1,R_0J})\\circ\\alpha_{2,G_1R_0J}\\circ L_2(b).$$\nBoth sides are morphisms $L_2Q\\to K$ in $\\mathcal D_2$. The functors need not be exact, and none of $\\alpha_i,\\beta_i,b,t$ is required to be invertible.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Formal properties paragraph, sentence \"Mates of natural isomorphisms compatible with composition are compatible with composition\", and Finite rings paragraph, transport through nu*: component normalization of two pasted mates with input and output arrows (agent-formulated categorical lemma)"
+ },
+ "stmt_deps": [
+  "def-nagata-category",
+  "def-weil-pbc-adjunction-mate"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mateEquiv_vcomp|mateEquiv_counit|counit.*[Pp]ast|[Pp]ast.*counit",
+   "results": "{\"t\": \"2026-10-21T05:49:13Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_vcomp|mateEquiv_counit|counit.*[Pp]ast|[Pp]ast.*counit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\", \"Mathlib/CategoryTheory/Adjunction/Mates.lean\"], \"digest\": \"d6f7e6613c6af5d5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_counit (Mates.lean:123) normalizes one mate; mateEquiv_vcomp (Mates.lean:170) identifies the mate of a pasted square but does not state its counit transpose with arbitrary input/output arrows. Basic.lean:226,243 supplies separate transpose naturality laws. The requested explicit boundary-arrow formula requires composing these identities and expanding the pasted square, rather than a one-line specialization of one declaration.",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given three adjunctions and two squares, compute the counit transpose of a composite of their right mates after precomposition and postcomposition",
+   "results": "{\"t\": \"2026-10-21T05:49:13Z\", \"tool\": \"leansearch\", \"query\": \"Given three adjunctions and two squares, compute the counit transpose of a composite of their right mates after precomposition and postcomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Bicategory.Adjunction.compCounit\", \"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Bicategory.Adjunction.comp_counit\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.Bicategory.rightAdjointSquare.comp\"], \"digest\": \"44e47a0ffda5d535\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_counit (Mates.lean:123) normalizes one mate; mateEquiv_vcomp (Mates.lean:170) identifies the mate of a pasted square but does not state its counit transpose with arbitrary input/output arrows. Basic.lean:226,243 supplies separate transpose naturality laws. The requested explicit boundary-arrow formula requires composing these identities and expanding the pasted square, rather than a one-line specialization of one declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_vcomp",
+   "results": "{\"t\": \"2026-10-21T05:49:13Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_vcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"502adec603a5acaf\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_counit (Mates.lean:123) normalizes one mate; mateEquiv_vcomp (Mates.lean:170) identifies the mate of a pasted square but does not state its counit transpose with arbitrary input/output arrows. Basic.lean:226,243 supplies separate transpose naturality laws. The requested explicit boundary-arrow formula requires composing these identities and expanding the pasted square, rather than a one-line specialization of one declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit transpose of the composite of two right mate transformations, with arbitrary precomposition and a right adjoint image of an output map",
+   "results": "{\"t\": \"2026-10-21T05:49:24Z\", \"tool\": \"leanfinder\", \"query\": \"Counit transpose of the composite of two right mate transformations, with arbitrary precomposition and a right adjoint image of an output map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv_vcomp\", \"CategoryTheory.rightAdjointMate_comp\"], \"digest\": \"0a640728b51b4202\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_counit (Mates.lean:123) normalizes one mate; mateEquiv_vcomp (Mates.lean:170) identifies the mate of a pasted square but does not state its counit transpose with arbitrary input/output arrows. Basic.lean:226,243 supplies separate transpose naturality laws. The requested explicit boundary-arrow formula requires composing these identities and expanding the pasted square, rather than a one-line specialization of one declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv_naturality_left_symm|homEquiv_naturality_right_symm|counit_naturality|mateEquiv_vcomp",
+   "results": "{\"t\": \"2026-10-21T05:49:49Z\", \"tool\": \"grep\", \"query\": \"homEquiv_naturality_left_symm|homEquiv_naturality_right_symm|counit_naturality|mateEquiv_vcomp\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Restrict.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\"], \"digest\": \"378301b81f7b9eba\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_counit (Mates.lean:123) normalizes one mate; mateEquiv_vcomp (Mates.lean:170) identifies the mate of a pasted square but does not state its counit transpose with arbitrary input/output arrows. Basic.lean:226,243 supplies separate transpose naturality laws. The requested explicit boundary-arrow formula requires composing these identities and expanding the pasted square, rather than a one-line specialization of one declaration.",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Explicit counit normal form for a length two composite of right mates with arbitrary input and output boundary morphisms",
+   "results": "{\"t\": \"2026-10-21T05:49:49Z\", \"tool\": \"leansearch\", \"query\": \"Explicit counit normal form for a length two composite of right mates with arbitrary input and output boundary morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Bicategory.Adjunction.compCounit\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Bicategory.Adjunction.counit\", \"CategoryTheory.Bicategory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Adjunction.counit_naturality_assoc\"], \"digest\": \"eb14ca1a4a410839\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_counit (Mates.lean:123) normalizes one mate; mateEquiv_vcomp (Mates.lean:170) identifies the mate of a pasted square but does not state its counit transpose with arbitrary input/output arrows. Basic.lean:226,243 supplies separate transpose naturality laws. The requested explicit boundary-arrow formula requires composing these identities and expanding the pasted square, rather than a one-line specialization of one declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_naturality_left_symm",
+   "results": "{\"t\": \"2026-10-21T05:49:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv_naturality_left_symm\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_naturality_left_symm\"], \"digest\": \"c9c8158b09547262\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_counit (Mates.lean:123) normalizes one mate; mateEquiv_vcomp (Mates.lean:170) identifies the mate of a pasted square but does not state its counit transpose with arbitrary input/output arrows. Basic.lean:226,243 supplies separate transpose naturality laws. The requested explicit boundary-arrow formula requires composing these identities and expanding the pasted square, rather than a one-line specialization of one declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For three adjunctions L_i left adjoint R_i, two squares alpha_i and their mates beta_i, compute epsilon_2 composed with L_2 of R_2(t) beta_2 G_2(beta_1) b as t H_2 H_1(epsilon_0) H_2(alpha_1) alpha_2 L_2(b)",
+   "results": "{\"t\": \"2026-10-21T05:50:00Z\", \"tool\": \"leanfinder\", \"query\": \"For three adjunctions L_i left adjoint R_i, two squares alpha_i and their mates beta_i, compute epsilon_2 composed with L_2 of R_2(t) beta_2 G_2(beta_1) b as t H_2 H_1(epsilon_0) H_2(alpha_1) alpha_2 L_2(b)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_square\"], \"digest\": \"b282c32ee84bf326\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: mateEquiv_counit (Mates.lean:123) normalizes one mate; mateEquiv_vcomp (Mates.lean:170) identifies the mate of a pasted square but does not state its counit transpose with arbitrary input/output arrows. Basic.lean:226,243 supplies separate transpose naturality laws. The requested explicit boundary-arrow formula requires composing these identities and expanding the pasted square, rather than a one-line specialization of one declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-etale-proetale-scalar-counit-transposes",
+  "date": "2026-10-21",
+  "group": "Q01"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-direct-image",
+   "place": "Formal properties: composition of mates and their counit compatibility; Finite rings: transport through nu*. Isolates the two-mate calculations of counit-transposes, old steps 1-2 and 4-6, before using the mixed site/scalar cube.",
+   "via": [
+    "lem-sfb-etale-proetale-scalar-counit-transposes",
+    "lem-sfb-etale-proetale-scalar-mate"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
