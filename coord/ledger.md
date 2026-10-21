@@ -21021,3 +21021,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:13 L: returned deliver/NN/lem-sf-open-quotient-koszul-completeness (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sf-open-quotient-koszul-completeness: cited node l)
 - 08:13 L: returned deliver/Q48/lem-sp-restricted-scalar-cohomology-local-constancy (reviewer RETURN: L: independent stage-2 immutable head b6fbd77f9cd8: H13 x2. The item statement matches the node (all hypotheses and clau)
 - 08:13 L: returned deliver/NP/sk-def-sf-admissible (reviewer RETURN: L: independent stage-2 immutable head c9664d838c32: H13: the delivery rewrites the landed NW record of def-weil-finite-t)
+- 08:13 L: returned deliver/N9/lem-pd-section-derived-pushpull-normalization (reviewer RETURN: L: independent stage-2 immutable head cdab90d9fce1: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 [59.1 s])
