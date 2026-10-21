@@ -21136,3 +21136,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:28 L: merged deliver/Q134/thm-nagata-blowup-flat-base-change (reviewer PASS; after a return; new nodes: 0)
 - 08:28 L: merged deliver/N6/lem-pur-compact-support-arrow-scalar-transport (reviewer PASS; first push; new nodes: 0); claim not held by N6: not your claim
 - 08:28 L: merged deliver/Q05/prop-nagata-strict-transform-chart-iso (reviewer PASS; first push; new nodes: 0)
+- 08:28 L: merged deliver/Q128/lemma-nagata-strict-transform-chart-localization-data (reviewer PASS; after a return; new nodes: 0)

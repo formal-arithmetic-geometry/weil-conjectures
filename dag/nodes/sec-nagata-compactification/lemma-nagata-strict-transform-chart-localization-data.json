@@ -3,38 +3,170 @@
  "blueprint": {
   "is": "lemma-nagata-strict-transform-chart-localization-data",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Localization data for strict-transform chart quotients",
- "statement": "For $s\\in B$, the canonical map\n\n$$\n(C_a(A,B,I)/\\Gamma_{(a)}C_a(A,B,I))_s\n\\longrightarrow\nC_a(A,B_s,I)/\\Gamma_{(a/1)}C_a(A,B_s,I)\n$$\n\nis an isomorphism. These isomorphisms are compatible with further\nlocalization: the maps obtained by localizing successively at $s$ and $t$\nagree with localization at $st$.",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, $I\\subseteq A$ an ideal, and $a\\in I$, with the chart rings of [def-nagata-strict-transform-chart-ring]. For $s\\in B$, the canonical map\n\n$$\n(C_a(A,B,I)/\\Gamma_{(a)}C_a(A,B,I))_s\n\\longrightarrow\nC_a(A,B_s,I)/\\Gamma_{(a/1)}C_a(A,B_s,I)\n$$\n\nis an isomorphism. These isomorphisms are compatible with further\nlocalization: the maps obtained by localizing successively at $s$ and $t$\nagree with localization at $st$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization-data.md",
   "place": "node lemma-nagata-strict-transform-chart-localization-data, order 154"
  },
  "stmt_deps": [
-  "def-nagata-strict-transform-chart-ring"
+  "def-nagata-strict-transform-chart-ring",
+  "def-nagata-strict-transform-basechange-chart-ring",
+  "def-nagata-power-torsion",
+  "def-weil-pbc-module-localization"
  ],
  "proof": [
   {
-   "text": "Localization commutes with tensor products, so\n$(B\\otimes_A A[I/a])_s\\cong B_s\\otimes_A A[I/a]$. By\n[lemma-nagata-power-torsion-localization], the image of the\n$a$-power-torsion submodule is exactly the $a/1$-power-torsion submodule.\nThe universal property of quotients gives the displayed isomorphism.\nCompatibility for $s,t$ follows because both composites send pure tensors\nand chart fractions to the same elements of the $st$-localization.",
+   "text": "Write $D=A[I/a]$, $C=B\\otimes_A D$, and $u$ for the image of $s$ in $C$. As in the current statement of [def-nagata-strict-transform-chart-ring], let $\\bar a\\in C$ be the structural image of $a$ and put $J=\\Gamma_{(\\bar a)}(C)$, the power-torsion submodule of the regular $C$-module $C$; the strict-transform chart is $C/J$. This is an ideal: $0$ is killed by $\\bar a^0$; if $\\bar a^m x=\\bar a^n y=0$, then $\\bar a^{m+n}(x+y)=0$; and $\\bar a^m(rx)=r(\\bar a^m x)=0$. Use $J'$ for the power-torsion ideal in $C'=B_s\\otimes_A D$. Below, $a$ and $s$ in each chart mean their structural images; the symbol $\\alpha_s$ in step 2 denotes a ring isomorphism, distinct from these elements.",
    "uses": [
-    "lemma-nagata-power-torsion-localization"
+    "def-nagata-strict-transform-basechange-chart-ring",
+    "def-nagata-strict-transform-chart-ring",
+    "def-nagata-power-torsion"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization-data.md",
+    "place": "statement, expanding the chart and power-torsion definitions"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-tensor-over-base] with its $R=A$, its algebra $B$, multiplicative subset $\\{s^n:n\\geq0\\}$, module $M=B$, and $N=D$. Its displayed fraction formula gives a $B$-linear isomorphism $\\alpha_s:C_u\\xrightarrow{\\sim}C'$, $(b\\otimes d)/u^n\\mapsto(b/s^n)\\otimes d$. It is a ring isomorphism: it sends $1$ to $1$, and on fractional pure tensors the product formula on both sides is $(bb'/s^{n+m})\\otimes dd'$. Finite sums of these fractions comprise $C_u$, so distributivity verifies multiplicativity everywhere. In particular $\\alpha_s$ takes the structural image of $a$ to that of $a$ in $C'$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DK (lemma-tensor-localization) and 00D2 (lemma-tensor-with-bimodule), specialized through the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "The extended ideal $JC_u$ consists exactly of fractions $j/u^n$ with $j\\in J$: sums of multiples of such fractions have a common denominator and numerator in $J$. Every such fraction is killed by a power of $a$. Conversely, if $a^k(x/u^n)=0$, the localization equality criterion gives an $\\ell\\geq0$ with $u^\\ell a^k x=0$ in $C$. Hence $u^\\ell x\\in J$ and $x/u^n=(u^\\ell x)/u^{n+\\ell}\\in JC_u$. Thus $JC_u=\\Gamma_{(a/1)}(C_u)$. Since $\\alpha_s$ and its inverse preserve $a$, applying them to the equations $a^kz=0$ gives $\\alpha_s(JC_u)=J'$.",
+   "uses": [
+    "def-nagata-power-torsion",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization-data.md",
+    "place": "proof: the power-torsion localization identity, written out by the fraction criterion; compare the current blueprint lemma-nagata-power-torsion-localization"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-localization-quotient-commute] to the commutative ring $C$, its ideal $J$, and $u\\in C$. It gives the canonical ring isomorphism $(C/J)_{\\bar u}\\to C_u/JC_u$, $[x]/\\bar u^n\\mapsto[x/u^n]$. By step 3, the formula $[z]\\mapsto[\\alpha_s(z)]$ defines an isomorphism $C_u/JC_u\\to C'/J'$; its inverse is induced by $\\alpha_s^{-1}$, since it sends $J'$ to $JC_u$. Their composite is the map in the statement. For $x=\\sum_i b_i\\otimes d_i$, its explicit formula is $[x]/\\bar u^n\\mapsto[\\sum_i(b_i/s^n)\\otimes d_i]$. This also identifies the constructed isomorphism with the canonical map, rather than an arbitrary ring equivalence.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CT, proposition-localize-quotient, followed by the explicit quotient map induced by step 2"
+   }
+  },
+  {
+   "text": "Use the canonical identification $(B_s)_t\\cong B_{st}$ and the analogous one for $C/J$: localizing successively makes $s$ and $t$ units, hence $st$ a unit; inverting $st$ makes $s$ and $t$ units with inverses $t/(st)$ and $s/(st)$. The mutually inverse fraction maps send $(x/s^n)/t^m$ to $x s^{k-n}t^{k-m}/(st)^k$ for $k=\\max(n,m)$, and $x/(st)^k$ back to $(x/s^k)/t^k$. Substitution into these formulas gives the identity in both orders by cancellation of the invertible denominators. The localization equality criterion shows the formulas respect equivalent representatives (multiply a witnessing zero equality by the missing powers of $s$ and $t$).",
+   "uses": [
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02C6, proposition-localize-twice: universal-property argument specialized to powers of s and t, with explicit fraction formulas"
+   }
+  },
+  {
+   "text": "Apply step 4 first to $B$ at $s$ and then to $B_s$ at the image of $t$. Under step 5, on $[x]$ with $x=\\sum_i b_i\\otimes d_i$ the composite is $[\\sum_i(b_i/1)\\otimes d_i]$ in $C_a(A,B_{st},I)/\\Gamma_{(a)}$. This is also the value of the map constructed directly at $st$. On a general double-localized element $([x]/s^n)/t^m$, both maps therefore give $[\\sum_i(b_i/(s^nt^m))\\otimes d_i]$. These elements comprise the whole source, so the maps agree. This proves successive-localization compatibility; no nonzerodivisor, flatness of $B$ over $A$, or nonzero-ring assumption was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization-data.md",
+    "place": "proof, final sentence: compatibility for s,t, expanded on arbitrary localized quotient elements"
+   }
   }
  ],
  "proof_deps": [
-  "lemma-nagata-power-torsion-localization"
+  "def-nagata-strict-transform-basechange-chart-ring",
+  "def-nagata-strict-transform-chart-ring",
+  "def-nagata-power-torsion",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-module-localization",
+  "lem-weil-pbc-localization-quotient-commute"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization-data.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/lemma-nagata-strict-transform-chart-localization-data.md",
+  "place": "Current blueprint statement and imported proof, with fraction calculations supplied and Stacks Tags 00DK, 00D2, 00CT, 02C6 as the algebraic tools"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization of the quotient of a tensor product algebra by power torsion is the quotient of the localized tensor product algebra by power torsion, compatibly with successive localization",
+   "results": "IsLocalization.tensorProduct_tensorProduct, IsLocalization.algebraTensorEquiv, IsLocalization.tensorRight, IsLocalization.Away.tensor, IsLocalization.tensor, IsLocalization.Away.tensorRight, IsLocalizedModule.rTensor, IsLocalization.tmul_mk'",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole chart quotient and compatibility statement; the tensor and quotient hits supply separate tools already in the DAG"
+  },
+  {
+   "tool": "grep",
+   "query": "algebraTensorEquiv|tensorLeft|tensorRight",
+   "results": "Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole chart quotient and compatibility statement; the tensor and quotient hits supply separate tools already in the DAG"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.algebraTensorEquiv",
+   "results": "IsLocalization.algebraTensorEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole chart quotient and compatibility statement; the tensor and quotient hits supply separate tools already in the DAG"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localizing a tensor product algebra modulo power torsion commutes with localizing the first algebra and with successive localization",
+   "results": "IsLocalization.tensorProduct_tensorProduct, IsLocalizedModule.rTensor, IsLocalization.Away.tensorEquiv, IsLocalization.mk'_tmul, IsLocalization.instIsLocalizedModuleTensorProductMap, IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.commutes, IsLocalization.Away.commutes",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole chart quotient and compatibility statement; the tensor and quotient hits supply separate tools already in the DAG"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product B localized at s tensor over A D is the localization at s of B tensor over A D",
+   "results": "IsLocalization.algebraTensorEquiv, IsLocalization.tensorProduct_tensorProduct, IsLocalization.tensor, IsLocalization.tensorRight, IsLocalization.tensorProduct_isLocalizedModule, IsLocalization.moduleTensorEquiv, IsLocalization.Away.tensor, IsLocalizedModule.rTensor",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole chart quotient and compatibility statement; the tensor and quotient hits supply separate tools already in the DAG"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, Ideal.Quotient",
+   "results": "loogle: unknown identifier 'Ideal.Quotient'",
+   "date": "2026-10-21",
+   "verdict": "invalid query: loogle: unknown identifier 'Ideal.Quotient'"
+  },
+  {
+   "tool": "grep",
+   "query": "powTorsion|torsion.*quotient|QuotientIdeal|tensorProduct_tensorProduct",
+   "results": "Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean, Mathlib/RingTheory/Localization/BaseChange.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole chart quotient and compatibility statement; the tensor and quotient hits supply separate tools already in the DAG"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, \"quotient\"",
+   "results": "Submodule.toLocalizedQuotient', IsLocalizedModule.toLocalizedQuotient', Submodule.toLocalizedQuotient'_mk, IsLocalization.instQuotientIdealAlgebraMapSubmonoidMapRingHomAlgebraMap, IsLocalization.surjective_quotientMap_of_maximal_of_localization, IsLocalization.AtPrime.equivQuotientMapMaximalIdeal, IsLocalization.AtPrime.equivQuotientMapMaximalIdeal_apply_mk, IsLocalization.AtPrime.equivQuotientMapMaximalIdeal_symm_apply_mk",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole chart quotient and compatibility statement; the tensor and quotient hits supply separate tools already in the DAG"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Power torsion quotient of a base changed blowup chart commutes with principal localization and the resulting ring isomorphisms compose",
+   "results": "IsLocalization.tensor, RingHom.StableUnderCompositionWithLocalizationAwayTarget, RingHom.StableUnderCompositionWithLocalizationAway, Submodule.toLocalizedQuotient'_mk, IsLocalization.tensorRight, AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes, RingHom.StableUnderCompositionWithLocalizationAwaySource, IsLocalization.Away.tensorEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole chart quotient and compatibility statement; the tensor and quotient hits supply separate tools already in the DAG"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -72,5 +204,21 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-strict-transform-chart-localization-data",
+  "worker": "stage1",
+  "summary": "Q128: made the inherited ring/chart context explicit, retained both clauses, and expanded the proof into six steps using existing tensor-localization and quotient-localization Mathlib leaves. Proved the torsion identity by fractions rather than using the erroneous ordinary-image wording of the imported neighbour. Wrote out the successive-localization fraction formula and equality of the canonical maps. No new nodes. Current Lean declarations found on the broader search are reported without another attachment, as expressly required by the direct-delivery brief. Repair of return at ec667c10f70: re-read all six current cited statements, aligned step 1 with the revised chart definition (structural image and regular-module torsion ideal), and replaced its stale citation quote; all other seven quotes remain verbatim.",
+  "blueprint": "Unit sk-lem-nagata-sketch-blowups, step 1, sentence \"These descriptions commute with localization\": steps 1–2 realize tensor localization; step 3 realizes the current blueprint power-torsion identity; step 4 realizes the quotient isomorphism; steps 5–6 realize the final successive-localization clause.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-55ab3a8e4",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-55ab3a8e4 (reviewer sub-agent of L); spot-checked: Read the item in full: 6 steps, 0 new nodes. Since ec667c10 (returned at landing only because the chart definition changed) the delivery changes only step 1, now aligned with the revised def-nagata-strict-transform-chart-ring (ā the structural image, T = Γ_(ā)(C)); I re-read every step anyway. The item is still imported in live and side-live. It has no repair note and is not in route-pivot-dropped. The statement is the blueprint_update statement plus the chart definition's own context (A→B commutative, I an ideal, a∈I); it is not weakened and both clauses are kept. Step 2: lem-weil-pbc-localization-tensor-over-base with R=A, algebra B, T={s^n}, M=B, N=D gives C_u ≅ B_s⊗_A D, and the ring check and the image of a are correct. Step 3: the inline proof that JC_u = Γ(C_u) supplies the extra power u^ℓ, so it is correct with zero divisors. Step 4: lem-weil-pbc-localization-quotient-commute holds for an arbitrary ideal; composed with the map induced by α_s it gives the canonical map with an explicit formula. Steps 5–6: I checked the (B_s)_t ≅ B_st fraction maps (Stacks 02C6) and recomputed both routes on ([x]/s^n)/t^m, which both give [Σ b_i/(s^n t^m)⊗d_i]. Edge cases checked: a = 0, nilpotent or a unit; s = 0, nilpotent or 1; t = 0; the zero ring; Z→Z/4 with a = 2. Stacks labels 00DK, 00D2, 00CT and 02C6 are verified. No SGA. All citations are definitions or Mathlib leaves, so tool_uses is empty. The item does not cite lemma-nagata-power-torsion-localization and proves the special case inline; I accept this because that node's live statement (ordinary image) is false: R=N=Z, a=0, s=2 gives image Z ≠ Z[1/2] = Γ_0(Z[1/2]). Maintainer notes: (1) STATEMENT-DISPUTED on the main statement of lemma-nagata-power-torsion-localization; its blueprint_update is correct. (2) Sorry-free project Lean exists in Blowup/Affine/StrictTransformChart.lean: StrictChart.isLocalization_away, strictChartLocalizationEquiv and StrictChart.map_comp. These are an attachment candidate."
  }
 }
