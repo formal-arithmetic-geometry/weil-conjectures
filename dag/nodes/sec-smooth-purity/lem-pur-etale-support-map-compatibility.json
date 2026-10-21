@@ -39,193 +39,58 @@
  ],
  "proof": [
   {
-   "text": "First check the geometry needed below. Proper base change preserves properness, and separated finite-type base change preserves separatedness and finite type; base change also preserves etaleness and open immersions. Thus c' is a compactification of e'. Its ambient scheme and V' are Noetherian by finite type over T'. The same argument makes the ambient scheme of c Noetherian. No separatedness or finite-type hypothesis on g is used. For an etale W over T and a lift s:W\\to V, its graph is open and closed in V\\times_TW by the etale-section lemma. Its image in \\overline V\\times_TW is still open, and is closed because it is a section of the separated morphism r_W; this uses the closed-section lemma, not a finiteness assertion about r. On the disjoint open cover consisting of that graph and its complement, glue m\\in M(W,s) with zero. This is a section of j_!M on \\overline V\\times_TW: its restriction to the boundary is zero, and its support is closed inside that graph. Pullback of the graph for s along a map W_1\\to W is the graph for s|_{W_1}. Consequently these assignments commute with restrictions and are A-linear, and the sum-presheaf construction and the universal property of module sheafification give a natural sheaf map a_M:e_{\\Sigma!}M\\to r_*j_!M. The support-composition theorem identifies r_*j_!M with e^{\\mathrm{supp}}_!M as a subsheaf of e_*M, by keeping the section itself. The canonical sum/proper-support identification in the quasi-finite comparison identifies its summand (s,m) with precisely this zero-extended graph section (the construction in Tag 0F4L). Hence a is that sheaf identification, in particular an isomorphism.",
+   "text": "Choose an EtaleCompactSupportNormalization N from its nonemptiness theorem. Use N.sheafComparison and N.comparison for the two families. The sheaf and homotopy normalization equations and the arbitrary-base-change equation are precisely fields of N.",
    "uses": [
-    "lem-weil-pbc-proper-base-change",
-    "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-etale-section-clopen-immersion",
-    "lem-weil-pbc-section-separated-closed-immersion",
-    "lem-weil-pbc-separated-base-change",
-    "def-weil-pbc-etale-sum-extension",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-cbc-proper-support-sheaf-composition",
-    "lem-sfb-quasifinite-compact-support-exact"
+    "lem-asd-etale-compact-support-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F4Y, 0GKM; etale-cohomology.tex Tag 0F4L, graph-section construction; Schemes closed-section lemma"
-   }
+   "elementary": false
   },
   {
-   "text": "Write t_M=(c_e^c(M))^{-1}. On a complex P on V, apply a termwise and then the derived-functor comparison q_{j_!P}:Q(r_*j_!P)\\to Rr_*Q(j_!P). This gives t: S_e\\to F_e^c: it is the canonical comparison of the quasi-finite theorem, with its sheaf proper-support identification from Step 1. Set d_M:r^*S_eM\\to Dj_!M to be its adjoint under r^*\\dashv Rr_*. Crucially, d is the descent of the termwise sheaf map d^0_P=\\varepsilon^0_{r,j_!P}\\circ r^*a_P. To verify the assertion on an arbitrary unbounded P, choose j_!P\\xrightarrow{\\iota}I K-injective. The map t_P is represented by r_*\\iota\\circ a_P, and its adjoint is represented by \\varepsilon^0_{r,I}\\circ r^*(r_*\\iota\\circ a_P)=\\iota\\circ\\varepsilon^0_{r,j_!P}\\circ r^*a_P, by naturality of the sheaf counit. In the derived category Q\\iota is invertible. The termwise adjunction on homotopy categories and the bijection of maps into K-injectives justify this computation. Exactness of r^*, e_{\\Sigma!} and j_! implies that the two functors on either side of d^0 preserve quasi-isomorphisms; localization therefore gives the asserted d, naturally in M. In particular d evaluates the graph sections of Step 1; it is not an arbitrarily chosen isomorphism between functors.",
+   "text": "For each sheaf M apply degree-zero homology to N.derived_normalization on the single complex M. The total right-derived unit of the left-exact proper direct-image functor is an isomorphism in degree zero. Naturality transports this along the canonical open-extension/single-complex isomorphism. Cancel the remaining isomorphisms in the homotopy formula. The single-complex homology comparison identifies the resulting isomorphism with the sheafComparison component itself. Componentwise invertibility proves the sheaf natural transformation invertible.",
    "uses": [
-    "lem-sfb-quasifinite-compact-support-exact",
-    "def-amb-etale-compact-support",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-amb-etale-adjoint-locality",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-kun-right-derived-single-h0",
+    "lem-asd-etale-compact-support-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKM canonical derived comparison, expanded by the termwise adjunction and K-injective construction"
-   }
+   "elementary": false
   },
   {
-   "text": "The inverse sum-extension base-change maps b_e and b_j have the following specific effect. If (s,m) is a summand over an etale W\\to T, its pullback over W\\times_TT' is the summand of the pulled-back lift s' with value h^*m. For j the same statement says that the pulled-back zero extension is zero extension on the pulled-back open. This follows from the defining conjugate formula for beta=b^{-1}: its unit restricts a section to the pullback object, its underived exchange is restriction along the fibre-product identification, and its final counit evaluates the same lift. The etale-local underived-exchange lemma and the etale restriction/unit lemma identify these two restrictions explicitly. This calculation gives beta(s',h^*m)=g^*(s,m), hence gives the displayed rule for its inverse, whose existence is the module base-change theorem. It suffices to compute on these local representatives: an inverse-image sheaf is sheafification of the inverse-image presheaf, whose elements are locally represented by a source section. Thus the argument does not claim that all lifts over an arbitrary T'-object descend to T. Pulling back a graph-supported section in Step 1 gives a section on the pulled-back graph with the same value and zero on its complement, since both pieces are open and closed. Evaluating these sections gives the sheaf identity b_j\\circ\\bar h^*d^0_M=d'^0_{h^*M}\\circ r'^*b_e, with the pullback-composition identification r'^*g^*=\\bar h^*r^* understood. The same degreewise equality descends to an equality of derived natural transformations by exactness and the localization uniqueness statement.",
+   "text": "Transport the monoidal structure on left-derived inverse image to exact derived inverse image. The source-library projection theorem makes its left projection mate invertible: this property is invariant under transport, since it is equivalent to invertibility of the internal-hom comparison. Braiding changes the left projection mate to the right projection mate specified in the statement. The transported tensorator is exactly etaleSupportExactUpperTensorIso. Thus the inverse of asIso of etaleSupportSumProjectionReverse supplies p, with the required inverse equation.",
    "uses": [
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "lem-weil-pbc-etale-shriek-base-change-modules",
-    "lem-weil-pbc-etale-underived-exchange-restriction",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-inverse-image",
-    "def-weil-pbc-etale-sum-extension",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7L construction of compact-support exchange; etale-cohomology.tex Tag 03S6, with its conjugate map and graph representatives"
-   }
-  },
-  {
-   "text": "Precompose the desired exchange identity with g^*t_M. It is equivalent to C^c_{e,g}\\circ g^*t_M=t'_{h^*M}\\circ b_e. Transpose both sides under r'^*\\dashv Rr'_*. By the definition of Ex_r as the mate of pullback composition, the transpose of the left side is b_j\\circ\\bar h^*d_M. Indeed the mate equation is \\varepsilon_{r'}\\circ r'^*\\operatorname{Ex}_r=\\bar h^*\\varepsilon_r after pullback composition; naturality moves g^*t through this equation. The transpose of the right side is d'_{h^*M}\\circ r'^*b_e. These are equal by Step 3. Injectivity of the adjunction Hom bijection proves the equivalent identity, and cancellation of t and t' proves (1). All maps have been identified before taking cohomology; no faithfulness of stalks on derived morphisms is used.",
-   "uses": [
-    "def-kun-unbounded-exchange",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7L proper-exchange/open-extension construction, with the explicit defining mate equation"
-   }
-  },
-  {
-   "text": "The underived sheaf projection map is the specific generator map of [lem-pur-etale-sheaf-projection-map]. Its hypotheses hold for the separated etale finite-type morphism $e$, and the node states that this map is an isomorphism, including its stalkwise direct-sum formula and compatibility with the lift-indexed summands. Thus the map used in the later totalization is the canonical $p^0_{M,N}$, not an unspecified isomorphism.",
-   "uses": [
-    "lem-pur-etale-sheaf-projection-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), tensor-generator and stalk calculation; sites-cohomology.tex Tag 0GL1, expanded on unbounded complexes"
-   }
-  },
-  {
-   "text": "For unbounded complexes $P$ on $V$ and $Q$ on $T$, apply [lem-pur-etale-sum-tensor-totalization] to the separated etale finite-type map $e$. Its isomorphism $\\Psi_{P,Q}$ is precisely the totalization of the sheaf maps in Step 5, with the stated generator formula and the signed differential. Choose flat-term K-flat representatives by [lem-pc-kflat-resolution]. By [lem-pur-etale-sum-flat-kflat], $e_{\\Sigma!}P$ is also K-flat with flat terms. By the tensor-pullback theorem $e^*Q$ has those properties as well. Consequently tensor descent computes both total tensors by the derived tensors of the stated inputs. Exactness of sum extension identifies its termwise application on the right with $S_e$.",
-   "uses": [
-    "lem-pur-etale-sum-tensor-totalization",
-    "lem-pur-etale-sum-flat-kflat",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-amb-etale-adjoint-locality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), tensor-generator and stalk calculation; sites-cohomology.tex Tag 0GL1, expanded on unbounded complexes"
-   }
-  },
-  {
-   "text": "The localized flat-term K-flat homotopy category presents $D(V_{\\mathrm{et}},A)$, and separately the analogous category presents $D(T_{\\mathrm{et}},A)$, by tensor descent. For each fixed flat K-flat $Q$ on $T$, Step 6 gives a natural isomorphism in $P$ between the restrictions of $S_e(-)\\otimes_A^L Q$ and $S_e(-\\otimes_A^Le^*Q)$. Localization, clause (2), extends it uniquely in the $V$ variable. The naturality square for every map between such $Q$ holds before localization and hence afterwards by clause (3), so the extension is natural in $Q$. Localize this natural family in the $T$ variable by clause (2) again. Invert the family in the same way; uniqueness and preservation of composition show that its two composites are identities. This gives the natural isomorphism $p^\\Sigma$ on $D(V_{\\mathrm{et}},A)\\times D(T_{\\mathrm{et}},A)$, with exactly the tensor-representative formula in the statement. The two sites were localized separately; they are never identified.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF (lemma-f-shriek-projection), tensor-generator and stalk calculation; sites-cohomology.tex Tag 0GL1, expanded on unbounded complexes"
-   }
-  },
-  {
-   "text": "For the sheaf maps of Steps 1, 2 and 5–7, the following evaluation identity holds after pullback tensor comparison: gamma_j\\circ(d^0_M\\otimes1)=d^0_{M\\otimes e^*K}\\circ r^*p^\\Sigma_{M,K}. Check it on a local pullback of the tensor generator (s,m)\\otimes k. On the graph of s the left side evaluates m and then tensors with the restriction of k, yielding m\\otimes s^*k; off the graph it is zero. The right side first forms the generator (s,m\\otimes s^*k) and then zero-extends and evaluates it, giving those same two restrictions. Equality follows by the sheaf axiom on the disjoint graph/complement cover, by linearity on finite sums, and by the universal properties of inverse image and sheafification. For flat K-flat P,Q the computation is a degreewise equality of maps of total tensor complexes: all maps have degree zero and preserve tensor-factor order, so each differential d_P\\otimes1+(-1)^p1\\otimes d_Q is respected with the same sign on both sides. Step 6 makes S_eP K-flat; the same K-flatness argument for open extension, or its case in the open-tensor theorem, applies to j_!P. The derived tensor-pullback and open-tensor theorems identify these chain maps with the specified derived gamma_j and pullback tensor comparison. Tensor descent and Step 2 therefore give the derived equality gamma_j\\circ(d_M\\otimes1)=d_{M\\otimes^Le^*K}\\circ r^*p^\\Sigma_{M,K} for arbitrary M,K. More explicitly, equality on flat K-flat models extends first in the V-variable and then in the T-variable, using the resolving-class equivalence and localization uniqueness in each variable; no identification of the two sites is required.",
-   "uses": [
-    "lem-pur-etale-open-derived-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-pur-etale-sum-flat-kflat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKF tensor-generator formula; Tag 0GL5 open tensor factor; etale-cohomology.tex Tag 0F4L graph evaluation"
-   }
-  },
-  {
-   "text": "Precompose the proposed projection identity with t_M\\otimes1_K. It is equivalent to P^c_{e,M,K}\\circ(t_M\\otimes1_K)=t_{M\\otimes^Le^*K}\\circ p^\\Sigma_{e,M,K}. Transpose under r^*\\dashv Rr_*. The projection-map definition gives the transpose of the left side as gamma_j\\circ((\\varepsilon_{r,Dj_!M}\\circ r^*t_M)\\otimes1)=gamma_j\\circ(d_M\\otimes1), using naturality of the pullback tensor comparison. The transpose of the right side is d_{M\\otimes^Le^*K}\\circ r^*p^\\Sigma. These are equal by Step 8. The adjunction bijection proves the equivalent identity, and cancellation of the isomorphism t proves (2). This is the counit-defined projection morphism, with precisely the order of factors in the statement; there is no choice of a projection isomorphism by abstract endpoints.",
-   "uses": [
-    "def-kun-projection-formula-map",
+    "lem-pur-source-etale-derived-projection",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL5 compactification projection construction and the counit-defined projection transpose"
-   }
+   "elementary": false
   },
   {
-   "text": "Every previous calculation was performed for the given compactification c, with no use of r being finite. Under a proper-refinement comparison rho:F_e^c\\to F_e^d, the quasi-finite comparison theorem says c_e^d\\circ rho=c_e^c, hence rho\\circ t^c=t^d. Step 4 writes each compactification exchange as t'\\circ b_e\\circ g^*c_e, and Step 9 writes each projection as t\\circ p^\\Sigma\\circ(c_e\\otimes1). Substituting rho\\circ t^c=t^d and its base-changed version into these two expressions proves refinement compatibility by associativity of composition. Naturality in M,K holds because a,d,b,p and the adjunction bijections used above are natural; the identities thus hold as identities of derived natural transformations. This proves the final clause as well as both numbered clauses.",
+   "text": "Transpose the inverse comparison under proper inverse image/direct image. The graph tensor evaluation theorem supplies the equality after precomposing with the sum tensor mate. Naturality of the pullback tensor comparison and the counit formula for the right-adjoint projection map identify this with the transpose of the compactification projection composite. Injectivity of the adjunction bijection gives the untransposed equality. Cancel the invertible reverse sum projection and the inverse normalization comparison to obtain the required projection equation.",
    "uses": [
-    "lem-sfb-quasifinite-compact-support-exact"
+    "lem-pur-compact-support-graph-tensor-evaluation",
+    "def-kun-projection-formula-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKM canonical compactification comparison; Tags 0F7L and 0GL5, refinement independence via the proved formulas"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The refinement field of N uses its inverse comparison for the coarser open immersion. Substitute the unbounded refinement-normalization theorem to identify this composite with the inverse pairwise compactification comparison. The cocycle and identity laws make the pairwise comparisons inverse to each other. Cancel them to obtain exactly the stated orientation of the refinement equation.",
+   "uses": [
+    "lem-asd-etale-compact-support-normalization",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-amb-etale-compact-support",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-kun-right-derived-single-h0",
+  "lem-pur-source-etale-derived-projection",
+  "lem-pur-compact-support-graph-tensor-evaluation",
   "def-kun-projection-formula-map",
-  "def-kun-unbounded-exchange",
-  "def-weil-pbc-etale-shriek-base-change-map",
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-pbc-inverse-image",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-amb-etale-adjoint-locality",
-  "lem-cbc-proper-support-sheaf-composition",
-  "lem-pc-kflat-resolution",
-  "lem-pod-separated-finite-type-base-change",
-  "lem-pur-etale-open-derived-tensor",
-  "lem-pur-etale-sheaf-projection-map",
-  "lem-pur-etale-sum-flat-kflat",
-  "lem-pur-etale-sum-tensor-totalization",
-  "lem-sfb-quasifinite-compact-support-exact",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-weil-pbc-etale-underived-exchange-restriction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-section-separated-closed-immersion",
-  "lem-weil-pbc-separated-base-change",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F4Y, 0GKM, 0F7L, 0GKF, 0GL5 and etale-cohomology.tex Tags 03S6, 0F4L; explicit graph-evaluation and adjunction-transpose proof, not a quotation of an omitted coherence argument"
+  "place": "Tags 0GKF and 0GL5; stage 3 reuses the simultaneous graph normalization, the source derived etale projection formula, H0 of the right-derived unit, and the unbounded compactification comparisons. Only the graph tensor evaluation is a separate geometric obligation."
  },
  "mathlib_searches": [
   {
@@ -525,35 +390,15 @@
   "def-kun-unbounded-exchange",
   "def-weil-pbc-etale-shriek-base-change-map",
   "def-weil-pbc-etale-sum-extension",
-  "def-weil-pbc-inverse-image",
   "def-weil-presheaf-modules-sheafification",
   "lem-amb-etale-adjoint-locality",
-  "lem-amb-etale-sum-stalks",
-  "lem-cbc-proper-support-sheaf-composition",
   "lem-pc-kflat-resolution",
-  "lem-pod-etale-stalk-tensor-scalar",
-  "lem-pod-separated-finite-type-base-change",
   "lem-pur-etale-open-derived-tensor",
   "lem-sfb-quasifinite-compact-support-exact",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-section-clopen-immersion",
   "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-weil-pbc-etale-underived-exchange-restriction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-kinjective-hom-derived",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-proper-base-change",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-section-separated-closed-immersion",
-  "lem-weil-pbc-separated-base-change",
   "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lemma-weil-pbc-geometric-stalk-conservative",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "reviewed": {
@@ -595,5 +440,15 @@
   "from_unit": "sk-prop-cohsm",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T152402-L-1922543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

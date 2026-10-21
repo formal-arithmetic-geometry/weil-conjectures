@@ -1,0 +1,156 @@
+{
+ "id": "lem-pur-compact-support-graph-tensor-evaluation",
+ "kind": "statement",
+ "title": "Tensor evaluation of the normalized compactification graph",
+ "statement": "Let $A$ be a finite commutative ring and $e:V\\to T$ a separated etale finite-type morphism between Noetherian schemes. Choose a compactification $c=(j:V\\hookrightarrow Z,r:Z\\to T)$ [def-weil-compactifications-refinements]. Work on the ordinary small etale sites in unbounded derived categories of constant-$A$ module sheaves [def-weil-pbc-derived-categories], with derived tensor [def-kun-derived-tensor]. Let $N$ be a graph- and homotopy-normalized compact-support comparison [lem-asd-etale-compact-support-normalization]. Put $S=D(e_{\\Sigma!})$, $E=D(e^*)$, $O=D(j_!)$, $P=Lr^*$ and $R=Rr_*$. Write $t_M=(N.comparison(e,c))^{-1}_M:SM\\to ROM$, and let $d_M:PSM\\to OM$ be its transpose under $P\\dashv R$. Write $\\eta$ for the unit of $S\\dashv E$, and $\\theta_{X,K}:EX\\otimes^L EK\\xrightarrow{\\sim}E(X\\otimes^L K)$ for the canonical exact-pullback tensor comparison [lem-asd-etale-sum-extension-tensor]. For all $M\\in D(V,A)$, $K\\in D(T,A)$ and $q:S(M\\otimes^L EK)\\to SM\\otimes^L K$ satisfying $\\eta_{M\\otimes^L EK}E(q)=(\\eta_M\\otimes1)\\theta_{SM,K}$, the following composite equals $d_{M\\otimes^L EK}$: apply $P(q)$, then the canonical comparison $P(SM\\otimes^L K)\\to PSM\\otimes^L PK$, then $d_M\\otimes1$, then the inverse open projection $OM\\otimes^L PK\\to O(M\\otimes^L Lj^*PK)$ [lem-pur-etale-open-derived-tensor], then $O(1\\otimes\\lambda_K)$ and $O(1\\otimes\\iota_K)$. Here $\\lambda:Lj^*Lr^*\\cong Le^*$ is canonical pullback composition and $\\iota:Le^*\\cong E$ is the exact/left-derived comparison [prop-weil-pbc-inverse-image-modules-exact]. There is no boundedness assumption.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GKF (lemma-f-shriek-projection) and 0GL5 (lemma-projection-formula-Rf-lower-shriek); etale-cohomology.tex Tag 0F4L, graph extension. Agent expansion of Step 8 of the parent compatibility proof, not a verbatim single Stacks lemma."
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-kun-derived-tensor",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-etale-sum-extension-tensor",
+  "lem-pur-etale-open-derived-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof": [
+  {
+   "text": "The sheaf and homotopy normalization equations identify d with descended graph evaluation. On a K-injective resolution of the open extension this follows from ordinary counit naturality. The unit equation for q uniquely specifies the reverse sum tensor mate.",
+   "uses": [
+    "lem-asd-etale-compact-support-normalization",
+    "lem-asd-etale-sum-extension-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a local tensor generator (s,m) tensor k both evaluation composites retain m tensor s-star k on the clopen graph of s and vanish on its complement. The sheaf axiom on this disjoint open cover, linearity, inverse-image locality and module sheafification imply equality on sheaves. The unit equation identifies q as the inverse of the sum projection sending (s,m) tensor k to (s,m tensor s-star k).",
+   "uses": [
+    "lem-pur-etale-sheaf-projection-map",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose flat-term K-flat models separately on V and T. Sum extension and open extension preserve these models; inverse image preserves their flatness. Totalize the equality in every bidegree. All maps have degree zero and preserve tensor-factor order, so the signed differentials agree. The canonical derived pullback tensor and open projection comparisons identify these chain maps with the displayed derived maps.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-etale-sum-flat-kflat",
+    "lem-pur-etale-sum-tensor-totalization",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend equality of the natural families through the K-flat localization presentation, first in the V variable and then in the T variable. Uniqueness of localization descent gives equality on every pair of unbounded derived objects. Homotopy normalization fixes d and the adjunction unit equation fixes q throughout.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-compact-support-normalization",
+  "lem-asd-etale-sum-extension-tensor",
+  "lem-pur-etale-sheaf-projection-map",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-pur-etale-sum-flat-kflat",
+  "lem-pur-etale-sum-tensor-totalization",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0GKF and 0GL5, together with graph extension of etale-cohomology.tex Tag 0F4L; Step 8 of lem-pur-etale-support-map-compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Graph evaluation for an etale compactification commutes with the derived tensor projection formula",
+   "results": "Eight hits: scheme/locally-ringed-space evaluation naturality, pullback triplet SpecTensorTo, and Profinite good-product evaluation. None concerns compact-support graph tensor evaluation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graph evaluation map for an etale compactification commutes with the tensor projection formula",
+   "results": "Eight irrelevant Mathlib hits concerning scheme pullback triplets.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "compactSupportGraph_tensor_evaluation",
+   "results": "No hits; unknown identifier.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactSupport.*[Tt]ensor|[Tt]ensor.*compactSupport",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleSupportMapCompatibility",
+  "date": "2026-10-21",
+  "group": "V2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-co-smooth-etale-locality",
+   "place": "Step 3: the tensor maps are written from the adjunction counit; graph tensor evaluation of Step 8 of lem-pur-etale-support-map-compatibility.",
+   "via": [
+    "lem-pur-etale-support-map-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean_audit": {},
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphTensor",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportGraphTensor.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportGraph_tensor_evaluation",
+  "statement": "theorem compactSupportGraph_tensor_evaluation\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (N : EtaleCompactSupportNormalization A)\n    {V T : Scheme.{u}} [IsLocallyNoetherian V] [CompactSpace V]\n    [IsLocallyNoetherian T] [CompactSpace T]\n    (e : V ⟶ T) [Etale e] [IsSeparated e]\n    [LocallyOfFiniteType e] [QuasiCompact e] (c : Compactification e)\n    (M : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)))\n    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))) :\n    let S : DerivedCategoryModule A V ⥤ DerivedCategoryModule A T :=\n      (etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapDerivedCategory\n    let E : DerivedCategoryModule A T ⥤ DerivedCategoryModule A V :=\n      (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory\n    let O : DerivedCategoryModule A V ⥤ DerivedCategoryModule A c.Z :=\n      (openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory\n    let P : DerivedCategoryModule A T ⥤ DerivedCategoryModule A c.Z :=\n      (upperStar (ModuleCat.{u + 1} A) c.g).leftDerivedFunctor\n    let adj := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) c.g\n    let d : ∀ X : DerivedCategoryModule A V, P.obj (S.obj X) ⟶ O.obj X := fun X ↦\n      (adj.homEquiv (S.obj X) (O.obj X)).symm ((N.comparison e c).inv.app X)\n    let sumAdj := (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) e\n      inferInstance).mapDerivedCategoryAdjunction\n    ∀ q : S.obj (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).obj (E.obj K)) ⟶\n        ((derivedTensor (ModuleCat.{u + 1} A) T).obj (S.obj M)).obj K,\n      sumAdj.unit.app _ ≫ E.map q =\n        ((derivedTensor (ModuleCat.{u + 1} A) V).map (sumAdj.unit.app M)).app (E.obj K) ≫\n          (etaleSumExtensionTensorPullbackIso A e (S.obj M) K).hom →\n      P.map q ≫\n        ((leftDerivedUpperStarTensorComparison (ModuleCat.{u + 1} A) c.g).app (S.obj M)).app K ≫\n        ((derivedTensor (ModuleCat.{u + 1} A) c.Z).map (d M)).app (P.obj K) ≫\n        ((derivedOpenImmersionLowerShriekProjectionIso\n          (ModuleCat.{u + 1} A) c.i).inv.app M).app (P.obj K) ≫\n        O.map (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).map\n          ((leftDerivedUpperStarCompactificationIso (ModuleCat.{u + 1} A) c).hom.app K)) ≫\n        O.map (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).map\n          ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) e).hom.app K)) =\n      d (((derivedTensor (ModuleCat.{u + 1} A) V).obj M).obj (E.obj K))",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T152402-L-1922543",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261021T152402-L-1922543",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
