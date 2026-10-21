@@ -9,16 +9,16 @@ public import Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence
 public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Sheaf.AlgebraicGeometry.FiniteConstantLocalModel
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport
-import Sheaf.Paper.ProEtaleFiniteModelStalks
-import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImageStalk
-import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
-import Mathlib.Algebra.Module.FinitePresentation
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.Paper.CondensedConstantConstructibility
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
-import Mathlib.AlgebraicGeometry.Sites.Proetale
+import Sheaf.Paper.FiniteDiscreteEncodingPullbackFixed
+import Sheaf.Paper.FiniteDiscreteScalarConstantModels
+import Sheaf.Paper.ProEtaleConstantModulePullbackEncoding
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafEquivalence
+import all Sheaf.Paper.ProEtaleConstantModuleConstructibility
+import all Sheaf.Paper.ProEtaleFiniteModelStalks
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Finite constant models and finite-stalk constructibility
 
@@ -33,6 +33,8 @@ constant values on empty covering objects are discarded before asserting their f
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option synthInstance.maxSize 2048
 
 universe u
 
@@ -125,13 +127,14 @@ structure FiniteCoefficientModelComparison [Finite A] (X : Scheme.{u}) (e : Enco
         Nonempty ((CondensedRing.upperStar (coefficient A) (W j).hom).obj
           ((CondensedRing.upperStar (coefficient A) (S.immersion i)).obj M) ≅
             (finiteConstantScalarExtension (coefficient A) (W j).left).obj Q)
+  -- STATEMENT-DISPUTED: the former unparenthesized equivalence was false for b < a.
   /-- The actual termwise derived equivalence preserves and reflects each vanishing interval. -/
   intervals : ∀ (K : DerivedCategory (Internal A X)) (a b : ℤ), a ≤ b →
-    (∀ q : ℤ, q < a ∨ b < q →
+    ((∀ q : ℤ, q < a ∨ b < q →
       IsZero ((DerivedCategory.homologyFunctor (Internal A X) q).obj K)) ↔
     (∀ q : ℤ, q < a ∨ b < q →
       IsZero ((DerivedCategory.homologyFunctor (Ordinary A X) q).obj
-        (e.ordinaryDerived.functor.obj K)))
+        (e.ordinaryDerived.functor.obj K))))
   /-- Both bounded-constructible membership tests agree, without a finite-Tor condition. -/
   boundedConstructible : ∀ K : DerivedCategory (Internal A X),
     constantModelBoundedConstructible (coefficient A) X K ↔
@@ -141,6 +144,402 @@ structure FiniteCoefficientModelComparison [Finite A] (X : Scheme.{u}) (e : Enco
       (ordinaryIntrinsicBoundedConstructible A X).FullSubcategory,
     Nonempty (d.functor ⋙ (ordinaryIntrinsicBoundedConstructible A X).ι ≅
       (constantModelBoundedConstructible (coefficient A) X).ι ⋙ e.ordinaryDerived.functor)
+
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private theorem fixedRestriction_iso (T : Scheme.{u}) (F : Ordinary A T) :
+    Nonempty ((fixedRestriction A T).obj F ≅ (Scheme.proEtaleModuleRestriction T A).obj F) := by
+  let J := Scheme.ProEt.topology T
+  let B := ULift.{u + 1} A
+  let c := (constantCommuteCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).app
+    (CommRingCat.of B)
+  have hc : Scheme.proEtaleModuleScalarUnit T A ≫ c.hom.hom =
+      toSheafify J ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of B)) := by
+    change _ ≫ ((constantCommuteCompose J
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).hom.app
+        (CommRingCat.of B)).hom = _
+    erw [constantCommuteCompose_hom_app_hom]
+    unfold Scheme.proEtaleModuleScalarUnit
+    rw [← Category.assoc, sheafComposeIso_inv_fac]
+    exact (toSheafify_naturality J
+      (Functor.constComp T.ProEtᵒᵖ (CommRingCat.of B)
+        (forget₂ CommRingCat RingCat)).hom).symm.trans (by rfl)
+  have hci : toSheafify J ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of B)) ≫ c.inv.hom =
+      Scheme.proEtaleModuleScalarUnit T A := by
+    rw [← hc, Category.assoc]
+    change _ ≫ (c.hom ≫ c.inv).hom = _
+    rw [Iso.hom_inv_id]
+    exact Category.comp_id _
+  refine ⟨ObjectProperty.isoMk _ (NatIso.ofComponents (fun U ↦ ?_) ?_)⟩
+  · refine (show (((fixedRestriction A T).obj F).obj.obj U : Type (u + 1)) ≃ₗ[B]
+        (((Scheme.proEtaleModuleRestriction T A).obj F).obj.obj U) from
+      { toFun := fun m ↦ m
+        invFun := fun m ↦ m
+        left_inv := fun _ ↦ rfl
+        right_inv := fun _ ↦ rfl
+        map_add' := fun _ _ ↦ rfl
+        map_smul' := fun b m ↦ ?_ }).toModuleIso
+    change (c.inv.hom.app U
+      ((toSheafify J ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of B))).app U b)) •
+        (show F.val.obj U from m) =
+      (Scheme.proEtaleModuleScalarUnit T A).app U b • (show F.val.obj U from m)
+    exact congrArg (fun r ↦ r • (show F.val.obj U from m))
+      (ConcreteCategory.congr_hom (congr_app hci U) b)
+  · intro U V f
+    ext m
+    rfl
+
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private theorem discardEmpty_cover (T : Scheme.{u})
+    (I : Type (u + 1)) (W : I → T.ProEt)
+    (f : ∀ j : I, W j ⟶ Scheme.ProEt.mk (𝟙 T))
+    (hf : Presieve.ofArrows W f ∈ (Scheme.ProEt.precoverage T).coverings _) :
+    Presieve.ofArrows (fun j : {j : I // Nonempty (W j).left} ↦ W j.val)
+      (fun j ↦ f j.val) ∈ (Scheme.ProEt.precoverage T).coverings _ := by
+  classical
+  have hw (j : I) : (f j).left = (W j).hom := by
+    have h := MorphismProperty.Over.w (f j)
+    exact (Category.comp_id _).symm.trans h
+  rw [Scheme.ProEt.mem_precoverage_iff, Presieve.map_ofArrows] at hf ⊢
+  change Presieve.ofArrows (fun j ↦ (W j).left) (fun j ↦ (f j).left) ∈
+    Scheme.proetalePrecoverage T at hf
+  change Presieve.ofArrows (fun j : {j : I // Nonempty (W j).left} ↦
+    (W j.1).left) (fun j ↦ (f j.1).left) ∈ Scheme.proetalePrecoverage T
+  simp only [hw] at hf ⊢
+  let E : PreZeroHypercover T := ⟨I, fun j ↦ (W j).left, fun j ↦ (W j).hom⟩
+  have : QuasiCompactCover E := Scheme.presieve₀_mem_qcPrecoverage_iff.mp hf.1
+  let E' : PreZeroHypercover T :=
+    ⟨{j : I // Nonempty (W j).left}, fun j ↦ (W j.1).left, fun j ↦ (W j.1).hom⟩
+  have : QuasiCompactCover E' := by
+    constructor
+    intro V hV
+    obtain ⟨n, a, U, hU, hcov⟩ :=
+      QuasiCompactCover.exists_isAffineOpen_of_isCompact E hV.isCompact
+    refine IsCompactOpenCovered.of_finite
+      (fun j : {j : Fin n // Nonempty (W (a j)).left} ↦ ⟨a j.1, j.2⟩)
+      (fun j ↦ U j.1) (fun j ↦ (hU j.1).isCompact) ?_
+    rw [← hcov]
+    ext x
+    simp only [Set.mem_iUnion, Set.mem_image]
+    constructor
+    · rintro ⟨j, y, hy, rfl⟩
+      exact ⟨j.1, y, hy, rfl⟩
+    · rintro ⟨j, y, hy, rfl⟩
+      exact ⟨⟨j, ⟨y⟩⟩, y, hy, rfl⟩
+  refine ⟨Scheme.presieve₀_mem_qcPrecoverage_iff.mpr ‹QuasiCompactCover E'›, ?_⟩
+  rw [Scheme.ofArrows_mem_precoverage_iff]
+  have hweak := hf.2
+  rw [Scheme.ofArrows_mem_precoverage_iff] at hweak
+  exact ⟨fun x ↦ by
+    obtain ⟨j, y, hy⟩ := hweak.1 x
+    exact ⟨⟨j, ⟨y⟩⟩, y, hy⟩, fun j ↦ (W j.1).prop⟩
+
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private theorem finite_value_of_nonempty (T : Scheme.{u}) (F : Ordinary A T)
+    (W : T.ProEt) (P : ModuleCat.{u + 1} (ULift.{u + 1} A))
+    (e : F.over W ≅ Scheme.proEtaleConstantModuleSheafOver T A W P)
+    (hs : ordinaryFiniteStalks A T F) (hw : Nonempty W.left) : Finite P := by
+  classical
+  let w : W.left := Classical.choice hw
+  let Ω := AlgebraicClosure (W.left.residueField w)
+  let y : Spec (.of Ω) ⟶ W.left := (Scheme.SpecToEquivOfField Ω _).2
+    ⟨w, CommRingCat.ofHom (algebraMap (W.left.residueField w) Ω)⟩
+  let x := y ≫ W.hom
+  let Φ := AlgebraicGeometry.ProEtale.geometricPoint x
+  let z : Φ.fiber.obj W := ⟨Over.homMk y rfl⟩
+  let R := (sheafCompose (Scheme.ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Scheme.proEtaleConstantRing T A)
+  let a := Functor.whiskerLeft (Over.forget W).op (Scheme.proEtaleModuleScalarUnit T A)
+  have hb := Scheme.proEtaleConstantRingUnit_over_locallyBijective T A W
+  have : Presheaf.IsLocallyInjective ((Scheme.ProEt.topology T).over W) a := hb.1
+  have : Presheaf.IsLocallySurjective ((Scheme.ProEt.topology T).over W) a := hb.2
+  let E := Scheme.ConstantScalarComparison.restriction
+    ((Scheme.ProEt.topology T).over W) (ULift.{u + 1} A) (R.over W) a
+  have hc := Scheme.ConstantScalarComparison.constantComparisonHom_isIso
+    ((Scheme.ProEt.topology T).over W) (ULift.{u + 1} A) (R.over W) a P
+  let em : ((Scheme.proEtaleModuleRestriction T A).obj F).over W ≅
+      (constantSheaf ((Scheme.ProEt.topology T).over W)
+        (ModuleCat.{u + 1} (ULift.{u + 1} A))).obj P :=
+    E.mapIso e ≪≫
+      (asIso (Scheme.ConstantScalarComparison.constantComparisonHom
+        ((Scheme.ProEt.topology T).over W) (ULift.{u + 1} A) (R.over W) a P)).symm
+  let estalk : Scheme.proEtaleGeometricFixedModuleStalk x (ULift.{u + 1} A)
+      ((Scheme.proEtaleModuleRestriction T A).obj F) ≅ P :=
+    AlgebraicGeometry.ProEtale.geometricStalkIsoFiber x _ _ ≪≫
+      (AlgebraicGeometry.ProEtale.sheafFiberOverIso Φ z _ _).symm ≪≫
+      (Φ.over z).sheafFiber.mapIso em ≪≫ (Φ.over z).sheafFiberConstantSheafIso P
+  have : Finite (Scheme.proEtaleGeometricFixedModuleStalk x (ULift.{u + 1} A)
+      ((Scheme.proEtaleModuleRestriction T A).obj F)) :=
+    (Scheme.finite_stalk_iff T A F Ω x).mp (hs Ω x)
+  exact Finite.of_equiv _ estalk.toLinearEquiv.toEquiv
+
+private def fixedIso (T : Scheme.{u}) (e : Encoding A T) (F : Ordinary A T) :
+    e.fixed.functor.obj F ≅ (Scheme.proEtaleModuleRestriction T A).obj F :=
+  (eqToIso (congrArg (fun G ↦ G.obj F) e.fixed_functor)) ≪≫
+    (fixedRestriction_iso A T F).some
+
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private theorem intrinsicConstant_iff_fixed (T : Scheme.{u}) (F : Ordinary A T) :
+    (∃ P : ModuleCat.{u + 1} (ULift.{u + 1} A), Finite P ∧
+      Nonempty (F ≅ Scheme.proEtaleConstantModuleSheaf T A P)) ↔
+    ∃ P : ModuleCat.{u + 1} (ULift.{u + 1} A), Finite P ∧
+      Nonempty ((Scheme.proEtaleModuleRestriction T A).obj F ≅
+        (constantSheaf (Scheme.ProEt.topology T)
+          (ModuleCat.{u + 1} (ULift.{u + 1} A))).obj P) := by
+  let J := Scheme.ProEt.topology T
+  let B := ULift.{u + 1} A
+  let R := (sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+    (Scheme.proEtaleConstantRing T A)
+  let a := Scheme.proEtaleModuleScalarUnit T A
+  have : Presheaf.IsLocallyInjective J a := (Scheme.proEtaleConstantRingUnit_locallyBijective T A).1
+  have : Presheaf.IsLocallySurjective J a :=
+    (Scheme.proEtaleConstantRingUnit_locallyBijective T A).2
+  let E := Scheme.ConstantScalarComparison.restriction J B R a
+  have h (P : ModuleCat.{u + 1} B) :
+      IsIso (Scheme.ConstantScalarComparison.constantComparisonHom J B R a P) :=
+    Scheme.ConstantScalarComparison.constantComparisonHom_isIso J B R a P
+  constructor
+  · rintro ⟨P, hP, ⟨e⟩⟩
+    exact ⟨P, hP, ⟨E.mapIso e ≪≫
+      (asIso (Scheme.ConstantScalarComparison.constantComparisonHom J B R a P)).symm⟩⟩
+  · rintro ⟨P, hP, ⟨e⟩⟩
+    exact ⟨P, hP, ⟨(Scheme.ConstantScalarComparison.restrictionFullyFaithful J B R a).preimageIso
+      (e ≪≫ asIso (Scheme.ConstantScalarComparison.constantComparisonHom J B R a P))⟩⟩
+
+private def encodedPullbackIso [Finite A] [DiscreteTopology A]
+    {T U : Scheme.{u}} (f : U ⟶ T) (eT : Encoding A T) (eU : Encoding A U)
+    (M : Internal A T) :
+    (eU.ordinary.functor ⋙ eU.fixed.functor).obj
+      ((CondensedRing.upperStar (coefficient A) f).obj M) ≅
+      (Scheme.proEtaleModuleRestriction U A).obj
+        (Scheme.proEtaleConstantModulePullback f A (eT.ordinary.functor.obj M)) :=
+  (encoding_pullback_fixed A f eT eU M).some ≪≫
+    (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) f).mapIso
+      (fixedIso A T eT (eT.ordinary.functor.obj M)) ≪≫
+    (Scheme.proEtaleModuleRestriction_pullback f A (eT.ordinary.functor.obj M)).some.symm
+
+private theorem coverModels_iff [Finite A] [DiscreteTopology A]
+    (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u}) (M : Internal A T)
+    (F : Ordinary A T)
+    (e : (E T).fixed.functor.obj ((E T).ordinary.functor.obj M) ≅
+      (Scheme.proEtaleModuleRestriction T A).obj F)
+    (C : Scheme.Cover.{u} Scheme.proetalePrecoverage T) :
+    HasFiniteConstantLocalModelOnCover (coefficient A) M C ↔
+      ordinaryFiniteCoverModels A T F C := by
+  refine forall_congr' fun j ↦ ?_
+  let V := C.X j
+  let h : ((E V).ordinary.functor ⋙ (E V).fixed.functor).obj
+      ((CondensedRing.upperStar (coefficient A) (C.f j)).obj M) ≅
+      (Scheme.proEtaleModuleRestriction V A).obj
+        (Scheme.proEtaleConstantModulePullback (C.f j) A F) :=
+    (encoding_pullback_fixed A (C.f j) (E T) (E V) M).some ≪≫
+      (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) (C.f j)).mapIso e ≪≫
+      (Scheme.proEtaleModuleRestriction_pullback (C.f j) A F).some.symm
+  refine (finite_scalar_model_iff_constant A V (E V) _).trans ?_
+  refine Iff.trans ?_ (intrinsicConstant_iff_fixed A V _).symm
+  constructor
+  · rintro ⟨P, hP, ⟨hM⟩⟩
+    exact ⟨P, hP, ⟨h.symm ≪≫ hM⟩⟩
+  · rintro ⟨P, hP, ⟨hF⟩⟩
+    exact ⟨P, hP, ⟨h ≪≫ hF⟩⟩
+
+private theorem internalModel_on_object [Finite A] [DiscreteTopology A]
+    (E : ∀ T : Scheme.{u}, Encoding A T) (T : Scheme.{u})
+    (N : Internal A T) (F : Ordinary A T)
+    (hNF : ((E T).ordinary.functor ⋙ (E T).fixed.functor).obj N ≅
+      (Scheme.proEtaleModuleRestriction T A).obj F)
+    (W : T.ProEt) (P : ModuleCat.{u + 1} (ULift.{u + 1} A)) [Finite P]
+    (e : F.over W ≅ Scheme.proEtaleConstantModuleSheafOver T A W P) :
+    ∃ Q : Mod Ab.{u + 1} (scalarRingObj (coefficient A)),
+      Mod.IsFinitelyPresented (scalarRingObj (coefficient A)) Q ∧
+      Nonempty ((CondensedRing.upperStar (coefficient A) W.hom).obj N ≅
+        (finiteConstantScalarExtension (coefficient A) W.left).obj Q) := by
+  let R := (sheafCompose (Scheme.ProEt.topology T)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (Scheme.proEtaleConstantRing T A)
+  let a := Functor.whiskerLeft (Over.forget W).op (Scheme.proEtaleModuleScalarUnit T A)
+  have hb := Scheme.proEtaleConstantRingUnit_over_locallyBijective T A W
+  have : Presheaf.IsLocallyInjective ((Scheme.ProEt.topology T).over W) a := hb.1
+  have : Presheaf.IsLocallySurjective ((Scheme.ProEt.topology T).over W) a := hb.2
+  let H := Scheme.ConstantScalarComparison.restriction
+    ((Scheme.ProEt.topology T).over W) (ULift.{u + 1} A) (R.over W) a
+  have hc := Scheme.ConstantScalarComparison.constantComparisonHom_isIso
+    ((Scheme.ProEt.topology T).over W) (ULift.{u + 1} A) (R.over W) a P
+  let em : ((Scheme.proEtaleModuleRestriction T A).obj F).over W ≅
+      (constantSheaf ((Scheme.ProEt.topology T).over W)
+        (ModuleCat.{u + 1} (ULift.{u + 1} A))).obj P :=
+    H.mapIso e ≪≫
+      (asIso (Scheme.ConstantScalarComparison.constantComparisonHom
+        ((Scheme.ProEt.topology T).over W) (ULift.{u + 1} A) (R.over W) a P)).symm
+  have : (Scheme.ProEt.sliceEquiv T W).inverse.IsDenseSubsite
+      (Scheme.ProEt.topology W.left) ((Scheme.ProEt.topology T).over W) :=
+    Scheme.ProEt.sliceDense T W
+  let S := (Scheme.ProEt.sliceEquiv T W).sheafCongr
+    ((Scheme.ProEt.topology T).over W) (Scheme.ProEt.topology W.left)
+      (ModuleCat.{u + 1} (ULift.{u + 1} A))
+  let r : S.functor.obj (((Scheme.proEtaleModuleRestriction T A).obj F).over W) ≅
+      (localizationRestriction (ModuleCat.{u + 1} (ULift.{u + 1} A)) W.hom W.prop).obj
+        ((Scheme.proEtaleModuleRestriction T A).obj F) :=
+    ObjectProperty.isoMk _ (NatIso.ofComponents (fun _ ↦ Iso.refl _))
+  let c := ((Scheme.ProEt.sliceEquiv T W).constantSheafSheafCongrIso
+    ((Scheme.ProEt.topology T).over W) (Scheme.ProEt.topology W.left)
+    (ModuleCat.{u + 1} (ULift.{u + 1} A)) (Over.mkIdTerminal (X := W))).app P
+  apply (finite_scalar_model_iff_constant A W.left (E W.left) _).mpr
+  refine ⟨P, inferInstance, ⟨?_⟩⟩
+  exact (encoding_pullback_fixed A W.hom (E T) (E W.left) N).some ≪≫
+    (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) W.hom).mapIso hNF ≪≫
+    (upperStarIsoLocalizationRestriction (ModuleCat.{u + 1} (ULift.{u + 1} A))
+      W.hom W.prop).app _ ≪≫ r.symm ≪≫ S.functor.mapIso em ≪≫ c
+
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private theorem localModel_iff_finiteLocal (T : Scheme.{u})
+    (F : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
+    ordinaryLocalModel A T F ↔ IsFiniteLocallyConstant (ULift.{u + 1} A) F := by
+  constructor
+  · rintro ⟨C, hC⟩
+    let D : Scheme.Cover.{u + 1} Scheme.proetalePrecoverage T :=
+      C.reindex Equiv.ulift.{u + 1, u}
+    exact ⟨D.I₀, D.X, D.f, D.mem₀, fun i ↦ hC i.down⟩
+  · rintro ⟨I, W, f, hf, h⟩
+    let C : Scheme.Cover.{u + 1} Scheme.proetalePrecoverage T := ⟨⟨I, W, f⟩, hf⟩
+    have : Precoverage.Small.{u} Scheme.proetalePrecoverage :=
+      inferInstanceAs (Precoverage.Small.{u} (Scheme.propQCPrecoverage @WeaklyEtale))
+    exact ⟨C.restrictIndexOfSmall.{u}, fun i ↦ h (Precoverage.ZeroHypercover.Small.restrictFun C i)⟩
+
+private theorem localCondition_iff [Finite A] [DiscreteTopology A]
+    (T : Scheme.{u}) (e : Encoding A T) (M : Internal A T) :
+    HasFiniteConstantLocalModel (coefficient A) T M ↔
+      ordinaryFiniteLocalCondition A T (e.ordinary.functor.obj M) := by
+  have hl : HasFiniteConstantLocalModel (coefficient A) T M ↔
+      ordinaryLocalModel A T ((e.ordinary.functor ⋙ e.fixed.functor).obj M) := by
+    refine (finiteConstantLocalModel_iff_exists_cover (coefficient A) M).trans ?_
+    apply exists_congr
+    intro C
+    refine forall_congr' fun i ↦ ?_
+    let eU := (encoding_exists A (C.X i)).some
+    let h := (encoding_pullback_fixed A (C.f i) e eU M).some
+    refine (finite_scalar_model_iff_constant A (C.X i) eU _).trans ?_
+    constructor
+    · rintro ⟨P, hP, ⟨j⟩⟩
+      exact ⟨P, hP, ⟨h.symm ≪≫ j⟩⟩
+    · rintro ⟨P, hP, ⟨j⟩⟩
+      exact ⟨P, hP, ⟨h ≪≫ j⟩⟩
+  refine hl.trans ?_
+  refine (localModel_iff_finiteLocal A T _).trans ?_
+  let h := fixedIso A T e (e.ordinary.functor.obj M)
+  refine Iff.trans ?_ (Scheme.finiteLocal_iff T A _)
+  exact ⟨isFiniteLocallyConstant_of_iso h, isFiniteLocallyConstant_of_iso h.symm⟩
+
+private theorem strataComparison [Finite A] [DiscreteTopology A]
+    (E : ∀ T : Scheme.{u}, Encoding A T) (X : Scheme.{u}) (M : Internal A X)
+    (S : Scheme.Stratification X) :
+    (∀ i : Fin S.n, HasFiniteConstantLocalModel (coefficient A) (S.domain i)
+      ((CondensedRing.upperStar (coefficient A) (S.immersion i)).obj M)) ↔
+    ∀ i : Fin S.n, ordinaryFiniteLocalCondition A (S.domain i)
+      (Scheme.proEtaleConstantModulePullback (S.immersion i) A
+        ((E X).ordinary.functor.obj M)) := by
+  refine forall_congr' fun i ↦ ?_
+  let N := (CondensedRing.upperStar (coefficient A) (S.immersion i)).obj M
+  let F := Scheme.proEtaleConstantModulePullback (S.immersion i) A
+    ((E X).ordinary.functor.obj M)
+  let h := (fixedIso A (S.domain i) (E (S.domain i))
+    ((E (S.domain i)).ordinary.functor.obj N)).symm ≪≫
+      encodedPullbackIso A (S.immersion i) (E X) (E (S.domain i)) M
+  refine (localCondition_iff A (S.domain i) (E (S.domain i)) N).trans ?_
+  refine (Scheme.finiteLocal_iff (S.domain i) A _).symm.trans ?_
+  exact (Iff.intro (isFiniteLocallyConstant_of_iso h)
+    (isFiniteLocallyConstant_of_iso h.symm)).trans (Scheme.finiteLocal_iff _ A F)
+
+private theorem sheafConstructibility [Finite A] [DiscreteTopology A]
+    (E : ∀ T : Scheme.{u}, Encoding A T) (X : Scheme.{u}) [IsNoetherian X]
+    (M : Internal A X) :
+    IsConstantModelConstructible (coefficient A) X M ↔
+      Scheme.IsConstructibleProEtaleModuleSheaf X A ((E X).ordinary.functor.obj M) := by
+  have hqc : CompactSpace X ∧ QuasiSeparatedSpace X := ⟨inferInstance, inferInstance⟩
+  rw [IsConstantModelConstructible, if_pos hqc]
+  constructor
+  · rintro ⟨S, hS⟩
+    have h := (strataComparison A E X M S).mp hS
+    let F := ((E X).ordinary.functor ⋙ (E X).fixed.functor).obj M
+    have hc : IsConstructible (ULift.{u + 1} A) F := by
+      refine ⟨S, fun i ↦ ?_⟩
+      have hi := (Scheme.finiteLocal_iff (S.domain i) A _).mpr (h i)
+      let e := (Scheme.proEtaleModuleRestriction_pullback (S.immersion i) A
+        ((E X).ordinary.functor.obj M)).some ≪≫
+        (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} A)) (S.immersion i)).mapIso
+          (fixedIso A X (E X) ((E X).ordinary.functor.obj M)).symm
+      exact isFiniteLocallyConstant_of_iso e hi
+    exact (Scheme.proEtaleModuleRestriction_constructible_iff X A _).mpr
+      (isConstructible_of_iso (fixedIso A X (E X) _) hc)
+  · rintro ⟨S, hn, hS⟩
+    exact ⟨S, (strataComparison A E X M S).mpr hS⟩
+
+omit [TopologicalSpace A] [IsTopologicalRing A] in
+private theorem constructible_of_iso [Finite A] (T : Scheme.{u})
+    {F G : Ordinary A T} (e : F ≅ G)
+    (hF : Scheme.IsConstructibleProEtaleModuleSheaf T A F) :
+    Scheme.IsConstructibleProEtaleModuleSheaf T A G := by
+  obtain ⟨S, hn, hS⟩ := hF
+  refine ⟨S, hn, fun i ↦ ?_⟩
+  let e' := (Scheme.proEtaleConstantRingPullback A (S.immersion i)).mapIso e
+  obtain ⟨I, U, f, hc, ht⟩ := (hS i).1
+  refine ⟨⟨I, U, f, hc, fun j ↦ ?_⟩, ?_⟩
+  · obtain ⟨P, ⟨hP⟩⟩ := ht j
+    exact ⟨P, ⟨(SheafOfModules.overFunctor _ (U j)).mapIso e'.symm ≪≫ hP⟩⟩
+  · intro Ω _ _ y
+    let E := Scheme.geometricRingModuleStalkFunctor y
+      (Scheme.proEtaleConstantRing (S.domain i) A)
+    have : Finite (E.obj ((Scheme.proEtaleConstantRingPullback A
+        (S.immersion i)).obj F)) := (hS i).2 Ω y
+    exact Finite.of_injective (E.mapIso e'.symm).toLinearEquiv
+      (E.mapIso e'.symm).toLinearEquiv.injective
+
+private theorem derived_intervals (X : Scheme.{u}) (e : Encoding A X)
+    (K : DerivedCategory (Internal A X)) (a b : ℤ) :
+    (∀ q : ℤ, q < a ∨ b < q →
+      IsZero ((DerivedCategory.homologyFunctor (Internal A X) q).obj K)) ↔
+    (∀ q : ℤ, q < a ∨ b < q →
+      IsZero ((DerivedCategory.homologyFunctor (Ordinary A X) q).obj
+        (e.ordinaryDerived.functor.obj K))) := by
+  constructor
+  · intro h q hq
+    exact e.ordinary.functor.isZero_homologyFunctor_mapDerivedCategory_obj (h q hq)
+  · intro h q hq
+    exact e.ordinary.functor.isZero_homologyFunctor_of_isZero_homologyFunctor_mapDerivedCategory_obj
+      (h q hq)
+
+private theorem derived_boundedConstructible [Finite A] (X : Scheme.{u}) (e : Encoding A X)
+    (hc : ∀ M : Internal A X, IsConstantModelConstructible (coefficient A) X M ↔
+      Scheme.IsConstructibleProEtaleModuleSheaf X A (e.ordinary.functor.obj M))
+    (K : DerivedCategory (Internal A X)) :
+    constantModelBoundedConstructible (coefficient A) X K ↔
+      ordinaryIntrinsicBoundedConstructible A X (e.ordinaryDerived.functor.obj K) := by
+  have hb : DerivedCategory.TStructure.t.bounded K ↔
+      DerivedCategory.TStructure.t.bounded (e.ordinaryDerived.functor.obj K) :=
+    ⟨e.ordinary.functor.bounded_mapDerivedCategory_obj,
+      e.ordinary.functor.bounded_of_bounded_mapDerivedCategory_obj⟩
+  refine and_congr hb (forall_congr' fun q ↦ ?_)
+  let h := (e.ordinary.functor.mapDerivedCategoryHomologyFunctorIso q).app K
+  exact (hc _).trans ⟨constructible_of_iso A X h, constructible_of_iso A X h.symm⟩
+
+private theorem derived_boundedEquivalence [Finite A] (X : Scheme.{u}) (e : Encoding A X)
+    (hc : ∀ K : DerivedCategory (Internal A X),
+      constantModelBoundedConstructible (coefficient A) X K ↔
+        ordinaryIntrinsicBoundedConstructible A X (e.ordinaryDerived.functor.obj K)) :
+    ∃ d : ConstantModelBoundedConstructible (coefficient A) X ≌
+      (ordinaryIntrinsicBoundedConstructible A X).FullSubcategory,
+      Nonempty (d.functor ⋙ (ordinaryIntrinsicBoundedConstructible A X).ι ≅
+        (constantModelBoundedConstructible (coefficient A) X).ι ⋙
+          e.ordinaryDerived.functor) := by
+  let Q := ordinaryIntrinsicBoundedConstructible A X
+  let : Q.IsClosedUnderIsomorphisms := ⟨by
+    intro K L h hK
+    exact ⟨DerivedCategory.TStructure.t.bounded.prop_of_iso h hK.1,
+      fun q ↦ constructible_of_iso A X ((DerivedCategory.homologyFunctor _ q).mapIso h)
+        (hK.2 q)⟩⟩
+  have hp : Q.inverseImage e.ordinaryDerived.functor =
+      constantModelBoundedConstructible (coefficient A) X := by
+    funext K
+    exact propext (hc K).symm
+  exact ⟨e.ordinaryDerived.congrFullSubcategory hp, ⟨Iso.refl _⟩⟩
 
 /-- Finite discrete coefficients identify finite constant local models with locally constant
 finite-stalk constructibility, retaining strata, covers after deletion of empty objects, and
@@ -186,6 +585,28 @@ commuting comparison with the ambient functor. No completeness or Tor bound is u
 theorem finiteCoefficientModelComparison [Finite A] [DiscreteTopology A]
     (X : Scheme.{u}) [IsNoetherian X] :
     ∃ e : Encoding A X, FiniteCoefficientModelComparison A X e := by
-  sorry
+  classical
+  let E : ∀ T : Scheme.{u}, Encoding A T := fun T ↦ (encoding_exists A T).some
+  refine ⟨E X, ?_⟩
+  have hc := sheafConstructibility A E X
+  have hb := derived_boundedConstructible A X (E X) hc
+  refine
+    { constructible := hc
+      strata := strataComparison A E X
+      covers := ?_
+      discardEmpty := ?_
+      intervals := fun K a b _ ↦ derived_intervals A X (E X) K a b
+      boundedConstructible := hb
+      boundedEquivalence := derived_boundedEquivalence A X (E X) hb }
+  · intro M S i C
+    exact coverModels_iff A E (S.domain i) _ _
+      (encodedPullbackIso A (S.immersion i) (E X) (E (S.domain i)) M) C
+  · intro M S i I W f P hf he hs
+    refine ⟨discardEmpty_cover (S.domain i) I W f hf, fun j hj ↦ ?_⟩
+    obtain ⟨ej⟩ := he j
+    have hP : Finite (P j) := finite_value_of_nonempty A (S.domain i) _ _ _ ej hs hj
+    have := hP
+    exact ⟨hP, internalModel_on_object A E (S.domain i) _ _
+      (encodedPullbackIso A (S.immersion i) (E X) (E (S.domain i)) M) (W j) (P j) ej⟩
 
 end AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary
