@@ -2,7 +2,7 @@
  "id": "lem-pur-ringed-derived-pushforward-linear",
  "kind": "statement",
  "title": "Derived ringed-topos direct image preserves compatible central scalars",
- "statement": "Let $R$ be a commutative ring and let $u:(\\operatorname{Sh}(\\mathcal D),B)\\to(\\operatorname{Sh}(\\mathcal C),A)$ be a morphism of ringed topoi presented by sites small in the module universe [def-weil-size-convention, def-weil-pbc-ringed-topos-morphism]. Suppose given unital homomorphisms $s_A:R\\to\\Gamma(\\mathcal C,A)$ and $s_B:R\\to\\Gamma(\\mathcal D,B)$ such that the structural map $c:u^{-1}A\\to B$ carries $u^{-1}s_A(r)$ to $s_B(r)$ for every $r\\in R$. On module sheaves [def-weil-sheaf-of-modules-category] define $(r f)_U(x)=s_A(r)|_U f_U(x)$, and likewise using $s_B$. Equip the ordinary unbounded derived categories $D(A),D(B)$ [def-weil-abstract-derived-category] with the induced $R$-linear structures [def-weil-linear-category, lem-weil-linear-abelian-derived-category]. The canonical K-injective derived direct image $Ru_*:D(B)\\to D(A)$, computed with the derived-functor comparison of [lem-weil-pbc-kinjective-total-derived], is $R$-linear [def-weil-linear-functor]. In particular it sends the endomorphism induced by the actual scalar section $s_B(r)$ to that induced by $s_A(r)$; no exactness of $u_*$ is assumed.",
+ "statement": "Let $R$ be a commutative ring and let $u:(\\operatorname{Sh}(\\mathcal D),B)\\to(\\operatorname{Sh}(\\mathcal C),A)$ be a morphism of ringed topoi presented by sites small in the module universe [def-weil-size-convention, def-weil-pbc-ringed-topos-morphism]. Suppose given unital homomorphisms $s_A:R\\to\\Gamma(\\mathcal C,A)$ and $s_B:R\\to\\Gamma(\\mathcal D,B)$ whose restrictions $s_A(r)|_U\\in A(U)$ and $s_B(r)|_V\\in B(V)$ are central for every $r\\in R$ and every site object $U\\in\\mathcal C$, $V\\in\\mathcal D$, and such that the structural map $c:u^{-1}A\\to B$ carries $u^{-1}s_A(r)$ to $s_B(r)$ for every $r\\in R$. On module sheaves [def-weil-sheaf-of-modules-category] define $(r f)_U(x)=s_A(r)|_U f_U(x)$, and likewise using $s_B$. Equip the ordinary unbounded derived categories $D(A),D(B)$ [def-weil-abstract-derived-category] with the induced $R$-linear structures [def-weil-linear-category, lem-weil-linear-abelian-derived-category]. The canonical K-injective derived direct image $Ru_*:D(B)\\to D(A)$, computed with the derived-functor comparison of [lem-weil-pbc-kinjective-total-derived], is $R$-linear [def-weil-linear-functor]. In particular it sends the endomorphism induced by the actual scalar section $s_B(r)$ to that induced by $s_A(r)$; no exactness of $u_*$ is assumed.",
  "source": {
   "document": "literature/stacks-project/derived.tex",
   "place": "Tag 070K (lemma-enough-K-injectives-implies), computation of the right derived functor on K-injectives. The compatible-central-scalar assertion is the implicit compatible-central-scalar prerequisite."
@@ -17,9 +17,101 @@
   "def-weil-linear-functor",
   "lem-weil-pbc-kinjective-total-derived"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the stated scalar structures on module sheaves. For $A$-modules $M,N$ and $f:M\\to N$, centrality gives $(r f)_U(a x)=s_A(r)|_U a f_U(x)=a s_A(r)|_U f_U(x)$; hence $r f$ is $A$-linear. It commutes with restrictions because both the scalar section and $f$ do. The additive and scalar axioms on each Hom group follow sectionwise from the module axioms and the unital ring map $s_A$. For composable module maps, $g\\circ(r f)=r(g\\circ f)=(r g)\\circ f$, since $g$ is $A$-linear. Thus these Hom groups give the stated $R$-linear category; the same calculation with $B$ gives its $R$-linear category. Local centrality, rather than commutativity of $R$ alone, is what makes $r f$ a module morphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tags 09MJ (definition-linear-category), 09MK (definition-functor-linear-categories); elementary sectionwise verification of the prescribed central action"
+   }
+  },
+  {
+   "text": "Put $F=u_*:\\operatorname{Mod}(B)\\to\\operatorname{Mod}(A)$. Its underlying additive sheaf functor and $A$-action are those in the ringed-topos morphism definition. A generalized element $x$ of $FN$ has an adjoint transpose $\\widetilde x$ in $N$. By that action formula and the compatibility hypothesis, the transpose of $s_A(r)x$ is $c(u^{-1}s_A(r))\\widetilde x=s_B(r)\\widetilde x$. Naturality of the sheaf adjunction in $N$ therefore identifies the transposes of $F(r f)(x)$ and $s_A(r)F(f)(x)$ for every module morphism $f$. They are equal, so $F(r f)=rF(f)$. The given additive direct image also has $F(f+g)=F(f)+F(g)$. This proves $R$-linearity of the underived module functor without assuming that the geometric morphism comes from a functor between the sites.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6 (definition-pushforward); the adjoint-transpose action formula in def-weil-pbc-ringed-topos-morphism"
+   }
+  },
+  {
+   "text": "The smallness hypothesis makes $\\operatorname{Mod}(B)$ Grothendieck abelian by the arbitrary-ring-sheaf theorem. The K-injective existence theorem therefore supplies a quasi-isomorphism $a:N\\to I$ for every complex $N$, with $I$ K-injective. Apply $F$ degreewise. Its additivity sends a homotopy equation $f-g=dh+hd$ to the same equation for $Ff,Fg,Fh$ and identifies the cone differential $\\left(\\begin{smallmatrix}d&f\\\\0&-d\\end{smallmatrix}\\right)$ with the corresponding differential after $F$; finite biproducts are preserved by an additive functor. Thus $Q_A F:K(B)\\to D(A)$ respects shifts and cone triangles, hence is exact as a functor of triangulated categories. The total-derived theorem applies to this functor and gives the canonical $RF=Ru_*$ and comparison $\\eta_I:Q_A(FI)\\xrightarrow{\\sim}RF(Q_B I)$ for K-injective $I$. Exactness here concerns cone triangles, not exactness of $F$ on module sheaves.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-pur-kinjective-degreewise-existence",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); injectives.tex Tags 079Q (remark-existence-D), 079P (theorem-K-injective-embedding-grothendieck)"
+   }
+  },
+  {
+   "text": "Fix complexes $N,N\\prime$ and resolutions $a:N\\to I$, $b:N\\prime\\to J$. Write $c_a=\\eta_I^{-1}\\circ RF(Q_Ba)$ and $c_b=\\eta_J^{-1}\\circ RF(Q_Bb)$. For every derived morphism $h:Q_BN\\to Q_BN\\prime$, the arbitrary-resolution computation theorem gives a unique homotopy class $g:I\\to J$ satisfying $Q_Bg=(Q_Bb)\\circ h\\circ(Q_Ba)^{-1}$ and $c_b\\circ RF(h)\\circ c_a^{-1}=Q_A(Fg)$. Here $Fg$ can be computed with any chain-map representative. These are the specified derived-functor comparisons, so they compute the canonical $Ru_*$ rather than a newly chosen functor. By the linear-derived-category theorem, $Q_A,Q_B$ preserve addition and the componentwise central scalar action.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation",
+    "lem-weil-linear-abelian-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined); arbitrary-resolution formula as stated in lem-sf-kinjective-derived-map-computation"
+   }
+  },
+  {
+   "text": "Use the same resolutions for two parallel derived morphisms $h,k$, represented by homotopy classes $g,t:I\\to J$ as in the preceding step. Choose chain-map representatives for $g,t$. Linearity of $Q_B$ and bilinearity of composition show that $r g$ represents $r h$ and $g+t$ represents $h+k$: for example $Q_B(r g)=r\\big((Q_Bb)h(Q_Ba)^{-1}\\big)=(Q_Bb)(r h)(Q_Ba)^{-1}$. By the comparison formula and the degreewise calculation of step 2, $$c_b RF(r h)c_a^{-1}=Q_A(F(r g))=Q_A(r Fg)=r\\big(c_b RF(h)c_a^{-1}\\big).$$ Cancel the fixed comparison isomorphisms using $R$-bilinearity of composition to obtain $RF(rh)=rRF(h)$. The identical calculation with $g+t$ gives $c_b RF(h+k)c_a^{-1}=Q_A(Fg)+Q_A(Ft)=c_b(RF(h)+RF(k))c_a^{-1}$, hence $RF(h+k)=RF(h)+RF(k)$. All derived objects admit complex representatives by the definition of $D(B)$ (or its essentially surjective localization); conjugation by any presentation isomorphisms preserves these two equalities by bilinearity. Thus the conclusion holds for every pair of derived objects.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation",
+    "lem-weil-linear-abelian-derived-category",
+    "def-weil-linear-category",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070Y, via the cited arbitrary-resolution formula; elementary linear calculation with that formula"
+   }
+  },
+  {
+   "text": "The two equalities just proved say that $Ru_*$ is an $R$-linear functor. On a complex $N$, multiplication by the actual global section $s_B(r)$ is the chain endomorphism $r\\operatorname{id}_N$, whose derived image is $r\\operatorname{id}_{Q_BN}$ because $Q_B$ is linear. Consequently $Ru_*(r\\operatorname{id})=r\\operatorname{id}_{Ru_*N}$; on the representative $F I$ this is multiplication by the actual section $s_A(r)$, by step 2. This proves also the final scalar-endomorphism assertion.",
+   "uses": [
+    "def-weil-linear-functor",
+    "lem-weil-linear-abelian-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "Tag 09MK (definition-functor-linear-categories); scalar endomorphisms by the induced linear structures"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-linear-category",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-linear-functor",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-pur-kinjective-degreewise-existence",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-linear-abelian-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I, 070Y, 070K, with the central scalar action of sites-modules.tex Tag 03D6 and dga.tex Tags 09MJ–09MK. The scalar computation is written here, not asserted verbatim by Tag 070K."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -93,10 +185,54 @@
    "results": "0 hits; ",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A right derived direct image of sheaves of modules preserves compatible central scalar actions over a commutative ring",
+   "results": "8 hits; PresheafOfModules.map_smul, SheafOfModules.instIsRightAdjointPushforward, PresheafOfModules.Sheafify.map_smul, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.pushforward, PresheafOfModules.instIsRightAdjointPushforward, SheafOfModules.restrictScalars; hits concern underived module operations, not the unbounded K-injective derived functor.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Linear|linear",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match",
+   "subdirectory": "CategoryTheory/Triangulated/DerivedFunctor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Functor.totalRightDerived",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total right derived functor of an R-linear additive functor computed on K-injectives is R-linear",
+   "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinear, DerivedCategory.instLinearSingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.mapDerivedCategoryFactorsh; read ExactFunctor.lean:28-32,120-125: the induced linear functor requires exactness, so it does not cover this item. Linear.lean:24-39 covers the existing linear-derived-category node only.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Linearity of a total right derived functor over a commutative scalar ring without exactness of the original functor",
+   "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinearSingleFunctor, DerivedCategory.instLinear, DerivedCategory.instLinearHomotopyCategoryIntUpQh, CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Functor.mapExtLinearMap, CategoryTheory.Functor.mapExtLinearMap_apply; read ExactFunctor.lean:28-32,120-125: the induced linear functor requires exactness, so it does not cover this item. Linear.lean:24-39 covers the existing linear-derived-category node only.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Linear|linear",
+   "results": "23 hits; Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match",
+   "subdirectory": "Algebra/Homology/DerivedCategory"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-compact-support-reduction-tower-functor",
@@ -116,5 +252,39 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-ringed-derived-pushforward-linear",
+  "worker": "stage1",
+  "summary": "Q78: repaired the omitted local-centrality hypothesis (the original is ill-typed for noncentral maps into matrix rings), checked the arbitrary-ring module Grothendieck and K-injective hypotheses, and proved scalar/additive preservation on arbitrary derived morphisms through fixed resolution comparison isomorphisms. Reused existing nodes throughout; no new nodes or attachments.",
+  "blueprint": "Realizes the first proof sentence of lem-weil-compact-support-representative-independence: central O_E-linearity of the separately right-derived ringed direct image used in the coherent integral tower. The main-20261015 proof has the same first-sentence linearity assertion.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-ringed-topos-morphism",
+    "why": "The induced module direct image and its adjoint-transpose scalar-action formula; this is the ringed-topos notion, not a replacement of the six-operation unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Grothendieck abelian module categories for arbitrary, possibly noncommutative ring sheaves on sites small in the module universe; the same-unit Grothendieck statement assumes commutative ring sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Canonical total right derived functor and invertible comparison on K-injectives; it is already required by the item statement and is a general derived-category tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q78-61bbf851f",
+  "group": "Q78",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q78-61bbf851f (reviewer sub-agent of L); spot-checked: I read the whole item, all 11 cited statements and the sources. Verdict PASS, with no changes. Shape: one commit; item still unsplit on side-live, not on the dropped list, no repair note, no new nodes. Statement correction: the delivery adds local centrality of s_A(r)|_U and s_B(r)|_V. It is necessary, because the ringed-topos and module definitions allow noncommutative rings. I rechecked the counterexample on a point topos with A=B=M_2(Q) and t↦diag(1,0): t·id is not A-linear (d·E12=E12 but E12·d=0). The only citer, lem-weil-compact-support-reduction-tower-functor, uses commutative coefficient sheaves, so it still holds. Steps: (1) the sectionwise R-linear category uses centrality; (2) the transpose formula of def-weil-pbc-ringed-topos-morphism, with letters reversed, plus c(u^{-1}s_A)=s_B gives F(rf)=rF(f). (3) Mod(B) is Grothendieck by the noncommutative ring-sheaf node; K-injective resolutions exist; Q_A F_K is exact by the cone/biproduct argument; 070K (derived.tex l.9767, read) gives RF. (4) The map-computation node's RF is def-sfb-right-derived-functor, which is defined through the same lem-weil-pbc-kinjective-total-derived, so it is the same canonical Ru_*. (5) Uniqueness of the homotopy class, linearity of Q and cancelling the fixed c_a, c_b give additivity and R-linearity of Ru_*. (6) Scalar endomorphisms go to scalar endomorphisms. Edge cases r=0, r=1, R=0 and unbounded complexes are fine. Duplicates: lem-sbc-ambient-operations-scalar-linearity is only the pro-étale, commutative-ring version, and lem-cbc-exact-linear-derived-functor needs F exact; neither restates the item. I accept the three declared tool uses: the noncommutative Grothendieck node, the 070K total-derived node and the ringed-topos definition. No SGA source is used. Advisory: the sibling lem-pur-ringed-derived-pullback-linear (unsplit) lacks the same centrality hypothesis."
+ }
 }
