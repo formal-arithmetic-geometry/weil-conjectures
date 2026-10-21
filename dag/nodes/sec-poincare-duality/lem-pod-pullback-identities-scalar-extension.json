@@ -1,0 +1,75 @@
+{
+ "id": "lem-pod-pullback-identities-scalar-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-weil-operations",
+   "place": "Proof sentence 1 ('The equivariant lifts of the operations ... are [lem-fix-weil-operations]'), at the passage of the Frobenius pullback comparisons to algebraically closed coefficients: the inverse Frobenius transport and the pullback comparison P_X Lf^* = Lf^* P_Y must be natural in the common-stage category, which needs their compatibility with the pullback scalar-extension comparisons.",
+   "via": [
+    "lem-pod-semilinear-field-operation-lifts"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pullback composition and inverse identities commute with integral scalar extension",
+ "statement": "Fix a prime $\\ell$ and finite extensions $E\\subset L$ of $\\mathbf Q_\\ell$ inside $\\overline{\\mathbf Q}_\\ell$, with valuation rings $\\mathcal O_E\\subset\\mathcal O_L$ [def-weil-l-adic-coefficient-extension]. For a scheme $W$ on which $\\ell$ is invertible [def-weil-scheme-morphism-properties] and $F\\in\\{E,L\\}$ let $D^b_c(W,\\mathcal O_F)$ be the derived-complete integral constructible category [def-weil-derived-complete-integral-detailed], and let $T_W:D^b_c(W,\\mathcal O_E)\\to D^b_c(W,\\mathcal O_L)$, $K\\mapsto K\\otimes_{\\mathcal O_E}\\mathcal O_L$, be integral scalar extension [def-weil-integral-scalar-extension]. For a morphism $f:W'\\to W$ of such schemes let $Lf_F^*$ be the integral derived pullback over $\\mathcal O_F$ [def-weil-derived-pullback-tensor-hom], and let $\\alpha^f_K:T_{W'}(Lf_E^*K)\\xrightarrow{\\sim}Lf_L^*(T_WK)$, for $K\\in D^b_c(W,\\mathcal O_E)$, be the natural scalar-extension comparison of [lem-pur-integral-operations-scalar-extension].\\n\\n1. *Composition.* Let $h:Z\\to W$ and $k:W\\to V$ be morphisms of schemes on which $\\ell$ is invertible, and let $c^{\\mathcal O_F}_{h,k}:L(k\\circ h)_F^*\\xrightarrow{\\sim}Lh_F^*Lk_F^*$ be the integral composition isomorphisms of [lem-pod-integral-pullback-composition]. Then for every $K\\in D^b_c(V,\\mathcal O_E)$\\n$$Lh_L^*(\\alpha^k_K)\\circ\\alpha^h_{Lk_E^*K}\\circ T_Z\\bigl(c^{\\mathcal O_E}_{h,k}(K)\\bigr)=c^{\\mathcal O_L}_{h,k}(T_VK)\\circ\\alpha^{k\\circ h}_K$$\\nas isomorphisms $T_Z(L(k\\circ h)_E^*K)\\to Lh_L^*Lk_L^*(T_VK)$.\\n\\n2. *Inverse identities along an isomorphism.* Let $g:X\\to Y$ be an isomorphism of schemes on which $\\ell$ is invertible, with inverse $\\bar g:Y\\to X$, and write $g^{-1},\\bar g^{-1}$ for the inverse-image functors on pro-etale module sheaves [def-weil-proetale-inverse-image]. For $F\\in\\{E,L\\}$ and $K\\in D^b_c(Y,\\mathcal O_F)$ let $\\lambda^g_K:Lg_F^*K\\xrightarrow{\\sim}g^{-1}K$ and $\\lambda^{\\bar g}$ be the isomorphisms of [lem-weil-isomorphism-derived-pullback], and let\\n$$\\epsilon^F_K:L\\bar g_F^*Lg_F^*K\\xrightarrow{\\ \\lambda^{\\bar g}_{Lg_F^*K}\\ }\\bar g^{-1}Lg_F^*K\\xrightarrow{\\ \\bar g^{-1}(\\lambda^g_K)\\ }\\bar g^{-1}g^{-1}K\\xrightarrow{\\ \\sim\\ }K,$$\\nthe last arrow being the canonical isomorphism of inverse images along $g\\circ\\bar g=\\mathrm{id}_Y$ [lem-weil-proetale-isomorphism-inverse-image]. Then for every $K\\in D^b_c(Y,\\mathcal O_E)$\\n$$\\epsilon^L_{T_YK}\\circ L\\bar g_L^*(\\alpha^g_K)\\circ\\alpha^{\\bar g}_{Lg_E^*K}=T_Y(\\epsilon^E_K)$$\\nas isomorphisms $T_Y(L\\bar g_E^*Lg_E^*K)\\to T_YK$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First paragraph: 'Pullback uses g_X^*f^*=f^*g_Y^*' and the inverse automorphism squares, read at the algebraically closed level of def-weil-derived-pullback-tensor-hom, where an arrow over a common finite field acts through the scalar-extension comparisons of lem-pur-integral-operations-scalar-extension; the blueprint leaves the compatibility of these comparisons with the composition and inverse identifications implicit."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-integral-scalar-extension",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -n \"def pullbackComp|pullbackComp\" Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean",
+   "results": "Pullback.lean:131 PresheafOfModules.pullbackComp, :143-146 its associativity with whiskering.",
+   "date": "2026-10-21",
+   "verdict": "no match: underived pullback of presheaves of modules along functors of sites; no derived-complete l-adic coefficients and no scalar-extension comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -ln \"extendScalars\" Mathlib/Algebra/Category/ModuleCat; rg -n \"pullbackComp|pullback_comp\" Mathlib/Condensed Mathlib/CategoryTheory/Sites | grep -i scalar",
+   "results": "extendScalars only in ModuleCat/Pseudofunctor.lean, EnoughInjectives.lean, Descent.lean, Monoidal/Adjunction.lean, ChangeOfRings.lean (modules over rings); no scalar-related pullback-composition hit under Condensed or CategoryTheory/Sites.",
+   "date": "2026-10-21",
+   "verdict": "no match: Mathlib has no derived pullback of completed pro-etale coefficient modules, hence no compatibility with scalar extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "lem-pod-semilinear-field-operation-lifts",
+  "date": "2026-10-21",
+  "group": "N5"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ }
+}
