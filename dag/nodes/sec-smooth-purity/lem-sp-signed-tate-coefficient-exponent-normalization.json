@@ -16,9 +16,165 @@
   "def-pur-sheaf-hom",
   "det-def-sp-tate-twist-locally-free"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the finite-coefficient clauses of [det-def-sp-tate-twist-locally-free], taking $E=\\mathbf Q_\\ell$ in that statement. They supply one pro-étale cover with compatible primitive generators $\\zeta_n$, and identify the actual root sheaf with $(\\mathbf Z/\\ell^n)$ by $a\\mapsto\\zeta_n^a$. Since $n\\ge m$, the maps $\\mathbf Z/\\ell^n\\to R$ exist. Restriction of sheaf tensors commutes with tensor product by [lem-sfb-localized-site-tensor-restriction], and the unitors of [lem-pc-sheaf-modules-tensor-closed] therefore give bases $u_{R,n}=\\zeta_n\\otimes1$ of $L_{R,n}$ on this cover. Iterating gives $u_{R,n}^{d}$ in positive degree. By the slice description of [def-pur-sheaf-hom], its dual has basis $(u_{R,n}^{d})^\\vee$, with value $1$ on $u_{R,n}^{d}$. Thus evaluating a functional on this basis determines it, on every further slice. These bases are used only for verification, not to choose the global maps.",
+   "uses": [
+    "det-def-sp-tate-twist-locally-free",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "(3), finite Tate lines; compatible-root trivializations from det-def-sp-tate-twist-locally-free clauses (1)-(3)"
+   }
+  },
+  {
+   "text": "Put $c_{f,n}^0=f_T$. The rule $(z,a)\\mapsto z\\otimes f_T(a)$ is additive in both variables and balanced over $(\\mathbf Z/\\ell^n)_T$: for a local scalar $t$, $(tz)\\otimes f_T(a)=z\\otimes t f_T(a)=z\\otimes f_T(ta)$, because the unital map $f$ commutes with the integer quotient maps. Regard the target as an $A_T$-module via $f_T$. The bilinear universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] defines the unique map $c_{f,n}^1$ with this rule. Multiplication by $s\\in A_T$ gives $c_{f,n}^1(s(z\\otimes a))=f_T(s)c_{f,n}^1(z\\otimes a)$; the same universal property extends this equality to the sheaf tensor. The formula commutes with restrictions, so this is an additive semilinear sheaf map, not merely a prescription on global pure tensors.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property"
+   }
+  },
+  {
+   "text": "For $d\\ge1$, construct the positive maps recursively from $c_{f,n}^1$ by the rule $c_{f,n}^{d+1}(x\\otimes y)=c_{f,n}^d(x)\\otimes c_{f,n}^1(y)$. It is $A_T$-balanced because either moving $s$ out of the first input or out of the second input gives the same factor $f_T(s)$ in the $B_T$-tensor product. Apply [lem-pc-sites-sheaf-tensor-bilinear-universal] at each successor. This proves existence, semilinearity and uniqueness recursively, with the case $d=1$ furnished by step 2. In the bases of step 1, $c_{f,n}^d(a u_{A,n}^{d})=f_T(a)u_{B,n}^{d}$.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), recursive maps of tensor powers"
+   }
+  },
+  {
+   "text": "For $d\\ge0$ extend by $\\beta_d(x\\otimes b)=b c_{f,n}^d(x)$. Semilinearity makes this $A_T$-balanced; [lem-pc-sites-sheaf-tensor-bilinear-universal] gives the map, and its formula proves $B_T$-linearity. For $d=0$ the inverse sends $b$ to $1\\otimes b$. For $d>0$, on the cover of step 1 the map sends $u_{A,n}^{d}\\otimes b$ to $b u_{B,n}^{d}$, with inverse $b u_{B,n}^{d}\\mapsto u_{A,n}^{d}\\otimes b$. Step 1 applies also to this scalar tensor, so these formulas are inverse on the whole restricted sheaves. On overlaps the inverses coincide by uniqueness of an inverse. The sheaf of module morphisms [def-pur-sheaf-hom] glues them to a global inverse. Hence every $\\beta_d$, $d\\ge0$, is an isomorphism, including for non-flat coefficient maps.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "(3), ordinary scalar extension and positive Tate powers; Stacks 03EK and 03EM"
+   }
+  },
+  {
+   "text": "Fix $d>0$ and write $P_R=L_{R,n}^{[d]}$. Apply [lem-sp-scalar-extension-dual-evaluation] to $A_T\\to B_T$ and $P_A$: its map $\\delta:P_A^\\vee\\otimes_{A_T}B_T\\to(P_A\\otimes_{A_T}B_T)^\\vee$ satisfies $\\delta(\\lambda\\otimes b)(x\\otimes t)=bt f_T(\\lambda(x))$ on every slice. In the bases of step 1 it sends $(u_{A,n}^{d})^\\vee\\otimes1$ to the functional taking $u_{A,n}^{d}\\otimes1$ to $1$. Thus it identifies free rank-one sheaves on that cover; its local inverses glue by [def-pur-sheaf-hom], as in step 4. Define $c_{f,n}^{-d}(\\lambda)=\\delta(\\lambda\\otimes1)\\circ\\beta_d^{-1}$. It is additive and $f$-semilinear, and evaluation on $c_{f,n}^{d}(x)=\\beta_d(x\\otimes1)$ is $f_T(\\lambda(x))$. Its scalar extension is the composite of the isomorphism $\\delta$ and precomposition by $\\beta_d^{-1}$. The latter has inverse precomposition by $\\beta_d$, so this proves the required isomorphism in every negative degree.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-evaluation",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "(3), dual evaluation under scalar extension; Stacks 03EK, 04TT and 03EM"
+   }
+  },
+  {
+   "text": "For uniqueness of the coefficient family, degree zero is prescribed and degree one is forced by the root-tensor formula and [lem-pc-sites-sheaf-tensor-bilinear-universal]. The positive degrees are then forced by the recursion. In negative degree, evaluate a competing map on the local basis $u_{B,n}^{d}=c_{f,n}^{d}(u_{A,n}^{d})$. Its required value on $\\lambda$ is $f_T(\\lambda(u_{A,n}^{d}))$, so $B_T$-linearity of the resulting functional forces it on every $b u_{B,n}^{d}$. The separatedness of internal Hom [def-pur-sheaf-hom] gives equality globally. No surjectivity of $f$ is used: these images generate the positive target after $B_T$-scalar multiplication. Consequently the family of steps 2-5 is the unique normalized family.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "(3), uniqueness of the normalized finite signed coefficient maps"
+   }
+  },
+  {
+   "text": "For $n\\ge k\\ge m$, the actual transition of [def-pur-roots-of-unity-sheaf] is $q^{n,k}(z)=z^{\\ell^{n-k}}$. It is linear over $(\\mathbf Z/\\ell^n)_T$ when the target is restricted along the quotient to $(\\mathbf Z/\\ell^k)_T$. Since $\\ell^kR=0$, the balanced rule $z\\otimes a\\mapsto q^{n,k}(z)\\otimes a$ therefore defines $e_R^{n,k,1}$ by [lem-pc-sites-sheaf-tensor-bilinear-universal]. Clause (2) of [det-def-sp-tate-twist-locally-free], applied with annihilating exponent $k$, says that precisely this induced Kummer map is an isomorphism. In the compatible bases it sends $u_{R,n}$ to $u_{R,k}$.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "det-def-sp-tate-twist-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "(3), independence of the common annihilating exponent; det-def-sp-tate-twist-locally-free clause (2)"
+   }
+  },
+  {
+   "text": "Set $e_R^{n,k,0}=\\mathrm{id}$. Tensor powers of $e_R^{n,k,1}$ give isomorphisms in positive degrees. For $d>0$ put $e_R^{n,k,-d}(\\lambda)=\\lambda\\circ(e_R^{n,k,d})^{-1}$, using the slice definition of [def-pur-sheaf-hom]. Its inverse is precomposition by $e_R^{n,k,d}$, and evaluation on $e_R^{n,k,d}(x)$ is $\\lambda(x)$ as required. The tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] forces the positive maps. For the negative maps the equation determines a functional on every local section of the target because $e_R^{n,k,d}$ is invertible on every slice. Thus this is the unique family with all the stated normalizations.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "(3), signed extension of the Kummer-induced comparison"
+   }
+  },
+  {
+   "text": "The degree-one transition is the identity for $n=k$. For $n\\ge k\\ge j\\ge m$, the root formula gives $(z^{\\ell^{n-k}})^{\\ell^{k-j}}=z^{\\ell^{n-j}}$, using $(n-k)+(k-j)=n-j$. Hence degree one has the asserted composition, by the tensor universal property. Degree zero does too, and tensoring gives all positive degrees. For negative degrees the composite sends $\\lambda$ to $\\lambda\\circ(e_R^{n,k,d})^{-1}\\circ(e_R^{k,j,d})^{-1}=\\lambda\\circ(e_R^{k,j,d}\\circ e_R^{n,k,d})^{-1}$. This is the prescribed direct negative transition. The same formula gives identity in negative degrees. These formulas are slice-wise formulas for internal Hom, so they prove the sheaf-map equalities.",
+   "uses": [
+    "def-pur-roots-of-unity-sheaf",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "(3), normalization under repeated change of common exponent"
+   }
+  },
+  {
+   "text": "In degree zero both paths in the coefficient/exponent square are $f_T$. In degree one their values on a root tensor are both $z^{\\ell^{n-k}}\\otimes f_T(a)$. The bilinear universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] therefore gives equality of the two maps of sheaves. Induct on $d\\ge1$: the case $d=1$ is this calculation, and on $x\\otimes y$ the two maps in degree $d+1$ are the tensors of their degree-$d$ and degree-one maps. The induction hypothesis and the same universal property prove the successor. Thus the square commutes in every nonnegative degree.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "(3), coefficient/exponent compatibility on root tensors and positive powers"
+   }
+  },
+  {
+   "text": "For degree $-d$ fix a local $\\lambda\\in L_{A,n}^{[-d]}$ and $x\\in L_{A,n}^{[d]}$. Put $y=e_B^{n,k,d}(c_{f,n}^{d}(x))=c_{f,k}^{d}(e_A^{n,k,d}(x))$, the equality being step 10. Evaluating the first path on $y$ gives\n$$[e_B^{n,k,-d}(c_{f,n}^{-d}(\\lambda))](y)=c_{f,n}^{-d}(\\lambda)(c_{f,n}^{d}(x))=f_T(\\lambda(x)).$$\nEvaluating the other path on that same section gives\n$$[c_{f,k}^{-d}(e_A^{n,k,-d}(\\lambda))](y)=f_T\\bigl(e_A^{n,k,-d}(\\lambda)(e_A^{n,k,d}(x))\\bigr)=f_T(\\lambda(x)).$$\nOn the cover of step 1 take $x=u_{A,n}^{d}$. Then $y=u_{B,k}^{d}$ is a basis, so the two $B_T$-linear functionals agree on all sections. Equality is local by [def-pur-sheaf-hom]; hence the negative square commutes as a map of sheaves. This explicitly verifies compatibility with dual evaluation, including non-surjective coefficient maps.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "(3), exponent naturality for negative twists by dual evaluation"
+   }
+  },
+  {
+   "text": "In any signed degree evaluate the scalar-extended square on $x\\otimes b$. The left path is $b\\,e_B^{n,k,r}(c_{f,n}^r(x))$ and the right path is $b\\,c_{f,k}^r(e_A^{n,k,r}(x))$. Steps 10-11 identify these. Conversely set $b=1$ to recover the semilinear square. The tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] promotes the pure-tensor equality to the asserted equality of $B_T$-linear sheaf maps. The scalar-extended maps here are precisely those constructed in steps 4-5, so all the required clauses hold for the same unique normalized families.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+    "place": "(3), ordinary scalar-extension formulation of the exponent square"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-def-sp-tate-twist-locally-free",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pur-sheaf-hom",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-sp-scalar-extension-dual-evaluation",
+  "def-pur-roots-of-unity-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sp-scalar-extension/sk-def-sp-scalar-extension-functor.proof.md",
+  "place": "Proof paragraph (3), expanded finite signed normalization, using Stacks 03EK, 03EM, 03EO, 03EL and the existing explicit scalar-dual evaluation node"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +217,38 @@
    "results": "8 hits: SheafOfModules.Hom.mk.inj, SheafOfModules.LocalGeneratorsData.mk.inj, AlgebraicGeometry.Scheme.Modules.hom_ext, AlgebraicGeometry.Scheme.Modules.hom_ext_iff, SheafOfModules.hom_ext, PresheafOfModules.Sheafify.instUniqueSMulCandidate, SheafOfModules.Hom.ext, SheafOfModules.hom_ext_iff",
    "date": "2026-10-21",
    "verdict": "no match: algebraic roots, ordinary sheaf extensionality and tensor APIs do not give the normalized signed Kummer families or their exponent square"
+  },
+  {
+   "tool": "grep",
+   "query": "TateTwist|tateTwist|Kummer|rootsOfUnity",
+   "results": "0 hits: ; directory AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, algebraic cyclotomic characters or sheaf morphism extensionality; none states the normalized signed finite Tate families with the Kummer exponent square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps on Tate twists normalized by roots tensor powers and dual evaluation commute with exponent reduction",
+   "results": "8 hits: TensorPower.multilinearMapToDual_apply_tprod, contractLeft, Module.Dual.eval, TensorPower.pairingDual, Module.Dual.eval_naturality, LinearEquiv.trans_dualMap_symm_flip, IsBaseChange.toDualBaseChange_tmul, LinearMap.IsPerfPair.dualEval",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, algebraic cyclotomic characters or sheaf morphism extensionality; none states the normalized signed finite Tate families with the Kummer exponent square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized semilinear maps on positive and negative Tate twists commute with Kummer root exponent transitions and become scalar extension isomorphisms",
+   "results": "8 hits: modularCyclotomicCharacter.aux_spec, cyclotomicCharacter.toFun_spec, modularCyclotomicCharacter'.spec', autEquivZmod_symm_apply_intCast, modularCyclotomicCharacter.toFun_spec, modularCyclotomicCharacter.toFun_spec', groupCohomology.exists_mul_galRestrict_of_norm_eq_one, cyclotomicCharacter.spec",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, algebraic cyclotomic characters or sheaf morphism extensionality; none states the normalized signed finite Tate families with the Kummer exponent square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniqueness of sheaf module maps defined on root tensors tensor powers and duals after extension of coefficients",
+   "results": "8 hits: PresheafOfModules.Sheafify.instUniqueSMulCandidate, PresheafOfModules.Sheafify.SMulCandidate.mk.inj, SheafOfModules.Hom.ext, SheafOfModules.hom_ext, SheafOfModules.Hom.mk.inj, SheafOfModules.hom_ext_iff, SheafOfModules.Hom.ext_iff, PresheafOfModules.Sheafify.instSubsingletonSMulCandidate",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, algebraic cyclotomic characters or sheaf morphism extensionality; none states the normalized signed finite Tate families with the Kummer exponent square"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-scalar-extension-functor",
@@ -82,5 +266,44 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-signed-tate-coefficient-exponent-normalization",
+  "worker": "stage1",
+  "summary": "Constructed the degree-one coefficient map on balanced root tensors, proved scalar-extension invertibility before defining negative maps by the explicit scalar-dual evaluation comparison, and checked unique signed Kummer maps, transition laws and the full negative-degree exponent square. Reused all auxiliary facts already in the DAG; no new nodes, statement changes, Lean edits or compilation.",
+  "blueprint": "det-sp-scalar-extension-functor.proof.md paragraph (3): ordinary scalar extension of finite Tate root lines, tensor powers, internal duals, and independence of the common exponent; expanded into steps 1-12.",
+  "tool_uses": [
+   {
+    "node": "det-def-sp-tate-twist-locally-free",
+    "why": "Only its finite-coefficient compatible primitive-root cover, local bases and Kummer-induced level isomorphism are used; these supply local models without replacing the scalar-extension unit route."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic restriction-to-slice tensor comparison identifies the root-tensor bases on the primitive-root cover; the coefficient-extension unit contains no separate restriction theorem."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tensor unitors on module sheaves identify a trivialized root line tensored with the coefficient ring; no alternate geometric route is involved."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic sheaf tensor bilinear universal property constructs and compares the normalized maps on pure tensors; the unit is not a construction of sheaf tensor products."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-def-sp-tate-twist-locally-free",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-1a710d82c",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-1a710d82c (reviewer sub-agent of L); spot-checked: I read all 12 steps and the cited statements in full. The statement and stmt_deps match live verbatim (live is still unsplit); only the proof, proof_deps, proof_origin, split_report, status and appended searches changed. There are 0 new nodes, no repair note and no SGA reference. Source is blueprint main-20261015 sk-def-sp-scalar-extension-functor.proof.md paragraph (3), expanded into the signed normalization and exponent independence. Step 1: det-def-sp-tate-twist-locally-free clause (1) gives a compatible-root cover; tensor restriction and unitors give local bases zeta_n⊗1. Steps 2-3: c^1 and its tensor powers come from the bilinear universal property, balanced over Z/ℓ^n and over A via f. Step 4: beta_d is invertible because locally it sends basis to basis, with no flatness needed. Step 5: c^{-d}(λ)=δ(λ⊗1)∘β_d^{-1}, with δ from same-unit lem-sp-scalar-extension-dual-evaluation; I checked the evaluation f(λ(x)), semilinearity and invertibility. Step 6: uniqueness uses the local B-basis c^d(u_A^d), not surjectivity of f. Step 7: clause (2) applies with r=k since ℓ^kR=0 (k≥m), and its induced Kummer map is exactly z⊗a↦z^{ℓ^{n-k}}⊗a. Steps 8-12: I recomputed the inverse-precomposition, composition, nonnegative-degree induction, the negative square at y=u_{B,k}^d, and the scalar-extended square. Edge cases T empty, A=B=0, Z/ℓ²→Z/ℓ, F_ℓ→F_ℓ[ε] and n=k=m all hold. No cycle: no proof_dep or stmt_dep has the item in its closure. I accept the 4 generic tool_uses from other units (tate-twist-locally-free, localized tensor restriction, tensor closed, bilinear universal). Maintainer note: a concurrent Q49 delivery of the same item (31f43c3b48e3, base 279ca14) is under review, so whichever lands second is superseded."
+ }
 }

@@ -20568,3 +20568,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:13 L: merged deliver/Q97/prop-nagata-proj-standard-open (reviewer PASS; first push; new nodes: 0)
 - 07:13 L: merged deliver/NN/lem-weil-pbc-flat-scalar-koszul-tower-comparison (reviewer PASS; first push; new nodes: 0)
 - 07:13 L: merged deliver/NV/lem-sf-direct-image-scalar-restriction-cocycle (reviewer PASS; first push; new nodes: 0)
+- 07:13 L: merged deliver/Q71/lem-sp-signed-tate-coefficient-exponent-normalization (reviewer PASS; first push; new nodes: 0); claim not held by Q71: not your claim
