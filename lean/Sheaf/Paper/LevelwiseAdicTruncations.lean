@@ -20,6 +20,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 import Mathlib.CategoryTheory.Triangulated.Adjunction
+import all Sheaf.Paper.ActualCompletedReductionReconstruction
 import all Sheaf.Paper.AdicCoefficientDatum
 import all Sheaf.Paper.BoundedConstructibleTower
 
@@ -524,6 +525,244 @@ def pbcReductionEvaluationIso (K : PbcCompletedDerived T d) (n : ℕ) :
         ((completedReductionTower T d).obj K) :=
   (asIso (completedReductionEvaluation T d n)).symm.app K
 
+section ReductionLaws
+attribute [local semireducible] pbcComplexCounit pbcExtensionCounit pbcDerivedExtensionExistence
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem reduction_restriction_coherence
+    {R S B C : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ B) (χ : B ⟶ C)
+    (π : R ⟶ B) (τ : S ⟶ C) (ρ : R ⟶ C)
+    (h₁ : φ ≫ ψ = π) (h₂ : ψ ≫ χ = τ)
+    (h₃ : φ ≫ τ = ρ) (h₄ : π ≫ χ = ρ) :
+    Functor.whiskerRight (pbcDerivedRestrictComp ψ χ τ h₂).hom
+        (pbcDerivedRestrict φ) ≫ (pbcDerivedRestrictComp φ τ ρ h₃).hom =
+      Functor.whiskerLeft (pbcDerivedRestrict χ)
+        (pbcDerivedRestrictComp φ ψ π h₁).hom ≫
+          (pbcDerivedRestrictComp π χ ρ h₄).hom := by
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso (pbcModules T C) (.up ℤ))
+  intro P
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  apply (cancel_mono ((pbcRestrict ρ).mapDerivedCategoryFactors.hom.app P)).1
+  simp only [Category.assoc]
+  erw [reconstructionRestrictionFactors T φ τ ρ h₃,
+    reconstructionRestrictionFactors T π χ ρ h₄]
+  erw [← Functor.map_comp_assoc, reconstructionRestrictionFactors T ψ χ τ h₂]
+  simp only [Functor.map_comp, Category.assoc]
+  dsimp only [pbcDerivedRestrict, Functor.comp_obj] at *
+  have hn := (pbcDerivedRestrictComp φ ψ π h₁).hom.naturality
+    ((pbcRestrict χ).mapDerivedCategoryFactors.hom.app P)
+  dsimp only [Functor.comp_map] at hn
+  erw [← reassoc_of% hn]
+  dsimp only [pbcDerivedRestrict, Functor.comp_obj] at *
+  erw [reassoc_of% (reconstructionRestrictionFactors T φ ψ π h₁
+    (((pbcRestrict χ).mapHomologicalComplex (.up ℤ)).obj P))]
+  erw [(pbcRestrict φ).mapDerivedCategoryFactors.hom.naturality_assoc]
+  simp only [Functor.comp_map, ← DerivedCategory.Q.map_comp]
+  congr 4
+  apply HomologicalComplex.Hom.ext
+  funext i
+  ext U x
+  simp only [HomologicalComplex.comp_f, NatTrans.mapHomologicalComplex_app_f,
+    Functor.mapHomologicalComplex_map_f]
+  change ((pbcRestrictComp φ τ ρ h₃).hom.app (P.X i)).val.app U
+      (((pbcRestrictComp ψ χ τ h₂).hom.app (P.X i)).val.app U x) =
+    ((pbcRestrictComp π χ ρ h₄).hom.app (P.X i)).val.app U
+      (((pbcRestrictComp φ ψ π h₁).hom.app ((pbcRestrict χ).obj (P.X i))).val.app U x)
+  erw [reconstructionComp_section, reconstructionComp_section,
+    reconstructionComp_section, reconstructionComp_section]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem reduction_transition_cocycle
+    {R S B C : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
+    (φ : R ⟶ S) (ψ : S ⟶ B) (χ : B ⟶ C)
+    (π : R ⟶ B) (τ : S ⟶ C) (ρ : R ⟶ C)
+    (h₁ : φ ≫ ψ = π) (h₂ : ψ ≫ χ = τ)
+    (h₃ : φ ≫ τ = ρ) (h₄ : π ≫ χ = ρ)
+    (K : DerivedCategory (pbcModules T R)) :
+    pbcReductionTransition φ τ ρ h₃ K =
+      pbcReductionTransition φ ψ π h₁ K ≫
+        (pbcDerivedRestrict ψ).map (pbcReductionTransition π χ ρ h₄ K) ≫
+          (pbcDerivedRestrictComp ψ χ τ h₂).hom.app ((pbcDerivedExtend ρ).obj K) := by
+  have hc := congr_app (reduction_restriction_coherence T φ ψ χ π τ ρ h₁ h₂ h₃ h₄)
+    ((pbcDerivedExtend ρ).obj K)
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app] at hc
+  apply ((pbcDerivedScalarAdjunction φ).homEquiv _ _).injective
+  rw [Adjunction.homEquiv_naturality_right]
+  rw [pbcReductionTransition, Equiv.apply_symm_apply]
+  rw [pbcReductionTransition, Equiv.apply_symm_apply]
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := (pbcDerivedRestrictComp φ ψ π h₁).inv.naturality
+    (pbcReductionTransition π χ ρ h₄ K)
+  dsimp only [Functor.comp_map] at hn
+  rw [← reassoc_of% hn]
+  rw [← Category.assoc]
+  rw [← (pbcDerivedScalarAdjunction π).homEquiv_unit]
+  rw [pbcReductionTransition, Equiv.apply_symm_apply]
+  apply (cancel_mono ((pbcDerivedRestrictComp φ τ ρ h₃).hom.app
+    ((pbcDerivedExtend ρ).obj K))).1
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  rw [hc]
+  simp only [Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem reduction_module_tower_map
+    (M : pbcModules T (pbcAdicCompletion T d)) (b a : ℕ) (hab : a ≤ b) :
+    (completedReductionModuleTower T d M).map (homOfLE hab).op =
+      (completedReductionTransition T d b a hab).app M := by
+  apply level_hom_ext T (pbcAdicProjection T d b) M
+  intro U s x
+  erw [(completedReductionTransition_exists T d b a hab).exists.choose_spec M U s x]
+  induction b, hab using Nat.le_induction with
+  | base =>
+      have hi : (homOfLE (le_refl a)).op = 𝟙 (op a) := Subsingleton.elim _ _
+      rw [hi, (completedReductionModuleTower T d M).map_id]
+      change reductionTensorSection T _ M U s x = _
+      rw [reductionCoefficientMap_id]
+      rfl
+  | succ b hab ih =>
+      have hc : (homOfLE (hab.trans (Nat.le_succ b))).op =
+          (homOfLE (Nat.le_succ b)).op ≫ (homOfLE hab).op := Subsingleton.elim _ _
+      rw [hc, Functor.map_comp]
+      erw [show (completedReductionModuleTower T d M).map
+          (homOfLE (Nat.le_succ b)).op =
+          (completedReductionTransition T d (b + 1) b (Nat.le_succ b)).app M from
+        Functor.ofOpSequence_map_homOfLE_succ _ b]
+      change ((completedReductionModuleTower T d M).map (homOfLE hab).op).val.app U
+        (((completedReductionTransition T d (b + 1) b (Nat.le_succ b)).app M).val.app U
+          (reductionTensorSection T _ M U s x)) = _
+      erw [(completedReductionTransition_exists T d (b + 1) b
+        (Nat.le_succ b)).exists.choose_spec M U s x, ih]
+      congr 1
+      exact (ConcreteCategory.congr_hom (congrArg (fun k ↦ k.hom.app U)
+        (pbcAdicQuotient_comp T d (b + 1) b a hab (Nat.le_succ b))) s)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
+private theorem reduction_allpair_comparison (b a : ℕ) (hab : a ≤ b) :
+    let step : pbcCompletedReduction T d b ⋙
+        pbcDerivedRestrict (pbcAdicProjection T d b) ⟶
+      pbcCompletedReduction T d a ⋙ pbcDerivedRestrict (pbcAdicProjection T d a) :=
+      { app K := (pbcDerivedRestrict (pbcAdicProjection T d b)).map
+          (pbcReductionTransition (pbcAdicProjection T d b)
+            (pbcAdicQuotient T d b a hab) (pbcAdicProjection T d a)
+            (pbcAdicProjection_comp T d b a hab) K) ≫
+          (pbcDerivedRestrictComp (pbcAdicProjection T d b)
+            (pbcAdicQuotient T d b a hab) (pbcAdicProjection T d a)
+            (pbcAdicProjection_comp T d b a hab)).hom.app
+              ((pbcCompletedReduction T d a).obj K)
+        naturality := by
+          intro K L f
+          dsimp only [Functor.comp_map]
+          simp only [← Category.assoc, ← Functor.map_comp]
+          rw [reconstructionTransition_natural T]
+          simp only [Functor.map_comp, Category.assoc]
+          exact congrArg (fun t ↦ _ ≫ t)
+            ((pbcDerivedRestrictComp (pbcAdicProjection T d b)
+              (pbcAdicQuotient T d b a hab) (pbcAdicProjection T d a)
+              (pbcAdicProjection_comp T d b a hab)).hom.naturality
+                ((pbcCompletedReduction T d a).map f)) }
+    let strictStep := Functor.whiskerLeft (completedReductionTower T d)
+      (pbcTowerTransition T (pbcAdicCompletion T d) b a hab)
+    strictStep ≫ completedReductionEvaluation T d a =
+      completedReductionEvaluation T d b ≫ step := by
+  intro step strictStep
+  apply derived_natTrans_ext _ _
+    (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients
+      (R := completedReductionCoefficient T d) P)
+    (fun X ↦ by
+      obtain ⟨P, p, hk, _, hp, _⟩ :=
+        CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+          (R := completedReductionCoefficient T d) X
+      exact ⟨P, p, hk, hp⟩)
+  intro P hP
+  let φ := pbcAdicProjection T d a
+  let c := (pbcDerivedRestrict φ).map (pbcComplexCounit φ P) ≫
+    (pbcRestrict φ).mapDerivedCategoryFactors.hom.app
+      (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P)
+  have : IsIso (pbcComplexCounit φ P) := by
+    have := pbcExtensionCounit_isIso φ P hP
+    unfold pbcComplexCounit
+    infer_instance
+  have : IsIso c := by dsimp [c]; infer_instance
+  apply (cancel_mono c).1
+  simp only [NatTrans.comp_app, Category.assoc]
+  have he (i : ℕ) :=
+    (completedReductionEvaluation_exists T d i).choose_spec.1.2 P hP
+  have hs := reconstructionRestrictedTransition_computation T
+    (pbcAdicProjection T d b)
+    (pbcAdicQuotient T d b a hab) φ
+    (pbcAdicProjection_comp T d b a hab) P hP
+  let J := (completedReductionComplexTowerFunctor T d).obj P
+  let q := completedReductionTowerComplexCounit T d P
+  let E (i : ℕ) := pbcTowerEvaluation T (pbcAdicCompletion T d) i
+  let F (i : ℕ) := (CategoryTheory.evaluation ℕᵒᵖ
+    (pbcModules T (pbcAdicCompletion T d))).obj (op i)
+  let τ := pbcTowerTransition T (pbcAdicCompletion T d) b a hab
+  let t := (NatTrans.mapHomologicalComplex
+    ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules T (pbcAdicCompletion T d))).map
+      (homOfLE hab).op) (.up ℤ)).app J
+  have ht : τ.app (DerivedCategory.Q.obj J) ≫ (F a).mapDerivedCategoryFactors.hom.app J =
+      (F b).mapDerivedCategoryFactors.hom.app J ≫ DerivedCategory.Q.map t := by
+    dsimp only [τ, pbcTowerTransition]
+    erw [Localization.liftNatTrans_app]
+    simp only [Localization.Lifting.iso, Functor.whiskerRight_app, Category.assoc]
+    dsimp only [F, t]
+    simp only [Iso.inv_hom_id_app, Category.comp_id]
+  have hj :
+      (((pbcRestrict (pbcAdicProjection T d b)).mapHomologicalComplex (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex
+          (reconstructionOrdinaryTransitionNat T (pbcAdicProjection T d b)
+            (pbcAdicQuotient T d b a hab) φ
+            (pbcAdicProjection_comp T d b a hab)) (.up ℤ)).app P) ≫
+        (NatTrans.mapHomologicalComplex (pbcRestrictComp (pbcAdicProjection T d b)
+          (pbcAdicQuotient T d b a hab) φ
+          (pbcAdicProjection_comp T d b a hab)).hom (.up ℤ)).app
+            (((pbcExtend φ).mapHomologicalComplex (.up ℤ)).obj P)) = t := by
+    apply HomologicalComplex.Hom.ext
+    funext i
+    change (pbcRestrict (pbcAdicProjection T d b)).map
+        (reconstructionOrdinaryTransition T (pbcAdicProjection T d b)
+          (pbcAdicQuotient T d b a hab) (pbcAdicProjection T d a)
+          (pbcAdicProjection_comp T d b a hab) (P.X i)) ≫
+        (pbcRestrictComp (pbcAdicProjection T d b) (pbcAdicQuotient T d b a hab)
+          (pbcAdicProjection T d a) (pbcAdicProjection_comp T d b a hab)).hom.app
+            ((pbcExtend (pbcAdicProjection T d a)).obj (P.X i)) =
+      (completedReductionModuleTower T d (P.X i)).map (homOfLE hab).op
+    rw [reduction_module_tower_map T d (P.X i) b a hab]
+    exact reconstructionOrdinaryStep T d b a hab (P.X i)
+  rw [hj] at hs
+  simp only [Category.assoc] at hs
+  dsimp only [strictStep, Functor.whiskerLeft_app]
+  change τ.app _ ≫ (completedReductionEvaluation T d a).app _ ≫ c =
+    (completedReductionEvaluation T d b).app _ ≫
+      (step).app _ ≫ c
+  dsimp only [c]
+  erw [he a]
+  change _ = (completedReductionEvaluation T d b).app _ ≫
+    (((pbcDerivedRestrict (pbcAdicProjection T d b)).map _) ≫ _) ≫ _
+  simp only [Category.assoc]
+  erw [hs]
+  erw [reassoc_of% (he b)]
+  have hn := τ.naturality q
+  try dsimp only [Functor.comp_map] at hn
+  change τ.app _ ≫ (E a).map q ≫ (F a).mapDerivedCategoryFactors.hom.app J = _
+  rw [← Category.assoc, ← hn, Category.assoc, ht]
+  rfl
+
+end ReductionLaws
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.defeqAttrib.useBackward true in
 /-- The canonical reduction tower satisfies the strict-transition equation and full
 quotient cocycle, before any truncation or Tor hypothesis.
 Source: blueprint order 1429, opening paragraph; Stacks Tag 06YY
@@ -570,7 +809,45 @@ theorem pbc_reduction_adic_tower_laws (K : PbcCompletedDerived T d) :
             (pbcAdicQuotient T d b a hab) (pbcAdicQuotient T d c a (hab.trans hbc))
             (pbcAdicQuotient_comp T d c b a hab hbc)).hom.app
               ((pbcCompletedReduction T d a).obj K) := by
-  sorry
+  have ht (b a : ℕ) (hab : a ≤ b) :
+      adicTowerSemilinearTransition T d
+          (fun n ↦ (pbcCompletedReduction T d n).obj K)
+          (fun b a hab ↦ pbcReductionNormalization (pbcAdicProjection T d b)
+            (pbcAdicQuotient T d b a hab) (pbcAdicProjection T d a)
+            (pbcAdicProjection_comp T d b a hab) K) b a hab =
+        pbcReductionTransition (pbcAdicProjection T d b) (pbcAdicQuotient T d b a hab)
+          (pbcAdicProjection T d a) (pbcAdicProjection_comp T d b a hab) K := by
+    change ((pbcDerivedScalarAdjunction (pbcAdicQuotient T d b a hab)).homEquiv _ _)
+      (((pbcDerivedScalarAdjunction (pbcAdicQuotient T d b a hab)).homEquiv _ _).symm
+        (pbcReductionTransition (pbcAdicProjection T d b) (pbcAdicQuotient T d b a hab)
+          (pbcAdicProjection T d a) (pbcAdicProjection_comp T d b a hab) K)) = _
+    exact Equiv.apply_symm_apply _ _
+  constructor
+  · intro b a hab
+    rw [ht]
+    have hs := congr_app (reduction_allpair_comparison T d b a hab) K
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hs
+    have hia : (asIso (completedReductionEvaluation T d a)).inv.app K ≫
+        (completedReductionEvaluation T d a).app K = 𝟙 _ :=
+      (asIso (completedReductionEvaluation T d a)).inv_hom_id_app K
+    have hib : (completedReductionEvaluation T d b).app K ≫
+        (asIso (completedReductionEvaluation T d b)).inv.app K = 𝟙 _ :=
+      (asIso (completedReductionEvaluation T d b)).hom_inv_id_app K
+    dsimp only [pbcReductionEvaluationIso, Iso.symm_hom, Iso.app_hom]
+    apply (cancel_epi ((asIso (completedReductionEvaluation T d b)).hom.app K)).1
+    apply (cancel_mono ((asIso (completedReductionEvaluation T d a)).hom.app K)).1
+    simp only [Category.assoc, asIso_hom, hia, reassoc_of% hib]
+    erw [Category.comp_id]
+    exact hs.symm
+  · intro c b a hab hbc
+    rw [ht, ht, ht]
+    exact reduction_transition_cocycle T (pbcAdicProjection T d c)
+      (pbcAdicQuotient T d c b hbc) (pbcAdicQuotient T d b a hab)
+      (pbcAdicProjection T d b) (pbcAdicQuotient T d c a (hab.trans hbc))
+      (pbcAdicProjection T d a) (pbcAdicProjection_comp T d c b hbc)
+      (pbcAdicQuotient_comp T d c b a hab hbc)
+      (pbcAdicProjection_comp T d c a (hab.trans hbc))
+      (pbcAdicProjection_comp T d b a hab) K
 
 /-- The actual reduction tower of K: all data come from the recorded K-flat universal
 construction and balancing maps; only the two named proof fields are postponed.
