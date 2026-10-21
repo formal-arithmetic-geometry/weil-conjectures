@@ -84,6 +84,6 @@ L: independent stage-2 immutable head cfd6713a8ff9: H3/H13: the bound AlgebraicG
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-restricted-quotient-complete: lem-trf-restricted-quotient-complete: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## lem-weil-pbc-projection-mate-square-coherence (2026-10-21 03:12 UTC, branch head 6e889d20f6)
+## lem-weil-pbc-projection-mate-square-coherence (2026-10-21 03:24 UTC, branch head 98f499d80d)
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-weil-pbc-projection-mate-square-coherence: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
