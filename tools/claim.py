@@ -246,15 +246,18 @@ def take(who, m, quiet=False, stage=None) -> bool:
     (~40-100 sessions an hour). Judged for the caller's stage, such a claim is refused."""
     claim_stage = str(stage or queue_stage(m) or
                       ("3" if "." in m or li.file_of(m).is_file() else "1"))
-    if claim_stage in ("1", "2") and not node_published(m):
+    # the human, 2026-10-22: an item still on the list (coord/queue.tsv) that nobody holds is dispatched, whatever
+    # the checks below would say; they apply only to items the queue no longer lists
+    listed = queue_stage(m) is not None
+    if not listed and claim_stage in ("1", "2") and not node_published(m):
         if not quiet:
             print(f"{m} has no published DAG node in the live sources; nothing to claim")
         return False
-    if stage is not None and node_finished(m, stage) and repair_note(m).get('state') != 'released':
+    if not listed and stage is not None and node_finished(m, stage) and repair_note(m).get('state') != 'released':
         if not quiet:
             print(f"{m} is already completed for stage {stage} (live node); nothing to claim for that stage")
         return False
-    if li.file_of(m).is_file() and sorries(m) == 0 and repair_note(m).get('state') != 'released' \
+    if not listed and li.file_of(m).is_file() and sorries(m) == 0 and repair_note(m).get('state') != 'released' \
             and not any(l.split()[:1] == [m] for l in (WORK / 'repairs.txt').read_text().splitlines()) \
             and m not in retire_items():   # 2026-10-20: a `retire` item (coord/retire-items.tsv) has no sorry to prove
         # launcher, 2026-10-16: a module proved on the main branch is not claimable even while the queue still lists it
@@ -262,13 +265,13 @@ def take(who, m, quiet=False, stage=None) -> bool:
         if not quiet:
             print(f"{m} has no sorry on the main branch; nothing to claim")
         return False
-    if m in retire_items() and _withdrawn(m):
+    if not listed and m in retire_items() and _withdrawn(m):
         # 2026-10-21: a retire item whose retirement landed (the module is the withdrawn stub, or gone) is no work; between
         # the landing and the next queue refresh it was claimed again and the worker answered BLOCKED (~30-80 runs an hour)
         if not quiet:
             print(f"{m} is already retired (withdrawn stub on the main branch); nothing to claim")
         return False
-    if stage2_parked(m):   # launcher's order 2026-10-11 05:50 UTC: parked for every group until L resolves it
+    if not listed and stage2_parked(m):   # launcher's order 2026-10-11 05:50 UTC: parked for every group until L resolves it
         if not quiet:
             print(f"{m} is parked in stage 2 (abandoned; see tools/claim.py parked and coord/stage2-parked.md); nothing to claim")
         return False
