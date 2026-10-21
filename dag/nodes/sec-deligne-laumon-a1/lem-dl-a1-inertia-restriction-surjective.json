@@ -15,83 +15,78 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-integral-closure-algebraic-extension-normal] to $A\\subset L$ and $A\\subset M$. Thus $B,C$ are normal domains with fraction fields $L,M$, and $C$ is integrally closed in $M$. Moreover $C$ is exactly the integral closure of $B$ in $M$: if $x\\in C$, its monic equation over $A$ is also one over $B$; conversely, a monic equation over $B\\subset C$ makes $x\\in M$ integral over $C$, hence $x\\in C$. The inclusion $B/\\mathfrak q\\hookrightarrow C/\\mathfrak r$ is injective by the definition of contraction. Consequently it extends by $a/b\\mapsto a/b$ to an inclusion $\\kappa(\\mathfrak q)\\hookrightarrow\\kappa(\\mathfrak r)$, where $\\kappa(\\mathfrak q)=\\operatorname{Frac}(B/\\mathfrak q)$ and $\\kappa(\\mathfrak r)=\\operatorname{Frac}(C/\\mathfrak r)$.",
-   "uses": [
-    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
-    "def-weil-pbc-integral-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
-   }
-  },
-  {
-   "text": "Restriction to $L$ is defined for every $g\\in\\operatorname{Gal}(M/K)$: normality of $L/K$ implies that $g(x)\\in L$ for $x\\in L$, since $g(x)$ is another root of the minimal polynomial of $x$ over $K$; applying this also to $g^{-1}$ gives equality of the image with $L$. Applying $g$ to monic equations over $A$ shows $g(C)=C$ and $g(B)=B$. If $g\\in I_{\\mathfrak r}$, then $g(\\mathfrak q)=g(\\mathfrak r)\\cap g(B)=\\mathfrak q$, and the residue action of $g|_L$ on $\\kappa(\\mathfrak q)$ is the restriction of the identity action on $\\kappa(\\mathfrak r)$. Therefore $g|_L\\in I_{\\mathfrak q}$. Restriction commutes with composition and identity, so it defines the asserted homomorphism.",
+   "text": "Let B = integralClosure A L, C = integralClosure A M and f : B → C be the canonical inclusion. Restriction commutes with f by AlgEquiv.restrictNormal_commutes. Applying f to the difference h(b)-b shows that the restriction of any upper inertia element lies in lower inertia. Contraction of a translated prime is the translate of its contraction, by the same equivariance applied to inverse automorphisms.",
    "uses": [
     "def-weil-pbc-integral-closure"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; implemented directly using the profinite invariant-ring prime transitivity and quotient-lifting theorems."
    }
   },
   {
-   "text": "Fix $h\\in I_{\\mathfrak q}$. By [lem-weil-pbc-normal-subextension-automorphism-extends], normality of $M/K$ and $L/K$ gives $\\tau\\in\\operatorname{Gal}(M/K)$ with $\\tau|_L=h$. By [lem-dl-a1-galois-over-intermediate], $M/L$ is Galois even when either extension is infinite. Step 1 supplies precisely the normal base domain $B$, its fraction field $L$, and its integral closure $C$ in $M$ needed to apply [lem-dl-a1-galois-prime-residue-lifting] over $B$.",
+   "text": "By [lem-dl-a1-galois-over-intermediate], M/L is Galois. The fixed-field theorem [lem-exc-etale-galois-fixed-field-subgroup] for the bottom field, in the equivalent form InfiniteGalois.mem_range_algebraMap_iff_fixed, shows that an element of C fixed by Gal(M/L) comes from an element y of L. Integrality descends along the injective algebra map L → M, so y belongs to B. Thus B is exactly the invariant ring of the action on C.",
+   "uses": [
+    "lem-dl-a1-galois-over-intermediate",
+    "lem-exc-etale-galois-fixed-field-subgroup",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; implemented directly using the profinite invariant-ring prime transitivity and quotient-lifting theorems."
+   }
+  },
+  {
+   "text": "The Krull topology makes Gal(M/L) profinite, using [lem-exc-galois-krull-finite-limit] and [lem-dl-a1-finite-group-limit-profinite]. Give C the discrete topology. For b in C, its orbit-map fiber through σ is the coset σ Stab(b), which is open: b is algebraic over L and its stabilizer is open in the Krull topology (Mathlib stabilizer_isOpen_of_isIntegral). These fibers give continuity of the action.",
+   "uses": [
+    "lem-exc-galois-krull-finite-limit",
+    "lem-dl-a1-finite-group-limit-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; implemented directly using the profinite invariant-ring prime transitivity and quotient-lifting theorems."
+   }
+  },
+  {
+   "text": "For h in lower inertia lift h to τ in Gal(M/K) using [lem-weil-pbc-normal-subextension-automorphism-extends]. Inertia stabilizes the lower prime, so τ(r) and r have equal contraction to B. Apply prime transitivity in [lem-dl-a1-profinite-invariant-ring-primes] to the Gal(M/L)-action on C. Obtain ρ with ρ(τ(r)) = r. Then d = ρτ stabilizes r and restricts to h because ρ fixes L.",
    "uses": [
     "lem-weil-pbc-normal-subextension-automorphism-extends",
-    "lem-dl-a1-galois-over-intermediate"
+    "lem-dl-a1-profinite-invariant-ring-primes"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; implemented directly using the profinite invariant-ring prime transitivity and quotient-lifting theorems."
    }
   },
   {
-   "text": "The primes $\\tau(\\mathfrak r)$ and $\\mathfrak r$ of $C$ contract to the same prime of $B$, because $\\tau(\\mathfrak r)\\cap B=h(\\mathfrak q)=\\mathfrak q$. Apply part (1) of [lem-dl-a1-galois-prime-residue-lifting] with base $B$, fraction field $L$, extension $M/L$, and these two primes. Obtain $\\rho\\in\\operatorname{Gal}(M/L)$ satisfying $\\rho\\tau(\\mathfrak r)=\\mathfrak r$. Put $d=\\rho\\tau$. Then $d$ stabilizes $\\mathfrak r$ and $d|_L=h$, since $\\rho$ fixes $L$ pointwise.",
+   "text": "The quotient automorphism d̄ of C/r fixes B/q: its value on the class of f(b) is the class of f(h(b)), equal to the class of f(b) since h is in lower inertia. Apply quotient lifting in [lem-dl-a1-profinite-invariant-ring-primes] to obtain ε in Gal(M/L), stabilizing r and acting on C/r as d does. For every c in C, d(c)-ε(c) lies in r. Applying ε⁻¹ and using its stabilization of r gives (ε⁻¹d)(c)-c in r. Thus ε⁻¹d is in upper inertia, and its restriction is h. This proves the reverse subgroup image inclusion.",
    "uses": [
-    "lem-dl-a1-galois-prime-residue-lifting"
+    "lem-dl-a1-profinite-invariant-ring-primes"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
-   }
-  },
-  {
-   "text": "Let $\\bar d$ be the automorphism of $\\kappa(\\mathfrak r)$ induced by $d$. For $a,b\\in B$ with $b\\notin\\mathfrak q$, its value on the image of $\\bar a/\\bar b$ is $\\overline{h(a)}/\\overline{h(b)}=\\bar a/\\bar b$, since $h\\in I_{\\mathfrak q}$. Thus $\\bar d$ fixes $\\kappa(\\mathfrak q)$. Apply part (2) of [lem-dl-a1-galois-prime-residue-lifting], again for $B\\subset C$ and $M/L$, to this automorphism. It gives $\\epsilon\\in\\operatorname{Gal}(M/L)$ stabilizing $\\mathfrak r$ whose action on $\\kappa(\\mathfrak r)$ equals $\\bar d$. This does not require the residue extension to be separable or finite.",
-   "uses": [
-    "lem-dl-a1-galois-prime-residue-lifting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
-   }
-  },
-  {
-   "text": "Set $g=\\epsilon^{-1}d$. Both factors stabilize $\\mathfrak r$, and its residue action is $\\bar\\epsilon^{-1}\\bar d=\\bar d^{-1}\\bar d=1$. Hence $g\\in I_{\\mathfrak r}$. Because $\\epsilon|_L=1$, its restriction is $g|_L=h$. Every $h\\in I_{\\mathfrak q}$ therefore has a preimage, proving surjectivity.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; implemented directly using the profinite invariant-ring prime transitivity and quotient-lifting theorems."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
   "def-weil-pbc-integral-closure",
-  "lem-weil-pbc-normal-subextension-automorphism-extends",
   "lem-dl-a1-galois-over-intermediate",
-  "lem-dl-a1-galois-prime-residue-lifting"
+  "lem-exc-etale-galois-fixed-field-subgroup",
+  "lem-exc-galois-krull-finite-limit",
+  "lem-dl-a1-finite-group-limit-profinite",
+  "lem-weil-pbc-normal-subextension-automorphism-extends",
+  "lem-dl-a1-profinite-invariant-ring-primes"
  ],
  "proof_origin": {
-  "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+  "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; implemented directly using the profinite invariant-ring prime transitivity and quotient-lifting theorems.",
+  "by": "document"
  },
  "mathlib_searches": [
   {
@@ -212,5 +207,15 @@
   "group": "Q77",
   "result": "pass",
   "note": "Matched every clause of the statement against Stacks 0BSX (more-algebra.tex:32869): normal domain via IsDomain+IsIntegrallyClosed; K any fraction-field model; scalar towers are compatibility only; IsGalois K L, IsGalois K M with no finiteness; actual integralClosure rings; arbitrary prime r; q = comap along mapIntegralClosure; Ideal.inertia (trivial on C/r, includes stabilizer by inertia_le_stabilizer, equivalent to trivial on Frac(C/r) for prime r); image under restrictNormalHom = lower inertia, giving both well-definedness and surjectivity. Edge cases (r=0, non-maximal r, A a field, L=K, infinite extensions, inseparable residue fields, independent universes) covered. No duplicate: exists_mem_inertia_eqOn needs a maximal ideal; FiniteTameCharacterTower is finite/DVR only. lean.statement is verbatim; stmt_deps used; sorry-only; docstrings carry source place, blueprint tag and the 6 steps; report has both sections. Advisory: proof-only imports. No compile per instruction (worker's clean compile)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G5",
+  "result": "pass",
+  "landing": "20261021T154026-L-2766617",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
