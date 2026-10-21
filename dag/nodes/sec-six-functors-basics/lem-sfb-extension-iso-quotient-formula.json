@@ -15,114 +15,63 @@
  ],
  "proof": [
   {
-   "text": "Put $\\psi=\\varphi^{-1}$, $I=\\operatorname{Res}_{\\psi}$ and $H=\\operatorname{Res}_{\\varphi}$. By [def-sfb-modobj-restriction], $I(N)=T_N$ has action $\\beta_N$ and both restriction functors keep underlying morphisms. For an $S$-module $M$ with action $a_M$, the linearity equation of [det-def-sfb-module-objects-definition] for a map $h:N\\to M$ is\n$$h\\gamma_N(\\psi\\otimes\\mathrm{id}_N)=a_M(\\mathrm{id}_S\\otimes h).$$\nPrecompose with $\\varphi\\otimes\\mathrm{id}_N$, or conversely with $\\psi\\otimes\\mathrm{id}_N$, to see that this is equivalent to\n$$h\\gamma_N=a_M(\\varphi\\otimes h).$$\nConsequently $\\operatorname{Hom}_S(I(N),M)\\to\\operatorname{Hom}_R(N,H(M))$, $h\\mapsto h$, is a bijection. It is natural in both variables: precomposition and postcomposition on either side are the very same underlying compositions.",
+   "text": "Use the specified comparison p = extendScalarsIsoComapInv, which is defined by left-adjoint uniqueness for the extension-restriction adjunction and the adjunction of the inverse restriction equivalence. The Mathlib equation homEquiv_leftAdjointUniq_hom_app identifies the image of p_N with the unit of the latter adjunction. Its underlying arrow is the identity: the inverse equivalence unit is the inverse of the original counit, and that counit is composed of comapComp, comapCongr and comapId, all with identity underlying arrows. Unfolding the extension Hom equivalence therefore gives u_N followed by p_N equal to the identity.",
    "uses": [
-    "def-sfb-modobj-restriction",
-    "det-def-sfb-module-objects-definition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-restriction-equivalence.proof.md",
-    "place": "Composite restriction formula and identity on underlying morphisms; explicitly write the identity Hom bijection for inverse restriction."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-adjunction-of-natural-bijection] to step 1 to obtain $b:I\\dashv H$. Its unit at $N$ is the image of $\\mathrm{id}_{I(N)}$, so its underlying morphism is $\\mathrm{id}_N$. Indeed, the action on $H(I(N))$ is $\\gamma_N(\\psi\\otimes\\mathrm{id}_N)(\\varphi\\otimes\\mathrm{id}_N)=\\gamma_N$ by [def-sfb-modobj-restriction]. Likewise the counit is an underlying identity. This is the canonical inverse-restriction adjunction: the inverse restrictions cancel through the identity maps, rather than an arbitrary rescaling of the adjunction.",
-   "uses": [
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "def-sfb-modobj-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0037, definition-adjoint and the following unit/counit formulas; apply to the identity Hom bijection of step 1."
-   }
-  },
-  {
-   "text": "The hypotheses of [def-sfb-modobj-extend-restrict-adjunction] hold: $\\mathcal C$ is braided with coequalizers preserved by tensoring and $R$ is commutative. It supplies $a:\\operatorname{Ext}_{\\varphi}\\dashv H$ with unit\n$$u_N=q_N(\\eta_S\\otimes\\mathrm{id}_N)\\lambda_N^{-1}.$$\nApply [lem-weil-pbc-conjugate-iso-unit-equation] to $a,b$, with identical right adjoint $H$ and $\\delta=\\mathrm{id}_H$. The resulting natural isomorphism $p:\\operatorname{Ext}_{\\varphi}\\xrightarrow{\\sim}I$ is characterized by $H(p_N)\\eta_{a,N}=\\eta_{b,N}$. This is the comparison of [def-sfb-modobj-extension-along-iso] named in the statement. That comparison is the one of [lem-weil-pbc-conjugate-iso-unit-equation] for $a$ and the adjunction $b':I\\dashv H$ given by the left-adjoint clause of [lem-weil-pbc-quasi-inverse-adjoint], applied to the equivalence $H$ with quasi-inverse $I$ of [def-sfb-modobj-restriction-equivalence]; the unit of $b'$ is $\\beta^{-1}$ for the equivalence isomorphism $\\beta:HI\\xrightarrow{\\sim}\\mathrm{id}$, whose components have identity underlying morphisms (both facts belong to the construction that the statement names). So the unit of $b'$ and the unit of $b$ from step 2 have the same underlying morphisms. By [det-def-sfb-module-objects-definition], module morphisms are their underlying morphisms, so the units agree. The formula $\\Psi(f)=H(f)\\circ\\eta$ of [lem-weil-pbc-adjunction-of-natural-bijection] then shows that $b'$ and $b$ have the same Hom bijections, so $b'=b$. The two comparisons are therefore the same. On underlying objects the unit equation is\n$$p_Nu_N=\\mathrm{id}_N.$$\nThe components $p_N$ are $S$-linear isomorphisms, since this comparison is a natural isomorphism between functors valued in $S$-module objects.",
-   "uses": [
-    "def-sfb-modobj-extend-restrict-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
     "def-sfb-modobj-extension-along-iso",
     "def-sfb-modobj-restriction-equivalence",
     "lem-weil-pbc-quasi-inverse-adjoint",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-sfb-modobj-extend-restrict-adjunction",
     "lem-weil-pbc-adjunction-of-natural-bijection",
-    "det-def-sfb-module-objects-definition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension-along-iso.proof.md",
-    "place": "The two adjunctions and their unique compatible comparison; unit normalization is the cited conjugate-isomorphism equation (Stacks Tag 0B65)."
-   }
-  },
-  {
-   "text": "Write $a_F:S\\otimes F_N\\to F_N$ for the action on the extension. The statement of [def-sfb-modobj-extension] says that this action is induced by multiplication on the first factor, namely\n$$a_F(\\mathrm{id}_S\\otimes q_N)=q_N(\\mu_S\\otimes\\mathrm{id}_N)\\alpha_{S,S,N}^{-1}.$$\nSubstitute the displayed formula for $u_N$. Naturality of $\\alpha$ and the right-unit identity $\\mu_S(\\mathrm{id}_S\\otimes\\eta_S)=\\rho_S$ of [det-def-sfb-ring-object-monoid] give\n$$\\begin{aligned}\na_F(\\mathrm{id}_S\\otimes u_N)\n&=q_N(\\mu_S\\otimes\\mathrm{id}_N)\\alpha_{S,S,N}^{-1}(\\mathrm{id}_S\\otimes(\\eta_S\\otimes\\mathrm{id}_N))(\\mathrm{id}_S\\otimes\\lambda_N^{-1})\\\\\n&=q_N(\\rho_S\\otimes\\mathrm{id}_N)\\alpha_{S,\\mathbf1,N}^{-1}(\\mathrm{id}_S\\otimes\\lambda_N^{-1})=q_N.\n\\end{aligned}$$\nThe last equality is the monoidal triangle axiom $(\\rho_S\\otimes\\mathrm{id}_N)\\alpha_{S,\\mathbf1,N}^{-1}=\\mathrm{id}_S\\otimes\\lambda_N$. Thus no calculation with elements or assumed tensor generators is involved.",
-   "uses": [
-    "def-sfb-modobj-extension",
-    "det-def-sfb-ring-object-monoid"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
-    "place": "Extension action through multiplication on S, composed with insertion of its unit; expand the right-unit and monoidal triangle axioms."
-   }
-  },
-  {
-   "text": "By the module-morphism equation of [det-def-sfb-module-objects-definition], $p_Na_F=\\beta_N(\\mathrm{id}_S\\otimes p_N)$. Combining steps 3 and 4 yields\n$$p_Nq_N=p_Na_F(\\mathrm{id}_S\\otimes u_N)=\\beta_N(\\mathrm{id}_S\\otimes(p_Nu_N))=\\beta_N.$$\nLet $d_0,d_1:(S\\otimes R)\\otimes N\\rightrightarrows S\\otimes N$ be the defining pair in [def-sfb-modobj-extension]. Since $q_Nd_0=q_Nd_1$, the formula just proved gives $\\beta_Nd_0=p_Nq_Nd_0=p_Nq_Nd_1=\\beta_Nd_1$. Finally [def-weil-pbc-category-colimit], applied to this finite parallel-pair diagram, says that there is exactly one underlying morphism $F_N\\to N$ whose composite with $q_N$ is $\\beta_N$. It is $p_N$.",
-   "uses": [
-    "det-def-sfb-module-objects-definition",
-    "def-sfb-modobj-extension",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.md",
-    "place": "Unit formula and extension action, giving the value of the comparison on the quotient; uniqueness by Stacks Tag 002F, definition-colimit."
-   }
-  },
-  {
-   "text": "The proposed $s_N=q_N(\\eta_S\\otimes\\mathrm{id}_N)\\lambda_N^{-1}$ is exactly $u_N$ as an underlying morphism. Thus step 3 gives $p_Ns_N=\\mathrm{id}_{T_N}$. As $p_N$ is invertible, $s_N=p_N^{-1}(p_Ns_N)=p_N^{-1}$, whence $s_Np_N=\\mathrm{id}_{F_N}$. The inverse in step 3 is already an $S$-module morphism, so $s_N$ is $S$-linear for the action $\\beta_N$ on its domain. This uses the module category of [det-def-sfb-module-objects-definition], whose composition and identities are the underlying ones.",
-   "uses": [
-    "det-def-sfb-module-objects-definition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extend-restrict-adjunction.md",
-    "place": "Unit insertion is the inverse of the unit-compatible comparison: compose the unit equation with its already established inverse."
-   }
-  },
-  {
-   "text": "For an $R$-linear $h:N\\to N'$, [def-sfb-modobj-extension] defines $E(h)=\\operatorname{Ext}_{\\varphi}(h)$ by $E(h)q_N=q_{N'}(\\mathrm{id}_S\\otimes h)$. The module-morphism equation in [det-def-sfb-module-objects-definition], precomposed with $\\psi\\otimes\\mathrm{id}_N$, gives $h\\beta_N=\\beta_{N'}(\\mathrm{id}_S\\otimes h)$. Hence\n$$h p_Nq_N=h\\beta_N=\\beta_{N'}(\\mathrm{id}_S\\otimes h)=p_{N'}E(h)q_N.$$\nUniqueness in [def-weil-pbc-category-colimit] cancels $q_N$, giving $h p_N=p_{N'}E(h)$; by [def-sfb-modobj-restriction], $I(h)$ has underlying map $h$. Naturality of tensoring and of the left unitor also gives directly\n$$E(h)s_N=q_{N'}(\\mathrm{id}_S\\otimes h)(\\eta_S\\otimes\\mathrm{id}_N)\\lambda_N^{-1}=q_{N'}(\\eta_S\\otimes\\mathrm{id}_{N'})\\lambda_{N'}^{-1}h=s_{N'}h.$$\nThese are both asserted naturality equations.",
-   "uses": [
-    "def-sfb-modobj-extension",
-    "det-def-sfb-module-objects-definition",
-    "def-weil-pbc-category-colimit",
     "def-sfb-modobj-restriction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/def-sfb-modobj-extension.md",
-    "place": "Definition of extension on morphisms, and inverse restriction on the same underlying morphisms; write both naturality equations."
-   }
+   "elementary": false
+  },
+  {
+   "text": "The extension API already proves that tensoring unit insertion u_N with S and then applying the extension action a_F gives q_N (whiskerLeft_extendUnitHom_smul'). Since p_N is a module morphism, a_F followed by p_N equals S tensor p_N followed by the inverse-restriction action beta_N. Thus q_N followed by p_N equals S tensor (u_N followed by p_N) followed by beta_N, hence equals beta_N by step 1. Postcompose the defining coequalizer equation for q_N with p_N to obtain the claimed coequalizing equation for beta_N. If another underlying arrow f has q_N followed by f equal to beta_N, cancellation of the epimorphism q_N gives f = p_N.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-extend-restrict-adjunction",
+    "det-def-sfb-module-objects-definition",
+    "def-sfb-modobj-restriction",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Since p_N is an isomorphism, cancel it from u_N followed by p_N equal to the identity to identify u_N with the underlying arrow of the inverse comparison. This proves the asserted inverse formula, its S-linearity, and the second inverse identity; the first inverse identity is step 1. All use the component isomorphism and the faithful forgetful functor on module objects.",
+   "uses": [
+    "def-sfb-modobj-extension-along-iso",
+    "det-def-sfb-module-objects-definition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of the comparison as a natural transformation gives the forward naturality equation after taking underlying arrows. Naturality of its inverse gives the inverse equation after replacing each inverse component by u_N using step 3. Restriction of scalars keeps the underlying arrows unchanged.",
+   "uses": [
+    "def-sfb-modobj-extension-along-iso",
+    "def-sfb-modobj-restriction",
+    "det-def-sfb-module-objects-definition"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-sfb-modobj-restriction",
-  "det-def-sfb-module-objects-definition",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
-  "def-sfb-modobj-extend-restrict-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
   "def-sfb-modobj-extension-along-iso",
-  "def-sfb-modobj-extension",
-  "det-def-sfb-ring-object-monoid",
-  "def-weil-pbc-category-colimit",
   "def-sfb-modobj-restriction-equivalence",
-  "lem-weil-pbc-quasi-inverse-adjoint"
+  "lem-weil-pbc-quasi-inverse-adjoint",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-sfb-modobj-restriction",
+  "def-sfb-modobj-extension",
+  "det-def-sfb-module-objects-definition",
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek-adjunction.proof.md",
-  "place": "Explicit normalization of the scalar-isomorphism comparisons invoked in the last sentence; identity inverse-restriction adjunction and quotient-unit calculation, using Stacks Tags 0037, 0B65 and 002F through the cited existing nodes."
+  "place": "Explicit normalization of the scalar-isomorphism comparison in the last sentence, using the existing extension API and Mathlib left-adjoint uniqueness. J6 formal proof, 2026-10-21; no second adjunction is constructed."
  },
  "mathlib_searches": [
   {
@@ -255,5 +204,15 @@
   "group": "Q47",
   "result": "pass",
   "note": "Statement matches the node clause by clause: symmetric monoidal closed C, equalizers/coequalizers, tensor preserves colimits on both sides, R and S commutative monoid objects, φ an invertible monoid morphism, arbitrary N. All nine conclusion conjuncts are present with correct orientation: β coequalizes the extendπ pair (matches extendScalarsObj_X), q≫p=β, uniqueness over all underlying f, inverse component = λ⁻¹≫η▷≫π (= extendUnitHom), linearity of p and s, both inverse identities, both naturalities. p is the actual extendScalarsIsoComapInv (leftAdjointUniq, MapMod.lean:175) = recorded def-sfb-modobj-extension-along-iso. A probe compile confirmed γ[S,F.X] is (extendScalarsObj φ N).mod.smul by rfl. Only the node's lean field changed; stmt_deps are identical to live; the item is still open; lean.statement is verbatim. Docstrings carry the source place, the blueprint id and all 7 steps; the source file exists. Report has Worker report and Second reading sections. nt_compile --json on the delivered file: 12.5 s, EXIT 0, clean. Advisory only: PreservesColimits (size v) is stronger than the API's {0,0} and is bridged by preservesSmallestColimits_of_preservesColimits; this is the node's own wording and matches the landed CoextensionIsoEvaluationFormula companion."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261021T101157-L-21229",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
