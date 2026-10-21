@@ -5,18 +5,8 @@ Authors: SHEAF group NW
 -/
 module
 
-public import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
-public import Sheaf.Paper.IntegralReductionTowerCanonical
-public import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-public import Sheaf.CategoryTheory.StrictRoosComparison
-public import Sheaf.CategoryTheory.StrictRoosModel
-import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.SequenceProjectionDerivedAdjunction
-import Sheaf.SixFunctors.ResolvingDerivedAdjunction
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.CategoryTheory.SequencePushforwardLimitProjections
-import Sheaf.CategoryTheory.SystemRingedSequenceSite
+public import Sheaf.Paper.CompletionUnitModels
+import Sheaf.Paper.CompletionUnitCanonicalModels
 
 /-!
 # The actual completion unit on a strict quotient cone
@@ -29,12 +19,15 @@ refinement of those constructions, not a verbatim assertion of a Stacks tag.
 The auxiliary structures package canonical constructions and their normalization
 conditions. They introduce no alternative tensor, limit, or derived category.
 The theorem asserts their existence together with the whole-morphism unit formula.
+The compatible-model construction is isolated in `canonicalModels`; the proof here
+derives the cone, unit and two-resolution formulas from its normalizations.
 Index n denotes the positive exponent n+1. Site and coefficient universes are independent.
 -/
 
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
@@ -51,161 +44,253 @@ namespace CompletionUnit
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Exact restriction of a system complex to its completed-coefficient tower.
-Source: Stacks 0941 (blueprint: lem-trf-completion-unit-strict-quotient-model). -/
-abbrev tower := (coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)
-
-/-- The ordinary sequence direct image: restriction of rings followed by inverse limit.
-Source: Stacks 07A6, 0941 (blueprint: lem-trf-completion-unit-strict-quotient-model). -/
-abbrev ordinaryLimit := coefficientSequenceRestriction l E W ⋙
-  (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)
-
-/-- The quotient-system tensor functor with its ordinary adjunction and actual tensor
-unit. The evaluation isomorphisms identify its components with the recorded scalar
-extension, and `transition` fixes the strict quotient maps, including all levels.
-`unit_tensor` fixes the adjunction itself on sections, rather than only its functors.
-Source: Stacks 03EK, 07A6, 0941 and item proof step 2
-(blueprint: lem-trf-completion-unit-strict-quotient-model). -/
-structure OrdinaryModel where
-  tensor : scalarReductionSource l E W ⥤ coefficientSequenceModules l E W
-  [additive : tensor.Additive]
-  evaluation : ∀ n : ℕ, tensor ⋙ coefficientSequenceEvaluation l E W n ≅
-    scalarReductionExtension l E W n
-  transition : ∀ (M : scalarReductionSource l E W) {m n : ℕ} (h : n ≤ m),
-    (coefficientSequenceTransition l E W h).app (tensor.obj M) ≫
-        (normalizedDVRModuleRes l E W h).map ((evaluation n).hom.app M) =
-      (evaluation m).hom.app M ≫ (coefficientOrdinaryQuotient l E W h).app M
-  adjunction : tensor ⊣ ordinaryLimit l E W
-  unit_tensor : ∀ (M : scalarReductionSource l E W) (n : ℕ) (V : W.ProEtᵒᵖ)
-    (x : M.val.obj V),
-    ((adjunction.unit.app M ≫
-        limit.π ((coefficientSequenceRestriction l E W).obj (tensor.obj M)) (op n) ≫
-        (eqToIso (coefficientSequenceRestriction_evaluation l E W n)).hom.app
-          (tensor.obj M) ≫
-        (scalarReductionRestriction l E W n).map ((evaluation n).hom.app M)).val.app V) x =
-      unrestrictedIntegralTensorSection l E W n M V 1 x
-  limitComparison : (ordinaryLimit l E W).mapHomologicalComplex (.up ℤ) ≅
-    tower l E W ⋙ roosLimitFunctor
-  limitComparison_projection : ∀ (I : CochainComplex (coefficientSequenceModules l E W) ℤ)
-    (n : ℕ) (p : ℤ),
-    ((limitComparison.hom.app I) ≫
-        limit.π ((tower l E W).obj I).asFunctor (op n)).f p =
-      limit.π ((coefficientSequenceRestriction l E W).obj (I.X p)) (op n)
-
-attribute [instance] OrdinaryModel.additive
-
-/-- The strict quotient system of a complex is the termwise ordinary tensor functor.
-Source: Stacks 06YY, 0941 (blueprint: lem-trf-completion-unit-strict-quotient-model). -/
-abbrev OrdinaryModel.quotient (M : OrdinaryModel l E W) :=
-  M.tensor.mapHomologicalComplex (.up ℤ)
-
-/-- The ordinary-adjunction transpose, in the canonical termwise-limit coordinates.
-Source: Stacks 07A6 and item proof step 2
-(blueprint: lem-trf-completion-unit-strict-quotient-model). -/
-def OrdinaryModel.transpose (M : OrdinaryModel l E W)
+private theorem transpose_natural (M : OrdinaryModel l E W)
     {Q : CochainComplex (scalarReductionSource l E W) ℤ}
     {I : CochainComplex (coefficientSequenceModules l E W) ℤ}
     (a : (M.quotient l E W).obj Q ⟶ I) :
-    Q ⟶ limit ((tower l E W).obj I).asFunctor :=
-  (M.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv Q I a ≫
-    M.limitComparison.hom.app I
+    M.transpose l E W a = M.augmentation l E W Q ≫
+      lim.map (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map
+        ((tower l E W).map a)) := by
+  dsimp only [OrdinaryModel.transpose, OrdinaryModel.augmentation]
+  simp only [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_id]
+  erw [Category.comp_id]
+  simpa only [Functor.comp_map, Functor.comp_obj, roosLimitFunctor, Category.assoc]
+    using congrArg
+    (fun f ↦ (M.adjunction.mapHomologicalComplex (.up ℤ)).unit.app Q ≫ f)
+    (M.limitComparison.hom.naturality a)
 
-/-- The strict quotient augmentation to the ordinary limit; its level maps are z tensor 1.
-Source: Stacks 07A6, 0941 and item proof steps 2, 5
-(blueprint: lem-trf-completion-unit-strict-quotient-model). -/
-def OrdinaryModel.augmentation (M : OrdinaryModel l E W)
-    (Q : CochainComplex (scalarReductionSource l E W) ℤ) :
-    Q ⟶ limit ((tower l E W).obj ((M.quotient l E W).obj Q)).asFunctor :=
-  M.transpose l E W (𝟙 _)
+private theorem coneAugmentation_coordinates (M : OrdinaryModel l E W)
+    (Q : CochainComplex (scalarReductionSource l E W) ℤ) (p : ℤ) :
+    (M.coneAugmentation l E W Q).f (p + 1) ≫
+        (roosχ ((tower l E W).obj ((M.quotient l E W).obj Q)) p).hom =
+      biprod.lift 0
+        ((Pi.lift (fun n : ℕ ↦ M.augmentation l E W Q ≫
+          limit.π ((tower l E W).obj ((M.quotient l E W).obj Q)).asFunctor
+            (op n))).f (p + 1)) := by
+  dsimp only [OrdinaryModel.coneAugmentation]
+  rw [HomologicalComplex.comp_f, Category.assoc, roosι_χ]
+  apply biprod.hom_ext
+  · simp
+  · simp only [Category.assoc, biprod.lift_snd]
+    rw [← HomologicalComplex.comp_f]
+    congr 1
+    apply Pi.hom_ext
+    intro n
+    simp
 
-/-- Canonical derived comparisons for the actual ordinary quotient adjunction.
-The limit unit is pinned on every K-injective tower by the existing right-derived
-functor comparison. The Roos isomorphism is normalized on the ordinary inclusion.
-The system unit is the composition comparison for exact restriction and projection.
-Finally `hom_normalization` derives the ordinary Hom correspondence on chain maps.
-These conditions specify comparisons, rather than postulating arbitrary isomorphisms.
-Source: Stacks 09T5, 0D6E, 0941 and item proof steps 3--4, 6
-(blueprint: lem-trf-completion-unit-strict-quotient-model). -/
-structure DerivedModel (S : CoefficientDerivedSystemCalculus l E W)
-    (M : OrdinaryModel l E W) where
-  towerLimitComparison :
-    (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
-      scalarReductionSource l E W).mapHomologicalComplex (.up ℤ) ≅ roosLimitFunctor
-  towerLimitComparison_projection :
-    ∀ (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) (n : ℕ) (p : ℤ),
-      (towerLimitComparison.hom.app Z ≫ limit.π Z.asFunctor (op n)).f p =
-        limit.π (Z.X p) (op n)
-  limitUnit : roosLimitFunctor ⋙ DerivedCategory.Q ⟶
-    DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W
-  limitUnit_normalization :
-    ∀ (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective],
-      limitUnit.app J ≫
-          ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
-            scalarReductionSource l E W).rightDerivedFunctorObjQIso J).hom =
-        DerivedCategory.Q.map (towerLimitComparison.inv.app J)
-  roos : roosF ⋙ DerivedCategory.Q ≅
-    DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W
-  roos_normalization : ∀ Z,
-    DerivedCategory.Q.map (roosι Z) ≫ roos.hom.app Z = limitUnit.app Z
-  systemUnit : (ordinaryLimit l E W).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶
-    DerivedCategory.Q ⋙ coefficientSequenceLimit l E W
-  system_isIso : ∀ (I : CochainComplex (coefficientSequenceModules l E W) ℤ),
-    I.IsKInjective → IsIso (systemUnit.app I)
-  systemUnit_composition : ∀ I,
-    systemUnit.app I = DerivedCategory.Q.map (M.limitComparison.hom.app I) ≫
-      limitUnit.app ((tower l E W).obj I) ≫
-      (coefficientConstantTowerLimit l E W).map
-        ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app I)
-  reductionComparison : DerivedCategory.Q ⋙ S.reduction ⟶
-    M.quotient l E W ⋙ DerivedCategory.Q
-  reduction_isLeftDerived : S.reduction.IsLeftDerivedFunctor reductionComparison
-    (HomologicalComplex.quasiIso (scalarReductionSource l E W) (.up ℤ))
-  reduction_isIso : ∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ),
-    Q.IsKFlatIndependentCoefficients → (∀ p : ℤ, (Q.X p).IsFlatOnSite) →
-      IsIso (reductionComparison.app Q)
-  reduction_evaluation : ∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ)
-    (hQ : Q.IsKFlatIndependentCoefficients) (_hflat : ∀ p : ℤ, (Q.X p).IsFlatOnSite) (n : ℕ),
-    (coefficientSequenceDerivedEvaluation l E W n).map (reductionComparison.app Q) ≫
-        (coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors.hom.app
-          ((M.quotient l E W).obj Q) ≫
-        DerivedCategory.Q.map
-          ((NatIso.mapHomologicalComplex (M.evaluation n) (.up ℤ)).hom.app Q) =
-      (S.reductionEvaluation n).hom.app (DerivedCategory.Q.obj Q) ≫
-        (coefficientFiniteReductionModel l E W Q hQ n).hom
-  hom_normalization : ∀ (Q : CochainComplex (scalarReductionSource l E W) ℤ)
-    (I : CochainComplex (coefficientSequenceModules l E W) ℤ)
-    (a : (M.quotient l E W).obj Q ⟶ I),
-    S.adjunction.homEquiv (DerivedCategory.Q.obj Q) (DerivedCategory.Q.obj I)
-        (reductionComparison.app Q ≫ DerivedCategory.Q.map a) =
-      DerivedCategory.Q.map ((M.adjunction.mapHomologicalComplex (.up ℤ)).homEquiv Q I a) ≫
-        systemUnit.app I
-
-/-- The strict cone augmentation is the ordinary-limit lift followed by the existing
-zero-shifted-coordinate Roos inclusion. Thus this is a real chain map by construction.
-Source: Stacks 08TC, 0941 and item proof step 5
-(blueprint: lem-trf-completion-unit-strict-quotient-model). -/
-def OrdinaryModel.coneAugmentation (M : OrdinaryModel l E W)
-    (Q : CochainComplex (scalarReductionSource l E W) ℤ) :
-    Q ⟶ roosF.obj ((tower l E W).obj ((M.quotient l E W).obj Q)) :=
-  M.augmentation l E W Q ≫ roosι _
-
-/-- The normalized Roos comparison to the simultaneous reduction/limit object.
-Both transports are the recorded localization comparison for exact restriction and
-the universal left-derived comparison on the specified K-flat complex.
-Source: Stacks 09T5, 0941 and item proof steps 3, 6
-(blueprint: lem-trf-completion-unit-strict-quotient-model). -/
-def DerivedModel.completionComparison
+private theorem limitUnit_isIso
     {S : CoefficientDerivedSystemCalculus l E W} {M : OrdinaryModel l E W}
-    (D : DerivedModel l E W S M) (Q : CochainComplex (scalarReductionSource l E W) ℤ)
+    (D : DerivedModel l E W S M)
+    (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective] :
+    IsIso (D.limitUnit.app J) := by
+  have hn := D.limitUnit_normalization J
+  have : IsIso (D.limitUnit.app J ≫
+      ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
+        scalarReductionSource l E W).rightDerivedFunctorObjQIso J).hom) := by
+    rw [hn]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _
+    ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
+      scalarReductionSource l E W).rightDerivedFunctorObjQIso J).hom
+
+private theorem roosι_quasiIso
+    {S : CoefficientDerivedSystemCalculus l E W} {M : OrdinaryModel l E W}
+    (D : DerivedModel l E W S M)
+    (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective] :
+    QuasiIso (roosι J) := by
+  have := limitUnit_isIso l E W D J
+  have : IsIso (DerivedCategory.Q.map (roosι J) ≫ D.roos.hom.app J) := by
+    rw [D.roos_normalization]
+    infer_instance
+  have : IsIso (DerivedCategory.Q.map (roosι J)) :=
+    IsIso.of_isIso_comp_right _ (D.roos.hom.app J)
+  exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mp this
+
+private theorem unit_at_complex
+    {S : CoefficientDerivedSystemCalculus l E W} {M : OrdinaryModel l E W}
+    (D : DerivedModel l E W S M)
+    (Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (hQ : Q.IsKFlatIndependentCoefficients) (hflat : ∀ p : ℤ, (Q.X p).IsFlatOnSite) :
-    DerivedCategory.Q.obj (roosF.obj ((tower l E W).obj ((M.quotient l E W).obj Q))) ≅
-      (coefficientSequenceLimit l E W).obj (S.reduction.obj (DerivedCategory.Q.obj Q)) :=
-  D.roos.app _ ≪≫
-    (coefficientConstantTowerLimit l E W).mapIso
-      ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.app
-        ((M.quotient l E W).obj Q)).symm ≪≫
-    (coefficientSequenceLimit l E W).mapIso
-      (@asIso _ _ _ _ (D.reductionComparison.app Q) (D.reduction_isIso Q hQ hflat)).symm
+    S.adjunction.unit.app (DerivedCategory.Q.obj Q) =
+      DerivedCategory.Q.map (M.coneAugmentation l E W Q) ≫
+        (D.completionComparison l E W Q hQ hflat).hom := by
+  have := D.reduction_isIso Q hQ hflat
+  apply (cancel_mono ((coefficientSequenceLimit l E W).map
+    (D.reductionComparison.app Q))).1
+  have h := D.hom_normalization Q ((M.quotient l E W).obj Q) (𝟙 _)
+  simp only [CategoryTheory.Functor.map_id, Adjunction.homEquiv_unit] at h
+  erw [Category.comp_id, Category.comp_id] at h
+  rw [h, D.systemUnit_composition]
+  dsimp only [DerivedModel.completionComparison, OrdinaryModel.coneAugmentation,
+    OrdinaryModel.augmentation, OrdinaryModel.transpose, Iso.trans_hom,
+    Functor.mapIso_hom, Iso.symm_hom, Iso.app, asIso_inv]
+  simp only [Category.assoc]
+  simp only [← Functor.map_comp, IsIso.inv_hom_id, CategoryTheory.Functor.map_id]
+  erw [Category.comp_id]
+  simp only [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_id]
+  erw [Category.comp_id]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← D.roos_normalization]
+  simp only [Category.assoc]
+
+
+private theorem unit_at_representative
+    {S : CoefficientDerivedSystemCalculus l E W} {M : OrdinaryModel l E W}
+    (D : DerivedModel l E W S M)
+    (Q : CochainComplex (scalarReductionSource l E W) ℤ)
+    (hQ : Q.IsKFlatIndependentCoefficients) (hflat : ∀ p : ℤ, (Q.X p).IsFlatOnSite)
+    (N : DerivedCategory (scalarReductionSource l E W))
+    (q : DerivedCategory.Q.obj Q ≅ N) :
+    S.adjunction.unit.app N = q.inv ≫
+      DerivedCategory.Q.map (M.coneAugmentation l E W Q) ≫
+      (D.completionComparison l E W Q hQ hflat).hom ≫
+      (coefficientSequenceLimit l E W).map (S.reduction.map q.hom) := by
+  apply (cancel_epi q.hom).1
+  have hn := S.adjunction.unit.naturality q.hom
+  dsimp only [Functor.id_map, Functor.comp_map] at hn
+  rw [hn]
+  rw [unit_at_complex l E W D Q hQ hflat]
+  simp only [Category.assoc, Iso.hom_inv_id_assoc]
+
+private theorem augmentation_sections (M : OrdinaryModel l E W)
+    (Q : CochainComplex (scalarReductionSource l E W) ℤ)
+    (p : ℤ) (n : ℕ) (V : W.ProEtᵒᵖ) (x : (Q.X p).val.obj V) :
+    (((M.augmentation l E W Q ≫
+        limit.π ((tower l E W).obj ((M.quotient l E W).obj Q)).asFunctor
+          (op n)).f p ≫
+        (eqToIso (coefficientSequenceRestriction_evaluation l E W n)).hom.app
+          (((M.quotient l E W).obj Q).X p) ≫
+        (scalarReductionRestriction l E W n).map
+          ((M.evaluation n).hom.app (Q.X p))).val.app V) x =
+      unrestrictedIntegralTensorSection l E W n (Q.X p) V 1 x := by
+  have hu : (M.augmentation l E W Q).f p =
+      M.adjunction.unit.app (Q.X p) ≫
+        (M.limitComparison.hom.app ((M.quotient l E W).obj Q)).f p := by
+    dsimp only [OrdinaryModel.augmentation, OrdinaryModel.transpose]
+    rw [Adjunction.homEquiv_unit]
+    simp only [CategoryTheory.Functor.map_id, HomologicalComplex.comp_f,
+      HomologicalComplex.id_f, Adjunction.mapHomologicalComplex_unit_app_f]
+    erw [Category.comp_id]
+  have hp := M.limitComparison_projection ((M.quotient l E W).obj Q) n p
+  rw [HomologicalComplex.comp_f] at hp
+  have hproj : (M.augmentation l E W Q ≫
+      limit.π ((tower l E W).obj ((M.quotient l E W).obj Q)).asFunctor (op n)).f p =
+      M.adjunction.unit.app (Q.X p) ≫ limit.π
+        ((coefficientSequenceRestriction l E W).obj
+          (((M.quotient l E W).obj Q).X p)) (op n) := by
+    rw [HomologicalComplex.comp_f, hu, Category.assoc, hp]
+  rw [hproj]
+  exact M.unit_tensor (Q.X p) n V x
+
+private theorem limit_resolution_compatibility
+    {S : CoefficientDerivedSystemCalculus l E W} {M : OrdinaryModel l E W}
+    (D : DerivedModel l E W S M)
+    (I : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)
+    (j : (tower l E W).obj I ⟶ J) [QuasiIso j] :
+    DerivedCategory.Q.map
+        (lim.map (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map j)) ≫
+        (D.limitUnit.app J ≫
+          (coefficientConstantTowerLimit l E W).map (inv (DerivedCategory.Q.map j)) ≫
+          (coefficientConstantTowerLimit l E W).map
+            ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app I)) =
+      DerivedCategory.Q.map (M.limitComparison.inv.app I) ≫ D.systemUnit.app I := by
+  have hn := D.limitUnit.naturality j
+  dsimp only [Functor.comp_map] at hn
+  change DerivedCategory.Q.map (roosLimitFunctor.map j) ≫ _ = _
+  rw [← Category.assoc, ← Category.assoc, hn]
+  simp only [Category.assoc, ← Functor.map_comp, IsIso.hom_inv_id,
+    CategoryTheory.Functor.map_id]
+  rw [D.systemUnit_composition]
+  simp only [← Category.assoc, ← Functor.map_comp, Iso.inv_hom_id_app]
+  change _ = (DerivedCategory.Q.map (𝟙 _) ≫ _) ≫ _
+  rw [CategoryTheory.Functor.map_id, Category.id_comp]
+  erw [Category.comp_id]
+
+private theorem limit_resolution_quasiIso
+    {S : CoefficientDerivedSystemCalculus l E W} {M : OrdinaryModel l E W}
+    (D : DerivedModel l E W S M)
+    (I : CochainComplex (coefficientSequenceModules l E W) ℤ) [I.IsKInjective]
+    (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective]
+    (j : (tower l E W).obj I ⟶ J) [QuasiIso j] :
+    QuasiIso (lim.map (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map j)) := by
+  have := limitUnit_isIso l E W D J
+  have := D.system_isIso I inferInstance
+  have : IsIso (DerivedCategory.Q.map
+      (lim.map (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map j)) ≫
+      (D.limitUnit.app J ≫
+        (coefficientConstantTowerLimit l E W).map (inv (DerivedCategory.Q.map j)) ≫
+        (coefficientConstantTowerLimit l E W).map
+          ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app I))) := by
+    rw [limit_resolution_compatibility l E W D I J j]
+    infer_instance
+  have : IsIso (DerivedCategory.Q.map
+      (lim.map (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map j))) :=
+    IsIso.of_isIso_comp_right _
+      (D.limitUnit.app J ≫
+        (coefficientConstantTowerLimit l E W).map (inv (DerivedCategory.Q.map j)) ≫
+        (coefficientConstantTowerLimit l E W).map
+          ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app I))
+  exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mp this
+
+private theorem transpose_cone_natural (M : OrdinaryModel l E W)
+    (Q : CochainComplex (scalarReductionSource l E W) ℤ)
+    (I : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (a : (M.quotient l E W).obj Q ⟶ I)
+    (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)
+    (j : (tower l E W).obj I ⟶ J) :
+    (M.transpose l E W a ≫
+        lim.map (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map j)) ≫
+        roosι J =
+      M.coneAugmentation l E W Q ≫ roosF.map ((tower l E W).map a ≫ j) := by
+  rw [transpose_natural l E W M a]
+  dsimp only [OrdinaryModel.coneAugmentation]
+  simp only [Functor.map_comp, Category.assoc]
+  have h := roosι_natural ((tower l E W).map a)
+  rw [roosι_natural j]
+  simpa only [Category.assoc] using congrArg
+    (fun f ↦ M.augmentation l E W Q ≫ f ≫ roosF.map j) h
+
+private theorem comparison_resolution
+    {S : CoefficientDerivedSystemCalculus l E W} {M : OrdinaryModel l E W}
+    (D : DerivedModel l E W S M)
+    (Q : CochainComplex (scalarReductionSource l E W) ℤ)
+    (hQ : Q.IsKFlatIndependentCoefficients) (hflat : ∀ p : ℤ, (Q.X p).IsFlatOnSite)
+    (I : CochainComplex (coefficientSequenceModules l E W) ℤ)
+    (a : (M.quotient l E W).obj Q ⟶ I)
+    (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective]
+    (j : (tower l E W).obj I ⟶ J) [QuasiIso j]
+    (eCone : DerivedCategory.Q.obj (limit J.asFunctor) ≅
+      DerivedCategory.Q.obj (roosF.obj J))
+    (heCone : eCone.hom = DerivedCategory.Q.map (roosι J)) :
+    (D.completionComparison l E W Q hQ hflat).hom ≫
+        (coefficientSequenceLimit l E W).map (D.reductionComparison.app Q) ≫
+        (coefficientSequenceLimit l E W).map (DerivedCategory.Q.map a) =
+      DerivedCategory.Q.map (roosF.map ((tower l E W).map a ≫ j)) ≫
+        eCone.inv ≫
+        D.limitUnit.app J ≫
+        (coefficientConstantTowerLimit l E W).map (inv (DerivedCategory.Q.map j)) ≫
+        (coefficientConstantTowerLimit l E W).map
+          ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app I) := by
+  have := D.reduction_isIso Q hQ hflat
+  rw [← D.roos_normalization J, ← heCone]
+  simp only [← Category.assoc, Iso.inv_hom_id, Category.id_comp]
+  have hn := D.roos.hom.naturality ((tower l E W).map a ≫ j)
+  dsimp only [Functor.comp_map] at hn
+  rw [hn]
+  dsimp only [DerivedModel.completionComparison, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.symm_hom, asIso_inv]
+  simp only [Category.assoc, ← Functor.map_comp, IsIso.inv_hom_id,
+    CategoryTheory.Functor.map_id]
+  simp only [Functor.map_comp, Category.assoc, IsIso.hom_inv_id_assoc]
+  erw [Category.id_comp]
+  congr 1
+  have hf := (coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.naturality a
+  dsimp only [Functor.comp_map] at hf
+  dsimp only [coefficientSequenceLimit, coefficientSequenceDerivedRestriction,
+    Functor.comp_map]
+  simpa only [Functor.map_comp, Functor.comp_obj, tower, Iso.app] using
+    congrArg (coefficientConstantTowerLimit l E W).map hf.symm
 
 /-- The actual completion unit, including its two-resolution composition normalization.
 The existential packages choose only the canonical tensor/derived constructions fixed
@@ -216,33 +301,30 @@ Source: blueprint main-20261015, rational Frobenius integral model, proof (2)--(
 normalization refinement; Stacks 07A6, 09T5, 0D6E, 0941, 08TC.
 (blueprint: lem-trf-completion-unit-strict-quotient-model).
 
-Proof plan (the seven steps of the node):
-1. Work in the fixed small module universe. Use det-pe-products-exact and
-   prop-pur-kinjective-resolutions-exist on the sequence and constant-ring tower sites.
-   Restriction is exact; it is not assumed to preserve K-injective complexes.
-2. The ordinary tensor/limit adjunction sends a to the compatible family a_n(r_n z).
-   Balancing gives its inverse b tensor z mapped to b times the nth limit projection.
-   This constructs OrdinaryModel, its unit_tensor and the termwise-limit comparison.
-3. Derive that adjunction with the flat-term K-flat representative on the left and a
-   K-injective resolution on the right. The resolving-adjunction normalization says
-   that the transpose of the resolved identity computes the actual unit, as a whole
-   derived morphism; this supplies reductionComparison and hom_normalization.
-4. Factor the sequence projection as ring restriction followed by constant-ring
-   projection. The normalized derived direct-image composition theorem identifies its
-   unit with systemUnit_composition. For arbitrary I and J as below, lim(j) is a
-   quasi-isomorphism and represents this comparison. The constant sequence-site
-   equivalence identifies J with a K-injective tower with injective degree terms.
-5. The quotient transition sends r_(n+1) to r_n. Hence (1-s)gamma=0 and
-   d(0,gamma z)=(0,gamma dz), so coneAugmentation has precisely zero shifted coordinate.
-   Both H(j U(a))v and iota_J (lim j)b have coordinates (0,(j_n a_n r_n z)_n).
-6. Apply lem-weil-strict-roos-comparison to j U(a). Its normalization gives the
-   comparison as H(j U(a)) followed by the inverse inclusion and the derived limit
-   identification. Cancel that inclusion in step 5 and substitute step 4 to get the
-   displayed unit equality. No argument from level projections alone is used.
-7. Every allowed I, a, J, j was arbitrary, so the formula is resolution-independent.
-   The naturality of the actual adjunction unit gives the last equation for every
-   derived morphism h. Quantifying over every representative isomorphism q also gives
-   independence of the chosen K-flat representative. No bound or completeness enters. -/
+Proof:
+1. Take the compatible ordinary and derived models from canonicalModels. Its
+   construction is the separate lemma realizing the original proof steps 1--4.
+2. Express the ordinary transpose by its adjunction unit. Naturality of the
+   termwise-limit comparison identifies it with augmentation followed by limit(a).
+   The specified limit projections and unit_tensor give the local tensor formula.
+3. Compose augmentation with the strict Roos inclusion. The inclusion's coordinate
+   equation gives the zero shifted coordinate, and its naturality proves the
+   strict equality between the resolved transpose and the image of augmentation.
+4. Apply hom_normalization to the identity of the quotient complex. Cancel the
+   invertible reduction comparison and use systemUnit_composition and
+   roos_normalization. This identifies the actual adjunction unit as a whole
+   morphism. Naturality transports it along every representative isomorphism q.
+5. The K-injective normalization makes limitUnit invertible. Together with the
+   invertible systemUnit and naturality of limitUnit, it makes limit(j) invertible
+   after localization, hence a quasi-isomorphism. The Roos normalization likewise
+   makes the inclusion at J a quasi-isomorphism. These give eI, eJ and eCone with
+   exactly the specified maps. Naturality of the Roos comparison and the exact
+   restriction localization comparison gives the resolved comparison formula.
+6. Substitute the strict equality from step 3 in the whole-unit equation and cancel
+   the reduction comparison, the resolution a and eCone. This gives the formula
+   for every pair of resolutions. Finally use naturality of the actual unit for
+   every derived morphism. No detection by finite projections, completeness,
+   boundedness or preservation of K-injectivity by restriction is used. -/
 theorem completionUnitStrictQuotientModel
     [∀ x : W, Invertible (l : W.residueField x)] :
     ∃ (S : CoefficientDerivedSystemCalculus l E W)
@@ -322,7 +404,77 @@ theorem completionUnitStrictQuotientModel
       (∀ (N N' : DerivedCategory (scalarReductionSource l E W)) (h : N ⟶ N'),
         h ≫ S.adjunction.unit.app N' = S.adjunction.unit.app N ≫
           (coefficientSequenceLimit l E W).map (S.reduction.map h)) := by
-  sorry
+  obtain ⟨S, coherence, M, ⟨D⟩⟩ := canonicalModels l E W
+  refine ⟨S, coherence, M, D, ?_, ?_⟩
+  · intro Q hQ hflat
+    refine ⟨augmentation_sections l E W M Q, coneAugmentation_coordinates l E W M Q,
+      unit_at_representative l E W D Q hQ hflat, ?_⟩
+    intro I a _ _ _hI J j _ _ _hJ
+    have := D.system_isIso I inferInstance
+    have := limitUnit_isIso l E W D J
+    have hι := roosι_quasiIso l E W D J
+    have : IsIso (DerivedCategory.Q.map (roosι J)) :=
+      (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr hι
+    let eI : DerivedCategory.Q.obj (limit ((tower l E W).obj I).asFunctor) ≅
+        (coefficientSequenceLimit l E W).obj (DerivedCategory.Q.obj I) :=
+      asIso (DerivedCategory.Q.map (M.limitComparison.inv.app I) ≫ D.systemUnit.app I)
+    let eJ : DerivedCategory.Q.obj (limit J.asFunctor) ≅
+        (coefficientSequenceLimit l E W).obj (DerivedCategory.Q.obj I) :=
+      asIso (D.limitUnit.app J ≫
+        (coefficientConstantTowerLimit l E W).map (inv (DerivedCategory.Q.map j)) ≫
+        (coefficientConstantTowerLimit l E W).map
+          ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app I))
+    let eCone : DerivedCategory.Q.obj (limit J.asFunctor) ≅
+        DerivedCategory.Q.obj (roosF.obj J) := asIso (DerivedCategory.Q.map (roosι J))
+    have hc : (D.completionComparison l E W Q hQ hflat).hom ≫
+        (coefficientSequenceLimit l E W).map (D.reductionComparison.app Q) ≫
+        (coefficientSequenceLimit l E W).map (DerivedCategory.Q.map a) =
+      DerivedCategory.Q.map (roosF.map ((tower l E W).map a ≫ j)) ≫
+        eCone.inv ≫ eJ.hom := by
+      simpa only [eJ, eCone, asIso_hom, asIso_inv, Category.assoc] using
+        comparison_resolution l E W D Q hQ hflat I a J j eCone rfl
+    have ht := transpose_cone_natural l E W M Q I a J j
+    refine ⟨eI, eJ, eCone, rfl, rfl, rfl,
+      limit_resolution_quasiIso l E W D I J j, hι,
+      limit_resolution_compatibility l E W D I J j,
+      transpose_natural l E W M a, ht, hc, ?_⟩
+    intro N q
+    rw [unit_at_representative l E W D Q hQ hflat N q]
+    have := D.reduction_isIso Q hQ hflat
+    have hu : DerivedCategory.Q.map (M.coneAugmentation l E W Q) ≫
+        (D.completionComparison l E W Q hQ hflat).hom =
+      DerivedCategory.Q.map (M.transpose l E W a ≫
+        lim.map (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map j)) ≫
+        eJ.hom ≫
+        (coefficientSequenceLimit l E W).map (inv (DerivedCategory.Q.map a)) ≫
+        (coefficientSequenceLimit l E W).map
+          (@asIso _ _ _ _ (D.reductionComparison.app Q)
+            (D.reduction_isIso Q hQ hflat)).inv := by
+      apply (cancel_mono ((coefficientSequenceLimit l E W).map
+        (D.reductionComparison.app Q))).1
+      apply (cancel_mono ((coefficientSequenceLimit l E W).map
+        (DerivedCategory.Q.map a))).1
+      simp only [Category.assoc, ← Functor.map_comp, asIso_inv, IsIso.inv_hom_id,
+        CategoryTheory.Functor.map_id, Category.id_comp]
+      simp only [Functor.map_comp, Category.comp_id, Category.assoc]
+      rw [hc]
+      have ht' := congrArg DerivedCategory.Q.map ht
+      simp only [Functor.map_comp, Category.assoc] at ht'
+      have he : DerivedCategory.Q.map (M.transpose l E W a ≫
+          lim.map (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map j)) =
+        DerivedCategory.Q.map (M.coneAugmentation l E W Q) ≫
+          DerivedCategory.Q.map (roosF.map ((tower l E W).map a ≫ j)) ≫
+          eCone.inv := by
+        apply (cancel_mono eCone.hom).1
+        simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+        simpa only [eCone, asIso_hom, Functor.map_comp, Category.assoc] using ht'
+      simpa only [Functor.map_comp, Category.assoc] using
+        congrArg (fun f ↦ f ≫ eJ.hom) he.symm
+    simpa only [Category.assoc] using congrArg
+      (fun f ↦ q.inv ≫ f ≫
+        (coefficientSequenceLimit l E W).map (S.reduction.map q.hom)) hu
+  · intro N N' h
+    exact S.adjunction.unit.naturality h
 
 end CompletionUnit
 end WeilConjectures

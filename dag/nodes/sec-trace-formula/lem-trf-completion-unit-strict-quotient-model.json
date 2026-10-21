@@ -25,116 +25,59 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\widehat R_W$ and $\\mathcal C=W_{\\mathrm{proet}}$. The fixed small skeleton makes both $\\mathcal C$ and $\\mathbf N_{\\geq1}\\times\\mathcal C$ small in the module universe. The ringed sequence site realizes $\\mathscr S_W$, and restriction $U_W$ is exact. By the pro-etale product theorem, countable products in $\\operatorname{Mod}(A)$ are exact; thus the strict Roos comparison in the statement applies to all unbounded tower complexes here. Choose the resolutions $a:TQ\\to I$ and $j:U_WI\\to J$ with injective terms using K-injective existence on these two small ringed sites. There is no requirement that $U_WI$ itself be K-injective.",
+   "text": "Take compatible S, coherence, M and D from the canonical-model construction lemma. The theorem below only combines these data; no representative or resolution is chosen in this step.",
    "uses": [
-    "def-coef-ringed-sequence-site",
-    "def-weil-pbc-proetale-site",
-    "def-weil-size-convention",
-    "det-pe-products-exact",
-    "lem-weil-strict-roos-comparison",
-    "prop-pur-kinjective-resolutions-exist"
+    "lem-trf-completion-unit-canonical-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, choice of resolutions; exact-product hypothesis supplied by det-pe-products-exact"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $p$ be the ringed sequence projection with coefficient maps $A\\to B_{W,n}$. Its ordinary inverse-image functor on modules is $T(M)=(M\\otimes_A B_{W,n})_n$, and $p_*M=\\lim U_WM$. Explicitly, the adjunction sends $h:M\\to\\lim U_WZ$ to the family $m\\otimes b\\mapsto b\\pi_nh(m)$; the inverse sends $f:TM\\to Z$ to $m\\mapsto(f_n(m\\otimes1))_n$. These formulas respect balancing, restrictions and transitions and are inverse, so they also give the termwise complex adjunction. In particular the transpose of $a:TQ\\to I$ is the chain map $b:Q\\to\\lim U_WI$ with $\\pi_nb=a_nr_n$. Indeed $t^I_na_{n+1}r_{n+1}=a_n\\tau_nr_{n+1}=a_nr_n$; and $d(a_nr_n)=a_nr_nd$ since both factors are chain maps.",
+   "text": "The termwise adjunction transpose of a is the unit followed by ordinaryLimit(a); naturality of M.limitComparison gives transpose(a)=augmentation followed by lim(tower(a)). Taking degree p and using limitComparison_projection and unit_tensor gives the stated local-section formula.",
    "uses": [
-    "lem-coef-sequence-projection-derived-adjunction",
-    "def-pur-sheaf-tensor-product"
+    "def-trf-completion-unit-models"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, lemma-adjoint; ordinary sequence-projection correspondence of lem-coef-sequence-projection-derived-adjunction"
-   }
+   "elementary": true
   },
   {
-   "text": "Use the canonical derived adjunction $Lp^*\\dashv Rp_*$. The sequence-projection theorem identifies $Lp^*N$ with the strict quotient complex $TQ$, and states that its Hom correspondence extends the ordinary one on derived fractions. The resolving-adjunction normalization therefore computes the transpose of the identity of $Lp^*N$ as follows: represent that identity by the resolution map $a:TQ\\to I$ and apply the ordinary transpose of Step 2. Consequently the unit $N\\to Rp_*Lp^*N$, under the resolution identification $Rp_*[TQ]\\simeq[\\lim U_WI]$, is $[b][q]^{-1}$. Here the flat-term K-flat hypothesis on $Q$ supplies the left derived representative; K-injectivity of $I$ supplies the right derived representative. This argument computes the unit itself, rather than characterizing it by its level projections.",
+   "text": "The cone augmentation is augmentation followed by roosι. The formula roosι_χ and biproduct/product extensionality give the zero shifted coordinate. Naturality of roosι twice gives the strict chain identity for every a and j.",
    "uses": [
-    "lem-coef-sequence-projection-derived-adjunction",
-    "lem-sfb-resolving-derived-adjunction-normalization"
+    "def-trf-completion-unit-models",
+    "def-weil-strict-roos-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5, lemma-derived-adjoint-functors; sites-cohomology.tex Tag 07A6, lemma-adjoint, with the recorded resolving-adjunction normalization"
-   }
+   "elementary": true
   },
   {
-   "text": "Factor $p$ as the change of rings $c:(\\operatorname{Sh}(\\mathbf N\\times\\mathcal C),B)\\to(\\operatorname{Sh}(\\mathbf N\\times\\mathcal C),\\Delta A)$ followed by the constant-ring sequence projection $\\pi$. Applied to the constant sequence $A$, the sequence-site equivalence identifies $\\Delta A$-module sheaves on $\\mathbf N\\times\\mathcal C$ with $\\operatorname{Tow}(\\operatorname{Mod}(A))$ componentwise; hence K-injective complexes with injective terms on either side correspond, and the K-injective $J$ below is a K-injective tower with injective terms. Then $c_*=U_W$ and $\\pi_*=\\lim$, while exactness of $U_W$ identifies $Rc_*$ with $U_W$ on the derived category. Apply the normalized right-derived direct-image composition theorem to the K-injective $I$ and the resolution $j:c_*I\\to J$. It says that $\\lim j:\\lim U_WI\\to\\lim J$ is a quasi-isomorphism representing the canonical comparison $Rp_*\\simeq R\\lim U_W$. The sequence pushforward/limit theorem transports the adjunction along this comparison, giving exactly the simultaneous reduction/limit adjunction of the statement. Thus, in the model $\\mathcal L_W\\mathcal R_WN\\simeq[\\lim J]$, its actual unit is $[b'][q]^{-1}$, where $b'=(\\lim j)b$ has coordinates $j_na_nr_n$. This proves the two-resolution assertion with its specified composition normalization.",
+   "text": "Apply D.hom_normalization to the identity of quotient(Q). Its transpose is the ordinary unit. Substitute D.systemUnit_composition and D.roos_normalization, and cancel the invertible reductionComparison on Q. This gives the whole unit formula on Q. Naturality of the actual adjunction unit transports it through every representative isomorphism q.",
    "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-coef-sequence-pushforward-limit-projections",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-pur-system-ringed-sequence-site"
+    "def-trf-completion-unit-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition, applied to ring restriction and sequence projection; Tag 07A6, lemma-adjoint"
-   }
+   "elementary": true
   },
   {
-   "text": "Set $\\gamma(z)=(r_nz)_n$. The quotient maps give $\\tau_nr_{n+1}=r_n$, hence $(1-s_D)\\gamma=0$, and $d\\gamma=\\gamma d$. Therefore the displayed differential gives $d v_Q(z)=d(0,\\gamma z)=(0,\\gamma dz)=v_Q(dz)$, proving that $v_Q$ is a chain map. Put $f=jU_W(a):D\\to J$. It is a strict tower chain map, so $f_nt^D_n=t^J_nf_{n+1}$ implies $(\\prod f_n)(1-s_D)=(1-s_J)(\\prod f_n)$. Accordingly $H(f)$ acts by $\\prod f_n$ on each coordinate. If $\\iota_J:\\lim J\\to H(J)$ is the canonical inclusion, both chain maps $H(f)v_Q$ and $\\iota_Jb'$ send $z$ to $(0,(j_na_nr_nz)_n)$; they are equal, including the shifted-product coordinate.",
+   "text": "For K-injective J, limitUnit_normalization makes D.limitUnit(J) invertible; roos_normalization then makes Q(roosι J) invertible. Define eCone by this map. Define eI from M.limitComparison inverse and D.systemUnit, and eJ from D.limitUnit(J) followed by the inverses of Q(j) and the exact-restriction comparison. Naturality of D.limitUnit and systemUnit_composition give Q(lim j)eJ=eI. Both eI and eJ are invertible, so lim j is a quasi-isomorphism.",
    "uses": [
-    "def-pur-sheaf-tensor-product"
+    "def-trf-completion-unit-models"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08TC, definition-derived-limit; explicit calculation with the cone differential fixed in the item"
-   }
+   "elementary": true
   },
   {
-   "text": "Since $U_W$ is exact, $f=jU_W(a)$ is a quasi-isomorphism and is, through the sequence-site equivalence for $\\Delta A$ of Step 4, a K-injective tower resolution of $D$ in $\\operatorname{Tow}(\\operatorname{Mod}(A))$ with injective degree terms. Apply the normalized strict Roos comparison to this resolution: $\\iota_J$ is a quasi-isomorphism and, under the canonical $R\\lim D\\simeq[\\lim J]$ identification, $\\rho_D=[\\iota_J]^{-1}[H(f)]$. Step 5 now gives $\\rho_D[v_Q]=[\\iota_J]^{-1}[H(f)v_Q]=[b']$. Substituting Step 4 yields $u_N=\\rho_D[v_Q][q]^{-1}$. The equality is obtained by cancellation of an isomorphism in the derived category, so it is an equality of whole morphisms.",
+   "text": "Naturality of D.roos, its inclusion normalization, and naturality of exact-restriction localization yield the displayed completionComparison resolution equality. Localize the strict chain identity, cancel eCone and both resolution/left-comparison isomorphisms, and substitute the unit formula already proved. This gives the full two-resolution formula for arbitrary a,j,q. Finally use the naturality equation of S.adjunction.unit for every derived morphism.",
    "uses": [
-    "def-coef-ringed-sequence-site",
-    "lem-weil-strict-roos-comparison",
-    "lem-pur-system-ringed-sequence-site"
+    "def-trf-completion-unit-models",
+    "def-weil-strict-roos-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, normalized strict Roos resolution comparison"
-   }
-  },
-  {
-   "text": "The resolutions $a,j$ above were arbitrary of the stated kind, so their formula always represents the same unit. The Roos comparison is resolution-independent and natural, and the simultaneous adjunction has a natural unit. Explicitly, for $h:N\\to N'$ its naturality gives $(\\mathcal L_W\\mathcal R_W h)u_N=u_{N'}h$; replacing each unit by the equality of Step 6 gives precisely the naturality of the asserted representative formula. Different choices of $q$, $a$ or $j$ therefore give the same morphism under the canonical derived identifications. All constructions used unbounded K-flat and K-injective representatives and exact countable products; none required completeness or a cohomological bound on $N$.",
-   "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "(2)-(3), functorial reduction and integral realization; resolution-independent normalization supplied by the cited derived adjunction and Roos statements"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-coef-ringed-sequence-site",
-  "def-weil-pbc-proetale-site",
-  "def-weil-size-convention",
-  "det-pe-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-coef-sequence-projection-derived-adjunction",
-  "def-pur-sheaf-tensor-product",
-  "lem-sfb-resolving-derived-adjunction-normalization",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-coef-sequence-pushforward-limit-projections",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-pur-system-ringed-sequence-site"
+  "lem-trf-completion-unit-canonical-models",
+  "def-trf-completion-unit-models",
+  "def-weil-strict-roos-model"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-  "place": "(2)-(3): chain-level normalization prerequisite for functorial integral realization; argument combines Stacks 07A6, 09T5, 0D6E, 0941 and the fixed cone convention of 08TC. Not a verbatim assertion of those sources."
+  "place": "Original steps 1--4 are isolated as the canonical-model construction. The Lean proof establishes all remaining whole-unit, chain-cone, two-resolution and naturality assertions by adjunction normalization, naturality and cancellation, preserving the unit route."
  },
  "mathlib_searches": [
   {
@@ -279,16 +222,7 @@
    }
   ]
  },
- "tool_uses": [
-  "det-pe-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-coef-sequence-projection-derived-adjunction",
-  "lem-sfb-resolving-derived-adjunction-normalization",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-coef-sequence-pushforward-limit-projections",
-  "lem-coef-derived-system-evaluation-calculus"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -301,15 +235,6 @@
   "module": "Sheaf.Paper.CompletionUnitStrictQuotientModel",
   "declaration": "WeilConjectures.CompletionUnit.completionUnitStrictQuotientModel",
   "declarations": [
-   "WeilConjectures.CompletionUnit.tower",
-   "WeilConjectures.CompletionUnit.ordinaryLimit",
-   "WeilConjectures.CompletionUnit.OrdinaryModel",
-   "WeilConjectures.CompletionUnit.OrdinaryModel.quotient",
-   "WeilConjectures.CompletionUnit.OrdinaryModel.transpose",
-   "WeilConjectures.CompletionUnit.OrdinaryModel.augmentation",
-   "WeilConjectures.CompletionUnit.DerivedModel",
-   "WeilConjectures.CompletionUnit.OrdinaryModel.coneAugmentation",
-   "WeilConjectures.CompletionUnit.DerivedModel.completionComparison",
    "WeilConjectures.CompletionUnit.completionUnitStrictQuotientModel"
   ],
   "file": "lean/Sheaf/Paper/CompletionUnitStrictQuotientModel.lean",
@@ -328,5 +253,15 @@
   "group": "NW",
   "result": "fix",
   "note": "Re-delivery after the 43763eb2 C5 RETURN. stmt_deps now cites def-weil-integral-reduction-tower instead of the theorem node. That node gets a §1(B) superset existing:true record (4 decls kept, unrestrictedIntegralTensorSection added; live record is still base Q63, not overwritten), accepted. Only other change: the import, to IntegralReductionTowerCanonical, which re-exports publicly. FIX: the Lean still used unrestrictedTowerTensorSection, a wrapper recorded under the theorem node that is no longer a stmt_dep, and left the newly recorded def-node decl unused. Renamed both occurrences (lines 86, 261) to unrestrictedIntegralTensorSection (the wrapper's whole body, same arguments). fixes/: complete CompletionUnitStrictQuotientModel.lean and the item lean-record.json (statement + note); refit_record and check_lean_text clean, statement verbatim. Compile: nt_compile timed out at 60 s (load 133); lcompile(timeout=560) clean in 49.5 s and 27.4 s on re-run, vs 18.3 s for the delivered file. Mathematics re-checked: hypotheses, K-flat Q with arbitrary q, pinned OrdinaryModel/DerivedModel, zero shifted-coordinate cone, unit formula, two-resolution clause, naturality, independent universes, edge cases, 7-step docstring, sorry only. Advisory: the dependency's canonical adjunction is only an existential S."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-051a4",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T140827-L-2759165",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to live; moved model block diffed verbatim vs live (only blueprint ids differ); canonicalModels implied by the old item statement; axioms of the item = propext/Classical.choice/Quot.sound + sorryAx from canonicalModels only (scratch build, 50.5 s)"
  }
 }

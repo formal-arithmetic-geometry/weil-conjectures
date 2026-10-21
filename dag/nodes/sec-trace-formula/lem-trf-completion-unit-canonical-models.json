@@ -1,0 +1,149 @@
+{
+ "id": "lem-trf-completion-unit-canonical-models",
+ "kind": "statement",
+ "title": "Compatible ordinary and derived presentations of the coefficient adjunction",
+ "statement": "Fix a prime l, a finite extension E of Q_l and a scheme W on which l is invertible, with the project's independent universes and ordinary unbounded derived module categories. Use the fixed scalar-extension and coefficient-sequence functors. With OrdinaryModel and DerivedModel exactly as defined in [def-trf-completion-unit-models], there exist a coherent coefficient calculus S [lem-coef-derived-system-evaluation-calculus], its coherence witness, an OrdinaryModel M, and a DerivedModel for S and M. This is only the simultaneous construction and comparison-normalization assertion: it asserts no cone-augmentation formula, two-resolution unit formula or representative-independence theorem.",
+ "stmt_deps": [
+  "def-trf-completion-unit-models",
+  "lem-coef-derived-system-evaluation-calculus"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, sites-cohomology.tex lemma-adjoint; 0D6E, sites-cohomology.tex lemma-derived-pushforward-composition; 0941, sites-cohomology.tex lemma-derived-limit-is-ok; 09T5, derived.tex lemma-derived-adjoint-functors; 03D7, sites-modules.tex lemma-adjoint-pullback-pushforward-modules. The specified normalizations are the coefficient specialization in original completion-unit proof steps 1--4, not a verbatim assertion of these tags."
+ },
+ "proof": [
+  {
+   "text": "Construct the ordinary simultaneous tensor system by the sequence projection theorem and strict-system/sequence-site equivalence. Its scalar-extension Hom bijections send b tensor x to b times the limit projection. Transport the right adjoint to the fixed coefficientSequenceRestriction followed by limit, using its sectionwise characterization. The unit is the family 1 tensor x; pure tensors determine the quotient transitions. Evaluation of the limit cone gives the termwise-limit comparison with the stated projections.",
+   "uses": [
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-pur-system-ringed-sequence-site",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose S and its coherence from the coefficient-calculus existence theorem. Derive the ordinary adjunction on flat-term K-flat complexes and K-injectives. The normalized composition comparison identifies its right adjoint with the fixed coefficientSequenceLimit, without assuming restriction preserves K-injectives. Uniqueness of left adjoints compares its derived left adjoint with S.reduction, compatibly with the actual Hom equivalences. Transport the universal left-derived comparison and the resolving chain-map Hom equation along this isomorphism.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-sequence-projection-derived-adjunction",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the finite evaluation comparison by taking the adjunction mates of the evaluated counits. S.counit_projection and the sequence pushforward/limit projected counit compute the same total-limit projection. The finite derived scalar-extension normalization on a flat-term K-flat representative therefore gives reduction_evaluation. This is equality of mates, not detection of arbitrary derived maps by their level components; S and its original coherence are retained.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-sequence-pushforward-limit-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The canonical unit of the right-derived constant-tower limit, transported through the degreewise limit comparison, gives limitUnit. Its K-injective normalization is the defining rightDerivedFunctorObjQIso equation. Exact countable pro-etale products give the strict Roos comparison; its unit normalization supplies roos_normalization. Derived composition gives systemUnit, its composition equation and invertibility on K-injectives. Assemble M and D. The same universal properties apply to zero inputs and unbounded complexes.",
+   "uses": [
+    "det-pe-products-exact",
+    "lem-weil-strict-roos-comparison",
+    "lem-coef-sequence-pushforward-limit-projections",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-coef-sequence-projection-derived-adjunction",
+  "lem-pur-system-ringed-sequence-site",
+  "def-coef-ringed-sequence-site",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "prop-pur-kinjective-resolutions-exist",
+  "det-pe-products-exact",
+  "lem-weil-strict-roos-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Specialization of 07A6, 0D6E and 0941, with derived.tex 09T5; adjunction-compatible comparison normalization for the fixed coefficient calculus."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical ordinary tensor adjoint to inverse limit of scalar restrictions with a compatible derived adjunction on module sheaves over a ringed sequence site",
+   "results": "{\"t\": \"2026-10-21T11:02:17Z\", \"tool\": \"leansearch\", \"query\": \"Canonical ordinary tensor adjoint to inverse limit of scalar restrictions with a compatible derived adjunction on module sheaves over a ringed sequence site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.PullbackConstruction.adjunction\", \"ModuleCat.restrictCoextendScalarsAdj\", \"TensorProduct.directLimitLeft_symm_of_tmul\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"PresheafOfModules.sheafificationAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\"], \"digest\": \"5cc262d2600d2ace\"}",
+   "date": "2026-10-21",
+   "verdict": "No match. Generic scalar extension, adjunction and derived-uniqueness APIs do not package the fixed coefficient sequence functors and their simultaneous normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv_unit",
+   "results": "{\"t\": \"2026-10-21T11:02:16Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.homEquiv_unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.homEquiv_unit\"], \"digest\": \"f7a59756025fbb96\"}",
+   "date": "2026-10-21",
+   "verdict": "No match. Generic scalar extension, adjunction and derived-uniqueness APIs do not package the fixed coefficient sequence functors and their simultaneous normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "sequence.*adjunction|adjunction.*sequence|rightDerivedUnique",
+   "results": "{\"t\": \"2026-10-21T11:02:16Z\", \"tool\": \"grep\", \"query\": \"sequence.*adjunction|adjunction.*sequence|rightDerivedUnique\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"], \"digest\": \"ee9736f731ec1b13\"}",
+   "date": "2026-10-21",
+   "verdict": "No match. Generic scalar extension, adjunction and derived-uniqueness APIs do not package the fixed coefficient sequence functors and their simultaneous normalization."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletionUnitStrictQuotientModel",
+  "date": "2026-10-21",
+  "group": "J7"
+ },
+ "blueprint": {
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Rational Frobenius integral model proof (2)--(3), construction of the simultaneous reduction/limit adjunction and strict quotient model, original completion-unit proof steps 1--4.",
+   "via": [
+    "lem-trf-completion-unit-strict-quotient-model",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-trf-compact-support-system-realization-normalization",
+    "lem-trf-integral-compact-transport-recurrence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "module": "Sheaf.Paper.CompletionUnitCanonicalModels",
+  "file": "lean/Sheaf/Paper/CompletionUnitCanonicalModels.lean",
+  "declaration": "WeilConjectures.CompletionUnit.canonicalModels",
+  "statement": "theorem canonicalModels [∀ x : W, Invertible (l : W.residueField x)] :\n    ∃ (S : CoefficientDerivedSystemCalculus l E W)\n      (_coherence : CoefficientDerivedSystemCoherence l E W S)\n      (M : OrdinaryModel l E W), Nonempty (DerivedModel l E W S M)",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-051a4",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T140827-L-2759165",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-051a4",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261021T140827-L-2759165",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement byte-identical to live; moved model block diffed verbatim vs live (only blueprint ids differ); canonicalModels implied by the old item statement; axioms of the item = propext/Classical.choice/Quot.sound + sorryAx from canonicalModels only (scratch build, 50.5 s)"
+ }
+}
