@@ -20605,3 +20605,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:14 L: merged deliver/Q44/lem-pur-completed-line-tensor-coherence (reviewer PASS; first push; new nodes: 0); claim not held by Q44: not your claim
 - 07:14 L: merged deliver/Q99/lem-trf-weakly-etale-between-objects (reviewer PASS; first push; new nodes: 0)
 - 07:14 L: merged deliver/NR/lem-weil-pbc-pulled-reduction-strict-tower-comparison (reviewer PASS; first push; new nodes: 0); claim not held by NR: not your claim
+- 07:14 L: merged deliver/Q122/def-nagata-relative-stage-morphism-data (reviewer PASS; first push; new nodes: 0)

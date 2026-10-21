@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-nagata-relative-stage-morphism-data",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Finite-stage data for a morphism",
@@ -14,14 +14,61 @@
  },
  "stmt_deps": [
   "def-nagata-glued-limit-comparison",
-  "def-nagata-noetherian-inverse-system"
+  "def-nagata-noetherian-inverse-system",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-fibre-product",
+  "def-weil-closed-immersion"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "NoetherianStageData|[Ff]inite[Ss]tage|[Nn]oetherianApproximation",
+   "results": "0 hits: none; directory AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match: no full finite-stage record; immersion component alone does not record the stages, presentations or certificates"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes descended to finite stages of Noetherian approximations with chartwise immersion certificates",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion, AlgebraicGeometry.IsFinite.instOfIsClosedImmersion, AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.IsPreimmersion, AlgebraicGeometry.IsImmersion.toIsPreimmersion, AlgebraicGeometry.IsProper, AlgebraicGeometry.IsImmersion.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: IsImmersion, IsClosedImmersion and related morphism properties give individual components only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsImmersion, CategoryTheory.Limits.pullback.lift",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite stage datum for a scheme morphism between Noetherian inverse systems recording affine chart presentations and immersion witnesses",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hii', AlgebraicGeometry.ExistsHomHomCompEqCompAux.i', AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "date": "2026-10-21",
+   "verdict": "no match: affine-transition-limit auxiliaries and immersion constructions do not define the full stage datum with retained presentation lists and overlap witnesses"
+  },
+  {
+   "tool": "grep",
+   "query": "StageData|[Cc]hart.*[Dd]ata|[Pp]resentation.*[Dd]ata|[Ii]mmersion",
+   "results": "5 hits: 8, 14, 16, 18, 21; directory AlgebraicGeometry/Morphisms/Immersion.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: no full finite-stage record; immersion component alone does not record the stages, presentations or certificates"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Record of compatible finite affine charts polynomial generator relation lists surjective coordinate maps for a scheme immersion into a pullback",
+   "results": "8 hits: AlgebraicGeometry.IsImmersion, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι, AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion, AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S, AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionSubschemeι, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toScheme",
+   "date": "2026-10-21",
+   "verdict": "no match: affine-transition-limit auxiliaries and immersion constructions do not define the full stage datum with retained presentation lists and overlap witnesses"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -51,5 +98,20 @@
   "statement": "Let $X\\to S$ be a morphism and choose the inverse systems\n$\\mathsf N(X)$ and $\\mathsf N(S)$ together with their comparison maps to\n$X$ and $S$. A finite-stage datum for this morphism consists of indices\n$\\lambda_X$ and $\\lambda_S$, a morphism\n$\\varphi_{\\lambda_X,\\lambda_S}\\colon X_{\\lambda_X}\\to S_{\\lambda_S}$,\nand an equality after composing with the two limit projections: the map\n$X\\to S\\to S_{\\lambda_S}$ equals\n$X\\to X_{\\lambda_X}\\to S_{\\lambda_S}$. The datum also records the finite\naffine charts and generator-and-relation lists used to construct\n$\\varphi_{\\lambda_X,\\lambda_S}$. Finally it records a finite affine cover\nof $X$, compatible opens in\n$X_{\\lambda_X}\\times_{S_{\\lambda_S}}S$, and chartwise surjections of\ncoordinate rings showing that the induced comparison\n$X\\to X_{\\lambda_X}\\times_{S_{\\lambda_S}}S$ is an immersion; all overlap\nequalities are included in the datum.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-relative-stage-morphism-data",
+  "worker": "stage1",
+  "summary": "Definition split: retained the current blueprint statement, including all finite chart, generator-and-relation and immersion-overlap records. Existing definition nodes supply all constituent notions; added the missing dependencies for schemes, affine spectra, fibre products and closed immersions/immersions. No new nodes or existence claim. The project NoetherianStageData structure omits the additional recorded chart data, so cannot attach. Two semantic search phrasings and recorded Loogle, LeanSearch and Mathlib grep searches find components only, not the full record.",
+  "blueprint": "Realizes the full definition def-nagata-relative-stage-morphism-data, main-20261015 order 387, in sk-prop-nagata-sketch-fp-models. As a definition it has no proof paragraphs; its finite chart, presentation and immersion-certificate clauses are data, not assertions of existence."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-d6a979d3a",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-d6a979d3a (reviewer sub-agent of L); spot-checked: I read the full item, the definition in both blueprint copies (main-20261015 order 387 and master order 380) and all six stmt_deps statements. The statement matches the blueprint text word for word; nothing is weakened and no existence claim is made. Every added dependency is an existing definition that defines the notion it is cited for: the inverse system supplies the indices and limit projections, glued-limit-comparison supplies the comparison maps, def-pc-scheme and def-weil-affine-spectrum supply charts and coordinate rings, def-pc-fibre-product supplies the induced map (pi_X, f), whose compatibility is the recorded equality, and def-weil-closed-immersion defines immersion (Stacks 01IO) with the 01QO affine-surjection form. The dependencies form no cycle and raise no unit-route issue. A grep of the DAG for lambda_X, stage-data and fibre-product patterns found no duplicate: the morphism-descent, equality-stage and fp-descent definitions are other notions, and the exists lemma and immersion model use the item, so same_as [] is correct. The Lean structure NoetherianStageData (FinitePresentationModel.lean:95) omits the chart, presentation and overlap data, so leaving it unattached is right. The searches cover grep, LeanSearch, Loogle and LeanFinder. Edge cases checked: empty X; the identity of Spec Z with constant systems; Spec(A/J) to Spec A with J not finitely generated; codomains S_{lambda_S} on both sides. The item is not dropped, and live is still imported and unsplit, so the delivery is not superseded. One harmless report error: it says source was repointed to main-20261015, but the JSON still points at master order 380. source is maintainer-owned and the texts are identical, so the maintainer may repoint it."
  }
 }
