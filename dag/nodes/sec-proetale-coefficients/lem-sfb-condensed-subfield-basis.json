@@ -13,9 +13,80 @@
   "sk-def-sfb-module-objects",
   "sk-def-sfb-sheaf-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=\\mathbf Q_\\ell$. It is complete and its absolute value is nontrivial, since $|\\ell|=\\ell^{-1}\\notin\\{0,1\\}$ [def-weil-l-adic-numbers]. The induced absolute-value metrics make $E$ and $F$ Hausdorff topological $k$-vector spaces: addition and scalar multiplication are restrictions of the continuous field operations, and $E$ has the subspace topology from $F$. The hypothesis that $F/k$ is finite means that $F$ is finite-dimensional over $k$. Each $E$-linear coordinate map $q_i:F\\to E$ is also $k$-linear. Apply [lem-sfb-finite-dimensional-linear-map-continuous] with scalar field $k$, domain $F$, and codomain $E$ to obtain continuity of every $q_i$. Thus the map $c=(q_i)_i$ to the finite product $E^n$ is continuous.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "lem-sfb-finite-dimensional-linear-map-continuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: an E-basis gives the condensed module isomorphism, with continuous coordinate functions"
+   }
+  },
+  {
+   "text": "Define $\\beta:E^n\\to F$ by $\\beta((a_i))=\\sum_i b_i a_i$. Each summand is continuous, being the inclusion $E\\hookrightarrow F$ followed by multiplication by the fixed element $b_i$; hence the finite sum is continuous. The defining identities for the coordinates of a basis are $s=\\sum_i b_i q_i(s)$ and $q_j(b_i)=\\delta_{ij}$. They give $\\beta(c(s))=s$ and $q_j(\\beta((a_i)))=\\sum_i\\delta_{ij}a_i=a_j$. Consequently $c$ and $\\beta$ are continuous inverse maps, proving the homeomorphism assertion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: an E-basis gives the condensed module isomorphism, with continuous coordinate functions"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-condensed-ring], the two underlying abelian sheaves have sections $C(S,E)$ and $C(S,F)$, restrictions by precomposition, and pointwise addition. The finite product sheaf $\\underline E^{\\,n}$ has sections $C(S,E)^n$: a compatible family of tuples glues uniquely by gluing each component in $\\underline E$. The maps of step 2 therefore give well-defined maps $\\beta_S$ and $c_S$ in the statement. They are additive. For a continuous map $u:T\\to S$, one has $\\beta_S((h_i))\\circ u=\\sum_i b_i(h_i\\circ u)$ and $(q_i\\circ h)\\circ u=q_i\\circ(h\\circ u)$. Hence both families commute with restrictions and define morphisms of abelian sheaves. The inverse identities in step 2 hold at every $s\\in S$, so these sheaf morphisms are inverse.",
+   "uses": [
+    "sk-def-sfb-condensed-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: an E-basis gives the condensed module isomorphism, with continuous coordinate functions"
+   }
+  },
+  {
+   "text": "Let $R=\\underline E$, $M=\\underline F$, and $N=\\underline E^{\\,n}$. Give $M(S)$ the $R(S)$-action $(a,h)\\mapsto(s\\mapsto a(s)h(s))$, using $E\\subseteq F$, and $N(S)$ componentwise multiplication. These pairings are bilinear and compatible with restriction. By the ordinary tensor-product universal property they define morphisms from the presheaves $S\\mapsto R(S)\\otimes_{\\mathbf Z}M(S)$ and $S\\mapsto R(S)\\otimes_{\\mathbf Z}N(S)$ to $M$ and $N$. The sheafified tensor formula [sk-def-sfb-sheaf-tensor] and the factorization property [def-weil-pbc-sheafification] extend them uniquely to actions $R\\otimes M\\to M$ and $R\\otimes N\\to N$. The identities $1h=h$ and $(aa')h=a(a'h)$ hold on sections; on pure tensors they give the unit and associativity diagrams, and uniqueness of sheafification extends these equalities to the sheaf tensors (sheafification is strong monoidal by [sk-def-sfb-sheaf-tensor]). Thus these are the internal modules of [sk-def-sfb-module-objects].",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-sheafification",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: an E-basis gives the condensed module isomorphism, with continuous coordinate functions"
+   }
+  },
+  {
+   "text": "For $a\\in C(S,E)$, pointwise $E$-linearity gives $\\beta_S((ah_i)_i)=a\\beta_S((h_i)_i)$ and $q_i\\circ(ah)=a(q_i\\circ h)$. Thus the action-compatibility squares for both maps commute on every pure tensor of sections; additivity gives equality on the objectwise tensor products, and the uniqueness property [def-weil-pbc-sheafification] gives equality on their sheafifications [sk-def-sfb-sheaf-tensor]. By the definition of a module-object morphism [sk-def-sfb-module-objects], $\\beta$ and $c$ are internal $\\underline E$-linear morphisms. Their composites are identities by step 3, so they give the asserted inverse isomorphisms of internal modules.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "First two sentences: an E-basis gives the condensed module isomorphism, with continuous coordinate functions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-numbers",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-sheafification",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "First two sentences: an E-basis gives the condensed module isomorphism, with continuous coordinate functions; explicit sectionwise and sheafification arguments supplied by NL"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +122,45 @@
    "results": "8 hits: continuous_equivFun_basis, Module.Basis.coe_constrL, Module.Basis.continuous_coe_repr, Module.Basis.constrL.congr_simp, Module.Basis.constrL, Module.Basis.coord, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, FiniteField.instFiniteExtension_1",
    "date": "2026-10-21",
    "verdict": "no match: finite-dimensional continuity results do not state the isomorphism over the internal ring C(-,E); Condensed.finFree is for coefficients in a ring type and does not supply the topological-field module comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A basis of a finite extension of p adic fields gives an isomorphism of internal condensed modules by continuous coordinate functions",
+   "results": "8 hits: PadicInt.mahlerEquiv, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, AdicCompletion.piEquivOfFintype, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, PiLp.basisFun_equivFun, Profinite.NobelingProof.GoodProducts.Basis, PiLp.basisFun_map",
+   "date": "2026-10-21",
+   "verdict": "no match: the topology-only basis results and TopModuleCat isomorphisms do not state the internal module isomorphism over the nonconstant condensed ring C(-,E); CondensedMod and the locally constant functors use a fixed ring type"
+  },
+  {
+   "tool": "grep",
+   "query": "basis|equivFun|finiteFree",
+   "results": "2 hits: Mathlib/Condensed/Solid.lean, Mathlib/Condensed/Solid.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the topology-only basis results and TopModuleCat isomorphisms do not state the internal module isomorphism over the nonconstant condensed ring C(-,E); CondensedMod and the locally constant functors use a fixed ring type"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite basis of a finite p adic field extension gives an isomorphism of internal condensed modules by continuous coordinate functions",
+   "results": "8 hits: continuous_equivFun_basis, Module.Basis.coe_constrL, Module.Basis.continuous_coe_repr, Module.Basis.constrL.congr_simp, Module.Basis.constrL, Module.Basis.coord, FiniteField.instFiniteExtension_1, Module.Basis.equivFunL.congr_simp",
+   "date": "2026-10-21",
+   "verdict": "no match: the topology-only basis results and TopModuleCat isomorphisms do not state the internal module isomorphism over the nonconstant condensed ring C(-,E); CondensedMod and the locally constant functors use a fixed ring type"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousLinearEquiv, \"pi\"",
+   "results": "12 hits: ContinuousLinearEquiv.piUnique, ContinuousLinearEquiv.piCongrRight, ContinuousLinearEquiv.piCongrLeft, ContinuousLinearEquiv.sumPiEquivProdPi, ContinuousLinearEquiv.piUnique_apply, ContinuousLinearEquiv.piUnique_symm_apply, ContinuousLinearEquiv.piCongrRight_apply, ContinuousLinearEquiv.piFinTwo",
+   "date": "2026-10-21",
+   "verdict": "no match: the topology-only basis results and TopModuleCat isomorphisms do not state the internal module isomorphism over the nonconstant condensed ring C(-,E); CondensedMod and the locally constant functors use a fixed ring type"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous linear equivalence between topological modules induces an isomorphism of their sheaves of continuous functions over the condensed ring of scalars",
+   "results": "8 hits: TopModuleCat.ofIso, CategoryTheory.Iso.toContinuousLinearEquiv, IsModuleTopology.isoₛₗ, CondensedMod, CondensedMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscreteComponents, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor",
+   "date": "2026-10-21",
+   "verdict": "no match: the topology-only basis results and TopModuleCat isomorphisms do not state the internal module isomorphism over the nonconstant condensed ring C(-,E); CondensedMod and the locally constant functors use a fixed ring type"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-subfield-flat",
@@ -71,5 +177,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-condensed-subfield-basis",
+  "worker": "stage1",
+  "summary": "Proved coordinate continuity using the existing finite-dimensional continuity Mathlib leaf over Q_l, constructed the homeomorphism and the natural inverse maps of continuous-function sheaves, and verified internal module actions and linearity through the sheafification universal property. No new nodes and no statement change.",
+  "blueprint": "lem-sfb-subfield-flat.proof.md, first two sentences, inside step (2) of sk-prop-sfb-cartesian-coefficients: an E-basis gives C(-,F) ≅ C(-,E)^n with continuous coordinates."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NL-a41aa3c40",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-a41aa3c40 (reviewer sub-agent of L); spot-checked: I read the item in full against main-20261015 lem-sfb-subfield-flat.proof.md, first two sentences. The delivery has no new nodes, and the statement, stmt_deps and blueprint fields are byte-identical to the version Q43 created. Step 1 is coordinate continuity: the Mathlib leaf lem-sfb-finite-dimensional-linear-map-continuous (FiniteDimension.lean:283, hypotheses checked) applies over Q_ell, which is complete with |ell| = 1/ell. The topologies are metric and restricted from Qbar_ell, and E-linear maps are Q_ell-linear. Step 2: beta is continuous and the two inverse identities hold. Step 3: by the section description of sk-def-sfb-condensed-ring, beta_S and c_S are natural and inverse. Step 4: the internal actions come from the sheafification universal property, and unit and associativity follow from strong monoidality in sk-def-sfb-sheaf-tensor 1. Step 5: linearity on pure tensors extends by uniqueness. Edge cases checked: E=F, a basis (b), S empty, a one-point S; no integral basis is assumed. Not a duplicate: det-prop-sfb-cartesian-coefficients-finite-free is the O_E-basis analogue and would be circular to cite; lem-weil-pbc-finite-dimensional-linear-homeomorphism is an alternative, not required. The route uses only definitions and Mathlib leaves, so no tool_uses entry is needed; no SGA; no cycle; proof_deps equals the union of the uses. The item has no repair note and is not dropped. Advisory for the maintainer: the total proof is 3588 characters, above the parent re-split note's aim of well under 3000, but every step is under 1000 characters and the content is bookkeeping."
  }
 }
