@@ -103,6 +103,38 @@ theorem naturality_shifts
       alpha TC TD L R adj μ c P ≫
           R.map ((TD.map b).app (L.obj P) ≫ (TD.obj E').map (L.map p)) =
         ((TC.map a).app P ≫ (TC.obj K').map p) ≫ alpha TC TD L R adj μ c' P') := by
-  sorry
+  have := hTC
+  let := hη
+  constructor
+  · intro K E c P n
+    let := hTD _ _ c
+    let := hμ K
+    let β : TC.obj K ⋙ L ⟶ L ⋙ TD.obj E :=
+      μ.hom.app K ≫ Functor.whiskerLeft L (TD.map c)
+    have : NatTrans.CommShift β ℤ := by dsimp [β]; infer_instance
+    let α : TC.obj K ⟶ (L ⋙ TD.obj E) ⋙ R :=
+      (TC.obj K).rightUnitor.inv ≫ Functor.whiskerLeft (TC.obj K) adj.unit ≫
+        (Functor.associator (TC.obj K) L R).inv ≫ Functor.whiskerRight β R
+    have : NatTrans.CommShift α ℤ := by dsimp [α]; infer_instance
+    constructor
+    · exact (NatTrans.shift_app_comm β n P).symm
+    · simpa [α, β, alpha, beta, Adjunction.homEquiv_unit] using
+        (NatTrans.shift_app_comm α n P).symm
+  · intro K K' E E' c c' a b h P P' p
+    have hβ : beta TC TD L μ c P ≫
+        ((TD.map b).app (L.obj P) ≫ (TD.obj E').map (L.map p)) =
+        L.map ((TC.map a).app P ≫ (TC.obj K').map p) ≫ beta TC TD L μ c' P' := by
+      have ha := NatTrans.congr_app (μ.hom.naturality a) P
+      have hp := (μ.hom.app K').naturality p
+      dsimp at ha hp
+      dsimp [beta]
+      rw [L.map_comp]
+      simp only [Category.assoc]
+      rw [← Category.assoc ((TD.map c).app (L.obj P)),
+        ← NatTrans.comp_app, ← TD.map_comp, h, TD.map_comp]
+      dsimp
+      simp only [Category.assoc]
+      rw [← (TD.map c').naturality (L.map p), ← reassoc_of% ha, ← reassoc_of% hp]
+    exact ⟨hβ, (adj.homEquiv_naturality_left_square _ _ _ _ hβ.symm).symm⟩
 
 end CategoryTheory.TensorArrowMate
