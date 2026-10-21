@@ -13,7 +13,7 @@ public import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 public import Sheaf.CategoryTheory.KInjectiveDerivedMapComputation
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Two triple direct-image paths on common resolutions
 
@@ -168,6 +168,270 @@ noncomputable def HasTripleResolutionFormulas
                 Functor.kInjectiveResolutionHomTarget k k' (b.inv ≫ b'.hom) ∧
               d.inv ≫ d'.hom = H.kInjectiveHomotopyImage z)
 end FormulaPredicate
+
+private theorem homotopyImage_map
+    {A B : Type x} [Category.{v} A] [Category.{v} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{w} B]
+    (F : A ⥤ B) [F.Additive]
+    {I J : CochainComplex A ℤ} (g : I ⟶ J) :
+    F.kInjectiveHomotopyImage ((HomotopyCategory.quotient A (.up ℤ)).map g) =
+      DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map g) := by
+  unfold kInjectiveHomotopyImage
+  change (DerivedCategory.quotientCompQhIso B).inv.app _ ≫
+    DerivedCategory.Qh.map ((HomotopyCategory.quotient B (.up ℤ)).map
+      ((F.mapHomologicalComplex (.up ℤ)).map g)) ≫
+      (DerivedCategory.quotientCompQhIso B).hom.app
+        ((F.mapHomologicalComplex (.up ℤ)).obj J) = _
+  rw [DerivedCategory.quotientCompQhIso_hom_naturality]
+  simp
+
+private theorem resolution_naturality
+    {A B : Type x} [Category.{v} A] [Category.{v} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    (F : A ⥤ B) [F.Additive]
+    (RF : DerivedCategory.{w} A ⥤ DerivedCategory.{w} B)
+    (η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF)
+    {N N' I J : CochainComplex A ℤ} (a : N ⟶ I) (b : N' ⟶ J) [QuasiIso a]
+    (h : DerivedCategory.Q.obj N ⟶ DerivedCategory.Q.obj N')
+    (g : (HomotopyCategory.quotient A (.up ℤ)).obj I ⟶
+      (HomotopyCategory.quotient A (.up ℤ)).obj J)
+    (hg : DerivedCategory.Qh.map g = kInjectiveResolutionHomTarget a b h) :
+    η.app I ≫ RF.map (CategoryTheory.inv (DerivedCategory.Q.map a) ≫ h ≫ DerivedCategory.Q.map b) =
+      F.kInjectiveHomotopyImage g ≫ η.app J := by
+  obtain ⟨g, rfl⟩ := (HomotopyCategory.quotient A (.up ℤ)).map_surjective g
+  have hq : DerivedCategory.Q.map g =
+      CategoryTheory.inv (DerivedCategory.Q.map a) ≫ h ≫ DerivedCategory.Q.map b := by
+    have he := congrArg (fun q ↦ (DerivedCategory.quotientCompQhIso A).inv.app I ≫ q ≫
+      (DerivedCategory.quotientCompQhIso A).hom.app J) hg
+    simpa [kInjectiveResolutionHomTarget, Category.assoc,
+      ← DerivedCategory.quotientCompQhIso_inv_naturality, -NatTrans.naturality] using he
+  rw [← hq, homotopyImage_map]
+  exact (η.naturality g).symm
+
+private theorem coordinate_map
+    {A B : Type x} [Category.{v} A] [Category.{v} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    (F : A ⥤ B) [F.Additive]
+    (RF : DerivedCategory.{w} A ⥤ DerivedCategory.{w} B)
+    (η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF)
+    {N N' I J : CochainComplex A ℤ} (a : N ⟶ I) (b : N' ⟶ J)
+    [QuasiIso a] [QuasiIso b]
+    {X Y : DerivedCategory.{w} A} (e : X ≅ DerivedCategory.Q.obj N)
+    (e' : Y ≅ DerivedCategory.Q.obj N') (q : X ⟶ Y)
+    (c : RF.obj X ≅ DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj I))
+    (c' : RF.obj Y ≅ DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj J))
+    (hc : c.inv = η.app I ≫ RF.map (CategoryTheory.inv (DerivedCategory.Q.map a) ≫ e.inv))
+    (hc' : c'.inv = η.app J ≫ RF.map (CategoryTheory.inv (DerivedCategory.Q.map b) ≫ e'.inv))
+    (g : (HomotopyCategory.quotient A (.up ℤ)).obj I ⟶
+      (HomotopyCategory.quotient A (.up ℤ)).obj J)
+    (hg : DerivedCategory.Qh.map g =
+      kInjectiveResolutionHomTarget a b (e.inv ≫ q ≫ e'.hom)) :
+    c.inv ≫ RF.map q ≫ c'.hom = F.kInjectiveHomotopyImage g := by
+  apply (cancel_mono c'.inv).mp
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  rw [hc, hc']
+  have hn := resolution_naturality F RF η a b (e.inv ≫ q ≫ e'.hom) g hg
+  calc
+    _ = (η.app I ≫ RF.map (CategoryTheory.inv (DerivedCategory.Q.map a) ≫
+        (e.inv ≫ q ≫ e'.hom) ≫ DerivedCategory.Q.map b)) ≫
+        RF.map (CategoryTheory.inv (DerivedCategory.Q.map b) ≫ e'.inv) := by
+      simp [Functor.map_comp, Category.assoc]
+    _ = _ := by rw [hn, Category.assoc]
+
+private theorem unit_iso
+    {A B : Type x} [Category.{v} A] [Category.{v} B]
+    [Abelian A] [Abelian B] [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    [Abelian.HasKInjectiveResolutions A]
+    (F : A ⥤ B) [F.Additive]
+    (RF : DerivedCategory.{w} A ⥤ DerivedCategory.{w} B)
+    (η : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF)
+    [RF.IsRightDerivedFunctor η (HomologicalComplex.quasiIso A (.up ℤ))]
+    (I : CochainComplex A ℤ) [I.IsKInjective] : IsIso (η.app I) :=
+  (CategoryTheory.derives F).isIso_of_isRightDerivedFunctor η (CochainComplex.KInjectives.mk I)
+
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem triple_formulas
+    {M0 M1 M2 M3 : Type x}
+    [Category.{v} M0] [Category.{v} M1] [Category.{v} M2] [Category.{v} M3]
+    [Abelian M0] [Abelian M1] [Abelian M2] [Abelian M3]
+    [HasDerivedCategory.{w} M0] [HasDerivedCategory.{w} M1]
+    [HasDerivedCategory.{w} M2] [HasDerivedCategory.{w} M3]
+    [Abelian.HasKInjectiveResolutions M0] [Abelian.HasKInjectiveResolutions M1]
+    [Abelian.HasKInjectiveResolutions M2]
+    (F : M0 ⥤ M1) (G : M1 ⥤ M2) (H : M2 ⥤ M3)
+    [F.Additive] [G.Additive] [H.Additive]
+    (Rf : DerivedCategory.{w} M0 ⥤ DerivedCategory.{w} M1)
+    (Rg : DerivedCategory.{w} M1 ⥤ DerivedCategory.{w} M2)
+    (Rh : DerivedCategory.{w} M2 ⥤ DerivedCategory.{w} M3)
+    (Rgf : DerivedCategory.{w} M0 ⥤ DerivedCategory.{w} M2)
+    (Rhg : DerivedCategory.{w} M1 ⥤ DerivedCategory.{w} M3)
+    (Rhgf : DerivedCategory.{w} M0 ⥤ DerivedCategory.{w} M3)
+    (ηf : F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
+      DerivedCategory.Q.{w} ⋙ Rf)
+    (ηg : G.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
+      DerivedCategory.Q.{w} ⋙ Rg)
+    (ηh : H.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
+      DerivedCategory.Q.{w} ⋙ Rh)
+    (ηgf : (F ⋙ G).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
+      DerivedCategory.Q.{w} ⋙ Rgf)
+    (ηhg : (G ⋙ H).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
+      DerivedCategory.Q.{w} ⋙ Rhg)
+    (ηhgf : ((F ⋙ G) ⋙ H).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q.{w} ⟶
+      DerivedCategory.Q.{w} ⋙ Rhgf)
+    [Rf.IsRightDerivedFunctor ηf (HomologicalComplex.quasiIso M0 (.up ℤ))]
+    [Rg.IsRightDerivedFunctor ηg (HomologicalComplex.quasiIso M1 (.up ℤ))]
+    [Rh.IsRightDerivedFunctor ηh (HomologicalComplex.quasiIso M2 (.up ℤ))]
+    [Rgf.IsRightDerivedFunctor ηgf (HomologicalComplex.quasiIso M0 (.up ℤ))]
+    [Rhg.IsRightDerivedFunctor ηhg (HomologicalComplex.quasiIso M1 (.up ℤ))]
+    [Rhgf.IsRightDerivedFunctor ηhgf (HomologicalComplex.quasiIso M0 (.up ℤ))]
+    (κgf : Rgf ≅ Rf ⋙ Rg) (κhg : Rhg ≅ Rg ⋙ Rh)
+    (κh_gf : Rhgf ≅ Rgf ⋙ Rh) (κhg_f : Rhgf ≅ Rf ⋙ Rhg)
+    (hκgf : ∀ X, ηgf.app X ≫ κgf.hom.app (DerivedCategory.Q.obj X) =
+      ηg.app ((F.mapHomologicalComplex (.up ℤ)).obj X) ≫ Rg.map (ηf.app X))
+    (hκhg : ∀ X, ηhg.app X ≫ κhg.hom.app (DerivedCategory.Q.obj X) =
+      ηh.app ((G.mapHomologicalComplex (.up ℤ)).obj X) ≫ Rh.map (ηg.app X))
+    (hκh_gf : ∀ X, ηhgf.app X ≫ κh_gf.hom.app (DerivedCategory.Q.obj X) =
+      ηh.app (((F ⋙ G).mapHomologicalComplex (.up ℤ)).obj X) ≫ Rh.map (ηgf.app X))
+    (hκhg_f : ∀ X, ηhgf.app X ≫ κhg_f.hom.app (DerivedCategory.Q.obj X) =
+      ηhg.app ((F.mapHomologicalComplex (.up ℤ)).obj X) ≫ Rhg.map (ηf.app X))
+    (I : CochainComplex M0 ℤ) [I.IsKInjective]
+    (J : CochainComplex M1 ℤ) [J.IsKInjective]
+    (K T : CochainComplex M2 ℤ) [K.IsKInjective] [T.IsKInjective]
+    (j : (F.mapHomologicalComplex (.up ℤ)).obj I ⟶ J) [QuasiIso j]
+    (k : (G.mapHomologicalComplex (.up ℤ)).obj J ⟶ K) [QuasiIso k]
+    (t : ((G.mapHomologicalComplex (.up ℤ)).obj ((F.mapHomologicalComplex (.up ℤ)).obj I)) ⟶ T)
+          [QuasiIso t] :
+    HasTripleResolutionFormulas F G H Rf Rg Rh Rgf Rhg Rhgf
+      ηf ηg ηh ηgf ηhg ηhgf κgf κhg κh_gf κhg_f I J K T j k t := by
+  classical
+  let Fc := F.mapHomologicalComplex (.up ℤ)
+  let Gc := G.mapHomologicalComplex (.up ℤ)
+  let Hc := H.mapHomologicalComplex (.up ℤ)
+  have := unit_iso F Rf ηf I
+  have := unit_iso G Rg ηg J
+  have := unit_iso H Rh ηh K
+  have := unit_iso H Rh ηh T
+  have := unit_iso (F ⋙ G) Rgf ηgf I
+  have := unit_iso (G ⋙ H) Rhg ηhg J
+  have := unit_iso ((F ⋙ G) ⋙ H) Rhgf ηhgf I
+  let a := (asIso (ηf.app I)).symm ≪≫ asIso (DerivedCategory.Q.map j)
+  let v := (asIso (ηgf.app I)).symm
+  let b := Rg.mapIso a ≪≫ (asIso (ηg.app J)).symm
+  let s := (asIso (ηhgf.app I)).symm
+  let m := Rh.mapIso v ≪≫ Rh.mapIso (asIso (DerivedCategory.Q.map t)) ≪≫
+    (asIso (ηh.app T)).symm
+  let r := Rhg.mapIso a ≪≫ (asIso (ηhg.app J)).symm
+  let d := Rh.mapIso b ≪≫ Rh.mapIso (asIso (DerivedCategory.Q.map k)) ≪≫
+    (asIso (ηh.app K)).symm
+  have ha : a.inv = CategoryTheory.inv (DerivedCategory.Q.map j) ≫ ηf.app I := rfl
+  have hb : b.inv = ηg.app J ≫ Rg.map a.inv := rfl
+  have hm : m.inv = ηh.app T ≫ Rh.map (CategoryTheory.inv (DerivedCategory.Q.map t) ≫ v.inv) := by
+    simp [m, Functor.map_comp]
+  have hd : d.inv = ηh.app K ≫ Rh.map (CategoryTheory.inv (DerivedCategory.Q.map k) ≫ b.inv) := by
+    simp [d, Functor.map_comp]
+  have hr : r.inv = ηhg.app J ≫ Rhg.map a.inv := rfl
+  have hp : v.inv ≫ κgf.hom.app (DerivedCategory.Q.obj I) ≫ b.hom =
+      DerivedCategory.Q.map (Gc.map j) := by
+    apply (cancel_mono b.inv).mp
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    change ηgf.app I ≫ κgf.hom.app (DerivedCategory.Q.obj I) = _
+    rw [hκgf I, hb, ha]
+    have hn := ηg.naturality j
+    dsimp only [Functor.comp_map] at hn
+    rw [← Category.assoc, hn]
+    simp [Functor.map_comp, Category.assoc]
+  have : IsIso (DerivedCategory.Q.map (Gc.map j)) := by
+    rw [← hp]
+    infer_instance
+  have hpq : QuasiIso (Gc.map j) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mp inferInstance
+  have := hpq
+  have hwq : QuasiIso (Gc.map j ≫ k) := inferInstance
+  obtain ⟨u, hu⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+    ((HomotopyCategory.quotient M2 (.up ℤ)).obj T) K).surjective
+      (kInjectiveResolutionHomTarget t (𝟙 K) (DerivedCategory.Q.map (Gc.map j ≫ k)))
+  have htu : (HomotopyCategory.quotient M2 (.up ℤ)).map t ≫ u =
+      (HomotopyCategory.quotient M2 (.up ℤ)).map (Gc.map j ≫ k) := by
+    apply (CochainComplex.IsKInjective.Qh_map_bijective _ K).injective
+    rw [Functor.map_comp, hu]
+    simp [kInjectiveResolutionHomTarget, Category.assoc,
+      DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
+  have h₁ : s.inv ≫ κh_gf.hom.app (DerivedCategory.Q.obj I) ≫ m.hom =
+      DerivedCategory.Q.map (Hc.map t) := by
+    apply (cancel_mono m.inv).mp
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    change ηhgf.app I ≫ κh_gf.hom.app (DerivedCategory.Q.obj I) = _
+    rw [hκh_gf I, hm]
+    have hn := ηh.naturality t
+    dsimp only [Functor.comp_map] at hn
+    rw [← Category.assoc, hn]
+    simp [Functor.map_comp, Category.assoc]; rfl
+  have h₂ : m.inv ≫ Rh.map (κgf.hom.app (DerivedCategory.Q.obj I)) ≫ d.hom =
+      H.kInjectiveHomotopyImage u := by
+    apply coordinate_map H Rh ηh t k v b _ m d hm hd u
+    rw [hp]
+    simpa only [kInjectiveResolutionHomTarget, Functor.map_comp, Functor.map_id,
+      Category.comp_id, Category.id_comp, Category.assoc] using hu
+  have h₃ : s.inv ≫ κhg_f.hom.app (DerivedCategory.Q.obj I) ≫ r.hom =
+      DerivedCategory.Q.map (Hc.map (Gc.map j)) := by
+    apply (cancel_mono r.inv).mp
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    change ηhgf.app I ≫ κhg_f.hom.app (DerivedCategory.Q.obj I) = _
+    rw [hκhg_f I, hr, ha]
+    have hn := ηhg.naturality j
+    dsimp only [Functor.comp_map] at hn
+    change ηhg.app (Fc.obj I) ≫ Rhg.map (ηf.app I) =
+      DerivedCategory.Q.map (((G ⋙ H).mapHomologicalComplex (.up ℤ)).map j) ≫
+        ηhg.app J ≫ Rhg.map (CategoryTheory.inv (DerivedCategory.Q.map j) ≫ ηf.app I)
+    rw [← Category.assoc, hn]
+    simp [Functor.map_comp, Category.assoc]; rfl
+  have h₄ : r.inv ≫ κhg.hom.app (Rf.obj (DerivedCategory.Q.obj I)) ≫ d.hom =
+      DerivedCategory.Q.map (Hc.map k) := by
+    apply (cancel_mono d.inv).mp
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    rw [hr, hd]
+    have hn := κhg.hom.naturality a.inv
+    dsimp only [Functor.comp_map] at hn
+    rw [Category.assoc]
+    change ηhg.app J ≫ Rhg.map a.inv ≫ κhg.hom.app ((DerivedCategory.Q ⋙ Rf).obj I) =
+      DerivedCategory.Q.map ((H.mapHomologicalComplex (.up ℤ)).map k) ≫
+        ηh.app K ≫ Rh.map (CategoryTheory.inv (DerivedCategory.Q.map k) ≫ b.inv)
+    rw [hn, ← Category.assoc, hκhg J, hb]
+    have hk := ηh.naturality k
+    dsimp only [Functor.comp_map] at hk
+    rw [← Category.assoc (DerivedCategory.Q.map (Hc.map k)), hk]
+    simp [Functor.map_comp, Category.assoc]
+  refine ⟨hpq, hwq, u, hu, htu, ?_, a, v, b, s, m, r, d,
+    ha, rfl, hb, rfl, hm, hr, hd, h₁, h₂, h₃, h₄, ?_, ?_, ?_, ?_⟩
+  · intro u' hu'
+    exact (CochainComplex.IsKInjective.Qh_map_bijective _ K).injective (hu'.trans hu.symm)
+  · rw [← h₁, ← h₂]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  · rw [← h₃, ← h₄]
+    simp only [Category.assoc, Iso.hom_inv_id_assoc]
+  · intro T' hT' t' ht' m' hm'
+    obtain ⟨z, hz⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+      ((HomotopyCategory.quotient M2 (.up ℤ)).obj T) T').surjective
+        (kInjectiveResolutionHomTarget t t' (𝟙 _))
+    refine ⟨z, ⟨hz, ?_⟩, ?_⟩
+    · have he := coordinate_map H Rh ηh t t' v v (𝟙 _) m m' hm hm' z
+      simp only [Category.id_comp, Iso.inv_hom_id] at he
+      simpa using he hz
+    · intro z' hz'
+      exact (CochainComplex.IsKInjective.Qh_map_bijective _ T').injective
+        (hz'.1.trans hz.symm)
+  · intro J' hJ' K' hK' j' hj' k' hk' a' b' d' ha' hb' hd'
+    obtain ⟨z, hz⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+      ((HomotopyCategory.quotient M2 (.up ℤ)).obj K) K').surjective
+        (kInjectiveResolutionHomTarget k k' (b.inv ≫ b'.hom))
+    refine ⟨z, ⟨hz, ?_⟩, ?_⟩
+    · have he := coordinate_map H Rh ηh k k' b b' (𝟙 _) d d' hd hd' z
+      simp only [Category.id_comp] at he
+      simpa using he hz
+    · intro z' hz'
+      exact (CochainComplex.IsKInjective.Qh_map_bijective _ K').injective
+        (hz'.1.trans hz.symm)
 
 end CategoryTheory.Functor
 
@@ -331,6 +595,14 @@ theorem ringedTripleResolution_formulas
     Functor.HasTripleResolutionFormulas f.modules g.modules h.modules
       Rf Rg Rh Rgf Rhg Rhgf ηf ηg ηh ηgf ηhg ηhgf κgf κhg κh_gf κhg_f
       I J K T j k t := by
-  sorry
+  have := (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses
+    J0 A0).1
+  have := (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses
+    J1 A1).1
+  have := (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses
+    J2 A2).1
+  exact Functor.triple_formulas f.modules g.modules h.modules
+    Rf Rg Rh Rgf Rhg Rhgf ηf ηg ηh ηgf ηhg ηhgf κgf κhg κh_gf κhg_f
+    hκgf hκhg hκh_gf hκhg_f I J K T j k t
 
 end CategoryTheory

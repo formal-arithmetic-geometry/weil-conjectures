@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "All four module categories have K-injective resolutions by [prop-pur-kinjective-resolutions-exist]: the sites are small and the ring sheaves are commutative, exactly as required there. The induced module direct images are additive by [def-weil-pbc-ringed-topos-morphism]. Thus the unbounded derived-map computation applies to each of them. Write $\\eta_x$ for the derived unit of $x_*$ and, for K-injective $L$ on its domain, put $e_{x,L}=\\eta_{x,L}^{-1}:R_x(Q L)\\xrightarrow{\\sim}Q(x_*L)$. The inverse exists by [def-sfb-right-derived-functor]. Put $A=f_*I$, $B=g_*A$, $C=g_*J$ and $p=g_*j:B\\to C$. No assertion that $A$ or $C$ is K-injective is used.",
+   "text": "All four module categories have K-injective resolutions by [prop-pur-kinjective-resolutions-exist]: the sites are small and the ring sheaves are commutative, exactly as required there. The induced module direct images are additive by [def-weil-pbc-ringed-topos-morphism]. Thus the unbounded derived-map computation applies to each of them. Write $\\eta_x$ for the derived unit of $x_*$ and, for K-injective $L$ on its domain, put $e_{x,L}=\\eta_{x,L}^{-1}:R_x(Q L)\\xrightarrow{\\sim}Q(x_*L)$. The inverse exists by [def-sfb-right-derived-functor]. Put $A=f_*I$, $B=g_*A$, $C=g_*J$ and $p=g_*j:B\\to C$. No assertion that $A$ or $C$ is K-injective is used. Lean implementation: apply Grothendieck abelianness from the universe-independent resolution theorem on the three source sites. The source-library HasKInjectiveResolutions instance and CategoryTheory.derives, together with LocalizerMorphism.Derives.isIso_of_isRightDerivedFunctor, evaluate each of the six supplied derived units invertibly on the needed K-injectives.",
    "uses": [
     "prop-pur-kinjective-resolutions-exist",
     "def-weil-pbc-ringed-topos-morphism",
@@ -32,7 +32,7 @@
    }
   },
   {
-   "text": "Apply the normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $(f,g)$, the K-injective $I$, and its supplied resolution $j:f_*I\\to J$. It says explicitly that $p=g_*j$ is a quasi-isomorphism. Since $k:C\\to K$ is a quasi-isomorphism by hypothesis, $w=k\\circ p:B\\to K$ is one too: in every degree its cohomology map is the composite of the two invertible cohomology maps, by [def-weil-abstract-derived-category]. Thus $w$ and $t$ are both K-injective resolutions of $B$, although $B$ itself need not be K-injective.",
+   "text": "Apply the normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $(f,g)$, the K-injective $I$, and its supplied resolution $j:f_*I\\to J$. It says explicitly that $p=g_*j$ is a quasi-isomorphism. Since $k:C\\to K$ is a quasi-isomorphism by hypothesis, $w=k\\circ p:B\\to K$ is one too: in every degree its cohomology map is the composite of the two invertible cohomology maps, by [def-weil-abstract-derived-category]. Thus $w$ and $t$ are both K-injective resolutions of $B$, although $B$ itself need not be K-injective. More directly for the supplied comparisons: naturality along j and the given unit normalization give v.inv followed by kappa_gf followed by b.hom = Qp. All three factors are isomorphisms; the localization criterion implies p is a quasi-isomorphism.",
    "uses": [
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
     "def-weil-abstract-derived-category"
@@ -77,7 +77,7 @@
    }
   },
   {
-   "text": "Apply [lem-sf-kinjective-derived-map-computation] with additive functor $h_*$, derived morphism $Q_2p:Q_2B\\to Q_2C$, and resolutions $t:B\\to T$, $k:C\\to K$. The class computing that map is exactly $u$, because its required equation is $Q_2u=(Q_2k)(Q_2p)(Q_2t)^{-1}$. Hence $E_kR_h(Q_2p)E_t^{-1}=Q_3(h_*u)$. Substituting the preceding equation for $Q_2p$ and the definitions of $d,m$ gives $d\\,R_h(\\kappa_{g,f,Q_0I})\\,m^{-1}=Q_3(h_*u)$. Multiply this by the second equation of the preceding step and cancel $m^{-1}m$. This gives $d\\,\\alpha_{Q_0I}\\,s^{-1}=Q_3(h_*u)\\circ Q_3(h_*t)$ and identifies each of its two factors exactly as claimed. Different representatives of $u$ give the same map: applying an additive functor to the chain-homotopy equation applies $h_*$ to its homotopy in each degree.",
+   "text": "Apply [lem-sf-kinjective-derived-map-computation] with additive functor $h_*$, derived morphism $Q_2p:Q_2B\\to Q_2C$, and resolutions $t:B\\to T$, $k:C\\to K$. The class computing that map is exactly $u$, because its required equation is $Q_2u=(Q_2k)(Q_2p)(Q_2t)^{-1}$. Hence $E_kR_h(Q_2p)E_t^{-1}=Q_3(h_*u)$. Substituting the preceding equation for $Q_2p$ and the definitions of $d,m$ gives $d\\,R_h(\\kappa_{g,f,Q_0I})\\,m^{-1}=Q_3(h_*u)$. Multiply this by the second equation of the preceding step and cancel $m^{-1}m$. This gives $d\\,\\alpha_{Q_0I}\\,s^{-1}=Q_3(h_*u)\\circ Q_3(h_*t)$ and identifies each of its two factors exactly as claimed. Different representatives of $u$ give the same map: applying an additive functor to the chain-homotopy equation applies $h_*$ to its homotopy in each degree. The Lean proof establishes the arbitrary-unit version directly, avoiding transport from the chosen universal pair of the dependency: choose a chain-map representative of u using fullness of the homotopy quotient, translate its Qh equation through quotientCompQhIso, and apply naturality of eta_h. The private coordinate_map lemma then cancels the resolution and coordinate isomorphisms. This gives exactly the same map computation and requires no extra hypothesis.",
    "uses": [
     "lem-sf-kinjective-derived-map-computation"
    ],
@@ -99,7 +99,7 @@
    }
   },
   {
-   "text": "The choices in the argument were arbitrary. To check the specified transitions, let $j',k',t'$ be other choices and use primes for their coordinates. A change of $t$ has intermediate transition $m'm^{-1}=E_{t'}E_t^{-1}$, exactly the canonical transition of [lem-sf-kinjective-derived-map-computation]. It appears on the left of the first factor of the alpha path and with its inverse on the right of the second factor, so cancels in their product. For a simultaneous change of $j,k$, that node applied to the derived map $b'b^{-1}:Q_2C\\to Q_2C'$ with resolutions $k,k'$ identifies $d'd^{-1}=E_{k'}R_h(b'b^{-1})E_k^{-1}$ with $Q_3(h_*z)$, where $Q_2z=(Q_2k')b'b^{-1}(Q_2k)^{-1}$ is the unique homotopy class $K\\to K'$. This is the canonical final-target transition and has the cocycle and intertwining properties stated there. Indeed each full path $P$ changes its matrix by $d'Ps^{-1}=(d'd^{-1})(dPs^{-1})$. These equations cover arbitrary simultaneous choices and prove the required compatibility. Only $I,J,K,T$ were used as K-injectives; no direct-image preservation of that property was invoked.",
+   "text": "The choices in the argument were arbitrary. To check the specified transitions, let $j',k',t'$ be other choices and use primes for their coordinates. A change of $t$ has intermediate transition $m'm^{-1}=E_{t'}E_t^{-1}$, exactly the canonical transition of [lem-sf-kinjective-derived-map-computation]. It appears on the left of the first factor of the alpha path and with its inverse on the right of the second factor, so cancels in their product. For a simultaneous change of $j,k$, that node applied to the derived map $b'b^{-1}:Q_2C\\to Q_2C'$ with resolutions $k,k'$ identifies $d'd^{-1}=E_{k'}R_h(b'b^{-1})E_k^{-1}$ with $Q_3(h_*z)$, where $Q_2z=(Q_2k')b'b^{-1}(Q_2k)^{-1}$ is the unique homotopy class $K\\to K'$. This is the canonical final-target transition and has the cocycle and intertwining properties stated there. Indeed each full path $P$ changes its matrix by $d'Ps^{-1}=(d'd^{-1})(dPs^{-1})$. These equations cover arbitrary simultaneous choices and prove the required compatibility. Only $I,J,K,T$ were used as K-injectives; no direct-image preservation of that property was invoked. In Lean the same private coordinate_map argument applies with identity derived morphism and equal coordinates v,v for the t-transition, and coordinates b,b-prime for the simultaneous j,k-transition. Qh_map_bijective supplies existence and uniqueness of each homotopy class; cancellation proves its computed image equation.",
    "uses": [
     "lem-sf-kinjective-derived-map-computation"
    ],
@@ -122,7 +122,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0D6E (lemma-derived-pushforward-composition), together with derived.tex Tags 070I and 070Y; explicit resolution-coordinate extraction by Q48"
+  "place": "Tag 0D6E (lemma-derived-pushforward-composition), together with derived.tex Tags 070I and 070Y; explicit resolution-coordinate extraction by Q48; implemented by U8 from normalized unit equations and naturality for the supplied derived pairs, with direct Hom-bijection lifts and explicit coordinate cancellation (2026-10-21)"
  },
  "mathlib_searches": [
   {
@@ -272,5 +272,15 @@
   "group": "O3",
   "result": "pass",
   "note": "Only the lean field changed; lean.statement matches the file verbatim; single sorry; item not dropped and not yet landed. Hypotheses: hκ* are verbatim the unit characterization in ringedToposDerivedPushforwardComposition, which pins each κ uniquely; composites use f.modules ⋙ g.modules like the dependency; universes Type u / CommRingCat.{u} match the dependency, w free; only I,J,K,T assumed K-injective, no preservation assumption. Checked: u equations via kInjectiveResolutionHomTarget and kInjectiveHomotopyImage; the 7 coordinates a,v,b,s,m,r,d against proof step 4 in ≫ order (exist because all units used are at K-injective objects); 4 factor formulas and the α/β paths in common s,d coordinates; t-change and simultaneous j,k-change transitions computed by hand equal the canonical ones. Predicate body is an explicit conjunction, no hollow clause. Edge cases I=0, empty sites, zero rings, identities, unbounded covered. Advisories: u uniqueness taken from the Qh equation alone (stronger than the node, true via the K-injective Hom bijection); three proof-only imports. No file changed, so no compile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261021T134556-L-1374573",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
