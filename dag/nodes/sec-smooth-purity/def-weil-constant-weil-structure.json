@@ -46,8 +46,16 @@
    "elementary": true
   },
   {
-   "text": "The regular integral representative is the single complex in degree zero. Its good-complex theorem remains open, with the complete argument in its Lean docstring. The normalized strict chain unit and its quasi-isomorphism theorem also remain open as the original named theorems; their finite-generator and Roos arguments are unchanged.",
-   "uses": [],
+   "text": "The regular integral representative is the single complex in degree zero. In the independent-coefficient monoidal structure, its tensor on complexes is naturally isomorphic to the identity by the right unitor, so it preserves acyclicity. Its degree-zero term is the flat tensor unit; the other terms are zero and flat. The comparison between categorical sheaf tensor and site tensor transfers exactness to IsFlatOnSite. Construct the normalized strict chain unit by applying the actual finite reduction maps to the tensor sections 1 tensor 1, and then the actual pullback adjunction unit. Naturality gives compatible levels, so their product is killed by 1-shift; mappingCocone.lift with zero shifted component gives the chain map. Morphisms out of the regular single complex are determined by the section 1 at a terminal object. After base change this terminal object is still terminal, so the prescribed generators and the zero shifted component determine the map uniquely. At finite level, multiplication identifies scalar extension of the regular module with the finite regular module. The pullback-of-unit map is invertible because pro-etale base change along an isomorphism is a final equivalence; its adjunction unit takes 1 to the normalized generator. These identifications carry the level maps to the actual coefficient projections, and their epimorphy forces compatibility with transitions. The quotient module tower has the completed regular module as its limit, by evaluation and reflection of limits. Its projections are locally surjective, lifting local quotient sections from the valuation ring. The epimorphic-tower theorem makes 1-shift epic, and the generic kernel-fork calculation makes the normalized mapping-cocone lift a quasi-isomorphism. Uniqueness identifies it with the specified chain unit.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-weil-completed-integral-coefficients",
+    "lem-pur-integral-operations-well-defined",
+    "def-sf-strict-roos-functor",
+    "det-pe-milnor-epimorphic"
+   ],
    "elementary": false
   },
   {
@@ -74,13 +82,20 @@
  ],
  "proof_deps": [
   "lem-weil-proetale-isomorphism-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-integral-operations-well-defined",
+  "def-sf-strict-roos-functor",
+  "det-pe-milnor-epimorphic",
   "def-weil-constructible-heart",
   "def-weil-weil-sheaf-complex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
-  "place": "Coefficient paragraph, order 1510; six direct Lean proofs from the existing constant-comparison, site-equivalence, single-complex and fixed-pair APIs; three original obligations remain."
+  "place": "Coefficient paragraph, order 1510; the six existing proofs are retained. The three original obligations are proved: regular K-flatness, unique normalized strict chain unit, and its quasi-isomorphism via the actual finite coefficient tower and epimorphic Roos exactness."
  },
  "mathlib_searches": [
   {
@@ -168,13 +183,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Z6",
+  "group": "F2",
   "result": "pass",
-  "landing": "20261019T034412-L-429282",
-  "kind": "proof",
+  "landing": "20261021T203448-L-3769261",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
