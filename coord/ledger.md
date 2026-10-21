@@ -22530,3 +22530,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:28 L: merged deliver/Q75/lem-dl-a1-galois-prime-residue-lifting (reviewer PASS; first push; new nodes: 2)
 - 13:28 L: returned deliver/NI/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: A7/B10: superseded by the Lean closure that is live. On base be1f83d and in clones/live and side-live, the item is split)
 - 13:28 L: returned deliver/NI/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: A7/B10: superseded by the Lean closure that is live. On base be1f83d and in clones/live and side-live, the item is split)
+- 13:28 L: returned deliver/NE/lem-sfb-finite-free-scalar-coordinates (reviewer RETURN: A6/A7/B10/G4, superseded. The mathematics is sound and I read it in full. (1) Supersession: the re-split note coord/repa)
