@@ -1,0 +1,119 @@
+{
+ "id": "def-sfb-integral-lattice-pairs",
+ "kind": "definition",
+ "title": "Integral lattice pairs, embedded images, class presentations and matrix cosets",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], with its small pro-étale site [def-weil-pbc-proetale-site]. Let $R,S$ be sheaves of commutative rings on this site, $a:R\\to S$ a ring-sheaf morphism, and $L$ a sheaf of $S$-modules [def-weil-sheaf-of-modules-category]. For $U$ in the site, write $a_U:R|_U\\to S|_U$ for restriction to the slice site. An integral lattice pair over $U$ consists of a finite locally free $R|_U$-module $M$ (locally free with finite, possibly varying rank, including zero) and an isomorphism $\\alpha:S|_U\\otimes_{R|_U}M\\xrightarrow{\\sim}L|_U$, where scalar extension is the sheafified tensor product [def-pur-sheaf-tensor-product]. Two pairs $P,Q$ are equivalent when there exists an $R|_U$-module isomorphism $e:M_P\\xrightarrow{\\sim}M_Q$ with $\\alpha_Q\\circ(S|_U\\otimes e)=\\alpha_P$. For a test object $T$ of the slice, define the image of $P$ to be the range in $(L|_U)(T)$ of $m\\mapsto\\alpha_P(\\eta_T(1\\otimes m))$, where $\\eta$ is the module sheafification unit [def-weil-presheaf-modules-sheafification]. Given a sheaf of sets $F$ and maps $c_U$ from pairs over $U$ to $F(U)$, say that $(F,c)$ is a lattice-class presentation if (i) every $c_U$ is surjective, (ii) $c_U(P)=c_U(Q)$ if and only if $P,Q$ are equivalent, and (iii) for every site morphism $f:V\\to U$ and pairs $P$ over $U$, $Q$ over $V$, the equality $F(f)c_U(P)=c_V(Q)$ holds if and only if, on every test object $T$ of the slice over $V$, the image of $P$ on the composed object $T\\to V\\to U$ equals the image of $Q$ on $T$. For a field $K$, a subring $A\\subseteq K$ and $n\\in\\mathbf N$, define the integral matrix subgroup $H$ to be the image of $\\mathrm{GL}_n(A)\\to\\mathrm{GL}_n(K)$ induced by the inclusion, and define the integral matrix coset set to be $\\mathrm{GL}_n(K)/H$, consisting of cosets $gH$ (orbits of right multiplication). With $X:\\mathrm{Scheme}_u$, the ring and module section carriers lie in $\\mathrm{Type}_{u+1}$ and $F$ takes values in $\\mathrm{Type}_{u+2}$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(6), proof, pp. 59--60: the lattice functor, rationalization-compatible pairs, embedded images and GL_n(E)/GL_n(O_E); the generic ring-sheaf encoding is used by the blueprint lattice-scheme statement"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IntegralLatticePair|IsLatticeClassPresentation|integralMatrixSubgroup|integralMatrixCosets|latticeScalarMap",
+   "results": "OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib definition; reuse published Sheaf.Paper.LatticeSheafBasic definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral lattice pairs consisting of a finite locally free sheaf and a scalar extension isomorphism, embedded images and intertwining equivalence",
+   "results": "OK 8 hit(s): Representation.IsIntertwiningMap.mk, LinearMap.extendScalarsOfIsLocalizationEquiv, LinearEquiv.extendScalarsOfIsLocalizationEquiv, IntermediateField.extendScalars.orderIso, RootPairing.restrictScalars_pairing, Representation.IntertwiningMap.ext_iff, Module.FinitePresentation.linearEquivMapExtendScalars, Representation.IntertwiningMap.ext",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib definition; reuse published Sheaf.Paper.LatticeSheafBasic definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral lattice pairs, their embedded image, and a sheaf presentation by equivalence classes of such pairs",
+   "results": "OK 8 hit(s): SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation, SheafOfModules.Presentation.mapGenerators, SheafOfModules.Presentation.map_relations_I, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.Presentation.mapRelations, SheafOfModules.Presentation.generators, SheafOfModules.presentationOfIsCokernelFree",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib definition; reuse published Sheaf.Paper.LatticeSheafBasic definitions."
+  },
+  {
+   "tool": "rg",
+   "query": "IntegralLatticePair|IsLatticeClassPresentation|integralMatrixSubgroup|integralMatrixCosets|latticeScalarMap in lean/WeilConjectures and lean/Sheaf",
+   "results": "No declaration in WeilConjectures. All seven exact definitions occur in Sheaf/Paper/LatticeSheafBasic.lean, lines 76-232; other Sheaf modules are consumers. Full signatures, bodies and docstrings read.",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions; introduce no Lean declaration."
+  },
+  {
+   "tool": "DAG search and blueprint_refs.py",
+   "query": "rg -l 'IntegralLatticePair|IsLatticeClassPresentation|integralMatrixCosets|latticeScalarMap' dag/nodes; inspect definition-node lean records; blueprint_refs.py search 'lattice pair'; blueprint_refs.py search 'integral lattice'",
+   "results": "The declaration-record scan finds no definition node owning these seven names; their current owner is the theorem node lem-weil-pbc-lattice-pair-image-classification. The first blueprint search has 0 matches; the second has 7 unrelated blueprint nodes. def-sfb-continuous-lattice-coefficients owns only coefficient constructions.",
+   "date": "2026-10-21",
+   "verdict": "Add an existing:true definition node as required by immutable-head 81e6cb0c0b67 H2."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-lem-stratified-lattice-scheme",
+  "date": "2026-10-21",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-stratified-lattice-scheme",
+   "place": "Lattice-scheme statement: lattice pairs, their embedded images and restriction-compatible class presentation; clause (1) matrix cosets",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-stratified-lattice",
+ "lean": {
+  "module": "Sheaf.Paper.LatticeSheafBasic",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralLatticePair",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.latticeScalarMap",
+   "AlgebraicGeometry.ProEtale.IntegralLatticePair",
+   "AlgebraicGeometry.ProEtale.IntegralLatticePair.Equivalent",
+   "AlgebraicGeometry.ProEtale.IntegralLatticePair.image",
+   "AlgebraicGeometry.ProEtale.IsLatticeClassPresentation",
+   "AlgebraicGeometry.ProEtale.integralMatrixSubgroup",
+   "AlgebraicGeometry.ProEtale.integralMatrixCosets"
+  ],
+  "statement": "structure IntegralLatticePair {X : Scheme.{u}}\n    {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}} (a : R ⟶ S)\n    (L : SheafOfModules.{u + 1}\n      ((sheafCompose _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)) (U : X.ProEt)",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Ownership record for seven existing real-data definitions in the published module. These notions were listed only under a theorem node; def-sfb-continuous-lattice-coefficients owns the separate coefficient sheaves. No theorem result is needed to form these definitions, and no definition or Lean file is introduced or modified."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a1cbd9cd",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a1cbd9cd",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery of the 81e6cb0c0b67 H2 RETURN. The Lean module is byte-identical (sha256 68e87efa…), and the only item change is the stmt_dep swap from lem-weil-pbc-lattice-pair-image-classification to the new def-sfb-integral-lattice-pairs. The new existing:true definition node owns latticeScalarMap, IntegralLatticePair, .Equivalent, .image, IsLatticeClassPresentation, integralMatrixSubgroup and integralMatrixCosets in Sheaf.Paper.LatticeSheafBasic. All seven are plain real-data declarations. The lean.statement matches the structure header verbatim, the node text matches the bodies (pairs, intertwining equivalence, image, the three presentation clauses, GL_n(K)/H cosets, universes), the source is BS 6.8.4(6), and the stmt_deps exist live. No live definition node owns these declarations, so the record is not a duplicate and overwrites nothing. The item is not dropped and not landed live. The mathematics was re-confirmed: actual E/O_E condensed rings, qcqs, rank-r covering, presentation-pinned F, (1) constantSheaf of cosets, (2) separated, étale and surjective Q with a natural Yoneda iso, (3) a universal pair classifying the identity, and the edge cases r=0, empty X and empty V. No file changed, so nothing compiled."
+ }
+}

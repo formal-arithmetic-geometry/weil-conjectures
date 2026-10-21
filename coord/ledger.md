@@ -23088,3 +23088,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:49 L: merged deliver/NZ/lem-sfb-snc-tame-finite-fibre-classification (reviewer FIX; after a return; new nodes: 1)
 - 16:49 L: merged deliver/NR/lem-sfb-complete-group-torsor-monodromy (stage 2; reviewer PASS; parallel immutable checks)
 - 16:50 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 16:51 L: merged deliver/NB/det-lem-stratified-lattice-scheme (stage 2; reviewer PASS; parallel immutable checks)
