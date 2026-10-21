@@ -20032,3 +20032,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:52 L: merged deliver/Q58/sk-def-sfb-coefficient-comparisons (stage 2; reviewer PASS; parallel immutable checks)
 - 03:52 L: merged deliver/N7/lem-pe-roos-cone-calculus (stage 2; reviewer FIX; parallel immutable checks)
 - 03:52 L: merged deliver/Q15/lem-sfb-finite-proper-classical-coproducts (stage 2; reviewer PASS; parallel immutable checks)
+- 03:52 L: returned deliver/Q60/lem-sfb-locally-free-derived-scalars (reviewer RETURN: L: independent stage-2 immutable head b79577c2e6f4: H2 + theorem-stmt_dep rule: delivery adds existing nodes lem-pur-der)
