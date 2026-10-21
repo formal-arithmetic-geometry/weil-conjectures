@@ -18,9 +18,102 @@
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an internal $S$-module $N$, restriction gives the action $R\\otimes N\\xrightarrow{a\\otimes1}S\\otimes N\\to N$. Under the section reconstruction equivalence this acts by $r\\cdot n=a_U(r)n$ over every $U$. This is exactly sectionwise restriction. Both functors leave the underlying sheaf and every morphism unchanged; therefore their identity components give a natural identification $E_R\\operatorname{Res}_a\\cong\\operatorname{Res}_{a_{\\rm sec}}E_S$.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sfb-change-of-scalars",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; sectionwise action calculation for scalar restriction"
+   }
+  },
+  {
+   "text": "Regard $S$ as an internal $R$-module using $a$. Apply [lem-pe-internal-section-tensor-comparison] to the two $R$-modules $S$ and $M$. The underlying relative tensor of the internal scalar extension is the coequalizer of the relations $(s\\,a(r))\\otimes m=s\\otimes(rm)$, by [sk-def-sfb-change-of-scalars]. The cited comparison identifies this with the sheafification of $U\\mapsto S_{\\rm sec}(U)\\otimes_{R_{\\rm sec}(U)}E_R(M)(U)$ and sends $s\\otimes m$ to the same pure tensor. Its $S$-linearity follows from $t(s\\otimes m)=(ts)\\otimes m$ on both sides; the inverse comparison satisfies the same equation. Thus it is an isomorphism of $S_{\\rm sec}$-module sheaves $E_S\\operatorname{Ext}_a(M)\\cong\\operatorname{Ext}_{a_{\\rm sec}}E_R(M)$. Naturality follows because the map induced by $h:M\\to M'$ sends $s\\otimes m$ to $s\\otimes h(m)$ on both sides. These checks on pure tensors determine the sheaf morphisms by the balanced-bilinear universal property [lem-pc-sites-sheaf-tensor-bilinear-universal].",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "sk-def-sfb-change-of-scalars",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property following Tag 0GMW"
+   }
+  },
+  {
+   "text": "For an $S$-linear $f:S\\otimes_RM\\to N$, its adjoint is $m\\mapsto f(1\\otimes m)$. Conversely, an $R$-linear $g:M\\to\\operatorname{Res}_aN$ gives $s\\otimes m\\mapsto s\\,g(m)$: it is balanced since $s\\,a(r)g(m)=s\\,g(rm)$. The coequalizer and sheaf tensor universal properties make these morphisms, and $f(s\\otimes m)=s f(1\\otimes m)$ and $1g(m)=g(m)$ prove the formulas inverse. The comparisons in steps 1 and 2 leave these formulas unchanged, so they identify the specified Hom adjunctions. In particular the identity on the extension transposes to $m\\mapsto1\\otimes m$, and the identity on the restriction transposes to $s\\otimes n\\mapsto sn$. This identifies the units and counits, with their naturality, rather than merely asserting that two left adjoints are isomorphic.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, balanced-bilinear universal property; explicit scalar-adjunction transpose"
+   }
+  },
+  {
+   "text": "For $T=R,S$, [lem-pe-internal-section-tensor-comparison] states that $E_T$ is exact, identifies direct-sum total tensor complexes, and preserves and reflects flat objects, acyclicity and K-flatness. Exactness implies that the termwise equivalence and its inverse carry quasi-isomorphisms to quasi-isomorphisms. Localizing these two functors and their inverse natural isomorphisms gives mutually inverse equivalences of the ordinary unbounded derived categories [def-weil-abstract-derived-category]. Step 1 holds termwise and hence after localization. Internal scalar restriction is exact by [sk-def-sfb-change-of-scalars], so its derived functor is termwise restriction; its sectionwise counterpart is exact as well, since step 1 conjugates it by exact equivalences. This proves the required comparison of exact derived restrictions.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "def-weil-abstract-derived-category",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; passage to localization is the explicit agent argument"
+   }
+  },
+  {
+   "text": "For a complex $K$ of internal $R$-modules, apply [lem-pc-kflat-resolution] on the ringed site $(C,R_{\\rm sec})$ to $E_RK$. Pull the resulting flat-term K-flat resolution back along $E_R$; step 4 makes it a flat-term K-flat resolution $q:P\\to K$. The site and universe hypotheses in the statement are exactly those needed for these module sheaves and their sheafification. By [lem-pur-derived-change-of-rings], sectionwise scalar extension on these representatives inverts quasi-isomorphisms and computes its universal left derived functor. The termwise comparison of step 2 therefore implies the same inversion property internally. Conjugating the sectionwise universal left derived pair by the derived equivalences of step 4 gives the universal left derived pair for internal extension: its factorization property is unchanged under equivalences. This is the K-flat derived scalar extension denoted in [sk-def-sfb-derived-extension-of-scalars]. Its comparison at $K$ is represented by the chain isomorphism $E_S(S\\otimes_RP)\\cong S_{\\rm sec}\\otimes_{R_{\\rm sec}}E_RP$ of step 2. The canonical independence of the K-flat resolution in [lem-pur-derived-change-of-rings] makes this natural in the derived object. Thus on the flat-term K-flat representatives required in the statement it is exactly the localization of the displayed termwise map. No tensor functor on arbitrary complexes is claimed to preserve quasi-isomorphisms.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "sk-def-sfb-derived-extension-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 06YY, lemma-derived-base-change, specialized to the identity topos with ring map a_sec"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-sheaf-ring-derived-hom-comparison] to the sheafified extension and exact restriction for $a_{\\rm sec}$, with the ordinary adjunction of step 3 and the universal left derived pair of step 5. Its normalized transpose formula determines the specified derived adjunction. More explicitly, for $q:P\\to K$ as in step 5 the derived unit is represented by $K\\xleftarrow{q}P\\to\\operatorname{Res}_a(S\\otimes_RP)$, whose second arrow is $p\\mapsto1\\otimes p$. For an $S$-complex $N$ choose a flat-term K-flat resolution $q:P\\to\\operatorname{Res}_aN$; the derived counit is represented by $S\\otimes_RP\\to N$, $s\\otimes p\\mapsto s\\,q(p)$. These are the normalized transposes of the identity morphisms: after the invertible derived comparison at $P$, the cited formula reduces them respectively to the ordinary unit and the ordinary transpose of $q$. Steps 1--3 and 5 identify each of these chain maps and each resolution arrow with its sectionwise version. Thus the derived comparisons identify both specified derived units and counits, hence the adjunctions. This argument uses neither flatness of $a$ nor preservation of K-flatness by scalar restriction.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-hom-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors, with the normalized Hom formula of the cited node; sites-cohomology.tex Tag 07A6, lemma-adjoint"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-change-of-scalars",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "lem-pur-sheaf-ring-derived-hom-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(1), first paragraph; internal-to-sectionwise scalar identification expanded using Stacks 03EK, 0GMW, 06YS, 06YY and 09T5"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +156,52 @@
    "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean",
    "date": "2026-10-21",
    "verdict": "no match: hits give sectionwise scalar restriction, ordinary module scalar adjunctions, sheafification or site-equivalence pushforwards; none compares internal ring-object module scalar adjunctions with sectionwise ones and their K-flat derived models"
+  },
+  {
+   "tool": "grep",
+   "query": "internal.*module|module.*internal|equivalence",
+   "results": "6 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; subdirectory Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected hits concern ordinary ModuleCat scalar adjunctions, module sheafification, site-equivalence pushforward, or sectionwise scalar restriction, not the internal-to-sectionwise scalar adjunction with K-flat derived normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The internal module and sectionwise module sheaf equivalence preserves scalar extension restriction units counits and K-flat derived functors",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.ExtendRestrictScalarsAdj.counit_app, SheafOfModules.restrictScalars, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, PresheafOfModules.unitHomEquiv, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected hits concern ordinary ModuleCat scalar adjunctions, module sheafification, site-equivalence pushforward, or sectionwise scalar restriction, not the internal-to-sectionwise scalar adjunction with K-flat derived normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, Mod",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected hits concern ordinary ModuleCat scalar adjunctions, module sheafification, site-equivalence pushforward, or sectionwise scalar restriction, not the internal-to-sectionwise scalar adjunction with K-flat derived normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between internal modules in abelian sheaves and sectionwise ring-sheaf modules intertwines extension and restriction of scalars and their derived adjunctions",
+   "results": "8 hits: PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, SheafOfModules.unitHomEquiv_comp_apply, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.sheafificationAdjunction, SheafOfModules.unitHomEquiv, ModuleCat.ExtendRestrictScalarsAdj.homEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected hits concern ordinary ModuleCat scalar adjunctions, module sheafification, site-equivalence pushforward, or sectionwise scalar restriction, not the internal-to-sectionwise scalar adjunction with K-flat derived normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|extendScalars|[Aa]djunction",
+   "results": "5 hits: 16, 36, 39, 41, 43; subdirectory Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected hits concern ordinary ModuleCat scalar adjunctions, module sheafification, site-equivalence pushforward, or sectionwise scalar restriction, not the internal-to-sectionwise scalar adjunction with K-flat derived normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module equivalence from internal ring objects in sheaves to sheaves of modules commutes with sheafified balanced tensor and transports the extension restriction scalar adjunction unit and counit",
+   "results": "8 hits: PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm",
+   "date": "2026-10-21",
+   "verdict": "no match: the inspected hits concern ordinary ModuleCat scalar adjunctions, module sheafification, site-equivalence pushforward, or sectionwise scalar restriction, not the internal-to-sectionwise scalar adjunction with K-flat derived normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-scalar-six-pullback",
@@ -83,5 +218,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-internal-section-scalar-adjunction",
+  "worker": "stage1",
+  "summary": "Kept the statement and its hypotheses. Reused existing general-site tensor/K-flat transport, ringed-site K-flat resolutions and normalized derived scalar adjunction. Wrote the generator, balancing, S-linearity, Hom transpose, unit and counit calculations explicitly. No new nodes and no Lean attachment.",
+  "blueprint": "Realizes det-prop-scalar-six-pullback proof (1), first paragraph, by making its passage from internal module objects to sectionwise scalar operations precise, including the chosen ordinary and derived adjunctions. This is below the scalar-six unit route and does not alter that route.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Steps 2 and 4 use its same-ring tensor comparison and its exactness, flatness and K-flatness transport; the scalar-six unit assumes ring-sheaf operations without supplying this comparison."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Steps 2 and 3 use the general-site balanced-bilinear universal property to check S-linearity and the explicit scalar adjunction; this is a generic sheaf-tensor tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Step 5 needs flat-term unbounded K-flat representatives on an arbitrary ringed site; the scalar-six unit gives no replacement theorem."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Step 5 uses K-flat invariance and the universal derived scalar extension on a general ringed site, independently of geometric coefficient comparisons."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-hom-comparison",
+    "why": "Step 6 needs the specified derived Hom transpose normalization for an arbitrary ring-sheaf scalar map, rather than mere existence of an adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-hom-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q65-367305dab",
+  "group": "Q65",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-367305dab (reviewer sub-agent of L); spot-checked: First split; statement byte-identical to live (live unsplit), no repair note, not dropped, no new nodes. Read 03EK/0GMW in sites-modules.tex and blueprint det-prop-scalar-six-pullback proof (1). Step 1 (Res identity on underlying sheaves, r·n=a_U(r)n): elementary, correct. Step 2: lem-pe-internal-section-tensor-comparison is applied to Res_a S and M; the coequalizers agree because S is commutative; S-linearity and naturality are checked on pure tensors via lem-pc-sites-sheaf-tensor-bilinear-universal. Step 3: explicit Hom transposes, balancing and unit/counit; elementary. Step 4: exact equivalences localize to equivalences; Res is exact. Step 5: flat-term K-flat resolutions on (C,R_sec) via lem-pc-kflat-resolution, pulled back via preservation/reflection of K-flatness; universal derived functor via lem-pur-derived-change-of-rings, conjugated to the internal side; no functorial-flat-resolution hypothesis assumed. Step 6: lem-pur-sheaf-ring-derived-hom-comparison inputs supplied; the unit and counit roofs were checked. Edge cases a=id, S=0 and Z/4→F_2 (no flatness) checked. Duplicate search over section-ring/sectionwise scalar nodes (internal-module-operations-transport, internal-section-derived-tensor-comparison, module-object-ringed-site-derived-comparison, extend-scalars-kflat, det-sp-scalar-extension-functor): none duplicates. Five generic tool_uses accepted (pe tensor comparison, pc bilinear universal, pc kflat resolution, pur derived change of rings, pur derived hom comparison). Advisory: commutativity of S is implicit (E_S requires it) rather than stated."
  }
 }
