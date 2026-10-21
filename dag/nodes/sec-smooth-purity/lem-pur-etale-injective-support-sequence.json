@@ -11,11 +11,139 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-pbc-derived-categories",
   "def-pur-kinjective-complex",
-  "lem-exc-closed-support-triangle"
+  "lem-exc-closed-support-triangle",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-inverse-image",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-exact-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $G(M)=\\ker(\\eta_{j,M})$, so $H_A(M)=i^*G(M)$. Module kernels are sectionwise and module cokernels are the abelian ones [def-weil-sheaf-of-modules-category]; module inverse images, direct images and their units have the underlying abelian functors and units [prop-weil-pbc-inverse-image-modules-exact], [def-weil-pbc-direct-image]. So $G(M)$ is an $A$-submodule, and the isomorphism $q_M:G(M)\\xrightarrow{\\sim}i_*i^*G(M)=i_*H_A(M)$ of [lem-pur-etale-supported-kernel-adjunction], the closed unit at $G(M)$, is $A$-linear, as is its inverse. Module $i_*$ is exact: forgetting scalars is exact, faithful and reflects exactness, it commutes with $i_*$, and abelian $i_*$ is exact by [lem-pur-etale-supported-kernel-adjunction]. Next $j^*i_*N=0$: for $V$ etale over $U$, $(j^*i_*N)(V)=N(V\\times_PZ)=N(\\emptyset)=0$ by [lem-weil-pbc-etale-inverse-image-restriction] and [def-weil-pbc-direct-image]. For a module map $f:i_*N\\to M$, naturality of the unit gives $\\eta_{j,M}f=j_*j^*(f)\\,\\eta_{j,i_*N}=0$, so $f$ factors uniquely through $G(M)$. Abelian $i_*$ is fully faithful [lem-kun-04ca], so $q_M$ composed with this factorization is $i_*g$ for a unique $g:N\\to H_A(M)$. For $a\\in A$, $i_*(g\\mu_a)=i_*(\\mu_ag)$ and faithfulness make $g$ commute with every $\\mu_a$; since sections of $A_Z$ are locally constant, $g$ is $A$-linear. Thus $g\\mapsto\\iota_M q_M^{-1}\\,i_*g$, with $\\iota_M:G(M)\\hookrightarrow M$, is a bijection $\\operatorname{Hom}(N,H_A(M))\\cong\\operatorname{Hom}(i_*N,M)$ of module maps. It is natural in $N$, and natural in $M$ by naturality of $q$ and of the kernel. So $i_*\\dashv H_A$ on module sheaves, and at $g=\\mathrm{id}$ its counit is $\\iota_Mq_M^{-1}$, the support inclusion.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-kun-04ca"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04CA (proposition-closed-immersion-pushforward), 09XQ (lemma-sections-with-support-acyclic) and its proof's Hom identification, made module-linear"
+   }
+  },
+  {
+   "text": "For each etale object $V\\to P$, the open immersion $V\\times_PU\\to V$ is a monomorphism in $P_{\\mathrm{et}}$. The direct-image formula of [def-weil-pbc-direct-image] and the restriction/unit formula of [lem-weil-pbc-etale-inverse-image-restriction] identify $\\eta_{j,I^r}(V)$ with $I^r(V)\\to I^r(V\\times_PU)$. These formulas hold on constant-$A$ modules: the actions and the adjunction unit have the same underlying formulas by [prop-weil-pbc-inverse-image-modules-exact]. Apply [lem-pur-ringed-site-injective-mono-restriction] on the ringed site $(P_{\\mathrm{et}},A_P)$ to the injective module sheaf $I^r$. This map is surjective. Thus $0\\to G(I^r)\\to I^r\\to j_*j^*I^r\\to0$ is exact in every degree. Naturality of the unit makes the differentials and every chain map preserve the kernels. Substitute Step 1's natural identification $G\\cong i_*H_A$ and apply [lem-weil-pbc-cochain-complexes-degreewise-exact] to obtain the asserted short exact sequence of complexes and its naturality.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-pur-ringed-site-injective-mono-restriction",
+    "lem-weil-pbc-cochain-complexes-degreewise-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X (lemma-restriction-along-monomorphism-surjective); etale-cohomology.tex Tag 0A45 (lemma-cohomology-with-support-triangle), proof"
+   }
+  },
+  {
+   "text": "For $W=P,U,Z$, the category $\\operatorname{Mod}(A_W)$ is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck]. Hence [lem-pur-kinjective-degreewise-existence] supplies functorial K-injective resolutions. An additive functor on sheaves acts on complexes and homotopies termwise, and preserves mapping cones and shifts. Indeed additivity identifies $F(Y^n\\oplus X^{n+1})$ with $F(Y^n)\\oplus F(X^{n+1})$ and carries the cone differential matrix to the corresponding matrix for $F(f)$; it also carries $-d$ to $-F(d)$. Thus it carries cone triangles to cone triangles, so its homotopy-category functor followed by derived localization is exact. Therefore [lem-weil-pbc-kinjective-total-derived] applies to $H_A$ and to $j_*$ and computes their total unbounded right derived functors on K-injective complexes. In particular $H_A(I)$ computes $RH_A(L)$; no bounded-below replacement of $I$ has been made.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K (lemma-enough-K-injectives-implies), 070Y (lemma-K-injective-defined); injectives.tex Tag 079P"
+   }
+  },
+  {
+   "text": "Because $i_*$ is exact and $i_*\\dashv H_A$ by Step 1, [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $H_A(I)$ K-injective. For a complex $N$ on $Z$ the natural bijections of [lem-weil-pbc-kinjective-hom-derived] and [lem-weil-pbc-termwise-adjunction-homotopy] give\n$$\\operatorname{Hom}_{D(P,A)}(i_*N,L)\\cong\\operatorname{Hom}_{K(P,A)}(i_*N,I)\\cong\\operatorname{Hom}_{K(Z,A)}(N,H_A(I))\\cong\\operatorname{Hom}_{D(Z,A)}(N,H_A(I)).$$\nExactness of $i_*$ allows its termwise application on the derived category, as in the statement. Thus $RH_A$ is its right adjoint, and the derived transpose of the identity of $H_A(I)$ is the localized support inclusion from Step 1. Compare this adjunction with the ordinary right adjoint $Ri_A^!$ of [lem-exc-closed-ambient]. By [det-sp-unique-right-adjoint] there is a unique natural counit-compatible isomorphism $RH_A\\cong Ri_A^!$. This proves the first-term computation with its specified counit, not just an isomorphism of objects.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-exc-closed-ambient",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives), Tag 070I (lemma-K-injective); etale-cohomology.tex Tag 09XQ support adjunction"
+   }
+  },
+  {
+   "text": "The site equivalence $P_{\\mathrm{et}}/U\\simeq U_{\\mathrm{et}}$ of [lem-weil-pbc-etale-site-localization-open] and the restriction formula of [lem-weil-pbc-etale-inverse-image-restriction] identify $j^*$ with localized restriction. The same equivalence applies to constant-$A$ modules: it transports the constant ring sheaf and its sectionwise actions. Hence [lem-pur-kinjective-restrict-localized] implies that $j^*I$ is K-injective, and Step 3 computes $Rj_*j^*L$ as $j_*j^*I$. Furthermore $j^*$ is exact and $j^*\\dashv j_*$ by [prop-weil-pbc-inverse-image-modules-exact], so [lem-weil-pbc-right-adjoint-preserves-kinjective] makes $j_*j^*I$ K-injective. For any K-injective $J$ on $U$, those same facts and the Hom bijections of [lem-weil-pbc-kinjective-hom-derived] and [lem-weil-pbc-termwise-adjunction-homotopy] give $\\operatorname{Hom}_D(j^*N,QJ)\\cong\\operatorname{Hom}_K(j^*N,J)\\cong\\operatorname{Hom}_K(N,j_*J)\\cong\\operatorname{Hom}_D(QN,Qj_*J)$. This is the derived open adjunction. In particular, the unit at $L=QI$ is represented by $\\eta_{j,I}:I\\to j_*j^*I$: its transpose is the identity of $j^*I$. Thus the third-term comparison also identifies the second arrow with the actual derived unit.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-pur-kinjective-restrict-localized",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI (lemma-restrict-K-injective-to-open); derived.tex Tags 08BJ, 070I"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to Step 2's short exact sequence. It gives a distinguished triangle with the support inclusion and open unit as its first two arrows. Its connecting morphism is the canonical short-exact-sequence boundary: if $a:i_*H_A(I)\\to I$ is the inclusion and $q:\\operatorname{Cone}(a)\\to j_*j^*I$ the quotient map, then $\\delta=(-p)q^{-1}$ in the cone convention of that cited lemma. For a chain map $I\\to I'$, Step 2 gives the three maps of short exact sequences. Naturality in the cited lemma states exactly\n$$ (i_*H_A(I\\to I'))[1]\\,\\delta_I=\\delta_{I'}\\,(j_*j^*(I\\to I')),$$\nso these maps give a morphism of the entire triangles, including the connecting arrows. Steps 4 and 5 identify the endpoints and the first two arrows with $i_*Ri_A^!L$, $Rj_*j^*L$, the counit, and the unit. This supplies a realization of the counit/unit support triangle specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), formula and naturality of the connecting arrow"
+   }
+  },
+  {
+   "text": "These comparisons are independent of the representative in the derived sense. By [lem-weil-pbc-kinjective-hom-derived], a derived morphism between two K-injective representatives is represented by a unique homotopy class of chain maps; a quasi-isomorphism between such representatives is a homotopy equivalence. All termwise additive functors used above preserve homotopies (apply the functor to $f-g=dh+hd$). Consequently the three components of the triangle map in Step 6 depend only on the derived morphism, and a comparison between representatives gives an isomorphism of triangles. The first component remains counit-compatible by [det-sp-unique-right-adjoint], and the second and third remain the identity/comparison and the derived open-unit comparison from Step 5. This proves derived naturality as well as naturality for the chain maps in the statement. At no point did the argument require an underlying abelian sheaf, or a module sheaf after scalar restriction, to be injective.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), resolution comparisons; Tag 0152 naturality as used in Step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-sheaf-of-modules-category",
+  "det-sp-unique-right-adjoint",
+  "lem-exc-closed-ambient",
+  "lem-kun-04ca",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 09XP, Tags 09XQ and 0A45: ordinary support adjunction and injective support sequence, extended explicitly to constant-ring modules and unbounded K-injectives using sites-cohomology.tex Tags 093X and 08FI and derived.tex Tags 08BJ, 070I, 070K, 0152"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +186,59 @@
    "results": "[grep] OK 23 hit(s); Mathlib/CategoryTheory/Sites/Equivalence.lean:307; Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean:115; Mathlib/CategoryTheory/Sites/Point/Basic.lean:244; Mathlib/CategoryTheory/Sites/Point/Basic.lean:259; Mathlib/CategoryTheory/Sites/Point/Basic.lean:261; Mathlib/CategoryTheory/Sites/LocallyBijective.lean:18; Mathlib/CategoryTheory/Sites/LocallyBijective.lean:104; Mathlib/CategoryTheory/Sites/LocallyBijective.lean:107; Mathlib/CategoryTheory/Sites/LocallyBijective.lean:115; Mathlib/CategoryTheory/Sites/LocallyBijective.lean:118; Mathlib/CategoryTheory/Sites/EpiMono.lean:40; Mathlib/CategoryTheory/Sites/EpiMono.lean:84; Mathlib/CategoryTheory/Sites/EpiMono.lean:85; Mathlib/CategoryTheory/Sites/EpiMono.lean:86; Mathlib/CategoryTheory/Sites/Point/Conservative.lean:225; Mathlib/CategoryTheory/Sites/LocallyInjective.lean:18; Mathlib/CategoryTheory/Sites/LocallyInjective.lean:214; Mathlib/CategoryTheory/Sites/LocallyInjective.lean:217; Mathlib/CategoryTheory/Sites/LocallyInjective.lean:220; Mathlib/CategoryTheory/Sites/LocallyInjective.lean:223; Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean:764; Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean:64; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:97",
    "date": "2026-10-21",
    "verdict": "no match: returned general algebra/category theory or unrelated geometry, not this etale/coefficient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A K injective complex of etale module sheaves computes the closed support right adjoint and its natural short exact localization triangle",
+   "results": "8 hits; CochainComplex.IsKInjective; localCohomology.diagram; CochainComplex.isKInjective_of_injective; CochainComplex.IsKInjective.rightOrthogonal; CochainComplex.cm5b.I_X; CochainComplex.isKInjective_of_injective_aux; CochainComplex.isKInjective_iff_rightOrthogonal; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-21",
+   "verdict": "no match: generic K-injectivity, module localization/support, or Zariski/topological sheaf adjunctions do not state the ordinary etale support sequence and its derived normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*(injective|kernel)|[Kk][Ii]njective.*[Ss]hort[Ee]xact",
+   "results": "0 hits; none; directory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: generic K-injectivity, module localization/support, or Zariski/topological sheaf adjunctions do not state the ordinary etale support sequence and its derived normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf, IsKInjective",
+   "results": "0 hits; none; loogle: unknown identifier 'Sheaf'",
+   "date": "2026-10-21",
+   "verdict": "unavailable: query identifier Sheaf was not recognized; retried with CategoryTheory.ShortComplex.ShortExact"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed support localization short exact sequence of injective etale module sheaves and derived exceptional inverse image",
+   "results": "8 hits; Module.support_of_exact; ModuleCat.localizedModule_functor_map_exact; IsLocalizedModule.map_injective_iff_localizedModuleMap_injective; AlgebraicGeometry.instIsGermInjectiveOfIsIntegral; exact_of_localized_span; AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet; Module.support_subset_of_injective; ModuleCat.Tilde.stalkIso",
+   "date": "2026-10-21",
+   "verdict": "no match: generic K-injectivity, module localization/support, or Zariski/topological sheaf adjunctions do not state the ordinary etale support sequence and its derived normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open closed decomposition the kernel of restriction of a sheaf complex computes the right adjoint to closed direct image",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; TopCat.Sheaf.instIsRightAdjointPushforward; TopCat.Sheaf.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; TopCat.Sheaf.instIsLeftAdjointPullback; AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app; instIsRightAdjointSheafSkyscraperSheafFunctorOfHasColimits",
+   "date": "2026-10-21",
+   "verdict": "no match: generic K-injectivity, module localization/support, or Zariski/topological sheaf adjunctions do not state the ordinary etale support sequence and its derived normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact",
+   "results": "12 hits; CategoryTheory.ShortComplex.ShortExact; CategoryTheory.ShortComplex.ShortExact.exact; CategoryTheory.ShortComplex.Splitting.shortExact; CategoryTheory.ShortComplex.ShortExact.op; CategoryTheory.ShortComplex.shortExact_iff_op; CategoryTheory.ShortComplex.ShortExact.epi_g; CategoryTheory.ShortComplex.ShortExact.mono_f; CategoryTheory.ShortComplex.shortExact_of_iso",
+   "date": "2026-10-21",
+   "verdict": "no match: generic K-injectivity, module localization/support, or Zariski/topological sheaf adjunctions do not state the ordinary etale support sequence and its derived normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|closedUpperShriek|supportLocalizationTriangle|supportsShortComplex",
+   "results": "0 hits; none",
+   "date": "2026-10-21",
+   "verdict": "no match: generic K-injectivity, module localization/support, or Zariski/topological sheaf adjunctions do not state the ordinary etale support sequence and its derived normalization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-coefficient-adjoint-comparisons",
@@ -82,5 +259,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-etale-injective-support-sequence",
+  "worker": "stage1",
+  "summary": "Retained the statement. Gave the ordinary etale constant-module support identification and counit, proved termwise surjectivity directly for module injectives, computed both derived endpoints with unbounded K-injectives, and used the canonical natural SES boundary. Reused existing nodes throughout; no new nodes and no scalar-forgetting injectivity assumption.",
+  "blueprint": "Finite-stage prerequisite of thm-pur-rational-and-qbar-purity and unit sk-thm-purity-transport Step 1: the exceptional adjunction compatibility needed for finite reductions. The inherited launcher seed has no blueprint ancestor (blueprint_refs.py ancestor reports None). The support-sequence argument follows the proof of blueprint lem-exc-closed-support-triangle rather than the pro-etale lem-pur-support-exact.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic ordinary etale fact (Stacks 04CA): abelian closed direct image is fully faithful; used only to build the module support adjunction of Step 1, not a replacement of a purity-transport unit step."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Ordinary etale supported-kernel identification, lifted to constant-module coefficients by the specified module inverse image; no pro-etale substitute in the transport unit."
+   },
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Preservation of K-injectivity under localized ringed-site restriction."
+   },
+   {
+    "node": "lem-pur-ringed-site-injective-mono-restriction",
+    "why": "Surjectivity of module-injective restriction along a monomorphism, independent of forgetting scalars."
+   },
+   {
+    "node": "lem-weil-pbc-cochain-complexes-degreewise-exact",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ordinary sheaf or homological-algebra tool used exactly as stated in the proof; it supplies a prerequisite for the finite-coefficient adjunction comparison, not a replacement of any step of the purity-transport unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-direct-image",
+  "def-weil-sheaf-of-modules-category",
+  "det-sp-unique-right-adjoint",
+  "lem-exc-closed-ambient",
+  "lem-kun-04ca",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "lem-weil-pbc-cochain-complexes-degreewise-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-e18d721a7",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-e18d721a7 (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes, statement byte-identical to the live base. I also read every cited statement and the Stacks sources 093X (sites-cohomology l.1962), 08FI (l.4314), 09XQ and its proof (etale-cohomology l.14023) and 0A45 with its proof (l.14072). Mechanical finding: Step 1 cited lem-per-etale-closed-sheaf-internal-adjunction, which is dropped (side-live route-pivot-dropped.txt line 1521, 2026-10-19 section). The delivery's note that only its exact-pushforward and support-adjunction clauses are used does not justify the citation: a reachable node may not cite a dropped id. It is a repairable citation fault, though. The item itself is not dropped, its citers (finite-coefficient-adjoint-comparisons, etale-kflat-support-comparison) are live, and it uses no Qbar_l, adic, middle t-structure, Gabber or alteration input. FIX: Step 1 is rewritten without the dropped node. Module i_* is exact by forgetting scalars (def-weil-sheaf-of-modules-category, def-weil-pbc-direct-image module clause) plus abelian exactness from lem-pur-etale-supported-kernel-adjunction. j^*i_*N=0 by direct computation of sections (N(∅)=0). Each module map i_*N→M factors uniquely through the supported kernel. Full faithfulness of abelian i_* (lem-kun-04ca, Stacks 04CA, live) plus faithfulness against μ_a then give the explicit bijection g↦ι q^{-1} i_*g. So the counit is the support inclusion, as the statement says; the original step could not get this formula from the cited abelian bijection, which states none. proof_deps is recomputed and tool_uses is updated (dropped entry removed, lem-kun-04ca added). The fixed 419-node closure contains no dropped id and no cycle. The remaining steps are correct: Step 2 uses Mod(A)-injectivity via 093X along the open monomorphism V×U→V, so rows are degreewise exact. Step 3 computes the total unbounded derived functors on K-injectives (070K). Steps 4–5 give K-injectivity by 08BJ, the derived adjunctions by the Hom chains, and the identification with lem-exc-closed-ambient's Ri^! via unique right adjoints. Step 6 is the 0152 triangle with natural δ, realizing lem-exc-closed-support-triangle. Step 7 is representative independence. Edge cases Z=∅, U=∅ and A=0 check. No duplicate: the pro-étale analogues have quasi-compact hypotheses, and the ordinary nodes are dropped or definitions only. No SGA. The generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }

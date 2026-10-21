@@ -20456,3 +20456,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:36 L: merged deliver/Q43/lem-sfb-square-zero-periodic-tensor (reviewer PASS; after a return; new nodes: 3)
 - 06:36 L: merged deliver/Q04/lem-pur-integral-coherence-tower (reviewer PASS; after a return; new nodes: 1)
 - 06:36 L: merged deliver/NE/lem-fix-compactification-completed-realization (reviewer PASS; first push; new nodes: 0); claim not held by NE: not your claim
+- 06:36 L: merged deliver/NU/lem-pur-etale-injective-support-sequence (reviewer FIX; first push; new nodes: 0)
