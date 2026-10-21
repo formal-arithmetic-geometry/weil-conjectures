@@ -10,26 +10,22 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply the upstream core-existence theorem at sigma and tau to obtain the henselian rings, separably closed residue fields, presentations of strictLocalization, and universal-homeomorphism residue maps. Derive s = t composed with g from h_iota by associativity and apply upstream core completion to these presentations. The canonical comparison smallStrictHenselizationColimitIso identifies the small coordinate-ring colimit with the large affine-neighbourhood colimit. Apply Spec to this isomorphism and compose the presentations with it. The final-functor colimit injection formula identifies the cone legs. Composing any leg with its affine neighbourhood structure map proves that the comparison carries strictHenselizationStructuralMap to strictLocalizationToBase. Rewrite the structural square and both residue factorizations using this equality and associativity, then assemble the original witnesses with the transported spectrum isomorphisms.",
+   "text": "Apply exists_compatibleStrictHenselizationCoreExistence to obtain A, B, their henselian structures, separably closed residue fields, spectrum presentations, universal-homeomorphism residue maps and residue factorizations. Associate h_iota after composition with nu to obtain s = t followed by g. Apply exists_compatibleStrictHenselizationCoreCompletion to these presentations, obtaining the local ring map and structural equality. Assemble the unchanged witnesses and these three equalities. This is the existing upstream proof on strictLocalization; the sole DAG parent already uses that presentation.",
    "uses": [
     "compatible-strict-henselization-core-existence",
-    "compatible-strict-henselization-core-completion",
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-strict-henselization-structural-map"
+    "compatible-strict-henselization-core-completion"
    ],
    "elementary": true
   }
  ],
  "proof_deps": [
   "compatible-strict-henselization-core-existence",
-  "compatible-strict-henselization-core-completion",
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-strict-henselization-structural-map"
+  "compatible-strict-henselization-core-completion"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 04HX, 03PS, 04GU and 04DY; F1 2026-10-20: upstream core theorems and canonical affine-colimit comparison, preserving the small-colimit statement"
+  "place": "Tags 04HX, 03PS, 04GU and 04DY; Y3 2026-10-21: retire the unused small-colimit duplicate and record the existing upstream assembly proof."
  },
  "mathlib_searches": [
   {
@@ -73,14 +69,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationCoreData",
-  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationCoreData.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationCoreData",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CompatibleStrictHenselizationCoreData.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_compatibleStrictHenselizationCoreData",
-  "statement": "theorem Etale.exists_compatibleStrictHenselizationCoreData\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (hσ : ∃ (s : S) (ψ : S.residueField s ⟶ .of k),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ S.fromSpecResidueField s = σ)\n    (hτ : ∃ (t : T) (ψ : T.residueField t ⟶ .of k'),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ T.fromSpecResidueField t = τ)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k')) :\n    let s := ν ≫ ι ≫ σ\n    let t := ν ≫ τ\n    ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B),\n      letI := cA\n      letI := cB\n      ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B),\n        letI := hA\n        letI := hB\n        ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A))\n          (sB : IsSepClosed (IsLocalRing.ResidueField B)),\n          letI := sA\n          letI := sB\n          ∃ (φ : A →+* B) (hφ : IsLocalHom φ),\n            letI := hφ\n            ∃ (eA : Spec (.of A) ≅ strictHenselizationScheme s)\n              (eB : Spec (.of B) ≅ strictHenselizationScheme t)\n              (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n              (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))),\n              IsUniversalHomeomorphism ρA ∧ IsUniversalHomeomorphism ρB ∧\n              Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n                strictHenselizationStructuralMap s =\n                eB.hom ≫ strictHenselizationStructuralMap t ≫ g ∧\n              ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n                eA.hom ≫ strictHenselizationStructuralMap s = σ ∧\n              ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n                eB.hom ≫ strictHenselizationStructuralMap t = τ",
+  "statement": "theorem Etale.exists_compatibleStrictHenselizationCoreData\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (hσ : ∃ (s : S) (ψ : S.residueField s ⟶ .of k),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ S.fromSpecResidueField s = σ)\n    (hτ : ∃ (t : T) (ψ : T.residueField t ⟶ .of k'),\n      ψ.hom.IsIntegral ∧ Spec.map ψ ≫ T.fromSpecResidueField t = τ)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k')) :\n    let s := ν ≫ ι ≫ σ\n    let t := ν ≫ τ\n    ∃ (A B : Type u) (cA : CommRing A) (cB : CommRing B),\n      letI := cA\n      letI := cB\n      ∃ (hA : HenselianLocalRing A) (hB : HenselianLocalRing B),\n        letI := hA\n        letI := hB\n        ∃ (sA : IsSepClosed (IsLocalRing.ResidueField A))\n          (sB : IsSepClosed (IsLocalRing.ResidueField B)),\n          letI := sA\n          letI := sB\n          ∃ (φ : A →+* B) (hφ : IsLocalHom φ),\n            letI := hφ\n            ∃ (eA : Spec (.of A) ≅ strictLocalization s)\n              (eB : Spec (.of B) ≅ strictLocalization t)\n              (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n              (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))),\n              IsUniversalHomeomorphism ρA ∧ IsUniversalHomeomorphism ρB ∧\n              Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n                strictLocalizationToBase s =\n                eB.hom ≫ strictLocalizationToBase t ≫ g ∧\n              ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n                eA.hom ≫ strictLocalizationToBase s = σ ∧\n              ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n                eB.hom ≫ strictLocalizationToBase t = τ",
   "branch": "sheaf-dag",
-  "by": "X2",
-  "date": "2026-10-12"
+  "by": "Y3",
+  "date": "2026-10-21",
+  "note": "Retire the duplicate Sheaf module as assigned. The existing upstream theorem has the same binders and conclusions on strictLocalization and strictLocalizationToBase, canonically identified with the small coordinate-ring presentation by smallStrictHenselizationColimitIso. The sole DAG parent is already attached upstream and directly applies this theorem. Preserve that parent and all adopted source declarations unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -93,14 +90,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-b7068",
-  "group": "F1",
+  "reviewer": "C-a314e",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261020T154937-L-3174647",
+  "landing": "20261021T005758-L-1892920",
   "kind": "interface",
-  "note": "independent cc review: Retired Sheaf CoreExistence/CoreCompletion against their upstream WeilConjectures twins (node lean.statement verbatim in upstream files, no sorry); adapted unclaimed CoreData keeps its signature byte-identical, compiles with both downstream importers, axioms clean"
+  "note": "independent cc review: Node lean.statement matched verbatim against the proved upstream WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationCoreData (no sorry, axioms clean); retired Sheaf stub has no importers; retirement matched against queue.tsv/retire-items.tsv; node diff vs live: only proof/proof_deps/proof_origin/lean changed; prior return's extra module is gone"
  },
  "lean_audit": {
   "master": {
