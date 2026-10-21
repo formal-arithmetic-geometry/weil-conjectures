@@ -19,9 +19,94 @@
   "def-pc-flat-sheaf-modules",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $M_n=P\\otimes_R B_n$ and $X=Q_R(P)$. The balanced map $p\\otimes s\\mapsto p\\otimes b_n(s)$ defines a morphism $M_{n+1}\\to\\operatorname{Res}_{b_n}M_n$: the balancing identity holds because $b_na_{n+1}=a_n$. Tensor here is sheafification of the sectionwise tensor, so the compatible sectionwise maps induce sheaf maps. They commute with differentials, since both differentials send $p\\otimes s$ to $d_P(p)\\otimes s$. Scalar restriction leaves the underlying abelian sheaf and map unchanged. Thus restriction gives exactly $t_n$, and $p\\mapsto p\\otimes1$ gives $c_n$. The identity $b_n(1)=1$ gives $t_nc_{n+1}=c_n$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, identity-topos specialization; sheaf tensor as defined in sites-modules.tex, Tag 03EK"
+   }
+  },
+  {
+   "text": "For each $n$, the K-flat computation of derived change of rings gives the canonical isomorphism $\\gamma_n:F_nX\\xrightarrow{\\sim}Q_{B_n}(M_n)$. Exact scalar restriction commutes with the localizations, as in the derived coefficient adjunction. Write $\\rho_n=r_n(\\gamma_n):r_nF_nX\\xrightarrow{\\sim}Q_R(T_n(P))$, using that comparison. Define $\\epsilon_n=\\rho_n\\circ r_nF_n(e^{-1})$. These are isomorphisms; no resolution of the coefficient sheaf $B_n$ is required, because $P$ is K-flat over $R$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change; Tag 07A6, lemma-adjoint; canonical K-flat computation"
+   }
+  },
+  {
+   "text": "The normalized adjunction for $a_n$ identifies the unit at $X$ with $p\\mapsto p\\otimes1$; hence $\\rho_n\\circ u_n(X)=Q_R(c_n)$. Naturality of that unit at $e:X\\xrightarrow{\\sim}K$ gives $r_nF_n(e^{-1})\\circ u_n(K)\\circ e=u_n(X)$. Composing with $\\rho_n$ proves $\\epsilon_n\\circ u_n(K)\\circ e=Q_R(c_n)$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, normalized unit on a K-flat representative; derived.tex Tags 0FND and 09T5"
+   }
+  },
+  {
+   "text": "Apply K-flat pullback preservation to the identity topos with coefficient map $a_{n+1}$. Its hypotheses hold because $C$ is small and $P$ is K-flat with flat terms. It gives that $M_{n+1}$ is K-flat over $B_{n+1}$ with flat terms. Consequently both $G_nF_{n+1}X$ and $F_nX$ are computed on the ordinary complexes used in the scalar-composition comparison. Its representative is $A_n:(M_{n+1}\\otimes_{B_{n+1}}B_n)\\to M_n$, $(p\\otimes s)\\otimes t\\mapsto p\\otimes b_n(s)t$, with the inverse specified by that comparison. This is the stipulated $\\alpha_n(X)$ under the computation isomorphisms, rather than an arbitrary isomorphism between its source and target.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0G7E, lemma-pullback-K-flat; Tag 0D6D, lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "For an adjunction $G_n\\dashv j_n$, the adjunct of a map $h:G_nY\\to Z$ is $j_n(h)\\circ\\eta^b_Y$, where $\\eta^b$ is its unit. Apply this to $h=\\alpha_n(X)$. By the normalized unit formula, on the representative $M_{n+1}$ this composite sends $p\\otimes s$ first to $(p\\otimes s)\\otimes1$ and then, by $A_n$, to $p\\otimes b_n(s)$. Thus $\\delta_n(X)$ is the class of the sheaf map in Step 1 under $\\gamma_{n+1}$ and $\\gamma_n$. Restricting scalars therefore gives $\\rho_n\\circ d_n(X)=Q_R(t_n)\\circ\\rho_{n+1}$. Naturality of the Hom correspondence and of $\\alpha_n$ gives naturality of $\\delta_n$, hence of $d_n$. In particular $r_nF_n(e^{-1})\\circ d_n(K)=d_n(X)\\circ r_{n+1}F_{n+1}(e^{-1})$. Compose the preceding representative equality with $r_{n+1}F_{n+1}(e^{-1})$ to obtain $\\epsilon_n\\circ d_n(K)=Q_R(t_n)\\circ\\epsilon_{n+1}$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, normalized unit and natural Hom correspondence; Tag 0D6D, lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "For a chain map $f:P\\to P'$ between the stated representatives, the canonical K-flat computation comparison is natural: $Q_{B_n}(f\\otimes1)\\circ\\gamma_n(P)=\\gamma_n(P')\\circ F_n(Q_Rf)$. This is the comparison natural transformation of the left derived functor, restricted to K-flat objects. Restriction gives the same square for $\\rho_n$. The strict tensor maps commute as well: both orders send $p\\otimes s$ to $f(p)\\otimes b_n(s)$, and the unit square sends $p$ to $f(p)\\otimes1$. Transport along chosen representative isomorphisms therefore gives the asserted naturality of $\\epsilon_n$. For $m>n$, the strict composite sends $p\\otimes s$ to $p\\otimes(b_n\\cdots b_{m-1})(s)$. Inductively compose the adjacent equalities of Step 5 to get $\\epsilon_n d_{n,m}=Q_R(t_{n,m})\\epsilon_m$, with identities when $m=n$. The iterated scalar-composition comparisons agree and are natural in the ring maps, so this composite is also the transition defined directly using the comparison for $B_m\\to B_n$; the mate calculation is again $p\\otimes s\\mapsto p\\otimes(b_n\\cdots b_{m-1})(s)$. This proves compatibility for every composite, together with the augmentation identity of Step 1.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY, lemma-derived-base-change, computation comparison; Tag 0D6D, lemma-derived-pullback-composition, iterated identity-topos comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "def-weil-inverse-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition), 07A6 (lemma-adjoint); explicit mate calculation and transport along e by Q108."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +149,52 @@
    "results": "[grep] OK 0 hit(s); ",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(KFlat|kFlat|K-flat).*(tower|transition|scalar)|(tower|transition|scalar).*(KFlat|kFlat|K-flat)",
+   "results": "OK 0 hit(s); ; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the tower/K-flat pattern had zero hits; the second query located only ordinary ModuleCat.extendScalarsComp (ChangeOfRings.lean:984) and abstract derivedη_fac_app (Functor/Derived/Adjunction.lean:103), read and insufficient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical computation of derived extension of scalars on K-flat sheaf complexes, compatible with ring composition and units",
+   "results": "OK 8 hit(s); ModuleCat.extendScalars_id_comp, ModuleCat.extendScalarsComp, CochainComplex.HomComplex.Cochain.units_smul_comp, RingHom.Flat.stableUnderComposition, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc', comonadicExtendScalars; ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat.extendScalarsComp and its coherence do not provide the unbounded K-flat sheaf tower with normalized derived units."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derived\", \"adjunction\"",
+   "results": "OK 12 hit(s); CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedε_fac_app_assoc; ",
+   "date": "2026-10-21",
+   "verdict": "no match: CategoryTheory.Adjunction.derived and derivedη_fac_app give abstract derived adjunctions, without the K-flat sheaf scalar-tower computations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complexes of sheaves realize derived extension of scalars with compatible adjunction units and inverse tower transitions",
+   "results": "OK 8 hit(s); comonadicExtendScalars, CategoryTheory.compatiblePreservingOfFlat, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, CategoryTheory.lan_flat_of_flat, ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, Module.Flat.trans, SheafOfModules.instAbelian, Module.Flat.iff_rTensor_exact'; ",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary flatness, Tor, sheafification and sheaf category results, not this simultaneous derived scalar-extension tower."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|def extendScalarsComp|theorem extendScalars_assoc",
+   "results": "OK 2 hit(s); Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; ",
+   "date": "2026-10-21",
+   "verdict": "no match: the tower/K-flat pattern had zero hits; the second query located only ordinary ModuleCat.extendScalarsComp (ChangeOfRings.lean:984) and abstract derivedη_fac_app (Functor/Derived/Adjunction.lean:103), read and insufficient."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor associativity and adjoint mate equals the coefficient map on a fixed K-flat sheaf resolution",
+   "results": "OK 8 hit(s); SheafOfModules.map_ιFree_mapFree_hom_assoc, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_map_app, CategoryTheory.Tor_map, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor'_obj_obj, PresheafOfModules.sheafificationAdjunction_homEquiv_apply; ",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary flatness, Tor, sheafification and sheaf category results, not this simultaneous derived scalar-extension tower."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-def-pe-derived-completion",
@@ -84,5 +211,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-kflat-scalar-tower-realization",
+  "worker": "stage1",
+  "summary": "Q108 split the simultaneous augmented-tower realization into strict tensor maps, canonical computations, unit naturality, K-flat stability, the explicit adjoint mate calculation, and naturality/composite coherence. Reused existing general nodes; created no nodes and changed no statement.",
+  "blueprint": "sk-def-pe-derived-completion: the first display (canonical augmentation to derived reductions) and the second paragraph (canonical transitions and derived reduction identities).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of derived scalar extension, needed for each ring map; this unit does not reconstruct the derived functor."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic normalized tensor/restriction adjunction supplies the unit and mate formulas for this unit's canonical augmentation and transitions."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic K-flat stability with flat terms ensures the first scalar extension can compute the second; no such stability statement belongs to the derived-completion unit."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic scalar-composition comparison with explicit representatives and coherence identifies the transition used by the derived-completion unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-8eec60393",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-8eec60393 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is one commit, has no new nodes and leaves the statement and stmt_deps unchanged (base proof was empty). There is no re-split repair note. The item is not dropped and not superseded in live or side-live. No cycle: the proof_deps closure of 233 nodes does not contain the item. Route: Stacks 0D6D proof (represent by a K-flat complex with flat terms; 0G7E keeps the pullback K-flat with flat terms) plus 06YY and 07A6, with all tags checked against tags/tags. No SGA. Step checks: S1 balancing via b_n a_{n+1}=a_n, sheafification, Res_{a_{n+1}}Res_{b_n}=Res_{a_n}, and t_n c_{n+1}=c_n. S2 gamma_n from change-of-rings clause (2), and the e^{-1} direction is right. S3 unit clause (1) plus naturality gives eps∘u∘e=Q(c_n). S4 kflat-pullback with u=id and c=a_{n+1} gives the hypothesis of the composition node's representative (x⊗s)⊗t↦x⊗b(s)t. S5 adjunct = j(h)∘eta, the unit is m↦m⊗1, A_n gives p⊗s↦p⊗b_n(s), and I rechecked the transport along e^{-1}. S6 derived-functor naturality of gamma, the inductive tower composite, and the composition node's 'iterated comparisons agree'. No flatness or surjectivity of a_n or b_n is used; unbounded P is fine. Small cases: P=0, Z→Z/2^n, nonsurjective b_n. Not duplicates: lem-weil-pbc-flat-common-quotient-reduction-tower and lem-weil-pbc-source-kflat-tensor-single-model. Accepted tool_uses: lem-pur-derived-change-of-rings, lem-pur-sheaf-ring-derived-coefficient-adjunction, lem-weil-pbc-ringed-topos-kflat-pullback, lem-sfb-successive-derived-quotient-normalization."
  }
 }
