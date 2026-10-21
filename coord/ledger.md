@@ -23781,3 +23781,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:23 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 21:25 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 21:25 L: returned deliver/D2/Sheaf.Paper.StratifiedLatticeRank (reviewer RETURN: (reviewer C-4c885, head 4c8852318) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.StratifiedLatt)
+- 21:26 L: returned deliver/NA/lem-sfb-qcqs-proper-serre-heart-bound (reviewer RETURN: E2/E3: the new node lem-sfb-qcqs-proper-heart-bound-closure is false. It claims that for every d>=0 the class Q_d={M : H)
