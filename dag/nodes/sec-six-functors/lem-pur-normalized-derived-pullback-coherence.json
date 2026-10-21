@@ -1,0 +1,137 @@
+{
+ "id": "lem-pur-normalized-derived-pullback-coherence",
+ "kind": "lemma",
+ "title": "Derived associativity from section-normalized ordinary pullback comparisons",
+ "statement": "For an arbitrary commutative coefficient ring A and schemes in a fixed universe, suppose an ordinary pullback composition family comp is given for all composable scheme morphisms, and its adjunction mate on direct images acts on sections by restriction along the canonical site pullback-composition isomorphism. Then the exact derived descent of comp is associative: for j:W→Z, h:Z→Y, k:Y→X, descending along j then expanding h followed by k equals transporting along associativity, expanding j followed by h then k, and expanding j followed by h. The equality holds on every object of the standard unbounded derived category. The operations and adjunctions are [def-weil-pbc-proetale-operations]; the exact derived comparisons are those of [lem-trf-absolute-frobenius-site].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
+  "place": "order 2579, pullback-composition coherence in the final naturality identity; Stacks 0D6D, exact termwise descent"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-trf-absolute-frobenius-site"
+ ],
+ "proof": [
+  {
+   "text": "On direct images, evaluate the desired associativity equation on every module, site object and section. Replace every comparison by its assumed section formula. Site pullback associativity (MorphismProperty.Over.pullbackComp_assoc) and the presheaf restriction composition law identify the two restrictions, including the transport between the parenthesized composite arrows.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunction mate determines the ordinary comparison. Apply Adjunction.leftAdjointCompIso_assoc to the direct-image identity; transport the composite adjunction across the equality of the parenthesized morphisms. Taking inverse components gives ordinary pullback associativity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply mapDerivedCategoryNatIso to the ordinary isomorphism equation. Its left and right whiskering identities and mapDerivedCategoryCompIso_assoc give the derived equation. Equality induction identifies the descent of equality transport with equality transport of descended functors. Evaluate at an arbitrary derived object to obtain the stated pointwise equation. The category abbreviation only names the existing standard category instance.",
+   "uses": [
+    "lem-trf-absolute-frobenius-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-trf-absolute-frobenius-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
+  "place": "E8, explicit mate/descent proof of the pullback-coherence step"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherence associativity for composition isomorphisms of pullback functors obtained by adjunction mates",
+   "results": "ChosenPullbacksAlong and Over.pullbackComp results; no exact normalized derived family theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "conjugateEquiv_whiskerLeft",
+   "results": "Unknown unqualified identifier. Local Mathlib contains Adjunction.leftAdjointCompIso_assoc, used in proof.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "composition_coherence|leftAdjointCompIso_assoc",
+   "results": "Existing ProEtaleDerivedPullbackCoherence proves associativity for a different chosen canonical family; its section/mate/descent proof is reused with the arbitrary normalized family supplied as a parameter. Mathlib CompositionIso supplies the mate associativity theorem.",
+   "date": "2026-10-21",
+   "verdict": "generic constituent lemmas, no duplicate statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity coherence of exact derived pullback composition isomorphisms obtained as adjunction mates of section-normalized site pullback comparisons",
+   "results": "PresheafOfModules.pullback_assoc and GrothendieckTopology.overMapPullback_assoc concern their canonical ordinary comparisons, not an arbitrary section-normalized comparison family and its exact derived descent. They do not replace the theorem; site associativity and adjunction mate associativity are used directly.",
+   "date": "2026-10-21",
+   "verdict": "constituent coherence results; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.SchemeGeometricFrobenius",
+  "date": "2026-10-21",
+  "group": "E8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-scheme-geometric-frobenius",
+   "place": "final naturality identity, composition coherence",
+   "via": [
+    "def-pur-scheme-geometric-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-package",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.NormalizedProEtalePullbackCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalizedProEtalePullbackCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleNormalizedDerivedComp_coherence",
+  "statement": "theorem proEtaleNormalizedDerivedComp_coherence\n    {X Y Z W : Scheme.{u}} (j : W ⟶ Z) (h : Z ⟶ Y) (k : Y ⟶ X)\n    (M : proEtaleDerivedCategory X A) :\n    (proEtaleFrobeniusDerivedComp A j (h ≫ k) (comp j (h ≫ k))).hom.app M ≫\n        (proEtaleConstantRingDerivedPullback A j).map\n          ((proEtaleFrobeniusDerivedComp A h k (comp h k)).hom.app M) =\n      (eqToIso (congrArg (proEtaleConstantRingDerivedPullback A)\n        (Category.assoc j h k).symm)).hom.app M ≫\n        (proEtaleFrobeniusDerivedComp A (j ≫ h) k (comp (j ≫ h) k)).hom.app M ≫\n        (proEtaleFrobeniusDerivedComp A j h (comp j h)).hom.app\n          ((proEtaleConstantRingDerivedPullback A k).obj M)",
+  "branch": "sheaf-dag",
+  "by": "E8",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleDerivedCanonicalCategory",
+   "AlgebraicGeometry.Scheme.proEtaleNormalizedDerivedComp_coherence"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-6245a",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261021T120348-L-3836512",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-6245a",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261021T120348-L-3836512",
+  "kind": "interface",
+  "note": "independent cc review: 6245adcdbb03 Lean/node files vs the earlier 23dd5937 head and its FIX review, vs the live clone node/Lean, the unit realized list and the import graph (no importers)"
+ }
+}

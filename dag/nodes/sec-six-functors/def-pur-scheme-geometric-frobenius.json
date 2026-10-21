@@ -31,29 +31,31 @@
  ],
  "proof": [
   {
-   "text": "Define $g_{T,\\gamma}=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\gamma)$. Apply [lem-weil-frobenius-square-cartesian] to $f_0$: it gives their inverses, $fg_{X,\\gamma}=g_{Y,\\gamma}f$, and the first Cartesian square without an absolute finite-type hypothesis.",
+   "text": "Define $g_{T,\\gamma}=\\mathrm{id}_{T_0}\\times\\operatorname{Spec}(\\gamma)$ for $T=X,Y$. The statement of [lem-weil-frobenius-square-cartesian], applied to the given $k_0$-morphism $f_0$, supplies the inverse maps, the commutativity $fg_{X,\\gamma}=g_{Y,\\gamma}f$, and exactly the first Cartesian square. Its hypotheses require neither properness nor smoothness nor absolute finite type.",
    "uses": [
     "lem-weil-frobenius-square-cartesian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-    "place": "definition, order 2579; assembly after the 2026-10-21 re-split"
+    "place": "definition, order 2579; explicit verification of its embedded assertions"
    }
   },
   {
-   "text": "Apply [lem-pur-unrestricted-frobenius-factorization] to $X_0,Y_0,f_0$. Its projection identities and factorization give $F_T^{(q)}=g_{T,\\sigma}\\Phi_T=\\Phi_Tg_{T,\\sigma}$ and $\\Phi_T=g_{T,\\gamma}F_T^{(q)}$; its naturality gives the second commuting square.",
+   "text": "For a model T0, check each factorization after the two projections of its chosen base change. Naturality of absolute Frobenius gives the first-projection equations. The second projection is Spec(k); arithmetic coefficient Frobenius acts by the qth power on k, so the second-projection equations follow from the global-sections Frobenius formula and preservation of powers by ring maps. Pullback uniqueness gives both arithmetic factorizations. Composing the second with the inverse geometric coefficient action gives Phi = F followed by g_gamma. This works for arbitrary models and requires no affine-cover or affine-spectrum tensor-product identification.",
    "uses": [
-    "lem-pur-unrestricted-frobenius-factorization"
+    "def-weil-absolute-frobenius-scheme",
+    "def-pc-base-change",
+    "def-weil-frobenius-detailed"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-    "place": "definition, order 2579; assembly after the 2026-10-21 re-split"
+    "place": "definition, order 2579; explicit verification of its embedded assertions"
    }
   },
   {
-   "text": "Regard $T=X,Y$ as $k_0$-schemes. By [lem-pur-absolute-frobenius-universal-homeomorphism], $F_T^{(q)}$ is a universal homeomorphism. [thm-weil-pbc-universal-homeomorphism-invariance] gives its small etale-topos equivalence. This supplies the etale assertion separately from the pro-etale comparison.",
+   "text": "Regard $T=X,Y$ as $k_0$-schemes via their maps to $\\operatorname{Spec}k$. By [lem-pur-absolute-frobenius-universal-homeomorphism], $F_T^{(q)}$ is a universal homeomorphism without any finiteness hypothesis on $T_0$. Applying [thm-weil-pbc-universal-homeomorphism-invariance] gives the asserted invariance of the small etale topos. This step supplies the etale assertion only; the next step uses the specified pro-etale trivialization instead of inferring one from an unspecified equivalence.",
    "uses": [
     "lem-pur-absolute-frobenius-universal-homeomorphism",
     "thm-weil-pbc-universal-homeomorphism-invariance"
@@ -61,49 +63,47 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-    "place": "definition, order 2579; assembly after the 2026-10-21 re-split"
+    "place": "definition, order 2579; explicit verification of its embedded assertions"
    }
   },
   {
-   "text": "Use [lem-pur-frobenius-trivialization-pullback] at $b=a$ with the fixed finite ring $A$ to obtain the canonical $\\tau_T^{(a)}$. By [def-weil-pbc-proetale-operations] inverse image is exact and induces derived pullback termwise. Pullback composition [lem-weil-pbc-proetale-derived-pullback-composition] for $\\Phi_T=g_{T,\\gamma}F_T^{(q)}$ gives $d_T:L\\Phi_T^*\\cong L(F_T^{(q)})^*Lg_{T,\\gamma}^*$. Define $\\kappa_T=(\\tau_T^{(a)}Lg_{T,\\gamma}^*)d_T$; both factors are isomorphisms. This fixes the relative-Frobenius-normalized comparison.",
+   "text": "The positive-level coefficient ring is finite by Padic.finite_coefficientExtensionRing. Reuse the ordinary composition family and Frobenius trivializations selected jointly by the arbitrary-pullback trivialization theorem, with its section normalization. Their exact descents are definitionally the comparisons in the item. The named fibre-characteristic proof makes all occurrences of the absolute Frobenius agree by proof irrelevance.",
    "uses": [
-    "lem-pur-frobenius-trivialization-pullback",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-    "place": "definition, order 2579; assembly after the 2026-10-21 re-split"
-   }
-  },
-  {
-   "text": "In [lem-pur-factorized-pullback-square-pasting] take $u=f$, $r_T=F_T^{(q)}$, $s_T=g_{T,\\gamma}$, $t_T=\\Phi_T$. It gives $(d_XLf^*)c_\\Phi=(L(F_X^{(q)})^*c_g)(c_{f,a}Lg_{Y,\\gamma}^*)(Lf^*d_Y)$. Now [lem-pur-frobenius-trivialization-pullback] gives $(\\tau_X^{(a)}Lf^*)c_{f,a}=Lf^*\\tau_Y^{(a)}$. Whisker by $Lg_{Y,\\gamma}^*$, and use naturality of $\\tau_X^{(a)}$ on $c_g(K)$ for each $K\\in D(Y_{\\mathrm{proet}},A)$. Substituting in the pasting equality gives exactly $c_g(Lf^*\\kappa_Y)=(\\kappa_XLf^*)c_\\Phi$. Thus the stipulated comparison, rather than an unspecified equivalence, is compatible with $f$.",
-   "uses": [
-    "lem-pur-factorized-pullback-square-pasting",
+    "def-weil-l-adic-coefficient-extension",
     "lem-pur-frobenius-trivialization-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-    "place": "definition, order 2579; assembly after the 2026-10-21 re-split"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The section-normalized ordinary family has associative exact descents by lem-pur-normalized-derived-pullback-coherence. Transport its pointwise equation across the named equal composite arrows. Apply it to (f,F_Y,g_Y), (F_X,f,g_Y), and (F_X,g_X,f). Generic object-component interfaces and extensionality for composite functors retain the literal nested object types, without unfolding scheme pullback or localization data.",
+   "uses": [
+    "lem-pur-normalized-derived-pullback-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Evaluate the arbitrary-pullback identity for the selected Frobenius trivializations on Lg_Y(M). It identifies Lf(tau_Y) with tau_X after the absolute-Frobenius square comparison. Naturality of tau_X for the Galois-square comparison, the three coherence equations, and cancellation of invertible composition comparisons yield the two required paths on every M. The generic composite-component extensionality lemma gives the original natural-transformation equality, with exactly the specified kappa and square comparisons.",
+   "uses": [
+    "lem-pur-frobenius-trivialization-pullback"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-frobenius-square-cartesian",
-  "lem-pur-unrestricted-frobenius-factorization",
+  "def-weil-absolute-frobenius-scheme",
+  "def-pc-base-change",
+  "def-weil-frobenius-detailed",
   "lem-pur-absolute-frobenius-universal-homeomorphism",
   "thm-weil-pbc-universal-homeomorphism-invariance",
   "lem-pur-frobenius-trivialization-pullback",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-pur-factorized-pullback-square-pasting"
+  "lem-pur-normalized-derived-pullback-coherence",
+  "def-weil-l-adic-coefficient-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-  "place": "Explicit assembly from unrestricted Frobenius factorization, canonical trivialization and factorized-square pasting; old split arguments retained in report.md"
+  "place": "E8: section/mate/exact-descent coherence and three-square pasting through typed composite-object interfaces"
  },
  "mathlib_searches": [
   {
@@ -205,9 +205,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-proetale-derived-pullback-composition"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -233,6 +231,7 @@
    "WeilConjectures.PurityFiniteSetting.frobeniusGaloisMap",
    "WeilConjectures.PurityFiniteSetting.frobeniusArithmeticMap",
    "WeilConjectures.PurityFiniteSetting.frobeniusSchemeMap",
+   "WeilConjectures.PurityFiniteSetting.frobeniusFiber_characteristic",
    "WeilConjectures.PurityFiniteSetting.frobeniusAbsoluteMap",
    "WeilConjectures.PurityFiniteSetting.schemeGeometricFrobenius_factorization",
    "WeilConjectures.PurityFiniteSetting.frobeniusOrdinaryComposition",
@@ -242,7 +241,12 @@
    "WeilConjectures.PurityFiniteSetting.schemeGeometricFrobenius_squares",
    "WeilConjectures.PurityFiniteSetting.frobeniusGaloisSquareComparison",
    "WeilConjectures.PurityFiniteSetting.frobeniusSchemeSquareComparison",
-   "WeilConjectures.PurityFiniteSetting.schemeGeometricFrobenius_naturality"
+   "WeilConjectures.PurityFiniteSetting.schemeGeometricFrobenius_naturality",
+   "WeilConjectures.PurityFiniteSetting.coefficient_ring_finite",
+   "WeilConjectures.PurityFiniteSetting.selectedComp",
+   "WeilConjectures.PurityFiniteSetting.selectedTau",
+   "WeilConjectures.PurityFiniteSetting.selectedDerivedComp",
+   "WeilConjectures.PurityFiniteSetting.selectedDerivedTau"
   ],
   "file": "lean/Sheaf/SixFunctors/SchemeGeometricFrobenius.lean",
   "statement": "def schemeGeometricFrobeniusComparison (P : PurityFiniteSetting.{u}) (T₀ : Over (Spec (CommRingCat.of P.field.k₀))) : proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusSchemeMap T₀) ≅ proEtaleConstantRingDerivedPullback P.Ring (P.frobeniusGaloisMap T₀)",
@@ -253,13 +257,13 @@
   "note": "The main declaration constructs the specified kappa composite from the normalized relative-Frobenius trivialization and exact descended composition comparison. The listed helpers expose both actual base-changed schemes and maps, both arithmetic factorizations, both square identifications and the full equality of natural transformations. No absolute finite-type hypothesis is imposed."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
-  "result": "pass",
-  "landing": "20261020T051233-L-1604446",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "reviewer": "C-6245a",
+  "group": "E8",
+  "result": "fix",
+  "landing": "20261021T120348-L-3836512",
+  "kind": "interface",
+  "note": "independent cc review: 6245adcdbb03 Lean/node files vs the earlier 23dd5937 head and its FIX review, vs the live clone node/Lean, the unit realized list and the import graph (no importers)"
  }
 }
