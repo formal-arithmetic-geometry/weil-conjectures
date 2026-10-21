@@ -20039,3 +20039,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:53 L: merged deliver/Q16/lem-sfb-rhom-continuity-open-extension (reviewer FIX; first push; new nodes: 0)
 - 03:53 L: returned deliver/Q03/det-def-sp-tate-twist-locally-free (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED det-def-sp-tate-twist-locally-free: cited node def-wei)
 - 03:53 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
+- 03:53 L: returned deliver/U2/Sheaf.Paper.IntegralScalarExtensionWellDefined (reviewer RETURN: (reviewer C-07128, head 071285055) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralScalar)
