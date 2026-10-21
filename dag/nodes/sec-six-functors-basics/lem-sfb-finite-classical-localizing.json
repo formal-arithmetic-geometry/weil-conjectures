@@ -33,10 +33,9 @@
    }
   },
   {
-   "text": "Classical sheaves are closed under arbitrary small sums in the ambient heart. Indeed write $F_i\\simeq\\nu_T^*E_i$ by [det-pe-classical-sheaves-modules]. The two module categories have small coproducts by [lem-weil-pbc-module-sheaves-colimits-forgetful]. For any pro-étale module sheaf $G$, the adjunction of [def-weil-pbc-site-comparison-morphism] gives naturally\n$$\\operatorname{Hom}(\\nu_T^*(\\bigoplus_iE_i),G)\\simeq\\operatorname{Hom}(\\bigoplus_iE_i,\\nu_{T,*}G)\\simeq\\prod_i\\operatorname{Hom}(\\nu_T^*E_i,G).$$\nConsequently $\\nu_T^*(\\bigoplus_iE_i)$, with its canonical coprojections, is the ambient coproduct of the $F_i$ and is classical. The same calculation includes the empty family.",
+   "text": "Classical sheaves are closed under arbitrary small sums in the ambient heart. Indeed write $F_i\\simeq\\nu_T^*E_i$ by [det-pe-classical-sheaves-modules]. The two module categories have small coproducts by their existing small-colimit instances. For any pro-étale module sheaf $G$, the adjunction of [def-weil-pbc-site-comparison-morphism] gives naturally\n$$\\operatorname{Hom}(\\nu_T^*(\\bigoplus_iE_i),G)\\simeq\\operatorname{Hom}(\\bigoplus_iE_i,\\nu_{T,*}G)\\simeq\\prod_i\\operatorname{Hom}(\\nu_T^*E_i,G).$$\nConsequently $\\nu_T^*(\\bigoplus_iE_i)$, with its canonical coprojections, is the ambient coproduct of the $F_i$ and is classical. The same calculation includes the empty family. In Lean use the constant-module encoding equivalence and closure of the essential image of the fully faithful comparison left adjoint under colimits.",
    "uses": [
     "det-pe-classical-sheaves-modules",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
     "def-weil-pbc-site-comparison-morphism"
    ],
    "elementary": true,
@@ -46,10 +45,10 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-ring-sheaves-grothendieck], the module category on the fixed small pro-étale site has exact filtered colimits. A small sum is the filtered colimit of the sums over its finite subsets. Finite sums are exact in an abelian category, so taking this filtered colimit proves that all small sums are exact. For representing complexes $K_i^\\bullet$, [lem-kun-grothendieck-derived-coproducts] identifies the ambient derived coproduct with the termwise coproduct. Exactness gives\n$$\\ker(\\bigoplus_i d_i^q)\\simeq\\bigoplus_i\\ker d_i^q,\\qquad\\operatorname{im}(\\bigoplus_i d_i^{q-1})\\simeq\\bigoplus_i\\operatorname{im}d_i^{q-1},\\qquad \\mathcal H^q(\\bigoplus_iK_i)\\simeq\\bigoplus_i\\mathcal H^q(K_i).$$\nStep 2 now makes the coproduct classical in every degree whenever the $K_i$ lie in $\\mathcal C_T$. For each fixed integer $a$, the good truncation formulas of [def-kun-truncations] use just zero terms, retained terms, and one kernel or cokernel. Exact sums commute with each of these constructions, so $\\bigoplus_i\\tau_{\\le a}K_i\\simeq\\tau_{\\le a}(\\bigoplus_iK_i)$ and $\\bigoplus_i\\tau_{\\ge a}K_i\\simeq\\tau_{\\ge a}(\\bigoplus_iK_i)$, with their canonical maps. Empty sums give the zero complex throughout.",
+   "text": "Use the proved source-library homology-coproduct instance [src-weil-derived-homology-preserves-coproducts], which derives exact termwise coproducts from K-injective resolutions and AB4. Grothendieck module sheaves have AB5 and hence AB4. Apply the heart coproduct result degreewise. For either truncation, compose with every homology functor: in the retained range the canonical inclusion or projection is an isomorphism, and outside it every object is zero. Thus these composites preserve coproducts. Homology functors jointly reflect isomorphisms and hence jointly detect colimit cocones, proving preservation by truncation itself. All helper results are proved privately in the item module; no new statement is left unfinished.",
    "uses": [
     "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-kun-grothendieck-derived-coproducts",
+    "src-weil-derived-homology-preserves-coproducts",
     "def-kun-truncations"
    ],
    "elementary": true,
@@ -59,10 +58,10 @@
    }
   },
   {
-   "text": "For any scheme morphism $r:W\\to T$, [def-weil-pbc-proetale-operations] gives exact constant-coefficient inverse image, induced termwise on complexes. Thus the kernel/image/quotient formula for cohomology gives $\\mathcal H^q(r^*K)\\simeq r^*\\mathcal H^q(K)$. If $\\mathcal H^q(K)\\simeq\\nu_T^*E_q$, the inverse-image square of [sk-thm-pe-direct-image-comparison] gives $r^*\\nu_T^*E_q\\simeq\\nu_W^*r_{\\mathrm{ét}}^*E_q$, a classical sheaf. Hence $r^*K\\in\\mathcal C_W$. Exactness also preserves the kernel and cokernel in the good truncation formulas [def-kun-truncations], so the termwise identifications give $r^*\\tau_{\\le a}K\\simeq\\tau_{\\le a}r^*K$ and $r^*\\tau_{\\ge a}K\\simeq\\tau_{\\ge a}r^*K$. Only the unrestricted inverse-image clause of the comparison is used; no qcqs condition on $r$ is needed.",
+   "text": "For any scheme morphism $r:W\\to T$, [def-weil-pbc-proetale-operations] gives exact constant-coefficient inverse image, induced termwise on complexes. Thus the kernel/image/quotient formula for cohomology gives $\\mathcal H^q(r^*K)\\simeq r^*\\mathcal H^q(K)$. If $\\mathcal H^q(K)\\simeq\\nu_T^*E_q$, the fixed-module comparison square together with [lem-weil-pbc-proetale-constant-module-pullback-encoding] gives $r^*\\nu_T^*E_q\\simeq\\nu_W^*r_{\\mathrm{ét}}^*E_q$, a classical sheaf. Hence $r^*K\\in\\mathcal C_W$. Exactness also preserves the kernel and cokernel in the good truncation formulas [def-kun-truncations], so the termwise identifications give $r^*\\tau_{\\le a}K\\simeq\\tau_{\\le a}r^*K$ and $r^*\\tau_{\\ge a}K\\simeq\\tau_{\\ge a}r^*K$. Only the unrestricted inverse-image clause of the comparison is used; no qcqs condition on $r$ is needed. The actual coefficient-pullback square is supplied by [lem-weil-pbc-proetale-constant-module-pullback-encoding], combined with the fixed-module comparison square. The exact-functor derived truncation isomorphisms satisfy the canonical equations by the truncation lift and descent identities.",
    "uses": [
     "def-weil-pbc-proetale-operations",
-    "sk-thm-pe-direct-image-comparison",
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
     "def-kun-truncations"
    ],
    "elementary": true,
@@ -72,12 +71,18 @@
    }
   },
   {
-   "text": "Assume now that $T$ is qcqs. The finite discrete coefficient identifications [lem-weil-pbc-finite-discrete-condensed-ring-constant] and [lem-weil-pbc-finite-discrete-scheme-ring-constant] identify the pulled-back condensed $A$ ring with the ordinary constant $A$ ring. Transport along this ring isomorphism identifies their module sheaves, cohomology, and ambient sums, since its inverse is transport along the inverse ring isomorphism. The ring $A$ is Noetherian: its ideals are subsets of a finite set, so every ascending chain of ideals stabilizes. By [sk-def-sfb-constructible], an object of $\\Dctf(T,A)$ has constructible cohomology sheaves. Apply the heart clause of [sk-thm-pe-constructible-comparison], whose hypotheses are precisely qcqs $T$ and discrete Noetherian $A$, to conclude that all these sheaves are classical. Thus $\\Dctf(T,A)\\subseteq\\mathcal C_T$; the additional finite Tor amplitude condition is not needed for this inclusion.",
+   "text": "The canonical integralModelIntrinsicRealization factors through the section-action equivalence [def-weil-pbc-continuous-coefficient-module-encoding], restriction to constant scalars, and intrinsic sheafification. Its underlying additive sheaf is naturally isomorphic to the original internal-module sheaf, using the sheafification unit. The forgetful functors preserve finite limits and coproducts and reflect isomorphisms; consequently constant-scalar restriction and the realization are exact and preserve coproducts. On qcqs T, a generator has cohomology with finite constant models. By [det-def-sfb-constructible-local-model], these are locally finitely presented; transport through the canonical coefficient pullback yields internal constructibility on the same strata. Apply [lem-weil-pbc-finite-discrete-constructible-encoding] using [def-weil-pbc-common-finite-discrete-encoding], the finite discrete point-ring identification, and [lem-weil-pbc-internal-module-ab-equivalence]. The resulting fixed-module sheaf is constructible, so [lem-weil-pbc-fixed-module-constructible-origin] places it in the essential image of etale comparison. Its underlying sheaf is therefore classical. The forgetful comparison of the encoding and the underlying-sheaf isomorphism of the canonical realization transfer classicality to the required cohomology sheaf. No Tor bound is used.",
    "uses": [
+    "def-weil-pbc-continuous-coefficient-module-encoding",
+    "det-def-sfb-constructible-local-model",
+    "lem-weil-pbc-module-constructible-pullback",
+    "lem-weil-pbc-finite-discrete-constructible-encoding",
+    "def-weil-pbc-common-finite-discrete-encoding",
     "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+    "lem-weil-pbc-internal-module-ab-equivalence",
     "sk-def-sfb-constructible",
-    "sk-thm-pe-constructible-comparison"
+    "det-pe-classical-sheaves-modules",
+    "lem-weil-pbc-fixed-module-constructible-origin"
    ],
    "elementary": true,
    "source": {
@@ -86,7 +91,7 @@
    }
   },
   {
-   "text": "By steps 1 and 3, $\\mathcal C_T$ is a full replete triangulated subcategory closed under all small ambient coproducts. By step 5 it contains $\\Dctf(T,A)$. The definition [sk-def-localizing-closure] is the intersection of all full replete triangulated subcategories with exactly these containment and coproduct properties. In particular that intersection is contained in $\\mathcal C_T$, giving $\\Loc(\\Dctf(T,A))\\subseteq\\mathcal C_T$.",
+   "text": "By steps 1 and 3, $\\mathcal C_T$ is a full replete triangulated subcategory closed under all small ambient coproducts. By step 5 it contains $\\Dctf(T,A)$. The definition [sk-def-localizing-closure] is the intersection of all full replete triangulated subcategories with exactly these containment and coproduct properties. In particular that intersection is contained in $\\mathcal C_T$, giving $\\Loc(\\Dctf(T,A))\\subseteq\\mathcal C_T$. Formally pull back the already proved ordinary classical localizing class along the derived realization. Exactness makes this inverse image triangulated; coproduct preservation makes it localizing. Step 5 gives its containment of the generators. Apply the intersection definition and then the homology comparison isomorphism.",
    "uses": [
     "sk-def-localizing-closure"
    ],
@@ -99,25 +104,29 @@
  ],
  "proof_deps": [
   "def-kun-truncations",
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "def-weil-pbc-continuous-coefficient-module-encoding",
   "def-weil-pbc-proetale-operations",
   "def-weil-pbc-site-comparison-morphism",
+  "det-def-sfb-constructible-local-model",
   "det-pe-classical-derived-weak-serre",
   "det-pe-classical-sheaves-modules",
-  "lem-kun-grothendieck-derived-coproducts",
   "lem-sbc-cohomology-in-weak-serre-subcategory",
   "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-finite-discrete-constructible-encoding",
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "lem-weil-pbc-module-constructible-pullback",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding",
   "lem-weil-pbc-ring-sheaves-grothendieck",
   "sk-def-localizing-closure",
   "sk-def-sfb-constructible",
-  "sk-thm-pe-constructible-comparison",
-  "sk-thm-pe-direct-image-comparison"
+  "src-weil-derived-homology-preserves-coproducts"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/sk-prop-ctf-finite-proper-localizing.proof.md",
-  "place": "Transfer paragraph: classical-cohomology localizing-subcategory argument, expanded using the existing comparison and Grothendieck-category nodes"
+  "place": "B7: six-step proof using existing source homology coproducts, exact derived truncations, constant-module pullback encoding, and finite-discrete constructibility encoding; canonical realization retained verbatim."
  },
  "mathlib_searches": [
   {
@@ -259,11 +268,7 @@
  },
  "tool_uses": [
   "det-pe-classical-derived-weak-serre",
-  "lem-sbc-cohomology-in-weak-serre-subcategory",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-kun-grothendieck-derived-coproducts",
-  "sk-thm-pe-direct-image-comparison",
-  "sk-thm-pe-constructible-comparison"
+  "lem-sbc-cohomology-in-weak-serre-subcategory"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -292,5 +297,15 @@
   "group": "Q14",
   "result": "pass",
   "note": "Re-delivery of the 98070c17 H2 RETURN. stmt_deps now cite def-sfb-integral-model-generator-data instead of the theorem det-lem-integral-models-generators. That def node is landed existing:true, passed both reviews, and its lean.declarations owns integralModelIntrinsicRealization. Lean module byte-identical to the earlier run, whose full clause-by-clause check found no other fault. All 9 dependency records equal live; the item differs from live only in stmt_deps (one added edge) and lean. nt_compile --json: 45.8 s, exit 0, no errors or warnings. Report has the Worker report and Second reading sections; upstream repair experiments are outside lean/. Not on the dropped route; no repair note. Advisory: the statement text could cite the def node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T203426-L-3739310",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
