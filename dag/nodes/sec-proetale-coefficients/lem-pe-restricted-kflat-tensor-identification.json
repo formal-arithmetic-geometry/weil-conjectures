@@ -16,9 +16,102 @@
   "def-pc-flat-sheaf-modules",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pur-sheaf-ring-coefficient-ordinary-adjunction] to the small ringed site and $v:A\\to S$: restriction preserves finite limits and finite colimits, and is additive by [def-pc-sheaf-restrict-scalars]. Thus it preserves kernels, images and cokernels. For a complex $H$, this gives $H^n(\\operatorname{Res}_v H)\\cong\\operatorname{Res}_v H^n(H)$, using the kernel/image description of cohomology in [def-weil-abstract-derived-category]. In particular a quasi-isomorphism remains a quasi-isomorphism after restriction. This uses no flatness of $v$.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian), kernels and cokernels detected on abelian sheaves; exactness supplied by lem-pur-sheaf-ring-coefficient-ordinary-adjunction."
+   }
+  },
+  {
+   "text": "The localization universal property in [def-weil-abstract-derived-category], applied to $Q_A\\operatorname{Res}_v$, now gives the induced functor and its comparison $\\lambda_{v,H}:Q_A(\\operatorname{Res}_v H)\\cong\\operatorname{Res}_v(Q_S H)$. Naturality says $\\operatorname{Res}_v(Q_S a)\\lambda_{v,H}=\\lambda_{v,H'}Q_A(\\operatorname{Res}_v a)$ for an $S$-linear cochain map $a:H\\to H'$. Restriction leaves the groups, differentials and additive maps unchanged [def-pc-sheaf-restrict-scalars]; hence it commutes termwise with $H[1]^n=H^{n+1}$ and the differential $-d_H$. Localizing this identity defines the induced shift comparison. Its compatibility with $\\lambda$ follows because both composites are the same termwise identity after precomposition with $Q_S$; uniqueness in the localization universal property gives their equality. This proves precisely the claimed shift compatibility, without asserting that restriction preserves K-flatness.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RU (definition-unbounded-derived-category), localization universal property; shift convention as in def-weil-abstract-derived-category."
+   }
+  },
+  {
+   "text": "For each degree $n$ and site object $U$, define $s\\otimes p\\mapsto p\\otimes s$ on the sectionwise tensor over $B(U)$. Additivity and the balancing relation hold: $(\\varphi(b)s)\\otimes p$ and $s\\otimes bp$ both map to $bp\\otimes s=p\\otimes\\varphi(b)s$. The reverse swap obeys the same relations, and both composites are the identity on pure tensors, hence on their sums. Restrictions commute with these formulas. By the tensor construction [def-pur-sheaf-tensor-product] and the sheafification universal property [def-weil-presheaf-modules-sheafification], the inverse presheaf maps give inverse sheaf maps. The $S$-action is on the coefficient factor on both sides, so the swap is $S$-linear; this equality also extends uniquely through sheafification. Finally both routes through the differential send $s\\otimes p$ to $d_Pp\\otimes s$. Thus these maps assemble to the required $S$-linear cochain isomorphism $\\tau_S$. The coefficient is in degree zero, so no sign occurs. The identical construction gives $\\tau_T$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), sectionwise tensor construction; Tag 03CY (lemma-sheafification-presheaf-modules), uniqueness of extension to a sheaf."
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-pur-derived-change-of-rings] to $\\varphi=vu$ and the given K-flat resolution $f:P\\to G$. Its statement supplies exactly the canonical isomorphism $c_{\\varphi,f}:F_\\varphi(Q_BG)\\cong Q_S(P\\otimes_B S)$. Since $e:Q_BG\\cong K$, functoriality carries $e^{-1}$ to an isomorphism $F_\\varphi K\\cong F_\\varphi(Q_BG)$. Composing gives exactly $\\eta_S=c_{\\varphi,f}\\circ F_\\varphi(e^{-1})$. Apply the same clause to $wu:B\\to T$ and the same $f$ to obtain $\\eta_T$. The site's smallness ensures that the module categories used here are abelian; all K-flat and flat-term hypotheses are supplied by the item. No property of a scalar restriction of $P$ is used.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), identity underlying topos; Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side), K-flat computation as stated in lem-pur-derived-change-of-rings."
+   }
+  },
+  {
+   "text": "Write $\\delta_S=\\operatorname{Res}_v(\\eta_S^{-1})\\circ\\lambda_{v,P\\otimes_BS}\\circ Q_A(\\operatorname{Res}_v\\tau_S)$. The first and last maps are functorial images of isomorphisms, and the middle map is the localization comparison from step 2. Their inverse composite, in reverse order, is an inverse to $\\delta_S$, by cancellation of each adjacent inverse pair. This is the displayed isomorphism of the statement. Define $\\delta_T$ identically with $v,S$ replaced by $w,T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change); agent composition of the comparisons in steps 2--4."
+   }
+  },
+  {
+   "text": "An $A$-linear $h$ is $B$-linear via $u$, since $h(v(u(b))s)=w(u(b))h(s)$. Consequently the section formulas $s\\otimes p\\mapsto h(s)\\otimes p$ and $p\\otimes s\\mapsto p\\otimes h(s)$ respect the $B$-balancing relations. They are $A$-linear for the coefficient actions, since $h(v(a)s)=w(a)h(s)$. They commute with restrictions and with the differentials $1\\otimes d_P$ and $d_P\\otimes1$, respectively. The tensor construction and unique sheafification extension [def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification], with the scalar actions of [def-pc-sheaf-restrict-scalars], therefore give the claimed $A$-linear cochain maps. Both composites around the swap square send a pure tensor $s\\otimes p$ to $p\\otimes h(s)$. The sectionwise maps are equal by additivity and generation by pure tensors, and their sheaf extensions are equal by uniqueness. Thus the square commutes as a square of $A$-complexes. Only additivity and $A$-linearity of $h$ were used.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product) and 03CY (lemma-sheafification-presheaf-modules); agent calculation for an arbitrary A-linear coefficient map."
+   }
+  },
+  {
+   "text": "Set $H_S=P\\otimes_BS$, $H_T=P\\otimes_BT$, $a=h\\otimes1_P$, and $b=1_P\\otimes h$, where $b:\\operatorname{Res}_vH_S\\to\\operatorname{Res}_wH_T$ is a map of $A$-complexes. Localizing the square of step 6 and substituting the definitions of $\\delta_S,\\delta_T$ yields\n$$\\delta_T Q_A(a)\\delta_S^{-1}=\\operatorname{Res}_w(\\eta_T^{-1})\\lambda_{w,H_T}\\,Q_A(b)\\,\\lambda_{v,H_S}^{-1}\\operatorname{Res}_v(\\eta_S).$$\nIndeed $Q_A(\\operatorname{Res}_w\\tau_T)Q_A(a)=Q_A(b)Q_A(\\operatorname{Res}_v\\tau_S)$, and the two adjacent copies of $Q_A(\\operatorname{Res}_v\\tau_S)$ cancel. The right side is exactly the map represented on the chosen scalar-last models by $p\\otimes s\\mapsto p\\otimes h(s)$, with the source and target carried to the displayed derived objects. This uses no alleged $S$-linearity of $h$, and no application of naturality of $\\lambda$ to a map between different coefficient categories. It proves the final clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product); agent localization and cancellation of the square in step 6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 06YT, with sites-modules.tex Tags 03EK and 03CY; explicit scalar exchange and localization calculations."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +147,52 @@
    "results": "{\"t\": \"2026-10-21T05:50:19Z\", \"tool\": \"grep\", \"query\": \"KFlat|[Kk].flat|[Tt]ensor.*[Cc]omm|[Cc]omm.*[Tt]ensor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "No match: SheafOfModules.restrictScalars (Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:36) and the presheaf restriction declarations define the underived restriction functor. Ordinary ModuleCat extension/restriction formulas and ring localization results do not give this K-flat derived sheaf comparison with scalar-factor exchange and arbitrary A-linear coefficient maps."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|[Kk].flat|[Tt]ensor.*[Cc]omm|[Cc]omm.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-21T06:27:20Z\", \"tool\": \"grep\", \"query\": \"KFlat|[Kk].flat|[Tt]ensor.*[Cc]omm|[Cc]omm.*[Tt]ensor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: underived restriction, sectionwise tensor functoriality, exact-functor localization and Ext maps give components only; no hit states the restricted K-flat scalar-first comparison together with arbitrary A-linear coefficient-map normalization. Read Sheaf/ChangeOfRings.lean:36-43, Presheaf/Monoidal.lean:45-103 and Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-105."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars of sheaf complexes commutes with localization to derived categories and exchange of the coefficient tensor factor",
+   "results": "{\"t\": \"2026-10-21T06:27:21Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars of sheaf complexes commutes with localization to derived categories and exchange of the coefficient tensor factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.restrictScalars\", \"RestrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"SheafOfModules.restrictScalars\", \"ModuleCat.restrictScalars\", \"RingCat.moduleCatRestrictScalarsPseudofunctor\", \"LocalizedModule.restrictScalars_map_eq\"], \"digest\": \"2a3669d6e2323cf6\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: underived restriction, sectionwise tensor functoriality, exact-functor localization and Ext maps give components only; no hit states the restricted K-flat scalar-first comparison together with arbitrary A-linear coefficient-map normalization. Read Sheaf/ChangeOfRings.lean:36-43, Presheaf/Monoidal.lean:45-103 and Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-105."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrictScalars\"",
+   "results": "{\"t\": \"2026-10-21T06:27:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"restrictScalars\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.restrictScalars\", \"PresheafOfModules.instFaithfulRestrictScalars\", \"PresheafOfModules.instAdditiveRestrictScalars\", \"PresheafOfModules.restrictScalars_obj\"], \"digest\": \"a41e5e369182a35c\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: underived restriction, sectionwise tensor functoriality, exact-functor localization and Ext maps give components only; no hit states the restricted K-flat scalar-first comparison together with arbitrary A-linear coefficient-map normalization. Read Sheaf/ChangeOfRings.lean:36-43, Presheaf/Monoidal.lean:45-103 and Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-105."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of rings B to A to S, restriction of a scalar first K flat tensor model identifies derived scalar extension and carries any A linear coefficient map to the second tensor factor",
+   "results": "{\"t\": \"2026-10-21T06:27:22Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves of rings B to A to S, restriction of a scalar first K flat tensor model identifies derived scalar extension and carries any A linear coefficient map to the second tensor factor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply\", \"KaehlerDifferential.moduleBaseChange'\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply\", \"PresheafOfModules.Monoidal.tensorObjMap\", \"Module.Flat.toAlgebra\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\"], \"digest\": \"b187cefd95ad4173\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: underived restriction, sectionwise tensor functoriality, exact-functor localization and Ext maps give components only; no hit states the restricted K-flat scalar-first comparison together with arbitrary A-linear coefficient-map normalization. Read Sheaf/ChangeOfRings.lean:36-43, Presheaf/Monoidal.lean:45-103 and Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-105."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|restrictScalars|tensor",
+   "results": "{\"t\": \"2026-10-21T06:27:41Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategory|restrictScalars|tensor\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"d6440073342ced2b\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: underived restriction, sectionwise tensor functoriality, exact-functor localization and Ext maps give components only; no hit states the restricted K-flat scalar-first comparison together with arbitrary A-linear coefficient-map normalization. Read Sheaf/ChangeOfRings.lean:36-43, Presheaf/Monoidal.lean:45-103 and Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-105."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor on sheaves induces a derived functor with a natural localization isomorphism, and tensor product symmetry exchanges a coefficient map between two degree zero modules",
+   "results": "{\"t\": \"2026-10-21T06:27:43Z\", \"tool\": \"leanfinder\", \"query\": \"An exact additive functor on sheaves induces a derived functor with a natural localization isomorphism, and tensor product symmetry exchanges a coefficient map between two degree zero modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Sheaf.symmetricCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Tor\"], \"digest\": \"d3965e8e827ce0e6\"}",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item: underived restriction, sectionwise tensor functoriality, exact-functor localization and Ext maps give components only; no hit states the restricted K-flat scalar-first comparison together with arbitrary A-linear coefficient-map normalization. Read Sheaf/ChangeOfRings.lean:36-43, Presheaf/Monoidal.lean:45-103 and Algebra/Homology/DerivedCategory/ExactFunctor.lean:36-105."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pe-successive-quotient-linear-triangle",
@@ -76,5 +211,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-restricted-kflat-tensor-identification",
+  "worker": "stage1",
+  "summary": "Kept the statement; supplied seven proof steps, reusing the existing exact scalar-restriction and K-flat-computation nodes. Constructed tensor swaps and arbitrary A-linear coefficient maps sectionwise and extended them by the sheafification universal property. Wrote the final localized conjugation formula explicitly; no new nodes or Mathlib leaves.",
+  "blueprint": "det-prop-integral-criterion-reductions, second proof paragraph: realizes the coefficient-sensitive identification of the three tensor models in the derived tensor triangle, via lem-pe-successive-quotient-linear-triangle.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Its preservation of finite limits and finite colimits supplies exact scalar restriction for arbitrary ring sheaves; no node of the integral criterion unit states this generic fact."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Its K-flat computation clause supplies c_{phi,f}; this is the generic derived scalar-extension construction explicitly used in the unit reductions, not a replacement of the integral-criterion route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O3-9bf6c3bd8",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-9bf6c3bd8 (reviewer sub-agent of L); spot-checked: Item-only split: 0 new nodes, and statement, stmt_deps and blueprint are identical to the Q33 version that created it. No repair or re-split note, no SGA, proof_deps equals the union of uses. Stacks 06YY (sites-cohomology l.3585) and 06YT (l.3233) match their use through the identity topos. Steps: (1) restriction is exact by lem-pur-sheaf-ring-coefficient-ordinary-adjunction, so cohomology and quasi-isomorphisms are preserved. (2) λ comes from the localization universal property and has the item's orientation; shifts commute strictly. (3) The swap is B-balanced, (φ(b)s)⊗p and s⊗bp both going to p⊗φ(b)s; it is S-linear, has no sign because the coefficient is in degree 0, and extends by sheafification uniqueness. (4) Clause (2) of lem-pur-derived-change-of-rings applies to vu and wu, and η has the right orientation. (5) Trivial. (6) A-linearity of h gives B-balancing; both square routes send s⊗p to p⊗h(s), and maps agree by pure-tensor generation on presheaves and uniqueness on sheafifications. (7) I expanded the conjugation formula myself and it is correct. Small-case test on the one-point site with B=ℤ, A=ℤ/4, S=ℤ/2, T=ℤ/4, h:1↦2, P=ℤ: the square commutes. The parent lem-pe-successive-quotient-linear-triangle step 4 needs exactly an arbitrary A-linear h (multiplication by t or quotient), and the statement covers it. Advisory only: lem-pur-sheaf-ring-derived-coefficient-adjunction already states that exact Res induces Res on D, but steps 1-2 prove this directly, so it is not a duplicate fault. Both tool_uses accepted. No changes."
  }
 }
