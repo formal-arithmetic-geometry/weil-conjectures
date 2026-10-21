@@ -116,7 +116,7 @@ private theorem open_trivialized_image_spectrum_comparison
     (Abelian.HasKInjectiveResolutions (SheafOfModules.{v} (moduleRings Y.toRingedSpace)))
   let A := Modules.restrictFunctor q
   let B := Modules.restrictFunctor j
-  have : A.Additive := inferInstance
+  have : A.Additive := (inferInstance : A.Additive)
   have : A.PreservesKInjectiveComplexes :=
     (openImmersion_restriction_derived_properties q).2
   have : PreservesFiniteLimits A := (openImmersion_restriction_derived_properties q).1
