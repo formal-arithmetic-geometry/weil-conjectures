@@ -24,198 +24,79 @@
  ],
  "proof": [
   {
-   "text": "Work on the small pro-étale site in a module universe containing its objects. Countable products of $R$-module sheaves are sectionwise and exact by [lem-weil-proetale-countable-products-exact], for arbitrary $T$. Exactness implies $H^q(\\prod X_n)=\\prod H^q(X_n)$: the product functor preserves the kernels and images defining cohomology. Choose individual K-injective resolutions using [prop-pur-kinjective-resolutions-exist]. Their product represents the derived product by [lem-pc-ringed-space-product-kinjective], and the map from the product of the original complexes is a quasi-isomorphism by the preceding cohomology equality. Thus termwise products represent derived products. The normalized natural comparison [lem-weil-strict-roos-comparison] identifies the strict Roos fibre with the actual $H=R\\!\\lim X_\\bullet$, carries its coordinate maps to $p_n$, and identifies strict maps of Roos fibres with derived-limit maps. We use this normalization throughout, also after reindexing a tail by $\\mathbf N_{\\geq1}$.",
+   "text": "Obtain normalized chain data from lem-sp-normalized-koszul-roos-models. The explicitly defined comparison is invertible because its factors are isomorphisms and deletion is a quasi-isomorphism. Expanding its composite proves naturality; checking the current Roos coordinate on each total-tensor summand gives the projection identity.",
    "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pc-ringed-space-product-kinjective",
-    "lem-weil-strict-roos-comparison"
+    "lem-sp-normalized-koszul-roos-models",
+    "def-sp-koszul-roos-comparison-data"
    ],
    "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Propositions 3.1.9, 3.2.3(1), 4.2.8; Stacks sites-cohomology Tag 0941 (lemma-derived-limit-is-ok), derived Tag 0BK6 (lemma-product-K-injective)."
-   }
-  },
-  {
-   "text": "Fix the following coordinates, using [def-weil-abstract-derived-category] and [def-pc-tensor-complex-sheaves]. For a chain endomorphism $u:P\\to P$, write $F_u^q=P^q\\oplus P^{q-1}$ with $d(x,y)=(dx,ux-dy)$. The map $(x,y)\\mapsto(-y,x)$ identifies this with $\\operatorname{Cone}(u)[-1]$; projection is $(x,y)\\mapsto x$. Put $D_m(C)=C\\otimes_RK_m$. In degree $q$ write its coordinates as $(a,b)\\in C^q\\oplus C^{q+1}$. The total differential is $d(a,b)=(da+(-1)^{q+1}t^m b,db)$. Consequently $(a,b)\\mapsto(a,(-1)^{q+1}b)$ is a chain isomorphism $D_m(C)\\cong\\operatorname{Cone}(t^m:C\\to C)$, carrying the inclusion of $C$ to the cone inclusion and the augmentation to $a\\mapsto a\\otimes1$. These formulas fix all signs used below.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012Z (definition-associated-simple-complex); derived.tex, cone and shift conventions in section-homotopy-category."
-   }
-  },
-  {
-   "text": "Multiplication by $t^m$ is injective, being a composite of $m$ injective maps, and $B_m$ is its sheaf cokernel. Hence $0\\to R\\xrightarrow{t^m}R\\to B_m\\to0$ is exact. Apply [lem-cbc-regular-quotient-cone-augmentation] with $r=t^m$ and $S=B_m$. Together with the coordinate isomorphism in step 2 this gives a natural isomorphism $A_{m,C}:QD_m(C)\\xrightarrow{\\sim}\\operatorname{Res}(QC\\otimes_R^LB_m)$. For a K-flat $P$, $A_{m,P}$ is represented by the augmentation $P\\otimes K_m\\to\\operatorname{Res}(P\\otimes B_m)$, and the inclusion $P\\to D_m(P)$ becomes $p\\mapsto p\\otimes1$. The derived scalar extension is computed on these resolutions by [lem-pur-derived-change-of-rings]. The same cited cone theorem gives naturality for all derived morphisms and resolution independence. In particular $D_m$ preserves quasi-isomorphisms, since its localized cone functor exists on $D(R)$, or directly by the cone cohomology sequence.",
-   "uses": [
-    "lem-cbc-regular-quotient-cone-augmentation",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism), construction preceding Tag 06YU (definition-derived-tor), and Tag 06YY (lemma-derived-base-change); principal quotient cone model."
-   }
-  },
-  {
-   "text": "Delete the coordinates $n<h$ in both copies of the product. This strictly commutes with $1-s$, hence defines $F_{1-s}(\\prod_{n\\geq1}X_n)\\to F_{1-s}(\\prod_{n\\geq h}X_n)$. It is degreewise split surjective, and its kernel is $F_U(P_{<h})$, where $P_{<h}=\\prod_{1\\leq n<h}X_n$, $U=1-s_{<h}$, and the shift on the finite prefix has zero last component. It is nilpotent: $s_{<h}^{h-1}=0$ for $h>1$. Thus $U^{-1}=\\sum_{j=0}^{h-2}s_{<h}^j$. On the kernel the degree $-1$ map $(x,y)\\mapsto(U^{-1}y,0)$ satisfies $dH+Hd=1$, since $U$ commutes with $d$. The kernel is therefore acyclic. The long exact sequence [lem-weil-pbc-complex-ses-homology-long-exact] proves the deletion map is a quasi-isomorphism. For $h=1$ it is the identity and its kernel is zero. Every retained projection is unchanged literally.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940 (section-derived-limits), finite-tail invariance in the blueprint proof; explicit finite-prefix contraction; homology.tex Tag 0117 (lemma-long-exact-sequence-cochain)."
-   }
-  },
-  {
-   "text": "Let $P=\\prod_nX_n$. The canonical map $D_m(P)\\to\\prod_nD_m(X_n)$ is the chain isomorphism $( (a_n)_n,(b_n)_n )\\mapsto((a_n,b_n))_n$. Its inverse takes the two coordinate families. This is a sheaf map: products are sectionwise and only two summands occur in every total degree. The differential in step 2 is componentwise, so this permutation commutes with $d$. If $s((a_n))=(v_na_{n+1})$ for the transition maps $v_n$, it also commutes with $s$ and therefore with $1-s$. It commutes with every product projection, all strict tower maps, and deletion of any prefix, as each of these acts on the same coordinates.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-proetale-countable-products-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), product model, with homology.tex Tag 012Z (definition-associated-simple-complex); explicit two-summand calculation."
-   }
-  },
-  {
-   "text": "Tensor the fibre coordinates of step 2. For any $u:P\\to P$, a degree $q$ element of $D_m(F_u)$ has coordinates $(x,y,z,w)\\in P^q\\oplus P^{q-1}\\oplus P^{q+1}\\oplus P^q$. Send it to $((x,z),(y,w))\\in F_{D_m(u)}^q$. Both differentials, in the target ordering, are\n$$((dx+(-1)^{q+1}t^m z,dz),(ux-dy+(-1)^{q+1}t^m w,uz-dw)).$$\nThus this permutation is a chain isomorphism $D_m(F_u)\\cong F_{D_m(u)}$. It commutes with the first-coordinate projections to $D_m(P)$ and with maps commuting with $u$. Combining it for $u=1-s$ with step 5 gives a natural chain isomorphism $D_m(\\mathsf R(X))\\cong\\mathsf R(D_m(X))$ that retains every projection. No infinite totalization is being interchanged with a product.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 012Z (definition-associated-simple-complex); explicit interchange of two two-term total complexes, expanding the blueprint sentence that reduction is a cone and commutes with Rlim."
-   }
-  },
-  {
-   "text": "Represent $H$ by $Q\\mathsf R(X)$ using step 1. Start with $A_{m,\\mathsf R(X)}^{-1}$ from step 3, apply the chain isomorphism of step 6, delete the prefix by step 4 applied to the strict tower $D_m(X_n)$, and use [lem-weil-strict-roos-comparison] on that tail. The composite is the asserted isomorphism from $\\operatorname{Res}(H\\otimes_R^LB_m)$ to $R\\!\\lim_{n\\geq h}D_m(X_n)$. Its composite with projection to level $n$ is $D_m(p_n)$ after $A_m^{-1}$: this holds at chain level in steps 4–6 and for the normalized derived-limit comparison in step 1. Naturality of $A_m$ says exactly that this is the restriction of the derived tensor of $p_n$, followed by the stated two-term comparison.",
-   "uses": [
-    "lem-weil-strict-roos-comparison",
-    "lem-cbc-regular-quotient-cone-augmentation"
-   ],
-   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "First paragraph: reduction is the cone of multiplication and commutes with Rlim; terms with n<m do not affect the limit. Projection normalization expanded using Stacks Tag 0941."
+    "place": "Proof paragraph, repleteness and finite-tail deletion; reduction as a two-term cone commuting with Rlim; naturality; boundedness; returned DAG proof steps 3, 7, 8, 11; Bhatt–Scholze, The pro-étale topology for schemes, §3.5, Lemmas 3.5.4–3.5.7."
    }
   },
   {
-   "text": "For the constant tail $N$, put $P_N=\\prod_{n\\geq m}N$ and $u=1-s$. Define $v:P_N\\to P_N$ by $(vz)_m=0$ and $(vz)_n=-\\sum_{j=m}^{n-1}z_j$ for $n>m$. These are finite sums, so define sheaf maps and commute with $d$. One has $uv=1$ and $x=\\operatorname{diag}(x_m)+vux$. Hence $P_N\\cong N\\oplus P_N$ by $x\\mapsto(x_m,ux)$, and $F_u\\cong N\\oplus F_{1_{P_N}}$ by $(x,y)\\mapsto(x_m,(ux,y))$. The second factor contracts by $(a,b)\\mapsto(b,0)$. Therefore $e:F_u\\to N$, $(x,y)\\mapsto x_m$, is inverse in the derived category to the diagonal $N\\to F_u$, $z\\mapsto(\\operatorname{diag}z,0)$. This fixes the diagonal identification required in the statement.",
+   "text": "For a constant complex N define the finite-prefix-sum map v on its product by v(z)_0=0 and v(z)_(n+1)=v(z)_n-z_n. Then vu=1 and uv=1-pr_0 diagonal. The Roos triangle and this splitting show that evaluation at zero and the strict Roos lift of the diagonal are mutually inverse after localization, with the stated coordinates.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "def-weil-strict-roos-model",
+    "def-sp-koszul-roos-comparison-data"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), strict Roos model; explicit constant-tower contraction, using only finite coordinate sums."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph, repleteness and finite-tail deletion; reduction as a two-term cone commuting with Rlim; naturality; boundedness; returned DAG proof steps 3, 7, 8, 11; Bhatt–Scholze, The pro-étale topology for schemes, §3.5, Lemmas 3.5.4–3.5.7."
    }
   },
   {
-   "text": "Now put $h=m$. The augmentations $D_m(X_n)\\to X_n\\otimes B_m$ commute strictly with transitions. The assumed compatibility of $f_n$ makes their composites $g_n:D_m(X_n)\\to\\operatorname{Res}N$ a strict map to the constant tail. Under the normalized comparison [lem-weil-strict-roos-comparison], their derived-limit map is exactly the coordinatewise map of Roos fibres. Applying $e$ from step 8 selects its first product component at $m$. Consequently the complete composite of the statement, on the model $D_m(\\mathsf R(X))$, is\n$$D_m(\\mathsf R(X))\\xrightarrow{D_m(p_m)}D_m(X_m)\\xrightarrow{\\mathrm{aug}}X_m\\otimes_RB_m\\xrightarrow{f_m}\\operatorname{Res}N.$$\nThis is an equality of the indicated chain maps, not an inference that arbitrary morphisms into a homotopy limit are determined by their projections.",
-   "uses": [
-    "lem-weil-strict-roos-comparison",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), strict-map naturality; blueprint naturality and finite-tail sentence, expanded at the m-th coordinate."
-   }
-  },
-  {
-   "text": "Choose a K-flat resolution $q:P\\to\\mathsf R(X)$ by [lem-pc-kflat-resolution]. Ordinary scalar extension and restriction on complexes have the specified adjunction [def-weil-pbc-ringed-scalar-extension-complex-adjunction], with unit $p\\mapsto p\\otimes1$ by [def-weil-pbc-ringed-tensor-section-calculus]. Derive it using [lem-pc-derived-adjoint-functors], [lem-pur-derived-change-of-rings], and exact restriction [lem-sf-exact-functor-derived-triangulated]: kernels and sheafified cokernels have unchanged underlying abelian sheaves [def-weil-sheaf-of-modules-category]. On $P$, the map $H\\to\\operatorname{Res}N$ in the statement is represented by $p\\mapsto f_m(p_mq(p)\\otimes1)$. Its adjoint is represented on $P\\otimes B_m$ by $p\\otimes b\\mapsto b f_m(p_mq(p)\\otimes1)$. After the augmentation $D_m(P)\\to P\\otimes B_m$ this sends $(a,b)$ to $f_m(p_mq(a)\\otimes1)$, exactly the map in step 9 precomposed with $D_m(q)$. Both $D_m(q)$ and this augmentation are quasi-isomorphisms, by steps 2–3. The normalization of [lem-cbc-regular-quotient-cone-augmentation] identifies this roof with $A_m^{-1}$. Thus the equality is precisely the restriction of the derived adjoint asserted, including its unit normalization.",
+   "text": "For a K-flat complex the augmentation-adjoint identity is exactly the derived-adjunction and A_kflat normalizations. For an arbitrary complex precompose with a K-flat resolution; naturality of A and the augmentation and the ordinary and derived Hom equivalences cancel this invertible replacement. Expand the strict family map and use the projection identity to prove the required full derived adjoint equation.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "def-weil-pbc-ringed-scalar-extension-complex-adjunction",
-    "def-weil-pbc-ringed-tensor-section-calculus",
-    "lem-pc-derived-adjoint-functors",
-    "lem-pur-derived-change-of-rings",
-    "lem-sf-exact-functor-derived-triangulated",
-    "def-weil-sheaf-of-modules-category",
-    "lem-cbc-regular-quotient-cone-augmentation"
+    "def-sp-koszul-roos-comparison-data"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change); sites-modules.tex Tag 03CZ (lemma-adjointness-tensor-restrict); derived.tex Tags 09T5 (lemma-derived-adjoint-functors), 015F (lemma-right-derived-exact-functor)."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph, repleteness and finite-tail deletion; reduction as a two-term cone commuting with Rlim; naturality; boundedness; returned DAG proof steps 3, 7, 8, 11; Bhatt–Scholze, The pro-étale topology for schemes, §3.5, Lemmas 3.5.4–3.5.7."
    }
   },
   {
-   "text": "Restriction along $R\\to B_m$ preserves and reflects vanishing of cohomology: it leaves the underlying abelian sheaves unchanged and is exact, by [def-pc-sheaf-restrict-scalars] and the kernel/cokernel description [def-weil-sheaf-of-modules-category]. It is triangulated by [lem-sf-exact-functor-derived-triangulated]. If the restriction of a derived morphism $a:A\\to B$ is invertible, its cone restricts to zero, so that cone is acyclic and hence zero in the derived category. In the triangle $A\\xrightarrow a B\\to0\\to A[1]$, exactness of $\\operatorname{Hom}(B,-)$ from [lem-weil-pbc-hom-into-triangle-exact] supplies $r$ with $ar=1$. In the backward rotation $0[-1]\\to A\\xrightarrow a B\\to0$, the same exactness with source $A$ gives $ra-1=0$ since $a(ra-1)=0$. Thus $a$ is invertible. This proves detection of isomorphisms without asserting faithfulness or fullness of derived restriction.",
+   "text": "Iterating the existing adjacent Koszul cone transition gives the (s^(m-k),1) cone map; induction and additivity of endomorphism powers give its square. Apply the coefficient coherence theorem to supply all quotient, ordinary, derived, augmentation and comparison transition equations.",
    "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-sheaf-of-modules-category",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "def-weil-abstract-derived-category"
+    "lem-sp-koszul-roos-coefficient-compatibility",
+    "def-pur-principal-koszul-quotient-towers"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), Tag 0149 (lemma-representable-homological); exact faithful underlying-sheaf restriction and the cone criterion."
-   }
-  },
-  {
-   "text": "For $k\\leq m$, the map $K_m\\to K_k$ has components $t^{m-k}$ in degree $-1$ and $1$ in degree $0$. It is a chain map because $t^k t^{m-k}=t^m$, and it commutes with the augmentations via $B_m\\to B_k$. On $D_m(C)^q$ it sends $(a,b)$ to $(a,t^{m-k}b)$. On $P\\otimes B_m$, for a single K-flat resolution $P$, the corresponding map is $p\\otimes\\bar r\\mapsto p\\otimes\\bar r$ modulo $t^k$. The augmentation square therefore commutes on both summands. By [lem-pur-derived-change-of-rings] these are the coefficient quotient transitions; step 3 identifies their restrictions with the displayed $K$-maps. The permutations in steps 5–6 and tail deletion act on independent coordinates and commute with these maps. Compare different tails on the common tail $n\\geq\\max(h_m,h_k)$; the deletion maps compose literally. All resulting derived comparison squares commute. For $j\\leq k\\leq m$ the degree $-1$ components compose because $t^{k-j}t^{m-k}=t^{m-j}$; identity transitions have components $(1,1)$. If compatible target families are also varied, the formulas of steps 9–10 give the corresponding naturality square on the same resolution.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pur-derived-change-of-rings",
-    "lem-cbc-regular-quotient-cone-augmentation"
-   ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "First paragraph, natural reduction maps and finite tails; Stacks sites-cohomology Tag 06YY (lemma-derived-base-change), expanded on the two Koszul components."
+    "place": "Proof paragraph, repleteness and finite-tail deletion; reduction as a two-term cone commuting with Rlim; naturality; boundedness; returned DAG proof steps 3, 7, 8, 11; Bhatt–Scholze, The pro-étale topology for schemes, §3.5, Lemmas 3.5.4–3.5.7."
    }
   },
   {
-   "text": "Finally suppose $H^q(X_n)=0$ for all $q\\notin[a,b]$ and all $n$. Exact products give $H^q(P)=\\prod_nH^q(X_n)$ as in step 1, so $P=\\prod X_n$ has the same cohomological bound. In the Roos triangle $H\\to P\\xrightarrow{1-s}P\\to H[1]$, use [lem-sf-derived-homology-long-exact]: the segment $H^{q-1}(P)\\to H^q(H)\\to H^q(P)$ has both outside terms zero for $q<a$ or $q>b+1$. Thus $H^q(H)=0$ there, proving the interval $[a,b+1]$. The product exactness statement used here holds for every scheme, and none of the coordinate calculations imposed quasi-compactness on $T$.",
+   "text": "Exact countable products commute with homology, so the product of the strict tower complexes has vanishing cohomology outside [a,b]. Apply the homology exact sequence to the actual Roos mapping-cocone triangle: H^(q-1)(product) and H^q(product) vanish for q outside [a,b+1]. Transport this vanishing through norm. Assemble these properties with the normalization into Compatibility and hence Conclusion.",
    "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison",
+    "def-sp-koszul-roos-comparison-data",
     "lem-sf-derived-homology-long-exact"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 3.1.11, proof via Proposition 3.1.9 and the product triangle; derived.tex Tag 05RS (lemma-cohomology-homological)."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph, repleteness and finite-tail deletion; reduction as a two-term cone commuting with Rlim; naturality; boundedness; returned DAG proof steps 3, 7, 8, 11; Bhatt–Scholze, The pro-étale topology for schemes, §3.5, Lemmas 3.5.4–3.5.7."
    }
   }
  ],
  "proof_deps": [
-  "def-pc-sheaf-restrict-scalars",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-ringed-scalar-extension-complex-adjunction",
-  "def-weil-pbc-ringed-tensor-section-calculus",
-  "def-weil-sheaf-of-modules-category",
-  "lem-cbc-regular-quotient-cone-augmentation",
-  "lem-pc-derived-adjoint-functors",
+  "lem-sp-normalized-koszul-roos-models",
+  "def-sp-koszul-roos-comparison-data",
+  "def-weil-strict-roos-model",
   "lem-pc-kflat-resolution",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-pur-derived-change-of-rings",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-sp-koszul-roos-coefficient-compatibility",
+  "def-pur-principal-koszul-quotient-towers",
+  "lem-sf-derived-homology-long-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-  "place": "First paragraph: cone reduction commuting with Rlim, finite-tail deletion, naturality and boundedness; chain-coordinate expansion using Stacks Tags 0941, 06YP, 06YS, 06YY, 09T5 and Bhatt–Scholze Proposition 3.1.9 and the proof of Lemma 3.5.5."
+  "place": "First proof paragraph, expanded normalized Koszul/Roos construction and compatibility."
  },
  "mathlib_searches": [
   {
@@ -475,18 +356,8 @@
   ]
  },
  "tool_uses": [
-  "lem-cbc-regular-quotient-cone-augmentation",
-  "lem-pc-derived-adjoint-functors",
   "lem-pc-kflat-resolution",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-pur-derived-change-of-rings",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-hom-into-triangle-exact",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-sf-derived-homology-long-exact"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -500,40 +371,10 @@
   "module": "Sheaf.Algebra.Homology.KoszulRoosProjectionComparison",
   "declaration": "CategoryTheory.KoszulRoos.koszulRoosProjectionComparison",
   "declarations": [
-   "CategoryTheory.KoszulRoos.Modules",
-   "CategoryTheory.KoszulRoos.unitSection",
-   "CategoryTheory.KoszulRoos.K",
-   "CategoryTheory.KoszulRoos.B",
-   "CategoryTheory.KoszulRoos.quotient",
-   "CategoryTheory.KoszulRoos.tensor",
-   "CategoryTheory.KoszulRoos.assemble",
-   "CategoryTheory.KoszulRoos.summand",
-   "CategoryTheory.KoszulRoos.onTowers",
-   "CategoryTheory.KoszulRoos.tailIndex",
-   "CategoryTheory.KoszulRoos.tail",
-   "CategoryTheory.KoszulRoos.deletionProduct",
-   "CategoryTheory.KoszulRoos.tensorProduct",
-   "CategoryTheory.KoszulRoos.koszulStep",
-   "CategoryTheory.KoszulRoos.tensorStep",
-   "CategoryTheory.KoszulRoos.constant",
-   "CategoryTheory.KoszulRoos.ScalarModel",
-   "CategoryTheory.KoszulRoos.restriction",
-   "CategoryTheory.KoszulRoos.restrictComplex",
-   "CategoryTheory.KoszulRoos.pure",
-   "CategoryTheory.KoszulRoos.coordinates",
-   "CategoryTheory.KoszulRoos.onTowersMap",
-   "CategoryTheory.KoszulRoos.ordinaryTransition",
-   "CategoryTheory.KoszulRoos.Models",
-   "CategoryTheory.KoszulRoos.Normalization",
-   "CategoryTheory.KoszulRoos.Models.projection",
-   "CategoryTheory.KoszulRoos.Models.comparison",
-   "CategoryTheory.KoszulRoos.Models.familyMap",
-   "CategoryTheory.KoszulRoos.Compatibility",
-   "CategoryTheory.KoszulRoos.Conclusion",
    "CategoryTheory.KoszulRoos.koszulRoosProjectionComparison"
   ],
   "file": "lean/Sheaf/Algebra/Homology/KoszulRoosProjectionComparison.lean",
-  "statement": "theorem koszulRoosProjectionComparison (T : AlgebraicGeometry.Scheme.{t}) [EssentiallySmall.{t + 1} T.ProEt] (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) CommRingCat.{max z (t + 1)}) (s : (R.obj ⋙ forget CommRingCat.{max z (t + 1)}).sections) [∀ S : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) CommRingCat.{max z (t + 1)}, HasDerivedCategory.{w} (Modules S)] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ Modules R)] (_hs : Mono (globalSectionMultiplication R (unitSection R s))) : Conclusion R s",
+  "statement": "theorem koszulRoosProjectionComparison (T : AlgebraicGeometry.Scheme.{t})\n    [EssentiallySmall.{t + 1} T.ProEt]\n    (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) CommRingCat.{max z (t + 1)})\n    (s : (R.obj ⋙ forget CommRingCat.{max z (t + 1)}).sections)\n    [∀ S : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology T) CommRingCat.{max z (t + 1)},\n      HasDerivedCategory.{w} (Modules S)]\n    [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ Modules R)]\n    (_hs : Mono (globalSectionMultiplication R (unitSection R s))) :\n    Conclusion R s",
   "branch": "newtargets-dag",
   "by": "Q128",
   "date": "2026-10-21",
@@ -547,5 +388,15 @@
   "group": "Q128",
   "result": "pass",
   "note": "Read node (13 steps), source place, module in full, report, all stmt_dep declarations in side-live (principalKoszul/Transition/Tower, koszulTensorFunctor = K⊗P, koszulRepresentativeAugmentation, roosF=cone(1-s)[-1], roosχ/roosEval/roosι, DerivedChangeOfRingsCochainModel, restrictedTensorScalars, IsKFlatIndependentCoefficients). Every clause matches: arbitrary T and ring sheaf R (coefficient universe max z (t+1) ⊇ site objects), Mono t-multiplication, B_m/K_m by predecessor indexing, RF by IsRightDerivedFunctor with norm pinned by norm_unit, so projections are the canonical p_n; exact products and termwise derived products; tail deletion qis with projections; comparison a literal composite, iso, natural, projection clause; adjoint clause at h=m with strict family f, constant identification, ordinary unit 1⊗x and K-flat derived adjunction normalization (re-derived the equation); reflects isos; Koszul transition (t^{m-k},1) via mappingCone.map; coefficient squares with q/e/c pinned; bound [a,b+1]. Sign (-1)^a in chi_first verified against Mathlib's cone[-1] and ε₂ conventions. No hollow data: every Models field is pinned. Mechanical finding: restrictedTensorScalars.mapDerivedCategory needs the exactness instance theorems of lem-pe-restricted-kflat-tensor-identification (Mathlib restrictScalars only Additive), so the statement depends on the theorem's content: PASS on that point. Record statement verbatim; only the item node changed; added stmt_deps are landed nodes; docstrings with 13 steps; no line over 100 chars. Advisory: def-pc-kflat-complex not in stmt_deps (reached via lem-pur-derived-change-of-rings); base-era lem-pur-derived-change-of-rings plain structure (cite def-sfb-derived-change-of-rings-cochain-model later); second reading is a short self-audit. No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-eb61a",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261021T154754-L-3172406",
+  "kind": "interface",
+  "note": "independent cc review: published KoszulRoosProjectionComparison defs vs new KoszulRoosComparisonData (verbatim; tensor instance rfl-probed equal); item signature byte-identical; two sorry halves vs Normalization/Compatibility fields and node statements"
  }
 }

@@ -1,0 +1,256 @@
+{
+ "id": "lem-sp-koszul-roos-coefficient-compatibility",
+ "kind": "statement",
+ "title": "Coefficient coherence of normalized Koszul and Roos models",
+ "statement": "For an essentially small ringed site, a ring sheaf R, a global section s and any Models R s satisfying Normalization of [def-sp-koszul-roos-comparison-data], every k <= m admits the canonical quotient map R/(s^(m+1)) -> R/(s^(k+1)), its ordinary restricted tensor transition b tensor x -> q(b) tensor x, and a derived restricted transition normalized by the K-flat scalar counits. These transitions commute with the strict Koszul augmentations, the localized two-term comparisons, and the prescribed tensor/Roos/tail comparison for every strict tower and every tail. No regularity or existence of normalized models is asserted here.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "First proof paragraph, naturality of reduction maps; step 12 of the parent comparison proof."
+ },
+ "stmt_deps": [
+  "def-sp-koszul-roos-comparison-data"
+ ],
+ "proof": [
+  {
+   "text": "The ideal inclusion (s^(m+1)) <= (s^(k+1)) gives sectionwise quotient maps. Their naturality and compatibility with the quotient projections survive sheafification. Compose restriction along q with restriction to R by the identity on underlying sections. Apply the two specified ordinary adjunctions to their units to obtain e; its unit equation and linearity give the pure-section formula.",
+   "uses": [
+    "def-pe-principal-power-ring-quotients",
+    "def-sp-koszul-roos-comparison-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ, tensor/restriction adjunction and quotient scalar maps."
+   }
+  },
+  {
+   "text": "The strict Koszul unit inclusion commutes with the cone transitions. The degree-zero cone inclusion is an isomorphism on the degree-zero term, so the ordinary-unit identity proves the augmentation square on degree-zero tensor summands. Both sides vanish on every other Koszul degree by Normalization.",
+   "uses": [
+    "def-pur-principal-koszul-quotient-towers",
+    "def-sp-koszul-roos-comparison-data"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph, repleteness and finite-tail deletion; reduction as a two-term cone commuting with Rlim; naturality; boundedness; returned DAG proof steps 3, 7, 8, 11; Bhatt–Scholze, The pro-étale topology for schemes, §3.5, Lemmas 3.5.4–3.5.7."
+   }
+  },
+  {
+   "text": "Conjugate the localized strict tensor transition by the two A isomorphisms. Fullness of precomposition with localization descends this natural transformation to c on the derived category. Its A square is immediate and its K-flat counit equation follows by the two A_kflat normalization equations and the augmentation square.",
+   "uses": [
+    "def-sp-koszul-roos-comparison-data",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Localization universal property and Tag 06YY derived scalar extension."
+   }
+  },
+  {
+   "text": "The canonical tensor/product comparisons commute with the Koszul transition by product extensionality and naturality. Check the tensor/Roos square on every total-tensor summand and the two biproduct coordinates; the same sign (-1)^a occurs on both previous-degree components. Substitute this square, deletion naturality, the A square, and norm naturality into the explicit comparison composite.",
+   "uses": [
+    "def-sp-koszul-roos-comparison-data",
+    "def-weil-strict-roos-model",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph, repleteness and finite-tail deletion; reduction as a two-term cone commuting with Rlim; naturality; boundedness; returned DAG proof steps 3, 7, 8, 11; Bhatt–Scholze, The pro-étale topology for schemes, §3.5, Lemmas 3.5.4–3.5.7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pe-principal-power-ring-quotients",
+  "def-sp-koszul-roos-comparison-data",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-weil-abstract-derived-category",
+  "def-weil-strict-roos-model",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "First proof paragraph, expanded normalized Koszul/Roos construction and compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite two term Koszul tensor commutes with Roos derived inverse limit preserving projections and finite tails",
+   "results": {
+    "count": 8,
+    "hits": [
+     "Profinite.NobelingProof.GoodProducts.square_commutes",
+     "AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype",
+     "AdicCompletion.tensor_map_id_left_eq_map",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of",
+     "AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian",
+     "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+     "AdicCompletion.ofTensorProductEquivOfPiFintype",
+     "AlgebraicTopology.DoldKan.PInfty_on_Γ₀_splitting_summand_eq_self"
+    ],
+    "digest": "2cd0ce29f9c7efcc",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match. Read the returned declarations: none supplies the normalized sheaf-valued Koszul/Roos model or its coefficient coherence. Reuse the general cone, tensor, adjunction and quotient APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"mapBifunctor\"",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match. Read the returned declarations: none supplies the normalized sheaf-valued Koszul/Roos model or its coefficient coherence. Reuse the general cone, tensor, adjunction and quotient APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "roos|Roos|mapBifunctorMappingCone",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "Algebra/Homology"
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match. Read the returned declarations: none supplies the normalized sheaf-valued Koszul/Roos model or its coefficient coherence. Reuse the general cone, tensor, adjunction and quotient APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"IsIso\"",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match. Read the returned declarations: none supplies the normalized sheaf-valued Koszul/Roos model or its coefficient coherence. Reuse the general cone, tensor, adjunction and quotient APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized chain tensor models for regular principal quotients commute with the Roos cone and deletion of a finite prefix",
+   "results": {
+    "count": 8,
+    "hits": [
+     "DoldKan.termN[_]",
+     "CategoryTheory.FreeMonoidalCategory.normalizeIsoApp",
+     "CategoryTheory.FreeMonoidalCategory.normalize",
+     "CategoryTheory.FreeMonoidalCategory.normalizeIsoApp'",
+     "CategoryTheory.Idempotents.DoldKan.N",
+     "CategoryTheory.FreeMonoidalCategory.normalizeIsoApp_tensor",
+     "CategoryTheory.FreeMonoidalCategory.normalizeObj_tensor",
+     "CategoryTheory.FreeMonoidalCategory.normalizeObj"
+    ],
+    "digest": "d7d7c9244abe712d",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match. Read the returned declarations: none supplies the normalized sheaf-valued Koszul/Roos model or its coefficient coherence. Reuse the general cone, tensor, adjunction and quotient APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"mapBifunctor\"",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match. Read the returned declarations: none supplies the normalized sheaf-valued Koszul/Roos model or its coefficient coherence. Reuse the general cone, tensor, adjunction and quotient APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "roos|Roos|mapBifunctorMappingCone",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "Algebra/Homology"
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match. Read the returned declarations: none supplies the normalized sheaf-valued Koszul/Roos model or its coefficient coherence. Reuse the general cone, tensor, adjunction and quotient APIs."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Maps between quotient scalar extension functors commute with a normalized Koszul tensor and Roos cone comparison",
+   "results": {
+    "count": 8,
+    "hits": [
+     "ModuleCat.extendScalars",
+     "ModuleCat.ExtendScalars.map'",
+     "ModuleCat.ExtendScalars.obj'",
+     "Submodule.quotOfListConsSMulTopEquivQuotSMulTopInner_naturality",
+     "ModuleCat.restrictCoextendScalarsAdj",
+     "ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+     "QuotSMulTop.map",
+     "ModuleCat.extendRestrictScalarsAdj"
+    ],
+    "digest": "603e1011c58e4078",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact match. Read the returned declarations: none supplies the normalized sheaf-valued Koszul/Roos model or its coefficient coherence. Reuse the general cone, tensor, adjunction and quotient APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.KoszulRoosProjectionComparison",
+  "date": "2026-10-21",
+  "group": "X5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "First proof paragraph, naturality of reduction maps; step 12 of the parent comparison proof.",
+   "via": [
+    "lem-sp-koszul-roos-projection-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KoszulRoosCoefficientCompatibility",
+  "file": "lean/Sheaf/Algebra/Homology/KoszulRoosCoefficientCompatibility.lean",
+  "declaration": "CategoryTheory.KoszulRoos.koszulRoosCoefficientCompatibility",
+  "statement": "theorem koszulRoosCoefficientCompatibility (M : Models R s)\n    (hM : Normalization R s M) : ∀ (k m : ℕ) (hkm : k ≤ m),\n    ∃ q : B R s m ⟶ B R s k,\n      quotient R s m ≫ q = quotient R s k ∧\n      ∃ e : (M.scalar m).E ⋙ restriction R s m ⟶\n          (M.scalar k).E ⋙ restriction R s k,\n        (∀ (P : Modules R) (U : Cᵒᵖ) (b : (B R s m).obj.obj U) (x : P.val.obj U),\n          (e.app P).val.app U (pure R s m (M.scalar m) P U b x) =\n            pure R s k (M.scalar k) P U ((q.hom.app U).hom b) x) ∧\n        ∃ c : (M.scalar m).T ⋙ (restriction R s m).mapDerivedCategory ⟶\n            (M.scalar k).T ⋙ (restriction R s k).mapDerivedCategory,\n          (∀ (P : CochainComplex (Modules R) ℤ),\n            CochainComplex.IsKFlatIndependentCoefficients (R := R) P →\n            c.app (DerivedCategory.Q.obj P) ≫\n                (restriction R s k).mapDerivedCategory.map ((M.scalar k).ε.app P) ≫\n                (restriction R s k).mapDerivedCategoryFactors.hom.app\n                  (((M.scalar k).E.mapHomologicalComplex (.up ℤ)).obj P) =\n              (restriction R s m).mapDerivedCategory.map ((M.scalar m).ε.app P) ≫\n                (restriction R s m).mapDerivedCategoryFactors.hom.app\n                  (((M.scalar m).E.mapHomologicalComplex (.up ℤ)).obj P) ≫\n                DerivedCategory.Q.map\n                  ((ordinaryTransition R s (M.scalar m) (M.scalar k) e).app P)) ∧\n          (∀ P : CochainComplex (Modules R) ℤ,\n            (tensorStep R s hkm).app P ≫ (M.aug k).app P =\n              (M.aug m).app P ≫ (ordinaryTransition R s (M.scalar m) (M.scalar k) e).app P) ∧\n          (∀ P : CochainComplex (Modules R) ℤ,\n            DerivedCategory.Q.map ((tensorStep R s hkm).app P) ≫ (M.A k).hom.app P =\n              (M.A m).hom.app P ≫ c.app (DerivedCategory.Q.obj P)) ∧\n          (∀ (X : CochainComplex (ℕᵒᵖ ⥤ Modules R) ℤ) (h : ℕ),\n            c.app (M.RF.obj (DerivedCategory.Q.obj X)) ≫ M.comparison R s X k h =\n              M.comparison R s X m h ≫ M.RF.map (DerivedCategory.Q.map\n                ((tail R h).map ((onTowersMap R (tensorStep R s hkm)).app X))))",
+  "branch": "sheaf-dag",
+  "by": "X5",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "edge_cases": "Checked predecessor index m=0, equal coefficient indices k=m (identity transition), empty deleted prefix h=0, a unit section (zero quotient), and the zero ring. The coefficient assertion assumes only the displayed normalization, not regularity; the construction assertion retains Mono multiplication to identify the regular two-term quotient."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-eb61a",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261021T154754-L-3172406",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-eb61a",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261021T154754-L-3172406",
+  "kind": "interface",
+  "note": "independent cc review: published KoszulRoosProjectionComparison defs vs new KoszulRoosComparisonData (verbatim; tensor instance rfl-probed equal); item signature byte-identical; two sorry halves vs Normalization/Compatibility fields and node statements"
+ }
+}
