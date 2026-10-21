@@ -15,10 +15,9 @@ public import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
-import WeilConjectures.Algebra.Homology.HomComplex
-import Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
+import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
+import Sheaf.Algebra.Homology.RHomColimitSourceTransport
+import Sheaf.CategoryTheory.SignedDerivedInternalHomExact
 
 /-! # The filtered-target internal-Hom cohomology ladder
 
@@ -37,8 +36,11 @@ set_option backward.isDefEq.respectTransparency.types false
 
 universe u v r w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposite
+open CategoryTheory.Pretriangulated.Opposite
 
 namespace WeilConjectures.SfbHomFilteredColimit
+
+attribute [local irreducible] CategoryTheory.homComplexFunctor
 
 variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max u v r}]
@@ -133,6 +135,7 @@ def ladderStrictAlpha (P : CochainComplex (Modules.{u, v, r} J R) ℤ) :
         ((homFixed.{u, v, r} J R P).mapCocone (colimit.cocone N))) ≫
     (coefficientHomResolutionIso.{r, u, v, w} J R P (colimit N)).inv
 
+set_option linter.unusedSectionVars false in
 /-- Cohomology commutes naturally with every filtered termwise complex colimit.
 The preservation predicate specifies the canonical comparison isomorphism, including
 its equation on every colimit leg.
@@ -145,7 +148,10 @@ in complex diagrams and agrees with cohomology of every colimit injection. -/
 theorem ladder_filtered_cohomology [IsFiltered I] (q : ℤ) :
     PreservesColimitsOfShape I
       (HomologicalComplex.homologyFunctor (Modules.{u, v, r} J R) (.up ℤ) q) := by
-  sorry
+  let : IsGrothendieckAbelian.{max u v r} (Modules.{u, v, r} J R) :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u, v, r}
+      J R).1
+  infer_instance
 
 /-- Filtered termwise colimits preserve quasi-isomorphisms and common lower bounds.
 Source: Stacks 03DB (blueprint: lem-sfb-rhom-colimit-cohomology-ladder).
@@ -162,7 +168,125 @@ theorem ladder_filtered_consequences [IsFiltered I] :
       ∀ q : ℤ, q < a → IsZero
         ((HomologicalComplex.homologyFunctor (Modules.{u, v, r} J R) (.up ℤ) q).obj
           (colimit K))) := by
-  sorry
+  let H (q : ℤ) := HomologicalComplex.homologyFunctor (Modules.{u, v, r} J R) (.up ℤ) q
+  let (q : ℤ) : PreservesColimitsOfShape I (H q) :=
+    ladder_filtered_cohomology.{u, v, r} J R q
+  constructor
+  · intro K L f hf
+    rw [quasiIso_iff]
+    intro q
+    rw [quasiIsoAt_iff_isIso_homologyMap]
+    let (i : I) : QuasiIso (f.app i) := hf i
+    have (i : I) : IsIso ((Functor.whiskerRight f (H q)).app i) := by
+      change IsIso (HomologicalComplex.homologyMap (f.app i) q)
+      infer_instance
+    have : IsIso (Functor.whiskerRight f (H q)) := NatIso.isIso_of_isIso_app _
+    have he := (preservesColimitNatIso (J := I) (H q)).hom.naturality f
+    change (H q).map (colim.map f) ≫ (preservesColimitIso (H q) L).hom =
+      (preservesColimitIso (H q) K).hom ≫
+        colim.map (Functor.whiskerRight f (H q)) at he
+    have hm : (H q).map (colim.map f) =
+        (preservesColimitIso (H q) K).hom ≫
+          colim.map (Functor.whiskerRight f (H q)) ≫
+          (preservesColimitIso (H q) L).inv := by
+      rw [← Category.assoc, ← he, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    change IsIso ((H q).map (colim.map f))
+    rw [hm]
+    infer_instance
+  · intro K a hK q hq
+    exact (IsColimit.isZero_pt (colimit.isColimit (K ⋙ H q))
+      (Functor.isZero _ (fun i ↦ hK i q hq))).of_iso
+        (preservesColimitIso (H q) K)
+
+
+private def ladderResolution
+    (P : CochainComplex (Modules.{u, v, r} J R) ℤ) :
+    DerivedCategory.Q ⋙ RingedHomUniverses.hom.{u, v, r, w} J R
+        (DerivedCategory.Q.obj P) ≅
+      homFixed.{u, v, r} J R P ⋙ DerivedCategory.Q := by
+  let A := Modules.{u, v, r} J R
+  let : IsGrothendieckAbelian.{max u v r} A :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u, v, r}
+      J R).1
+  let e : (DerivedCategory.Q.op.prod DerivedCategory.Q) ⋙
+      derivedInternalHomOfUniverses.{u, v, r, w} J R ≅
+      (𝟭 _).prod (coefficientHomResolution.{r, u, v} J R) ⋙
+        Functor.uncurry.obj (homComplexFunctor.{u, v, max u v r, max u v r} (R := R)) ⋙
+          DerivedCategory.Q :=
+    Localization.fac _
+      (derivedInternalHomOfUniverses_inverts.{u, v, r, w} J R _
+        (CochainComplex.toKInjectiveResolution.{max u v r} A)
+        (fun F ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{max u v r}
+          A F).2, CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{max u v r}
+            A F⟩)) (DerivedCategory.Q.op.prod DerivedCategory.Q)
+  exact NatIso.ofComponents
+    (fun i ↦ coefficientHomResolutionIso.{r, u, v, w} J R P i)
+    (by
+      intro i j f
+      change (derivedInternalHomOfUniverses.{u, v, r, w} J R).map
+        (Prod.mkHom (𝟙 _) (DerivedCategory.Q.map f)) ≫ e.hom.app (op P, j) =
+          e.hom.app (op P, i) ≫ DerivedCategory.Q.map
+            ((homComplexFunctor.{u, v, max u v r, max u v r} (R := R)).obj
+              (op P) |>.map ((coefficientHomResolution.{r, u, v} J R).map f))
+      have hn := e.hom.naturality (Prod.mkHom (𝟙 (op P)) f)
+      dsimp only [Functor.comp_map, Functor.prod_map, Functor.prod_obj, Functor.id_obj,
+        Functor.op_map, unop_id, Functor.uncurry_obj_map, Functor.id_map] at hn
+      have hQ : (DerivedCategory.Q : CochainComplex (Modules.{u, v, r} J R) ℤ ⥤
+          DerivedCategory (Modules.{u, v, r} J R)).map (𝟙 P) = 𝟙 _ :=
+        CategoryTheory.Functor.map_id _ P
+      have hH : (homComplexFunctor.{u, v, max u v r, max u v r} (R := R)).map
+          (𝟙 (op P)) = 𝟙 _ := CategoryTheory.Functor.map_id _ (op P)
+      simpa only [hQ, hH, op_id, NatTrans.id_app, Category.id_comp, Functor.op_obj,
+        Functor.comp_obj, Functor.prod_obj, Functor.id_obj] using hn)
+
+
+private def ladderResolutionIso
+    (P : CochainComplex (Modules.{u, v, r} J R) ℤ) :
+    N ⋙ DerivedCategory.Q ⋙ RingedHomUniverses.hom.{u, v, r, w} J R
+        (DerivedCategory.Q.obj P) ≅
+      N ⋙ homFixed.{u, v, r} J R P ⋙ DerivedCategory.Q :=
+  Functor.isoWhiskerLeft N (ladderResolution.{u, v, r, w} J R P)
+
+private def ladderBeta [IsFiltered I]
+    (P : CochainComplex (Modules.{u, v, r} J R) ℤ) (q : ℤ) :
+    colimit (ladderDiagram.{u, v, r, w} J R N (DerivedCategory.Q.obj P) q) ≅
+      (DerivedCategory.homologyFunctor (Modules.{u, v, r} J R) q).obj
+        (DerivedCategory.Q.obj ((ladderModel.{u, v, r} J R N).obj (op P))) := by
+  let H := DerivedCategory.homologyFunctor (Modules.{u, v, r} J R) q
+  let : PreservesColimitsOfShape I
+      (HomologicalComplex.homologyFunctor (Modules.{u, v, r} J R) (.up ℤ) q) :=
+    ladder_filtered_cohomology.{u, v, r} J R q
+  let : PreservesColimitsOfShape I (DerivedCategory.Q ⋙ H) :=
+    preservesColimitsOfShape_of_natIso
+      (DerivedCategory.homologyFunctorFactors (Modules.{u, v, r} J R) q).symm
+  exact colim.mapIso (Functor.isoWhiskerRight (ladderResolutionIso.{u, v, r, w} J R N P) H) ≪≫
+    (preservesColimitIso (DerivedCategory.Q ⋙ H) (N ⋙ homFixed.{u, v, r} J R P)).symm
+
+@[reassoc]
+private theorem ladderBeta_ι [IsFiltered I]
+    (P : CochainComplex (Modules.{u, v, r} J R) ℤ) (q : ℤ) (i : I) :
+    colimit.ι (ladderDiagram.{u, v, r, w} J R N (DerivedCategory.Q.obj P) q) i ≫
+        (ladderBeta.{u, v, r, w} J R N P q).hom =
+      (DerivedCategory.homologyFunctor (Modules.{u, v, r} J R) q).map
+        ((coefficientHomResolutionIso.{r, u, v, w} J R P (N.obj i)).hom ≫
+          DerivedCategory.Q.map (colimit.ι (N ⋙ homFixed.{u, v, r} J R P) i)) := by
+  let : PreservesColimitsOfShape I
+      (HomologicalComplex.homologyFunctor (Modules.{u, v, r} J R) (.up ℤ) q) :=
+    ladder_filtered_cohomology.{u, v, r} J R q
+  let : PreservesColimitsOfShape I
+      (DerivedCategory.Q ⋙ DerivedCategory.homologyFunctor (Modules.{u, v, r} J R) q) :=
+    preservesColimitsOfShape_of_natIso
+      (DerivedCategory.homologyFunctorFactors (Modules.{u, v, r} J R) q).symm
+  dsimp only [ladderBeta, Iso.trans_hom, Functor.mapIso_hom, Iso.symm_hom]
+  rw [colimit.ι_map_assoc]
+  dsimp only [Functor.isoWhiskerRight_hom, Functor.whiskerRight_app]
+  change _ ≫ colimit.ι ((N ⋙ homFixed.{u, v, r} J R P) ⋙
+    (DerivedCategory.Q ⋙ DerivedCategory.homologyFunctor (Modules.{u, v, r} J R) q)) i ≫
+      (preservesColimitIso _ (N ⋙ homFixed.{u, v, r} J R P)).inv = _
+  rw [ι_preservesColimitIso_inv]
+  simp only [ladderResolutionIso,
+    Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app, ladderResolution,
+    NatIso.ofComponents_hom_app, Functor.map_comp, Functor.comp_map]
 
 /-- The canonical model cocone descends in the source, and its cohomology is the
 vertical colimit map under the canonical cohomology-colimit identification.
@@ -207,7 +331,176 @@ theorem ladder_comparison [IsFiltered I] :
               (DerivedCategory.homologyFunctor (Modules.{u, v, r} J R) q).map
                 (e.inv.app (op P) ≫ alpha.app (op (DerivedCategory.Q.obj P))) =
             ladderVertical.{u, v, r, w} J R N (DerivedCategory.Q.obj P) q) := by
-  sorry
+  obtain ⟨G, rho, alpha, t, hα, _⟩ :=
+    CategoryTheory.RingedHomColimitTransport.source_transport.{u, v, r, w} J R (I := I)
+  let ev := (evaluation (I ⥤ CochainComplex (Modules.{u, v, r} J R) ℤ)
+    (DerivedCategory (Modules.{u, v, r} J R))).obj N
+  let F := G ⋙ ev
+  let e : DerivedCategory.Q.op ⋙ F ≅ ladderModel.{u, v, r} J R N ⋙ DerivedCategory.Q :=
+    Functor.isoWhiskerRight rho ev
+  let a : F ⟶ ladderTarget.{u, v, r, w} J R (DerivedCategory.Q.obj (colimit N)) :=
+    Functor.whiskerRight alpha ev
+  have ha (P : CochainComplex (Modules.{u, v, r} J R) ℤ) :
+      e.hom.app (op P) ≫ ladderStrictAlpha.{u, v, r, w} J R N P =
+        a.app (op (DerivedCategory.Q.obj P)) := by
+    exact (hα P N).symm
+  refine ⟨F, e, a, ha, ?_⟩
+  intro P q
+  refine ⟨ladderBeta.{u, v, r, w} J R N P q,
+    ladderBeta_ι.{u, v, r, w} J R N P q, ?_⟩
+  have hαP : e.inv.app (op P) ≫ a.app (op (DerivedCategory.Q.obj P)) =
+      ladderStrictAlpha.{u, v, r, w} J R N P := by
+    rw [← ha P, ← Category.assoc, e.inv_hom_id_app, Category.id_comp]
+  rw [hαP]
+  apply colimit.hom_ext
+  intro i
+  rw [ladderBeta_ι_assoc, ← Functor.map_comp]
+  change _ = colimit.ι ((N ⋙ DerivedCategory.Q) ⋙
+    RingedHomUniverses.hom.{u, v, r, w} J R (DerivedCategory.Q.obj P) ⋙
+      DerivedCategory.homologyFunctor (Modules.{u, v, r} J R) q) i ≫ _
+  rw [ladderVertical, colimit.ι_desc]
+  have hn := (ladderResolution.{u, v, r, w} J R P).hom.naturality (colimit.ι N i)
+  have hc :
+      ((coefficientHomResolutionIso.{r, u, v, w} J R P (N.obj i)).hom ≫
+          DerivedCategory.Q.map (colimit.ι (N ⋙ homFixed.{u, v, r} J R P) i)) ≫
+        ladderStrictAlpha.{u, v, r, w} J R N P =
+      (RingedHomUniverses.hom.{u, v, r, w} J R (DerivedCategory.Q.obj P)).map
+        (DerivedCategory.Q.map (colimit.ι N i)) := by
+    dsimp only [ladderStrictAlpha]
+    rw [Category.assoc, ← DerivedCategory.Q.map_comp_assoc, colimit.ι_desc]
+    have hn' := congrArg (fun k ↦ k ≫
+      (coefficientHomResolutionIso.{r, u, v, w} J R P (colimit N)).inv) hn.symm
+    simpa only [ladderResolution, NatIso.ofComponents_hom_app, Functor.comp_map,
+      Category.assoc, Iso.hom_inv_id, Category.comp_id,
+      Functor.mapCocone_ι_app, colimit.cocone_ι] using hn'
+  rw [hc]
+  rfl
+
+
+private theorem ladderVertical_naturality
+    {A B : DerivedCategory (Modules.{u, v, r} J R) ⥤ Modules.{u, v, r} J R}
+    (f : A ⟶ B) :
+    colim.map (Functor.whiskerLeft (N ⋙ DerivedCategory.Q) f) ≫
+        colimit.desc _ (B.mapCocone (DerivedCategory.Q.mapCocone (colimit.cocone N))) =
+      colimit.desc _ (A.mapCocone (DerivedCategory.Q.mapCocone (colimit.cocone N))) ≫
+        f.app (DerivedCategory.Q.obj (colimit N)) := by
+  apply colimit.hom_ext
+  intro i
+  rw [colimit.ι_map_assoc, colimit.ι_desc, colimit.ι_desc_assoc]
+  exact (f.naturality (DerivedCategory.Q.map (colimit.ι N i))).symm
+
+set_option linter.unusedSectionVars false in
+private theorem ladderColim_exact [IsFiltered I]
+    {A B D : I ⥤ Modules.{u, v, r} J R} (f : A ⟶ B) (g : B ⟶ D)
+    (h : ∀ i : I, ∃ z : f.app i ≫ g.app i = 0,
+      (ShortComplex.mk _ _ z).Exact) :
+    ∃ z : colim.map f ≫ colim.map g = 0, (ShortComplex.mk _ _ z).Exact := by
+  let : IsGrothendieckAbelian.{max u v r} (Modules.{u, v, r} J R) :=
+    (SheafOfModules.grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u, v, r}
+      J R).1
+  have z : f ≫ g = 0 := by
+    apply NatTrans.ext
+    exact funext (fun i ↦ (h i).choose)
+  let K := ShortComplex.mk f g z
+  have hK : K.Exact := by
+    rw [ShortComplex.exact_iff_isZero_homology]
+    apply Functor.isZero
+    intro i
+    exact ((ShortComplex.exact_iff_isZero_homology _).mp (h i).choose_spec).of_iso
+      (K.mapHomologyIso ((evaluation I (Modules.{u, v, r} J R)).obj i)).symm
+  exact ⟨_, hK.map colim⟩
+
+private theorem ladderRow_exact
+    (T : Triangle (DerivedCategory (Modules.{u, v, r} J R)))
+    (hT : T ∈ distTriang (DerivedCategory (Modules.{u, v, r} J R)))
+    (M : DerivedCategory (Modules.{u, v, r} J R)) (q : ℤ) :
+    (∃ h : (ladderBoundary.{u, v, r, w} J R T q).app M ≫
+        (ladderPrecomp.{u, v, r, w} J R T.mor₂ q).app M = 0,
+      (ShortComplex.mk _ _ h).Exact) ∧
+    (∃ h : (ladderPrecomp.{u, v, r, w} J R T.mor₂ q).app M ≫
+        (ladderPrecomp.{u, v, r, w} J R T.mor₁ q).app M = 0,
+      (ShortComplex.mk _ _ h).Exact) ∧
+    (∃ h : (ladderPrecomp.{u, v, r, w} J R T.mor₁ (q - 1)).app M ≫
+        (ladderBoundary.{u, v, r, w} J R T q).app M = 0,
+      (ShortComplex.mk _ _ h).Exact) := by
+  let F := Prod.sectL _ M ⋙ derivedInternalHomOfUniverses.{u, v, r, w} J R
+  obtain ⟨S, hS, hpos, hneg⟩ := signedDerivedInternalHom_exact.{u, v, r, w} J R M
+  let := S
+  let := hS
+  let H (n : ℤ) := DerivedCategory.homologyFunctor (Modules.{u, v, r} J R) n
+  let c : H (q - 1) ≅ shiftFunctor _ (-1 : ℤ) ⋙ H q :=
+    ((DerivedCategory.homologyFunctor (Modules.{u, v, r} J R) 0).shiftIso
+      (-1) q (q - 1) (by omega)).symm
+  let e (X : DerivedCategory (Modules.{u, v, r} J R)) :
+      (H (q - 1)).obj (F.obj (op X)) ≅ (H q).obj (F.obj (op (X⟦(1 : ℤ)⟧))) :=
+    c.app (F.obj (op X)) ≪≫
+      (H q).mapIso ((F.commShiftIso (-1 : ℤ)).symm.app (op X))
+  have he (X) : (e X).hom =
+      (((DerivedCategory.homologyFunctor (Modules.{u, v, r} J R) 0).shiftIso
+        (-1) q (q - 1) (by omega)).inv.app (F.obj (op X))) ≫
+        (H q).map ((RingedHomUniverses.sourceShift.{u, v, r, w} J R X 1).hom.app M) := by
+    dsimp only [e, c, Iso.trans_hom, Iso.symm_hom, Iso.app_inv, Iso.app_hom,
+      Functor.mapIso_hom]
+    rw [hneg]
+  have hb : (ladderBoundary.{u, v, r, w} J R T q).app M =
+      (e T.obj₁).hom ≫ (H q).map (F.map T.mor₃.op) := by
+    rw [he]
+    rfl
+  have hn {X Y : DerivedCategory (Modules.{u, v, r} J R)} (f : X ⟶ Y) :
+      (H (q - 1)).map (F.map f.op) ≫ (e X).hom =
+        (e Y).hom ≫ (H q).map (F.map (f⟦(1 : ℤ)⟧').op) := by
+    have hn₁ : (F.map f.op)⟦(-1 : ℤ)⟧' ≫
+        (F.commShiftIso (-1 : ℤ)).inv.app (op X) =
+      (F.commShiftIso (-1 : ℤ)).inv.app (op Y) ≫
+        F.map (f⟦(1 : ℤ)⟧').op :=
+      (F.commShiftIso (-1 : ℤ)).inv.naturality f.op
+    have hn₂ := c.hom.naturality (F.map f.op)
+    dsimp only [Functor.comp_map] at hn₂
+    dsimp only [e, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Functor.mapIso_hom]
+    rw [← Category.assoc, hn₂]
+    simp only [Category.assoc, ← (H q).map_comp]
+    rw [hn₁]
+  let hrow (U : Triangle (DerivedCategory (Modules.{u, v, r} J R)))
+      (hU : U ∈ distTriang (DerivedCategory (Modules.{u, v, r} J R))) (n : ℤ) :=
+    (F ⋙ H n).map_distinguished_op_exact U hU
+  have h₁ := hrow T.rotate (rot_of_distTriang T hT) q
+  have h₂ := hrow T hT q
+  have h₃ := hrow T.rotate.rotate (rot_of_distTriang _ (rot_of_distTriang T hT)) q
+  constructor
+  · have hz : (ladderBoundary.{u, v, r, w} J R T q).app M ≫
+        (ladderPrecomp.{u, v, r, w} J R T.mor₂ q).app M = 0 := by
+      rw [hb, Category.assoc]
+      change (e T.obj₁).hom ≫ ((H q).map (F.map T.mor₃.op) ≫
+        (H q).map (F.map T.mor₂.op)) = 0
+      rw [← Functor.map_comp, ← Functor.map_comp, ← op_comp,
+        comp_distTriang_mor_zero₂₃ T hT, op_zero, F.map_zero, (H q).map_zero,
+        comp_zero]
+    refine ⟨hz, ShortComplex.exact_of_iso ?_ h₁⟩
+    exact ShortComplex.isoMk (e T.obj₁).symm (Iso.refl _) (Iso.refl _)
+      (by simp [hb]) (by simp [ladderPrecomp, F, H])
+  constructor
+  · exact ⟨_, h₂⟩
+  · have hz : (ladderPrecomp.{u, v, r, w} J R T.mor₁ (q - 1)).app M ≫
+        (ladderBoundary.{u, v, r, w} J R T q).app M = 0 := by
+      rw [hb, ← Category.assoc]
+      change ((H (q - 1)).map (F.map T.mor₁.op) ≫ (e T.obj₁).hom) ≫ _ = 0
+      rw [hn, Category.assoc, ← Functor.map_comp, ← Functor.map_comp, ← op_comp,
+        comp_distTriang_mor_zero₃₁ T hT, op_zero, F.map_zero, (H q).map_zero,
+        comp_zero]
+    refine ⟨hz, ShortComplex.exact_of_iso ?_ h₃⟩
+    refine ShortComplex.isoMk (-(e T.obj₂).symm) (e T.obj₁).symm (Iso.refl _) ?_ ?_
+    · have hc : (-(e T.obj₂).inv) ≫ (H (q - 1)).map (F.map T.mor₁.op) =
+          (H q).map (F.map (-T.mor₁⟦(1 : ℤ)⟧').op) ≫ (e T.obj₁).inv := by
+        simp only [op_neg, F.map_neg, (H q).map_neg, Preadditive.neg_comp, neg_inj]
+        rw [← cancel_mono (e T.obj₁).hom]
+        simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
+          Iso.inv_hom_id_assoc] using
+            congrArg (fun k ↦ (e T.obj₂).inv ≫ k) (hn T.mor₁)
+      simpa only [Preadditive.neg_iso_hom, Iso.symm_hom, ladderPrecomp,
+        Functor.whiskerRight_app, ShortComplex.map, ShortComplex.op,
+        shortComplexOfDistTriangle, Triangle.rotate, Triangle.mk, Functor.comp_map,
+        F, H, Functor.curry_obj_map_app, Prod.sectL_map] using hc
+    · simp [hb]
 
 /-- Both cohomology rows are exact and all squares commute, including the signed
 connecting square. The three exact spots in every degree give the entire infinite
@@ -283,6 +576,20 @@ theorem rhom_colimit_cohomology_ladder [IsFiltered I]
       ladderVertical.{u, v, r, w} J R N T.obj₁ (q - 1) ≫
         (ladderBoundary.{u, v, r, w} J R T q).app
           (DerivedCategory.Q.obj (colimit N))) := by
-  sorry
+  have hr (M : DerivedCategory (Modules.{u, v, r} J R)) :=
+    ladderRow_exact.{u, v, r, w} J R T hT M q
+  refine ⟨?_, ?_, ?_, (hr _).1, (hr _).2.1, (hr _).2.2, ?_, ?_, ?_⟩
+  · exact ladderColim_exact.{u, v, r} J R _ _
+      (fun i ↦ (hr (DerivedCategory.Q.obj (N.obj i))).1)
+  · exact ladderColim_exact.{u, v, r} J R _ _
+      (fun i ↦ (hr (DerivedCategory.Q.obj (N.obj i))).2.1)
+  · exact ladderColim_exact.{u, v, r} J R _ _
+      (fun i ↦ (hr (DerivedCategory.Q.obj (N.obj i))).2.2)
+  · exact ladderVertical_naturality.{u, v, r, w} J R N
+      (ladderPrecomp.{u, v, r, w} J R T.mor₂ q)
+  · exact ladderVertical_naturality.{u, v, r, w} J R N
+      (ladderPrecomp.{u, v, r, w} J R T.mor₁ q)
+  · exact ladderVertical_naturality.{u, v, r, w} J R N
+      (ladderBoundary.{u, v, r, w} J R T q)
 
 end WeilConjectures.SfbHomFilteredColimit
