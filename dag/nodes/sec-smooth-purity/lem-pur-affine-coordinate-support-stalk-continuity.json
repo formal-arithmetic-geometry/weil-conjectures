@@ -16,11 +16,155 @@
   "def-coefficient-twists-detailed",
   "def-pur-etale-coordinate-support",
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-asd-finite-etale-tate-twist"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U_i=P_i\\setminus C_i$. In the affine description of [def-sbc-affine-space], $U_i=\\bigcup_{h=1}^bD(t_h)$ and $D(t_h)=\\operatorname{Spec}R_i[t_1,\\ldots,t_b,t_h^{-1}]$. Thus $j_i$ is quasi-compact; it is separated since it is an open immersion, whose diagonal is an isomorphism. Transition maps of the $P_i$ are affine, and $U_j=P_j\\times_{P_i}U_i$, so those of the $U_i$ are affine too: on each displayed principal open they are induced by ring maps. Also $U=\\varprojlim U_i$: fix the least stage $R_0=k$ (if $R=0$, there is no geometric point and the assertion is vacuous); a cone to the $U_i=P_i\\times_{P_0}U_0$ is exactly a cone to the $P_i$ together with its compatible factorization to $U_0$. The given limit property of $P$ identifies this with a map to $P\\times_{P_0}U_0=U$. Hence the punctured-open system has precisely the hypotheses of relative higher-image continuity. The same reasoning applies after restricting to a cofinal family, by extending a cone uniquely along that family.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general: verification of its geometric hypotheses for the coordinate opens"
+   }
+  },
+  {
+   "text": "Put $F_i=A_{P_i}(r)$ and $F=A_P(r)$, using the finite etale twists. They are the constant line sheaves with fibre $L_r=A(r)(k)$, with their canonical pullback identifications. This interpretation involves finite twists only: take $N=\\ell^M$ annihilating $A$. Over $k$, $x^N-1$ has all its distinct roots, so the roots sheaf on every $k$-scheme is the constant finite sheaf $\\mu_N(k)$ (the factors $x-\\zeta$ are pairwise comaximal since $\\zeta-\\zeta'$ is a nonzero element of $k$). Tensor with $A$, then take tensor powers or the rank-one dual for negative $r$, as in [def-coefficient-twists-detailed]. The finite reduction identification in [lem-pur-twist-sheaf-locally-free] identifies this with the finite twists specified in the item. Consequently every transition $u_{ji}^{-1}F_i\\to F_j$ is the identity of this pulled-back line, and $\\varinjlim_i (u_i|_U)^{-1}(F_i|_{U_i})=F|_U$. Indeed the diagram after pullback is the constant diagram on $F|_U$ with identity arrows over a nonempty directed index.",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "def-asd-finite-etale-tate-twist",
+    "lem-pur-twist-sheaf-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PK, section-kummer, finite root sheaves; the finite reductions of the twists in the item"
+   }
+  },
+  {
+   "text": "For any of these pairs $(P_i,C_i)$, the module sheaves on $P_{i,\\mathrm{et}}$ have enough injectives: by [prop-pur-kinjective-resolutions-exist] a sheaf $M$ has a degreewise-injective resolution $M\\to I$, and $M\\cong Z^0(I)\\subseteq I^0$. So [lem-sc-bounded-below-injective-resolution-existence] gives a resolution $F_i\\to I_i$ by injective modules in degrees $\\ge0$, and $I_i$ is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Hence [lem-pur-etale-injective-support-sequence] applies to $I_i$ and computes the support triangle: its first complex is exactly $Q_i(I_i)$, by [def-pur-etale-coordinate-support], and its last is $j_{i,*}j_i^*I_i$. By [lem-weil-pbc-right-derived-plus-injective] (2), $Q_i(I_i)$ computes $RQ_iF_i$; it vanishes in negative degrees, so both negative-degree sides are zero. Thus for $K_i^d=\\mathcal H^d(RQ_iF_i)$ the long exact sequence gives $0\\to K_i^0\\to F_i\\to j_{i,*}(F_i|_{U_i})\\to K_i^1\\to0$ and, for $d\\ge2$, $K_i^d\\cong R^{d-1}j_{i,*}(F_i|_{U_i})$ through the connecting map. The same holds on $P$ for $Q$.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sc-bounded-below-injective-resolution-existence",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-pur-etale-injective-support-sequence",
+    "def-pur-etale-coordinate-support",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45, lemma-cohomology-with-support-triangle, kernel/cokernel and shifted higher-image calculation; module version via Tag 093X"
+   }
+  },
+  {
+   "text": "These exact sequences form compatible diagrams under the supported pullbacks in the question, including their connecting arrows. Here is the comparison on resolutions. For a transition or limit leg $v:P'\\to P_i$, exact module inverse image [prop-weil-pbc-inverse-image-modules-exact] gives a quasi-isomorphism $v^*F_i\\to v^*I_i$. Choose, as in step 3, a bounded-below injective (hence K-injective) resolution $I'$ of $F'$, and use [lem-sp-kinjective-comparison-principle] to lift $v^*F_i\\to F'\\to I'$ to $v^*I_i\\to I'$, uniquely up to homotopy. The ordinary open exchange $v^*j_{i,*}j_i^*I_i\\to j'_*j'^*v^*I_i$, followed by this lift, and the middle lift carry the restriction unit to the restriction unit. Exactness of $v^*$ therefore gives the induced map on the kernels. These three maps give a morphism of the short exact support complexes of step 3. Their right-hand map is the usual derived open exchange, and their left-hand map derives the kernel factorization specified in the item. Applying the same construction to a homotopy gives a homotopy on kernels, so compositions and identities hold on the derived objects; the connecting maps commute by the short-exact-complex construction (a cycle is lifted to the middle complex and its differential taken in the kernel). This fixes the maps, rather than choosing an unspecified completion of a triangle.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sp-kinjective-comparison-principle",
+    "lem-pur-etale-injective-support-sequence",
+    "def-pur-etale-coordinate-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective; lemma-base-change-map-flat-case, construction on resolutions; explicit kernel comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-0eym] to $j_i:U_i\\to P_i$ and the underlying abelian sheaves of $F_i|_{U_i}$, with step 1 giving affine transitions and qcqs $j_i$, and step 2 giving the limiting sheaf. To identify this with the module comparison use [lem-weil-pbc-exchange-forget-coefficients]: all transition and limit squares here are cartesian, and its clauses (1)--(3) identify inverse images, derived direct images and their actual exchange maps after forgetting scalars. Every map is $A$-linear before forgetting. Apply [lem-kun-stalks-commute-colimits] and [lemma-openclosed-stalk-upperstar] to obtain, for every $q\\ge0$, the $A$-linear isomorphism $\\varinjlim_i(R^qj_{i,*}F_i|_{U_i})_{\\bar x_i}\\xrightarrow{\\sim}(R^qj_*F|_U)_{\\bar x}$. The central term comparison $\\varinjlim_i(F_i)_{\\bar x_i}\\to F_{\\bar x}$ is the identity on $L_r$. These are the legs of the exact-sequence diagram of step 4, not arbitrary isomorphisms between its terms.",
+   "uses": [
+    "lem-kun-0eym",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-kun-stalks-commute-colimits",
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM, lemma-relative-colimit-general, statement and specified comparison; Tag 03Q1, lemma-stalk-pullback"
+   }
+  },
+  {
+   "text": "Take geometric stalks of the sequences in step 3, using [prop-weil-pbc-geometric-stalks-exact], and then filtered colimits using [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. Thus $\\varinjlim_iK^0_{i,\\bar x_i}$ is the kernel and $\\varinjlim_iK^1_{i,\\bar x_i}$ the cokernel of the colimit arrow $L_r\\to\\varinjlim_i(j_{i,*}F_i|_{U_i})_{\\bar x_i}$. The commutative square of step 5 identifies this arrow with $F_{\\bar x}\\to(j_*F|_U)_{\\bar x}$, with both vertical arrows invertible. Restricting those invertible arrows to kernels and taking their quotients therefore proves the required comparisons in degrees $0,1$. In degree $d\\ge2$, use the isomorphism of step 3 with $q=d-1$ and step 5. Step 4 identifies each resulting map with the supported leg and guarantees compatibility with the localization boundaries. Negative degrees were settled in step 3.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45, lemma-cohomology-with-support-triangle, applied to the Tag 0EYM comparison on stalks"
+   }
+  },
+  {
+   "text": "The entire argument is natural in a map of the constant coefficient lines: on resolutions use the same lift construction as step 4; on kernels, cokernels and the exchanges it is just the induced map. To check the claimed tensor/dual identifications, choose an $A$-basis of each rank-one line $L_r$ over $k$. A map is then multiplication by an element of $A$, and tensor multiplication or evaluation of duals is $a\\otimes b\\mapsto ab$. The maps of steps 4--6 are $A$-linear, so inserting these identifications on the coefficient factor commutes with them; changing basis multiplies both paths by the same unit. This asserts compatibility with the coefficient-line identifications, without asserting that tensor products of two supported complexes themselves satisfy a new continuity theorem. For coordinate Kummer products use [lem-pur-supported-cup-functoriality]: $\\kappa(t_h)$ pulls back to $\\kappa(t_h)$, its individual support boundary pulls back to that boundary, and the ordered supported product pulls back to that same ordered product. On every pointed etale neighbourhood the global-to-supported-stalk map factors the usual germ through the support kernel, by [def-pur-etale-coordinate-support]. Thus a class from $\\mathbf A^b_k$ has at each stage and at the limit exactly its canonical supported germ; step 4 and hence the comparison of step 6 carry those germs to one another. No finite-stage orientation theorem or purity is used.",
+   "uses": [
+    "lem-pur-supported-cup-functoriality",
+    "def-pur-etale-coordinate-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP, section-cohomology-support, functorial restrictions and boundaries; blueprint coordinate-model normalization clause"
+   }
+  },
+  {
+   "text": "For a cofinal directed family, a class or an equality in the filtered colimit can be represented at a stage by [lem-weil-pbc-filtered-colimit-modules-elementwise]; choose a member of the family above that stage. This proves both surjectivity and injectivity of the reindexing map. Its composite with the comparison of step 6 is the old leg on each representative, so the isomorphism is unchanged. For $f\\in R$, first take the cofinal stages containing $f$. The rings $R_i[1/f]$ are finitely generated $k$-algebras with union $R[1/f]$ (a finite list of numerators and $f$ lies in one stage). The corresponding coordinate squares and their punctured opens are cartesian; step 4 gives the commuting ladders for $R_i\\to R_i[1/f]$ and $R\\to R[1/f]$. Taking their colimits gives the asserted localization compatibility. At a point in two affine base neighbourhoods, choose an affine neighbourhood inside their intersection and then principal affine neighbourhoods of that point inside it and each original affine: principal opens form a basis in an affine spectrum. Apply the localization comparison to these restrictions. If finite-stage orientations agree under base change, their images are equal there by these commuting ladders. This proves the stated agreement on a common affine refinement; it does not require the whole intersection of affine opens to be affine.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYM: cofinal reindexing and explicit affine-local compatibility of the same canonical legs"
+   }
+  },
+  {
+   "text": "If $b=0$, $C_i=P_i$ and $U_i=\\varnothing$, so $j_{i,*}j_i^*=0$ and $Q_i=\\mathrm{id}$, directly from the defining kernel. Likewise $Q=\\mathrm{id}$. The asserted colimit is the identity $L_r\\to L_r$ in degree zero and $0\\to0$ otherwise; all boundaries to/from the empty open are zero and the coordinate product is the empty product $1$. Thus all compatibility assertions persist, including negative degrees. For any zero ring base or empty affine refinement there is no geometric point to check.",
+   "uses": [
+    "def-pur-etale-coordinate-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP, section-cohomology-support, full-support case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-weil-open-immersion",
+  "def-coefficient-twists-detailed",
+  "def-asd-finite-etale-tate-twist",
+  "lem-pur-twist-sheaf-locally-free",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-pur-etale-injective-support-sequence",
+  "def-pur-etale-coordinate-support",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-kun-0eym",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-kun-stalks-commute-colimits",
+  "lemma-openclosed-stalk-upperstar",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-pur-supported-cup-functoriality",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0EYM (lemma-relative-colimit-general) and Tag 0A45 (lemma-cohomology-with-support-triangle); explicit module and canonical-map assembly, finite-line and refinement checks"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +200,45 @@
    "results": "{\"t\": \"2026-10-21T06:19:03Z\", \"tool\": \"grep\", \"query\": \"stalk.*colimit|colimit.*stalk|support.*continuity\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\"], \"digest\": \"95e839600d4695bb\"}",
    "date": "2026-10-21",
    "verdict": "no match: returned general algebraic-geometry, sheaf or homological declarations do not state the complete supported-coordinate assertion; inspected the returned signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "support.*continuity|continuity.*support|stalk.*colimit",
+   "results": "{\"t\": \"2026-10-21T08:21:19Z\", \"tool\": \"grep\", \"query\": \"support.*continuity|continuity.*support|stalk.*colimit\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Limits.lean\"], \"digest\": \"95e839600d4695bb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; general colimits and Zariski structure-sheaf stalk results do not state supported etale continuity with these maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of higher direct images for punctured affine space etale sheaves",
+   "results": "{\"t\": \"2026-10-21T08:21:19Z\", \"tool\": \"leansearch\", \"query\": \"filtered colimit of higher direct images for punctured affine space etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"AlgebraicGeometry.PresheafedSpace.colimit\", \"AddGrpCat.FilteredColimits.colimitCocone\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization.colimitDesc_preimage\", \"SheafOfModules.Presentation.isColimit\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.isColimitCocone\", \"AlgebraicGeometry.SheafedSpace.instCreatesColimitsOfShapePresheafedSpaceForgetToPresheafedSpaceOfSmallOfHasLimitsOfShapeOpposite\", \"AlgebraicGeometry.SheafedSpace.instHasColimitsOfHasLimits\"], \"digest\": \"4d9a47ac56e41a15\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; general colimits and Zariski structure-sheaf stalk results do not state supported etale continuity with these maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-21T08:21:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"stalk\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; general colimits and Zariski structure-sheaf stalk results do not state supported etale continuity with these maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale local cohomology geometric stalk continuity inverse limits affine schemes closed zero section",
+   "results": "{\"t\": \"2026-10-21T08:21:20Z\", \"tool\": \"leanfinder\", \"query\": \"etale local cohomology geometric stalk continuity inverse limits affine schemes closed zero section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv\", \"AlgebraicGeometry.germ_stalkClosedPointIso_hom_assoc\", \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"AlgebraicGeometry.germ_stalkClosedPointIso_hom\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk\", \"AlgebraicGeometry.Scheme.stalkClosedPointTo\", \"AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec\"], \"digest\": \"4778aaef870e3e53\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; general colimits and Zariski structure-sheaf stalk results do not state supported etale continuity with these maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local cohomology is the fiber of restriction to an open complement and commutes with affine limit stalks",
+   "results": "{\"t\": \"2026-10-21T08:22:28Z\", \"tool\": \"leanfinder\", \"query\": \"local cohomology is the fiber of restriction to an open complement and commutes with affine limit stalks\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap_assoc\", \"ModuleCat.Tilde.stalkToFiberLinearMap\", \"ModuleCat.Tilde.toStalk_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap\", \"ModuleCat.Tilde.toOpen_germ\", \"ModuleCat.Tilde.toOpen_germ_apply\", \"ModuleCat.Tilde.toOpen_germ_assoc\", \"ModuleCat.Tilde.stalkToFiberLinearMap_germ\"], \"digest\": \"4507ac7ee4975a2d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; general colimits and Zariski structure-sheaf stalk results do not state supported etale continuity with these maps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-relative-support-coordinate-model",
@@ -79,5 +258,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-affine-coordinate-support-stalk-continuity",
+  "worker": "stage1",
+  "summary": "Proved supported-stalk continuity from existing relative higher-image continuity, the module injective support sequence, exact stalks and exact filtered colimits. Explicitly checked cartesian coefficient-forgetting exchanges, canonical kernel maps and boundaries, degree zero/one, negative degrees, cofinality/localization and b=0. No new nodes and no purity input.",
+  "blueprint": "Nearest ancestor lem-pur-frame-independence, first two proof sentences: local supported-cohomology germs. This item implements the affine-limit and affine-refinement portion extracted through lem-pur-relative-support-bottom-descent and lem-pur-relative-support-coordinate-model.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "General exactness, resolution, coefficient or stalk tool used on ordinary etale modules; it supplies a formal input to the coordinate continuity argument, not a different purity route."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "General exactness, resolution, coefficient or stalk tool used on ordinary etale modules; it supplies a formal input to the coordinate continuity argument, not a different purity route."
+   },
+   {
+    "node": "lem-pur-etale-injective-support-sequence",
+    "why": "Ordinary etale module localization sequence; the pro-etale support node in this unit does not give this module statement."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "General exactness, resolution, coefficient or stalk tool used on ordinary etale modules; it supplies a formal input to the coordinate continuity argument, not a different purity route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "General exactness, resolution, coefficient or stalk tool used on ordinary etale modules; it supplies a formal input to the coordinate continuity argument, not a different purity route."
+   },
+   {
+    "node": "lem-sp-kinjective-comparison-principle",
+    "why": "General exactness, resolution, coefficient or stalk tool used on ordinary etale modules; it supplies a formal input to the coordinate continuity argument, not a different purity route."
+   },
+   {
+    "node": "lem-kun-0eym",
+    "why": "General relative higher-image affine-limit continuity for the punctured-open system; no purity input or replacement of the coordinate route."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "General coefficient-forgetting compatibility of the actual derived exchanges in the cartesian coordinate squares."
+   },
+   {
+    "node": "lem-kun-stalks-commute-colimits",
+    "why": "General exactness, resolution, coefficient or stalk tool used on ordinary etale modules; it supplies a formal input to the coordinate continuity argument, not a different purity route."
+   },
+   {
+    "node": "lemma-openclosed-stalk-upperstar",
+    "why": "General exactness, resolution, coefficient or stalk tool used on ordinary etale modules; it supplies a formal input to the coordinate continuity argument, not a different purity route."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "General exactness, resolution, coefficient or stalk tool used on ordinary etale modules; it supplies a formal input to the coordinate continuity argument, not a different purity route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "why": "General exactness, resolution, coefficient or stalk tool used on ordinary etale modules; it supplies a formal input to the coordinate continuity argument, not a different purity route."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "why": "General exactness, resolution, coefficient or stalk tool used on ordinary etale modules; it supplies a formal input to the coordinate continuity argument, not a different purity route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-twist-sheaf-locally-free",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-etale-injective-support-sequence",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sp-kinjective-comparison-principle",
+  "lem-kun-0eym",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-kun-stalks-commute-colimits",
+  "lemma-openclosed-stalk-upperstar",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-d069b6de4",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-d069b6de4 (reviewer sub-agent of L); spot-checked: I read the item, which has 9 steps and no new nodes, together with the statements of all 19 nodes it cites, and checked Stacks 0EYM (etale-cohomology.tex:7567) and 0A45 (:14072). The item is a statement-only node that the Q86 re-split of coordinate-model created on 2026-10-21. It is still unsplit in live, so this is a first split and not superseded. The statement supplies the parent's step-1 clauses. There is no cycle: no dependency's closure reaches the item or its ancestors. Steps 1, 2 and 4–9 are correct. Step 1: j_i is qcqs by the finite D(t_h) cover, the transitions are affine and U = lim U_i. Step 2: twists are constant because k is algebraically closed and ℓ≠p; r<0 is handled by the dual. Step 4: maps are built on resolutions with lifts unique up to homotopy, and connecting maps commute. Step 5: 0EYM hypotheses hold and the squares are cartesian for forget-coefficients. Step 6: degrees 0/1 via kernel and cokernel, d≥2 via q=d-1. Step 7: supported-cup functoriality holds for arbitrary v, with the germ factorization. Step 8: R_i[1/f] injects into R[1/f], the family is cofinal, and the refinement uses a principal open common to both affines (no E1). Step 9: b=0. Edge cases tested: R=0, b=0,1, d<0, r<0, non-Noetherian R. One fault, C4 in step 3: the support-sequence node needs a degreewise-injective K-injective complex, and no cited statement linked that complex to the bounded-below RQ_i used for negative vanishing. FIX: step 3 now takes a bounded-below injective resolution from the Mathlib leaf lem-sc-bounded-below-injective-resolution-existence (enough injectives from the cited prop). That resolution is K-injective by the Mathlib leaf lem-weil-pbc-bounded-below-injectives-kinjective, and clause (2) of the plus-derived node then computes RQ_i. In step 4, I' is now that same resolution, and proof_deps is updated. Batch-5 flag: lem-pur-supported-cup-functoriality reaches lem-pod-etale-stalk-tensor-scalar, a generic lemma on stalks of tensor products and scalar extension. Neither assumption provides it, it is not part of the proof of either, and it is already in the parents' closure, so accepted. The declared tool uses are generic tools and are accepted. There is no duplicate: lem-kun-0eym and lem-sc-cartesian-higher-image-stalk-colimit are unsupported higher-image results. No SGA source is cited.; 1 file(s) fixed by the reviewer"
  }
 }

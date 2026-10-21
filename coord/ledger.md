@@ -21504,3 +21504,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:58 L: merged deliver/Q97/lem-sp-ell-coefficient-fiber (reviewer FIX; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q103/lem-weil-boundary-proetale-projection-comparison (reviewer FIX; after a return; new nodes: 2)
 - 08:58 L: merged deliver/NQ/lem-pur-normalized-pullback-composition-transport (reviewer PASS; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q73/lem-pur-affine-coordinate-support-stalk-continuity (reviewer FIX; first push; new nodes: 0)
