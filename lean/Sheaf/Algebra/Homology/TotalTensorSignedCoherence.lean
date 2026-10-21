@@ -6,13 +6,10 @@ Authors: SHEAF group Q124
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Algebra.Homology.RingedTensorComplexConstraints
+public import Sheaf.Algebra.Homology.RingedDerivedTensorNative
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.CategoryTheory.LargeSetSheafification
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
-import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
-import Mathlib.CategoryTheory.Monoidal.CommGrp_
+import Mathlib.Tactic.Ring
 
 /-! # Signed coherence of total cochain tensors
 
@@ -23,6 +20,9 @@ Source: Stacks Project, Tag 0FPQ and More on Algebra, integer sign rules
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true
 
 universe c v u
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory WeilConjectures
@@ -243,6 +243,213 @@ structure TotalTensorSignedCoherence : Prop where
   associativity_coefficients : totalTensorCoherence_associativity_coefficients
   symmetry_coefficients : totalTensorCoherence_symmetry_coefficients
 
+omit [BraidedCategory A]
+  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
+private theorem tensorInclusionCast (E F : CochainComplex A ℤ)
+    (p q n m : ℤ) (h : p + q = n) (e : n = m) :
+    HomologicalComplex.ιTensorObj E F p q n h ≫
+      eqToHom (congrArg (fun k ↦ (E ⊗ F).X k) e) =
+        HomologicalComplex.ιTensorObj E F p q m (h.trans e) := by
+  subst m
+  simp
+
+omit [BraidedCategory A]
+  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
+private theorem tripleInclusionCast (E F G : CochainComplex A ℤ)
+    (p q r s s' n m : ℤ) (hs : q + r = s) (hs' : q + r = s')
+    (hn : p + s = n) (hn' : p + s' = m) (e : n = m) :
+    (E.X p ◁ HomologicalComplex.ιTensorObj F G q r s hs) ≫
+      HomologicalComplex.ιTensorObj E (F ⊗ G) p s n hn ≫
+        eqToHom (congrArg (fun k ↦ (E ⊗ (F ⊗ G)).X k) e) =
+    (E.X p ◁ HomologicalComplex.ιTensorObj F G q r s' hs') ≫
+      HomologicalComplex.ιTensorObj E (F ⊗ G) p s' m hn' := by
+  have es : s = s' := hs.symm.trans hs'
+  cases e
+  cases es
+  simp only [eqToHom_refl, Category.comp_id]
+
+omit [BraidedCategory A]
+  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
+@[reassoc]
+private theorem shiftFormula (E F : CochainComplex A ℤ) (a b : ℤ) :
+    totalTensorShiftFormula E F a b (totalTensorShiftIso E F a b).hom := by
+  intro p q n h h'
+  dsimp only [totalTensorShiftIso, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.symm_hom, Iso.app_inv, HomologicalComplex.comp_f]
+  erw [CochainComplex.ι_mapBifunctorShift₂Iso_hom_f_assoc
+    _ _ _ _ _ _ _ h (q + b) (n + b) rfl rfl]
+  simp only [CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq,
+    eqToIso_refl, Iso.refl_hom, Iso.refl_inv, CochainComplex.shiftFunctor_map_f',
+    Category.comp_id, Linear.units_smul_comp, Category.assoc]
+  erw [CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc
+    _ _ _ _ _ _ _ (by omega) (p + a) ((n + b) + a) rfl rfl]
+  simp only [CochainComplex.shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq,
+    eqToIso_refl, Iso.refl_hom, Iso.refl_inv, Category.id_comp,
+    CochainComplex.shiftFunctorAdd_inv_app_f, eqToIso.hom]
+  erw [tensorInclusionCast E F (p + a) (q + b) ((n + b) + a)
+    (n + (a + b)) (by omega) (by omega)]
+  simp only [curriedTensor_obj_map, curriedTensor_map_app, Int.mul_comm]
+  erw [whiskerLeft_id, id_whiskerRight, Category.id_comp, Category.id_comp]
+
+omit [BraidedCategory A]
+  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
+@[reassoc]
+private theorem associatorFormula (E F G : CochainComplex A ℤ) :
+    totalTensorAssociatorFormula E F G (α_ E F G).hom := by
+  intro p q r pq qr n hpq hqr hn hn'
+  simpa only [CochainComplex.Monoidal.ι₁₂_eq E F G p q r pq n hpq hn,
+    CochainComplex.Monoidal.ι₂₃_eq E F G p q r qr n hqr hn', Category.assoc] using
+    CochainComplex.Monoidal.ι₁₂_associator_hom E F G p q r n (by omega)
+
+@[reassoc]
+private theorem symmetryFormula (E F : CochainComplex A ℤ) :
+    totalTensorSymmetryFormula E F (β_ E F).hom := by
+  intro p q n h h'
+  exact CochainComplex.Monoidal.ι_braiding_hom p q n h
+
+omit [BraidedCategory A]
+  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
+private theorem shiftUnique : totalTensorCoherence_shift_unique (A := A) := by
+  intro E F a b f hf
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q h
+  change p + q = n at h
+  exact (hf p q n h (by omega)).trans (shiftFormula E F a b p q n h (by omega)).symm
+
+private theorem symmetryUnique : totalTensorCoherence_symmetry_unique (A := A) := by
+  intro E F f hf
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q h
+  change p + q = n at h
+  exact (hf p q n h (by omega)).trans (symmetryFormula E F p q n h (by omega)).symm
+
+omit [BraidedCategory A]
+  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
+private theorem associatorUnique : totalTensorCoherence_associator_unique (A := A) := by
+  intro E F G f hf
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor₁₂.hom_ext
+  intro p q r h
+  change p + q + r = n at h
+  erw [CochainComplex.Monoidal.ι₁₂_eq E F G p q r (p + q) n rfl h]
+  simp only [Category.assoc]
+  exact (hf p q r (p + q) (q + r) n rfl rfl h (by omega)).trans
+    (associatorFormula E F G p q r (p + q) (q + r) n rfl rfl h (by omega)).symm
+
+omit [BraidedCategory A]
+  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
+private theorem shiftInverse : totalTensorCoherence_shift_inverse (A := A) := by
+  intro E F a b p q n h h'
+  apply (cancel_mono ((totalTensorShiftIso E F a b).hom.f n)).mp
+  erw [Category.assoc, ← HomologicalComplex.comp_f, Iso.inv_hom_id,
+    HomologicalComplex.id_f, Category.comp_id, Linear.units_smul_comp,
+    shiftFormula E F a b p q n h h', smul_smul, Int.units_mul_self, one_smul]
+
+omit [BraidedCategory A]
+  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
+private theorem associatorInverse : totalTensorCoherence_associator_inverse (A := A) := by
+  intro E F G p q r pq qr n hpq hqr hn hn'
+  simpa only [CochainComplex.Monoidal.ι₁₂_eq E F G p q r pq n hpq hn,
+    CochainComplex.Monoidal.ι₂₃_eq E F G p q r qr n hqr hn', Category.assoc] using
+    CochainComplex.Monoidal.ι₂₃_associator_inv E F G p q r n (by omega)
+
+omit [BraidedCategory A] in
+private theorem tensorMapFormula {E E' F F' : CochainComplex A ℤ}
+    (f : E ⟶ E') (g : F ⟶ F') (p q n : ℤ) (h : p + q = n) :
+    HomologicalComplex.ιTensorObj E F p q n h ≫ (f ⊗ₘ g).f n =
+      (f.f p ⊗ₘ g.f q) ≫ HomologicalComplex.ιTensorObj E' F' p q n h := by
+  simp only [tensorHom_def, HomologicalComplex.comp_f, Category.assoc]
+  erw [CochainComplex.Monoidal.ι_whiskerRight_assoc,
+    CochainComplex.ιTensorObj_whiskerLeft_f]
+
+omit [BraidedCategory A] in
+private theorem shiftNatural : totalTensorCoherence_shift_natural (A := A) := by
+  intro E E' F F' f g a b
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q h
+  change p + q = n at h
+  simp only [HomologicalComplex.comp_f]
+  erw [← Category.assoc, tensorMapFormula, Category.assoc,
+    shiftFormula E' F' a b p q n h (by omega)]
+  erw [shiftFormula_assoc E F a b p q n h (by omega)]
+  simp only [CochainComplex.shiftFunctor_map_f', Linear.comp_units_smul,
+    Linear.units_smul_comp]
+  erw [tensorMapFormula]
+
+private theorem associativityCoefficients : totalTensorCoherence_associativity_coefficients := by
+  intro b d p q
+  congr 1
+  ring
+
+private theorem symmetryCoefficients : totalTensorCoherence_symmetry_coefficients := by
+  intro a b p q
+  erw [show b * p + (p + a) * (q + b) =
+    2 * (b * p) + (a * b + p * q + a * q) by ring]
+  erw [Int.negOnePow_add, Int.negOnePow_two_mul, one_mul]
+
+private theorem symmetryCoherence : totalTensorCoherence_symmetry (A := A) := by
+  intro E F a b
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q h
+  change p + q = n at h
+  simp only [HomologicalComplex.comp_f, HomologicalComplex.units_smul_f_apply,
+    CochainComplex.shiftFunctor_map_f']
+  erw [← Category.assoc, shiftFormula E F a b p q n h (by omega)]
+  erw [Linear.units_smul_comp, symmetryFormula E F (p + a) (q + b)
+    (n + (a + b)) (by omega) (by omega)]
+  erw [Linear.comp_units_smul, ← Category.assoc,
+    symmetryFormula (E⟦a⟧) (F⟦b⟧) p q n h (by omega)]
+  simp only [Linear.units_smul_comp, Category.assoc]
+  erw [shiftFormula_assoc F E b a q p n (by omega) (by omega)]
+  simp only [Linear.comp_units_smul, Linear.units_smul_comp, smul_smul,
+    ← Int.negOnePow_add]
+  erw [symmetryCoefficients]
+  simp only [HomologicalComplex.eqToHom_f, eqToIso.hom, ← add_assoc]
+  erw [tensorInclusionCast F E (q + b) (p + a) (n + (b + a))
+    (n + (a + b)) (by omega) (by omega)]
+  rfl
+
+omit [BraidedCategory A]
+  [∀ (W X Y Z : GradedObject ℤ A), GradedObject.HasTensor₄ObjExt W X Y Z] in
+private theorem associativityCoherence : totalTensorCoherence_associativity (A := A) := by
+  intro E F G a b d
+  ext n : 1
+  apply HomologicalComplex.mapBifunctor₁₂.hom_ext
+  intro p q r h
+  change p + q + r = n at h
+  erw [CochainComplex.Monoidal.ι₁₂_eq (E⟦a⟧) (F⟦b⟧) (G⟦d⟧)
+    p q r (p + q) n rfl h]
+  simp only [HomologicalComplex.comp_f, CochainComplex.shiftFunctor_map_f', Category.assoc]
+  erw [CochainComplex.Monoidal.ι_whiskerRight_assoc]
+  erw [← comp_whiskerRight_assoc]
+  erw [shiftFormula E F a b p q (p + q) rfl (by omega)]
+  simp only [Units.smul_def, zsmul_whiskerRight, Preadditive.zsmul_comp]
+  erw [shiftFormula_assoc (E ⊗ F) G (a + b) d (p + q) r n h (by omega)]
+  simp only [Units.smul_def, Preadditive.comp_zsmul, Preadditive.zsmul_comp]
+  erw [associatorFormula E F G (p + a) (q + b) (r + d)
+    ((p + q) + (a + b)) ((q + b) + (r + d)) (n + ((a + b) + d))
+    (by omega) rfl (by omega) (by omega)]
+  erw [associatorFormula_assoc (E⟦a⟧) (F⟦b⟧) (G⟦d⟧) p q r
+    (p + q) (q + r) n rfl rfl h (by omega)]
+  erw [CochainComplex.ιTensorObj_whiskerLeft_f_assoc,
+    ← whiskerLeft_comp_assoc]
+  erw [shiftFormula F G b d q r (q + r) rfl (by omega)]
+  simp only [Units.smul_def, whiskerLeft_zsmul, Preadditive.zsmul_comp,
+    Preadditive.comp_zsmul]
+  erw [shiftFormula_assoc E (F ⊗ G) a (b + d) p (q + r) n (by omega) (by omega)]
+  simp only [Units.smul_def, Preadditive.comp_zsmul, Preadditive.zsmul_comp,
+    smul_smul, ← Units.val_mul, ← Int.negOnePow_add]
+  erw [associativityCoefficients]
+  simp only [eqToIso.hom, HomologicalComplex.eqToHom_f]
+  congr 2
+  exact (tripleInclusionCast E F G (p + a) (q + b) (r + d)
+    ((q + r) + (b + d)) ((q + b) + (r + d)) (n + (a + (b + d)))
+    (n + ((a + b) + d)) (by omega) rfl (by omega) (by omega) (by omega)).symm
+
 end Formulas
 
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
@@ -289,6 +496,26 @@ is still bijective; coproducts and all calculations apply to unbounded complexes
 No flatness, localization or degree-zero restriction is involved. -/
 theorem totalTensor_signed_coherence :
     TotalTensorSignedCoherence (A := Modules.{c, v, u} J R) := by
-  sorry
+  refine
+    { shift_formula := shiftFormula
+      associator_formula := associatorFormula
+      symmetry_formula := symmetryFormula
+      shift_inverse := shiftInverse
+      associator_inverse := associatorInverse
+      symmetry_inverse := ?_
+      shift_natural := shiftNatural
+      associator_natural := fun _ _ _ _ _ _ f g h ↦ associator_naturality f g h
+      symmetry_natural := fun _ _ _ _ f g ↦ BraidedCategory.braiding_naturality f g
+      shift_unique := shiftUnique
+      associator_unique := associatorUnique
+      symmetry_unique := symmetryUnique
+      associativity := associativityCoherence
+      symmetry := symmetryCoherence
+      associativity_coefficients := associativityCoefficients
+      symmetry_coefficients := symmetryCoefficients }
+  intro E F
+  apply (cancel_epi (β_ E F).hom).mp
+  erw [Iso.hom_inv_id]
+  exact (complex_symmetry E F).symm
 
 end CategoryTheory.RingedDerivedNative
