@@ -15,9 +15,94 @@
   "def-weil-extension-by-zero",
   "lem-weil-extension-by-zero-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a $B_U$-module sheaf $M$, write $P_M$ for the defining extension presheaf. The formula in [def-weil-extension-by-zero] gives a canonical identity $P_{r_{\\varphi,U}M}=r_{\\varphi,Z}P_M$ of $A_Z$-module presheaves: if $V\\to Z$ factors through $U$, both values are the abelian group $M(V\\to U)$ with action $a m=\\varphi_Z(a)m$; otherwise both are zero. The restriction maps and maps induced by morphisms of $M$ are identical, since scalar restriction changes only the action. For two coefficient maps the sectionwise identity also identifies both successive actions with $a m=\\psi_Z(\\varphi_Z(a))m$; it is precisely the prescribed $\\rho$, on both sheaves and presheaves.",
+   "uses": [
+    "def-weil-extension-by-zero",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, label lemma-extension-by-zero, and Tag 03CY, label lemma-sheafification-presheaf-modules; agent-written coefficient comparison using their explicit construction and universal property"
+   }
+  },
+  {
+   "text": "Let $aP$ denote abelian sheafification and $\\eta_P:P\\to aP$ its unit. By [def-weil-presheaf-modules-sheafification], both $J_A r_{\\varphi,U}M$ and $r_{\\varphi,Z}J_BM$ have underlying abelian sheaf $aP_M$, canonically identified by the identity on the presheaves of step 1. On the second object the restricted $A_Z$-action extends the action on $r_{\\varphi,Z}P_M$, because $\\eta_{P_M}$ is $B_Z$-linear and hence $A_Z$-linear. Uniqueness of the extended action makes this exactly the action on the first object. The canonical underlying identity and its inverse are therefore $A_Z$-linear and define $e_{\\varphi,M}$. It satisfies $e_{\\varphi,M}\\circ\\eta_{P_{r_\\varphi M}}=r_{\\varphi,Z}(\\eta_{P_M})$, using step 1's identification. The unique factorization clause of the cited sheafification statement shows that this equation determines $e_{\\varphi,M}$ uniquely.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, label lemma-extension-by-zero, and Tag 03CY, label lemma-sheafification-presheaf-modules; agent-written coefficient comparison using their explicit construction and universal property"
+   }
+  },
+  {
+   "text": "For a $B_U$-linear map $f:M\\to N$, precompose $r_{\\varphi,Z}(J_B f)\\circ e_{\\varphi,M}$ and $e_{\\varphi,N}\\circ J_A(r_{\\varphi,U}f)$ with $\\eta_{P_{r_\\varphi M}}$. By the unit equation of step 2 and functoriality of sheafification, both become $r_{\\varphi,Z}(\\eta_{P_N}\\circ P_f)$. The unique factorization clause therefore proves naturality. For $\\varphi=\\mathrm{id}$ the identity on $J_AM$ satisfies the same unit equation, so uniqueness gives the identity comparison under the canonical identifications.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, label lemma-extension-by-zero, and Tag 03CY, label lemma-sheafification-presheaf-modules; agent-written coefficient comparison using their explicit construction and universal property"
+   }
+  },
+  {
+   "text": "Fix a $C_U$-module sheaf $M$. Both sides of the required cocycle are $A_Z$-linear maps from $J_A r_{\\varphi,U}r_{\\psi,U}M$ to $r_{\\chi,Z}J_CM$. Precompose with $\\eta_{P_{r_\\varphi r_\\psi M}}$ and use step 1's identities. On the left, naturality of the sheafification unit for $P(\\rho_{U,M})$, followed by the unit equation for $e_\\chi$, gives $r_{\\chi,Z}(\\eta_{P_M})$. On the right, the unit equations for $e_\\varphi$ and $e_\\psi$ give $r_{\\varphi,Z}r_{\\psi,Z}(\\eta_{P_M})$, followed by $\\rho_{Z,J_CM}$. Since $\\rho$ is the identity on underlying presheaves, this is the same map $r_{\\chi,Z}(\\eta_{P_M})$. Unique factorization through sheafification proves exactly the displayed equation, including both specified $\\rho$ components.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, label lemma-extension-by-zero, and Tag 03CY, label lemma-sheafification-presheaf-modules; agent-written coefficient comparison using their explicit construction and universal property"
+   }
+  },
+  {
+   "text": "Scalar restriction is additive by [def-pc-sheaf-restrict-scalars] and preserves finite limits and finite colimits by [lem-pur-sheaf-ring-coefficient-ordinary-adjunction], applied on each small pro-etale site to its constant-ring sheaf map; thus it is exact. Each $J_R$ is exact by [lem-weil-extension-by-zero-exact]. Consequently [lem-weil-pbc-exact-functor-derived-factorization] applies to all these functors on unbounded cochain complexes and derived categories. Apply the sheaf comparison in each degree to a complex: its commutation with the differential is naturality from step 3. Its inverse likewise is a chain map. The cocycle and identity laws for complexes hold degree by degree by step 4 and the identity law of step 3.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, label lemma-right-derived-exact-functor, with sites-modules.tex Tag 03DA (lemma-abelian) and the cited ordinary scalar-restriction exactness statement"
+   }
+  },
+  {
+   "text": "Let $Q_R$ be the localization from complexes of $R$-module sheaves to $D(U_{\\mathrm{proet}},R)$, and use the exact factorizations of step 5. Clause (2) of [lem-weil-pbc-localization-universal-property] descends the chain isomorphism to $e_\\varphi:J_A r_{\\varphi,U}\\cong r_{\\varphi,Z}J_B$ on all of $D(U_{\\mathrm{proet}},B)$. Descend $\\rho$ by the same rule. Under the factorization isomorphisms, precomposition with $Q_C$ identifies each factor of the desired derived cocycle with its chain-level factor: for a whiskered transformation this follows from its component formula at a complex, and clause (2)'s uniqueness identifies its lift. Composition and identity are preserved by clause (2). The two resulting natural transformations agree after precomposition with $Q_C$ by step 5, hence agree on the whole derived category by clause (3). The same argument gives the identity coefficient law. Neither this localization theorem nor the exact factorization restricts the degrees of a complex. The presheaf and sheafification arguments never required quasi-compactness, flatness or constructibility.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, label lemma-properties-left-localization; the natural-transformation clauses are the cited Mathlib leaf, Localization.liftNatIso, comp_liftNatTrans, liftNatTrans_id and natTrans_ext in CategoryTheory/Localization/Predicate.lean"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero) and 03CY (lemma-sheafification-presheaf-modules), with exact termwise descent from derived.tex Tag 015F and the localization universal property; coefficient coherence proved explicitly by agreement on the sheafification units"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +138,52 @@
    "results": "SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.Presentation.map_π_eq; ModuleCat.homEquiv_extendScalarsComp; SheafOfModules.restrictScalars; Condensed.profiniteSolid; CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp; LightCondensed.forget_obj_val_map",
    "date": "2026-10-21",
    "verdict": "no match: hits give ordinary scalar restriction/composition or exact-functor localization; none constructs the specified coherent open-extension comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|openImmersionLowerShriek",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide scalar restriction, sheafification or open restriction, not the sheafified open-extension comparison with its specified coefficient cocycle and unbounded descent"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of sheaves of modules commutes with forgetting scalar actions and its canonical isomorphism satisfies the coefficient composition cocycle",
+   "results": "PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm; PresheafOfModules.Sheafify.zero_smul; TrivSqZeroExt.isScalarTower; PresheafOfModules.sheafificationCompToSheaf; PresheafOfModules.restrictScalarsCompToPresheaf; TrivSqZeroExt.smul; CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux; SheafOfModules.toSheafCompSheafToPresheafIso",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide scalar restriction, sheafification or open restriction, not the sheafified open-extension comparison with its specified coefficient cocycle and unbounded descent"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide scalar restriction, sheafification or open restriction, not the sheafified open-extension comparison with its specified coefficient cocycle and unbounded descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafified extension by zero for an open immersion commutes with restriction of scalars for finite ring maps, coherently under composition, on unbounded derived categories",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_hom_c_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide scalar restriction, sheafification or open restriction, not the sheafified open-extension comparison with its specified coefficient cocycle and unbounded descent"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|sheafificationCompToSheaf|restrictScalarsComp",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide scalar restriction, sheafification or open restriction, not the sheafified open-extension comparison with its specified coefficient cocycle and unbounded descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of ring scalars commutes with sheafification and extension by zero, with canonical identity and composition comparisons",
+   "results": "PresheafOfModules.sheafificationCompForgetCompToPresheaf; PresheafOfModules.Sheafify.map_smul_eq; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; PresheafOfModules.Sheafify.one_smul; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv; PresheafOfModules.Sheafify.map_smul; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def; PresheafOfModules.sheafificationCompToSheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: hits provide scalar restriction, sheafification or open restriction, not the sheafified open-extension comparison with its specified coefficient cocycle and unbounded descent"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-compact-support-restriction-of-scalars",
@@ -76,5 +203,21 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-open-extension-scalar-restriction-coherence",
+  "worker": "stage1",
+  "summary": "Six-step proof without new nodes: explicit presheaf identity; common abelian sheafification and uniqueness of its action; naturality and identity; coefficient cocycle tested on the units with both rho components retained; exact termwise extension; descent of comparisons and equations by the existing localization universal-property Mathlib leaf. Statement and statement dependencies unchanged. Checked source Tags 03DI, 03CY, 015F and all cited node statements; no exact upstream Lean attachment found.",
+  "blueprint": "Nearest ancestor def-weil-integral-rational-qbar-compact-support in main-20261015, sec-six-functors-basics/sk-prop-int-brown: the formula Rf_!K = R lim_n Res_n Rf_{!,n}K_n needs coherent finite-coefficient comparisons for its tower maps. These steps supply the open-extension portion extracted through lem-sf-compact-support-restriction-of-scalars. No unit route is replaced.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-6d548d949",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-6d548d949 (reviewer sub-agent of L); spot-checked: PASS with no changes; the full review is in review.md. This is a normal one-level split: the only re-split note is on the parent lem-sf-compact-support-restriction-of-scalars, which created this item, so the re-split size rules do not apply here. Statement, stmt_deps, source and blueprint are unchanged from side-live, where the item is still unsplit, so no other group has superseded it. Neither the item nor any node in its closure is on the route-pivot dropped list, there is no cycle and no SGA citation, and every dependency is in sk-def-sf-operations or is a Mathlib leaf (no tool_uses). Sources checked: Stacks 03DI lemma-extension-by-zero (l.2058; for an open immersion the direct sum has at most one term, giving the case formula) and 03CY lemma-sheafification-presheaf-modules (l.815; unique extended action and unique factorization), which matches def-weil-presheaf-modules-sheafification. Step checks: (1) P_{r_phi M} = r_phi P_M sectionwise, including the zero-to-zero restriction case; (2) the restricted B-action extends the A-action along eta, so by uniqueness the identity map on a(P_M) is A-linear, and e is determined by e∘eta = r_phi(eta); (3) naturality and the identity law, checked by computing both composites after eta; (4) the cocycle, checked after eta with both rho components kept, both sides equal r_chi(eta_{P_M}); (5) exactness from lem-pur-sheaf-ring-coefficient-ordinary-adjunction plus lem-weil-extension-by-zero-exact, then termwise descent; (6) localization clauses (2) and (3), with the whiskered components matched through the factorization isomorphisms. Edge cases tested: U empty, j = id, zero rings, non-flat Z/4 to Z/2, non-quasi-compact j, unbounded complexes. Duplicate search: lem-cbc-proetale-extension-zero contains only an unnormalized complex-level Res j_! ≅ j_! Res with no cocycle; lem-cbc-finite-open-exchange-scalars, lem-sf-semilinear-scalar-ordinary-comparison, lem-coef-etale-open-scalar-coherence and lem-cbc-ringed-open-strict-reduction state different things, so none is a duplicate. Advisory only: step 1 uses without saying so that phi is compatible with A_Z|_U ≅ A_U, a one-line naturality check."
+ }
 }
