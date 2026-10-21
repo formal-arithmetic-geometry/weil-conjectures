@@ -22046,3 +22046,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:03 L: merged deliver/Q82/lem-pod-condensed-localization-hom (reviewer FIX; first push; new nodes: 2); claim not held by Q82: not your claim
 - 10:03 L: returned deliver/NS/lem-sfb-cohomology-tor-interval (reviewer RETURN: A7/B10: the item is already finished on live (side-live: status split, reviewed_proof, 4-step proof; Sheaf/Paper/Cohomol)
 - 10:04 L: merged deliver/Q74/lem-pc-curve-local-scalar-principal-parts (reviewer PASS; first push; new nodes: 0)
+- 10:04 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
