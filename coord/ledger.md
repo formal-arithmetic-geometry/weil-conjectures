@@ -23048,3 +23048,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:29 L: merged deliver/N7/lem-sfb-nonnegative-derived-totalization (reviewer FIX; first push; new nodes: 0)
 - 16:29 L: merged deliver/O2/lem-sfb-snc-universal-residual-charts (reviewer FIX; first push; new nodes: 0)
 - 2026-10-21T16:29:44Z L: superseded stage-1 delivery NJ/lem-pur-concentrated-support-etale-transfer at 78b0b7f1dbf790361623b6ab59b3ac0ec14172c8; current completion retained; packet archived at refs/superseded/NJ/lem-pur-concentrated-support-etale-transfer/78b0b7f1dbf790361623b6ab59b3ac0ec14172c8; stale return retired.
+- 16:30 L: returned deliver/NB/det-lem-stratified-lattice-scheme (reviewer RETURN: L: independent stage-2 immutable head 81e6cb0c0b67: H2: stmt_dep lem-weil-pbc-lattice-pair-image-classification is a the)
