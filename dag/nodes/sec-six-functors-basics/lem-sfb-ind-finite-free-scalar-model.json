@@ -18,9 +18,135 @@
   "lem-pur-derived-change-of-rings",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $R$-module isomorphisms $S_i\\cong R^{\\oplus d_i}$. Additivity and the unit isomorphism of sheaf tensor give $S_i\\otimes_R M\\cong M^{\\oplus d_i}$ naturally in $M$. A finite direct sum of a short exact sequence is short exact: its kernel and cokernel maps are the direct sums of the component kernel and cokernel maps. Thus every functor $S_i\\otimes_R-$ on $R$-modules is exact, including $d_i=0$. No compatible choice of bases is needed.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EO (lemma-internal-hom-adjoint-tensor), tensor unit and additivity of Section 03EK; elementary finite-biproduct calculation"
+   }
+  },
+  {
+   "text": "For an $R$-module sheaf $M$, the given underlying-module colimit $S=\\varinjlim_iS_i$ and preservation of small colimits by sheaf tensor give $\\varinjlim_i(S_i\\otimes_R M)\\cong S\\otimes_R M$ in $\\operatorname{Mod}(R)$. Apply the cited colimit theorem to $M\\otimes_R-$ and use symmetry to put the coefficient first. The extension/tensor comparison identifies the target with $U(EM)$. Write the resulting canonical isomorphism as $\\lambda_M$. Its $i$-th leg is $q_i\\otimes1$, followed by the extension/tensor comparison. The diagram is small in the coefficient universe, exactly as the colimit theorem requires.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-extension-tensor-comparison",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EP (lemma-tensor-commute-colimits), part (2), and Section 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "Step 1 turns any short exact sequence of $R$-modules into an $I$-diagram of short exact sequences, since coefficient transitions induce natural tensor maps. The assumed exactness of $I$-colimits, together with $\\lambda$, proves its image under $UE$ is short exact. Restriction $U$ is exact by the ordinary scalar-adjunction lemma. It also reflects exactness: kernels are sectionwise and cokernels are sheafified sectionwise cokernels by the module-category definition; restricting actions changes neither underlying abelian sheaf nor either construction. Hence the $S$-module sequence obtained by $E$ is short exact. Scalar extension is additive by its sheafified tensor definition, so $E$ is exact.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EU (lemma-colimits-flat), part (2), using assumed exact colimits; Tag 03DA (lemma-abelian), kernels and cokernels"
+   }
+  },
+  {
+   "text": "Define $\\kappa_A^n=\\lambda_{A^n}$. Naturality of $q_i\\otimes1$ for $d_A^n$ makes this a chain isomorphism from the termwise colimit to $U(EA)$. With $\\eta$ the relevant sheafification unit, the $i$-th leg sends $\\eta(s_i\\otimes a)$ to $\\eta(q_i(s_i)\\otimes a)$: this is the sectionwise tensor map before sheafification, and the extension/tensor comparison preserves these images. Both orders of the differential square send it to $\\eta(q_i(s_i)\\otimes d_Aa)$. Equality on these images determines the sheaf maps: pure tensors generate the presheaf tensor, and the universal property of sheafification determines maps from it uniquely.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-extension-tensor-comparison",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product) and Tag 03CY (lemma-sheafification-presheaf-modules); degreewise Tag 03EP"
+   }
+  },
+  {
+   "text": "For a chain map $f:A\\to B$, both naturality composites for $\\kappa$ send the $i$-th pure tensor to $\\eta(q_i(s_i)\\otimes f(a))$. For compatible coefficient maps $h_i:S_i\\to S'_i$ inducing $h:S\\to S'$ with $hq_i=q'_ih_i$, the two composites send it to $\\eta(h(q_i(s_i))\\otimes a)$ and $\\eta(q'_i(h_i(s_i))\\otimes a)$, which agree. For a map along an indexing functor use the corresponding target coprojections. Presheaf generation, uniqueness through sheafification and uniqueness out of the colimit prove the squares commute. These formulas also show independence of all choices of finite free bases.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EP (lemma-tensor-commute-colimits), canonical cocone; Section 03EK and Tag 03CY, functorial sheafified tensor maps"
+   }
+  },
+  {
+   "text": "By exact-functor cohomology $H^n(EA)\\cong E(H^nA)$ naturally for every integer $n$. Thus for a quasi-isomorphism $f$, every $H^n(Ef)$ is invertible; $Ef$ is a quasi-isomorphism. The exact-functor factorization gives $D(E)$ and $\\phi_A:D(E)(Q_RA)\\cong Q_S(EA)$ naturally in $A$. Both cited statements concern unbounded complexes; no bound on $A$ is introduced.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), unbounded clause and quasi-isomorphism argument"
+   }
+  },
+  {
+   "text": "The exact-functor derived-functor lemma makes $(D(E),\\phi)$ a left derived functor of termwise $E$. The K-flat-derived extension $E^{\\mathbf L}$ is that left derived functor by the change-of-rings theorem. Their universal properties give unique maps in both directions respecting counits; the composites also respect counits and hence are identities. This identifies the two derived functors, so the canonical counit $\\epsilon_A:E^{\\mathbf L}(Q_RA)\\to Q_S(EA)$ is invertible and natural. Explicitly, take any K-flat resolution $p:P\\to A$, which exists by the resolution lemma. Naturality of the counit says $\\epsilon_A\\circ E^{\\mathbf L}(Q_Rp)=Q_S(Ep)\\circ\\epsilon_P$. On K-flat $P$, $\\epsilon_P$ is the canonical model comparison; under the model $E^{\\mathbf L}(Q_RA)\\cong Q_S(EP)$ this equation says exactly $\\epsilon_A=Q_S(Ep)$. Step 6 makes $Ep$ a quasi-isomorphism even when $A$ is not K-flat. The argument applies to every resolution, with the canonical resolution comparisons of the cited change-of-rings theorem.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), K-flat resolution theorem; derived.tex Tag 015F and its left-derived dual"
+   }
+  },
+  {
+   "text": "Exact restriction preserves quasi-isomorphisms by exact-functor cohomology. Therefore $UE$ preserves them; through $\\kappa$ so does $A\\mapsto\\varinjlim_i(S_i\\otimes_RA)$. The chain and coefficient squares of Step 5 descend by the localization universal property, whose fully faithful precomposition preserves their equations. Concretely, multiply a naturality square for a quasi-isomorphism by the inverses of its images to obtain the square for the inverted arrow. For the counits and a coefficient map $h:S\\to S'$ between diagrams satisfying the hypotheses, restrict $S'$-modules along $h$. The chain equation $E'p\\circ h_P=h_A\\circ Ep$ for coefficient tensor maps becomes, after localization, the square comparing $Q(Ep)$ and $Q(E'p)$. These are precisely the two counits by Step 7. Thus both identifications respect coefficient maps and inverted quasi-isomorphisms. Every argument used individual degrees or ordinary unbounded localization.",
+   "uses": [
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Section 05RR (section-derived-categories), Tag 015F (lemma-right-derived-exact-functor); categories.tex Tags 04VG and 04VK, localization uniqueness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-extension-tensor-comparison",
+  "def-weil-pbc-category-colimit",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Agent assembly of Tag 03EU (lemma-colimits-flat), part (2), and Tag 03EP (lemma-tensor-commute-colimits), part (2), with the cited unbounded exact-functor and K-flat-derived comparison lemmas. The chain and coefficient normalization calculations are written here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +190,46 @@
    "date": "2026-10-21",
    "verdict": "no match: ordinary-ring flat extension and generic exact-complex infrastructure do not state exact ind-finite-free extension on a ringed site together with its canonical unbounded derived counit and coefficient-cocone normalization.",
    "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "grep",
+   "query": "changeOfRings|tensor.*[Cc]olimit|[Ee]xact",
+   "results": "Sheaf/ChangeOfRings.lean:9 imports the presheaf construction; read its scalar restriction definition at lines 36-41 and additive instance at line 43. Remaining exact hits were tactic uses. Actual log: {\"t\": \"2026-10-21T06:33:23Z\", \"tool\": \"grep\", \"query\": \"changeOfRings|tensor.*[Cc]olimit|[Ee]xact\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Colimits.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"ad9c6deaa536cac3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat sheaf scalar extension preserves quasi isomorphisms and agrees with unbounded left derived extension",
+   "results": "Returned ModuleCat.preservesFiniteLimits_extendScalars_of_flat and preservesFiniteLimits_tensorLeft_of_ringHomFlat. Read Mathlib/Algebra/Category/ModuleCat/Descent.lean:36-45: ordinary rings/modules, not sheaf coefficients or derived/cocone normalization. Actual log: {\"t\": \"2026-10-21T06:33:23Z\", \"tool\": \"leansearch\", \"query\": \"Flat sheaf scalar extension preserves quasi isomorphisms and agrees with unbounded left derived extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"Module.Flat.lTensor_shortComplex_exact\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"CategoryTheory.lan_preservesFiniteLimits_of_flat\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\"], \"digest\": \"31b32431136ce833\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"changeOfRings\"",
+   "results": "No declarations returned. Actual log: {\"t\": \"2026-10-21T06:33:24Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"changeOfRings\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a small ringed site, tensoring with a filtered colimit of finite free algebra sheaves is exact and termwise extension computes unbounded derived scalar extension",
+   "results": "Both phrasings returned ordinary-module flatness or light-condensed internal projectivity/AB5 results, not the general ringed-site normalized unbounded scalar model. Actual log: {\"t\": \"2026-10-21T06:33:24Z\", \"tool\": \"leanfinder\", \"query\": \"For a small ringed site, tensoring with a filtered colimit of finite free algebra sheaves is exact and termwise extension computes unbounded derived scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"LightCondensed.internallyProjective_iff_tensor_condition\", \"Condensed.instAB5CondensedMod\", \"LightCondensed.internallyProjective_iff_tensor_condition'\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\"], \"digest\": \"025b228c77cfb1a8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed topos an ind finite free coefficient algebra is flat, and its derived tensor on any unbounded complex is computed without resolving the complex",
+   "results": "Both phrasings returned ordinary-module flatness or light-condensed internal projectivity/AB5 results, not the general ringed-site normalized unbounded scalar model. Actual log: {\"t\": \"2026-10-21T06:33:36Z\", \"tool\": \"leanfinder\", \"query\": \"On a ringed topos an ind finite free coefficient algebra is flat, and its derived tensor on any unbounded complex is computed without resolving the complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"f506e076d52c763b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-hom-filtered-colimit",
@@ -86,5 +248,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ind-finite-free-scalar-model",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split into eight steps using existing nodes only. Supplied finite-biproduct exactness, termwise cocone normalization, coefficient compatibility and inverted-arrow compatibility explicitly. Searched project Lean and Mathlib: no exact attachment or full Mathlib leaf.",
+  "blueprint": "Realizes the final paragraph of lem-sfb-dc-hom-preserves.proof.md, coefficient descent through finite extensions, via the scalar model isolated in lem-sfb-dc-hom-filtered-colimit. Retains the ringed-site unbounded K-flat route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Symmetric additive tensor with unit R gives the finite free tensor calculation; generic sheaf algebra, not a replacement constructibility argument."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Tensor preserves coefficient-universe-small colimits; generic sheaf algebra applied to the given underlying-module cocone."
+   },
+   {
+    "node": "lem-weil-pbc-extension-tensor-comparison",
+    "why": "Identifies actual restricted scalar extension with sheaf tensor, preserving pure tensor images."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "why": "Exactness of ordinary scalar restriction on a general ringed site, including coefficient-map comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "An exact functor computes its unbounded left derived functor, with its canonical counit."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Uses the existing K-flat-derived extension and canonical representative comparisons, without constructing a replacement functor."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of unbounded K-flat resolutions for module sheaves on the given small ringed site."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Fully faithful descent of natural transformations and their equations to ordinary localization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-extension-tensor-comparison",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-75a23ecfa",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-75a23ecfa (reviewer sub-agent of L); spot-checked: Read in full: the item, all 8 steps, the statement of every cited node, and Stacks sites-modules 03EU(2) (l.4342) and 03EP (l.4001). The delivery has 0 new nodes, and its statement and stmt_deps are byte-identical to base and to the side-live node, which is still unsplit. There is no repair note, it is not in the dropped list, it has no SGA source, proof_deps equals the union of the uses, and every off-unit statement is declared in tool_uses. Steps 1-3 are the omitted details of 03EU(2) for this case. S_i⊗M≅M^{d_i} is exact, including d_i=0. λ comes from independent-sheaf-tensor-colimits, which covers all small colimits, not only posets, together with the extension-tensor comparison. Exactness uses the I-colimit hypothesis, and U is exact and reflects exactness by the sectionwise kernel/cokernel formulas. Steps 4-5: I checked the κ differential, chain and coefficient squares on η(q_i(s)⊗a), with uniqueness from pure-tensor generation and the sheafification universal property. Step 6: H^nE≅EH^n, and the factorization holds on unbounded complexes. Step 7: (D(E),φ) is the right Kan extension (the left derived half of the exact-functor lemma) and E^L is the change-of-rings left derived functor, so uniqueness gives ε invertible. Naturality ε_A∘E^L(Qp)=Q(Ep)∘ε_P gives ε_A=Q_S(Ep). Step 8: descent by the localization universal property, and coefficient compatibility through a common K-flat resolution. Tested: one-object I, zero rings, R×R, non-poset filtered I with parallel arrows, unbounded complexes; non-flat Z→Z/2 shows the finite-free hypothesis is needed. No duplicate among filtered-colimit-flat-module-sheaves (posets, flatness only), sbc-scalar-extension-counit-properties, pc-kflat-scalar-extension-counit, sfb-kflat-scalar-comparison-normalization or trf-derived-colimit-change-rings. Advisory only: Step 7 leaves implicit the CoCh-vs-K(R) and S⊗− vs −⊗S identifications; Step 3 uses λ-naturality written out in Step 5; the 5306-character proof with no new nodes may attract a later re-split."
  }
 }
