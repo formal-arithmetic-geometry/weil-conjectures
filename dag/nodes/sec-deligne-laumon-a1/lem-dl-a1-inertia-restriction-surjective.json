@@ -13,9 +13,86 @@
   "def-weil-pbc-separable-algebraic-extension",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-integral-closure-algebraic-extension-normal] to $A\\subset L$ and $A\\subset M$. Thus $B,C$ are normal domains with fraction fields $L,M$, and $C$ is integrally closed in $M$. Moreover $C$ is exactly the integral closure of $B$ in $M$: if $x\\in C$, its monic equation over $A$ is also one over $B$; conversely, a monic equation over $B\\subset C$ makes $x\\in M$ integral over $C$, hence $x\\in C$. The inclusion $B/\\mathfrak q\\hookrightarrow C/\\mathfrak r$ is injective by the definition of contraction. Consequently it extends by $a/b\\mapsto a/b$ to an inclusion $\\kappa(\\mathfrak q)\\hookrightarrow\\kappa(\\mathfrak r)$, where $\\kappa(\\mathfrak q)=\\operatorname{Frac}(B/\\mathfrak q)$ and $\\kappa(\\mathfrak r)=\\operatorname{Frac}(C/\\mathfrak r)$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+   }
+  },
+  {
+   "text": "Restriction to $L$ is defined for every $g\\in\\operatorname{Gal}(M/K)$: normality of $L/K$ implies that $g(x)\\in L$ for $x\\in L$, since $g(x)$ is another root of the minimal polynomial of $x$ over $K$; applying this also to $g^{-1}$ gives equality of the image with $L$. Applying $g$ to monic equations over $A$ shows $g(C)=C$ and $g(B)=B$. If $g\\in I_{\\mathfrak r}$, then $g(\\mathfrak q)=g(\\mathfrak r)\\cap g(B)=\\mathfrak q$, and the residue action of $g|_L$ on $\\kappa(\\mathfrak q)$ is the restriction of the identity action on $\\kappa(\\mathfrak r)$. Therefore $g|_L\\in I_{\\mathfrak q}$. Restriction commutes with composition and identity, so it defines the asserted homomorphism.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+   }
+  },
+  {
+   "text": "Fix $h\\in I_{\\mathfrak q}$. By [lem-weil-pbc-normal-subextension-automorphism-extends], normality of $M/K$ and $L/K$ gives $\\tau\\in\\operatorname{Gal}(M/K)$ with $\\tau|_L=h$. By [lem-dl-a1-galois-over-intermediate], $M/L$ is Galois even when either extension is infinite. Step 1 supplies precisely the normal base domain $B$, its fraction field $L$, and its integral closure $C$ in $M$ needed to apply [lem-dl-a1-galois-prime-residue-lifting] over $B$.",
+   "uses": [
+    "lem-weil-pbc-normal-subextension-automorphism-extends",
+    "lem-dl-a1-galois-over-intermediate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+   }
+  },
+  {
+   "text": "The primes $\\tau(\\mathfrak r)$ and $\\mathfrak r$ of $C$ contract to the same prime of $B$, because $\\tau(\\mathfrak r)\\cap B=h(\\mathfrak q)=\\mathfrak q$. Apply part (1) of [lem-dl-a1-galois-prime-residue-lifting] with base $B$, fraction field $L$, extension $M/L$, and these two primes. Obtain $\\rho\\in\\operatorname{Gal}(M/L)$ satisfying $\\rho\\tau(\\mathfrak r)=\\mathfrak r$. Put $d=\\rho\\tau$. Then $d$ stabilizes $\\mathfrak r$ and $d|_L=h$, since $\\rho$ fixes $L$ pointwise.",
+   "uses": [
+    "lem-dl-a1-galois-prime-residue-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+   }
+  },
+  {
+   "text": "Let $\\bar d$ be the automorphism of $\\kappa(\\mathfrak r)$ induced by $d$. For $a,b\\in B$ with $b\\notin\\mathfrak q$, its value on the image of $\\bar a/\\bar b$ is $\\overline{h(a)}/\\overline{h(b)}=\\bar a/\\bar b$, since $h\\in I_{\\mathfrak q}$. Thus $\\bar d$ fixes $\\kappa(\\mathfrak q)$. Apply part (2) of [lem-dl-a1-galois-prime-residue-lifting], again for $B\\subset C$ and $M/L$, to this automorphism. It gives $\\epsilon\\in\\operatorname{Gal}(M/L)$ stabilizing $\\mathfrak r$ whose action on $\\kappa(\\mathfrak r)$ equals $\\bar d$. This does not require the residue extension to be separable or finite.",
+   "uses": [
+    "lem-dl-a1-galois-prime-residue-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+   }
+  },
+  {
+   "text": "Set $g=\\epsilon^{-1}d$. Both factors stabilize $\\mathfrak r$, and its residue action is $\\bar\\epsilon^{-1}\\bar d=\\bar d^{-1}\\bar d=1$. Hence $g\\in I_{\\mathfrak r}$. Because $\\epsilon|_L=1$, its restriction is $g|_L=h$. Every $h\\in I_{\\mathfrak q}$ therefore has a preimage, proving surjectivity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "def-weil-pbc-integral-closure",
+  "lem-weil-pbc-normal-subextension-automorphism-extends",
+  "lem-dl-a1-galois-over-intermediate",
+  "lem-dl-a1-galois-prime-residue-lifting"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0BSX, lemma-one-orbit-geometric-galois-compare, proof; expanding the last sentence using Tag 0BRK (1),(2)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +128,38 @@
    "results": "8 hits: arithFrobAt, ValuationSubring.inertiaSubgroup, InfiniteGalois.toAlgEquivAux_eq_liftNormal, galRestrict, Ideal.inertiaDeg_eq_of_isGaloisGroup, Ideal.ncard_primesOver_mul_card_inertia_mul_finrank, Ideal.inertiaDeg_eq_of_isGalois, galRestrictHom_symm_apply. The returned stabilizerHom_surjective concerns a residue automorphism group, not restriction between inertia groups. The ramification degree identities and field restriction maps do not give the asserted simultaneous prime and residue lift.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from the inertia group of a prime of an integral closure in a possibly infinite Galois extension to the inertia group in a normal intermediate extension is surjective",
+   "results": "8 hits: IsFractionRing.stabilizerHom_surjective, Polynomial.Gal.restrict_surjective, AlgEquiv.restrictNormalHom_surjective, Ideal.inertiaDegIn_mul_inertiaDegIn, Ideal.exists_comap_galRestrict_eq, IntermediateField.restrictRestrictAlgEquivMapHom_surjective, Ideal.Quotient.stabilizerHom_surjective_of_profinite, Ideal.coe_smul_primesOver_mk_eq_map_galRestrict. Field automorphism restriction surjectivity does not impose the simultaneous chosen-prime and trivial-residue conditions. Profinite residue surjectivity alone is an input, not the tower comparison. Related project theorem Ideal.exists_mem_inertia_eqOn assumes a maximal prime and is not an exact attachment for this arbitrary-prime statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "inertia.*(surject|restrict)|surject.*inertia|exists_mem_inertia",
+   "results": "3 hits: Mathlib/RingTheory/Polynomial/Morse.lean, Mathlib/RingTheory/Polynomial/Morse.lean, Mathlib/RingTheory/Polynomial/Morse.lean. Field automorphism restriction surjectivity does not impose the simultaneous chosen-prime and trivial-residue conditions. Profinite residue surjectivity alone is an input, not the tower comparison. Related project theorem Ideal.exists_mem_inertia_eqOn assumes a maximal prime and is not an exact attachment for this arbitrary-prime statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.inertia, AlgEquiv.restrictNormalHom",
+   "results": "0 hits: . Field automorphism restriction surjectivity does not impose the simultaneous chosen-prime and trivial-residue conditions. Profinite residue surjectivity alone is an input, not the tower comparison. Related project theorem Ideal.exists_mem_inertia_eqOn assumes a maximal prime and is not an exact attachment for this arbitrary-prime statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "In a tower of possibly infinite Galois fields restriction between inertia subgroups at primes of integral closures is surjective",
+   "results": "8 hits: IntermediateField.restrictRestrictAlgEquivMapHom_surjective, AlgEquiv.restrictNormalHom_surjective, Polynomial.Gal.restrict_surjective, IsScalarTower.AlgEquiv.restrictNormalHom_comp_apply, Ideal.inertiaDeg_algebra_tower, ValuationSubring.inertiaSubgroup, Polynomial.Gal.restrictComp_surjective, InfiniteGalois.IntermediateFieldEquivClosedSubgroup. Field automorphism restriction surjectivity does not impose the simultaneous chosen-prime and trivial-residue conditions. Profinite residue surjectivity alone is an input, not the tower comparison. Related project theorem Ideal.exists_mem_inertia_eqOn assumes a maximal prime and is not an exact attachment for this arbitrary-prime statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-dl-a1-normal-scheme-galois-inertia-presentation",
@@ -66,7 +171,7 @@
  "blueprint": {
   "from": {
    "node": "rem-dl-a1-conventions",
-   "place": "Second paragraph of rem-dl-a1-conventions, equivalence between lisse extension across infinity and trivial inertia, via lem-dl-a1-lisse-extension-inertia and lem-dl-a1-weil-kernel-inertia; finite-quotient argument of Stacks 0BTD.",
+   "place": "Second paragraph of rem-dl-a1-conventions, equivalence of lisse extension across infinity and trivial inertia; through lem-dl-a1-weil-kernel-inertia and lem-dl-a1-normal-scheme-galois-inertia-presentation: restriction to finite Galois quotients, Stacks 0BSX.",
    "via": [
     "lem-dl-a1-normal-scheme-galois-inertia-presentation",
     "lem-dl-a1-weil-kernel-inertia"
@@ -74,5 +179,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-dl-a1-inertia-restriction-surjective",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0BSX inertia clause into lifting, prime correction, residue correction, and explicit final product; reused existing integral-closure and field-automorphism nodes, added the infinite 0BRK input and the exact Mathlib 09I2 leaf. Statement unchanged.",
+  "blueprint": "Second paragraph of rem-dl-a1-conventions, equivalence of lisse extension across infinity and trivial inertia; through lem-dl-a1-weil-kernel-inertia and lem-dl-a1-normal-scheme-galois-inertia-presentation: restriction to finite Galois quotients, Stacks 0BSX. Steps 3-6 realize the inertia restriction input used in the finite-quotient argument; steps 1-2 justify its ring and restriction identifications."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-a35784695",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-a35784695 (reviewer sub-agent of L); spot-checked: The item statement is unchanged and matches Stacks 0BSX (more-algebra.tex, lemma-one-orbit-geometric-galois-compare), inertia clause, with possibly infinite Galois extensions. The parent's use of the item (Omega/L/K with Omega a separable closure) needs the infinite case. The six steps write out the 'same way' sentence of 0BSX. Step 1: C is the integral closure of B in M, using the Mathlib leaf lem-weil-pbc-integral-closure-algebraic-extension-normal. Step 2: restriction is a well-defined homomorphism I_r->I_q (elementary). Step 3: lift h to tau via lem-weil-pbc-normal-subextension-automorphism-extends; M/L is Galois by the new 09I2 leaf. Step 4: prime correction d=rho tau by 0BRK(1) over B. Step 5: d-bar fixes kappa(q), and 0BRK(2) gives epsilon in Gal(M/L) with epsilon-bar = d-bar. Step 6: g = epsilon^-1 d lies in I_r and restricts to h. I checked each cited statement and hypothesis. New node lem-dl-a1-galois-prime-residue-lifting is unsplit and states 0BRK(1) and the surjectivity part of (2) exactly as in Stacks lines 32777-32865. It strictly generalizes the finite lem-exc-finite-galois-prime-residue-lifting; no infinite version exists in the DAG (rg -L for 0BRK and 'infinite Galois'). The Mathlib profinite candidates need IsInvariant, topology and B/Q-level hypotheses, so unsplit is correct. I tested it on a field base, Z[i], the finite case and a purely inseparable residue extension. New node lem-dl-a1-galois-over-intermediate is an exact Mathlib leaf: IsGalois.tower_top_of_isGalois, FieldTheory/Galois/Basic.lean:152, stacks 09I2, read at 145-154. Neither new node restates the item, there is no cycle, no SGA, and no off-route proof node (both sk-thm-p1 citations are Mathlib leaves). The item is still unsplit on live and side-live, is not on the dropped list, and has no repair note. No fixes."
  }
 }
