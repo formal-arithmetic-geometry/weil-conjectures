@@ -18,9 +18,127 @@
   "lem-cbc-exact-product-functor-strict-limit",
   "lem-weil-ringed-tower-pushforward-limit-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $J_0=\\mathbf N_{\\geq1}^{\\mathrm{op}}$. Its diagram sites are small, and their module categories are exactly the strict tower categories, by [lem-weil-pbc-diagram-site-realization]. Apply [prop-pur-kinjective-resolutions-exist] on these sites. Thus we may compute at a K-injective $S_U$-tower complex $I$, and choose a quasi-isomorphism $j:F_S^{\\operatorname{Tow}}I\\to J$ with $J$ K-injective over $S_V$. By [lem-weil-pbc-flat-ringed-diagram-restriction], applied both to $J_0$ and to the terminal category, restriction is exact and preserves K-injectives. In particular $r_UI$ and $r_VJ$ are K-injective tower complexes, and $r_Vj$ is a quasi-isomorphism. The hypotheses of that lemma hold: both coefficient maps are flat, the two ring identifications commute with them, and both indexing categories are small.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), tower ringed site; injectives.tex Tag 079P (theorem-K-injective-embedding-grothendieck), applied through the cited diagram-site equivalence."
+   }
+  },
+  {
+   "text": "For each of the four module categories, the constant-tower functor $\\Delta$ is additive and exact: its kernels and cokernels are the constant towers of the original kernels and cokernels, since these are levelwise [lem-weil-tower-category-levelwise-abelian]. The defining universal property of inverse limit gives $\\operatorname{Hom}(\\Delta B,T)=\\operatorname{Hom}(B,\\lim T)$, naturally in both variables. Hence [lem-weil-pbc-right-adjoint-preserves-kinjective] applies to $\\Delta\\dashv\\lim$. Consequently $\\lim_{U,S}I$, $\\lim_{U,R}r_UI$, $\\lim_{V,S}J$ and $\\lim_{V,R}r_VJ$ are K-injective module complexes. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], these ordinary limits compute the corresponding total derived limits. This argument uses exactness of $\\Delta$, not exactness of inverse limit.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), inverse limit as direct image; derived.tex Tag 08BJ (lemma-adjoint-preserve-K-injectives)."
+   }
+  },
+  {
+   "text": "Write $\\alpha_T:r_VF_ST\\xrightarrow{\\sim}F_Rr_UT$ for the underived scalar/direct-image identification specified by [lem-weil-pbc-flat-ringed-diagram-restriction], also levelwise on towers. Write $\\beta_{W,T}:r_W\\lim_{W,S}T\\xrightarrow{\\sim}\\lim_{W,R}r_WT$. This is the identity on the underlying sheaf of compatible families: restriction changes only scalar action [def-pc-sheaf-restrict-scalars], and the action on a limit is componentwise. It is therefore an isomorphism, natural in $T$, satisfying $\\mathrm{pr}_n\\beta_{W,T}=r_W(\\mathrm{pr}_n)$. The identical argument for unrestricted families proves that $r_W$ preserves countable products with the canonical projection comparison. Finally let $e^Z_T:F_Z\\lim_{U,Z}T\\xrightarrow{\\sim}\\lim_{V,Z}F_Z^{\\operatorname{Tow}}T$ be the ordinary identity used to define [lem-weil-ringed-tower-pushforward-limit-comparison]; its defining equation is $\\mathrm{pr}_ne^Z_T=F_Z(\\mathrm{pr}_n)$. All these are chain maps when applied degreewise, since their naturality commutes with differentials.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), commutative tower-topos square; ordinary identities and their projection equations."
+   }
+  },
+  {
+   "text": "For every strict tower complex $T$ the ordinary comparisons satisfy\n$$\\lim_{V,R}(\\alpha_T)\\,\\beta_{V,F_S^{\\operatorname{Tow}}T}\\,r_V(e^S_T)=e^R_{r_UT}\\,F_R(\\beta_{U,T})\\,\\alpha_{\\lim_{U,S}T}.$$\nIndeed, after composing either side with the $n$-th limit projection, the left side is $\\alpha_{T_n}\\,r_VF_S(\\mathrm{pr}_n)$ and the right side is $F_R(r_U\\mathrm{pr}_n)\\,\\alpha_{\\lim T}$. These agree by naturality of $\\alpha$; the limit projections determine a map uniquely. This proves the identity degreewise and hence as chain maps. Naturality of $\\beta$ also gives\n$$\\beta_{V,J}\\,r_V(\\lim_{V,S}j)=\\lim_{V,R}(r_Vj)\\,\\beta_{V,F_S^{\\operatorname{Tow}}I}.$$\nBoth equations are universal-property calculations with the maps defined in Step 3; no uniqueness of maps of distinguished triangles is used.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), ordinary commutative square; explicit limit-projection calculation refining that square."
+   }
+  },
+  {
+   "text": "Use $I,j,J$ from Step 1. Set $j_R=(r_Vj)\\alpha_I^{-1}:F_R^{\\operatorname{Tow}}r_UI\\to r_VJ$. This is a K-injective resolution, since $r_Vj$ is a quasi-isomorphism and $r_VJ$ is K-injective. By [lem-weil-ringed-tower-pushforward-limit-acyclic], both $\\lim_{V,S}j$ and $\\lim_{V,R}j_R$ are quasi-isomorphisms (apply it respectively to $I$ and $r_UI$). With the models in Step 2, the normalization of [lem-weil-ringed-tower-pushforward-limit-comparison] thus represents $c^S_{QI}$ by $Q(\\lim j)Q(e^S_I)$ and $c^R_{Qr_UI}$ by $Q(\\lim j_R)Q(e^R_{r_UI})$. Here $Q$ denotes localization in each relevant category. These are the prescribed common-direct-image comparisons: first use the ordinary composite identity $e$, then the target resolution. Since $\\lim I$ is K-injective, the specified $d_{L_{U,S}QI}$ is represented by $Q(\\alpha_{\\lim I})$ [lem-weil-pbc-flat-ringed-diagram-restriction]. The same lemma represents $d^{\\operatorname{Tow}}_{QI}$ by $Q(\\alpha_I)$. Its derived limit is the identity on the common target model $\\lim r_VJ$, because $j_R\\alpha_I=r_Vj$.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-acyclic",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof and resolution normalization; the cited acyclicity statement justifies using the common target resolutions."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-exact-product-functor-strict-limit] with $F=r_U$ and with $F=r_V$. Exactness was supplied in Step 1, the canonical product comparison is invertible by Step 3, and the four exact-countable-product hypotheses are precisely those assumed in the item. Its resolution-normalization clause allows the identity target resolutions $r_UI\\to r_UI$ and $r_VJ\\to r_VJ$, since these complexes are K-injective. Therefore $\\lambda_{r_U,QI}$ is represented by $Q(\\beta_{U,I})$, and $\\lambda_{r_V,QJ}$ by $Q(\\beta_{V,J})$. Both ends of $\\beta_{U,I}$ are K-injective by Step 2 and flat restriction, so $RF_R(\\lambda_{r_U,QI})$ is represented by $Q(F_R\\beta_{U,I})$. Thus all five endpoint comparisons in the requested equality have their specified normalizations on these models.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940 (section-derived-limits), resolution construction; resolution-normalized scalar comparison as stated in lem-cbc-exact-product-functor-strict-limit."
+   }
+  },
+  {
+   "text": "After the identifications of Steps 5 and 6, the left side of the requested equality is represented by\n$$\\beta_{V,J}\\,r_V(\\lim j)\\,r_V(e^S_I).$$\nThe right side is represented by\n$$\\lim(j_R)\\,e^R_{r_UI}\\,F_R(\\beta_{U,I})\\,\\alpha_{\\lim I}.$$\nThe second equation of Step 4 rewrites the first expression as $\\lim(r_Vj)\\,\\beta_{V,F_S^{\\operatorname{Tow}}I}\\,r_V(e^S_I)$. Substitute $\\lim(r_Vj)=\\lim(j_R)\\lim(\\alpha_I)$, which follows from the definition of $j_R$. The first equation of Step 4 then turns this into the second expression. Localizing this equality of chain maps proves exactly the displayed equality for $M=QI$, including its direction and all endpoint identifications.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), ordinary square refined by the two explicit identities in Step 4."
+   }
+  },
+  {
+   "text": "Every derived strict-tower object has a K-injective representative by Step 1. For two such representatives, [lem-weil-pbc-kinjective-hom-derived] says that every actual derived morphism between them is represented by a chain map, uniquely up to homotopy. The maps $\\alpha,\\beta,e$ and the projection calculation of Step 4 are natural for such chain maps. Target resolutions may be chosen functorially by [prop-pur-kinjective-resolutions-exist] on the diagram sites. Additive functors preserve chain homotopies (apply the functor to $f-g=dh+hd$), so the calculation respects homotopies; a change of K-injective representative is a homotopy equivalence by the same Hom lemma. The resolution independence and naturality of $c$ and $\\lambda$ are part of [lem-weil-ringed-tower-pushforward-limit-comparison] and [lem-cbc-exact-product-functor-strict-limit]. Hence Step 7 proves the equality as a natural identity on the derived category of strict towers, not just on its evaluated inverse sequences. The source tower model is exactly $I$ and $r_UI$ throughout. Nothing in this argument requires boundedness or any of the additional coefficient or origin conditions excluded by the statement.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "derived.tex Tag 070I (lemma-K-injective), chain maps between K-injectives compute derived morphisms; Tag 0A07 (lemma-Rf-commutes-with-Rlim)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-ringed-tower-pushforward-limit-acyclic",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-tower-category-levelwise-abelian",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first tower-site proof; explicit scalar-coherence refinement using the existing resolution-normalized comparisons."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +188,59 @@
    "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.Algebra.Homology.DerivedCategory.KInjective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"line\": \"35\", \"text\": \"instance : R.cochainComplex.IsKInjective := isKInjective_of_injective _ 0\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"line\": \"44\", \"text\": \"    CochainComplex.HomComplex.CohomologyClass.equivOfIsKInjective.{w}.symm\"}",
    "date": "2026-10-21",
    "verdict": "no match: the four source hits in CategoryTheory/Abelian/Injective/Ext.lean concern injective resolutions and Ext, not scalar compatibility of the direct-image/limit comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(restrictScalars|restrictionOfScalars).*([Kk][Ii]njective|rightDerived|[Ll]imit)|([Ll]imit).*(rightDerived|derivedDirectImage)",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states the normalized unbounded ringed strict-tower scalar/direct-image/limit equality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat scalar restriction preserves the normalized derived direct image inverse limit comparison of module sheaf towers",
+   "results": "OK 8 hits: Algebra.FormallyUnramified.flat_of_restrictScalars, ModuleCat.preservesLimit_restrictScalars, AlgebraicGeometry.Flat.instMorphismRestrict, PresheafOfModules.restrictScalarsObj, instSeminormedAddCommGroupRestrictScalars, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, SheafOfModules.restrictScalars, PresheafOfModules.restrictScalars",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states the normalized unbounded ringed strict-tower scalar/direct-image/limit equality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"rightDerived\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states the normalized unbounded ringed strict-tower scalar/direct-image/limit equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat restriction of scalars commutes with the canonical comparison between derived direct image and derived inverse limit of strict towers",
+   "results": "OK 8 hits: Algebra.FormallyUnramified.flat_of_restrictScalars, AlgebraicGeometry.Flat.instResLE, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, CategoryTheory.lan_flat_of_flat, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.trans, AdicCompletion.flat_of_isNoetherian, comonadicExtendScalars",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states the normalized unbounded ringed strict-tower scalar/direct-image/limit equality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of normalized right derived functor composition isomorphisms with an exact change of coefficient rings on sheaves",
+   "results": "OK 8 hits: CategoryTheory.NatTrans.rightDerived_comp_assoc, CategoryTheory.NatTrans.rightDerived_comp, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc, CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; sources read: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean:80 gives a generic comparison normalization, not this composite coherence; Abelian/RightDerived.lean treats classical derived functors.",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states the normalized unbounded ringed strict-tower scalar/direct-image/limit equality"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|preservesLimit_restrictScalars|rightDerivedFunctorComparison_fac_app|rightDerived_comp",
+   "results": "OK 5 hits: 16, 36, 39, 41, 43; source read: SheafOfModules.restrictScalars at Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:36 only defines ordinary restriction.",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states the normalized unbounded ringed strict-tower scalar/direct-image/limit equality"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComparison_fac_app|rightDerived_comp",
+   "results": "OK 3 hits: Mathlib/CategoryTheory/Abelian/RightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: no hit states the normalized unbounded ringed strict-tower scalar/direct-image/limit equality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-complete-proetale-strict-tower-realization",
@@ -92,5 +259,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-flat-scalar-direct-image-limit-coherence",
+  "worker": "stage1",
+  "summary": "Q107 proves scalar compatibility on a common source tower resolution I and target resolution j:F_S I→J. Explicit ordinary limit projection equations identify the two composites; existing acyclicity and normalization lemmas identify them with the required derived maps. No new nodes, statement changes or Lean attachment.",
+  "blueprint": "Refines thm-cbc-complete-proetale proof first sentence, the two-factor completed-exchange composite, at its strict-tower scalar-coherence input through lem-cbc-complete-proetale-strict-tower-realization. The current main-20261015 proof and its exact-limit extension-by-zero factor were read; the item is the generic normalization check extracted from that route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Realize the small tower categories as module categories on small sites. This is a generic tool; it does not replace a coefficient-stage step of the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "why": "Flat scalar restriction and its normalized direct-image comparison, on both tower and ordinary categories. This is a generic tool; it does not replace a coefficient-stage step of the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Actual derived morphisms into K-injective towers are homotopy classes of chain maps. This is a generic tool; it does not replace a coefficient-stage step of the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "The general exact-left-adjoint criterion makes inverse limit preserve K-injectives. This is a generic tool; it does not replace a coefficient-stage step of the compact-support unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Compute total derived inverse limit by K-injective tower resolutions. This is a generic tool; it does not replace a coefficient-stage step of the compact-support unit."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-acyclic",
+    "why": "The direct-image tower resolution remains a quasi-isomorphism after inverse limit. This is a generic tool; it does not replace a coefficient-stage step of the compact-support unit."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Use the specified direct-image/limit comparison and its normalization. This is a generic tool; it does not replace a coefficient-stage step of the compact-support unit."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Levelwise exactness makes the constant-tower functor exact. This is a generic tool; it does not replace a coefficient-stage step of the compact-support unit."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Existence of unbounded functorial K-injective resolutions on those sites. This is a generic tool; it does not replace a coefficient-stage step of the compact-support unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-ringed-tower-pushforward-limit-acyclic",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-tower-category-levelwise-abelian",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q107-20e8dd982",
+  "group": "Q107",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q107-20e8dd982 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 8 steps (no new nodes) and every cited statement. The statement and blueprint are byte-equal to base and to live, where the item is still unsplit. This is a first split of the node Q46 created (Q46 landed 16:11), so there is no repair note and no supersession. Sources checked: Stacks sites-cohomology 0A07 (lemma-Rf-commutes-with-Rlim, the tower-topos square proof at sites-cohomology.tex:5150), 0940/0941, and derived 08BJ/070I. No SGA is cited. Step 1: diagram-site realization plus K-injective resolutions give I and j: F_S^Tow I→J. The flat diagram restriction lemma has exactly the item's hypotheses (flat a_T, compatible c_R and c_S, small J, used for N^op and for the terminal category); it gives r exact and preserving K-injectives. Step 2: Δ is exact because kernels and cokernels are levelwise, so the right adjoint lim preserves K-injectives; exactness of lim is never assumed. Steps 3-4: I recomputed the projections. Composed with pr_n, both sides become α_{T_n} r_V F_S(pr_n) = F_R r_U(pr_n) α_{lim T}, which is naturality of α. The second identity is naturality of β. Step 5: j_R=(r_V j)α_I^{-1} is a K-injective resolution. The acyclicity lemma applies to (I, j) and to (r_U I, j_R). On the model, c^Z is Q(lim j)Q(e), which matches the common-composite normalization. d_{L I} is α_{lim I}, and L(d^Tow) is the identity on lim r_V J. Step 6: the resolution clause of lem-cbc-exact-product-functor-strict-limit with identity target resolutions gives λ=β; all four exact-product hypotheses are in the item. Step 7: I recomputed the substitution chain, and the directions and endpoints are correct. Step 8 extends the result to every M by naturality and the K-injective Hom lemma. Edge cases checked: identity maps, the zero ring, constant and zero towers, unbounded complexes; flatness is needed exactly in Step 1. The cycle DFS is clean (284 nodes). I accept all 9 declared tool_uses, all generic K-injective, derived-limit and flat-restriction tools. Maintainer note: NZ's lem-weil-pbc-flat-scalar-tower-limit-square (unsplit, landed 16:16 on 2026-10-21, later than this item) states the same coherence equation without the exact-products hypothesis; its λ agrees with this item's λ by the cbc resolution clause. Recommend merging it into this item or reusing this proof for its split. This is not a fault of the delivery. No changes made."
  }
 }
