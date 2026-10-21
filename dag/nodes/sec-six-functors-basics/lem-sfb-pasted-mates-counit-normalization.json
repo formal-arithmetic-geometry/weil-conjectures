@@ -11,9 +11,61 @@
   "def-nagata-category",
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=G_2G_1R_0J$ and $Y=H_2H_1J$. The counit $\\varepsilon_2:L_2R_2\\Rightarrow\\mathrm{id}_{\\mathcal D_2}$ is natural, so its defining naturality square at $t:Y\\to K$ says $\\varepsilon_{2,K}\\circ L_2R_2(t)=t\\circ\\varepsilon_{2,Y}$. Expand $q$ using preservation of composition by $L_2$ and apply this equality. Associativity of composition [def-nagata-category] gives\n$$\\varepsilon_{2,K}\\circ L_2(q)=t\\circ\\varepsilon_{2,Y}\\circ L_2(\\beta_{2,H_1J})\\circ L_2G_2(\\beta_{1,J})\\circ L_2(b).$$\nThis step is just the definition of naturality and functoriality, with $b:Q\\to X$ as given.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001B (definition-functor), 001I (definition-transformation-functors), 0037 (definition-adjoint and the following unit/counit paragraph): naturality of the counit at t; agent-written boundary-arrow expansion"
+   }
+  },
+  {
+   "text": "Apply [lem-amb-mate-unit-counit] to $L_1\\dashv R_1$, $L_2\\dashv R_2$, $G_2,H_2,\\alpha_2$ and $d=H_1J\\in\\mathcal D_1$. It gives\n$$\\varepsilon_{2,Y}\\circ L_2(\\beta_{2,H_1J})=H_2(\\varepsilon_{1,H_1J})\\circ\\alpha_{2,R_1H_1J}.$$\nSubstituting into step 1 gives\n$$\\varepsilon_{2,K}\\circ L_2(q)=t\\circ H_2(\\varepsilon_{1,H_1J})\\circ\\alpha_{2,R_1H_1J}\\circ L_2G_2(\\beta_{1,J})\\circ L_2(b).$$",
+   "uses": [
+    "lem-amb-mate-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Formal properties paragraph, compatibility of mates with counits: apply the single-mate counit identity to the second square (Mathlib CategoryTheory.mateEquiv_counit, Mates.lean:123-125)"
+   }
+  },
+  {
+   "text": "The component $\\beta_{1,J}$ is a morphism $G_1R_0J\\to R_1H_1J$ in $\\mathcal C_1$. The defining naturality square for $\\alpha_2:L_2G_2\\Rightarrow H_2L_1$, evaluated at this morphism, is\n$$\\alpha_{2,R_1H_1J}\\circ L_2G_2(\\beta_{1,J})=H_2L_1(\\beta_{1,J})\\circ\\alpha_{2,G_1R_0J}.$$\nReplace the indicated two factors in step 2 and use preservation of composition by $H_2$. Reassociate [def-nagata-category] to obtain\n$$\\varepsilon_{2,K}\\circ L_2(q)=t\\circ H_2\\bigl(\\varepsilon_{1,H_1J}\\circ L_1(\\beta_{1,J})\\bigr)\\circ\\alpha_{2,G_1R_0J}\\circ L_2(b).$$",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 001I (definition-transformation-functors) at the arrow beta_1,J, and 001B (definition-functor): naturality followed by preservation of composition"
+   }
+  },
+  {
+   "text": "Apply [lem-amb-mate-unit-counit] to $L_0\\dashv R_0$, $L_1\\dashv R_1$, $G_1,H_1,\\alpha_1$ and $d=J$. Its formula reads\n$$\\varepsilon_{1,H_1J}\\circ L_1(\\beta_{1,J})=H_1(\\varepsilon_{0,J})\\circ\\alpha_{1,R_0J}.$$\nSubstitute it inside $H_2$ in step 3 and distribute $H_2$ over the two factors. This gives exactly\n$$\\varepsilon_{2,K}\\circ L_2(q)=t\\circ H_2H_1(\\varepsilon_{0,J})\\circ H_2(\\alpha_{1,R_0J})\\circ\\alpha_{2,G_1R_0J}\\circ L_2(b).$$\nEach factor has the displayed source and target, so both composites are $L_2Q\\to K$. Only functoriality, naturality and the two single-mate identities were used; exactness and invertibility are unnecessary.",
+   "uses": [
+    "lem-amb-mate-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+    "place": "Formal properties paragraph, composition and counit compatibility of mates: single-mate counit identity for the first square, then functoriality (Mathlib CategoryTheory.mateEquiv_counit, Mates.lean:123-125)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "lem-amb-mate-unit-counit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
+  "place": "Formal properties paragraph: explicit component calculation of the counit of two mates, using Stacks categories.tex Tags 001B, 001I, 0037 and the existing single-mate Mathlib leaf"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -72,10 +124,46 @@
    "results": "{\"t\": \"2026-10-21T05:50:00Z\", \"tool\": \"leanfinder\", \"query\": \"For three adjunctions L_i left adjoint R_i, two squares alpha_i and their mates beta_i, compute epsilon_2 composed with L_2 of R_2(t) beta_2 G_2(beta_1) b as t H_2 H_1(epsilon_0) H_2(alpha_1) alpha_2 L_2(b)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_square\"], \"digest\": \"b282c32ee84bf326\"}",
    "date": "2026-10-21",
    "verdict": "no match: mateEquiv_counit (Mates.lean:123) normalizes one mate; mateEquiv_vcomp (Mates.lean:170) identifies the mate of a pasted square but does not state its counit transpose with arbitrary input/output arrows. Basic.lean:226,243 supplies separate transpose naturality laws. The requested explicit boundary-arrow formula requires composing these identities and expanding the pasted square, rather than a one-line specialization of one declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit transpose of two successive right mates with arbitrary input and output morphisms",
+   "results": "{\"t\": \"2026-10-21T07:34:02Z\", \"tool\": \"leanfinder\", \"query\": \"Counit transpose of two successive right mates with arbitrary input and output morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.comp_rightAdjointMate_assoc\", \"CategoryTheory.comp_rightAdjointMate\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.Bicategory.mateEquiv_id_comp_right\", \"CategoryTheory.Bicategory.mateEquiv_comp_id_right\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"fde82618505557ff\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: mateEquiv_counit normalizes one mate, mateEquiv_vcomp identifies pasting, and counit_naturality moves the output arrow. Their successive use with naturality of alpha_2 is the four-step proof; no hit states the complete boundary-arrow formula. The single-mate theorem is already the existing leaf lem-amb-mate-unit-counit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_counit",
+   "results": "{\"t\": \"2026-10-21T07:34:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\"], \"digest\": \"8e33c4df1a4bdb3e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: mateEquiv_counit normalizes one mate, mateEquiv_vcomp identifies pasting, and counit_naturality moves the output arrow. Their successive use with naturality of alpha_2 is the four-step proof; no hit states the complete boundary-arrow formula. The single-mate theorem is already the existing leaf lem-amb-mate-unit-counit."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|mateEquiv_vcomp|counit_naturality",
+   "results": "{\"t\": \"2026-10-21T07:34:02Z\", \"tool\": \"grep\", \"query\": \"mateEquiv_counit|mateEquiv_vcomp|counit_naturality\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Lifting/Left.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\", \"Mathlib/CategoryTheory/Adjunction/Triple.lean\"], \"digest\": \"677c43d51f5fc2e6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: mateEquiv_counit normalizes one mate, mateEquiv_vcomp identifies pasting, and counit_naturality moves the output arrow. Their successive use with naturality of alpha_2 is the four-step proof; no hit states the complete boundary-arrow formula. The single-mate theorem is already the existing leaf lem-amb-mate-unit-counit.",
+   "subdirectory": "CategoryTheory/Adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit transpose of two pasted adjunction mates with input and output arrows",
+   "results": "{\"t\": \"2026-10-21T07:34:03Z\", \"tool\": \"leansearch\", \"query\": \"Counit transpose of two pasted adjunction mates with input and output arrows\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.counit\", \"CategoryTheory.Bicategory.Adjunction.counit\", \"CategoryTheory.Adjunction.counit_naturality_assoc\", \"CategoryTheory.Adjunction.CoreUnitCounit.counit\", \"CategoryTheory.Bicategory.Adjunction.compCounit\", \"CategoryTheory.Adjunction.counit_naturality\", \"CategoryTheory.Adjunction.comp_counit\", \"CategoryTheory.Adjunction.mk\"], \"digest\": \"43717ed1da753e42\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: mateEquiv_counit normalizes one mate, mateEquiv_vcomp identifies pasting, and counit_naturality moves the output arrow. Their successive use with naturality of alpha_2 is the four-step proof; no hit states the complete boundary-arrow formula. The single-mate theorem is already the existing leaf lem-amb-mate-unit-counit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For adjunctions L0 R0, L1 R1 and L2 R2, normalize epsilon2 L2 of R2(t) beta2 G2(beta1) b using the mates of alpha1 and alpha2",
+   "results": "{\"t\": \"2026-10-21T07:34:22Z\", \"tool\": \"leanfinder\", \"query\": \"For adjunctions L0 R0, L1 R1 and L2 R2, normalize epsilon2 L2 of R2(t) beta2 G2(beta1) b using the mates of alpha1 and alpha2\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.mateEquiv_apply\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.unit_conjugateEquiv\", \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit\"], \"digest\": \"077888c64642818c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: mateEquiv_counit normalizes one mate, mateEquiv_vcomp identifies pasting, and counit_naturality moves the output arrow. Their successive use with naturality of alpha_2 is the four-step proof; no hit states the complete boundary-arrow formula. The single-mate theorem is already the existing leaf lem-amb-mate-unit-counit."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-etale-proetale-scalar-counit-transposes",
@@ -87,7 +175,7 @@
  "blueprint": {
   "from": {
    "node": "det-prop-scalar-six-direct-image",
-   "place": "Formal properties: composition of mates and their counit compatibility; Finite rings: transport through nu*. Isolates the two-mate calculations of counit-transposes, old steps 1-2 and 4-6, before using the mixed site/scalar cube.",
+   "place": "Formal properties paragraph: \"Mates of natural isomorphisms compatible with composition are compatible with composition, and the stated compatibility with units and counits is the triangle identity for mates.\" The component calculation also serves Finite rings, transport through nu*: two pasted mates with arbitrary input/output arrows.",
    "via": [
     "lem-sfb-etale-proetale-scalar-counit-transposes",
     "lem-sfb-etale-proetale-scalar-mate"
@@ -95,5 +183,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-pasted-mates-counit-normalization",
+  "worker": "stage1",
+  "summary": "Preserved the statement and gave a four-step component proof: move the output arrow through the counit, normalize the second mate, apply naturality of alpha_2 at beta_1,J, and normalize the first mate. Reused the existing Mathlib leaf lem-amb-mate-unit-counit; no new nodes. Checked domains, absence of invertibility assumptions, project attachment candidates and both source and search results.",
+  "blueprint": "Steps 1-4 make explicit the Formal properties sentence on composition and units/counits of mates in det-prop-scalar-six-direct-image.proof.md; this is the two-mate component calculation needed when transporting the finite-ring comparison through nu*."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O3-4fd99aaea",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-4fd99aaea (reviewer sub-agent of L); spot-checked: The item's statement is unchanged, true and not weakened. It is a general component identity for two pasted mates with arbitrary input arrow b and output arrow t. Typing checks on both sides; small cases checked: identity adjunctions reduce it to associativity, and in Ab with α = ×2, ×3 and b, t = ×5, ×7 both sides are ×210. Step 1 (naturality of ε_2 at t) and step 3 (naturality of α_2 at β_{1,J}) are genuinely elementary. Steps 2 and 4 apply the statement of the Mathlib leaf lem-amb-mate-unit-counit to the adjunction pairs (1,2) with d = H_1J and (0,1) with d = J; checked against Mathlib Mates.lean:122-125 (mateEquiv_counit), and the directions match. The delivery adds no new nodes and creates no cycle. Source checked: main-20261015 det-prop-scalar-six-direct-image.proof.md, Formal properties sentence at lines 8-11; no SGA is used. Duplicate scan over all mate nodes: lem-weil-pbc-mate-pasting (mateEquiv_vcomp), lem-pur-adjunction-mate-transpose and lem-sfb-adjunction-transpose-square are related laws, not this statement. There is no repair note, so the re-split rule does not apply. No fixes."
  }
 }
