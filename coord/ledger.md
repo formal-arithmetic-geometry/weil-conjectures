@@ -23186,3 +23186,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:25 L: returned deliver/NB/lem-sfb-integral-lisse-closed-base-change (reviewer RETURN: C5 (twice), with D-type consequences. I read the item, all three new nodes, every cited statement and Stacks 09BL in ful)
 - 17:26 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 17:27 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 17:28 L: returned deliver/NY/lem-sfb-root-tower-puncture-invariance (reviewer RETURN: L: independent stage-2 immutable head 47122defe385: H2 / mechanical theorem-stmt_dep finding: the delivery adds theorem )
