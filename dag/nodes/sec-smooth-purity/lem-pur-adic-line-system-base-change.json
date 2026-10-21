@@ -1,0 +1,79 @@
+{
+ "id": "lem-pur-adic-line-system-base-change",
+ "kind": "statement",
+ "title": "Adic line-system comparison through cofinal indices and rational coefficient colimits",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be sites small relative to a larger sheaf universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with finite limits, and $u:\\mathcal C\\to\\mathcal D$ a functor preserving finite limits and coverings. Let $L$ be its geometric inverse image [lem-weil-pbc-left-exact-site-inverse-image-tensor]. Let $I$ be a nonempty directed poset whose underlying set belongs to the sheaf universe. For each $i\\in I$ let $(R_{i,m})_{m\\ge1}$ and $(S_{i,m})_{m\\ge1}$ be inverse towers of sheaves of commutative rings on $\\mathcal C$ and $\\mathcal D$. Write $R_i=\\varprojlim_mR_{i,m}$ and $S_i=\\varprojlim_mS_{i,m}$ [def-pur-sheaf-inverse-limit]. Assume compatible ring isomorphisms $a_{i,m}:LR_{i,m}\\cong S_{i,m}$ and a ring isomorphism $a_i:LR_i\\cong S_i$ whose $m$-th projection is $a_{i,m}L(\\mathrm{pr}_m)$.\nChoose integers $e_i\\ge1$ and put $B_{i,n}=R_{i,e_in}$, $B'_{i,n}=S_{i,e_in}$. Let $(M_{i,n})_n$ be a tower of $B_{i,n}$-module sheaves and $(N_{i,n})_n$ a tower of $B'_{i,n}$-module sheaves, with semilinear transitions [def-weil-sheaf-of-modules-category]. Assume compatible isomorphisms $c_{i,n}:LM_{i,n}\\cong N_{i,n}$ semilinear over $a_{i,e_in}$. For each $i$ assume one covering $\\{V_{ij}\\to1_{\\mathcal C}\\}_j$ and compatible bases $b_{ij,n}:B_{i,n}|_{V_{ij}}\\cong M_{i,n}|_{V_{ij}}$, with $t_nb_{ij,n+1}=b_{ij,n}\\rho_n$, on the localized sites [def-pur-localized-ringed-site]. Put $M_i=\\varprojlim_nM_{i,n}$, $N_i=\\varprojlim_nN_{i,n}$, with scalar actions via $R_i,S_i$ and their subsequence projections.\nAssume also specified directed diagrams in $i$ of the pairs $(B_{i,n},M_{i,n})$ and $(B'_{i,n},N_{i,n})$ for every $n$, with ring homomorphisms and semilinear module maps commuting with the tower transitions, $a$ and $c$. Their induced limit diagrams are required to use the corresponding ring maps $R_i\\to R_j$, $S_i\\to S_j$. Let $s_i\\in R_i(1_{\\mathcal C})$ be compatible global sections, and let $s'_i=a_i(Ls_i)$. For a module $M$ over $R$ write $M[1/s]$ for the sheafified sequential colimit $M\\xrightarrow{s}M\\xrightarrow{s}\\cdots$, with its canonical action of the likewise localized ring $R[1/s]$; equivalently this is $M\\otimes_RR[1/s]$ [def-pur-sheaf-tensor-product]. Then the projection equations\n$$\\mathrm{pr}_n\\theta_i=c_{i,n}L(\\mathrm{pr}_n)$$\ndefine isomorphisms $\\theta_i:LM_i\\cong N_i$ semilinear over $a_i$, independent of the bases and natural in all the specified tower maps. They extend uniquely along the localization cocones to compatible isomorphisms\n$$LM_i[1/s_i]\\cong N_i[1/s'_i].$$\nHere $LM_i[1/s_i]$ means $L(M_i[1/s_i])$. On the sheafified filtered colimits in $i$ they induce an isomorphism\n$$L\\bigl(\\varinjlim_iM_i[1/s_i]\\bigr)\\cong\\varinjlim_iN_i[1/s'_i],$$\nsemilinear over $L(\\varinjlim_iR_i[1/s_i])\\cong\\varinjlim_iS_i[1/s'_i]$. The scalar action on each filtered colimit is the sheafification of $[r_i][m_j]=[r_km_k]$ at any common upper bound $k\\ge i,j$. All comparisons are fixed by the displayed projections, localization maps and colimit coprojections. Restricting a compatible sequence to $m=e_in$ identifies the full coefficient limits with these subsequence limits; the inverse takes its $m$-th coordinate by reducing any coordinate at $e_in\\ge m$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "The integral twist and Rational and algebraic closure paragraphs, abstracted to semilinear module systems. Stacks sites.tex Tag 03CF, lemma-localize-morphism, supports the localized tower argument; the expanded argument is preserved in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-ringed-section-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A geometric inverse image carries compatible locally free rank one module towers to their inverse limits when it preserves the coefficient ring tower, and the comparisons extend to localization and varying coefficient filtered colimits",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, ModuleCat.Tilde.toOpen, ModuleCat.Tilde.res_const, Module.comap_freeLocus_le, Module.mem_freeLocus, Module.mem_freeLocus_of_isLocalization, Module.isLocallyConstant_rankAtStalk_freeLocus, Module.FinitePresentation.exists_free_localizedModule_powers.  The finite-limit instances do not preserve countable towers; inverse-system set equivalences do not address sheaf pullback or semilinearity. Localization.lean means categorical sheafification localization, not scalar inversion. No hit covers the adic and varying-ring scalar-normalized comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Semilinear inverse image comparisons of adic line systems extend to rational localization and filtered colimits of coefficient fields",
+   "results": "8 hits: LinearEquiv.extendScalarsOfIsLocalizationEquiv_symm_apply, LinearMap.extendScalarsOfIsLocalization, IsLocalizedModule.of_linearEquiv_right, LinearEquiv.extendScalarsOfIsLocalization_symm_apply, IsLocalizedModule.mapEquiv_symm_apply, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearIndependent.localization_localization, AdicCompletion.ofLinearEquiv_symm_of.  The finite-limit instances do not preserve countable towers; inverse-system set equivalences do not address sheaf pullback or semilinearity. Localization.lean means categorical sheafification localization, not scalar inversion. No hit covers the adic and varying-ring scalar-normalized comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafPullback\", \"limit\"",
+   "results": "3 hits: CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat.  The finite-limit instances do not preserve countable towers; inverse-system set equivalences do not address sheaf pullback or semilinearity. Localization.lean means categorical sheafification localization, not scalar inversion. No hit covers the adic and varying-ring scalar-normalized comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(adic|localization|[Ll]imit).*(pullback|[Ii]nverseImage)|(pullback|[Ii]nverseImage).*(adic|localization|[Ll]imit)",
+   "results": "3 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean.  The finite-limit instances do not preserve countable towers; inverse-system set equivalences do not address sheaf pullback or semilinearity. Localization.lean means categorical sheafification localization, not scalar inversion. No hit covers the adic and varying-ring scalar-normalized comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection normalized inverse limit comparison for locally trivial module towers is preserved under cofinal reindexing, inversion of a scalar, and semilinear filtered unions of rings",
+   "results": "8 hits: InverseSystem.pEquivOnLim, InverseSystem.piLTLim_symm_apply, InverseSystem.piLTLim_apply, InverseSystem.globalEquiv_compatibility, InverseSystem.piLTLim, InverseSystem.globalEquiv, InverseSystem.globalEquiv_naturality, InverseSystem.invLimEquiv.  The finite-limit instances do not preserve countable towers; inverse-system set equivalences do not address sheaf pullback or semilinearity. Localization.lean means categorical sheafification localization, not scalar inversion. No hit covers the adic and varying-ring scalar-normalized comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-sfb-cartesian-coefficients-twists",
+  "date": "2026-10-21",
+  "group": "Q08"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "The integral twist and Rational and algebraic closure paragraphs: cofinal reindexing, compatible-basis limits, field-inclusion and localized-colimit scalar normalization; returned steps 4-6.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

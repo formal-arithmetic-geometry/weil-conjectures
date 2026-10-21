@@ -1,0 +1,79 @@
+{
+ "id": "lem-pur-signed-line-derived-base-change",
+ "kind": "statement",
+ "title": "Signed line comparisons and their unbounded derived tensor action",
+ "statement": "Let $f:(\\operatorname{Sh}(\\mathcal D),S)\\to(\\operatorname{Sh}(\\mathcal C),R)$ be a morphism of ringed topoi on sites small relative to the sheaf universe [def-weil-size-convention, def-weil-pbc-ringed-topos-morphism], associated to a finite-limit- and covering-preserving functor $u:\\mathcal C\\to\\mathcal D$ between sites with finite limits, with $R,S$ commutative and structural ring isomorphism $a:f^{-1}R\\xrightarrow{\\sim}S$. Let $P$ be an $R$-module sheaf on $\\mathcal C$ and $Q$ an $S$-module sheaf on $\\mathcal D$ [def-weil-sheaf-of-modules-category]. Suppose both are locally free of rank one, meaning they restrict to the coefficient ring on a covering of the final object of their site [def-pur-localized-ringed-site]. Put $F(M)=S\\otimes_{f^{-1}R}f^{-1}M$, using sheaf tensor [def-pur-sheaf-tensor-product], and fix an isomorphism $t:F(P)\\xrightarrow{\\sim}Q$.\nDefine $P^{[0]}=R$, $P^{[m]}=P^{\\otimes_R m}$ for $m\\ge1$, and $P^{[-m]}=\\mathcal Hom_R(P^{[m]},R)$ for $m\\ge1$, with $Q^{[d]}$ defined in the same way [def-pur-sheaf-hom]. There is a unique family of isomorphisms $t_d:F(P^{[d]})\\xrightarrow{\\sim}Q^{[d]}$ with the following normalization: $t_0$ is the coefficient-unit comparison and $t_1=t$; $t_{m+1}$ for $m\\ge1$ is obtained from $t_m\\otimes t$ by the canonical relative tensor comparison and the fixed right-associated powers; and, for $m\\ge1$, $t_{-m}$ is characterized by\n$$\\operatorname{ev}_{Q^{[m]}}\\circ(t_{-m}\\otimes t_m)=(F\\operatorname{ev}_{P^{[m]}})\\circ\\sigma^{-1},$$\nwith both sides mapped to $S$ by the unit comparison and $\\sigma:F(P^{[-m]}\\otimes_RP^{[m]})\\cong F(P^{[-m]})\\otimes_SF(P^{[m]})$. In particular it sends the pulled-back functional dual to a local basis of $P^{[m]}$ to the functional dual to its image under $t_m$. This family is natural in isomorphisms of the line data, and in scalar-extension identifications of these data: for commutative ring maps $R\\to R'$, $S\\to S'$ and a ring isomorphism $a':f^{-1}R'\\xrightarrow{\\sim}S'$ compatible with $a$, equip $P'=R'\\otimes_RP$, $Q'=S'\\otimes_SQ$ and $t'$ with the induced comparison; then its $t'_d$ is the scalar extension of $t_d$ under the canonical signed-power identifications.\nThe exact functor $F$ induces termwise pullback $D(F):D(R)\\to D(S)$ on the ordinary unbounded derived categories [def-weil-abstract-derived-category], with derived tensor of [lem-weil-pbc-site-derived-tensor-descent]. For every $K\\in D(R)$ and $d\\in\\mathbf Z$ there is a natural isomorphism\n$$D(F)(K\\otimes_R^{\\mathbf L}P^{[d]}[0])\\xrightarrow{\\sim}D(F)(K)\\otimes_S^{\\mathbf L}Q^{[d]}[0],$$\nnamely the canonical derived tensor-pullback comparison followed by $1\\otimes t_d[0]$. It respects the preceding unit, positive-power and evaluation normalizations. No boundedness, constructibility or finite-Tor condition on $K$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product, on all unbounded complexes; sites-modules.tex Tags 03EL (lemma-tensor-product-pullback), 0GMX (remark-pullback-internal-hom), 0FNY (example-dual). The normalized signed-line extension is the expanded agent argument of blueprint Powers and duals, preserved in report.md."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-localized-ringed-site",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-sheaf-hom",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An isomorphism of pullback rank one sheaves extends uniquely to all signed tensor powers by evaluation duality and gives natural twist comparisons on unbounded derived categories of module sheaves",
+   "results": "8 hits: SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackIso, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc.  The free-sheaf comparisons supply neither the evaluation-defined negative powers nor the specified derived twist transformation. General monoidal preservation of dual pairs does not identify these internal Hom sheaves and their termwise unbounded derived realization in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ringed topos inverse image preserves signed powers of a line module and its action by derived tensor on unbounded complexes",
+   "results": "8 hits: SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instPreservesFiniteLimitsFunctorOppositeAddCommGrpCatCompSheafToSheafSheafToPresheaf, SheafOfModules.pushforwardNatIso_inv, SheafOfModules.pullbackObjFreeIso.congr_simp, SheafOfModules.forgetPreservesLimitsOfSize, SheafOfModules.pullbackObjFreeIso_hom_naturality.  The free-sheaf comparisons supply neither the evaluation-defined negative powers nor the specified derived twist transformation. General monoidal preservation of dual pairs does not identify these internal Hom sheaves and their termwise unbounded derived realization in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"dual\"",
+   "results": "0 hits: .  The free-sheaf comparisons supply neither the evaluation-defined negative powers nor the specified derived twist transformation. General monoidal preservation of dual pairs does not identify these internal Hom sheaves and their termwise unbounded derived realization in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "signed|[Dd]ual.*pullback|pullback.*[Dd]ual|[Tt]wist",
+   "results": "0 hits: .  The free-sheaf comparisons supply neither the evaluation-defined negative powers nor the specified derived twist transformation. General monoidal preservation of dual pairs does not identify these internal Hom sheaves and their termwise unbounded derived realization in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized extension of a degree one line bundle pullback comparison to negative powers using the internal Hom evaluation, compatible with unbounded derived tensor pullback",
+   "results": "8 hits: SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso_hom_naturality.  The free-sheaf comparisons supply neither the evaluation-defined negative powers nor the specified derived twist transformation. General monoidal preservation of dual pairs does not identify these internal Hom sheaves and their termwise unbounded derived realization in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "det-prop-sfb-cartesian-coefficients-twists",
+  "date": "2026-10-21",
+  "group": "Q08"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-twists",
+   "place": "Powers and duals paragraph: the positive-power induction, evaluation-defined negative powers, and natural comparison on all unbounded ambient complexes; returned steps 7-8.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
