@@ -23,9 +23,90 @@
   "def-weil-derived-tensor",
   "def-weil-proetale-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the chosen small pro-étale site, and write $R=\\kappa_X$. Apply [lem-exc-constant-field-module-flat] to this topology and to the field $\\kappa$: every sheaf of $R$-modules is flat for the ordinary sheafified tensor product. Its size and sheafification hypotheses are satisfied on the small representative in the enclosing coefficient universe; these are the usual ring and abelian-group sheafifications and their locally bijective equivalences, not an enough-points assumption. In particular every term of any complex of $R$-modules is flat.",
+   "uses": [
+    "lem-exc-constant-field-module-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03ER (definition-flat) and 08FC (lemma-flat-eq), specialized by the existing constant-field flatness node."
+   }
+  },
+  {
+   "text": "Assume $H^i(B)=0$ outside $[a,b]$. The abelian-category bounded representative theorem [lem-sfb-bounded-representative] gives a cochain complex $P^\\bullet$ and an isomorphism $B\\cong Q(P^\\bullet)$ with $P^i=0$ for $i<a$ and $i>b$. Now let $N$ be any $R$-module sheaf and regard $N[0]$ as a complex: its only possibly nonzero term is $N$ in degree $0$, flat by step 1, and its zero terms are flat because tensoring with $0$ gives $0$. Apply [lem-weil-pbc-independent-bounded-flat-kflat] with upper bound $0$: $N[0]$ is K-flat on this ringed site. The lemma applies to sites and independent coefficient universes; it does not require a topological-space presentation or stalks.",
+   "uses": [
+    "lem-sfb-bounded-representative",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; bounded representatives: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180–186."
+   }
+  },
+  {
+   "text": "Fix $N$ as in step 2 and write $T_N(X)=\\operatorname{Tot}(X\\otimes_R N[0])$ [def-pc-tensor-complex-sheaves]. Since $N[0]$ is K-flat, [lem-pur-kflat-tensor-quasiiso-independent] says that $T_N$ sends every quasi-isomorphism to a quasi-isomorphism. Hence $Q\\circ T_N$ inverts quasi-isomorphisms and factors through the localization [def-weil-abstract-derived-category] as $\\overline T_N:D\\to D$ with $\\overline T_N\\circ Q\\cong Q\\circ T_N$. Let $C^\\bullet$ represent $B$ and let $q:P'\\to C^\\bullet$ be the K-flat resolution used in [def-weil-derived-tensor], so that $B\\otimes_R^{\\mathbf L}N=Q\\,T_N(P')$. Then $Q\\,T_N(P')\\cong Q\\,T_N(C^\\bullet)$ via $T_N(q)$, and $Q\\,T_N(C^\\bullet)\\cong\\overline T_N(QC^\\bullet)\\cong\\overline T_N(QP^\\bullet)\\cong Q\\,T_N(P^\\bullet)$ via $QC^\\bullet=B\\cong QP^\\bullet$ from step 2. In the total-complex formula for $T_N(P^\\bullet)$, only the summand with second degree zero contributes, so degree $i$ is $P^i\\otimes_R N$ and the differential is $d_P^i\\otimes 1$. These terms are zero for $i\\notin[a,b]$. Their kernels modulo images are therefore zero there, and by invariance of cohomology sheaves under isomorphisms in $D$ [def-weil-derived-cohomology-sheaves], $H^i(B\\otimes^{\\mathbf L}_RN)=0$ for $i\\notin[a,b]$. Since $N$ was arbitrary, this proves the forward implication with the same endpoints.",
+   "uses": [
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-tensor",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism (tensor with a K-flat complex preserves quasi-isomorphisms), and the paragraph before definition-derived-tor (independence of the K-flat representative)."
+   }
+  },
+  {
+   "text": "Conversely, assume the tensor vanishing for every $N$. Represent the arbitrary object $B$ by a complex $C^\\bullet$ and choose a K-flat quasi-isomorphism $P^\\bullet\\to C^\\bullet$ by [lem-pc-kflat-resolution]; no bound on $B$ is used here. Set $N=R$, in degree zero. By [def-weil-derived-tensor] and [def-pc-tensor-complex-sheaves], $B\\otimes_R^{\\mathbf L}R$ is represented by the complex with terms $P^i\\otimes_R R$ and differential $d_P^i\\otimes1$. Sectionwise the mutually inverse maps $p\\otimes r\\mapsto rp$ and $p\\mapsto p\\otimes1$ commute with restrictions and differentials. They give an isomorphism after sheafification [def-pur-sheaf-tensor-product], hence an isomorphism of this total complex with $P^\\bullet$. Thus $B\\otimes_R^{\\mathbf L}R\\cong B$. Cohomology is invariant under these derived isomorphisms [def-weil-derived-cohomology-sheaves], so the assumed vanishing for this particular $N$ gives $H^i(B)=0$ for $i\\notin[a,b]$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-derived-tensor",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 08FZ, definition-tor-amplitude and the following paragraph testing with the coefficient sheaf."
+   }
+  },
+  {
+   "text": "The second condition is exactly Tor amplitude in $[a,b]$ by [def-weil-proetale-tor-amplitude]. Taking existence of an ordered integer interval in the two implications identifies finite Tor amplitude with bounded cohomology. The zero object is covered by any ordered interval, including $[0,0]$. No constructibility or geometric finiteness condition entered any step.",
+   "uses": [
+    "def-weil-proetale-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FZ, definition-tor-amplitude, clauses (1) and (2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-constant-field-module-flat",
+  "lem-sfb-bounded-representative",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-tensor",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-pc-kflat-resolution",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-proetale-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
+  "place": "First paragraph, sentence beginning “Since the residue ring is a field”; expanded using existing flatness, bounded representative and K-flat resolution nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -89,10 +170,66 @@
    "results": "{\"t\": \"2026-10-21T03:02:44Z\", \"tool\": \"grep\", \"query\": \"iff_lTensor_preserves_shortComplex_exact|iff_rTensor_preserves_shortComplex_exact|iff_preservesFiniteLimits_tensorLeft\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\"], \"digest\": \"7d2b99552e587b98\"}",
    "date": "2026-10-21",
    "verdict": "no match: located declarations characterize ordinary scalar-module flatness or derived cohomological bounds, without the sheaf derived-tensor comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"tensor\"",
+   "results": "{\"t\": \"2026-10-21T03:26:14Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-module flatness, cohomological bounds, or constant-sheaf constructions do not state the sheaf derived-tensor interval equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|constantField|constant_field",
+   "results": "{\"t\": \"2026-10-21T03:26:14Z\", \"tool\": \"grep\", \"query\": \"torAmplitude|tor_amplitude|constantField|constant_field\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every sheaf of vector spaces over a constant field is flat and a bounded cohomology complex has Tor amplitude in the same interval",
+   "results": "{\"t\": \"2026-10-21T03:26:14Z\", \"tool\": \"leansearch\", \"query\": \"Every sheaf of vector spaces over a constant field is flat and a bounded cohomology complex has Tor amplitude in the same interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.IsConstant.casesOn\", \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"LightCondensed.IsDiscrete\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.IsConstant.mk\", \"CategoryTheory.Sheaf.IsConstant.rec\", \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf\"], \"digest\": \"ddebf33c4bb2bbb4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-module flatness, cohomological bounds, or constant-sheaf constructions do not state the sheaf derived-tensor interval equivalence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules over a constant field sheaf, cohomology concentrated in an interval is equivalent to Tor amplitude in the same interval",
+   "results": "{\"t\": \"2026-10-21T03:26:23Z\", \"tool\": \"leanfinder\", \"query\": \"For sheaves of modules over a constant field sheaf, cohomology concentrated in an interval is equivalent to Tor amplitude in the same interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.isLE_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isGE_iff\", \"CategoryTheory.Sheaf.H\", \"DerivedCategory.isZero_of_isLE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\"], \"digest\": \"74d86f638e3e28fb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-module flatness, cohomological bounds, or constant-sheaf constructions do not state the sheaf derived-tensor interval equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "IsKFlat|KFlat|homology.*tensor|tensor.*homology",
+   "results": "{\"t\": \"2026-10-21T03:26:26Z\", \"tool\": \"grep\", \"query\": \"IsKFlat|KFlat|homology.*tensor|tensor.*homology\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no source hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring a bounded complex with any sheaf over a constant field does not enlarge its cohomological support because every module sheaf is flat",
+   "results": "{\"t\": \"2026-10-21T03:26:36Z\", \"tool\": \"leanfinder\", \"query\": \"Tensoring a bounded complex with any sheaf over a constant field does not enlarge its cohomological support because every module sheaf is flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"DerivedCategory.isLE_Q_obj_iff\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"48b04aeade7927ed\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary-module flatness, cohomological bounds, or constant-sheaf constructions do not state the sheaf derived-tensor interval equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "lTensor_shortComplex_exact|rTensor_shortComplex_exact",
+   "results": "{\"t\": \"2026-10-21T03:28:46Z\", \"tool\": \"grep\", \"query\": \"lTensor_shortComplex_exact|rTensor_shortComplex_exact\", \"sub\": \"RingTheory/Flat\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\", \"Mathlib/RingTheory/Flat/CategoryTheory.lean\"], \"digest\": \"c3858a328309ab91\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ordinary-module tensor exactness and derived cohomological-bound criteria; none states the constant-field sheaf Tor equivalence"
+  },
+  {
+   "tool": "grep",
+   "query": "isGE_iff|isLE_iff|exists_iso_Q_obj_of_isGE_of_isLE",
+   "results": "{\"t\": \"2026-10-21T03:28:46Z\", \"tool\": \"grep\", \"query\": \"isGE_iff|isLE_iff|exists_iso_Q_obj_of_isGE_of_isLE\", \"sub\": \"Algebra/Homology/DerivedCategory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\"], \"digest\": \"c8a5117eba01d072\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected ordinary-module tensor exactness and derived cohomological-bound criteria; none states the constant-field sheaf Tor equivalence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-lem-integral-models",
@@ -109,5 +246,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-constant-field-tor-bounds",
+  "worker": "stage1",
+  "summary": "Kept the statement and statement dependencies unchanged. Proved the precise interval equivalence using existing constant-field sheaf flatness, a bounded representative, site-level bounded-flat K-flatness and an explicit tensor-with-unit calculation for the converse. No new nodes or Mathlib leaves. Checked the empty scheme, zero complex and singleton intervals without assuming enough points. Maintainer reader repair (2026-10-21): step 3 now derives the computation of $B\\otimes^{\\mathbf L}N$ on the bounded representative from K-flatness of $N[0]$ and lem-pur-kflat-tensor-quasiiso-independent, since step 2 gives only an isomorphism in $D$, not a resolution map of the representing complex.",
+  "blueprint": "Realizes sk-lem-integral-models proof first paragraph: the residue coefficient ring is a field, so every bounded complex has finite Tor dimension.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-constant-field-module-flat",
+    "why": "General constant-field sheaf flatness supplies flat terms on any small ringed site, without enough points; the unit has no other such node."
+   },
+   {
+    "node": "lem-weil-pbc-independent-bounded-flat-kflat",
+    "why": "General site-level bounded-above flat K-flatness makes N[0] K-flat for every module N over the constant field, without topological-space or stalk hypotheses."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "General ringed-site K-flat resolution of an arbitrary representative is used to verify tensor with the coefficient unit in the converse before boundedness is known."
+   },
+   {
+    "node": "lem-pur-kflat-tensor-quasiiso-independent",
+    "why": "General ringed-site fact (Stacks 06YP) that tensoring with a K-flat complex preserves quasi-isomorphisms; it transports the derived tensor from the defining resolution to the bounded representative, which is only isomorphic to B in D. No node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-constant-field-module-flat",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-tensor-quasiiso-independent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-5f9ea7c91",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-5f9ea7c91 (reviewer sub-agent of L); spot-checked: I read the item, all 9 cited statements, the blueprint main-20261015 sk-lem-integral-models proof (paragraph 1), Stacks 06YQ and 06YP, and the remark before definition-derived-tor. The statement is true: sheaf tensor over κ_X is the sheafified tensor over the constant presheaf κ, which is exact, so every κ_X-module is flat; testing N=κ_X gives the converse. Edge cases checked: B=0, a=b, the empty scheme, unbounded B in the converse, infinite κ or κ of characteristic p. One C4/E5 fault, step 3: it computed B⊗^L N on the bounded representative P of step 2 'by def-weil-derived-tensor', but that definition uses a chosen K-flat resolution map P'→C of a complex representing B, and step 2 gives only B≅Q(P) in D. Independence from the representative was uncited; lem-weil-derived-tensor-resolution-independent covers only resolutions of the same complex. Fixed: step 2 now shows N[0] is K-flat by lem-weil-pbc-independent-bounded-flat-kflat with bound 0 (N is flat by step 1). Step 3 cites lem-pur-kflat-tensor-quasiiso-independent (Stacks 06YP), so Tot(−⊗N[0]) preserves quasi-isomorphisms and descends to D; this gives Q T_N(P')≅Q T_N(C)≅Q T_N(P), then the original degree count. proof_deps recomputed. Added tool_use lem-pur-kflat-tensor-quasiiso-independent, checked acyclic: its closure does not reach the item. Steps 1, 2 (bounded representative = Mathlib exists_iso_Q_obj_of_isGE_of_isLE), 4 (arbitrary K-flat resolution, unit isomorphism, N=R) and 5 checked correct. Accepted tool_uses: lem-exc-constant-field-module-flat, lem-weil-pbc-independent-bounded-flat-kflat, lem-pc-kflat-resolution and the added one, all generic. No duplicate: lem-sp-ringed-site-tor-flat-model is a general flat-model criterion the item is a corollary of, not a restatement; lem-weil-field-tor-amplitude and det-def-localizing-closure-ctf-equals-bc(1) differ. No new nodes, no SGA.; 1 file(s) fixed by the reviewer"
  }
 }
