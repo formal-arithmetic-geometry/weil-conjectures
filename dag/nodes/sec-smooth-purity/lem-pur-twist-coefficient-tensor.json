@@ -1,0 +1,133 @@
+{
+ "id": "lem-pur-twist-coefficient-tensor",
+ "kind": "statement",
+ "title": "Finite integral coefficient extension commutes with sheafwise completion",
+ "statement": "Let S be an arbitrary scheme, l a prime and E a finite extension of Q_l. For the four concrete coefficient sheaves and canonical maps [def-pur-twist-coefficient-rings], define the canonical ring homomorphism B(U)⊗_{A(U)}R(U)→T(U) by b⊗a↦d(b)c(a) for each site object U. The scalar-square equality makes the formula balanced. This specified map is bijective. The tensor uses the two specified maps from the discrete Z_l constant sheaf. This is a coefficient calculation and assumes no invertibility of l on S and makes no assertion about Tate twists, arbitrary module tensors, local freeness or derived completeness.\n\ntheorem purTwistCoefficientTensor (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (U : S.ProEtᵒᵖ) :\n    letI := ((purTwistConstantIntegersMap S l E).hom.app U).hom.toAlgebra\n    letI := ((purTwistZlCompletionMap S l).hom.app U).hom.toAlgebra\n    Function.Bijective (purTwistCoefficientTensorMap S l E U)",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; coefficient-twist blueprint order 1505 and parent proof step 6"
+ },
+ "stmt_deps": [
+  "def-pur-twist-coefficient-rings",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The integral closure of Z_l in E is O_E: the spectral norm criterion for the coefficients of the monic minimal polynomial proves one implication, and integral closedness of the valuation ring proves the other. Finite integral closure over the complete DVR is finite as a module. Torsion freeness in E and the PID criterion therefore give a finite Z_l-basis of O_E. The valuation decomposition of l writes it as a unit times pi^e for e≥1. The private Lean helpers integral_basis, prime_uniformizer_power and coefficient_filtrations prove these parts completely.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply constant sheafification to the finite basis, its coordinate maps and their inverse identities. The induced finite bases on sections identify B(U)⊗_{A(U)}R(U) with a fixed finite power of R(U). Reducing the coefficient basis modulo l^r gives compatible finite-power identifications of the constant quotient sheaves. Sectionwise limits commute with this finite power. The private helper coefficient_section_basis proves the section-basis claim, and finiteFreeCompletionTensor proves the algebraic tensor/completion bijection without Noetherian assumptions. The concrete quotient-diagram identifications and their compatibility with the specified scalar maps remain open.",
+   "uses": [
+    "lem-pur-constant-finite-free-section-basis",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ideals l^r O_E=(pi^(er)) are cofinal in the pi-power ideals. Extend any tuple on the cofinal subsequence to exponent n by reducing an entry at er≥n; compatibility proves independence of the choice. The private helper cofinal_power_subsequence proves the limit reindexing and its projection normalization in any category. Thus the finite-power limit is T(U). The comparison sends b⊗a to d(b)c(a) after every projection. This formula is unital and multiplicative on pure tensors, and tensor induction extends both identities. It is the explicitly constructed purTwistCoefficientTensorMap, whose bijectivity is the theorem. Pure tensors also prove uniqueness of the corresponding ring equivalence. The same argument works on the empty object, where the rings are zero. No claim that all sections of a constant sheaf are constant is used.",
+   "uses": [
+    "def-pur-twist-coefficient-rings",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-pur-constant-finite-free-section-basis",
+  "def-pur-sheaf-inverse-limit",
+  "def-pur-twist-coefficient-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; coefficient-twist blueprint order 1505 and parent proof step 6",
+  "group": "Q6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Completion of a finite free constant p-adic coefficient sheaf equals tensor with the completed scalar sheaf",
+   "results": "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfPiFintype; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.module; Padic.adicCompletionEquiv; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.instIsScalarTower",
+   "date": "2026-10-20",
+   "verdict": "Mathlib has the algebraic adic-completion tensor theorem. It does not identify these sheaf sections or the cofinal uniformizer quotient diagram."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion.ofTensorProduct",
+   "results": "AdicCompletion.ofTensorProduct; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProduct_surjective_of_finite; AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian; AdicCompletion.ofTensorProduct_tmul; AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype; AdicCompletion.ofTensorProduct_comp_ofTensorProductInvOfPiFintype; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply",
+   "date": "2026-10-20",
+   "verdict": "A useful algebraic ingredient, but its Noetherian assumption cannot simply be imposed on the section rings, which can have infinitely many components."
+  },
+  {
+   "tool": "grep",
+   "query": "Sheafify.*module|ofTensorProduct.*bijective|constant.*[Cc]ompletion",
+   "results": "Mathlib/Condensed/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Light/Module.lean; Mathlib/Condensed/Light/Small.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+   "date": "2026-10-20",
+   "verdict": "No theorem for these canonical sheafwise coefficient inclusions. The existing constant finite-free section basis is a project lemma used by the plan."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurTwistSheafLocallyFree",
+  "date": "2026-10-21",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "place": "Integral coefficient Tate twist and the coefficient calculation in lem-pur-twist-sheaf-locally-free, proof step 6.",
+   "via": [
+    "lem-pur-twist-sheaf-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurTwistCoefficientTensor",
+  "file": "lean/Sheaf/Paper/PurTwistCoefficientTensor.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purTwistCoefficientTensor",
+  "statement": "theorem purTwistCoefficientTensor (S : Scheme.{u}) (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]\n    (U : S.ProEtᵒᵖ) :\n    letI := ((purTwistConstantIntegersMap S l E).hom.app U).hom.toAlgebra\n    letI := ((purTwistZlCompletionMap S l).hom.app U).hom.toAlgebra\n    Function.Bijective (purTwistCoefficientTensorMap S l E U)",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.purTwistCoefficientTensorMap",
+   "AlgebraicGeometry.Scheme.purTwistCoefficientTensor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b1777",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261021T001137-L-1377147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b1777",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261021T001137-L-1377147",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item + 3 new modules vs live PurTwistSheafLocallyFree (moved block byte-identical bar one private proof line); new sorry purTwistCoefficientTensor vs finite-basis/cofinality argument (true); axioms audit; importer CoefficientTwistsDetailed compiled against delivery (32.4 s vs 32.6 s baseline)"
+ }
+}

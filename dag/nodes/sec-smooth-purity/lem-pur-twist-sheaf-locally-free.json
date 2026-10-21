@@ -31,6 +31,13 @@
  ],
  "proof": [
   {
+   "text": "Use the unchanged canonical coefficient-ring constructions now grouped in def-pur-twist-coefficient-rings. The public import reexports all original names, universes and definitions.",
+   "uses": [
+    "def-pur-twist-coefficient-rings"
+   ],
+   "elementary": true
+  },
+  {
    "text": "Finite-level trivializations on the correct site. Work first over an affine open $T=\\operatorname{Spec}B\\subset S$, and put $N=\\ell^r$. Apply lem-asd-finite-etale-twist-line with $A=\\mathbf Z/N\\mathbf Z$ and twist exponent $1$. The tensor with the coefficient ring is the identity (the maps $z\\otimes a\\mapsto z^a$ and $z\\mapsto z\\otimes1$ are inverse), so its conclusion is an etale cover trivializing the ordinary etale roots-of-unity sheaf. To transfer this particular sheaf, rather than assume an identification of sites, put $P=\\operatorname{Spec}(B[X]/(X^N-1))$. On every $T$-scheme, maps to $P$ are precisely units $z$ with $z^N=1$, by the defining polynomial relation (the inverse of $z$ is $z^{N-1}$). Taking $g=1$ in lem-sbc-root-split-away-cover-etale makes its basic open all of $P$, so $P\\to T$ is etale. Thus $P$ is an object of the etale site. In the explicit left-Kan-extension formula of def-weil-pbc-site-comparison-morphism, a representative $a\\in h_P(U)$ at $(U,W\\to U)$ maps to the composite $W\\to U\\xrightarrow a P$. Its inverse sends $b:W\\to P$ to $\\mathrm{id}_P$ at $(P,b)$. These are inverse: the arrow $(U,W\\to U)\\to(P,b)$ is $a$, and its restriction sends $\\mathrm{id}_P$ to $a$. Consequently $\\nu_T^{-1}h_P=h_P$ on the pro-etale site, after sheafification; the right side is the roots-of-unity sheaf in def-pur-roots-of-unity-sheaf. Apply clause 1 of the current statement of lem-sf-comparison-pullback-exact with the finite discrete commutative ring $\\Lambda=\\mathbf Z/N\\mathbf Z$: it identifies $\\nu_T^{-1}\\Lambda_{T_{\\mathrm{et}}}$ with $\\Lambda_{T_{\\mathrm{proet}}}$ and the module inverse image with the underlying inverse image. For each etale trivializing member $U_i\\to T$, repeat the preceding representative calculation with $W\\to U_i$ and $P\\times_TU_i$: a root over $W$ is exactly a $U_i$-map $W\\to P\\times_TU_i$. The etale isomorphism on $U_i$ and its inverse therefore pull back to inverse module morphisms on $(U_i)_{\\mathrm{proet}}$, with the indicated constant coefficient ring. These are precisely the restrictions of the roots sheaf on $T_{\\mathrm{proet}}$, since both evaluate on $W$ as roots in $\\Gamma(W,\\mathcal O_W)^\\times$. Thus the same etale cover trivializes the pro-etale roots sheaf; no conclusion about integral twists or derived completeness is taken from this finite-coefficient comparison lemma. The power maps and scalar actions are unchanged because the displayed inverse is evaluation of the same root. Combining with the affine-open cover gives the first asserted rank-one local trivializations over $S$. No quasi-compactness or separation assumption on $S$ is used.",
    "uses": [
     "lem-asd-finite-etale-twist-line",
@@ -107,12 +114,14 @@
    }
   },
   {
-   "text": "Compare the two completed coefficient sheaves, using a finite basis rather than interchanging tensor and an arbitrary limit. Choose the basis $b_1,\\ldots,b_d$ from step 5. Its reduction gives $(\\mathbf Z_\\ell/\\ell^r)^d\\cong\\mathcal O_E/\\ell^r\\mathcal O_E$ for every $r$, commuting with reductions. Applying constant sheafification preserves this explicit isomorphism and its inverse; finite direct sums of constant modules identify with the corresponding constant finite direct sum by the coordinate inclusions and projections. By the sectionwise description of limits, taking the limit identifies $\\varprojlim_r(\\mathcal O_E/\\ell^r)_S$ with $R^d$. The ideals $\\ell^r\\mathcal O_E=(\\varpi_E^{er})$ are cofinal in the $\\varpi_E$-powers: a compatible tuple on the subsequence $er$ extends uniquely to index $n$ by reducing its entry at any $er\\geq n$, independently of that choice. Thus this limit is $B=\\widehat{\\mathcal O}_{E,S}$. On the other hand the same basis identifies $R\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_E)_S$ with $R^d$ by $x\\otimes\\sum a_ib_i\\mapsto(a_ix)_i$ and its explicit inverse. The resulting isomorphism is the canonical scalar map: at index $er$, $x\\otimes a$ maps to $p_r(x)(a\\bmod\\ell^r)$; at other indices it is its reduction. This formula also proves multiplicativity, unity, independence of the basis, and compatibility with every coefficient projection. In particular it is an isomorphism of sheaves of rings, not just of underlying modules. Slice restriction preserves the constructions because all sections and covering relations are the same under lem-weil-proetale-weakly-etale-localization.",
+   "text": "Compare the two completed coefficient sheaves, using a finite basis rather than interchanging tensor and an arbitrary limit. Choose the basis $b_1,\\ldots,b_d$ from step 5. Its reduction gives $(\\mathbf Z_\\ell/\\ell^r)^d\\cong\\mathcal O_E/\\ell^r\\mathcal O_E$ for every $r$, commuting with reductions. Applying constant sheafification preserves this explicit isomorphism and its inverse; finite direct sums of constant modules identify with the corresponding constant finite direct sum by the coordinate inclusions and projections. By the sectionwise description of limits, taking the limit identifies $\\varprojlim_r(\\mathcal O_E/\\ell^r)_S$ with $R^d$. The ideals $\\ell^r\\mathcal O_E=(\\varpi_E^{er})$ are cofinal in the $\\varpi_E$-powers: a compatible tuple on the subsequence $er$ extends uniquely to index $n$ by reducing its entry at any $er\\geq n$, independently of that choice. Thus this limit is $B=\\widehat{\\mathcal O}_{E,S}$. On the other hand the same basis identifies $R\\otimes_{(\\mathbf Z_\\ell)_S}(\\mathcal O_E)_S$ with $R^d$ by $x\\otimes\\sum a_ib_i\\mapsto(a_ix)_i$ and its explicit inverse. The resulting isomorphism is the canonical scalar map: at index $er$, $x\\otimes a$ maps to $p_r(x)(a\\bmod\\ell^r)$; at other indices it is its reduction. This formula also proves multiplicativity, unity, independence of the basis, and compatibility with every coefficient projection. In particular it is an isomorphism of sheaves of rings, not just of underlying modules. Slice restriction preserves the constructions because all sections and covering relations are the same under lem-weil-proetale-weakly-etale-localization. In Lean the coefficient-only part is lem-pur-twist-coefficient-tensor. Apply lem-pur-tensor-pushout-action with these sectionwise equivalences and M=Z_l(1). This proves purTwistIntegralAction_existsUnique, including restriction, both scalar normalizations and uniqueness. The main local-freeness/derived-completeness theorem remains unproved; its other steps are retained.",
    "uses": [
     "def-pur-sheaf-inverse-limit",
     "def-pur-sheaf-tensor-product",
     "def-weil-completed-integral-coefficients",
-    "lem-weil-proetale-weakly-etale-localization"
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-pur-twist-coefficient-tensor",
+    "lem-pur-tensor-pushout-action"
    ],
    "elementary": true,
    "source": {
@@ -211,6 +220,7 @@
   }
  ],
  "proof_deps": [
+  "def-pur-twist-coefficient-rings",
   "lem-asd-finite-etale-twist-line",
   "lem-sbc-root-split-away-cover-etale",
   "def-weil-pbc-site-comparison-morphism",
@@ -231,6 +241,8 @@
   "lem-weil-valued-dvr-finite-quotients",
   "lem-sc-dvr-fg-torsionfree-free",
   "def-weil-completed-integral-coefficients",
+  "lem-pur-twist-coefficient-tensor",
+  "lem-pur-tensor-pushout-action",
   "lem-weil-pbc-etale-cover-geometric-point-lift",
   "lem-pur-site-restriction-module-adjunction-exact",
   "def-pc-kflat-complex",
@@ -244,8 +256,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-coefficient-twists-detailed.md",
-  "place": "The blueprint defines the objects but presupposes their properties. This proof assembles the finite Kummer trivializations, weakly contractible-cover construction, completed-constant quotient theorem, finite-basis comparison and surjective-tower Roos triangle; no source is asserted to state all four clauses together."
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Original twelve-step proof plan; coefficient action factored through a fully proved generic sheaf action and the separate coefficient tensor calculation.",
+  "group": "Q6",
+  "date": "2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -433,17 +447,6 @@
   "module": "Sheaf.Paper.PurTwistSheafLocallyFree",
   "declaration": "AlgebraicGeometry.Scheme.pur_twist_sheaf_locally_free",
   "declarations": [
-   "AlgebraicGeometry.Scheme.purTwistAbLocallyBijective",
-   "AlgebraicGeometry.Scheme.purTwistRing",
-   "AlgebraicGeometry.Scheme.purTwistFiniteRing",
-   "AlgebraicGeometry.Scheme.purTwistZlConstant",
-   "AlgebraicGeometry.Scheme.purTwistFiniteTransition",
-   "AlgebraicGeometry.Scheme.purTwistZlTower",
-   "AlgebraicGeometry.Scheme.purTwistZlCompletion",
-   "AlgebraicGeometry.Scheme.purTwistZlProjection",
-   "AlgebraicGeometry.Scheme.purTwistZlReduction",
-   "AlgebraicGeometry.Scheme.purTwistZlCompletionMap_existsUnique",
-   "AlgebraicGeometry.Scheme.purTwistZlCompletionMap",
    "AlgebraicGeometry.Scheme.purTwistZlOne",
    "AlgebraicGeometry.Scheme.purTwistForgetPreservesSheafification",
    "AlgebraicGeometry.Scheme.purTwistFiniteRingIso",
@@ -452,18 +455,6 @@
    "AlgebraicGeometry.Scheme.purTwistZlAction",
    "AlgebraicGeometry.Scheme.purTwistZlAction_restriction",
    "AlgebraicGeometry.Scheme.purTwistZlModule",
-   "AlgebraicGeometry.Scheme.purTwistIntegersMap_existsUnique",
-   "AlgebraicGeometry.Scheme.purTwistIntegersMap",
-   "AlgebraicGeometry.Scheme.purTwistIntegralConstant",
-   "AlgebraicGeometry.Scheme.purTwistConstantIntegersMap",
-   "AlgebraicGeometry.Scheme.purTwistIntegralQuotient",
-   "AlgebraicGeometry.Scheme.purTwistIntegralCompletionMap_existsUnique",
-   "AlgebraicGeometry.Scheme.purTwistIntegralCompletionMap",
-   "AlgebraicGeometry.Scheme.IsPurTwistCompletedScalarMap",
-   "AlgebraicGeometry.Scheme.purTwistCompletedScalarMap_existsUnique",
-   "AlgebraicGeometry.Scheme.purTwistCompletedScalarMap",
-   "AlgebraicGeometry.Scheme.purTwistCoefficientSquare",
-   "AlgebraicGeometry.Scheme.purTwistCoefficientComparison",
    "AlgebraicGeometry.Scheme.purTwistIntegralOne",
    "AlgebraicGeometry.Scheme.purTwistIntegralTensor",
    "AlgebraicGeometry.Scheme.purTwistIntegralAction_existsUnique",
@@ -479,25 +470,16 @@
   "by": "NF",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Canonical root-limit, constant-coefficient tensor and completed-action helpers are included in this owning module. All data choices have unique specifications; the main theorem refers to the concrete integral line and its concrete finite reductions."
+  "note": "Canonical root-limit, constant-coefficient tensor and completed-action helpers are included in this owning module. All data choices have unique specifications; the main theorem refers to the concrete integral line and its concrete finite reductions. Coefficient-only declarations have moved verbatim to Sheaf.Paper.PurTwistCoefficientRings, publicly imported here; their attachment is def-pur-twist-coefficient-rings. Integral action now follows from the coefficient tensor and generic tensor action nodes; the main theorem still has its original hole."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "W9",
+  "reviewer": "C-b1777",
+  "group": "Q6",
   "result": "pass",
-  "landing": "20261020T221401-L-4180829",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.purTwistIntegralAction_existsUnique",
-   "AlgebraicGeometry.Scheme.purTwistZlAction_existsUnique",
-   "AlgebraicGeometry.Scheme.pur_twist_sheaf_locally_free"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.purTwistIntegralAction_existsUnique",
-   "AlgebraicGeometry.Scheme.pur_twist_sheaf_locally_free"
-  ]
+  "landing": "20261021T001137-L-1377147",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item + 3 new modules vs live PurTwistSheafLocallyFree (moved block byte-identical bar one private proof line); new sorry purTwistCoefficientTensor vs finite-basis/cofinality argument (true); axioms audit; importer CoefficientTwistsDetailed compiled against delivery (32.4 s vs 32.6 s baseline)"
  }
 }

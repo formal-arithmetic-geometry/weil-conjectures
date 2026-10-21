@@ -1,0 +1,136 @@
+{
+ "id": "def-pur-twist-coefficient-rings",
+ "kind": "definition",
+ "title": "The canonical discrete and completed scalar square of the Tate twist",
+ "statement": "For a scheme S, a prime l and a finite extension E of Q_l [def-weil-l-adic-numbers], let A=(Z_l)_S and B=(O_E)_S be constant commutative ring sheaves [def-weil-pbc-constant-sheaf]. Let R=lim_r (Z/l^(r+1))_S and T=lim_n (O_E/(pi^(n+1)))_S [def-weil-completed-integral-coefficients]. Use the literal quotient maps as tower transitions. The maps A→R and B→T are the unique limit lifts of the quotient cones. The map Z_l→O_E is the unique map agreeing with the coefficient field inclusion, and induces A→B. The map R→T is uniquely characterized after every finite projection by a finite Z/l^r factorization of Z_l→O_E/(pi^n). These maps form a commutative square. Its comparison is the canonical morphism from the pushout of A→R and A→B to T. All of these are the unchanged named constructions extracted from the parent module; no assertion of invertibility or local freeness is included.\n\ndef purTwistCoefficientComparison",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK and the coefficient-twist blueprint, order 1505; unchanged parent scalar constructions"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Retain the original constant sheaves, quotient maps and tower limits. Limit universal properties give existence and uniqueness of the constant-to-completion maps. Integrality supplies the unique coefficient-ring inclusion. Each coefficient quotient kills a power of l; its factorization through Z/l^r yields a compatible cone, hence the completed scalar map. Cancellation of the epimorphic constant quotient maps and joint faithfulness of limit projections prove uniqueness and commutativity of the scalar square. Define its comparison by pushout.desc. These are exactly the already proved parent constructions, moved to avoid an import cycle with the coefficient-only tensor lemma.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK and the coefficient-twist blueprint, order 1505; unchanged parent scalar constructions",
+  "group": "Q6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Constant p-adic integer sheaf maps canonically to the inverse limit of its finite quotients",
+   "results": "ProfiniteGrp.toLimit_fun; PadicInt; PadicInt.lift; ProfiniteGrp.toLimit; IsAdicComplete.of_lift; ProfiniteGrp.isoLimittoFiniteQuotientFunctor; PadicInt.instCoePadic; Profinite.asLimitConeIso",
+   "date": "2026-10-20",
+   "verdict": "The standard inverse-limit tools are available; these particular four sheaves and canonical maps belong to this project."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.limit.lift",
+   "results": "CategoryTheory.Limits.limit.lift; CategoryTheory.Limits.limit.lift_cone; CategoryTheory.Limits.limit.isLimit_lift; CategoryTheory.Limits.limit.coneMorphism_hom; CategoryTheory.Limits.limit.lift_extend; CategoryTheory.Limits.limit.lift_π; CategoryTheory.Limits.limit.lift_pre; CategoryTheory.Limits.limit.lift_map",
+   "date": "2026-10-20",
+   "verdict": "Used to retain the existing concrete limit constructions, not an alternate coefficient definition."
+  },
+  {
+   "tool": "grep",
+   "query": "purTwistZlCompletionMap|purTwistCompletedScalarMap|constantSheaf.*[Cc]omplet",
+   "results": "No hits.",
+   "date": "2026-10-20",
+   "verdict": "No duplicate Mathlib definition. Existing project declarations are moved verbatim and reexported by their former module."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurTwistSheafLocallyFree",
+  "date": "2026-10-21",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "place": "Integral coefficient Tate twist and the coefficient calculation in lem-pur-twist-sheaf-locally-free, proof step 6.",
+   "via": [
+    "lem-pur-twist-sheaf-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PurTwistCoefficientRings",
+  "file": "lean/Sheaf/Paper/PurTwistCoefficientRings.lean",
+  "declaration": "AlgebraicGeometry.Scheme.purTwistCoefficientComparison",
+  "statement": "def purTwistCoefficientComparison",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.purTwistAbLocallyBijective",
+   "AlgebraicGeometry.Scheme.purTwistRing",
+   "AlgebraicGeometry.Scheme.purTwistFiniteRing",
+   "AlgebraicGeometry.Scheme.purTwistZlConstant",
+   "AlgebraicGeometry.Scheme.purTwistFiniteTransition",
+   "AlgebraicGeometry.Scheme.purTwistZlTower",
+   "AlgebraicGeometry.Scheme.purTwistZlCompletion",
+   "AlgebraicGeometry.Scheme.purTwistZlProjection",
+   "AlgebraicGeometry.Scheme.purTwistZlReduction",
+   "AlgebraicGeometry.Scheme.purTwistZlCompletionMap_existsUnique",
+   "AlgebraicGeometry.Scheme.purTwistZlCompletionMap",
+   "AlgebraicGeometry.Scheme.purTwistIntegersMap_existsUnique",
+   "AlgebraicGeometry.Scheme.purTwistIntegersMap",
+   "AlgebraicGeometry.Scheme.purTwistIntegralConstant",
+   "AlgebraicGeometry.Scheme.purTwistConstantIntegersMap",
+   "AlgebraicGeometry.Scheme.purTwistIntegralQuotient",
+   "AlgebraicGeometry.Scheme.purTwistIntegralCompletionMap_existsUnique",
+   "AlgebraicGeometry.Scheme.purTwistIntegralCompletionMap",
+   "AlgebraicGeometry.Scheme.IsPurTwistCompletedScalarMap",
+   "AlgebraicGeometry.Scheme.purTwistCompletedScalarMap_existsUnique",
+   "AlgebraicGeometry.Scheme.purTwistCompletedScalarMap",
+   "AlgebraicGeometry.Scheme.purTwistCoefficientSquare",
+   "AlgebraicGeometry.Scheme.purTwistCoefficientComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b1777",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261021T001137-L-1377147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b1777",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261021T001137-L-1377147",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item + 3 new modules vs live PurTwistSheafLocallyFree (moved block byte-identical bar one private proof line); new sorry purTwistCoefficientTensor vs finite-basis/cofinality argument (true); axioms audit; importer CoefficientTwistsDetailed compiled against delivery (32.4 s vs 32.6 s baseline)"
+ }
+}

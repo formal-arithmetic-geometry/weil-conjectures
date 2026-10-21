@@ -1,0 +1,116 @@
+{
+ "id": "lem-pur-tensor-pushout-action",
+ "kind": "statement",
+ "title": "A sectionwise scalar pushout acts uniquely on a balanced tensor sheaf",
+ "statement": "Let C be a category with a Grothendieck topology J and sheafification of abelian presheaves, with the locally bijective criterion. Let A,B,R,T be sheaves of commutative rings, a:A→R, b:A→B, c:R→T and d:B→T, and M an R-module sheaf [def-weil-sheaf-of-modules-category]. Suppose for every object U there is a ring equivalence e_U:B(U)⊗_{A(U)}R(U)≃T(U) taking s⊗r to d(s)c(r). Let N be extension along b of M restricted along a [def-pur-sheaf-tensor-product]. There is a unique family of T(U)-module structures on N(U) compatible with restriction, whose d(B)-action is the original B-action and whose c(r)-action on the sheafification image of s⊗x is the image of s⊗(r x). Neither finite freeness nor a nonzero ring hypothesis is required.\n\ntheorem tensorPushoutAction_existsUnique (e : ∀ U : Cᵒᵖ,\n    letI := (b.hom.app U).hom.toAlgebra\n    letI := (a.hom.app U).hom.toAlgebra\n    B.obj.obj U ⊗[A.obj.obj U] R.obj.obj U ≃+* T.obj.obj U)\n    (he : ∀ (U : Cᵒᵖ) (s : B.obj.obj U) (r : R.obj.obj U),\n      letI := (b.hom.app U).hom.toAlgebra\n      letI := (a.hom.app U).hom.toAlgebra\n      e U (s ⊗ₜ[A.obj.obj U] r) = d.hom.app U s * c.hom.app U r) :\n    let M' := (SheafOfModules.restrictScalars\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj M\n    let N := SheafOfModules.changeOfRingsOfUniverses b M'\n    let P := SheafOfModules.changeOfRingsPresheafOfUniverses b M'\n    let φ := (PresheafOfModules.toPresheaf _).map\n      ((PresheafOfModules.sheafificationAdjunction\n        (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B).obj)).unit.app P)\n    ∃! K : ∀ U : Cᵒᵖ, Module (T.obj.obj U) (N.val.obj U),\n      (∀ ⦃U V : Cᵒᵖ⦄ (f : U ⟶ V) (z : T.obj.obj U) (x : N.val.obj U),\n        N.val.map f (@SMul.smul _ _ (K U).toSMul z x) =\n          @SMul.smul _ _ (K V).toSMul (T.obj.map f z) (N.val.map f x)) ∧\n      (∀ (U : Cᵒᵖ) (s : B.obj.obj U) (x : N.val.obj U),\n        @SMul.smul _ _ (K U).toSMul (d.hom.app U s) x = s • x) ∧\n      ∀ (U : Cᵒᵖ) (r : R.obj.obj U) (s : B.obj.obj U) (x : M.val.obj U),\n        @SMul.smul _ _ (K U).toSMul (c.hom.app U r)\n          (φ.app U (s ⊗ₜ[A.obj.obj U, (b.hom.app U).hom] x)) =\n        φ.app U (s ⊗ₜ[A.obj.obj U, (b.hom.app U).hom] (r • x))",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; balanced scalar action in parent proof step 6"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Map B⊗_A R into the endomorphism ring of B⊗_A M using the R-action on M. On pure tensors its action is (s⊗r)(t⊗x)=st⊗rx. Transport it through each e_U. Double tensor induction and naturality of c,d show that restrictions are semilinear. Taking r=1 identifies the original B-action.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The underlying abelian presheaf has the prescribed tensor sheaf as its sheafification. Descend the new action through the locally bijective unit using PresheafOfModules.Sheafify.module. The unit intertwines the action. Locally lifting sections proves the B-normalization, and the pure tensor formula proves the R-normalization. For any other normalized action, double tensor induction shows that the same unit intertwines all T-scalars. The uniqueness of a sheafified scalar product makes the two actions equal, and Module.ext' identifies the module structures.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; balanced scalar action in parent proof step 6",
+  "group": "Q6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A ring tensor product acts on a balanced tensor product of modules, uniquely after sheafification",
+   "results": "TensorProduct.instDistribMulAction; TensorProduct.term_⊗[_]_; IsLocalization.moduleLid; TensorProduct.prodLeft; ModuleCat.MonoidalCategory.tensorObj_def; LinearEquiv.rTensor_trans; PiTensorProduct.instRing; PresheafOfModules.sheafify",
+   "date": "2026-10-20",
+   "verdict": "The algebraic tensor and sheafification constructions occur separately; no theorem gives this normalized sheaf action."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.Sheafify.module",
+   "results": "PresheafOfModules.Sheafify.module",
+   "date": "2026-10-20",
+   "verdict": "This supplies descent of the constructed presheaf action, but constructing it and checking the two normalization identities and uniqueness still require the present proof."
+  },
+  {
+   "tool": "grep",
+   "query": "Sheafify.*module|ofTensorProduct.*bijective|constant.*[Cc]ompletion",
+   "results": "Mathlib/Condensed/Module.lean; Mathlib/Condensed/Discrete/Module.lean; Mathlib/Condensed/Light/Module.lean; Mathlib/Condensed/Light/Small.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean; Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean",
+   "date": "2026-10-20",
+   "verdict": "The scalar tensor action and its uniqueness on local pure tensors are not already stated. The sheafification API is used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PurTwistSheafLocallyFree",
+  "date": "2026-10-21",
+  "group": "Q6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-coefficient-twists-detailed",
+   "place": "Integral coefficient Tate twist and the coefficient calculation in lem-pur-twist-sheaf-locally-free, proof step 6.",
+   "via": [
+    "lem-pur-twist-sheaf-locally-free"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-admissible",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.TensorPushoutAction",
+  "file": "lean/Sheaf/CategoryTheory/TensorPushoutAction.lean",
+  "declaration": "CategoryTheory.tensorPushoutAction_existsUnique",
+  "statement": "theorem tensorPushoutAction_existsUnique (e : ∀ U : Cᵒᵖ,\n    letI := (b.hom.app U).hom.toAlgebra\n    letI := (a.hom.app U).hom.toAlgebra\n    B.obj.obj U ⊗[A.obj.obj U] R.obj.obj U ≃+* T.obj.obj U)\n    (he : ∀ (U : Cᵒᵖ) (s : B.obj.obj U) (r : R.obj.obj U),\n      letI := (b.hom.app U).hom.toAlgebra\n      letI := (a.hom.app U).hom.toAlgebra\n      e U (s ⊗ₜ[A.obj.obj U] r) = d.hom.app U s * c.hom.app U r) :\n    let M' := (SheafOfModules.restrictScalars\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)).obj M\n    let N := SheafOfModules.changeOfRingsOfUniverses b M'\n    let P := SheafOfModules.changeOfRingsPresheafOfUniverses b M'\n    let φ := (PresheafOfModules.toPresheaf _).map\n      ((PresheafOfModules.sheafificationAdjunction\n        (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B).obj)).unit.app P)\n    ∃! K : ∀ U : Cᵒᵖ, Module (T.obj.obj U) (N.val.obj U),\n      (∀ ⦃U V : Cᵒᵖ⦄ (f : U ⟶ V) (z : T.obj.obj U) (x : N.val.obj U),\n        N.val.map f (@SMul.smul _ _ (K U).toSMul z x) =\n          @SMul.smul _ _ (K V).toSMul (T.obj.map f z) (N.val.map f x)) ∧\n      (∀ (U : Cᵒᵖ) (s : B.obj.obj U) (x : N.val.obj U),\n        @SMul.smul _ _ (K U).toSMul (d.hom.app U s) x = s • x) ∧\n      ∀ (U : Cᵒᵖ) (r : R.obj.obj U) (s : B.obj.obj U) (x : M.val.obj U),\n        @SMul.smul _ _ (K U).toSMul (c.hom.app U r)\n          (φ.app U (s ⊗ₜ[A.obj.obj U, (b.hom.app U).hom] x)) =\n        φ.app U (s ⊗ₜ[A.obj.obj U, (b.hom.app U).hom] (r • x))",
+  "branch": "sheaf-dag",
+  "by": "Q6",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b1777",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261021T001137-L-1377147",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b1777",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261021T001137-L-1377147",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item + 3 new modules vs live PurTwistSheafLocallyFree (moved block byte-identical bar one private proof line); new sorry purTwistCoefficientTensor vs finite-basis/cofinality argument (true); axioms audit; importer CoefficientTwistsDetailed compiled against delivery (32.4 s vs 32.6 s baseline)"
+ }
+}
