@@ -22,16 +22,14 @@
  ],
  "proof": [
   {
-   "text": "Work on the small site presentations fixed in [def-weil-pbc-proetale-site], in one larger universe. On each scheme involved the category of abelian sheaves is abelian by [lem-sfb-grothendieck-sheafification]. By [sk-def-sfb-sheaf-tensor] its tensor product is closed and preserves colimits in either variable. In particular it is additive in either variable, so [lem-sfb-modobj-abelian] applies to every ring object occurring here; finite biproducts and cokernels therefore exist in the module categories. Each $g^*$ is a left adjoint by [def-sfb-finite-upper-lower-star-adjunction], hence preserves finite colimits by [lem-weil-pbc-left-adjoint-preserves-colimits], and is additive by [lem-sfb-preserving-colimits-additive]. The strong monoidal structures are symmetric by [lem-sfb-finite-upper-star-braided], so the image rings remain commutative. These facts apply to arbitrary scheme morphisms, without assumptions on $f$ or on the ring.",
+   "text": "Use the existing abelian sheaf categories, their monoidal preadditive structure, and preservation of finite colimits by tensor. The source-library module-object category is abelian with finite colimits computed by the forgetful functor. Inverse image preserves finite colimits as a left adjoint. These instances apply to every morphism and all rings, including the zero ring.",
    "uses": [
     "def-weil-pbc-proetale-site",
     "lem-sfb-grothendieck-sheafification",
     "sk-def-sfb-sheaf-tensor",
     "lem-sfb-modobj-abelian",
     "def-sfb-finite-upper-lower-star-adjunction",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-sfb-preserving-colimits-additive",
-    "lem-sfb-finite-upper-star-braided"
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
    "elementary": false,
    "source": {
@@ -40,11 +38,11 @@
    }
   },
   {
-   "text": "Since $u_i$ is weakly étale, its base change $v_i$ is weakly étale by [sk-lem-pe-weakly-etale-stability]. The given family is fpqc by [def-weil-pbc-proetale-covering]; [lem-weil-pbc-fpqc-covering-axioms](3), applied to the arbitrary map $f:X\\to Y$, says that the family $\\{X\\times_YU_i\\to X\\}$ is fpqc. Thus it is precisely a pro-étale covering by the same definition. No refinement or change of the index set is made.",
+   "text": "Apply the existing Mathlib base-change operation on ZeroHypercovers for the pro-etale precoverage, whose definition already supplies its base-change stability instance. This is exactly the original index family, with objects pullback f (u_i) and maps pullback.fst f (u_i). Its mem₀ proves the first conclusion. Retain the unit-route weakly-etale stability module that supplies the mathematical stability statement.",
    "uses": [
-    "sk-lem-pe-weakly-etale-stability",
     "def-weil-pbc-proetale-covering",
-    "lem-weil-pbc-fpqc-covering-axioms"
+    "def-pc-fibre-product",
+    "sk-lem-pe-weakly-etale-stability"
    ],
    "elementary": false,
    "source": {
@@ -53,16 +51,15 @@
    }
   },
   {
-   "text": "Write $c_{a,b}:(a\\circ b)^*\\xrightarrow{\\sim}b^*a^*$ for [def-sfb-finite-upper-star-comp]. These are monoidal for the actual mate structures of [def-sfb-finite-upper-star-monoidal], as follows. For each $g$, its adjunction unit and counit are monoidal by [lem-sfb-finite-monoidal-adjunction]. The unit of a composite adjunction is the composite of the first unit and the image of the second, by [def-weil-pbc-composite-adjunction]; substituting the unit and tensor equations shows it is monoidal too. Fix $a,b$, put $L=(a b)^*$, $R=(a b)_*$, $K=b^*a^*$, $J=a_*b_*$, and let $s:J\\cong R$ be the monoidal pushforward compositor of [lem-sfb-pushforward-comp-monoidal]. With unit $\\eta^K$ of $K\\dashv J$ and counit $\\epsilon^L$ of $L\\dashv R$, the inverse mate formula of [def-weil-pbc-adjunction-mate] gives\n$$c_A=\\epsilon^L_{KA}\\,L(s_{KA})\\,L(\\eta^K_A).$$\nEach factor is a whiskering of a monoidal transformation by strong monoidal functors. Inserting each factor's unit/tensor equation in this three-factor composite gives the unit/tensor equations for $c$; thus the specified compositor is monoidal. For fixed $i$, put $P=v_i^*f^*$ and $Q=h_i^*u_i^*$. The equality $f v_i=u_i h_i$ from [def-pc-fibre-product] defines $e=c_{u_i,h_i}c_{f,v_i}^{-1}:P\\xrightarrow{\\sim}Q$, which is monoidal by inverting and composing these equations. Set $\\beta_i=e_R$. Naturality at multiplication and monoidality give\n$$e_R P(m_R)\\mu^P_{R,R}=Q(m_R)\\mu^Q_{R,R}(e_R\\otimes e_R).$$\nThe unit equation gives preservation of the transported unit. By [def-sfb-modobj-transport], these are exactly the ring-homomorphism equations, so $\\beta_i:P(R)\\cong Q(R)$ is the required ring-object isomorphism.",
+   "text": "The specified inverse-image compositor is the conjugate of the pushforward compositor. The monoidal adjunctions, their composite, and the monoidal pushforward compositor therefore give its monoidality by isMonoidal_conjugateEquiv_symm (equivalently the unit/counit mate calculation in the original plan). Equality congruence is monoidal by equality elimination. Compose these transformations to prove monoidality of the actual upperStarCompIso. Its component at R is a monoid isomorphism; monObjObj_comp identifies the composite structures with the actual iterated ring structures.",
    "uses": [
     "def-sfb-finite-upper-star-comp",
     "def-sfb-finite-upper-star-monoidal",
     "lem-sfb-finite-monoidal-adjunction",
     "def-weil-pbc-composite-adjunction",
     "lem-sfb-pushforward-comp-monoidal",
-    "def-pc-fibre-product",
-    "def-sfb-modobj-transport",
-    "def-weil-pbc-adjunction-mate"
+    "def-weil-pbc-adjunction-mate",
+    "def-sfb-modobj-transport"
    ],
    "elementary": false,
    "source": {
@@ -71,10 +68,10 @@
    }
   },
   {
-   "text": "Apply [lem-sfb-restricted-transport-comparison-linear] with $F=f^*$, $G=v_i^*$, $H=Q$, $A=R$, $B=f^*R$, $B'=v_i^*f^*R$, both $\\psi$ and $\\psi'$ identities, and $\\varphi=\\beta_i=e_R$. Its required equality $\\varphi=e_A G(\\psi)\\psi'$ is then the defining equality of $\\beta_i$. It gives the $P(R)$-linear map $e_M$ to $\\operatorname{Res}_{\\beta_i}\\operatorname{mapMod}(Q)(M)$. Its underlying map is invertible; multiplying its linearity equation by its inverse proves that inverse linear too. Finally, the composite tensorator is $G(\\mu^F)\\mu^G$. Substitution into the action formula of [def-sfb-modobj-transport] gives $\\operatorname{mapMod}(GF)(M)=T_{v_i}T_fM$ and $\\operatorname{mapMod}(Q)(M)=T_{h_i}T_{u_i}M$ with their actual actions, not just their underlying sheaves. This is the required module isomorphism.",
+   "text": "For the component at M, write both transported actions as tensorator followed by the image of the action. Naturality at the original action and the monoidality tensor equation give linearity after restriction along beta. Mod.isoMk supplies the inverse, proving the module comparison with exactly the component of the specified natural isomorphism as underlying morphism.",
    "uses": [
-    "lem-sfb-restricted-transport-comparison-linear",
-    "def-sfb-modobj-transport"
+    "def-sfb-modobj-transport",
+    "sk-def-sfb-change-of-scalars"
    ],
    "elementary": false,
    "source": {
@@ -83,13 +80,12 @@
    }
   },
   {
-   "text": "Put $A_i=u_i^*R$, $S_i=h_i^*A_i$ and $A'_i=v_i^*f^*R$, so $\\beta_i:A'_i\\cong S_i$. The adjunction for $h_i^*$ is monoidal by [lem-sfb-finite-monoidal-adjunction]. Consequently [def-sfb-modobj-transport-adjunction] supplies a right adjoint to $T_{h_i}$ for the ring $A_i$. By [lem-weil-pbc-left-adjoint-preserves-colimits], $T_{h_i}$ preserves finite colimits, in particular cokernel coforks, and by [lem-sfb-preserving-colimits-additive] it preserves zero maps. Let $C_i=\\operatorname{coker}(d_i)$ with its specified cokernel arrow $q_i:A_i^{n_i}\\to C_i$. Then $T_{h_i}(q_i)$ is a cokernel of $T_{h_i}(d_i)$. Applying $T_{h_i}$ to the given isomorphism $T_{u_i}M\\cong C_i$ identifies $T_{h_i}T_{u_i}M$ with its codomain. All colimit shapes used here are finite and hence small.",
+   "text": "Let T be H.mapMod followed by restriction along beta. Its composite with the forgetful functor is H.mapMod followed by the other forgetful functor, definitionally. Finite colimits of module objects are computed in the ambient abelian categories and the forgetful functors reflect them, so T preserves finite colimits. It is additive by rightExactFunctor_le_additiveFunctor. This uses the already implemented preservesFiniteColimits_mapMod and reflection lemmas, without constructing another module adjunction.",
    "uses": [
-    "lem-sfb-finite-monoidal-adjunction",
-    "def-sfb-modobj-transport-adjunction",
-    "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "lem-sfb-preserving-colimits-additive",
-    "def-sfb-finitely-presented-module"
+    "lem-sfb-modobj-abelian",
+    "def-sfb-modobj-transport",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-preserving-colimits-additive"
    ],
    "elementary": false,
    "source": {
@@ -98,11 +94,11 @@
    }
   },
   {
-   "text": "For every $k\\geq0$, apply [lem-sfb-monoidal-finite-free-transport] to $P=h_i^*$, the ring $A_i$, and the identity basis isomorphism of $A_i^k$. Its hypotheses hold by step 1 and the given strong monoidal structure. It gives $S_i^k\\cong T_{h_i}(A_i^k)$, with the specified basis and coordinate maps. Restrict its inverse along $\\beta_i$. The map $\\beta_i^{-1}:\\operatorname{Res}_{\\beta_i}S_i\\to A'_i$ is $A'_i$-linear because\n$$\\beta_i^{-1}m_{S_i}(\\beta_i\\otimes1)=m_{A'_i}(1\\otimes\\beta_i^{-1}).$$\nApplying it in each of the $k$ coordinates gives $\\operatorname{Res}_{\\beta_i}(S_i^k)\\cong(A'_i)^k$. Explicitly its coordinate maps are $\\beta_i^{-1}\\pi_j$, and its inverse has components $\\iota_j\\beta_i$. Their two composites are identities by the Kronecker and sum identities in [def-sfb-finitely-presented-module]; they are linear because the actions are componentwise and restriction changes an action by precomposition as in [sk-def-sfb-change-of-scalars](1). Composing gives the claimed canonical identification $a_k:\\operatorname{Res}_{\\beta_i}T_{h_i}(A_i^k)\\cong(A'_i)^k$. For $k=0$ the same calculation is the empty sum identity on the zero module.",
+   "text": "The inverse ring map beta inverse identifies T of the regular module with the regular module for the source ring: linearity follows by the monoid-hom multiplication equation and cancellation of beta followed by beta inverse. For each k use T.mapBiproduct followed by biproduct.mapIso of this regular-module isomorphism on each summand. The mapBiproduct_hom, biproduct.map_π, and lift_π equations show that each coordinate is precisely H(pi_j) followed by beta inverse. Finite biproduct preservation includes k=0 automatically.",
    "uses": [
-    "lem-sfb-monoidal-finite-free-transport",
     "def-sfb-finitely-presented-module",
-    "sk-def-sfb-change-of-scalars"
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-preserving-colimits-additive"
    ],
    "elementary": false,
    "source": {
@@ -111,10 +107,10 @@
    }
   },
   {
-   "text": "Let $H_i=\\operatorname{Res}_{\\beta_i}T_{h_i}$. By [sk-def-sfb-change-of-scalars](3), restriction preserves colimits: its hypotheses of closedness, equalizers and colimit-preserving tensor hold by step 1. Thus $H_i(q_i)$ is a cokernel of $H_i(d_i)$ by step 5. Define\n$$d'_i=a_{n_i}H_i(d_i)a_{m_i}^{-1},\\qquad q'_i=H_i(q_i)a_{n_i}^{-1}.$$\nThen $q'_i d'_i=0$. If a module map $t:(A'_i)^{n_i}\\to N$ kills $d'_i$, the map $t a_{n_i}$ kills $H_i(d_i)$, since $(t a_{n_i})H_i(d_i)=t d'_i a_{m_i}=0$. The cokernel property gives a unique $b:H_i(C_i)\\to N$ with $bH_i(q_i)=t a_{n_i}$, equivalently $bq'_i=t$. This proves directly that $H_i(C_i)$ with $q'_i$ is a cokernel of the stated $d'_i$. The two universal factorizations between this cokernel and the chosen $\\operatorname{coker}(d'_i)$ are inverse by uniqueness, using [def-sfb-finitely-presented-module]. Compose that isomorphism with $H_i$ of the specified presentation and the isomorphism of step 4. The result is exactly $T_{v_i}T_fM\\cong\\operatorname{coker}(d'_i)$, with ranks $m_i,n_i$ unchanged.",
+   "text": "Set d prime = a_m inverse followed by T(d) followed by a_n. Compose PreservesCokernel.iso T d with cokernel.mapIso for the commuting square with vertical maps a_m,a_n, then precede it by T of p and the module comparison. This is the required presentationIso. To verify its normalization, expand functoriality on cokernel.pi d followed by p inverse; cancel the module comparison and p inverse followed by p, apply PreservesCokernel.pi_iso_hom and cokernel.pi_map, and cancel a_n inverse followed by a_n. Thus the cokernel arrow agrees exactly with the displayed arrow, rather than only up to an unspecified automorphism.",
    "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "def-sfb-finitely-presented-module"
+    "def-sfb-finitely-presented-module",
+    "sk-def-sfb-change-of-scalars"
    ],
    "elementary": false,
    "source": {
@@ -123,10 +119,11 @@
    }
   },
   {
-   "text": "Step 2 gives the specified covering $\\{v_i\\}$. For each index, step 7 is a finite presentation of $T_{v_i}(T_fM)$ over $v_i^*f^*R$ in the precise sense of [def-sfb-finitely-presented-module]. Therefore this same covering and these presentations witness [def-sfb-locally-finitely-presented] for $T_fM$. No step used flatness of a module or a Noetherian ring. If the cover is empty (possible on the empty scheme), this last universal condition is vacuous; the zero-rank cases were already included in step 6.",
+   "text": "Use the base-changed cover of step 2 and the presentations of step 7. For the existential predicate with its u-small cover index, apply ZeroHypercover.restrictIndexOfSmall to this cover, using Mathlib's existing Small instance for propQCPrecoverage. The module and map on each restricted index are definitionally those of the original family, so the presentation witnesses IsFinitelyPresented with ranks n_i,m_i in the order required by that definition. The canonical witnesses themselves still retain every original index. No nonzero rank, nonempty cover, flatness or Noetherian assumption is introduced.",
    "uses": [
     "def-sfb-finitely-presented-module",
-    "def-sfb-locally-finitely-presented"
+    "def-sfb-locally-finitely-presented",
+    "def-weil-pbc-proetale-covering"
    ],
    "elementary": true,
    "source": {
@@ -142,30 +139,25 @@
   "lem-sfb-modobj-abelian",
   "def-sfb-finite-upper-lower-star-adjunction",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-sfb-preserving-colimits-additive",
-  "lem-sfb-finite-upper-star-braided",
-  "sk-lem-pe-weakly-etale-stability",
   "def-weil-pbc-proetale-covering",
-  "lem-weil-pbc-fpqc-covering-axioms",
+  "def-pc-fibre-product",
+  "sk-lem-pe-weakly-etale-stability",
   "def-sfb-finite-upper-star-comp",
   "def-sfb-finite-upper-star-monoidal",
   "lem-sfb-finite-monoidal-adjunction",
   "def-weil-pbc-composite-adjunction",
   "lem-sfb-pushforward-comp-monoidal",
-  "def-pc-fibre-product",
-  "def-sfb-modobj-transport",
   "def-weil-pbc-adjunction-mate",
-  "lem-sfb-restricted-transport-comparison-linear",
-  "def-sfb-modobj-transport-adjunction",
-  "def-sfb-finitely-presented-module",
-  "lem-sfb-monoidal-finite-free-transport",
+  "def-sfb-modobj-transport",
   "sk-def-sfb-change-of-scalars",
+  "lem-sfb-preserving-colimits-additive",
+  "def-sfb-finitely-presented-module",
   "def-sfb-locally-finitely-presented"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-upper-star-preserves.proof.md",
-  "place": "Chosen cover, its base change, and the final right-exactness/finite-free/cokernel argument, expanded using existing DAG statements and the explicit adjunction mate formula; Stacks Tags 022D, 0038 and 010N as indicated in the steps."
+  "place": "Source proof from the chosen pro-etale cover to the final presentation, realized by T8 using the specified monoidal compositor, finite-colimit reflection through module forgetful functors, and Mathlib biproduct/cokernel comparison isomorphisms. No statement change or new node."
  },
  "mathlib_searches": [
   {
@@ -353,7 +345,6 @@
   ]
  },
  "tool_uses": [
-  "lem-sfb-monoidal-finite-free-transport",
   "lem-sfb-pushforward-comp-monoidal"
  ],
  "reviewed": {
@@ -387,5 +378,15 @@
   "group": "Q57",
   "result": "fix",
   "note": "Statement matches the node clause by clause: same-index base-changed cover via pullback₁ (components pullback.fst); beta, the module iso, freeIso (coordinates H(π_j)≫β⁻¹) and presentationIso (π-equation, derived from step 7) are all pinned to e, p and d, so nothing is hollow; existing IsLocallyFinitelyPresented; no extra hypotheses; empty cover, rank 0, zero ring and free cover universe all fine. H4 fixed: the helper finitePresentationPullbackComparison is rfl-equal to the existing upstream ProEtale.upperStarCompIso (UpperLowerStar/Iso.lean:119); fixes/LocalFinitePresentationInverseImage.lean removes it, public-imports UpperLowerStar.Iso and uses upperStarCompIso Ab (pullback.condition); the lean-record.json override sets declarations, statement and note. nt_compile: delivered clean 32.7 s, fixed clean 29.7 s, rfl probe clean, control errors as expected; refit_record gives no notes or refusals. Advisory: def-sfb-finite-upper-star-comp is used by the statement but is only in proof_deps; the second reading was a self-reread by the same worker but records clause checks."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261021T120643-L-3928650",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
