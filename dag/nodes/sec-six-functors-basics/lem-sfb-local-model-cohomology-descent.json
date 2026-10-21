@@ -30,86 +30,89 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-sfb-condensed-localization-exact-cohomology] to each $u_i:V_i\\to S$. It identifies the given restriction with exact sectionwise module restriction, with the canonical coefficient action, and gives $H^q(Q)|_{V_i}\\cong H^q(Q|_{V_i})$.",
+   "text": "Use the existing exact internal-module pullback CondensedRing.upperStar. The proved source-library mapDerivedCategoryHomologyFunctorIso identifies its value on H^q(Q) with H^q of its derived value, in all integer degrees and without boundedness. This is the already implemented generic exact-functor result; no sectionwise module-category equivalence needs to be rebuilt.",
    "uses": [
-    "lem-sfb-condensed-localization-exact-cohomology"
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CE, lemma-localize-given-products; condensed ringed-module cohomology specialization isolated in the cited child."
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, exact-functor derived cohomology; the proved source-library generic comparison."
    }
   },
   {
-   "text": "Set $E_i(M)=\\Gamma_{V_i}\\otimes_{R_{V_i}}M_{V_i}$, with constant sheaves as in [det-def-sfb-constructible-local-model]. This is the assumed exact functor. By [lem-weil-pbc-exact-functor-complex-cohomology], $H^q(E_i(Q_i^\\bullet))\\cong E_i(H^q(Q_i^\\bullet))$. Apply the derived cohomology functor [def-weil-abstract-derived-category] to the given model isomorphism and compose with Step 1. This proves the required isomorphism on each original $V_i$, without asserting flatness of arbitrary coefficients.",
+   "text": "Apply derived cohomology to each given model isomorphism, then homologyFunctorFactors and the exact-functor complex comparison mapHomologicalComplexHomologyIso for finiteConstantScalarExtension. Compose these isomorphisms with Step 1. The result uses exactly the original covering members and complexes.",
    "uses": [
-    "det-def-sfb-constructible-local-model",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, exact functors and cohomology."
+   }
+  },
+  {
+   "text": "Outside [r,s], the middle object of (K_i.sc q) is zero. ShortComplex.isZero_homology_of_isZero_X₂ makes scalar homology zero. Additive scalar extension preserves zero, and the isomorphism of Step 2 makes every restricted H^q(Q) zero.",
+   "uses": [
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor; exact-functor cohomology and derived cohomology functoriality."
+    "place": "Zero middle term gives zero kernel/image homology."
    }
   },
   {
-   "text": "For $q\\notin[r,s]$, $Q_i^q=0$, hence $H^q(Q_i^\\bullet)=\\ker d_i^q/\\operatorname{im}d_i^{q-1}=0$ [def-weil-abstract-derived-category]. Exact additive $E_i$ preserves zero, so Step 2 gives $H^q(Q)|_{V_i}=0$.",
+   "text": "Extension of scalars along the invertible condensedPullbackHom is naturally restriction along its inverse, so forgetting the restricted module gives ordinary abelian-sheaf inverse image. For weakly etale cover members, upperStarIsoLocalizationRestriction identifies this with slice restriction. Apply the proved source-library isIso_of_isIso_localizationRestriction to the zero endomorphism of H^q(Q).X: its restrictions are maps between zero objects, hence invertible. An invertible zero endomorphism makes the identity zero and yields IsZero of the underlying sheaf; faithfulness of Mod.forget gives IsZero of H^q(Q). The covering-sieve criterion includes the empty cover.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "sk-def-sfb-coefficient-morphisms",
+    "def-sfb-modobj-extension-along-iso",
+    "def-weil-pbc-proetale-site",
+    "lem-sfb-sheaf-cover-local-isomorphism"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Elementary kernel/image computation; Tag 010N, lemma-exact-functor."
-   }
-  },
-  {
-   "text": "Write $F=H^q(Q)$ for such $q$. Every test object $W$ has the base-changed cover $\\{W\\times_SV_i\\to W\\}$ [def-weil-pbc-sites-and-cohomology]. By Step 3 and sectionwise restriction [def-pur-localized-ringed-site], $F(W\\times_SV_i)=0$. Every section of $F(W)$ therefore agrees locally with zero; uniqueness in the sheaf equalizer axiom gives $F(W)=0$, hence $F=0$. For an empty covering that same axiom makes $F(W)$ a singleton.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00VH, definition-site (base change), and 00VM, definition-sheaf-sets (uniqueness, including the empty cover)."
+    "place": "Tags 00VH, 00VM and 04TQ: base-changed covers and uniqueness of sheaf gluing."
    }
   },
   {
-   "text": "The finitely presented $H^q(Q_i^\\bullet)$ and Step 2 witness finite constant local models [det-def-sfb-constructible-local-model]. The identity immersion is a one-piece stratification [def-constructible-stratification]: $S=S\\cap(S\\setminus\\varnothing)$ is constructible since $S,\\varnothing$ are open retrocompact [def-weil-constructible-subset]. For the affine-local convention without quasi-separatedness, take the equivalent scalar-matrix cokernel presentations in the local-model node and restrict to the base-changed cover of each affine open. Exact restriction [lem-pur-site-restriction-module-adjunction-exact] preserves their cokernels and finite sums; coefficient restriction preserves multiplication and the same scalar entries [lem-sfb-coefficient-sections-localization]. These presentations give finite constant local models there too. Clause (1) of [det-def-sfb-constructible-tor-amplitude] gives constructibility. The finite interval proved in Step 4 and clause (2) give $Q\\in\\Dbc(S,\\Gamma)$.",
+   "text": "Use finiteConstantLocalModel_iff_exists_cover with the original cover, the original scalar homology and the given finite-presentation witnesses. The trivial one-piece stratification realizes constructibility when the scheme is qcqs; pullback_finiteConstantLocalModel along the identity supplies its local models. Otherwise pull these models to each affine open using the proved pullback_finiteConstantLocalModel and use its trivial stratification. Finally isGE_iff and isLE_iff turn the vanishing interval into canonical t-structure boundedness; combine it with constructibility in the definition of constantModelBoundedConstructible.",
    "uses": [
     "det-def-sfb-constructible-local-model",
     "def-constructible-stratification",
     "def-weil-constructible-subset",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sfb-coefficient-sections-localization",
+    "new-unbounded-pullback-finite-constant-local-model",
     "det-def-sfb-constructible-tor-amplitude"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DH, section-localize; the cited finite scalar presentation and constructibility definitions, with the one-stratum and affine-local assembly written out."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+    "place": "Paragraph (2), local models and single-stratum constructibility; affine-local convention of the cited definitions."
    }
   }
  ],
  "proof_deps": [
   "def-constructible-stratification",
-  "def-pur-localized-ringed-site",
+  "def-sfb-modobj-extension-along-iso",
   "def-weil-abstract-derived-category",
   "def-weil-constructible-subset",
-  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-proetale-site",
   "det-def-sfb-constructible-local-model",
   "det-def-sfb-constructible-tor-amplitude",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sfb-coefficient-sections-localization",
-  "lem-sfb-condensed-localization-exact-cohomology",
-  "lem-weil-pbc-exact-functor-complex-cohomology"
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "new-unbounded-pullback-finite-constant-local-model",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-module-pushforward-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Finite-cover assembly from exact localized cohomology, exact scalar cohomology, Tags 00VH/00VM sheaf descent, and finite scalar-presentation definitions. Old Steps 1-2 are extracted to lem-sfb-condensed-localization-exact-cohomology; every old argument is retained in report.md."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-ctf.proof.md",
+  "place": "Paragraph (2), finite local-model cohomology argument. M3, 2026-10-21: use the already proved generic derived-cohomology comparison, cover conservativity and pullback of finite constant models; retain all five assembly steps without reconstructing sectionwise module operations."
  },
  "mathlib_searches": [
   {
@@ -207,9 +210,7 @@
   "summary": "Repair of the human-requested re-split: extracted the 2218-character canonical condensed module localization and derived-cohomology argument into one statement-only unsplit child. Kept the item statement and its Lean record unchanged. Parent now assembles scalar cohomology, common-bound vanishing, sheaf uniqueness, finite scalar local models and affine-local constructibility in five steps under 3000 characters; the complete old proof is preserved with its relocation map in report.md.",
   "blueprint": "det-prop-scalar-six-ctf.proof.md paragraph (2), Local models, motivates the restriction/cohomology computation. The extracted comparison and finite-cover assembly remain agent expansions grounded in the cited Stacks passages."
  },
- "tool_uses": [
-  "sk-lem-pe-weakly-etale-stability"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -236,5 +237,15 @@
   "result": "pass",
   "note": "Read the node, all 10 stmt_deps and their declarations (CondensedConstantConstructibility, FiniteConstantLocalModel, ConstantModelTorAmplitude, ModuleObject Basic/UpperStar, Scheme.Stratification, Scheme.ProEt). Every hypothesis matches the node with nothing stronger: qc scheme, condensed comm ring, R=scalarRingObj, Gamma_T=condensedRingObj, finite proetale cover, bounded scalar complexes, derived local model via upperStar, exactness as additive+finite limits/colimits, fp scalar cohomology for all q. All four conclusion clauses match: global vanishing, cohomology local iso on the original cover, finite constant local model + IsConstantModelConstructible for all q, constantModelBoundedConstructible. Edge cases (empty cover/S, Gamma=0, r=s, non-qs S via affine-local convention, single stratum id) are fine. One universe u. lean.statement is verbatim. No defs, one sorry, source/blueprint docstrings with the six proof steps. nt_compile.py --json rc=0 in 2.9 s, no errors or warnings; #print axioms shows only standard axioms + sorryAx. Minor: the Additive binder is redundant; the report names ContinuousCoefficientCommRing instead of the recorded Profinite.CondensedRing (same notion, unbundled form)."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-15f3a",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261021T162734-L-698550",
+  "kind": "proof",
+  "note": "independent cc review: Delivered LocalModelCohomologyDescent.lean (statement byte-identical, proof closed) and node lem-sfb-local-model-cohomology-descent (proof/proof_deps/proof_origin/tool_uses only) against the live clone, the unit realized lists of sk-prop-scalar-six and sk-lem-pe-weakly-etale-stability (both empty), #print axioms, and an item+importer compile of InternalHomDualConstructibleModels (exit 0)"
+ }
 }
