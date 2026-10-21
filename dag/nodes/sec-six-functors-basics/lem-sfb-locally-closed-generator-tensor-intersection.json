@@ -24,11 +24,146 @@
   "def-weil-proetale-inverse-image",
   "def-sfb-module-open-lower-shriek",
   "sk-def-sfb-module-lower-shriek",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "lem-sfb-locally-closed-extension-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose closed-then-open factorizations of $a,b$. Base change of their closed and open factors shows that $r,s$ are locally closed immersions and, by composition of immersions (clause (e) of the permanence lemma), that their composites with $a,b$ are the same immersion $c:W\\hookrightarrow X$. In particular this is the actual fibre product $S\\times_XT$, rather than a chosen reduced intersection. Every intermediate open is Noetherian; every intermediate closed subscheme is Noetherian, since a closed immersion is finite type. Apply the same observation to the base-changed factors to see that $S,T,W$ are Noetherian. The underlying space of each has descending chains of closed subsets stabilizing; hence all its subsets are quasi-compact. Consequently the opens in these factorizations and all complementary opens are quasi-compact as morphisms (test on any affine open). All hypotheses of the open/closed projection formulas and the extension-coherence and base-change lemmas below therefore hold.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+    "place": "Proof (1), locally closed projection formulas and base change on the scheme fibre product"
+   }
+  },
+  {
+   "text": "The coefficient isomorphism $h^{-1}R_Z\\cong R_Y$ holds for every morphism $h:Y\\to Z$, for arbitrary condensed $\\Lambda$, by the alpha-isomorphism lemma. Thus the inverse-image coefficient convention in extension coherence is the one in the statement. Pull back the trivializing pro-etale covers for $L,M$ to $W$ and refine them by their pairwise fibre products. On this common cover, exact monoidal inverse image identifies $r^*L$ with $R_W^m$ and $s^*M$ with $R_W^n$. Distributing the ordinary tensor over these finite sums gives the basis $e_i\\otimes f_j$, indexed by $(i,j)$; the maps $e_i\\otimes f_j\\leftrightarrow e_{(i,j)}$ are mutually inverse. Hence $P=r^*L\\otimes_{R_W}s^*M$ is lisse of rank $mn$ on this cover, including $m=0$ or $n=0$.",
+   "uses": [
+    "lem-sfb-alpha-iso",
+    "def-sfb-lisse-coefficient-module",
+    "def-sfb-condensed-pullback-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+    "place": "Proof (1), locally closed projection formulas and base change on the scheme fibre product"
+   }
+  },
+  {
+   "text": "Apply finite-free tensor exactness to $r^*L$ and $s^*M$. Each is flat as an internal $R_W$-module, with no restriction on $\\Lambda$. The flat-single lemma makes their degree-zero complexes K-flat in the relative tensor convention. Computing derived tensor on these representatives therefore gives the natural comparison $r^*L[0]\\otimes^{\\mathbf L}_{R_W}s^*M[0]\\cong P[0]$: its total complex has only the $(0,0)$ summand, so every differential is zero. This also fixes the underived identification used below.",
+   "uses": [
+    "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "lem-sfb-flat-single-scalar-conventions",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+    "place": "Proof (1), locally closed projection formulas and base change on the scheme fibre product"
+   }
+  },
+  {
+   "text": "For any of the locally closed immersions $h:D\\hookrightarrow Z$ occurring here, factor $h=v i$ with $i:D\\hookrightarrow V$ closed and $v:V\\hookrightarrow Z$ open. The support projection formulas give, naturally in $A\\in D(R_D)$ and $B\\in D(R_Z)$,\n$$ (v_!i_*A)\\otimes^{\\mathbf L}B\\cong v_!\\bigl(i_*A\\otimes^{\\mathbf L}v^*B\\bigr)\\cong v_!i_*\\bigl(A\\otimes^{\\mathbf L}i^*v^*B\\bigr). $$\nUse the normalized extension comparison $h_!\\cong v_!i_*$ and inverse-image composition to obtain $h_!A\\otimes^{\\mathbf L}B\\cong h_!(A\\otimes^{\\mathbf L}h^*B)$. These formulas apply to arbitrary unbounded inputs. Step 1 supplies the quasi-compact complementary opens; step 2 identifies supportPullback with the specified coefficient-compatible inverse image. The projection maps are the unit/counit-induced ones, so their restrictions to $D$ are the canonical tensor comparisons and restriction isomorphisms.",
+   "uses": [
+    "lem-sfb-condensed-support-projection-formula",
+    "lem-sfb-locally-closed-extension-coherence",
+    "def-sfb-condensed-pullback-tensor-comparison",
+    "def-sfb-open-closed-internal-hom-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+    "place": "Proof (1), locally closed projection formulas and base change on the scheme fibre product"
+   }
+  },
+  {
+   "text": "Factor $b=v\\circ i$ with $i:T\\hookrightarrow V$ closed and $v:V\\hookrightarrow X$ open, let $k:Z\\hookrightarrow X$ be a closed immersion with image $X\\setminus V$ and $u:V^\\circ\\hookrightarrow V$ the open complement of $i(T)$; both opens are quasi-compact and $X,V,S,S_V=S\\times_XV$ are Noetherian, hence qcqs, by step 1. Base change of $v$ and $i$ along $a$ gives the open $v':S_V\\hookrightarrow S$, the projection $a_V:S_V\\to V$, the closed $i':W\\hookrightarrow S_V$ with $r=v'i'$, and $s:W\\to T$. Apply the base-change mates for the ring sheaf $R_X$ twice: $\\alpha$ for the pair $(k,v)$ along $g=a$ gives $a^*v_!\\cong v'_!a_V^*$, and $\\beta$ for the pair $(i,u)$ along $g=a_V$ gives $a_V^*i_*\\cong i'_*s^*$. The coefficient rings there are inverse images of $R_X$, identified with the pulled-back coefficients by step 2. With the normalized comparisons $b_!\\cong v_!i_*$ and $r_!\\cong v'_!i'_*$ this gives $a^*b_!M\\cong r_!s^*M$. Its restriction along $r^*$ is the identity of $s^*M$ after the restriction isomorphisms and inverse-image composition comparisons: the adjoint of $\\alpha^{-1}$ is $a_V^*$ of the open unit followed by the coefficient square comparison, so $v'^*\\alpha$ is the canonical identification, and the adjoint of $\\beta$ is the square comparison followed by $s^*$ of the closed counit, so $i'^*\\beta$ is the canonical identification. All functors here are exact and applied to degree-zero objects, so this is also the corresponding derived identification. Apply step 4 first with $h=a$, then with $h=r$, using symmetry of tensor for the second application. The result is the chain\n$$ a_!L[0]\\otimes^{\\mathbf L}b_!M[0]\\cong a_!\\bigl(L[0]\\otimes^{\\mathbf L}r_!s^*M[0]\\bigr)\\cong a_!r_!\\bigl(r^*L[0]\\otimes^{\\mathbf L}s^*M[0]\\bigr)\\cong c_!P[0]. $$\nThe last arrow uses $\\gamma_{a,r}:a_!r_!\\cong c_!$ and step 3. This proves the displayed isomorphism by two projection calculations and one base-change input; it does not assume tensor constructibility.",
+   "uses": [
+    "lem-sf-ring-sheaf-base-change-mates",
+    "def-sf-proetale-ring-sheaf-operations",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-sfb-locally-closed-extension-coherence",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+    "place": "Proof (1), locally closed projection formulas and base change on the scheme fibre product"
+   }
+  },
+  {
+   "text": "Each constituent of the chain in step 5 is natural in $L,M$. Changing open/closed factorizations and inserting the normalized extension comparisons gives a second map with the same source and target. The first isomorphism identifies that source with $c_!P[0]$, so their ratio is an endomorphism of $c_!P[0]$. After $c^*$, both maps are the ordinary tensor map on $r^*L,s^*M$: this follows from the unit/counit normalization of the projection maps, the identity normalization of the base-change isomorphism of step 5, and the identity normalization of $\\gamma$. The tensor symmetries occur twice and cancel on $x\\otimes y$. Hence this ratio restricts to the identity. The bijection on Hom sets induced by $c^*$ for two objects in the image of $c_!$ implies that the ratio is the identity. This proves independence of factorization in exactly the normalized sense asserted.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-sf-ring-sheaf-base-change-mates",
+    "def-sfb-open-closed-internal-hom-comparisons",
+    "def-sfb-condensed-pullback-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+    "place": "Proof (1), locally closed projection formulas and base change on the scheme fibre product"
+   }
+  },
+  {
+   "text": "Exactness of $c_!$ implies $\\mathcal H^q(c_!P[0])=0$ for $q\\ne0$ and $\\mathcal H^0(c_!P[0])=c_!P$. Choose a closed-then-open factorization $c=v i$, with $v:V\\hookrightarrow X$. Partition $X$ into the image of $W$, the open subset $V\\setminus i(W)$, and the closed subset $X\\setminus V$, giving the last one its reduced induced closed subscheme structure. These are disjoint locally closed strata; since $W$ is constructible by intersection of the two constructible immersion images, all three strata are constructible. Keep the given scheme $W$ as the first stratum. On it, $c^*c_!P=P$ by extension coherence. On the closed stratum $k':X\\setminus V\\hookrightarrow X$, the mate $\\alpha$ for $v$ along $k'$ gives $k'^*v_!i_*P\\cong v''_!(\\cdots)$ with $v''$ the open immersion of the empty scheme $V\\times_X(X\\setminus V)$, hence zero. On the open stratum $u':V\\setminus i(W)\\hookrightarrow X$, factor $u'=vu_0$; then $u'^*c_!P\\cong u_0^*v^*v_!i_*P\\cong u_0^*i_*P$ by the restriction isomorphism, and the mate $\\beta$ for $i$ along $u_0$ is extension from the empty fibre product, hence zero. By step 2, on the first stratum $P$ has the finite constant scalar model $R^{mn}=R\\otimes_{\\Lambda(*)}\\Lambda(*)^{mn}$, and elsewhere the model is zero. This finite stratification verifies the constructibility definition for every condensed $\\Lambda$. If $W$ is empty, all these restrictions are zero; the same formulas cover zero ranks and the zero ring.",
+   "uses": [
+    "lem-sfb-locally-closed-extension-coherence",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "def-constructible-stratification",
+    "lem-sf-ring-sheaf-base-change-mates",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+    "place": "Proof (1), locally closed projection formulas and base change on the scheme fibre product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-sfb-alpha-iso",
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-condensed-pullback-tensor-comparison",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-sfb-flat-single-scalar-conventions",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-condensed-support-projection-formula",
+  "lem-sfb-locally-closed-extension-coherence",
+  "def-sfb-open-closed-internal-hom-comparisons",
+  "lem-sf-ring-sheaf-base-change-mates",
+  "def-sf-proetale-ring-sheaf-operations",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-constructible-stratification",
+  "sk-def-sfb-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/sk-thm-sf-pf-field-tensor.proof.md",
+  "place": "Proof (1), locally closed projection formulas and base change on the scheme fibre product"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +202,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-admissible-tensor-constructibility",
@@ -86,5 +221,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-locally-closed-generator-tensor-intersection",
+  "worker": "stage1",
+  "summary": "Expanded the two projection formulas through the unrestricted support projection node; isolated only the genuine ringed pro-etale locally closed base-change input. Verified actual fibre product, arbitrary condensed coefficients, flat K-flat degree-zero tensor, normalized independence, constructible strata and empty/zero cases. No statement correction and no Lean attachment. Reviewer repair (cc Q08 review, 2026-10-21): the two new nodes duplicated existing ones and are dropped; composition of immersions is clause (e) of lem-weil-pbc-proper-fp-permanence, and the locally closed base change is written in step 5 from the open and closed mates of lem-sf-ring-sheaf-base-change-mates.",
+  "blueprint": "det-thm-sf-pf-field-tensor.proof.md proof (1), projection/base-change/rank-product paragraph, also serving det-thm-sf-ctf-stability-direct-images proof (ii). The inherited created.item ancestry has no blueprint ancestor; its existing null from.node and explanatory place are preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic Base change of an open immersion is an open immersion (Stacks 01JY) used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic Base change of a closed immersion is a closed immersion used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic Closed immersions are proper used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic Closed subsets of a Noetherian scheme satisfy the minimal condition used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Generic Every subset of a Noetherian topological space is compact used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "Generic $\\alpha_f$ is an isomorphism for every $f$ used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-finite-free-tensor-exact",
+    "why": "Generic Tensoring with a pro-etale locally finite free internal module preserves finite limits used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-flat-single-scalar-conventions",
+    "why": "Generic Flat degree-zero scalar comparison agrees between module-object and ringed-site conventions used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-condensed-support-projection-formula",
+    "why": "Generic Natural support tensor projection formulas on unbounded condensed modules used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-sfb-locally-closed-extension-coherence",
+    "why": "Generic Restriction and composition for locally closed extension by zero used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic Exact functors preserve kernels, cokernels, images, inverse images and homology used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-closed-subscheme",
+    "why": "Generic Every closed subset of a scheme underlies a closed subscheme used with exactly its stated hypotheses for the local generator calculation; no statement of the tensor-stability unit supplies this support, coefficient, geometric, or K-flat tool. The unit route is unchanged."
+   },
+   {
+    "node": "lem-sf-ring-sheaf-base-change-mates",
+    "why": "Generic open and closed module base-change isomorphisms for an arbitrary ring sheaf with their adjoint normalizations, specialized to pulled-back condensed coefficients (as in lem-sfb-derived-open-square-restriction); the item's unit has no node for module base change of extensions along an arbitrary morphism (reviewer repair)."
+   },
+   {
+    "node": "def-sf-proetale-ring-sheaf-operations",
+    "why": "Defines the operations in which the arbitrary-ring base-change mates are stated (reviewer repair)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-sfb-alpha-iso",
+  "lem-weil-pbc-condensed-finite-free-tensor-exact",
+  "lem-sfb-flat-single-scalar-conventions",
+  "lem-sfb-condensed-support-projection-formula",
+  "lem-sfb-locally-closed-extension-coherence",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-sf-ring-sheaf-base-change-mates",
+  "def-sf-proetale-ring-sheaf-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-4c4478cd0",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-4c4478cd0 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the source blueprint sk-thm-sf-pf-field-tensor.proof.md part (1): projection formula, base change for extension by zero, projection formula again, lisse tensor is underived. The item statement agrees with the source, generalized to arbitrary condensed Λ and Noetherian X with the scheme fibre product S×_X T. It is unchanged from the base, and there is no repair note. Small cases tested: W empty, rank 0, Λ=0, S=T=X, disjoint points and a nonreduced intersection. Step checks: (1) Noetherian and quasi-compactness facts from the sk-thm-p1 nodes. (2) alpha-iso plus a common refinement of the covers gives rank mn. (3) finite-free tensor exactness and flat-single give K-flatness. (4) the support projection formula (closed and quasi-compact open complementary, unbounded inputs) gives h_!A⊗B ≅ h_!(A⊗h^*B). (5) the chain a_!L⊗b_!M ≅ a_!(L⊗r_!s^*M) ≅ a_!r_!(r^*L⊗s^*M) ≅ c_!P. (6) the Hom bijection of lem-sfb-locally-closed-extension-coherence. (7) the three strata W, V∖i(W), X∖V with lisse = finite constant local model. All correct. Two C5 duplicates are repaired: lem-sfb-immersion-composition is clause (e) of lem-weil-pbc-proper-fp-permanence (mathlib, on route via sk-thm-p1). lem-sfb-locally-closed-ringed-extension-base-change is true, but it is the composite of α (g^*j_!≅j'_!g_U^*) and β (g^*i_*≅i'_*g_Z^*) of the existing split node lem-sf-ring-sheaf-base-change-mates. That node covers arbitrary ring sheaves on qcqs schemes, gives adjoint normalizations, and is already a recorded tool of lem-sfb-derived-open-square-restriction. The worker's duplicate list missed it. Corrected item: step 1 cites the permanence lemma. Step 5 now writes the composite base change, with factor b=vi, α along a and β along a_V, the normalized r_!≅v'_!i'_*, and the restriction identity from the adjoint descriptions. Steps 6 and 7 now cite the mates node, with the zero restrictions on the strata X∖V and V∖i(W) written out. proof_deps are recomputed and tool_uses gain the mates node and def-sf-proetale-ring-sheaf-operations, both off-route generic tools from unit sk-prop-sf-closed-unit. Neither creates a cycle (checked by dependency closure). The null blueprint.from.node comes from the base ancestry and is not a fault of this delivery.; 1 file(s) fixed by the reviewer"
  }
 }
