@@ -20661,3 +20661,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:24 L: merged deliver/Q13/def-trf-supported-class (reviewer PASS; first push; new nodes: 0)
 - 07:24 L: merged deliver/Q143/lemma-nagata-sheaf-ideal-powers-assoc (reviewer PASS; first push; new nodes: 0)
 - 07:25 L: returned deliver/Q63/def-per-support-condition (reviewer RETURN: C7/C8 route + E6. The delivery types CosuppCon for an arbitrary field k through lem-per-qbar-arbitrary-field-duality. Th)
+- 07:25 L: returned deliver/NQ/lem-cbc-ringed-open-extension-products (reviewer RETURN: Superseded (A7/B10). This delivery is a re-split answering the human's 2026-10-21 note, committed 05:53 UTC on base ecf1)
