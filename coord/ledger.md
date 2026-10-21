@@ -23270,3 +23270,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T18:05:13Z L: superseded stage-1 delivery N9/lem-sfb-tame-inertia-continuous-koszul at b1ffc8ef439129853218aef47d634a9033501492; current completion retained; packet archived at refs/superseded/N9/lem-sfb-tame-inertia-continuous-koszul/b1ffc8ef439129853218aef47d634a9033501492; stale return retired.
 - 18:05 L: merged deliver/Q20/lem-pur-closed-finite-adjoint-counit-transport (stage 2; reviewer PASS; parallel immutable checks)
 - 18:05 L: merged deliver/N7/lem-sfb-dense-lattice-derived-invariants-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T18:05:49Z L: superseded stage-1 delivery Q13/lem-coef-residue-controlled-finite-homs at 11d8e5e0871a1313a833ac2bd4baaa70402f4ce0; current completion retained; packet archived at refs/superseded/Q13/lem-coef-residue-controlled-finite-homs/11d8e5e0871a1313a833ac2bd4baaa70402f4ce0; stale return retired.
