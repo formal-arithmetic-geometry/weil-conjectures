@@ -22698,3 +22698,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:48 L: returned deliver/Q29/lem-weil-point-automorphism-transport-scalar-extension (reviewer RETURN: L: independent stage-2 immutable head a5562f0bab6d: H13/H2: the delivered (B) record for lem-weil-point-automorphism-res)
 - 13:48 L: returned deliver/Q10/sk-d-real-weights (reviewer RETURN: L: independent stage-2 immutable head ded644f6e20a: H13+H2: the delivery re-creates Sheaf.Paper.AdicLocalCharacteristicF)
 - 13:48 L: returned deliver/Q16/lem-per-rational-pullback-composition-coherence (reviewer RETURN: L: independent stage-2 immutable head ef2a70e15342: H2: stmt_dep theorem lem-weil-pbc-profinite-coefficient-inverse-imag)
+- 13:50 L: merged deliver/Q23/lem-weil-isomorphism-scalar-augmentation-cone (stage 2; reviewer PASS; parallel immutable checks)
+- 13:50 L: merged deliver/Q130/lem-sp-semilinear-kflat-tower-model (stage 2; reviewer PASS; parallel immutable checks)

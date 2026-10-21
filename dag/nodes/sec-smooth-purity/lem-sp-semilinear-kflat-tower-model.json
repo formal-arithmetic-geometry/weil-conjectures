@@ -15,7 +15,9 @@
   "def-pc-kflat-complex",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-pur-derived-change-of-rings",
-  "def-pc-flat-sheaf-modules"
+  "def-pc-flat-sheaf-modules",
+  "def-pur-system-level-left-extension-basic",
+  "def-weil-pbc-system-scalar-model"
  ],
  "proof": [
   {
@@ -373,5 +375,32 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-8610a0219 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps, every cited statement, Bhatt–Scholze Def 3.5.3 and Lemmas 3.5.4–3.5.7, Stacks 06YS and 0G7E (sites-cohomology.tex l.3507), and the blueprint sk-lem-sp-tower proof. There are no new nodes and the statement is unchanged; adding def-pc-flat-sheaf-modules to the item's statement dependencies is justified. The route is correct: the whole varying-ring tower is resolved once on the product ringed site (lem-pc-kflat-resolution), then evaluated by the geometric inverse images i_n, which keeps K-flatness and flat terms (0G7E), so no flatness of B_{n+1}->B_n is needed. I checked by hand the evaluation adjunction (right Kan extension: F at levels j>=n, terminal below), the squares Res(e_n)Q(q_n)=t_n e_{n+1}, exactness of U and naturality of the R lim triangle for the projections. Edge cases checked: empty T, n=1, m=n (unitor), nonflat Z/l^2->Z/l, unbounded C. No duplicate among the def-coef-*/lem-coef-* sequence-site nodes and no cycle. Two C3 repairs are in fixes/dag/nodes/sec-smooth-purity/lem-sp-semilinear-kflat-tower-model.json. (1) Step 1 asserted the vertical-slice sheaf criterion, which lem-weil-pbc-diagram-site-topology only proves, not states; I wrote the short gluing argument into the step, including Sh(site)=X^I. (2) Step 7 used without saying it that det-sp-coefficient-towers-abelian (3)'s reduction for Q(P) is the derived adjunct of Q(q_{n,m}); this is now stated, giving red(Q(P))=Q(beta) under the K-flat isomorphism. I accept the generic tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SemilinearKFlatTowerModel",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_semilinear_kflat_tower_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spSemilinearCompletedProjection",
+   "AlgebraicGeometry.ProEtale.spSemilinearChainTransition",
+   "AlgebraicGeometry.ProEtale.spSemilinearEvaluationIso",
+   "AlgebraicGeometry.ProEtale.HasSpSemilinearCompletedLift",
+   "AlgebraicGeometry.ProEtale.HasSpSemilinearKFlatTowerModel",
+   "AlgebraicGeometry.ProEtale.sp_semilinear_kflat_tower_model"
+  ],
+  "file": "lean/Sheaf/Paper/SemilinearKFlatTowerModel.lean",
+  "statement": "theorem sp_semilinear_kflat_tower_model (D : SpCoefficientTowersAbelian l E T) (C : @DerivedCategory (spCoefficientTowers l E T) _ _ D.hasDerived) : HasSpSemilinearKFlatTowerModel l E T D C",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The predicate packages precisely the model conclusions, using the recorded tower category, flat-term K-flat predicate, normalized reductions and actual completed coefficient projections. One complex of towers supplies all coherent chain transitions. No boundedness, tower normalization, quotient flatness or universe equality is assumed. The normalized scalar data and pure tensors use def-weil-pbc-system-scalar-model; derived localizations use HasDerivedCategory.standard from def-weil-abstract-derived-category, not the scalar-model existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-777924238",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Re-delivery of 699f8168 (H2 RETURN). Diff: stmt_dep lem-pur-system-scalar-model replaced by def node def-weil-pbc-system-scalar-model (existing:true, owns SystemScalarModel/systemModelTmul used via D.scalar); systemRingHasDerived replaced by HasDerivedCategory.standard (same by definition, SystemScalarModel.lean l.79-81); SystemScalarModel import made public; node otherwise unchanged vs live except lean/stmt_deps. Clauses (completed projections, K-flat flat terms, strict transitions m<=n, e_n square via adjunct of D.reduction, pure tensors, K-flat reduction square, pinned U, b=D(U)(a), Rlim projections), edge cases, gates and verbatim statement re-checked; no theorem-module plain defs remain; not superseded live. No compile (no file changed; worker 54.4/49.2 s clean)."
  }
 }
