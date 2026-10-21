@@ -193,5 +193,23 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-transport",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+  "declaration": "CategoryTheory.Adjunction.mapModLeftAdjunction",
+  "statement": "noncomputable def mapModLeftAdjunction : adj.mapModLeft B ⊣ S.mapMod B",
+  "branch": "slopmaster2",
+  "by": "NZ",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream construction, ProjectionFormula.lean:535–550; checked against live server source with scompile.py --source. Context: arbitrary monoidal categories C and D with independent object and morphism universes, P : C ⥤ D, S : D ⥤ C, adj : P ⊣ S, [S.Monoidal], [adj.HasProjectionFormula], and B : D with [MonObj B]. The left functor is definitionally adj.projectionFormula.mapModLeft B, and the right functor is the recorded transport S.mapMod B. The defining Hom equivalence sends a module morphism φ to the module morphism with underlying map adj.homEquiv M.X N.X φ.hom, and its inverse uses the original inverse Hom equivalence. Thus the last clause is included in the actual construction, with no extra assumptions or duplicate module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-babb926fe",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Existing:true record for CategoryTheory.Adjunction.mapModLeftAdjunction (side ProjectionFormula.lean:538); only the item node's lean field changed, live lean null (not superseded). Binders adj : P ⊣ S, [S.Monoidal], [adj.HasProjectionFormula], {B} [MonObj B], independent universes, match the node with nothing stronger. Left functor = adj.projectionFormula.mapModLeft B (the linearization dependency's declaration with the canonical projection formula); right functor = Functor.mapMod (the transport dependency's declaration). Final clause: nt_compile --json probe proves homEquiv(φ).hom = adj.homEquiv M.X N.X φ.hom via mkOfHomEquiv_homEquiv; #check signature matches the record; #print axioms shows no sorryAx. Source front-matter names the same declaration. Report has Worker report and Second reading by NZ sections. Advisory only: the transport dependency's lean record lacks module/statement fields (pre-existing, not touched)."
+ }
 }

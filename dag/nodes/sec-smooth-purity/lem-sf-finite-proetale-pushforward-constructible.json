@@ -233,5 +233,29 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-b39377e41 (reviewer sub-agent of L); spot-checked: I read every step and every cited statement; there are 0 new nodes. Shape: one commit; the statement and stmt_deps are byte-identical to the live node, which is still unsplit live. No repair note and no dropped-list entry. No SGA. Sources checked: Stacks proetale.tex 09A6 lemma-morphism-comparison (needs qcqs f and an abelian/D+ input), 09AK and 09AL compare-constructible(-derived) (any scheme, Noetherian Λ, and a finite ring is Noetherian), and Bhatt-Scholze Thm 6.7.1 / Lemma 6.7.2, whose finite-level input is the existing nonseparated thm-dg-finite-type-constructibility. Step 1: X is Noetherian by lem-weil-pbc-finite-type-over-noetherian, opens are quasi-compact by the open-subscheme leaf, so the affine preimages under f and Δ_f are quasi-compact and f is qcqs; no affine intersections or separatedness are used. Step 2: the finite-ring origin node applies to an arbitrary finite commutative B, giving L ∈ D^b_c and α; interval reflection makes L bounded below. Step 3: all thm-dg hypotheses hold (same field k, finite type, B finite, m invertible). Step 4: the canonical-mate node applies with u=f qcqs and K=L ∈ D^+; β = Rf_proet(α)∘b is the named comparison, not an arbitrary isomorphism. Step 5: the forward direction at Y plus transport along β gives the conclusion. The closure of every proof_dep was computed and none reaches the item, so there is no cycle. No duplicate: cor-sf-direct-image-ctf-etale-origin needs separated f and ctf input, and thm-sf-ctf-stability covers only separated f with A_{E,n}. The unit sk-def-sf-admissible is a definition with uses=[]. I accept the five tool_uses: two Noetherian leaves, the finite-ring comparison, the qcqs mate and thm-dg. Edge cases tested: empty X, C=0, identity f, doubled-origin line, B=Z/4 with Z/2 (no finite Tor amplitude), m=1, product rings. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteProEtalePushforwardConstructible",
+  "declaration": "AlgebraicGeometry.ProEtale.finite_proetale_pushforward_constructible",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finitePushforwardDerivedPullbackComparison",
+   "AlgebraicGeometry.ProEtale.finitePushforwardDerivedComparison",
+   "AlgebraicGeometry.ProEtale.finite_proetale_pushforward_constructible"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteProEtalePushforwardConstructible.lean",
+  "statement": "theorem finite_proetale_pushforward_constructible (k : Type u) [Field k] (B : Type (u + 1)) [CommRing B] [Finite B] (m : ℕ) (hm : 0 < m) (hB : (m : B) = 0) (hk : IsUnit (m : k)) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) (C : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B))) (hC : ∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf X B ((DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) i).obj C)) (hCb : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) i).obj C)) : ∃ L : Etale.DerivedCategoryModule B X, Etale.DerivedCategory.isBoundedConstructible B X L ∧ ∃ α : (comparisonUpperStar (ModuleCat.{u + 1} B) X).mapDerivedCategory.obj L ≅ C, IsIso ((finitePushforwardDerivedComparison B f).app L ≫ (lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctor.map α.hom) ∧ (∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf Y B ((DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} B)) i).obj ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctor.obj C))) ∧ ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} B)) i).obj ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctor.obj C))",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Fixed ModuleCat presentation of the published constant finite coefficient sheaves. Intrinsic constructibility uses the recorded IsConstructibleProEtaleFixedModuleSheaf. The two helper definitions give the exact termwise pullback comparison and its ordinary unbounded counit mate; the theorem asserts invertibility of its actual component followed by Rf(alpha), not existence of an unrelated endpoint isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a15760342",
+  "group": "NL",
+  "result": "pass",
+  "note": "Clause-by-clause match of the Lean to the node: field k; X,Y finite type over k via LocallyOfFiniteType+QuasiCompact on the structure maps; k-morphism hf; no separatedness; finite comm B in Type(u+1) (forced by the stmt_dep records IsConstructibleProEtaleFixedModuleSheaf and Etale.DerivedCategory.isBoundedConstructible, not a mathematical restriction); m>0, (m:B)=0, IsUnit (m:k); bounded C with intrinsically constructible H^i; conclusions ∃L ∈ D^b_c, ∃α: ν_X^*L≅C, IsIso(canonical mate ≫ Rf_proet(α)), Rf_proet C intrinsically constructible and bounded. The two helpers are the canonical mateEquiv of comparisonUpperStarCompUpperStarIso under the derived adjunctions (direction checked), with no arbitrary choice. Node differs from live only in lean; statement verbatim; plain imports = recorded proof-dep modules; docstrings carry sources and the 5 steps; sorry-only proof; both report sections present. nt_compile --json: 42.2 s, clean. Edge cases (empty schemes, C=0, zero ring with m=1, Z/4, nonseparated f) covered. Advisory: geoP1PushComparison (sk-lem-geo-p1 local helper) is the same unbounded mate; stage 3 must transport the Type-u/ULift finite-ring origin theorem to the fixed-module Type(u+1) presentation."
  }
 }

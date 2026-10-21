@@ -215,5 +215,23 @@
   "group": "Q60",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-ec74d7703 (reviewer sub-agent of L); spot-checked: Ordinary first split (0 new nodes, statement and stmt_deps unchanged) of a statement-only node that Q67 created on 2026-10-21 when re-splitting det-brown-hypotheses-small. This item has no repair note of its own. It is not superseded: live and side-live still show it unsplit. No SGA is cited. The statement is true and its proof is complete. Step 1: Hom sets inject into a product over the small slice of maps between V-valued section sets. Step 2: the codes (K ⊆ Ob C, labels, isomorphisms g_UV on fixed products U×V) form a set in V, built from a power set, small products and unions, with no cocycle condition. Step 3: each M has a code; one occurrence is chosen per object and the original indexed cover is kept, so no repetition deletion is assumed (consistent with the reindexing-only site convention). Step 4: a_V=g a_U and b_V=g b_U give b_V^{-1}a_V=b_U^{-1}a_U; I checked the order of composition, and the self-overlap U×U is covered by g_UU. Step 5: lem-pur-sheaf-hom-cover-gluing (Stacks 03EM via 04TQ, sites.tex l.5637 read) glues the maps and their inverses on C/1=C, and its uniqueness gives inverse isomorphisms. Its hypotheses hold: R is commutative, finite limits give the overlaps, the cover is of 1. Step 6: representatives are chosen for the realized codes S ∈ V. Edge cases checked: empty I_U, an empty cover of 1 (modules are 0), singleton cover, repeated members, non-monic cover arrows. rg found no duplicate in the DAG. The gluing nodes for open covers and for étale sites are specialisations. Tool_use lem-pur-sheaf-hom-cover-gluing is accepted as a generic off-unit black box. Mathlib searches (leanfinder, leansearch, loogle, grep) found no match, which is plausible. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocallyPrescribedModulesSmall",
+  "declaration": "SheafOfModules.essentiallySmall_locally_prescribed",
+  "file": "lean/Sheaf/CategoryTheory/LocallyPrescribedModulesSmall.lean",
+  "statement": "theorem essentiallySmall_locally_prescribed {C : Type u} [Category.{u} C] [HasFiniteLimits C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) (R : Cᵒᵖ ⥤ CommRingCat.{u}) (hR : Presheaf.IsSheaf J.toGrothendieck (R ⋙ forget₂ CommRingCat RingCat.{u})) (I : C → Type u) (B : ∀ U : C, I U → ringedSiteModules.{u} (Sheaf.over (⟨R ⋙ forget₂ CommRingCat RingCat.{u}, hR⟩ : Sheaf J.toGrothendieck RingCat.{u}) U)) : ObjectProperty.EssentiallySmall.{u} (fun M : ringedSiteModules.{u} ⟨R ⋙ forget₂ CommRingCat RingCat.{u}, hR⟩ ↦ ∃ (ι : Type u) (U : ι → C) (f : ∀ j : ι, U j ⟶ ⊤_ C), Presieve.ofArrows U f ∈ J (⊤_ C) ∧ ∀ j : ι, ∃ t : I (U j), Nonempty (((overFunctor.{u} ⟨R ⋙ forget₂ CommRingCat RingCat.{u}, hR⟩ (U j)).obj M) ≅ B (U j) t))",
+  "branch": "newtargets-dag",
+  "by": "O1",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-941648ace",
+  "group": "O1",
+  "result": "pass",
+  "note": "Lean statement matches every node clause: small site (C : Type u, Category.{u}, J precoverage with IsSiteForCoverings), finite limits and ⊤_ C, sheaf of comm rings R/hR, ringedSiteModules.{u}, I : C → Type u, B over Sheaf.over U; class P is an actual J-covering presieve of ⊤_ C plus overFunctor local isos; conclusion ObjectProperty.EssentiallySmall.{u} equals the node's S∈V family of members (via exists_small_le). No added hypotheses; edge cases (empty I_U, empty P, empty or repeated covers, zero ring) are covered. Only the item's lean field changed and its statement is verbatim. Imports are used; the non-public HomCoverGluing import is the recorded proof-dependency module. Docstrings have source, blueprint tag and all 6 steps; sorry-only; max line 82; no duplicate found; item not route-pivot dropped. nt_compile --json clean in 20.7 s."
  }
 }

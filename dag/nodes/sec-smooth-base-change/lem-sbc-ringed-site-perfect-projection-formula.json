@@ -246,5 +246,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-b10060ae3 (reviewer sub-agent of L); spot-checked: PASS: I read the item, its five steps and the one new node in full. Status: the item is unsplit on live and side-live. There is no repair note; the 10-21 re-split note is for the different node lemma-weil-pbc-perfect-projection-formula. The item and its cited nodes are not on the drop list, there is no cycle, there is no SGA, and the statement and stmt_deps are byte-identical to base. Source: Stacks 0944 (sites-cohomology l.13655-13712); its map is the adjoint of (eps tensor 1) composed with mu, the alpha of mate-exact. Step 1: alpha_R=1 plus the shift equation gives every shift, negative n included. Step 2: I recomputed the retract inverse F(p)pi_H^-1 G(i); it is a two-sided inverse, plus biproducts. Step 3: stupid tails are degreewise split, the base case is 0 at c=b+1, and 014A finishes the induction. Step 4: the coherence edges are f=u, g=j_A, g'=j_B, f'=u_A on the 04IF square. The coherence node's theta and Ex are the new node's theta and beta, so r_Y(pi_u) is invertible exactly when pi_{u_A} is. The strict-perfect model transfers through the element-restriction-hom equivalence. Step 5: H^q commutes with restriction, the domains form a small covering family, isIso_of_coversTop applies, the unbounded cohomology criterion finishes, and no bound on E is used. New node: I read 04IF (sites-modules l.2704-2772), which holds for any sheaf and any ringed morphism and gives the module identities. Theta is the image of sigma on flat K-flat complexes. r_X I is K-injective via the exact left adjoint j_B!, so beta is invertible, and the counit equation is correctly typed. The node is true, statement-only and not a clause of the item. Existing slice nodes need a continuous site functor or pro-etale sites, so it is not a duplicate; a 04IF grep finds no other node. Small cases: Z->Z/2 point topoi with P=Z and P=Z/2, P=0, empty A. The four declared tool uses are accepted; the unit sk-rem-rest has no uses. Advisory: step 3 could cite lem-weil-pbc-bounded-complex-triangulated-devissage instead of repeating the induction."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedSitePerfectProjectionFormula",
+  "declaration": "SheafOfModules.ringedSitePerfectProjectionFormula",
+  "file": "lean/Sheaf/Paper/RingedSitePerfectProjectionFormula.lean",
+  "statement": "theorem ringedSitePerfectProjectionFormula {Y X : RingedTensorCorner.{u, w}} (e : RingedTensorEdge Y X) (a : RingedTensorModel Y) (b : RingedTensorModel X) (E : X.mateDerived) (P : Y.mateDerived) (hP : IsPerfectOnRingedSiteOfUniverses.{u, u, u, w} Y.ring P) : IsIso (e.projection a b E P)",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d1565a94",
+  "group": "NI",
+  "result": "pass",
+  "note": "Item node unchanged except the added lean record; the six dependency nodes are byte-identical to side-live; lean.statement matches the file exactly. Clauses match the node and Stacks 0944: the ringed-topos presentation, derived adjunction and K-flat tensor models are those of mate-exact; E is unbounded; hP is the recorded locally strict-perfect predicate (bounds and ranks inside the cover, degreewise splittings, universes all u). A probe showed e.projection equals derivedProjectionFormulaMate, the alpha of mate-exact, i.e. the adjoint of (counit ⊗ 1) after the tensor comparison. Edge cases checked: P=0, rank 0, all shifts, non-flat Z->Z/2, empty site. No duplicate; proof is sorry only; docstrings carry source and proof steps 1-5; plain imports are exactly the proof-dependency modules. nt_compile clean in 27.3 s (worker recorded 17.6/20.5 s). Advisories only: projection and the Corner/Edge/Model presentation are owned by nodes outside the item's stmt_deps; the RingedToposMorphism declaration is imported but not used in the signature."
  }
 }

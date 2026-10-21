@@ -228,5 +228,28 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-a2180b3bc (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. The item's statement and stmt_deps are byte-identical to the base (Q21-created, unsplit). Sources checked: Stacks sites-modules 0EMC (lemma-simple-invert, proof omitted, so proof_origin=agent is right), and the main-20261015 finite-free proof sentence 'Inverting ell ... compatible with O to E by construction', which matches blueprint.from. I recomputed all 8 steps. Step 2 gets phi_t from the item's own universal-property hypothesis. Step 3 gets local fractions and the k-power relation from the statements of the new node, lem-pc-sites-sheafification-underlying-sets and lem-weil-pbc-site-sheafification-sections-local. Steps 4-5 verify the formula Q(j_R(c_i u)s^-n)=v^-n j_T(u). Step 6 proves injectivity: c_i(phi(t)^k u)=t^k r_i through Res_phi linearity, with no cancellation. Steps 7-8 give gluing and uniqueness from H(e_i)=j_T(b_i). The off-unit nodes are a Mathlib leaf and the Lean-closed sheafification_sections_local, so they are tools. The new node is the t-power case of 0EMC; I tested it at t=1, t=0, nilpotent t (Z/4, t=2) and on an empty site. It is statement-only, self-contained and acyclic, and it does not restate the item or a clause of the parent. Duplicate search: def-weil-pbc-ringed-section-localization builds the same object (Lean ringedLocalizationRingOfUniverses) without the ring universal property, which exists only as a private lift in LocalizationInverseImageCoherence.lean. Advisory: stage 2 should formalize the new node on that def and promote the lift. Minor: the new node lacks the merged_into and lean_audit keys, which the tools accepted. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizedBasisCoefficients",
+  "declaration": "CategoryTheory.Mod.sheaf_localizedBasisCoefficients",
+  "declarations": [
+   "CategoryTheory.Mod.LocalizedBasisCoefficients",
+   "CategoryTheory.Mod.sheaf_localizedBasisCoefficients"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/LocalizedBasisCoefficients.lean",
+  "statement": "theorem sheaf_localizedBasisCoefficients {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] (J : GrothendieckTopology C) : @LocalizedBasisCoefficients.{_, _, uI} (Sheaf J Ab.{w}) _ (sfbSheafTensorStructure (A := Ab.{w}) J).monoidal (sfbSheafTensorStructure (A := Ab.{w}) J).symmetric.toBraidedCategory (@sheafIsAbelian C _ Ab.{w} _ _ J (hasSheafifyEssentiallySmallSite J Ab.{w}))",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper predicate spells out this node’s entire assertion using the existing internal ring and module objects; the theorem asserts it only for abelian sheaves with sfbSheafTensorStructure. Global sections are maps from its tensor unit, and invertibility is equivalently IsIso of multiplication by that section. Arbitrary finite index types retain their independent universe. The summand equations are exactly the prescribed finite-sum formulas; the square and uniqueness use the componentwise localization map written explicitly as a finite sum of projection, jR and inclusion. No localization construction, module notion or restriction functor is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-262bfc0af",
+  "group": "N0",
+  "result": "pass",
+  "note": "Only change vs live: new lean record + module Sheaf.CategoryTheory.LocalizedBasisCoefficients; statement/stmt_deps/proof_deps and all 4 dep nodes unchanged. Clause-by-clause match: Sheaf J Ab.{w} with sfbSheafTensorStructure and EssentiallySmall.{w} (same convention as the sheaf-tensor dep); comm MonObj ring objects with Mon homs; t : 𝟙 ⟶ R global section; Fintype I in independent universe uI; q fixed by its summands φ(r)b_i; invertibility as IsIso of multiplication; universal properties ∃! over all comm D; ∃! ψ; qt over comap ψ with summand ψ(a)jT(b_i); square via Σ π_i≫jR≫ι_i; A-linear uniqueness. No injectivity, nonzero-divisor or sectionwise assumptions. Edge cases (empty I, t nilpotent, empty site) covered. Extra conjunct Nonempty(MonoidalPreadditive) is true; probe shows sfbSheafTensor_monoidalPreadditive elaborates with the same instances. Prop helper is not hollow; docstrings carry the source place, blueprint tag and 8 proof steps; statement field is verbatim. nt_compile --json clean in 38.0 s. No duplicate found in side-live Sheaf/WeilConjectures or Mathlib. Advisory: unused proof-dep imports."
  }
 }

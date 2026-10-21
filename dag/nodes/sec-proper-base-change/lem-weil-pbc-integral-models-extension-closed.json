@@ -228,5 +228,30 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-9023fab8c (reviewer sub-agent of L); spot-checked: I read all six steps and the statements of every cited node, plus Bhatt–Scholze Def 6.8.10, Prop 6.8.11(1),(3) and Lemma 6.8.13 (last paragraph). Shape: one commit with the item and the report, no new nodes. The item is unsplit in live and side-live, not on the dropped list, has no repair note, and has no base proof, so the re-split rule does not apply. Every cited statement is in unit sk-thm-properbasechange; def-weil-pbc-module-localization-away is only a notion; no SGA is cited. proof_deps equals the union of the step uses. Step 1: the immersion-restriction node gives A_X≅lim(A/ϖⁿ)_X and the canonical A_X[1/ϖ]≅E_X, so the scalar-localization lemma (R=A_X, s=ϖ) makes S_X exact. Step 2: surjectivity of the specified map and the fraction form give ξ=ϖ^{-m}S_X(α). Step 3: the classification node, applied to α in Mod(A_X), gives 0→Q→N→P→0. Step 4: P[0] and Q[0] satisfy (iii) of the stratified characterization, whose hypotheses are all in the item. The ses-triangle node and closure under shifts and cones put N[0] in the subcategory, so N is constructible. Step 5: the exact-functor clause gives class ϖ^mξ. With u_m=u∘ϖ^{-m}, (ϖ^m,id,id) is a morphism E→E_m, and triangleOfSES naturality gives [E_m]=ϖ^m[1]∘ξ. The classification node's boundary is the same triangleOfSES δ (its steps 4–5, extClass_hom), and the direction of the rescaling is correct. Step 6: the injective half of classification gives S_XN≅F. Edge cases m=0, ξ=0, torsion α, P=0 or Q=0 and empty X are fine. The DAG search (rg -L for '6.8.13' and 'closed under extensions'+constructible) found no node stating this criterion. No changes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralModelsExtensionClosed",
+  "declaration": "AlgebraicGeometry.ProEtale.integralModels_extension_closed",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralModelScalarExtension",
+   "AlgebraicGeometry.ProEtale.integralModelScalarExtensionMap",
+   "AlgebraicGeometry.ProEtale.integralModelConstantScalar",
+   "AlgebraicGeometry.ProEtale.integralModels_extension_closed"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralModelsExtensionClosed.lean",
+  "statement": "theorem integralModels_extension_closed (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) [IsNoetherian X] (_hdim : ∃ n : ℕ, topologicalKrullDim X ≤ n) (_hl : IsUnit (l : Γ(X, ⊤))) [HasExt.{w} (SheafOfModules.{u + 1} (latticeModuleRing X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E))))] (P Q : SheafOfModules.{u + 1} (latticeModuleRing X (latticeCoefficientIntegers l E))) (_hP : IsContinuousConstructible X (latticeCoefficientIntegers l E) P) (_hQ : IsContinuousConstructible X (latticeCoefficientIntegers l E) Q) (_hsurj : ∀ ξ : Abelian.Ext (integralModelScalarExtension X l E P) (integralModelScalarExtension X l E Q) 1, ∃ (m : ℕ) (B : SheafOfModules.{u + 1} (latticeModuleRing X (latticeCoefficientIntegers l E))) (i : Q ⟶ B) (p : B ⟶ P) (z : i ≫ p = 0), (ShortComplex.mk i p z).ShortExact ∧ ∃ (zE : integralModelScalarExtensionMap X l E i ≫ integralModelScalarExtensionMap X l E p = 0) (hE : (ShortComplex.mk (integralModelScalarExtensionMap X l E i) (integralModelScalarExtensionMap X l E p) zE).ShortExact), hE.extClass = ξ.comp (Abelian.Ext.mk₀ (integralModelConstantScalar X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) (integralModelScalarExtension X l E Q) (((WithAbs.equiv (Padic.coefficientExtensionAbsoluteValue l E)).symm (Padic.coefficientExtensionUniformizer l E : E)) ^ m))) (add_zero 1)) (F : SheafOfModules.{u + 1} (latticeModuleRing X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)))) (i : integralModelScalarExtension X l E Q ⟶ F) (p : F ⟶ integralModelScalarExtension X l E P) (z : i ≫ p = 0) (_h : (ShortComplex.mk i p z).ShortExact) : ∃ N : SheafOfModules.{u + 1} (latticeModuleRing X (latticeCoefficientIntegers l E)), IsContinuousConstructible X (latticeCoefficientIntegers l E) N ∧ Nonempty (integralModelScalarExtension X l E N ≅ F)",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The localized Ext-map surjectivity is expanded using short exact numerator representatives and the equation S(alpha) = varpi^m xi. Exact scalar extension and Ext-one classification make this precisely equivalent to the displayed fraction-surjectivity condition. The numerator middle object is arbitrary; constructibility is concluded, not assumed. Transparent abbreviations specialize the existing scalar extension, and the constant-section scalar endomorphism has explicit data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba7cc73d2",
+  "group": "O4",
+  "result": "pass",
+  "note": "Clause-by-clause match of node and Lean: canonical changeOfRings along the subring inclusion, IsContinuousConstructible for P/Q/N, Mathlib Ext, conclusion Nonempty(S N ≅ F) with no compatibility condition. The surjectivity hypothesis is stated via short-exact representatives (ξ.comp(mk₀ ϖ^m) = class of the scalar-extended integral SES, B not assumed constructible); it is equivalent to the localized-Ext surjectivity via ext_one_extension_classification and exactness of S (node step 1). Helper integralModelConstantScalar has real data and no existing duplicate. Docstrings, sorry-only proof, imports (stmt and proof dep modules), lines ≤93, only the lean field changed, statement verbatim, both report sections present. Source BS 6.8.13 checked. Edge cases empty X, zero/torsion P/Q, m=0 and universes ok. nt_compile --json clean in 38.5 s (delivery recorded 38.0 s). Advisory only: def-weil-pbc-module-localization-away is not referenced in the signature."
  }
 }

@@ -194,5 +194,23 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-f08dea102 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit holding the item and its report, with no new nodes and the statement unchanged. This is a first split: Q67 created the item on 2026-10-21 with no proof, so the re-split rule does not apply, and the item is not on any dropped list. The statement is true. I tested it on the empty classes, the zero category, P={k},Q={k[-1]} in D(k) (Ext^2=0 gives only k⊕k[-1]) and P=Q={k}. It is exactly what det-brown-hypotheses-small step 6 needs, and it matches unit sk-lem-brown-hypotheses step 1 and the blueprint sk-lem-brown-hypotheses-small.proof.md, Essentially small paragraph (lines 11-18). Step 1: the dependent sum over I×J of the Hom sets is V-small, and the empty case is handled. Step 2: TR1 then two inverse rotations by TR2, which is an iff in def-weil-triangulated-category; TR1 iso-invariance justifies identifying B_i[1][-1] with B_i, and the third arrow stays δ. Step 3: I checked the twice-rotated triangles C→B[1]→M[1]→C[1]; with δ=a[1]γc⁻¹ the square a[1]γ=δc is exactly TR3's hypothesis for (c,a[1]), so TR3 gives d:M[1]→M_s[1]. Step 4: the Mathlib leaf lem-sf-triangle-morphism-iso (isIso₂_of_isIso₁₃ and siblings, any two of three) makes d an isomorphism; shifting back and iso-closure finish the proof. proof_deps equals the union of the uses. Both cited nodes are Mathlib leaves, so no tool_uses are needed. Sources checked: Stacks derived.tex 0145, 014A (lines 414-452) and 014B (lines 541-556), with labels confirmed in the tags table. No SGA is used. mathlib_searches has all of leansearch, loogle, leanfinder and grep. Advisory for the maintainer: the last clause of lem-sfb-alpha-compact-object-api (same chapter, unit sk-cor-existence-ii) states the same smallness of extension classes in one sentence. The item existed before this delivery and is cited by det-brown-hypotheses-small, and citing that bundled off-unit node would be worse than this self-contained proof, so this is not a fault; the API clause could cite this item later. No fixes."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.Triangulated.ExtensionProductEssentiallySmall",
+  "declaration": "CategoryTheory.ObjectProperty.essentiallySmall_extensionProduct",
+  "statement": "instance essentiallySmall_extensionProduct [LocallySmall.{w} C] (P Q : ObjectProperty C)\n    [ObjectProperty.EssentiallySmall.{w} P] [ObjectProperty.EssentiallySmall.{w} Q] :\n    ObjectProperty.EssentiallySmall.{w} (P.extensionProduct Q)",
+  "branch": "slopmaster2",
+  "by": "O2",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing instance at lines 41–43 of the live upstream module, confirmed with scompile.py --source. Its context uses independent object, Hom and smallness universes u, v, w; only pretriangulated structure, LocallySmall.{w} C, and ObjectProperty.EssentiallySmall.{w} P and Q are assumed. Mathlib extensionProduct is closed under isomorphisms without requiring P or Q to be, so its middle-term predicate equals the node’s isomorphism-closed extension class. The branch value slopmaster2 is the prescribed existing-WeilConjectures record convention; the declaration was read from the live published project."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b36a22169",
+  "group": "O2",
+  "result": "pass",
+  "note": "Only change vs live node: lean := existing:true CategoryTheory.ObjectProperty.essentiallySmall_extensionProduct (WeilConjectures.CategoryTheory.Triangulated.ExtensionProductEssentiallySmall l.41-43, sorry-free, published olean). Statement verbatim. Clauses: universe w independent of u,v; Pretriangulated-only encoding = def-weil-triangulated-category match (no IsTriangulated); LocallySmall.{w} = V-small Homs; EssentiallySmall.{w} ≡ small representatives within P via exists_small_le; Mathlib extensionProduct is iso-closed for arbitrary P,Q so equals node's iso-closed P*Q; arrow order/shift match. Edge cases: empty classes (extensionProduct_bot_*), zero maps, non-iso-closed P,Q covered. No duplicate record; stmt_deps convention + Mathlib leaf. Probe via nt_compile --json clean twice (50.2 s / 40.5 s), axioms propext/choice/Quot.sound, universes independent. No findings."
  }
 }

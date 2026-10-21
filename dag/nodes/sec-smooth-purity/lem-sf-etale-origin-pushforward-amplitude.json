@@ -263,5 +263,23 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-ad9431a04 (reviewer sub-agent of L); spot-checked: I read the item, all 11 cited statements and the Stacks sources: 099T (proetale l.3828), 09A6 (l.4696), and the tags 08J5, 05TC, 015B, 05SE, 05SU and 05TE checked against the tags table. The delivery has one commit, the item plus its report, and zero new nodes. In side-live the item is still unsplit, it is not in the dropped list and no repair note names it; NU's re-split of its parent created it to carry old step 6. The statement is unchanged. Step 1: the comparison pullback ν^* is exact, so it commutes with cohomology, and it is faithful, so it reflects zero; this gives L range [a,b]. Step 2: Grothendieck categories and K-injectives (prop-pur), f_* left exact, the unbounded RF triangulated, and on D^+ it agrees with def-weil-pbc-direct-image. Step 3: negative vanishing plus the hypothesis put heart objects in [0,N]. Step 4: lem-pur-bounded-heart-amplitude with S = all objects and c=0, d=N gives [a,b+N]. Step 5: when N<0, q=0 together with R^0v≅v gives f_*=0, so Rf_*L=0; consistent, since this forces X empty or B=0. Step 6: f qcqs and L bounded, hence D^+, so sk-thm-pe-direct-image-comparison applies; Step 1 at Y moves the cohomology across, and the empty-interval case holds. The coefficient category (Cont(π0,B) versus ν^*B for finite B) is the DAG's standing identification; the base-change morphism is the ordinary K-injective direct image. Edge cases checked: a=b, N=0, N<0, L=0, b+N<a. No duplicate: the hits for 'b+N]' are Tor-amplitude or condensed nodes, or the item's own citers and analogues. All 8 declared tool uses are generic black boxes, and the definition unit has no route of its own, so they are accepted. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SfEtaleOriginPushforwardAmplitude",
+  "declaration": "AlgebraicGeometry.ProEtale.etaleOrigin_pushforward_amplitude",
+  "file": "lean/Sheaf/AlgebraicGeometry/SfEtaleOriginPushforwardAmplitude.lean",
+  "statement": "theorem etaleOrigin_pushforward_amplitude {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (B : Type u) [CommRing B] [Finite B] (N : ℤ) (_hN : ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} B))) (q : ℤ), 0 ≤ q → N < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) f).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj M)))) (a b : ℤ) (_hab : a ≤ b) (L : FiniteCoefficientEtaleDerivedCategory X (ULift.{u + 1, u} B)) (_hL : ∃ c d : ℤ, c ≤ d ∧ ∀ r : ℤ, r < c ∨ d < r → IsZero ((DerivedCategory.homologyFunctor _ r).obj L)) (_hC : ∀ r : ℤ, r < a ∨ b < r → IsZero ((DerivedCategory.homologyFunctor _ r).obj ((finiteCoefficientIntrinsicDerivedComparison X B).obj L))) : (∀ r : ℤ, r < a ∨ b < r → IsZero ((DerivedCategory.homologyFunctor _ r).obj L)) ∧ (∀ i : ℤ, i < a ∨ b + N < i → IsZero ((DerivedCategory.homologyFunctor _ i).obj ((Scheme.proEtaleConstantDerivedDirectImage f B).obj ((finiteCoefficientIntrinsicDerivedComparison X B).obj L)))) ∧ (N < 0 → IsZero ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) f).rightDerivedFunctor.obj L) ∧ IsZero ((Scheme.proEtaleConstantDerivedDirectImage f B).obj ((finiteCoefficientIntrinsicDerivedComparison X B).obj L)))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbf83e9aa",
+  "group": "NK",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: f qcqs on Scheme.{u}; finite comm B : Type u via ULift convention; _hN for all M, all q≥0 with q>N (q=0 kept), H^q of R(Etale.lowerStar f) on M[0]; a≤b; L bounded via ∃[c,d]; _hC on canonical finiteCoefficientIntrinsicDerivedComparison (comparisonUpperStar ⋙ intrinsic realization, termwise); conclusions: L range [a,b], proEtaleConstantDerivedDirectImage of C range [a,b+N], N<0 ⇒ both direct images zero. No extra hypotheses; universes standard; edge cases L=0, B=0, empty X/Y, a=b, N=0, N<0, b+N<a covered. No definitions, proof sorry only, docstrings with source and blueprint tag plus 6 proof steps, lean.statement verbatim, only the lean field changed vs side-live, both report sections present. nt_compile --json rc 0, 34.6 s, clean. Advisory: intrinsic comparison and constant derived direct image are not listed in their owner nodes' lean.declarations; second reading done by the same worker."
  }
 }

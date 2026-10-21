@@ -205,5 +205,27 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-862e09e74 (reviewer sub-agent of L); spot-checked: Read the item and all six steps in full. The delivery is one commit with the item and report only, and no new nodes. The live (side-live) item is still unsplit, it is not in route-pivot-dropped, and there is no repair note. The statement is unchanged apart from the added [def-weil-pbc-additive-functor] citation, so no target is weakened. Citer det-brown-hypotheses-small step 6 (exact stratum pullbacks a_s^*, right adjoints a_{s*}, finite I) matches the item's hypotheses. Blueprint main-20261015 sk-lem-brown-hypotheses-small.proof.md l.11-14 'Essentially small' is the recorded place, and proof_origin=agent is correct. Steps checked: 1 is the product equations and the kernel (Stacks 0106, homology.tex l.210); 2 uses unit = Phi(id) and naturality (Stacks 0037, categories.tex l.3344) to get Phi(e∘F(k)) = Phi(e∘F(0)) = 0, then injectivity and e^{-1} give F(k)=0; 3 uses kernel preservation and kernel uniqueness to get id_{F_iK}=0, so F_iK is zero; 4 uses joint detection to get K=0, so k=0; 5 shows u∘(a-b)=0, so a=b (mono); 6 takes e=id. All four cited nodes are Mathlib-leaf definitions and say what is used; no off-route statement and no tool_uses. Edge cases: I empty (category trivial), Ab×Ab projections (jointly but not individually faithful), and kernel preservation is genuinely needed. DAG grep found no generic duplicate; lem-sbc-closed-open-coefficient-embedding is a concrete instance. The Mathlib searches are recorded and the no-match verdict is sound. Advisory only: 'monomorphism' could cite def-galois-initial-mono, but both mono and kernel are spelled out inline."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.JointAdjunctionModelEmbedding",
+  "declaration": "CategoryTheory.mono_pi_lift_adjunction_models",
+  "declarations": [
+   "CategoryTheory.mono_pi_lift_adjunction_models",
+   "CategoryTheory.mono_pi_lift_adjunction_units"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/JointAdjunctionModelEmbedding.lean",
+  "statement": "theorem mono_pi_lift_adjunction_models {A : Type u₁} [Category.{v₁} A] [Abelian A] {I : Type w} {B : I → Type u₂} [∀ i : I, Category.{v₂} (B i)] [∀ i : I, Abelian (B i)] (F : ∀ i : I, A ⥤ B i) [∀ i : I, (F i).Additive] [∀ (i : I) (X Y : A) (f : X ⟶ Y), PreservesLimit (parallelPair f 0) (F i)] (G : ∀ i : I, B i ⥤ A) (adj : ∀ i : I, F i ⊣ G i) (hzero : ∀ N : A, (∀ i : I, IsZero ((F i).obj N)) → IsZero N) (M : A) (models : ∀ i : I, B i) (e : ∀ i : I, (F i).obj M ≅ models i) [HasProduct (fun i : I ↦ (G i).obj (models i))] : Mono (Pi.lift (fun i : I ↦ (adj i).unit.app M ≫ (G i).map (e i).hom))",
+  "branch": "sheaf-dag",
+  "by": "NZ",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af4a188ec",
+  "group": "NZ",
+  "result": "pass",
+  "note": "All hypotheses and conclusion clauses match the node: abelian A and B_i, additive F_i, kernel preservation via PreservesLimit (parallelPair f 0) with no stronger exactness, specified adjunctions, joint IsZero detection, isomorphisms e_i, only the needed HasProduct, and Mono of Pi.lift (unit ≫ G.map e), which is G(e)∘η. The identity special case is stated separately. Edge cases covered: empty I, zero objects, infinite I, families that detect zero only jointly. No Mathlib or project duplicate (unit_mono_of_L_faithful needs one faithful functor, mono_productTo a coseparating class); no name collision in side-live. Node record is identical to live apart from the lean field; lean.statement matches the file verbatim; docstrings give the source place, the blueprint tag and steps 1-6; proofs are only sorry. nt_compile --json: 24.8 s, exit 0, clean. Advisory: the 'Second reading by NZ' section is a self-reread by the same worker."
  }
 }
