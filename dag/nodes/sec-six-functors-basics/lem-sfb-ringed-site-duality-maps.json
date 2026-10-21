@@ -23,128 +23,80 @@
  ],
  "proof": [
   {
-   "text": "Use the existing closed symmetric monoidal structure theorem [lem-sf-ringed-derived-closed-symmetric-monoidal] for the actual independent-universe derived internal Hom and its normalized CoefficientTensorModels. It supplies the closed structure, the Koszul symmetry, the coefficient-unit isomorphism and all tensor coherence models. No new choice of derived tensor or Hom is made.",
+   "text": "Use [lem-sf-ringed-derived-closed-symmetric-monoidal] with its actual models [def-coef-ringed-tensor-hom-model]. The coefficient unit is K-flat: its tensor with an acyclic complex is the same complex by the unitor. The supplied symmetry, unitor and associator give the required coherence on K-flat representatives; total tensor preserves K-flatness. Thus all transposes below use the fixed tensor and Hom.",
    "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9, 0A90; normalized K-flat models"
+   }
+  },
+  {
+   "text": "By [lem-sfb-ringed-hom-composition-model] form $c$ as the transpose of two evaluations. Under $B\\cong H(O,B)$ from [lem-sc-hom-complex-unit-iso] applied to a K-injective representative of $B$, put $e_{A,B}=c_{A,O,B}$. The unit identification evaluates at $1$, so its uncurried composite is $(1_B\\otimes\\epsilon_{A,O})$ followed by the right unitor. Naturality of $c$ gives the stated two variances. Define $b_A=\\operatorname{tr}(\\epsilon_{A,O}\\circ\\sigma_{A,H(A,O)})$. For $u:A'\\to A$, the two sides of $H(H(u,1),1)b_{A'}=b_Au$ have identical uncurrying by counit and symmetry naturality. Injectivity of transposition proves covariance.",
+   "uses": [
+    "lem-sfb-ringed-hom-composition-model",
+    "lem-sc-hom-complex-unit-iso",
     "lem-sf-ringed-derived-closed-symmetric-monoidal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom), proof; Tag 0A90 (lemma-compose); Section 08J7"
+    "place": "Tags 0A98, 08JD, 0A97"
    }
   },
   {
-   "text": "The degree-zero coefficient unit is K-flat: tensoring an acyclic complex with it is isomorphic to the original complex by the ordinary right unitor, so its homology vanishes. Take the morphisms underlying the supplied symmetry, right-unitor and associator isomorphisms. Rewrite the coherence comparison with tensorIso_both on the two K-flat inputs; coefficientTotalTensor_isKFlat supplies the nested tensor hypotheses. Reorder only the explicitly named degree equations and the scalar-section arguments to obtain the fields of RingedSiteDualityModel.",
+   "text": "Apply [lem-sfb-ringed-ordinary-evaluation-localization] with the stated $E,F,D$. Its $\\theta$ is the transpose defining $e$ in step 2. Its two augmentation hypotheses and K-flat tensor comparison are precisely those in the item, so its displayed equation gives the unsigned ordinary representative, including existence and uniqueness of the chain map.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "def-coef-ringed-tensor-hom-model"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Sections 06YL (K-flat complexes) and 08J7; elementary total differential calculation"
-   }
-  },
-  {
-   "text": "Let $\\epsilon_{K,M}:H(K,M)\\otimes^{\\mathbf L}K\\to M$ be the image of $1_{H(K,M)}$ under the adjunction of step 1. For $K,L,M$ define $c_{K,L,M}$ by transposing the composite\n$$(H(L,M)\\otimes^{\\mathbf L}H(K,L))\\otimes^{\\mathbf L}K\\to H(L,M)\\otimes^{\\mathbf L}L\\to M,$$\nwhere the first arrow is $1\\otimes\\epsilon_{K,L}$ after rebracketing, and the second is $\\epsilon_{L,M}$. Thus $c:H(L,M)\\otimes^{\\mathbf L}H(K,L)\\to H(K,M)$. On Hom-complex representatives it is $(f,g)\\mapsto f\\circ g$: uncurrying either construction sends $(f,g,x)$ to $f(g(x))$. The identity $d(fg)=(df)g+(-1)^{|f|}f(dg)$ from [def-pur-hom-complex] verifies that this is the total chain-composition map used by Stacks 0A98. Its derived independence follows from step 1. It is natural in $K,M$ and dinatural in the middle object $L$: for $u:L\\to L'$, $f(ug)=(fu)g$ expresses the two maps from $H(L',M)\\otimes^{\\mathbf L}H(K,L)$ to $H(K,M)$.",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sc-derived-hom-tensor-total",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A91 (lemma-composition) and 0A98 (lemma-internal-hom-composition), construction and functoriality"
-   }
-  },
-  {
-   "text": "The unit-Hom isomorphism [lem-sc-hom-complex-unit-iso] applied to the K-injective target identifies $H(\\mathcal O,B)$ with $B$. Set $e_{A,B}=c_{A,\\mathcal O,B}$ under this identification. Its transpose under step 1 is\n$$B\\otimes^{\\mathbf L}A^\\vee\\otimes^{\\mathbf L}A\\xrightarrow{1\\otimes\\epsilon_{A,\\mathcal O}}B\\otimes^{\\mathbf L}\\mathcal O\\cong B.$$\nFor $u:A'\\to A$ and $v:B\\to B'$, naturality of this composite gives $H(u,v)e_{A,B}=e_{A',B'}(v\\otimes H(u,1_{\\mathcal O}))$. Define $b_A$ by transposing $A\\otimes^{\\mathbf L}A^\\vee\\xrightarrow{\\tau}A^\\vee\\otimes^{\\mathbf L}A\\xrightarrow{\\epsilon_{A,\\mathcal O}}\\mathcal O$, using step 1 with $K=A^\\vee$. Both sides of $H(H(u,1),1)b_{A'}=b_Au$ transpose to evaluation on $(u(x'),\\phi)$, proving covariance. These constructions use the dual of $A$, not evaluation of $A^\\vee$ against its own dual.",
-   "uses": [
-    "lem-sc-hom-complex-unit-iso",
-    "def-pur-derived-internal-hom",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JD (lemma-dual); Tag 0A97 (lemma-internal-hom-evaluate) at the coefficient unit"
-   }
-  },
-  {
-   "text": "For the first normalization choose a K-flat resolution $r:P\\to E$. The assumed map $D\\to\\mathcal Hom^\\bullet(E,I(\\mathcal O))$ identifies $D$ with $A^\\vee$; precomposition with $r$ is a quasi-isomorphism by [lem-pur-rhom-well-defined]. By the componentwise adjunction in step 1, the pairing $D\\otimes P\\to\\mathcal O[0]$, $(\\phi,x)\\mapsto\\phi(r(x))$, followed by $\\mathcal O[0]\\to I(\\mathcal O)$, is $\\epsilon_{A,\\mathcal O}$ on these models. The quasi-isomorphism $\\mathcal Hom^\\bullet(E,F)\\to\\mathcal Hom^\\bullet(E,I(F))$, followed by precomposition with $r$, identifies the stated target with $H(A,B)$. The transpose in step 4 sends $(y,\\phi,x)$ to $y\\phi(r(x))$, followed by $F\\to I(F)$. Currying gives precisely precomposition with $r$ of $x\\mapsto y\\phi(x)$, followed by $F\\to I(F)$; hence that chain map represents $e_{A,B}$. The tensor comparisons apply by step 2. For $|y|=p,|\\phi|=q$, [def-pur-hom-complex] gives $d_D\\phi=-(-1)^q\\phi d_E$; thus the tensor differential gives $d_Fy\\,\\phi+(-1)^{p+q+1}y\\phi d_E$, equal to the Hom differential of $x\\mapsto y\\phi(x)$. No sign is inserted in the map itself.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-rhom-well-defined",
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-sfb-ringed-ordinary-evaluation-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JD; Tag 0A98; Hom differential in Section 0A8X"
+    "place": "Tag 08JE; ordinary evaluation localization"
    }
   },
   {
-   "text": "For the second normalization put $D=\\mathcal Hom^\\bullet(E,\\mathcal O[0])$ and choose K-flat resolutions $P\\to E$ and $T\\to D$ by [lem-pc-kflat-resolution]. The first assumed quasi-isomorphism identifies $D$ with $A^\\vee$. On $T\\otimes P$, evaluation is $(t,x)\\mapsto t(x)$, where the resolution maps into $D,E$ are understood, followed by $\\mathcal O\\to I(\\mathcal O)$; this follows by uncurrying in step 1. After the exchange in step 2, the transpose is $x\\mapsto(\\phi\\mapsto(-1)^{|x||\\phi|}\\phi(x))$. Postcomposing this ordinary chain map by $\\mathcal O\\to I(\\mathcal O)$ and precomposing the Hom variable by $T\\to D$ gives exactly that transpose on $P,T$. The second assumed quasi-isomorphism and [lem-pur-rhom-well-defined] identify its target with $H(A^\\vee,\\mathcal O)$, so the ordinary map represents $b_A$. For $|x|=a,|\\phi|=-a-1$, the outer Hom differential evaluated at $\\phi$ is $-(-1)^a b(x)(d_D\\phi)$. Here $d_D\\phi=(-1)^a\\phi d_E$ and $b(x)$ on degree $-a$ has sign $(-1)^a$. The product sign is therefore $(-1)^{a+1}$, equal to $b(d_Ex)(\\phi)$ since $(a+1)(-a-1)\\equiv a+1$ modulo $2$. Other degree components vanish. The ordinary signed bidual chain map and its uniqueness are now proved directly in Lean: form the sheaf bidual x maps to evaluation at x, compose with each actual Hom-product projection and multiply the (i,q) component by (-1)^(iq). The product universal property gives the degree map. Project the two chain-map composites, use the Hom differential with zero differential on the coefficient unit, and evaluate at a local dual section. Naturality of the differential and the identity -(-1)^i (-1)^(i(q+1)) (-(-1)^q) = (-1)^((i+1)q) prove equality. For uniqueness, use product extensionality: the degree-zero coefficient component is determined by RingedSiteBidualFormula, and every other coefficient degree is a zero object. The derived-normalization argument in the preceding sentences remains the plan for the remaining normalization theorem.",
+   "text": "Apply [lem-sfb-ringed-signed-bidual-localization] to $E$. Its $b$ is the transpose of step 2; its two augmentation isomorphisms are exactly the stated identifications. Its equation therefore gives the signed ordinary bidual representative. This application uses no flatness.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pur-derived-internal-hom",
-    "lem-pur-rhom-well-defined",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sc-hom-complex-projections"
+    "lem-sfb-ringed-signed-bidual-localization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A97, coefficient-unit specialization; Section 0A8X, signed bidual chain map"
+    "place": "Tag 0A97; signed bidual localization"
    }
   },
   {
-   "text": "For $U\\in\\mathcal C$, use the localized coefficients of [def-pur-localized-ringed-site]. Restriction is exact by [lem-pur-site-restriction-module-adjunction-exact], sends K-injectives to K-injectives by [lem-pur-kinjective-restrict-localized], and compares derived tensor and Hom by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and [lem-weil-pbc-ringed-internal-hom-exact-restriction]. The tensor-pullback node applies with $u=j_U$: localization is a morphism of topoi $j_U^{-1}\\dashv j_{U*}$ with $j_U^{-1}$ exact (Stacks Section 00XZ), and $j_U^{-1}\\mathcal O=\\mathcal O_U$, so $u^*$ is restriction and restricted K-flat flat-term complexes stay K-flat with flat terms. Compute steps 1--4 with K-flat, flat-term representatives and K-injective targets: their restrictions are such representatives on the slice, and the Hom and tensor comparisons are the sectionwise identifications on them. On each object $V\\to U$ the uncurrying map still sends $(f,x)$ to $f(x)$, composition sends $(f,g,x)$ to $f(g(x))$, and exchange multiplies by the same $(-1)^{|x||\\phi|}$. Thus these comparisons preserve the adjunct identity that defines $\\epsilon$, the composite defining $c$, and the transpose defining $b$. Adjunction is a bijection, so the compared maps are exactly $e$ and $b$ on the slice. This argument uses arbitrary resolution models, not the extra hypotheses of the optional ordinary normalizations.",
+   "text": "Use [lem-weil-pbc-ringed-slice-evaluation-transpose] on arbitrary derived objects. Its canonical restriction comparisons preserve counits, transposition and Koszul symmetry. Its $\\rho$ is the summandwise pure-tensor isomorphism of [lem-sfb-localized-site-tensor-restriction] on K-flat flat-term models, and the associator and right unitor of [lem-sf-ringed-derived-closed-symmetric-monoidal] are induced there by the module-sheaf associativity and scalar-multiplication maps; these commute with restriction sectionwise and $r\\mathcal O[0]=\\mathcal O_U[0]$, so $\\rho$ intertwines $\\alpha$ and the unitor. Restrict the two transposed formulas in step 2: the first becomes $B|_U$ tensor coefficient evaluation followed by its unitor, and the second becomes exchanged coefficient evaluation on the slice. Their transposes are exactly $e$ and $b$ there. This proves restriction compatibility without either optional ordinary-representative hypothesis.",
    "uses": [
-    "def-pur-localized-ringed-site",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-pur-kinjective-restrict-localized",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves"
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JB (lemma-restriction-RHom-to-U); Tag 07A4 (lemma-pullback-tensor-product); Sites Section 00XZ (sites-section-localize)"
+    "place": "Tag 08JB; canonical tensor-Hom evaluation and symmetry under localization"
    }
   }
  ],
  "proof_deps": [
   "def-coef-ringed-tensor-hom-model",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-pur-localized-ringed-site",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kinjective-restrict-localized",
-  "lem-pur-rhom-well-defined",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-sc-hom-complex-projections",
   "lem-sc-hom-complex-unit-iso",
   "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-sfb-ringed-hom-composition-model",
+  "lem-sfb-ringed-ordinary-evaluation-localization",
+  "lem-sfb-ringed-signed-bidual-localization",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose"
  ],
  "proof_origin": {
-  "by": "worker",
-  "group": "Z6",
+  "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08JD, 0A97, 0A98 and 08JB. Z6 reuses lem-sf-ringed-derived-closed-symmetric-monoidal for model existence and proves the ordinary signed bidual map directly from Hom-product projections. The remaining evaluation, derived-normalization and restriction steps retain their plans."
+  "place": "Tags 0A91, 0A97, 0A98, 08JD, 08JB; short assembly after the human-requested re-split, with all former normalization arguments allocated to independent statement-only nodes."
  },
  "mathlib_searches": [
   {
@@ -247,21 +199,20 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-ringed-site-duality-maps",
   "worker": "stage1",
-  "group": "Q41",
-  "summary": "Kept the imported statement unchanged (arbitrary unbounded objects of D(O) on a small commutative ringed site; no perfectness or invertibility). Step 1 builds the tensor-Hom adjunction for the actual H from K-flat flat-term and K-injective models; step 2 records the Koszul exchange, associator and K-flat model comparisons; step 3 defines internal composition as the transpose of two evaluations (Stacks 0A91/0A98); step 4 specializes to e_{A,B} (Stacks 08JD) and defines b_A with naturality; steps 5-6 verify the two ordinary-representative normalizations and their signs; step 7 proves slice compatibility (Stacks 08JB). The proposed helper node was dropped; no new node.",
-  "blueprint": "det-thm-sf-ctf-stability-internal-hom, proof second paragraph final sentence: construct the coefficient-dual comparison and bidual map before the separate perfectness/invertibility proof. Steps 1--4 derive the canonical maps from tensor--Hom currying; steps 5--6 verify their ordinary representative formulas; step 7 proves slice compatibility.",
-  "by": "Q41"
+  "group": "NS",
+  "summary": "Human-requested re-split: unchanged statement, three independent statement-only work items for derived Hom composition, ordinary unsigned evaluation localization, and signed bidual localization. Existing slice-evaluation-transpose already carries the restriction argument, so it is reused. Full old proof and argument allocation are retained in report.md.",
+  "blueprint": "det-thm-sf-ctf-stability-internal-hom, proof second paragraph final sentence: construction and normalization of the coefficient-dual comparison before perfectness. Assembly steps 1-2 give the maps, steps 3-4 their representative formulas, step 5 their localization compatibility."
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q41-d3bd77b8c",
-  "group": "Q41",
+  "reviewer": "NT-cc-NS-7b5357ef6",
+  "group": "NS",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-d3bd77b8c (reviewer sub-agent of L); spot-checked: I read the whole delivery, which is only the item: the second reader dropped the helper composition node, so there is no new node. The statement is unchanged and matches Stacks 08JD (a special case of 0A98) and, for b_A, the coefficient-unit case of 0A97. It covers arbitrary unbounded objects of D(O) on a small commutative ringed site, adds no perfectness, and claims no isomorphism. Step 1 builds the tensor-Hom adjunction for the actual H from K-flat flat-term and K-injective models; I checked every hypothesis there, and the uncurrying t⊗p->f(t)(p) is sign-free and agrees with the Hom and Tot differentials. Steps 2-4: I verified the exchange signs, the transpose giving composition (f,g)->f∘g as in Stacks more-algebra lemma-composition, the dinaturality in L, and the domains in the naturality equations for e and b. Steps 5-6: I recomputed both sign checks, yφd_E with sign (-1)^{p+q+1}, and (-1)^{a+1}φ(dx) for the bidual. The K-flat and quasi-isomorphism hypotheses are used exactly where needed. Step 7 uses exact restriction, restricted K-injectives and 08JB. Small cases checked: A=O[0], O[n], 0, and complexes in degree 0. Every cited unit is in the transitive uses of sk-thm-sf-ctf-stability, so no tool_uses are needed and none are accepted. No SGA source is cited. My duplicate search over 08JD/0A97/0A98/bidual found only scheme, perfect-complex or definition-level nodes, none the same as the item. The blueprint place (internal-Hom proof, second paragraph, last sentence) checks out. Fixes in the corrected item file: (1) step 7 now states why the tensor-pullback node applies: localization j_U is a morphism of topoi with j_U^{-1}O=O_U (Stacks Section 00XZ), so restricted K-flat flat-term complexes stay K-flat with flat terms; (2) the split_report gets the missing item, worker, group and summary fields. No statement, uses or proof_deps changed.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-7b5357ef6 (reviewer sub-agent of L); spot-checked: Human re-split of 2026-10-21 (repair note checked): item statement byte-identical; 3 statement-only unsplit new nodes of comparable size (composition 0A98, ordinary evaluation 08JD/08JE, signed bidual 0A97), each with grep/loogle/leansearch/leanfinder searches; assembly 2135 chars, 2612 after the fix. Every old proof step has a home: steps 1-2 and 4 stay as short assembly steps; steps 3, 5 and 6 are the new nodes with the old content in their statements; step 7 now cites the existing lem-weil-pbc-ringed-slice-evaluation-transpose (full statement read; it does not reach the item, and no new node creates a cycle). Stacks sources checked at sites-cohomology lines 8637, 8965, 8998 and 9114. Recomputed chain-map signs: evaluation unsigned, dy·φ(x)+(-1)^{p+q+1}yφ(dx); bidual (-1)^{a+1}φ(dx) on both sides; composition is Leibniz. Edge cases checked: O[0], O[n], zero complexes, characteristic 2. Hypotheses of the new nodes are exactly the item's; no target weakened. No duplicates among the 0A97/0A98/08JD/bidual/composition candidates; no SGA. Fixes to the item (statement and stmt_deps unchanged): (1) step 5 used ρ's compatibility with the associator and right unitor (they appear in the transposed formula for e), which the slice node does not state; the step now derives it from the pure-tensor model of ρ via lem-sfb-localized-site-tensor-restriction and the closed-monoidal node (both added to uses, the first also to proof_deps). (2) Step 2 again says the unit-Hom isomorphism lem-sc-hom-complex-unit-iso is applied to a K-injective representative of B, as old step 4 did. Snapshot chapter symlinks were dangling; I read the other chapters from sibling dagsnap 3eb42cc9.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.RingedSiteDualityMaps",

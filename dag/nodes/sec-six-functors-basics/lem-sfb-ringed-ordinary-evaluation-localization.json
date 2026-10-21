@@ -1,0 +1,77 @@
+{
+ "id": "lem-sfb-ringed-ordinary-evaluation-localization",
+ "kind": "statement",
+ "title": "Unsigned ordinary evaluation and its localization through the two augmentation comparisons",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the chosen module universe [def-weil-size-convention], with $\\mathcal O$ a sheaf of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived localization $Q$ with category $D(\\mathcal O)$ [def-weil-abstract-derived-category], the Hom complex $\\mathcal Hom^\\bullet$ [def-pur-hom-complex], total tensor [def-pc-tensor-complex-sheaves], K-flat complexes [def-pc-kflat-complex], and $H=R\\mathcal Hom$ with its fixed K-injective augmentations $\\eta_F:F\\to I(F)$ [def-pur-derived-internal-hom]. Fix the closed symmetric monoidal structure and its canonical K-flat tensor and uncurrying models [def-coef-ringed-tensor-hom-model, lem-sf-ringed-derived-closed-symmetric-monoidal]. Write $\\operatorname{tr}$ for its right-tensor adjunction and $\\epsilon_{L,M}:H(L,M)\\otimes^{\\mathbf L}L\\to M$ for its counit. Write $O=\\mathcal O[0]$ and also $O$ for its derived image. For arbitrary complexes $E,F$ put $D=\\mathcal Hom^\\bullet(E,O)$. There is a unique chain map\n$$a_{E,F}:\\operatorname{Tot}(F\\otimes D)\\to\\mathcal Hom^\\bullet(E,F)$$\nwhose component on local homogeneous sections $y\\in F^p$, $\\phi\\in D^q$, $x\\in E^a$ is $a_{E,F}(y\\otimes\\phi)(x)=y\\phi(x)$ in $F^{a+p+q}$ when $a+q=0$, and is zero when $a+q\\ne0$. Here the coefficient action and the identifications with degree zero of $O$ are the actual module-sheaf action and coefficient-unit identifications. The formula fixes the map on the sheafified pure-tensor generators, total-coproduct inclusions and all Hom-product projections. Define\n$$\\theta_{A,B}=\\operatorname{tr}\\bigl((B\\otimes^{\\mathbf L}H(A,O))\\otimes^{\\mathbf L}A\\xrightarrow{\\alpha}B\\otimes^{\\mathbf L}(H(A,O)\\otimes^{\\mathbf L}A)\\xrightarrow{1\\otimes\\epsilon_{A,O}}B\\otimes^{\\mathbf L}O\\xrightarrow{\\rho}B\\bigr).$$\nSuppose $F,D$ are K-flat, and the maps $\\mathcal Hom^\\bullet(E,\\eta_O)$ and $\\mathcal Hom^\\bullet(E,\\eta_F)$ are quasi-isomorphisms. Let $\\gamma_{E,G}:Q\\mathcal Hom^\\bullet(E,G)\\xrightarrow{\\sim}H(QE,QG)$, for $G=O,F$, be induced by those augmentations and the fixed derived-Hom comparisons. Let $\\mu:Q\\operatorname{Tot}(F\\otimes D)\\xrightarrow{\\sim}QF\\otimes^{\\mathbf L}QD$ be the canonical K-flat tensor comparison [lem-weil-pbc-site-derived-tensor-descent]. Then\n$$\\theta_{QE,QF}\\circ(1\\otimes\\gamma_{E,O})\\circ\\mu=\\gamma_{E,F}\\circ Q(a_{E,F}).$$\nIn particular the ordinary formula has no Koszul sign. No K-flatness of $E$ or K-injectivity of $F$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JD (lemma-dual), equation-eval (Tag 08JE), Tag 0A98 (lemma-internal-hom-composition), and section-hom-complexes; ordinary chain map and its fixed-augmentation derived comparison."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ihomUnitTensorToIhom|[Ee]valuation.*[Cc]ochain|[Cc]ochain.*[Ee]valuation",
+   "results": "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean:51",
+   "date": "2026-10-21",
+   "verdict": "no match: module dual-tensor maps, total tensors and underived sheafification do not give the fixed-augmentation ringed-site derived normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomUnitTensorToIhom\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: module dual-tensor maps, total tensors and underived sheafification do not give the fixed-augmentation ringed-site derived normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor a complex of module sheaves with the Hom complex dual into the coefficient unit and obtain the derived internal Hom comparison with no sign",
+   "results": "HomologicalComplex.tensorObj; dualTensorHomEquiv; HomologicalComplex.rightUnitor'; CategoryTheory.tensorRightHomEquiv; HomologicalComplex.instHasTensorTensorUnit; HomologicalComplex.rightUnitor; map_dualTensorHom; HomologicalComplex.instHasTensorTensorUnit_1",
+   "date": "2026-10-21",
+   "verdict": "no match: module dual-tensor maps, total tensors and underived sheafification do not give the fixed-augmentation ringed-site derived normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a ringed site the unsigned map Tot(F tensor Hom(E,O)) to Hom(E,F) represents the adjoint of coefficient evaluation under K-flat and K-injective comparisons",
+   "results": "PresheafOfModules.sheafificationAdjunction_homEquiv_apply; PresheafOfModules.sheafificationHomEquiv; PresheafOfModules.sheafificationAdjunction; PresheafOfModules.sheafifyHomEquiv'; PresheafOfModules.sheafifyHomEquiv; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; LightCondensed.ihomPoints; PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+   "date": "2026-10-21",
+   "verdict": "no match: module dual-tensor maps, total tensors and underived sheafification do not give the fixed-augmentation ringed-site derived normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-duality-maps",
+  "date": "2026-10-21",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Proof, second paragraph, final sentence: the coefficient-dual evaluation comparison in the internal-Hom tensor-with-dual identification; Unsigned ordinary evaluation and its localization through the two augmentation comparisons.",
+   "via": [
+    "lem-sfb-ringed-site-duality-maps",
+    "lem-sfb-ringed-site-perfect-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

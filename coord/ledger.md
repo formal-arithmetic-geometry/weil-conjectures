@@ -20949,3 +20949,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/Q09/lem-sfb-kinjective-direct-image-open-word-model (reviewer PASS; first push; new nodes: 0)
 - 08:09 L: merged deliver/Q23/lem-trf-integral-pullback-comparison-realization (reviewer PASS; after a return; new nodes: 3)
 - 08:09 L: merged deliver/Q27/lem-pur-comparison-global-resolution-model (reviewer PASS; first push; new nodes: 0)
+- 08:09 L: merged deliver/NS/lem-sfb-ringed-site-duality-maps (reviewer FIX; after a return; new nodes: 3)

@@ -1,0 +1,76 @@
+{
+ "id": "lem-sfb-ringed-hom-composition-model",
+ "kind": "statement",
+ "title": "Hom-complex composition and its agreement with the derived adjunction",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the chosen module universe [def-weil-size-convention], with $\\mathcal O$ a sheaf of commutative rings. Use module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived localization $Q$ with category $D(\\mathcal O)$ [def-weil-abstract-derived-category], the Hom complex $\\mathcal Hom^\\bullet$ [def-pur-hom-complex], total tensor [def-pc-tensor-complex-sheaves], K-flat complexes [def-pc-kflat-complex], and $H=R\\mathcal Hom$ with its fixed K-injective augmentations $\\eta_F:F\\to I(F)$ [def-pur-derived-internal-hom]. Fix the closed symmetric monoidal structure and its canonical K-flat tensor and uncurrying models [def-coef-ringed-tensor-hom-model, lem-sf-ringed-derived-closed-symmetric-monoidal]. Write $\\operatorname{tr}$ for its right-tensor adjunction and $\\epsilon_{L,M}:H(L,M)\\otimes^{\\mathbf L}L\\to M$ for its counit. Write $O=\\mathcal O[0]$ and also $O$ for its derived image. For $K,L,M\\in D(\\mathcal O)$ define\n$$c_{K,L,M}=\\operatorname{tr}\\bigl(\\epsilon_{L,M}\\circ(1\\otimes\\epsilon_{K,L})\\circ\\alpha\\bigr):H(L,M)\\otimes^{\\mathbf L}H(K,L)\\to H(K,M),$$\nwhere $\\alpha$ rebrackets $(H(L,M)\\otimes^{\\mathbf L}H(K,L))\\otimes^{\\mathbf L}K$. This family is natural contravariantly in $K$, covariantly in $M$, and dinatural in $L$: for $u:L\\to L'$,\n$$c_{K,L',M}\\circ(1\\otimes H(K,u))=c_{K,L,M}\\circ(H(u,M)\\otimes1)$$\nas maps from $H(L',M)\\otimes^{\\mathbf L}H(K,L)$ to $H(K,M)$. It agrees with derived Hom-complex composition as follows. For arbitrary complexes $E,J,I$, there is a unique chain map\n$$\\operatorname{Tot}(\\mathcal Hom^\\bullet(J,I)\\otimes\\mathcal Hom^\\bullet(E,J))\\to\\mathcal Hom^\\bullet(E,I)$$\nwhose local homogeneous formula is $f\\otimes g\\mapsto f\\circ g$, without an extra sign. If $J,I$ are K-injective and $t:T\\to\\mathcal Hom^\\bullet(E,J)$ is a K-flat resolution, the localization of the composite of $1\\otimes t$ with this chain map represents $c_{QE,QJ,QI}$ under the canonical tensor and Hom comparisons. No boundedness or perfectness is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A91 (lemma-composition), 0A98 (lemma-internal-hom-composition), with section-hom-complexes and lemma-internal-hom; identification with the normalized adjunction and dinaturality."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ihom.*[Cc]omp|[Cc]omp.*ihom|internalHom.*[Cc]omp",
+   "results": "Mathlib/RingTheory/Spectrum/Prime/Topology.lean:718; Mathlib/Condensed/Light/InternallyProjective.lean:53; Mathlib/Condensed/Light/InternallyProjective.lean:83; Mathlib/Condensed/Light/InternallyProjective.lean:118; Mathlib/Condensed/Light/InternallyProjective.lean:125; Mathlib/AlgebraicTopology/DoldKan/NReflectsIso.lean:90; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean:149; Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/PushoutProduct.lean:155; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean:64; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean:180; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean:188; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean:190; Mathlib/CategoryTheory/Idempotents/HomologicalComplex.lean:191; Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean:158; Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean:186; Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean:225; Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean:235; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean:114; Mathlib/CategoryTheory/Monoidal/DayConvolution/Closed.lean:164; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:81; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:82; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:86; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:87; Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean:95; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean:127",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and cochains do not identify the actual sheaf Hom-complex construction after K-flat resolution with the fixed K-injective derived adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, \"comp\"",
+   "results": "CategoryTheory.MonoidalCategory.Arrow.PushoutProduct.tensorHom_comp_tensorHom; CategoryTheory.MonoidalClosed.enrichedCategorySelf_comp; CategoryTheory.expComparison; CategoryTheory.MonoidalClosedFunctor.comparison_iso; CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso; CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso; CategoryTheory.expComparison_whiskerLeft; CategoryTheory.uncurry_expComparison; CategoryTheory.coev_expComparison; CategoryTheory.expComparison_ev; CategoryTheory.Functor.instIsLeftAdjointDiscreteTensorLeftCompIncl; CategoryTheory.prodComparison_iso",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and cochains do not identify the actual sheaf Hom-complex construction after K-flat resolution with the fixed K-injective derived adjunction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived composition RHom(L,M) tensor RHom(K,L) to RHom(K,M) is natural and dinatural and computed by composition of cochain maps",
+   "results": "CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp; CategoryTheory.NatTrans.rightDerived_comp; CategoryTheory.Functor.rightDerivedNatTrans_comp; CochainComplex.HomComplex.Cochain.comp; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality; CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc; CategoryTheory.ShortComplex.mapRightHomologyIso_hom_naturality_assoc; HomologicalComplex.opcyclesMap_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and cochains do not identify the actual sheaf Hom-complex construction after K-flat resolution with the fixed K-injective derived adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of derived internal Hom on a ringed site is the transpose of two tensor Hom evaluations and agrees with composition of Hom complexes",
+   "results": "LightCondensed.ihom_map_val_app; LightCondensed.ihomPoints_symm_comp; SheafOfModules.unitHomEquiv_comp_apply; LightCondensed.ihomPoints; LightCondensed.ihomPoints_apply; AlgebraicGeometry.Scheme.Modules.Hom.comp_app; SheafOfModules.unitHomEquiv_symm_comp; CategoryTheory.Sheaf.ΓHomEquiv_naturality_right",
+   "date": "2026-10-21",
+   "verdict": "no match: abstract closed composition and cochains do not identify the actual sheaf Hom-complex construction after K-flat resolution with the fixed K-injective derived adjunction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-ringed-site-duality-maps",
+  "date": "2026-10-21",
+  "group": "NS"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Proof, second paragraph, final sentence: the coefficient-dual evaluation comparison in the internal-Hom tensor-with-dual identification; Hom-complex composition and its agreement with the derived adjunction.",
+   "via": [
+    "lem-sfb-ringed-site-duality-maps",
+    "lem-sfb-ringed-site-perfect-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
