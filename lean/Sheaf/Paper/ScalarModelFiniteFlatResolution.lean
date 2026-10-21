@@ -89,13 +89,24 @@ def independentConstantRingUnit (R : Type r) [CommRing R] :
   Functor.whiskerRight (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of R)))
     (forget₂ CommRingCat.{r} RingCat.{r})
 
+-- Keep the existing instance parameters in the public interface.
+set_option linter.unusedSectionVars false in
 /-- Forgetting commutativity preserves local bijectivity of the coefficient unit.
 Source: Stacks 03CY (blueprint: lem-sfb-scalar-model-finite-flat-resolution).
 Proof: the functions on sections and their equalizer and image covering sieves do not
 change under forgetting commutativity. The ring-sheafification unit is locally bijective. -/
 theorem independentConstantRingUnit_locallyBijective (R : Type r) [CommRing R] :
     Presheaf.IsLocallyInjective J (independentConstantRingUnit J R) ∧
-      Presheaf.IsLocallySurjective J (independentConstantRingUnit J R) := sorry
+      Presheaf.IsLocallySurjective J (independentConstantRingUnit J R) := by
+  constructor
+  · apply (Presheaf.isLocallyInjective_forget_iff _ _).mp
+    change Presheaf.IsLocallyInjective J (Functor.whiskerRight (toSheafify J
+      ((Functor.const Cᵒᵖ).obj (CommRingCat.of R))) (forget CommRingCat.{r}))
+    infer_instance
+  · apply (Presheaf.isLocallySurjective_iff_whisker_forget _ _).mpr
+    change Presheaf.IsLocallySurjective J (Functor.whiskerRight (toSheafify J
+      ((Functor.const Cᵒᵖ).obj (CommRingCat.of R))) (forget CommRingCat.{r}))
+    infer_instance
 
 /-- Sheafify the same constant module presheaf over the commutative coefficient presentation.
 Source: Stacks 03CY and 093T (blueprint: lem-sfb-scalar-model-finite-flat-resolution). -/
