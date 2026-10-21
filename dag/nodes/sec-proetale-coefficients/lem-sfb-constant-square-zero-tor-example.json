@@ -1,0 +1,138 @@
+{
+ "id": "lem-sfb-constant-square-zero-tor-example",
+ "kind": "statement",
+ "title": "The constant square-zero residue and its truncation counterexample",
+ "statement": "Let ell be prime, k a separably closed field, X=Spec k, and Lambda the discrete continuous condensed ring A=Z/ell^2. Let P be the cokernel of ell times the identity of the regular condensed Lambda-module, and M its monoidal inverse image to X. Then M is constant-model constructible, M[0] has no finite Tor amplitude, and there exists a bounded constant-model constructible complex K of finite Tor amplitude such that truncGE_0(K) has no finite Tor amplitude. The assertion is invariant under a specified condensed coefficient-ring isomorphism, so it is stated for an abstract commutative condensed ring isomorphic to the continuous finite ring.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "The examples, constant-sheaf specialization and the two-term truncation counterexample"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-constructible",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "The annihilator of ell in Z/ell^2 is the ideal (ell). Use the periodic multiplication-by-ell free resolution of F=A/(ell). After tensoring with F all differentials vanish, so each nonpositive tensor homology module is F. Constant sheafification, its finite-discrete ring comparison, and scheme inverse image identify the quotient with the displayed internal cokernel.",
+   "uses": [
+    "lem-sfb-square-zero-periodic-tensor",
+    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+    "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Constant F is nonzero on the nonempty scheme Spec k: nonzero constant sections cannot vanish after any jointly surjective cover. Thus the periodic tensor computation contradicts every finite lower Tor bound. The same finite scalar presentation exhibits M as a finite constant model on the identity cover and the one-stratum stratification.",
+   "uses": [
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the cone of multiplication by ell on the regular module in degree zero. Its two terms are finite free and its cohomology in degrees -1 and 0 is M. Thus it is bounded constructible and has Tor amplitude [-1,0]. Its upper truncation at zero is M[0], which has no finite Tor amplitude by the preceding calculation.",
+   "uses": [
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport along the specified coefficient isomorphism. Exact monoidal scalar restriction preserves the regular module, its integer-scalar endomorphisms, their cokernels, the finite constant presentations and the derived tensor interval. The inverse equivalence reflects finite Tor amplitude and commutes with the canonical truncation, so all three conclusions transfer.",
+   "uses": [
+    "lem-sfb-condensed-coefficient-iso-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-square-zero-periodic-tensor",
+  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "det-def-sfb-constructible-local-model",
+  "lem-sf-derived-concentrated-single",
+  "lem-sfb-condensed-coefficient-iso-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "The examples, constant-sheaf specialization and the two-term truncation counterexample; R4 extracted the internal-model comparison from the parent assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The constant residue Zmod prime over prime squared has infinite Tor dimension and a two term finite free cone whose truncation has infinite Tor dimension",
+   "results": "8 hits: generic HasProjectiveDimensionLT, HasInjectiveDimensionLT, HasProjectiveDimensionLE, HasInjectiveDimensionLE, dimension constructors and projective Tor vanishing.",
+   "date": "2026-10-21",
+   "verdict": "No match for the constant-sheaf calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"ZMod\"",
+   "results": "12 hits: zmodAddEquivOfGenerator, zmodMulEquivOfGenerator, their evaluation lemmas, torsionBy.zmodModule, ZMod.not_isUnit_of_mem_primeFactors.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "square_zero.*periodic|ZMod.*Tor|trunc.*TorAmplitude",
+   "results": "25 unrelated ZMod text matches, including Dirichlet characters and Padic ring homomorphisms.",
+   "date": "2026-10-21",
+   "verdict": "No match. The project SquareZeroPeriodicTensor supplies the intrinsic tensor calculation, but a comparison with the specified internal cokernel and truncation remains necessary."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant residue sheaf over ZMod prime squared has infinite Tor dimension and its finite free presentation cone has finite Tor amplitude",
+   "results": "8 hits, all generic module-sheaf presentation facts: SheafOfModules.IsFinitePresentation.mk; SheafOfModules.QuasicoherentData.IsFinitePresentation.mk; SheafOfModules.isFinitePresentation; SheafOfModules.IsFinitePresentation.recOn; SheafOfModules.IsFinitePresentation; SheafOfModules.free; SheafOfModules.Presentation.isColimit; SheafOfModules.QuasicoherentData.IsFinitePresentation.",
+   "date": "2026-10-22",
+   "verdict": "No match: no condensed coefficient identification, Tor bound or periodic constant-sheaf counterexample is stated by these generic presentation and local-ring results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizingClosureCtfEqualsBc",
+  "date": "2026-10-21",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-localizing-closure-ctf-equals-bc",
+   "place": "The examples, periodic resolution and perfect complex and truncations"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-localizing-closure",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantSquareZeroTorExample",
+  "file": "lean/Sheaf/Paper/ConstantSquareZeroTorExample.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.constant_square_zero_tor_example",
+  "statement": "theorem constant_square_zero_tor_example (ℓ : ℕ) [Fact ℓ.Prime]\n    (Λ : Sheaf (coherentTopology Profinite.{0}) Ab.{1})\n    [MonObj Λ] [IsCommMonObj Λ]\n    (hΛ : Nonempty (Mon.mk Λ ≅\n      Mon.mk (Profinite.continuousCoefficientRingObj.{0} (ZMod (ℓ ^ 2)))))\n    (k : Type) [Field k] [IsSepClosed k] :\n    let X : Scheme.{0} := Scheme.Spec.obj (Opposite.op (CommRingCat.of k))\n    let C := Mod (Sheaf (coherentTopology Profinite.{0}) Ab.{1}) Λ\n    let P := cokernel ((ℓ : ℕ) • (𝟙 (𝟙_ C)))\n    let Cₓ := Mod (Sheaf (Scheme.ProEt.topology X) Ab.{1}) (condensedRingObj Λ X)\n    let M : Cₓ := ((upperStarFromPoint X).mapMod Λ).obj P\n    IsConstantModelConstructible Λ X M ∧\n    ¬ _root_.DerivedCategory.finiteTorAmplitude Cₓ\n      ((_root_.DerivedCategory.singleFunctor Cₓ 0).obj M) ∧\n    ∃ K : DerivedCategory Cₓ,\n      (constantModelBoundedConstructible Λ X ⊓\n        _root_.DerivedCategory.finiteTorAmplitude Cₓ) K ∧\n      ¬ _root_.DerivedCategory.finiteTorAmplitude Cₓ\n        ((_root_.DerivedCategory.TStructure.t.truncGE 0).obj K)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ae35d",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261021T173342-L-3590144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ae35d",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261021T173342-L-3590144",
+  "kind": "interface",
+  "note": "independent cc review: item node det-def-localizing-closure-ctf-equals-bc + 2 new nodes vs delivered Lean (unchanged main signature, proof via padic-local-model-tor, stratified devissage, cohomology-interval, finite-discrete encoding, square-zero example); unit sk-def-localizing-closure realized empty, so dropping CartesianCoefficients bypasses nothing; 4 direct importers compiled in sandbox"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-padic-constant-local-model-tor",
+ "kind": "statement",
+ "title": "Uniform Tor intervals for finite constant p-adic scalar models",
+ "statement": "Let ell be prime and Lambda a commutative condensed ring isomorphic to Z_ell or O_E, with c=-1, or isomorphic to Q_ell, E, or the finite-subextension-valued algebraic closure, with c=0. Here E ranges over finite subextensions of the fixed p-adic algebraic closure. For every scheme S and every Lambda_S-module N admitting a finite constant local model [det-def-sfb-constructible-local-model], the degree-zero complex N[0] has Tor amplitude [c,0] [det-def-sfb-constructible-tor-amplitude]. No finiteness hypothesis on S is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Local models and Locality paragraphs"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-qlbar-condensed",
+  "det-def-sfb-constructible-local-model",
+  "det-def-sfb-constructible-tor-amplitude"
+ ],
+ "proof": [
+  {
+   "text": "Identify Lambda(*) with the stated scalar ring using evaluation of continuous functions at the point. The finite-subextension-valued closure has the algebraic closure as its scalar ring. Finite matrices on the condensed point give the scalar modules in the local-model definition. Transport by the coefficient isomorphism throughout.",
+   "uses": [
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a DVR use its finite free presentation with free kernel. Constant sheafification is exact and the scalar-to-continuous coefficient extension is flat, because the continuous-function modules are torsion-free over the DVR. Apply the monoidal inverse image to get a two-term finite-free model. For a field use a finite basis and the degree-zero finite-free model. The independent-coefficient and internal-module encodings preserve these cokernels, finite powers and the scalar matrix.",
+   "uses": [
+    "lem-sfb-scalar-model-finite-flat-resolution",
+    "lem-sfb-constant-to-continuous-scalar-flat",
+    "lem-sfb-finite-constant-model-two-term-free-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute tensor using the bounded flat models, obtaining the same interval against every test module. Exact restriction to the pro-etale cover commutes with derived tensor, and vanishing descends by joint conservativity. The internal-section equivalence gives the stated internal Tor interval. Empty covers and zero powers are allowed.",
+   "uses": [
+    "lem-sfb-tor-interval-local-detection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "det-def-sfb-constructible-local-model",
+  "lem-sfb-scalar-model-finite-flat-resolution",
+  "lem-sfb-constant-to-continuous-scalar-flat",
+  "lem-sfb-finite-constant-model-two-term-free-resolution",
+  "lem-sfb-tor-interval-local-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Local models and Locality paragraphs; R4 extracted the internal-model comparison from the parent assembly"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite constant local models over p-adic integers have Tor amplitude minus one to zero, and over p-adic fields have Tor amplitude zero",
+   "results": "8 hits: BDeRhamPlus, BDeRham, instCommRingBDeRhamPlus, DerivedCategory.IsGE, DerivedCategory.isGE_iff, CategoryTheory.isZero_Tor_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, DerivedCategory.IsLE",
+   "date": "2026-10-21",
+   "verdict": "No match: perfectoid definitions and generic homological bounds do not provide scalar-model comparison or cover descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "square_zero.*tensor|constant.*Tor|local.*Tor",
+   "results": "25 unrelated text matches, chiefly local and constant terminology in number theory and category theory.",
+   "date": "2026-10-21",
+   "verdict": "No match. Local repository search found ScalarModelFiniteFlatResolution, FiniteConstantModelResolution and ProEtaleTorIntervalLocalDetection; their intrinsic/internal comparison is the outstanding glue."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite constant local model sheaves over a discrete valuation ring have Tor amplitude minus one to zero",
+   "results": "8 hits: IsDiscreteValuationRing.toIsLocalRing; SheafOfModules.isFinitePresentation; SheafOfModules.IsFiniteType; SheafOfModules.Finite.hasFiniteLimits; ModuleCat.tildeInModuleCat; SheafOfModules.IsFiniteType.mk; IsLocalRing.finrank_CotangentSpace_eq_one_iff; AlgebraicGeometry.LocallyRingedSpace.𝒪.",
+   "date": "2026-10-22",
+   "verdict": "No match: no condensed coefficient identification, Tor bound or periodic constant-sheaf counterexample is stated by these generic presentation and local-ring results."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalizingClosureCtfEqualsBc",
+  "date": "2026-10-21",
+  "group": "R4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-localizing-closure-ctf-equals-bc",
+   "place": "Local models and Locality paragraphs"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-localizing-closure",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PadicConstantLocalModelTor",
+  "file": "lean/Sheaf/Paper/PadicConstantLocalModelTor.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.padic_constant_local_model_tor",
+  "statement": "theorem padic_constant_local_model_tor\n    (ℓ : ℕ) [Fact ℓ.Prime]\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]\n    (c : ℤ)\n    (hΛ :\n      (c = -1 ∧ (Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨\n        ∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E)))) ∨\n      (c = 0 ∧ (Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨\n        (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,\n          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨\n        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)))))\n    (S : Scheme.{u})\n    (N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))\n    (hN : HasFiniteConstantLocalModel Λ S N) :\n    _root_.DerivedCategory.torAmplitudeIn _ c 0\n      ((_root_.DerivedCategory.singleFunctor _ 0).obj N)",
+  "branch": "sheaf-dag",
+  "by": "R4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ae35d",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261021T173342-L-3590144",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ae35d",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261021T173342-L-3590144",
+  "kind": "interface",
+  "note": "independent cc review: item node det-def-localizing-closure-ctf-equals-bc + 2 new nodes vs delivered Lean (unchanged main signature, proof via padic-local-model-tor, stratified devissage, cohomology-interval, finite-discrete encoding, square-zero example); unit sk-def-localizing-closure realized empty, so dropping CartesianCoefficients bypasses nothing; 4 direct importers compiled in sandbox"
+ }
+}

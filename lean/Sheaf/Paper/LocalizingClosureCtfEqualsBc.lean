@@ -11,30 +11,20 @@ public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.ConstantModelTorAmplitude
 public import WeilConjectures.RingTheory.GlobalDimension
-import Sheaf.Paper.LocalizingClosureExistence
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Homology.KFlatTelescopeClosure
-import Sheaf.AlgebraicGeometry.ClassicalModuleWeakSerre
-import Sheaf.AlgebraicGeometry.ConstructiblePartitionLocalClosedStratum
-import Sheaf.AlgebraicGeometry.FiniteConstantLocalModel
-import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
-import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
-import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheaves
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.PullbackConstantModelConstructible
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.CartesianCoefficients
-import Sheaf.Paper.FiniteRingConstructibleSheafOrigin
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedProjectionRestriction
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
+import Sheaf.Paper.PadicConstantLocalModelTor
+import Sheaf.Paper.ConstantSquareZeroTorExample
+import Sheaf.Paper.StratifiedTorIntervalDevissage
+import Sheaf.Paper.CohomologyTorInterval
+import all Sheaf.Paper.ConstructibleCoefficientSerre
+import Sheaf.Paper.CohomologyInWeakSerreSubcategory
+import Sheaf.Paper.FiniteDiscreteEncodingConstructibility
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Paper.SquareZeroPeriodicTensor
+import Mathlib.RingTheory.Nilpotent.Basic
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
 
 /-!
 # Constructible finite Tor objects and bounded constructible objects
@@ -201,36 +191,342 @@ def localizingClosureCtfEqualsBcAssertions
   constantFiniteRingExample ℓ ∧
   finiteRingTruncationFailure ℓ
 
-/-- For a prime `ℓ`, an algebraic closure of `ℚ_ℓ`, and a finite extension `E`, every
-qcqs scheme has the stated Tor bounds for the integral and field coefficient cases; hence
-`Dᵇ_ctf = Dᵇ_c` and their localizing closures agree. The final conjunction records the
-field specialization of the first bound. The scalar perfectness convention is the
-`DerivedCategory.IsPerfectRingComplex` predicate from the cited definition node.
+private theorem boundedConstructible_torBounds
+    (X : Scheme.{u}) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ]
+    (hmod : ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+        (condensedRingObj Λ X), IsConstantModelConstructible Λ X M →
+      _root_.DerivedCategory.torAmplitudeIn _ (-1 : ℤ) 0
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj M)) :
+    (∀ (K : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+      (a b : ℤ), a ≤ b → constantModelBoundedConstructible Λ X K →
+        _root_.DerivedCategory.homologyConcentratedIn a b K →
+        _root_.DerivedCategory.torAmplitudeIn _ (a - 1) b K) ∧
+    (constantModelBoundedConstructible Λ X ⊓ _root_.DerivedCategory.finiteTorAmplitude _) =
+      constantModelBoundedConstructible Λ X := by
+  have hcomplex (K : DerivedCategory
+        (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
+      (a b : ℤ) (hab : a ≤ b) (hK : constantModelBoundedConstructible Λ X K)
+      (hbound : _root_.DerivedCategory.homologyConcentratedIn a b K) :
+      _root_.DerivedCategory.torAmplitudeIn _ (a - 1) b K := by
+    have h := torAmplitudeIn_of_cohomology_interval X (Mon.mk Λ) K a b (-1) 0 hab
+      (by omega) (fun q hq ↦ by
+        by_cases hqa : q < a
+        · exact (_root_.DerivedCategory.isGE_iff K a).1 hbound.1 q hqa
+        · exact (_root_.DerivedCategory.isLE_iff K b).1 hbound.2 q (by
+            simp only [Set.mem_Icc] at hq
+            omega))
+      (fun q _ ↦ hmod _ (hK.2 q))
+    simpa only [sub_eq_add_neg, add_zero] using h
+  refine ⟨hcomplex, ?_⟩
+  funext K
+  apply propext
+  constructor
+  · exact And.left
+  · intro hK
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hK.1
+    have ha' : K.IsGE (min a b) :=
+      (_root_.DerivedCategory.isGE_iff K _).2 fun q hq ↦
+        (_root_.DerivedCategory.isGE_iff K a).1 ha q (lt_of_lt_of_le hq (min_le_left _ _))
+    exact ⟨hK, min a b - 1, b,
+      hcomplex K (min a b) b (min_le_right _ _) hK ⟨ha', hb⟩⟩
+
+private theorem ordinary_localModel_iff (A : Type u) [CommRing A]
+    (T : Scheme.{u})
+    (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
+    FiniteDiscreteOrdinary.ordinaryLocalModel A T M ↔
+      IsFiniteLocallyConstant (ULift.{u + 1} A) M := by
+  constructor
+  · rintro ⟨C, hC⟩
+    refine ⟨ULift.{u + 1} C.I₀, fun i ↦ C.X i.down, fun i ↦ C.f i.down, ?_,
+      fun i ↦ hC i.down⟩
+    convert C.mem₀ using 1
+    apply le_antisymm
+    · rintro V f ⟨i⟩
+      exact ⟨i.down⟩
+    · rintro V f ⟨i⟩
+      exact ⟨ULift.up i⟩
+  · rintro ⟨I, W, g, hg, h⟩
+    let C : Scheme.Cover.{u + 1} Scheme.proetalePrecoverage T :=
+      ⟨⟨I, W, g⟩, hg⟩
+    have : Precoverage.Small.{u} Scheme.proetalePrecoverage := by
+      unfold Scheme.proetalePrecoverage
+      infer_instance
+    exact ⟨C.restrictIndexOfSmall.{u}, fun i ↦
+      h (Precoverage.ZeroHypercover.Small.restrictFun C i)⟩
+
+private theorem ordinary_constructible_iff (A : Type u) [CommRing A]
+    (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T]
+    (M : Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A))) :
+    FiniteDiscreteOrdinary.ordinaryConstructible A T M ↔
+      IsConstructible (ULift.{u + 1} A) M := by
+  rw [FiniteDiscreteOrdinary.ordinaryConstructible, if_pos ⟨inferInstance, inferInstance⟩]
+  constructor
+  · rintro ⟨S, hS⟩
+    exact ⟨S, fun i ↦ (ordinary_localModel_iff A _ _).1 (hS i)⟩
+  · rintro ⟨S, hS⟩
+    exact ⟨S, fun i ↦ (ordinary_localModel_iff A _ _).2 (hS i)⟩
+
+private theorem kernel_closed_retract
+    {A : Type*} [Category A] [Abelian A] (P : ObjectProperty A)
+    [P.IsClosedUnderKernels] {M N : A} (e : Retract M N) (hN : P N) : P M := by
+  let f : N ⟶ N := 𝟙 N - e.r ≫ e.i
+  have w : e.i ≫ f = 0 := by simp [f, Preadditive.comp_sub, ← Category.assoc]
+  apply P.prop_of_isLimit_kernelFork (k := Limits.KernelFork.ofι e.i w) _ hN hN
+  refine Limits.KernelFork.IsLimit.ofι e.i w (fun g _ ↦ g ≫ e.r) ?_ ?_
+  · intro W g hg
+    have h : g - g ≫ e.r ≫ e.i = 0 := by
+      simpa [f, Preadditive.comp_sub] using hg
+    simpa only [Category.assoc] using (sub_eq_zero.mp h).symm
+  · intro W g hg m hm
+    rw [← hm]
+    simp
+
+private theorem bounded_homology_thick
+    {A : Type*} [Category A] [Abelian A] [HasDerivedCategory A]
+    (P : ObjectProperty A) [P.ContainsZero] [P.IsClosedUnderIsomorphisms]
+    [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] :
+    (_root_.DerivedCategory.TStructure.t.bounded ⊓ _root_.DerivedCategory.homologyProperty P
+      ).IsClosedUnderIsomorphisms ∧
+    (_root_.DerivedCategory.TStructure.t.bounded ⊓ _root_.DerivedCategory.homologyProperty P
+      ).IsTriangulated ∧
+    (_root_.DerivedCategory.TStructure.t.bounded ⊓ _root_.DerivedCategory.homologyProperty P
+      ).IsStableUnderRetracts := by
+  have : (_root_.DerivedCategory.homologyProperty P).IsTriangulated :=
+    (cohomology_in_weak_serre_subcategory P).1
+  refine ⟨inferInstance, inferInstance, ⟨?_⟩⟩
+  intro M N e hN
+  obtain ⟨a, b, hab⟩ := (_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded N).2 hN.1
+  refine ⟨(_root_.DerivedCategory.exists_homologyConcentratedIn_iff_bounded M).1
+    ⟨a, b, (_root_.DerivedCategory.homologyConcentratedIn a b).prop_of_retract e hab⟩, ?_⟩
+  intro n
+  exact kernel_closed_retract P (e.map (_root_.DerivedCategory.homologyFunctor A n)) (hN.2 n)
+
+private theorem fixed_bounded_constructible_thick (A : Type (u + 1)) [CommRing A]
+    [Finite A] (T : Scheme.{u}) :
+    let P : ObjectProperty (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) :=
+      IsConstructible A
+    (_root_.DerivedCategory.TStructure.t.bounded ⊓ _root_.DerivedCategory.homologyProperty P
+      ).IsClosedUnderIsomorphisms ∧
+    (_root_.DerivedCategory.TStructure.t.bounded ⊓ _root_.DerivedCategory.homologyProperty P
+      ).IsTriangulated ∧
+    (_root_.DerivedCategory.TStructure.t.bounded ⊓ _root_.DerivedCategory.homologyProperty P
+      ).IsStableUnderRetracts := by
+  let P : ObjectProperty (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} A)) :=
+    IsConstructible A
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ isConstructible_of_iso e h⟩
+  let Z := (Limits.HasZeroObject.zero
+    (C := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).choose
+  have hz : IsZero Z := (Limits.HasZeroObject.zero
+    (C := Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).choose_spec
+  have : IsConstructibleSheaf Z := IsConstructibleSheaf.of_isZero hz
+  have : P.ContainsZero := ⟨(comparisonUpperStar (ModuleCat.{u + 1} A) T).obj Z,
+    Functor.map_isZero _ hz, isConstructible_comparisonUpperStar_obj Z⟩
+  have : P.IsClosedUnderKernels := ⟨by
+    rintro _ ⟨f, k, hk, hFG⟩
+    exact P.prop_of_iso ((kernelIsKernel f).conePointUniqueUpToIso hk)
+      (Scheme.CoefficientSerre.fixed_kernel_cokernel T A _ _ f hFG.1 hFG.2).1⟩
+  have : P.IsClosedUnderCokernels := ⟨by
+    rintro _ ⟨f, k, hk, hFG⟩
+    exact P.prop_of_iso ((cokernelIsCokernel f).coconePointUniqueUpToIso hk)
+      (Scheme.CoefficientSerre.fixed_kernel_cokernel T A _ _ f hFG.1 hFG.2).2⟩
+  have : P.IsClosedUnderExtensions :=
+    ⟨fun hS h1 h3 ↦ Scheme.CoefficientSerre.fixed_extension T A _ hS h1 h3⟩
+  exact bounded_homology_thick P
+
+private theorem finite_coefficient_ctf_thick (A : Type u) [CommRing A] [Finite A]
+    [TopologicalSpace A] [DiscreteTopology A] [IsTopologicalRing A]
+    (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] :
+    (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj A) T ⊓
+      _root_.DerivedCategory.finiteTorAmplitude _).IsTriangulated ∧
+    (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj A) T ⊓
+      _root_.DerivedCategory.finiteTorAmplitude _).IsStableUnderRetracts := by
+  classical
+  let e := Classical.choice (FiniteDiscreteOrdinary.encoding_exists A T)
+  let F := e.fixedDerived.functor
+  let P : ObjectProperty (DerivedCategory
+    (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} A)))) :=
+    _root_.DerivedCategory.TStructure.t.bounded ⊓
+      _root_.DerivedCategory.homologyProperty (IsConstructible (ULift.{u + 1} A))
+  obtain ⟨hi, ht, hr⟩ := fixed_bounded_constructible_thick (ULift.{u + 1} A) T
+  have : P.IsClosedUnderIsomorphisms := hi
+  have : P.IsTriangulated := ht
+  have : P.IsStableUnderRetracts := hr
+  have hP : constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj A) T =
+      P.inverseImage F := by
+    funext K
+    apply propext
+    rw [(FiniteDiscreteOrdinary.encoding_constructibility A T e).2 K]
+    change (_ ∧ _) ↔ (_ ∧ _)
+    apply and_congr Iff.rfl
+    exact forall_congr' fun n ↦ ordinary_constructible_iff A T _
+  have hAdd : F.Additive := by
+    change (e.ordinary.functor ⋙ e.fixed.functor).mapDerivedCategory.Additive
+    infer_instance
+  have hF : F.IsTriangulated := by
+    change (e.ordinary.functor ⋙ e.fixed.functor).mapDerivedCategory.IsTriangulated
+    infer_instance
+  have hbtri : (constantModelBoundedConstructible
+      (Profinite.continuousCoefficientRingObj A) T).IsTriangulated := by
+    rw [hP]
+    change ObjectProperty.IsTriangulated (P.inverseImage F)
+    infer_instance
+  have hbr : (constantModelBoundedConstructible
+      (Profinite.continuousCoefficientRingObj A) T).IsStableUnderRetracts := by
+    rw [hP]
+    exact ⟨fun r h ↦ P.prop_of_retract (r.map F) h⟩
+  obtain ⟨_, _, _, _, _, _, _, htortri, htorr⟩ :=
+    constantModelConstructibleFiniteTor_wellDefined (Profinite.continuousCoefficientRingObj A) T
+  refine ⟨inferInstance, ⟨?_⟩⟩
+  intro M N r hN
+  exact ⟨ObjectProperty.prop_of_retract _ r hN.1,
+    ObjectProperty.prop_of_retract _ r hN.2⟩
+
+private theorem residue_square_zero_ann (ℓ : ℕ) [Fact ℓ.Prime] :
+    (ℓ : ZMod (ℓ ^ 2)) ^ 2 = 0 ∧
+    ∀ a : ZMod (ℓ ^ 2), (ℓ : ZMod (ℓ ^ 2)) * a = 0 ↔
+      a ∈ Ideal.span ({(ℓ : ZMod (ℓ ^ 2))} : Set (ZMod (ℓ ^ 2))) := by
+  have hp := (Fact.out : ℓ.Prime)
+  have : NeZero (ℓ ^ 2) := ⟨pow_ne_zero _ hp.ne_zero⟩
+  constructor
+  · rw [← Nat.cast_pow, ZMod.natCast_self]
+  · intro a
+    rw [Ideal.mem_span_singleton]
+    constructor
+    · intro ha
+      have hd : ℓ ^ 2 ∣ ℓ * a.val := by
+        apply (ZMod.natCast_eq_zero_iff _ _).1
+        simpa only [Nat.cast_mul, ZMod.natCast_zmod_val] using ha
+      have hd' : ℓ ∣ a.val := by
+        apply (Nat.mul_dvd_mul_iff_left hp.pos).1
+        simpa only [pow_two] using hd
+      obtain ⟨b, hb⟩ := hd'
+      refine ⟨(b : ZMod (ℓ ^ 2)), ?_⟩
+      rw [← Nat.cast_mul, ← hb, ZMod.natCast_zmod_val]
+    · rintro ⟨b, rfl⟩
+      rw [← mul_assoc, ← pow_two, ← Nat.cast_pow, ZMod.natCast_self, zero_mul]
+
+private theorem scalar_residue_nontrivial (ℓ : ℕ) [Fact ℓ.Prime] :
+    Nontrivial (scalarResidue ℓ) := by
+  have hp := (Fact.out : ℓ.Prime)
+  have : NeZero (ℓ ^ 2) := ⟨pow_ne_zero _ hp.ne_zero⟩
+  have : Fact (1 < ℓ ^ 2) := ⟨by have := hp.two_le; nlinarith⟩
+  have : Nontrivial (ZMod (ℓ ^ 2)) := inferInstance
+  exact Ideal.Quotient.nontrivial_iff.mpr (Ideal.span_singleton_ne_top
+    (IsNilpotent.not_isUnit ⟨2, (residue_square_zero_ann ℓ).1⟩))
+
+private theorem scalar_residue_not_finite_tor (ℓ : ℕ) [Fact ℓ.Prime] :
+    ¬ _root_.DerivedCategory.finiteTorAmplitude (ModuleCat.{0} (ZMod (ℓ ^ 2)))
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj
+        (ModuleCat.of (ZMod (ℓ ^ 2)) (scalarResidue ℓ))) := by
+  intro ⟨a, b, h⟩
+  have := scalar_residue_nontrivial ℓ
+  obtain ⟨ht, hann⟩ := residue_square_zero_ann ℓ
+  obtain ⟨_, _, htor⟩ := ModuleCat.square_zero_periodic_resolution_tensor
+    (ZMod (ℓ ^ 2)) (ℓ : ZMod (ℓ ^ 2)) ht hann
+  obtain ⟨q, hq⟩ := exists_nat_gt (-a)
+  obtain ⟨e⟩ := htor q
+  have hz := (_root_.DerivedCategory.isGE_iff _ a).1
+    (h (ModuleCat.of (ZMod (ℓ ^ 2)) (scalarResidue ℓ))).1
+    (-(q : ℤ)) (by omega)
+  have hz' := hz.of_iso e.symm
+  exact (ModuleCat.isZero_iff_subsingleton.mp hz').elim (0 : scalarResidue ℓ) 1 |> zero_ne_one
+
+private theorem scalar_residue_not_finite_pd (ℓ : ℕ) [Fact ℓ.Prime] :
+    ¬ ModuleCat.HasFiniteProjectiveDimension
+      (ModuleCat.of (ZMod (ℓ ^ 2)) (scalarResidue ℓ)) := by
+  rintro ⟨n, hn⟩
+  have := scalar_residue_nontrivial ℓ
+  obtain ⟨P, hP⟩ := (ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE
+    (ModuleCat.of (ZMod (ℓ ^ 2)) (scalarResidue ℓ)) n).2 hn
+  obtain ⟨ht, hann⟩ := residue_square_zero_ann ℓ
+  obtain ⟨_, htor, _⟩ := ModuleCat.square_zero_periodic_resolution_tensor
+    (ZMod (ℓ ^ 2)) (ℓ : ZMod (ℓ ^ 2)) ht hann
+  obtain ⟨e⟩ := htor (n + 1)
+  let F := MonoidalCategory.tensorLeft
+    (ModuleCat.of (ZMod (ℓ ^ 2)) (scalarResidue ℓ))
+  have hz : IsZero (((F.mapHomologicalComplex (.down ℕ)).obj P.complex).X (n + 1)) :=
+    F.map_isZero (hP (n + 1) (by omega))
+  have hh : IsZero (((F.mapHomologicalComplex (.down ℕ)).obj P.complex).homology (n + 1)) :=
+    ShortComplex.isZero_homology_of_isZero_X₂ _ hz
+  have ht0 := hh.of_iso (P.isoLeftDerivedObj F (n + 1))
+  have hz' := ht0.of_iso e.symm
+  exact zero_ne_one ((ModuleCat.isZero_iff_subsingleton.mp hz').elim
+    (0 : scalarResidue ℓ) 1)
+
+private theorem perfectRing_finiteTor {R : Type} [CommRing R]
+    {K : DerivedCategory (ModuleCat.{0} R)} (h : _root_.DerivedCategory.IsPerfectRingComplex K) :
+    _root_.DerivedCategory.finiteTorAmplitude _ K := by
+  obtain ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩ := h
+  have := ha
+  have := hb
+  refine ⟨a, b, (_root_.DerivedCategory.torAmplitudeIn _ a b).prop_of_iso e.symm ?_⟩
+  apply _root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat P a b
+  intro i
+  have := (hP i).1
+  exact (ModuleCat.flat_iff_flat _).2 inferInstance
+
+private theorem scalar_twoTerm_perfect (ℓ : ℕ) :
+    _root_.DerivedCategory.IsPerfectRingComplex (scalarTwoTermComplex ℓ) := by
+  let A := ZMod (ℓ ^ 2)
+  let P := (CochainComplex.singleFunctor (ModuleCat.{0} A) 0).obj (ModuleCat.of A A)
+  let f := (CochainComplex.singleFunctor (ModuleCat.{0} A) 0).map
+    (scalarMulHom A (ℓ : A))
+  have hg : (CochainComplex.mappingCone f).IsStrictlyGE (-1) :=
+    CochainComplex.isStrictlyGE_mappingCone f 0 0 (-1)
+  have hl : (CochainComplex.mappingCone f).IsStrictlyLE 0 := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro i hi
+    rw [CochainComplex.mappingCone.isZero_X_iff]
+    exact ⟨P.isZero_of_isStrictlyLE 0 _ (by omega),
+      P.isZero_of_isStrictlyLE 0 _ hi⟩
+  have hP (i : ℤ) : Module.Projective A (P.X i) ∧ Module.Finite A (P.X i) := by
+    by_cases hi : i = 0
+    · subst i
+      let e := HomologicalComplex.singleObjXSelf (.up ℤ) 0 (ModuleCat.of A A)
+      exact ⟨Module.Projective.of_equiv e.toLinearEquiv.symm,
+        Module.Finite.equiv e.toLinearEquiv.symm⟩
+    · have : Subsingleton (P.X i) := ModuleCat.isZero_iff_subsingleton.mp
+        (HomologicalComplex.isZero_single_obj_X _ _ _ _ hi)
+      constructor <;> infer_instance
+  refine ⟨CochainComplex.mappingCone f, -1, 0, hg, hl, ?_, ⟨Iso.refl _⟩⟩
+  intro i
+  let e := (HomologicalComplex.homotopyCofiber.XIsoBiprod f i (i + 1) rfl) ≪≫
+    ModuleCat.biprodIsoProd (P.X (i + 1)) (P.X i)
+  have := (hP (i + 1)).1
+  have := (hP (i + 1)).2
+  have := (hP i).1
+  have := (hP i).2
+  exact ⟨Module.Projective.of_equiv e.toLinearEquiv.symm,
+    Module.Finite.equiv e.toLinearEquiv.symm⟩
+
+private theorem scalar_finiteRing_example (ℓ : ℕ) [Fact ℓ.Prime] :
+    scalarFiniteRingExample ℓ := by
+  refine ⟨inferInstance, scalar_residue_not_finite_pd ℓ, scalar_twoTerm_perfect ℓ, ?_⟩
+  exact fun h ↦ scalar_residue_not_finite_tor ℓ (perfectRing_finiteTor h)
+
+/-- For the five integral and field coefficient rings, constructible modules have
+Tor amplitude [-1,0], and [0,0] in the field cases. Bounded constructible complexes
+therefore have finite Tor amplitude, so the bounded and localizing closures agree.
+The statement also records finite-ring thickness and the square-zero counterexamples.
 
 Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node det-def-localizing-closure-ctf-equals-bc (blueprint: det-def-localizing-closure-ctf-equals-bc).
+node det-def-localizing-closure-ctf-equals-bc
+(blueprint: det-def-localizing-closure-ctf-equals-bc).
 
-Proof plan, following the twelve source steps: (1) evaluate the condensed coefficient ring
-at the point and construct finite free resolutions over the DVRs and fields, including the
-zero and rank-zero cases; (2) pull those exact scalar sequences to constant sheaves and use
-the integral flatness criterion to obtain local models; (3) use finite direct sums, K-flatness,
-and the derived tensor projection formula to compute the local Tor interval; (4) prove cover
-locality by exact slice restriction, compatibility with derived tensor, and joint conservativity;
-(5) induct on the number of constructible strata, choosing an affine neighbourhood with a
-closed stratum and quasi-compact open complement; (6) pull the presentations to the closed and
-open pieces, using the canonical module pullback and dropping the empty strata; (7) apply the
-open--closed exact sequence to detect vanishing of tensor cohomology and conclude the module
-bound; (8) induct on the cohomological interval using the truncation triangle, the homology
-long exact sequence, the single-cohomology base case, and the extension rule; (9) identify
-`Dctf` with `Dbc` object by object and use the defining intersections for their localizing
-closures; (10) for a finite discrete ring, transfer the finite locally constant description
-through the classical-sheaf equivalence and deduce Serre, triangulated, and retract closure;
-(11) for `A = ℤ/ℓ²`, use the periodic multiplication-by-`ℓ` resolution to show the residue
-module is constructible but has infinite projective dimension, and pull the same example to
-`Spec k` for separably closed `k`; (12) use the bounded two-term finite-free complex to show
-perfectness of the whole complex while both residue cohomology modules are nonperfect, and
-apply its standard truncations to exhibit failure of truncation stability. The scalar notion
-of perfectness in steps 11--12 is `DerivedCategory.IsPerfectRingComplex`.
+Proof: apply the finite-constant-local-model Tor theorem and the stratified devissage
+with unchanged endpoints. The cohomology-interval theorem gives [a-1,b]; boundedness
+supplies such an interval, so extensionality gives Dctf=Dbc and congruence gives their
+localizing-closure equality. For finite rings, the normalized exact coefficient encoding
+identifies finite constant models with finite locally constant fixed modules. Their
+constructible Serre class gives triangulation of bounded constructible cohomology.
+Retracts are kernels of one minus the associated idempotent, and cohomology preserves
+retracts and vanishing intervals; intersect with the thick finite-Tor property.
+For Z/ell², the periodic resolution gives nonzero residue self-Tor in every nonpositive
+degree, ruling out finite projective dimension and perfectness. The two-term cone has
+finite projective terms and is perfect. Finally the constant square-zero example theorem
+on each separably closed point gives the required sheaf and truncation counterexamples.
 -/
 theorem localizingClosure_ctf_equals_bc
     (ℓ : ℕ) [Fact ℓ.Prime]
@@ -256,6 +552,65 @@ theorem localizingClosure_ctf_equals_bc
             0 0 ((DerivedCategory.singleFunctor
               (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
                 (condensedRingObj Λ X)) 0).obj M)) := by
-  sorry
+  have hcoeff :
+      (Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
+        ∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨
+      (Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+        (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) := by
+    rcases hΛ with h | h | ⟨E, h | h⟩ | h
+    · exact Or.inl (Or.inl h)
+    · exact Or.inr (Or.inl h)
+    · exact Or.inl (Or.inr ⟨E, h⟩)
+    · exact Or.inr (Or.inr (Or.inl ⟨E, h⟩))
+    · exact Or.inr (Or.inr (Or.inr h))
+  have hdev :
+      (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)
+          (_ : DiscreteTopology A) (_ : IsTopologicalRing A),
+        Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧
+          Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨
+      (∃ E : PadicAlgCl.FiniteIntermediateField ℓ,
+        Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨
+      Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)) := by
+    rcases hcoeff with (h | h) | h
+    · exact Or.inr (Or.inl h)
+    · exact Or.inr (Or.inr (Or.inl h))
+    · exact Or.inr (Or.inr (Or.inr h))
+  have hlocal (S : Scheme.{u})
+      (N : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))
+      (hN : HasFiniteConstantLocalModel Λ S N) :
+      _root_.DerivedCategory.torAmplitudeIn _ (-1) 0
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj N) := by
+    rcases hcoeff with h | h
+    · exact padic_constant_local_model_tor ℓ Λ (-1) (Or.inl ⟨rfl, h⟩) S N hN
+    · exact (padic_constant_local_model_tor ℓ Λ 0 (Or.inr ⟨rfl, h⟩) S N hN).mono
+        (by norm_num) le_rfl
+  have hmod := torAmplitudeIn_of_constructible_of_uniform_local_model
+    ℓ (Mon.mk Λ) hdev (-1) 0 (by norm_num) hlocal X
+  obtain ⟨hcomplex, heq⟩ := boundedConstructible_torBounds X Λ hmod
+  constructor
+  · refine ⟨hmod, hcomplex, heq, ?_, ?_, scalar_finiteRing_example ℓ, ?_, ?_⟩
+    · exact congrArg CategoryTheory.localizingClosure heq
+    · intro A _ _ _ _ _ T _ _
+      exact finite_coefficient_ctf_thick A T
+    · intro k _ _
+      exact ⟨(constant_square_zero_tor_example ℓ
+          (Profinite.continuousCoefficientRingObj (ZMod (ℓ ^ 2))) ⟨Iso.refl _⟩ k).1,
+        (constant_square_zero_tor_example ℓ
+          (Profinite.continuousCoefficientRingObj (ZMod (ℓ ^ 2))) ⟨Iso.refl _⟩ k).2.1⟩
+    · intro k _ _
+      obtain ⟨K, hK, ht⟩ := (constant_square_zero_tor_example ℓ
+          (Profinite.continuousCoefficientRingObj (ZMod (ℓ ^ 2))) ⟨Iso.refl _⟩ k).2.2
+      exact ⟨K, hK, fun h ↦ ht h.2⟩
+  · intro hfield M hM
+    exact torAmplitudeIn_of_constructible_of_uniform_local_model ℓ (Mon.mk Λ) hdev
+      0 0 le_rfl (fun S N hN ↦
+        padic_constant_local_model_tor ℓ Λ 0 (Or.inr ⟨rfl, hfield⟩) S N hN) X M hM
 
 end AlgebraicGeometry.ProEtale

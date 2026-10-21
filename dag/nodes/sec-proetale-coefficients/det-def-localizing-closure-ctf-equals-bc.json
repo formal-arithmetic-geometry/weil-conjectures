@@ -22,117 +22,70 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\Lambda(*)$ and $I=[-1,0]$, or $I=[0,0]$ for field coefficients. The coefficient definitions identify $R$ with the stated scalar ring; the integral rings are DVRs by [lem-weil-l-adic-extension-integers-dvr]. The integral coefficient map is flat by clause 1 of [det-prop-integral-criterion-constant-coefficients]. Apply [lem-sfb-scalar-model-finite-flat-resolution] to each finite constant local model, then cover detection [lem-sfb-tor-interval-local-detection]. Thus every module with such a model on any scheme has interval $I$.",
+   "text": "Apply the uniform finite-constant-local-model interval theorem, with c=-1 for the integral DVR coefficients and c=0 for field coefficients. Enlarge the field interval to [-1,0]. Rearrange the coefficient disjunction into the six-case convention of the stratified devissage theorem; its finite-ring alternative is not needed here.",
    "uses": [
-    "sk-def-sfb-condensed-ring",
-    "sk-def-sfb-qlbar-condensed",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "det-prop-integral-criterion-constant-coefficients",
-    "lem-sfb-scalar-model-finite-flat-resolution",
-    "lem-sfb-tor-interval-local-detection"
+    "lem-sfb-padic-constant-local-model-tor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Local models and Locality"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-sfb-stratified-tor-interval-devissage] to this common interval on all schemes. Its conclusion is clause 1 for every qcqs $X$.",
+   "text": "Apply finite-strata Tor devissage to the local-model bound on every scheme. This gives [-1,0] for every constructible module and, when the coefficient is a field, [0,0]. The main theorem uses the stated devissage declaration rather than reproving its open-closed induction.",
    "uses": [
     "lem-sfb-stratified-tor-interval-devissage"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Strata"
-   }
+   "elementary": false
   },
   {
-   "text": "For $K\\in\\Dbc$ supported in $[a,b]$, clause 1 and [lem-sfb-cohomology-tor-interval] with $[c,d]=[-1,0]$ give $[a-1,b]$. Hence every object of $\\Dbc$ lies in $\\Dctf$ by its definition, so the full replete subcategories agree. Their defining intersections for localizing closures are identical.",
+   "text": "Apply the cohomology-interval theorem with [c,d]=[-1,0] to get [a-1,b]. Boundedness supplies endpoints; replacing the lower one by min(a,b) ensures an ordered interval even for zero complexes. Thus every bounded constructible object has finite Tor amplitude. Extensionality identifies Dbc intersect finiteTor with Dbc, and congruence gives equality of their localizing closures.",
    "uses": [
-    "lem-sfb-cohomology-tor-interval",
-    "det-def-sfb-constructible-tor-amplitude",
-    "det-def-localizing-closure-existence"
+    "lem-sfb-cohomology-tor-interval"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Complexes"
-   }
+   "elementary": false
   },
   {
-   "text": "For finite discrete $A$, the coefficient ring sheaf is constant by the two finite-discrete coefficient identifications cited here. Finitely presented $A$-modules are finite, and finite modules are finitely presented (a finite free surjection has finite kernel). Thus finite constant local models are precisely finite locally constant models. The existing Serre-closure and triangulated-subcategory statements therefore apply to this constructibility predicate. A retract of a constructible cohomology sheaf is $\\ker(1-e)$ for its idempotent $e$, hence constructible; its cohomological bounds persist. Thus $\\Dbc(X,A)$ is thick, and intersecting with the thick class of finite-Tor complexes proves thickness of $\\Dctf(X,A)$.",
+   "text": "For finite discrete A, use the normalized exact fixed-module encoding and its constructibility comparison. Smallify each pro-etale covering family; this identifies ordinary local models with finite locally constant fixed modules and their stratifications. Constructible fixed modules form a Serre class by the finite-ring kernel/cokernel and extension theorems. Apply cohomology in a weak Serre class and boundedness for triangulation. A retract is ker(1-r i); applying homology preserves retracts and vanishing intervals, giving bounded constructible retract closure. Pull these properties back through the exact derived encoding and intersect with the already thick finite-Tor property.",
    "uses": [
-    "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-    "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-    "lem-weil-proetale-constructible-exact-closure",
-    "lem-weil-proetale-dbc-triangulated",
+    "lem-sf-finite-discrete-normalized-encoding",
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-weil-constructible-coefficient-serre",
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
     "det-def-sfb-constructible-tor-amplitude"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "Final thickness clause; finite coefficient constructibility"
-   }
+   "elementary": false
   },
   {
-   "text": "For $A=\\mathbf Z/\\ell^2$, $t=\\ell$ satisfies $t^2=0$ and $\\operatorname{ann}(t)=tA$, with $F=A/tA=\\mathbf F_\\ell\\ne0$. Apply [lem-sfb-square-zero-periodic-tensor]. A finite projective resolution would give bounded tensor cohomology, since projectives are summands of free modules and thus flat, contradicting the nonzero self-Tor groups. The same calculation on every nonempty cover member rules out local perfectness of $F_X$. Its finite presentation makes $F_X$ constructible.",
+   "text": "For Z/ell^2, prove directly that ell squared is zero and its annihilator is (ell). The periodic tensor theorem gives F=A/(ell) in every nonpositive degree of the derived self-tensor. F is nontrivial, so it has no finite Tor bound; a finite projective resolution would force high Tor to vanish, proving infinite projective dimension. The cone of ell on A[0] is a two-term finite projective complex, hence perfect. A perfect complex has a bounded flat model, so F[0] cannot be perfect. These scalar conclusions are proved in the parent module without additional holes.",
    "uses": [
     "lem-sfb-square-zero-periodic-tensor",
-    "det-def-sfb-constructible-local-model",
-    "sk-def-sfb-constructible",
-    "lem-pc-kflat-closure"
+    "def-pc-perfect-ring-complex"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "The examples, periodic resolution"
-   }
+   "elementary": false
   },
   {
-   "text": "The complex $P=[A\\xrightarrow{\\ell}A]$ in degrees $[-1,0]$ is perfect by definition, and $H^{-1}P=\\ell A\\cong F=H^0P$. Its finite free tensor complex has interval $[-1,0]$, so $P\\in\\Dctf$. Its truncations are $F$ and $F[1]$; the preceding unbounded self-Tor calculation and the shift rule exclude both from $\\Dctf$. This proves all remaining counterexample clauses.",
+   "text": "Apply the constant square-zero example theorem at each separably closed Spec k. Its displayed quotient is definitionally the constantResidueModuleOnSpec used in the parent. The theorem supplies constructibility and infinite Tor amplitude for this module, and a bounded constructible finite-Tor complex whose upper truncation has infinite Tor amplitude. Forgetting the truncation constructibility conjunct yields exactly the claimed failure.",
    "uses": [
-    "def-pc-perfect-ring-complex",
-    "det-def-sfb-constructible-tor-amplitude",
-    "lem-pc-kflat-closure",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sf-derived-concentrated-single"
+    "lem-sfb-constant-square-zero-tor-example"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-    "place": "The examples, perfect complex and truncations"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "sk-def-sfb-condensed-ring",
-  "sk-def-sfb-qlbar-condensed",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "det-prop-integral-criterion-constant-coefficients",
-  "lem-sfb-scalar-model-finite-flat-resolution",
-  "lem-sfb-tor-interval-local-detection",
+  "lem-sfb-padic-constant-local-model-tor",
   "lem-sfb-stratified-tor-interval-devissage",
   "lem-sfb-cohomology-tor-interval",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-sf-finite-discrete-encoding-constructibility",
+  "lem-weil-constructible-coefficient-serre",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
   "det-def-sfb-constructible-tor-amplitude",
-  "det-def-localizing-closure-existence",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "lem-weil-proetale-constructible-exact-closure",
-  "lem-weil-proetale-dbc-triangulated",
   "lem-sfb-square-zero-periodic-tensor",
-  "det-def-sfb-constructible-local-model",
-  "sk-def-sfb-constructible",
-  "lem-pc-kflat-closure",
   "def-pc-perfect-ring-complex",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-sf-derived-concentrated-single"
+  "lem-sfb-constant-square-zero-tor-example"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-  "place": "Local models, Locality, corrected local Strata induction, Complexes and The examples; arguments extracted into five smaller lemmas"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.md",
+  "place": "R4 Lean assembly: local-model comparison and constant square-zero specialization split into separately stated source lemmas; scalar obstruction, cohomology interval assembly, finite-ring thickness and localizing equality proved directly."
  },
  "mathlib_searches": [
   {
@@ -347,35 +300,9 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-pc-kflat-closure",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-ringed-projection-restriction",
-  "lem-sf-constructible-partition-local-closed-stratum",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-sf-derived-concentrated-single",
-  "lem-sf-derived-truncation-triangle",
-  "lem-sf-derived-homology-long-exact",
-  "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
-  "det-pe-classical-derived-weak-serre",
-  "sk-thm-pe-classical-sheaves",
-  "thm-constructible-serre",
-  "prop-weil-pbc-module-bounded-constructible-triangulated",
-  "det-prop-integral-criterion-constant-coefficients",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-sfb-pullback-constant-model-constructible",
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-qlbar-condensed",
   "det-def-sfb-constructible-tor-amplitude",
-  "det-def-localizing-closure-existence",
-  "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
-  "lem-weil-proetale-constructible-exact-closure",
-  "lem-weil-proetale-dbc-triangulated",
   "det-def-sfb-constructible-local-model",
   "sk-def-sfb-constructible",
   "def-pc-perfect-ring-complex"
@@ -418,5 +345,15 @@
   "group": "Q10",
   "result": "pass",
   "note": "Re-delivery after the a496697bf3fb RETURN. The diff against that head shows only docstring changes in the Lean module (all 8 helpers and localizingClosureCtfEqualsBcAssertions now name the source place and carry (blueprint: det-def-localizing-closure-ctf-equals-bc)) and the full lean.declarations list (10, equal to the file). The sk-def-sfb-qlbar-condensed record at head is byte-identical to the live Q83 record, so H2 is resolved; the other five dependency records also equal live. Independent re-check against the node: the 5-way hΛ uses the live padicAlgClRingObj; X is qcqs; clause 1 is [-1,0], with [0,0] for the field cases; clause 2 is [a-1,b] with homologyConcentratedIn; Dbc⊓finiteTorAmplitude = Dbc (the same ⊓ as the recorded ConstantModelConstructibleFiniteTor, so H4 is fine); localizingClosure is equal on both sides; finite-ring thickness (IsTriangulated ∧ IsStableUnderRetracts) holds for A : Type u and all qcqs T; the ℤ/ℓ² examples are stated (finite with infinite projective dimension; mapping-cone [A -ℓ-> A] perfect while single F_ℓ is not; constant F_ℓ on separably closed Spec k constructible but not finite-Tor; truncGE 0 failure). The only universe is u (counterexamples use k : Type). Helpers have real data, the theorem's proof is the only sorry, and its docstring has all 12 steps. lean.statement is verbatim; report has Worker report and Second reading by Q10. nt_compile --json: clean, 7.0 s, exit 0, no warnings. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-ae35d",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261021T173342-L-3590144",
+  "kind": "interface",
+  "note": "independent cc review: item node det-def-localizing-closure-ctf-equals-bc + 2 new nodes vs delivered Lean (unchanged main signature, proof via padic-local-model-tor, stratified devissage, cohomology-interval, finite-discrete encoding, square-zero example); unit sk-def-localizing-closure realized empty, so dropping CartesianCoefficients bypasses nothing; 4 direct importers compiled in sandbox"
  }
 }
