@@ -19,51 +19,54 @@
  ],
  "proof": [
   {
-   "text": "Put $F=\\operatorname{Res}_{a_X}$. By [def-pc-sheaf-restrict-scalars], $F$ is additive and changes neither the underlying abelian sheaf nor the underlying maps. Apply [lem-weil-pbc-module-sheaves-colimits-forgetful](1) to $A_X$ and $A'_X$ on the same small site: kernels and cokernels in both module categories have the corresponding underlying abelian sheaves. The kernel action on a subsheaf and the cokernel action on a quotient are induced by the original action; composing either action with $a_X$ gives exactly its restricted action. Thus $F$ preserves kernels and cokernels and is exact. Also $F(M)=0$ if and only if $M=0$, since both zero conditions say that this same abelian sheaf is zero.",
+   "text": "Use the existing additive restriction functor and its named finite-limit and finite-colimit preservation theorems from [def-pe-proetale-ring-restrict-scalars]. Its composite with the faithful underlying abelian-sheaf functor is definitionally the original underlying abelian-sheaf functor, so restriction is faithful. Thus it preserves and reflects zero objects, by the identity-equals-zero criterion.",
    "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "def-pe-proetale-ring-restrict-scalars",
+    "def-pc-sheaf-restrict-scalars"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03DA, lemma-abelian; kernel and cokernel constructions immediately preceding it."
    }
   },
   {
-   "text": "For a stratum immersion $i:Z\\to X$, use [prop-weil-pbc-proetale-constant-ring-map] for both finite rings to identify $i^{-1}A_X=A_Z$ and $i^{-1}A'_X=A'_Z$. These identifications commute with $a$: on the generating constant sections both composites send $b\\in A$ to the constant section $a(b)$, hence they agree by [def-weil-pbc-sheafification] and the constant-presheaf construction in [def-weil-pbc-constant-sheaf]. By the module inverse-image construction of [def-weil-proetale-inverse-image], the action on $i^{-1}M$ is $i^{-1}\\mu_M$. Consequently applying inverse image to the restricted action gives $i^{-1}(\\mu_M\\circ(a_X\\times1))=i^{-1}\\mu_M\\circ(i^{-1}a_X\\times1)$. This is the restricted action on the inverse image. Tensoring along either coefficient isomorphism merely transports this action ($m\\otimes r\\mapsto c^{-1}(r)m$, inverse $m\\mapsto m\\otimes1$), so this gives $i_A^*F(M)\\cong\\operatorname{Res}_{a_Z}(i_{A'}^*M)$. Restriction to a covering object of the localized site commutes with scalar restriction section by section.",
+   "text": "Prove naturality of the canonical constant-ring direct-image map by the sheafification universal property: both composites agree after the constant-presheaf unit. Counit naturality then gives naturality of the coefficient inverse-image map. For a stratum immersion, use [lem-pur-proetale-constant-coefficient-comparison] for both rings. The resulting coefficient square satisfies the hypotheses of the ordinary invertible restriction/pullback comparison in [lem-weil-pbc-ring-sheaf-change-adjunction]. Its component identifies pullback of scalar restriction with scalar restriction of pullback. Localization over any covering object commutes with restriction definitionally.",
    "uses": [
-    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-proetale-inverse-image",
     "def-weil-pbc-constant-sheaf",
     "def-weil-pbc-sheafification",
-    "def-weil-proetale-inverse-image",
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
     "def-pc-sheaf-restrict-scalars"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 03D2, lemma-pullback-module (apply inverse image to the action); Tag 03D3, lemma-adjoint-push-pull-modules; constant sheaves in Tag 093I, section-constant."
    }
   },
   {
-   "text": "For every $A'$-module $P$, scalar restriction of its constant module sheaf is the constant sheaf of $\\operatorname{Res}_aP$. Indeed [def-weil-proetale-locally-constant-sheaf] constructs this sheaf by sheafifying the constant module presheaf. By [lem-cbc-sieve-module-sheafification], for either coefficient ring its underlying abelian sheaf is the abelian sheafification of that presheaf; these are the same abelian presheaf $P$. On locally represented constant sections the two $A$-actions are both $(b,p)\\mapsto a(b)p$, so the identity of the abelian sheafifications is $A$-linear. If $M$ is constructible, choose its stratification and the covers trivializing each stratum as in [def-weil-proetale-constructible-sheaf]. Apply the preceding step and this constant-model calculation to each chosen trivialization. They give trivializations of $F(M)$ on the very same strata and covering objects, with models $\\operatorname{Res}_aP$.",
+   "text": "Prove compatibility of simultaneous ring/module sheafification with any commuting coefficient square. Map the scalar-restricted presheaf to the restricted sheafification using the original module unit; linearity is exactly the coefficient square. Lift by [lem-cbc-sieve-module-sheafification]. Under the faithful underlying abelian-sheaf functor this lift is the identity, by the abelian sheafification adjunction, and hence it is invertible. Apply this to the localized constant-ring units, whose square is naturality of the constant-presheaf sheafification unit. Combine the result, the pullback comparison, and restriction of each original trivialization to prove proEtaleFiniteScalarRestriction_sameTrivializations, with precisely the original covers and scalar-restricted models.",
    "uses": [
-    "def-weil-proetale-locally-constant-sheaf",
     "lem-cbc-sieve-module-sheafification",
-    "def-weil-proetale-constructible-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-locally-constant-sheaf",
     "def-pc-sheaf-restrict-scalars"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
     "place": "Tag 093I, section-constant, and Tag 093Q, definition-locally-constant; the constant model with its induced scalar action."
    }
   },
   {
-   "text": "The stalks of the restricted sheaf on each stratum have the same underlying sets as the original stalks: the neighbourhood diagram and its equivalence relation in [def-weil-proetale-geometric-stalk] are unchanged, and the action on representatives is precomposed with $a$. Each original stalk is finitely generated over the finite ring $A'$, hence is finite as a set: if it has $t$ generators, it is a quotient of the finite set $(A')^t$. Its restricted $A$-module is therefore finitely generated by the finite list of all its elements (each element is $1$ times itself). Thus the unchanged stratification and trivializations from step 3 satisfy the finite-stalk condition of [def-weil-proetale-constructible-sheaf] over $A$. This proves preservation of constructible sheaves. No surjectivity of $a$ was used.",
+   "text": "Apply the unchanged-trivializations theorem to the local-constancy witnesses on each original stratum. The underlying additive neighbourhood diagrams of a module sheaf and its scalar restriction are definitionally equal. Their module stalk constructions therefore have the same underlying colimit carrier. Transport finiteness through the stalk of the pullback-comparison isomorphism. This proves proEtaleFiniteScalarRestriction_sameStratification. The intrinsic constructibility definition already assumes finite underlying stalk sets, so no separate finite-generation theorem is needed. Retain the original stratification and its positive number of strata to obtain preservation of constructibility.",
    "uses": [
     "def-weil-proetale-geometric-stalk",
     "def-weil-proetale-constructible-sheaf",
+    "def-weil-proetale-locally-constant-sheaf",
     "def-pc-sheaf-restrict-scalars"
    ],
    "elementary": true,
@@ -73,7 +76,7 @@
    }
   },
   {
-   "text": "By step 1, $F$ satisfies the additive exactness hypotheses of [lem-weil-pbc-exact-functor-derived-factorization]. Apply that node to the two module-sheaf categories on our small site, using a common localization universe: termwise $C(F)$ preserves quasi-isomorphisms and induces $D(a_X)$, with $D(a_X)(QK)\\cong Q(C(F)K)$ for every unbounded complex $K$. By [lem-weil-pbc-exact-functor-complex-cohomology], $H^q(C(F)K)\\cong F(H^q(K))$, naturally in $K$. The cohomology functors on the derived categories are the factorizations of complex cohomology through $Q$ in [def-weil-abstract-derived-category]. The preceding natural comparison therefore gives $H^q(D(a_X)L)\\cong F(H^q(L))$ for every $L$: for a representative $L=QK$ it is precisely that comparison on $K$, and naturality for a quasi-isomorphism remains commutative after inverting it, hence also for roofs in the localization. This uses no boundedness or resolution hypothesis.",
+   "text": "Apply the existing exact-functor construction [lem-weil-pbc-exact-functor-derived-factorization]. The library theorem Functor.mapDerivedCategoryHomologyFunctorIso is the descended exact-complex homology comparison [lem-weil-pbc-exact-functor-complex-cohomology]. Its inverse has exactly the direction of the stated natural isomorphism. Pin the module-category and localization universes to the universes already fixed by the statement; this introduces no bound on complexes.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-exact-functor-complex-cohomology",
@@ -86,10 +89,11 @@
    }
   },
   {
-   "text": "Combine step 5 with the zero-reflection observation of step 1. For every $q$, $H^q(D(a_X)L)=0$ if and only if $F(H^q(L))=0$, if and only if $H^q(L)=0$. Hence every vanishing bound is preserved and reflected. In particular, if the cohomology of $L$ vanishes outside $[r,s]$, the same is true after restriction; this is the boundedness condition in [def-weil-pbc-bounded-derived-subcategories]. If all cohomology sheaves of $L$ are constructible, steps 3-4 and the isomorphism of step 5 show the same for $D(a_X)L$. Thus bounded constructibility is preserved, with the original interval $[r,s]$.",
+   "text": "For each degree, transport zero through the homology comparison. Restriction preserves zero because it is additive, and reflects zero by faithfulness and the identity-equals-zero criterion. Extract the original lower and upper t-structure bounds and apply this degreewise equivalence with DerivedCategory.isGE_iff and isLE_iff, keeping the same bounds. Transport constructibility through the homology comparison: pullback, localization, and the geometric module stalk are functorial, so isomorphisms transport both local trivializations and finite stalks without changing a chosen stratification. This completes proEtaleFiniteScalarRestriction_constructible.",
    "uses": [
     "def-weil-pbc-bounded-derived-subcategories",
-    "def-weil-proetale-constructible-sheaf"
+    "def-weil-proetale-constructible-sheaf",
+    "def-weil-proetale-geometric-stalk"
    ],
    "elementary": true,
    "source": {
@@ -100,6 +104,7 @@
  ],
  "proof_deps": [
   "def-pc-sheaf-restrict-scalars",
+  "def-pe-proetale-ring-restrict-scalars",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-bounded-derived-subcategories",
   "def-weil-pbc-constant-sheaf",
@@ -109,15 +114,15 @@
   "def-weil-proetale-inverse-image",
   "def-weil-proetale-locally-constant-sheaf",
   "lem-cbc-sieve-module-sheafification",
+  "lem-pur-proetale-constant-coefficient-comparison",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-  "place": "Agent expansion of the final scalar-restriction sentence of the second paragraph, using Stacks Tags 03DA, 03D2, 093I, 093Q, 09AJ, 010N and 015F."
+  "place": "T6 Lean proof, 2026-10-21: implement the scalar-restriction sentence using the existing exact restriction and ordinary pullback-comparison APIs, a proved sheafification comparison, unchanged stalk carriers, and the exact-functor homology isomorphism. The original strata, covers, and bounds are retained."
  },
  "mathlib_searches": [
   {
@@ -241,10 +246,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "prop-weil-pbc-proetale-constant-ring-map"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -277,5 +279,15 @@
   "group": "Q83",
   "result": "pass",
   "note": "Re-delivery of 04abde48 H2(2) RETURN. Lean sha256 identical to the returned head (72d490b9); prior clause-by-clause substance review stands (Noetherian X, any finite comm ring map, canonical constantSheaf.map a.ulift, exactness, constructible→constructible with same strata/covers, natural H^q∘D(a)≅Res∘H^q, IsZero iff per degree, t.bounded+constructible; edge cases ok). Item record: only stmt_deps change, theorem lem-weil-pbc-ring-sheaf-change-adjunction → new def-pe-proetale-ring-restrict-scalars (existing:true on unchanged ProEtaleRingSheafChangeAdjunction: proEtaleRingRestrictScalars abbrev = SheafOfModules.restrictScalars after forget₂, + _preservesFiniteLimits/Colimits projections of the proved _properties). New node statement matches binders, stmt_deps exist and own the body, Stacks source (restriction before lemma-adjointness-tensor-restrict; 03DA) ok; check_new_node clean; check_existing no failures (note only: noncomputable kept in lean.statement, advisory). All used owner-module decls listed. nt_compile --json 40.8 s exit 0 clean at load 252. Maintainer note: NA's pending (landing-refused) def-weil-pbc-ring-restriction-pullback-comparison also lists proEtaleRingRestrictScalars; the second to land should cite the other."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261021T130156-L-2592138",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
