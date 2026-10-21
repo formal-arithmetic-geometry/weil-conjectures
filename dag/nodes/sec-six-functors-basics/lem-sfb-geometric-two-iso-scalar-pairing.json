@@ -18,9 +18,121 @@
   "def-weil-presheaf-modules-sheafification",
   "def-pc-cochain-complex-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $1_C,1_D$ for the terminal sheaves. Since $I$ and $J$ preserve finite limits, $I1_C$ and $J1_C$ are terminal and $\\theta_{1_C}$ is their unique comparison. For any sheaves $X,Y$, naturality at the two projections says that, under the canonical product comparisons, both projections of $\\theta_{X\\times Y}$ equal those of $\\theta_X\\times\\theta_Y$. The product universal property gives $\\theta_{X\\times Y}=\\theta_X\\times\\theta_Y$. This also applies to products with the coefficient sheaf.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, balanced-pairing argument; Tag 03EK, section-tensor-product, universal characterization"
+   }
+  },
+  {
+   "text": "For $R=A,B$, use the coproduct presentation of the underlying constant sheaf $R_C$ and its canonical inverse-image comparison from [lem-sfb-geometric-inverse-image-constant-module], applied to the $R$-module $R$. The index set $R$ is small in the coefficient universe. Both left adjoints preserve this coproduct by [lem-weil-pbc-left-adjoint-preserves-colimits]. For each inclusion $i_r:1_C\\to R_C$, naturality gives $\\theta_{R_C}I(i_r)=J(i_r)\\theta_{1_C}$. Under the canonical comparisons this fixes each coproduct inclusion into $R_D$. Uniqueness in the coproduct universal property therefore makes $\\theta_{R_C}$ the identity on the entire sheaf $R_D$. Applying naturality to $a:A_C\\to B_C$ now gives compatibility with $a$. This proves a sheaf identity, with no assumption that global scalar sections exhaust sections.",
+   "uses": [
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, example-constant-sheaf; Tag 00YV, proposition-functoriality-algebraic-structures-topoi; coproduct uniqueness and naturality"
+   }
+  },
+  {
+   "text": "The module lifts are those of [lem-pe-constant-left-module-inverse-image]. For a module $M$, apply naturality of $\\theta$ to its addition $M\\times M\\to M$, zero $1_C\\to M$, negation $M\\to M$, and action $R_C\\times M\\to M$. Step 1 identifies the product components and step 2 identifies the coefficient component with the identity. Thus $\\theta_M$ preserves addition, zero, negation and the full $R_D$-action on every test object. Hence it is a module map $\\theta^R_M$. Apply the same equations to $\\theta^{-1}$: the inverse is also linear. Naturality with respect to module maps is the original naturality equation, so these are $R_D$-linear natural isomorphisms.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, module operations; naturality at the operations"
+   }
+  },
+  {
+   "text": "Put $T=E_CN$ and let $q:B_C\\times N\\to T$ be the actual sheaf tensor pairing. Naturality at this sheaf map gives $\\theta_T I(q)=J(q)\\theta_{B_C\\times N}$. By step 1 this is precisely $\\theta_T I(q)=J(q)(\\theta_{B_C}\\times\\theta_N)$, the requested equation before tensor quotient. The operation equations of step 3 imply that the pairing $(b,m)\\mapsto b\\otimes\\theta^A_N(m)$ is additive in both entries and balanced: $a(r)b\\otimes\\theta^A_N(m)=b\\otimes r\\theta^A_N(m)=b\\otimes\\theta^A_N(rm)$. The scalar-extension functor on this map is therefore $E_D(\\theta^A_N)$, by the pure-tensor characterization of [def-weil-pbc-ringed-tensor-section-calculus].",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, balanced-pairing argument; Tag 03EK, section-tensor-product, universal characterization"
+   }
+  },
+  {
+   "text": "Let $q_I:B_D\\times I_AN\\to E_DI_AN$ and $q_J:B_D\\times J_AN\\to E_DJ_AN$ denote the target tensor pairings. The stipulated normalized comparisons satisfy $e_I I(q)=q_I$ and $e_J J(q)=q_J$ under the product and constant-ring identifications. Concretely, apply their generalized pure-tensor normalization with test sheaf $Z=B_C\\times N$, its two projections, and $z=q$; this gives an equation on the entire domain $I(Z)$, respectively $J(Z)$, not just on inverse images of constant sections. Set $u=e_J\\theta^B_T$ and $v=E_D(\\theta^A_N)e_I$. Step 4 and $\\theta_{B_C}=1$ give $u I(q)=q_J(1\\times\\theta^A_N)=v I(q)$. Consequently $u e_I^{-1}$ and $v e_I^{-1}$ agree after $q_I$. Pure tensors determine linear maps out of the sheaf tensor [def-weil-pbc-ringed-tensor-section-calculus], so $u e_I^{-1}=v e_I^{-1}$; cancel $e_I^{-1}$ to obtain the asserted equality. The comparisons are the given normalized ones, whose existence is [lem-weil-pbc-canonical-ringed-tensor-comparison-construction].",
+   "uses": [
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, balanced-pairing argument; Tag 03EK, section-tensor-product, universal characterization"
+   }
+  },
+  {
+   "text": "The pure-tensor argument takes place in sheaves. Indeed the tensor of [def-pur-sheaf-tensor-product] is the sheafification of the sectionwise tensor presheaf. On a test object, the balanced formula in step 4 defines a linear map on that sectionwise tensor and commutes with restrictions. The factorization and uniqueness in [def-weil-presheaf-modules-sheafification] extend it uniquely to the sheafified tensor. Thus equality on these pairings proves equality of sheaf maps even when a tensor section is not globally a pure tensor. In the coordinates of $e_I,e_J$, the induced map is exactly $b\\otimes m\\mapsto b\\otimes\\theta_N(m)$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, balanced-pairing argument; Tag 03EK, section-tensor-product, universal characterization"
+   }
+  },
+  {
+   "text": "For two successive geometric inverse images $K,H$, the ordinary module identification $(HK)_R\\cong H_RK_R$ is the composition identification of [lem-pe-constant-left-module-inverse-image]. The product comparison for $HK$ is the iterated product comparison: both have the same two projections. The constant-ring comparison is likewise the iterated one, since both preserve every constant inclusion, as in step 2. Consider $H_BE_C\\cong E_DH_A$ and $K_BE_{C'}\\cong E_CK_A$. The composite $H_BK_BE_{C'}\\xrightarrow{H_B(e_K)}H_BE_CK_A\\xrightarrow{e_H}E_DH_AK_A$ carries $(HK)(q)$ to the target pairing: first $K(q)$ is carried to the intermediate pairing by $e_K$, then its $H$-image is carried to the final pairing by $e_H$. Thus this composite and $e_{HK}$ have exactly the same normalization on $(HK)(q)$. Repeat the cancellation with the tensor pairing in step 5 to see that they are equal. The identity path satisfies the same formula. Induction on path length now identifies every iterated normalized comparison with $e_I$ or $e_J$ for its composite. Substitution into the equality proved in step 5 proves it with the specified expanded presentations as well.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, balanced-pairing argument; Tag 03EK, section-tensor-product, universal characterization"
+   }
+  },
+  {
+   "text": "Apply the module isomorphisms and the equality of step 5 in each degree $n$ of a cochain complex. Naturality of $\\theta^R$ and of $e_I,e_J$ at $d^n:N^n\\to N^{n+1}$ says that the degreewise maps commute with the differentials. Hence they define chain isomorphisms, and equality degree by degree is equality of chain maps. For a chain map $f$, naturality at each $f^n$ proves naturality of these isomorphisms on complexes. This uses exactly the definition of complexes and their morphisms in [def-pc-cochain-complex-modules]; there are no totalizations, boundedness conditions or signs beyond the unchanged differentials.",
+   "uses": [
+    "def-pc-cochain-complex-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback, balanced-pairing argument; Tag 03EK, section-tensor-product, universal characterization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-cochain-complex-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL balanced-pairing proof and Tag 03EK universal characterization; agent-written naturality and expanded-composite argument"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +169,46 @@
    "results": "{\"t\": \"2026-10-21T05:50:17Z\", \"tool\": \"leanfinder\", \"query\": \"A specified natural isomorphism of two geometric inverse images induces a scalar compatible module isomorphism and commutes with the universal tensor pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_inv\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_refl\", \"AlgebraicGeometry.Scheme.Pullback.tensorCongr_SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_trans_hom_assoc\"], \"digest\": \"f460d4d412db70dd\"}",
    "date": "2026-10-21",
    "verdict": "no match: free-sheaf pullbacks and ordinary composition isomorphisms do not assert compatibility of an arbitrary geometric two-isomorphism with the scalar balanced pairing, including its expanded composite presentations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between geometric inverse image functors on sheaves respects scalar extension via the universal balanced tensor pairing",
+   "results": "{\"t\": \"2026-10-21T08:11:00Z\", \"tool\": \"leanfinder\", \"query\": \"A natural isomorphism between geometric inverse image functors on sheaves respects scalar extension via the universal balanced tensor pairing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\"], \"digest\": \"773e71d9a8d22124\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern free-module pullbacks, continuous-site pushforward isomorphisms or ordinary composition, not an arbitrary geometric two-isomorphism and its scalar balanced-pairing equation."
+  },
+  {
+   "tool": "grep",
+   "query": "(tensor|scalar).*(natIso|natTrans)|(natIso|natTrans).*(tensor|scalar)",
+   "results": "{\"t\": \"2026-10-21T08:11:15Z\", \"tool\": \"grep\", \"query\": \"(tensor|scalar).*(natIso|natTrans)|(natIso|natTrans).*(tensor|scalar)\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern free-module pullbacks, continuous-site pushforward isomorphisms or ordinary composition, not an arbitrary geometric two-isomorphism and its scalar balanced-pairing equation.",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "{\"t\": \"2026-10-21T08:11:15Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullbackComp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"6d62dd74aaeb25fe\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern free-module pullbacks, continuous-site pushforward isomorphisms or ordinary composition, not an arbitrary geometric two-isomorphism and its scalar balanced-pairing equation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism between geometric inverse image functors fixes constant ring sheaves and commutes with extension of scalars",
+   "results": "{\"t\": \"2026-10-21T08:11:15Z\", \"tool\": \"leansearch\", \"query\": \"A natural isomorphism between geometric inverse image functors fixes constant ring sheaves and commutes with extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality\", \"CategoryTheory.constantCommuteCompose\", \"SheafOfModules.pushforwardNatIso_inv\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"ModuleCat.restrictScalarsCongr\", \"SheafOfModules.pushforwardNatIso_hom\", \"SheafOfModules.pushforwardCongr.congr_simp\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\"], \"digest\": \"85334bb686db0c69\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern free-module pullbacks, continuous-site pushforward isomorphisms or ordinary composition, not an arbitrary geometric two-isomorphism and its scalar balanced-pairing equation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric natural isomorphism of sheaf inverse images commutes with the tensor product comparison for constant coefficients and scalar extension",
+   "results": "{\"t\": \"2026-10-21T08:11:49Z\", \"tool\": \"leanfinder\", \"query\": \"A geometric natural isomorphism of sheaf inverse images commutes with the tensor product comparison for constant coefficients and scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.pullbackObjFreeIso\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjUnitToUnit\"], \"digest\": \"27ed89c4ab69b85e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern free-module pullbacks, continuous-site pushforward isomorphisms or ordinary composition, not an arbitrary geometric two-isomorphism and its scalar balanced-pairing equation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-etale-proetale-scalar-pullback-cube",
@@ -80,5 +228,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-geometric-two-iso-scalar-pairing",
+  "worker": "stage1",
+  "summary": "Proved constant-ring rigidity by the coproduct universal property, lifted theta using naturality at module operations, and proved the scalar square by naturality at the entire tensor pairing and cancellation using tensor uniqueness. Wrote out sheafification, composite normalization and termwise complex compatibility. Reused existing nodes; no new nodes or statement change.",
+  "blueprint": "Realizes det-prop-scalar-six-direct-image clause 2, compatibility with composition, through unit sk-prop-scalar-six step 3 (finite-coefficient site comparison), along lem-sfb-etale-proetale-scalar-mate and lem-sfb-etale-proetale-scalar-pullback-cube. The eight steps supply the ordinary two-isomorphism/pairing compatibility extracted in this item.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-ringed-topos-morphism",
+    "why": "Generic ordinary sheaf/module interface used for its defining operations or the stipulated normalized tensor comparison; the scalar-six unit does not replace this generic interface."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic ordinary sheaf/module interface used for the coproduct presentation of constant modules; the scalar-six unit does not replace this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic ordinary sheaf/module interface used for preservation of the small scalar-indexed coproduct; the scalar-six unit does not replace this generic interface."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic ordinary sheaf/module interface used for the specified constant-coefficient module lift and its composition identification; the scalar-six unit does not replace this generic interface."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic ordinary sheaf/module interface used for its defining operations or the stipulated normalized tensor comparison; the scalar-six unit does not replace this generic interface."
+   },
+   {
+    "node": "def-weil-pbc-ringed-tensor-section-calculus",
+    "why": "Generic ordinary sheaf/module interface used for the actual pure pairing, scalar extension on maps, and uniqueness out of the sheaf tensor; the scalar-six unit does not replace this generic interface."
+   },
+   {
+    "node": "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "why": "Generic ordinary sheaf/module interface used for its defining operations or the stipulated normalized tensor comparison; the scalar-six unit does not replace this generic interface."
+   },
+   {
+    "node": "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "why": "Generic ordinary sheaf/module interface used for its defining operations or the stipulated normalized tensor comparison; the scalar-six unit does not replace this generic interface."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Generic ordinary sheaf/module interface used for its defining operations or the stipulated normalized tensor comparison; the scalar-six unit does not replace this generic interface."
+   },
+   {
+    "node": "def-weil-presheaf-modules-sheafification",
+    "why": "Generic ordinary sheaf/module interface used for its defining operations or the stipulated normalized tensor comparison; the scalar-six unit does not replace this generic interface."
+   },
+   {
+    "node": "def-pc-cochain-complex-modules",
+    "why": "Generic ordinary sheaf/module interface used for its defining operations or the stipulated normalized tensor comparison; the scalar-six unit does not replace this generic interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pc-cochain-complex-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-4321f73f0",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-4321f73f0 (reviewer sub-agent of L); spot-checked: Read the whole item at 4321f73f: unchanged statement, 8 steps, no new nodes, item first split (live side node is still unsplit, no prior runs, no re-split note, not in the drop list). Every step is correct against the statements of its 13 cited nodes, none merged, with no cycle (closure of 157 nodes). Step 1: terminal and product uniqueness give θ_{X×Y}=θ_X×θ_Y. Step 2: R_C=∐_R 1 (geometric-inverse-image-constant-module final sentence with M=R; Stacks 0H7J); the left-adjoint-preserves-colimits node gives preservation. Naturality at each i_r with coproduct uniqueness makes θ_{R_C} the identity as a sheaf map; the lem-pe identification agrees with the coproduct comparison because both send I(i_r) to i_r. Step 3: naturality at addition, zero, negation and action gives R_D-linearity, and the inverse is linear too. Step 4: θ_T I(q)=J(q)(θ_B×θ_N), and balancing a(r)b⊗θm=b⊗θ(rm) checks. Step 5: the generalized pure-tensor clause with Z=B_C×N, x,y the projections, z=q gives e_I I(q)=q_I; then u I(q)=q_J(1×θ)=v I(q), and tensor uniqueness gives the square; I re-derived it. Step 6: sheafification factorization is correctly cited, redundant but harmless. Step 7: the composite e_H∘H_B(e_K) has the same normalization as e_{HK}; the induction on path length has its base and inductive step. Step 8: termwise chain-map naturality. Edge cases checked: zero ring, non-flat Z→Z/2, degenerate topos, nontrivial point automorphism, unbounded complexes. Stacks tags 03EK, 03EL (sites-modules.tex:3649), 0H7J (sites.tex:2099) and 00YV (sites.tex:10473) verified; no SGA. Generic sheaf/module tool_uses accepted. No fixes."
  }
 }
