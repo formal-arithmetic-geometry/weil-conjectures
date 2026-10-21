@@ -14,66 +14,74 @@
  ],
  "proof": [
   {
-   "text": "Resolve the coefficient O by a K-injective I. Define b_E(x)(f)=(-1)^(p*q)f(x) for homogeneous x and f of degrees p and q. Expanding the Hom differential cancels the d_I terms and gives b_E(dx), so b is a natural chain map. The delivered private generalHom_d_eval, generalBidualDegree_comm and generalOrdinaryBidual check this ordinary chain-map construction for arbitrary I, with both target-differential terms retained and canceled; no zero-differential hypothesis is used. The delivered ordinaryBidual_naturality proves functoriality by both Hom-functor projection formulas and the naturality of the input chain map on restricted sections; generalOrdinaryBidualTransformation packages the resulting natural transformation.",
+   "text": "Use the fixed coefficientHomResolution I of the coefficient unit. Construct the natural chain map b_E:E to Hom(Hom(E,I),I) by b_E(x)(f)=(-1)^(p*q)f(x). On Hom-product projections, generalHom_d_eval and generalBidualSigns cancel the target differential terms and prove the chain equation. ordinaryBidual_naturality proves naturality on restricted sections. The construction works for an arbitrary I, with no zero-differential hypothesis.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-hom-complex",
+    "lem-sc-hom-complex-projections",
+    "def-coef-hom-representative-evaluation",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X, 08J9, 08JC and 0A97; signed evaluation and its fixed representative normalization."
+   }
+  },
+  {
+   "text": "For K-flat E take a K-flat quasi-isomorphism a:L to Hom(E,I). Use the two existing normalized uncurry_model equations for a and b_E followed by Hom(a,I), and the symmetry_model equation. bidual_precompose_formula computes the second evaluation as (-1)^(p*q)a(y)(x). totalTensor_generator_ext proves the corresponding total-tensor maps agree from their pure generators. Cancel the tensor comparison and then the isomorphism induced by a to identify Q(b_E), under the fixed doubleComparison, with ringedSiteBidual. Naturality and another K-flat replacement extend this identification to every complex E. This argument uses neither ordinary Hom into the unresolved coefficient nor generic relative-bidual triangle compatibility.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-coef-ringed-tensor-hom-model",
+    "def-coef-hom-representative-evaluation",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X, 08J9, 08JC and 0A97; signed evaluation and its fixed representative normalization."
+   }
+  },
+  {
+   "text": "Use SignedDoubleHomCone.comparison for the ordinary signed source shifts and its double-Hom comparison chi. The product-projection formula has sign (-1)^(p+t). On b_(E[1]) its combined exponent is p+t+p*(t+1), equal modulo two to (p+1)*t; ordinaryBidual_shift_with and ordinaryBidual_signed_shift therefore prove b_(E[1]) followed by the negative composite of the two signed source shifts equals b_E[1]. unsignedReindex_eval supplies the ordinary reindexing equation.",
+   "uses": [
+    "lem-sf-double-hom-cone-comparison",
     "def-pur-hom-complex"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A8X, 08J9, 08JC and 0A97; explicit signed Hom-complex calculation"
+    "place": "Tags 0A8X, 08J9, 08JC and 0A97; signed evaluation and its fixed representative normalization."
    }
   },
   {
-   "text": "Take a K-flat representative P and a K-flat replacement a:L to Hom(P,I). The normalized tensor-Hom adjunction represents evaluation after Koszul symmetry by (x,l) to (-1)^(p*q)a(l)(x). Currying gives Hom(a,I)b_P. Since Hom(a,I) is a quasi-isomorphism, this identifies Q(b_P) with the actual evaluation transpose. Naturality and K-flat replacement identify Q(b_E) with derived evaluation for arbitrary representatives. No assertion that ordinary Hom into O computes arbitrary derived Hom is used.",
+   "text": "Prove that the inverse ordinary signed source shift satisfies the existing LeftFormula. Strengthen normalized source-shift descent to the fixed resolved coefficient and arbitrary representative isomorphisms; uniqueness of LeftNormalization identifies this descent with sourceShift and proves its source naturality. dualResolutionIso is the fixed coefficientHomResolutionIso inverse, with naturality from the recorded localization factorization. doubleShift_compare transports the ordinary negative double-shift composite through these fixed isomorphisms. The resolved evaluation identification, shift naturality and essential surjectivity of localization give exactly the displayed equality for every derived X.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-sfb-ringed-site-duality-maps",
-    "lem-pur-rhom-well-defined",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-coef-hom-representative-evaluation",
+    "lem-sf-double-hom-cone-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A8X, 08J9, 08JC and 0A97; explicit signed Hom-complex calculation"
-   }
-  },
-  {
-   "text": "The normalized signed double-Hom comparison has degree-p, inner-degree-t sign (-1)^(p+t). On b_(E[1]) the combined exponent is p+t+p*(t+1), differing from (p+1)*t by 2*p. Thus the composite is b_E[1]. The fixed source-shift representative normalization and localization give exactly the asserted derived equality. The delivered private ordinaryBidual_shift_one proves the ordinary equality for arbitrary E and I, using the actual chi and its product-projection formula supplied by the proved SignedDoubleHomCone.comparison; unsignedReindex_eval checks the reindexing explicitly. Only representative identification and descent remain in this step.",
-   "uses": [
-    "lem-sf-double-hom-cone-comparison",
-    "def-pur-hom-complex",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A8X, 08J9, 08JC and 0A97; explicit signed Hom-complex calculation"
+    "place": "Tags 0A8X, 08J9, 08JC and 0A97; signed evaluation and its fixed representative normalization."
    }
   }
  ],
  "proof_deps": [
+  "def-coef-hom-representative-evaluation",
+  "def-coef-ringed-tensor-hom-model",
   "def-pur-hom-complex",
   "lem-pc-kflat-resolution",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-pur-rhom-well-defined",
-  "lem-sc-derived-hom-tensor-total",
+  "lem-sc-hom-complex-projections",
   "lem-sf-double-hom-cone-comparison",
   "lem-sfb-ringed-site-duality-maps",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "P1",
   "date": "2026-10-21",
-  "note": "Separate source result extracted from the ambient signed bidual argument; all dependent declarations were read before this split.",
-  "group": "Q7"
+  "note": "Complete coefficient-specific chain calculation, K-flat normalized-uncurry identification, signed source-shift descent and localization; all new helpers proved privately. No generic relative-bidual module is imported."
  },
  "mathlib_searches": [
   {
@@ -150,9 +158,9 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q7",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261021T011030-L-2030374",
+  "landing": "20261021T021921-L-2792824",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
