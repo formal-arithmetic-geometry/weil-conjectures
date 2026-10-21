@@ -12,14 +12,80 @@
   "def-weil-abstract-derived-category",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q$ for the localization functor of [def-weil-abstract-derived-category]. If $a>b$, every integer $q$ satisfies $q<a$ or $q>b$, so every $C^q$ is zero. Thus $C^\\bullet$ is isomorphic to the zero complex and its image is zero in $D(\\mathcal A)$, hence belongs to $\\mathcal S$ by hypothesis. Now assume $a\\le b$. For $n\\in\\mathbf Z$ define $T_n=\\sigma_{\\ge n}C$ by $T_n^q=C^q$ for $q\\ge n$ and $T_n^q=0$ for $q<n$, with differential $d_C^q$ when $q\\ge n$ and zero otherwise. The complex identities follow from $d_C^{q+1}d_C^q=0$; at a cut they are zero identities. The support bounds give $T_a\\cong C^\\bullet$ and $T_{b+1}\\cong0$ by the termwise identity maps on nonzero terms and the unique maps on zero terms.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FCP, lemma-K-bounded-derived, proof: displayed stupid-truncation triangles and finite induction (lines 9112–9128)."
+   }
+  },
+  {
+   "text": "For $a\\le n\\le b$, let $E_n$ be the complex with $C^n$ in degree $n$ and zero elsewhere. Define $i_n:T_{n+1}\\to T_n$ to be the identity in degrees $q\\ge n+1$ and zero below, and $p_n:T_n\\to E_n$ to be the identity in degree $n$ and zero elsewhere. Both commute with differentials: away from the cut this is identity commutation or a zero identity, while at degree $n$ the inclusion has zero source and the projection has zero target in degree $n+1$. The sequence $0\\to T_{n+1}\\xrightarrow{i_n}T_n\\xrightarrow{p_n}E_n\\to0$ is degreewise short exact in the abelian category [def-sp-abelian]. In degree $n$ it is $0\\to0\\to C^n\\xrightarrow{1}C^n\\to0$; in degrees $q\\ge n+1$ it is $0\\to C^q\\xrightarrow{1}C^q\\to0\\to0$; below $n$ every object is zero. Thus no assertion about truncations is being invoked without a proof.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FCP, lemma-K-bounded-derived, proof: displayed stupid-truncation triangles and finite induction (lines 9112–9128)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the degreewise short exact sequence just constructed. Its hypotheses are exactly that $\\mathcal A$ is abelian and $D(\\mathcal A)$ exists, both assumed here. For every $a\\le n\\le b$ this gives a distinguished triangle $Q(T_{n+1})\\to Q(T_n)\\to Q(E_n)\\to Q(T_{n+1})[1]$. Only existence and distinguishedness are needed; the boundary map's naturality and its sign play no role.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FCP, lemma-K-bounded-derived, proof: displayed stupid-truncation triangles and finite induction (lines 9112–9128)."
+   }
+  },
+  {
+   "text": "The shift convention of [def-weil-abstract-derived-category] gives $E_n\\cong C^n[0][-n]$: the unique nonzero term has degree $n$, and the shifted differential is zero regardless of its sign. Since $Q$ commutes with shifts, $Q(E_n)\\cong Q(C^n[0])[-n]$. The hypothesis puts $Q(C^n[0])$ in $\\mathcal S$ for $a\\le n\\le b$; closure under all integer shifts and isomorphisms, assumed in the statement, puts $Q(E_n)$ in $\\mathcal S$ as well.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FCP, lemma-K-bounded-derived, proof: displayed stupid-truncation triangles and finite induction (lines 9112–9128)."
+   }
+  },
+  {
+   "text": "Set $N=b-a+1\\in\\mathbf Z_{>0}$. Induct on integers $k=0,\\ldots,N$ to prove $Q(T_{b+1-k})\\in\\mathcal S$. At $k=0$ this is the zero object identified in Step 1. For $k<N$, put $n=b-k$, so $a\\le n\\le b$ and $n+1=b+1-k$. The induction hypothesis gives the first vertex $Q(T_{n+1})$ of the distinguished triangle of Step 3, and Step 4 gives its third vertex $Q(E_n)$. For completeness, rotate this triangle twice using (TR2) of [def-weil-triangulated-category]. Its vertices are $Q(E_n),Q(T_{n+1})[1],Q(T_n)[1]$. The first two lie in $\\mathcal S$ by Step 4 and shift closure, so third-vertex closure gives $Q(T_n)[1]\\in\\mathcal S$, and shifting by $[-1]$ gives $Q(T_n)\\in\\mathcal S$. This is the claim for $k+1$. At $k=N$ this is $Q(T_a)\\in\\mathcal S$. The isomorphism $T_a\\cong C^\\bullet$ from Step 1 and closure under isomorphisms finish the proof.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0FCP, lemma-K-bounded-derived, proof: displayed stupid-truncation triangles and finite induction (lines 9112–9128)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0FCP, lemma-K-bounded-derived, proof: displayed stupid-truncation triangles and finite induction (lines 9112–9128)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
    "query": "prop_of.*(complex|bounded)|mem.*triangulated.*|stupidTrunc",
-   "results": "8 hits: Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean, Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean, Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean, Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean, Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean, Mathlib/Algebra/Homology/Embedding/Basic.lean, Mathlib/Algebra/Homology/Embedding/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean",
+   "results": "10 hits: Mathlib/CategoryTheory/Triangulated/TStructure/Induced.lean, Mathlib/CategoryTheory/Triangulated/Opposite/Pretriangulated.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean, Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean, Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean, Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean, Mathlib/Algebra/Homology/Embedding/StupidTrunc.lean",
    "date": "2026-10-21",
    "verdict": "no match: t-structure bounds, stupid-truncation constructions and closure instances do not state bounded termwise devissage"
   },
@@ -67,7 +133,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lemma-weil-pbc-perfect-projection-formula",
@@ -84,5 +150,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-bounded-complex-triangulated-devissage",
+  "worker": "stage1",
+  "summary": "Expanded the bounded-term devissage in Stacks 0FCP into explicit stupid tails, degreewise short exact sequences, their distinguished triangles, and a finite descending induction. Reused the existing general complex-ses triangle node; no new nodes. Checked empty intervals, shift signs and absence of retract or projectivity assumptions; project Lean bounded-devissage declarations concern cohomology instead of terms.",
+  "blueprint": "Realizes the first proof paragraph of lemma-weil-pbc-perfect-projection-formula in the main-20261015 snapshot: the assertion that the triangulated locus contains bounded perfect representatives once their terms belong to it. This item supplies only the finite stupid-truncation induction, independently of retract closure."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NE-d7ee75696",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-d7ee75696 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full. The delivery is one commit with only the item and its report: no new nodes, no unit edits, statement unchanged. The base proof was empty (an imported statement-only node from the split of lemma-weil-pbc-perfect-projection-formula), so no re-split note applies. Statement checked: a complex supported in [a,b] whose terms Q(C^q[0]) lie in a strictly full S closed under 0, isomorphisms, shifts and third vertices has Q(C) in S. It is true, and the subcategory notion is defined inline. Small cases tested: a>b, a=b, a two-term complex with a nonzero differential, gaps of zero terms, negative degrees. Source checked: Stacks derived.tex Tag 0FCP = lemma-K-bounded-derived (tags line 19189, label at line 9077); the stupid-truncation triangles and induction are at about lines 9112-9128, and the item takes only the construction, not the K_0 claim. Step 1: T_n is a complex, T_a = C, T_{b+1} = 0, and the empty interval is handled. Step 2: i_n and p_n commute with the differentials at the cut, and every degreewise sequence is exact. Step 3: the hypotheses of lem-weil-pbc-complex-ses-triangle (abelian A, D(A), degreewise short exact sequence) are exactly met. Step 4: with (K[1])^r = K^{r+1}, E_n is isomorphic to C^n[0][-n], and Q commutes with shifts per the definition node. Step 5: two TR2 rotations give the triangle E_n, T_{n+1}[1], T_n[1]; the index range k <= b-a gives n in [a,b], and the endpoints are correct. Duplicate search over DAG statements (stupid truncation, triangulated/thick subcategory, generated, each/every term) found no duplicate; the existing stupid-truncation nodes are about décalage and filtrations. This also suits the parent's use for thick loci. No SGA is used. Minor: the report mentions citations.json and searches.jsonl, which are not in the commit. No fixes."
  }
 }
