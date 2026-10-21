@@ -69,7 +69,7 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-geo-p1-adjunction",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition",
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1DecompositionMaps",
   "declaration": "AlgebraicGeometry.Etale.p1DecompositionMap",
   "declarations": [
    "AlgebraicGeometry.Etale.p1DecompositionTwist",
@@ -80,7 +80,8 @@
   "by": "NB",
   "date": "2026-10-20",
   "existing": true,
-  "note": "Definition ownership for the existing canonical helpers, separated from the theorem in this unchanged module. No declaration is copied or newly introduced."
+  "note": "Existing canonical signed twist and decomposition map, moved to the publicly re-exported Maps prerequisite without changing their signatures or ownership.",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1DecompositionMaps.lean"
  },
  "reviewed": {
   "date": "2026-10-20",
@@ -97,5 +98,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Re-delivery after c93f H2 RETURN. Theorem stmt_deps sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition/lem-amb-p1-diagonal-integrals replaced in item and def-sp-p1-proetale-trace-system by existing:true def nodes def-sp-p1-comparison-arrows (15 plain GeoP1Cohomology defs), def-sp-p1-decomposition-arrows, def-sp-p1-diagonal-charts; ownership scan: every geoP1*/p1Decomposition*/projectiveLineDiagonal* identifier now resolves to a cited def node; statements verbatim, no rival owners, DAG acyclic; item statement/proof/proof_deps byte-identical to live. Advisory resolved: new def-sp-cartier-derived-realization pins delta = R(Delta_*)(s) ; exact single comparison ; cDelta ; t^-1 (exactness witness is a conjunct); free deltaType HEq verified sound: scratch rfl proves the Hom types equal (finiteEtaleTateSheaf 1 reduces to finiteEtaleTateLine), 11.3 s clean. Clauses 1-2, edge cases, docstrings, single sorry unchanged/OK; trace-system module byte-identical to c93f. Advisory: GeoCartierClass helpers owned only by base stmt_dep sk-lem-geo-cartier; finiteEtaleTateLine/ProjectiveLine/derivedUpperStarLowerStarAdjunction owners outside stmt_deps. Compile at load 133-172: CartierDerivedRealization 23.9-59.9 s clean, TraceSystem 31-58 s clean, item module timeout 60 s x3; item prefix through SpP1DiagonalIntegrals clean 49.2 s (kernel 40.5 s), delivery recorded 29.5/27.8/47.1 s. Maintainer: land item at lower load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-1baf3",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T125938-L-2464238",
+  "kind": "interface",
+  "note": "independent cc review: Delivered files diff -r against the PASSed head cb4040740 (C-cb404): only the report differs; packet base blobs and node diffs unchanged; live: item still open, no collisions; delivered modules compile (item 131 s with a 560 s timeout at load ~157); reader gate: GeoP1Cohomology and PurityFrameKummer compile against the delivered .lbuild with no messages"
  }
 }

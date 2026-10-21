@@ -30,110 +30,40 @@
  ],
  "proof": [
   {
-   "text": "The projection $q$ is proper by [lemma-nagata-projective-space-base-change-proper], hence finite type and quasi-compact. By [pqf-lem-locnoeth-lft], $P$ is locally Noetherian. Its quasi-compactness follows because $q$ and $S$ are quasi-compact; thus $P$ is Noetherian. This checks the scheme hypotheses of the proper projection formula used next.",
-   "uses": [
-    "lemma-nagata-projective-space-base-change-proper",
-    "pqf-lem-locnoeth-lft"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
-    "place": "Proof final sentence: applicability of proper tensor projection"
-   }
-  },
-  {
-   "text": "By [lem-asd-ordinary-finite-p1-adjunction] there is an isomorphism $b_q:A_S(1)[2]\\oplus A_S\\to Rq_*A_P(1)[2]$ with the shifted twisted unit and Kummer adjoint as components. Tensor it by $K=A_S(-1)[-2]$ and apply [lem-amb-proper-coproducts-projection] with $E=A_P(1)[2]$. The twists are locally free of rank one and pull back compatibly with tensor and evaluation by [lem-asd-etale-finite-twist-pullback]; evaluation identifies $q^{-1}K\\otimes_A^L E$ with $A_P$. On a local rank-one basis evaluation is multiplication $A\\otimes_A A\\to A$, an isomorphism. The two source summands become $A_S$ and $K$. We have therefore obtained an isomorphism $A_S\\oplus K\\to Rq_*A_P$. No flatness of $A$ over $\\mathbf Z/N$ is used.",
+   "text": "Use [lem-asd-ordinary-finite-p1-adjunction] to obtain the normalized positive-twist decomposition and its actual Chern class on the Noetherian base S. Apply [lem-asd-ordinary-finite-p1-untwist] to this biproduct isomorphism to obtain precisely the inverse-twist map (1,h).",
    "uses": [
     "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-amb-proper-coproducts-projection",
-    "lem-asd-etale-finite-twist-pullback"
+    "lem-asd-ordinary-finite-p1-untwist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
-    "place": "Proof: projective-line decomposition and proper tensor projection"
-   }
+   "elementary": false
   },
   {
-   "text": "Identify this isomorphism's components using [lem-amb-tensor-projection-adjunct]. Put $L=A_S(1)[2]$, $E=A_P(1)[2]$ and let $c:A_P\\to E$ be the stated Chern class. Apply the lemma first to $a=\\eta_{q,L}:L\\to Rq_*E$, whose adjoint is the identity under twist pullback, and then to $a=Rq_*c\\circ\\eta_{q,A_S}:A_S\\to Rq_*E$, whose adjoint is $c$. After the evaluation identifications of the preceding step, whose compatibility with inverse image, tensor and evaluation is [lem-asd-etale-finite-twist-pullback], the first adjoint is $1_{A_P}$ and the second is $1_{q^{-1}K}\\otimes c$ followed by evaluation. These define respectively $1$ and $h$. Thus the isomorphism just constructed is exactly $(1,h)$.",
+   "text": "For arbitrary g:Sprime->S, invertibility of N pulls back. Apply [lem-asd-ordinary-finite-p1-kummer-base-change] to obtain the actual class cprime and both component squares. The biproduct universal property combines them into the required square for (1,h).",
    "uses": [
-    "lem-amb-tensor-projection-adjunct",
-    "lem-asd-etale-finite-twist-pullback"
+    "lem-asd-ordinary-finite-p1-kummer-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
-    "place": "Proof: identification of the unit and Cartier-class components after tensor projection"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $g:S'\\to S$ be arbitrary, $P'=P\\times_SS'$, and write $g':P'\\to P$, $q':P'\\to S'$. The properness of $q$ is already checked and $A$ is a torsion ring since $N1_A=0$. Thus [lem-kun-proper-base-change-torsion-ring] gives an isomorphism $\\mathrm{Ex}:g^{-1}Rq_*A_P\\to Rq'_*A_{P'}$. By [lem-asd-etale-finite-twist-pullback] the source summands pull back to $A_{S'}\\oplus A_{S'}(-1)[-2]$, with tensor/evaluation compatibility. Invertibility of $N$ pulls back. No Noetherian hypothesis on $S'$ is required.",
+   "text": "The source comparison is invertible because additive inverse image preserves binary biproducts and both summand comparisons are isomorphisms. The exchange is invertible by [lem-asd-ordinary-finite-p1-exchange-iso]. Hence the left side of the square is invertible; cancel the invertible source comparison to show (1,hprime) invertible. This works for arbitrary Sprime.",
    "uses": [
-    "lem-kun-proper-base-change-torsion-ring",
-    "lem-asd-etale-finite-twist-pullback"
+    "def-asd-ordinary-finite-p1-decomposition-maps",
+    "lem-asd-ordinary-finite-p1-exchange-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
-    "place": "Proof: arbitrary change of base, using torsion-ring proper exchange"
-   }
-  },
-  {
-   "text": "Let $D=(x_0=0)\\subset P$. On the chart $x_1\\ne0$ its ideal is $(s)$ in $B[s]$, with $s=x_0/x_1$; on $x_0\\ne0$ its ideal is the unit ideal. Multiplication by $s$ is injective over every ring $B$ by comparison of polynomial coefficients, also after arbitrary base change. Thus $D$ and its pullback $D'\\subset P'$ are effective Cartier divisors. The dual ideal generators are $e_0=1$ and $e_1=s^{-1}$, hence $e_0=s e_1=t^{-1}e_1$. They give $\\mathcal O(D)=\\mathcal O_P(1)$ and $\\mathcal O(D')=\\mathcal O_{P'}(1)$ with exactly the statement's convention.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
-    "place": "Proof: the Cartier class of infinity under arbitrary base change"
-   }
-  },
-  {
-   "text": "Write $i:D\\hookrightarrow P$, $i':D'\\hookrightarrow P'$ and $u_D:A_P\\to Ri_*A_D$. The supported Kummer lemma [lem-asd-ordinary-supported-kummer] gives $c_1(\\mathcal O_P(1))=c_{D,A}u_D$ and $g'^{-1}c_{D,A}=c_{D',A}\\mathrm{Ex}_i$, using the divisor check in the preceding step. The exchange of [def-kun-unbounded-exchange] is a mate. The mate unit identity [lem-pur-mate-unit-compatibility], applied to this closed-immersion square with $\\alpha$ the inverse-image square isomorphism, says $\\mathrm{Ex}_i\\circ g'^{-1}u_D=u_{D'}$ under the constant-sheaf identifications. Composing these two equations proves $g'^{-1}c=c'$, the Kummer class of $\\mathcal O_{P'}(1)$.",
-   "uses": [
-    "lem-asd-ordinary-supported-kummer",
-    "def-kun-unbounded-exchange",
-    "lem-pur-mate-unit-compatibility"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
-    "place": "Proof: pullback compatibility of the Cartier/Kummer component"
-   }
-  },
-  {
-   "text": "For the projective-line square apply the mate unit identity [lem-pur-mate-unit-compatibility] and the mate counit identity [lem-amb-mate-unit-counit] to the exchange defined in [def-kun-unbounded-exchange]. The unit identity gives $\\mathrm{Ex}\\circ g^{-1}(1)=1'$. For the other component the counit identity, precomposed with $q'^{-1}g^{-1}h$, gives the adjunct of $\\mathrm{Ex}\\circ g^{-1}h$ as the pullback of the adjunct of $h$; naturality of the inverse-image square comparison makes its source $q'^{-1}g^{-1}K$. By [lem-asd-etale-finite-twist-pullback], the bifunctoriality of the inverse-image tensor comparison [lem-kun-inverse-image-monoidal] (which moves $g'^{-1}(1\\otimes c)$ to $1\\otimes g'^{-1}c$), and $g'^{-1}c=c'$ from the preceding step, this is $1\\otimes c'$ followed by evaluation. It is exactly the adjunct defining $h'$. Therefore $\\mathrm{Ex}\\circ g^{-1}(1,h)=(1,h')$. Its left side is a composite of isomorphisms, proving the required arbitrary-base compatibility and the isomorphism over $S'$.",
-   "uses": [
-    "lem-pur-mate-unit-compatibility",
-    "lem-amb-mate-unit-counit",
-    "def-kun-unbounded-exchange",
-    "lem-asd-etale-finite-twist-pullback",
-    "lem-kun-inverse-image-monoidal"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
-    "place": "Proof sentence: both defining components commute with arbitrary base change"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lemma-nagata-projective-space-base-change-proper",
-  "pqf-lem-locnoeth-lft",
   "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-amb-proper-coproducts-projection",
-  "lem-asd-etale-finite-twist-pullback",
-  "lem-amb-tensor-projection-adjunct",
-  "lem-kun-proper-base-change-torsion-ring",
-  "lem-asd-ordinary-supported-kummer",
-  "def-kun-unbounded-exchange",
-  "lem-pur-mate-unit-compatibility",
-  "lem-amb-mate-unit-counit",
-  "lem-kun-inverse-image-monoidal"
+  "lem-asd-ordinary-finite-p1-untwist",
+  "lem-asd-ordinary-finite-p1-kummer-base-change",
+  "def-asd-ordinary-finite-p1-decomposition-maps",
+  "lem-asd-ordinary-finite-p1-exchange-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
-  "place": "## Proof"
+  "place": "Proof: tensor cancellation and arbitrary-base compatibility; A6 Lean realization"
  },
  "mathlib_searches": [
   {
@@ -295,23 +225,10 @@
   "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition",
   "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1Decomposition",
   "declarations": [
-   "AlgebraicGeometry.Etale.P1DecompositionTwistTransport",
-   "AlgebraicGeometry.Etale.p1DecompositionTwistTransport",
-   "AlgebraicGeometry.Etale.p1DecompositionSheafPullback",
-   "AlgebraicGeometry.Etale.p1DecompositionSheafProduct",
-   "AlgebraicGeometry.Etale.p1DecompositionTwist",
-   "AlgebraicGeometry.Etale.p1DecompositionTwistPullback",
-   "AlgebraicGeometry.Etale.p1DecompositionEvaluation",
-   "AlgebraicGeometry.Etale.p1DecompositionUnit",
-   "AlgebraicGeometry.Etale.p1DecompositionChernAdjoint",
-   "AlgebraicGeometry.Etale.p1DecompositionMap",
-   "AlgebraicGeometry.Etale.p1DecompositionSourceMap",
-   "AlgebraicGeometry.Etale.p1DecompositionDegreeZeroTensor",
-   "AlgebraicGeometry.Etale.p1DecompositionDegreeZeroEvaluation",
    "AlgebraicGeometry.Etale.ordinaryFiniteP1Decomposition"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1Decomposition.lean",
-  "statement": "theorem ordinaryFiniteP1Decomposition (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) : ∃ c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶ (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧, ordinaryFiniteP1ChernSpec A N hA S ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸ hS.map (ProjectiveLine S ↘ S).appTop.hom) c ∧ IsIso (p1DecompositionMap A N hN hA S hS c) ∧ ∀ (S' : Scheme.{u}) (g : S' ⟶ S), ∃ c' : ordinaryFiniteUnit A (ProjectiveLine S') ⟶ (ordinaryFiniteLine A N hA (ProjectiveLine S'))⟦(2 : ℤ)⟧, ordinaryFiniteP1ChernSpec A N hA S' ((map_natCast (ProjectiveLine S' ↘ S').appTop.hom N) ▸ (((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom).map (ProjectiveLine S' ↘ S').appTop.hom)) c' ∧ IsIso (p1DecompositionMap A N hN hA S' ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c') ∧ (ordinaryFinitePullback A g).map (p1DecompositionMap A N hN hA S hS c) ≫ ordinaryFiniteP1Exchange A g (ordinaryFiniteUnit A (ProjectiveLine S)) ≫ (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom = p1DecompositionSourceMap A N hN hA g hS ≫ p1DecompositionMap A N hN hA S' ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c'",
+  "statement": "theorem ordinaryFiniteP1Decomposition (N : ℕ) (hN : 0 < N)\n    (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0)\n    (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))) :\n    ∃ c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n        (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧,\n      ordinaryFiniteP1ChernSpec A N hA S\n        ((map_natCast (ProjectiveLine S ↘ S).appTop.hom N) ▸\n            hS.map (ProjectiveLine S ↘ S).appTop.hom) c ∧\n      IsIso (p1DecompositionMap A N hN hA S hS c) ∧\n      ∀ (S' : Scheme.{u}) (g : S' ⟶ S),\n        ∃ c' : ordinaryFiniteUnit A (ProjectiveLine S') ⟶\n            (ordinaryFiniteLine A N hA (ProjectiveLine S'))⟦(2 : ℤ)⟧,\n          ordinaryFiniteP1ChernSpec A N hA S'\n            ((map_natCast (ProjectiveLine S' ↘ S').appTop.hom N) ▸\n              (((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom).map\n                (ProjectiveLine S' ↘ S').appTop.hom)) c' ∧\n          IsIso (p1DecompositionMap A N hN hA S'\n            ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c') ∧\n          (ordinaryFinitePullback A g).map (p1DecompositionMap A N hN hA S hS c) ≫\n              ordinaryFiniteP1Exchange A g (ordinaryFiniteUnit A (ProjectiveLine S)) ≫\n              (ordinaryFinitePushforward A (ProjectiveLine S' ↘ S')).map\n                (ordinaryFiniteUnitPullback A (ProjectiveSpace.map (ULift.{u} (Fin 2)) g)).hom =\n            p1DecompositionSourceMap A N hN hA g hS ≫\n              p1DecompositionMap A N hN hA S'\n                ((map_natCast g.appTop.hom N) ▸ hS.map g.appTop.hom) c'",
   "branch": "newtargets-dag",
   "by": "Q118",
   "date": "2026-10-16",
@@ -324,5 +241,15 @@
   "group": "Q118",
   "result": "pass",
   "note": "Read node, report (Worker report + Second reading by Q118), module and the exact dependency declarations: OrdinaryFiniteP1Kummer (ChernSpec, class realization), OrdinaryFiniteP1Arrows (pullback, pushforward, tensor, unit pullback, P1 exchange), FiniteEtaleTateSheaf, and EtaleFiniteTwistPullback (all conjuncts). Every clause matches: N>0; finite CommRing A in u+1 with N=0; IsNoetherian S; IsUnit N on global sections; ProjectiveLine; ordinary small-etale unbounded D(A); A(1)/A(-1) as line/ihom; K = A(-1)[-2]; h is the homEquiv adjoint of right-unit, then (x c), then the normalized twist pullback, then evaluation (even shifts, no sign); the unit is the adjunct of the constant pullback; IsIso of biprod.desc; for all S' and g with no hypothesis, c' satisfies the same spec and the base-change square has the correct direction. ChernSpec determines c, so the existential is not weaker. The Classical.choice transport record is a subsingleton (roots via mono kernel inclusion, line via pure tensors/zero/power/negative-evaluation, product hom = ev), so the selection is canonical; not a duplicate of the positive-only OrdinaryFiniteTwistTransport. stmt_deps add only the landed def-asd-ordinary-finite-p1-arrows (no cycle); lean.statement is verbatim; no statement_change. Edge cases checked: A=0, N=1, empty S/S', non-flat Z/2 with N=4, non-Noetherian S'; universes bound, no added equality. nt_compile.py local overlay: 35.5 s and 38.2 s, clean. Only sorry; docstrings carry source and blueprint tags. Minor non-blocking: the docstring cites the main-20261015 source path while the node's source.document is the master path. No fixes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-1baf3",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T125938-L-2464238",
+  "kind": "interface",
+  "note": "independent cc review: Delivered files diff -r against the PASSed head cb4040740 (C-cb404): only the report differs; packet base blobs and node diffs unchanged; live: item still open, no collisions; delivered modules compile (item 131 s with a 560 s timeout at load ~157); reader gate: GeoP1Cohomology and PurityFrameKummer compile against the delivered .lbuild with no messages"
  }
 }
