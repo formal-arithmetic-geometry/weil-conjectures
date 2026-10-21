@@ -125,7 +125,7 @@
    }
   },
   {
-   "text": "For $E$ and $\\overline{\\mathbf Q}_\\ell$, rational restriction gives preservation for this general Brown adjoint. The coefficients $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ are the cases $\\mathcal O_E$ (step 9) and $E$ (this step) with $E=\\mathbf Q_\\ell$.",
+   "text": "For $E$ and $\\overline{\\mathbf Q}_\\ell$, rational restriction gives preservation of $\\Dctf$ for this same general Brown adjoint.",
    "uses": [
     "sk-thm-restriction"
    ],
@@ -133,6 +133,18 @@
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
     "place": "field-coefficient bullet and introductory coefficient specializations"
+   }
+  },
+  {
+   "text": "The base-coefficient identification gives $\\underline{\\mathbf Z}_\\ell\\cong\\underline{\\mathcal O}_{E_0}$ and $\\underline{\\mathbf Q}_\\ell\\cong\\underline{E_0}$ for the bottom finite subextension $E_0$. Coefficient-isomorphism transport identifies the compactification functors and their given right adjoints. Thus steps 9–10 give preservation for $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ too.",
+   "uses": [
+    "lem-sfb-base-coefficient-condensed-identification",
+    "lem-sfb-shriek-coefficient-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+    "place": "Introduction, coefficient specializations, with the scalar identifications and adjoint comparisons separated as independent tasks."
    }
   },
   {
@@ -163,6 +175,8 @@
   "det-prop-int-brown-adjoint",
   "det-sf-comp-coherence-cocycle",
   "det-sf-comp-coherence-single",
+  "lem-sfb-base-coefficient-condensed-identification",
+  "lem-sfb-shriek-coefficient-isomorphism",
   "lem-sp-fully-faithful-adjunction-restriction",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-qcqs-morphism-permanence",
@@ -266,8 +280,8 @@
   "date": "2026-10-21",
   "item": "sk-thm-existence",
   "worker": "stage1",
-  "summary": "Q66 repair of the 3733-character proof returned as too coarse: replaced the five compound steps by twelve atomic applications, separating the geometric prerequisites, compactification, single-compactification restriction, coherence, Brown adjunction, each coefficient family, full-subcategory adjunction restriction, and Dctf=Dbc substitution. All non-elementary arguments are already existing nodes, so the required duplicate search leads to reuse rather than new copies. In particular the previously implicit formal adjunction restriction is now an explicit citation of the existing Mathlib leaf lem-sp-fully-faithful-adjunction-restriction. Statement and statement dependencies unchanged; no new nodes; sources and existing searches retained. See report.md for the argument-by-argument return audit.",
-  "blueprint": "Steps 1–7 realize the compactification and compactness/Brown paragraph (unit step 2; det-existence-localizing (1)–(3)); steps 8–11 realize the coefficient restriction paragraph (unit step 3; det-existence-restriction); step 12 realizes the non-finite coefficient specialization. No unit or chapter route changes.",
+  "summary": "Q102 repairs the human-ordered re-split by adding two independently assignable statement-only lemmas: canonical condensed realizations of Q_l/Z_l as the bottom finite coefficient field and its integer ring, and transport of the compactification functor plus its given adjunction across a coefficient-ring isomorphism. The parent retains every existing geometric, compactness, coherence, Brown and coefficient-restriction application; its base-coefficient step now cites these two tasks instead of silently identifying different ring objects. New nodes are unsplit with no proof steps, and their complete intended arguments and search audit are retained in report.md. The parent statement and metadata are unchanged.",
+  "blueprint": "Steps 1–7 realize unit step 2 and det-existence-localizing (1)–(3). Steps 8–12 realize unit step 3 and det-existence-restriction, with new step 11 realizing the introductory base-coefficient specializations via two distinct lemmas. Step 13 is the non-finite Dctf=Dbc substitution. All arguments already carried by named existing nodes remain citations; the new nodes are not copies of those statements.",
   "tool_uses": [
    {
     "node": "sk-lem-brown-hypotheses",
@@ -321,10 +335,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q66-de3daf289",
-  "group": "Q66",
+  "reviewer": "NT-cc-Q102-9f721da55",
+  "group": "Q102",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-de3daf289 (reviewer sub-agent of L); spot-checked: Human-ordered re-split (repair note 2026-10-21: 3733 chars too coarse). I diffed the item against the live node: statement, stmt_deps, lean, reviewed, tool_uses and blueprint are identical, and only proof, proof_deps and split_report changed. The proof now has 12 single-citation steps totalling 2118 chars (longest 250), with no new nodes. I checked that every non-elementary argument of the old proof is already the statement of an existing node, so new nodes would have been duplicates (C5/D1); reusing them meets the note. The only newly cited node is the landed Mathlib leaf lem-sp-fully-faithful-adjunction-restriction (Adjunction.restrictFullyFaithful, Restrict.lean), so there is no cycle and no route issue. I read main-20261015 sk-thm-existence.proof.md, det-existence-localizing.proof.md (1)-(3) and det-existence-restriction.proof.md: steps 1-7 realize the localizing part, 8-11 the restriction bullets and the final 'formal' paragraph, 12 the Dctf=Dbc specialization. There is no SGA citation. I checked each step against the statement it cites and the hypotheses in force. (1) qcqs-over-affine gives X and Y qcqs. (2) Separated-cancellation (b), proper-fp-permanence (f) and qcqs-morphism-permanence (1) give f separated of finite type. (3) brown-hypotheses gives clause (1). (4) Nagata applies over qcqs Y and gives a dense compactification with qc open j and proper p. (5) and (6) comp-coherence-single and -cocycle, whose hypotheses all hold, give clause (2). (7) sk-prop-sf-existence gives clause (3). (8) rf-shriek-preservation covers finite A with no regularity hypothesis. (9) det-prop-int-brown-adjoint's identification feeds sk-thm-int-restriction. (10) sk-thm-restriction covers E and Q̄_ℓ. (11) the restriction leaf applies with the full inclusions and identity comparisons, giving clause (4). (12) ctf-equals-bc (2) applies only to the non-finite coefficients. Edge cases checked: f=id, X empty, A=Z/ℓ², E=Q_ℓ. One fault (C4, wording), which I fixed: step 10 credited the Z_ℓ case to sk-thm-restriction, but Z_ℓ=O_{Q_ℓ} is step 9's integral case. The text now says Z_ℓ and Q_ℓ are the O_E (step 9) and E (step 10) cases with E=Q_ℓ (fixes/dag/nodes/sec-six-functors-basics/sk-thm-existence.json; total 2179 chars). The existing tool_uses are unchanged and stay accepted. Maintainer notes: (a) Clause (1) and sk-lem-brown-hypotheses are false over a standing field of infinite ℓ-cd (Q54 957efba8: over iterated Laurent series over F̄_p, F_ℓ is not compact because the pro-étale ⊕F_ℓ[n] equals ΠF_ℓ[n]). I found nothing on it in live HUMAN.md or the ledger, and it needs a human decision; the re-split order correctly kept the statement. (b) The unit realized fields are still empty, unchanged from live.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-9f721da55 (reviewer sub-agent of L); spot-checked: Reopened human re-split (needs ≥1 new node, parent ≤3000 chars). The delivered item differs from live Q66 (de3daf28) only in proof, proof_deps and split_report; statement, stmt_deps, lean and tool_uses are byte-identical. The proof has 13 steps and 2443 chars. Live steps 1-9, 11 and 12 are kept verbatim. Live step 10 is split: E and Q̄_ℓ by sk-thm-restriction, and a new step 11 makes the base-coefficient specialization Z_ℓ/Q_ℓ = O_E/E at E=Q_ℓ explicit. That specialization is the det-existence-localizing.proof.md opening sentence and det-existence-restriction.proof.md 'it suffices to treat A, O_E, E, Q̄_ℓ' (main-20261015). No old argument is dropped. New nodes: (1) lem-sfb-base-coefficient-condensed-identification: ι:Q_ℓ→E_0=ι(Q_ℓ) is an isometric ring isomorphism because the norm extends |·|_ℓ; it restricts to unit balls and gives natural condensed-ring isomorphisms by postcomposition, with the integral/rational square commuting. True; checked S=∅ and constants. Small but genuine: the Lean statement treats ℚ_[ℓ] and FiniteIntermediateField E as different objects. (2) lem-sfb-shriek-coefficient-isomorphism: U_T=Res along p_T^*(e⁻¹) (direction checked against sk-def-sfb-change-of-scalars (5)) is an exact, coproduct-preserving equivalence. It matches Dctf (= lem-sfb-condensed-coefficient-iso-constructible both ways) and the minimal closures L. U_Y H ≅ H' U_X holds on underlying sheaves, K-injectives are preserved, and the conjugate b exists uniquely; I type-checked the counit formula. The iff for Dctf preservation is true. Edge cases e=id and X=∅ hold, and no Tor/regularity claims are made. Neither node restates the parent, and no cycle is introduced. I searched the DAG for duplicates (qlbar subextensions, scalar/tensor transport, coefficient-morphisms, identification-coefficient-transport) and found none. Step 11 applies node 2 with Λ=Z_ℓ/Q_ℓ, Λ'=O_{E_0}/E_0, the step-5 hypothesis and the step-7 adjunctions; sk-prop-sf-existence and comp-coherence-single cover all six coefficients. All other steps re-checked against their cited statements. No SGA; the item is not in the dropped list. Advisory: node 2 lists lem-weil-pbc-adjunction-of-natural-bijection in stmt_deps without citing it in the text; its Dctf clause overlaps lem-sfb-condensed-coefficient-iso-constructible (its proof should cite it). Maintainer: the inherited infinite-ℓ-cd dispute on clause (1) and sk-lem-brown-hypotheses (Q54/Q66) is still open; the statement was kept as the note requires."
  },
  "lean": {
   "module": "Sheaf.Paper.ExceptionalInverseImageExistence",
