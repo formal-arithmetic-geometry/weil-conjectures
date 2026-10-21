@@ -20573,3 +20573,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:13 L: merged deliver/Q11/lem-pur-etale-compact-scalar-coherence (reviewer FIX; after a return; new nodes: 4)
 - 07:13 L: merged deliver/NP/lem-weil-pbc-pulled-reduction-normalization-comparison (reviewer PASS; first push; new nodes: 0); claim not held by NP: not your claim
 - 07:13 L: merged deliver/Q139/def-nagata-strict-chart-to-extended-blowup-chart (reviewer PASS; first push; new nodes: 0)
+- 07:13 L: merged deliver/Q121/lemma-nagata-localization-ideal-pow (reviewer PASS; first push; new nodes: 0)
