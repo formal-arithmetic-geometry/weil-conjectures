@@ -1,6 +1,6 @@
 # Work queue
 
-151 items; claim with `tools/claim.py next <group> [--stage N]`.
+153 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (11 clusters, 711 modules)
 
@@ -29,12 +29,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
 | `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
-| `lem-sfb-condensed-derived-restriction-calculus` | 4012 | none |
 | `lem-sfb-derived-invariants-normal-subgroup-comparison` | 4012 | none |
 | `lem-sfb-integral-lisse-closed-base-change` | 4012 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
 | `lem-sfb-prime-to-ell-condensed-acyclicity` | 4012 | none |
 | `lem-sfb-root-coordinate-supported-vanishing` | 4012 | none |
+| `lem-sfb-action-topos-geometric-restriction` | 4013 | none |
 | `lem-sfb-condensed-galois-global-descent` | 4013 | none |
 | `lem-sfb-geometric-condensed-finite-scalar-model` | 4013 | none |
 | `lem-sfb-internal-bar-ordered-cup` | 4013 | none |
@@ -48,13 +48,14 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-filtered-colimit-strictly-henselian-local` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (50)
+## Stage 2: nodes to state (52)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `sk-def-sf-orientation` | 2 | state | 17 |
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
+| `lem-sfb-condensed-derived-restriction-calculus` | 1 | state | 4 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
 | `lem-sf-open-external-tensor-normalization` | 1 | state | 2 |
 | `lem-wf-internal-hom-weil` | 1 | state | 2 |
@@ -90,6 +91,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sfb-wstrict-lisse-component-cohomology` | 1 | state | 0 |
 | `lem-sp-finite-coefficient-input-models` | 1 | state | 0 |
+| `lem-trf-bounded-below-derived-mate-model` | 1 | state | 0 |
 | `lem-weil-boundary-comparison-composition-transport` | 1 | state | 0 |
 | `lem-zl-adic-hom-tensor-lisse-criterion` | 1 | state | 0 |
 | `lem-zl-constant-geometric-stalk-unit` | 1 | state | 0 |
@@ -103,7 +105,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-wf-tate-twist-compatibility` | 2 | state | 0 |
 | `lem-wf-tate-twist-frobenius` | 2 | state | 0 |
 
-Not open yet: 374 nodes that below a finished node, not needed, 104 nodes that wait for a statement dependency (bottom-up), 20 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 373 nodes that below a finished node, not needed, 104 nodes that wait for a statement dependency (bottom-up), 20 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (62)
 
