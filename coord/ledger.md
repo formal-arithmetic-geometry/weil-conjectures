@@ -23774,3 +23774,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:17 L: returned deliver/NQ/lem-pur-vector-integration-site-comparison (reviewer RETURN: L: independent stage-2 immutable head 7845f3f7f26a: F1 H2/H12: the statement uses plain defs from theorem modules: openP)
 - 21:20 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 21:20 L: returned deliver/ND/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D4/C6 in substance, C5, D1, D2. (1) The new node lem-sfb-norm-algcl-closed-support-base-change (γ: S_Z Ri^!_A N ≅ Ri^!_B)
+- 21:20 L: returned deliver/NH/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: This is the 12th push of lem-sfb-gabber-global-snc-alteration; the 11 earlier pushes (NV, NF×3, NL×2, NB, NH, NC, NI×2) )
