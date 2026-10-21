@@ -43,13 +43,11 @@
    }
   },
   {
-   "text": "On the point put $A=\\underline{\\Qlb}$. Given compatible additive sheaf maps $a_E:\\underline E\\to G$, define $a_S(t)=a_{E,S}(t)$ by choosing a finite field containing the image of $t\\in A(S)$. Such $E$ exists by the definition of $A$. Passing to a common finite compositum proves independence and additivity; restrictions use the same $E$. Every section occurs at some stage, so this additive sheaf map is unique. Thus the inclusions $j_E$ form an abelian colimit cocone. The index is nonempty and directed, and is a set of subsets of $\\Qlb$, hence small in a universe containing $\\Qlb$.",
+   "text": "Apply [lem-sfb-qlbar-point-abelian-colimit] to the finite-subextension-valued condensed ring. The actual inclusions $j_E$ give a colimit in condensed abelian groups. The index contains $\\mathbf Q_\\ell$, is directed by composita, and is a small set of subfields of the fixed $\\Qlb$.",
    "uses": [
-    "sk-def-sfb-qlbar-condensed",
-    "sk-def-sfb-condensed-ring",
-    "def-sfb-qlbar-subextension-to-qlbar"
+    "lem-sfb-qlbar-point-abelian-colimit"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
     "place": "Third isomorphism: explicit point-colimit universal property"
@@ -98,13 +96,12 @@
  "proof_deps": [
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "sk-def-sfb-qlbar-condensed",
-  "sk-def-sfb-condensed-ring",
-  "def-sfb-qlbar-subextension-to-qlbar",
+  "lem-sfb-qlbar-point-abelian-colimit",
   "sk-def-sfb-pullback-from-point",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
   "def-sfb-qlbar-x-cocone",
   "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-qlbar-condensed",
   "sk-def-sfb-sheaf-tensor",
   "lem-sfb-filtered-ring-object-cocone-colimit",
   "det-prop-sfb-qlbar-colimit-x-pullback",
@@ -113,7 +110,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x.proof.md",
-  "place": "The four blueprint comparison paragraphs; assembly using the existing integral, localization and pullback detail nodes. The point-colimit universal property is explicit; the ring upgrade uses the filtered ring-object cocone lemma of this unit."
+  "place": "Assembly of the existing integral, localization and pullback detail nodes, the extracted point-colimit statement (with its existing project declaration seeded for audit), and the filtered ring-object cocone lemma landed for this repair. No argument is removed: pointwise factorization and universal-property work now belong to the point-colimit node."
  },
  "mathlib_searches": [
   {
@@ -248,12 +245,12 @@
   "date": "2026-10-21",
   "item": "sk-prop-sfb-qlbar-colimit-x",
   "worker": "stage1",
-  "summary": "Dedicated Q04 re-split handoff repaired without changing the statement. Replaced the inline localization and pullback arguments by their existing detail nodes; replaced the hidden ring-colimit lifting argument by the statement-only node lem-sfb-filtered-ring-object-cocone-colimit (reviewer FIX: the first version cited the route-pivot-dropped lem-coef-associative-word-filtration). The point-colimit argument remains an elementary explicit universal-property calculation. One new node (added at review); otherwise creating separate nodes for these existing arguments would duplicate them. Removed the old C4 misuse of the scalar-exactness statement as a localization-cocone theorem. All proof dependencies were opened and reverse paths checked.",
-  "blueprint": "First isomorphism: step 1; Second isomorphism: step 2; Third isomorphism: steps 3-4; Compatibility with inverse image: step 5; final Q_ell specialization: step 6. All four unit steps remain on the prescribed route.",
+  "summary": "Continued the retained Q04 assembly. Added the missing statement-only point-colimit child for the exact Profinite.isColimitPadicAlgClRingObjCocone declaration listed with nodes=[] in the item audit, after DAG/blueprint/source/Mathlib searches. Step 3 now cites that child; step 4 retains the independent filtered-ring-object lifting child added for this repair by Q04. The two children divide sectionwise additive descent from the monoidal ring-object upgrade. The item statement is unchanged. The current gate explicitly counts children already landed since the repair note, so this delivery completes that pair without duplicating the existing ring lemma.",
+  "blueprint": "First isomorphism: step 1; Second isomorphism: step 2; Third isomorphism: point-colimit child in step 3 and filtered-ring-object lifting child in step 4; Compatibility with inverse image: step 5; Q_ell specializations: step 6.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "why": "Generic Stacks Tag 0038 / Mathlib colimit-preservation tool used on the point cocone, as the unit requires."
+    "why": "Generic Stacks Tag 0038 / Mathlib colimit-preservation tool transports the point cocone, as the unit requires."
    }
   ]
  },
@@ -265,10 +262,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q04-7413fb076",
-  "group": "Q04",
+  "reviewer": "NT-cc-NH-7863d1315",
+  "group": "NH",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-7413fb076 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement byte-identical to live; six assembly steps, re-split per the human note of 2026-10-21), the blueprint main-20261015 proof (4 paragraphs), the unit, and the statements of all cited nodes. Steps 1, 2 and 5 cite det-…-integral-limit (3), det-…-invert-ell (module telescope, legs ℓ^{-m}φ, ring iso) and det-…-pullback (1)-(3); each says what the step takes from it. Step 3 is an elementary point-colimit universal-property check from the finite-image sections of sk-def-sfb-qlbar-condensed, using composita for independence and additivity; the index is nonempty since it contains Q_ℓ. Step 6: O_{Q_ℓ}=Z_ℓ and Z_ℓ/ℓ^n≅Z/ℓ^n by def-weil-l-adic-numbers. Edge cases checked: X empty, f=id, E=Q_ℓ, ℓ a residue characteristic. Closure traversal finds no cycle. Route pivot: step 4 cited lem-coef-associative-word-filtration, which is on route-pivot-dropped.txt line 225. The step is named and the clause used (filtered-colimit creation for algebras) is correct, but citing it makes a dropped node with a 15-step proof reachable again, so I do not accept it. FIX: new statement-only node lem-sfb-filtered-ring-object-cocone-colimit (unit/item sk-prop-sfb-qlbar-colimit-x). It states that over a small filtered I, with tensor preserving I-colimits in each variable, a ring-object cocone whose underlying cocone is a colimit is a colimit in ring objects, and in commutative ring objects when braided. Its proof is checked: the diagonal is final, so the c_i⊗c_i are jointly epimorphic, and the unit holds via a nonempty I. It is the landed Lean helper siftedRingCoconeIsColimit. Step 4 is rewritten to use this node, with filtered from directedness plus Q_ℓ, legs as ring maps from pulled-back-coefficients, and preservation from the sheaf-tensor right adjoints. lem-coef-associative-word-filtration and lem-sfb-proetale-sheaves-grothendieck are removed from uses, proof_deps and split_report.tool_uses. Unit realized step 3 now lists the new node. Accepted tool_use: lem-weil-pbc-left-adjoint-preserves-colimits.; 3 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-7863d1315 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-sfb-qlbar-point-abelian-colimit, both units (qlbar-colimit-x and qlbar-colimit-point), the main-20261015 blueprint proofs (item, det-pullback, and raw sk-prop-sfb-qlbar-colimit-point), the statements of every cited node, the human's re-split note of 2026-10-21, and the Lean declaration isColimitPadicAlgClRingObjCocone at FiniteSubextension.lean:173. Re-split: the old 9-step proof (7530 chars with LaTeX) is now a 6-step assembly of 2033 chars. Old steps 1-2 go to the existing det-integral-limit and det-invert-ell nodes. Old step 3 (point colimit) goes to the new node. Old step 5 (ring upgrade) goes to lem-sfb-filtered-ring-object-cocone-colimit, which Q04 landed under the same note. Old steps 6-8 go to det-pullback, which passed review on 10-17 and has its own 5-step proof, so citing it removes an inline duplicate. Old step 9 is elementary. Together with Q04's landed child this makes 2 new nodes of comparable size. Neither restates the item, and nothing was blurred. New node: it is exactly the raw blueprint colimit-point proposition and its unit statement. Proof checked: the stage maps are injective and the index is directed, so the presheaf colimit is the union, and the union equals A(S) by corestriction. A is a sheaf, since finite covers glue in a compositum. The topology of E restricted from Q̄_ℓ matches sk-def-sfb-condensed-ring. Cases checked: S empty, S a point, a section admitting two fields. Taking all continuous maps into Q̄_ℓ instead would make it false, and that is excluded. No duplicate: tail-module-colimit, two-colimit, qbar-function-coefficients and continuous-algcl all differ. blueprint.same_as=[] is forced because colimit-point has no DAG node. I computed the closure for cycles and found none; proof_deps equal the step uses. Steps 1-6 meet every hypothesis of what they cite; filtered index and tensor preservation are verified for the ring lemma. The statement is unchanged and no SGA is used. I accept the tool use lem-weil-pbc-left-adjoint-preserves-colimits. Maintainer notes: (1) unit sk-prop-sfb-qlbar-colimit-point has an empty realized; the new node is its statement. (2) The item's node-level tool_uses still lists lem-galois-yoneda-*, which the proof no longer uses; this comes from the base. (3) det-pullback step 5 re-proves the point colimit inline and could cite the new node."
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-qlbar-colimit-x",
