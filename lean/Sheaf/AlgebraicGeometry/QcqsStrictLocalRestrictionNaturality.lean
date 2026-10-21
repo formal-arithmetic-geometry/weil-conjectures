@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
+public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
@@ -58,12 +58,12 @@ theorem qcqsStrictLocalRestriction_naturality
         (MorphismProperty.Over.homMk
     (pullback.lift
       ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
-        Scheme.strictHenselizationBaseChangeMap f s j)
+        Scheme.smallStrictHenselizationBaseChangeMap f s j)
       (𝟙 _)
       (by
         change (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
-          Scheme.strictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _
-        simp only [Scheme.strictHenselizationBaseChangeMap, pullback.lift_snd,
+          Scheme.smallStrictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _
+        simp only [Scheme.smallStrictHenselizationBaseChangeMap_snd,
           pullbackSymmetry_hom_comp_snd, Category.id_comp]))
     (pullback.lift_snd _ _ _)).op ≫
     (Sheaf.ΓNatIsoSheafSections _ _
@@ -88,23 +88,22 @@ theorem qcqsStrictLocalRestriction_naturality
   MorphismProperty.Over.homMk
     (pullback.lift
       ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
-        Scheme.strictHenselizationBaseChangeMap f s j)
+        Scheme.smallStrictHenselizationBaseChangeMap f s j)
       (𝟙 _)
       (by
         change (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
-          Scheme.strictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _
-        simp only [Scheme.strictHenselizationBaseChangeMap, pullback.lift_snd,
+          Scheme.smallStrictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _
+        simp only [Scheme.smallStrictHenselizationBaseChangeMap_snd,
           pullbackSymmetry_hom_comp_snd, Category.id_comp]))
     (pullback.lift_snd _ _ _)
   obtain ⟨π, _, hp, hf⟩ := Scheme.strictHenselizationBaseChangeCone_exists f s
   have hπ (j : SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)) :
-      π.app j = Scheme.strictHenselizationBaseChangeMap f s j := by
-    unfold Scheme.strictHenselizationBaseChangeMap
+      π.app j = Scheme.smallStrictHenselizationBaseChangeMap f s j := by
     apply pullback.hom_ext
-    · exact (hf j).trans (pullback.lift_fst _ _ _).symm
-    · exact (hp j).trans (pullback.lift_snd _ _ _).symm
-  have hn : Scheme.strictHenselizationBaseChangeMap f s j ≫ (B.map a).left =
-      Scheme.strictHenselizationBaseChangeMap f s k := by
+    · exact (hf j).trans (Scheme.smallStrictHenselizationBaseChangeMap_fst f s j).symm
+    · exact (hp j).trans (Scheme.smallStrictHenselizationBaseChangeMap_snd f s j).symm
+  have hn : Scheme.smallStrictHenselizationBaseChangeMap f s j ≫ (B.map a).left =
+      Scheme.smallStrictHenselizationBaseChangeMap f s k := by
     have h := π.naturality a
     change π.app k = π.app j ≫ (B.map a).left at h
     simpa only [hπ] using h.symm

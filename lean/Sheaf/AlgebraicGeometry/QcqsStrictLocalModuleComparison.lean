@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
+public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.AlgebraicGeometry.QcqsStrictLocalRestrictionNaturality
@@ -40,12 +40,12 @@ noncomputable def qcqsStrictLocalNeighbourhoodSection
   MorphismProperty.Over.homMk
     (pullback.lift
       ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
-        Scheme.strictHenselizationBaseChangeMap f s j)
+        Scheme.smallStrictHenselizationBaseChangeMap f s j)
       (𝟙 _)
       (by
         change (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
-          Scheme.strictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _
-        simp only [Scheme.strictHenselizationBaseChangeMap, pullback.lift_snd,
+          Scheme.smallStrictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _
+        simp only [Scheme.smallStrictHenselizationBaseChangeMap_snd,
           pullbackSymmetry_hom_comp_snd, Category.id_comp]))
     (pullback.lift_snd _ _ _)
 

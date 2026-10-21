@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization
+public import Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 
 public import WeilConjectures.AlgebraicGeometry.EtaleModuleSetPullbackComparison
@@ -292,12 +292,12 @@ theorem strictLocalModuleSections_set_transport
         (MorphismProperty.Over.homMk
     (pullback.lift
       ((pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
-        Scheme.strictHenselizationBaseChangeMap f s j)
+        Scheme.smallStrictHenselizationBaseChangeMap f s j)
       (𝟙 _)
       (by
         change (pullbackSymmetry f (Scheme.strictHenselizationStructuralMap s)).hom ≫
-          Scheme.strictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _
-        simp only [Scheme.strictHenselizationBaseChangeMap, pullback.lift_snd,
+          Scheme.smallStrictHenselizationBaseChangeMap f s j ≫ pullback.snd _ f = _
+        simp only [Scheme.smallStrictHenselizationBaseChangeMap_snd,
           pullbackSymmetry_hom_comp_snd, Category.id_comp]))
     (pullback.lift_snd _ _ _)).op ≫
     (Sheaf.ΓNatIsoSheafSections _ _
@@ -307,7 +307,7 @@ theorem strictLocalModuleSections_set_transport
         (Scheme.Etale.mk (𝟙 _)) Over.mkIdTerminal)).inv.app _) z) =
           ((Scheme.etaleSetPullback
             (pullback.snd (Scheme.strictHenselizationStructuralMap s) f)).obj H).obj.map
-              (Scheme.strictHenselizationSectionMap f s j).op
+              (Scheme.smallStrictHenselizationSectionMap f s j).op
                 (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
                   (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤
                     (pullback.snd (Scheme.strictHenselizationStructuralMap s) f))
@@ -363,9 +363,9 @@ theorem strictLocalModuleSections_set_transport
   let e1 := e0 ≪≫ eq.symm ≪≫ ec.symm ≪≫ er ≪≫ ed.symm
   let U := f.Etale.obj ((Scheme.AffineEtale.Spec Y).obj
     ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj j).1)
-  let v := Scheme.strictHenselizationBaseChangeMap f s j
+  let v := Scheme.smallStrictHenselizationBaseChangeMap f s j
   have hv : v ≫ U.hom = h := by
-    exact pullback.lift_snd _ _ _
+    exact Scheme.smallStrictHenselizationBaseChangeMap_snd f s j
   let dA : T ⟶ (sitePullback g).obj U :=
     MorphismProperty.Over.homMk
       (pullback.lift (σ ≫ v) (𝟙 A) (by
@@ -396,7 +396,7 @@ theorem strictLocalModuleSections_set_transport
   have htransport : (forget (ModuleCat.{u + 1} Λ)).map ηm ≫
       (forget (ModuleCat.{u + 1} Λ)).map (M.obj.map dA.op) ≫
       eq.inv ≫ ec.inv ≫ er.hom ≫ ed.inv =
-    ηh ≫ ((setPullback h).obj H).obj.map (Scheme.strictHenselizationSectionMap f s j).op := by
+    ηh ≫ ((setPullback h).obj H).obj.map (Scheme.smallStrictHenselizationSectionMap f s j).op := by
     erw [reassoc_of% hcoeff]
     exact hsym
   have hc0 : (forget (ModuleCat.{u + 1} Λ)).map eΓ.inv ≫ e0.hom = 𝟙 _ :=
@@ -404,7 +404,7 @@ theorem strictLocalModuleSections_set_transport
   have hall : (forget (ModuleCat.{u + 1} Λ)).map
       (ηm ≫ M.obj.map dA.op ≫ eΓ.inv) ≫ e1.hom =
       ηh ≫ ((setPullback h).obj H).obj.map
-        (Scheme.strictHenselizationSectionMap f s j).op := by
+        (Scheme.smallStrictHenselizationSectionMap f s j).op := by
     erw [(forget (ModuleCat.{u + 1} Λ)).map_comp ηm (M.obj.map dA.op ≫ eΓ.inv),
       (forget (ModuleCat.{u + 1} Λ)).map_comp (M.obj.map dA.op) eΓ.inv]
     simp only [Category.assoc]

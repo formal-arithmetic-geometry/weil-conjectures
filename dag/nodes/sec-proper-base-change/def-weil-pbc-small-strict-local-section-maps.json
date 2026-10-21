@@ -1,0 +1,130 @@
+{
+ "id": "def-weil-pbc-small-strict-local-section-maps",
+ "kind": "definition",
+ "title": "Transported small strict-local section maps",
+ "statement": "Let f:X→Y be a scheme morphism and y:Spec Ω→Y a geometric point. Let C be the coordinate-ring colimit over a small representative affine pointed category [def-weil-pbc-strict-henselization-limit], and let q:Spec C→Y be its structural map [def-weil-pbc-strict-henselization-structural-map]. The existing canonical final-functor colimit isomorphism e:C≅O^sh identifies Spec(e.inv) followed by strictLocalizationToBase with q. Define the small-model leg Spec C×_Y X→V×_Y X as the base change of Spec(e.inv) followed by the official leg [lem-weil-pbc-sets-pushforward-stalk-strict-henselization]. Its second projection is the projection to X and its first projection is the original small spectrum-cone leg followed by Spec Γ(V)≅V. Define its graph section into the pullback to Spec C×_Y X using this leg and the identity.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, affine pointed-neighbourhood replacement and the inverse limit X×_Y Spec(O^sh); canonical comparison under the choice of a small representative category"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "The final-functor colimit comparison commutes with every coprojection by Functor.Final.ι_colimitIso_inv. Apply Spec and the original structural-map characterization to prove the comparison is over Y. Base change this map and compose with the official strictHenselizationBaseChangeMap. Pullback projection identities and the same coprojection equation give its two projections; its graph is pullback.lift with second component identity.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03Q9, compatibility of the chosen small affine-neighbourhood limit presentation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical comparison isomorphism of colimits over a final functor commutes with coprojections",
+   "results": "CategoryTheory.Functor.Final.ι_colimitIso_hom; CategoryTheory.Functor.Final.ι_colimitIso_inv; CategoryTheory.Functor.Final.ι_colimitIso_hom_assoc; CategoryTheory.Functor.Final.ι_colimitIso_inv_assoc; CategoryTheory.Functor.Final.colimIso; CategoryTheory.Functor.Final.colimit_cocone_comp_aux; CategoryTheory.Functor.Final.colimitIso_hom; CategoryTheory.Functor.Final.colimitIso",
+   "date": "2026-10-21",
+   "verdict": "existing colimit comparison supplies transport; no strict-local adapter in Mathlib"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Final.ι_colimitIso_inv",
+   "results": "CategoryTheory.Functor.Final.ι_colimitIso_inv",
+   "date": "2026-10-21",
+   "verdict": "existing colimit comparison supplies transport; no strict-local adapter in Mathlib"
+  },
+  {
+   "tool": "grep",
+   "query": "ι_colimitIso_inv",
+   "results": "Mathlib/CategoryTheory/Limits/Final.lean",
+   "date": "2026-10-21",
+   "verdict": "existing colimit comparison supplies transport; no strict-local adapter in Mathlib"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Transport the strict henselization neighborhood section maps across a final-functor colimit isomorphism",
+   "results": "CategoryTheory.Functor.Final.colimIso; CategoryTheory.Functor.Final.colimitIso; CategoryTheory.Functor.Final.colimit_pre_isIso; CategoryTheory.Limits.IsColimit.mapCoconeEquiv; localCohomology.isoOfFinal; CategoryTheory.Functor.Final.colimitIso_hom; CategoryTheory.Grothendieck.fiberwiseColimitMapCompEquivalence; CategoryTheory.Functor.Final.createsColimitOfComp",
+   "date": "2026-10-21",
+   "verdict": "existing colimit comparison supplies transport; no strict-local adapter in Mathlib"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization",
+  "date": "2026-10-22",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-proper-strict-henselian-h0",
+   "place": "proof, Tag 0A0C: the invocation of Tag 09ZF; within 09ZF, last sentence of the proof: 's' comes from a section of F over X by Remark 09Z3'; Remark 09Z3 is proved 'in exactly the same way' as Lemma 09Z2, by checking on stalks that G is the equalizer of f_{0,*}f_0^{-1}G => f_{1,*}f_1^{-1}G; within the proof of 09Z2 the sentence '(F_n)_ybar = ⊕_{e∈E^{n+1}} F_ybar by Proposition 03QP and Lemma 03Q1', here for sheaves of sets and n = 0, 1; within that use of 03QP (1), the proof of 03QP: 'the stalk of R^q f_*F at ybar is computed by H^q(X^sh_ybar, F) by Theorem 03Q9', here q = 0 and sheaves of sets",
+   "via": [
+    "lem-weil-pbc-sets-pushforward-stalk-strict-henselization",
+    "lem-weil-pbc-sets-finite-pushforward-stalk",
+    "lem-weil-pbc-sets-finite-surjective-descent",
+    "lem-weil-pbc-gabber-h0-etale-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-iff",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmallStrictLocalSectionMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmallStrictLocalSectionMaps.lean",
+  "declaration": "AlgebraicGeometry.Scheme.smallStrictHenselizationBaseChangeMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.smallStrictLocalization_toBase",
+   "AlgebraicGeometry.Scheme.smallStrictHenselizationBaseChangeMap",
+   "AlgebraicGeometry.Scheme.smallStrictHenselizationBaseChangeMap_snd",
+   "AlgebraicGeometry.Scheme.smallStrictHenselizationBaseChangeMap_fst",
+   "AlgebraicGeometry.Scheme.smallStrictHenselizationSectionMap"
+  ],
+  "statement": "def smallStrictHenselizationBaseChangeMap {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) (j : SmallModel.{u} (strictHenselizationNeighbourhoods y)) : pullback (strictHenselizationStructuralMap y) f ⟶ pullback ((AffineEtale.Spec Y).obj ((equivSmallModel.{u} (strictHenselizationNeighbourhoods y)).inverse.obj j).1).hom f",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-59f3f",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T183343-L-1605786",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-59f3f",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261021T183343-L-1605786",
+  "kind": "interface",
+  "note": "independent cc review: Retirement of the Sheaf twin of SetsPushforwardStalkStrictHenselization against the WeilConjectures twin; the new small-model transport map's _fst/_snd lemmas match the old pullback.lift components, so the 4 changed consumer statements are unchanged in meaning; change record lists all edited unclaimed modules; 8 delivered modules plus 5 external direct importers compiled in sandbox; axioms clean"
+ }
+}

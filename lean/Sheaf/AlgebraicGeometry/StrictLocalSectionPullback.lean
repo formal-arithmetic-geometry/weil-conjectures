@@ -270,8 +270,8 @@ theorem strictLocal_section_pullback
         simp only [δ, qcqsStrictLocalNeighbourhoodSection,
           MorphismProperty.Over.homMk_hom, Over.homMk_left]
         erw [pullback.lift_fst_assoc, pullback.lift_fst]
-        simp only [Scheme.strictHenselizationBaseChangeMap, Category.assoc]
-        erw [pullback.lift_fst]
+        simp only [Category.assoc]
+        rw [Scheme.smallStrictHenselizationBaseChangeMap_fst f s j]
         simp only [← Category.assoc, pullbackSymmetry_hom_comp_fst]
         rw [hqt]
         simp only [Category.assoc]
@@ -284,8 +284,8 @@ theorem strictLocal_section_pullback
         simp only [δ, qcqsStrictLocalNeighbourhoodSection,
           MorphismProperty.Over.homMk_hom, Over.homMk_left]
         erw [pullback.lift_fst_assoc, pullback.lift_snd]
-        simp only [Scheme.strictHenselizationBaseChangeMap, Category.assoc]
-        erw [pullback.lift_snd]
+        simp only [Category.assoc]
+        rw [Scheme.smallStrictHenselizationBaseChangeMap_snd f s j]
         simp only [pullbackSymmetry_hom_comp_snd]
         exact hq
     · exact (θ ≫ q.Etale.map δ ≫ c.inv.app U).w.trans
