@@ -20268,3 +20268,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:10 L: merged deliver/NO/lem-sf-compact-support-restriction-of-scalars (reviewer FIX; after a return; new nodes: 2)
 - 04:10 L: merged deliver/NK/lem-sf-ringed-open-roos-preservation (reviewer PASS; first push; new nodes: 0)
 - 04:10 L: merged deliver/Q28/lem-sfb-tor-interval-local-detection (reviewer PASS; first push; new nodes: 0)
+- 04:10 L: returned deliver/Q28/lem-sfb-lattice-pullback (reviewer RETURN: L: independent stage-2 immutable head 8d1c775d8a63: H2: the delivery adds theorem nodes lem-weil-pbc-lattice-pair-image-)
