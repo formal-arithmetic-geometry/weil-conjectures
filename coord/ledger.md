@@ -21515,3 +21515,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:59 L: merged deliver/Q04/lemma-nagata-strict-transform-chart-localization (reviewer PASS; after a return; new nodes: 0)
 - 08:59 L: merged deliver/Q98/lem-sp-koszul-roos-projection-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:59 L: merged deliver/Q79/lem-pur-quotient-diagram-projection-evaluation (reviewer FIX; first push; new nodes: 0)
+- 08:59 L: merged deliver/Q76/lem-pur-total-tensor-signed-coherence (reviewer FIX; first push; new nodes: 0)
