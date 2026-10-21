@@ -1,0 +1,122 @@
+{
+ "id": "lem-fix-ringed-site-perfect-duality-for-model",
+ "kind": "statement",
+ "title": "Perfect duality in a specified normalized coefficient presentation",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-pf-reduction",
+ "statement": "Let (C,J,R) be a ringed site with the independent site, morphism, coefficient and derived-category universes of def-weil-size-convention. Assume sheafification and locally-bijective characterization over the site and all its slices. For any site-perfect P in the unbounded module-sheaf derived category and any normalized RingedSiteDualityModel M [def-zl-ringed-site-duality-model], the canonical natural transformation N ↦ RHom(P,R) tensor N → RHom(P,N), defined by the specified evaluation transpose and symmetry of M, is invertible. The presentation M is fixed before P is chosen.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex; proof of the all-target tensor-dual evaluation isomorphism on local bounded finite-projective representatives."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "def-zl-ringed-site-duality-model"
+ ],
+ "proof": [
+  {
+   "text": "Use the slice restriction comparison data and local-model criterion of the existing perfect-duality proof, now applied to the specified presentation M instead of choosing a presentation in the conclusion. The private restriction lemmas quantify over both presentations.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a covering family choose bounded strict perfect representatives for P. The strict evaluation theorem and source-transport formula give invertibility of every restricted evaluation component. Exact slice restriction detects isomorphisms; symmetry converts to the left-ordered comparison, and componentwise invertibility gives invertibility of the natural transformation.",
+   "uses": [
+    "lem-sfb-ringed-site-perfect-duality",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-site-duality-maps",
+  "lem-sfb-ringed-site-perfect-duality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JJ, lemma-dual-perfect-complex; proof of the all-target tensor-dual evaluation isomorphism on local bounded finite-projective representatives."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "[Pp]erfect.*[Dd]ual|[Dd]ual.*[Pp]erfect",
+   "results": "14 hits; Mathlib/Topology/Algebra/Module/PerfectPairing.lean, Mathlib/Topology/Algebra/Module/TopDualPairing.lean, Mathlib/Topology/Algebra/Module/TopDualPairing.lean, Mathlib/Topology/Algebra/Module/TopDualPairing.lean, Mathlib/Topology/Algebra/Module/TopDualPairing.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean, Mathlib/LinearAlgebra/PerfectPairing/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "No matching ringed-site derived statement; generic categorical constructors are used in the proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomUnitTensorToIhom\"",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "No matching ringed-site derived statement; generic categorical constructors are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a perfect complex on a ringed site the evaluation tensor dual comparison is invertible for any normalized tensor Hom presentation",
+   "results": "8 hits; HomologicalComplex.rightUnitor'_inv, HomologicalComplex.leftUnitor'_inv, HomologicalComplex.rightUnitor'_inv_comm, HomologicalComplex.rightUnitor, HomologicalComplex.leftUnitor'_inv_comm, HomologicalComplex.leftUnitor, HomologicalComplex.rightUnitor', FGModuleCat.FGModuleCatEvaluation_apply'",
+   "date": "2026-10-21",
+   "verdict": "No matching ringed-site derived statement; generic categorical constructors are used in the proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex on a ringed site has invertible evaluation tensor dual comparison in any normalized presentation",
+   "results": "8 hits; LinearMap.IsPerfPair.dualEval, Module.evalEquiv, Module.IsReflexive.of_isPerfPair, LinearMap.IsPerfPair.flip, Module.Dual.instIsReflecive, Module.Invertible.linearEquiv, LinearMap.apply_toPerfPair_flip, Module.Invertible.linearEquivDual",
+   "date": "2026-10-21",
+   "verdict": "No matching ringed-site derived statement; generic categorical constructors are used in the proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SitePerfectScalarHomComparison",
+  "date": "2026-10-21",
+  "group": "U4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-site-perfect-scalar-hom",
+   "place": "Tag 08JJ, lemma-dual-perfect-complex; proof of the all-target tensor-dual evaluation isomorphism on local bounded finite-projective representatives.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSitePerfectDualityForModel",
+  "file": "lean/Sheaf/CategoryTheory/RingedSitePerfectDualityForModel.lean",
+  "declaration": "CategoryTheory.ringedSitePerfectDualityForModel",
+  "statement": "theorem ringedSitePerfectDualityForModel\n    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)\n    [HasSheafify J AddCommGrpCat.{max c v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    [∀ U : C, HasSheafify (J.over U) AddCommGrpCat.{max c v r}]\n    [∀ U : C, (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]\n    (R : Sheaf J CommRingCat.{max c v r})\n    [HasDerivedCategory.{w} (SheafOfModules.{max c v r} ((sheafCompose J\n      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R))]\n    (P : DerivedCategory (SheafOfModules.{max c v r} ((sheafCompose J\n      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)))\n    (hP : SheafOfModules.IsPerfectOnRingedSiteOfUniverses.{c, v, r, w} R P)\n    (M : RingedSiteDualityModel.{c, v, r, w} J R) :\n    IsIso (ringedSiteDualEvaluationLeftNatTrans M.closed M.symmetric\n      (ringedSiteDualityUnit.{c, v, r, w} J R) M.unitIso P)",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261021T144009-L-35035",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261021T144009-L-35035",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
