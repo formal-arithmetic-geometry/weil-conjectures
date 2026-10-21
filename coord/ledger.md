@@ -19869,3 +19869,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:38 L: merged deliver/Q90/lem-sfb-extend-subfield-constructible (reviewer PASS; after a return; new nodes: 1)
 - 03:38 L: merged deliver/Q82/lem-sfb-module-upper-star-kflat-quasi-iso (reviewer PASS; after a return; new nodes: 1)
 - 03:38 L: merged deliver/Q62/lem-sp-affine-counit-scalar (reviewer PASS; first push; new nodes: 0); claim not held by Q62: not your claim
+- 03:38 L: merged deliver/Q69/lem-sp-p1-splitting-scalar (reviewer FIX; first push; new nodes: 0); claim not held by Q69: not your claim

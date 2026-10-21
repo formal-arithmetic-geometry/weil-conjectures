@@ -17,9 +17,96 @@
   "def-amb-p1-trace",
   "lem-sp-et-proet-coefficient-compatibility"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Normalize the scalar identifications before comparing arrows. For T=S,P, the sheaves A_T and A_T(1) are flat, and A_T(1) is locally free of rank one by [lem-asd-finite-etale-twist-line]. Their degree-zero complexes and shifts are K-flat by [lem-pc-kflat-closure]. Thus [lem-pur-derived-change-of-rings] computes their scalar extension by ordinary tensor. The balanced map (z\\otimes a)\\otimes b\\mapsto z\\otimes\\varphi(a)b has inverse z\\otimes b\\mapsto(z\\otimes1)\\otimes b; these formulas are balanced and mutually inverse. They give exactly the twist identifications in the statement. The scalar functor is exact and additive by the same derived-change-of-rings assertion, hence preserves shifts and finite biproducts with their inclusions and projections. Write D_R=R_S(1)[2]\\oplus R_S and identify T_S D_A=D_B by these maps.",
+   "uses": [
+    "lem-asd-finite-etale-twist-line",
+    "lem-pc-kflat-closure",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; Tag 06YY, lemma-derived-base-change; identity-topos coefficient specialization"
+   }
+  },
+  {
+   "text": "Put \\Lambda=\\mathbf Z/N and let c_\\Lambda:\\Lambda_P\\to\\mu_{N,P}[2] be the Kummer Chern morphism of the fixed line bundle \\mathcal O_P(1). Write E_{\\Lambda R} for derived scalar extension on P. The definition of the scalar-extended Kummer class in [lem-asd-ordinary-finite-p1-adjunction] says that the upstairs morphism whose q-adjunct is h_R is c_R=E_{\\Lambda R}(c_\\Lambda). Apply [lem-sfb-ringed-derived-monoidal-comparisons] to the identity-topos ring tower \\Lambda_P\\to A_P\\to B_P. Its canonical composition isomorphism \\alpha:T_P E_{\\Lambda A}\\simeq E_{\\Lambda B} is natural on c_\\Lambda, so \\alpha_{\\mu_N[2]}T_P(c_A)=c_B\\alpha_{\\Lambda_P}. The source component is the multiplication unit, and the target component is the balanced map of Step 1: the cited comparison is computed by ordinary module pullback composition on K-flat complexes. Therefore T_P(c_A)=c_B under the specified identifications. This is naturality of the image of one fixed Kummer morphism; it does not tensor the Kummer short exact sequence with a nonflat coefficient ring. The hypotheses of [lem-asd-ordinary-finite-p1-adjunction] hold for R=A,B: S is of finite type over the Noetherian scheme \\operatorname{Spec}k, hence Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (quasi-compact and locally Noetherian, so it has a finite affine cover by spectra of Noetherian rings); N=\\ell^n is invertible on S because \\ell\\ne p=\\operatorname{char}k; and A,B are finite commutative rings with NA=NB=0.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: Kummer classes over A and B are images of the same class over Z/ell^n; sites-cohomology.tex Tag 0D6D, lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "Let \\lambda_X:q_B^*T_SX\\xrightarrow{\\sim}T_Pq_A^*X be the canonical tensor/pullback comparison. It is the left square whose right mate is the specified \\beta_q: this is precisely the proper counit-transpose normalization in [lem-sp-et-proet-coefficient-compatibility]. For any v:q_A^*X\\to E let \\operatorname{adj}_R denote the inverse-image/direct-image adjunction bijection over R. Apply [lem-pur-adjunction-mate-transpose] to this square. It gives the equality of actual morphisms\n$$\\beta_q(E)T_S(\\operatorname{adj}_A(v))=\\operatorname{adj}_B(T_P(v)\\lambda_X).$$\nThe orientation can also be checked directly: the B-transpose of the left side is T_P(\\varepsilon_{A,E})\\lambda_{Rq_{*,A}E}q_B^*T_S(\\operatorname{adj}_A(v)); naturality of \\lambda and the A-triangle identity turn this into T_P(v)\\lambda_X. Thus the equality uses the named counit-transpose map rather than an arbitrarily chosen isomorphism between the endpoints.",
+   "uses": [
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-pur-adjunction-mate-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change; transpose of the coefficient square, using the categorical mate-transpose identity"
+   }
+  },
+  {
+   "text": "Write u_R:q_R^*(R_S(1)[2])\\xrightarrow{\\sim}L_R for pullback of the roots-of-unity twist. By [lem-asd-etale-finite-twist-pullback] it is the canonical roots-induced identification. It satisfies T_P(u_A)\\lambda_{A_S(1)[2]}=u_B under Step 1: both composites before shifting send (q^{-1}z\\otimes a)\\otimes b to the pulled-back root z\\otimes\\varphi(a)b. Equality of these sheaf maps gives equality of their degree-zero and shifted derived maps. The tensor and unit comparisons used here are the canonical ones of [lem-sfb-ringed-derived-monoidal-comparisons]. The two components of s_R are \\operatorname{adj}_R(u_R) and \\operatorname{adj}_R(c_R), by [lem-asd-ordinary-finite-p1-adjunction]. Apply Step 3 first to v=u_A and then to v=c_A; Step 2 identifies the scalar extension in the second application. Consequently\n$$\\beta_q(L_A)T_S(\\operatorname{adj}_A(u_A))=\\operatorname{adj}_B(u_B),\\qquad \\beta_q(L_A)T_S(h_A)=h_B.$$\nHere q_B^*T_S A_S=B_P, so the latter equality has the asserted unit source, not a restriction-of-scalars source.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: compare the twisted-unit and Kummer components of the two rank-one summands"
+   }
+  },
+  {
+   "text": "Let \\iota_{1,R},\\iota_{2,R} be the two inclusions of D_R. Step 1 identifies T_S(\\iota_{j,A}) with \\iota_{j,B}. For j=1,2 Step 4 therefore gives\n$$\\beta_q(L_A)T_S(s_A)\\iota_{j,B}=s_B\\iota_{j,B}.$$\nThe universal property of the coproduct D_B says that maps out of it agreeing on both inclusions agree. Hence \\beta_q(L_A)T_S(s_A)=s_B, the first required equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: splitting into two free rank-one summands, compare both components"
+   }
+  },
+  {
+   "text": "Use the specified definition t_R=\\operatorname{pr}_{2,R}s_R^{-1} of [def-amb-p1-trace]. Postcomposing the first equation with t_B gives t_B\\beta_q(L_A)T_S(s_A)=\\operatorname{pr}_{2,B}. Functoriality and Step 1 also give T_S(t_A)T_S(s_A)=T_S(\\operatorname{pr}_{2,A})=\\operatorname{pr}_{2,B}. Since s_A is invertible, T_S(s_A) is invertible with inverse T_S(s_A^{-1}); cancel it on the right. This proves t_B\\beta_q(L_A)=T_S(t_A). All tensor computations were made on K-flat objects, and the other steps used functoriality, adjunction and coproduct identities. No flatness of B over A is used.",
+   "uses": [
+    "def-amb-p1-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: normalized projective-line integration is the projection onto the Kummer summand"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-p1-trace",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-pc-kflat-closure",
+  "lem-pur-adjunction-mate-transpose",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-finite-type-over-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts: explicit expansion of the Kummer-class, splitting and projection assertions using normalized ringed-topos comparisons"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +142,45 @@
    "results": "{\"t\": \"2026-10-21T03:02:56Z\", \"tool\": \"leansearch\", \"query\": \"Projective line Kummer splitting commutes with extension of coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.splits_comp_of_splits\", \"Polynomial.splits_of_splits_id\", \"WeierstrassCurve.Projective.map_addU\", \"Polynomial.splits_map_iff\", \"Polynomial.Splits.map\", \"IsSepClosed.splits_codomain\", \"Polynomial.splits_id_iff_splits\", \"adjoinRootXPowSubCEquiv\"], \"digest\": \"275fb15b801098f0\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits do not state this geometric finite-coefficient assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "kummer|chernClass|tateTwist",
+   "results": "{\"t\": \"2026-10-21T03:26:07Z\", \"tool\": \"grep\", \"query\": \"kummer|chernClass|tateTwist\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the logged hits concern algebraic field extensions, cotangent cohomology, ordinary pullback or basis naturality, not the specified etale-derived Kummer splitting and trace"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of coefficients preserves the unit and Chern class decomposition of etale cohomology of the projective line",
+   "results": "{\"t\": \"2026-10-21T03:26:07Z\", \"tool\": \"leansearch\", \"query\": \"Change of coefficients preserves the unit and Chern class decomposition of etale cohomology of the projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.baseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Module.Basis.mapCoeffs_apply\", \"DirichletCharacter.changeLevel_self_toUnitHom\", \"CochainComplex.HomComplex.Cochain.units_smul_v\", \"WeierstrassCurve.variableChange_a₁\", \"WeierstrassCurve.VariableChange.map_u\"], \"digest\": \"3204f99c798cc1c4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the logged hits concern algebraic field extensions, cotangent cohomology, ordinary pullback or basis naturality, not the specified etale-derived Kummer splitting and trace"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\"",
+   "results": "{\"t\": \"2026-10-21T03:26:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerExtension.«termK[_√_]»\", \"KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.quotMapEquivQuotQuotMap\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"KummerDedekind.quotMapEquivQuotQuotMap_symm_apply\"], \"digest\": \"716f53183e49d042\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the logged hits concern algebraic field extensions, cotangent cohomology, ordinary pullback or basis naturality, not the specified etale-derived Kummer splitting and trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of finite coefficient rings preserves the Kummer first Chern class and normalized projective line splitting",
+   "results": "{\"t\": \"2026-10-21T03:26:15Z\", \"tool\": \"leanfinder\", \"query\": \"Derived extension of finite coefficient rings preserves the Kummer first Chern class and normalized projective line splitting\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.H1Cotangent.map\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"Algebra.Generators.H1Cotangent.δ_map\", \"Algebra.Extension.H1Cotangent.map_eq\", \"Algebra.Generators.H1Cotangent.δ_eq\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"groupCohomology.Hilbert90.aux\", \"ClassGroup.exists_mk0_eq_mk0\"], \"digest\": \"728872536dffd760\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the logged hits concern algebraic field extensions, cotangent cohomology, ordinary pullback or basis naturality, not the specified etale-derived Kummer splitting and trace"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality under change of rings of the first Chern class of a line bundle in etale derived categories",
+   "results": "{\"t\": \"2026-10-21T03:26:31Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality under change of rings of the first Chern class of a line bundle in etale derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Spec_Γ_naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"AlgebraicGeometry.Scheme.Hom.naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"AlgebraicGeometry.Scheme.Hom.naturality\", \"AlgebraicGeometry.Scheme.ΓSpecIso_naturality\"], \"digest\": \"de1c4e8b5fa1932c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the logged hits concern algebraic field extensions, cotangent cohomology, ordinary pullback or basis naturality, not the specified etale-derived Kummer splitting and trace"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-reduction-exceptional",
@@ -75,5 +197,65 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-p1-splitting-scalar",
+  "worker": "stage1",
+  "group": "Q69",
+  "summary": "Proved scalar compatibility by naturality of derived coefficient composition on the common Kummer Chern morphism, the proper counit-transpose identity on its two components, the coproduct universal property, and cancellation for the normalized trace. Reused existing nodes throughout; no new nodes and no statement change.",
+  "blueprint": "Realizes the Charts paragraph of det-sp-reduction-exceptional: Kummer classes come from Z/ell^n, compare the two summands of the projective-line splitting, then the trace projection. The six steps expand the retained Steps 5 and 6 named in the item source.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Canonical roots-induced ordinary-etale twist pullback, used to compare the first splitting component."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Ordinary-etale local freeness and flatness of finite twists for arbitrary finite coefficients."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Existing ordinary-etale normalized splitting and definition of its unit and Kummer components; coefficient compatibility is proved here."
+   },
+   {
+    "node": "lem-pc-kflat-closure",
+    "why": "General ringed-site bounded-flat K-flatness to compute extension of the two degree-zero lines; the unit does not replace this homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-adjunction-mate-transpose",
+    "why": "Generic categorical formula for a transpose under an already specified mate square; it supplies no geometric projective-line conclusion."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "General ordinary ringed-site derived extension and its exactness, used for the specified ordinary-etale functor."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General ringed-topos composition and unit normalization, specialized to the identity-topos coefficient tower; it does not assert the projective-line compatibility being proved."
+   },
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Only the stated proper counit-transpose normalization of beta is used; the site comparison and compactification assertions are not used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-pc-kflat-closure",
+  "lem-pur-adjunction-mate-transpose",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sp-et-proet-coefficient-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-43c3ababb",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-43c3ababb (reviewer sub-agent of L); spot-checked: I read the item and all 6 steps in full, plus the statement of every cited node, the unit sk-lem-sp-reduction, the parent det-sp-reduction-exceptional (step 2) and the blueprint main-20261015 sk-lem-sp-reduction-exceptional.proof.md, Charts paragraph (lines 20-36). The split follows the Charts route: the Kummer class comes from Z/N, and the splitting has two free rank-one summands with trace = projection. No SGA source is cited. I found no duplicate. No node of sk-prop-geo-p1-adjunction states coefficient change of the splitting: det-sp-p1-trace and lem-asd-ordinary-finite-p1-adjunction cover base change only, and lem-pur-finite-smooth-adjunction-general-base covers only Z/l^r->Z/l^m reductions of gamma. lem-sp-p1-counit-scalar is the sibling counit lemma. Step 1: twist-line flatness, the K-flat closure and the termwise derived change of rings are correct; I checked that the balanced map and its inverse are mutually inverse on generators. Step 2: c_R=E_{Lambda R}(c_Lambda) is the defining construction in the p1-adjunction statement. The ringed-topos composition lemma, applied to the identity topos with Lambda->A->B, needs no flatness, and its unit equation gives the source component. Step 3: I checked the transpose formula myself; it follows from naturality of lambda and the A triangle identity, matching the B-adjoint-transpose definition of beta in lem-sp-et-proet-coefficient-compatibility and det-sp-reduction-direct-image. Step 4: I checked T_P(u_A)lambda=u_B on generators; both splitting components are adj(u_R) and adj(c_R). Steps 5 and 6 (coproduct property, cancellation) are elementary. Edge cases: a non-flat map Z/l^2->F_l, the identity map, empty S and N=1 all work. The 8 declared tool uses are accepted. FIX: step 2 applied lem-asd-ordinary-finite-p1-adjunction without checking that S is Noetherian with N invertible. I added that check, citing the Mathlib leaf lem-weil-pbc-finite-type-over-noetherian and using l != p, and added the node to uses and proof_deps. The corrected file is fixes/dag/nodes/sec-smooth-purity/lem-sp-p1-splitting-scalar.json.; 1 file(s) fixed by the reviewer"
  }
 }
