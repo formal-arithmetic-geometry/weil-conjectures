@@ -1,0 +1,106 @@
+{
+ "id": "def-sfb-scalar-periodic-complex",
+ "kind": "definition",
+ "title": "The nonpositive scalar-periodic cochain complex",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a small site and $\\mathcal O$ a sheaf of commutative rings. Work in the category of sheaves of $\\mathcal O$-modules [def-weil-sheaf-of-modules-category]. For a sheaf $M$ and a square-zero endomorphism $f:M\\to M$, define $X_M^i=M$ for $i\\leq0$ and $X_M^i=0$ for $i>0$. Define $d_f^i:X_M^i\\to X_M^{i+1}$ as $f$ for $i<0$, using these term identifications, and zero otherwise. The cochain complex [def-pc-cochain-complex-modules] with these terms and differentials is the nonpositive periodic complex of $f$; its term identification in degree $i\\leq0$ is the identity identification $X_M^i\\cong M$. In particular, for a restriction-compatible family $t=(t_U)_U$ with $t_U^2=0$, let $\\mu_t:\\mathcal O\\to\\mathcal O$ be sectionwise multiplication $a\\mapsto t_Ua$. The scalar-periodic complex $P(t)$ is the above complex for $M=\\mathcal O$ and $f=\\mu_t$. The equations $\\mu_t^2=0$ and $d_f^{i+1}d_f^i=0$ supply the complex compatibility proofs. No kernel-image equality or exactness assumption is part of this definition.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "The examples: the all-degree Tor computation after tensoring the periodic resolution; generalized to an arbitrary annihilated module sheaf"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Cochain complex with the same object in every nonpositive degree and square zero endomorphism as differential",
+   "results": "Eight hits: CochainComplex.of, HomologicalComplex.zero, singleFunctor_obj_d, cochainComplex_d_succ_succ_zero, of_d, of_x, fromSingle₀AsComplex and ConnectData.cochainComplex. Generic constructors, no scalar-periodic definition.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The nonpositive periodic cochain complex of multiplication by a square zero global scalar on a sheaf of rings",
+   "results": "Eight hits: ContinuousCohomology.MultiInd.complex, CochainComplex, ConnectData.X/cochainComplex/X_negOne/cochainComplex_X, HomComplex and augment. No matching scalar-periodic definition.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarPeriodic|exactScalarPeriodic|periodic",
+   "results": "Algebra/Homology: two hits in AlternatingConst.lean, lines 16 and 19, describing alternating-periodic complexes. Project rg found the exact definitions in Sheaf.Paper.ExactScalarPeriodicResolution lines 48-134; no matching declaration in WeilConjectures. Reuse the landed definitions without copying them.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-periodic-tensor-normal-form",
+  "date": "2026-10-21",
+  "group": "Q12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-def-localizing-closure-ctf-equals-bc",
+   "place": "The examples: the nonpositive periodic resolution with scalar differential, before tensoring to compute Tor in every nonnegative degree.",
+   "via": [
+    "lem-sfb-periodic-tensor-normal-form",
+    "lem-sfb-square-zero-periodic-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-def-localizing-closure",
+ "lean": {
+  "module": "Sheaf.Paper.ExactScalarPeriodicResolution",
+  "declaration": "SheafOfModules.exactScalarPeriodicComplex",
+  "declarations": [
+   "CochainComplex.scalarPeriodicX",
+   "CochainComplex.scalarPeriodicD",
+   "CochainComplex.scalarPeriodicD_comp",
+   "CochainComplex.scalarPeriodic",
+   "CochainComplex.scalarPeriodicXIso",
+   "SheafOfModules.exactScalarMultiplication",
+   "SheafOfModules.exactScalarMultiplication_sq",
+   "SheafOfModules.exactScalarPeriodicComplex"
+  ],
+  "statement": "def exactScalarPeriodicComplex\n    (t : (unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)).sections)\n    (ht : ∀ U : Cᵒᵖ, (@id (R.obj.obj U) (t.val U)) * (@id (R.obj.obj U) (t.val U)) = 0) :\n    CochainComplex\n      (ringedSiteModules.{r, r, v, u}\n        ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Ownership record for the existing plain definitions and their named square-zero compatibility proofs in the unchanged landed module, lines 48-134. The general category construction specializes to module sheaves; multiplication is unitHomEquiv.symm t. No use or choice of exact_scalar_periodic_resolution, no exactness hypothesis, and no moved or duplicated Lean declaration."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68d4855bd",
+  "group": "Q12",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68d4855bd",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Re-delivery after the d6c1817873d6 H2 RETURN. Lean file byte-identical (sha 604d7bd8). The item's stmt_deps replace theorem node lem-sfb-exact-scalar-periodic-resolution with the new def-sfb-scalar-periodic-complex; statement and proof are unchanged and all side-live stmt_deps are kept. The new node is existing:true on the unchanged ExactScalarPeriodicResolution: its 8 declarations cover every module declaration the item uses, its statement is the verbatim def header, and check_existing and check_new_node report no failures. The definitions are real data with no exactness assumption. No competing owner, no cycle. Mathematics re-read: phi is fixed by the degree formulas via mapBifunctorSingle₂Iso and λ_M, with chain-map naturality, H^{-q}≅M for every q≥0, positive degrees zero, and the K-flat clause fixed through the ∃! comparison with Q(ε) invertible. Edge cases M=0, t=0, zero ring, Z/8 with t=4 and q=0 hold. Report sections present; item not dropped. No compile: no file changed."
+ }
+}

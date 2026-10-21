@@ -14,7 +14,8 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-abstract-derived-category",
   "def-pc-kflat-complex",
-  "lem-sf-ringed-kflat-single-tensor-comparison"
+  "lem-sf-ringed-kflat-single-tensor-comparison",
+  "def-sfb-scalar-periodic-complex"
  ],
  "proof": [
   {
@@ -286,5 +287,30 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-16b4e0460 (reviewer sub-agent of L); spot-checked: Read the item in full, the full statements of all 8 cited nodes, the parent and its Q26 base steps 2/3/6, which this node now carries. The statement is unchanged from the Q43-created (PASSed) version. The only stmt_dep added is lem-sf-ringed-kflat-single-tensor-comparison, which gives meaning to the derived tensor 'computed using that resolution'. No new nodes, no cycle (closure computed), no SGA. Live and side-live are still unsplit and the item is not in route-pivot-dropped. Step checks. (1) d^{i+1}d^i=t^2=0 for i<-1, d^0=0 at i=-1, mult by t is O-linear. (2) The sectionwise unit maps a⊗m↦am and m↦1⊗m are inverse; extension through the sheafification universal property (def-weil-presheaf-modules-sheafification) checked, uniqueness argument included; 0⊗M=0. (3) Tot^n has a single summand P^n⊗M because M[0]^q=0 for q≠0; no infinite products are used. (4) The sign term multiplies d_{M[0]}=0; d_P⊗1 transports to m↦tm=0 since tM=0; for n=0 the target is zero. (5) Naturality: af(m)=f(am). (6) A zero-differential complex has H=term, so H^{-q}=M for q≥0 and 0 in positive degrees. (7) The comparison lemma's statement allows any K-flat P and any M on an essentially small site; its T_M(P) (terms P^q⊗M, differential d_P⊗1) equals Tot(P⊗M[0]); Q(ε) is invertible, so the direction is correct; marked non-elementary. Stacks sources verified via tags and .tex labels: 010V, 012Z, 03EK, 03CY, 06YU. Blueprint main-20261015 ctf-equals-bc 'The examples' l.37-42 (Z/ℓ² periodic Tor). Edge cases: Z/4 with t=2 and M=Z/2 gives Tor_q=Z/2; t=0 gives ⊕M[q], with the resolution clause correctly conditional; M=0, the zero ring, and q=0 at the -1→0 transition all check. No annihilator hypothesis is needed. Duplicate search over periodic, square-zero and unit-tensor nodes: the sibling resolution nodes, the cyclic-group resolution and the scheme-only or pro-étale-only K-flat representatives are other statements. Accepted tool use: lem-sf-ringed-kflat-single-tensor-comparison (unit sk-lem-sf-flat-model), a generic K-flat comparison that unit sk-def-localizing-closure does not supply; the other declared tool_uses are definitions. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PeriodicTensorNormalForm",
+  "declaration": "SheafOfModules.periodic_tensor_normal_form",
+  "declarations": [
+   "SheafOfModules.periodicTensorZeroComplex",
+   "SheafOfModules.periodicTensorZeroXIso",
+   "SheafOfModules.periodicTensorZeroMap",
+   "SheafOfModules.periodic_tensor_normal_form"
+  ],
+  "file": "lean/Sheaf/Paper/PeriodicTensorNormalForm.lean",
+  "statement": "theorem periodic_tensor_normal_form (t : (unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)).sections) (ht : ∀ U : Cᵒᵖ, (@id (R.obj.obj U) (t.val U)) * (@id (R.obj.obj U) (t.val U)) = 0) [HasDerivedCategory.{w} (Modules R)] : ∃ phi : ∀ (M : Modules R) (_ : ∀ (U : Cᵒᵖ) (m : M.val.obj U), (@id (R.obj.obj U) (t.val U)) • m = 0), CochainComplex.mapBifunctor (exactScalarPeriodicComplex R t ht) ((HomologicalComplex.single _ (.up ℤ) 0).obj M) (ordinaryTensor R) ≅ periodicTensorZeroComplex R M, (∀ (M : Modules R) (hM : ∀ (U : Cᵒᵖ) (m : M.val.obj U), (@id (R.obj.obj U) (t.val U)) • m = 0) (i : ℤ) (hi : i ≤ 0), (phi M hM).hom.f i ≫ (periodicTensorZeroXIso R M i hi).hom = (CochainComplex.mapBifunctorSingle₂Iso (ordinaryTensor R) M (exactScalarPeriodicComplex R t ht)).hom.f i ≫ ((ordinaryTensor R).map (CochainComplex.scalarPeriodicXIso (exactScalarMultiplication R t) (exactScalarMultiplication_sq R t ht) i hi).hom ).app M ≫ (λ_ M).hom) ∧ (∀ (M : Modules R) (hM : ∀ (U : Cᵒᵖ) (m : M.val.obj U), (@id (R.obj.obj U) (t.val U)) • m = 0) (i : ℤ) (hi : i ≤ 0), (phi M hM).inv.f i = (periodicTensorZeroXIso R M i hi).hom ≫ (λ_ M).inv ≫ ((ordinaryTensor R).map (CochainComplex.scalarPeriodicXIso (exactScalarMultiplication R t) (exactScalarMultiplication_sq R t ht) i hi).inv ).app M ≫ (CochainComplex.mapBifunctorSingle₂Iso (ordinaryTensor R) M (exactScalarPeriodicComplex R t ht)).inv.f i) ∧ (∀ (M N : Modules R) (hM : ∀ (U : Cᵒᵖ) (m : M.val.obj U), (@id (R.obj.obj U) (t.val U)) • m = 0) (hN : ∀ (U : Cᵒᵖ) (n : N.val.obj U), (@id (R.obj.obj U) (t.val U)) • n = 0) (f : M ⟶ N), ((totalTensor R).obj (exactScalarPeriodicComplex R t ht)).map ((HomologicalComplex.single _ (.up ℤ) 0).map f) ≫ (phi N hN).hom = (phi M hM).hom ≫ periodicTensorZeroMap R f) ∧ (∀ (M : Modules R) (hM : ∀ (U : Cᵒᵖ) (m : M.val.obj U), (@id (R.obj.obj U) (t.val U)) • m = 0), (∀ q : ℕ, Nonempty ((CochainComplex.mapBifunctor (exactScalarPeriodicComplex R t ht) ((HomologicalComplex.single _ (.up ℤ) 0).obj M) (ordinaryTensor R)).homology (-(q : ℤ)) ≅ M)) ∧ (∀ i : ℤ, 0 < i → IsZero ((CochainComplex.mapBifunctor (exactScalarPeriodicComplex R t ht) ((HomologicalComplex.single _ (.up ℤ) 0).obj M) (ordinaryTensor R)).homology i)) ∧ (∀ (E : Modules R) (epsilon : exactScalarPeriodicComplex R t ht ⟶ (HomologicalComplex.single _ (.up ℤ) 0).obj E) (hepsilon : CochainComplex.IsKFlatResolutionIndependentCoefficients epsilon), ∃ e : ((derivedTensor R).obj (DerivedCategory.Q.obj ((HomologicalComplex.single _ (.up ℤ) 0).obj E))).obj (DerivedCategory.Q.obj ((HomologicalComplex.single _ (.up ℤ) 0).obj M)) ≅ DerivedCategory.Q.obj (periodicTensorZeroComplex R M), ((derivedTensor R).map (DerivedCategory.Q.map epsilon)).app _ ≫ e.hom = ((ringed_kFlat_single_tensor_comparison R).choose (exactScalarPeriodicComplex R t ht) hepsilon.2 M).hom ≫ DerivedCategory.Q.map ((CochainComplex.mapBifunctorSingle₂Iso (ordinaryTensor R) M (exactScalarPeriodicComplex R t ht)).inv ≫ (phi M hM).hom)))",
+  "branch": "sheaf-dag",
+  "by": "Q12",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Reuses the unchanged landed scalar-periodic constructions owned by def-sfb-scalar-periodic-complex, without invoking the exactness theorem. States the unit and inverse degree formulas, naturality, all nonnegative Tor degrees, positive cohomology vanishing, and the resolution-normalized derived identification. No annihilator equality or nonzero hypothesis; independent site/coefficient universes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-68d4855bd",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Re-delivery after the d6c1817873d6 H2 RETURN. Lean file byte-identical (sha 604d7bd8). The item's stmt_deps replace theorem node lem-sfb-exact-scalar-periodic-resolution with the new def-sfb-scalar-periodic-complex; statement and proof are unchanged and all side-live stmt_deps are kept. The new node is existing:true on the unchanged ExactScalarPeriodicResolution: its 8 declarations cover every module declaration the item uses, its statement is the verbatim def header, and check_existing and check_new_node report no failures. The definitions are real data with no exactness assumption. No competing owner, no cycle. Mathematics re-read: phi is fixed by the degree formulas via mapBifunctorSingle₂Iso and λ_M, with chain-map naturality, H^{-q}≅M for every q≥0, positive degrees zero, and the K-flat clause fixed through the ∃! comparison with Q(ε) invertible. Edge cases M=0, t=0, zero ring, Z/8 with t=4 and q=0 hold. Report sections present; item not dropped. No compile: no file changed."
  }
 }

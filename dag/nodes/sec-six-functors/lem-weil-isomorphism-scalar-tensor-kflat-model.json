@@ -282,5 +282,48 @@
   "group": "Q142",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-cdd733451 (reviewer sub-agent of L); spot-checked: This is the first split of the statement-only child that Q99 created in its re-split of lem-weil-isomorphism-comparison-scalar-extension (Q99 e558ec45 PASS). The item has no repair note of its own; live holds it unsplit, so the delivery is not superseded. Compared with live, the statement, stmt_deps and blueprint are unchanged and there are no new nodes. proof_deps equals the union of the uses, every cited id exists and is unmerged, there is no cycle and no SGA. All trf nodes in the closure were already in the closure of the unchanged stmt_deps, so there is no batch-5 delta. I re-checked all 7 steps against the statements they cite. Step 1: I recomputed coordinatewise that c_L g^{-1}(j_Y) = j_X c_E, using the defining projection equation in the def-weil-inverse-image-pullback-comparison Structure paragraph and lem-weil-proetale-isomorphism-inverse-image(3). Step 2: the K-flat preservation clause of lem-weil-pbc-ringed-topoi-derived-tensor-pullback applies to (g^{-1}, c_E) as an exact equivalence, and lem-pur-kflat-change-of-rings holds for an arbitrary ring map. Step 3: the change-of-rings clause and local formula of lem-pur-isomorphism-inverse-image-tensor-hom hold for any ring sheaf. Steps 4 and 5: I checked the reassociation inverse, the quotient square and the q_L/q_E transitions on generators, also for ramified E⊂L. Steps 6 and 7: derived change of rings (1)/(2), exactness of G_F and the W^{-1}P≃D(R) clause of lem-weil-pbc-site-derived-tensor-descent are used correctly. Edge cases E=L, g=id and P=0 are fine. The candidate duplicates (lem-sfb-kflat-scalar-comparison-normalization, lem-sfb-scalar-inverse-image-tower-diagram, lem-pur-coefficient-pullback-comparison) are untransported or general, so they are not duplicates. Stacks labels 03EL/0G7E/06YS/06YT/0G7D/06YY are verified. I accept the declared tool uses: the ringed-topoi pullback, the K-flat localization, the tensor-hom and the K-flat resolution nodes. Advisory: the proof is 7154 characters with 0 new nodes on a child of a length-driven re-split. That is acceptable for a first split (Q70 precedent), but a later re-split note could move Steps 4–5 into a separate node."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IsomorphismScalarTensorKFlatModel",
+  "declaration": "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.isomorphism_scalar_tensor_kflat_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.finiteChangeData",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.finiteExtension",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.finitePure",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.inverseComplex",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.leftComplex",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.rightComplex",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.finiteLeft",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.finiteRight",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.restrictedLeft",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.restrictedRight",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.doublePure",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.PreservesModels",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.CompletedFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.FiniteFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.LeftQuotientFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.RightQuotientFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.QuotientSquare",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.LeftTransitionFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.RightTransitionFormula",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.TransitionSquare",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.DerivedModel",
+   "AlgebraicGeometry.ProEtale.IsomorphismScalarTensor.isomorphism_scalar_tensor_kflat_model"
+  ],
+  "file": "lean/Sheaf/Paper/IsomorphismScalarTensorKFlatModel.lean",
+  "statement": "theorem isomorphism_scalar_tensor_kflat_model (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : ∃ (b : (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ≅ (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g) (β : inverseImageIntegralDerived l E g ⋙ completedDerivedScalarExtension l E L ι X ≅ completedDerivedScalarExtension l E L ι Y ⋙ inverseImageIntegralDerived l L g) (bfin : ∀ n : ℕ, (integralOperationsGoodComplex l E Y).ι ⋙ finiteLeft l E L ι g n ≅ (integralOperationsGoodComplex l E Y).ι ⋙ finiteRight l E L ι g n) (vleft : ∀ n : ℕ, (integralOperationsGoodComplex l E Y).ι ⋙ leftComplex l E L ι g ⟶ (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n) (vright : ∀ n : ℕ, (integralOperationsGoodComplex l E Y).ι ⋙ rightComplex l E L ι g ⟶ (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n) (tleft : ∀ n : ℕ, (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g (n + 1) ⟶ (integralOperationsGoodComplex l E Y).ι ⋙ restrictedLeft l E L ι g n) (tright : ∀ n : ℕ, (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g (n + 1) ⟶ (integralOperationsGoodComplex l E Y).ι ⋙ restrictedRight l E L ι g n), PreservesModels l E L ι g ∧ CompletedFormula l E L ι g b ∧ FiniteFormula l E L ι g bfin ∧ LeftQuotientFormula l E L ι g vleft ∧ RightQuotientFormula l E L ι g vright ∧ QuotientSquare l E L ι g b bfin vleft vright ∧ LeftTransitionFormula l E L ι g tleft ∧ RightTransitionFormula l E L ι g tright ∧ TransitionSquare l E L ι g bfin tleft tright ∧ DerivedModel l E L ι g b β",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The theorem retains the recorded independent site/coefficient universes. Its ten named specification predicates unfold to the K-flat preservation, normalized completed/finite maps, normalized quotient/transition maps and their squares, and the counit equation for ordinary derived descent. The existing completed scalar construction is reused; no completed functor replaces the ordinary tensor in this statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-923df50a5",
+  "group": "NA",
+  "result": "pass",
+  "note": "Only the item's lean record changed; one module, no new nodes or dependency repairs; statement verbatim; live has no lean for the item. Every node clause has its Lean: PreservesModels (G_E P, Q, Z flat-term K-flat), b pinned by CompletedFormula c_L(s)⊗x↦s⊗x, bfin pinned by FiniteFormula t⊗(a⊗x)↦(c_L,n^-1(t)·ι(a))⊗x after the faithful restriction, vleft/vright pinned on generators with QuotientSquare b≫vright=vleft≫Res(bfin), tleft/tright pinned with TransitionSquare, beta pinned by the K-flat counit/mapDerivedCategoryFactors equation and resolution naturality. Hypotheses: IsIso g plus l invertible at stalks; universes t and u independent; no completeness or constructibility. finiteChangeData's choice uses only E, fixed by obj_eq/map_eq; no free existentials. Docstrings have source/blueprint and the 7 node steps; plain imports are proof-dependency imports. Advisories: theorem-owned declarations outside stmt_deps; the parent's isomorphismScalarTensor is not a duplicate (other model, equal universe, citing it would be a cycle), a future bridge via isomorphismScalarSheafModel. No file changed, so no compile; the worker reports clean compiles in 7.9 s and 7.6 s."
  }
 }

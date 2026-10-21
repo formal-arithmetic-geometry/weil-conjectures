@@ -235,5 +235,30 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-0efb03ff4 (reviewer sub-agent of L); spot-checked: Ordinary one-level split, read in full: the item has no repair note, is unsplit in both live and side-live, is not in the dropped list and contains no SGA text. The statement is byte-identical to the one Q11 created as node A of the parent re-split. There are no new nodes, and proof_deps equals the union of the step uses. Sources checked: Stacks 03D2 (l.1020-1041) gives action transport via f^{-1}mu for any ring sheaf; 03EK, 03EL and 00YV are correctly labelled. Step 1: lem-weil-pbc-left-exact-site-inverse-image-tensor gives finite-limit preservation of L, and def-weil-proetale-inverse-image supplies its hypotheses. The graph equations follow because lambda∘L<x,y> = <Lx,Ly> (same projections), and the presentation's module functor is I itself. Step 2: lem-pc-sites-sheaf-tensor-bilinear-universal (the Hom-Bilin bijection) constructs a_H; q_H is RI-linear because 1⊗cm = c⊗m in the presheaf tensor. Steps 3-4: aq = 1 directly; qa = 1, naturality and the functor laws of T(f) = 1⊗I(f) follow from injectivity of the bijection. Step 5: Z = |M|×|N| with the projections and the pure-tensor pairing satisfies the generalized pure-tensor equation; unit naturality applied to eta_Z(s,t) gives h^{-1}s, h^{-1}t and h^{-1}(s⊗t); q_one forces q = a^{-1}, and applying a⊗a gives b(h^{-1}(s⊗t)) = h^{-1}s⊗h^{-1}t. The existence of a comparison is never used and the parent is not cited, so there is no cycle. Edge cases (R = 0, empty schemes, nonconstant R) hold. Both declared tool uses are generic and accepted. lem-sfb-sheaf-tensor-unit-comparison and the sibling nodes are not duplicates. Two advisories: e_M (identifying the Ab-valued inverse image's underlying set sheaf with the set inverse image) is taken from the definition's canonical identifications; the left-sided scalar extension follows the comparison node's convention. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleInverseImageScalarUnitNormalization",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleInverseImage_scalarUnit_normalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleInverseImageScalarUnitNormalization.lean",
+  "statement": "theorem proEtaleInverseImage_scalarUnit_normalization {X Y : Scheme.{u}} (h : X ⟶ Y) (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) : Nonempty (ProEtaleScalarUnitNormalization h R)",
+  "branch": "sheaf-dag",
+  "by": "Q73",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "SheafOfModules.CanonicalRingedTensorComparisonOnSmallSites.normalizedHom",
+   "AlgebraicGeometry.Scheme.proEtaleAlgebraicUnitSection",
+   "SheafOfModules.scalarUnitComparisonNormalized",
+   "AlgebraicGeometry.Scheme.ProEtaleScalarUnitNormalization",
+   "AlgebraicGeometry.Scheme.proEtaleInverseImage_scalarUnit_normalization"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0e014de49",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Re-delivery after the H13/H4 RETURN of 334650707987; both faults repaired. All snapshot files are byte-identical to live except the item node (new lean field only) and the new item module. Q64's record of def-weil-pbc-canonical-ringed-tensor-comparison is unchanged and the duplicate SiteUniverses module is removed. normalized now quantifies over the landed CanonicalRingedTensorComparisonOnSmallSites R RI RI uInv AI (𝟙 RI) T ho. normalizedHom = a⁻¹≫μ≫a⊗a (the node's b) is a listed def in the item module. ringedComparisonPure is term-for-term the previous inline pure-tensor formula. The extra instance block was dropped, leaving only EssentiallySmall.{w}. Item clauses re-checked against the node: modules_eq, the ring_unit/module_unit pins, scalar_obj/scalar_map, multiplication with multiply_pure/insert_one (consistent with q_one), and the universal normalization on unit images. Unrestricted h and R, ProEt universes u+1/u. One sorry; source/blueprint docstrings with the 5 proof steps; statement verbatim; imports = stmt_dep modules; no name collisions in live. No compile run (worker: item 34.9 s clean, dry run OK). Advisory: normalizedHom lives in Q64's structure namespace."
  }
 }

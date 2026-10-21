@@ -194,5 +194,23 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-a35784695 (reviewer sub-agent of L); spot-checked: The item statement is unchanged and matches Stacks 0BSX (more-algebra.tex, lemma-one-orbit-geometric-galois-compare), inertia clause, with possibly infinite Galois extensions. The parent's use of the item (Omega/L/K with Omega a separable closure) needs the infinite case. The six steps write out the 'same way' sentence of 0BSX. Step 1: C is the integral closure of B in M, using the Mathlib leaf lem-weil-pbc-integral-closure-algebraic-extension-normal. Step 2: restriction is a well-defined homomorphism I_r->I_q (elementary). Step 3: lift h to tau via lem-weil-pbc-normal-subextension-automorphism-extends; M/L is Galois by the new 09I2 leaf. Step 4: prime correction d=rho tau by 0BRK(1) over B. Step 5: d-bar fixes kappa(q), and 0BRK(2) gives epsilon in Gal(M/L) with epsilon-bar = d-bar. Step 6: g = epsilon^-1 d lies in I_r and restricts to h. I checked each cited statement and hypothesis. New node lem-dl-a1-galois-prime-residue-lifting is unsplit and states 0BRK(1) and the surjectivity part of (2) exactly as in Stacks lines 32777-32865. It strictly generalizes the finite lem-exc-finite-galois-prime-residue-lifting; no infinite version exists in the DAG (rg -L for 0BRK and 'infinite Galois'). The Mathlib profinite candidates need IsInvariant, topology and B/Q-level hypotheses, so unsplit is correct. I tested it on a field base, Z[i], the finite case and a purely inseparable residue extension. New node lem-dl-a1-galois-over-intermediate is an exact Mathlib leaf: IsGalois.tower_top_of_isGalois, FieldTheory/Galois/Basic.lean:152, stacks 09I2, read at 145-154. Neither new node restates the item, there is no cycle, no SGA, and no off-route proof node (both sk-thm-p1 citations are Mathlib leaves). The item is still unsplit on live and side-live, is not on the dropped list, and has no repair note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.InertiaRestrictionSurjective",
+  "declaration": "Ideal.inertia_map_restrictNormalHom",
+  "file": "lean/Sheaf/FieldTheory/InertiaRestrictionSurjective.lean",
+  "statement": "theorem inertia_map_restrictNormalHom (A : Type u) [CommRing A] [IsDomain A] [IsIntegrallyClosed A] (K : Type v) [Field K] [Algebra A K] [IsFractionRing A K] (L : Type w) [Field L] [Algebra K L] [Algebra A L] [IsScalarTower A K L] (M : Type z) [Field M] [Algebra K M] [Algebra A M] [Algebra L M] [IsScalarTower A K M] [IsScalarTower A L M] [IsScalarTower K L M] [IsGalois K L] [IsGalois K M] (r : Ideal (integralClosure A M)) [r.IsPrime] : (r.inertia (M ≃ₐ[K] M)).map (AlgEquiv.restrictNormalHom L) = (r.comap (IsScalarTower.toAlgHom A L M).mapIntegralClosure.toRingHom).inertia (L ≃ₐ[K] L)",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65455b301",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Matched every clause of the statement against Stacks 0BSX (more-algebra.tex:32869): normal domain via IsDomain+IsIntegrallyClosed; K any fraction-field model; scalar towers are compatibility only; IsGalois K L, IsGalois K M with no finiteness; actual integralClosure rings; arbitrary prime r; q = comap along mapIntegralClosure; Ideal.inertia (trivial on C/r, includes stabilizer by inertia_le_stabilizer, equivalent to trivial on Frac(C/r) for prime r); image under restrictNormalHom = lower inertia, giving both well-definedness and surjectivity. Edge cases (r=0, non-maximal r, A a field, L=K, infinite extensions, inseparable residue fields, independent universes) covered. No duplicate: exists_mem_inertia_eqOn needs a maximal ideal; FiniteTameCharacterTower is finite/DVR only. lean.statement is verbatim; stmt_deps used; sorry-only; docstrings carry source place, blueprint tag and the 6 steps; report has both sections. Advisory: proof-only imports. No compile per instruction (worker's clean compile)."
  }
 }

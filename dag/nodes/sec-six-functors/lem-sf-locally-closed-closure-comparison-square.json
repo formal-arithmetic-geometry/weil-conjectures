@@ -310,5 +310,50 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-b5b5cce59 (reviewer sub-agent of L); spot-checked: I read the item, all six steps, and the statement of every cited node. Delivery: one commit with the item and the report, no new nodes. The statement and stmt_deps are byte-identical to the node created by Q68's PASSed head 089d8584. The item is still unsplit in live and side-live, has no repair note, and neither it nor any cited node is in route-pivot-dropped. Source: blueprint main-20261015 lem-weil-finite-duality-site-comparison.proof.md l.33ff ('the locally closed Rs^! commutes with ν^* by the open and closed comparisons'); the parent uses the item at its step 3. No SGA is cited. Step 1: V is Noetherian; closed immersions are finite type by the definitions (R→R/I); so S̄ and S are Noetherian and the normalization lemma applies to v,c,i,u. Exactness of c_{e,*} and u_{e,!} plus the exact-functor node keep δ_c and δ_i on D^+. Steps 3-4: I checked by hand that the open unit equation, naturality of η^p and ε^p_i, and the closed counit equation of lem-sf-derived-immersion-comparison-normalization give the restricted identities with the same compositor a_s, which comes from the composites clause of lem-weil-pbc-comparison-pullback. Step 5: s_p^*f = s_p^*g; conjugating by Δ^{-1} and q_p^{-1} gives endomorphisms of a_!(C_SL), where restriction is injective by the Hom bijection of lem-sfb-locally-closed-extension-coherence. The coefficient ring is right: def-weil-pbc-proetale-modules uses the constant ring, whose inverse image is A_S. Step 6: cancellation is correct (B = q'_pΔ'C_T(q'_e)^{-1}). Minor: invertibility of the open unit is used but not stated separately; it is elementary and implicit in the normalization node. Tested S empty, s open or closed, A=0 and a stratum with boundary. The rg -L duplicate search found no node stating this square. I accept the nine declared tool uses as generic. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocallyClosedClosureComparisonSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.locallyClosed_closure_comparison_square",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.closureSquareEtaleFactor",
+   "AlgebraicGeometry.ProEtale.closureSquareProEtaleFactor",
+   "AlgebraicGeometry.ProEtale.closureSquareEtaleClosure",
+   "AlgebraicGeometry.ProEtale.closureSquareProEtaleClosure",
+   "AlgebraicGeometry.ProEtale.closureSquareOpenComparison",
+   "AlgebraicGeometry.ProEtale.closureSquareDelta",
+   "AlgebraicGeometry.ProEtale.closureSquareB",
+   "AlgebraicGeometry.ProEtale.closureSquareEtaleOpenRestriction",
+   "AlgebraicGeometry.ProEtale.closureSquareEtalePullComp",
+   "AlgebraicGeometry.ProEtale.closureSquareEtaleFactorRestriction",
+   "AlgebraicGeometry.ProEtale.closureSquareEtaleClosureRestriction",
+   "AlgebraicGeometry.ProEtale.closureSquareProEtaleOpenRestriction",
+   "AlgebraicGeometry.ProEtale.closureSquareProEtalePullComp",
+   "AlgebraicGeometry.ProEtale.closureSquareProEtaleFactorRestriction",
+   "AlgebraicGeometry.ProEtale.closureSquareProEtaleClosureRestriction",
+   "AlgebraicGeometry.ProEtale.closureSquareImageOpen",
+   "AlgebraicGeometry.ProEtale.closureSquareEtaleNormalized",
+   "AlgebraicGeometry.ProEtale.closureSquareProEtaleNormalized",
+   "AlgebraicGeometry.ProEtale.closureSquareChange",
+   "AlgebraicGeometry.ProEtale.locallyClosed_closure_comparison_square",
+   "AlgebraicGeometry.ProEtale.locallyClosed_closure_comparison_change",
+   "AlgebraicGeometry.ProEtale.locallyClosed_closure_comparison_etale_laws",
+   "AlgebraicGeometry.ProEtale.locallyClosed_closure_comparison_proetale_laws",
+   "AlgebraicGeometry.ProEtale.locallyClosed_closure_comparison_termwise_laws"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocallyClosedClosureComparisonSquare.lean",
+  "statement": "theorem locallyClosed_closure_comparison_square (A : Type (u + 1)) [CommRing A] [Finite A] {S V T : Scheme.{u}} [IsNoetherian T] (s : S ⟶ T) [IsImmersion s] (c : S ⟶ V) (v : V ⟶ T) [IsClosedImmersion c] [IsOpenImmersion v] (h : c ≫ v = s) (qe : closureSquareEtaleFactor A c v ≅ closureSquareEtaleClosure A s.toImage s.imageι) (qp : closureSquareProEtaleFactor A c v ≅ closureSquareProEtaleClosure A s.toImage s.imageι) (he : closureSquareEtaleNormalized A s c v h qe) (hp : closureSquareProEtaleNormalized A s c v h qp) : ((closureSquareDelta A c v).hom ≫ Functor.whiskerLeft (siteComparisonDerivedPullbackPlus S A) qp.hom = Functor.whiskerRight qe.hom (siteComparisonDerivedPullbackPlus T A) ≫ (closureSquareB A s.toImage s.imageι).hom) ∧ (Functor.whiskerLeft (closureSquareEtaleFactor A c v) (fixedComparisonPullbackPlus A s).hom ≫ Functor.whiskerRight (closureSquareDelta A c v).hom (upperStar (ModuleCat.{u + 1} A) s).mapDerivedCategoryPlus ≫ Functor.whiskerLeft (siteComparisonDerivedPullbackPlus S A) (closureSquareProEtaleFactorRestriction A s c v h) = Functor.whiskerRight (closureSquareEtaleFactorRestriction A s c v h) (siteComparisonDerivedPullbackPlus S A)) ∧ (Functor.whiskerLeft (closureSquareEtaleClosure A s.toImage s.imageι) (fixedComparisonPullbackPlus A s).hom ≫ Functor.whiskerRight (closureSquareB A s.toImage s.imageι).hom (upperStar (ModuleCat.{u + 1} A) s).mapDerivedCategoryPlus ≫ Functor.whiskerLeft (siteComparisonDerivedPullbackPlus S A) (closureSquareProEtaleClosureRestriction A s s.toImage s.imageι s.toImage_imageι) = Functor.whiskerRight (closureSquareEtaleClosureRestriction A s s.toImage s.imageι s.toImage_imageι) (siteComparisonDerivedPullbackPlus S A))",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main theorem states the closure square and both restriction equations; the change theorem states the second-factorization square and identity restriction; two derived laws and the termwise-laws theorem state the identity/cocycle clauses. The normalized q parameters use their equivalent restriction characterization with the actual units/counits and the canonical compositor; no arbitrary isomorphism or replacement comparison is chosen. All helper definitions belong to the composites and normalization explicitly introduced in this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a2bd4a92",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Read node, 16 stmt_dep records, report (Worker report + Second reading present), item module, and side-live etale extension comparison / fixedComparisonPullbackPlus sources. All clauses match: F=Rc_*⋙v_!, E=u_!⋙Ri_* via Mathlib s.image/toImage/imageι; Δ=o_v then v_!(δ_c), B=δ_i then i_*(o_u) with recorded open comparison iso and asIso of recorded direct-image mate; conjunct 1 q_pΔ=B C_T(q_e); conjuncts 2-3 restriction equations through the single a_s=fixedComparisonPullbackPlus (q-independent); change square with t=q≪≫q'.symm plus normalization; identity/cocycle laws derived and termwise. q_e,q_p are pinned by derived restriction normalization (unique by restriction Hom injectivity, inhabited by the etale dep's normalized e descended through exact closed push), not free arrows. Hypotheses: IsNoetherian T, IsImmersion s, closed/open factorization; A:Type(u+1) Finite CommRing as in every dep; no extra assumptions; edge cases S=∅, s open/closed, A=0 fine. statement verbatim, 25 declarations present, docstrings with source/blueprint and proof plans, 5 sorry theorems, no hollow defs, no downstream import, item still unstated in side-live. Advisory: instance closureSquareImageOpen is a real inferInstance proof (Mathlib plumbing); proof-only plain imports; downstream FiniteDualityLocallyClosedComparison should reuse these declarations. No compile run (no change made)."
  }
 }

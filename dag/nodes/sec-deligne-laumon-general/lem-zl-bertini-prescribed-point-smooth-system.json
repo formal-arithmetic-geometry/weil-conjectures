@@ -26,7 +26,10 @@
   "def-pc-zero-scheme",
   "def-pc-base-change",
   "def-weil-connected-scheme",
-  "def-weil-pure-dimension"
+  "def-weil-pure-dimension",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-invertible-stalk-linear-equiv",
+  "lem-weil-pbc-invertible-pullback-tensor"
  ],
  "proof": [
   {
@@ -451,5 +454,34 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-d14f5e9b5 (reviewer sub-agent of L); spot-checked: I read the whole item: the unchanged statement, all 12 steps and every cited node's statement. I also read blueprint main-20261015 lem-zl-bertini-finite-cover-curve proof paragraph 2, the item's from.place, which describes the Stacks 0FD5/0FD6 route. There are no new nodes, no SGA use, no re-split note, and the item is not dropped. This head re-delivers af186cff after a landing refusal. The changes are Noetherianity of X in step 1, the density argument in step 9, and in step 12 a purely topological component comparison with finite type of A and lem-sc-regular-local-domain dropped. All of these are correct. The re-delivery lost the earlier reader FIX, so C4 is back: step 2 applies lem-zl-bertini-sections, which needs ampleness in the def-sc-ample sense (a very ample power), but step 1 only gives the 01PS notion through lem-weil-pbc-projective-ample-invertible. I re-applied the fix on the new step-1 text: the affine Y_{s_k} cover plus lem-pc-ample-affine-loci-criterion with n=1. It is added to uses, proof_deps and split_report.tool_uses, and causes no cycle (the criterion's closure has 1274 nodes without the item). Steps checked: I_s=m_s and the finite-support stalk sum (step 4); Serre vanishing applied to I^2, then the long exact sequence (step 5); dim m_s/m_s^2=d from the algebraically closed cotangent comparison (step 6); joint jet lift giving W nonempty (step 7); 0FD6 with a non-injective restriction map (step 8); the derivation a -> a-a(s) and the differential criterion at s (step 10); nonzerodivisor local equations on integral X (step 11); purity per component by isolating it and applying Cartier dimension drop (step 12). Edge cases: A^2 with one point, several points, characteristic p, d=2, disconnected H_v, singular boundary. Advisory: 'X open in its closure' is used without a node. I accept the generic tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BertiniPrescribedPointSmoothSystem",
+  "declaration": "AlgebraicGeometry.exists_eventual_prescribedPoint_smoothSystem",
+  "declarations": [
+   "AlgebraicGeometry.prescribedPointTwist",
+   "AlgebraicGeometry.prescribedPointCombination",
+   "AlgebraicGeometry.prescribedPointVanishes",
+   "AlgebraicGeometry.PrescribedPointJet",
+   "AlgebraicGeometry.prescribedPointJet",
+   "AlgebraicGeometry.prescribedPointRestrictedFamily",
+   "AlgebraicGeometry.prescribedPointMember",
+   "AlgebraicGeometry.exists_eventual_prescribedPoint_smoothSystem"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BertiniPrescribedPointSmoothSystem.lean",
+  "statement": "theorem exists_eventual_prescribedPoint_smoothSystem {k : Type u} [Field k] [IsAlgClosed k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsAffine X] [ConnectedSpace X] [Smooth (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (d : ℕ) (hd : 2 ≤ d) (hdim : X.IsPureDimension d) (S : Finset X) (hS : S.Nonempty) (hclosed : ∀ x ∈ S, IsClosed ({x} : Set X)) (N : ℕ) (Y : Scheme.{u}) [IsReduced Y] (c : Y ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k))) [IsClosedImmersion c] (j : X ⟶ Y) [IsOpenImmersion j] (hdense : DenseRange j) (hchart : Set.range j = c ⁻¹' (ProjectiveSpace.standardOpen (ULift.{u} (Fin (N + 1))) (Spec (.of k)) ⟨0⟩ : Set _)) (hover : j ≫ c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k)) = X ↘ Spec (.of k)) : ∃ (n₀ : ℕ) (U : X.Opens), (∀ x : X, x ∈ U ↔ x ∉ S) ∧ ∀ n : ℕ, n₀ ≤ n → ∃ (I : Type u) (_ : Fintype I) (s : I → Γ(prescribedPointTwist c n, ⊤)), (∀ v : Γ(prescribedPointTwist c n, ⊤), prescribedPointVanishes ((tensorPullback j).obj (prescribedPointTwist c n)) S (tensorSectionsUnit j (prescribedPointTwist c n) v) ↔ ∃! a : I → k, prescribedPointCombination (c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k))) (prescribedPointTwist c n) s a = v) ∧ (∃ ht : Epi ((((tensorPullback (U.ι ≫ j)).obj (prescribedPointTwist c n)).freeHomEquiv).symm (prescribedPointRestrictedFamily (prescribedPointTwist c n) j U s)), IsImmersion (@ProjectiveSpace.homOfGeneratingSections I inferInstance U.toScheme (Spec (.of k)) (U.ι ≫ (X ↘ Spec (.of k))) ((tensorPullback (U.ι ≫ j)).obj (prescribedPointTwist c n)) ((@id (∀ L : Y.Modules, L.IsInvertible → _) (invertible_pullback_tensor (U.ι ≫ j)).1) (prescribedPointTwist c n) ((invertible_pullback_tensor c).1 (ProjectiveSpace.twist _ _ (n : ℤ))).2).2 (prescribedPointRestrictedFamily (prescribedPointTwist c n) j U s) ht)) ∧ Function.Surjective (fun a : I → k ↦ fun x : S ↦ @prescribedPointJet X ((tensorPullback j).obj (prescribedPointTwist c n)) ((@id (∀ L : Y.Modules, L.IsInvertible → _) (invertible_pullback_tensor j).1) (prescribedPointTwist c n) ((invertible_pullback_tensor c).1 (ProjectiveSpace.twist _ _ (n : ℤ))).2).2 x.val (tensorSectionsUnit j (prescribedPointTwist c n) (prescribedPointCombination (c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k))) (prescribedPointTwist c n) s a))) ∧ ∃ O : (Spec (CommRingCat.of (MvPolynomial I k))).Opens, (O : Set (Spec (CommRingCat.of (MvPolynomial I k)))).Nonempty ∧ ∀ a : I → k, Set.range (bertiniCoefficientPoint (k := k) a) ⊆ (O : Set _) → Smooth ((prescribedPointMember (c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k))) j (prescribedPointTwist c n) s a).subschemeι ≫ (X ↘ Spec (.of k))) ∧ IsAffine (prescribedPointMember (c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k))) j (prescribedPointTwist c n) s a).subscheme ∧ (prescribedPointMember (c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k))) j (prescribedPointTwist c n) s a).subscheme.IsPureDimension (d - 1) ∧ (∀ x ∈ S, x ∈ (prescribedPointMember (c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k))) j (prescribedPointTwist c n) s a).support) ∧ ∀ x ∈ S, @prescribedPointJet X ((tensorPullback j).obj (prescribedPointTwist c n)) ((@id (∀ L : Y.Modules, L.IsInvertible → _) (invertible_pullback_tensor j).1) (prescribedPointTwist c n) ((invertible_pullback_tensor c).1 (ProjectiveSpace.twist _ _ (n : ℤ))).2).2 x (tensorSectionsUnit j (prescribedPointTwist c n) (prescribedPointCombination (c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k))) (prescribedPointTwist c n) s a)) ≠ 0",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The kernel is presented by a finite basis using unique coefficient representations. The finite direct sum of first-order targets is its finite product, modeled canonically by (m/m²) tensor over the local ring with the line-bundle stalk; at rational closed points this is the displayed tensor over k. The projective closure is specified as a reduced closed projective subscheme with dense affine-chart intersection X. All pullbacks and section restrictions use tensorPullback and its canonical unit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-95d2388d1",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Every node clause matches the Lean, including the reduced projective closure, the unique-coefficient basis of V_n, generation and immersion on X\\S, jet surjectivity and the U_sm clauses. Theorem stmt_deps are genuine: invertible_pullback_tensor gives the IsInvertible proof terms that homOfGeneratingSections and prescribedPointJet need; invertible_stalk_linearEquiv gives a Classical.choice frame, and the jet value is independent of the frame. Helpers have real data; only the main proof is sorry. lean.statement is verbatim; the node changed only in lean and in stmt_deps, which gained landed nodes; lines <=100; docstrings carry source and all 12 steps. Advisory: tensorSectionsUnit/bertiniCoefficientPoint/bertiniSectionFamily/homOfGlobalSection owners are not in stmt_deps; the stage-3 proof must bridge c^*O(n) and L.tensorPow n. No compile run: no file changed."
  }
 }

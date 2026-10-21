@@ -420,5 +420,48 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-13ecc3e71 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps and all 46 cited statements in full. Statement, stmt_deps, source and blueprint are byte-identical to the live unsplit node, so no target is weakened. No new nodes, no re-split note, no SGA. Mechanical finding: the cited lem-per-etale-closed-sheaf-internal-adjunction is dropped (route-pivot-dropped.txt line 1521). The item itself, its citer lem-weil-finite-duality-locally-closed-comparison and the ancestor lem-weil-finite-duality-site-comparison are all live, so this is a repairable citation fault (same as the NU injective-support-sequence precedent). The node was used in Steps 5, 7 and 10 only for module exactness of etale c_* and i_*. Fix: Step 5 now cites lem-pur-etale-supported-kernel-adjunction (abelian i_* is exact). The module direct image commutes with forgetting scalars (def-weil-pbc-direct-image), and module kernels and cokernels are the abelian ones (def-weil-sheaf-of-modules-category), so the exact faithful forgetful functor transfers exactness. Steps 7 and 10 now point to Step 5, and proof_deps and tool_uses are updated. The fixed closure contains no dropped id and no cycle. No Artin-Gabber forbidden ingredient is used. Maths checked: Step 1 Noetherianity gives quasi-compactness of s, c, v. Step 2 uses the qc scheme-theoretic image (01R8) and makes u a qc open immersion (01RG), keeping nilpotents. Step 3 checks every requirement of def-weil-compactifications-refinements for (u,i). Step 4 gives finite dim via lem-kun-dimension-finite-type, with the empty case D=0. Step 5 composite exactness preserves lower bounds, including the pro-etale closed case with qc complement. Step 6 uses the normalized closure identifications of lem-sfb-etale-locally-closed-extension-comparison and lem-sfb-locally-closed-extension-coherence, with the coefficient bridge prop-weil-pbc-proetale-constant-ring-map, and descends them by localization (2). Step 7: Ri_* is termwise because i_* is exact, and thm-amb-etale-exceptional-adjoint's hypotheses hold. Step 8: conjugating q^{-1}:E->F gives J->s^x; I re-derived both unit and counit identities from the mate relations. Step 9 shows D^b_c is stable under v^* via 005J and lisse restriction. Step 10 applies clause (1) of the exact-adjunction bounds node, giving H in D^{>=a}. Step 11 applies the bounded-below qcqs comparison at c and i. Source: blueprint main-20261015 site-comparison proof, paragraph 2 sentence on locally closed Rs^!. Corrected file: fixes/dag/nodes/sec-six-functors/lem-sf-locally-closed-closure-adjoint-realization.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.LocallyClosedClosureAdjointRealization",
+  "declaration": "AlgebraicGeometry.locallyClosedClosureAdjointRealization",
+  "declarations": [
+   "AlgebraicGeometry.SfClosureExtensionComparison",
+   "AlgebraicGeometry.SfClosureExtensionComparison.derivedIso",
+   "AlgebraicGeometry.sfClosureCompactification",
+   "AlgebraicGeometry.sfProEtaleClosedOpenRestrictionIso",
+   "AlgebraicGeometry.sfProEtaleClosureRestrictionIso",
+   "AlgebraicGeometry.SfLocallyClosedClosureGeometry",
+   "AlgebraicGeometry.sfEtaleClosure_additive",
+   "AlgebraicGeometry.sfEtaleClosure_preservesFiniteLimits",
+   "AlgebraicGeometry.sfEtaleClosure_preservesFiniteColimits",
+   "AlgebraicGeometry.SfLocallyClosedClosureSites",
+   "AlgebraicGeometry.sfClosureEtaleJ",
+   "AlgebraicGeometry.sfClosureEtalePastedAdjunction",
+   "AlgebraicGeometry.sfClosureProEtaleJ",
+   "AlgebraicGeometry.sfClosureProEtalePastedAdjunction",
+   "AlgebraicGeometry.sfClosureEtaleCompactSupportIso",
+   "AlgebraicGeometry.SfLocallyClosedClosureAdjoints",
+   "AlgebraicGeometry.sfClosureEtaleAdjointIso",
+   "AlgebraicGeometry.sfClosureEtaleAmbientAdjunction",
+   "AlgebraicGeometry.SfClosureEtaleConjugationCompatibility",
+   "AlgebraicGeometry.sfClosureIntrinsicProEtaleIso",
+   "AlgebraicGeometry.SfLocallyClosedClosureRealization",
+   "AlgebraicGeometry.locallyClosedClosureAdjointRealization"
+  ],
+  "file": "lean/Sheaf/SixFunctors/LocallyClosedClosureAdjointRealization.lean",
+  "statement": "theorem locallyClosedClosureAdjointRealization (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {S V T : Scheme.{u}} [S.Over (Spec (.of D.k))] [T.Over (Spec (.of D.k))] [IsSeparated (S ↘ Spec (.of D.k))] [LocallyOfFiniteType (S ↘ Spec (.of D.k))] [QuasiCompact (S ↘ Spec (.of D.k))] [IsSeparated (T ↘ Spec (.of D.k))] [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))] (s : S ⟶ T) [IsImmersion s] [s.IsOver (Spec (.of D.k))] (c : S ⟶ V) (v : V ⟶ T) [IsClosedImmersion c] [IsOpenImmersion v] (hs : c ≫ v = s) : Nonempty (SfLocallyClosedClosureRealization D l E n s c v hs)",
+  "branch": "sheaf-dag",
+  "by": "Q39",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main theorem supplies all geometric, exactness, normalized sheaf-comparison and adjoint properties as conclusions in its explicitly defined result bundle. Helpers only unpack or canonically transport these conclusions. Ordinary pro-etale modules use their published fixed-scalar realization equivalence; sfClosureIntrinsicProEtaleIso gives the same normalized comparison in the recorded intrinsic constant-ring categories. No coefficient completion or bound on arbitrary derived objects is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c081f3b39",
+  "group": "Q39",
+  "result": "pass",
+  "note": "Read node, all stmt_dep records, module in full and side-live sources of etaleLocallyClosedExtension/restriction isos, sfIntrinsicExtensionByZero/Transport. Only the lean field changed vs live; no name clash; statement verbatim; all 22 declarations present; one sorry; docstrings carry source and blueprint tags plus the 11 steps. Hypotheses match the node with no stronger assumptions (IsImmersion s redundant). All conclusion clauses present: scheme image with ideal=kernel; Noetherian and qc-complement geometry; compactification; dim bound with D:ℕ; exactness and lower bounds for F,E on both sites; q_tau = mapDerivedCategoryNatIso of sheafIso pinned uniquely by restriction-to-S normalization (etale: inverse of dep's equation; pro-etale: open unit/closed counit, transported to intrinsic categories via the published equivalence); Rs_!≅E_e canonical; J_e≅s^x via conjugateIsoEquiv(q_e.symm), direction and unit/counit equations checked; D^b_c restriction, J_eM bounded below, comparison-domain bounds. Edge cases (empty, identity, nilpotent, negative bounds, n=1) covered. Advisory only: J_p via fixed-scalar closed adjoint (setup only), unused private imports. Not recompiled per instructions."
  }
 }
