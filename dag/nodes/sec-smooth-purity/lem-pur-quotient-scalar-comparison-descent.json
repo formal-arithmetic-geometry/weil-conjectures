@@ -13,11 +13,167 @@
   "def-pc-sheaf-restrict-scalars",
   "def-pc-kflat-complex",
   "def-weil-inverse-system",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-strict-roos-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $c_n:S\\to B_n$ and $t_n:B_{n+1}\\to B_n$ for the structure and transition maps of the strict tower of $S$-algebras; thus $t_nc_{n+1}=c_n$. For every degree of $P$, the balanced map $p\\otimes s\\mapsto p\\otimes c_n(s)$ defines an $S$-linear map $\\alpha_{n,P}:P\\otimes_RS\\to\\operatorname{Res}^S_{B_n}(P\\otimes_RB_n)$. Indeed, $rp\\otimes c_n(s)=p\\otimes c_n(\\varphi(r)s)$ for a local section $r$ of $R$. These presheaf maps commute with restriction and therefore induce maps on the sheafified tensor products. The identity $t_nc_{n+1}=c_n$ implies $(1\\otimes t_n)\\alpha_{n+1,P}=\\alpha_{n,P}$. The product universal property gives a unique $\\alpha_P:F(P)\\to V(P)=\\prod_n\\operatorname{Res}^S_{B_n}(P\\otimes_RB_n)$ with these components, and $(1-s_P)\\alpha_P=0$.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section Tag 03EK (section-tensor-product); explicit balanced scalar map"
+   }
+  },
+  {
+   "text": "Use the fixed strict Roos coordinates $G(P)^i=V(P)^{i-1}\\oplus V(P)^i$, with $d(y,x)=(-dy-(1-s_P)x,dx)$. Define $\\beta_P(z)=(0,\\alpha_P(z))$. Since $\\alpha_P$ commutes with differentials and $(1-s_P)\\alpha_P=0$, its differential is $(0,\\alpha_P(dz))$, so this is a chain map. For a chain map $f:P\\to P'$, every product projection of $V(f)\\alpha_P$ and $\\alpha_{P'}F(f)$ sends $p\\otimes s$ to $f(p)\\otimes c_n(s)$; hence these maps agree and $G(f)\\beta_P=\\beta_{P'}F(f)$. Any map with zero first component and the stipulated product projections has second component $\\alpha_P$ by the product universal property. Pure tensors locally generate the sheafified tensors, so the stipulated formulas determine the maps even when sections are not globally pure tensors. This proves the chain-level existence, uniqueness, and naturality.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone) and Tag 08TC (definition-derived-limit); strict coordinates"
+   }
+  },
+  {
+   "text": "The ordinary functor $F$ sends a chain homotopy $h$ to $h\\otimes1$. For the tensor tower, its levelwise homotopies are $h\\otimes1_{B_n}$; they commute with transitions because $(h\\otimes1)(1\\otimes t_n)=(1\\otimes t_n)(h\\otimes1)$. The strict Roos homotopy lemma therefore sends them to the homotopy $(y,x)\\mapsto(-h_Vy,h_Vx)$, where $h_V=\\prod_n(h\\otimes1_{B_n})$. Thus both functors pass to the homotopy category of $R$-module complexes, and then to functors $\\overline F,\\overline G:K(R)\\to D(S)$ by localization in the target. Their chain-natural transformation gives $\\overline\\beta:\\overline F\\to\\overline G$.",
+   "uses": [
+    "lem-pur-strict-roos-homotopy-functor",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone); explicit strict homotopy formula"
+   }
+  },
+  {
+   "text": "Let $\\mathcal P$ be the homotopy-category objects represented by K-flat complexes with flat terms. Every unbounded $R$-module complex admits a quasi-isomorphism $P\\to X$ with $P\\in\\mathcal P$, by the K-flat resolution theorem. Since the site is small, $\\operatorname{Mod}(R)$ is abelian. Quasi-isomorphisms in $K(R)$ have right calculus of fractions and two-out-of-three, by the saturated multiplicative-system theorem. These are exactly the resolution and fraction hypotheses needed for resolving-class descent; no boundedness or projectivity assumption is introduced.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pur-quasi-isos-saturated-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution)"
+   }
+  },
+  {
+   "text": "For a quasi-isomorphism $f:P\\to P'$ between objects of $\\mathcal P$, apply the change-of-rings K-flat quasi-isomorphism lemma first to $R\\to S$ and then to every composite $R\\to S\\to B_n$. It gives quasi-isomorphisms $F(f)$ and $f\\otimes_RB_n$. Restricting the latter to $S$ still gives a quasi-isomorphism: restriction changes only the scalar action; kernels are the same underlying subsheaves and cokernels are the same sheafified abelian quotients. Thus restriction commutes with cohomology and reflects its isomorphisms. This uses no flatness of $S$ or $B_n$ over $R$ and no surjectivity of $S\\to B_n$.",
+   "uses": [
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side), with each coefficient ring in degree zero"
+   }
+  },
+  {
+   "text": "Exactness of countable products in $\\operatorname{Mod}(S)$ gives $H^i(\\prod_n C_n)=\\prod_n H^i(C_n)$ for every family of complexes: the product functor preserves kernels and images, and applying it to $0\\to\\operatorname{im}d^{i-1}\\to\\ker d^i\\to H^i\\to0$ identifies the quotient. Consequently the product $V(f)$ of the restricted levelwise quasi-isomorphisms from the preceding step is a quasi-isomorphism. It commutes with $1-s$ because $f\\otimes1$ is a strict tower map.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC (definition-derived-limit); exact-product cohomology calculation"
+   }
+  },
+  {
+   "text": "Reorder the strict Roos coordinates as $(x,y)\\in V(P)^i\\oplus V(P)^{i-1}$. The differential becomes $(dx,-(1-s_P)x-dy)$. Apply the Roos-coordinate quasi-isomorphism lemma with its endomorphism equal to $-(1-s_P)$, its primed endomorphism equal to $-(1-s_{P'})$, and its map $a=V(f)$. The map $G(f)$ is diagonal with both coordinates $V(f)$, so that lemma shows $G(f)$ is a quasi-isomorphism. Hence $\\overline F$ and $\\overline G$ invert every quasi-isomorphism between objects of $\\mathcal P$.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "lem-pe-roos-coordinates-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone), Tag 08TC (definition-derived-limit); cone comparison"
+   }
+  },
+  {
+   "text": "Apply resolving-class essential constancy to $K(R)$, its quasi-isomorphisms, the class $\\mathcal P$, and each of $\\overline F,\\overline G$. The preceding steps verify every hypothesis. For each $X$ the denominator diagram is essentially constant, and for $X\\in\\mathcal P$ its identity leg is invertible. The pointwise-Kan bridge identifies this cone with a pointwise right Kan extension along $Q_R:K(R)\\to D(R)$ and identifies the identity leg with the universal comparison. The total-left-derived-localization theorem assembles these pointwise extensions into everywhere-defined left derived functors $LF,LG:D(R)\\to D(S)$ with comparisons $\\varepsilon_F:LFQ_R\\to\\overline F$ and $\\varepsilon_G:LGQ_R\\to\\overline G$. Both comparisons are isomorphisms on $\\mathcal P$. This also shows directly that the actual ordinary tensor and product-cone models compute these functors on the stated representatives.",
+   "uses": [
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-left-derived-defined-pointwise-kan-bridge",
+    "lem-pur-total-left-derived-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (lemma-find-existence-computes), dual argument, and Tag 05S9 (definition-right-derived-functor-defined); the pointwise Kan formulation is the cited bridge"
+   }
+  },
+  {
+   "text": "Compose $LFQ_R\\xrightarrow{\\varepsilon_F}\\overline F\\xrightarrow{\\overline\\beta}\\overline G$. By the universal property of the right Kan extension $(LG,\\varepsilon_G)$ there is a unique natural transformation $\\chi:LF\\to LG$ satisfying $\\varepsilon_{G,X}\\chi_{Q_RX}=\\overline\\beta_X\\varepsilon_{F,X}$ for every $X\\in K(R)$. For $P\\in\\mathcal P$, invert the comparison to obtain precisely $\\chi_{Q_RP}=\\varepsilon_{G,P}^{-1}Q_S(\\beta_P)\\varepsilon_{F,P}$. This constructs a transformation on the entire derived category, rather than only a family of maps on chosen resolutions.",
+   "uses": [
+    "lem-pur-total-left-derived-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Universal property of a left derived functor/right Kan extension; cf. Tag 05S9"
+   }
+  },
+  {
+   "text": "The normalization alone determines $\\chi$. For any complex $X$ choose the quasi-isomorphism $q:P\\to X$ of the K-flat resolution theorem. Since $Q_Rq$ is invertible, naturality forces $\\chi_{Q_RX}=LG(Q_Rq)\\chi_{Q_RP}LF(Q_Rq)^{-1}$. Thus two normalized natural transformations coincide on every localized complex, and hence on every derived object. The transformation already constructed satisfies this formula for every resolution, so changing the resolution gives the same map under the canonical comparisons. Changing models of $LF$ or $LG$ also gives the same transformation after their comparison-preserving universal isomorphisms, by uniqueness of universal objects.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution); uniqueness from invertibility of the localized resolution"
+   }
+  },
+  {
+   "text": "Finally set $S=R$ and $B_n=R/a^nR$, with the usual quotient transition maps and $a$ a global section of $R$. Multiplication $m:P\\otimes_RR\\to P$, $p\\otimes r\\mapsto rp$, has inverse $p\\mapsto p\\otimes1$; both formulas respect restriction and hence sheafification. The $n$th projection of $\\beta_Pm^{-1}$ is $p\\mapsto p\\otimes\\overline1$, and its shifted-product component is zero. These are exactly the projections and zero component of the quotient unit in the strict Roos definition, so the two chain maps agree. The formulas also cover $a=0$ (constant tower $R$) and $a$ invertible (zero quotient tower).",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10 and Proposition 3.5.1, pp. 22,24; explicit quotient-unit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-inverse-system",
+  "def-weil-strict-roos-model",
+  "lem-pur-strict-roos-homotopy-functor",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-pe-roos-coordinates-quasi-iso",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-left-derived-defined-pointwise-kan-bridge",
+  "lem-pur-total-left-derived-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10 and Proposition 3.5.1 provide completion context only; explicit augmentation and generic ring-sheaf descent expanded using Stacks Tags 03EK, 014E, 08TC, 06YS, 06YT, 06XN and 05S9 and the existing pointwise Kan bridge."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +209,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Tor\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"The $ n $-th left-derived functor of the tensor product operation in a monoidal abelian category, constructed by taking projective resolutions. For each object $ X $, $ \\\\mathrm{Tor}_n(X,-) $ is the $ \"}\n  {\"name\": \"CategoryTheory.Tor'_obj_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k : C) {X Y : C} (f : X ⟶ Y),\\n  ((Category\", \"doc\": \"For any morphism $f: X \\to Y$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the object map of the $n$-th Tor functor $\\\\mathrm{Tor}_n(-, k)$ applied to $f$ equals the eval\"}\n  {\"name\": \"CategoryTheory.Tor'\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Abelian C] →\\n        [CategoryTheory.MonoidalPreadditive C] →\\n          [CategoryTheory.HasProjectiveResolutions C] → ℕ → CategoryTheory.Functor C (Cat\", \"doc\": \"For a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n : \\\\mathcal{C} \\\\times \\\\mathcal{C} \\\\to \\\\mathcal{C}$ is the $n$-th left-derived functo\"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n  {\"name\": \"CategoryTheory.Tor_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y),\\n  (CategoryTheory.To\", \"doc\": \"In a monoidal abelian category with projective resolutions, for any morphism $f: X \\to Y$ and natural number $n$, the action of the $n$-th Tor functor on $f$ is equal to the $n$-th left-derived natural\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_naturality\", \"module\": \"Mathlib/RingTheory/AdicCompletion/AsTensorProduct\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N),\\n  AdicCompletion.map I f ∘ₗ AdicCompletion.ofTensorProduct I M =\\n    AdicCompletion.ofTensorProduct I N \", \"doc\": \"For any $ R $-linear map $ f : M \\to N $, the diagram involving the $ I $-adic completion maps and tensor products commutes, i.e., $\\\\text{map}_I(f) \\\\circ \\\\text{ofTensorProduct}_I(M) = \\\\text{ofTensorPro\"}\n  {\"name\": \"CategoryTheory.Tor_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (X : C),\\n  (CategoryTheory.Tor C n).obj X =\", \"doc\": \"For each object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the $n$-th Tor functor $\\\\mathrm{Tor}_n(X,-)$ is defined as the $n$-th left-derived functor of the left \"}",
    "date": "2026-10-21",
    "verdict": "no match: returned ordinary module completion, localization, tensor or category infrastructure; none states this ring-sheaf tower assertion with its specified augmentation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation from tensor extension of ring sheaves to the homotopy inverse limit of tensor extensions along a strict algebra tower descends from K-flat complexes to unbounded derived categories",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.Tor'_map_app\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\\n  ((Category\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any natural number $n$, morphism $f: X \\\\to Y$, and object $j \\\\in \\\\mathcal{C}$, the application of the $n$-th Tor functo\"}\n  {\"name\": \"HomologicalComplex.HasGoodTensor₁₂\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        {I : Type u_2} →\\n          [inst_3 : AddMonoid I] →\\n            {c : ComplexShape I} →\\n              [c.TensorSigns] → HomologicalCompl\", \"doc\": \"A proposition asserting that for three homological complexes $K_1, K_2, K_3$ in a category $\\\\mathcal{C}$ with shape $c$, the composition of curried tensor product functors preserves colimits of diagra\"}\n  {\"name\": \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] {I : Type u_2} [inst_3 : AddMonoid I] {c : ComplexShape I}\\n  [inst_4 : c.TensorSigns] (K₁ K₂ K₃ : HomologicalComplex C c)\\n  [CategoryTheory.GradedObje\", \"doc\": \"Given three homological complexes $ K_1, K_2, K_3 $ in a category $ \\\\mathcal{C} $ with shape $ c $, if their underlying graded objects $ K_1.X, K_2.X, K_3.X $ satisfy the colimit-preserving tensor pro\"}\n  {\"name\": \"CategoryTheory.Tor_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y),\\n  (CategoryTheory.To\", \"doc\": \"In a monoidal abelian category with projective resolutions, for any morphism $f: X \\to Y$ and natural number $n$, the action of the $n$-th Tor functor on $f$ is equal to the $n$-th left-derived natural\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_map\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k : C) {X Y : C} (f : X ⟶ Y),\\n  ((Category\", \"doc\": \"For any morphism $f: X \\to Y$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, the object map of the $n$-th Tor functor $\\\\mathrm{Tor}_n(-, k)$ applied to $f$ equals the eval\"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat →\\n    CategoryTheory.Limits.PreservesFiniteLimits\\n      (CategoryTheory.MonoidalCategory.tensorLeft ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $, the functor $ - \\\\otimes_R S $ from the category of $ R $-modules to itself preserves finite limits.\"}\n  {\"name\": \"CategoryTheory.Tor'_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\\n  ((CategoryTheory.Tor' C n).obj\", \"doc\": \"In a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, for any objects $k, j \\\\in \\\\mathcal{C}$, the $n$-th Tor functor $\\\\mathrm{Tor}_n(k, j)$ is equal to the $n$-th left-derived f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic derived-functor/localization or ordinary tensor infrastructure does not construct the specified ring-sheaf strict-tower augmentation or establish its resolving-class hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"leftDerived\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.HasLeftDerivedFunctor\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_2} H] (F : CategoryTheory.Functor C H) (W : CategoryTheory.MorphismProperty C) : Prop\", \"doc\": \"A functor `F : C ⥤ H` has a left derived functor with respect to\\n`W : MorphismProperty C` if it has a right Kan extension along\\n`W.Q : C ⥤ W.Localization` (or any localization functor `L : C ⥤ D`\\nfor \"}\n  {\"name\": \"CategoryTheory.Functor.HasLeftDerivedFunctor.hasRightKanExtension'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {H : Type u_2} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Category.{v_3, u_2} H} {F : CategoryTheory.Functor C H} {W : CategoryTheory.MorphismProperty C} [self : F.HasLeftDerivedFunctor W] : W.Q.HasRightKanExtension F\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.HasLeftDerivedFunctor.mk\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_2} H] {F : CategoryTheory.Functor C H} {W : CategoryTheory.MorphismProperty C} (hasRightKanExtension' : W.Q.HasRightKanExtension F) : F.HasLeftDerivedFunctor W\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.totalLeftDerived\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] [F.HasLeft\", \"doc\": \"Given a functor `F : C ⥤ H`, and a localization functor `L : C ⥤ D` for `W`,\\nthis is the left derived functor `D ⥤ H` of `F`, i.e. the right Kan extension\\nof `F` along `L`.\"}\n  {\"name\": \"CategoryTheory.Functor.HasLeftDerivedFunctor.hasRightKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] [F.HasLeft\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.hasLeftDerivedFunctor_iff\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_3} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_3} D] [CategoryTheory.Category.{v_3, u_2} H] (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] : F.HasLef\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.hasLeftDerivedFunctor_iff_of_iso\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {H : Type u_2} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_3, u_2} H] {F F' : CategoryTheory.Functor C H} (e : F ≅ F') (W : CategoryTheory.MorphismProperty C) : F.HasLeftDerivedFunctor W ↔ F'.HasLeftDerivedFunctor W\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftDerivedFunctor\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (LF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : L.comp LF ⟶ F) (W : CategoryTheo\", \"doc\": \"A functor `LF : D ⥤ H` is a left derived functor of `F : C ⥤ H`\\nif it is equipped with a natural transformation `α : L ⋙ LF ⟶ F`\\nwhich makes it a right Kan extension of `F` along `L`,\\nwhere `L : C ⥤ D\"}\n  {\"name\": \"CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] [F.HasLeft\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.totalLeftDerivedCounit\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (F : CategoryTheory.Functor C H) (L : CategoryTheory.Functor C D) (W : CategoryTheory.MorphismProperty C) [L.IsLocalization W] [F.HasLeft\", \"doc\": \"The canonical natural transformation `L ⋙ F.totalLeftDerived L W ⟶ F`.\"}\n  {\"name\": \"CategoryTheory.Functor.HasLeftDerivedFunctor.mk'\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} [CategoryTheory.Category.{v_1, u_1} C] [CategoryTheory.Category.{v_2, u_2} D] [CategoryTheory.Category.{v_3, u_3} H] (LF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : L.comp LF ⟶ F) {W : CategoryTheo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \" {C : Type u_1} {D : Type u_2} {H : Type u_3} {inst✝ : CategoryTheory.Category.{v_1, u_1} C} {inst✝¹ : CategoryTheory.Category.{v_2, u_2} D} {inst✝² : CategoryTheory.Category.{v_3, u_3} H} (LF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : L.comp\", \"doc\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic derived-functor/localization or ordinary tensor infrastructure does not construct the specified ring-sheaf strict-tower augmentation or establish its resolving-class hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|quotientScalar|scalarAugmentation|scalar.*tower.*[Nn]at",
+   "results": "[grep] OK 4 hit(s)\n  {\"file\": \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"line\": \"72\", \"text\": \"`[Module R M] [IsScalarTower R S M]`. If some concrete `M` naturally carries these (as is often\"}\n  {\"file\": \"Mathlib/Algebra/MvPolynomial/Invertible.lean\", \"line\": \"33\", \"text\": \"  IsScalarTower.invertibleAlgebraCoeNat R _ _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\", \"line\": \"104\", \"text\": \"instance : IsScalarTower R R[X] W'.CoordinateRing := inferInstance\"}\n  {\"file\": \"Mathlib/RingTheory/Binomial.lean\", \"line\": \"189\", \"text\": \"    [Pow S ℕ] [Module R S] [IsScalarTower R S S] [NatPowAssoc S]\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic derived-functor/localization or ordinary tensor infrastructure does not construct the specified ring-sheaf strict-tower augmentation or establish its resolving-class hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation between functors on complexes of sheaves descends uniquely to their left derived functors using K-flat resolutions",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.leftDerivedUnique\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \"[LF'.IsLeftDerivedFunctor α'₂ W] : LF ≅ LF'\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and two left derived functors $LF, LF' : \\\\mathcal{D} \\\\to \\\\mathc\"}\n  {\"name\": \"CategoryTheory.NatTrans.leftDerived\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"{F G : C ⥤ D} [F.Additive] [G.Additive] (α : F ⟶ G) (n : ℕ) : F.leftDerived n ⟶ G.leftDerived n\", \"doc\": \"Given additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, this constructs the induced natural transformat\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.leftDerived_app_eq\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"{F G : C ⥤ D} [F.Additive] [G.Additive] (α : F ⟶ G) {X : C} (P : ProjectiveResolution X) (n : ℕ) :\\n  (NatTrans.leftDerived α n).app X =\\n    (P.isoLeftDerivedObj F n).hom ≫\\n      (HomologicalComplex.homologyFunctor D (ComplexShape.down ℕ) n).map\\n          ((NatTrans.mapHomologicalComplex α _).app P.c\", \"doc\": \"For additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, an object $ X \\\\in \\\\mathcal{C} $, its projective resolution $ P $, and $ n \\\\in \\\\math\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.leftDerivedToHomotopyCategory_app_eq\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"{F G : C ⥤ D} [F.Additive] [G.Additive] (α : F ⟶ G) {X : C} (P : ProjectiveResolution X) :\\n  (NatTrans.leftDerivedToHomotopyCategory α).app X =\\n    (P.isoLeftDerivedToHomotopyCategoryObj F).hom ≫\\n      (HomotopyCategory.quotient _ _).map ((NatTrans.mapHomologicalComplex α _).app P.complex) ≫\\n       \", \"doc\": \"Given additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between preadditive categories and a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, there exists an induced natural transformation \"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedNatTrans\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \"(τ : F' ⟶ F) : LF' ⟶ LF\", \"doc\": \"Given natural transformation $\\\\tau : F' \\\\Rightarrow F$ between functors $F', F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, this constructs the induced natural transformation $LF' \\\\Rightarrow LF$ between their lef\"}\n  {\"name\": \"CategoryTheory.Functor.toRightDerivedZero\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] : F ⟶ F.rightDerived 0\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, this constructs a natural transformation from $ F $ to its 0th right-derived functor $ R^\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedLift\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.LeftDerived\", \"type\": \"(G : D ⥤ H) (β : L ⋙ G ⟶ F) : G ⟶ LF\", \"doc\": \"Given a functor $ G : \\\\mathcal{D} \\\\to \\\\mathcal{H} $ and a natural transformation $ \\\\beta : L \\\\circ G \\\\Rightarrow F $, this function constructs the unique natural transformation $ G \\\\Rightarrow LF $ gu\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"{X Y : C} (f : X ⟶ Y) (P : ProjectiveResolution X) (Q : ProjectiveResolution Y) (φ : P.complex ⟶ Q.complex)\\n  (comm : φ.f 0 ≫ Q.π.f 0 = P.π.f 0 ≫ f) (F : C ⥤ D) [F.Additive] (n : ℕ) :\\n  (F.leftDerived n).map f ≫ (Q.isoLeftDerivedObj F n).hom =\\n    (P.isoLeftDerivedObj F n).hom ≫ (F.mapHomologicalCom\", \"doc\": \"For objects $X,Y$ in an abelian category $\\\\mathcal{C}$, projective resolutions $P\\\\to X$ and $Q\\\\to Y$, a chain map $\\\\phi:P\\\\to Q$ satisfying $\\\\phi_0\\\\circ \\\\pi_P = \\\\pi_Q\\\\circ f$, and an additive functor $\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic derived-functor/localization or ordinary tensor infrastructure does not construct the specified ring-sheaf strict-tower augmentation or establish its resolving-class hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right Kan extension of functors on a localization sends a natural transformation to a unique natural transformation normalized on resolving objects",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Localization.Construction.natTransExtension\", \"module\": \"Mathlib/CategoryTheory/Localization/Construction\", \"type\": \"{C : Type uC} →\\n  [inst : CategoryTheory.Category.{uC', uC} C] →\\n    {W : CategoryTheory.MorphismProperty C} →\\n      {D : Type uD} →\\n        [inst_1 : CategoryTheory.Category.{uD', uD} D] →\\n          {F₁ F₂ : CategoryTheory.Functor W.Localization D} → (W.Q.comp F₁ ⟶ W.Q.comp F₂) → (F₁ ⟶ F₂)\", \"doc\": \"Given functors $F_1, F_2: \\\\mathcal{C}[W^{-1}] \\\\to \\\\mathcal{D}$ and a natural transformation $\\\\tau: Q \\\\circ F_1 \\\\Rightarrow Q \\\\circ F_2$ (where $Q: \\\\mathcal{C} \\\\to \\\\mathcal{C}[W^{-1}]$ is the localizat\"}\n  {\"name\": \"CategoryTheory.Localization.Construction.natTransExtension_app\", \"module\": \"Mathlib/CategoryTheory/Localization/Construction\", \"type\": \"∀ {C : Type uC} [inst : CategoryTheory.Category.{uC', uC} C] {W : CategoryTheory.MorphismProperty C} {D : Type uD}\\n  [inst_1 : CategoryTheory.Category.{uD', uD} D] {F₁ F₂ : CategoryTheory.Functor W.Localization D}\\n  (τ : W.Q.comp F₁ ⟶ W.Q.comp F₂) (X : W.Localization),\\n  (CategoryTheory.Localization\", \"doc\": \"Given functors $F_1, F_2: \\\\mathcal{C}[W^{-1}] \\\\to \\\\mathcal{D}$ and a natural transformation $\\\\tau: Q \\\\circ F_1 \\\\Rightarrow Q \\\\circ F_2$ (where $Q: \\\\mathcal{C} \\\\to \\\\mathcal{C}[W^{-1}]$ is the localizat\"}\n  {\"name\": \"CategoryTheory.Localization.Construction.NatTransExtension.app\", \"module\": \"Mathlib/CategoryTheory/Localization/Construction\", \"type\": \"{C : Type uC} →\\n  [inst : CategoryTheory.Category.{uC', uC} C] →\\n    {W : CategoryTheory.MorphismProperty C} →\\n      {D : Type uD} →\\n        [inst_1 : CategoryTheory.Category.{uD', uD} D] →\\n          {F₁ F₂ : CategoryTheory.Functor W.Localization D} →\\n            (W.Q.comp F₁ ⟶ W.Q.comp F₂) → (X : W\", \"doc\": \"For an object $X$ in the localization $\\\\mathcal{C}[W^{-1}]$, the component of the extended natural transformation is constructed by: (1) mapping $X$ back to $\\\\mathcal{C}$ via the equivalence $\\\\text{ob\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_ext\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived\", \"type\": \"∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (α : \", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and $RF : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, and a localization $L$ \"}\n  {\"name\": \"CategoryTheory.Localization.Construction.NatTransExtension.app_eq\", \"module\": \"Mathlib/CategoryTheory/Localization/Construction\", \"type\": \"∀ {C : Type uC} [inst : CategoryTheory.Category.{uC', uC} C] {W : CategoryTheory.MorphismProperty C} {D : Type uD}\\n  [inst_1 : CategoryTheory.Category.{uD', uD} D] {F₁ F₂ : CategoryTheory.Functor W.Localization D}\\n  (τ : W.Q.comp F₁ ⟶ W.Q.comp F₂) (X : C),\\n  CategoryTheory.Localization.Construction.\", \"doc\": \"For any object $X$ in the original category $\\\\mathcal{C}$, the component of the extended natural transformation $\\\\tau$ at the localized object $Q(X)$ in the localized category $\\\\mathcal{C}[W^{-1}]$ is\"}\n  {\"name\": \"CategoryTheory.Localization.Construction.natTransExtension_hcomp\", \"module\": \"Mathlib/CategoryTheory/Localization/Construction\", \"type\": \"∀ {C : Type uC} [inst : CategoryTheory.Category.{uC', uC} C] {W : CategoryTheory.MorphismProperty C} {D : Type uD}\\n  [inst_1 : CategoryTheory.Category.{uD', uD} D] {F G : CategoryTheory.Functor W.Localization D}\\n  (τ : W.Q.comp F ⟶ W.Q.comp G),\\n  CategoryTheory.CategoryStruct.id W.Q ◫ CategoryTheory\", \"doc\": \"For functors $F, G: \\\\mathcal{C}[W^{-1}] \\\\to \\\\mathcal{D}$ and a natural transformation $\\\\tau: Q \\\\circ F \\\\Rightarrow Q \\\\circ G$ (where $Q: \\\\mathcal{C} \\\\to \\\\mathcal{C}[W^{-1}]$ is the localization functo\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedDesc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived\", \"type\": \"{C : Type u_1} →\\n  {D : Type u_2} →\\n    {H : Type u_3} →\\n      [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n        [inst_1 : CategoryTheory.Category.{v_3, u_2} D] →\\n          [inst_2 : CategoryTheory.Category.{v_5, u_3} H] →\\n            (RF : CategoryTheory.Functor D H) →\\n              {F : Cate\", \"doc\": \"Given functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, $ G : \\\\mathcal{D} \\\\to \\\\mathcal{H} $, and a natural transformation $ \\\\beta : F \\\\Rightarrow L \\\\circ G $, this con\"}\n  {\"name\": \"CategoryTheory.Functor.isPointwiseRightKanExtensionAtOfIsoOfIsLocalization\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived\", \"type\": \"{C : Type u₁} →\\n  {D : Type u₂} →\\n    {H : Type u₃} →\\n      [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n        [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n          [inst_2 : CategoryTheory.Category.{v₃, u₃} H] →\\n            {F : CategoryTheory.Functor C H} →\\n              {L : CategoryTheory\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, a morphism property $W$ in $\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the item: generic derived-functor/localization or ordinary tensor infrastructure does not construct the specified ring-sheaf strict-tower augmentation or establish its resolving-class hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-finite-free-completed-scalar-comparison",
@@ -76,5 +267,34 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-quotient-scalar-comparison-descent",
+  "worker": "stage1",
+  "summary": "Constructed the balanced scalar maps and zero-shifted-component chain augmentation, checked strict homotopies, K-flat invariance through restriction/exact products/cones, and descended by existing resolving-class pointwise Kan nodes. The universal property constructs a natural transformation on all derived objects; normalization and a resolution prove uniqueness. No new nodes; statement retained.",
+  "blueprint": "lem-weil-scalar-extension-composition, proof first paragraph: completed derived tensor on integral representatives. This item supplies its scalar augmentation and the descent needed by lem-weil-finite-free-completed-scalar-comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Unbounded flat-term K-flat resolutions on any ringed site are generic resolving objects; no same-unit node gives their existence."
+   },
+   {
+    "node": "lem-pe-roos-coordinates-quasi-iso",
+    "why": "Generic cone comparison for two diagonal quasi-isomorphisms; no change to the coefficient-completion route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pe-roos-coordinates-quasi-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N8-644f83870",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-644f83870 (reviewer sub-agent of L); spot-checked: Read the item's 11 steps in full, every cited statement and the sources (BS 3.4.10 and 3.5.1(1), pp. 22-24; Stacks 06YS/06YT at sites-cohomology.tex l. 3207/3233). The statement is unchanged from the NQ base. Two stmt_deps were added and the statement uses both: flat modules and the strict Roos model. There are no new nodes. The closure has 181 nodes and no cycle, and there is no SGA citation. Steps 1-2: the balanced maps, t_n c_{n+1}=c_n, (1-s)alpha=0 and the chain map (0,alpha) all match the coordinates and augmentation of def-weil-strict-roos-model. Step 3: the strict Roos homotopy lemma applies, since its levelwise homotopies commute with the transitions. Step 4 supplies 06YS resolutions and saturated right fractions. Step 5: change of rings for a K-flat quasi-isomorphism holds for any ring map; restriction keeps the underlying sheaves, so it keeps cohomology. Step 6: exact products give a product quasi-isomorphism. Step 7: the sign is right; reordering gives (dx,-(1-s)x-dy), so the lemma's endomorphism is -(1-s). Step 8 applies essential constancy, then the pointwise-Kan bridge, then the total derived leaf. The leaf's Mathlib match includes the pointwise RKE, which together with limit-cone uniqueness gives an invertible counit on P. This is the same chain as the accepted lem-pur-left-derived-from-kflat-class, and it avoids that node's exactness premise. Steps 9-10: the RKE universal property is used in the correct direction, and uniqueness follows by resolution. Step 11: the quotient unit for S=R matches what the citer's step 5 uses. Edge cases checked: P=0, B_n=0, B_n=S, Z to Z_p, a=0 or a unit, a non-surjective S to B_n, unbounded complexes. No duplicate found: lem-pe-kflat-roos-representative-invariance covers only S=R. The tool uses lem-pc-kflat-resolution and lem-pe-roos-coordinates-quasi-iso are accepted. Advisory only: step 8 could spell out the limit-cone uniqueness sentence. No changes."
+ }
 }
