@@ -22540,3 +22540,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:31 L: merged deliver/NF/lem-sfb-continuous-algcl-tame-boundary-comparison (reviewer FIX; first push; new nodes: 3); claim not held by NF: not your claim
 - 13:31 L: merged deliver/NC/lem-sfb-qcqs-integral-finite-model-completeness (reviewer FIX; first push; new nodes: 0); claim not held by NC: not your claim
 - 13:31 L: returned deliver/ND/lem-sfb-continuous-algcl-proper-scalar-comparison (reviewer RETURN: E2/E1/D (false inputs, major gap): steps 1-6 never use any property of B and prove pi_M invertible for EVERY degree-zero)
+- 13:31 L: returned deliver/ND/lem-sfb-continuous-algcl-proper-scalar-comparison (reviewer RETURN: E2/E1/D (false inputs, major gap): steps 1-6 never use any property of B and prove pi_M invertible for EVERY degree-zero)
