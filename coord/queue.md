@@ -1,6 +1,6 @@
 # Work queue
 
-581 items; claim with `tools/claim.py next <group> [--stage N]`.
+586 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (24 clusters, 1028 modules)
 
@@ -35,7 +35,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 89, stage 3 21 items.
 
-## Stage 1: nodes to split (14)
+## Stage 1: nodes to split (18)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -43,18 +43,22 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
 | `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
 | `lem-sfb-tame-inertia-continuous-koszul` | 4010 | none |
-| `lem-sfb-tame-stratum-kummer-descent` | 4010 | none |
 | `lem-sfb-complete-group-forgetful-automorphisms` | 4011 | none |
+| `lem-sfb-condensed-derived-invariant-bar` | 4011 | none |
 | `lem-sfb-condensed-product-action-inflation` | 4011 | none |
+| `lem-sfb-derived-cech-image-totalization` | 4011 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-partial-kummer-boundary-unit-model` | 4011 | none |
 | `lem-sfb-pointed-finite-etale-limit-cover` | 4011 | none |
+| `lem-sfb-prime-to-ell-linear-image-finite` | 4011 | none |
+| `lem-sfb-root-tower-boundary-acyclicity` | 4011 | none |
 | `lem-sfb-spectral-clopen-component-homeomorphism` | 4011 | none |
 | `lem-sfb-supported-finite-stage-topology-defect` | 4011 | none |
+| `lem-sfb-tame-root-tower-extension` | 4011 | none |
 | `lem-sfb-totally-disconnected-coefficient-realization` | 4011 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (36)
+## Stage 2: nodes to state (35)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -68,7 +72,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-weil-point-derived-sections-tensor-descent` | 1 | state | 1 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-coef-enriched-sequence-projection-formula` | 1 | state | 0 |
-| `lem-dl-a1-integral-finite-residue-model` | 1 | state | 0 |
 | `lem-fd-common-stage-comparison-descent` | 1 | state | 0 |
 | `lem-fd-frobenius-fixed-pair-comparison` | 1 | state | 0 |
 | `lem-fd-whole-tower-integral-pullback-comparison` | 1 | state | 0 |
@@ -88,16 +91,16 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-nested-open-regular-alteration` | 1 | state | 0 |
 | `lem-sfb-normal-generic-continuous-sections` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
-| `lem-sfb-relative-single-tensor-cohomology` | 1 | state | 0 |
+| `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sfb-transverse-tame-open-shriek-exchange` | 1 | state | 0 |
 | `lem-sp-cofinal-finite-reduction-constructibility` | 1 | state | 0 |
 | `lem-sp-supported-etale-tensor-origin` | 1 | state | 0 |
 | `lem-weil-pbc-finite-free-strict-tower-transport` | 1 | state | 0 |
 | `lem-zl-weil-generic-lissity` | 1 | state | 0 |
 
-Not open yet: 374 nodes that below a finished node, not needed, 111 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 374 nodes that below a finished node, not needed, 111 nodes that wait for a statement dependency (bottom-up), 17 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (499)
+## Stage 3: modules to prove (501)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -581,12 +584,14 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleDescentThroughSourceCover` | - | 1 | proof | 11 |
 | `Sheaf.FieldTheory.GaloisPrimeResidueLifting` | - | 1 | proof | 11 |
 | `Sheaf.RingTheory.IntegralComponentHenselianPermanence` | - | 1 | proof | 11 |
+| `Sheaf.RingTheory.IntegralNormalResidueEtaleSplitting` | - | 1 | proof | 11 |
 | `Sheaf.RingTheory.RegularLocalPicardZero` | - | 1 | proof | 11 |
 | `Sheaf.RingTheory.StrictHenselizationFiniteLifts` | - | 1 | proof | 11 |
 | `Sheaf.TraceFormula.HenselizationPrimeIndEtale` | - | 1 | proof | 11 |
 | `Sheaf.TraceFormula.NagataInvertPrime` | - | 1 | proof | 11 |
 | `Sheaf.AlgebraicGeometry.AffineNonZeroDivisorComplementDense` | - | 1 | proof | 12 |
 | `Sheaf.FieldTheory.NormalFiniteAutSeparableSubfield` | - | 1 | proof | 12 |
+| `Sheaf.RingTheory.IntegralFiniteResidueModel` | - | 1 | proof | 12 |
 | `Sheaf.RingTheory.K0ClassTrivialInvertible` | - | 1 | proof | 12 |
 | `Sheaf.RingTheory.LocalizedFiniteModuleSpread` | - | 1 | proof | 12 |
 | `Sheaf.TraceFormula.InvertibleModuleK0Class` | - | 1 | proof | 12 |
@@ -603,7 +608,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.TopBaseChangePresheaf` | - | 1 | proof | 17 |
 | `Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge` | - | 1 | proof | 18 |
 
-## Stage 3: waiting for statements of dependencies (29)
+## Stage 3: waiting for statements of dependencies (28)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -636,7 +641,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.SfCbcExtensionZeroCompletion` | - | 21 | `lem-sf-cbc-localized-strict-tensor-descent` |
 | `Sheaf.Paper.SmoothPurityTowerReconstruction` | - | 4 | `lem-sp-cofinal-finite-reduction-constructibility` |
 | `Sheaf.Paper.TameBoundaryScalarComparison` | - | 1 | `lem-sfb-transverse-tame-open-shriek-exchange` |
-| `Sheaf.RingTheory.IntegralNormalResidueEtaleSplitting` | - | 1 | `lem-dl-a1-integral-finite-residue-model` |
 | `Sheaf.SixFunctors.AdmissibleDirectImage` | - | 1 | `lem-sfb-continuous-algcl-open-finiteness` |
 
 ## Stage 3: held for an open upstream PR (16)
