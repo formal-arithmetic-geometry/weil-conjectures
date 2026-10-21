@@ -21,112 +21,68 @@
  "proof": [
   {
    "step": 1,
-   "text": "Put $\\mathcal T_A=(\\operatorname{Sh}(\\mathcal T),\\Delta A)$, where $\\Delta A$ is the constant-in-index ring sheaf. Factor $p=s r$, where $r:(\\operatorname{Sh}(\\mathcal T),B)\\to\\mathcal T_A$ is the identity geometric morphism with ring map $\\Delta A\\to B$, and $s:\\mathcal T_A\\to(\\operatorname{Sh}(\\mathcal C),A)$ has constant-sequence inverse image. On modules, $r_*=U$ and $s_*=\\lim$. Indeed, an $A$-linear map $P\\to p_*N$ is exactly a compatible family $P\\to\\operatorname{Res}_{A\\to B_n}N_n$, so $p_*N=\\lim UN$, with its actual cone projections. Restriction changes only the action, hence preserves kernels and cokernels. Also let $h:\\mathcal T_A\\to(\\operatorname{Sh}(\\mathbf N_{\\ge1}),\\mathbf Z)$ be the termwise global-sections morphism, and let $t$ be the sequence-to-point morphism. Thus $h_*=\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}$ and $t_*=\\lim$ on abelian towers. Write $a:(\\operatorname{Sh}(\\mathcal C),A)\\to(*,\\mathbf Z)$ for global sections. The underlying inverse images for $h$ and $a$ take sets to their constant sheaves (levelwise for $h$), and their ring maps are the unit maps from $\\mathbf Z$; $t^{-1}$ is constant sequence. The two composites $a s$ and $t h$ agree: their inverse images send a set to the constant sheaf at every index, with the same unit ring map.",
+   "text": "Use the existing coefficient-universe Grothendieck theorems for module sheaves and strict systems. The countable tower category is Grothendieck: take evaluation-left-adjoint images of a separator, use componentwise filtered colimits, and use componentwise locally small hom sets. K-injective localization therefore supplies the universal inverse-limit pairs LA and LB.",
    "uses": [
-    "lem-pur-system-ringed-sequence-site",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-coef-sequence-global-sections-evaluation"
+    "lem-pur-ringed-site-grothendieck-coefficient-universe",
+    "lem-pur-system-grothendieck",
+    "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
-   }
+   "elementary": false
   },
   {
    "step": 2,
-   "text": "Use the ringed-site K-injective existence theorem on $B$-modules on $\\mathcal T$, on $\\Delta A$-modules on $\\mathcal T$, and on $\\mathbf Z$-modules on the one-point sequence site. Choose successively $J\\to I$, $v:UI\\to K$, and $w:\\Gamma^{\\operatorname{Tow}}K\\to H$, where $I,K,H$ are K-injective in these three respective categories. These are resolutions of strict systems, not a family of independently chosen fiber resolutions. Since $U$ is exact, its termwise derived functor represents $U(J)$ by $UI$, and $K$ resolves that object. By the finite-evaluation sections lemma, $G(J)$ is represented by $\\Gamma^{\\operatorname{Tow}}K$, and its specified finite comparison is computed using this same $K$.",
+   "text": "Apply the inverse-limit acyclicity clause of the normalized sequence-projection theorem. Its restriction U0 is naturally isomorphic to the specified restriction U: the level isomorphisms identify both with actual scalar restriction, and the stated sectionwise transition equations prove tower naturality. Resolve UI by a K-injective K and precompose its resolution with this isomorphism. The cited clause makes lim(UI) to lim(K) a quasi-isomorphism. Naturality of the LA unit then makes its value on UI invertible. Hence U on derived categories followed by LA is a universal derived pair P for the actual projection direct image.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-coef-sequence-global-sections-evaluation"
+    "lem-coef-sequence-pushforward-limit-projections",
+    "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
-   }
+   "elementary": false
   },
   {
    "step": 3,
-   "text": "Apply the normalized composition isomorphism to $r$ followed by $s$, at the K-injective $I$ with resolution $v:r_*I=UI\\to K$. It says precisely that $\\alpha=\\lim(v):p_*I=\\lim UI\\to\\lim K$ is a quasi-isomorphism, representing $Rp_*J\\xrightarrow{\\sim}Rs_*U(J)$. The functor $\\Delta:\\operatorname{Mod}(A)\\to\\operatorname{Tow}(\\operatorname{Mod}(A))$ is exact because exactness is componentwise, and its right adjoint is $\\lim$. The exact-left-adjoint preservation theorem therefore makes $\\lim K$ K-injective. Consequently $R\\Gamma(\\mathcal C,Rp_*J)$ is represented by $\\Gamma(\\mathcal C,\\lim K)$ using $\\alpha$. In addition $K_n$ is K-injective in $\\operatorname{Mod}(A)$ by tower evaluation.",
+   "text": "For constant coefficients, lim preserves K-injectives by its exact constant-sequence left adjoint. Thus LA followed by derived sections is a universal derived pair for lim followed by ordinary sections. For the other order, resolve a K-injective tower I by a tower J with injective terms; the resolution is a homotopy equivalence. Injective towers have split successor transitions, and any additive functor preserves these splittings. The split-transition kernel/Roos short exact sequence and exact products in abelian groups make the ordinary-limit-to-Roos comparison a quasi-isomorphism for termwise sections of J. The normalized exact-products Roos theorem identifies its localization with the LB unit. Naturality and the homotopy equivalence give invertibility on termwise sections of I. This makes derived termwise sections followed by LB the second universal derived pair.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-tower-evaluation-kinjective"
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "prop-pur-kinjective-resolutions-exist"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
-   }
+   "elementary": false
   },
   {
    "step": 4,
-   "text": "For any strict tower of $A$-module sheaves $V$, there is an ordinary isomorphism $\\rho_V:\\Gamma(\\mathcal C,\\lim V)\\to\\lim\\Gamma^{\\operatorname{Tow}}_{\\mathcal C}V$. A global section on the left is exactly a family of global sections of $V_n$ compatible with every transition; that same family gives the inverse map. Thus $\\pi_n\\rho_V=\\Gamma(\\pi_n^V)$, and the family description proves naturality in $V$. Apply this degreewise to $K$; all maps commute with differentials, so $\\rho_K$ is an isomorphism of complexes. This verifies the ordinary equality $(a s)_*=(t h)_*$ with the cone normalization, rather than choosing an unspecified isomorphism of their values.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
-   }
+   "text": "Global sections preserve ordinary tower limits. Localize the canonical preservesLimitNatIso, whose nth projection is sections of the ordinary cone projection. Uniqueness of total right derived functors gives the constant-coefficient comparison, normalized by the two composite units. Whisker it with exact derived restriction to obtain kappa for strict systems. Its naturality against the exact-functor factorization gives the asserted equation on every complex.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false
   },
   {
    "step": 5,
-   "text": "Apply the normalized composition theorem to $h$ followed by $t$, at the K-injective $K$ and the resolution $w:h_*K\\to H$. The theorem makes $\\lim(w):\\lim\\Gamma^{\\operatorname{Tow}}K\\to\\lim H$ a quasi-isomorphism. The strict-tower derived-limit theorem identifies $\\lim H$ with $R\\lim G(J)$. Define the required comparison by the class of $$\\beta=(\\lim w)\\rho_K:\\Gamma(\\mathcal C,\\lim K)\\longrightarrow\\lim H.$$ Step 3 computes its source as $R\\Gamma(\\mathcal C,Rp_*J)$; step 4 and the composition theorem make $\\beta$ a quasi-isomorphism. This constructs the asserted isomorphism without any claim that varying-ring evaluation or restriction of scalars preserves K-injectives.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
-   }
-  },
-  {
-   "step": 6,
-   "text": "Check its $n$th projection explicitly. The resolution map $v$ gives the strict identity $\\pi_n^K\\alpha=v_n\\pi_n^{UI}$. Under $Rp_*J=Q(p_*I)$ and $\\operatorname{Res}_nJ_n=Q(UI_n)$, the total-limit projection is $Q(\\pi_n^{UI})$. Since $\\alpha$ and $v_n$ are quasi-isomorphisms and $\\lim K,K_n$ are K-injective, its derived-sections map is represented by $\\Gamma(\\pi_n^K)$. On the target side, the finite comparison for $G(J)$ is $e_nG(J)\\cong Q(\\Gamma K_n)$, followed by the specified scalar-restriction comparison $R\\Gamma_A(\\operatorname{Res}_nJ_n)\\cong R\\Gamma_{B_n}(J_n)$. The map $w_n:\\Gamma K_n\\to H_n$ is a quasi-isomorphism, and the strict cone identity is $$\\pi_n^H\\beta=w_n\\Gamma(\\pi_n^K).$$ After identifying $QH_n$ with $Q(\\Gamma K_n)$ by $Q(w_n)^{-1}$, this is exactly global sections of the total-limit projection. Composing with the finite scalar-restriction comparison gives the projection formula in the statement.",
+   "text": "Derive the natural ordinary projections lim to evaluation by the universal property of LA and LB; their factorization equations give the two unit/projection identities. For the constant comparison, check the projection identity on K-injective representatives, canceling the invertible composite unit. Use the comparison normalization, the ordinary preservesLimitNatIso projection equation, and the given normalized sections/evaluation equation. Tower evaluation is K-injective, so its finite unit can be canceled. Natural isomorphisms to K-injective representatives extend the identity to every derived object. Finally whisker by exact restriction and compose with the given derived restriction/evaluation and scalar isomorphisms. Expanding finiteEvaluation gives precisely the last displayed equality.",
    "uses": [
     "lem-coef-sequence-global-sections-evaluation",
-    "lem-weil-tower-evaluation-kinjective",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "lem-weil-tower-evaluation-kinjective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
-   }
-  },
-  {
-   "step": 7,
-   "text": "The isomorphism constructed above is specified by the canonical composition comparisons for $r,s$ and $h,t$, with the ordinary identification $\\rho$ of step 4. Those comparisons are natural in derived input morphisms by the normalized composition theorem; the finite comparisons are natural by the sections-evaluation lemma. Hence their composite is a natural isomorphism on $D(\\mathscr S(B))$, independent of the auxiliary resolutions through their canonical computation identifications. The displayed identities of step 6 hold before localization for every $n$ and every strict transition, so localization preserves them and retains the actual projections and transitions. No selection of a limit of an unrelated diagram in the fiber derived categories occurs.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-coef-sequence-global-sections-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 0941, lemma-derived-limit-is-ok and the preceding sequence-site construction; agent projection calculation."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-sheaf-restrict-scalars",
   "lem-coef-sequence-global-sections-evaluation",
-  "lem-pur-system-ringed-sequence-site",
+  "lem-coef-sequence-pushforward-limit-projections",
+  "lem-pur-ringed-site-grothendieck-coefficient-universe",
+  "lem-pur-system-grothendieck",
   "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-exact-products-roos-comparison",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-tower-evaluation-kinjective",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0D6E and 0941; explicit two-factorization proof with strict resolution and projection equations; blueprint prop-coef-integral-exceptional-adjoint, proof paragraph 2."
+  "place": "Tags 0D6E and 0941; existing normalized sequence-projection acyclicity, constant-tower right-derived uniqueness, and split-transition Roos computation in Ab, with explicit unit/projection equations."
  },
  "mathlib_searches": [
   {
@@ -278,11 +234,8 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-system-ringed-sequence-site",
-  "def-pc-sheaf-restrict-scalars",
   "prop-pur-kinjective-resolutions-exist",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "lem-weil-tower-evaluation-kinjective",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
@@ -321,5 +274,15 @@
   "group": "Q138",
   "result": "pass",
   "note": "Read the item node, all 9 stmt_dep records, the live CoefficientSequenceGlobalSections interfaces and the delivered module. Type-checked all 4 conjuncts by hand. Conjuncts 1-2 fix πP and πL to Q(lim.π) through the universal derived units. Conjunct 3 fixes κ through the composite derived unit and the canonical preservesLimitNatIso, i.e. β=(lim w)ρ_K. Conjunct 4, after cancelling the common isos, is the step-6 identity; d.scalar.inv goes from RΓ_A Res to RΓ_{B_n}. d ranges over all Normalized data, which is canonical. ∃P,L are harmless because derived functors are unique up to unique iso. p enters through its direct image U⋙lim, avoiding the one-universe RingedToposMorphism. Node differs from live only in lean; statement verbatim; lines ≤100; docstrings with source, blueprint and 7 steps; defs have real data; only the theorem is sorry; no H4 duplicate (SequencePushforwardLimitProjections and RingedTowerPushforwardLimitComparison are existential or generic theorems). Edge cases ok. No compile (no file changed); worker reports clean compile. Advisories: unused public RingedToposMorphism import and private proof imports; global Prop instance on lim; second reading is brief and by the same worker."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261021T143928-L-22695",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
